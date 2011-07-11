@@ -1,0 +1,8 @@
+{
+  final ListView list=getListView();
+  final RelativeLayout loading=(RelativeLayout)findViewById(R.id.loading);
+  if (list.getVisibility() == View.GONE) {
+    list.setVisibility(View.VISIBLE);
+    loading.setVisibility(View.GONE);
+  }
+}

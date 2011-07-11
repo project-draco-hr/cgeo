@@ -1,0 +1,39 @@
+{
+  if (cache == null) {
+    return;
+  }
+  try {
+    holder.checkbox.setChecked(cache.statusChecked);
+    Animation hideCheckbox=new TranslateAnimation((int)(SWIPE_DISTANCE * pixelDensity),0,0,0);
+    hideCheckbox.setRepeatCount(0);
+    if (force == true) {
+      hideCheckbox.setDuration(0);
+    }
+ else {
+      hideCheckbox.setDuration(400);
+    }
+    hideCheckbox.setFillEnabled(true);
+    hideCheckbox.setFillAfter(true);
+    hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
+    Animation brightenInfo=new AlphaAnimation(SWIPE_OPACITY,1.0f);
+    brightenInfo.setRepeatCount(0);
+    if (force == true) {
+      brightenInfo.setDuration(0);
+    }
+ else {
+      brightenInfo.setDuration(400);
+    }
+    brightenInfo.setFillEnabled(true);
+    brightenInfo.setFillAfter(true);
+    brightenInfo.setInterpolator(new AccelerateDecelerateInterpolator());
+    AnimationSet selectAnimation=new AnimationSet(true);
+    selectAnimation.setFillEnabled(true);
+    selectAnimation.setFillAfter(true);
+    selectAnimation.addAnimation(hideCheckbox);
+    selectAnimation.addAnimation(brightenInfo);
+    holder.oneInfo.startAnimation(selectAnimation);
+    cache.statusCheckedView=false;
+  }
+ catch (  Exception e) {
+  }
+}

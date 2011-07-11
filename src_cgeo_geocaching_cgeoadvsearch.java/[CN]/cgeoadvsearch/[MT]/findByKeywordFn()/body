@@ -1,0 +1,12 @@
+{
+  String keyText=((EditText)findViewById(R.id.keyword)).getText().toString();
+  if (keyText == null || keyText.length() == 0) {
+    warning.helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_keyword));
+    return;
+  }
+  final Intent cachesIntent=new Intent(activity,cgeocaches.class);
+  cachesIntent.putExtra("type","keyword");
+  cachesIntent.putExtra("keyword",keyText);
+  cachesIntent.putExtra("cachetype",settings.cacheType);
+  activity.startActivity(cachesIntent);
+}

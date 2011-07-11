@@ -1,0 +1,33 @@
+{
+  AlertDialog.Builder dialog=new AlertDialog.Builder(activity);
+  dialog.setCancelable(true);
+  dialog.setTitle(res.getString(R.string.caches_drop_stored));
+  if (adapter != null && adapter.getChecked() > 0) {
+    dialog.setMessage(res.getString(R.string.caches_drop_selected_ask));
+    dialog.setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int id){
+        dropSelected();
+        dialog.cancel();
+      }
+    }
+);
+  }
+ else {
+    dialog.setMessage(res.getString(R.string.caches_drop_all_ask));
+    dialog.setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int id){
+        dropSelected();
+        dialog.cancel();
+      }
+    }
+);
+  }
+  dialog.setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int id){
+      dialog.cancel();
+    }
+  }
+);
+  AlertDialog alert=dialog.create();
+  alert.show();
+}

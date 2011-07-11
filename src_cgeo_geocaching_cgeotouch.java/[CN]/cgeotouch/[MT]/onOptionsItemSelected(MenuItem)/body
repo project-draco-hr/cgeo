@@ -1,0 +1,36 @@
+{
+  int id=item.getItemId();
+  EditText text=null;
+  String textContent=null;
+  String dateString=null;
+  String timeString=null;
+  String addText="";
+  if ((id >= 0x1 && id <= 0x7)) {
+    text=(EditText)findViewById(R.id.log);
+    textContent=text.getText().toString();
+    dateString=cgBase.dateOut.format(new Date());
+    timeString=cgBase.timeOut.format(new Date());
+    if ((id & 0x4) == 0x4) {
+      addText+=dateString;
+      if ((id & 0x2) == 0x2) {
+        addText+=" | ";
+      }
+    }
+    if ((id & 0x2) == 0x2) {
+      addText+=timeString;
+    }
+    if ((id & 0x1) == 0x1 && settings.getSignature() != null) {
+      if (addText.length() > 0) {
+        addText+="\n";
+      }
+      addText+=settings.getSignature().replaceAll("\\[DATE\\]",dateString).replaceAll("\\[TIME\\]",timeString).replaceAll("\\[USER\\]",settings.getUsername()).replaceAll("\\[NUMBER\\]","");
+    }
+    if (textContent.length() > 0 && addText.length() > 0) {
+      addText="\n" + addText;
+    }
+    text.setText(textContent + addText,TextView.BufferType.NORMAL);
+    text.setSelection(text.getText().toString().length());
+    return true;
+  }
+  return false;
+}

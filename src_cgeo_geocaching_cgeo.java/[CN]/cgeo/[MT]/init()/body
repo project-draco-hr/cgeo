@@ -1,0 +1,53 @@
+{
+  if (initialized == true) {
+    return;
+  }
+  initialized=true;
+  settings.getLogin();
+  settings.reloadCacheType();
+  if (app.firstRun == true) {
+    new Thread(){
+      @Override public void run(){
+        int status=base.login();
+        if (status == 1) {
+          app.firstRun=false;
+        }
+      }
+    }
+.start();
+  }
+  (new countBubbleUpdate()).start();
+  (new cleanDatabase()).start();
+  if (settings.cacheType != null && cgBase.cacheTypesInv.containsKey(settings.cacheType) == false) {
+    settings.setCacheType(null);
+  }
+  if (geo == null) {
+    geo=app.startGeo(context,geoUpdate,base,settings,warning,0,0);
+  }
+  navType=(TextView)findViewById(R.id.nav_type);
+  navAccuracy=(TextView)findViewById(R.id.nav_accuracy);
+  navLocation=(TextView)findViewById(R.id.nav_location);
+  final LinearLayout findOnMap=(LinearLayout)findViewById(R.id.map);
+  findOnMap.setClickable(true);
+  findOnMap.setOnClickListener(new cgeoFindOnMapListener());
+  final RelativeLayout findByOffline=(RelativeLayout)findViewById(R.id.search_offline);
+  findByOffline.setClickable(true);
+  findByOffline.setOnClickListener(new cgeoFindByOfflineListener());
+  (new countBubbleUpdate()).start();
+  final LinearLayout advanced=(LinearLayout)findViewById(R.id.advanced_button);
+  advanced.setClickable(true);
+  advanced.setOnClickListener(new cgeoSearchListener());
+  final LinearLayout any=(LinearLayout)findViewById(R.id.any_button);
+  any.setClickable(true);
+  any.setOnClickListener(new cgeoPointListener());
+  final LinearLayout filter=(LinearLayout)findViewById(R.id.filter_button);
+  registerForContextMenu(filter);
+  filter.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View view){
+      openContextMenu(view);
+    }
+  }
+);
+  filter.setClickable(true);
+  setFilterTitle();
+}

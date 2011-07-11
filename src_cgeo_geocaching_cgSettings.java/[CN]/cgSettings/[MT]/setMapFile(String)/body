@@ -1,0 +1,6 @@
+{
+  final SharedPreferences.Editor prefsEdit=prefs.edit();
+  prefsEdit.putString("mfmapfile",mapFileIn);
+  mapFile=mapFileIn;
+  return prefsEdit.commit();
+}

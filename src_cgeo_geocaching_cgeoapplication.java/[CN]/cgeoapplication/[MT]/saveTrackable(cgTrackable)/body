@@ -1,0 +1,8 @@
+{
+  if (storage == null) {
+    storage=new cgData(this);
+  }
+  final ArrayList<cgTrackable> list=new ArrayList<cgTrackable>();
+  list.add(trackable);
+  return storage.saveInventory("---",list);
+}

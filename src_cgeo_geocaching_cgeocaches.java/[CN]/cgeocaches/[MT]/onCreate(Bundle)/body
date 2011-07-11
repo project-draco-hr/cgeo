@@ -1,0 +1,132 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  app.setAction(action);
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.caches);
+  base.setTitle(activity,"caches");
+  tracker=GoogleAnalyticsTracker.getInstance();
+  tracker.start(cgSettings.analytics,this);
+  tracker.dispatch();
+  base.sendAnal(activity,tracker,"/cache/list");
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    type=extras.getString("type");
+    latitude=extras.getDouble("latitude");
+    longitude=extras.getDouble("longitude");
+    cachetype=extras.getString("cachetype");
+    keyword=extras.getString("keyword");
+    address=extras.getString("address");
+    username=extras.getString("username");
+  }
+  init();
+  Thread threadPure;
+  cgSearchThread thread;
+  if (type.equals("offline") == true) {
+    listId=settings.getLastList();
+    if (listId <= 0) {
+      listId=1;
+      title=res.getString(R.string.caches_stored);
+    }
+ else {
+      final cgList list=app.getList(listId);
+      title=list.title;
+    }
+    base.setTitle(activity,title);
+    base.showProgress(activity,true);
+    setLoadingCaches();
+    threadPure=new geocachesLoadByOffline(loadCachesHandler,latitude,longitude,listId);
+    threadPure.start();
+  }
+ else   if (type.equals("history") == true) {
+    if (adapter != null) {
+      adapter.setHistoric(true);
+    }
+    title=res.getString(R.string.caches_history);
+    base.setTitle(activity,title);
+    base.showProgress(activity,true);
+    setLoadingCaches();
+    threadPure=new geocachesLoadByHistory(loadCachesHandler);
+    threadPure.start();
+  }
+ else   if (type.equals("nearest") == true) {
+    action="pending";
+    title=res.getString(R.string.caches_nearby);
+    base.setTitle(activity,title);
+    base.showProgress(activity,true);
+    setLoadingCaches();
+    thread=new geocachesLoadByCoords(loadCachesHandler,latitude,longitude,cachetype);
+    thread.setRecaptchaHandler(new cgSearchHandler(activity,res,thread));
+    thread.start();
+  }
+ else   if (type.equals("coordinate") == true) {
+    action="planning";
+    title=base.formatCoordinate(latitude,res.getString(R.string.search_lat),true) + " | " + base.formatCoordinate(longitude,res.getString(R.string.search_lon),true);
+    base.setTitle(activity,title);
+    base.showProgress(activity,true);
+    setLoadingCaches();
+    thread=new geocachesLoadByCoords(loadCachesHandler,latitude,longitude,cachetype);
+    thread.setRecaptchaHandler(new cgSearchHandler(activity,res,thread));
+    thread.start();
+  }
+ else   if (type.equals("keyword") == true) {
+    title=keyword;
+    base.setTitle(activity,title);
+    base.showProgress(activity,true);
+    setLoadingCaches();
+    thread=new geocachesLoadByKeyword(loadCachesHandler,keyword,cachetype);
+    thread.setRecaptchaHandler(new cgSearchHandler(activity,res,thread));
+    thread.start();
+  }
+ else   if (type.equals("address") == true) {
+    action="planning";
+    if (address != null && address.length() > 0) {
+      title=address;
+      base.setTitle(activity,title);
+      base.showProgress(activity,true);
+      setLoadingCaches();
+    }
+ else {
+      title=base.formatCoordinate(latitude,res.getString(R.string.search_lat),true) + " | " + base.formatCoordinate(longitude,res.getString(R.string.search_lon),true);
+      base.setTitle(activity,title);
+      base.showProgress(activity,true);
+      setLoadingCaches();
+    }
+    thread=new geocachesLoadByCoords(loadCachesHandler,latitude,longitude,cachetype);
+    thread.setRecaptchaHandler(new cgSearchHandler(activity,res,thread));
+    thread.start();
+  }
+ else   if (type.equals("username") == true) {
+    title=username;
+    base.setTitle(activity,title);
+    base.showProgress(activity,true);
+    setLoadingCaches();
+    thread=new geocachesLoadByUserName(loadCachesHandler,username,cachetype);
+    thread.setRecaptchaHandler(new cgSearchHandler(activity,res,thread));
+    thread.start();
+  }
+ else   if (type.equals("owner") == true) {
+    title=username;
+    base.setTitle(activity,title);
+    base.showProgress(activity,true);
+    setLoadingCaches();
+    thread=new geocachesLoadByOwner(loadCachesHandler,username,cachetype);
+    thread.setRecaptchaHandler(new cgSearchHandler(activity,res,thread));
+    thread.start();
+  }
+ else {
+    title="caches";
+    base.setTitle(activity,title);
+    Log.e(cgSettings.tag,"cgeocaches.onCreate: No action or unknown action specified");
+  }
+}

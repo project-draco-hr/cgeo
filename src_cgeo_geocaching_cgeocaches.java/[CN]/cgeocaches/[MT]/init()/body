@@ -1,0 +1,37 @@
+{
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
+    dir=app.startDir(activity,dirUpdate,warning);
+  }
+  if (cacheList != null) {
+    base.setTitle(activity,title);
+  }
+  if (cacheList != null && cacheList.isEmpty() == false) {
+    final Integer count=app.getTotal(searchId);
+    if (count != null && count > 0) {
+      base.setTitle(activity,title);
+      if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < 1000) {
+        setMoreCaches(true);
+      }
+ else {
+        setMoreCaches(false);
+      }
+    }
+ else {
+      base.setTitle(activity,title);
+      setMoreCaches(false);
+    }
+  }
+ else {
+    base.setTitle(activity,title);
+  }
+  setAdapter();
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
+  if (dir != null) {
+    dirUpdate.updateDir(dir);
+  }
+}

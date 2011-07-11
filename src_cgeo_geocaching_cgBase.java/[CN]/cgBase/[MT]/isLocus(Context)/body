@@ -1,0 +1,9 @@
+{
+  boolean locus=false;
+  final Intent intentTest=new Intent(Intent.ACTION_VIEW);
+  intentTest.setData(Uri.parse("menion.points:x"));
+  if (isIntentAvailable(context,intentTest) == true) {
+    locus=true;
+  }
+  return locus;
+}

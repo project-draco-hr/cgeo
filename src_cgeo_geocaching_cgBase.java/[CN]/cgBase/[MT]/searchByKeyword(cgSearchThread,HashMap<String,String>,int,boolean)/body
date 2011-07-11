@@ -1,0 +1,62 @@
+{
+  final cgSearch search=new cgSearch();
+  final String keyword=parameters.get("keyword");
+  cgCacheWrap caches=new cgCacheWrap();
+  String cacheType=parameters.get("cachetype");
+  if (keyword == null || keyword.length() == 0) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No keyword given");
+    return null;
+  }
+  if (cacheType != null && cacheType.length() == 0) {
+    cacheType=null;
+  }
+  final String host="www.geocaching.com";
+  final String path="/seek/nearest.aspx";
+  final String method="GET";
+  final HashMap<String,String> params=new HashMap<String,String>();
+  if (cacheType != null && cacheIDs.containsKey(cacheType) == true) {
+    params.put("tx",cacheIDs.get(cacheType));
+  }
+ else {
+    params.put("tx",cacheIDs.get("all"));
+  }
+  params.put("key",keyword);
+  final String url="http://" + host + path+ "?"+ prepareParameters(params,false,true);
+  String page=requestLogged(false,host,path,method,params,false,false,true);
+  if (page == null || page.length() == 0) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No data from server");
+    return null;
+  }
+  caches=parseSearch(thread,url,page,showCaptcha);
+  if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No cache parsed");
+  }
+  if (app == null) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No application found");
+    return null;
+  }
+  final ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
+  if (caches != null) {
+    if (caches.error != null && caches.error.length() > 0) {
+      search.error=caches.error;
+    }
+    if (caches.url != null && caches.url.length() > 0) {
+      search.url=caches.url;
+    }
+    if (caches.viewstate != null && caches.viewstate.length() > 0) {
+      search.viewstate=caches.viewstate;
+    }
+    if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
+      search.viewstate1=caches.viewstate1;
+    }
+    search.totalCnt=caches.totalCnt;
+    for (    cgCache cache : caches.cacheList) {
+      if (settings.excludeDisabled == 0 || (settings.excludeDisabled == 1 && cache.disabled == false)) {
+        search.addGeocode(cache.geocode);
+        cacheList.add(cache);
+      }
+    }
+  }
+  app.addSearch(search,cacheList,true,reason);
+  return search.getCurrentId();
+}

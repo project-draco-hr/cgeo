@@ -1,0 +1,54 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(activity);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.waypoint_new);
+  base.setTitle(activity,"waypoint");
+  base.sendAnal(activity,"/waypoint/new");
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    geocode=extras.getString("geocode");
+    wpCount=extras.getInt("count",0);
+    id=extras.getInt("waypoint");
+  }
+  if ((geocode == null || geocode.length() == 0) && id <= 0) {
+    warning.showToast(res.getString(R.string.err_waypoint_cache_unknown));
+    finish();
+    return;
+  }
+  if (id <= 0) {
+    base.setTitle(activity,res.getString(R.string.waypoint_add_title));
+  }
+ else {
+    base.setTitle(activity,res.getString(R.string.waypoint_edit_title));
+  }
+  if (geocode != null) {
+    app.setAction(geocode);
+  }
+  Button buttonCurrent=(Button)findViewById(R.id.current);
+  buttonCurrent.setOnClickListener(new currentListener());
+  Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
+  addWaypoint.setOnClickListener(new coordsListener());
+  ArrayList<String> wayPointNames=new ArrayList<String>(cgBase.waypointTypes.values());
+  AutoCompleteTextView textView=(AutoCompleteTextView)findViewById(R.id.name);
+  ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,wayPointNames);
+  textView.setAdapter(adapter);
+  if (id > 0) {
+    waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
+    waitDialog.setCancelable(true);
+    (new loadWaypoint()).start();
+  }
+}

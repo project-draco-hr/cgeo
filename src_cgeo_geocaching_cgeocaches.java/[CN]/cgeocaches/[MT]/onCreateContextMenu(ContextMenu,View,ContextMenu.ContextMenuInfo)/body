@@ -1,0 +1,70 @@
+{
+  super.onCreateContextMenu(menu,view,info);
+  if (adapter == null) {
+    return;
+  }
+  AdapterContextMenuInfo adapterInfo=null;
+  try {
+    adapterInfo=(AdapterContextMenuInfo)info;
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgeocaches.onCreateContextMenu: " + e.toString());
+  }
+  if ((adapterInfo == null || adapterInfo.position < 0) && selectedFilter != null) {
+    if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
+      menu.setHeaderTitle(res.getString(R.string.caches_filter_size_title));
+      menu.add(0,8,0,res.getString(R.string.caches_filter_size_micro));
+      menu.add(0,9,0,res.getString(R.string.caches_filter_size_small));
+      menu.add(0,10,0,res.getString(R.string.caches_filter_size_regular));
+      menu.add(0,11,0,res.getString(R.string.caches_filter_size_large));
+      menu.add(0,12,0,res.getString(R.string.caches_filter_size_other));
+      menu.add(0,13,0,res.getString(R.string.caches_filter_size_virtual));
+      menu.add(0,14,0,res.getString(R.string.caches_filter_size_notchosen));
+    }
+ else     if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
+      menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
+      menu.add(0,15,0,res.getString(R.string.caches_filter_type_traditional));
+      menu.add(0,16,0,res.getString(R.string.caches_filter_type_multi));
+      menu.add(0,17,0,res.getString(R.string.caches_filter_type_mystery));
+      menu.add(0,18,0,res.getString(R.string.caches_filter_type_letterbox));
+      menu.add(0,19,0,res.getString(R.string.caches_filter_type_event));
+      menu.add(0,20,0,res.getString(R.string.caches_filter_type_mega));
+      menu.add(0,21,0,res.getString(R.string.caches_filter_type_earth));
+      menu.add(0,22,0,res.getString(R.string.caches_filter_type_cito));
+      menu.add(0,23,0,res.getString(R.string.caches_filter_type_webcam));
+      menu.add(0,24,0,res.getString(R.string.caches_filter_type_virtual));
+      menu.add(0,25,0,res.getString(R.string.caches_filter_type_wherigo));
+      menu.add(0,26,0,res.getString(R.string.caches_filter_type_lostfound));
+      menu.add(0,27,0,res.getString(R.string.caches_filter_type_ape));
+      menu.add(0,28,0,res.getString(R.string.caches_filter_type_gchq));
+      menu.add(0,29,0,res.getString(R.string.caches_filter_type_gps));
+    }
+  }
+ else {
+    final cgCache cache=adapter.getItem(adapterInfo.position);
+    if (cache.name != null && cache.name.length() > 0) {
+      menu.setHeaderTitle(cache.name);
+    }
+ else {
+      menu.setHeaderTitle(cache.geocode);
+    }
+    if (cache.latitude != null && cache.longitude != null) {
+      menu.add(0,1,0,res.getString(R.string.cache_menu_compass));
+      menu.add(0,2,0,res.getString(R.string.cache_menu_radar));
+      menu.add(0,3,0,res.getString(R.string.cache_menu_map));
+      menu.add(0,4,0,res.getString(R.string.cache_menu_map_ext));
+      menu.add(0,5,0,res.getString(R.string.cache_menu_tbt));
+      menu.add(0,6,0,res.getString(R.string.cache_menu_visit));
+      menu.add(0,7,0,res.getString(R.string.cache_menu_details));
+    }
+  }
+  ArrayList<cgList> cacheLists=app.getLists();
+  int listCount=cacheLists.size();
+  if (listCount > 1) {
+    SubMenu submenu=menu.addSubMenu(0,8,0,res.getString(R.string.cache_menu_move_list));
+    for (int i=0; i < listCount; i++) {
+      cgList list=cacheLists.get(i);
+      submenu.add(Menu.NONE,100 + list.id,Menu.NONE,list.title);
+    }
+  }
+}

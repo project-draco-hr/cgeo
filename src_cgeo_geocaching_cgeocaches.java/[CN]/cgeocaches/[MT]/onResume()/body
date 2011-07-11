@@ -1,0 +1,18 @@
+{
+  super.onResume();
+  settings.load();
+  init();
+  if (adapter != null && geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
+    adapter.setActualCoordinates(geo.latitudeNow,geo.longitudeNow);
+    adapter.setActualHeading(northHeading);
+  }
+  if (adapter != null) {
+    adapter.setSelectMode(false,true);
+    if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
+      adapter.forceSort(geo.latitudeNow,geo.longitudeNow);
+    }
+  }
+  if (loadCachesHandler != null && searchId != null) {
+    loadCachesHandler.sendEmptyMessage(0);
+  }
+}

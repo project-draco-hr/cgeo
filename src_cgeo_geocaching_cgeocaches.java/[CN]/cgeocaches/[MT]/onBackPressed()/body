@@ -1,0 +1,17 @@
+{
+  if (adapter != null) {
+    if (adapter.resetChecks() == true) {
+      return;
+    }
+ else     if (adapter.getSelectMode() == true) {
+      adapter.setSelectMode(false,true);
+      return;
+    }
+    if (adapter.isFilter()) {
+      adapter.clearFilter();
+      return;
+    }
+  }
+  super.onBackPressed();
+  return;
+}

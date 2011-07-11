@@ -1,0 +1,38 @@
+{
+  if (g4cRunning == true) {
+    return;
+  }
+  if (settings.publicLoc == 1 && (lastGo4cacheLat == null || lastGo4cacheLon == null || cgBase.getDistance(latitudeNow,longitudeNow,lastGo4cacheLat,lastGo4cacheLon) > 0.75)) {
+    g4cRunning=true;
+    final String host="api.go4cache.com";
+    final String path="/";
+    final String method="POST";
+    String action=null;
+    if (app != null) {
+      action=app.getAction();
+    }
+ else {
+      action="";
+    }
+    final String username=settings.getUsername();
+    if (username != null) {
+      final HashMap<String,String> params=new HashMap<String,String>();
+      final String latStr=String.format((Locale)null,"%.6f",latitudeNow);
+      final String lonStr=String.format((Locale)null,"%.6f",longitudeNow);
+      params.put("u",username);
+      params.put("lt",latStr);
+      params.put("ln",lonStr);
+      params.put("a",action);
+      params.put("s",(cgBase.sha1(username + "|" + latStr+ "|"+ lonStr+ "|"+ action+ "|"+ cgBase.md5("carnero: developing your dreams"))).toLowerCase());
+      if (base.version != null) {
+        params.put("v",base.version);
+      }
+      final String res=base.request(false,host,path,method,params,false,false,false).getData();
+      if (res != null && res.length() > 0) {
+        lastGo4cacheLat=latitudeNow;
+        lastGo4cacheLon=longitudeNow;
+      }
+    }
+  }
+  g4cRunning=false;
+}

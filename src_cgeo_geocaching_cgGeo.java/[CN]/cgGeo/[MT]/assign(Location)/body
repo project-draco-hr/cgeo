@@ -1,0 +1,64 @@
+{
+  if (loc == null) {
+    gps=-1;
+    return;
+  }
+  location=loc;
+  String provider=location.getProvider();
+  if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+    gps=1;
+  }
+ else   if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+    gps=0;
+  }
+ else   if (provider.equals("last") == true) {
+    gps=-1;
+  }
+  latitudeNow=location.getLatitude();
+  longitudeNow=location.getLongitude();
+  app.setLastLoc(latitudeNow,longitudeNow);
+  if (location.hasAltitude() && gps != -1) {
+    altitudeNow=location.getAltitude() + settings.altCorrection;
+  }
+ else {
+    altitudeNow=null;
+  }
+  if (location.hasBearing() && gps != -1) {
+    bearingNow=new Double(location.getBearing());
+  }
+ else {
+    bearingNow=new Double(0);
+  }
+  if (location.hasSpeed() && gps != -1) {
+    speedNow=location.getSpeed();
+  }
+ else {
+    speedNow=0f;
+  }
+  if (location.hasAccuracy() && gps != -1) {
+    accuracyNow=location.getAccuracy();
+  }
+ else {
+    accuracyNow=999f;
+  }
+  if (gps == 1) {
+    if (latitudeBefore != null && longitudeBefore != null && latitudeNow != null && longitudeNow != null) {
+      final double dst=cgBase.getDistance(latitudeBefore,longitudeBefore,latitudeNow,longitudeNow);
+      if (Double.isNaN(dst) == false && dst > 0.005) {
+        distanceNow+=dst;
+        latitudeBefore=latitudeNow;
+        longitudeBefore=longitudeNow;
+      }
+    }
+ else     if (latitudeBefore == null || longitudeBefore == null) {
+      latitudeBefore=latitudeNow;
+      longitudeBefore=longitudeNow;
+    }
+  }
+  if (geoUpdate != null) {
+    geoUpdate.updateLoc(this);
+  }
+  if (gps > -1) {
+    (new publishLoc()).start();
+  }
+}

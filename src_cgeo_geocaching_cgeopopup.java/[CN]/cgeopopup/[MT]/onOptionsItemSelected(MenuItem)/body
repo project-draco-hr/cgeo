@@ -1,0 +1,58 @@
+{
+  final int menuItem=item.getItemId();
+  if (menuItem == 1) {
+    showOnMap();
+    return true;
+  }
+ else   if (menuItem == 2) {
+    navigateTo();
+    return true;
+  }
+ else   if (menuItem == 3) {
+    radarTo();
+    return true;
+  }
+ else   if (menuItem == 4) {
+    if (geo != null) {
+      base.runNavigation(activity,res,settings,warning,tracker,cache.latitude,cache.longitude,geo.latitudeNow,geo.longitudeNow);
+    }
+ else {
+      base.runNavigation(activity,res,settings,warning,tracker,cache.latitude,cache.longitude);
+    }
+    return true;
+  }
+ else   if (menuItem == 5) {
+    cachesAround();
+    return true;
+  }
+ else   if (menuItem == 6) {
+    if (cache.cacheid == null || cache.cacheid.length() == 0) {
+      warning.showToast(res.getString(R.string.err_cannot_log_visit));
+      return false;
+    }
+    Intent logVisitIntent=new Intent(activity,cgeovisit.class);
+    logVisitIntent.putExtra("id",cache.cacheid);
+    logVisitIntent.putExtra("geocode",cache.geocode.toUpperCase());
+    logVisitIntent.putExtra("type",cache.type.toLowerCase());
+    activity.startActivity(logVisitIntent);
+    activity.finish();
+    return true;
+  }
+ else   if (menuItem == 7) {
+    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.geocode)));
+    return true;
+  }
+ else   if (menuItem == 20) {
+    base.runExternalMap(cgBase.mapAppLocus,activity,res,warning,tracker,cache.latitude,cache.longitude);
+    return true;
+  }
+ else   if (menuItem == 21) {
+    base.runExternalMap(cgBase.mapAppRmaps,activity,res,warning,tracker,cache.latitude,cache.longitude);
+    return true;
+  }
+ else   if (menuItem == 23) {
+    base.runExternalMap(cgBase.mapAppAny,activity,res,warning,tracker,cache.latitude,cache.longitude);
+    return true;
+  }
+  return false;
+}

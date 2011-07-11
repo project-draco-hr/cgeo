@@ -1,0 +1,12 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  MenuItem item;
+  item=menu.findItem(1);
+  if (settings.useCompass == 1) {
+    item.setTitle(res.getString(R.string.use_gps));
+  }
+ else {
+    item.setTitle(res.getString(R.string.use_compass));
+  }
+  return true;
+}

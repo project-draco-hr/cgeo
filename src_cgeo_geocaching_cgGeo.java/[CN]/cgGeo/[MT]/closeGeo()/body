@@ -1,0 +1,16 @@
+{
+  if (geoManager != null && geoNetListener != null) {
+    geoManager.removeUpdates(geoNetListener);
+  }
+  if (geoManager != null && geoGpsListener != null) {
+    geoManager.removeUpdates(geoGpsListener);
+  }
+  if (geoManager != null) {
+    geoManager.removeGpsStatusListener(geoGpsStatusListener);
+  }
+  final SharedPreferences.Editor prefsEdit=context.getSharedPreferences(cgSettings.preferences,0).edit();
+  if (prefsEdit != null && Double.isNaN(distanceNow) == false) {
+    prefsEdit.putFloat("dst",(float)distanceNow);
+    prefsEdit.commit();
+  }
+}

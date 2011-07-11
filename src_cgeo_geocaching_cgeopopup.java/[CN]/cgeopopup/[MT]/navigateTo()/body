@@ -1,0 +1,12 @@
+{
+  if (cache == null || cache.latitude == null || cache.longitude == null) {
+    warning.showToast(res.getString(R.string.err_location_unknown));
+  }
+  cgeonavigate navigateActivity=new cgeonavigate();
+  Intent navigateIntent=new Intent(activity,navigateActivity.getClass());
+  navigateIntent.putExtra("latitude",cache.latitude);
+  navigateIntent.putExtra("longitude",cache.longitude);
+  navigateIntent.putExtra("geocode","");
+  navigateIntent.putExtra("name","Some destination");
+  activity.startActivity(navigateIntent);
+}

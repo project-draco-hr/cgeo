@@ -1,0 +1,21 @@
+{
+  if (latitudeIntent != null && longitudeIntent != null) {
+    (new DisplayPointThread()).start();
+  }
+ else {
+    if (loadTimer != null) {
+      loadTimer.stopIt();
+      loadTimer=null;
+    }
+    loadTimer=new LoadTimer();
+    loadTimer.start();
+  }
+  if (settings.publicLoc > 0) {
+    if (usersTimer != null) {
+      usersTimer.stopIt();
+      usersTimer=null;
+    }
+    usersTimer=new UsersTimer();
+    usersTimer.start();
+  }
+}

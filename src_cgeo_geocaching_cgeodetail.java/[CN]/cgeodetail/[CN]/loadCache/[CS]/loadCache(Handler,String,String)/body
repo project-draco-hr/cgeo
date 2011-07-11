@@ -1,0 +1,10 @@
+{
+  handler=handlerIn;
+  geocode=geocodeIn;
+  guid=guidIn;
+  if (geocode == null && guid == null) {
+    warning.showToast(res.getString(R.string.err_detail_cache_forgot));
+    finish();
+    return;
+  }
+}

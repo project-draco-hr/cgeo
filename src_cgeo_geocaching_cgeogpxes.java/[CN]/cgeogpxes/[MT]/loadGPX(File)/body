@@ -1,0 +1,7 @@
+{
+  if (waitDialog != null) {
+    waitDialog.dismiss();
+  }
+  parseDialog=ProgressDialog.show(activity,res.getString(R.string.gpx_import_title_reading_file),res.getString(R.string.gpx_import_loading),true,false);
+  new loadCaches(file).start();
+}

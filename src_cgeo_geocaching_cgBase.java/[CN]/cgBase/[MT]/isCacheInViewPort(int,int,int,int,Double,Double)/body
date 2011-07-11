@@ -1,0 +1,36 @@
+{
+  if (cacheLat == null || cacheLon == null) {
+    return false;
+  }
+  int minLat=centerLat - (spanLat / 2) - (spanLat / 10);
+  int maxLat=centerLat + (spanLat / 2) + (spanLat / 10);
+  int minLon=centerLon - (spanLon / 2) - (spanLon / 10);
+  int maxLon=centerLon + (spanLon / 2) + (spanLon / 10);
+  int cLat=(int)Math.round(cacheLat * 1e6);
+  int cLon=(int)Math.round(cacheLon * 1e6);
+  int mid=0;
+  if (maxLat < minLat) {
+    mid=minLat;
+    minLat=maxLat;
+    maxLat=mid;
+  }
+  if (maxLon < minLon) {
+    mid=minLon;
+    minLon=maxLon;
+    maxLon=mid;
+  }
+  boolean latOk=false;
+  boolean lonOk=false;
+  if (cLat >= minLat && cLat <= maxLat) {
+    latOk=true;
+  }
+  if (cLon >= minLon && cLon <= maxLon) {
+    lonOk=true;
+  }
+  if (latOk == true && lonOk == true) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

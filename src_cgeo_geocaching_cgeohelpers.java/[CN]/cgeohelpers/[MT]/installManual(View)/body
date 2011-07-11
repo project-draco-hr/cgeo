@@ -1,0 +1,15 @@
+{
+  final Locale loc=Locale.getDefault();
+  final String lng=loc.getLanguage();
+  try {
+    if (lng.equalsIgnoreCase("de")) {
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("market://search?q=pname:gnu.android.app.cgeomanual.de")));
+    }
+ else {
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("market://search?q=pname:gnu.android.app.cgeomanual.en")));
+    }
+  }
+ catch (  Exception e) {
+  }
+  finish();
+}

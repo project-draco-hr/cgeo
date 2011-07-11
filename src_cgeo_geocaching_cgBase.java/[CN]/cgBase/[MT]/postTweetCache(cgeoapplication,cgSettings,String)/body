@@ -1,0 +1,9 @@
+{
+  final cgCache cache=app.getCacheByGeocode(geocode);
+  String name=cache.name;
+  if (name.length() > 84) {
+    name=name.substring(0,81) + "...";
+  }
+  final String status="I found " + name + " (http://coord.info/"+ cache.geocode.toUpperCase()+ ")! #cgeo #geocaching";
+  postTweet(app,settings,status,null,null);
+}

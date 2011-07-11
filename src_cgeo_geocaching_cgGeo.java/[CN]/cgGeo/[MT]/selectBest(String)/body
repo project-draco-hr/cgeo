@@ -1,0 +1,23 @@
+{
+  if (locNet == null && locGps != null) {
+    assign(locGps);
+    return;
+  }
+  if (locNet != null && locGps == null) {
+    assign(locNet);
+    return;
+  }
+  if (satellitesFixed > 0) {
+    assign(locGps);
+    return;
+  }
+  if (initProvider != null && initProvider.equals(LocationManager.GPS_PROVIDER) == true) {
+    assign(locGps);
+    return;
+  }
+  if (locGpsLast > (System.currentTimeMillis() - 30 * 1000)) {
+    assign(locGps);
+    return;
+  }
+  assign(locNet);
+}

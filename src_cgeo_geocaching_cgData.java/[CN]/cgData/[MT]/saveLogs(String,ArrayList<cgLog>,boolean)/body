@@ -1,0 +1,31 @@
+{
+  init();
+  if (geocode == null || geocode.length() == 0 || logs == null) {
+    return false;
+  }
+  databaseRW.beginTransaction();
+  try {
+    if (drop == true) {
+      databaseRW.delete(dbTableLogs,"geocode = \"" + geocode + "\"",null);
+    }
+    if (!logs.isEmpty()) {
+      ContentValues values=new ContentValues();
+      for (      cgLog oneLog : logs) {
+        values.clear();
+        values.put("geocode",geocode);
+        values.put("updated",System.currentTimeMillis());
+        values.put("type",oneLog.type);
+        values.put("author",oneLog.author);
+        values.put("log",oneLog.log);
+        values.put("date",oneLog.date);
+        values.put("found",oneLog.found);
+        databaseRW.insert(dbTableLogs,null,values);
+      }
+    }
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+  return true;
+}

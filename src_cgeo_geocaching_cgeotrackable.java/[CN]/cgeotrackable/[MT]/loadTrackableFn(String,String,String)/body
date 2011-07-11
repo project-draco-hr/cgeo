@@ -1,0 +1,16 @@
+{
+  HashMap<String,String> params=new HashMap<String,String>();
+  if (geocode != null && geocode.length() > 0) {
+    params.put("geocode",geocode);
+  }
+ else   if (guid != null && guid.length() > 0) {
+    params.put("guid",guid);
+  }
+ else   if (id != null && id.length() > 0) {
+    params.put("id",id);
+  }
+ else {
+    return;
+  }
+  trackable=base.searchTrackable(params);
+}

@@ -1,0 +1,19 @@
+{
+  if (app == null) {
+    return;
+  }
+  int checks=0;
+  while (app.storageStatus() == false) {
+    try {
+      wait(500);
+      checks++;
+    }
+ catch (    Exception e) {
+    }
+    if (checks > 10) {
+      return;
+    }
+  }
+  countBubbleCnt=app.getAllStoredCachesCount(true,null,null);
+  countBubbleHandler.sendEmptyMessage(0);
+}

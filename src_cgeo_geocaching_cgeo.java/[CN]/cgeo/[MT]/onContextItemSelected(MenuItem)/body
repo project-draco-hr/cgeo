@@ -1,0 +1,27 @@
+{
+  final int id=item.getItemId();
+  if (id == 0) {
+    settings.setCacheType(null);
+    setFilterTitle();
+    return true;
+  }
+ else   if (id > 0) {
+    String itemTitle=item.getTitle().toString();
+    String choice=null;
+    for (    Entry<String,String> entry : cgBase.cacheTypesInv.entrySet()) {
+      if (entry.getValue().equalsIgnoreCase(itemTitle)) {
+        choice=entry.getKey();
+        break;
+      }
+    }
+    if (choice == null) {
+      settings.setCacheType(null);
+    }
+ else {
+      settings.setCacheType(choice);
+    }
+    setFilterTitle();
+    return true;
+  }
+  return false;
+}

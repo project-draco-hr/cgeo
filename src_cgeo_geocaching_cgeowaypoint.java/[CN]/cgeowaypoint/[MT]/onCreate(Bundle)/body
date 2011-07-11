@@ -1,0 +1,37 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.waypoint);
+  base.setTitle(activity,"waypoint");
+  tracker=GoogleAnalyticsTracker.getInstance();
+  tracker.start(cgSettings.analytics,this);
+  tracker.dispatch();
+  base.sendAnal(activity,tracker,"/waypoint/detail");
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    id=extras.getInt("waypoint");
+    geocode=extras.getString("geocode");
+  }
+  if (id <= 0) {
+    warning.showToast(res.getString(R.string.err_waypoint_unknown));
+    finish();
+    return;
+  }
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
+  waitDialog.setCancelable(true);
+  (new loadWaypoint()).start();
+}

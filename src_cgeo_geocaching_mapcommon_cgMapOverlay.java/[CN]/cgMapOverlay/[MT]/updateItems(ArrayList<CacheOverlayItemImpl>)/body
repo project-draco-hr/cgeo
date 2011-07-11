@@ -1,0 +1,11 @@
+{
+  if (itemsPre == null) {
+    return;
+  }
+  for (  CacheOverlayItemImpl item : itemsPre) {
+    item.setMarker(boundCenterBottom(item.getMarker(0)));
+  }
+  items=(ArrayList<CacheOverlayItemImpl>)itemsPre.clone();
+  setLastFocusedItemIndex(-1);
+  populate();
+}

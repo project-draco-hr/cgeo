@@ -1,0 +1,6 @@
+{
+  if (dstLatitude == null || dstLatitude == null) {
+    return;
+  }
+  ((TextView)findViewById(R.id.destination)).setText(base.formatCoordinate(dstLatitude,"lat",true) + " | " + base.formatCoordinate(dstLongitude,"lon",true));
+}

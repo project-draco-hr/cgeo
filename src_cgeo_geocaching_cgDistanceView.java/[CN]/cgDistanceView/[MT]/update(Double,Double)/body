@@ -1,0 +1,6 @@
+{
+  if (cacheLat == null || cacheLon == null)   return;
+  if (latitude == null || longitude == null)   return;
+  if (base == null)   return;
+  setText(base.getHumanDistance(cgBase.getDistance(latitude,longitude,cacheLat,cacheLon)));
+}

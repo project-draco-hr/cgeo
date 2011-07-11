@@ -1,0 +1,11 @@
+{
+switch (item.getItemId()) {
+case 1:
+    logTouch();
+  return true;
+case 2:
+activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/track/details.aspx?tracker=" + trackable.geocode)));
+return true;
+}
+return false;
+}

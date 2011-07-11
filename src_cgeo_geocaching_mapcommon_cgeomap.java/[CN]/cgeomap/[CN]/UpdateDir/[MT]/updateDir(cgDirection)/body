@@ -1,0 +1,9 @@
+{
+  if (dir == null || dir.directionNow == null) {
+    return;
+  }
+  if (overlayMyLoc != null && mapView != null && (geo == null || geo.speedNow == null || geo.speedNow <= 5)) {
+    overlayMyLoc.setHeading(dir.directionNow);
+    mapView.invalidate();
+  }
+}

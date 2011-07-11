@@ -1,0 +1,15 @@
+{
+  final String host="www.geocaching.com";
+  final String path="/default.aspx";
+  final HashMap<String,String> params=new HashMap<String,String>();
+  if (viewstate != null) {
+    params.put("__VIEWSTATE",viewstate);
+  }
+  if (viewstate1 != null) {
+    params.put("__VIEWSTATE1",viewstate1);
+    params.put("__VIEWSTATEFIELDCOUNT","2");
+  }
+  params.put("__EVENTTARGET","ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem");
+  params.put("__EVENTARGUMENT","");
+  return request(false,host,path,"POST",params,false,false,false).getData();
+}

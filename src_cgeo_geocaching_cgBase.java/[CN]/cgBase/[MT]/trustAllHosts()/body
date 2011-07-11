@@ -1,0 +1,20 @@
+{
+  TrustManager[] trustAllCerts=new TrustManager[]{new X509TrustManager(){
+    public java.security.cert.X509Certificate[] getAcceptedIssuers(){
+      return new java.security.cert.X509Certificate[]{};
+    }
+    public void checkClientTrusted(    X509Certificate[] chain,    String authType) throws CertificateException {
+    }
+    public void checkServerTrusted(    X509Certificate[] chain,    String authType) throws CertificateException {
+    }
+  }
+};
+  try {
+    SSLContext sc=SSLContext.getInstance("TLS");
+    sc.init(null,trustAllCerts,new java.security.SecureRandom());
+    HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgBase.trustAllHosts: " + e.toString());
+  }
+}

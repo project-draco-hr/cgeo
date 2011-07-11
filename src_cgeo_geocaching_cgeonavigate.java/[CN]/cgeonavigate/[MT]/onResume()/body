@@ -1,0 +1,23 @@
+{
+  super.onResume();
+  settings.load();
+  if (title != null && title.length() > 0) {
+    app.setAction(title);
+  }
+ else   if (name != null && name.length() > 0) {
+    app.setAction(name);
+  }
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  if (settings.useCompass == 1 && dir == null) {
+    dir=app.startDir(activity,dirUpdate,warning);
+  }
+  if (pm == null) {
+    pm=(PowerManager)getSystemService(Context.POWER_SERVICE);
+  }
+  if (updater == null) {
+    updater=new updaterThread(updaterHandler);
+    updater.start();
+  }
+}

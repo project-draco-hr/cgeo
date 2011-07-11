@@ -1,0 +1,37 @@
+{
+  final Button typeButton=(Button)findViewById(R.id.type);
+  if (cgBase.logTypes2.get(type) != null) {
+    typeSelected=type;
+  }
+  if (cgBase.logTypes2.get(typeSelected) == null) {
+    typeSelected=1;
+  }
+  typeButton.setText(cgBase.logTypes2.get(typeSelected));
+  if (tweetBox == null) {
+    tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
+  }
+  if (type == 2 && tbChanged == false) {
+  }
+ else   if (type != 2 && tbChanged == false) {
+  }
+  if (type == cgBase.LOG_FOUND_IT && settings.twitter == 1) {
+    tweetBox.setVisibility(View.VISIBLE);
+  }
+ else {
+    tweetBox.setVisibility(View.GONE);
+  }
+  if (post == null) {
+    post=(Button)findViewById(R.id.post);
+  }
+  if (type == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
+    if (rating == 0) {
+      post.setText(res.getString(R.string.log_post_no_rate));
+    }
+ else {
+      post.setText(res.getString(R.string.log_post_rate) + " " + rating+ "*");
+    }
+  }
+ else {
+    post.setText(res.getString(R.string.log_post));
+  }
+}

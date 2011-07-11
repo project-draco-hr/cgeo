@@ -1,0 +1,40 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.gpx);
+  base.setTitle(activity,res.getString(R.string.gpx_import_title));
+  base.sendAnal(activity,"/gpx-import");
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    listId=extras.getInt("list");
+  }
+  if (listId <= 0) {
+    listId=1;
+  }
+  setAdapter();
+  waitDialog=ProgressDialog.show(this,res.getString(R.string.gpx_import_title_searching),res.getString(R.string.gpx_import_searching),true,true,new DialogInterface.OnCancelListener(){
+    public void onCancel(    DialogInterface arg0){
+      if (searchingThread != null && searchingThread.isAlive()) {
+        searchingThread.notifyEnd();
+      }
+      if (files.isEmpty() == true) {
+        finish();
+      }
+    }
+  }
+);
+  endSearching=false;
+  searchingThread=new loadFiles();
+  searchingThread.start();
+}

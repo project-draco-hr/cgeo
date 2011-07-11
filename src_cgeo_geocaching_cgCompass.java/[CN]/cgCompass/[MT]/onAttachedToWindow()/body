@@ -1,0 +1,19 @@
+{
+  compassUnderlay=BitmapFactory.decodeResource(context.getResources(),R.drawable.compass_underlay);
+  compassRose=BitmapFactory.decodeResource(context.getResources(),R.drawable.compass_rose);
+  compassArrow=BitmapFactory.decodeResource(context.getResources(),R.drawable.compass_arrow);
+  compassOverlay=BitmapFactory.decodeResource(context.getResources(),R.drawable.compass_overlay);
+  compassUnderlayWidth=compassUnderlay.getWidth();
+  compassUnderlayHeight=compassUnderlay.getWidth();
+  compassRoseWidth=compassRose.getWidth();
+  compassRoseHeight=compassRose.getWidth();
+  compassArrowWidth=compassArrow.getWidth();
+  compassArrowHeight=compassArrow.getWidth();
+  compassOverlayWidth=compassOverlay.getWidth();
+  compassOverlayHeight=compassOverlay.getWidth();
+  setfil=new PaintFlagsDrawFilter(0,Paint.FILTER_BITMAP_FLAG);
+  remfil=new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG,0);
+  wantStop=false;
+  watchdog=new changeThread(changeHandler);
+  watchdog.start();
+}

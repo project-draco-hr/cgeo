@@ -1,0 +1,63 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.navigate);
+  base.setTitle(activity,res.getString(R.string.compass_title));
+  base.sendAnal(activity,"/navigate");
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  if (settings.useCompass == 1 && dir == null) {
+    dir=app.startDir(activity,dirUpdate,warning);
+  }
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    title=extras.getString("geocode");
+    name=extras.getString("name");
+    dstLatitude=extras.getDouble("latitude");
+    dstLongitude=extras.getDouble("longitude");
+    if (name != null && name.length() > 0) {
+      if (title != null && title.length() > 0) {
+        title=title + ": " + name;
+      }
+ else {
+        title=name;
+      }
+    }
+  }
+ else {
+    Intent pointIntent=new Intent(activity,cgeopoint.class);
+    activity.startActivity(pointIntent);
+    finish();
+    return;
+  }
+  if (title != null && title.length() > 0) {
+    app.setAction(title);
+  }
+ else   if (name != null && name.length() > 0) {
+    app.setAction(name);
+  }
+  setTitle();
+  setDestCoords();
+  compassView=(cgCompass)findViewById(R.id.rose);
+  updater=new updaterThread(updaterHandler);
+  updater.start();
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
+  if (dir != null) {
+    dirUpdate.updateDir(dir);
+  }
+}

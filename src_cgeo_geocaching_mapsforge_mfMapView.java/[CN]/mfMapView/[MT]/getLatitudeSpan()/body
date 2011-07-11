@@ -1,0 +1,6 @@
+{
+  Projection projection=getProjection();
+  GeoPoint low=projection.fromPixels(0,0);
+  GeoPoint high=projection.fromPixels(0,getHeight());
+  return Math.abs(high.getLatitudeE6() - low.getLatitudeE6());
+}

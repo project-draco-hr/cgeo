@@ -1,0 +1,93 @@
+{
+  final cgSearch search=new cgSearch();
+  String geocode=parameters.get("geocode");
+  String guid=parameters.get("guid");
+  if ((geocode == null || geocode.length() == 0) && ((guid == null || guid.length() == 0))) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No geocode nor guid given");
+    return null;
+  }
+  if (forceReload == false && reason == 0 && (app.isOffline(geocode,guid) == true || app.isThere(geocode,guid,true,true) == true)) {
+    if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
+      geocode=app.getGeocode(guid);
+    }
+    ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
+    cacheList.add(app.getCacheByGeocode(geocode,true,true,true,true,true,true));
+    search.addGeocode(geocode);
+    app.addSearch(search,cacheList,false,reason);
+    cacheList.clear();
+    cacheList=null;
+    return search.getCurrentId();
+  }
+  final String host="www.geocaching.com";
+  final String path="/seek/cache_details.aspx";
+  final String method="GET";
+  final HashMap<String,String> params=new HashMap<String,String>();
+  if (geocode != null && geocode.length() > 0) {
+    params.put("wp",geocode);
+  }
+ else   if (guid != null && guid.length() > 0) {
+    params.put("guid",guid);
+  }
+  params.put("decrypt","y");
+  params.put("log","y");
+  params.put("numlogs","35");
+  String page=requestLogged(false,host,path,method,params,false,false,false);
+  if (page == null || page.length() == 0) {
+    if (app.isThere(geocode,guid,true,false) == true) {
+      if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
+        Log.i(cgSettings.tag,"Loading old cache from cache.");
+        geocode=app.getGeocode(guid);
+      }
+      final ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
+      cacheList.add(app.getCacheByGeocode(geocode));
+      search.addGeocode(geocode);
+      search.error=null;
+      search.errorRetrieve=0;
+      app.addSearch(search,cacheList,false,reason);
+      cacheList.clear();
+      return search.getCurrentId();
+    }
+    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No data from server");
+    return null;
+  }
+  final cgCacheWrap caches=parseCache(page,reason);
+  if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+    if (caches != null && caches.error != null && caches.error.length() > 0) {
+      search.error=caches.error;
+    }
+    if (caches != null && caches.url != null && caches.url.length() > 0) {
+      search.url=caches.url;
+    }
+    app.addSearch(search,null,true,reason);
+    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No cache parsed");
+    return null;
+  }
+  if (app == null) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No application found");
+    return null;
+  }
+  final ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
+  if (caches != null) {
+    if (caches.error != null && caches.error.length() > 0) {
+      search.error=caches.error;
+    }
+    if (caches.url != null && caches.url.length() > 0) {
+      search.url=caches.url;
+    }
+    if (caches.viewstate != null && caches.viewstate.length() > 0) {
+      search.viewstate=caches.viewstate;
+    }
+    if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
+      search.viewstate1=caches.viewstate1;
+    }
+    search.totalCnt=caches.totalCnt;
+    for (    cgCache cache : caches.cacheList) {
+      search.addGeocode(cache.geocode);
+      cacheList.add(cache);
+    }
+  }
+  app.addSearch(search,cacheList,true,reason);
+  page=null;
+  cacheList.clear();
+  return search.getCurrentId();
+}

@@ -1,0 +1,26 @@
+{
+  if (databaseRO != null) {
+    path=databaseRO.getPath();
+    if (databaseRO.inTransaction() == true) {
+      databaseRO.endTransaction();
+    }
+    databaseRO.close();
+    databaseRO=null;
+    SQLiteDatabase.releaseMemory();
+    Log.d(cgSettings.tag,"Closing RO database");
+  }
+  if (databaseRW != null) {
+    path=databaseRW.getPath();
+    if (databaseRW.inTransaction() == true) {
+      databaseRW.endTransaction();
+    }
+    databaseRW.close();
+    databaseRW=null;
+    SQLiteDatabase.releaseMemory();
+    Log.d(cgSettings.tag,"Closing RW database");
+  }
+  if (dbHelper != null) {
+    dbHelper.close();
+    dbHelper=null;
+  }
+}

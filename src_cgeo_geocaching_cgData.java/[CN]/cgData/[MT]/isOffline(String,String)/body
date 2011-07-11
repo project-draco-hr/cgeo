@@ -1,0 +1,35 @@
+{
+  init();
+  Cursor cursor=null;
+  long reason=0;
+  try {
+    if (geocode != null && geocode.length() > 0) {
+      cursor=databaseRO.query(dbTableCaches,new String[]{"reason"},"geocode = \"" + geocode + "\"",null,null,null,null,"1");
+    }
+ else     if (guid != null && guid.length() > 0) {
+      cursor=databaseRO.query(dbTableCaches,new String[]{"reason"},"guid = \"" + guid + "\"",null,null,null,null,"1");
+    }
+ else {
+      return false;
+    }
+    if (cursor != null) {
+      final int cnt=cursor.getCount();
+      int index=0;
+      if (cnt > 0) {
+        cursor.moveToFirst();
+        index=cursor.getColumnIndex("reason");
+        reason=(long)cursor.getLong(index);
+      }
+      cursor.close();
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgData.isOffline: " + e.toString());
+  }
+  if (reason >= 1) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

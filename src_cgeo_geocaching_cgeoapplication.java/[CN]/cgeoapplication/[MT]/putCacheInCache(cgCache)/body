@@ -1,0 +1,9 @@
+{
+  if (cache == null || cache.geocode == null) {
+    return;
+  }
+  if (cachesCache.containsKey(cache.geocode) == true) {
+    cachesCache.remove(cache.geocode);
+  }
+  cachesCache.put(cache.geocode,cache);
+}

@@ -1,0 +1,8 @@
+{
+  if (cache == null || cache.spoilers == null || cache.spoilers.isEmpty() == true) {
+    warning.showToast(res.getString(R.string.err_detail_no_spoiler));
+  }
+  Intent spoilersIntent=new Intent(activity,cgeospoilers.class);
+  spoilersIntent.putExtra("geocode",geocode.toUpperCase());
+  activity.startActivity(spoilersIntent);
+}

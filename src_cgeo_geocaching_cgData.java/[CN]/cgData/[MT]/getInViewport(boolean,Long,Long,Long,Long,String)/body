@@ -1,0 +1,61 @@
+{
+  if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
+    return null;
+  }
+  init();
+  Cursor cursor=null;
+  ArrayList<String> geocodes=new ArrayList<String>();
+  double latMin=(centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
+  double latMax=(centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
+  double lonMin=(centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
+  double lonMax=(centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
+  double llCache;
+  if (latMin > latMax) {
+    llCache=latMax;
+    latMax=latMin;
+    latMin=llCache;
+  }
+  if (lonMin > lonMax) {
+    llCache=lonMax;
+    lonMax=lonMin;
+    lonMin=llCache;
+  }
+  StringBuilder where=new StringBuilder();
+  where.append("latitude >= ");
+  where.append(String.format((Locale)null,"%.6f",latMin));
+  where.append(" and latitude <= ");
+  where.append(String.format((Locale)null,"%.6f",latMax));
+  where.append(" and longitude >= ");
+  where.append(String.format((Locale)null,"%.6f",lonMin));
+  where.append(" and longitude <= ");
+  where.append(String.format((Locale)null,"%.6f",lonMax));
+  if (cachetype != null) {
+    where.append(" and type = \"");
+    where.append(cachetype);
+    where.append("\"");
+  }
+  if (stored) {
+    where.append(" and reason >= 1");
+  }
+  try {
+    cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},where.toString(),null,null,null,null,"500");
+    if (cursor != null) {
+      if (cursor.getCount() > 0) {
+        cursor.moveToFirst();
+        do {
+          geocodes.add((String)cursor.getString(cursor.getColumnIndex("geocode")));
+        }
+ while (cursor.moveToNext());
+      }
+ else {
+        cursor.close();
+        return null;
+      }
+      cursor.close();
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgData.getOfflineInViewport: " + e.toString());
+  }
+  return geocodes;
+}

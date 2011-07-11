@@ -1,0 +1,251 @@
+{
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  app.setAction(geocode);
+  cache=app.getCacheByGeocode(geocode);
+  if (cache == null) {
+    warning.showToast(res.getString(R.string.err_detail_cache_find));
+    finish();
+    return;
+  }
+  try {
+    RelativeLayout itemLayout;
+    TextView itemName;
+    TextView itemValue;
+    LinearLayout itemStars;
+    if (gcIcons == null || gcIcons.isEmpty()) {
+      gcIcons.put("ape",R.drawable.type_ape);
+      gcIcons.put("cito",R.drawable.type_cito);
+      gcIcons.put("earth",R.drawable.type_earth);
+      gcIcons.put("event",R.drawable.type_event);
+      gcIcons.put("letterbox",R.drawable.type_letterbox);
+      gcIcons.put("locationless",R.drawable.type_locationless);
+      gcIcons.put("mega",R.drawable.type_mega);
+      gcIcons.put("multi",R.drawable.type_multi);
+      gcIcons.put("traditional",R.drawable.type_traditional);
+      gcIcons.put("virtual",R.drawable.type_virtual);
+      gcIcons.put("webcam",R.drawable.type_webcam);
+      gcIcons.put("wherigo",R.drawable.type_wherigo);
+      gcIcons.put("mystery",R.drawable.type_mystery);
+      gcIcons.put("gchq",R.drawable.type_hq);
+    }
+    if (cache.name != null && cache.name.length() > 0) {
+      base.setTitle(activity,cache.name);
+    }
+ else {
+      base.setTitle(activity,geocode.toUpperCase());
+    }
+    inflater=activity.getLayoutInflater();
+    geocode=cache.geocode.toUpperCase();
+    ((ScrollView)findViewById(R.id.details_list_box)).setVisibility(View.VISIBLE);
+    LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
+    detailsList.removeAllViews();
+    if (cache.type != null && gcIcons.containsKey(cache.type) == true) {
+      ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)activity.getResources().getDrawable(gcIcons.get(cache.type)),null,null,null);
+    }
+ else {
+      ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)activity.getResources().getDrawable(gcIcons.get("mystery")),null,null,null);
+    }
+    itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
+    itemName=(TextView)itemLayout.findViewById(R.id.name);
+    itemValue=(TextView)itemLayout.findViewById(R.id.value);
+    itemName.setText(res.getString(R.string.cache_type));
+    if (cgBase.cacheTypesInv.containsKey(cache.type) == true) {
+      if (cache.size != null && cache.size.length() > 0) {
+        itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + " (" + cache.size+ ")");
+      }
+ else {
+        itemValue.setText(cgBase.cacheTypesInv.get(cache.type));
+      }
+    }
+ else {
+      if (cache.size != null && cache.size.length() > 0) {
+        itemValue.setText(cgBase.cacheTypesInv.get("mystery") + " (" + cache.size+ ")");
+      }
+ else {
+        itemValue.setText(cgBase.cacheTypesInv.get("mystery"));
+      }
+    }
+    detailsList.addView(itemLayout);
+    itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
+    itemName=(TextView)itemLayout.findViewById(R.id.name);
+    itemValue=(TextView)itemLayout.findViewById(R.id.value);
+    itemName.setText(res.getString(R.string.cache_geocode));
+    itemValue.setText(cache.geocode.toUpperCase());
+    detailsList.addView(itemLayout);
+    if (cache.archived == true || cache.disabled == true || cache.members == true || cache.found == true) {
+      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
+      itemName=(TextView)itemLayout.findViewById(R.id.name);
+      itemValue=(TextView)itemLayout.findViewById(R.id.value);
+      itemName.setText(res.getString(R.string.cache_status));
+      StringBuilder state=new StringBuilder();
+      if (cache.found == true) {
+        if (state.length() > 0) {
+          state.append(", ");
+        }
+        state.append(res.getString(R.string.cache_status_found));
+      }
+      if (cache.archived == true) {
+        if (state.length() > 0) {
+          state.append(", ");
+        }
+        state.append(res.getString(R.string.cache_status_archived));
+      }
+      if (cache.disabled == true) {
+        if (state.length() > 0) {
+          state.append(", ");
+        }
+        state.append(res.getString(R.string.cache_status_disabled));
+      }
+      if (cache.members == true) {
+        if (state.length() > 0) {
+          state.append(", ");
+        }
+        state.append(res.getString(R.string.cache_status_premium));
+      }
+      itemValue.setText(state.toString());
+      detailsList.addView(itemLayout);
+      state=null;
+    }
+    itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
+    itemName=(TextView)itemLayout.findViewById(R.id.name);
+    itemValue=(TextView)itemLayout.findViewById(R.id.value);
+    itemName.setText(res.getString(R.string.cache_distance));
+    itemValue.setText("--");
+    detailsList.addView(itemLayout);
+    cacheDistance=itemValue;
+    if (cache.difficulty > 0f) {
+      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_layout,null);
+      itemName=(TextView)itemLayout.findViewById(R.id.name);
+      itemValue=(TextView)itemLayout.findViewById(R.id.value);
+      itemStars=(LinearLayout)itemLayout.findViewById(R.id.stars);
+      itemName.setText(res.getString(R.string.cache_difficulty));
+      itemValue.setText(String.format(Locale.getDefault(),"%.1f",cache.difficulty) + " of 5");
+      for (int i=0; i <= 4; i++) {
+        ImageView star=(ImageView)inflater.inflate(R.layout.star,null);
+        if ((cache.difficulty - i) >= 1.0) {
+          star.setImageResource(R.drawable.star_on);
+        }
+ else         if ((cache.difficulty - i) > 0.0) {
+          star.setImageResource(R.drawable.star_half);
+        }
+ else {
+          star.setImageResource(R.drawable.star_off);
+        }
+        itemStars.addView(star);
+      }
+      detailsList.addView(itemLayout);
+    }
+    if (cache.terrain > 0f) {
+      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_layout,null);
+      itemName=(TextView)itemLayout.findViewById(R.id.name);
+      itemValue=(TextView)itemLayout.findViewById(R.id.value);
+      itemStars=(LinearLayout)itemLayout.findViewById(R.id.stars);
+      itemName.setText(res.getString(R.string.cache_terrain));
+      itemValue.setText(String.format(Locale.getDefault(),"%.1f",cache.terrain) + " of 5");
+      for (int i=0; i <= 4; i++) {
+        ImageView star=(ImageView)inflater.inflate(R.layout.star,null);
+        if ((cache.terrain - i) >= 1.0) {
+          star.setImageResource(R.drawable.star_on);
+        }
+ else         if ((cache.terrain - i) > 0.0) {
+          star.setImageResource(R.drawable.star_half);
+        }
+ else {
+          star.setImageResource(R.drawable.star_off);
+        }
+        itemStars.addView(star);
+      }
+      detailsList.addView(itemLayout);
+    }
+    if (cache.rating != null && cache.rating > 0) {
+      setRating(cache.rating,cache.votes);
+    }
+ else {
+      (new Thread(){
+        public void run(){
+          cgRating rating=base.getRating(cache.guid,geocode);
+          Message msg=new Message();
+          Bundle bundle=new Bundle();
+          if (rating == null || rating.rating == null) {
+            return;
+          }
+          bundle.putFloat("rating",rating.rating);
+          bundle.putInt("votes",rating.votes);
+          msg.setData(bundle);
+          ratingHandler.sendMessage(msg);
+        }
+      }
+).start();
+    }
+    if (fromDetail == false) {
+      ((LinearLayout)findViewById(R.id.more_details_box)).setVisibility(View.VISIBLE);
+      Button buttonMore=(Button)findViewById(R.id.more_details);
+      buttonMore.setOnClickListener(new OnClickListener(){
+        public void onClick(        View arg0){
+          Intent cachesIntent=new Intent(activity,cgeodetail.class);
+          cachesIntent.putExtra("geocode",geocode.toUpperCase());
+          activity.startActivity(cachesIntent);
+          activity.finish();
+          return;
+        }
+      }
+);
+    }
+ else {
+      ((LinearLayout)findViewById(R.id.more_details_box)).setVisibility(View.GONE);
+    }
+    if (fromDetail == false) {
+      ((LinearLayout)findViewById(R.id.offline_box)).setVisibility(View.VISIBLE);
+      final TextView offlineText=(TextView)findViewById(R.id.offline_text);
+      final Button offlineRefresh=(Button)findViewById(R.id.offline_refresh);
+      final Button offlineStore=(Button)findViewById(R.id.offline_store);
+      if (cache.reason > 0) {
+        Long diff=(System.currentTimeMillis() / (60 * 1000)) - (cache.detailedUpdate / (60 * 1000));
+        String ago="";
+        if (diff < 15) {
+          ago=res.getString(R.string.cache_offline_time_mins_few);
+        }
+ else         if (diff < 50) {
+          ago=res.getString(R.string.cache_offline_time_about) + " " + diff+ " "+ res.getString(R.string.cache_offline_time_mins);
+        }
+ else         if (diff < 90) {
+          ago=res.getString(R.string.cache_offline_time_about) + " " + res.getString(R.string.cache_offline_time_hour);
+        }
+ else         if (diff < (48 * 60)) {
+          ago=res.getString(R.string.cache_offline_time_about) + " " + (diff / 60)+ " "+ res.getString(R.string.cache_offline_time_hours);
+        }
+ else {
+          ago=res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60))+ " "+ res.getString(R.string.cache_offline_time_days);
+        }
+        offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
+        offlineRefresh.setVisibility(View.VISIBLE);
+        offlineRefresh.setEnabled(true);
+        offlineRefresh.setOnClickListener(new storeCache());
+        offlineStore.setText(res.getString(R.string.cache_offline_drop));
+        offlineStore.setEnabled(true);
+        offlineStore.setOnClickListener(new dropCache());
+      }
+ else {
+        offlineText.setText(res.getString(R.string.cache_offline_not_ready));
+        offlineRefresh.setVisibility(View.GONE);
+        offlineRefresh.setEnabled(false);
+        offlineRefresh.setOnTouchListener(null);
+        offlineRefresh.setOnClickListener(null);
+        offlineStore.setText(res.getString(R.string.cache_offline_store));
+        offlineStore.setEnabled(true);
+        offlineStore.setOnClickListener(new storeCache());
+      }
+    }
+ else {
+      ((LinearLayout)findViewById(R.id.offline_box)).setVisibility(View.GONE);
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgeopopup.init: " + e.toString());
+  }
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
+}

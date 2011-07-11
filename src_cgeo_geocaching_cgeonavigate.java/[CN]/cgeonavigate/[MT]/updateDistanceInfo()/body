@@ -1,0 +1,14 @@
+{
+  if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null || dstLatitude == null || dstLongitude == null) {
+    return;
+  }
+  if (distanceView == null) {
+    distanceView=(TextView)findViewById(R.id.distance);
+  }
+  if (headingView == null) {
+    headingView=(TextView)findViewById(R.id.heading);
+  }
+  cacheHeading=cgBase.getHeading(geo.latitudeNow,geo.longitudeNow,dstLatitude,dstLongitude);
+  distanceView.setText(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow,geo.longitudeNow,dstLatitude,dstLongitude)));
+  headingView.setText(String.format(Locale.getDefault(),"%.0f",cacheHeading) + "??");
+}

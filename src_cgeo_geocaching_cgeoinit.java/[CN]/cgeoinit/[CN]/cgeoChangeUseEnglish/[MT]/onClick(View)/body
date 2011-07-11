@@ -1,0 +1,22 @@
+{
+  SharedPreferences.Editor edit=prefs.edit();
+  if (prefs.getBoolean("useenglish",false) == false) {
+    edit.putBoolean("useenglish",true);
+    settings.useEnglish=true;
+    settings.setLanguage(true);
+  }
+ else {
+    edit.putBoolean("useenglish",false);
+    settings.useEnglish=false;
+    settings.setLanguage(false);
+  }
+  edit.commit();
+  CheckBox useEnglishButton=(CheckBox)findViewById(R.id.useenglish);
+  if (prefs.getBoolean("useenglish",false) == false) {
+    useEnglishButton.setChecked(false);
+  }
+ else {
+    useEnglishButton.setChecked(true);
+  }
+  return;
+}

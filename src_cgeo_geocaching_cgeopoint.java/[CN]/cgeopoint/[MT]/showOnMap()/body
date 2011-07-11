@@ -1,0 +1,10 @@
+{
+  ArrayList<Double> coords=getDestination();
+  if (coords == null || coords.get(0) == null || coords.get(1) == null) {
+    warning.showToast(res.getString(R.string.err_location_unknown));
+  }
+  Intent mapIntent=new Intent(activity,settings.getMapFactory().getMapClass());
+  mapIntent.putExtra("latitude",coords.get(0));
+  mapIntent.putExtra("longitude",coords.get(1));
+  activity.startActivity(mapIntent);
+}

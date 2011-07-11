@@ -1,0 +1,15 @@
+{
+  int result=0;
+  int specMode=MeasureSpec.getMode(measureSpec);
+  int specSize=MeasureSpec.getSize(measureSpec);
+  if (specMode == MeasureSpec.EXACTLY) {
+    result=specSize;
+  }
+ else {
+    result=21 + getPaddingLeft() + getPaddingRight();
+    if (specMode == MeasureSpec.AT_MOST) {
+      result=Math.min(result,specSize);
+    }
+  }
+  return result;
+}

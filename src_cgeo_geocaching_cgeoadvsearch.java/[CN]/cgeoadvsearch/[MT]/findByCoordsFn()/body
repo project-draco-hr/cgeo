@@ -1,0 +1,28 @@
+{
+  final EditText latView=(EditText)findViewById(R.id.latitude);
+  final EditText lonView=(EditText)findViewById(R.id.longitude);
+  final String latText=latView.getText().toString();
+  final String lonText=lonView.getText().toString();
+  if (latText == null || latText.length() == 0 || lonText == null || lonText.length() == 0) {
+    latView.setText(base.formatCoordinate(geo.latitudeNow,"lat",true));
+    lonView.setText(base.formatCoordinate(geo.longitudeNow,"lon",true));
+  }
+ else {
+    HashMap<String,Object> latParsed=base.parseCoordinate(latText,"lat");
+    HashMap<String,Object> lonParsed=base.parseCoordinate(lonText,"lat");
+    if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
+      warning.showToast(res.getString(R.string.err_parse_lat));
+      return;
+    }
+    if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
+      warning.showToast(res.getString(R.string.err_parse_lon));
+      return;
+    }
+    final Intent cachesIntent=new Intent(activity,cgeocaches.class);
+    cachesIntent.putExtra("type","coordinate");
+    cachesIntent.putExtra("latitude",(Double)latParsed.get("coordinate"));
+    cachesIntent.putExtra("longitude",(Double)lonParsed.get("coordinate"));
+    cachesIntent.putExtra("cachetype",settings.cacheType);
+    activity.startActivity(cachesIntent);
+  }
+}

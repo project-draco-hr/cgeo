@@ -1,0 +1,21 @@
+{
+  if (((EditText)findViewById(R.id.pin)).getText().toString().length() == 0) {
+    warning.helpDialog(res.getString(R.string.auth_dialog_pin_title),res.getString(R.string.auth_dialog_pin_message));
+    return;
+  }
+  if (changeTokensDialog == null) {
+    changeTokensDialog=new ProgressDialog(activity);
+    changeTokensDialog.setCancelable(false);
+    changeTokensDialog.setMessage(res.getString(R.string.auth_dialog_wait));
+  }
+  changeTokensDialog.show();
+  pinEntryButton.setEnabled(false);
+  pinEntryButton.setOnTouchListener(null);
+  pinEntryButton.setOnClickListener(null);
+  (new Thread(){
+    @Override public void run(){
+      changeToken();
+    }
+  }
+).start();
+}

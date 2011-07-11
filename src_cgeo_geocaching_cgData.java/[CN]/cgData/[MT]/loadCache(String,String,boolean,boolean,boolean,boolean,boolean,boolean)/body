@@ -1,0 +1,21 @@
+{
+  Object[] geocodes=new Object[1];
+  Object[] guids=new Object[1];
+  if (geocode != null && geocode.length() > 0) {
+    geocodes[0]=geocode;
+  }
+ else {
+    geocodes=null;
+  }
+  if (guid != null && guid.length() > 0) {
+    guids[0]=guid;
+  }
+ else {
+    guids=null;
+  }
+  ArrayList<cgCache> caches=loadCaches(geocodes,guids,null,null,null,null,loadA,loadW,loadS,loadL,loadI,loadO);
+  if (caches != null && caches.isEmpty() == false) {
+    return caches.get(0);
+  }
+  return null;
+}

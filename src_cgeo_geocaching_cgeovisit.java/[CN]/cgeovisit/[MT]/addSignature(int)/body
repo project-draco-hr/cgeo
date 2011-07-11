@@ -1,0 +1,45 @@
+{
+  EditText text=null;
+  String textContent=null;
+  String dateString=null;
+  String timeString=null;
+  StringBuilder addText=new StringBuilder();
+  text=(EditText)findViewById(R.id.log);
+  textContent=text.getText().toString();
+  dateString=cgBase.dateOut.format(new Date());
+  timeString=cgBase.timeOut.format(new Date());
+  if ((id & LOG_DATE) == LOG_DATE) {
+    addText.append(dateString);
+    if ((id & LOG_TIME) == LOG_TIME) {
+      addText.append(" | ");
+    }
+  }
+  if ((id & LOG_TIME) == LOG_TIME) {
+    addText.append(timeString);
+  }
+  if ((id & LOG_SIGNATURE) == LOG_SIGNATURE && settings.getSignature() != null) {
+    String findCount="";
+    if (addText.length() > 0) {
+      addText.append("\n");
+    }
+    if (settings.getSignature().contains("[NUMBER]") == true) {
+      final HashMap<String,String> params=new HashMap<String,String>();
+      final String page=base.request(false,"www.geocaching.com","/my/","GET",params,false,false,false).getData();
+      int current=base.parseFindCount(page);
+      if (current >= 0) {
+        findCount="" + (current + 1);
+      }
+    }
+    String signature=settings.getSignature().replaceAll("\\[DATE\\]",dateString).replaceAll("\\[TIME\\]",timeString).replaceAll("\\[USER\\]",settings.getUsername()).replaceAll("\\[NUMBER\\]",findCount);
+    addText.append(signature);
+  }
+  final String addTextDone;
+  if (textContent.length() > 0 && addText.length() > 0) {
+    addTextDone=textContent + "\n" + addText.toString();
+  }
+ else {
+    addTextDone=textContent + addText.toString();
+  }
+  text.setText(addTextDone,TextView.BufferType.NORMAL);
+  text.setSelection(text.getText().toString().length());
+}

@@ -1,0 +1,10 @@
+{
+  if (compassArrow == null || compassArrow.isRecycled() == true) {
+    return;
+  }
+  int compassRoseWidth=compassArrow.getWidth();
+  int compassRoseHeight=compassArrow.getWidth();
+  int marginLeft=(getWidth() - compassRoseWidth) / 2;
+  int marginTop=(getHeight() - compassRoseHeight) / 2;
+  invalidate(marginLeft,marginTop,(marginLeft + compassRoseWidth),(marginTop + compassRoseHeight));
+}

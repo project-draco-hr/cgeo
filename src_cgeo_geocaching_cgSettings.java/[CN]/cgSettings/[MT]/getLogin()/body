@@ -1,0 +1,28 @@
+{
+  final HashMap<String,String> login=new HashMap<String,String>();
+  if (username == null || password == null) {
+    final String preUsername=prefs.getString("username",null);
+    final String prePassword=prefs.getString("password",null);
+    if (initialized == 0 && (preUsername == null || prePassword == null)) {
+      Intent initIntent=new Intent(context,cgeoinit.class);
+      context.startActivity(initIntent);
+      final SharedPreferences.Editor prefsEdit=prefs.edit();
+      prefsEdit.putInt("initialized",1);
+      prefsEdit.commit();
+      initialized=1;
+      return null;
+    }
+ else     if (initialized == 1 && (preUsername == null || prePassword == null)) {
+      return null;
+    }
+    login.put("username",preUsername);
+    login.put("password",prePassword);
+    username=preUsername;
+    password=prePassword;
+  }
+ else {
+    login.put("username",username);
+    login.put("password",password);
+  }
+  return login;
+}

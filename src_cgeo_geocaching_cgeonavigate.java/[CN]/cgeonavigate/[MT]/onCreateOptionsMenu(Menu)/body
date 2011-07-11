@@ -1,0 +1,23 @@
+{
+  if (settings.useCompass == 1) {
+    menu.add(0,1,0,res.getString(R.string.use_gps)).setIcon(android.R.drawable.ic_menu_compass);
+  }
+ else {
+    menu.add(0,1,0,res.getString(R.string.use_compass)).setIcon(android.R.drawable.ic_menu_compass);
+  }
+  menu.add(0,0,0,res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
+  menu.add(0,2,0,res.getString(R.string.destination_set)).setIcon(android.R.drawable.ic_menu_edit);
+  if (coordinates != null && coordinates.size() > 1) {
+    SubMenu subMenu=menu.addSubMenu(0,3,0,res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
+    int cnt=4;
+    for (    cgCoord coordinate : coordinates) {
+      subMenu.add(0,cnt,0,coordinate.name + " (" + coordinate.type+ ")");
+      cnt++;
+    }
+    return true;
+  }
+ else {
+    menu.add(0,3,0,res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces).setEnabled(false);
+    return true;
+  }
+}

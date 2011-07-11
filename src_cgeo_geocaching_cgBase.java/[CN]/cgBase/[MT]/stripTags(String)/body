@@ -1,0 +1,9 @@
+{
+  if (text == null) {
+    return "";
+  }
+  final Pattern patternP=Pattern.compile("(<[^>]+>)",Pattern.CASE_INSENSITIVE);
+  final Matcher matcherP=patternP.matcher(text);
+  matcherP.replaceAll(" ");
+  return text.trim();
+}

@@ -1,0 +1,17 @@
+{
+  Log.d(cgSettings.tag,"Terminating c:geo...");
+  if (geo != null) {
+    geo.closeGeo();
+    geo=null;
+  }
+  if (dir != null) {
+    dir.closeDir();
+    dir=null;
+  }
+  if (storage != null) {
+    storage.clean();
+    storage.closeDb();
+    storage=null;
+  }
+  super.onTerminate();
+}

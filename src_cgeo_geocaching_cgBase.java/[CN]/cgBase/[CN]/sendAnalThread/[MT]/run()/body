@@ -1,0 +1,20 @@
+{
+  try {
+    if (page == null || page.length() == 0) {
+      page="/";
+    }
+    if (tracker == null && context != null) {
+      startedHere=true;
+      tracker=GoogleAnalyticsTracker.getInstance();
+      tracker.start(cgSettings.analytics,context);
+    }
+    tracker.trackPageView(page);
+    tracker.dispatch();
+    Log.i(cgSettings.tag,"Logged use of " + page);
+    if (startedHere == true) {
+      tracker.stop();
+    }
+  }
+ catch (  Exception e) {
+  }
+}

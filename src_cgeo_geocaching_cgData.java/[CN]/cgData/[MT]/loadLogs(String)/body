@@ -1,0 +1,27 @@
+{
+  init();
+  if (geocode == null || geocode.length() == 0) {
+    return null;
+  }
+  Cursor cursor=null;
+  ArrayList<cgLog> logs=new ArrayList<cgLog>();
+  cursor=databaseRO.query(dbTableLogs,new String[]{"_id","type","author","log","date","found"},"geocode = \"" + geocode + "\"",null,null,null,"date desc, _id asc","100");
+  if (cursor != null && cursor.getCount() > 0) {
+    cursor.moveToFirst();
+    do {
+      cgLog log=new cgLog();
+      log.id=(int)cursor.getInt(cursor.getColumnIndex("_id"));
+      log.type=(int)cursor.getInt(cursor.getColumnIndex("type"));
+      log.author=(String)cursor.getString(cursor.getColumnIndex("author"));
+      log.log=(String)cursor.getString(cursor.getColumnIndex("log"));
+      log.date=(long)cursor.getLong(cursor.getColumnIndex("date"));
+      log.found=(int)cursor.getInt(cursor.getColumnIndex("found"));
+      logs.add(log);
+    }
+ while (cursor.moveToNext());
+  }
+  if (cursor != null) {
+    cursor.close();
+  }
+  return logs;
+}

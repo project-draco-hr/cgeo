@@ -1,0 +1,54 @@
+{
+  super.onCreate(savedInstanceState);
+  context=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  app.setAction(null);
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  prefs=getSharedPreferences(cgSettings.preferences,0);
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  app.cleanGeo();
+  app.cleanDir();
+  setContentView(R.layout.main);
+  setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
+  try {
+    PackageManager manager=this.getPackageManager();
+    PackageInfo info=manager.getPackageInfo(this.getPackageName(),0);
+    version=info.versionCode;
+    base.sendAnal(context,"/?ver=" + info.versionCode);
+    Log.i(cgSettings.tag,"Starting " + info.packageName + " "+ info.versionCode+ " a.k.a "+ info.versionName+ "...");
+    info=null;
+    manager=null;
+  }
+ catch (  Exception e) {
+    base.sendAnal(context,"/");
+    Log.i(cgSettings.tag,"No info.");
+  }
+  try {
+    if (settings.helper == 0) {
+      RelativeLayout helper=(RelativeLayout)findViewById(R.id.helper);
+      if (helper != null) {
+        helper.setVisibility(View.VISIBLE);
+        helper.setClickable(true);
+        helper.setOnClickListener(new View.OnClickListener(){
+          public void onClick(          View view){
+            try {
+              AppManualReaderClient.openManual("c-geo","c:geo-intro",context,"http://cgeo.carnero.cc/manual/");
+            }
+ catch (            Exception e) {
+            }
+            view.setVisibility(View.GONE);
+          }
+        }
+);
+        final SharedPreferences.Editor edit=getSharedPreferences(cgSettings.preferences,0).edit();
+        edit.putInt("helper",1);
+        edit.commit();
+      }
+    }
+  }
+ catch (  Exception e) {
+  }
+  init();
+}

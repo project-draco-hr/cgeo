@@ -1,0 +1,18 @@
+{
+  final cgResponse response=request(false,"www.geocaching.com","/map/default.aspx","GET","",0,false);
+  final String data=response.getData();
+  String usertoken=null;
+  if (data != null && data.length() > 0) {
+    final Pattern pattern=Pattern.compile("var userToken[^=]*=[^']*'([^']+)';",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    final Matcher matcher=pattern.matcher(data);
+    while (matcher.find()) {
+      if (matcher.groupCount() > 0) {
+        usertoken=matcher.group(1);
+      }
+    }
+  }
+  if (noTokenHandler != null && (usertoken == null || usertoken.length() == 0)) {
+    noTokenHandler.sendEmptyMessage(0);
+  }
+  return usertoken;
+}

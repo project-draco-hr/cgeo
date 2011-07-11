@@ -1,0 +1,27 @@
+{
+  if (page == null || page.length() == 0) {
+    return null;
+  }
+  final ArrayList<Integer> types=new ArrayList<Integer>();
+  final Pattern typeBoxPattern=Pattern.compile("<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$ddLogType\" id=\"ctl00_ContentBody_LogBookPanel1_ddLogType\"[^>]*>" + "(([^<]*<option[^>]*>[^<]+</option>)+)[^<]*</select>",Pattern.CASE_INSENSITIVE);
+  final Matcher typeBoxMatcher=typeBoxPattern.matcher(page);
+  String typesText=null;
+  if (typeBoxMatcher.find()) {
+    if (typeBoxMatcher.groupCount() > 0) {
+      typesText=typeBoxMatcher.group(1);
+    }
+  }
+  if (typesText != null) {
+    final Pattern typePattern=Pattern.compile("<option( selected=\"selected\")? value=\"(\\d+)\">[^<]+</option>",Pattern.CASE_INSENSITIVE);
+    final Matcher typeMatcher=typePattern.matcher(typesText);
+    while (typeMatcher.find()) {
+      if (typeMatcher.groupCount() > 1) {
+        final int type=Integer.parseInt(typeMatcher.group(2));
+        if (type > 0) {
+          types.add(type);
+        }
+      }
+    }
+  }
+  return types;
+}

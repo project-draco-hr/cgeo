@@ -1,0 +1,29 @@
+{
+  if (geo == null) {
+    return;
+  }
+  if (adapter == null) {
+    return;
+  }
+  try {
+    if (cacheList != null && geo.latitudeNow != null && geo.longitudeNow != null) {
+      adapter.setActualCoordinates(geo.latitudeNow,geo.longitudeNow);
+    }
+    if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) {
+      if (settings.useCompass == 0) {
+        if (geo.bearingNow != null) {
+          adapter.setActualHeading(geo.bearingNow);
+        }
+ else {
+          adapter.setActualHeading(new Double(0));
+        }
+      }
+      if (northHeading != null) {
+        adapter.setActualHeading(northHeading);
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"Failed to update location.");
+  }
+}

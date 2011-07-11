@@ -1,0 +1,205 @@
+{
+  context=appIn.getBaseContext();
+  res=appIn.getBaseContext().getResources();
+  cacheTypes.put("traditional cache","traditional");
+  cacheTypes.put("multi-cache","multi");
+  cacheTypes.put("unknown cache","mystery");
+  cacheTypes.put("letterbox hybrid","letterbox");
+  cacheTypes.put("event cache","event");
+  cacheTypes.put("mega-event cache","mega");
+  cacheTypes.put("earthcache","earth");
+  cacheTypes.put("cache in trash out event","cito");
+  cacheTypes.put("webcam cache","webcam");
+  cacheTypes.put("virtual cache","virtual");
+  cacheTypes.put("wherigo cache","wherigo");
+  cacheTypes.put("lost & found","lostfound");
+  cacheTypes.put("project ape cache","ape");
+  cacheTypes.put("groundspeak hq","gchq");
+  cacheTypes.put("gps cache exhibit","gps");
+  cacheTypesInv.put("traditional",res.getString(R.string.traditional));
+  cacheTypesInv.put("multi",res.getString(R.string.multi));
+  cacheTypesInv.put("mystery",res.getString(R.string.mystery));
+  cacheTypesInv.put("letterbox",res.getString(R.string.letterbox));
+  cacheTypesInv.put("event",res.getString(R.string.event));
+  cacheTypesInv.put("mega",res.getString(R.string.mega));
+  cacheTypesInv.put("earth",res.getString(R.string.earth));
+  cacheTypesInv.put("cito",res.getString(R.string.cito));
+  cacheTypesInv.put("webcam",res.getString(R.string.webcam));
+  cacheTypesInv.put("virtual",res.getString(R.string.virtual));
+  cacheTypesInv.put("wherigo",res.getString(R.string.wherigo));
+  cacheTypesInv.put("lostfound",res.getString(R.string.lostfound));
+  cacheTypesInv.put("ape",res.getString(R.string.ape));
+  cacheTypesInv.put("gchq",res.getString(R.string.gchq));
+  cacheTypesInv.put("gps",res.getString(R.string.gps));
+  cacheIDs.put("all","9a79e6ce-3344-409c-bbe9-496530baf758");
+  cacheIDs.put("traditional","32bc9333-5e52-4957-b0f6-5a2c8fc7b257");
+  cacheIDs.put("multi","a5f6d0ad-d2f2-4011-8c14-940a9ebf3c74");
+  cacheIDs.put("mystery","40861821-1835-4e11-b666-8d41064d03fe");
+  cacheIDs.put("letterbox","4bdd8fb2-d7bc-453f-a9c5-968563b15d24");
+  cacheIDs.put("event","69eb8534-b718-4b35-ae3c-a856a55b0874");
+  cacheIDs.put("mega-event","69eb8535-b718-4b35-ae3c-a856a55b0874");
+  cacheIDs.put("earth","c66f5cf3-9523-4549-b8dd-759cd2f18db8");
+  cacheIDs.put("cito","57150806-bc1a-42d6-9cf0-538d171a2d22");
+  cacheIDs.put("webcam","31d2ae3c-c358-4b5f-8dcd-2185bf472d3d");
+  cacheIDs.put("virtual","294d4360-ac86-4c83-84dd-8113ef678d7e");
+  cacheIDs.put("wherigo","0544fa55-772d-4e5c-96a9-36a51ebcf5c9");
+  cacheIDs.put("lostfound","3ea6533d-bb52-42fe-b2d2-79a3424d4728");
+  cacheIDs.put("ape","2555690d-b2bc-4b55-b5ac-0cb704c0b768");
+  cacheIDs.put("gchq","416f2494-dc17-4b6a-9bab-1a29dd292d8c");
+  cacheIDs.put("gps","72e69af2-7986-4990-afd9-bc16cbbb4ce3");
+  cacheIDsChoices.put(res.getString(R.string.all),cacheIDs.get("all"));
+  cacheIDsChoices.put(res.getString(R.string.traditional),cacheIDs.get("traditional"));
+  cacheIDsChoices.put(res.getString(R.string.multi),cacheIDs.get("multi"));
+  cacheIDsChoices.put(res.getString(R.string.mystery),cacheIDs.get("mystery"));
+  cacheIDsChoices.put(res.getString(R.string.letterbox),cacheIDs.get("letterbox"));
+  cacheIDsChoices.put(res.getString(R.string.event),cacheIDs.get("event"));
+  cacheIDsChoices.put(res.getString(R.string.mega),cacheIDs.get("mega"));
+  cacheIDsChoices.put(res.getString(R.string.earth),cacheIDs.get("earth"));
+  cacheIDsChoices.put(res.getString(R.string.cito),cacheIDs.get("cito"));
+  cacheIDsChoices.put(res.getString(R.string.webcam),cacheIDs.get("webcam"));
+  cacheIDsChoices.put(res.getString(R.string.virtual),cacheIDs.get("virtual"));
+  cacheIDsChoices.put(res.getString(R.string.wherigo),cacheIDs.get("whereigo"));
+  cacheIDsChoices.put(res.getString(R.string.lostfound),cacheIDs.get("lostfound"));
+  cacheIDsChoices.put(res.getString(R.string.ape),cacheIDs.get("ape"));
+  cacheIDsChoices.put(res.getString(R.string.gchq),cacheIDs.get("gchq"));
+  cacheIDsChoices.put(res.getString(R.string.gps),cacheIDs.get("gps"));
+  waypointTypes.put("flag",res.getString(R.string.wp_final));
+  waypointTypes.put("stage",res.getString(R.string.wp_stage));
+  waypointTypes.put("puzzle",res.getString(R.string.wp_puzzle));
+  waypointTypes.put("pkg",res.getString(R.string.wp_pkg));
+  waypointTypes.put("trailhead",res.getString(R.string.wp_trailhead));
+  waypointTypes.put("waypoint",res.getString(R.string.wp_waypoint));
+  logTypes.put("icon_smile",LOG_FOUND_IT);
+  logTypes.put("icon_sad",LOG_DIDNT_FIND_IT);
+  logTypes.put("icon_note",LOG_NOTE);
+  logTypes.put("icon_greenlight",LOG_PUBLISH_LISTING);
+  logTypes.put("icon_enabled",LOG_ENABLE_LISTING);
+  logTypes.put("traffic_cone",LOG_ARCHIVE);
+  logTypes.put("icon_disabled",LOG_TEMP_DISABLE_LISTING);
+  logTypes.put("icon_remove",LOG_NEEDS_ARCHIVE);
+  logTypes.put("icon_rsvp",LOG_WILL_ATTEND);
+  logTypes.put("icon_attended",LOG_ATTENDED);
+  logTypes.put("picked_up",LOG_RETRIEVED_IT);
+  logTypes.put("dropped_off",LOG_PLACED_IT);
+  logTypes.put("transfer",LOG_GRABBED_IT);
+  logTypes.put("icon_needsmaint",LOG_NEEDS_MAINTENANCE);
+  logTypes.put("icon_maint",LOG_OWNER_MAINTENANCE);
+  logTypes.put("coord_update",LOG_UPDATE_COORDINATES);
+  logTypes.put("icon_discovered",LOG_DISCOVERED_IT);
+  logTypes.put("big_smile",LOG_POST_REVIEWER_NOTE);
+  logTypes.put("icon_visited",LOG_VISIT);
+  logTypes.put("icon_camera",LOG_WEBCAM_PHOTO_TAKEN);
+  logTypes.put("icon_announcement",LOG_ANNOUNCEMENT);
+  logTypes0.put("found it",LOG_FOUND_IT);
+  logTypes0.put("didn't find it",LOG_DIDNT_FIND_IT);
+  logTypes0.put("write note",LOG_NOTE);
+  logTypes0.put("publish listing",LOG_PUBLISH_LISTING);
+  logTypes0.put("enable listing",LOG_ENABLE_LISTING);
+  logTypes0.put("archive",LOG_ARCHIVE);
+  logTypes0.put("temporarily disable listing",LOG_TEMP_DISABLE_LISTING);
+  logTypes0.put("needs archived",LOG_NEEDS_ARCHIVE);
+  logTypes0.put("will attend",LOG_WILL_ATTEND);
+  logTypes0.put("attended",LOG_ATTENDED);
+  logTypes0.put("retrieved it",LOG_RETRIEVED_IT);
+  logTypes0.put("placed it",LOG_PLACED_IT);
+  logTypes0.put("grabbed it",LOG_GRABBED_IT);
+  logTypes0.put("needs maintenance",LOG_NEEDS_MAINTENANCE);
+  logTypes0.put("owner maintenance",LOG_OWNER_MAINTENANCE);
+  logTypes0.put("update coordinates",LOG_UPDATE_COORDINATES);
+  logTypes0.put("discovered it",LOG_DISCOVERED_IT);
+  logTypes0.put("post reviewer note",LOG_POST_REVIEWER_NOTE);
+  logTypes0.put("visit",LOG_VISIT);
+  logTypes0.put("webcam photo taken",LOG_WEBCAM_PHOTO_TAKEN);
+  logTypes0.put("announcement",LOG_ANNOUNCEMENT);
+  logTypes1.put(LOG_FOUND_IT,res.getString(R.string.log_found));
+  logTypes1.put(LOG_DIDNT_FIND_IT,res.getString(R.string.log_dnf));
+  logTypes1.put(LOG_NOTE,res.getString(R.string.log_note));
+  logTypes1.put(LOG_PUBLISH_LISTING,res.getString(R.string.log_published));
+  logTypes1.put(LOG_ENABLE_LISTING,res.getString(R.string.log_enabled));
+  logTypes1.put(LOG_ARCHIVE,res.getString(R.string.log_archived));
+  logTypes1.put(LOG_TEMP_DISABLE_LISTING,res.getString(R.string.log_disabled));
+  logTypes1.put(LOG_NEEDS_ARCHIVE,res.getString(R.string.log_needs_archived));
+  logTypes1.put(LOG_WILL_ATTEND,res.getString(R.string.log_attend));
+  logTypes1.put(LOG_ATTENDED,res.getString(R.string.log_attended));
+  logTypes1.put(LOG_RETRIEVED_IT,res.getString(R.string.log_retrieved));
+  logTypes1.put(LOG_PLACED_IT,res.getString(R.string.log_placed));
+  logTypes1.put(LOG_GRABBED_IT,res.getString(R.string.log_grabbed));
+  logTypes1.put(LOG_NEEDS_MAINTENANCE,res.getString(R.string.log_maintenance_needed));
+  logTypes1.put(LOG_OWNER_MAINTENANCE,res.getString(R.string.log_maintained));
+  logTypes1.put(LOG_UPDATE_COORDINATES,res.getString(R.string.log_update));
+  logTypes1.put(LOG_DISCOVERED_IT,res.getString(R.string.log_discovered));
+  logTypes1.put(LOG_POST_REVIEWER_NOTE,res.getString(R.string.log_reviewed));
+  logTypes1.put(LOG_VISIT,res.getString(R.string.log_taken));
+  logTypes1.put(LOG_WEBCAM_PHOTO_TAKEN,res.getString(R.string.log_webcam));
+  logTypes1.put(LOG_ANNOUNCEMENT,res.getString(R.string.log_announcement));
+  logTypes2.put(LOG_FOUND_IT,res.getString(R.string.log_found));
+  logTypes2.put(LOG_DIDNT_FIND_IT,res.getString(R.string.log_dnf));
+  logTypes2.put(LOG_NOTE,res.getString(R.string.log_note));
+  logTypes2.put(LOG_PUBLISH_LISTING,res.getString(R.string.log_published));
+  logTypes2.put(LOG_ENABLE_LISTING,res.getString(R.string.log_enabled));
+  logTypes2.put(LOG_ARCHIVE,res.getString(R.string.log_archived));
+  logTypes2.put(LOG_TEMP_DISABLE_LISTING,res.getString(R.string.log_disabled));
+  logTypes2.put(LOG_NEEDS_ARCHIVE,res.getString(R.string.log_needs_archived));
+  logTypes2.put(LOG_WILL_ATTEND,res.getString(R.string.log_attend));
+  logTypes2.put(LOG_ATTENDED,res.getString(R.string.log_attended));
+  logTypes2.put(LOG_WEBCAM_PHOTO_TAKEN,res.getString(R.string.log_webcam));
+  logTypes2.put(LOG_RETRIEVED_IT,res.getString(R.string.log_retrieved));
+  logTypes2.put(LOG_GRABBED_IT,res.getString(R.string.log_grabbed));
+  logTypes2.put(LOG_NEEDS_MAINTENANCE,res.getString(R.string.log_maintenance_needed));
+  logTypes2.put(LOG_OWNER_MAINTENANCE,res.getString(R.string.log_maintained));
+  logTypes2.put(LOG_DISCOVERED_IT,res.getString(R.string.log_discovered));
+  logTypes2.put(LOG_POST_REVIEWER_NOTE,res.getString(R.string.log_reviewed));
+  logTypes2.put(LOG_ANNOUNCEMENT,res.getString(R.string.log_announcement));
+  logTypesTrackable.put(0,res.getString(R.string.log_tb_nothing));
+  logTypesTrackable.put(1,res.getString(R.string.log_tb_visit));
+  logTypesTrackable.put(2,res.getString(R.string.log_tb_drop));
+  logTypesTrackableAction.put(0,"");
+  logTypesTrackableAction.put(1,"_Visited");
+  logTypesTrackableAction.put(2,"_DroppedOff");
+  errorRetrieve.put(1,res.getString(R.string.err_none));
+  errorRetrieve.put(0,res.getString(R.string.err_start));
+  errorRetrieve.put(-1,res.getString(R.string.err_parse));
+  errorRetrieve.put(-2,res.getString(R.string.err_server));
+  errorRetrieve.put(-3,res.getString(R.string.err_login));
+  errorRetrieve.put(-4,res.getString(R.string.err_unknown));
+  errorRetrieve.put(-5,res.getString(R.string.err_comm));
+  errorRetrieve.put(-6,res.getString(R.string.err_wrong));
+  errorRetrieve.put(-7,res.getString(R.string.err_license));
+  app=appIn;
+  settings=settingsIn;
+  prefs=prefsIn;
+  try {
+    PackageManager manager=app.getPackageManager();
+    PackageInfo info=manager.getPackageInfo(app.getPackageName(),0);
+    version=info.versionName;
+  }
+ catch (  Exception e) {
+  }
+  if (settings.asBrowser == 1) {
+    final long rndBrowser=Math.round(Math.random() * 6);
+    if (rndBrowser == 0) {
+      idBrowser="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.322.2 Safari/533.1";
+    }
+ else     if (rndBrowser == 1) {
+      idBrowser="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; MDDC)";
+    }
+ else     if (rndBrowser == 2) {
+      idBrowser="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
+    }
+ else     if (rndBrowser == 3) {
+      idBrowser="Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.21.8 (KHTML, like Gecko) Version/4.0.4 Safari/531.21.10";
+    }
+ else     if (rndBrowser == 4) {
+      idBrowser="Mozilla/5.0 (iPod; U; CPU iPhone OS 2_2_1 like Mac OS X; en-us) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5H11a Safari/525.20";
+    }
+ else     if (rndBrowser == 5) {
+      idBrowser="Mozilla/5.0 (Linux; U; Android 1.1; en-gb; dream) AppleWebKit/525.10+ (KHTML, like Gecko) Version/3.0.4 Mobile Safari/523.12.2";
+    }
+ else     if (rndBrowser == 6) {
+      idBrowser="Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
+    }
+ else {
+      idBrowser="Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-US) AppleWebKit/532.9 (KHTML, like Gecko) Chrome/5.0.307.11 Safari/532.9";
+    }
+  }
+}

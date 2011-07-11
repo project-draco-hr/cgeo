@@ -1,0 +1,8 @@
+{
+  if (geocode == null || geocode.length() == 0) {
+    return null;
+  }
+  cgTrackable trackable=null;
+  trackable=storage.loadTrackable(geocode);
+  return trackable;
+}

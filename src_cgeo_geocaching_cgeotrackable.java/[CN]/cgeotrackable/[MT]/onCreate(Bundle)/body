@@ -1,0 +1,85 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.trackable_detail);
+  base.setTitle(activity,res.getString(R.string.trackable));
+  base.sendAnal(activity,"/trackable/detail");
+  Bundle extras=getIntent().getExtras();
+  Uri uri=getIntent().getData();
+  if (extras != null) {
+    geocode=extras.getString("geocode");
+    name=extras.getString("name");
+    guid=extras.getString("guid");
+    id=extras.getString("id");
+  }
+  if (geocode == null && guid == null && id == null && uri != null) {
+    String uriHost=uri.getHost().toLowerCase();
+    if (uriHost.contains("geocaching.com") == true) {
+      geocode=uri.getQueryParameter("tracker");
+      guid=uri.getQueryParameter("guid");
+      id=uri.getQueryParameter("id");
+      if (geocode != null && geocode.length() > 0) {
+        geocode=geocode.toUpperCase();
+        guid=null;
+        id=null;
+      }
+ else       if (guid != null && guid.length() > 0) {
+        geocode=null;
+        guid=guid.toLowerCase();
+        id=null;
+      }
+ else       if (id != null && id.length() > 0) {
+        geocode=null;
+        guid=null;
+        id=id.toLowerCase();
+      }
+ else {
+        warning.showToast(res.getString(R.string.err_tb_details_open));
+        finish();
+        return;
+      }
+    }
+ else     if (uriHost.contains("coord.info") == true) {
+      String uriPath=uri.getPath().toLowerCase();
+      if (uriPath != null && uriPath.startsWith("/tb") == true) {
+        geocode=uriPath.substring(1).toUpperCase();
+        guid=null;
+        id=null;
+      }
+ else {
+        warning.showToast(res.getString(R.string.err_tb_details_open));
+        finish();
+        return;
+      }
+    }
+  }
+  if (geocode == null && guid == null && id == null) {
+    warning.showToast(res.getString(R.string.err_tb_display));
+    finish();
+    return;
+  }
+  if (name != null && name.length() > 0) {
+    waitDialog=ProgressDialog.show(this,Html.fromHtml(name).toString(),res.getString(R.string.trackable_details_loading),true);
+  }
+ else   if (geocode != null && geocode.length() > 0) {
+    waitDialog=ProgressDialog.show(this,geocode.toUpperCase(),res.getString(R.string.trackable_details_loading),true);
+  }
+ else {
+    waitDialog=ProgressDialog.show(this,res.getString(R.string.trackable),res.getString(R.string.trackable_details_loading),true);
+  }
+  waitDialog.setCancelable(true);
+  loadTrackable thread;
+  thread=new loadTrackable(loadTrackableHandler,geocode,guid,id);
+  thread.start();
+}

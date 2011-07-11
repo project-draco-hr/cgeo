@@ -1,0 +1,24 @@
+{
+  if (list == null || list.isEmpty() == true) {
+    return;
+  }
+  if (sort == false) {
+    return;
+  }
+  try {
+    if (statComparator != null) {
+      Collections.sort((List<cgCache>)list,statComparator);
+    }
+ else {
+      if (latitudeIn == null || longitudeIn == null) {
+        return;
+      }
+      dstComparator.setCoords(latitudeIn,longitudeIn);
+      Collections.sort((List<cgCache>)list,dstComparator);
+    }
+    notifyDataSetChanged();
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+  }
+}

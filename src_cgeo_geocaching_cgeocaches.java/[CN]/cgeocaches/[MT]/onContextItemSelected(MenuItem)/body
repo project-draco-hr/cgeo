@@ -1,0 +1,193 @@
+{
+  final int id=item.getItemId();
+  ContextMenu.ContextMenuInfo info=item.getMenuInfo();
+  if (info == null) {
+    if (adapter != null) {
+      if (id == 8) {
+        adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_micro)));
+      }
+ else       if (id == 9) {
+        adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_small)));
+      }
+ else       if (id == 10) {
+        adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_regular)));
+      }
+ else       if (id == 11) {
+        adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_large)));
+      }
+ else       if (id == 12) {
+        adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_other)));
+      }
+ else       if (id == 13) {
+        adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_virtual)));
+      }
+ else       if (id == 14) {
+        adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_notchosen)));
+      }
+ else       if (id == 15) {
+        adapter.setFilter(new cgFilterByType("traditional"));
+      }
+ else       if (id == 16) {
+        adapter.setFilter(new cgFilterByType("multi"));
+      }
+ else       if (id == 17) {
+        adapter.setFilter(new cgFilterByType("mystery"));
+      }
+ else       if (id == 18) {
+        adapter.setFilter(new cgFilterByType("letterbox"));
+      }
+ else       if (id == 19) {
+        adapter.setFilter(new cgFilterByType("event"));
+      }
+ else       if (id == 20) {
+        adapter.setFilter(new cgFilterByType("mega"));
+      }
+ else       if (id == 21) {
+        adapter.setFilter(new cgFilterByType("earth"));
+      }
+ else       if (id == 22) {
+        adapter.setFilter(new cgFilterByType("cito"));
+      }
+ else       if (id == 23) {
+        adapter.setFilter(new cgFilterByType("webcam"));
+      }
+ else       if (id == 24) {
+        adapter.setFilter(new cgFilterByType("virtual"));
+      }
+ else       if (id == 25) {
+        adapter.setFilter(new cgFilterByType("wherigo"));
+      }
+ else       if (id == 26) {
+        adapter.setFilter(new cgFilterByType("lostfound"));
+      }
+ else       if (id == 27) {
+        adapter.setFilter(new cgFilterByType("ape"));
+      }
+ else       if (id == 28) {
+        adapter.setFilter(new cgFilterByType("gchq"));
+      }
+ else       if (id == 29) {
+        adapter.setFilter(new cgFilterByType("gps"));
+      }
+ else {
+        return false;
+      }
+      return true;
+    }
+ else {
+      info=lastMenuInfo;
+      lastMenuInfo=null;
+      return false;
+    }
+  }
+  AdapterContextMenuInfo adapterInfo=null;
+  try {
+    adapterInfo=(AdapterContextMenuInfo)info;
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgeocaches.onContextItemSelected: " + e.toString());
+  }
+  final int touchedPos=adapterInfo.position;
+  final cgCache cache=adapter.getItem(touchedPos);
+  if (id == 1) {
+    Intent navigateIntent=new Intent(activity,cgeonavigate.class);
+    navigateIntent.putExtra("latitude",cache.latitude);
+    navigateIntent.putExtra("longitude",cache.longitude);
+    navigateIntent.putExtra("geocode",cache.geocode.toUpperCase());
+    navigateIntent.putExtra("name",cache.name);
+    activity.startActivity(navigateIntent);
+    return true;
+  }
+ else   if (id == 2) {
+    try {
+      if (cgBase.isIntentAvailable(activity,"com.google.android.radar.SHOW_RADAR") == true) {
+        Intent radarIntent=new Intent("com.google.android.radar.SHOW_RADAR");
+        radarIntent.putExtra("latitude",new Float(cache.latitude));
+        radarIntent.putExtra("longitude",new Float(cache.longitude));
+        activity.startActivity(radarIntent);
+      }
+ else {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(activity);
+        dialog.setTitle(res.getString(R.string.err_radar_title));
+        dialog.setMessage(res.getString(R.string.err_radar_message));
+        dialog.setCancelable(true);
+        dialog.setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
+          public void onClick(          DialogInterface dialog,          int id){
+            try {
+              activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("market://search?q=pname:com.eclipsim.gpsstatus2")));
+              dialog.cancel();
+            }
+ catch (            Exception e) {
+              warning.showToast(res.getString(R.string.err_radar_market));
+              Log.e(cgSettings.tag,"cgeocaches.onContextItemSelected.radar.onClick: " + e.toString());
+            }
+          }
+        }
+);
+        dialog.setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
+          public void onClick(          DialogInterface dialog,          int id){
+            dialog.cancel();
+          }
+        }
+);
+        AlertDialog alert=dialog.create();
+        alert.show();
+      }
+    }
+ catch (    Exception e) {
+      warning.showToast(res.getString(R.string.err_radar_generic));
+      Log.e(cgSettings.tag,"cgeocaches.onContextItemSelected.radar: " + e.toString());
+    }
+    return true;
+  }
+ else   if (id == 3) {
+    Intent mapIntent=new Intent(activity,settings.getMapFactory().getMapClass());
+    mapIntent.putExtra("detail",false);
+    mapIntent.putExtra("geocode",cache.geocode);
+    activity.startActivity(mapIntent);
+    return true;
+  }
+ else   if (id == 4) {
+    base.runExternalMap(0,activity,res,warning,tracker,cache);
+    return true;
+  }
+ else   if (id == 5) {
+    if (geo != null) {
+      base.runNavigation(activity,res,settings,warning,tracker,cache.latitude,cache.longitude,geo.latitudeNow,geo.longitudeNow);
+    }
+ else {
+      base.runNavigation(activity,res,settings,warning,tracker,cache.latitude,cache.longitude);
+    }
+    return true;
+  }
+ else   if (id == 6) {
+    if (cache.cacheid == null || cache.cacheid.length() == 0) {
+      warning.showToast(res.getString(R.string.err_cannot_log_visit));
+      return true;
+    }
+    Intent logVisitIntent=new Intent(activity,cgeovisit.class);
+    logVisitIntent.putExtra("id",cache.cacheid);
+    logVisitIntent.putExtra("geocode",cache.geocode.toUpperCase());
+    logVisitIntent.putExtra("type",cache.type.toLowerCase());
+    activity.startActivity(logVisitIntent);
+    return true;
+  }
+ else   if (id == 7) {
+    Intent cachesIntent=new Intent(activity,cgeodetail.class);
+    cachesIntent.putExtra("geocode",cache.geocode.toUpperCase());
+    cachesIntent.putExtra("name",cache.name);
+    activity.startActivity(cachesIntent);
+    return true;
+  }
+ else   if (id == 8) {
+    lastMenuInfo=info;
+    return true;
+  }
+ else   if (id >= 100) {
+    int newListId=id - 100;
+    app.moveToList(cache.geocode,newListId);
+    switchListById(listId);
+    return true;
+  }
+  return false;
+}

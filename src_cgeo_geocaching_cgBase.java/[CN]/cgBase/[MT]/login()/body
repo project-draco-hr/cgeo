@@ -1,0 +1,72 @@
+{
+  final String host="www.geocaching.com";
+  final String path="/login/default.aspx";
+  cgResponse loginResponse=null;
+  String loginData=null;
+  String viewstate=null;
+  String viewstate1=null;
+  final HashMap<String,String> loginStart=settings.getLogin();
+  if (loginStart == null) {
+    return -3;
+  }
+  loginResponse=request(true,host,path,"GET",new HashMap<String,String>(),false,false,false);
+  loginData=loginResponse.getData();
+  if (loginData != null && loginData.length() > 0) {
+    if (checkLogin(loginData) == true) {
+      Log.i(cgSettings.tag,"Already logged in Geocaching.com as " + loginStart.get("username"));
+      switchToEnglish(viewstate,viewstate1);
+      return 1;
+    }
+    viewstate=findViewstate(loginData,0);
+    viewstate1=findViewstate(loginData,1);
+    if (viewstate == null || viewstate.length() == 0) {
+      Log.e(cgSettings.tag,"cgeoBase.login: Failed to find viewstate");
+      return -1;
+    }
+  }
+ else {
+    Log.e(cgSettings.tag,"cgeoBase.login: Failed to retrieve login page (1st)");
+    return -2;
+  }
+  final HashMap<String,String> login=settings.getLogin();
+  final HashMap<String,String> params=new HashMap<String,String>();
+  if (login == null || login.get("username") == null || login.get("username").length() == 0 || login.get("password") == null || login.get("password").length() == 0) {
+    Log.e(cgSettings.tag,"cgeoBase.login: No login information stored");
+    return -3;
+  }
+  settings.deleteCookies();
+  params.put("__EVENTTARGET","");
+  params.put("__EVENTARGUMENT","");
+  params.put("__VIEWSTATE",viewstate);
+  if (viewstate1 != null) {
+    params.put("__VIEWSTATE1",viewstate1);
+    params.put("__VIEWSTATEFIELDCOUNT","2");
+  }
+  params.put("ctl00$SiteContent$tbUsername",login.get("username"));
+  params.put("ctl00$SiteContent$tbPassword",login.get("password"));
+  params.put("ctl00$SiteContent$cbRememberMe","on");
+  params.put("ctl00$SiteContent$btnSignIn","Login");
+  loginResponse=request(true,host,path,"POST",params,false,false,false);
+  loginData=loginResponse.getData();
+  if (loginData != null && loginData.length() > 0) {
+    if (checkLogin(loginData) == true) {
+      Log.i(cgSettings.tag,"Successfully logged in Geocaching.com as " + login.get("username"));
+      switchToEnglish(findViewstate(loginData,0),findViewstate(loginData,1));
+      return 1;
+    }
+ else {
+      if (loginData.indexOf("Your username/password combination does not match.") != -1) {
+        Log.i(cgSettings.tag,"Failed to log in Geocaching.com as " + login.get("username") + " because of wrong username/password");
+        return -6;
+      }
+ else {
+        Log.i(cgSettings.tag,"Failed to log in Geocaching.com as " + login.get("username") + " for some unknown reason");
+        return -4;
+      }
+    }
+  }
+ else {
+    Log.e(cgSettings.tag,"cgeoBase.login: Failed to retrieve login page (2nd)");
+    return -5;
+  }
+}

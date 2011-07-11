@@ -1,0 +1,24 @@
+{
+  init();
+  int id=-1;
+  if (name == null || name.length() == 0) {
+    return id;
+  }
+  databaseRW.beginTransaction();
+  try {
+    ContentValues values=new ContentValues();
+    values.put("title",name);
+    values.put("updated",System.currentTimeMillis());
+    id=(int)databaseRW.insert(dbTableLists,null,values);
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+  if (id < 0) {
+    return -1;
+  }
+ else {
+    return (id + 10);
+  }
+}

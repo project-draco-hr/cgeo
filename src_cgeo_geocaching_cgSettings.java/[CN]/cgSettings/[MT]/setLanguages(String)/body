@@ -1,0 +1,14 @@
+{
+  final SharedPreferences.Editor prefsEdit=prefs.edit();
+  if (languages == null || languages.length() == 0) {
+    prefsEdit.remove("languages");
+  }
+ else {
+    languages=languages.toLowerCase();
+    languages=languages.replaceAll("([^a-z]+)"," ");
+    languages=languages.replaceAll("([ ]+)"," ");
+    prefsEdit.putString("languages",languages);
+  }
+  this.languages=languages;
+  return prefsEdit.commit();
+}

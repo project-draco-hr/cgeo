@@ -1,0 +1,12 @@
+{
+  if (settings.livelist == 0) {
+    return;
+  }
+  if (dir == null || dir.directionNow == null) {
+    return;
+  }
+  northHeading=dir.directionNow;
+  if (northHeading != null && adapter != null && (geo == null || geo.speedNow == null || geo.speedNow <= 5)) {
+    adapter.setActualHeading(northHeading);
+  }
+}

@@ -1,0 +1,23 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  app=(cgeoapplication)this.getApplication();
+  res=this.getResources();
+  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,0));
+  prefs=getSharedPreferences(cgSettings.preferences,0);
+  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(activity);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.point);
+  base.setTitle(activity,res.getString(R.string.search_destination));
+  tracker=GoogleAnalyticsTracker.getInstance();
+  tracker.start(cgSettings.analytics,this);
+  tracker.dispatch();
+  base.sendAnal(activity,tracker,"/point");
+  init();
+}

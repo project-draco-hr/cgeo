@@ -1,0 +1,15 @@
+{
+  if (adapter != null) {
+    adapter=null;
+  }
+  if (dir != null) {
+    dir=app.removeDir();
+  }
+  if (geo != null) {
+    geo=app.removeGeo();
+  }
+  if (tracker != null) {
+    tracker.stop();
+  }
+  super.onDestroy();
+}

@@ -1,0 +1,19 @@
+{
+  final DisplayMetrics dm=getResources().getDisplayMetrics();
+  pixelRatio=dm.density;
+  if (inflater == null) {
+    inflater=activity.getLayoutInflater();
+  }
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  if (searchId != null && searchId > 0) {
+    cache=app.getCache(searchId);
+    if (cache != null && cache.geocode != null) {
+      geocode=cache.geocode;
+    }
+  }
+  if (geocode != null && geocode.length() > 0) {
+    app.setAction(geocode);
+  }
+}

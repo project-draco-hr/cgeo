@@ -1,0 +1,61 @@
+{
+  if (calendars == null || calendars.isEmpty() == true) {
+    return;
+  }
+  try {
+    Uri calendarProvider=null;
+    final int sdk=new Integer(Build.VERSION.SDK).intValue();
+    if (sdk >= 8) {
+      calendarProvider=Uri.parse("content://com.android.calendar/events");
+    }
+ else {
+      calendarProvider=Uri.parse("content://calendar/events");
+    }
+    final Integer[] keys=calendars.keySet().toArray(new Integer[calendars.size()]);
+    final Integer calId=keys[index];
+    final Date eventDate=cache.hidden;
+    eventDate.setHours(0);
+    eventDate.setMinutes(0);
+    eventDate.setSeconds(0);
+    StringBuilder description=new StringBuilder();
+    description.append("http://coord.info/");
+    description.append(cache.geocode.toUpperCase());
+    description.append("\n\n");
+    if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
+      description.append(Html.fromHtml(cache.shortdesc).toString());
+    }
+    ContentValues event=new ContentValues();
+    event.put("calendar_id",calId);
+    event.put("dtstart",eventDate.getTime() + 43200000);
+    event.put("dtend",eventDate.getTime() + 43200000 + 3600000);
+    event.put("eventTimezone","UTC");
+    event.put("title",Html.fromHtml(cache.name).toString());
+    event.put("description",description.toString());
+    String location="";
+    if (cache.latitudeString != null && cache.latitudeString.length() > 0 && cache.longitudeString != null && cache.longitudeString.length() > 0) {
+      location+=cache.latitudeString + " " + cache.longitudeString;
+    }
+    if (cache.location != null && cache.location.length() > 0) {
+      boolean addParenteses=false;
+      if (location.length() > 0) {
+        addParenteses=true;
+        location+=" (";
+      }
+      location+=Html.fromHtml(cache.location).toString();
+      if (addParenteses) {
+        location+=")";
+      }
+    }
+    if (location.length() > 0) {
+      event.put("eventLocation",location);
+    }
+    event.put("allDay",1);
+    event.put("hasAlarm",0);
+    getContentResolver().insert(calendarProvider,event);
+    warning.showToast(res.getString(R.string.event_success));
+  }
+ catch (  Exception e) {
+    warning.showToast(res.getString(R.string.event_fail));
+    Log.e(cgSettings.tag,"cgeodetail.addToCalendarFn: " + e.toString());
+  }
+}

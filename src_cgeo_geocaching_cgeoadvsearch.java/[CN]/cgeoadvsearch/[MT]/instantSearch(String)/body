@@ -1,0 +1,33 @@
+{
+  boolean found=false;
+  final Pattern gcCode=Pattern.compile("^GC[0-9A-Z]+$",Pattern.CASE_INSENSITIVE);
+  final Pattern tbCode=Pattern.compile("^TB[0-9A-Z]+$",Pattern.CASE_INSENSITIVE);
+  final Matcher gcCodeM=gcCode.matcher(query);
+  final Matcher tbCodeM=tbCode.matcher(query);
+  try {
+    if (gcCodeM.find()) {
+      final Intent cachesIntent=new Intent(activity,cgeodetail.class);
+      cachesIntent.putExtra("geocode",query.trim().toUpperCase());
+      activity.startActivity(cachesIntent);
+      found=true;
+    }
+ else     if (tbCodeM.find()) {
+      final Intent trackablesIntent=new Intent(activity,cgeotrackable.class);
+      trackablesIntent.putExtra("geocode",query.trim().toUpperCase());
+      activity.startActivity(trackablesIntent);
+      found=true;
+    }
+ else {
+      final Intent cachesIntent=new Intent(activity,cgeocaches.class);
+      cachesIntent.putExtra("type","keyword");
+      cachesIntent.putExtra("keyword",query);
+      cachesIntent.putExtra("cachetype",settings.cacheType);
+      activity.startActivity(cachesIntent);
+      found=true;
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgeoadvsearch.instantSearch: " + e.toString());
+  }
+  return found;
+}

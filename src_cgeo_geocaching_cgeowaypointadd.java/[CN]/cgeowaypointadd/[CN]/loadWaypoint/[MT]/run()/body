@@ -1,0 +1,9 @@
+{
+  try {
+    waypoint=app.loadWaypoint(id);
+    loadWaypointHandler.sendMessage(new Message());
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgeowaypoint.loadWaypoint.run: " + e.toString());
+  }
+}

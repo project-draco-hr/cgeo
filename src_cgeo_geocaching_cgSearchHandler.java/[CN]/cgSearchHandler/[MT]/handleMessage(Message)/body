@@ -1,0 +1,24 @@
+{
+  try {
+    if (msg.what == 1) {
+      final AlertDialog.Builder dlg=new AlertDialog.Builder(activity);
+      final LayoutInflater inflater=activity.getLayoutInflater();
+      final View view=inflater.inflate(R.layout.recaptcha_dialog,null);
+      imageView=(ImageView)view.findViewById(R.id.image);
+      (new getCaptcha(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
+      dlg.setTitle(res.getString(R.string.caches_recaptcha_title));
+      dlg.setView(view);
+      dlg.setNeutralButton(res.getString(R.string.caches_recaptcha_continue),new DialogInterface.OnClickListener(){
+        public void onClick(        DialogInterface dialog,        int id){
+          final String text=((EditText)view.findViewById(R.id.text)).getText().toString();
+          recaptchaThread.setText(text);
+          dialog.cancel();
+        }
+      }
+);
+      dlg.create().show();
+    }
+  }
+ catch (  Exception e) {
+  }
+}

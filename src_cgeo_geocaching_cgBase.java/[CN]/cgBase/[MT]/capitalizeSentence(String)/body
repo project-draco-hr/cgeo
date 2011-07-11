@@ -1,0 +1,10 @@
+{
+  if (sentence == null) {
+    return "";
+  }
+  final String[] word=sentence.split(" ");
+  for (int i=0; i < word.length; i++) {
+    word[i]=capitalizeWord(word[i]);
+  }
+  return implode(" ",word);
+}

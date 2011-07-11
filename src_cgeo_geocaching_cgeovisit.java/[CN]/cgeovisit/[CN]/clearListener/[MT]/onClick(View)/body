@@ -1,0 +1,27 @@
+{
+  app.clearLogOffline(geocode);
+  if (alreadyFound == true) {
+    typeSelected=cgBase.LOG_NOTE;
+  }
+ else {
+    typeSelected=types.get(0);
+  }
+  date.setTime(new Date());
+  text=null;
+  setType(typeSelected);
+  Button dateButton=(Button)findViewById(R.id.date);
+  dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+  dateButton.setOnClickListener(new cgeovisitDateListener());
+  EditText logView=(EditText)findViewById(R.id.log);
+  if (text != null && text.length() > 0) {
+    logView.setText(text);
+  }
+ else {
+    logView.setText("");
+  }
+  if (clear == null) {
+    clear=(Button)findViewById(R.id.clear);
+  }
+  clear.setOnClickListener(new clearListener());
+  warning.showToast(res.getString(R.string.info_log_cleared));
+}

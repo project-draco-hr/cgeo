@@ -1,0 +1,29 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.map_static);
+  base.setTitle(activity,res.getString(R.string.map_static_title));
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    geocode=extras.getString("geocode");
+  }
+  if (geocode == null) {
+    warning.showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
+    finish();
+    return;
+  }
+  waitDialog=ProgressDialog.show(this,null,res.getString(R.string.map_static_loading),true);
+  waitDialog.setCancelable(true);
+  (new loadMaps()).start();
+}

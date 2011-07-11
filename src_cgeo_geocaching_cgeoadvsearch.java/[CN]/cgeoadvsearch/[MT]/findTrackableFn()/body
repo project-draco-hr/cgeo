@@ -1,0 +1,10 @@
+{
+  final String trackableText=((EditText)findViewById(R.id.trackable)).getText().toString();
+  if (trackableText == null || trackableText.length() == 0 || trackableText.equalsIgnoreCase("TB")) {
+    warning.helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_tb));
+    return;
+  }
+  final Intent trackablesIntent=new Intent(activity,cgeotrackable.class);
+  trackablesIntent.putExtra("geocode",trackableText.toUpperCase());
+  activity.startActivity(trackablesIntent);
+}

@@ -1,0 +1,17 @@
+{
+  selectMode=!selectMode;
+  if (selectMode == false) {
+    for (    cgCache cache : list) {
+      cache.statusChecked=false;
+      cache.statusCheckedView=false;
+    }
+    checked=0;
+  }
+ else   if (selectMode == true) {
+    for (    cgCache cache : list) {
+      cache.statusCheckedView=false;
+    }
+  }
+  checkChecked(0);
+  notifyDataSetChanged();
+}

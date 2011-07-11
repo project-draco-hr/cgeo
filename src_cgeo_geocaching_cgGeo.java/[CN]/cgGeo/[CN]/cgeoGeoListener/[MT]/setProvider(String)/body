@@ -1,0 +1,18 @@
+{
+  if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+    if (geoManager != null && geoManager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true) {
+      active=provider;
+    }
+ else {
+      active=null;
+    }
+  }
+ else   if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+    if (geoManager != null && geoManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) == true) {
+      active=provider;
+    }
+ else {
+      active=null;
+    }
+  }
+}

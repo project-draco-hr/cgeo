@@ -1,0 +1,12 @@
+{
+  final Double rlat1=latitude * deg2rad;
+  final Double rlon1=longitude * deg2rad;
+  final Double rbearing=bearing * deg2rad;
+  final Double rdistance=distance / erad;
+  final Double rlat=Math.asin(Math.sin(rlat1) * Math.cos(rdistance) + Math.cos(rlat1) * Math.sin(rdistance) * Math.cos(rbearing));
+  final Double rlon=rlon1 + Math.atan2(Math.sin(rbearing) * Math.sin(rdistance) * Math.cos(rlat1),Math.cos(rdistance) - Math.sin(rlat1) * Math.sin(rlat));
+  HashMap<String,Double> result=new HashMap<String,Double>();
+  result.put("latitude",rlat * rad2deg);
+  result.put("longitude",rlon * rad2deg);
+  return result;
+}

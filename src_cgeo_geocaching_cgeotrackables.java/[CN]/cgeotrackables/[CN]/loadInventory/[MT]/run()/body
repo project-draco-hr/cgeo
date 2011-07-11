@@ -1,0 +1,9 @@
+{
+  try {
+    trackables=app.loadInventory(geocode);
+    loadInventoryHandler.sendMessage(new Message());
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgeotrackables.loadInventory.run: " + e.toString());
+  }
+}

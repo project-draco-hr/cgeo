@@ -1,0 +1,35 @@
+{
+  super.onCreateContextMenu(menu,v,menuInfo);
+  menu.setHeaderTitle(res.getString(R.string.menu_filter));
+  menu.add(1,0,0,res.getString(R.string.all_types));
+  menu.add(1,1,0,res.getString(R.string.traditional));
+  menu.add(1,2,0,res.getString(R.string.multi));
+  menu.add(1,3,0,res.getString(R.string.mystery));
+  HashMap<String,String> allTypes=(HashMap<String,String>)base.cacheTypesInv.clone();
+  allTypes.remove("traditional");
+  allTypes.remove("multi");
+  allTypes.remove("mystery");
+  ArrayList<String> sorted=new ArrayList<String>(allTypes.values());
+  Collections.sort(sorted);
+  for (  String choice : sorted) {
+    menu.add(1,menu.size(),0,choice);
+  }
+  menu.setGroupCheckable(1,true,true);
+  boolean foundItem=false;
+  int itemCount=menu.size();
+  if (settings.cacheType != null) {
+    String typeTitle=cgBase.cacheTypesInv.get(settings.cacheType);
+    if (typeTitle != null) {
+      for (int i=0; i < itemCount; i++) {
+        if (menu.getItem(i).getTitle().equals(typeTitle)) {
+          menu.getItem(i).setChecked(true);
+          foundItem=true;
+          break;
+        }
+      }
+    }
+  }
+  if (!foundItem) {
+    menu.getItem(0).setChecked(true);
+  }
+}

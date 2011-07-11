@@ -1,0 +1,34 @@
+{
+  if (cache != null && cache.latitude != null && cache.longitude != null) {
+    menu.add(0,2,0,res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass);
+    SubMenu subMenu=menu.addSubMenu(1,0,0,res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+    subMenu.add(0,8,0,res.getString(R.string.cache_menu_radar));
+    if (cache != null && cache.reason >= 1 && settings.storeOfflineMaps == 1) {
+      subMenu.add(1,6,0,res.getString(R.string.cache_menu_map_static));
+    }
+    subMenu.add(0,1,0,res.getString(R.string.cache_menu_map));
+    if (base.isLocus(activity)) {
+      subMenu.add(0,20,0,res.getString(R.string.cache_menu_locus));
+    }
+    if (base.isRmaps(activity)) {
+      subMenu.add(0,21,0,res.getString(R.string.cache_menu_rmaps));
+    }
+    subMenu.add(0,23,0,res.getString(R.string.cache_menu_map_ext));
+    subMenu.add(0,9,0,res.getString(R.string.cache_menu_tbt));
+  }
+  if (cache != null && cache.hidden != null && (cache.type.equalsIgnoreCase("event") == true || cache.type.equalsIgnoreCase("mega") == true || cache.type.equalsIgnoreCase("cito") == true)) {
+    menu.add(1,11,0,res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda);
+  }
+  if (settings.isLogin() == true) {
+    menu.add(1,3,0,res.getString(R.string.cache_menu_visit)).setIcon(android.R.drawable.ic_menu_agenda);
+  }
+  if (cache != null && cache.spoilers != null && cache.spoilers.size() > 0) {
+    menu.add(1,5,0,res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery);
+  }
+  if (cache != null && cache.latitude != null && cache.longitude != null) {
+    menu.add(0,10,0,res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate);
+  }
+  menu.add(1,7,0,res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details);
+  menu.add(0,12,0,res.getString(R.string.cache_menu_share)).setIcon(android.R.drawable.ic_menu_share);
+  return true;
+}

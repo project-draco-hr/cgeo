@@ -1,0 +1,16 @@
+{
+  cgSearch search=new cgSearch();
+  long searchId=0l;
+  try {
+    cgGPXParser GPXparser=new cgGPXParser(app,this,listId,search);
+    searchId=GPXparser.parse(file,10,handler);
+    if (searchId == 0l) {
+      searchId=GPXparser.parse(file,11,handler);
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgBase.parseGPX: " + e.toString());
+  }
+  Log.i(cgSettings.tag,"Caches found in .gpx file: " + app.getCount(searchId));
+  return search.getCurrentId();
+}

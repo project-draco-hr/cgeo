@@ -1,0 +1,14 @@
+{
+  if (geo == null) {
+    return;
+  }
+  try {
+    if (geo.latitudeNow != null && geo.longitudeNow != null && cache != null && cache.latitude != null && cache.longitude != null) {
+      cacheDistance.setText(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow,geo.longitudeNow,cache.latitude,cache.longitude)));
+      cacheDistance.bringToFront();
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"Failed to update location.");
+  }
+}

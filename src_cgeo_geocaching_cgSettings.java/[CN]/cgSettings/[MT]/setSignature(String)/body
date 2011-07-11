@@ -1,0 +1,11 @@
+{
+  final SharedPreferences.Editor prefsEdit=prefs.edit();
+  if (signature == null || signature.length() == 0) {
+    prefsEdit.remove("signature");
+  }
+ else {
+    prefsEdit.putString("signature",signature);
+  }
+  this.signature=signature;
+  return prefsEdit.commit();
+}

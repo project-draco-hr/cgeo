@@ -1,0 +1,108 @@
+{
+  TextView textView=(TextView)findViewById(R.id.logcount);
+  int logCounter=0;
+  if (cache != null && cache.logCounts != null) {
+    final StringBuffer buff=new StringBuffer();
+    buff.append(res.getString(R.string.cache_log_types));
+    buff.append(": ");
+    ArrayList<Entry<Integer,Integer>> sortedLogCounts=new ArrayList<Entry<Integer,Integer>>();
+    sortedLogCounts.addAll(cache.logCounts.entrySet());
+    Collections.sort(sortedLogCounts,new Comparator<Entry<Integer,Integer>>(){
+      @Override public int compare(      Entry<Integer,Integer> logCountItem1,      Entry<Integer,Integer> logCountItem2){
+        return logCountItem1.getKey().compareTo(logCountItem2.getKey());
+      }
+    }
+);
+    for (    Entry<Integer,Integer> pair : sortedLogCounts) {
+      int logTypeId=pair.getKey().intValue();
+      String logTypeLabel=cgBase.logTypes1.get(logTypeId);
+      if (logTypeLabel != null) {
+        if (logCounter > 0) {
+          buff.append(", ");
+        }
+        buff.append(pair.getValue().intValue());
+        buff.append("?? ");
+        buff.append(logTypeLabel);
+      }
+      logCounter++;
+    }
+    textView.setText(buff.toString());
+  }
+  if (logCounter > 0) {
+    textView.setVisibility(View.VISIBLE);
+  }
+ else {
+    textView.setVisibility(View.GONE);
+  }
+  LinearLayout listView=(LinearLayout)findViewById(R.id.log_list);
+  listView.removeAllViews();
+  RelativeLayout rowView;
+  if (cache != null && cache.logs != null) {
+    for (    cgLog log : cache.logs) {
+      rowView=(RelativeLayout)inflater.inflate(R.layout.log_item,null);
+      if (log.date > 0) {
+        final Date logDate=new Date(log.date);
+        ((TextView)rowView.findViewById(R.id.added)).setText(cgBase.dateOutShort.format(logDate));
+      }
+      if (cgBase.logTypes1.containsKey(log.type) == true) {
+        ((TextView)rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
+      }
+ else {
+        ((TextView)rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4));
+      }
+      if (log.author.indexOf('<') >= 0 || log.author.indexOf('&') >= 0) {
+        ((TextView)rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author),TextView.BufferType.SPANNABLE);
+      }
+ else {
+        ((TextView)rowView.findViewById(R.id.author)).setText(log.author);
+      }
+      if (log.found == -1) {
+        ((TextView)rowView.findViewById(R.id.count)).setVisibility(View.GONE);
+      }
+ else       if (log.found == 0) {
+        ((TextView)rowView.findViewById(R.id.count)).setText(res.getString(R.string.cache_count_no));
+      }
+ else       if (log.found == 1) {
+        ((TextView)rowView.findViewById(R.id.count)).setText(res.getString(R.string.cache_count_one));
+      }
+ else {
+        ((TextView)rowView.findViewById(R.id.count)).setText(log.found + " " + res.getString(R.string.cache_count_more));
+      }
+      if (log.log.indexOf('<') >= 0 || log.log.indexOf('&') >= 0) {
+        ((TextView)rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log,new cgHtmlImg(activity,settings,null,false,cache.reason,false),null),TextView.BufferType.SPANNABLE);
+      }
+ else {
+        ((TextView)rowView.findViewById(R.id.log)).setText(log.log);
+      }
+      final ImageView markFound=(ImageView)rowView.findViewById(R.id.found_mark);
+      final ImageView markDNF=(ImageView)rowView.findViewById(R.id.dnf_mark);
+      final ImageView markDisabled=(ImageView)rowView.findViewById(R.id.disabled_mark);
+      if (log.type == 2 || log.type == 9 || log.type == 10) {
+        markFound.setVisibility(View.VISIBLE);
+        markDNF.setVisibility(View.GONE);
+        markDisabled.setVisibility(View.GONE);
+      }
+ else       if (log.type == 3) {
+        markFound.setVisibility(View.GONE);
+        markDNF.setVisibility(View.VISIBLE);
+        markDisabled.setVisibility(View.GONE);
+      }
+ else       if (log.type == 7 || log.type == 8) {
+        markFound.setVisibility(View.GONE);
+        markDNF.setVisibility(View.GONE);
+        markDisabled.setVisibility(View.VISIBLE);
+      }
+ else {
+        markFound.setVisibility(View.GONE);
+        markDNF.setVisibility(View.GONE);
+        markDisabled.setVisibility(View.GONE);
+      }
+      ((TextView)rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
+      ((TextView)rowView.findViewById(R.id.log)).setOnClickListener(new decryptLog());
+      listView.addView(rowView);
+    }
+    if (cache.logs.size() > 0) {
+      ((LinearLayout)findViewById(R.id.log_box)).setVisibility(View.VISIBLE);
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  if (gcIcons.isEmpty()) {
+    gcIcons.put("ape",R.drawable.marker_cache_ape);
+    gcIcons.put("cito",R.drawable.marker_cache_cito);
+    gcIcons.put("earth",R.drawable.marker_cache_earth);
+    gcIcons.put("event",R.drawable.marker_cache_event);
+    gcIcons.put("letterbox",R.drawable.marker_cache_letterbox);
+    gcIcons.put("locationless",R.drawable.marker_cache_locationless);
+    gcIcons.put("mega",R.drawable.marker_cache_mega);
+    gcIcons.put("multi",R.drawable.marker_cache_multi);
+    gcIcons.put("traditional",R.drawable.marker_cache_traditional);
+    gcIcons.put("virtual",R.drawable.marker_cache_virtual);
+    gcIcons.put("webcam",R.drawable.marker_cache_webcam);
+    gcIcons.put("wherigo",R.drawable.marker_cache_wherigo);
+    gcIcons.put("mystery",R.drawable.marker_cache_mystery);
+    gcIcons.put("gchq",R.drawable.marker_cache_gchq);
+    gcIcons.put("ape-own",R.drawable.marker_cache_ape_own);
+    gcIcons.put("cito-own",R.drawable.marker_cache_cito_own);
+    gcIcons.put("earth-own",R.drawable.marker_cache_earth_own);
+    gcIcons.put("event-own",R.drawable.marker_cache_event_own);
+    gcIcons.put("letterbox-own",R.drawable.marker_cache_letterbox_own);
+    gcIcons.put("locationless-own",R.drawable.marker_cache_locationless_own);
+    gcIcons.put("mega-own",R.drawable.marker_cache_mega_own);
+    gcIcons.put("multi-own",R.drawable.marker_cache_multi_own);
+    gcIcons.put("traditional-own",R.drawable.marker_cache_traditional_own);
+    gcIcons.put("virtual-own",R.drawable.marker_cache_virtual_own);
+    gcIcons.put("webcam-own",R.drawable.marker_cache_webcam_own);
+    gcIcons.put("wherigo-own",R.drawable.marker_cache_wherigo_own);
+    gcIcons.put("mystery-own",R.drawable.marker_cache_mystery_own);
+    gcIcons.put("gchq-own",R.drawable.marker_cache_gchq_own);
+    gcIcons.put("ape-found",R.drawable.marker_cache_ape_found);
+    gcIcons.put("cito-found",R.drawable.marker_cache_cito_found);
+    gcIcons.put("earth-found",R.drawable.marker_cache_earth_found);
+    gcIcons.put("event-found",R.drawable.marker_cache_event_found);
+    gcIcons.put("letterbox-found",R.drawable.marker_cache_letterbox_found);
+    gcIcons.put("locationless-found",R.drawable.marker_cache_locationless_found);
+    gcIcons.put("mega-found",R.drawable.marker_cache_mega_found);
+    gcIcons.put("multi-found",R.drawable.marker_cache_multi_found);
+    gcIcons.put("traditional-found",R.drawable.marker_cache_traditional_found);
+    gcIcons.put("virtual-found",R.drawable.marker_cache_virtual_found);
+    gcIcons.put("webcam-found",R.drawable.marker_cache_webcam_found);
+    gcIcons.put("wherigo-found",R.drawable.marker_cache_wherigo_found);
+    gcIcons.put("mystery-found",R.drawable.marker_cache_mystery_found);
+    gcIcons.put("gchq-found",R.drawable.marker_cache_gchq_found);
+    gcIcons.put("ape-disabled",R.drawable.marker_cache_ape_disabled);
+    gcIcons.put("cito-disabled",R.drawable.marker_cache_cito_disabled);
+    gcIcons.put("earth-disabled",R.drawable.marker_cache_earth_disabled);
+    gcIcons.put("event-disabled",R.drawable.marker_cache_event_disabled);
+    gcIcons.put("letterbox-disabled",R.drawable.marker_cache_letterbox_disabled);
+    gcIcons.put("locationless-disabled",R.drawable.marker_cache_locationless_disabled);
+    gcIcons.put("mega-disabled",R.drawable.marker_cache_mega_disabled);
+    gcIcons.put("multi-disabled",R.drawable.marker_cache_multi_disabled);
+    gcIcons.put("traditional-disabled",R.drawable.marker_cache_traditional_disabled);
+    gcIcons.put("virtual-disabled",R.drawable.marker_cache_virtual_disabled);
+    gcIcons.put("webcam-disabled",R.drawable.marker_cache_webcam_disabled);
+    gcIcons.put("wherigo-disabled",R.drawable.marker_cache_wherigo_disabled);
+    gcIcons.put("mystery-disabled",R.drawable.marker_cache_mystery_disabled);
+    gcIcons.put("gchq-disabled",R.drawable.marker_cache_gchq_disabled);
+  }
+  if (wpIcons.isEmpty()) {
+    wpIcons.put("waypoint",R.drawable.marker_waypoint_waypoint);
+    wpIcons.put("flag",R.drawable.marker_waypoint_flag);
+    wpIcons.put("pkg",R.drawable.marker_waypoint_pkg);
+    wpIcons.put("puzzle",R.drawable.marker_waypoint_puzzle);
+    wpIcons.put("stage",R.drawable.marker_waypoint_stage);
+    wpIcons.put("trailhead",R.drawable.marker_waypoint_trailhead);
+  }
+  int icon=-1;
+  String iconTxt=null;
+  if (cache == true) {
+    if (type != null && type.length() > 0) {
+      if (own == true) {
+        iconTxt=type + "-own";
+      }
+ else       if (found == true) {
+        iconTxt=type + "-found";
+      }
+ else       if (disabled == true) {
+        iconTxt=type + "-disabled";
+      }
+ else {
+        iconTxt=type;
+      }
+    }
+ else {
+      iconTxt="traditional";
+    }
+    if (gcIcons.containsKey(iconTxt) == true) {
+      icon=gcIcons.get(iconTxt);
+    }
+ else {
+      icon=gcIcons.get("traditional");
+    }
+  }
+ else {
+    if (type != null && type.length() > 0) {
+      iconTxt=type;
+    }
+ else {
+      iconTxt="waypoint";
+    }
+    if (wpIcons.containsKey(iconTxt) == true) {
+      icon=wpIcons.get(iconTxt);
+    }
+ else {
+      icon=wpIcons.get("waypoint");
+    }
+  }
+  return icon;
+}

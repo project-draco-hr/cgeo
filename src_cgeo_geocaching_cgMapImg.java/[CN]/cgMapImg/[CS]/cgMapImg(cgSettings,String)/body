@@ -1,0 +1,17 @@
+{
+  geocode=geocodeIn;
+  settings=settingsIn;
+  if (geocode != null && geocode.length() > 0) {
+    final String dirName=settings.getStorage() + geocode + "/";
+    File dir=null;
+    dir=new File(settings.getStorage());
+    if (dir.exists() == false) {
+      dir.mkdirs();
+    }
+    dir=new File(dirName);
+    if (dir.exists() == false) {
+      dir.mkdirs();
+    }
+    dir=null;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  if (list.isEmpty() == true) {
+    return false;
+  }
+  if (checked <= 0) {
+    return false;
+  }
+  boolean status=getSelectMode();
+  int cleared=0;
+  for (  cgCache cache : list) {
+    if (cache.statusChecked == true) {
+      cache.statusChecked=false;
+      checkChecked(-1);
+      cleared++;
+    }
+  }
+  setSelectMode(false,false);
+  notifyDataSetChanged();
+  if (cleared > 0 || status == true) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

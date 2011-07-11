@@ -1,0 +1,23 @@
+{
+  ArrayList<String> guids=null;
+  ArrayList<String> geocodes=null;
+  if (guid != null && guid.length() > 0) {
+    guids=new ArrayList<String>();
+    guids.add(guid);
+  }
+ else   if (geocode != null && geocode.length() > 0) {
+    geocodes=new ArrayList<String>();
+    geocodes.add(geocode);
+  }
+ else {
+    return null;
+  }
+  final HashMap<String,cgRating> ratings=getRating(guids,geocodes);
+  if (ratings != null) {
+    final Set<String> ratingKeys=ratings.keySet();
+    for (    String ratingKey : ratingKeys) {
+      return ratings.get(ratingKey);
+    }
+  }
+  return null;
+}

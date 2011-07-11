@@ -1,0 +1,12 @@
+{
+  try {
+    sleep(2500);
+  }
+ catch (  Exception e) {
+  }
+  if (dirInUse == false && dir != null) {
+    dir.closeDir();
+    dir=null;
+    Log.i(cgSettings.tag,"Direction service stopped");
+  }
+}

@@ -1,0 +1,13 @@
+{
+  if (touch == false) {
+    touch=true;
+    return;
+  }
+  if (getSelectMode() == true || getChecked() > 0) {
+    return;
+  }
+  Intent cachesIntent=new Intent(getContext(),cgeodetail.class);
+  cachesIntent.putExtra("geocode",geocode);
+  cachesIntent.putExtra("name",name);
+  getContext().startActivity(cachesIntent);
+}

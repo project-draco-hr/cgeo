@@ -1,0 +1,13 @@
+{
+  if (geocode == null || geocode.length() == 0) {
+    return;
+  }
+  ContentValues values=new ContentValues();
+  values.put("visiteddate",System.currentTimeMillis());
+  try {
+    databaseRW.update(dbTableCaches,values,"geocode = \"" + geocode + "\"",null);
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgData.saveVisitDate: " + e.toString());
+  }
+}

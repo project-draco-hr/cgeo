@@ -1,0 +1,20 @@
+{
+  SharedPreferences.Editor edit=prefs.edit();
+  if (prefs.getBoolean("showcaptcha",false) == false) {
+    edit.putBoolean("showcaptcha",true);
+    settings.showCaptcha=true;
+  }
+ else {
+    edit.putBoolean("showcaptcha",false);
+    settings.showCaptcha=false;
+  }
+  edit.commit();
+  CheckBox captchaButton=(CheckBox)findViewById(R.id.captcha);
+  if (prefs.getBoolean("showcaptcha",false) == false) {
+    captchaButton.setChecked(false);
+  }
+ else {
+    captchaButton.setChecked(true);
+  }
+  return;
+}

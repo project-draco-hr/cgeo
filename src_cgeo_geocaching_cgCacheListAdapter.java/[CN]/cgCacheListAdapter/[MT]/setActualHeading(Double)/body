@@ -1,0 +1,11 @@
+{
+  if (azimuthIn == null) {
+    return;
+  }
+  azimuth=azimuthIn;
+  if (compasses != null && compasses.size() > 0) {
+    for (    cgCompassMini compass : compasses) {
+      compass.updateAzimuth(azimuth);
+    }
+  }
+}

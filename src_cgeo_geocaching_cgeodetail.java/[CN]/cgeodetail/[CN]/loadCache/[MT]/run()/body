@@ -1,0 +1,14 @@
+{
+  HashMap<String,String> params=new HashMap<String,String>();
+  if (geocode != null && geocode.length() > 0) {
+    params.put("geocode",geocode);
+  }
+ else   if (guid != null && guid.length() > 0) {
+    params.put("guid",guid);
+  }
+ else {
+    return;
+  }
+  searchId=base.searchByGeocode(params,0,false);
+  handler.sendMessage(new Message());
+}

@@ -1,0 +1,22 @@
+{
+  init();
+  boolean status=false;
+  if (id < 10) {
+    return status;
+  }
+  databaseRW.beginTransaction();
+  try {
+    int cnt=databaseRW.delete(dbTableLists,"_id = " + (id - 10),null);
+    if (cnt > 0) {
+      ContentValues values=new ContentValues();
+      values.put("reason",1);
+      databaseRW.update(dbTableCaches,values,"reason = " + id,null);
+      status=true;
+    }
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+  return status;
+}

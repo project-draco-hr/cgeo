@@ -1,0 +1,29 @@
+{
+  try {
+    final int left1=centerLat1 - (spanLat1 / 2);
+    final int right1=centerLat1 + (spanLat1 / 2);
+    final int top1=centerLon1 + (spanLon1 / 2);
+    final int bottom1=centerLon1 - (spanLon1 / 2);
+    final int left2=centerLat2 - (spanLat2 / 2);
+    final int right2=centerLat2 + (spanLat2 / 2);
+    final int top2=centerLon2 + (spanLon2 / 2);
+    final int bottom2=centerLon2 - (spanLon2 / 2);
+    if (left2 <= left1) {
+      return false;
+    }
+    if (right2 >= right1) {
+      return false;
+    }
+    if (top2 >= top1) {
+      return false;
+    }
+    if (bottom2 <= bottom1) {
+      return false;
+    }
+    return true;
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgBase.isInViewPort: " + e.toString());
+    return false;
+  }
+}

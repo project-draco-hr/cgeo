@@ -1,0 +1,12 @@
+{
+  String[] storage=new String[2];
+  if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    storage[0]=Environment.getExternalStorageDirectory() + "/" + cache+ "/";
+    storage[1]=Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache+ "/";
+  }
+ else {
+    storage[0]=Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache+ "/";
+    storage[1]=Environment.getExternalStorageDirectory() + "/" + cache+ "/";
+  }
+  return storage;
+}

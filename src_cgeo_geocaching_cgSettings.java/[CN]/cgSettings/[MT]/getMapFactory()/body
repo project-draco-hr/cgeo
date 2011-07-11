@@ -1,0 +1,15 @@
+{
+  if (mapProvider == mapSourceEnum.googleMap) {
+    if (mapProviderUsed != mapSourceEnum.googleMap || mapFactory == null) {
+      mapFactory=new googleMapFactory();
+      mapProviderUsed=mapProvider;
+    }
+  }
+ else   if (mapProvider != mapSourceEnum.googleMap) {
+    if (mapProviderUsed == mapSourceEnum.googleMap || mapFactory == null) {
+      mapFactory=new mfMapFactory();
+      mapProviderUsed=mapProvider;
+    }
+  }
+  return mapFactory;
+}

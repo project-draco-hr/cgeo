@@ -1,0 +1,162 @@
+{
+  if (cache == null) {
+    return false;
+  }
+  ContentValues values=new ContentValues();
+  if (cache.updated == null) {
+    values.put("updated",System.currentTimeMillis());
+  }
+ else {
+    values.put("updated",cache.updated);
+  }
+  values.put("reason",cache.reason);
+  if (cache.detailed == true) {
+    values.put("detailed",1);
+  }
+ else {
+    values.put("detailed",0);
+  }
+  values.put("detailedupdate",cache.detailedUpdate);
+  values.put("visiteddate",cache.visitedDate);
+  values.put("geocode",cache.geocode);
+  values.put("cacheid",cache.cacheid);
+  values.put("guid",cache.guid);
+  values.put("type",cache.type);
+  values.put("name",cache.name);
+  if (cache.own == true) {
+    values.put("own",1);
+  }
+ else {
+    values.put("own",0);
+  }
+  values.put("owner",cache.owner);
+  values.put("owner_real",cache.ownerReal);
+  if (cache.hidden == null) {
+    values.put("hidden",0);
+  }
+ else {
+    values.put("hidden",cache.hidden.getTime());
+  }
+  values.put("hint",cache.hint);
+  values.put("size",cache.size);
+  values.put("difficulty",cache.difficulty);
+  values.put("terrain",cache.terrain);
+  values.put("latlon",cache.latlon);
+  values.put("latitude_string",cache.latitudeString);
+  values.put("longitude_string",cache.longitudeString);
+  values.put("location",cache.location);
+  values.put("distance",cache.distance);
+  values.put("direction",cache.direction);
+  final boolean rel=isReliableLatLon(cache.geocode,cache.guid);
+  if (cache.reliableLatLon) {
+    values.put("latitude",cache.latitude);
+    values.put("longitude",cache.longitude);
+    values.put("reliable_latlon",1);
+  }
+ else   if (!rel) {
+    values.put("latitude",cache.latitude);
+    values.put("longitude",cache.longitude);
+    values.put("reliable_latlon",0);
+  }
+  values.put("elevation",cache.elevation);
+  values.put("shortdesc",cache.shortdesc);
+  values.put("description",cache.description);
+  values.put("favourite_cnt",cache.favouriteCnt);
+  values.put("rating",cache.rating);
+  values.put("votes",cache.votes);
+  values.put("myvote",cache.myVote);
+  if (cache.disabled == true) {
+    values.put("disabled",1);
+  }
+ else {
+    values.put("disabled",0);
+  }
+  if (cache.archived == true) {
+    values.put("archived",1);
+  }
+ else {
+    values.put("archived",0);
+  }
+  if (cache.members == true) {
+    values.put("members",1);
+  }
+ else {
+    values.put("members",0);
+  }
+  if (cache.found == true) {
+    values.put("found",1);
+  }
+ else {
+    values.put("found",0);
+  }
+  if (cache.favourite == true) {
+    values.put("favourite",1);
+  }
+ else {
+    values.put("favourite",0);
+  }
+  values.put("inventoryunknown",cache.inventoryItems);
+  boolean status=false;
+  boolean statusOk=true;
+  if (cache.attributes != null) {
+    status=saveAttributes(cache.geocode,cache.attributes);
+    if (status == false) {
+      statusOk=false;
+    }
+  }
+  if (cache.waypoints != null) {
+    status=saveWaypoints(cache.geocode,cache.waypoints,true);
+    if (status == false) {
+      statusOk=false;
+    }
+  }
+  if (cache.spoilers != null) {
+    status=saveSpoilers(cache.geocode,cache.spoilers);
+    if (status == false) {
+      statusOk=false;
+    }
+  }
+  if (cache.logs != null) {
+    status=saveLogs(cache.geocode,cache.logs);
+    if (status == false) {
+      statusOk=false;
+    }
+  }
+  if (cache.logCounts != null && cache.logCounts.isEmpty() == false) {
+    status=saveLogCount(cache.geocode,cache.logCounts);
+    if (status == false) {
+      statusOk=false;
+    }
+  }
+  if (cache.inventory != null) {
+    status=saveInventory(cache.geocode,cache.inventory);
+    if (status == false) {
+      statusOk=false;
+    }
+  }
+  if (statusOk == false) {
+    cache.detailed=false;
+    cache.detailedUpdate=0l;
+  }
+  init();
+  try {
+    int rows=databaseRW.update(dbTableCaches,values,"geocode = \"" + cache.geocode + "\"",null);
+    if (rows > 0) {
+      values=null;
+      return true;
+    }
+  }
+ catch (  Exception e) {
+  }
+  try {
+    long id=databaseRW.insert(dbTableCaches,null,values);
+    if (id > 0) {
+      values=null;
+      return true;
+    }
+  }
+ catch (  Exception e) {
+  }
+  values=null;
+  return false;
+}

@@ -1,0 +1,38 @@
+{
+  if (geocode != null)   app.setAction("logging trackable");
+  types.clear();
+  types.add(cgBase.LOG_RETRIEVED_IT);
+  types.add(cgBase.LOG_GRABBED_IT);
+  types.add(cgBase.LOG_NOTE);
+  types.add(cgBase.LOG_DISCOVERED_IT);
+  if (typeSelected < 0 && cgBase.logTypes2.get(typeSelected) == null)   typeSelected=types.get(2);
+  setType(typeSelected);
+  Button typeButton=(Button)findViewById(R.id.type);
+  registerForContextMenu(typeButton);
+  typeButton.setText(cgBase.logTypes2.get(typeSelected));
+  typeButton.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View view){
+      openContextMenu(view);
+    }
+  }
+);
+  Button dateButton=(Button)findViewById(R.id.date);
+  dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+  dateButton.setOnClickListener(new cgeotouchDateListener());
+  if (tweetBox == null)   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
+  if (tweetCheck == null)   tweetCheck=(CheckBox)findViewById(R.id.tweet);
+  tweetCheck.setChecked(true);
+  Button buttonPost=(Button)findViewById(R.id.post);
+  if (viewstate == null || viewstate.length() == 0) {
+    buttonPost.setEnabled(false);
+    buttonPost.setOnTouchListener(null);
+    buttonPost.setOnClickListener(null);
+    loadData thread;
+    thread=new loadData(guid);
+    thread.start();
+  }
+ else {
+    buttonPost.setEnabled(true);
+    buttonPost.setOnClickListener(new postListener());
+  }
+}

@@ -1,0 +1,11 @@
+{
+  final SharedPreferences.Editor prefsEdit=prefs.edit();
+  if (password == null || password.length() == 0) {
+    prefsEdit.remove("pass-vote");
+  }
+ else {
+    prefsEdit.putString("pass-vote",password);
+  }
+  passVote=password;
+  return prefsEdit.commit();
+}

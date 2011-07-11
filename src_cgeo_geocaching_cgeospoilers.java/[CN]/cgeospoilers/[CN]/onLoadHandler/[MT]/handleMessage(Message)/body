@@ -1,0 +1,25 @@
+{
+  BitmapDrawable image=(BitmapDrawable)message.obj;
+  if (image != null) {
+    ImageView spoilerImage=null;
+    spoilerImage=(ImageView)inflater.inflate(R.layout.image_item,null);
+    Rect bounds=image.getBounds();
+    spoilerImage.setImageResource(R.drawable.image_not_loaded);
+    spoilerImage.setClickable(true);
+    spoilerImage.setOnClickListener(new View.OnClickListener(){
+      public void onClick(      View arg0){
+        activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(spoiler.url)));
+      }
+    }
+);
+    spoilerImage.setImageDrawable((BitmapDrawable)message.obj);
+    spoilerImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+    spoilerImage.setLayoutParams(new LayoutParams(bounds.width(),bounds.height()));
+    view.addView(spoilerImage);
+  }
+  countDone++;
+  progressDialog.setProgress(countDone);
+  if (progressDialog.getProgress() >= count) {
+    progressDialog.dismiss();
+  }
+}

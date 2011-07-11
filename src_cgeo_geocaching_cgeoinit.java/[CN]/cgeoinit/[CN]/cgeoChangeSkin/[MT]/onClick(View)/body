@@ -1,0 +1,20 @@
+{
+  SharedPreferences.Editor edit=prefs.edit();
+  if (prefs.getInt("skin",0) == 0) {
+    edit.putInt("skin",1);
+    settings.setSkin(1);
+  }
+ else {
+    edit.putInt("skin",0);
+    settings.setSkin(0);
+  }
+  edit.commit();
+  CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
+  if (prefs.getInt("skin",0) == 0) {
+    skinButton.setChecked(false);
+  }
+ else {
+    skinButton.setChecked(true);
+  }
+  return;
+}

@@ -1,0 +1,21 @@
+{
+  init();
+  if (geocode == null || geocode.length() == 0) {
+    return null;
+  }
+  Cursor cursor=null;
+  cgLog log=null;
+  cursor=databaseRO.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = \"" + geocode + "\"",null,null,null,"_id desc","1");
+  if (cursor != null && cursor.getCount() > 0) {
+    cursor.moveToFirst();
+    log=new cgLog();
+    log.id=(int)cursor.getInt(cursor.getColumnIndex("_id"));
+    log.type=(int)cursor.getInt(cursor.getColumnIndex("type"));
+    log.log=(String)cursor.getString(cursor.getColumnIndex("log"));
+    log.date=(long)cursor.getLong(cursor.getColumnIndex("date"));
+  }
+  if (cursor != null) {
+    cursor.close();
+  }
+  return log;
+}

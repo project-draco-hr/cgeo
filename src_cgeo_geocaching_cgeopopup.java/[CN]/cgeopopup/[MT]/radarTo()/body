@@ -1,0 +1,44 @@
+{
+  if (cache == null || cache.latitude == null || cache.longitude == null) {
+    warning.showToast(res.getString(R.string.err_location_unknown));
+  }
+  try {
+    if (cgBase.isIntentAvailable(activity,"com.google.android.radar.SHOW_RADAR") == true) {
+      Intent radarIntent=new Intent("com.google.android.radar.SHOW_RADAR");
+      radarIntent.putExtra("latitude",new Float(cache.latitude));
+      radarIntent.putExtra("longitude",new Float(cache.longitude));
+      activity.startActivity(radarIntent);
+    }
+ else {
+      AlertDialog.Builder dialog=new AlertDialog.Builder(activity);
+      dialog.setTitle(res.getString(R.string.err_radar_title));
+      dialog.setMessage(res.getString(R.string.err_radar_message));
+      dialog.setCancelable(true);
+      dialog.setPositiveButton("yes",new DialogInterface.OnClickListener(){
+        public void onClick(        DialogInterface dialog,        int id){
+          try {
+            activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("market://search?q=pname:com.eclipsim.gpsstatus2")));
+            dialog.cancel();
+          }
+ catch (          Exception e) {
+            warning.showToast(res.getString(R.string.err_radar_market));
+            Log.e(cgSettings.tag,"cgeopoint.radarTo.onClick: " + e.toString());
+          }
+        }
+      }
+);
+      dialog.setNegativeButton("no",new DialogInterface.OnClickListener(){
+        public void onClick(        DialogInterface dialog,        int id){
+          dialog.cancel();
+        }
+      }
+);
+      AlertDialog alert=dialog.create();
+      alert.show();
+    }
+  }
+ catch (  Exception e) {
+    warning.showToast(res.getString(R.string.err_radar_generic));
+    Log.e(cgSettings.tag,"cgeopoint.radarTo: " + e.toString());
+  }
+}

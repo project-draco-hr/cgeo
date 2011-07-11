@@ -1,0 +1,28 @@
+{
+  if (page == null || page.length() == 0) {
+    return -1;
+  }
+  int findCount=-1;
+  try {
+    final Pattern findPattern=Pattern.compile("<strong>Caches Found:<\\/strong>([^<]+)<br",Pattern.CASE_INSENSITIVE);
+    final Matcher findMatcher=findPattern.matcher(page);
+    if (findMatcher.find() == true) {
+      if (findMatcher.groupCount() > 0) {
+        String count=findMatcher.group(1);
+        if (count != null) {
+          count=count.trim();
+          if (count.length() == 0) {
+            findCount=0;
+          }
+ else {
+            findCount=Integer.parseInt(count);
+          }
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgBase.parseFindCount: " + e.toString());
+  }
+  return findCount;
+}

@@ -1,0 +1,31 @@
+{
+  try {
+    stop=false;
+    working=true;
+    if (mapView == null || users == null || users.isEmpty()) {
+      return;
+    }
+    ArrayList<UserOverlayItemImpl> items=new ArrayList<UserOverlayItemImpl>();
+    int counter=0;
+    UserOverlayItemImpl item=null;
+    for (    cgUser userOne : users) {
+      if (stop) {
+        return;
+      }
+      if (userOne.latitude == null && userOne.longitude == null) {
+        continue;
+      }
+      item=settings.getMapFactory().getUserOverlayItemBase(activity,userOne);
+      items.add(item);
+      counter++;
+      if ((counter % 10) == 0) {
+        overlayUsers.updateItems(items);
+        displayHandler.sendEmptyMessage(1);
+      }
+    }
+    overlayUsers.updateItems(items);
+  }
+  finally {
+    working=false;
+  }
+}

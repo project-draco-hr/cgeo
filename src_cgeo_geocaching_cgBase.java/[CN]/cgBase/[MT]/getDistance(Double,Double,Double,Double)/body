@@ -1,0 +1,17 @@
+{
+  if (lat1 == null || lon1 == null || lat2 == null || lon2 == null) {
+    return 0d;
+  }
+  lat1*=deg2rad;
+  lon1*=deg2rad;
+  lat2*=deg2rad;
+  lon2*=deg2rad;
+  final double d=Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2);
+  final double distance=erad * Math.acos(d);
+  if (Double.isNaN(distance) == false && distance > 0) {
+    return distance;
+  }
+ else {
+    return 0d;
+  }
+}

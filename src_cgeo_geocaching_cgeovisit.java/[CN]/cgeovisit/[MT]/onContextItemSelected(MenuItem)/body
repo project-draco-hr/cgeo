@@ -1,0 +1,63 @@
+{
+  final int group=item.getGroupId();
+  final int id=item.getItemId();
+  if (group == R.id.type) {
+    setType(id);
+    return true;
+  }
+ else   if (group == R.id.changebutton) {
+    try {
+      final String logTbAction=cgBase.logTypesTrackable.get(id);
+      if (logTbAction != null) {
+        final LinearLayout inventView=(LinearLayout)findViewById(R.id.inventory);
+        for (int count=0; count < inventView.getChildCount(); count++) {
+          final LinearLayout tbView=(LinearLayout)inventView.getChildAt(count);
+          if (tbView == null) {
+            return false;
+          }
+          final TextView tbText=(TextView)tbView.findViewById(R.id.action);
+          if (tbText == null) {
+            return false;
+          }
+          tbText.setText(logTbAction);
+        }
+        for (        cgTrackableLog tb : trackables) {
+          tb.action=id;
+        }
+        tbChanged=true;
+        return true;
+      }
+    }
+ catch (    Exception e) {
+      Log.e(cgSettings.tag,"cgeovisit.onContextItemSelected: " + e.toString());
+    }
+  }
+ else {
+    try {
+      final String logTbAction=cgBase.logTypesTrackable.get(id);
+      if (logTbAction != null) {
+        final LinearLayout tbView=(LinearLayout)findViewById(group);
+        if (tbView == null) {
+          return false;
+        }
+        final TextView tbText=(TextView)tbView.findViewById(R.id.action);
+        if (tbText == null) {
+          return false;
+        }
+        for (        cgTrackableLog tb : trackables) {
+          if (tb.id == group) {
+            tbChanged=true;
+            tb.action=id;
+            tbText.setText(logTbAction);
+            Log.i(cgSettings.tag,"Trackable " + tb.trackCode + " ("+ tb.name+ ") has new action: #"+ id);
+          }
+        }
+        return true;
+      }
+    }
+ catch (    Exception e) {
+      Log.e(cgSettings.tag,"cgeovisit.onContextItemSelected: " + e.toString());
+    }
+  }
+  return false;
+}

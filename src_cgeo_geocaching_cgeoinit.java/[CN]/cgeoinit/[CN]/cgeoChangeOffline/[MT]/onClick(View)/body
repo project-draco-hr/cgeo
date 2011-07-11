@@ -1,0 +1,20 @@
+{
+  SharedPreferences.Editor edit=prefs.edit();
+  if (prefs.getInt("offlinemaps",1) == 0) {
+    edit.putInt("offlinemaps",1);
+    settings.excludeDisabled=1;
+  }
+ else {
+    edit.putInt("offlinemaps",0);
+    settings.excludeDisabled=0;
+  }
+  edit.commit();
+  CheckBox offlineButton=(CheckBox)findViewById(R.id.offline);
+  if (prefs.getInt("offlinemaps",0) == 0) {
+    offlineButton.setChecked(false);
+  }
+ else {
+    offlineButton.setChecked(true);
+  }
+  return;
+}

@@ -1,0 +1,12 @@
+{
+  try {
+    sleep(2500);
+  }
+ catch (  Exception e) {
+  }
+  if (geoInUse == false && geo != null) {
+    geo.closeGeo();
+    geo=null;
+    Log.i(cgSettings.tag,"Location service stopped");
+  }
+}

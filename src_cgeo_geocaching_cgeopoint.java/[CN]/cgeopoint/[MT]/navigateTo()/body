@@ -1,0 +1,13 @@
+{
+  ArrayList<Double> coords=getDestination();
+  if (coords == null || coords.get(0) == null || coords.get(1) == null) {
+    warning.showToast(res.getString(R.string.err_location_unknown));
+  }
+  cgeonavigate navigateActivity=new cgeonavigate();
+  Intent navigateIntent=new Intent(activity,navigateActivity.getClass());
+  navigateIntent.putExtra("latitude",coords.get(0));
+  navigateIntent.putExtra("longitude",coords.get(1));
+  navigateIntent.putExtra("geocode","");
+  navigateIntent.putExtra("name","Some destination");
+  activity.startActivity(navigateIntent);
+}

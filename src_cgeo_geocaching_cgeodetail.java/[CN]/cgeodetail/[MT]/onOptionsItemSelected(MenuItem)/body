@@ -1,0 +1,65 @@
+{
+  final int menuItem=item.getItemId();
+  if (menuItem == 1) {
+    showOnMap();
+    return true;
+  }
+ else   if (menuItem == 2) {
+    navigateTo();
+    return true;
+  }
+ else   if (menuItem == 3) {
+    logVisit();
+    return true;
+  }
+ else   if (menuItem == 5) {
+    showSpoilers();
+    return true;
+  }
+ else   if (menuItem == 6) {
+    showSmaps();
+    return true;
+  }
+ else   if (menuItem == 7) {
+    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.geocode)));
+    return true;
+  }
+ else   if (menuItem == 8) {
+    radarTo();
+    return true;
+  }
+ else   if (menuItem == 9) {
+    if (geo != null) {
+      base.runNavigation(activity,res,settings,warning,tracker,cache.latitude,cache.longitude,geo.latitudeNow,geo.longitudeNow);
+    }
+ else {
+      base.runNavigation(activity,res,settings,warning,tracker,cache.latitude,cache.longitude);
+    }
+    return true;
+  }
+ else   if (menuItem == 10) {
+    cachesAround();
+    return true;
+  }
+ else   if (menuItem == 11) {
+    addToCalendar();
+    return true;
+  }
+ else   if (menuItem == 12) {
+    shareCache();
+    return true;
+  }
+ else   if (menuItem == 20) {
+    base.runExternalMap(cgBase.mapAppLocus,activity,res,warning,tracker,cache);
+    return true;
+  }
+ else   if (menuItem == 21) {
+    base.runExternalMap(cgBase.mapAppRmaps,activity,res,warning,tracker,cache);
+    return true;
+  }
+ else   if (menuItem == 23) {
+    base.runExternalMap(cgBase.mapAppAny,activity,res,warning,tracker,cache);
+    return true;
+  }
+  return false;
+}

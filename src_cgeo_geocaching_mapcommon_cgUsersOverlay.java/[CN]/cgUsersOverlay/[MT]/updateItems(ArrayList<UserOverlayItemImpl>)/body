@@ -1,0 +1,14 @@
+{
+  if (itemsPre == null) {
+    return;
+  }
+  for (  UserOverlayItemImpl item : itemsPre) {
+    item.setMarker(boundCenter(item.getMarker(0)));
+  }
+  items.clear();
+  if (itemsPre.size() > 0) {
+    items=(ArrayList<UserOverlayItemImpl>)itemsPre.clone();
+  }
+  setLastFocusedItemIndex(-1);
+  populate();
+}

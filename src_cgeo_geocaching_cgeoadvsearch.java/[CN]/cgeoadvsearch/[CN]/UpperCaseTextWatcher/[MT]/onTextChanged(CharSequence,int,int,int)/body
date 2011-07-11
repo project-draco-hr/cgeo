@@ -1,0 +1,10 @@
+{
+  String oldText=editText.getText().toString();
+  String upperText=oldText.toUpperCase();
+  if (!oldText.equals(upperText)) {
+    int selectionStart=editText.getSelectionStart();
+    int selectionEnd=editText.getSelectionEnd();
+    editText.setText(upperText);
+    editText.setSelection(selectionStart,selectionEnd);
+  }
+}

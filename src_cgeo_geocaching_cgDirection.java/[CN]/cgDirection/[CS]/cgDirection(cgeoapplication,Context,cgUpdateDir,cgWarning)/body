@@ -1,0 +1,14 @@
+{
+  app=appIn;
+  context=contextIn;
+  dirUpdate=dirUpdateIn;
+  warning=warningIn;
+  res=context.getResources();
+  try {
+    final int sdk=new Integer(Build.VERSION.SDK).intValue();
+    if (sdk >= 8)     cg8=new cg8wrap((Activity)context);
+  }
+ catch (  Exception e) {
+  }
+  sensorListener=new cgeoSensorListener();
+}

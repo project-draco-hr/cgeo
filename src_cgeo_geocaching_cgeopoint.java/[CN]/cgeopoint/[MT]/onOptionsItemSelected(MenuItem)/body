@@ -1,0 +1,42 @@
+{
+  final int menuItem=item.getItemId();
+  ArrayList<Double> coords=getDestination();
+  if (menuItem == 1) {
+    showOnMap();
+    return true;
+  }
+ else   if (menuItem == 2) {
+    navigateTo();
+    return true;
+  }
+ else   if (menuItem == 3) {
+    radarTo();
+    return true;
+  }
+ else   if (menuItem == 4) {
+    if (geo != null) {
+      base.runNavigation(activity,res,settings,warning,tracker,coords.get(0),coords.get(1),geo.latitudeNow,geo.longitudeNow);
+    }
+ else {
+      base.runNavigation(activity,res,settings,warning,tracker,coords.get(0),coords.get(1));
+    }
+    return true;
+  }
+ else   if (menuItem == 5) {
+    cachesAround();
+    return true;
+  }
+ else   if (menuItem == 20) {
+    base.runExternalMap(cgBase.mapAppLocus,activity,res,warning,tracker,coords.get(0),coords.get(1));
+    return true;
+  }
+ else   if (menuItem == 21) {
+    base.runExternalMap(cgBase.mapAppRmaps,activity,res,warning,tracker,coords.get(0),coords.get(1));
+    return true;
+  }
+ else   if (menuItem == 23) {
+    base.runExternalMap(cgBase.mapAppAny,activity,res,warning,tracker,coords.get(0),coords.get(1));
+    return true;
+  }
+  return false;
+}

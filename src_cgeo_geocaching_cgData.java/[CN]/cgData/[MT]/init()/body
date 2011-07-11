@@ -1,0 +1,46 @@
+{
+  if (databaseRW == null || databaseRW.isOpen() == false) {
+    try {
+      if (dbHelper == null) {
+        dbHelper=new cgDbHelper(context);
+      }
+      databaseRW=dbHelper.getWritableDatabase();
+      if (databaseRW != null && databaseRW.isOpen()) {
+        Log.i(cgSettings.tag,"Connection to RW database established.");
+      }
+ else {
+        Log.e(cgSettings.tag,"Failed to open connection to RW database.");
+      }
+      if (databaseRW.inTransaction() == true) {
+        databaseRW.endTransaction();
+      }
+    }
+ catch (    Exception e) {
+      Log.e(cgSettings.tag,"cgData.openDb.RW: " + e.toString());
+    }
+  }
+  if (databaseRO == null || databaseRO.isOpen() == false) {
+    try {
+      if (dbHelper == null) {
+        dbHelper=new cgDbHelper(context);
+      }
+      databaseRO=dbHelper.getReadableDatabase();
+      if (databaseRO.needUpgrade(dbVersion) == true) {
+        databaseRO=null;
+      }
+      if (databaseRO != null && databaseRO.isOpen()) {
+        Log.i(cgSettings.tag,"Connection to RO database established.");
+      }
+ else {
+        Log.e(cgSettings.tag,"Failed to open connection to RO database.");
+      }
+      if (databaseRO.inTransaction() == true) {
+        databaseRO.endTransaction();
+      }
+    }
+ catch (    Exception e) {
+      Log.e(cgSettings.tag,"cgData.openDb.RO: " + e.toString());
+    }
+  }
+  initialized=true;
+}

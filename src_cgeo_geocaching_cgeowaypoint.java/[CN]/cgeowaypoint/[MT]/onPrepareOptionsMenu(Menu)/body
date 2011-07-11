@@ -1,0 +1,12 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  try {
+    boolean visible=waypoint != null && waypoint.latitude != null && waypoint.longitude != null;
+    menu.findItem(MENU_ID_NAVIGATION).setVisible(visible);
+    menu.findItem(MENU_ID_COMPASS).setVisible(visible);
+    menu.findItem(MENU_ID_CACHES_AROUND).setVisible(visible);
+  }
+ catch (  Exception e) {
+  }
+  return true;
+}

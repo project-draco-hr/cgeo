@@ -1,0 +1,9 @@
+{
+  EditText mapFileEdit=(EditText)findViewById(R.id.mapfile);
+  if (settings.mapProvider == mapSourceEnum.mapsforgeOffline) {
+    mapFileEdit.setVisibility(View.VISIBLE);
+  }
+ else {
+    mapFileEdit.setVisibility(View.INVISIBLE);
+  }
+}

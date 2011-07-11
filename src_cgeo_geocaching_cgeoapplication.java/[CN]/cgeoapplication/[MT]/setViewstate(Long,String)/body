@@ -1,0 +1,10 @@
+{
+  if (viewstate == null || viewstate.length() == 0) {
+    return false;
+  }
+  if (searchId == null || searches.containsKey(searchId) == false) {
+    return false;
+  }
+  searches.get(searchId).viewstate=viewstate;
+  return true;
+}

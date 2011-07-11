@@ -1,0 +1,30 @@
+{
+  if (listFooter == null) {
+    if (inflater == null) {
+      inflater=activity.getLayoutInflater();
+    }
+    listFooter=inflater.inflate(R.layout.caches_footer,null);
+    listFooter.setClickable(true);
+    listFooter.setOnClickListener(new moreCachesListener());
+  }
+  if (listFooterText == null) {
+    listFooterText=(TextView)listFooter.findViewById(R.id.more_caches);
+  }
+  if (adapter == null) {
+    final ListView list=getListView();
+    registerForContextMenu(list);
+    list.setLongClickable(true);
+    list.addFooterView(listFooter);
+    adapter=new cgCacheListAdapter(activity,settings,cacheList,base);
+    setListAdapter(adapter);
+  }
+ else {
+    adapter.notifyDataSetChanged();
+  }
+  if (adapter != null && geo != null) {
+    adapter.setActualCoordinates(geo.latitudeNow,geo.longitudeNow);
+  }
+  if (adapter != null && dir != null) {
+    adapter.setActualHeading(dir.directionNow);
+  }
+}

@@ -1,0 +1,41 @@
+{
+  final int menuItem=item.getItemId();
+  if (menuItem == MENU_ID_MAP) {
+    showOnMap();
+    return true;
+  }
+ else   if (menuItem == MENU_ID_COMPASS) {
+    goCompass(null);
+    return true;
+  }
+ else   if (menuItem == MENU_ID_RADAR) {
+    radarTo();
+    return true;
+  }
+ else   if (menuItem == MENU_ID_TURNBYTURN) {
+    if (geo != null) {
+      base.runNavigation(activity,res,settings,warning,tracker,waypoint.latitude,waypoint.longitude,geo.latitudeNow,geo.longitudeNow);
+    }
+ else {
+      base.runNavigation(activity,res,settings,warning,tracker,waypoint.latitude,waypoint.longitude);
+    }
+    return true;
+  }
+ else   if (menuItem == MENU_ID_CACHES_AROUND) {
+    cachesAround();
+    return true;
+  }
+ else   if (menuItem == MENU_ID_LOCUS) {
+    base.runExternalMap(cgBase.mapAppLocus,activity,res,warning,tracker,waypoint);
+    return true;
+  }
+ else   if (menuItem == MENU_ID_RMAPS) {
+    base.runExternalMap(cgBase.mapAppRmaps,activity,res,warning,tracker,waypoint);
+    return true;
+  }
+ else   if (menuItem == MENU_ID_EXTERN) {
+    base.runExternalMap(cgBase.mapAppAny,activity,res,warning,tracker,waypoint);
+    return true;
+  }
+  return false;
+}

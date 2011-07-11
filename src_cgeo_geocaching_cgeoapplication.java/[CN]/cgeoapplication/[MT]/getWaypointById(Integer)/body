@@ -1,0 +1,9 @@
+{
+  if (id == null || id == 0) {
+    return null;
+  }
+  if (storage == null) {
+    storage=new cgData(this);
+  }
+  return storage.loadWaypoint(id);
+}

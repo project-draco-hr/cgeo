@@ -1,0 +1,18 @@
+{
+  init();
+  if (geocode == null || geocode.length() == 0) {
+    return false;
+  }
+  try {
+    ContentValues values=new ContentValues();
+    values.put("found",1);
+    int rows=databaseRW.update(dbTableCaches,values,"geocode = \"" + geocode + "\"",null);
+    if (rows > 0) {
+      return true;
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgData.markFound: " + e.toString());
+  }
+  return false;
+}

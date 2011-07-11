@@ -1,0 +1,41 @@
+{
+  try {
+    if (getSelectMode() == true) {
+      return false;
+    }
+    if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
+      return false;
+    }
+    if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
+      if (cache.statusChecked == true) {
+        return true;
+      }
+      if (holder != null && holder.oneInfo != null) {
+        checkChecked(+1);
+        holder.checkbox.setChecked(true);
+        cache.statusChecked=true;
+        moveRight(holder,cache,false);
+      }
+      return true;
+    }
+ else     if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
+      if (cache.statusChecked == false) {
+        return true;
+      }
+      if (holder != null && holder.oneInfo != null) {
+        if (getSelectMode() == true) {
+          setSelectMode(false,false);
+        }
+        checkChecked(-1);
+        holder.checkbox.setChecked(false);
+        cache.statusChecked=false;
+        moveLeft(holder,cache,false);
+      }
+      return true;
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgCacheListAdapter.detectGesture.onFling: " + e.toString());
+  }
+  return false;
+}

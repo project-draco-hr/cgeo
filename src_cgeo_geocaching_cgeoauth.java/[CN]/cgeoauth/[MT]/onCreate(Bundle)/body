@@ -1,0 +1,21 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  app.setAction("setting up");
+  prefs=getSharedPreferences(cgSettings.preferences,0);
+  settings=new cgSettings(this,prefs);
+  base=new cgBase(app,settings,prefs);
+  warning=new cgWarning(this);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.auth);
+  base.setTitle(activity,res.getString(R.string.auth_twitter));
+  base.sendAnal(activity,"/auth");
+  init();
+}

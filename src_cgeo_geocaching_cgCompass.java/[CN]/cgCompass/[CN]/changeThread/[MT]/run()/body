@@ -1,0 +1,101 @@
+{
+  while (wantStop == false) {
+    try {
+      sleep(50);
+    }
+ catch (    Exception e) {
+    }
+    if (Math.abs(azimuth - northHeading) < 2 && Math.abs(heading - cacheHeading) < 2) {
+      continue;
+    }
+    lock=true;
+    Double diff=new Double(0);
+    Double diffAbs=new Double(0);
+    Double tempAzimuth=new Double(0);
+    Double tempHeading=new Double(0);
+    Double actualAzimuth=azimuth;
+    Double actualHeading=heading;
+    diff=northHeading - actualAzimuth;
+    diffAbs=Math.abs(northHeading - actualAzimuth);
+    if (diff < 0) {
+      diff=diff + 360;
+    }
+ else     if (diff >= 360) {
+      diff=diff - 360;
+    }
+    if (diff > 0 && diff <= 180) {
+      if (diffAbs > 5) {
+        tempAzimuth=actualAzimuth + 2;
+      }
+ else       if (diffAbs > 1) {
+        tempAzimuth=actualAzimuth + 1;
+      }
+ else {
+        tempAzimuth=actualAzimuth;
+      }
+    }
+ else     if (diff > 180 && diff < 360) {
+      if (diffAbs > 5) {
+        tempAzimuth=actualAzimuth - 2;
+      }
+ else       if (diffAbs > 1) {
+        tempAzimuth=actualAzimuth - 1;
+      }
+ else {
+        tempAzimuth=actualAzimuth;
+      }
+    }
+ else {
+      tempAzimuth=actualAzimuth;
+    }
+    diff=cacheHeading - actualHeading;
+    diffAbs=Math.abs(cacheHeading - actualHeading);
+    if (diff < 0) {
+      diff=diff + 360;
+    }
+ else     if (diff >= 360) {
+      diff=diff - 360;
+    }
+    if (diff > 0 && diff <= 180) {
+      if (diffAbs > 5) {
+        tempHeading=actualHeading + 2;
+      }
+ else       if (diffAbs > 1) {
+        tempHeading=actualHeading + 1;
+      }
+ else {
+        tempHeading=actualHeading;
+      }
+    }
+ else     if (diff > 180 && diff < 360) {
+      if (diffAbs > 5) {
+        tempHeading=actualHeading - 2;
+      }
+ else       if (diffAbs > 1) {
+        tempHeading=actualHeading - 1;
+      }
+ else {
+        tempHeading=actualHeading;
+      }
+    }
+ else {
+      tempHeading=actualHeading;
+    }
+    if (tempAzimuth >= 360) {
+      tempAzimuth=tempAzimuth - 360;
+    }
+ else     if (tempAzimuth < 0) {
+      tempAzimuth=tempAzimuth + 360;
+    }
+    if (tempHeading >= 360) {
+      tempHeading=tempHeading - 360;
+    }
+ else     if (tempHeading < 0) {
+      tempHeading=tempHeading + 360;
+    }
+    azimuth=tempAzimuth;
+    heading=tempHeading;
+    lock=false;
+    changeHandler.sendMessage(new Message());
+  }
+}

@@ -1,0 +1,20 @@
+{
+  if (cache == null || cache.latitude == null || cache.longitude == null) {
+    return;
+  }
+  BitmapDrawable image=null;
+  try {
+    final String latlonMap=String.format((Locale)null,"%.6f",cache.latitude) + "," + String.format((Locale)null,"%.6f",cache.longitude);
+    final Display display=((WindowManager)activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+    int width=display.getWidth();
+    int height=(int)(90 * pixelRatio);
+    String markerUrl=cgBase.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
+    cgHtmlImg mapGetter=new cgHtmlImg(activity,settings,cache.geocode,false,0,false);
+    image=mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=15&size="+ width+ "x"+ height+ "&maptype=terrain&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ "&sensor=false");
+    Message message=handler.obtainMessage(0,image);
+    handler.sendMessage(message);
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgeodetail.loadMapPreview.run: " + e.toString());
+  }
+}

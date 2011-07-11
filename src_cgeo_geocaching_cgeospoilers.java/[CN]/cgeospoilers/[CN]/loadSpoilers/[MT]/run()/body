@@ -1,0 +1,9 @@
+{
+  try {
+    spoilers=app.loadSpoilers(geocode);
+    loadSpoilersHandler.sendMessage(new Message());
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgeospoilers.loadSpoilers.run: " + e.toString());
+  }
+}

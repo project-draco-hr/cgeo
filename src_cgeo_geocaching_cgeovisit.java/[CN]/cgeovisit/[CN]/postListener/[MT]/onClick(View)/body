@@ -1,0 +1,12 @@
+{
+  if (gettingViewstate == false) {
+    waitDialog=ProgressDialog.show(activity,null,res.getString(R.string.log_saving),true);
+    waitDialog.setCancelable(true);
+    String log=((EditText)findViewById(R.id.log)).getText().toString();
+    Thread thread=new postLog(postLogHandler,log);
+    thread.start();
+  }
+ else {
+    warning.showToast(res.getString(R.string.err_log_load_data_still));
+  }
+}

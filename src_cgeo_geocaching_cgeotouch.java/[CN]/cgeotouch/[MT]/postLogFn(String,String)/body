@@ -1,0 +1,16 @@
+{
+  int status=-1;
+  try {
+    if (tweetBox == null)     tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
+    if (tweetCheck == null)     tweetCheck=(CheckBox)findViewById(R.id.tweet);
+    status=base.postLogTrackable(guid,tracking,viewstate,viewstate1,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log);
+    if (status == 1 && settings.twitter == 1 && settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null && settings.tokenSecret.length() > 0 && tweetCheck.isChecked() == true && tweetBox.getVisibility() == View.VISIBLE) {
+      base.postTweetTrackable(app,settings,geocode);
+    }
+    return status;
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgeotouch.postLogFn: " + e.toString());
+  }
+  return 1000;
+}

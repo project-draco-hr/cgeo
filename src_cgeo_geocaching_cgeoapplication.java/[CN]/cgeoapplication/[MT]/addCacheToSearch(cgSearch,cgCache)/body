@@ -1,0 +1,23 @@
+{
+  if (search == null || cache == null) {
+    return false;
+  }
+  final long searchId=search.getCurrentId();
+  if (searches.containsKey(searchId) == false) {
+    searches.put(searchId,search);
+  }
+  String geocode=cache.geocode.toUpperCase();
+  String guid=cache.guid.toLowerCase();
+  boolean status=false;
+  if (storage.isThere(geocode,guid,false,false) == false || cache.reason >= 1) {
+    status=storage.saveCache(cache);
+  }
+ else {
+    cgCache mergedCache=cache.merge(storage);
+    status=storage.saveCache(mergedCache);
+  }
+  if (status == true) {
+    search.addGeocode(cache.geocode);
+  }
+  return status;
+}

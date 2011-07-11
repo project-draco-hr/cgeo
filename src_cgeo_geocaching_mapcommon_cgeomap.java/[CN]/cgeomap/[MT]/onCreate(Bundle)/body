@@ -1,0 +1,103 @@
+{
+  super.onCreate(savedInstanceState);
+  res=this.getResources();
+  activity=this.getActivity();
+  app=(cgeoapplication)activity.getApplication();
+  app.setAction(null);
+  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(activity);
+  prefsEdit=activity.getSharedPreferences(cgSettings.preferences,0).edit();
+  MapFactory mapFactory=settings.getMapFactory();
+  noMapTokenShowed=false;
+  activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+  if (settings.skin == 1) {
+    activity.setTheme(R.style.light);
+  }
+ else {
+    activity.setTheme(R.style.dark);
+  }
+  activity.setContentView(settings.getMapFactory().getMapLayoutId());
+  base.setTitle(activity,res.getString(R.string.map_map));
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  if (settings.useCompass == 1 && dir == null) {
+    dir=app.startDir(activity,dirUpdate,warning);
+  }
+  mapView=(MapViewImpl)activity.findViewById(mapFactory.getMapViewId());
+  mapView.setMapSource(settings);
+  if (!mapView.needsScaleOverlay()) {
+    mapView.setBuiltinScale(true);
+  }
+  if (settings.maptype == cgSettings.mapSatellite) {
+    mapView.setSatellite(true);
+  }
+ else {
+    mapView.setSatellite(false);
+  }
+  mapView.setBuiltInZoomControls(true);
+  mapView.displayZoomControls(true);
+  mapView.preLoad();
+  mapView.clearOverlays();
+  if (overlayMyLoc == null) {
+    overlayMyLoc=new cgMapMyOverlay(settings);
+    mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayMyLoc));
+  }
+  if (settings.publicLoc > 0 && overlayUsers == null) {
+    overlayUsers=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
+  }
+  if (overlayCaches == null) {
+    overlayCaches=mapView.createAddMapOverlay(settings,mapView.getContext(),getResources().getDrawable(R.drawable.marker),fromDetailIntent);
+  }
+  if (overlayScale == null && mapView.needsScaleOverlay()) {
+    overlayScale=new cgOverlayScale(activity,settings);
+    mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayScale));
+  }
+  mapView.invalidate();
+  mapController=mapView.getMapController();
+  mapController.setZoom(settings.mapzoom);
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
+  if (dir != null) {
+    dirUpdate.updateDir(dir);
+  }
+  Bundle extras=activity.getIntent().getExtras();
+  if (extras != null) {
+    fromDetailIntent=extras.getBoolean("detail");
+    searchIdIntent=extras.getLong("searchid");
+    geocodeIntent=extras.getString("geocode");
+    latitudeIntent=extras.getDouble("latitude");
+    longitudeIntent=extras.getDouble("longitude");
+    waypointTypeIntent=extras.getString("wpttype");
+    if (searchIdIntent == 0l) {
+      searchIdIntent=null;
+    }
+    if (latitudeIntent == 0.0) {
+      latitudeIntent=null;
+    }
+    if (longitudeIntent == 0.0) {
+      longitudeIntent=null;
+    }
+  }
+  if (searchIdIntent == null && geocodeIntent == null && (latitudeIntent == null || longitudeIntent == null)) {
+    live=true;
+  }
+ else {
+    live=false;
+  }
+  if (live) {
+    base.sendAnal(activity,"/map/live");
+    followMyLocation=true;
+  }
+ else {
+    base.sendAnal(activity,"/map/normal");
+    followMyLocation=false;
+    if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null)) {
+      centerMap(geocodeIntent,searchIdIntent,latitudeIntent,longitudeIntent);
+    }
+  }
+  setMyLoc(null);
+  startTimer();
+}

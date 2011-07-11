@@ -1,0 +1,7 @@
+{
+  init();
+  if (geocode == null || geocode.length() == 0) {
+    return;
+  }
+  databaseRW.delete(dbTableLogsOffline,"geocode = \"" + geocode + "\"",null);
+}

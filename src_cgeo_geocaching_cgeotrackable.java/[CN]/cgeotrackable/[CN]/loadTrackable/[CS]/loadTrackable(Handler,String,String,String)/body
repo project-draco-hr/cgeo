@@ -1,0 +1,12 @@
+{
+  handler=handlerIn;
+  geocode=geocodeIn;
+  guid=guidIn;
+  id=idIn;
+  if (geocode == null && guid == null && id == null) {
+    warning.showToast(res.getString(R.string.err_tb_forgot));
+    stop();
+    finish();
+    return;
+  }
+}

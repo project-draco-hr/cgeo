@@ -1,0 +1,31 @@
+{
+  detailProgress=0;
+  getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+  base.showProgress(activity,false);
+  waitDialog=new ProgressDialog(this);
+  waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
+    public void onCancel(    DialogInterface arg0){
+      try {
+        if (threadW != null) {
+          threadW.kill();
+        }
+        if (geo == null) {
+          geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+        }
+        if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
+          dir=app.startDir(activity,dirUpdate,warning);
+        }
+      }
+ catch (      Exception e) {
+        Log.e(cgSettings.tag,"cgeocaches.importWeb.onCancel: " + e.toString());
+      }
+    }
+  }
+);
+  waitDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+  waitDialog.setMessage(res.getString(R.string.web_import_waiting));
+  waitDialog.setCancelable(true);
+  waitDialog.show();
+  threadW=new geocachesLoadFromWeb(downloadFromWebHandler,listId);
+  threadW.start();
+}

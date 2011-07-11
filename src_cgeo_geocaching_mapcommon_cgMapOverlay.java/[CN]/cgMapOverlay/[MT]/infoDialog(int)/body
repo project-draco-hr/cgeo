@@ -1,0 +1,86 @@
+{
+  final CacheOverlayItemImpl item=items.get(index);
+  final cgCoord coordinate=item.getCoord();
+  if (coordinate == null) {
+    Log.e(cgSettings.tag,"cgMapOverlay:infoDialog: No coordinates given");
+    return;
+  }
+  try {
+    AlertDialog.Builder dialog=new AlertDialog.Builder(context);
+    dialog.setCancelable(true);
+    if (coordinate.type.equalsIgnoreCase("cache")) {
+      dialog.setTitle("cache");
+      String cacheType;
+      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec) == true) {
+        cacheType=cgBase.cacheTypesInv.get(coordinate.typeSpec);
+      }
+ else {
+        cacheType=cgBase.cacheTypesInv.get("mystery");
+      }
+      dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.geocode.toUpperCase()+ "\ntype: "+ cacheType);
+      if (fromDetail == false) {
+        dialog.setPositiveButton("detail",new DialogInterface.OnClickListener(){
+          public void onClick(          DialogInterface dialog,          int id){
+            Intent cachesIntent=new Intent(context,cgeodetail.class);
+            cachesIntent.putExtra("geocode",coordinate.geocode.toUpperCase());
+            context.startActivity(cachesIntent);
+            dialog.cancel();
+          }
+        }
+);
+      }
+ else {
+        dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
+          public void onClick(          DialogInterface dialog,          int id){
+            cgeonavigate navigateActivity=new cgeonavigate();
+            cgeonavigate.coordinates=new ArrayList<cgCoord>();
+            cgeonavigate.coordinates.add(coordinate);
+            Intent navigateIntent=new Intent(context,navigateActivity.getClass());
+            navigateIntent.putExtra("latitude",coordinate.latitude);
+            navigateIntent.putExtra("longitude",coordinate.longitude);
+            navigateIntent.putExtra("geocode",coordinate.geocode.toUpperCase());
+            context.startActivity(navigateIntent);
+            dialog.cancel();
+          }
+        }
+);
+      }
+    }
+ else {
+      dialog.setTitle("waypoint");
+      String waypointType;
+      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec) == true) {
+        waypointType=cgBase.waypointTypes.get(coordinate.typeSpec);
+      }
+ else {
+        waypointType=cgBase.waypointTypes.get("waypoint");
+      }
+      dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointType);
+      dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
+        public void onClick(        DialogInterface dialog,        int id){
+          cgeonavigate navigateActivity=new cgeonavigate();
+          cgeonavigate.coordinates=new ArrayList<cgCoord>();
+          cgeonavigate.coordinates.add(coordinate);
+          Intent navigateIntent=new Intent(context,navigateActivity.getClass());
+          navigateIntent.putExtra("latitude",coordinate.latitude);
+          navigateIntent.putExtra("longitude",coordinate.longitude);
+          navigateIntent.putExtra("geocode",coordinate.name);
+          context.startActivity(navigateIntent);
+          dialog.cancel();
+        }
+      }
+);
+    }
+    dialog.setNegativeButton("dismiss",new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int id){
+        dialog.cancel();
+      }
+    }
+);
+    AlertDialog alert=dialog.create();
+    alert.show();
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgMapOverlay.infoDialog: " + e.toString());
+  }
+}

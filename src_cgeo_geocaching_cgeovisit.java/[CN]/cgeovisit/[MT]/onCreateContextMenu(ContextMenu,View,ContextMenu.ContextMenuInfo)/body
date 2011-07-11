@@ -1,0 +1,28 @@
+{
+  super.onCreateContextMenu(menu,view,info);
+  final int viewId=view.getId();
+  if (viewId == R.id.type) {
+    for (    final int typeOne : types) {
+      menu.add(viewId,typeOne,0,cgBase.logTypes2.get(typeOne));
+      Log.w(cgSettings.tag,"Addig " + typeOne + " "+ cgBase.logTypes2.get(typeOne));
+    }
+  }
+ else   if (viewId == R.id.changebutton) {
+    final int textId=((TextView)findViewById(viewId)).getId();
+    menu.setHeaderTitle(res.getString(R.string.log_tb_changeall));
+    for (    final int logTbAction : cgBase.logTypesTrackable.keySet()) {
+      menu.add(textId,logTbAction,0,cgBase.logTypesTrackable.get(logTbAction));
+    }
+  }
+ else {
+    final int realViewId=((LinearLayout)findViewById(viewId)).getId();
+    for (    final cgTrackableLog tb : trackables) {
+      if (tb.id == realViewId) {
+        menu.setHeaderTitle(tb.name);
+      }
+    }
+    for (    final int logTbAction : cgBase.logTypesTrackable.keySet()) {
+      menu.add(realViewId,logTbAction,0,cgBase.logTypesTrackable.get(logTbAction));
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  if (cache == null || cache.latitude == null || cache.longitude == null) {
+    warning.showToast(res.getString(R.string.err_location_unknown));
+  }
+  cgeonavigate navigateActivity=new cgeonavigate();
+  Intent navigateIntent=new Intent(activity,navigateActivity.getClass());
+  navigateIntent.putExtra("latitude",cache.latitude);
+  navigateIntent.putExtra("longitude",cache.longitude);
+  navigateIntent.putExtra("geocode",cache.geocode.toUpperCase());
+  navigateIntent.putExtra("name",cache.name);
+  if (cgeonavigate.coordinates != null) {
+    cgeonavigate.coordinates.clear();
+  }
+  cgeonavigate.coordinates=getCoordinates();
+  activity.startActivity(navigateIntent);
+}

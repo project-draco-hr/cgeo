@@ -1,0 +1,46 @@
+{
+  if (distance == null) {
+    return "?";
+  }
+  if (settings.units == cgSettings.unitsImperial) {
+    distance*=kmInMiles;
+    if (distance > 100) {
+      return String.format(Locale.getDefault(),"%.0f",new Double(Math.round(distance))) + " mi";
+    }
+ else     if (distance > 0.5) {
+      return String.format(Locale.getDefault(),"%.1f",new Double(Math.round(distance * 10.0) / 10.0)) + " mi";
+    }
+ else     if (distance > 0.1) {
+      return String.format(Locale.getDefault(),"%.2f",new Double(Math.round(distance * 100.0) / 100.0)) + " mi";
+    }
+ else     if (distance > 0.05) {
+      return String.format(Locale.getDefault(),"%.0f",new Double(Math.round(distance * 5280.0))) + " ft";
+    }
+ else     if (distance > 0.01) {
+      return String.format(Locale.getDefault(),"%.1f",new Double(Math.round(distance * 5280 * 10.0) / 10.0)) + " ft";
+    }
+ else {
+      return String.format(Locale.getDefault(),"%.2f",new Double(Math.round(distance * 5280 * 100.0) / 100.0)) + " ft";
+    }
+  }
+ else {
+    if (distance > 100) {
+      return String.format(Locale.getDefault(),"%.0f",new Double(Math.round(distance))) + " km";
+    }
+ else     if (distance > 10) {
+      return String.format(Locale.getDefault(),"%.1f",new Double(Math.round(distance * 10.0) / 10.0)) + " km";
+    }
+ else     if (distance > 1) {
+      return String.format(Locale.getDefault(),"%.2f",new Double(Math.round(distance * 100.0) / 100.0)) + " km";
+    }
+ else     if (distance > 0.1) {
+      return String.format(Locale.getDefault(),"%.0f",new Double(Math.round(distance * 1000.0))) + " m";
+    }
+ else     if (distance > 0.01) {
+      return String.format(Locale.getDefault(),"%.1f",new Double(Math.round(distance * 1000.0 * 10.0) / 10.0)) + " m";
+    }
+ else {
+      return String.format(Locale.getDefault(),"%.2f",new Double(Math.round(distance * 1000.0 * 100.0) / 100.0)) + " m";
+    }
+  }
+}

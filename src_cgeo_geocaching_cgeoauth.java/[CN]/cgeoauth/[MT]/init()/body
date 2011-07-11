@@ -1,0 +1,18 @@
+{
+  startButton=(Button)findViewById(R.id.start);
+  pinEntry=(EditText)findViewById(R.id.pin);
+  pinEntryButton=(Button)findViewById(R.id.pin_button);
+  OAtoken=prefs.getString("temp-token-public",null);
+  OAtokenSecret=prefs.getString("temp-token-secret",null);
+  startButton.setEnabled(true);
+  startButton.setOnClickListener(new startListener());
+  if (OAtoken == null || OAtoken.length() == 0 || OAtokenSecret == null || OAtokenSecret.length() == 0) {
+    startButton.setText(res.getString(R.string.auth_start));
+  }
+ else {
+    startButton.setText(res.getString(R.string.auth_again));
+    pinEntry.setVisibility(View.VISIBLE);
+    pinEntryButton.setVisibility(View.VISIBLE);
+    pinEntryButton.setOnClickListener(new confirmPINListener());
+  }
+}

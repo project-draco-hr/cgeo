@@ -1,0 +1,12 @@
+{
+  int checked=adapter.getChecked();
+  if (checked > 0) {
+    final ArrayList<cgCache> cacheListTemp=(ArrayList<cgCache>)cacheList.clone();
+    for (    cgCache cache : cacheListTemp) {
+      if (cache.statusChecked != false) {
+        app.moveToList(cache.geocode,listId);
+      }
+    }
+  }
+  handler.sendEmptyMessage(listId);
+}

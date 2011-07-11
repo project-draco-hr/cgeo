@@ -1,0 +1,9 @@
+{
+  List<cgCache> itemsToRemove=new ArrayList<cgCache>();
+  for (  cgCache item : list) {
+    if (!applyFilter(item)) {
+      itemsToRemove.add(item);
+    }
+  }
+  list.removeAll(itemsToRemove);
+}

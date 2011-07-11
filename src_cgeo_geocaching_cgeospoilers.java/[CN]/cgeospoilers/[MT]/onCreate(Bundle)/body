@@ -1,0 +1,34 @@
+{
+  super.onCreate(savedInstanceState);
+  activity=this;
+  res=this.getResources();
+  app=(cgeoapplication)this.getApplication();
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  if (settings.skin == 1) {
+    setTheme(R.style.light);
+  }
+ else {
+    setTheme(R.style.dark);
+  }
+  setContentView(R.layout.spoilers);
+  base.setTitle(activity,res.getString(R.string.cache_spoiler_images_title));
+  base.sendAnal(activity,"/spoilers");
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    geocode=extras.getString("geocode");
+  }
+  if (geocode == null) {
+    warning.showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
+    finish();
+    return;
+  }
+  inflater=activity.getLayoutInflater();
+  if (spoilerView == null) {
+    spoilerView=(LinearLayout)findViewById(R.id.spoiler_list);
+  }
+  waitDialog=ProgressDialog.show(this,null,res.getString(R.string.cache_spoiler_images_loading),true);
+  waitDialog.setCancelable(true);
+  (new loadSpoilers()).start();
+}

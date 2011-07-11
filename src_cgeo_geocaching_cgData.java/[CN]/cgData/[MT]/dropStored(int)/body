@@ -1,0 +1,36 @@
+{
+  init();
+  Cursor cursor=null;
+  ArrayList<String> geocodes=new ArrayList<String>();
+  try {
+    cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},"reason = " + listId,null,null,null,null,null);
+    if (cursor != null) {
+      if (cursor.getCount() > 0) {
+        cursor.moveToFirst();
+        do {
+          geocodes.add("\"" + (String)cursor.getString(cursor.getColumnIndex("geocode")) + "\"");
+        }
+ while (cursor.moveToNext());
+      }
+ else {
+        cursor.close();
+        return;
+      }
+      cursor.close();
+    }
+    if (geocodes.size() > 0) {
+      databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in ("+ cgBase.implode(", ",geocodes.toArray())+ ")");
+      databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in ("+ cgBase.implode(", ",geocodes.toArray())+ ")");
+      databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in ("+ cgBase.implode(", ",geocodes.toArray())+ ")");
+      databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in ("+ cgBase.implode(", ",geocodes.toArray())+ ")");
+      databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in ("+ cgBase.implode(", ",geocodes.toArray())+ ")");
+      databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in ("+ cgBase.implode(", ",geocodes.toArray())+ ")");
+      databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in ("+ cgBase.implode(", ",geocodes.toArray())+ ") and type <> \"own\"");
+      databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in ("+ cgBase.implode(", ",geocodes.toArray())+ ")");
+      geocodes.clear();
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgData.dropStored: " + e.toString());
+  }
+}

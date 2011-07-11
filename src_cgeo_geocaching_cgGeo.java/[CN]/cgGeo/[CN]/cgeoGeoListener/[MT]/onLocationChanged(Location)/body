@@ -1,0 +1,10 @@
+{
+  if (location.getProvider().equals(LocationManager.GPS_PROVIDER) == true) {
+    locGps=location;
+    locGpsLast=System.currentTimeMillis();
+  }
+ else   if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER) == true) {
+    locNet=location;
+  }
+  selectBest(location.getProvider());
+}

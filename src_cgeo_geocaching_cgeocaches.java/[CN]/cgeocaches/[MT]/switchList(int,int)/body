@@ -1,0 +1,29 @@
+{
+  cgList list=null;
+  if (id >= 0) {
+    list=app.getList(id);
+  }
+ else   if (order >= 0) {
+    lists=app.getLists();
+    list=lists.get(order);
+  }
+ else {
+    return;
+  }
+  if (list == null) {
+    return;
+  }
+  listId=list.id;
+  title=list.title;
+  settings.saveLastList(listId);
+  base.showProgress(activity,true);
+  setLoadingCaches();
+  Handler handlerMove=new Handler(){
+    @Override public void handleMessage(    Message msg){
+      Thread threadPure=new geocachesLoadByOffline(loadCachesHandler,latitude,longitude,msg.what);
+      threadPure.start();
+    }
+  }
+;
+  (new moveCachesToList(listId,handlerMove)).start();
+}

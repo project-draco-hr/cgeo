@@ -1,0 +1,13 @@
+{
+  while (!Thread.currentThread().isInterrupted()) {
+    if (handler != null) {
+      handler.sendMessage(new Message());
+    }
+    try {
+      Thread.sleep(20);
+    }
+ catch (    Exception e) {
+      Thread.currentThread().interrupt();
+    }
+  }
+}

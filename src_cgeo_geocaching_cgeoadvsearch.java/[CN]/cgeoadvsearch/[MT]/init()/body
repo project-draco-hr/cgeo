@@ -1,0 +1,39 @@
+{
+  settings.getLogin();
+  settings.reloadCacheType();
+  if (settings.cacheType != null && cgBase.cacheTypesInv.containsKey(settings.cacheType) == false) {
+    settings.setCacheType(null);
+  }
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+  }
+  ((EditText)findViewById(R.id.latitude)).setOnEditorActionListener(new findByCoordsAction());
+  ((EditText)findViewById(R.id.longitude)).setOnEditorActionListener(new findByCoordsAction());
+  final Button findByCoords=(Button)findViewById(R.id.search_coordinates);
+  findByCoords.setOnClickListener(new findByCoordsListener());
+  ((EditText)findViewById(R.id.address)).setOnEditorActionListener(new findByAddressAction());
+  final Button findByAddress=(Button)findViewById(R.id.search_address);
+  findByAddress.setOnClickListener(new findByAddressListener());
+  final AutoCompleteTextView geocodeEdit=(AutoCompleteTextView)findViewById(R.id.geocode);
+  geocodeEdit.setOnEditorActionListener(new findByGeocodeAction());
+  geocodesInCache=app.geocodesInCache();
+  if (geocodesInCache != null) {
+    final ArrayAdapter<String> geocodesAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,geocodesInCache);
+    geocodeEdit.setAdapter(geocodesAdapter);
+  }
+  final Button displayByGeocode=(Button)findViewById(R.id.display_geocode);
+  displayByGeocode.setOnClickListener(new findByGeocodeListener());
+  ((EditText)findViewById(R.id.keyword)).setOnEditorActionListener(new findByKeywordAction());
+  final Button findByKeyword=(Button)findViewById(R.id.search_keyword);
+  findByKeyword.setOnClickListener(new findByKeywordListener());
+  ((EditText)findViewById(R.id.username)).setOnEditorActionListener(new findByUsernameAction());
+  final Button findByUserName=(Button)findViewById(R.id.search_username);
+  findByUserName.setOnClickListener(new findByUsernameListener());
+  ((EditText)findViewById(R.id.owner)).setOnEditorActionListener(new findByOwnerAction());
+  final Button findByOwner=(Button)findViewById(R.id.search_owner);
+  findByOwner.setOnClickListener(new findByOwnerListener());
+  EditText trackable=(EditText)findViewById(R.id.trackable);
+  trackable.setOnEditorActionListener(new findTrackableAction());
+  final Button displayTrackable=(Button)findViewById(R.id.display_trackable);
+  displayTrackable.setOnClickListener(new findTrackableListener());
+}

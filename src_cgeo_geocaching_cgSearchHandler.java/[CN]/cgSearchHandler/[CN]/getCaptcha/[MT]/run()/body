@@ -1,0 +1,14 @@
+{
+  try {
+    HttpURLConnection connection=(HttpURLConnection)uri.openConnection();
+    connection.setDoInput(true);
+    connection.connect();
+    InputStream is=connection.getInputStream();
+    img=BitmapFactory.decodeStream(is);
+    is.close();
+    imgHandler.sendEmptyMessage(0);
+  }
+ catch (  IOException e) {
+    Log.e(cgSettings.tag,"Failed to download reCAPTCHA image");
+  }
+}

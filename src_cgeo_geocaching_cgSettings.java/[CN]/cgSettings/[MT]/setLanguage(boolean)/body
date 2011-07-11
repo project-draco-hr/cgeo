@@ -1,0 +1,9 @@
+{
+  Locale locale=Locale.getDefault();
+  if (useEnglish) {
+    locale=new Locale("en");
+  }
+  Configuration config=new Configuration();
+  config.locale=locale;
+  context.getResources().updateConfiguration(config,context.getResources().getDisplayMetrics());
+}

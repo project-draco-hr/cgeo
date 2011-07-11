@@ -1,0 +1,17 @@
+{
+  if (settings.getSignature() == null) {
+    menu.findItem(LOG_SIGNATURE).setVisible(false);
+    menu.findItem(LOG_SIGNATURE_DATE_TIME).setVisible(false);
+  }
+ else {
+    menu.findItem(LOG_SIGNATURE).setVisible(true);
+    menu.findItem(LOG_SIGNATURE_DATE_TIME).setVisible(true);
+  }
+  if (settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && cache.guid != null && cache.guid.length() > 0) {
+    menu.findItem(9).setVisible(true);
+  }
+ else {
+    menu.findItem(9).setVisible(false);
+  }
+  return true;
+}

@@ -1,0 +1,47 @@
+{
+  if (adapter != null && adapter.getChecked() > 0) {
+    detailTotal=adapter.getChecked();
+  }
+ else {
+    detailTotal=cacheList.size();
+  }
+  detailProgress=0;
+  base.showProgress(activity,false);
+  waitDialog=new ProgressDialog(this);
+  waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
+    public void onCancel(    DialogInterface arg0){
+      try {
+        if (threadD != null) {
+          threadD.kill();
+        }
+        if (geo == null) {
+          geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+        }
+        if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
+          dir=app.startDir(activity,dirUpdate,warning);
+        }
+      }
+ catch (      Exception e) {
+        Log.e(cgSettings.tag,"cgeocaches.onOptionsItemSelected.onCancel: " + e.toString());
+      }
+    }
+  }
+);
+  waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+  int etaTime=(int)((detailTotal * 25) / 60);
+  if (etaTime < 1) {
+    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+  }
+ else   if (etaTime == 1) {
+    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getString(R.string.caches_eta_min));
+  }
+ else {
+    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getString(R.string.caches_eta_mins));
+  }
+  waitDialog.setCancelable(true);
+  waitDialog.setMax(detailTotal);
+  waitDialog.show();
+  detailProgressTime=System.currentTimeMillis();
+  threadD=new geocachesLoadDetails(loadDetailsHandler,listId);
+  threadD.start();
+}

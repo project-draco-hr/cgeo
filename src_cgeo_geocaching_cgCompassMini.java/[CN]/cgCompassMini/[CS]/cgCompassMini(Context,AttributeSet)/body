@@ -1,0 +1,8 @@
+{
+  super(contextIn,attrs);
+  context=contextIn;
+  TypedArray attributes=context.obtainStyledAttributes(attrs,R.styleable.cgCompassMini);
+  int usedSkin=attributes.getInt(R.styleable.cgCompassMini_skin,0);
+  if (usedSkin == 1)   arrowSkin=R.drawable.compass_arrow_mini_black;
+ else   arrowSkin=R.drawable.compass_arrow_mini_white;
+}

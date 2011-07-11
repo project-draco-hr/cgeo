@@ -1,0 +1,193 @@
+{
+  String usernameNow=prefs.getString("username",null);
+  if (usernameNow != null) {
+    ((EditText)findViewById(R.id.username)).setText(usernameNow);
+  }
+  String passwordNow=prefs.getString("password",null);
+  if (usernameNow != null) {
+    ((EditText)findViewById(R.id.password)).setText(passwordNow);
+  }
+  Button logMeIn=(Button)findViewById(R.id.log_me_in);
+  logMeIn.setOnClickListener(new logIn());
+  TextView legalNote=(TextView)findViewById(R.id.legal_note);
+  legalNote.setClickable(true);
+  legalNote.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View arg0){
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
+    }
+  }
+);
+  String passvoteNow=prefs.getString("pass-vote",null);
+  if (passvoteNow != null) {
+    ((EditText)findViewById(R.id.passvote)).setText(passvoteNow);
+  }
+  TextView go4cache=(TextView)findViewById(R.id.about_go4cache);
+  go4cache.setClickable(true);
+  go4cache.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View arg0){
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://go4cache.com/")));
+    }
+  }
+);
+  CheckBox publicButton=(CheckBox)findViewById(R.id.publicloc);
+  if (prefs.getInt("publicloc",0) == 0) {
+    publicButton.setChecked(false);
+  }
+ else {
+    publicButton.setChecked(true);
+  }
+  publicButton.setOnClickListener(new cgeoChangePublic());
+  Button authorizeTwitter=(Button)findViewById(R.id.authorize_twitter);
+  authorizeTwitter.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View arg0){
+      Intent authIntent=new Intent(activity,cgeoauth.class);
+      activity.startActivity(authIntent);
+    }
+  }
+);
+  CheckBox twitterButton=(CheckBox)findViewById(R.id.twitter_option);
+  if (prefs.getInt("twitter",0) == 0 || settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0) {
+    twitterButton.setChecked(false);
+  }
+ else {
+    twitterButton.setChecked(true);
+  }
+  twitterButton.setOnClickListener(new cgeoChangeTwitter());
+  EditText sigEdit=(EditText)findViewById(R.id.signature);
+  if (sigEdit.getText().length() == 0) {
+    sigEdit.setText(settings.getSignature());
+  }
+  Button sigBtn=(Button)findViewById(R.id.signature_help);
+  sigBtn.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      warning.helpDialog(res.getString(R.string.init_signature_help_title),res.getString(R.string.init_signature_help_text));
+    }
+  }
+);
+  CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
+  if (prefs.getInt("skin",0) == 0) {
+    skinButton.setChecked(false);
+  }
+ else {
+    skinButton.setChecked(true);
+  }
+  skinButton.setOnClickListener(new cgeoChangeSkin());
+  CheckBox addressButton=(CheckBox)findViewById(R.id.address);
+  if (prefs.getInt("showaddress",1) == 0) {
+    addressButton.setChecked(false);
+  }
+ else {
+    addressButton.setChecked(true);
+  }
+  addressButton.setOnClickListener(new cgeoChangeAddress());
+  CheckBox captchaButton=(CheckBox)findViewById(R.id.captcha);
+  if (prefs.getBoolean("showcaptcha",false) == false) {
+    captchaButton.setChecked(false);
+  }
+ else {
+    captchaButton.setChecked(true);
+  }
+  captchaButton.setOnClickListener(new cgeoChangeCaptcha());
+  CheckBox useEnglishButton=(CheckBox)findViewById(R.id.useenglish);
+  if (prefs.getBoolean("useenglish",false) == false) {
+    useEnglishButton.setChecked(false);
+  }
+ else {
+    useEnglishButton.setChecked(true);
+  }
+  useEnglishButton.setOnClickListener(new cgeoChangeUseEnglish());
+  CheckBox excludeButton=(CheckBox)findViewById(R.id.exclude);
+  if (prefs.getInt("excludemine",0) == 0) {
+    excludeButton.setChecked(false);
+  }
+ else {
+    excludeButton.setChecked(true);
+  }
+  excludeButton.setOnClickListener(new cgeoChangeExclude());
+  CheckBox disabledButton=(CheckBox)findViewById(R.id.disabled);
+  if (prefs.getInt("excludedisabled",0) == 0) {
+    disabledButton.setChecked(false);
+  }
+ else {
+    disabledButton.setChecked(true);
+  }
+  disabledButton.setOnClickListener(new cgeoChangeDisabled());
+  CheckBox offlineButton=(CheckBox)findViewById(R.id.offline);
+  if (prefs.getInt("offlinemaps",1) == 0) {
+    offlineButton.setChecked(false);
+  }
+ else {
+    offlineButton.setChecked(true);
+  }
+  offlineButton.setOnClickListener(new cgeoChangeOffline());
+  CheckBox autoloadButton=(CheckBox)findViewById(R.id.autoload);
+  if (prefs.getInt("autoloaddesc",0) == 0) {
+    autoloadButton.setChecked(false);
+  }
+ else {
+    autoloadButton.setChecked(true);
+  }
+  autoloadButton.setOnClickListener(new cgeoChangeAutoload());
+  CheckBox livelistButton=(CheckBox)findViewById(R.id.livelist);
+  if (prefs.getInt("livelist",1) == 0) {
+    livelistButton.setChecked(false);
+  }
+ else {
+    livelistButton.setChecked(true);
+  }
+  livelistButton.setOnClickListener(new cgeoChangeLivelist());
+  CheckBox unitsButton=(CheckBox)findViewById(R.id.units);
+  if (prefs.getInt("units",cgSettings.unitsMetric) == cgSettings.unitsMetric) {
+    unitsButton.setChecked(false);
+  }
+ else {
+    unitsButton.setChecked(true);
+  }
+  unitsButton.setOnClickListener(new cgeoChangeUnits());
+  CheckBox gnavButton=(CheckBox)findViewById(R.id.gnav);
+  if (prefs.getInt("usegnav",1) == 1) {
+    gnavButton.setChecked(true);
+  }
+ else {
+    gnavButton.setChecked(false);
+  }
+  gnavButton.setOnClickListener(new cgeoChangeGNav());
+  CheckBox browserButton=(CheckBox)findViewById(R.id.browser);
+  if (prefs.getInt("asbrowser",1) == 0) {
+    browserButton.setChecked(false);
+  }
+ else {
+    browserButton.setChecked(true);
+  }
+  browserButton.setOnClickListener(new cgeoChangeBrowser());
+  EditText altitudeEdit=(EditText)findViewById(R.id.altitude);
+  altitudeEdit.setText("" + prefs.getInt("altcorrection",0));
+  String webDeviceName=prefs.getString("webDeviceName",null);
+  if ((webDeviceName != null) && (webDeviceName.length() > 0)) {
+    ((EditText)findViewById(R.id.webDeviceName)).setText(webDeviceName);
+  }
+ else {
+    String s=android.os.Build.MODEL;
+    ((EditText)findViewById(R.id.webDeviceName)).setText(s);
+  }
+  Button webAuth=(Button)findViewById(R.id.sendToCgeo_register);
+  webAuth.setOnClickListener(new webAuth());
+  Spinner mapSourceSelector=(Spinner)findViewById(R.id.mapsource);
+  ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.map_sources,android.R.layout.simple_spinner_item);
+  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+  mapSourceSelector.setAdapter(adapter);
+  int mapsource=prefs.getInt("mapsource",0);
+  mapSourceSelector.setSelection(mapsource);
+  mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
+  EditText mfmapFileEdit=(EditText)findViewById(R.id.mapfile);
+  mfmapFileEdit.setText(prefs.getString("mfmapfile",""));
+  setMapFileEditState();
+  TextView lastBackup=(TextView)findViewById(R.id.backup_last);
+  File lastBackupFile=app.isRestoreFile();
+  if (lastBackupFile != null) {
+    lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.timeOut.format(lastBackupFile.lastModified())+ ", "+ cgBase.dateOut.format(lastBackupFile.lastModified()));
+  }
+ else {
+    lastBackup.setText(res.getString(R.string.init_backup_last_no));
+  }
+}

@@ -1,0 +1,17 @@
+{
+  if (message == null || message.length() == 0) {
+    return;
+  }
+  AlertDialog.Builder dialog=new AlertDialog.Builder(context);
+  dialog.setTitle(title);
+  dialog.setMessage(message);
+  dialog.setCancelable(true);
+  dialog.setNeutralButton("Ok",new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int id){
+      dialog.cancel();
+    }
+  }
+);
+  AlertDialog alert=dialog.create();
+  alert.show();
+}

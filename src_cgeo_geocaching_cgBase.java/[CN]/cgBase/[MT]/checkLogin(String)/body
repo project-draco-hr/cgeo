@@ -1,0 +1,15 @@
+{
+  if (page == null || page.length() == 0) {
+    Log.e(cgSettings.tag,"cgeoBase.checkLogin: No page given");
+    return false;
+  }
+  final Matcher matcherLogged2In=patternLogged2In.matcher(page);
+  while (matcherLogged2In.find()) {
+    return true;
+  }
+  final Matcher matcherLoggedIn=patternLoggedIn.matcher(page);
+  while (matcherLoggedIn.find()) {
+    return true;
+  }
+  return false;
+}

@@ -1,0 +1,44 @@
+{
+  if (geo == null) {
+    return;
+  }
+  try {
+    StringBuilder dist=new StringBuilder();
+    if (geo.latitudeNow != null && geo.longitudeNow != null && cache != null && cache.latitude != null && cache.longitude != null) {
+      dist.append(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow,geo.longitudeNow,cache.latitude,cache.longitude)));
+    }
+    if (cache.elevation != null) {
+      Double diff=null;
+      if (geo.altitudeNow != null) {
+        diff=(cache.elevation - geo.altitudeNow);
+      }
+      if (diff != null && diff >= 0) {
+        dist.append(" ???");
+        if (settings.units == cgSettings.unitsImperial) {
+          dist.append(String.format(Locale.getDefault(),"%.0f",(Math.abs(diff) * 3.2808399)));
+          dist.append(" ft");
+        }
+ else {
+          dist.append(String.format(Locale.getDefault(),"%.0f",(Math.abs(diff))));
+          dist.append(" m");
+        }
+      }
+ else       if (diff != null && diff < 0) {
+        dist.append(" ???");
+        if (settings.units == cgSettings.unitsImperial) {
+          dist.append(String.format(Locale.getDefault(),"%.0f",(Math.abs(diff) * 3.2808399)));
+          dist.append(" ft");
+        }
+ else {
+          dist.append(String.format(Locale.getDefault(),"%.0f",(Math.abs(diff))));
+          dist.append(" m");
+        }
+      }
+    }
+    cacheDistance.setText(dist.toString());
+    cacheDistance.bringToFront();
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"Failed to update location.");
+  }
+}

@@ -1,0 +1,88 @@
+{
+switch (item.getItemId()) {
+case 0:
+    if (adapter != null) {
+      adapter.switchSelectMode();
+    }
+  return true;
+case 1:
+refreshStored();
+return true;
+case 2:
+showOnMap();
+return false;
+case 3:
+showOnLocus();
+return false;
+case 5:
+dropStored();
+return false;
+case 6:
+importGpx();
+return false;
+case 7:
+createList();
+return false;
+case 8:
+removeList();
+return false;
+case 9:
+if (adapter != null) {
+adapter.invertSelection();
+}
+return false;
+case 10:
+setComparator(item,null);
+return false;
+case 11:
+setComparator(item,new cgCacheDifficultyComparator());
+return false;
+case 12:
+setComparator(item,new cgCacheTerrainComparator());
+return false;
+case 13:
+setComparator(item,new cgCacheSizeComparator());
+return false;
+case 14:
+setComparator(item,new cgCachePopularityComparator());
+return false;
+case 15:
+setComparator(item,new cgCacheNameComparator());
+return false;
+case 16:
+setComparator(item,new cgCacheGeocodeComparator());
+return false;
+case 17:
+selectList(null);
+return false;
+case 18:
+setComparator(item,new cgCacheRatingComparator());
+return false;
+case 19:
+setComparator(item,new cgCacheVoteComparator());
+return false;
+case 20:
+setComparator(item,new cgCacheInventoryComparator());
+return false;
+case 21:
+selectedFilter=res.getString(R.string.caches_filter_type);
+openContextMenu(getListView());
+return false;
+case 22:
+selectedFilter=res.getString(R.string.caches_filter_size);
+openContextMenu(getListView());
+return false;
+case 23:
+adapter.setFilter(new cgFilterByTrackables());
+return false;
+case 24:
+if (adapter != null) {
+adapter.setFilter(null);
+}
+return false;
+case 25:
+importWeb();
+return false;
+}
+return false;
+}

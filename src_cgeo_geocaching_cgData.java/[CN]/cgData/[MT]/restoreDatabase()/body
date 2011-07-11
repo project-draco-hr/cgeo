@@ -1,0 +1,36 @@
+{
+  if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
+    Log.w(cgSettings.tag,"Database wasn't restored: no external memory");
+    return false;
+  }
+  closeDb();
+  try {
+    final String directoryImg=cgSettings.cache;
+    final String fileSource=Environment.getExternalStorageDirectory() + "/" + directoryImg+ "/cgeo.sqlite";
+    final String fileTarget=path;
+    File fileSourceFile=new File(fileSource);
+    if (fileSourceFile.exists() == false) {
+      Log.w(cgSettings.tag,"Database backup was not found");
+      init();
+      return false;
+    }
+    InputStream input=new FileInputStream(fileSource);
+    OutputStream output=new FileOutputStream(fileTarget);
+    byte[] buffer=new byte[1024];
+    int length;
+    while ((length=input.read(buffer)) > 0) {
+      output.write(buffer,0,length);
+    }
+    output.flush();
+    output.close();
+    input.close();
+    Log.i(cgSettings.tag,"Database was restored");
+    init();
+    return true;
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"Database wasn't restored: " + e.toString());
+  }
+  init();
+  return false;
+}

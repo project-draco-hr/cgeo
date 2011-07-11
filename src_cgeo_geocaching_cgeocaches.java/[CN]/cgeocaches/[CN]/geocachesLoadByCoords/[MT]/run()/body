@@ -1,0 +1,8 @@
+{
+  HashMap<String,String> params=new HashMap<String,String>();
+  params.put("latitude",String.format((Locale)null,"%.6f",latitude));
+  params.put("longitude",String.format((Locale)null,"%.6f",longitude));
+  params.put("cachetype",cachetype);
+  searchId=base.searchByCoords(this,params,0,settings.showCaptcha);
+  handler.sendMessage(new Message());
+}

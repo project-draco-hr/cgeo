@@ -1,0 +1,15 @@
+{
+  String log=((EditText)findViewById(R.id.log)).getText().toString();
+  final boolean status=app.saveLogOffline(geocode,date.getTime(),typeSelected,log);
+  if (save == null) {
+    save=(Button)findViewById(R.id.save);
+  }
+  save.setOnClickListener(new saveListener());
+  if (status == true) {
+    warning.showToast(res.getString(R.string.info_log_saved));
+    app.saveVisitDate(geocode);
+  }
+ else {
+    warning.showToast(res.getString(R.string.err_log_post_failed));
+  }
+}

@@ -1,0 +1,21 @@
+{
+  if (requestTokenDialog == null) {
+    requestTokenDialog=new ProgressDialog(activity);
+    requestTokenDialog.setCancelable(false);
+    requestTokenDialog.setMessage(res.getString(R.string.auth_dialog_wait));
+  }
+  requestTokenDialog.show();
+  startButton.setEnabled(false);
+  startButton.setOnTouchListener(null);
+  startButton.setOnClickListener(null);
+  final SharedPreferences.Editor prefs=getSharedPreferences(cgSettings.preferences,0).edit();
+  prefs.putString("temp-token-public",null);
+  prefs.putString("temp-token-secret",null);
+  prefs.commit();
+  (new Thread(){
+    @Override public void run(){
+      requestToken();
+    }
+  }
+).start();
+}

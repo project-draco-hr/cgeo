@@ -1,0 +1,46 @@
+{
+  init();
+  if (geocode == null || geocode.length() == 0) {
+    return null;
+  }
+  Cursor cursor=null;
+  ArrayList<cgWaypoint> waypoints=new ArrayList<cgWaypoint>();
+  cursor=databaseRO.query(dbTableWaypoints,new String[]{"_id","geocode","updated","type","prefix","lookup","name","latlon","latitude_string","longitude_string","latitude","longitude","note"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
+  if (cursor != null && cursor.getCount() > 0) {
+    int index;
+    cursor.moveToFirst();
+    do {
+      cgWaypoint waypoint=new cgWaypoint();
+      waypoint.id=(int)cursor.getInt(cursor.getColumnIndex("_id"));
+      waypoint.geocode=(String)cursor.getString(cursor.getColumnIndex("geocode"));
+      waypoint.type=(String)cursor.getString(cursor.getColumnIndex("type"));
+      waypoint.prefix=(String)cursor.getString(cursor.getColumnIndex("prefix"));
+      waypoint.lookup=(String)cursor.getString(cursor.getColumnIndex("lookup"));
+      waypoint.name=(String)cursor.getString(cursor.getColumnIndex("name"));
+      waypoint.latlon=(String)cursor.getString(cursor.getColumnIndex("latlon"));
+      waypoint.latitudeString=(String)cursor.getString(cursor.getColumnIndex("latitude_string"));
+      waypoint.longitudeString=(String)cursor.getString(cursor.getColumnIndex("longitude_string"));
+      index=cursor.getColumnIndex("latitude");
+      if (cursor.isNull(index) == true) {
+        waypoint.latitude=null;
+      }
+ else {
+        waypoint.latitude=(Double)cursor.getDouble(index);
+      }
+      index=cursor.getColumnIndex("longitude");
+      if (cursor.isNull(index) == true) {
+        waypoint.longitude=null;
+      }
+ else {
+        waypoint.longitude=(Double)cursor.getDouble(index);
+      }
+      waypoint.note=(String)cursor.getString(cursor.getColumnIndex("note"));
+      waypoints.add(waypoint);
+    }
+ while (cursor.moveToNext());
+  }
+  if (cursor != null) {
+    cursor.close();
+  }
+  return waypoints;
+}

@@ -1,0 +1,14 @@
+{
+  if (originalList == null) {
+    originalList=new ArrayList<cgCache>(list);
+  }
+  if (currentFilter != null) {
+    list.clear();
+    list.addAll(originalList);
+  }
+  if (filter != null) {
+    filter.filter(list);
+  }
+  currentFilter=filter;
+  notifyDataSetChanged();
+}

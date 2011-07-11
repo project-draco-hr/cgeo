@@ -1,0 +1,16 @@
+{
+  if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
+    warning.showToast(res.getString(R.string.err_location_unknown));
+  }
+  Intent navigateIntent=new Intent(activity,cgeonavigate.class);
+  navigateIntent.putExtra("latitude",waypoint.latitude);
+  navigateIntent.putExtra("longitude",waypoint.longitude);
+  navigateIntent.putExtra("geocode",waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
+  navigateIntent.putExtra("name",waypoint.name);
+  if (cgeonavigate.coordinates != null) {
+    cgeonavigate.coordinates.clear();
+  }
+  cgeonavigate.coordinates=new ArrayList<cgCoord>();
+  cgeonavigate.coordinates.add(new cgCoord(waypoint));
+  activity.startActivity(navigateIntent);
+}

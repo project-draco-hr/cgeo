@@ -1,0 +1,21 @@
+{
+  waitDialog=new ProgressDialog(this);
+  waitDialog.setMessage(res.getString(R.string.caches_drop_progress));
+  waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
+    public void onCancel(    DialogInterface arg0){
+      try {
+        if (threadR != null) {
+          threadR.kill();
+        }
+      }
+ catch (      Exception e) {
+        Log.e(cgSettings.tag,"cgeocaches.onOptionsItemSelected.onCancel: " + e.toString());
+      }
+    }
+  }
+);
+  waitDialog.setCancelable(true);
+  waitDialog.show();
+  threadR=new geocachesDropDetails(dropDetailsHandler);
+  threadR.start();
+}

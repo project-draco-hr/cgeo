@@ -1,0 +1,56 @@
+{
+  final ArrayList<cgUser> users=new ArrayList<cgUser>();
+  if (username == null) {
+    return users;
+  }
+  if (latMin == null || latMax == null || lonMin == null || lonMax == null) {
+    return users;
+  }
+  final String host="api.go4cache.com";
+  final String path="/get.php";
+  final String method="POST";
+  final HashMap<String,String> params=new HashMap<String,String>();
+  params.put("u",username);
+  params.put("ltm",String.format((Locale)null,"%.6f",latMin));
+  params.put("ltx",String.format((Locale)null,"%.6f",latMax));
+  params.put("lnm",String.format((Locale)null,"%.6f",lonMin));
+  params.put("lnx",String.format((Locale)null,"%.6f",lonMax));
+  final String data=request(false,host,path,method,params,false,false,false).getData();
+  if (data == null || data.length() == 0) {
+    Log.e(cgSettings.tag,"cgeoBase.getGeocachersInViewport: No data from server");
+    return null;
+  }
+  try {
+    final JSONObject dataJSON=new JSONObject(data);
+    final JSONArray usersData=dataJSON.getJSONArray("users");
+    if (usersData != null && usersData.length() > 0) {
+      int count=usersData.length();
+      JSONObject oneUser=null;
+      for (int i=0; i < count; i++) {
+        final cgUser user=new cgUser();
+        oneUser=usersData.getJSONObject(i);
+        if (oneUser != null) {
+          final String located=oneUser.getString("located");
+          if (located != null) {
+            user.located=dateSqlIn.parse(located);
+          }
+ else {
+            user.located=new Date();
+          }
+          user.username=oneUser.getString("user");
+          user.latitude=oneUser.getDouble("latitude");
+          user.longitude=oneUser.getDouble("longitude");
+          user.action=oneUser.getString("action");
+          user.client=oneUser.getString("client");
+          if (user.latitude != null && user.longitude != null) {
+            users.add(user);
+          }
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgBase.getGeocachersInViewport: " + e.toString());
+  }
+  return users;
+}

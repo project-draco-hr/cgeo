@@ -1,0 +1,14 @@
+{
+  if (myLocSwitch == null) {
+    myLocSwitch=(ImageView)activity.findViewById(R.id.my_position);
+  }
+  if (followMyLocation == true) {
+    followMyLocation=false;
+    myLocSwitch.setImageResource(R.drawable.my_location_off);
+  }
+ else {
+    followMyLocation=true;
+    myLocationInMiddle();
+    myLocSwitch.setImageResource(R.drawable.my_location_on);
+  }
+}

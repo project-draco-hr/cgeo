@@ -1,0 +1,8 @@
+{
+  final SharedPreferences.Editor edit=prefs.edit();
+  this.webDeviceCode=code;
+  this.webDeviceName=name;
+  edit.putString("webDeviceName",name);
+  edit.putString("webDeviceCode",code);
+  edit.commit();
+}

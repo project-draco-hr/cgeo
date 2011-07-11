@@ -1,0 +1,17 @@
+{
+  if (dropDialog != null && dropDialog.isShowing() == true) {
+    warning.showToast(res.getString(R.string.err_detail_still_removing));
+    return;
+  }
+  if (refreshDialog != null && refreshDialog.isShowing() == true) {
+    warning.showToast(res.getString(R.string.err_detail_still_refreshing));
+    return;
+  }
+  storeDialog=ProgressDialog.show(activity,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true);
+  storeDialog.setCancelable(true);
+  if (storeThread != null) {
+    storeThread.interrupt();
+  }
+  storeThread=new storeCacheThread(storeCacheHandler);
+  storeThread.start();
+}

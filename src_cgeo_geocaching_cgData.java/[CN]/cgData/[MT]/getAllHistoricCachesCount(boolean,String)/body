@@ -1,0 +1,12 @@
+{
+  init();
+  int count=0;
+  try {
+    SQLiteStatement sqlCount=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where visiteddate > 0");
+    count=(int)sqlCount.simpleQueryForLong();
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgData.getAllHistoricCachesCount: " + e.toString());
+  }
+  return count;
+}

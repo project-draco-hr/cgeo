@@ -1,0 +1,10 @@
+{
+  if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
+    warning.showToast(res.getString(R.string.err_location_unknown));
+  }
+  Intent mapIntent=new Intent(activity,settings.getMapFactory().getMapClass());
+  mapIntent.putExtra("latitude",waypoint.latitude);
+  mapIntent.putExtra("longitude",waypoint.longitude);
+  mapIntent.putExtra("wpttype",waypoint.type);
+  activity.startActivity(mapIntent);
+}

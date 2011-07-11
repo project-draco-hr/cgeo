@@ -1,0 +1,39 @@
+{
+  String usernameNew=((EditText)findViewById(R.id.username)).getText().toString();
+  String passwordNew=((EditText)findViewById(R.id.password)).getText().toString();
+  String passvoteNew=((EditText)findViewById(R.id.passvote)).getText().toString();
+  String signatureNew=((EditText)findViewById(R.id.signature)).getText().toString();
+  String altitudeNew=((EditText)findViewById(R.id.altitude)).getText().toString();
+  String mfmapFileNew=((EditText)findViewById(R.id.mapfile)).getText().toString();
+  if (usernameNew == null) {
+    usernameNew="";
+  }
+  if (passwordNew == null) {
+    passwordNew="";
+  }
+  if (passvoteNew == null) {
+    passvoteNew="";
+  }
+  if (signatureNew == null) {
+    signatureNew="";
+  }
+  int altitudeNewInt=0;
+  if (altitudeNew == null) {
+    altitudeNewInt=0;
+  }
+ else {
+    altitudeNewInt=new Integer(altitudeNew);
+  }
+  if (mfmapFileNew == null) {
+    mfmapFileNew="";
+  }
+  final boolean status1=settings.setLogin(usernameNew,passwordNew);
+  final boolean status2=settings.setGCvoteLogin(passvoteNew);
+  final boolean status3=settings.setSignature(signatureNew);
+  final boolean status4=settings.setAltCorrection(altitudeNewInt);
+  final boolean status5=settings.setMapFile(mfmapFileNew);
+  if (status1 && status2 && status3&& status4&& status5) {
+    return true;
+  }
+  return false;
+}

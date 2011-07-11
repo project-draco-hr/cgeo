@@ -1,0 +1,22 @@
+{
+  init();
+  if (geocode == null || geocode.length() == 0) {
+    return null;
+  }
+  Cursor cursor=null;
+  HashMap<Integer,Integer> logCounts=new HashMap<Integer,Integer>();
+  cursor=databaseRO.query(dbTableLogCount,new String[]{"_id","type","count"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
+  if (cursor != null && cursor.getCount() > 0) {
+    cursor.moveToFirst();
+    do {
+      Integer type=new Integer(cursor.getInt(cursor.getColumnIndex("type")));
+      Integer count=new Integer(cursor.getInt(cursor.getColumnIndex("count")));
+      logCounts.put(type,count);
+    }
+ while (cursor.moveToNext());
+  }
+  if (cursor != null) {
+    cursor.close();
+  }
+  return logCounts;
+}

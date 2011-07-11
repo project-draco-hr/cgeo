@@ -1,0 +1,14 @@
+{
+  final SharedPreferences.Editor prefsEdit=prefs.edit();
+  if (username == null || username.length() == 0 || password == null || password.length() == 0) {
+    prefsEdit.remove("username");
+    prefsEdit.remove("password");
+  }
+ else {
+    prefsEdit.putString("username",username);
+    prefsEdit.putString("password",password);
+  }
+  this.username=username;
+  this.password=password;
+  return prefsEdit.commit();
+}

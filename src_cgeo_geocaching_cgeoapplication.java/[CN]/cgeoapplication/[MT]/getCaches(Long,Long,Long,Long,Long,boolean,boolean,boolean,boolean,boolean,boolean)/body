@@ -1,0 +1,21 @@
+{
+  if (searchId == null || searches.containsKey(searchId) == false) {
+    ArrayList<cgCache> cachesOut=new ArrayList<cgCache>();
+    final ArrayList<cgCache> cachesPre=storage.loadCaches(null,null,centerLat,centerLon,spanLat,spanLon,loadA,loadW,loadS,loadL,loadI,loadO);
+    if (cachesPre != null) {
+      cachesOut.addAll(cachesPre);
+    }
+    return cachesOut;
+  }
+  ArrayList<cgCache> cachesOut=new ArrayList<cgCache>();
+  cgSearch search=searches.get(searchId);
+  ArrayList<String> geocodeList=search.getGeocodes();
+  if (storage == null) {
+    storage=new cgData(this);
+  }
+  final ArrayList<cgCache> cachesPre=storage.loadCaches(geocodeList.toArray(),null,centerLat,centerLon,spanLat,spanLon,loadA,loadW,loadS,loadL,loadI,loadO);
+  if (cachesPre != null) {
+    cachesOut.addAll(cachesPre);
+  }
+  return cachesOut;
+}

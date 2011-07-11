@@ -1,0 +1,18 @@
+{
+  if (mapView == null) {
+    return;
+  }
+  if (mapView.isSatellite()) {
+    prefsEdit.putInt("maptype",cgSettings.mapSatellite);
+    settings.maptype=cgSettings.mapSatellite;
+  }
+ else {
+    prefsEdit.putInt("maptype",cgSettings.mapClassic);
+    settings.maptype=cgSettings.mapClassic;
+  }
+  if (prefsEdit == null) {
+    prefsEdit=activity.getSharedPreferences(cgSettings.preferences,0).edit();
+  }
+  prefsEdit.putInt("mapzoom",mapView.getMapZoomLevel());
+  prefsEdit.commit();
+}
