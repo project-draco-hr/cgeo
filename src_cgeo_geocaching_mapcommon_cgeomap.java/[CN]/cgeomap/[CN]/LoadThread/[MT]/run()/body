@@ -8,7 +8,7 @@
       working=false;
       return;
     }
-    if (settings.maplive == 0) {
+    if (!live || settings.maplive == 0) {
       searchId=app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,settings.cacheType);
     }
  else {
@@ -39,7 +39,7 @@
       working=false;
       return;
     }
-    if (settings.maplive >= 1) {
+    if (live && settings.maplive >= 1) {
       if (downloadThread != null && downloadThread.isWorking()) {
         downloadThread.stopIt();
       }
