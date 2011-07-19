@@ -1,6 +1,3 @@
 {
-  MapDatabase testDatabase=new MapDatabase();
-  boolean isValid=testDatabase.openFile(file);
-  testDatabase.closeFile();
-  return isValid;
+  return MapDatabase.isValidMapFile(file);
 }
