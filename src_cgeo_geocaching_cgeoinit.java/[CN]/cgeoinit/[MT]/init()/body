@@ -179,8 +179,15 @@
   int mapsource=prefs.getInt("mapsource",0);
   mapSourceSelector.setSelection(mapsource);
   mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
-  EditText mfmapFileEdit=(EditText)findViewById(R.id.mapfile);
-  mfmapFileEdit.setText(prefs.getString("mfmapfile",""));
+  initMapfileEdittext(false);
+  Button selectMapfile=(Button)findViewById(R.id.select_mapfile);
+  selectMapfile.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Intent selectIntent=new Intent(activity,cgSelectMapfile.class);
+      activity.startActivityForResult(selectIntent,SELECT_MAPFILE_REQUEST);
+    }
+  }
+);
   setMapFileEditState();
   TextView lastBackup=(TextView)findViewById(R.id.backup_last);
   File lastBackupFile=app.isRestoreFile();
