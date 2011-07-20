@@ -7,7 +7,7 @@ case mapsforgeOsmarender:
   setMapViewMode(MapViewMode.OSMARENDER_TILE_DOWNLOAD);
 break;
 case mapsforgeOffline:
-if (isValidMapFile(settings.getMapFile())) {
+if (MapDatabase.isValidMapFile(settings.getMapFile())) {
 setMapViewMode(MapViewMode.CANVAS_RENDERER);
 super.setMapFile(settings.getMapFile());
 }
