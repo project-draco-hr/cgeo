@@ -8,11 +8,16 @@
       working=false;
       return;
     }
-    if (settings.maplive == 0) {
-      searchId=app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,settings.cacheType);
+    if (fromDetailIntent) {
+      searchId=searchIdIntent;
     }
  else {
-      searchId=app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,settings.cacheType);
+      if (!live || settings.maplive == 0) {
+        searchId=app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,settings.cacheType);
+      }
+ else {
+        searchId=app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,settings.cacheType);
+      }
     }
     if (searchId != null) {
       downloaded=true;
@@ -23,6 +28,19 @@
       return;
     }
     caches=app.getCaches(searchId);
+    if (live && settings.maplive >= 1) {
+      int i=0;
+      boolean excludeMine=settings.excludeMine > 0;
+      boolean excludeDisabled=settings.excludeDisabled > 0;
+      while (i < caches.size()) {
+        boolean remove=false;
+        if ((caches.get(i).found) && (excludeMine))         remove=true;
+        if ((caches.get(i).own) && (excludeMine))         remove=true;
+        if ((caches.get(i).disabled) && (excludeDisabled))         remove=true;
+        if (remove)         caches.remove(i);
+ else         i++;
+      }
+    }
     if (stop) {
       displayHandler.sendEmptyMessage(0);
       working=false;
@@ -39,7 +57,7 @@
       working=false;
       return;
     }
-    if (settings.maplive >= 1) {
+    if (live && settings.maplive >= 1) {
       if (downloadThread != null && downloadThread.isWorking()) {
         downloadThread.stopIt();
       }
