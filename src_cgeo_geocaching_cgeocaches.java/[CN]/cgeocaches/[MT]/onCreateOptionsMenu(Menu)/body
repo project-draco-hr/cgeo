@@ -31,6 +31,7 @@
     SubMenu subMenu=menu.addSubMenu(0,103,0,res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
     subMenu.add(0,5,0,res.getString(R.string.caches_drop_all));
     subMenu.add(0,1,0,res.getString(R.string.cache_offline_refresh));
+    subMenu.add(0,26,0,res.getString(R.string.cache_export_fieldnote));
     if (settings.webDeviceCode == null) {
       menu.add(0,6,0,res.getString(R.string.gpx_import_title)).setIcon(android.R.drawable.ic_menu_upload);
     }
@@ -41,6 +42,9 @@
     }
   }
  else {
+    if (type.equals("history")) {
+      menu.add(0,26,0,res.getString(R.string.cache_export_fieldnote)).setIcon(android.R.drawable.ic_menu_save);
+    }
     menu.add(0,1,0,res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as);
   }
   final Intent intentTest=new Intent(Intent.ACTION_VIEW);
