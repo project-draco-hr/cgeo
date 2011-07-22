@@ -151,8 +151,9 @@
     }
   }
 );
+  final Element cacheParent=version == 11 ? waypoint.getChild(ns,"extensions") : waypoint;
   for (  String nsGC : nsGCList) {
-    final Element gcCache=waypoint.getChild(nsGC,"cache");
+    final Element gcCache=cacheParent.getChild(nsGC,"cache");
     gcCache.setStartElementListener(new StartElementListener(){
       public void start(      Attributes attrs){
         try {
