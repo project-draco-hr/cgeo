@@ -1,0 +1,14 @@
+{
+  if (keyCode == KeyEvent.KEYCODE_BACK) {
+    if (adapter != null) {
+      if (adapter.resetChecks() == true) {
+        return true;
+      }
+ else       if (adapter.getSelectMode() == true) {
+        adapter.setSelectMode(false,true);
+        return true;
+      }
+    }
+  }
+  return super.onKeyDown(keyCode,event);
+}
