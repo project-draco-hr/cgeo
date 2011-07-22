@@ -22,6 +22,12 @@
  else {
         menu.findItem(1).setTitle(res.getString(R.string.caches_refresh_all));
       }
+      if (adapter != null && adapter.getChecked() > 0) {
+        menu.findItem(26).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked()+ ")");
+      }
+ else {
+        menu.findItem(26).setTitle(res.getString(R.string.cache_export_fieldnote));
+      }
     }
  else {
       if (adapter == null) {
