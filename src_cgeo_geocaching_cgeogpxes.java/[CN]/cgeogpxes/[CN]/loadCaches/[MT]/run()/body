@@ -1,5 +1,5 @@
 {
-  final long searchId=base.parseGPX(app,file,listId,changeParseDialogHandler);
-  imported=app.getCount(searchId);
+  final long searchId=getBase().parseGPX(getApp(),file,listId,changeParseDialogHandler);
+  imported=getApp().getCount(searchId);
   loadCachesHandler.sendMessage(new Message());
 }

@@ -1,0 +1,61 @@
+{
+  SimpleDateFormat fieldNoteDateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+  StringBuffer fieldNoteBuffer=new StringBuffer(500);
+  HashMap<Integer,String> logTypes=new HashMap<Integer,String>();
+  logTypes.put(cgBase.LOG_FOUND_IT,"Found it");
+  logTypes.put(cgBase.LOG_DIDNT_FIND_IT,"Didn't find it");
+  logTypes.put(cgBase.LOG_NOTE,"Write Note");
+  logTypes.put(cgBase.LOG_NEEDS_ARCHIVE,"Needs archived");
+  for (  cgCache cache : cacheList) {
+    if (checked > 0 && cache.statusChecked == false) {
+      handler.sendEmptyMessage(0);
+      yield();
+      continue;
+    }
+    try {
+      if (needToStop == true) {
+        Log.i(cgSettings.tag,"Stopped exporting process.");
+        break;
+      }
+      if (cache.logOffline) {
+        cgLog log=app.loadLogOffline(cache.geocode);
+        if (null != logTypes.get(log.type)) {
+          fieldNoteBuffer.append(cache.geocode).append(",").append(fieldNoteDateFormat.format(new Date(log.date))).append(",").append(logTypes.get(log.type)).append(",\"").append(log.log.replaceAll("\"","'")).append("\"\n");
+        }
+      }
+      detailProgress++;
+      handler.sendEmptyMessage(cacheList.indexOf(cache));
+      yield();
+    }
+ catch (    Exception e) {
+      Log.e(cgSettings.tag,"cgeocaches.geocachesExportFieldNotes: " + e.toString());
+    }
+  }
+  if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    File exportLocation=new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
+    exportLocation.mkdirs();
+    SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+    File exportFile=new File(exportLocation + "/" + fileNameDateFormat.format(new Date())+ ".txt");
+    OutputStream os=null;
+    Writer fw=null;
+    try {
+      os=new FileOutputStream(exportFile);
+      fw=new OutputStreamWriter(os,"ISO-8859-1");
+      fw.write(fieldNoteBuffer.toString());
+    }
+ catch (    IOException e) {
+      Log.e(cgSettings.tag,"cgeocaches.geocachesExportFieldNotes: " + e.toString());
+    }
+ finally {
+      if (fw != null) {
+        try {
+          fw.close();
+        }
+ catch (        IOException e) {
+          Log.e(cgSettings.tag,"cgeocaches.geocachesExportFieldNotes: " + e.toString());
+        }
+      }
+    }
+  }
+  handler.sendEmptyMessage(-1);
+}
