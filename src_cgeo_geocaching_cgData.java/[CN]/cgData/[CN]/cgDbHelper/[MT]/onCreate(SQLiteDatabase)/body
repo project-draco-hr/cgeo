@@ -8,6 +8,7 @@
   db.execSQL(dbCreateLogCount);
   db.execSQL(dbCreateLogsOffline);
   db.execSQL(dbCreateTrackables);
+  db.execSQL(dbCreateSearchDestinationHistory);
   db.execSQL("create index if not exists in_a on " + dbTableCaches + " (geocode)");
   db.execSQL("create index if not exists in_b on " + dbTableCaches + " (guid)");
   db.execSQL("create index if not exists in_c on " + dbTableCaches + " (reason)");
