@@ -2,19 +2,7 @@
   if (cache != null && cache.latitude != null && cache.longitude != null) {
     menu.add(0,2,0,res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass);
     SubMenu subMenu=menu.addSubMenu(1,0,0,res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-    subMenu.add(0,8,0,res.getString(R.string.cache_menu_radar));
-    if (cache != null && cache.reason >= 1 && settings.storeOfflineMaps == 1) {
-      subMenu.add(1,6,0,res.getString(R.string.cache_menu_map_static));
-    }
-    subMenu.add(0,1,0,res.getString(R.string.cache_menu_map));
-    if (base.isLocus(activity)) {
-      subMenu.add(0,20,0,res.getString(R.string.cache_menu_locus));
-    }
-    if (base.isRmaps(activity)) {
-      subMenu.add(0,21,0,res.getString(R.string.cache_menu_rmaps));
-    }
-    subMenu.add(0,23,0,res.getString(R.string.cache_menu_map_ext));
-    subMenu.add(0,9,0,res.getString(R.string.cache_menu_tbt));
+    addNavigationMenuItems(subMenu);
   }
   if (cache != null && cache.hidden != null && (cache.type.equalsIgnoreCase("event") == true || cache.type.equalsIgnoreCase("mega") == true || cache.type.equalsIgnoreCase("cito") == true)) {
     menu.add(1,11,0,res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda);
