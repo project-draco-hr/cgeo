@@ -3,13 +3,6 @@
   if (coords == null || coords.get(0) == null || coords.get(1) == null) {
     warning.showToast(res.getString(R.string.err_location_unknown));
   }
-  cgWaypoint loc=new cgWaypoint();
-  loc.name=DateFormat.format("MM/dd/yy h:mmaa",new Date()).toString();
-  loc.latitude=coords.get(0);
-  loc.longitude=coords.get(1);
-  getHistoryOfSearchedLocations().add(0,loc);
-  app.saveSearchedDestinations(getHistoryOfSearchedLocations());
-  getDestionationHistoryAdapter().notifyDataSetChanged();
   try {
     if (cgBase.isIntentAvailable(activity,"com.google.android.radar.SHOW_RADAR") == true) {
       Intent radarIntent=new Intent("com.google.android.radar.SHOW_RADAR");

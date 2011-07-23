@@ -19,6 +19,7 @@
   tracker.start(cgSettings.analytics,this);
   tracker.dispatch();
   base.sendAnal(activity,tracker,"/point");
+  ListView listView=(ListView)findViewById(R.id.historyList);
+  listView.setAdapter(getDestionationHistoryAdapter());
   init();
-  setListAdapter(getDestionationHistoryAdapter());
 }
