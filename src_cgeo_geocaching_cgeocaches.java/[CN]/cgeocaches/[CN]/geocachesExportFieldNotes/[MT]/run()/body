@@ -42,9 +42,11 @@
       os=new FileOutputStream(exportFile);
       fw=new OutputStreamWriter(os,"ISO-8859-1");
       fw.write(fieldNoteBuffer.toString());
+      Message.obtain(handler,-2,exportFile).sendToTarget();
     }
  catch (    IOException e) {
       Log.e(cgSettings.tag,"cgeocaches.geocachesExportFieldNotes: " + e.toString());
+      handler.sendEmptyMessage(-3);
     }
  finally {
       if (fw != null) {
