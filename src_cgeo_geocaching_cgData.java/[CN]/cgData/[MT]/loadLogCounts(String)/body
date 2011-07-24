@@ -9,8 +9,8 @@
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {
-      Integer type=new Integer(cursor.getInt(cursor.getColumnIndex("type")));
-      Integer count=new Integer(cursor.getInt(cursor.getColumnIndex("count")));
+      Integer type=cursor.getInt(cursor.getColumnIndex("type"));
+      Integer count=cursor.getInt(cursor.getColumnIndex("count"));
       logCounts.put(type,count);
     }
  while (cursor.moveToNext());
