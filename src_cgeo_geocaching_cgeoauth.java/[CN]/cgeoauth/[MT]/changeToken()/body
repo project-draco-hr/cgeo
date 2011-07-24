@@ -28,7 +28,7 @@
       out.close();
       final InputStream in=connection.getInputStream();
       final InputStreamReader ins=new InputStreamReader(in);
-      final BufferedReader br=new BufferedReader(ins);
+      final BufferedReader br=new BufferedReader(ins,16 * 1024);
       while ((lineOne=br.readLine()) != null) {
         sb.append(lineOne);
         sb.append("\n");
