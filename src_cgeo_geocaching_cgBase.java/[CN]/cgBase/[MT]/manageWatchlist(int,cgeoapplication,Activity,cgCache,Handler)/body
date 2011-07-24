@@ -1,0 +1,47 @@
+{
+  Log.i(cgSettings.tag,"cgBase.manageWatchlist: Managing watchlist: cache='" + cache.cacheid + "', request="+ request);
+  String host="www.geocaching.com";
+  String path=request == 1 ? "/my/watchlist.aspx?w=" + cache.cacheid : "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
+  String method="GET";
+  String page=request(false,host,path,method,null,false,false,false).getData();
+  if (checkLogin(page) == false) {
+    int loginState=login();
+    if (loginState == 1) {
+      page=request(false,host,path,method,null,false,false,false).getData();
+    }
+ else {
+      Log.e(cgSettings.tag,"cgBase.manageWatchlist: Can not log in geocaching (error: " + loginState + ")");
+      handler.sendMessage(handler.obtainMessage(2));
+      return;
+    }
+  }
+  if (page == null || page.length() == 0) {
+    Log.e(cgSettings.tag,"cgBase.manageWatchlist: No data from server");
+    handler.sendMessage(handler.obtainMessage(2));
+    return;
+  }
+  if (request == 1) {
+    boolean guidOnPage=checkPageForGuid(cache,page);
+    if (guidOnPage)     Log.i(cgSettings.tag,"cgBase.manageWatchlist: cache added to watchlist");
+ else     Log.e(cgSettings.tag,"cgBase.manageWatchlist: cache not added to watchlist");
+    handler.sendMessage(handler.obtainMessage(guidOnPage ? 1 : 2));
+    return;
+  }
+  method="POST";
+  final HashMap<String,String> params=new HashMap<String,String>();
+  String viewstate1=findViewstate(page,1);
+  params.put("__VIEWSTATE",findViewstate(page,0));
+  if (viewstate1 != null) {
+    params.put("__VIEWSTATE1",viewstate1);
+    params.put("__VIEWSTATEFIELDCOUNT","2");
+  }
+  params.put("__EVENTTARGET","");
+  params.put("__EVENTARGUMENT","");
+  params.put("ctl00$ContentBody$btnYes","Yes");
+  page=request(false,host,path,method,params,false,false,false).getData();
+  boolean guidOnPage=checkPageForGuid(cache,page);
+  if (!guidOnPage)   Log.i(cgSettings.tag,"cgBase.manageWatchlist: cache removed from watchlist");
+ else   Log.e(cgSettings.tag,"cgBase.manageWatchlist: cache not removed from watchlist");
+  handler.sendMessage(handler.obtainMessage(guidOnPage ? 2 : 0));
+  return;
+}

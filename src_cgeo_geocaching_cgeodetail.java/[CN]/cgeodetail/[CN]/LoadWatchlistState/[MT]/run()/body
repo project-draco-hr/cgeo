@@ -1,0 +1,13 @@
+{
+  if (cache == null || cache.guid == null || cache.guid.length() == 0) {
+    sendError();
+    return;
+  }
+  try {
+    send(base.loadWatchlistState(cache));
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgeodetail.LoadWatchlistState.run: " + e.toString());
+    sendError();
+  }
+}
