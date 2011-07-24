@@ -7,13 +7,15 @@
   }
   int delay=-1;
   int times=0;
-  while (times < 36) {
+  while (times < 3 * 60 / 5) {
     if (needToStop) {
       handler.sendEmptyMessage(-1);
       break;
     }
     String deviceCode=settings.webDeviceCode;
-    if (deviceCode == null)     deviceCode="";
+    if (deviceCode == null) {
+      deviceCode="";
+    }
     cgResponse responseFromWeb=base.request(false,"send2cgeo.carnero.cc","/readCode.php","GET","d=" + cgBase.urlencode_rfc3986(deviceCode),0,true);
     if ((responseFromWeb.getStatusCode() == 200) && (responseFromWeb.getData().length() > 2)) {
       String GCcode=responseFromWeb.getData();

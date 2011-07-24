@@ -2,31 +2,31 @@
   super.onPrepareOptionsMenu(menu);
   try {
     if (adapter != null && adapter.getSelectMode() == true) {
-      menu.findItem(0).setTitle(res.getString(R.string.caches_select_mode_exit));
-      menu.findItem(9).setVisible(true);
+      menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit));
+      menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
     }
  else {
-      menu.findItem(0).setTitle(res.getString(R.string.caches_select_mode));
-      menu.findItem(9).setVisible(false);
+      menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode));
+      menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
     }
     if (type != null && type.equals("offline") == true) {
       if (adapter != null && adapter.getChecked() > 0) {
-        menu.findItem(5).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked()+ ")");
+        menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked()+ ")");
       }
  else {
-        menu.findItem(5).setTitle(res.getString(R.string.caches_drop_all));
+        menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_all));
       }
       if (adapter != null && adapter.getChecked() > 0) {
-        menu.findItem(1).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked()+ ")");
+        menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked()+ ")");
       }
  else {
-        menu.findItem(1).setTitle(res.getString(R.string.caches_refresh_all));
+        menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_all));
       }
       if (adapter != null && adapter.getChecked() > 0) {
-        menu.findItem(26).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked()+ ")");
+        menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked()+ ")");
       }
  else {
-        menu.findItem(26).setTitle(res.getString(R.string.cache_export_fieldnote));
+        menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote));
       }
     }
  else {
@@ -37,29 +37,25 @@
         Log.i(cgSettings.tag,"Checked: " + adapter.getChecked());
       }
       if (adapter != null && adapter.getChecked() > 0) {
-        menu.findItem(1).setTitle(res.getString(R.string.caches_store_selected) + " (" + adapter.getChecked()+ ")");
+        menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_selected) + " (" + adapter.getChecked()+ ")");
       }
  else {
-        menu.findItem(1).setTitle(res.getString(R.string.caches_store_offline));
+        menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_offline));
       }
     }
     if (type != null && type.equals("offline") == false && (cacheList != null && app != null && cacheList.size() >= app.getTotal(searchId))) {
-      menu.findItem(0).setEnabled(false);
+      menu.findItem(MENU_SWITCH_SELECT_MODE).setEnabled(false);
     }
  else {
-      menu.findItem(0).setEnabled(true);
+      menu.findItem(MENU_SWITCH_SELECT_MODE).setEnabled(true);
     }
-    if (listId == 1) {
-      menu.findItem(8).setVisible(false);
+    MenuItem item=menu.findItem(MENU_DROP_LIST);
+    if (item != null) {
+      item.setVisible(listId != 1);
     }
- else {
-      menu.findItem(8).setVisible(true);
-    }
-    if (app.getLists().size() < 2) {
-      menu.findItem(17).setVisible(false);
-    }
- else {
-      menu.findItem(17).setVisible(true);
+    item=menu.findItem(MENU_SWITCH_LIST);
+    if (item != null) {
+      item.setVisible(app.getLists().size() >= 2);
     }
   }
  catch (  Exception e) {
