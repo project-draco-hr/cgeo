@@ -1,0 +1,11 @@
+{
+  cgDestination loc=new cgDestination();
+  loc.setLatitude(coords.get(0));
+  loc.setLongitude(coords.get(1));
+  if (!getHistoryOfSearchedLocations().contains(loc)) {
+    loc.setDate(DateFormat.format("dd/MM/yy H:mm",new Date()).toString());
+    getHistoryOfSearchedLocations().add(0,loc);
+    app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+    historyListView.removeFooterView(getEmptyHistoryFooter());
+  }
+}

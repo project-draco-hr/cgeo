@@ -184,7 +184,7 @@
           Log.e(cgSettings.tag,"Failed to upgrade to ver. 51: " + e.toString());
         }
       }
-      if (oldVersion < 60) {
+      if (oldVersion < 52) {
         try {
           db.execSQL(dbCreateSearchDestinationHistory);
           Log.i(cgSettings.tag,"Added table " + dbTableSearchDestionationHistory + ".");

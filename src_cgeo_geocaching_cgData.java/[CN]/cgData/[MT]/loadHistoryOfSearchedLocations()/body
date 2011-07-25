@@ -1,19 +1,18 @@
 {
   init();
   Cursor cursor=null;
-  List<cgWaypoint> locs=new ArrayList<cgWaypoint>();
-  cursor=databaseRO.query(dbTableSearchDestionationHistory,new String[]{"_id","updated","latitude","longitude"},null,null,null,null,"updated desc","100");
+  List<cgDestination> destinations=new ArrayList<cgDestination>();
+  cursor=databaseRO.query(dbTableSearchDestionationHistory,new String[]{"_id","date","latitude","longitude"},null,null,null,null,"date desc","100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {
-      cgWaypoint wp=new cgWaypoint();
-      wp.id=(int)cursor.getInt(cursor.getColumnIndex("_id"));
-      wp.name=(String)cursor.getString(cursor.getColumnIndex("updated"));
-      wp.latitude=(double)cursor.getDouble(cursor.getColumnIndex("latitude"));
-      wp.longitude=(double)cursor.getDouble(cursor.getColumnIndex("longitude"));
-      locs.add(wp);
+      cgDestination dest=new cgDestination();
+      dest.setDate((String)cursor.getString(cursor.getColumnIndex("date")));
+      dest.setLatitude((double)cursor.getDouble(cursor.getColumnIndex("latitude")));
+      dest.setLongitude((double)cursor.getDouble(cursor.getColumnIndex("longitude")));
+      destinations.add(dest);
     }
  while (cursor.moveToNext());
   }
-  return locs;
+  return destinations;
 }

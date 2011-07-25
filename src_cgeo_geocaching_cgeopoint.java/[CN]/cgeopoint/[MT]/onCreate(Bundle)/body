@@ -19,9 +19,24 @@
   tracker.start(cgSettings.analytics,this);
   tracker.dispatch();
   base.sendAnal(activity,tracker,"/point");
-  ListView listView=(ListView)findViewById(R.id.historyList);
+  historyListView=(ListView)findViewById(R.id.historyList);
   View pointControls=getLayoutInflater().inflate(R.layout.point_controls,null);
-  listView.addHeaderView(pointControls);
-  listView.setAdapter(getDestionationHistoryAdapter());
+  historyListView.addHeaderView(pointControls);
+  if (getHistoryOfSearchedLocations().isEmpty()) {
+    historyListView.addFooterView(getEmptyHistoryFooter(),null,false);
+  }
+  historyListView.setAdapter(getDestionationHistoryAdapter());
+  historyListView.setOnItemClickListener(new OnItemClickListener(){
+    @Override public void onItemClick(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
+      Object selection=arg0.getItemAtPosition(arg2);
+      if (selection instanceof cgDestination) {
+        List<Double> coords=new ArrayList<Double>(2);
+        coords.add(((cgDestination)selection).getLatitude());
+        coords.add(((cgDestination)selection).getLongitude());
+        navigateTo(coords);
+      }
+    }
+  }
+);
   init();
 }

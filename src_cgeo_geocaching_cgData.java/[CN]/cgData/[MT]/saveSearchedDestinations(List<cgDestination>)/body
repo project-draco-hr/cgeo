@@ -5,11 +5,11 @@
   databaseRW.delete(dbTableSearchDestionationHistory,null,null);
   try {
     if (destinations != null) {
-      for (      cgWaypoint wp : destinations) {
+      for (      cgDestination dest : destinations) {
         ContentValues values=new ContentValues();
-        values.put("updated",wp.name);
-        values.put("latitude",wp.latitude);
-        values.put("longitude",wp.longitude);
+        values.put("date",dest.getDate());
+        values.put("latitude",dest.getLatitude());
+        values.put("longitude",dest.getLongitude());
         databaseRW.insert(dbTableSearchDestionationHistory,null,values);
       }
       databaseRW.setTransactionSuccessful();

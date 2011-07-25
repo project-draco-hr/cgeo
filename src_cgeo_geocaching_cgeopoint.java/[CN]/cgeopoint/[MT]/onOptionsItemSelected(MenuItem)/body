@@ -1,12 +1,7 @@
 {
   final int menuItem=item.getItemId();
   ArrayList<Double> coords=getDestination();
-  cgWaypoint loc=new cgWaypoint();
-  loc.name=DateFormat.format("dd/MM/yy h:mm",new Date()).toString();
-  loc.latitude=coords.get(0);
-  loc.longitude=coords.get(1);
-  getHistoryOfSearchedLocations().add(0,loc);
-  app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+  pushToHistory(coords);
   if (menuItem == 1) {
     showOnMap();
     return true;
