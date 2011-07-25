@@ -1,0 +1,16 @@
+{
+  if (!type.equalsIgnoreCase("event") && !type.equalsIgnoreCase("mega") && !type.equalsIgnoreCase("cito")) {
+    return false;
+  }
+  if (hidden == null) {
+    return false;
+  }
+  Date today=new Date();
+  today.setHours(0);
+  today.setMinutes(0);
+  today.setSeconds(0);
+  if (hidden.compareTo(today) <= 0) {
+    return false;
+  }
+  return true;
+}

@@ -14,9 +14,8 @@
   }
   final HashMap<String,cgRating> ratings=getRating(guids,geocodes);
   if (ratings != null) {
-    final Set<String> ratingKeys=ratings.keySet();
-    for (    String ratingKey : ratingKeys) {
-      return ratings.get(ratingKey);
+    for (    Entry<String,cgRating> entry : ratings.entrySet()) {
+      return entry.getValue();
     }
   }
   return null;

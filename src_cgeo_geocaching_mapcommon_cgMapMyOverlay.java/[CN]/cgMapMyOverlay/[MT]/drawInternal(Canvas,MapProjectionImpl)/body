@@ -59,8 +59,12 @@
         if (prev != null && now != null) {
           projection.toPixels(mapFactory.getGeoPointBase((int)(prev.getLatitude() * 1e6),(int)(prev.getLongitude() * 1e6)),historyPointP);
           projection.toPixels(mapFactory.getGeoPointBase((int)(now.getLatitude() * 1e6),(int)(now.getLongitude() * 1e6)),historyPointN);
-          if ((alphaCnt - cnt) > 0)           alpha=Math.round(255 / (alphaCnt - cnt));
- else           alpha=255;
+          if ((alphaCnt - cnt) > 0) {
+            alpha=255 / (alphaCnt - cnt);
+          }
+ else {
+            alpha=255;
+          }
           historyLineShadow.setAlpha(alpha);
           historyLine.setAlpha(alpha);
           canvas.drawLine(historyPointP.x,historyPointP.y,historyPointN.x,historyPointN.y,historyLineShadow);
@@ -90,8 +94,8 @@
   int marginTop;
   marginLeft=center.x - (widthArrow / 2);
   marginTop=center.y - (heightArrow / 2);
-  canvas.rotate(new Float(heading),center.x,center.y);
+  canvas.rotate(heading.floatValue(),center.x,center.y);
   canvas.drawBitmap(arrow,marginLeft,marginTop,null);
-  canvas.rotate(-(new Float(heading)),center.x,center.y);
+  canvas.rotate(-(heading.floatValue()),center.x,center.y);
   canvas.setDrawFilter(remfil);
 }

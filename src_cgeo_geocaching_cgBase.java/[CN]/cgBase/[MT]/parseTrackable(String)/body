@@ -236,7 +236,7 @@
               Calendar date=Calendar.getInstance();
               date.set(year,month,day,12,0,0);
               logDate=date.getTimeInMillis();
-              logDate=(long)(Math.ceil(logDate / 1000)) * 1000;
+              logDate=(logDate / 1000L) * 1000L;
             }
  else {
               logDate=0;

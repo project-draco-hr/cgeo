@@ -1,5 +1,4 @@
 {
-  int count=0;
   String listSql=null;
   String listSqlW=null;
   if (list == null) {
@@ -11,29 +10,30 @@
     listSqlW=" and reason = " + list;
   }
  else {
-    return count;
+    return 0;
   }
+  int count=0;
   try {
+    String sql="select count(_id) from " + dbTableCaches;
     if (detailedOnly == false) {
       if (cachetype == null) {
-        SQLiteStatement sqlCount=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + listSql);
-        count=(int)sqlCount.simpleQueryForLong();
+        sql="select count(_id) from " + dbTableCaches + listSql;
       }
  else {
-        SQLiteStatement sqlCount=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where type = \""+ cachetype+ "\""+ listSqlW);
-        count=(int)sqlCount.simpleQueryForLong();
+        sql="select count(_id) from " + dbTableCaches + " where type = \""+ cachetype+ "\""+ listSqlW;
       }
     }
  else {
       if (cachetype == null) {
-        SQLiteStatement sqlCount=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where detailed = 1"+ listSqlW);
-        count=(int)sqlCount.simpleQueryForLong();
+        sql="select count(_id) from " + dbTableCaches + " where detailed = 1"+ listSqlW;
       }
  else {
-        SQLiteStatement sqlCount=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \""+ cachetype+ "\""+ listSqlW);
-        count=(int)sqlCount.simpleQueryForLong();
+        sql="select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \""+ cachetype+ "\""+ listSqlW;
       }
     }
+    SQLiteStatement compiledStmnt=databaseRO.compileStatement(sql);
+    count=(int)compiledStmnt.simpleQueryForLong();
+    compiledStmnt.close();
   }
  catch (  Exception e) {
     Log.e(cgSettings.tag,"cgData.loadAllStoredCachesCount: " + e.toString());
