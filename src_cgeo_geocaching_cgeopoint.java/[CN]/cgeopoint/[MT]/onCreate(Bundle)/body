@@ -20,6 +20,8 @@
   tracker.dispatch();
   base.sendAnal(activity,tracker,"/point");
   ListView listView=(ListView)findViewById(R.id.historyList);
+  View pointControls=getLayoutInflater().inflate(R.layout.point_controls,null);
+  listView.addHeaderView(pointControls);
   listView.setAdapter(getDestionationHistoryAdapter());
   init();
 }

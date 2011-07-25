@@ -12,7 +12,7 @@
   }
   if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
     HashMap<String,Object> latParsed=base.parseCoordinate(latText,"lat");
-    HashMap<String,Object> lonParsed=base.parseCoordinate(lonText,"lat");
+    HashMap<String,Object> lonParsed=base.parseCoordinate(lonText,"lon");
     if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
       warning.showToast(res.getString(R.string.err_parse_lat));
       return null;

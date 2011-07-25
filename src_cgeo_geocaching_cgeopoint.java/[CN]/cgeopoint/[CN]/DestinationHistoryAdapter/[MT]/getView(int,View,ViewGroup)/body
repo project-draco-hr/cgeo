@@ -1,11 +1,15 @@
 {
   cgWaypoint loc=getItem(position);
-  View row=getInflater().inflate(R.layout.simple_way_point,null);
-  TextView longitude=(TextView)row.findViewById(R.id.simple_way_point_longitude);
-  TextView latitude=(TextView)row.findViewById(R.id.simple_way_point_latitude);
-  TextView date=(TextView)row.findViewById(R.id.date);
-  longitude.setText(String.valueOf(loc.longitude));
-  latitude.setText(String.valueOf(loc.latitude));
+  if (convertView == null) {
+    convertView=getInflater().inflate(R.layout.simple_way_point,null);
+  }
+  TextView longitude=(TextView)convertView.findViewById(R.id.simple_way_point_longitude);
+  TextView latitude=(TextView)convertView.findViewById(R.id.simple_way_point_latitude);
+  TextView date=(TextView)convertView.findViewById(R.id.date);
+  String lonString=base.formatCoordinate(loc.longitude,"lon",true);
+  String latString=base.formatCoordinate(loc.latitude,"lat",true);
+  longitude.setText(lonString);
+  latitude.setText(latString);
   date.setText(loc.name);
-  return row;
+  return convertView;
 }
