@@ -42,6 +42,18 @@
  else {
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_offline));
       }
+      if (adapter != null && adapter.getChecked() > 0) {
+        menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked()+ ")");
+      }
+ else {
+        menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote));
+      }
+      if (adapter != null && adapter.getChecked() > 0) {
+        menu.findItem(MENU_REMOVE_FROM_HISTORY).setTitle(res.getString(R.string.cache_remove_from_history) + " (" + adapter.getChecked()+ ")");
+      }
+ else {
+        menu.findItem(MENU_REMOVE_FROM_HISTORY).setTitle(res.getString(R.string.cache_clear_history));
+      }
     }
     if (type != null && type.equals("offline") == false && (cacheList != null && app != null && cacheList.size() >= app.getTotal(searchId))) {
       menu.findItem(MENU_SWITCH_SELECT_MODE).setEnabled(false);

@@ -11,21 +11,21 @@
   waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
     public void onCancel(    DialogInterface arg0){
       try {
-        if (threadF != null) {
-          threadF.kill();
+        if (threadH != null) {
+          threadH.kill();
         }
       }
  catch (      Exception e) {
-        Log.e(cgSettings.tag,"cgeocaches.exportFieldNotes.onCancel: " + e.toString());
+        Log.e(cgSettings.tag,"cgeocaches.removeFromHistory.onCancel: " + e.toString());
       }
     }
   }
 );
   waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-  waitDialog.setMessage(res.getString(R.string.caches_exporting_fieldnote));
+  waitDialog.setMessage(res.getString(R.string.caches_removing_from_history));
   waitDialog.setCancelable(true);
   waitDialog.setMax(detailTotal);
   waitDialog.show();
-  threadF=new geocachesExportFieldNotes(exportFieldNotesHandler);
-  threadF.start();
+  threadH=new geocachesRemoveFromHistory(removeFromHistoryHandler);
+  threadH.start();
 }
