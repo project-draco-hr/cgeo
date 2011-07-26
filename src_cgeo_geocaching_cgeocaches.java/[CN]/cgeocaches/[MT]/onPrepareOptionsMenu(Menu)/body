@@ -22,20 +22,8 @@
  else {
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_all));
       }
-      if (adapter != null && adapter.getChecked() > 0) {
-        menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked()+ ")");
-      }
- else {
-        menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote));
-      }
     }
  else {
-      if (adapter == null) {
-        Log.i(cgSettings.tag,"No adapter");
-      }
- else {
-        Log.i(cgSettings.tag,"Checked: " + adapter.getChecked());
-      }
       if (adapter != null && adapter.getChecked() > 0) {
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_selected) + " (" + adapter.getChecked()+ ")");
       }
@@ -43,19 +31,49 @@
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_offline));
       }
     }
-    if (type != null && type.equals("offline") == false && (cacheList != null && app != null && cacheList.size() >= app.getTotal(searchId))) {
-      menu.findItem(MENU_SWITCH_SELECT_MODE).setEnabled(false);
+    int[] hideIfEmptyList=new int[]{MENU_SWITCH_SELECT_MODE,SUBMENU_MANAGE_OFFLINE,SUBMENU_MANAGE_HISTORY,SUBMENU_SHOW_MAP,MENU_MAP,SUBMENU_SORT,SUBMENU_FILTER,MENU_REFRESH_STORED};
+    if (cacheList != null && cacheList.size() > 0) {
+      for (      int entryId : hideIfEmptyList) {
+        MenuItem item=menu.findItem(entryId);
+        if (null != item) {
+          item.setEnabled(true);
+        }
+      }
     }
  else {
-      menu.findItem(MENU_SWITCH_SELECT_MODE).setEnabled(true);
+      for (      int entryId : hideIfEmptyList) {
+        MenuItem item=menu.findItem(entryId);
+        if (null != item) {
+          item.setEnabled(false);
+        }
+      }
     }
-    MenuItem item=menu.findItem(MENU_DROP_LIST);
+    MenuItem item;
+    item=menu.findItem(MENU_DROP_LIST);
     if (item != null) {
       item.setVisible(listId != 1);
     }
     item=menu.findItem(MENU_SWITCH_LIST);
     if (item != null) {
       item.setVisible(app.getLists().size() >= 2);
+    }
+    item=menu.findItem(MENU_REMOVE_FROM_HISTORY);
+    if (null != item) {
+      if (adapter != null && adapter.getChecked() > 0) {
+        item.setTitle(res.getString(R.string.cache_remove_from_history) + " (" + adapter.getChecked()+ ")");
+      }
+ else {
+        item.setTitle(res.getString(R.string.cache_clear_history));
+      }
+    }
+    item=menu.findItem(MENU_EXPORT_NOTES);
+    if (null != item) {
+      if (adapter != null && adapter.getChecked() > 0) {
+        item.setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked()+ ")");
+      }
+ else {
+        item.setTitle(res.getString(R.string.cache_export_fieldnote));
+      }
     }
   }
  catch (  Exception e) {
