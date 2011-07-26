@@ -1,7 +1,7 @@
 {
   final int menuItem=item.getItemId();
   ArrayList<Double> coords=getDestination();
-  pushToHistory(coords);
+  addToHistory(coords);
   if (menuItem == 1) {
     showOnMap();
     return true;
@@ -25,6 +25,10 @@
   }
  else   if (menuItem == 5) {
     cachesAround();
+    return true;
+  }
+ else   if (menuItem == 6) {
+    clearHistory();
     return true;
   }
  else   if (menuItem == 20) {

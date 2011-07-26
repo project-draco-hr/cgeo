@@ -1,0 +1,13 @@
+{
+switch (item.getItemId()) {
+case CONTEXT_MENU_DELETE_WAYPOINT:
+    AdapterView.AdapterContextMenuInfo menuInfo=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+  Object destination=historyListView.getItemAtPosition(menuInfo.position);
+if (destination instanceof cgDestination) {
+  removeFromHistory((cgDestination)destination);
+}
+return true;
+default :
+return super.onContextItemSelected(item);
+}
+}
