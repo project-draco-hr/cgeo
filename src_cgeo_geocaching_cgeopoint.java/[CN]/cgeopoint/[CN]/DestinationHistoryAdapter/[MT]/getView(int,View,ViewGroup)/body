@@ -10,6 +10,7 @@
   String latString=base.formatCoordinate(loc.getLatitude(),"lat",true);
   longitude.setText(lonString);
   latitude.setText(latString);
-  date.setText(loc.getDate());
+  CharSequence dateString=DateFormat.format("dd/MM/yy kk:mm",loc.getDate());
+  date.setText(dateString);
   return convertView;
 }
