@@ -1,9 +1,10 @@
 {
   init();
   Cursor cursor=null;
-  List<cgDestination> destinations=new ArrayList<cgDestination>();
+  final List<cgDestination> destinations;
   cursor=databaseRO.query(dbTableSearchDestionationHistory,new String[]{"_id","date","latitude","longitude"},null,null,null,null,"date desc","100");
   if (cursor != null && cursor.getCount() > 0) {
+    destinations=new ArrayList<cgDestination>();
     cursor.moveToFirst();
     do {
       cgDestination dest=new cgDestination();
@@ -13,6 +14,9 @@
       destinations.add(dest);
     }
  while (cursor.moveToNext());
+  }
+ else {
+    destinations=Collections.emptyList();
   }
   return destinations;
 }
