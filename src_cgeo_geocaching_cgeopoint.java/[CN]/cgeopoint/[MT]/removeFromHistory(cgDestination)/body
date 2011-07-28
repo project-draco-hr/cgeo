@@ -1,7 +1,7 @@
 {
   if (getHistoryOfSearchedLocations().contains(destination)) {
     getHistoryOfSearchedLocations().remove(destination);
-    app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+    app.removeSearchedDestinations(destination);
     if (getHistoryOfSearchedLocations().isEmpty()) {
       if (historyListView.getFooterViewsCount() == 0) {
         historyListView.addFooterView(getEmptyHistoryFooter());
