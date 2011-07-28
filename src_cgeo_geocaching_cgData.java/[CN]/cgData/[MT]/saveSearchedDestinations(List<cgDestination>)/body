@@ -1,0 +1,26 @@
+{
+  init();
+  boolean success=true;
+  databaseRW.beginTransaction();
+  databaseRW.delete(dbTableSearchDestionationHistory,null,null);
+  try {
+    if (destinations != null) {
+      for (      cgDestination dest : destinations) {
+        ContentValues values=new ContentValues();
+        values.put("date",dest.getDate());
+        values.put("latitude",dest.getLatitude());
+        values.put("longitude",dest.getLongitude());
+        databaseRW.insert(dbTableSearchDestionationHistory,null,values);
+      }
+      databaseRW.setTransactionSuccessful();
+    }
+  }
+ catch (  Exception e) {
+    success=false;
+    Log.e(cgSettings.tag,"Updating searchedDestinations db failed",e);
+  }
+ finally {
+    databaseRW.endTransaction();
+  }
+  return success;
+}

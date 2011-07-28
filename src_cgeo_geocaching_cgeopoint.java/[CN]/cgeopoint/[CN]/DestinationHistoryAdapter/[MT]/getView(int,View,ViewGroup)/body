@@ -1,0 +1,16 @@
+{
+  cgDestination loc=getItem(position);
+  if (convertView == null) {
+    convertView=getInflater().inflate(R.layout.simple_way_point,null);
+  }
+  TextView longitude=(TextView)convertView.findViewById(R.id.simple_way_point_longitude);
+  TextView latitude=(TextView)convertView.findViewById(R.id.simple_way_point_latitude);
+  TextView date=(TextView)convertView.findViewById(R.id.date);
+  String lonString=base.formatCoordinate(loc.getLongitude(),"lon",true);
+  String latString=base.formatCoordinate(loc.getLatitude(),"lat",true);
+  longitude.setText(lonString);
+  latitude.setText(latString);
+  CharSequence dateString=DateFormat.format("dd/MM/yy kk:mm",loc.getDate());
+  date.setText(dateString);
+  return convertView;
+}
