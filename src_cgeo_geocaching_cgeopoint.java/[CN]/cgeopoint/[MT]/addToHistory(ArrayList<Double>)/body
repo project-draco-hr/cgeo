@@ -5,7 +5,7 @@
   if (!getHistoryOfSearchedLocations().contains(loc)) {
     loc.setDate(System.currentTimeMillis());
     getHistoryOfSearchedLocations().add(0,loc);
-    app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+    app.saveSearchedDestination(loc);
     historyListView.removeFooterView(getEmptyHistoryFooter());
   }
 }

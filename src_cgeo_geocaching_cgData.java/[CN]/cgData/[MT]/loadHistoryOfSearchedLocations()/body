@@ -8,6 +8,7 @@
     cursor.moveToFirst();
     do {
       cgDestination dest=new cgDestination();
+      dest.setId((long)cursor.getLong(cursor.getColumnIndex("_id")));
       dest.setDate((long)cursor.getLong(cursor.getColumnIndex("date")));
       dest.setLatitude((double)cursor.getDouble(cursor.getColumnIndex("latitude")));
       dest.setLongitude((double)cursor.getDouble(cursor.getColumnIndex("longitude")));
