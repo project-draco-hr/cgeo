@@ -3,11 +3,11 @@
     warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
     return;
   }
-  watchlistDialog=ProgressDialog.show(activity,res.getString(R.string.cache_dialog_watchlist_add_title),res.getString(R.string.cache_dialog_watchlist_add_message),true);
+  watchlistDialog=ProgressDialog.show(activity,res.getString(titleId),res.getString(messageId),true);
   watchlistDialog.setCancelable(true);
   if (watchlistThread != null) {
     watchlistThread.interrupt();
   }
-  watchlistThread=new WatchlistThread(1,WatchlistHandler);
+  watchlistThread=thread;
   watchlistThread.start();
 }

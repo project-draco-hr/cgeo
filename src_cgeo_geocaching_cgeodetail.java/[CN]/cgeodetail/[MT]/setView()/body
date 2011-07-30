@@ -322,8 +322,8 @@
     }
     Button buttonWatchlistAdd=(Button)findViewById(R.id.add_to_watchlist);
     Button buttonWatchlistRemove=(Button)findViewById(R.id.remove_from_watchlist);
-    buttonWatchlistAdd.setOnClickListener(new addToWatchlistClickListener());
-    buttonWatchlistRemove.setOnClickListener(new removeFromWatchlistClickListener());
+    buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
+    buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
     LinearLayout waypoints=(LinearLayout)findViewById(R.id.waypoints);
     waypoints.removeAllViews();
     if (cache.waypoints != null && cache.waypoints.size() > 0) {
