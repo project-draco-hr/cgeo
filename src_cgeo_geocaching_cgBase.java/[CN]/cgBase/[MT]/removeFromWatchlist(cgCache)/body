@@ -1,7 +1,7 @@
 {
-  String method="POST";
-  String path="/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
   String host="www.geocaching.com";
+  String path="/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
+  String method="POST";
   String page=requestLogged(false,host,path,method,null,false,false,false);
   if (page == null || page.length() == 0) {
     Log.e(cgSettings.tag,"cgBase.removeFromWatchlist: No data from server");
