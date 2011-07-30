@@ -1,68 +1,68 @@
 {
 switch (item.getItemId()) {
-case 0:
+case MENU_SWITCH_SELECT_MODE:
     if (adapter != null) {
       adapter.switchSelectMode();
     }
   return true;
-case 1:
+case MENU_REFRESH_STORED:
 refreshStored();
 return true;
-case 2:
+case MENU_MAP:
 showOnMap();
 return false;
-case 3:
+case MENU_LOCUS:
 showOnLocus();
 return false;
-case 5:
+case MENU_DROP_CACHES:
 dropStored();
 return false;
-case 6:
+case MENU_IMPORT_GPX:
 importGpx();
 return false;
-case 7:
+case MENU_CREATE_LIST:
 createList();
 return false;
-case 8:
+case MENU_DROP_LIST:
 removeList();
 return false;
-case 9:
+case MENU_INVERT_SELECTION:
 if (adapter != null) {
 adapter.invertSelection();
 }
 return false;
-case 10:
+case MENU_SORT_DISTANCE:
 setComparator(item,null);
 return false;
-case 11:
-setComparator(item,new cgCacheDifficultyComparator());
+case MENU_SORT_DIFFICULTY:
+setComparator(item,new DifficultyComparator());
 return false;
-case 12:
-setComparator(item,new cgCacheTerrainComparator());
+case MENU_SORT_TERRAIN:
+setComparator(item,new TerrainComparator());
 return false;
-case 13:
-setComparator(item,new cgCacheSizeComparator());
+case MENU_SORT_SIZE:
+setComparator(item,new SizeComparator());
 return false;
-case 14:
-setComparator(item,new cgCachePopularityComparator());
+case MENU_SORT_FAVORITES:
+setComparator(item,new PopularityComparator());
 return false;
-case 15:
-setComparator(item,new cgCacheNameComparator());
+case MENU_SORT_NAME:
+setComparator(item,new NameComparator());
 return false;
-case 16:
-setComparator(item,new cgCacheGeocodeComparator());
+case MENU_SORT_GEOCODE:
+setComparator(item,new GeocodeComparator());
 return false;
-case 17:
+case MENU_SWITCH_LIST:
 selectList(null);
 return false;
-case 18:
-setComparator(item,new cgCacheRatingComparator());
+case MENU_SORT_RATING:
+setComparator(item,new RatingComparator());
 return false;
-case 19:
-setComparator(item,new cgCacheVoteComparator());
+case MENU_SORT_VOTE:
+setComparator(item,new VoteComparator());
 return false;
-case 20:
-setComparator(item,new cgCacheInventoryComparator());
+case MENU_SORT_INVENTORY:
+setComparator(item,new InventoryComparator());
 return false;
 case 21:
 selectedFilter=res.getString(R.string.caches_filter_type);
@@ -80,11 +80,14 @@ if (adapter != null) {
 adapter.setFilter(null);
 }
 return false;
-case 25:
+case MENU_IMPORT_WEB:
 importWeb();
 return false;
-case 26:
+case MENU_EXPORT_NOTES:
 exportFieldNotes();
+return false;
+case MENU_REMOVE_FROM_HISTORY:
+removeFromHistoryCheck();
 return false;
 }
 return false;

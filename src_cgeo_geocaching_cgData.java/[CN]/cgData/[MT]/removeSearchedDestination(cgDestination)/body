@@ -1,0 +1,22 @@
+{
+  boolean success=true;
+  if (destination == null) {
+    success=false;
+  }
+ else {
+    init();
+    databaseRW.beginTransaction();
+    try {
+      databaseRW.delete(dbTableSearchDestionationHistory,"_id = " + destination.getId(),null);
+      databaseRW.setTransactionSuccessful();
+    }
+ catch (    Exception e) {
+      Log.e(cgSettings.tag,"Unable to remove searched destination",e);
+      success=false;
+    }
+ finally {
+      databaseRW.endTransaction();
+    }
+  }
+  return success;
+}

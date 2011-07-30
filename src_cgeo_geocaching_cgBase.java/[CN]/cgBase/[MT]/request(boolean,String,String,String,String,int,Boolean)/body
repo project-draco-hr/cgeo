@@ -155,7 +155,7 @@
         ins=connection.getInputStream();
       }
       final InputStreamReader inr=new InputStreamReader(ins);
-      final BufferedReader br=new BufferedReader(inr);
+      final BufferedReader br=new BufferedReader(inr,16 * 1024);
       readIntoBuffer(br,buffer);
       httpCode=connection.getResponseCode();
       httpMessage=connection.getResponseMessage();

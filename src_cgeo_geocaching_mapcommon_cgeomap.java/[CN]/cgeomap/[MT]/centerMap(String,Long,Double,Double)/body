@@ -14,16 +14,16 @@
       Integer minLon=null;
       Integer maxLon=null;
       if (viewport.get(1) != null) {
-        minLat=new Double((Double)viewport.get(1) * 1e6).intValue();
+        minLat=(int)((Double)viewport.get(1) * 1e6);
       }
       if (viewport.get(2) != null) {
-        maxLat=new Double((Double)viewport.get(2) * 1e6).intValue();
+        maxLat=(int)((Double)viewport.get(2) * 1e6);
       }
       if (viewport.get(3) != null) {
-        maxLon=new Double((Double)viewport.get(3) * 1e6).intValue();
+        maxLon=(int)((Double)viewport.get(3) * 1e6);
       }
       if (viewport.get(4) != null) {
-        minLon=new Double((Double)viewport.get(4) * 1e6).intValue();
+        minLon=(int)((Double)viewport.get(4) * 1e6);
       }
       if (cnt == null || cnt <= 0 || minLat == null || maxLat == null || minLon == null || maxLon == null) {
         return;

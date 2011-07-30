@@ -179,12 +179,21 @@
     activity.startActivity(cachesIntent);
     return true;
   }
- else   if (id == 8) {
+ else   if (id == MENU_MOVE_TO_LIST) {
     lastMenuInfo=info;
     return true;
   }
- else   if (id >= 100) {
-    int newListId=id - 100;
+ else   if (id == MENU_DROP_CACHE) {
+    base.dropCache(app,activity,cache,new Handler(){
+      @Override public void handleMessage(      Message msg){
+        switchList(listId,-1);
+      }
+    }
+);
+    return true;
+  }
+ else   if (id >= SUBMENU_MOVE_TO_LIST) {
+    int newListId=id - SUBMENU_MOVE_TO_LIST;
     app.moveToList(cache.geocode,newListId);
     switchListById(listId);
     return true;

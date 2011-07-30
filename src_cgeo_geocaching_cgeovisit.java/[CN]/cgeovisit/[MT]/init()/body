@@ -35,7 +35,7 @@
     types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
     types.add(cgBase.LOG_ENABLE_LISTING);
     types.add(cgBase.LOG_ARCHIVE);
-    types.remove(new Integer(cgBase.LOG_UPDATE_COORDINATES));
+    types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
     if (cache.type.equals("event") || cache.type.equals("mega") || cache.type.equals("cito")|| cache.type.equals("lostfound")) {
       types.add(cgBase.LOG_ANNOUNCEMENT);
     }
@@ -52,7 +52,7 @@
       post.setText(res.getString(R.string.log_post_no_rate));
     }
   }
- else   if (settings.getSignature() != null && settings.getSignature().length() > 0) {
+ else   if (settings.getSignature() != null && settings.getSignature().length() > 0 && 0 == ((EditText)findViewById(R.id.log)).getText().length()) {
     addSignature(LOG_SIGNATURE);
   }
   if (types.contains(typeSelected) == false) {
