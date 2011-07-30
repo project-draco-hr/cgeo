@@ -5,7 +5,12 @@
     return -1;
   }
   boolean guidOnPage=checkPageForGuid(cache,page);
-  if (guidOnPage)   Log.i(cgSettings.tag,"cgBase.addToWatchlist: cache is on watchlist");
- else   Log.e(cgSettings.tag,"cgBase.addToWatchlist: cache is not on watchlist");
+  if (guidOnPage) {
+    Log.i(cgSettings.tag,"cgBase.addToWatchlist: cache is on watchlist");
+    cache.onWatchlist=true;
+  }
+ else {
+    Log.e(cgSettings.tag,"cgBase.addToWatchlist: cache is not on watchlist");
+  }
   return guidOnPage ? 1 : -1;
 }

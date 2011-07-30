@@ -19,7 +19,12 @@
   params.put("ctl00$ContentBody$btnYes","Yes");
   page=request(false,host,path,method,params,false,false,false).getData();
   boolean guidOnPage=checkPageForGuid(cache,page);
-  if (!guidOnPage)   Log.i(cgSettings.tag,"cgBase.removeFromWatchlist: cache removed from watchlist");
- else   Log.e(cgSettings.tag,"cgBase.removeFromWatchlist: cache not removed from watchlist");
+  if (!guidOnPage) {
+    Log.i(cgSettings.tag,"cgBase.removeFromWatchlist: cache removed from watchlist");
+    cache.onWatchlist=false;
+  }
+ else {
+    Log.e(cgSettings.tag,"cgBase.removeFromWatchlist: cache not removed from watchlist");
+  }
   return guidOnPage ? -1 : 0;
 }

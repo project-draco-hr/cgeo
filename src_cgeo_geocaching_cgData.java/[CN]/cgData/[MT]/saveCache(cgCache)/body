@@ -10,12 +10,7 @@
     values.put("updated",cache.updated);
   }
   values.put("reason",cache.reason);
-  if (cache.detailed == true) {
-    values.put("detailed",1);
-  }
- else {
-    values.put("detailed",0);
-  }
+  values.put("detailed",cache.detailed ? 1 : 0);
   values.put("detailedupdate",cache.detailedUpdate);
   values.put("visiteddate",cache.visitedDate);
   values.put("geocode",cache.geocode);
@@ -23,12 +18,7 @@
   values.put("guid",cache.guid);
   values.put("type",cache.type);
   values.put("name",cache.name);
-  if (cache.own == true) {
-    values.put("own",1);
-  }
- else {
-    values.put("own",0);
-  }
+  values.put("own",cache.own ? 1 : 0);
   values.put("owner",cache.owner);
   values.put("owner_real",cache.ownerReal);
   if (cache.hidden == null) {
@@ -65,37 +55,13 @@
   values.put("rating",cache.rating);
   values.put("votes",cache.votes);
   values.put("myvote",cache.myVote);
-  if (cache.disabled == true) {
-    values.put("disabled",1);
-  }
- else {
-    values.put("disabled",0);
-  }
-  if (cache.archived == true) {
-    values.put("archived",1);
-  }
- else {
-    values.put("archived",0);
-  }
-  if (cache.members == true) {
-    values.put("members",1);
-  }
- else {
-    values.put("members",0);
-  }
-  if (cache.found == true) {
-    values.put("found",1);
-  }
- else {
-    values.put("found",0);
-  }
-  if (cache.favourite == true) {
-    values.put("favourite",1);
-  }
- else {
-    values.put("favourite",0);
-  }
+  values.put("disabled",cache.disabled ? 1 : 0);
+  values.put("archived",cache.archived ? 1 : 0);
+  values.put("members",cache.members ? 1 : 0);
+  values.put("found",cache.found ? 1 : 0);
+  values.put("favourite",cache.favourite ? 1 : 0);
   values.put("inventoryunknown",cache.inventoryItems);
+  values.put("onWatchlist",cache.onWatchlist ? 1 : 0);
   boolean status=false;
   boolean statusOk=true;
   if (cache.attributes != null) {

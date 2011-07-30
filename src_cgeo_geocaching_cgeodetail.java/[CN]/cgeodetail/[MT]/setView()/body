@@ -324,6 +324,7 @@
     Button buttonWatchlistRemove=(Button)findViewById(R.id.remove_from_watchlist);
     buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
     buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
+    updateWatchlistBox();
     LinearLayout waypoints=(LinearLayout)findViewById(R.id.waypoints);
     waypoints.removeAllViews();
     if (cache.waypoints != null && cache.waypoints.size() > 0) {
