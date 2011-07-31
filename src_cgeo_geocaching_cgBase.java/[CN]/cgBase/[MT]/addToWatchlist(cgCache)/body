@@ -1,0 +1,16 @@
+{
+  String page=requestLogged(false,"www.geocaching.com","/my/watchlist.aspx?w=" + cache.cacheid,"POST",null,false,false,false);
+  if (page == null || page.length() == 0) {
+    Log.e(cgSettings.tag,"cgBase.addToWatchlist: No data from server");
+    return -1;
+  }
+  boolean guidOnPage=checkPageForGuid(cache,page);
+  if (guidOnPage) {
+    Log.i(cgSettings.tag,"cgBase.addToWatchlist: cache is on watchlist");
+    cache.onWatchlist=true;
+  }
+ else {
+    Log.e(cgSettings.tag,"cgBase.addToWatchlist: cache is not on watchlist");
+  }
+  return guidOnPage ? 1 : -1;
+}

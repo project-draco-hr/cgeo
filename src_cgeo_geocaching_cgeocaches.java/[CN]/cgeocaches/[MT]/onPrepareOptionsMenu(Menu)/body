@@ -31,25 +31,18 @@
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_offline));
       }
     }
-    int[] hideIfEmptyList=new int[]{MENU_SWITCH_SELECT_MODE,SUBMENU_MANAGE_OFFLINE,SUBMENU_MANAGE_HISTORY,SUBMENU_SHOW_MAP,MENU_MAP,SUBMENU_SORT,SUBMENU_FILTER,MENU_REFRESH_STORED};
-    if (cacheList != null && cacheList.size() > 0) {
-      for (      int entryId : hideIfEmptyList) {
-        MenuItem item=menu.findItem(entryId);
-        if (null != item) {
-          item.setEnabled(true);
-        }
+    int[] hideIfEmptyList=new int[]{MENU_SWITCH_SELECT_MODE,SUBMENU_MANAGE_OFFLINE,SUBMENU_MANAGE_HISTORY,SUBMENU_SHOW_MAP,SUBMENU_SORT,SUBMENU_FILTER,MENU_REFRESH_STORED};
+    boolean menuEnabled=cacheList != null && cacheList.size() > 0;
+    for (    int itemId : hideIfEmptyList) {
+      MenuItem item=menu.findItem(itemId);
+      if (null != item) {
+        item.setEnabled(menuEnabled);
       }
     }
- else {
-      for (      int entryId : hideIfEmptyList) {
-        MenuItem item=menu.findItem(entryId);
-        if (null != item) {
-          item.setEnabled(false);
-        }
-      }
+    if (navigationMenu != null) {
+      navigationMenu.setEnabled(menuEnabled);
     }
-    MenuItem item;
-    item=menu.findItem(MENU_DROP_LIST);
+    MenuItem item=menu.findItem(MENU_DROP_LIST);
     if (item != null) {
       item.setVisible(listId != 1);
     }

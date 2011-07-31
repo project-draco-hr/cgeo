@@ -1,0 +1,8 @@
+{
+  if (packageName == null) {
+    return null;
+  }
+  PackageManager packageManager=context.getPackageManager();
+  Intent intent=packageManager.getLaunchIntentForPackage(packageName);
+  return intent;
+}

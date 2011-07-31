@@ -193,6 +193,15 @@
           Log.e(cgSettings.tag,"Failed to upgrade to ver. 52",e);
         }
       }
+      if (oldVersion < 53) {
+        try {
+          db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
+          Log.i(cgSettings.tag,"Column onWatchlist added to " + dbTableCaches + ".");
+        }
+ catch (        Exception e) {
+          Log.e(cgSettings.tag,"Failed to upgrade to ver. 53",e);
+        }
+      }
     }
     db.setTransactionSuccessful();
   }

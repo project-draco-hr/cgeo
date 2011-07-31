@@ -21,7 +21,7 @@
   final Pattern patternLocation=Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)",Pattern.CASE_INSENSITIVE);
   final Pattern patternHint=Pattern.compile("<p>([^<]*<strong>)?[^\\w]*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]",Pattern.CASE_INSENSITIVE);
   final Pattern patternDescShort=Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternDesc=Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>[^\\w]*Additional Hints</strong>",Pattern.CASE_INSENSITIVE);
+  final Pattern patternDesc=Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>[^\\w]*Additional Hints</strong>",Pattern.CASE_INSENSITIVE);
   final Pattern patternCountLogs=Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>",Pattern.CASE_INSENSITIVE);
   final Pattern patternCountLog=Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
   final Pattern patternLogs=Pattern.compile("<table class=\"LogsTable[^\"]*\"[^>]*>[^<]*<tr>(.*)</tr>[^<]*</table>[^<]*<p",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -32,6 +32,7 @@
   final Pattern patternSpoilersInside=Pattern.compile("[^<]*<a href=\"([^\"]+)\"[^>]*>[^<]*<img[^>]+>[^<]*<span>([^>]+)</span>[^<]*</a>[^<]*<br[^>]*>(([^<]*)(<br[^<]*>)+)?",Pattern.CASE_INSENSITIVE);
   final Pattern patternInventory=Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">[^\\w]*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?",Pattern.CASE_INSENSITIVE);
   final Pattern patternInventoryInside=Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>",Pattern.CASE_INSENSITIVE);
+  final Pattern patternOnWatchlist=Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"",Pattern.CASE_INSENSITIVE);
   final cgCacheWrap caches=new cgCacheWrap();
   final cgCache cache=new cgCache();
   if (page.indexOf("Cache is Unpublished") > -1) {
@@ -242,6 +243,13 @@
     Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache type");
   }
   try {
+    final Matcher matcher=patternOnWatchlist.matcher(page);
+    cache.onWatchlist=matcher.find();
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse watchlist state");
+  }
+  try {
     final Matcher matcherLatLon=patternLatLon.matcher(page);
     while (matcherLatLon.find()) {
       if (matcherLatLon.groupCount() > 0) {
@@ -288,7 +296,7 @@
   }
   try {
     final Matcher matcherDescShort=patternDescShort.matcher(page);
-    while (matcherDescShort.find()) {
+    if (matcherDescShort.find()) {
       if (matcherDescShort.groupCount() > 0) {
         cache.shortdesc=matcherDescShort.group(1).trim();
       }
@@ -299,7 +307,7 @@
   }
   try {
     final Matcher matcherDesc=patternDesc.matcher(page);
-    while (matcherDesc.find()) {
+    if (matcherDesc.find()) {
       if (matcherDesc.groupCount() > 0) {
         cache.description=matcherDesc.group(1);
       }

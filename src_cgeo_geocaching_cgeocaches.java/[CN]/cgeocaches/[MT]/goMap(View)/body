@@ -1,3 +1,10 @@
 {
-  showOnMap();
+  if (searchId == null || searchId == 0 || cacheList == null || cacheList.isEmpty() == true) {
+    warning.showToast(res.getString(R.string.warn_no_cache_coord));
+    return;
+  }
+  Intent mapIntent=new Intent(activity,settings.getMapFactory().getMapClass());
+  mapIntent.putExtra("detail",false);
+  mapIntent.putExtra("searchid",searchId);
+  activity.startActivity(mapIntent);
 }
