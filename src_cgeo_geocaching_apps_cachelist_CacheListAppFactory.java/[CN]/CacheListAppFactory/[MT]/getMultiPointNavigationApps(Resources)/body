@@ -1,0 +1,6 @@
+{
+  if (null == apps || 0 == apps.length) {
+    apps=new CacheListApp[]{new InternalCacheListMap(res),new LocusCacheListApp(res)};
+  }
+  return apps;
+}

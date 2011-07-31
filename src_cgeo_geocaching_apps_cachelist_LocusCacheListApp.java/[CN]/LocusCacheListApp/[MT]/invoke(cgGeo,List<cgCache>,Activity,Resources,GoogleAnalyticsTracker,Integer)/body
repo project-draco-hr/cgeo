@@ -1,0 +1,62 @@
+{
+  if (cacheList == null || cacheList.isEmpty() == true) {
+    return false;
+  }
+  try {
+    final ArrayList<cgCache> cacheListCoord=new ArrayList<cgCache>();
+    for (    cgCache cache : cacheList) {
+      if (cache.latitude != null && cache.longitude != null) {
+        cacheListCoord.add(cache);
+      }
+    }
+    final ByteArrayOutputStream baos=new ByteArrayOutputStream();
+    final DataOutputStream dos=new DataOutputStream(baos);
+    dos.writeInt(1);
+    dos.writeInt(cacheListCoord.size());
+    if (cacheListCoord != null && cacheListCoord.isEmpty() == false) {
+      for (      cgCache cache : cacheListCoord) {
+        final int wpIcon=cgBase.getIcon(true,cache.type,cache.own,cache.found,cache.disabled);
+        if (wpIcon > 0) {
+          Bitmap bitmap=BitmapFactory.decodeResource(res,wpIcon);
+          ByteArrayOutputStream baos2=new ByteArrayOutputStream();
+          bitmap.compress(Bitmap.CompressFormat.PNG,100,baos2);
+          byte[] image=baos2.toByteArray();
+          dos.writeInt(image.length);
+          dos.write(image);
+        }
+ else {
+          dos.writeInt(0);
+        }
+        if (cache != null && cache.geocode != null && cache.geocode.length() > 0) {
+          dos.writeUTF(cache.geocode.toUpperCase());
+        }
+ else {
+          dos.writeUTF("");
+        }
+        if (cache != null && cache.name != null && cache.name.length() > 0) {
+          dos.writeUTF(cache.name);
+        }
+ else {
+          dos.writeUTF("");
+        }
+        if (cache != null && cache.geocode != null && cache.geocode.length() > 0) {
+          dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeodetail;geocode;" + cache.geocode);
+        }
+ else {
+          dos.writeUTF("");
+        }
+        dos.writeDouble(cache.latitude);
+        dos.writeDouble(cache.longitude);
+      }
+    }
+    final Intent intent=new Intent();
+    intent.setAction(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse("menion.points:data"));
+    intent.putExtra("data",baos.toByteArray());
+    activity.startActivity(intent);
+    sendAnal(activity,tracker,"/external/locus");
+  }
+ catch (  Exception e) {
+  }
+  return true;
+}

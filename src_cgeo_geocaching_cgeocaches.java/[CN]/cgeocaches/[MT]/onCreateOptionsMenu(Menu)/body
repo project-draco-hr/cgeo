@@ -47,16 +47,7 @@
     }
     menu.add(0,MENU_REFRESH_STORED,0,res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as);
   }
-  final Intent intentTest=new Intent(Intent.ACTION_VIEW);
-  intentTest.setData(Uri.parse("menion.points:x"));
-  if (cgBase.isIntentAvailable(activity,intentTest) == true) {
-    SubMenu subMenu=menu.addSubMenu(0,101,0,res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
-    subMenu.add(0,MENU_MAP,0,res.getString(R.string.caches_map_cgeo));
-    subMenu.add(0,MENU_LOCUS,0,res.getString(R.string.caches_map_locus));
-  }
- else {
-    menu.add(0,MENU_MAP,0,res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
-  }
+  CacheListAppFactory.addMenuItems(menu,activity,res);
   if (type.equals("offline") == true) {
     SubMenu subMenu=menu.addSubMenu(0,102,0,res.getString(R.string.list_menu)).setIcon(android.R.drawable.ic_menu_more);
     subMenu.add(0,MENU_CREATE_LIST,0,res.getString(R.string.list_menu_create));

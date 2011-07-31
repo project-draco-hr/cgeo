@@ -1,0 +1,19 @@
+{
+  cgSettings settings=getSettings(activity);
+  Intent mapIntent=new Intent(activity,settings.getMapFactory().getMapClass());
+  if (searchId != null) {
+    mapIntent.putExtra("detail",true);
+    mapIntent.putExtra("searchid",searchId);
+  }
+  if (waypoint != null) {
+    mapIntent.putExtra("latitude",waypoint.latitude);
+    mapIntent.putExtra("longitude",waypoint.longitude);
+    mapIntent.putExtra("wpttype",waypoint.type);
+  }
+  if (cache != null) {
+    mapIntent.putExtra("latitude",cache.latitude);
+    mapIntent.putExtra("longitude",cache.longitude);
+  }
+  activity.startActivity(mapIntent);
+  return true;
+}
