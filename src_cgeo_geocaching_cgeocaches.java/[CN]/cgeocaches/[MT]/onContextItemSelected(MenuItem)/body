@@ -22,7 +22,7 @@
     touchedPos=-1;
     cache=null;
   }
-  if (id == 1) {
+  if (id == MENU_COMPASS) {
     Intent navigateIntent=new Intent(activity,cgeonavigate.class);
     navigateIntent.putExtra("latitude",cache.latitude);
     navigateIntent.putExtra("longitude",cache.longitude);
@@ -31,7 +31,7 @@
     activity.startActivity(navigateIntent);
     return true;
   }
- else   if (id == 6) {
+ else   if (id == MENU_LOG_VISIT) {
     if (cache.cacheid == null || cache.cacheid.length() == 0) {
       warning.showToast(res.getString(R.string.err_cannot_log_visit));
       return true;
@@ -43,77 +43,77 @@
     activity.startActivity(logVisitIntent);
     return true;
   }
- else   if (id == 7) {
+ else   if (id == MENU_CACHE_DETAILS) {
     Intent cachesIntent=new Intent(activity,cgeodetail.class);
     cachesIntent.putExtra("geocode",cache.geocode.toUpperCase());
     cachesIntent.putExtra("name",cache.name);
     activity.startActivity(cachesIntent);
     return true;
   }
- else   if (id == 8) {
+ else   if (id == MENU_FILTER_SIZE_MICRO) {
     return setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_micro)));
   }
- else   if (id == 9) {
+ else   if (id == MENU_FILTER_SIZE_SMALL) {
     return setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_small)));
   }
- else   if (id == 10) {
+ else   if (id == MENU_FILTER_SIZE_REGULAR) {
     return setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_regular)));
   }
- else   if (id == 11) {
+ else   if (id == MENU_FILTER_SIZE_LARGE) {
     return setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_large)));
   }
- else   if (id == 12) {
+ else   if (id == MENU_FILTER_SIZE_OTHER) {
     return setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_other)));
   }
- else   if (id == 13) {
+ else   if (id == MENU_FILTER_SIZE_VIRTUAL) {
     return setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_virtual)));
   }
- else   if (id == 14) {
+ else   if (id == MENU_FILTER_SIZE_NOT_CHOSEN) {
     return setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_notchosen)));
   }
- else   if (id == 15) {
+ else   if (id == MENU_FILTER_TYPE_TRADITIONAL) {
     return setFilter(new cgFilterByType("traditional"));
   }
- else   if (id == 16) {
+ else   if (id == MENU_FILTER_TYPE_MULTI) {
     return setFilter(new cgFilterByType("multi"));
   }
- else   if (id == 17) {
+ else   if (id == MENU_FILTER_TYPE_MYSTERY) {
     return setFilter(new cgFilterByType("mystery"));
   }
- else   if (id == 18) {
+ else   if (id == MENU_FILTER_TYPE_LETTERBOX) {
     return setFilter(new cgFilterByType("letterbox"));
   }
- else   if (id == 19) {
+ else   if (id == MENU_FILTER_TYPE_EVENT) {
     return setFilter(new cgFilterByType("event"));
   }
- else   if (id == 20) {
+ else   if (id == MENU_FILTER_TYPE_MEGA) {
     return setFilter(new cgFilterByType("mega"));
   }
- else   if (id == 21) {
+ else   if (id == MENU_FILTER_TYPE_EARTH) {
     return setFilter(new cgFilterByType("earth"));
   }
- else   if (id == 22) {
+ else   if (id == MENU_FILTER_TYPE_CITO) {
     return setFilter(new cgFilterByType("cito"));
   }
- else   if (id == 23) {
+ else   if (id == MENU_FILTER_TYPE_WEBCAM) {
     return setFilter(new cgFilterByType("webcam"));
   }
- else   if (id == 24) {
+ else   if (id == MENU_FILTER_TYPE_VIRTUAL) {
     return setFilter(new cgFilterByType("virtual"));
   }
- else   if (id == 25) {
+ else   if (id == MENU_FILTER_TYPE_WHERIGO) {
     return setFilter(new cgFilterByType("wherigo"));
   }
- else   if (id == 26) {
+ else   if (id == MENU_FILTER_TYPE_LOSTFOUND) {
     return setFilter(new cgFilterByType("lostfound"));
   }
- else   if (id == 27) {
+ else   if (id == MENU_FILTER_TYPE_APE) {
     return setFilter(new cgFilterByType("ape"));
   }
- else   if (id == 28) {
+ else   if (id == MENU_FILTER_TYPE_GCHQ) {
     return setFilter(new cgFilterByType("gchq"));
   }
- else   if (id == 29) {
+ else   if (id == MENU_FILTER_TYPE_GPS) {
     return setFilter(new cgFilterByType("gps"));
   }
  else   if (id == MENU_DROP_CACHE) {
