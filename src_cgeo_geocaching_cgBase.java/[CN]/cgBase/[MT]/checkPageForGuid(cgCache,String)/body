@@ -1,0 +1,13 @@
+{
+  if (cache.guid == null || cache.guid.length() == 0)   return false;
+  Pattern patternOk=Pattern.compile(cache.guid,Pattern.CASE_INSENSITIVE);
+  Matcher matcherOk=patternOk.matcher(page);
+  if (matcherOk.find()) {
+    Log.i(cgSettings.tag,"cgBase.checkPageForGuid: guid '" + cache.guid + "' found");
+    return true;
+  }
+ else {
+    Log.i(cgSettings.tag,"cgBase.checkPageForGuid: guid '" + cache.guid + "' not found");
+    return false;
+  }
+}

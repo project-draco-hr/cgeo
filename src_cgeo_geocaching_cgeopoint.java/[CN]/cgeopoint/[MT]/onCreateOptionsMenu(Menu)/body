@@ -3,5 +3,7 @@
   SubMenu subMenu=menu.addSubMenu(1,0,0,res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
   NavigationAppFactory.addMenuItems(subMenu,activity,res);
   menu.add(0,5,0,res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate);
+  MenuItem clearHistoryItem=menu.add(0,6,0,res.getString(R.string.search_clear_history));
+  clearHistoryItem.setIcon(android.R.drawable.ic_menu_delete);
   return true;
 }

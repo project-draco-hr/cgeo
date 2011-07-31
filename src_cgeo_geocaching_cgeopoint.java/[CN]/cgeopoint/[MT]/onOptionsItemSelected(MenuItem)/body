@@ -1,16 +1,19 @@
 {
   final int menuItem=item.getItemId();
   ArrayList<Double> coords=getDestination();
-  if (menuItem == 1) {
-    showOnMap();
-    return true;
+  if (coords != null && !coords.isEmpty()) {
+    addToHistory(coords);
   }
- else   if (menuItem == 2) {
+  if (menuItem == 2) {
     navigateTo();
     return true;
   }
  else   if (menuItem == 5) {
     cachesAround();
+    return true;
+  }
+ else   if (menuItem == 6) {
+    clearHistory();
     return true;
   }
   return NavigationAppFactory.onMenuItemSelected(item,geo,activity,res,warning,tracker,null,null,null,coords);

@@ -184,6 +184,24 @@
           Log.e(cgSettings.tag,"Failed to upgrade to ver. 51: " + e.toString());
         }
       }
+      if (oldVersion < 52) {
+        try {
+          db.execSQL(dbCreateSearchDestinationHistory);
+          Log.i(cgSettings.tag,"Added table " + dbTableSearchDestionationHistory + ".");
+        }
+ catch (        Exception e) {
+          Log.e(cgSettings.tag,"Failed to upgrade to ver. 52",e);
+        }
+      }
+      if (oldVersion < 53) {
+        try {
+          db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
+          Log.i(cgSettings.tag,"Column onWatchlist added to " + dbTableCaches + ".");
+        }
+ catch (        Exception e) {
+          Log.e(cgSettings.tag,"Failed to upgrade to ver. 53",e);
+        }
+      }
     }
     db.setTransactionSuccessful();
   }

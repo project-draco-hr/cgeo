@@ -1,0 +1,27 @@
+{
+  boolean success=true;
+  if (destination == null) {
+    success=false;
+  }
+ else {
+    init();
+    databaseRW.beginTransaction();
+    try {
+      ContentValues values=new ContentValues();
+      values.put("date",destination.getDate());
+      values.put("latitude",destination.getLatitude());
+      values.put("longitude",destination.getLongitude());
+      long id=databaseRW.insert(dbTableSearchDestionationHistory,null,values);
+      destination.setId(id);
+      databaseRW.setTransactionSuccessful();
+    }
+ catch (    Exception e) {
+      success=false;
+      Log.e(cgSettings.tag,"Updating searchedDestinations db failed",e);
+    }
+ finally {
+      databaseRW.endTransaction();
+    }
+  }
+  return success;
+}

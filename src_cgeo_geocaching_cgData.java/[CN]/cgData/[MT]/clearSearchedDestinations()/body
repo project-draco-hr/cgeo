@@ -1,0 +1,17 @@
+{
+  boolean success=true;
+  init();
+  databaseRW.beginTransaction();
+  try {
+    databaseRW.delete(dbTableSearchDestionationHistory,null,null);
+    databaseRW.setTransactionSuccessful();
+  }
+ catch (  Exception e) {
+    success=false;
+    Log.e(cgSettings.tag,"Unable to clear searched destinations",e);
+  }
+ finally {
+    databaseRW.endTransaction();
+  }
+  return success;
+}
