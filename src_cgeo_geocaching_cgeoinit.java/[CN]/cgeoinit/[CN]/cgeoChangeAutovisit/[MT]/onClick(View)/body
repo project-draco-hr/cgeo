@@ -1,16 +1,16 @@
 {
   SharedPreferences.Editor edit=prefs.edit();
-  if (prefs.getBoolean("autovisit",false)) {
-    edit.putBoolean("autovisit",false);
-    settings.autovisit=false;
+  if (prefs.getBoolean("trackautovisit",false)) {
+    edit.putBoolean("trackautovisit",false);
+    settings.trackableAutovisit=false;
   }
  else {
-    edit.putBoolean("autovisit",true);
-    settings.autovisit=true;
+    edit.putBoolean("trackautovisit",true);
+    settings.trackableAutovisit=true;
   }
   edit.commit();
-  CheckBox autovisitButton=(CheckBox)findViewById(R.id.autovisit);
-  if (prefs.getBoolean("autovisit",false) == false) {
+  CheckBox autovisitButton=(CheckBox)findViewById(R.id.trackautovisit);
+  if (prefs.getBoolean("trackautovisit",false) == false) {
     autovisitButton.setChecked(false);
   }
  else {
