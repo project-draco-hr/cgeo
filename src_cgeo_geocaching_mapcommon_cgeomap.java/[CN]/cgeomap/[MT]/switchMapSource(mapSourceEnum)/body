@@ -1,0 +1,10 @@
+{
+  settings.mapSource=mapSource;
+  prefsEdit.putInt("mapsource",settings.mapSource.ordinal());
+  prefsEdit.commit();
+  boolean mapRestartRequired=settings.mapSource.isGoogleMapSource() != settings.mapSourceUsed.isGoogleMapSource();
+  if (!mapRestartRequired) {
+    mapView.setMapSource(settings);
+  }
+  return mapRestartRequired;
+}

@@ -30,12 +30,6 @@
   if (!mapView.needsScaleOverlay()) {
     mapView.setBuiltinScale(true);
   }
-  if (settings.maptype == cgSettings.mapSatellite) {
-    mapView.setSatellite(true);
-  }
- else {
-    mapView.setSatellite(false);
-  }
   mapView.setBuiltInZoomControls(true);
   mapView.displayZoomControls(true);
   mapView.preLoad();
@@ -71,6 +65,7 @@
     latitudeIntent=extras.getDouble("latitude");
     longitudeIntent=extras.getDouble("longitude");
     waypointTypeIntent=extras.getString("wpttype");
+    mapStateIntent=extras.getIntArray("mapstate");
     if (searchIdIntent == 0l) {
       searchIdIntent=null;
     }
@@ -94,9 +89,9 @@
  else {
     base.sendAnal(activity,"/map/normal");
     followMyLocation=false;
-    if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null)) {
-      centerMap(geocodeIntent,searchIdIntent,latitudeIntent,longitudeIntent);
-    }
+  }
+  if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
+    centerMap(geocodeIntent,searchIdIntent,latitudeIntent,longitudeIntent,mapStateIntent);
   }
   setMyLoc(null);
   startTimer();
