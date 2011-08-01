@@ -9,7 +9,6 @@
   autoLoadDesc=prefs.getInt("autoloaddesc",0);
   units=prefs.getInt("units",1);
   livelist=prefs.getInt("livelist",1);
-  maptype=prefs.getInt("maptype",1);
   maplive=prefs.getInt("maplive",1);
   mapzoom=prefs.getInt("mapzoom",14);
   maptrail=prefs.getInt("maptrail",1);
@@ -30,7 +29,8 @@
   tokenPublic=prefs.getString("tokenpublic",null);
   tokenSecret=prefs.getString("tokensecret",null);
   mapFile=prefs.getString("mfmapfile",null);
-  mapProvider=mapSourceEnum.fromInt(prefs.getInt("mapsource",0));
+  mapFileValid=checkMapfile(mapFile);
+  mapSource=mapSourceEnum.fromInt(prefs.getInt("mapsource",0));
   webDeviceName=prefs.getString("webDeviceName",null);
   webDeviceCode=prefs.getString("webDeviceCode",null);
   trackableAutovisit=prefs.getBoolean("trackautovisit",false);

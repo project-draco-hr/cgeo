@@ -1,15 +1,18 @@
 {
-  setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
-switch (settings.mapProvider) {
-case mapsforgeMapnik:
-    break;
+switch (settings.mapSource) {
 case mapsforgeOsmarender:
-  setMapViewMode(MapViewMode.OSMARENDER_TILE_DOWNLOAD);
+    setMapViewMode(MapViewMode.OSMARENDER_TILE_DOWNLOAD);
+  break;
+case mapsforgeCycle:
+setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
 break;
 case mapsforgeOffline:
 if (MapDatabase.isValidMapFile(settings.getMapFile())) {
 setMapViewMode(MapViewMode.CANVAS_RENDERER);
 super.setMapFile(settings.getMapFile());
 }
+break;
+default :
+setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
 }
 }

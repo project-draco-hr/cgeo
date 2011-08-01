@@ -1,14 +1,14 @@
 {
-  if (mapProvider == mapSourceEnum.googleMap) {
-    if (mapProviderUsed != mapSourceEnum.googleMap || mapFactory == null) {
+  if (mapSource.isGoogleMapSource()) {
+    if (!mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
       mapFactory=new googleMapFactory();
-      mapProviderUsed=mapProvider;
+      mapSourceUsed=mapSource;
     }
   }
- else   if (mapProvider != mapSourceEnum.googleMap) {
-    if (mapProviderUsed == mapSourceEnum.googleMap || mapFactory == null) {
+ else   if (!mapSource.isGoogleMapSource()) {
+    if (mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
       mapFactory=new mfMapFactory();
-      mapProviderUsed=mapProvider;
+      mapSourceUsed=mapSource;
     }
   }
   return mapFactory;

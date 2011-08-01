@@ -1,5 +1,15 @@
 {
-  if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
+  if (!centered && mapState != null) {
+    try {
+      mapController.setCenter(settings.getMapFactory().getGeoPointBase(mapState[0],mapState[1]));
+      mapController.setZoom(mapState[2]);
+    }
+ catch (    Exception e) {
+    }
+    centered=true;
+    alreadyCentered=true;
+  }
+ else   if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
     try {
       ArrayList<Object> viewport;
       if (geocodeCenter != null) {
