@@ -4,12 +4,12 @@
     return null;
   }
   Cursor cursor=null;
-  ArrayList<cgSpoiler> spoilers=new ArrayList<cgSpoiler>();
+  ArrayList<cgImage> spoilers=new ArrayList<cgImage>();
   cursor=databaseRO.query(dbTableSpoilers,new String[]{"_id","url","title","description"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {
-      cgSpoiler spoiler=new cgSpoiler();
+      cgImage spoiler=new cgImage();
       spoiler.url=(String)cursor.getString(cursor.getColumnIndex("url"));
       spoiler.title=(String)cursor.getString(cursor.getColumnIndex("title"));
       spoiler.description=(String)cursor.getString(cursor.getColumnIndex("description"));

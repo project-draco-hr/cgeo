@@ -19,7 +19,16 @@
         values.put("log",oneLog.log);
         values.put("date",oneLog.date);
         values.put("found",oneLog.found);
-        databaseRW.insert(dbTableLogs,null,values);
+        long log_id=databaseRW.insert(dbTableLogs,null,values);
+        if ((oneLog.logImages != null) && (oneLog.logImages.size() > 0)) {
+          for (          cgImage img : oneLog.logImages) {
+            values.clear();
+            values.put("log_id",log_id);
+            values.put("title",img.title);
+            values.put("url",img.url);
+            databaseRW.insert(dbTableLogImages,null,values);
+          }
+        }
       }
     }
     databaseRW.setTransactionSuccessful();

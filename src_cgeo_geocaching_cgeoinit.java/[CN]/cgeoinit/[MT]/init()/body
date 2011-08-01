@@ -136,6 +136,14 @@
     offlineButton.setChecked(true);
   }
   offlineButton.setOnClickListener(new cgeoChangeOffline());
+  CheckBox saveLogImgButton=(CheckBox)findViewById(R.id.save_log_img);
+  if (prefs.getInt("logimages",1) == 0) {
+    saveLogImgButton.setChecked(false);
+  }
+ else {
+    saveLogImgButton.setChecked(true);
+  }
+  saveLogImgButton.setOnClickListener(new cgeoChangeSaveLogImg());
   CheckBox autoloadButton=(CheckBox)findViewById(R.id.autoload);
   if (prefs.getInt("autoloaddesc",0) == 0) {
     autoloadButton.setChecked(false);
