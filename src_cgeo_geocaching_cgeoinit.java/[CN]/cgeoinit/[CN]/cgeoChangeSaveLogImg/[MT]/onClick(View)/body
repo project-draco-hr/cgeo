@@ -1,0 +1,20 @@
+{
+  SharedPreferences.Editor edit=prefs.edit();
+  if (prefs.getBoolean("logimages",true) == false) {
+    edit.putBoolean("logimages",true);
+    settings.storelogimages=true;
+  }
+ else {
+    edit.putBoolean("logimages",false);
+    settings.storelogimages=false;
+  }
+  edit.commit();
+  CheckBox saveLogImgButton=(CheckBox)findViewById(R.id.save_log_img);
+  if (prefs.getBoolean("logimages",true) == false) {
+    saveLogImgButton.setChecked(false);
+  }
+ else {
+    saveLogImgButton.setChecked(true);
+  }
+  return;
+}

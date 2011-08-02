@@ -16,6 +16,7 @@
       log.log=(String)cursor.getString(cursor.getColumnIndex("log"));
       log.date=(long)cursor.getLong(cursor.getColumnIndex("date"));
       log.found=(int)cursor.getInt(cursor.getColumnIndex("found"));
+      log.logImages=loadLogImages(log.id);
       logs.add(log);
     }
  while (cursor.moveToNext());
