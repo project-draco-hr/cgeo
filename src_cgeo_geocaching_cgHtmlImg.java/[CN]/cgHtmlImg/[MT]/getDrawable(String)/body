@@ -146,29 +146,31 @@
         }
       }
     }
-    try {
-      if (bufferedEntity != null) {
-        final InputStream is=(InputStream)bufferedEntity.getContent();
-        final FileOutputStream fos=new FileOutputStream(fileName);
-        try {
-          final byte[] buffer=new byte[4096];
-          int l;
-          while ((l=is.read(buffer)) != -1) {
-            fos.write(buffer,0,l);
+    if (save == true) {
+      try {
+        if (bufferedEntity != null) {
+          final InputStream is=(InputStream)bufferedEntity.getContent();
+          final FileOutputStream fos=new FileOutputStream(fileName);
+          try {
+            final byte[] buffer=new byte[4096];
+            int l;
+            while ((l=is.read(buffer)) != -1) {
+              fos.write(buffer,0,l);
+            }
+          }
+ catch (          IOException e) {
+            Log.e(cgSettings.tag,"cgHtmlImg.getDrawable (saving to cache): " + e.toString());
+          }
+ finally {
+            is.close();
+            fos.flush();
+            fos.close();
           }
         }
- catch (        IOException e) {
-          Log.e(cgSettings.tag,"cgHtmlImg.getDrawable (saving to cache): " + e.toString());
-        }
- finally {
-          is.close();
-          fos.flush();
-          fos.close();
-        }
       }
-    }
- catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgHtmlImg.getDrawable (saving to cache): " + e.toString());
+ catch (      Exception e) {
+        Log.e(cgSettings.tag,"cgHtmlImg.getDrawable (saving to cache): " + e.toString());
+      }
     }
     entity=null;
     bufferedEntity=null;

@@ -23,8 +23,17 @@
       Html.fromHtml(cache.description,imgGetter,null);
     }
     if (cache.spoilers != null && cache.spoilers.isEmpty() == false) {
-      for (      cgSpoiler oneSpoiler : cache.spoilers) {
+      for (      cgImage oneSpoiler : cache.spoilers) {
         imgGetter.getDrawable(oneSpoiler.url);
+      }
+    }
+    if (settings.storelogimages == true) {
+      for (      cgLog log : cache.logs) {
+        if (log.logImages != null && log.logImages.isEmpty() == false) {
+          for (          cgImage oneLogImg : log.logImages) {
+            imgGetter.getDrawable(oneLogImg.url);
+          }
+        }
       }
     }
     if (settings.storeOfflineMaps == 1 && cache.latitude != null && cache.longitude != null) {

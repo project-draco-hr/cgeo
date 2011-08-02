@@ -4,7 +4,7 @@
     Log.e(cgSettings.tag,"cgBase.addToWatchlist: No data from server");
     return -1;
   }
-  boolean guidOnPage=checkPageForGuid(cache,page);
+  boolean guidOnPage=cache.isGuidContainedInPage(page);
   if (guidOnPage) {
     Log.i(cgSettings.tag,"cgBase.addToWatchlist: cache is on watchlist");
     cache.onWatchlist=true;
