@@ -14,10 +14,6 @@
   }
   setContentView(R.layout.waypoint);
   base.setTitle(activity,"waypoint");
-  tracker=GoogleAnalyticsTracker.getInstance();
-  tracker.start(cgSettings.analytics,this);
-  tracker.dispatch();
-  base.sendAnal(activity,tracker,"/waypoint/detail");
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     id=extras.getInt("waypoint");

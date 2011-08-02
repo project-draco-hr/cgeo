@@ -9,10 +9,6 @@
   setTheme(R.style.transparent);
   setContentView(R.layout.popup);
   base.setTitle(activity,res.getString(R.string.detail));
-  tracker=GoogleAnalyticsTracker.getInstance();
-  tracker.start(cgSettings.analytics,this);
-  tracker.dispatch();
-  base.sendAnal(activity,tracker,"/popup");
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     fromDetail=extras.getBoolean("fromdetail");
