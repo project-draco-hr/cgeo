@@ -68,6 +68,14 @@
         item.setTitle(res.getString(R.string.cache_export_fieldnote));
       }
     }
+    item=menu.findItem(MENU_EXPORT_NOTES);
+    item.setEnabled(false);
+    for (    cgCache cache : cacheList) {
+      if (cache.logOffline) {
+        item.setEnabled(true);
+        break;
+      }
+    }
   }
  catch (  Exception e) {
     Log.e(cgSettings.tag,"cgeocaches.onPrepareOptionsMenu: " + e.toString());
