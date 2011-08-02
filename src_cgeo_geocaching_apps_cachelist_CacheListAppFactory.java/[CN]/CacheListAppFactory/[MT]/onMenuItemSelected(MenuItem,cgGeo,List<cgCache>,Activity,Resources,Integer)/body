@@ -1,0 +1,7 @@
+{
+  CacheListApp app=(CacheListApp)getAppFromMenuItem(item,apps);
+  if (app != null) {
+    return app.invoke(geo,caches,activity,res,searchId);
+  }
+  return false;
+}

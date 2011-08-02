@@ -18,12 +18,6 @@
     finish();
     return;
   }
-  if (cache.reason >= 1) {
-    base.sendAnal(activity,tracker,"/cache/detail/stored");
-  }
- else {
-    base.sendAnal(activity,tracker,"/cache/detail/online");
-  }
   try {
     if (gcIcons == null || gcIcons.isEmpty()) {
       gcIcons.put("ape",R.drawable.type_ape);

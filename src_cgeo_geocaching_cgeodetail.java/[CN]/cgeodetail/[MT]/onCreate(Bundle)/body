@@ -60,12 +60,6 @@
       }
     }
   }
-  tracker=GoogleAnalyticsTracker.getInstance();
-  tracker.start(cgSettings.analytics,this);
-  tracker.dispatch();
-  if (geocode != null) {
-    base.sendAnal(activity,tracker,"/cache/detail#" + geocode);
-  }
   if (geocode == null && guid == null) {
     warning.showToast(res.getString(R.string.err_detail_cache));
     finish();

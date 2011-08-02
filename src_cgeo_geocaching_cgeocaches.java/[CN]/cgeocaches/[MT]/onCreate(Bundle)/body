@@ -15,10 +15,6 @@
   }
   setContentView(R.layout.caches);
   base.setTitle(activity,"caches");
-  tracker=GoogleAnalyticsTracker.getInstance();
-  tracker.start(cgSettings.analytics,this);
-  tracker.dispatch();
-  base.sendAnal(activity,tracker,"/cache/list");
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     type=extras.getString("type");

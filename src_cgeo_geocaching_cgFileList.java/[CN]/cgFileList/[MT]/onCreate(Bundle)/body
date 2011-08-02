@@ -14,7 +14,6 @@
   }
   setContentView(R.layout.gpx);
   getBase().setTitle(getActivity(),getRes().getString(R.string.gpx_import_title));
-  getBase().sendAnal(getActivity(),"/file-import");
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     listId=extras.getInt("list");
