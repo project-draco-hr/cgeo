@@ -1,5 +1,5 @@
 {
-  BitmapDrawable image=(BitmapDrawable)message.obj;
+  final BitmapDrawable image=(BitmapDrawable)message.obj;
   if (image != null) {
     ImageView image_view=null;
     image_view=(ImageView)inflater.inflate(R.layout.image_item,null);
@@ -8,11 +8,27 @@
     image_view.setClickable(true);
     image_view.setOnClickListener(new View.OnClickListener(){
       public void onClick(      View arg0){
-        activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(img.url)));
+        final String directoryTarget=Environment.getExternalStorageDirectory() + "/" + cgSettings.cache+ "/"+ "temp.jpg";
+        File file=new File(directoryTarget);
+        FileOutputStream fos;
+        try {
+          fos=new FileOutputStream(file);
+          image.getBitmap().compress(CompressFormat.JPEG,100,fos);
+          fos.close();
+        }
+ catch (        Exception e) {
+          Log.e(cgSettings.tag,"cgeoimages.handleMessage.onClick: " + e.toString());
+          return;
+        }
+        Intent intent=new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file),"image/jpg");
+        activity.startActivity(intent);
+        if (file.exists())         file.deleteOnExit();
       }
     }
 );
-    image_view.setImageDrawable((BitmapDrawable)message.obj);
+    image_view.setImageDrawable(image);
     image_view.setScaleType(ImageView.ScaleType.CENTER_CROP);
     image_view.setLayoutParams(new LayoutParams(bounds.width(),bounds.height()));
     view.addView(image_view);
