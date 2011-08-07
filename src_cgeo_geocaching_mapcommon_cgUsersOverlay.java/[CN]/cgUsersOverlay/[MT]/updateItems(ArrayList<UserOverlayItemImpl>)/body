@@ -7,7 +7,7 @@
   }
   items.clear();
   if (itemsPre.size() > 0) {
-    items=(ArrayList<UserOverlayItemImpl>)itemsPre.clone();
+    items=new ArrayList<UserOverlayItemImpl>(itemsPre);
   }
   setLastFocusedItemIndex(-1);
   populate();

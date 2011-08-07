@@ -5,7 +5,7 @@
   if (geo != null) {
     geo=app.removeGeo();
   }
-  final ArrayList<cgCache> cacheListTemp=(ArrayList<cgCache>)cacheList.clone();
+  final ArrayList<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
   for (  cgCache cache : cacheListTemp) {
     if (checked > 0 && cache.statusChecked == false) {
       handler.sendEmptyMessage(0);
