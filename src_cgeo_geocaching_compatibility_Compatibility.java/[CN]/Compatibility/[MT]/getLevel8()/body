@@ -1,0 +1,13 @@
+{
+  if (!initialized) {
+    try {
+      final int sdk=new Integer(Build.VERSION.SDK).intValue();
+      if (sdk >= 8) {
+        level8=new AndroidLevel8();
+      }
+    }
+ catch (    Exception e) {
+    }
+  }
+  return level8;
+}
