@@ -1,0 +1,21 @@
+{
+  if (newPoints != null && oldPoints != null) {
+    for (    cgWaypoint old : oldPoints) {
+      boolean merged=false;
+      if (old != null && old.name != null && old.name.length() > 0) {
+        for (        cgWaypoint waypoint : newPoints) {
+          if (waypoint != null && waypoint.name != null) {
+            if (old.name.equalsIgnoreCase(waypoint.name)) {
+              waypoint.merge(old);
+              merged=true;
+              break;
+            }
+          }
+        }
+      }
+      if (!merged) {
+        newPoints.add(old);
+      }
+    }
+  }
+}

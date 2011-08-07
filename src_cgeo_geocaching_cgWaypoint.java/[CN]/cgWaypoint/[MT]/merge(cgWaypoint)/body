@@ -1,0 +1,34 @@
+{
+  if (prefix == null || prefix.length() == 0) {
+    prefix=old.prefix;
+  }
+  if (lookup == null || lookup.length() == 0) {
+    lookup=old.lookup;
+  }
+  if (name == null || name.length() == 0) {
+    name=old.name;
+  }
+  if (latlon == null || latlon.length() == 0) {
+    latlon=old.latlon;
+  }
+  if (latitudeString == null || latitudeString.length() == 0) {
+    latitudeString=old.latitudeString;
+  }
+  if (longitudeString == null || longitudeString.length() == 0) {
+    longitudeString=old.longitudeString;
+  }
+  if (latitude == null) {
+    latitude=old.latitude;
+  }
+  if (longitude == null) {
+    longitude=old.longitude;
+  }
+  if (note == null || note.length() == 0) {
+    note=old.note;
+  }
+  if (note != null && old.note != null) {
+    if (old.note.length() > note.length()) {
+      note=old.note;
+    }
+  }
+}
