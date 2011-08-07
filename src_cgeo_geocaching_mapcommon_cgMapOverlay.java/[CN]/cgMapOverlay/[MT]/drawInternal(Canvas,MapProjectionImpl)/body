@@ -5,6 +5,8 @@
       blockedCircle=new Paint();
       blockedCircle.setAntiAlias(true);
       blockedCircle.setStrokeWidth(1.0f);
+      blockedCircle.setARGB(127,0,0,0);
+      blockedCircle.setPathEffect(new DashPathEffect(new float[]{3,2},0));
     }
     if (setfil == null)     setfil=new PaintFlagsDrawFilter(0,Paint.FILTER_BITMAP_FLAG);
     if (remfil == null)     remfil=new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG,0);

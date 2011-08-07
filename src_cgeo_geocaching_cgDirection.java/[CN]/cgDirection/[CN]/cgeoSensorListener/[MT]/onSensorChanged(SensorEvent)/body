@@ -1,16 +1,7 @@
 {
   Double directionNowPre=new Double(event.values[0]);
-  if (cg8 != null) {
-    final int rotation=cg8.getRotation();
-    if (rotation == Surface.ROTATION_90)     directionNowPre=directionNowPre + 90;
- else     if (rotation == Surface.ROTATION_180)     directionNowPre=directionNowPre + 180;
- else     if (rotation == Surface.ROTATION_270)     directionNowPre=directionNowPre + 270;
+  directionNow=Compatibility.getDirectionNow(directionNowPre,(Activity)context);
+  if (dirUpdate != null && directionNow != null) {
+    dirUpdate.updateDir(dir);
   }
- else {
-    final Display display=((Activity)context).getWindowManager().getDefaultDisplay();
-    final int rotation=display.getOrientation();
-    if (rotation == Configuration.ORIENTATION_LANDSCAPE)     directionNowPre=directionNowPre + 90;
-  }
-  directionNow=directionNowPre;
-  if (dirUpdate != null && directionNow != null)   dirUpdate.updateDir(dir);
 }

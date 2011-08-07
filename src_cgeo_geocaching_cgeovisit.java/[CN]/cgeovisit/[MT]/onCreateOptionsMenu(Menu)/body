@@ -1,17 +1,21 @@
 {
-  SubMenu subMenu=null;
-  subMenu=menu.addSubMenu(0,0,0,res.getString(R.string.log_add)).setIcon(android.R.drawable.ic_menu_add);
-  subMenu.add(0,LOG_DATE_TIME,0,res.getString(R.string.log_date_time));
-  subMenu.add(0,LOG_DATE,0,res.getString(R.string.log_date));
-  subMenu.add(0,LOG_TIME,0,res.getString(R.string.log_time));
-  subMenu.add(0,LOG_SIGNATURE,0,res.getString(R.string.init_signature));
-  subMenu.add(0,LOG_SIGNATURE_DATE_TIME,0,res.getString(R.string.log_date_time) + " & " + res.getString(R.string.init_signature));
-  subMenu=menu.addSubMenu(0,9,0,res.getString(R.string.log_rating)).setIcon(android.R.drawable.ic_menu_sort_by_size);
-  subMenu.add(0,10,0,res.getString(R.string.log_no_rating));
-  subMenu.add(0,15,0,res.getString(R.string.log_stars_5));
-  subMenu.add(0,14,0,res.getString(R.string.log_stars_4));
-  subMenu.add(0,13,0,res.getString(R.string.log_stars_3));
-  subMenu.add(0,12,0,res.getString(R.string.log_stars_2));
-  subMenu.add(0,11,0,res.getString(R.string.log_stars_1));
+  SubMenu menuLog=null;
+  menuLog=menu.addSubMenu(0,0,0,res.getString(R.string.log_add)).setIcon(android.R.drawable.ic_menu_add);
+  menuLog.add(0,LOG_DATE_TIME,0,res.getString(R.string.log_date_time));
+  menuLog.add(0,LOG_DATE,0,res.getString(R.string.log_date));
+  menuLog.add(0,LOG_TIME,0,res.getString(R.string.log_time));
+  menuLog.add(0,LOG_SIGNATURE,0,res.getString(R.string.init_signature));
+  menuLog.add(0,LOG_SIGNATURE_DATE_TIME,0,res.getString(R.string.log_date_time) + " & " + res.getString(R.string.init_signature));
+  SubMenu menuStars=menu.addSubMenu(0,9,0,res.getString(R.string.log_rating)).setIcon(android.R.drawable.ic_menu_sort_by_size);
+  menuStars.add(0,10,0,res.getString(R.string.log_no_rating));
+  menuStars.add(0,19,0,res.getString(R.string.log_stars_5));
+  menuStars.add(0,18,0,res.getString(R.string.log_stars_45));
+  menuStars.add(0,17,0,res.getString(R.string.log_stars_4));
+  menuStars.add(0,16,0,res.getString(R.string.log_stars_35));
+  menuStars.add(0,15,0,res.getString(R.string.log_stars_3));
+  menuStars.add(0,14,0,res.getString(R.string.log_stars_25));
+  menuStars.add(0,13,0,res.getString(R.string.log_stars_2));
+  menuStars.add(0,12,0,res.getString(R.string.log_stars_15));
+  menuStars.add(0,11,0,res.getString(R.string.log_stars_1));
   return true;
 }

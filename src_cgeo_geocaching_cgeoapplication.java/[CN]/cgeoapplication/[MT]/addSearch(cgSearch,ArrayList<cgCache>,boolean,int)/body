@@ -1,0 +1,25 @@
+{
+  if (cacheList == null || cacheList.isEmpty()) {
+    return null;
+  }
+  final long searchId=search.getCurrentId();
+  searches.put(searchId,search);
+  if (storage == null) {
+    storage=new cgData(this);
+  }
+  if (newItem) {
+    for (    cgCache cache : cacheList) {
+      String geocode=cache.geocode.toUpperCase();
+      String guid=cache.guid.toLowerCase();
+      cache.reason=reason;
+      if (storage.isThere(geocode,guid,false,false)) {
+        cgCache mergedCache=cache.merge(storage);
+        storage.saveCache(mergedCache);
+      }
+ else {
+        storage.saveCache(cache);
+      }
+    }
+  }
+  return searchId;
+}

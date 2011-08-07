@@ -1,4 +1,7 @@
 {
+  if (app.getAllStoredCachesCount(true,null,null) == 0) {
+    return;
+  }
   final String file=app.backupDatabase();
   if (file != null) {
     warning.helpDialog(res.getString(R.string.init_backup_backup),res.getString(R.string.init_backup_success) + "\n" + file);
