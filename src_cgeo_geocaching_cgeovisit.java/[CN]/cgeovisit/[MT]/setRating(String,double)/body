@@ -2,7 +2,7 @@
   if (guid == null || guid.length() == 0) {
     return false;
   }
-  if (vote < 0 || vote > 5) {
+  if (vote < 0.0 || vote > 5.0) {
     return false;
   }
   final HashMap<String,String> login=settings.getGCvoteLogin();
@@ -13,11 +13,8 @@
   params.put("userName",login.get("username"));
   params.put("password",login.get("password"));
   params.put("cacheId",guid);
-  params.put("voteUser",Integer.toString(vote));
+  params.put("voteUser",String.format("%.1f",rating).replace(',','.'));
   params.put("version","cgeo");
-  final String result=request(false,"gcvote.com","/setVote.php","GET",params,false,false,false).getData();
-  if (result.trim().equalsIgnoreCase("ok") == true) {
-    return true;
-  }
-  return false;
+  final String result=base.request(false,"gcvote.com","/setVote.php","GET",params,false,false,false).getData();
+  return result.trim().equalsIgnoreCase("ok");
 }
