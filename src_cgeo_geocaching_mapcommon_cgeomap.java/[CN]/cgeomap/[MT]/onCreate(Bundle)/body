@@ -35,7 +35,7 @@
   mapView.preLoad();
   mapView.clearOverlays();
   if (overlayMyLoc == null) {
-    overlayMyLoc=new cgMapMyOverlay(settings);
+    overlayMyLoc=new cgMapMyOverlay(settings,activity);
     mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayMyLoc));
   }
   if (settings.publicLoc > 0 && overlayUsers == null) {

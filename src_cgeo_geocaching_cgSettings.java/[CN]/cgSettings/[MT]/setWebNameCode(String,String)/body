@@ -1,8 +1,12 @@
 {
-  final SharedPreferences.Editor edit=prefs.edit();
-  this.webDeviceCode=code;
-  this.webDeviceName=name;
-  edit.putString("webDeviceName",name);
-  edit.putString("webDeviceCode",code);
-  edit.commit();
+  if (editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      edit.putString(KEY_WEBDEVICE_NAME,name);
+      edit.putString(KEY_WEB_DEVICE_CODE,code);
+    }
+  }
+)) {
+    webDeviceCode=code;
+    webDeviceName=name;
+  }
 }

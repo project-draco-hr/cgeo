@@ -1,11 +1,13 @@
 {
-  final SharedPreferences.Editor prefsEdit=prefs.edit();
-  if (signature == null || signature.length() == 0) {
-    prefsEdit.remove("signature");
-  }
+  return editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      if (signature == null || signature.length() == 0) {
+        edit.remove(KEY_SIGNATURE);
+      }
  else {
-    prefsEdit.putString("signature",signature);
+        edit.putString(KEY_SIGNATURE,signature);
+      }
+    }
   }
-  this.signature=signature;
-  return prefsEdit.commit();
+);
 }

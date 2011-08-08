@@ -1,7 +1,10 @@
 {
-  final SharedPreferences.Editor edit=prefs.edit();
-  edit.putString("cachetype",cacheTypeIn);
-  edit.commit();
+  editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      edit.putString(KEY_CACHE_TYPE,cacheTypeIn);
+    }
+  }
+);
   cacheType=cacheTypeIn;
   return cacheType;
 }

@@ -1,7 +1,10 @@
 {
-  final SharedPreferences.Editor prefsEdit=prefs.edit();
-  prefsEdit.putString("mfmapfile",mapFileIn);
-  boolean commitResult=prefsEdit.commit();
+  boolean commitResult=editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      edit.putString(KEY_MAPFILE,mapFileIn);
+    }
+  }
+);
   mapFile=mapFileIn;
   mapFileValid=checkMapfile(mapFile);
   return commitResult;

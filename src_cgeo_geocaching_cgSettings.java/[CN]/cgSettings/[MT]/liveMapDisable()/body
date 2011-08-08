@@ -1,7 +1,10 @@
 {
-  final SharedPreferences.Editor edit=prefs.edit();
-  edit.putInt("maplive",0);
-  if (edit.commit() == true) {
+  if (editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      edit.putInt(KEY_MAP_LIVE,0);
+    }
+  }
+)) {
     maplive=0;
   }
 }

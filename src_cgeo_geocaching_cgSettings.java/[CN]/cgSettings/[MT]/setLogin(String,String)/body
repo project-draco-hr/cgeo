@@ -1,14 +1,17 @@
 {
-  final SharedPreferences.Editor prefsEdit=prefs.edit();
-  if (username == null || username.length() == 0 || password == null || password.length() == 0) {
-    prefsEdit.remove("username");
-    prefsEdit.remove("password");
-  }
- else {
-    prefsEdit.putString("username",username);
-    prefsEdit.putString("password",password);
-  }
   this.username=username;
   this.password=password;
-  return prefsEdit.commit();
+  return editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      if (username == null || username.length() == 0 || password == null || password.length() == 0) {
+        edit.remove(KEY_USERNAME);
+        edit.remove(KEY_PASSWORD);
+      }
+ else {
+        edit.putString(KEY_USERNAME,username);
+        edit.putString(KEY_PASSWORD,password);
+      }
+    }
+  }
+);
 }
