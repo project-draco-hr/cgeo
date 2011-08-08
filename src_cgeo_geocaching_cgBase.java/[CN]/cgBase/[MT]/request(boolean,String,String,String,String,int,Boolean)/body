@@ -183,7 +183,6 @@ catch (    Exception e) {
     }
   }
   cgResponse response=new cgResponse();
-  String data=null;
   try {
     if (httpCode == 302 && httpLocation != null) {
       final Uri newLocation=Uri.parse(httpLocation);
@@ -200,7 +199,8 @@ catch (    Exception e) {
     }
  else {
       if (buffer != null && buffer.length() > 0) {
-        data=replaceWhitespace(buffer);
+        replaceWhitespace(buffer);
+        String data=buffer.toString();
         buffer=null;
         if (data != null) {
           response.setData(data);

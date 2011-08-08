@@ -114,7 +114,8 @@
     }
   }
  else {
-    page=replaceWhitespace(buffer);
+    replaceWhitespace(buffer);
+    page=buffer.toString();
   }
   if (page != null) {
     return page;
