@@ -3,14 +3,6 @@
     return;
   }
   try {
-    if (latEdit == null) {
-      latEdit=(EditText)findViewById(R.id.latitude);
-    }
-    if (lonEdit == null) {
-      lonEdit=(EditText)findViewById(R.id.longitude);
-    }
-    latEdit.setHint(base.formatCoordinate(geo.latitudeNow,"lat",false));
-    lonEdit.setHint(base.formatCoordinate(geo.longitudeNow,"lon",false));
   }
  catch (  Exception e) {
     Log.w(cgSettings.tag,"Failed to update location.");

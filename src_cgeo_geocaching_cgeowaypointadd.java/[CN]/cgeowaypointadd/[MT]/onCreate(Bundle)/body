@@ -50,4 +50,21 @@
     waitDialog.setCancelable(true);
     (new loadWaypoint()).start();
   }
+  bLat=(Button)findViewById(R.id.ButtonLat);
+  eLatDeg=(EditText)findViewById(R.id.EditTextLatDeg);
+  eLatMin=(EditText)findViewById(R.id.EditTextLatMin);
+  eLatSec=(EditText)findViewById(R.id.EditTextLatSec);
+  bLon=(Button)findViewById(R.id.ButtonLon);
+  eLonDeg=(EditText)findViewById(R.id.EditTextLonDeg);
+  eLonMin=(EditText)findViewById(R.id.EditTextLonMin);
+  eLonSec=(EditText)findViewById(R.id.EditTextLonSec);
+  bLat.setOnClickListener(new buttonClickListener());
+  bLon.setOnClickListener(new buttonClickListener());
+  eLatDeg.addTextChangedListener(new textChangedListener(1));
+  eLatMin.addTextChangedListener(new textChangedListener(2));
+  eLatSec.addTextChangedListener(new textChangedListener(3));
+  eLonDeg.addTextChangedListener(new textChangedListener(4));
+  eLonMin.addTextChangedListener(new textChangedListener(5));
+  eLonSec.addTextChangedListener(new textChangedListener(6));
+  ((EditText)findViewById(R.id.name)).requestFocus();
 }

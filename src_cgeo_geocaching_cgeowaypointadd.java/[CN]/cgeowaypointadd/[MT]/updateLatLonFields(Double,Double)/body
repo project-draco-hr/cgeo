@@ -1,0 +1,12 @@
+{
+  char[] lat=base.formatCoordinate(latitude,"lat",true).toCharArray();
+  bLat.setText(lat,0,1);
+  eLatDeg.setText(lat,2,2);
+  eLatMin.setText(lat,6,2);
+  eLatSec.setText(lat,9,3);
+  char[] lon=base.formatCoordinate(longitude,"lon",true).toCharArray();
+  bLon.setText(lon,0,1);
+  eLonDeg.setText(lon,2,3);
+  eLonMin.setText(lon,7,2);
+  eLonSec.setText(lon,10,3);
+}
