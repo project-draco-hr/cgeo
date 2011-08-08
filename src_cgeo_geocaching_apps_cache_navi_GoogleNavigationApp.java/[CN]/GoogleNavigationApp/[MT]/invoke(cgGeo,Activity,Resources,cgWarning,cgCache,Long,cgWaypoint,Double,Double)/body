@@ -2,35 +2,21 @@
   if (activity == null) {
     return false;
   }
-  cgSettings settings=getSettings(activity);
-  Double latitudeNow=null;
-  Double longitudeNow=null;
-  if (geo != null) {
-    latitudeNow=geo.latitudeNow;
-    longitudeNow=geo.longitudeNow;
+  boolean navigationResult=false;
+  if (latitude != null && longitude != null) {
+    navigationResult=navigateToCoordinates(geo,activity,latitude,longitude);
   }
-  if (settings.useGNavigation == 1) {
-    try {
-      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:ll=" + latitude + ","+ longitude)));
-      return true;
+ else   if (waypoint != null) {
+    navigationResult=navigateToCoordinates(geo,activity,waypoint.latitude,waypoint.longitude);
+  }
+ else   if (cache != null) {
+    navigationResult=navigateToCoordinates(geo,activity,cache.latitude,cache.longitude);
+  }
+  if (!navigationResult) {
+    if (warning != null && res != null) {
+      warning.showToast(res.getString(R.string.err_navigation_no));
     }
- catch (    Exception e) {
-    }
+    return false;
   }
-  try {
-    if (latitudeNow != null && longitudeNow != null) {
-      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?f=d&saddr=" + latitudeNow + ","+ longitudeNow+ "&daddr="+ latitude+ ","+ longitude)));
-    }
- else {
-      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?f=d&daddr=" + latitude + ","+ longitude)));
-    }
-    return true;
-  }
- catch (  Exception e) {
-  }
-  Log.i(cgSettings.tag,"cgBase.runNavigation: No navigation application available.");
-  if (warning != null && res != null) {
-    warning.showToast(res.getString(R.string.err_navigation_no));
-  }
-  return false;
+  return true;
 }
