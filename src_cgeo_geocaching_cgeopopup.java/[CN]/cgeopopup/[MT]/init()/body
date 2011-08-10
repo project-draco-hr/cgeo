@@ -1,6 +1,6 @@
 {
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(this,geoUpdate,base,settings,warning,0,0);
   }
   app.setAction(geocode);
   cache=app.getCacheByGeocode(geocode);
@@ -31,21 +31,21 @@
       gcIcons.put("gchq",R.drawable.type_hq);
     }
     if (cache.name != null && cache.name.length() > 0) {
-      base.setTitle(activity,cache.name);
+      setTitle(cache.name);
     }
  else {
-      base.setTitle(activity,geocode.toUpperCase());
+      setTitle(geocode.toUpperCase());
     }
-    inflater=activity.getLayoutInflater();
+    inflater=getLayoutInflater();
     geocode=cache.geocode.toUpperCase();
     ((ScrollView)findViewById(R.id.details_list_box)).setVisibility(View.VISIBLE);
     LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
     if (cache.type != null && gcIcons.containsKey(cache.type) == true) {
-      ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)activity.getResources().getDrawable(gcIcons.get(cache.type)),null,null,null);
+      ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)getResources().getDrawable(gcIcons.get(cache.type)),null,null,null);
     }
  else {
-      ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)activity.getResources().getDrawable(gcIcons.get("mystery")),null,null,null);
+      ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)getResources().getDrawable(gcIcons.get("mystery")),null,null,null);
     }
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
     itemName=(TextView)itemLayout.findViewById(R.id.name);
@@ -184,10 +184,10 @@
       Button buttonMore=(Button)findViewById(R.id.more_details);
       buttonMore.setOnClickListener(new OnClickListener(){
         public void onClick(        View arg0){
-          Intent cachesIntent=new Intent(activity,cgeodetail.class);
+          Intent cachesIntent=new Intent(cgeopopup.this,cgeodetail.class);
           cachesIntent.putExtra("geocode",geocode.toUpperCase());
-          activity.startActivity(cachesIntent);
-          activity.finish();
+          startActivity(cachesIntent);
+          finish();
           return;
         }
       }

@@ -1,20 +1,12 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
   res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
   settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
   warning=new cgWarning(this);
   inflater=getLayoutInflater();
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.addresses);
-  base.setTitle(activity,res.getString(R.string.search_address_result));
+  setTitle(res.getString(R.string.search_address_result));
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     keyword=extras.getString("keyword");

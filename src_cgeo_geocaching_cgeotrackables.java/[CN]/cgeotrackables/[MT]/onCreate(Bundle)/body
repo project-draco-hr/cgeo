@@ -1,18 +1,11 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
   app=(cgeoapplication)this.getApplication();
   settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
   warning=new cgWarning(this);
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.trackables);
-  base.setTitle(activity,"Trackables");
+  setTitle("Trackables");
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString("geocode");

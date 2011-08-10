@@ -1,16 +1,9 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
   res=this.getResources();
   settings=new cgSettings(this,this.getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase((cgeoapplication)this.getApplication(),settings,this.getSharedPreferences(cgSettings.preferences,0));
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.about);
-  base.setTitle(activity,res.getString(R.string.about));
+  setTitle(res.getString(R.string.about));
   init();
 }

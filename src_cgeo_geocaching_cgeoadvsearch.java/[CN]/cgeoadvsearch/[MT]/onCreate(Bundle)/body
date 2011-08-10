@@ -1,6 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
   res=this.getResources();
   app=(cgeoapplication)this.getApplication();
   app.setAction(null);
@@ -16,13 +15,8 @@
       return;
     }
   }
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.search);
-  base.setTitle(activity,res.getString(R.string.search));
+  setTitle(res.getString(R.string.search));
   init();
 }

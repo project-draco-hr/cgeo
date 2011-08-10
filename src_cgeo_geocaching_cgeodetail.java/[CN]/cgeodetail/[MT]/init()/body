@@ -2,10 +2,10 @@
   final DisplayMetrics dm=getResources().getDisplayMetrics();
   pixelRatio=dm.density;
   if (inflater == null) {
-    inflater=activity.getLayoutInflater();
+    inflater=getLayoutInflater();
   }
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(this,geoUpdate,base,settings,warning,0,0);
   }
   if (searchId != null && searchId > 0) {
     cache=app.getCache(searchId);

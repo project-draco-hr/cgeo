@@ -16,7 +16,7 @@
   listId=list.id;
   title=list.title;
   settings.saveLastList(listId);
-  base.showProgress(activity,true);
+  showProgress(true);
   setLoadingCaches();
   Handler handlerMove=new Handler(){
     @Override public void handleMessage(    Message msg){

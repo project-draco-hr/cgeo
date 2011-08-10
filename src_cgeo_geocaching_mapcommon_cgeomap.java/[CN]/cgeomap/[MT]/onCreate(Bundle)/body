@@ -11,14 +11,9 @@
   MapFactory mapFactory=settings.getMapFactory();
   noMapTokenShowed=false;
   activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-  if (settings.skin == 1) {
-    activity.setTheme(R.style.light);
-  }
- else {
-    activity.setTheme(R.style.dark);
-  }
+  ActivityMixin.setTheme(activity);
   activity.setContentView(settings.getMapFactory().getMapLayoutId());
-  base.setTitle(activity,res.getString(R.string.map_map));
+  ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
   if (geo == null) {
     geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
   }

@@ -31,11 +31,7 @@
         helper.setClickable(true);
         helper.setOnClickListener(new View.OnClickListener(){
           public void onClick(          View view){
-            try {
-              AppManualReaderClient.openManual("c-geo","c:geo-intro",context,"http://cgeo.carnero.cc/manual/");
-            }
- catch (            Exception e) {
-            }
+            ActivityMixin.goManual(context,"c:geo-intro");
             view.setVisibility(View.GONE);
           }
         }

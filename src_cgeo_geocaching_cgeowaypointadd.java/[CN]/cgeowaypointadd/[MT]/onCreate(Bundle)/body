@@ -1,21 +1,15 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
   res=this.getResources();
   app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(activity);
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
+  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
+  warning=new cgWarning(this);
+  setTheme();
   setContentView(R.layout.waypoint_new);
-  base.setTitle(activity,"waypoint");
+  setTitle("waypoint");
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(this,geoUpdate,base,settings,warning,0,0);
   }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
@@ -29,10 +23,10 @@
     return;
   }
   if (id <= 0) {
-    base.setTitle(activity,res.getString(R.string.waypoint_add_title));
+    setTitle(res.getString(R.string.waypoint_add_title));
   }
  else {
-    base.setTitle(activity,res.getString(R.string.waypoint_edit_title));
+    setTitle(res.getString(R.string.waypoint_edit_title));
   }
   if (geocode != null) {
     app.setAction(geocode);

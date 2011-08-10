@@ -4,7 +4,7 @@
     warning.helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_gccode));
     return;
   }
-  final Intent cachesIntent=new Intent(activity,cgeodetail.class);
+  final Intent cachesIntent=new Intent(this,cgeodetail.class);
   cachesIntent.putExtra("geocode",geocodeText.toUpperCase());
-  activity.startActivity(cachesIntent);
+  startActivity(cachesIntent);
 }

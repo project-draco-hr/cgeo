@@ -4,7 +4,7 @@
     warning.helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_address));
     return;
   }
-  final Intent addressesIntent=new Intent(activity,cgeoaddresses.class);
+  final Intent addressesIntent=new Intent(this,cgeoaddresses.class);
   addressesIntent.putExtra("keyword",addText);
-  activity.startActivity(addressesIntent);
+  startActivity(addressesIntent);
 }

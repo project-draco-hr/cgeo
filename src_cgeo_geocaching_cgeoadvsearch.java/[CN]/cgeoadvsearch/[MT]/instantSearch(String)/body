@@ -6,23 +6,23 @@
   final Matcher tbCodeM=tbCode.matcher(query);
   try {
     if (gcCodeM.find()) {
-      final Intent cachesIntent=new Intent(activity,cgeodetail.class);
+      final Intent cachesIntent=new Intent(this,cgeodetail.class);
       cachesIntent.putExtra("geocode",query.trim().toUpperCase());
-      activity.startActivity(cachesIntent);
+      startActivity(cachesIntent);
       found=true;
     }
  else     if (tbCodeM.find()) {
-      final Intent trackablesIntent=new Intent(activity,cgeotrackable.class);
+      final Intent trackablesIntent=new Intent(this,cgeotrackable.class);
       trackablesIntent.putExtra("geocode",query.trim().toUpperCase());
-      activity.startActivity(trackablesIntent);
+      startActivity(trackablesIntent);
       found=true;
     }
  else {
-      final Intent cachesIntent=new Intent(activity,cgeocaches.class);
+      final Intent cachesIntent=new Intent(this,cgeocaches.class);
       cachesIntent.putExtra("type","keyword");
       cachesIntent.putExtra("keyword",query);
       cachesIntent.putExtra("cachetype",settings.cacheType);
-      activity.startActivity(cachesIntent);
+      startActivity(cachesIntent);
       found=true;
     }
   }

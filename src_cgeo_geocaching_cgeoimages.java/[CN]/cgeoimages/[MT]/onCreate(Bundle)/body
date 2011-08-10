@@ -1,17 +1,10 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
   res=this.getResources();
   app=(cgeoapplication)this.getApplication();
   settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
   warning=new cgWarning(this);
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.spoilers);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
@@ -19,10 +12,10 @@
     img_type=extras.getInt("type",0);
   }
   if (img_type == SPOILER_IMAGE) {
-    base.setTitle(activity,res.getString(R.string.cache_spoiler_images_title));
+    setTitle(res.getString(R.string.cache_spoiler_images_title));
   }
  else   if (img_type == LOG_IMAGE) {
-    base.setTitle(activity,res.getString(R.string.cache_log_images_title));
+    setTitle(res.getString(R.string.cache_log_images_title));
   }
   if (geocode == null) {
     warning.showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
@@ -40,7 +33,7 @@ if ((title == null) || (url == null)) {
 }
 break;
 }
-inflater=activity.getLayoutInflater();
+inflater=getLayoutInflater();
 if (imagesView == null) {
 imagesView=(LinearLayout)findViewById(R.id.spoiler_list);
 }
