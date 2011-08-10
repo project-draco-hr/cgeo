@@ -3,10 +3,10 @@
     warning.showToast(res.getString(R.string.err_location_unknown));
   }
   cgeonavigate navigateActivity=new cgeonavigate();
-  Intent navigateIntent=new Intent(activity,navigateActivity.getClass());
+  Intent navigateIntent=new Intent(this,navigateActivity.getClass());
   navigateIntent.putExtra("latitude",cache.latitude);
   navigateIntent.putExtra("longitude",cache.longitude);
   navigateIntent.putExtra("geocode","");
   navigateIntent.putExtra("name","Some destination");
-  activity.startActivity(navigateIntent);
+  startActivity(navigateIntent);
 }

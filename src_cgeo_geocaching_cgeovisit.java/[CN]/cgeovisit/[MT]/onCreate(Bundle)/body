@@ -1,19 +1,13 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
   res=this.getResources();
   app=(cgeoapplication)this.getApplication();
   settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
   base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
   warning=new cgWarning(this);
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.visit);
-  base.setTitle(activity,res.getString(R.string.log_new_log));
+  setTitle(res.getString(R.string.log_new_log));
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     cacheid=extras.getString("id");
@@ -29,10 +23,10 @@
   }
   cache=app.getCacheByGeocode(geocode);
   if (cache.name != null && cache.name.length() > 0) {
-    base.setTitle(activity,res.getString(R.string.log_new_log) + " " + cache.name);
+    setTitle(res.getString(R.string.log_new_log) + " " + cache.name);
   }
  else {
-    base.setTitle(activity,res.getString(R.string.log_new_log) + " " + cache.geocode.toUpperCase());
+    setTitle(res.getString(R.string.log_new_log) + " " + cache.geocode.toUpperCase());
   }
   app.setAction(geocode);
   if (cache == null) {

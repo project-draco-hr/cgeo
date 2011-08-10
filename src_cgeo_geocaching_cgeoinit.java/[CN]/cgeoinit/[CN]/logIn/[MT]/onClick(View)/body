@@ -5,7 +5,7 @@
     warning.showToast(res.getString(R.string.err_missing_auth));
     return;
   }
-  loginDialog=ProgressDialog.show(activity,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
+  loginDialog=ProgressDialog.show(cgeoinit.this,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
   loginDialog.setCancelable(false);
   settings.setLogin(username,password);
   settings.deleteCookies();

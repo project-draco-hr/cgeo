@@ -13,7 +13,7 @@
   legalNote.setClickable(true);
   legalNote.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View arg0){
-      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
+      startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
     }
   }
 );
@@ -25,7 +25,7 @@
   go4cache.setClickable(true);
   go4cache.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View arg0){
-      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://go4cache.com/")));
+      startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://go4cache.com/")));
     }
   }
 );
@@ -40,8 +40,8 @@
   Button authorizeTwitter=(Button)findViewById(R.id.authorize_twitter);
   authorizeTwitter.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View arg0){
-      Intent authIntent=new Intent(activity,cgeoauth.class);
-      activity.startActivity(authIntent);
+      Intent authIntent=new Intent(cgeoinit.this,cgeoauth.class);
+      startActivity(authIntent);
     }
   }
 );
@@ -207,8 +207,8 @@
   Button selectMapfile=(Button)findViewById(R.id.select_mapfile);
   selectMapfile.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      Intent selectIntent=new Intent(activity,cgSelectMapfile.class);
-      activity.startActivityForResult(selectIntent,SELECT_MAPFILE_REQUEST);
+      Intent selectIntent=new Intent(cgeoinit.this,cgSelectMapfile.class);
+      startActivityForResult(selectIntent,SELECT_MAPFILE_REQUEST);
     }
   }
 );

@@ -4,11 +4,11 @@
     warning.showToast(res.getString(R.string.err_location_unknown));
   }
   cgeocaches cachesActivity=new cgeocaches();
-  Intent cachesIntent=new Intent(activity,cachesActivity.getClass());
+  Intent cachesIntent=new Intent(this,cachesActivity.getClass());
   cachesIntent.putExtra("type","coordinate");
   cachesIntent.putExtra("latitude",coords.get(0));
   cachesIntent.putExtra("longitude",coords.get(1));
   cachesIntent.putExtra("cachetype",settings.cacheType);
-  activity.startActivity(cachesIntent);
+  startActivity(cachesIntent);
   finish();
 }

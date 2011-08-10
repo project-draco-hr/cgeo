@@ -1,6 +1,6 @@
 {
   if (gettingViewstate == false) {
-    waitDialog=ProgressDialog.show(activity,null,res.getString(R.string.log_saving),true);
+    waitDialog=ProgressDialog.show(cgeotouch.this,null,res.getString(R.string.log_saving),true);
     waitDialog.setCancelable(true);
     String tracking=((EditText)findViewById(R.id.tracking)).getText().toString();
     String log=((EditText)findViewById(R.id.log)).getText().toString();

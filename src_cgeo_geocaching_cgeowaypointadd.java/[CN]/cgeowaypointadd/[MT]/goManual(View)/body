@@ -1,12 +1,8 @@
 {
-  try {
-    if (id >= 0) {
-      AppManualReaderClient.openManual("c-geo","c:geo-waypoint-edit",activity,"http://cgeo.carnero.cc/manual/");
-    }
- else {
-      AppManualReaderClient.openManual("c-geo","c:geo-waypoint-new",activity,"http://cgeo.carnero.cc/manual/");
-    }
+  if (id >= 0) {
+    ActivityMixin.goManual(this,"c:geo-waypoint-edit");
   }
- catch (  Exception e) {
+ else {
+    ActivityMixin.goManual(this,"c:geo-waypoint-new");
   }
 }

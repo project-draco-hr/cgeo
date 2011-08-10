@@ -23,7 +23,7 @@
         Intent intent=new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file),"image/jpg");
-        activity.startActivity(intent);
+        startActivity(intent);
         if (file.exists())         file.deleteOnExit();
       }
     }

@@ -5,7 +5,7 @@
     warning.showToast(res.getString(R.string.err_missing_device_name));
     return;
   }
-  webDialog=ProgressDialog.show(activity,res.getString(R.string.init_sendToCgeo),res.getString(R.string.init_sendToCgeo_registering),true);
+  webDialog=ProgressDialog.show(cgeoinit.this,res.getString(R.string.init_sendToCgeo),res.getString(R.string.init_sendToCgeo_registering),true);
   webDialog.setCancelable(false);
   (new Thread(){
     @Override public void run(){

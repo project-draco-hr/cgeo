@@ -18,11 +18,11 @@
       warning.showToast(res.getString(R.string.err_parse_lon));
       return;
     }
-    final Intent cachesIntent=new Intent(activity,cgeocaches.class);
+    final Intent cachesIntent=new Intent(this,cgeocaches.class);
     cachesIntent.putExtra("type","coordinate");
     cachesIntent.putExtra("latitude",(Double)latParsed.get("coordinate"));
     cachesIntent.putExtra("longitude",(Double)lonParsed.get("coordinate"));
     cachesIntent.putExtra("cachetype",settings.cacheType);
-    activity.startActivity(cachesIntent);
+    startActivity(cachesIntent);
   }
 }

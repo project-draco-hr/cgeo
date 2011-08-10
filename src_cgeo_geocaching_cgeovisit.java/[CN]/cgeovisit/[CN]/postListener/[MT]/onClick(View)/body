@@ -1,6 +1,6 @@
 {
   if (gettingViewstate == false) {
-    waitDialog=ProgressDialog.show(activity,null,res.getString(R.string.log_saving),true);
+    waitDialog=ProgressDialog.show(cgeovisit.this,null,res.getString(R.string.log_saving),true);
     waitDialog.setCancelable(true);
     String log=((EditText)findViewById(R.id.log)).getText().toString();
     Thread thread=new postLog(postLogHandler,log);

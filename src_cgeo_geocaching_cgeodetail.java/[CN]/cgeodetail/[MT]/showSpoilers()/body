@@ -2,8 +2,8 @@
   if (cache == null || cache.spoilers == null || cache.spoilers.isEmpty() == true) {
     warning.showToast(res.getString(R.string.err_detail_no_spoiler));
   }
-  Intent spoilersIntent=new Intent(activity,cgeoimages.class);
+  Intent spoilersIntent=new Intent(this,cgeoimages.class);
   spoilersIntent.putExtra("geocode",geocode.toUpperCase());
   spoilersIntent.putExtra("type",cgeoimages.SPOILER_IMAGE);
-  activity.startActivity(spoilersIntent);
+  startActivity(spoilersIntent);
 }

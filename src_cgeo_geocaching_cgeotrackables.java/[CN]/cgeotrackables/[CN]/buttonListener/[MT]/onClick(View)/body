@@ -1,9 +1,9 @@
 {
-  Intent trackableIntent=new Intent(activity,cgeotrackable.class);
+  Intent trackableIntent=new Intent(cgeotrackables.this,cgeotrackable.class);
   trackableIntent.putExtra("guid",guid);
   trackableIntent.putExtra("geocode",geocode);
   trackableIntent.putExtra("name",name);
-  activity.startActivity(trackableIntent);
+  startActivity(trackableIntent);
   finish();
   return;
 }

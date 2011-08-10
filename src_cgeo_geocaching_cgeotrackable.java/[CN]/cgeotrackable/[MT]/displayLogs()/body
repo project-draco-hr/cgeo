@@ -25,15 +25,15 @@
         final String cacheName=log.cacheName;
         ((TextView)rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener(){
           public void onClick(          View arg0){
-            Intent cacheIntent=new Intent(activity,cgeodetail.class);
+            Intent cacheIntent=new Intent(cgeotrackable.this,cgeodetail.class);
             cacheIntent.putExtra("guid",(String)cacheGuid);
             cacheIntent.putExtra("name",(String)Html.fromHtml(cacheName).toString());
-            activity.startActivity(cacheIntent);
+            startActivity(cacheIntent);
           }
         }
 );
       }
-      ((TextView)rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log,new cgHtmlImg(activity,settings,null,false,0,false),null),TextView.BufferType.SPANNABLE);
+      ((TextView)rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log,new cgHtmlImg(cgeotrackable.this,settings,null,false,0,false),null),TextView.BufferType.SPANNABLE);
       ((TextView)rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
       listView.addView(rowView);
     }
