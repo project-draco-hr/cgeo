@@ -1,8 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   inflater=getLayoutInflater();
   setTheme();
   setContentView(R.layout.addresses);
@@ -12,7 +9,7 @@
     keyword=extras.getString("keyword");
   }
   if (keyword == null) {
-    warning.showToast(res.getString(R.string.err_search_address_forgot));
+    showToast(res.getString(R.string.err_search_address_forgot));
     finish();
     return;
   }

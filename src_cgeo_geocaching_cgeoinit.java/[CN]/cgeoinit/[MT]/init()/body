@@ -60,7 +60,7 @@
   Button sigBtn=(Button)findViewById(R.id.signature_help);
   sigBtn.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View v){
-      warning.helpDialog(res.getString(R.string.init_signature_help_title),res.getString(R.string.init_signature_help_text));
+      helpDialog(res.getString(R.string.init_signature_help_title),res.getString(R.string.init_signature_help_text));
     }
   }
 );
@@ -213,7 +213,7 @@
   }
 );
   TextView lastBackup=(TextView)findViewById(R.id.backup_last);
-  File lastBackupFile=app.isRestoreFile();
+  File lastBackupFile=cgeoapplication.isRestoreFile();
   if (lastBackupFile != null) {
     lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.timeOut.format(lastBackupFile.lastModified())+ ", "+ cgBase.dateOut.format(lastBackupFile.lastModified()));
   }

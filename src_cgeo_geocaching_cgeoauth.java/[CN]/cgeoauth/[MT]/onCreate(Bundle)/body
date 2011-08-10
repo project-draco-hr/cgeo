@@ -1,11 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
   app.setAction("setting up");
-  prefs=getSharedPreferences(cgSettings.preferences,0);
-  settings=new cgSettings(this,prefs);
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.auth);
   setTitle(res.getString(R.string.auth_twitter));

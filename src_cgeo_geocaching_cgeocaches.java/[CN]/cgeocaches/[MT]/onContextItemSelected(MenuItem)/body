@@ -33,7 +33,7 @@
   }
  else   if (id == MENU_LOG_VISIT) {
     if (cache.cacheid == null || cache.cacheid.length() == 0) {
-      warning.showToast(res.getString(R.string.err_cannot_log_visit));
+      showToast(res.getString(R.string.err_cannot_log_visit));
       return true;
     }
     Intent logVisitIntent=new Intent(this,cgeovisit.class);
@@ -117,7 +117,7 @@
     return setFilter(new cgFilterByType("gps"));
   }
  else   if (id == MENU_DROP_CACHE) {
-    base.dropCache(app,this,cache,new Handler(){
+    cgBase.dropCache(app,this,cache,new Handler(){
       @Override public void handleMessage(      Message msg){
         switchList(listId,-1);
       }
@@ -132,5 +132,5 @@
     return true;
   }
   lastMenuInfo=info;
-  return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,warning,cache,null,null,null);
+  return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,null,null,null);
 }

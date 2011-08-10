@@ -2,7 +2,7 @@
   final String deviceName=((EditText)findViewById(R.id.webDeviceName)).getText().toString();
   final String deviceCode=prefs.getString("webDeviceCode",null);
   if (deviceName == null || deviceName.length() == 0) {
-    warning.showToast(res.getString(R.string.err_missing_device_name));
+    showToast(res.getString(R.string.err_missing_device_name));
     return;
   }
   webDialog=ProgressDialog.show(cgeoinit.this,res.getString(R.string.init_sendToCgeo),res.getString(R.string.init_sendToCgeo_registering),true);

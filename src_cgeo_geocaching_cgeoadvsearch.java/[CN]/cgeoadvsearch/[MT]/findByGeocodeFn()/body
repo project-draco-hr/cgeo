@@ -1,7 +1,7 @@
 {
   final String geocodeText=((EditText)findViewById(R.id.geocode)).getText().toString();
   if (geocodeText == null || geocodeText.length() == 0 || geocodeText.equalsIgnoreCase("GC")) {
-    warning.helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_gccode));
+    helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_gccode));
     return;
   }
   final Intent cachesIntent=new Intent(this,cgeodetail.class);

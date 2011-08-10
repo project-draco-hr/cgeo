@@ -1,10 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.visit);
   setTitle(res.getString(R.string.log_new_log));
@@ -30,7 +25,7 @@
   }
   app.setAction(geocode);
   if (cache == null) {
-    warning.showToast(res.getString(R.string.err_detail_cache_forgot_visit));
+    showToast(res.getString(R.string.err_detail_cache_forgot_visit));
     finish();
     return;
   }

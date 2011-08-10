@@ -5,14 +5,14 @@
     return;
   }
   if (geocode != null && geocode.length() > 0) {
-    dirName=settings.getStorage() + geocode + "/";
-    fileName=settings.getStorage() + geocode + "/direction.png";
+    dirName=cgSettings.getStorage() + geocode + "/";
+    fileName=cgSettings.getStorage() + geocode + "/direction.png";
   }
  else {
     return;
   }
   File dir=null;
-  dir=new File(settings.getStorage());
+  dir=new File(cgSettings.getStorage());
   if (dir.exists() == false) {
     dir.mkdirs();
   }

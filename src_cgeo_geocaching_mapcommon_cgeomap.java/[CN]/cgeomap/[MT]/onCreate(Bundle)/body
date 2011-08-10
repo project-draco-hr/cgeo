@@ -6,7 +6,6 @@
   app.setAction(null);
   settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,0));
   base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(activity);
   prefsEdit=activity.getSharedPreferences(cgSettings.preferences,0).edit();
   MapFactory mapFactory=settings.getMapFactory();
   noMapTokenShowed=false;
@@ -15,10 +14,10 @@
   activity.setContentView(settings.getMapFactory().getMapLayoutId());
   ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(activity,geoUpdate,base,settings,0,0);
   }
   if (settings.useCompass == 1 && dir == null) {
-    dir=app.startDir(activity,dirUpdate,warning);
+    dir=app.startDir(activity,dirUpdate);
   }
   mapView=(MapViewImpl)activity.findViewById(mapFactory.getMapViewId());
   mapView.setMapSource(settings);

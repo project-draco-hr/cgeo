@@ -33,7 +33,7 @@
       app.clearLogOffline(geocode);
     }
     if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1 && settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null && settings.tokenSecret.length() > 0 && tweetCheck.isChecked() == true && tweetBox.getVisibility() == View.VISIBLE) {
-      base.postTweetCache(app,settings,geocode);
+      cgBase.postTweetCache(app,settings,geocode);
     }
     if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
       setRating(cache.guid,rating);

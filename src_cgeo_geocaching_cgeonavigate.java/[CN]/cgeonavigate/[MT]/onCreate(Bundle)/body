@@ -1,19 +1,14 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
   setTheme();
   setContentView(R.layout.navigate);
   setTitle(res.getString(R.string.compass_title));
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
   }
   if (settings.useCompass == 1 && dir == null) {
-    dir=app.startDir(this,dirUpdate,warning);
+    dir=app.startDir(this,dirUpdate);
   }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {

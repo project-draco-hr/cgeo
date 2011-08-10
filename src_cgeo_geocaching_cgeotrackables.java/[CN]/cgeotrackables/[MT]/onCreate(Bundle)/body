@@ -1,8 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.trackables);
   setTitle("Trackables");
@@ -11,7 +8,7 @@
     geocode=extras.getString("geocode");
   }
   if (geocode == null) {
-    warning.showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
+    showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
     finish();
     return;
   }

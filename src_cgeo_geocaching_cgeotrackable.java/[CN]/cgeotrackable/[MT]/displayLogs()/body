@@ -33,7 +33,7 @@
         }
 );
       }
-      ((TextView)rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log,new cgHtmlImg(cgeotrackable.this,settings,null,false,0,false),null),TextView.BufferType.SPANNABLE);
+      ((TextView)rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log,new cgHtmlImg(cgeotrackable.this,null,false,0,false),null),TextView.BufferType.SPANNABLE);
       ((TextView)rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
       listView.addView(rowView);
     }
