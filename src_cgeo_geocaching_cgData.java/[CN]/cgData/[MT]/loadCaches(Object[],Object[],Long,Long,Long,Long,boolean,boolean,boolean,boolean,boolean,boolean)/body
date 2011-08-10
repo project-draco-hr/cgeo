@@ -71,7 +71,7 @@
       where.append(String.format((Locale)null,"%.6f",lonMax));
       where.append(")");
     }
-    cursor=databaseRO.query(dbTableCaches,new String[]{"_id","updated","reason","detailed","detailedupdate","visiteddate","geocode","cacheid","guid","type","name","own","owner","owner_real","hidden","hint","size","difficulty","distance","direction","terrain","latlon","latitude_string","longitude_string","location","latitude","longitude","elevation","shortdesc","description","favourite_cnt","rating","votes","myvote","disabled","archived","members","found","favourite","inventorycoins","inventorytags","inventoryunknown","onWatchlist"},where.toString(),null,null,null,null,null);
+    cursor=databaseRO.query(dbTableCaches,new String[]{"_id","updated","reason","detailed","detailedupdate","visiteddate","geocode","cacheid","guid","type","name","own","owner","owner_real","hidden","hint","size","difficulty","distance","direction","terrain","latlon","latitude_string","longitude_string","location","latitude","longitude","elevation","shortdesc","description","favourite_cnt","rating","votes","myvote","disabled","archived","members","found","favourite","inventorycoins","inventorytags","inventoryunknown","onWatchlist","personal_note"},where.toString(),null,null,null,null,null);
     if (cursor != null) {
       int index=0;
       if (cursor.getCount() > 0) {
@@ -135,6 +135,7 @@
  else {
             cache.elevation=(Double)cursor.getDouble(index);
           }
+          cache.personalNote=(String)cursor.getString(cursor.getColumnIndex("personal_note"));
           cache.shortdesc=(String)cursor.getString(cursor.getColumnIndex("shortdesc"));
           cache.description=(String)cursor.getString(cursor.getColumnIndex("description"));
           cache.favouriteCnt=(Integer)cursor.getInt(cursor.getColumnIndex("favourite_cnt"));

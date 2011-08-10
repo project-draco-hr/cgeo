@@ -20,6 +20,7 @@
   final Pattern patternLatLon=Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>",Pattern.CASE_INSENSITIVE);
   final Pattern patternLocation=Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)",Pattern.CASE_INSENSITIVE);
   final Pattern patternHint=Pattern.compile("<p>([^<]*<strong>)?[^\\w]*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]",Pattern.CASE_INSENSITIVE);
+  final Pattern patternPersonalNote=Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>",Pattern.CASE_INSENSITIVE);
   final Pattern patternDescShort=Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>",Pattern.CASE_INSENSITIVE);
   final Pattern patternDesc=Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>[^\\w]*Additional Hints</strong>",Pattern.CASE_INSENSITIVE);
   final Pattern patternCountLogs=Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>",Pattern.CASE_INSENSITIVE);
@@ -294,6 +295,17 @@
   }
  catch (  Exception e) {
     Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache hint");
+  }
+  try {
+    final Matcher matcherPersonalNote=patternPersonalNote.matcher(page);
+    if (matcherPersonalNote.find()) {
+      if (matcherPersonalNote.groupCount() > 0) {
+        cache.personalNote=getMatch(matcherPersonalNote.group(1).trim());
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache personal note");
   }
   try {
     final Matcher matcherDescShort=patternDescShort.matcher(page);

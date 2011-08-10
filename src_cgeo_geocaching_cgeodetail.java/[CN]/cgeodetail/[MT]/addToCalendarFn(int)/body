@@ -24,6 +24,9 @@
     if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
       description.append(Html.fromHtml(cache.shortdesc).toString());
     }
+    if (cache.personalNote != null && cache.personalNote.length() > 0) {
+      description.append("\n\n" + Html.fromHtml(cache.personalNote).toString());
+    }
     ContentValues event=new ContentValues();
     event.put("calendar_id",calId);
     event.put("dtstart",eventDate.getTime() + 43200000);
