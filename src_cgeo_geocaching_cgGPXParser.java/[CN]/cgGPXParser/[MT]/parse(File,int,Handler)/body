@@ -408,12 +408,29 @@
     }
 );
   }
+  FileInputStream fis=null;
+  boolean parsed=false;
   try {
-    Xml.parse(new FileInputStream(file),Xml.Encoding.UTF_8,root.getContentHandler());
-    return search.getCurrentId();
+    fis=new FileInputStream(file);
   }
- catch (  Exception e) {
-    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": "+ e.toString());
+ catch (  FileNotFoundException e) {
+    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": file not found!");
   }
-  return 0l;
+  try {
+    Xml.parse(fis,Xml.Encoding.UTF_8,root.getContentHandler());
+    parsed=true;
+  }
+ catch (  IOException e) {
+    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not read file!");
+  }
+catch (  SAXException e) {
+    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not parse XML - "+ e.toString());
+  }
+  try {
+    fis.close();
+  }
+ catch (  IOException e) {
+    Log.e(cgSettings.tag,"Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not close file!");
+  }
+  return parsed ? search.getCurrentId() : 0l;
 }

@@ -35,6 +35,7 @@
             fos.write(buffer,0,bytesRead);
             fileSize+=bytesRead;
           }
+          fos.flush();
           ok=true;
         }
  catch (        IOException e) {
@@ -42,7 +43,6 @@
         }
  finally {
           is.close();
-          fos.flush();
           fos.close();
         }
         bufferedEntity=null;
