@@ -3,7 +3,7 @@
     touch=true;
     return;
   }
-  if (getSelectMode() == true || getChecked() > 0) {
+  if (getSelectMode() || getChecked() > 0) {
     return;
   }
   Intent cachesIntent=new Intent(getContext(),cgeodetail.class);

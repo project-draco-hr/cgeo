@@ -2,7 +2,7 @@
   if (cache == null || cache.geocode == null) {
     return;
   }
-  if (cachesCache.containsKey(cache.geocode) == true) {
+  if (cachesCache.containsKey(cache.geocode)) {
     cachesCache.remove(cache.geocode);
   }
   cachesCache.put(cache.geocode,cache);

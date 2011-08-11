@@ -82,7 +82,7 @@
   final Pattern pattern=Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>",Pattern.CASE_INSENSITIVE);
   final Matcher matcher=pattern.matcher(page);
   try {
-    if (matcher.find() == true && matcher.groupCount() > 0) {
+    if (matcher.find() && matcher.groupCount() > 0) {
       final String viewstateConfirm=findViewstate(page,0);
       final String viewstate1Confirm=findViewstate(page,1);
       if (viewstateConfirm == null || viewstateConfirm.length() == 0) {
@@ -130,7 +130,7 @@
   try {
     final Pattern patternOk=Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_lbHeading\"[^>]*>[^<]*</span>[^<]*</h2>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     final Matcher matcherOk=patternOk.matcher(page);
-    if (matcherOk.find() == true) {
+    if (matcherOk.find()) {
       Log.i(cgSettings.tag,"Log successfully posted to cache #" + cacheid);
       if (app != null && geocode != null) {
         app.saveVisitDate(geocode);

@@ -10,7 +10,7 @@
   }
   for (  String geocode : geocodes) {
     try {
-      if (stop == true) {
+      if (stop) {
         break;
       }
       if (!app.isOffline(geocode,null)) {
@@ -25,7 +25,7 @@
  catch (          Exception e) {
           }
         }
-        if (stop == true) {
+        if (stop) {
           Log.i(cgSettings.tag,"Stopped storing process.");
           break;
         }

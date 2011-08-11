@@ -5,13 +5,13 @@
   }
   location=loc;
   String provider=location.getProvider();
-  if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+  if (provider.equals(LocationManager.GPS_PROVIDER)) {
     gps=1;
   }
- else   if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+ else   if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
     gps=0;
   }
- else   if (provider.equals("last") == true) {
+ else   if (provider.equals("last")) {
     gps=-1;
   }
   latitudeNow=location.getLatitude();

@@ -21,7 +21,7 @@
     if (addText.length() > 0) {
       addText.append("\n");
     }
-    if (settings.getSignature().contains("[NUMBER]") == true) {
+    if (settings.getSignature().contains("[NUMBER]")) {
       final HashMap<String,String> params=new HashMap<String,String>();
       final String page=base.request(false,"www.geocaching.com","/my/","GET",params,false,false,false).getData();
       int current=cgBase.parseFindCount(page);

@@ -1,7 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
   try {
-    if (adapter != null && adapter.getSelectMode() == true) {
+    if (adapter != null && adapter.getSelectMode()) {
       menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit));
       menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
     }
@@ -9,7 +9,7 @@
       menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode));
       menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
     }
-    if (type != null && type.equals("offline") == true) {
+    if (type != null && type.equals("offline")) {
       if (adapter != null && adapter.getChecked() > 0) {
         menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked()+ ")");
       }

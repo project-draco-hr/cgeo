@@ -6,7 +6,7 @@
     int fixed=0;
     while (statusIterator.hasNext()) {
       GpsSatellite sat=statusIterator.next();
-      if (sat.usedInFix() == true) {
+      if (sat.usedInFix()) {
         fixed++;
       }
       satellites++;
@@ -20,7 +20,7 @@
       satellitesFixed=fixed;
       changed=true;
     }
-    if (changed == true) {
+    if (changed) {
       selectBest(null);
     }
   }

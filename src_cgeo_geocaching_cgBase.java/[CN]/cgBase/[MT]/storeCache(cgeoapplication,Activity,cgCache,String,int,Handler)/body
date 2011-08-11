@@ -27,7 +27,7 @@
         imgGetter.getDrawable(oneSpoiler.url);
       }
     }
-    if (settings.storelogimages == true) {
+    if (settings.storelogimages) {
       for (      cgLog log : cache.logs) {
         if (log.logImages != null && log.logImages.isEmpty() == false) {
           for (          cgImage oneLogImg : log.logImages) {
@@ -49,10 +49,10 @@
         edge=maxHeight;
       }
       String type="mystery";
-      if (cache.found == true) {
+      if (cache.found) {
         type=cache.type + "_found";
       }
- else       if (cache.disabled == true) {
+ else       if (cache.disabled) {
         type=cache.type + "_disabled";
       }
  else {

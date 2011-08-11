@@ -3,7 +3,7 @@
   Cursor cursor=null;
   ArrayList<String> geocodes=new ArrayList<String>();
   StringBuilder specifySql=new StringBuilder();
-  if (detailedOnly == true) {
+  if (detailedOnly) {
     specifySql.append(" and detailed = 1");
   }
   if (cachetype != null) {

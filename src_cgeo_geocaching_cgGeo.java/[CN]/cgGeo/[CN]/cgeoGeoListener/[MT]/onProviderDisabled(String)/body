@@ -1,10 +1,10 @@
 {
-  if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+  if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
     if (geoManager != null && geoNetListener != null) {
       geoManager.removeUpdates(geoNetListener);
     }
   }
- else   if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+ else   if (provider.equals(LocationManager.GPS_PROVIDER)) {
     if (geoManager != null && geoGpsListener != null) {
       geoManager.removeUpdates(geoGpsListener);
     }

@@ -1,7 +1,7 @@
 {
   if (databaseRO != null) {
     path=databaseRO.getPath();
-    if (databaseRO.inTransaction() == true) {
+    if (databaseRO.inTransaction()) {
       databaseRO.endTransaction();
     }
     databaseRO.close();
@@ -11,7 +11,7 @@
   }
   if (databaseRW != null) {
     path=databaseRW.getPath();
-    if (databaseRW.inTransaction() == true) {
+    if (databaseRW.inTransaction()) {
       databaseRW.endTransaction();
     }
     databaseRW.close();

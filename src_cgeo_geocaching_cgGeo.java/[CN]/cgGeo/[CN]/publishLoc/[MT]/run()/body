@@ -1,5 +1,5 @@
 {
-  if (g4cRunning == true) {
+  if (g4cRunning) {
     return;
   }
   if (settings.publicLoc == 1 && (lastGo4cacheLat == null || lastGo4cacheLon == null || cgBase.getDistance(latitudeNow,longitudeNow,lastGo4cacheLat,lastGo4cacheLon) > 0.75)) {

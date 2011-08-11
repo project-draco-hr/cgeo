@@ -14,7 +14,7 @@
   final String path="/seek/nearest.aspx";
   final String method="GET";
   final HashMap<String,String> params=new HashMap<String,String>();
-  if (cacheType != null && cacheIDs.containsKey(cacheType) == true) {
+  if (cacheType != null && cacheIDs.containsKey(cacheType)) {
     params.put("tx",cacheIDs.get(cacheType));
   }
  else {
@@ -22,7 +22,7 @@
   }
   params.put("ul",userName);
   boolean my=false;
-  if (userName.equalsIgnoreCase(settings.getLogin().get("username")) == true) {
+  if (userName.equalsIgnoreCase(settings.getLogin().get("username"))) {
     my=true;
     Log.i(cgSettings.tag,"cgBase.searchByUsername: Overriding users choice, downloading all caches.");
   }
