@@ -11,7 +11,7 @@
     if (coordinate.type.equalsIgnoreCase("cache")) {
       dialog.setTitle("cache");
       String cacheType;
-      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec) == true) {
+      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
         cacheType=cgBase.cacheTypesInv.get(coordinate.typeSpec);
       }
  else {
@@ -49,7 +49,7 @@
  else {
       dialog.setTitle("waypoint");
       String waypointType;
-      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec) == true) {
+      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
         waypointType=cgBase.waypointTypes.get(coordinate.typeSpec);
       }
  else {

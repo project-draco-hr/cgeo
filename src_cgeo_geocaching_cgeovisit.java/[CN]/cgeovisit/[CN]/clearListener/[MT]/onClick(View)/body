@@ -1,6 +1,6 @@
 {
   app.clearLogOffline(geocode);
-  if (alreadyFound == true) {
+  if (alreadyFound) {
     typeSelected=cgBase.LOG_NOTE;
   }
  else {
@@ -10,7 +10,7 @@
   text=null;
   setType(typeSelected);
   Button dateButton=(Button)findViewById(R.id.date);
-  dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+  dateButton.setText(base.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new cgeovisitDateListener());
   EditText logView=(EditText)findViewById(R.id.log);
   if (text != null && text.length() > 0) {

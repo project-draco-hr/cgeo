@@ -17,14 +17,14 @@
     scheme="https://";
   }
   String cookiesDone=null;
-  if (cookies == null || cookies.isEmpty() == true) {
+  if (cookies == null || cookies.isEmpty()) {
     if (cookies == null) {
       cookies=new HashMap<String,String>();
     }
     final Map<String,?> prefsAll=prefs.getAll();
     final Set<String> prefsKeys=prefsAll.keySet();
     for (    String key : prefsKeys) {
-      if (key.matches("cookie_.+") == true) {
+      if (key.matches("cookie_.+")) {
         final String cookieKey=key.substring(7);
         final String cookieValue=(String)prefsAll.get(key);
         cookies.put(cookieKey,cookieValue);
@@ -49,7 +49,7 @@
       final ArrayList<String> cookiesEncoded=new ArrayList<String>();
       final int length=keys.length;
       for (int i=0; i < length; i++) {
-        if (keys[i].toString().length() > 7 && keys[i].toString().substring(0,7).equals("cookie_") == true) {
+        if (keys[i].toString().length() > 7 && keys[i].toString().substring(0,7).equals("cookie_")) {
           cookiesEncoded.add(keys[i].toString().substring(7) + "=" + prefsValues.get(keys[i].toString()));
         }
       }
@@ -77,7 +77,7 @@
         uc=u.openConnection();
         uc.setRequestProperty("Host",host);
         uc.setRequestProperty("Cookie",cookiesDone);
-        if (xContentType == true) {
+        if (xContentType) {
           uc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
         }
         if (settings.asBrowser == 1) {
@@ -100,7 +100,7 @@
         uc=u.openConnection();
         uc.setRequestProperty("Host",host);
         uc.setRequestProperty("Cookie",cookiesDone);
-        if (xContentType == true) {
+        if (xContentType) {
           uc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
         }
         if (settings.asBrowser == 1) {
@@ -186,7 +186,7 @@ catch (    Exception e) {
   try {
     if (httpCode == 302 && httpLocation != null) {
       final Uri newLocation=Uri.parse(httpLocation);
-      if (newLocation.isRelative() == true) {
+      if (newLocation.isRelative()) {
         response=request(secure,host,path,"GET",new HashMap<String,String>(),requestId,false,false,false);
       }
  else {

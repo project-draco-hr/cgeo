@@ -6,13 +6,13 @@
   boolean ok=false;
   databaseRW.beginTransaction();
   try {
-    if (drop == true) {
+    if (drop) {
       databaseRW.delete(dbTableWaypoints,"geocode = \"" + geocode + "\" and type <> \"own\"",null);
     }
     if (!waypoints.isEmpty()) {
       ContentValues values=new ContentValues();
       for (      cgWaypoint oneWaypoint : waypoints) {
-        if (oneWaypoint.type.equalsIgnoreCase("own") == true) {
+        if (oneWaypoint.type.equalsIgnoreCase("own")) {
           continue;
         }
         values.clear();

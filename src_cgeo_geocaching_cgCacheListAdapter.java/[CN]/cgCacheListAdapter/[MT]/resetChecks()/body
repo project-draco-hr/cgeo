@@ -1,5 +1,5 @@
 {
-  if (list.isEmpty() == true) {
+  if (list.isEmpty()) {
     return false;
   }
   if (checked <= 0) {
@@ -8,7 +8,7 @@
   boolean status=getSelectMode();
   int cleared=0;
   for (  cgCache cache : list) {
-    if (cache.statusChecked == true) {
+    if (cache.statusChecked) {
       cache.statusChecked=false;
       checkChecked(-1);
       cleared++;
@@ -16,7 +16,7 @@
   }
   setSelectMode(false,false);
   notifyDataSetChanged();
-  if (cleared > 0 || status == true) {
+  if (cleared > 0 || status) {
     return true;
   }
  else {

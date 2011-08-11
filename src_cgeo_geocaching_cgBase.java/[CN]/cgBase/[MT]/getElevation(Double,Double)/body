@@ -13,7 +13,7 @@
     if (status == null || status.equalsIgnoreCase("OK") == false) {
       return elv;
     }
-    if (response.has("results") == true) {
+    if (response.has("results")) {
       JSONArray results=response.getJSONArray("results");
       JSONObject result=results.getJSONObject(0);
       elv=result.getDouble("elevation");

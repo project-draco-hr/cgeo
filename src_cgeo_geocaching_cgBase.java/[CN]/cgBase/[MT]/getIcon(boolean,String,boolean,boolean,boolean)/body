@@ -67,15 +67,15 @@
   }
   int icon=-1;
   String iconTxt=null;
-  if (cache == true) {
+  if (cache) {
     if (type != null && type.length() > 0) {
-      if (own == true) {
+      if (own) {
         iconTxt=type + "-own";
       }
- else       if (found == true) {
+ else       if (found) {
         iconTxt=type + "-found";
       }
- else       if (disabled == true) {
+ else       if (disabled) {
         iconTxt=type + "-disabled";
       }
  else {
@@ -85,7 +85,7 @@
  else {
       iconTxt="traditional";
     }
-    if (gcIcons.containsKey(iconTxt) == true) {
+    if (gcIcons.containsKey(iconTxt)) {
       icon=gcIcons.get(iconTxt);
     }
  else {
@@ -99,7 +99,7 @@
  else {
       iconTxt="waypoint";
     }
-    if (wpIcons.containsKey(iconTxt) == true) {
+    if (wpIcons.containsKey(iconTxt)) {
       icon=wpIcons.get(iconTxt);
     }
  else {

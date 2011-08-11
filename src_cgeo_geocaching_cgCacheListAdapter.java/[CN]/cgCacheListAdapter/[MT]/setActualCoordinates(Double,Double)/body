@@ -4,7 +4,7 @@
   }
   latitude=latitudeIn;
   longitude=longitudeIn;
-  if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort == true) {
+  if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
     try {
       if (statComparator != null) {
         Collections.sort((List<cgCache>)list,statComparator);

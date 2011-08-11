@@ -1,6 +1,6 @@
 {
   CheckBox twitterButton=(CheckBox)findViewById(R.id.twitter_option);
-  if (twitterButton.isChecked() == true) {
+  if (twitterButton.isChecked()) {
     settings.reloadTwitterTokens();
     SharedPreferences.Editor edit=prefs.edit();
     if (prefs.getInt("twitter",0) == 0) {

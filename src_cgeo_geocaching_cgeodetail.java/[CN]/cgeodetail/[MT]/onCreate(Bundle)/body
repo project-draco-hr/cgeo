@@ -21,7 +21,7 @@
  else {
       Log.i(cgSettings.tag,"Opening URI: " + uriHost + uriPath);
     }
-    if (uriHost.contains("geocaching.com") == true) {
+    if (uriHost.contains("geocaching.com")) {
       geocode=uri.getQueryParameter("wp");
       guid=uri.getQueryParameter("guid");
       if (geocode != null && geocode.length() > 0) {
@@ -38,8 +38,8 @@
         return;
       }
     }
- else     if (uriHost.contains("coord.info") == true) {
-      if (uriPath != null && uriPath.startsWith("/gc") == true) {
+ else     if (uriHost.contains("coord.info")) {
+      if (uriPath != null && uriPath.startsWith("/gc")) {
         geocode=uriPath.substring(1).toUpperCase();
       }
  else {
