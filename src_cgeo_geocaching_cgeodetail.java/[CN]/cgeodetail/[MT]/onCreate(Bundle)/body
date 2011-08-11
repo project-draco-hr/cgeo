@@ -1,10 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.detail);
   setTitle(res.getString(R.string.cache));
@@ -38,7 +33,7 @@
         guid=guid.toLowerCase();
       }
  else {
-        warning.showToast(res.getString(R.string.err_detail_open));
+        showToast(res.getString(R.string.err_detail_open));
         finish();
         return;
       }
@@ -48,14 +43,14 @@
         geocode=uriPath.substring(1).toUpperCase();
       }
  else {
-        warning.showToast(res.getString(R.string.err_detail_open));
+        showToast(res.getString(R.string.err_detail_open));
         finish();
         return;
       }
     }
   }
   if (geocode == null && guid == null) {
-    warning.showToast(res.getString(R.string.err_detail_cache));
+    showToast(res.getString(R.string.err_detail_cache));
     finish();
     return;
   }

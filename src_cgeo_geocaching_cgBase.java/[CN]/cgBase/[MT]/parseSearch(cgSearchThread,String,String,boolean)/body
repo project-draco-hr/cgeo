@@ -369,13 +369,11 @@
       Log.e(cgSettings.tag,"cgBase.parseSearch.CIDs: " + e.toString());
     }
   }
-  cgDirectionImg dirImgDownloader=new cgDirectionImg(settings);
   for (  cgCache oneCache : caches.cacheList) {
     if (oneCache.latitude == null && oneCache.longitude == null && oneCache.direction == null && oneCache.directionImg != null) {
-      dirImgDownloader.getDrawable(oneCache.geocode,oneCache.directionImg);
+      cgDirectionImg.getDrawable(oneCache.geocode,oneCache.directionImg);
     }
   }
-  dirImgDownloader=null;
   if (guids.size() > 0) {
     Log.i(cgSettings.tag,"Trying to get ratings for " + cids.size() + " caches");
     try {

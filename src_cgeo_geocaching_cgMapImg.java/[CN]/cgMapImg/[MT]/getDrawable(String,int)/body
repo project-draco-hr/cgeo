@@ -5,7 +5,7 @@
   if (geocode == null || geocode.length() == 0) {
     return;
   }
-  final String fileName=settings.getStorage() + geocode + "/map_"+ level;
+  final String fileName=cgSettings.getStorage() + geocode + "/map_"+ level;
   HttpClient client=null;
   HttpGet getMethod=null;
   HttpResponse httpResponse=null;

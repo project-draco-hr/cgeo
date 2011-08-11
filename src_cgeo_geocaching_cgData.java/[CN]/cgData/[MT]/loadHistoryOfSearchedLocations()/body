@@ -16,5 +16,8 @@
     }
  while (cursor.moveToNext());
   }
+  if (cursor != null) {
+    cursor.close();
+  }
   return destinations;
 }

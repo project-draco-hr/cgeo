@@ -1,6 +1,6 @@
 {
   if (cache == null || cache.latitude == null || cache.longitude == null) {
-    warning.showToast(res.getString(R.string.cache_coordinates_no));
+    showToast(res.getString(R.string.cache_coordinates_no));
     return;
   }
   Intent navigateIntent=new Intent(this,cgeonavigate.class);

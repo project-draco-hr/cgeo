@@ -18,17 +18,17 @@
     urlExt="";
   }
   if (geocode != null && geocode.length() > 0) {
-    dirName=settings.getStorage() + geocode + "/";
-    fileName=settings.getStorage() + geocode + "/"+ cgBase.md5(url)+ urlExt;
-    fileNameSec=settings.getStorageSec() + geocode + "/"+ cgBase.md5(url)+ urlExt;
+    dirName=cgSettings.getStorage() + geocode + "/";
+    fileName=cgSettings.getStorage() + geocode + "/"+ cgBase.md5(url)+ urlExt;
+    fileNameSec=cgSettings.getStorageSec() + geocode + "/"+ cgBase.md5(url)+ urlExt;
   }
  else {
-    dirName=settings.getStorage() + "_others/";
-    fileName=settings.getStorage() + "_others/" + cgBase.md5(url)+ urlExt;
-    fileNameSec=settings.getStorageSec() + "_others/" + cgBase.md5(url)+ urlExt;
+    dirName=cgSettings.getStorage() + "_others/";
+    fileName=cgSettings.getStorage() + "_others/" + cgBase.md5(url)+ urlExt;
+    fileNameSec=cgSettings.getStorageSec() + "_others/" + cgBase.md5(url)+ urlExt;
   }
   File dir=null;
-  dir=new File(settings.getStorage());
+  dir=new File(cgSettings.getStorage());
   if (dir.exists() == false) {
     dir.mkdirs();
   }

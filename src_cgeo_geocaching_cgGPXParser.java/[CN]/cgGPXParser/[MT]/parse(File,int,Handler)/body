@@ -63,8 +63,8 @@
         matcherGeocode=null;
       }
       if (cache.geocode != null && cache.geocode.length() > 0 && cache.latitude != null && cache.longitude != null && ((type == null && sym == null) || (type != null && type.indexOf("geocache") > -1) || (sym != null && sym.indexOf("geocache") > -1))) {
-        cache.latitudeString=base.formatCoordinate(cache.latitude,"lat",true);
-        cache.longitudeString=base.formatCoordinate(cache.longitude,"lon",true);
+        cache.latitudeString=cgBase.formatCoordinate(cache.latitude,"lat",true);
+        cache.longitudeString=cgBase.formatCoordinate(cache.longitude,"lon",true);
         if (cache.inventory != null) {
           cache.inventoryItems=cache.inventory.size();
         }

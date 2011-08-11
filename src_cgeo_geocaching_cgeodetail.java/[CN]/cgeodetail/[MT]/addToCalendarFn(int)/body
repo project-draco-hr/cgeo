@@ -55,10 +55,10 @@
     event.put("allDay",1);
     event.put("hasAlarm",0);
     getContentResolver().insert(calendarProvider,event);
-    warning.showToast(res.getString(R.string.event_success));
+    showToast(res.getString(R.string.event_success));
   }
  catch (  Exception e) {
-    warning.showToast(res.getString(R.string.event_fail));
+    showToast(res.getString(R.string.event_fail));
     Log.e(cgSettings.tag,"cgeodetail.addToCalendarFn: " + e.toString());
   }
 }

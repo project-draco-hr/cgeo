@@ -1,10 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.touch);
   setTitle(res.getString(R.string.trackable_touch));
@@ -22,7 +17,7 @@
   }
   app.setAction("logging trackable");
   if (trackable == null || guid == null) {
-    warning.showToast(res.getString(R.string.err_tb_forgot_saw));
+    showToast(res.getString(R.string.err_tb_forgot_saw));
     finish();
     return;
   }

@@ -1,13 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   context=this;
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
   app.setAction(null);
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  prefs=getSharedPreferences(cgSettings.preferences,0);
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   app.cleanGeo();
   app.cleanDir();
   setContentView(R.layout.main);

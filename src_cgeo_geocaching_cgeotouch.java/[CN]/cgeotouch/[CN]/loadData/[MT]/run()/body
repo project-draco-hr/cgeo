@@ -12,9 +12,9 @@
       return;
     }
     final String page=base.request(false,"www.geocaching.com","/track/log.aspx","GET",params,false,false,false).getData();
-    viewstate=base.findViewstate(page,0);
-    viewstate1=base.findViewstate(page,1);
-    final ArrayList<Integer> typesPre=base.parseTypes(page);
+    viewstate=cgBase.findViewstate(page,0);
+    viewstate1=cgBase.findViewstate(page,1);
+    final ArrayList<Integer> typesPre=cgBase.parseTypes(page);
     if (typesPre.size() > 0) {
       types.clear();
       types.addAll(typesPre);
@@ -23,7 +23,7 @@
     if (types.contains(typeSelected) == false) {
       typeSelected=types.get(0);
       setType(typeSelected);
-      warning.showToast(res.getString(R.string.info_log_type_changed));
+      showToast(res.getString(R.string.info_log_type_changed));
     }
   }
  catch (  Exception e) {

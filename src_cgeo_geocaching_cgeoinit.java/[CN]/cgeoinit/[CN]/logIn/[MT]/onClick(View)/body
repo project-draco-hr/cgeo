@@ -2,7 +2,7 @@
   final String username=((EditText)findViewById(R.id.username)).getText().toString();
   final String password=((EditText)findViewById(R.id.password)).getText().toString();
   if (username == null || username.length() == 0 || password == null || password.length() == 0) {
-    warning.showToast(res.getString(R.string.err_missing_auth));
+    showToast(res.getString(R.string.err_missing_auth));
     return;
   }
   loginDialog=ProgressDialog.show(cgeoinit.this,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);

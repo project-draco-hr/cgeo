@@ -9,11 +9,11 @@
   if (cache == null) {
     if (waitDialog != null && waitDialog.isShowing())     waitDialog.dismiss();
     if (geocode != null && geocode.length() > 0) {
-      warning.showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
+      showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
     }
  else {
       geocode=null;
-      warning.showToast(res.getString(R.string.err_detail_cache_find_some));
+      showToast(res.getString(R.string.err_detail_cache_find_some));
     }
     finish();
     return;
@@ -285,12 +285,12 @@
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       TextView descView=(TextView)findViewById(R.id.shortdesc);
       descView.setVisibility(View.VISIBLE);
-      descView.setText(Html.fromHtml(cache.shortdesc.trim(),new cgHtmlImg(this,settings,geocode,true,cache.reason,false),null),TextView.BufferType.SPANNABLE);
+      descView.setText(Html.fromHtml(cache.shortdesc.trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),null),TextView.BufferType.SPANNABLE);
       descView.setMovementMethod(LinkMovementMethod.getInstance());
     }
     if (longDescDisplayed == true) {
       if (longDesc == null && cache != null && cache.description != null) {
-        longDesc=Html.fromHtml(cache.description.trim(),new cgHtmlImg(this,settings,geocode,true,cache.reason,false),null);
+        longDesc=Html.fromHtml(cache.description.trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),null);
       }
       if (longDesc != null && longDesc.length() > 0) {
         ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -368,7 +368,7 @@ if (wpt.prefix.equalsIgnoreCase("OWN") == false) {
 }
 TextView nameView=(TextView)waypointView.findViewById(R.id.name);
 if (wpt.name.trim().length() == 0) {
-  nameView.setText(base.formatCoordinate(wpt.latitude,"lat",true) + " | " + base.formatCoordinate(wpt.longitude,"lon",true));
+  nameView.setText(cgBase.formatCoordinate(wpt.latitude,"lat",true) + " | " + cgBase.formatCoordinate(wpt.longitude,"lon",true));
 }
  else {
   if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {

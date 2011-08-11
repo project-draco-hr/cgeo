@@ -1,6 +1,6 @@
 {
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
   }
   EditText latitudeEdit=(EditText)findViewById(R.id.latitude);
   latitudeEdit.setOnKeyListener(new View.OnKeyListener(){
@@ -19,8 +19,8 @@
   }
 );
   if (prefs.contains("anylatitude") == true && prefs.contains("anylongitude") == true) {
-    latitudeEdit.setText(base.formatCoordinate(new Double(prefs.getFloat("anylatitude",0f)),"lat",true));
-    longitudeEdit.setText(base.formatCoordinate(new Double(prefs.getFloat("anylongitude",0f)),"lon",true));
+    latitudeEdit.setText(cgBase.formatCoordinate(new Double(prefs.getFloat("anylatitude",0f)),"lat",true));
+    longitudeEdit.setText(cgBase.formatCoordinate(new Double(prefs.getFloat("anylongitude",0f)),"lon",true));
   }
   Button buttonCurrent=(Button)findViewById(R.id.current);
   buttonCurrent.setOnClickListener(new currentListener());

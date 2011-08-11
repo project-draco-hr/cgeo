@@ -20,7 +20,7 @@
  else {
       settings.useCompass=1;
       if (dir == null) {
-        dir=app.startDir(this,dirUpdate,warning);
+        dir=app.startDir(this,dirUpdate);
       }
       SharedPreferences.Editor prefsEdit=getSharedPreferences(cgSettings.preferences,0).edit();
       prefsEdit.putInt("usecompass",settings.useCompass);

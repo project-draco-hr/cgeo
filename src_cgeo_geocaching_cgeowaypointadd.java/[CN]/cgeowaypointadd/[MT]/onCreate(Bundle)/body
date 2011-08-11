@@ -1,15 +1,10 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.waypoint_new);
   setTitle("waypoint");
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
   }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
@@ -18,7 +13,7 @@
     id=extras.getInt("waypoint");
   }
   if ((geocode == null || geocode.length() == 0) && id <= 0) {
-    warning.showToast(res.getString(R.string.err_waypoint_cache_unknown));
+    showToast(res.getString(R.string.err_waypoint_cache_unknown));
     finish();
     return;
   }

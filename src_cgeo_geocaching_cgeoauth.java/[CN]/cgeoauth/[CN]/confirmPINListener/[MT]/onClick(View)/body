@@ -1,6 +1,6 @@
 {
   if (((EditText)findViewById(R.id.pin)).getText().toString().length() == 0) {
-    warning.helpDialog(res.getString(R.string.auth_dialog_pin_title),res.getString(R.string.auth_dialog_pin_message));
+    helpDialog(res.getString(R.string.auth_dialog_pin_title),res.getString(R.string.auth_dialog_pin_message));
     return;
   }
   if (changeTokensDialog == null) {

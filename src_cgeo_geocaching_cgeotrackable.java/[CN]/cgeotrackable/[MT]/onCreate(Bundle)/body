@@ -1,10 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.trackable_detail);
   setTitle(res.getString(R.string.trackable));
@@ -38,7 +33,7 @@
         id=id.toLowerCase();
       }
  else {
-        warning.showToast(res.getString(R.string.err_tb_details_open));
+        showToast(res.getString(R.string.err_tb_details_open));
         finish();
         return;
       }
@@ -51,14 +46,14 @@
         id=null;
       }
  else {
-        warning.showToast(res.getString(R.string.err_tb_details_open));
+        showToast(res.getString(R.string.err_tb_details_open));
         finish();
         return;
       }
     }
   }
   if (geocode == null && guid == null && id == null) {
-    warning.showToast(res.getString(R.string.err_tb_display));
+    showToast(res.getString(R.string.err_tb_display));
     finish();
     return;
   }

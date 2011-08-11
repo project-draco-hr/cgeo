@@ -6,10 +6,10 @@
   }
   save.setOnClickListener(new saveListener());
   if (status == true) {
-    warning.showToast(res.getString(R.string.info_log_saved));
+    showToast(res.getString(R.string.info_log_saved));
     app.saveVisitDate(geocode);
   }
  else {
-    warning.showToast(res.getString(R.string.err_log_post_failed));
+    showToast(res.getString(R.string.err_log_post_failed));
   }
 }

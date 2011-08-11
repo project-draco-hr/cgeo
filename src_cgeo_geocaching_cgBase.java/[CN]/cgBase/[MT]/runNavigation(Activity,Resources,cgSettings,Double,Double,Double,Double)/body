@@ -1,0 +1,32 @@
+{
+  if (activity == null) {
+    return false;
+  }
+  if (settings == null) {
+    return false;
+  }
+  if (settings.useGNavigation == 1) {
+    try {
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:ll=" + latitude + ","+ longitude)));
+      return true;
+    }
+ catch (    Exception e) {
+    }
+  }
+  try {
+    if (latitudeNow != null && longitudeNow != null) {
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?f=d&saddr=" + latitudeNow + ","+ longitudeNow+ "&daddr="+ latitude+ ","+ longitude)));
+    }
+ else {
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?f=d&daddr=" + latitude + ","+ longitude)));
+    }
+    return true;
+  }
+ catch (  Exception e) {
+  }
+  Log.i(cgSettings.tag,"cgBase.runNavigation: No navigation application available.");
+  if (res != null) {
+    ActivityMixin.showToast(activity,res.getString(R.string.err_navigation_no));
+  }
+  return false;
+}

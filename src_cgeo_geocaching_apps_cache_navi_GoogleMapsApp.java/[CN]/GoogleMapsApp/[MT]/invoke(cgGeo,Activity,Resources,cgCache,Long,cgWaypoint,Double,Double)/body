@@ -1,0 +1,21 @@
+{
+  if (cache == null && waypoint == null && latitude == null && longitude == null) {
+    return false;
+  }
+  try {
+    if (cache != null && cache.latitude != null && cache.longitude != null) {
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("geo:" + cache.latitude + ","+ cache.longitude)));
+    }
+ else     if (waypoint != null && waypoint.latitude != null && waypoint.longitude != null) {
+      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("geo:" + waypoint.latitude + ","+ waypoint.longitude)));
+    }
+    return true;
+  }
+ catch (  Exception e) {
+  }
+  Log.i(cgSettings.tag,"cgBase.runExternalMap: No maps application available.");
+  if (res != null) {
+    ActivityMixin.showToast(activity,res.getString(R.string.err_application_no));
+  }
+  return false;
+}

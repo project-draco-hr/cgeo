@@ -1,9 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.spoilers);
   Bundle extras=getIntent().getExtras();
@@ -18,7 +14,7 @@
     setTitle(res.getString(R.string.cache_log_images_title));
   }
   if (geocode == null) {
-    warning.showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
+    showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
     finish();
     return;
   }
@@ -27,7 +23,7 @@ case LOG_IMAGE:
     title=extras.getString("title");
   url=extras.getString("url");
 if ((title == null) || (url == null)) {
-  warning.showToast("Sorry, c:geo forgot which logimage you wanted to load.");
+  showToast("Sorry, c:geo forgot which logimage you wanted to load.");
   finish();
   return;
 }
@@ -74,7 +70,7 @@ case SPOILER_IMAGE:
 (new loadSpoilers()).start();
 break;
 default :
-warning.showToast("Sorry, can't load unknown image type.");
+showToast("Sorry, can't load unknown image type.");
 finish();
 }
 }

@@ -1,11 +1,11 @@
 {
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
   }
   app.setAction(geocode);
   cache=app.getCacheByGeocode(geocode);
   if (cache == null) {
-    warning.showToast(res.getString(R.string.err_detail_cache_find));
+    showToast(res.getString(R.string.err_detail_cache_find));
     finish();
     return;
   }

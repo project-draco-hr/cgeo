@@ -1,11 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
   app.setAction(null);
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   Intent intent=getIntent();
   if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
     final String query=intent.getStringExtra(SearchManager.QUERY);
