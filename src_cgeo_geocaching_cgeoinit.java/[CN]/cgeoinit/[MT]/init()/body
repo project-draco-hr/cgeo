@@ -64,13 +64,18 @@
     }
   }
 );
+  Button templates=(Button)findViewById(R.id.signature_template);
+  registerForContextMenu(templates);
+  templates.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      enableTemplatesMenu=true;
+      openContextMenu(v);
+      enableTemplatesMenu=false;
+    }
+  }
+);
   CheckBox autoinsertButton=(CheckBox)findViewById(R.id.sigautoinsert);
-  if (prefs.getBoolean("sigautoinsert",false)) {
-    autoinsertButton.setChecked(true);
-  }
- else {
-    autoinsertButton.setChecked(false);
-  }
+  autoinsertButton.setChecked(prefs.getBoolean("sigautoinsert",false));
   autoinsertButton.setOnClickListener(new cgeoChangeSignatureAutoinsert());
   CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
   if (prefs.getInt("skin",0) == 0) {
