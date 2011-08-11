@@ -41,8 +41,7 @@
     for (    cgLog log : cache.logs) {
       rowView=(RelativeLayout)inflater.inflate(R.layout.log_item,null);
       if (log.date > 0) {
-        final Date logDate=new Date(log.date);
-        ((TextView)rowView.findViewById(R.id.added)).setText(cgBase.dateOutShort.format(logDate));
+        ((TextView)rowView.findViewById(R.id.added)).setText(base.formatShortDate(log.date));
       }
       if (cgBase.logTypes1.containsKey(log.type) == true) {
         ((TextView)rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));

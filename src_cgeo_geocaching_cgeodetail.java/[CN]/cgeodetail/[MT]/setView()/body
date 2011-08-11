@@ -175,7 +175,7 @@
  else {
         itemName.setText(res.getString(R.string.cache_hidden));
       }
-      itemValue.setText(cgBase.dateOut.format(cache.hidden));
+      itemValue.setText(base.formatFullDate(cache.hidden.getTime()));
       detailsList.addView(itemLayout);
     }
     if (cache.location != null && cache.location.length() > 0) {
