@@ -41,7 +41,7 @@
     try {
       final Date now=new Date();
       final File file=new File(fileName);
-      if (file.exists() == true) {
+      if (file.exists()) {
         final long imageSize=file.length();
         if (imageSize > (6 * 1024 * 1024)) {
           bfOptions.inSampleSize=48;
@@ -64,7 +64,7 @@
       }
       if (imagePre == null) {
         final File fileSec=new File(fileNameSec);
-        if (fileSec.exists() == true) {
+        if (fileSec.exists()) {
           final long imageSize=fileSec.length();
           if (imageSize > (6 * 1024 * 1024)) {
             bfOptions.inSampleSize=48;
@@ -91,7 +91,7 @@
       Log.w(cgSettings.tag,"cgHtmlImg.getDrawable (reading cache): " + e.toString());
     }
   }
-  if ((imagePre == null && reason == 0) || onlySave == true) {
+  if ((imagePre == null && reason == 0) || onlySave) {
     Uri uri=null;
     HttpClient client=null;
     HttpGet getMethod=null;
@@ -146,7 +146,7 @@
         }
       }
     }
-    if (save == true) {
+    if (save) {
       try {
         if (bufferedEntity != null) {
           final InputStream is=(InputStream)bufferedEntity.getContent();
@@ -175,7 +175,7 @@
     entity=null;
     bufferedEntity=null;
   }
-  if (onlySave == true) {
+  if (onlySave) {
     return null;
   }
   if (imagePre == null) {

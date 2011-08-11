@@ -40,11 +40,11 @@
       final String line=sb.toString();
       if (line != null && line.length() > 0) {
         final Matcher paramsMatcher1=paramsPattern1.matcher(line);
-        if (paramsMatcher1.find() == true && paramsMatcher1.groupCount() > 0) {
+        if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
           OAtoken=paramsMatcher1.group(1).toString();
         }
         final Matcher paramsMatcher2=paramsPattern2.matcher(line);
-        if (paramsMatcher2.find() == true && paramsMatcher2.groupCount() > 0) {
+        if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
           OAtokenSecret=paramsMatcher2.group(1).toString();
         }
         if (OAtoken != null && OAtoken.length() > 0 && OAtokenSecret != null && OAtokenSecret.length() > 0) {

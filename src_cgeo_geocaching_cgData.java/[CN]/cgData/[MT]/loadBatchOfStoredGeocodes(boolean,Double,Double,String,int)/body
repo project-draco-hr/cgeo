@@ -8,7 +8,7 @@
   StringBuilder specifySql=new StringBuilder();
   specifySql.append("reason = ");
   specifySql.append(list);
-  if (detailedOnly == true) {
+  if (detailedOnly) {
     if (specifySql.length() > 0) {
       specifySql.append(" and ");
     }

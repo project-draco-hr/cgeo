@@ -4,7 +4,7 @@
   final Matcher matcher=pattern.matcher(dst);
   while (matcher.find()) {
     if (matcher.groupCount() > 1) {
-      if (matcher.group(2).equalsIgnoreCase("km") == true) {
+      if (matcher.group(2).equalsIgnoreCase("km")) {
         distance=Double.valueOf(matcher.group(1));
       }
  else {

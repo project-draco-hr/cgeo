@@ -30,7 +30,7 @@
     types.add(cgBase.LOG_NEEDS_ARCHIVE);
     types.add(cgBase.LOG_NEEDS_MAINTENANCE);
   }
-  if (cache.owner.equalsIgnoreCase(settings.getUsername()) == true) {
+  if (cache.owner.equalsIgnoreCase(settings.getUsername())) {
     types.add(cgBase.LOG_OWNER_MAINTENANCE);
     types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
     types.add(cgBase.LOG_ENABLE_LISTING);
@@ -45,7 +45,7 @@
     typeSelected=log.type;
     date.setTime(new Date(log.date));
     text=log.log;
-    if (typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
+    if (typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
       if (post == null) {
         post=(Button)findViewById(R.id.post);
       }
@@ -56,7 +56,7 @@
     addSignature(LOG_SIGNATURE);
   }
   if (types.contains(typeSelected) == false) {
-    if (alreadyFound == true) {
+    if (alreadyFound) {
       typeSelected=cgBase.LOG_NOTE;
     }
  else {

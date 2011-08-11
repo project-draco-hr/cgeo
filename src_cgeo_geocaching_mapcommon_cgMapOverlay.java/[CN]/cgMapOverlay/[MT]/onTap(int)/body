@@ -11,13 +11,13 @@
     waitDialog.show();
     CacheOverlayItemImpl item=items.get(index);
     cgCoord coordinate=item.getCoord();
-    if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") == true && coordinate.geocode != null && coordinate.geocode.length() > 0) {
+    if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && coordinate.geocode != null && coordinate.geocode.length() > 0) {
       Intent popupIntent=new Intent(context,cgeopopup.class);
       popupIntent.putExtra("fromdetail",fromDetail);
       popupIntent.putExtra("geocode",coordinate.geocode);
       context.startActivity(popupIntent);
     }
- else     if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") == true && coordinate.id != null && coordinate.id > 0) {
+ else     if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") && coordinate.id != null && coordinate.id > 0) {
       Intent popupIntent=new Intent(context,cgeowaypoint.class);
       popupIntent.putExtra("waypoint",coordinate.id);
       popupIntent.putExtra("geocode",coordinate.geocode);
