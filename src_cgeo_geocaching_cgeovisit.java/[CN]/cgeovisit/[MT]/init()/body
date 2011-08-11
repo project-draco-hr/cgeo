@@ -74,7 +74,7 @@
   }
 );
   Button dateButton=(Button)findViewById(R.id.date);
-  dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+  dateButton.setText(base.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new cgeovisitDateListener());
   EditText logView=(EditText)findViewById(R.id.log);
   if (logView.getText().length() == 0 && text != null && text.length() > 0) {
