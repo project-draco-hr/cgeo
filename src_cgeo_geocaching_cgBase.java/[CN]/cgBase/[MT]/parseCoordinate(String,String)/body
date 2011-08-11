@@ -24,11 +24,11 @@
       latlonNegative=-1;
     }
     if (matcherA.groupCount() < 5 || matcherA.group(5) == null) {
-      coords.put("coordinate",new Double(latlonNegative * (new Double(matcherA.group(2)) + new Double(matcherA.group(3) + ".0") / 60)));
+      coords.put("coordinate",Double.valueOf(latlonNegative * (Double.valueOf(matcherA.group(2)) + Double.valueOf(matcherA.group(3) + ".0") / 60)));
       coords.put("string",matcherA.group(1) + " " + matcherA.group(2)+ "?? "+ matcherA.group(3)+ ".000");
     }
  else {
-      coords.put("coordinate",new Double(latlonNegative * (new Double(matcherA.group(2)) + new Double(matcherA.group(3) + "." + matcherA.group(5)) / 60)));
+      coords.put("coordinate",Double.valueOf(latlonNegative * (Double.valueOf(matcherA.group(2)) + Double.valueOf(matcherA.group(3) + "." + matcherA.group(5)) / 60)));
       coords.put("string",matcherA.group(1) + " " + matcherA.group(2)+ "?? "+ matcherA.group(3)+ "."+ matcherA.group(5));
     }
     return coords;
@@ -41,18 +41,18 @@
       latlonNegative=-1;
     }
     if (matcherB.groupCount() < 4 || matcherB.group(4) == null) {
-      coords.put("coordinate",new Double(latlonNegative * (new Double(matcherB.group(2) + ".0"))));
+      coords.put("coordinate",Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2) + ".0"))));
     }
  else {
-      coords.put("coordinate",new Double(latlonNegative * (new Double(matcherB.group(2) + "." + matcherB.group(4)))));
+      coords.put("coordinate",Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2) + "." + matcherB.group(4)))));
     }
   }
  else   if (matcherC.find() == true && matcherC.groupCount() > 0) {
     if (matcherC.groupCount() < 3 || matcherC.group(3) == null) {
-      coords.put("coordinate",new Double(new Float(matcherC.group(1) + ".0")));
+      coords.put("coordinate",Double.valueOf(new Float(matcherC.group(1) + ".0")));
     }
  else {
-      coords.put("coordinate",new Double(new Float(matcherC.group(1) + "." + matcherC.group(3))));
+      coords.put("coordinate",Double.valueOf(new Float(matcherC.group(1) + "." + matcherC.group(3))));
     }
   }
  else   if (matcherD.find() == true && matcherD.groupCount() > 0) {
@@ -62,10 +62,10 @@
  else {
       latlonNegative=-1;
     }
-    coords.put("coordinate",new Double(latlonNegative * (new Double(matcherB.group(2)))));
+    coords.put("coordinate",Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2)))));
   }
  else   if (matcherE.find() == true && matcherE.groupCount() > 0) {
-    coords.put("coordinate",new Double(matcherE.group(1)));
+    coords.put("coordinate",Double.valueOf(matcherE.group(1)));
   }
  else   if (matcherF.find() == true && matcherF.groupCount() > 0) {
     if (matcherF.group(1).equalsIgnoreCase("N") || matcherF.group(1).equalsIgnoreCase("E")) {
@@ -74,7 +74,7 @@
  else {
       latlonNegative=-1;
     }
-    coords.put("coordinate",new Double(latlonNegative * (new Double(matcherB.group(2)))));
+    coords.put("coordinate",Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2)))));
   }
  else {
     return null;
