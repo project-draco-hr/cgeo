@@ -3,14 +3,7 @@
     return;
   }
   try {
-    Uri calendarProvider=null;
-    final int sdk=new Integer(Build.VERSION.SDK).intValue();
-    if (sdk >= 8) {
-      calendarProvider=Uri.parse("content://com.android.calendar/events");
-    }
- else {
-      calendarProvider=Uri.parse("content://calendar/events");
-    }
+    Uri calendarProvider=Compatibility.getCalenderEventsProviderURI();
     final Integer[] keys=calendars.keySet().toArray(new Integer[calendars.size()]);
     final Integer calId=keys[index];
     final Date eventDate=cache.hidden;
