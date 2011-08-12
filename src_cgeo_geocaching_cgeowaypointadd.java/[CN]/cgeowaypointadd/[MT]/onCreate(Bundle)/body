@@ -37,8 +37,10 @@
   if (geocode != null) {
     app.setAction(geocode);
   }
-  Button buttonCurrent=(Button)findViewById(R.id.current);
-  buttonCurrent.setOnClickListener(new currentListener());
+  Button buttonLat=(Button)findViewById(R.id.buttonLatitude);
+  buttonLat.setOnClickListener(new coordDialogListener());
+  Button buttonLon=(Button)findViewById(R.id.buttonLongitude);
+  buttonLon.setOnClickListener(new coordDialogListener());
   Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
   addWaypoint.setOnClickListener(new coordsListener());
   ArrayList<String> wayPointNames=new ArrayList<String>(cgBase.waypointTypes.values());

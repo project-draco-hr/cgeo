@@ -4,15 +4,15 @@
   Double longitude=null;
   final String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
   final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString();
-  final String latText=((EditText)findViewById(R.id.latitude)).getText().toString();
-  final String lonText=((EditText)findViewById(R.id.longitude)).getText().toString();
+  final String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
+  final String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
   if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0) && (latText == null || latText.length() == 0)&& (lonText == null || lonText.length() == 0)) {
     warning.helpDialog(res.getString(R.string.err_point_no_position_given_title),res.getString(R.string.err_point_no_position_given));
     return;
   }
   if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
     HashMap<String,Object> latParsed=base.parseCoordinate(latText,"lat");
-    HashMap<String,Object> lonParsed=base.parseCoordinate(lonText,"lat");
+    HashMap<String,Object> lonParsed=base.parseCoordinate(lonText,"lon");
     if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
       warning.showToast(res.getString(R.string.err_parse_lat));
       return;
