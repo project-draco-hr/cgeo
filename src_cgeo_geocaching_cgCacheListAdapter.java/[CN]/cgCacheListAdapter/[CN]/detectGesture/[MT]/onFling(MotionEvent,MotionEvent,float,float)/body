@@ -1,13 +1,13 @@
 {
   try {
-    if (getSelectMode() == true) {
+    if (getSelectMode()) {
       return false;
     }
     if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
       return false;
     }
     if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-      if (cache.statusChecked == true) {
+      if (cache.statusChecked) {
         return true;
       }
       if (holder != null && holder.oneInfo != null) {
@@ -23,7 +23,7 @@
         return true;
       }
       if (holder != null && holder.oneInfo != null) {
-        if (getSelectMode() == true) {
+        if (getSelectMode()) {
           setSelectMode(false,false);
         }
         checkChecked(-1);

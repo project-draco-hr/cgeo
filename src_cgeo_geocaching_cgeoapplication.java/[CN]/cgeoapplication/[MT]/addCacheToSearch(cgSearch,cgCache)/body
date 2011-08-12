@@ -16,7 +16,7 @@
     cgCache mergedCache=cache.merge(storage);
     status=storage.saveCache(mergedCache);
   }
-  if (status == true) {
+  if (status) {
     search.addGeocode(cache.geocode);
   }
   return status;

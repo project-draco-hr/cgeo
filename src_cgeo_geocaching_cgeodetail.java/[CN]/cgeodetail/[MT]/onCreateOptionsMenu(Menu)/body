@@ -7,7 +7,7 @@
   if (cache != null && cache.canBeAddedToCalendar()) {
     menu.add(1,11,0,res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda);
   }
-  if (settings.isLogin() == true) {
+  if (settings.isLogin()) {
     menu.add(1,3,0,res.getString(R.string.cache_menu_visit)).setIcon(android.R.drawable.ic_menu_agenda);
   }
   if (cache != null && cache.spoilers != null && cache.spoilers.size() > 0) {

@@ -41,7 +41,7 @@
     ((ScrollView)findViewById(R.id.details_list_box)).setVisibility(View.VISIBLE);
     LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
-    if (cache.type != null && gcIcons.containsKey(cache.type) == true) {
+    if (cache.type != null && gcIcons.containsKey(cache.type)) {
       ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)getResources().getDrawable(gcIcons.get(cache.type)),null,null,null);
     }
  else {
@@ -51,7 +51,7 @@
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_type));
-    if (cgBase.cacheTypesInv.containsKey(cache.type) == true) {
+    if (cgBase.cacheTypesInv.containsKey(cache.type)) {
       if (cache.size != null && cache.size.length() > 0) {
         itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + " (" + cache.size+ ")");
       }
@@ -74,31 +74,31 @@
     itemName.setText(res.getString(R.string.cache_geocode));
     itemValue.setText(cache.geocode.toUpperCase());
     detailsList.addView(itemLayout);
-    if (cache.archived == true || cache.disabled == true || cache.members == true || cache.found == true) {
+    if (cache.archived || cache.disabled || cache.members|| cache.found) {
       itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
       itemName.setText(res.getString(R.string.cache_status));
       StringBuilder state=new StringBuilder();
-      if (cache.found == true) {
+      if (cache.found) {
         if (state.length() > 0) {
           state.append(", ");
         }
         state.append(res.getString(R.string.cache_status_found));
       }
-      if (cache.archived == true) {
+      if (cache.archived) {
         if (state.length() > 0) {
           state.append(", ");
         }
         state.append(res.getString(R.string.cache_status_archived));
       }
-      if (cache.disabled == true) {
+      if (cache.disabled) {
         if (state.length() > 0) {
           state.append(", ");
         }
         state.append(res.getString(R.string.cache_status_disabled));
       }
-      if (cache.members == true) {
+      if (cache.members) {
         if (state.length() > 0) {
           state.append(", ");
         }

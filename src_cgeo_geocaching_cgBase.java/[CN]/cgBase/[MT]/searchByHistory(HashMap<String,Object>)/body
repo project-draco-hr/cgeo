@@ -4,7 +4,7 @@
     return null;
   }
   String cachetype=null;
-  if (parameters.containsKey("cachetype") == true) {
+  if (parameters.containsKey("cachetype")) {
     cachetype=(String)parameters.get("cachetype");
   }
   final cgSearch search=app.getHistoryOfCaches(true,cachetype);

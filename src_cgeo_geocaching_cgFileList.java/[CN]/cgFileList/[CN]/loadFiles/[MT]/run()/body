@@ -1,7 +1,7 @@
 {
   ArrayList<File> list=new ArrayList<File>();
   try {
-    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == true) {
+    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
       boolean loaded=false;
       for (      String baseFolder : getBaseFolders()) {
         final File dir=new File(baseFolder);

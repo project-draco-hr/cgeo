@@ -1,7 +1,7 @@
 {
   Log.i(cgSettings.tag,"Upgrade database from ver. " + oldVersion + " to ver. "+ newVersion+ ": start");
   try {
-    if (db.isReadOnly() == true) {
+    if (db.isReadOnly()) {
       return;
     }
     db.beginTransaction();

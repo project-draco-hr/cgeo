@@ -8,8 +8,9 @@
   if ((id >= 0x1 && id <= 0x7)) {
     text=(EditText)findViewById(R.id.log);
     textContent=text.getText().toString();
-    dateString=cgBase.dateOut.format(new Date());
-    timeString=cgBase.timeOut.format(new Date());
+    final long now=System.currentTimeMillis();
+    dateString=base.formatDate(now);
+    timeString=base.formatTime(now);
     if ((id & 0x4) == 0x4) {
       addText+=dateString;
       if ((id & 0x2) == 0x2) {

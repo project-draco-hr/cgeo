@@ -1,0 +1,8 @@
+{
+  EditText sig=(EditText)findViewById(R.id.signature);
+  String insertText="[" + template + "]";
+  int start=sig.getSelectionStart();
+  int end=sig.getSelectionEnd();
+  sig.getText().replace(Math.min(start,end),Math.max(start,end),insertText);
+  return true;
+}

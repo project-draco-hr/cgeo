@@ -4,7 +4,7 @@
     return formatted;
   }
   String worldSide="";
-  if (latlon.equalsIgnoreCase("lat") == true) {
+  if (latlon.equalsIgnoreCase("lat")) {
     if (coord >= 0) {
       worldSide="N ";
     }
@@ -12,7 +12,7 @@
       worldSide="S ";
     }
   }
- else   if (latlon.equalsIgnoreCase("lon") == true) {
+ else   if (latlon.equalsIgnoreCase("lon")) {
     if (coord >= 0) {
       worldSide="E ";
     }
@@ -21,8 +21,8 @@
     }
   }
   coord=Math.abs(coord);
-  if (latlon.equalsIgnoreCase("lat") == true) {
-    if (degrees == true) {
+  if (latlon.equalsIgnoreCase("lat")) {
+    if (degrees) {
       formatted=worldSide + String.format(Locale.getDefault(),"%02.0f",Math.floor(coord)) + "?? "+ String.format(Locale.getDefault(),"%06.3f",((coord - Math.floor(coord)) * 60));
     }
  else {
@@ -30,7 +30,7 @@
     }
   }
  else {
-    if (degrees == true) {
+    if (degrees) {
       formatted=worldSide + String.format(Locale.getDefault(),"%03.0f",Math.floor(coord)) + "?? "+ String.format(Locale.getDefault(),"%06.3f",((coord - Math.floor(coord)) * 60));
     }
  else {

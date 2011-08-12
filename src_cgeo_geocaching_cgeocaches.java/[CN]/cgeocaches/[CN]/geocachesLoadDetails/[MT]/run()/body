@@ -13,7 +13,7 @@
       continue;
     }
     try {
-      if (needToStop == true) {
+      if (needToStop) {
         Log.i(cgSettings.tag,"Stopped storing process.");
         break;
       }
@@ -30,7 +30,7 @@
           Log.e(cgSettings.tag,"cgeocaches.geocachesLoadDetails.sleep: " + e.toString());
         }
       }
-      if (needToStop == true) {
+      if (needToStop) {
         Log.i(cgSettings.tag,"Stopped storing process.");
         break;
       }

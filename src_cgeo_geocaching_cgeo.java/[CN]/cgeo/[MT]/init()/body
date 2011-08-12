@@ -1,11 +1,11 @@
 {
-  if (initialized == true) {
+  if (initialized) {
     return;
   }
   initialized=true;
   settings.getLogin();
   settings.reloadCacheType();
-  if (app.firstRun == true) {
+  if (app.firstRun) {
     new Thread(){
       @Override public void run(){
         int status=base.login();
