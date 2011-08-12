@@ -1,13 +1,6 @@
 {
   String[] projection=new String[]{"_id","displayName"};
-  Uri calendarProvider=null;
-  final int sdk=new Integer(Build.VERSION.SDK).intValue();
-  if (sdk >= 8) {
-    calendarProvider=Uri.parse("content://com.android.calendar/calendars");
-  }
- else {
-    calendarProvider=Uri.parse("content://calendar/calendars");
-  }
+  Uri calendarProvider=Compatibility.getCalendarProviderURI();
   Cursor cursor=managedQuery(calendarProvider,projection,"selected=1",null,null);
   calendars.clear();
   int cnt=0;
