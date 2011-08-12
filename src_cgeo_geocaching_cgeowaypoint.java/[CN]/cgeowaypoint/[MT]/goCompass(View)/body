@@ -7,9 +7,6 @@
   navigateIntent.putExtra("longitude",waypoint.longitude);
   navigateIntent.putExtra("geocode",waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
   navigateIntent.putExtra("name",waypoint.name);
-  if (cgeonavigate.coordinates != null) {
-    cgeonavigate.coordinates.clear();
-  }
   cgeonavigate.coordinates=new ArrayList<cgCoord>();
   cgeonavigate.coordinates.add(new cgCoord(waypoint));
   startActivity(navigateIntent);
