@@ -427,7 +427,7 @@
             String typeStr=matcherLog.group(1);
             String countStr=matcherLog.group(2);
             if (typeStr != null && typeStr.length() > 0) {
-              if (logTypes.containsKey(typeStr.toLowerCase()) == true) {
+              if (logTypes.containsKey(typeStr.toLowerCase())) {
                 type=logTypes.get(typeStr.toLowerCase());
               }
             }
@@ -527,7 +527,7 @@
  else {
               logDate=0;
             }
-            if (logTypes.containsKey(matcherLog.group(1).toLowerCase()) == true) {
+            if (logTypes.containsKey(matcherLog.group(1).toLowerCase())) {
               logDone.type=logTypes.get(matcherLog.group(1).toLowerCase());
             }
  else {

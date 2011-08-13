@@ -1,9 +1,9 @@
 {
-  if (storeDialog != null && storeDialog.isShowing() == true) {
+  if (storeDialog != null && storeDialog.isShowing()) {
     showToast(res.getString(R.string.err_detail_still_saving));
     return;
   }
-  if (refreshDialog != null && refreshDialog.isShowing() == true) {
+  if (refreshDialog != null && refreshDialog.isShowing()) {
     showToast(res.getString(R.string.err_detail_still_refreshing));
     return;
   }

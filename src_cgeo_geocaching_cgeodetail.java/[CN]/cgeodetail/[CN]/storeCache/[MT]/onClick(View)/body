@@ -1,9 +1,9 @@
 {
-  if (dropDialog != null && dropDialog.isShowing() == true) {
+  if (dropDialog != null && dropDialog.isShowing()) {
     showToast(res.getString(R.string.err_detail_still_removing));
     return;
   }
-  if (refreshDialog != null && refreshDialog.isShowing() == true) {
+  if (refreshDialog != null && refreshDialog.isShowing()) {
     showToast(res.getString(R.string.err_detail_still_refreshing));
     return;
   }

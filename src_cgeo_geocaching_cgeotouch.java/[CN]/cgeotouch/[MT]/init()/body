@@ -17,7 +17,7 @@
   }
 );
   Button dateButton=(Button)findViewById(R.id.date);
-  dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+  dateButton.setText(base.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new cgeotouchDateListener());
   if (tweetBox == null)   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   if (tweetCheck == null)   tweetCheck=(CheckBox)findViewById(R.id.tweet);

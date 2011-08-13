@@ -5,7 +5,7 @@
     save=(Button)findViewById(R.id.save);
   }
   save.setOnClickListener(new saveListener());
-  if (status == true) {
+  if (status) {
     showToast(res.getString(R.string.info_log_saved));
     app.saveVisitDate(geocode);
   }

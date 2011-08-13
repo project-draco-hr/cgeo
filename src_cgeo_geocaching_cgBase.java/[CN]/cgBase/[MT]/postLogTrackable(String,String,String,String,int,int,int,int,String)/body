@@ -58,7 +58,7 @@
   try {
     final Pattern patternOk=Pattern.compile("<div id=[\"|']ctl00_ContentBody_LogBookPanel1_ViewLogPanel[\"|']>",Pattern.CASE_INSENSITIVE);
     final Matcher matcherOk=patternOk.matcher(page);
-    if (matcherOk.find() == true) {
+    if (matcherOk.find()) {
       Log.i(cgSettings.tag,"Log successfully posted to trackable #" + trackingCode);
       return 1;
     }

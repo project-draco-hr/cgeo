@@ -51,7 +51,7 @@
     search.totalCnt=caches.totalCnt;
     if (caches.cacheList != null && caches.cacheList.size() > 0) {
       for (      cgCache cache : caches.cacheList) {
-        if ((settings.excludeDisabled == 0 || (settings.excludeDisabled == 1 && cache.disabled == false)) && (settings.excludeMine == 0 || (settings.excludeMine == 1 && cache.own == false)) && (settings.excludeMine == 0 || (settings.excludeMine == 1 && cache.found == false))&& (settings.cacheType == null || (settings.cacheType.equals(cache.type) == true))) {
+        if ((settings.excludeDisabled == 0 || (settings.excludeDisabled == 1 && cache.disabled == false)) && (settings.excludeMine == 0 || (settings.excludeMine == 1 && cache.own == false)) && (settings.excludeMine == 0 || (settings.excludeMine == 1 && cache.found == false))&& (settings.cacheType == null || (settings.cacheType.equals(cache.type)))) {
           search.addGeocode(cache.geocode);
           cacheList.add(cache);
         }

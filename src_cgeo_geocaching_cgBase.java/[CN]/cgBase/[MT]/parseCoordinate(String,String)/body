@@ -16,7 +16,7 @@
   final Matcher matcherF=patternF.matcher(coord);
   final Matcher matcher0=pattern0.matcher(coord);
   int latlonNegative;
-  if (matcherA.find() == true && matcherA.groupCount() > 0) {
+  if (matcherA.find() && matcherA.groupCount() > 0) {
     if (matcherA.group(1).equalsIgnoreCase("N") || matcherA.group(1).equalsIgnoreCase("E")) {
       latlonNegative=1;
     }
@@ -33,7 +33,7 @@
     }
     return coords;
   }
- else   if (matcherB.find() == true && matcherB.groupCount() > 0) {
+ else   if (matcherB.find() && matcherB.groupCount() > 0) {
     if (matcherB.group(1).equalsIgnoreCase("N") || matcherB.group(1).equalsIgnoreCase("E")) {
       latlonNegative=1;
     }
@@ -47,7 +47,7 @@
       coords.put("coordinate",Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2) + "." + matcherB.group(4)))));
     }
   }
- else   if (matcherC.find() == true && matcherC.groupCount() > 0) {
+ else   if (matcherC.find() && matcherC.groupCount() > 0) {
     if (matcherC.groupCount() < 3 || matcherC.group(3) == null) {
       coords.put("coordinate",Double.valueOf(new Float(matcherC.group(1) + ".0")));
     }
@@ -55,7 +55,7 @@
       coords.put("coordinate",Double.valueOf(new Float(matcherC.group(1) + "." + matcherC.group(3))));
     }
   }
- else   if (matcherD.find() == true && matcherD.groupCount() > 0) {
+ else   if (matcherD.find() && matcherD.groupCount() > 0) {
     if (matcherD.group(1).equalsIgnoreCase("N") || matcherD.group(1).equalsIgnoreCase("E")) {
       latlonNegative=1;
     }
@@ -64,10 +64,10 @@
     }
     coords.put("coordinate",Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2)))));
   }
- else   if (matcherE.find() == true && matcherE.groupCount() > 0) {
+ else   if (matcherE.find() && matcherE.groupCount() > 0) {
     coords.put("coordinate",Double.valueOf(matcherE.group(1)));
   }
- else   if (matcherF.find() == true && matcherF.groupCount() > 0) {
+ else   if (matcherF.find() && matcherF.groupCount() > 0) {
     if (matcherF.group(1).equalsIgnoreCase("N") || matcherF.group(1).equalsIgnoreCase("E")) {
       latlonNegative=1;
     }
@@ -79,7 +79,7 @@
  else {
     return null;
   }
-  if (matcher0.find() == true && matcher0.groupCount() > 0) {
+  if (matcher0.find() && matcher0.groupCount() > 0) {
     String tmpDir=null;
     Float tmpCoord;
     if (matcher0.groupCount() < 3 || matcher0.group(3) == null) {
