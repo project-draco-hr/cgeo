@@ -14,7 +14,9 @@
       logNow.date=date.getTimeInMillis();
       logNow.type=typeSelected;
       logNow.log=log;
-      cache.logs.add(0,logNow);
+      if (cache != null) {
+        cache.logs.add(0,logNow);
+      }
       app.addLog(geocode,logNow);
       if (typeSelected == cgBase.LOG_FOUND_IT) {
         app.markFound(geocode);
@@ -32,10 +34,10 @@
     if (status == 1) {
       app.clearLogOffline(geocode);
     }
-    if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1 && settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null && settings.tokenSecret.length() > 0 && tweetCheck.isChecked() == true && tweetBox.getVisibility() == View.VISIBLE) {
-      base.postTweetCache(app,settings,geocode);
+    if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1 && settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null && settings.tokenSecret.length() > 0 && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+      cgBase.postTweetCache(app,settings,geocode);
     }
-    if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
+    if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
       setRating(cache.guid,rating);
     }
     return status;

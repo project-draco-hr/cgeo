@@ -6,7 +6,7 @@
     holder.checkbox.setChecked(cache.statusChecked);
     Animation hideCheckbox=new TranslateAnimation((int)(SWIPE_DISTANCE * pixelDensity),0,0,0);
     hideCheckbox.setRepeatCount(0);
-    if (force == true) {
+    if (force) {
       hideCheckbox.setDuration(0);
     }
  else {
@@ -17,7 +17,7 @@
     hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
     Animation brightenInfo=new AlphaAnimation(SWIPE_OPACITY,1.0f);
     brightenInfo.setRepeatCount(0);
-    if (force == true) {
+    if (force) {
       brightenInfo.setDuration(0);
     }
  else {

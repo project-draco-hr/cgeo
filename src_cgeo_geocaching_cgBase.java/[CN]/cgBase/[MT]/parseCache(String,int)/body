@@ -256,7 +256,7 @@
     if (matcherLatLon.find()) {
       if (matcherLatLon.groupCount() > 0) {
         cache.latlon=getMatch(matcherLatLon.group(2));
-        HashMap<String,Object> tmp=this.parseLatlon(cache.latlon);
+        HashMap<String,Object> tmp=cgBase.parseLatlon(cache.latlon);
         if (tmp.size() > 0) {
           cache.latitude=(Double)tmp.get("latitude");
           cache.longitude=(Double)tmp.get("longitude");
@@ -427,7 +427,7 @@
             String typeStr=matcherLog.group(1);
             String countStr=matcherLog.group(2);
             if (typeStr != null && typeStr.length() > 0) {
-              if (logTypes.containsKey(typeStr.toLowerCase()) == true) {
+              if (logTypes.containsKey(typeStr.toLowerCase())) {
                 type=logTypes.get(typeStr.toLowerCase());
               }
             }
@@ -527,7 +527,7 @@
  else {
               logDate=0;
             }
-            if (logTypes.containsKey(matcherLog.group(1).toLowerCase()) == true) {
+            if (logTypes.containsKey(matcherLog.group(1).toLowerCase())) {
               logDone.type=logTypes.get(matcherLog.group(1).toLowerCase());
             }
  else {
@@ -648,7 +648,7 @@
           while (matcherWpLatLon.find()) {
             if (matcherWpLatLon.groupCount() > 1) {
               waypoint.latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString();
-              final HashMap<String,Object> tmp=this.parseLatlon(waypoint.latlon);
+              final HashMap<String,Object> tmp=cgBase.parseLatlon(waypoint.latlon);
               if (tmp.size() > 0) {
                 waypoint.latitude=(Double)tmp.get("latitude");
                 waypoint.longitude=(Double)tmp.get("longitude");

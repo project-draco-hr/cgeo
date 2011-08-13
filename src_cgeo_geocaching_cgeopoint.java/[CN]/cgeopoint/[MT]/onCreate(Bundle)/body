@@ -1,11 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  app=(cgeoapplication)this.getApplication();
-  res=this.getResources();
-  settings=new cgSettings(this,this.getSharedPreferences(cgSettings.preferences,0));
-  prefs=getSharedPreferences(cgSettings.preferences,0);
-  base=new cgBase(app,settings,this.getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.point);
   setTitle(res.getString(R.string.search_destination));

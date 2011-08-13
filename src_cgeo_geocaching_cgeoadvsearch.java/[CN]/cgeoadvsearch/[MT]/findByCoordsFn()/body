@@ -4,18 +4,18 @@
   final String latText=latView.getText().toString();
   final String lonText=lonView.getText().toString();
   if (latText == null || latText.length() == 0 || lonText == null || lonText.length() == 0) {
-    latView.setText(base.formatCoordinate(geo.latitudeNow,"lat",true));
-    lonView.setText(base.formatCoordinate(geo.longitudeNow,"lon",true));
+    latView.setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true));
+    lonView.setText(cgBase.formatCoordinate(geo.longitudeNow,"lon",true));
   }
  else {
-    HashMap<String,Object> latParsed=base.parseCoordinate(latText,"lat");
-    HashMap<String,Object> lonParsed=base.parseCoordinate(lonText,"lat");
+    HashMap<String,Object> latParsed=cgBase.parseCoordinate(latText,"lat");
+    HashMap<String,Object> lonParsed=cgBase.parseCoordinate(lonText,"lat");
     if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
-      warning.showToast(res.getString(R.string.err_parse_lat));
+      showToast(res.getString(R.string.err_parse_lat));
       return;
     }
     if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
-      warning.showToast(res.getString(R.string.err_parse_lon));
+      showToast(res.getString(R.string.err_parse_lon));
       return;
     }
     final Intent cachesIntent=new Intent(this,cgeocaches.class);

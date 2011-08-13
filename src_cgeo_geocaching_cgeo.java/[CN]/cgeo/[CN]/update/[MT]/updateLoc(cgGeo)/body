@@ -63,10 +63,10 @@
  else {
             humanAlt=String.format("%.0f",geo.altitudeNow) + " m";
           }
-          navLocation.setText(base.formatCoordinate(geo.latitudeNow,"lat",true) + " | " + base.formatCoordinate(geo.longitudeNow,"lon",true)+ " | "+ humanAlt);
+          navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true) + " | " + cgBase.formatCoordinate(geo.longitudeNow,"lon",true)+ " | "+ humanAlt);
         }
  else {
-          navLocation.setText(base.formatCoordinate(geo.latitudeNow,"lat",true) + " | " + base.formatCoordinate(geo.longitudeNow,"lon",true));
+          navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true) + " | " + cgBase.formatCoordinate(geo.longitudeNow,"lon",true));
         }
       }
     }

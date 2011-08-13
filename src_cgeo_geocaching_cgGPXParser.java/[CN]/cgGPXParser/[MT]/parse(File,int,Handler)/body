@@ -63,8 +63,8 @@
         matcherGeocode=null;
       }
       if (cache.geocode != null && cache.geocode.length() > 0 && cache.latitude != null && cache.longitude != null && ((type == null && sym == null) || (type != null && type.indexOf("geocache") > -1) || (sym != null && sym.indexOf("geocache") > -1))) {
-        cache.latitudeString=base.formatCoordinate(cache.latitude,"lat",true);
-        cache.longitudeString=base.formatCoordinate(cache.longitude,"lon",true);
+        cache.latitudeString=cgBase.formatCoordinate(cache.latitude,"lat",true);
+        cache.longitudeString=cgBase.formatCoordinate(cache.longitude,"lon",true);
         if (cache.inventory != null) {
           cache.inventoryItems=cache.inventory.size();
         }
@@ -110,7 +110,7 @@
       name=body;
       final String content=Html.fromHtml(body).toString().trim();
       cache.name=content;
-      if (cache.name.length() > 2 && cache.name.substring(0,2).equalsIgnoreCase("GC") == true) {
+      if (cache.name.length() > 2 && cache.name.substring(0,2).equalsIgnoreCase("GC")) {
         cache.geocode=cache.name.toUpperCase();
       }
     }
@@ -384,7 +384,7 @@
     gcLog.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
         final String content=body.trim().toLowerCase();
-        if (cgBase.logTypes0.containsKey(content) == true) {
+        if (cgBase.logTypes0.containsKey(content)) {
           log.type=cgBase.logTypes0.get(content);
         }
  else {
@@ -408,12 +408,29 @@
     }
 );
   }
+  FileInputStream fis=null;
+  boolean parsed=false;
   try {
-    Xml.parse(new FileInputStream(file),Xml.Encoding.UTF_8,root.getContentHandler());
-    return search.getCurrentId();
+    fis=new FileInputStream(file);
   }
- catch (  Exception e) {
-    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": "+ e.toString());
+ catch (  FileNotFoundException e) {
+    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": file not found!");
   }
-  return 0l;
+  try {
+    Xml.parse(fis,Xml.Encoding.UTF_8,root.getContentHandler());
+    parsed=true;
+  }
+ catch (  IOException e) {
+    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not read file!");
+  }
+catch (  SAXException e) {
+    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not parse XML - "+ e.toString());
+  }
+  try {
+    fis.close();
+  }
+ catch (  IOException e) {
+    Log.e(cgSettings.tag,"Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not close file!");
+  }
+  return parsed ? search.getCurrentId() : 0l;
 }

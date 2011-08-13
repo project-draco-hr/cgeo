@@ -5,7 +5,7 @@
   }
   databaseRW.beginTransaction();
   try {
-    if (drop == true) {
+    if (drop) {
       databaseRW.delete(dbTableLogs,"geocode = \"" + geocode + "\"",null);
     }
     if (!logs.isEmpty()) {

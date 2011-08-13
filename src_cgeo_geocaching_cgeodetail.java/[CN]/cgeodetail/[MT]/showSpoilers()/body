@@ -1,6 +1,6 @@
 {
-  if (cache == null || cache.spoilers == null || cache.spoilers.isEmpty() == true) {
-    warning.showToast(res.getString(R.string.err_detail_no_spoiler));
+  if (cache == null || cache.spoilers == null || cache.spoilers.isEmpty()) {
+    showToast(res.getString(R.string.err_detail_no_spoiler));
   }
   Intent spoilersIntent=new Intent(this,cgeoimages.class);
   spoilersIntent.putExtra("geocode",geocode.toUpperCase());

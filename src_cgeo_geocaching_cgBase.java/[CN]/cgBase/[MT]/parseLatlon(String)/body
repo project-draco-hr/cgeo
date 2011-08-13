@@ -14,8 +14,8 @@
       if (matcherLatlon.group(5).equalsIgnoreCase("E")) {
         lonNegative=1;
       }
-      result.put("latitude",new Double(latNegative * (new Float(matcherLatlon.group(2)) + new Float(matcherLatlon.group(3) + "." + matcherLatlon.group(4)) / 60)));
-      result.put("longitude",new Double(lonNegative * (new Float(matcherLatlon.group(6)) + new Float(matcherLatlon.group(7) + "." + matcherLatlon.group(8)) / 60)));
+      result.put("latitude",Double.valueOf(latNegative * (Float.valueOf(matcherLatlon.group(2)) + Float.valueOf(matcherLatlon.group(3) + "." + matcherLatlon.group(4)) / 60)));
+      result.put("longitude",Double.valueOf(lonNegative * (Float.valueOf(matcherLatlon.group(6)) + Float.valueOf(matcherLatlon.group(7) + "." + matcherLatlon.group(8)) / 60)));
     }
  else {
       Log.w(cgSettings.tag,"cgBase.parseLatlon: Failed to parse coordinates.");

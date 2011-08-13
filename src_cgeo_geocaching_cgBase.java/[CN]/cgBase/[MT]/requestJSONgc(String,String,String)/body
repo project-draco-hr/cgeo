@@ -2,14 +2,14 @@
   int httpCode=-1;
   String httpLocation=null;
   String cookiesDone=null;
-  if (cookies == null || cookies.isEmpty() == true) {
+  if (cookies == null || cookies.isEmpty()) {
     if (cookies == null) {
       cookies=new HashMap<String,String>();
     }
     final Map<String,?> prefsAll=prefs.getAll();
     final Set<String> prefsKeys=prefsAll.keySet();
     for (    String key : prefsKeys) {
-      if (key.matches("cookie_.+") == true) {
+      if (key.matches("cookie_.+")) {
         final String cookieKey=key.substring(7);
         final String cookieValue=(String)prefsAll.get(key);
         cookies.put(cookieKey,cookieValue);
@@ -34,7 +34,7 @@
       final ArrayList<String> cookiesEncoded=new ArrayList<String>();
       final int length=keys.length;
       for (int i=0; i < length; i++) {
-        if (keys[i].toString().length() > 7 && keys[i].toString().substring(0,7).equals("cookie_") == true) {
+        if (keys[i].toString().length() > 7 && keys[i].toString().substring(0,7).equals("cookie_")) {
           cookiesEncoded.add(keys[i].toString().substring(7) + "=" + prefsValues.get(keys[i].toString()));
         }
       }
@@ -139,7 +139,7 @@ catch (    Exception e) {
   String page=null;
   if (httpCode == 302 && httpLocation != null) {
     final Uri newLocation=Uri.parse(httpLocation);
-    if (newLocation.isRelative() == true) {
+    if (newLocation.isRelative()) {
       page=requestJSONgc(host,path,params);
     }
  else {

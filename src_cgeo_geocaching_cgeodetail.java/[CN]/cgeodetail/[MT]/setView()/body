@@ -9,11 +9,11 @@
   if (cache == null) {
     if (waitDialog != null && waitDialog.isShowing())     waitDialog.dismiss();
     if (geocode != null && geocode.length() > 0) {
-      warning.showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
+      showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
     }
  else {
       geocode=null;
-      warning.showToast(res.getString(R.string.err_detail_cache_find_some));
+      showToast(res.getString(R.string.err_detail_cache_find_some));
     }
     finish();
     return;
@@ -43,7 +43,7 @@
     LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
     String typeId="mystery";
-    if (cache.type != null && gcIcons.containsKey(cache.type) == true) {
+    if (cache.type != null && gcIcons.containsKey(cache.type)) {
       typeId=cache.type;
     }
     ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)getResources().getDrawable(gcIcons.get(typeId)),null,null,null);
@@ -64,7 +64,7 @@
  else {
       size="";
     }
-    if (cgBase.cacheTypesInv.containsKey(cache.type) == true) {
+    if (cgBase.cacheTypesInv.containsKey(cache.type)) {
       itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + size);
     }
  else {
@@ -77,37 +77,37 @@
     itemName.setText(res.getString(R.string.cache_geocode));
     itemValue.setText(cache.geocode.toUpperCase());
     detailsList.addView(itemLayout);
-    if (cache.logOffline == true || cache.archived == true || cache.disabled == true || cache.members == true || cache.found == true) {
+    if (cache.logOffline || cache.archived || cache.disabled|| cache.members|| cache.found) {
       itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
       itemName.setText(res.getString(R.string.cache_status));
       StringBuilder state=new StringBuilder();
-      if (cache.logOffline == true) {
+      if (cache.logOffline) {
         if (state.length() > 0) {
           state.append(", ");
         }
         state.append(res.getString(R.string.cache_status_offline_log));
       }
-      if (cache.found == true) {
+      if (cache.found) {
         if (state.length() > 0) {
           state.append(", ");
         }
         state.append(res.getString(R.string.cache_status_found));
       }
-      if (cache.archived == true) {
+      if (cache.archived) {
         if (state.length() > 0) {
           state.append(", ");
         }
         state.append(res.getString(R.string.cache_status_archived));
       }
-      if (cache.disabled == true) {
+      if (cache.disabled) {
         if (state.length() > 0) {
           state.append(", ");
         }
         state.append(res.getString(R.string.cache_status_disabled));
       }
-      if (cache.members == true) {
+      if (cache.members) {
         if (state.length() > 0) {
           state.append(", ");
         }
@@ -169,13 +169,13 @@
       itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      if (cache.type != null && (cache.type.equalsIgnoreCase("event") == true || cache.type.equalsIgnoreCase("mega") == true || cache.type.equalsIgnoreCase("cito") == true)) {
+      if (cache.type != null && (cache.type.equalsIgnoreCase("event") || cache.type.equalsIgnoreCase("mega") || cache.type.equalsIgnoreCase("cito"))) {
         itemName.setText(res.getString(R.string.cache_event));
       }
  else {
         itemName.setText(res.getString(R.string.cache_hidden));
       }
-      itemValue.setText(cgBase.dateOut.format(cache.hidden));
+      itemValue.setText(base.formatFullDate(cache.hidden.getTime()));
       detailsList.addView(itemLayout);
     }
     if (cache.location != null && cache.location.length() > 0) {
@@ -285,12 +285,12 @@
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       TextView descView=(TextView)findViewById(R.id.shortdesc);
       descView.setVisibility(View.VISIBLE);
-      descView.setText(Html.fromHtml(cache.shortdesc.trim(),new cgHtmlImg(this,settings,geocode,true,cache.reason,false),null),TextView.BufferType.SPANNABLE);
+      descView.setText(Html.fromHtml(cache.shortdesc.trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),null),TextView.BufferType.SPANNABLE);
       descView.setMovementMethod(LinkMovementMethod.getInstance());
     }
-    if (longDescDisplayed == true) {
+    if (longDescDisplayed) {
       if (longDesc == null && cache != null && cache.description != null) {
-        longDesc=Html.fromHtml(cache.description.trim(),new cgHtmlImg(this,settings,geocode,true,cache.reason,false),null);
+        longDesc=Html.fromHtml(cache.description.trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),null);
       }
       if (longDesc != null && longDesc.length() > 0) {
         ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -368,7 +368,7 @@ if (wpt.prefix.equalsIgnoreCase("OWN") == false) {
 }
 TextView nameView=(TextView)waypointView.findViewById(R.id.name);
 if (wpt.name.trim().length() == 0) {
-  nameView.setText(base.formatCoordinate(wpt.latitude,"lat",true) + " | " + base.formatCoordinate(wpt.longitude,"lon",true));
+  nameView.setText(cgBase.formatCoordinate(wpt.latitude,"lat",true) + " | " + cgBase.formatCoordinate(wpt.longitude,"lon",true));
 }
  else {
   if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {

@@ -18,7 +18,7 @@
       }
       return;
     }
-    final cgHtmlImg imgGetter=new cgHtmlImg(activity,settings,cache.geocode,false,listId,true);
+    final cgHtmlImg imgGetter=new cgHtmlImg(activity,cache.geocode,false,listId,true);
     if (cache.description != null) {
       Html.fromHtml(cache.description,imgGetter,null);
     }
@@ -27,7 +27,7 @@
         imgGetter.getDrawable(oneSpoiler.url);
       }
     }
-    if (settings.storelogimages == true) {
+    if (settings.storelogimages) {
       for (      cgLog log : cache.logs) {
         if (log.logImages != null && log.logImages.isEmpty() == false) {
           for (          cgImage oneLogImg : log.logImages) {
@@ -49,10 +49,10 @@
         edge=maxHeight;
       }
       String type="mystery";
-      if (cache.found == true) {
+      if (cache.found) {
         type=cache.type + "_found";
       }
- else       if (cache.disabled == true) {
+ else       if (cache.disabled) {
         type=cache.type + "_disabled";
       }
  else {
@@ -77,7 +77,7 @@
       final int finalEdge=edge;
       Thread staticMapsThread=new Thread("getting static map"){
         @Override public void run(){
-          cgMapImg mapGetter=new cgMapImg(settings,code);
+          cgMapImg mapGetter=new cgMapImg(code);
           mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=20&size="+ finalEdge+ "x"+ finalEdge+ "&maptype=satellite&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ waypoints.toString()+ "&sensor=false",1);
           mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=18&size="+ finalEdge+ "x"+ finalEdge+ "&maptype=satellite&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ waypoints.toString()+ "&sensor=false",2);
           mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=16&size="+ finalEdge+ "x"+ finalEdge+ "&maptype=roadmap&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ waypoints.toString()+ "&sensor=false",3);

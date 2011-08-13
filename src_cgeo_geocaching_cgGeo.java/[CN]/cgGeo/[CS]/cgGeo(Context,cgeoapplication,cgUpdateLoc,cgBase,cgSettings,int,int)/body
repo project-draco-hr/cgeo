@@ -10,7 +10,7 @@
     prefs=context.getSharedPreferences(cgSettings.preferences,0);
   }
   distanceNow=prefs.getFloat("dst",0f);
-  if (Double.isNaN(distanceNow) == true) {
+  if (Double.isNaN(distanceNow)) {
     distanceNow=0d;
   }
   if (distanceNow == 0f) {

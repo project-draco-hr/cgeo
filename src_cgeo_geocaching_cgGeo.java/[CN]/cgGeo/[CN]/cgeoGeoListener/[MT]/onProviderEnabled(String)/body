@@ -1,11 +1,11 @@
 {
-  if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+  if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
     if (geoNetListener == null) {
       geoNetListener=new cgeoGeoListener();
     }
     geoNetListener.setProvider(LocationManager.NETWORK_PROVIDER);
   }
- else   if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+ else   if (provider.equals(LocationManager.GPS_PROVIDER)) {
     if (geoGpsListener == null) {
       geoGpsListener=new cgeoGeoListener();
     }

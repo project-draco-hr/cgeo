@@ -1,10 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme(R.style.transparent);
   setContentView(R.layout.popup);
   setTitle(res.getString(R.string.detail));
@@ -14,7 +9,7 @@
     geocode=extras.getString("geocode");
   }
   if (geocode == null || geocode.length() == 0) {
-    warning.showToast(res.getString(R.string.err_detail_cache_find));
+    showToast(res.getString(R.string.err_detail_cache_find));
     finish();
     return;
   }

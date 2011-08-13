@@ -26,7 +26,7 @@
  else         if (spanLatitudeUsers == null || spanLongitudeUsers == null) {
           moved=true;
         }
- else         if (((Math.abs(spanLatitudeNow - spanLatitudeUsers) > 50) || (Math.abs(spanLongitudeNow - spanLongitudeUsers) > 50) || (Math.abs(centerLatitudeNow - centerLatitudeUsers) > (spanLatitudeNow / 4))|| (Math.abs(centerLongitudeNow - centerLongitudeUsers) > (spanLongitudeNow / 4))) && !base.isInViewPort(centerLatitudeUsers,centerLongitudeUsers,centerLatitudeNow,centerLongitudeNow,spanLatitudeUsers,spanLongitudeUsers,spanLatitudeNow,spanLongitudeNow)) {
+ else         if (((Math.abs(spanLatitudeNow - spanLatitudeUsers) > 50) || (Math.abs(spanLongitudeNow - spanLongitudeUsers) > 50) || (Math.abs(centerLatitudeNow - centerLatitudeUsers) > (spanLatitudeNow / 4))|| (Math.abs(centerLongitudeNow - centerLongitudeUsers) > (spanLongitudeNow / 4))) && !cgBase.isInViewPort(centerLatitudeUsers,centerLongitudeUsers,centerLatitudeNow,centerLongitudeNow,spanLatitudeUsers,spanLongitudeUsers,spanLatitudeNow,spanLongitudeNow)) {
           moved=true;
         }
         if (moved && (1000 < (currentTime - usersThreadRun))) {

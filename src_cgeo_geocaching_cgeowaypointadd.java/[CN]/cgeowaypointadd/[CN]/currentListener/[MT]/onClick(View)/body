@@ -1,8 +1,8 @@
 {
   if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-    warning.showToast(res.getString(R.string.err_point_unknown_position));
+    showToast(res.getString(R.string.err_point_unknown_position));
     return;
   }
-  ((EditText)findViewById(R.id.latitude)).setText(base.formatCoordinate(geo.latitudeNow,"lat",true));
-  ((EditText)findViewById(R.id.longitude)).setText(base.formatCoordinate(geo.longitudeNow,"lon",true));
+  ((EditText)findViewById(R.id.latitude)).setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true));
+  ((EditText)findViewById(R.id.longitude)).setText(cgBase.formatCoordinate(geo.longitudeNow,"lon",true));
 }

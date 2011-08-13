@@ -11,7 +11,7 @@
  else {
         Log.e(cgSettings.tag,"Failed to open connection to RW database.");
       }
-      if (databaseRW.inTransaction() == true) {
+      if (databaseRW != null && databaseRW.inTransaction()) {
         databaseRW.endTransaction();
       }
     }

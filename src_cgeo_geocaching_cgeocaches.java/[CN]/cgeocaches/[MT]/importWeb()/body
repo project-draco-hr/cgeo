@@ -10,10 +10,10 @@
           threadW.kill();
         }
         if (geo == null) {
-          geo=app.startGeo(cgeocaches.this,geoUpdate,base,settings,warning,0,0);
+          geo=app.startGeo(cgeocaches.this,geoUpdate,base,settings,0,0);
         }
         if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
-          dir=app.startDir(cgeocaches.this,dirUpdate,warning);
+          dir=app.startDir(cgeocaches.this,dirUpdate);
         }
       }
  catch (      Exception e) {

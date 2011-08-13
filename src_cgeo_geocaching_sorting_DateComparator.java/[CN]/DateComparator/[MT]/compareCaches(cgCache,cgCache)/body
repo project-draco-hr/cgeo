@@ -1,0 +1,20 @@
+{
+  Date event1=null;
+  Date event2=null;
+  if (cache1.isEventCache()) {
+    event1=cache1.hidden;
+  }
+  if (cache2.isEventCache()) {
+    event2=cache2.hidden;
+  }
+  if (event1 != null && event2 != null) {
+    return event1.compareTo(event2);
+  }
+  if (event1 != null) {
+    return -1;
+  }
+  if (event2 != null) {
+    return 1;
+  }
+  return 0;
+}

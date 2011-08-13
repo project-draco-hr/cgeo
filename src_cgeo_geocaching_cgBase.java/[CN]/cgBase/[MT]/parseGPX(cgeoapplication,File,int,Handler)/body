@@ -2,7 +2,7 @@
   cgSearch search=new cgSearch();
   long searchId=0l;
   try {
-    cgGPXParser GPXparser=new cgGPXParser(app,this,listId,search);
+    cgGPXParser GPXparser=new cgGPXParser(app,listId,search);
     searchId=GPXparser.parse(file,10,handler);
     if (searchId == 0l) {
       searchId=GPXparser.parse(file,11,handler);

@@ -1,13 +1,12 @@
 {
+  final long now=System.currentTimeMillis();
+  final String dateString=base.formatFullDate(now);
+  final String timeString=base.formatTime(now);
   EditText text=null;
   String textContent=null;
-  String dateString=null;
-  String timeString=null;
   StringBuilder addText=new StringBuilder();
   text=(EditText)findViewById(R.id.log);
   textContent=text.getText().toString();
-  dateString=cgBase.dateOut.format(new Date());
-  timeString=cgBase.timeOut.format(new Date());
   if ((id & LOG_DATE) == LOG_DATE) {
     addText.append(dateString);
     if ((id & LOG_TIME) == LOG_TIME) {
@@ -22,10 +21,10 @@
     if (addText.length() > 0) {
       addText.append("\n");
     }
-    if (settings.getSignature().contains("[NUMBER]") == true) {
+    if (settings.getSignature().contains("[NUMBER]")) {
       final HashMap<String,String> params=new HashMap<String,String>();
       final String page=base.request(false,"www.geocaching.com","/my/","GET",params,false,false,false).getData();
-      int current=base.parseFindCount(page);
+      int current=cgBase.parseFindCount(page);
       if (current >= 0) {
         findCount="" + (current + 1);
       }

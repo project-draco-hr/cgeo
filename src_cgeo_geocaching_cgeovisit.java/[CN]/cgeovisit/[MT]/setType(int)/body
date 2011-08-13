@@ -23,7 +23,7 @@
   if (post == null) {
     post=(Button)findViewById(R.id.post);
   }
-  if (type == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
+  if (type == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
     if (rating == 0) {
       post.setText(res.getString(R.string.log_post_no_rate));
     }

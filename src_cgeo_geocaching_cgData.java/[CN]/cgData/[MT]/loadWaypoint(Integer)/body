@@ -19,14 +19,14 @@
     waypoint.latitudeString=(String)cursor.getString(cursor.getColumnIndex("latitude_string"));
     waypoint.longitudeString=(String)cursor.getString(cursor.getColumnIndex("longitude_string"));
     index=cursor.getColumnIndex("latitude");
-    if (cursor.isNull(index) == true) {
+    if (cursor.isNull(index)) {
       waypoint.latitude=null;
     }
  else {
       waypoint.latitude=(Double)cursor.getDouble(index);
     }
     index=cursor.getColumnIndex("longitude");
-    if (cursor.isNull(index) == true) {
+    if (cursor.isNull(index)) {
       waypoint.longitude=null;
     }
  else {

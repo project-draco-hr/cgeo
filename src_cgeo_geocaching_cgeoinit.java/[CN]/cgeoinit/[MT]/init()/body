@@ -60,17 +60,22 @@
   Button sigBtn=(Button)findViewById(R.id.signature_help);
   sigBtn.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View v){
-      warning.helpDialog(res.getString(R.string.init_signature_help_title),res.getString(R.string.init_signature_help_text));
+      helpDialog(res.getString(R.string.init_signature_help_title),res.getString(R.string.init_signature_help_text));
+    }
+  }
+);
+  Button templates=(Button)findViewById(R.id.signature_template);
+  registerForContextMenu(templates);
+  templates.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      enableTemplatesMenu=true;
+      openContextMenu(v);
+      enableTemplatesMenu=false;
     }
   }
 );
   CheckBox autoinsertButton=(CheckBox)findViewById(R.id.sigautoinsert);
-  if (prefs.getBoolean("sigautoinsert",false)) {
-    autoinsertButton.setChecked(true);
-  }
- else {
-    autoinsertButton.setChecked(false);
-  }
+  autoinsertButton.setChecked(prefs.getBoolean("sigautoinsert",false));
   autoinsertButton.setOnClickListener(new cgeoChangeSignatureAutoinsert());
   CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
   if (prefs.getInt("skin",0) == 0) {
@@ -212,12 +217,5 @@
     }
   }
 );
-  TextView lastBackup=(TextView)findViewById(R.id.backup_last);
-  File lastBackupFile=app.isRestoreFile();
-  if (lastBackupFile != null) {
-    lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.timeOut.format(lastBackupFile.lastModified())+ ", "+ cgBase.dateOut.format(lastBackupFile.lastModified()));
-  }
- else {
-    lastBackup.setText(res.getString(R.string.init_backup_last_no));
-  }
+  showBackupDate();
 }

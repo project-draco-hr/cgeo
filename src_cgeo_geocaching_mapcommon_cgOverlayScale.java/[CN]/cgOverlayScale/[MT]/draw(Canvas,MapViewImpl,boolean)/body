@@ -1,7 +1,7 @@
 {
   final double span=mapView.getLongitudeSpan() / 1e6;
   final GeoPointImpl center=mapView.getMapViewCenter();
-  pixels=mapView.getWidth() / 2;
+  pixels=mapView.getWidth() / 2.0;
   bottom=mapView.getHeight() - 14;
   distance=cgBase.getDistance((center.getLatitudeE6() / 1e6),((center.getLongitudeE6() / 1e6) - (span / 2)),(center.getLatitudeE6() / 1e6),((center.getLongitudeE6() / 1e6) + (span / 2)));
   distance=distance / 2;

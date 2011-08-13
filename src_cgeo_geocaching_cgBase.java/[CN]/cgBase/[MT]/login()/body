@@ -12,7 +12,7 @@
   loginResponse=request(true,host,path,"GET",new HashMap<String,String>(),false,false,false);
   loginData=loginResponse.getData();
   if (loginData != null && loginData.length() > 0) {
-    if (checkLogin(loginData) == true) {
+    if (checkLogin(loginData)) {
       Log.i(cgSettings.tag,"Already logged in Geocaching.com as " + loginStart.get("username"));
       switchToEnglish(viewstate,viewstate1);
       return 1;
@@ -49,7 +49,7 @@
   loginResponse=request(true,host,path,"POST",params,false,false,false);
   loginData=loginResponse.getData();
   if (loginData != null && loginData.length() > 0) {
-    if (checkLogin(loginData) == true) {
+    if (checkLogin(loginData)) {
       Log.i(cgSettings.tag,"Successfully logged in Geocaching.com as " + login.get("username"));
       switchToEnglish(findViewstate(loginData,0),findViewstate(loginData,1));
       return 1;

@@ -9,7 +9,7 @@
     int width=display.getWidth();
     int height=(int)(90 * pixelRatio);
     String markerUrl=cgBase.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
-    cgHtmlImg mapGetter=new cgHtmlImg(cgeodetail.this,settings,cache.geocode,false,0,false);
+    cgHtmlImg mapGetter=new cgHtmlImg(cgeodetail.this,cache.geocode,false,0,false);
     image=mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=15&size="+ width+ "x"+ height+ "&maptype=terrain&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ "&sensor=false");
     Message message=handler.obtainMessage(0,image);
     handler.sendMessage(message);

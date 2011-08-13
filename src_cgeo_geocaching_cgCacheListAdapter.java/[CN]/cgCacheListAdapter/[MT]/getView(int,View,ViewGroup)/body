@@ -31,7 +31,7 @@
  else {
     holder=(cgCacheView)rowView.getTag();
   }
-  if (cache.own == true) {
+  if (cache.own) {
     if (settings.skin == 1) {
       holder.oneInfo.setBackgroundResource(R.color.owncache_background_light);
       holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_light);
@@ -56,17 +56,17 @@
   rowView.setOnLongClickListener(touchLst);
   rowView.setOnTouchListener(touchLst);
   rowView.setLongClickable(true);
-  if (selectMode == true) {
-    if (cache.statusCheckedView == true) {
+  if (selectMode) {
+    if (cache.statusCheckedView) {
       moveRight(holder,cache,true);
     }
  else {
       moveRight(holder,cache,false);
     }
   }
- else   if (cache.statusChecked == true) {
+ else   if (cache.statusChecked) {
     holder.checkbox.setChecked(true);
-    if (cache.statusCheckedView == true) {
+    if (cache.statusCheckedView) {
       moveRight(holder,cache,true);
     }
  else {
@@ -91,11 +91,11 @@
     compasses.add(holder.direction);
   }
   holder.direction.setContent(cache.latitude,cache.longitude);
-  if (cache.logOffline == true) {
+  if (cache.logOffline) {
     holder.offlineMark.setVisibility(View.VISIBLE);
     holder.foundMark.setVisibility(View.GONE);
   }
- else   if (cache.found == true) {
+ else   if (cache.found) {
     holder.offlineMark.setVisibility(View.GONE);
     holder.foundMark.setVisibility(View.VISIBLE);
   }
@@ -105,12 +105,12 @@
   }
   if (cache.nameSp == null) {
     cache.nameSp=(new Spannable.Factory()).newSpannable(cache.name);
-    if (cache.disabled == true || cache.archived == true) {
+    if (cache.disabled || cache.archived) {
       cache.nameSp.setSpan(new StrikethroughSpan(),0,cache.nameSp.toString().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
   }
   holder.text.setText(cache.nameSp,TextView.BufferType.SPANNABLE);
-  if (gcIcons.containsKey(cache.type) == true) {
+  if (gcIcons.containsKey(cache.type)) {
     holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get(cache.type),null,null,null);
   }
  else {
@@ -151,7 +151,7 @@
       setDiDi=true;
     }
   }
-  if (setDiDi == true) {
+  if (setDiDi) {
     holder.directionLayout.setVisibility(View.VISIBLE);
     holder.dirImgLayout.setVisibility(View.GONE);
   }
@@ -161,7 +161,7 @@
     Bitmap dirImgPre=null;
     Bitmap dirImg=null;
     try {
-      dirImgPre=BitmapFactory.decodeFile(settings.getStorage() + cache.geocode + "/direction.png");
+      dirImgPre=BitmapFactory.decodeFile(cgSettings.getStorage() + cache.geocode + "/direction.png");
       dirImg=dirImgPre.copy(Bitmap.Config.ARGB_8888,true);
       dirImgPre.recycle();
       dirImgPre=null;
@@ -225,10 +225,10 @@
   }
   holder.favourite.setBackgroundResource(favoriteBack);
   StringBuilder cacheInfo=new StringBuilder();
-  if (historic == true && cache.visitedDate != null) {
-    cacheInfo.append(cgBase.timeOut.format(cache.visitedDate));
+  if (historic && cache.visitedDate != null) {
+    cacheInfo.append(base.formatTime(cache.visitedDate));
     cacheInfo.append("; ");
-    cacheInfo.append(cgBase.dateOut.format(cache.visitedDate));
+    cacheInfo.append(base.formatDate(cache.visitedDate));
   }
  else {
     if (cache.geocode != null && cache.geocode.length() > 0) {
@@ -253,7 +253,7 @@
         cacheInfo.append(String.format(Locale.getDefault(),"%.1f",cache.terrain));
       }
     }
-    if (cache.members == true) {
+    if (cache.members) {
       if (cacheInfo.length() > 0) {
         cacheInfo.append(" | ");
       }

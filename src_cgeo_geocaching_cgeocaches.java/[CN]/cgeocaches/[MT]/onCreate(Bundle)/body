@@ -1,11 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
   app.setAction(action);
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   setTheme();
   setContentView(R.layout.caches);
   setTitle("caches");
@@ -22,7 +17,7 @@
   init();
   Thread threadPure;
   cgSearchThread thread;
-  if (type.equals("offline") == true) {
+  if (type.equals("offline")) {
     listId=settings.getLastList();
     if (listId <= 0) {
       listId=1;
@@ -38,7 +33,7 @@
     threadPure=new geocachesLoadByOffline(loadCachesHandler,latitude,longitude,listId);
     threadPure.start();
   }
- else   if (type.equals("history") == true) {
+ else   if (type.equals("history")) {
     if (adapter != null) {
       adapter.setHistoric(true);
     }
@@ -49,7 +44,7 @@
     threadPure=new geocachesLoadByHistory(loadCachesHandler);
     threadPure.start();
   }
- else   if (type.equals("nearest") == true) {
+ else   if (type.equals("nearest")) {
     action="pending";
     title=res.getString(R.string.caches_nearby);
     setTitle(title);
@@ -59,9 +54,9 @@
     thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
     thread.start();
   }
- else   if (type.equals("coordinate") == true) {
+ else   if (type.equals("coordinate")) {
     action="planning";
-    title=base.formatCoordinate(latitude,res.getString(R.string.search_lat),true) + " | " + base.formatCoordinate(longitude,res.getString(R.string.search_lon),true);
+    title=cgBase.formatCoordinate(latitude,res.getString(R.string.search_lat),true) + " | " + cgBase.formatCoordinate(longitude,res.getString(R.string.search_lon),true);
     setTitle(title);
     showProgress(true);
     setLoadingCaches();
@@ -69,7 +64,7 @@
     thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
     thread.start();
   }
- else   if (type.equals("keyword") == true) {
+ else   if (type.equals("keyword")) {
     title=keyword;
     setTitle(title);
     showProgress(true);
@@ -78,7 +73,7 @@
     thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
     thread.start();
   }
- else   if (type.equals("address") == true) {
+ else   if (type.equals("address")) {
     action="planning";
     if (address != null && address.length() > 0) {
       title=address;
@@ -87,7 +82,7 @@
       setLoadingCaches();
     }
  else {
-      title=base.formatCoordinate(latitude,res.getString(R.string.search_lat),true) + " | " + base.formatCoordinate(longitude,res.getString(R.string.search_lon),true);
+      title=cgBase.formatCoordinate(latitude,res.getString(R.string.search_lat),true) + " | " + cgBase.formatCoordinate(longitude,res.getString(R.string.search_lon),true);
       setTitle(title);
       showProgress(true);
       setLoadingCaches();
@@ -96,7 +91,7 @@
     thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
     thread.start();
   }
- else   if (type.equals("username") == true) {
+ else   if (type.equals("username")) {
     title=username;
     setTitle(title);
     showProgress(true);
@@ -105,7 +100,7 @@
     thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
     thread.start();
   }
- else   if (type.equals("owner") == true) {
+ else   if (type.equals("owner")) {
     title=username;
     setTitle(title);
     showProgress(true);
