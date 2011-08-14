@@ -51,7 +51,11 @@
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_name));
-    itemValue.setText(Html.fromHtml(cache.name).toString());
+    Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.name).toString());
+    if (cache.disabled || cache.archived) {
+      span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+    itemValue.setText(span);
     detailsList.addView(itemLayout);
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
     itemName=(TextView)itemLayout.findViewById(R.id.name);
