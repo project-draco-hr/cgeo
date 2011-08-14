@@ -1,7 +1,12 @@
 {
   GeneralApp app=(GeneralApp)getAppFromMenuItem(item,apps);
   if (app != null) {
-    return app.invoke(activity,cache);
+    try {
+      return app.invoke(activity,cache);
+    }
+ catch (    Exception e) {
+      Log.e(cgSettings.tag,"GeneralAppsFactory.onMenuItemSelected: " + e.toString());
+    }
   }
   return false;
 }
