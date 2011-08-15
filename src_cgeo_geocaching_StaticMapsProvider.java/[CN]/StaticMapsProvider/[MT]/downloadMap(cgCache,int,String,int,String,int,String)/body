@@ -1,11 +1,8 @@
 {
-  if (url == null || url.length() == 0) {
-    return;
-  }
-  if (geocode == null || geocode.length() == 0) {
-    return;
-  }
-  final String fileName=cgSettings.getStorage() + geocode + "/map_"+ level;
+  String mapUrl="http://maps.google.com/maps/api/staticmap?center=" + latlonMap;
+  String markerUrl=getMarkerUrl(cache);
+  String url=mapUrl + "&zoom=" + zoom+ "&size="+ edge+ "x"+ edge+ "&maptype="+ mapType+ "&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ waypoints+ "&sensor=false";
+  final String fileName=getStaticMapsDirectory(cache) + "/map_" + level;
   HttpClient client=null;
   HttpGet getMethod=null;
   HttpResponse httpResponse=null;
