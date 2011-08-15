@@ -1,6 +1,6 @@
 {
   if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-    warning.showToast(context.getResources().getString(R.string.err_point_unknown_position));
+    context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
     return;
   }
   latitude=geo.latitudeNow;

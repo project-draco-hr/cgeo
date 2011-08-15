@@ -1,13 +1,13 @@
 {
   final HashMap<String,String> login=new HashMap<String,String>();
   if (username == null || password == null) {
-    final String preUsername=prefs.getString("username",null);
-    final String prePassword=prefs.getString("password",null);
+    final String preUsername=prefs.getString(KEY_USERNAME,null);
+    final String prePassword=prefs.getString(KEY_PASSWORD,null);
     if (initialized == 0 && (preUsername == null || prePassword == null)) {
       Intent initIntent=new Intent(context,cgeoinit.class);
       context.startActivity(initIntent);
       final SharedPreferences.Editor prefsEdit=prefs.edit();
-      prefsEdit.putInt("initialized",1);
+      prefsEdit.putInt(KEY_INITIALIZED,1);
       prefsEdit.commit();
       initialized=1;
       return null;
@@ -15,14 +15,14 @@
  else     if (initialized == 1 && (preUsername == null || prePassword == null)) {
       return null;
     }
-    login.put("username",preUsername);
-    login.put("password",prePassword);
+    login.put(KEY_USERNAME,preUsername);
+    login.put(KEY_PASSWORD,prePassword);
     username=preUsername;
     password=prePassword;
   }
  else {
-    login.put("username",username);
-    login.put("password",password);
+    login.put(KEY_USERNAME,username);
+    login.put(KEY_PASSWORD,password);
   }
   return login;
 }

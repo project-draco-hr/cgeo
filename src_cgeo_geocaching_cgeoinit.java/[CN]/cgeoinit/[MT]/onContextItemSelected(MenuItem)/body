@@ -1,0 +1,15 @@
+{
+switch (item.getItemId()) {
+case MENU_ITEM_DATE:
+    return insertSignatureTemplate("DATE");
+case MENU_ITEM_NUMBER:
+  return insertSignatureTemplate("NUMBER");
+case MENU_ITEM_TIME:
+return insertSignatureTemplate("TIME");
+case MENU_ITEM_USER:
+return insertSignatureTemplate("USER");
+default :
+break;
+}
+return super.onContextItemSelected(item);
+}

@@ -1,13 +1,13 @@
 {
-  if (dropDialog != null && dropDialog.isShowing() == true) {
-    warning.showToast(res.getString(R.string.err_detail_still_removing));
+  if (dropDialog != null && dropDialog.isShowing()) {
+    showToast(res.getString(R.string.err_detail_still_removing));
     return;
   }
-  if (storeDialog != null && storeDialog.isShowing() == true) {
-    warning.showToast(res.getString(R.string.err_detail_still_saving));
+  if (storeDialog != null && storeDialog.isShowing()) {
+    showToast(res.getString(R.string.err_detail_still_saving));
     return;
   }
-  refreshDialog=ProgressDialog.show(activity,res.getString(R.string.cache_dialog_refresh_title),res.getString(R.string.cache_dialog_refresh_message),true);
+  refreshDialog=ProgressDialog.show(cgeodetail.this,res.getString(R.string.cache_dialog_refresh_title),res.getString(R.string.cache_dialog_refresh_message),true);
   refreshDialog.setCancelable(true);
   if (refreshThread != null) {
     refreshThread.interrupt();

@@ -1,5 +1,5 @@
 {
-  Double result=new Double(0);
+  Double result=Double.valueOf(0);
   int ilat1=(int)Math.round(0.5 + lat1 * 360000);
   int ilon1=(int)Math.round(0.5 + lon1 * 360000);
   int ilat2=(int)Math.round(0.5 + lat2 * 360000);
@@ -9,25 +9,25 @@
   lat2*=deg2rad;
   lon2*=deg2rad;
   if (ilat1 == ilat2 && ilon1 == ilon2) {
-    return new Double(result);
+    return Double.valueOf(result);
   }
  else   if (ilat1 == ilat2) {
     if (ilon1 > ilon2) {
-      result=new Double(270);
+      result=Double.valueOf(270);
     }
  else {
-      result=new Double(90);
+      result=Double.valueOf(90);
     }
   }
  else   if (ilon1 == ilon2) {
     if (ilat1 > ilat2) {
-      result=new Double(180);
+      result=Double.valueOf(180);
     }
   }
  else {
     Double c=Math.acos(Math.sin(lat2) * Math.sin(lat1) + Math.cos(lat2) * Math.cos(lat1) * Math.cos(lon2 - lon1));
     Double A=Math.asin(Math.cos(lat2) * Math.sin(lon2 - lon1) / Math.sin(c));
-    result=new Double(A * rad2deg);
+    result=Double.valueOf(A * rad2deg);
     if (ilat2 > ilat1 && ilon2 > ilon1) {
     }
  else     if (ilat2 < ilat1 && ilon2 < ilon1) {

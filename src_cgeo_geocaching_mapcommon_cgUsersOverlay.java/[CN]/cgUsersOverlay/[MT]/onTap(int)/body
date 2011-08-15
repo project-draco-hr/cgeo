@@ -14,7 +14,7 @@
  else     if (user.action.equalsIgnoreCase("tweeting")) {
       action="Tweeting";
     }
- else     if (matcherGeocode.find() == true) {
+ else     if (matcherGeocode.find()) {
       if (matcherGeocode.group(1) != null) {
         geocode=matcherGeocode.group(1).trim().toUpperCase();
       }
@@ -29,13 +29,13 @@
       action=user.action;
     }
     int icon=-1;
-    if (user.client.equalsIgnoreCase("c:geo") == true) {
+    if (user.client.equalsIgnoreCase("c:geo")) {
       icon=R.drawable.client_cgeo;
     }
- else     if (user.client.equalsIgnoreCase("preCaching") == true) {
+ else     if (user.client.equalsIgnoreCase("preCaching")) {
       icon=R.drawable.client_precaching;
     }
- else     if (user.client.equalsIgnoreCase("Handy Geocaching") == true) {
+ else     if (user.client.equalsIgnoreCase("Handy Geocaching")) {
       icon=R.drawable.client_handygeocaching;
     }
     final AlertDialog.Builder dialog=new AlertDialog.Builder(context);

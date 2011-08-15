@@ -1,10 +1,10 @@
 {
   if (keyCode == KeyEvent.KEYCODE_BACK) {
     if (adapter != null) {
-      if (adapter.resetChecks() == true) {
+      if (adapter.resetChecks()) {
         return true;
       }
- else       if (adapter.getSelectMode() == true) {
+ else       if (adapter.getSelectMode()) {
         adapter.setSelectMode(false,true);
         return true;
       }

@@ -1,19 +1,8 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.detail);
-  base.setTitle(activity,res.getString(R.string.cache));
+  setTitle(res.getString(R.string.cache));
   init();
   final Bundle extras=getIntent().getExtras();
   final Uri uri=getIntent().getData();
@@ -32,7 +21,7 @@
  else {
       Log.i(cgSettings.tag,"Opening URI: " + uriHost + uriPath);
     }
-    if (uriHost.contains("geocaching.com") == true) {
+    if (uriHost.contains("geocaching.com")) {
       geocode=uri.getQueryParameter("wp");
       guid=uri.getQueryParameter("guid");
       if (geocode != null && geocode.length() > 0) {
@@ -44,24 +33,24 @@
         guid=guid.toLowerCase();
       }
  else {
-        warning.showToast(res.getString(R.string.err_detail_open));
+        showToast(res.getString(R.string.err_detail_open));
         finish();
         return;
       }
     }
- else     if (uriHost.contains("coord.info") == true) {
-      if (uriPath != null && uriPath.startsWith("/gc") == true) {
+ else     if (uriHost.contains("coord.info")) {
+      if (uriPath != null && uriPath.startsWith("/gc")) {
         geocode=uriPath.substring(1).toUpperCase();
       }
  else {
-        warning.showToast(res.getString(R.string.err_detail_open));
+        showToast(res.getString(R.string.err_detail_open));
         finish();
         return;
       }
     }
   }
   if (geocode == null && guid == null) {
-    warning.showToast(res.getString(R.string.err_detail_cache));
+    showToast(res.getString(R.string.err_detail_cache));
     finish();
     return;
   }

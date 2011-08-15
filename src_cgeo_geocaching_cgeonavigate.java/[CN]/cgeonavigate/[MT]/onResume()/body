@@ -8,10 +8,10 @@
     app.setAction(name);
   }
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
   }
   if (settings.useCompass == 1 && dir == null) {
-    dir=app.startDir(activity,dirUpdate,warning);
+    dir=app.startDir(this,dirUpdate);
   }
   if (pm == null) {
     pm=(PowerManager)getSystemService(Context.POWER_SERVICE);

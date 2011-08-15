@@ -1,6 +1,5 @@
 {
   int httpCode=-1;
-  String httpLocation=null;
   if (method == null) {
     method="GET";
   }
@@ -104,18 +103,8 @@
     }
   }
   String page=null;
-  if (httpCode == 302 && httpLocation != null) {
-    final Uri newLocation=Uri.parse(httpLocation);
-    if (newLocation.isRelative() == true) {
-      page=requestJSONgc(host,path,params);
-    }
- else {
-      page=requestJSONgc(newLocation.getHost(),newLocation.getPath(),params);
-    }
-  }
- else {
-    page=replaceWhitespace(buffer);
-  }
+  replaceWhitespace(buffer);
+  page=buffer.toString();
   if (page != null) {
     return page;
   }

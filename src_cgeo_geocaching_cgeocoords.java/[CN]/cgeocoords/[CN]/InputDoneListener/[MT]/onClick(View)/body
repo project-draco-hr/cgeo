@@ -1,14 +1,14 @@
 {
   if (currentFormat == formatPlain) {
     if (eLat.length() > 0 && eLon.length() > 0) {
-      HashMap<String,Object> latParsed=base.parseCoordinate(eLat.getText().toString(),"lat");
-      HashMap<String,Object> lonParsed=base.parseCoordinate(eLon.getText().toString(),"lon");
+      HashMap<String,Object> latParsed=cgBase.parseCoordinate(eLat.getText().toString(),"lat");
+      HashMap<String,Object> lonParsed=cgBase.parseCoordinate(eLon.getText().toString(),"lon");
       if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
-        warning.showToast(context.getResources().getString(R.string.err_parse_lat));
+        context.showToast(context.getResources().getString(R.string.err_parse_lat));
         return;
       }
       if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
-        warning.showToast(context.getResources().getString(R.string.err_parse_lon));
+        context.showToast(context.getResources().getString(R.string.err_parse_lon));
         return;
       }
       latitude=(Double)latParsed.get("coordinate");
@@ -16,7 +16,7 @@
     }
  else {
       if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-        warning.showToast(context.getResources().getString(R.string.err_point_curr_position_unavailable));
+        context.showToast(context.getResources().getString(R.string.err_point_curr_position_unavailable));
         return;
       }
       latitude=geo.latitudeNow;

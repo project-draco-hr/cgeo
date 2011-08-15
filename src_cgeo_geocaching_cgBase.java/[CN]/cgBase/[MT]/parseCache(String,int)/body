@@ -20,6 +20,7 @@
   final Pattern patternLatLon=Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>",Pattern.CASE_INSENSITIVE);
   final Pattern patternLocation=Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)",Pattern.CASE_INSENSITIVE);
   final Pattern patternHint=Pattern.compile("<p>([^<]*<strong>)?[^\\w]*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]",Pattern.CASE_INSENSITIVE);
+  final Pattern patternPersonalNote=Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>",Pattern.CASE_INSENSITIVE);
   final Pattern patternDescShort=Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>",Pattern.CASE_INSENSITIVE);
   final Pattern patternDesc=Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>[^\\w]*Additional Hints</strong>",Pattern.CASE_INSENSITIVE);
   final Pattern patternCountLogs=Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>",Pattern.CASE_INSENSITIVE);
@@ -69,9 +70,9 @@
   cache.reason=reason;
   try {
     final Matcher matcherGeocode=patternGeocode.matcher(page);
-    while (matcherGeocode.find()) {
+    if (matcherGeocode.find()) {
       if (matcherGeocode.groupCount() > 0) {
-        cache.geocode=(String)matcherGeocode.group(1);
+        cache.geocode=getMatch(matcherGeocode.group(1));
       }
     }
   }
@@ -80,9 +81,9 @@
   }
   try {
     final Matcher matcherCacheId=patternCacheId.matcher(page);
-    while (matcherCacheId.find()) {
+    if (matcherCacheId.find()) {
       if (matcherCacheId.groupCount() > 0) {
-        cache.cacheid=(String)matcherCacheId.group(1);
+        cache.cacheid=getMatch(matcherCacheId.group(1));
       }
     }
   }
@@ -93,7 +94,7 @@
     final Matcher matcherCacheGuid=patternCacheGuid.matcher(page);
     if (matcherCacheGuid.find()) {
       if (matcherCacheGuid.groupCount() > 0) {
-        cache.guid=(String)matcherCacheGuid.group(1);
+        cache.guid=getMatch(matcherCacheGuid.group(1));
       }
     }
   }
@@ -102,7 +103,7 @@
   }
   try {
     final Matcher matcherName=patternName.matcher(page);
-    while (matcherName.find()) {
+    if (matcherName.find()) {
       if (matcherName.groupCount() > 0) {
         cache.name=Html.fromHtml(matcherName.group(1)).toString();
       }
@@ -113,7 +114,7 @@
   }
   try {
     final Matcher matcherOwnerReal=patternOwnerReal.matcher(page);
-    while (matcherOwnerReal.find()) {
+    if (matcherOwnerReal.find()) {
       if (matcherOwnerReal.groupCount() > 0) {
         cache.ownerReal=URLDecoder.decode(matcherOwnerReal.group(1));
       }
@@ -143,7 +144,7 @@
   if (tableInside != null && tableInside.length() > 0) {
     try {
       final Matcher matcherTerrain=patternTerrain.matcher(tableInside);
-      while (matcherTerrain.find()) {
+      if (matcherTerrain.find()) {
         if (matcherTerrain.groupCount() > 0) {
           cache.terrain=new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
         }
@@ -154,7 +155,7 @@
     }
     try {
       final Matcher matcherDifficulty=patternDifficulty.matcher(tableInside);
-      while (matcherDifficulty.find()) {
+      if (matcherDifficulty.find()) {
         if (matcherDifficulty.groupCount() > 0) {
           cache.difficulty=new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
         }
@@ -165,7 +166,7 @@
     }
     try {
       final Matcher matcherOwner=patternOwner.matcher(tableInside);
-      while (matcherOwner.find()) {
+      if (matcherOwner.find()) {
         if (matcherOwner.groupCount() > 0) {
           cache.owner=Html.fromHtml(matcherOwner.group(2)).toString();
         }
@@ -176,7 +177,7 @@
     }
     try {
       final Matcher matcherHidden=patternHidden.matcher(tableInside);
-      while (matcherHidden.find()) {
+      if (matcherHidden.find()) {
         if (matcherHidden.groupCount() > 0) {
           cache.hidden=parseDate(matcherHidden.group(1));
         }
@@ -188,7 +189,7 @@
     if (cache.hidden == null) {
       try {
         final Matcher matcherHiddenEvent=patternHiddenEvent.matcher(tableInside);
-        while (matcherHiddenEvent.find()) {
+        if (matcherHiddenEvent.find()) {
           if (matcherHiddenEvent.groupCount() > 0) {
             cache.hidden=parseDate(matcherHiddenEvent.group(1));
           }
@@ -200,7 +201,7 @@
     }
     try {
       final Matcher matcherFavourite=patternFavourite.matcher(tableInside);
-      while (matcherFavourite.find()) {
+      if (matcherFavourite.find()) {
         if (matcherFavourite.groupCount() > 0) {
           cache.favouriteCnt=Integer.parseInt(matcherFavourite.group(1));
         }
@@ -211,9 +212,9 @@
     }
     try {
       final Matcher matcherSize=patternSize.matcher(tableInside);
-      while (matcherSize.find()) {
+      if (matcherSize.find()) {
         if (matcherSize.groupCount() > 0) {
-          cache.size=matcherSize.group(1).toLowerCase();
+          cache.size=getMatch(matcherSize.group(1)).toLowerCase();
         }
       }
     }
@@ -223,7 +224,7 @@
   }
   try {
     final Matcher matcherFound=patternFound.matcher(page);
-    while (matcherFound.find()) {
+    if (matcherFound.find()) {
       if (matcherFound.group() != null && matcherFound.group().length() > 0) {
         cache.found=true;
       }
@@ -234,7 +235,7 @@
   }
   try {
     final Matcher matcherType=patternType.matcher(page);
-    while (matcherType.find()) {
+    if (matcherType.find()) {
       if (matcherType.groupCount() > 0) {
         cache.type=cacheTypes.get(matcherType.group(1).toLowerCase());
       }
@@ -252,10 +253,10 @@
   }
   try {
     final Matcher matcherLatLon=patternLatLon.matcher(page);
-    while (matcherLatLon.find()) {
+    if (matcherLatLon.find()) {
       if (matcherLatLon.groupCount() > 0) {
-        cache.latlon=matcherLatLon.group(2);
-        HashMap<String,Object> tmp=this.parseLatlon(cache.latlon);
+        cache.latlon=getMatch(matcherLatLon.group(2));
+        HashMap<String,Object> tmp=cgBase.parseLatlon(cache.latlon);
         if (tmp.size() > 0) {
           cache.latitude=(Double)tmp.get("latitude");
           cache.longitude=(Double)tmp.get("longitude");
@@ -272,9 +273,9 @@
   }
   try {
     final Matcher matcherLocation=patternLocation.matcher(page);
-    while (matcherLocation.find()) {
+    if (matcherLocation.find()) {
       if (matcherLocation.groupCount() > 0) {
-        cache.location=matcherLocation.group(1);
+        cache.location=getMatch(matcherLocation.group(1));
       }
     }
   }
@@ -283,7 +284,7 @@
   }
   try {
     final Matcher matcherHint=patternHint.matcher(page);
-    while (matcherHint.find()) {
+    if (matcherHint.find()) {
       if (matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
         String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
         if (hint != null) {
@@ -296,10 +297,21 @@
     Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache hint");
   }
   try {
+    final Matcher matcherPersonalNote=patternPersonalNote.matcher(page);
+    if (matcherPersonalNote.find()) {
+      if (matcherPersonalNote.groupCount() > 0) {
+        cache.personalNote=getMatch(matcherPersonalNote.group(1).trim());
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache personal note");
+  }
+  try {
     final Matcher matcherDescShort=patternDescShort.matcher(page);
     if (matcherDescShort.find()) {
       if (matcherDescShort.groupCount() > 0) {
-        cache.shortdesc=matcherDescShort.group(1).trim();
+        cache.shortdesc=getMatch(matcherDescShort.group(1));
       }
     }
   }
@@ -310,7 +322,7 @@
     final Matcher matcherDesc=patternDesc.matcher(page);
     if (matcherDesc.find()) {
       if (matcherDesc.groupCount() > 0) {
-        cache.description=matcherDesc.group(1);
+        cache.description=getMatch(matcherDesc.group(1));
       }
     }
   }
@@ -415,7 +427,7 @@
             String typeStr=matcherLog.group(1);
             String countStr=matcherLog.group(2);
             if (typeStr != null && typeStr.length() > 0) {
-              if (logTypes.containsKey(typeStr.toLowerCase()) == true) {
+              if (logTypes.containsKey(typeStr.toLowerCase())) {
                 type=logTypes.get(typeStr.toLowerCase());
               }
             }
@@ -515,7 +527,7 @@
  else {
               logDate=0;
             }
-            if (logTypes.containsKey(matcherLog.group(1).toLowerCase()) == true) {
+            if (logTypes.containsKey(matcherLog.group(1).toLowerCase())) {
               logDone.type=logTypes.get(matcherLog.group(1).toLowerCase());
             }
  else {
@@ -636,7 +648,7 @@
           while (matcherWpLatLon.find()) {
             if (matcherWpLatLon.groupCount() > 1) {
               waypoint.latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString();
-              final HashMap<String,Object> tmp=this.parseLatlon(waypoint.latlon);
+              final HashMap<String,Object> tmp=cgBase.parseLatlon(waypoint.latlon);
               if (tmp.size() > 0) {
                 waypoint.latitude=(Double)tmp.get("latitude");
                 waypoint.longitude=(Double)tmp.get("longitude");

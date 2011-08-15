@@ -1,6 +1,9 @@
 {
-  final SharedPreferences.Editor prefsEdit=prefs.edit();
-  prefsEdit.putInt("altcorrection",altitude);
   altCorrection=altitude;
-  return prefsEdit.commit();
+  return editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      edit.putInt(KEY_ALTITUDE_CORRECTION,altitude);
+    }
+  }
+);
 }

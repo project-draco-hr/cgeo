@@ -1,8 +1,8 @@
 {
   try {
-    Intent trackablesIntent=new Intent(activity,cgeotrackables.class);
+    Intent trackablesIntent=new Intent(cgeodetail.this,cgeotrackables.class);
     trackablesIntent.putExtra("geocode",geocode.toUpperCase());
-    activity.startActivity(trackablesIntent);
+    startActivity(trackablesIntent);
   }
  catch (  Exception e) {
     Log.e(cgSettings.tag,"cgeodetail.selectTrackable: " + e.toString());

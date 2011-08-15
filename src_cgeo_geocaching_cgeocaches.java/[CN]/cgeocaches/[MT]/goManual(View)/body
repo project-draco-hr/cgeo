@@ -1,15 +1,11 @@
 {
-  try {
-    if (type != null && type.equals("offline") == true) {
-      AppManualReaderClient.openManual("c-geo","c:geo-stored",activity,"http://cgeo.carnero.cc/manual/");
-    }
- else     if (type != null && type.equals("history") == true) {
-      AppManualReaderClient.openManual("c-geo","c:geo-history",activity,"http://cgeo.carnero.cc/manual/");
-    }
- else {
-      AppManualReaderClient.openManual("c-geo","c:geo-nearby",activity,"http://cgeo.carnero.cc/manual/");
-    }
+  if (type != null && type.equals("offline")) {
+    ActivityMixin.goManual(this,"c:geo-stored");
   }
- catch (  Exception e) {
+ else   if (type != null && type.equals("history")) {
+    ActivityMixin.goManual(this,"c:geo-history");
+  }
+ else {
+    ActivityMixin.goManual(this,"c:geo-nearby");
   }
 }

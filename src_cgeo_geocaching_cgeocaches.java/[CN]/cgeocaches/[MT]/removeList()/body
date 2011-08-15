@@ -6,11 +6,11 @@
     public void onClick(    DialogInterface dialog,    int whichButton){
       boolean status=app.removeList(listId);
       if (status) {
-        warning.showToast(res.getString(R.string.list_dialog_remove_ok));
+        showToast(res.getString(R.string.list_dialog_remove_ok));
         switchListById(1);
       }
  else {
-        warning.showToast(res.getString(R.string.list_dialog_remove_err));
+        showToast(res.getString(R.string.list_dialog_remove_err));
       }
     }
   }

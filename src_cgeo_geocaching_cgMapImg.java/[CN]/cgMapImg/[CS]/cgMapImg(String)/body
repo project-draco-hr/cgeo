@@ -1,0 +1,16 @@
+{
+  geocode=geocodeIn;
+  if (geocode != null && geocode.length() > 0) {
+    final String dirName=cgSettings.getStorage() + geocode + "/";
+    File dir=null;
+    dir=new File(cgSettings.getStorage());
+    if (dir.exists() == false) {
+      dir.mkdirs();
+    }
+    dir=new File(dirName);
+    if (dir.exists() == false) {
+      dir.mkdirs();
+    }
+    dir=null;
+  }
+}

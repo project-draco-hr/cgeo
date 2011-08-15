@@ -1,19 +1,8 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(getApp(),getSettings(),getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
-  if (getSettings().skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.gpx);
-  getBase().setTitle(getActivity(),getRes().getString(R.string.gpx_import_title));
+  setTitle(res.getString(R.string.gpx_import_title));
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     listId=extras.getInt("list");
@@ -22,12 +11,12 @@
     listId=1;
   }
   setAdapter();
-  waitDialog=ProgressDialog.show(this,getRes().getString(R.string.file_title_searching),getRes().getString(R.string.file_searching),true,true,new DialogInterface.OnCancelListener(){
+  waitDialog=ProgressDialog.show(this,res.getString(R.string.file_title_searching),res.getString(R.string.file_searching),true,true,new DialogInterface.OnCancelListener(){
     public void onCancel(    DialogInterface arg0){
       if (searchingThread != null && searchingThread.isAlive()) {
         searchingThread.notifyEnd();
       }
-      if (files.isEmpty() == true) {
+      if (files.isEmpty()) {
         finish();
       }
     }

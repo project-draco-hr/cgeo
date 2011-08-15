@@ -1,11 +1,13 @@
 {
-  final SharedPreferences.Editor prefsEdit=prefs.edit();
-  if (password == null || password.length() == 0) {
-    prefsEdit.remove("pass-vote");
-  }
+  return editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      if (password == null || password.length() == 0) {
+        edit.remove(KEY_GCVOTE_PASSWORD);
+      }
  else {
-    prefsEdit.putString("pass-vote",password);
+        edit.putString(KEY_GCVOTE_PASSWORD,password);
+      }
+    }
   }
-  passVote=password;
-  return prefsEdit.commit();
+);
 }

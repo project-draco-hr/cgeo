@@ -1,7 +1,7 @@
 {
   if (listFooter == null) {
     if (inflater == null) {
-      inflater=activity.getLayoutInflater();
+      inflater=getLayoutInflater();
     }
     listFooter=inflater.inflate(R.layout.caches_footer,null);
     listFooter.setClickable(true);
@@ -15,7 +15,7 @@
     registerForContextMenu(list);
     list.setLongClickable(true);
     list.addFooterView(listFooter);
-    adapter=new cgCacheListAdapter(activity,settings,cacheList,base);
+    adapter=new cgCacheListAdapter(this,settings,cacheList,base);
     setListAdapter(adapter);
   }
  else {

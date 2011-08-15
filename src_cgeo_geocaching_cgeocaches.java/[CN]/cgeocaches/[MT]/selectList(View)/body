@@ -11,7 +11,7 @@
     listsTitle.add(list.title);
   }
   final CharSequence[] items=new CharSequence[listsTitle.size()];
-  AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+  AlertDialog.Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(res.getString(R.string.list_title));
   builder.setItems(listsTitle.toArray(items),new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialogInterface,    int item){

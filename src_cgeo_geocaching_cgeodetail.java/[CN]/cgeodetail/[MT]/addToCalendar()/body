@@ -30,11 +30,11 @@
           calendars.put(calId,calName);
         }
       }
- while (cursor.moveToNext() == true);
+ while (cursor.moveToNext());
     }
   }
   final CharSequence[] items=calendars.values().toArray(new CharSequence[calendars.size()]);
-  AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+  AlertDialog.Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(R.string.cache_calendars);
   builder.setItems(items,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int item){

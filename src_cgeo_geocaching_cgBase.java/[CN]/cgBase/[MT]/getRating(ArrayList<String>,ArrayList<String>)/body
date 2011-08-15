@@ -5,7 +5,7 @@
   final HashMap<String,cgRating> ratings=new HashMap<String,cgRating>();
   try {
     final HashMap<String,String> params=new HashMap<String,String>();
-    if (settings.isLogin() == true) {
+    if (settings.isLogin()) {
       final HashMap<String,String> login=settings.getGCvoteLogin();
       if (login != null) {
         params.put("userName",login.get("username"));
@@ -56,7 +56,7 @@
         final Matcher matcherLoggedIn=patternLogIn.matcher(votes);
         if (matcherLoggedIn.find()) {
           if (matcherLoggedIn.groupCount() > 0) {
-            if (matcherLoggedIn.group(1).equalsIgnoreCase("true") == true) {
+            if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
               loggedIn=true;
             }
           }
@@ -87,7 +87,7 @@
  catch (      Exception e) {
         Log.w(cgSettings.tag,"cgBase.getRating: Failed to parse vote count");
       }
-      if (loggedIn == true) {
+      if (loggedIn) {
         try {
           final Matcher matcherVote=patternVote.matcher(voteData);
           if (matcherVote.find()) {

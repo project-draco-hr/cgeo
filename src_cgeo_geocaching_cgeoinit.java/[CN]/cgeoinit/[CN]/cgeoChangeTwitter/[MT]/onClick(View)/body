@@ -1,6 +1,6 @@
 {
   CheckBox twitterButton=(CheckBox)findViewById(R.id.twitter_option);
-  if (twitterButton.isChecked() == true) {
+  if (twitterButton.isChecked()) {
     settings.reloadTwitterTokens();
     SharedPreferences.Editor edit=prefs.edit();
     if (prefs.getInt("twitter",0) == 0) {
@@ -13,8 +13,8 @@
     }
     edit.commit();
     if (settings.twitter == 1 && (settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0)) {
-      Intent authIntent=new Intent(activity,cgeoauth.class);
-      activity.startActivity(authIntent);
+      Intent authIntent=new Intent(cgeoinit.this,cgeoauth.class);
+      startActivity(authIntent);
     }
     if (prefs.getInt("twitter",0) == 0) {
       twitterButton.setChecked(false);

@@ -1,12 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
   app.setAction(null);
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   Intent intent=getIntent();
   if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
     final String query=intent.getStringExtra(SearchManager.QUERY);
@@ -16,13 +10,8 @@
       return;
     }
   }
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.search);
-  base.setTitle(activity,res.getString(R.string.search));
+  setTitle(res.getString(R.string.search));
   init();
 }

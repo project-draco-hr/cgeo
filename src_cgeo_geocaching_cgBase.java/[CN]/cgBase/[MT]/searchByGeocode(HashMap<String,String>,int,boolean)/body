@@ -6,7 +6,7 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No geocode nor guid given");
     return null;
   }
-  if (forceReload == false && reason == 0 && (app.isOffline(geocode,guid) == true || app.isThere(geocode,guid,true,true) == true)) {
+  if (forceReload == false && reason == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
     if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
       geocode=app.getGeocode(guid);
     }
@@ -33,7 +33,7 @@
   params.put("numlogs","35");
   String page=requestLogged(false,host,path,method,params,false,false,false);
   if (page == null || page.length() == 0) {
-    if (app.isThere(geocode,guid,true,false) == true) {
+    if (app.isThere(geocode,guid,true,false)) {
       if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
         Log.i(cgSettings.tag,"Loading old cache from cache.");
         geocode=app.getGeocode(guid);

@@ -4,7 +4,7 @@
   }
   BitmapDrawable image=null;
   try {
-    cgHtmlImg imgGetter=new cgHtmlImg(activity,settings,trackable.geocode,false,0,false);
+    cgHtmlImg imgGetter=new cgHtmlImg(cgeotrackable.this,trackable.geocode,false,0,false);
     image=imgGetter.getDrawable(url);
     Message message=handler.obtainMessage(0,image);
     handler.sendMessage(message);

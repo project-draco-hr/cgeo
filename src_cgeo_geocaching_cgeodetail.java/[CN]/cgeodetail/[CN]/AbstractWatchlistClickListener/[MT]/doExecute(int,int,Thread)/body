@@ -1,9 +1,9 @@
 {
-  if (watchlistDialog != null && watchlistDialog.isShowing() == true) {
-    warning.showToast(res.getString(R.string.err_watchlist_still_managing));
+  if (watchlistDialog != null && watchlistDialog.isShowing()) {
+    showToast(res.getString(R.string.err_watchlist_still_managing));
     return;
   }
-  watchlistDialog=ProgressDialog.show(activity,res.getString(titleId),res.getString(messageId),true);
+  watchlistDialog=ProgressDialog.show(cgeodetail.this,res.getString(titleId),res.getString(messageId),true);
   watchlistDialog.setCancelable(true);
   if (watchlistThread != null) {
     watchlistThread.interrupt();

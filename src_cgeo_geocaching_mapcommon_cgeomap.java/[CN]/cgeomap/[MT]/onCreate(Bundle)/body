@@ -6,24 +6,18 @@
   app.setAction(null);
   settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,0));
   base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(activity);
   prefsEdit=activity.getSharedPreferences(cgSettings.preferences,0).edit();
   MapFactory mapFactory=settings.getMapFactory();
   noMapTokenShowed=false;
   activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-  if (settings.skin == 1) {
-    activity.setTheme(R.style.light);
-  }
- else {
-    activity.setTheme(R.style.dark);
-  }
+  ActivityMixin.setTheme(activity);
   activity.setContentView(settings.getMapFactory().getMapLayoutId());
-  base.setTitle(activity,res.getString(R.string.map_map));
+  ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,settings,warning,0,0);
+    geo=app.startGeo(activity,geoUpdate,base,settings,0,0);
   }
   if (settings.useCompass == 1 && dir == null) {
-    dir=app.startDir(activity,dirUpdate,warning);
+    dir=app.startDir(activity,dirUpdate);
   }
   mapView=(MapViewImpl)activity.findViewById(mapFactory.getMapViewId());
   mapView.setMapSource(settings);
@@ -35,7 +29,7 @@
   mapView.preLoad();
   mapView.clearOverlays();
   if (overlayMyLoc == null) {
-    overlayMyLoc=new cgMapMyOverlay(settings);
+    overlayMyLoc=new cgMapMyOverlay(settings,activity);
     mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayMyLoc));
   }
   if (settings.publicLoc > 0 && overlayUsers == null) {

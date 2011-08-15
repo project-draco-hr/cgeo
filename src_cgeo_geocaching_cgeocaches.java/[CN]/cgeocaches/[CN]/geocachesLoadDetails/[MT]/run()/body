@@ -13,7 +13,7 @@
       continue;
     }
     try {
-      if (needToStop == true) {
+      if (needToStop) {
         Log.i(cgSettings.tag,"Stopped storing process.");
         break;
       }
@@ -30,12 +30,12 @@
           Log.e(cgSettings.tag,"cgeocaches.geocachesLoadDetails.sleep: " + e.toString());
         }
       }
-      if (needToStop == true) {
+      if (needToStop) {
         Log.i(cgSettings.tag,"Stopped storing process.");
         break;
       }
       detailProgress++;
-      base.storeCache(app,activity,cache,null,reason,handler);
+      base.storeCache(app,cgeocaches.this,cache,null,reason,handler);
       handler.sendEmptyMessage(cacheList.indexOf(cache));
       yield();
     }

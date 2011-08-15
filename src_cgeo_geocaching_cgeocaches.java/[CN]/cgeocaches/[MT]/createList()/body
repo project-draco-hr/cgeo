@@ -13,10 +13,10 @@
       if (value != null && value.length() > 0) {
         int newId=app.createList(value);
         if (newId >= 10) {
-          warning.showToast(res.getString(R.string.list_dialog_create_ok));
+          showToast(res.getString(R.string.list_dialog_create_ok));
         }
  else {
-          warning.showToast(res.getString(R.string.list_dialog_create_err));
+          showToast(res.getString(R.string.list_dialog_create_err));
         }
       }
     }

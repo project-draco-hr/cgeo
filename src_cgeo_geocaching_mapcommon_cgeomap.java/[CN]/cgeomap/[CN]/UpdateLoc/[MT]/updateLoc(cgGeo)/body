@@ -4,14 +4,14 @@
   }
   try {
     if (overlayMyLoc == null && mapView != null) {
-      overlayMyLoc=new cgMapMyOverlay(settings);
+      overlayMyLoc=new cgMapMyOverlay(settings,activity);
       mapView.addOverlay(settings.getMapFactory().getOverlayBaseWrapper(overlayMyLoc));
     }
     if (overlayMyLoc != null && geo.location != null) {
       overlayMyLoc.setCoordinates(geo.location);
     }
     if (geo.latitudeNow != null && geo.longitudeNow != null) {
-      if (followMyLocation == true) {
+      if (followMyLocation) {
         myLocationInMiddle();
       }
  else {
@@ -23,7 +23,7 @@
         overlayMyLoc.setHeading(geo.bearingNow);
       }
  else {
-        overlayMyLoc.setHeading(new Double(0));
+        overlayMyLoc.setHeading(Double.valueOf(0));
       }
     }
   }

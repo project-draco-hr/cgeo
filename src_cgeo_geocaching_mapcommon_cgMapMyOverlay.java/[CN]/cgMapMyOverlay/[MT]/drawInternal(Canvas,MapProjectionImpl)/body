@@ -1,6 +1,5 @@
 {
   if (coordinates == null || location == null)   return;
-  MapFactory mapFactory=settings.getMapFactory();
   if (accuracyCircle == null) {
     accuracyCircle=new Paint();
     accuracyCircle.setAntiAlias(true);
@@ -86,7 +85,7 @@
     }
   }
   if (arrow == null) {
-    arrow=BitmapFactory.decodeResource(settings.getContext().getResources(),R.drawable.my_location_chevron);
+    arrow=BitmapFactory.decodeResource(activity.getResources(),R.drawable.my_location_chevron);
     widthArrow=arrow.getWidth();
     heightArrow=arrow.getHeight();
   }

@@ -1,9 +1,9 @@
 {
   final boolean status=app.restoreDatabase();
   if (status) {
-    warning.helpDialog(res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_success));
+    helpDialog(res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_success));
   }
  else {
-    warning.helpDialog(res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_failed));
+    helpDialog(res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_failed));
   }
 }

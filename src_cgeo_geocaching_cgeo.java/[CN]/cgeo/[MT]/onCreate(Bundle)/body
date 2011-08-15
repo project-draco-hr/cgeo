@@ -1,13 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   context=this;
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
   app.setAction(null);
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  prefs=getSharedPreferences(cgSettings.preferences,0);
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
   app.cleanGeo();
   app.cleanDir();
   setContentView(R.layout.main);
@@ -31,11 +25,7 @@
         helper.setClickable(true);
         helper.setOnClickListener(new View.OnClickListener(){
           public void onClick(          View view){
-            try {
-              AppManualReaderClient.openManual("c-geo","c:geo-intro",context,"http://cgeo.carnero.cc/manual/");
-            }
- catch (            Exception e) {
-            }
+            ActivityMixin.goManual(context,"c:geo-intro");
             view.setVisibility(View.GONE);
           }
         }

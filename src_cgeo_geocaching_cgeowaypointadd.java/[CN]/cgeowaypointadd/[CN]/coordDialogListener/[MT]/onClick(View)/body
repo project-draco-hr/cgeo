@@ -1,10 +1,10 @@
 {
-  cgeocoords coordsDialog=new cgeocoords(activity,waypoint,geo);
+  cgeocoords coordsDialog=new cgeocoords(cgeowaypointadd.this,waypoint,geo);
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
     @Override public void update(    ArrayList<Double> coords){
-      ((Button)findViewById(R.id.buttonLatitude)).setText(base.formatCoordinate(coords.get(0),"lat",true));
-      ((Button)findViewById(R.id.buttonLongitude)).setText(base.formatCoordinate(coords.get(1),"lon",true));
+      ((Button)findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(coords.get(0),"lat",true));
+      ((Button)findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(coords.get(1),"lon",true));
       if (waypoint != null) {
         waypoint.latitude=coords.get(0);
         waypoint.longitude=coords.get(1);

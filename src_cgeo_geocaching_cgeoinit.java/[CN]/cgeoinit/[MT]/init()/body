@@ -13,7 +13,7 @@
   legalNote.setClickable(true);
   legalNote.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View arg0){
-      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
+      startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
     }
   }
 );
@@ -25,7 +25,7 @@
   go4cache.setClickable(true);
   go4cache.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View arg0){
-      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://go4cache.com/")));
+      startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://go4cache.com/")));
     }
   }
 );
@@ -40,8 +40,8 @@
   Button authorizeTwitter=(Button)findViewById(R.id.authorize_twitter);
   authorizeTwitter.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View arg0){
-      Intent authIntent=new Intent(activity,cgeoauth.class);
-      activity.startActivity(authIntent);
+      Intent authIntent=new Intent(cgeoinit.this,cgeoauth.class);
+      startActivity(authIntent);
     }
   }
 );
@@ -60,17 +60,22 @@
   Button sigBtn=(Button)findViewById(R.id.signature_help);
   sigBtn.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View v){
-      warning.helpDialog(res.getString(R.string.init_signature_help_title),res.getString(R.string.init_signature_help_text));
+      helpDialog(res.getString(R.string.init_signature_help_title),res.getString(R.string.init_signature_help_text));
+    }
+  }
+);
+  Button templates=(Button)findViewById(R.id.signature_template);
+  registerForContextMenu(templates);
+  templates.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      enableTemplatesMenu=true;
+      openContextMenu(v);
+      enableTemplatesMenu=false;
     }
   }
 );
   CheckBox autoinsertButton=(CheckBox)findViewById(R.id.sigautoinsert);
-  if (prefs.getBoolean("sigautoinsert",false)) {
-    autoinsertButton.setChecked(true);
-  }
- else {
-    autoinsertButton.setChecked(false);
-  }
+  autoinsertButton.setChecked(prefs.getBoolean("sigautoinsert",false));
   autoinsertButton.setOnClickListener(new cgeoChangeSignatureAutoinsert());
   CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
   if (prefs.getInt("skin",0) == 0) {
@@ -207,17 +212,10 @@
   Button selectMapfile=(Button)findViewById(R.id.select_mapfile);
   selectMapfile.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      Intent selectIntent=new Intent(activity,cgSelectMapfile.class);
-      activity.startActivityForResult(selectIntent,SELECT_MAPFILE_REQUEST);
+      Intent selectIntent=new Intent(cgeoinit.this,cgSelectMapfile.class);
+      startActivityForResult(selectIntent,SELECT_MAPFILE_REQUEST);
     }
   }
 );
-  TextView lastBackup=(TextView)findViewById(R.id.backup_last);
-  File lastBackupFile=app.isRestoreFile();
-  if (lastBackupFile != null) {
-    lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.timeOut.format(lastBackupFile.lastModified())+ ", "+ cgBase.dateOut.format(lastBackupFile.lastModified()));
-  }
- else {
-    lastBackup.setText(res.getString(R.string.init_backup_last_no));
-  }
+  showBackupDate();
 }

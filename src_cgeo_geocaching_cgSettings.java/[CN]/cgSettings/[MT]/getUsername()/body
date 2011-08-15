@@ -1,10 +1,8 @@
 {
-  String user=null;
   if (username == null) {
-    user=prefs.getString("username",null);
+    return prefs.getString(KEY_USERNAME,null);
   }
  else {
-    user=username;
+    return username;
   }
-  return user;
 }

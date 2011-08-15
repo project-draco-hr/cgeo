@@ -1,17 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  activity=this;
-  res=this.getResources();
-  app=(cgeoapplication)this.getApplication();
-  settings=new cgSettings(this,getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,getSharedPreferences(cgSettings.preferences,0));
-  warning=new cgWarning(this);
-  if (settings.skin == 1) {
-    setTheme(R.style.light);
-  }
- else {
-    setTheme(R.style.dark);
-  }
+  setTheme();
   setContentView(R.layout.spoilers);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
@@ -19,13 +8,13 @@
     img_type=extras.getInt("type",0);
   }
   if (img_type == SPOILER_IMAGE) {
-    base.setTitle(activity,res.getString(R.string.cache_spoiler_images_title));
+    setTitle(res.getString(R.string.cache_spoiler_images_title));
   }
  else   if (img_type == LOG_IMAGE) {
-    base.setTitle(activity,res.getString(R.string.cache_log_images_title));
+    setTitle(res.getString(R.string.cache_log_images_title));
   }
   if (geocode == null) {
-    warning.showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
+    showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
     finish();
     return;
   }
@@ -34,13 +23,13 @@ case LOG_IMAGE:
     title=extras.getString("title");
   url=extras.getString("url");
 if ((title == null) || (url == null)) {
-  warning.showToast("Sorry, c:geo forgot which logimage you wanted to load.");
+  showToast("Sorry, c:geo forgot which logimage you wanted to load.");
   finish();
   return;
 }
 break;
 }
-inflater=activity.getLayoutInflater();
+inflater=getLayoutInflater();
 if (imagesView == null) {
 imagesView=(LinearLayout)findViewById(R.id.spoiler_list);
 }
@@ -51,7 +40,7 @@ save=true;
 break;
 case LOG_IMAGE:
 load_process_string=res.getString(R.string.cache_log_images_loading);
-if (settings.storelogimages == true) {
+if (settings.storelogimages) {
 save=true;
 }
  else {
@@ -81,7 +70,7 @@ case SPOILER_IMAGE:
 (new loadSpoilers()).start();
 break;
 default :
-warning.showToast("Sorry, can't load unknown image type.");
+showToast("Sorry, can't load unknown image type.");
 finish();
 }
 }
