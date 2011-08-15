@@ -1,8 +1,7 @@
 {
   boolean signatureAvailable=settings.getSignature() != null;
-  menu.findItem(LOG_SIGNATURE).setVisible(signatureAvailable);
-  menu.findItem(LOG_SIGNATURE_DATE_TIME).setVisible(signatureAvailable);
+  menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
   boolean voteAvailable=settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && cache.guid != null && cache.guid.length() > 0;
-  menu.findItem(9).setVisible(voteAvailable);
+  menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
   return true;
 }

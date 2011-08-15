@@ -1,7 +1,12 @@
 {
   int id=item.getItemId();
-  if ((id >= LOG_SIGNATURE && id <= LOG_SIGNATURE_DATE_TIME)) {
-    addSignature(id);
+  if (id == MENU_SIGNATURE) {
+    EditText log=(EditText)findViewById(R.id.log);
+    String content=log.getText().toString();
+    if (content.length() > 0) {
+      insertIntoLog("\n");
+    }
+    insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(),base));
     return true;
   }
  else   if (id >= 10 && id <= 19) {
@@ -15,6 +20,13 @@
  else {
       post.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating)+ "*");
     }
+    return true;
+  }
+  LogTemplate template=LogTemplateProvider.getTemplate(id);
+  if (template != null) {
+    String newText=template.getValue(base);
+    insertIntoLog(newText);
+    return true;
   }
   return false;
 }

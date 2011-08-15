@@ -1,15 +1,7 @@
 {
-switch (item.getItemId()) {
-case MENU_ITEM_DATE:
-    return insertSignatureTemplate("DATE");
-case MENU_ITEM_NUMBER:
-  return insertSignatureTemplate("NUMBER");
-case MENU_ITEM_TIME:
-return insertSignatureTemplate("TIME");
-case MENU_ITEM_USER:
-return insertSignatureTemplate("USER");
-default :
-break;
-}
-return super.onContextItemSelected(item);
+  LogTemplate template=LogTemplateProvider.getTemplate(item.getItemId());
+  if (template != null) {
+    return insertSignatureTemplate(template);
+  }
+  return super.onContextItemSelected(item);
 }
