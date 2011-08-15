@@ -1,9 +1,0 @@
-{
-  final double rlat1=latitude * deg2rad;
-  final double rlon1=longitude * deg2rad;
-  final double rbearing=bearing * deg2rad;
-  final double rdistance=distance / erad;
-  final double rlat=Math.asin(Math.sin(rlat1) * Math.cos(rdistance) + Math.cos(rlat1) * Math.sin(rdistance) * Math.cos(rbearing));
-  final double rlon=rlon1 + Math.atan2(Math.sin(rbearing) * Math.sin(rdistance) * Math.cos(rlat1),Math.cos(rdistance) - Math.sin(rlat1) * Math.sin(rlat));
-  return new cgGeopoint(rlat * rad2deg,rlon * rad2deg);
-}
