@@ -1,5 +1,5 @@
 {
-  if (currentFormat == formatPlain) {
+  if (currentFormat == coordInputFormatEnum.Plain) {
     if (eLat.length() > 0 && eLon.length() > 0) {
       HashMap<String,Object> latParsed=cgBase.parseCoordinate(eLat.getText().toString(),"lat");
       HashMap<String,Object> lonParsed=cgBase.parseCoordinate(eLon.getText().toString(),"lon");
