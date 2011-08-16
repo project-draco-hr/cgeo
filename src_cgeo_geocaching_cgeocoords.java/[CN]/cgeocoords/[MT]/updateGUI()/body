@@ -18,14 +18,14 @@
   int lonSec=(int)Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
   int lonSecFrac=(int)Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
 switch (currentFormat) {
-case formatPlain:
+case Plain:
     findViewById(R.id.coordTable).setVisibility(View.GONE);
   eLat.setVisibility(View.VISIBLE);
 eLon.setVisibility(View.VISIBLE);
 eLat.setText(cgBase.formatCoordinate(latitude,"lat",true));
 eLon.setText(cgBase.formatCoordinate(longitude,"lon",true));
 break;
-case formatDeg:
+case Deg:
 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
 eLat.setVisibility(View.GONE);
 eLon.setVisibility(View.GONE);
@@ -44,7 +44,7 @@ eLatMin.setText(Integer.toString(latDegFrac) + addZeros(latDegFrac,5));
 eLonDeg.setText(addZeros(latDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac,5));
 break;
-case formatMin:
+case Min:
 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
 eLat.setVisibility(View.GONE);
 eLon.setVisibility(View.GONE);
@@ -67,7 +67,7 @@ eLonDeg.setText(addZeros(lonDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(addZeros(lonMin,2) + Integer.toString(lonMin));
 eLonSec.setText(Integer.toString(lonMinFrac) + addZeros(lonMinFrac,3));
 break;
-case formatSec:
+case Sec:
 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
 eLat.setVisibility(View.GONE);
 eLon.setVisibility(View.GONE);

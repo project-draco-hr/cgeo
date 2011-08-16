@@ -1,9 +1,9 @@
 {
-  if (currentFormat == formatPlain)   return;
+  if (currentFormat == coordInputFormatEnum.Plain)   return;
   int maxLength=2;
   if (editTextId == 5 || editTextId == 4 || editTextId == 8)   maxLength=3;
-  if ((editTextId == 2 || editTextId == 6) && currentFormat == formatDeg)   maxLength=5;
-  if ((editTextId == 3 || editTextId == 7) && currentFormat == formatMin)   maxLength=3;
+  if ((editTextId == 2 || editTextId == 6) && currentFormat == coordInputFormatEnum.Deg)   maxLength=5;
+  if ((editTextId == 3 || editTextId == 7) && currentFormat == coordInputFormatEnum.Min)   maxLength=3;
   if (s.length() == maxLength) {
 switch (editTextId) {
 case 1:

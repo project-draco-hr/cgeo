@@ -32,5 +32,6 @@
   webDeviceCode=prefs.getString(KEY_WEB_DEVICE_CODE,null);
   trackableAutovisit=prefs.getBoolean(KEY_AUTO_VISIT_TRACKABLES,false);
   signatureAutoinsert=prefs.getBoolean(KEY_AUTO_INSERT_SIGNATURE,false);
+  coordInput=coordInputFormatEnum.fromInt(prefs.getInt(KEY_COORD_INPUT_FORMAT,0));
   setLanguage(useEnglish);
 }
