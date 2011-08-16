@@ -1,0 +1,13 @@
+{
+  String type="mystery";
+  if (cache.found) {
+    type=cache.type + "_found";
+  }
+ else   if (cache.disabled) {
+    type=cache.type + "_disabled";
+  }
+ else {
+    type=cache.type;
+  }
+  return cgBase.urlencode_rfc3986(MARKERS_URL + "marker_cache_" + type+ ".png");
+}

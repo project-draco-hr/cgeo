@@ -1,0 +1,33 @@
+{
+  if (templates == null) {
+    templates=new LogTemplate[]{new LogTemplate("DATE",R.string.init_signature_template_date){
+      @Override String getValue(      final cgBase base){
+        return base.formatFullDate(System.currentTimeMillis());
+      }
+    }
+,new LogTemplate("TIME",R.string.init_signature_template_time){
+      @Override String getValue(      final cgBase base){
+        return base.formatTime(System.currentTimeMillis());
+      }
+    }
+,new LogTemplate("USER",R.string.init_signature_template_user){
+      @Override String getValue(      final cgBase base){
+        return base.getUserName();
+      }
+    }
+,new LogTemplate("NUMBER",R.string.init_signature_template_number){
+      @Override String getValue(      final cgBase base){
+        String findCount="";
+        final HashMap<String,String> params=new HashMap<String,String>();
+        final String page=base.request(false,"www.geocaching.com","/my/","GET",params,false,false,false).getData();
+        int current=cgBase.parseFindCount(page);
+        if (current >= 0) {
+          findCount=String.valueOf(current + 1);
+        }
+        return findCount;
+      }
+    }
+};
+  }
+  return templates;
+}

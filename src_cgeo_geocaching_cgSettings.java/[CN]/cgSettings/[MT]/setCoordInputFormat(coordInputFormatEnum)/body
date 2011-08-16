@@ -1,0 +1,10 @@
+{
+  coordInput=format;
+  boolean commitResult=editSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      edit.putInt(KEY_COORD_INPUT_FORMAT,coordInput.ordinal());
+    }
+  }
+);
+  return commitResult;
+}

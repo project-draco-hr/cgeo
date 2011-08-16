@@ -53,7 +53,7 @@
     }
   }
  else   if (settings.getSignature() != null && settings.signatureAutoinsert && settings.getSignature().length() > 0 && 0 == ((EditText)findViewById(R.id.log)).getText().length()) {
-    addSignature(LOG_SIGNATURE);
+    insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(),base));
   }
   if (types.contains(typeSelected) == false) {
     if (alreadyFound) {
@@ -90,7 +90,7 @@
   if (post == null) {
     post=(Button)findViewById(R.id.post);
   }
-  if (viewstate == null || viewstate.length() == 0) {
+  if (cgBase.isEmpty(viewstates)) {
     post.setEnabled(false);
     post.setOnTouchListener(null);
     post.setOnClickListener(null);

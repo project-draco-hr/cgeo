@@ -1,0 +1,10 @@
+{
+  if (signature == null) {
+    return "";
+  }
+  String result=signature;
+  for (  LogTemplate template : getTemplates()) {
+    result=template.apply(result,base);
+  }
+  return result;
+}

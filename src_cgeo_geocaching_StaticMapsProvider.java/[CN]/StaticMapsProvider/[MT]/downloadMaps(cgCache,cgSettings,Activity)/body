@@ -1,0 +1,31 @@
+{
+  if (settings.storeOfflineMaps != 1 || cache.latitude == null || cache.longitude == null || cache.geocode == null || cache.geocode.length() == 0) {
+    return;
+  }
+  final String latlonMap=String.format((Locale)null,"%.6f",cache.latitude) + "," + String.format((Locale)null,"%.6f",cache.longitude);
+  final Display display=((WindowManager)activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+  final int maxWidth=display.getWidth() - 25;
+  final int maxHeight=display.getHeight() - 25;
+  int edge=0;
+  if (maxWidth > maxHeight) {
+    edge=maxWidth;
+  }
+ else {
+    edge=maxHeight;
+  }
+  final StringBuilder waypoints=new StringBuilder();
+  if (cache.waypoints != null && cache.waypoints.size() > 0) {
+    for (    cgWaypoint waypoint : cache.waypoints) {
+      if (waypoint.latitude == null && waypoint.longitude == null) {
+        continue;
+      }
+      waypoints.append("&markers=icon%3A" + MARKERS_URL + "marker_waypoint_");
+      waypoints.append(waypoint.type);
+      waypoints.append(".png%7C");
+      waypoints.append(String.format((Locale)null,"%.6f",waypoint.latitude));
+      waypoints.append(",");
+      waypoints.append(String.format((Locale)null,"%.6f",waypoint.longitude));
+    }
+  }
+  downloadMaps(cache,latlonMap,edge,waypoints.toString());
+}

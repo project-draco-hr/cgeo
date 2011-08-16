@@ -1,0 +1,13 @@
+{
+  int selectionStart=editText.getSelectionStart();
+  int selectionEnd=editText.getSelectionEnd();
+  int start=Math.min(selectionStart,selectionEnd);
+  int end=Math.max(selectionStart,selectionEnd);
+  String content=editText.getText().toString();
+  if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
+    insertText=" " + insertText;
+  }
+  editText.getText().replace(start,end,insertText);
+  int newCursor=start + insertText.length();
+  editText.setSelection(newCursor,newCursor);
+}

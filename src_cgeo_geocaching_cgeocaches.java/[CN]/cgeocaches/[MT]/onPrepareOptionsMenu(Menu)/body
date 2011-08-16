@@ -9,22 +9,29 @@
       menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode));
       menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
     }
+    boolean hasSelection=adapter != null && adapter.getChecked() > 0;
     if (type != null && type.equals("offline")) {
-      if (adapter != null && adapter.getChecked() > 0) {
+      if (hasSelection) {
         menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked()+ ")");
       }
  else {
         menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_all));
       }
-      if (adapter != null && adapter.getChecked() > 0) {
+      if (hasSelection) {
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked()+ ")");
       }
  else {
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_all));
       }
+      if (hasSelection) {
+        menu.findItem(MENU_MOVE_TO_LIST).setTitle(res.getString(R.string.caches_move_selected) + " (" + adapter.getChecked()+ ")");
+      }
+ else {
+        menu.findItem(MENU_MOVE_TO_LIST).setTitle(res.getString(R.string.caches_move_all));
+      }
     }
  else {
-      if (adapter != null && adapter.getChecked() > 0) {
+      if (hasSelection) {
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_selected) + " (" + adapter.getChecked()+ ")");
       }
  else {
@@ -46,13 +53,18 @@
     if (item != null) {
       item.setVisible(listId != 1);
     }
+    boolean multipleLists=app.getLists().size() >= 2;
     item=menu.findItem(MENU_SWITCH_LIST);
     if (item != null) {
-      item.setVisible(app.getLists().size() >= 2);
+      item.setVisible(multipleLists);
+    }
+    item=menu.findItem(MENU_MOVE_TO_LIST);
+    if (item != null) {
+      item.setVisible(multipleLists);
     }
     item=menu.findItem(MENU_REMOVE_FROM_HISTORY);
     if (null != item) {
-      if (adapter != null && adapter.getChecked() > 0) {
+      if (hasSelection) {
         item.setTitle(res.getString(R.string.cache_remove_from_history) + " (" + adapter.getChecked()+ ")");
       }
  else {
@@ -61,7 +73,7 @@
     }
     item=menu.findItem(MENU_EXPORT_NOTES);
     if (null != item) {
-      if (adapter != null && adapter.getChecked() > 0) {
+      if (hasSelection) {
         item.setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked()+ ")");
       }
  else {

@@ -12,15 +12,13 @@
  catch (  Exception e) {
     Log.w(cgSettings.tag,"cgeocaches.onContextItemSelected: " + e.toString());
   }
-  final int touchedPos;
-  final cgCache cache;
+  int touchedPos=-1;
+  cgCache cache=null;
   if (adapterInfo != null) {
     touchedPos=adapterInfo.position;
-    cache=adapter.getItem(touchedPos);
-  }
- else {
-    touchedPos=-1;
-    cache=null;
+    if (touchedPos < adapter.getCount()) {
+      cache=adapter.getItem(touchedPos);
+    }
   }
   if (id == MENU_COMPASS) {
     Intent navigateIntent=new Intent(this,cgeonavigate.class);
@@ -125,12 +123,31 @@
 );
     return true;
   }
- else   if (id >= SUBMENU_MOVE_TO_LIST && id < SUBMENU_MOVE_TO_LIST + 100) {
-    int newListId=id - SUBMENU_MOVE_TO_LIST;
-    app.moveToList(cache.geocode,newListId);
+ else   if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + 100) {
+    int newListId=id - CONTEXT_MENU_MOVE_TO_LIST;
+    if (cache != null) {
+      app.moveToList(cache.geocode,newListId);
+    }
+    adapter.resetChecks();
+    switchListById(listId);
+    return true;
+  }
+ else   if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
+    int newListId=id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
+    boolean moveAll=adapter.getChecked() == 0;
+    final ArrayList<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
+    for (    cgCache c : cacheListTemp) {
+      if (moveAll || c.statusChecked) {
+        app.moveToList(c.geocode,newListId);
+      }
+    }
+    adapter.resetChecks();
     switchListById(listId);
     return true;
   }
   lastMenuInfo=info;
-  return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,null,null,null);
+  HashMap<String,String> params=new HashMap<String,String>();
+  params.put("geocode",cache.geocode);
+  Long singleSearchId=base.searchByGeocode(params,0,false);
+  return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearchId,null,null);
 }

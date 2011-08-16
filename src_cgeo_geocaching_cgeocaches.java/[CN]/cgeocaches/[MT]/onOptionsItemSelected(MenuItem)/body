@@ -1,5 +1,6 @@
 {
-switch (item.getItemId()) {
+  int itemId=item.getItemId();
+switch (itemId) {
 case MENU_SWITCH_SELECT_MODE:
     if (adapter != null) {
       adapter.switchSelectMode();
@@ -86,6 +87,11 @@ return false;
 case MENU_REMOVE_FROM_HISTORY:
 removeFromHistoryCheck();
 return false;
+case MENU_MOVE_TO_LIST:
+contextMenuMoveToList=true;
+openContextMenu(getListView());
+contextMenuMoveToList=false;
+return false;
 }
-return CacheListAppFactory.onMenuItemSelected(item,geo,cacheList,this,res,null);
+return CacheListAppFactory.onMenuItemSelected(item,geo,cacheList,this,res,searchId);
 }

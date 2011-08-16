@@ -1,0 +1,10 @@
+{
+  Thread staticMapsThread=new Thread("getting static map"){
+    @Override public void run(){
+      downloadMapsInThread(cache,latlonMap,edge,waypoints);
+    }
+  }
+;
+  staticMapsThread.setPriority(Thread.MIN_PRIORITY);
+  staticMapsThread.start();
+}

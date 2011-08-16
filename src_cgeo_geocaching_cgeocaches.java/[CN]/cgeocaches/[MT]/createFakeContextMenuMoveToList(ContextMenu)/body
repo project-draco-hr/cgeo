@@ -1,0 +1,9 @@
+{
+  ArrayList<cgList> cacheLists=app.getLists();
+  int listCount=cacheLists.size();
+  menu.setHeaderTitle(res.getString(R.string.cache_menu_move_list));
+  for (int i=0; i < listCount; i++) {
+    cgList list=cacheLists.get(i);
+    menu.add(Menu.NONE,MENU_MOVE_SELECTED_OR_ALL_TO_LIST + list.id,Menu.NONE,list.title);
+  }
+}

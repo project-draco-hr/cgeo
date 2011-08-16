@@ -1,0 +1,37 @@
+{
+  final Matcher matcher=pattern.matcher(format);
+  final StringBuffer formattedResult=new StringBuffer();
+  while (matcher.find()) {
+    StringBuilder replacement=new StringBuilder();
+    final double coord=(matcher.group(1).equals("y")) ? gp.getLatitude() : gp.getLongitude();
+    if (matcher.group(3).equals("n")) {
+      if (matcher.group(1).equals("y")) {
+        replacement.append((coord < 0) ? "S" : "N");
+      }
+ else {
+        replacement.append((coord < 0) ? "W" : "E");
+      }
+    }
+ else     if (matcher.group(3).equals("d")) {
+      if (null == matcher.group(2)) {
+        replacement.append(String.format("%0" + ((matcher.group(1).equals("y")) ? "2." : "3.") + "0f",Math.floor(Math.abs(coord))));
+      }
+ else {
+        replacement.append(String.format("%0" + ((matcher.group(1).equals("y")) ? "2." : "3.") + Integer.parseInt(matcher.group(2))+ "f",coord));
+      }
+    }
+ else     if (matcher.group(3).equals("m")) {
+      final double value=Math.abs(coord);
+      final double minutes=(value - Math.floor(value)) * 60;
+      replacement.append(String.format("%02." + ((null == matcher.group(2)) ? 0 : Integer.parseInt(matcher.group(2))) + "f",(null == matcher.group(2)) ? Math.floor(minutes) : minutes));
+    }
+ else     if (matcher.group(3).equals("s")) {
+      final double value=Math.abs(coord);
+      final double minutes=(value - Math.floor(value)) * 60;
+      replacement.append(String.format("%02." + ((null == matcher.group(2)) ? 0 : Integer.parseInt(matcher.group(2))) + "f",(minutes - Math.floor(minutes)) * 60));
+    }
+    matcher.appendReplacement(formattedResult,replacement.toString());
+  }
+  matcher.appendTail(formattedResult);
+  return formattedResult.toString();
+}
