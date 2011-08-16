@@ -132,5 +132,8 @@
     return true;
   }
   lastMenuInfo=info;
-  return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,null,null,null);
+  HashMap<String,String> params=new HashMap<String,String>();
+  params.put("geocode",cache.geocode);
+  Long singleSearchId=base.searchByGeocode(params,0,false);
+  return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearchId,null,null);
 }
