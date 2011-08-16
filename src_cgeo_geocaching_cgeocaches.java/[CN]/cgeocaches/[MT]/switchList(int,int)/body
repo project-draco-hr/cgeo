@@ -18,12 +18,5 @@
   settings.saveLastList(listId);
   showProgress(true);
   setLoadingCaches();
-  Handler handlerMove=new Handler(){
-    @Override public void handleMessage(    Message msg){
-      Thread threadPure=new geocachesLoadByOffline(loadCachesHandler,latitude,longitude,msg.what);
-      threadPure.start();
-    }
-  }
-;
-  (new moveCachesToList(listId,handlerMove)).start();
+  (new moveCachesToList(listId,new MoveHandler())).start();
 }
