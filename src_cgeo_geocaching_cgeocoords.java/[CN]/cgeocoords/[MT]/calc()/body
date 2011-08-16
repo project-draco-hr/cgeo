@@ -1,5 +1,5 @@
 {
-  if (currentFormat == formatPlain)   return;
+  if (currentFormat == coordInputFormatEnum.Plain)   return;
   int latDeg=0, latMin=0, latSec=0, latSub=0;
   int lonDeg=0, lonMin=0, lonSec=0, lonSub=0;
   try {
@@ -15,7 +15,7 @@
  catch (  NumberFormatException e) {
   }
 switch (currentFormat) {
-case formatDeg:
+case Deg:
     Double latDegFrac=latMin * 1.0;
   while (latDegFrac > 1)   latDegFrac/=10;
 Double lonDegFrac=lonMin * 1.0;
@@ -23,7 +23,7 @@ while (lonDegFrac > 1) lonDegFrac/=10;
 latitude=latDeg + latDegFrac;
 longitude=lonDeg + lonDegFrac;
 break;
-case formatMin:
+case Min:
 Double latMinFrac=latSec * 1.0;
 while (latMinFrac > 1) latMinFrac/=10;
 Double lonMinFrac=lonSec * 1.0;
@@ -31,7 +31,7 @@ while (lonMinFrac > 1) lonMinFrac/=10;
 latitude=latDeg + latMin / 60.0 + latMinFrac / 60.0;
 longitude=lonDeg + lonMin / 60.0 + lonMinFrac / 60.0;
 break;
-case formatSec:
+case Sec:
 Double latSecFrac=latSub * 1.0;
 while (latSecFrac > 1) latSecFrac/=10;
 Double lonSecFrac=lonSub * 1.0;
