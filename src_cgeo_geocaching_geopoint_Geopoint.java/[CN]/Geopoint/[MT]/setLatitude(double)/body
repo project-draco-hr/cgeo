@@ -1,0 +1,9 @@
+{
+  if (lat <= 90 && lat >= -90) {
+    latitude=lat;
+  }
+ else {
+    throw new MalformedCoordinateException("malformed latitude: " + lat);
+  }
+  return this;
+}

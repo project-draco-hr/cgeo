@@ -1,0 +1,46 @@
+{
+  final int ilat1=(int)Math.round(0.5 + latitude * 360000);
+  final int ilon1=(int)Math.round(0.5 + longitude * 360000);
+  final int ilat2=(int)Math.round(0.5 + gp.getLatitude() * 360000);
+  final int ilon2=(int)Math.round(0.5 + gp.getLongitude() * 360000);
+  final double lat1=deg2rad * latitude;
+  final double lon1=deg2rad * longitude;
+  final double lat2=deg2rad * gp.getLatitude();
+  final double lon2=deg2rad * gp.getLongitude();
+  if (ilat1 == ilat2 && ilon1 == ilon2) {
+    return 0;
+  }
+ else   if (ilat1 == ilat2) {
+    if (ilon1 > ilon2) {
+      return 270;
+    }
+ else {
+      return 90;
+    }
+  }
+ else   if (ilon1 == ilon2) {
+    if (ilat1 > ilat2) {
+      return 180;
+    }
+ else {
+      return 0;
+    }
+  }
+ else {
+    double c=Math.acos(Math.sin(lat2) * Math.sin(lat1) + Math.cos(lat2) * Math.cos(lat1) * Math.cos(lon2 - lon1));
+    double A=Math.asin(Math.cos(lat2) * Math.sin(lon2 - lon1) / Math.sin(c));
+    double result=A * rad2deg;
+    if (ilat2 > ilat1 && ilon2 > ilon1) {
+    }
+ else     if (ilat2 < ilat1 && ilon2 < ilon1) {
+      result=180f - result;
+    }
+ else     if (ilat2 < ilat1 && ilon2 > ilon1) {
+      result=180f - result;
+    }
+ else     if (ilat2 > ilat1 && ilon2 < ilon1) {
+      result+=360f;
+    }
+    return result;
+  }
+}
