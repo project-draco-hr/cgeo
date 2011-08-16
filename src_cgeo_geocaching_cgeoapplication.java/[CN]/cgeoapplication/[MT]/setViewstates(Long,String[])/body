@@ -1,7 +1,10 @@
 {
+  if (cgBase.isEmpty(viewstates)) {
+    return false;
+  }
   if (searchId == null || searches.containsKey(searchId) == false) {
     return false;
   }
-  searches.get(searchId).viewstate1=viewstate1;
+  searches.get(searchId).viewstates=viewstates;
   return true;
 }

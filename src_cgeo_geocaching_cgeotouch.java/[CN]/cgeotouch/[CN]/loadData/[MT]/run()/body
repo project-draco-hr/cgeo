@@ -12,8 +12,7 @@
       return;
     }
     final String page=base.request(false,"www.geocaching.com","/track/log.aspx","GET",params,false,false,false).getData();
-    viewstate=cgBase.findViewstate(page,0);
-    viewstate1=cgBase.findViewstate(page,1);
+    viewstates=cgBase.getViewstates(page);
     final ArrayList<Integer> typesPre=cgBase.parseTypes(page);
     if (typesPre.size() > 0) {
       types.clear();

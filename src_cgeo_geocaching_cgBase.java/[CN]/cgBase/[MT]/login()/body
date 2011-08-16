@@ -3,8 +3,7 @@
   final String path="/login/default.aspx";
   cgResponse loginResponse=null;
   String loginData=null;
-  String viewstate=null;
-  String viewstate1=null;
+  String[] viewstates=null;
   final HashMap<String,String> loginStart=settings.getLogin();
   if (loginStart == null) {
     return -3;
@@ -14,13 +13,12 @@
   if (loginData != null && loginData.length() > 0) {
     if (checkLogin(loginData)) {
       Log.i(cgSettings.tag,"Already logged in Geocaching.com as " + loginStart.get("username"));
-      switchToEnglish(viewstate,viewstate1);
+      switchToEnglish(viewstates);
       return 1;
     }
-    viewstate=findViewstate(loginData,0);
-    viewstate1=findViewstate(loginData,1);
-    if (viewstate == null || viewstate.length() == 0) {
-      Log.e(cgSettings.tag,"cgeoBase.login: Failed to find viewstate");
+    viewstates=getViewstates(loginData);
+    if (isEmpty(viewstates)) {
+      Log.e(cgSettings.tag,"cgeoBase.login: Failed to find viewstates");
       return -1;
     }
   }
@@ -37,11 +35,7 @@
   settings.deleteCookies();
   params.put("__EVENTTARGET","");
   params.put("__EVENTARGUMENT","");
-  params.put("__VIEWSTATE",viewstate);
-  if (viewstate1 != null) {
-    params.put("__VIEWSTATE1",viewstate1);
-    params.put("__VIEWSTATEFIELDCOUNT","2");
-  }
+  setViewstates(viewstates,params);
   params.put("ctl00$SiteContent$tbUsername",login.get("username"));
   params.put("ctl00$SiteContent$tbPassword",login.get("password"));
   params.put("ctl00$SiteContent$cbRememberMe","on");
@@ -51,7 +45,7 @@
   if (loginData != null && loginData.length() > 0) {
     if (checkLogin(loginData)) {
       Log.i(cgSettings.tag,"Successfully logged in Geocaching.com as " + login.get("username"));
-      switchToEnglish(findViewstate(loginData,0),findViewstate(loginData,1));
+      switchToEnglish(getViewstates(loginData));
       return 1;
     }
  else {

@@ -1,5 +1,5 @@
 {
-  if (viewstate == null || viewstate.length() == 0) {
+  if (isEmpty(viewstates)) {
     Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: No viewstate given");
     return 1000;
   }
@@ -18,11 +18,7 @@
   final String path="/track/log.aspx?wid=" + tbid;
   final String method="POST";
   final HashMap<String,String> params=new HashMap<String,String>();
-  params.put("__VIEWSTATE",viewstate);
-  if (viewstate1 != null) {
-    params.put("__VIEWSTATE1",viewstate1);
-    params.put("__VIEWSTATEFIELDCOUNT","2");
-  }
+  setViewstates(viewstates,params);
   params.put("__EVENTTARGET","");
   params.put("__EVENTARGUMENT","");
   params.put("__LASTFOCUS","");

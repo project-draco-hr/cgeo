@@ -74,12 +74,7 @@
     if (caches.url != null && caches.url.length() > 0) {
       search.url=caches.url;
     }
-    if (caches.viewstate != null && caches.viewstate.length() > 0) {
-      search.viewstate=caches.viewstate;
-    }
-    if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
-      search.viewstate1=caches.viewstate1;
-    }
+    search.viewstates=caches.viewstates;
     search.totalCnt=caches.totalCnt;
     for (    cgCache cache : caches.cacheList) {
       search.addGeocode(cache.geocode);

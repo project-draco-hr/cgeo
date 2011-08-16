@@ -1,13 +1,12 @@
 {
-  final String viewstate=app.getViewstate(searchId);
-  final String viewstate1=app.getViewstate1(searchId);
+  final String[] viewstates=app.getViewstates(searchId);
   cgCacheWrap caches=new cgCacheWrap();
   String url=app.getUrl(searchId);
   if (url == null || url.length() == 0) {
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No url found");
     return searchId;
   }
-  if (viewstate == null || viewstate.length() == 0) {
+  if (isEmpty(viewstates)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No viewstate given");
     return searchId;
   }
@@ -35,11 +34,7 @@
     path=url;
   }
   final HashMap<String,String> params=new HashMap<String,String>();
-  params.put("__VIEWSTATE",viewstate);
-  if (viewstate1 != null) {
-    params.put("__VIEWSTATE1",viewstate1);
-    params.put("__VIEWSTATEFIELDCOUNT","2");
-  }
+  setViewstates(viewstates,params);
   params.put("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08");
   params.put("__EVENTARGUMENT","");
   String page=request(false,host,path,method,params,false,false,true).getData();
@@ -67,8 +62,7 @@
     return searchId;
   }
   app.setError(searchId,caches.error);
-  app.setViewstate(searchId,caches.viewstate);
-  app.setViewstate1(searchId,caches.viewstate1);
+  app.setViewstates(searchId,caches.viewstates);
   final ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
   for (  cgCache cache : caches.cacheList) {
     app.addGeocode(searchId,cache.geocode);
