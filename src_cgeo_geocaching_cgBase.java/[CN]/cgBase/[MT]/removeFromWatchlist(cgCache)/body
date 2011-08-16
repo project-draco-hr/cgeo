@@ -8,12 +8,7 @@
     return -1;
   }
   final HashMap<String,String> params=new HashMap<String,String>();
-  String viewstate1=findViewstate(page,1);
-  params.put("__VIEWSTATE",findViewstate(page,0));
-  if (viewstate1 != null) {
-    params.put("__VIEWSTATE1",viewstate1);
-    params.put("__VIEWSTATEFIELDCOUNT","2");
-  }
+  transferViewstates(page,params);
   params.put("__EVENTTARGET","");
   params.put("__EVENTARGUMENT","");
   params.put("ctl00$ContentBody$btnYes","Yes");

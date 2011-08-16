@@ -20,8 +20,7 @@
   final Pattern patternTotalCnt=Pattern.compile("<td class=\"PageBuilderWidget\"><span>Total Records[^<]*<b>(\\d+)<\\/b>",Pattern.CASE_INSENSITIVE);
   final Pattern patternRecaptcha=Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>",Pattern.CASE_INSENSITIVE);
   final Pattern patternRecaptchaChallenge=Pattern.compile("challenge : '([^']+)'",Pattern.CASE_INSENSITIVE);
-  caches.viewstate=findViewstate(page,0);
-  caches.viewstate1=findViewstate(page,1);
+  caches.viewstates=getViewstates(page);
   if (showCaptcha) {
     try {
       String recaptchaJsParam=null;
@@ -255,15 +254,16 @@
       params.append("__EVENTTARGET=");
       params.append("&");
       params.append("__EVENTARGUMENT=");
-      params.append("&");
-      params.append("__VIEWSTATE=");
-      params.append(urlencode_rfc3986(caches.viewstate));
-      if (caches.viewstate1 != null) {
-        params.append("&");
-        params.append("__VIEWSTATE1=");
-        params.append(urlencode_rfc3986(caches.viewstate1));
-        params.append("&");
-        params.append("__VIEWSTATEFIELDCOUNT=2");
+      if (caches.viewstates != null && caches.viewstates.length > 0) {
+        params.append("&__VIEWSTATE=");
+        params.append(urlencode_rfc3986(caches.viewstates[0]));
+        if (caches.viewstates.length > 1) {
+          for (int i=1; i < caches.viewstates.length; i++) {
+            params.append("&__VIEWSTATE" + i + "=");
+            params.append(urlencode_rfc3986(caches.viewstates[i]));
+          }
+          params.append("&__VIEWSTATEFIELDCOUNT=" + caches.viewstates.length);
+        }
       }
       for (      String cid : cids) {
         params.append("&");

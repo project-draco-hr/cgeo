@@ -23,7 +23,7 @@
   if (tweetCheck == null)   tweetCheck=(CheckBox)findViewById(R.id.tweet);
   tweetCheck.setChecked(true);
   Button buttonPost=(Button)findViewById(R.id.post);
-  if (viewstate == null || viewstate.length() == 0) {
+  if (cgBase.isEmpty(viewstates)) {
     buttonPost.setEnabled(false);
     buttonPost.setOnTouchListener(null);
     buttonPost.setOnClickListener(null);
