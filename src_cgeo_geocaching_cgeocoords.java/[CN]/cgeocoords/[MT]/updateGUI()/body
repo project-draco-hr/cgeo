@@ -1,0 +1,96 @@
+{
+  if (latitude < 0)   bLat.setText("S");
+ else   bLat.setText("N");
+  if (longitude < 0)   bLon.setText("W");
+ else   bLon.setText("E");
+  Double lat=Math.abs(latitude);
+  Double lon=Math.abs(longitude);
+  int latDeg=(int)Math.floor(lat);
+  int latDegFrac=(int)Math.round((lat - latDeg) * 100000);
+  int latMin=(int)Math.floor((lat - latDeg) * 60);
+  int latMinFrac=(int)Math.round(((lat - latDeg) * 60 - latMin) * 1000);
+  int latSec=(int)Math.floor(((lat - latDeg) * 60 - latMin) * 60);
+  int latSecFrac=(int)Math.round((((lat - latDeg) * 60 - latMin) * 60 - latSec) * 1000);
+  int lonDeg=(int)Math.floor(lon);
+  int lonDegFrac=(int)Math.round((lon - lonDeg) * 100000);
+  int lonMin=(int)Math.floor((lon - lonDeg) * 60);
+  int lonMinFrac=(int)Math.round(((lon - lonDeg) * 60 - lonMin) * 1000);
+  int lonSec=(int)Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
+  int lonSecFrac=(int)Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
+switch (currentFormat) {
+case formatPlain:
+    findViewById(R.id.coordTable).setVisibility(View.GONE);
+  eLat.setVisibility(View.VISIBLE);
+eLon.setVisibility(View.VISIBLE);
+eLat.setText(cgBase.formatCoordinate(latitude,"lat",true));
+eLon.setText(cgBase.formatCoordinate(longitude,"lon",true));
+break;
+case formatDeg:
+findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+eLat.setVisibility(View.GONE);
+eLon.setVisibility(View.GONE);
+eLatSec.setVisibility(View.GONE);
+eLonSec.setVisibility(View.GONE);
+tLatSep3.setVisibility(View.GONE);
+tLonSep3.setVisibility(View.GONE);
+eLatSub.setVisibility(View.GONE);
+eLonSub.setVisibility(View.GONE);
+tLatSep1.setText(".");
+tLonSep1.setText(".");
+tLatSep2.setText("??");
+tLonSep2.setText("??");
+eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
+eLatMin.setText(Integer.toString(latDegFrac) + addZeros(latDegFrac,5));
+eLonDeg.setText(addZeros(latDeg,3) + Integer.toString(lonDeg));
+eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac,5));
+break;
+case formatMin:
+findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+eLat.setVisibility(View.GONE);
+eLon.setVisibility(View.GONE);
+eLatSec.setVisibility(View.VISIBLE);
+eLonSec.setVisibility(View.VISIBLE);
+tLatSep3.setVisibility(View.VISIBLE);
+tLonSep3.setVisibility(View.VISIBLE);
+eLatSub.setVisibility(View.GONE);
+eLonSub.setVisibility(View.GONE);
+tLatSep1.setText("??");
+tLonSep1.setText("??");
+tLatSep2.setText(".");
+tLonSep2.setText(".");
+tLatSep3.setText("'");
+tLonSep3.setText("'");
+eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
+eLatMin.setText(addZeros(latMin,2) + Integer.toString(latMin));
+eLatSec.setText(Integer.toString(latMinFrac) + addZeros(latMinFrac,3));
+eLonDeg.setText(addZeros(lonDeg,3) + Integer.toString(lonDeg));
+eLonMin.setText(addZeros(lonMin,2) + Integer.toString(lonMin));
+eLonSec.setText(Integer.toString(lonMinFrac) + addZeros(lonMinFrac,3));
+break;
+case formatSec:
+findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+eLat.setVisibility(View.GONE);
+eLon.setVisibility(View.GONE);
+eLatSec.setVisibility(View.VISIBLE);
+eLonSec.setVisibility(View.VISIBLE);
+tLatSep3.setVisibility(View.VISIBLE);
+tLonSep3.setVisibility(View.VISIBLE);
+eLatSub.setVisibility(View.VISIBLE);
+eLonSub.setVisibility(View.VISIBLE);
+tLatSep1.setText("??");
+tLonSep1.setText("??");
+tLatSep2.setText("'");
+tLonSep2.setText("'");
+tLatSep3.setText(".");
+tLonSep3.setText(".");
+eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
+eLatMin.setText(addZeros(latMin,2) + Integer.toString(latMin));
+eLatSec.setText(addZeros(latSec,2) + Integer.toString(latSec));
+eLatSub.setText(Integer.toString(latSecFrac) + addZeros(latSecFrac,3));
+eLonDeg.setText(addZeros(lonDeg,3) + Integer.toString(lonDeg));
+eLonMin.setText(addZeros(lonMin,2) + Integer.toString(lonMin));
+eLonSec.setText(addZeros(lonSec,2) + Integer.toString(lonSec));
+eLonSub.setText(Integer.toString(lonSecFrac) + addZeros(lonSecFrac,3));
+break;
+}
+}
