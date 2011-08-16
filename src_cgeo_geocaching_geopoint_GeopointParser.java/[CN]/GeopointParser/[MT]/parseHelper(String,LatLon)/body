@@ -1,7 +1,4 @@
 {
-  final Pattern patternLat=Pattern.compile("([NS])\\s*(\\d+)???(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
-  final Pattern patternLon=Pattern.compile("([WE])\\s*(\\d+)???(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
-  final Pattern patternDec=Pattern.compile("^(-?\\d+([\\.,]\\d+)?)\\s*(-?\\d+([\\.,]\\d+)?)?$");
   Matcher matcher;
   if (LatLon.LAT == latlon) {
     matcher=patternLat.matcher(text);
