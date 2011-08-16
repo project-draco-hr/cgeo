@@ -1,0 +1,44 @@
+{
+  final Pattern patternLat=Pattern.compile("([NS])\\s*(\\d+)???(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
+  final Pattern patternLon=Pattern.compile("([WE])\\s*(\\d+)???(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
+  final Pattern patternDec=Pattern.compile("^(-?\\d+([\\.,]\\d+)?)\\s*(-?\\d+([\\.,]\\d+)?)?$");
+  Matcher matcher;
+  if (LatLon.LAT == latlon) {
+    matcher=patternLat.matcher(text);
+  }
+ else {
+    matcher=patternLon.matcher(text);
+  }
+  if (matcher.find()) {
+    int sign=1;
+    int degree=0;
+    int minutes=0;
+    int seconds=0;
+    if (matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W")) {
+      sign=-1;
+    }
+    degree=Integer.parseInt(matcher.group(2));
+    if (null != matcher.group(4)) {
+      minutes=Integer.parseInt(matcher.group(4));
+      if (null != matcher.group(6)) {
+        seconds=Math.round(Float.parseFloat("0." + matcher.group(6)) * 60);
+      }
+ else       if (null != matcher.group(7)) {
+        seconds=Integer.parseInt(matcher.group(7));
+      }
+    }
+    return (double)sign * ((double)degree + (double)minutes / 60 + (double)seconds / 3600);
+  }
+ else {
+    matcher=patternDec.matcher(text);
+    if (matcher.find()) {
+      if (LatLon.LAT == latlon) {
+        return Double.parseDouble(matcher.group(1).replaceAll(",","."));
+      }
+ else       if (null != matcher.group(3)) {
+        return Double.parseDouble(matcher.group(3).replaceAll(",","."));
+      }
+    }
+  }
+  throw new ParseException("Could not parse coordinates as " + latlon + ": \""+ text+ "\"");
+}
