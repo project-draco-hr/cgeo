@@ -1,6 +1,6 @@
 {
-  if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
-    showToast(res.getString(R.string.err_location_unknown));
+  if (!navigationPossible()) {
+    return;
   }
   Intent navigateIntent=new Intent(this,cgeonavigate.class);
   navigateIntent.putExtra("latitude",waypoint.latitude);
