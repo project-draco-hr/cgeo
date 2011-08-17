@@ -1,10 +1,24 @@
 {
-  if (latitude < 0)   bLat.setText("S");
- else   bLat.setText("N");
-  if (longitude < 0)   bLon.setText("W");
- else   bLon.setText("E");
-  Double lat=Math.abs(latitude);
-  Double lon=Math.abs(longitude);
+  Double lat=0.0;
+  if (latitude != null) {
+    if (latitude < 0) {
+      bLat.setText("S");
+    }
+ else {
+      bLat.setText("N");
+    }
+    lat=Math.abs(latitude);
+  }
+  Double lon=0.0;
+  if (longitude != null) {
+    if (longitude < 0) {
+      bLon.setText("W");
+    }
+ else {
+      bLon.setText("E");
+    }
+    lon=Math.abs(longitude);
+  }
   int latDeg=(int)Math.floor(lat);
   int latDegFrac=(int)Math.round((lat - latDeg) * 100000);
   int latMin=(int)Math.floor((lat - latDeg) * 60);
@@ -22,8 +36,12 @@ case Plain:
     findViewById(R.id.coordTable).setVisibility(View.GONE);
   eLat.setVisibility(View.VISIBLE);
 eLon.setVisibility(View.VISIBLE);
+if (latitude != null) {
 eLat.setText(cgBase.formatCoordinate(latitude,"lat",true));
+}
+if (longitude != null) {
 eLon.setText(cgBase.formatCoordinate(longitude,"lon",true));
+}
 break;
 case Deg:
 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -39,10 +57,14 @@ tLatSep1.setText(".");
 tLonSep1.setText(".");
 tLatSep2.setText("??");
 tLonSep2.setText("??");
+if (latitude != null) {
 eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
 eLatMin.setText(Integer.toString(latDegFrac) + addZeros(latDegFrac,5));
+}
+if (longitude != null) {
 eLonDeg.setText(addZeros(latDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac,5));
+}
 break;
 case Min:
 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -60,12 +82,16 @@ tLatSep2.setText(".");
 tLonSep2.setText(".");
 tLatSep3.setText("'");
 tLonSep3.setText("'");
+if (latitude != null) {
 eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
 eLatMin.setText(addZeros(latMin,2) + Integer.toString(latMin));
 eLatSec.setText(Integer.toString(latMinFrac) + addZeros(latMinFrac,3));
+}
+if (longitude != null) {
 eLonDeg.setText(addZeros(lonDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(addZeros(lonMin,2) + Integer.toString(lonMin));
 eLonSec.setText(Integer.toString(lonMinFrac) + addZeros(lonMinFrac,3));
+}
 break;
 case Sec:
 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -83,14 +109,18 @@ tLatSep2.setText("'");
 tLonSep2.setText("'");
 tLatSep3.setText(".");
 tLonSep3.setText(".");
+if (latitude != null) {
 eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
 eLatMin.setText(addZeros(latMin,2) + Integer.toString(latMin));
 eLatSec.setText(addZeros(latSec,2) + Integer.toString(latSec));
 eLatSub.setText(Integer.toString(latSecFrac) + addZeros(latSecFrac,3));
+}
+if (longitude != null) {
 eLonDeg.setText(addZeros(lonDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(addZeros(lonMin,2) + Integer.toString(lonMin));
 eLonSec.setText(addZeros(lonSec,2) + Integer.toString(lonSec));
 eLonSub.setText(Integer.toString(lonSecFrac) + addZeros(lonSecFrac,3));
+}
 break;
 }
 }
