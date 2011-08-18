@@ -3,38 +3,6 @@
     Log.e(cgSettings.tag,"cgeoBase.parseCache: No page given");
     return null;
   }
-  final Pattern patternGeocode=Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"[^>]*>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternCacheId=Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternCacheGuid=Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"),Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternType=Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+)\" (title=\"[^\"]*\" )?width=\"32\" height=\"32\"[^>]*>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternName=Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_CacheName\">([^<]+)<\\/span>[^<]*<\\/h2>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternSize=Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternDifficulty=Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternTerrain=Pattern.compile("<span id=\"ctl00_ContentBody_Localize6\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternOwner=Pattern.compile("<span class=\"minorCacheDetails\">[^\\w]*An?([^\\w]*Event)?[^\\w]*cache[^\\w]*by[^<]*<a href=\"[^\"]+\">([^<]+)</a>[^<]*</span>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternOwnerReal=Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=*([^\"]+)\">[^<]+</a>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternHidden=Pattern.compile("<span[^>]*>[^\\w]*Hidden[^:]*:[^\\d]*((\\d+)\\/(\\d+)\\/(\\d+))[^<]*</span>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternHiddenEvent=Pattern.compile("<span[^>]*>[^\\w]*Event[^\\w]*Date[^:]*:([^<]*)</span>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternFavourite=Pattern.compile("<a id=\"uxFavContainerLink\"[^>]*>[^<]*<div[^<]*<span class=\"favorite-value\">[^\\d]*([0-9]+)[^\\d^<]*</span>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternFound=Pattern.compile("<p>[^<]*<a id=\"ctl00_ContentBody_hlFoundItLog\"[^<]*<img src=\".*/images/stockholm/16x16/check\\.gif\"[^>]*>[^<]*</a>[^<]*</p>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternLatLon=Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternLocation=Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)",Pattern.CASE_INSENSITIVE);
-  final Pattern patternHint=Pattern.compile("<p>([^<]*<strong>)?[^\\w]*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]",Pattern.CASE_INSENSITIVE);
-  final Pattern patternPersonalNote=Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternDescShort=Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternDesc=Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>[^\\w]*Additional Hints</strong>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternCountLogs=Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternCountLog=Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternLogs=Pattern.compile("<table class=\"LogsTable[^\"]*\"[^>]*>[^<]*<tr>(.*)</tr>[^<]*</table>[^<]*<p",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternLog=Pattern.compile("<td[^>]*>[^<]*<strong>[^<]*<img src=\"[^\"]*/images/icons/([^\\.]+)\\.[a-z]{2,5}\"[^>]*>&nbsp;([a-zA-Z]+) (\\d+)(, (\\d+))? by <a href=[^>]+>([^<]+)</a>[<^]*</strong>([^\\(]*\\((\\d+) found\\))?(<br[^>]*>)+((?:(?!<small>).)*)(<br[^>]*>)+<small>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternLogImgs=Pattern.compile("a href=\"http://img.geocaching.com/cache/log/([^\"]+)\".+?<span>([^<]*)",Pattern.CASE_INSENSITIVE);
-  final Pattern patternAttributes=Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>[^\\w]*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p",Pattern.CASE_INSENSITIVE);
-  final Pattern patternAttributesInside=Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternSpoilers=Pattern.compile("<span id=\"ctl00_ContentBody_Images\">((<a href=\"[^\"]+\"[^>]*>[^<]*<img[^>]+>[^<]*<span>[^>]+</span>[^<]*</a>[^<]*<br[^>]*>([^<]*(<br[^>]*>)+)?)+)[^<]*</span>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternSpoilersInside=Pattern.compile("[^<]*<a href=\"([^\"]+)\"[^>]*>[^<]*<img[^>]+>[^<]*<span>([^>]+)</span>[^<]*</a>[^<]*<br[^>]*>(([^<]*)(<br[^<]*>)+)?",Pattern.CASE_INSENSITIVE);
-  final Pattern patternInventory=Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">[^\\w]*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?",Pattern.CASE_INSENSITIVE);
-  final Pattern patternInventoryInside=Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternOnWatchlist=Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"",Pattern.CASE_INSENSITIVE);
   final cgCacheWrap caches=new cgCacheWrap();
   final cgCache cache=new cgCache();
   if (page.indexOf("Cache is Unpublished") > -1) {
@@ -296,6 +264,7 @@
  catch (  Exception e) {
     Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache hint");
   }
+  checkFields(cache);
   try {
     final Matcher matcherPersonalNote=patternPersonalNote.matcher(page);
     if (matcherPersonalNote.find()) {
