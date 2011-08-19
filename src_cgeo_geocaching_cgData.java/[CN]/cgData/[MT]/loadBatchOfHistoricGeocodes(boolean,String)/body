@@ -1,8 +1,8 @@
 {
   init();
-  Cursor cursor=null;
   ArrayList<String> geocodes=new ArrayList<String>();
   StringBuilder specifySql=new StringBuilder();
+  specifySql.append("visiteddate > 0");
   if (detailedOnly) {
     specifySql.append(" and detailed = 1");
   }
@@ -12,7 +12,7 @@
     specifySql.append("\"");
   }
   try {
-    cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},"visiteddate > 0" + specifySql.toString(),null,null,null,"visiteddate",null);
+    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},specifySql.toString(),null,null,null,"visiteddate",null);
     if (cursor != null) {
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();

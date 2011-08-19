@@ -1,12 +1,12 @@
 {
-  init();
   if (geocode == null || geocode.length() == 0) {
     return;
   }
+  init();
   if (listId <= 0) {
     listId=1;
   }
   ContentValues values=new ContentValues();
   values.put("reason",listId);
-  databaseRW.update(dbTableCaches,values,"geocode = \"" + geocode + "\" and reason < 1",null);
+  databaseRW.update(dbTableCaches,values,"geocode = ? and reason < 1",new String[]{geocode});
 }

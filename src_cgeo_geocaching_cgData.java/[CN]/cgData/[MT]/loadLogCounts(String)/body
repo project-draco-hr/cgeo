@@ -1,11 +1,10 @@
 {
-  init();
   if (geocode == null || geocode.length() == 0) {
     return null;
   }
-  Cursor cursor=null;
+  init();
   HashMap<Integer,Integer> logCounts=new HashMap<Integer,Integer>();
-  cursor=databaseRO.query(dbTableLogCount,new String[]{"_id","type","count"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
+  Cursor cursor=databaseRO.query(dbTableLogCount,new String[]{"_id","type","count"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {

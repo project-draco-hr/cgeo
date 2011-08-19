@@ -14,7 +14,7 @@
   values.put("date",date.getTime());
   try {
     if (hasLogOffline(geocode)) {
-      final int rows=databaseRW.update(dbTableLogsOffline,values,"geocode = \"" + geocode + "\"",null);
+      final int rows=databaseRW.update(dbTableLogsOffline,values,"geocode = ?",new String[]{geocode});
       if (rows > 0) {
         status=true;
       }

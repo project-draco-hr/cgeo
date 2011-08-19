@@ -1,11 +1,10 @@
 {
-  init();
   if (geocode == null || geocode.length() == 0) {
     return null;
   }
-  Cursor cursor=null;
+  init();
   ArrayList<String> attributes=new ArrayList<String>();
-  cursor=databaseRO.query(dbTableAttributes,new String[]{"_id","attribute"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
+  Cursor cursor=databaseRO.query(dbTableAttributes,new String[]{"_id","attribute"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {

@@ -1,11 +1,10 @@
 {
-  init();
   if (geocode == null || geocode.length() == 0) {
     return null;
   }
-  Cursor cursor=null;
+  init();
   ArrayList<cgImage> spoilers=new ArrayList<cgImage>();
-  cursor=databaseRO.query(dbTableSpoilers,new String[]{"_id","url","title","description"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
+  Cursor cursor=databaseRO.query(dbTableSpoilers,new String[]{"_id","url","title","description"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {

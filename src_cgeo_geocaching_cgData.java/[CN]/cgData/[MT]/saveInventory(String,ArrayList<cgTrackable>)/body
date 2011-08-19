@@ -6,7 +6,7 @@
   databaseRW.beginTransaction();
   try {
     if (geocode != null) {
-      databaseRW.delete(dbTableTrackables,"geocode = \"" + geocode + "\"",null);
+      databaseRW.delete(dbTableTrackables,"geocode = ?",new String[]{geocode});
     }
     if (!trackables.isEmpty()) {
       ContentValues values=new ContentValues();

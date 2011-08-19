@@ -1,9 +1,9 @@
 {
-  init();
   boolean status=false;
   if (id < 10) {
     return status;
   }
+  init();
   databaseRW.beginTransaction();
   try {
     int cnt=databaseRW.delete(dbTableLists,"_id = " + (id - 10),null);
