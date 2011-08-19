@@ -107,7 +107,7 @@
   }
   init();
   try {
-    int rows=databaseRW.update(dbTableCaches,values,"geocode = \"" + cache.geocode + "\"",null);
+    int rows=databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{cache.geocode});
     if (rows > 0) {
       values=null;
       return true;

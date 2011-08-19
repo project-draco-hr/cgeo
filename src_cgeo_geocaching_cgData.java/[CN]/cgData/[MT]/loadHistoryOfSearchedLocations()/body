@@ -1,9 +1,7 @@
 {
   init();
-  Cursor cursor=null;
-  final List<cgDestination> destinations;
-  cursor=databaseRO.query(dbTableSearchDestionationHistory,new String[]{"_id","date","latitude","longitude"},null,null,null,null,"date desc","100");
-  destinations=new LinkedList<cgDestination>();
+  Cursor cursor=databaseRO.query(dbTableSearchDestionationHistory,new String[]{"_id","date","latitude","longitude"},null,null,null,null,"date desc","100");
+  final List<cgDestination> destinations=new LinkedList<cgDestination>();
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {

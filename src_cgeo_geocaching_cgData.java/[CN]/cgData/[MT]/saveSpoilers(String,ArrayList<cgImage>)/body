@@ -5,7 +5,7 @@
   }
   databaseRW.beginTransaction();
   try {
-    databaseRW.delete(dbTableSpoilers,"geocode = \"" + geocode + "\"",null);
+    databaseRW.delete(dbTableSpoilers,"geocode = ?",new String[]{geocode});
     if (!spoilers.isEmpty()) {
       ContentValues values=new ContentValues();
       for (      cgImage oneSpoiler : spoilers) {

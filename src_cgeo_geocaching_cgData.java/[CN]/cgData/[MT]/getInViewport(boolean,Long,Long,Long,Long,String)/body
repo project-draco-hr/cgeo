@@ -3,7 +3,6 @@
     return null;
   }
   init();
-  Cursor cursor=null;
   ArrayList<String> geocodes=new ArrayList<String>();
   double latMin=(centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
   double latMax=(centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -38,7 +37,7 @@
     where.append(" and reason >= 1");
   }
   try {
-    cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},where.toString(),null,null,null,null,"500");
+    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},where.toString(),null,null,null,null,"500");
     if (cursor != null) {
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();

@@ -7,7 +7,7 @@
   databaseRW.beginTransaction();
   try {
     if (drop) {
-      databaseRW.delete(dbTableWaypoints,"geocode = \"" + geocode + "\" and type <> \"own\"",null);
+      databaseRW.delete(dbTableWaypoints,"geocode = ? and type <> ?",new String[]{geocode,"own"});
     }
     if (!waypoints.isEmpty()) {
       ContentValues values=new ContentValues();

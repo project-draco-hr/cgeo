@@ -6,7 +6,7 @@
   databaseRW.beginTransaction();
   try {
     if (drop) {
-      databaseRW.delete(dbTableLogCount,"geocode = \"" + geocode + "\"",null);
+      databaseRW.delete(dbTableLogCount,"geocode = ?",new String[]{geocode});
     }
     ContentValues values=new ContentValues();
     Set<Entry<Integer,Integer>> logCountsItems=logCounts.entrySet();

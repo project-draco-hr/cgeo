@@ -5,7 +5,7 @@
   }
   databaseRW.beginTransaction();
   try {
-    databaseRW.delete(dbTableAttributes,"geocode = \"" + geocode + "\"",null);
+    databaseRW.delete(dbTableAttributes,"geocode = ?",new String[]{geocode});
     if (!attributes.isEmpty()) {
       ContentValues values=new ContentValues();
       for (      String oneAttribute : attributes) {
