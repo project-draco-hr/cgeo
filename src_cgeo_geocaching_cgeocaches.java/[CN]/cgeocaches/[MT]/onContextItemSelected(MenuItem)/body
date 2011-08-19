@@ -30,16 +30,7 @@
     return true;
   }
  else   if (id == MENU_LOG_VISIT) {
-    if (cache.cacheid == null || cache.cacheid.length() == 0) {
-      showToast(res.getString(R.string.err_cannot_log_visit));
-      return true;
-    }
-    Intent logVisitIntent=new Intent(this,cgeovisit.class);
-    logVisitIntent.putExtra("id",cache.cacheid);
-    logVisitIntent.putExtra("geocode",cache.geocode.toUpperCase());
-    logVisitIntent.putExtra("type",cache.type.toLowerCase());
-    startActivity(logVisitIntent);
-    return true;
+    return cache.logVisit(this);
   }
  else   if (id == MENU_CACHE_DETAILS) {
     Intent cachesIntent=new Intent(this,cgeodetail.class);

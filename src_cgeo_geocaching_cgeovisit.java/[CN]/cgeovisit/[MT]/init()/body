@@ -105,7 +105,13 @@
   if (save == null) {
     save=(Button)findViewById(R.id.save);
   }
-  save.setOnClickListener(new saveListener());
+  save.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      String log=((EditText)findViewById(R.id.log)).getText().toString();
+      cache.logOffline(cgeovisit.this,log,date);
+    }
+  }
+);
   if (clear == null) {
     clear=(Button)findViewById(R.id.clear);
   }

@@ -1,0 +1,12 @@
+{
+  cgeoapplication app=(cgeoapplication)((Activity)fromActivity).getApplication();
+  final boolean status=app.saveLogOffline(geocode,date.getTime(),cgBase.LOG_FOUND_IT,log);
+  Resources res=((Activity)fromActivity).getResources();
+  if (status) {
+    fromActivity.showToast(res.getString(R.string.info_log_saved));
+    app.saveVisitDate(geocode);
+  }
+ else {
+    fromActivity.showToast(res.getString(R.string.err_log_post_failed));
+  }
+}

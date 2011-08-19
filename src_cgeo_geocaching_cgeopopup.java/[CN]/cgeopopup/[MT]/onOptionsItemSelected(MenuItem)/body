@@ -9,15 +9,7 @@
     return true;
   }
  else   if (menuItem == 6) {
-    if (cache.cacheid == null || cache.cacheid.length() == 0) {
-      showToast(res.getString(R.string.err_cannot_log_visit));
-      return false;
-    }
-    Intent logVisitIntent=new Intent(this,cgeovisit.class);
-    logVisitIntent.putExtra("id",cache.cacheid);
-    logVisitIntent.putExtra("geocode",cache.geocode.toUpperCase());
-    logVisitIntent.putExtra("type",cache.type.toLowerCase());
-    startActivity(logVisitIntent);
+    cache.logVisit(this);
     finish();
     return true;
   }
