@@ -11,12 +11,8 @@
       menu.findItem(2).setVisible(false);
       menu.findItem(5).setVisible(false);
     }
-    if (fromDetail == false && settings.isLogin()) {
-      menu.findItem(6).setEnabled(true);
-    }
- else {
-      menu.findItem(6).setEnabled(false);
-    }
+    boolean visitPossible=fromDetail == false && settings.isLogin();
+    menu.findItem(MENU_LOG_VISIT).setEnabled(visitPossible);
   }
  catch (  Exception e) {
   }

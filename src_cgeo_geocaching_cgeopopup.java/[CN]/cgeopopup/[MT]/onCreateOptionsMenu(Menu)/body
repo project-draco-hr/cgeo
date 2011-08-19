@@ -2,8 +2,7 @@
   menu.add(0,2,0,res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass);
   SubMenu subMenu=menu.addSubMenu(1,0,0,res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
   NavigationAppFactory.addMenuItems(subMenu,this,res);
-  String label=settings.getLogOffline() ? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
-  menu.add(0,6,0,label).setIcon(android.R.drawable.ic_menu_agenda);
+  addVisitMenu(menu,cache);
   menu.add(0,5,0,res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate);
   menu.add(0,7,0,res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details);
   return true;

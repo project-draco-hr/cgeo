@@ -4,7 +4,7 @@
     navigateTo();
     return true;
   }
- else   if (menuItem == 3) {
+ else   if (menuItem == MENU_LOG_VISIT) {
     logVisit();
     return true;
   }
@@ -31,5 +31,10 @@
   if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,searchId,null,null)) {
     return true;
   }
-  return GeneralAppsFactory.onMenuItemSelected(item,this,cache);
+  if (GeneralAppsFactory.onMenuItemSelected(item,this,cache)) {
+    return true;
+  }
+  int logType=menuItem - MENU_LOG_VISIT_OFFLINE;
+  cache.logOffline(this,logType);
+  return true;
 }
