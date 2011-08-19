@@ -415,41 +415,32 @@
     Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache log count");
   }
   try {
-    final Matcher matcherLogs=patternLogs.matcher(page);
-    while (matcherLogs.find()) {
-      if (matcherLogs.groupCount() > 0) {
-        final String[] logs=matcherLogs.group(1).split("</tr><tr>");
-        final int logsCnt=logs.length;
-        for (int k=0; k < logsCnt; k++) {
-          final Matcher matcherLog=patternLog.matcher(logs[k]);
-          if (matcherLog.find()) {
-            final cgLog logDone=new cgLog();
-            String logTmp=matcherLog.group(5);
-            if (logTypes.containsKey(matcherLog.group(2).toLowerCase())) {
-              logDone.type=logTypes.get(matcherLog.group(2).toLowerCase());
-            }
- else {
-              logDone.type=logTypes.get("icon_note");
-            }
-            logDone.author=Html.fromHtml(matcherLog.group(1)).toString();
-            final Matcher matcherImg=patternLogImgs.matcher(logs[k]);
-            while (matcherImg.find()) {
-              final cgImage logImage=new cgImage();
-              logImage.url="http://img.geocaching.com/cache/log/" + matcherImg.group(1);
-              logImage.title=matcherImg.group(2);
-              if (logDone.logImages == null) {
-                logDone.logImages=new ArrayList<cgImage>();
-              }
-              logDone.logImages.add(logImage);
-            }
-            logDone.log=logTmp;
-            if (cache.logs == null) {
-              cache.logs=new ArrayList<cgLog>();
-            }
-            cache.logs.add(logDone);
-          }
-        }
+    final Matcher matcherLog=patternLog.matcher(page);
+    while (matcherLog.find()) {
+      final cgLog logDone=new cgLog();
+      if (logTypes.containsKey(matcherLog.group(3).toLowerCase())) {
+        logDone.type=logTypes.get(matcherLog.group(3).toLowerCase());
       }
+ else {
+        logDone.type=logTypes.get("icon_note");
+      }
+      logDone.author=Html.fromHtml(matcherLog.group(1)).toString();
+      logDone.found=Integer.parseInt(matcherLog.group(2));
+      logDone.log=matcherLog.group(6);
+      final Matcher matcherImg=patternLogImgs.matcher(matcherLog.group(7));
+      while (matcherImg.find()) {
+        final cgImage logImage=new cgImage();
+        logImage.url=matcherImg.group(1);
+        logImage.title=matcherImg.group(2);
+        if (logDone.logImages == null) {
+          logDone.logImages=new ArrayList<cgImage>();
+        }
+        logDone.logImages.add(logImage);
+      }
+      if (null == cache.logs) {
+        cache.logs=new ArrayList<cgLog>();
+      }
+      cache.logs.add(logDone);
     }
   }
  catch (  Exception e) {
