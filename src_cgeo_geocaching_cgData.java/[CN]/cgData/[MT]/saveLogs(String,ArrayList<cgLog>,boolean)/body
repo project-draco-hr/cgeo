@@ -6,7 +6,7 @@
   databaseRW.beginTransaction();
   try {
     if (drop) {
-      databaseRW.delete(dbTableLogs,"geocode = \"" + geocode + "\"",null);
+      databaseRW.delete(dbTableLogs,"geocode = ?",new String[]{geocode});
     }
     if (!logs.isEmpty()) {
       ContentValues values=new ContentValues();

@@ -6,7 +6,7 @@
   try {
     ContentValues values=new ContentValues();
     values.put("reason",listId);
-    databaseRW.update(dbTableCaches,values,"geocode = \"" + geocode + "\"",null);
+    databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{geocode});
     databaseRW.setTransactionSuccessful();
   }
   finally {

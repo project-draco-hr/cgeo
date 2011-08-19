@@ -1,10 +1,9 @@
 {
   init();
-  Cursor cursor=null;
   ArrayList<cgList> lists=new ArrayList<cgList>();
   lists.add(new cgList(true,1,res.getString(R.string.list_inbox)));
   try {
-    cursor=databaseRO.query(dbTableLists,new String[]{"_id","title","updated","latitude","longitude"},null,null,null,null,"title COLLATE NOCASE ASC",null);
+    Cursor cursor=databaseRO.query(dbTableLists,new String[]{"_id","title","updated","latitude","longitude"},null,null,null,null,"title COLLATE NOCASE ASC",null);
     if (cursor != null) {
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();

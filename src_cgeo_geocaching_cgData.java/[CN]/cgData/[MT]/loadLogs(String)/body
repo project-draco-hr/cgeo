@@ -1,11 +1,10 @@
 {
-  init();
   if (geocode == null || geocode.length() == 0) {
     return null;
   }
-  Cursor cursor=null;
+  init();
   ArrayList<cgLog> logs=new ArrayList<cgLog>();
-  cursor=databaseRO.query(dbTableLogs,new String[]{"_id","type","author","log","date","found"},"geocode = \"" + geocode + "\"",null,null,null,"date desc, _id asc","100");
+  Cursor cursor=databaseRO.query(dbTableLogs,new String[]{"_id","type","author","log","date","found"},"geocode = \"" + geocode + "\"",null,null,null,"date desc, _id asc","100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {
