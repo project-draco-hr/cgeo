@@ -81,11 +81,13 @@
       }
     }
     item=menu.findItem(MENU_EXPORT_NOTES);
-    item.setEnabled(false);
-    for (    cgCache cache : cacheList) {
-      if (cache.logOffline) {
-        item.setEnabled(true);
-        break;
+    if (null != item) {
+      item.setEnabled(false);
+      for (      cgCache cache : cacheList) {
+        if (cache.logOffline) {
+          item.setEnabled(true);
+          break;
+        }
       }
     }
   }
