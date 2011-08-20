@@ -35,8 +35,13 @@
       gcIcons.put("gchq",R.drawable.type_hq);
       gcIcons.put("mystery",R.drawable.type_mystery);
     }
-    geocode=geocode.toUpperCase();
-    setTitle(geocode);
+    if (null == geocode && cache.geocode.length() > 0) {
+      geocode=cache.geocode;
+    }
+    if (null == guid && cache.guid.length() > 0) {
+      guid=cache.guid;
+    }
+    setTitle(cache.geocode.toUpperCase());
     inflater=getLayoutInflater();
     ScrollView scroll=(ScrollView)findViewById(R.id.details_list_box);
     scroll.setVisibility(View.VISIBLE);
