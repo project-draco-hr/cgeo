@@ -161,22 +161,10 @@
             cache.cacheid=attrs.getValue("id");
           }
           if (attrs.getIndex("archived") > -1) {
-            final String at=attrs.getValue("archived").toLowerCase();
-            if (at.equals("true")) {
-              cache.archived=true;
-            }
- else {
-              cache.archived=false;
-            }
+            cache.archived=attrs.getValue("archived").equalsIgnoreCase("true");
           }
           if (attrs.getIndex("available") > -1) {
-            final String at=attrs.getValue("available").toLowerCase();
-            if (at.equals("true")) {
-              cache.disabled=false;
-            }
- else {
-              cache.disabled=true;
-            }
+            cache.disabled=!attrs.getValue("available").equalsIgnoreCase("true");
           }
         }
  catch (        Exception e) {
@@ -188,28 +176,28 @@
     gcCache.getChild(nsGC,"name").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
         final String content=Html.fromHtml(body).toString().trim();
-        cache.name=content;
+        cache.name=validate(content);
       }
     }
 );
     gcCache.getChild(nsGC,"owner").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
         final String content=Html.fromHtml(body).toString().trim();
-        cache.owner=content;
+        cache.owner=validate(content);
       }
     }
 );
     gcCache.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
-        final String content=cgBase.cacheTypes.get(body.toLowerCase());
-        cache.type=content;
+        String parsedString=validate(body.toLowerCase());
+        setType(parsedString);
       }
     }
 );
     gcCache.getChild(nsGC,"container").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
         final String content=body.toLowerCase();
-        cache.size=content;
+        cache.size=validate(content);
       }
     }
 );
@@ -238,7 +226,7 @@
     gcCache.getChild(nsGC,"country").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
         if (cache.location == null || cache.location.length() == 0) {
-          cache.location=body.trim();
+          cache.location=validate(body.trim());
         }
  else {
           cache.location=cache.location + ", " + body.trim();
@@ -249,7 +237,7 @@
     gcCache.getChild(nsGC,"state").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
         if (cache.location == null || cache.location.length() == 0) {
-          cache.location=body.trim();
+          cache.location=validate(body.trim());
         }
  else {
           cache.location=body.trim() + ", " + cache.location;
@@ -259,7 +247,7 @@
 );
     gcCache.getChild(nsGC,"encoded_hints").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
-        cache.hint=body.trim();
+        cache.hint=validate(body.trim());
       }
     }
 );
@@ -267,8 +255,8 @@
       public void start(      Attributes attrs){
         try {
           if (attrs.getIndex("html") > -1) {
-            final String at=attrs.getValue("html").toLowerCase();
-            if (at.equals("false")) {
+            final String at=attrs.getValue("html");
+            if (at.equalsIgnoreCase("false")) {
               htmlShort=false;
             }
           }
@@ -280,7 +268,7 @@
 );
     gcCache.getChild(nsGC,"short_description").setEndTextElementListener(new EndTextElementListener(){
       public void end(      String body){
-        if (htmlShort == false) {
+        if (!htmlShort) {
           cache.shortdesc=Html.fromHtml(body).toString();
         }
  else {
@@ -293,8 +281,7 @@
       public void start(      Attributes attrs){
         try {
           if (attrs.getIndex("html") > -1) {
-            final String at=attrs.getValue("html").toLowerCase();
-            if (at.equals("false")) {
+            if (attrs.getValue("html").equalsIgnoreCase("false")) {
               htmlLong=false;
             }
           }

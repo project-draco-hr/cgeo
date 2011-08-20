@@ -1,0 +1,11 @@
+{
+  final String knownType=cgBase.cacheTypes.get(parsedString);
+  if (knownType != null) {
+    cache.type=knownType;
+  }
+ else {
+    if (cache.type == null || cache.type.length() == 0) {
+      cache.type="mystery";
+    }
+  }
+}
