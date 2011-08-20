@@ -20,7 +20,7 @@
         String findCount="";
         final HashMap<String,String> params=new HashMap<String,String>();
         final String page=base.request(false,"www.geocaching.com","/my/","GET",params,false,false,false).getData();
-        int current=cgBase.parseFindCount(page);
+        int current=parseFindCount(page);
         if (current >= 0) {
           findCount=String.valueOf(current + 1);
         }
