@@ -16,51 +16,7 @@
   if (secure) {
     scheme="https://";
   }
-  String cookiesDone=null;
-  if (cookies == null || cookies.isEmpty()) {
-    if (cookies == null) {
-      cookies=new HashMap<String,String>();
-    }
-    final Map<String,?> prefsAll=prefs.getAll();
-    final Set<? extends Map.Entry<String,?>> entrySet=prefsAll.entrySet();
-    for (    Map.Entry<String,?> entry : entrySet) {
-      String key=entry.getKey();
-      if (key.matches("cookie_.+")) {
-        final String cookieKey=key.substring(7);
-        final String cookieValue=(String)entry.getValue();
-        cookies.put(cookieKey,cookieValue);
-      }
-    }
-  }
-  if (cookies != null) {
-    final Set<Map.Entry<String,String>> entrySet=cookies.entrySet();
-    final ArrayList<String> cookiesEncoded=new ArrayList<String>();
-    for (    Map.Entry<String,String> entry : entrySet) {
-      cookiesEncoded.add(entry.getKey() + "=" + entry.getValue());
-    }
-    if (cookiesEncoded.size() > 0) {
-      cookiesDone=implode("; ",cookiesEncoded.toArray());
-    }
-  }
-  if (cookiesDone == null) {
-    Map<String,?> prefsValues=prefs.getAll();
-    if (prefsValues != null && prefsValues.size() > 0 && prefsValues.keySet().size() > 0) {
-      final Set<? extends Map.Entry<String,?>> entrySet=prefsValues.entrySet();
-      final ArrayList<String> cookiesEncoded=new ArrayList<String>();
-      for (      Map.Entry<String,?> entry : entrySet) {
-        String key=entry.getKey();
-        if (key.length() > 7 && key.substring(0,7).equals("cookie_")) {
-          cookiesEncoded.add(key + "=" + entry.getValue());
-        }
-      }
-      if (cookiesEncoded.size() > 0) {
-        cookiesDone=implode("; ",cookiesEncoded.toArray());
-      }
-    }
-  }
-  if (cookiesDone == null) {
-    cookiesDone="";
-  }
+  String cookiesDone=getCookiesAsString();
   URLConnection uc=null;
   HttpURLConnection connection=null;
   Integer timeout=30000;
@@ -143,17 +99,7 @@
         }
       }
       prefsEditor.commit();
-      final String encoding=connection.getContentEncoding();
-      InputStream ins;
-      if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-        ins=new GZIPInputStream(connection.getInputStream());
-      }
- else       if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-        ins=new InflaterInputStream(connection.getInputStream(),new Inflater(true));
-      }
- else {
-        ins=connection.getInputStream();
-      }
+      InputStream ins=getInputstreamFromConnection(connection);
       final InputStreamReader inr=new InputStreamReader(ins);
       final BufferedReader br=new BufferedReader(inr,16 * 1024);
       readIntoBuffer(br,buffer);

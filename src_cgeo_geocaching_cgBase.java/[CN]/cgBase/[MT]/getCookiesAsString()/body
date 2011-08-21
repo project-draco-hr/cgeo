@@ -1,0 +1,48 @@
+{
+  String cookiesDone=null;
+  if (cookies == null || cookies.isEmpty()) {
+    if (cookies == null) {
+      cookies=new HashMap<String,String>();
+    }
+    final Map<String,?> prefsAll=prefs.getAll();
+    final Set<? extends Map.Entry<String,?>> entrySet=prefsAll.entrySet();
+    for (    Map.Entry<String,?> entry : entrySet) {
+      String key=entry.getKey();
+      if (key.matches("cookie_.+")) {
+        final String cookieKey=key.substring(7);
+        final String cookieValue=(String)entry.getValue();
+        cookies.put(cookieKey,cookieValue);
+      }
+    }
+  }
+  if (cookies != null) {
+    final Set<Map.Entry<String,String>> entrySet=cookies.entrySet();
+    final ArrayList<String> cookiesEncoded=new ArrayList<String>();
+    for (    Map.Entry<String,String> entry : entrySet) {
+      cookiesEncoded.add(entry.getKey() + "=" + entry.getValue());
+    }
+    if (cookiesEncoded.size() > 0) {
+      cookiesDone=implode("; ",cookiesEncoded.toArray());
+    }
+  }
+  if (cookiesDone == null) {
+    Map<String,?> prefsValues=prefs.getAll();
+    if (prefsValues != null && prefsValues.size() > 0) {
+      final Set<? extends Map.Entry<String,?>> entrySet=prefsValues.entrySet();
+      final ArrayList<String> cookiesEncoded=new ArrayList<String>();
+      for (      Map.Entry<String,?> entry : entrySet) {
+        String key=entry.getKey();
+        if (key.length() > 7 && key.substring(0,7).equals("cookie_")) {
+          cookiesEncoded.add(key + "=" + entry.getValue());
+        }
+      }
+      if (cookiesEncoded.size() > 0) {
+        cookiesDone=implode("; ",cookiesEncoded.toArray());
+      }
+    }
+  }
+  if (cookiesDone == null) {
+    cookiesDone="";
+  }
+  return cookiesDone;
+}

@@ -231,7 +231,7 @@
     while (matcherTotalCnt.find()) {
       if (matcherTotalCnt.groupCount() > 0) {
         if (matcherTotalCnt.group(1) != null) {
-          caches.totalCnt=new Integer(matcherTotalCnt.group(1));
+          caches.totalCnt=Integer.valueOf(matcherTotalCnt.group(1));
         }
       }
     }
