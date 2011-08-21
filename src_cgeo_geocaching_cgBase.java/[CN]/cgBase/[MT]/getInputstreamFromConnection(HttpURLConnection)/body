@@ -1,0 +1,14 @@
+{
+  final String encoding=connection.getContentEncoding();
+  InputStream ins;
+  if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
+    ins=new GZIPInputStream(connection.getInputStream());
+  }
+ else   if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
+    ins=new InflaterInputStream(connection.getInputStream(),new Inflater(true));
+  }
+ else {
+    ins=connection.getInputStream();
+  }
+  return ins;
+}

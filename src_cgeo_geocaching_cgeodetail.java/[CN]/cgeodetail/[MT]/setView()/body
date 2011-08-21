@@ -202,9 +202,7 @@
       final LinearLayout attribBox=(LinearLayout)findViewById(R.id.attributes_box);
       final TextView attribView=(TextView)findViewById(R.id.attributes);
       StringBuilder buffer=new StringBuilder();
-      String attribute;
-      for (int i=0; i < cache.attributes.size(); i++) {
-        attribute=cache.attributes.get(i);
+      for (      String attribute : cache.attributes) {
         int id=res.getIdentifier("attribute_" + attribute,"string",base.context.getPackageName());
         if (id > 0) {
           String translated=res.getString(id);
