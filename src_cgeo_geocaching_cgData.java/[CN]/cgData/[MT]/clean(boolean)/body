@@ -35,10 +35,12 @@
       geocodes.clear();
     }
     databaseRW.execSQL("delete from " + dbTableCaches + " where geocode = \"\"");
-    final SQLiteStatement countSql=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
-    final int count=(int)countSql.simpleQueryForLong();
-    countSql.close();
-    Log.d(cgSettings.tag,"Database clean: " + count + " cached geocaches remaining");
+    if (Log.isLoggable(cgSettings.tag,Log.DEBUG)) {
+      final SQLiteStatement countSql=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
+      final int count=(int)countSql.simpleQueryForLong();
+      countSql.close();
+      Log.d(cgSettings.tag,"Database clean: " + count + " cached geocaches remaining");
+    }
   }
  catch (  Exception e) {
     Log.w(cgSettings.tag,"cgData.clean: " + e.toString());
