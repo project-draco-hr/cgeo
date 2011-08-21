@@ -1,0 +1,28 @@
+{
+  cgSearch search=new cgSearch();
+  long searchId=0l;
+  try {
+    HashMap<String,cgCoord> coords=parseCoordinates(readFile(file).toString());
+    final cgCacheWrap caches=new cgCacheWrap();
+    for (    Entry<String,cgCoord> entry : coords.entrySet()) {
+      cgCoord coord=entry.getValue();
+      if (coord.geocode == null || coord.geocode.length() == 0 || coord.name == null || coord.name.length() == 0) {
+        continue;
+      }
+      cgCache cache=new cgCache();
+      copyCoordToCache(coord,cache);
+      caches.cacheList.add(cache);
+      fixCache(cache);
+      cache.reason=listId;
+      cache.detailed=false;
+      app.addCacheToSearch(search,cache);
+    }
+    caches.totalCnt=caches.cacheList.size();
+    showFinishedMessage(handler,search);
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgBase.parseGPX: " + e.toString());
+  }
+  Log.i(cgSettings.tag,"Caches found in .gpx file: " + app.getCount(searchId));
+  return search.getCurrentId();
+}

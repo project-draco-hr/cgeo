@@ -1,5 +1,12 @@
 {
-  final long searchId=cgBase.parseGPX(app,file,listId,changeParseDialogHandler);
+  final long searchId;
+  String name=file.getName().toLowerCase();
+  if (name.endsWith("gpx")) {
+    searchId=GPXParser.parseGPX(app,file,listId,changeParseDialogHandler);
+  }
+ else {
+    searchId=LocParser.parseLoc(app,file,listId,changeParseDialogHandler);
+  }
   imported=app.getCount(searchId);
   loadCachesHandler.sendMessage(new Message());
 }

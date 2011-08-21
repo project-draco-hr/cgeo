@@ -1,0 +1,14 @@
+{
+  StringBuilder buffer=new StringBuilder();
+  BufferedReader input=new BufferedReader(new FileReader(file));
+  try {
+    String line=null;
+    while ((line=input.readLine()) != null) {
+      buffer.append(line);
+    }
+  }
+  finally {
+    input.close();
+  }
+  return buffer;
+}

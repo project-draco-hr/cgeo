@@ -1,0 +1,39 @@
+{
+  if (directory == null || !directory.isDirectory() || !directory.canRead()) {
+    return;
+  }
+  final File[] files=directory.listFiles();
+  if (files != null && files.length > 0) {
+    for (    File file : files) {
+      if (endSearching) {
+        return;
+      }
+      if (!file.canRead()) {
+        continue;
+      }
+      String name=file.getName();
+      if (file.isFile()) {
+        for (        String ext : extensions) {
+          int extLength=ext.length();
+          if (name.length() > extLength && name.substring(name.length() - extLength,name.length()).equalsIgnoreCase(ext)) {
+            result.add(file);
+            break;
+          }
+        }
+      }
+ else       if (file.isDirectory()) {
+        if (name.charAt(0) == '.') {
+          continue;
+        }
+        if (name.length() > 16) {
+          name=name.substring(0,14) + "...";
+        }
+        final Message msg=new Message();
+        msg.obj=name;
+        changeWaitDialogHandler.sendMessage(msg);
+        listDir(result,file);
+      }
+    }
+  }
+  return;
+}
