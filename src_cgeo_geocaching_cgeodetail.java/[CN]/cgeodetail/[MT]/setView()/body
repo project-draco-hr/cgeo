@@ -35,8 +35,13 @@
       gcIcons.put("gchq",R.drawable.type_hq);
       gcIcons.put("mystery",R.drawable.type_mystery);
     }
-    geocode=geocode.toUpperCase();
-    setTitle(geocode);
+    if (null == geocode && cache.geocode.length() > 0) {
+      geocode=cache.geocode;
+    }
+    if (null == guid && cache.guid.length() > 0) {
+      guid=cache.guid;
+    }
+    setTitle(cache.geocode.toUpperCase());
     inflater=getLayoutInflater();
     ScrollView scroll=(ScrollView)findViewById(R.id.details_list_box);
     scroll.setVisibility(View.VISIBLE);
@@ -202,9 +207,7 @@
       final LinearLayout attribBox=(LinearLayout)findViewById(R.id.attributes_box);
       final TextView attribView=(TextView)findViewById(R.id.attributes);
       StringBuilder buffer=new StringBuilder();
-      String attribute;
-      for (int i=0; i < cache.attributes.size(); i++) {
-        attribute=cache.attributes.get(i);
+      for (      String attribute : cache.attributes) {
         int id=res.getIdentifier("attribute_" + attribute,"string",base.context.getPackageName());
         if (id > 0) {
           String translated=res.getString(id);

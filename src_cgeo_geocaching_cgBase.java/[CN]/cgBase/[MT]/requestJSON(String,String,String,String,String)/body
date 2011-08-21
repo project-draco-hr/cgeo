@@ -65,17 +65,7 @@
  else {
           connection.setDoOutput(false);
         }
-        final String encoding=connection.getContentEncoding();
-        InputStream ins;
-        if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-          ins=new GZIPInputStream(connection.getInputStream());
-        }
- else         if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-          ins=new InflaterInputStream(connection.getInputStream(),new Inflater(true));
-        }
- else {
-          ins=connection.getInputStream();
-        }
+        InputStream ins=getInputstreamFromConnection(connection);
         final InputStreamReader inr=new InputStreamReader(ins);
         final BufferedReader br=new BufferedReader(inr,1024);
         readIntoBuffer(br,buffer);
