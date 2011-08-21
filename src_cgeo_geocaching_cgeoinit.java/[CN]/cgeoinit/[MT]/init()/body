@@ -101,6 +101,9 @@
     captchaButton.setChecked(true);
   }
   captchaButton.setOnClickListener(new cgeoChangeCaptcha());
+  CheckBox dirImgButton=(CheckBox)findViewById(R.id.loaddirectionimg);
+  dirImgButton.setChecked(prefs.getBoolean("loaddirectionimg",true));
+  dirImgButton.setOnClickListener(new cgeoChangeDirImg());
   CheckBox useEnglishButton=(CheckBox)findViewById(R.id.useenglish);
   if (prefs.getBoolean("useenglish",false) == false) {
     useEnglishButton.setChecked(false);
