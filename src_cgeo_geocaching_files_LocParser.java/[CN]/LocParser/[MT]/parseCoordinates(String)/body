@@ -68,8 +68,8 @@
         pointCoord.size="unknown";
       }
     }
-    if (pointCoord.name != null && pointCoord.name.length() > 0) {
-      coords.put(pointCoord.name,pointCoord);
+    if (pointCoord.geocode != null && pointCoord.geocode.length() > 0) {
+      coords.put(pointCoord.geocode,pointCoord);
     }
   }
   Log.i(cgSettings.tag,"Coordinates found in .loc file: " + coords.size());
