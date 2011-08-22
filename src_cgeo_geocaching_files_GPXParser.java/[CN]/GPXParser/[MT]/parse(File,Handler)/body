@@ -24,37 +24,9 @@
   waypoint.setEndElementListener(new EndElementListener(){
     public void end(){
       if (cache.geocode == null || cache.geocode.length() == 0) {
-        String geocode=null;
-        Matcher matcherGeocode=null;
-        if (name != null && geocode == null) {
-          matcherGeocode=patternGeocode.matcher(name);
-          while (matcherGeocode.find()) {
-            if (matcherGeocode.groupCount() > 0) {
-              geocode=matcherGeocode.group(1);
-            }
-          }
-        }
-        if (desc != null && geocode == null) {
-          matcherGeocode=patternGeocode.matcher(desc);
-          while (matcherGeocode.find()) {
-            if (matcherGeocode.groupCount() > 0) {
-              geocode=matcherGeocode.group(1);
-            }
-          }
-        }
-        if (cmt != null && geocode == null) {
-          matcherGeocode=patternGeocode.matcher(cmt);
-          while (matcherGeocode.find()) {
-            if (matcherGeocode.groupCount() > 0) {
-              geocode=matcherGeocode.group(1);
-            }
-          }
-        }
-        if (geocode != null && geocode.length() > 0) {
-          cache.geocode=geocode;
-        }
-        geocode=null;
-        matcherGeocode=null;
+        findGeoCode(name);
+        findGeoCode(desc);
+        findGeoCode(cmt);
       }
       if (cache.geocode != null && cache.geocode.length() > 0 && cache.latitude != null && cache.longitude != null && ((type == null && sym == null) || (type != null && type.indexOf("geocache") > -1) || (sym != null && sym.indexOf("geocache") > -1))) {
         fixCache(cache);
@@ -91,9 +63,8 @@
       name=body;
       final String content=Html.fromHtml(body).toString().trim();
       cache.name=content;
-      if (cache.name.length() > 2 && cache.name.substring(0,2).equalsIgnoreCase("GC")) {
-        cache.geocode=cache.name.toUpperCase();
-      }
+      findGeoCode(cache.name);
+      findGeoCode(cache.description);
     }
   }
 );

@@ -1,0 +1,8 @@
+{
+  for (  IConnector connector : connectors) {
+    if (connector.canHandle(geocode)) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -1,0 +1,14 @@
+{
+  if (input == null || (cache.geocode != null && cache.geocode.length() != 0)) {
+    return;
+  }
+  Matcher matcherGeocode=patternGeocode.matcher(input);
+  if (matcherGeocode.find()) {
+    if (matcherGeocode.groupCount() > 0) {
+      String geocode=matcherGeocode.group(1);
+      if (ConnectorFactory.canHandle(geocode)) {
+        cache.geocode=geocode;
+      }
+    }
+  }
+}

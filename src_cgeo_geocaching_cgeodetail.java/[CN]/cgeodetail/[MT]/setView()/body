@@ -266,8 +266,6 @@
         ago=res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60))+ " "+ res.getString(R.string.cache_offline_time_days);
       }
       offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-      offlineRefresh.setVisibility(View.VISIBLE);
-      offlineRefresh.setClickable(true);
       offlineRefresh.setOnClickListener(new storeCache());
       offlineStore.setText(res.getString(R.string.cache_offline_drop));
       offlineStore.setClickable(true);
@@ -275,13 +273,13 @@
     }
  else {
       offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-      offlineRefresh.setVisibility(View.VISIBLE);
-      offlineRefresh.setClickable(true);
       offlineRefresh.setOnClickListener(new refreshCache());
       offlineStore.setText(res.getString(R.string.cache_offline_store));
       offlineStore.setClickable(true);
       offlineStore.setOnClickListener(new storeCache());
     }
+    offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
+    offlineRefresh.setClickable(true);
     if (cache.personalNote != null && cache.personalNote.length() > 0) {
       ((LinearLayout)findViewById(R.id.personalnote_box)).setVisibility(View.VISIBLE);
       TextView personalNoteText=(TextView)findViewById(R.id.personalnote);
