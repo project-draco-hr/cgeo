@@ -29,8 +29,7 @@
   mapView.preLoad();
   mapView.clearOverlays();
   if (overlayMyLoc == null) {
-    overlayMyLoc=new cgMapMyOverlay(settings,activity);
-    mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayMyLoc));
+    overlayMyLoc=mapView.createAddPositionOverlay(activity,settings);
   }
   if (settings.publicLoc > 0 && overlayUsers == null) {
     overlayUsers=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
@@ -39,8 +38,7 @@
     overlayCaches=mapView.createAddMapOverlay(settings,mapView.getContext(),getResources().getDrawable(R.drawable.marker),fromDetailIntent);
   }
   if (overlayScale == null && mapView.needsScaleOverlay()) {
-    overlayScale=new cgOverlayScale(activity,settings);
-    mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayScale));
+    overlayScale=mapView.createAddScaleOverlay(activity,settings);
   }
   mapView.invalidate();
   mapController=mapView.getMapController();
