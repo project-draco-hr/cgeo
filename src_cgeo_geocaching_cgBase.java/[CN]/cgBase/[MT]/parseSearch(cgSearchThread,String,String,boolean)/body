@@ -133,7 +133,7 @@
  catch (    Exception e) {
       Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache type");
     }
-    if (settings.loadDirectionImg) {
+    if (settings.getLoadDirImg()) {
       try {
         final Matcher matcherDirection=patternDirection.matcher(row);
         while (matcherDirection.find()) {
@@ -296,7 +296,7 @@
       Log.e(cgSettings.tag,"cgBase.parseSearch.CIDs: " + e.toString());
     }
   }
-  if (settings.loadDirectionImg) {
+  if (settings.getLoadDirImg()) {
     for (    cgCache oneCache : caches.cacheList) {
       if (oneCache.latitude == null && oneCache.longitude == null && oneCache.directionImg != null) {
         cgDirectionImg.getDrawable(oneCache.geocode,oneCache.directionImg);
