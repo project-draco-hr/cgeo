@@ -440,7 +440,9 @@
         Log.w(cgSettings.tag,"Failed to parse logs date: " + e.toString());
       }
       logDone.author=Html.fromHtml(matcherLog.group(1)).toString();
-      logDone.found=Integer.parseInt(matcherLog.group(2));
+      if (null != matcherLog.group(2)) {
+        logDone.found=Integer.parseInt(matcherLog.group(2));
+      }
       logDone.log=matcherLog.group(6);
       final Matcher matcherImg=patternLogImgs.matcher(matcherLog.group(7));
       while (matcherImg.find()) {
