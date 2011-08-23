@@ -1,4 +1,7 @@
 {
+  if (!cache.supportsLogging()) {
+    return;
+  }
   cgSettings settings=activity.getSettings();
   Resources res=((Activity)activity).getResources();
   if (settings.isLogin()) {
