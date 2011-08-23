@@ -1,0 +1,8 @@
+{
+  for (  IConnector connector : connectors) {
+    if (connector.canHandle(cache.geocode)) {
+      return connector;
+    }
+  }
+  return GC_CONNECTOR;
+}
