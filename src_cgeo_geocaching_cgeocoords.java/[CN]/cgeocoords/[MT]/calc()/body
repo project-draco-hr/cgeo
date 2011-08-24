@@ -31,13 +31,9 @@ longitude=lonDeg + lonDegFrac;
 break;
 case Min:
 Double latMinFrac=latSec * 1.0;
-while (latMinFrac > 1) {
-latMinFrac/=10;
-}
+latMinFrac/=1000;
 Double lonMinFrac=lonSec * 1.0;
-while (lonMinFrac > 1) {
-lonMinFrac/=10;
-}
+lonMinFrac/=1000;
 latitude=latDeg + latMin / 60.0 + latMinFrac / 60.0;
 longitude=lonDeg + lonMin / 60.0 + lonMinFrac / 60.0;
 break;
