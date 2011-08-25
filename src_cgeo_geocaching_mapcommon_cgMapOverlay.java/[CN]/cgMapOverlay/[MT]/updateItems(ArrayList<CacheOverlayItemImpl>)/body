@@ -5,7 +5,13 @@
   for (  CacheOverlayItemImpl item : itemsPre) {
     item.setMarker(boundCenterBottom(item.getMarker(0)));
   }
-  items=new ArrayList<CacheOverlayItemImpl>(itemsPre);
-  setLastFocusedItemIndex(-1);
-  populate();
+  getOverlayImpl().lock();
+  try {
+    items=new ArrayList<CacheOverlayItemImpl>(itemsPre);
+    setLastFocusedItemIndex(-1);
+    populate();
+  }
+  finally {
+    getOverlayImpl().unlock();
+  }
 }
