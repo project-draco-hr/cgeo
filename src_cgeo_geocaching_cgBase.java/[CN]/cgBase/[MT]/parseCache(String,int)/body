@@ -384,29 +384,13 @@
   }
   try {
     final Matcher matcherLogCounts=patternCountLogs.matcher(page);
-    while (matcherLogCounts.find()) {
-      if (matcherLogCounts.groupCount() > 0) {
-        final String[] logs=matcherLogCounts.group(1).split("<img");
-        final int logsCnt=logs.length;
-        for (int k=1; k < logsCnt; k++) {
-          Integer type=null;
-          Integer count=null;
-          final Matcher matcherLog=patternCountLog.matcher(logs[k]);
-          if (matcherLog.find()) {
-            String typeStr=matcherLog.group(1);
-            String countStr=matcherLog.group(2);
-            if (typeStr != null && typeStr.length() > 0) {
-              if (logTypes.containsKey(typeStr.toLowerCase())) {
-                type=logTypes.get(typeStr.toLowerCase());
-              }
-            }
-            if (countStr != null && countStr.length() > 0) {
-              count=Integer.parseInt(countStr);
-            }
-            if (type != null && count != null) {
-              cache.logCounts.put(type,count);
-            }
-          }
+    if (matcherLogCounts.find()) {
+      final Matcher matcherLog=patternCountLog.matcher(matcherLogCounts.group(1));
+      while (matcherLog.find()) {
+        String typeStr=matcherLog.group(1);
+        String countStr=matcherLog.group(2);
+        if (typeStr != null && typeStr.length() > 0 && logTypes.containsKey(typeStr.toLowerCase()) && countStr != null && countStr.length() > 0) {
+          cache.logCounts.put(logTypes.get(typeStr.toLowerCase()),Integer.parseInt(countStr));
         }
       }
     }
