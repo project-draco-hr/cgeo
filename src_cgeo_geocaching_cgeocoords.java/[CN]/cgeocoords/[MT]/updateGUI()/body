@@ -59,11 +59,11 @@ tLatSep2.setText("??");
 tLonSep2.setText("??");
 if (latitude != null) {
 eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
-eLatMin.setText(Integer.toString(latDegFrac) + addZeros(latDegFrac,5));
+eLatMin.setText(addZeros(latDegFrac,5) + Integer.toString(latDegFrac));
 }
 if (longitude != null) {
 eLonDeg.setText(addZeros(latDeg,3) + Integer.toString(lonDeg));
-eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac,5));
+eLonMin.setText(addZeros(lonDegFrac,5) + Integer.toString(lonDegFrac));
 }
 break;
 case Min:
@@ -113,13 +113,13 @@ if (latitude != null) {
 eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
 eLatMin.setText(addZeros(latMin,2) + Integer.toString(latMin));
 eLatSec.setText(addZeros(latSec,2) + Integer.toString(latSec));
-eLatSub.setText(Integer.toString(latSecFrac) + addZeros(latSecFrac,3));
+eLatSub.setText(addZeros(latSecFrac,3) + Integer.toString(latSecFrac));
 }
 if (longitude != null) {
 eLonDeg.setText(addZeros(lonDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(addZeros(lonMin,2) + Integer.toString(lonMin));
 eLonSec.setText(addZeros(lonSec,2) + Integer.toString(lonSec));
-eLonSub.setText(Integer.toString(lonSecFrac) + addZeros(lonSecFrac,3));
+eLonSub.setText(addZeros(lonSecFrac,3) + Integer.toString(lonSecFrac));
 }
 break;
 }
