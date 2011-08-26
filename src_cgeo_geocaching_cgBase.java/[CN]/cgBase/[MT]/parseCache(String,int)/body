@@ -192,10 +192,9 @@
   }
   try {
     final Matcher matcherFound=patternFound.matcher(page);
-    if (matcherFound.find()) {
-      if (matcherFound.group() != null && matcherFound.group().length() > 0) {
-        cache.found=true;
-      }
+    final Matcher matcherFoundAlternative=patternFoundAlternative.matcher(page);
+    if (matcherFound.find() || matcherFoundAlternative.find()) {
+      cache.found=true;
     }
   }
  catch (  Exception e) {
