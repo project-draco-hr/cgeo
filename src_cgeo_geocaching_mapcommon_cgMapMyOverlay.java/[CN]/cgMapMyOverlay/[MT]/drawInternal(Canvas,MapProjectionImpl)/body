@@ -86,15 +86,16 @@
   }
   if (arrow == null) {
     arrow=BitmapFactory.decodeResource(activity.getResources(),R.drawable.my_location_chevron);
-    widthArrow=arrow.getWidth();
-    heightArrow=arrow.getHeight();
+    widthArrowHalf=arrow.getWidth() / 2;
+    heightArrowHalf=arrow.getHeight() / 2;
   }
   int marginLeft;
   int marginTop;
-  marginLeft=center.x - (widthArrow / 2);
-  marginTop=center.y - (heightArrow / 2);
-  canvas.rotate(heading.floatValue(),center.x,center.y);
-  canvas.drawBitmap(arrow,marginLeft,marginTop,null);
-  canvas.rotate(-(heading.floatValue()),center.x,center.y);
+  marginLeft=center.x - widthArrowHalf;
+  marginTop=center.y - heightArrowHalf;
+  Matrix matrix=new Matrix();
+  matrix.setRotate(heading.floatValue(),widthArrowHalf,heightArrowHalf);
+  matrix.postTranslate(marginLeft,marginTop);
+  canvas.drawBitmap(arrow,matrix,null);
   canvas.setDrawFilter(remfil);
 }
