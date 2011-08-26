@@ -147,11 +147,11 @@
       final Matcher matcherHidden=patternHidden.matcher(tableInside);
       if (matcherHidden.find()) {
         if (matcherHidden.groupCount() > 0) {
-          cache.hidden=parseDate(matcherHidden.group(1));
+          cache.hidden=parseGcCustomDate(matcherHidden.group(1));
         }
       }
     }
- catch (    Exception e) {
+ catch (    ParseException e) {
       Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache hidden date");
     }
     if (cache.hidden == null) {
@@ -159,11 +159,11 @@
         final Matcher matcherHiddenEvent=patternHiddenEvent.matcher(tableInside);
         if (matcherHiddenEvent.find()) {
           if (matcherHiddenEvent.groupCount() > 0) {
-            cache.hidden=parseDate(matcherHiddenEvent.group(1));
+            cache.hidden=parseGcCustomDate(matcherHiddenEvent.group(1));
           }
         }
       }
- catch (      Exception e) {
+ catch (      ParseException e) {
         Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache event date");
       }
     }
@@ -192,10 +192,9 @@
   }
   try {
     final Matcher matcherFound=patternFound.matcher(page);
-    if (matcherFound.find()) {
-      if (matcherFound.group() != null && matcherFound.group().length() > 0) {
-        cache.found=true;
-      }
+    final Matcher matcherFoundAlternative=patternFoundAlternative.matcher(page);
+    if (matcherFound.find() || matcherFoundAlternative.find()) {
+      cache.found=true;
     }
   }
  catch (  Exception e) {
@@ -409,7 +408,7 @@
         logDone.type=logTypes.get("icon_note");
       }
       try {
-        logDone.date=dateInSlash.parse(matcherLog.group(5)).getTime();
+        logDone.date=parseGcCustomDate(matcherLog.group(5)).getTime();
       }
  catch (      ParseException e) {
         Log.w(cgSettings.tag,"Failed to parse log date.");
