@@ -1,0 +1,14 @@
+{
+  if (input == null) {
+    throw new ParseException("Input is null",0);
+  }
+  input=input.trim();
+  for (  SimpleDateFormat format : gcCustomDateFormats.values()) {
+    try {
+      return format.parse(input);
+    }
+ catch (    ParseException e) {
+    }
+  }
+  throw new ParseException("No matching pattern",0);
+}

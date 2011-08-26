@@ -19,7 +19,7 @@
       @Override String getValue(      final cgBase base){
         String findCount="";
         final HashMap<String,String> params=new HashMap<String,String>();
-        final String page=base.request(false,"www.geocaching.com","/my/","GET",params,false,false,false).getData();
+        final String page=base.request(false,"www.geocaching.com","/email/","GET",params,false,false,false).getData();
         int current=parseFindCount(page);
         if (current >= 0) {
           findCount=String.valueOf(current + 1);
