@@ -295,9 +295,7 @@
       descView.setMovementMethod(LinkMovementMethod.getInstance());
     }
     if (longDescDisplayed) {
-      if (longDesc == null && cache != null && cache.description != null) {
-        longDesc=Html.fromHtml(cache.description.trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),null);
-      }
+      parseLongDescription();
       if (longDesc != null && longDesc.length() > 0) {
         ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
         TextView descView=(TextView)findViewById(R.id.description);
