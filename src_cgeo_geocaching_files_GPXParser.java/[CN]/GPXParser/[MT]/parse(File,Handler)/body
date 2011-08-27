@@ -50,7 +50,7 @@
   waypoint.getChild(namespace,"time").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       try {
-        cache.hidden=cgBase.dateGPXIn.parse(body.trim());
+        cache.hidden=parseDate(body);
       }
  catch (      Exception e) {
         Log.w(cgSettings.tag,"Failed to parse cache date: " + e.toString());
@@ -311,7 +311,7 @@
     gcLog.getChild(nsGC,"date").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
         try {
-          log.date=cgBase.dateGPXIn.parse(body.trim()).getTime();
+          log.date=parseDate(body).getTime();
         }
  catch (        Exception e) {
           Log.w(cgSettings.tag,"Failed to parse log date: " + e.toString());
