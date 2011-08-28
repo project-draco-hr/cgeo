@@ -15,7 +15,7 @@
   builder.setTitle(res.getString(R.string.list_title));
   builder.setItems(listsTitle.toArray(items),new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialogInterface,    int item){
-      switchListByOrder(item);
+      switchListById(lists.get(item).id);
       return;
     }
   }

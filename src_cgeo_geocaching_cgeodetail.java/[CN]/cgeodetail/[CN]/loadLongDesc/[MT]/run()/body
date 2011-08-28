@@ -2,6 +2,6 @@
   if (cache == null || cache.description == null || handler == null) {
     return;
   }
-  longDesc=Html.fromHtml(cache.description.trim(),new cgHtmlImg(cgeodetail.this,geocode,true,cache.reason,false),null);
+  parseLongDescription();
   handler.sendMessage(new Message());
 }
