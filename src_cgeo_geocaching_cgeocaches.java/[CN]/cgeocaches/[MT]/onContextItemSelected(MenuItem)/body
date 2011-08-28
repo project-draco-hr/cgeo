@@ -108,7 +108,7 @@
  else   if (id == MENU_DROP_CACHE) {
     cgBase.dropCache(app,this,cache,new Handler(){
       @Override public void handleMessage(      Message msg){
-        switchList(listId,-1);
+        switchListById(listId);
       }
     }
 );
