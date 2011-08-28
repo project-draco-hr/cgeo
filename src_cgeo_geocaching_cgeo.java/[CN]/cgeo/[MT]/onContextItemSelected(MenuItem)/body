@@ -5,6 +5,12 @@
     setFilterTitle();
     return true;
   }
+ else   if (id > MENU_OPEN_LIST) {
+    int listId=id - MENU_OPEN_LIST;
+    settings.saveLastList(listId);
+    cgeocaches.startActivityOffline(context);
+    return true;
+  }
  else   if (id > 0) {
     String itemTitle=item.getTitle().toString();
     String choice=null;
