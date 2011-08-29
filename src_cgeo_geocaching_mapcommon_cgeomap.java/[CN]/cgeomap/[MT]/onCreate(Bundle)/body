@@ -4,9 +4,9 @@
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
   app.setAction(null);
-  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,0));
-  prefsEdit=activity.getSharedPreferences(cgSettings.preferences,0).edit();
+  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE));
+  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE));
+  prefsEdit=activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE).edit();
   MapFactory mapFactory=settings.getMapFactory();
   noMapTokenShowed=false;
   activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -29,8 +29,7 @@
   mapView.preLoad();
   mapView.clearOverlays();
   if (overlayMyLoc == null) {
-    overlayMyLoc=new cgMapMyOverlay(settings,activity);
-    mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayMyLoc));
+    overlayMyLoc=mapView.createAddPositionOverlay(activity,settings);
   }
   if (settings.publicLoc > 0 && overlayUsers == null) {
     overlayUsers=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
@@ -39,8 +38,7 @@
     overlayCaches=mapView.createAddMapOverlay(settings,mapView.getContext(),getResources().getDrawable(R.drawable.marker),fromDetailIntent);
   }
   if (overlayScale == null && mapView.needsScaleOverlay()) {
-    overlayScale=new cgOverlayScale(activity,settings);
-    mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayScale));
+    overlayScale=mapView.createAddScaleOverlay(activity,settings);
   }
   mapView.invalidate();
   mapController=mapView.getMapController();

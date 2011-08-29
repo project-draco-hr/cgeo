@@ -33,6 +33,7 @@
   final RelativeLayout findByOffline=(RelativeLayout)findViewById(R.id.search_offline);
   findByOffline.setClickable(true);
   findByOffline.setOnClickListener(new cgeoFindByOfflineListener());
+  registerForContextMenu(findByOffline);
   (new countBubbleUpdate()).start();
   final LinearLayout advanced=(LinearLayout)findViewById(R.id.advanced_button);
   advanced.setClickable(true);

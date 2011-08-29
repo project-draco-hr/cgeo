@@ -1,22 +1,27 @@
 {
   final int id=item.getItemId();
-  if (id == 0) {
+switch (id) {
+case MENU_ABOUT:
     showAbout(null);
-    return true;
-  }
- else   if (id == 1) {
-    context.startActivity(new Intent(context,cgeohelpers.class));
-    return true;
-  }
- else   if (id == 2) {
-    context.startActivity(new Intent(context,cgeoinit.class));
-    return true;
-  }
- else   if (id == 3) {
-    final Intent cachesIntent=new Intent(context,cgeocaches.class);
-    cachesIntent.putExtra("type","history");
-    context.startActivity(cachesIntent);
-    return true;
-  }
-  return false;
+  return true;
+case MENU_HELPERS:
+context.startActivity(new Intent(context,cgeohelpers.class));
+return true;
+case MENU_SETTINGS:
+context.startActivity(new Intent(context,cgeoinit.class));
+return true;
+case MENU_HISTORY:
+final Intent cachesIntent=new Intent(context,cgeocaches.class);
+cachesIntent.putExtra("type","history");
+context.startActivity(cachesIntent);
+return true;
+case MENU_SCAN:
+Intent intent=new Intent(SCAN_INTENT);
+intent.putExtra("SCAN_MODE","QR_CODE_MODE");
+startActivityForResult(intent,SCAN_REQUEST_CODE);
+return true;
+default :
+break;
+}
+return false;
 }

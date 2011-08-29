@@ -108,7 +108,7 @@
  else   if (id == MENU_DROP_CACHE) {
     cgBase.dropCache(app,this,cache,new Handler(){
       @Override public void handleMessage(      Message msg){
-        switchList(listId,-1);
+        switchListById(listId);
       }
     }
 );
@@ -137,13 +137,13 @@
     return true;
   }
   lastMenuInfo=info;
-  HashMap<String,String> params=new HashMap<String,String>();
-  params.put("geocode",cache.geocode);
-  Long singleSearchId=base.searchByGeocode(params,0,false);
-  if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearchId,null,null)) {
-    return true;
-  }
   if (cache != null) {
+    HashMap<String,String> params=new HashMap<String,String>();
+    params.put("geocode",cache.geocode);
+    Long singleSearchId=base.searchByGeocode(params,0,false);
+    if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearchId,null,null)) {
+      return true;
+    }
     int logType=id - MENU_LOG_VISIT_OFFLINE;
     cache.logOffline(this,logType);
   }

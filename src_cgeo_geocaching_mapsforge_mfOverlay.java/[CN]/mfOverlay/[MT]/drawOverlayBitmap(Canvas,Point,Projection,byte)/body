@@ -1,3 +1,5 @@
 {
-  overlayBase.drawOverlayBitmap(canvas,drawPosition,new mfMapProjection(projection),drawZoomLevel);
+  if (overlayBase != null) {
+    overlayBase.drawOverlayBitmap(canvas,drawPosition,new mfMapProjection(projection),drawZoomLevel);
+  }
 }
