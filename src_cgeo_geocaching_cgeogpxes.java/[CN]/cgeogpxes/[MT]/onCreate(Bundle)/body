@@ -2,7 +2,7 @@
   super.onCreate(savedInstanceState);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    listId=extras.getInt("list");
+    listId=extras.getInt(EXTRAS_LIST_ID);
   }
   if (listId <= 0) {
     listId=1;
