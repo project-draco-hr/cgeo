@@ -1,11 +1,12 @@
 {
-  String zeros="";
+  StringBuilder zeros=new StringBuilder();
   if (value == 0) {
     value=1;
   }
-  while (value < Math.pow(10,len - 1)) {
-    zeros+="0";
+  double wantedLength=Math.pow(10,len - 1);
+  while (value < wantedLength) {
+    zeros.append('0');
     value*=10;
   }
-  return zeros;
+  return zeros.toString();
 }

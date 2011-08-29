@@ -1,7 +1,10 @@
 {
   Button e=(Button)v;
-  char[] c=e.getText().toString().toCharArray();
-switch (c[0]) {
+  CharSequence text=e.getText();
+  if (text == null || text.length() == 0) {
+    return;
+  }
+switch (text.charAt(0)) {
 case 'N':
     e.setText("S");
   break;

@@ -61,7 +61,10 @@ setComparator(item,new InventoryComparator());
 return false;
 case MENU_SORT_DATE:
 setComparator(item,new DateComparator());
-return false;
+return true;
+case MENU_SORT_FINDS:
+setComparator(item,new FindsComparator(app));
+return true;
 case SUBMENU_FILTER_TYPE:
 selectedFilter=res.getString(R.string.caches_filter_type);
 openContextMenu(getListView());
