@@ -1,0 +1,16 @@
+{
+  ICache cache=new GC2CJPF();
+  cgCacheWrap caches=base.parseCache(cache.getData(),0);
+  cgCache cacheParsed=caches.cacheList.get(0);
+  Assert.assertEquals(cacheParsed.geocode,cache.getGeocode());
+  Assert.assertEquals(cacheParsed.type,cache.getType());
+  Assert.assertEquals(cacheParsed.owner,cache.getOwner());
+  Assert.assertEquals(cacheParsed.difficulty,cache.getDifficulty());
+  Assert.assertEquals(cacheParsed.terrain,cache.getTerrain());
+  Assert.assertEquals(cacheParsed.latitudeString,cache.getLatitute());
+  Assert.assertEquals(cacheParsed.longitudeString,cache.getLongitude());
+  Assert.assertEquals(cacheParsed.disabled,cache.isDisabled());
+  Assert.assertEquals(cacheParsed.own,cache.isOwn());
+  Assert.assertEquals(cacheParsed.archived,cache.isArchived());
+  Assert.assertEquals(cacheParsed.members,cache.isMembersOnly());
+}

@@ -1,0 +1,17 @@
+{
+  try {
+    InputStream is=this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/" + getGeocode() + ".txt");
+    ByteArrayOutputStream buffer=new ByteArrayOutputStream();
+    int nRead;
+    byte[] data=new byte[16384];
+    while ((nRead=is.read(data,0,data.length)) != -1) {
+      buffer.write(data,0,nRead);
+    }
+    buffer.flush();
+    return buffer.toString();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  return null;
+}
