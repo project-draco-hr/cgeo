@@ -1,0 +1,10 @@
+{
+  final String host="www.geocaching.com";
+  final String path="/account/ManagePreferences.aspx";
+  final String result=request(false,host,path,"GET",null,false,false,false).getData();
+  final Pattern pattern=Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">",Pattern.CASE_INSENSITIVE);
+  final Matcher matcher=pattern.matcher(result);
+  if (matcher.find()) {
+    settings.setGcCustomDate(matcher.group(1));
+  }
+}

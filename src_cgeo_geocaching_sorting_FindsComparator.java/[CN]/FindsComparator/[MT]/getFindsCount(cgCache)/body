@@ -1,0 +1,11 @@
+{
+  int finds=0;
+  if (cache.logCounts.isEmpty()) {
+    cache.logCounts=app.loadLogCounts(cache.geocode);
+  }
+  Integer logged=cache.logCounts.get(cgBase.LOG_FOUND_IT);
+  if (logged != null) {
+    finds=logged;
+  }
+  return finds;
+}
