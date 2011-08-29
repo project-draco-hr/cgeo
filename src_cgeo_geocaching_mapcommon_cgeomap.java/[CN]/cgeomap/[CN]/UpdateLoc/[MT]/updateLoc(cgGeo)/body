@@ -3,9 +3,9 @@
     return;
   }
   try {
+    boolean repaintRequired=false;
     if (overlayMyLoc == null && mapView != null) {
-      overlayMyLoc=new cgMapMyOverlay(settings,activity);
-      mapView.addOverlay(settings.getMapFactory().getOverlayBaseWrapper(overlayMyLoc));
+      overlayMyLoc=mapView.createAddPositionOverlay(activity,settings);
     }
     if (overlayMyLoc != null && geo.location != null) {
       overlayMyLoc.setCoordinates(geo.location);
@@ -15,7 +15,7 @@
         myLocationInMiddle();
       }
  else {
-        mapView.invalidate();
+        repaintRequired=true;
       }
     }
     if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) {
@@ -25,6 +25,10 @@
  else {
         overlayMyLoc.setHeading(Double.valueOf(0));
       }
+      repaintRequired=true;
+    }
+    if (repaintRequired) {
+      mapView.repaintRequired(overlayMyLoc);
     }
   }
  catch (  Exception e) {

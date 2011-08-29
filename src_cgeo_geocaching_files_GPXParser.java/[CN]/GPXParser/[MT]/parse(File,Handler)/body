@@ -6,7 +6,7 @@
   final RootElement root=new RootElement(namespace,"gpx");
   final Element waypoint=root.getChild(namespace,"wpt");
   waypoint.setStartElementListener(new StartElementListener(){
-    public void start(    Attributes attrs){
+    @Override public void start(    Attributes attrs){
       try {
         if (attrs.getIndex("lat") > -1) {
           cache.latitude=new Double(attrs.getValue("lat"));
@@ -22,7 +22,7 @@
   }
 );
   waypoint.setEndElementListener(new EndElementListener(){
-    public void end(){
+    @Override public void end(){
       if (cache.geocode == null || cache.geocode.length() == 0) {
         findGeoCode(name);
         findGeoCode(desc);
@@ -35,8 +35,8 @@
         app.addCacheToSearch(search,cache);
       }
       showFinishedMessage(handler,search);
-      htmlShort=true;
-      htmlLong=true;
+      shortDescIsHtml=true;
+      longDescIsHtml=true;
       type=null;
       sym=null;
       name=null;
@@ -48,9 +48,9 @@
   }
 );
   waypoint.getChild(namespace,"time").setEndTextElementListener(new EndTextElementListener(){
-    public void end(    String body){
+    @Override public void end(    String body){
       try {
-        cache.hidden=cgBase.dateGPXIn.parse(body.trim());
+        cache.hidden=parseDate(body);
       }
  catch (      Exception e) {
         Log.w(cgSettings.tag,"Failed to parse cache date: " + e.toString());
@@ -59,7 +59,7 @@
   }
 );
   waypoint.getChild(namespace,"name").setEndTextElementListener(new EndTextElementListener(){
-    public void end(    String body){
+    @Override public void end(    String body){
       name=body;
       final String content=Html.fromHtml(body).toString().trim();
       cache.name=content;
@@ -69,7 +69,7 @@
   }
 );
   waypoint.getChild(namespace,"desc").setEndTextElementListener(new EndTextElementListener(){
-    public void end(    String body){
+    @Override public void end(    String body){
       desc=body;
       final String content=Html.fromHtml(body).toString().trim();
       cache.shortdesc=content;
@@ -77,7 +77,7 @@
   }
 );
   waypoint.getChild(namespace,"cmt").setEndTextElementListener(new EndTextElementListener(){
-    public void end(    String body){
+    @Override public void end(    String body){
       cmt=body;
       final String content=Html.fromHtml(body).toString().trim();
       cache.description=content;
@@ -85,7 +85,7 @@
   }
 );
   waypoint.getChild(namespace,"type").setEndTextElementListener(new EndTextElementListener(){
-    public void end(    String body){
+    @Override public void end(    String body){
       final String[] content=body.split("\\|");
       if (content.length > 0) {
         type=content[0].toLowerCase().trim();
@@ -94,7 +94,7 @@
   }
 );
   waypoint.getChild(namespace,"sym").setEndTextElementListener(new EndTextElementListener(){
-    public void end(    String body){
+    @Override public void end(    String body){
       body=body.toLowerCase();
       sym=body;
       if (body.indexOf("geocache") != -1 && body.indexOf("found") != -1) {
@@ -107,7 +107,7 @@
   for (  String nsGC : nsGCList) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");
     gcCache.setStartElementListener(new StartElementListener(){
-      public void start(      Attributes attrs){
+      @Override public void start(      Attributes attrs){
         try {
           if (attrs.getIndex("id") > -1) {
             cache.cacheid=attrs.getValue("id");
@@ -126,35 +126,31 @@
     }
 );
     gcCache.getChild(nsGC,"name").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        final String content=Html.fromHtml(body).toString().trim();
-        cache.name=validate(content);
+      @Override public void end(      String body){
+        cache.name=validate(Html.fromHtml(body).toString().trim());
       }
     }
 );
     gcCache.getChild(nsGC,"owner").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        final String content=Html.fromHtml(body).toString().trim();
-        cache.owner=validate(content);
+      @Override public void end(      String body){
+        cache.owner=validate(Html.fromHtml(body).toString().trim());
       }
     }
 );
     gcCache.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        String parsedString=validate(body.toLowerCase());
-        setType(parsedString);
+      @Override public void end(      String body){
+        setType(validate(body.toLowerCase()));
       }
     }
 );
     gcCache.getChild(nsGC,"container").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        final String content=body.toLowerCase();
-        cache.size=validate(content);
+      @Override public void end(      String body){
+        cache.size=validate(body.toLowerCase());
       }
     }
 );
     gcCache.getChild(nsGC,"difficulty").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
+      @Override public void end(      String body){
         try {
           cache.difficulty=new Float(body);
         }
@@ -165,7 +161,7 @@
     }
 );
     gcCache.getChild(nsGC,"terrain").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
+      @Override public void end(      String body){
         try {
           cache.terrain=new Float(body);
         }
@@ -176,7 +172,7 @@
     }
 );
     gcCache.getChild(nsGC,"country").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
+      @Override public void end(      String body){
         if (cache.location == null || cache.location.length() == 0) {
           cache.location=validate(body.trim());
         }
@@ -187,7 +183,7 @@
     }
 );
     gcCache.getChild(nsGC,"state").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
+      @Override public void end(      String body){
         if (cache.location == null || cache.location.length() == 0) {
           cache.location=validate(body.trim());
         }
@@ -198,18 +194,18 @@
     }
 );
     gcCache.getChild(nsGC,"encoded_hints").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
+      @Override public void end(      String body){
         cache.hint=validate(body.trim());
       }
     }
 );
     gcCache.getChild(nsGC,"short_description").setStartElementListener(new StartElementListener(){
-      public void start(      Attributes attrs){
+      @Override public void start(      Attributes attrs){
         try {
           if (attrs.getIndex("html") > -1) {
             final String at=attrs.getValue("html");
             if (at.equalsIgnoreCase("false")) {
-              htmlShort=false;
+              shortDescIsHtml=false;
             }
           }
         }
@@ -219,22 +215,22 @@
     }
 );
     gcCache.getChild(nsGC,"short_description").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        if (!htmlShort) {
-          cache.shortdesc=Html.fromHtml(body).toString();
+      @Override public void end(      String body){
+        if (shortDescIsHtml) {
+          cache.shortdesc=body.trim();
         }
  else {
-          cache.shortdesc=body;
+          cache.shortdesc=Html.fromHtml(body).toString();
         }
       }
     }
 );
     gcCache.getChild(nsGC,"long_description").setStartElementListener(new StartElementListener(){
-      public void start(      Attributes attrs){
+      @Override public void start(      Attributes attrs){
         try {
           if (attrs.getIndex("html") > -1) {
             if (attrs.getValue("html").equalsIgnoreCase("false")) {
-              htmlLong=false;
+              longDescIsHtml=false;
             }
           }
         }
@@ -244,19 +240,19 @@
     }
 );
     gcCache.getChild(nsGC,"long_description").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        if (htmlLong == false) {
-          cache.description=Html.fromHtml(body).toString().trim();
+      @Override public void end(      String body){
+        if (longDescIsHtml) {
+          cache.description=body.trim();
         }
  else {
-          cache.description=body;
+          cache.description=Html.fromHtml(body).toString().trim();
         }
       }
     }
 );
     final Element gcTBs=gcCache.getChild(nsGC,"travelbugs");
     gcTBs.getChild(nsGC,"travelbug").setStartElementListener(new StartElementListener(){
-      public void start(      Attributes attrs){
+      @Override public void start(      Attributes attrs){
         trackable=new cgTrackable();
         try {
           if (attrs.getIndex("ref") > -1) {
@@ -270,25 +266,26 @@
 );
     final Element gcTB=gcTBs.getChild(nsGC,"travelbug");
     gcTB.setEndElementListener(new EndElementListener(){
-      public void end(){
+      @Override public void end(){
         if (trackable.geocode != null && trackable.geocode.length() > 0 && trackable.name != null && trackable.name.length() > 0) {
-          if (cache.inventory == null)           cache.inventory=new ArrayList<cgTrackable>();
+          if (cache.inventory == null) {
+            cache.inventory=new ArrayList<cgTrackable>();
+          }
           cache.inventory.add(trackable);
         }
       }
     }
 );
     gcTB.getChild(nsGC,"name").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        String content=Html.fromHtml(body).toString();
-        trackable.name=content;
+      @Override public void end(      String body){
+        trackable.name=Html.fromHtml(body).toString();
       }
     }
 );
     final Element gcLogs=gcCache.getChild(nsGC,"logs");
     final Element gcLog=gcLogs.getChild(nsGC,"log");
     gcLog.setStartElementListener(new StartElementListener(){
-      public void start(      Attributes attrs){
+      @Override public void start(      Attributes attrs){
         log=new cgLog();
         try {
           if (attrs.getIndex("id") > -1) {
@@ -301,18 +298,20 @@
     }
 );
     gcLog.setEndElementListener(new EndElementListener(){
-      public void end(){
+      @Override public void end(){
         if (log.log != null && log.log.length() > 0) {
-          if (cache.logs == null)           cache.logs=new ArrayList<cgLog>();
+          if (cache.logs == null) {
+            cache.logs=new ArrayList<cgLog>();
+          }
           cache.logs.add(log);
         }
       }
     }
 );
     gcLog.getChild(nsGC,"date").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
+      @Override public void end(      String body){
         try {
-          log.date=cgBase.dateGPXIn.parse(body.trim()).getTime();
+          log.date=parseDate(body).getTime();
         }
  catch (        Exception e) {
           Log.w(cgSettings.tag,"Failed to parse log date: " + e.toString());
@@ -321,28 +320,26 @@
     }
 );
     gcLog.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        final String content=body.trim().toLowerCase();
-        if (cgBase.logTypes0.containsKey(content)) {
-          log.type=cgBase.logTypes0.get(content);
+      @Override public void end(      String body){
+        final String logType=body.trim().toLowerCase();
+        if (cgBase.logTypes0.containsKey(logType)) {
+          log.type=cgBase.logTypes0.get(logType);
         }
  else {
-          log.type=4;
+          log.type=cgBase.LOG_NOTE;
         }
       }
     }
 );
     gcLog.getChild(nsGC,"finder").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        String content=Html.fromHtml(body).toString();
-        log.author=content;
+      @Override public void end(      String body){
+        log.author=Html.fromHtml(body).toString();
       }
     }
 );
     gcLog.getChild(nsGC,"text").setEndTextElementListener(new EndTextElementListener(){
-      public void end(      String body){
-        String content=Html.fromHtml(body).toString();
-        log.log=content;
+      @Override public void end(      String body){
+        log.log=Html.fromHtml(body).toString();
       }
     }
 );
@@ -366,7 +363,9 @@ catch (  SAXException e) {
     Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not parse XML - "+ e.toString());
   }
   try {
-    fis.close();
+    if (fis != null) {
+      fis.close();
+    }
   }
  catch (  IOException e) {
     Log.e(cgSettings.tag,"Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not close file!");

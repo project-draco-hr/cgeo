@@ -9,7 +9,19 @@
       waitDialog.setCancelable(false);
     }
     waitDialog.show();
-    CacheOverlayItemImpl item=items.get(index);
+    CacheOverlayItemImpl item=null;
+    getOverlayImpl().lock();
+    try {
+      if (index < items.size()) {
+        item=items.get(index);
+      }
+    }
+  finally {
+      getOverlayImpl().unlock();
+    }
+    if (item == null) {
+      return false;
+    }
     cgCoord coordinate=item.getCoord();
     if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && coordinate.geocode != null && coordinate.geocode.length() > 0) {
       Intent popupIntent=new Intent(context,cgeopopup.class);

@@ -1,5 +1,15 @@
 {
   super.onCreateContextMenu(menu,v,menuInfo);
+  if (v.getId() == R.id.search_offline) {
+    ArrayList<cgList> cacheLists=app.getLists();
+    int listCount=cacheLists.size();
+    menu.setHeaderTitle(res.getString(R.string.list_title));
+    for (int i=0; i < listCount; i++) {
+      cgList list=cacheLists.get(i);
+      menu.add(Menu.NONE,MENU_OPEN_LIST + list.id,Menu.NONE,list.title);
+    }
+    return;
+  }
   menu.setHeaderTitle(res.getString(R.string.menu_filter));
   menu.add(1,0,0,res.getString(R.string.all_types));
   menu.add(1,1,0,res.getString(R.string.traditional));
