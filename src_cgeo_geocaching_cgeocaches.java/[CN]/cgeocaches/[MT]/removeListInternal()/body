@@ -1,0 +1,10 @@
+{
+  boolean status=app.removeList(listId);
+  if (status) {
+    showToast(res.getString(R.string.list_dialog_remove_ok));
+    switchListById(1);
+  }
+ else {
+    showToast(res.getString(R.string.list_dialog_remove_err));
+  }
+}
