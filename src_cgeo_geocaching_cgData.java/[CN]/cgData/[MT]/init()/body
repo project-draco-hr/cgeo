@@ -24,7 +24,7 @@
       if (dbHelper == null) {
         dbHelper=new cgDbHelper(context);
       }
-      databaseRO=dbHelper.getReadableDatabase();
+      databaseRO=dbHelper.getWritableDatabase();
       if (databaseRO.needUpgrade(dbVersion)) {
         databaseRO=null;
       }

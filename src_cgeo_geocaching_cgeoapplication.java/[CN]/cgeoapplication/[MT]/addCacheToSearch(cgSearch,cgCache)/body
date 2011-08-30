@@ -9,11 +9,12 @@
   String geocode=cache.geocode.toUpperCase();
   String guid=cache.guid.toLowerCase();
   boolean status=false;
-  if (storage.isThere(geocode,guid,false,false) == false || cache.reason >= 1) {
+  cgCache oldCache=null;
+  if (cache.reason >= 1 || (oldCache=storage.loadCache(cache.geocode,cache.guid,false,true,true,true,true,true)) != null) {
     status=storage.saveCache(cache);
   }
  else {
-    cgCache mergedCache=cache.merge(storage);
+    cgCache mergedCache=cache.merge(storage,oldCache);
     status=storage.saveCache(mergedCache);
   }
   if (status) {

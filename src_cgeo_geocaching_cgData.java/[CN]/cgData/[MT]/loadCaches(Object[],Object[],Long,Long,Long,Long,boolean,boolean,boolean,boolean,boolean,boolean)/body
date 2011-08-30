@@ -4,22 +4,29 @@
   Cursor cursor=null;
   ArrayList<cgCache> caches=new ArrayList<cgCache>();
   try {
-    if (geocodes != null && geocodes.length > 0) {
-      StringBuilder all=new StringBuilder();
-      for (      Object one : geocodes) {
-        if (all.length() > 0) {
-          all.append(", ");
+    if (geocodes != null) {
+      if (geocodes.length == 1 && false) {
+        where.append("geocode == \"");
+        where.append(geocodes[0]);
+        where.append("\"");
+      }
+ else       if (geocodes.length > 0) {
+        StringBuilder all=new StringBuilder();
+        for (        Object one : geocodes) {
+          if (all.length() > 0) {
+            all.append(", ");
+          }
+          all.append("\"");
+          all.append((String)one);
+          all.append("\"");
         }
-        all.append("\"");
-        all.append((String)one);
-        all.append("\"");
+        if (where.length() > 0) {
+          where.append(" and ");
+        }
+        where.append("geocode in (");
+        where.append(all);
+        where.append(")");
       }
-      if (where.length() > 0) {
-        where.append(" and ");
-      }
-      where.append("geocode in (");
-      where.append(all);
-      where.append(")");
     }
  else     if (guids != null && guids.length > 0) {
       StringBuilder all=new StringBuilder();
@@ -71,7 +78,12 @@
       where.append(String.format((Locale)null,"%.6f",lonMax));
       where.append(")");
     }
+    long start=System.currentTimeMillis();
     cursor=databaseRO.query(dbTableCaches,new String[]{"_id","updated","reason","detailed","detailedupdate","visiteddate","geocode","cacheid","guid","type","name","own","owner","owner_real","hidden","hint","size","difficulty","distance","direction","terrain","latlon","latitude_string","longitude_string","location","latitude","longitude","elevation","shortdesc","description","favourite_cnt","rating","votes","myvote","disabled","archived","members","found","favourite","inventorycoins","inventorytags","inventoryunknown","onWatchlist","personal_note"},where.toString(),null,null,null,null,null);
+    long end=System.currentTimeMillis();
+    if ((end - start) > 100) {
+      System.out.println("" + (end - start) + where);
+    }
     if (cursor != null) {
       int index=0;
       if (cursor.getCount() > 0) {
@@ -149,6 +161,7 @@
           cache.favourite=cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
           cache.inventoryItems=(Integer)cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
           cache.onWatchlist=cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
+          cache.reliableLatLon=cursor.getInt(cursor.getColumnIndex("reliable_latlon")) > 0;
           if (loadA) {
             ArrayList<String> attributes=loadAttributes(cache.geocode);
             if (attributes != null && attributes.isEmpty() == false) {
