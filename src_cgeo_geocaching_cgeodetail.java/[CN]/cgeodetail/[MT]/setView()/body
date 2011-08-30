@@ -219,8 +219,12 @@
         }
       }
 );
-      if (attributesShowAsIcons)       showAttributeIcons(attribBox,attributeBoxMaxWidth);
- else       showAttributeDescriptions(attribBox);
+      if (attributesShowAsIcons || noAttributeIconsFound) {
+        showAttributeIcons(attribBox,attributeBoxMaxWidth);
+      }
+ else {
+        showAttributeDescriptions(attribBox);
+      }
       findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
     }
     if (cache.inventory != null && cache.inventory.size() > 0) {

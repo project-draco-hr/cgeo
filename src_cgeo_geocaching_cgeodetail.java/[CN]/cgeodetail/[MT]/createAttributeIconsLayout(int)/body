@@ -4,9 +4,12 @@
   rows.setOrientation(LinearLayout.VERTICAL);
   LinearLayout attributeRow=newAttributeIconsRow();
   rows.addView(attributeRow);
+  noAttributeIconsFound=true;
   for (  String attributeName : cache.attributes) {
     boolean strikethru=attributeName.endsWith("_no");
-    if (attributeName.endsWith("_no") || attributeName.endsWith("_yes"))     attributeName=attributeName.substring(0,attributeName.lastIndexOf("_"));
+    if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
+      attributeName=attributeName.substring(0,attributeName.lastIndexOf("_"));
+    }
     attributeRow.measure(0,0);
     int rowWidth=attributeRow.getMeasuredWidth();
     FrameLayout fl=(FrameLayout)inflater.inflate(R.layout.attribute_image,null);
@@ -17,15 +20,21 @@
     }
     Drawable d=null;
     int id=res.getIdentifier("attribute_" + attributeName,"drawable",base.context.getPackageName());
-    if (id > 0)     d=res.getDrawable(id);
- else     d=res.getDrawable(R.drawable.attribute_icon_not_found);
-    iv.setImageDrawable(d);
-    if (strikethru) {
-      ImageView strikethruImage=new ImageView(this);
-      strikethruImage.setLayoutParams(iv.getLayoutParams());
-      d=res.getDrawable(R.drawable.attribute__strikethru);
-      strikethruImage.setImageDrawable(d);
-      fl.addView(strikethruImage);
+    if (id > 0) {
+      noAttributeIconsFound=false;
+      d=res.getDrawable(id);
+      iv.setImageDrawable(d);
+      if (strikethru) {
+        ImageView strikethruImage=new ImageView(this);
+        strikethruImage.setLayoutParams(iv.getLayoutParams());
+        d=res.getDrawable(R.drawable.attribute__strikethru);
+        strikethruImage.setImageDrawable(d);
+        fl.addView(strikethruImage);
+      }
+    }
+ else {
+      d=res.getDrawable(R.drawable.attribute_icon_not_found);
+      iv.setImageDrawable(d);
     }
     attributeRow.addView(fl);
   }
