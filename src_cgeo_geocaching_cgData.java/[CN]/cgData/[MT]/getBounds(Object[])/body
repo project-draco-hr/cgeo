@@ -10,16 +10,16 @@
         if (all.length() > 0) {
           all.append(", ");
         }
-        all.append("\"");
+        all.append('"');
         all.append((String)one);
-        all.append("\"");
+        all.append('"');
       }
       if (where.length() > 0) {
         where.append(" and ");
       }
       where.append("geocode in (");
       where.append(all);
-      where.append(")");
+      where.append(')');
     }
     cursor=databaseRO.query(dbTableCaches,new String[]{"count(_id) as cnt","min(latitude) as latMin","max(latitude) as latMax","min(longitude) as lonMin","max(longitude) as lonMax"},where.toString(),null,null,null,null,null);
     if (cursor != null) {

@@ -213,7 +213,7 @@
       StringBuilder inventoryString=new StringBuilder();
       for (      cgTrackable inventoryItem : cache.inventory) {
         if (inventoryString.length() > 0) {
-          inventoryString.append("\n");
+          inventoryString.append('\n');
         }
         if (inventoryItem.name.indexOf('<') >= 0 || inventoryItem.name.indexOf('&') >= 0) {
           inventoryString.append(Html.fromHtml(inventoryItem.name).toString());

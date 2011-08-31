@@ -29,16 +29,13 @@
     }
     caches=app.getCaches(searchId);
     if (live && settings.maplive >= 1) {
-      int i=0;
-      boolean excludeMine=settings.excludeMine > 0;
-      boolean excludeDisabled=settings.excludeDisabled > 0;
-      while (i < caches.size()) {
-        boolean remove=false;
-        if ((caches.get(i).found) && (excludeMine))         remove=true;
-        if ((caches.get(i).own) && (excludeMine))         remove=true;
-        if ((caches.get(i).disabled) && (excludeDisabled))         remove=true;
-        if (remove)         caches.remove(i);
- else         i++;
+      final boolean excludeMine=settings.excludeMine > 0;
+      final boolean excludeDisabled=settings.excludeDisabled > 0;
+      for (int i=caches.size() - 1; i >= 0; i--) {
+        cgCache cache=caches.get(i);
+        if ((cache.found && excludeMine) || (cache.own && excludeMine) || (cache.disabled && excludeDisabled)) {
+          caches.remove(i);
+        }
       }
     }
     if (stop) {

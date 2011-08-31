@@ -9,7 +9,7 @@
   if (cachetype != null) {
     specifySql.append(" and type = \"");
     specifySql.append(cachetype);
-    specifySql.append("\"");
+    specifySql.append('"');
   }
   try {
     Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},specifySql.toString(),null,null,null,"visiteddate",null);
