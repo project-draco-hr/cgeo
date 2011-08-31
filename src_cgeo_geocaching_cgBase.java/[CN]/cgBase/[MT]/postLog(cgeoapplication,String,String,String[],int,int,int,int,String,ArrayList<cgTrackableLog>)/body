@@ -18,7 +18,7 @@
     if (c > 300) {
       logUpdated.append("&#");
       logUpdated.append(Integer.toString((int)c));
-      logUpdated.append(";");
+      logUpdated.append(';');
     }
  else {
       logUpdated.append(c);
@@ -54,7 +54,7 @@
       final String action=Integer.toString(tb.id) + logTypesTrackableAction.get(tb.action);
       if (tb.action > 0) {
         hdnSelected.append(action);
-        hdnSelected.append(",");
+        hdnSelected.append(',');
       }
     }
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString());
@@ -106,7 +106,7 @@
           params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl" + ctl + "$ddlAction",action);
           if (tb.action > 0) {
             hdnSelected.append(action);
-            hdnSelected.append(",");
+            hdnSelected.append(',');
           }
         }
         params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString());

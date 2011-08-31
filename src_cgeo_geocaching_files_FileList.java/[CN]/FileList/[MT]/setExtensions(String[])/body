@@ -1,6 +1,6 @@
 {
   for (  String extension : extensionsIn) {
-    if (!extension.startsWith(".")) {
+    if (extension.length() == 0 || extension.charAt(0) != '.') {
       extension="." + extension;
     }
   }

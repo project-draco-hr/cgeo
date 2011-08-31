@@ -142,6 +142,36 @@
       }
     }
 );
+    final Element gcAttributes=gcCache.getChild(nsGC,"attributes");
+    final Element gcAttribute=gcAttributes.getChild(nsGC,"attribute");
+    gcAttribute.setStartElementListener(new StartElementListener(){
+      @Override public void start(      Attributes attrs){
+        cacheAttribute=new CacheAttribute();
+        try {
+          if (attrs.getIndex("id") > -1) {
+            cacheAttribute.setBaseName(Integer.parseInt(attrs.getValue("id")));
+          }
+          if (attrs.getIndex("inc") > -1) {
+            cacheAttribute.setActive(Integer.parseInt(attrs.getValue("inc")) != 0);
+          }
+        }
+ catch (        Exception e) {
+        }
+      }
+    }
+);
+    gcAttribute.setEndElementListener(new EndElementListener(){
+      @Override public void end(){
+        if (cacheAttribute != null) {
+          String internalId=cacheAttribute.getInternalId();
+          if (internalId != null) {
+            if (cache.attributes == null)             cache.attributes=new ArrayList<String>();
+            cache.attributes.add(internalId);
+          }
+        }
+      }
+    }
+);
     gcCache.getChild(nsGC,"difficulty").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
         try {
@@ -309,5 +339,5 @@
 catch (  SAXException e) {
     Log.e(cgSettings.tag,"Cannot parse .gpx file as GPX " + version + ": could not parse XML - "+ e.toString());
   }
-  return parsed ? search.getCurrentId() : 0l;
+  return parsed ? search.getCurrentId() : 0L;
 }

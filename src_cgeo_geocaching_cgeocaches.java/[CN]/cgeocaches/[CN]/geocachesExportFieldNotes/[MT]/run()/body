@@ -24,7 +24,7 @@
       if (cache.logOffline) {
         cgLog log=app.loadLogOffline(cache.geocode);
         if (null != logTypes.get(log.type)) {
-          fieldNoteBuffer.append(cache.geocode).append(",").append(fieldNoteDateFormat.format(new Date(log.date))).append(",").append(logTypes.get(log.type)).append(",\"").append(log.log.replaceAll("\"","'")).append("\"\n");
+          fieldNoteBuffer.append(cache.geocode).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(logTypes.get(log.type)).append(",\"").append(log.log.replaceAll("\"","'")).append("\"\n");
         }
       }
       detailProgress++;

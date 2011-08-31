@@ -3,10 +3,10 @@
   final Matcher matcherViewstateCount=patternViewstateFieldCount.matcher(page);
   if (matcherViewstateCount.find())   count=Integer.parseInt(matcherViewstateCount.group(1));
   String[] viewstates=new String[count];
+  int no;
   final Matcher matcherViewstates=patternViewstates.matcher(page);
   while (matcherViewstates.find()) {
     String sno=matcherViewstates.group(1);
-    int no;
     if ("".equals(sno))     no=0;
  else     no=Integer.parseInt(sno);
     viewstates[no]=matcherViewstates.group(2);
