@@ -96,6 +96,18 @@
     }
   }
 );
+  waypoint.getChild(namespace,"url").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String url){
+      final Matcher matcher=patternGuid.matcher(url);
+      if (matcher.matches()) {
+        String guid=matcher.group(1);
+        if (guid.length() > 0) {
+          cache.guid=guid;
+        }
+      }
+    }
+  }
+);
   final Element cacheParent=getCacheParent(waypoint);
   for (  String nsGC : nsGCList) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");
