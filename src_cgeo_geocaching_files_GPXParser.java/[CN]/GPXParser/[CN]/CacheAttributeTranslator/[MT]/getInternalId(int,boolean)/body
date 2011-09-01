@@ -1,0 +1,7 @@
+{
+  final String baseName=CacheAttributeTranslator.getBaseName(attributeId);
+  if (baseName == null) {
+    return null;
+  }
+  return baseName + (active ? YES : NO);
+}
