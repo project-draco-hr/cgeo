@@ -1,0 +1,12 @@
+{
+  cgeocoords coordsDialog=new cgeocoords(cgeoadvsearch.this,settings,null,geo);
+  coordsDialog.setCancelable(true);
+  coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
+    @Override public void update(    Geopoint gp){
+      ((Button)findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(gp.getLatitude(),"lat",true));
+      ((Button)findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(gp.getLongitude(),"lon",true));
+    }
+  }
+);
+  coordsDialog.show();
+}

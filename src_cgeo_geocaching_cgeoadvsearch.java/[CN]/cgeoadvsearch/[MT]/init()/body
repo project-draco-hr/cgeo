@@ -7,8 +7,8 @@
   if (geo == null) {
     geo=app.startGeo(this,geoUpdate,base,settings,0,0);
   }
-  ((EditText)findViewById(R.id.latitude)).setOnEditorActionListener(new findByCoordsAction());
-  ((EditText)findViewById(R.id.longitude)).setOnEditorActionListener(new findByCoordsAction());
+  ((Button)findViewById(R.id.buttonLatitude)).setOnClickListener(new findByCoordsAction());
+  ((Button)findViewById(R.id.buttonLongitude)).setOnClickListener(new findByCoordsAction());
   final Button findByCoords=(Button)findViewById(R.id.search_coordinates);
   findByCoords.setOnClickListener(new findByCoordsListener());
   ((EditText)findViewById(R.id.address)).setOnEditorActionListener(new findByAddressAction());
