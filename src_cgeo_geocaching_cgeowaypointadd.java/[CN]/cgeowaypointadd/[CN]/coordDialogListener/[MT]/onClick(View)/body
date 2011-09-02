@@ -3,8 +3,8 @@
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
     @Override public void update(    ArrayList<Double> coords){
-      ((Button)findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(coords.get(0),"lat",true));
-      ((Button)findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(coords.get(1),"lon",true));
+      ((Button)findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(coords.get(0),true));
+      ((Button)findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(coords.get(1),true));
       if (waypoint != null) {
         waypoint.latitude=coords.get(0);
         waypoint.longitude=coords.get(1);
