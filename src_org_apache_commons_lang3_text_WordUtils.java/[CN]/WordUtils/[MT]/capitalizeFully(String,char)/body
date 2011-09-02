@@ -1,0 +1,8 @@
+{
+  int delimLen=(delimiters == null ? -1 : delimiters.length);
+  if (StringUtils.isEmpty(str) || delimLen == 0) {
+    return str;
+  }
+  str=str.toLowerCase();
+  return capitalize(str,delimiters);
+}
