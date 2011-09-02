@@ -74,11 +74,16 @@
  else {
     live=false;
   }
-  if (live) {
-    followMyLocation=true;
+  if (null == mapStateIntent) {
+    if (live) {
+      followMyLocation=true;
+    }
+ else {
+      followMyLocation=false;
+    }
   }
  else {
-    followMyLocation=false;
+    followMyLocation=1 == mapStateIntent[3] ? true : false;
   }
   if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
     centerMap(geocodeIntent,searchIdIntent,latitudeIntent,longitudeIntent,mapStateIntent);
