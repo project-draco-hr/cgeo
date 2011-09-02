@@ -68,7 +68,7 @@
   int icon=-1;
   String iconTxt=null;
   if (cache) {
-    if (type != null && type.length() > 0) {
+    if (StringUtils.isNotBlank(type)) {
       if (own) {
         iconTxt=type + "-own";
       }
@@ -93,7 +93,7 @@
     }
   }
  else {
-    if (type != null && type.length() > 0) {
+    if (StringUtils.isNotBlank(type)) {
       iconTxt=type;
     }
  else {

@@ -1,5 +1,5 @@
 {
-  if (searchId == null || searchId == 0 || cacheList == null || cacheList.isEmpty()) {
+  if (searchId == null || searchId == 0 || CollectionUtils.isEmpty(cacheList)) {
     showToast(res.getString(R.string.warn_no_cache_coord));
     return;
   }

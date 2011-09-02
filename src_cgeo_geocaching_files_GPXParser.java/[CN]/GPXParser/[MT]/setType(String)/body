@@ -4,7 +4,7 @@
     cache.type=knownType;
   }
  else {
-    if (cache.type == null || cache.type.length() == 0) {
+    if (StringUtils.isBlank(cache.type)) {
       cache.type="mystery";
     }
   }

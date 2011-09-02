@@ -1,0 +1,42 @@
+{
+  String duration=formatDuration(durationMillis,"d' days 'H' hours 'm' minutes 's' seconds'");
+  if (suppressLeadingZeroElements) {
+    duration=" " + duration;
+    String tmp=StringUtils.replaceOnce(duration," 0 days","");
+    if (tmp.length() != duration.length()) {
+      duration=tmp;
+      tmp=StringUtils.replaceOnce(duration," 0 hours","");
+      if (tmp.length() != duration.length()) {
+        duration=tmp;
+        tmp=StringUtils.replaceOnce(duration," 0 minutes","");
+        duration=tmp;
+        if (tmp.length() != duration.length()) {
+          duration=StringUtils.replaceOnce(tmp," 0 seconds","");
+        }
+      }
+    }
+    if (duration.length() != 0) {
+      duration=duration.substring(1);
+    }
+  }
+  if (suppressTrailingZeroElements) {
+    String tmp=StringUtils.replaceOnce(duration," 0 seconds","");
+    if (tmp.length() != duration.length()) {
+      duration=tmp;
+      tmp=StringUtils.replaceOnce(duration," 0 minutes","");
+      if (tmp.length() != duration.length()) {
+        duration=tmp;
+        tmp=StringUtils.replaceOnce(duration," 0 hours","");
+        if (tmp.length() != duration.length()) {
+          duration=StringUtils.replaceOnce(tmp," 0 days","");
+        }
+      }
+    }
+  }
+  duration=" " + duration;
+  duration=StringUtils.replaceOnce(duration," 1 seconds"," 1 second");
+  duration=StringUtils.replaceOnce(duration," 1 minutes"," 1 minute");
+  duration=StringUtils.replaceOnce(duration," 1 hours"," 1 hour");
+  duration=StringUtils.replaceOnce(duration," 1 days"," 1 day");
+  return duration.trim();
+}

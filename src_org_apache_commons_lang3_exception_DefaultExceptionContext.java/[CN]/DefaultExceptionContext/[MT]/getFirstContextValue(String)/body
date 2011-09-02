@@ -1,0 +1,8 @@
+{
+  for (  final Pair<String,Object> pair : contextValues) {
+    if (StringUtils.equals(label,pair.getKey())) {
+      return pair.getValue();
+    }
+  }
+  return null;
+}

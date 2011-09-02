@@ -6,7 +6,7 @@
       final Long searchId=searchByGeocode(params,listId,false);
       cache=app.getCache(searchId);
     }
- else     if (geocode != null) {
+ else     if (StringUtils.isNotBlank(geocode)) {
       final HashMap<String,String> params=new HashMap<String,String>();
       params.put("geocode",geocode);
       final Long searchId=searchByGeocode(params,listId,false);
@@ -19,7 +19,7 @@
       return;
     }
     final cgHtmlImg imgGetter=new cgHtmlImg(activity,cache.geocode,false,listId,true);
-    if (cache.description != null) {
+    if (StringUtils.isNotBlank(cache.description)) {
       Html.fromHtml(cache.description,imgGetter,null);
     }
     if (cache.spoilers != null && cache.spoilers.isEmpty() == false) {

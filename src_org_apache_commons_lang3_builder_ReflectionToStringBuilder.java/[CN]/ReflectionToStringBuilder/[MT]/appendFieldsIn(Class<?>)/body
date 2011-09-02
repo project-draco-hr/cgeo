@@ -1,0 +1,20 @@
+{
+  if (clazz.isArray()) {
+    this.reflectionAppendArray(this.getObject());
+    return;
+  }
+  Field[] fields=clazz.getDeclaredFields();
+  AccessibleObject.setAccessible(fields,true);
+  for (  Field field : fields) {
+    String fieldName=field.getName();
+    if (this.accept(field)) {
+      try {
+        Object fieldValue=this.getValue(field);
+        this.append(fieldName,fieldValue);
+      }
+ catch (      IllegalAccessException ex) {
+        throw new InternalError("Unexpected IllegalAccessException: " + ex.getMessage());
+      }
+    }
+  }
+}

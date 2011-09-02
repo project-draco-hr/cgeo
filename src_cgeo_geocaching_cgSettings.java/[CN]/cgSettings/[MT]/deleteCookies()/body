@@ -2,7 +2,7 @@
   editSettings(new PrefRunnable(){
     @Override public void edit(    Editor edit){
       Map<String,?> prefsValues=prefs.getAll();
-      if (prefsValues != null && prefsValues.size() > 0) {
+      if (CollectionUtils.isNotEmpty(prefsValues)) {
         Log.i(cgSettings.tag,"Removing cookies");
         for (        String key : prefsValues.keySet()) {
           if (key.length() > 7 && key.substring(0,7).equals("cookie_")) {

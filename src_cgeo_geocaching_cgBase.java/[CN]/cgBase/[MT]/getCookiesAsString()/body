@@ -27,7 +27,7 @@
   }
   if (cookiesDone == null) {
     Map<String,?> prefsValues=prefs.getAll();
-    if (prefsValues != null && prefsValues.size() > 0) {
+    if (CollectionUtils.isNotEmpty(prefsValues)) {
       final Set<? extends Map.Entry<String,?>> entrySet=prefsValues.entrySet();
       final ArrayList<String> cookiesEncoded=new ArrayList<String>();
       for (      Map.Entry<String,?> entry : entrySet) {

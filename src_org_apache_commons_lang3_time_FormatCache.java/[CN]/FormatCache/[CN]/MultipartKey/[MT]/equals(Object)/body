@@ -1,0 +1,9 @@
+{
+  if (this == obj) {
+    return true;
+  }
+  if (obj instanceof MultipartKey == false) {
+    return false;
+  }
+  return Arrays.equals(keys,((MultipartKey)obj).keys);
+}

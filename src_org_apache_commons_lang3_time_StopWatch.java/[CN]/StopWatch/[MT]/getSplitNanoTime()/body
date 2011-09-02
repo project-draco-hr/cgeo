@@ -1,0 +1,6 @@
+{
+  if (this.splitState != STATE_SPLIT) {
+    throw new IllegalStateException("Stopwatch must be split to get the split time. ");
+  }
+  return this.stopTime - this.startTime;
+}

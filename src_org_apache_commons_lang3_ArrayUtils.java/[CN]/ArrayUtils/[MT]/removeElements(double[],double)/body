@@ -1,0 +1,29 @@
+{
+  if (isEmpty(array) || isEmpty(values)) {
+    return clone(array);
+  }
+  HashMap<Double,MutableInt> occurrences=new HashMap<Double,MutableInt>(values.length);
+  for (  double v : values) {
+    Double boxed=Double.valueOf(v);
+    MutableInt count=occurrences.get(boxed);
+    if (count == null) {
+      occurrences.put(boxed,new MutableInt(1));
+    }
+ else {
+      count.increment();
+    }
+  }
+  HashSet<Integer> toRemove=new HashSet<Integer>();
+  for (  Map.Entry<Double,MutableInt> e : occurrences.entrySet()) {
+    Double v=e.getKey();
+    int found=0;
+    for (int i=0, ct=e.getValue().intValue(); i < ct; i++) {
+      found=indexOf(array,v.doubleValue(),found);
+      if (found < 0) {
+        break;
+      }
+      toRemove.add(found++);
+    }
+  }
+  return removeAll(array,extractIndices(toRemove));
+}

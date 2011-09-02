@@ -46,7 +46,7 @@
   }
 );
   CheckBox twitterButton=(CheckBox)findViewById(R.id.twitter_option);
-  if (prefs.getInt("twitter",0) == 0 || settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0) {
+  if (prefs.getInt("twitter",0) == 0 || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret)) {
     twitterButton.setChecked(false);
   }
  else {
@@ -210,7 +210,7 @@
   EditText altitudeEdit=(EditText)findViewById(R.id.altitude);
   altitudeEdit.setText("" + prefs.getInt("altcorrection",0));
   String webDeviceName=prefs.getString("webDeviceName",null);
-  if ((webDeviceName != null) && (webDeviceName.length() > 0)) {
+  if (StringUtils.isNotBlank(webDeviceName)) {
     ((EditText)findViewById(R.id.webDeviceName)).setText(webDeviceName);
   }
  else {

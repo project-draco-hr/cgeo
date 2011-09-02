@@ -8,7 +8,7 @@
     fromDetail=extras.getBoolean("fromdetail");
     geocode=extras.getString("geocode");
   }
-  if (geocode == null || geocode.length() == 0) {
+  if (StringUtils.isBlank(geocode)) {
     showToast(res.getString(R.string.err_detail_cache_find));
     finish();
     return;

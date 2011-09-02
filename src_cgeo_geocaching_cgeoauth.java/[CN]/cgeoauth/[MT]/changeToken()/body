@@ -53,7 +53,7 @@
     if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
       OAtokenSecret=paramsMatcher2.group(1);
     }
-    if (OAtoken.length() == 0 || OAtokenSecret.length() == 0) {
+    if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
       OAtoken="";
       OAtokenSecret="";
       final SharedPreferences.Editor prefs=getSharedPreferences(cgSettings.preferences,0).edit();

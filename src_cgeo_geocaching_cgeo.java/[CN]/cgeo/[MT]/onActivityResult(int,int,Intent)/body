@@ -2,7 +2,7 @@
   if (requestCode == SCAN_REQUEST_CODE) {
     if (resultCode == RESULT_OK) {
       String scan=intent.getStringExtra("SCAN_RESULT");
-      if (scan == null || scan.length() == 0) {
+      if (StringUtils.isBlank(scan)) {
         return;
       }
       String host="http://coord.info/";

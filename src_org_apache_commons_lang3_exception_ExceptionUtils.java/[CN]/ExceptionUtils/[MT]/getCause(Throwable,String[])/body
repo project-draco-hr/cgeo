@@ -1,0 +1,17 @@
+{
+  if (throwable == null) {
+    return null;
+  }
+  if (methodNames == null) {
+    methodNames=CAUSE_METHOD_NAMES;
+  }
+  for (  String methodName : methodNames) {
+    if (methodName != null) {
+      Throwable cause=getCauseUsingMethodName(throwable,methodName);
+      if (cause != null) {
+        return cause;
+      }
+    }
+  }
+  return null;
+}

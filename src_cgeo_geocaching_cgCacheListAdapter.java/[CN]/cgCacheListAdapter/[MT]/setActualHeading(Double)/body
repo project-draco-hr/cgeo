@@ -3,7 +3,7 @@
     return;
   }
   azimuth=azimuthIn;
-  if (compasses != null && compasses.size() > 0) {
+  if (CollectionUtils.isNotEmpty(compasses)) {
     for (    cgCompassMini compass : compasses) {
       compass.updateAzimuth(azimuth);
     }

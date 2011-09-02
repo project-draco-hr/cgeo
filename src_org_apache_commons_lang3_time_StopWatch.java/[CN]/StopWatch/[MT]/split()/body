@@ -1,0 +1,7 @@
+{
+  if (this.runningState != STATE_RUNNING) {
+    throw new IllegalStateException("Stopwatch is not running. ");
+  }
+  this.stopTime=System.nanoTime();
+  this.splitState=STATE_SPLIT;
+}

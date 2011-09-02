@@ -1,8 +1,8 @@
 {
-  if (geocode == null || geocode.length() == 0) {
+  if (StringUtils.isBlank(geocode)) {
     return false;
   }
-  if (type <= 0 && (log == null || log.length() == 0)) {
+  if (type <= 0 && StringUtils.isBlank(log)) {
     return false;
   }
   boolean status=false;

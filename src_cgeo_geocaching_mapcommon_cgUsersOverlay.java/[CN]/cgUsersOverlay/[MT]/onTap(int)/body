@@ -45,7 +45,7 @@
     dialog.setTitle(user.username);
     dialog.setMessage(action);
     dialog.setCancelable(true);
-    if (geocode != null && geocode.length() > 0) {
+    if (StringUtils.isNotBlank(geocode)) {
       dialog.setPositiveButton(geocode + "?",new cacheDetails(geocode));
     }
     dialog.setNeutralButton("Dismiss",new DialogInterface.OnClickListener(){

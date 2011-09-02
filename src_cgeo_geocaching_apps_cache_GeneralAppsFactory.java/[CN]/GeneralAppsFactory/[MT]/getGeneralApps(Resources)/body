@@ -1,5 +1,5 @@
 {
-  if (null == apps || 0 == apps.length) {
+  if (ArrayUtils.isEmpty(apps)) {
     apps=new GeneralApp[]{new GccApp(res),new WhereYouGoApp(res)};
   }
   return apps;

@@ -1,7 +1,7 @@
 {
   return editSettings(new PrefRunnable(){
     @Override public void edit(    Editor edit){
-      if (password == null || password.length() == 0) {
+      if (StringUtils.isBlank(password)) {
         edit.remove(KEY_GCVOTE_PASSWORD);
       }
  else {

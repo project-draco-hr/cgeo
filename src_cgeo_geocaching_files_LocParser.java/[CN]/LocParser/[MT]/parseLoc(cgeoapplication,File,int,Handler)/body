@@ -6,7 +6,7 @@
     final cgCacheWrap caches=new cgCacheWrap();
     for (    Entry<String,cgCoord> entry : coords.entrySet()) {
       cgCoord coord=entry.getValue();
-      if (coord.geocode == null || coord.geocode.length() == 0 || coord.name == null || coord.name.length() == 0) {
+      if (StringUtils.isBlank(coord.geocode) || StringUtils.isBlank(coord.name)) {
         continue;
       }
       cgCache cache=new cgCache();

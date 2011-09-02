@@ -1,5 +1,5 @@
 {
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.checkLogin: No page given");
     return false;
   }

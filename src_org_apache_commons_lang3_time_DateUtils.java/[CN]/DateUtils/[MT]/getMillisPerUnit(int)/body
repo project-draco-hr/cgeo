@@ -1,0 +1,24 @@
+{
+  long result=Long.MAX_VALUE;
+switch (unit) {
+case Calendar.DAY_OF_YEAR:
+case Calendar.DATE:
+    result=MILLIS_PER_DAY;
+  break;
+case Calendar.HOUR_OF_DAY:
+result=MILLIS_PER_HOUR;
+break;
+case Calendar.MINUTE:
+result=MILLIS_PER_MINUTE;
+break;
+case Calendar.SECOND:
+result=MILLIS_PER_SECOND;
+break;
+case Calendar.MILLISECOND:
+result=1;
+break;
+default :
+throw new IllegalArgumentException("The unit " + unit + " cannot be represented is milleseconds");
+}
+return result;
+}

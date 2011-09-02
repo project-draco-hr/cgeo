@@ -8,7 +8,7 @@
   if (cacheList != null) {
     setTitle(title);
   }
-  if (cacheList != null && cacheList.isEmpty() == false) {
+  if (CollectionUtils.isNotEmpty(cacheList)) {
     final Integer count=app.getTotal(searchId);
     if (count != null && count > 0) {
       setTitle(title);

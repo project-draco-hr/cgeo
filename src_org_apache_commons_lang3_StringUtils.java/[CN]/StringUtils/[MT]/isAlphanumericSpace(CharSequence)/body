@@ -1,0 +1,12 @@
+{
+  if (cs == null) {
+    return false;
+  }
+  int sz=cs.length();
+  for (int i=0; i < sz; i++) {
+    if ((Character.isLetterOrDigit(cs.charAt(i)) == false) && (cs.charAt(i) != ' ')) {
+      return false;
+    }
+  }
+  return true;
+}

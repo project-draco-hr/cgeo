@@ -1,0 +1,14 @@
+{
+  if (date == null) {
+    throw new IllegalArgumentException("The date must not be null");
+  }
+  if (date instanceof Date) {
+    return round((Date)date,field);
+  }
+ else   if (date instanceof Calendar) {
+    return round((Calendar)date,field).getTime();
+  }
+ else {
+    throw new ClassCastException("Could not round " + date);
+  }
+}

@@ -1,5 +1,5 @@
 {
-  if (data == null || data.length() == 0) {
+  if (StringUtils.isEmpty(data)) {
     Log.e(cgSettings.tag,"cgeoBase.parseMapJSON: No page given");
     return null;
   }
@@ -14,7 +14,7 @@
     }
     final JSONObject dataJSON=new JSONObject(json);
     final JSONObject extra=dataJSON.getJSONObject("cs");
-    if (extra != null && extra.length() > 0) {
+    if (StringUtils.isNotBlank(data)) {
       int count=extra.getInt("count");
       if (count > 0 && extra.has("cc")) {
         final JSONArray cachesData=extra.getJSONArray("cc");

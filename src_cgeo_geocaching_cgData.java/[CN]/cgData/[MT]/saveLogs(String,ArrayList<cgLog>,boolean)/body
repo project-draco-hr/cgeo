@@ -1,6 +1,6 @@
 {
   init();
-  if (geocode == null || geocode.length() == 0 || logs == null) {
+  if (StringUtils.isBlank(geocode) || logs == null) {
     return false;
   }
   databaseRW.beginTransaction();
@@ -20,7 +20,7 @@
         values.put("date",oneLog.date);
         values.put("found",oneLog.found);
         long log_id=databaseRW.insert(dbTableLogs,null,values);
-        if ((oneLog.logImages != null) && (oneLog.logImages.size() > 0)) {
+        if (CollectionUtils.isNotEmpty(oneLog.logImages)) {
           for (          cgImage img : oneLog.logImages) {
             values.clear();
             values.put("log_id",log_id);

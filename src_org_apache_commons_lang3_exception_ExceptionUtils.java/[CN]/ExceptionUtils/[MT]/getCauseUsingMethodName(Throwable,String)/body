@@ -1,0 +1,22 @@
+{
+  Method method=null;
+  try {
+    method=throwable.getClass().getMethod(methodName);
+  }
+ catch (  NoSuchMethodException ignored) {
+  }
+catch (  SecurityException ignored) {
+  }
+  if (method != null && Throwable.class.isAssignableFrom(method.getReturnType())) {
+    try {
+      return (Throwable)method.invoke(throwable);
+    }
+ catch (    IllegalAccessException ignored) {
+    }
+catch (    IllegalArgumentException ignored) {
+    }
+catch (    InvocationTargetException ignored) {
+    }
+  }
+  return null;
+}

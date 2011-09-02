@@ -75,7 +75,7 @@
   }
  else   if (type.equals("address")) {
     action="planning";
-    if (address != null && address.length() > 0) {
+    if (StringUtils.isNotBlank(address)) {
       title=address;
       setTitle(title);
       showProgress(true);

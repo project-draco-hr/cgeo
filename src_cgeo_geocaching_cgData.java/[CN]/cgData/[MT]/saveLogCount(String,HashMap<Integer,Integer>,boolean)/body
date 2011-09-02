@@ -1,6 +1,6 @@
 {
   init();
-  if (geocode == null || geocode.length() == 0 || logCounts == null || logCounts.isEmpty()) {
+  if (StringUtils.isBlank(geocode) || CollectionUtils.isEmpty(logCounts)) {
     return false;
   }
   databaseRW.beginTransaction();

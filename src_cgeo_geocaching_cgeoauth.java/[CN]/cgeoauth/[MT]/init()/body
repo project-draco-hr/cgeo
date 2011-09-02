@@ -6,7 +6,7 @@
   OAtokenSecret=prefs.getString("temp-token-secret",null);
   startButton.setEnabled(true);
   startButton.setOnClickListener(new startListener());
-  if (OAtoken == null || OAtoken.length() == 0 || OAtokenSecret == null || OAtokenSecret.length() == 0) {
+  if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
     startButton.setText(res.getString(R.string.auth_start));
   }
  else {

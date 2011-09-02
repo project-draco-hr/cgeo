@@ -2,11 +2,11 @@
   final String[] viewstates=app.getViewstates(searchId);
   cgCacheWrap caches=new cgCacheWrap();
   String url=app.getUrl(searchId);
-  if (url == null || url.length() == 0) {
+  if (StringUtils.isBlank(url)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No url found");
     return searchId;
   }
-  if (isEmpty(viewstates)) {
+  if (ArrayUtils.isEmpty(viewstates)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No viewstate given");
     return searchId;
   }
@@ -52,7 +52,7 @@
       return searchId;
     }
   }
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No data from server");
     return searchId;
   }

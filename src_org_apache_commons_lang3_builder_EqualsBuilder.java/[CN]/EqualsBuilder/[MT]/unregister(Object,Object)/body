@@ -1,0 +1,13 @@
+{
+  Set<Pair<IDKey,IDKey>> registry=getRegistry();
+  if (registry != null) {
+    Pair<IDKey,IDKey> pair=getRegisterPair(lhs,rhs);
+    registry.remove(pair);
+synchronized (EqualsBuilder.class) {
+      registry=getRegistry();
+      if (registry != null && registry.isEmpty()) {
+        REGISTRY.remove();
+      }
+    }
+  }
+}

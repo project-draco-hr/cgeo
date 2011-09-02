@@ -1,5 +1,5 @@
 {
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.parseTrackable: No page given");
     return null;
   }
@@ -64,7 +64,7 @@
  catch (  Exception e) {
     Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable name");
   }
-  if (trackable.name != null && trackable.name.length() > 0) {
+  if (StringUtils.isNotBlank(trackable.name)) {
     try {
       final Matcher matcherType=patternType.matcher(page);
       while (matcherType.find()) {
@@ -181,10 +181,10 @@
       if (matcherDetailsImage.groupCount() > 0) {
         final String image=matcherDetailsImage.group(3);
         final String details=matcherDetailsImage.group(4);
-        if (image != null) {
+        if (StringUtils.isNotBlank(image)) {
           trackable.image=image;
         }
-        if (details != null) {
+        if (StringUtils.isNotBlank(details)) {
           trackable.details=details;
         }
       }

@@ -1,0 +1,6 @@
+{
+  if (this.runningState == STATE_UNSTARTED) {
+    throw new IllegalStateException("Stopwatch has not been started");
+  }
+  return this.startTimeMillis;
+}

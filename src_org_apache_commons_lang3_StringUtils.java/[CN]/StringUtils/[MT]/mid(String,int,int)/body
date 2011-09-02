@@ -1,0 +1,15 @@
+{
+  if (str == null) {
+    return null;
+  }
+  if (len < 0 || pos > str.length()) {
+    return EMPTY;
+  }
+  if (pos < 0) {
+    pos=0;
+  }
+  if (str.length() <= (pos + len)) {
+    return str.substring(pos);
+  }
+  return str.substring(pos,pos + len);
+}

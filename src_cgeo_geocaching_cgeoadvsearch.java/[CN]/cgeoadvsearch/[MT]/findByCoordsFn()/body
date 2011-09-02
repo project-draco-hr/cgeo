@@ -3,7 +3,7 @@
   final EditText lonView=(EditText)findViewById(R.id.longitude);
   final String latText=latView.getText().toString();
   final String lonText=lonView.getText().toString();
-  if (latText == null || latText.length() == 0 || lonText == null || lonText.length() == 0) {
+  if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
     latView.setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true));
     lonView.setText(cgBase.formatCoordinate(geo.longitudeNow,"lon",true));
   }

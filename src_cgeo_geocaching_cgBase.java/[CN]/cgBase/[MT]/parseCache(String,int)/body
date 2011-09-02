@@ -1,5 +1,5 @@
 {
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.parseCache: No page given");
     return null;
   }
@@ -109,7 +109,7 @@
     return null;
   }
   tableInside=tableInside.substring(0,pos);
-  if (tableInside != null && tableInside.length() > 0) {
+  if (StringUtils.isNotBlank(tableInside)) {
     try {
       final Matcher matcherTerrain=patternTerrain.matcher(tableInside);
       if (matcherTerrain.find()) {
@@ -388,7 +388,7 @@
       while (matcherLog.find()) {
         String typeStr=matcherLog.group(1);
         String countStr=matcherLog.group(2);
-        if (typeStr != null && typeStr.length() > 0 && logTypes.containsKey(typeStr.toLowerCase()) && countStr != null && countStr.length() > 0) {
+        if (StringUtils.isNotBlank(typeStr) && logTypes.containsKey(typeStr.toLowerCase()) && StringUtils.isNotBlank(countStr)) {
           cache.logCounts.put(logTypes.get(typeStr.toLowerCase()),Integer.parseInt(countStr));
         }
       }
@@ -468,7 +468,7 @@
           while (matcherWpType.find()) {
             if (matcherWpType.groupCount() > 0) {
               waypoint.type=matcherWpType.group(1);
-              if (waypoint.type != null) {
+              if (StringUtils.isNotBlank(waypoint.type)) {
                 waypoint.type=waypoint.type.trim();
               }
             }
@@ -482,7 +482,7 @@
           while (matcherWpPrefix.find()) {
             if (matcherWpPrefix.groupCount() > 1) {
               waypoint.prefix=matcherWpPrefix.group(2);
-              if (waypoint.prefix != null) {
+              if (StringUtils.isNotBlank(waypoint.prefix)) {
                 waypoint.prefix=waypoint.prefix.trim();
               }
             }
@@ -496,7 +496,7 @@
           while (matcherWpLookup.find()) {
             if (matcherWpLookup.groupCount() > 1) {
               waypoint.lookup=matcherWpLookup.group(2);
-              if (waypoint.lookup != null) {
+              if (StringUtils.isNotBlank(waypoint.lookup)) {
                 waypoint.lookup=waypoint.lookup.trim();
               }
             }
@@ -510,7 +510,7 @@
           while (matcherWpName.find()) {
             if (matcherWpName.groupCount() > 0) {
               waypoint.name=matcherWpName.group(1);
-              if (waypoint.name != null) {
+              if (StringUtils.isNotBlank(waypoint.name)) {
                 waypoint.name=waypoint.name.trim();
               }
             }
@@ -546,7 +546,7 @@
           while (matcherWpNote.find()) {
             if (matcherWpNote.groupCount() > 0) {
               waypoint.note=matcherWpNote.group(1);
-              if (waypoint.note != null) {
+              if (StringUtils.isNotBlank(waypoint.note)) {
                 waypoint.note=waypoint.note.trim();
               }
             }

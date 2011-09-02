@@ -3,7 +3,7 @@
   String dirName=null;
   String fileName=null;
   String fileNameSec=null;
-  if (url == null || url.length() == 0) {
+  if (StringUtils.isNotBlank(url)) {
     return null;
   }
   final String[] urlParts=url.split("\\.");
@@ -17,7 +17,7 @@
  else {
     urlExt="";
   }
-  if (geocode != null && geocode.length() > 0) {
+  if (StringUtils.isNotBlank(geocode)) {
     dirName=cgSettings.getStorage() + geocode + "/";
     fileName=cgSettings.getStorage() + geocode + "/"+ cgBase.md5(url)+ urlExt;
     fileNameSec=cgSettings.getStorageSec() + geocode + "/"+ cgBase.md5(url)+ urlExt;

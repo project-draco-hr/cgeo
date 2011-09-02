@@ -1,0 +1,16 @@
+{
+  if (str == null || size <= 0) {
+    return str;
+  }
+  if (isEmpty(padStr)) {
+    padStr=" ";
+  }
+  int strLen=str.length();
+  int pads=size - strLen;
+  if (pads <= 0) {
+    return str;
+  }
+  str=leftPad(str,strLen + pads / 2,padStr);
+  str=rightPad(str,size,padStr);
+  return str;
+}

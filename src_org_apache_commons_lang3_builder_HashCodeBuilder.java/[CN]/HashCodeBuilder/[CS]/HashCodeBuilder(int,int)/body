@@ -1,0 +1,16 @@
+{
+  if (initialNonZeroOddNumber == 0) {
+    throw new IllegalArgumentException("HashCodeBuilder requires a non zero initial value");
+  }
+  if (initialNonZeroOddNumber % 2 == 0) {
+    throw new IllegalArgumentException("HashCodeBuilder requires an odd initial value");
+  }
+  if (multiplierNonZeroOddNumber == 0) {
+    throw new IllegalArgumentException("HashCodeBuilder requires a non zero multiplier");
+  }
+  if (multiplierNonZeroOddNumber % 2 == 0) {
+    throw new IllegalArgumentException("HashCodeBuilder requires an odd multiplier");
+  }
+  iConstant=multiplierNonZeroOddNumber;
+  iTotal=initialNonZeroOddNumber;
+}

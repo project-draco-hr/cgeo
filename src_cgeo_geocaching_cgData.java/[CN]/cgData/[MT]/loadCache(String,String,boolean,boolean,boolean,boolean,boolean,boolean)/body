@@ -1,13 +1,13 @@
 {
   Object[] geocodes=new Object[1];
   Object[] guids=new Object[1];
-  if (geocode != null && geocode.length() > 0) {
+  if (StringUtils.isNotBlank(geocode)) {
     geocodes[0]=geocode;
   }
  else {
     geocodes=null;
   }
-  if (guid != null && guid.length() > 0) {
+  if (StringUtils.isNotBlank(guid)) {
     guids[0]=guid;
   }
  else {

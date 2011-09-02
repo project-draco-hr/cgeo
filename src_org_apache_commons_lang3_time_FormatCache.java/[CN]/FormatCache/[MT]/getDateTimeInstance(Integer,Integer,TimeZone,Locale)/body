@@ -1,0 +1,30 @@
+{
+  if (locale == null) {
+    locale=Locale.getDefault();
+  }
+  MultipartKey key=new MultipartKey(dateStyle,timeStyle,locale);
+  String pattern=cDateTimeInstanceCache.get(key);
+  if (pattern == null) {
+    try {
+      DateFormat formatter;
+      if (dateStyle == null) {
+        formatter=DateFormat.getTimeInstance(timeStyle,locale);
+      }
+ else       if (timeStyle == null) {
+        formatter=DateFormat.getDateInstance(dateStyle,locale);
+      }
+ else {
+        formatter=DateFormat.getDateTimeInstance(dateStyle,timeStyle,locale);
+      }
+      pattern=((SimpleDateFormat)formatter).toPattern();
+      String previous=cDateTimeInstanceCache.putIfAbsent(key,pattern);
+      if (previous != null) {
+        pattern=previous;
+      }
+    }
+ catch (    ClassCastException ex) {
+      throw new IllegalArgumentException("No date time pattern for locale: " + locale);
+    }
+  }
+  return getInstance(pattern,timeZone,locale);
+}
