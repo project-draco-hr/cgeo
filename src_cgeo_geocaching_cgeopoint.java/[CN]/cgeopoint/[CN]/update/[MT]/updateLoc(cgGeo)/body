@@ -4,10 +4,10 @@
   }
   try {
     if (latEdit == null) {
-      latEdit=(EditText)findViewById(R.id.latitude);
+      latEdit=(Button)findViewById(R.id.buttonLatitude);
     }
     if (lonEdit == null) {
-      lonEdit=(EditText)findViewById(R.id.longitude);
+      lonEdit=(Button)findViewById(R.id.buttonLongitude);
     }
     latEdit.setHint(cgBase.formatCoordinate(geo.latitudeNow,"lat",false));
     lonEdit.setHint(cgBase.formatCoordinate(geo.longitudeNow,"lon",false));
