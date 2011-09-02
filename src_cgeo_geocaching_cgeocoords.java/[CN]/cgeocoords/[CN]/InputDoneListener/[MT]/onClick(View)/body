@@ -1,31 +1,11 @@
 {
-  if (currentFormat == coordInputFormatEnum.Plain) {
-    if (eLat.length() > 0 && eLon.length() > 0) {
-      HashMap<String,Object> latParsed=cgBase.parseCoordinate(eLat.getText().toString(),"lat");
-      HashMap<String,Object> lonParsed=cgBase.parseCoordinate(eLon.getText().toString(),"lon");
-      if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
-        context.showToast(context.getResources().getString(R.string.err_parse_lat));
-        return;
-      }
-      if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
-        context.showToast(context.getResources().getString(R.string.err_parse_lon));
-        return;
-      }
-      latitude=(Double)latParsed.get("coordinate");
-      longitude=(Double)lonParsed.get("coordinate");
-    }
- else {
-      if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-        context.showToast(context.getResources().getString(R.string.err_point_curr_position_unavailable));
-        return;
-      }
-      latitude=geo.latitudeNow;
-      longitude=geo.longitudeNow;
-    }
+  try {
+    calc();
   }
-  ArrayList<Double> co=new ArrayList<Double>();
-  co.add(latitude);
-  co.add(longitude);
-  cuListener.update(co);
+ catch (  GeopointException e) {
+    context.showToast(e.getMessage());
+    return;
+  }
+  cuListener.update(gp);
   dismiss();
 }

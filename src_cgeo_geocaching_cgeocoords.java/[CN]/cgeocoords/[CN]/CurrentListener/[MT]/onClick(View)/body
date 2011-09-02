@@ -3,7 +3,7 @@
     context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
     return;
   }
-  latitude=geo.latitudeNow;
-  longitude=geo.longitudeNow;
+  gp.setLatitude(geo.latitudeNow);
+  gp.setLongitude(geo.longitudeNow);
   updateGUI();
 }

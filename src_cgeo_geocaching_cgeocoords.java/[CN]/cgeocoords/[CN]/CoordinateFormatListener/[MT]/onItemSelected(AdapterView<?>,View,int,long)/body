@@ -1,4 +1,12 @@
 {
+  try {
+    if (currentFormat != null)     calc();
+  }
+ catch (  GeopointException e) {
+    context.showToast(e.getMessage());
+    spinner.setSelection(currentFormat.ordinal());
+    return;
+  }
   currentFormat=coordInputFormatEnum.fromInt(pos);
   settings.setCoordInputFormat(currentFormat);
   updateGUI();

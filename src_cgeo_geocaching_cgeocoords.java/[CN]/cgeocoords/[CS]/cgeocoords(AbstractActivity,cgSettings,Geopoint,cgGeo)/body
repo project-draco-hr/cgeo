@@ -3,12 +3,13 @@
   context=contextIn;
   settings=settingsIn;
   geo=geoIn;
-  if (waypoint != null) {
-    latitude=waypoint.latitude;
-    longitude=waypoint.longitude;
+  if (gpIn != null) {
+    gp=gpIn;
   }
  else   if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-    latitude=geo.latitudeNow;
-    longitude=geo.longitudeNow;
+    gp=new Geopoint(geo.latitudeNow,geo.longitudeNow);
+  }
+ else {
+    gp=new Geopoint();
   }
 }
