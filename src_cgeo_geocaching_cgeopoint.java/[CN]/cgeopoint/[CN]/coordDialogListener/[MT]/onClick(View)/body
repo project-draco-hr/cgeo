@@ -1,10 +1,16 @@
 {
-  cgeocoords coordsDialog=new cgeocoords(cgeopoint.this,settings,null,geo);
+  Geopoint gp=null;
+  if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
+    gp=new Geopoint();
+    gp.setLatitude(latButton.getText().toString());
+    gp.setLongitude(lonButton.getText().toString());
+  }
+  cgeocoords coordsDialog=new cgeocoords(cgeopoint.this,settings,gp,geo);
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
     @Override public void update(    Geopoint gp){
-      ((Button)findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(gp.getLatitude(),"lat",true));
-      ((Button)findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(gp.getLongitude(),"lon",true));
+      latButton.setText(cgBase.formatCoordinate(gp.getLatitude(),"lat",true));
+      lonButton.setText(cgBase.formatCoordinate(gp.getLongitude(),"lon",true));
       changed=true;
     }
   }

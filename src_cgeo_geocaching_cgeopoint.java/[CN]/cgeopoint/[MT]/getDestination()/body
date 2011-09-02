@@ -4,8 +4,8 @@
   Double longitude=null;
   String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
   String distanceText=((EditText)findViewById(R.id.distance)).getText().toString();
-  String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
-  String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
+  String latText=latButton.getText().toString();
+  String lonText=lonButton.getText().toString();
   if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0) && (latText == null || latText.length() == 0)&& (lonText == null || lonText.length() == 0)) {
     showToast(res.getString(R.string.err_point_no_position_given));
     return null;
