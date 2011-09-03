@@ -321,7 +321,7 @@
       }
       if (matcherInventory.groupCount() > 1) {
         final String inventoryPre=matcherInventory.group(2);
-        if (inventoryPre != null && inventoryPre.length() > 0) {
+        if (StringUtils.isNotBlank(inventoryPre)) {
           final Matcher matcherInventoryInside=patternInventoryInside.matcher(inventoryPre);
           while (matcherInventoryInside.find()) {
             if (matcherInventoryInside.groupCount() > 0) {

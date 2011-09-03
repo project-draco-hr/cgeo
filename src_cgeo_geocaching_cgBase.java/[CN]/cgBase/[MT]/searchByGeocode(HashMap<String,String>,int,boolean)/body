@@ -52,7 +52,7 @@
   }
   final cgCacheWrap caches=parseCache(page,reason);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-    if (caches != null && caches.error != null && caches.error.length() > 0) {
+    if (caches != null && StringUtils.isNotBlank(caches.error)) {
       search.error=caches.error;
     }
     if (caches != null && StringUtils.isNotBlank(caches.url)) {

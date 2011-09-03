@@ -1,7 +1,7 @@
 {
   try {
     if (cache != null) {
-      if (cache.reason > 0 || cache.description == null || cache.description.length() == 0) {
+      if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
         final HashMap<String,String> params=new HashMap<String,String>();
         params.put("geocode",cache.geocode);
         final Long searchId=searchByGeocode(params,listId,false);
@@ -24,14 +24,14 @@
     if (StringUtils.isNotBlank(cache.description)) {
       Html.fromHtml(cache.description,imgGetter,null);
     }
-    if (cache.spoilers != null && cache.spoilers.isEmpty() == false) {
+    if (CollectionUtils.isNotEmpty(cache.spoilers)) {
       for (      cgImage oneSpoiler : cache.spoilers) {
         imgGetter.getDrawable(oneSpoiler.url);
       }
     }
     if (settings.storelogimages) {
       for (      cgLog log : cache.logs) {
-        if (log.logImages != null && log.logImages.isEmpty() == false) {
+        if (CollectionUtils.isNotEmpty(log.logImages)) {
           for (          cgImage oneLogImg : log.logImages) {
             imgGetter.getDrawable(oneLogImg.url);
           }

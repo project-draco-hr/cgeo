@@ -32,7 +32,7 @@
       }
       if (recaptchaJsParam != null) {
         final String recaptchaJs=request(false,"www.google.com","/recaptcha/api/challenge","GET","k=" + urlencode_rfc3986(recaptchaJsParam.trim()),0,true).getData();
-        if (recaptchaJs != null && recaptchaJs.length() > 0) {
+        if (StringUtils.isNotBlank(recaptchaJs)) {
           final Matcher matcherRecaptchaChallenge=patternRecaptchaChallenge.matcher(recaptchaJs);
           while (matcherRecaptchaChallenge.find()) {
             if (matcherRecaptchaChallenge.groupCount() > 0) {
@@ -45,7 +45,7 @@
  catch (    Exception e) {
       Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse recaptcha challenge");
     }
-    if (thread != null && recaptchaChallenge != null && recaptchaChallenge.length() > 0) {
+    if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
       thread.setChallenge(recaptchaChallenge);
       thread.notifyNeed();
     }
@@ -158,7 +158,7 @@
  catch (    Exception e) {
       Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory (1)");
     }
-    if (inventoryPre != null && inventoryPre.trim().length() > 0) {
+    if (StringUtils.isNotBlank(inventoryPre)) {
       try {
         final Matcher matcherTbsInside=patternTbsInside.matcher(inventoryPre);
         while (matcherTbsInside.find()) {
@@ -254,7 +254,7 @@
       final String path="/seek/nearest.aspx";
       final StringBuilder params=new StringBuilder();
       params.append("__EVENTTARGET=&__EVENTARGUMENT=");
-      if (caches.viewstates != null && caches.viewstates.length > 0) {
+      if (ArrayUtils.isNotEmpty(caches.viewstates)) {
         params.append("&__VIEWSTATE=");
         params.append(urlencode_rfc3986(caches.viewstates[0]));
         if (caches.viewstates.length > 1) {

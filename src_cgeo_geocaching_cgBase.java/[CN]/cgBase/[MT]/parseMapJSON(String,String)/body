@@ -8,7 +8,7 @@
   try {
     final JSONObject yoDawg=new JSONObject(data);
     final String json=yoDawg.getString("d");
-    if (json == null || json.length() == 0) {
+    if (StringUtils.isBlank(json)) {
       Log.e(cgSettings.tag,"cgeoBase.parseMapJSON: No JSON inside JSON");
       return null;
     }
