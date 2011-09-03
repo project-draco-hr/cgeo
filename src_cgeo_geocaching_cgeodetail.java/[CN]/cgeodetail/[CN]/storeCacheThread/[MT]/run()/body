@@ -1,7 +1,4 @@
 {
-  int reason=1;
-  if (cache.reason > 1) {
-    reason=cache.reason;
-  }
+  int reason=(cache.reason > 1) ? cache.reason : 1;
   base.storeCache(app,cgeodetail.this,cache,null,reason,handler);
 }
