@@ -3,6 +3,6 @@
     return null;
   }
   cgSearch search=searches.get(searchId);
-  ArrayList<String> geocodeList=search.getGeocodes();
+  List<String> geocodeList=search.getGeocodes();
   return getCacheByGeocode(geocodeList.get(0),true,true,true,true,true,true);
 }

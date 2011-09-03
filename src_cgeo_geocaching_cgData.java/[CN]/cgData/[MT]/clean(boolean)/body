@@ -2,7 +2,7 @@
   init();
   Log.d(cgSettings.tag,"Database clean: started");
   Cursor cursor=null;
-  ArrayList<String> geocodes=new ArrayList<String>();
+  List<String> geocodes=new ArrayList<String>();
   try {
     if (more) {
       cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},"reason = 0",null,null,null,null,null);

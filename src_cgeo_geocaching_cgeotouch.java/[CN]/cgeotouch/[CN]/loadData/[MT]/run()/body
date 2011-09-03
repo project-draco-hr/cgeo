@@ -1,5 +1,5 @@
 {
-  final HashMap<String,String> params=new HashMap<String,String>();
+  final Map<String,String> params=new HashMap<String,String>();
   showProgressHandler.sendEmptyMessage(0);
   gettingViewstate=true;
   attempts++;
@@ -13,7 +13,7 @@
     }
     final String page=base.request(false,"www.geocaching.com","/track/log.aspx","GET",params,false,false,false).getData();
     viewstates=cgBase.getViewstates(page);
-    final ArrayList<Integer> typesPre=cgBase.parseTypes(page);
+    final List<Integer> typesPre=cgBase.parseTypes(page);
     if (typesPre.size() > 0) {
       types.clear();
       types.addAll(typesPre);

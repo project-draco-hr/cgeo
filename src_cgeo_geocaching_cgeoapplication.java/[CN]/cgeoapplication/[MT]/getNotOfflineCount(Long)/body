@@ -3,7 +3,7 @@
     return 0;
   }
   int count=0;
-  ArrayList<String> geocodes=searches.get(searchId).getGeocodes();
+  List<String> geocodes=searches.get(searchId).getGeocodes();
   if (geocodes != null) {
     for (    String geocode : geocodes) {
       if (isOffline(geocode,null) == false) {

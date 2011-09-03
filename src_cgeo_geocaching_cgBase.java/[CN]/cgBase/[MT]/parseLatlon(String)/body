@@ -1,5 +1,5 @@
 {
-  final HashMap<String,Object> result=new HashMap<String,Object>();
+  final Map<String,Object> result=new HashMap<String,Object>();
   final Pattern patternLatlon=Pattern.compile("([NS])[^\\d]*(\\d+)[^??]*?? (\\d+)\\.(\\d+) ([WE])[^\\d]*(\\d+)[^??]*?? (\\d+)\\.(\\d+)",Pattern.CASE_INSENSITIVE);
   final Matcher matcherLatlon=patternLatlon.matcher(latlon);
   while (matcherLatlon.find()) {

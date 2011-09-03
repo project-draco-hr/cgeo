@@ -1,5 +1,5 @@
 {
-  ArrayList<Double> coords=new ArrayList<Double>();
+  List<Double> coords=new ArrayList<Double>();
   Double latitude=null;
   Double longitude=null;
   String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
@@ -11,8 +11,8 @@
     return null;
   }
   if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
-    HashMap<String,Object> latParsed=cgBase.parseCoordinate(latText,"lat");
-    HashMap<String,Object> lonParsed=cgBase.parseCoordinate(lonText,"lon");
+    Map<String,Object> latParsed=cgBase.parseCoordinate(latText,"lat");
+    Map<String,Object> lonParsed=cgBase.parseCoordinate(lonText,"lon");
     if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
       showToast(res.getString(R.string.err_parse_lat));
       return null;
@@ -87,7 +87,7 @@
     }
     Double latParsed=null;
     Double lonParsed=null;
-    HashMap<String,Double> coordsDst=cgBase.getRadialDistance(latitude,longitude,bearing,distance);
+    Map<String,Double> coordsDst=cgBase.getRadialDistance(latitude,longitude,bearing,distance);
     latParsed=coordsDst.get("latitude");
     lonParsed=coordsDst.get("longitude");
     if (latParsed == null || lonParsed == null) {

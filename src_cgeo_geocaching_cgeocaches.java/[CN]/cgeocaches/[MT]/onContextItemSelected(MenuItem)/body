@@ -126,7 +126,7 @@
  else   if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
     int newListId=id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
     boolean moveAll=adapter.getChecked() == 0;
-    final ArrayList<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
+    final List<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
     for (    cgCache c : cacheListTemp) {
       if (moveAll || c.statusChecked) {
         app.moveToList(c.geocode,newListId);
@@ -138,7 +138,7 @@
   }
   lastMenuInfo=info;
   if (cache != null) {
-    HashMap<String,String> params=new HashMap<String,String>();
+    Map<String,String> params=new HashMap<String,String>();
     params.put("geocode",cache.geocode);
     Long singleSearchId=base.searchByGeocode(params,0,false);
     if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearchId,null,null)) {
