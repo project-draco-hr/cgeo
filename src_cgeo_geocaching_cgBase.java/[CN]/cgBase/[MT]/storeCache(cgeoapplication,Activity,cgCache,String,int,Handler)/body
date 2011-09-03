@@ -1,10 +1,12 @@
 {
   try {
     if (cache != null) {
-      final HashMap<String,String> params=new HashMap<String,String>();
-      params.put("geocode",cache.geocode);
-      final Long searchId=searchByGeocode(params,listId,false);
-      cache=app.getCache(searchId);
+      if (cache.reason > 0 || cache.description == null || cache.description.length() == 0) {
+        final HashMap<String,String> params=new HashMap<String,String>();
+        params.put("geocode",cache.geocode);
+        final Long searchId=searchByGeocode(params,listId,false);
+        cache=app.getCache(searchId);
+      }
     }
  else     if (StringUtils.isNotBlank(geocode)) {
       final HashMap<String,String> params=new HashMap<String,String>();
