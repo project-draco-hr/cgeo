@@ -6,7 +6,7 @@
       contextMenuUser=((TextView)view).getText().toString();
     }
  else     if (viewId == R.id.value) {
-      if (cache.ownerReal != null && cache.ownerReal.length() > 0) {
+      if (StringUtils.isNotBlank(cache.ownerReal)) {
         contextMenuUser=cache.ownerReal;
       }
  else {

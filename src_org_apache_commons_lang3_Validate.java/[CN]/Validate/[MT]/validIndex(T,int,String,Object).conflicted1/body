@@ -1,0 +1,7 @@
+{
+  Validate.notNull(chars);
+  if (index < 0 || index >= chars.length()) {
+    throw new IndexOutOfBoundsException(String.format(message,values));
+  }
+  return chars;
+}

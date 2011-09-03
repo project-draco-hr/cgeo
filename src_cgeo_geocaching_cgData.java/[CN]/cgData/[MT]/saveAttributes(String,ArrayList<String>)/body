@@ -1,6 +1,6 @@
 {
   init();
-  if (geocode == null || geocode.length() == 0 || attributes == null) {
+  if (StringUtils.isBlank(geocode) || attributes == null) {
     return false;
   }
   databaseRW.beginTransaction();

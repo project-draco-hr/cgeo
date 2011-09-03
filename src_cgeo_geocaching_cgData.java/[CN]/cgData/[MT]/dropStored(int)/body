@@ -17,7 +17,7 @@
       }
       cursor.close();
     }
-    if (geocodes.size() > 0) {
+    if (CollectionUtils.isNotEmpty(geocodes)) {
       String geocodeList=cgBase.implode(", ",geocodes.toArray());
       databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in ("+ geocodeList+ ")");
       databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in ("+ geocodeList+ ")");

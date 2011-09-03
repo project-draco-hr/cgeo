@@ -3,11 +3,11 @@
   final String keyword=parameters.get("keyword");
   cgCacheWrap caches=new cgCacheWrap();
   String cacheType=parameters.get("cachetype");
-  if (keyword == null || keyword.length() == 0) {
+  if (StringUtils.isBlank(keyword)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No keyword given");
     return null;
   }
-  if (cacheType != null && cacheType.length() == 0) {
+  if (StringUtils.isBlank(cacheType)) {
     cacheType=null;
   }
   final String host="www.geocaching.com";
@@ -23,7 +23,7 @@
   params.put("key",keyword);
   final String url="http://" + host + path+ "?"+ prepareParameters(params,false,true);
   String page=requestLogged(false,host,path,method,params,false,false,true);
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No data from server");
     return null;
   }
@@ -37,10 +37,10 @@
   }
   final ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
   if (caches != null) {
-    if (caches.error != null && caches.error.length() > 0) {
+    if (StringUtils.isNotBlank(caches.error)) {
       search.error=caches.error;
     }
-    if (caches.url != null && caches.url.length() > 0) {
+    if (StringUtils.isNotBlank(caches.url)) {
       search.url=caches.url;
     }
     search.viewstates=caches.viewstates;

@@ -1,0 +1,10 @@
+{
+  if (object != null) {
+    appendClassName(buffer,object);
+    appendIdentityHashCode(buffer,object);
+    appendContentStart(buffer);
+    if (fieldSeparatorAtStart) {
+      appendFieldSeparator(buffer);
+    }
+  }
+}

@@ -49,7 +49,7 @@
       return;
     }
     final cgCache cache=adapter.getItem(adapterInfo.position);
-    if (cache.name != null && cache.name.length() > 0) {
+    if (StringUtils.isNotBlank(cache.name)) {
       menu.setHeaderTitle(cache.name);
     }
  else {

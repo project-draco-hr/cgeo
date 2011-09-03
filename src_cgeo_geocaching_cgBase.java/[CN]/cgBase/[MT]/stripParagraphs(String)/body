@@ -1,5 +1,5 @@
 {
-  if (text == null) {
+  if (StringUtils.isBlank(text)) {
     return "";
   }
   final Pattern patternP=Pattern.compile("(<p>|</p>|<br \\/>|<br>)",Pattern.CASE_INSENSITIVE);

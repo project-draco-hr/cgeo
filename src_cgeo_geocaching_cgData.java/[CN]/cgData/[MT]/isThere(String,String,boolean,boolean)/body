@@ -6,10 +6,10 @@
   long dataDetailedUpdate=0;
   int dataDetailed=0;
   try {
-    if (geocode != null && geocode.length() > 0) {
+    if (StringUtils.isNotBlank(geocode)) {
       cursor=databaseRO.query(dbTableCaches,new String[]{"_id","detailed","detailedupdate","updated"},"geocode = \"" + geocode + "\"",null,null,null,null,"1");
     }
- else     if (guid != null && guid.length() > 0) {
+ else     if (StringUtils.isNotBlank(guid)) {
       cursor=databaseRO.query(dbTableCaches,new String[]{"_id","detailed","detailedupdate","updated"},"guid = \"" + guid + "\"",null,null,null,null,"1");
     }
  else {

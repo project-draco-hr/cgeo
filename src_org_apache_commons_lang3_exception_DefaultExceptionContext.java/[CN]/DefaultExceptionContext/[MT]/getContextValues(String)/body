@@ -1,0 +1,9 @@
+{
+  final List<Object> values=new ArrayList<Object>();
+  for (  final Pair<String,Object> pair : contextValues) {
+    if (StringUtils.equals(label,pair.getKey())) {
+      values.add(pair.getValue());
+    }
+  }
+  return values;
+}

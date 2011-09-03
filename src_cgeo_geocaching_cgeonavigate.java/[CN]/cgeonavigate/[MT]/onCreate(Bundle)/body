@@ -16,8 +16,8 @@
     name=extras.getString("name");
     dstLatitude=extras.getDouble("latitude");
     dstLongitude=extras.getDouble("longitude");
-    if (name != null && name.length() > 0) {
-      if (title != null && title.length() > 0) {
+    if (StringUtils.isNotBlank(name)) {
+      if (StringUtils.isNotBlank(title)) {
         title=title + ": " + name;
       }
  else {
@@ -31,10 +31,10 @@
     finish();
     return;
   }
-  if (title != null && title.length() > 0) {
+  if (StringUtils.isNotBlank(title)) {
     app.setAction(title);
   }
- else   if (name != null && name.length() > 0) {
+ else   if (StringUtils.isNotBlank(name)) {
     app.setAction(name);
   }
   setTitle();

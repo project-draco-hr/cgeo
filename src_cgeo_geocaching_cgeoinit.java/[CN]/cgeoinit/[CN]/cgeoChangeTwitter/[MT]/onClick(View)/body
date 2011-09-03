@@ -12,7 +12,7 @@
       settings.twitter=0;
     }
     edit.commit();
-    if (settings.twitter == 1 && (settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0)) {
+    if (settings.twitter == 1 && (StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret))) {
       Intent authIntent=new Intent(cgeoinit.this,cgeoauth.class);
       startActivity(authIntent);
     }

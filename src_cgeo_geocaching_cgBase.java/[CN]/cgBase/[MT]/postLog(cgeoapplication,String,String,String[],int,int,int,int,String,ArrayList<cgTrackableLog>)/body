@@ -1,5 +1,5 @@
 {
-  if (isEmpty(viewstates)) {
+  if (ArrayUtils.isEmpty(viewstates)) {
     Log.e(cgSettings.tag,"cgeoBase.postLog: No viewstate given");
     return 1000;
   }
@@ -7,7 +7,7 @@
     Log.e(cgSettings.tag,"cgeoBase.postLog: Unknown logtype");
     return 1000;
   }
-  if (log == null || log.length() == 0) {
+  if (StringUtils.isBlank(log)) {
     Log.e(cgSettings.tag,"cgeoBase.postLog: No log text given");
     return 1001;
   }
@@ -71,7 +71,7 @@
       return loginState;
     }
   }
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.postLog: No data from server");
     return 1002;
   }
@@ -80,7 +80,7 @@
   try {
     if (matcher.find() && matcher.groupCount() > 0) {
       final String[] viewstatesConfirm=getViewstates(page);
-      if (isEmpty(viewstatesConfirm)) {
+      if (ArrayUtils.isEmpty(viewstatesConfirm)) {
         Log.e(cgSettings.tag,"cgeoBase.postLog: No viewstate for confirm log");
         return 1000;
       }

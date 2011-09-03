@@ -1,0 +1,10 @@
+{
+  appendFieldStart(buffer,fieldName);
+  if (value == null) {
+    appendNullText(buffer,fieldName);
+  }
+ else {
+    appendInternal(buffer,fieldName,value,isFullDetail(fullDetail));
+  }
+  appendFieldEnd(buffer,fieldName);
+}

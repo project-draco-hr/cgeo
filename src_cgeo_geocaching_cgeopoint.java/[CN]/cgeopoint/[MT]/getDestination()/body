@@ -6,11 +6,11 @@
   String distanceText=((EditText)findViewById(R.id.distance)).getText().toString();
   String latText=((EditText)findViewById(R.id.latitude)).getText().toString();
   String lonText=((EditText)findViewById(R.id.longitude)).getText().toString();
-  if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0) && (latText == null || latText.length() == 0)&& (lonText == null || lonText.length() == 0)) {
+  if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     showToast(res.getString(R.string.err_point_no_position_given));
     return null;
   }
-  if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
+  if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
     HashMap<String,Object> latParsed=cgBase.parseCoordinate(latText,"lat");
     HashMap<String,Object> lonParsed=cgBase.parseCoordinate(lonText,"lon");
     if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
@@ -32,7 +32,7 @@
     latitude=geo.latitudeNow;
     longitude=geo.longitudeNow;
   }
-  if (bearingText != null && bearingText.length() > 0 && distanceText != null && distanceText.length() > 0) {
+  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     Double bearing=null;
     try {
       bearing=new Double(bearingText);

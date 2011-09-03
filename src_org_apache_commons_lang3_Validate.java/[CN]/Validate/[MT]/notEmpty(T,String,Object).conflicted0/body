@@ -1,0 +1,9 @@
+{
+  if (map == null) {
+    throw new NullPointerException(String.format(message,values));
+  }
+  if (map.size() == 0) {
+    throw new IllegalArgumentException(String.format(message,values));
+  }
+  return map;
+}

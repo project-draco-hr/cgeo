@@ -1,0 +1,8 @@
+{
+  if (cs instanceof String && substring instanceof String) {
+    return ((String)cs).regionMatches(ignoreCase,thisStart,((String)substring),start,length);
+  }
+ else {
+    return cs.toString().regionMatches(ignoreCase,thisStart,substring.toString(),start,length);
+  }
+}

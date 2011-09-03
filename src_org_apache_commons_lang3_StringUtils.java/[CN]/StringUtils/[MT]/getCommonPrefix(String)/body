@@ -1,0 +1,18 @@
+{
+  if (strs == null || strs.length == 0) {
+    return EMPTY;
+  }
+  int smallestIndexOfDiff=indexOfDifference(strs);
+  if (smallestIndexOfDiff == INDEX_NOT_FOUND) {
+    if (strs[0] == null) {
+      return EMPTY;
+    }
+    return strs[0];
+  }
+ else   if (smallestIndexOfDiff == 0) {
+    return EMPTY;
+  }
+ else {
+    return strs[0].substring(0,smallestIndexOfDiff);
+  }
+}

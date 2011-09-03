@@ -12,7 +12,7 @@
         params.put("password",login.get("password"));
       }
     }
-    if (guids != null && guids.size() > 0) {
+    if (CollectionUtils.isNotEmpty(guids)) {
       params.put("cacheIds",implode(",",guids.toArray()));
     }
  else {
@@ -100,7 +100,7 @@
           Log.w(cgSettings.tag,"cgBase.getRating: Failed to parse user's vote");
         }
       }
-      if (guid != null) {
+      if (StringUtils.isNotBlank(guid)) {
         ratings.put(guid,rating);
       }
     }

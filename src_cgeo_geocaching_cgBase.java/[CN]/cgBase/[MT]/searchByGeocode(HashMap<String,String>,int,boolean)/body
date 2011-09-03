@@ -2,12 +2,12 @@
   final cgSearch search=new cgSearch();
   String geocode=parameters.get("geocode");
   String guid=parameters.get("guid");
-  if ((geocode == null || geocode.length() == 0) && ((guid == null || guid.length() == 0))) {
+  if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No geocode nor guid given");
     return null;
   }
   if (forceReload == false && reason == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
-    if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
+    if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
       geocode=app.getGeocode(guid);
     }
     ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
@@ -22,19 +22,19 @@
   final String path="/seek/cache_details.aspx";
   final String method="GET";
   final HashMap<String,String> params=new HashMap<String,String>();
-  if (geocode != null && geocode.length() > 0) {
+  if (StringUtils.isNotBlank(geocode)) {
     params.put("wp",geocode);
   }
- else   if (guid != null && guid.length() > 0) {
+ else   if (StringUtils.isNotBlank(guid)) {
     params.put("guid",guid);
   }
   params.put("decrypt","y");
   params.put("log","y");
   params.put("numlogs","35");
   String page=requestLogged(false,host,path,method,params,false,false,false);
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isEmpty(page)) {
     if (app.isThere(geocode,guid,true,false)) {
-      if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
+      if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
         Log.i(cgSettings.tag,"Loading old cache from cache.");
         geocode=app.getGeocode(guid);
       }
@@ -52,10 +52,10 @@
   }
   final cgCacheWrap caches=parseCache(page,reason);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-    if (caches != null && caches.error != null && caches.error.length() > 0) {
+    if (caches != null && StringUtils.isNotBlank(caches.error)) {
       search.error=caches.error;
     }
-    if (caches != null && caches.url != null && caches.url.length() > 0) {
+    if (caches != null && StringUtils.isNotBlank(caches.url)) {
       search.url=caches.url;
     }
     app.addSearch(search,null,true,reason);
@@ -68,10 +68,10 @@
   }
   final ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
   if (caches != null) {
-    if (caches.error != null && caches.error.length() > 0) {
+    if (StringUtils.isNotBlank(caches.error)) {
       search.error=caches.error;
     }
-    if (caches.url != null && caches.url.length() > 0) {
+    if (StringUtils.isNotBlank(caches.url)) {
       search.url=caches.url;
     }
     search.viewstates=caches.viewstates;

@@ -8,7 +8,7 @@
     menu.add(1,11,0,res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda);
   }
   addVisitMenu(menu,cache);
-  if (cache != null && cache.spoilers != null && cache.spoilers.size() > 0) {
+  if (cache != null && CollectionUtils.isNotEmpty(cache.spoilers)) {
     menu.add(1,5,0,res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery);
   }
   if (cache != null && cache.latitude != null && cache.longitude != null) {

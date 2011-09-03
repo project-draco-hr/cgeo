@@ -26,19 +26,19 @@
  else {
         dos.writeInt(0);
       }
-      if (cache.geocode != null && cache.geocode.length() > 0) {
+      if (StringUtils.isNotBlank(cache.geocode)) {
         dos.writeUTF(cache.geocode.toUpperCase());
       }
  else {
         dos.writeUTF("");
       }
-      if (cache.name != null && cache.name.length() > 0) {
+      if (StringUtils.isNotBlank(cache.name)) {
         dos.writeUTF(cache.name);
       }
  else {
         dos.writeUTF("");
       }
-      if (cache.geocode != null && cache.geocode.length() > 0) {
+      if (StringUtils.isNotBlank(cache.geocode)) {
         dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeodetail;geocode;" + cache.geocode);
       }
  else {
