@@ -3,7 +3,7 @@
   handler=handlerIn;
   username=usernameIn;
   cachetype=cachetypeIn;
-  if (username == null || username.length() == 0) {
+  if (StringUtils.isBlank(username)) {
     showToast(res.getString(R.string.warn_no_username));
     finish();
     return;

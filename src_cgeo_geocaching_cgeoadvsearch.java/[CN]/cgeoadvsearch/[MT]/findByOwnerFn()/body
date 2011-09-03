@@ -1,6 +1,6 @@
 {
   final String usernameText=((EditText)findViewById(R.id.owner)).getText().toString();
-  if (usernameText == null || usernameText.length() == 0) {
+  if (StringUtils.isBlank(usernameText)) {
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_user));
     return;
   }

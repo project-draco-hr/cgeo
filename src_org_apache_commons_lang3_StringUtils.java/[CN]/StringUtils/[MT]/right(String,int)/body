@@ -1,0 +1,12 @@
+{
+  if (str == null) {
+    return null;
+  }
+  if (len < 0) {
+    return EMPTY;
+  }
+  if (str.length() <= len) {
+    return str;
+  }
+  return str.substring(str.length() - len);
+}

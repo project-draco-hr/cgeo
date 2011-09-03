@@ -231,10 +231,10 @@
     cacheInfo.append(base.formatDate(cache.visitedDate));
   }
  else {
-    if (cache.geocode != null && cache.geocode.length() > 0) {
+    if (StringUtils.isNotBlank(cache.geocode)) {
       cacheInfo.append(cache.geocode);
     }
-    if (cache.size != null && cache.size.length() > 0) {
+    if (StringUtils.isNotBlank(cache.size)) {
       if (cacheInfo.length() > 0) {
         cacheInfo.append(" | ");
       }

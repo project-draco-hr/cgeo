@@ -1,11 +1,11 @@
 {
-  if (cache.geocode == null || cache.geocode.length() == 0) {
+  if (StringUtils.isEmpty(cache.geocode)) {
     Log.w(cgSettings.tag,"geo code not parsed correctly");
   }
-  if (cache.name == null || cache.name.length() == 0) {
+  if (StringUtils.isEmpty(cache.name)) {
     Log.w(cgSettings.tag,"name not parsed correctly");
   }
-  if (cache.guid == null || cache.guid.length() == 0) {
+  if (StringUtils.isEmpty(cache.guid)) {
     Log.w(cgSettings.tag,"guid not parsed correctly");
   }
   if (cache.terrain == null || cache.terrain == 0.0) {
@@ -14,10 +14,10 @@
   if (cache.difficulty == null || cache.difficulty == 0.0) {
     Log.w(cgSettings.tag,"difficulty not parsed correctly");
   }
-  if (cache.owner == null || cache.owner.length() == 0) {
+  if (StringUtils.isEmpty(cache.owner)) {
     Log.w(cgSettings.tag,"owner not parsed correctly");
   }
-  if (cache.ownerReal == null || cache.ownerReal.length() == 0) {
+  if (StringUtils.isEmpty(cache.ownerReal)) {
     Log.w(cgSettings.tag,"owner real not parsed correctly");
   }
   if (cache.hidden == null) {
@@ -26,10 +26,10 @@
   if (cache.favouriteCnt == null) {
     Log.w(cgSettings.tag,"favoriteCount not parsed correctly");
   }
-  if (cache.size == null || cache.size.length() == 0) {
+  if (StringUtils.isEmpty(cache.size)) {
     Log.w(cgSettings.tag,"size not parsed correctly");
   }
-  if (cache.type == null || cache.type.length() == 0) {
+  if (StringUtils.isNotBlank(cache.type)) {
     Log.w(cgSettings.tag,"type not parsed correctly");
   }
   if (cache.latitude == null) {
@@ -38,7 +38,7 @@
   if (cache.longitude == null) {
     Log.w(cgSettings.tag,"longitude not parsed correctly");
   }
-  if (cache.location == null || cache.location.length() == 0) {
+  if (StringUtils.isEmpty(cache.location)) {
     Log.w(cgSettings.tag,"location not parsed correctly");
   }
 }

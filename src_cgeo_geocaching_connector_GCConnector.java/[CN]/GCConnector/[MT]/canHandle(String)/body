@@ -1,3 +1,3 @@
 {
-  return geocode != null && geocode.toUpperCase().startsWith("GC");
+  return StringUtils.isNotBlank(geocode) && geocode.toUpperCase().startsWith("GC");
 }

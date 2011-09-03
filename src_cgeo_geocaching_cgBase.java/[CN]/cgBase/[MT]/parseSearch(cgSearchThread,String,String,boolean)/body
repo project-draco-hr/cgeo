@@ -1,5 +1,5 @@
 {
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.parseSearch: No page given");
     return null;
   }
@@ -32,7 +32,7 @@
       }
       if (recaptchaJsParam != null) {
         final String recaptchaJs=request(false,"www.google.com","/recaptcha/api/challenge","GET","k=" + urlencode_rfc3986(recaptchaJsParam.trim()),0,true).getData();
-        if (recaptchaJs != null && recaptchaJs.length() > 0) {
+        if (StringUtils.isNotBlank(recaptchaJs)) {
           final Matcher matcherRecaptchaChallenge=patternRecaptchaChallenge.matcher(recaptchaJs);
           while (matcherRecaptchaChallenge.find()) {
             if (matcherRecaptchaChallenge.groupCount() > 0) {
@@ -45,7 +45,7 @@
  catch (    Exception e) {
       Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse recaptcha challenge");
     }
-    if (thread != null && recaptchaChallenge != null && recaptchaChallenge.length() > 0) {
+    if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
       thread.setChallenge(recaptchaChallenge);
       thread.notifyNeed();
     }
@@ -158,7 +158,7 @@
  catch (    Exception e) {
       Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory (1)");
     }
-    if (inventoryPre != null && inventoryPre.trim().length() > 0) {
+    if (StringUtils.isNotBlank(inventoryPre)) {
       try {
         final Matcher matcherTbsInside=patternTbsInside.matcher(inventoryPre);
         while (matcherTbsInside.find()) {
@@ -247,14 +247,14 @@
     }
     recaptchaText=thread.getText();
   }
-  if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && recaptchaText != null && recaptchaText.length() > 0))) {
+  if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)))) {
     Log.i(cgSettings.tag,"Trying to get .loc for " + cids.size() + " caches");
     try {
       final String host="www.geocaching.com";
       final String path="/seek/nearest.aspx";
       final StringBuilder params=new StringBuilder();
       params.append("__EVENTTARGET=&__EVENTARGUMENT=");
-      if (caches.viewstates != null && caches.viewstates.length > 0) {
+      if (ArrayUtils.isNotEmpty(caches.viewstates)) {
         params.append("&__VIEWSTATE=");
         params.append(urlencode_rfc3986(caches.viewstates[0]));
         if (caches.viewstates.length > 1) {
@@ -269,7 +269,7 @@
         params.append("&CID=");
         params.append(urlencode_rfc3986(cid));
       }
-      if (recaptchaChallenge != null && recaptchaText != null && recaptchaText.length() > 0) {
+      if (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)) {
         params.append("&recaptcha_challenge_field=");
         params.append(urlencode_rfc3986(recaptchaChallenge));
         params.append("&recaptcha_response_field=");
@@ -277,7 +277,7 @@
       }
       params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
       final String coordinates=request(false,host,path,"POST",params.toString(),0,true).getData();
-      if (coordinates != null && coordinates.length() > 0) {
+      if (StringUtils.isNotBlank(coordinates)) {
         if (coordinates.indexOf("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com") > -1) {
           Log.i(cgSettings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");
           caches.error=errorRetrieve.get(-7);
@@ -301,7 +301,7 @@
     Log.i(cgSettings.tag,"Trying to get ratings for " + cids.size() + " caches");
     try {
       final HashMap<String,cgRating> ratings=getRating(guids,null);
-      if (ratings != null) {
+      if (CollectionUtils.isNotEmpty(ratings)) {
         for (        cgCache oneCache : caches.cacheList) {
           if (ratings.containsKey(oneCache.guid)) {
             cgRating thisRating=ratings.get(oneCache.guid);

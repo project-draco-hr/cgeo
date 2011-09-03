@@ -4,7 +4,7 @@
   gettingViewstate=true;
   attempts++;
   try {
-    if (guid != null && guid.length() > 0) {
+    if (StringUtils.isNotBlank(guid)) {
       params.put("wid",guid);
     }
  else {

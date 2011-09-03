@@ -1,11 +1,11 @@
 {
   ArrayList<String> guids=null;
   ArrayList<String> geocodes=null;
-  if (guid != null && guid.length() > 0) {
+  if (StringUtils.isNotBlank(guid)) {
     guids=new ArrayList<String>();
     guids.add(guid);
   }
- else   if (geocode != null && geocode.length() > 0) {
+ else   if (StringUtils.isNotBlank(geocode)) {
     geocodes=new ArrayList<String>();
     geocodes.add(geocode);
   }

@@ -1,0 +1,12 @@
+{
+  Set<IDKey> registry=getRegistry();
+  if (registry != null) {
+    registry.remove(new IDKey(value));
+synchronized (HashCodeBuilder.class) {
+      registry=getRegistry();
+      if (registry != null && registry.isEmpty()) {
+        REGISTRY.remove();
+      }
+    }
+  }
+}

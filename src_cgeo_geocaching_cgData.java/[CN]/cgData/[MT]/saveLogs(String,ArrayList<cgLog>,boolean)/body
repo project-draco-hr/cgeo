@@ -1,6 +1,6 @@
 {
   init();
-  if (geocode == null || geocode.length() == 0 || logs == null) {
+  if (StringUtils.isBlank(geocode) || logs == null) {
     return false;
   }
   databaseRW.beginTransaction();
@@ -20,7 +20,7 @@
         helper.bind(LOGS_DATE,log.date);
         helper.bind(LOGS_FOUND,log.found);
         long log_id=helper.execute();
-        if ((log.logImages != null) && (log.logImages.size() > 0)) {
+        if (CollectionUtils.isNotEmpty(log.logImages)) {
           ContentValues values=new ContentValues();
           for (          cgImage img : log.logImages) {
             values.clear();

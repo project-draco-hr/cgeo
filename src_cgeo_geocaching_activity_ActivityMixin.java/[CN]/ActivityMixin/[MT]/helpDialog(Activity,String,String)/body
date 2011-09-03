@@ -1,5 +1,5 @@
 {
-  if (message == null || message.length() == 0) {
+  if (StringUtils.isBlank(message)) {
     return;
   }
   AlertDialog.Builder dialog=new AlertDialog.Builder(activity);

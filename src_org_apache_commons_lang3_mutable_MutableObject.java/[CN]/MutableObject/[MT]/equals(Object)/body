@@ -1,0 +1,15 @@
+{
+  if (obj == null) {
+    return false;
+  }
+  if (this == obj) {
+    return true;
+  }
+  if (this.getClass() == obj.getClass()) {
+    MutableObject<?> that=(MutableObject<?>)obj;
+    return this.value.equals(that.value);
+  }
+ else {
+    return false;
+  }
+}

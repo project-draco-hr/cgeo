@@ -85,7 +85,7 @@
  catch (    Exception e) {
       Log.e(cgSettings.tag,"cgeoBase.requestJSON: " + e.toString());
     }
-    if (buffer != null && buffer.length() > 0) {
+    if (StringUtils.isNotBlank(buffer)) {
       break;
     }
     if (httpCode == 403) {

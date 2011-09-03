@@ -1,7 +1,7 @@
 {
   return editSettings(new PrefRunnable(){
     @Override public void edit(    Editor edit){
-      if (signature == null || signature.length() == 0) {
+      if (StringUtils.isBlank(signature)) {
         edit.remove(KEY_SIGNATURE);
       }
  else {

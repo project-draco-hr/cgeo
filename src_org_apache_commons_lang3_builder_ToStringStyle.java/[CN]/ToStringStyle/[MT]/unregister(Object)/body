@@ -1,0 +1,11 @@
+{
+  if (value != null) {
+    Map<Object,Object> m=getRegistry();
+    if (m != null) {
+      m.remove(value);
+      if (m.isEmpty()) {
+        REGISTRY.remove();
+      }
+    }
+  }
+}

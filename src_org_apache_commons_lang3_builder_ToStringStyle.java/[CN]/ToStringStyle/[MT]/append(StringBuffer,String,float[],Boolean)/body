@@ -1,0 +1,13 @@
+{
+  appendFieldStart(buffer,fieldName);
+  if (array == null) {
+    appendNullText(buffer,fieldName);
+  }
+ else   if (isFullDetail(fullDetail)) {
+    appendDetail(buffer,fieldName,array);
+  }
+ else {
+    appendSummary(buffer,fieldName,array);
+  }
+  appendFieldEnd(buffer,fieldName);
+}

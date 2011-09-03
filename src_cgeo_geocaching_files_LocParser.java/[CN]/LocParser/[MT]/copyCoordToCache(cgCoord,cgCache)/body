@@ -5,7 +5,7 @@
   cache.terrain=coord.terrain;
   cache.size=coord.size;
   cache.geocode=coord.geocode.toUpperCase();
-  if (cache.name == null || cache.name.length() == 0) {
+  if (StringUtils.isBlank(cache.name)) {
     cache.name=coord.name;
   }
 }

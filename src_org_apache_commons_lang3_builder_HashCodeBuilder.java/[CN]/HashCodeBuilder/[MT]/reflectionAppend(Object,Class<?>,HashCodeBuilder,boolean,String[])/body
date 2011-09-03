@@ -1,0 +1,24 @@
+{
+  if (isRegistered(object)) {
+    return;
+  }
+  try {
+    register(object);
+    Field[] fields=clazz.getDeclaredFields();
+    AccessibleObject.setAccessible(fields,true);
+    for (    Field field : fields) {
+      if (!ArrayUtils.contains(excludeFields,field.getName()) && (field.getName().indexOf('$') == -1) && (useTransients || !Modifier.isTransient(field.getModifiers()))&& (!Modifier.isStatic(field.getModifiers()))) {
+        try {
+          Object fieldValue=field.get(object);
+          builder.append(fieldValue);
+        }
+ catch (        IllegalAccessException e) {
+          throw new InternalError("Unexpected IllegalAccessException");
+        }
+      }
+    }
+  }
+  finally {
+    unregister(object);
+  }
+}

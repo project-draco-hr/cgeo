@@ -4,7 +4,7 @@
   try {
     coords=new cgCoord();
     coords.type="cache";
-    if (name != null && name.length() > 0) {
+    if (StringUtils.isNotBlank(name)) {
       coords.name=name;
     }
  else {

@@ -4,7 +4,7 @@
   gettingViewstate=true;
   attempts++;
   try {
-    if (cacheid != null && cacheid.length() > 0) {
+    if (StringUtils.isNotBlank(cacheid)) {
       params.put("ID",cacheid);
     }
  else {
@@ -15,7 +15,7 @@
     viewstates=cgBase.getViewstates(page);
     trackables=cgBase.parseTrackableLog(page);
     final ArrayList<Integer> typesPre=cgBase.parseTypes(page);
-    if (typesPre.size() > 0) {
+    if (CollectionUtils.isNotEmpty(typesPre)) {
       types.clear();
       types.addAll(typesPre);
       types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));

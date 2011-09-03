@@ -47,25 +47,25 @@
  else {
         dos.writeInt(0);
       }
-      if (cache != null && cache.name != null && cache.name.length() > 0) {
+      if (cache != null && StringUtils.isNotBlank(cache.name)) {
         dos.writeUTF(cache.name);
       }
- else       if (waypoint != null && waypoint.name != null && waypoint.name.length() > 0) {
+ else       if (waypoint != null && StringUtils.isNotBlank(waypoint.name)) {
         dos.writeUTF(waypoint.name);
       }
  else {
         dos.writeUTF("");
       }
-      if (cache != null && cache.geocode != null && cache.geocode.length() > 0) {
+      if (cache != null && StringUtils.isNotBlank(cache.geocode)) {
         dos.writeUTF(cache.geocode.toUpperCase());
       }
- else       if (waypoint != null && waypoint.lookup != null && waypoint.lookup.length() > 0) {
+ else       if (waypoint != null && StringUtils.isNotBlank(waypoint.lookup)) {
         dos.writeUTF(waypoint.lookup.toUpperCase());
       }
  else {
         dos.writeUTF("");
       }
-      if (cache != null && cache.geocode != null && cache.geocode.length() > 0) {
+      if (cache != null && StringUtils.isNotBlank(cache.geocode)) {
         dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeodetail;geocode;" + cache.geocode);
       }
  else       if (waypoint != null && waypoint.id != null && waypoint.id > 0) {
@@ -86,7 +86,7 @@
         dos.writeDouble(latitude);
         dos.writeDouble(longitude);
       }
-      if (waypoints != null && waypoints.isEmpty() == false) {
+      if (CollectionUtils.isNotEmpty(waypoints)) {
         for (        cgWaypoint wp : waypoints) {
           if (wp == null || wp.latitude == null || wp.longitude == null) {
             continue;
@@ -103,13 +103,13 @@
  else {
             dos.writeInt(0);
           }
-          if (wp.lookup != null && wp.lookup.length() > 0) {
+          if (StringUtils.isNotBlank(wp.lookup)) {
             dos.writeUTF(wp.lookup.toUpperCase());
           }
  else {
             dos.writeUTF("");
           }
-          if (wp.name != null && wp.name.length() > 0) {
+          if (StringUtils.isNotBlank(wp.name)) {
             dos.writeUTF(wp.name);
           }
  else {
