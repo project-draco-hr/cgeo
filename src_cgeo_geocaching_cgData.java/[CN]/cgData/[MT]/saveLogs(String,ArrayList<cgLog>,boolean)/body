@@ -9,19 +9,20 @@
       databaseRW.delete(dbTableLogs,"geocode = ?",new String[]{geocode});
     }
     if (!logs.isEmpty()) {
-      ContentValues values=new ContentValues();
-      for (      cgLog oneLog : logs) {
-        values.clear();
-        values.put("geocode",geocode);
-        values.put("updated",System.currentTimeMillis());
-        values.put("type",oneLog.type);
-        values.put("author",oneLog.author);
-        values.put("log",oneLog.log);
-        values.put("date",oneLog.date);
-        values.put("found",oneLog.found);
-        long log_id=databaseRW.insert(dbTableLogs,null,values);
-        if (CollectionUtils.isNotEmpty(oneLog.logImages)) {
-          for (          cgImage img : oneLog.logImages) {
+      InsertHelper helper=new InsertHelper(databaseRW,dbTableLogs);
+      for (      cgLog log : logs) {
+        helper.prepareForInsert();
+        helper.bind(LOGS_GEOCODE,geocode);
+        helper.bind(LOGS_UPDATED,System.currentTimeMillis());
+        helper.bind(LOGS_TYPE,log.type);
+        helper.bind(LOGS_AUTHOR,log.author);
+        helper.bind(LOGS_LOG,log.log);
+        helper.bind(LOGS_DATE,log.date);
+        helper.bind(LOGS_FOUND,log.found);
+        long log_id=helper.execute();
+        if (CollectionUtils.isNotEmpty(log.logImages)) {
+          ContentValues values=new ContentValues();
+          for (          cgImage img : log.logImages) {
             values.clear();
             values.put("log_id",log_id);
             values.put("title",img.title);
@@ -30,6 +31,7 @@
           }
         }
       }
+      helper.close();
     }
     databaseRW.setTransactionSuccessful();
   }

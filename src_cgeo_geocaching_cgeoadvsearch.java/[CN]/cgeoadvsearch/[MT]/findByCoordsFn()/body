@@ -4,8 +4,8 @@
   final String latText=latView.getText().toString();
   final String lonText=lonView.getText().toString();
   if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
-    latView.setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true));
-    lonView.setText(cgBase.formatCoordinate(geo.longitudeNow,"lon",true));
+    latView.setText(cgBase.formatLatitude(geo.latitudeNow,true));
+    lonView.setText(cgBase.formatLongitude(geo.longitudeNow,true));
   }
  else {
     HashMap<String,Object> latParsed=cgBase.parseCoordinate(latText,"lat");

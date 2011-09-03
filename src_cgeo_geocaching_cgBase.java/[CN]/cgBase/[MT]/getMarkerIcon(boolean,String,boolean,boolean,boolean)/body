@@ -1,0 +1,53 @@
+{
+  fillIconsMap();
+  if (wpIcons.isEmpty()) {
+    wpIcons.put("waypoint",R.drawable.marker_waypoint_waypoint);
+    wpIcons.put("flag",R.drawable.marker_waypoint_flag);
+    wpIcons.put("pkg",R.drawable.marker_waypoint_pkg);
+    wpIcons.put("puzzle",R.drawable.marker_waypoint_puzzle);
+    wpIcons.put("stage",R.drawable.marker_waypoint_stage);
+    wpIcons.put("trailhead",R.drawable.marker_waypoint_trailhead);
+  }
+  int icon=-1;
+  String iconTxt=null;
+  if (cache) {
+    if (type != null && type.length() > 0) {
+      if (own) {
+        iconTxt=type + "-own";
+      }
+ else       if (found) {
+        iconTxt=type + "-found";
+      }
+ else       if (disabled) {
+        iconTxt=type + "-disabled";
+      }
+ else {
+        iconTxt=type;
+      }
+    }
+ else {
+      iconTxt="traditional";
+    }
+    if (gcIcons.containsKey(iconTxt)) {
+      icon=gcIcons.get(iconTxt);
+    }
+ else {
+      icon=gcIcons.get("traditional");
+    }
+  }
+ else {
+    if (type != null && type.length() > 0) {
+      iconTxt=type;
+    }
+ else {
+      iconTxt="waypoint";
+    }
+    if (wpIcons.containsKey(iconTxt)) {
+      icon=wpIcons.get(iconTxt);
+    }
+ else {
+      icon=wpIcons.get("waypoint");
+    }
+  }
+  return icon;
+}

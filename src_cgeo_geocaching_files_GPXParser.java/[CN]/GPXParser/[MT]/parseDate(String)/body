@@ -1,7 +1,7 @@
 {
-  input=input.trim();
+  final String input=inputUntrimmed.trim();
   if (input.length() >= 3 && input.charAt(input.length() - 3) == ':') {
-    String removeColon=input.substring(0,input.length() - 3) + input.substring(input.length() - 2);
+    final String removeColon=input.substring(0,input.length() - 3) + input.substring(input.length() - 2);
     return formatTimezone.parse(removeColon);
   }
   return formatSimple.parse(input);

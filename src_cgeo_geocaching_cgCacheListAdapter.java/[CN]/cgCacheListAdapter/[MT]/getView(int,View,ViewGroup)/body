@@ -110,11 +110,11 @@
     }
   }
   holder.text.setText(cache.nameSp,TextView.BufferType.SPANNABLE);
-  if (gcIcons.containsKey(cache.type)) {
-    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get(cache.type),null,null,null);
+  if (gcIconDrawables.containsKey(cache.type)) {
+    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.type),null,null,null);
   }
  else {
-    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get("mystery"),null,null,null);
+    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get("mystery"),null,null,null);
   }
   if (holder.inventory.getChildCount() > 0) {
     holder.inventory.removeAllViews();

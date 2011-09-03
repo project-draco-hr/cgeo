@@ -108,7 +108,7 @@
  else   if (id == MENU_DROP_CACHE) {
     cgBase.dropCache(app,this,cache,new Handler(){
       @Override public void handleMessage(      Message msg){
-        switchList(listId,-1);
+        refreshCurrentList();
       }
     }
 );
@@ -120,7 +120,7 @@
       app.moveToList(cache.geocode,newListId);
     }
     adapter.resetChecks();
-    switchListById(listId);
+    refreshCurrentList();
     return true;
   }
  else   if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
@@ -133,7 +133,7 @@
       }
     }
     adapter.resetChecks();
-    switchListById(listId);
+    refreshCurrentList();
     return true;
   }
   lastMenuInfo=info;
@@ -145,7 +145,7 @@
       return true;
     }
     int logType=id - MENU_LOG_VISIT_OFFLINE;
-    cache.logOffline(this,logType);
+    cache.logOffline(this,logType,settings,base);
   }
   return true;
 }

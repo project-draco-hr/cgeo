@@ -8,8 +8,6 @@
   final ArrayList<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
   for (  cgCache cache : cacheListTemp) {
     if (checked > 0 && cache.statusChecked == false) {
-      handler.sendEmptyMessage(0);
-      yield();
       continue;
     }
     try {
@@ -18,8 +16,6 @@
         break;
       }
       app.markDropped(cache.geocode);
-      handler.sendEmptyMessage(cacheList.indexOf(cache));
-      yield();
     }
  catch (    Exception e) {
       Log.e(cgSettings.tag,"cgeocaches.geocachesDropDetails: " + e.toString());

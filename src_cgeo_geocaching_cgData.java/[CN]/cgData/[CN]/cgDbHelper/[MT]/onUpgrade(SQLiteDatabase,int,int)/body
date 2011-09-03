@@ -218,6 +218,14 @@
           Log.e(cgSettings.tag,"Failed to upgrade to ver. 55: " + e.toString());
         }
       }
+      if (oldVersion < 56) {
+        try {
+          db.execSQL("update " + dbTableAttributes + " set attribute = "+ "lower(attribute) where attribute like \"%_yes\" "+ "or attribute like \"%_no\"");
+        }
+ catch (        Exception e) {
+          Log.e(cgSettings.tag,"Failed to upgrade to ver. 56: " + e.toString());
+        }
+      }
     }
     db.setTransactionSuccessful();
   }

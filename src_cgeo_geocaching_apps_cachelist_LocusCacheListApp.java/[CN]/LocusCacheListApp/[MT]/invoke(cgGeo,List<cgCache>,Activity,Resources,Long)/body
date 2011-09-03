@@ -14,7 +14,7 @@
     dos.writeInt(1);
     dos.writeInt(cacheListCoord.size());
     for (    cgCache cache : cacheListCoord) {
-      final int wpIcon=cgBase.getIcon(true,cache.type,cache.own,cache.found,cache.disabled);
+      final int wpIcon=cgBase.getMarkerIcon(true,cache.type,cache.own,cache.found,cache.disabled);
       if (wpIcon > 0) {
         Bitmap bitmap=BitmapFactory.decodeResource(res,wpIcon);
         ByteArrayOutputStream baos2=new ByteArrayOutputStream();

@@ -10,16 +10,16 @@
         if (all.length() > 0) {
           all.append(", ");
         }
-        all.append("\"");
+        all.append('"');
         all.append((String)one);
-        all.append("\"");
+        all.append('"');
       }
       if (where.length() > 0) {
         where.append(" and ");
       }
       where.append("geocode in (");
       where.append(all);
-      where.append(")");
+      where.append(')');
     }
  else     if (guids != null && guids.length > 0) {
       StringBuilder all=new StringBuilder();
@@ -27,16 +27,16 @@
         if (all.length() > 0) {
           all.append(", ");
         }
-        all.append("\"");
+        all.append('"');
         all.append((String)one);
-        all.append("\"");
+        all.append('"');
       }
       if (where.length() > 0) {
         where.append(" and ");
       }
       where.append("guid in (");
       where.append(all);
-      where.append(")");
+      where.append(')');
     }
  else {
       return caches;
@@ -60,8 +60,7 @@
       if (where.length() > 0) {
         where.append(" and ");
       }
-      where.append("(");
-      where.append("latitude >= ");
+      where.append("(latitude >= ");
       where.append(String.format((Locale)null,"%.6f",latMin));
       where.append(" and latitude <= ");
       where.append(String.format((Locale)null,"%.6f",latMax));
@@ -69,7 +68,7 @@
       where.append(String.format((Locale)null,"%.6f",lonMin));
       where.append(" and longitude <= ");
       where.append(String.format((Locale)null,"%.6f",lonMax));
-      where.append(")");
+      where.append(')');
     }
     cursor=databaseRO.query(dbTableCaches,new String[]{"_id","updated","reason","detailed","detailedupdate","visiteddate","geocode","cacheid","guid","type","name","own","owner","owner_real","hidden","hint","size","difficulty","distance","direction","terrain","latlon","latitude_string","longitude_string","location","latitude","longitude","elevation","shortdesc","description","favourite_cnt","rating","votes","myvote","disabled","archived","members","found","favourite","inventorycoins","inventorytags","inventoryunknown","onWatchlist","personal_note"},where.toString(),null,null,null,null,null);
     if (cursor != null) {
@@ -142,13 +141,13 @@
           cache.rating=(Float)cursor.getFloat(cursor.getColumnIndex("rating"));
           cache.votes=(Integer)cursor.getInt(cursor.getColumnIndex("votes"));
           cache.myVote=(Float)cursor.getFloat(cursor.getColumnIndex("myvote"));
-          cache.disabled=cursor.getLong(cursor.getColumnIndex("disabled")) == 1l;
-          cache.archived=cursor.getLong(cursor.getColumnIndex("archived")) == 1l;
-          cache.members=cursor.getLong(cursor.getColumnIndex("members")) == 1l;
-          cache.found=cursor.getLong(cursor.getColumnIndex("found")) == 1l;
-          cache.favourite=cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
+          cache.disabled=cursor.getLong(cursor.getColumnIndex("disabled")) == 1L;
+          cache.archived=cursor.getLong(cursor.getColumnIndex("archived")) == 1L;
+          cache.members=cursor.getLong(cursor.getColumnIndex("members")) == 1L;
+          cache.found=cursor.getLong(cursor.getColumnIndex("found")) == 1L;
+          cache.favourite=cursor.getLong(cursor.getColumnIndex("favourite")) == 1L;
           cache.inventoryItems=(Integer)cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
-          cache.onWatchlist=cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
+          cache.onWatchlist=cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1L;
           if (loadA) {
             ArrayList<String> attributes=loadAttributes(cache.geocode);
             if (attributes != null && attributes.isEmpty() == false) {

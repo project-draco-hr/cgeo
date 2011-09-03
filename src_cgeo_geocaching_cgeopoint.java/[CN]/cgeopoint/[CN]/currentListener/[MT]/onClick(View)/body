@@ -3,7 +3,7 @@
     showToast(res.getString(R.string.err_point_unknown_position));
     return;
   }
-  ((EditText)findViewById(R.id.latitude)).setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true));
-  ((EditText)findViewById(R.id.longitude)).setText(cgBase.formatCoordinate(geo.longitudeNow,"lon",true));
+  ((EditText)findViewById(R.id.latitude)).setText(cgBase.formatLatitude(geo.latitudeNow,true));
+  ((EditText)findViewById(R.id.longitude)).setText(cgBase.formatLongitude(geo.longitudeNow,true));
   changed=false;
 }

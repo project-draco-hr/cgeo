@@ -2,10 +2,10 @@
   if (input == null || StringUtils.isNotBlank(cache.geocode)) {
     return;
   }
-  Matcher matcherGeocode=patternGeocode.matcher(input);
+  final Matcher matcherGeocode=patternGeocode.matcher(input);
   if (matcherGeocode.find()) {
     if (matcherGeocode.groupCount() > 0) {
-      String geocode=matcherGeocode.group(1);
+      final String geocode=matcherGeocode.group(1);
       if (ConnectorFactory.canHandle(geocode)) {
         cache.geocode=geocode;
       }

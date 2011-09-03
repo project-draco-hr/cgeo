@@ -118,8 +118,8 @@
   waypoint.name=name;
   waypoint.latitude=coords.get(0);
   waypoint.longitude=coords.get(1);
-  waypoint.latitudeString=cgBase.formatCoordinate(coords.get(0),"lat",true);
-  waypoint.longitudeString=cgBase.formatCoordinate(coords.get(1),"lon",true);
+  waypoint.latitudeString=cgBase.formatLatitude(coords.get(0),true);
+  waypoint.longitudeString=cgBase.formatLongitude(coords.get(1),true);
   waypoint.note=note;
   if (app.saveOwnWaypoint(id,geocode,waypoint)) {
     app.removeCacheFromCache(geocode);

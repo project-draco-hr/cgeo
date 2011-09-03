@@ -1,10 +1,10 @@
 {
-  cgSearch search=new cgSearch();
-  long searchId=0l;
+  final cgSearch search=new cgSearch();
+  long searchId=0L;
   try {
     GPXParser parser=new GPX10Parser(app,listId,search);
     searchId=parser.parse(file,handler);
-    if (searchId == 0l) {
+    if (searchId == 0L) {
       parser=new GPX11Parser(app,listId,search);
       searchId=parser.parse(file,handler);
     }

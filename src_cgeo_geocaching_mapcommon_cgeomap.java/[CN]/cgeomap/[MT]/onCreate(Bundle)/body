@@ -4,9 +4,9 @@
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
   app.setAction(null);
-  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,0));
-  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,0));
-  prefsEdit=activity.getSharedPreferences(cgSettings.preferences,0).edit();
+  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE));
+  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE));
+  prefsEdit=activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE).edit();
   MapFactory mapFactory=settings.getMapFactory();
   noMapTokenShowed=false;
   activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -58,7 +58,7 @@
     longitudeIntent=extras.getDouble("longitude");
     waypointTypeIntent=extras.getString("wpttype");
     mapStateIntent=extras.getIntArray("mapstate");
-    if (searchIdIntent == 0l) {
+    if (searchIdIntent == 0L) {
       searchIdIntent=null;
     }
     if (latitudeIntent == 0.0) {
@@ -74,11 +74,16 @@
  else {
     live=false;
   }
-  if (live) {
-    followMyLocation=true;
+  if (null == mapStateIntent) {
+    if (live) {
+      followMyLocation=true;
+    }
+ else {
+      followMyLocation=false;
+    }
   }
  else {
-    followMyLocation=false;
+    followMyLocation=1 == mapStateIntent[3] ? true : false;
   }
   if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
     centerMap(geocodeIntent,searchIdIntent,latitudeIntent,longitudeIntent,mapStateIntent);

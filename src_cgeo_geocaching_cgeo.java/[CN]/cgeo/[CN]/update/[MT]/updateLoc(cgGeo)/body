@@ -10,11 +10,10 @@
       navLocation=(TextView)findViewById(R.id.nav_location);
     }
     if (geo.latitudeNow != null && geo.longitudeNow != null) {
-      LinearLayout findNearest=(LinearLayout)findViewById(R.id.nearest);
+      View findNearest=findViewById(R.id.nearest);
       findNearest.setClickable(true);
       findNearest.setOnClickListener(new cgeoFindNearestListener());
-      View findNearestView=(View)findNearest.findViewById(R.id.view_nearest);
-      findNearestView.setBackgroundResource(R.drawable.main_nearby);
+      findNearest.setBackgroundResource(R.drawable.main_nearby);
       String satellites=null;
       if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
         satellites=res.getString(R.string.loc_sat) + ": " + geo.satellitesFixed+ "/"+ geo.satellitesVisible;
@@ -63,19 +62,19 @@
  else {
             humanAlt=String.format("%.0f",geo.altitudeNow) + " m";
           }
-          navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true) + " | " + cgBase.formatCoordinate(geo.longitudeNow,"lon",true)+ " | "+ humanAlt);
+          navLocation.setText(cgBase.formatCoords(geo.latitudeNow,geo.longitudeNow,true) + " | " + humanAlt);
         }
  else {
-          navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow,"lat",true) + " | " + cgBase.formatCoordinate(geo.longitudeNow,"lon",true));
+          navLocation.setText(cgBase.formatCoords(geo.latitudeNow,geo.longitudeNow,true));
         }
       }
     }
  else {
-      LinearLayout findNearest=(LinearLayout)findViewById(R.id.nearest);
+      View findNearest=findViewById(R.id.nearest);
+      findNearest.setFocusable(false);
       findNearest.setClickable(false);
       findNearest.setOnClickListener(null);
-      View findNearestView=(View)findNearest.findViewById(R.id.view_nearest);
-      findNearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
+      findNearest.setBackgroundResource(R.drawable.main_nearby_disabled);
       navType.setText(null);
       navAccuracy.setText(null);
       navLocation.setText(res.getString(R.string.loc_trying));
