@@ -1,8 +1,0 @@
-{
-  if (date == null) {
-    throw new IllegalArgumentException("The date must not be null");
-  }
-  Calendar truncated=(Calendar)date.clone();
-  modify(truncated,field,MODIFY_TRUNCATE);
-  return truncated;
-}

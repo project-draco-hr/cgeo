@@ -1,7 +1,0 @@
-{
-  if (this.runningState != STATE_RUNNING) {
-    throw new IllegalStateException("Stopwatch must be running to suspend. ");
-  }
-  this.stopTime=System.nanoTime();
-  this.runningState=STATE_SUSPENDED;
-}
