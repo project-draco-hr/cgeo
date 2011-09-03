@@ -3,7 +3,7 @@
   String dirName=null;
   String fileName=null;
   String fileNameSec=null;
-  if (StringUtils.isNotBlank(url)) {
+  if (StringUtils.isBlank(url)) {
     return null;
   }
   final String[] urlParts=url.split("\\.");
