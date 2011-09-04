@@ -7,7 +7,7 @@
     return null;
   }
   if (forceReload == false && reason == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
-    if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+    if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
       geocode=app.getGeocode(guid);
     }
     ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
@@ -34,7 +34,7 @@
   String page=requestLogged(false,host,path,method,params,false,false,false);
   if (StringUtils.isEmpty(page)) {
     if (app.isThere(geocode,guid,true,false)) {
-      if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+      if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
         Log.i(cgSettings.tag,"Loading old cache from cache.");
         geocode=app.getGeocode(guid);
       }
