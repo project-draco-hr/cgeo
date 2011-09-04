@@ -80,7 +80,7 @@
   try {
     if (matcher.find() && matcher.groupCount() > 0) {
       final String[] viewstatesConfirm=getViewstates(page);
-      if (ArrayUtils.isEmpty(viewstatesConfirm)) {
+      if (isEmpty(viewstatesConfirm)) {
         Log.e(cgSettings.tag,"cgeoBase.postLog: No viewstate for confirm log");
         return 1000;
       }
