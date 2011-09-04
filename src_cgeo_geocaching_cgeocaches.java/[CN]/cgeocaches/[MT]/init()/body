@@ -12,7 +12,7 @@
     final Integer count=app.getTotal(searchId);
     if (count != null && count > 0) {
       setTitle(title);
-      if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < 1000) {
+      if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < MAX_LIST_ITEMS) {
         setMoreCaches(true);
       }
  else {
