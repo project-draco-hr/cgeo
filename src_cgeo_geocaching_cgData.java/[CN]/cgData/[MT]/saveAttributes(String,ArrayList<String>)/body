@@ -7,14 +7,16 @@
   try {
     databaseRW.delete(dbTableAttributes,"geocode = ?",new String[]{geocode});
     if (!attributes.isEmpty()) {
-      ContentValues values=new ContentValues();
-      for (      String oneAttribute : attributes) {
-        values.clear();
-        values.put("geocode",geocode);
-        values.put("updated",System.currentTimeMillis());
-        values.put("attribute",oneAttribute);
-        databaseRW.insert(dbTableAttributes,null,values);
+      InsertHelper helper=new InsertHelper(databaseRW,dbTableAttributes);
+      long timeStamp=System.currentTimeMillis();
+      for (      String attribute : attributes) {
+        helper.prepareForInsert();
+        helper.bind(ATTRIBUTES_GEOCODE,geocode);
+        helper.bind(ATTRIBUTES_UPDATED,timeStamp);
+        helper.bind(ATTRIBUTES_ATTRIBUTE,attribute);
+        helper.execute();
       }
+      helper.close();
     }
     databaseRW.setTransactionSuccessful();
   }

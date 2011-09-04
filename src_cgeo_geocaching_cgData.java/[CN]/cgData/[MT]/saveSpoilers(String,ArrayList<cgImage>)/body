@@ -8,10 +8,11 @@
     databaseRW.delete(dbTableSpoilers,"geocode = ?",new String[]{geocode});
     if (!spoilers.isEmpty()) {
       ContentValues values=new ContentValues();
+      long timeStamp=System.currentTimeMillis();
       for (      cgImage oneSpoiler : spoilers) {
         values.clear();
         values.put("geocode",geocode);
-        values.put("updated",System.currentTimeMillis());
+        values.put("updated",timeStamp);
         values.put("url",oneSpoiler.url);
         values.put("title",oneSpoiler.title);
         values.put("description",oneSpoiler.description);

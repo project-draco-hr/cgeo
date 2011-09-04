@@ -10,10 +10,11 @@
     }
     if (!logs.isEmpty()) {
       InsertHelper helper=new InsertHelper(databaseRW,dbTableLogs);
+      long timeStamp=System.currentTimeMillis();
       for (      cgLog log : logs) {
         helper.prepareForInsert();
         helper.bind(LOGS_GEOCODE,geocode);
-        helper.bind(LOGS_UPDATED,System.currentTimeMillis());
+        helper.bind(LOGS_UPDATED,timeStamp);
         helper.bind(LOGS_TYPE,log.type);
         helper.bind(LOGS_AUTHOR,log.author);
         helper.bind(LOGS_LOG,log.log);

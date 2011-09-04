@@ -11,13 +11,14 @@
     }
     if (!waypoints.isEmpty()) {
       ContentValues values=new ContentValues();
+      long timeStamp=System.currentTimeMillis();
       for (      cgWaypoint oneWaypoint : waypoints) {
         if (oneWaypoint.isUserDefined()) {
           continue;
         }
         values.clear();
         values.put("geocode",geocode);
-        values.put("updated",System.currentTimeMillis());
+        values.put("updated",timeStamp);
         values.put("type",oneWaypoint.type);
         values.put("prefix",oneWaypoint.prefix);
         values.put("lookup",oneWaypoint.lookup);

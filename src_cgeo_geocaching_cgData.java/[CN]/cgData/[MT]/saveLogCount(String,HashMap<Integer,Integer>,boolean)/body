@@ -10,10 +10,11 @@
     }
     ContentValues values=new ContentValues();
     Set<Entry<Integer,Integer>> logCountsItems=logCounts.entrySet();
+    long timeStamp=System.currentTimeMillis();
     for (    Entry<Integer,Integer> pair : logCountsItems) {
       values.clear();
       values.put("geocode",geocode);
-      values.put("updated",System.currentTimeMillis());
+      values.put("updated",timeStamp);
       values.put("type",pair.getKey().intValue());
       values.put("count",pair.getValue().intValue());
       databaseRW.insert(dbTableLogCount,null,values);
