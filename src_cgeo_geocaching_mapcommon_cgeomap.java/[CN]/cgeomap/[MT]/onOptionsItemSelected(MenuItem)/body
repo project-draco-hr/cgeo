@@ -28,7 +28,7 @@
       final ArrayList<String> geocodes=new ArrayList<String>();
       ArrayList<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
       try {
-        if (CollectionUtils.isNotEmpty(cachesProtected)) {
+        if (cachesProtected.size() > 0) {
           final GeoPointImpl mapCenter=mapView.getMapViewCenter();
           final int mapCenterLat=mapCenter.getLatitudeE6();
           final int mapCenterLon=mapCenter.getLongitudeE6();
