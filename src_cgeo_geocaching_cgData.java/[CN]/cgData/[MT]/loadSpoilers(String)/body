@@ -3,7 +3,7 @@
     return null;
   }
   init();
-  ArrayList<cgImage> spoilers=new ArrayList<cgImage>();
+  List<cgImage> spoilers=new ArrayList<cgImage>();
   Cursor cursor=databaseRO.query(dbTableSpoilers,new String[]{"_id","url","title","description"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();

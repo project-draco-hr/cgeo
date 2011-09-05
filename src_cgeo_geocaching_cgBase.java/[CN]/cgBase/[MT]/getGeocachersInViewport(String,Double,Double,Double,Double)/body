@@ -1,5 +1,5 @@
 {
-  final ArrayList<cgUser> users=new ArrayList<cgUser>();
+  final List<cgUser> users=new ArrayList<cgUser>();
   if (username == null) {
     return users;
   }
@@ -9,7 +9,7 @@
   final String host="api.go4cache.com";
   final String path="/get.php";
   final String method="POST";
-  final HashMap<String,String> params=new HashMap<String,String>();
+  final Map<String,String> params=new HashMap<String,String>();
   params.put("u",username);
   params.put("ltm",String.format((Locale)null,"%.6f",latMin));
   params.put("ltx",String.format((Locale)null,"%.6f",latMax));

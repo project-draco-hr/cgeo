@@ -33,7 +33,7 @@
  else {
     path=url;
   }
-  final HashMap<String,String> params=new HashMap<String,String>();
+  final Map<String,String> params=new HashMap<String,String>();
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08");
   params.put("__EVENTARGUMENT","");
@@ -63,7 +63,7 @@
   }
   app.setError(searchId,caches.error);
   app.setViewstates(searchId,caches.viewstates);
-  final ArrayList<cgCache> cacheList=new ArrayList<cgCache>();
+  final List<cgCache> cacheList=new ArrayList<cgCache>();
   for (  cgCache cache : caches.cacheList) {
     app.addGeocode(searchId,cache.geocode);
     cacheList.add(cache);

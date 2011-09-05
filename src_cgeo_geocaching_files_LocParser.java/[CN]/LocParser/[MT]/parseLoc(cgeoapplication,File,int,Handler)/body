@@ -2,7 +2,7 @@
   cgSearch search=new cgSearch();
   long searchId=0L;
   try {
-    HashMap<String,cgCoord> coords=parseCoordinates(readFile(file).toString());
+    Map<String,cgCoord> coords=parseCoordinates(readFile(file).toString());
     final cgCacheWrap caches=new cgCacheWrap();
     for (    Entry<String,cgCoord> entry : coords.entrySet()) {
       cgCoord coord=entry.getValue();

@@ -3,7 +3,7 @@
     return null;
   }
   init();
-  ArrayList<cgTrackable> trackables=new ArrayList<cgTrackable>();
+  List<cgTrackable> trackables=new ArrayList<cgTrackable>();
   Cursor cursor=databaseRO.query(dbTableTrackables,new String[]{"_id","updated","tbcode","guid","title","owner","released","goal","description"},"geocode = \"" + geocode + "\"",null,null,null,"title COLLATE NOCASE ASC","100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
