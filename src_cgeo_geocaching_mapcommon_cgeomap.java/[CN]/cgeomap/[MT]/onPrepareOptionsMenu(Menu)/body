@@ -23,7 +23,7 @@
       }
     }
     item=menu.findItem(MENU_STORE_CACHES);
-    if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && CollectionUtils.isNotEmpty(caches)) {
+    if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && caches != null && caches.size() > 0) {
       item.setEnabled(true);
     }
  else {

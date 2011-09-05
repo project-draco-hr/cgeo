@@ -27,6 +27,7 @@
   mapView.setBuiltInZoomControls(true);
   mapView.displayZoomControls(true);
   mapView.preLoad();
+  mapView.setOnDragListener(this);
   mapView.clearOverlays();
   if (overlayMyLoc == null) {
     overlayMyLoc=mapView.createAddPositionOverlay(activity,settings);
