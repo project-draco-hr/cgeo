@@ -1,12 +1,15 @@
 {
-  if (lock) {
-    return;
+  double currentAzimuth;
+  double currentHeading;
+synchronized (this) {
+    currentAzimuth=azimuth;
+    currentHeading=heading;
   }
   if (drawing) {
     return;
   }
-  double azimuthTemp=azimuth;
-  double azimuthRelative=azimuthTemp - heading;
+  double azimuthTemp=currentAzimuth;
+  double azimuthRelative=azimuthTemp - currentHeading;
   if (azimuthRelative < 0) {
     azimuthRelative=azimuthRelative + 360;
   }

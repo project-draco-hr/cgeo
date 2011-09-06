@@ -5,10 +5,10 @@
     }
  catch (    Exception e) {
     }
-    lock=true;
-    azimuth=smoothUpdate(northHeading,azimuth);
-    heading=smoothUpdate(cacheHeading,heading);
-    lock=false;
+synchronized (cgCompass.this) {
+      azimuth=smoothUpdate(northHeading,azimuth);
+      heading=smoothUpdate(cacheHeading,heading);
+    }
     changeHandler.sendMessage(new Message());
   }
 }
