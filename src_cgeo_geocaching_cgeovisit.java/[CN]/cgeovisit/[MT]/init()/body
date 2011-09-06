@@ -15,7 +15,7 @@
       post.setText(res.getString(R.string.log_post_no_rate));
     }
   }
- else   if (settings.getSignature() != null && settings.signatureAutoinsert && settings.getSignature().length() > 0 && 0 == ((EditText)findViewById(R.id.log)).getText().length()) {
+ else   if (StringUtils.isNotBlank(settings.getSignature()) && settings.signatureAutoinsert && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
     insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(),base));
   }
   if (types.contains(typeSelected) == false) {
@@ -40,7 +40,7 @@
   dateButton.setText(base.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new cgeovisitDateListener());
   EditText logView=(EditText)findViewById(R.id.log);
-  if (logView.getText().length() == 0 && text != null && text.length() > 0) {
+  if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text)) {
     logView.setText(text);
   }
   if (tweetBox == null) {
@@ -53,7 +53,7 @@
   if (post == null) {
     post=(Button)findViewById(R.id.post);
   }
-  if (cgBase.isEmpty(viewstates)) {
+  if (ArrayUtils.isEmpty(viewstates)) {
     post.setEnabled(false);
     post.setOnTouchListener(null);
     post.setOnClickListener(null);

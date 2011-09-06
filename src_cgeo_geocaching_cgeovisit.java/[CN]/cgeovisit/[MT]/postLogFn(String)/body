@@ -34,7 +34,7 @@
     if (status == 1) {
       app.clearLogOffline(geocode);
     }
-    if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1 && settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null && settings.tokenSecret.length() > 0 && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+    if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1 && StringUtils.isNotBlank(settings.tokenPublic) && StringUtils.isNotBlank(settings.tokenSecret) && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
       cgBase.postTweetCache(app,settings,geocode);
     }
     if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {

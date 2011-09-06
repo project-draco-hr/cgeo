@@ -27,6 +27,7 @@
   mapView.setBuiltInZoomControls(true);
   mapView.displayZoomControls(true);
   mapView.preLoad();
+  mapView.setOnDragListener(this);
   mapView.clearOverlays();
   if (overlayMyLoc == null) {
     overlayMyLoc=mapView.createAddPositionOverlay(activity,settings);
@@ -52,13 +53,13 @@
   Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {
     fromDetailIntent=extras.getBoolean("detail");
-    searchIdIntent=extras.getLong("searchid");
+    searchIdIntent=extras.getString("searchid");
     geocodeIntent=extras.getString("geocode");
     latitudeIntent=extras.getDouble("latitude");
     longitudeIntent=extras.getDouble("longitude");
     waypointTypeIntent=extras.getString("wpttype");
     mapStateIntent=extras.getIntArray("mapstate");
-    if (searchIdIntent == 0L) {
+    if ("".equals(searchIdIntent)) {
       searchIdIntent=null;
     }
     if (latitudeIntent == 0.0) {

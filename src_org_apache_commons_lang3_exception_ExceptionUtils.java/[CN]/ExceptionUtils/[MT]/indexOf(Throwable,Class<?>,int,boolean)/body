@@ -1,0 +1,27 @@
+{
+  if (throwable == null || type == null) {
+    return -1;
+  }
+  if (fromIndex < 0) {
+    fromIndex=0;
+  }
+  Throwable[] throwables=ExceptionUtils.getThrowables(throwable);
+  if (fromIndex >= throwables.length) {
+    return -1;
+  }
+  if (subclass) {
+    for (int i=fromIndex; i < throwables.length; i++) {
+      if (type.isAssignableFrom(throwables[i].getClass())) {
+        return i;
+      }
+    }
+  }
+ else {
+    for (int i=fromIndex; i < throwables.length; i++) {
+      if (type.equals(throwables[i].getClass())) {
+        return i;
+      }
+    }
+  }
+  return -1;
+}

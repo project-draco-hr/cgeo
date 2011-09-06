@@ -1,5 +1,5 @@
 {
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.parseTrackable: No page given");
     return null;
   }
@@ -40,7 +40,7 @@
  catch (  Exception e) {
     Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable name");
   }
-  if (trackable.name != null && trackable.name.length() > 0) {
+  if (StringUtils.isNotBlank(trackable.name)) {
     try {
       final Matcher matcherType=PATTERN_TRACKABLE_Type.matcher(page);
       if (matcherType.find() && matcherType.groupCount() > 0) {

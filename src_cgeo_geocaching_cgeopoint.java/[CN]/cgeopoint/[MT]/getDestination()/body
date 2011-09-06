@@ -1,18 +1,18 @@
 {
-  ArrayList<Double> coords=new ArrayList<Double>();
+  List<Double> coords=new ArrayList<Double>();
   Double latitude=null;
   Double longitude=null;
   String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
   String distanceText=((EditText)findViewById(R.id.distance)).getText().toString();
   String latText=((EditText)findViewById(R.id.latitude)).getText().toString();
   String lonText=((EditText)findViewById(R.id.longitude)).getText().toString();
-  if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0) && (latText == null || latText.length() == 0)&& (lonText == null || lonText.length() == 0)) {
+  if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     showToast(res.getString(R.string.err_point_no_position_given));
     return null;
   }
-  if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
-    HashMap<String,Object> latParsed=cgBase.parseCoordinate(latText,"lat");
-    HashMap<String,Object> lonParsed=cgBase.parseCoordinate(lonText,"lon");
+  if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
+    Map<String,Object> latParsed=cgBase.parseCoordinate(latText,"lat");
+    Map<String,Object> lonParsed=cgBase.parseCoordinate(lonText,"lon");
     if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
       showToast(res.getString(R.string.err_parse_lat));
       return null;
@@ -32,7 +32,7 @@
     latitude=geo.latitudeNow;
     longitude=geo.longitudeNow;
   }
-  if (bearingText != null && bearingText.length() > 0 && distanceText != null && distanceText.length() > 0) {
+  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     Double bearing=null;
     try {
       bearing=new Double(bearingText);
@@ -87,7 +87,7 @@
     }
     Double latParsed=null;
     Double lonParsed=null;
-    HashMap<String,Double> coordsDst=cgBase.getRadialDistance(latitude,longitude,bearing,distance);
+    Map<String,Double> coordsDst=cgBase.getRadialDistance(latitude,longitude,bearing,distance);
     latParsed=coordsDst.get("latitude");
     lonParsed=coordsDst.get("longitude");
     if (latParsed == null || lonParsed == null) {

@@ -1,0 +1,11 @@
+{
+  int strsLen;
+  if (strs == null || (strsLen=strs.length) == 0) {
+    return strs;
+  }
+  String[] newArr=new String[strsLen];
+  for (int i=0; i < strsLen; i++) {
+    newArr[i]=strip(strs[i],stripChars);
+  }
+  return newArr;
+}

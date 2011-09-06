@@ -1,6 +1,6 @@
 {
   init();
-  if (((geocode == null || geocode.length() == 0) && id <= 0) || waypoint == null) {
+  if ((StringUtils.isBlank(geocode) && id <= 0) || waypoint == null) {
     return false;
   }
   boolean ok=false;

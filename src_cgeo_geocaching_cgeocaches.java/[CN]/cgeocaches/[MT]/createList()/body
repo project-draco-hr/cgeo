@@ -10,7 +10,7 @@
       if (value != null) {
         value=value.trim();
       }
-      if (value != null && value.length() > 0) {
+      if (StringUtils.isNotBlank(value)) {
         int newId=app.createList(value);
         if (newId >= 10) {
           showToast(res.getString(R.string.list_dialog_create_ok));

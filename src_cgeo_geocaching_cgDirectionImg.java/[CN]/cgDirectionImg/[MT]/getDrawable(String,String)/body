@@ -1,10 +1,10 @@
 {
   String dirName;
   String fileName;
-  if (geocode == null || geocode.length() == 0 || code == null || code.length() == 0) {
+  if (StringUtils.isBlank(geocode) || StringUtils.isBlank(code)) {
     return;
   }
-  if (geocode != null && geocode.length() > 0) {
+  if (StringUtils.isNotBlank(geocode)) {
     dirName=cgSettings.getStorage() + geocode + "/";
     fileName=cgSettings.getStorage() + geocode + "/direction.png";
   }

@@ -1,5 +1,5 @@
 {
-  if (null == apps || 0 == apps.length) {
+  if (ArrayUtils.isEmpty(apps)) {
     apps=new CacheListApp[]{new InternalCacheListMap(res),new LocusCacheListApp(res)};
   }
   return apps;

@@ -20,12 +20,12 @@
     }
     lastSort=System.currentTimeMillis();
   }
-  if (distances != null && distances.size() > 0) {
+  if (CollectionUtils.isNotEmpty(distances)) {
     for (    cgDistanceView distance : distances) {
       distance.update(latitudeIn,longitudeIn);
     }
   }
-  if (compasses != null && compasses.size() > 0) {
+  if (CollectionUtils.isNotEmpty(compasses)) {
     for (    cgCompassMini compass : compasses) {
       compass.updateCoords(latitudeIn,longitudeIn);
     }

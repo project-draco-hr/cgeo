@@ -10,14 +10,14 @@
     text=extras.getString(EXTRAS_TEXT);
     alreadyFound=extras.getBoolean(EXTRAS_FOUND);
   }
-  if ((cacheid == null || cacheid.length() == 0) && geocode != null && geocode.length() > 0) {
+  if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
     cacheid=app.getCacheid(geocode);
   }
-  if ((geocode == null || geocode.length() == 0) && cacheid != null && cacheid.length() > 0) {
+  if ((StringUtils.isBlank(geocode)) && StringUtils.isNotBlank(cacheid)) {
     geocode=app.getGeocode(cacheid);
   }
   cache=app.getCacheByGeocode(geocode);
-  if (cache.name != null && cache.name.length() > 0) {
+  if (StringUtils.isNotBlank(cache.name)) {
     setTitle(res.getString(R.string.log_new_log) + " " + cache.name);
   }
  else {

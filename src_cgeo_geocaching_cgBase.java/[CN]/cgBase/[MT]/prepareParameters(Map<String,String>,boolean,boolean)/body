@@ -1,0 +1,32 @@
+{
+  String paramsDone=null;
+  if (my != true && settings.excludeMine > 0) {
+    if (params == null) {
+      params=new HashMap<String,String>();
+    }
+    if (addF) {
+      params.put("f","1");
+    }
+    Log.i(cgSettings.tag,"Skipping caches found or hidden by user.");
+  }
+  if (params != null) {
+    Set<Map.Entry<String,String>> entrySet=params.entrySet();
+    List<String> paramsEncoded=new ArrayList<String>();
+    for (    Map.Entry<String,String> entry : entrySet) {
+      String key=entry.getKey();
+      String value=entry.getValue();
+      if (key.charAt(0) == '^') {
+        key="";
+      }
+      if (value == null) {
+        value="";
+      }
+      paramsEncoded.add(key + "=" + urlencode_rfc3986(value));
+    }
+    paramsDone=implode("&",paramsEncoded.toArray());
+  }
+ else {
+    paramsDone="";
+  }
+  return paramsDone;
+}

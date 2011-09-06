@@ -1,12 +1,12 @@
 {
-  final HashMap<String,cgCoord> coords=new HashMap<String,cgCoord>();
-  if (fileContent == null || fileContent.length() <= 0) {
+  final Map<String,cgCoord> coords=new HashMap<String,cgCoord>();
+  if (StringUtils.isBlank(fileContent)) {
     return coords;
   }
   final String[] points=fileContent.split("<waypoint>");
   for (  String pointString : points) {
     final cgCoord pointCoord=new cgCoord();
-    HashMap<String,Object> tmp=null;
+    Map<String,Object> tmp=null;
     final Matcher matcherGeocode=patternGeocode.matcher(pointString);
     if (matcherGeocode.find()) {
       String geocode=matcherGeocode.group(1).trim().toUpperCase();
@@ -68,7 +68,7 @@
         pointCoord.size="unknown";
       }
     }
-    if (pointCoord.geocode != null && pointCoord.geocode.length() > 0) {
+    if (StringUtils.isNotBlank(pointCoord.geocode)) {
       coords.put(pointCoord.geocode,pointCoord);
     }
   }

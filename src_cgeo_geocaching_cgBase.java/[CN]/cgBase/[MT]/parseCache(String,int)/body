@@ -1,5 +1,5 @@
 {
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.parseCache: No page given");
     return null;
   }
@@ -99,7 +99,7 @@
     return null;
   }
   tableInside=tableInside.substring(0,pos);
-  if (tableInside != null && tableInside.length() > 0) {
+  if (StringUtils.isNotBlank(tableInside)) {
     try {
       final Matcher matcherTerrain=patternTerrain.matcher(tableInside);
       if (matcherTerrain.find() && matcherTerrain.groupCount() > 0) {
@@ -196,7 +196,7 @@
     final Matcher matcherLatLon=patternLatLon.matcher(page);
     if (matcherLatLon.find() && matcherLatLon.groupCount() > 0) {
       cache.latlon=getMatch(matcherLatLon.group(2));
-      HashMap<String,Object> tmp=cgBase.parseLatlon(cache.latlon);
+      Map<String,Object> tmp=cgBase.parseLatlon(cache.latlon);
       if (tmp.size() > 0) {
         cache.latitude=(Double)tmp.get("latitude");
         cache.longitude=(Double)tmp.get("longitude");
@@ -321,7 +321,7 @@
       }
       if (matcherInventory.groupCount() > 1) {
         final String inventoryPre=matcherInventory.group(2);
-        if (inventoryPre != null && inventoryPre.length() > 0) {
+        if (StringUtils.isNotBlank(inventoryPre)) {
           final Matcher matcherInventoryInside=patternInventoryInside.matcher(inventoryPre);
           while (matcherInventoryInside.find()) {
             if (matcherInventoryInside.groupCount() > 0) {
@@ -346,7 +346,7 @@
       while (matcherLog.find()) {
         String typeStr=matcherLog.group(1);
         String countStr=matcherLog.group(2);
-        if (typeStr != null && typeStr.length() > 0 && logTypes.containsKey(typeStr.toLowerCase()) && countStr != null && countStr.length() > 0) {
+        if (StringUtils.isNotBlank(typeStr) && logTypes.containsKey(typeStr.toLowerCase()) && StringUtils.isNotBlank(countStr)) {
           cache.logCounts.put(logTypes.get(typeStr.toLowerCase()),Integer.parseInt(countStr));
         }
       }
@@ -451,8 +451,16 @@
         }
         try {
           final Matcher matcherWpName=patternWpName.matcher(wp[6]);
-          if (matcherWpName.find() && matcherWpName.groupCount() > 0) {
-            waypoint.name=matcherWpName.group(1).trim();
+          while (matcherWpName.find()) {
+            if (matcherWpName.groupCount() > 0) {
+              waypoint.name=matcherWpName.group(1);
+              if (StringUtils.isNotBlank(waypoint.name)) {
+                waypoint.name=waypoint.name.trim();
+              }
+            }
+            if (matcherWpName.find() && matcherWpName.groupCount() > 0) {
+              waypoint.name=matcherWpName.group(1).trim();
+            }
           }
         }
  catch (        Exception e) {
@@ -462,7 +470,7 @@
           final Matcher matcherWpLatLon=patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
           if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
             waypoint.latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString();
-            final HashMap<String,Object> tmp=cgBase.parseLatlon(waypoint.latlon);
+            final Map<String,Object> tmp=cgBase.parseLatlon(waypoint.latlon);
             if (tmp.size() > 0) {
               waypoint.latitude=(Double)tmp.get("latitude");
               waypoint.longitude=(Double)tmp.get("longitude");

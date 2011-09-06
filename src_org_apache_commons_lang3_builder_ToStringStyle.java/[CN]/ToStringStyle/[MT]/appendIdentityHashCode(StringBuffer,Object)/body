@@ -1,0 +1,7 @@
+{
+  if (this.isUseIdentityHashCode() && object != null) {
+    register(object);
+    buffer.append('@');
+    buffer.append(Integer.toHexString(System.identityHashCode(object)));
+  }
+}

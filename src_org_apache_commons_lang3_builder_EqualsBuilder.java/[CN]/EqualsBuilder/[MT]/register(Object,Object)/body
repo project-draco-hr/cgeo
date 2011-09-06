@@ -1,0 +1,10 @@
+{
+synchronized (EqualsBuilder.class) {
+    if (getRegistry() == null) {
+      REGISTRY.set(new HashSet<Pair<IDKey,IDKey>>());
+    }
+  }
+  Set<Pair<IDKey,IDKey>> registry=getRegistry();
+  Pair<IDKey,IDKey> pair=getRegisterPair(lhs,rhs);
+  registry.add(pair);
+}

@@ -1,0 +1,7 @@
+{
+  Validate.notNull(collection);
+  if (index < 0 || index >= collection.size()) {
+    throw new IndexOutOfBoundsException(String.format(message,values));
+  }
+  return collection;
+}

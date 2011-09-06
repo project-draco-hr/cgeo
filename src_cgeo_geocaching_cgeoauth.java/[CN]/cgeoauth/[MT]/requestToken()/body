@@ -38,7 +38,7 @@
       }
  while (code == -1 && retries < 5);
       final String line=sb.toString();
-      if (line != null && line.length() > 0) {
+      if (StringUtils.isNotBlank(line)) {
         final Matcher paramsMatcher1=paramsPattern1.matcher(line);
         if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
           OAtoken=paramsMatcher1.group(1);
@@ -47,13 +47,13 @@
         if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
           OAtokenSecret=paramsMatcher2.group(1);
         }
-        if (OAtoken != null && OAtoken.length() > 0 && OAtokenSecret != null && OAtokenSecret.length() > 0) {
+        if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
           final SharedPreferences.Editor prefsEdit=getSharedPreferences(cgSettings.preferences,0).edit();
           prefsEdit.putString("temp-token-public",OAtoken);
           prefsEdit.putString("temp-token-secret",OAtokenSecret);
           prefsEdit.commit();
           try {
-            final HashMap<String,String> paramsPre=new HashMap<String,String>();
+            final Map<String,String> paramsPre=new HashMap<String,String>();
             paramsPre.put("oauth_callback","oob");
             final String paramsBrowser=cgOAuth.signOAuth(host,pathAuthorize,"GET",true,paramsPre,OAtoken,OAtokenSecret);
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://" + host + pathAuthorize+ "?"+ paramsBrowser)));

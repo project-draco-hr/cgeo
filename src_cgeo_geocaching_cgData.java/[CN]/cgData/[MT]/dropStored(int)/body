@@ -1,6 +1,6 @@
 {
   init();
-  ArrayList<String> geocodes=new ArrayList<String>();
+  List<String> geocodes=new ArrayList<String>();
   try {
     Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},"reason = " + listId,null,null,null,null,null);
     if (cursor != null) {
@@ -17,7 +17,7 @@
       }
       cursor.close();
     }
-    if (geocodes.size() > 0) {
+    if (CollectionUtils.isNotEmpty(geocodes)) {
       String geocodeList=cgBase.implode(", ",geocodes.toArray());
       databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in ("+ geocodeList+ ")");
       databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in ("+ geocodeList+ ")");

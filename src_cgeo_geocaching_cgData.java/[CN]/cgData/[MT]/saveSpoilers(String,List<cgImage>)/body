@@ -1,0 +1,28 @@
+{
+  init();
+  if (StringUtils.isBlank(geocode) || spoilers == null) {
+    return false;
+  }
+  databaseRW.beginTransaction();
+  try {
+    databaseRW.delete(dbTableSpoilers,"geocode = ?",new String[]{geocode});
+    if (!spoilers.isEmpty()) {
+      ContentValues values=new ContentValues();
+      long timeStamp=System.currentTimeMillis();
+      for (      cgImage oneSpoiler : spoilers) {
+        values.clear();
+        values.put("geocode",geocode);
+        values.put("updated",timeStamp);
+        values.put("url",oneSpoiler.url);
+        values.put("title",oneSpoiler.title);
+        values.put("description",oneSpoiler.description);
+        databaseRW.insert(dbTableSpoilers,null,values);
+      }
+    }
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+  return true;
+}

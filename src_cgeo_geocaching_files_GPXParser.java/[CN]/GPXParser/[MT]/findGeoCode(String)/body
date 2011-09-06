@@ -1,5 +1,5 @@
 {
-  if (input == null || (cache.geocode != null && cache.geocode.length() != 0)) {
+  if (input == null || StringUtils.isNotBlank(cache.geocode)) {
     return;
   }
   final Matcher matcherGeocode=patternGeocode.matcher(input);

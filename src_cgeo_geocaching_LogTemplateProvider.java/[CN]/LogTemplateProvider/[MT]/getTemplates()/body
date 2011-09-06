@@ -24,7 +24,7 @@
 ,new LogTemplate("NUMBER",R.string.init_signature_template_number){
       @Override String getValue(      final cgBase base){
         String findCount="";
-        final HashMap<String,String> params=new HashMap<String,String>();
+        final Map<String,String> params=new HashMap<String,String>();
         final String page=base.request(false,"www.geocaching.com","/email/","GET",params,false,false,false).getData();
         int current=parseFindCount(page);
         if (current >= 0) {

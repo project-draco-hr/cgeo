@@ -3,7 +3,7 @@
     storage=new cgData(this);
   }
   cgSearch search=new cgSearch();
-  ArrayList<String> geocodes=storage.loadBatchOfStoredGeocodes(detailedOnly,latitude,longitude,cachetype,list);
+  List<String> geocodes=storage.loadBatchOfStoredGeocodes(detailedOnly,latitude,longitude,cachetype,list);
   if (geocodes != null && geocodes.isEmpty() == false) {
     for (    String gccode : geocodes) {
       search.addGeocode(gccode);

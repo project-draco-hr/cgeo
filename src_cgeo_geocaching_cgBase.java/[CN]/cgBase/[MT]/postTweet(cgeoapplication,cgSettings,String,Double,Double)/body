@@ -2,11 +2,11 @@
   if (app == null) {
     return;
   }
-  if (settings == null || settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0) {
+  if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isNotBlank(settings.tokenSecret)) {
     return;
   }
   try {
-    HashMap<String,String> parameters=new HashMap<String,String>();
+    Map<String,String> parameters=new HashMap<String,String>();
     parameters.put("status",status);
     if (latitude != null && longitude != null) {
       parameters.put("lat",String.format("%.6f",latitude));

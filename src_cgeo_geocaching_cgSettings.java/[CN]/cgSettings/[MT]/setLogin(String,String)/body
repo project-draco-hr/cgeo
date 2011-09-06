@@ -3,7 +3,7 @@
   this.password=password;
   return editSettings(new PrefRunnable(){
     @Override public void edit(    Editor edit){
-      if (username == null || username.length() == 0 || password == null || password.length() == 0) {
+      if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
         edit.remove(KEY_USERNAME);
         edit.remove(KEY_PASSWORD);
       }
