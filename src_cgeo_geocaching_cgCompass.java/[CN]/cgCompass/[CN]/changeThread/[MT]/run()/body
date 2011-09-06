@@ -9,12 +9,12 @@
       continue;
     }
     lock=true;
-    Double diff=Double.valueOf(0);
-    Double diffAbs=Double.valueOf(0);
-    Double tempAzimuth=Double.valueOf(0);
-    Double tempHeading=Double.valueOf(0);
-    Double actualAzimuth=azimuth;
-    Double actualHeading=heading;
+    double diff=0.0;
+    double diffAbs=0.0;
+    double tempAzimuth=0.0;
+    double tempHeading=0.0;
+    final double actualAzimuth=azimuth;
+    final double actualHeading=heading;
     diff=northHeading - actualAzimuth;
     diffAbs=Math.abs(northHeading - actualAzimuth);
     if (diff < 0) {
