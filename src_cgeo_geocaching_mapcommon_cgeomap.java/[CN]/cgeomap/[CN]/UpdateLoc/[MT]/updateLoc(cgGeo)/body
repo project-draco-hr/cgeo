@@ -15,7 +15,9 @@
         myLocationInMiddle();
       }
  else {
-        mapView.invalidate();
+        if (mapView != null) {
+          mapView.invalidate();
+        }
       }
     }
     if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) {

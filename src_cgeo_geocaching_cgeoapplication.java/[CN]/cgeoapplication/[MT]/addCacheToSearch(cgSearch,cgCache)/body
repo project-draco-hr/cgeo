@@ -9,14 +9,7 @@
   String geocode=cache.geocode.toUpperCase();
   String guid=cache.guid.toLowerCase();
   boolean status=false;
-  cgCache oldCache=null;
-  if (cache.reason >= 1 || (oldCache=storage.loadCache(cache.geocode,cache.guid,false,true,true,true,true,true)) != null) {
-    status=storage.saveCache(cache);
-  }
- else {
-    cgCache mergedCache=cache.merge(storage,oldCache);
-    status=storage.saveCache(mergedCache);
-  }
+  status=storeWithMerge(cache,cache.reason >= 1);
   if (status) {
     search.addGeocode(cache.geocode);
   }
