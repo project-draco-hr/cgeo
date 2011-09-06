@@ -1,0 +1,8 @@
+{
+  if (cache == null)   return null;
+  Location loc=new Location(cgSettings.tag);
+  loc.setLatitude(cache.latitude);
+  loc.setLongitude(cache.longitude);
+  Point p=new Point(cache.name,loc);
+  return p;
+}
