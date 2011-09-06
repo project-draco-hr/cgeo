@@ -311,7 +311,7 @@
     waypoints.removeAllViews();
     if (CollectionUtils.isNotEmpty(cache.waypoints)) {
       LinearLayout waypointView;
-      ArrayList<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.waypoints);
+      List<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.waypoints);
       Collections.sort(sortedWaypoints,new Comparator<cgWaypoint>(){
         @Override public int compare(        cgWaypoint wayPoint1,        cgWaypoint wayPoint2){
           return order(wayPoint1) - order(wayPoint2);

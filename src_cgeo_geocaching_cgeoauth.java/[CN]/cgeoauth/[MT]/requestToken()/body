@@ -53,7 +53,7 @@
           prefsEdit.putString("temp-token-secret",OAtokenSecret);
           prefsEdit.commit();
           try {
-            final HashMap<String,String> paramsPre=new HashMap<String,String>();
+            final Map<String,String> paramsPre=new HashMap<String,String>();
             paramsPre.put("oauth_callback","oob");
             final String paramsBrowser=cgOAuth.signOAuth(host,pathAuthorize,"GET",true,paramsPre,OAtoken,OAtokenSecret);
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://" + host + pathAuthorize+ "?"+ paramsBrowser)));

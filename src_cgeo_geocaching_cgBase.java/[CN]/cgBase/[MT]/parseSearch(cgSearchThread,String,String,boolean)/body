@@ -4,8 +4,8 @@
     return null;
   }
   final cgCacheWrap caches=new cgCacheWrap();
-  final ArrayList<String> cids=new ArrayList<String>();
-  final ArrayList<String> guids=new ArrayList<String>();
+  final List<String> cids=new ArrayList<String>();
+  final List<String> guids=new ArrayList<String>();
   String recaptchaChallenge=null;
   String recaptchaText=null;
   caches.url=url;
@@ -300,7 +300,7 @@
   if (guids.size() > 0) {
     Log.i(cgSettings.tag,"Trying to get ratings for " + cids.size() + " caches");
     try {
-      final HashMap<String,cgRating> ratings=getRating(guids,null);
+      final Map<String,cgRating> ratings=getRating(guids,null);
       if (CollectionUtils.isNotEmpty(ratings)) {
         for (        cgCache oneCache : caches.cacheList) {
           if (ratings.containsKey(oneCache.guid)) {

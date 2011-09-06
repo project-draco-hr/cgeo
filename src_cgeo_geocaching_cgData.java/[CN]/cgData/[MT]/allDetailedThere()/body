@@ -1,7 +1,7 @@
 {
   init();
   Cursor cursor=null;
-  ArrayList<String> thereA=new ArrayList<String>();
+  List<String> thereA=new ArrayList<String>();
   try {
     cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},"(detailed = 1 and detailedupdate > " + (System.currentTimeMillis() - (3 * 24 * 60* 60* 1000)) + ") or reason > 0",null,null,null,"detailedupdate desc","100");
     if (cursor != null) {

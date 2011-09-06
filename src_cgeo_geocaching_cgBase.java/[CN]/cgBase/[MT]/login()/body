@@ -4,7 +4,7 @@
   cgResponse loginResponse=null;
   String loginData=null;
   String[] viewstates=null;
-  final HashMap<String,String> loginStart=settings.getLogin();
+  final Map<String,String> loginStart=settings.getLogin();
   if (loginStart == null) {
     return -3;
   }
@@ -26,8 +26,8 @@
     Log.e(cgSettings.tag,"cgeoBase.login: Failed to retrieve login page (1st)");
     return -2;
   }
-  final HashMap<String,String> login=settings.getLogin();
-  final HashMap<String,String> params=new HashMap<String,String>();
+  final Map<String,String> login=settings.getLogin();
+  final Map<String,String> params=new HashMap<String,String>();
   if (login == null || StringUtils.isEmpty(login.get("username")) || StringUtils.isEmpty(login.get("password"))) {
     Log.e(cgSettings.tag,"cgeoBase.login: No login information stored");
     return -3;

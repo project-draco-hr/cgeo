@@ -1,0 +1,73 @@
+{
+  final cgSearch search=new cgSearch();
+  String geocode=parameters.get("geocode");
+  String guid=parameters.get("guid");
+  if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No geocode nor guid given");
+    return null;
+  }
+  if (forceReload == false && reason == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
+    if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+      geocode=app.getGeocode(guid);
+    }
+    List<cgCache> cacheList=new ArrayList<cgCache>();
+    cacheList.add(app.getCacheByGeocode(geocode,true,true,true,true,true,true));
+    search.addGeocode(geocode);
+    app.addSearch(search,cacheList,false,reason);
+    cacheList.clear();
+    cacheList=null;
+    return search.getCurrentId();
+  }
+  final String host="www.geocaching.com";
+  final String path="/seek/cache_details.aspx";
+  final String method="GET";
+  final Map<String,String> params=new HashMap<String,String>();
+  if (StringUtils.isNotBlank(geocode)) {
+    params.put("wp",geocode);
+  }
+ else   if (StringUtils.isNotBlank(guid)) {
+    params.put("guid",guid);
+  }
+  params.put("decrypt","y");
+  params.put("log","y");
+  params.put("numlogs","35");
+  String page=requestLogged(false,host,path,method,params,false,false,false);
+  if (StringUtils.isEmpty(page)) {
+    if (app.isThere(geocode,guid,true,false)) {
+      if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+        Log.i(cgSettings.tag,"Loading old cache from cache.");
+        geocode=app.getGeocode(guid);
+      }
+      final List<cgCache> cacheList=new ArrayList<cgCache>();
+      cacheList.add(app.getCacheByGeocode(geocode));
+      search.addGeocode(geocode);
+      search.error=null;
+      app.addSearch(search,cacheList,false,reason);
+      cacheList.clear();
+      return search.getCurrentId();
+    }
+    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No data from server");
+    return null;
+  }
+  final cgCacheWrap caches=parseCache(page,reason);
+  if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+    if (caches != null && StringUtils.isNotBlank(caches.error)) {
+      search.error=caches.error;
+    }
+    if (caches != null && StringUtils.isNotBlank(caches.url)) {
+      search.url=caches.url;
+    }
+    app.addSearch(search,null,true,reason);
+    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No cache parsed");
+    return null;
+  }
+  if (app == null) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No application found");
+    return null;
+  }
+  List<cgCache> cacheList=processSearchResults(search,caches,0,0,null);
+  app.addSearch(search,cacheList,true,reason);
+  page=null;
+  cacheList.clear();
+  return search.getCurrentId();
+}

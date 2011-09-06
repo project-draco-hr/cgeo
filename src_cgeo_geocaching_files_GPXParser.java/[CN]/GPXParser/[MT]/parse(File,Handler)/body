@@ -1,9 +1,9 @@
 {
   if (file == null) {
-    return 0L;
+    return null;
   }
   FileInputStream fis=null;
-  long result=0L;
+  UUID result=null;
   try {
     fis=new FileInputStream(file);
     result=parse(fis,handlerIn);

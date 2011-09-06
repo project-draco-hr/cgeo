@@ -25,10 +25,10 @@
   }
  else   if (id == MENU_STORE_CACHES) {
     if (live && !isLoading() && caches != null && !caches.isEmpty()) {
-      final ArrayList<String> geocodes=new ArrayList<String>();
-      ArrayList<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
+      final List<String> geocodes=new ArrayList<String>();
+      List<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
       try {
-        if (CollectionUtils.isNotEmpty(cachesProtected)) {
+        if (cachesProtected.size() > 0) {
           final GeoPointImpl mapCenter=mapView.getMapViewCenter();
           final int mapCenterLat=mapCenter.getLatitudeE6();
           final int mapCenterLon=mapCenter.getLongitudeE6();

@@ -1,6 +1,6 @@
 {
   init();
-  ArrayList<cgImage> logImgList=new ArrayList<cgImage>();
+  List<cgImage> logImgList=new ArrayList<cgImage>();
   Cursor cursor=databaseRO.query(dbTableLogImages,new String[]{"_id","log_id","title","url"},"log_id = \"" + log_id + "\"",null,null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();

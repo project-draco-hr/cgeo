@@ -1,8 +1,8 @@
 {
   if (currentFormat == coordInputFormatEnum.Plain) {
     if (eLat.length() > 0 && eLon.length() > 0) {
-      HashMap<String,Object> latParsed=cgBase.parseCoordinate(eLat.getText().toString(),"lat");
-      HashMap<String,Object> lonParsed=cgBase.parseCoordinate(eLon.getText().toString(),"lon");
+      Map<String,Object> latParsed=cgBase.parseCoordinate(eLat.getText().toString(),"lat");
+      Map<String,Object> lonParsed=cgBase.parseCoordinate(eLon.getText().toString(),"lon");
       if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
         context.showToast(context.getResources().getString(R.string.err_parse_lat));
         return;
@@ -23,7 +23,7 @@
       longitude=geo.longitudeNow;
     }
   }
-  ArrayList<Double> co=new ArrayList<Double>();
+  List<Double> co=new ArrayList<Double>();
   co.add(latitude);
   co.add(longitude);
   cuListener.update(co);
