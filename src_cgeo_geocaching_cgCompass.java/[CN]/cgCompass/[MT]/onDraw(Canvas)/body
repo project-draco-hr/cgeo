@@ -5,9 +5,6 @@ synchronized (this) {
     currentAzimuth=azimuth;
     currentHeading=heading;
   }
-  if (drawing) {
-    return;
-  }
   double azimuthTemp=currentAzimuth;
   double azimuthRelative=azimuthTemp - currentHeading;
   if (azimuthRelative < 0) {
@@ -20,7 +17,6 @@ synchronized (this) {
   int canvasCenterY=(compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
   int marginLeftTemp=0;
   int marginTopTemp=0;
-  drawing=true;
   super.onDraw(canvas);
   canvas.save();
   canvas.setDrawFilter(setfil);
@@ -42,5 +38,4 @@ synchronized (this) {
   canvas.drawBitmap(compassOverlay,marginLeftTemp,marginTopTemp,null);
   canvas.setDrawFilter(remfil);
   canvas.restore();
-  drawing=false;
 }
