@@ -89,6 +89,11 @@
   if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
     centerMap(geocodeIntent,searchIdIntent,latitudeIntent,longitudeIntent,mapStateIntent);
   }
-  setMyLoc(null);
+  myLocSwitch=(ImageSwitcher)activity.findViewById(R.id.my_position);
+  myLocSwitch.setFactory(this);
+  myLocSwitch.setInAnimation(activity,android.R.anim.fade_in);
+  myLocSwitch.setOutAnimation(activity,android.R.anim.fade_out);
+  myLocSwitch.setOnClickListener(new MyLocationListener());
+  switchMyLocationButton();
   startTimer();
 }
