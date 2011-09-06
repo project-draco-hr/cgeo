@@ -1,5 +1,5 @@
 {
-  final long searchId;
+  final UUID searchId;
   String name=file.getName().toLowerCase();
   if (name.endsWith("gpx")) {
     searchId=GPXParser.parseGPX(app,file,listId,changeParseDialogHandler);

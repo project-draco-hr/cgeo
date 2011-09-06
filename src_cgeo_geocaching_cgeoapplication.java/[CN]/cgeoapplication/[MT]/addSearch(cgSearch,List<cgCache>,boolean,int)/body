@@ -2,7 +2,7 @@
   if (CollectionUtils.isEmpty(cacheList)) {
     return null;
   }
-  final long searchId=search.getCurrentId();
+  final UUID searchId=search.getCurrentId();
   searches.put(searchId,search);
   if (storage == null) {
     storage=new cgData(this);

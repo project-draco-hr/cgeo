@@ -9,7 +9,7 @@
       return;
     }
     if (fromDetailIntent) {
-      searchId=searchIdIntent;
+      searchId=UUID.fromString(searchIdIntent);
     }
  else {
       if (!live || settings.maplive == 0) {
