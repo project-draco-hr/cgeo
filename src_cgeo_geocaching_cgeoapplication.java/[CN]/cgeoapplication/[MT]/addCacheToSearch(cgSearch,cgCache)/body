@@ -2,7 +2,7 @@
   if (search == null || cache == null) {
     return false;
   }
-  final long searchId=search.getCurrentId();
+  final UUID searchId=search.getCurrentId();
   if (searches.containsKey(searchId) == false) {
     searches.put(searchId,search);
   }
