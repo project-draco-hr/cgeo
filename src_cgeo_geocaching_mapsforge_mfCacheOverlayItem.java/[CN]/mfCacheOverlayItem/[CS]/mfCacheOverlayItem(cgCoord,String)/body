@@ -1,5 +1,5 @@
 {
-  super(new GeoPoint((int)(coordinate.latitude * 1e6),(int)(coordinate.longitude * 1e6)),coordinate.name,"");
+  super(new GeoPoint(coordinate.coords.getLatitudeE6(),coordinate.coords.getLongitudeE6()),coordinate.name,"");
   this.cacheType=type;
   this.coord=coordinate;
 }

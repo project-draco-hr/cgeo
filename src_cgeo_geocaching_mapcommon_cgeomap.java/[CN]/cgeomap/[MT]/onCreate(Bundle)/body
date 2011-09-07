@@ -55,21 +55,19 @@
     fromDetailIntent=extras.getBoolean("detail");
     searchIdIntent=extras.getString("searchid");
     geocodeIntent=extras.getString("geocode");
-    latitudeIntent=extras.getDouble("latitude");
-    longitudeIntent=extras.getDouble("longitude");
+    final double latitudeIntent=extras.getDouble("latitude");
+    final double longitudeIntent=extras.getDouble("longitude");
+    coordsIntent=new Geopoint(latitudeIntent,longitudeIntent);
     waypointTypeIntent=extras.getString("wpttype");
     mapStateIntent=extras.getIntArray("mapstate");
     if ("".equals(searchIdIntent)) {
       searchIdIntent=null;
     }
-    if (latitudeIntent == 0.0) {
-      latitudeIntent=null;
-    }
-    if (longitudeIntent == 0.0) {
-      longitudeIntent=null;
+    if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
+      coordsIntent=null;
     }
   }
-  if (searchIdIntent == null && geocodeIntent == null && (latitudeIntent == null || longitudeIntent == null)) {
+  if (searchIdIntent == null && geocodeIntent == null && coordsIntent == null) {
     live=true;
   }
  else {
@@ -86,8 +84,8 @@
  else {
     followMyLocation=1 == mapStateIntent[3] ? true : false;
   }
-  if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
-    centerMap(geocodeIntent,searchIdIntent,latitudeIntent,longitudeIntent,mapStateIntent);
+  if (geocodeIntent != null || searchIdIntent != null || coordsIntent != null || mapStateIntent != null) {
+    centerMap(geocodeIntent,searchIdIntent,coordsIntent,mapStateIntent);
   }
   myLocSwitch=(ImageSwitcher)activity.findViewById(R.id.my_position);
   myLocSwitch.setFactory(this);

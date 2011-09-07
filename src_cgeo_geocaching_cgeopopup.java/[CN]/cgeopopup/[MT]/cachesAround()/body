@@ -1,7 +1,7 @@
 {
-  if (cache == null || cache.latitude == null || cache.longitude == null) {
+  if (cache == null || cache.coords == null) {
     showToast(res.getString(R.string.err_location_unknown));
   }
-  cgeocaches.startActivityCachesAround(this,cache.latitude,cache.longitude);
+  cgeocaches.startActivityCachesAround(this,cache.coords);
   finish();
 }

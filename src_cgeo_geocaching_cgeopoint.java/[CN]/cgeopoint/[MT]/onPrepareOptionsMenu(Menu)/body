@@ -1,8 +1,8 @@
 {
   super.onPrepareOptionsMenu(menu);
   try {
-    List<Double> coords=getDestination();
-    if (coords != null && coords.get(0) != null && coords.get(1) != null) {
+    final Geopoint coords=getDestination();
+    if (coords != null) {
       menu.findItem(0).setVisible(true);
       menu.findItem(2).setVisible(true);
       menu.findItem(5).setVisible(true);

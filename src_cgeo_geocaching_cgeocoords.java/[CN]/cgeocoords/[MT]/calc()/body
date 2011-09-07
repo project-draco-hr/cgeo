@@ -22,6 +22,8 @@
   }
  catch (  NumberFormatException e) {
   }
+  double latitude=0.0;
+  double longitude=0.0;
 switch (currentFormat) {
 case Deg:
     latitude=latDeg + latDegFrac;
@@ -38,4 +40,5 @@ break;
 }
 latitude*=(bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
 longitude*=(bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
+coords=new Geopoint(latitude,longitude);
 }

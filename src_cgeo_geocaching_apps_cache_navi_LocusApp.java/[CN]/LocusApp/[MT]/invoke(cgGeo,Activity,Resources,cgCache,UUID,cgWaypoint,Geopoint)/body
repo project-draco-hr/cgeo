@@ -1,0 +1,139 @@
+{
+  if (cache == null && waypoint == null && coords == null) {
+    return false;
+  }
+  try {
+    if (isInstalled(activity)) {
+      final List<cgWaypoint> waypoints=new ArrayList<cgWaypoint>();
+      if (cache != null && cache.waypoints != null && cache.waypoints.isEmpty() == false) {
+        for (        cgWaypoint wp : cache.waypoints) {
+          if (wp.coords != null) {
+            waypoints.add(wp);
+          }
+        }
+      }
+      final ByteArrayOutputStream baos=new ByteArrayOutputStream();
+      final DataOutputStream dos=new DataOutputStream(baos);
+      dos.writeInt(1);
+      if (cache != null) {
+        if (waypoints == null || waypoints.isEmpty()) {
+          dos.writeInt(1);
+        }
+ else {
+          dos.writeInt((1 + waypoints.size()));
+        }
+      }
+ else {
+        dos.writeInt(1);
+      }
+      int icon=-1;
+      if (cache != null) {
+        icon=cgBase.getMarkerIcon(true,cache.type,cache.own,cache.found,cache.disabled || cache.archived);
+      }
+ else       if (waypoint != null) {
+        icon=cgBase.getMarkerIcon(false,waypoint.type,false,false,false);
+      }
+ else {
+        icon=cgBase.getMarkerIcon(false,"waypoint",false,false,false);
+      }
+      if (icon > 0) {
+        Bitmap bitmap=BitmapFactory.decodeResource(res,icon);
+        ByteArrayOutputStream baos2=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,baos2);
+        byte[] image=baos2.toByteArray();
+        dos.writeInt(image.length);
+        dos.write(image);
+      }
+ else {
+        dos.writeInt(0);
+      }
+      if (cache != null && StringUtils.isNotBlank(cache.name)) {
+        dos.writeUTF(cache.name);
+      }
+ else       if (waypoint != null && StringUtils.isNotBlank(waypoint.name)) {
+        dos.writeUTF(waypoint.name);
+      }
+ else {
+        dos.writeUTF("");
+      }
+      if (cache != null && StringUtils.isNotBlank(cache.geocode)) {
+        dos.writeUTF(cache.geocode.toUpperCase());
+      }
+ else       if (waypoint != null && StringUtils.isNotBlank(waypoint.lookup)) {
+        dos.writeUTF(waypoint.lookup.toUpperCase());
+      }
+ else {
+        dos.writeUTF("");
+      }
+      if (cache != null && StringUtils.isNotBlank(cache.geocode)) {
+        dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeodetail;geocode;" + cache.geocode);
+      }
+ else       if (waypoint != null && waypoint.id != null && waypoint.id > 0) {
+        dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeowaypoint;id;" + waypoint.id);
+      }
+ else {
+        dos.writeUTF("");
+      }
+      if (cache != null && cache.coords != null) {
+        dos.writeDouble(cache.coords.getLatitude());
+        dos.writeDouble(cache.coords.getLongitude());
+      }
+ else       if (waypoint != null && waypoint.coords != null) {
+        dos.writeDouble(waypoint.coords.getLatitude());
+        dos.writeDouble(waypoint.coords.getLongitude());
+      }
+ else {
+        dos.writeDouble(coords.getLatitude());
+        dos.writeDouble(coords.getLongitude());
+      }
+      if (CollectionUtils.isNotEmpty(waypoints)) {
+        for (        cgWaypoint wp : waypoints) {
+          if (wp == null || wp.coords == null) {
+            continue;
+          }
+          final int wpIcon=cgBase.getMarkerIcon(false,wp.type,false,false,false);
+          if (wpIcon > 0) {
+            Bitmap bitmap=BitmapFactory.decodeResource(res,wpIcon);
+            ByteArrayOutputStream baos2=new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,baos2);
+            byte[] image=baos2.toByteArray();
+            dos.writeInt(image.length);
+            dos.write(image);
+          }
+ else {
+            dos.writeInt(0);
+          }
+          if (StringUtils.isNotBlank(wp.lookup)) {
+            dos.writeUTF(wp.lookup.toUpperCase());
+          }
+ else {
+            dos.writeUTF("");
+          }
+          if (StringUtils.isNotBlank(wp.name)) {
+            dos.writeUTF(wp.name);
+          }
+ else {
+            dos.writeUTF("");
+          }
+          if (wp.id != null && wp.id > 0) {
+            dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeowaypoint;id;" + wp.id);
+          }
+ else {
+            dos.writeUTF("");
+          }
+          dos.writeDouble(wp.coords.getLatitude());
+          dos.writeDouble(wp.coords.getLongitude());
+        }
+      }
+      final Intent intent=new Intent();
+      intent.setAction(Intent.ACTION_VIEW);
+      intent.setData(Uri.parse("menion.points:data"));
+      intent.putExtra("data",baos.toByteArray());
+      activity.startActivity(intent);
+      return true;
+    }
+  }
+ catch (  Exception e) {
+  }
+  return false;
+}

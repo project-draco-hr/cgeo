@@ -1,14 +1,14 @@
 {
-  List<Double> coords=getDestination();
-  if (coords == null || coords.get(0) == null || coords.get(1) == null) {
+  final Geopoint coords=getDestination();
+  if (coords == null) {
     showToast(res.getString(R.string.err_location_unknown));
     return;
   }
   cgeocaches cachesActivity=new cgeocaches();
   Intent cachesIntent=new Intent(this,cachesActivity.getClass());
   cachesIntent.putExtra("type","coordinate");
-  cachesIntent.putExtra("latitude",coords.get(0));
-  cachesIntent.putExtra("longitude",coords.get(1));
+  cachesIntent.putExtra("latitude",coords.getLatitude());
+  cachesIntent.putExtra("longitude",coords.getLongitude());
   cachesIntent.putExtra("cachetype",settings.cacheType);
   startActivity(cachesIntent);
   finish();

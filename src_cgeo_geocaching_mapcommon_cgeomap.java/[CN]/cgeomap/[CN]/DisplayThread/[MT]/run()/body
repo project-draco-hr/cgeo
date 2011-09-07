@@ -19,7 +19,7 @@
           working=false;
           return;
         }
-        if (cacheOne.latitude == null && cacheOne.longitude == null) {
+        if (cacheOne.coords == null) {
           continue;
         }
         final cgCoord coord=new cgCoord(cacheOne);
@@ -51,7 +51,7 @@
           cgCache oneCache=cachesProtected.get(0);
           if (oneCache != null && oneCache.waypoints != null && !oneCache.waypoints.isEmpty()) {
             for (            cgWaypoint oneWaypoint : oneCache.waypoints) {
-              if (oneWaypoint.latitude == null && oneWaypoint.longitude == null) {
+              if (oneWaypoint.coords == null) {
                 continue;
               }
               cgCoord coord=new cgCoord(oneWaypoint);

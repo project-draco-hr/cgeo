@@ -2,9 +2,9 @@
   final int prime=31;
   int result=1;
   long temp;
-  temp=Double.doubleToLongBits(latitude);
+  temp=Double.doubleToLongBits(coords.getLatitude());
   result=prime * result + (int)(temp ^ (temp >>> 32));
-  temp=Double.doubleToLongBits(longitude);
+  temp=Double.doubleToLongBits(coords.getLongitude());
   result=prime * result + (int)(temp ^ (temp >>> 32));
   return result;
 }

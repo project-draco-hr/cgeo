@@ -5,7 +5,7 @@
   try {
     final List<cgCache> cacheListCoord=new ArrayList<cgCache>();
     for (    cgCache cache : cacheList) {
-      if (cache.latitude != null && cache.longitude != null) {
+      if (cache.coords != null) {
         cacheListCoord.add(cache);
       }
     }
@@ -44,8 +44,8 @@
  else {
         dos.writeUTF("");
       }
-      dos.writeDouble(cache.latitude);
-      dos.writeDouble(cache.longitude);
+      dos.writeDouble(cache.coords.getLatitude());
+      dos.writeDouble(cache.coords.getLongitude());
     }
     final Intent intent=new Intent();
     intent.setAction(Intent.ACTION_VIEW);

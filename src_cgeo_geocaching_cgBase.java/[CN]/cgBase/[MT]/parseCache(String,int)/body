@@ -198,8 +198,7 @@
       cache.latlon=getMatch(matcherLatLon.group(2));
       Map<String,Object> tmp=cgBase.parseLatlon(cache.latlon);
       if (tmp.size() > 0) {
-        cache.latitude=(Double)tmp.get("latitude");
-        cache.longitude=(Double)tmp.get("longitude");
+        cache.coords=new Geopoint((Double)tmp.get("latitude"),(Double)tmp.get("longitude"));
         cache.latitudeString=(String)tmp.get("latitudeString");
         cache.longitudeString=(String)tmp.get("longitudeString");
         cache.reliableLatLon=true;
@@ -472,8 +471,7 @@
             waypoint.latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString();
             final Map<String,Object> tmp=cgBase.parseLatlon(waypoint.latlon);
             if (tmp.size() > 0) {
-              waypoint.latitude=(Double)tmp.get("latitude");
-              waypoint.longitude=(Double)tmp.get("longitude");
+              waypoint.coords=new Geopoint((Double)tmp.get("latitude"),(Double)tmp.get("longitude"));
               waypoint.latitudeString=(String)tmp.get("latitudeString");
               waypoint.longitudeString=(String)tmp.get("longitudeString");
             }
@@ -502,8 +500,8 @@
       }
     }
   }
-  if (cache.latitude != null && cache.longitude != null) {
-    cache.elevation=getElevation(cache.latitude,cache.longitude);
+  if (cache.coords != null) {
+    cache.elevation=getElevation(cache.coords);
   }
   final cgRating rating=getRating(cache.guid,cache.geocode);
   if (rating != null) {

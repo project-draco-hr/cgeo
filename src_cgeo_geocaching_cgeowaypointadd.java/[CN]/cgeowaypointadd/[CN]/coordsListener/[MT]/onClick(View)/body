@@ -25,12 +25,12 @@
     longitude=(Double)lonParsed.get("coordinate");
   }
  else {
-    if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+    if (geo == null || geo.coordsNow == null) {
       showToast(res.getString(R.string.err_point_curr_position_unavailable));
       return;
     }
-    latitude=geo.latitudeNow;
-    longitude=geo.longitudeNow;
+    latitude=geo.coordsNow.getLatitude();
+    longitude=geo.coordsNow.getLongitude();
   }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     Double bearing=null;
@@ -87,9 +87,9 @@
     }
     Double latParsed=null;
     Double lonParsed=null;
-    Map<String,Double> coordsDst=cgBase.getRadialDistance(latitude,longitude,bearing,distance);
-    latParsed=coordsDst.get("latitude");
-    lonParsed=coordsDst.get("longitude");
+    final Geopoint coordsDst=cgBase.getRadialDistance(new Geopoint(latitude,longitude),bearing,distance);
+    latParsed=coordsDst.getLatitude();
+    lonParsed=coordsDst.getLongitude();
     if (latParsed == null || lonParsed == null) {
       showToast(res.getString(R.string.err_point_location_error));
       return;
@@ -116,8 +116,7 @@
   waypoint.prefix=prefix;
   waypoint.lookup=lookup;
   waypoint.name=name;
-  waypoint.latitude=coords.get(0);
-  waypoint.longitude=coords.get(1);
+  waypoint.coords=new Geopoint(coords.get(0),coords.get(1));
   waypoint.latitudeString=cgBase.formatLatitude(coords.get(0),true);
   waypoint.longitudeString=cgBase.formatLongitude(coords.get(1),true);
   waypoint.note=note;
