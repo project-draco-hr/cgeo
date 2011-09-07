@@ -1,8 +1,8 @@
 {
-  List<ICache> cachesToTest=new ArrayList<ICache>();
+  List<MockedCache> cachesToTest=new ArrayList<MockedCache>();
   cachesToTest.add(new GC2CJPF());
   cachesToTest.add(new GC1ZXX2());
-  for (  ICache cache : cachesToTest) {
+  for (  MockedCache cache : cachesToTest) {
     cgCacheWrap caches=base.parseCache(cache.getData(),0);
     cgCache cacheParsed=caches.cacheList.get(0);
     Assert.assertEquals(cacheParsed.getGeocode(),cache.getGeocode());
