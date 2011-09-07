@@ -11,20 +11,10 @@
     return 0;
   }
  else   if (ilat1 == ilat2) {
-    if (ilon1 > ilon2) {
-      return 270;
-    }
- else {
-      return 90;
-    }
+    return (ilon1 > ilon2) ? 270 : 90;
   }
  else   if (ilon1 == ilon2) {
-    if (ilat1 > ilat2) {
-      return 180;
-    }
- else {
-      return 0;
-    }
+    return (ilat1 > ilat2) ? 180 : 0;
   }
  else {
     double c=Math.acos(Math.sin(lat2) * Math.sin(lat1) + Math.cos(lat2) * Math.cos(lat1) * Math.cos(lon2 - lon1));
