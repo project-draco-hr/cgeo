@@ -1,10 +1,10 @@
 {
   super.onResume();
   settings.load();
-  if (title != null && title.length() > 0) {
+  if (StringUtils.isNotBlank(title)) {
     app.setAction(title);
   }
- else   if (name != null && name.length() > 0) {
+ else   if (StringUtils.isNotBlank(name)) {
     app.setAction(name);
   }
   if (geo == null) {

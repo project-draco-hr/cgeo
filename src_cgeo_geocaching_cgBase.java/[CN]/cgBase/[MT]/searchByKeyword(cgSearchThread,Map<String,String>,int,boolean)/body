@@ -1,0 +1,41 @@
+{
+  final cgSearch search=new cgSearch();
+  final String keyword=parameters.get("keyword");
+  cgCacheWrap caches=new cgCacheWrap();
+  String cacheType=parameters.get("cachetype");
+  if (StringUtils.isBlank(keyword)) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No keyword given");
+    return null;
+  }
+  if (StringUtils.isBlank(cacheType)) {
+    cacheType=null;
+  }
+  final String host="www.geocaching.com";
+  final String path="/seek/nearest.aspx";
+  final String method="GET";
+  final Map<String,String> params=new HashMap<String,String>();
+  if (cacheType != null && cacheIDs.containsKey(cacheType)) {
+    params.put("tx",cacheIDs.get(cacheType));
+  }
+ else {
+    params.put("tx",cacheIDs.get("all"));
+  }
+  params.put("key",keyword);
+  final String url="http://" + host + path+ "?"+ prepareParameters(params,false,true);
+  String page=requestLogged(false,host,path,method,params,false,false,true);
+  if (StringUtils.isBlank(page)) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No data from server");
+    return null;
+  }
+  caches=parseSearch(thread,url,page,showCaptcha);
+  if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No cache parsed");
+  }
+  if (app == null) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No application found");
+    return null;
+  }
+  List<cgCache> cacheList=processSearchResults(search,caches,settings.excludeDisabled,0,null);
+  app.addSearch(search,cacheList,true,reason);
+  return search.getCurrentId();
+}

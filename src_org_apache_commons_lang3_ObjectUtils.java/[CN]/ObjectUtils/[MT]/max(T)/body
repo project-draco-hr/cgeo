@@ -1,0 +1,11 @@
+{
+  T result=null;
+  if (values != null) {
+    for (    T value : values) {
+      if (compare(value,result,false) > 0) {
+        result=value;
+      }
+    }
+  }
+  return result;
+}

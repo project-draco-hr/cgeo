@@ -6,7 +6,7 @@
   intent.setType("text/plain");
   if (cache != null && cache.geocode != null) {
     String subject=cache.geocode.toUpperCase();
-    if (cache.name != null && cache.name.length() > 0) {
+    if (StringUtils.isNotBlank(cache.name)) {
       subject=subject + " - " + cache.name;
     }
     intent.putExtra(Intent.EXTRA_SUBJECT,"Geocache " + subject);

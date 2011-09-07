@@ -1,6 +1,6 @@
 {
   final String addText=((EditText)findViewById(R.id.address)).getText().toString();
-  if (addText == null || addText.length() == 0) {
+  if (StringUtils.isBlank(addText)) {
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_address));
     return;
   }

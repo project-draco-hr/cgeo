@@ -1,0 +1,5 @@
+{
+  Throwable root=ExceptionUtils.getRootCause(th);
+  root=(root == null ? th : root);
+  return getMessage(root);
+}

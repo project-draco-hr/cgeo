@@ -63,41 +63,34 @@
   values.put("favourite",cache.favourite ? 1 : 0);
   values.put("inventoryunknown",cache.inventoryItems);
   values.put("onWatchlist",cache.onWatchlist ? 1 : 0);
-  boolean status=false;
   boolean statusOk=true;
   if (cache.attributes != null) {
-    status=saveAttributes(cache.geocode,cache.attributes);
-    if (status == false) {
+    if (!saveAttributes(cache.geocode,cache.attributes)) {
       statusOk=false;
     }
   }
   if (cache.waypoints != null) {
-    status=saveWaypoints(cache.geocode,cache.waypoints,true);
-    if (status == false) {
+    if (!saveWaypoints(cache.geocode,cache.waypoints,true)) {
       statusOk=false;
     }
   }
   if (cache.spoilers != null) {
-    status=saveSpoilers(cache.geocode,cache.spoilers);
-    if (status == false) {
+    if (!saveSpoilers(cache.geocode,cache.spoilers)) {
       statusOk=false;
     }
   }
   if (cache.logs != null) {
-    status=saveLogs(cache.geocode,cache.logs);
-    if (status == false) {
+    if (!saveLogs(cache.geocode,cache.logs)) {
       statusOk=false;
     }
   }
   if (cache.logCounts != null && cache.logCounts.isEmpty() == false) {
-    status=saveLogCount(cache.geocode,cache.logCounts);
-    if (status == false) {
+    if (!saveLogCount(cache.geocode,cache.logCounts)) {
       statusOk=false;
     }
   }
   if (cache.inventory != null) {
-    status=saveInventory(cache.geocode,cache.inventory);
-    if (status == false) {
+    if (!saveInventory(cache.geocode,cache.inventory)) {
       statusOk=false;
     }
   }

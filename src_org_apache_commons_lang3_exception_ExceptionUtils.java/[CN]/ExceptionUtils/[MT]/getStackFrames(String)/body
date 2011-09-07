@@ -1,0 +1,9 @@
+{
+  String linebreak=SystemUtils.LINE_SEPARATOR;
+  StringTokenizer frames=new StringTokenizer(stackTrace,linebreak);
+  List<String> list=new ArrayList<String>();
+  while (frames.hasMoreTokens()) {
+    list.add(frames.nextToken());
+  }
+  return list.toArray(new String[list.size()]);
+}

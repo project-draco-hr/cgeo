@@ -3,7 +3,7 @@
   if (id == MENU_SIGNATURE) {
     EditText log=(EditText)findViewById(R.id.log);
     String content=log.getText().toString();
-    if (content.length() > 0) {
+    if (StringUtils.isNotBlank(content)) {
       insertIntoLog("\n");
     }
     insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(),base));

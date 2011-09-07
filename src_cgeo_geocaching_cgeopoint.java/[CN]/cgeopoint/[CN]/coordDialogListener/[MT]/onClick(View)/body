@@ -9,8 +9,8 @@
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
     @Override public void update(    Geopoint gp){
-      latButton.setText(cgBase.formatCoordinate(gp.getLatitude(),"lat",true));
-      lonButton.setText(cgBase.formatCoordinate(gp.getLongitude(),"lon",true));
+      latButton.setText(cgBase.formatLatitude(gp.getLatitude(),true));
+      lonButton.setText(cgBase.formatLongitude(gp.getLongitude(),true));
       changed=true;
     }
   }

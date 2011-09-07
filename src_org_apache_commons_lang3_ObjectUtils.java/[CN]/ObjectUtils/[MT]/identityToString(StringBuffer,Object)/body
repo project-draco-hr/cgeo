@@ -1,0 +1,6 @@
+{
+  if (object == null) {
+    throw new NullPointerException("Cannot get the toString of a null identity");
+  }
+  buffer.append(object.getClass().getName()).append('@').append(Integer.toHexString(System.identityHashCode(object)));
+}

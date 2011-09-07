@@ -1,15 +1,15 @@
 {
-  if (guid == null || guid.length() == 0) {
+  if (StringUtils.isBlank(guid)) {
     return false;
   }
   if (vote < 0.0 || vote > 5.0) {
     return false;
   }
-  final HashMap<String,String> login=settings.getGCvoteLogin();
+  final Map<String,String> login=settings.getGCvoteLogin();
   if (login == null) {
     return false;
   }
-  final HashMap<String,String> params=new HashMap<String,String>();
+  final Map<String,String> params=new HashMap<String,String>();
   params.put("userName",login.get("username"));
   params.put("password",login.get("password"));
   params.put("cacheId",guid);

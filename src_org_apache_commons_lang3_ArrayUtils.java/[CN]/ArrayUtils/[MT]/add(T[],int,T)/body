@@ -1,0 +1,14 @@
+{
+  Class<?> clss=null;
+  if (array != null) {
+    clss=array.getClass().getComponentType();
+  }
+ else   if (element != null) {
+    clss=element.getClass();
+  }
+ else {
+    throw new IllegalArgumentException("Array and element cannot both be null");
+  }
+  @SuppressWarnings("unchecked") final T[] newArray=(T[])add(array,index,element,clss);
+  return newArray;
+}

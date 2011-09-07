@@ -5,7 +5,7 @@
     final String path="/maps/api/elevation/json";
     final String params="sensor=false&locations=" + String.format((Locale)null,"%.6f",latitude) + ","+ String.format((Locale)null,"%.6f",longitude);
     final String data=requestJSON(host,path,params);
-    if (data == null || data.length() == 0) {
+    if (StringUtils.isBlank(data)) {
       return elv;
     }
     JSONObject response=new JSONObject(data);

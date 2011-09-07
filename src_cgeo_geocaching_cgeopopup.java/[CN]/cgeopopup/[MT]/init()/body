@@ -14,7 +14,7 @@
     TextView itemName;
     TextView itemValue;
     LinearLayout itemStars;
-    if (cache.name != null && cache.name.length() > 0) {
+    if (StringUtils.isNotBlank(cache.name)) {
       setTitle(cache.name);
     }
  else {
@@ -31,7 +31,7 @@
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_type));
     if (cgBase.cacheTypesInv.containsKey(cache.type)) {
-      if (cache.size != null && cache.size.length() > 0) {
+      if (StringUtils.isNotBlank(cache.size)) {
         itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + " (" + cache.size+ ")");
       }
  else {
@@ -39,7 +39,7 @@
       }
     }
  else {
-      if (cache.size != null && cache.size.length() > 0) {
+      if (StringUtils.isNotBlank(cache.size)) {
         itemValue.setText(cgBase.cacheTypesInv.get("mystery") + " (" + cache.size+ ")");
       }
  else {

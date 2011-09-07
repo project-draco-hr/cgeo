@@ -5,7 +5,7 @@
   int status=0;
   String lineOne=null;
   try {
-    final HashMap<String,String> paramsPre=new HashMap<String,String>();
+    final Map<String,String> paramsPre=new HashMap<String,String>();
     paramsPre.put("oauth_verifier",pinEntry.getText().toString());
     int code=-1;
     int retries=0;
@@ -53,7 +53,7 @@
     if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
       OAtokenSecret=paramsMatcher2.group(1);
     }
-    if (OAtoken.length() == 0 || OAtokenSecret.length() == 0) {
+    if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
       OAtoken="";
       OAtokenSecret="";
       final SharedPreferences.Editor prefs=getSharedPreferences(cgSettings.preferences,0).edit();

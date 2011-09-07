@@ -1,8 +1,8 @@
 {
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isEmpty(page)) {
     return null;
   }
-  final ArrayList<cgTrackableLog> trackables=new ArrayList<cgTrackableLog>();
+  final List<cgTrackableLog> trackables=new ArrayList<cgTrackableLog>();
   int startPos=-1;
   int endPos=-1;
   startPos=page.indexOf("<table id=\"tblTravelBugs\"");

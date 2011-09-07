@@ -3,6 +3,11 @@
     return null;
   }
   PackageManager packageManager=context.getPackageManager();
-  Intent intent=packageManager.getLaunchIntentForPackage(packageName);
-  return intent;
+  try {
+    Intent intent=packageManager.getLaunchIntentForPackage(packageName);
+    return intent;
+  }
+ catch (  Exception e) {
+    return null;
+  }
 }

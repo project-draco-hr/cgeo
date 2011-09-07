@@ -1,6 +1,6 @@
 {
   init();
-  ArrayList<cgList> lists=new ArrayList<cgList>();
+  List<cgList> lists=new ArrayList<cgList>();
   lists.add(new cgList(true,1,res.getString(R.string.list_inbox)));
   try {
     Cursor cursor=databaseRO.query(dbTableLists,new String[]{"_id","title","updated","latitude","longitude"},null,null,null,null,"title COLLATE NOCASE ASC",null);

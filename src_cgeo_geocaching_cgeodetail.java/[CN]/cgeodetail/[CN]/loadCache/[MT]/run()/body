@@ -1,9 +1,9 @@
 {
-  HashMap<String,String> params=new HashMap<String,String>();
-  if (geocode != null && geocode.length() > 0) {
+  Map<String,String> params=new HashMap<String,String>();
+  if (StringUtils.isNotBlank(geocode)) {
     params.put("geocode",geocode);
   }
- else   if (guid != null && guid.length() > 0) {
+ else   if (StringUtils.isNotBlank(guid)) {
     params.put("guid",guid);
   }
  else {

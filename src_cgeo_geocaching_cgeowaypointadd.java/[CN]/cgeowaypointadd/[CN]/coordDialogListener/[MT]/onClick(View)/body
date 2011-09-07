@@ -5,8 +5,8 @@
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
     @Override public void update(    Geopoint gp){
-      ((Button)findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(gp.getLatitude(),"lat",true));
-      ((Button)findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(gp.getLongitude(),"lon",true));
+      ((Button)findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(gp.getLatitude(),true));
+      ((Button)findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(gp.getLongitude(),true));
       if (waypoint != null) {
         waypoint.latitude=gp.getLatitude();
         waypoint.longitude=gp.getLongitude();

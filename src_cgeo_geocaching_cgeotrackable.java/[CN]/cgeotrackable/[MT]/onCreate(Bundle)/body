@@ -17,17 +17,17 @@
       geocode=uri.getQueryParameter("tracker");
       guid=uri.getQueryParameter("guid");
       id=uri.getQueryParameter("id");
-      if (geocode != null && geocode.length() > 0) {
+      if (StringUtils.isNotBlank(geocode)) {
         geocode=geocode.toUpperCase();
         guid=null;
         id=null;
       }
- else       if (guid != null && guid.length() > 0) {
+ else       if (StringUtils.isNotBlank(guid)) {
         geocode=null;
         guid=guid.toLowerCase();
         id=null;
       }
- else       if (id != null && id.length() > 0) {
+ else       if (StringUtils.isNotBlank(id)) {
         geocode=null;
         guid=null;
         id=id.toLowerCase();
@@ -57,10 +57,10 @@
     finish();
     return;
   }
-  if (name != null && name.length() > 0) {
+  if (StringUtils.isNotBlank(name)) {
     waitDialog=ProgressDialog.show(this,Html.fromHtml(name).toString(),res.getString(R.string.trackable_details_loading),true);
   }
- else   if (geocode != null && geocode.length() > 0) {
+ else   if (StringUtils.isNotBlank(geocode)) {
     waitDialog=ProgressDialog.show(this,geocode.toUpperCase(),res.getString(R.string.trackable_details_loading),true);
   }
  else {

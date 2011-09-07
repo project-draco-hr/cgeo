@@ -8,7 +8,7 @@
   cache=app.getCache(searchId);
   if (cache == null) {
     if (waitDialog != null && waitDialog.isShowing())     waitDialog.dismiss();
-    if (geocode != null && geocode.length() > 0) {
+    if (StringUtils.isNotBlank(geocode)) {
       showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
     }
  else {
@@ -19,10 +19,10 @@
     return;
   }
   try {
-    if (null == geocode && cache.geocode.length() > 0) {
+    if (StringUtils.isBlank(geocode)) {
       geocode=cache.geocode;
     }
-    if (null == guid && cache.guid.length() > 0) {
+    if (StringUtils.isBlank(guid)) {
       guid=cache.guid;
     }
     setTitle(cache.geocode.toUpperCase());
@@ -47,7 +47,7 @@
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_type));
     String size="";
-    if (cache.size != null && cache.size.length() > 0) {
+    if (StringUtils.isNotBlank(cache.size)) {
       if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
         size=" (" + cache.size + ")";
       }
@@ -139,15 +139,15 @@
       itemValue.setText(String.format("%d",cache.favouriteCnt) + "??");
       detailsList.addView(itemLayout);
     }
-    if ((cache.owner != null && cache.owner.length() > 0) || (cache.ownerReal != null && cache.ownerReal.length() > 0)) {
+    if (StringUtils.isNotBlank(cache.owner) || StringUtils.isNotBlank(cache.ownerReal)) {
       itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
       itemName.setText(res.getString(R.string.cache_owner));
-      if (cache.owner != null && cache.owner.length() > 0) {
+      if (StringUtils.isNotBlank(cache.owner)) {
         itemValue.setText(Html.fromHtml(cache.owner),TextView.BufferType.SPANNABLE);
       }
- else       if (cache.ownerReal != null && cache.ownerReal.length() > 0) {
+ else       if (StringUtils.isNotBlank(cache.ownerReal)) {
         itemValue.setText(Html.fromHtml(cache.ownerReal),TextView.BufferType.SPANNABLE);
       }
       itemValue.setOnClickListener(new userActions());
@@ -166,7 +166,7 @@
       itemValue.setText(base.formatFullDate(cache.hidden.getTime()));
       detailsList.addView(itemLayout);
     }
-    if (cache.location != null && cache.location.length() > 0) {
+    if (StringUtils.isNotBlank(cache.location)) {
       itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
@@ -182,7 +182,7 @@
       itemValue.setText(cache.latitudeString + " | " + cache.longitudeString);
       detailsList.addView(itemLayout);
     }
-    if (cache.attributes != null && cache.attributes.size() > 0) {
+    if (CollectionUtils.isNotEmpty(cache.attributes)) {
       final LinearLayout attribBox=(LinearLayout)findViewById(R.id.attributes_innerbox);
       attributeBoxMaxWidth=((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
       ViewParent child=attribBox;
@@ -207,7 +207,7 @@
       }
       findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
     }
-    if (cache.inventory != null && cache.inventory.size() > 0) {
+    if (CollectionUtils.isNotEmpty(cache.inventory)) {
       final LinearLayout inventBox=(LinearLayout)findViewById(R.id.inventory_box);
       final TextView inventView=(TextView)findViewById(R.id.inventory);
       StringBuilder inventoryString=new StringBuilder();
@@ -263,14 +263,14 @@
     }
     offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
     offlineRefresh.setClickable(true);
-    if (cache.personalNote != null && cache.personalNote.length() > 0) {
+    if (StringUtils.isNotBlank(cache.personalNote)) {
       ((LinearLayout)findViewById(R.id.personalnote_box)).setVisibility(View.VISIBLE);
       TextView personalNoteText=(TextView)findViewById(R.id.personalnote);
       personalNoteText.setVisibility(View.VISIBLE);
       personalNoteText.setText(cache.personalNote,TextView.BufferType.SPANNABLE);
       personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
     }
-    if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
+    if (StringUtils.isNotBlank(cache.shortdesc)) {
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       TextView descView=(TextView)findViewById(R.id.shortdesc);
       descView.setVisibility(View.VISIBLE);
@@ -279,7 +279,7 @@
     }
     if (longDescDisplayed) {
       parseLongDescription();
-      if (longDesc != null && longDesc.length() > 0) {
+      if (StringUtils.isNotBlank(longDesc)) {
         ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
         TextView descView=(TextView)findViewById(R.id.description);
         descView.setVisibility(View.VISIBLE);
@@ -291,7 +291,7 @@
         showDesc.setOnClickListener(null);
       }
     }
- else     if (longDescDisplayed == false && cache.description != null && cache.description.length() > 0) {
+ else     if (longDescDisplayed == false && StringUtils.isNotBlank(cache.description)) {
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       Button showDesc=(Button)findViewById(R.id.show_description);
       showDesc.setVisibility(View.VISIBLE);
@@ -309,15 +309,15 @@
     updateWatchlistBox();
     LinearLayout waypoints=(LinearLayout)findViewById(R.id.waypoints);
     waypoints.removeAllViews();
-    if (cache.waypoints != null && cache.waypoints.size() > 0) {
+    if (CollectionUtils.isNotEmpty(cache.waypoints)) {
       LinearLayout waypointView;
-      ArrayList<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.waypoints);
+      List<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.waypoints);
       Collections.sort(sortedWaypoints,new Comparator<cgWaypoint>(){
         @Override public int compare(        cgWaypoint wayPoint1,        cgWaypoint wayPoint2){
           return order(wayPoint1) - order(wayPoint2);
         }
         private int order(        cgWaypoint waypoint){
-          if (waypoint.prefix == null || waypoint.prefix.length() == 0) {
+          if (StringUtils.isEmpty(waypoint.prefix)) {
             return 0;
           }
           char firstLetter=Character.toUpperCase(waypoint.prefix.charAt(0));
@@ -354,8 +354,8 @@ if (wpt.prefix.equalsIgnoreCase("OWN") == false) {
   identification.setText(res.getString(R.string.waypoint_custom));
 }
 TextView nameView=(TextView)waypointView.findViewById(R.id.name);
-if (wpt.name.trim().length() == 0) {
-  nameView.setText(cgBase.formatCoordinate(wpt.latitude,"lat",true) + " | " + cgBase.formatCoordinate(wpt.longitude,"lon",true));
+if (StringUtils.isBlank(wpt.name)) {
+  nameView.setText(cgBase.formatCoords(wpt.latitude,wpt.longitude,true));
 }
  else {
   if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
@@ -379,7 +379,7 @@ waypoints.addView(waypointView);
 Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
 addWaypoint.setClickable(true);
 addWaypoint.setOnClickListener(new addWaypoint());
-if (cache.hint != null && cache.hint.length() > 0) {
+if (StringUtils.isNotBlank(cache.hint)) {
 ((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
 TextView hintView=((TextView)findViewById(R.id.hint));
 hintView.setText(cgBase.rot13(cache.hint.trim()));

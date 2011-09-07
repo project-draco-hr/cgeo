@@ -25,8 +25,8 @@
   }
  else   if (id == MENU_STORE_CACHES) {
     if (live && !isLoading() && caches != null && !caches.isEmpty()) {
-      final ArrayList<String> geocodes=new ArrayList<String>();
-      ArrayList<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
+      final List<String> geocodes=new ArrayList<String>();
+      List<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
       try {
         if (cachesProtected.size() > 0) {
           final GeoPointImpl mapCenter=mapView.getMapViewCenter();
@@ -111,11 +111,12 @@
       mapIntent.putExtra("latitude",latitudeIntent);
       mapIntent.putExtra("longitude",longitudeIntent);
       mapIntent.putExtra("wpttype",waypointTypeIntent);
-      int[] mapState=new int[3];
+      int[] mapState=new int[4];
       GeoPointImpl mapCenter=mapView.getMapViewCenter();
       mapState[0]=mapCenter.getLatitudeE6();
       mapState[1]=mapCenter.getLongitudeE6();
       mapState[2]=mapView.getMapZoomLevel();
+      mapState[3]=followMyLocation ? 1 : 0;
       mapIntent.putExtra("mapstate",mapState);
       activity.startActivity(mapIntent);
     }

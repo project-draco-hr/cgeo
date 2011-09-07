@@ -27,21 +27,21 @@
   navType=(TextView)findViewById(R.id.nav_type);
   navAccuracy=(TextView)findViewById(R.id.nav_accuracy);
   navLocation=(TextView)findViewById(R.id.nav_location);
-  final LinearLayout findOnMap=(LinearLayout)findViewById(R.id.map);
+  final View findOnMap=findViewById(R.id.map);
   findOnMap.setClickable(true);
   findOnMap.setOnClickListener(new cgeoFindOnMapListener());
-  final RelativeLayout findByOffline=(RelativeLayout)findViewById(R.id.search_offline);
+  final View findByOffline=findViewById(R.id.search_offline);
   findByOffline.setClickable(true);
   findByOffline.setOnClickListener(new cgeoFindByOfflineListener());
   registerForContextMenu(findByOffline);
   (new countBubbleUpdate()).start();
-  final LinearLayout advanced=(LinearLayout)findViewById(R.id.advanced_button);
+  final View advanced=findViewById(R.id.advanced_button);
   advanced.setClickable(true);
   advanced.setOnClickListener(new cgeoSearchListener());
-  final LinearLayout any=(LinearLayout)findViewById(R.id.any_button);
+  final View any=findViewById(R.id.any_button);
   any.setClickable(true);
   any.setOnClickListener(new cgeoPointListener());
-  final LinearLayout filter=(LinearLayout)findViewById(R.id.filter_button);
+  final View filter=findViewById(R.id.filter_button);
   registerForContextMenu(filter);
   filter.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View view){

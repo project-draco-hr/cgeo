@@ -5,7 +5,7 @@
     final StringBuffer buff=new StringBuffer();
     buff.append(res.getString(R.string.cache_log_types));
     buff.append(": ");
-    ArrayList<Entry<Integer,Integer>> sortedLogCounts=new ArrayList<Entry<Integer,Integer>>();
+    List<Entry<Integer,Integer>> sortedLogCounts=new ArrayList<Entry<Integer,Integer>>();
     sortedLogCounts.addAll(cache.logCounts.entrySet());
     Collections.sort(sortedLogCounts,new Comparator<Entry<Integer,Integer>>(){
       @Override public int compare(      Entry<Integer,Integer> logCountItem1,      Entry<Integer,Integer> logCountItem2){

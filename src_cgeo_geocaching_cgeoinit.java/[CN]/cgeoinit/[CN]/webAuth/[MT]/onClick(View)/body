@@ -1,7 +1,7 @@
 {
   final String deviceName=((EditText)findViewById(R.id.webDeviceName)).getText().toString();
   final String deviceCode=prefs.getString("webDeviceCode",null);
-  if (deviceName == null || deviceName.length() == 0) {
+  if (StringUtils.isBlank(deviceName)) {
     showToast(res.getString(R.string.err_missing_device_name));
     return;
   }

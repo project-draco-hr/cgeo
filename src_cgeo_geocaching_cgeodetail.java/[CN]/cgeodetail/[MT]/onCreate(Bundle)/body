@@ -24,11 +24,11 @@
     if (uriHost.contains("geocaching.com")) {
       geocode=uri.getQueryParameter("wp");
       guid=uri.getQueryParameter("guid");
-      if (geocode != null && geocode.length() > 0) {
+      if (StringUtils.isNotBlank(geocode)) {
         geocode=geocode.toUpperCase();
         guid=null;
       }
- else       if (guid != null && guid.length() > 0) {
+ else       if (StringUtils.isNotBlank(guid)) {
         geocode=null;
         guid=guid.toLowerCase();
       }
@@ -56,10 +56,10 @@
   }
   app.setAction(geocode);
   try {
-    if (name != null && name.length() > 0) {
+    if (StringUtils.isNotBlank(name)) {
       waitDialog=ProgressDialog.show(this,name,res.getString(R.string.cache_dialog_loading_details),true);
     }
- else     if (geocode != null && geocode.length() > 0) {
+ else     if (StringUtils.isNotBlank(geocode)) {
       waitDialog=ProgressDialog.show(this,geocode.toUpperCase(),res.getString(R.string.cache_dialog_loading_details),true);
     }
  else {
@@ -69,6 +69,7 @@
   }
  catch (  Exception e) {
   }
+  disableResumeSetView=true;
   threadCache=new loadCache(loadCacheHandler);
   threadCache.start();
 }

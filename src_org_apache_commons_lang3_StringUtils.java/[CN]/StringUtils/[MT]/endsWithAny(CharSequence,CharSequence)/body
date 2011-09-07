@@ -1,0 +1,11 @@
+{
+  if (isEmpty(string) || ArrayUtils.isEmpty(searchStrings)) {
+    return false;
+  }
+  for (  CharSequence searchString : searchStrings) {
+    if (StringUtils.endsWith(string,searchString)) {
+      return true;
+    }
+  }
+  return false;
+}

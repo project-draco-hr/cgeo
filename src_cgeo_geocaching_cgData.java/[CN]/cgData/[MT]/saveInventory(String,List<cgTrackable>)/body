@@ -1,0 +1,42 @@
+{
+  init();
+  if (trackables == null) {
+    return false;
+  }
+  databaseRW.beginTransaction();
+  try {
+    if (geocode != null) {
+      databaseRW.delete(dbTableTrackables,"geocode = ?",new String[]{geocode});
+    }
+    if (!trackables.isEmpty()) {
+      ContentValues values=new ContentValues();
+      long timeStamp=System.currentTimeMillis();
+      for (      cgTrackable oneTrackable : trackables) {
+        values.clear();
+        if (geocode != null) {
+          values.put("geocode",geocode);
+        }
+        values.put("updated",timeStamp);
+        values.put("tbcode",oneTrackable.geocode);
+        values.put("guid",oneTrackable.guid);
+        values.put("title",oneTrackable.name);
+        values.put("owner",oneTrackable.owner);
+        if (oneTrackable.released != null) {
+          values.put("released",oneTrackable.released.getTime());
+        }
+ else {
+          values.put("released",0L);
+        }
+        values.put("goal",oneTrackable.goal);
+        values.put("description",oneTrackable.details);
+        databaseRW.insert(dbTableTrackables,null,values);
+        saveLogs(oneTrackable.geocode,oneTrackable.logs);
+      }
+    }
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+  return true;
+}

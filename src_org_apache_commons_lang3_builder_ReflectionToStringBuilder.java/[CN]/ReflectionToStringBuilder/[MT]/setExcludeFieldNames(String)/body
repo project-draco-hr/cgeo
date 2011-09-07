@@ -1,0 +1,10 @@
+{
+  if (excludeFieldNamesParam == null) {
+    this.excludeFieldNames=null;
+  }
+ else {
+    this.excludeFieldNames=toNoNullStringArray(excludeFieldNamesParam);
+    Arrays.sort(this.excludeFieldNames);
+  }
+  return this;
+}

@@ -1,5 +1,5 @@
 {
-  if (cacheid == null || cacheid.length() == 0) {
+  if (StringUtils.isBlank(cacheid)) {
     fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
     return true;
   }

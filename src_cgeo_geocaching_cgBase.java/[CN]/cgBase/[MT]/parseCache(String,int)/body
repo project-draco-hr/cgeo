@@ -1,5 +1,5 @@
 {
-  if (page == null || page.length() == 0) {
+  if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.parseCache: No page given");
     return null;
   }
@@ -38,10 +38,8 @@
   cache.reason=reason;
   try {
     final Matcher matcherGeocode=patternGeocode.matcher(page);
-    if (matcherGeocode.find()) {
-      if (matcherGeocode.groupCount() > 0) {
-        cache.geocode=getMatch(matcherGeocode.group(1));
-      }
+    if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
+      cache.geocode=getMatch(matcherGeocode.group(1));
     }
   }
  catch (  Exception e) {
@@ -49,10 +47,8 @@
   }
   try {
     final Matcher matcherCacheId=patternCacheId.matcher(page);
-    if (matcherCacheId.find()) {
-      if (matcherCacheId.groupCount() > 0) {
-        cache.cacheid=getMatch(matcherCacheId.group(1));
-      }
+    if (matcherCacheId.find() && matcherCacheId.groupCount() > 0) {
+      cache.cacheid=getMatch(matcherCacheId.group(1));
     }
   }
  catch (  Exception e) {
@@ -60,10 +56,8 @@
   }
   try {
     final Matcher matcherCacheGuid=patternCacheGuid.matcher(page);
-    if (matcherCacheGuid.find()) {
-      if (matcherCacheGuid.groupCount() > 0) {
-        cache.guid=getMatch(matcherCacheGuid.group(1));
-      }
+    if (matcherCacheGuid.find() && matcherCacheGuid.groupCount() > 0) {
+      cache.guid=getMatch(matcherCacheGuid.group(1));
     }
   }
  catch (  Exception e) {
@@ -71,10 +65,8 @@
   }
   try {
     final Matcher matcherName=patternName.matcher(page);
-    if (matcherName.find()) {
-      if (matcherName.groupCount() > 0) {
-        cache.name=Html.fromHtml(matcherName.group(1)).toString();
-      }
+    if (matcherName.find() && matcherName.groupCount() > 0) {
+      cache.name=Html.fromHtml(matcherName.group(1)).toString();
     }
   }
  catch (  Exception e) {
@@ -82,10 +74,8 @@
   }
   try {
     final Matcher matcherOwnerReal=patternOwnerReal.matcher(page);
-    if (matcherOwnerReal.find()) {
-      if (matcherOwnerReal.groupCount() > 0) {
-        cache.ownerReal=URLDecoder.decode(matcherOwnerReal.group(1));
-      }
+    if (matcherOwnerReal.find() && matcherOwnerReal.groupCount() > 0) {
+      cache.ownerReal=URLDecoder.decode(matcherOwnerReal.group(1));
     }
   }
  catch (  Exception e) {
@@ -109,13 +99,11 @@
     return null;
   }
   tableInside=tableInside.substring(0,pos);
-  if (tableInside != null && tableInside.length() > 0) {
+  if (StringUtils.isNotBlank(tableInside)) {
     try {
       final Matcher matcherTerrain=patternTerrain.matcher(tableInside);
-      if (matcherTerrain.find()) {
-        if (matcherTerrain.groupCount() > 0) {
-          cache.terrain=new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
-        }
+      if (matcherTerrain.find() && matcherTerrain.groupCount() > 0) {
+        cache.terrain=new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
       }
     }
  catch (    Exception e) {
@@ -123,10 +111,8 @@
     }
     try {
       final Matcher matcherDifficulty=patternDifficulty.matcher(tableInside);
-      if (matcherDifficulty.find()) {
-        if (matcherDifficulty.groupCount() > 0) {
-          cache.difficulty=new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
-        }
+      if (matcherDifficulty.find() && matcherDifficulty.groupCount() > 0) {
+        cache.difficulty=new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
       }
     }
  catch (    Exception e) {
@@ -134,10 +120,8 @@
     }
     try {
       final Matcher matcherOwner=patternOwner.matcher(tableInside);
-      if (matcherOwner.find()) {
-        if (matcherOwner.groupCount() > 0) {
-          cache.owner=Html.fromHtml(matcherOwner.group(2)).toString();
-        }
+      if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
+        cache.owner=Html.fromHtml(matcherOwner.group(2)).toString();
       }
     }
  catch (    Exception e) {
@@ -145,10 +129,8 @@
     }
     try {
       final Matcher matcherHidden=patternHidden.matcher(tableInside);
-      if (matcherHidden.find()) {
-        if (matcherHidden.groupCount() > 0) {
-          cache.hidden=parseGcCustomDate(matcherHidden.group(1));
-        }
+      if (matcherHidden.find() && matcherHidden.groupCount() > 0) {
+        cache.hidden=parseGcCustomDate(matcherHidden.group(1));
       }
     }
  catch (    ParseException e) {
@@ -157,10 +139,8 @@
     if (cache.hidden == null) {
       try {
         final Matcher matcherHiddenEvent=patternHiddenEvent.matcher(tableInside);
-        if (matcherHiddenEvent.find()) {
-          if (matcherHiddenEvent.groupCount() > 0) {
-            cache.hidden=parseGcCustomDate(matcherHiddenEvent.group(1));
-          }
+        if (matcherHiddenEvent.find() && matcherHiddenEvent.groupCount() > 0) {
+          cache.hidden=parseGcCustomDate(matcherHiddenEvent.group(1));
         }
       }
  catch (      ParseException e) {
@@ -169,10 +149,8 @@
     }
     try {
       final Matcher matcherFavourite=patternFavourite.matcher(tableInside);
-      if (matcherFavourite.find()) {
-        if (matcherFavourite.groupCount() > 0) {
-          cache.favouriteCnt=Integer.parseInt(matcherFavourite.group(1));
-        }
+      if (matcherFavourite.find() && matcherFavourite.groupCount() > 0) {
+        cache.favouriteCnt=Integer.parseInt(matcherFavourite.group(1));
       }
     }
  catch (    Exception e) {
@@ -180,10 +158,8 @@
     }
     try {
       final Matcher matcherSize=patternSize.matcher(tableInside);
-      if (matcherSize.find()) {
-        if (matcherSize.groupCount() > 0) {
-          cache.size=getMatch(matcherSize.group(1)).toLowerCase();
-        }
+      if (matcherSize.find() && matcherSize.groupCount() > 0) {
+        cache.size=getMatch(matcherSize.group(1)).toLowerCase();
       }
     }
  catch (    Exception e) {
@@ -202,10 +178,8 @@
   }
   try {
     final Matcher matcherType=patternType.matcher(page);
-    if (matcherType.find()) {
-      if (matcherType.groupCount() > 0) {
-        cache.type=cacheTypes.get(matcherType.group(1).toLowerCase());
-      }
+    if (matcherType.find() && matcherType.groupCount() > 0) {
+      cache.type=cacheTypes.get(matcherType.group(1).toLowerCase());
     }
   }
  catch (  Exception e) {
@@ -220,19 +194,17 @@
   }
   try {
     final Matcher matcherLatLon=patternLatLon.matcher(page);
-    if (matcherLatLon.find()) {
-      if (matcherLatLon.groupCount() > 0) {
-        cache.latlon=getMatch(matcherLatLon.group(2));
-        HashMap<String,Object> tmp=cgBase.parseLatlon(cache.latlon);
-        if (tmp.size() > 0) {
-          cache.latitude=(Double)tmp.get("latitude");
-          cache.longitude=(Double)tmp.get("longitude");
-          cache.latitudeString=(String)tmp.get("latitudeString");
-          cache.longitudeString=(String)tmp.get("longitudeString");
-          cache.reliableLatLon=true;
-        }
-        tmp=null;
+    if (matcherLatLon.find() && matcherLatLon.groupCount() > 0) {
+      cache.latlon=getMatch(matcherLatLon.group(2));
+      Map<String,Object> tmp=cgBase.parseLatlon(cache.latlon);
+      if (tmp.size() > 0) {
+        cache.latitude=(Double)tmp.get("latitude");
+        cache.longitude=(Double)tmp.get("longitude");
+        cache.latitudeString=(String)tmp.get("latitudeString");
+        cache.longitudeString=(String)tmp.get("longitudeString");
+        cache.reliableLatLon=true;
       }
+      tmp=null;
     }
   }
  catch (  Exception e) {
@@ -240,10 +212,8 @@
   }
   try {
     final Matcher matcherLocation=patternLocation.matcher(page);
-    if (matcherLocation.find()) {
-      if (matcherLocation.groupCount() > 0) {
-        cache.location=getMatch(matcherLocation.group(1));
-      }
+    if (matcherLocation.find() && matcherLocation.groupCount() > 0) {
+      cache.location=getMatch(matcherLocation.group(1));
     }
   }
  catch (  Exception e) {
@@ -251,12 +221,10 @@
   }
   try {
     final Matcher matcherHint=patternHint.matcher(page);
-    if (matcherHint.find()) {
-      if (matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
-        String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
-        if (hint != null) {
-          cache.hint=hint.replaceAll(Pattern.quote("</p>"),"").trim();
-        }
+    if (matcherHint.find() && matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
+      String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
+      if (hint != null) {
+        cache.hint=hint.replaceAll(Pattern.quote("</p>"),"").trim();
       }
     }
   }
@@ -266,10 +234,8 @@
   checkFields(cache);
   try {
     final Matcher matcherPersonalNote=patternPersonalNote.matcher(page);
-    if (matcherPersonalNote.find()) {
-      if (matcherPersonalNote.groupCount() > 0) {
-        cache.personalNote=getMatch(matcherPersonalNote.group(1).trim());
-      }
+    if (matcherPersonalNote.find() && matcherPersonalNote.groupCount() > 0) {
+      cache.personalNote=getMatch(matcherPersonalNote.group(1).trim());
     }
   }
  catch (  Exception e) {
@@ -277,10 +243,8 @@
   }
   try {
     final Matcher matcherDescShort=patternDescShort.matcher(page);
-    if (matcherDescShort.find()) {
-      if (matcherDescShort.groupCount() > 0) {
-        cache.shortdesc=getMatch(matcherDescShort.group(1));
-      }
+    if (matcherDescShort.find() && matcherDescShort.groupCount() > 0) {
+      cache.shortdesc=getMatch(matcherDescShort.group(1));
     }
   }
  catch (  Exception e) {
@@ -288,10 +252,8 @@
   }
   try {
     final Matcher matcherDesc=patternDesc.matcher(page);
-    if (matcherDesc.find()) {
-      if (matcherDesc.groupCount() > 0) {
-        cache.description=getMatch(matcherDesc.group(1));
-      }
+    if (matcherDesc.find() && matcherDesc.groupCount() > 0) {
+      cache.description=getMatch(matcherDesc.group(1));
     }
   }
  catch (  Exception e) {
@@ -299,26 +261,24 @@
   }
   try {
     final Matcher matcherAttributes=patternAttributes.matcher(page);
-    while (matcherAttributes.find()) {
-      if (matcherAttributes.groupCount() > 0) {
-        final String attributesPre=matcherAttributes.group(1);
-        final Matcher matcherAttributesInside=patternAttributesInside.matcher(attributesPre);
-        while (matcherAttributesInside.find()) {
-          if (matcherAttributesInside.groupCount() > 1 && matcherAttributesInside.group(2).equalsIgnoreCase("blank") != true) {
-            if (cache.attributes == null) {
-              cache.attributes=new ArrayList<String>();
-            }
-            String attribute=matcherAttributesInside.group(2).toLowerCase();
-            String imageName=matcherAttributesInside.group(1).trim();
-            if (imageName.length() > 0) {
-              int start=imageName.lastIndexOf('/');
-              int end=imageName.lastIndexOf('.');
-              if (start >= 0 && end >= 0) {
-                attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase();
-              }
-            }
-            cache.attributes.add(attribute);
+    if (matcherAttributes.find() && matcherAttributes.groupCount() > 0) {
+      final String attributesPre=matcherAttributes.group(1);
+      final Matcher matcherAttributesInside=patternAttributesInside.matcher(attributesPre);
+      while (matcherAttributesInside.find()) {
+        if (matcherAttributesInside.groupCount() > 1 && matcherAttributesInside.group(2).equalsIgnoreCase("blank") != true) {
+          if (cache.attributes == null) {
+            cache.attributes=new ArrayList<String>();
           }
+          String attribute=matcherAttributesInside.group(2).toLowerCase();
+          String imageName=matcherAttributesInside.group(1).trim();
+          if (imageName.length() > 0) {
+            int start=imageName.lastIndexOf('/');
+            int end=imageName.lastIndexOf('.');
+            if (start >= 0 && end >= 0) {
+              attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase();
+            }
+          }
+          cache.attributes.add(attribute);
         }
       }
     }
@@ -328,25 +288,23 @@
   }
   try {
     final Matcher matcherSpoilers=patternSpoilers.matcher(page);
-    while (matcherSpoilers.find()) {
-      if (matcherSpoilers.groupCount() > 0) {
-        final String spoilersPre=matcherSpoilers.group(1);
-        final Matcher matcherSpoilersInside=patternSpoilersInside.matcher(spoilersPre);
-        while (matcherSpoilersInside.find()) {
-          if (matcherSpoilersInside.groupCount() > 0) {
-            final cgImage spoiler=new cgImage();
-            spoiler.url=matcherSpoilersInside.group(1);
-            if (matcherSpoilersInside.group(2) != null) {
-              spoiler.title=matcherSpoilersInside.group(2);
-            }
-            if (matcherSpoilersInside.group(4) != null) {
-              spoiler.description=matcherSpoilersInside.group(4);
-            }
-            if (cache.spoilers == null) {
-              cache.spoilers=new ArrayList<cgImage>();
-            }
-            cache.spoilers.add(spoiler);
+    if (matcherSpoilers.find() && matcherSpoilers.groupCount() > 0) {
+      final String spoilersPre=matcherSpoilers.group(1);
+      final Matcher matcherSpoilersInside=patternSpoilersInside.matcher(spoilersPre);
+      while (matcherSpoilersInside.find()) {
+        if (matcherSpoilersInside.groupCount() > 0) {
+          final cgImage spoiler=new cgImage();
+          spoiler.url=matcherSpoilersInside.group(1);
+          if (matcherSpoilersInside.group(2) != null) {
+            spoiler.title=matcherSpoilersInside.group(2);
           }
+          if (matcherSpoilersInside.group(4) != null) {
+            spoiler.description=matcherSpoilersInside.group(4);
+          }
+          if (cache.spoilers == null) {
+            cache.spoilers=new ArrayList<cgImage>();
+          }
+          cache.spoilers.add(spoiler);
         }
       }
     }
@@ -357,13 +315,13 @@
   try {
     cache.inventoryItems=0;
     final Matcher matcherInventory=patternInventory.matcher(page);
-    while (matcherInventory.find()) {
+    if (matcherInventory.find()) {
       if (cache.inventory == null) {
         cache.inventory=new ArrayList<cgTrackable>();
       }
       if (matcherInventory.groupCount() > 1) {
         final String inventoryPre=matcherInventory.group(2);
-        if (inventoryPre != null && inventoryPre.length() > 0) {
+        if (StringUtils.isNotBlank(inventoryPre)) {
           final Matcher matcherInventoryInside=patternInventoryInside.matcher(inventoryPre);
           while (matcherInventoryInside.find()) {
             if (matcherInventoryInside.groupCount() > 0) {
@@ -388,7 +346,7 @@
       while (matcherLog.find()) {
         String typeStr=matcherLog.group(1);
         String countStr=matcherLog.group(2);
-        if (typeStr != null && typeStr.length() > 0 && logTypes.containsKey(typeStr.toLowerCase()) && countStr != null && countStr.length() > 0) {
+        if (StringUtils.isNotBlank(typeStr) && logTypes.containsKey(typeStr.toLowerCase()) && StringUtils.isNotBlank(countStr)) {
           cache.logCounts.put(logTypes.get(typeStr.toLowerCase()),Integer.parseInt(countStr));
         }
       }
@@ -401,8 +359,9 @@
     final Matcher matcherLog=patternLog.matcher(page);
     while (matcherLog.find()) {
       final cgLog logDone=new cgLog();
-      if (logTypes.containsKey(matcherLog.group(3).toLowerCase())) {
-        logDone.type=logTypes.get(matcherLog.group(3).toLowerCase());
+      final String logIconName=matcherLog.group(3).toLowerCase();
+      if (logTypes.containsKey(logIconName)) {
+        logDone.type=logTypes.get(logIconName);
       }
  else {
         logDone.type=logTypes.get("icon_note");
@@ -465,13 +424,8 @@
         wp=wpItems[j].split("<td");
         try {
           final Matcher matcherWpType=patternWpType.matcher(wp[3]);
-          while (matcherWpType.find()) {
-            if (matcherWpType.groupCount() > 0) {
-              waypoint.type=matcherWpType.group(1);
-              if (waypoint.type != null) {
-                waypoint.type=waypoint.type.trim();
-              }
-            }
+          if (matcherWpType.find() && matcherWpType.groupCount() > 0) {
+            waypoint.type=matcherWpType.group(1).trim();
           }
         }
  catch (        Exception e) {
@@ -479,13 +433,8 @@
         }
         try {
           final Matcher matcherWpPrefix=patternWpPrefixOrLookupOrLatlon.matcher(wp[4]);
-          while (matcherWpPrefix.find()) {
-            if (matcherWpPrefix.groupCount() > 1) {
-              waypoint.prefix=matcherWpPrefix.group(2);
-              if (waypoint.prefix != null) {
-                waypoint.prefix=waypoint.prefix.trim();
-              }
-            }
+          if (matcherWpPrefix.find() && matcherWpPrefix.groupCount() > 1) {
+            waypoint.prefix=matcherWpPrefix.group(2).trim();
           }
         }
  catch (        Exception e) {
@@ -493,13 +442,8 @@
         }
         try {
           final Matcher matcherWpLookup=patternWpPrefixOrLookupOrLatlon.matcher(wp[5]);
-          while (matcherWpLookup.find()) {
-            if (matcherWpLookup.groupCount() > 1) {
-              waypoint.lookup=matcherWpLookup.group(2);
-              if (waypoint.lookup != null) {
-                waypoint.lookup=waypoint.lookup.trim();
-              }
-            }
+          if (matcherWpLookup.find() && matcherWpLookup.groupCount() > 1) {
+            waypoint.lookup=matcherWpLookup.group(2).trim();
           }
         }
  catch (        Exception e) {
@@ -510,9 +454,12 @@
           while (matcherWpName.find()) {
             if (matcherWpName.groupCount() > 0) {
               waypoint.name=matcherWpName.group(1);
-              if (waypoint.name != null) {
+              if (StringUtils.isNotBlank(waypoint.name)) {
                 waypoint.name=waypoint.name.trim();
               }
+            }
+            if (matcherWpName.find() && matcherWpName.groupCount() > 0) {
+              waypoint.name=matcherWpName.group(1).trim();
             }
           }
         }
@@ -521,16 +468,14 @@
         }
         try {
           final Matcher matcherWpLatLon=patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
-          while (matcherWpLatLon.find()) {
-            if (matcherWpLatLon.groupCount() > 1) {
-              waypoint.latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString();
-              final HashMap<String,Object> tmp=cgBase.parseLatlon(waypoint.latlon);
-              if (tmp.size() > 0) {
-                waypoint.latitude=(Double)tmp.get("latitude");
-                waypoint.longitude=(Double)tmp.get("longitude");
-                waypoint.latitudeString=(String)tmp.get("latitudeString");
-                waypoint.longitudeString=(String)tmp.get("longitudeString");
-              }
+          if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
+            waypoint.latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString();
+            final Map<String,Object> tmp=cgBase.parseLatlon(waypoint.latlon);
+            if (tmp.size() > 0) {
+              waypoint.latitude=(Double)tmp.get("latitude");
+              waypoint.longitude=(Double)tmp.get("longitude");
+              waypoint.latitudeString=(String)tmp.get("latitudeString");
+              waypoint.longitudeString=(String)tmp.get("longitudeString");
             }
           }
         }
@@ -543,19 +488,16 @@
         }
         try {
           final Matcher matcherWpNote=patternWpNote.matcher(wp[3]);
-          while (matcherWpNote.find()) {
-            if (matcherWpNote.groupCount() > 0) {
-              waypoint.note=matcherWpNote.group(1);
-              if (waypoint.note != null) {
-                waypoint.note=waypoint.note.trim();
-              }
-            }
+          if (matcherWpNote.find() && matcherWpNote.groupCount() > 0) {
+            waypoint.note=matcherWpNote.group(1).trim();
           }
         }
  catch (        Exception e) {
           Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse waypoint note");
         }
-        if (cache.waypoints == null)         cache.waypoints=new ArrayList<cgWaypoint>();
+        if (cache.waypoints == null) {
+          cache.waypoints=new ArrayList<cgWaypoint>();
+        }
         cache.waypoints.add(waypoint);
       }
     }

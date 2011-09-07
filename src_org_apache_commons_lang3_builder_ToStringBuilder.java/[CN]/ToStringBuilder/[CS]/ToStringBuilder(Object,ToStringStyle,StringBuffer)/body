@@ -1,0 +1,12 @@
+{
+  if (style == null) {
+    style=getDefaultStyle();
+  }
+  if (buffer == null) {
+    buffer=new StringBuffer(512);
+  }
+  this.buffer=buffer;
+  this.style=style;
+  this.object=object;
+  style.appendStart(buffer,object);
+}

@@ -20,12 +20,12 @@
 );
   waypoint.setEndElementListener(new EndElementListener(){
     @Override public void end(){
-      if (cache.geocode == null || cache.geocode.length() == 0) {
+      if (StringUtils.isBlank(cache.geocode)) {
         findGeoCode(name);
         findGeoCode(desc);
         findGeoCode(cmt);
       }
-      if (cache.geocode != null && cache.geocode.length() > 0 && cache.latitude != null && cache.longitude != null && ((type == null && sym == null) || (type != null && type.indexOf("geocache") > -1) || (sym != null && sym.indexOf("geocache") > -1))) {
+      if (StringUtils.isNotBlank(cache.geocode) && cache.latitude != null && cache.longitude != null && ((type == null && sym == null) || (type != null && type.indexOf("geocache") > -1) || (sym != null && sym.indexOf("geocache") > -1))) {
         fixCache(cache);
         cache.reason=listId;
         cache.detailed=true;
@@ -96,6 +96,18 @@
     }
   }
 );
+  waypoint.getChild(namespace,"url").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String url){
+      final Matcher matcher=patternGuid.matcher(url);
+      if (matcher.matches()) {
+        String guid=matcher.group(1);
+        if (StringUtils.isNotBlank(guid)) {
+          cache.guid=guid;
+        }
+      }
+    }
+  }
+);
   final Element cacheParent=getCacheParent(waypoint);
   for (  String nsGC : nsGCList) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");
@@ -146,28 +158,20 @@
     final Element gcAttribute=gcAttributes.getChild(nsGC,"attribute");
     gcAttribute.setStartElementListener(new StartElementListener(){
       @Override public void start(      Attributes attrs){
-        cacheAttribute=new CacheAttribute();
         try {
-          if (attrs.getIndex("id") > -1) {
-            cacheAttribute.setBaseName(Integer.parseInt(attrs.getValue("id")));
-          }
-          if (attrs.getIndex("inc") > -1) {
-            cacheAttribute.setActive(Integer.parseInt(attrs.getValue("inc")) != 0);
+          if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
+            int attributeId=Integer.parseInt(attrs.getValue("id"));
+            boolean attributeActive=Integer.parseInt(attrs.getValue("inc")) != 0;
+            String internalId=CacheAttributeTranslator.getInternalId(attributeId,attributeActive);
+            if (internalId != null) {
+              if (cache.attributes == null) {
+                cache.attributes=new ArrayList<String>();
+              }
+              cache.attributes.add(internalId);
+            }
           }
         }
- catch (        Exception e) {
-        }
-      }
-    }
-);
-    gcAttribute.setEndElementListener(new EndElementListener(){
-      @Override public void end(){
-        if (cacheAttribute != null) {
-          String internalId=cacheAttribute.getInternalId();
-          if (internalId != null) {
-            if (cache.attributes == null)             cache.attributes=new ArrayList<String>();
-            cache.attributes.add(internalId);
-          }
+ catch (        NumberFormatException e) {
         }
       }
     }
@@ -196,7 +200,7 @@
 );
     gcCache.getChild(nsGC,"country").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String country){
-        if (cache.location == null || cache.location.length() == 0) {
+        if (StringUtils.isBlank(cache.location)) {
           cache.location=validate(country);
         }
  else {
@@ -207,7 +211,7 @@
 );
     gcCache.getChild(nsGC,"state").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String state){
-        if (cache.location == null || cache.location.length() == 0) {
+        if (StringUtils.isBlank(cache.location)) {
           cache.location=validate(state);
         }
  else {
@@ -251,7 +255,7 @@
     final Element gcTB=gcTBs.getChild(nsGC,"travelbug");
     gcTB.setEndElementListener(new EndElementListener(){
       @Override public void end(){
-        if (trackable.geocode != null && trackable.geocode.length() > 0 && trackable.name != null && trackable.name.length() > 0) {
+        if (StringUtils.isNotBlank(trackable.geocode) && StringUtils.isNotBlank(trackable.name)) {
           if (cache.inventory == null) {
             cache.inventory=new ArrayList<cgTrackable>();
           }
@@ -283,7 +287,7 @@
 );
     gcLog.setEndElementListener(new EndElementListener(){
       @Override public void end(){
-        if (log.log != null && log.log.length() > 0) {
+        if (StringUtils.isNotBlank(log.log)) {
           if (cache.logs == null) {
             cache.logs=new ArrayList<cgLog>();
           }
@@ -339,5 +343,5 @@
 catch (  SAXException e) {
     Log.e(cgSettings.tag,"Cannot parse .gpx file as GPX " + version + ": could not parse XML - "+ e.toString());
   }
-  return parsed ? search.getCurrentId() : 0L;
+  return parsed ? search.getCurrentId() : null;
 }
