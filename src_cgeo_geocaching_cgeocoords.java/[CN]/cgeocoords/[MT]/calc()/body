@@ -1,7 +1,6 @@
 {
   if (currentFormat == coordInputFormatEnum.Plain) {
-    gp.setLatitude(eLat.getText().toString());
-    gp.setLongitude(eLon.getText().toString());
+    gp=new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
     return;
   }
   int latDeg=0, latMin=0, latSec=0;
@@ -42,6 +41,5 @@ break;
 }
 latitude*=(bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
 longitude*=(bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
-gp.setLatitude(latitude);
-gp.setLongitude(longitude);
+gp=new Geopoint(latitude,longitude);
 }
