@@ -1,10 +1,10 @@
 {
   init();
   if (((geocodes != null && geocodes.length > 0) && (guids != null && guids.length > 0))) {
-    throw new IllegalArgumentException("Nur Entweder oder");
+    throw new IllegalArgumentException("Please use only one parameter");
   }
   if (((geocodes != null && geocodes.length > 0) || (guids != null && guids.length > 0)) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
-    throw new IllegalArgumentException("Nur Entweder oder");
+    throw new IllegalArgumentException("Please use only one parameter");
   }
   StringBuilder where=new StringBuilder();
   Cursor cursor=null;
@@ -81,11 +81,10 @@
     }
     cursor=databaseRO.query(dbTableCaches,CACHE_COLUMNS,where.toString(),null,null,null,null,null);
     if (cursor != null) {
-      int index=0;
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();
         do {
-          cgCache cache=mapCache(cursor);
+          cgCache cache=createCacheFromDatabaseContent(cursor);
           if (loadA) {
             ArrayList<String> attributes=loadAttributes(cache.geocode);
             if (attributes != null && attributes.isEmpty() == false) {
