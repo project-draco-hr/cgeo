@@ -8,7 +8,7 @@
       working=false;
       return;
     }
-    if (fromDetailIntent) {
+    if (fromDetailIntent || StringUtils.isNotEmpty(searchIdIntent)) {
       searchId=UUID.fromString(searchIdIntent);
     }
  else {
