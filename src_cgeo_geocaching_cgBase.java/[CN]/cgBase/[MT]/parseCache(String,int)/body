@@ -235,7 +235,7 @@
   try {
     final Matcher matcherPersonalNote=patternPersonalNote.matcher(page);
     if (matcherPersonalNote.find() && matcherPersonalNote.groupCount() > 0) {
-      cache.personalNote=getMatch(matcherPersonalNote.group(1).trim());
+      cache.personalNote=getMatch(matcherPersonalNote.group(1));
     }
   }
  catch (  Exception e) {

@@ -29,16 +29,22 @@
         fixCache(cache);
         cache.reason=listId;
         cache.detailed=true;
+        if (StringUtils.isBlank(cache.personalNote)) {
+          StringBuilder buffer=new StringBuilder();
+          for (int i=0; i < userData.length; i++) {
+            if (StringUtils.isNotBlank(userData[i])) {
+              buffer.append(' ').append(userData[i]);
+            }
+          }
+          String note=buffer.toString().trim();
+          if (StringUtils.isNotBlank(note)) {
+            cache.personalNote=note;
+          }
+        }
         app.addCacheToSearch(search,cache);
       }
       showFinishedMessage(handler,search);
-      type=null;
-      sym=null;
-      name=null;
-      desc=null;
-      cmt=null;
-      cache=null;
-      cache=new cgCache();
+      resetCache();
     }
   }
 );
@@ -109,6 +115,17 @@
   }
 );
   final Element cacheParent=getCacheParent(waypoint);
+  final Element gsak=cacheParent.getChild(GSAK_NS,"wptExtension");
+  gsak.getChild(GSAK_NS,"Watch").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String watchList){
+      cache.onWatchlist=Boolean.valueOf(watchList.trim());
+    }
+  }
+);
+  gsak.getChild(GSAK_NS,"UserData").setEndTextElementListener(new UserDataListener(1));
+  for (int i=2; i <= 4; i++) {
+    gsak.getChild(GSAK_NS,"User" + i).setEndTextElementListener(new UserDataListener(i));
+  }
   for (  String nsGC : nsGCList) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");
     gcCache.setStartElementListener(new StartElementListener(){
