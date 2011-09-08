@@ -1,9 +1,7 @@
 {
-  if (currentFormat != null) {
-    if (calc() == false) {
-      spinner.setSelection(currentFormat.ordinal());
-      return;
-    }
+  if (currentFormat != null && !calc()) {
+    spinner.setSelection(currentFormat.ordinal());
+    return;
   }
   currentFormat=coordInputFormatEnum.fromInt(pos);
   settings.setCoordInputFormat(currentFormat);
