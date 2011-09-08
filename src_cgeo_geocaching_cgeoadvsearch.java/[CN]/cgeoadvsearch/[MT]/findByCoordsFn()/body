@@ -3,7 +3,7 @@
   final Button lonView=(Button)findViewById(R.id.buttonLongitude);
   final String latText=latView.getText().toString();
   final String lonText=lonView.getText().toString();
-  if (latText == null || StringUtils.isEmpty(latText) || lonText == null || StringUtils.isEmpty(lonText)) {
+  if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
     latView.setText(cgBase.formatLatitude(geo.latitudeNow,true));
     lonView.setText(cgBase.formatLongitude(geo.longitudeNow,true));
   }
