@@ -1,11 +1,5 @@
 {
-  try {
-    calc();
-  }
- catch (  GeopointException e) {
-    context.showToast(e.getMessage());
-    return;
-  }
+  if (calc() == false)   return;
   if (gp != null)   cuListener.update(gp);
   dismiss();
 }
