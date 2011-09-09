@@ -12,13 +12,7 @@
       String geocode=cache.geocode.toUpperCase();
       String guid=cache.guid.toLowerCase();
       cache.reason=reason;
-      if (storage.isThere(geocode,guid,false,false)) {
-        cgCache mergedCache=cache.merge(storage);
-        storage.saveCache(mergedCache);
-      }
- else {
-        storage.saveCache(cache);
-      }
+      boolean status=storeWithMerge(cache,false);
     }
   }
   return searchId;
