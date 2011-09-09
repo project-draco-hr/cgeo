@@ -37,7 +37,7 @@
   values.put("location",cache.location);
   values.put("distance",cache.distance);
   values.put("direction",cache.direction);
-  final boolean rel=isReliableLatLon(cache.geocode,cache.guid);
+  final boolean rel=cache.reliableLatLon;
   if (cache.reliableLatLon) {
     values.put("latitude",cache.coords.getLatitude());
     values.put("longitude",cache.coords.getLongitude());
