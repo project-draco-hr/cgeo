@@ -1,0 +1,81 @@
+{
+  int version=in.readInt();
+  if (version == 0) {
+    id=in.readInt();
+    cacheID=in.readString();
+    available=in.readInt() == 1;
+    archived=in.readInt() == 1;
+    premiumOnly=in.readInt() == 1;
+    name=in.readString();
+    lastUpdated=in.readString();
+    exported=in.readString();
+    placedBy=in.readString();
+    owner=in.readString();
+    hidden=in.readString();
+    type=in.readInt();
+    container=in.readInt();
+    difficulty=in.readFloat();
+    terrain=in.readFloat();
+    country=in.readString();
+    state=in.readString();
+    shortDescription=in.readString();
+    longDescription=in.readString();
+    encodedHints=in.readString();
+    attributes=in.readArrayList(PointGeocachingAttributes.class.getClassLoader());
+    logs=in.readArrayList(PointGeocachingDataLog.class.getClassLoader());
+    travelBugs=in.readArrayList(PointGeocachingDataTravelBug.class.getClassLoader());
+    waypoints=in.readArrayList(PointGeocachingDataWaypoint.class.getClassLoader());
+    notes=in.readString();
+    computed=in.readInt() == 1;
+  }
+ else   if (version > 0) {
+    id=in.readInt();
+    cacheID=in.readString();
+    available=in.readInt() == 1;
+    archived=in.readInt() == 1;
+    premiumOnly=in.readInt() == 1;
+    name=in.readString();
+    lastUpdated=in.readString();
+    exported=in.readString();
+    placedBy=in.readString();
+    owner=in.readString();
+    hidden=in.readString();
+    type=in.readInt();
+    container=in.readInt();
+    difficulty=in.readFloat();
+    terrain=in.readFloat();
+    country=in.readString();
+    state=in.readString();
+    try {
+      int size=in.readInt();
+      int lengthSD=in.readInt();
+      byte[] data=new byte[size];
+      in.readByteArray(data);
+      GZIPInputStream zis=new GZIPInputStream(new ByteArrayInputStream(data),10240);
+      StringBuffer buffer=new StringBuffer();
+      InputStreamReader isr=new InputStreamReader(zis,"UTF-8");
+      char[] dataD=new char[1024];
+      int charsRead;
+      while ((charsRead=isr.read(dataD)) != -1) {
+        buffer.append(dataD,0,charsRead);
+      }
+      String result=buffer.toString();
+      isr.close();
+      if (lengthSD > 0)       shortDescription=result.substring(0,lengthSD);
+      longDescription=result.substring(lengthSD);
+    }
+ catch (    Exception e) {
+      Log.e("PointGeocachingData","Problem in ZIP compression - read",e);
+    }
+    encodedHints=in.readString();
+    attributes=in.readArrayList(PointGeocachingAttributes.class.getClassLoader());
+    logs=in.readArrayList(PointGeocachingDataLog.class.getClassLoader());
+    travelBugs=in.readArrayList(PointGeocachingDataTravelBug.class.getClassLoader());
+    waypoints=in.readArrayList(PointGeocachingDataWaypoint.class.getClassLoader());
+    notes=in.readString();
+    computed=in.readInt() == 1;
+    if (version == 2) {
+      found=in.readInt() == 1;
+    }
+  }
+}

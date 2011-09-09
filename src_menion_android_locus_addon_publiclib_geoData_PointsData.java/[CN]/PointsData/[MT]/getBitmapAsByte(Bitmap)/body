@@ -1,0 +1,21 @@
+{
+  ByteArrayOutputStream baos=null;
+  try {
+    baos=new ByteArrayOutputStream();
+    bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+    return baos.toByteArray();
+  }
+ catch (  Exception e) {
+    return null;
+  }
+ finally {
+    try {
+      if (baos != null) {
+        baos.close();
+        baos=null;
+      }
+    }
+ catch (    Exception e) {
+    }
+  }
+}

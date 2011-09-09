@@ -1,0 +1,15 @@
+{
+  dest.writeInt(VERSION);
+  dest.writeString(mName);
+  dest.writeString(mDesc);
+  dest.writeString(mLoc.getProvider());
+  dest.writeLong(mLoc.getTime());
+  dest.writeDouble(mLoc.getLatitude());
+  dest.writeDouble(mLoc.getLongitude());
+  dest.writeDouble(mLoc.getAltitude());
+  dest.writeFloat(mLoc.getAccuracy());
+  dest.writeFloat(mLoc.getBearing());
+  dest.writeFloat(mLoc.getSpeed());
+  dest.writeString(mExtraData);
+  dest.writeParcelable(mGeoCachingData,flags);
+}

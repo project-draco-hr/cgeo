@@ -1,0 +1,12 @@
+{
+  PackageInfo info=null;
+  for (  String p : LOCUS_PACKAGE_NAMES) {
+    try {
+      info=context.getPackageManager().getPackageInfo(p,0);
+      break;
+    }
+ catch (    PackageManager.NameNotFoundException e) {
+    }
+  }
+  return info;
+}

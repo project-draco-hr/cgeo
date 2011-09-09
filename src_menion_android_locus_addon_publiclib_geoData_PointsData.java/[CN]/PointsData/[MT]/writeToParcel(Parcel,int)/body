@@ -1,0 +1,18 @@
+{
+  dest.writeInt(VERSION);
+  dest.writeString(mName);
+  if (mBitmap == null) {
+    dest.writeInt(0);
+  }
+ else {
+    byte[] data=getBitmapAsByte(mBitmap);
+    if (data == null || data.length == 0) {
+      dest.writeInt(0);
+    }
+ else {
+      dest.writeInt(data.length);
+      dest.writeByteArray(data);
+    }
+  }
+  dest.writeList(mPoints);
+}

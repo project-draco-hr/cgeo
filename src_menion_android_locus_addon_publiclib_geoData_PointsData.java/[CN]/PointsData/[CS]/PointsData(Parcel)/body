@@ -1,0 +1,17 @@
+{
+switch (in.readInt()) {
+case 0:
+    mName=in.readString();
+  int size=in.readInt();
+if (size > 0) {
+  byte[] data=new byte[size];
+  in.readByteArray(data);
+  mBitmap=BitmapFactory.decodeByteArray(data,0,data.length);
+}
+ else {
+  mBitmap=null;
+}
+mPoints=in.readArrayList(Point.class.getClassLoader());
+break;
+}
+}

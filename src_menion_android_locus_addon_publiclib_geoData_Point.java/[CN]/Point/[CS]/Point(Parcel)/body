@@ -1,0 +1,18 @@
+{
+switch (in.readInt()) {
+case 0:
+    mName=in.readString();
+  mDesc=in.readString();
+mLoc=new Location(in.readString());
+mLoc.setTime(in.readLong());
+mLoc.setLatitude(in.readDouble());
+mLoc.setLongitude(in.readDouble());
+mLoc.setAltitude(in.readDouble());
+mLoc.setAccuracy(in.readFloat());
+mLoc.setBearing(in.readFloat());
+mLoc.setSpeed(in.readFloat());
+mExtraData=in.readString();
+mGeoCachingData=in.readParcelable(PointGeocachingData.class.getClassLoader());
+break;
+}
+}

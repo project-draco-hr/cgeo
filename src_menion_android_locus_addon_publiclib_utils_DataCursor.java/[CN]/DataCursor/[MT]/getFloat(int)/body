@@ -1,0 +1,6 @@
+{
+  Object value=get(column);
+  if (value == null)   return 0.0f;
+  if (value instanceof Number)   return ((Number)value).floatValue();
+  return Float.parseFloat(value.toString());
+}

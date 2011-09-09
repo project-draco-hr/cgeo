@@ -12,11 +12,6 @@
       if (cache.longitude != null && cache.latitude != null) {
         points.add(cache);
       }
-      if (cache.waypoints != null) {
-        for (        cgWaypoint wp : cache.waypoints) {
-          if (wp.latitude != null && wp.longitude != null)           points.add(wp);
-        }
-      }
     }
     if (waypoint != null) {
       if (waypoint.longitude == null || waypoint.latitude == null) {
