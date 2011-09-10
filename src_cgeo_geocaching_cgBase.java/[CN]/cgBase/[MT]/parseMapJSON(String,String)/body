@@ -14,7 +14,7 @@
     }
     final JSONObject dataJSON=new JSONObject(json);
     final JSONObject extra=dataJSON.getJSONObject("cs");
-    if (StringUtils.isNotBlank(data)) {
+    if (extra != null && extra.length() > 0) {
       int count=extra.getInt("count");
       if (count > 0 && extra.has("cc")) {
         final JSONArray cachesData=extra.getJSONArray("cc");
