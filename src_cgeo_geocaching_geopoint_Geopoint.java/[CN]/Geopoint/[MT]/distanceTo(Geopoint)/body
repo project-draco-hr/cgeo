@@ -1,14 +1,3 @@
 {
-  final double lat1=deg2rad * latitude;
-  final double lon1=deg2rad * longitude;
-  final double lat2=deg2rad * gp.getLatitude();
-  final double lon2=deg2rad * gp.getLongitude();
-  final double d=Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2);
-  final double distance=erad * Math.acos(d);
-  if (!Double.isNaN(distance) && distance >= 0) {
-    return distance;
-  }
- else {
-    throw new GeopointException("Error in distance calculation.");
-  }
+  return pathTo(gp)[0] / 1000;
 }
