@@ -3,8 +3,8 @@
   Geopoint coords=null;
   String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
   String distanceText=((EditText)findViewById(R.id.distance)).getText().toString();
-  String latText=((EditText)findViewById(R.id.latitude)).getText().toString();
-  String lonText=((EditText)findViewById(R.id.longitude)).getText().toString();
+  String latText=latButton.getText().toString();
+  String lonText=lonButton.getText().toString();
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     showToast(res.getString(R.string.err_point_no_position_given));
     return null;
