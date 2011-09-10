@@ -1,9 +1,0 @@
-{
-  if (value != null) {
-    Map<Object,Object> m=getRegistry();
-    if (m == null) {
-      REGISTRY.set(new WeakHashMap<Object,Object>());
-    }
-    getRegistry().put(value,null);
-  }
-}
