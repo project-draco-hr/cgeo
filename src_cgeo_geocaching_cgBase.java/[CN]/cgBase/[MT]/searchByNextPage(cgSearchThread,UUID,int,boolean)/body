@@ -1,6 +1,5 @@
 {
   final String[] viewstates=app.getViewstates(searchId);
-  cgCacheWrap caches=new cgCacheWrap();
   String url=app.getUrl(searchId);
   if (StringUtils.isBlank(url)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No url found");
@@ -56,7 +55,7 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No data from server");
     return searchId;
   }
-  caches=parseSearch(thread,url,page,showCaptcha);
+  final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No cache parsed");
     return searchId;
