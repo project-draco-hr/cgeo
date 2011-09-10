@@ -12,7 +12,7 @@
       if (stop) {
         return;
       }
-      if (userOne.latitude == null && userOne.longitude == null) {
+      if (userOne.coords == null) {
         continue;
       }
       item=settings.getMapFactory().getUserOverlayItemBase(activity,userOne);

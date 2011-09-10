@@ -8,9 +8,9 @@
   try {
     Map<String,String> parameters=new HashMap<String,String>();
     parameters.put("status",status);
-    if (latitude != null && longitude != null) {
-      parameters.put("lat",String.format("%.6f",latitude));
-      parameters.put("long",String.format("%.6f",longitude));
+    if (coords != null) {
+      parameters.put("lat",String.format("%.6f",coords.getLatitude()));
+      parameters.put("long",String.format("%.6f",coords.getLongitude()));
       parameters.put("display_coordinates","true");
     }
     final String paramsDone=cgOAuth.signOAuth("api.twitter.com","/1/statuses/update.json","POST",false,parameters,settings.tokenPublic,settings.tokenSecret);
