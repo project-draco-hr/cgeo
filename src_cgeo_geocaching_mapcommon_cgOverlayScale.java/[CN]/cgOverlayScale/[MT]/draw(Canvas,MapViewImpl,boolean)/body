@@ -9,7 +9,7 @@
   distance=distance / 2;
   distanceRound=0d;
   if (settings.units == cgSettings.unitsImperial) {
-    distance*=cgBase.kmInMiles;
+    distance/=cgBase.miles2km;
     if (distance > 100) {
       distanceRound=Math.floor(distance / 100) * 100;
       units="mi";
