@@ -6,7 +6,6 @@
   final String[] points=fileContent.split("<waypoint>");
   for (  String pointString : points) {
     final cgCoord pointCoord=new cgCoord();
-    Map<String,Object> tmp=null;
     final Matcher matcherGeocode=patternGeocode.matcher(pointString);
     if (matcherGeocode.find()) {
       String geocode=matcherGeocode.group(1).trim().toUpperCase();

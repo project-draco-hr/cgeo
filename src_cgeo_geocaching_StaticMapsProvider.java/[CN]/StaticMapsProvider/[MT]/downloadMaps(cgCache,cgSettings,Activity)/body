@@ -1,5 +1,5 @@
 {
-  if (settings.storeOfflineMaps != 1 || cache.coords == null || StringUtils.isNotBlank(cache.geocode)) {
+  if (settings.storeOfflineMaps != 1 || cache.coords == null || StringUtils.isBlank(cache.geocode)) {
     return;
   }
   final String latlonMap=String.format((Locale)null,"%.6f",cache.coords.getLatitude()) + "," + String.format((Locale)null,"%.6f",cache.coords.getLongitude());

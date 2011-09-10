@@ -2,6 +2,7 @@
   if (geo == null) {
     return;
   }
+  findViewById(R.id.nearest).setPressed(true);
   final Intent cachesIntent=new Intent(context,cgeocaches.class);
   cachesIntent.putExtra("type","nearest");
   cachesIntent.putExtra("latitude",geo.coordsNow.getLatitude());
