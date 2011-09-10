@@ -9,10 +9,8 @@
   }
   if (newItem) {
     for (    cgCache cache : cacheList) {
-      String geocode=cache.geocode.toUpperCase();
-      String guid=cache.guid.toLowerCase();
       cache.reason=reason;
-      boolean status=storeWithMerge(cache,false);
+      storeWithMerge(cache,false);
     }
   }
   return searchId;
