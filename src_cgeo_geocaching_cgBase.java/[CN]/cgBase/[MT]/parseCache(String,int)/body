@@ -48,7 +48,7 @@
   try {
     final Matcher matcherCacheId=patternCacheId.matcher(page);
     if (matcherCacheId.find() && matcherCacheId.groupCount() > 0) {
-      cache.cacheid=getMatch(matcherCacheId.group(1));
+      cache.cacheId=getMatch(matcherCacheId.group(1));
     }
   }
  catch (  Exception e) {

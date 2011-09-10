@@ -1,5 +1,5 @@
 {
-  String page=requestLogged(false,"www.geocaching.com","/my/watchlist.aspx?w=" + cache.cacheid,"POST",null,false,false,false);
+  String page=requestLogged(false,"www.geocaching.com","/my/watchlist.aspx?w=" + cache.cacheId,"POST",null,false,false,false);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgBase.addToWatchlist: No data from server");
     return -1;
