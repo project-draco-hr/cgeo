@@ -3,10 +3,10 @@
   context=contextIn;
   settings=settingsIn;
   geo=geoIn;
-  if (waypoint != null) {
-    coords=waypoint.coords;
+  if (gpIn != null) {
+    gp=gpIn;
   }
  else   if (geo != null && geo.coordsNow != null) {
-    coords=geo.coordsNow;
+    gp=geo.coordsNow;
   }
 }
