@@ -1,7 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
   try {
-    if (cache != null && cache.latitude != null && cache.longitude != null) {
+    if (cache != null && cache.coords != null) {
       menu.findItem(0).setVisible(true);
       menu.findItem(2).setVisible(true);
       menu.findItem(5).setVisible(true);

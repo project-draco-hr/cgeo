@@ -9,7 +9,7 @@
       navSatellites=(TextView)findViewById(R.id.nav_satellites);
       navLocation=(TextView)findViewById(R.id.nav_location);
     }
-    if (geo.latitudeNow != null && geo.longitudeNow != null) {
+    if (geo.coordsNow != null) {
       View findNearest=findViewById(R.id.nearest);
       findNearest.setClickable(true);
       findNearest.setOnClickListener(new OnClickListener(){
@@ -51,10 +51,10 @@
         navAccuracy.setText(null);
       }
       if (settings.showAddress == 1) {
-        if (addLat == null || addLon == null) {
+        if (addCoords == null) {
           navLocation.setText(res.getString(R.string.loc_no_addr));
         }
-        if (addLat == null || addLon == null || (cgBase.getDistance(geo.latitudeNow,geo.longitudeNow,addLat,addLon) > 0.5 && addressObtaining == false)) {
+        if (addCoords == null || (cgBase.getDistance(geo.coordsNow,addCoords) > 0.5 && addressObtaining == false)) {
           (new obtainAddress()).start();
         }
       }
@@ -67,10 +67,10 @@
  else {
             humanAlt=String.format("%.0f",geo.altitudeNow) + " m";
           }
-          navLocation.setText(cgBase.formatCoords(geo.latitudeNow,geo.longitudeNow,true) + " | " + humanAlt);
+          navLocation.setText(cgBase.formatCoords(geo.coordsNow,true) + " | " + humanAlt);
         }
  else {
-          navLocation.setText(cgBase.formatCoords(geo.latitudeNow,geo.longitudeNow,true));
+          navLocation.setText(cgBase.formatCoords(geo.coordsNow,true));
         }
       }
     }

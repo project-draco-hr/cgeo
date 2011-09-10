@@ -1,8 +1,8 @@
 {
   Map<String,Object> params=new HashMap<String,Object>();
-  if (latitude != null && longitude != null) {
-    params.put("latitude",latitude);
-    params.put("longitude",longitude);
+  if (coords != null) {
+    params.put("latitude",coords.getLatitude());
+    params.put("longitude",coords.getLongitude());
     params.put("cachetype",settings.cacheType);
     params.put("list",listId);
   }

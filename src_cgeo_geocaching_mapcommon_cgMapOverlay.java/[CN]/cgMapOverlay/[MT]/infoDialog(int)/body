@@ -36,8 +36,8 @@
             cgeonavigate.coordinates=new ArrayList<cgCoord>();
             cgeonavigate.coordinates.add(coordinate);
             Intent navigateIntent=new Intent(context,navigateActivity.getClass());
-            navigateIntent.putExtra("latitude",coordinate.latitude);
-            navigateIntent.putExtra("longitude",coordinate.longitude);
+            navigateIntent.putExtra("latitude",coordinate.coords.getLatitude());
+            navigateIntent.putExtra("longitude",coordinate.coords.getLongitude());
             navigateIntent.putExtra("geocode",coordinate.geocode.toUpperCase());
             context.startActivity(navigateIntent);
             dialog.cancel();
@@ -62,8 +62,8 @@
           cgeonavigate.coordinates=new ArrayList<cgCoord>();
           cgeonavigate.coordinates.add(coordinate);
           Intent navigateIntent=new Intent(context,navigateActivity.getClass());
-          navigateIntent.putExtra("latitude",coordinate.latitude);
-          navigateIntent.putExtra("longitude",coordinate.longitude);
+          navigateIntent.putExtra("latitude",coordinate.coords.getLatitude());
+          navigateIntent.putExtra("longitude",coordinate.coords.getLongitude());
           navigateIntent.putExtra("geocode",coordinate.name);
           context.startActivity(navigateIntent);
           dialog.cancel();

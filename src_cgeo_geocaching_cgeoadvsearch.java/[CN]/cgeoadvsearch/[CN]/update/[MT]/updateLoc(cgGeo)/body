@@ -9,9 +9,9 @@
     if (lonEdit == null) {
       lonEdit=(EditText)findViewById(R.id.longitude);
     }
-    if (geo.latitudeNow != null && geo.longitudeNow != null) {
-      latEdit.setHint(cgBase.formatLatitude(geo.latitudeNow,false));
-      lonEdit.setHint(cgBase.formatLongitude(geo.longitudeNow,false));
+    if (geo.coordsNow != null) {
+      latEdit.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(),false));
+      lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(),false));
     }
   }
  catch (  Exception e) {

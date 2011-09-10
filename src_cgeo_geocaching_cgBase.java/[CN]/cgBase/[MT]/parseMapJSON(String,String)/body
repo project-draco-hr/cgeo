@@ -28,8 +28,7 @@
             final cgCache cacheToAdd=new cgCache();
             cacheToAdd.reliableLatLon=false;
             cacheToAdd.geocode=oneCache.getString("gc");
-            cacheToAdd.latitude=oneCache.getDouble("lat");
-            cacheToAdd.longitude=oneCache.getDouble("lon");
+            cacheToAdd.coords=new Geopoint(oneCache.getDouble("lat"),oneCache.getDouble("lon"));
             cacheToAdd.name=oneCache.getString("nn");
             cacheToAdd.found=oneCache.getBoolean("f");
             cacheToAdd.own=oneCache.getBoolean("o");

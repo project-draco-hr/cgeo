@@ -9,8 +9,8 @@
     try {
       ContentValues values=new ContentValues();
       values.put("date",destination.getDate());
-      values.put("latitude",destination.getLatitude());
-      values.put("longitude",destination.getLongitude());
+      values.put("latitude",destination.getCoords().getLatitude());
+      values.put("longitude",destination.getCoords().getLongitude());
       long id=databaseRW.insert(dbTableSearchDestionationHistory,null,values);
       destination.setId(id);
       databaseRW.setTransactionSuccessful();

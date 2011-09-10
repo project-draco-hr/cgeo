@@ -174,7 +174,7 @@
       itemValue.setText(cache.location);
       detailsList.addView(itemLayout);
     }
-    if (cache.latitude != null && cache.longitude != null) {
+    if (cache.coords != null) {
       itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
@@ -355,7 +355,7 @@ if (wpt.prefix.equalsIgnoreCase("OWN") == false) {
 }
 TextView nameView=(TextView)waypointView.findViewById(R.id.name);
 if (StringUtils.isBlank(wpt.name)) {
-  nameView.setText(cgBase.formatCoords(wpt.latitude,wpt.longitude,true));
+  nameView.setText(cgBase.formatCoords(wpt.coords,true));
 }
  else {
   if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
@@ -392,8 +392,8 @@ TextView hintView=((TextView)findViewById(R.id.hint));
 hintView.setClickable(false);
 hintView.setOnClickListener(null);
 }
-if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null && cache != null && cache.latitude != null && cache.longitude != null) {
-cacheDistance.setText(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow,geo.longitudeNow,cache.latitude,cache.longitude)));
+if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
+cacheDistance.setText(base.getHumanDistance(cgBase.getDistance(geo.coordsNow,cache.coords)));
 cacheDistance.bringToFront();
 }
 }

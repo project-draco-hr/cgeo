@@ -4,11 +4,9 @@
   settings=settingsIn;
   geo=geoIn;
   if (waypoint != null) {
-    latitude=waypoint.latitude;
-    longitude=waypoint.longitude;
+    coords=waypoint.coords;
   }
- else   if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-    latitude=geo.latitudeNow;
-    longitude=geo.longitudeNow;
+ else   if (geo != null && geo.coordsNow != null) {
+    coords=geo.coordsNow;
   }
 }

@@ -2,14 +2,14 @@
   super.onResume();
   settings.load();
   init();
-  if (adapter != null && geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-    adapter.setActualCoordinates(geo.latitudeNow,geo.longitudeNow);
+  if (adapter != null && geo != null && geo.coordsNow != null) {
+    adapter.setActualCoordinates(geo.coordsNow);
     adapter.setActualHeading(northHeading);
   }
   if (adapter != null) {
     adapter.setSelectMode(false,true);
-    if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-      adapter.forceSort(geo.latitudeNow,geo.longitudeNow);
+    if (geo != null && geo.coordsNow != null) {
+      adapter.forceSort(geo.coordsNow);
     }
   }
   if (loadCachesHandler != null && searchId != null) {

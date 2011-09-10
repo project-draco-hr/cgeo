@@ -16,8 +16,8 @@
     values.put("latlon",waypoint.latlon);
     values.put("latitude_string",waypoint.latitudeString);
     values.put("longitude_string",waypoint.longitudeString);
-    values.put("latitude",waypoint.latitude);
-    values.put("longitude",waypoint.longitude);
+    values.put("latitude",waypoint.coords.getLatitude());
+    values.put("longitude",waypoint.coords.getLongitude());
     values.put("note",waypoint.note);
     if (id <= 0) {
       databaseRW.insert(dbTableWaypoints,null,values);

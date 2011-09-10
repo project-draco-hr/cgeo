@@ -292,7 +292,7 @@
   }
   if (settings.getLoadDirImg()) {
     for (    cgCache oneCache : caches.cacheList) {
-      if (oneCache.latitude == null && oneCache.longitude == null && oneCache.directionImg != null) {
+      if (oneCache.coords == null && oneCache.directionImg != null) {
         cgDirectionImg.getDrawable(oneCache.geocode,oneCache.directionImg);
       }
     }

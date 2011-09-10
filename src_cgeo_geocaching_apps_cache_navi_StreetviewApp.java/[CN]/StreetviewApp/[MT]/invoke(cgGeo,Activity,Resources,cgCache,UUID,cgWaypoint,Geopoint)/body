@@ -1,0 +1,20 @@
+{
+  if (cache == null && waypoint == null && coords == null) {
+    return false;
+  }
+  try {
+    if (cache != null && cache.coords != null) {
+      startActivity(activity,cache.coords);
+    }
+ else     if (waypoint != null && waypoint.coords != null) {
+      startActivity(activity,waypoint.coords);
+    }
+    return true;
+  }
+ catch (  ActivityNotFoundException e) {
+    if (res != null) {
+      ActivityMixin.showToast(activity,res.getString(R.string.err_application_no));
+    }
+  }
+  return false;
+}

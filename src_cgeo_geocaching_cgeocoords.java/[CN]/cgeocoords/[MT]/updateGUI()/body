@@ -1,6 +1,10 @@
 {
-  Double lat=0.0;
-  if (latitude != null) {
+  double latitude=0.0;
+  double longitude=0.0;
+  double lat=0.0;
+  double lon=0.0;
+  if (coords != null) {
+    latitude=coords.getLatitude();
     if (latitude < 0) {
       bLat.setText("S");
     }
@@ -8,9 +12,7 @@
       bLat.setText("N");
     }
     lat=Math.abs(latitude);
-  }
-  Double lon=0.0;
-  if (longitude != null) {
+    longitude=coords.getLongitude();
     if (longitude < 0) {
       bLon.setText("W");
     }
@@ -36,10 +38,8 @@ case Plain:
     findViewById(R.id.coordTable).setVisibility(View.GONE);
   eLat.setVisibility(View.VISIBLE);
 eLon.setVisibility(View.VISIBLE);
-if (latitude != null) {
+if (coords != null) {
 eLat.setText(cgBase.formatLatitude(latitude,true));
-}
-if (longitude != null) {
 eLon.setText(cgBase.formatLongitude(longitude,true));
 }
 break;
@@ -57,11 +57,9 @@ tLatSep1.setText(".");
 tLonSep1.setText(".");
 tLatSep2.setText("??");
 tLonSep2.setText("??");
-if (latitude != null) {
+if (coords != null) {
 eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
 eLatMin.setText(addZeros(latDegFrac,5) + Integer.toString(latDegFrac));
-}
-if (longitude != null) {
 eLonDeg.setText(addZeros(latDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(addZeros(lonDegFrac,5) + Integer.toString(lonDegFrac));
 }
@@ -82,12 +80,10 @@ tLatSep2.setText(".");
 tLonSep2.setText(".");
 tLatSep3.setText("'");
 tLonSep3.setText("'");
-if (latitude != null) {
+if (coords != null) {
 eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
 eLatMin.setText(addZeros(latMin,2) + Integer.toString(latMin));
 eLatSec.setText(addZeros(latMinFrac,3) + Integer.toString(latMinFrac));
-}
-if (longitude != null) {
 eLonDeg.setText(addZeros(lonDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(addZeros(lonMin,2) + Integer.toString(lonMin));
 eLonSec.setText(addZeros(lonMinFrac,3) + Integer.toString(lonMinFrac));
@@ -109,13 +105,11 @@ tLatSep2.setText("'");
 tLonSep2.setText("'");
 tLatSep3.setText(".");
 tLonSep3.setText(".");
-if (latitude != null) {
+if (coords != null) {
 eLatDeg.setText(addZeros(latDeg,2) + Integer.toString(latDeg));
 eLatMin.setText(addZeros(latMin,2) + Integer.toString(latMin));
 eLatSec.setText(addZeros(latSec,2) + Integer.toString(latSec));
 eLatSub.setText(addZeros(latSecFrac,3) + Integer.toString(latSecFrac));
-}
-if (longitude != null) {
 eLonDeg.setText(addZeros(lonDeg,3) + Integer.toString(lonDeg));
 eLonMin.setText(addZeros(lonMin,2) + Integer.toString(lonMin));
 eLonSec.setText(addZeros(lonSec,2) + Integer.toString(lonSec));

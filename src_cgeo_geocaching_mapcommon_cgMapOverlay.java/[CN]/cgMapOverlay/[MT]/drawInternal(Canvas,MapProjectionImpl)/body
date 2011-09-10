@@ -15,10 +15,11 @@
       for (      CacheOverlayItemImpl item : items) {
         final cgCoord itemCoord=item.getCoord();
         float[] result=new float[1];
-        Location.distanceBetween(itemCoord.latitude,itemCoord.longitude,itemCoord.latitude,itemCoord.longitude + 1,result);
+        Location.distanceBetween(itemCoord.coords.getLatitude(),itemCoord.coords.getLongitude(),itemCoord.coords.getLatitude(),itemCoord.coords.getLongitude() + 1,result);
         final float longitudeLineDistance=result[0];
-        GeoPointImpl itemGeo=mapFactory.getGeoPointBase((int)(itemCoord.latitude * 1e6),(int)(itemCoord.longitude * 1e6));
-        GeoPointImpl leftGeo=mapFactory.getGeoPointBase((int)(itemCoord.latitude * 1e6),(int)((itemCoord.longitude - 161 / longitudeLineDistance) * 1e6));
+        GeoPointImpl itemGeo=mapFactory.getGeoPointBase(itemCoord.coords);
+        final Geopoint leftCoords=new Geopoint(itemCoord.coords.getLatitude(),itemCoord.coords.getLongitude() - 161 / longitudeLineDistance);
+        GeoPointImpl leftGeo=mapFactory.getGeoPointBase(leftCoords);
         projection.toPixels(itemGeo,center);
         projection.toPixels(leftGeo,left);
         int radius=center.x - left.x;

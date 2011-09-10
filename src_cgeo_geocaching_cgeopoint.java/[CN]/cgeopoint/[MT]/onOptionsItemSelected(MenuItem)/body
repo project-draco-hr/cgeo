@@ -1,7 +1,7 @@
 {
   final int menuItem=item.getItemId();
-  List<Double> coords=getDestination();
-  if (coords != null && !coords.isEmpty()) {
+  final Geopoint coords=getDestination();
+  if (coords != null) {
     addToHistory(coords);
   }
   if (menuItem == 2) {

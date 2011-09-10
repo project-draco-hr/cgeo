@@ -9,19 +9,13 @@
   waypoint.latlon=(String)cursor.getString(cursor.getColumnIndex("latlon"));
   waypoint.latitudeString=(String)cursor.getString(cursor.getColumnIndex("latitude_string"));
   waypoint.longitudeString=(String)cursor.getString(cursor.getColumnIndex("longitude_string"));
-  int index=cursor.getColumnIndex("latitude");
-  if (cursor.isNull(index)) {
-    waypoint.latitude=null;
+  final int indexLat=cursor.getColumnIndex("latitude");
+  final int indexLon=cursor.getColumnIndex("longitude");
+  if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
+    waypoint.coords=null;
   }
  else {
-    waypoint.latitude=(Double)cursor.getDouble(index);
-  }
-  index=cursor.getColumnIndex("longitude");
-  if (cursor.isNull(index)) {
-    waypoint.longitude=null;
-  }
- else {
-    waypoint.longitude=(Double)cursor.getDouble(index);
+    waypoint.coords=new Geopoint(cursor.getDouble(indexLat),cursor.getDouble(indexLon));
   }
   waypoint.note=(String)cursor.getString(cursor.getColumnIndex("note"));
   return waypoint;

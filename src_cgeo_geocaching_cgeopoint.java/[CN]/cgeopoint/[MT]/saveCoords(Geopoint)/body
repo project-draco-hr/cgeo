@@ -1,0 +1,14 @@
+{
+  if (changed && coords != null) {
+    SharedPreferences.Editor edit=prefs.edit();
+    edit.putFloat("anylatitude",(float)coords.getLatitude());
+    edit.putFloat("anylongitude",(float)coords.getLongitude());
+    edit.commit();
+  }
+ else {
+    SharedPreferences.Editor edit=prefs.edit();
+    edit.remove("anylatitude");
+    edit.remove("anylongitude");
+    edit.commit();
+  }
+}
