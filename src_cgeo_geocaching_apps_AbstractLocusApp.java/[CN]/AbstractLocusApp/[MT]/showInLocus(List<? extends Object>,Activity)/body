@@ -1,16 +1,14 @@
 {
-  if (objectsToShow == null || activity == null)   return;
+  if (objectsToShow == null)   return;
   int pc=0;
   PointsData pd=new PointsData("c:geo");
   for (  Object o : objectsToShow) {
     Point p=null;
     if (o instanceof cgCache) {
-      cgCache c=(cgCache)o;
-      p=this.getPoint(c,activity);
+      p=this.getPoint((cgCache)o);
     }
  else     if (o instanceof cgWaypoint) {
-      cgWaypoint w=(cgWaypoint)o;
-      p=this.getPoint(w);
+      p=this.getPoint((cgWaypoint)o);
     }
  else {
       continue;

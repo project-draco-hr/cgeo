@@ -12,7 +12,7 @@
   pg.premiumOnly=cache.members;
   pg.name=cache.name;
   pg.placedBy=cache.owner;
-  if (cache.hidden != null)   pg.hidden=cgBase.formatFullDate(context,cache.hidden.getTime());
+  if (cache.hidden != null)   pg.hidden=ISO8601DATE.format(cache.hidden.getTime());
   for (  CacheType ct : CacheType.values()) {
     if (ct.cgeoId.equals(cache.type)) {
       if (ct.locusId != CacheType.NO_LOCUS_ID)       pg.type=ct.locusId;
@@ -33,7 +33,9 @@
   if (cache.waypoints != null) {
     pg.waypoints=new ArrayList<PointGeocachingDataWaypoint>();
     for (    cgWaypoint waypoint : cache.waypoints) {
-      if (waypoint == null)       continue;
+      if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
+        continue;
+      }
       PointGeocachingDataWaypoint w=new PointGeocachingDataWaypoint();
       w.code=waypoint.geocode;
       w.name=waypoint.name;
