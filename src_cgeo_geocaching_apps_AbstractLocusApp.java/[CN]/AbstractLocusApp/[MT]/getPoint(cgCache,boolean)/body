@@ -1,0 +1,50 @@
+{
+  if (cache == null || cache.coords == null)   return null;
+  Location loc=new Location(cgSettings.tag);
+  loc.setLatitude(cache.coords.getLatitude());
+  loc.setLongitude(cache.coords.getLongitude());
+  Point p=new Point(cache.name,loc);
+  PointGeocachingData pg=new PointGeocachingData();
+  p.setGeocachingData(pg);
+  pg.cacheID=cache.geocode;
+  pg.available=!cache.disabled;
+  pg.archived=cache.archived;
+  pg.premiumOnly=cache.members;
+  pg.name=cache.name;
+  pg.placedBy=cache.owner;
+  if (cache.hidden != null)   pg.hidden=ISO8601DATE.format(cache.hidden.getTime());
+  for (  CacheType ct : CacheType.values()) {
+    if (ct.cgeoId.equals(cache.type)) {
+      if (ct.locusId != CacheType.NO_LOCUS_ID)       pg.type=ct.locusId;
+      break;
+    }
+  }
+  for (  CacheSize cs : CacheSize.values()) {
+    if (cs.cgeoId.equals(cache.size)) {
+      pg.container=cs.locusId;
+      break;
+    }
+  }
+  if (cache.difficulty != null)   pg.difficulty=cache.difficulty;
+  if (cache.terrain != null)   pg.terrain=cache.terrain;
+  pg.found=cache.found;
+  if (withWaypoints && cache.waypoints != null) {
+    pg.waypoints=new ArrayList<PointGeocachingDataWaypoint>();
+    for (    cgWaypoint waypoint : cache.waypoints) {
+      if (waypoint == null || waypoint.coords == null)       continue;
+      PointGeocachingDataWaypoint wp=new PointGeocachingDataWaypoint();
+      wp.code=waypoint.geocode;
+      wp.name=waypoint.name;
+      for (      WaypointType wt : WaypointType.values()) {
+        if (wt.cgeoId.equals(waypoint.type)) {
+          wp.type=wt.locusId;
+          break;
+        }
+      }
+      wp.lat=waypoint.coords.getLatitude();
+      wp.lon=waypoint.coords.getLongitude();
+      pg.waypoints.add(wp);
+    }
+  }
+  return p;
+}

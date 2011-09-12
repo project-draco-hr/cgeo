@@ -5,7 +5,7 @@
   for (  Object o : objectsToShow) {
     Point p=null;
     if (o instanceof cgCache) {
-      p=this.getPoint((cgCache)o);
+      p=this.getPoint((cgCache)o,withCacheWaypoints);
     }
  else     if (o instanceof cgWaypoint) {
       p=this.getPoint((cgWaypoint)o);
