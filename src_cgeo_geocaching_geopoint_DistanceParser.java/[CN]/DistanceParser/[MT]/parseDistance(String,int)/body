@@ -1,0 +1,21 @@
+{
+  final Matcher matcher=pattern.matcher(distanceText);
+  if (!matcher.find()) {
+    throw new NumberFormatException(distanceText);
+  }
+  final double value=Double.parseDouble(matcher.group(1));
+  final String unit=matcher.group(2).toLowerCase();
+  if (unit.equals("m") || (unit.length() == 0 && defaultUnit == cgSettings.unitsMetric)) {
+    return value / 1000;
+  }
+  if (unit.equals("km")) {
+    return value;
+  }
+  if (unit.equals("yd")) {
+    return value * cgBase.yards2km;
+  }
+  if (unit.equals("mi")) {
+    return value * cgBase.miles2km;
+  }
+  return value * cgBase.feet2km;
+}
