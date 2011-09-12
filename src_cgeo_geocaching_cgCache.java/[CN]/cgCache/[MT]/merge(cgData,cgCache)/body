@@ -1,0 +1,120 @@
+{
+  if (oldCache == null) {
+    return this;
+  }
+  updated=System.currentTimeMillis();
+  if (detailed == false && oldCache.detailed) {
+    detailed=true;
+    detailedUpdate=System.currentTimeMillis();
+  }
+  if (visitedDate == null || visitedDate == 0) {
+    visitedDate=oldCache.visitedDate;
+  }
+  if (reason == null || reason == 0) {
+    reason=oldCache.reason;
+  }
+  if (StringUtils.isBlank(geocode)) {
+    geocode=oldCache.geocode;
+  }
+  if (StringUtils.isBlank(cacheId)) {
+    cacheId=oldCache.cacheId;
+  }
+  if (StringUtils.isBlank(guid)) {
+    guid=oldCache.guid;
+  }
+  if (StringUtils.isBlank(type)) {
+    type=oldCache.type;
+  }
+  if (StringUtils.isBlank(name)) {
+    name=oldCache.name;
+  }
+  if (StringUtils.isBlank(nameSp)) {
+    nameSp=oldCache.nameSp;
+  }
+  if (StringUtils.isBlank(owner)) {
+    owner=oldCache.owner;
+  }
+  if (StringUtils.isBlank(ownerReal)) {
+    ownerReal=oldCache.ownerReal;
+  }
+  if (hidden == null) {
+    hidden=oldCache.hidden;
+  }
+  if (StringUtils.isBlank(hint)) {
+    hint=oldCache.hint;
+  }
+  if (StringUtils.isBlank(size)) {
+    size=oldCache.size;
+  }
+  if (difficulty == null || difficulty == 0) {
+    difficulty=oldCache.difficulty;
+  }
+  if (terrain == null || terrain == 0) {
+    terrain=oldCache.terrain;
+  }
+  if (direction == null) {
+    direction=oldCache.direction;
+  }
+  if (distance == null) {
+    distance=oldCache.distance;
+  }
+  if (StringUtils.isBlank(latlon)) {
+    latlon=oldCache.latlon;
+  }
+  if (StringUtils.isBlank(latitudeString)) {
+    latitudeString=oldCache.latitudeString;
+  }
+  if (StringUtils.isBlank(longitudeString)) {
+    longitudeString=oldCache.longitudeString;
+  }
+  if (StringUtils.isBlank(location)) {
+    location=oldCache.location;
+  }
+  if (coords == null) {
+    coords=oldCache.coords;
+  }
+  if (elevation == null) {
+    elevation=oldCache.elevation;
+  }
+  if (StringUtils.isNotBlank(personalNote)) {
+    personalNote=oldCache.personalNote;
+  }
+  if (StringUtils.isBlank(shortdesc)) {
+    shortdesc=oldCache.shortdesc;
+  }
+  if (StringUtils.isBlank(description)) {
+    description=oldCache.description;
+  }
+  if (favouriteCnt == null) {
+    favouriteCnt=oldCache.favouriteCnt;
+  }
+  if (rating == null) {
+    rating=oldCache.rating;
+  }
+  if (votes == null) {
+    votes=oldCache.votes;
+  }
+  if (myVote == null) {
+    myVote=oldCache.myVote;
+  }
+  if (inventoryItems == 0) {
+    inventoryItems=oldCache.inventoryItems;
+  }
+  if (attributes == null) {
+    attributes=oldCache.attributes;
+  }
+  if (waypoints == null) {
+    waypoints=oldCache.waypoints;
+  }
+  cgWaypoint.mergeWayPoints(waypoints,oldCache.waypoints);
+  if (spoilers == null) {
+    spoilers=oldCache.spoilers;
+  }
+  if (inventory == null) {
+    inventory=oldCache.inventory;
+  }
+  if (logs == null || logs.isEmpty()) {
+    logs=oldCache.logs;
+  }
+  return this;
+}

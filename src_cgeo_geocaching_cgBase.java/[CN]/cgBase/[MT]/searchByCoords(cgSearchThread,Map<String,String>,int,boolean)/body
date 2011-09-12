@@ -2,7 +2,6 @@
   final cgSearch search=new cgSearch();
   final String latitude=parameters.get("latitude");
   final String longitude=parameters.get("longitude");
-  cgCacheWrap caches=new cgCacheWrap();
   String cacheType=parameters.get("cachetype");
   if (StringUtils.isBlank(latitude)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No latitude given");
@@ -12,7 +11,7 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No longitude given");
     return null;
   }
-  if (StringUtils.isBlank(latitude)) {
+  if (StringUtils.isBlank(cacheType)) {
     cacheType=null;
   }
   final String host="www.geocaching.com";
@@ -33,7 +32,7 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No data from server");
     return null;
   }
-  caches=parseSearch(thread,url,page,showCaptcha);
+  final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No cache parsed");
   }

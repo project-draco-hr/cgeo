@@ -22,8 +22,8 @@
   }
   if (id == MENU_COMPASS) {
     Intent navigateIntent=new Intent(this,cgeonavigate.class);
-    navigateIntent.putExtra("latitude",cache.latitude);
-    navigateIntent.putExtra("longitude",cache.longitude);
+    navigateIntent.putExtra("latitude",cache.coords.getLatitude());
+    navigateIntent.putExtra("longitude",cache.coords.getLongitude());
     navigateIntent.putExtra("geocode",cache.geocode.toUpperCase());
     navigateIntent.putExtra("name",cache.name);
     startActivity(navigateIntent);

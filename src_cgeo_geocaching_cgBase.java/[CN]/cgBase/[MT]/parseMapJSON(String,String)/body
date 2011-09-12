@@ -14,7 +14,7 @@
     }
     final JSONObject dataJSON=new JSONObject(json);
     final JSONObject extra=dataJSON.getJSONObject("cs");
-    if (StringUtils.isNotBlank(data)) {
+    if (extra != null && extra.length() > 0) {
       int count=extra.getInt("count");
       if (count > 0 && extra.has("cc")) {
         final JSONArray cachesData=extra.getJSONArray("cc");
@@ -28,8 +28,7 @@
             final cgCache cacheToAdd=new cgCache();
             cacheToAdd.reliableLatLon=false;
             cacheToAdd.geocode=oneCache.getString("gc");
-            cacheToAdd.latitude=oneCache.getDouble("lat");
-            cacheToAdd.longitude=oneCache.getDouble("lon");
+            cacheToAdd.coords=new Geopoint(oneCache.getDouble("lat"),oneCache.getDouble("lon"));
             cacheToAdd.name=oneCache.getString("nn");
             cacheToAdd.found=oneCache.getBoolean("f");
             cacheToAdd.own=oneCache.getBoolean("o");

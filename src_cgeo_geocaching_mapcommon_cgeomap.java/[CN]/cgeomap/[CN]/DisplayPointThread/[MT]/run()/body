@@ -2,11 +2,10 @@
   if (mapView == null || caches == null) {
     return;
   }
-  if (latitudeIntent != null && longitudeIntent != null) {
+  if (coordsIntent != null) {
     cgCoord coord=new cgCoord();
     coord.type="waypoint";
-    coord.latitude=latitudeIntent;
-    coord.longitude=longitudeIntent;
+    coord.coords=coordsIntent;
     coord.name="some place";
     coordinates.add(coord);
     CacheOverlayItemImpl item=settings.getMapFactory().getCacheOverlayItem(coord,null);

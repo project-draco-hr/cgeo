@@ -1,0 +1,25 @@
+{
+  try {
+    final String host="maps.googleapis.com";
+    final String path="/maps/api/elevation/json";
+    final String params="sensor=false&locations=" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ","+ String.format((Locale)null,"%.6f",coords.getLongitude());
+    final String data=requestJSON(host,path,params);
+    if (StringUtils.isBlank(data)) {
+      return null;
+    }
+    JSONObject response=new JSONObject(data);
+    String status=response.getString("status");
+    if (status == null || status.equalsIgnoreCase("OK") == false) {
+      return null;
+    }
+    if (response.has("results")) {
+      JSONArray results=response.getJSONArray("results");
+      JSONObject result=results.getJSONObject(0);
+      return result.getDouble("elevation");
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"cgBase.getElevation: " + e.toString());
+  }
+  return null;
+}

@@ -33,11 +33,11 @@
         dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
           public void onClick(          DialogInterface dialog,          int id){
             cgeonavigate navigateActivity=new cgeonavigate();
-            cgeonavigate.coordinates=new ArrayList<cgCoord>();
+            cgeonavigate.coordinates.clear();
             cgeonavigate.coordinates.add(coordinate);
             Intent navigateIntent=new Intent(context,navigateActivity.getClass());
-            navigateIntent.putExtra("latitude",coordinate.latitude);
-            navigateIntent.putExtra("longitude",coordinate.longitude);
+            navigateIntent.putExtra("latitude",coordinate.coords.getLatitude());
+            navigateIntent.putExtra("longitude",coordinate.coords.getLongitude());
             navigateIntent.putExtra("geocode",coordinate.geocode.toUpperCase());
             context.startActivity(navigateIntent);
             dialog.cancel();
@@ -59,11 +59,11 @@
       dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
         public void onClick(        DialogInterface dialog,        int id){
           cgeonavigate navigateActivity=new cgeonavigate();
-          cgeonavigate.coordinates=new ArrayList<cgCoord>();
+          cgeonavigate.coordinates.clear();
           cgeonavigate.coordinates.add(coordinate);
           Intent navigateIntent=new Intent(context,navigateActivity.getClass());
-          navigateIntent.putExtra("latitude",coordinate.latitude);
-          navigateIntent.putExtra("longitude",coordinate.longitude);
+          navigateIntent.putExtra("latitude",coordinate.coords.getLatitude());
+          navigateIntent.putExtra("longitude",coordinate.coords.getLongitude());
           navigateIntent.putExtra("geocode",coordinate.name);
           context.startActivity(navigateIntent);
           dialog.cancel();

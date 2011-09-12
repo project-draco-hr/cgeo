@@ -3,8 +3,8 @@
   if (id == 0) {
     Intent mapIntent=new Intent(this,settings.getMapFactory().getMapClass());
     mapIntent.putExtra("detail",false);
-    mapIntent.putExtra("latitude",dstLatitude);
-    mapIntent.putExtra("longitude",dstLongitude);
+    mapIntent.putExtra("latitude",dstCoords.getLatitude());
+    mapIntent.putExtra("longitude",dstCoords.getLongitude());
     startActivity(mapIntent);
   }
  else   if (id == 1) {
@@ -33,15 +33,14 @@
     finish();
     return true;
   }
- else   if (id > 3 && coordinates != null && coordinates.get(id - 4) != null) {
+ else   if (id > 3 && coordinates.get(id - 4) != null) {
     cgCoord coordinate=coordinates.get(id - 4);
     title=coordinate.name;
-    dstLatitude=coordinate.latitude;
-    dstLongitude=coordinate.longitude;
+    dstCoords=coordinate.coords;
     setTitle();
     setDestCoords();
     updateDistanceInfo();
-    Log.d(cgSettings.tag,"destination set: " + title + " ("+ String.format(Locale.getDefault(),"%.8f",dstLatitude)+ " | "+ String.format(Locale.getDefault(),"%.8f",dstLatitude)+ ")");
+    Log.d(cgSettings.tag,"destination set: " + title + " ("+ String.format(Locale.getDefault(),"%.8f",dstCoords.getLatitude())+ " | "+ String.format(Locale.getDefault(),"%.8f",dstCoords.getLongitude())+ ")");
     return true;
   }
   return false;

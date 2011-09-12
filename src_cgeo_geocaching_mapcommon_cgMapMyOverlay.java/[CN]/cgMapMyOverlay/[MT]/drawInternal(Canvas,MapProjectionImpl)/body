@@ -26,7 +26,8 @@
   float[] result=new float[1];
   Location.distanceBetween(latitude,longitude,latitude,longitude + 1,result);
   float longitudeLineDistance=result[0];
-  GeoPointImpl leftGeo=mapFactory.getGeoPointBase((int)(latitude * 1e6),(int)((longitude - accuracy / longitudeLineDistance) * 1e6));
+  final Geopoint leftCoords=new Geopoint(latitude,longitude - accuracy / longitudeLineDistance);
+  GeoPointImpl leftGeo=mapFactory.getGeoPointBase(leftCoords);
   projection.toPixels(leftGeo,left);
   projection.toPixels(location,center);
   int radius=center.x - left.x;
@@ -36,7 +37,7 @@
   accuracyCircle.setColor(0x08000000);
   accuracyCircle.setStyle(Style.FILL);
   canvas.drawCircle(center.x,center.y,radius,accuracyCircle);
-  if (coordinates.getAccuracy() < 50f && ((historyRecent != null && cgBase.getDistance(historyRecent.getLatitude(),historyRecent.getLongitude(),coordinates.getLatitude(),coordinates.getLongitude()) > 0.005) || historyRecent == null)) {
+  if (coordinates.getAccuracy() < 50f && ((historyRecent != null && cgBase.getDistance(new Geopoint(historyRecent),new Geopoint(coordinates)) > 0.005) || historyRecent == null)) {
     if (historyRecent != null)     history.add(historyRecent);
     historyRecent=coordinates;
     int toRemove=history.size() - 700;
@@ -56,8 +57,8 @@
         Location prev=history.get(cnt - 1);
         Location now=history.get(cnt);
         if (prev != null && now != null) {
-          projection.toPixels(mapFactory.getGeoPointBase((int)(prev.getLatitude() * 1e6),(int)(prev.getLongitude() * 1e6)),historyPointP);
-          projection.toPixels(mapFactory.getGeoPointBase((int)(now.getLatitude() * 1e6),(int)(now.getLongitude() * 1e6)),historyPointN);
+          projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(prev)),historyPointP);
+          projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(now)),historyPointN);
           if ((alphaCnt - cnt) > 0) {
             alpha=255 / (alphaCnt - cnt);
           }
@@ -75,8 +76,8 @@
       Location prev=history.get(size - 1);
       Location now=coordinates;
       if (prev != null && now != null) {
-        projection.toPixels(mapFactory.getGeoPointBase((int)(prev.getLatitude() * 1e6),(int)(prev.getLongitude() * 1e6)),historyPointP);
-        projection.toPixels(mapFactory.getGeoPointBase((int)(now.getLatitude() * 1e6),(int)(now.getLongitude() * 1e6)),historyPointN);
+        projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(prev)),historyPointP);
+        projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(now)),historyPointN);
         historyLineShadow.setAlpha(255);
         historyLine.setAlpha(255);
         canvas.drawLine(historyPointP.x,historyPointP.y,historyPointN.x,historyPointN.y,historyLineShadow);

@@ -8,7 +8,7 @@
   addressObtaining=true;
   try {
     Geocoder geocoder=new Geocoder(context,Locale.getDefault());
-    addresses=geocoder.getFromLocation(geo.latitudeNow,geo.longitudeNow,1);
+    addresses=geocoder.getFromLocation(geo.coordsNow.getLatitude(),geo.coordsNow.getLongitude(),1);
   }
  catch (  Exception e) {
     Log.i(cgSettings.tag,"Failed to obtain address");

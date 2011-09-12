@@ -1,7 +1,6 @@
 {
   final cgSearch search=new cgSearch();
   final String keyword=parameters.get("keyword");
-  cgCacheWrap caches=new cgCacheWrap();
   String cacheType=parameters.get("cachetype");
   if (StringUtils.isBlank(keyword)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No keyword given");
@@ -27,7 +26,7 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No data from server");
     return null;
   }
-  caches=parseSearch(thread,url,page,showCaptcha);
+  final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No cache parsed");
   }

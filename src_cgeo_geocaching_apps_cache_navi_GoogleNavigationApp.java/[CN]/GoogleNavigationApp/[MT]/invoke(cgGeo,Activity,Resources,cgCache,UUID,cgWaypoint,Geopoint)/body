@@ -1,0 +1,22 @@
+{
+  if (activity == null) {
+    return false;
+  }
+  boolean navigationResult=false;
+  if (coords != null) {
+    navigationResult=navigateToCoordinates(geo,activity,coords);
+  }
+ else   if (waypoint != null) {
+    navigationResult=navigateToCoordinates(geo,activity,waypoint.coords);
+  }
+ else   if (cache != null) {
+    navigationResult=navigateToCoordinates(geo,activity,cache.coords);
+  }
+  if (!navigationResult) {
+    if (res != null) {
+      ActivityMixin.showToast(activity,res.getString(R.string.err_navigation_no));
+    }
+    return false;
+  }
+  return true;
+}

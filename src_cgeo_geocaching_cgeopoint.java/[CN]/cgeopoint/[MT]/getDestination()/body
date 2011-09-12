@@ -1,11 +1,10 @@
 {
-  List<Double> coords=new ArrayList<Double>();
-  Double latitude=null;
-  Double longitude=null;
+  Geopoint result=null;
+  Geopoint coords=null;
   String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
   String distanceText=((EditText)findViewById(R.id.distance)).getText().toString();
-  String latText=((EditText)findViewById(R.id.latitude)).getText().toString();
-  String lonText=((EditText)findViewById(R.id.longitude)).getText().toString();
+  String latText=latButton.getText().toString();
+  String lonText=lonButton.getText().toString();
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     showToast(res.getString(R.string.err_point_no_position_given));
     return null;
@@ -21,16 +20,14 @@
       showToast(res.getString(R.string.err_parse_lon));
       return null;
     }
-    latitude=(Double)latParsed.get("coordinate");
-    longitude=(Double)lonParsed.get("coordinate");
+    coords=new Geopoint((Double)latParsed.get("coordinate"),(Double)lonParsed.get("coordinate"));
   }
  else {
-    if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+    if (geo == null || geo.coordsNow == null) {
       showToast(res.getString(R.string.err_point_curr_position_unavailable));
       return null;
     }
-    latitude=geo.latitudeNow;
-    longitude=geo.longitudeNow;
+    coords=geo.coordsNow;
   }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     Double bearing=null;
@@ -85,25 +82,19 @@
       showToast(res.getString(R.string.err_parse_dist));
       return null;
     }
-    Double latParsed=null;
-    Double lonParsed=null;
-    Map<String,Double> coordsDst=cgBase.getRadialDistance(latitude,longitude,bearing,distance);
-    latParsed=coordsDst.get("latitude");
-    lonParsed=coordsDst.get("longitude");
-    if (latParsed == null || lonParsed == null) {
+    final Geopoint coordsDst=cgBase.getRadialDistance(coords,bearing,distance);
+    if (coordsDst == null) {
       showToast(res.getString(R.string.err_point_location_error));
       return null;
     }
-    coords.add(0,(Double)latParsed);
-    coords.add(1,(Double)lonParsed);
+    result=coordsDst;
   }
- else   if (latitude != null && longitude != null) {
-    coords.add(0,latitude);
-    coords.add(1,longitude);
+ else   if (coords != null) {
+    result=coords;
   }
  else {
     return null;
   }
-  saveCoords(coords.get(0),coords.get(1));
-  return coords;
+  saveCoords(result);
+  return result;
 }

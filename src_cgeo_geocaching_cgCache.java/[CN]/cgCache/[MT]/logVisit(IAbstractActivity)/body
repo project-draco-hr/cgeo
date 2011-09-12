@@ -1,10 +1,10 @@
 {
-  if (StringUtils.isBlank(cacheid)) {
+  if (StringUtils.isBlank(cacheId)) {
     fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
     return true;
   }
   Intent logVisitIntent=new Intent((Activity)fromActivity,cgeovisit.class);
-  logVisitIntent.putExtra(cgeovisit.EXTRAS_ID,cacheid);
+  logVisitIntent.putExtra(cgeovisit.EXTRAS_ID,cacheId);
   logVisitIntent.putExtra(cgeovisit.EXTRAS_GEOCODE,geocode.toUpperCase());
   logVisitIntent.putExtra(cgeovisit.EXTRAS_FOUND,found);
   ((Activity)fromActivity).startActivity(logVisitIntent);

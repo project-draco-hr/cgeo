@@ -14,9 +14,8 @@
  else   if (provider.equals("last")) {
     gps=-1;
   }
-  latitudeNow=location.getLatitude();
-  longitudeNow=location.getLongitude();
-  app.setLastLoc(latitudeNow,longitudeNow);
+  coordsNow=new Geopoint(location.getLatitude(),location.getLongitude());
+  app.setLastLoc(coordsNow);
   if (location.hasAltitude() && gps != -1) {
     altitudeNow=location.getAltitude() + settings.altCorrection;
   }
@@ -42,17 +41,15 @@
     accuracyNow=999f;
   }
   if (gps == 1) {
-    if (latitudeBefore != null && longitudeBefore != null && latitudeNow != null && longitudeNow != null) {
-      final double dst=cgBase.getDistance(latitudeBefore,longitudeBefore,latitudeNow,longitudeNow);
+    if (coordsBefore != null && coordsNow != null) {
+      final double dst=cgBase.getDistance(coordsBefore,coordsNow);
       if (Double.isNaN(dst) == false && dst > 0.005) {
         distanceNow+=dst;
-        latitudeBefore=latitudeNow;
-        longitudeBefore=longitudeNow;
+        coordsBefore=coordsNow;
       }
     }
- else     if (latitudeBefore == null || longitudeBefore == null) {
-      latitudeBefore=latitudeNow;
-      longitudeBefore=longitudeNow;
+ else     if (coordsBefore == null) {
+      coordsBefore=coordsNow;
     }
   }
   if (geoUpdate != null) {

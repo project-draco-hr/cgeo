@@ -1,0 +1,71 @@
+{
+  int index;
+  cgCache cache=new cgCache();
+  cache.updated=(long)cursor.getLong(cursor.getColumnIndex("updated"));
+  cache.reason=(int)cursor.getInt(cursor.getColumnIndex("reason"));
+  cache.detailed=cursor.getInt(cursor.getColumnIndex("detailed")) == 1;
+  cache.detailedUpdate=(Long)cursor.getLong(cursor.getColumnIndex("detailedupdate"));
+  cache.visitedDate=(Long)cursor.getLong(cursor.getColumnIndex("visiteddate"));
+  cache.geocode=(String)cursor.getString(cursor.getColumnIndex("geocode"));
+  cache.cacheId=(String)cursor.getString(cursor.getColumnIndex("cacheid"));
+  cache.guid=(String)cursor.getString(cursor.getColumnIndex("guid"));
+  cache.type=(String)cursor.getString(cursor.getColumnIndex("type"));
+  cache.name=(String)cursor.getString(cursor.getColumnIndex("name"));
+  cache.own=cursor.getInt(cursor.getColumnIndex("own")) == 1;
+  cache.owner=(String)cursor.getString(cursor.getColumnIndex("owner"));
+  cache.ownerReal=(String)cursor.getString(cursor.getColumnIndex("owner_real"));
+  cache.hidden=new Date((long)cursor.getLong(cursor.getColumnIndex("hidden")));
+  cache.hint=(String)cursor.getString(cursor.getColumnIndex("hint"));
+  cache.size=(String)cursor.getString(cursor.getColumnIndex("size"));
+  cache.difficulty=(Float)cursor.getFloat(cursor.getColumnIndex("difficulty"));
+  index=cursor.getColumnIndex("direction");
+  if (cursor.isNull(index)) {
+    cache.direction=null;
+  }
+ else {
+    cache.direction=(Double)cursor.getDouble(index);
+  }
+  index=cursor.getColumnIndex("distance");
+  if (cursor.isNull(index)) {
+    cache.distance=null;
+  }
+ else {
+    cache.distance=(Double)cursor.getDouble(index);
+  }
+  cache.terrain=(Float)cursor.getFloat(cursor.getColumnIndex("terrain"));
+  cache.latlon=(String)cursor.getString(cursor.getColumnIndex("latlon"));
+  cache.latitudeString=(String)cursor.getString(cursor.getColumnIndex("latitude_string"));
+  cache.longitudeString=(String)cursor.getString(cursor.getColumnIndex("longitude_string"));
+  cache.location=(String)cursor.getString(cursor.getColumnIndex("location"));
+  final int indexLat=cursor.getColumnIndex("latitude");
+  final int indexLon=cursor.getColumnIndex("longitude");
+  if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
+    cache.coords=null;
+  }
+ else {
+    cache.coords=new Geopoint(cursor.getDouble(indexLat),cursor.getDouble(indexLon));
+  }
+  index=cursor.getColumnIndex("elevation");
+  if (cursor.isNull(index)) {
+    cache.elevation=null;
+  }
+ else {
+    cache.elevation=(Double)cursor.getDouble(index);
+  }
+  cache.personalNote=(String)cursor.getString(cursor.getColumnIndex("personal_note"));
+  cache.shortdesc=(String)cursor.getString(cursor.getColumnIndex("shortdesc"));
+  cache.description=(String)cursor.getString(cursor.getColumnIndex("description"));
+  cache.favouriteCnt=(Integer)cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
+  cache.rating=(Float)cursor.getFloat(cursor.getColumnIndex("rating"));
+  cache.votes=(Integer)cursor.getInt(cursor.getColumnIndex("votes"));
+  cache.myVote=(Float)cursor.getFloat(cursor.getColumnIndex("myvote"));
+  cache.disabled=cursor.getLong(cursor.getColumnIndex("disabled")) == 1l;
+  cache.archived=cursor.getLong(cursor.getColumnIndex("archived")) == 1l;
+  cache.members=cursor.getLong(cursor.getColumnIndex("members")) == 1l;
+  cache.found=cursor.getLong(cursor.getColumnIndex("found")) == 1l;
+  cache.favourite=cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
+  cache.inventoryItems=(Integer)cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
+  cache.onWatchlist=cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
+  cache.reliableLatLon=cursor.getInt(cursor.getColumnIndex("reliable_latlon")) > 0;
+  return cache;
+}

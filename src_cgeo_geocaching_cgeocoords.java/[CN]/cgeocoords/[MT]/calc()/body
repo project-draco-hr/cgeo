@@ -1,6 +1,17 @@
 {
   if (currentFormat == coordInputFormatEnum.Plain) {
-    return;
+    try {
+      gp=new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
+    }
+ catch (    ParseException e) {
+      context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+      return false;
+    }
+catch (    MalformedCoordinateException e) {
+      context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+      return false;
+    }
+    return true;
   }
   int latDeg=0, latMin=0, latSec=0;
   int lonDeg=0, lonMin=0, lonSec=0;
@@ -22,6 +33,8 @@
   }
  catch (  NumberFormatException e) {
   }
+  double latitude=0.0;
+  double longitude=0.0;
 switch (currentFormat) {
 case Deg:
     latitude=latDeg + latDegFrac;
@@ -38,4 +51,12 @@ break;
 }
 latitude*=(bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
 longitude*=(bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
+try {
+gp=new Geopoint(latitude,longitude);
+}
+ catch (MalformedCoordinateException e) {
+context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+return false;
+}
+return true;
 }

@@ -1,4 +1,14 @@
 {
-  setLatitude(lat);
-  setLongitude(lon);
+  if (lat <= 90 && lat >= -90) {
+    latitude=lat;
+  }
+ else {
+    throw new MalformedCoordinateException("malformed latitude: " + lat);
+  }
+  if (lon <= 180 && lon >= -180) {
+    longitude=lon;
+  }
+ else {
+    throw new MalformedCoordinateException("malformed longitude: " + lon);
+  }
 }

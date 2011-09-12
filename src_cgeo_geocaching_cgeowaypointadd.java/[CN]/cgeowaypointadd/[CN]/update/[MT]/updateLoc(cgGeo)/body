@@ -1,12 +1,12 @@
 {
-  if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+  if (geo == null || geo.coordsNow == null) {
     return;
   }
   try {
     Button bLat=(Button)findViewById(R.id.buttonLatitude);
     Button bLon=(Button)findViewById(R.id.buttonLongitude);
-    bLat.setHint(cgBase.formatLatitude(geo.latitudeNow,false));
-    bLon.setHint(cgBase.formatLongitude(geo.longitudeNow,false));
+    bLat.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(),false));
+    bLon.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(),false));
   }
  catch (  Exception e) {
     Log.w(cgSettings.tag,"Failed to update location.");

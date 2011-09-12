@@ -1,10 +1,10 @@
 {
-  if (cache == null || cache.latitude == null || cache.longitude == null) {
+  if (cache == null || cache.coords == null) {
     return;
   }
   BitmapDrawable image=null;
   try {
-    final String latlonMap=String.format((Locale)null,"%.6f",cache.latitude) + "," + String.format((Locale)null,"%.6f",cache.longitude);
+    final String latlonMap=String.format((Locale)null,"%.6f",cache.coords.getLatitude()) + "," + String.format((Locale)null,"%.6f",cache.coords.getLongitude());
     final Display display=((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
     int width=display.getWidth();
     int height=(int)(90 * pixelRatio);

@@ -6,16 +6,7 @@
   if (searches.containsKey(searchId) == false) {
     searches.put(searchId,search);
   }
-  String geocode=cache.geocode.toUpperCase();
-  String guid=cache.guid.toLowerCase();
-  boolean status=false;
-  if (storage.isThere(geocode,guid,false,false) == false || cache.reason >= 1) {
-    status=storage.saveCache(cache);
-  }
- else {
-    cgCache mergedCache=cache.merge(storage);
-    status=storage.saveCache(mergedCache);
-  }
+  final boolean status=storeWithMerge(cache,cache.reason >= 1);
   if (status) {
     search.addGeocode(cache.geocode);
   }

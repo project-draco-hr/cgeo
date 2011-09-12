@@ -1,0 +1,12 @@
+{
+  super(contextIn);
+  context=contextIn;
+  settings=settingsIn;
+  geo=geoIn;
+  if (gpIn != null) {
+    gp=gpIn;
+  }
+ else   if (geo != null && geo.coordsNow != null) {
+    gp=geo.coordsNow;
+  }
+}

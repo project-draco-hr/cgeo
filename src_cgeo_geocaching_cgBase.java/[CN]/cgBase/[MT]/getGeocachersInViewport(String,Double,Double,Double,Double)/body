@@ -38,11 +38,10 @@
             user.located=new Date();
           }
           user.username=oneUser.getString("user");
-          user.latitude=oneUser.getDouble("latitude");
-          user.longitude=oneUser.getDouble("longitude");
+          user.coords=new Geopoint(oneUser.getDouble("latitude"),oneUser.getDouble("longitude"));
           user.action=oneUser.getString("action");
           user.client=oneUser.getString("client");
-          if (user.latitude != null && user.longitude != null) {
+          if (user.coords != null) {
             users.add(user);
           }
         }

@@ -1,0 +1,15 @@
+{
+  if (coords == null) {
+    return;
+  }
+  if (mapView == null) {
+    return;
+  }
+  if (!alreadyCentered) {
+    alreadyCentered=true;
+    mapController.setCenter(makeGeoPoint(coords));
+  }
+ else {
+    mapController.animateTo(makeGeoPoint(coords));
+  }
+}

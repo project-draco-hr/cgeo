@@ -8,8 +8,7 @@
       cgDestination dest=new cgDestination();
       dest.setId((long)cursor.getLong(cursor.getColumnIndex("_id")));
       dest.setDate((long)cursor.getLong(cursor.getColumnIndex("date")));
-      dest.setLatitude((double)cursor.getDouble(cursor.getColumnIndex("latitude")));
-      dest.setLongitude((double)cursor.getDouble(cursor.getColumnIndex("longitude")));
+      dest.setCoords(new Geopoint((double)cursor.getDouble(cursor.getColumnIndex("latitude")),(double)cursor.getDouble(cursor.getColumnIndex("longitude"))));
       destinations.add(dest);
     }
  while (cursor.moveToNext());

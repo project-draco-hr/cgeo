@@ -1,8 +1,8 @@
 {
-  if (waypoint == null)   return null;
+  if (waypoint == null || waypoint.coords == null)   return null;
   Location loc=new Location(cgSettings.tag);
-  loc.setLatitude(waypoint.latitude);
-  loc.setLongitude(waypoint.longitude);
+  loc.setLatitude(waypoint.coords.getLatitude());
+  loc.setLongitude(waypoint.coords.getLongitude());
   Point p=new Point(waypoint.name,loc);
   p.setDescription("<a href=\"http://coord.info/" + waypoint.geocode + "\">"+ waypoint.geocode+ "</a>");
   return p;
