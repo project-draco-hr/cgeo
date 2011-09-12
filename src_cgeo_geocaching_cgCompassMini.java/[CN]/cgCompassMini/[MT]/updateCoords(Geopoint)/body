@@ -2,6 +2,6 @@
   if (coordsIn == null || cacheCoords == null) {
     return;
   }
-  heading=cgBase.getHeading(coordsIn,cacheCoords);
+  heading=coordsIn.bearingTo(cacheCoords);
   updateDirection();
 }

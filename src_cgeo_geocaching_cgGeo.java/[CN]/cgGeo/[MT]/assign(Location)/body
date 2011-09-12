@@ -23,10 +23,10 @@
     altitudeNow=null;
   }
   if (location.hasBearing() && gps != -1) {
-    bearingNow=Double.valueOf(location.getBearing());
+    bearingNow=location.getBearing();
   }
  else {
-    bearingNow=Double.valueOf(0);
+    bearingNow=0f;
   }
   if (location.hasSpeed() && gps != -1) {
     speedNow=location.getSpeed();
