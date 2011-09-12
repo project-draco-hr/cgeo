@@ -37,17 +37,9 @@
   values.put("location",cache.location);
   values.put("distance",cache.distance);
   values.put("direction",cache.direction);
-  final boolean rel=cache.reliableLatLon;
-  if (cache.reliableLatLon) {
-    values.put("latitude",cache.coords.getLatitude());
-    values.put("longitude",cache.coords.getLongitude());
-    values.put("reliable_latlon",1);
-  }
- else   if (!rel) {
-    values.put("latitude",cache.coords.getLatitude());
-    values.put("longitude",cache.coords.getLongitude());
-    values.put("reliable_latlon",0);
-  }
+  values.put("latitude",cache.coords.getLatitude());
+  values.put("longitude",cache.coords.getLongitude());
+  values.put("reliable_latlon",cache.reliableLatLon ? 1 : 0);
   values.put("elevation",cache.elevation);
   values.put("shortdesc",cache.shortdesc);
   values.put("personal_note",cache.personalNote);
