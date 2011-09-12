@@ -2,7 +2,7 @@
   if (g4cRunning) {
     return;
   }
-  if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || cgBase.getDistance(coordsNow,lastGo4cacheCoords) > 0.75)) {
+  if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
     g4cRunning=true;
     final String host="api.go4cache.com";
     final String path="/";

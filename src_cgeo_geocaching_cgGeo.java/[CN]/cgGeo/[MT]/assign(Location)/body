@@ -42,8 +42,8 @@
   }
   if (gps == 1) {
     if (coordsBefore != null && coordsNow != null) {
-      final double dst=cgBase.getDistance(coordsBefore,coordsNow);
-      if (Double.isNaN(dst) == false && dst > 0.005) {
+      final float dst=coordsBefore.distanceTo(coordsNow);
+      if (dst > 0.005) {
         distanceNow+=dst;
         coordsBefore=coordsNow;
       }

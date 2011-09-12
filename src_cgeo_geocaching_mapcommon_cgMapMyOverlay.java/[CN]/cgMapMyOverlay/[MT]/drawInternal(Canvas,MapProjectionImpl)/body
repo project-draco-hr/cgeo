@@ -37,7 +37,7 @@
   accuracyCircle.setColor(0x08000000);
   accuracyCircle.setStyle(Style.FILL);
   canvas.drawCircle(center.x,center.y,radius,accuracyCircle);
-  if (coordinates.getAccuracy() < 50f && ((historyRecent != null && cgBase.getDistance(new Geopoint(historyRecent),new Geopoint(coordinates)) > 0.005) || historyRecent == null)) {
+  if (coordinates.getAccuracy() < 50f && ((historyRecent != null && historyRecent.distanceTo(coordinates) > 5.0) || historyRecent == null)) {
     if (historyRecent != null)     history.add(historyRecent);
     historyRecent=coordinates;
     int toRemove=history.size() - 700;
