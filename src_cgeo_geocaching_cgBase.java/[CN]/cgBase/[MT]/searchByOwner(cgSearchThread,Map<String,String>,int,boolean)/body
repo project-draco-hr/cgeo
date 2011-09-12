@@ -27,7 +27,7 @@
     return null;
   }
   final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
-  if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+  if (caches == null || caches.cacheList == null) {
     Log.e(cgSettings.tag,"cgeoBase.searchByOwner: No cache parsed");
   }
   if (app == null) {

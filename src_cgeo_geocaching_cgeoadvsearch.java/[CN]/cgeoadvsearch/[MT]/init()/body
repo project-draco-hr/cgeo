@@ -31,7 +31,12 @@
   findByUserName.setOnClickListener(new findByUsernameListener());
   ((EditText)findViewById(R.id.owner)).setOnEditorActionListener(new findByOwnerAction());
   final Button findByOwner=(Button)findViewById(R.id.search_owner);
-  findByOwner.setOnClickListener(new findByOwnerListener());
+  findByOwner.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View arg0){
+      findByOwnerFn();
+    }
+  }
+);
   EditText trackable=(EditText)findViewById(R.id.trackable);
   trackable.setOnEditorActionListener(new findTrackableAction());
   final Button displayTrackable=(Button)findViewById(R.id.display_trackable);
