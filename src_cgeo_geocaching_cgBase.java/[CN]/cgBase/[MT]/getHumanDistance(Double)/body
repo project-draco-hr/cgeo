@@ -3,7 +3,7 @@
     return "?";
   }
   if (settings.units == cgSettings.unitsImperial) {
-    distance*=kmInMiles;
+    distance/=miles2km;
     if (distance > 100) {
       return String.format(Locale.getDefault(),"%.0f",Double.valueOf(Math.round(distance))) + " mi";
     }
