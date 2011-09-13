@@ -1,5 +1,7 @@
 {
-  if (forceSave)   return storage.saveCache(cache);
+  if (forceSave) {
+    return storage.saveCache(cache);
+  }
   final cgCache oldCache=storage.loadCache(cache.geocode,cache.guid,true,true,true,true,true,true);
   return storage.saveCache(cache.merge(storage,oldCache));
 }
