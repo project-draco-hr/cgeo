@@ -94,4 +94,9 @@
   myLocSwitch.setOnClickListener(new MyLocationListener());
   switchMyLocationButton();
   startTimer();
+  if (settings.cacheType != null) {
+    String cacheType=cgBase.cacheTypesInv.get(settings.cacheType);
+    ((TextView)activity.findViewById(R.id.filter_text)).setText(cacheType);
+    activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+  }
 }
