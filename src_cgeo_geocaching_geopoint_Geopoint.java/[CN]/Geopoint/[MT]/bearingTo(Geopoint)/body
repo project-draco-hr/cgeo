@@ -1,3 +1,4 @@
 {
-  return pathTo(gp)[1];
+  final float bearing=pathTo(gp)[1];
+  return bearing < 0 ? bearing + 360 : bearing;
 }
