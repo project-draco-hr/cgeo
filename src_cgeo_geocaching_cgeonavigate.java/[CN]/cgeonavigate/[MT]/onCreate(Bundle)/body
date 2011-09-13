@@ -14,8 +14,7 @@
   if (extras != null) {
     title=extras.getString("geocode");
     name=extras.getString("name");
-    dstLatitude=extras.getDouble("latitude");
-    dstLongitude=extras.getDouble("longitude");
+    dstCoords=new Geopoint(extras.getDouble("latitude"),extras.getDouble("longitude"));
     if (StringUtils.isNotBlank(name)) {
       if (StringUtils.isNotBlank(title)) {
         title=title + ": " + name;

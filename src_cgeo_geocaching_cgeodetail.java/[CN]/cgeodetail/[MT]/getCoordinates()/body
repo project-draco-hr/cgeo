@@ -10,8 +10,7 @@
  else {
       coords.name=geocode.toUpperCase();
     }
-    coords.latitude=cache.latitude;
-    coords.longitude=cache.longitude;
+    coords.coords=cache.coords;
     coordinates.add(coords);
   }
  catch (  Exception e) {
@@ -19,14 +18,13 @@
   }
   try {
     for (    cgWaypoint waypoint : cache.waypoints) {
-      if (waypoint.latitude == null || waypoint.longitude == null) {
+      if (waypoint.coords == null) {
         continue;
       }
       coords=new cgCoord();
       coords.type="waypoint";
       coords.name=waypoint.name;
-      coords.latitude=waypoint.latitude;
-      coords.longitude=waypoint.longitude;
+      coords.coords=waypoint.coords;
       coordinates.add(coords);
     }
   }

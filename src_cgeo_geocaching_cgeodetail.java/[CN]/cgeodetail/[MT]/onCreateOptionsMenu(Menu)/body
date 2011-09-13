@@ -1,5 +1,5 @@
 {
-  if (cache != null && cache.latitude != null && cache.longitude != null) {
+  if (cache != null && cache.coords != null) {
     menu.add(0,2,0,res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass);
     SubMenu subMenu=menu.addSubMenu(1,0,0,res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
     addNavigationMenuItems(subMenu);
@@ -11,7 +11,7 @@
   if (cache != null && CollectionUtils.isNotEmpty(cache.spoilers)) {
     menu.add(1,5,0,res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery);
   }
-  if (cache != null && cache.latitude != null && cache.longitude != null) {
+  if (cache != null && cache.coords != null) {
     menu.add(0,10,0,res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate);
   }
   if (cache != null && cache.canOpenInBrowser()) {

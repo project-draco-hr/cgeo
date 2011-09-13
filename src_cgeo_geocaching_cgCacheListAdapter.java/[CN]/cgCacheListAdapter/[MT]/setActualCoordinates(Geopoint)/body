@@ -1,0 +1,32 @@
+{
+  if (coordsIn == null) {
+    return;
+  }
+  coords=coordsIn;
+  if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
+    try {
+      if (statComparator != null) {
+        Collections.sort((List<cgCache>)list,statComparator);
+      }
+ else {
+        final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
+        Collections.sort((List<cgCache>)list,dstComparator);
+      }
+      notifyDataSetChanged();
+    }
+ catch (    Exception e) {
+      Log.w(cgSettings.tag,"cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+    }
+    lastSort=System.currentTimeMillis();
+  }
+  if (CollectionUtils.isNotEmpty(distances)) {
+    for (    cgDistanceView distance : distances) {
+      distance.update(coordsIn);
+    }
+  }
+  if (CollectionUtils.isNotEmpty(compasses)) {
+    for (    cgCompassMini compass : compasses) {
+      compass.updateCoords(coordsIn);
+    }
+  }
+}

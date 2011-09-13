@@ -120,7 +120,13 @@
   try {
     final Matcher matcherDistance=PATTERN_TRACKABLE_Distance.matcher(page);
     if (matcherDistance.find() && matcherDistance.groupCount() > 0) {
-      trackable.distance=parseDistance(matcherDistance.group(1));
+      try {
+        trackable.distance=DistanceParser.parseDistance(matcherDistance.group(1),settings.units);
+      }
+ catch (      NumberFormatException e) {
+        trackable.distance=null;
+        throw e;
+      }
     }
   }
  catch (  Exception e) {

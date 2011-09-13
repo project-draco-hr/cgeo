@@ -10,10 +10,7 @@
     @Override public void onItemClick(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
       Object selection=arg0.getItemAtPosition(arg2);
       if (selection instanceof cgDestination) {
-        List<Double> coords=new ArrayList<Double>(2);
-        coords.add(((cgDestination)selection).getLatitude());
-        coords.add(((cgDestination)selection).getLongitude());
-        navigateTo(coords);
+        navigateTo(((cgDestination)selection).getCoords());
       }
     }
   }

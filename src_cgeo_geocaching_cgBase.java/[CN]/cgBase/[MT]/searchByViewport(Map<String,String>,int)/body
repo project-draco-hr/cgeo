@@ -11,7 +11,6 @@
  else {
     usertoken="";
   }
-  cgCacheWrap caches=new cgCacheWrap();
   String page=null;
   if (StringUtils.isBlank(latMin) || StringUtils.isBlank(latMax) || StringUtils.isBlank(lonMin)|| StringUtils.isBlank(lonMax)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: Not enough parameters to recognize viewport");
@@ -26,7 +25,7 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No data from server");
     return null;
   }
-  caches=parseMapJSON(url,page);
+  final cgCacheWrap caches=parseMapJSON(url,page);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No cache parsed");
   }

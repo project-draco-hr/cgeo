@@ -1,0 +1,17 @@
+{
+  Geopoint gp=null;
+  if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
+    gp=new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
+  }
+  cgeocoords coordsDialog=new cgeocoords(cgeopoint.this,settings,gp,geo);
+  coordsDialog.setCancelable(true);
+  coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
+    @Override public void update(    Geopoint gp){
+      latButton.setText(cgBase.formatLatitude(gp.getLatitude(),true));
+      lonButton.setText(cgBase.formatLongitude(gp.getLongitude(),true));
+      changed=true;
+    }
+  }
+);
+  coordsDialog.show();
+}

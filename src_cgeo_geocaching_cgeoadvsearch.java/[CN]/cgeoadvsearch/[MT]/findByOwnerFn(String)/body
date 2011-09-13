@@ -1,0 +1,12 @@
+{
+  final String usernameText=StringUtils.trimToEmpty(userName);
+  if (StringUtils.isBlank(usernameText)) {
+    helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_user));
+    return;
+  }
+  final Intent cachesIntent=new Intent(this,cgeocaches.class);
+  cachesIntent.putExtra("type","owner");
+  cachesIntent.putExtra("username",usernameText);
+  cachesIntent.putExtra("cachetype",settings.cacheType);
+  startActivity(cachesIntent);
+}

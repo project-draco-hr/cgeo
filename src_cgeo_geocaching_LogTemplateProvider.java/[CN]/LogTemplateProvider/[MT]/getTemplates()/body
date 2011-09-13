@@ -1,28 +1,31 @@
 {
   if (templates == null) {
     templates=new LogTemplate[]{new LogTemplate("DATE",R.string.init_signature_template_date){
-      @Override String getValue(      final cgBase base){
+      @Override String getValue(      final cgBase base,      final boolean offline){
         return base.formatFullDate(System.currentTimeMillis());
       }
     }
 ,new LogTemplate("TIME",R.string.init_signature_template_time){
-      @Override String getValue(      final cgBase base){
+      @Override String getValue(      final cgBase base,      final boolean offline){
         return base.formatTime(System.currentTimeMillis());
       }
     }
 ,new LogTemplate("DATETIME",R.string.init_signature_template_datetime){
-      @Override String getValue(      final cgBase base){
+      @Override String getValue(      final cgBase base,      final boolean offline){
         final long currentTime=System.currentTimeMillis();
         return base.formatFullDate(currentTime) + " " + base.formatTime(currentTime);
       }
     }
 ,new LogTemplate("USER",R.string.init_signature_template_user){
-      @Override String getValue(      final cgBase base){
+      @Override String getValue(      final cgBase base,      final boolean offline){
         return base.getUserName();
       }
     }
 ,new LogTemplate("NUMBER",R.string.init_signature_template_number){
-      @Override String getValue(      final cgBase base){
+      @Override String getValue(      final cgBase base,      final boolean offline){
+        if (offline) {
+          return "";
+        }
         String findCount="";
         final Map<String,String> params=new HashMap<String,String>();
         final String page=base.request(false,"www.geocaching.com","/email/","GET",params,false,false,false).getData();

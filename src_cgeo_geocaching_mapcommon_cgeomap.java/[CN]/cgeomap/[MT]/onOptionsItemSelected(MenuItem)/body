@@ -35,8 +35,8 @@
           final int mapSpanLat=mapView.getLatitudeSpan();
           final int mapSpanLon=mapView.getLongitudeSpan();
           for (          cgCache oneCache : cachesProtected) {
-            if (oneCache != null && oneCache.latitude != null && oneCache.longitude != null) {
-              if (cgBase.isCacheInViewPort(mapCenterLat,mapCenterLon,mapSpanLat,mapSpanLon,oneCache.latitude,oneCache.longitude) && app.isOffline(oneCache.geocode,null) == false) {
+            if (oneCache != null && oneCache.coords != null) {
+              if (cgBase.isCacheInViewPort(mapCenterLat,mapCenterLon,mapSpanLat,mapSpanLon,oneCache.coords) && app.isOffline(oneCache.geocode,null) == false) {
                 geocodes.add(oneCache.geocode);
               }
             }
@@ -108,8 +108,10 @@
       mapIntent.putExtra("detail",fromDetailIntent);
       mapIntent.putExtra("searchid",searchIdIntent);
       mapIntent.putExtra("geocode",geocodeIntent);
-      mapIntent.putExtra("latitude",latitudeIntent);
-      mapIntent.putExtra("longitude",longitudeIntent);
+      if (coordsIntent != null) {
+        mapIntent.putExtra("latitude",coordsIntent.getLatitude());
+        mapIntent.putExtra("longitude",coordsIntent.getLongitude());
+      }
       mapIntent.putExtra("wpttype",waypointTypeIntent);
       int[] mapState=new int[4];
       GeoPointImpl mapCenter=mapView.getMapViewCenter();

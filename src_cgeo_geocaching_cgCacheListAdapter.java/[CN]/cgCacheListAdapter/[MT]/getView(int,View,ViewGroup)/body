@@ -85,19 +85,22 @@
   if (distances.contains(holder.distance) == false) {
     distances.add(holder.distance);
   }
-  holder.distance.setContent(base,cache.latitude,cache.longitude);
+  holder.distance.setContent(base,cache.coords);
   if (compasses.contains(holder.direction) == false) {
     compasses.add(holder.direction);
   }
-  holder.direction.setContent(cache.latitude,cache.longitude);
+  holder.direction.setContent(cache.coords);
   if (cache.found && cache.logOffline) {
     holder.logStatusMark.setImageResource(R.drawable.mark_green_red);
+    holder.logStatusMark.setVisibility(View.VISIBLE);
   }
  else   if (cache.found) {
     holder.logStatusMark.setImageResource(R.drawable.mark_green);
+    holder.logStatusMark.setVisibility(View.VISIBLE);
   }
  else   if (cache.logOffline) {
     holder.logStatusMark.setImageResource(R.drawable.mark_red);
+    holder.logStatusMark.setVisibility(View.VISIBLE);
   }
  else {
     holder.logStatusMark.setVisibility(View.GONE);
@@ -129,12 +132,12 @@
     holder.inventory.setVisibility(View.GONE);
   }
   boolean setDiDi=false;
-  if (cache.latitude != null && cache.longitude != null) {
+  if (cache.coords != null) {
     holder.direction.setVisibility(View.VISIBLE);
     holder.direction.updateAzimuth(azimuth);
-    if (latitude != null && longitude != null) {
-      holder.distance.update(latitude,longitude);
-      holder.direction.updateCoords(latitude,longitude);
+    if (coords != null) {
+      holder.distance.update(coords);
+      holder.direction.updateCoords(coords);
     }
     setDiDi=true;
   }

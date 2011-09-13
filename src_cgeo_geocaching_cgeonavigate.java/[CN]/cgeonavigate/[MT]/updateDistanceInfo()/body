@@ -1,5 +1,5 @@
 {
-  if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null || dstLatitude == null || dstLongitude == null) {
+  if (geo == null || geo.coordsNow == null || dstCoords == null) {
     return;
   }
   if (distanceView == null) {
@@ -8,7 +8,7 @@
   if (headingView == null) {
     headingView=(TextView)findViewById(R.id.heading);
   }
-  cacheHeading=cgBase.getHeading(geo.latitudeNow,geo.longitudeNow,dstLatitude,dstLongitude);
-  distanceView.setText(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow,geo.longitudeNow,dstLatitude,dstLongitude)));
+  cacheHeading=geo.coordsNow.bearingTo(dstCoords);
+  distanceView.setText(base.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
   headingView.setText(String.format(Locale.getDefault(),"%.0f",cacheHeading) + "??");
 }

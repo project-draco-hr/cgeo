@@ -2,7 +2,7 @@
   double kph=speed * 3.6;
   String unit="km/h";
   if (this.settings.units == cgSettings.unitsImperial) {
-    kph*=kmInMiles;
+    kph/=miles2km;
     unit="mph";
   }
   if (kph < 10.0) {

@@ -1,0 +1,11 @@
+{
+  if (directionNow == null) {
+    return;
+  }
+  azimuth=directionNow;
+  if (CollectionUtils.isNotEmpty(compasses)) {
+    for (    cgCompassMini compass : compasses) {
+      compass.updateAzimuth(azimuth);
+    }
+  }
+}

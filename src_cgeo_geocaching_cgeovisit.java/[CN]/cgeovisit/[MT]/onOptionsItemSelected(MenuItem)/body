@@ -6,7 +6,7 @@
     if (StringUtils.isNotBlank(content)) {
       insertIntoLog("\n");
     }
-    insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(),base));
+    insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(),base,false));
     return true;
   }
  else   if (id >= 10 && id <= 19) {
@@ -24,7 +24,7 @@
   }
   LogTemplate template=LogTemplateProvider.getTemplate(id);
   if (template != null) {
-    String newText=template.getValue(base);
+    String newText=template.getValue(base,false);
     insertIntoLog(newText);
     return true;
   }

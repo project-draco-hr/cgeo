@@ -6,8 +6,8 @@
     return;
   }
   try {
-    if (cacheList != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-      adapter.setActualCoordinates(geo.latitudeNow,geo.longitudeNow);
+    if (cacheList != null && geo.coordsNow != null) {
+      adapter.setActualCoordinates(geo.coordsNow);
     }
     if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) {
       if (settings.useCompass == 0) {
@@ -15,7 +15,7 @@
           adapter.setActualHeading(geo.bearingNow);
         }
  else {
-          adapter.setActualHeading(Double.valueOf(0));
+          adapter.setActualHeading(0f);
         }
       }
       if (northHeading != null) {

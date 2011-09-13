@@ -1,7 +1,7 @@
 {
-  if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
+  if (waypoint == null || waypoint.coords == null) {
     showToast(res.getString(R.string.err_location_unknown));
   }
-  cgeocaches.startActivityCachesAround(this,waypoint.latitude,waypoint.longitude);
+  cgeocaches.startActivityCachesAround(this,waypoint.coords);
   finish();
 }

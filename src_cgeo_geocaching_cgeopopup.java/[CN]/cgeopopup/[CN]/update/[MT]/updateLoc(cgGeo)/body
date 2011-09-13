@@ -3,8 +3,8 @@
     return;
   }
   try {
-    if (geo.latitudeNow != null && geo.longitudeNow != null && cache != null && cache.latitude != null && cache.longitude != null) {
-      cacheDistance.setText(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow,geo.longitudeNow,cache.latitude,cache.longitude)));
+    if (geo.coordsNow != null && cache != null && cache.coords != null) {
+      cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
       cacheDistance.bringToFront();
     }
   }

@@ -3,11 +3,12 @@
   final GeoPointImpl center=mapView.getMapViewCenter();
   pixels=mapView.getWidth() / 2.0;
   bottom=mapView.getHeight() - 14;
-  distance=cgBase.getDistance((center.getLatitudeE6() / 1e6),((center.getLongitudeE6() / 1e6) - (span / 2)),(center.getLatitudeE6() / 1e6),((center.getLongitudeE6() / 1e6) + (span / 2)));
-  distance=distance / 2;
+  final Geopoint leftCoords=new Geopoint(center.getLatitudeE6() / 1e6,center.getLongitudeE6() / 1e6 - span / 2);
+  final Geopoint rightCoords=new Geopoint(center.getLatitudeE6() / 1e6,center.getLongitudeE6() / 1e6 + span / 2);
+  distance=leftCoords.distanceTo(rightCoords) / 2;
   distanceRound=0d;
   if (settings.units == cgSettings.unitsImperial) {
-    distance*=cgBase.kmInMiles;
+    distance/=cgBase.miles2km;
     if (distance > 100) {
       distanceRound=Math.floor(distance / 100) * 100;
       units="mi";

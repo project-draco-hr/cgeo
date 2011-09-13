@@ -10,7 +10,7 @@
     if (overlayMyLoc != null && geo.location != null) {
       overlayMyLoc.setCoordinates(geo.location);
     }
-    if (geo.latitudeNow != null && geo.longitudeNow != null) {
+    if (geo.coordsNow != null) {
       if (followMyLocation) {
         myLocationInMiddle();
       }
@@ -23,11 +23,11 @@
         overlayMyLoc.setHeading(geo.bearingNow);
       }
  else {
-        overlayMyLoc.setHeading(Double.valueOf(0));
+        overlayMyLoc.setHeading(0f);
       }
       repaintRequired=true;
     }
-    if (repaintRequired) {
+    if (repaintRequired && mapView != null) {
       mapView.repaintRequired(overlayMyLoc);
     }
   }

@@ -1,0 +1,117 @@
+{
+  if (other == null) {
+    return;
+  }
+  updated=System.currentTimeMillis();
+  if (detailed == false && other.detailed) {
+    detailed=true;
+    detailedUpdate=updated;
+  }
+  if (visitedDate == null || visitedDate == 0) {
+    visitedDate=other.visitedDate;
+  }
+  if (reason == null || reason == 0) {
+    reason=other.reason;
+  }
+  if (StringUtils.isBlank(geocode)) {
+    geocode=other.geocode;
+  }
+  if (StringUtils.isBlank(cacheId)) {
+    cacheId=other.cacheId;
+  }
+  if (StringUtils.isBlank(guid)) {
+    guid=other.guid;
+  }
+  if (StringUtils.isBlank(type)) {
+    type=other.type;
+  }
+  if (StringUtils.isBlank(name)) {
+    name=other.name;
+  }
+  if (StringUtils.isBlank(nameSp)) {
+    nameSp=other.nameSp;
+  }
+  if (StringUtils.isBlank(owner)) {
+    owner=other.owner;
+  }
+  if (StringUtils.isBlank(ownerReal)) {
+    ownerReal=other.ownerReal;
+  }
+  if (hidden == null) {
+    hidden=other.hidden;
+  }
+  if (StringUtils.isBlank(hint)) {
+    hint=other.hint;
+  }
+  if (StringUtils.isBlank(size)) {
+    size=other.size;
+  }
+  if (difficulty == null || difficulty == 0) {
+    difficulty=other.difficulty;
+  }
+  if (terrain == null || terrain == 0) {
+    terrain=other.terrain;
+  }
+  if (direction == null) {
+    direction=other.direction;
+  }
+  if (distance == null) {
+    distance=other.distance;
+  }
+  if (StringUtils.isBlank(latlon)) {
+    latlon=other.latlon;
+  }
+  if (StringUtils.isBlank(latitudeString)) {
+    latitudeString=other.latitudeString;
+  }
+  if (StringUtils.isBlank(longitudeString)) {
+    longitudeString=other.longitudeString;
+  }
+  if (StringUtils.isBlank(location)) {
+    location=other.location;
+  }
+  if (coords == null) {
+    coords=other.coords;
+  }
+  if (elevation == null) {
+    elevation=other.elevation;
+  }
+  if (StringUtils.isNotBlank(personalNote)) {
+    personalNote=other.personalNote;
+  }
+  if (StringUtils.isBlank(shortdesc)) {
+    shortdesc=other.shortdesc;
+  }
+  if (StringUtils.isBlank(description)) {
+    description=other.description;
+  }
+  if (favouriteCnt == null) {
+    favouriteCnt=other.favouriteCnt;
+  }
+  if (rating == null) {
+    rating=other.rating;
+  }
+  if (votes == null) {
+    votes=other.votes;
+  }
+  if (myVote == null) {
+    myVote=other.myVote;
+  }
+  if (attributes == null) {
+    attributes=other.attributes;
+  }
+  if (waypoints == null) {
+    waypoints=other.waypoints;
+  }
+  cgWaypoint.mergeWayPoints(waypoints,other.waypoints);
+  if (spoilers == null) {
+    spoilers=other.spoilers;
+  }
+  if (inventory == null) {
+    inventory=other.inventory;
+    inventoryItems=other.inventoryItems;
+  }
+  if (logs == null || logs.isEmpty()) {
+    logs=other.logs;
+  }
+}

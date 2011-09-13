@@ -1,0 +1,7 @@
+{
+  if (item.getItemId() == MENU_SEARCH_OWN_CACHES) {
+    findByOwnerFn(settings.getUsername());
+    return true;
+  }
+  return super.onOptionsItemSelected(item);
+}

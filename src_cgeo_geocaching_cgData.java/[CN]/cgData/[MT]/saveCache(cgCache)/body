@@ -14,7 +14,7 @@
   values.put("detailedupdate",cache.detailedUpdate);
   values.put("visiteddate",cache.visitedDate);
   values.put("geocode",cache.geocode);
-  values.put("cacheid",cache.cacheid);
+  values.put("cacheid",cache.cacheId);
   values.put("guid",cache.guid);
   values.put("type",cache.type);
   values.put("name",cache.name);
@@ -37,17 +37,9 @@
   values.put("location",cache.location);
   values.put("distance",cache.distance);
   values.put("direction",cache.direction);
-  final boolean rel=isReliableLatLon(cache.geocode,cache.guid);
-  if (cache.reliableLatLon) {
-    values.put("latitude",cache.latitude);
-    values.put("longitude",cache.longitude);
-    values.put("reliable_latlon",1);
-  }
- else   if (!rel) {
-    values.put("latitude",cache.latitude);
-    values.put("longitude",cache.longitude);
-    values.put("reliable_latlon",0);
-  }
+  values.put("latitude",cache.coords == null ? 0 : cache.coords.getLatitude());
+  values.put("longitude",cache.coords == null ? 0 : cache.coords.getLongitude());
+  values.put("reliable_latlon",cache.reliableLatLon ? 1 : 0);
   values.put("elevation",cache.elevation);
   values.put("shortdesc",cache.shortdesc);
   values.put("personal_note",cache.personalNote);

@@ -6,7 +6,7 @@
   final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString();
   final String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
   final String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
-  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText) && StringUtils.isNotBlank(latText)&& StringUtils.isNotBlank(lonText)) {
+  if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     helpDialog(res.getString(R.string.err_point_no_position_given_title),res.getString(R.string.err_point_no_position_given));
     return;
   }
@@ -25,12 +25,12 @@
     longitude=(Double)lonParsed.get("coordinate");
   }
  else {
-    if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+    if (geo == null || geo.coordsNow == null) {
       showToast(res.getString(R.string.err_point_curr_position_unavailable));
       return;
     }
-    latitude=geo.latitudeNow;
-    longitude=geo.longitudeNow;
+    latitude=geo.coordsNow.getLatitude();
+    longitude=geo.coordsNow.getLongitude();
   }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     Double bearing=null;
@@ -43,53 +43,19 @@
       helpDialog(res.getString(R.string.err_point_bear_and_dist_title),res.getString(R.string.err_point_bear_and_dist));
       return;
     }
-    Double distance=null;
-    final Pattern patternA=Pattern.compile("^([0-9\\.\\,]+)[ ]*m$",Pattern.CASE_INSENSITIVE);
-    final Pattern patternB=Pattern.compile("^([0-9\\.\\,]+)[ ]*km$",Pattern.CASE_INSENSITIVE);
-    final Pattern patternC=Pattern.compile("^([0-9\\.\\,]+)[ ]*ft$",Pattern.CASE_INSENSITIVE);
-    final Pattern patternD=Pattern.compile("^([0-9\\.\\,]+)[ ]*yd$",Pattern.CASE_INSENSITIVE);
-    final Pattern patternE=Pattern.compile("^([0-9\\.\\,]+)[ ]*mi$",Pattern.CASE_INSENSITIVE);
-    Matcher matcherA=patternA.matcher(distanceText);
-    Matcher matcherB=patternB.matcher(distanceText);
-    Matcher matcherC=patternC.matcher(distanceText);
-    Matcher matcherD=patternD.matcher(distanceText);
-    Matcher matcherE=patternE.matcher(distanceText);
-    if (matcherA.find() && matcherA.groupCount() > 0) {
-      distance=(new Double(matcherA.group(1))) * 0.001;
+    double distance;
+    try {
+      distance=DistanceParser.parseDistance(distanceText,settings.units);
     }
- else     if (matcherB.find() && matcherB.groupCount() > 0) {
-      distance=new Double(matcherB.group(1));
-    }
- else     if (matcherC.find() && matcherC.groupCount() > 0) {
-      distance=(new Double(matcherC.group(1))) * 0.0003048;
-    }
- else     if (matcherD.find() && matcherD.groupCount() > 0) {
-      distance=(new Double(matcherD.group(1))) * 0.0009144;
-    }
- else     if (matcherE.find() && matcherE.groupCount() > 0) {
-      distance=(new Double(matcherE.group(1))) * 1.609344;
-    }
- else {
-      try {
-        if (settings.units == cgSettings.unitsImperial) {
-          distance=(new Double(distanceText)) * 1.609344;
-        }
- else {
-          distance=(new Double(distanceText)) * 0.001;
-        }
-      }
- catch (      Exception e) {
-      }
-    }
-    if (distance == null) {
+ catch (    NumberFormatException e) {
       showToast(res.getString(R.string.err_parse_dist));
       return;
     }
     Double latParsed=null;
     Double lonParsed=null;
-    Map<String,Double> coordsDst=cgBase.getRadialDistance(latitude,longitude,bearing,distance);
-    latParsed=coordsDst.get("latitude");
-    lonParsed=coordsDst.get("longitude");
+    final Geopoint coordsDst=new Geopoint(latitude,longitude).project(bearing,distance);
+    latParsed=coordsDst.getLatitude();
+    lonParsed=coordsDst.getLongitude();
     if (latParsed == null || lonParsed == null) {
       showToast(res.getString(R.string.err_point_location_error));
       return;
@@ -116,8 +82,7 @@
   waypoint.prefix=prefix;
   waypoint.lookup=lookup;
   waypoint.name=name;
-  waypoint.latitude=coords.get(0);
-  waypoint.longitude=coords.get(1);
+  waypoint.coords=new Geopoint(coords.get(0),coords.get(1));
   waypoint.latitudeString=cgBase.formatLatitude(coords.get(0),true);
   waypoint.longitudeString=cgBase.formatLongitude(coords.get(1),true);
   waypoint.note=note;

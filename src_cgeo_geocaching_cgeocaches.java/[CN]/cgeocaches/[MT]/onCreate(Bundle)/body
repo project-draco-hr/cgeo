@@ -7,8 +7,7 @@
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     type=extras.getString(EXTRAS_LIST_TYPE);
-    latitude=extras.getDouble("latitude");
-    longitude=extras.getDouble("longitude");
+    coords=new Geopoint(extras.getDouble("latitude"),extras.getDouble("longitude"));
     cachetype=extras.getString("cachetype");
     keyword=extras.getString("keyword");
     address=extras.getString("address");
@@ -30,7 +29,7 @@
     setTitle(title);
     showProgress(true);
     setLoadingCaches();
-    threadPure=new geocachesLoadByOffline(loadCachesHandler,latitude,longitude,listId);
+    threadPure=new geocachesLoadByOffline(loadCachesHandler,coords,listId);
     threadPure.start();
   }
  else   if (type.equals("history")) {
@@ -50,17 +49,17 @@
     setTitle(title);
     showProgress(true);
     setLoadingCaches();
-    thread=new geocachesLoadByCoords(loadCachesHandler,latitude,longitude,cachetype);
+    thread=new geocachesLoadByCoords(loadCachesHandler,coords,cachetype);
     thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
     thread.start();
   }
  else   if (type.equals("coordinate")) {
     action="planning";
-    title=cgBase.formatCoords(latitude,longitude,true);
+    title=cgBase.formatCoords(coords,true);
     setTitle(title);
     showProgress(true);
     setLoadingCaches();
-    thread=new geocachesLoadByCoords(loadCachesHandler,latitude,longitude,cachetype);
+    thread=new geocachesLoadByCoords(loadCachesHandler,coords,cachetype);
     thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
     thread.start();
   }
@@ -82,12 +81,12 @@
       setLoadingCaches();
     }
  else {
-      title=cgBase.formatCoords(latitude,longitude,true);
+      title=cgBase.formatCoords(coords,true);
       setTitle(title);
       showProgress(true);
       setLoadingCaches();
     }
-    thread=new geocachesLoadByCoords(loadCachesHandler,latitude,longitude,cachetype);
+    thread=new geocachesLoadByCoords(loadCachesHandler,coords,cachetype);
     thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
     thread.start();
   }
