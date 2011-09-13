@@ -9,7 +9,7 @@
         Collections.sort((List<cgCache>)list,statComparator);
       }
  else {
-        dstComparator.setCoords(coordsIn);
+        final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
         Collections.sort((List<cgCache>)list,dstComparator);
       }
       notifyDataSetChanged();

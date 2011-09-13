@@ -13,7 +13,7 @@
       if (coordsIn == null) {
         return;
       }
-      dstComparator.setCoords(coordsIn);
+      final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
       Collections.sort((List<cgCache>)list,dstComparator);
     }
     notifyDataSetChanged();

@@ -1,8 +1,8 @@
 {
-  if (azimuthIn == null) {
+  if (directionNow == null) {
     return;
   }
-  azimuth=azimuthIn;
+  azimuth=directionNow;
   if (CollectionUtils.isNotEmpty(compasses)) {
     for (    cgCompassMini compass : compasses) {
       compass.updateAzimuth(azimuth);
