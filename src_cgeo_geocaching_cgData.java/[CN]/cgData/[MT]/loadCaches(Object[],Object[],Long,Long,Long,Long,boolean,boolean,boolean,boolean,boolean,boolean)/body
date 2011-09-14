@@ -85,32 +85,48 @@
           if (loadA) {
             List<String> attributes=loadAttributes(cache.geocode);
             if (attributes != null && attributes.isEmpty() == false) {
-              if (cache.attributes == null)               cache.attributes=new ArrayList<String>();
- else               cache.attributes.clear();
+              if (cache.attributes == null) {
+                cache.attributes=new ArrayList<String>();
+              }
+ else {
+                cache.attributes.clear();
+              }
               cache.attributes.addAll(attributes);
             }
           }
           if (loadW) {
             List<cgWaypoint> waypoints=loadWaypoints(cache.geocode);
             if (waypoints != null && waypoints.isEmpty() == false) {
-              if (cache.waypoints == null)               cache.waypoints=new ArrayList<cgWaypoint>();
- else               cache.waypoints.clear();
+              if (cache.waypoints == null) {
+                cache.waypoints=new ArrayList<cgWaypoint>();
+              }
+ else {
+                cache.waypoints.clear();
+              }
               cache.waypoints.addAll(waypoints);
             }
           }
           if (loadS) {
             List<cgImage> spoilers=loadSpoilers(cache.geocode);
             if (spoilers != null && spoilers.isEmpty() == false) {
-              if (cache.spoilers == null)               cache.spoilers=new ArrayList<cgImage>();
- else               cache.spoilers.clear();
+              if (cache.spoilers == null) {
+                cache.spoilers=new ArrayList<cgImage>();
+              }
+ else {
+                cache.spoilers.clear();
+              }
               cache.spoilers.addAll(spoilers);
             }
           }
           if (loadL) {
             List<cgLog> logs=loadLogs(cache.geocode);
             if (logs != null && logs.isEmpty() == false) {
-              if (cache.logs == null)               cache.logs=new ArrayList<cgLog>();
- else               cache.logs.clear();
+              if (cache.logs == null) {
+                cache.logs=new ArrayList<cgLog>();
+              }
+ else {
+                cache.logs.clear();
+              }
               cache.logs.addAll(logs);
             }
             Map<Integer,Integer> logCounts=loadLogCounts(cache.geocode);
@@ -122,8 +138,12 @@
           if (loadI) {
             List<cgTrackable> inventory=loadInventory(cache.geocode);
             if (inventory != null && inventory.isEmpty() == false) {
-              if (cache.inventory == null)               cache.inventory=new ArrayList<cgTrackable>();
- else               cache.inventory.clear();
+              if (cache.inventory == null) {
+                cache.inventory=new ArrayList<cgTrackable>();
+              }
+ else {
+                cache.inventory.clear();
+              }
               cache.inventory.addAll(inventory);
             }
           }

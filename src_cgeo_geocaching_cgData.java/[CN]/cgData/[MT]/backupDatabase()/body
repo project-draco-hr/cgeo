@@ -37,13 +37,19 @@
     }
   }
   try {
-    if (output != null)     output.close();
-    if (input != null)     input.close();
+    if (output != null) {
+      output.close();
+    }
+    if (input != null) {
+      input.close();
+    }
   }
  catch (  IOException e) {
     Log.e(cgSettings.tag,"Database wasn't backed up, could not close file: " + e.toString());
   }
-  if (backupDone)   Log.i(cgSettings.tag,"Database was copied to " + fileTarget);
+  if (backupDone) {
+    Log.i(cgSettings.tag,"Database was copied to " + fileTarget);
+  }
   init();
   return backupDone ? fileTarget : null;
 }

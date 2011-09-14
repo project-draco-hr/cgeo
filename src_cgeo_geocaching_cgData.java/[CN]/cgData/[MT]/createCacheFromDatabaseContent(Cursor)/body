@@ -37,14 +37,7 @@
   cache.latitudeString=(String)cursor.getString(cursor.getColumnIndex("latitude_string"));
   cache.longitudeString=(String)cursor.getString(cursor.getColumnIndex("longitude_string"));
   cache.location=(String)cursor.getString(cursor.getColumnIndex("location"));
-  final int indexLat=cursor.getColumnIndex("latitude");
-  final int indexLon=cursor.getColumnIndex("longitude");
-  if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
-    cache.coords=null;
-  }
- else {
-    cache.coords=new Geopoint(cursor.getDouble(indexLat),cursor.getDouble(indexLon));
-  }
+  cache.coords=getCoords(cursor);
   index=cursor.getColumnIndex("elevation");
   if (cursor.isNull(index)) {
     cache.elevation=null;
