@@ -1,0 +1,10 @@
+{
+  final int indexLat=cursor.getColumnIndex("latitude");
+  final int indexLon=cursor.getColumnIndex("longitude");
+  if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
+    return null;
+  }
+ else {
+    return new Geopoint(cursor.getDouble(indexLat),cursor.getDouble(indexLon));
+  }
+}
