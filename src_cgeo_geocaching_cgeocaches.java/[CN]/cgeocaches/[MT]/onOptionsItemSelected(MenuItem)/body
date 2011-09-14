@@ -77,11 +77,11 @@ selectedFilter=res.getString(R.string.caches_filter_size);
 openContextMenu(getListView());
 return false;
 case MENU_FILTER_TRACKABLES:
-adapter.setFilter(new cgFilterByTrackables());
+setFilter(new cgFilterByTrackables(res.getString(R.string.caches_filter_track)));
 return false;
 case MENU_FILTER_CLEAR:
 if (adapter != null) {
-adapter.setFilter(null);
+setFilter(null);
 }
 return false;
 case MENU_IMPORT_WEB:

@@ -1,0 +1,21 @@
+{
+  TextView filterTextView=(TextView)findViewById(R.id.filter_text);
+  View filterBar=findViewById(R.id.filter_bar);
+  String cacheType="", filter="";
+  if (settings.cacheType != null || adapter.isFilter()) {
+    if (settings.cacheType != null) {
+      cacheType=cgBase.cacheTypesInv.get(settings.cacheType);
+    }
+    if (adapter.isFilter()) {
+      filter=adapter.getFilterName();
+    }
+    if (settings.cacheType != null && adapter.isFilter()) {
+      filter=", " + filter;
+    }
+    filterTextView.setText(cacheType + filter);
+    filterBar.setVisibility(View.VISIBLE);
+  }
+ else {
+    filterBar.setVisibility(View.GONE);
+  }
+}
