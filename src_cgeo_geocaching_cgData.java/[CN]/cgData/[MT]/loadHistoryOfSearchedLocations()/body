@@ -4,11 +4,15 @@
   final List<cgDestination> destinations=new LinkedList<cgDestination>();
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
+    int indexId=cursor.getColumnIndex("_id");
+    int indexDate=cursor.getColumnIndex("date");
+    int indexLatitude=cursor.getColumnIndex("latitude");
+    int indexLongitude=cursor.getColumnIndex("longitude");
     do {
       cgDestination dest=new cgDestination();
-      dest.setId((long)cursor.getLong(cursor.getColumnIndex("_id")));
-      dest.setDate((long)cursor.getLong(cursor.getColumnIndex("date")));
-      dest.setCoords(new Geopoint((double)cursor.getDouble(cursor.getColumnIndex("latitude")),(double)cursor.getDouble(cursor.getColumnIndex("longitude"))));
+      dest.setId((long)cursor.getLong(indexId));
+      dest.setDate((long)cursor.getLong(indexDate));
+      dest.setCoords(new Geopoint((double)cursor.getDouble(indexLatitude),(double)cursor.getDouble(indexLongitude)));
       destinations.add(dest);
     }
  while (cursor.moveToNext());

@@ -1,0 +1,30 @@
+{
+  ArrayList<cgList> result=new ArrayList<cgList>();
+  try {
+    Cursor cursor=databaseRO.query(dbTableLists,new String[]{"_id","title","updated","latitude","longitude"},selection,null,null,null,sorting);
+    if (cursor != null) {
+      if (cursor.getCount() > 0) {
+        cursor.moveToFirst();
+        int indexId=cursor.getColumnIndex("_id");
+        int indexTitle=cursor.getColumnIndex("title");
+        int indexUpdated=cursor.getColumnIndex("updated");
+        int indexLatitude=cursor.getColumnIndex("latitude");
+        int indexLongitude=cursor.getColumnIndex("longitude");
+        do {
+          cgList list=new cgList(false);
+          list.id=((int)cursor.getInt(indexId)) + 10;
+          list.title=(String)cursor.getString(indexTitle);
+          list.updated=(Long)cursor.getLong(indexUpdated);
+          list.coords=new Geopoint(cursor.getDouble(indexLatitude),cursor.getDouble(indexLongitude));
+          result.add(list);
+        }
+ while (cursor.moveToNext());
+      }
+      cursor.close();
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgData.readLists: " + e.toString());
+  }
+  return result;
+}

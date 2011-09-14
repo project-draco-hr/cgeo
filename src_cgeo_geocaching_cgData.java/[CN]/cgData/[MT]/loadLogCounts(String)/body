@@ -7,9 +7,11 @@
   Cursor cursor=databaseRO.query(dbTableLogCount,new String[]{"_id","type","count"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
+    int indexType=cursor.getColumnIndex("type");
+    int indexCount=cursor.getColumnIndex("count");
     do {
-      Integer type=cursor.getInt(cursor.getColumnIndex("type"));
-      Integer count=cursor.getInt(cursor.getColumnIndex("count"));
+      Integer type=cursor.getInt(indexType);
+      Integer count=cursor.getInt(indexCount);
       logCounts.put(type,count);
     }
  while (cursor.moveToNext());

@@ -7,8 +7,9 @@
   Cursor cursor=databaseRO.query(dbTableAttributes,new String[]{"_id","attribute"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
+    int index=cursor.getColumnIndex("attribute");
     do {
-      attributes.add((String)cursor.getString(cursor.getColumnIndex("attribute")));
+      attributes.add((String)cursor.getString(index));
     }
  while (cursor.moveToNext());
   }
