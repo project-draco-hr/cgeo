@@ -70,11 +70,15 @@ setComparator(item,new StateComparator());
 return true;
 case SUBMENU_FILTER_TYPE:
 selectedFilter=res.getString(R.string.caches_filter_type);
+contextMenuShowFilter=true;
 openContextMenu(getListView());
+contextMenuShowFilter=false;
 return false;
 case SUBMENU_FILTER_SIZE:
 selectedFilter=res.getString(R.string.caches_filter_size);
+contextMenuShowFilter=true;
 openContextMenu(getListView());
+contextMenuShowFilter=false;
 return false;
 case MENU_FILTER_TRACKABLES:
 setFilter(new cgFilterByTrackables(res.getString(R.string.caches_filter_track)));
