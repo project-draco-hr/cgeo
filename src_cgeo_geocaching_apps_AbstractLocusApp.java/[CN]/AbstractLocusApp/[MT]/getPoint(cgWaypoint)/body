@@ -1,5 +1,7 @@
 {
-  if (waypoint == null || waypoint.coords == null)   return null;
+  if (waypoint == null || waypoint.coords == null) {
+    return null;
+  }
   Location loc=new Location(cgSettings.tag);
   loc.setLatitude(waypoint.coords.getLatitude());
   loc.setLongitude(waypoint.coords.getLongitude());

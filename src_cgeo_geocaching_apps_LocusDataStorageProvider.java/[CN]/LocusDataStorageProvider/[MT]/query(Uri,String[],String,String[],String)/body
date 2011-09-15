@@ -1,7 +1,9 @@
 {
   DataCursor cursor=new DataCursor(new String[]{"data"});
   ArrayList<PointsData> data=DataStorage.getData();
-  if (data == null || data.size() == 0)   return cursor;
+  if (data == null || data.size() == 0) {
+    return cursor;
+  }
   for (int i=0; i < data.size(); i++) {
     Parcel par=Parcel.obtain();
     data.get(i).writeToParcel(par,0);
