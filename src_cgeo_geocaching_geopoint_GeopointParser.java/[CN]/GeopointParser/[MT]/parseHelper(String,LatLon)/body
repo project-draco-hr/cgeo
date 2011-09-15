@@ -27,14 +27,12 @@
     return (double)sign * ((double)degree + (double)minutes / 60 + (double)seconds / 3600);
   }
  else {
-    matcher=patternDec.matcher(text);
-    if (matcher.find()) {
-      if (LatLon.LAT == latlon) {
-        return Double.parseDouble(matcher.group(1).replaceAll(",","."));
-      }
- else       if (null != matcher.group(3)) {
-        return Double.parseDouble(matcher.group(3).replaceAll(",","."));
-      }
+    try {
+      final String[] items=StringUtils.split(text.trim());
+      final int index=latlon == LatLon.LON ? items.length - 1 : 0;
+      return Double.parseDouble(items[index]);
+    }
+ catch (    NumberFormatException e) {
     }
   }
   throw new ParseException("Could not parse coordinates as " + latlon + ": \""+ text+ "\"",latlon);
