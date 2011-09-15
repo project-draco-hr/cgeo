@@ -2,11 +2,11 @@
   super.onPrepareOptionsMenu(menu);
   try {
     if (adapter != null && adapter.getSelectMode()) {
-      menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit));
+      menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit)).setIcon(R.drawable.ic_menu_clear_playlist);
       menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
     }
  else {
-      menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode));
+      menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode)).setIcon(android.R.drawable.ic_menu_agenda);
       menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
     }
     boolean hasSelection=adapter != null && adapter.getChecked() > 0;
