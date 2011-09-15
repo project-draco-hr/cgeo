@@ -15,7 +15,7 @@
           list.id=((int)cursor.getInt(indexId)) + 10;
           list.title=(String)cursor.getString(indexTitle);
           list.updated=(Long)cursor.getLong(indexUpdated);
-          list.coords=new Geopoint(cursor.getDouble(indexLatitude),cursor.getDouble(indexLongitude));
+          list.coords=getCoords(cursor,indexLatitude,indexLongitude);
           result.add(list);
         }
  while (cursor.moveToNext());
