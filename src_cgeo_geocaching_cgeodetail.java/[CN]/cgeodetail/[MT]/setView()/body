@@ -49,7 +49,7 @@
     String size="";
     if (cache.size != null) {
       if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
-        size=" (" + cache.size.id + ")";
+        size=" (" + res.getString(cache.size.stringId) + ")";
       }
     }
     if (cgBase.cacheTypesInv.containsKey(cache.type)) {
