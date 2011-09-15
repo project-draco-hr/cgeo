@@ -10,20 +10,26 @@
     }
   }
  else {
-    Map<String,Object> latParsed=cgBase.parseCoordinate(latText,"lat");
-    Map<String,Object> lonParsed=cgBase.parseCoordinate(lonText,"lat");
-    if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
+    double latitude;
+    try {
+      latitude=GeopointParser.parseLatitude(latText);
+    }
+ catch (    GeopointParser.ParseException e) {
       showToast(res.getString(R.string.err_parse_lat));
       return;
     }
-    if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
+    double longitude;
+    try {
+      longitude=GeopointParser.parseLongitude(lonText);
+    }
+ catch (    GeopointParser.ParseException e) {
       showToast(res.getString(R.string.err_parse_lon));
       return;
     }
     final Intent cachesIntent=new Intent(this,cgeocaches.class);
     cachesIntent.putExtra("type","coordinate");
-    cachesIntent.putExtra("latitude",(Double)latParsed.get("coordinate"));
-    cachesIntent.putExtra("longitude",(Double)lonParsed.get("coordinate"));
+    cachesIntent.putExtra("latitude",latitude);
+    cachesIntent.putExtra("longitude",longitude);
     cachesIntent.putExtra("cachetype",settings.cacheType);
     startActivity(cachesIntent);
   }
