@@ -14,7 +14,7 @@
  catch (  Exception e) {
     Log.w(cgSettings.tag,"cgeocaches.onCreateContextMenu: " + e.toString());
   }
-  if ((adapterInfo == null || adapterInfo.position < 0) && selectedFilter != null) {
+  if ((adapterInfo == null || adapterInfo.position < 0 || contextMenuShowFilter) && selectedFilter != null) {
     if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
       menu.setHeaderTitle(res.getString(R.string.caches_filter_size_title));
       menu.add(0,MENU_FILTER_SIZE_MICRO,0,res.getString(R.string.caches_filter_size_micro));

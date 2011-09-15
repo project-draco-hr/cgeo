@@ -6,17 +6,20 @@
   cacheIDsChoices.put(res.getString(R.string.all),CACHETYPE_ALL_GUID);
   for (  CacheType ct : CacheType.values()) {
     String l10n=res.getString(ct.stringId);
-    cacheTypes.put(ct.pattern,ct.cgeoId);
-    cacheTypesInv.put(ct.cgeoId,l10n);
-    cacheIDs.put(ct.cgeoId,ct.guid);
+    cacheTypes.put(ct.pattern,ct.id);
+    cacheTypesInv.put(ct.id,l10n);
+    cacheIDs.put(ct.id,ct.guid);
     cacheIDsChoices.put(l10n,ct.guid);
   }
-  waypointTypes.put("flag",res.getString(R.string.wp_final));
-  waypointTypes.put("stage",res.getString(R.string.wp_stage));
-  waypointTypes.put("puzzle",res.getString(R.string.wp_puzzle));
-  waypointTypes.put("pkg",res.getString(R.string.wp_pkg));
-  waypointTypes.put("trailhead",res.getString(R.string.wp_trailhead));
-  waypointTypes.put("waypoint",res.getString(R.string.wp_waypoint));
+  for (  CacheSize cs : CacheSize.values()) {
+    cacheSizesInv.put(cs,res.getString(cs.stringId));
+  }
+  waypointTypes.put("flag",res.getString(WaypointType.FLAG.stringId));
+  waypointTypes.put("stage",res.getString(WaypointType.STAGE.stringId));
+  waypointTypes.put("puzzle",res.getString(WaypointType.PUZZLE.stringId));
+  waypointTypes.put("pkg",res.getString(WaypointType.PKG.stringId));
+  waypointTypes.put("trailhead",res.getString(WaypointType.TRAILHEAD.stringId));
+  waypointTypes.put("waypoint",res.getString(WaypointType.WAYPOINT.stringId));
   logTypes.put("icon_smile",LOG_FOUND_IT);
   logTypes.put("icon_sad",LOG_DIDNT_FIND_IT);
   logTypes.put("icon_note",LOG_NOTE);

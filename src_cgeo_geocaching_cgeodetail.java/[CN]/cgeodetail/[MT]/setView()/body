@@ -47,9 +47,9 @@
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_type));
     String size="";
-    if (StringUtils.isNotBlank(cache.size)) {
-      if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
-        size=" (" + cache.size + ")";
+    if (cache.size != null) {
+      if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
+        size=" (" + cache.size.id + ")";
       }
     }
     if (cgBase.cacheTypesInv.containsKey(cache.type)) {

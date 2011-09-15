@@ -1,9 +1,0 @@
-{
-  if (!sunAvailable) {
-    throw new IllegalStateException("sun.text.Normalizer is not available");
-  }
-  String result;
-  result=(String)sunDecomposeMethod.invoke(null,new Object[]{text,Boolean.FALSE,Integer.valueOf(0)});
-  result=sunPattern.matcher(result).replaceAll("");
-  return result;
-}
