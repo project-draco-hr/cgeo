@@ -1,0 +1,10 @@
+{
+  loadCookiesIfNeeded(prefs);
+  final SharedPreferences.Editor editor=prefs.edit();
+  for (  final String key : cookies.keySet()) {
+    editor.remove("cookie_" + key);
+  }
+  editor.commit();
+  cookies.clear();
+  cache="";
+}

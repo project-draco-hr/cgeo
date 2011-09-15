@@ -1,0 +1,11 @@
+{
+  final int semiIndex=headerField.indexOf(';');
+  final String cookie=semiIndex == -1 ? headerField : headerField.substring(0,semiIndex);
+  final int equalIndex=headerField.indexOf('=');
+  if (equalIndex > 0) {
+    setCookie(prefs,cookie.substring(0,equalIndex),cookie.substring(equalIndex + 1));
+  }
+ else {
+    Log.w(cgSettings.tag,"CookieJar.setCookie: ignoring header " + headerField);
+  }
+}

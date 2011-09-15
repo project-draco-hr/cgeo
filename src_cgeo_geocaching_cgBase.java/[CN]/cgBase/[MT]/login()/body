@@ -32,7 +32,7 @@
     Log.e(cgSettings.tag,"cgeoBase.login: No login information stored");
     return -3;
   }
-  settings.deleteCookies();
+  CookieJar.deleteCookies(prefs);
   params.put("__EVENTTARGET","");
   params.put("__EVENTARGUMENT","");
   setViewstates(viewstates,params);

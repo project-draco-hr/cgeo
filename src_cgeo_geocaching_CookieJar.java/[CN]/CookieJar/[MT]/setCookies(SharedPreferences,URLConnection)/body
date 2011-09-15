@@ -1,0 +1,8 @@
+{
+  final List<String> headers=uc.getHeaderFields().get("Set-Cookie");
+  if (headers != null) {
+    for (    final String field : headers) {
+      setCookie(prefs,field);
+    }
+  }
+}
