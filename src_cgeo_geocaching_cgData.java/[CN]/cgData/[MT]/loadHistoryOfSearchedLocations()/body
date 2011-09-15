@@ -10,10 +10,14 @@
     int indexLongitude=cursor.getColumnIndex("longitude");
     do {
       cgDestination dest=new cgDestination();
-      dest.setId((long)cursor.getLong(indexId));
-      dest.setDate((long)cursor.getLong(indexDate));
-      dest.setCoords(new Geopoint((double)cursor.getDouble(indexLatitude),(double)cursor.getDouble(indexLongitude)));
-      destinations.add(dest);
+      try {
+        dest.setId((long)cursor.getLong(indexId));
+        dest.setDate((long)cursor.getLong(indexDate));
+        dest.setCoords(new Geopoint((double)cursor.getDouble(indexLatitude),(double)cursor.getDouble(indexLongitude)));
+        destinations.add(dest);
+      }
+ catch (      MalformedCoordinateException e) {
+      }
     }
  while (cursor.moveToNext());
   }
