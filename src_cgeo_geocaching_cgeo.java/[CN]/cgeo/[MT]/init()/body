@@ -6,15 +6,7 @@
   settings.getLogin();
   settings.reloadCacheType();
   if (app.firstRun) {
-    new Thread(){
-      @Override public void run(){
-        int status=base.login();
-        if (status == 1) {
-          app.firstRun=false;
-        }
-      }
-    }
-.start();
+    (new firstLogin()).start();
   }
   (new countBubbleUpdate()).start();
   (new cleanDatabase()).start();

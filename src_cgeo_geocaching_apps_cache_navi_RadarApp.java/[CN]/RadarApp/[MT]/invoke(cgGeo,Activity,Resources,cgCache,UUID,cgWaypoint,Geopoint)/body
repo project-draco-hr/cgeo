@@ -1,19 +1,9 @@
 {
   if (cache != null) {
-    if (cache.coords != null) {
-      navigateTo(activity,cache.coords);
-      return true;
-    }
+    return navigateTo(activity,cache.coords);
   }
   if (waypoint != null) {
-    if (waypoint.coords != null) {
-      navigateTo(activity,waypoint.coords);
-      return true;
-    }
+    return navigateTo(activity,waypoint.coords);
   }
-  if (coords != null) {
-    navigateTo(activity,coords);
-    return true;
-  }
-  return false;
+  return navigateTo(activity,coords);
 }

@@ -1,5 +1,8 @@
 {
   final int menuItem=item.getItemId();
+  if (menuItem == 0) {
+    return false;
+  }
   if (menuItem == 2) {
     navigateTo();
     return true;

@@ -16,7 +16,7 @@
   if (secure) {
     scheme="https://";
   }
-  String cookiesDone=getCookiesAsString();
+  String cookiesDone=CookieJar.getCookiesAsString(prefs);
   URLConnection uc=null;
   HttpURLConnection connection=null;
   Integer timeout=30000;
@@ -79,26 +79,7 @@
         wr.flush();
         wr.close();
       }
-      String headerName=null;
-      final SharedPreferences.Editor prefsEditor=prefs.edit();
-      for (int j=1; (headerName=uc.getHeaderFieldKey(j)) != null; j++) {
-        if (headerName != null && headerName.equalsIgnoreCase("Set-Cookie")) {
-          int index;
-          String cookie=uc.getHeaderField(j);
-          index=cookie.indexOf(";");
-          if (index > -1) {
-            cookie=cookie.substring(0,cookie.indexOf(";"));
-          }
-          index=cookie.indexOf("=");
-          if (index > -1 && cookie.length() > (index + 1)) {
-            String name=cookie.substring(0,cookie.indexOf("="));
-            String value=cookie.substring(cookie.indexOf("=") + 1,cookie.length());
-            cookies.put(name,value);
-            prefsEditor.putString("cookie_" + name,value);
-          }
-        }
-      }
-      prefsEditor.commit();
+      CookieJar.setCookies(prefs,uc);
       InputStream ins=getInputstreamFromConnection(connection);
       final InputStreamReader inr=new InputStreamReader(ins);
       final BufferedReader br=new BufferedReader(inr,16 * 1024);

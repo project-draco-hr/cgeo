@@ -1,5 +1,7 @@
 {
-  if (objectsToShow == null)   return;
+  if (objectsToShow == null) {
+    return;
+  }
   int pc=0;
   PointsData pd=new PointsData("c:geo");
   for (  Object o : objectsToShow) {
@@ -13,7 +15,9 @@
  else {
       continue;
     }
-    if (p == null)     continue;
+    if (p == null) {
+      continue;
+    }
     pd.addPoint(p);
     ++pc;
   }

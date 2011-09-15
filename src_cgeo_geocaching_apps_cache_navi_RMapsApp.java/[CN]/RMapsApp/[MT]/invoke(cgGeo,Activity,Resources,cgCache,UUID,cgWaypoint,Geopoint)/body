@@ -11,7 +11,7 @@
  else       if (waypoint != null && waypoint.coords != null) {
         locations.add(String.format((Locale)null,"%.6f",waypoint.coords.getLatitude()) + "," + String.format((Locale)null,"%.6f",waypoint.coords.getLongitude())+ ";"+ waypoint.lookup+ ";"+ waypoint.name);
       }
-      final Intent intent=new Intent("com.robert.maps.action.SHOW_POINTS");
+      final Intent intent=new Intent(INTENT);
       intent.putStringArrayListExtra("locations",locations);
       activity.startActivity(intent);
       return true;

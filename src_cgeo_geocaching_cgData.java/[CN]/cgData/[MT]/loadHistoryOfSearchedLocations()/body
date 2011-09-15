@@ -9,11 +9,13 @@
     int indexLatitude=cursor.getColumnIndex("latitude");
     int indexLongitude=cursor.getColumnIndex("longitude");
     do {
-      cgDestination dest=new cgDestination();
+      final cgDestination dest=new cgDestination();
       dest.setId((long)cursor.getLong(indexId));
       dest.setDate((long)cursor.getLong(indexDate));
-      dest.setCoords(new Geopoint((double)cursor.getDouble(indexLatitude),(double)cursor.getDouble(indexLongitude)));
-      destinations.add(dest);
+      dest.setCoords(getCoords(cursor,indexLatitude,indexLongitude));
+      if (dest.getCoords() != null) {
+        destinations.add(dest);
+      }
     }
  while (cursor.moveToNext());
   }
