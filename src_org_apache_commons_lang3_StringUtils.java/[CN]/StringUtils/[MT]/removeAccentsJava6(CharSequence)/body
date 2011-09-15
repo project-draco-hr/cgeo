@@ -1,9 +1,0 @@
-{
-  if (!java6Available || java6NormalizerFormNFD == null) {
-    throw new IllegalStateException("java.text.Normalizer is not available");
-  }
-  String result;
-  result=(String)java6NormalizeMethod.invoke(null,new Object[]{text,java6NormalizerFormNFD});
-  result=java6Pattern.matcher(result).replaceAll("");
-  return result;
-}
