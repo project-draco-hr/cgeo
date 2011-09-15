@@ -26,7 +26,7 @@
   if (cache.favouriteCnt == null) {
     Log.w(cgSettings.tag,"favoriteCount not parsed correctly");
   }
-  if (StringUtils.isBlank(cache.size)) {
+  if (cache.size == null) {
     Log.w(cgSettings.tag,"size not parsed correctly");
   }
   if (StringUtils.isBlank(cache.type)) {

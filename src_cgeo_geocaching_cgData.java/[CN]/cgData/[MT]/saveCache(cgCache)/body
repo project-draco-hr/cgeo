@@ -28,7 +28,7 @@
     values.put("hidden",cache.hidden.getTime());
   }
   values.put("hint",cache.hint);
-  values.put("size",cache.size);
+  values.put("size",cache.size == null ? "" : cache.size.id);
   values.put("difficulty",cache.difficulty);
   values.put("terrain",cache.terrain);
   values.put("latlon",cache.latlon);
