@@ -1,7 +1,7 @@
 {
   if (cache != null && cache.coords != null) {
     menu.add(0,2,0,res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass);
-    SubMenu subMenu=menu.addSubMenu(1,0,0,res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+    SubMenu subMenu=menu.addSubMenu(1,0,0,res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
     addNavigationMenuItems(subMenu);
   }
   if (cache != null && cache.canBeAddedToCalendar()) {
@@ -15,7 +15,7 @@
     menu.add(0,10,0,res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate);
   }
   if (cache != null && cache.canOpenInBrowser()) {
-    menu.add(1,7,0,res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details);
+    menu.add(1,7,0,res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe);
   }
   menu.add(0,12,0,res.getString(R.string.cache_menu_share)).setIcon(android.R.drawable.ic_menu_share);
   return true;
