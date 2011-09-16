@@ -5,36 +5,21 @@
   }
   final cgCacheWrap caches=new cgCacheWrap();
   final cgCache cache=new cgCache();
-  if (page.indexOf("Cache is Unpublished") > -1) {
+  if (page.contains("Cache is Unpublished")) {
     caches.error="cache was unpublished";
     return caches;
   }
-  if (page.indexOf("Sorry, the owner of this listing has made it viewable to Premium Members only.") != -1) {
+  if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
     caches.error="requested cache is for premium members only";
     return caches;
   }
-  if (page.indexOf("has chosen to make this cache listing visible to Premium Members only.") != -1) {
+  if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
     caches.error="requested cache is for premium members only";
     return caches;
   }
-  if (page.indexOf("<li>This cache is temporarily unavailable.") != -1) {
-    cache.disabled=true;
-  }
- else {
-    cache.disabled=false;
-  }
-  if (page.indexOf("<li>This cache has been archived,") != -1) {
-    cache.archived=true;
-  }
- else {
-    cache.archived=false;
-  }
-  if (page.indexOf("<p class=\"Warning\">This is a Premium Member Only cache.</p>") != -1) {
-    cache.members=true;
-  }
- else {
-    cache.members=false;
-  }
+  cache.disabled=page.contains("<li>This cache is temporarily unavailable.");
+  cache.archived=page.contains("<li>This cache has been archived,");
+  cache.members=page.contains("<p class=\"Warning\">This is a Premium Member Only cache.</p>");
   cache.reason=reason;
   try {
     final Matcher matcherGeocode=patternGeocode.matcher(page);
@@ -359,7 +344,7 @@
     if (wpEnd > -1 && wpEnd <= wpList.length()) {
       wpList=wpList.substring(0,wpEnd);
     }
-    if (wpList.indexOf("No additional waypoints to display.") == -1) {
+    if (!wpList.contains("No additional waypoints to display.")) {
       wpEnd=wpList.indexOf("</table>");
       wpList=wpList.substring(0,wpEnd);
       wpBegin=wpList.indexOf("<tbody>");

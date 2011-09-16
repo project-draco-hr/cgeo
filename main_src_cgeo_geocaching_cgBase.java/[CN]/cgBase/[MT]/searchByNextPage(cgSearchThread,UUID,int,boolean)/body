@@ -13,7 +13,7 @@
   String path="/";
   final String method="POST";
   int dash=-1;
-  if (url.indexOf("http://") > -1) {
+  if (url.startsWith("http://")) {
     url=url.substring(7);
   }
   dash=url.indexOf("/");
