@@ -28,9 +28,6 @@
  else   if (StringUtils.isNotBlank(guid)) {
     params.put("guid",guid);
   }
-  params.put("decrypt","y");
-  params.put("log","y");
-  params.put("numlogs","35");
   String page=requestLogged(false,host,path,method,params,false,false,false);
   if (StringUtils.isEmpty(page)) {
     if (app.isThere(geocode,guid,true,false)) {
