@@ -215,7 +215,7 @@
         if (inventoryString.length() > 0) {
           inventoryString.append('\n');
         }
-        if (inventoryItem.name.indexOf('<') >= 0 || inventoryItem.name.indexOf('&') >= 0) {
+        if (containsHtml(inventoryItem.name)) {
           inventoryString.append(Html.fromHtml(inventoryItem.name).toString());
         }
  else {
@@ -328,7 +328,7 @@
           nameView.setText(cgBase.formatCoords(wpt.coords,true));
         }
  else {
-          if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
+          if (containsHtml(wpt.name)) {
             nameView.setText(Html.fromHtml(wpt.name.trim()),TextView.BufferType.SPANNABLE);
           }
  else {
@@ -336,7 +336,7 @@
           }
         }
         wpt.setIcon(res,base,nameView);
-        if (wpt.note.indexOf('<') >= 0 || wpt.note.indexOf('&') >= 0) {
+        if (containsHtml(wpt.note)) {
           ((TextView)waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
         }
  else {
