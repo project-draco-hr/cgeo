@@ -1,12 +1,12 @@
 {
-  if (StringUtils.isBlank(prefix)) {
-    prefix=old.prefix;
+  if (StringUtils.isBlank(getPrefix())) {
+    setPrefix(old.getPrefix());
   }
   if (StringUtils.isBlank(lookup)) {
     lookup=old.lookup;
   }
   if (StringUtils.isBlank(name)) {
-    name=old.name;
+    this.name=old.name;
   }
   if (StringUtils.isBlank(latlon)) {
     latlon=old.latlon;
