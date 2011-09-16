@@ -1,0 +1,7 @@
+{
+  Assert.assertEquals(1.2,DistanceParser.parseDistance("1200 m",cgSettings.unitsMetric),MM);
+  Assert.assertEquals(1.2,DistanceParser.parseDistance("1.2 km",cgSettings.unitsMetric),MM);
+  Assert.assertEquals(0.36576,DistanceParser.parseDistance("1200 ft",cgSettings.unitsMetric),MM);
+  Assert.assertEquals(1.09728,DistanceParser.parseDistance("1200 yd",cgSettings.unitsMetric),MM);
+  Assert.assertEquals(1.9312128,DistanceParser.parseDistance("1.2 mi",cgSettings.unitsMetric),MM);
+}

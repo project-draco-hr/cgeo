@@ -1,0 +1,26 @@
+{
+  List<MockedCache> cachesToTest=new ArrayList<MockedCache>();
+  cachesToTest.add(new GC2CJPF());
+  cachesToTest.add(new GC1ZXX2());
+  for (  MockedCache cache : cachesToTest) {
+    cgCacheWrap caches=base.parseCache(cache.getData(),0);
+    cgCache cacheParsed=caches.cacheList.get(0);
+    Assert.assertEquals(cacheParsed.getGeocode(),cache.getGeocode());
+    Assert.assertEquals(cacheParsed.getType(),cache.getType());
+    Assert.assertEquals(cacheParsed.getOwner(),cache.getOwner());
+    Assert.assertEquals(cacheParsed.getDifficulty(),cache.getDifficulty());
+    Assert.assertEquals(cacheParsed.getTerrain(),cache.getTerrain());
+    Assert.assertEquals(cacheParsed.getLatitude(),cache.getLatitude());
+    Assert.assertEquals(cacheParsed.getLongitude(),cache.getLongitude());
+    Assert.assertEquals(cacheParsed.isDisabled(),cache.isDisabled());
+    Assert.assertEquals(cacheParsed.isOwn(),cache.isOwn());
+    Assert.assertEquals(cacheParsed.isArchived(),cache.isArchived());
+    Assert.assertEquals(cacheParsed.isMembersOnly(),cache.isMembersOnly());
+    Assert.assertEquals(cacheParsed.getOwnerReal(),cache.getOwnerReal());
+    Assert.assertEquals(cacheParsed.getSize(),cache.getSize());
+    Assert.assertEquals(cacheParsed.getHint(),cache.getHint());
+    Assert.assertTrue(cacheParsed.getDescription().startsWith(cache.getDescription()));
+    Assert.assertEquals(cacheParsed.getShortDescription(),cache.getShortDescription());
+    Assert.assertEquals(cacheParsed.getName(),cache.getName());
+  }
+}

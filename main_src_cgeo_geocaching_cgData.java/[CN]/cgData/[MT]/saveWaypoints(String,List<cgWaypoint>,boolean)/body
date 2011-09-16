@@ -1,0 +1,41 @@
+{
+  init();
+  if (StringUtils.isBlank(geocode) || waypoints == null) {
+    return false;
+  }
+  boolean ok=false;
+  databaseRW.beginTransaction();
+  try {
+    if (drop) {
+      databaseRW.delete(dbTableWaypoints,"geocode = ? and type <> ?",new String[]{geocode,"own"});
+    }
+    if (!waypoints.isEmpty()) {
+      ContentValues values=new ContentValues();
+      long timeStamp=System.currentTimeMillis();
+      for (      cgWaypoint oneWaypoint : waypoints) {
+        if (oneWaypoint.isUserDefined()) {
+          continue;
+        }
+        values.clear();
+        values.put("geocode",geocode);
+        values.put("updated",timeStamp);
+        values.put("type",oneWaypoint.type);
+        values.put("prefix",oneWaypoint.getPrefix());
+        values.put("lookup",oneWaypoint.lookup);
+        values.put("name",oneWaypoint.name);
+        values.put("latlon",oneWaypoint.latlon);
+        values.put("latitude_string",oneWaypoint.latitudeString);
+        values.put("longitude_string",oneWaypoint.longitudeString);
+        putCoords(values,oneWaypoint.coords);
+        values.put("note",oneWaypoint.note);
+        databaseRW.insert(dbTableWaypoints,null,values);
+      }
+    }
+    databaseRW.setTransactionSuccessful();
+    ok=true;
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+  return ok;
+}

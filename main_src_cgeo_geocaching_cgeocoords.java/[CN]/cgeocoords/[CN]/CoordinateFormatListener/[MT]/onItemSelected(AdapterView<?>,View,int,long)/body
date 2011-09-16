@@ -1,0 +1,15 @@
+{
+  if (currentFormat != null) {
+    if (!calc(false)) {
+      if (geo != null && geo.coordsNow != null) {
+        gp=geo.coordsNow;
+      }
+ else {
+        gp=new Geopoint(0,0);
+      }
+    }
+  }
+  currentFormat=coordInputFormatEnum.fromInt(pos);
+  settings.setCoordInputFormat(currentFormat);
+  updateGUI();
+}

@@ -1,0 +1,17 @@
+{
+  if (cacheList == null || cacheList.size() == 0) {
+    return null;
+  }
+  final UUID searchId=search.getCurrentId();
+  searches.put(searchId,search);
+  if (storage == null) {
+    storage=new cgData(this);
+  }
+  if (newItem) {
+    for (    final cgCache cache : cacheList) {
+      cache.reason=reason;
+      storeWithMerge(cache,false);
+    }
+  }
+  return searchId;
+}

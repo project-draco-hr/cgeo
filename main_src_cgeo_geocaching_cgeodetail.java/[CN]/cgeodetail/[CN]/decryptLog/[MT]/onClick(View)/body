@@ -1,0 +1,19 @@
+{
+  if (view == null) {
+    return;
+  }
+  try {
+    final TextView logView=(TextView)view;
+    CharSequence text=logView.getText();
+    if (text instanceof Spannable) {
+      Spannable span=(Spannable)text;
+      logView.setText(CryptUtils.rot13(span));
+    }
+ else {
+      String string=(String)text;
+      logView.setText(CryptUtils.rot13(string));
+    }
+  }
+ catch (  Exception e) {
+  }
+}

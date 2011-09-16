@@ -1,0 +1,23 @@
+{
+  final SpannableStringBuilder buffer=new SpannableStringBuilder(span);
+  boolean plaintext=false;
+  final int length=span.length();
+  int c;
+  int capitalized;
+  for (int index=0; index < length; index++) {
+    c=span.charAt(index);
+    if (c == '[') {
+      plaintext=true;
+    }
+ else     if (c == ']') {
+      plaintext=false;
+    }
+ else     if (!plaintext) {
+      capitalized=c & 32;
+      c&=~capitalized;
+      c=((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c) | capitalized;
+    }
+    buffer.replace(index,index + 1,String.valueOf((char)c));
+  }
+  return buffer;
+}
