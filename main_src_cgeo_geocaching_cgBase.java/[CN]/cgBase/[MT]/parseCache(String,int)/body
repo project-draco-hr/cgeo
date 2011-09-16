@@ -196,8 +196,8 @@
   }
   try {
     final Matcher matcherHint=patternHint.matcher(page);
-    if (matcherHint.find() && matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
-      String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
+    if (matcherHint.find() && matcherHint.group(1) != null) {
+      String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(1)).replaceAll("\n");
       if (hint != null) {
         cache.hint=hint.replaceAll(Pattern.quote("</p>"),"").trim();
       }
