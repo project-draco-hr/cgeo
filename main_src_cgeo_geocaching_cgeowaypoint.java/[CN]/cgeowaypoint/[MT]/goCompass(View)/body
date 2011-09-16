@@ -5,7 +5,7 @@
   Intent navigateIntent=new Intent(this,cgeonavigate.class);
   navigateIntent.putExtra("latitude",waypoint.coords.getLatitude());
   navigateIntent.putExtra("longitude",waypoint.coords.getLongitude());
-  navigateIntent.putExtra("geocode",waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
+  navigateIntent.putExtra("geocode",waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim());
   navigateIntent.putExtra("name",waypoint.name);
   cgeonavigate.coordinates.clear();
   cgeonavigate.coordinates.add(new cgCoord(waypoint));

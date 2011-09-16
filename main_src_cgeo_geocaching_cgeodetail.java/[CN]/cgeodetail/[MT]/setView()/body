@@ -312,98 +312,68 @@
     if (CollectionUtils.isNotEmpty(cache.waypoints)) {
       LinearLayout waypointView;
       List<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.waypoints);
-      Collections.sort(sortedWaypoints,new Comparator<cgWaypoint>(){
-        @Override public int compare(        cgWaypoint wayPoint1,        cgWaypoint wayPoint2){
-          return order(wayPoint1) - order(wayPoint2);
+      Collections.sort(sortedWaypoints);
+      for (      cgWaypoint wpt : sortedWaypoints) {
+        waypointView=(LinearLayout)inflater.inflate(R.layout.waypoint_item,null);
+        final TextView identification=(TextView)waypointView.findViewById(R.id.identification);
+        ((TextView)waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
+        if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
+          identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
         }
-        private int order(        cgWaypoint waypoint){
-          if (StringUtils.isEmpty(waypoint.prefix)) {
-            return 0;
+ else {
+          identification.setText(res.getString(R.string.waypoint_custom));
+        }
+        TextView nameView=(TextView)waypointView.findViewById(R.id.name);
+        if (StringUtils.isBlank(wpt.name)) {
+          nameView.setText(cgBase.formatCoords(wpt.coords,true));
+        }
+ else {
+          if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
+            nameView.setText(Html.fromHtml(wpt.name.trim()),TextView.BufferType.SPANNABLE);
           }
-          char firstLetter=Character.toUpperCase(waypoint.prefix.charAt(0));
-switch (firstLetter) {
-case 'P':
-            return -100;
-case 'S':
-{
-            try {
-              Integer stageNumber=Integer.valueOf(waypoint.prefix.substring(1));
-              return stageNumber;
-            }
- catch (            NumberFormatException e) {
-            }
-            return 0;
+ else {
+            nameView.setText(wpt.name.trim());
           }
-case 'F':
-        return 1000;
-case 'O':
-      return 10000;
+        }
+        wpt.setIcon(res,base,nameView);
+        if (wpt.note.indexOf('<') >= 0 || wpt.note.indexOf('&') >= 0) {
+          ((TextView)waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
+        }
+ else {
+          ((TextView)waypointView.findViewById(R.id.note)).setText(wpt.note.trim());
+        }
+        waypointView.setOnClickListener(new waypointInfo(wpt.id));
+        waypoints.addView(waypointView);
+      }
+    }
+    Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
+    addWaypoint.setClickable(true);
+    addWaypoint.setOnClickListener(new addWaypoint());
+    if (StringUtils.isNotBlank(cache.hint)) {
+      ((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
+      TextView hintView=((TextView)findViewById(R.id.hint));
+      hintView.setText(cgBase.rot13(cache.hint.trim()));
+      hintView.setClickable(true);
+      hintView.setOnClickListener(new codeHint());
+    }
+ else {
+      ((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.GONE);
+      TextView hintView=((TextView)findViewById(R.id.hint));
+      hintView.setClickable(false);
+      hintView.setOnClickListener(null);
+    }
+    if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
+      cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+      cacheDistance.bringToFront();
+    }
   }
-  return 0;
-}
-}
-);
-for (cgWaypoint wpt : sortedWaypoints) {
-waypointView=(LinearLayout)inflater.inflate(R.layout.waypoint_item,null);
-final TextView identification=(TextView)waypointView.findViewById(R.id.identification);
-((TextView)waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
-if (wpt.prefix.equalsIgnoreCase("OWN") == false) {
-  identification.setText(wpt.prefix.trim() + "/" + wpt.lookup.trim());
-}
- else {
-  identification.setText(res.getString(R.string.waypoint_custom));
-}
-TextView nameView=(TextView)waypointView.findViewById(R.id.name);
-if (StringUtils.isBlank(wpt.name)) {
-  nameView.setText(cgBase.formatCoords(wpt.coords,true));
-}
- else {
-  if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
-    nameView.setText(Html.fromHtml(wpt.name.trim()),TextView.BufferType.SPANNABLE);
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgeodetail.setView: " + e.toString());
   }
- else {
-    nameView.setText(wpt.name.trim());
-  }
-}
-wpt.setIcon(res,base,nameView);
-if (wpt.note.indexOf('<') >= 0 || wpt.note.indexOf('&') >= 0) {
-  ((TextView)waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
-}
- else {
-  ((TextView)waypointView.findViewById(R.id.note)).setText(wpt.note.trim());
-}
-waypointView.setOnClickListener(new waypointInfo(wpt.id));
-waypoints.addView(waypointView);
-}
-}
-Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
-addWaypoint.setClickable(true);
-addWaypoint.setOnClickListener(new addWaypoint());
-if (StringUtils.isNotBlank(cache.hint)) {
-((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
-TextView hintView=((TextView)findViewById(R.id.hint));
-hintView.setText(cgBase.rot13(cache.hint.trim()));
-hintView.setClickable(true);
-hintView.setOnClickListener(new codeHint());
-}
- else {
-((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.GONE);
-TextView hintView=((TextView)findViewById(R.id.hint));
-hintView.setClickable(false);
-hintView.setOnClickListener(null);
-}
-if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
-cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
-cacheDistance.bringToFront();
-}
-}
- catch (Exception e) {
-Log.e(cgSettings.tag,"cgeodetail.setView: " + e.toString());
-}
-if (waitDialog != null && waitDialog.isShowing()) waitDialog.dismiss();
-if (storeDialog != null && storeDialog.isShowing()) storeDialog.dismiss();
-if (dropDialog != null && dropDialog.isShowing()) dropDialog.dismiss();
-if (refreshDialog != null && refreshDialog.isShowing()) refreshDialog.dismiss();
-displayLogs();
-if (geo != null) geoUpdate.updateLoc(geo);
+  if (waitDialog != null && waitDialog.isShowing())   waitDialog.dismiss();
+  if (storeDialog != null && storeDialog.isShowing())   storeDialog.dismiss();
+  if (dropDialog != null && dropDialog.isShowing())   dropDialog.dismiss();
+  if (refreshDialog != null && refreshDialog.isShowing())   refreshDialog.dismiss();
+  displayLogs();
+  if (geo != null)   geoUpdate.updateLoc(geo);
 }
