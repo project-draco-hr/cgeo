@@ -1,0 +1,25 @@
+{
+  if (StringUtils.isEmpty(prefix)) {
+    return 0;
+  }
+  char firstLetter=Character.toUpperCase(prefix.charAt(0));
+switch (firstLetter) {
+case 'P':
+    return -100;
+case 'S':
+{
+    try {
+      Integer stageNumber=Integer.valueOf(prefix.substring(1));
+      return stageNumber;
+    }
+ catch (    NumberFormatException e) {
+    }
+    return 0;
+  }
+case 'F':
+return 1000;
+case 'O':
+return 10000;
+}
+return 0;
+}
