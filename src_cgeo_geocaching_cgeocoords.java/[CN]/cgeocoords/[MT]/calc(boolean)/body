@@ -4,11 +4,15 @@
       gp=new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
     }
  catch (    ParseException e) {
-      context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+      if (signalError) {
+        context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+      }
       return false;
     }
 catch (    MalformedCoordinateException e) {
-      context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+      if (signalError) {
+        context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+      }
       return false;
     }
     return true;
@@ -55,7 +59,9 @@ try {
 gp=new Geopoint(latitude,longitude);
 }
  catch (MalformedCoordinateException e) {
+if (signalError) {
 context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+}
 return false;
 }
 return true;
