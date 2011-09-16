@@ -1,8 +1,8 @@
 {
   byte[] macBytes={};
   try {
-    SecretKeySpec secretKeySpec=new SecretKeySpec(salt.getBytes(),"HmacSHA1");
-    Mac mac=Mac.getInstance("HmacSHA1");
+    final SecretKeySpec secretKeySpec=new SecretKeySpec(salt.getBytes(),"HmacSHA1");
+    final Mac mac=Mac.getInstance("HmacSHA1");
     mac.init(secretKeySpec);
     macBytes=mac.doFinal(text.getBytes());
   }

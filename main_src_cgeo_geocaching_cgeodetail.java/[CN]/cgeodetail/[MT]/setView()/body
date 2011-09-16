@@ -352,7 +352,7 @@
     if (StringUtils.isNotBlank(cache.hint)) {
       ((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
       TextView hintView=((TextView)findViewById(R.id.hint));
-      hintView.setText(cgBase.rot13(cache.hint.trim()));
+      hintView.setText(CryptUtils.rot13(cache.hint.trim()));
       hintView.setClickable(true);
       hintView.setOnClickListener(new codeHint());
     }

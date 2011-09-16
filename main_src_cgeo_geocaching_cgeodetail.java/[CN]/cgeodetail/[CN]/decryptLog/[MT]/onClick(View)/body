@@ -4,26 +4,15 @@
   }
   try {
     final TextView logView=(TextView)view;
-    Spannable span=(Spannable)logView.getText();
-    SpannableStringBuilder buffer=new SpannableStringBuilder(span);
-    boolean plaintext=false;
-    int length=span.length();
-    for (int index=0; index < length; index++) {
-      int c=span.charAt(index);
-      if (c == '[') {
-        plaintext=true;
-      }
- else       if (c == ']') {
-        plaintext=false;
-      }
- else       if (!plaintext) {
-        int capitalized=c & 32;
-        c&=~capitalized;
-        c=((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c) | capitalized;
-      }
-      buffer.replace(index,index + 1,String.valueOf((char)c));
+    CharSequence text=logView.getText();
+    if (text instanceof Spannable) {
+      Spannable span=(Spannable)text;
+      logView.setText(CryptUtils.rot13(span));
     }
-    logView.setText(buffer);
+ else {
+      String string=(String)text;
+      logView.setText(CryptUtils.rot13(string));
+    }
   }
  catch (  Exception e) {
   }

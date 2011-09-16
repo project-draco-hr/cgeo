@@ -19,13 +19,13 @@
   }
   if (StringUtils.isNotBlank(geocode)) {
     dirName=cgSettings.getStorage() + geocode + "/";
-    fileName=cgSettings.getStorage() + geocode + "/"+ cgBase.md5(url)+ urlExt;
-    fileNameSec=cgSettings.getStorageSec() + geocode + "/"+ cgBase.md5(url)+ urlExt;
+    fileName=cgSettings.getStorage() + geocode + "/"+ CryptUtils.md5(url)+ urlExt;
+    fileNameSec=cgSettings.getStorageSec() + geocode + "/"+ CryptUtils.md5(url)+ urlExt;
   }
  else {
     dirName=cgSettings.getStorage() + "_others/";
-    fileName=cgSettings.getStorage() + "_others/" + cgBase.md5(url)+ urlExt;
-    fileNameSec=cgSettings.getStorageSec() + "_others/" + cgBase.md5(url)+ urlExt;
+    fileName=cgSettings.getStorage() + "_others/" + CryptUtils.md5(url)+ urlExt;
+    fileNameSec=cgSettings.getStorageSec() + "_others/" + CryptUtils.md5(url)+ urlExt;
   }
   File dir=null;
   dir=new File(cgSettings.getStorage());
