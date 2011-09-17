@@ -320,7 +320,7 @@
       final Matcher matcherLog=patternCountLog.matcher(matcherLogCounts.group(1));
       while (matcherLog.find()) {
         String typeStr=matcherLog.group(1);
-        String countStr=matcherLog.group(2).replaceAll(",","");
+        String countStr=matcherLog.group(2).replaceAll("[.,]","");
         if (StringUtils.isNotBlank(typeStr) && logTypes.containsKey(typeStr.toLowerCase()) && StringUtils.isNotBlank(countStr)) {
           cache.logCounts.put(logTypes.get(typeStr.toLowerCase()),Integer.parseInt(countStr));
         }
