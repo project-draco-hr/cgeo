@@ -25,9 +25,9 @@
     }
     final Pattern patternLogIn=Pattern.compile("loggedIn='([^']+)'",Pattern.CASE_INSENSITIVE);
     final Pattern patternGuid=Pattern.compile("cacheId='([^']+)'",Pattern.CASE_INSENSITIVE);
-    final Pattern patternRating=Pattern.compile("voteAvg='([0-9\\.]+)'",Pattern.CASE_INSENSITIVE);
+    final Pattern patternRating=Pattern.compile("voteAvg='([0-9.]+)'",Pattern.CASE_INSENSITIVE);
     final Pattern patternVotes=Pattern.compile("voteCnt='([0-9]+)'",Pattern.CASE_INSENSITIVE);
-    final Pattern patternVote=Pattern.compile("voteUser='([0-9\\.]+)'",Pattern.CASE_INSENSITIVE);
+    final Pattern patternVote=Pattern.compile("voteUser='([0-9.]+)'",Pattern.CASE_INSENSITIVE);
     String voteData=null;
     final Pattern patternVoteElement=Pattern.compile("<vote ([^>]+)>",Pattern.CASE_INSENSITIVE);
     final Matcher matcherVoteElement=patternVoteElement.matcher(votes);
