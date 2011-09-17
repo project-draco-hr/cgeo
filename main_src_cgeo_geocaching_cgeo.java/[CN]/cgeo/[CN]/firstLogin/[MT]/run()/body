@@ -5,6 +5,7 @@
   int status=base.login();
   if (status == 1) {
     app.firstRun=false;
+    base.detectGcCustomDate();
   }
   if (app.showLoginToast) {
     firstLoginHandler.sendEmptyMessage(status);

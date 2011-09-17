@@ -2,6 +2,12 @@
   if (initialized) {
     return;
   }
+  if (Thread.currentThread().getContextClassLoader() == null) {
+    Thread.currentThread().setContextClassLoader(new ClassLoader(){
+    }
+);
+    StringUtils.isNotBlank("haha");
+  }
   initialized=true;
   settings.getLogin();
   settings.reloadCacheType();
