@@ -2,17 +2,17 @@
   super.onCreate(savedInstanceState);
   setTheme();
   setContentView(R.layout.trackables);
-  setTitle("Trackables");
+  setTitle(res.getString(R.string.trackable));
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString("geocode");
   }
   if (geocode == null) {
-    showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
+    showToast(res.getString(R.string.err_tb_forgot));
     finish();
     return;
   }
-  waitDialog=ProgressDialog.show(this,null,"loading cache inventory...",true);
+  waitDialog=ProgressDialog.show(this,null,res.getString(R.string.cache_inventory_loading),true);
   waitDialog.setCancelable(true);
   (new loadInventory()).start();
 }
