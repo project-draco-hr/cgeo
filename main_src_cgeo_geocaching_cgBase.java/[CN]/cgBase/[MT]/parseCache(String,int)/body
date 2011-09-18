@@ -196,8 +196,8 @@
   }
   try {
     final Matcher matcherHint=patternHint.matcher(page);
-    if (matcherHint.find() && matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
-      String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
+    if (matcherHint.find() && matcherHint.group(1) != null) {
+      String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(1)).replaceAll("\n");
       if (hint != null) {
         cache.hint=hint.replaceAll(Pattern.quote("</p>"),"").trim();
       }
@@ -263,24 +263,21 @@
   }
   try {
     final Matcher matcherSpoilers=patternSpoilers.matcher(page);
-    if (matcherSpoilers.find() && matcherSpoilers.groupCount() > 0) {
-      final String spoilersPre=matcherSpoilers.group(1);
-      final Matcher matcherSpoilersInside=patternSpoilersInside.matcher(spoilersPre);
+    if (matcherSpoilers.find()) {
+      final Matcher matcherSpoilersInside=patternSpoilersInside.matcher(matcherSpoilers.group(1));
       while (matcherSpoilersInside.find()) {
-        if (matcherSpoilersInside.groupCount() > 0) {
-          final cgImage spoiler=new cgImage();
-          spoiler.url=matcherSpoilersInside.group(1);
-          if (matcherSpoilersInside.group(2) != null) {
-            spoiler.title=matcherSpoilersInside.group(2);
-          }
-          if (matcherSpoilersInside.group(4) != null) {
-            spoiler.description=matcherSpoilersInside.group(4);
-          }
-          if (cache.spoilers == null) {
-            cache.spoilers=new ArrayList<cgImage>();
-          }
-          cache.spoilers.add(spoiler);
+        final cgImage spoiler=new cgImage();
+        spoiler.url=matcherSpoilersInside.group(1);
+        if (matcherSpoilersInside.group(2) != null) {
+          spoiler.title=matcherSpoilersInside.group(2);
         }
+        if (matcherSpoilersInside.group(3) != null) {
+          spoiler.description=matcherSpoilersInside.group(3);
+        }
+        if (cache.spoilers == null) {
+          cache.spoilers=new ArrayList<cgImage>();
+        }
+        cache.spoilers.add(spoiler);
       }
     }
   }
@@ -320,7 +317,7 @@
       final Matcher matcherLog=patternCountLog.matcher(matcherLogCounts.group(1));
       while (matcherLog.find()) {
         String typeStr=matcherLog.group(1);
-        String countStr=matcherLog.group(2);
+        String countStr=matcherLog.group(2).replaceAll("[.,]","");
         if (StringUtils.isNotBlank(typeStr) && logTypes.containsKey(typeStr.toLowerCase()) && StringUtils.isNotBlank(countStr)) {
           cache.logCounts.put(logTypes.get(typeStr.toLowerCase()),Integer.parseInt(countStr));
         }
