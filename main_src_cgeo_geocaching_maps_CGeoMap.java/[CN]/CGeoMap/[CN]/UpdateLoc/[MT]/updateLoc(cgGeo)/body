@@ -1,0 +1,37 @@
+{
+  if (geo == null) {
+    return;
+  }
+  try {
+    boolean repaintRequired=false;
+    if (overlayPosition == null && mapView != null) {
+      overlayPosition=mapView.createAddPositionOverlay(activity,settings);
+    }
+    if (overlayPosition != null && geo.location != null) {
+      overlayPosition.setCoordinates(geo.location);
+    }
+    if (geo.coordsNow != null) {
+      if (followMyLocation) {
+        myLocationInMiddle();
+      }
+ else {
+        repaintRequired=true;
+      }
+    }
+    if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) {
+      if (geo.bearingNow != null) {
+        overlayPosition.setHeading(geo.bearingNow);
+      }
+ else {
+        overlayPosition.setHeading(0f);
+      }
+      repaintRequired=true;
+    }
+    if (repaintRequired && mapView != null) {
+      mapView.repaintRequired(overlayPosition);
+    }
+  }
+ catch (  Exception e) {
+    Log.w(cgSettings.tag,"Failed to update location.");
+  }
+}

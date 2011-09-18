@@ -1,0 +1,14 @@
+{
+  if (itemsPre == null) {
+    return;
+  }
+  for (  OtherCachersOverlayItemImpl item : itemsPre) {
+    item.setMarker(boundCenter(item.getMarker(0)));
+  }
+  items.clear();
+  if (itemsPre.size() > 0) {
+    items=new ArrayList<OtherCachersOverlayItemImpl>(itemsPre);
+  }
+  setLastFocusedItemIndex(-1);
+  populate();
+}

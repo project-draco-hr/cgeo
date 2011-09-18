@@ -1,0 +1,65 @@
+{
+  try {
+    if (items.size() <= index) {
+      return false;
+    }
+    final OtherCachersOverlayItemImpl item=items.get(index);
+    final cgUser user=item.getUser();
+    String action=null;
+    String geocode=null;
+    final Matcher matcherGeocode=patternGeocode.matcher(user.action.trim());
+    if (user.action.length() == 0 || user.action.equalsIgnoreCase("pending")) {
+      action="Looking around";
+    }
+ else     if (user.action.equalsIgnoreCase("tweeting")) {
+      action="Tweeting";
+    }
+ else     if (matcherGeocode.find()) {
+      if (matcherGeocode.group(1) != null) {
+        geocode=matcherGeocode.group(1).trim().toUpperCase();
+      }
+      if (matcherGeocode.group(3) != null) {
+        action="Heading to " + geocode + " ("+ matcherGeocode.group(3).trim()+ ")";
+      }
+ else {
+        action="Heading to " + geocode;
+      }
+    }
+ else {
+      action=user.action;
+    }
+    int icon=-1;
+    if (user.client.equalsIgnoreCase("c:geo")) {
+      icon=R.drawable.client_cgeo;
+    }
+ else     if (user.client.equalsIgnoreCase("preCaching")) {
+      icon=R.drawable.client_precaching;
+    }
+ else     if (user.client.equalsIgnoreCase("Handy Geocaching")) {
+      icon=R.drawable.client_handygeocaching;
+    }
+    final AlertDialog.Builder dialog=new AlertDialog.Builder(context);
+    if (icon > -1) {
+      dialog.setIcon(icon);
+    }
+    dialog.setTitle(user.username);
+    dialog.setMessage(action);
+    dialog.setCancelable(true);
+    if (StringUtils.isNotBlank(geocode)) {
+      dialog.setPositiveButton(geocode + "?",new cacheDetails(geocode));
+    }
+    dialog.setNeutralButton("Dismiss",new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int id){
+        dialog.cancel();
+      }
+    }
+);
+    AlertDialog alert=dialog.create();
+    alert.show();
+    return true;
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgUsersOverlay.onTap: " + e.toString());
+  }
+  return false;
+}
