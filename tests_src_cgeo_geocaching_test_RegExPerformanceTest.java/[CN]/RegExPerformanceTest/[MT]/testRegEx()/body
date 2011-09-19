@@ -1,0 +1,34 @@
+{
+  List<MockedCache> cachesForParsing=new ArrayList<MockedCache>();
+  cachesForParsing.add(new GC2CJPF());
+  cachesForParsing.add(new GC1ZXX2());
+  int ITERATIONS=250;
+  for (  MockedCache cache : cachesForParsing) {
+    String page=cache.getData();
+    String resultOld=parseHint(page,PATTERN_ACTUAL,1);
+    String resultNew=parseHint(page,PATTERN_IMPROVED,1);
+    assertEquals(resultOld,resultNew);
+    long diffOld, diffNew;
+    System.out.println("Parsing " + cache.getGeocode() + " "+ cache.getName());
+{
+      System.out.println(("Result actual pattern:\t<<" + resultOld + ">>"));
+      long start=System.currentTimeMillis();
+      for (int j=0; j < ITERATIONS; j++) {
+        parseHint(page,PATTERN_ACTUAL,1);
+      }
+      diffOld=(System.currentTimeMillis() - start);
+      System.out.println("Time actual pattern:\t" + diffOld + " ms");
+    }
+{
+      System.out.println(("Result new pattern:\t<<" + resultNew + ">>"));
+      long start=System.currentTimeMillis();
+      for (int j=0; j < ITERATIONS; j++) {
+        parseHint(page,PATTERN_IMPROVED,1);
+      }
+      diffNew=(System.currentTimeMillis() - start);
+      System.out.println("Time new pattern:\t" + diffNew + " ms");
+    }
+    Float reduction=new Float((float)diffNew * 100 / (float)diffOld);
+    System.out.println("Reduction to x percent:\t" + reduction.toString() + "\n");
+  }
+}

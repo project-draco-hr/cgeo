@@ -1,0 +1,8 @@
+{
+  String result=null;
+  final Matcher matcher=p.matcher(data);
+  if (matcher.find() && matcher.groupCount() >= group) {
+    result=BaseUtils.getMatch(matcher.group(group));
+  }
+  return result;
+}
