@@ -1,5 +1,6 @@
 {
-  final String knownType=cgBase.cacheTypes.get(parsedString);
+  String lowercase=parsedString.toLowerCase().trim();
+  final String knownType=cgBase.cacheTypes.get(lowercase);
   if (knownType != null) {
     cache.type=knownType;
   }

@@ -6,9 +6,7 @@
   cacheIDsChoices.put(res.getString(R.string.all),CACHETYPE_ALL_GUID);
   for (  CacheType ct : CacheType.values()) {
     String l10n=res.getString(ct.stringId);
-    cacheTypes.put(ct.pattern,ct.id);
     cacheTypesInv.put(ct.id,l10n);
-    cacheIDs.put(ct.id,ct.guid);
     cacheIDsChoices.put(l10n,ct.guid);
   }
   for (  CacheSize cs : CacheSize.values()) {

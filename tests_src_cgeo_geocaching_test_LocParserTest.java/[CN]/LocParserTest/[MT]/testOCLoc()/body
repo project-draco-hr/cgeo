@@ -1,0 +1,8 @@
+{
+  final Map<String,cgCoord> coords=readLoc(R.raw.oc5952_loc);
+  final cgCoord coord=coords.get("OC5952");
+  assertNotNull(coord);
+  assertEquals("OC5952",coord.geocode);
+  assertEquals("Die Schatzinsel / treasure island",coord.name);
+  assertTrue(new Geopoint(48.85968,9.18740).isEqualTo(coord.coords));
+}

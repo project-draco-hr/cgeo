@@ -1,11 +1,11 @@
 {
   final UUID searchId;
-  String name=file.getName().toLowerCase();
+  final String name=file.getName().toLowerCase();
   if (name.endsWith("gpx")) {
-    searchId=GPXParser.parseGPX(app,file,listId,changeParseDialogHandler);
+    searchId=GPXParser.parseGPX(file,listId,changeParseDialogHandler);
   }
  else {
-    searchId=LocParser.parseLoc(app,file,listId,changeParseDialogHandler);
+    searchId=LocParser.parseLoc(file,listId,changeParseDialogHandler);
   }
   imported=app.getCount(searchId);
   loadCachesHandler.sendMessage(new Message());

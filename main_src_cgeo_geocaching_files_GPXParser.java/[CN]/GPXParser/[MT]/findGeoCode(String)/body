@@ -4,11 +4,9 @@
   }
   final Matcher matcherGeocode=patternGeocode.matcher(input);
   if (matcherGeocode.find()) {
-    if (matcherGeocode.groupCount() > 0) {
-      final String geocode=matcherGeocode.group(1);
-      if (ConnectorFactory.canHandle(geocode)) {
-        cache.geocode=geocode;
-      }
+    final String geocode=matcherGeocode.group(1);
+    if (ConnectorFactory.canHandle(geocode)) {
+      cache.geocode=geocode;
     }
   }
 }

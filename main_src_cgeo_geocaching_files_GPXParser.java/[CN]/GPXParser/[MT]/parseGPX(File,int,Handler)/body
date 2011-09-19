@@ -1,0 +1,23 @@
+{
+  try {
+    GPXParser parser=new GPX10Parser(listId);
+    List<cgCache> caches=parser.parse(file,handler);
+    if (caches == null) {
+      parser=new GPX11Parser(listId);
+      caches=parser.parse(file,handler);
+    }
+    if (caches != null) {
+      final cgSearch search=new cgSearch();
+      final cgeoapplication app=cgeoapplication.getInstance();
+      for (      cgCache cache : caches) {
+        app.addCacheToSearch(search,cache);
+      }
+      Log.i(cgSettings.tag,"Caches found in .gpx file: " + caches.size());
+      return search.getCurrentId();
+    }
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"cgBase.parseGPX: " + e.toString());
+  }
+  return null;
+}
