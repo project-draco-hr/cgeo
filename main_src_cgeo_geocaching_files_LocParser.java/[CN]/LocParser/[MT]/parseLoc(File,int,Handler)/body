@@ -12,8 +12,9 @@
       copyCoordToCache(coord,cache);
       caches.cacheList.add(cache);
       fixCache(cache);
+      cache.type="traditional";
       cache.reason=listId;
-      cache.detailed=false;
+      cache.detailed=true;
       cgeoapplication.getInstance().addCacheToSearch(search,cache);
     }
     caches.totalCnt=caches.cacheList.size();
