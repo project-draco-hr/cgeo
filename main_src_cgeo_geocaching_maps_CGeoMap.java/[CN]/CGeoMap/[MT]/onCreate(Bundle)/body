@@ -1,0 +1,102 @@
+{
+  super.onCreate(savedInstanceState);
+  res=this.getResources();
+  activity=this.getActivity();
+  app=(cgeoapplication)activity.getApplication();
+  app.setAction(null);
+  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE));
+  base=new cgBase(app,settings,activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE));
+  prefsEdit=activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE).edit();
+  MapFactory mapFactory=settings.getMapFactory();
+  noMapTokenShowed=false;
+  activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+  ActivityMixin.setTheme(activity);
+  activity.setContentView(settings.getMapFactory().getMapLayoutId());
+  ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,settings,0,0);
+  }
+  if (settings.useCompass == 1 && dir == null) {
+    dir=app.startDir(activity,dirUpdate);
+  }
+  mapView=(MapViewImpl)activity.findViewById(mapFactory.getMapViewId());
+  mapView.setMapSource(settings);
+  if (!mapView.needsScaleOverlay()) {
+    mapView.setBuiltinScale(true);
+  }
+  mapView.setBuiltInZoomControls(true);
+  mapView.displayZoomControls(true);
+  mapView.preLoad();
+  mapView.setOnDragListener(this);
+  mapView.clearOverlays();
+  if (overlayPosition == null) {
+    overlayPosition=mapView.createAddPositionOverlay(activity,settings);
+  }
+  if (settings.publicLoc > 0 && overlayOtherCachers == null) {
+    overlayOtherCachers=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
+  }
+  if (overlayCaches == null) {
+    overlayCaches=mapView.createAddMapOverlay(settings,mapView.getContext(),getResources().getDrawable(R.drawable.marker),fromDetailIntent);
+  }
+  if (overlayScale == null && mapView.needsScaleOverlay()) {
+    overlayScale=mapView.createAddScaleOverlay(activity,settings);
+  }
+  mapView.invalidate();
+  mapController=mapView.getMapController();
+  mapController.setZoom(settings.mapzoom);
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
+  if (dir != null) {
+    dirUpdate.updateDir(dir);
+  }
+  Bundle extras=activity.getIntent().getExtras();
+  if (extras != null) {
+    fromDetailIntent=extras.getBoolean("detail");
+    searchIdIntent=extras.getString("searchid");
+    geocodeIntent=extras.getString("geocode");
+    final double latitudeIntent=extras.getDouble("latitude");
+    final double longitudeIntent=extras.getDouble("longitude");
+    coordsIntent=new Geopoint(latitudeIntent,longitudeIntent);
+    waypointTypeIntent=extras.getString("wpttype");
+    mapStateIntent=extras.getIntArray("mapstate");
+    if ("".equals(searchIdIntent)) {
+      searchIdIntent=null;
+    }
+    if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
+      coordsIntent=null;
+    }
+  }
+  if (searchIdIntent == null && geocodeIntent == null && coordsIntent == null) {
+    live=true;
+  }
+ else {
+    live=false;
+  }
+  if (null == mapStateIntent) {
+    if (live) {
+      followMyLocation=true;
+    }
+ else {
+      followMyLocation=false;
+    }
+  }
+ else {
+    followMyLocation=1 == mapStateIntent[3] ? true : false;
+  }
+  if (geocodeIntent != null || searchIdIntent != null || coordsIntent != null || mapStateIntent != null) {
+    centerMap(geocodeIntent,searchIdIntent,coordsIntent,mapStateIntent);
+  }
+  myLocSwitch=(ImageSwitcher)activity.findViewById(R.id.my_position);
+  myLocSwitch.setFactory(this);
+  myLocSwitch.setInAnimation(activity,android.R.anim.fade_in);
+  myLocSwitch.setOutAnimation(activity,android.R.anim.fade_out);
+  myLocSwitch.setOnClickListener(new MyLocationListener());
+  switchMyLocationButton();
+  startTimer();
+  if (settings.cacheType != null) {
+    String cacheType=cgBase.cacheTypesInv.get(settings.cacheType);
+    ((TextView)activity.findViewById(R.id.filter_text)).setText(cacheType);
+    activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+  }
+}
