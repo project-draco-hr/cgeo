@@ -1,3 +1,4 @@
 {
-  return AndroidLevel8Internal.getRotation(activity);
+  Display display=activity.getWindowManager().getDefaultDisplay();
+  return display.getRotation();
 }
