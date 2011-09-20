@@ -13,12 +13,7 @@
   dateButton.setText(base.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new cgeovisitDateListener());
   EditText logView=(EditText)findViewById(R.id.log);
-  if (StringUtils.isNotBlank(text)) {
-    logView.setText(text);
-  }
- else {
-    logView.setText("");
-  }
+  logView.setText("");
   if (clear == null) {
     clear=(Button)findViewById(R.id.clear);
   }

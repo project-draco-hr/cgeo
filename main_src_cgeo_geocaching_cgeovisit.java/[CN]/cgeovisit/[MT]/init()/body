@@ -70,8 +70,7 @@
   }
   save.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      String log=((EditText)findViewById(R.id.log)).getText().toString();
-      cache.logOffline(cgeovisit.this,log,date,typeSelected);
+      saveLog(true);
     }
   }
 );
