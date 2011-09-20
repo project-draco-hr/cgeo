@@ -16,7 +16,8 @@
     }
   }
  else   if (StringUtils.isNotBlank(settings.getSignature()) && settings.signatureAutoinsert && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
-    insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(),base,false));
+    text="\n" + LogTemplateProvider.applyTemplates(settings.getSignature(),base,false);
+    insertIntoLog(text,false);
   }
   if (types.contains(typeSelected) == false) {
     if (alreadyFound) {
