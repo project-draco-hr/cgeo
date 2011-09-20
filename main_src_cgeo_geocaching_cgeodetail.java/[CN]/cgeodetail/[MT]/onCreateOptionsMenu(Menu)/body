@@ -11,7 +11,7 @@
   if (cache != null && CollectionUtils.isNotEmpty(cache.spoilers)) {
     menu.add(1,5,0,res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery);
   }
-  if (cache != null && cache.coords != null) {
+  if (cache != null && cache.coords != null && cache.supportsCachesAround()) {
     menu.add(0,10,0,res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate);
   }
   if (cache != null && cache.canOpenInBrowser()) {

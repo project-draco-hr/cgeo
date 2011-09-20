@@ -375,5 +375,19 @@
   if (dropDialog != null && dropDialog.isShowing())   dropDialog.dismiss();
   if (refreshDialog != null && refreshDialog.isShowing())   refreshDialog.dismiss();
   displayLogs();
+  IConnector connector=ConnectorFactory.getConnector(cache);
+  if (connector != null) {
+    String license=connector.getLicenseText(cache);
+    if (StringUtils.isNotBlank(license)) {
+      ((LinearLayout)findViewById(R.id.license_box)).setVisibility(View.VISIBLE);
+      TextView licenseView=((TextView)findViewById(R.id.license));
+      licenseView.setText(Html.fromHtml(license),BufferType.SPANNABLE);
+      licenseView.setClickable(true);
+      licenseView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+ else {
+      ((LinearLayout)findViewById(R.id.license_box)).setVisibility(View.GONE);
+    }
+  }
   if (geo != null)   geoUpdate.updateLoc(geo);
 }

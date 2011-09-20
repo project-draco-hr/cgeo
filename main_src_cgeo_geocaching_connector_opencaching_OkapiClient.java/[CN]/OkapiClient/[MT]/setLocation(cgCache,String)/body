@@ -1,0 +1,7 @@
+{
+  final String latitude=StringUtils.substringBefore(location,"|");
+  final String longitude=StringUtils.substringAfter(location,"|");
+  cache.coords=GeopointParser.parse(latitude,longitude);
+  cache.latitudeString=cgBase.formatLatitude(cache.coords.getLatitude(),true);
+  cache.longitudeString=cgBase.formatLongitude(cache.coords.getLongitude(),true);
+}

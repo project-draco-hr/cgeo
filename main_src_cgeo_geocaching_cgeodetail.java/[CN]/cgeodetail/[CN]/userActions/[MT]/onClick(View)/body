@@ -2,6 +2,9 @@
   if (view == null) {
     return;
   }
+  if (!cache.supportsUserActions()) {
+    return;
+  }
   try {
     registerForContextMenu(view);
     openContextMenu(view);

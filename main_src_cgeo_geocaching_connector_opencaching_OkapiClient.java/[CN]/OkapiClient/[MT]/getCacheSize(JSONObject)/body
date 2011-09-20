@@ -1,0 +1,24 @@
+{
+  double size=0;
+  try {
+    size=response.getDouble("size");
+  }
+ catch (  JSONException e) {
+    e.printStackTrace();
+  }
+switch ((int)Math.round(size)) {
+case 1:
+    return CacheSize.MICRO;
+case 2:
+  return CacheSize.SMALL;
+case 3:
+return CacheSize.REGULAR;
+case 4:
+return CacheSize.LARGE;
+case 5:
+return CacheSize.LARGE;
+default :
+break;
+}
+return CacheSize.NOT_CHOSEN;
+}

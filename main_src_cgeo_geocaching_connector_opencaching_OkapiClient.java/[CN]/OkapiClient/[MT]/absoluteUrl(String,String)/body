@@ -1,0 +1,8 @@
+{
+  final Uri uri=Uri.parse(url);
+  if (!uri.isAbsolute()) {
+    final IConnector connector=ConnectorFactory.getConnector(geocode);
+    return "http://" + connector.getHost() + "/"+ url;
+  }
+  return url;
+}

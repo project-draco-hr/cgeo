@@ -1,0 +1,50 @@
+{
+  final cgCache cache=new cgCache();
+  try {
+    final JSONObject response=new JSONObject(data);
+    cache.geocode=response.getString(CACHE_CODE);
+    cache.name=response.getString(CACHE_NAME);
+    setLocation(cache,response.getString(CACHE_LOCATION));
+    cache.type=getCacheType(response.getString(CACHE_TYPE));
+    final String status=response.getString(CACHE_STATUS);
+    cache.disabled=status.equalsIgnoreCase("Temporarily unavailable");
+    cache.archived=status.equalsIgnoreCase("Archived");
+    final JSONObject owner=response.getJSONObject(CACHE_OWNER);
+    cache.owner=parseUser(owner);
+    cache.logCounts.put(cgBase.LOG_FOUND_IT,response.getInt(CACHE_FOUNDS));
+    cache.logCounts.put(cgBase.LOG_DIDNT_FIND_IT,response.getInt(CACHE_NOTFOUNDS));
+    cache.size=getCacheSize(response);
+    cache.difficulty=(float)response.getDouble(CACHE_DIFFICULTY);
+    cache.terrain=(float)response.getDouble(CACHE_TERRAIN);
+    if (response.has(CACHE_RATING) && !isNull(response.getString(CACHE_RATING))) {
+      cache.rating=(float)response.getDouble(CACHE_RATING);
+    }
+    cache.votes=response.getInt(CACHE_VOTES);
+    cache.favouriteCnt=response.getInt(CACHE_RECOMMENDATIONS);
+    cache.description=response.getString(CACHE_DESCRIPTION);
+    cache.hint=Html.fromHtml(response.getString(CACHE_HINT)).toString();
+    final JSONArray images=response.getJSONArray(CACHE_IMAGES);
+    if (images != null) {
+      JSONObject imageResponse;
+      cgImage image;
+      for (int i=0; i < images.length(); i++) {
+        imageResponse=images.getJSONObject(i);
+        if (imageResponse.getBoolean(CACHE_IMAGE_IS_SPOILER)) {
+          image=new cgImage();
+          image.title=imageResponse.getString(CACHE_IMAGE_CAPTION);
+          image.url=absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL),cache.geocode);
+          if (cache.spoilers == null) {
+            cache.spoilers=new ArrayList<cgImage>();
+          }
+          cache.spoilers.add(image);
+        }
+      }
+    }
+    cache.logs=parseLogs(response.getJSONArray(CACHE_LATEST_LOGS));
+    cache.hidden=parseDate(response.getString(CACHE_HIDDEN));
+  }
+ catch (  JSONException e) {
+    e.printStackTrace();
+  }
+  return cache;
+}

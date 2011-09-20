@@ -101,7 +101,8 @@
     try {
       uri=Uri.parse(url);
       if (uri.isAbsolute() == false) {
-        url="http://www.geocaching.com" + url;
+        IConnector connector=ConnectorFactory.getConnector(geocode);
+        url="http://" + connector.getHost() + url;
       }
     }
  catch (    Exception e) {
