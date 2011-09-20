@@ -1,13 +1,13 @@
 {
   if (mapSource.isGoogleMapSource()) {
     if (!mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
-      mapFactory=new googleMapFactory();
+      mapFactory=new GoogleMapFactory();
       mapSourceUsed=mapSource;
     }
   }
  else   if (!mapSource.isGoogleMapSource()) {
     if (mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
-      mapFactory=new mfMapFactory();
+      mapFactory=new MapsforgeMapFactory();
       mapSourceUsed=mapSource;
     }
   }
