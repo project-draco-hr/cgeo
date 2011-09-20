@@ -1,6 +1,5 @@
 {
-  AndroidLevel8 level8=getLevel8();
-  if (level8 != null) {
+  if (isLevel8) {
     final int rotation=level8.getRotation(activity);
     if (rotation == Surface.ROTATION_90) {
       return directionNowPre + 90;
