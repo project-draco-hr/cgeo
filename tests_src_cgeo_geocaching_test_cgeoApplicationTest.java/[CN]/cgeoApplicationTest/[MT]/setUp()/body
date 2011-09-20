@@ -1,8 +1,8 @@
 {
   super.setUp();
   createApplication();
-  Context context=this.getContext();
-  SharedPreferences prefs=context.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE);
+  final Context context=this.getContext();
+  final SharedPreferences prefs=context.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE);
   settings=new cgSettings(context,prefs);
   base=new cgBase(this.getApplication(),settings,prefs);
 }
