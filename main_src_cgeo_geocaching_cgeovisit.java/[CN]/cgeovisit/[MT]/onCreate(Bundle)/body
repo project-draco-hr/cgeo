@@ -24,10 +24,5 @@
     setTitle(res.getString(R.string.log_new_log) + " " + cache.geocode.toUpperCase());
   }
   app.setAction(geocode);
-  if (cache == null) {
-    showToast(res.getString(R.string.err_detail_cache_forgot_visit));
-    finish();
-    return;
-  }
   init();
 }
