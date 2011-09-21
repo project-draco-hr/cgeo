@@ -20,7 +20,12 @@
   final String path="/map/default.aspx/MapAction";
   String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ usertoken+ "\"}}";
   final String url="http://" + host + path+ "?"+ params;
-  page=requestJSONgc(host,path,params);
+  try {
+    page=requestJSONgc(new URI("http",host,path,null),params);
+  }
+ catch (  URISyntaxException e) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByViewPort",e);
+  }
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No data from server");
     return null;

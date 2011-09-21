@@ -1,4 +1,9 @@
 {
-  final String paramsDone=prepareParameters(params,my,addF);
-  return request(secure,host,path,method,paramsDone,requestId,xContentType);
+  try {
+    return request(new URI(secure ? "https" : "http",host,path,null),method,params,requestId,xContentType,my,addF);
+  }
+ catch (  URISyntaxException e) {
+    Log.e(cgSettings.tag,"request",e);
+    return null;
+  }
 }

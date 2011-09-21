@@ -13,14 +13,14 @@
     buffer.delete(0,buffer.length());
     timeout=30000 + (i * 15000);
     try {
-      final URL u=new URL("http://" + host + path);
+      final URL u=uri.toURL();
       uc=u.openConnection();
-      uc.setRequestProperty("Host",host);
+      uc.setRequestProperty("Host",uri.getHost());
       uc.setRequestProperty("Cookie",cookiesDone);
       uc.setRequestProperty("Content-Type","application/json; charset=UTF-8");
       uc.setRequestProperty("X-Requested-With","XMLHttpRequest");
       uc.setRequestProperty("Accept","application/json, text/javascript, */*; q=0.01");
-      uc.setRequestProperty("Referer",host + "/" + path);
+      uc.setRequestProperty("Referer",uri.getHost() + "/" + uri.getPath());
       if (settings.asBrowser == 1) {
         uc.setRequestProperty("Accept-Charset","utf-8, iso-8859-1, utf-16, *;q=0.7");
         uc.setRequestProperty("Accept-Language","en-US");
@@ -47,7 +47,7 @@
       httpCode=connection.getResponseCode();
       httpLocation=uc.getHeaderField("Location");
       final String paramsLog=params.replaceAll(passMatch,"password=***");
-      Log.i(cgSettings.tag + " | JSON","[POST " + (int)(params.length() / 1024) + "k | "+ httpCode+ " | "+ (int)(buffer.length() / 1024)+ "k] Downloaded "+ "http://"+ host+ path+ "?"+ paramsLog);
+      Log.i(cgSettings.tag + " | JSON","[POST " + (int)(params.length() / 1024) + "k | "+ httpCode+ " | "+ (int)(buffer.length() / 1024)+ "k] Downloaded "+ uri.toString()+ "?"+ paramsLog);
       connection.disconnect();
       br.close();
       ins.close();
@@ -65,13 +65,8 @@ catch (    Exception e) {
   }
   String page=null;
   if (httpCode == 302 && httpLocation != null) {
-    try {
-      final URI newLocation=new URI("http",host,path,null).resolve(httpLocation);
-      page=requestJSONgc(newLocation.getHost(),newLocation.getPath(),params);
-    }
- catch (    URISyntaxException e) {
-      Log.e(cgSettings.tag,"requestJSONgc",e);
-    }
+    final URI newLocation=uri.resolve(httpLocation);
+    page=requestJSONgc(newLocation,params);
   }
  else {
     replaceWhitespace(buffer);
