@@ -107,17 +107,8 @@ catch (    Exception e) {
   cgResponse response=new cgResponse();
   try {
     if (httpCode == 302 && httpLocation != null) {
-      final Uri newLocation=Uri.parse(httpLocation);
-      if (newLocation.isRelative()) {
-        response=request(secure,host,path,"GET",new HashMap<String,String>(),requestId,false,false,false);
-      }
- else {
-        boolean secureRedir=false;
-        if (newLocation.getScheme().equals("https")) {
-          secureRedir=true;
-        }
-        response=request(secureRedir,newLocation.getHost(),newLocation.getPath(),"GET",new HashMap<String,String>(),requestId,false,false,false);
-      }
+      final URI newLocation=new URI(scheme,host,path,null).resolve(httpLocation);
+      response=request(newLocation.getScheme() == "https",newLocation.getHost(),newLocation.getPath(),"GET",new HashMap<String,String>(),requestId,false,false,false);
     }
  else {
       if (StringUtils.isNotEmpty(buffer)) {
@@ -137,7 +128,7 @@ catch (    Exception e) {
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeoBase.page: " + e.toString());
+    Log.e(cgSettings.tag,"cgeoBase.page",e);
   }
   return response;
 }

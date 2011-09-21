@@ -65,12 +65,12 @@ catch (    Exception e) {
   }
   String page=null;
   if (httpCode == 302 && httpLocation != null) {
-    final Uri newLocation=Uri.parse(httpLocation);
-    if (newLocation.isRelative()) {
-      page=requestJSONgc(host,path,params);
-    }
- else {
+    try {
+      final URI newLocation=new URI("http",host,path,null).resolve(httpLocation);
       page=requestJSONgc(newLocation.getHost(),newLocation.getPath(),params);
+    }
+ catch (    URISyntaxException e) {
+      Log.e(cgSettings.tag,"requestJSONgc",e);
     }
   }
  else {
