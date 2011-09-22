@@ -31,7 +31,7 @@
         }
       }
       if (recaptchaJsParam != null) {
-        final String recaptchaJs=request(URI_GOOGLE_RECAPTCHA,"GET","k=" + urlencode_rfc3986(recaptchaJsParam.trim()),0,true).getData();
+        final String recaptchaJs=request(URI_GOOGLE_RECAPTCHA,"GET","k=" + urlencode_rfc3986(recaptchaJsParam.trim()),true).getData();
         if (StringUtils.isNotBlank(recaptchaJs)) {
           final Matcher matcherRecaptchaChallenge=patternRecaptchaChallenge.matcher(recaptchaJs);
           while (matcherRecaptchaChallenge.find()) {
@@ -260,7 +260,7 @@
         params.append(urlencode_rfc3986(recaptchaText));
       }
       params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
-      final String coordinates=request(URI_GC_SEEK_NEAREST,"POST",params.toString(),0,true).getData();
+      final String coordinates=request(URI_GC_SEEK_NEAREST,"POST",params.toString(),true).getData();
       if (StringUtils.isNotBlank(coordinates)) {
         if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
           Log.i(cgSettings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");

@@ -1,5 +1,5 @@
 {
-  final cgResponse response=request(URI_GC_MAP_DEFAULT,"GET","",0,false);
+  final cgResponse response=request(URI_GC_MAP_DEFAULT,"GET","",false);
   final String data=response.getData();
   String usertoken=null;
   if (StringUtils.isNotBlank(data)) {

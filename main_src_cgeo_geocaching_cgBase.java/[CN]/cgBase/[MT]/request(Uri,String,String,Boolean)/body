@@ -2,9 +2,6 @@
   URL u=null;
   int httpCode=-1;
   String httpMessage=null;
-  if (requestId == 0) {
-    requestId=(int)(Math.random() * 1000);
-  }
   if (method == null || (method.equalsIgnoreCase("GET") == false && method.equalsIgnoreCase("POST") == false)) {
     method="POST";
   }
@@ -82,7 +79,7 @@
       httpCode=connection.getResponseCode();
       httpMessage=connection.getResponseMessage();
       final String paramsLog=params.replaceAll(passMatch,"password=***");
-      Log.i(cgSettings.tag + "|" + requestId,"[" + method + " "+ (params.length() / 1024)+ "k | "+ httpCode+ " | "+ (buffer.length() / 1024)+ "k] Downloaded "+ uri+ "?"+ paramsLog);
+      Log.i(cgSettings.tag,"[" + method + " "+ (params.length() / 1024)+ "k | "+ httpCode+ " | "+ (buffer.length() / 1024)+ "k] Downloaded "+ uri+ "?"+ paramsLog);
       connection.disconnect();
       br.close();
       ins.close();
