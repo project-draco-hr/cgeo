@@ -15,6 +15,7 @@
   params.put("cacheId",guid);
   params.put("voteUser",String.format("%.1f",rating).replace(',','.'));
   params.put("version","cgeo");
-  final String result=base.request(false,"gcvote.com","/setVote.php","GET",params,false,false,false).getData();
+  final URI uri=cgBase.buildURI(false,"gcvote.com","/setVote.php");
+  final String result=base.request(uri,"GET",params,false,false,false).getData();
   return result.trim().equalsIgnoreCase("ok");
 }

@@ -1,7 +1,6 @@
 {
-  final String host="www.geocaching.com";
-  final String path="/account/ManagePreferences.aspx";
-  final String result=request(false,host,path,"GET",null,false,false,false).getData();
+  final URI uri=buildURI(false,"www.geocaching.com","/account/ManagePreferences.aspx");
+  final String result=request(uri,"GET",null,false,false,false).getData();
   if (null == result) {
     Log.w(cgSettings.tag,"cgeoBase.detectGcCustomDate: result is null");
     return;

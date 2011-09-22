@@ -6,16 +6,14 @@
   if (latMin == null || latMax == null || lonMin == null || lonMax == null) {
     return users;
   }
-  final String host="api.go4cache.com";
-  final String path="/get.php";
-  final String method="POST";
   final Map<String,String> params=new HashMap<String,String>();
   params.put("u",username);
   params.put("ltm",String.format((Locale)null,"%.6f",latMin));
   params.put("ltx",String.format((Locale)null,"%.6f",latMax));
   params.put("lnm",String.format((Locale)null,"%.6f",lonMin));
   params.put("lnx",String.format((Locale)null,"%.6f",lonMax));
-  final String data=request(false,host,path,method,params,false,false,false).getData();
+  final URI uri=buildURI(false,"api.go4cache.com","/get.php");
+  final String data=request(uri,"POST",params,false,false,false).getData();
   if (StringUtils.isBlank(data)) {
     Log.e(cgSettings.tag,"cgeoBase.getGeocachersInViewport: No data from server");
     return null;

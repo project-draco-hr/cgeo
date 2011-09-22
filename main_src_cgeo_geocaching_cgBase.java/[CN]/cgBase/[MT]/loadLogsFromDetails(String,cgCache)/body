@@ -12,7 +12,8 @@
   params.put("sp","0");
   params.put("sf","0");
   params.put("decrypt","1");
-  final cgResponse response=request(false,"www.geocaching.com","/seek/geocache.logbook","GET",params,false,false,false);
+  final URI uri=buildURI(false,"www.geocaching.com","/seek/geocache.logbook");
+  final cgResponse response=request(uri,"GET",params,false,false,false);
   if (response.getStatusCode() != 200) {
     Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: error " + response.getStatusCode() + " when requesting log information");
     return;

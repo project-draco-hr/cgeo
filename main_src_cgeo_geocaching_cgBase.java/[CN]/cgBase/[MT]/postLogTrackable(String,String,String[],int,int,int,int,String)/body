@@ -14,9 +14,6 @@
   Log.i(cgSettings.tag,"Trying to post log for trackable #" + trackingCode + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log);
   log=log.replace("\n","\r\n");
   final Calendar currentDate=Calendar.getInstance();
-  final String host="www.geocaching.com";
-  final String path="/track/log.aspx?wid=" + tbid;
-  final String method="POST";
   final Map<String,String> params=new HashMap<String,String>();
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","");
@@ -36,11 +33,12 @@
   params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo",log);
   params.put("ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry");
   params.put("ctl00$ContentBody$uxVistOtherListingGC","");
-  String page=request(false,host,path,method,params,false,false,false).getData();
+  final URI uri=buildURI(false,"www.geocaching.com","/track/log.aspx?wid=" + tbid);
+  String page=request(uri,"POST",params,false,false,false).getData();
   if (checkLogin(page) == false) {
     int loginState=login();
     if (loginState == 1) {
-      page=request(false,host,path,method,params,false,false,false).getData();
+      page=request(uri,"POST",params,false,false,false).getData();
     }
  else {
       Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: Can not log in geocaching (error: " + loginState + ")");

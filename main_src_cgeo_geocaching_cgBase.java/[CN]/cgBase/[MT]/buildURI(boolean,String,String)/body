@@ -1,0 +1,4 @@
+{
+  final String pathComponents[]=StringUtils.split(path,"?",2);
+  return buildURI(secure,host,pathComponents[0],pathComponents.length > 1 ? pathComponents[1] : null);
+}

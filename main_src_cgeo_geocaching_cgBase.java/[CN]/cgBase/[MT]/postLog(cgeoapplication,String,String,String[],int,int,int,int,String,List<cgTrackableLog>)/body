@@ -32,9 +32,6 @@
  else {
     Log.i(cgSettings.tag,"Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log+ "; trackables: 0");
   }
-  final String host="www.geocaching.com";
-  final String path="/seek/log.aspx?ID=" + cacheid;
-  final String method="POST";
   final Map<String,String> params=new HashMap<String,String>();
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","");
@@ -60,11 +57,12 @@
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString());
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
   }
-  String page=request(false,host,path,method,params,false,false,false).getData();
+  final URI uri=buildURI(false,"www.geocaching.com","/seek/log.aspx?ID=" + cacheid);
+  String page=request(uri,"POST",params,false,false,false).getData();
   if (checkLogin(page) == false) {
     int loginState=login();
     if (loginState == 1) {
-      page=request(false,host,path,method,params,false,false,false).getData();
+      page=request(uri,"POST",params,false,false,false).getData();
     }
  else {
       Log.e(cgSettings.tag,"cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
@@ -112,7 +110,7 @@
         params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString());
         params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
       }
-      page=request(false,host,path,method,params,false,false,false).getData();
+      page=request(uri,"POST",params,false,false,false).getData();
     }
   }
  catch (  Exception e) {

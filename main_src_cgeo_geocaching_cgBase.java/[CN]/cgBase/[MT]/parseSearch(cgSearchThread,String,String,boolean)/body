@@ -31,7 +31,8 @@
         }
       }
       if (recaptchaJsParam != null) {
-        final String recaptchaJs=request(false,"www.google.com","/recaptcha/api/challenge","GET","k=" + urlencode_rfc3986(recaptchaJsParam.trim()),0,true).getData();
+        final URI uri=buildURI(false,"www.google.com","/recaptcha/api/challenge");
+        final String recaptchaJs=request(uri,"GET","k=" + urlencode_rfc3986(recaptchaJsParam.trim()),0,true).getData();
         if (StringUtils.isNotBlank(recaptchaJs)) {
           final Matcher matcherRecaptchaChallenge=patternRecaptchaChallenge.matcher(recaptchaJs);
           while (matcherRecaptchaChallenge.find()) {
@@ -236,8 +237,6 @@
   if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)))) {
     Log.i(cgSettings.tag,"Trying to get .loc for " + cids.size() + " caches");
     try {
-      final String host="www.geocaching.com";
-      final String path="/seek/nearest.aspx";
       final StringBuilder params=new StringBuilder();
       params.append("__EVENTTARGET=&__EVENTARGUMENT=");
       if (ArrayUtils.isNotEmpty(caches.viewstates)) {
@@ -262,7 +261,8 @@
         params.append(urlencode_rfc3986(recaptchaText));
       }
       params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
-      final String coordinates=request(false,host,path,"POST",params.toString(),0,true).getData();
+      final URI uri=buildURI(false,"www.geocaching.com","/seek/nearest.aspx");
+      final String coordinates=request(uri,"POST",params.toString(),0,true).getData();
       if (StringUtils.isNotBlank(coordinates)) {
         if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
           Log.i(cgSettings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");

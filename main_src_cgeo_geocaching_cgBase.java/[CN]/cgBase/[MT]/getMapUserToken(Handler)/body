@@ -1,5 +1,6 @@
 {
-  final cgResponse response=request(false,"www.geocaching.com","/map/default.aspx","GET","",0,false);
+  final URI uri=buildURI(false,"www.geocaching.com","/map/default.aspx");
+  final cgResponse response=request(uri,"GET","",0,false);
   final String data=response.getData();
   String usertoken=null;
   if (StringUtils.isNotBlank(data)) {
