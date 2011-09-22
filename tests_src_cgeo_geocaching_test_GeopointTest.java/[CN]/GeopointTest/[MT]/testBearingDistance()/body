@@ -1,0 +1,10 @@
+{
+  final Geopoint gp1=new Geopoint(-30.4,-1.2);
+  final Geopoint gp2=new Geopoint(-30.1,-2.3);
+  final float d12=gp1.distanceTo(gp2);
+  Assert.assertEquals(110.967995,d12,1e-6);
+  Assert.assertEquals(d12,gp2.distanceTo(gp1),1e-6);
+  final float b12=gp1.bearingTo(gp2);
+  Assert.assertEquals(287.162,gp1.bearingTo(gp2),1e-3);
+  Assert.assertEquals(107.715,gp2.bearingTo(gp1),1e-3);
+}
