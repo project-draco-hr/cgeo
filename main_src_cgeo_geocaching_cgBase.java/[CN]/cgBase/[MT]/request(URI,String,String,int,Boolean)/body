@@ -43,7 +43,7 @@
         connection=(HttpURLConnection)uc;
         connection.setReadTimeout(timeout);
         connection.setRequestMethod(method);
-        HttpURLConnection.setFollowRedirects(false);
+        HttpURLConnection.setFollowRedirects(true);
         connection.setDoInput(true);
         connection.setDoOutput(false);
       }
@@ -66,7 +66,7 @@
         connection=(HttpURLConnection)uc;
         connection.setReadTimeout(timeout);
         connection.setRequestMethod(method);
-        HttpURLConnection.setFollowRedirects(false);
+        HttpURLConnection.setFollowRedirects(true);
         connection.setDoInput(true);
         connection.setDoOutput(true);
         final OutputStream out=connection.getOutputStream();
@@ -102,25 +102,19 @@ catch (    Exception e) {
   }
   cgResponse response=new cgResponse();
   try {
-    if (httpCode == 302 && httpLocation != null) {
-      final URI newLocation=uri.resolve(httpLocation);
-      response=request(newLocation,"GET",new HashMap<String,String>(),requestId,false,false,false);
-    }
- else {
-      if (StringUtils.isNotEmpty(buffer)) {
-        replaceWhitespace(buffer);
-        String data=buffer.toString();
-        buffer=null;
-        if (data != null) {
-          response.setData(data);
-        }
- else {
-          response.setData("");
-        }
-        response.setStatusCode(httpCode);
-        response.setStatusMessage(httpMessage);
-        response.setUrl(u.toString());
+    if (StringUtils.isNotEmpty(buffer)) {
+      replaceWhitespace(buffer);
+      String data=buffer.toString();
+      buffer=null;
+      if (data != null) {
+        response.setData(data);
       }
+ else {
+        response.setData("");
+      }
+      response.setStatusCode(httpCode);
+      response.setStatusMessage(httpMessage);
+      response.setUrl(u.toString());
     }
   }
  catch (  Exception e) {

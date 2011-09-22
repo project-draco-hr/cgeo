@@ -31,7 +31,7 @@
       connection=(HttpURLConnection)uc;
       connection.setReadTimeout(timeout);
       connection.setRequestMethod("POST");
-      HttpURLConnection.setFollowRedirects(false);
+      HttpURLConnection.setFollowRedirects(true);
       connection.setDoInput(true);
       connection.setDoOutput(true);
       final OutputStream out=connection.getOutputStream();
@@ -64,14 +64,8 @@ catch (    Exception e) {
     }
   }
   String page=null;
-  if (httpCode == 302 && httpLocation != null) {
-    final URI newLocation=uri.resolve(httpLocation);
-    page=requestJSONgc(newLocation,params);
-  }
- else {
-    replaceWhitespace(buffer);
-    page=buffer.toString();
-  }
+  replaceWhitespace(buffer);
+  page=buffer.toString();
   if (page != null) {
     return page;
   }

@@ -52,7 +52,7 @@
         connection=(HttpURLConnection)uc;
         connection.setReadTimeout(timeout);
         connection.setRequestMethod(method);
-        HttpURLConnection.setFollowRedirects(false);
+        HttpURLConnection.setFollowRedirects(true);
         connection.setDoInput(true);
         if (methodPost) {
           connection.setDoOutput(true);
@@ -92,13 +92,6 @@
       break;
     }
   }
-  String page=null;
   replaceWhitespace(buffer);
-  page=buffer.toString();
-  if (page != null) {
-    return page;
-  }
- else {
-    return "";
-  }
+  return buffer.toString();
 }
