@@ -1,9 +1,3 @@
 {
-  try {
-    return new URI(secure ? "https" : "http",host,path,query,null);
-  }
- catch (  URISyntaxException e) {
-    Log.e(cgSettings.tag,"buildURI",e);
-    return null;
-  }
+  return new Uri.Builder().scheme(secure ? "https" : "http").authority(host).path(path).encodedQuery(query).build();
 }

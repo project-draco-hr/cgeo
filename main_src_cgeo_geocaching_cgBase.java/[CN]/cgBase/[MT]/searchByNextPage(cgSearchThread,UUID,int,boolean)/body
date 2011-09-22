@@ -36,7 +36,7 @@
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08");
   params.put("__EVENTARGUMENT","");
-  final URI uri=buildURI(false,host,path);
+  final Uri uri=buildURI(false,host,path);
   String page=request(uri,method,params,false,false,true).getData();
   if (checkLogin(page) == false) {
     int loginState=login();

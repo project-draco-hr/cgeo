@@ -1,6 +1,5 @@
 {
   int httpCode=-1;
-  String httpLocation=null;
   final String cookiesDone=CookieJar.getCookiesAsString(prefs);
   URLConnection uc=null;
   HttpURLConnection connection=null;
@@ -13,7 +12,7 @@
     buffer.delete(0,buffer.length());
     timeout=30000 + (i * 15000);
     try {
-      final URL u=uri.toURL();
+      final URL u=new URL(uri.toString());
       uc=u.openConnection();
       uc.setRequestProperty("Host",uri.getHost());
       uc.setRequestProperty("Cookie",cookiesDone);
@@ -45,9 +44,8 @@
       final BufferedReader br=new BufferedReader(inr);
       readIntoBuffer(br,buffer);
       httpCode=connection.getResponseCode();
-      httpLocation=uc.getHeaderField("Location");
       final String paramsLog=params.replaceAll(passMatch,"password=***");
-      Log.i(cgSettings.tag + " | JSON","[POST " + (int)(params.length() / 1024) + "k | "+ httpCode+ " | "+ (int)(buffer.length() / 1024)+ "k] Downloaded "+ uri.toString()+ "?"+ paramsLog);
+      Log.i(cgSettings.tag + " | JSON","[POST " + (params.length() / 1024) + "k | "+ httpCode+ " | "+ (buffer.length() / 1024)+ "k] Downloaded "+ uri.toString()+ "?"+ paramsLog);
       connection.disconnect();
       br.close();
       ins.close();

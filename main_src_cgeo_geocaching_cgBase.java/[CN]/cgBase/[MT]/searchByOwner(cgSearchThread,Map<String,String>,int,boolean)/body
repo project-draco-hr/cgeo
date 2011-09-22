@@ -21,7 +21,7 @@
   }
   params.put("u",userName);
   final String url="http://" + host + path+ "?"+ prepareParameters(params,false,true);
-  final URI uri=buildURI(false,host,path);
+  final Uri uri=buildURI(false,host,path);
   String page=requestLogged(uri,method,params,false,false,true);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByOwner: No data from server");

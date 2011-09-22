@@ -26,7 +26,7 @@
     Log.i(cgSettings.tag,"cgBase.searchByUsername: Overriding users choice, downloading all caches.");
   }
   final String url="http://" + host + path+ "?"+ prepareParameters(params,my,true);
-  final URI uri=buildURI(false,host,path);
+  final Uri uri=buildURI(false,host,path);
   String page=requestLogged(uri,method,params,false,my,true);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByUsername: No data from server");

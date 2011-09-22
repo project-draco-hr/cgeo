@@ -21,7 +21,7 @@
   }
   params.put("key",keyword);
   final String url="http://" + host + path+ "?"+ prepareParameters(params,false,true);
-  final URI uri=cgBase.buildURI(false,host,path);
+  final Uri uri=cgBase.buildURI(false,host,path);
   String page=requestLogged(uri,method,params,false,false,true);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No data from server");

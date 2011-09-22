@@ -2,7 +2,6 @@
   URL u=null;
   int httpCode=-1;
   String httpMessage=null;
-  String httpLocation=null;
   if (requestId == 0) {
     requestId=(int)(Math.random() * 1000);
   }
@@ -25,7 +24,7 @@
     timeout=30000 + (i * 10000);
     try {
       if (method.equals("GET")) {
-        u=new URI(uri.getScheme(),uri.getAuthority(),uri.getPath(),params,null).toURL();
+        u=new URL(uri.buildUpon().encodedQuery(params).build().toString());
         uc=u.openConnection();
         uc.setRequestProperty("Host",uri.getHost());
         uc.setRequestProperty("Cookie",cookiesDone);
@@ -48,7 +47,7 @@
         connection.setDoOutput(false);
       }
  else {
-        u=uri.toURL();
+        u=new URL(uri.toString());
         uc=u.openConnection();
         uc.setRequestProperty("Host",uri.getHost());
         uc.setRequestProperty("Cookie",cookiesDone);
@@ -82,9 +81,8 @@
       readIntoBuffer(br,buffer);
       httpCode=connection.getResponseCode();
       httpMessage=connection.getResponseMessage();
-      httpLocation=uc.getHeaderField("Location");
       final String paramsLog=params.replaceAll(passMatch,"password=***");
-      Log.i(cgSettings.tag + "|" + requestId,"[" + method + " "+ (int)(params.length() / 1024)+ "k | "+ httpCode+ " | "+ (int)(buffer.length() / 1024)+ "k] Downloaded "+ uri+ "?"+ paramsLog);
+      Log.i(cgSettings.tag + "|" + requestId,"[" + method + " "+ (params.length() / 1024)+ "k | "+ httpCode+ " | "+ (buffer.length() / 1024)+ "k] Downloaded "+ uri+ "?"+ paramsLog);
       connection.disconnect();
       br.close();
       ins.close();

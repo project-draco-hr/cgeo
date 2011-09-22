@@ -33,7 +33,7 @@
   params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo",log);
   params.put("ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry");
   params.put("ctl00$ContentBody$uxVistOtherListingGC","");
-  final URI uri=buildURI(false,"www.geocaching.com","/track/log.aspx","wid=" + tbid);
+  final Uri uri=buildURI(false,"www.geocaching.com","/track/log.aspx","wid=" + tbid);
   String page=request(uri,"POST",params,false,false,false).getData();
   if (checkLogin(page) == false) {
     int loginState=login();
