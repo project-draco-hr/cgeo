@@ -36,11 +36,12 @@
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08");
   params.put("__EVENTARGUMENT","");
-  String page=request(false,host,path,method,params,false,false,true).getData();
+  final URI uri=buildURI(false,host,path);
+  String page=request(uri,method,params,false,false,true).getData();
   if (checkLogin(page) == false) {
     int loginState=login();
     if (loginState == 1) {
-      page=request(false,host,path,method,params,false,false,true).getData();
+      page=request(uri,method,params,false,false,true).getData();
     }
  else     if (loginState == -3) {
       Log.i(cgSettings.tag,"Working as guest.");

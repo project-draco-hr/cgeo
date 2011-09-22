@@ -12,10 +12,6 @@
  else {
     method=method.toUpperCase();
   }
-  String scheme="http://";
-  if (secure) {
-    scheme="https://";
-  }
   String cookiesDone=CookieJar.getCookiesAsString(prefs);
   URLConnection uc=null;
   HttpURLConnection connection=null;
@@ -29,9 +25,9 @@
     timeout=30000 + (i * 10000);
     try {
       if (method.equals("GET")) {
-        u=new URL(scheme + host + path+ "?"+ params);
+        u=new URI(uri.getScheme(),uri.getAuthority(),uri.getPath(),params,null).toURL();
         uc=u.openConnection();
-        uc.setRequestProperty("Host",host);
+        uc.setRequestProperty("Host",uri.getHost());
         uc.setRequestProperty("Cookie",cookiesDone);
         if (xContentType) {
           uc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
@@ -52,9 +48,9 @@
         connection.setDoOutput(false);
       }
  else {
-        u=new URL(scheme + host + path);
+        u=uri.toURL();
         uc=u.openConnection();
-        uc.setRequestProperty("Host",host);
+        uc.setRequestProperty("Host",uri.getHost());
         uc.setRequestProperty("Cookie",cookiesDone);
         if (xContentType) {
           uc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
@@ -88,17 +84,17 @@
       httpMessage=connection.getResponseMessage();
       httpLocation=uc.getHeaderField("Location");
       final String paramsLog=params.replaceAll(passMatch,"password=***");
-      Log.i(cgSettings.tag + "|" + requestId,"[" + method + " "+ (int)(params.length() / 1024)+ "k | "+ httpCode+ " | "+ (int)(buffer.length() / 1024)+ "k] Downloaded "+ scheme+ host+ path+ "?"+ paramsLog);
+      Log.i(cgSettings.tag + "|" + requestId,"[" + method + " "+ (int)(params.length() / 1024)+ "k | "+ httpCode+ " | "+ (int)(buffer.length() / 1024)+ "k] Downloaded "+ uri+ "?"+ paramsLog);
       connection.disconnect();
       br.close();
       ins.close();
       inr.close();
     }
  catch (    IOException e) {
-      Log.e(cgSettings.tag,"cgeoBase.request.IOException: " + e.toString());
+      Log.e(cgSettings.tag,"cgeoBase.request.IOException",e);
     }
 catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgeoBase.request: " + e.toString());
+      Log.e(cgSettings.tag,"cgeoBase.request",e);
     }
     if (buffer.length() > 0) {
       break;
@@ -107,8 +103,8 @@ catch (    Exception e) {
   cgResponse response=new cgResponse();
   try {
     if (httpCode == 302 && httpLocation != null) {
-      final URI newLocation=new URI(scheme,host,path,null).resolve(httpLocation);
-      response=request(newLocation.getScheme() == "https",newLocation.getHost(),newLocation.getPath(),"GET",new HashMap<String,String>(),requestId,false,false,false);
+      final URI newLocation=uri.resolve(httpLocation);
+      response=request(newLocation,"GET",new HashMap<String,String>(),requestId,false,false,false);
     }
  else {
       if (StringUtils.isNotEmpty(buffer)) {

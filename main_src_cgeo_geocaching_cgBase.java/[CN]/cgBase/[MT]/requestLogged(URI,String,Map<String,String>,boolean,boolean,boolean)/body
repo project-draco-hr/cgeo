@@ -1,10 +1,10 @@
 {
-  cgResponse response=request(secure,host,path,method,params,xContentType,my,addF);
+  cgResponse response=request(uri,method,params,xContentType,my,addF);
   String data=response.getData();
   if (checkLogin(data) == false) {
     int loginState=login();
     if (loginState == 1) {
-      response=request(secure,host,path,method,params,xContentType,my,addF);
+      response=request(uri,method,params,xContentType,my,addF);
       data=response.getData();
     }
  else {
