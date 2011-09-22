@@ -61,13 +61,5 @@ catch (    Exception e) {
       break;
     }
   }
-  String page=null;
-  replaceWhitespace(buffer);
-  page=buffer.toString();
-  if (page != null) {
-    return page;
-  }
- else {
-    return "";
-  }
+  return replaceWhitespace(buffer);
 }

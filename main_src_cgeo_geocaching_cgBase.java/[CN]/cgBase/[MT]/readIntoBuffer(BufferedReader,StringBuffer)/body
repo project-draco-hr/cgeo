@@ -1,13 +1,8 @@
 {
-  int bufferSize=1024 * 16;
-  char[] bytes=new char[bufferSize];
+  final int bufferSize=1024 * 16;
+  final char[] bytes=new char[bufferSize];
   int bytesRead;
   while ((bytesRead=br.read(bytes)) > 0) {
-    if (bytesRead == bufferSize) {
-      buffer.append(bytes);
-    }
- else {
-      buffer.append(bytes,0,bytesRead);
-    }
+    buffer.append(bytes,0,bytesRead);
   }
 }

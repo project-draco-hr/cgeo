@@ -98,15 +98,8 @@ catch (    Exception e) {
   cgResponse response=new cgResponse();
   try {
     if (StringUtils.isNotEmpty(buffer)) {
-      replaceWhitespace(buffer);
-      String data=buffer.toString();
-      buffer=null;
-      if (data != null) {
-        response.setData(data);
-      }
- else {
-        response.setData("");
-      }
+      final String data=replaceWhitespace(buffer);
+      response.setData(data);
       response.setStatusCode(httpCode);
       response.setStatusMessage(httpMessage);
       response.setUrl(u.toString());
