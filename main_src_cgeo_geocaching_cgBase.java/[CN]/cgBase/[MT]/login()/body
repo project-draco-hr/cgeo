@@ -1,5 +1,4 @@
 {
-  final URI uri=buildURI(true,"www.geocaching.com","/login/default.aspx");
   cgResponse loginResponse=null;
   String loginData=null;
   String[] viewstates=null;
@@ -7,7 +6,7 @@
   if (loginStart == null) {
     return -3;
   }
-  loginResponse=request(uri,"GET",new HashMap<String,String>(),false,false,false);
+  loginResponse=request(URI_GC_LOGIN_DEFAULT,"GET",new HashMap<String,String>(),false,false,false);
   loginData=loginResponse.getData();
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {
@@ -39,7 +38,7 @@
   params.put("ctl00$SiteContent$tbPassword",login.get("password"));
   params.put("ctl00$SiteContent$cbRememberMe","on");
   params.put("ctl00$SiteContent$btnSignIn","Login");
-  loginResponse=request(uri,"POST",params,false,false,false);
+  loginResponse=request(URI_GC_LOGIN_DEFAULT,"POST",params,false,false,false);
   loginData=loginResponse.getData();
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {

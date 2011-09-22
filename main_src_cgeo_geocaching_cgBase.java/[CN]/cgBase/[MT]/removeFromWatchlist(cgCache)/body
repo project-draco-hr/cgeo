@@ -1,5 +1,5 @@
 {
-  final URI uri=buildURI(false,"www.geocaching.com","/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheId);
+  final URI uri=buildURI(false,"www.geocaching.com","/my/watchlist.aspx","ds=1&action=rem&id=" + cache.cacheId);
   String page=requestLogged(uri,"POST",null,false,false,false);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgBase.removeFromWatchlist: No data from server");

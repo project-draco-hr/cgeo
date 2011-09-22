@@ -17,8 +17,7 @@
  else   if (StringUtils.isNotBlank(id)) {
     params.put("id",id);
   }
-  final URI uri=buildURI(false,"www.geocaching.com","/track/details.aspx");
-  String page=requestLogged(uri,"GET",params,false,false,false);
+  String page=requestLogged(URI_GC_TRACK_DETAILS,"GET",params,false,false,false);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchTrackable: No data from server");
     return trackable;

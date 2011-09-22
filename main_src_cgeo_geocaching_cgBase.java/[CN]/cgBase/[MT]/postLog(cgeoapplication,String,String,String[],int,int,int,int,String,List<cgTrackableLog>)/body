@@ -57,7 +57,7 @@
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString());
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
   }
-  final URI uri=buildURI(false,"www.geocaching.com","/seek/log.aspx?ID=" + cacheid);
+  final URI uri=buildURI(false,"www.geocaching.com","/seek/log.aspx","ID=" + cacheid);
   String page=request(uri,"POST",params,false,false,false).getData();
   if (checkLogin(page) == false) {
     int loginState=login();

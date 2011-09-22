@@ -19,8 +19,7 @@
       params.put("waypoints",implode(",",geocodes.toArray()));
     }
     params.put("version","cgeo");
-    final URI uri=buildURI(false,"gcvote.com","/getVotes.php");
-    final String votes=request(uri,"GET",params,false,false,false).getData();
+    final String votes=request(URI_GCVOTE_GETVOTES,"GET",params,false,false,false).getData();
     if (votes == null) {
       return null;
     }
