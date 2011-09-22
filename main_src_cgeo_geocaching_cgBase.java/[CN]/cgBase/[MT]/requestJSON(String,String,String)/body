@@ -17,11 +17,11 @@
       readIntoBuffer(br,buffer);
       final String paramsLog=params.replaceAll(passMatch,"password=***");
       Log.i(cgSettings.tag + " | JSON","[POST " + (int)(params.length() / 1024) + "k | "+ statusCode+ " | "+ (int)(buffer.length() / 1024)+ "k] Downloaded "+ "http://"+ host+ path+ "?"+ paramsLog);
-      return replaceWhitespace(buffer);
+      return new JSONObject(buffer.toString());
     }
  catch (    Exception e) {
       Log.e(cgSettings.tag,"cgeoBase.requestJSON",e);
     }
   }
-  return "";
+  return null;
 }
