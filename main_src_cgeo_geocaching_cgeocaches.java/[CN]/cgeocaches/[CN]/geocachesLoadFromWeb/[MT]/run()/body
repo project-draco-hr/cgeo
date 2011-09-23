@@ -16,7 +16,7 @@
     if (deviceCode == null) {
       deviceCode="";
     }
-    cgResponse responseFromWeb=base.request(false,"send2.cgeo.org","/read.html","GET","code=" + cgBase.urlencode_rfc3986(deviceCode),0,true);
+    cgResponse responseFromWeb=base.request(URI_SEND2CGEO_READ,"GET","code=" + cgBase.urlencode_rfc3986(deviceCode),0,true);
     if (responseFromWeb.getStatusCode() == 200) {
       if (responseFromWeb.getData().length() > 2) {
         String GCcode=responseFromWeb.getData();

@@ -19,18 +19,13 @@
   final String host="www.geocaching.com";
   final String path="/map/default.aspx/MapAction";
   String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ usertoken+ "\"}}";
-  final String url="http://" + host + path+ "?"+ params;
-  try {
-    page=requestJSONgc(new URI("http",host,path,null),params);
-  }
- catch (  URISyntaxException e) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByViewPort",e);
-  }
+  final URI uri=buildURI(false,host,path);
+  page=requestJSONgc(uri,params);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No data from server");
     return null;
   }
-  final cgCacheWrap caches=parseMapJSON(url,page);
+  final cgCacheWrap caches=parseMapJSON(buildURI(false,host,path,params),page);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No cache parsed");
   }
