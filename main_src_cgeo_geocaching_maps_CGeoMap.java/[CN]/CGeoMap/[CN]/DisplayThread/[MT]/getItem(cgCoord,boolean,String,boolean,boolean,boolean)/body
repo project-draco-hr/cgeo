@@ -1,7 +1,7 @@
 {
   coordinates.add(cgCoord);
-  CachesOverlayItemImpl item2=settings.getMapFactory().getCachesOverlayItem(cgCoord,null);
-  int icon=cgBase.getMarkerIcon(false,cgCoord.type,false,false,false);
+  CachesOverlayItemImpl item=settings.getMapFactory().getCachesOverlayItem(cgCoord,null);
+  int icon=cgBase.getMarkerIcon(cache,type,own,found,disabled);
   Drawable pin=null;
   if (iconsCache.containsKey(icon)) {
     pin=iconsCache.get(icon);
@@ -11,6 +11,6 @@
     pin.setBounds(0,0,pin.getIntrinsicWidth(),pin.getIntrinsicHeight());
     iconsCache.put(icon,pin);
   }
-  item2.setMarker(pin);
-  return item2;
+  item.setMarker(pin);
+  return item;
 }

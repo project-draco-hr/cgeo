@@ -19,13 +19,13 @@
         if (cacheOne.coords == null) {
           continue;
         }
-        items.add(getItem(new cgCoord(cacheOne),cacheOne.type));
+        items.add(getItem(new cgCoord(cacheOne),true,cacheOne.type,cacheOne.own,cacheOne.found,cacheOne.disabled));
         if (cacheOne != null && cacheOne.waypoints != null && !cacheOne.waypoints.isEmpty()) {
           for (          cgWaypoint oneWaypoint : cacheOne.waypoints) {
             if (oneWaypoint.coords == null) {
               continue;
             }
-            items.add(getItem(new cgCoord(oneWaypoint),oneWaypoint.type));
+            items.add(getItem(new cgCoord(oneWaypoint),false,oneWaypoint.type,false,false,false));
           }
         }
       }
