@@ -14,7 +14,7 @@
   Log.i(cgSettings.tag,"Trying to post log for trackable #" + trackingCode + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log);
   log=log.replace("\n","\r\n");
   final Calendar currentDate=Calendar.getInstance();
-  final Map<String,String> params=new HashMap<String,String>();
+  final Parameters params=new Parameters();
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","");
   params.put("__EVENTARGUMENT","");
@@ -33,12 +33,12 @@
   params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo",log);
   params.put("ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry");
   params.put("ctl00$ContentBody$uxVistOtherListingGC","");
-  final Uri uri=buildURI(false,"www.geocaching.com","/track/log.aspx","wid=" + tbid);
-  String page=request(uri,"POST",params,false,false,false).getData();
+  final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
+  String page=getResponseData(postRequest(uri,params));
   if (checkLogin(page) == false) {
     int loginState=login();
     if (loginState == 1) {
-      page=request(uri,"POST",params,false,false,false).getData();
+      page=getResponseData(postRequest(uri,params));
     }
  else {
       Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: Can not log in geocaching (error: " + loginState + ")");

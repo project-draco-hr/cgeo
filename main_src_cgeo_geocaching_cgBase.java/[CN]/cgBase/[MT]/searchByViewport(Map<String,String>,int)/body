@@ -20,7 +20,7 @@
   final String path="/map/default.aspx/MapAction";
   String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ usertoken+ "\"}}";
   final Uri uri=buildURI(false,host,path);
-  page=requestJSONgc(uri,params);
+  page=getResponseData(requestJSONgc(uri,params));
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No data from server");
     return null;

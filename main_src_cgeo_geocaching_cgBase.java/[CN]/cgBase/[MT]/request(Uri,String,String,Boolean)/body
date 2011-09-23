@@ -1,112 +1,42 @@
 {
-  URL u=null;
-  int httpCode=-1;
-  String httpMessage=null;
-  if (method == null || (method.equalsIgnoreCase("GET") == false && method.equalsIgnoreCase("POST") == false)) {
-    method="POST";
+  HttpRequestBase request;
+  if (method.equals("GET")) {
+    request=new HttpGet(uri.buildUpon().encodedQuery(params).build().toString());
   }
  else {
-    method=method.toUpperCase();
+    request=new HttpPost(uri.toString());
+    try {
+      final ByteArrayEntity paramsEntity=new ByteArrayEntity(params.getBytes("utf-8"));
+      Log.d(cgSettings.tag,"Entity: " + paramsEntity);
+      ((HttpPost)request).setEntity(paramsEntity);
+    }
+ catch (    UnsupportedEncodingException e) {
+      Log.e(cgSettings.tag,"request",e);
+      return null;
+    }
   }
-  String cookiesDone=CookieJar.getCookiesAsString(prefs);
-  URLConnection uc=null;
-  HttpURLConnection connection=null;
-  Integer timeout=30000;
-  StringBuffer buffer=null;
+  request.setHeader("X-Requested-With","XMLHttpRequest");
+  if (xContentType) {
+    request.setHeader("Content-Type","application/x-www-form-urlencoded");
+  }
+  if (settings.asBrowser == 1) {
+    request.setHeader("User-Agent",idBrowser);
+  }
+  final DefaultHttpClient client=getHttpClient();
   for (int i=0; i < 5; i++) {
     if (i > 0) {
       Log.w(cgSettings.tag,"Failed to download data, retrying. Attempt #" + (i + 1));
     }
-    buffer=new StringBuffer();
-    timeout=30000 + (i * 10000);
+    Log.d(cgSettings.tag,"request: requesting " + request.getMethod() + " "+ request.getURI()+ " ??? headers: "+ request.getAllHeaders());
     try {
-      if (method.equals("GET")) {
-        u=new URL(uri.buildUpon().encodedQuery(params).build().toString());
-        uc=u.openConnection();
-        uc.setRequestProperty("Host",uri.getHost());
-        uc.setRequestProperty("Cookie",cookiesDone);
-        if (xContentType) {
-          uc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        }
-        if (settings.asBrowser == 1) {
-          uc.setRequestProperty("Accept","application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5");
-          uc.setRequestProperty("Accept-Charset","utf-8, iso-8859-1, utf-16, *;q=0.7");
-          uc.setRequestProperty("Accept-Language","en-US");
-          uc.setRequestProperty("User-Agent",idBrowser);
-          uc.setRequestProperty("Connection","keep-alive");
-          uc.setRequestProperty("Keep-Alive","300");
-        }
-        connection=(HttpURLConnection)uc;
-        connection.setReadTimeout(timeout);
-        connection.setRequestMethod(method);
-        HttpURLConnection.setFollowRedirects(true);
-        connection.setDoInput(true);
-        connection.setDoOutput(false);
-      }
- else {
-        u=new URL(uri.toString());
-        uc=u.openConnection();
-        uc.setRequestProperty("Host",uri.getHost());
-        uc.setRequestProperty("Cookie",cookiesDone);
-        if (xContentType) {
-          uc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        }
-        if (settings.asBrowser == 1) {
-          uc.setRequestProperty("Accept","application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5");
-          uc.setRequestProperty("Accept-Charset","utf-8, iso-8859-1, utf-16, *;q=0.7");
-          uc.setRequestProperty("Accept-Language","en-US");
-          uc.setRequestProperty("User-Agent",idBrowser);
-          uc.setRequestProperty("Connection","keep-alive");
-          uc.setRequestProperty("Keep-Alive","300");
-        }
-        connection=(HttpURLConnection)uc;
-        connection.setReadTimeout(timeout);
-        connection.setRequestMethod(method);
-        HttpURLConnection.setFollowRedirects(true);
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
-        final OutputStream out=connection.getOutputStream();
-        final OutputStreamWriter wr=new OutputStreamWriter(out);
-        wr.write(params);
-        wr.flush();
-        wr.close();
-      }
-      CookieJar.setCookies(prefs,uc);
-      InputStream ins=getInputstreamFromConnection(connection);
-      final InputStreamReader inr=new InputStreamReader(ins);
-      final BufferedReader br=new BufferedReader(inr,16 * 1024);
-      readIntoBuffer(br,buffer);
-      httpCode=connection.getResponseCode();
-      httpMessage=connection.getResponseMessage();
-      final String paramsLog=params.replaceAll(passMatch,"password=***");
-      Log.i(cgSettings.tag,"[" + method + " "+ (params.length() / 1024)+ "k | "+ httpCode+ " | "+ (buffer.length() / 1024)+ "k] Downloaded "+ uri+ "?"+ paramsLog);
-      connection.disconnect();
-      br.close();
-      ins.close();
-      inr.close();
+      dumpCookies("Cookies before request",client);
+      final HttpResponse response=client.execute(request);
+      dumpCookies("Cookies after request",client);
+      return response;
     }
- catch (    IOException e) {
-      Log.e(cgSettings.tag,"cgeoBase.request.IOException",e);
-    }
-catch (    Exception e) {
+ catch (    Exception e) {
       Log.e(cgSettings.tag,"cgeoBase.request",e);
     }
-    if (buffer.length() > 0) {
-      break;
-    }
   }
-  cgResponse response=new cgResponse();
-  try {
-    if (StringUtils.isNotEmpty(buffer)) {
-      final String data=replaceWhitespace(buffer);
-      response.setData(data);
-      response.setStatusCode(httpCode);
-      response.setStatusMessage(httpMessage);
-      response.setUrl(u.toString());
-    }
-  }
- catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeoBase.page",e);
-  }
-  return response;
+  return null;
 }

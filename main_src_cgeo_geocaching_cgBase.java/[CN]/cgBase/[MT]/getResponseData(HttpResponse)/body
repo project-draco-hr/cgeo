@@ -1,0 +1,12 @@
+{
+  if (response == null) {
+    return null;
+  }
+  try {
+    return EntityUtils.toString(response.getEntity(),"utf-8");
+  }
+ catch (  Exception e) {
+    Log.e(cgSettings.tag,"getResponseData",e);
+    return null;
+  }
+}

@@ -12,7 +12,7 @@
   params.put("ltx",String.format((Locale)null,"%.6f",latMax));
   params.put("lnm",String.format((Locale)null,"%.6f",lonMin));
   params.put("lnx",String.format((Locale)null,"%.6f",lonMax));
-  final String data=request(URI_GO4CACHE_GET,"POST",params,false,false,false).getData();
+  final String data=getResponseData(request(URI_GO4CACHE_GET,"POST",params,false,false,false));
   if (StringUtils.isBlank(data)) {
     Log.e(cgSettings.tag,"cgeoBase.getGeocachersInViewport: No data from server");
     return null;

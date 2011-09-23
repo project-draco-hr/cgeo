@@ -32,7 +32,7 @@
  else {
     Log.i(cgSettings.tag,"Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log+ "; trackables: 0");
   }
-  final Map<String,String> params=new HashMap<String,String>();
+  final Parameters params=new Parameters();
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","");
   params.put("__EVENTARGUMENT","");
@@ -57,12 +57,12 @@
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString());
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
   }
-  final Uri uri=buildURI(false,"www.geocaching.com","/seek/log.aspx","ID=" + cacheid);
-  String page=request(uri,"POST",params,false,false,false).getData();
-  if (checkLogin(page) == false) {
+  final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
+  String page=getResponseData(postRequest(uri,params));
+  if (!checkLogin(page)) {
     int loginState=login();
     if (loginState == 1) {
-      page=request(uri,"POST",params,false,false,false).getData();
+      page=getResponseData(postRequest(uri,params));
     }
  else {
       Log.e(cgSettings.tag,"cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
@@ -110,7 +110,7 @@
         params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString());
         params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
       }
-      page=request(uri,"POST",params,false,false,false).getData();
+      page=getResponseData(postRequest(uri,params));
     }
   }
  catch (  Exception e) {

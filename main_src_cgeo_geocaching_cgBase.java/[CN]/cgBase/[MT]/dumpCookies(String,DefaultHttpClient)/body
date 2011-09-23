@@ -1,0 +1,6 @@
+{
+  Log.d(cgSettings.tag,msg);
+  for (  Cookie cookie : client.getCookieStore().getCookies()) {
+    Log.d(cgSettings.tag,"  - " + cookie.getName() + ": "+ cookie.getValue());
+  }
+}

@@ -1,7 +1,7 @@
 {
-  final Map<String,String> params=new HashMap<String,String>();
+  final Parameters params=new Parameters();
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem");
   params.put("__EVENTARGUMENT","");
-  return request(URI_GC_DEFAULT,"POST",params,false,false,false).getData();
+  return cgBase.getResponseData(postRequest(URI_GC_DEFAULT,params));
 }

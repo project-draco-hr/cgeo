@@ -19,7 +19,7 @@
       params.put("waypoints",StringUtils.join(geocodes.toArray(),','));
     }
     params.put("version","cgeo");
-    final String votes=request(URI_GCVOTE_GETVOTES,"GET",params,false,false,false).getData();
+    final String votes=getResponseData(request(URI_GCVOTE_GETVOTES,"GET",params,false,false,false));
     if (votes == null) {
       return null;
     }

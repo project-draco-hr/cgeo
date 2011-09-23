@@ -1,6 +1,6 @@
 {
   final String[] viewstates=app.getViewstates(searchId);
-  String url=app.getUrl(searchId);
+  final String url=app.getUrl(searchId);
   if (StringUtils.isBlank(url)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No url found");
     return searchId;
@@ -9,39 +9,16 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No viewstate given");
     return searchId;
   }
-  String host="www.geocaching.com";
-  String path="/";
-  final String method="POST";
-  int dash=-1;
-  if (url.startsWith("http://")) {
-    url=url.substring(7);
-  }
-  dash=url.indexOf("/");
-  if (dash > -1) {
-    host=url.substring(0,dash);
-    url=url.substring(dash);
-  }
- else {
-    host=url;
-    url="";
-  }
-  dash=url.indexOf("?");
-  if (dash > -1) {
-    path=url.substring(0,dash);
-  }
- else {
-    path=url;
-  }
-  final Map<String,String> params=new HashMap<String,String>();
+  final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
+  final Parameters params=new Parameters();
   setViewstates(viewstates,params);
   params.put("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08");
   params.put("__EVENTARGUMENT","");
-  final Uri uri=buildURI(false,host,path);
-  String page=request(uri,method,params,false,false,true).getData();
+  String page=getResponseData(postRequest(uri,params));
   if (checkLogin(page) == false) {
     int loginState=login();
     if (loginState == 1) {
-      page=request(uri,method,params,false,false,true).getData();
+      page=getResponseData(postRequest(uri,params));
     }
  else     if (loginState == -3) {
       Log.i(cgSettings.tag,"Working as guest.");

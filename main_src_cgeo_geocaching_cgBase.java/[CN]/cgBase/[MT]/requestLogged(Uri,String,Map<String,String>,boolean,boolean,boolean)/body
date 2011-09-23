@@ -1,11 +1,11 @@
 {
-  cgResponse response=request(uri,method,params,xContentType,my,addF);
-  String data=response.getData();
+  HttpResponse response=request(uri,method,params,xContentType,my,addF);
+  String data=getResponseData(response);
   if (checkLogin(data) == false) {
     int loginState=login();
     if (loginState == 1) {
       response=request(uri,method,params,xContentType,my,addF);
-      data=response.getData();
+      data=getResponseData(response);
     }
  else {
       Log.i(cgSettings.tag,"Working as guest.");
