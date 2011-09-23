@@ -1,13 +1,11 @@
 {
-  final HttpClient client=new DefaultHttpClient();
-  final Uri uri=buildURI(false,host,path,params);
-  final HttpGet request=new HttpGet(uri.toString());
+  final HttpGet request=new HttpGet(uri);
   request.setHeader("Accept","application/json, text/javascript, */*; q=0.01");
   request.setHeader("Content-Type","application/json; charset=UTF-8");
   request.setHeader("X-Requested-With","XMLHttpRequest");
   for (int i=0; i < 3; i++) {
     try {
-      final HttpResponse response=client.execute(request);
+      final HttpResponse response=getHttpClient().execute(request);
       final int statusCode=response.getStatusLine().getStatusCode();
       if (statusCode == 403) {
         break;
@@ -15,8 +13,7 @@
       final StringBuffer buffer=new StringBuffer();
       final BufferedReader br=new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
       readIntoBuffer(br,buffer);
-      final String paramsLog=params.replaceAll(passMatch,"password=***");
-      Log.i(cgSettings.tag + " | JSON","[POST " + (int)(params.length() / 1024) + "k | "+ statusCode+ " | "+ (int)(buffer.length() / 1024)+ "k] Downloaded "+ "http://"+ host+ path+ "?"+ paramsLog);
+      Log.i(cgSettings.tag,"[POST " + statusCode + "] Downloaded "+ uri);
       return new JSONObject(buffer.toString());
     }
  catch (    Exception e) {
