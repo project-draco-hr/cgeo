@@ -13,7 +13,7 @@
     }
     final String username=settings.getUsername();
     if (username != null) {
-      final Map<String,String> params=new HashMap<String,String>();
+      final Parameters params=new Parameters();
       final String latStr=String.format((Locale)null,"%.6f",coordsNow.getLatitude());
       final String lonStr=String.format((Locale)null,"%.6f",coordsNow.getLongitude());
       params.put("u",username);
@@ -24,7 +24,7 @@
       if (base.version != null) {
         params.put("v",base.version);
       }
-      final String res=cgBase.getResponseData(base.request(URI_GO4CACHE,"POST",params,false,false,false));
+      final String res=cgBase.getResponseData(base.postRequest(URI_GO4CACHE,params));
       if (StringUtils.isNotBlank(res)) {
         lastGo4cacheCoords=coordsNow;
       }

@@ -1,6 +1,6 @@
 {
-  final Uri uri=buildURI(false,"www.geocaching.com","/my/watchlist.aspx","w=" + cache.cacheId);
-  String page=requestLogged(uri,"POST",null,false,false,false);
+  final String uri="http://www.geocaching.com/my/watchlist.aspx?w=" + cache.cacheId;
+  String page=postRequestLogged(uri);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgBase.addToWatchlist: No data from server");
     return -1;
