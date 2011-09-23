@@ -8,7 +8,7 @@
     if (settings.asBrowser == 1) {
       request.setHeader("User-Agent",idBrowser);
     }
-    Log.d(cgSettings.tag,"postRequest: POST to " + uri);
+    Log.d(cgSettings.tag,"postRequest: POST " + uri);
     return getHttpClient().execute(request);
   }
  catch (  Exception e) {
