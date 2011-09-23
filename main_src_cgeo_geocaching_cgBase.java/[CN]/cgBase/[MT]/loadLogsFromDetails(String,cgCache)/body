@@ -10,7 +10,7 @@
   params.put("idx","1");
   params.put("num","35");
   params.put("decrypt","true");
-  final HttpResponse response=request(URI_GC_SEEK_LOGBOOK,"GET",params,false,false,false);
+  final HttpResponse response=request(URI_GC_SEEK_LOGBOOK,params,false,false,false);
   final int statusCode=response.getStatusLine().getStatusCode();
   if (statusCode != 200) {
     Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");

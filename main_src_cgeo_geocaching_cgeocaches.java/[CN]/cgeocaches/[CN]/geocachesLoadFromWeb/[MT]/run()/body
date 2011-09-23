@@ -16,7 +16,7 @@
     if (deviceCode == null) {
       deviceCode="";
     }
-    HttpResponse responseFromWeb=base.request(URI_SEND2CGEO_READ,"GET","code=" + cgBase.urlencode_rfc3986(deviceCode),true);
+    HttpResponse responseFromWeb=base.request(URI_SEND2CGEO_READ,"code=" + cgBase.urlencode_rfc3986(deviceCode),true);
     if (responseFromWeb.getStatusLine().getStatusCode() == 200) {
       final String response=cgBase.getResponseData(responseFromWeb);
       if (response.length() > 2) {

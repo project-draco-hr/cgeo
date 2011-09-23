@@ -7,7 +7,7 @@
     params.put("guid",guid);
   }
   params.put("decrypt","y");
-  String page=base.requestLogged(URI_GC_SEEK_CACHE_DETAILS,"GET",params,false,false,false);
+  String page=base.requestLogged(URI_GC_SEEK_CACHE_DETAILS,params,false,false,false);
   if (StringUtils.isEmpty(page)) {
     if (app.isThere(geocode,guid,true,false)) {
       if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {

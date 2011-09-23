@@ -6,7 +6,7 @@
   if (loginStart == null) {
     return -3;
   }
-  loginResponse=request(Uri.parse(URI_GC_LOGIN_DEFAULT),"GET",new HashMap<String,String>(),false,false,false);
+  loginResponse=request(URI_GC_LOGIN_DEFAULT,new HashMap<String,String>(),false,false,false);
   loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {

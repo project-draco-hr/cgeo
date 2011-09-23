@@ -31,7 +31,7 @@
         }
       }
       if (recaptchaJsParam != null) {
-        final String recaptchaJs=cgBase.getResponseData(request(URI_GOOGLE_RECAPTCHA,"GET","k=" + urlencode_rfc3986(recaptchaJsParam.trim()),true));
+        final String recaptchaJs=cgBase.getResponseData(request(URI_GOOGLE_RECAPTCHA,"k=" + urlencode_rfc3986(recaptchaJsParam.trim()),true));
         if (StringUtils.isNotBlank(recaptchaJs)) {
           final Matcher matcherRecaptchaChallenge=patternRecaptchaChallenge.matcher(recaptchaJs);
           while (matcherRecaptchaChallenge.find()) {

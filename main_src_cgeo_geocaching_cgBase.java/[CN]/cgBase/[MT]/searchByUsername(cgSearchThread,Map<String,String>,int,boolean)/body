@@ -9,9 +9,6 @@
   if (StringUtils.isBlank(cacheType)) {
     cacheType=null;
   }
-  final String host="www.geocaching.com";
-  final String path="/seek/nearest.aspx";
-  final String method="GET";
   final Map<String,String> params=new HashMap<String,String>();
   if (cacheType != null && cacheIDs.containsKey(cacheType)) {
     params.put("tx",cacheIDs.get(cacheType));
@@ -25,14 +22,14 @@
     my=true;
     Log.i(cgSettings.tag,"cgBase.searchByUsername: Overriding users choice, downloading all caches.");
   }
-  final String url="http://" + host + path+ "?"+ prepareParameters(params,my,true);
-  final Uri uri=buildURI(false,host,path);
-  String page=requestLogged(uri,method,params,false,my,true);
+  final String uri="http://www.geocaching.com/seek/nearest.aspx";
+  final String fullUri=uri + "?" + prepareParameters(params,my,true);
+  String page=requestLogged(uri,params,false,my,true);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByUsername: No data from server");
     return null;
   }
-  final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
+  final cgCacheWrap caches=parseSearch(thread,fullUri,page,showCaptcha);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByUsername: No cache parsed");
   }

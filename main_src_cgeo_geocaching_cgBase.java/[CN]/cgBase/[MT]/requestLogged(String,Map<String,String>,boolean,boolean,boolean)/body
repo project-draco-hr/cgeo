@@ -1,10 +1,10 @@
 {
-  HttpResponse response=request(uri,method,params,xContentType,my,addF);
+  HttpResponse response=request(uri,params,xContentType,my,addF);
   String data=getResponseData(response);
   if (checkLogin(data) == false) {
     int loginState=login();
     if (loginState == 1) {
-      response=request(uri,method,params,xContentType,my,addF);
+      response=request(uri,params,xContentType,my,addF);
       data=getResponseData(response);
     }
  else {

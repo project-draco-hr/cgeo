@@ -1,20 +1,5 @@
 {
-  HttpRequestBase request;
-  if (method.equals("GET")) {
-    request=new HttpGet(uri.buildUpon().encodedQuery(params).build().toString());
-  }
- else {
-    request=new HttpPost(uri.toString());
-    try {
-      final ByteArrayEntity paramsEntity=new ByteArrayEntity(params.getBytes("utf-8"));
-      Log.d(cgSettings.tag,"Entity: " + paramsEntity);
-      ((HttpPost)request).setEntity(paramsEntity);
-    }
- catch (    UnsupportedEncodingException e) {
-      Log.e(cgSettings.tag,"request",e);
-      return null;
-    }
-  }
+  final HttpRequestBase request=new HttpGet(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString());
   request.setHeader("X-Requested-With","XMLHttpRequest");
   if (xContentType) {
     request.setHeader("Content-Type","application/x-www-form-urlencoded");
@@ -27,7 +12,7 @@
     if (i > 0) {
       Log.w(cgSettings.tag,"Failed to download data, retrying. Attempt #" + (i + 1));
     }
-    Log.d(cgSettings.tag,"request: requesting " + request.getMethod() + " "+ request.getURI()+ " ??? headers: "+ request.getAllHeaders());
+    Log.d(cgSettings.tag,"request: requesting " + request.getURI() + " ??? headers: "+ request.getAllHeaders());
     try {
       dumpCookies("Cookies before request",client);
       final HttpResponse response=client.execute(request);
