@@ -12,7 +12,7 @@
   params.put("ltx",String.format((Locale)null,"%.6f",latMax));
   params.put("lnm",String.format((Locale)null,"%.6f",lonMin));
   params.put("lnx",String.format((Locale)null,"%.6f",lonMax));
-  final String data=getResponseData(postRequest(URI_GO4CACHE_GET,params));
+  final String data=getResponseData(postRequest("http://api.go4cache.com/get.php",params));
   if (StringUtils.isBlank(data)) {
     Log.e(cgSettings.tag,"cgeoBase.getGeocachersInViewport: No data from server");
     return null;

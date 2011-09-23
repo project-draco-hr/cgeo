@@ -13,7 +13,7 @@
       String nam=deviceName == null ? "" : deviceName;
       String cod=deviceCode == null ? "" : deviceCode;
       String params="name=" + cgBase.urlencode_rfc3986(nam) + "&code="+ cgBase.urlencode_rfc3986(cod);
-      HttpResponse response=base.request(URI_SEND2CGEO_AUTH,params,true);
+      HttpResponse response=base.request("http://send2.cgeo.org/auth.html",params,true);
       if (response.getStatusLine().getStatusCode() == 200) {
         String[] strings=cgBase.getResponseData(response).split(",");
         try {

@@ -6,7 +6,7 @@
   if (loginStart == null) {
     return -3;
   }
-  loginResponse=request(URI_GC_LOGIN_DEFAULT,new HashMap<String,String>(),false,false,false);
+  loginResponse=request("https://www.geocaching.com/login/default.aspx",new HashMap<String,String>(),false,false,false);
   loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {
@@ -38,7 +38,7 @@
   params.put("ctl00$SiteContent$tbPassword",login.get("password"));
   params.put("ctl00$SiteContent$cbRememberMe","on");
   params.put("ctl00$SiteContent$btnSignIn","Login");
-  loginResponse=postRequest(URI_GC_LOGIN_DEFAULT,params);
+  loginResponse=postRequest("https://www.geocaching.com/login/default.aspx",params);
   loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {

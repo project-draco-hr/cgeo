@@ -11,7 +11,7 @@
       loadDataHandler.sendEmptyMessage(0);
       return;
     }
-    final String page=cgBase.getResponseData(base.request(URI_GC_SEEK_LOG,params,false,false,false));
+    final String page=cgBase.getResponseData(base.request("http://www.geocaching.com/seek/log.aspx",params,false,false,false));
     viewstates=cgBase.getViewstates(page);
     trackables=cgBase.parseTrackableLog(page);
     final List<Integer> typesPre=cgBase.parseTypes(page);

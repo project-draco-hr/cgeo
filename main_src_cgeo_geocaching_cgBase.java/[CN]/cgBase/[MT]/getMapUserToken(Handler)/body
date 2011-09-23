@@ -1,5 +1,5 @@
 {
-  final HttpResponse response=request(URI_GC_MAP_DEFAULT,"",false);
+  final HttpResponse response=request("http://www.geocaching.com/map/default.aspx","",false);
   final String data=getResponseData(response);
   String usertoken=null;
   if (StringUtils.isNotBlank(data)) {
