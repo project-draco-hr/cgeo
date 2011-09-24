@@ -16,16 +16,25 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: Not enough parameters to recognize viewport");
     return null;
   }
-  final String host="www.geocaching.com";
-  final String path="/map/default.aspx/MapAction";
-  String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ usertoken+ "\"}}";
-  final String uri="http://" + host + path;
-  page=getResponseData(requestJSONgc(uri,params));
+  final String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ usertoken+ "\"}}";
+  final String uri="http://www.geocaching.com/map/default.aspx/MapAction";
+  final HttpPost request=new HttpPost("http://www.geocaching.com/map/default.aspx/MapAction");
+  try {
+    request.setEntity(new StringEntity(params,HTTP.UTF_8));
+  }
+ catch (  UnsupportedEncodingException e) {
+    Log.e(cgSettings.tag,"cgeoBase.searchByViewport",e);
+  }
+  request.addHeader("Content-Type","application/json; charset=UTF-8");
+  request.addHeader("X-Requested-With","XMLHttpRequest");
+  request.addHeader("Accept","application/json, text/javascript, */*; q=0.01");
+  request.addHeader("Referer",uri);
+  page=getResponseData(request(request));
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No data from server");
     return null;
   }
-  final cgCacheWrap caches=parseMapJSON(Uri.parse(uri).buildUpon().query(params).build().toString(),page);
+  final cgCacheWrap caches=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No cache parsed");
   }
