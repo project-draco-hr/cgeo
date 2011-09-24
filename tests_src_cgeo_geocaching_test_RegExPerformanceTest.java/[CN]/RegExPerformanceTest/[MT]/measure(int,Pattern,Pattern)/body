@@ -1,0 +1,27 @@
+{
+  List<String> output=new ArrayList<String>();
+  List<MockedCache> cachesForParsing=new ArrayList<MockedCache>();
+  cachesForParsing.add(new GC2CJPF());
+  cachesForParsing.add(new GC1ZXX2());
+  for (  MockedCache cache : cachesForParsing) {
+    String page=cache.getData();
+    String result1=BaseUtils.getMatch(page,p1,1,"");
+    String result2=BaseUtils.getMatch(page,p2,1,"");
+    assertEquals(result1,result2);
+    long diff1, diff2;
+    output.add("Parsing " + cache.getGeocode() + " "+ cache.getName());
+{
+      output.add("Result pattern #1:\t<<" + result1 + ">>");
+      diff1=parse(page,p1,iterations);
+      output.add("Time pattern #1:\t" + diff1 + " ms");
+    }
+{
+      output.add("Result pattern #2:\t<<" + result2 + ">>");
+      diff2=parse(page,p2,iterations);
+      output.add("Time pattern #2:\t" + diff2 + " ms");
+    }
+    Float reduction=new Float((float)diff2 * 100 / (float)diff1);
+    output.add("Reduction to x percent:\t" + reduction.toString() + "\n");
+  }
+  return output;
+}
