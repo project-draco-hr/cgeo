@@ -1,8 +1,7 @@
 {
-  String result=defaultValue;
   final Matcher matcher=p.matcher(data);
   if (matcher.find() && matcher.groupCount() >= group) {
-    result=BaseUtils.makeCopy(matcher.group(group));
+    return new String(matcher.group(group).trim());
   }
-  return result;
+  return defaultValue;
 }
