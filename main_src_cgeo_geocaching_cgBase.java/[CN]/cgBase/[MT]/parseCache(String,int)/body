@@ -25,7 +25,7 @@
   cache.cacheId=BaseUtils.getMatch(page,Constants.PATTERN_CACHEID,1,cache.cacheId);
   cache.guid=BaseUtils.getMatch(page,Constants.PATTERN_GUID,1,cache.guid);
   cache.name=Html.fromHtml(BaseUtils.getMatch(page,Constants.PATTERN_NAME,1,cache.name)).toString();
-  cache.ownerReal=BaseUtils.getMatch(page,Constants.PATTERN_OWNERREAL,1,cache.ownerReal);
+  cache.ownerReal=URLDecoder.decode(BaseUtils.getMatch(page,Constants.PATTERN_OWNERREAL,1,cache.ownerReal));
   final String username=settings.getUsername();
   if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
     cache.own=true;
