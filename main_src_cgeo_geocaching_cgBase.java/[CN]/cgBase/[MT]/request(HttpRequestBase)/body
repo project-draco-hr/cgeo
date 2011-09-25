@@ -9,7 +9,7 @@
     if (i > 0) {
       Log.w(cgSettings.tag,"Failed to download data, retrying. Attempt #" + (i + 1));
     }
-    Log.d(cgSettings.tag,"request: " + request.getMethod() + " "+ request.getURI());
+    Log.d(cgSettings.tag,"request: " + request.getMethod() + " "+ hidePassword(request.getURI().toString()));
     try {
       return client.execute(request);
     }
