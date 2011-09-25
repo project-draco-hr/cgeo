@@ -134,6 +134,9 @@
     disabledButton.setChecked(true);
   }
   disabledButton.setOnClickListener(new cgeoChangeDisabled());
+  CheckBox showWaypoints=(CheckBox)findViewById(R.id.showwaypoints);
+  showWaypoints.setChecked(prefs.getBoolean("gcshowwaypoints",false));
+  showWaypoints.setOnClickListener(new cgeoShowWaypoints());
   CheckBox autovisitButton=(CheckBox)findViewById(R.id.trackautovisit);
   if (prefs.getBoolean("trackautovisit",false)) {
     autovisitButton.setChecked(true);
