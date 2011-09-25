@@ -1,5 +1,5 @@
 {
-  List<cgCache> caches=null;
+  Collection<cgCache> caches=null;
   final Resources res=getInstrumentation().getContext().getResources();
   final InputStream instream=res.openRawResource(resourceId);
   try {
@@ -10,5 +10,6 @@
     instream.close();
   }
   assertNotNull(caches);
-  return caches;
+  List<cgCache> cacheList=new ArrayList<cgCache>(caches);
+  return cacheList;
 }

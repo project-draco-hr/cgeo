@@ -1,7 +1,7 @@
 {
   try {
     GPXParser parser=new GPX10Parser(listId);
-    List<cgCache> caches=parser.parse(file,handler);
+    Collection<cgCache> caches=parser.parse(file,handler);
     if (caches == null) {
       parser=new GPX11Parser(listId);
       caches=parser.parse(file,handler);
