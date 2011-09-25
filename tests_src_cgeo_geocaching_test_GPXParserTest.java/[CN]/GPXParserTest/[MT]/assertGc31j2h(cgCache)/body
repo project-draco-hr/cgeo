@@ -1,0 +1,28 @@
+{
+  assertEquals("GC31J2H",cache.getGeocode());
+  assertEquals("Hockenheimer City-Brunnen",cache.getName());
+  assertTrue("Hockenheimer City-Brunnen by vptsz, Multi-cache (2/1)",cache.getShortDescription().startsWith("Kurzer informativer Multi entlang der Brunnen"));
+  assertTrue(cache.getDescription().startsWith("Cachemobile k??nnen kostenfrei am Messplatz geparkt werden."));
+  assertTrue(cache.hasTrackables());
+  assertEquals(2.0f,cache.getDifficulty().floatValue(),0.01f);
+  assertEquals(1.0f,cache.getTerrain().floatValue(),0.01f);
+  assertEquals("N 49?? 19.122",cache.getLatitude());
+  assertEquals("E 008?? 32.739",cache.getLongitude());
+  assertEquals("vptsz",cache.getOwner());
+  assertEquals(CacheSize.SMALL,cache.getSize());
+  assertEquals("multi",cache.getType());
+  assertFalse(cache.isArchived());
+  assertFalse(cache.isDisabled());
+  assertFalse(cache.isEventCache());
+  assertFalse(cache.isMembersOnly());
+  assertFalse(cache.isOwn());
+  assertTrue(cache.found);
+  assertEquals("Station3: Der zerbrochene Stein z??hlt doppelt.\nFinal: Oben neben dem Tor",cache.getHint());
+  assertEquals(6,cache.logs.size());
+  final cgLog log=cache.logs.get(5);
+  assertEquals("Geoteufel",log.author);
+  assertEquals(LOG_DATE_FORMAT.parse("2011-09-11T07:00:00Z").getTime(),log.date);
+  assertEquals(-1,log.found);
+  assertEquals("Sehr sch??ne Runde und wir haben wieder etwas Neues ??ber Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel",log.log);
+  assertNull(cache.attributes);
+}

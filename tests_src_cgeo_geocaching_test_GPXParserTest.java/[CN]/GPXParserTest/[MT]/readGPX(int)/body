@@ -6,18 +6,9 @@
     final GPX10Parser parser=new GPX10Parser(1);
     caches=parser.parse(instream,new Handler());
   }
- catch (  Exception e) {
-    e.printStackTrace();
-  }
- finally {
-    try {
-      instream.close();
-    }
- catch (    IOException e) {
-      e.printStackTrace();
-    }
+  finally {
+    instream.close();
   }
   assertNotNull(caches);
-  assertTrue(caches.size() > 0);
   return caches;
 }
