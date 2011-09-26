@@ -11,7 +11,7 @@
     finish();
     return;
   }
-  if (img_type != SPOILER_IMAGE && img_type != LOG_IMAGE) {
+  if (img_type != SPOILER_IMAGE && img_type != LOG_IMAGES) {
     showToast("Sorry, can't load unknown image type.");
     finish();
     return;
@@ -24,17 +24,8 @@
     imagesView=(LinearLayout)findViewById(R.id.spoiler_list);
   }
   final boolean offline=app.isOffline(geocode,null) && (img_type == SPOILER_IMAGE | settings.storelogimages);
-  if (img_type == LOG_IMAGE) {
-    cgImage logimage=new cgImage();
-    logimage.title=extras.getString("title");
-    logimage.url=extras.getString("url");
-    if (logimage.title == null || logimage.url == null) {
-      showToast("Sorry, c:geo forgot which logimage you wanted to load.");
-      finish();
-      return;
-    }
-    logimage.description="";
-    loadImages(Collections.singletonList(logimage),R.string.cache_log_images_loading,settings.storelogimages,offline);
+  if (img_type == LOG_IMAGES) {
+    loadImages(extras.<cgImage>getParcelableArrayList("images"),R.string.cache_log_images_loading,settings.storelogimages,offline);
   }
  else {
     final List<cgImage> images=app.loadSpoilers(geocode);
