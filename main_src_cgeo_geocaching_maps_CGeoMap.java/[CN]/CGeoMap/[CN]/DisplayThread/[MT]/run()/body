@@ -19,7 +19,6 @@
         if (cacheOne.coords == null) {
           continue;
         }
-        items.add(getItem(new cgCoord(cacheOne),true,cacheOne.type,cacheOne.own,cacheOne.found,cacheOne.disabled));
         if (cacheOne != null && cacheOne.waypoints != null && (cachesProtected.size() == 1 || (settings.showWaypoints && cachesProtected.size() < settings.showWaypointsthreshold)) && !cacheOne.waypoints.isEmpty()) {
           for (          cgWaypoint oneWaypoint : cacheOne.waypoints) {
             if (oneWaypoint.coords == null) {
@@ -28,6 +27,7 @@
             items.add(getItem(new cgCoord(oneWaypoint),false,oneWaypoint.type,false,false,false));
           }
         }
+        items.add(getItem(new cgCoord(cacheOne),true,cacheOne.type,cacheOne.own,cacheOne.found,cacheOne.disabled));
       }
       overlayCaches.updateItems(items);
       displayHandler.sendEmptyMessage(1);
