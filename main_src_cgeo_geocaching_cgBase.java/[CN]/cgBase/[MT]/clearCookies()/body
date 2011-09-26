@@ -1,3 +1,6 @@
 {
-  getHttpClient().getCookieStore().clear();
+  if (cookieStore == null) {
+    getHttpClient();
+  }
+  cookieStore.clear();
 }

@@ -1,10 +1,18 @@
 {
-  if (httpClient == null) {
+  if (clientConnectionManager == null) {
 synchronized (cgBase.class) {
-      if (httpClient == null) {
-        httpClient=new DefaultHttpClient();
+      if (clientConnectionManager == null) {
+        clientParams=new BasicHttpParams();
+        HttpProtocolParams.setVersion(clientParams,HttpVersion.HTTP_1_1);
+        final SchemeRegistry registry=new SchemeRegistry();
+        registry.register(new Scheme("http",PlainSocketFactory.getSocketFactory(),80));
+        registry.register(new Scheme("https",SSLSocketFactory.getSocketFactory(),443));
+        cookieStore=new BasicCookieStore();
+        clientConnectionManager=new ThreadSafeClientConnManager(clientParams,registry);
       }
     }
   }
-  return httpClient;
+  final DefaultHttpClient client=new DefaultHttpClient(clientConnectionManager,clientParams);
+  client.setCookieStore(cookieStore);
+  return client;
 }
