@@ -1,7 +1,7 @@
 {
   final String params="cache_code=" + geoCode + "&"+ SERVICE_CACHE_FIELDS;
-  final String data=request(geoCode,SERVICE_CACHE,params,1);
-  if (StringUtils.isBlank(data)) {
+  final JSONObject data=request(geoCode,SERVICE_CACHE,params,1);
+  if (data == null) {
     return null;
   }
   final cgCache cache=parseCache(data);

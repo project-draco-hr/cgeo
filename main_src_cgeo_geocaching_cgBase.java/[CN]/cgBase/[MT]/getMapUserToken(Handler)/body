@@ -1,6 +1,6 @@
 {
-  final cgResponse response=request(URI_GC_MAP_DEFAULT,"GET","",0,false);
-  final String data=response.getData();
+  final HttpResponse response=request("http://www.geocaching.com/map/default.aspx","",false);
+  final String data=getResponseData(response);
   String usertoken=null;
   if (StringUtils.isNotBlank(data)) {
     final Pattern pattern=Pattern.compile("var userToken[^=]*=[^']*'([^']+)';",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);

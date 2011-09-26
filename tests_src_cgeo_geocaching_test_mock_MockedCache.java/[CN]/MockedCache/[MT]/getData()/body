@@ -8,8 +8,7 @@
       buffer.append(line).append("\n");
     }
     br.close();
-    cgBase.replaceWhitespace(buffer);
-    return buffer.toString();
+    return cgBase.replaceWhitespace(buffer.toString());
   }
  catch (  IOException e) {
     e.printStackTrace();
