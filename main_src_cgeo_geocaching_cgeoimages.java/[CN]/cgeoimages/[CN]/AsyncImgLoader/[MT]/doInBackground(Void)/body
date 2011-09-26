@@ -1,4 +1,4 @@
 {
-  final cgHtmlImg imgGetter=new cgHtmlImg(cgeoimages.this,geocode,true,offline,false,save);
+  final cgHtmlImg imgGetter=new cgHtmlImg(cgeoimages.this,geocode,true,offline ? 1 : 0,false,save);
   return imgGetter.getDrawable(img.url);
 }

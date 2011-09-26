@@ -1,70 +1,48 @@
 {
   super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.spoilers);
   Bundle extras=getIntent().getExtras();
+  int img_type=UNKNOWN_TYPE;
   if (extras != null) {
     geocode=extras.getString("geocode");
     img_type=extras.getInt("type",0);
   }
-  if (img_type == SPOILER_IMAGE) {
-    setTitle(res.getString(R.string.cache_spoiler_images_title));
-  }
- else   if (img_type == LOG_IMAGE) {
-    setTitle(res.getString(R.string.cache_log_images_title));
-  }
-  if (geocode == null) {
+  if (extras == null || geocode == null) {
     showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
     finish();
     return;
   }
-switch (img_type) {
-case LOG_IMAGE:
-    title=extras.getString("title");
-  url=extras.getString("url");
-if ((title == null) || (url == null)) {
-  showToast("Sorry, c:geo forgot which logimage you wanted to load.");
-  finish();
-  return;
-}
-break;
-}
-inflater=getLayoutInflater();
-if (imagesView == null) {
-imagesView=(LinearLayout)findViewById(R.id.spoiler_list);
-}
-switch (img_type) {
-case SPOILER_IMAGE:
-load_process_string=res.getString(R.string.cache_spoiler_images_loading);
-save=true;
-break;
-case LOG_IMAGE:
-load_process_string=res.getString(R.string.cache_log_images_loading);
-if (settings.storelogimages) {
-save=true;
-}
+  if (img_type != SPOILER_IMAGE && img_type != LOG_IMAGE) {
+    showToast("Sorry, can't load unknown image type.");
+    finish();
+    return;
+  }
+  setTheme();
+  setContentView(R.layout.spoilers);
+  setTitle(res.getString(img_type == SPOILER_IMAGE ? R.string.cache_spoiler_images_title : R.string.cache_log_images_title));
+  inflater=getLayoutInflater();
+  if (imagesView == null) {
+    imagesView=(LinearLayout)findViewById(R.id.spoiler_list);
+  }
+  final boolean offline=app.isOffline(geocode,null) && (img_type == SPOILER_IMAGE | settings.storelogimages);
+  if (img_type == LOG_IMAGE) {
+    cgImage logimage=new cgImage();
+    logimage.title=extras.getString("title");
+    logimage.url=extras.getString("url");
+    if (logimage.title == null || logimage.url == null) {
+      showToast("Sorry, c:geo forgot which logimage you wanted to load.");
+      finish();
+      return;
+    }
+    logimage.description="";
+    loadImages(Collections.singletonList(logimage),R.string.cache_log_images_loading,settings.storelogimages,offline);
+  }
  else {
-save=false;
-}
-break;
-default :
-load_process_string="Loading...";
-}
-waitDialog=ProgressDialog.show(this,null,load_process_string,true);
-waitDialog.setCancelable(true);
-switch (img_type) {
-case LOG_IMAGE:
-cgImage logimage=new cgImage();
-logimage.title=title;
-logimage.url=url;
-logimage.description="";
-loadImages(Collections.singletonList(logimage));
-break;
-case SPOILER_IMAGE:
-loadImages(app.loadSpoilers(geocode));
-break;
-default :
-showToast("Sorry, can't load unknown image type.");
-finish();
-}
+    final List<cgImage> images=app.loadSpoilers(geocode);
+    if (images.isEmpty()) {
+      showToast(res.getString(R.string.warn_load_spoiler_image));
+      finish();
+      return;
+    }
+    loadImages(app.loadSpoilers(geocode),R.string.cache_spoiler_images_loading,true,offline);
+  }
 }
