@@ -93,7 +93,6 @@
   }
   if ((imagePre == null && reason == 0) || onlySave) {
     Uri uri=null;
-    HttpClient client=null;
     HttpGet getMethod=null;
     HttpResponse httpResponse=null;
     HttpEntity entity=null;
@@ -114,9 +113,8 @@
           Log.w(cgSettings.tag,"cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
         }
         try {
-          client=new DefaultHttpClient();
           getMethod=new HttpGet(url);
-          httpResponse=client.execute(getMethod);
+          httpResponse=cgBase.doRequest(getMethod);
           entity=httpResponse.getEntity();
           bufferedEntity=new BufferedHttpEntity(entity);
           final long imageSize=bufferedEntity.getContentLength();
