@@ -58,16 +58,10 @@ cgImage logimage=new cgImage();
 logimage.title=title;
 logimage.url=url;
 logimage.description="";
-images.add(logimage);
-try {
-loadImagesHandler.sendMessage(new Message());
-}
- catch (Exception e) {
-Log.e(cgSettings.tag,"cgeoimages.loadImagesHandler.sendMessage: " + e.toString());
-}
+loadImages(Collections.singletonList(logimage));
 break;
 case SPOILER_IMAGE:
-(new loadSpoilers()).start();
+loadImages(app.loadSpoilers(geocode));
 break;
 default :
 showToast("Sorry, can't load unknown image type.");

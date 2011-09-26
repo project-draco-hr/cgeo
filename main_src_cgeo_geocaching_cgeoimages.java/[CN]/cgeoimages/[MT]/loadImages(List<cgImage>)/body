@@ -1,0 +1,43 @@
+{
+  if (waitDialog != null) {
+    waitDialog.dismiss();
+  }
+  if (images.isEmpty()) {
+switch (img_type) {
+case LOG_IMAGE:
+      showToast(res.getString(R.string.warn_load_log_image));
+    break;
+case SPOILER_IMAGE:
+  showToast(res.getString(R.string.warn_load_spoiler_image));
+break;
+}
+finish();
+}
+ else {
+if (app.isOffline(geocode,null)) {
+offline=(img_type == LOG_IMAGE) && !settings.storelogimages ? 0 : 1;
+}
+ else {
+offline=0;
+}
+count=images.size();
+progressDialog=new ProgressDialog(cgeoimages.this);
+progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+progressDialog.setMessage(load_process_string);
+progressDialog.setCancelable(true);
+progressDialog.setMax(count);
+progressDialog.show();
+LinearLayout rowView=null;
+for (final cgImage img : images) {
+rowView=(LinearLayout)inflater.inflate(R.layout.cache_image_item,null);
+((TextView)rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
+if (StringUtils.isNotBlank(img.description)) {
+final TextView descView=(TextView)rowView.findViewById(R.id.description);
+descView.setText(Html.fromHtml(img.description),TextView.BufferType.SPANNABLE);
+descView.setVisibility(View.VISIBLE);
+}
+new AsyncImgLoader(rowView,img).execute();
+imagesView.addView(rowView);
+}
+}
+}
