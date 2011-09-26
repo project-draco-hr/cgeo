@@ -20,7 +20,7 @@
           continue;
         }
         items.add(getItem(new cgCoord(cacheOne),true,cacheOne.type,cacheOne.own,cacheOne.found,cacheOne.disabled));
-        if (cacheOne != null && cacheOne.waypoints != null && cachesProtected.size() < 200 && (cachesProtected.size() == 1 || settings.showWaypoints) && !cacheOne.waypoints.isEmpty()) {
+        if (cacheOne != null && cacheOne.waypoints != null && (cachesProtected.size() == 1 || (settings.showWaypoints && cachesProtected.size() < settings.showWaypointsthreshold)) && !cacheOne.waypoints.isEmpty()) {
           for (          cgWaypoint oneWaypoint : cacheOne.waypoints) {
             if (oneWaypoint.coords == null) {
               continue;
