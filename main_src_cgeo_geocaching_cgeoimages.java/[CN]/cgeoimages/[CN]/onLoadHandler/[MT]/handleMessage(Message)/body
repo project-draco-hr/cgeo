@@ -1,6 +1,7 @@
 {
   if (message.what == IMG_LOAD_SUCCESS) {
     final BitmapDrawable image=(BitmapDrawable)message.obj;
+    bitmaps.add(image.getBitmap());
     final ImageView image_view=(ImageView)inflater.inflate(R.layout.image_item,null);
     final Rect bounds=image.getBounds();
     image_view.setImageResource(R.drawable.image_not_loaded);
