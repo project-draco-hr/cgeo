@@ -23,7 +23,7 @@
       }
       paramsEncoded.add(key + "=" + urlencode_rfc3986(value));
     }
-    paramsDone=implode("&",paramsEncoded.toArray());
+    paramsDone=StringUtils.join(paramsEncoded.toArray(),'&');
   }
  else {
     paramsDone="";
