@@ -13,13 +13,13 @@
       }
     }
     if (CollectionUtils.isNotEmpty(guids)) {
-      params.put("cacheIds",implode(",",guids.toArray()));
+      params.put("cacheIds",StringUtils.join(guids.toArray(),','));
     }
  else {
-      params.put("waypoints",implode(",",geocodes.toArray()));
+      params.put("waypoints",StringUtils.join(geocodes.toArray(),','));
     }
     params.put("version","cgeo");
-    final String votes=request(URI_GCVOTE_GETVOTES,"GET",params,false,false,false).getData();
+    final String votes=getResponseData(request("http://gcvote.com/getVotes.php",params,false,false,false));
     if (votes == null) {
       return null;
     }

@@ -1,9 +1,0 @@
-{
-  try {
-    return new URI(secure ? "https" : "http",host,path,query,null);
-  }
- catch (  URISyntaxException e) {
-    Log.e(cgSettings.tag,"buildURI",e);
-    return null;
-  }
-}

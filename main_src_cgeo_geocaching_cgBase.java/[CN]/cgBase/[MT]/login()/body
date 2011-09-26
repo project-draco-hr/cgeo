@@ -1,13 +1,13 @@
 {
-  cgResponse loginResponse=null;
+  HttpResponse loginResponse=null;
   String loginData=null;
   String[] viewstates=null;
   final Map<String,String> loginStart=settings.getLogin();
   if (loginStart == null) {
     return -3;
   }
-  loginResponse=request(URI_GC_LOGIN_DEFAULT,"GET",new HashMap<String,String>(),false,false,false);
-  loginData=loginResponse.getData();
+  loginResponse=request("https://www.geocaching.com/login/default.aspx",new HashMap<String,String>(),false,false,false);
+  loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {
       Log.i(cgSettings.tag,"Already logged in Geocaching.com as " + loginStart.get("username"));
@@ -25,12 +25,12 @@
     return -2;
   }
   final Map<String,String> login=settings.getLogin();
-  final Map<String,String> params=new HashMap<String,String>();
   if (login == null || StringUtils.isEmpty(login.get("username")) || StringUtils.isEmpty(login.get("password"))) {
     Log.e(cgSettings.tag,"cgeoBase.login: No login information stored");
     return -3;
   }
-  CookieJar.deleteCookies(prefs);
+  clearCookies();
+  final Parameters params=new Parameters();
   params.put("__EVENTTARGET","");
   params.put("__EVENTARGUMENT","");
   setViewstates(viewstates,params);
@@ -38,8 +38,8 @@
   params.put("ctl00$SiteContent$tbPassword",login.get("password"));
   params.put("ctl00$SiteContent$cbRememberMe","on");
   params.put("ctl00$SiteContent$btnSignIn","Login");
-  loginResponse=request(URI_GC_LOGIN_DEFAULT,"POST",params,false,false,false);
-  loginData=loginResponse.getData();
+  loginResponse=postRequest("https://www.geocaching.com/login/default.aspx",params);
+  loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {
       Log.i(cgSettings.tag,"Successfully logged in Geocaching.com as " + login.get("username"));

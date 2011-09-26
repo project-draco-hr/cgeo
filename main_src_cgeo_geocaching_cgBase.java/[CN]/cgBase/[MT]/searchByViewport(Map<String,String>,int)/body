@@ -16,16 +16,14 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: Not enough parameters to recognize viewport");
     return null;
   }
-  final String host="www.geocaching.com";
-  final String path="/map/default.aspx/MapAction";
-  String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ usertoken+ "\"}}";
-  final URI uri=buildURI(false,host,path);
+  final String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ usertoken+ "\"}}";
+  final String uri="http://www.geocaching.com/map/default.aspx/MapAction";
   page=requestJSONgc(uri,params);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No data from server");
     return null;
   }
-  final cgCacheWrap caches=parseMapJSON(buildURI(false,host,path,params),page);
+  final cgCacheWrap caches=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByViewport: No cache parsed");
   }

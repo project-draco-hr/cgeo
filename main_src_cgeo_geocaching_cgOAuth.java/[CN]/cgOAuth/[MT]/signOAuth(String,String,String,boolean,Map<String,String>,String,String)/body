@@ -28,9 +28,9 @@
   String keysPacked;
   String requestPacked;
   keysPacked=cgSettings.keyConsumerSecret + "&" + tokenSecret;
-  if (https)   requestPacked=method + "&" + cgBase.urlencode_rfc3986("https://" + host + path)+ "&"+ cgBase.urlencode_rfc3986(cgBase.implode("&",paramsEncoded.toArray()));
- else   requestPacked=method + "&" + cgBase.urlencode_rfc3986("http://" + host + path)+ "&"+ cgBase.urlencode_rfc3986(cgBase.implode("&",paramsEncoded.toArray()));
+  if (https)   requestPacked=method + "&" + cgBase.urlencode_rfc3986("https://" + host + path)+ "&"+ cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(),'&'));
+ else   requestPacked=method + "&" + cgBase.urlencode_rfc3986("http://" + host + path)+ "&"+ cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(),'&'));
   paramsEncoded.add("oauth_signature=" + cgBase.urlencode_rfc3986(cgBase.base64Encode(CryptUtils.hashHmac(requestPacked,keysPacked))));
-  paramsDone=cgBase.implode("&",paramsEncoded.toArray());
+  paramsDone=StringUtils.join(paramsEncoded.toArray(),'&');
   return paramsDone;
 }

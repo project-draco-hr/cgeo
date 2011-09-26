@@ -9,16 +9,19 @@
   params.put("tkn",userToken);
   params.put("idx","1");
   params.put("num","35");
-  params.put("sp","0");
-  params.put("sf","0");
-  params.put("decrypt","1");
-  final cgResponse response=request(URI_GC_SEEK_LOGBOOK,"GET",params,false,false,false);
-  if (response.getStatusCode() != 200) {
-    Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: error " + response.getStatusCode() + " when requesting log information");
+  params.put("decrypt","true");
+  final HttpResponse response=request("http://www.geocaching.com/seek/geocache.logbook",params,false,false,false);
+  if (response == null) {
+    Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: cannot log logs, response is null");
+    return;
+  }
+  final int statusCode=response.getStatusLine().getStatusCode();
+  if (statusCode != 200) {
+    Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
     return;
   }
   try {
-    final JSONObject resp=new JSONObject(response.getData());
+    final JSONObject resp=new JSONObject(cgBase.getResponseData(response));
     if (!resp.getString("status").equals("success")) {
       Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
       return;

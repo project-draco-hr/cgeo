@@ -1,0 +1,12 @@
+{
+  final String data=getResponseData(postRequest(uri,null));
+  if (!checkLogin(data)) {
+    if (login() == 1) {
+      return getResponseData(postRequest(uri,null));
+    }
+ else {
+      Log.i(cgSettings.tag,"Working as guest.");
+    }
+  }
+  return data;
+}

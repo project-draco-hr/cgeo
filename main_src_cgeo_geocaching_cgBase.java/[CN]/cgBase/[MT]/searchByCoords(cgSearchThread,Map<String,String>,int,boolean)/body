@@ -14,9 +14,6 @@
   if (StringUtils.isBlank(cacheType)) {
     cacheType=null;
   }
-  final String host="www.geocaching.com";
-  final String path="/seek/nearest.aspx";
-  final String method="GET";
   final Map<String,String> params=new HashMap<String,String>();
   if (cacheType != null && cacheIDs.containsKey(cacheType)) {
     params.put("tx",cacheIDs.get(cacheType));
@@ -26,14 +23,14 @@
   }
   params.put("lat",latitude);
   params.put("lng",longitude);
-  final String url="http://" + host + path+ "?"+ prepareParameters(params,false,true);
-  final URI uri=buildURI(false,host,path);
-  String page=requestLogged(uri,method,params,false,false,true);
+  final String uri="http://www.geocaching.com/seek/nearest.aspx";
+  final String fullUri=uri + "?" + prepareParameters(params,false,true);
+  String page=requestLogged(uri,params,false,false,true);
   if (StringUtils.isBlank(page)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No data from server");
     return null;
   }
-  final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
+  final cgCacheWrap caches=parseSearch(thread,fullUri,page,showCaptcha);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No cache parsed");
   }
