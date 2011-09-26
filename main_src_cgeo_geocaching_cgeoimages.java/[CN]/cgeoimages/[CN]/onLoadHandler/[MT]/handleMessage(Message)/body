@@ -1,9 +1,8 @@
 {
-  final BitmapDrawable image=(BitmapDrawable)message.obj;
-  if (image != null) {
-    ImageView image_view=null;
-    image_view=(ImageView)inflater.inflate(R.layout.image_item,null);
-    Rect bounds=image.getBounds();
+  if (message.what == IMG_LOAD_SUCCESS) {
+    final BitmapDrawable image=(BitmapDrawable)message.obj;
+    final ImageView image_view=(ImageView)inflater.inflate(R.layout.image_item,null);
+    final Rect bounds=image.getBounds();
     image_view.setImageResource(R.drawable.image_not_loaded);
     image_view.setClickable(true);
     image_view.setOnClickListener(new View.OnClickListener(){
