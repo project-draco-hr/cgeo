@@ -3,20 +3,12 @@
   request.setHeader("Accept","application/json, text/javascript, */*; q=0.01");
   request.setHeader("Content-Type","application/json; charset=UTF-8");
   request.setHeader("X-Requested-With","XMLHttpRequest");
-  for (int i=0; i < 3; i++) {
+  final HttpResponse response=doRequest(request);
+  if (response != null && response.getStatusLine().getStatusCode() == 200) {
     try {
-      final HttpResponse response=getHttpClient().execute(request);
-      final int statusCode=response.getStatusLine().getStatusCode();
-      if (statusCode == 403) {
-        break;
-      }
-      final StringBuffer buffer=new StringBuffer();
-      final BufferedReader br=new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-      readIntoBuffer(br,buffer);
-      Log.i(cgSettings.tag,"[POST " + statusCode + "] Downloaded "+ uri);
-      return new JSONObject(buffer.toString());
+      return new JSONObject(getResponseData(response));
     }
- catch (    Exception e) {
+ catch (    JSONException e) {
       Log.e(cgSettings.tag,"cgeoBase.requestJSON",e);
     }
   }
