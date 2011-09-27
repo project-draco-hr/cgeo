@@ -7,7 +7,7 @@
     Log.e(cgSettings.tag,"cgeoBase.searchTrackable: No geocode nor guid nor id given");
     return null;
   }
-  final Map<String,String> params=new HashMap<String,String>();
+  final Parameters params=new Parameters();
   if (StringUtils.isNotBlank(geocode)) {
     params.put("tracker",geocode);
   }
