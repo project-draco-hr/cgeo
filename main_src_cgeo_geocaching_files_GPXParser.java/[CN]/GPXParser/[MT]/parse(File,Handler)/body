@@ -1,23 +1,25 @@
 {
   if (file == null) {
-    return null;
+    return false;
   }
   FileInputStream fis=null;
-  Collection<cgCache> result=null;
+  boolean parsed=false;
   try {
     fis=new FileInputStream(file);
-    result=parse(fis,handlerIn);
+    parsed=parse(fis,handlerIn);
   }
  catch (  FileNotFoundException e) {
     Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": file not found!");
   }
-  try {
-    if (fis != null) {
-      fis.close();
+ finally {
+    try {
+      if (fis != null) {
+        fis.close();
+      }
+    }
+ catch (    IOException e) {
+      Log.e(cgSettings.tag,"Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not close file!");
     }
   }
- catch (  IOException e) {
-    Log.e(cgSettings.tag,"Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not close file!");
-  }
-  return result;
+  return parsed;
 }

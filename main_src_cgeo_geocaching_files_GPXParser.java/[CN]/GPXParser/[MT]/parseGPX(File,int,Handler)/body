@@ -1,18 +1,25 @@
 {
   try {
     GPXParser parser=new GPX10Parser(listId);
-    Collection<cgCache> caches=parser.parse(file,handler);
-    if (caches == null) {
+    boolean parsed=parser.parse(file,handler);
+    if (!parsed) {
       parser=new GPX11Parser(listId);
-      caches=parser.parse(file,handler);
+      parsed=parser.parse(file,handler);
     }
-    if (caches != null) {
+    if (parsed) {
+      final File wptsFile=getWaypointsFileForGpx(file);
+      if (wptsFile != null && wptsFile.canRead()) {
+        parser.parse(wptsFile,handler);
+      }
+    }
+    if (parsed) {
       final cgSearch search=new cgSearch();
       final cgeoapplication app=cgeoapplication.getInstance();
-      for (      cgCache cache : caches) {
+      for (      cgCache cache : parser.getParsedCaches()) {
+        app.removeCacheFromCache(cache.geocode);
         app.addCacheToSearch(search,cache);
       }
-      Log.i(cgSettings.tag,"Caches found in .gpx file: " + caches.size());
+      Log.i(cgSettings.tag,"Caches found in .gpx file: " + parser.getParsedCaches().size());
       return search.getCurrentId();
     }
   }

@@ -1,0 +1,11 @@
+{
+  String name=file.getName();
+  int idx=name.lastIndexOf('.');
+  if (idx > 0) {
+    String wptsName=name.substring(0,idx) + "-wpts" + name.substring(idx);
+    return new File(file.getParentFile(),wptsName);
+  }
+ else {
+    return null;
+  }
+}

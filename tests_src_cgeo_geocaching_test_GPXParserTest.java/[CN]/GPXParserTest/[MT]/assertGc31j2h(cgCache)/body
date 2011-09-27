@@ -21,7 +21,7 @@
   assertEquals(6,cache.logs.size());
   final cgLog log=cache.logs.get(5);
   assertEquals("Geoteufel",log.author);
-  assertEquals(LOG_DATE_FORMAT.parse("2011-09-11T07:00:00Z").getTime(),log.date);
+  assertEquals(parseTime("2011-09-11T07:00:00Z"),log.date);
   assertEquals(-1,log.found);
   assertEquals("Sehr sch??ne Runde und wir haben wieder etwas Neues ??ber Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel",log.log);
   assertNull(cache.attributes);

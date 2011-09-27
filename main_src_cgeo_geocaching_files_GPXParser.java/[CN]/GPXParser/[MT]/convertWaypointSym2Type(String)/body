@@ -1,8 +1,20 @@
 {
-  if ("parking area".equals(sym))   return WaypointType.PKG;
- else   if ("stages of a multicache".equals(sym))   return WaypointType.STAGE;
- else   if ("question to answer".equals(sym))   return WaypointType.PUZZLE;
- else   if ("trailhead".equals(sym))   return WaypointType.TRAILHEAD;
- else   if ("final location".equals(sym))   return WaypointType.FLAG;
- else   return WaypointType.WAYPOINT;
+  if ("parking area".equalsIgnoreCase(sym)) {
+    return WaypointType.PKG;
+  }
+ else   if ("stages of a multicache".equalsIgnoreCase(sym)) {
+    return WaypointType.STAGE;
+  }
+ else   if ("question to answer".equalsIgnoreCase(sym)) {
+    return WaypointType.PUZZLE;
+  }
+ else   if ("trailhead".equalsIgnoreCase(sym)) {
+    return WaypointType.TRAILHEAD;
+  }
+ else   if ("final location".equalsIgnoreCase(sym)) {
+    return WaypointType.FLAG;
+  }
+ else {
+    return WaypointType.WAYPOINT;
+  }
 }
