@@ -28,8 +28,11 @@
     return true;
   }
  else   if (menuItem == 12) {
-    shareCache();
-    return true;
+    if (cache != null) {
+      cache.shareCache(this,res);
+      return true;
+    }
+    return false;
   }
   if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,searchId,null,null)) {
     return true;

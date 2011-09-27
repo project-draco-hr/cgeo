@@ -4,6 +4,8 @@
   if (name.length() > 82) {
     name=name.substring(0,79) + "...";
   }
-  final String status="I touched " + name + " (http://coord.info/"+ trackable.geocode.toUpperCase()+ ")! #cgeo #geocaching";
-  postTweet(app,settings,status,null);
+  String status="I touched " + name + " ("+ trackable.getUrl()+ ")!";
+  status=Twitter.appendHashTag(status,"cgeo");
+  status=Twitter.appendHashTag(status,"geocaching");
+  Twitter.postTweet(app,settings,status,null);
 }
