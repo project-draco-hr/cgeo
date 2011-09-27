@@ -133,9 +133,7 @@
  else           if (imageSize > (0.5 * 1024 * 1024)) {
             bfOptions.inSampleSize=2;
           }
-          if (bufferedEntity != null) {
-            imagePre=BitmapFactory.decodeStream(bufferedEntity.getContent(),null,bfOptions);
-          }
+          imagePre=BitmapFactory.decodeStream(bufferedEntity.getContent(),null,bfOptions);
           if (imagePre != null) {
             break;
           }

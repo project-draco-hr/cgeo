@@ -7,7 +7,6 @@
   HttpGet getMethod=null;
   HttpResponse httpResponse=null;
   HttpEntity entity=null;
-  BufferedHttpEntity bufferedEntity=null;
   boolean ok=false;
   for (int i=0; i < 3; i++) {
     if (i > 0)     Log.w(cgSettings.tag,"cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
@@ -20,32 +19,29 @@
       if (contentSize > 0 && contentSize <= MIN_MAP_IMAGE_BYTES) {
         break;
       }
-      bufferedEntity=new BufferedHttpEntity(entity);
-      if (bufferedEntity != null) {
-        InputStream is=(InputStream)bufferedEntity.getContent();
-        FileOutputStream fos=new FileOutputStream(fileName);
-        int fileSize=0;
-        try {
-          byte[] buffer=new byte[4096];
-          int bytesRead;
-          while ((bytesRead=is.read(buffer)) != -1) {
-            fos.write(buffer,0,bytesRead);
-            fileSize+=bytesRead;
-          }
-          fos.flush();
-          ok=true;
+      final BufferedHttpEntity bufferedEntity=new BufferedHttpEntity(entity);
+      InputStream is=(InputStream)bufferedEntity.getContent();
+      FileOutputStream fos=new FileOutputStream(fileName);
+      int fileSize=0;
+      try {
+        byte[] buffer=new byte[4096];
+        int bytesRead;
+        while ((bytesRead=is.read(buffer)) != -1) {
+          fos.write(buffer,0,bytesRead);
+          fileSize+=bytesRead;
         }
- catch (        IOException e) {
-          Log.e(cgSettings.tag,"cgMapImg.getDrawable (saving to cache): " + e.toString());
-        }
+        fos.flush();
+        ok=true;
+      }
+ catch (      IOException e) {
+        Log.e(cgSettings.tag,"cgMapImg.getDrawable (saving to cache): " + e.toString());
+      }
  finally {
-          is.close();
-          fos.close();
-        }
-        bufferedEntity=null;
-        if (ok && fileSize < MIN_MAP_IMAGE_BYTES) {
-          (new File(fileName)).delete();
-        }
+        is.close();
+        fos.close();
+      }
+      if (ok && fileSize < MIN_MAP_IMAGE_BYTES) {
+        (new File(fileName)).delete();
       }
       if (ok) {
         break;
