@@ -20,6 +20,6 @@
   final boolean status4=settings.setAltCorrection(altitudeNewInt);
   final boolean status5=settings.setMapFile(mfmapFileNew);
   TextView field=(TextView)findViewById(R.id.showwaypointsthreshold);
-  settings.setShowWaypointsThreshold(Integer.parseInt(field.getText().toString()));
+  settings.setShowWaypointsThreshold(safeParse(field,5));
   return status1 && status2 && status3&& status4&& status5;
 }
