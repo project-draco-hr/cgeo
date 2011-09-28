@@ -106,7 +106,7 @@
     return setFilter(new cgFilterByType("gps"));
   }
  else   if (id == MENU_DROP_CACHE) {
-    cgBase.dropCache(app,this,cache,new Handler(){
+    cgBase.dropCache(app,cache,new Handler(){
       @Override public void handleMessage(      Message msg){
         refreshCurrentList();
       }

@@ -8,6 +8,6 @@
     cachetype=(String)parameters.get("cachetype");
   }
   final cgSearch search=app.getHistoryOfCaches(true,cachetype);
-  search.totalCnt=app.getAllHistoricCachesCount(true,cachetype);
+  search.totalCnt=app.getAllHistoricCachesCount();
   return search.getCurrentId();
 }
