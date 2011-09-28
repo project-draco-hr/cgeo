@@ -172,12 +172,8 @@
     final Matcher matcherLatLon=patternLatLon.matcher(page);
     if (matcherLatLon.find() && matcherLatLon.groupCount() > 0) {
       cache.latlon=getMatch(matcherLatLon.group(2));
-      Map<String,Object> tmp=cgBase.parseLatlon(cache.latlon);
-      if (tmp.size() > 0) {
-        cache.coords=new Geopoint((Double)tmp.get("latitude"),(Double)tmp.get("longitude"));
-        cache.reliableLatLon=true;
-      }
-      tmp=null;
+      cache.coords=new Geopoint(cache.latlon);
+      cache.reliableLatLon=true;
     }
   }
  catch (  Exception e) {
@@ -402,10 +398,7 @@
             String latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString().trim();
             if (!StringUtils.containsOnly(latlon,'?')) {
               waypoint.latlon=latlon;
-              final Map<String,Object> tmp=cgBase.parseLatlon(waypoint.latlon);
-              if (tmp.size() > 0) {
-                waypoint.coords=new Geopoint((Double)tmp.get("latitude"),(Double)tmp.get("longitude"));
-              }
+              waypoint.coords=new Geopoint(latlon);
             }
           }
         }
