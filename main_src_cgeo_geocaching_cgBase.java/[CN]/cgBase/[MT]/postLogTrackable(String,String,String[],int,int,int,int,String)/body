@@ -12,7 +12,7 @@
     return 1001;
   }
   Log.i(cgSettings.tag,"Trying to post log for trackable #" + trackingCode + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log);
-  log=log.replace("\n","\r\n");
+  final String logInfo=log.replace("\n","\r\n");
   final Calendar currentDate=Calendar.getInstance();
   final Parameters params=new Parameters();
   setViewstates(viewstates,params);
@@ -30,7 +30,7 @@
   params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day));
   params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month));
   params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year));
-  params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo",log);
+  params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo);
   params.put("ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry");
   params.put("ctl00$ContentBody$uxVistOtherListingGC","");
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
