@@ -80,10 +80,9 @@
   }
 );
   waypoint.getChild(namespace,"sym").setEndTextElementListener(new EndTextElementListener(){
-    @Override public void end(    String body){
-      body=body.toLowerCase();
-      sym=body;
-      if (body.contains("geocache") && body.contains("found")) {
+    @Override public void end(    final String body){
+      sym=body.toLowerCase();
+      if (sym.contains("geocache") && sym.contains("found")) {
         cache.found=true;
       }
     }
