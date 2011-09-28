@@ -1,0 +1,16 @@
+{
+  coordinates.add(cgCoord);
+  CachesOverlayItemImpl item=settings.getMapFactory().getCachesOverlayItem(cgCoord,null);
+  int icon=cgBase.getMarkerIcon(cache,type,own,found,disabled);
+  Drawable pin=null;
+  if (iconsCache.containsKey(icon)) {
+    pin=iconsCache.get(icon);
+  }
+ else {
+    pin=getResources().getDrawable(icon);
+    pin.setBounds(0,0,pin.getIntrinsicWidth(),pin.getIntrinsicHeight());
+    iconsCache.put(icon,pin);
+  }
+  item.setMarker(pin);
+  return item;
+}
