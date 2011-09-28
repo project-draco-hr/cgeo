@@ -9,7 +9,7 @@
     HttpsURLConnection connection=null;
     try {
       final StringBuilder sb=new StringBuilder();
-      final String params=cgOAuth.signOAuth(host,pathRequest,method,true,new HashMap<String,String>(),null,null);
+      final String params=cgOAuth.signOAuth(host,pathRequest,method,true,new Parameters(),null,null);
       int code=-1;
       int retries=0;
       do {
@@ -53,7 +53,7 @@
           prefsEdit.putString("temp-token-secret",OAtokenSecret);
           prefsEdit.commit();
           try {
-            final Map<String,String> paramsPre=new HashMap<String,String>();
+            final Parameters paramsPre=new Parameters();
             paramsPre.put("oauth_callback","oob");
             final String paramsBrowser=cgOAuth.signOAuth(host,pathAuthorize,"GET",true,paramsPre,OAtoken,OAtokenSecret);
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://" + host + pathAuthorize+ "?"+ paramsBrowser)));
