@@ -209,7 +209,7 @@
     if (cache.nameSp == null) {
       cache.nameSp=(new Spannable.Factory()).newSpannable(cache.name);
       if (cache.disabled || cache.archived) {
-        cache.nameSp.setSpan(new StrikethroughSpan(),0,cache.nameSp.toString().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        cache.nameSp.setSpan(new StrikethroughSpan(),0,cache.nameSp.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
       }
     }
     caches.cacheList.add(cache);

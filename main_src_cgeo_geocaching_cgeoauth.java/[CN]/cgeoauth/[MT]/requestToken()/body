@@ -19,7 +19,7 @@
         connection=(HttpsURLConnection)uc;
         connection.setReadTimeout(30000);
         connection.setRequestMethod(method);
-        HttpsURLConnection.setFollowRedirects(true);
+        HttpURLConnection.setFollowRedirects(true);
         connection.setDoInput(true);
         connection.setDoOutput(false);
         final InputStream in=connection.getInputStream();
