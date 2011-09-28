@@ -1,10 +1,10 @@
 {
-  if (app.deleteWaypoint(id) == false) {
-    showToast(res.getString(R.string.err_waypoint_delete_failed));
-  }
- else {
+  if (app.deleteWaypoint(id)) {
     app.removeCacheFromCache(geocode);
     finish();
     return;
+  }
+ else {
+    showToast(res.getString(R.string.err_waypoint_delete_failed));
   }
 }

@@ -2,14 +2,14 @@
   if (StringUtils.isEmpty(getPrefix())) {
     return 0;
   }
-  char firstLetter=Character.toUpperCase(getPrefix().charAt(0));
+  final char firstLetter=Character.toUpperCase(getPrefix().charAt(0));
 switch (firstLetter) {
 case 'P':
     return -100;
 case 'S':
 {
     try {
-      Integer stageNumber=Integer.valueOf(getPrefix().substring(1));
+      final Integer stageNumber=Integer.valueOf(getPrefix().substring(1));
       return stageNumber;
     }
  catch (    NumberFormatException e) {
@@ -20,6 +20,7 @@ case 'F':
 return 1000;
 case 'O':
 return 10000;
-}
+default :
 return 0;
+}
 }

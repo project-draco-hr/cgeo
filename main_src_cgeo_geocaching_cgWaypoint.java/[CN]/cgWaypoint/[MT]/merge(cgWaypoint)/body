@@ -8,7 +8,7 @@
   if (StringUtils.isBlank(name)) {
     this.name=old.name;
   }
-  if (StringUtils.isBlank(latlon)) {
+  if (StringUtils.isBlank(latlon) || latlon.startsWith("?")) {
     latlon=old.latlon;
   }
   if (StringUtils.isBlank(latitudeString)) {
