@@ -9,7 +9,7 @@
     }
     final List<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
     final List<CachesOverlayItemImpl> items=new ArrayList<CachesOverlayItemImpl>();
-    if (cachesProtected != null && !cachesProtected.isEmpty()) {
+    if (!cachesProtected.isEmpty()) {
       for (      cgCache cacheOne : cachesProtected) {
         if (stop) {
           displayHandler.sendEmptyMessage(0);
