@@ -179,7 +179,7 @@
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
       itemName.setText(res.getString(R.string.cache_coordinates));
-      itemValue.setText(cache.latitudeString + " | " + cache.longitudeString);
+      itemValue.setText(cache.getLatitude() + " | " + cache.getLongitude());
       detailsList.addView(itemLayout);
     }
     if (CollectionUtils.isNotEmpty(cache.attributes)) {

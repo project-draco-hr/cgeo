@@ -27,8 +27,8 @@
     event.put("title",Html.fromHtml(cache.name).toString());
     event.put("description",description.toString());
     String location="";
-    if (StringUtils.isNotBlank(cache.latitudeString) && StringUtils.isNotBlank(cache.longitudeString)) {
-      location+=cache.latitudeString + " " + cache.longitudeString;
+    if (cache.coords != null) {
+      location+=cache.getLatitude() + " " + cache.getLongitude();
     }
     if (StringUtils.isNotBlank(cache.location)) {
       boolean addParenteses=false;

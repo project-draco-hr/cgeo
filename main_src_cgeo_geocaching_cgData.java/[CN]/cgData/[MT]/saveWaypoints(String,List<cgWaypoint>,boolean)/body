@@ -24,8 +24,6 @@
         values.put("lookup",oneWaypoint.lookup);
         values.put("name",oneWaypoint.name);
         values.put("latlon",oneWaypoint.latlon);
-        values.put("latitude_string",oneWaypoint.latitudeString);
-        values.put("longitude_string",oneWaypoint.longitudeString);
         putCoords(values,oneWaypoint.coords);
         values.put("note",oneWaypoint.note);
         databaseRW.insert(dbTableWaypoints,null,values);
