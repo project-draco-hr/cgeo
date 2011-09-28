@@ -1,0 +1,9 @@
+{
+  CheckBox disabledButton=(CheckBox)findViewById(R.id.showwaypoints);
+  SharedPreferences.Editor edit=prefs.edit();
+  edit.putBoolean("gcshowwaypoints",disabledButton.isChecked());
+  settings.showWaypoints=disabledButton.isChecked();
+  edit.commit();
+  disabledButton.setChecked(prefs.getBoolean("gcshowwaypoints",false));
+  return;
+}
