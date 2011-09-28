@@ -6,7 +6,7 @@
   if (loginStart == null) {
     return -3;
   }
-  loginResponse=request("https://www.geocaching.com/login/default.aspx",new HashMap<String,String>(),false,false,false);
+  loginResponse=request("https://www.geocaching.com/login/default.aspx",null,false,false,false);
   loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {

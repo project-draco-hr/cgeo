@@ -14,7 +14,7 @@
   if (StringUtils.isBlank(cacheType)) {
     cacheType=null;
   }
-  final Map<String,String> params=new HashMap<String,String>();
+  final Parameters params=new Parameters();
   if (cacheType != null && cacheIDs.containsKey(cacheType)) {
     params.put("tx",cacheIDs.get(cacheType));
   }

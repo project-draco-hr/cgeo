@@ -1,9 +1,19 @@
 {
   final cgCache cache=app.getCacheByGeocode(geocode);
-  String name=cache.name;
-  if (name.length() > 84) {
-    name=name.substring(0,81) + "...";
+  String status;
+  final String url=cache.getUrl();
+  if (url.length() >= 100) {
+    status="I found " + url;
   }
-  final String status="I found " + name + " (http://coord.info/"+ cache.geocode.toUpperCase()+ ")! #cgeo #geocaching";
-  postTweet(app,settings,status,null);
+ else {
+    String name=cache.name;
+    status="I found " + name + " ("+ url+ ")";
+    if (status.length() > Twitter.MAX_TWEET_SIZE) {
+      name=name.substring(0,name.length() - (status.length() - Twitter.MAX_TWEET_SIZE) - 3) + "...";
+    }
+    status="I found " + name + " ("+ url+ ")";
+    status=Twitter.appendHashTag(status,"cgeo");
+    status=Twitter.appendHashTag(status,"geocaching");
+  }
+  Twitter.postTweet(app,settings,status,null);
 }
