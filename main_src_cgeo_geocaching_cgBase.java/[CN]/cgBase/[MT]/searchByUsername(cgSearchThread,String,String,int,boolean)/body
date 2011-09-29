@@ -1,16 +1,11 @@
 {
   final cgSearch search=new cgSearch();
-  final String userName=parameters.get("username");
-  String cacheType=parameters.get("cachetype");
   if (StringUtils.isBlank(userName)) {
     Log.e(cgSettings.tag,"cgeoBase.searchByUsername: No user name given");
     return null;
   }
-  if (StringUtils.isBlank(cacheType)) {
-    cacheType=null;
-  }
   final Parameters params=new Parameters();
-  if (cacheType != null && cacheIDs.containsKey(cacheType)) {
+  if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
     params.put("tx",cacheIDs.get(cacheType));
   }
  else {
