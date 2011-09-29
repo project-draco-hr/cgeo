@@ -3,11 +3,7 @@
     Log.e(cgSettings.tag,"cgeoBase.searchByHistory: No application found");
     return null;
   }
-  String cachetype=null;
-  if (parameters.containsKey("cachetype")) {
-    cachetype=(String)parameters.get("cachetype");
-  }
-  final cgSearch search=app.getHistoryOfCaches(true,cachetype);
+  final cgSearch search=app.getHistoryOfCaches(true,cacheType);
   search.totalCnt=app.getAllHistoricCachesCount();
   return search.getCurrentId();
 }
