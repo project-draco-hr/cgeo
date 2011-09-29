@@ -5,12 +5,7 @@
     return null;
   }
   final Parameters params=new Parameters();
-  if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
-    params.put("tx",cacheIDs.get(cacheType));
-  }
- else {
-    params.put("tx",cacheIDs.get("all"));
-  }
+  insertCacheType(params,cacheType);
   params.put("ul",userName);
   boolean my=false;
   if (userName.equalsIgnoreCase(settings.getLogin().left)) {
