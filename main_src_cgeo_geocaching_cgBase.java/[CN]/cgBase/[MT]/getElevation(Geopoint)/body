@@ -1,7 +1,10 @@
 {
   try {
-    final String uri="http://maps.googleapis.com/maps/api/elevation/json?sensor=false&locations=" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ","+ String.format((Locale)null,"%.6f",coords.getLongitude());
-    final JSONObject response=requestJSON(uri);
+    final String uri="http://maps.googleapis.com/maps/api/elevation/";
+    final Parameters params=new Parameters();
+    params.put("sensor","false");
+    params.put("locations",String.format((Locale)null,"%.6f",coords.getLatitude()) + "," + String.format((Locale)null,"%.6f",coords.getLongitude()));
+    final JSONObject response=requestJSON(uri,params);
     if (response == null) {
       return null;
     }

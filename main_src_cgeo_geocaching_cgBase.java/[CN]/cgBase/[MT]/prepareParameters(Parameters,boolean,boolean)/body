@@ -6,16 +6,5 @@
     params.put("f","1");
     Log.i(cgSettings.tag,"Skipping caches found or hidden by user.");
   }
-  if (params != null) {
-    final List<String> paramsEncoded=new ArrayList<String>(params.size());
-    for (    final NameValuePair nameValue : params) {
-      final String key=nameValue.getName();
-      final String value=StringUtils.defaultString(nameValue.getValue());
-      paramsEncoded.add((key.charAt(0) != '^' ? key : "") + "=" + urlencode_rfc3986(value));
-    }
-    return StringUtils.join(paramsEncoded.toArray(),'&');
-  }
- else {
-    return "";
-  }
+  return prepareParameters(params);
 }

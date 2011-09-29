@@ -1,6 +1,8 @@
 {
-  final String params="cache_code=" + geoCode + "&"+ SERVICE_CACHE_FIELDS;
-  final JSONObject data=request(geoCode,SERVICE_CACHE,params,1);
+  final Parameters params=new Parameters();
+  params.put("cache_code",geoCode);
+  params.put("fields",SERVICE_CACHE_FIELDS);
+  final JSONObject data=request(geoCode,SERVICE_CACHE,params);
   if (data == null) {
     return null;
   }
