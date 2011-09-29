@@ -1,6 +1,5 @@
 {
   handler=handlerIn;
-  final List<cgCache> result=new ArrayList<cgCache>();
   final RootElement root=new RootElement(namespace,"gpx");
   final Element waypoint=root.getChild(namespace,"wpt");
   waypoint.setStartElementListener(new StartElementListener(){
@@ -28,10 +27,39 @@
         cache.reason=listId;
         cache.detailed=true;
         createNoteFromGSAKUserdata();
-        result.add(cache);
+        result.put(cache.geocode,cache);
         showCountMessage(handler,result.size());
       }
+ else       if (StringUtils.isNotBlank(cache.name) && cache.coords != null && StringUtils.contains(type,"waypoint")) {
+        addWaypointToCache();
+      }
       resetCache();
+    }
+    private void addWaypointToCache(){
+      fixCache(cache);
+      if (cache.name.length() > 2) {
+        String cacheGeocodeForWaypoint="GC" + cache.name.substring(2);
+        cgCache cacheForWaypoint=result.get(cacheGeocodeForWaypoint);
+        if (cacheForWaypoint != null) {
+          final cgWaypoint waypoint=new cgWaypoint();
+          waypoint.id=-1;
+          waypoint.type=convertWaypointSym2Type(sym).id;
+          waypoint.geocode=cacheGeocodeForWaypoint;
+          waypoint.setPrefix(cache.name.substring(0,2));
+          waypoint.lookup="---";
+          waypoint.name=cache.shortdesc;
+          waypoint.coords=cache.coords;
+          waypoint.latitudeString=cache.latitudeString;
+          waypoint.longitudeString=cache.longitudeString;
+          waypoint.note=cache.description;
+          if (cacheForWaypoint.waypoints == null) {
+            cacheForWaypoint.waypoints=new ArrayList<cgWaypoint>();
+          }
+          cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints,Collections.singletonList(waypoint));
+          result.put(cacheGeocodeForWaypoint,cacheForWaypoint);
+          showCountMessage(handler,result.size());
+        }
+      }
     }
   }
 );
@@ -335,10 +363,9 @@
     }
 );
   }
-  boolean parsed=false;
   try {
     Xml.parse(stream,Xml.Encoding.UTF_8,root.getContentHandler());
-    parsed=true;
+    return true;
   }
  catch (  IOException e) {
     Log.e(cgSettings.tag,"Cannot parse .gpx file as GPX " + version + ": could not read file!");
@@ -346,5 +373,5 @@
 catch (  SAXException e) {
     Log.e(cgSettings.tag,"Cannot parse .gpx file as GPX " + version + ": could not parse XML - "+ e.toString());
   }
-  return parsed ? result : null;
+  return false;
 }

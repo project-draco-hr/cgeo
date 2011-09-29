@@ -1,0 +1,20 @@
+{
+  if ("parking area".equalsIgnoreCase(sym)) {
+    return WaypointType.PKG;
+  }
+ else   if ("stages of a multicache".equalsIgnoreCase(sym)) {
+    return WaypointType.STAGE;
+  }
+ else   if ("question to answer".equalsIgnoreCase(sym)) {
+    return WaypointType.PUZZLE;
+  }
+ else   if ("trailhead".equalsIgnoreCase(sym)) {
+    return WaypointType.TRAILHEAD;
+  }
+ else   if ("final location".equalsIgnoreCase(sym)) {
+    return WaypointType.FLAG;
+  }
+ else {
+    return WaypointType.WAYPOINT;
+  }
+}

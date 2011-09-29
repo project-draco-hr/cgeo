@@ -1,0 +1,8 @@
+{
+  final List<cgCache> caches=readGPX(R.raw.gc31j2h);
+  assertEquals(1,caches.size());
+  final cgCache cache=caches.get(0);
+  assertGc31j2h(cache);
+  assertSame(cache,caches.get(0));
+  assertNull(cache.waypoints);
+}

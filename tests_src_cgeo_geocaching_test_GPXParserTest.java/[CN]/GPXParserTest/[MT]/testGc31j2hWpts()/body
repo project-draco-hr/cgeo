@@ -1,0 +1,7 @@
+{
+  List<cgCache> caches=readGPX(R.raw.gc31j2h,R.raw.gc31j2h_wpts);
+  assertEquals(1,caches.size());
+  cgCache cache=caches.get(0);
+  assertGc31j2h(cache);
+  assertGc31j2hWaypoints(cache);
+}

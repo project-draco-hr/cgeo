@@ -1,0 +1,10 @@
+{
+  final String name=file.getName();
+  if (StringUtils.endsWithIgnoreCase(name,GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
+    String wptsName=StringUtils.substringBeforeLast(name,".") + "-wpts" + StringUtils.right(name,GPX_FILE_EXTENSION.length());
+    return new File(file.getParentFile(),wptsName);
+  }
+ else {
+    return null;
+  }
+}
