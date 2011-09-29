@@ -1,11 +1,9 @@
 {
-  Map<String,Object> params=new HashMap<String,Object>();
   if (coords != null) {
-    params.put("latitude",coords.getLatitude());
-    params.put("longitude",coords.getLongitude());
-    params.put("cachetype",settings.cacheType);
-    params.put("list",listId);
+    searchId=base.searchByOffline(coords,settings.cacheType,listId);
   }
-  searchId=base.searchByOffline(params);
+ else {
+    searchId=base.searchByOffline(null,null,1);
+  }
   handler.sendMessage(new Message());
 }
