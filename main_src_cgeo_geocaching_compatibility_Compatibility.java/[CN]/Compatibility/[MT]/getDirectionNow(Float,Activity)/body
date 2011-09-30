@@ -1,14 +1,19 @@
 {
   if (isLevel8) {
-    final int rotation=level8.getRotation(activity);
-    if (rotation == Surface.ROTATION_90) {
-      return directionNowPre + 90;
+    try {
+      final int rotation=(Integer)getRotationMethod.invoke(null,activity);
+      if (rotation == Surface.ROTATION_90) {
+        return directionNowPre + 90;
+      }
+ else       if (rotation == Surface.ROTATION_180) {
+        return directionNowPre + 180;
+      }
+ else       if (rotation == Surface.ROTATION_270) {
+        return directionNowPre + 270;
+      }
     }
- else     if (rotation == Surface.ROTATION_180) {
-      return directionNowPre + 180;
-    }
- else     if (rotation == Surface.ROTATION_270) {
-      return directionNowPre + 270;
+ catch (    final Exception e) {
+      Log.e(cgSettings.tag,"Cannot call getRotation()",e);
     }
   }
  else {
