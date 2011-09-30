@@ -1,3 +1,20 @@
 {
-  return StringUtils.join(StringUtils.split(data," \n\r\t"),' ');
+  final int length=data.length();
+  final char[] chars=new char[length];
+  data.getChars(0,length,chars,0);
+  int resultSize=0;
+  boolean lastWasWhitespace=true;
+  for (  char c : chars) {
+    if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
+      if (!lastWasWhitespace) {
+        chars[resultSize++]=' ';
+      }
+      lastWasWhitespace=true;
+    }
+ else {
+      chars[resultSize++]=c;
+      lastWasWhitespace=false;
+    }
+  }
+  return String.valueOf(chars,0,resultSize);
 }
