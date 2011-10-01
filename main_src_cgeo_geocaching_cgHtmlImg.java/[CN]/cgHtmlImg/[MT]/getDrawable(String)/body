@@ -93,9 +93,6 @@
   }
   if ((imagePre == null && reason == 0) || onlySave) {
     Uri uri=null;
-    HttpGet getMethod=null;
-    HttpResponse httpResponse=null;
-    HttpEntity entity=null;
     BufferedHttpEntity bufferedEntity=null;
     try {
       uri=Uri.parse(url);
@@ -113,10 +110,10 @@
           Log.w(cgSettings.tag,"cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
         }
         try {
-          getMethod=new HttpGet(url);
-          httpResponse=cgBase.doRequest(getMethod);
+          final HttpGet getMethod=new HttpGet(url);
+          final HttpResponse httpResponse=cgBase.doRequest(getMethod);
           if (httpResponse != null) {
-            entity=httpResponse.getEntity();
+            final HttpEntity entity=httpResponse.getEntity();
             bufferedEntity=new BufferedHttpEntity(entity);
             final long imageSize=bufferedEntity.getContentLength();
             if (imageSize > (6 * 1024 * 1024)) {
@@ -134,7 +131,13 @@
  else             if (imageSize > (0.5 * 1024 * 1024)) {
               bfOptions.inSampleSize=2;
             }
-            imagePre=BitmapFactory.decodeStream(bufferedEntity.getContent(),null,bfOptions);
+            final InputStream is=bufferedEntity.getContent();
+            try {
+              imagePre=BitmapFactory.decodeStream(is,null,bfOptions);
+            }
+  finally {
+              is.close();
+            }
           }
           if (imagePre != null) {
             break;
@@ -148,31 +151,30 @@
     if (save) {
       try {
         if (bufferedEntity != null) {
-          final InputStream is=(InputStream)bufferedEntity.getContent();
-          final FileOutputStream fos=new FileOutputStream(fileName);
+          final InputStream is=bufferedEntity.getContent();
           try {
-            final byte[] buffer=new byte[4096];
-            int l;
-            while ((l=is.read(buffer)) != -1) {
-              fos.write(buffer,0,l);
+            final FileOutputStream fos=new FileOutputStream(fileName);
+            try {
+              final byte[] buffer=new byte[4096];
+              int l;
+              while ((l=is.read(buffer)) != -1) {
+                fos.write(buffer,0,l);
+              }
+              fos.flush();
             }
-            fos.flush();
+  finally {
+              fos.close();
+            }
           }
- catch (          IOException e) {
-            Log.e(cgSettings.tag,"cgHtmlImg.getDrawable (saving to cache): " + e.toString());
-          }
- finally {
+  finally {
             is.close();
-            fos.close();
           }
         }
       }
- catch (      Exception e) {
-        Log.e(cgSettings.tag,"cgHtmlImg.getDrawable (saving to cache): " + e.toString());
+ catch (      IOException e) {
+        Log.e(cgSettings.tag,"cgHtmlImg.getDrawable (saving to cache)",e);
       }
     }
-    entity=null;
-    bufferedEntity=null;
   }
   if (onlySave) {
     return null;
