@@ -2,7 +2,7 @@
   if (settings.asBrowser == 1) {
     request.setHeader("Accept-Charset","utf-8, iso-8859-1, utf-16, *;q=0.7");
     request.setHeader("Accept-Language","en-US");
-    request.setHeader("User-Agent",idBrowser);
+    request.getParams().setParameter(CoreProtocolPNames.USER_AGENT,idBrowser);
   }
   return doRequest(request);
 }
