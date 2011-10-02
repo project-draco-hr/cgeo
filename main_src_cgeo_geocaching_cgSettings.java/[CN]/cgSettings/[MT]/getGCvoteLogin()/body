@@ -1,18 +1,11 @@
 {
+  final String preUsername=sharedPrefs.getString(KEY_USERNAME,null);
+  final String prePassword=sharedPrefs.getString(KEY_GCVOTE_PASSWORD,null);
+  if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
+    return null;
+  }
   final Map<String,String> login=new HashMap<String,String>();
-  if (username == null || password == null) {
-    final String preUsername=prefs.getString(KEY_USERNAME,null);
-    final String prePassword=prefs.getString(KEY_GCVOTE_PASSWORD,null);
-    if (preUsername == null || prePassword == null) {
-      return null;
-    }
-    login.put(KEY_USERNAME,preUsername);
-    login.put(KEY_PASSWORD,prePassword);
-    username=preUsername;
-  }
- else {
-    login.put(KEY_USERNAME,username);
-    login.put(KEY_PASSWORD,password);
-  }
+  login.put(KEY_USERNAME,preUsername);
+  login.put(KEY_PASSWORD,prePassword);
   return login;
 }

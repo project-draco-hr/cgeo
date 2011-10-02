@@ -332,7 +332,7 @@
   if (cache.coords != null) {
     cache.elevation=getElevation(cache.coords);
   }
-  final cgRating rating=getRating(cache.guid,cache.geocode);
+  final cgRating rating=GCVote.getRating(cache.guid,cache.geocode);
   if (rating != null) {
     cache.rating=rating.rating;
     cache.votes=rating.votes;

@@ -125,7 +125,7 @@
     Log.e(cgSettings.tag,"unable to get version information",e);
     version=null;
   }
-  if (settings.asBrowser == 1) {
+  if (cgSettings.asBrowser()) {
     final long rndBrowser=Math.round(Math.random() * 6);
 switch ((int)rndBrowser) {
 case 0:

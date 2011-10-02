@@ -118,14 +118,19 @@
     useEnglishButton.setChecked(true);
   }
   useEnglishButton.setOnClickListener(new cgeoChangeUseEnglish());
-  CheckBox excludeButton=(CheckBox)findViewById(R.id.exclude);
+  final CheckBox excludeButton=(CheckBox)findViewById(R.id.exclude);
   if (prefs.getInt("excludemine",0) == 0) {
     excludeButton.setChecked(false);
   }
  else {
     excludeButton.setChecked(true);
   }
-  excludeButton.setOnClickListener(new cgeoChangeExclude());
+  excludeButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      cgSettings.setExcludeMine(excludeButton.isChecked());
+    }
+  }
+);
   CheckBox disabledButton=(CheckBox)findViewById(R.id.disabled);
   if (prefs.getInt("excludedisabled",0) == 0) {
     disabledButton.setChecked(false);
@@ -201,14 +206,19 @@
     }
   }
 );
-  CheckBox browserButton=(CheckBox)findViewById(R.id.browser);
+  final CheckBox browserButton=(CheckBox)findViewById(R.id.browser);
   if (prefs.getInt("asbrowser",1) == 0) {
     browserButton.setChecked(false);
   }
  else {
     browserButton.setChecked(true);
   }
-  browserButton.setOnClickListener(new cgeoChangeBrowser());
+  browserButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      cgSettings.setAsBrowser(browserButton.isChecked());
+    }
+  }
+);
   EditText altitudeEdit=(EditText)findViewById(R.id.altitude);
   altitudeEdit.setText("" + prefs.getInt("altcorrection",0));
   String webDeviceName=prefs.getString("webDeviceName",null);

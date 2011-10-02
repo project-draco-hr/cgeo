@@ -29,7 +29,7 @@
     }
     caches=app.getCaches(searchId);
     if (live && settings.maplive >= 1) {
-      final boolean excludeMine=settings.excludeMine > 0;
+      final boolean excludeMine=cgSettings.getExcludeMine();
       final boolean excludeDisabled=settings.excludeDisabled > 0;
       for (int i=caches.size() - 1; i >= 0; i--) {
         cgCache cache=caches.get(i);

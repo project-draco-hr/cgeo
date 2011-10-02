@@ -142,21 +142,23 @@
       setRating(cache.rating,cache.votes);
     }
  else {
-      (new Thread(){
-        public void run(){
-          cgRating rating=base.getRating(cache.guid,geocode);
-          Message msg=new Message();
-          Bundle bundle=new Bundle();
-          if (rating == null || rating.rating == null) {
-            return;
+      if (cache.supportsGCVote()) {
+        (new Thread(){
+          public void run(){
+            cgRating rating=GCVote.getRating(cache.guid,geocode);
+            Message msg=new Message();
+            Bundle bundle=new Bundle();
+            if (rating == null || rating.rating == null) {
+              return;
+            }
+            bundle.putFloat("rating",rating.rating);
+            bundle.putInt("votes",rating.votes);
+            msg.setData(bundle);
+            ratingHandler.sendMessage(msg);
           }
-          bundle.putFloat("rating",rating.rating);
-          bundle.putInt("votes",rating.votes);
-          msg.setData(bundle);
-          ratingHandler.sendMessage(msg);
         }
-      }
 ).start();
+      }
     }
     if (fromDetail == false) {
       ((LinearLayout)findViewById(R.id.more_details_box)).setVisibility(View.VISIBLE);

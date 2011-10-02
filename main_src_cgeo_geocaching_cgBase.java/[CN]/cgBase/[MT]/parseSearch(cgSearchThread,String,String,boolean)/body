@@ -280,7 +280,7 @@
   if (guids.size() > 0) {
     Log.i(cgSettings.tag,"Trying to get ratings for " + cids.size() + " caches");
     try {
-      final Map<String,cgRating> ratings=getRating(guids,null);
+      final Map<String,cgRating> ratings=GCVote.getRating(guids,null);
       if (CollectionUtils.isNotEmpty(ratings)) {
         for (        cgCache oneCache : caches.cacheList) {
           if (ratings.containsKey(oneCache.guid)) {

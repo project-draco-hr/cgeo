@@ -1,11 +1,15 @@
 {
+  if (!cache.supportsGCVote()) {
+    return false;
+  }
+  String guid=cache.guid;
   if (StringUtils.isBlank(guid)) {
     return false;
   }
-  if (vote < 0.0 || vote > 5.0) {
+  if (vote <= 0.0 || vote > 5.0) {
     return false;
   }
-  final Map<String,String> login=settings.getGCvoteLogin();
+  final Map<String,String> login=cgSettings.getGCvoteLogin();
   if (login == null) {
     return false;
   }
@@ -13,8 +17,8 @@
   params.put("userName",login.get("username"));
   params.put("password",login.get("password"));
   params.put("cacheId",guid);
-  params.put("voteUser",String.format("%.1f",rating).replace(',','.'));
+  params.put("voteUser",String.format("%.1f",vote).replace(',','.'));
   params.put("version","cgeo");
-  final String result=cgBase.getResponseData(base.request("http://gcvote.com/setVote.php",params,false,false,false));
+  final String result=cgBase.getResponseData(cgBase.request("http://gcvote.com/setVote.php",params,false,false,false));
   return result.trim().equalsIgnoreCase("ok");
 }
