@@ -1,8 +1,12 @@
 {
-  if (ArrayUtils.isEmpty(viewstates))   return;
+  if (ArrayUtils.isEmpty(viewstates)) {
+    return;
+  }
   params.put("__VIEWSTATE",viewstates[0]);
   if (viewstates.length > 1) {
-    for (int i=1; i < viewstates.length; i++)     params.put("__VIEWSTATE" + i,viewstates[i]);
+    for (int i=1; i < viewstates.length; i++) {
+      params.put("__VIEWSTATE" + i,viewstates[i]);
+    }
     params.put("__VIEWSTATEFIELDCOUNT",viewstates.length + "");
   }
 }

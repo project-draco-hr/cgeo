@@ -47,11 +47,11 @@
   if (StringUtils.isNotBlank(tableInside)) {
     String result=BaseUtils.getMatch(tableInside,Constants.PATTERN_TERRAIN,1,null);
     if (result != null) {
-      cache.terrain=new Float(Pattern.compile("_").matcher(result).replaceAll("."));
+      cache.terrain=new Float(StringUtils.replaceChars(result,'_','.'));
     }
     result=BaseUtils.getMatch(tableInside,Constants.PATTERN_DIFFICULTY,1,null);
     if (result != null) {
-      cache.difficulty=new Float(Pattern.compile("_").matcher(result).replaceAll("."));
+      cache.difficulty=new Float(StringUtils.replaceChars(result,'_','.'));
     }
     try {
       final Matcher matcherOwner=patternOwner.matcher(tableInside);
@@ -138,7 +138,7 @@
       final String attributesPre=matcherAttributes.group(1);
       final Matcher matcherAttributesInside=patternAttributesInside.matcher(attributesPre);
       while (matcherAttributesInside.find()) {
-        if (matcherAttributesInside.groupCount() > 1 && matcherAttributesInside.group(2).equalsIgnoreCase("blank") != true) {
+        if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
           if (cache.attributes == null) {
             cache.attributes=new ArrayList<String>();
           }
