@@ -1,13 +1,30 @@
 {
   if (app.getAllStoredCachesCount(true,null,null) == 0) {
+    helpDialog(res.getString(R.string.init_backup),res.getString(R.string.init_backup_unnecessary));
     return;
   }
-  final String file=app.backupDatabase();
-  if (file != null) {
-    helpDialog(res.getString(R.string.init_backup_backup),res.getString(R.string.init_backup_success) + "\n" + file);
-  }
+  final AtomicReference<String> fileRef=new AtomicReference<String>(null);
+  final ProgressDialog dialog=ProgressDialog.show(this,res.getString(R.string.init_backup),res.getString(R.string.init_backup_running),true,false);
+  Thread backupThread=new Thread(){
+    final Handler handler=new Handler(){
+      public void handleMessage(      Message msg){
+        dialog.dismiss();
+        final String file=fileRef.get();
+        if (file != null) {
+          helpDialog(res.getString(R.string.init_backup_backup),res.getString(R.string.init_backup_success) + "\n" + file);
+        }
  else {
-    helpDialog(res.getString(R.string.init_backup_backup),res.getString(R.string.init_backup_failed));
+          helpDialog(res.getString(R.string.init_backup_backup),res.getString(R.string.init_backup_failed));
+        }
+        refreshBackupLabel();
+      }
+    }
+;
+    @Override public void run(){
+      fileRef.set(app.backupDatabase());
+      handler.sendMessage(handler.obtainMessage());
+    }
   }
-  showBackupDate();
+;
+  backupThread.start();
 }
