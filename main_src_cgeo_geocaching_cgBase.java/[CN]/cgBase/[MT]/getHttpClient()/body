@@ -1,20 +1,17 @@
 {
-  if (clientConnectionManager == null) {
+  if (cookieStore == null) {
 synchronized (cgBase.class) {
-      if (clientConnectionManager == null) {
+      if (cookieStore == null) {
         clientParams=new BasicHttpParams();
         clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET,HTTP.UTF_8);
         clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,30000);
         clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT,30000);
-        final SchemeRegistry registry=new SchemeRegistry();
-        registry.register(new Scheme("http",PlainSocketFactory.getSocketFactory(),80));
-        registry.register(new Scheme("https",SSLSocketFactory.getSocketFactory(),443));
         cookieStore=new BasicCookieStore();
-        clientConnectionManager=new ThreadSafeClientConnManager(clientParams,registry);
       }
     }
   }
-  final DefaultHttpClient client=new DefaultHttpClient(clientConnectionManager,clientParams);
+  final DefaultHttpClient client=new DefaultHttpClient();
   client.setCookieStore(cookieStore);
+  client.setParams(clientParams);
   return client;
 }
