@@ -7,10 +7,7 @@
     cache=cachesCache.get(geocode);
   }
  else {
-    if (storage == null) {
-      storage=new cgData(this);
-    }
-    cache=storage.loadCache(geocode,null,loadA,loadW,loadS,loadL,loadI,loadO);
+    cache=getStorage().loadCache(geocode,null,loadA,loadW,loadS,loadL,loadI,loadO);
     if (cache != null && cache.detailed && loadA && loadW && loadS && loadL && loadI) {
       putCacheInCache(cache);
     }

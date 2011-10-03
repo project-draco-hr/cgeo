@@ -2,9 +2,6 @@
   if (databaseCleaned) {
     return;
   }
-  if (storage == null) {
-    storage=new cgData(this);
-  }
-  storage.clean(more);
+  getStorage().clean(more);
   databaseCleaned=true;
 }

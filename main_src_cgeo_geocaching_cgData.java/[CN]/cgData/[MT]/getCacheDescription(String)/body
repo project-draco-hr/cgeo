@@ -4,11 +4,11 @@
   }
   init();
   try {
-    SQLiteStatement sql=databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
-    sql.bindString(1,geocode);
-    String description=sql.simpleQueryForString();
-    sql.close();
-    return description;
+    if (statementDescription == null) {
+      statementDescription=databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
+    }
+    statementDescription.bindString(1,geocode);
+    return statementDescription.simpleQueryForString();
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgData.getCacheDescription: " + e.toString());

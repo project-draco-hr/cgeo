@@ -4,7 +4,7 @@
   }
   init();
   cgLog log=null;
-  Cursor cursor=databaseRO.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = \"" + geocode + "\"",null,null,null,"_id desc","1");
+  Cursor cursor=databaseRO.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = ?",new String[]{geocode},null,null,"_id desc","1");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     log=new cgLog();

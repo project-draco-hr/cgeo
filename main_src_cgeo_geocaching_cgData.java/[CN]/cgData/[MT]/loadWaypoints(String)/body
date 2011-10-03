@@ -4,7 +4,7 @@
   }
   init();
   List<cgWaypoint> waypoints=new ArrayList<cgWaypoint>();
-  Cursor cursor=databaseRO.query(dbTableWaypoints,new String[]{"_id","geocode","updated","type","prefix","lookup","name","latlon","latitude","longitude","note"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
+  Cursor cursor=databaseRO.query(dbTableWaypoints,new String[]{"_id","geocode","updated","type","prefix","lookup","name","latlon","latitude","longitude","note"},"geocode = ?",new String[]{geocode},null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {

@@ -6,7 +6,7 @@
   Cursor cursor=null;
   String geocode=null;
   try {
-    cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},"guid = \"" + guid + "\"",null,null,null,null,"1");
+    cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"guid = ?",new String[]{guid},null,null,null,"1");
     if (cursor != null) {
       int index=0;
       if (cursor.getCount() > 0) {

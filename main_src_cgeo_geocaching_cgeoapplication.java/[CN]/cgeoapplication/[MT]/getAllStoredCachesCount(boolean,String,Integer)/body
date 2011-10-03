@@ -1,6 +1,3 @@
 {
-  if (storage == null) {
-    storage=new cgData(this);
-  }
-  return storage.getAllStoredCachesCount(detailedOnly,cachetype,list);
+  return getStorage().getAllStoredCachesCount(detailedOnly,cachetype,list);
 }

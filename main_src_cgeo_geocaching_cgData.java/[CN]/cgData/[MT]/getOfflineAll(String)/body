@@ -11,7 +11,7 @@
   }
   where.append("reason >= 1");
   try {
-    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},where.toString(),null,null,null,null,"5000");
+    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},where.toString(),null,null,null,null,"5000");
     if (cursor != null) {
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();

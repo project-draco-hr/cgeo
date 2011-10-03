@@ -2,15 +2,16 @@
   if (StringUtils.isBlank(geocode)) {
     return false;
   }
-  int count=0;
   init();
   try {
-    final SQLiteStatement countSql=databaseRO.compileStatement("select count(_id) from " + dbTableLogsOffline + " where geocode = \""+ geocode.toUpperCase()+ "\"");
-    count=(int)countSql.simpleQueryForLong();
-    countSql.close();
+    if (statementLogCount == null) {
+      statementLogCount=databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
+    }
+    statementLogCount.bindString(1,geocode.toUpperCase());
+    return statementLogCount.simpleQueryForLong() > 0;
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgData.hasLogOffline: " + e.toString());
   }
-  return count > 0;
+  return false;
 }

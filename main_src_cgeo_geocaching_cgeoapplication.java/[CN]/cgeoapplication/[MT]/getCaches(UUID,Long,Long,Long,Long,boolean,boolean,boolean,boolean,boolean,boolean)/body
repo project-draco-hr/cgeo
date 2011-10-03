@@ -10,10 +10,7 @@
   List<cgCache> cachesOut=new ArrayList<cgCache>();
   cgSearch search=searches.get(searchId);
   List<String> geocodeList=search.getGeocodes();
-  if (storage == null) {
-    storage=new cgData(this);
-  }
-  final List<cgCache> cachesPre=storage.loadCaches(geocodeList.toArray(),null,null,null,null,null,loadA,loadW,loadS,loadL,loadI,loadO);
+  final List<cgCache> cachesPre=getStorage().loadCaches(geocodeList.toArray(),null,null,null,null,null,loadA,loadW,loadS,loadL,loadI,loadO);
   if (cachesPre != null) {
     cachesOut.addAll(cachesPre);
   }
