@@ -18,7 +18,7 @@
       cgeoapplication.getInstance().addCacheToSearch(search,cache);
     }
     caches.totalCnt=caches.cacheList.size();
-    showCountMessage(handler,search.getCount());
+    showCountMessage(handler,R.string.gpx_import_loading_stored,search.getCount());
     Log.i(Settings.tag,"Caches found in .gpx file: " + caches.totalCnt);
   }
  catch (  Exception e) {

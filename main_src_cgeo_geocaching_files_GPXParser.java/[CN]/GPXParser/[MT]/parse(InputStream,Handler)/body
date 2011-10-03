@@ -1,4 +1,5 @@
 {
+  importedRecords=0;
   handler=handlerIn;
   final RootElement root=new RootElement(namespace,"gpx");
   final Element waypoint=root.getChild(namespace,"wpt");
@@ -28,7 +29,7 @@
         cache.detailed=true;
         createNoteFromGSAKUserdata();
         result.put(cache.geocode,cache);
-        showCountMessage(handler,result.size());
+        showCountMessage(handler,R.string.gpx_import_loading_caches,++importedRecords);
       }
  else       if (StringUtils.isNotBlank(cache.name) && cache.coords != null && StringUtils.contains(type,"waypoint")) {
         addWaypointToCache();
@@ -55,7 +56,7 @@
           }
           cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints,Collections.singletonList(waypoint));
           result.put(cacheGeocodeForWaypoint,cacheForWaypoint);
-          showCountMessage(handler,result.size());
+          showCountMessage(handler,R.string.gpx_import_loading_waypoints,++importedRecords);
         }
       }
     }
