@@ -4,16 +4,15 @@
     Log.e(Settings.tag,"cgeoBase.searchByUsername: No user name given");
     return null;
   }
-  final Parameters params=new Parameters();
+  final Parameters params=new Parameters("ul",userName);
   insertCacheType(params,cacheType);
-  params.put("ul",userName);
   boolean my=false;
   if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
     my=true;
     Log.i(Settings.tag,"cgBase.searchByUsername: Overriding users choice, downloading all caches.");
   }
   final String uri="http://www.geocaching.com/seek/nearest.aspx";
-  final String fullUri=uri + "?" + prepareParameters(params,my,true);
+  final String fullUri=uri + "?" + addFToParams(params,my,true);
   String page=requestLogged(uri,params,false,my,true);
   if (StringUtils.isBlank(page)) {
     Log.e(Settings.tag,"cgeoBase.searchByUsername: No data from server");

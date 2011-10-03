@@ -30,14 +30,8 @@
     return -3;
   }
   clearCookies();
-  final Parameters params=new Parameters();
-  params.put("__EVENTTARGET","");
-  params.put("__EVENTARGUMENT","");
+  final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$SiteContent$tbUsername",login.left,"ctl00$SiteContent$tbPassword",login.right,"ctl00$SiteContent$cbRememberMe","on","ctl00$SiteContent$btnSignIn","Login");
   setViewstates(viewstates,params);
-  params.put("ctl00$SiteContent$tbUsername",login.left);
-  params.put("ctl00$SiteContent$tbPassword",login.right);
-  params.put("ctl00$SiteContent$cbRememberMe","on");
-  params.put("ctl00$SiteContent$btnSignIn","Login");
   loginResponse=postRequest("https://www.geocaching.com/login/default.aspx",params);
   loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {

@@ -5,11 +5,8 @@
     Log.e(Settings.tag,"cgBase.removeFromWatchlist: No data from server");
     return -1;
   }
-  final Parameters params=new Parameters();
+  final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$btnYes","Yes");
   transferViewstates(page,params);
-  params.put("__EVENTTARGET","");
-  params.put("__EVENTARGUMENT","");
-  params.put("ctl00$ContentBody$btnYes","Yes");
   page=getResponseData(postRequest(uri,params));
   boolean guidOnPage=cache.isGuidContainedInPage(page);
   if (!guidOnPage) {
