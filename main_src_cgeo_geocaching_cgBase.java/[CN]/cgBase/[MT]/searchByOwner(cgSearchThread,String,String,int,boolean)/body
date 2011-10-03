@@ -1,27 +1,8 @@
 {
-  final cgSearch search=new cgSearch();
   if (StringUtils.isBlank(userName)) {
     Log.e(Settings.tag,"cgeoBase.searchByOwner: No user name given");
     return null;
   }
   final Parameters params=new Parameters("u",userName);
-  insertCacheType(params,cacheType);
-  final String uri="http://www.geocaching.com/seek/nearest.aspx";
-  final String fullUri=uri + "?" + addFToParams(params,false,true);
-  String page=requestLogged(uri,params,false,false,true);
-  if (StringUtils.isBlank(page)) {
-    Log.e(Settings.tag,"cgeoBase.searchByOwner: No data from server");
-    return null;
-  }
-  final cgCacheWrap caches=parseSearch(thread,fullUri,page,showCaptcha);
-  if (caches == null || caches.cacheList == null) {
-    Log.e(Settings.tag,"cgeoBase.searchByOwner: No cache parsed");
-  }
-  if (app == null) {
-    Log.e(Settings.tag,"cgeoBase.searchByCoords: No application found");
-    return null;
-  }
-  List<cgCache> cacheList=processSearchResults(search,caches,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),null);
-  app.addSearch(search,cacheList,true,0);
-  return search.getCurrentId();
+  return searchByAny(thread,cacheType,false,reason,showCaptcha,params);
 }
