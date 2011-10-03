@@ -131,7 +131,7 @@
   checkFields(cache);
   cache.personalNote=BaseUtils.getMatch(page,Constants.PATTERN_PERSONALNOTE,1,cache.personalNote);
   cache.shortdesc=BaseUtils.getMatch(page,Constants.PATTERN_SHORTDESC,1,cache.shortdesc);
-  cache.description=BaseUtils.getMatch(page,Constants.PATTERN_DESC,1,cache.description);
+  cache.setDescription(BaseUtils.getMatch(page,Constants.PATTERN_DESC,1,""));
   try {
     final Matcher matcherAttributes=patternAttributes.matcher(page);
     if (matcherAttributes.find() && matcherAttributes.groupCount() > 0) {

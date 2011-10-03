@@ -1,7 +1,7 @@
 {
   try {
     if (cache != null) {
-      if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
+      if (cache.reason > 0 || StringUtils.isBlank(cache.getDescription())) {
         final UUID searchId=searchByGeocode(cache.geocode,null,listId,false);
         cache=app.getCache(searchId);
       }
@@ -17,8 +17,8 @@
       return;
     }
     final cgHtmlImg imgGetter=new cgHtmlImg(activity,cache.geocode,false,listId,true);
-    if (StringUtils.isNotBlank(cache.description)) {
-      Html.fromHtml(cache.description,imgGetter,null);
+    if (StringUtils.isNotBlank(cache.getDescription())) {
+      Html.fromHtml(cache.getDescription(),imgGetter,null);
     }
     if (CollectionUtils.isNotEmpty(cache.spoilers)) {
       for (      cgImage oneSpoiler : cache.spoilers) {

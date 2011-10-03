@@ -50,7 +50,7 @@
           waypoint.lookup="---";
           waypoint.name=cache.shortdesc;
           waypoint.coords=cache.coords;
-          waypoint.note=cache.description;
+          waypoint.note=cache.getDescription();
           if (cacheForWaypoint.waypoints == null) {
             cacheForWaypoint.waypoints=new ArrayList<cgWaypoint>();
           }
@@ -79,7 +79,6 @@
       final String content=body.trim();
       cache.name=content;
       findGeoCode(cache.name);
-      findGeoCode(cache.description);
     }
   }
 );
@@ -93,7 +92,7 @@
   waypoint.getChild(namespace,"cmt").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       cmt=body;
-      cache.description=validate(body);
+      cache.setDescription(validate(body));
     }
   }
 );
@@ -264,7 +263,7 @@
 );
     gcCache.getChild(nsGC,"long_description").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String desc){
-        cache.description=validate(desc);
+        cache.setDescription(validate(desc));
       }
     }
 );

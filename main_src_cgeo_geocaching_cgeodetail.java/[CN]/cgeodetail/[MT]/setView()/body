@@ -291,7 +291,7 @@
         showDesc.setOnClickListener(null);
       }
     }
- else     if (longDescDisplayed == false && StringUtils.isNotBlank(cache.description)) {
+ else     if (longDescDisplayed == false && StringUtils.isNotBlank(cache.getDescription())) {
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       Button showDesc=(Button)findViewById(R.id.show_description);
       showDesc.setVisibility(View.VISIBLE);

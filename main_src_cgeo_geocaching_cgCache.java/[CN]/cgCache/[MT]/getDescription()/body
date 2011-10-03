@@ -1,3 +1,6 @@
 {
+  if (description == null) {
+    description=StringUtils.defaultString(cgeoapplication.getInstance().getCacheDescription(geocode));
+  }
   return description;
 }
