@@ -31,7 +31,8 @@
         }
       }
       if (recaptchaJsParam != null) {
-        final String recaptchaJs=cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge","k=" + urlencode_rfc3986(recaptchaJsParam.trim()),true));
+        final Parameters params=new Parameters("k",recaptchaJsParam.trim());
+        final String recaptchaJs=cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge",params,true));
         if (StringUtils.isNotBlank(recaptchaJs)) {
           final Matcher matcherRecaptchaChallenge=patternRecaptchaChallenge.matcher(recaptchaJs);
           while (matcherRecaptchaChallenge.find()) {
@@ -236,9 +237,7 @@
   if (cids.size() > 0 && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
     Log.i(Settings.tag,"Trying to get .loc for " + cids.size() + " caches");
     try {
-      final Parameters params=new Parameters();
-      params.put("__EVENTTARGET","");
-      params.put("__EVENTARGUMENT","");
+      final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","");
       if (ArrayUtils.isNotEmpty(caches.viewstates)) {
         params.put("__VIEWSTATE",caches.viewstates[0]);
         if (caches.viewstates.length > 1) {

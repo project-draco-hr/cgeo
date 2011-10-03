@@ -10,9 +10,9 @@
   (new Thread(){
     @Override public void run(){
       int pin=0;
-      String nam=deviceName == null ? "" : deviceName;
-      String cod=deviceCode == null ? "" : deviceCode;
-      String params="name=" + cgBase.urlencode_rfc3986(nam) + "&code="+ cgBase.urlencode_rfc3986(cod);
+      final String nam=StringUtils.defaultString(deviceName);
+      final String cod=StringUtils.defaultString(deviceCode);
+      final Parameters params=new Parameters("name",nam,"code",cod);
       HttpResponse response=cgBase.request("http://send2.cgeo.org/auth.html",params,true);
       if (response.getStatusLine().getStatusCode() == 200) {
         String[] strings=cgBase.getResponseData(response).split(",");

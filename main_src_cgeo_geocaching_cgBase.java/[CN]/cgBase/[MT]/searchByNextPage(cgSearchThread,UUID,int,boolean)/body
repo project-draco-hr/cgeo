@@ -10,10 +10,8 @@
     return searchId;
   }
   final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
-  final Parameters params=new Parameters();
+  final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
   setViewstates(viewstates,params);
-  params.put("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08");
-  params.put("__EVENTARGUMENT","");
   String page=getResponseData(postRequest(uri,params));
   if (checkLogin(page) == false) {
     int loginState=login();

@@ -8,8 +8,7 @@
     if (Settings.isLogin()) {
       final Map<String,String> login=Settings.getGCvoteLogin();
       if (login != null) {
-        params.put("userName",login.get("username"));
-        params.put("password",login.get("password"));
+        params.put("userName",login.get("username"),"password",login.get("password"));
       }
     }
     if (CollectionUtils.isNotEmpty(guids)) {

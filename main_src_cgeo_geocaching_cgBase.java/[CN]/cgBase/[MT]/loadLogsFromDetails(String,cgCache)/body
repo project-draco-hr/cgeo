@@ -5,11 +5,7 @@
     return;
   }
   final String userToken=userTokenMatcher.group(1);
-  final Parameters params=new Parameters();
-  params.put("tkn",userToken);
-  params.put("idx","1");
-  params.put("num","35");
-  params.put("decrypt","true");
+  final Parameters params=new Parameters("tkn",userToken,"idx","1","num","35","decrypt","true");
   final HttpResponse response=request("http://www.geocaching.com/seek/geocache.logbook",params,false,false,false);
   if (response == null) {
     Log.e(Settings.tag,"cgBase.loadLogsFromDetails: cannot log logs, response is null");
