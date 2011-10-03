@@ -1,11 +1,11 @@
 {
   if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
-    Log.w(cgSettings.tag,"Database wasn't backed up: no external memory");
+    Log.w(Settings.tag,"Database wasn't backed up: no external memory");
     return null;
   }
   closeDb();
   boolean backupDone=false;
-  final String directoryImg=cgSettings.cache;
+  final String directoryImg=Settings.cache;
   final String directoryTarget=Environment.getExternalStorageDirectory() + "/" + directoryImg+ "/";
   final String fileTarget=directoryTarget + "cgeo.sqlite";
   final String fileSource=path;
@@ -20,7 +20,7 @@
     output=new FileOutputStream(fileTarget);
   }
  catch (  FileNotFoundException e) {
-    Log.e(cgSettings.tag,"Database wasn't backed up, could not open file: " + e.toString());
+    Log.e(Settings.tag,"Database wasn't backed up, could not open file: " + e.toString());
   }
   byte[] buffer=new byte[1024];
   int length;
@@ -33,7 +33,7 @@
       backupDone=true;
     }
  catch (    IOException e) {
-      Log.e(cgSettings.tag,"Database wasn't backed up, could not read/write file: " + e.toString());
+      Log.e(Settings.tag,"Database wasn't backed up, could not read/write file: " + e.toString());
     }
   }
   try {
@@ -45,10 +45,10 @@
     }
   }
  catch (  IOException e) {
-    Log.e(cgSettings.tag,"Database wasn't backed up, could not close file: " + e.toString());
+    Log.e(Settings.tag,"Database wasn't backed up, could not close file: " + e.toString());
   }
   if (backupDone) {
-    Log.i(cgSettings.tag,"Database was copied to " + fileTarget);
+    Log.i(Settings.tag,"Database was copied to " + fileTarget);
   }
   init();
   return backupDone ? fileTarget : null;

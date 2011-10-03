@@ -1,7 +1,7 @@
 {
   final cgSearch search=new cgSearch();
   if (StringUtils.isBlank(keyword)) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No keyword given");
+    Log.e(Settings.tag,"cgeoBase.searchByKeyword: No keyword given");
     return null;
   }
   final Parameters params=new Parameters();
@@ -11,18 +11,18 @@
   final String fullUri=uri + "?" + prepareParameters(params,false,true);
   String page=requestLogged(uri,params,false,false,true);
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No data from server");
+    Log.e(Settings.tag,"cgeoBase.searchByKeyword: No data from server");
     return null;
   }
   final cgCacheWrap caches=parseSearch(thread,fullUri,page,showCaptcha);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByKeyword: No cache parsed");
+    Log.e(Settings.tag,"cgeoBase.searchByKeyword: No cache parsed");
   }
   if (app == null) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByCoords: No application found");
+    Log.e(Settings.tag,"cgeoBase.searchByCoords: No application found");
     return null;
   }
-  List<cgCache> cacheList=processSearchResults(search,caches,settings.excludeDisabled,0,null);
+  List<cgCache> cacheList=processSearchResults(search,caches,Settings.isExcludeDisabledCaches(),false,null);
   app.addSearch(search,cacheList,true,reason);
   return search.getCurrentId();
 }

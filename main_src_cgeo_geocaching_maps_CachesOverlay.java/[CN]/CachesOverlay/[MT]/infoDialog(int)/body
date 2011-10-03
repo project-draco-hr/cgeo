@@ -2,7 +2,7 @@
   final CachesOverlayItemImpl item=items.get(index);
   final cgCoord coordinate=item.getCoord();
   if (coordinate == null) {
-    Log.e(cgSettings.tag,"cgMapOverlay:infoDialog: No coordinates given");
+    Log.e(Settings.tag,"cgMapOverlay:infoDialog: No coordinates given");
     return;
   }
   try {
@@ -81,6 +81,6 @@
     alert.show();
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgMapOverlay.infoDialog: " + e.toString());
+    Log.e(Settings.tag,"cgMapOverlay.infoDialog: " + e.toString());
   }
 }

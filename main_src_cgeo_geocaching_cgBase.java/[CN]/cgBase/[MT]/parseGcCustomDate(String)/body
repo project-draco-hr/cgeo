@@ -3,9 +3,9 @@
     throw new ParseException("Input is null",0);
   }
   final String trimmed=input.trim();
-  if (null != settings && gcCustomDateFormats.containsKey(settings.getGcCustomDate())) {
+  if (gcCustomDateFormats.containsKey(Settings.getGcCustomDate())) {
     try {
-      return gcCustomDateFormats.get(settings.getGcCustomDate()).parse(trimmed);
+      return gcCustomDateFormats.get(Settings.getGcCustomDate()).parse(trimmed);
     }
  catch (    ParseException e) {
     }

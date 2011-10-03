@@ -3,7 +3,7 @@
   MenuItem item;
   try {
     item=menu.findItem(MENU_TRAIL_MODE);
-    if (settings.maptrail == 1) {
+    if (Settings.isMapTrail()) {
       item.setTitle(res.getString(R.string.map_trail_hide));
     }
  else {
@@ -15,7 +15,7 @@
       item.setTitle(res.getString(R.string.map_live_enable));
     }
  else {
-      if (settings.maplive == 1) {
+      if (Settings.isLiveMap()) {
         item.setTitle(res.getString(R.string.map_live_disable));
       }
  else {
@@ -37,7 +37,7 @@
       item.setTitle(res.getString(R.string.map_circles_show));
     }
     item=menu.findItem(SUBMENU_VIEW_MF_OFFLINE);
-    if (settings.hasValidMapFile()) {
+    if (Settings.isValidMapFile()) {
       item.setEnabled(true);
     }
  else {
@@ -45,7 +45,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeomap.onPrepareOptionsMenu: " + e.toString());
+    Log.e(Settings.tag,"cgeomap.onPrepareOptionsMenu: " + e.toString());
   }
   return true;
 }

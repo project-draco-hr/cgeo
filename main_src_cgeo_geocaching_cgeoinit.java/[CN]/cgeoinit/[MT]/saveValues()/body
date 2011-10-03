@@ -14,12 +14,12 @@
       altitudeNewInt=0;
     }
   }
-  final boolean status1=settings.setLogin(usernameNew,passwordNew);
-  final boolean status2=settings.setGCvoteLogin(passvoteNew);
-  final boolean status3=settings.setSignature(signatureNew);
-  final boolean status4=settings.setAltCorrection(altitudeNewInt);
-  final boolean status5=settings.setMapFile(mfmapFileNew);
+  final boolean status1=Settings.setLogin(usernameNew,passwordNew);
+  final boolean status2=Settings.setGCvoteLogin(passvoteNew);
+  final boolean status3=Settings.setSignature(signatureNew);
+  final boolean status4=Settings.setAltCorrection(altitudeNewInt);
+  final boolean status5=Settings.setMapFile(mfmapFileNew);
   TextView field=(TextView)findViewById(R.id.showwaypointsthreshold);
-  settings.setShowWaypointsThreshold(safeParse(field,5));
+  Settings.setShowWaypointsThreshold(safeParse(field,5));
   return status1 && status2 && status3&& status4&& status5;
 }

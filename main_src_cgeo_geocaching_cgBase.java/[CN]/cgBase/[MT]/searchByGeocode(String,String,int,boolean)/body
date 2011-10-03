@@ -1,7 +1,7 @@
 {
   final cgSearch search=new cgSearch();
   if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByGeocode: No geocode nor guid given");
+    Log.e(Settings.tag,"cgeoBase.searchByGeocode: No geocode nor guid given");
     return null;
   }
   if (forceReload == false && reason == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {

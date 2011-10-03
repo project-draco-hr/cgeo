@@ -1,8 +1,8 @@
 {
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
+    geo=app.startGeo(this,geoUpdate,base,0,0);
   }
-  if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
+  if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
     dir=app.startDir(this,dirUpdate);
   }
   if (cacheList != null) {

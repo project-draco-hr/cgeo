@@ -1,0 +1,10 @@
+{
+  final String external=Environment.getExternalStorageDirectory() + "/" + cache+ "/";
+  final String data=Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache+ "/";
+  if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    return new String[]{external,data};
+  }
+ else {
+    return new String[]{data,external};
+  }
+}

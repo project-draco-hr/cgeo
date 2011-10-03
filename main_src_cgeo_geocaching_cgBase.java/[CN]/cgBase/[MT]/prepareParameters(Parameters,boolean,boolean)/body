@@ -1,10 +1,10 @@
 {
-  if (!my && cgSettings.getExcludeMine() && addF) {
+  if (!my && Settings.isExcludeMyCaches() && addF) {
     if (params == null) {
       return "f=1";
     }
     params.put("f","1");
-    Log.i(cgSettings.tag,"Skipping caches found or hidden by user.");
+    Log.i(Settings.tag,"Skipping caches found or hidden by user.");
   }
   return prepareParameters(params);
 }

@@ -1,0 +1,19 @@
+{
+  if (username == null || password == null) {
+    final String preUsername=sharedPrefs.getString(KEY_USERNAME,null);
+    final String prePassword=sharedPrefs.getString(KEY_PASSWORD,null);
+    if (!isInitialized() && (preUsername == null || prePassword == null)) {
+      final Context context=cgeoapplication.getInstance().getApplicationContext();
+      final Intent initIntent=new Intent(context,cgeoinit.class);
+      context.startActivity(initIntent);
+      setInitialized();
+      return null;
+    }
+ else     if (isInitialized() && (preUsername == null || prePassword == null)) {
+      return null;
+    }
+    username=preUsername;
+    password=prePassword;
+  }
+  return new ImmutablePair<String,String>(username,password);
+}

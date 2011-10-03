@@ -7,7 +7,31 @@
   final Geopoint rightCoords=new Geopoint(center.getLatitudeE6() / 1e6,center.getLongitudeE6() / 1e6 + span / 2);
   distance=leftCoords.distanceTo(rightCoords) / 2;
   distanceRound=0d;
-  if (settings.units == cgSettings.unitsImperial) {
+  if (Settings.isUseMetricUnits()) {
+    if (distance > 100) {
+      distanceRound=Math.floor(distance / 100) * 100;
+      units="km";
+    }
+ else     if (distance > 10) {
+      distanceRound=Math.floor(distance / 10) * 10;
+      units="km";
+    }
+ else     if (distance > 1) {
+      distanceRound=Math.floor(distance);
+      units="km";
+    }
+ else     if (distance > 0.1) {
+      distance*=1000;
+      distanceRound=Math.floor(distance / 100) * 100;
+      units="m";
+    }
+ else {
+      distance*=1000;
+      distanceRound=Math.round(distance / 10) * 10;
+      units="m";
+    }
+  }
+ else {
     distance/=cgBase.miles2km;
     if (distance > 100) {
       distanceRound=Math.floor(distance / 100) * 100;
@@ -32,30 +56,6 @@
       units="ft";
     }
   }
- else {
-    if (distance > 100) {
-      distanceRound=Math.floor(distance / 100) * 100;
-      units="km";
-    }
- else     if (distance > 10) {
-      distanceRound=Math.floor(distance / 10) * 10;
-      units="km";
-    }
- else     if (distance > 1) {
-      distanceRound=Math.floor(distance);
-      units="km";
-    }
- else     if (distance > 0.1) {
-      distance*=1000;
-      distanceRound=Math.floor(distance / 100) * 100;
-      units="m";
-    }
- else {
-      distance*=1000;
-      distanceRound=Math.round(distance / 10) * 10;
-      units="m";
-    }
-  }
   pixels=Math.round((pixels / distance) * distanceRound);
   if (blur == null) {
     blur=new BlurMaskFilter(3,BlurMaskFilter.Blur.NORMAL);
@@ -75,7 +75,7 @@
     scale.setTextSize(14 * pixelDensity);
     scale.setTypeface(Typeface.DEFAULT_BOLD);
   }
-  if (mapSourceEnum.googleSat == settings.mapSource) {
+  if (mapSourceEnum.googleSat == Settings.getMapSource()) {
     scaleShadow.setColor(0xFF000000);
     scale.setColor(0xFFFFFFFF);
   }

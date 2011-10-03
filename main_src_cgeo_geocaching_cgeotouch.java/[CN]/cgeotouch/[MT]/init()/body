@@ -1,11 +1,15 @@
 {
-  if (geocode != null)   app.setAction("logging trackable");
+  if (geocode != null) {
+    app.setAction("logging trackable");
+  }
   types.clear();
   types.add(cgBase.LOG_RETRIEVED_IT);
   types.add(cgBase.LOG_GRABBED_IT);
   types.add(cgBase.LOG_NOTE);
   types.add(cgBase.LOG_DISCOVERED_IT);
-  if (typeSelected < 0 && cgBase.logTypes2.get(typeSelected) == null)   typeSelected=types.get(2);
+  if (typeSelected < 0 && cgBase.logTypes2.get(typeSelected) == null) {
+    typeSelected=types.get(2);
+  }
   setType(typeSelected);
   Button typeButton=(Button)findViewById(R.id.type);
   registerForContextMenu(typeButton);
@@ -19,8 +23,12 @@
   Button dateButton=(Button)findViewById(R.id.date);
   dateButton.setText(base.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new cgeotouchDateListener());
-  if (tweetBox == null)   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
-  if (tweetCheck == null)   tweetCheck=(CheckBox)findViewById(R.id.tweet);
+  if (tweetBox == null) {
+    tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
+  }
+  if (tweetCheck == null) {
+    tweetCheck=(CheckBox)findViewById(R.id.tweet);
+  }
   tweetCheck.setChecked(true);
   Button buttonPost=(Button)findViewById(R.id.post);
   if (cgBase.isEmpty(viewstates)) {

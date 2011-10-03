@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgeoBase.parseSearch: No page given");
+    Log.e(Settings.tag,"cgeoBase.parseSearch: No page given");
     return null;
   }
   final cgCacheWrap caches=new cgCacheWrap();
@@ -43,7 +43,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse recaptcha challenge");
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse recaptcha challenge");
     }
     if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
       thread.setChallenge(recaptchaChallenge);
@@ -55,14 +55,14 @@
   }
   int startPos=page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
   if (startPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
+    Log.e(Settings.tag,"cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
     return null;
   }
   page=page.substring(startPos);
   startPos=page.indexOf(">");
   int endPos=page.indexOf("ctl00_ContentBody_UnitTxt");
   if (startPos == -1 || endPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
+    Log.e(Settings.tag,"cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
     return null;
   }
   page=page.substring(startPos + 1,endPos - startPos + 1);
@@ -105,9 +105,9 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
     }
-    if (settings.excludeDisabled == 1 && (cache.disabled || cache.archived)) {
+    if (Settings.isExcludeDisabledCaches() && (cache.disabled || cache.archived)) {
       cache=null;
       continue;
     }
@@ -121,7 +121,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache code");
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache code");
     }
     try {
       final Matcher matcherCacheType=patternCacheType.matcher(row);
@@ -132,9 +132,9 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache type");
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache type");
     }
-    if (settings.getLoadDirImg()) {
+    if (Settings.getLoadDirImg()) {
       try {
         final Matcher matcherDirection=patternDirection.matcher(row);
         while (matcherDirection.find()) {
@@ -144,7 +144,7 @@
         }
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache direction image");
+        Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache direction image");
       }
     }
     try {
@@ -157,7 +157,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory (1)");
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory (1)");
     }
     if (StringUtils.isNotBlank(inventoryPre)) {
       try {
@@ -177,7 +177,7 @@
         }
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory info");
+        Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory info");
       }
     }
     cache.members=row.contains("/images/small_profile.gif");
@@ -193,7 +193,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache id");
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache id");
     }
     try {
       final Matcher matcherFavourite=patternFavourite.matcher(row);
@@ -204,7 +204,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse favourite count");
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse favourite count");
     }
     if (cache.nameSp == null) {
       cache.nameSp=(new Spannable.Factory()).newSpannable(cache.name);
@@ -225,7 +225,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseSearch: Failed to parse cache count");
+    Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache count");
   }
   if (thread != null && recaptchaChallenge != null) {
     if (thread.getText() == null) {
@@ -234,7 +234,7 @@
     recaptchaText=thread.getText();
   }
   if (cids.size() > 0 && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
-    Log.i(cgSettings.tag,"Trying to get .loc for " + cids.size() + " caches");
+    Log.i(Settings.tag,"Trying to get .loc for " + cids.size() + " caches");
     try {
       final Parameters params=new Parameters();
       params.put("__EVENTTARGET","");
@@ -259,7 +259,7 @@
       final String coordinates=getResponseData(postRequest("http://www.geocaching.com/seek/nearest.aspx",params));
       if (StringUtils.isNotBlank(coordinates)) {
         if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
-          Log.i(cgSettings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");
+          Log.i(Settings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");
           caches.error=errorRetrieve.get(-7);
           return caches;
         }
@@ -267,10 +267,10 @@
       LocParser.parseLoc(caches,coordinates);
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgBase.parseSearch.CIDs: " + e.toString());
+      Log.e(Settings.tag,"cgBase.parseSearch.CIDs: " + e.toString());
     }
   }
-  if (settings.getLoadDirImg()) {
+  if (Settings.getLoadDirImg()) {
     for (    cgCache oneCache : caches.cacheList) {
       if (oneCache.coords == null && oneCache.directionImg != null) {
         cgDirectionImg.getDrawable(oneCache.geocode,oneCache.directionImg);
@@ -278,7 +278,7 @@
     }
   }
   if (guids.size() > 0) {
-    Log.i(cgSettings.tag,"Trying to get ratings for " + cids.size() + " caches");
+    Log.i(Settings.tag,"Trying to get ratings for " + cids.size() + " caches");
     try {
       final Map<String,cgRating> ratings=GCVote.getRating(guids,null);
       if (CollectionUtils.isNotEmpty(ratings)) {
@@ -293,7 +293,7 @@
       }
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgBase.parseSearch.GCvote: " + e.toString());
+      Log.e(Settings.tag,"cgBase.parseSearch.GCvote: " + e.toString());
     }
   }
   return caches;

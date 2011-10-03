@@ -1,0 +1,13 @@
+{
+  return editSharedSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      if (StringUtils.isBlank(signature)) {
+        edit.remove(KEY_SIGNATURE);
+      }
+ else {
+        edit.putString(KEY_SIGNATURE,signature);
+      }
+    }
+  }
+);
+}

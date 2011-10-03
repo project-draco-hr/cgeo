@@ -27,8 +27,8 @@
   menu.setGroupCheckable(1,true,true);
   boolean foundItem=false;
   int itemCount=menu.size();
-  if (settings.cacheType != null) {
-    String typeTitle=cgBase.cacheTypesInv.get(settings.cacheType);
+  if (Settings.getCacheType() != null) {
+    String typeTitle=cgBase.cacheTypesInv.get(Settings.getCacheType());
     if (typeTitle != null) {
       for (int i=0; i < itemCount; i++) {
         if (menu.getItem(i).getTitle().equals(typeTitle)) {

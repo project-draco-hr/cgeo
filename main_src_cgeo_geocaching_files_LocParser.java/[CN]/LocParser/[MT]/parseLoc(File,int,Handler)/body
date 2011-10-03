@@ -19,10 +19,10 @@
     }
     caches.totalCnt=caches.cacheList.size();
     showCountMessage(handler,search.getCount());
-    Log.i(cgSettings.tag,"Caches found in .gpx file: " + caches.totalCnt);
+    Log.i(Settings.tag,"Caches found in .gpx file: " + caches.totalCnt);
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgBase.parseGPX: " + e.toString());
+    Log.e(Settings.tag,"cgBase.parseGPX: " + e.toString());
   }
   return search.getCurrentId();
 }

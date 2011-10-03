@@ -1,6 +1,5 @@
 {
-  cgSettings settings=getSettings(activity);
-  Intent mapIntent=new Intent(activity,settings.getMapFactory().getMapClass());
+  Intent mapIntent=new Intent(activity,Settings.getMapFactory().getMapClass());
   if (cache != null) {
     mapIntent.putExtra("detail",false);
     mapIntent.putExtra("geocode",cache.geocode);

@@ -26,14 +26,14 @@
           }
         }
         if (stop) {
-          Log.i(cgSettings.tag,"Stopped storing process.");
+          Log.i(Settings.tag,"Stopped storing process.");
           break;
         }
         base.storeCache(app,activity,null,geocode,1,handler);
       }
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgeocaches.LoadDetails.run: " + e.toString());
+      Log.e(Settings.tag,"cgeocaches.LoadDetails.run: " + e.toString());
     }
  finally {
       detailProgress++;

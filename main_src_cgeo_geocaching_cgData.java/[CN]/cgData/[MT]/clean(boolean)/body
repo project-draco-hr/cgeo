@@ -1,6 +1,6 @@
 {
   init();
-  Log.d(cgSettings.tag,"Database clean: started");
+  Log.d(Settings.tag,"Database clean: started");
   Cursor cursor=null;
   List<String> geocodes=new ArrayList<String>();
   try {
@@ -23,7 +23,7 @@
     }
     final int size=geocodes.size();
     if (size > 0) {
-      Log.d(cgSettings.tag,"Database clean: removing " + size + " geocaches");
+      Log.d(Settings.tag,"Database clean: removing " + size + " geocaches");
       String geocodeList=StringUtils.join(geocodes.toArray(),", ");
       databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in ("+ geocodeList+ ")");
       databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in ("+ geocodeList+ ")");
@@ -36,15 +36,15 @@
       geocodes.clear();
     }
     databaseRW.execSQL("delete from " + dbTableCaches + " where geocode = \"\"");
-    if (Log.isLoggable(cgSettings.tag,Log.DEBUG)) {
+    if (Log.isLoggable(Settings.tag,Log.DEBUG)) {
       final SQLiteStatement countSql=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
       final int count=(int)countSql.simpleQueryForLong();
       countSql.close();
-      Log.d(cgSettings.tag,"Database clean: " + count + " cached geocaches remaining");
+      Log.d(Settings.tag,"Database clean: " + count + " cached geocaches remaining");
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgData.clean: " + e.toString());
+    Log.w(Settings.tag,"cgData.clean: " + e.toString());
   }
-  Log.d(cgSettings.tag,"Database clean: finished");
+  Log.d(Settings.tag,"Database clean: finished");
 }

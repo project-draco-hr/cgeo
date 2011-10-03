@@ -2,7 +2,6 @@
   super.onCreate(savedInstanceState);
   res=this.getResources();
   app=(cgeoapplication)this.getApplication();
-  prefs=getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE);
-  settings=new cgSettings(this,prefs);
-  base=new cgBase(app,settings);
+  prefs=getSharedPreferences(Settings.preferences,Context.MODE_PRIVATE);
+  base=new cgBase(app);
 }

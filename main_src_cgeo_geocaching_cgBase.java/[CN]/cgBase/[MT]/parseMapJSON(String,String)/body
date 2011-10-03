@@ -1,6 +1,6 @@
 {
   if (StringUtils.isEmpty(data)) {
-    Log.e(cgSettings.tag,"cgeoBase.parseMapJSON: No page given");
+    Log.e(Settings.tag,"cgeoBase.parseMapJSON: No page given");
     return null;
   }
   final cgCacheWrap caches=new cgCacheWrap();
@@ -9,7 +9,7 @@
     final JSONObject yoDawg=new JSONObject(data);
     final String json=yoDawg.getString("d");
     if (StringUtils.isBlank(json)) {
-      Log.e(cgSettings.tag,"cgeoBase.parseMapJSON: No JSON inside JSON");
+      Log.e(Settings.tag,"cgeoBase.parseMapJSON: No JSON inside JSON");
       return null;
     }
     final JSONObject dataJSON=new JSONObject(json);
@@ -75,13 +75,13 @@
         }
       }
  else {
-        Log.w(cgSettings.tag,"There are no caches in viewport");
+        Log.w(Settings.tag,"There are no caches in viewport");
       }
       caches.totalCnt=caches.cacheList.size();
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgBase.parseMapJSON",e);
+    Log.e(Settings.tag,"cgBase.parseMapJSON",e);
   }
   return caches;
 }

@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackable: No page given");
+    Log.e(Settings.tag,"cgeoBase.parseTrackable: No page given");
     return null;
   }
   final cgTrackable trackable=new cgTrackable();
@@ -11,7 +11,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable geocode");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable geocode");
   }
   try {
     final Matcher matcherTrackableId=PATTERN_TRACKABLE_TrackableId.matcher(page);
@@ -20,7 +20,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable id");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable id");
   }
   try {
     final Matcher matcherTrackableIcon=PATTERN_TRACKABLE_Icon.matcher(page);
@@ -29,7 +29,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable icon");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable icon");
   }
   try {
     final Matcher matcherName=PATTERN_TRACKABLE_Name.matcher(page);
@@ -38,7 +38,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable name");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable name");
   }
   if (StringUtils.isNotBlank(trackable.name)) {
     try {
@@ -48,7 +48,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable type");
+      Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable type");
     }
   }
   try {
@@ -59,7 +59,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable owner name");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable owner name");
   }
   try {
     final Matcher matcherOrigin=PATTERN_TRACKABLE_Origin.matcher(page);
@@ -68,7 +68,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable origin");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable origin");
   }
   try {
     final Matcher matcherSpottedCache=PATTERN_TRACKABLE_SpottedCache.matcher(page);
@@ -93,7 +93,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable last known place");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable last known place");
   }
   try {
     final Matcher matcherReleased=PATTERN_TRACKABLE_Released.matcher(page);
@@ -115,13 +115,13 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable released date");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable released date");
   }
   try {
     final Matcher matcherDistance=PATTERN_TRACKABLE_Distance.matcher(page);
     if (matcherDistance.find() && matcherDistance.groupCount() > 0) {
       try {
-        trackable.distance=DistanceParser.parseDistance(matcherDistance.group(1),settings.units);
+        trackable.distance=DistanceParser.parseDistance(matcherDistance.group(1),Settings.isUseMetricUnits());
       }
  catch (      NumberFormatException e) {
         trackable.distance=null;
@@ -130,7 +130,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable distance");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable distance");
   }
   try {
     final Matcher matcherGoal=PATTERN_TRACKABLE_Goal.matcher(page);
@@ -139,7 +139,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable goal");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable goal");
   }
   try {
     final Matcher matcherDetailsImage=PATTERN_TRACKABLE_DetailsImage.matcher(page);
@@ -155,7 +155,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseTrackable: Failed to parse trackable details & image");
+    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable details & image");
   }
   try {
     final Matcher matcherLogs=PATTERN_TRACKABLE_Log.matcher(page);
@@ -182,7 +182,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache logs");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache logs");
   }
   app.saveTrackable(trackable);
   return trackable;

@@ -10,7 +10,7 @@
     adapterInfo=(AdapterContextMenuInfo)info;
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeocaches.onContextItemSelected: " + e.toString());
+    Log.w(Settings.tag,"cgeocaches.onContextItemSelected: " + e.toString());
   }
   int touchedPos=-1;
   cgCache cache=null;
@@ -143,7 +143,7 @@
       return true;
     }
     int logType=id - MENU_LOG_VISIT_OFFLINE;
-    cache.logOffline(this,logType,settings,base);
+    cache.logOffline(this,logType,base);
   }
   return true;
 }

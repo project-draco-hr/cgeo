@@ -19,12 +19,12 @@
         app.removeCacheFromCache(cache.geocode);
         app.addCacheToSearch(search,cache);
       }
-      Log.i(cgSettings.tag,"Caches found in .gpx file: " + parser.getParsedCaches().size());
+      Log.i(Settings.tag,"Caches found in .gpx file: " + parser.getParsedCaches().size());
       return search.getCurrentId();
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgBase.parseGPX: " + e.toString());
+    Log.e(Settings.tag,"cgBase.parseGPX: " + e.toString());
   }
   return null;
 }

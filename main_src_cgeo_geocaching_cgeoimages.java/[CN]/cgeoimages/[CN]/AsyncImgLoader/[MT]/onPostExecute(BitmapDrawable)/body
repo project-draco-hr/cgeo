@@ -7,7 +7,7 @@
     image_view.setClickable(true);
     image_view.setOnClickListener(new View.OnClickListener(){
       public void onClick(      View arg0){
-        final String directoryTarget=Environment.getExternalStorageDirectory() + "/" + cgSettings.cache+ "/"+ "temp.jpg";
+        final String directoryTarget=Environment.getExternalStorageDirectory() + "/" + Settings.cache+ "/"+ "temp.jpg";
         final File file=new File(directoryTarget);
         try {
           final FileOutputStream fos=new FileOutputStream(file);
@@ -15,7 +15,7 @@
           fos.close();
         }
  catch (        Exception e) {
-          Log.e(cgSettings.tag,"cgeoimages.handleMessage.onClick: " + e.toString());
+          Log.e(Settings.tag,"cgeoimages.handleMessage.onClick: " + e.toString());
           return;
         }
         Intent intent=new Intent();

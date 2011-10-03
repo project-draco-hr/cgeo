@@ -1,6 +1,6 @@
 {
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
+    geo=app.startGeo(this,geoUpdate,base,0,0);
   }
   app.setAction(geocode);
   cache=app.getCacheByGeocode(geocode);
@@ -224,7 +224,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeopopup.init: " + e.toString());
+    Log.e(Settings.tag,"cgeopopup.init: " + e.toString());
   }
   if (geo != null) {
     geoUpdate.updateLoc(geo);

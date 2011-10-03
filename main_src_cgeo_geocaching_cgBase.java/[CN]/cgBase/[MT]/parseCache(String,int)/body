@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgeoBase.parseCache: No page given");
+    Log.e(Settings.tag,"cgeoBase.parseCache: No page given");
     return null;
   }
   final cgCacheWrap caches=new cgCacheWrap();
@@ -26,7 +26,7 @@
   cache.guid=BaseUtils.getMatch(page,Constants.PATTERN_GUID,1,cache.guid);
   cache.name=Html.fromHtml(BaseUtils.getMatch(page,Constants.PATTERN_NAME,1,cache.name)).toString();
   cache.ownerReal=URLDecoder.decode(BaseUtils.getMatch(page,Constants.PATTERN_OWNERREAL,1,cache.ownerReal));
-  final String username=settings.getUsername();
+  final String username=Settings.getUsername();
   if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
     cache.own=true;
   }
@@ -34,13 +34,13 @@
   String tableInside=page;
   pos=tableInside.indexOf("id=\"cacheDetails\"");
   if (pos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseCache: ID \"cacheDetails\" not found on page");
+    Log.e(Settings.tag,"cgeoBase.parseCache: ID \"cacheDetails\" not found on page");
     return null;
   }
   tableInside=tableInside.substring(pos);
   pos=tableInside.indexOf("<div class=\"CacheInformationTable\"");
   if (pos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseCache: ID \"CacheInformationTable\" not found on page");
+    Log.e(Settings.tag,"cgeoBase.parseCache: ID \"CacheInformationTable\" not found on page");
     return null;
   }
   tableInside=tableInside.substring(0,pos);
@@ -60,7 +60,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache owner");
+      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache owner");
     }
     try {
       final Matcher matcherHidden=patternHidden.matcher(tableInside);
@@ -69,7 +69,7 @@
       }
     }
  catch (    ParseException e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache hidden date");
+      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hidden date");
     }
     if (cache.hidden == null) {
       try {
@@ -79,7 +79,7 @@
         }
       }
  catch (      ParseException e) {
-        Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache event date");
+        Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache event date");
       }
     }
     try {
@@ -89,7 +89,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse favourite count");
+      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse favourite count");
     }
     cache.size=CacheSize.FIND_BY_ID.get(BaseUtils.getMatch(tableInside,Constants.PATTERN_SIZE,1,CacheSize.NOT_CHOSEN.id).toLowerCase());
   }
@@ -101,14 +101,14 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache type");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache type");
   }
   try {
     final Matcher matcher=patternOnWatchlist.matcher(page);
     cache.onWatchlist=matcher.find();
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse watchlist state");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse watchlist state");
   }
   cache.latlon=BaseUtils.getMatch(page,Constants.PATTERN_LATLON,1,cache.latlon);
   if (StringUtils.isNotEmpty(cache.latlon)) {
@@ -126,7 +126,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache hint");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hint");
   }
   checkFields(cache);
   cache.personalNote=BaseUtils.getMatch(page,Constants.PATTERN_PERSONALNOTE,1,cache.personalNote);
@@ -157,7 +157,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache attributes");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache attributes");
   }
   try {
     final Matcher matcherSpoilers=patternSpoilers.matcher(page);
@@ -180,7 +180,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache spoilers");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache spoilers");
   }
   try {
     cache.inventoryItems=0;
@@ -207,7 +207,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache inventory (2)");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache inventory (2)");
   }
   try {
     final Matcher matcherLogCounts=patternCountLogs.matcher(page);
@@ -223,7 +223,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse cache log count");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache log count");
   }
   loadLogsFromDetails(page,cache);
   int wpBegin=0;
@@ -259,7 +259,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse waypoint type");
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint type");
         }
         try {
           final Matcher matcherWpPrefix=patternWpPrefixOrLookupOrLatlon.matcher(wp[4]);
@@ -268,7 +268,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse waypoint prefix");
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint prefix");
         }
         try {
           final Matcher matcherWpLookup=patternWpPrefixOrLookupOrLatlon.matcher(wp[5]);
@@ -277,7 +277,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse waypoint lookup");
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint lookup");
         }
         try {
           final Matcher matcherWpName=patternWpName.matcher(wp[6]);
@@ -294,7 +294,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse waypoint name");
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint name");
         }
         try {
           final Matcher matcherWpLatLon=patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
@@ -307,7 +307,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse waypoint coordinates");
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint coordinates");
         }
         j++;
         if (wpItems.length > j) {
@@ -320,7 +320,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"cgeoBase.parseCache: Failed to parse waypoint note");
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint note");
         }
         if (cache.waypoints == null) {
           cache.waypoints=new ArrayList<cgWaypoint>();

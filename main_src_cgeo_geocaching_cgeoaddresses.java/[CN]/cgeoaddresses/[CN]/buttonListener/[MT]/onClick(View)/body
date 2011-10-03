@@ -4,7 +4,7 @@
   addressIntent.putExtra("latitude",(Double)latitude);
   addressIntent.putExtra("longitude",(Double)longitude);
   addressIntent.putExtra("address",(String)address);
-  addressIntent.putExtra("cachetype",settings.cacheType);
+  addressIntent.putExtra("cachetype",Settings.getCacheType());
   startActivity(addressIntent);
   finish();
   return;

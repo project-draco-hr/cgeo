@@ -1,7 +1,7 @@
 {
   Geopoint gp=null;
   if (waypoint != null && waypoint.coords != null)   gp=waypoint.coords;
-  cgeocoords coordsDialog=new cgeocoords(cgeowaypointadd.this,settings,gp,geo);
+  cgeocoords coordsDialog=new cgeocoords(cgeowaypointadd.this,gp,geo);
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
     @Override public void update(    final Geopoint gp){

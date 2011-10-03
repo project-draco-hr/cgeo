@@ -2,7 +2,7 @@
   if (g4cRunning) {
     return;
   }
-  if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
+  if (Settings.isPublicLoc() && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
     g4cRunning=true;
     String action=null;
     if (app != null) {
@@ -11,7 +11,7 @@
  else {
       action="";
     }
-    final String username=settings.getUsername();
+    final String username=Settings.getUsername();
     if (username != null) {
       final Parameters params=new Parameters();
       final String latStr=String.format((Locale)null,"%.6f",coordsNow.getLatitude());

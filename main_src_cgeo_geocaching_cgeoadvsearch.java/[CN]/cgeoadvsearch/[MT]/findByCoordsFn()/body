@@ -15,7 +15,7 @@
       cachesIntent.putExtra("latitude",GeopointParser.parseLatitude(latText));
       cachesIntent.putExtra("longitude",GeopointParser.parseLongitude(lonText));
       cachesIntent.putExtra("type","coordinate");
-      cachesIntent.putExtra("cachetype",settings.cacheType);
+      cachesIntent.putExtra("cachetype",Settings.getCacheType());
       startActivity(cachesIntent);
     }
  catch (    GeopointParser.ParseException e) {

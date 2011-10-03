@@ -1,33 +1,33 @@
 {
   final cgSearch search=new cgSearch();
   if (StringUtils.isBlank(userName)) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByUsername: No user name given");
+    Log.e(Settings.tag,"cgeoBase.searchByUsername: No user name given");
     return null;
   }
   final Parameters params=new Parameters();
   insertCacheType(params,cacheType);
   params.put("ul",userName);
   boolean my=false;
-  if (userName.equalsIgnoreCase(settings.getLogin().left)) {
+  if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
     my=true;
-    Log.i(cgSettings.tag,"cgBase.searchByUsername: Overriding users choice, downloading all caches.");
+    Log.i(Settings.tag,"cgBase.searchByUsername: Overriding users choice, downloading all caches.");
   }
   final String uri="http://www.geocaching.com/seek/nearest.aspx";
   final String fullUri=uri + "?" + prepareParameters(params,my,true);
   String page=requestLogged(uri,params,false,my,true);
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByUsername: No data from server");
+    Log.e(Settings.tag,"cgeoBase.searchByUsername: No data from server");
     return null;
   }
   final cgCacheWrap caches=parseSearch(thread,fullUri,page,showCaptcha);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByUsername: No cache parsed");
+    Log.e(Settings.tag,"cgeoBase.searchByUsername: No cache parsed");
   }
   if (app == null) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByUsername: No application found");
+    Log.e(Settings.tag,"cgeoBase.searchByUsername: No application found");
     return null;
   }
-  List<cgCache> cacheList=processSearchResults(search,caches,settings.excludeDisabled,0,null);
+  List<cgCache> cacheList=processSearchResults(search,caches,Settings.isExcludeDisabledCaches(),false,null);
   app.addSearch(search,cacheList,true,reason);
   return search.getCurrentId();
 }

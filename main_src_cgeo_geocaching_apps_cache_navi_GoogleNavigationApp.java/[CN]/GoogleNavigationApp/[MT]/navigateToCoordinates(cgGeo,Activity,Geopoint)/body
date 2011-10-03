@@ -1,7 +1,6 @@
 {
   final Geopoint coordsNow=geo == null ? null : geo.coordsNow;
-  cgSettings settings=getSettings(activity);
-  if (settings.useGNavigation == 1) {
+  if (Settings.isUseGoogleNavigation()) {
     try {
       activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:ll=" + coords.getLatitude() + ","+ coords.getLongitude())));
       return true;
@@ -20,6 +19,6 @@
   }
  catch (  Exception e) {
   }
-  Log.i(cgSettings.tag,"cgBase.runNavigation: No navigation application available.");
+  Log.i(Settings.tag,"cgBase.runNavigation: No navigation application available.");
   return false;
 }

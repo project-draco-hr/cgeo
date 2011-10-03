@@ -35,7 +35,7 @@
       }
       code=connection.getResponseCode();
       retries++;
-      Log.i(cgSettings.tag,host + ": " + connection.getResponseCode()+ " "+ connection.getResponseMessage());
+      Log.i(Settings.tag,host + ": " + connection.getResponseCode()+ " "+ connection.getResponseMessage());
       br.close();
       ins.close();
       in.close();
@@ -56,14 +56,14 @@
     if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
       OAtoken="";
       OAtokenSecret="";
-      final SharedPreferences.Editor prefs=getSharedPreferences(cgSettings.preferences,0).edit();
+      final SharedPreferences.Editor prefs=getSharedPreferences(Settings.preferences,0).edit();
       prefs.putString("tokenpublic",null);
       prefs.putString("tokensecret",null);
       prefs.putInt("twitter",0);
       prefs.commit();
     }
  else {
-      final SharedPreferences.Editor prefs=getSharedPreferences(cgSettings.preferences,0).edit();
+      final SharedPreferences.Editor prefs=getSharedPreferences(Settings.preferences,0).edit();
       prefs.remove("temp-token-public");
       prefs.remove("temp-token-secret");
       prefs.putString("tokenpublic",OAtoken);
@@ -74,7 +74,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeoauth.changeToken: " + e.toString());
+    Log.e(Settings.tag,"cgeoauth.changeToken: " + e.toString());
   }
   changeTokensHandler.sendEmptyMessage(status);
 }

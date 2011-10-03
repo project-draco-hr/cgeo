@@ -9,7 +9,7 @@
   cachesIntent.putExtra("type","coordinate");
   cachesIntent.putExtra("latitude",coords.getLatitude());
   cachesIntent.putExtra("longitude",coords.getLongitude());
-  cachesIntent.putExtra("cachetype",settings.cacheType);
+  cachesIntent.putExtra("cachetype",Settings.getCacheType());
   startActivity(cachesIntent);
   finish();
 }

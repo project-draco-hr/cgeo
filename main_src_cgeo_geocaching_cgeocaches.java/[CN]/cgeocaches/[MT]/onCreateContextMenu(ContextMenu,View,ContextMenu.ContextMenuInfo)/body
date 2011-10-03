@@ -12,7 +12,7 @@
     adapterInfo=(AdapterContextMenuInfo)info;
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeocaches.onCreateContextMenu: " + e.toString());
+    Log.w(Settings.tag,"cgeocaches.onCreateContextMenu: " + e.toString());
   }
   if ((adapterInfo == null || adapterInfo.position < 0 || contextMenuShowFilter) && selectedFilter != null) {
     if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {

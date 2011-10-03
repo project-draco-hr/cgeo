@@ -1,17 +1,17 @@
 {
   if (isEmpty(viewstates)) {
-    Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: No viewstate given");
+    Log.e(Settings.tag,"cgeoBase.postLogTrackable: No viewstate given");
     return 1000;
   }
   if (logTypes2.containsKey(logType) == false) {
-    Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: Unknown logtype");
+    Log.e(Settings.tag,"cgeoBase.postLogTrackable: Unknown logtype");
     return 1000;
   }
   if (StringUtils.isBlank(log)) {
-    Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: No log text given");
+    Log.e(Settings.tag,"cgeoBase.postLogTrackable: No log text given");
     return 1001;
   }
-  Log.i(cgSettings.tag,"Trying to post log for trackable #" + trackingCode + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log);
+  Log.i(Settings.tag,"Trying to post log for trackable #" + trackingCode + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log);
   final String logInfo=log.replace("\n","\r\n");
   final Calendar currentDate=Calendar.getInstance();
   final Parameters params=new Parameters();
@@ -41,25 +41,25 @@
       page=getResponseData(postRequest(uri,params));
     }
  else {
-      Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: Can not log in geocaching (error: " + loginState + ")");
+      Log.e(Settings.tag,"cgeoBase.postLogTrackable: Can not log in geocaching (error: " + loginState + ")");
       return loginState;
     }
   }
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: No data from server");
+    Log.e(Settings.tag,"cgeoBase.postLogTrackable: No data from server");
     return 1002;
   }
   try {
     final Pattern patternOk=Pattern.compile("<div id=[\"|']ctl00_ContentBody_LogBookPanel1_ViewLogPanel[\"|']>",Pattern.CASE_INSENSITIVE);
     final Matcher matcherOk=patternOk.matcher(page);
     if (matcherOk.find()) {
-      Log.i(cgSettings.tag,"Log successfully posted to trackable #" + trackingCode);
+      Log.i(Settings.tag,"Log successfully posted to trackable #" + trackingCode);
       return 1;
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeoBase.postLogTrackable.check: " + e.toString());
+    Log.e(Settings.tag,"cgeoBase.postLogTrackable.check: " + e.toString());
   }
-  Log.e(cgSettings.tag,"cgeoBase.postLogTrackable: Failed to post log because of unknown error");
+  Log.e(Settings.tag,"cgeoBase.postLogTrackable: Failed to post log because of unknown error");
   return 1000;
 }

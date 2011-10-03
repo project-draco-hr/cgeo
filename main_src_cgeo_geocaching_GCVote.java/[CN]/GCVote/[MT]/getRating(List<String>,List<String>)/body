@@ -5,8 +5,8 @@
   final Map<String,cgRating> ratings=new HashMap<String,cgRating>();
   try {
     final Parameters params=new Parameters();
-    if (cgSettings.isLogin()) {
-      final Map<String,String> login=cgSettings.getGCvoteLogin();
+    if (Settings.isLogin()) {
+      final Map<String,String> login=Settings.getGCvoteLogin();
       if (login != null) {
         params.put("userName",login.get("username"));
         params.put("password",login.get("password"));
@@ -44,7 +44,7 @@
         }
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"cgBase.getRating: Failed to parse guid");
+        Log.w(Settings.tag,"cgBase.getRating: Failed to parse guid");
       }
       try {
         final Matcher matcherLoggedIn=patternLogIn.matcher(votes);
@@ -57,7 +57,7 @@
         }
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"cgBase.getRating: Failed to parse loggedIn");
+        Log.w(Settings.tag,"cgBase.getRating: Failed to parse loggedIn");
       }
       try {
         final Matcher matcherRating=patternRating.matcher(voteData);
@@ -68,7 +68,7 @@
         }
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"cgBase.getRating: Failed to parse rating");
+        Log.w(Settings.tag,"cgBase.getRating: Failed to parse rating");
       }
       try {
         final Matcher matcherVotes=patternVotes.matcher(voteData);
@@ -79,7 +79,7 @@
         }
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"cgBase.getRating: Failed to parse vote count");
+        Log.w(Settings.tag,"cgBase.getRating: Failed to parse vote count");
       }
       if (loggedIn) {
         try {
@@ -91,7 +91,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"cgBase.getRating: Failed to parse user's vote");
+          Log.w(Settings.tag,"cgBase.getRating: Failed to parse user's vote");
         }
       }
       if (StringUtils.isNotBlank(guid)) {
@@ -100,7 +100,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgBase.getRating: " + e.toString());
+    Log.e(Settings.tag,"cgBase.getRating: " + e.toString());
   }
   return ratings;
 }

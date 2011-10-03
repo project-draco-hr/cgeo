@@ -14,7 +14,7 @@
     coordinates.add(coords);
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeodetail.getCoordinates (cache): " + e.toString());
+    Log.e(Settings.tag,"cgeodetail.getCoordinates (cache): " + e.toString());
   }
   try {
     for (    cgWaypoint waypoint : cache.waypoints) {
@@ -29,7 +29,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeodetail.getCoordinates (waypoint): " + e.toString());
+    Log.e(Settings.tag,"cgeodetail.getCoordinates (waypoint): " + e.toString());
   }
   return coordinates;
 }

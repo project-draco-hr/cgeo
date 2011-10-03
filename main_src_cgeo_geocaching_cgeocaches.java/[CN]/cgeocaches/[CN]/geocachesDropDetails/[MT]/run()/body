@@ -12,13 +12,13 @@
     }
     try {
       if (needToStop) {
-        Log.i(cgSettings.tag,"Stopped dropping process.");
+        Log.i(Settings.tag,"Stopped dropping process.");
         break;
       }
       app.markDropped(cache.geocode);
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgeocaches.geocachesDropDetails: " + e.toString());
+      Log.e(Settings.tag,"cgeocaches.geocachesDropDetails: " + e.toString());
     }
   }
   cacheListTemp.clear();

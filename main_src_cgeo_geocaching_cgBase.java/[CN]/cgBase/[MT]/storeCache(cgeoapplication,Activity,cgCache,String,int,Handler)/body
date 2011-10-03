@@ -25,7 +25,7 @@
         imgGetter.getDrawable(oneSpoiler.url);
       }
     }
-    if (settings.storelogimages && cache.logs != null) {
+    if (Settings.isStoreLogImages() && cache.logs != null) {
       for (      cgLog log : cache.logs) {
         if (CollectionUtils.isNotEmpty(log.logImages)) {
           for (          cgImage oneLogImg : log.logImages) {
@@ -34,7 +34,7 @@
         }
       }
     }
-    StaticMapsProvider.downloadMaps(cache,settings,activity);
+    StaticMapsProvider.downloadMaps(cache,activity);
     app.markStored(cache.geocode,listId);
     app.removeCacheFromCache(cache.geocode);
     if (handler != null) {
@@ -42,6 +42,6 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgBase.storeCache: " + e.toString());
+    Log.e(Settings.tag,"cgBase.storeCache: " + e.toString());
   }
 }

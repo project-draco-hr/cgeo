@@ -1,16 +1,16 @@
 {
   if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
-    Log.w(cgSettings.tag,"Database wasn't restored: no external memory");
+    Log.w(Settings.tag,"Database wasn't restored: no external memory");
     return false;
   }
   closeDb();
   boolean restoreDone=false;
-  final String directoryImg=cgSettings.cache;
+  final String directoryImg=Settings.cache;
   final String fileSource=Environment.getExternalStorageDirectory() + "/" + directoryImg+ "/cgeo.sqlite";
   final String fileTarget=path;
   File fileSourceFile=new File(fileSource);
   if (fileSourceFile.exists() == false) {
-    Log.w(cgSettings.tag,"Database backup was not found");
+    Log.w(Settings.tag,"Database backup was not found");
     init();
     return restoreDone;
   }
@@ -21,7 +21,7 @@
     output=new FileOutputStream(fileTarget);
   }
  catch (  FileNotFoundException e) {
-    Log.e(cgSettings.tag,"Database wasn't restored, could not open file: " + e.toString());
+    Log.e(Settings.tag,"Database wasn't restored, could not open file: " + e.toString());
   }
   byte[] buffer=new byte[1024];
   int length;
@@ -34,7 +34,7 @@
       restoreDone=true;
     }
  catch (    IOException e) {
-      Log.e(cgSettings.tag,"Database wasn't restored, could not read/write file: " + e.toString());
+      Log.e(Settings.tag,"Database wasn't restored, could not read/write file: " + e.toString());
     }
   }
   try {
@@ -46,10 +46,10 @@
     }
   }
  catch (  IOException e) {
-    Log.e(cgSettings.tag,"Database wasn't restored, could not close file: " + e.toString());
+    Log.e(Settings.tag,"Database wasn't restored, could not close file: " + e.toString());
   }
   if (restoreDone) {
-    Log.i(cgSettings.tag,"Database was restored");
+    Log.i(Settings.tag,"Database was restored");
   }
   init();
   return restoreDone;

@@ -20,10 +20,10 @@
           pin=Integer.parseInt(strings[1].trim());
         }
  catch (        Exception e) {
-          Log.e(cgSettings.tag,"webDialog: " + e.toString());
+          Log.e(Settings.tag,"webDialog: " + e.toString());
         }
         String code=strings[0];
-        settings.setWebNameCode(nam,code);
+        Settings.setWebNameCode(nam,code);
       }
       webAuthHandler.sendEmptyMessage(pin);
     }
