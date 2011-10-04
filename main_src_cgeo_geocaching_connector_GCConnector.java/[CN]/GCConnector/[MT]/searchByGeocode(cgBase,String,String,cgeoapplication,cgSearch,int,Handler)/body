@@ -6,6 +6,14 @@
  else   if (StringUtils.isNotBlank(guid)) {
     params.put("guid",guid);
   }
+  if (app == null) {
+    Log.e(Settings.tag,"cgeoBase.searchByGeocode: No application found");
+    return null;
+  }
+  final Resources res=app.getResources();
+  if (null != handler) {
+    handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL,res.getString(R.string.cache_dialog_loading_details_status_loadpage)).sendToTarget();
+  }
   String page=base.requestLogged("http://www.geocaching.com/seek/cache_details.aspx",params,false,false,false);
   if (StringUtils.isEmpty(page)) {
     if (app.isThere(geocode,guid,true,false)) {
@@ -24,7 +32,7 @@
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No data from server");
     return null;
   }
-  final cgCacheWrap caches=base.parseCache(page,reason);
+  final cgCacheWrap caches=base.parseCache(page,reason,handler);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     if (caches != null && StringUtils.isNotBlank(caches.error)) {
       search.error=caches.error;
@@ -34,10 +42,6 @@
     }
     app.addSearch(search,null,true,reason);
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No cache parsed");
-    return null;
-  }
-  if (app == null) {
-    Log.e(Settings.tag,"cgeoBase.searchByGeocode: No application found");
     return null;
   }
   List<cgCache> cacheList=cgBase.processSearchResults(search,caches,false,false,null);

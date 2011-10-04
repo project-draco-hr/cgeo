@@ -1,4 +1,7 @@
 {
+  if (null != handler) {
+    handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL,res.getString(R.string.cache_dialog_loading_details_status_details)).sendToTarget();
+  }
   if (StringUtils.isBlank(page)) {
     Log.e(Settings.tag,"cgeoBase.parseCache: No page given");
     return null;
@@ -162,6 +165,9 @@
   try {
     final Matcher matcherSpoilers=patternSpoilers.matcher(page);
     if (matcherSpoilers.find()) {
+      if (null != handler) {
+        handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL,res.getString(R.string.cache_dialog_loading_details_status_spoilers)).sendToTarget();
+      }
       final Matcher matcherSpoilersInside=patternSpoilersInside.matcher(matcherSpoilers.group(1));
       while (matcherSpoilersInside.find()) {
         final cgImage spoiler=new cgImage();
@@ -225,11 +231,17 @@
  catch (  Exception e) {
     Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache log count");
   }
+  if (null != handler) {
+    handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL,res.getString(R.string.cache_dialog_loading_details_status_logs)).sendToTarget();
+  }
   loadLogsFromDetails(page,cache);
   int wpBegin=0;
   int wpEnd=0;
   wpBegin=page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
   if (wpBegin != -1) {
+    if (null != handler) {
+      handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL,res.getString(R.string.cache_dialog_loading_details_status_waypoints)).sendToTarget();
+    }
     final Pattern patternWpType=Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg",Pattern.CASE_INSENSITIVE);
     final Pattern patternWpPrefixOrLookupOrLatlon=Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>",Pattern.CASE_INSENSITIVE);
     final Pattern patternWpName=Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>",Pattern.CASE_INSENSITIVE);
@@ -331,6 +343,9 @@
   }
   if (cache.coords != null) {
     cache.elevation=getElevation(cache.coords);
+  }
+  if (null != handler) {
+    handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL,res.getString(R.string.cache_dialog_loading_details_status_gcvote)).sendToTarget();
   }
   final cgRating rating=GCVote.getRating(cache.guid,cache.geocode);
   if (rating != null) {
