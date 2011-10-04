@@ -123,10 +123,10 @@
   if (null == imagePre) {
     Log.d(Settings.tag,"cgHtmlImg.getDrawable: Failed to obtain image");
     if (placement) {
-      imagePre=BitmapFactory.decodeResource(activity.getResources(),R.drawable.image_not_loaded);
+      imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_not_loaded);
     }
  else {
-      imagePre=BitmapFactory.decodeResource(activity.getResources(),R.drawable.image_no_placement);
+      imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_no_placement);
     }
   }
   final int imgWidth=imagePre.getWidth();
