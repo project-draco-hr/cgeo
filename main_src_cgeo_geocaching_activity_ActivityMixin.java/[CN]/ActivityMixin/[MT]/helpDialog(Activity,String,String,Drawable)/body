@@ -2,16 +2,16 @@
   if (StringUtils.isBlank(message)) {
     return;
   }
-  AlertDialog.Builder dialog=new AlertDialog.Builder(activity);
-  dialog.setTitle(title);
-  dialog.setMessage(message);
-  dialog.setCancelable(true);
+  AlertDialog.Builder dialog=new AlertDialog.Builder(activity).setTitle(title).setMessage(message).setCancelable(true);
   dialog.setNeutralButton("Ok",new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int id){
       dialog.cancel();
     }
   }
 );
+  if (icon != null) {
+    dialog.setIcon(icon);
+  }
   AlertDialog alert=dialog.create();
   alert.show();
 }

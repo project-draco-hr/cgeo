@@ -15,7 +15,7 @@
       if (loginResult == StatusCode.NO_ERROR) {
         cgBase.detectGcCustomDate();
       }
-      logInHandler.sendMessage(logInHandler.obtainMessage(0,loginResult));
+      logInHandler.obtainMessage(0,cgBase.downloadAvatar(cgeoinit.this)).sendToTarget();
     }
   }
 ).start();
