@@ -6,7 +6,7 @@
  else   if (StringUtils.isNotBlank(guid)) {
     params.put("guid",guid);
   }
-  String page=base.requestLogged("http://www.geocaching.com/seek/cache_details.aspx",params,false,false,false);
+  String page=cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx",params,false,false,false);
   if (StringUtils.isEmpty(page)) {
     if (app.isThere(geocode,guid,true,false)) {
       if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
@@ -24,7 +24,7 @@
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No data from server");
     return null;
   }
-  final cgCacheWrap caches=base.parseCache(page,reason);
+  final cgCacheWrap caches=cgBase.parseCache(page,reason);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
     if (caches != null && StringUtils.isNotBlank(caches.error)) {
       search.error=caches.error;

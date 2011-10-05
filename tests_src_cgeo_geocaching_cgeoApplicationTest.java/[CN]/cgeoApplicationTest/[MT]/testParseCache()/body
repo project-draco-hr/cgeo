@@ -3,7 +3,7 @@
   cachesToTest.add(new GC2CJPF());
   cachesToTest.add(new GC1ZXX2());
   for (  MockedCache cache : cachesToTest) {
-    cgCacheWrap caches=base.parseCache(cache.getData(),0);
+    cgCacheWrap caches=cgBase.parseCache(cache.getData(),0);
     cgCache cacheParsed=caches.cacheList.get(0);
     Assert.assertEquals(cache.getGeocode(),cacheParsed.getGeocode());
     Assert.assertEquals(cache.getType(),cacheParsed.getType());

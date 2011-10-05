@@ -110,7 +110,7 @@
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_distance));
     if (cache.distance != null) {
-      itemValue.setText("~" + base.getHumanDistance(cache.distance));
+      itemValue.setText("~" + cgBase.getHumanDistance(cache.distance));
     }
  else {
       itemValue.setText("--");
@@ -363,7 +363,7 @@
       hintView.setOnClickListener(null);
     }
     if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
-      cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+      cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
       cacheDistance.bringToFront();
     }
   }
