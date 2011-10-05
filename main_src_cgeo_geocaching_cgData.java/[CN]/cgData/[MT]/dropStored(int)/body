@@ -1,37 +1,11 @@
 {
   init();
-  List<String> geocodes=new ArrayList<String>();
   try {
-    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"reason = ?",new String[]{Integer.toString(listId)},null,null,null,null);
-    if (cursor != null) {
-      if (cursor.getCount() > 0) {
-        cursor.moveToFirst();
-        int index=cursor.getColumnIndex("geocode");
-        do {
-          geocodes.add("\"" + (String)cursor.getString(index) + "\"");
-        }
- while (cursor.moveToNext());
-      }
- else {
-        cursor.close();
-        return;
-      }
-      cursor.close();
-    }
-    if (CollectionUtils.isNotEmpty(geocodes)) {
-      String geocodeList=StringUtils.join(geocodes.toArray(),", ");
-      databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in ("+ geocodeList+ ")");
-      databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in ("+ geocodeList+ ")");
-      databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in ("+ geocodeList+ ")");
-      databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in ("+ geocodeList+ ")");
-      databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in ("+ geocodeList+ ")");
-      databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in ("+ geocodeList+ ")");
-      databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in ("+ geocodeList+ ") and type <> \"own\"");
-      databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in ("+ geocodeList+ ")");
-      geocodes.clear();
-    }
+    final ContentValues values=new ContentValues();
+    values.put("reason",0);
+    databaseRW.update(dbTableCaches,values,"reason = ?",new String[]{Integer.toString(listId)});
   }
  catch (  Exception e) {
-    Log.e(Settings.tag,"cgData.dropStored: " + e.toString());
+    Log.e(Settings.tag,"cgData.dropStored: error when updating reason",e);
   }
 }

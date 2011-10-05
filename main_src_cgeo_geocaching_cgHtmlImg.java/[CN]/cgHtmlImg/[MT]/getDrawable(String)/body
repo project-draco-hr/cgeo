@@ -47,7 +47,7 @@
       Log.w(Settings.tag,"cgHtmlImg.getDrawable (reading cache): " + e.toString());
     }
   }
-  if ((null == imagePre && 0 == reason) || onlySave) {
+  if (imagePre == null || onlySave) {
     Uri uri=null;
     BufferedHttpEntity bufferedEntity=null;
     try {

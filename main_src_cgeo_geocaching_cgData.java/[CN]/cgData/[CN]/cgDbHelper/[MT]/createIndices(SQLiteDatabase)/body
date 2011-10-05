@@ -1,6 +1,8 @@
 {
   db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
   db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
+  db.execSQL("create index if not exists in_caches_lat on " + dbTableCaches + " (latitude)");
+  db.execSQL("create index if not exists in_caches_lon on " + dbTableCaches + " (longitude)");
   db.execSQL("create index if not exists in_caches_reason on " + dbTableCaches + " (reason)");
   db.execSQL("create index if not exists in_caches_detailed on " + dbTableCaches + " (detailed)");
   db.execSQL("create index if not exists in_caches_type on " + dbTableCaches + " (type)");
