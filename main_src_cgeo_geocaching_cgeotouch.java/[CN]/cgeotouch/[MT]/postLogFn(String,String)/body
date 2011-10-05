@@ -1,5 +1,4 @@
 {
-  int status=-1;
   try {
     if (tweetBox == null) {
       tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
@@ -7,8 +6,8 @@
     if (tweetCheck == null) {
       tweetCheck=(CheckBox)findViewById(R.id.tweet);
     }
-    status=cgBase.postLogTrackable(guid,tracking,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log);
-    if (status == 1 && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+    final StatusCode status=cgBase.postLogTrackable(guid,tracking,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log);
+    if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
       cgBase.postTweetTrackable(app,geocode);
     }
     return status;
@@ -16,5 +15,5 @@
  catch (  Exception e) {
     Log.e(Settings.tag,"cgeotouch.postLogFn: " + e.toString());
   }
-  return 1000;
+  return StatusCode.LOG_POST_ERROR;
 }

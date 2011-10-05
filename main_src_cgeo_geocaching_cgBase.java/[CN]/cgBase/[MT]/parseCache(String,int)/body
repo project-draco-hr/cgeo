@@ -6,15 +6,15 @@
   final cgCacheWrap caches=new cgCacheWrap();
   final cgCache cache=new cgCache();
   if (page.contains("Cache is Unpublished")) {
-    caches.error="cache was unpublished";
+    caches.error=StatusCode.UNPUBLISHED_CACHE;
     return caches;
   }
   if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
-    caches.error="requested cache is for premium members only";
+    caches.error=StatusCode.PREMIUM_ONLY;
     return caches;
   }
   if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
-    caches.error="requested cache is for premium members only";
+    caches.error=StatusCode.PREMIUM_ONLY;
     return caches;
   }
   cache.disabled=page.contains("<li>This cache is temporarily unavailable.");
