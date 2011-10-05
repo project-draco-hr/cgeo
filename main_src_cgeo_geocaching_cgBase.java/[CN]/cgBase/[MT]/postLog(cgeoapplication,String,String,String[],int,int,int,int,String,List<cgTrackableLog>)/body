@@ -24,7 +24,7 @@
       logUpdated.append(c);
     }
   }
-  final String logInfo=logUpdated.toString().replace("\n","\r\n");
+  final String logInfo=logUpdated.toString().replace("\n","\r\n").trim();
   if (trackables != null) {
     Log.i(Settings.tag,"Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: "+ trackables.size());
   }
