@@ -3,7 +3,7 @@
     return null;
   }
   try {
-    return replaceWhitespace(EntityUtils.toString(response.getEntity(),HTTP.UTF_8));
+    return BaseUtils.replaceWhitespace(EntityUtils.toString(response.getEntity(),HTTP.UTF_8));
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"getResponseData",e);

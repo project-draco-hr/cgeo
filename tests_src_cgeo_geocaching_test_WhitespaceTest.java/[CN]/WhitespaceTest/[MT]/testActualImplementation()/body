@@ -1,8 +1,8 @@
 {
   String result;
   final long start=System.currentTimeMillis();
-  result=cgBase.replaceWhitespace(data);
+  result=BaseUtils.replaceWhitespace(data);
   final long end=System.currentTimeMillis();
-  assertEquals(84028,result.length());
-  Log.w(Settings.tag,(end - start) + " ms manually");
+  assertEquals(84027,result.length());
+  Log.w(Settings.tag,(end - start) + " ms actual implementation");
 }

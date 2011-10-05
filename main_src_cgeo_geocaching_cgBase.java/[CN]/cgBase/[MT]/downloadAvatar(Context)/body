@@ -1,6 +1,6 @@
 {
   try {
-    final String profile=replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/",null,false)));
+    final String profile=BaseUtils.replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/",null,false)));
     final Matcher matcher=patternAvatarImg.matcher(profile);
     if (matcher.find()) {
       final String avatarURL=matcher.group(1);
