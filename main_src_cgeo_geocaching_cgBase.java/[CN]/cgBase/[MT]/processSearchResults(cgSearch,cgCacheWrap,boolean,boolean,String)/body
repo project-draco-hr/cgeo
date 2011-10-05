@@ -1,7 +1,7 @@
 {
   List<cgCache> cacheList=new ArrayList<cgCache>();
   if (caches != null) {
-    if (StringUtils.isNotBlank(caches.error)) {
+    if (caches.error != null) {
       search.error=caches.error;
     }
     if (StringUtils.isNotBlank(caches.url)) {

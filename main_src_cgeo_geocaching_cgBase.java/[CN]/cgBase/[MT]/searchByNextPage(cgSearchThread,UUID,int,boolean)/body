@@ -14,15 +14,15 @@
   setViewstates(viewstates,params);
   String page=getResponseData(postRequest(uri,params));
   if (checkLogin(page) == false) {
-    int loginState=login();
-    if (loginState == 1) {
+    final StatusCode loginState=login();
+    if (loginState == StatusCode.NO_ERROR) {
       page=getResponseData(postRequest(uri,params));
     }
- else     if (loginState == -3) {
+ else     if (loginState == StatusCode.NO_LOGIN_INFO_STORED) {
       Log.i(Settings.tag,"Working as guest.");
     }
  else {
-      app.setError(searchId,errorRetrieve.get(loginState));
+      app.setError(searchId,loginState);
       Log.e(Settings.tag,"cgeoBase.searchByNextPage: Can not log in geocaching");
       return searchId;
     }

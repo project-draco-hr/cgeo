@@ -2,8 +2,7 @@
   HttpResponse response=request(uri,params,xContentType,my,addF);
   String data=getResponseData(response);
   if (checkLogin(data) == false) {
-    int loginState=login();
-    if (loginState == 1) {
+    if (login() == StatusCode.NO_ERROR) {
       response=request(uri,params,xContentType,my,addF);
       data=getResponseData(response);
     }

@@ -2,15 +2,15 @@
   if (app == null) {
     return;
   }
-  final int status=cgBase.login();
-  if (status == 1) {
+  final StatusCode status=cgBase.login();
+  if (status == StatusCode.NO_ERROR) {
     app.firstRun=false;
     cgBase.detectGcCustomDate();
   }
   if (app.showLoginToast) {
-    firstLoginHandler.sendEmptyMessage(status);
+    firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0,status));
     app.showLoginToast=false;
-    if (status == -3) {
+    if (status == StatusCode.NO_LOGIN_INFO_STORED) {
       final Context context=cgeo.this;
       final Intent initIntent=new Intent(context,cgeoinit.class);
       context.startActivity(initIntent);

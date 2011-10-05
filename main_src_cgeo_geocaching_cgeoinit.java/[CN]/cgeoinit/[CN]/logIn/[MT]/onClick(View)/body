@@ -11,11 +11,11 @@
   cgBase.clearCookies();
   (new Thread(){
     @Override public void run(){
-      final int loginResult=cgBase.login();
-      if (1 == loginResult) {
+      final StatusCode loginResult=cgBase.login();
+      if (loginResult == StatusCode.NO_ERROR) {
         cgBase.detectGcCustomDate();
       }
-      logInHandler.sendEmptyMessage(loginResult);
+      logInHandler.sendMessage(logInHandler.obtainMessage(0,loginResult));
     }
   }
 ).start();

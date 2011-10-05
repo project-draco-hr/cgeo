@@ -4,7 +4,7 @@
   String[] viewstates=null;
   final ImmutablePair<String,String> loginStart=Settings.getLogin();
   if (loginStart == null) {
-    return -3;
+    return StatusCode.NO_LOGIN_INFO_STORED;
   }
   loginResponse=request("https://www.geocaching.com/login/default.aspx",null,false,false,false);
   loginData=getResponseData(loginResponse);
@@ -12,22 +12,22 @@
     if (checkLogin(loginData)) {
       Log.i(Settings.tag,"Already logged in Geocaching.com as " + loginStart.left);
       switchToEnglish(viewstates);
-      return 1;
+      return StatusCode.NO_ERROR;
     }
     viewstates=getViewstates(loginData);
     if (isEmpty(viewstates)) {
       Log.e(Settings.tag,"cgeoBase.login: Failed to find viewstates");
-      return -1;
+      return StatusCode.LOGIN_PARSE_ERROR;
     }
   }
  else {
     Log.e(Settings.tag,"cgeoBase.login: Failed to retrieve login page (1st)");
-    return -2;
+    return StatusCode.CONNECTION_FAILED;
   }
   final ImmutablePair<String,String> login=Settings.getLogin();
   if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
     Log.e(Settings.tag,"cgeoBase.login: No login information stored");
-    return -3;
+    return StatusCode.NO_LOGIN_INFO_STORED;
   }
   clearCookies();
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$SiteContent$tbUsername",login.left,"ctl00$SiteContent$tbPassword",login.right,"ctl00$SiteContent$cbRememberMe","on","ctl00$SiteContent$btnSignIn","Login");
@@ -38,21 +38,21 @@
     if (checkLogin(loginData)) {
       Log.i(Settings.tag,"Successfully logged in Geocaching.com as " + login.left);
       switchToEnglish(getViewstates(loginData));
-      return 1;
+      return StatusCode.NO_ERROR;
     }
  else {
       if (loginData.contains("Your username/password combination does not match.")) {
         Log.i(Settings.tag,"Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
-        return -6;
+        return StatusCode.WRONG_LOGIN_DATA;
       }
  else {
         Log.i(Settings.tag,"Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
-        return -4;
+        return StatusCode.UNKNOWN_ERROR;
       }
     }
   }
  else {
     Log.e(Settings.tag,"cgeoBase.login: Failed to retrieve login page (2nd)");
-    return -5;
+    return StatusCode.COMMUNICATION_ERROR;
   }
 }
