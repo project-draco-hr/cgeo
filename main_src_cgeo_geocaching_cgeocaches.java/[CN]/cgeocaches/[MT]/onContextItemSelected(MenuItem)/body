@@ -138,7 +138,7 @@
   }
   lastMenuInfo=info;
   if (cache != null) {
-    final UUID singleSearchId=base.searchByGeocode(cache.geocode,null,0,false);
+    final UUID singleSearchId=base.searchByGeocode(cache.geocode,null,0,false,null);
     if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearchId,null,null)) {
       return true;
     }

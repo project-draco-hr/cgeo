@@ -7,7 +7,9 @@
   }
   cache=app.getCache(searchId);
   if (cache == null) {
-    if (waitDialog != null && waitDialog.isShowing())     waitDialog.dismiss();
+    if (waitDialog != null && waitDialog.isShowing()) {
+      waitDialog.dismiss();
+    }
     if (StringUtils.isNotBlank(geocode)) {
       showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
     }
