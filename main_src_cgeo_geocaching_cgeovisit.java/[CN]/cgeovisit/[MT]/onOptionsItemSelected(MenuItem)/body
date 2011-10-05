@@ -1,12 +1,7 @@
 {
   int id=item.getItemId();
   if (id == MENU_SIGNATURE) {
-    EditText log=(EditText)findViewById(R.id.log);
-    String content=log.getText().toString();
-    if (StringUtils.isNotBlank(content)) {
-      insertIntoLog("\n",false);
-    }
-    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),base,false),false);
+    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),base,false),true);
     return true;
   }
  else   if (id >= 10 && id <= 19) {
