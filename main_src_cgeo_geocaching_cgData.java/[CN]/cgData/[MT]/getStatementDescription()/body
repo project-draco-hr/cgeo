@@ -1,0 +1,10 @@
+{
+  if (statementDescription == null) {
+synchronized (this) {
+      if (statementDescription == null) {
+        statementDescription=databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
+      }
+    }
+  }
+  return statementDescription;
+}

@@ -4,14 +4,14 @@
   }
   init();
   try {
-    if (statementLogCount == null) {
-      statementLogCount=databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
+    final SQLiteStatement logCount=getStatementLogCount();
+synchronized (logCount) {
+      statementLogCount.bindString(1,geocode.toUpperCase());
+      return statementLogCount.simpleQueryForLong() > 0;
     }
-    statementLogCount.bindString(1,geocode.toUpperCase());
-    return statementLogCount.simpleQueryForLong() > 0;
   }
  catch (  Exception e) {
-    Log.e(Settings.tag,"cgData.hasLogOffline: " + e.toString());
+    Log.e(Settings.tag,"cgData.hasLogOffline",e);
   }
   return false;
 }

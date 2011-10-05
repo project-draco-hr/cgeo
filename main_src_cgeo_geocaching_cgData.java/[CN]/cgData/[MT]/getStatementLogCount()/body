@@ -1,0 +1,10 @@
+{
+  if (statementLogCount == null) {
+synchronized (this) {
+      if (statementLogCount == null) {
+        statementLogCount=databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
+      }
+    }
+  }
+  return statementLogCount;
+}
