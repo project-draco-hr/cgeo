@@ -29,7 +29,7 @@
       }
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgeovisit.onContextItemSelected: " + e.toString());
+      Log.e(Settings.tag,"cgeovisit.onContextItemSelected: " + e.toString());
     }
   }
  else {
@@ -49,14 +49,14 @@
             tbChanged=true;
             tb.action=id;
             tbText.setText(logTbAction);
-            Log.i(cgSettings.tag,"Trackable " + tb.trackCode + " ("+ tb.name+ ") has new action: #"+ id);
+            Log.i(Settings.tag,"Trackable " + tb.trackCode + " ("+ tb.name+ ") has new action: #"+ id);
           }
         }
         return true;
       }
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgeovisit.onContextItemSelected: " + e.toString());
+      Log.e(Settings.tag,"cgeovisit.onContextItemSelected: " + e.toString());
     }
   }
   return false;

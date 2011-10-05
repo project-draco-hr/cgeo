@@ -1,6 +1,3 @@
 {
-  if (storage == null) {
-    storage=new cgData(this);
-  }
-  return storage.isOffline(geocode,guid);
+  return getStorage().isOffline(geocode,guid);
 }

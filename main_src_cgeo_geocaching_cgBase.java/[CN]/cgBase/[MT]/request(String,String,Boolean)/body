@@ -1,8 +1,0 @@
-{
-  final HttpRequestBase request=new HttpGet(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString());
-  request.setHeader("X-Requested-With","XMLHttpRequest");
-  if (xContentType) {
-    request.setHeader("Content-Type","application/x-www-form-urlencoded");
-  }
-  return request(request);
-}

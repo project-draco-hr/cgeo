@@ -4,7 +4,7 @@
   }
   init();
   List<cgImage> spoilers=new ArrayList<cgImage>();
-  Cursor cursor=databaseRO.query(dbTableSpoilers,new String[]{"_id","url","title","description"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
+  Cursor cursor=databaseRO.query(dbTableSpoilers,new String[]{"url","title","description"},"geocode = ?",new String[]{geocode},null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     int indexUrl=cursor.getColumnIndex("url");

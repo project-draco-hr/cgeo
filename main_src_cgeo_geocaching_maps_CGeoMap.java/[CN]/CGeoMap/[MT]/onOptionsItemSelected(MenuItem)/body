@@ -1,24 +1,10 @@
 {
   final int id=item.getItemId();
   if (id == MENU_TRAIL_MODE) {
-    if (settings.maptrail == 1) {
-      prefsEdit.putInt("maptrail",0);
-      prefsEdit.commit();
-      settings.maptrail=0;
-    }
- else {
-      prefsEdit.putInt("maptrail",1);
-      prefsEdit.commit();
-      settings.maptrail=1;
-    }
+    Settings.setMapTrail(!Settings.isMapTrail());
   }
  else   if (id == MENU_MAP_LIVE) {
-    if (settings.maplive == 1) {
-      settings.liveMapDisable();
-    }
- else {
-      settings.liveMapEnable();
-    }
+    Settings.setLiveMap(!Settings.isLiveMap());
     liveChanged=true;
     searchId=null;
     searchIdIntent=null;
@@ -44,7 +30,7 @@
         }
       }
  catch (      Exception e) {
-        Log.e(cgSettings.tag,"cgeomap.onOptionsItemSelected.#4: " + e.toString());
+        Log.e(Settings.tag,"cgeomap.onOptionsItemSelected.#4: " + e.toString());
       }
       detailTotal=geocodes.size();
       if (detailTotal == 0) {
@@ -62,14 +48,14 @@
               loadDetailsThread.stopIt();
             }
             if (geo == null) {
-              geo=app.startGeo(activity,geoUpdate,base,settings,0,0);
+              geo=app.startGeo(activity,geoUpdate,base,0,0);
             }
-            if (settings.useCompass == 1 && dir == null) {
+            if (Settings.isUseCompass() && dir == null) {
               dir=app.startDir(activity,dirUpdate);
             }
           }
  catch (          Exception e) {
-            Log.e(cgSettings.tag,"cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
+            Log.e(Settings.tag,"cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
           }
         }
       }
@@ -104,7 +90,7 @@
     boolean mapRestartRequired=switchMapSource(mapSource);
     if (mapRestartRequired) {
       activity.finish();
-      Intent mapIntent=new Intent(activity,settings.getMapFactory().getMapClass());
+      Intent mapIntent=new Intent(activity,Settings.getMapFactory().getMapClass());
       mapIntent.putExtra("detail",fromDetailIntent);
       mapIntent.putExtra("searchid",searchIdIntent);
       mapIntent.putExtra("geocode",geocodeIntent);

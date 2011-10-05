@@ -1,0 +1,35 @@
+{
+  boolean isOwner=owner != null && owner.equalsIgnoreCase(Settings.getUsername());
+  List<Integer> types=new ArrayList<Integer>();
+  if ("event".equals(type) || "mega".equals(type) || "cito".equals(type)|| "lostfound".equals(type)) {
+    types.add(cgBase.LOG_WILL_ATTEND);
+    types.add(cgBase.LOG_NOTE);
+    types.add(cgBase.LOG_ATTENDED);
+    types.add(cgBase.LOG_NEEDS_ARCHIVE);
+    if (isOwner) {
+      types.add(cgBase.LOG_ANNOUNCEMENT);
+    }
+  }
+ else   if ("webcam".equals(type)) {
+    types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
+    types.add(cgBase.LOG_DIDNT_FIND_IT);
+    types.add(cgBase.LOG_NOTE);
+    types.add(cgBase.LOG_NEEDS_ARCHIVE);
+    types.add(cgBase.LOG_NEEDS_MAINTENANCE);
+  }
+ else {
+    types.add(cgBase.LOG_FOUND_IT);
+    types.add(cgBase.LOG_DIDNT_FIND_IT);
+    types.add(cgBase.LOG_NOTE);
+    types.add(cgBase.LOG_NEEDS_ARCHIVE);
+    types.add(cgBase.LOG_NEEDS_MAINTENANCE);
+  }
+  if (isOwner) {
+    types.add(cgBase.LOG_OWNER_MAINTENANCE);
+    types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
+    types.add(cgBase.LOG_ENABLE_LISTING);
+    types.add(cgBase.LOG_ARCHIVE);
+    types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
+  }
+  return types;
+}

@@ -3,7 +3,7 @@
     showToast(res.getString(R.string.warn_no_cache_coord));
     return;
   }
-  Intent mapIntent=new Intent(this,settings.getMapFactory().getMapClass());
+  Intent mapIntent=new Intent(this,Settings.getMapFactory().getMapClass());
   mapIntent.putExtra("detail",false);
   mapIntent.putExtra("searchid",searchId.toString());
   startActivity(mapIntent);

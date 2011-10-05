@@ -1,7 +1,5 @@
 {
-  final Parameters params=new Parameters();
+  final Parameters params=new Parameters("__EVENTTARGET","ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem","__EVENTARGUMENT","");
   setViewstates(viewstates,params);
-  params.put("__EVENTTARGET","ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem");
-  params.put("__EVENTARGUMENT","");
   return cgBase.getResponseData(postRequest("http://www.geocaching.com/default.aspx",params));
 }

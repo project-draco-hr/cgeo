@@ -16,10 +16,10 @@
     String uriPath=uri.getPath().toLowerCase();
     String uriQuery=uri.getQuery();
     if (uriQuery != null) {
-      Log.i(cgSettings.tag,"Opening URI: " + uriHost + uriPath+ "?"+ uriQuery);
+      Log.i(Settings.tag,"Opening URI: " + uriHost + uriPath+ "?"+ uriQuery);
     }
  else {
-      Log.i(cgSettings.tag,"Opening URI: " + uriHost + uriPath);
+      Log.i(Settings.tag,"Opening URI: " + uriHost + uriPath);
     }
     if (uriHost.contains("geocaching.com")) {
       geocode=uri.getQueryParameter("wp");
@@ -57,15 +57,14 @@
   app.setAction(geocode);
   try {
     if (StringUtils.isNotBlank(name)) {
-      waitDialog=ProgressDialog.show(this,name,res.getString(R.string.cache_dialog_loading_details),true);
+      waitDialog=ProgressDialog.show(this,name,res.getString(R.string.cache_dialog_loading_details),true,true);
     }
  else     if (StringUtils.isNotBlank(geocode)) {
-      waitDialog=ProgressDialog.show(this,geocode.toUpperCase(),res.getString(R.string.cache_dialog_loading_details),true);
+      waitDialog=ProgressDialog.show(this,geocode.toUpperCase(),res.getString(R.string.cache_dialog_loading_details),true,true);
     }
  else {
-      waitDialog=ProgressDialog.show(this,res.getString(R.string.cache),res.getString(R.string.cache_dialog_loading_details),true);
+      waitDialog=ProgressDialog.show(this,res.getString(R.string.cache),res.getString(R.string.cache_dialog_loading_details),true,true);
     }
-    waitDialog.setCancelable(true);
   }
  catch (  Exception e) {
   }

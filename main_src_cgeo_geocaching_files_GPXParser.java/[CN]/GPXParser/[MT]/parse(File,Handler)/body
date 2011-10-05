@@ -9,7 +9,7 @@
     parsed=parse(fis,handlerIn);
   }
  catch (  FileNotFoundException e) {
-    Log.e(cgSettings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": file not found!");
+    Log.e(Settings.tag,"Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": file not found!");
   }
  finally {
     try {
@@ -18,7 +18,7 @@
       }
     }
  catch (    IOException e) {
-      Log.e(cgSettings.tag,"Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not close file!");
+      Log.e(Settings.tag,"Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX "+ version+ ": could not close file!");
     }
   }
   return parsed;

@@ -10,20 +10,20 @@
   (new Thread(){
     @Override public void run(){
       int pin=0;
-      String nam=deviceName == null ? "" : deviceName;
-      String cod=deviceCode == null ? "" : deviceCode;
-      String params="name=" + cgBase.urlencode_rfc3986(nam) + "&code="+ cgBase.urlencode_rfc3986(cod);
-      HttpResponse response=base.request("http://send2.cgeo.org/auth.html",params,true);
+      final String nam=StringUtils.defaultString(deviceName);
+      final String cod=StringUtils.defaultString(deviceCode);
+      final Parameters params=new Parameters("name",nam,"code",cod);
+      HttpResponse response=cgBase.request("http://send2.cgeo.org/auth.html",params,true);
       if (response.getStatusLine().getStatusCode() == 200) {
         String[] strings=cgBase.getResponseData(response).split(",");
         try {
           pin=Integer.parseInt(strings[1].trim());
         }
  catch (        Exception e) {
-          Log.e(cgSettings.tag,"webDialog: " + e.toString());
+          Log.e(Settings.tag,"webDialog: " + e.toString());
         }
         String code=strings[0];
-        settings.setWebNameCode(nam,code);
+        Settings.setWebNameCode(nam,code);
       }
       webAuthHandler.sendEmptyMessage(pin);
     }

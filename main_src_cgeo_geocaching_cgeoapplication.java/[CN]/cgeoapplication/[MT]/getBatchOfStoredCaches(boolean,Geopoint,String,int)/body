@@ -1,9 +1,6 @@
 {
-  if (storage == null) {
-    storage=new cgData(this);
-  }
   cgSearch search=new cgSearch();
-  List<String> geocodes=storage.loadBatchOfStoredGeocodes(detailedOnly,coords,cachetype,list);
+  List<String> geocodes=getStorage().loadBatchOfStoredGeocodes(detailedOnly,coords,cachetype,list);
   if (geocodes != null && geocodes.isEmpty() == false) {
     for (    String gccode : geocodes) {
       search.addGeocode(gccode);

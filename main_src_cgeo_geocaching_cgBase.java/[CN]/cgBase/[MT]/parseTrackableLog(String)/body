@@ -7,25 +7,25 @@
   int endPos=-1;
   startPos=page.indexOf("<table id=\"tblTravelBugs\"");
   if (startPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackableLog: ID \"tblTravelBugs\" not found on page");
+    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: ID \"tblTravelBugs\" not found on page");
     return null;
   }
   page=page.substring(startPos);
   endPos=page.indexOf("</table>");
   if (endPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackableLog: end of ID \"tblTravelBugs\" not found on page");
+    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: end of ID \"tblTravelBugs\" not found on page");
     return null;
   }
   page=page.substring(0,endPos);
   startPos=page.indexOf("<tbody>");
   if (startPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackableLog: tbody not found on page");
+    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: tbody not found on page");
     return null;
   }
   page=page.substring(startPos);
   endPos=page.indexOf("</tbody>");
   if (endPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackableLog: end of tbody not found on page");
+    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: end of tbody not found on page");
     return null;
   }
   page=page.substring(0,endPos);
@@ -58,7 +58,7 @@
  else {
         continue;
       }
-      Log.i(cgSettings.tag,"Trackable in inventory (#" + trackable.ctl + "/"+ trackable.id+ "): "+ trackable.trackCode+ " - "+ trackable.name);
+      Log.i(Settings.tag,"Trackable in inventory (#" + trackable.ctl + "/"+ trackable.id+ "): "+ trackable.trackCode+ " - "+ trackable.name);
       trackables.add(trackable);
     }
   }

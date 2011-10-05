@@ -20,11 +20,11 @@
     if ((id & 0x2) == 0x2) {
       addText+=timeString;
     }
-    if ((id & 0x1) == 0x1 && settings.getSignature() != null) {
+    if ((id & 0x1) == 0x1 && Settings.getSignature() != null) {
       if (addText.length() > 0) {
         addText+="\n";
       }
-      addText+=settings.getSignature().replaceAll("\\[DATE\\]",dateString).replaceAll("\\[TIME\\]",timeString).replaceAll("\\[USER\\]",settings.getUsername()).replaceAll("\\[NUMBER\\]","");
+      addText+=Settings.getSignature().replaceAll("\\[DATE\\]",dateString).replaceAll("\\[TIME\\]",timeString).replaceAll("\\[USER\\]",Settings.getUsername()).replaceAll("\\[NUMBER\\]","");
     }
     if (textContent.length() > 0 && addText.length() > 0) {
       addText="\n" + addText;

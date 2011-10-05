@@ -4,14 +4,14 @@
   if (lastGps != null) {
     lastGps.setProvider("last");
     assign(lastGps);
-    Log.i(cgSettings.tag,"Using last location from GPS");
+    Log.i(Settings.tag,"Using last location from GPS");
     return;
   }
   Location lastGsm=geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
   if (lastGsm != null) {
     lastGsm.setProvider("last");
     assign(lastGsm);
-    Log.i(cgSettings.tag,"Using last location from NETWORK");
+    Log.i(Settings.tag,"Using last location from NETWORK");
     return;
   }
 }

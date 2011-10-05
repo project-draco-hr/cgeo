@@ -21,13 +21,13 @@
       final Intent cachesIntent=new Intent(this,cgeocaches.class);
       cachesIntent.putExtra("type","keyword");
       cachesIntent.putExtra("keyword",query);
-      cachesIntent.putExtra("cachetype",settings.cacheType);
+      cachesIntent.putExtra("cachetype",Settings.getCacheType());
       startActivity(cachesIntent);
       found=true;
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgeoadvsearch.instantSearch: " + e.toString());
+    Log.w(Settings.tag,"cgeoadvsearch.instantSearch: " + e.toString());
   }
   return found;
 }

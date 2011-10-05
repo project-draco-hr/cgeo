@@ -6,7 +6,7 @@
     return new Geopoint(cursor.getDouble(indexLat),cursor.getDouble(indexLon));
   }
  catch (  MalformedCoordinateException e) {
-    Log.e(cgSettings.tag,"cannot parse geopoint from database: " + e.getMessage());
+    Log.e(Settings.tag,"cannot parse geopoint from database: " + e.getMessage());
     return null;
   }
 }

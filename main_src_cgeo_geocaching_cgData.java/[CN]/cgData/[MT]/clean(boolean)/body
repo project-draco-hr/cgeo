@@ -1,14 +1,16 @@
 {
   init();
-  Log.d(cgSettings.tag,"Database clean: started");
+  Log.d(Settings.tag,"Database clean: started");
   Cursor cursor=null;
   List<String> geocodes=new ArrayList<String>();
   try {
     if (more) {
-      cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},"reason = 0",null,null,null,null,null);
+      cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null);
     }
  else {
-      cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},"reason = 0 and detailed < " + (System.currentTimeMillis() - (3 * 24 * 60* 60* 1000)) + " and detailedupdate < "+ (System.currentTimeMillis() - (3 * 24 * 60* 60* 1000))+ " and visiteddate < "+ (System.currentTimeMillis() - (3 * 24 * 60* 60* 1000)),null,null,null,null,null);
+      long timestamp=System.currentTimeMillis() - (3 * 24 * 60* 60* 1000);
+      String timestampString=Long.toString(timestamp);
+      cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",new String[]{timestampString,timestampString,timestampString},null,null,null,null);
     }
     if (cursor != null) {
       if (cursor.getCount() > 0) {
@@ -23,7 +25,7 @@
     }
     final int size=geocodes.size();
     if (size > 0) {
-      Log.d(cgSettings.tag,"Database clean: removing " + size + " geocaches");
+      Log.d(Settings.tag,"Database clean: removing " + size + " geocaches");
       String geocodeList=StringUtils.join(geocodes.toArray(),", ");
       databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in ("+ geocodeList+ ")");
       databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in ("+ geocodeList+ ")");
@@ -36,15 +38,15 @@
       geocodes.clear();
     }
     databaseRW.execSQL("delete from " + dbTableCaches + " where geocode = \"\"");
-    if (Log.isLoggable(cgSettings.tag,Log.DEBUG)) {
+    if (Log.isLoggable(Settings.tag,Log.DEBUG)) {
       final SQLiteStatement countSql=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
       final int count=(int)countSql.simpleQueryForLong();
       countSql.close();
-      Log.d(cgSettings.tag,"Database clean: " + count + " cached geocaches remaining");
+      Log.d(Settings.tag,"Database clean: " + count + " cached geocaches remaining");
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgData.clean: " + e.toString());
+    Log.w(Settings.tag,"cgData.clean: " + e.toString());
   }
-  Log.d(cgSettings.tag,"Database clean: finished");
+  Log.d(Settings.tag,"Database clean: finished");
 }

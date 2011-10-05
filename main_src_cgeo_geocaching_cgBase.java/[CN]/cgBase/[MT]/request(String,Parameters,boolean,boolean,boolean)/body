@@ -1,4 +1,3 @@
 {
-  final String paramsDone=prepareParameters(params,my,addF);
-  return request(uri,paramsDone,xContentType);
+  return request(uri,addFToParams(params,my,addF),xContentType);
 }

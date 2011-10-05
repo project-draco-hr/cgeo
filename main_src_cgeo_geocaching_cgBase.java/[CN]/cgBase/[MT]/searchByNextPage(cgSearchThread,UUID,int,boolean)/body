@@ -2,40 +2,38 @@
   final String[] viewstates=app.getViewstates(searchId);
   final String url=app.getUrl(searchId);
   if (StringUtils.isBlank(url)) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No url found");
+    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No url found");
     return searchId;
   }
   if (isEmpty(viewstates)) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No viewstate given");
+    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No viewstate given");
     return searchId;
   }
   final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
-  final Parameters params=new Parameters();
+  final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
   setViewstates(viewstates,params);
-  params.put("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08");
-  params.put("__EVENTARGUMENT","");
   String page=getResponseData(postRequest(uri,params));
   if (checkLogin(page) == false) {
-    int loginState=login();
-    if (loginState == 1) {
+    final StatusCode loginState=login();
+    if (loginState == StatusCode.NO_ERROR) {
       page=getResponseData(postRequest(uri,params));
     }
- else     if (loginState == -3) {
-      Log.i(cgSettings.tag,"Working as guest.");
+ else     if (loginState == StatusCode.NO_LOGIN_INFO_STORED) {
+      Log.i(Settings.tag,"Working as guest.");
     }
  else {
-      app.setError(searchId,errorRetrieve.get(loginState));
-      Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: Can not log in geocaching");
+      app.setError(searchId,loginState);
+      Log.e(Settings.tag,"cgeoBase.searchByNextPage: Can not log in geocaching");
       return searchId;
     }
   }
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No data from server");
+    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No data from server");
     return searchId;
   }
   final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
   if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByNextPage: No cache parsed");
+    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No cache parsed");
     return searchId;
   }
   app.setError(searchId,caches.error);

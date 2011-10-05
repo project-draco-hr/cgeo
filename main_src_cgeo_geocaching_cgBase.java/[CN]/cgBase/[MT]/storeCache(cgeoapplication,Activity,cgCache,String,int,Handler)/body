@@ -1,13 +1,13 @@
 {
   try {
     if (cache != null) {
-      if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
-        final UUID searchId=searchByGeocode(cache.geocode,null,listId,false);
+      if (cache.reason > 0 || StringUtils.isBlank(cache.getDescription())) {
+        final UUID searchId=searchByGeocode(cache.geocode,null,listId,false,null);
         cache=app.getCache(searchId);
       }
     }
  else     if (StringUtils.isNotBlank(geocode)) {
-      final UUID searchId=searchByGeocode(geocode,null,listId,false);
+      final UUID searchId=searchByGeocode(geocode,null,listId,false,null);
       cache=app.getCache(searchId);
     }
     if (cache == null) {
@@ -17,15 +17,15 @@
       return;
     }
     final cgHtmlImg imgGetter=new cgHtmlImg(activity,cache.geocode,false,listId,true);
-    if (StringUtils.isNotBlank(cache.description)) {
-      Html.fromHtml(cache.description,imgGetter,null);
+    if (StringUtils.isNotBlank(cache.getDescription())) {
+      Html.fromHtml(cache.getDescription(),imgGetter,null);
     }
     if (CollectionUtils.isNotEmpty(cache.spoilers)) {
       for (      cgImage oneSpoiler : cache.spoilers) {
         imgGetter.getDrawable(oneSpoiler.url);
       }
     }
-    if (settings.storelogimages && cache.logs != null) {
+    if (Settings.isStoreLogImages() && cache.logs != null) {
       for (      cgLog log : cache.logs) {
         if (CollectionUtils.isNotEmpty(log.logImages)) {
           for (          cgImage oneLogImg : log.logImages) {
@@ -34,7 +34,7 @@
         }
       }
     }
-    StaticMapsProvider.downloadMaps(cache,settings,activity);
+    StaticMapsProvider.downloadMaps(cache,activity);
     app.markStored(cache.geocode,listId);
     app.removeCacheFromCache(cache.geocode);
     if (handler != null) {
@@ -42,6 +42,6 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgBase.storeCache: " + e.toString());
+    Log.e(Settings.tag,"cgBase.storeCache: " + e.toString());
   }
 }

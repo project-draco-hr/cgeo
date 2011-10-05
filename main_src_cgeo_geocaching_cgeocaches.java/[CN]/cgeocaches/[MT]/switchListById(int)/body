@@ -11,7 +11,7 @@
   }
   listId=list.id;
   title=list.title;
-  settings.saveLastList(listId);
+  Settings.saveLastList(listId);
   showProgress(true);
   setLoadingCaches();
   (new moveCachesToList(listId,new MoveHandler())).start();

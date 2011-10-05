@@ -8,7 +8,7 @@
   try {
     StringBuilder dist=new StringBuilder();
     if (geo.coordsNow != null && cache != null && cache.coords != null) {
-      dist.append(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+      dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
     }
     if (cache != null && cache.elevation != null) {
       if (geo.altitudeNow != null) {
@@ -19,13 +19,13 @@
  else         if (diff < 0) {
           dist.append(" ???");
         }
-        if (settings.units == cgSettings.unitsImperial) {
-          dist.append(String.format(Locale.getDefault(),"%.0f",(Math.abs(diff) * 3.2808399)));
-          dist.append(" ft");
-        }
- else {
+        if (Settings.isUseMetricUnits()) {
           dist.append(String.format(Locale.getDefault(),"%.0f",(Math.abs(diff))));
           dist.append(" m");
+        }
+ else {
+          dist.append(String.format(Locale.getDefault(),"%.0f",(Math.abs(diff) * 3.2808399)));
+          dist.append(" ft");
         }
       }
     }
@@ -33,6 +33,6 @@
     cacheDistance.bringToFront();
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"Failed to update location.");
+    Log.w(Settings.tag,"Failed to update location.");
   }
 }

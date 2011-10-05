@@ -1,5 +1,4 @@
 {
-  int ret=-1;
-  ret=postLogFn(log);
-  handler.sendEmptyMessage(ret);
+  final StatusCode status=postLogFn(log);
+  handler.sendMessage(handler.obtainMessage(0,status));
 }

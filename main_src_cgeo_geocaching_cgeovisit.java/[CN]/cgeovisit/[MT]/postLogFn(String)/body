@@ -1,5 +1,4 @@
 {
-  int status=-1;
   try {
     if (tweetBox == null) {
       tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
@@ -7,10 +6,10 @@
     if (tweetCheck == null) {
       tweetCheck=(CheckBox)findViewById(R.id.tweet);
     }
-    status=base.postLog(app,geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
-    if (status == 1) {
+    final StatusCode status=cgBase.postLog(app,geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
+    if (status == StatusCode.NO_ERROR) {
       cgLog logNow=new cgLog();
-      logNow.author=settings.getUsername();
+      logNow.author=Settings.getUsername();
       logNow.date=date.getTimeInMillis();
       logNow.type=typeSelected;
       logNow.log=log;
@@ -31,19 +30,19 @@
         app.removeCacheFromCache(geocode);
       }
     }
-    if (status == 1) {
+    if (status == StatusCode.NO_ERROR) {
       app.clearLogOffline(geocode);
     }
-    if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1 && StringUtils.isNotBlank(settings.tokenPublic) && StringUtils.isNotBlank(settings.tokenSecret) && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-      cgBase.postTweetCache(app,settings,geocode);
+    if (status == StatusCode.NO_ERROR && typeSelected == cgBase.LOG_FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+      cgBase.postTweetCache(app,geocode);
     }
-    if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
-      setRating(cache.guid,rating);
+    if (status == StatusCode.NO_ERROR && typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
+      GCVote.setRating(cache,rating);
     }
     return status;
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeovisit.postLogFn: " + e.toString());
+    Log.e(Settings.tag,"cgeovisit.postLogFn: " + e.toString());
   }
-  return 1000;
+  return StatusCode.LOG_POST_ERROR;
 }

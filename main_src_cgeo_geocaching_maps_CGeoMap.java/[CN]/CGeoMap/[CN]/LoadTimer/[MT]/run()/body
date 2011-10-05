@@ -22,7 +22,7 @@
           moved=true;
           force=true;
         }
- else         if (live && settings.maplive == 1 && downloaded == false) {
+ else         if (live && Settings.isLiveMap() && downloaded == false) {
           moved=true;
         }
  else         if (centerLatitude == null || centerLongitude == null) {
@@ -71,7 +71,7 @@
       yield();
     }
  catch (    Exception e) {
-      Log.w(cgSettings.tag,"cgeomap.LoadTimer.run: " + e.toString());
+      Log.w(Settings.tag,"cgeomap.LoadTimer.run: " + e.toString());
     }
   }
 }

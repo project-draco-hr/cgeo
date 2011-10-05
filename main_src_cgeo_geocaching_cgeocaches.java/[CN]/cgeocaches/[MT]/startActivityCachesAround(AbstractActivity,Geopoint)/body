@@ -4,6 +4,6 @@
   cachesIntent.putExtra("type","coordinate");
   cachesIntent.putExtra("latitude",coords.getLatitude());
   cachesIntent.putExtra("longitude",coords.getLongitude());
-  cachesIntent.putExtra("cachetype",context.getSettings().cacheType);
+  cachesIntent.putExtra("cachetype",Settings.getCacheType());
   context.startActivity(cachesIntent);
 }

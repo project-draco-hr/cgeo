@@ -13,12 +13,8 @@
       }
       String name=file.getName();
       if (file.isFile()) {
-        for (        String ext : extensions) {
-          int extLength=ext.length();
-          if (name.length() > extLength && name.substring(name.length() - extLength,name.length()).equalsIgnoreCase(ext)) {
-            result.add(file);
-            break;
-          }
+        if (filenameBelongsToList(name)) {
+          result.add(file);
         }
       }
  else       if (file.isDirectory()) {

@@ -2,21 +2,21 @@
   if (geocode != null) {
     app.setAction(geocode);
   }
-  types=cache.getPossibleLogTypes(settings);
+  types=cache.getPossibleLogTypes();
   final cgLog log=app.loadLogOffline(geocode);
   if (log != null) {
     typeSelected=log.type;
     date.setTime(new Date(log.date));
     text=log.log;
-    if (typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
+    if (typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
       if (post == null) {
         post=(Button)findViewById(R.id.post);
       }
       post.setText(res.getString(R.string.log_post_no_rate));
     }
   }
- else   if (StringUtils.isNotBlank(settings.getSignature()) && settings.signatureAutoinsert && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
-    text="\n" + LogTemplateProvider.applyTemplates(settings.getSignature(),base,false);
+ else   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
+    text="\n" + LogTemplateProvider.applyTemplates(Settings.getSignature(),base,false);
     insertIntoLog(text,false);
   }
   if (types.contains(typeSelected) == false) {

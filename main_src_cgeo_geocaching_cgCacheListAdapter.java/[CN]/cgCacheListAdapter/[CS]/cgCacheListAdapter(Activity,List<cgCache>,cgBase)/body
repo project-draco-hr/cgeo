@@ -1,0 +1,25 @@
+{
+  super(activityIn,0,listIn);
+  res=activityIn.getResources();
+  activity=activityIn;
+  list=listIn;
+  base=baseIn;
+  DisplayMetrics metrics=new DisplayMetrics();
+  activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+  pixelDensity=metrics.density;
+  if (gcIconDrawables == null || gcIconDrawables.isEmpty()) {
+    for (    String cacheType : cgBase.cacheTypesInv.keySet()) {
+      gcIconDrawables.put(cacheType,(Drawable)activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
+    }
+  }
+  if (Settings.isLightSkin()) {
+    ratingBcgs[0]=R.drawable.favourite_background_red_light;
+    ratingBcgs[1]=R.drawable.favourite_background_orange_light;
+    ratingBcgs[2]=R.drawable.favourite_background_green_light;
+  }
+ else {
+    ratingBcgs[0]=R.drawable.favourite_background_red_dark;
+    ratingBcgs[1]=R.drawable.favourite_background_orange_dark;
+    ratingBcgs[2]=R.drawable.favourite_background_green_dark;
+  }
+}

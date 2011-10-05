@@ -12,11 +12,11 @@
       searchId=UUID.fromString(searchIdIntent);
     }
  else {
-      if (!live || settings.maplive == 0) {
-        searchId=app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,settings.cacheType);
+      if (!live || !Settings.isLiveMap()) {
+        searchId=app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType());
       }
  else {
-        searchId=app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,settings.cacheType);
+        searchId=app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType());
       }
     }
     if (searchId != null) {
@@ -28,9 +28,9 @@
       return;
     }
     caches=app.getCaches(searchId);
-    if (live && settings.maplive >= 1) {
-      final boolean excludeMine=settings.excludeMine > 0;
-      final boolean excludeDisabled=settings.excludeDisabled > 0;
+    if (live && Settings.isLiveMap()) {
+      final boolean excludeMine=Settings.isExcludeMyCaches();
+      final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
       for (int i=caches.size() - 1; i >= 0; i--) {
         cgCache cache=caches.get(i);
         if ((cache.found && excludeMine) || (cache.own && excludeMine) || (cache.disabled && excludeDisabled)) {
@@ -54,7 +54,7 @@
       working=false;
       return;
     }
-    if (live && settings.maplive >= 1) {
+    if (live && Settings.isLiveMap()) {
       if (downloadThread != null && downloadThread.isWorking()) {
         downloadThread.stopIt();
       }

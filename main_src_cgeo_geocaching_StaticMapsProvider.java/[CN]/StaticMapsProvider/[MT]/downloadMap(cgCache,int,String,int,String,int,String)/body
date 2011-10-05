@@ -9,7 +9,7 @@
   HttpEntity entity=null;
   boolean ok=false;
   for (int i=0; i < 3; i++) {
-    if (i > 0)     Log.w(cgSettings.tag,"cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+    if (i > 0)     Log.w(Settings.tag,"cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
     try {
       client=new DefaultHttpClient();
       getMethod=new HttpGet(url);
@@ -34,7 +34,7 @@
         ok=true;
       }
  catch (      IOException e) {
-        Log.e(cgSettings.tag,"cgMapImg.getDrawable (saving to cache): " + e.toString());
+        Log.e(Settings.tag,"cgMapImg.getDrawable (saving to cache): " + e.toString());
       }
  finally {
         is.close();
@@ -48,7 +48,7 @@
       }
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgMapImg.getDrawable (downloading from web): " + e.toString());
+      Log.e(Settings.tag,"cgMapImg.getDrawable (downloading from web): " + e.toString());
     }
   }
 }

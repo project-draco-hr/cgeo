@@ -4,23 +4,21 @@
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
   app.setAction(null);
-  settings=new cgSettings(activity,activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE));
-  base=new cgBase(app,settings);
-  prefsEdit=activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE).edit();
-  MapFactory mapFactory=settings.getMapFactory();
+  base=new cgBase(app);
+  MapFactory mapFactory=Settings.getMapFactory();
   noMapTokenShowed=false;
   activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
   ActivityMixin.setTheme(activity);
-  activity.setContentView(settings.getMapFactory().getMapLayoutId());
+  activity.setContentView(Settings.getMapFactory().getMapLayoutId());
   ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,settings,0,0);
+    geo=app.startGeo(activity,geoUpdate,base,0,0);
   }
-  if (settings.useCompass == 1 && dir == null) {
+  if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(activity,dirUpdate);
   }
   mapView=(MapViewImpl)activity.findViewById(mapFactory.getMapViewId());
-  mapView.setMapSource(settings);
+  mapView.setMapSource();
   if (!mapView.needsScaleOverlay()) {
     mapView.setBuiltinScale(true);
   }
@@ -30,20 +28,20 @@
   mapView.setOnDragListener(this);
   mapView.clearOverlays();
   if (overlayPosition == null) {
-    overlayPosition=mapView.createAddPositionOverlay(activity,settings);
+    overlayPosition=mapView.createAddPositionOverlay(activity);
   }
-  if (settings.publicLoc > 0 && overlayOtherCachers == null) {
+  if (Settings.isPublicLoc() && overlayOtherCachers == null) {
     overlayOtherCachers=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
   }
   if (overlayCaches == null) {
-    overlayCaches=mapView.createAddMapOverlay(settings,mapView.getContext(),getResources().getDrawable(R.drawable.marker),fromDetailIntent);
+    overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker),fromDetailIntent);
   }
   if (overlayScale == null && mapView.needsScaleOverlay()) {
-    overlayScale=mapView.createAddScaleOverlay(activity,settings);
+    overlayScale=mapView.createAddScaleOverlay(activity);
   }
   mapView.invalidate();
   mapController=mapView.getMapController();
-  mapController.setZoom(settings.mapzoom);
+  mapController.setZoom(Settings.getMapZoom());
   if (geo != null) {
     geoUpdate.updateLoc(geo);
   }
@@ -94,8 +92,8 @@
   myLocSwitch.setOnClickListener(new MyLocationListener());
   switchMyLocationButton();
   startTimer();
-  if (settings.cacheType != null) {
-    String cacheType=cgBase.cacheTypesInv.get(settings.cacheType);
+  if (Settings.getCacheType() != null) {
+    String cacheType=cgBase.cacheTypesInv.get(Settings.getCacheType());
     ((TextView)activity.findViewById(R.id.filter_text)).setText(cacheType);
     activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
   }

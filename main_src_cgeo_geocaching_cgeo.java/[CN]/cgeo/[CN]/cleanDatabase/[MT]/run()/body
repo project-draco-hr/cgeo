@@ -6,8 +6,8 @@
     return;
   }
   boolean more=false;
-  if (version != settings.version) {
-    Log.i(cgSettings.tag,"Initializing hard cleanup - version changed from " + settings.version + " to "+ version+ ".");
+  if (version != Settings.getVersion()) {
+    Log.i(Settings.tag,"Initializing hard cleanup - version changed from " + Settings.getVersion() + " to "+ version+ ".");
     more=true;
   }
   cleanupRunning=true;

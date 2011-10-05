@@ -31,11 +31,11 @@
         navType.setText(res.getString(R.string.loc_gps));
       }
       if (geo.accuracyNow != null) {
-        if (settings.units == cgSettings.unitsImperial) {
-          navAccuracy.setText("??" + String.format(Locale.getDefault(),"%.0f",(geo.accuracyNow * 3.2808399)) + " ft");
+        if (Settings.isUseMetricUnits()) {
+          navAccuracy.setText("??" + String.format(Locale.getDefault(),"%.0f",geo.accuracyNow) + " m");
         }
  else {
-          navAccuracy.setText("??" + String.format(Locale.getDefault(),"%.0f",geo.accuracyNow) + " m");
+          navAccuracy.setText("??" + String.format(Locale.getDefault(),"%.0f",(geo.accuracyNow * 3.2808399)) + " ft");
         }
       }
  else {
@@ -43,11 +43,11 @@
       }
       if (geo.altitudeNow != null) {
         String humanAlt;
-        if (settings.units == cgSettings.unitsImperial) {
-          humanAlt=String.format("%.0f",(geo.altitudeNow * 3.2808399)) + " ft";
+        if (Settings.isUseMetricUnits()) {
+          humanAlt=String.format("%.0f",geo.altitudeNow) + " m";
         }
  else {
-          humanAlt=String.format("%.0f",geo.altitudeNow) + " m";
+          humanAlt=String.format("%.0f",(geo.altitudeNow * 3.2808399)) + " ft";
         }
         navLocation.setText(cgBase.formatCoords(geo.coordsNow,true) + " | " + humanAlt);
       }
@@ -61,7 +61,7 @@
       navAccuracy.setText(null);
       navLocation.setText(res.getString(R.string.loc_trying));
     }
-    if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) {
+    if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) {
       if (geo.bearingNow != null) {
         northHeading=geo.bearingNow;
       }
@@ -71,6 +71,6 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"Failed to update location.");
+    Log.w(Settings.tag,"Failed to update location.");
   }
 }

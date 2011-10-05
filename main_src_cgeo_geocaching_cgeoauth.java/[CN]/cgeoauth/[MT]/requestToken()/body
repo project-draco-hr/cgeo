@@ -13,7 +13,7 @@
       int code=-1;
       int retries=0;
       do {
-        Log.d(cgSettings.tag,"https://" + host + pathRequest+ "?"+ params);
+        Log.d(Settings.tag,"https://" + host + pathRequest+ "?"+ params);
         final URL u=new URL("https://" + host + pathRequest+ "?"+ params);
         final URLConnection uc=u.openConnection();
         connection=(HttpsURLConnection)uc;
@@ -31,7 +31,7 @@
         }
         code=connection.getResponseCode();
         retries++;
-        Log.i(cgSettings.tag,host + ": " + connection.getResponseCode()+ " "+ connection.getResponseMessage());
+        Log.i(Settings.tag,host + ": " + connection.getResponseCode()+ " "+ connection.getResponseMessage());
         br.close();
         in.close();
         ins.close();
@@ -48,7 +48,7 @@
           OAtokenSecret=paramsMatcher2.group(1);
         }
         if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-          final SharedPreferences.Editor prefsEdit=getSharedPreferences(cgSettings.preferences,0).edit();
+          final SharedPreferences.Editor prefsEdit=getSharedPreferences(Settings.preferences,0).edit();
           prefsEdit.putString("temp-token-public",OAtoken);
           prefsEdit.putString("temp-token-secret",OAtokenSecret);
           prefsEdit.commit();
@@ -60,16 +60,16 @@
             status=1;
           }
  catch (          Exception e) {
-            Log.e(cgSettings.tag,"cgeoauth.requestToken(2): " + e.toString());
+            Log.e(Settings.tag,"cgeoauth.requestToken(2): " + e.toString());
           }
         }
       }
     }
  catch (    IOException eio) {
-      Log.e(cgSettings.tag,"cgeoauth.requestToken(IO): " + eio.toString() + " ~ "+ connection.getResponseCode()+ ": "+ connection.getResponseMessage());
+      Log.e(Settings.tag,"cgeoauth.requestToken(IO): " + eio.toString() + " ~ "+ connection.getResponseCode()+ ": "+ connection.getResponseMessage());
     }
 catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgeoauth.requestToken(1): " + e.toString());
+      Log.e(Settings.tag,"cgeoauth.requestToken(1): " + e.toString());
     }
  finally {
       if (connection != null) {
@@ -78,7 +78,7 @@ catch (    Exception e) {
     }
   }
  catch (  Exception e2) {
-    Log.e(cgSettings.tag,"cgeoauth.requestToken(3): " + e2.toString());
+    Log.e(Settings.tag,"cgeoauth.requestToken(3): " + e2.toString());
   }
   requestTokenHandler.sendEmptyMessage(status);
 }

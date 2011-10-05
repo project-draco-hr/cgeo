@@ -3,7 +3,7 @@
     inflater=((Activity)getContext()).getLayoutInflater();
   }
   if (position > getCount()) {
-    Log.w(cgSettings.tag,"cgCacheListAdapter.getView: Attempt to access missing item #" + position);
+    Log.w(Settings.tag,"cgCacheListAdapter.getView: Attempt to access missing item #" + position);
     return null;
   }
   cgCache cache=getItem(position);
@@ -32,7 +32,7 @@
     holder=(cgCacheView)v.getTag();
   }
   if (cache.own) {
-    if (settings.skin == 1) {
+    if (Settings.isLightSkin()) {
       holder.oneInfo.setBackgroundResource(R.color.owncache_background_light);
       holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_light);
     }
@@ -42,7 +42,7 @@
     }
   }
  else {
-    if (settings.skin == 1) {
+    if (Settings.isLightSkin()) {
       holder.oneInfo.setBackgroundResource(R.color.background_light);
       holder.oneCheckbox.setBackgroundResource(R.color.background_light);
     }
@@ -92,15 +92,15 @@
   }
   holder.direction.setContent(cache.coords);
   if (cache.found && cache.logOffline) {
-    holder.logStatusMark.setImageResource(R.drawable.mark_green_red);
+    holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);
     holder.logStatusMark.setVisibility(View.VISIBLE);
   }
  else   if (cache.found) {
-    holder.logStatusMark.setImageResource(R.drawable.mark_green);
+    holder.logStatusMark.setImageResource(R.drawable.mark_green_more);
     holder.logStatusMark.setVisibility(View.VISIBLE);
   }
  else   if (cache.logOffline) {
-    holder.logStatusMark.setImageResource(R.drawable.mark_red);
+    holder.logStatusMark.setImageResource(R.drawable.mark_orange);
     holder.logStatusMark.setVisibility(View.VISIBLE);
   }
  else {
@@ -164,7 +164,7 @@
     Bitmap dirImgPre=null;
     Bitmap dirImg=null;
     try {
-      dirImgPre=BitmapFactory.decodeFile(cgSettings.getStorage() + cache.geocode + "/direction.png");
+      dirImgPre=BitmapFactory.decodeFile(Settings.getStorage() + cache.geocode + "/direction.png");
       dirImg=dirImgPre.copy(Bitmap.Config.ARGB_8888,true);
       dirImgPre.recycle();
       dirImgPre=null;
@@ -172,7 +172,7 @@
  catch (    Exception e) {
     }
     if (dirImg != null) {
-      if (settings.skin == 0) {
+      if (!Settings.isLightSkin()) {
         int length=dirImg.getWidth() * dirImg.getHeight();
         int[] pixels=new int[length];
         dirImg.getPixels(pixels,0,dirImg.getWidth(),0,0,dirImg.getWidth(),dirImg.getHeight());
@@ -198,7 +198,7 @@
     holder.favourite.setText("---");
   }
   int favoriteBack;
-  if (settings.skin == 1) {
+  if (Settings.isLightSkin()) {
     favoriteBack=R.drawable.favourite_background_light;
   }
  else {

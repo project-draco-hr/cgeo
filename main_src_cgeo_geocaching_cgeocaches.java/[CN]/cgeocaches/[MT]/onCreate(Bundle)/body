@@ -17,7 +17,7 @@
   Thread threadPure;
   cgSearchThread thread;
   if (type.equals("offline")) {
-    listId=settings.getLastList();
+    listId=Settings.getLastList();
     if (listId <= 0) {
       listId=1;
       title=res.getString(R.string.caches_stored);
@@ -111,7 +111,7 @@
  else {
     title="caches";
     setTitle(title);
-    Log.e(cgSettings.tag,"cgeocaches.onCreate: No action or unknown action specified");
+    Log.e(Settings.tag,"cgeocaches.onCreate: No action or unknown action specified");
   }
   prepareFilterBar();
 }

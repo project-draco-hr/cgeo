@@ -14,7 +14,7 @@
     }
     try {
       if (needToStop) {
-        Log.i(cgSettings.tag,"Stopped storing process.");
+        Log.i(Settings.tag,"Stopped storing process.");
         break;
       }
       if ((System.currentTimeMillis() - last) < 1500) {
@@ -23,15 +23,15 @@
           if (delay < 0) {
             delay=500;
           }
-          Log.i(cgSettings.tag,"Waiting for next cache " + delay + " ms");
+          Log.i(Settings.tag,"Waiting for next cache " + delay + " ms");
           sleep(delay);
         }
  catch (        Exception e) {
-          Log.e(cgSettings.tag,"cgeocaches.geocachesLoadDetails.sleep: " + e.toString());
+          Log.e(Settings.tag,"cgeocaches.geocachesLoadDetails.sleep: " + e.toString());
         }
       }
       if (needToStop) {
-        Log.i(cgSettings.tag,"Stopped storing process.");
+        Log.i(Settings.tag,"Stopped storing process.");
         break;
       }
       detailProgress++;
@@ -40,7 +40,7 @@
       yield();
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgeocaches.geocachesLoadDetails: " + e.toString());
+      Log.e(Settings.tag,"cgeocaches.geocachesLoadDetails: " + e.toString());
     }
     last=System.currentTimeMillis();
   }

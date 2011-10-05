@@ -1,0 +1,10 @@
+{
+  if (!my && Settings.isExcludeMyCaches() && addF) {
+    if (params == null) {
+      return new Parameters("f","1");
+    }
+    params.put("f","1");
+    Log.i(Settings.tag,"Skipping caches found or hidden by user.");
+  }
+  return params;
+}

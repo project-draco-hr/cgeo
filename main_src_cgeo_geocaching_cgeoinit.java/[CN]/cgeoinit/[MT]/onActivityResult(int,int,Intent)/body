@@ -3,7 +3,7 @@
   if (requestCode == SELECT_MAPFILE_REQUEST) {
     if (resultCode == RESULT_OK) {
       if (data.hasExtra("mapfile")) {
-        settings.setMapFile(data.getStringExtra("mapfile"));
+        Settings.setMapFile(data.getStringExtra("mapfile"));
       }
     }
     initMapfileEdittext(true);

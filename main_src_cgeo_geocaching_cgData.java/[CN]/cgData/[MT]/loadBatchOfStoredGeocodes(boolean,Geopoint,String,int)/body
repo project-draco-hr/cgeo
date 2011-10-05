@@ -13,7 +13,7 @@
     specifySql.append('"');
   }
   try {
-    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},specifySql.toString(),null,null,null,"dif",null);
+    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},specifySql.toString(),null,null,null,"dif",null);
     if (cursor != null) {
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();
@@ -31,7 +31,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgData.loadBatchOfStoredGeocodes: " + e.toString());
+    Log.e(Settings.tag,"cgData.loadBatchOfStoredGeocodes: " + e.toString());
   }
   return geocodes;
 }

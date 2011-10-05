@@ -1,4 +1,5 @@
 {
+  importedRecords=0;
   handler=handlerIn;
   final RootElement root=new RootElement(namespace,"gpx");
   final Element waypoint=root.getChild(namespace,"wpt");
@@ -10,7 +11,7 @@
         }
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"Failed to parse waypoint's latitude and/or longitude.");
+        Log.w(Settings.tag,"Failed to parse waypoint's latitude and/or longitude.");
       }
     }
   }
@@ -28,7 +29,7 @@
         cache.detailed=true;
         createNoteFromGSAKUserdata();
         result.put(cache.geocode,cache);
-        showCountMessage(handler,result.size());
+        showCountMessage(handler,R.string.gpx_import_loading_caches,++importedRecords);
       }
  else       if (StringUtils.isNotBlank(cache.name) && cache.coords != null && StringUtils.contains(type,"waypoint")) {
         addWaypointToCache();
@@ -49,13 +50,13 @@
           waypoint.lookup="---";
           waypoint.name=cache.shortdesc;
           waypoint.coords=cache.coords;
-          waypoint.note=cache.description;
+          waypoint.note=cache.getDescription();
           if (cacheForWaypoint.waypoints == null) {
             cacheForWaypoint.waypoints=new ArrayList<cgWaypoint>();
           }
           cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints,Collections.singletonList(waypoint));
           result.put(cacheGeocodeForWaypoint,cacheForWaypoint);
-          showCountMessage(handler,result.size());
+          showCountMessage(handler,R.string.gpx_import_loading_waypoints,++importedRecords);
         }
       }
     }
@@ -67,7 +68,7 @@
         cache.hidden=parseDate(body);
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"Failed to parse cache date: " + e.toString());
+        Log.w(Settings.tag,"Failed to parse cache date: " + e.toString());
       }
     }
   }
@@ -78,7 +79,6 @@
       final String content=body.trim();
       cache.name=content;
       findGeoCode(cache.name);
-      findGeoCode(cache.description);
     }
   }
 );
@@ -92,7 +92,7 @@
   waypoint.getChild(namespace,"cmt").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       cmt=body;
-      cache.description=validate(body);
+      cache.setDescription(validate(body));
     }
   }
 );
@@ -154,7 +154,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"Failed to parse cache attributes.");
+          Log.w(Settings.tag,"Failed to parse cache attributes.");
         }
       }
     }
@@ -211,7 +211,7 @@
           cache.difficulty=new Float(body);
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"Failed to parse difficulty: " + e.toString());
+          Log.w(Settings.tag,"Failed to parse difficulty: " + e.toString());
         }
       }
     }
@@ -222,7 +222,7 @@
           cache.terrain=new Float(body);
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"Failed to parse terrain: " + e.toString());
+          Log.w(Settings.tag,"Failed to parse terrain: " + e.toString());
         }
       }
     }
@@ -263,7 +263,7 @@
 );
     gcCache.getChild(nsGC,"long_description").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String desc){
-        cache.description=validate(desc);
+        cache.setDescription(validate(desc));
       }
     }
 );
@@ -331,7 +331,7 @@
           log.date=parseDate(body).getTime();
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"Failed to parse log date: " + e.toString());
+          Log.w(Settings.tag,"Failed to parse log date: " + e.toString());
         }
       }
     }
@@ -366,10 +366,10 @@
     return true;
   }
  catch (  IOException e) {
-    Log.e(cgSettings.tag,"Cannot parse .gpx file as GPX " + version + ": could not read file!");
+    Log.e(Settings.tag,"Cannot parse .gpx file as GPX " + version + ": could not read file!");
   }
 catch (  SAXException e) {
-    Log.e(cgSettings.tag,"Cannot parse .gpx file as GPX " + version + ": could not parse XML - "+ e.toString());
+    Log.e(Settings.tag,"Cannot parse .gpx file as GPX " + version + ": could not parse XML - "+ e.toString());
   }
   return false;
 }

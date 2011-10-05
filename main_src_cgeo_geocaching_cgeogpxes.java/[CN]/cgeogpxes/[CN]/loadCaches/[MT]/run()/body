@@ -7,6 +7,5 @@
  else {
     searchId=LocParser.parseLoc(file,listId,changeParseDialogHandler);
   }
-  imported=app.getCount(searchId);
-  loadCachesHandler.sendMessage(new Message());
+  loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0,app.getCount(searchId),0));
 }

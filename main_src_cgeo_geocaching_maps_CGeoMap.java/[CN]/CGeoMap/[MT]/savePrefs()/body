@@ -2,9 +2,5 @@
   if (mapView == null) {
     return;
   }
-  if (prefsEdit == null) {
-    prefsEdit=activity.getSharedPreferences(cgSettings.preferences,Context.MODE_PRIVATE).edit();
-  }
-  prefsEdit.putInt("mapzoom",mapView.getMapZoomLevel());
-  prefsEdit.commit();
+  Settings.setMapZoom(mapView.getMapZoomLevel());
 }

@@ -29,14 +29,14 @@
     }
   }
 );
-  CheckBox publicButton=(CheckBox)findViewById(R.id.publicloc);
-  if (prefs.getInt("publicloc",0) == 0) {
-    publicButton.setChecked(false);
+  final CheckBox publicButton=(CheckBox)findViewById(R.id.publicloc);
+  publicButton.setChecked(Settings.isPublicLoc());
+  publicButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setPublicLoc(publicButton.isChecked());
+    }
   }
- else {
-    publicButton.setChecked(true);
-  }
-  publicButton.setOnClickListener(new cgeoChangePublic());
+);
   Button authorizeTwitter=(Button)findViewById(R.id.authorize_twitter);
   authorizeTwitter.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View arg0){
@@ -45,17 +45,22 @@
     }
   }
 );
-  CheckBox twitterButton=(CheckBox)findViewById(R.id.twitter_option);
-  if (prefs.getInt("twitter",0) == 0 || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret)) {
-    twitterButton.setChecked(false);
+  final CheckBox twitterButton=(CheckBox)findViewById(R.id.twitter_option);
+  twitterButton.setChecked(Settings.isUseTwitter() && Settings.isTwitterLoginValid());
+  twitterButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseTwitter(twitterButton.isChecked());
+      if (Settings.isUseTwitter() && !Settings.isTwitterLoginValid()) {
+        Intent authIntent=new Intent(cgeoinit.this,cgeoauth.class);
+        startActivity(authIntent);
+      }
+      twitterButton.setChecked(Settings.isUseTwitter());
+    }
   }
- else {
-    twitterButton.setChecked(true);
-  }
-  twitterButton.setOnClickListener(new cgeoChangeTwitter());
+);
   EditText sigEdit=(EditText)findViewById(R.id.signature);
   if (sigEdit.getText().length() == 0) {
-    sigEdit.setText(settings.getSignature());
+    sigEdit.setText(Settings.getSignature());
   }
   Button sigBtn=(Button)findViewById(R.id.signature_help);
   sigBtn.setOnClickListener(new View.OnClickListener(){
@@ -74,144 +79,149 @@
     }
   }
 );
-  CheckBox autoinsertButton=(CheckBox)findViewById(R.id.sigautoinsert);
-  autoinsertButton.setChecked(prefs.getBoolean("sigautoinsert",false));
-  autoinsertButton.setOnClickListener(new cgeoChangeSignatureAutoinsert());
-  CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
-  if (prefs.getInt("skin",0) == 0) {
-    skinButton.setChecked(false);
+  final CheckBox autoinsertButton=(CheckBox)findViewById(R.id.sigautoinsert);
+  autoinsertButton.setChecked(Settings.isAutoInsertSignature());
+  autoinsertButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setAutoInsertSignature(autoinsertButton.isChecked());
+    }
   }
- else {
-    skinButton.setChecked(true);
+);
+  final CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
+  skinButton.setChecked(Settings.isLightSkin());
+  skinButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setLightSkin(skinButton.isChecked());
+    }
   }
-  skinButton.setOnClickListener(new cgeoChangeSkin());
-  CheckBox addressButton=(CheckBox)findViewById(R.id.address);
-  if (prefs.getInt("showaddress",1) == 0) {
-    addressButton.setChecked(false);
+);
+  final CheckBox addressButton=(CheckBox)findViewById(R.id.address);
+  addressButton.setChecked(Settings.isShowAddress());
+  addressButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setShowAddress(addressButton.isChecked());
+    }
   }
- else {
-    addressButton.setChecked(true);
+);
+  final CheckBox captchaButton=(CheckBox)findViewById(R.id.captcha);
+  captchaButton.setChecked(Settings.isShowCaptcha());
+  captchaButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setShowCaptcha(captchaButton.isChecked());
+    }
   }
-  addressButton.setOnClickListener(new cgeoChangeAddress());
-  CheckBox captchaButton=(CheckBox)findViewById(R.id.captcha);
-  if (prefs.getBoolean("showcaptcha",false) == false) {
-    captchaButton.setChecked(false);
-  }
- else {
-    captchaButton.setChecked(true);
-  }
-  captchaButton.setOnClickListener(new cgeoChangeCaptcha());
+);
   final CheckBox dirImgButton=(CheckBox)findViewById(R.id.loaddirectionimg);
-  dirImgButton.setChecked(settings.getLoadDirImg());
+  dirImgButton.setChecked(Settings.getLoadDirImg());
   dirImgButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      settings.setLoadDirImg(!settings.getLoadDirImg());
-      dirImgButton.setChecked(settings.getLoadDirImg());
+      Settings.setLoadDirImg(!Settings.getLoadDirImg());
+      dirImgButton.setChecked(Settings.getLoadDirImg());
     }
   }
 );
-  CheckBox useEnglishButton=(CheckBox)findViewById(R.id.useenglish);
-  if (prefs.getBoolean("useenglish",false) == false) {
-    useEnglishButton.setChecked(false);
+  final CheckBox useEnglishButton=(CheckBox)findViewById(R.id.useenglish);
+  useEnglishButton.setChecked(Settings.isUseEnglish());
+  useEnglishButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseEnglish(useEnglishButton.isChecked());
+    }
   }
- else {
-    useEnglishButton.setChecked(true);
+);
+  final CheckBox excludeButton=(CheckBox)findViewById(R.id.exclude);
+  excludeButton.setChecked(Settings.isExcludeMyCaches());
+  excludeButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setExcludeMine(excludeButton.isChecked());
+    }
   }
-  useEnglishButton.setOnClickListener(new cgeoChangeUseEnglish());
-  CheckBox excludeButton=(CheckBox)findViewById(R.id.exclude);
-  if (prefs.getInt("excludemine",0) == 0) {
-    excludeButton.setChecked(false);
+);
+  final CheckBox disabledButton=(CheckBox)findViewById(R.id.disabled);
+  disabledButton.setChecked(Settings.isExcludeDisabledCaches());
+  disabledButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setExcludeDisabledCaches(disabledButton.isChecked());
+    }
   }
- else {
-    excludeButton.setChecked(true);
-  }
-  excludeButton.setOnClickListener(new cgeoChangeExclude());
-  CheckBox disabledButton=(CheckBox)findViewById(R.id.disabled);
-  if (prefs.getInt("excludedisabled",0) == 0) {
-    disabledButton.setChecked(false);
-  }
- else {
-    disabledButton.setChecked(true);
-  }
-  disabledButton.setOnClickListener(new cgeoChangeDisabled());
+);
   TextView showWaypointsThreshold=(TextView)findViewById(R.id.showwaypointsthreshold);
   showWaypointsThreshold.setText("" + prefs.getInt("gcshowwaypointsthreshold",0));
-  CheckBox autovisitButton=(CheckBox)findViewById(R.id.trackautovisit);
-  if (prefs.getBoolean("trackautovisit",false)) {
-    autovisitButton.setChecked(true);
-  }
- else {
-    autovisitButton.setChecked(false);
-  }
-  autovisitButton.setOnClickListener(new cgeoChangeAutovisit());
-  CheckBox offlineButton=(CheckBox)findViewById(R.id.offline);
-  if (prefs.getInt("offlinemaps",1) == 0) {
-    offlineButton.setChecked(false);
-  }
- else {
-    offlineButton.setChecked(true);
-  }
-  offlineButton.setOnClickListener(new cgeoChangeOffline());
-  CheckBox saveLogImgButton=(CheckBox)findViewById(R.id.save_log_img);
-  if (prefs.getBoolean("logimages",false) == false) {
-    saveLogImgButton.setChecked(false);
-  }
- else {
-    saveLogImgButton.setChecked(true);
-  }
-  saveLogImgButton.setOnClickListener(new cgeoChangeSaveLogImg());
-  CheckBox autoloadButton=(CheckBox)findViewById(R.id.autoload);
-  if (prefs.getInt("autoloaddesc",0) == 0) {
-    autoloadButton.setChecked(false);
-  }
- else {
-    autoloadButton.setChecked(true);
-  }
-  autoloadButton.setOnClickListener(new cgeoChangeAutoload());
-  CheckBox livelistButton=(CheckBox)findViewById(R.id.livelist);
-  if (prefs.getInt("livelist",1) == 0) {
-    livelistButton.setChecked(false);
-  }
- else {
-    livelistButton.setChecked(true);
-  }
-  livelistButton.setOnClickListener(new cgeoChangeLivelist());
-  CheckBox unitsButton=(CheckBox)findViewById(R.id.units);
-  if (prefs.getInt("units",cgSettings.unitsMetric) == cgSettings.unitsMetric) {
-    unitsButton.setChecked(false);
-  }
- else {
-    unitsButton.setChecked(true);
-  }
-  unitsButton.setOnClickListener(new cgeoChangeUnits());
-  CheckBox gnavButton=(CheckBox)findViewById(R.id.gnav);
-  if (prefs.getInt("usegnav",1) == 1) {
-    gnavButton.setChecked(true);
-  }
- else {
-    gnavButton.setChecked(false);
-  }
-  gnavButton.setOnClickListener(new cgeoChangeGNav());
-  final CheckBox logOffline=(CheckBox)findViewById(R.id.log_offline);
-  logOffline.setChecked(settings.getLogOffline());
-  logOffline.setOnClickListener(new View.OnClickListener(){
+  final CheckBox autovisitButton=(CheckBox)findViewById(R.id.trackautovisit);
+  autovisitButton.setChecked(Settings.isTrackableAutoVisit());
+  autovisitButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      settings.setLogOffline(!settings.getLogOffline());
-      logOffline.setChecked(settings.getLogOffline());
+      Settings.setTrackableAutoVisit(autovisitButton.isChecked());
     }
   }
 );
-  CheckBox browserButton=(CheckBox)findViewById(R.id.browser);
-  if (prefs.getInt("asbrowser",1) == 0) {
-    browserButton.setChecked(false);
+  final CheckBox offlineButton=(CheckBox)findViewById(R.id.offline);
+  offlineButton.setChecked(Settings.isStoreOfflineMaps());
+  offlineButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setStoreOfflineMaps(offlineButton.isChecked());
+    }
   }
- else {
-    browserButton.setChecked(true);
+);
+  final CheckBox saveLogImgButton=(CheckBox)findViewById(R.id.save_log_img);
+  saveLogImgButton.setChecked(Settings.isStoreLogImages());
+  saveLogImgButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setStoreLogImages(saveLogImgButton.isChecked());
+    }
   }
-  browserButton.setOnClickListener(new cgeoChangeBrowser());
+);
+  final CheckBox autoloadButton=(CheckBox)findViewById(R.id.autoload);
+  autoloadButton.setChecked(Settings.isAutoLoadDescription());
+  autoloadButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setAutoLoadDesc(autoloadButton.isChecked());
+    }
+  }
+);
+  final CheckBox livelistButton=(CheckBox)findViewById(R.id.livelist);
+  livelistButton.setChecked(Settings.isLiveList());
+  livelistButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setLiveList(livelistButton.isChecked());
+    }
+  }
+);
+  final CheckBox unitsButton=(CheckBox)findViewById(R.id.units);
+  unitsButton.setChecked(!Settings.isUseMetricUnits());
+  unitsButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseMetricUnits(!unitsButton.isChecked());
+    }
+  }
+);
+  final CheckBox gnavButton=(CheckBox)findViewById(R.id.gnav);
+  gnavButton.setChecked(Settings.isUseGoogleNavigation());
+  gnavButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseGoogleNavigation(gnavButton.isChecked());
+    }
+  }
+);
+  final CheckBox logOffline=(CheckBox)findViewById(R.id.log_offline);
+  logOffline.setChecked(Settings.getLogOffline());
+  logOffline.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setLogOffline(!Settings.getLogOffline());
+      logOffline.setChecked(Settings.getLogOffline());
+    }
+  }
+);
+  final CheckBox browserButton=(CheckBox)findViewById(R.id.browser);
+  browserButton.setChecked(Settings.isBrowser());
+  browserButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setAsBrowser(browserButton.isChecked());
+    }
+  }
+);
   EditText altitudeEdit=(EditText)findViewById(R.id.altitude);
   altitudeEdit.setText("" + prefs.getInt("altcorrection",0));
-  String webDeviceName=prefs.getString("webDeviceName",null);
+  String webDeviceName=Settings.getWebDeviceName();
   if (StringUtils.isNotBlank(webDeviceName)) {
     ((EditText)findViewById(R.id.webDeviceName)).setText(webDeviceName);
   }
@@ -237,5 +247,5 @@
     }
   }
 );
-  showBackupDate();
+  refreshBackupLabel();
 }

@@ -8,7 +8,7 @@
   startButton.setEnabled(false);
   startButton.setOnTouchListener(null);
   startButton.setOnClickListener(null);
-  final SharedPreferences.Editor prefs=getSharedPreferences(cgSettings.preferences,0).edit();
+  final SharedPreferences.Editor prefs=getSharedPreferences(Settings.preferences,0).edit();
   prefs.putString("temp-token-public",null);
   prefs.putString("temp-token-secret",null);
   prefs.commit();

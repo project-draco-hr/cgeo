@@ -2,16 +2,16 @@
   final String uri="http://www.geocaching.com/my/watchlist.aspx?w=" + cache.cacheId;
   String page=postRequestLogged(uri);
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgBase.addToWatchlist: No data from server");
+    Log.e(Settings.tag,"cgBase.addToWatchlist: No data from server");
     return -1;
   }
   boolean guidOnPage=cache.isGuidContainedInPage(page);
   if (guidOnPage) {
-    Log.i(cgSettings.tag,"cgBase.addToWatchlist: cache is on watchlist");
+    Log.i(Settings.tag,"cgBase.addToWatchlist: cache is on watchlist");
     cache.onWatchlist=true;
   }
  else {
-    Log.e(cgSettings.tag,"cgBase.addToWatchlist: cache is not on watchlist");
+    Log.e(Settings.tag,"cgBase.addToWatchlist: cache is not on watchlist");
   }
   return guidOnPage ? 1 : -1;
 }

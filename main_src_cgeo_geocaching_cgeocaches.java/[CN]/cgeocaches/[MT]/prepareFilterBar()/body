@@ -2,14 +2,14 @@
   TextView filterTextView=(TextView)findViewById(R.id.filter_text);
   View filterBar=findViewById(R.id.filter_bar);
   String cacheType="", filter="";
-  if (settings.cacheType != null || adapter.isFilter()) {
-    if (settings.cacheType != null) {
-      cacheType=cgBase.cacheTypesInv.get(settings.cacheType);
+  if (Settings.getCacheType() != null || adapter.isFilter()) {
+    if (Settings.getCacheType() != null) {
+      cacheType=cgBase.cacheTypesInv.get(Settings.getCacheType());
     }
     if (adapter.isFilter()) {
       filter=adapter.getFilterName();
     }
-    if (settings.cacheType != null && adapter.isFilter()) {
+    if (Settings.getCacheType() != null && adapter.isFilter()) {
       filter=", " + filter;
     }
     filterTextView.setText(cacheType + filter);

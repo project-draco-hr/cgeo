@@ -17,7 +17,7 @@
   coordsNow=new Geopoint(location.getLatitude(),location.getLongitude());
   app.setLastLoc(coordsNow);
   if (location.hasAltitude() && gps != -1) {
-    altitudeNow=location.getAltitude() + settings.altCorrection;
+    altitudeNow=location.getAltitude() + Settings.getAltCorrection();
   }
  else {
     altitudeNow=null;

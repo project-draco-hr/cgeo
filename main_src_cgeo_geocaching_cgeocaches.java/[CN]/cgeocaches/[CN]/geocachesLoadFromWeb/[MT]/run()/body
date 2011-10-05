@@ -12,11 +12,12 @@
       handler.sendEmptyMessage(-1);
       break;
     }
-    String deviceCode=settings.webDeviceCode;
+    String deviceCode=Settings.getWebDeviceCode();
     if (deviceCode == null) {
       deviceCode="";
     }
-    HttpResponse responseFromWeb=base.request("http://send2.cgeo.org/read.html","code=" + cgBase.urlencode_rfc3986(deviceCode),true);
+    final Parameters params=new Parameters("code",deviceCode);
+    HttpResponse responseFromWeb=cgBase.request("http://send2.cgeo.org/read.html",params,true);
     if (responseFromWeb.getStatusLine().getStatusCode() == 200) {
       final String response=cgBase.getResponseData(responseFromWeb);
       if (response.length() > 2) {
@@ -35,7 +36,7 @@
         yield();
       }
  else       if ("RG".equals(cgBase.getResponseData(responseFromWeb))) {
-        settings.setWebNameCode(null,null);
+        Settings.setWebNameCode(null,null);
         needToStop=true;
         handler.sendEmptyMessage(-3);
         return;
@@ -63,7 +64,7 @@
       }
     }
  catch (    InterruptedException e) {
-      Log.e(cgSettings.tag,"cgeocaches.geocachesLoadFromWeb.sleep: " + e.toString());
+      Log.e(Settings.tag,"cgeocaches.geocachesLoadFromWeb.sleep: " + e.toString());
     }
   }
   handler.sendEmptyMessage(-1);

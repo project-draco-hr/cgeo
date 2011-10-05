@@ -7,15 +7,15 @@
   }
   loginDialog=ProgressDialog.show(cgeoinit.this,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
   loginDialog.setCancelable(false);
-  settings.setLogin(username,password);
+  Settings.setLogin(username,password);
   cgBase.clearCookies();
   (new Thread(){
     @Override public void run(){
-      final int loginResult=base.login();
-      if (1 == loginResult) {
-        base.detectGcCustomDate();
+      final StatusCode loginResult=cgBase.login();
+      if (loginResult == StatusCode.NO_ERROR) {
+        cgBase.detectGcCustomDate();
       }
-      logInHandler.sendEmptyMessage(loginResult);
+      logInHandler.obtainMessage(0,cgBase.downloadAvatar(cgeoinit.this)).sendToTarget();
     }
   }
 ).start();

@@ -5,9 +5,9 @@
   setContentView(R.layout.navigate);
   setTitle(res.getString(R.string.compass_title));
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
+    geo=app.startGeo(this,geoUpdate,base,0,0);
   }
-  if (settings.useCompass == 1 && dir == null) {
+  if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(this,dirUpdate);
   }
   Bundle extras=getIntent().getExtras();

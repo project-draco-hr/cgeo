@@ -1,15 +1,15 @@
 {
   if (isEmpty(viewstates)) {
-    Log.e(cgSettings.tag,"cgeoBase.postLog: No viewstate given");
-    return 1000;
+    Log.e(Settings.tag,"cgeoBase.postLog: No viewstate given");
+    return StatusCode.LOG_POST_ERROR;
   }
   if (logTypes2.containsKey(logType) == false) {
-    Log.e(cgSettings.tag,"cgeoBase.postLog: Unknown logtype");
-    return 1000;
+    Log.e(Settings.tag,"cgeoBase.postLog: Unknown logtype");
+    return StatusCode.LOG_POST_ERROR;
   }
   if (StringUtils.isBlank(log)) {
-    Log.e(cgSettings.tag,"cgeoBase.postLog: No log text given");
-    return 1001;
+    Log.e(Settings.tag,"cgeoBase.postLog: No log text given");
+    return StatusCode.NO_LOG_TEXT;
   }
   final int logLen=log.length();
   final StringBuilder logUpdated=new StringBuilder();
@@ -26,24 +26,13 @@
   }
   final String logInfo=logUpdated.toString().replace("\n","\r\n");
   if (trackables != null) {
-    Log.i(cgSettings.tag,"Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: "+ trackables.size());
+    Log.i(Settings.tag,"Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: "+ trackables.size());
   }
  else {
-    Log.i(cgSettings.tag,"Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: 0");
+    Log.i(Settings.tag,"Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: 0");
   }
-  final Parameters params=new Parameters();
+  final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","__LASTFOCUS","","ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged",String.format("%02d",month) + "/" + String.format("%02d",day)+ "/"+ String.format("%04d",year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo,"ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry","ctl00$ContentBody$uxVistOtherListingGC","");
   setViewstates(viewstates,params);
-  params.put("__EVENTTARGET","");
-  params.put("__EVENTARGUMENT","");
-  params.put("__LASTFOCUS","");
-  params.put("ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType));
-  params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged",String.format("%02d",month) + "/" + String.format("%02d",day)+ "/"+ String.format("%04d",year));
-  params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month));
-  params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day));
-  params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year));
-  params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo);
-  params.put("ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry");
-  params.put("ctl00$ContentBody$uxVistOtherListingGC","");
   if (trackables != null && trackables.isEmpty() == false) {
     final StringBuilder hdnSelected=new StringBuilder();
     for (    cgTrackableLog tb : trackables) {
@@ -53,24 +42,23 @@
         hdnSelected.append(',');
       }
     }
-    params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString());
-    params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
+    params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString(),"ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
   }
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
   String page=getResponseData(postRequest(uri,params));
   if (!checkLogin(page)) {
-    int loginState=login();
-    if (loginState == 1) {
+    final StatusCode loginState=login();
+    if (loginState == StatusCode.NO_ERROR) {
       page=getResponseData(postRequest(uri,params));
     }
  else {
-      Log.e(cgSettings.tag,"cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
+      Log.e(Settings.tag,"cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
       return loginState;
     }
   }
   if (StringUtils.isBlank(page)) {
-    Log.e(cgSettings.tag,"cgeoBase.postLog: No data from server");
-    return 1002;
+    Log.e(Settings.tag,"cgeoBase.postLog: No data from server");
+    return StatusCode.NO_DATA_FROM_SERVER;
   }
   final Pattern pattern=Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>",Pattern.CASE_INSENSITIVE);
   final Matcher matcher=pattern.matcher(page);
@@ -78,8 +66,8 @@
     if (matcher.find() && matcher.groupCount() > 0) {
       final String[] viewstatesConfirm=getViewstates(page);
       if (isEmpty(viewstatesConfirm)) {
-        Log.e(cgSettings.tag,"cgeoBase.postLog: No viewstate for confirm log");
-        return 1000;
+        Log.e(Settings.tag,"cgeoBase.postLog: No viewstate for confirm log");
+        return StatusCode.LOG_POST_ERROR;
       }
       params.clear();
       setViewstates(viewstatesConfirm,params);
@@ -113,22 +101,22 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeoBase.postLog.confim: " + e.toString());
+    Log.e(Settings.tag,"cgeoBase.postLog.confim: " + e.toString());
   }
   try {
     final Pattern patternOk=Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_lbHeading\"[^>]*>[^<]*</span>[^<]*</h2>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     final Matcher matcherOk=patternOk.matcher(page);
     if (matcherOk.find()) {
-      Log.i(cgSettings.tag,"Log successfully posted to cache #" + cacheid);
+      Log.i(Settings.tag,"Log successfully posted to cache #" + cacheid);
       if (app != null && geocode != null) {
         app.saveVisitDate(geocode);
       }
-      return 1;
+      return StatusCode.NO_ERROR;
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeoBase.postLog.check: " + e.toString());
+    Log.e(Settings.tag,"cgeoBase.postLog.check: " + e.toString());
   }
-  Log.e(cgSettings.tag,"cgeoBase.postLog: Failed to post log because of unknown error");
-  return 1000;
+  Log.e(Settings.tag,"cgeoBase.postLog: Failed to post log because of unknown error");
+  return StatusCode.LOG_POST_ERROR;
 }

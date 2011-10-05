@@ -1,0 +1,47 @@
+{
+  final Parameters params=new Parameters("decrypt","y");
+  if (StringUtils.isNotBlank(geocode)) {
+    params.put("wp",geocode);
+  }
+ else   if (StringUtils.isNotBlank(guid)) {
+    params.put("guid",guid);
+  }
+  if (app == null) {
+    Log.e(Settings.tag,"cgeoBase.searchByGeocode: No application found");
+    return null;
+  }
+  base.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_loadpage);
+  String page=cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx",params,false,false,false);
+  if (StringUtils.isEmpty(page)) {
+    if (app.isThere(geocode,guid,true,false)) {
+      if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
+        Log.i(Settings.tag,"Loading old cache from cache.");
+        geocode=app.getGeocode(guid);
+      }
+      final List<cgCache> cacheList=new ArrayList<cgCache>();
+      cacheList.add(app.getCacheByGeocode(geocode));
+      search.addGeocode(geocode);
+      search.error=null;
+      app.addSearch(search,cacheList,false,reason);
+      cacheList.clear();
+      return search.getCurrentId();
+    }
+    Log.e(Settings.tag,"cgeoBase.searchByGeocode: No data from server");
+    return null;
+  }
+  final cgCacheWrap caches=base.parseCache(page,reason,handler);
+  if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+    if (caches != null && caches.error != null) {
+      search.error=caches.error;
+    }
+    if (caches != null && StringUtils.isNotBlank(caches.url)) {
+      search.url=caches.url;
+    }
+    app.addSearch(search,null,true,reason);
+    Log.e(Settings.tag,"cgeoBase.searchByGeocode: No cache parsed");
+    return null;
+  }
+  List<cgCache> cacheList=cgBase.processSearchResults(search,caches,false,false,null);
+  app.addSearch(search,cacheList,true,reason);
+  return search.getCurrentId();
+}

@@ -1,5 +1,5 @@
 {
-  Intent mapIntent=new Intent(activity,getSettings(activity).getMapFactory().getMapClass());
+  Intent mapIntent=new Intent(activity,Settings.getMapFactory().getMapClass());
   mapIntent.putExtra("detail",false);
   mapIntent.putExtra("searchid",searchId.toString());
   activity.startActivity(mapIntent);

@@ -10,7 +10,7 @@
     loadTimer=new LoadTimer();
     loadTimer.start();
   }
-  if (settings.publicLoc > 0) {
+  if (Settings.isPublicLoc()) {
     if (usersTimer != null) {
       usersTimer.stopIt();
       usersTimer=null;

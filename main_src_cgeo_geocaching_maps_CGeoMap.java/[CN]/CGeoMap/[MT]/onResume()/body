@@ -1,11 +1,10 @@
 {
   super.onResume();
-  settings.load();
   app.setAction(null);
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,settings,0,0);
+    geo=app.startGeo(activity,geoUpdate,base,0,0);
   }
-  if (settings.useCompass == 1 && dir == null) {
+  if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(activity,dirUpdate);
   }
   if (geo != null) {

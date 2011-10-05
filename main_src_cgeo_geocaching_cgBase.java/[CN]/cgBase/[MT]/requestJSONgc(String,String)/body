@@ -5,7 +5,7 @@
     request.setEntity(new StringEntity(params,HTTP.UTF_8));
   }
  catch (  UnsupportedEncodingException e) {
-    Log.e(cgSettings.tag,"cgeoBase.searchByViewport",e);
+    Log.e(Settings.tag,"cgeoBase.searchByViewport",e);
   }
   request.addHeader("Content-Type","application/json; charset=UTF-8");
   request.addHeader("X-Requested-With","XMLHttpRequest");
