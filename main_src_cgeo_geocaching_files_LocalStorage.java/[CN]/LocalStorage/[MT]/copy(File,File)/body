@@ -10,18 +10,7 @@
     Log.e(Settings.tag,"LocalStorage.copy: could not open file",e);
     return false;
   }
-  byte[] buffer=new byte[4096];
-  int length;
-  try {
-    while ((length=input.read(buffer)) > 0) {
-      output.write(buffer,0,length);
-    }
-    output.flush();
-  }
- catch (  IOException e) {
-    Log.e(Settings.tag,"LocalStorage.copy: error when copying file",e);
-    return false;
-  }
+  boolean copyDone=copy(input,output);
   try {
     input.close();
     output.close();
@@ -30,5 +19,5 @@
     Log.e(Settings.tag,"LocalStorage.copy: could not close file",e);
     return false;
   }
-  return true;
+  return copyDone;
 }

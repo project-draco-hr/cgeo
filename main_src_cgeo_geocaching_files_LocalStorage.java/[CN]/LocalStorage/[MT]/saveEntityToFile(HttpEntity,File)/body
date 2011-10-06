@@ -7,13 +7,7 @@
     try {
       final FileOutputStream fos=new FileOutputStream(targetFile);
       try {
-        final byte[] buffer=new byte[4096];
-        int l;
-        while ((l=is.read(buffer)) != -1) {
-          fos.write(buffer,0,l);
-        }
-        fos.flush();
-        return true;
+        return copy(is,fos);
       }
   finally {
         fos.close();
