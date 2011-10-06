@@ -1,46 +1,15 @@
 {
-  if (StringUtils.isBlank(url)) {
+  if (StringUtils.isBlank(url) || isCounter(url)) {
     return null;
   }
-  if (isCounter(url)) {
-    return null;
-  }
-  String urlExt=StringUtils.substringAfterLast(url,".");
-  if (urlExt.length() > 0) {
-    urlExt="." + urlExt;
-  }
-  if (urlExt.length() > 5) {
-    urlExt="";
-  }
-  String dirName;
-  String fileName;
-  String fileNameSec;
-  if (StringUtils.isNotBlank(geocode)) {
-    dirName=Settings.getStorage() + geocode + "/";
-    fileName=Settings.getStorage() + geocode + "/"+ CryptUtils.md5(url)+ urlExt;
-    fileNameSec=Settings.getStorageSec() + geocode + "/"+ CryptUtils.md5(url)+ urlExt;
-  }
- else {
-    dirName=Settings.getStorage() + "_others/";
-    fileName=Settings.getStorage() + "_others/" + CryptUtils.md5(url)+ urlExt;
-    fileNameSec=Settings.getStorageSec() + "_others/" + CryptUtils.md5(url)+ urlExt;
-  }
-  File dir=null;
-  dir=new File(Settings.getStorage());
-  if (!dir.exists()) {
-    dir.mkdirs();
-  }
-  dir=new File(dirName);
-  if (!dir.exists()) {
-    dir.mkdirs();
-  }
-  dir=null;
+  final File file=LocalStorage.getStorageFile(geocode,url,true);
+  final File fileSec=LocalStorage.getStorageSecFile(geocode,url,true);
   Bitmap imagePre=null;
   if (!onlySave) {
     try {
-      imagePre=loadCachedImage(fileName);
-      if (null == imagePre) {
-        imagePre=loadCachedImage(fileNameSec);
+      imagePre=loadCachedImage(file);
+      if (imagePre == null) {
+        imagePre=loadCachedImage(fileSec);
       }
     }
  catch (    Exception e) {
@@ -48,79 +17,35 @@
     }
   }
   if (imagePre == null || onlySave) {
-    Uri uri=null;
+    final String absoluteURL=makeAbsoluteURL(url);
     BufferedHttpEntity bufferedEntity=null;
-    try {
-      uri=Uri.parse(url);
-      if (!uri.isAbsolute()) {
-        final IConnector connector=ConnectorFactory.getConnector(geocode);
-        url="http://" + connector.getHost() + url;
-      }
-    }
- catch (    Exception e) {
-      Log.e(Settings.tag,"cgHtmlImg.getDrawable (parse URL): " + e.toString());
-    }
-    if (null != uri) {
-      for (int i=0; i < 2; i++) {
-        if (i > 0) {
-          Log.w(Settings.tag,"cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
-        }
-        try {
-          final HttpGet getMethod=new HttpGet(url);
-          final HttpResponse httpResponse=cgBase.doRequest(getMethod);
-          if (null != httpResponse) {
-            final HttpEntity entity=httpResponse.getEntity();
-            bufferedEntity=new BufferedHttpEntity(entity);
-            setSampleSize(bufferedEntity.getContentLength());
-            final InputStream is=bufferedEntity.getContent();
-            try {
-              imagePre=BitmapFactory.decodeStream(is,null,bfOptions);
-            }
-  finally {
-              is.close();
-            }
-          }
-          if (null != imagePre) {
-            break;
-          }
-        }
- catch (        Exception e) {
-          Log.e(Settings.tag,"cgHtmlImg.getDrawable (downloading from web)",e);
-        }
-      }
-    }
-    if (save) {
+    if (absoluteURL != null) {
       try {
-        if (null != bufferedEntity) {
+        final HttpResponse httpResponse=cgBase.request(absoluteURL,null,false);
+        if (httpResponse != null) {
+          bufferedEntity=new BufferedHttpEntity(httpResponse.getEntity());
+          setSampleSize(bufferedEntity.getContentLength());
           final InputStream is=bufferedEntity.getContent();
           try {
-            final FileOutputStream fos=new FileOutputStream(fileName);
-            try {
-              final byte[] buffer=new byte[4096];
-              int l;
-              while ((l=is.read(buffer)) != -1) {
-                fos.write(buffer,0,l);
-              }
-              fos.flush();
-            }
-  finally {
-              fos.close();
-            }
+            imagePre=BitmapFactory.decodeStream(is,null,bfOptions);
           }
   finally {
             is.close();
           }
         }
       }
- catch (      IOException e) {
-        Log.e(Settings.tag,"cgHtmlImg.getDrawable (saving to cache)",e);
+ catch (      Exception e) {
+        Log.e(Settings.tag,"cgHtmlImg.getDrawable (downloading from web)",e);
       }
+    }
+    if (save) {
+      LocalStorage.saveEntityToFile(bufferedEntity,file);
     }
   }
   if (onlySave) {
     return null;
   }
-  if (null == imagePre) {
+  if (imagePre == null) {
     Log.d(Settings.tag,"cgHtmlImg.getDrawable: Failed to obtain image");
     if (placement) {
       imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_not_loaded);

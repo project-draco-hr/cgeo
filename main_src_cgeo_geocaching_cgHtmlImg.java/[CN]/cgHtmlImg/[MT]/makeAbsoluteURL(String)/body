@@ -1,0 +1,14 @@
+{
+  try {
+    if (Uri.parse(url).isAbsolute()) {
+      return url;
+    }
+ else {
+      return "http://" + ConnectorFactory.getConnector(geocode).getHost() + url;
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgHtmlImg.makeAbsoluteURL (parse URL)",e);
+    return null;
+  }
+}

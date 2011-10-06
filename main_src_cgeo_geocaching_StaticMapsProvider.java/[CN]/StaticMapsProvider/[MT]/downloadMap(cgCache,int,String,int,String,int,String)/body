@@ -1,54 +1,15 @@
 {
-  String mapUrl="http://maps.google.com/maps/api/staticmap?center=" + latlonMap;
-  String markerUrl=getMarkerUrl(cache);
-  String url=mapUrl + "&zoom=" + zoom+ "&size="+ edge+ "x"+ edge+ "&maptype="+ mapType+ "&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ waypoints+ "&sensor=false";
-  final String fileName=getStaticMapsDirectory(cache) + "/map_" + level;
-  HttpClient client=null;
-  HttpGet getMethod=null;
-  HttpResponse httpResponse=null;
-  HttpEntity entity=null;
-  boolean ok=false;
-  for (int i=0; i < 3; i++) {
-    if (i > 0)     Log.w(Settings.tag,"cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
-    try {
-      client=new DefaultHttpClient();
-      getMethod=new HttpGet(url);
-      httpResponse=client.execute(getMethod);
-      entity=httpResponse.getEntity();
-      long contentSize=entity.getContentLength();
-      if (contentSize > 0 && contentSize <= MIN_MAP_IMAGE_BYTES) {
-        break;
+  final String mapUrl="http://maps.google.com/maps/api/staticmap?center=" + latlonMap;
+  final String markerUrl=getMarkerUrl(cache);
+  final String url=mapUrl + "&zoom=" + zoom+ "&size="+ edge+ "x"+ edge+ "&maptype="+ mapType+ "&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ waypoints+ "&sensor=false";
+  final File file=getMapFile(cache.geocode,level);
+  final HttpResponse httpResponse=cgBase.request(url,null,false);
+  if (httpResponse != null) {
+    if (LocalStorage.saveEntityToFile(httpResponse.getEntity(),file)) {
+      final long fileSize=file.length();
+      if (fileSize < MIN_MAP_IMAGE_BYTES) {
+        file.delete();
       }
-      final BufferedHttpEntity bufferedEntity=new BufferedHttpEntity(entity);
-      InputStream is=(InputStream)bufferedEntity.getContent();
-      FileOutputStream fos=new FileOutputStream(fileName);
-      int fileSize=0;
-      try {
-        byte[] buffer=new byte[4096];
-        int bytesRead;
-        while ((bytesRead=is.read(buffer)) != -1) {
-          fos.write(buffer,0,bytesRead);
-          fileSize+=bytesRead;
-        }
-        fos.flush();
-        ok=true;
-      }
- catch (      IOException e) {
-        Log.e(Settings.tag,"cgMapImg.getDrawable (saving to cache): " + e.toString());
-      }
- finally {
-        is.close();
-        fos.close();
-      }
-      if (ok && fileSize < MIN_MAP_IMAGE_BYTES) {
-        (new File(fileName)).delete();
-      }
-      if (ok) {
-        break;
-      }
-    }
- catch (    Exception e) {
-      Log.e(Settings.tag,"cgMapImg.getDrawable (downloading from web): " + e.toString());
     }
   }
 }

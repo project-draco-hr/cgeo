@@ -7,8 +7,7 @@
     image_view.setClickable(true);
     image_view.setOnClickListener(new View.OnClickListener(){
       public void onClick(      View arg0){
-        final String directoryTarget=Environment.getExternalStorageDirectory() + "/" + Settings.cache+ "/"+ "temp.jpg";
-        final File file=new File(directoryTarget);
+        final File file=LocalStorage.getStorageFile(null,"temp.jpg",false);
         try {
           final FileOutputStream fos=new FileOutputStream(file);
           image.getBitmap().compress(CompressFormat.JPEG,100,fos);
