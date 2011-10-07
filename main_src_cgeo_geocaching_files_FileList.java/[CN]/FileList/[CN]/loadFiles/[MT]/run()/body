@@ -3,8 +3,7 @@
   try {
     if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
       boolean loaded=false;
-      for (      String baseFolder : getBaseFolders()) {
-        final File dir=new File(baseFolder);
+      for (      final File dir : getBaseFolders()) {
         if (dir.exists() && dir.isDirectory()) {
           listDir(list,dir);
           if (list.size() > 0) {
