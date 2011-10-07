@@ -49,9 +49,14 @@
     if (navigationMenu != null) {
       navigationMenu.setEnabled(menuEnabled);
     }
+    boolean isNonDefaultList=listId != 1;
     MenuItem item=menu.findItem(MENU_DROP_LIST);
     if (item != null) {
-      item.setVisible(listId != 1);
+      item.setVisible(isNonDefaultList);
+    }
+    item=menu.findItem(MENU_RENAME_LIST);
+    if (item != null) {
+      item.setVisible(isNonDefaultList);
     }
     boolean multipleLists=app.getLists().size() >= 2;
     item=menu.findItem(MENU_SWITCH_LIST);
