@@ -1,8 +1,8 @@
 {
   String result;
   final long start=System.currentTimeMillis();
-  result=replaceWhitespaceManually(data);
+  result=BaseUtils.replaceWhitespace(data);
   final long end=System.currentTimeMillis();
   assertEquals(111957,result.length());
-  Log.w(Settings.tag,(end - start) + " ms manually");
+  Log.w(Settings.tag,(end - start) + " ms actual implementation");
 }
