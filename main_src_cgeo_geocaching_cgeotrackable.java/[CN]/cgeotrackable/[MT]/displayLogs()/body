@@ -25,8 +25,8 @@
         ((TextView)rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener(){
           public void onClick(          View arg0){
             Intent cacheIntent=new Intent(cgeotrackable.this,cgeodetail.class);
-            cacheIntent.putExtra("guid",(String)cacheGuid);
-            cacheIntent.putExtra("name",(String)Html.fromHtml(cacheName).toString());
+            cacheIntent.putExtra("guid",cacheGuid);
+            cacheIntent.putExtra("name",Html.fromHtml(cacheName).toString());
             startActivity(cacheIntent);
           }
         }

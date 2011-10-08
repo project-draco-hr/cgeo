@@ -9,7 +9,7 @@
     cursor.moveToFirst();
     int index=cursor.getColumnIndex("attribute");
     do {
-      attributes.add((String)cursor.getString(index));
+      attributes.add(cursor.getString(index));
     }
  while (cursor.moveToNext());
   }

@@ -7,14 +7,14 @@
   }
   try {
     if (statComparator != null) {
-      Collections.sort((List<cgCache>)list,statComparator);
+      Collections.sort(list,statComparator);
     }
  else {
       if (coordsIn == null) {
         return;
       }
       final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
-      Collections.sort((List<cgCache>)list,dstComparator);
+      Collections.sort(list,dstComparator);
     }
     notifyDataSetChanged();
   }

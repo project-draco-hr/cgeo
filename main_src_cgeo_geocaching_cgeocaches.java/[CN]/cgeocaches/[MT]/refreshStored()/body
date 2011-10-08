@@ -28,7 +28,7 @@
   }
 );
   waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-  int etaTime=(int)((detailTotal * 25) / 60);
+  int etaTime=((detailTotal * 25) / 60);
   if (etaTime < 1) {
     waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
   }

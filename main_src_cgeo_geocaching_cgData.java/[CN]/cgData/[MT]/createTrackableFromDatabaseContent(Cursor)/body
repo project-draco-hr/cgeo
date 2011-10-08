@@ -1,9 +1,9 @@
 {
   cgTrackable trackable=new cgTrackable();
-  trackable.geocode=(String)cursor.getString(cursor.getColumnIndex("tbcode"));
-  trackable.guid=(String)cursor.getString(cursor.getColumnIndex("guid"));
-  trackable.name=(String)cursor.getString(cursor.getColumnIndex("title"));
-  trackable.owner=(String)cursor.getString(cursor.getColumnIndex("owner"));
+  trackable.geocode=cursor.getString(cursor.getColumnIndex("tbcode"));
+  trackable.guid=cursor.getString(cursor.getColumnIndex("guid"));
+  trackable.name=cursor.getString(cursor.getColumnIndex("title"));
+  trackable.owner=cursor.getString(cursor.getColumnIndex("owner"));
   String releasedPre=cursor.getString(cursor.getColumnIndex("released"));
   if (releasedPre != null && Long.getLong(releasedPre) != null) {
     trackable.released=new Date(Long.getLong(releasedPre));
@@ -11,8 +11,8 @@
  else {
     trackable.released=null;
   }
-  trackable.goal=(String)cursor.getString(cursor.getColumnIndex("goal"));
-  trackable.details=(String)cursor.getString(cursor.getColumnIndex("description"));
+  trackable.goal=cursor.getString(cursor.getColumnIndex("goal"));
+  trackable.details=cursor.getString(cursor.getColumnIndex("description"));
   trackable.logs=loadLogs(trackable.geocode);
   return trackable;
 }

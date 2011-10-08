@@ -9,7 +9,7 @@
     ContentValues values=new ContentValues();
     values.put("title",name);
     values.put("updated",System.currentTimeMillis());
-    count=(int)databaseRW.update(dbTableLists,values,"_id = " + (listId - 10),null);
+    count=databaseRW.update(dbTableLists,values,"_id = " + (listId - 10),null);
     databaseRW.setTransactionSuccessful();
   }
   finally {

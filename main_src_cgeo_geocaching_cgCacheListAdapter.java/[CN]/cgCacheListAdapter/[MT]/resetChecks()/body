@@ -16,10 +16,5 @@
   }
   setSelectMode(false,false);
   notifyDataSetChanged();
-  if (cleared > 0 || status) {
-    return true;
-  }
- else {
-    return false;
-  }
+  return cleared > 0 || status;
 }
