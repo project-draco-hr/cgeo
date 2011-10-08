@@ -3,32 +3,15 @@
     return null;
   }
   final List<cgTrackableLog> trackables=new ArrayList<cgTrackableLog>();
-  int startPos=-1;
-  int endPos=-1;
-  startPos=page.indexOf("<table id=\"tblTravelBugs\"");
-  if (startPos == -1) {
-    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: ID \"tblTravelBugs\" not found on page");
-    return null;
+  String table=StringUtils.substringBetween(page,"<table id=\"tblTravelBugs\"","</table>");
+  if (StringUtils.isBlank(table)) {
+    return trackables;
   }
-  page=page.substring(startPos);
-  endPos=page.indexOf("</table>");
-  if (endPos == -1) {
-    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: end of ID \"tblTravelBugs\" not found on page");
-    return null;
-  }
-  page=page.substring(0,endPos);
-  startPos=page.indexOf("<tbody>");
-  if (startPos == -1) {
+  table=StringUtils.substringBetween(table,"<tbody>","</tbody>");
+  if (StringUtils.isBlank(table)) {
     Log.e(Settings.tag,"cgeoBase.parseTrackableLog: tbody not found on page");
     return null;
   }
-  page=page.substring(startPos);
-  endPos=page.indexOf("</tbody>");
-  if (endPos == -1) {
-    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: end of tbody not found on page");
-    return null;
-  }
-  page=page.substring(0,endPos);
   final Pattern trackablePattern=Pattern.compile("<tr id=\"ctl00_ContentBody_LogBookPanel1_uxTrackables_repTravelBugs_ctl[0-9]+_row\"[^>]*>" + "[^<]*<td>[^<]*<a href=\"[^\"]+\">([A-Z0-9]+)</a>[^<]*</td>[^<]*<td>([^<]+)</td>[^<]*<td>" + "[^<]*<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$uxTrackables\\$repTravelBugs\\$ctl([0-9]+)\\$ddlAction\"[^>]*>"+ "([^<]*<option value=\"([0-9]+)(_[a-z]+)?\">[^<]+</option>)+"+ "[^<]*</select>[^<]*</td>[^<]*</tr>",Pattern.CASE_INSENSITIVE);
   final Matcher trackableMatcher=trackablePattern.matcher(page);
   while (trackableMatcher.find()) {

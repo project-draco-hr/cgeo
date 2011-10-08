@@ -1,0 +1,8 @@
+{
+  List<cgTrackableLog> tbLogs=cgBase.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
+  assertNotNull(tbLogs);
+  assertEquals(2,tbLogs.size());
+  cgTrackableLog log=tbLogs.get(0);
+  assertEquals("Steffen's Kaiserwagen",log.name);
+  assertEquals("1QG1EE",log.trackCode);
+}
