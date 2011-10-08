@@ -198,8 +198,8 @@
           while (matcherInventoryInside.find()) {
             if (matcherInventoryInside.groupCount() > 0) {
               final cgTrackable inventoryItem=new cgTrackable();
-              inventoryItem.guid=matcherInventoryInside.group(1);
-              inventoryItem.name=matcherInventoryInside.group(2);
+              inventoryItem.setGuid(matcherInventoryInside.group(1));
+              inventoryItem.setName(matcherInventoryInside.group(2));
               cache.inventory.add(inventoryItem);
               cache.inventoryItems++;
             }

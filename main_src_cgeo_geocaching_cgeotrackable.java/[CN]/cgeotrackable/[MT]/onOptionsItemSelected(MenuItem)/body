@@ -4,7 +4,7 @@ case 1:
     logTouch();
   return true;
 case 2:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/track/details.aspx?tracker=" + trackable.geocode)));
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/track/details.aspx?tracker=" + trackable.getGeocode())));
 return true;
 }
 return false;
