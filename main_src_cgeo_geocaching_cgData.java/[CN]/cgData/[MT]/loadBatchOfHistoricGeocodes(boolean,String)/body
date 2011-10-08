@@ -18,7 +18,7 @@
         cursor.moveToFirst();
         int index=cursor.getColumnIndex("geocode");
         do {
-          geocodes.add((String)cursor.getString(index));
+          geocodes.add(cursor.getString(index));
         }
  while (cursor.moveToNext());
       }

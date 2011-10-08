@@ -6,11 +6,11 @@
   if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
     try {
       if (statComparator != null) {
-        Collections.sort((List<cgCache>)list,statComparator);
+        Collections.sort(list,statComparator);
       }
  else {
         final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
-        Collections.sort((List<cgCache>)list,dstComparator);
+        Collections.sort(list,dstComparator);
       }
       notifyDataSetChanged();
     }
