@@ -41,7 +41,7 @@
       PointGeocachingDataWaypoint wp=new PointGeocachingDataWaypoint();
       wp.code=waypoint.geocode;
       wp.name=waypoint.name;
-      String locusWpId=toLocusId(WaypointType.FIND_BY_ID.get(waypoint.type));
+      String locusWpId=toLocusId(waypoint.typee);
       if (locusWpId != null) {
         wp.type=locusWpId;
       }

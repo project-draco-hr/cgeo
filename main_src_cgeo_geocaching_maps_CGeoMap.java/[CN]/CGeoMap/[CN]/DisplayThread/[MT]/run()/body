@@ -24,10 +24,10 @@
             if (oneWaypoint.coords == null) {
               continue;
             }
-            items.add(getItem(new cgCoord(oneWaypoint),false,oneWaypoint.type,false,false,false));
+            items.add(getWaypointItem(new cgCoord(oneWaypoint),oneWaypoint.typee));
           }
         }
-        items.add(getItem(new cgCoord(cacheOne),true,cacheOne.type,cacheOne.own,cacheOne.found,cacheOne.disabled));
+        items.add(getCacheItem(new cgCoord(cacheOne),cacheOne.type,cacheOne.own,cacheOne.found,cacheOne.disabled));
       }
       overlayCaches.updateItems(items);
       displayHandler.sendEmptyMessage(1);

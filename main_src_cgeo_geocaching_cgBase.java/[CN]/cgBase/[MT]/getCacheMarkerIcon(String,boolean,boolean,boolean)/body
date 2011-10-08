@@ -1,0 +1,29 @@
+{
+  fillIconsMap();
+  int icon=-1;
+  String iconTxt=null;
+  if (StringUtils.isNotBlank(type)) {
+    if (own) {
+      iconTxt=type + "-own";
+    }
+ else     if (found) {
+      iconTxt=type + "-found";
+    }
+ else     if (disabled) {
+      iconTxt=type + "-disabled";
+    }
+ else {
+      iconTxt=type;
+    }
+  }
+ else {
+    iconTxt="traditional";
+  }
+  if (gcIcons.containsKey(iconTxt)) {
+    icon=gcIcons.get(iconTxt);
+  }
+ else {
+    icon=gcIcons.get("traditional");
+  }
+  return icon;
+}

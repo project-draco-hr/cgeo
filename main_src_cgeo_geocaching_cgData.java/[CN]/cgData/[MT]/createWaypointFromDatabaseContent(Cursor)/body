@@ -2,7 +2,7 @@
   cgWaypoint waypoint=new cgWaypoint();
   waypoint.id=(int)cursor.getInt(cursor.getColumnIndex("_id"));
   waypoint.geocode=(String)cursor.getString(cursor.getColumnIndex("geocode"));
-  waypoint.type=(String)cursor.getString(cursor.getColumnIndex("type"));
+  waypoint.typee=WaypointType.FIND_BY_ID.get((String)cursor.getString(cursor.getColumnIndex("type")));
   waypoint.setPrefix((String)cursor.getString(cursor.getColumnIndex("prefix")));
   waypoint.lookup=(String)cursor.getString(cursor.getColumnIndex("lookup"));
   waypoint.name=(String)cursor.getString(cursor.getColumnIndex("name"));
