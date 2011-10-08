@@ -4,5 +4,8 @@
     final String removeColon=input.substring(0,input.length() - 3) + input.substring(input.length() - 2);
     return formatTimezone.parse(removeColon);
   }
+  if (input.contains(".")) {
+    return formatSimpleMilliSeconds.parse(input);
+  }
   return formatSimple.parse(input);
 }
