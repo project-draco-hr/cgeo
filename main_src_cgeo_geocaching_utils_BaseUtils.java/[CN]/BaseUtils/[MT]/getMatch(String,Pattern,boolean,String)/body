@@ -1,0 +1,10 @@
+{
+  final Matcher matcher=p.matcher(data);
+  if (matcher.find() && matcher.groupCount() >= 1) {
+    if (trim) {
+      return matcher.group(1).trim();
+    }
+    return new String(matcher.group(1));
+  }
+  return defaultValue;
+}

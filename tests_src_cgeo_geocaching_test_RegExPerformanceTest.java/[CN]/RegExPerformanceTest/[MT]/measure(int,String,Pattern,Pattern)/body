@@ -1,13 +1,10 @@
 {
   List<String> output=new ArrayList<String>();
   output.add(fieldName + ":");
-  List<MockedCache> cachesForParsing=new ArrayList<MockedCache>();
-  cachesForParsing.add(new GC2CJPF());
-  cachesForParsing.add(new GC1ZXX2());
-  for (  MockedCache cache : cachesForParsing) {
+  for (  MockedCache cache : MOCKED_CACHES) {
     String page=cache.getData();
-    String result1=BaseUtils.getMatch(page,p1,1,"");
-    String result2=BaseUtils.getMatch(page,p2,1,"");
+    String result1=BaseUtils.getMatch(page,p1,true,"");
+    String result2=BaseUtils.getMatch(page,p2,true,"");
     assertEquals(result1,result2);
     long diff1, diff2;
     output.add("Parsing " + cache.getGeocode() + " "+ cache.getName());

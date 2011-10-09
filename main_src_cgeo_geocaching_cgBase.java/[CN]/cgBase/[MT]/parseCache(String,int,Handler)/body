@@ -20,13 +20,14 @@
   }
   cache.disabled=page.contains("<li>This cache is temporarily unavailable.");
   cache.archived=page.contains("<li>This cache has been archived,");
-  cache.members=page.contains("<p class=\"Warning\">This is a Premium Member Only cache.</p>");
+  cache.members=BaseUtils.matches(page,GCConstants.PATTERN_MEMBERS);
+  cache.favourite=BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE);
   cache.reason=reason;
-  cache.geocode=BaseUtils.getMatch(page,Constants.PATTERN_GEOCODE,1,cache.geocode);
-  cache.cacheId=BaseUtils.getMatch(page,Constants.PATTERN_CACHEID,1,cache.cacheId);
-  cache.guid=BaseUtils.getMatch(page,Constants.PATTERN_GUID,1,cache.guid);
-  cache.name=Html.fromHtml(BaseUtils.getMatch(page,Constants.PATTERN_NAME,1,cache.name)).toString();
-  cache.ownerReal=URLDecoder.decode(BaseUtils.getMatch(page,Constants.PATTERN_OWNERREAL,1,cache.ownerReal));
+  cache.geocode=BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.geocode);
+  cache.cacheId=BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.cacheId);
+  cache.guid=BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.guid);
+  cache.name=BaseUtils.getMatch(page,GCConstants.PATTERN_NAME,true,cache.name);
+  cache.ownerReal=BaseUtils.getMatch(page,GCConstants.PATTERN_OWNERREAL,true,cache.ownerReal);
   final String username=Settings.getUsername();
   if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
     cache.own=true;
@@ -46,72 +47,31 @@
   }
   tableInside=tableInside.substring(0,pos);
   if (StringUtils.isNotBlank(tableInside)) {
-    String result=BaseUtils.getMatch(tableInside,Constants.PATTERN_TERRAIN,1,null);
+    String result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_TERRAIN,true,null);
     if (result != null) {
       cache.terrain=new Float(StringUtils.replaceChars(result,'_','.'));
     }
-    result=BaseUtils.getMatch(tableInside,Constants.PATTERN_DIFFICULTY,1,null);
+    result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_DIFFICULTY,true,null);
     if (result != null) {
       cache.difficulty=new Float(StringUtils.replaceChars(result,'_','.'));
     }
+    cache.owner=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER,false,cache.owner);
     try {
-      final Matcher matcherOwner=patternOwner.matcher(tableInside);
-      if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
-        cache.owner=Html.fromHtml(matcherOwner.group(2)).toString();
-      }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache owner");
-    }
-    try {
-      final Matcher matcherHidden=patternHidden.matcher(tableInside);
-      if (matcherHidden.find() && matcherHidden.groupCount() > 0) {
-        cache.hidden=parseGcCustomDate(matcherHidden.group(1));
+      cache.hidden=parseGcCustomDate(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null));
+      if (cache.hidden == null) {
+        cache.hidden=parseGcCustomDate(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null));
       }
     }
  catch (    ParseException e) {
-      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hidden date");
+      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hidden (event) date");
     }
-    if (cache.hidden == null) {
-      try {
-        final Matcher matcherHiddenEvent=patternHiddenEvent.matcher(tableInside);
-        if (matcherHiddenEvent.find() && matcherHiddenEvent.groupCount() > 0) {
-          cache.hidden=parseGcCustomDate(matcherHiddenEvent.group(1));
-        }
-      }
- catch (      ParseException e) {
-        Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache event date");
-      }
-    }
-    try {
-      final Matcher matcherFavourite=patternFavourite.matcher(tableInside);
-      if (matcherFavourite.find() && matcherFavourite.groupCount() > 0) {
-        cache.favouriteCnt=Integer.parseInt(matcherFavourite.group(1));
-      }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse favourite count");
-    }
-    cache.size=CacheSize.FIND_BY_ID.get(BaseUtils.getMatch(tableInside,Constants.PATTERN_SIZE,1,CacheSize.NOT_CHOSEN.id).toLowerCase());
+    cache.favouriteCnt=Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0"));
+    cache.size=CacheSize.FIND_BY_ID.get(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id).toLowerCase());
   }
-  cache.found=Constants.PATTERN_FOUND.matcher(page).find() || Constants.PATTERN_FOUND_ALTERNATIVE.matcher(page).find();
-  try {
-    final Matcher matcherType=patternType.matcher(page);
-    if (matcherType.find() && matcherType.groupCount() > 0) {
-      cache.type=cacheTypes.get(matcherType.group(1).toLowerCase());
-    }
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache type");
-  }
-  try {
-    final Matcher matcher=patternOnWatchlist.matcher(page);
-    cache.onWatchlist=matcher.find();
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse watchlist state");
-  }
-  cache.latlon=BaseUtils.getMatch(page,Constants.PATTERN_LATLON,1,cache.latlon);
+  cache.found=BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE);
+  cache.type=cacheTypes.get(BaseUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.type).toLowerCase());
+  cache.onWatchlist=BaseUtils.matches(page,GCConstants.PATTERN_WATCHLIST);
+  cache.latlon=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,cache.latlon);
   if (StringUtils.isNotEmpty(cache.latlon)) {
     try {
       cache.coords=new Geopoint(cache.latlon);
@@ -121,9 +81,9 @@
       Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache coordinates: " + e.toString());
     }
   }
-  cache.location=BaseUtils.getMatch(page,Constants.PATTERN_LOCATION,1,cache.location);
+  cache.location=BaseUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,cache.location);
   try {
-    final Matcher matcherHint=Constants.PATTERN_HINT.matcher(page);
+    final Matcher matcherHint=GCConstants.PATTERN_HINT.matcher(page);
     if (matcherHint.find() && matcherHint.group(1) != null) {
       String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(1)).replaceAll("\n");
       if (hint != null) {
@@ -135,14 +95,13 @@
     Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hint");
   }
   checkFields(cache);
-  cache.personalNote=BaseUtils.getMatch(page,Constants.PATTERN_PERSONALNOTE,1,cache.personalNote);
-  cache.shortdesc=BaseUtils.getMatch(page,Constants.PATTERN_SHORTDESC,1,cache.shortdesc);
-  cache.setDescription(BaseUtils.getMatch(page,Constants.PATTERN_DESC,1,""));
+  cache.personalNote=BaseUtils.getMatch(page,GCConstants.PATTERN_PERSONALNOTE,true,cache.personalNote);
+  cache.shortdesc=BaseUtils.getMatch(page,GCConstants.PATTERN_SHORTDESC,true,cache.shortdesc);
+  cache.setDescription(BaseUtils.getMatch(page,GCConstants.PATTERN_DESC,true,""));
   try {
-    final Matcher matcherAttributes=patternAttributes.matcher(page);
-    if (matcherAttributes.find() && matcherAttributes.groupCount() > 0) {
-      final String attributesPre=matcherAttributes.group(1);
-      final Matcher matcherAttributesInside=patternAttributesInside.matcher(attributesPre);
+    final String attributesPre=BaseUtils.getMatch(page,GCConstants.PATTERN_ATTRIBUTES,true,null);
+    if (null != attributesPre) {
+      final Matcher matcherAttributesInside=GCConstants.PATTERN_ATTRIBUTESINSIDE.matcher(attributesPre);
       while (matcherAttributesInside.find()) {
         if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
           if (cache.attributes == null) {
@@ -166,10 +125,10 @@
     Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache attributes");
   }
   try {
-    final Matcher matcherSpoilers=patternSpoilers.matcher(page);
-    if (matcherSpoilers.find()) {
+    final String spoilers=BaseUtils.getMatch(page,GCConstants.PATTERN_SPOILERS,false,null);
+    if (null != spoilers) {
       sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_spoilers);
-      final Matcher matcherSpoilersInside=patternSpoilersInside.matcher(matcherSpoilers.group(1));
+      final Matcher matcherSpoilersInside=GCConstants.PATTERN_SPOILERSINSIDE.matcher(spoilers);
       while (matcherSpoilersInside.find()) {
         final cgImage spoiler=new cgImage();
         spoiler.url=matcherSpoilersInside.group(1);
@@ -191,7 +150,7 @@
   }
   try {
     cache.inventoryItems=0;
-    final Matcher matcherInventory=patternInventory.matcher(page);
+    final Matcher matcherInventory=GCConstants.PATTERN_INVENTORY.matcher(page);
     if (matcherInventory.find()) {
       if (cache.inventory == null) {
         cache.inventory=new ArrayList<cgTrackable>();
@@ -199,7 +158,7 @@
       if (matcherInventory.groupCount() > 1) {
         final String inventoryPre=matcherInventory.group(2);
         if (StringUtils.isNotBlank(inventoryPre)) {
-          final Matcher matcherInventoryInside=patternInventoryInside.matcher(inventoryPre);
+          final Matcher matcherInventoryInside=GCConstants.PATTERN_INVENTORYINSIDE.matcher(inventoryPre);
           while (matcherInventoryInside.find()) {
             if (matcherInventoryInside.groupCount() > 0) {
               final cgTrackable inventoryItem=new cgTrackable();
@@ -217,9 +176,9 @@
     Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache inventory (2)");
   }
   try {
-    final Matcher matcherLogCounts=patternCountLogs.matcher(page);
-    if (matcherLogCounts.find()) {
-      final Matcher matcherLog=patternCountLog.matcher(matcherLogCounts.group(1));
+    final String countlogs=BaseUtils.getMatch(page,GCConstants.PATTERN_COUNTLOGS,true,null);
+    if (null != countlogs) {
+      final Matcher matcherLog=GCConstants.PATTERN_COUNTLOG.matcher(countlogs);
       while (matcherLog.find()) {
         String typeStr=matcherLog.group(1);
         String countStr=matcherLog.group(2).replaceAll("[.,]","");

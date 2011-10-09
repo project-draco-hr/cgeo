@@ -4,55 +4,15 @@
     return null;
   }
   final cgTrackable trackable=new cgTrackable();
-  try {
-    final Matcher matcherGeocode=PATTERN_TRACKABLE_Geocode.matcher(page);
-    if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
-      trackable.setGeocode(matcherGeocode.group(1).trim().toUpperCase());
-    }
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable geocode");
-  }
-  try {
-    final Matcher matcherTrackableId=PATTERN_TRACKABLE_TrackableId.matcher(page);
-    if (matcherTrackableId.find() && matcherTrackableId.groupCount() > 0) {
-      trackable.setGuid(matcherTrackableId.group(1).trim());
-    }
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable id");
-  }
-  try {
-    final Matcher matcherTrackableIcon=PATTERN_TRACKABLE_Icon.matcher(page);
-    if (matcherTrackableIcon.find() && matcherTrackableIcon.groupCount() > 0) {
-      trackable.setIconUrl(matcherTrackableIcon.group(1).trim());
-    }
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable icon");
-  }
-  try {
-    final Matcher matcherName=PATTERN_TRACKABLE_Name.matcher(page);
-    if (matcherName.find() && matcherName.groupCount() > 1) {
-      trackable.setName(matcherName.group(2).trim());
-    }
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable name");
-  }
+  trackable.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()).toUpperCase());
+  trackable.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ID,true,trackable.getGuid()));
+  trackable.setIconUrl(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ICON,true,trackable.getIconUrl()));
+  trackable.setName(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,true,trackable.getName()));
   if (StringUtils.isNotBlank(trackable.getName())) {
-    try {
-      final Matcher matcherType=PATTERN_TRACKABLE_Type.matcher(page);
-      if (matcherType.find() && matcherType.groupCount() > 0) {
-        trackable.setType(matcherType.group(1).trim());
-      }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable type");
-    }
+    trackable.setType(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_TYPE,true,trackable.getType()));
   }
   try {
-    final Matcher matcherOwner=PATTERN_TRACKABLE_Owner.matcher(page);
+    final Matcher matcherOwner=GCConstants.PATTERN_TRACKABLE_OWNER.matcher(page);
     if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
       trackable.setOwnerGuid(matcherOwner.group(1));
       trackable.setOwner(matcherOwner.group(2).trim());
@@ -61,34 +21,24 @@
  catch (  Exception e) {
     Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable owner name");
   }
+  trackable.setOrigin(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ORIGIN,true,trackable.getOrigin()));
   try {
-    final Matcher matcherOrigin=PATTERN_TRACKABLE_Origin.matcher(page);
-    if (matcherOrigin.find() && matcherOrigin.groupCount() > 0) {
-      trackable.setOrigin(matcherOrigin.group(1).trim());
-    }
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable origin");
-  }
-  try {
-    final Matcher matcherSpottedCache=PATTERN_TRACKABLE_SpottedCache.matcher(page);
+    final Matcher matcherSpottedCache=GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE.matcher(page);
     if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
       trackable.setSpottedGuid(matcherSpottedCache.group(1));
       trackable.setSpottedName(matcherSpottedCache.group(2).trim());
       trackable.setSpottedType(cgTrackable.SPOTTED_CACHE);
     }
-    final Matcher matcherSpottedUser=PATTERN_TRACKABLE_SpottedUser.matcher(page);
+    final Matcher matcherSpottedUser=GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER.matcher(page);
     if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
       trackable.setSpottedGuid(matcherSpottedUser.group(1));
       trackable.setSpottedName(matcherSpottedUser.group(2).trim());
       trackable.setSpottedType(cgTrackable.SPOTTED_USER);
     }
-    final Matcher matcherSpottedUnknown=PATTERN_TRACKABLE_SpottedUnknown.matcher(page);
-    if (matcherSpottedUnknown.find()) {
+    if (BaseUtils.matches(page,GCConstants.PATTERN_TRACKABLE_SPOTTEDUNKNOWN)) {
       trackable.setSpottedType(cgTrackable.SPOTTED_UNKNOWN);
     }
-    final Matcher matcherSpottedOwner=PATTERN_TRACKABLE_SpottedOwner.matcher(page);
-    if (matcherSpottedOwner.find()) {
+    if (BaseUtils.matches(page,GCConstants.PATTERN_TRACKABLE_SPOTTEDOWNER)) {
       trackable.setSpottedType(cgTrackable.SPOTTED_OWNER);
     }
   }
@@ -96,53 +46,24 @@
     Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable last known place");
   }
   try {
-    final Matcher matcherReleased=PATTERN_TRACKABLE_Released.matcher(page);
-    if (matcherReleased.find() && matcherReleased.groupCount() > 0 && matcherReleased.group(1) != null) {
-      try {
-        if (trackable.getReleased() == null) {
-          trackable.setReleased(dateTbIn1.parse(matcherReleased.group(1)));
-        }
-      }
- catch (      Exception e) {
-      }
-      try {
-        if (trackable.getReleased() == null) {
-          trackable.setReleased(dateTbIn2.parse(matcherReleased.group(1)));
-        }
-      }
- catch (      Exception e) {
-      }
+    trackable.setReleased(dateTbIn1.parse(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null)));
+    if (trackable.getReleased() == null) {
+      trackable.setReleased(dateTbIn2.parse(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null)));
     }
   }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable released date");
+ catch (  ParseException e1) {
+    trackable.setReleased(null);
   }
   try {
-    final Matcher matcherDistance=PATTERN_TRACKABLE_Distance.matcher(page);
-    if (matcherDistance.find() && matcherDistance.groupCount() > 0) {
-      try {
-        trackable.setDistance(DistanceParser.parseDistance(matcherDistance.group(1),Settings.isUseMetricUnits()));
-      }
- catch (      NumberFormatException e) {
-        trackable.setDistance(null);
-        throw e;
-      }
-    }
+    trackable.setDistance(DistanceParser.parseDistance(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_DISTANCE,false,null),Settings.isUseMetricUnits()));
   }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable distance");
+ catch (  NumberFormatException e) {
+    trackable.setDistance(null);
+    throw e;
   }
+  trackable.setGoal(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GOAL,true,trackable.getGoal()));
   try {
-    final Matcher matcherGoal=PATTERN_TRACKABLE_GOAL.matcher(page);
-    if (matcherGoal.find() && matcherGoal.groupCount() > 0) {
-      trackable.setGoal(matcherGoal.group(1).trim());
-    }
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable goal");
-  }
-  try {
-    final Matcher matcherDetailsImage=PATTERN_TRACKABLE_DETAILSIMAGE.matcher(page);
+    final Matcher matcherDetailsImage=GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE.matcher(page);
     if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
       final String image=matcherDetailsImage.group(3).trim();
       final String details=matcherDetailsImage.group(4).trim();
@@ -158,7 +79,7 @@
     Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable details & image");
   }
   try {
-    final Matcher matcherLogs=PATTERN_TRACKABLE_Log.matcher(page);
+    final Matcher matcherLogs=GCConstants.PATTERN_TRACKABLE_LOG.matcher(page);
     while (matcherLogs.find()) {
       final cgLog logDone=new cgLog();
       if (logTypes.containsKey(matcherLogs.group(1).toLowerCase())) {
