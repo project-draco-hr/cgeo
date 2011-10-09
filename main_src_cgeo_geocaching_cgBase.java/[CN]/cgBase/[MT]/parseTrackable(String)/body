@@ -144,14 +144,15 @@
   try {
     final Matcher matcherDetailsImage=PATTERN_TRACKABLE_DetailsImage.matcher(page);
     if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
-      final String image=matcherDetailsImage.group(3);
-      final String details=matcherDetailsImage.group(4);
+      final String image=matcherDetailsImage.group(3).trim();
+      final String details=matcherDetailsImage.group(4).trim();
       if (image != null) {
         trackable.image=image;
       }
       if (details != null) {
-        trackable.details=details;
+        trackable.details=details.equals("No additional details available.") ? null : details;
       }
+      Log.d(Settings.tag,"Details: " + details);
     }
   }
  catch (  Exception e) {
