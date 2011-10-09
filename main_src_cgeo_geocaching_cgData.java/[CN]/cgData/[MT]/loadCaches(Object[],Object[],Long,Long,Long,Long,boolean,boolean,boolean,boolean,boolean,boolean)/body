@@ -83,8 +83,8 @@
         do {
           cgCache cache=createCacheFromDatabaseContent(cursor);
           if (loadA) {
-            List<String> attributes=loadAttributes(cache.geocode);
-            if (attributes != null && !attributes.isEmpty()) {
+            final List<String> attributes=loadAttributes(cache.geocode);
+            if (CollectionUtils.isNotEmpty(attributes)) {
               if (cache.attributes == null) {
                 cache.attributes=new ArrayList<String>();
               }
@@ -95,8 +95,8 @@
             }
           }
           if (loadW) {
-            List<cgWaypoint> waypoints=loadWaypoints(cache.geocode);
-            if (waypoints != null && !waypoints.isEmpty()) {
+            final List<cgWaypoint> waypoints=loadWaypoints(cache.geocode);
+            if (CollectionUtils.isNotEmpty(waypoints)) {
               if (cache.waypoints == null) {
                 cache.waypoints=new ArrayList<cgWaypoint>();
               }
@@ -107,8 +107,8 @@
             }
           }
           if (loadS) {
-            List<cgImage> spoilers=loadSpoilers(cache.geocode);
-            if (spoilers != null && !spoilers.isEmpty()) {
+            final List<cgImage> spoilers=loadSpoilers(cache.geocode);
+            if (CollectionUtils.isNotEmpty(spoilers)) {
               if (cache.spoilers == null) {
                 cache.spoilers=new ArrayList<cgImage>();
               }
@@ -119,8 +119,8 @@
             }
           }
           if (loadL) {
-            List<cgLog> logs=loadLogs(cache.geocode);
-            if (logs != null && !logs.isEmpty()) {
+            final List<cgLog> logs=loadLogs(cache.geocode);
+            if (CollectionUtils.isNotEmpty(logs)) {
               if (cache.logs == null) {
                 cache.logs=new ArrayList<cgLog>();
               }
@@ -129,15 +129,15 @@
               }
               cache.logs.addAll(logs);
             }
-            Map<Integer,Integer> logCounts=loadLogCounts(cache.geocode);
-            if (logCounts != null && !logCounts.isEmpty()) {
+            final Map<Integer,Integer> logCounts=loadLogCounts(cache.geocode);
+            if (MapUtils.isNotEmpty(logCounts)) {
               cache.logCounts.clear();
               cache.logCounts.putAll(logCounts);
             }
           }
           if (loadI) {
-            List<cgTrackable> inventory=loadInventory(cache.geocode);
-            if (inventory != null && !inventory.isEmpty()) {
+            final List<cgTrackable> inventory=loadInventory(cache.geocode);
+            if (CollectionUtils.isNotEmpty(inventory)) {
               if (cache.inventory == null) {
                 cache.inventory=new ArrayList<cgTrackable>();
               }

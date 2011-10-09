@@ -73,7 +73,7 @@
       statusOk=false;
     }
   }
-  if (cache.logCounts != null && !cache.logCounts.isEmpty()) {
+  if (MapUtils.isNotEmpty(cache.logCounts)) {
     if (!saveLogCount(cache.geocode,cache.logCounts)) {
       statusOk=false;
     }

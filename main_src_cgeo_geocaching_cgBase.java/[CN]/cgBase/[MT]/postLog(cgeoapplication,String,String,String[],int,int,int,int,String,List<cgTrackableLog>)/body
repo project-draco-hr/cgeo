@@ -33,7 +33,7 @@
   }
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","__LASTFOCUS","","ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged",String.format("%02d",month) + "/" + String.format("%02d",day)+ "/"+ String.format("%04d",year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo,"ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry","ctl00$ContentBody$uxVistOtherListingGC","");
   setViewstates(viewstates,params);
-  if (trackables != null && !trackables.isEmpty()) {
+  if (CollectionUtils.isNotEmpty(trackables)) {
     final StringBuilder hdnSelected=new StringBuilder();
     for (    cgTrackableLog tb : trackables) {
       final String action=Integer.toString(tb.id) + logTypesTrackableAction.get(tb.action);
@@ -77,7 +77,7 @@
       params.put("ctl00$ContentBody$LogBookPanel1$btnConfirm","Yes");
       params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo);
       params.put("ctl00$ContentBody$uxVistOtherListingGC","");
-      if (trackables != null && !trackables.isEmpty()) {
+      if (CollectionUtils.isNotEmpty(trackables)) {
         final StringBuilder hdnSelected=new StringBuilder();
         for (        cgTrackableLog tb : trackables) {
           String ctl=null;

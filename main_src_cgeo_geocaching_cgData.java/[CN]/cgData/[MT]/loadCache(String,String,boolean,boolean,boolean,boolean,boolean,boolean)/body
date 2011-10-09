@@ -14,7 +14,7 @@
     guids=null;
   }
   List<cgCache> caches=loadCaches(geocodes,null,null,null,null,null,loadA,loadW,loadS,loadL,loadI,loadO);
-  if (caches != null && !caches.isEmpty()) {
+  if (CollectionUtils.isNotEmpty(caches)) {
     return caches.get(0);
   }
   return null;

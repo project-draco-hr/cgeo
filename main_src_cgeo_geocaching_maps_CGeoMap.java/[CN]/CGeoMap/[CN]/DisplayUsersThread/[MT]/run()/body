@@ -2,7 +2,7 @@
   try {
     stop=false;
     working=true;
-    if (mapView == null || users == null || users.isEmpty()) {
+    if (mapView == null || CollectionUtils.isEmpty(users)) {
       return;
     }
     List<OtherCachersOverlayItemImpl> items=new ArrayList<OtherCachersOverlayItemImpl>();

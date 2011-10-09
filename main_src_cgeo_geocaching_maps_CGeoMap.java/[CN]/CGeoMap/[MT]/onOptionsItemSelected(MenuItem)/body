@@ -10,7 +10,7 @@
     searchIdIntent=null;
   }
  else   if (id == MENU_STORE_CACHES) {
-    if (live && !isLoading() && caches != null && !caches.isEmpty()) {
+    if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
       final List<String> geocodes=new ArrayList<String>();
       List<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
       try {

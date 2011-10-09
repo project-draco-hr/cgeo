@@ -32,7 +32,7 @@
         if (addList == null) {
           addList=(LinearLayout)findViewById(R.id.address_list);
         }
-        if (addresses == null || addresses.isEmpty()) {
+        if (CollectionUtils.isEmpty(addresses)) {
           showToast(res.getString(R.string.err_search_address_no_match));
           finish();
           return;

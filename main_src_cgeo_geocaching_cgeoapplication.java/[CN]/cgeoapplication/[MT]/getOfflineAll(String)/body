@@ -1,11 +1,4 @@
 {
-  cgSearch search=new cgSearch();
-  List<String> geocodes=getStorage().getOfflineAll(cachetype);
-  if (geocodes != null && !geocodes.isEmpty()) {
-    for (    String gccode : geocodes) {
-      search.addGeocode(gccode);
-    }
-  }
-  searches.put(search.getCurrentId(),search);
-  return search.getCurrentId();
+  final List<String> geocodes=getStorage().getOfflineAll(cachetype);
+  return createNewSearch(geocodes).getCurrentId();
 }
