@@ -217,11 +217,11 @@
         if (inventoryString.length() > 0) {
           inventoryString.append('\n');
         }
-        if (containsHtml(inventoryItem.name)) {
-          inventoryString.append(Html.fromHtml(inventoryItem.name).toString());
+        if (containsHtml(inventoryItem.getName())) {
+          inventoryString.append(Html.fromHtml(inventoryItem.getName()).toString());
         }
  else {
-          inventoryString.append(inventoryItem.name);
+          inventoryString.append(inventoryItem.getName());
         }
       }
       inventView.setText(inventoryString);

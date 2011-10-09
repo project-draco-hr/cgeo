@@ -2,7 +2,7 @@
   try {
     if (cache != null && cache.inventory != null && cache.inventory.size() == 1) {
       cgTrackable trackable=cache.inventory.get(0);
-      cgeotrackable.startActivity(cgeodetail.this,trackable.guid,trackable.geocode,trackable.name);
+      cgeotrackable.startActivity(cgeodetail.this,trackable.getGuid(),trackable.getGeocode(),trackable.getName());
     }
  else {
       Intent trackablesIntent=new Intent(cgeodetail.this,cgeotrackables.class);

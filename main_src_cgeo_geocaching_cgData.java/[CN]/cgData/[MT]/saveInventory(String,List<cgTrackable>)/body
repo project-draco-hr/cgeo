@@ -17,20 +17,20 @@
           values.put("geocode",geocode);
         }
         values.put("updated",timeStamp);
-        values.put("tbcode",oneTrackable.geocode);
-        values.put("guid",oneTrackable.guid);
-        values.put("title",oneTrackable.name);
-        values.put("owner",oneTrackable.owner);
-        if (oneTrackable.released != null) {
-          values.put("released",oneTrackable.released.getTime());
+        values.put("tbcode",oneTrackable.getGeocode());
+        values.put("guid",oneTrackable.getGuid());
+        values.put("title",oneTrackable.getName());
+        values.put("owner",oneTrackable.getOwner());
+        if (oneTrackable.getReleased() != null) {
+          values.put("released",oneTrackable.getReleased().getTime());
         }
  else {
           values.put("released",0L);
         }
-        values.put("goal",oneTrackable.goal);
-        values.put("description",oneTrackable.details);
+        values.put("goal",oneTrackable.getGoal());
+        values.put("description",oneTrackable.getDetails());
         databaseRW.insert(dbTableTrackables,null,values);
-        saveLogs(oneTrackable.geocode,oneTrackable.logs);
+        saveLogs(oneTrackable.getGeocode(),oneTrackable.getLogs());
       }
     }
     databaseRW.setTransactionSuccessful();

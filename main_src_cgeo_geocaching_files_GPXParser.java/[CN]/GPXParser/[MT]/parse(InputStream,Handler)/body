@@ -273,7 +273,7 @@
         trackable=new cgTrackable();
         try {
           if (attrs.getIndex("ref") > -1) {
-            trackable.geocode=attrs.getValue("ref").toUpperCase();
+            trackable.setGeocode(attrs.getValue("ref").toUpperCase());
           }
         }
  catch (        Exception e) {
@@ -284,7 +284,7 @@
     final Element gcTB=gcTBs.getChild(nsGC,"travelbug");
     gcTB.setEndElementListener(new EndElementListener(){
       @Override public void end(){
-        if (StringUtils.isNotBlank(trackable.geocode) && StringUtils.isNotBlank(trackable.name)) {
+        if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
           if (cache.inventory == null) {
             cache.inventory=new ArrayList<cgTrackable>();
           }
@@ -295,7 +295,7 @@
 );
     gcTB.getChild(nsGC,"name").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String tbName){
-        trackable.name=validate(tbName);
+        trackable.setName(validate(tbName));
       }
     }
 );
