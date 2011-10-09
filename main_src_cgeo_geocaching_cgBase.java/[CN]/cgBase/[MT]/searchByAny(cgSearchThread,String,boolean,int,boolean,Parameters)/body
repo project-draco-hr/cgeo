@@ -16,7 +16,7 @@
     Log.e(Settings.tag,"cgeoBase.searchByAny: No application found");
     return null;
   }
-  List<cgCache> cacheList=processSearchResults(search,caches,Settings.isExcludeDisabledCaches(),false,null);
+  List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),false,null);
   app.addSearch(search,cacheList,true,reason);
   return search.getCurrentId();
 }

@@ -10,8 +10,9 @@
     search.viewstates=caches.viewstates;
     search.totalCnt=caches.totalCnt;
     if (CollectionUtils.isNotEmpty(caches.cacheList)) {
-      for (      cgCache cache : caches.cacheList) {
-        if ((!excludeDisabled || (excludeDisabled && cache.disabled == false)) && (!excludeMine || (excludeMine && cache.own == false)) && (!excludeMine || (excludeMine && cache.found == false))&& (cacheType == null || (cacheType.equals(cache.type)))) {
+      for (      final cgCache cache : caches.cacheList) {
+        final boolean excludeCache=(excludeDisabled && cache.disabled) || (excludeMine && (cache.own || cache.found)) || (cacheType != null && !cacheType.equals(cache.type));
+        if (!excludeCache) {
           search.addGeocode(cache.geocode);
           cacheList.add(cache);
         }
