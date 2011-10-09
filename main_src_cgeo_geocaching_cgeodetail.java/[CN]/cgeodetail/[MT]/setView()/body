@@ -7,9 +7,7 @@
   }
   cache=app.getCache(searchId);
   if (cache == null) {
-    if (waitDialog != null && waitDialog.isShowing()) {
-      waitDialog.dismiss();
-    }
+    Progress.dismiss();
     if (StringUtils.isNotBlank(geocode)) {
       showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
     }
@@ -375,10 +373,7 @@
  catch (  Exception e) {
     Log.e(Settings.tag,"cgeodetail.setView: " + e.toString());
   }
-  if (waitDialog != null && waitDialog.isShowing())   waitDialog.dismiss();
-  if (storeDialog != null && storeDialog.isShowing())   storeDialog.dismiss();
-  if (dropDialog != null && dropDialog.isShowing())   dropDialog.dismiss();
-  if (refreshDialog != null && refreshDialog.isShowing())   refreshDialog.dismiss();
+  Progress.dismiss();
   displayLogs();
   IConnector connector=ConnectorFactory.getConnector(cache);
   if (connector != null) {

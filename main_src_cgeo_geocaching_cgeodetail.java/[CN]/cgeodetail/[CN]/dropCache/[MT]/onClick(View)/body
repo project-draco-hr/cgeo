@@ -1,14 +1,9 @@
 {
-  if (storeDialog != null && storeDialog.isShowing()) {
-    showToast(res.getString(R.string.err_detail_still_saving));
+  if (Progress.isShowing()) {
+    showToast(res.getString(R.string.err_detail_still_working));
     return;
   }
-  if (refreshDialog != null && refreshDialog.isShowing()) {
-    showToast(res.getString(R.string.err_detail_still_refreshing));
-    return;
-  }
-  dropDialog=ProgressDialog.show(cgeodetail.this,res.getString(R.string.cache_dialog_offline_drop_title),res.getString(R.string.cache_dialog_offline_drop_message),true);
-  dropDialog.setCancelable(false);
+  Progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_offline_drop_title),res.getString(R.string.cache_dialog_offline_drop_message),true,false);
   Thread thread=new dropCacheThread(dropCacheHandler);
   thread.start();
 }
