@@ -1,7 +1,7 @@
 {
   cgSearch search=new cgSearch();
   List<String> geocodes=getStorage().getStoredInViewport(centerLat,centerLon,spanLat,spanLon,cachetype);
-  if (geocodes != null && geocodes.isEmpty() == false) {
+  if (geocodes != null && !geocodes.isEmpty()) {
     for (    String gccode : geocodes) {
       search.addGeocode(gccode);
     }

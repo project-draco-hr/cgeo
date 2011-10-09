@@ -75,19 +75,19 @@
   }
  else {
     holder.checkbox.setChecked(false);
-    if (cache.statusCheckedView == false) {
-      holder.oneInfo.clearAnimation();
+    if (cache.statusCheckedView) {
+      moveLeft(holder,cache,false);
     }
  else {
-      moveLeft(holder,cache,false);
+      holder.oneInfo.clearAnimation();
     }
   }
   holder.checkbox.setOnClickListener(new checkBoxListener(cache));
-  if (distances.contains(holder.distance) == false) {
+  if (!distances.contains(holder.distance)) {
     distances.add(holder.distance);
   }
   holder.distance.setContent(base,cache.coords);
-  if (compasses.contains(holder.direction) == false) {
+  if (!compasses.contains(holder.direction)) {
     compasses.add(holder.direction);
   }
   holder.direction.setContent(cache.coords);

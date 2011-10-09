@@ -1,6 +1,6 @@
 {
   for (  cgCache cache : cacheList) {
-    if (checked > 0 && cache.statusChecked == false) {
+    if (checked > 0 && !cache.statusChecked) {
       handler.sendEmptyMessage(0);
       yield();
       continue;

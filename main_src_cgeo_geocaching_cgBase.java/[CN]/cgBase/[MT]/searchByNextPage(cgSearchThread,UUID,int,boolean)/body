@@ -13,7 +13,7 @@
   final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
   setViewstates(viewstates,params);
   String page=getResponseData(postRequest(uri,params));
-  if (checkLogin(page) == false) {
+  if (!checkLogin(page)) {
     final StatusCode loginState=login();
     if (loginState == StatusCode.NO_ERROR) {
       page=getResponseData(postRequest(uri,params));

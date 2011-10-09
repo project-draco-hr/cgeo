@@ -84,7 +84,7 @@
           cgCache cache=createCacheFromDatabaseContent(cursor);
           if (loadA) {
             List<String> attributes=loadAttributes(cache.geocode);
-            if (attributes != null && attributes.isEmpty() == false) {
+            if (attributes != null && !attributes.isEmpty()) {
               if (cache.attributes == null) {
                 cache.attributes=new ArrayList<String>();
               }
@@ -96,7 +96,7 @@
           }
           if (loadW) {
             List<cgWaypoint> waypoints=loadWaypoints(cache.geocode);
-            if (waypoints != null && waypoints.isEmpty() == false) {
+            if (waypoints != null && !waypoints.isEmpty()) {
               if (cache.waypoints == null) {
                 cache.waypoints=new ArrayList<cgWaypoint>();
               }
@@ -108,7 +108,7 @@
           }
           if (loadS) {
             List<cgImage> spoilers=loadSpoilers(cache.geocode);
-            if (spoilers != null && spoilers.isEmpty() == false) {
+            if (spoilers != null && !spoilers.isEmpty()) {
               if (cache.spoilers == null) {
                 cache.spoilers=new ArrayList<cgImage>();
               }
@@ -120,7 +120,7 @@
           }
           if (loadL) {
             List<cgLog> logs=loadLogs(cache.geocode);
-            if (logs != null && logs.isEmpty() == false) {
+            if (logs != null && !logs.isEmpty()) {
               if (cache.logs == null) {
                 cache.logs=new ArrayList<cgLog>();
               }
@@ -130,14 +130,14 @@
               cache.logs.addAll(logs);
             }
             Map<Integer,Integer> logCounts=loadLogCounts(cache.geocode);
-            if (logCounts != null && logCounts.isEmpty() == false) {
+            if (logCounts != null && !logCounts.isEmpty()) {
               cache.logCounts.clear();
               cache.logCounts.putAll(logCounts);
             }
           }
           if (loadI) {
             List<cgTrackable> inventory=loadInventory(cache.geocode);
-            if (inventory != null && inventory.isEmpty() == false) {
+            if (inventory != null && !inventory.isEmpty()) {
               if (cache.inventory == null) {
                 cache.inventory=new ArrayList<cgTrackable>();
               }

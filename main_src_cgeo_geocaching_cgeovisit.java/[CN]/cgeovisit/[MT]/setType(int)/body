@@ -10,9 +10,9 @@
   if (tweetBox == null) {
     tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   }
-  if (type == 2 && tbChanged == false) {
+  if (type == 2 && !tbChanged) {
   }
- else   if (type != 2 && tbChanged == false) {
+ else   if (type != 2 && !tbChanged) {
   }
   if (type == cgBase.LOG_FOUND_IT && Settings.isUseTwitter()) {
     tweetBox.setVisibility(View.VISIBLE);

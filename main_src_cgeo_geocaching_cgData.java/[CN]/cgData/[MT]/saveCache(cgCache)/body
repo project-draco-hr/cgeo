@@ -73,7 +73,7 @@
       statusOk=false;
     }
   }
-  if (cache.logCounts != null && cache.logCounts.isEmpty() == false) {
+  if (cache.logCounts != null && !cache.logCounts.isEmpty()) {
     if (!saveLogCount(cache.geocode,cache.logCounts)) {
       statusOk=false;
     }
@@ -83,7 +83,7 @@
       statusOk=false;
     }
   }
-  if (statusOk == false) {
+  if (!statusOk) {
     cache.detailed=false;
     cache.detailedUpdate=0L;
   }
