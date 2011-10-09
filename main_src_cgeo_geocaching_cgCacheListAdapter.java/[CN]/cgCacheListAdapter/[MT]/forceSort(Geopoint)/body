@@ -2,20 +2,15 @@
   if (CollectionUtils.isEmpty(list) || !sort) {
     return;
   }
-  try {
-    if (statComparator != null) {
-      Collections.sort(list,statComparator);
-    }
+  if (statComparator != null) {
+    Collections.sort(list,statComparator);
+  }
  else {
-      if (coordsIn == null) {
-        return;
-      }
-      final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
-      Collections.sort(list,dstComparator);
+    if (coordsIn == null) {
+      return;
     }
-    notifyDataSetChanged();
+    final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
+    Collections.sort(list,dstComparator);
   }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
-  }
+  notifyDataSetChanged();
 }

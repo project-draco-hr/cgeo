@@ -157,16 +157,9 @@
  else {
     holder.directionLayout.setVisibility(View.GONE);
     holder.distance.clear();
-    Bitmap dirImgPre=null;
-    Bitmap dirImg=null;
-    try {
-      dirImgPre=BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.geocode).getPath());
-      dirImg=dirImgPre.copy(Bitmap.Config.ARGB_8888,true);
-      dirImgPre.recycle();
-      dirImgPre=null;
-    }
- catch (    Exception e) {
-    }
+    final Bitmap dirImgPre=BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.geocode).getPath());
+    final Bitmap dirImg=dirImgPre.copy(Bitmap.Config.ARGB_8888,true);
+    dirImgPre.recycle();
     if (dirImg != null) {
       if (!Settings.isLightSkin()) {
         int length=dirImg.getWidth() * dirImg.getHeight();

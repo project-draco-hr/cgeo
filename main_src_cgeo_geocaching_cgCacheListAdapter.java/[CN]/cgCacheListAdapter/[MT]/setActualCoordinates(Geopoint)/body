@@ -4,19 +4,8 @@
   }
   coords=coordsIn;
   if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
-    try {
-      if (statComparator != null) {
-        Collections.sort(list,statComparator);
-      }
- else {
-        final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
-        Collections.sort(list,dstComparator);
-      }
-      notifyDataSetChanged();
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
-    }
+    Collections.sort(list,statComparator != null ? statComparator : new DistanceComparator(coordsIn));
+    notifyDataSetChanged();
     lastSort=System.currentTimeMillis();
   }
   for (  final cgDistanceView distance : distances) {
