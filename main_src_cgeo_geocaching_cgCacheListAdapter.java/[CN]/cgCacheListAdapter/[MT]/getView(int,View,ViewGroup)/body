@@ -83,13 +83,9 @@
     }
   }
   holder.checkbox.setOnClickListener(new checkBoxListener(cache));
-  if (!distances.contains(holder.distance)) {
-    distances.add(holder.distance);
-  }
+  distances.add(holder.distance);
   holder.distance.setContent(base,cache.coords);
-  if (!compasses.contains(holder.direction)) {
-    compasses.add(holder.direction);
-  }
+  compasses.add(holder.direction);
   holder.direction.setContent(cache.coords);
   if (cache.found && cache.logOffline) {
     holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);

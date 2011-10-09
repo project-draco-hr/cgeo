@@ -19,14 +19,10 @@
     }
     lastSort=System.currentTimeMillis();
   }
-  if (CollectionUtils.isNotEmpty(distances)) {
-    for (    cgDistanceView distance : distances) {
-      distance.update(coordsIn);
-    }
+  for (  final cgDistanceView distance : distances) {
+    distance.update(coordsIn);
   }
-  if (CollectionUtils.isNotEmpty(compasses)) {
-    for (    cgCompassMini compass : compasses) {
-      compass.updateCoords(coordsIn);
-    }
+  for (  final cgCompassMini compass : compasses) {
+    compass.updateCoords(coordsIn);
   }
 }
