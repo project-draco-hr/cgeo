@@ -1,11 +1,5 @@
 {
-  Intent addressIntent=new Intent(cgeoaddresses.this,cgeocaches.class);
-  addressIntent.putExtra("type","address");
-  addressIntent.putExtra("latitude",latitude);
-  addressIntent.putExtra("longitude",longitude);
-  addressIntent.putExtra("address",address);
-  addressIntent.putExtra("cachetype",Settings.getCacheType());
-  startActivity(addressIntent);
+  cgeocaches.startActivityAddress(cgeoaddresses.this,latitude,longitude,address);
   finish();
   return;
 }

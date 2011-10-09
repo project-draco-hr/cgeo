@@ -1,5 +1,6 @@
 {
   final Intent cachesIntent=new Intent(context,cgeocaches.class);
-  cachesIntent.putExtra(EXTRAS_LIST_TYPE,CacheListType.OFFLINE.ordinal());
+  cachesIntent.putExtra(EXTRAS_LIST_TYPE,CacheListType.KEYWORD);
+  cachesIntent.putExtra("keyword",keyword);
   context.startActivity(cachesIntent);
 }

@@ -4,9 +4,5 @@
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_user));
     return;
   }
-  final Intent cachesIntent=new Intent(this,cgeocaches.class);
-  cachesIntent.putExtra("type","username");
-  cachesIntent.putExtra("username",usernameText);
-  cachesIntent.putExtra("cachetype",Settings.getCacheType());
-  startActivity(cachesIntent);
+  cgeocaches.startActivityUserName(this,usernameText);
 }

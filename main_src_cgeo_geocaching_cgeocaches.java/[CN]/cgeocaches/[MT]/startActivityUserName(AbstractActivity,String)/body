@@ -1,7 +1,6 @@
 {
   final Intent cachesIntent=new Intent(context,cgeocaches.class);
-  cachesIntent.putExtra("type","owner");
+  cachesIntent.putExtra(EXTRAS_LIST_TYPE,CacheListType.USERNAME.ordinal());
   cachesIntent.putExtra("username",userName);
-  cachesIntent.putExtra("cachetype",Settings.getCacheType());
   context.startActivity(cachesIntent);
 }
