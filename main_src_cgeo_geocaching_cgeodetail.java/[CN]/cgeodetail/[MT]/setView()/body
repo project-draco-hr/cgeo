@@ -272,6 +272,9 @@
       personalNoteText.setText(cache.personalNote,TextView.BufferType.SPANNABLE);
       personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
     }
+ else {
+      ((LinearLayout)findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
+    }
     if (StringUtils.isNotBlank(cache.shortdesc)) {
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       TextView descView=(TextView)findViewById(R.id.shortdesc);
