@@ -3,7 +3,7 @@
     return;
   }
   updated=System.currentTimeMillis();
-  if (detailed == false && other.detailed) {
+  if (!detailed && other.detailed) {
     detailed=true;
     detailedUpdate=updated;
   }
@@ -107,7 +107,7 @@
     inventory=other.inventory;
     inventoryItems=other.inventoryItems;
   }
-  if (logs == null || logs.isEmpty()) {
+  if (CollectionUtils.isEmpty(logs)) {
     logs=other.logs;
   }
 }

@@ -1,5 +1,5 @@
 {
-  if (waitDialog == null || waitDialog.isShowing() == false) {
+  if (waitDialog == null || !waitDialog.isShowing()) {
     descDialog=ProgressDialog.show(this,null,res.getString(R.string.cache_dialog_loading_description),true);
     descDialog.setCancelable(true);
   }

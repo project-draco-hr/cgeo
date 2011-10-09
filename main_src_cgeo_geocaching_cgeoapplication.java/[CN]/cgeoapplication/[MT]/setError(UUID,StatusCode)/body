@@ -1,5 +1,5 @@
 {
-  if (searchId == null || searches.containsKey(searchId) == false) {
+  if (unknownSearch(searchId)) {
     return false;
   }
   searches.get(searchId).error=error;

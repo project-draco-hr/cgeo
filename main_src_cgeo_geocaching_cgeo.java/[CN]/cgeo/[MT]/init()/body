@@ -15,7 +15,7 @@
   }
   (new countBubbleUpdate()).start();
   (new cleanDatabase()).start();
-  if (Settings.getCacheType() != null && cgBase.cacheTypesInv.containsKey(Settings.getCacheType()) == false) {
+  if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
     Settings.setCacheType(null);
   }
   if (geo == null) {

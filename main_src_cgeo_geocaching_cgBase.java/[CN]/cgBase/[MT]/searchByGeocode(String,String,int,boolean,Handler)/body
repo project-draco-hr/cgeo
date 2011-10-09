@@ -4,7 +4,7 @@
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No geocode nor guid given");
     return null;
   }
-  if (forceReload == false && reason == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
+  if (!forceReload && reason == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
     final String realGeocode=StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
     List<cgCache> cacheList=new ArrayList<cgCache>();
     cacheList.add(app.getCacheByGeocode(realGeocode,true,true,true,true,true,true));

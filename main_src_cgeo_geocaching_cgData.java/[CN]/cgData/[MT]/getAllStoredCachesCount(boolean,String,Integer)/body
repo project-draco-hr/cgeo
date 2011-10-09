@@ -15,7 +15,7 @@
   int count=0;
   try {
     String sql="select count(_id) from " + dbTableCaches;
-    if (detailedOnly == false) {
+    if (!detailedOnly) {
       if (cachetype == null) {
         sql="select count(_id) from " + dbTableCaches + listSql;
       }

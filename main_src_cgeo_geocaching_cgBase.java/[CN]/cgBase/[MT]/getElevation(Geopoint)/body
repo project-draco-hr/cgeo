@@ -6,8 +6,7 @@
     if (response == null) {
       return null;
     }
-    String status=response.getString("status");
-    if (status == null || status.equalsIgnoreCase("OK") == false) {
+    if (!StringUtils.equalsIgnoreCase(response.getString("status"),"OK")) {
       return null;
     }
     if (response.has("results")) {

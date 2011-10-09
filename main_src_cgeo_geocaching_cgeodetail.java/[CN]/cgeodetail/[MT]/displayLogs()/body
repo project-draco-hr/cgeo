@@ -77,7 +77,7 @@
         ((TextView)rowView.findViewById(R.id.log)).setText(log.log);
       }
       LinearLayout logLayout=(LinearLayout)rowView.findViewById(R.id.log_layout);
-      if ((log.logImages != null) && (!log.logImages.isEmpty())) {
+      if (CollectionUtils.isNotEmpty(log.logImages)) {
         final ArrayList<cgImage> logImages=new ArrayList<cgImage>(log.logImages);
         final View.OnClickListener listener=new View.OnClickListener(){
           @Override public void onClick(          View v){

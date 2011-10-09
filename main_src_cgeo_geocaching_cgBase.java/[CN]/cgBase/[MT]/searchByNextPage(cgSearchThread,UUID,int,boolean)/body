@@ -13,7 +13,7 @@
   final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
   setViewstates(viewstates,params);
   String page=getResponseData(postRequest(uri,params));
-  if (checkLogin(page) == false) {
+  if (!checkLogin(page)) {
     final StatusCode loginState=login();
     if (loginState == StatusCode.NO_ERROR) {
       page=getResponseData(postRequest(uri,params));
@@ -32,7 +32,7 @@
     return searchId;
   }
   final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
-  if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+  if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
     Log.e(Settings.tag,"cgeoBase.searchByNextPage: No cache parsed");
     return searchId;
   }

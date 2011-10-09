@@ -1,5 +1,5 @@
 {
-  if (this.searches.containsKey(searchId) == false || StringUtils.isBlank(geocode)) {
+  if (!this.searches.containsKey(searchId) || StringUtils.isBlank(geocode)) {
     return;
   }
   this.searches.get(searchId).addGeocode(geocode);

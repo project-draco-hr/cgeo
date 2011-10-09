@@ -7,7 +7,7 @@
   }
   final List<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
   for (  cgCache cache : cacheListTemp) {
-    if (checked > 0 && cache.statusChecked == false) {
+    if (checked > 0 && !cache.statusChecked) {
       continue;
     }
     try {

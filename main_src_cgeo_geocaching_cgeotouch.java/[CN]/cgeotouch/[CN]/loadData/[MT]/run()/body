@@ -19,7 +19,7 @@
       types.addAll(typesPre);
     }
     typesPre.clear();
-    if (types.contains(typeSelected) == false) {
+    if (!types.contains(typeSelected)) {
       typeSelected=types.get(0);
       setType(typeSelected);
       showToast(res.getString(R.string.info_log_type_changed));
