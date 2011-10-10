@@ -24,7 +24,7 @@
     imagesView=(LinearLayout)findViewById(R.id.spoiler_list);
   }
   final ArrayList<cgImage> images=extras.getParcelableArrayList("images");
-  if (images == null || images.isEmpty()) {
+  if (CollectionUtils.isEmpty(images)) {
     showToast(res.getString(R.string.warn_load_images));
     finish();
     return;

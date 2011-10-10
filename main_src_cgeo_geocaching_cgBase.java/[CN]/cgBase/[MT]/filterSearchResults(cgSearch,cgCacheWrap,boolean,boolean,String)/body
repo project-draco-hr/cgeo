@@ -1,0 +1,23 @@
+{
+  List<cgCache> cacheList=new ArrayList<cgCache>();
+  if (caches != null) {
+    if (caches.error != null) {
+      search.error=caches.error;
+    }
+    if (StringUtils.isNotBlank(caches.url)) {
+      search.url=caches.url;
+    }
+    search.viewstates=caches.viewstates;
+    search.totalCnt=caches.totalCnt;
+    if (CollectionUtils.isNotEmpty(caches.cacheList)) {
+      for (      final cgCache cache : caches.cacheList) {
+        final boolean excludeCache=(excludeDisabled && cache.disabled) || (excludeMine && (cache.own || cache.found)) || (cacheType != null && !cacheType.equals(cache.type));
+        if (!excludeCache) {
+          search.addGeocode(cache.geocode);
+          cacheList.add(cache);
+        }
+      }
+    }
+  }
+  return cacheList;
+}

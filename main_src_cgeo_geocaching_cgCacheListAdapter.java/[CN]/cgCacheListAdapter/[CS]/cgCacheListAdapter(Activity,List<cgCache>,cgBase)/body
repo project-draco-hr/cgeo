@@ -1,16 +1,13 @@
 {
-  super(activityIn,0,listIn);
-  res=activityIn.getResources();
-  activity=activityIn;
-  list=listIn;
-  base=baseIn;
-  DisplayMetrics metrics=new DisplayMetrics();
+  super(activity,0,list);
+  this.res=activity.getResources();
+  this.list=list;
+  this.base=base;
+  final DisplayMetrics metrics=new DisplayMetrics();
   activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
   pixelDensity=metrics.density;
-  if (gcIconDrawables == null || gcIconDrawables.isEmpty()) {
-    for (    String cacheType : cgBase.cacheTypesInv.keySet()) {
-      gcIconDrawables.put(cacheType,(Drawable)activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
-    }
+  for (  final String cacheType : cgBase.cacheTypesInv.keySet()) {
+    gcIconDrawables.put(cacheType,activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
   }
   if (Settings.isLightSkin()) {
     ratingBcgs[0]=R.drawable.favourite_background_red_light;

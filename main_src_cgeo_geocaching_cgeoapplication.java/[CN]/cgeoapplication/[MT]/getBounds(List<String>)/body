@@ -1,5 +1,5 @@
 {
-  if (geocodes == null || geocodes.isEmpty()) {
+  if (CollectionUtils.isEmpty(geocodes)) {
     return null;
   }
   return getStorage().getBounds(geocodes.toArray());

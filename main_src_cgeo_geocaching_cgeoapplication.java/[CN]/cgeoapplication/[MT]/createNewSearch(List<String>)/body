@@ -1,0 +1,10 @@
+{
+  final cgSearch search=new cgSearch();
+  if (CollectionUtils.isNotEmpty(geocodes)) {
+    for (    final String gccode : geocodes) {
+      search.addGeocode(gccode);
+    }
+  }
+  searches.put(search.getCurrentId(),search);
+  return search;
+}

@@ -12,9 +12,9 @@
     int indexDescription=cursor.getColumnIndex("description");
     do {
       cgImage spoiler=new cgImage();
-      spoiler.url=(String)cursor.getString(indexUrl);
-      spoiler.title=(String)cursor.getString(indexTitle);
-      spoiler.description=(String)cursor.getString(indexDescription);
+      spoiler.url=cursor.getString(indexUrl);
+      spoiler.title=cursor.getString(indexTitle);
+      spoiler.description=cursor.getString(indexDescription);
       spoilers.add(spoiler);
     }
  while (cursor.moveToNext());

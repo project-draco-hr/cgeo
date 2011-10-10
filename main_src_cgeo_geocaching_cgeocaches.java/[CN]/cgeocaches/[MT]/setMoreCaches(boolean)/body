@@ -5,7 +5,7 @@
   if (listFooterText == null) {
     return;
   }
-  if (more == false) {
+  if (!more) {
     if (CollectionUtils.isEmpty(cacheList)) {
       listFooterText.setText(res.getString(R.string.caches_no_cache));
     }

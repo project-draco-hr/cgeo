@@ -13,7 +13,9 @@
     cacheSizesInv.put(cs,res.getString(cs.stringId));
   }
   for (  WaypointType wt : WaypointType.values()) {
-    waypointTypees.put(wt,res.getString(wt.stringId));
+    if (wt != WaypointType.OWN) {
+      waypointTypees.put(wt,res.getString(wt.stringId));
+    }
   }
   logTypes.put("icon_smile",LOG_FOUND_IT);
   logTypes.put("icon_sad",LOG_DIDNT_FIND_IT);

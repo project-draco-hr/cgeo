@@ -9,10 +9,10 @@
     TextView itemName=(TextView)itemLayout.findViewById(R.id.name);
     String selectedName=itemName.getText().toString();
     if (selectedName.equals(res.getString(R.string.trackable_owner))) {
-      contextMenuUser=trackable.owner;
+      contextMenuUser=trackable.getOwner();
     }
  else     if (selectedName.equals(res.getString(R.string.trackable_spotted))) {
-      contextMenuUser=trackable.spottedName;
+      contextMenuUser=trackable.getSpottedName();
     }
   }
   menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);

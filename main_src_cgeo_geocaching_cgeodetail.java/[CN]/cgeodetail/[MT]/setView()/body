@@ -7,9 +7,7 @@
   }
   cache=app.getCache(searchId);
   if (cache == null) {
-    if (waitDialog != null && waitDialog.isShowing()) {
-      waitDialog.dismiss();
-    }
+    Progress.dismiss();
     if (StringUtils.isNotBlank(geocode)) {
       showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
     }
@@ -33,7 +31,7 @@
     scroll.setVisibility(View.VISIBLE);
     LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
-    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)getResources().getDrawable(cgBase.getCacheIcon(cache.type)),null,null,null);
+    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)),null,null,null);
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
@@ -217,11 +215,11 @@
         if (inventoryString.length() > 0) {
           inventoryString.append('\n');
         }
-        if (containsHtml(inventoryItem.name)) {
-          inventoryString.append(Html.fromHtml(inventoryItem.name).toString());
+        if (containsHtml(inventoryItem.getName())) {
+          inventoryString.append(Html.fromHtml(inventoryItem.getName()).toString());
         }
  else {
-          inventoryString.append(inventoryItem.name);
+          inventoryString.append(inventoryItem.getName());
         }
       }
       inventView.setText(inventoryString);
@@ -272,6 +270,9 @@
       personalNoteText.setText(cache.personalNote,TextView.BufferType.SPANNABLE);
       personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
     }
+ else {
+      ((LinearLayout)findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
+    }
     if (StringUtils.isNotBlank(cache.shortdesc)) {
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       TextView descView=(TextView)findViewById(R.id.shortdesc);
@@ -293,7 +294,7 @@
         showDesc.setOnClickListener(null);
       }
     }
- else     if (longDescDisplayed == false && StringUtils.isNotBlank(cache.getDescription())) {
+ else     if (!longDescDisplayed && StringUtils.isNotBlank(cache.getDescription())) {
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       Button showDesc=(Button)findViewById(R.id.show_description);
       showDesc.setVisibility(View.VISIBLE);
@@ -319,7 +320,7 @@
         waypointView=(LinearLayout)inflater.inflate(R.layout.waypoint_item,null);
         final TextView identification=(TextView)waypointView.findViewById(R.id.identification);
         ((TextView)waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypees.get(wpt.typee));
-        if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
+        if (!wpt.getPrefix().equalsIgnoreCase("OWN")) {
           identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
         }
  else {
@@ -372,10 +373,7 @@
  catch (  Exception e) {
     Log.e(Settings.tag,"cgeodetail.setView: " + e.toString());
   }
-  if (waitDialog != null && waitDialog.isShowing())   waitDialog.dismiss();
-  if (storeDialog != null && storeDialog.isShowing())   storeDialog.dismiss();
-  if (dropDialog != null && dropDialog.isShowing())   dropDialog.dismiss();
-  if (refreshDialog != null && refreshDialog.isShowing())   refreshDialog.dismiss();
+  Progress.dismiss();
   displayLogs();
   IConnector connector=ConnectorFactory.getConnector(cache);
   if (connector != null) {

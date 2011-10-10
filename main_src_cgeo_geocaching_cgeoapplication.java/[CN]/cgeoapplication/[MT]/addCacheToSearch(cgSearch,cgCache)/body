@@ -3,7 +3,7 @@
     return false;
   }
   final UUID searchId=search.getCurrentId();
-  if (searches.containsKey(searchId) == false) {
+  if (!searches.containsKey(searchId)) {
     searches.put(searchId,search);
   }
   final boolean status=storeWithMerge(cache,cache.reason >= 1);

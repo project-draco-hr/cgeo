@@ -11,7 +11,7 @@
         cursor.moveToFirst();
         index=cursor.getColumnIndex("geocode");
         do {
-          list.add((String)cursor.getString(index));
+          list.add(cursor.getString(index));
         }
  while (cursor.moveToNext());
       }

@@ -21,11 +21,11 @@
       if (cnt > 0) {
         cursor.moveToFirst();
         index=cursor.getColumnIndex("updated");
-        dataUpdated=(long)cursor.getLong(index);
+        dataUpdated=cursor.getLong(index);
         index=cursor.getColumnIndex("detailedupdate");
-        dataDetailedUpdate=(long)cursor.getLong(index);
+        dataDetailedUpdate=cursor.getLong(index);
         index=cursor.getColumnIndex("detailed");
-        dataDetailed=(int)cursor.getInt(index);
+        dataDetailed=cursor.getInt(index);
       }
     }
   }
@@ -42,7 +42,7 @@
     if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - (3 * 24 * 60* 60* 1000))) {
       return false;
     }
-    if (checkTime && detailed == false && dataUpdated < (System.currentTimeMillis() - (3 * 24 * 60* 60* 1000))) {
+    if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - (3 * 24 * 60* 60* 1000))) {
       return false;
     }
     return true;

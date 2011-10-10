@@ -11,12 +11,7 @@
   }
  else {
     try {
-      final Intent cachesIntent=new Intent(this,cgeocaches.class);
-      cachesIntent.putExtra("latitude",GeopointParser.parseLatitude(latText));
-      cachesIntent.putExtra("longitude",GeopointParser.parseLongitude(lonText));
-      cachesIntent.putExtra("type","coordinate");
-      cachesIntent.putExtra("cachetype",Settings.getCacheType());
-      startActivity(cachesIntent);
+      cgeocaches.startActivityCoordinates(this,GeopointParser.parseLatitude(latText),GeopointParser.parseLongitude(lonText));
     }
  catch (    GeopointParser.ParseException e) {
       showToast(res.getString(e.resource));

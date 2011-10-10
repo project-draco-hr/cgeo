@@ -9,14 +9,14 @@
     return null;
   }
   final cgCacheWrap caches=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
-  if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+  if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
     Log.e(Settings.tag,"cgeoBase.searchByViewport: No cache parsed");
   }
   if (app == null) {
     Log.e(Settings.tag,"cgeoBase.searchByViewport: No application found");
     return null;
   }
-  List<cgCache> cacheList=processSearchResults(search,caches,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
+  List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
   app.addSearch(search,cacheList,true,reason);
   return search.getCurrentId();
 }

@@ -1,11 +1,4 @@
 {
-  cgSearch search=new cgSearch();
-  List<String> geocodes=getStorage().getStoredInViewport(centerLat,centerLon,spanLat,spanLon,cachetype);
-  if (geocodes != null && geocodes.isEmpty() == false) {
-    for (    String gccode : geocodes) {
-      search.addGeocode(gccode);
-    }
-  }
-  searches.put(search.getCurrentId(),search);
-  return search.getCurrentId();
+  final List<String> geocodes=getStorage().getStoredInViewport(centerLat,centerLon,spanLat,spanLon,cachetype);
+  return createNewSearch(geocodes).getCurrentId();
 }

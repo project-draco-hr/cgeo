@@ -3,7 +3,7 @@
     return;
   }
   int checks=0;
-  while (app.storageStatus() == false) {
+  while (!app.storageStatus()) {
     try {
       wait(500);
       checks++;

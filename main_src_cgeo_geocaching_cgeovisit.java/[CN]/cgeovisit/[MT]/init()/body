@@ -18,7 +18,7 @@
  else   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
     insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),base,false),false);
   }
-  if (types.contains(typeSelected) == false) {
+  if (!types.contains(typeSelected)) {
     if (alreadyFound) {
       typeSelected=cgBase.LOG_NOTE;
     }

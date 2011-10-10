@@ -2,38 +2,24 @@
   if (cache == null) {
     return;
   }
-  try {
-    holder.checkbox.setChecked(cache.statusChecked);
-    Animation showCheckbox=new TranslateAnimation(0,(int)(SWIPE_DISTANCE * pixelDensity),0,0);
-    showCheckbox.setRepeatCount(0);
-    if (force) {
-      showCheckbox.setDuration(0);
-    }
- else {
-      showCheckbox.setDuration(400);
-    }
-    showCheckbox.setFillEnabled(true);
-    showCheckbox.setFillAfter(true);
-    showCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
-    Animation dimInfo=new AlphaAnimation(1.0f,SWIPE_OPACITY);
-    dimInfo.setRepeatCount(0);
-    if (force) {
-      dimInfo.setDuration(0);
-    }
- else {
-      dimInfo.setDuration(400);
-    }
-    dimInfo.setFillEnabled(true);
-    dimInfo.setFillAfter(true);
-    dimInfo.setInterpolator(new AccelerateDecelerateInterpolator());
-    AnimationSet selectAnimation=new AnimationSet(true);
-    selectAnimation.setFillEnabled(true);
-    selectAnimation.setFillAfter(true);
-    selectAnimation.addAnimation(showCheckbox);
-    selectAnimation.addAnimation(dimInfo);
-    holder.oneInfo.startAnimation(selectAnimation);
-    cache.statusCheckedView=true;
-  }
- catch (  Exception e) {
-  }
+  holder.checkbox.setChecked(cache.statusChecked);
+  final Animation showCheckbox=new TranslateAnimation(0,(int)(SWIPE_DISTANCE * pixelDensity),0,0);
+  showCheckbox.setRepeatCount(0);
+  showCheckbox.setDuration(force ? 0 : 400);
+  showCheckbox.setFillEnabled(true);
+  showCheckbox.setFillAfter(true);
+  showCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
+  final Animation dimInfo=new AlphaAnimation(1.0f,SWIPE_OPACITY);
+  dimInfo.setRepeatCount(0);
+  dimInfo.setDuration(force ? 0 : 400);
+  dimInfo.setFillEnabled(true);
+  dimInfo.setFillAfter(true);
+  dimInfo.setInterpolator(new AccelerateDecelerateInterpolator());
+  final AnimationSet selectAnimation=new AnimationSet(true);
+  selectAnimation.setFillEnabled(true);
+  selectAnimation.setFillAfter(true);
+  selectAnimation.addAnimation(showCheckbox);
+  selectAnimation.addAnimation(dimInfo);
+  holder.oneInfo.startAnimation(selectAnimation);
+  cache.statusCheckedView=true;
 }

@@ -1,18 +1,18 @@
 {
   cgTrackable trackable=new cgTrackable();
-  trackable.geocode=(String)cursor.getString(cursor.getColumnIndex("tbcode"));
-  trackable.guid=(String)cursor.getString(cursor.getColumnIndex("guid"));
-  trackable.name=(String)cursor.getString(cursor.getColumnIndex("title"));
-  trackable.owner=(String)cursor.getString(cursor.getColumnIndex("owner"));
+  trackable.setGeocode(cursor.getString(cursor.getColumnIndex("tbcode")));
+  trackable.setGuid(cursor.getString(cursor.getColumnIndex("guid")));
+  trackable.setName(cursor.getString(cursor.getColumnIndex("title")));
+  trackable.setOwner(cursor.getString(cursor.getColumnIndex("owner")));
   String releasedPre=cursor.getString(cursor.getColumnIndex("released"));
   if (releasedPre != null && Long.getLong(releasedPre) != null) {
-    trackable.released=new Date(Long.getLong(releasedPre));
+    trackable.setReleased(new Date(Long.getLong(releasedPre)));
   }
  else {
-    trackable.released=null;
+    trackable.setReleased(null);
   }
-  trackable.goal=(String)cursor.getString(cursor.getColumnIndex("goal"));
-  trackable.details=(String)cursor.getString(cursor.getColumnIndex("description"));
-  trackable.logs=loadLogs(trackable.geocode);
+  trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
+  trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));
+  trackable.setLogs(loadLogs(trackable.getGeocode()));
   return trackable;
 }

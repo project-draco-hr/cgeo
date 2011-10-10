@@ -9,7 +9,7 @@
   cgCache cache=getItem(position);
   View v=rowView;
   if (v == null) {
-    v=(View)inflater.inflate(R.layout.cache,null);
+    v=inflater.inflate(R.layout.cache,null);
     holder=new cgCacheView();
     holder.oneCache=(RelativeLayout)v.findViewById(R.id.one_cache);
     holder.checkbox=(CheckBox)v.findViewById(R.id.checkbox);
@@ -75,21 +75,17 @@
   }
  else {
     holder.checkbox.setChecked(false);
-    if (cache.statusCheckedView == false) {
-      holder.oneInfo.clearAnimation();
+    if (cache.statusCheckedView) {
+      moveLeft(holder,cache,false);
     }
  else {
-      moveLeft(holder,cache,false);
+      holder.oneInfo.clearAnimation();
     }
   }
   holder.checkbox.setOnClickListener(new checkBoxListener(cache));
-  if (distances.contains(holder.distance) == false) {
-    distances.add(holder.distance);
-  }
+  distances.add(holder.distance);
   holder.distance.setContent(base,cache.coords);
-  if (compasses.contains(holder.direction) == false) {
-    compasses.add(holder.direction);
-  }
+  compasses.add(holder.direction);
   holder.direction.setContent(cache.coords);
   if (cache.found && cache.logOffline) {
     holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);
@@ -161,16 +157,9 @@
  else {
     holder.directionLayout.setVisibility(View.GONE);
     holder.distance.clear();
-    Bitmap dirImgPre=null;
-    Bitmap dirImg=null;
-    try {
-      dirImgPre=BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.geocode).getPath());
-      dirImg=dirImgPre.copy(Bitmap.Config.ARGB_8888,true);
-      dirImgPre.recycle();
-      dirImgPre=null;
-    }
- catch (    Exception e) {
-    }
+    final Bitmap dirImgPre=BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.geocode).getPath());
+    final Bitmap dirImg=dirImgPre.copy(Bitmap.Config.ARGB_8888,true);
+    dirImgPre.recycle();
     if (dirImg != null) {
       if (!Settings.isLightSkin()) {
         int length=dirImg.getWidth() * dirImg.getHeight();

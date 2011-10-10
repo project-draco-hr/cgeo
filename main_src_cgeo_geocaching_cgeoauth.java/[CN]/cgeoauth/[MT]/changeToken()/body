@@ -3,49 +3,14 @@
   final String path="/oauth/access_token";
   final String method="POST";
   int status=0;
-  String lineOne=null;
   try {
-    final Parameters paramsPre=new Parameters("oauth_verifier",pinEntry.getText().toString());
-    int code=-1;
-    int retries=0;
-    final String params=cgOAuth.signOAuth(host,path,method,true,paramsPre,OAtoken,OAtokenSecret);
-    final StringBuilder sb=new StringBuilder();
-    do {
-      final URL u=new URL("https://" + host + path);
-      final URLConnection uc=u.openConnection();
-      final HttpsURLConnection connection=(HttpsURLConnection)uc;
-      connection.setReadTimeout(30000);
-      connection.setRequestMethod(method);
-      HttpURLConnection.setFollowRedirects(true);
-      connection.setDoOutput(true);
-      connection.setDoInput(true);
-      final OutputStream out=connection.getOutputStream();
-      final OutputStreamWriter wr=new OutputStreamWriter(out);
-      wr.write(params);
-      wr.flush();
-      wr.close();
-      out.close();
-      final InputStream in=connection.getInputStream();
-      final InputStreamReader ins=new InputStreamReader(in);
-      final BufferedReader br=new BufferedReader(ins,16 * 1024);
-      while ((lineOne=br.readLine()) != null) {
-        sb.append(lineOne);
-        sb.append('\n');
-      }
-      code=connection.getResponseCode();
-      retries++;
-      Log.i(Settings.tag,host + ": " + connection.getResponseCode()+ " "+ connection.getResponseMessage());
-      br.close();
-      ins.close();
-      in.close();
-      connection.disconnect();
-    }
- while (code == -1 && retries < 5);
-    final String line=sb.toString();
+    final Parameters params=new Parameters("oauth_verifier",pinEntry.getText().toString());
+    OAuth.signOAuth(host,path,method,true,params,OAtoken,OAtokenSecret);
+    final String line=StringUtils.defaultString(cgBase.getResponseData(cgBase.postRequest("https://" + host + path,params)));
     OAtoken="";
     OAtokenSecret="";
     final Matcher paramsMatcher1=paramsPattern1.matcher(line);
-    if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
+    if (paramsMatcher1.find()) {
       OAtoken=paramsMatcher1.group(1);
     }
     final Matcher paramsMatcher2=paramsPattern2.matcher(line);

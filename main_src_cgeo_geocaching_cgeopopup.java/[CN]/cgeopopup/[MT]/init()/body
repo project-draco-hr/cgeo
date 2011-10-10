@@ -25,7 +25,7 @@
     ((ScrollView)findViewById(R.id.details_list_box)).setVisibility(View.VISIBLE);
     LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
-    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)getResources().getDrawable(cgBase.getCacheIcon(cache.type)),null,null,null);
+    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)),null,null,null);
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
@@ -160,7 +160,7 @@
 ).start();
       }
     }
-    if (fromDetail == false) {
+    if (!fromDetail) {
       ((LinearLayout)findViewById(R.id.more_details_box)).setVisibility(View.VISIBLE);
       Button buttonMore=(Button)findViewById(R.id.more_details);
       buttonMore.setOnClickListener(new OnClickListener(){
@@ -177,7 +177,7 @@
  else {
       ((LinearLayout)findViewById(R.id.more_details_box)).setVisibility(View.GONE);
     }
-    if (fromDetail == false) {
+    if (!fromDetail) {
       ((LinearLayout)findViewById(R.id.offline_box)).setVisibility(View.VISIBLE);
       final TextView offlineText=(TextView)findViewById(R.id.offline_text);
       final Button offlineRefresh=(Button)findViewById(R.id.offline_refresh);
