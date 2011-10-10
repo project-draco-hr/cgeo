@@ -98,7 +98,7 @@
         mapIntent.putExtra("latitude",coordsIntent.getLatitude());
         mapIntent.putExtra("longitude",coordsIntent.getLongitude());
       }
-      mapIntent.putExtra("wpttype",waypointTypeeIntent.id);
+      mapIntent.putExtra("wpttype",waypointTypeIntent != null ? waypointTypeIntent.id : null);
       int[] mapState=new int[4];
       GeoPointImpl mapCenter=mapView.getMapViewCenter();
       mapState[0]=mapCenter.getLatitudeE6();

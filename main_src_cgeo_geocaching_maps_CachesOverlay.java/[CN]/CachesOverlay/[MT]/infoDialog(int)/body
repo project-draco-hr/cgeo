@@ -11,8 +11,8 @@
     if (coordinate.type.equalsIgnoreCase("cache")) {
       dialog.setTitle("cache");
       String cacheType;
-      if (cgBase.cacheTypesInv.containsKey(coordinate.typeeSpec)) {
-        cacheType=cgBase.cacheTypesInv.get(coordinate.typeeSpec);
+      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
+        cacheType=cgBase.cacheTypesInv.get(coordinate.typeSpec);
       }
  else {
         cacheType=cgBase.cacheTypesInv.get("mystery");
@@ -48,9 +48,9 @@
     }
  else {
       dialog.setTitle("waypoint");
-      String waypointL10N=cgBase.waypointTypees.get(coordinate.typeeSpec);
+      String waypointL10N=cgBase.waypointTypes.get(WaypointType.FIND_BY_ID.get(coordinate.typeSpec));
       if (waypointL10N == null) {
-        waypointL10N=cgBase.waypointTypees.get(WaypointType.WAYPOINT);
+        waypointL10N=cgBase.waypointTypes.get(WaypointType.WAYPOINT);
       }
       dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointL10N);
       dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
