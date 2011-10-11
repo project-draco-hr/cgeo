@@ -29,7 +29,7 @@
         cache.detailed=true;
         createNoteFromGSAKUserdata();
         result.put(cache.geocode,cache);
-        showCountMessage(handler,R.string.gpx_import_loading_caches,++importedRecords);
+        showCountMessage(handler,R.string.gpx_import_loading_caches,++importedRecords,progressStream.getProgress());
       }
  else       if (StringUtils.isNotBlank(cache.name) && cache.coords != null && StringUtils.contains(type,"waypoint")) {
         addWaypointToCache();
@@ -39,8 +39,8 @@
     private void addWaypointToCache(){
       fixCache(cache);
       if (cache.name.length() > 2) {
-        String cacheGeocodeForWaypoint="GC" + cache.name.substring(2);
-        cgCache cacheForWaypoint=result.get(cacheGeocodeForWaypoint);
+        final String cacheGeocodeForWaypoint="GC" + cache.name.substring(2);
+        final cgCache cacheForWaypoint=result.get(cacheGeocodeForWaypoint);
         if (cacheForWaypoint != null) {
           final cgWaypoint waypoint=new cgWaypoint();
           waypoint.id=-1;
@@ -56,7 +56,7 @@
           }
           cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints,Collections.singletonList(waypoint));
           result.put(cacheGeocodeForWaypoint,cacheForWaypoint);
-          showCountMessage(handler,R.string.gpx_import_loading_waypoints,++importedRecords);
+          showCountMessage(handler,R.string.gpx_import_loading_waypoints,++importedRecords,progressStream.getProgress());
         }
       }
     }
@@ -233,7 +233,7 @@
           cache.location=validate(country);
         }
  else {
-          cache.location=cache.location + ", " + country.trim();
+          cache.location+=", " + country.trim();
         }
       }
     }
@@ -362,7 +362,8 @@
 );
   }
   try {
-    Xml.parse(stream,Xml.Encoding.UTF_8,root.getContentHandler());
+    progressStream=new ProgressInputStream(stream);
+    Xml.parse(progressStream,Xml.Encoding.UTF_8,root.getContentHandler());
     return true;
   }
  catch (  IOException e) {
