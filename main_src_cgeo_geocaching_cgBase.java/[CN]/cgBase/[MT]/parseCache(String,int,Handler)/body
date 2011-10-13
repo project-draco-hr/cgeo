@@ -26,7 +26,7 @@
   cache.geocode=BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.geocode);
   cache.cacheId=BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.cacheId);
   cache.guid=BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.guid);
-  cache.name=BaseUtils.getMatch(page,GCConstants.PATTERN_NAME,true,cache.name);
+  cache.name=Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_NAME,true,cache.name)).toString();
   cache.ownerReal=BaseUtils.getMatch(page,GCConstants.PATTERN_OWNERREAL,true,cache.ownerReal);
   final String username=Settings.getUsername();
   if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
@@ -55,7 +55,7 @@
     if (result != null) {
       cache.difficulty=new Float(StringUtils.replaceChars(result,'_','.'));
     }
-    cache.owner=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER,false,cache.owner);
+    cache.owner=Html.fromHtml(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER,false,cache.owner)).toString();
     try {
       cache.hidden=parseGcCustomDate(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null));
       if (cache.hidden == null) {
