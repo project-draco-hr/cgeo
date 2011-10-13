@@ -12,12 +12,11 @@
   for (  CacheSize cs : CacheSize.values()) {
     cacheSizesInv.put(cs,res.getString(cs.stringId));
   }
-  waypointTypes.put("flag",res.getString(WaypointType.FLAG.stringId));
-  waypointTypes.put("stage",res.getString(WaypointType.STAGE.stringId));
-  waypointTypes.put("puzzle",res.getString(WaypointType.PUZZLE.stringId));
-  waypointTypes.put("pkg",res.getString(WaypointType.PKG.stringId));
-  waypointTypes.put("trailhead",res.getString(WaypointType.TRAILHEAD.stringId));
-  waypointTypes.put("waypoint",res.getString(WaypointType.WAYPOINT.stringId));
+  for (  WaypointType wt : WaypointType.values()) {
+    if (wt != WaypointType.OWN) {
+      waypointTypes.put(wt,res.getString(wt.stringId));
+    }
+  }
   logTypes.put("icon_smile",LOG_FOUND_IT);
   logTypes.put("icon_sad",LOG_DIDNT_FIND_IT);
   logTypes.put("icon_note",LOG_NOTE);

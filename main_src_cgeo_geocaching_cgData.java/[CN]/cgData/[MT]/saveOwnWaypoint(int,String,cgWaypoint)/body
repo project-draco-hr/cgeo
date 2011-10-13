@@ -9,7 +9,7 @@
     ContentValues values=new ContentValues();
     values.put("geocode",geocode);
     values.put("updated",System.currentTimeMillis());
-    values.put("type",waypoint.type);
+    values.put("type",waypoint.type != null ? waypoint.type.id : null);
     values.put("prefix",waypoint.getPrefix());
     values.put("lookup",waypoint.lookup);
     values.put("name",waypoint.name);

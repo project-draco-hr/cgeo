@@ -19,7 +19,7 @@
         values.clear();
         values.put("geocode",geocode);
         values.put("updated",timeStamp);
-        values.put("type",oneWaypoint.type);
+        values.put("type",oneWaypoint.type != null ? oneWaypoint.type.id : null);
         values.put("prefix",oneWaypoint.getPrefix());
         values.put("lookup",oneWaypoint.lookup);
         values.put("name",oneWaypoint.name);

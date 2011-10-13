@@ -48,14 +48,11 @@
     }
  else {
       dialog.setTitle("waypoint");
-      String waypointType;
-      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
-        waypointType=cgBase.waypointTypes.get(coordinate.typeSpec);
+      String waypointL10N=cgBase.waypointTypes.get(WaypointType.FIND_BY_ID.get(coordinate.typeSpec));
+      if (waypointL10N == null) {
+        waypointL10N=cgBase.waypointTypes.get(WaypointType.WAYPOINT);
       }
- else {
-        waypointType=cgBase.waypointTypes.get("waypoint");
-      }
-      dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointType);
+      dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointL10N);
       dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
         public void onClick(        DialogInterface dialog,        int id){
           cgeonavigate navigateActivity=new cgeonavigate();

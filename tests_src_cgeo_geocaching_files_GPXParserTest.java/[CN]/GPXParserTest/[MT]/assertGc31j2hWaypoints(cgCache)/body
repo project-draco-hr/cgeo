@@ -7,7 +7,7 @@
   assertEquals("---",wp.lookup);
   assertEquals("Parkplatz",wp.name);
   assertEquals("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)",wp.note);
-  assertEquals(WaypointType.PKG.id,wp.type);
+  assertEquals(WaypointType.PKG,wp.type);
   assertEquals(49.317517,wp.coords.getLatitude(),0.000001);
   assertEquals(8.545083,wp.coords.getLongitude(),0.000001);
   wp=cache.waypoints.get(1);
@@ -16,7 +16,7 @@
   assertEquals("---",wp.lookup);
   assertEquals("Station 1",wp.name);
   assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.",wp.note);
-  assertEquals(WaypointType.STAGE.id,wp.type);
+  assertEquals(WaypointType.STAGE,wp.type);
   assertEquals(49.317500,wp.coords.getLatitude(),0.000001);
   assertEquals(8.545100,wp.coords.getLongitude(),0.000001);
 }
