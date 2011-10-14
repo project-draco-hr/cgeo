@@ -19,7 +19,7 @@
     Log.e(Settings.tag,"cgeoBase.searchTrackable: No data from server");
     return trackable;
   }
-  trackable=parseTrackable(page);
+  trackable=parseTrackable(page,app);
   if (trackable == null) {
     Log.e(Settings.tag,"cgeoBase.searchTrackable: No trackable parsed");
     return trackable;
