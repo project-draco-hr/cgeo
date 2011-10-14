@@ -338,7 +338,7 @@
             nameView.setText(wpt.name.trim());
           }
         }
-        wpt.setIcon(res,base,nameView);
+        wpt.setIcon(res,nameView);
         if (containsHtml(wpt.note)) {
           ((TextView)waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
         }
