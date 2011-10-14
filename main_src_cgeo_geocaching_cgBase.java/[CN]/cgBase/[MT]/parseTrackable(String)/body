@@ -173,10 +173,10 @@
       }
  catch (      ParseException e) {
       }
-      logDone.log=matcherLogs.group(6).trim();
-      if (matcherLogs.group(4) != null && matcherLogs.group(5) != null) {
+      logDone.log=matcherLogs.group(7).trim();
+      if (matcherLogs.group(4) != null && matcherLogs.group(6) != null) {
         logDone.cacheGuid=matcherLogs.group(4);
-        logDone.cacheName=matcherLogs.group(5);
+        logDone.cacheName=matcherLogs.group(6);
       }
       trackable.getLogs().add(logDone);
     }
