@@ -1,7 +1,4 @@
 {
-  Intent mapIntent=new Intent(activity,Settings.getMapFactory().getMapClass());
-  mapIntent.putExtra("detail",false);
-  mapIntent.putExtra("searchid",searchId.toString());
-  activity.startActivity(mapIntent);
+  CGeoMap.startActivitySearch(activity,searchId,null,false);
   return true;
 }

@@ -1,0 +1,10 @@
+{
+  Intent mapIntent=new Intent(context,Settings.getMapFactory().getMapClass());
+  mapIntent.putExtra(EXTRAS_DETAIL,false);
+  mapIntent.putExtra(EXTRAS_LATITUDE,coords.getLatitude());
+  mapIntent.putExtra(EXTRAS_LONGITUDE,coords.getLongitude());
+  if (type != null) {
+    mapIntent.putExtra(EXTRAS_WPTTYPE,type != null ? type.id : null);
+  }
+  context.startActivity(mapIntent);
+}

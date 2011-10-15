@@ -100,21 +100,21 @@ boolean mapRestartRequired=switchMapSource(mapSource);
 if (mapRestartRequired) {
 activity.finish();
 Intent mapIntent=new Intent(activity,Settings.getMapFactory().getMapClass());
-mapIntent.putExtra("detail",fromDetailIntent);
-mapIntent.putExtra("searchid",searchIdIntent);
-mapIntent.putExtra("geocode",geocodeIntent);
+mapIntent.putExtra(EXTRAS_DETAIL,fromDetailIntent);
+mapIntent.putExtra(EXTRAS_SEARCHID,searchIdIntent);
+mapIntent.putExtra(EXTRAS_GEOCODE,geocodeIntent);
 if (coordsIntent != null) {
-mapIntent.putExtra("latitude",coordsIntent.getLatitude());
-mapIntent.putExtra("longitude",coordsIntent.getLongitude());
+mapIntent.putExtra(EXTRAS_LATITUDE,coordsIntent.getLatitude());
+mapIntent.putExtra(EXTRAS_LONGITUDE,coordsIntent.getLongitude());
 }
-mapIntent.putExtra("wpttype",waypointTypeIntent != null ? waypointTypeIntent.id : null);
+mapIntent.putExtra(EXTRAS_WPTTYPE,waypointTypeIntent != null ? waypointTypeIntent.id : null);
 int[] mapState=new int[4];
 GeoPointImpl mapCenter=mapView.getMapViewCenter();
 mapState[0]=mapCenter.getLatitudeE6();
 mapState[1]=mapCenter.getLongitudeE6();
 mapState[2]=mapView.getMapZoomLevel();
 mapState[3]=followMyLocation ? 1 : 0;
-mapIntent.putExtra("mapstate",mapState);
+mapIntent.putExtra(EXTRAS_MAPSTATE,mapState);
 activity.startActivity(mapIntent);
 }
 return true;

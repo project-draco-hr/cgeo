@@ -50,14 +50,15 @@
   }
   Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {
-    fromDetailIntent=extras.getBoolean("detail");
-    searchIdIntent=extras.getString("searchid");
-    geocodeIntent=extras.getString("geocode");
-    final double latitudeIntent=extras.getDouble("latitude");
-    final double longitudeIntent=extras.getDouble("longitude");
+    fromDetailIntent=extras.getBoolean(EXTRAS_DETAIL);
+    searchIdIntent=extras.getString(EXTRAS_SEARCHID);
+    geocodeIntent=extras.getString(EXTRAS_GEOCODE);
+    final double latitudeIntent=extras.getDouble(EXTRAS_LATITUDE);
+    final double longitudeIntent=extras.getDouble(EXTRAS_LONGITUDE);
     coordsIntent=new Geopoint(latitudeIntent,longitudeIntent);
-    waypointTypeIntent=WaypointType.FIND_BY_ID.get(extras.getString("wpttype"));
-    mapStateIntent=extras.getIntArray("mapstate");
+    waypointTypeIntent=WaypointType.FIND_BY_ID.get(extras.getString(EXTRAS_WPTTYPE));
+    mapStateIntent=extras.getIntArray(EXTRAS_MAPSTATE);
+    mapTitle=extras.getString(EXTRAS_MAP_TITLE);
     if ("".equals(searchIdIntent)) {
       searchIdIntent=null;
     }
@@ -65,19 +66,12 @@
       coordsIntent=null;
     }
   }
-  if (searchIdIntent == null && geocodeIntent == null && coordsIntent == null) {
-    live=true;
+  if (StringUtils.isBlank(mapTitle)) {
+    mapTitle=res.getString(R.string.map_map);
   }
- else {
-    live=false;
-  }
+  live=(searchIdIntent == null && geocodeIntent == null && coordsIntent == null);
   if (null == mapStateIntent) {
-    if (live) {
-      followMyLocation=true;
-    }
- else {
-      followMyLocation=false;
-    }
+    followMyLocation=live;
   }
  else {
     followMyLocation=1 == mapStateIntent[3] ? true : false;

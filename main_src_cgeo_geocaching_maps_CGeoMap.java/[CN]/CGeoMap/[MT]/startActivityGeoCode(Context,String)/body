@@ -1,0 +1,7 @@
+{
+  Intent mapIntent=new Intent(context,Settings.getMapFactory().getMapClass());
+  mapIntent.putExtra(EXTRAS_DETAIL,false);
+  mapIntent.putExtra(EXTRAS_GEOCODE,geocode);
+  mapIntent.putExtra(EXTRAS_MAP_TITLE,geocode);
+  context.startActivity(mapIntent);
+}
