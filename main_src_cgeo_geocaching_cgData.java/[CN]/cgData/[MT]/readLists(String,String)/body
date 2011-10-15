@@ -14,7 +14,7 @@
           cgList list=new cgList(false);
           list.id=(cursor.getInt(indexId)) + 10;
           list.title=cursor.getString(indexTitle);
-          list.updated=(Long)cursor.getLong(indexUpdated);
+          list.updated=cursor.getLong(indexUpdated);
           list.coords=getCoords(cursor,indexLatitude,indexLongitude);
           result.add(list);
         }

@@ -26,11 +26,11 @@
       int cnt=cursor.getCount();
       if (cnt > 0) {
         cursor.moveToFirst();
-        viewport.add((Integer)cursor.getInt(cursor.getColumnIndex("cnt")));
-        viewport.add((Double)cursor.getDouble(cursor.getColumnIndex("latMin")));
-        viewport.add((Double)cursor.getDouble(cursor.getColumnIndex("latMax")));
-        viewport.add((Double)cursor.getDouble(cursor.getColumnIndex("lonMin")));
-        viewport.add((Double)cursor.getDouble(cursor.getColumnIndex("lonMax")));
+        viewport.add(cursor.getInt(cursor.getColumnIndex("cnt")));
+        viewport.add(cursor.getDouble(cursor.getColumnIndex("latMin")));
+        viewport.add(cursor.getDouble(cursor.getColumnIndex("latMax")));
+        viewport.add(cursor.getDouble(cursor.getColumnIndex("lonMin")));
+        viewport.add(cursor.getDouble(cursor.getColumnIndex("lonMax")));
       }
     }
   }
