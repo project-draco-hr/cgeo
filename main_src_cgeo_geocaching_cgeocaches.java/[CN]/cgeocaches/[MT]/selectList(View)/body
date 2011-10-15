@@ -10,13 +10,23 @@
   for (  cgList list : lists) {
     listsTitle.add(list.title);
   }
+  listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
   final CharSequence[] items=new CharSequence[listsTitle.size()];
   AlertDialog.Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(res.getString(R.string.list_title));
   builder.setItems(listsTitle.toArray(items),new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialogInterface,    int item){
-      switchListById(lists.get(item).id);
-      return;
+    public void onClick(    DialogInterface dialogInterface,    int itemId){
+      if (itemId >= lists.size()) {
+        createList(new RunnableWithArgument<Integer>(){
+          @Override public void run(){
+            switchListById(getArgument());
+          }
+        }
+);
+      }
+ else {
+        switchListById(lists.get(itemId).id);
+      }
     }
   }
 );

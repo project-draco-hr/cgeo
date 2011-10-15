@@ -7,9 +7,9 @@
   alert.setView(view);
   alert.setPositiveButton(buttonTitle,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int whichButton){
-      String value=StringUtils.trim(input.getText().toString());
-      if (StringUtils.isNotBlank(value)) {
-        runnable.setInput(value);
+      String listName=StringUtils.trim(input.getText().toString());
+      if (StringUtils.isNotBlank(listName)) {
+        runnable.setArgument(listName);
         runnable.run();
       }
     }

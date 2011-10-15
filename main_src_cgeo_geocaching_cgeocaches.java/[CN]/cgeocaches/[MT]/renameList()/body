@@ -1,8 +1,9 @@
 {
   final cgList list=app.getList(listId);
-  handleListNameInput(list.title,R.string.list_dialog_rename_title,R.string.list_dialog_rename,new RunnableWithInput(){
+  handleListNameInput(list.title,R.string.list_dialog_rename_title,R.string.list_dialog_rename,new RunnableWithArgument<String>(){
     @Override public void run(){
-      app.renameList(listId,input);
+      String listName=getArgument();
+      app.renameList(listId,listName);
       refreshCurrentList();
     }
   }
