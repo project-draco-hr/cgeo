@@ -15,7 +15,7 @@
         cacheType=cgBase.cacheTypesInv.get(coordinate.typeSpec);
       }
  else {
-        cacheType=cgBase.cacheTypesInv.get("mystery");
+        cacheType=cgBase.cacheTypesInv.get(CacheType.MYSTERY.id);
       }
       dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.geocode.toUpperCase()+ "\ntype: "+ cacheType);
       if (fromDetail == false) {

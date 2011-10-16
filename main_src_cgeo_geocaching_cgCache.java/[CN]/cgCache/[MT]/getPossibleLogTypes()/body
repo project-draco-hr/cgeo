@@ -1,7 +1,7 @@
 {
   boolean isOwner=owner != null && owner.equalsIgnoreCase(Settings.getUsername());
   List<Integer> types=new ArrayList<Integer>();
-  if ("event".equals(type) || "mega".equals(type) || "cito".equals(type)|| "lostfound".equals(type)) {
+  if (isEventCache()) {
     types.add(cgBase.LOG_WILL_ATTEND);
     types.add(cgBase.LOG_NOTE);
     types.add(cgBase.LOG_ATTENDED);
@@ -10,7 +10,7 @@
       types.add(cgBase.LOG_ANNOUNCEMENT);
     }
   }
- else   if ("webcam".equals(type)) {
+ else   if (CacheType.WEBCAM.id.equals(type)) {
     types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
     types.add(cgBase.LOG_DIDNT_FIND_IT);
     types.add(cgBase.LOG_NOTE);

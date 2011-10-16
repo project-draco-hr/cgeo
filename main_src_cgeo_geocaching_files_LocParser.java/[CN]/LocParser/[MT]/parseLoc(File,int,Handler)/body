@@ -12,7 +12,7 @@
       copyCoordToCache(coord,cache);
       caches.cacheList.add(cache);
       fixCache(cache);
-      cache.type="traditional";
+      cache.type=CacheType.UNKNOWN.id;
       cache.reason=listId;
       cache.detailed=true;
       cgeoapplication.getInstance().addCacheToSearch(search,cache);

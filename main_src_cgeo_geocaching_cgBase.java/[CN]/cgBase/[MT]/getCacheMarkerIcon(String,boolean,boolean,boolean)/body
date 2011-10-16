@@ -17,13 +17,13 @@
     }
   }
  else {
-    iconTxt="traditional";
+    iconTxt=CacheType.TRADITIONAL.id;
   }
   if (gcIcons.containsKey(iconTxt)) {
     icon=gcIcons.get(iconTxt);
   }
  else {
-    icon=gcIcons.get("traditional");
+    icon=gcIcons.get(CacheType.TRADITIONAL.id);
   }
   return icon;
 }

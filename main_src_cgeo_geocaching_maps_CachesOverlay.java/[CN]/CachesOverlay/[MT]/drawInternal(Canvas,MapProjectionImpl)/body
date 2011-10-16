@@ -24,7 +24,7 @@
         projection.toPixels(leftGeo,left);
         int radius=center.x - left.x;
         final String type=item.getType();
-        if (type == null || "multi".equals(type) || "mystery".equals(type) || "virtual".equals(type)) {
+        if (type == null || CacheType.MULTI.id.equals(type) || CacheType.MYSTERY.id.equals(type) || CacheType.VIRTUAL.id.equals(type)) {
           blockedCircle.setColor(0x66000000);
           blockedCircle.setStyle(Style.STROKE);
           canvas.drawCircle(center.x,center.y,radius,blockedCircle);

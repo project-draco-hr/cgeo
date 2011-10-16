@@ -1,15 +1,15 @@
 {
   if (type.equalsIgnoreCase("Traditional")) {
-    return "traditional";
+    return CacheType.TRADITIONAL.id;
   }
  else   if (type.equalsIgnoreCase("Multi")) {
-    return "multi";
+    return CacheType.MULTI.id;
   }
  else   if (type.equalsIgnoreCase("Quiz")) {
-    return "mystery";
+    return CacheType.MYSTERY.id;
   }
  else   if (type.equalsIgnoreCase("Virtual")) {
-    return "virtual";
+    return CacheType.VIRTUAL.id;
   }
-  return "other";
+  return CacheType.UNKNOWN.id;
 }
