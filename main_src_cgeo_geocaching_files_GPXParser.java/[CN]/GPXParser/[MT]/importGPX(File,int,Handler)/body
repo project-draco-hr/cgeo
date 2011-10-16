@@ -1,0 +1,23 @@
+{
+  try {
+    GPXParser parser=new GPX10Parser(listId);
+    boolean parsed=parser.parse(file,handler);
+    if (!parsed) {
+      parser=new GPX11Parser(listId);
+      parsed=parser.parse(file,handler);
+    }
+    if (parsed) {
+      final File wptsFile=getWaypointsFileForGpx(file);
+      if (wptsFile != null && wptsFile.canRead()) {
+        parser.parse(wptsFile,handler);
+      }
+    }
+    if (parsed) {
+      return storeParsedCaches(handler,parser);
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"GPXParser.importGPX: " + e.toString());
+  }
+  return null;
+}

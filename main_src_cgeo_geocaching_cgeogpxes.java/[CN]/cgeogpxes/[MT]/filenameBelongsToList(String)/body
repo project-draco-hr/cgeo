@@ -1,8 +1,6 @@
 {
   if (super.filenameBelongsToList(filename)) {
-    return !StringUtils.endsWithIgnoreCase(filename,"-wpts.gpx");
+    return !StringUtils.endsWithIgnoreCase(filename,GPXParser.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION);
   }
- else {
-    return false;
-  }
+  return false;
 }

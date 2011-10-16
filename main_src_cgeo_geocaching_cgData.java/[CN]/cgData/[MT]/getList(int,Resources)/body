@@ -1,9 +1,9 @@
 {
-  if (id == 1) {
-    return new cgList(true,1,res.getString(R.string.list_inbox));
+  if (id == cgList.STANDARD_LIST_ID) {
+    return new cgList(cgList.STANDARD_LIST_ID,res.getString(R.string.list_inbox));
   }
  else   if (id == 2) {
-    return new cgList(true,2,res.getString(R.string.list_wpt));
+    return new cgList(2,res.getString(R.string.list_wpt));
   }
  else   if (id >= 10) {
     init();

@@ -1,0 +1,17 @@
+{
+  try {
+    GPXParser parser=new GPX10Parser(listId);
+    boolean parsed=parser.parse(stream,handler);
+    if (!parsed) {
+      parser=new GPX11Parser(listId);
+      parsed=parser.parse(stream,handler);
+    }
+    if (parsed) {
+      return storeParsedCaches(handler,parser);
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"GPXParser.importGPX: " + e.toString());
+  }
+  return null;
+}
