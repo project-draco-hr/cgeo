@@ -7,8 +7,8 @@
   }
  else   if (group == R.id.changebutton) {
     try {
-      final String logTbAction=cgBase.logTypesTrackable.get(id);
-      if (logTbAction != null) {
+      final LogTypeTrackable logType=LogTypeTrackable.findById(id);
+      if (logType != null) {
         final LinearLayout inventView=(LinearLayout)findViewById(R.id.inventory);
         for (int count=0; count < inventView.getChildCount(); count++) {
           final LinearLayout tbView=(LinearLayout)inventView.getChildAt(count);
@@ -19,10 +19,10 @@
           if (tbText == null) {
             return false;
           }
-          tbText.setText(logTbAction);
+          tbText.setText(res.getString(logType.resourceId));
         }
         for (        cgTrackableLog tb : trackables) {
-          tb.action=id;
+          tb.action=logType;
         }
         tbChanged=true;
         return true;
@@ -34,8 +34,8 @@
   }
  else {
     try {
-      final String logTbAction=cgBase.logTypesTrackable.get(id);
-      if (logTbAction != null) {
+      final LogTypeTrackable logType=LogTypeTrackable.findById(id);
+      if (logType != null) {
         final LinearLayout tbView=(LinearLayout)findViewById(group);
         if (tbView == null) {
           return false;
@@ -47,8 +47,8 @@
         for (        cgTrackableLog tb : trackables) {
           if (tb.id == group) {
             tbChanged=true;
-            tb.action=id;
-            tbText.setText(logTbAction);
+            tb.action=logType;
+            tbText.setText(res.getString(logType.resourceId));
             Log.i(Settings.tag,"Trackable " + tb.trackCode + " ("+ tb.name+ ") has new action: #"+ id);
           }
         }

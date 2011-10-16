@@ -10,8 +10,8 @@
  else   if (viewId == R.id.changebutton) {
     final int textId=((TextView)findViewById(viewId)).getId();
     menu.setHeaderTitle(res.getString(R.string.log_tb_changeall));
-    for (    final int logTbAction : cgBase.logTypesTrackable.keySet()) {
-      menu.add(textId,logTbAction,0,cgBase.logTypesTrackable.get(logTbAction));
+    for (    LogTypeTrackable logType : LogTypeTrackable.values()) {
+      menu.add(textId,logType.id,0,res.getString(logType.resourceId));
     }
   }
  else {
@@ -21,8 +21,8 @@
         menu.setHeaderTitle(tb.name);
       }
     }
-    for (    final int logTbAction : cgBase.logTypesTrackable.keySet()) {
-      menu.add(realViewId,logTbAction,0,cgBase.logTypesTrackable.get(logTbAction));
+    for (    LogTypeTrackable logType : LogTypeTrackable.values()) {
+      menu.add(realViewId,logType.id,0,res.getString(logType.resourceId));
     }
   }
 }

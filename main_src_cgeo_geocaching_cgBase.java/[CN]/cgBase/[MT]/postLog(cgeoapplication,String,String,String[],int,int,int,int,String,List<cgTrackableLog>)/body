@@ -36,9 +36,9 @@
   if (CollectionUtils.isNotEmpty(trackables)) {
     final StringBuilder hdnSelected=new StringBuilder();
     for (    cgTrackableLog tb : trackables) {
-      final String action=Integer.toString(tb.id) + logTypesTrackableAction.get(tb.action);
-      if (tb.action > 0) {
-        hdnSelected.append(action);
+      if (tb.action != LogTypeTrackable.DO_NOTHING) {
+        hdnSelected.append(Integer.toString(tb.id));
+        hdnSelected.append(tb.action.action);
         hdnSelected.append(',');
       }
     }
@@ -81,7 +81,7 @@
         final StringBuilder hdnSelected=new StringBuilder();
         for (        cgTrackableLog tb : trackables) {
           String ctl=null;
-          final String action=Integer.toString(tb.id) + logTypesTrackableAction.get(tb.action);
+          final String action=Integer.toString(tb.id) + tb.action.action;
           if (tb.ctl < 10) {
             ctl="0" + Integer.toString(tb.ctl);
           }
@@ -89,7 +89,7 @@
             ctl=Integer.toString(tb.ctl);
           }
           params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl" + ctl + "$ddlAction",action);
-          if (tb.action > 0) {
+          if (tb.action != LogTypeTrackable.DO_NOTHING) {
             hdnSelected.append(action);
             hdnSelected.append(',');
           }
