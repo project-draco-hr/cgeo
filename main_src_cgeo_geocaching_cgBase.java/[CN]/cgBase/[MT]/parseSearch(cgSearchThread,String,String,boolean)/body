@@ -117,7 +117,7 @@
       final Matcher matcherCode=patternCode.matcher(row);
       while (matcherCode.find()) {
         if (matcherCode.groupCount() > 0) {
-          cache.geocode=matcherCode.group(1).toUpperCase();
+          cache.geocode=new String(matcherCode.group(1).toUpperCase().trim());
         }
       }
     }

@@ -7,6 +7,6 @@
   final Pattern pattern=Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">",Pattern.CASE_INSENSITIVE);
   final Matcher matcher=pattern.matcher(result);
   if (matcher.find()) {
-    Settings.setGcCustomDate(matcher.group(1));
+    Settings.setGcCustomDate(new String(matcher.group(1).trim()));
   }
 }
