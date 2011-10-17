@@ -7,7 +7,7 @@
   if (listId <= 0) {
     listId=cgList.STANDARD_LIST_ID;
   }
-  if (getIntent().getScheme().equals("content")) {
+  if ("content".equals(getIntent().getScheme())) {
     new AlertDialog.Builder(this).setTitle(res.getString(R.string.gpx_import_title)).setMessage(res.getString(R.string.gpx_import_confirm)).setCancelable(false).setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
       public void onClick(      DialogInterface dialog,      int id){
         try {
