@@ -32,7 +32,7 @@
     Log.i(Settings.tag,"Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: 0");
   }
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","__LASTFOCUS","","ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged",String.format("%02d",month) + "/" + String.format("%02d",day)+ "/"+ String.format("%04d",year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo,"ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry","ctl00$ContentBody$uxVistOtherListingGC","");
-  setViewstates(viewstates,params);
+  putViewstates(params,viewstates);
   if (CollectionUtils.isNotEmpty(trackables)) {
     final StringBuilder hdnSelected=new StringBuilder();
     for (    cgTrackableLog tb : trackables) {
@@ -70,7 +70,7 @@
         return StatusCode.LOG_POST_ERROR;
       }
       params.clear();
-      setViewstates(viewstatesConfirm,params);
+      putViewstates(params,viewstatesConfirm);
       params.put("__EVENTTARGET","");
       params.put("__EVENTARGUMENT","");
       params.put("__LASTFOCUS","");

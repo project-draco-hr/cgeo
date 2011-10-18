@@ -8,16 +8,16 @@
   }
   loginResponse=request("https://www.geocaching.com/login/default.aspx",null,false,false,false);
   loginData=getResponseData(loginResponse);
+  viewstates=getViewstates(loginData);
+  if (isEmpty(viewstates)) {
+    Log.e(Settings.tag,"cgeoBase.login: Failed to find viewstates");
+    return StatusCode.LOGIN_PARSE_ERROR;
+  }
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {
       Log.i(Settings.tag,"Already logged in Geocaching.com as " + loginStart.left);
       switchToEnglish(viewstates);
       return StatusCode.NO_ERROR;
-    }
-    viewstates=getViewstates(loginData);
-    if (isEmpty(viewstates)) {
-      Log.e(Settings.tag,"cgeoBase.login: Failed to find viewstates");
-      return StatusCode.LOGIN_PARSE_ERROR;
     }
   }
  else {
@@ -31,7 +31,7 @@
   }
   clearCookies();
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$tbUsername",login.left,"ctl00$ContentBody$tbPassword",login.right,"ctl00$ContentBody$cbRememberMe","on","ctl00$ContentBody$btnSignIn","Login");
-  setViewstates(viewstates,params);
+  putViewstates(params,viewstates);
   loginResponse=postRequest("https://www.geocaching.com/login/default.aspx",params);
   loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {

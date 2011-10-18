@@ -15,7 +15,7 @@
   final String logInfo=log.replace("\n","\r\n");
   final Calendar currentDate=Calendar.getInstance();
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","__LASTFOCUS","","ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType),"ctl00$ContentBody$LogBookPanel1$tbCode",trackingCode);
-  setViewstates(viewstates,params);
+  putViewstates(params,viewstates);
   if (currentDate.get(Calendar.YEAR) == year && (currentDate.get(Calendar.MONTH) + 1) == month && currentDate.get(Calendar.DATE) == day) {
     params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged","");
   }

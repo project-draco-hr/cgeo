@@ -11,7 +11,7 @@
   }
   final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
   final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
-  setViewstates(viewstates,params);
+  putViewstates(params,viewstates);
   String page=getResponseData(postRequest(uri,params));
   if (!checkLogin(page)) {
     final StatusCode loginState=login();
