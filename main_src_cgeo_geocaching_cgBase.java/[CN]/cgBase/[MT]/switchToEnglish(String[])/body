@@ -1,5 +1,8 @@
 {
   final Parameters params=new Parameters("__EVENTTARGET","ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem","__EVENTARGUMENT","");
   setViewstates(viewstates,params);
-  return cgBase.getResponseData(postRequest("http://www.geocaching.com/default.aspx",params));
+  final HttpResponse response=postRequest("http://www.geocaching.com/default.aspx",params);
+  if (!isSuccess(response)) {
+    Log.e(Settings.tag,"Failed to set geocaching.com language to English");
+  }
 }
