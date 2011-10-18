@@ -7,7 +7,7 @@
   }
   cache=app.getCache(searchId);
   if (cache == null) {
-    Progress.dismiss();
+    progress.dismiss();
     if (StringUtils.isNotBlank(geocode)) {
       showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
     }
@@ -373,7 +373,7 @@
  catch (  Exception e) {
     Log.e(Settings.tag,"cgeodetail.setView: " + e.toString());
   }
-  Progress.dismiss();
+  progress.dismiss();
   displayLogs();
   IConnector connector=ConnectorFactory.getConnector(cache);
   if (connector != null) {

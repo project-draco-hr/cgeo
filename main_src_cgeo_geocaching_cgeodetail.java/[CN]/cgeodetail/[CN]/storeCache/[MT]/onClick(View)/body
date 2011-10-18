@@ -1,9 +1,9 @@
 {
-  if (Progress.isShowing()) {
+  if (progress.isShowing()) {
     showToast(res.getString(R.string.err_detail_still_working));
     return;
   }
-  Progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,true);
+  progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,true);
   if (storeThread != null) {
     storeThread.interrupt();
   }

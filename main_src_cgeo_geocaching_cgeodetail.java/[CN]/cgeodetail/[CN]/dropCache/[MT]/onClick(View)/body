@@ -1,9 +1,9 @@
 {
-  if (Progress.isShowing()) {
+  if (progress.isShowing()) {
     showToast(res.getString(R.string.err_detail_still_working));
     return;
   }
-  Progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_offline_drop_title),res.getString(R.string.cache_dialog_offline_drop_message),true,false);
+  progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_offline_drop_title),res.getString(R.string.cache_dialog_offline_drop_message),true,false);
   Thread thread=new dropCacheThread(dropCacheHandler);
   thread.start();
 }
