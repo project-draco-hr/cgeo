@@ -5,8 +5,8 @@
     if (remaining1.length() > 0 && Character.isDigit(remaining1.charAt(0))) {
       final String remaining2=cache2.name.substring(prefix.length()).trim();
       if (remaining2.length() > 0 && Character.isDigit(remaining2.charAt(0))) {
-        final Integer number1=(new Scanner(remaining1)).nextInt();
-        final Integer number2=(new Scanner(remaining2)).nextInt();
+        final Integer number1=getNumber(remaining1);
+        final Integer number2=getNumber(remaining2);
         return number1.compareTo(number2);
       }
     }
