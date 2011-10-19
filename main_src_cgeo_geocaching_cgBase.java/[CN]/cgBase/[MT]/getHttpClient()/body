@@ -1,15 +1,4 @@
 {
-  if (cookieStore == null) {
-synchronized (cgBase.class) {
-      if (cookieStore == null) {
-        clientParams=new BasicHttpParams();
-        clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET,HTTP.UTF_8);
-        clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,30000);
-        clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT,30000);
-        cookieStore=new BasicCookieStore();
-      }
-    }
-  }
   final DefaultHttpClient client=new DefaultHttpClient();
   client.setCookieStore(cookieStore);
   client.setParams(clientParams);

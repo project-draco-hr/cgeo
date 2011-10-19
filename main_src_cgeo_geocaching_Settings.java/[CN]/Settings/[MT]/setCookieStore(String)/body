@@ -1,0 +1,13 @@
+{
+  return editSharedSettings(new PrefRunnable(){
+    @Override public void edit(    final Editor edit){
+      if (StringUtils.isBlank(cookies)) {
+        edit.remove(KEY_COOKIE_STORE);
+      }
+ else {
+        edit.putString(KEY_COOKIE_STORE,cookies);
+      }
+    }
+  }
+);
+}
