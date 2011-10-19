@@ -16,7 +16,7 @@
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {
       Log.i(Settings.tag,"Already logged in Geocaching.com as " + loginStart.left);
-      switchToEnglish();
+      switchToEnglish(loginData);
       return StatusCode.NO_ERROR;
     }
   }
@@ -37,7 +37,7 @@
   if (StringUtils.isNotBlank(loginData)) {
     if (checkLogin(loginData)) {
       Log.i(Settings.tag,"Successfully logged in Geocaching.com as " + login.left);
-      switchToEnglish();
+      switchToEnglish(loginData);
       return StatusCode.NO_ERROR;
     }
  else {
