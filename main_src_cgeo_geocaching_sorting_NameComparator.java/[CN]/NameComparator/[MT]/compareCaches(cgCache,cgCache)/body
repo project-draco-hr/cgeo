@@ -1,15 +1,3 @@
 {
-  final String prefix=StringUtils.getCommonPrefix(cache1.name,cache2.name);
-  if (StringUtils.length(prefix) > 0) {
-    final String remaining1=cache1.name.substring(prefix.length()).trim();
-    if (remaining1.length() > 0 && Character.isDigit(remaining1.charAt(0))) {
-      final String remaining2=cache2.name.substring(prefix.length()).trim();
-      if (remaining2.length() > 0 && Character.isDigit(remaining2.charAt(0))) {
-        final Integer number1=getNumber(remaining1);
-        final Integer number2=getNumber(remaining2);
-        return number1.compareTo(number2);
-      }
-    }
-  }
-  return cache1.name.compareToIgnoreCase(cache2.name);
+  return cache1.getNameForSorting().compareToIgnoreCase(cache2.getNameForSorting());
 }
