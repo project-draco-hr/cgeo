@@ -9,6 +9,7 @@
     StringUtils.isNotBlank("haha");
   }
   initialized=true;
+  Settings.setLanguage(Settings.isUseEnglish());
   Settings.getLogin();
   if (app.firstRun) {
     (new firstLogin()).start();
