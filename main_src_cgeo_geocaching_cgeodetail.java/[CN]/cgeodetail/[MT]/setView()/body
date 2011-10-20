@@ -339,13 +339,15 @@
           }
         }
         wpt.setIcon(res,nameView);
+        TextView noteView=(TextView)waypointView.findViewById(R.id.note);
         if (containsHtml(wpt.note)) {
-          ((TextView)waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
+          noteView.setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
         }
  else {
-          ((TextView)waypointView.findViewById(R.id.note)).setText(wpt.note.trim());
+          noteView.setText(wpt.note.trim());
         }
         waypointView.setOnClickListener(new waypointInfo(wpt.id));
+        registerForContextMenu(waypointView);
         waypoints.addView(waypointView);
       }
     }

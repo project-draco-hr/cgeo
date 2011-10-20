@@ -1,22 +1,48 @@
 {
-  final int group=item.getGroupId();
-  if (group == R.id.author || group == R.id.value) {
-    final int id=item.getItemId();
-    if (id == 1) {
-      cgeocaches.startActivityOwner(this,contextMenuUser);
-      return true;
-    }
- else     if (id == 2) {
-      cgeocaches.startActivityUserName(this,contextMenuUser);
-      return true;
-    }
- else     if (id == 3) {
-      startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
-      return true;
-    }
-  }
- else {
-    return onOptionsItemSelected(item);
-  }
-  return false;
+  final int groupId=item.getGroupId();
+  final int index=item.getItemId();
+switch (groupId) {
+case R.id.author:
+case R.id.value:
+    final int itemId=item.getItemId();
+switch (itemId) {
+case 1:
+    cgeocaches.startActivityOwner(this,contextMenuUser);
+  return true;
+case 2:
+cgeocaches.startActivityUserName(this,contextMenuUser);
+return true;
+case 3:
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+return true;
+default :
+break;
+}
+break;
+case CONTEXT_MENU_WAYPOINT_DUPLICATE:
+if (null != cache.waypoints && index < cache.waypoints.size()) {
+final cgWaypoint copy=new cgWaypoint(cache.waypoints.get(index));
+copy.setUserDefined();
+copy.name=res.getString(R.string.waypoint_copy_of) + " " + copy.name;
+cache.waypoints.add(index + 1,copy);
+app.saveOwnWaypoint(-1,cache.geocode,copy);
+app.removeCacheFromCache(geocode);
+setView();
+}
+break;
+case CONTEXT_MENU_WAYPOINT_DELETE:
+if (null != cache.waypoints && index < cache.waypoints.size()) {
+final cgWaypoint waypoint=cache.waypoints.get(index);
+if (waypoint.isUserDefined()) {
+cache.waypoints.remove(index);
+app.deleteWaypoint(waypoint.id);
+app.removeCacheFromCache(geocode);
+setView();
+}
+}
+break;
+default :
+return onOptionsItemSelected(item);
+}
+return false;
 }
