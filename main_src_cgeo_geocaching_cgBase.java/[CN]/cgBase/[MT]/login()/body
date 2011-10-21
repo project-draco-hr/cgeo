@@ -1,25 +1,19 @@
 {
-  HttpResponse loginResponse=null;
-  String loginData=null;
-  final ImmutablePair<String,String> loginStart=Settings.getLogin();
-  if (loginStart == null) {
+  final ImmutablePair<String,String> login=Settings.getLogin();
+  if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
+    Log.e(Settings.tag,"cgeoBase.login: No login information stored");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
-  loginResponse=request("https://www.geocaching.com/login/default.aspx",null,false,false,false);
-  loginData=getResponseData(loginResponse);
+  HttpResponse loginResponse=request("https://www.geocaching.com/login/default.aspx",null,false,false,false);
+  String loginData=getResponseData(loginResponse);
   if (StringUtils.isBlank(loginData)) {
     Log.e(Settings.tag,"cgeoBase.login: Failed to retrieve login page (1st)");
     return StatusCode.CONNECTION_FAILED;
   }
   if (checkLogin(loginData)) {
-    Log.i(Settings.tag,"Already logged in Geocaching.com as " + loginStart.left);
+    Log.i(Settings.tag,"Already logged in Geocaching.com as " + login.left);
     switchToEnglish(loginData);
     return StatusCode.NO_ERROR;
-  }
-  final ImmutablePair<String,String> login=Settings.getLogin();
-  if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
-    Log.e(Settings.tag,"cgeoBase.login: No login information stored");
-    return StatusCode.NO_LOGIN_INFO_STORED;
   }
   clearCookies();
   Settings.setCookieStore(null);
