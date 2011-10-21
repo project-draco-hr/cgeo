@@ -6,9 +6,9 @@
   try {
     final Parameters params=new Parameters();
     if (Settings.isLogin()) {
-      final Map<String,String> login=Settings.getGCvoteLogin();
+      final ImmutablePair<String,String> login=Settings.getGCvoteLogin();
       if (login != null) {
-        params.put("userName",login.get("username"),"password",login.get("password"));
+        params.put("userName",login.left,"password",login.right);
       }
     }
     if (CollectionUtils.isNotEmpty(guids)) {

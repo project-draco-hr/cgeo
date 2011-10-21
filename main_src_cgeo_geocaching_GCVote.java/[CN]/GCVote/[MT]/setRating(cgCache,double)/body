@@ -9,11 +9,11 @@
   if (vote <= 0.0 || vote > 5.0) {
     return false;
   }
-  final Map<String,String> login=Settings.getGCvoteLogin();
+  final ImmutablePair<String,String> login=Settings.getGCvoteLogin();
   if (login == null) {
     return false;
   }
-  final Parameters params=new Parameters("userName",login.get("username"),"password",login.get("password"),"cacheId",guid,"voteUser",String.format("%.1f",vote).replace(',','.'),"version","cgeo");
+  final Parameters params=new Parameters("userName",login.left,"password",login.right,"cacheId",guid,"voteUser",String.format("%.1f",vote).replace(',','.'),"version","cgeo");
   final String result=cgBase.getResponseData(cgBase.request("http://gcvote.com/setVote.php",params,false,false,false));
   return result.trim().equalsIgnoreCase("ok");
 }

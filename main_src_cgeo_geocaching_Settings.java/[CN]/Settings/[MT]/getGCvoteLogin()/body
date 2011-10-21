@@ -1,11 +1,8 @@
 {
-  final String preUsername=sharedPrefs.getString(KEY_USERNAME,null);
-  final String prePassword=sharedPrefs.getString(KEY_GCVOTE_PASSWORD,null);
-  if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
+  final String username=sharedPrefs.getString(KEY_USERNAME,null);
+  final String password=sharedPrefs.getString(KEY_GCVOTE_PASSWORD,null);
+  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
     return null;
   }
-  final Map<String,String> login=new HashMap<String,String>();
-  login.put(KEY_USERNAME,preUsername);
-  login.put(KEY_PASSWORD,prePassword);
-  return login;
+  return new ImmutablePair<String,String>(username,password);
 }
