@@ -268,7 +268,7 @@
           final Matcher matcherWpLatLon=patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
           if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
             String latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString().trim();
-            if (!StringUtils.containsOnly(latlon,'?')) {
+            if (!StringUtils.startsWith(latlon,"???")) {
               waypoint.latlon=latlon;
               waypoint.coords=new Geopoint(latlon);
             }
