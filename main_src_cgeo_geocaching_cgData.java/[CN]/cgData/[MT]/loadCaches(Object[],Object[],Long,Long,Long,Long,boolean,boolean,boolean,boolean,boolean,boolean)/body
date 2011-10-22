@@ -82,7 +82,7 @@
         cursor.moveToFirst();
         do {
           cgCache cache=createCacheFromDatabaseContent(cursor);
-          if (loadA) {
+          if (loadAttributes) {
             final List<String> attributes=loadAttributes(cache.geocode);
             if (CollectionUtils.isNotEmpty(attributes)) {
               if (cache.attributes == null) {
@@ -94,7 +94,7 @@
               cache.attributes.addAll(attributes);
             }
           }
-          if (loadW) {
+          if (loadWaypoints) {
             final List<cgWaypoint> waypoints=loadWaypoints(cache.geocode);
             if (CollectionUtils.isNotEmpty(waypoints)) {
               if (cache.waypoints == null) {
@@ -106,7 +106,7 @@
               cache.waypoints.addAll(waypoints);
             }
           }
-          if (loadS) {
+          if (loadSpoilers) {
             final List<cgImage> spoilers=loadSpoilers(cache.geocode);
             if (CollectionUtils.isNotEmpty(spoilers)) {
               if (cache.spoilers == null) {
@@ -118,7 +118,7 @@
               cache.spoilers.addAll(spoilers);
             }
           }
-          if (loadL) {
+          if (loadLogs) {
             final List<cgLog> logs=loadLogs(cache.geocode);
             if (CollectionUtils.isNotEmpty(logs)) {
               if (cache.logs == null) {
@@ -135,7 +135,7 @@
               cache.logCounts.putAll(logCounts);
             }
           }
-          if (loadI) {
+          if (loadInventory) {
             final List<cgTrackable> inventory=loadInventory(cache.geocode);
             if (CollectionUtils.isNotEmpty(inventory)) {
               if (cache.inventory == null) {
@@ -147,7 +147,7 @@
               cache.inventory.addAll(inventory);
             }
           }
-          if (loadO) {
+          if (loadOfflineLogs) {
             cache.logOffline=hasLogOffline(cache.geocode);
           }
           caches.add(cache);
