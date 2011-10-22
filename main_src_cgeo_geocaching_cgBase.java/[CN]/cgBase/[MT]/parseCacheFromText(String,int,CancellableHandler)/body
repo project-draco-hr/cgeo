@@ -1,0 +1,306 @@
+{
+  sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_details);
+  if (StringUtils.isBlank(page)) {
+    Log.e(Settings.tag,"cgeoBase.parseCache: No page given");
+    return null;
+  }
+  final cgCacheWrap caches=new cgCacheWrap();
+  final cgCache cache=new cgCache();
+  if (page.contains("Cache is Unpublished")) {
+    caches.error=StatusCode.UNPUBLISHED_CACHE;
+    return caches;
+  }
+  if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
+    caches.error=StatusCode.PREMIUM_ONLY;
+    return caches;
+  }
+  if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
+    caches.error=StatusCode.PREMIUM_ONLY;
+    return caches;
+  }
+  cache.disabled=page.contains("<li>This cache is temporarily unavailable.");
+  cache.archived=page.contains("<li>This cache has been archived,");
+  cache.members=BaseUtils.matches(page,GCConstants.PATTERN_MEMBERS);
+  cache.favourite=BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE);
+  cache.reason=reason;
+  cache.geocode=BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.geocode);
+  cache.cacheId=BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.cacheId);
+  cache.guid=BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.guid);
+  cache.name=Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_NAME,true,cache.name)).toString();
+  cache.ownerReal=URLDecoder.decode(BaseUtils.getMatch(page,GCConstants.PATTERN_OWNERREAL,true,cache.ownerReal));
+  final String username=Settings.getUsername();
+  if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
+    cache.own=true;
+  }
+  int pos=-1;
+  String tableInside=page;
+  pos=tableInside.indexOf("id=\"cacheDetails\"");
+  if (pos == -1) {
+    Log.e(Settings.tag,"cgeoBase.parseCache: ID \"cacheDetails\" not found on page");
+    return null;
+  }
+  tableInside=tableInside.substring(pos);
+  pos=tableInside.indexOf("<div class=\"CacheInformationTable\"");
+  if (pos == -1) {
+    Log.e(Settings.tag,"cgeoBase.parseCache: ID \"CacheInformationTable\" not found on page");
+    return null;
+  }
+  tableInside=tableInside.substring(0,pos);
+  if (StringUtils.isNotBlank(tableInside)) {
+    String result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_TERRAIN,true,null);
+    if (result != null) {
+      cache.terrain=new Float(StringUtils.replaceChars(result,'_','.'));
+    }
+    result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_DIFFICULTY,true,null);
+    if (result != null) {
+      cache.difficulty=new Float(StringUtils.replaceChars(result,'_','.'));
+    }
+    cache.owner=Html.fromHtml(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER,true,cache.owner)).toString();
+    try {
+      cache.hidden=parseGcCustomDate(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null));
+      if (cache.hidden == null) {
+        cache.hidden=parseGcCustomDate(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null));
+      }
+    }
+ catch (    ParseException e) {
+      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hidden (event) date");
+    }
+    cache.favouriteCnt=Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0"));
+    cache.size=CacheSize.FIND_BY_ID.get(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id).toLowerCase());
+  }
+  cache.found=BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE);
+  cache.type=cacheTypes.get(BaseUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.type).toLowerCase());
+  cache.onWatchlist=BaseUtils.matches(page,GCConstants.PATTERN_WATCHLIST);
+  cache.latlon=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,cache.latlon);
+  if (StringUtils.isNotEmpty(cache.latlon)) {
+    try {
+      cache.coords=new Geopoint(cache.latlon);
+      cache.reliableLatLon=true;
+    }
+ catch (    Geopoint.GeopointException e) {
+      Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache coordinates: " + e.toString());
+    }
+  }
+  cache.location=BaseUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,cache.location);
+  try {
+    final Matcher matcherHint=GCConstants.PATTERN_HINT.matcher(page);
+    if (matcherHint.find() && matcherHint.group(1) != null) {
+      String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(1)).replaceAll("\n");
+      if (hint != null) {
+        cache.hint=hint.replaceAll(Pattern.quote("</p>"),"").trim();
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hint");
+  }
+  checkFields(cache);
+  cache.personalNote=BaseUtils.getMatch(page,GCConstants.PATTERN_PERSONALNOTE,true,cache.personalNote);
+  cache.shortdesc=BaseUtils.getMatch(page,GCConstants.PATTERN_SHORTDESC,true,cache.shortdesc);
+  cache.setDescription(BaseUtils.getMatch(page,GCConstants.PATTERN_DESC,true,""));
+  try {
+    final String attributesPre=BaseUtils.getMatch(page,GCConstants.PATTERN_ATTRIBUTES,true,null);
+    if (null != attributesPre) {
+      final Matcher matcherAttributesInside=GCConstants.PATTERN_ATTRIBUTESINSIDE.matcher(attributesPre);
+      while (matcherAttributesInside.find()) {
+        if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
+          if (cache.attributes == null) {
+            cache.attributes=new ArrayList<String>();
+          }
+          String attribute=matcherAttributesInside.group(2).toLowerCase();
+          String imageName=matcherAttributesInside.group(1).trim();
+          if (imageName.length() > 0) {
+            int start=imageName.lastIndexOf('/');
+            int end=imageName.lastIndexOf('.');
+            if (start >= 0 && end >= 0) {
+              attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase();
+            }
+          }
+          cache.attributes.add(attribute);
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache attributes");
+  }
+  try {
+    final String spoilers=BaseUtils.getMatch(page,GCConstants.PATTERN_SPOILERS,false,null);
+    if (null != spoilers) {
+      if (CancellableHandler.isCancelled(handler)) {
+        return null;
+      }
+      sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_spoilers);
+      final Matcher matcherSpoilersInside=GCConstants.PATTERN_SPOILERSINSIDE.matcher(spoilers);
+      while (matcherSpoilersInside.find()) {
+        final cgImage spoiler=new cgImage();
+        spoiler.url=matcherSpoilersInside.group(1);
+        if (matcherSpoilersInside.group(2) != null) {
+          spoiler.title=matcherSpoilersInside.group(2);
+        }
+        if (matcherSpoilersInside.group(3) != null) {
+          spoiler.description=matcherSpoilersInside.group(3);
+        }
+        if (cache.spoilers == null) {
+          cache.spoilers=new ArrayList<cgImage>();
+        }
+        cache.spoilers.add(spoiler);
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache spoilers");
+  }
+  try {
+    cache.inventoryItems=0;
+    final Matcher matcherInventory=GCConstants.PATTERN_INVENTORY.matcher(page);
+    if (matcherInventory.find()) {
+      if (cache.inventory == null) {
+        cache.inventory=new ArrayList<cgTrackable>();
+      }
+      if (matcherInventory.groupCount() > 1) {
+        final String inventoryPre=matcherInventory.group(2);
+        if (StringUtils.isNotBlank(inventoryPre)) {
+          final Matcher matcherInventoryInside=GCConstants.PATTERN_INVENTORYINSIDE.matcher(inventoryPre);
+          while (matcherInventoryInside.find()) {
+            if (matcherInventoryInside.groupCount() > 0) {
+              final cgTrackable inventoryItem=new cgTrackable();
+              inventoryItem.setGuid(matcherInventoryInside.group(1));
+              inventoryItem.setName(matcherInventoryInside.group(2));
+              cache.inventory.add(inventoryItem);
+              cache.inventoryItems++;
+            }
+          }
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache inventory (2)");
+  }
+  try {
+    final String countlogs=BaseUtils.getMatch(page,GCConstants.PATTERN_COUNTLOGS,true,null);
+    if (null != countlogs) {
+      final Matcher matcherLog=GCConstants.PATTERN_COUNTLOG.matcher(countlogs);
+      while (matcherLog.find()) {
+        String typeStr=matcherLog.group(1);
+        String countStr=matcherLog.group(2).replaceAll("[.,]","");
+        if (StringUtils.isNotBlank(typeStr) && logTypes.containsKey(typeStr.toLowerCase()) && StringUtils.isNotBlank(countStr)) {
+          cache.logCounts.put(logTypes.get(typeStr.toLowerCase()),Integer.parseInt(countStr));
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache log count");
+  }
+  int wpBegin=0;
+  int wpEnd=0;
+  wpBegin=page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
+  if (wpBegin != -1) {
+    if (CancellableHandler.isCancelled(handler)) {
+      return null;
+    }
+    sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_waypoints);
+    final Pattern patternWpType=Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg",Pattern.CASE_INSENSITIVE);
+    final Pattern patternWpPrefixOrLookupOrLatlon=Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>",Pattern.CASE_INSENSITIVE);
+    final Pattern patternWpName=Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>",Pattern.CASE_INSENSITIVE);
+    final Pattern patternWpNote=Pattern.compile("colspan=\"6\">(.*)<\\/td>",Pattern.CASE_INSENSITIVE);
+    String wpList=page.substring(wpBegin);
+    wpEnd=wpList.indexOf("</p>");
+    if (wpEnd > -1 && wpEnd <= wpList.length()) {
+      wpList=wpList.substring(0,wpEnd);
+    }
+    if (!wpList.contains("No additional waypoints to display.")) {
+      wpEnd=wpList.indexOf("</table>");
+      wpList=wpList.substring(0,wpEnd);
+      wpBegin=wpList.indexOf("<tbody>");
+      wpEnd=wpList.indexOf("</tbody>");
+      if (wpBegin >= 0 && wpEnd >= 0 && wpEnd <= wpList.length()) {
+        wpList=wpList.substring(wpBegin + 7,wpEnd);
+      }
+      final String[] wpItems=wpList.split("<tr");
+      String[] wp;
+      for (int j=1; j < wpItems.length; j++) {
+        final cgWaypoint waypoint=new cgWaypoint();
+        wp=wpItems[j].split("<td");
+        try {
+          final Matcher matcherWpType=patternWpType.matcher(wp[3]);
+          if (matcherWpType.find() && matcherWpType.groupCount() > 0) {
+            waypoint.type=WaypointType.FIND_BY_ID.get(matcherWpType.group(1).trim());
+          }
+        }
+ catch (        Exception e) {
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint type");
+        }
+        try {
+          final Matcher matcherWpPrefix=patternWpPrefixOrLookupOrLatlon.matcher(wp[4]);
+          if (matcherWpPrefix.find() && matcherWpPrefix.groupCount() > 1) {
+            waypoint.setPrefix(matcherWpPrefix.group(2).trim());
+          }
+        }
+ catch (        Exception e) {
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint prefix");
+        }
+        try {
+          final Matcher matcherWpLookup=patternWpPrefixOrLookupOrLatlon.matcher(wp[5]);
+          if (matcherWpLookup.find() && matcherWpLookup.groupCount() > 1) {
+            waypoint.lookup=matcherWpLookup.group(2).trim();
+          }
+        }
+ catch (        Exception e) {
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint lookup");
+        }
+        try {
+          final Matcher matcherWpName=patternWpName.matcher(wp[6]);
+          while (matcherWpName.find()) {
+            if (matcherWpName.groupCount() > 0) {
+              waypoint.name=matcherWpName.group(1).trim();
+              if (StringUtils.isNotBlank(waypoint.name)) {
+                waypoint.name=waypoint.name.trim();
+              }
+            }
+            if (matcherWpName.find() && matcherWpName.groupCount() > 0) {
+              waypoint.name=matcherWpName.group(1).trim();
+            }
+          }
+        }
+ catch (        Exception e) {
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint name");
+        }
+        try {
+          final Matcher matcherWpLatLon=patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
+          if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
+            String latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString().trim();
+            if (!StringUtils.startsWith(latlon,"???")) {
+              waypoint.latlon=latlon;
+              waypoint.coords=new Geopoint(latlon);
+            }
+          }
+        }
+ catch (        Exception e) {
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint coordinates");
+        }
+        j++;
+        if (wpItems.length > j) {
+          wp=wpItems[j].split("<td");
+        }
+        try {
+          final Matcher matcherWpNote=patternWpNote.matcher(wp[3]);
+          if (matcherWpNote.find() && matcherWpNote.groupCount() > 0) {
+            waypoint.note=matcherWpNote.group(1).trim();
+          }
+        }
+ catch (        Exception e) {
+          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint note");
+        }
+        if (cache.waypoints == null) {
+          cache.waypoints=new ArrayList<cgWaypoint>();
+        }
+        cache.waypoints.add(waypoint);
+      }
+    }
+  }
+  caches.cacheList.add(cache);
+  return caches;
+}

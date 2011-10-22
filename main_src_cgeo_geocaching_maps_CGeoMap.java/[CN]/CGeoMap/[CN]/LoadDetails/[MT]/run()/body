@@ -10,7 +10,7 @@
   }
   for (  String geocode : geocodes) {
     try {
-      if (stop) {
+      if (handler.isCancelled()) {
         break;
       }
       if (!app.isOffline(geocode,null)) {
@@ -25,7 +25,7 @@
  catch (          Exception e) {
           }
         }
-        if (stop) {
+        if (handler.isCancelled()) {
           Log.i(Settings.tag,"Stopped storing process.");
           break;
         }

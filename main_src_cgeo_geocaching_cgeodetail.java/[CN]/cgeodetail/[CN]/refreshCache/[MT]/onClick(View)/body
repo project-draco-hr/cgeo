@@ -3,7 +3,8 @@
     showToast(res.getString(R.string.err_detail_still_working));
     return;
   }
-  progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_refresh_title),res.getString(R.string.cache_dialog_refresh_message),true,true);
+  final RefreshCacheHandler refreshCacheHandler=new RefreshCacheHandler();
+  progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_refresh_title),res.getString(R.string.cache_dialog_refresh_message),true,refreshCacheHandler.cancelMessage());
   if (refreshThread != null) {
     refreshThread.interrupt();
   }

@@ -3,7 +3,8 @@
     showToast(res.getString(R.string.err_detail_still_working));
     return;
   }
-  progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,true);
+  final StoreCacheHandler storeCacheHandler=new StoreCacheHandler();
+  progress.show(cgeodetail.this,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,storeCacheHandler.cancelMessage());
   if (storeThread != null) {
     storeThread.interrupt();
   }

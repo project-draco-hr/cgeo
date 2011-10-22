@@ -1,7 +1,7 @@
 {
   final Progress progress=new Progress();
   assertFalse(progress.isShowing());
-  progress.show(getActivity(),"Title","Message",true,false);
+  progress.show(getActivity(),"Title","Message",true,null);
   assertTrue(progress.isShowing());
   progress.setMessage("Test");
   assertTrue(progress.isShowing());

@@ -39,9 +39,11 @@ if (detailTotal == 0) {
 ActivityMixin.showToast(activity,res.getString(R.string.warn_save_nothing));
 return true;
 }
+final LoadDetailsHandler loadDetailsHandler=new LoadDetailsHandler();
 waitDialog=new ProgressDialog(activity);
 waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 waitDialog.setCancelable(true);
+waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
 waitDialog.setMax(detailTotal);
 waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
 public void onCancel(DialogInterface arg0){
