@@ -1,5 +1,8 @@
 {
-  if (longDesc == null && cache != null && cache.getDescription() != null) {
-    longDesc=Html.fromHtml(cache.getDescription().trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),new UnknownTagsHandler());
+  if (longDesc == null && cache != null) {
+    String description=cache.getDescription();
+    if (description != null) {
+      longDesc=Html.fromHtml(description.trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),new UnknownTagsHandler());
+    }
   }
 }

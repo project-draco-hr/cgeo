@@ -48,7 +48,7 @@
     itemName.setText(res.getString(R.string.cache_type));
     String size="";
     if (cache.size != null) {
-      if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
+      if (cache.showSize()) {
         size=" (" + res.getString(cache.size.stringId) + ")";
       }
     }
