@@ -215,12 +215,7 @@
         if (inventoryString.length() > 0) {
           inventoryString.append('\n');
         }
-        if (containsHtml(inventoryItem.getName())) {
-          inventoryString.append(Html.fromHtml(inventoryItem.getName()).toString());
-        }
- else {
-          inventoryString.append(inventoryItem.getName());
-        }
+        inventoryString.append(StringEscapeUtils.unescapeHtml4(inventoryItem.getName()));
       }
       inventView.setText(inventoryString);
       inventBox.setClickable(true);
@@ -331,21 +326,11 @@
           nameView.setText(cgBase.formatCoords(wpt.coords,true));
         }
  else {
-          if (containsHtml(wpt.name)) {
-            nameView.setText(Html.fromHtml(wpt.name.trim()),TextView.BufferType.SPANNABLE);
-          }
- else {
-            nameView.setText(wpt.name.trim());
-          }
+          nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.name));
         }
         wpt.setIcon(res,nameView);
         TextView noteView=(TextView)waypointView.findViewById(R.id.note);
-        if (containsHtml(wpt.note)) {
-          noteView.setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
-        }
- else {
-          noteView.setText(wpt.note.trim());
-        }
+        noteView.setText(StringEscapeUtils.unescapeHtml4(wpt.note));
         waypointView.setOnClickListener(new waypointInfo(wpt.id));
         registerForContextMenu(waypointView);
         waypoints.addView(waypointView);

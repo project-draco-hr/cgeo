@@ -52,12 +52,7 @@
  else {
         ((TextView)rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4));
       }
-      if (containsHtml(log.author)) {
-        ((TextView)rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author),TextView.BufferType.SPANNABLE);
-      }
- else {
-        ((TextView)rowView.findViewById(R.id.author)).setText(log.author);
-      }
+      ((TextView)rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
       if (log.found == -1) {
         ((TextView)rowView.findViewById(R.id.count)).setVisibility(View.GONE);
       }
