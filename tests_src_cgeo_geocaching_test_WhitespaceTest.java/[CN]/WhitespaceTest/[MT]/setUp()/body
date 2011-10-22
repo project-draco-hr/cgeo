@@ -1,7 +1,7 @@
 {
-  final StringBuffer buffer=new StringBuffer();
+  final StringBuffer buffer=new StringBuffer(4096);
   final InputStream is=this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/GC2CJPF.html");
-  final BufferedReader br=new BufferedReader(new InputStreamReader(is));
+  final BufferedReader br=new BufferedReader(new InputStreamReader(is),4096);
   String line=null;
   while ((line=br.readLine()) != null) {
     buffer.append(line).append('\n');
