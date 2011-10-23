@@ -1,0 +1,11 @@
+{
+  cgTrackable trackable=cgBase.parseTrackable(getFileContent(R.raw.tb14wfv),null);
+  assertNotNull(trackable);
+  assertEquals("The Brickster",trackable.getName());
+  assertEquals("Adrian C",trackable.getOwner());
+  assertTrue(trackable.getGoal().startsWith("I'm on the run from the law."));
+  assertTrue(trackable.getGoal().endsWith("what I've seen."));
+  assertEquals(8451.9,trackable.getDistance(),0.01);
+  assertNull(trackable.getReleased());
+  assertNull(trackable.getOrigin());
+}
