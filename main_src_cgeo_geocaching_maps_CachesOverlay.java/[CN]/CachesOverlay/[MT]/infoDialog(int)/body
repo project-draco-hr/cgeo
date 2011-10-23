@@ -21,14 +21,9 @@
       if (fromDetail) {
         dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
           public void onClick(          DialogInterface dialog,          int id){
-            cgeonavigate navigateActivity=new cgeonavigate();
-            cgeonavigate.coordinates.clear();
-            cgeonavigate.coordinates.add(coordinate);
-            Intent navigateIntent=new Intent(context,navigateActivity.getClass());
-            navigateIntent.putExtra("latitude",coordinate.coords.getLatitude());
-            navigateIntent.putExtra("longitude",coordinate.coords.getLongitude());
-            navigateIntent.putExtra("geocode",coordinate.geocode.toUpperCase());
-            context.startActivity(navigateIntent);
+            final Collection<cgCoord> coordinatesWithType=new ArrayList<cgCoord>();
+            coordinatesWithType.add(coordinate);
+            cgeonavigate.startActivity(context,coordinate.geocode.toUpperCase(),null,coordinate.coords,coordinatesWithType);
             dialog.cancel();
           }
         }
@@ -55,14 +50,9 @@
       dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointL10N);
       dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
         public void onClick(        DialogInterface dialog,        int id){
-          cgeonavigate navigateActivity=new cgeonavigate();
-          cgeonavigate.coordinates.clear();
-          cgeonavigate.coordinates.add(coordinate);
-          Intent navigateIntent=new Intent(context,navigateActivity.getClass());
-          navigateIntent.putExtra("latitude",coordinate.coords.getLatitude());
-          navigateIntent.putExtra("longitude",coordinate.coords.getLongitude());
-          navigateIntent.putExtra("geocode",coordinate.name);
-          context.startActivity(navigateIntent);
+          Collection<cgCoord> coordinatesWithType=new ArrayList<cgCoord>();
+          coordinatesWithType.add(coordinate);
+          cgeonavigate.startActivity(context,coordinate.name,null,coordinate.coords,coordinatesWithType);
           dialog.cancel();
         }
       }

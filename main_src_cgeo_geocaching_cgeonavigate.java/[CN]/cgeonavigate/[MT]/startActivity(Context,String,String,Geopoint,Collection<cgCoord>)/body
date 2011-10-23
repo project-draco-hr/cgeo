@@ -1,0 +1,12 @@
+{
+  coordinates.clear();
+  coordinates.addAll(coordinatesWithType);
+  final Intent navigateIntent=new Intent(context,cgeonavigate.class);
+  navigateIntent.putExtra(EXTRAS_LATITUDE,coords.getLatitude());
+  navigateIntent.putExtra(EXTRAS_LONGITUDE,coords.getLongitude());
+  navigateIntent.putExtra(EXTRAS_GEOCODE,geocode.toUpperCase());
+  if (null != displayedName) {
+    navigateIntent.putExtra(EXTRAS_NAME,displayedName);
+  }
+  context.startActivity(navigateIntent);
+}

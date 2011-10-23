@@ -12,10 +12,14 @@
         attribute=translated;
       }
     }
-    if (buffer.length() > 0)     buffer.append('\n');
+    if (buffer.length() > 0) {
+      buffer.append('\n');
+    }
     buffer.append(attribute);
   }
-  if (noAttributeIconsFound)   buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
+  if (noAttributeIconsFound) {
+    buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
+  }
   attribView.setText(buffer);
   return descriptions;
 }

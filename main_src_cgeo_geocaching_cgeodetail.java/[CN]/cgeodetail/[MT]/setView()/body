@@ -187,7 +187,9 @@
       attributeBoxMaxWidth=((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
       ViewParent child=attribBox;
       do {
-        if (child instanceof View)         attributeBoxMaxWidth=attributeBoxMaxWidth - ((View)child).getPaddingLeft() - ((View)child).getPaddingRight();
+        if (child instanceof View) {
+          attributeBoxMaxWidth=attributeBoxMaxWidth - ((View)child).getPaddingLeft() - ((View)child).getPaddingRight();
+        }
         child=child.getParent();
       }
  while (child != null);
@@ -376,5 +378,7 @@
       ((LinearLayout)findViewById(R.id.license_box)).setVisibility(View.GONE);
     }
   }
-  if (geo != null)   geoUpdate.updateLoc(geo);
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
 }

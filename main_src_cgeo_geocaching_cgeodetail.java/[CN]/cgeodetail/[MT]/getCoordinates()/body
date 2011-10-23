@@ -17,15 +17,16 @@
     Log.e(Settings.tag,"cgeodetail.getCoordinates (cache): " + e.toString());
   }
   try {
-    for (    cgWaypoint waypoint : cache.waypoints) {
-      if (waypoint.coords == null) {
-        continue;
+    if (null != cache.waypoints) {
+      for (      cgWaypoint waypoint : cache.waypoints) {
+        if (null != waypoint.coords) {
+          coords=new cgCoord();
+          coords.type="waypoint";
+          coords.name=waypoint.name;
+          coords.coords=waypoint.coords;
+          coordinates.add(coords);
+        }
       }
-      coords=new cgCoord();
-      coords.type="waypoint";
-      coords.name=waypoint.name;
-      coords.coords=waypoint.coords;
-      coordinates.add(coords);
     }
   }
  catch (  Exception e) {

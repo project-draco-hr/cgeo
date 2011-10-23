@@ -3,12 +3,5 @@
     showToast(res.getString(R.string.cache_coordinates_no));
     return;
   }
-  Intent navigateIntent=new Intent(this,cgeonavigate.class);
-  navigateIntent.putExtra("latitude",cache.coords.getLatitude());
-  navigateIntent.putExtra("longitude",cache.coords.getLongitude());
-  navigateIntent.putExtra("geocode",cache.geocode.toUpperCase());
-  navigateIntent.putExtra("name",cache.name);
-  cgeonavigate.coordinates.clear();
-  cgeonavigate.coordinates.addAll(getCoordinates());
-  startActivity(navigateIntent);
+  cgeonavigate.startActivity(this,cache.geocode,cache.name,cache.coords,getCoordinates());
 }

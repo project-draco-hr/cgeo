@@ -12,9 +12,9 @@
   }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    title=extras.getString("geocode");
-    name=extras.getString("name");
-    dstCoords=new Geopoint(extras.getDouble("latitude"),extras.getDouble("longitude"));
+    title=extras.getString(EXTRAS_GEOCODE);
+    name=extras.getString(EXTRAS_NAME);
+    dstCoords=new Geopoint(extras.getDouble(EXTRAS_LATITUDE),extras.getDouble(EXTRAS_LONGITUDE));
     if (StringUtils.isNotBlank(name)) {
       if (StringUtils.isNotBlank(title)) {
         title=title + ": " + name;
