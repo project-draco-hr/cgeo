@@ -18,7 +18,9 @@
  else {
         viewport=app.getBounds(UUID.fromString(searchIdCenter));
       }
-      if (viewport == null)       return;
+      if (viewport == null) {
+        return;
+      }
       Integer cnt=(Integer)viewport.get(0);
       Integer minLat=null;
       Integer maxLat=null;
