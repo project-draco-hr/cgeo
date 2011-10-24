@@ -1,10 +1,6 @@
 {
-  Locale locale=Locale.getDefault();
-  if (useEnglish) {
-    locale=new Locale("en");
-  }
   final Configuration config=new Configuration();
-  config.locale=locale;
+  config.locale=useEnglish ? new Locale("en") : Locale.getDefault();
   final Resources resources=cgeoapplication.getInstance().getResources();
   resources.updateConfiguration(config,resources.getDisplayMetrics());
 }
