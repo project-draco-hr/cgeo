@@ -22,7 +22,7 @@
       item.setEnabled(false);
       item.setTitle(res.getString(R.string.map_live_enable));
     }
-    menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches)&& app.hasUnsavedCaches(searchId));
+    menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches)&& app.hasUnsavedCaches(search));
     item=menu.findItem(MENU_CIRCLE_MODE);
     if (overlayCaches != null && overlayCaches.getCircles()) {
       item.setTitle(res.getString(R.string.map_circles_hide));

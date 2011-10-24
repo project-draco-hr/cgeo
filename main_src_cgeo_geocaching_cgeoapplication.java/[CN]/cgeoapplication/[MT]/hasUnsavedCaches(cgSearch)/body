@@ -1,0 +1,11 @@
+{
+  if (search == null) {
+    return false;
+  }
+  for (  final String geocode : search.getGeocodes()) {
+    if (!isOffline(geocode,null)) {
+      return true;
+    }
+  }
+  return false;
+}

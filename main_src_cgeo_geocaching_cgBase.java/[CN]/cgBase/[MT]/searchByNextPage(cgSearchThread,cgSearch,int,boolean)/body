@@ -1,0 +1,48 @@
+{
+  final String[] viewstates=cgeoapplication.getViewstates(search);
+  final String url=cgeoapplication.getUrl(search);
+  if (StringUtils.isBlank(url)) {
+    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No url found");
+    return search;
+  }
+  if (isEmpty(viewstates)) {
+    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No viewstate given");
+    return search;
+  }
+  final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
+  final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
+  putViewstates(params,viewstates);
+  String page=getResponseData(postRequest(uri,params));
+  if (!checkLogin(page)) {
+    final StatusCode loginState=login();
+    if (loginState == StatusCode.NO_ERROR) {
+      page=getResponseData(postRequest(uri,params));
+    }
+ else     if (loginState == StatusCode.NO_LOGIN_INFO_STORED) {
+      Log.i(Settings.tag,"Working as guest.");
+    }
+ else {
+      cgeoapplication.setError(search,loginState);
+      Log.e(Settings.tag,"cgeoBase.searchByNextPage: Can not log in geocaching");
+      return search;
+    }
+  }
+  if (StringUtils.isBlank(page)) {
+    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No data from server");
+    return search;
+  }
+  final cgCacheWrap caches=parseSearch(thread,url,page,showCaptcha);
+  if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
+    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No cache parsed");
+    return search;
+  }
+  cgeoapplication.setError(search,caches.error);
+  cgeoapplication.setViewstates(search,caches.viewstates);
+  final List<cgCache> cacheList=new ArrayList<cgCache>();
+  for (  cgCache cache : caches.cacheList) {
+    cgeoapplication.addGeocode(search,cache.geocode);
+    cacheList.add(cache);
+  }
+  app.addSearch(search,cacheList,true,reason);
+  return search;
+}

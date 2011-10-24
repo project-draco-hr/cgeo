@@ -7,8 +7,8 @@ case MENU_TRAIL_MODE:
 case MENU_MAP_LIVE:
 Settings.setLiveMap(!Settings.isLiveMap());
 liveChanged=true;
-searchId=null;
-searchIdIntent=null;
+search=null;
+searchIntent=null;
 return true;
 case MENU_STORE_CACHES:
 if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
@@ -86,6 +86,7 @@ overlayCaches.switchCircles();
 mapView.invalidate();
 return true;
 case MENU_AS_LIST:
+{
 final cgSearch search=new cgSearch();
 search.totalCnt=caches.size();
 for (cgCache cache : caches) {
@@ -93,6 +94,7 @@ search.addGeocode(cache.geocode);
 }
 cgeocaches.startActivityMap(activity,app.addSearch(search,caches,true,0));
 return true;
+}
 default :
 if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
 item.setChecked(true);
@@ -102,7 +104,7 @@ if (mapRestartRequired) {
 activity.finish();
 Intent mapIntent=new Intent(activity,Settings.getMapFactory().getMapClass());
 mapIntent.putExtra(EXTRAS_DETAIL,fromDetailIntent);
-mapIntent.putExtra(EXTRAS_SEARCHID,searchIdIntent);
+mapIntent.putExtra(EXTRAS_SEARCH,searchIntent);
 mapIntent.putExtra(EXTRAS_GEOCODE,geocodeIntent);
 if (coordsIntent != null) {
 mapIntent.putExtra(EXTRAS_LATITUDE,coordsIntent.getLatitude());
@@ -121,7 +123,7 @@ activity.startActivity(mapIntent);
 return true;
 }
  else {
-NavigationAppFactory.onMenuItemSelected(item,geo,activity,res,caches != null && caches.size() > 0 ? caches.get(0) : null,searchId,null,coordsIntent);
+NavigationAppFactory.onMenuItemSelected(item,geo,activity,res,caches != null && caches.size() > 0 ? caches.get(0) : null,search,null,coordsIntent);
 }
 break;
 }

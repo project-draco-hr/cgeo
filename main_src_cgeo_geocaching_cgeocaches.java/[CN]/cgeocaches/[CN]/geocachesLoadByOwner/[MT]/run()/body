@@ -2,6 +2,6 @@
   Map<String,String> params=new HashMap<String,String>();
   params.put("username",username);
   params.put("cachetype",cachetype);
-  searchId=base.searchByOwner(this,username,cachetype,0,Settings.isShowCaptcha());
+  search=base.searchByOwner(this,username,cachetype,0,Settings.isShowCaptcha());
   handler.sendMessage(new Message());
 }

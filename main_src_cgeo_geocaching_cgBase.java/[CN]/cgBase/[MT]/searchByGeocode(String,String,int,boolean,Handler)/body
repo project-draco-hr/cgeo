@@ -12,7 +12,7 @@
     app.addSearch(search,cacheList,false,reason);
     cacheList.clear();
     cacheList=null;
-    return search.getCurrentId();
+    return search;
   }
   return ConnectorFactory.getConnector(geocode).searchByGeocode(this,geocode,guid,app,search,reason,handler);
 }

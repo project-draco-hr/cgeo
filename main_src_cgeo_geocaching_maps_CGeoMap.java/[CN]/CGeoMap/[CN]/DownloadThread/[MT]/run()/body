@@ -23,8 +23,8 @@
       working=false;
       return;
     }
-    searchId=base.searchByViewport(token,latMin,latMax,lonMin,lonMax,0);
-    if (searchId != null) {
+    search=base.searchByViewport(token,latMin,latMax,lonMin,lonMax,0);
+    if (search != null) {
       downloaded=true;
     }
     if (stop) {
@@ -32,7 +32,7 @@
       working=false;
       return;
     }
-    caches=app.getCaches(searchId,centerLat,centerLon,spanLat,spanLon);
+    caches=app.getCaches(search,centerLat,centerLon,spanLat,spanLon);
     if (stop) {
       displayHandler.sendEmptyMessage(0);
       working=false;

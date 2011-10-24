@@ -8,18 +8,18 @@
       working=false;
       return;
     }
-    if (fromDetailIntent || StringUtils.isNotEmpty(searchIdIntent)) {
-      searchId=UUID.fromString(searchIdIntent);
+    if (fromDetailIntent || searchIntent != null) {
+      search=searchIntent;
     }
  else {
       if (!live || !Settings.isLiveMap()) {
-        searchId=app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType());
+        search=app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType());
       }
  else {
-        searchId=app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType());
+        search=app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType());
       }
     }
-    if (searchId != null) {
+    if (search != null) {
       downloaded=true;
     }
     if (stop) {
@@ -27,7 +27,7 @@
       working=false;
       return;
     }
-    caches=app.getCaches(searchId,true);
+    caches=app.getCaches(search,true);
     if (live && Settings.isLiveMap()) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();

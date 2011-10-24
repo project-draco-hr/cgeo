@@ -2,13 +2,13 @@
   try {
     if (cache != null) {
       if (cache.reason > 0 || StringUtils.isBlank(cache.getDescription())) {
-        final UUID searchId=searchByGeocode(cache.geocode,null,listId,false,null);
-        cache=app.getCache(searchId);
+        final cgSearch search=searchByGeocode(cache.geocode,null,listId,false,null);
+        cache=app.getCache(search);
       }
     }
  else     if (StringUtils.isNotBlank(geocode)) {
-      final UUID searchId=searchByGeocode(geocode,null,listId,false,null);
-      cache=app.getCache(searchId);
+      final cgSearch search=searchByGeocode(geocode,null,listId,false,null);
+      cache=app.getCache(search);
     }
     if (cache == null) {
       if (handler != null) {

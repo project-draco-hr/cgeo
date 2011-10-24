@@ -9,10 +9,10 @@
     setTitle(title);
   }
   if (CollectionUtils.isNotEmpty(cacheList)) {
-    final Integer count=app.getTotal(searchId);
+    final Integer count=cgeoapplication.getTotal(search);
     if (count != null && count > 0) {
       setTitle(title);
-      if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < MAX_LIST_ITEMS) {
+      if (cacheList.size() < cgeoapplication.getTotal(search) && cacheList.size() < MAX_LIST_ITEMS) {
         setMoreCaches(true);
       }
  else {

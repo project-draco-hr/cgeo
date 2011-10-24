@@ -1,7 +1,7 @@
 {
-  if (searchId == null || CollectionUtils.isEmpty(cacheList)) {
+  if (search == null || CollectionUtils.isEmpty(cacheList)) {
     showToast(res.getString(R.string.warn_no_cache_coord));
     return;
   }
-  CGeoMap.startActivitySearch(this,searchId,title + " [" + app.getCount(searchId)+ "]",false);
+  CGeoMap.startActivitySearch(this,search,title + " [" + cgeoapplication.getCount(search)+ "]",false);
 }

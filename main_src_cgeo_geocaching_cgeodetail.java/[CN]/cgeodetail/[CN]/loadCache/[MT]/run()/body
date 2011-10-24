@@ -2,6 +2,6 @@
   if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
     return;
   }
-  searchId=base.searchByGeocode(geocode,StringUtils.isBlank(geocode) ? guid : null,0,false,handler);
+  search=base.searchByGeocode(geocode,StringUtils.isBlank(geocode) ? guid : null,0,false,handler);
   handler.sendMessage(new Message());
 }

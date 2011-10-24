@@ -24,7 +24,7 @@
       search.error=null;
       app.addSearch(search,cacheList,false,reason);
       cacheList.clear();
-      return search.getCurrentId();
+      return search;
     }
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No data from server");
     return null;
@@ -43,5 +43,5 @@
   }
   final List<cgCache> cacheList=cgBase.filterSearchResults(search,caches,false,false,null);
   app.addSearch(search,cacheList,true,reason);
-  return search.getCurrentId();
+  return search;
 }
