@@ -4,7 +4,7 @@
   }
   sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
   loadLogsFromDetails(page,cache);
-  if (Settings.isAdditionalDetails()) {
+  if (Settings.isElevationWanted()) {
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
@@ -12,6 +12,8 @@
     if (cache.coords != null) {
       cache.elevation=getElevation(cache.coords);
     }
+  }
+  if (Settings.isRatingWanted()) {
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
