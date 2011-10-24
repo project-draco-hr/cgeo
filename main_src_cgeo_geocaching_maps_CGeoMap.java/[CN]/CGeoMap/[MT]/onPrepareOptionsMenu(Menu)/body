@@ -34,6 +34,7 @@
     item=menu.findItem(MENU_AS_LIST);
     item.setVisible(live);
     item.setEnabled(CollectionUtils.isNotEmpty(caches));
+    menu.findItem(MENU_NAVIGATE).setEnabled(cachesCnt <= 1);
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgeomap.onPrepareOptionsMenu: " + e.toString());

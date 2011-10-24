@@ -120,6 +120,9 @@ activity.startActivity(mapIntent);
 }
 return true;
 }
+ else {
+NavigationAppFactory.onMenuItemSelected(item,geo,activity,res,caches != null && caches.size() > 0 ? caches.get(0) : null,searchId,null,coordsIntent);
+}
 break;
 }
 return false;
