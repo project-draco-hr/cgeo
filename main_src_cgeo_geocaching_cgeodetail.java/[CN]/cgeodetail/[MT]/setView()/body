@@ -2,10 +2,10 @@
   RelativeLayout itemLayout;
   TextView itemName;
   TextView itemValue;
-  if (searchId == null) {
+  if (search == null) {
     return;
   }
-  cache=app.getCache(searchId);
+  cache=app.getCache(search);
   if (cache == null) {
     progress.dismiss();
     if (StringUtils.isNotBlank(geocode)) {

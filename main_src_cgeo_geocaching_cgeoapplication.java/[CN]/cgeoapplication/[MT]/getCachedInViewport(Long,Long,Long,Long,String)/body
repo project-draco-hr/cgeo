@@ -1,4 +1,4 @@
 {
   final List<String> geocodes=getStorage().getCachedInViewport(centerLat,centerLon,spanLat,spanLon,cachetype);
-  return createNewSearch(geocodes).getCurrentId();
+  return new cgSearch(geocodes);
 }

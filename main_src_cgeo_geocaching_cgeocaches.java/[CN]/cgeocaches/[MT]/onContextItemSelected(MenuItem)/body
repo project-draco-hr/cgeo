@@ -138,8 +138,8 @@
   }
   lastMenuInfo=info;
   if (cache != null) {
-    final UUID singleSearchId=base.searchByGeocode(cache.geocode,null,0,false,null);
-    if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearchId,null,null)) {
+    final cgSearch singleSearch=base.searchByGeocode(cache.geocode,null,0,false,null);
+    if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearch,null,null)) {
       return true;
     }
     int logType=id - MENU_LOG_VISIT_OFFLINE;
