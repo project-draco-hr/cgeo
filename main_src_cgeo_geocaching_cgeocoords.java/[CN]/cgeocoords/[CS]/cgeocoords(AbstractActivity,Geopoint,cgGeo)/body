@@ -1,11 +1,14 @@
 {
-  super(contextIn);
-  context=contextIn;
-  geo=geoIn;
-  if (gpIn != null) {
-    gp=gpIn;
+  super(context);
+  this.context=context;
+  this.geo=geo;
+  if (gp != null) {
+    this.gp=gp;
   }
  else   if (geo != null && geo.coordsNow != null) {
-    gp=geo.coordsNow;
+    this.gp=geo.coordsNow;
+  }
+ else {
+    this.gp=new Geopoint(0.0,0.0);
   }
 }
