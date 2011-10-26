@@ -8,7 +8,7 @@
   }
  else {
     cache=getStorage().loadCache(geocode,null,loadAttributes,loadWaypoints,loadSpoilers,loadLogs,loadInventory,loadOfflineLog);
-    if (cache != null && cache.detailed && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
+    if (cache != null && cache.getDetailed() && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
       putCacheInCache(cache);
     }
   }

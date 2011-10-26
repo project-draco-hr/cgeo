@@ -7,7 +7,7 @@
   }
   final List<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
   for (  cgCache cache : cacheListTemp) {
-    if (checked > 0 && !cache.statusChecked) {
+    if (checked > 0 && !cache.isStatusChecked()) {
       continue;
     }
     try {
@@ -15,7 +15,7 @@
         Log.i(Settings.tag,"Stopped dropping process.");
         break;
       }
-      app.markDropped(cache.geocode);
+      app.markDropped(cache.getGeocode());
     }
  catch (    Exception e) {
       Log.e(Settings.tag,"cgeocaches.geocachesDropDetails: " + e.toString());

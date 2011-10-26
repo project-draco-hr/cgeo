@@ -1,13 +1,13 @@
 {
   int check=0;
   for (  cgCache cache : list) {
-    if (cache.statusChecked) {
-      cache.statusChecked=false;
-      cache.statusCheckedView=false;
+    if (cache.isStatusChecked()) {
+      cache.setStatusChecked(false);
+      cache.setStatusCheckedView(false);
     }
  else {
-      cache.statusChecked=true;
-      cache.statusCheckedView=true;
+      cache.setStatusChecked(true);
+      cache.setStatusCheckedView(true);
       check++;
     }
   }

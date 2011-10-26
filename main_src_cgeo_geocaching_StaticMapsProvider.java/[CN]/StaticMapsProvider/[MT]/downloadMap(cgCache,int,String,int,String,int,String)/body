@@ -2,7 +2,7 @@
   final String mapUrl="http://maps.google.com/maps/api/staticmap?center=" + latlonMap;
   final String markerUrl=getMarkerUrl(cache);
   final String url=mapUrl + "&zoom=" + zoom+ "&size="+ edge+ "x"+ edge+ "&maptype="+ mapType+ "&markers=icon%3A"+ markerUrl+ "%7C"+ latlonMap+ waypoints+ "&sensor=false";
-  final File file=getMapFile(cache.geocode,level);
+  final File file=getMapFile(cache.getGeocode(),level);
   final HttpResponse httpResponse=cgBase.request(url,null,false);
   if (httpResponse != null) {
     if (LocalStorage.saveEntityToFile(httpResponse.getEntity(),file)) {

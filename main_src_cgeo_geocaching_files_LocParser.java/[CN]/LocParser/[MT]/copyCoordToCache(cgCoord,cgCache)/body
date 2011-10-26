@@ -1,10 +1,10 @@
 {
-  cache.coords=coord.coords;
-  cache.difficulty=coord.difficulty;
-  cache.terrain=coord.terrain;
-  cache.size=coord.size;
-  cache.geocode=coord.geocode.toUpperCase();
-  if (StringUtils.isBlank(cache.name)) {
-    cache.name=coord.name;
+  cache.setCoords(coord.getCoords());
+  cache.setDifficulty(coord.getDifficulty());
+  cache.setTerrain(coord.getTerrain());
+  cache.setSize(coord.getSize());
+  cache.setGeocode(coord.getGeocode().toUpperCase());
+  if (StringUtils.isBlank(cache.getName())) {
+    cache.setName(coord.getName());
   }
 }

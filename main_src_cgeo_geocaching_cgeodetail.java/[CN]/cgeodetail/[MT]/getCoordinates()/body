@@ -3,27 +3,27 @@
   List<cgCoord> coordinates=new ArrayList<cgCoord>();
   try {
     coords=new cgCoord();
-    coords.type="cache";
+    coords.setType("cache");
     if (StringUtils.isNotBlank(name)) {
-      coords.name=name;
+      coords.setName(name);
     }
  else {
-      coords.name=geocode.toUpperCase();
+      coords.setName(geocode.toUpperCase());
     }
-    coords.coords=cache.coords;
+    coords.setCoords(cache.getCoords());
     coordinates.add(coords);
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgeodetail.getCoordinates (cache): " + e.toString());
   }
   try {
-    if (null != cache.waypoints) {
-      for (      cgWaypoint waypoint : cache.waypoints) {
-        if (null != waypoint.coords) {
+    if (null != cache.getWaypoints()) {
+      for (      cgWaypoint waypoint : cache.getWaypoints()) {
+        if (null != waypoint.getCoords()) {
           coords=new cgCoord();
-          coords.type="waypoint";
-          coords.name=waypoint.name;
-          coords.coords=waypoint.coords;
+          coords.setType("waypoint");
+          coords.setName(waypoint.getName());
+          coords.setCoords(waypoint.getCoords());
           coordinates.add(coords);
         }
       }

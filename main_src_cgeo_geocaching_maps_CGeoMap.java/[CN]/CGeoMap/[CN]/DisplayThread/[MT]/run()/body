@@ -16,18 +16,18 @@
           working=false;
           return;
         }
-        if (cacheOne.coords == null) {
+        if (cacheOne.getCoords() == null) {
           continue;
         }
-        if (cacheOne.waypoints != null && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold())) && !cacheOne.waypoints.isEmpty()) {
-          for (          cgWaypoint oneWaypoint : cacheOne.waypoints) {
-            if (oneWaypoint.coords == null) {
+        if (cacheOne.getWaypoints() != null && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold())) && !cacheOne.getWaypoints().isEmpty()) {
+          for (          cgWaypoint oneWaypoint : cacheOne.getWaypoints()) {
+            if (oneWaypoint.getCoords() == null) {
               continue;
             }
-            items.add(getWaypointItem(new cgCoord(oneWaypoint),oneWaypoint.type));
+            items.add(getWaypointItem(new cgCoord(oneWaypoint),oneWaypoint.getWaypointType()));
           }
         }
-        items.add(getCacheItem(new cgCoord(cacheOne),cacheOne.type,cacheOne.own,cacheOne.found,cacheOne.disabled));
+        items.add(getCacheItem(new cgCoord(cacheOne),cacheOne.getType(),cacheOne.isOwn(),cacheOne.isFound(),cacheOne.isDisabled()));
       }
       overlayCaches.updateItems(items);
       displayHandler.sendEmptyMessage(1);

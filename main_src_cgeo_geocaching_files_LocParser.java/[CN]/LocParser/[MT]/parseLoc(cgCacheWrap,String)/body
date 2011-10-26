@@ -1,8 +1,8 @@
 {
   final Map<String,cgCoord> cidCoords=parseCoordinates(fileContent);
   for (  cgCache cache : caches.cacheList) {
-    if (cidCoords.containsKey(cache.geocode)) {
-      cgCoord coord=cidCoords.get(cache.geocode);
+    if (cidCoords.containsKey(cache.getGeocode())) {
+      cgCoord coord=cidCoords.get(cache.getGeocode());
       copyCoordToCache(coord,cache);
     }
   }

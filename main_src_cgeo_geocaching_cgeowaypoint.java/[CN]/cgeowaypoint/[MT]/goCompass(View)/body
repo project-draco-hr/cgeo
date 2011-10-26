@@ -4,5 +4,5 @@
   }
   Collection<cgCoord> coordinatesWithType=new ArrayList<cgCoord>();
   coordinatesWithType.add(new cgCoord(waypoint));
-  cgeonavigate.startActivity(this,waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim(),waypoint.name,waypoint.coords,coordinatesWithType);
+  cgeonavigate.startActivity(this,waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(),waypoint.getName(),waypoint.getCoords(),coordinatesWithType);
 }

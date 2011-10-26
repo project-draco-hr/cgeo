@@ -1,5 +1,5 @@
 {
-  final String uri="http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheId;
+  final String uri="http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
   String page=postRequestLogged(uri);
   if (StringUtils.isBlank(page)) {
     Log.e(Settings.tag,"cgBase.removeFromWatchlist: No data from server");
@@ -11,7 +11,7 @@
   boolean guidOnPage=cache.isGuidContainedInPage(page);
   if (!guidOnPage) {
     Log.i(Settings.tag,"cgBase.removeFromWatchlist: cache removed from watchlist");
-    cache.onWatchlist=false;
+    cache.setOnWatchlist(false);
   }
  else {
     Log.e(Settings.tag,"cgBase.removeFromWatchlist: cache not removed from watchlist");

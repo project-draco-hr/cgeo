@@ -1,7 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
   try {
-    boolean visible=waypoint != null && waypoint.coords != null;
+    boolean visible=waypoint != null && waypoint.getCoords() != null;
     menu.findItem(MENU_ID_NAVIGATION).setVisible(visible);
     menu.findItem(MENU_ID_COMPASS).setVisible(visible);
     menu.findItem(MENU_ID_CACHES_AROUND).setVisible(visible);

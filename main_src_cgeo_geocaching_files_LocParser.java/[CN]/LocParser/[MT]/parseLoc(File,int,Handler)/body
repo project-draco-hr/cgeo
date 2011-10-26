@@ -5,16 +5,16 @@
     final cgCacheWrap caches=new cgCacheWrap();
     for (    Entry<String,cgCoord> entry : coords.entrySet()) {
       cgCoord coord=entry.getValue();
-      if (StringUtils.isBlank(coord.geocode) || StringUtils.isBlank(coord.name)) {
+      if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
         continue;
       }
       cgCache cache=new cgCache();
       copyCoordToCache(coord,cache);
       caches.cacheList.add(cache);
       fixCache(cache);
-      cache.type=CacheType.UNKNOWN.id;
-      cache.reason=listId;
-      cache.detailed=true;
+      cache.setCacheType(CacheType.UNKNOWN);
+      cache.setReason(listId);
+      cache.setDetailed(true);
       cgeoapplication.getInstance().addCacheToSearch(search,cache);
     }
     caches.totalCnt=caches.cacheList.size();

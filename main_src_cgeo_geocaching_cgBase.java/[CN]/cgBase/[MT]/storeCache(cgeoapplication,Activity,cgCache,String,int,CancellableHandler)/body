@@ -1,8 +1,8 @@
 {
   try {
     if (cache != null) {
-      if (cache.reason > 0 || StringUtils.isBlank(cache.getDescription())) {
-        final cgSearch search=searchByGeocode(cache.geocode,null,listId,false,null);
+      if (cache.getReason() > 0 || StringUtils.isBlank(cache.getDescription())) {
+        final cgSearch search=searchByGeocode(cache.getGeocode(),null,listId,false,null);
         cache=app.getCache(search);
       }
     }
@@ -19,23 +19,23 @@
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
-    final cgHtmlImg imgGetter=new cgHtmlImg(activity,cache.geocode,false,listId,true);
+    final cgHtmlImg imgGetter=new cgHtmlImg(activity,cache.getGeocode(),false,listId,true);
     if (StringUtils.isNotBlank(cache.getDescription())) {
       Html.fromHtml(cache.getDescription(),imgGetter,null);
     }
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
-    if (CollectionUtils.isNotEmpty(cache.spoilers)) {
-      for (      cgImage oneSpoiler : cache.spoilers) {
+    if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+      for (      cgImage oneSpoiler : cache.getSpoilers()) {
         imgGetter.getDrawable(oneSpoiler.url);
       }
     }
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
-    if (Settings.isStoreLogImages() && cache.logs != null) {
-      for (      cgLog log : cache.logs) {
+    if (Settings.isStoreLogImages() && cache.getLogs() != null) {
+      for (      cgLog log : cache.getLogs()) {
         if (CollectionUtils.isNotEmpty(log.logImages)) {
           for (          cgImage oneLogImg : log.logImages) {
             imgGetter.getDrawable(oneLogImg.url);
@@ -50,8 +50,8 @@
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
-    app.markStored(cache.geocode,listId);
-    app.removeCacheFromCache(cache.geocode);
+    app.markStored(cache.getGeocode(),listId);
+    app.removeCacheFromCache(cache.getGeocode());
     if (handler != null) {
       handler.sendMessage(new Message());
     }

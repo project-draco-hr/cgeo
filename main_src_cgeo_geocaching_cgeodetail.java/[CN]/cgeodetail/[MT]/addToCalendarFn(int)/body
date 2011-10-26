@@ -6,37 +6,37 @@
     Uri calendarProvider=Compatibility.getCalenderEventsProviderURI();
     final Integer[] keys=calendars.keySet().toArray(new Integer[calendars.size()]);
     final Integer calId=keys[index];
-    final Date eventDate=cache.hidden;
+    final Date eventDate=cache.getHidden();
     eventDate.setHours(0);
     eventDate.setMinutes(0);
     eventDate.setSeconds(0);
     StringBuilder description=new StringBuilder();
     description.append(cache.getUrl());
     description.append("\n\n");
-    if (StringUtils.isNotBlank(cache.shortdesc)) {
-      description.append(Html.fromHtml(cache.shortdesc).toString());
+    if (StringUtils.isNotBlank(cache.getShortdesc())) {
+      description.append(Html.fromHtml(cache.getShortdesc()).toString());
     }
-    if (StringUtils.isNotBlank(cache.personalNote)) {
-      description.append("\n\n" + Html.fromHtml(cache.personalNote).toString());
+    if (StringUtils.isNotBlank(cache.getPersonalNote())) {
+      description.append("\n\n" + Html.fromHtml(cache.getPersonalNote()).toString());
     }
     ContentValues event=new ContentValues();
     event.put("calendar_id",calId);
     event.put("dtstart",eventDate.getTime() + 43200000);
     event.put("dtend",eventDate.getTime() + 43200000 + 3600000);
     event.put("eventTimezone","UTC");
-    event.put("title",Html.fromHtml(cache.name).toString());
+    event.put("title",Html.fromHtml(cache.getName()).toString());
     event.put("description",description.toString());
     String location="";
-    if (cache.coords != null) {
+    if (cache.getCoords() != null) {
       location+=cache.getLatitude() + " " + cache.getLongitude();
     }
-    if (StringUtils.isNotBlank(cache.location)) {
+    if (StringUtils.isNotBlank(cache.getLocation())) {
       boolean addParenteses=false;
       if (location.length() > 0) {
         addParenteses=true;
         location+=" (";
       }
-      location+=Html.fromHtml(cache.location).toString();
+      location+=Html.fromHtml(cache.getLocation()).toString();
       if (addParenteses) {
         location+=")";
       }

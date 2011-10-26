@@ -1,6 +1,6 @@
 {
-  if (cache == null || cache.coords == null) {
+  if (cache == null || cache.getCoords() == null) {
     showToast(res.getString(R.string.err_location_unknown));
   }
-  cgeonavigate.startActivity(this,cache.geocode,cache.name,cache.coords,getCoordinates());
+  cgeonavigate.startActivity(this,cache.getGeocode(),cache.getName(),cache.getCoords(),getCoordinates());
 }

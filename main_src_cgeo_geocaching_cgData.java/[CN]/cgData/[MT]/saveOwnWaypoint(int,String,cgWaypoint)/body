@@ -9,13 +9,13 @@
     ContentValues values=new ContentValues();
     values.put("geocode",geocode);
     values.put("updated",System.currentTimeMillis());
-    values.put("type",waypoint.type != null ? waypoint.type.id : null);
+    values.put("type",waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
     values.put("prefix",waypoint.getPrefix());
-    values.put("lookup",waypoint.lookup);
-    values.put("name",waypoint.name);
-    values.put("latlon",waypoint.latlon);
-    putCoords(values,waypoint.coords);
-    values.put("note",waypoint.note);
+    values.put("lookup",waypoint.getLookup());
+    values.put("name",waypoint.getName());
+    values.put("latlon",waypoint.getLatlon());
+    putCoords(values,waypoint.getCoords());
+    values.put("note",waypoint.getNote());
     if (id <= 0) {
       databaseRW.insert(dbTableWaypoints,null,values);
       ok=true;

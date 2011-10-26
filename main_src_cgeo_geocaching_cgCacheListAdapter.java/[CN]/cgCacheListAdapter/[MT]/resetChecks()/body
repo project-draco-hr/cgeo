@@ -8,8 +8,8 @@
   boolean status=getSelectMode();
   int cleared=0;
   for (  cgCache cache : list) {
-    if (cache.statusChecked) {
-      cache.statusChecked=false;
+    if (cache.isStatusChecked()) {
+      cache.setStatusChecked(false);
       checkChecked(-1);
       cleared++;
     }

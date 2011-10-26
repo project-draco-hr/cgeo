@@ -3,11 +3,11 @@
     return false;
   }
   try {
-    if (cache != null && cache.coords != null) {
-      startActivity(activity,cache.coords);
+    if (cache != null && cache.getCoords() != null) {
+      startActivity(activity,cache.getCoords());
     }
- else     if (waypoint != null && waypoint.coords != null) {
-      startActivity(activity,waypoint.coords);
+ else     if (waypoint != null && waypoint.getCoords() != null) {
+      startActivity(activity,waypoint.getCoords());
     }
  else     if (coords != null) {
       startActivity(activity,coords);

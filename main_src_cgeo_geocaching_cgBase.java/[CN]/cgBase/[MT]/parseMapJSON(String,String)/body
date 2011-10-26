@@ -26,52 +26,52 @@
               break;
             }
             final cgCache cacheToAdd=new cgCache();
-            cacheToAdd.reliableLatLon=false;
-            cacheToAdd.geocode=oneCache.getString("gc");
-            cacheToAdd.coords=new Geopoint(oneCache.getDouble("lat"),oneCache.getDouble("lon"));
-            cacheToAdd.name=oneCache.getString("nn");
-            cacheToAdd.found=oneCache.getBoolean("f");
-            cacheToAdd.own=oneCache.getBoolean("o");
-            cacheToAdd.disabled=!oneCache.getBoolean("ia");
+            cacheToAdd.setReliableLatLon(false);
+            cacheToAdd.setGeocode(oneCache.getString("gc"));
+            cacheToAdd.setCoords(new Geopoint(oneCache.getDouble("lat"),oneCache.getDouble("lon")));
+            cacheToAdd.setName(oneCache.getString("nn"));
+            cacheToAdd.setFound(oneCache.getBoolean("f"));
+            cacheToAdd.setOwn(oneCache.getBoolean("o"));
+            cacheToAdd.setDisabled(!oneCache.getBoolean("ia"));
             int ctid=oneCache.getInt("ctid");
             if (ctid == 2) {
-              cacheToAdd.type=CacheType.TRADITIONAL.id;
+              cacheToAdd.setCacheType(CacheType.TRADITIONAL);
             }
  else             if (ctid == 3) {
-              cacheToAdd.type=CacheType.MULTI.id;
+              cacheToAdd.setCacheType(CacheType.MULTI);
             }
  else             if (ctid == 4) {
-              cacheToAdd.type=CacheType.VIRTUAL.id;
+              cacheToAdd.setCacheType(CacheType.VIRTUAL);
             }
  else             if (ctid == 5) {
-              cacheToAdd.type=CacheType.LETTERBOX.id;
+              cacheToAdd.setCacheType(CacheType.LETTERBOX);
             }
  else             if (ctid == 6) {
-              cacheToAdd.type=CacheType.EVENT.id;
+              cacheToAdd.setCacheType(CacheType.EVENT);
             }
  else             if (ctid == 8) {
-              cacheToAdd.type=CacheType.MYSTERY.id;
+              cacheToAdd.setCacheType(CacheType.MYSTERY);
             }
  else             if (ctid == 11) {
-              cacheToAdd.type=CacheType.WEBCAM.id;
+              cacheToAdd.setCacheType(CacheType.WEBCAM);
             }
  else             if (ctid == 13) {
-              cacheToAdd.type=CacheType.CITO.id;
+              cacheToAdd.setCacheType(CacheType.CITO);
             }
  else             if (ctid == 137) {
-              cacheToAdd.type=CacheType.EARTH.id;
+              cacheToAdd.setCacheType(CacheType.EARTH);
             }
  else             if (ctid == 453) {
-              cacheToAdd.type=CacheType.MEGA_EVENT.id;
+              cacheToAdd.setCacheType(CacheType.MEGA_EVENT);
             }
  else             if (ctid == 1858) {
-              cacheToAdd.type=CacheType.WHERIGO.id;
+              cacheToAdd.setCacheType(CacheType.WHERIGO);
             }
  else             if (ctid == 3653) {
-              cacheToAdd.type=CacheType.LOSTANDFOUND.id;
+              cacheToAdd.setCacheType(CacheType.LOSTANDFOUND);
             }
  else {
-              cacheToAdd.type=CacheType.UNKNOWN.id;
+              cacheToAdd.setCacheType(CacheType.UNKNOWN);
             }
             caches.cacheList.add(cacheToAdd);
           }

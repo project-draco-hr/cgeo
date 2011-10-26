@@ -3,9 +3,9 @@
   if (caches != null && !caches.cacheList.isEmpty()) {
     final cgCache cache=caches.cacheList.get(0);
     getExtraOnlineInfo(cache,page,handler);
-    cache.updated=System.currentTimeMillis();
-    cache.detailedUpdate=cache.updated;
-    cache.detailed=true;
+    cache.setUpdated(System.currentTimeMillis());
+    cache.setDetailedUpdate(cache.getUpdated());
+    cache.setDetailed(true);
   }
   if (CancellableHandler.isCancelled(handler)) {
     return null;

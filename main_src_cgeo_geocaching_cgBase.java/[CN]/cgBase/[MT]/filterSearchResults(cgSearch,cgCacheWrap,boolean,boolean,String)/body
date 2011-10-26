@@ -11,9 +11,9 @@
     search.totalCnt=caches.totalCnt;
     if (CollectionUtils.isNotEmpty(caches.cacheList)) {
       for (      final cgCache cache : caches.cacheList) {
-        final boolean excludeCache=(excludeDisabled && cache.disabled) || (excludeMine && (cache.own || cache.found)) || (cacheType != null && !cacheType.equals(cache.type));
+        final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwn() || cache.isFound())) || (cacheType != null && !cacheType.equals(cache.getType()));
         if (!excludeCache) {
-          search.addGeocode(cache.geocode);
+          search.addGeocode(cache.getGeocode());
           cacheList.add(cache);
         }
       }

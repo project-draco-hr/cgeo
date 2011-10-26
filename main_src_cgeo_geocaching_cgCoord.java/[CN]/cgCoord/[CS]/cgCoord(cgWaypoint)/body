@@ -1,10 +1,11 @@
 {
-  id=waypoint.id;
+  id=waypoint.getId();
   disabled=false;
   found=false;
   geocode="";
-  coords=waypoint.coords;
-  name=waypoint.name;
+  coords=waypoint.getCoords();
+  name=waypoint.getName();
   type="waypoint";
-  typeSpec=waypoint.type != null ? waypoint.type.id : null;
+  typeSpec=waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null;
+  waypointType=waypoint.getWaypointType();
 }

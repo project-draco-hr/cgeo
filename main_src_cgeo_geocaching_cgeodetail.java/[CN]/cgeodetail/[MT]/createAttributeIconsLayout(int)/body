@@ -5,7 +5,7 @@
   LinearLayout attributeRow=newAttributeIconsRow();
   rows.addView(attributeRow);
   noAttributeIconsFound=true;
-  for (  String attributeName : cache.attributes) {
+  for (  String attributeName : cache.getAttributes()) {
     boolean strikethru=attributeName.endsWith("_no");
     if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
       attributeName=attributeName.substring(0,attributeName.lastIndexOf("_"));

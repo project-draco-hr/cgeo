@@ -2,7 +2,7 @@
   if (cache == null) {
     return;
   }
-  holder.checkbox.setChecked(cache.statusChecked);
+  holder.checkbox.setChecked(cache.isStatusChecked());
   final Animation hideCheckbox=new TranslateAnimation((int)(SWIPE_DISTANCE * pixelDensity),0,0,0);
   hideCheckbox.setRepeatCount(0);
   hideCheckbox.setDuration(force ? 0 : 400);
@@ -21,5 +21,5 @@
   selectAnimation.addAnimation(hideCheckbox);
   selectAnimation.addAnimation(brightenInfo);
   holder.oneInfo.startAnimation(selectAnimation);
-  cache.statusCheckedView=false;
+  cache.setStatusCheckedView(false);
 }

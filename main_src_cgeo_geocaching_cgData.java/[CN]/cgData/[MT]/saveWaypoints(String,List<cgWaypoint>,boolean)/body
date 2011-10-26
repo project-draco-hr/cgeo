@@ -19,13 +19,13 @@
         values.clear();
         values.put("geocode",geocode);
         values.put("updated",timeStamp);
-        values.put("type",oneWaypoint.type != null ? oneWaypoint.type.id : null);
+        values.put("type",oneWaypoint.getWaypointType() != null ? oneWaypoint.getWaypointType().id : null);
         values.put("prefix",oneWaypoint.getPrefix());
-        values.put("lookup",oneWaypoint.lookup);
-        values.put("name",oneWaypoint.name);
-        values.put("latlon",oneWaypoint.latlon);
-        putCoords(values,oneWaypoint.coords);
-        values.put("note",oneWaypoint.note);
+        values.put("lookup",oneWaypoint.getLookup());
+        values.put("name",oneWaypoint.getName());
+        values.put("latlon",oneWaypoint.getLatlon());
+        putCoords(values,oneWaypoint.getCoords());
+        values.put("note",oneWaypoint.getNote());
         databaseRW.insert(dbTableWaypoints,null,values);
       }
     }

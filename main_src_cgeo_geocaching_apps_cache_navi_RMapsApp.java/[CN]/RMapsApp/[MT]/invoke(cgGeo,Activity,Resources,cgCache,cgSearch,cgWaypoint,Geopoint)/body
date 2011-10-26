@@ -5,11 +5,11 @@
   try {
     if (isInstalled(activity)) {
       final ArrayList<String> locations=new ArrayList<String>();
-      if (cache != null && cache.coords != null) {
-        locations.add(String.format((Locale)null,"%.6f",cache.coords.getLatitude()) + "," + String.format((Locale)null,"%.6f",cache.coords.getLongitude())+ ";"+ cache.geocode+ ";"+ cache.name);
+      if (cache != null && cache.getCoords() != null) {
+        locations.add(String.format((Locale)null,"%.6f",cache.getCoords().getLatitude()) + "," + String.format((Locale)null,"%.6f",cache.getCoords().getLongitude())+ ";"+ cache.getGeocode()+ ";"+ cache.getName());
       }
- else       if (waypoint != null && waypoint.coords != null) {
-        locations.add(String.format((Locale)null,"%.6f",waypoint.coords.getLatitude()) + "," + String.format((Locale)null,"%.6f",waypoint.coords.getLongitude())+ ";"+ waypoint.lookup+ ";"+ waypoint.name);
+ else       if (waypoint != null && waypoint.getCoords() != null) {
+        locations.add(String.format((Locale)null,"%.6f",waypoint.getCoords().getLatitude()) + "," + String.format((Locale)null,"%.6f",waypoint.getCoords().getLongitude())+ ";"+ waypoint.getLookup()+ ";"+ waypoint.getName());
       }
       final Intent intent=new Intent(INTENT);
       intent.putStringArrayListExtra("locations",locations);

@@ -6,13 +6,13 @@
     lookup=old.lookup;
   }
   if (StringUtils.isBlank(name)) {
-    this.name=old.name;
+    setName(old.getName());
   }
   if (StringUtils.isBlank(latlon) || latlon.startsWith("?")) {
     latlon=old.latlon;
   }
   if (coords == null) {
-    coords=old.coords;
+    coords=old.getCoords();
   }
   if (StringUtils.isBlank(note)) {
     note=old.note;

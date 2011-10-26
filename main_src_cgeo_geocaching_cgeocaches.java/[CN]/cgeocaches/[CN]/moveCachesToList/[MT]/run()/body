@@ -3,8 +3,8 @@
   if (checked > 0) {
     final List<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
     for (    cgCache cache : cacheListTemp) {
-      if (cache.statusChecked) {
-        app.moveToList(cache.geocode,listId);
+      if (cache.isStatusChecked()) {
+        app.moveToList(cache.getGeocode(),listId);
       }
     }
   }

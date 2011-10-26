@@ -33,7 +33,7 @@
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
       for (int i=caches.size() - 1; i >= 0; i--) {
         cgCache cache=caches.get(i);
-        if ((cache.found && excludeMine) || (cache.own && excludeMine) || (cache.disabled && excludeDisabled)) {
+        if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
           caches.remove(i);
         }
       }

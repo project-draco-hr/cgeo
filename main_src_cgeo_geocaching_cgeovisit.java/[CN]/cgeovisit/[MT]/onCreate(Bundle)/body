@@ -17,11 +17,11 @@
     geocode=app.getGeocode(cacheid);
   }
   cache=app.getCacheByGeocode(geocode);
-  if (StringUtils.isNotBlank(cache.name)) {
-    setTitle(res.getString(R.string.log_new_log) + " " + cache.name);
+  if (StringUtils.isNotBlank(cache.getName())) {
+    setTitle(res.getString(R.string.log_new_log) + " " + cache.getName());
   }
  else {
-    setTitle(res.getString(R.string.log_new_log) + " " + cache.geocode.toUpperCase());
+    setTitle(res.getString(R.string.log_new_log) + " " + cache.getGeocode().toUpperCase());
   }
   app.setAction(geocode);
   init();

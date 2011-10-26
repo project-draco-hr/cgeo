@@ -20,22 +20,22 @@ break;
 }
 break;
 case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-if (null != cache.waypoints && index < cache.waypoints.size()) {
-final cgWaypoint copy=new cgWaypoint(cache.waypoints.get(index));
+if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+final cgWaypoint copy=new cgWaypoint(cache.getWaypoints().get(index));
 copy.setUserDefined();
-copy.name=res.getString(R.string.waypoint_copy_of) + " " + copy.name;
-cache.waypoints.add(index + 1,copy);
-app.saveOwnWaypoint(-1,cache.geocode,copy);
+copy.setName(res.getString(R.string.waypoint_copy_of) + " " + copy.getName());
+cache.getWaypoints().add(index + 1,copy);
+app.saveOwnWaypoint(-1,cache.getGeocode(),copy);
 app.removeCacheFromCache(geocode);
 setView();
 }
 break;
 case CONTEXT_MENU_WAYPOINT_DELETE:
-if (null != cache.waypoints && index < cache.waypoints.size()) {
-final cgWaypoint waypoint=cache.waypoints.get(index);
+if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+final cgWaypoint waypoint=cache.getWaypoints().get(index);
 if (waypoint.isUserDefined()) {
-cache.waypoints.remove(index);
-app.deleteWaypoint(waypoint.id);
+cache.getWaypoints().remove(index);
+app.deleteWaypoint(waypoint.getId());
 app.removeCacheFromCache(geocode);
 setView();
 }

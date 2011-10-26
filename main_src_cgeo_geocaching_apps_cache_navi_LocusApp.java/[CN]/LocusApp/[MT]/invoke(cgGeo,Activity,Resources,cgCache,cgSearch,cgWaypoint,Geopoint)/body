@@ -4,10 +4,10 @@
   }
   if (isInstalled(activity)) {
     final ArrayList<Object> points=new ArrayList<Object>();
-    if (cache != null && cache.coords != null) {
+    if (cache != null && cache.getCoords() != null) {
       points.add(cache);
     }
-    if (waypoint != null && waypoint.coords != null) {
+    if (waypoint != null && waypoint.getCoords() != null) {
       points.add(waypoint);
     }
     showInLocus(points,true,activity);
