@@ -1,3 +1,6 @@
 {
+  if (StringUtils.isBlank(geocode)) {
+    return null;
+  }
   return getCacheByGeocode(geocode,false,true,false,false,false,false);
 }

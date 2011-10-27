@@ -1,16 +1,10 @@
 {
-  if (StringUtils.isBlank(geocode)) {
-    return null;
-  }
-  cgCache cache=null;
   if (cachesCache.containsKey(geocode)) {
-    cache=cachesCache.get(geocode);
+    return cachesCache.get(geocode);
   }
- else {
-    cache=getStorage().loadCache(geocode,null,loadAttributes,loadWaypoints,loadSpoilers,loadLogs,loadInventory,loadOfflineLog);
-    if (cache != null && cache.detailed && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
-      putCacheInCache(cache);
-    }
+  final cgCache cache=getStorage().loadCache(geocode,null,loadAttributes,loadWaypoints,loadSpoilers,loadLogs,loadInventory,loadOfflineLog);
+  if (cache != null && cache.detailed && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
+    putCacheInCache(cache);
   }
   return cache;
 }
