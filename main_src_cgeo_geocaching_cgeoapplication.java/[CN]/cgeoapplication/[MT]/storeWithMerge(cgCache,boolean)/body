@@ -1,6 +1,6 @@
 {
   if (!override) {
-    final cgCache oldCache=storage.loadCache(cache.geocode,cache.guid,true,true,true,true,true,true);
+    final cgCache oldCache=storage.loadCache(cache.geocode,cache.guid,cgCache.LOADALL);
     cache.gatherMissingFrom(oldCache);
   }
   return storage.saveCache(cache);

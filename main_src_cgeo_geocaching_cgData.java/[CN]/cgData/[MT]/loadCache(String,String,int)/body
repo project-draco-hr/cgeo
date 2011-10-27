@@ -13,7 +13,7 @@
  else {
     guids=null;
   }
-  List<cgCache> caches=loadCaches(geocodes,null,null,null,null,null,loadAttributes,loadWaypoints,loadSpoilers,loadLogs,loadInventory,loadOfflineLogs);
+  List<cgCache> caches=loadCaches(geocodes,null,null,null,null,null,loadFlags);
   if (CollectionUtils.isNotEmpty(caches)) {
     return caches.get(0);
   }
