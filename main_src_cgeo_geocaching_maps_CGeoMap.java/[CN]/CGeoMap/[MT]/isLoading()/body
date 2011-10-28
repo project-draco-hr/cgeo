@@ -1,13 +1,15 @@
 {
   boolean loading=false;
-  if (loadThread != null && loadThread.isWorking()) {
-    loading=true;
-  }
- else   if (downloadThread != null && downloadThread.isWorking()) {
-    loading=true;
-  }
- else   if (displayThread != null && displayThread.isWorking()) {
-    loading=true;
+  if (loadTimer != null) {
+    if (loadTimer.getLoadThread() != null && loadTimer.getLoadThread().isWorking()) {
+      loading=true;
+    }
+ else     if (loadTimer.getDownloadThread() != null && loadTimer.getDownloadThread().isWorking()) {
+      loading=true;
+    }
+ else     if (loadTimer.getDownloadThread() != null && loadTimer.getDisplayThread().isWorking()) {
+      loading=true;
+    }
   }
   return loading;
 }
