@@ -1,4 +1,4 @@
 {
   final cgSearch search=doImport();
-  loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0,cgeoapplication.getCount(search),0));
+  importStepHandler.sendMessage(importStepHandler.obtainMessage(0,cgeoapplication.getCount(search),0,search));
 }
