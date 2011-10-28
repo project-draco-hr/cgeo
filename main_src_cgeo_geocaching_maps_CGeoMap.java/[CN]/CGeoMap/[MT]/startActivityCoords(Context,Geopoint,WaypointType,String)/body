@@ -6,5 +6,8 @@
   if (type != null) {
     mapIntent.putExtra(EXTRAS_WPTTYPE,type.id);
   }
+  if (StringUtils.isNotBlank(title)) {
+    mapIntent.putExtra(EXTRAS_MAP_TITLE,title);
+  }
   context.startActivity(mapIntent);
 }
