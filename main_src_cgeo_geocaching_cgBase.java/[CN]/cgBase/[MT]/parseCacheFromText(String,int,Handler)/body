@@ -57,9 +57,15 @@
     }
     cache.owner=Html.fromHtml(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER,true,cache.owner)).toString();
     try {
-      cache.hidden=parseGcCustomDate(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null));
+      String hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null);
+      if (StringUtils.isNotBlank(hiddenString)) {
+        cache.hidden=parseGcCustomDate(hiddenString);
+      }
       if (cache.hidden == null) {
-        cache.hidden=parseGcCustomDate(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null));
+        hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null);
+        if (StringUtils.isNotBlank(hiddenString)) {
+          cache.hidden=parseGcCustomDate(hiddenString);
+        }
       }
     }
  catch (    ParseException e) {
