@@ -1,0 +1,12 @@
+{
+  if (null == nameForSorting) {
+    final Matcher matcher=NUMBER_PATTERN.matcher(name);
+    if (matcher.find()) {
+      nameForSorting=name.replace(matcher.group(),StringUtils.leftPad(matcher.group(),6,'0'));
+    }
+ else {
+      nameForSorting=name;
+    }
+  }
+  return nameForSorting;
+}

@@ -1,0 +1,22 @@
+{
+  final cgSearch search=new cgSearch();
+  String page=null;
+  final String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ StringUtils.defaultString(userToken)+ "\"}}";
+  final String uri="http://www.geocaching.com/map/default.aspx/MapAction";
+  page=requestJSONgc(uri,params);
+  if (StringUtils.isBlank(page)) {
+    Log.e(Settings.tag,"cgeoBase.searchByViewport: No data from server");
+    return null;
+  }
+  final cgCacheWrap caches=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
+  if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
+    Log.e(Settings.tag,"cgeoBase.searchByViewport: No cache parsed");
+  }
+  if (app == null) {
+    Log.e(Settings.tag,"cgeoBase.searchByViewport: No application found");
+    return null;
+  }
+  List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
+  app.addSearch(search,cacheList,true,reason);
+  return search;
+}

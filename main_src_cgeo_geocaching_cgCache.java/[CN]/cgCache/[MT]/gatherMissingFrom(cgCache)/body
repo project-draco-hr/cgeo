@@ -3,7 +3,7 @@
     return;
   }
   updated=System.currentTimeMillis();
-  if (detailed == false && other.detailed) {
+  if (!detailed && other.detailed) {
     detailed=true;
     detailedUpdate=updated;
   }
@@ -61,12 +61,6 @@
   if (StringUtils.isBlank(latlon)) {
     latlon=other.latlon;
   }
-  if (StringUtils.isBlank(latitudeString)) {
-    latitudeString=other.latitudeString;
-  }
-  if (StringUtils.isBlank(longitudeString)) {
-    longitudeString=other.longitudeString;
-  }
   if (StringUtils.isBlank(location)) {
     location=other.location;
   }
@@ -76,7 +70,7 @@
   if (elevation == null) {
     elevation=other.elevation;
   }
-  if (StringUtils.isNotBlank(personalNote)) {
+  if (personalNote == null) {
     personalNote=other.personalNote;
   }
   if (StringUtils.isBlank(shortdesc)) {
@@ -103,7 +97,9 @@
   if (waypoints == null) {
     waypoints=other.waypoints;
   }
-  cgWaypoint.mergeWayPoints(waypoints,other.waypoints);
+ else {
+    cgWaypoint.mergeWayPoints(waypoints,other.waypoints);
+  }
   if (spoilers == null) {
     spoilers=other.spoilers;
   }
@@ -111,7 +107,7 @@
     inventory=other.inventory;
     inventoryItems=other.inventoryItems;
   }
-  if (logs == null || logs.isEmpty()) {
+  if (CollectionUtils.isEmpty(logs)) {
     logs=other.logs;
   }
 }

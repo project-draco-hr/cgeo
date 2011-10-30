@@ -1,0 +1,88 @@
+{
+  super.onCreate(savedInstanceState);
+  res=this.getResources();
+  activity=this.getActivity();
+  app=(cgeoapplication)activity.getApplication();
+  app.setAction(null);
+  base=new cgBase(app);
+  MapFactory mapFactory=Settings.getMapFactory();
+  noMapTokenShowed=false;
+  activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+  ActivityMixin.setTheme(activity);
+  activity.setContentView(Settings.getMapFactory().getMapLayoutId());
+  ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,0,0);
+  }
+  if (Settings.isUseCompass() && dir == null) {
+    dir=app.startDir(activity,dirUpdate);
+  }
+  mapView=(MapViewImpl)activity.findViewById(mapFactory.getMapViewId());
+  mapView.setMapSource();
+  mapView.setBuiltInZoomControls(true);
+  mapView.displayZoomControls(true);
+  mapView.preLoad();
+  mapView.setOnDragListener(this);
+  mapView.clearOverlays();
+  if (overlayPosition == null) {
+    overlayPosition=mapView.createAddPositionOverlay(activity);
+  }
+  if (Settings.isPublicLoc() && overlayOtherCachers == null) {
+    overlayOtherCachers=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
+  }
+  if (overlayCaches == null) {
+    overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker),fromDetailIntent);
+  }
+  if (overlayScale == null) {
+    overlayScale=mapView.createAddScaleOverlay(activity);
+  }
+  mapView.repaintRequired(null);
+  mapController=mapView.getMapController();
+  mapController.setZoom(Settings.getMapZoom());
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
+  if (dir != null) {
+    dirUpdate.updateDir(dir);
+  }
+  Bundle extras=activity.getIntent().getExtras();
+  if (extras != null) {
+    fromDetailIntent=extras.getBoolean(EXTRAS_DETAIL);
+    searchIntent=(cgSearch)extras.getParcelable(EXTRAS_SEARCH);
+    geocodeIntent=extras.getString(EXTRAS_GEOCODE);
+    final double latitudeIntent=extras.getDouble(EXTRAS_LATITUDE);
+    final double longitudeIntent=extras.getDouble(EXTRAS_LONGITUDE);
+    coordsIntent=new Geopoint(latitudeIntent,longitudeIntent);
+    waypointTypeIntent=WaypointType.FIND_BY_ID.get(extras.getString(EXTRAS_WPTTYPE));
+    mapStateIntent=extras.getIntArray(EXTRAS_MAPSTATE);
+    mapTitle=extras.getString(EXTRAS_MAP_TITLE);
+    if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
+      coordsIntent=null;
+    }
+  }
+  if (StringUtils.isBlank(mapTitle)) {
+    mapTitle=res.getString(R.string.map_map);
+  }
+  live=(searchIntent == null && geocodeIntent == null && coordsIntent == null);
+  if (null == mapStateIntent) {
+    followMyLocation=live;
+  }
+ else {
+    followMyLocation=1 == mapStateIntent[3] ? true : false;
+  }
+  if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
+    centerMap(geocodeIntent,searchIntent,coordsIntent,mapStateIntent);
+  }
+  myLocSwitch=(ImageSwitcher)activity.findViewById(R.id.my_position);
+  myLocSwitch.setFactory(this);
+  myLocSwitch.setInAnimation(activity,android.R.anim.fade_in);
+  myLocSwitch.setOutAnimation(activity,android.R.anim.fade_out);
+  myLocSwitch.setOnClickListener(new MyLocationListener());
+  switchMyLocationButton();
+  startTimer();
+  if (Settings.getCacheType() != null) {
+    String cacheType=cgBase.cacheTypesInv.get(Settings.getCacheType());
+    ((TextView)activity.findViewById(R.id.filter_text)).setText(cacheType);
+    activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+  }
+}

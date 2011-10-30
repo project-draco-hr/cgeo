@@ -1,12 +1,11 @@
 {
-  cache.latitudeString=cgBase.formatLatitude(cache.coords.getLatitude(),true);
-  cache.longitudeString=cgBase.formatLongitude(cache.coords.getLongitude(),true);
   if (cache.inventory != null) {
     cache.inventoryItems=cache.inventory.size();
   }
  else {
     cache.inventoryItems=0;
   }
-  cache.updated=new Date().getTime();
-  cache.detailedUpdate=new Date().getTime();
+  final long time=new Date().getTime();
+  cache.updated=time;
+  cache.detailedUpdate=time;
 }

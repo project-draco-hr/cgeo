@@ -1,0 +1,17 @@
+{
+  if (itemsPre == null) {
+    return;
+  }
+  for (  CachesOverlayItemImpl item : itemsPre) {
+    item.setMarker(boundCenterBottom(item.getMarker(0)));
+  }
+  getOverlayImpl().lock();
+  try {
+    items=new ArrayList<CachesOverlayItemImpl>(itemsPre);
+    setLastFocusedItemIndex(-1);
+    populate();
+  }
+  finally {
+    getOverlayImpl().unlock();
+  }
+}

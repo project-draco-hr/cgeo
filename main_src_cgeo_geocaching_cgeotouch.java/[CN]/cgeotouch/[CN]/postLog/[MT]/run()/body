@@ -1,5 +1,4 @@
 {
-  int ret=-1;
-  ret=postLogFn(tracking,log);
-  handler.sendEmptyMessage(ret);
+  final StatusCode error=postLogFn(tracking,log);
+  handler.sendMessage(handler.obtainMessage(0,error));
 }

@@ -1,0 +1,14 @@
+{
+  final cgCacheWrap caches=parseCacheFromText(page,reason,handler);
+  if (caches != null && !caches.cacheList.isEmpty()) {
+    final cgCache cache=caches.cacheList.get(0);
+    getExtraOnlineInfo(cache,page,handler);
+    cache.updated=System.currentTimeMillis();
+    cache.detailedUpdate=cache.updated;
+    cache.detailed=true;
+  }
+  if (CancellableHandler.isCancelled(handler)) {
+    return null;
+  }
+  return caches;
+}

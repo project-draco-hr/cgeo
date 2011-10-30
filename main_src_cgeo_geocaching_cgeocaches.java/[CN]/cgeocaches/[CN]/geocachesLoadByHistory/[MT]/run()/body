@@ -1,8 +1,4 @@
 {
-  Map<String,Object> params=new HashMap<String,Object>();
-  if (coords != null) {
-    params.put("cachetype",settings.cacheType);
-  }
-  searchId=base.searchByHistory(params);
+  search=base.searchByHistory(coords != null ? Settings.getCacheType() : null);
   handler.sendMessage(new Message());
 }

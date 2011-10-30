@@ -4,14 +4,14 @@
   if (viewId == R.id.type) {
     for (    final int typeOne : types) {
       menu.add(viewId,typeOne,0,cgBase.logTypes2.get(typeOne));
-      Log.w(cgSettings.tag,"Adding " + typeOne + " "+ cgBase.logTypes2.get(typeOne));
+      Log.w(Settings.tag,"Adding " + typeOne + " "+ cgBase.logTypes2.get(typeOne));
     }
   }
  else   if (viewId == R.id.changebutton) {
     final int textId=((TextView)findViewById(viewId)).getId();
     menu.setHeaderTitle(res.getString(R.string.log_tb_changeall));
-    for (    final int logTbAction : cgBase.logTypesTrackable.keySet()) {
-      menu.add(textId,logTbAction,0,cgBase.logTypesTrackable.get(logTbAction));
+    for (    LogTypeTrackable logType : LogTypeTrackable.values()) {
+      menu.add(textId,logType.id,0,res.getString(logType.resourceId));
     }
   }
  else {
@@ -21,8 +21,8 @@
         menu.setHeaderTitle(tb.name);
       }
     }
-    for (    final int logTbAction : cgBase.logTypesTrackable.keySet()) {
-      menu.add(realViewId,logTbAction,0,cgBase.logTypesTrackable.get(logTbAction));
+    for (    LogTypeTrackable logType : LogTypeTrackable.values()) {
+      menu.add(realViewId,logType.id,0,res.getString(logType.resourceId));
     }
   }
 }

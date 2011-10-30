@@ -1,0 +1,12 @@
+{
+  if (cancelled) {
+    return;
+  }
+  if (message.obj instanceof CancelHolder) {
+    cancelled=true;
+    handleCancel(((CancelHolder)message.obj).payload);
+  }
+ else {
+    handleRegularMessage(message);
+  }
+}

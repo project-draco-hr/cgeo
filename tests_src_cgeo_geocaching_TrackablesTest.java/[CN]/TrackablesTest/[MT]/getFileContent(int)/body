@@ -1,0 +1,4 @@
+{
+  InputStream ins=getInstrumentation().getContext().getResources().openRawResource(resourceId);
+  return new Scanner(ins).useDelimiter("\\A").next();
+}

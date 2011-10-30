@@ -1,26 +1,30 @@
 {
   final Matcher userTokenMatcher=patternUserToken.matcher(page);
   if (!userTokenMatcher.find()) {
-    Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: unable to extract userToken");
+    Log.e(Settings.tag,"cgBase.loadLogsFromDetails: unable to extract userToken");
     return;
   }
   final String userToken=userTokenMatcher.group(1);
-  final HashMap<String,String> params=new HashMap<String,String>();
-  params.put("tkn",userToken);
-  params.put("idx","1");
-  params.put("num","35");
-  params.put("sp","0");
-  params.put("sf","0");
-  params.put("decrypt","1");
-  final cgResponse response=request(false,"www.geocaching.com","/seek/geocache.logbook","GET",params,false,false,false);
-  if (response.getStatusCode() != 200) {
-    Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: error " + response.getStatusCode() + " when requesting log information");
+  final Parameters params=new Parameters("tkn",userToken,"idx","1","num","35","decrypt","true");
+  final HttpResponse response=request("http://www.geocaching.com/seek/geocache.logbook",params,false,false,false);
+  if (response == null) {
+    Log.e(Settings.tag,"cgBase.loadLogsFromDetails: cannot log logs, response is null");
+    return;
+  }
+  final int statusCode=response.getStatusLine().getStatusCode();
+  if (statusCode != 200) {
+    Log.e(Settings.tag,"cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
     return;
   }
   try {
-    final JSONObject resp=new JSONObject(response.getData());
+    final String rawResponse=cgBase.getResponseData(response);
+    if (rawResponse == null) {
+      Log.e(Settings.tag,"cgBase.loadLogsFromDetails: unable to read whole response");
+      return;
+    }
+    final JSONObject resp=new JSONObject(rawResponse);
     if (!resp.getString("status").equals("success")) {
-      Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
+      Log.e(Settings.tag,"cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
       return;
     }
     final JSONArray data=resp.getJSONArray("data");
@@ -39,7 +43,7 @@
         logDone.date=parseGcCustomDate(entry.getString("Visited")).getTime();
       }
  catch (      ParseException e) {
-        Log.e(cgSettings.tag,"cgBase.loadLogsFromDetails: failed to parse log date.");
+        Log.e(Settings.tag,"cgBase.loadLogsFromDetails: failed to parse log date.");
       }
       logDone.author=entry.getString("UserName");
       logDone.found=entry.getInt("GeocacheFindCount");
@@ -62,6 +66,6 @@
     }
   }
  catch (  JSONException e) {
-    Log.w(cgSettings.tag,"cgBase.loadLogsFromDetails: Failed to parse cache logs",e);
+    Log.w(Settings.tag,"cgBase.loadLogsFromDetails: Failed to parse cache logs",e);
   }
 }

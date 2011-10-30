@@ -1,25 +1,18 @@
 {
-  if (StringUtils.isEmpty(getPrefix())) {
-    return 0;
-  }
-  char firstLetter=Character.toUpperCase(getPrefix().charAt(0));
-switch (firstLetter) {
-case 'P':
-    return -100;
-case 'S':
-{
-    try {
-      Integer stageNumber=Integer.valueOf(getPrefix().substring(1));
-      return stageNumber;
-    }
- catch (    NumberFormatException e) {
-    }
-    return 0;
-  }
-case 'F':
-return 1000;
-case 'O':
-return 10000;
-}
+switch (type) {
+case PARKING:
+    return -1;
+case TRAILHEAD:
+  return 1;
+case STAGE:
+return 2;
+case PUZZLE:
+return 2;
+case FINAL:
+return 3;
+case OWN:
+return 4;
+default :
 return 0;
+}
 }

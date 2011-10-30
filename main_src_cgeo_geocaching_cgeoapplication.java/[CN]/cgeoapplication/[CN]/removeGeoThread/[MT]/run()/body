@@ -4,9 +4,9 @@
   }
  catch (  Exception e) {
   }
-  if (geoInUse == false && geo != null) {
+  if (!geoInUse && geo != null) {
     geo.closeGeo();
     geo=null;
-    Log.i(cgSettings.tag,"Location service stopped");
+    Log.i(Settings.tag,"Location service stopped");
   }
 }

@@ -1,41 +1,41 @@
 {
   if (StringUtils.isBlank(cache.geocode)) {
-    Log.w(cgSettings.tag,"cgBase.loadLogsFromDetails: geo code not parsed correctly");
+    Log.e(Settings.tag,"cgBase.loadLogsFromDetails: geo code not parsed correctly");
   }
   if (StringUtils.isBlank(cache.name)) {
-    Log.w(cgSettings.tag,"name not parsed correctly");
+    Log.e(Settings.tag,"name not parsed correctly");
   }
   if (StringUtils.isBlank(cache.guid)) {
-    Log.w(cgSettings.tag,"guid not parsed correctly");
+    Log.e(Settings.tag,"guid not parsed correctly");
   }
   if (cache.terrain == null || cache.terrain == 0.0) {
-    Log.w(cgSettings.tag,"terrain not parsed correctly");
+    Log.e(Settings.tag,"terrain not parsed correctly");
   }
   if (cache.difficulty == null || cache.difficulty == 0.0) {
-    Log.w(cgSettings.tag,"difficulty not parsed correctly");
+    Log.e(Settings.tag,"difficulty not parsed correctly");
   }
   if (StringUtils.isBlank(cache.owner)) {
-    Log.w(cgSettings.tag,"owner not parsed correctly");
+    Log.e(Settings.tag,"owner not parsed correctly");
   }
   if (StringUtils.isBlank(cache.ownerReal)) {
-    Log.w(cgSettings.tag,"owner real not parsed correctly");
+    Log.e(Settings.tag,"owner real not parsed correctly");
   }
   if (cache.hidden == null) {
-    Log.w(cgSettings.tag,"hidden not parsed correctly");
+    Log.e(Settings.tag,"hidden not parsed correctly");
   }
   if (cache.favouriteCnt == null) {
-    Log.w(cgSettings.tag,"favoriteCount not parsed correctly");
+    Log.e(Settings.tag,"favoriteCount not parsed correctly");
   }
   if (cache.size == null) {
-    Log.w(cgSettings.tag,"size not parsed correctly");
+    Log.e(Settings.tag,"size not parsed correctly");
   }
   if (StringUtils.isBlank(cache.type)) {
-    Log.w(cgSettings.tag,"type not parsed correctly");
+    Log.e(Settings.tag,"type not parsed correctly");
   }
   if (cache.coords == null) {
-    Log.w(cgSettings.tag,"coordinates not parsed correctly");
+    Log.e(Settings.tag,"coordinates not parsed correctly");
   }
   if (StringUtils.isBlank(cache.location)) {
-    Log.w(cgSettings.tag,"location not parsed correctly");
+    Log.e(Settings.tag,"location not parsed correctly");
   }
 }

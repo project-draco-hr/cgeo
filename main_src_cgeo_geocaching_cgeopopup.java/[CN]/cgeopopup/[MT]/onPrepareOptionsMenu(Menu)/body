@@ -11,7 +11,7 @@
       menu.findItem(2).setVisible(false);
       menu.findItem(5).setVisible(false);
     }
-    boolean visitPossible=fromDetail == false && settings.isLogin();
+    boolean visitPossible=!fromDetail && Settings.isLogin();
     menu.findItem(MENU_LOG_VISIT).setEnabled(visitPossible);
   }
  catch (  Exception e) {

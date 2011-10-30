@@ -1,4 +1,5 @@
 {
+  importedRecords=0;
   handler=handlerIn;
   final RootElement root=new RootElement(namespace,"gpx");
   final Element waypoint=root.getChild(namespace,"wpt");
@@ -10,7 +11,7 @@
         }
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"Failed to parse waypoint's latitude and/or longitude.");
+        Log.w(Settings.tag,"Failed to parse waypoint's latitude and/or longitude.");
       }
     }
   }
@@ -26,22 +27,38 @@
         fixCache(cache);
         cache.reason=listId;
         cache.detailed=true;
-        if (StringUtils.isBlank(cache.personalNote)) {
-          StringBuilder buffer=new StringBuilder();
-          for (int i=0; i < userData.length; i++) {
-            if (StringUtils.isNotBlank(userData[i])) {
-              buffer.append(' ').append(userData[i]);
-            }
-          }
-          String note=buffer.toString().trim();
-          if (StringUtils.isNotBlank(note)) {
-            cache.personalNote=note;
-          }
-        }
-        app.addCacheToSearch(search,cache);
+        createNoteFromGSAKUserdata();
+        result.put(cache.geocode,cache);
+        showCountMessage(handler,R.string.gpx_import_loading_caches,++importedRecords,progressStream.getProgress());
       }
-      showFinishedMessage(handler,search);
+ else       if (StringUtils.isNotBlank(cache.name) && cache.coords != null && StringUtils.contains(type,"waypoint")) {
+        addWaypointToCache();
+      }
       resetCache();
+    }
+    private void addWaypointToCache(){
+      fixCache(cache);
+      if (cache.name.length() > 2) {
+        final String cacheGeocodeForWaypoint="GC" + cache.name.substring(2);
+        final cgCache cacheForWaypoint=result.get(cacheGeocodeForWaypoint);
+        if (cacheForWaypoint != null) {
+          final cgWaypoint waypoint=new cgWaypoint();
+          waypoint.id=-1;
+          waypoint.type=convertWaypointSym2Type(sym);
+          waypoint.geocode=cacheGeocodeForWaypoint;
+          waypoint.setPrefix(cache.name.substring(0,2));
+          waypoint.lookup="---";
+          waypoint.name=cache.shortdesc;
+          waypoint.coords=cache.coords;
+          waypoint.note=cache.getDescription();
+          if (cacheForWaypoint.waypoints == null) {
+            cacheForWaypoint.waypoints=new ArrayList<cgWaypoint>();
+          }
+          cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints,Collections.singletonList(waypoint));
+          result.put(cacheGeocodeForWaypoint,cacheForWaypoint);
+          showCountMessage(handler,R.string.gpx_import_loading_waypoints,++importedRecords,progressStream.getProgress());
+        }
+      }
     }
   }
 );
@@ -51,7 +68,7 @@
         cache.hidden=parseDate(body);
       }
  catch (      Exception e) {
-        Log.w(cgSettings.tag,"Failed to parse cache date: " + e.toString());
+        Log.w(Settings.tag,"Failed to parse cache date: " + e.toString());
       }
     }
   }
@@ -62,7 +79,6 @@
       final String content=body.trim();
       cache.name=content;
       findGeoCode(cache.name);
-      findGeoCode(cache.description);
     }
   }
 );
@@ -76,7 +92,7 @@
   waypoint.getChild(namespace,"cmt").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       cmt=body;
-      cache.description=validate(body);
+      cache.setDescription(validate(body));
     }
   }
 );
@@ -90,10 +106,9 @@
   }
 );
   waypoint.getChild(namespace,"sym").setEndTextElementListener(new EndTextElementListener(){
-    @Override public void end(    String body){
-      body=body.toLowerCase();
-      sym=body;
-      if (body.contains("geocache") && body.contains("found")) {
+    @Override public void end(    final String body){
+      sym=body.toLowerCase();
+      if (sym.contains("geocache") && sym.contains("found")) {
         cache.found=true;
       }
     }
@@ -103,7 +118,7 @@
     @Override public void end(    String url){
       final Matcher matcher=patternGuid.matcher(url);
       if (matcher.matches()) {
-        String guid=matcher.group(1);
+        final String guid=matcher.group(1);
         if (StringUtils.isNotBlank(guid)) {
           cache.guid=guid;
         }
@@ -139,7 +154,7 @@
           }
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"Failed to parse cache attributes.");
+          Log.w(Settings.tag,"Failed to parse cache attributes.");
         }
       }
     }
@@ -196,7 +211,7 @@
           cache.difficulty=new Float(body);
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"Failed to parse difficulty: " + e.toString());
+          Log.w(Settings.tag,"Failed to parse difficulty: " + e.toString());
         }
       }
     }
@@ -207,7 +222,7 @@
           cache.terrain=new Float(body);
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"Failed to parse terrain: " + e.toString());
+          Log.w(Settings.tag,"Failed to parse terrain: " + e.toString());
         }
       }
     }
@@ -218,7 +233,7 @@
           cache.location=validate(country);
         }
  else {
-          cache.location=cache.location + ", " + country.trim();
+          cache.location+=", " + country.trim();
         }
       }
     }
@@ -248,7 +263,7 @@
 );
     gcCache.getChild(nsGC,"long_description").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String desc){
-        cache.description=validate(desc);
+        cache.setDescription(validate(desc));
       }
     }
 );
@@ -258,7 +273,7 @@
         trackable=new cgTrackable();
         try {
           if (attrs.getIndex("ref") > -1) {
-            trackable.geocode=attrs.getValue("ref").toUpperCase();
+            trackable.setGeocode(attrs.getValue("ref").toUpperCase());
           }
         }
  catch (        Exception e) {
@@ -269,7 +284,7 @@
     final Element gcTB=gcTBs.getChild(nsGC,"travelbug");
     gcTB.setEndElementListener(new EndElementListener(){
       @Override public void end(){
-        if (StringUtils.isNotBlank(trackable.geocode) && StringUtils.isNotBlank(trackable.name)) {
+        if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
           if (cache.inventory == null) {
             cache.inventory=new ArrayList<cgTrackable>();
           }
@@ -280,7 +295,7 @@
 );
     gcTB.getChild(nsGC,"name").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String tbName){
-        trackable.name=validate(tbName);
+        trackable.setName(validate(tbName));
       }
     }
 );
@@ -316,7 +331,7 @@
           log.date=parseDate(body).getTime();
         }
  catch (        Exception e) {
-          Log.w(cgSettings.tag,"Failed to parse log date: " + e.toString());
+          Log.w(Settings.tag,"Failed to parse log date: " + e.toString());
         }
       }
     }
@@ -346,16 +361,16 @@
     }
 );
   }
-  boolean parsed=false;
   try {
-    Xml.parse(stream,Xml.Encoding.UTF_8,root.getContentHandler());
-    parsed=true;
+    progressStream=new ProgressInputStream(stream);
+    Xml.parse(progressStream,Xml.Encoding.UTF_8,root.getContentHandler());
+    return true;
   }
  catch (  IOException e) {
-    Log.e(cgSettings.tag,"Cannot parse .gpx file as GPX " + version + ": could not read file!");
+    Log.e(Settings.tag,"Cannot parse .gpx file as GPX " + version + ": could not read file!");
   }
 catch (  SAXException e) {
-    Log.e(cgSettings.tag,"Cannot parse .gpx file as GPX " + version + ": could not parse XML - "+ e.toString());
+    Log.e(Settings.tag,"Cannot parse .gpx file as GPX " + version + ": could not parse XML - "+ e.toString());
   }
-  return parsed ? search.getCurrentId() : null;
+  return false;
 }

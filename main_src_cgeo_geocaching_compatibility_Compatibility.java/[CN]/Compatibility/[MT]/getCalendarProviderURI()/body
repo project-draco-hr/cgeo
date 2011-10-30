@@ -1,9 +1,3 @@
 {
-  final int sdk=Integer.valueOf(Build.VERSION.SDK).intValue();
-  if (sdk >= 8) {
-    return Uri.parse("content://com.android.calendar/calendars");
-  }
- else {
-    return Uri.parse("content://calendar/calendars");
-  }
+  return Uri.parse(isLevel8 ? "content://com.android.calendar/calendars" : "content://calendar/calendars");
 }

@@ -28,16 +28,19 @@
     return true;
   }
  else   if (menuItem == 12) {
-    shareCache();
-    return true;
+    if (cache != null) {
+      cache.shareCache(this,res);
+      return true;
+    }
+    return false;
   }
-  if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,searchId,null,null)) {
+  if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,search,null,null)) {
     return true;
   }
   if (GeneralAppsFactory.onMenuItemSelected(item,this,cache)) {
     return true;
   }
   int logType=menuItem - MENU_LOG_VISIT_OFFLINE;
-  cache.logOffline(this,logType,settings,base);
+  cache.logOffline(this,logType,base);
   return true;
 }

@@ -1,0 +1,20 @@
+{
+  final List<cgCache> caches=readGPX(resourceId);
+  assertNotNull(caches);
+  assertEquals(1,caches.size());
+  final cgCache cache=caches.get(0);
+  assertEquals("GC1BKP3",cache.geocode);
+  assertEquals("9946f030-a514-46d8-a050-a60e92fd2e1a",cache.guid);
+  assertEquals(CacheType.TRADITIONAL.id,cache.type);
+  assertEquals(false,cache.archived);
+  assertEquals(false,cache.disabled);
+  assertEquals("Die Schatzinsel / treasure island",cache.name);
+  assertEquals("Die unbesiegbaren Geo - Geparden",cache.owner);
+  assertEquals(CacheSize.MICRO,cache.size);
+  assertEquals(1.0f,cache.difficulty.floatValue());
+  assertEquals(5.0f,cache.terrain.floatValue());
+  assertEquals("Baden-W??rttemberg, Germany",cache.location);
+  assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.",cache.shortdesc);
+  assertTrue(new Geopoint(48.859683,9.1874).isEqualTo(cache.coords));
+  return cache;
+}

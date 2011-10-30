@@ -1,7 +1,5 @@
 {
   app.removeCacheFromCache(geocode);
-  final Map<String,String> params=new HashMap<String,String>();
-  params.put("geocode",cache.geocode);
-  searchId=base.searchByGeocode(params,0,true);
+  search=base.searchByGeocode(cache.geocode,null,0,true,handler);
   handler.sendEmptyMessage(0);
 }

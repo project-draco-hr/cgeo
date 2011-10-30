@@ -1,0 +1,31 @@
+{
+  try {
+    stop=false;
+    working=true;
+    if (mapView == null || CollectionUtils.isEmpty(users)) {
+      return;
+    }
+    List<OtherCachersOverlayItemImpl> items=new ArrayList<OtherCachersOverlayItemImpl>();
+    int counter=0;
+    OtherCachersOverlayItemImpl item=null;
+    for (    cgUser userOne : users) {
+      if (stop) {
+        return;
+      }
+      if (userOne.coords == null) {
+        continue;
+      }
+      item=Settings.getMapFactory().getOtherCachersOverlayItemBase(activity,userOne);
+      items.add(item);
+      counter++;
+      if ((counter % 10) == 0) {
+        overlayOtherCachers.updateItems(items);
+        displayHandler.sendEmptyMessage(1);
+      }
+    }
+    overlayOtherCachers.updateItems(items);
+  }
+  finally {
+    working=false;
+  }
+}

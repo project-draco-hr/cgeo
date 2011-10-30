@@ -10,7 +10,7 @@
       menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
     }
     boolean hasSelection=adapter != null && adapter.getChecked() > 0;
-    if (type != null && type.equals("offline")) {
+    if (type == CacheListType.OFFLINE) {
       if (hasSelection) {
         menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked()+ ")");
       }
@@ -49,9 +49,14 @@
     if (navigationMenu != null) {
       navigationMenu.setEnabled(menuEnabled);
     }
+    boolean isNonDefaultList=listId != 1;
     MenuItem item=menu.findItem(MENU_DROP_LIST);
     if (item != null) {
-      item.setVisible(listId != 1);
+      item.setVisible(isNonDefaultList);
+    }
+    item=menu.findItem(MENU_RENAME_LIST);
+    if (item != null) {
+      item.setVisible(isNonDefaultList);
     }
     boolean multipleLists=app.getLists().size() >= 2;
     item=menu.findItem(MENU_SWITCH_LIST);
@@ -92,7 +97,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeocaches.onPrepareOptionsMenu: " + e.toString());
+    Log.e(Settings.tag,"cgeocaches.onPrepareOptionsMenu: " + e.toString());
   }
   return true;
 }

@@ -2,6 +2,8 @@
   super.onCreateContextMenu(menu,view,info);
   final int viewId=view.getId();
   if (viewId == R.id.type) {
-    for (    final int typeOne : types)     menu.add(viewId,typeOne,0,cgBase.logTypes2.get(typeOne));
+    for (    final int typeOne : types) {
+      menu.add(viewId,typeOne,0,cgBase.logTypes2.get(typeOne));
+    }
   }
 }

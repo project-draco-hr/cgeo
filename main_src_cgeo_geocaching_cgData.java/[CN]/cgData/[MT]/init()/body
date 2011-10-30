@@ -1,22 +1,22 @@
 {
-  if (databaseRW == null || databaseRW.isOpen() == false) {
+  if (databaseRW == null || !databaseRW.isOpen()) {
     try {
       if (dbHelper == null) {
         dbHelper=new cgDbHelper(context);
       }
       databaseRW=dbHelper.getWritableDatabase();
       if (databaseRW != null && databaseRW.isOpen()) {
-        Log.i(cgSettings.tag,"Connection to RW database established.");
+        Log.i(Settings.tag,"Connection to RW database established.");
       }
  else {
-        Log.e(cgSettings.tag,"Failed to open connection to RW database.");
+        Log.e(Settings.tag,"Failed to open connection to RW database.");
       }
       if (databaseRW != null && databaseRW.inTransaction()) {
         databaseRW.endTransaction();
       }
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgData.openDb.RW: " + e.toString());
+      Log.e(Settings.tag,"cgData.openDb.RW: " + e.toString());
     }
   }
   if (databaseRO == null || !databaseRO.isOpen()) {
@@ -29,17 +29,17 @@
         databaseRO=null;
       }
       if (databaseRO != null && databaseRO.isOpen()) {
-        Log.i(cgSettings.tag,"Connection to RO database established.");
+        Log.i(Settings.tag,"Connection to RO database established.");
       }
  else {
-        Log.e(cgSettings.tag,"Failed to open connection to RO database.");
+        Log.e(Settings.tag,"Failed to open connection to RO database.");
       }
       if (databaseRO != null && databaseRO.inTransaction()) {
         databaseRO.endTransaction();
       }
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgData.openDb.RO: " + e.toString());
+      Log.e(Settings.tag,"cgData.openDb.RO: " + e.toString());
     }
   }
   initialized=true;

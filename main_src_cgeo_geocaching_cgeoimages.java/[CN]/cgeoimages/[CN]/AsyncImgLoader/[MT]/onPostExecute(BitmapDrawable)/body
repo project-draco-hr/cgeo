@@ -1,0 +1,40 @@
+{
+  if (image != null) {
+    bitmaps.add(image.getBitmap());
+    final ImageView image_view=(ImageView)inflater.inflate(R.layout.image_item,null);
+    final Rect bounds=image.getBounds();
+    image_view.setImageResource(R.drawable.image_not_loaded);
+    image_view.setClickable(true);
+    image_view.setOnClickListener(new View.OnClickListener(){
+      public void onClick(      View arg0){
+        final File file=LocalStorage.getStorageFile(null,"temp.jpg",false);
+        try {
+          final FileOutputStream fos=new FileOutputStream(file);
+          image.getBitmap().compress(CompressFormat.JPEG,100,fos);
+          fos.close();
+        }
+ catch (        Exception e) {
+          Log.e(Settings.tag,"cgeoimages.handleMessage.onClick: " + e.toString());
+          return;
+        }
+        Intent intent=new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file),"image/jpg");
+        startActivity(intent);
+        if (file.exists())         file.deleteOnExit();
+      }
+    }
+);
+    image_view.setImageDrawable(image);
+    image_view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+    image_view.setLayoutParams(new LayoutParams(bounds.width(),bounds.height()));
+    view.addView(image_view);
+  }
+synchronized (cgeoimages.this) {
+    countDone++;
+    progressDialog.setProgress(countDone);
+    if (progressDialog.getProgress() >= count) {
+      progressDialog.dismiss();
+    }
+  }
+}

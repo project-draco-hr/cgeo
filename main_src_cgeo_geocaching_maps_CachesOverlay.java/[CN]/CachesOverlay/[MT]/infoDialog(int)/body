@@ -1,0 +1,73 @@
+{
+  final CachesOverlayItemImpl item=items.get(index);
+  final cgCoord coordinate=item.getCoord();
+  if (coordinate == null) {
+    Log.e(Settings.tag,"cgMapOverlay:infoDialog: No coordinates given");
+    return;
+  }
+  try {
+    AlertDialog.Builder dialog=new AlertDialog.Builder(context);
+    dialog.setCancelable(true);
+    if (coordinate.type.equalsIgnoreCase("cache")) {
+      dialog.setTitle("cache");
+      String cacheType;
+      if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
+        cacheType=cgBase.cacheTypesInv.get(coordinate.typeSpec);
+      }
+ else {
+        cacheType=cgBase.cacheTypesInv.get(CacheType.MYSTERY.id);
+      }
+      dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.geocode.toUpperCase()+ "\ntype: "+ cacheType);
+      if (fromDetail) {
+        dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
+          public void onClick(          DialogInterface dialog,          int id){
+            final Collection<cgCoord> coordinatesWithType=new ArrayList<cgCoord>();
+            coordinatesWithType.add(coordinate);
+            cgeonavigate.startActivity(context,coordinate.geocode.toUpperCase(),null,coordinate.coords,coordinatesWithType);
+            dialog.cancel();
+          }
+        }
+);
+      }
+ else {
+        dialog.setPositiveButton("detail",new DialogInterface.OnClickListener(){
+          public void onClick(          DialogInterface dialog,          int id){
+            Intent cachesIntent=new Intent(context,cgeodetail.class);
+            cachesIntent.putExtra("geocode",coordinate.geocode.toUpperCase());
+            context.startActivity(cachesIntent);
+            dialog.cancel();
+          }
+        }
+);
+      }
+    }
+ else {
+      dialog.setTitle("waypoint");
+      String waypointL10N=cgBase.waypointTypes.get(WaypointType.FIND_BY_ID.get(coordinate.typeSpec));
+      if (waypointL10N == null) {
+        waypointL10N=cgBase.waypointTypes.get(WaypointType.WAYPOINT);
+      }
+      dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointL10N);
+      dialog.setPositiveButton("navigate",new DialogInterface.OnClickListener(){
+        public void onClick(        DialogInterface dialog,        int id){
+          Collection<cgCoord> coordinatesWithType=new ArrayList<cgCoord>();
+          coordinatesWithType.add(coordinate);
+          cgeonavigate.startActivity(context,coordinate.name,null,coordinate.coords,coordinatesWithType);
+          dialog.cancel();
+        }
+      }
+);
+    }
+    dialog.setNegativeButton("dismiss",new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int id){
+        dialog.cancel();
+      }
+    }
+);
+    AlertDialog alert=dialog.create();
+    alert.show();
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgMapOverlay.infoDialog: " + e.toString());
+  }
+}

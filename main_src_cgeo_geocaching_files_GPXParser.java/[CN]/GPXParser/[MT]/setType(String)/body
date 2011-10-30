@@ -1,11 +1,12 @@
 {
-  final String knownType=cgBase.cacheTypes.get(parsedString);
+  final String lowercase=parsedString.toLowerCase().trim();
+  final String knownType=cgBase.cacheTypes.get(lowercase);
   if (knownType != null) {
     cache.type=knownType;
   }
  else {
     if (StringUtils.isBlank(cache.type)) {
-      cache.type="mystery";
+      cache.type=CacheType.UNKNOWN.id;
     }
   }
 }

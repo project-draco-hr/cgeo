@@ -1,12 +1,7 @@
 {
-  if (geo == null) {
+  if (geo == null || geo.coordsNow == null) {
     return;
   }
   findViewById(R.id.nearest).setPressed(true);
-  final Intent cachesIntent=new Intent(context,cgeocaches.class);
-  cachesIntent.putExtra("type","nearest");
-  cachesIntent.putExtra("latitude",geo.coordsNow.getLatitude());
-  cachesIntent.putExtra("longitude",geo.coordsNow.getLongitude());
-  cachesIntent.putExtra("cachetype",settings.cacheType);
-  context.startActivity(cachesIntent);
+  cgeocaches.startActivityNearest(context,geo.coordsNow);
 }

@@ -1,0 +1,19 @@
+{
+  final ArrayList<String> quotedGeocodes=new ArrayList<String>(geocodes.size());
+  for (  final String geocode : geocodes) {
+    quotedGeocodes.add('"' + geocode + '"');
+  }
+  final String geocodeList=StringUtils.join(quotedGeocodes.toArray(),',');
+  final String baseWhereClause="geocode in (" + geocodeList + ")";
+  databaseRW.delete(dbTableCaches,baseWhereClause,null);
+  databaseRW.delete(dbTableAttributes,baseWhereClause,null);
+  databaseRW.delete(dbTableSpoilers,baseWhereClause,null);
+  databaseRW.delete(dbTableLogs,baseWhereClause,null);
+  databaseRW.delete(dbTableLogCount,baseWhereClause,null);
+  databaseRW.delete(dbTableLogsOffline,baseWhereClause,null);
+  databaseRW.delete(dbTableWaypoints,baseWhereClause + " and type <> \"own\"",null);
+  databaseRW.delete(dbTableTrackables,baseWhereClause,null);
+  for (  final String geocode : geocodes) {
+    cgBase.deleteDirectory(LocalStorage.getStorageDir(geocode));
+  }
+}

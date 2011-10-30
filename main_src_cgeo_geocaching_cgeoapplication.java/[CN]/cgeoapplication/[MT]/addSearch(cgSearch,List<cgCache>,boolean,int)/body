@@ -1,9 +1,7 @@
 {
-  if (cacheList == null || cacheList.size() == 0) {
+  if (CollectionUtils.isEmpty(cacheList)) {
     return null;
   }
-  final UUID searchId=search.getCurrentId();
-  searches.put(searchId,search);
   if (storage == null) {
     storage=new cgData(this);
   }
@@ -13,5 +11,5 @@
       storeWithMerge(cache,false);
     }
   }
-  return searchId;
+  return search;
 }

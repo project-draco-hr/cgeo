@@ -1,0 +1,19 @@
+{
+  if (StringUtils.isBlank(name)) {
+    return 0;
+  }
+  init();
+  int count=0;
+  databaseRW.beginTransaction();
+  try {
+    ContentValues values=new ContentValues();
+    values.put("title",name);
+    values.put("updated",System.currentTimeMillis());
+    count=databaseRW.update(dbTableLists,values,"_id = " + (listId - 10),null);
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+  return count;
+}

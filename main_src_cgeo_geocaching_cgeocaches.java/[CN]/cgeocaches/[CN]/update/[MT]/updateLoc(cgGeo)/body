@@ -9,8 +9,8 @@
     if (cacheList != null && geo.coordsNow != null) {
       adapter.setActualCoordinates(geo.coordsNow);
     }
-    if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) {
-      if (settings.useCompass == 0) {
+    if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) {
+      if (!Settings.isUseCompass()) {
         if (geo.bearingNow != null) {
           adapter.setActualHeading(geo.bearingNow);
         }
@@ -24,6 +24,6 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"Failed to update location.");
+    Log.w(Settings.tag,"Failed to update location.");
   }
 }

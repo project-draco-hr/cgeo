@@ -1,0 +1,21 @@
+{
+  if (coordsIntent != null) {
+    (new DisplayPointThread()).start();
+  }
+ else {
+    if (loadTimer != null) {
+      loadTimer.stopIt();
+      loadTimer=null;
+    }
+    loadTimer=new LoadTimer();
+    loadTimer.start();
+  }
+  if (Settings.isPublicLoc()) {
+    if (usersTimer != null) {
+      usersTimer.stopIt();
+      usersTimer=null;
+    }
+    usersTimer=new UsersTimer();
+    usersTimer.start();
+  }
+}

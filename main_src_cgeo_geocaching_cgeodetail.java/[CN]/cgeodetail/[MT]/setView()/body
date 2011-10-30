@@ -2,12 +2,12 @@
   RelativeLayout itemLayout;
   TextView itemName;
   TextView itemValue;
-  if (searchId == null) {
+  if (search == null) {
     return;
   }
-  cache=app.getCache(searchId);
+  cache=app.getCache(search);
   if (cache == null) {
-    if (waitDialog != null && waitDialog.isShowing())     waitDialog.dismiss();
+    progress.dismiss();
     if (StringUtils.isNotBlank(geocode)) {
       showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode+ ".");
     }
@@ -31,14 +31,14 @@
     scroll.setVisibility(View.VISIBLE);
     LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
-    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)getResources().getDrawable(cgBase.getCacheIcon(cache.type)),null,null,null);
+    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)),null,null,null);
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_name));
     Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.name).toString());
     if (cache.disabled || cache.archived) {
-      span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+      span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
     itemValue.setText(span);
     detailsList.addView(itemLayout);
@@ -48,7 +48,7 @@
     itemName.setText(res.getString(R.string.cache_type));
     String size="";
     if (cache.size != null) {
-      if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
+      if (cache.showSize()) {
         size=" (" + res.getString(cache.size.stringId) + ")";
       }
     }
@@ -56,7 +56,7 @@
       itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + size);
     }
  else {
-      itemValue.setText(cgBase.cacheTypesInv.get("mystery") + size);
+      itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id) + size);
     }
     detailsList.addView(itemLayout);
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
@@ -110,7 +110,7 @@
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_distance));
     if (cache.distance != null) {
-      itemValue.setText("~" + base.getHumanDistance(cache.distance));
+      itemValue.setText("~" + cgBase.getHumanDistance(cache.distance));
     }
  else {
       itemValue.setText("--");
@@ -157,7 +157,7 @@
       itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      if (cache.type != null && (cache.type.equalsIgnoreCase("event") || cache.type.equalsIgnoreCase("mega") || cache.type.equalsIgnoreCase("cito"))) {
+      if (cache.isEventCache()) {
         itemName.setText(res.getString(R.string.cache_event));
       }
  else {
@@ -179,7 +179,7 @@
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
       itemName.setText(res.getString(R.string.cache_coordinates));
-      itemValue.setText(cache.latitudeString + " | " + cache.longitudeString);
+      itemValue.setText(cache.getLatitude() + " | " + cache.getLongitude());
       detailsList.addView(itemLayout);
     }
     if (CollectionUtils.isNotEmpty(cache.attributes)) {
@@ -187,7 +187,9 @@
       attributeBoxMaxWidth=((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
       ViewParent child=attribBox;
       do {
-        if (child instanceof View)         attributeBoxMaxWidth=attributeBoxMaxWidth - ((View)child).getPaddingLeft() - ((View)child).getPaddingRight();
+        if (child instanceof View) {
+          attributeBoxMaxWidth=attributeBoxMaxWidth - ((View)child).getPaddingLeft() - ((View)child).getPaddingRight();
+        }
         child=child.getParent();
       }
  while (child != null);
@@ -215,12 +217,7 @@
         if (inventoryString.length() > 0) {
           inventoryString.append('\n');
         }
-        if (containsHtml(inventoryItem.name)) {
-          inventoryString.append(Html.fromHtml(inventoryItem.name).toString());
-        }
- else {
-          inventoryString.append(inventoryItem.name);
-        }
+        inventoryString.append(StringEscapeUtils.unescapeHtml4(inventoryItem.getName()));
       }
       inventView.setText(inventoryString);
       inventBox.setClickable(true);
@@ -270,11 +267,14 @@
       personalNoteText.setText(cache.personalNote,TextView.BufferType.SPANNABLE);
       personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
     }
+ else {
+      ((LinearLayout)findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
+    }
     if (StringUtils.isNotBlank(cache.shortdesc)) {
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       TextView descView=(TextView)findViewById(R.id.shortdesc);
       descView.setVisibility(View.VISIBLE);
-      descView.setText(Html.fromHtml(cache.shortdesc.trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),null),TextView.BufferType.SPANNABLE);
+      descView.setText(Html.fromHtml(cache.shortdesc.trim(),new HtmlImage(this,geocode,true,cache.reason,false),null),TextView.BufferType.SPANNABLE);
       descView.setMovementMethod(LinkMovementMethod.getInstance());
     }
     if (longDescDisplayed) {
@@ -291,7 +291,7 @@
         showDesc.setOnClickListener(null);
       }
     }
- else     if (longDescDisplayed == false && StringUtils.isNotBlank(cache.description)) {
+ else     if (!longDescDisplayed && StringUtils.isNotBlank(cache.getDescription())) {
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       Button showDesc=(Button)findViewById(R.id.show_description);
       showDesc.setVisibility(View.VISIBLE);
@@ -317,7 +317,7 @@
         waypointView=(LinearLayout)inflater.inflate(R.layout.waypoint_item,null);
         final TextView identification=(TextView)waypointView.findViewById(R.id.identification);
         ((TextView)waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
-        if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
+        if (!wpt.getPrefix().equalsIgnoreCase("OWN")) {
           identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
         }
  else {
@@ -328,21 +328,18 @@
           nameView.setText(cgBase.formatCoords(wpt.coords,true));
         }
  else {
-          if (containsHtml(wpt.name)) {
-            nameView.setText(Html.fromHtml(wpt.name.trim()),TextView.BufferType.SPANNABLE);
-          }
- else {
-            nameView.setText(wpt.name.trim());
-          }
+          nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.name));
         }
-        wpt.setIcon(res,base,nameView);
+        wpt.setIcon(res,nameView);
+        TextView noteView=(TextView)waypointView.findViewById(R.id.note);
         if (containsHtml(wpt.note)) {
-          ((TextView)waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
+          noteView.setText(Html.fromHtml(wpt.note.trim()),TextView.BufferType.SPANNABLE);
         }
  else {
-          ((TextView)waypointView.findViewById(R.id.note)).setText(wpt.note.trim());
+          noteView.setText(wpt.note.trim());
         }
         waypointView.setOnClickListener(new waypointInfo(wpt.id));
+        registerForContextMenu(waypointView);
         waypoints.addView(waypointView);
       }
     }
@@ -363,17 +360,30 @@
       hintView.setOnClickListener(null);
     }
     if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
-      cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+      cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
       cacheDistance.bringToFront();
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeodetail.setView: " + e.toString());
+    Log.e(Settings.tag,"cgeodetail.setView: " + e.toString());
   }
-  if (waitDialog != null && waitDialog.isShowing())   waitDialog.dismiss();
-  if (storeDialog != null && storeDialog.isShowing())   storeDialog.dismiss();
-  if (dropDialog != null && dropDialog.isShowing())   dropDialog.dismiss();
-  if (refreshDialog != null && refreshDialog.isShowing())   refreshDialog.dismiss();
+  progress.dismiss();
   displayLogs();
-  if (geo != null)   geoUpdate.updateLoc(geo);
+  IConnector connector=ConnectorFactory.getConnector(cache);
+  if (connector != null) {
+    String license=connector.getLicenseText(cache);
+    if (StringUtils.isNotBlank(license)) {
+      ((LinearLayout)findViewById(R.id.license_box)).setVisibility(View.VISIBLE);
+      TextView licenseView=((TextView)findViewById(R.id.license));
+      licenseView.setText(Html.fromHtml(license),BufferType.SPANNABLE);
+      licenseView.setClickable(true);
+      licenseView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+ else {
+      ((LinearLayout)findViewById(R.id.license_box)).setVisibility(View.GONE);
+    }
+  }
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
 }

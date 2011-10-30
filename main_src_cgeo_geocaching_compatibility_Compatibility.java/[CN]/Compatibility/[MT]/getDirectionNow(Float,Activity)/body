@@ -1,15 +1,19 @@
 {
-  AndroidLevel8 level8=getLevel8();
-  if (level8 != null) {
-    final int rotation=level8.getRotation(activity);
-    if (rotation == Surface.ROTATION_90) {
-      return directionNowPre + 90;
+  if (isLevel8) {
+    try {
+      final int rotation=(Integer)getRotationMethod.invoke(null,activity);
+      if (rotation == Surface.ROTATION_90) {
+        return directionNowPre + 90;
+      }
+ else       if (rotation == Surface.ROTATION_180) {
+        return directionNowPre + 180;
+      }
+ else       if (rotation == Surface.ROTATION_270) {
+        return directionNowPre + 270;
+      }
     }
- else     if (rotation == Surface.ROTATION_180) {
-      return directionNowPre + 180;
-    }
- else     if (rotation == Surface.ROTATION_270) {
-      return directionNowPre + 270;
+ catch (    final Exception e) {
+      Log.e(Settings.tag,"Cannot call getRotation()",e);
     }
   }
  else {

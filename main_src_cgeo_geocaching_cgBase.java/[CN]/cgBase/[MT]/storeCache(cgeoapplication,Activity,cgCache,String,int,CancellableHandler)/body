@@ -1,0 +1,62 @@
+{
+  try {
+    if (cache != null) {
+      if (cache.reason > 0 || StringUtils.isBlank(cache.getDescription())) {
+        final cgSearch search=searchByGeocode(cache.geocode,null,listId,false,null);
+        cache=app.getCache(search);
+      }
+    }
+ else     if (StringUtils.isNotBlank(geocode)) {
+      final cgSearch search=searchByGeocode(geocode,null,listId,false,null);
+      cache=app.getCache(search);
+    }
+    if (cache == null) {
+      if (handler != null) {
+        handler.sendMessage(new Message());
+      }
+      return;
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    final HtmlImage imgGetter=new HtmlImage(activity,cache.geocode,false,listId,true);
+    if (StringUtils.isNotBlank(cache.getDescription())) {
+      Html.fromHtml(cache.getDescription(),imgGetter,null);
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    if (CollectionUtils.isNotEmpty(cache.spoilers)) {
+      for (      cgImage oneSpoiler : cache.spoilers) {
+        imgGetter.getDrawable(oneSpoiler.url);
+      }
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    if (Settings.isStoreLogImages() && cache.logs != null) {
+      for (      cgLog log : cache.logs) {
+        if (CollectionUtils.isNotEmpty(log.logImages)) {
+          for (          cgImage oneLogImg : log.logImages) {
+            imgGetter.getDrawable(oneLogImg.url);
+          }
+        }
+      }
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    StaticMapsProvider.downloadMaps(cache,activity);
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    app.markStored(cache.geocode,listId);
+    app.removeCacheFromCache(cache.geocode);
+    if (handler != null) {
+      handler.sendMessage(new Message());
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgBase.storeCache");
+  }
+}

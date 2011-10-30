@@ -1,0 +1,170 @@
+{
+  init();
+  if (((geocodes != null && geocodes.length > 0) && (guids != null && guids.length > 0))) {
+    throw new IllegalArgumentException("Please use only one parameter");
+  }
+  if (((geocodes != null && geocodes.length > 0) || (guids != null && guids.length > 0)) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
+    throw new IllegalArgumentException("Please use only one parameter");
+  }
+  StringBuilder where=new StringBuilder();
+  Cursor cursor=null;
+  List<cgCache> caches=new ArrayList<cgCache>();
+  try {
+    if (geocodes != null && geocodes.length > 0) {
+      StringBuilder all=new StringBuilder();
+      for (      Object one : geocodes) {
+        if (all.length() > 0) {
+          all.append(", ");
+        }
+        all.append('"');
+        all.append((String)one);
+        all.append('"');
+      }
+      if (where.length() > 0) {
+        where.append(" and ");
+      }
+      where.append("geocode in (");
+      where.append(all);
+      where.append(')');
+    }
+ else     if (guids != null && guids.length > 0) {
+      StringBuilder all=new StringBuilder();
+      for (      Object one : guids) {
+        if (all.length() > 0) {
+          all.append(", ");
+        }
+        all.append('"');
+        all.append((String)one);
+        all.append('"');
+      }
+      if (where.length() > 0) {
+        where.append(" and ");
+      }
+      where.append("guid in (");
+      where.append(all);
+      where.append(')');
+    }
+ else {
+      return caches;
+    }
+    if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
+      double latMin=(centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
+      double latMax=(centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
+      double lonMin=(centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
+      double lonMax=(centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
+      double llCache;
+      if (latMin > latMax) {
+        llCache=latMax;
+        latMax=latMin;
+        latMin=llCache;
+      }
+      if (lonMin > lonMax) {
+        llCache=lonMax;
+        lonMax=lonMin;
+        lonMin=llCache;
+      }
+      if (where.length() > 0) {
+        where.append(" and ");
+      }
+      where.append("(latitude >= ");
+      where.append(String.format((Locale)null,"%.6f",latMin));
+      where.append(" and latitude <= ");
+      where.append(String.format((Locale)null,"%.6f",latMax));
+      where.append(" and longitude >= ");
+      where.append(String.format((Locale)null,"%.6f",lonMin));
+      where.append(" and longitude <= ");
+      where.append(String.format((Locale)null,"%.6f",lonMax));
+      where.append(')');
+    }
+    cursor=databaseRO.query(dbTableCaches,CACHE_COLUMNS,where.toString(),null,null,null,null,null);
+    if (cursor != null) {
+      if (cursor.getCount() > 0) {
+        cursor.moveToFirst();
+        do {
+          cgCache cache=createCacheFromDatabaseContent(cursor);
+          if ((loadFlags & cgCache.LOADATTRIBUTES) != 0) {
+            final List<String> attributes=loadAttributes(cache.geocode);
+            if (CollectionUtils.isNotEmpty(attributes)) {
+              if (cache.attributes == null) {
+                cache.attributes=new ArrayList<String>();
+              }
+ else {
+                cache.attributes.clear();
+              }
+              cache.attributes.addAll(attributes);
+            }
+          }
+          if ((loadFlags & cgCache.LOADWAYPOINTS) != 0) {
+            final List<cgWaypoint> waypoints=loadWaypoints(cache.geocode);
+            if (CollectionUtils.isNotEmpty(waypoints)) {
+              if (cache.waypoints == null) {
+                cache.waypoints=new ArrayList<cgWaypoint>();
+              }
+ else {
+                cache.waypoints.clear();
+              }
+              cache.waypoints.addAll(waypoints);
+            }
+          }
+          if ((loadFlags & cgCache.LOADSPOILERS) != 0) {
+            final List<cgImage> spoilers=loadSpoilers(cache.geocode);
+            if (CollectionUtils.isNotEmpty(spoilers)) {
+              if (cache.spoilers == null) {
+                cache.spoilers=new ArrayList<cgImage>();
+              }
+ else {
+                cache.spoilers.clear();
+              }
+              cache.spoilers.addAll(spoilers);
+            }
+          }
+          if ((loadFlags & cgCache.LOADLOGS) != 0) {
+            final List<cgLog> logs=loadLogs(cache.geocode);
+            if (CollectionUtils.isNotEmpty(logs)) {
+              if (cache.logs == null) {
+                cache.logs=new ArrayList<cgLog>();
+              }
+ else {
+                cache.logs.clear();
+              }
+              cache.logs.addAll(logs);
+            }
+            final Map<Integer,Integer> logCounts=loadLogCounts(cache.geocode);
+            if (MapUtils.isNotEmpty(logCounts)) {
+              cache.logCounts.clear();
+              cache.logCounts.putAll(logCounts);
+            }
+          }
+          if ((loadFlags & cgCache.LOADINVENTORY) != 0) {
+            final List<cgTrackable> inventory=loadInventory(cache.geocode);
+            if (CollectionUtils.isNotEmpty(inventory)) {
+              if (cache.inventory == null) {
+                cache.inventory=new ArrayList<cgTrackable>();
+              }
+ else {
+                cache.inventory.clear();
+              }
+              cache.inventory.addAll(inventory);
+            }
+          }
+          if ((loadFlags & cgCache.LOADOFFLINELOG) != 0) {
+            cache.logOffline=hasLogOffline(cache.geocode);
+          }
+          caches.add(cache);
+        }
+ while (cursor.moveToNext());
+      }
+ else {
+        cursor.close();
+        return null;
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgData.loadCaches: " + e.toString());
+  }
+  if (cursor != null) {
+    cursor.close();
+  }
+  return caches;
+}

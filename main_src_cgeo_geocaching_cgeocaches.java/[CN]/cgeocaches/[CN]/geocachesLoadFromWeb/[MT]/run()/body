@@ -12,14 +12,16 @@
       handler.sendEmptyMessage(-1);
       break;
     }
-    String deviceCode=settings.webDeviceCode;
+    String deviceCode=Settings.getWebDeviceCode();
     if (deviceCode == null) {
       deviceCode="";
     }
-    cgResponse responseFromWeb=base.request(false,"send2.cgeo.org","/read.html","GET","code=" + cgBase.urlencode_rfc3986(deviceCode),0,true);
-    if (responseFromWeb.getStatusCode() == 200) {
-      if (responseFromWeb.getData().length() > 2) {
-        String GCcode=responseFromWeb.getData();
+    final Parameters params=new Parameters("code",deviceCode);
+    HttpResponse responseFromWeb=cgBase.request("http://send2.cgeo.org/read.html",params,true);
+    if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
+      final String response=cgBase.getResponseData(responseFromWeb);
+      if (response.length() > 2) {
+        String GCcode=response;
         delay=1;
         Message mes=new Message();
         mes.what=1;
@@ -33,8 +35,8 @@
         handler.sendMessage(mes1);
         yield();
       }
- else       if ("RG".equals(responseFromWeb.getData())) {
-        settings.setWebNameCode(null,null);
+ else       if ("RG".equals(cgBase.getResponseData(responseFromWeb))) {
+        Settings.setWebNameCode(null,null);
         needToStop=true;
         handler.sendEmptyMessage(-3);
         return;
@@ -45,7 +47,7 @@
         yield();
       }
     }
-    if (responseFromWeb.getStatusCode() != 200) {
+    if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
       needToStop=true;
       handler.sendEmptyMessage(-2);
       return;
@@ -62,7 +64,7 @@
       }
     }
  catch (    InterruptedException e) {
-      Log.e(cgSettings.tag,"cgeocaches.geocachesLoadFromWeb.sleep: " + e.toString());
+      Log.e(Settings.tag,"cgeocaches.geocachesLoadFromWeb.sleep: " + e.toString());
     }
   }
   handler.sendEmptyMessage(-1);

@@ -1,0 +1,12 @@
+{
+  geocodes=new ArrayList<String>();
+  in.readStringList(geocodes);
+  error=(StatusCode)in.readSerializable();
+  url=in.readString();
+  final int length=in.readInt();
+  if (length >= 0) {
+    viewstates=new String[length];
+    in.readStringArray(viewstates);
+  }
+  totalCnt=in.readInt();
+}

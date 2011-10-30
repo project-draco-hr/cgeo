@@ -1,30 +1,20 @@
 {
   int id=item.getItemId();
   if (id == 0) {
-    Intent mapIntent=new Intent(this,settings.getMapFactory().getMapClass());
-    mapIntent.putExtra("detail",false);
-    mapIntent.putExtra("latitude",dstCoords.getLatitude());
-    mapIntent.putExtra("longitude",dstCoords.getLongitude());
-    startActivity(mapIntent);
+    CGeoMap.startActivityCoords(this,dstCoords,null,null);
   }
  else   if (id == 1) {
-    if (settings.useCompass == 1) {
-      settings.useCompass=0;
+    boolean oldSetting=Settings.isUseCompass();
+    Settings.setUseCompass(!oldSetting);
+    if (oldSetting) {
       if (dir != null) {
         dir=app.removeDir();
       }
-      SharedPreferences.Editor prefsEdit=getSharedPreferences(cgSettings.preferences,0).edit();
-      prefsEdit.putInt("usecompass",settings.useCompass);
-      prefsEdit.commit();
     }
  else {
-      settings.useCompass=1;
       if (dir == null) {
         dir=app.startDir(this,dirUpdate);
       }
-      SharedPreferences.Editor prefsEdit=getSharedPreferences(cgSettings.preferences,0).edit();
-      prefsEdit.putInt("usecompass",settings.useCompass);
-      prefsEdit.commit();
     }
   }
  else   if (id == 2) {
@@ -40,7 +30,7 @@
     setTitle();
     setDestCoords();
     updateDistanceInfo();
-    Log.d(cgSettings.tag,"destination set: " + title + " ("+ String.format(Locale.getDefault(),"%.8f",dstCoords.getLatitude())+ " | "+ String.format(Locale.getDefault(),"%.8f",dstCoords.getLongitude())+ ")");
+    Log.d(Settings.tag,"destination set: " + title + " ("+ String.format(Locale.getDefault(),"%.8f",dstCoords.getLatitude())+ " | "+ String.format(Locale.getDefault(),"%.8f",dstCoords.getLongitude())+ ")");
     return true;
   }
   return false;

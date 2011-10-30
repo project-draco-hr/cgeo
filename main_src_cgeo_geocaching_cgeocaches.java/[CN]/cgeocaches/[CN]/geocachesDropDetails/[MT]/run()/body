@@ -7,18 +7,18 @@
   }
   final List<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
   for (  cgCache cache : cacheListTemp) {
-    if (checked > 0 && cache.statusChecked == false) {
+    if (checked > 0 && !cache.statusChecked) {
       continue;
     }
     try {
       if (needToStop) {
-        Log.i(cgSettings.tag,"Stopped dropping process.");
+        Log.i(Settings.tag,"Stopped dropping process.");
         break;
       }
       app.markDropped(cache.geocode);
     }
  catch (    Exception e) {
-      Log.e(cgSettings.tag,"cgeocaches.geocachesDropDetails: " + e.toString());
+      Log.e(Settings.tag,"cgeocaches.geocachesDropDetails: " + e.toString());
     }
   }
   cacheListTemp.clear();

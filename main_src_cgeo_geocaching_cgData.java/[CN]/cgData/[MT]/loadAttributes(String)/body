@@ -4,12 +4,12 @@
   }
   init();
   ArrayList<String> attributes=new ArrayList<String>();
-  Cursor cursor=databaseRO.query(dbTableAttributes,new String[]{"_id","attribute"},"geocode = \"" + geocode + "\"",null,null,null,null,"100");
+  Cursor cursor=databaseRO.query(dbTableAttributes,new String[]{"attribute"},"geocode = ?",new String[]{geocode},null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     int index=cursor.getColumnIndex("attribute");
     do {
-      attributes.add((String)cursor.getString(index));
+      attributes.add(cursor.getString(index));
     }
  while (cursor.moveToNext());
   }

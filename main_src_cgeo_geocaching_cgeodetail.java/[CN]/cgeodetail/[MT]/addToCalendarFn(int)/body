@@ -1,5 +1,5 @@
 {
-  if (calendars == null || calendars.isEmpty()) {
+  if (MapUtils.isEmpty(calendars)) {
     return;
   }
   try {
@@ -11,8 +11,7 @@
     eventDate.setMinutes(0);
     eventDate.setSeconds(0);
     StringBuilder description=new StringBuilder();
-    description.append("http://coord.info/");
-    description.append(cache.geocode.toUpperCase());
+    description.append(cache.getUrl());
     description.append("\n\n");
     if (StringUtils.isNotBlank(cache.shortdesc)) {
       description.append(Html.fromHtml(cache.shortdesc).toString());
@@ -28,8 +27,8 @@
     event.put("title",Html.fromHtml(cache.name).toString());
     event.put("description",description.toString());
     String location="";
-    if (StringUtils.isNotBlank(cache.latitudeString) && StringUtils.isNotBlank(cache.longitudeString)) {
-      location+=cache.latitudeString + " " + cache.longitudeString;
+    if (cache.coords != null) {
+      location+=cache.getLatitude() + " " + cache.getLongitude();
     }
     if (StringUtils.isNotBlank(cache.location)) {
       boolean addParenteses=false;
@@ -52,6 +51,6 @@
   }
  catch (  Exception e) {
     showToast(res.getString(R.string.event_fail));
-    Log.e(cgSettings.tag,"cgeodetail.addToCalendarFn: " + e.toString());
+    Log.e(Settings.tag,"cgeodetail.addToCalendarFn: " + e.toString());
   }
 }

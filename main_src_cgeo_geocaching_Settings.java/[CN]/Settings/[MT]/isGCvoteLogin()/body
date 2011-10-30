@@ -1,0 +1,5 @@
+{
+  final String preUsername=sharedPrefs.getString(KEY_USERNAME,null);
+  final String prePassword=sharedPrefs.getString(KEY_GCVOTE_PASSWORD,null);
+  return !StringUtils.isBlank(preUsername) && !StringUtils.isBlank(prePassword);
+}

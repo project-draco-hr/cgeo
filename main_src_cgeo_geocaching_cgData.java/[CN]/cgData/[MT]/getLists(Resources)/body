@@ -1,7 +1,7 @@
 {
   init();
   List<cgList> lists=new ArrayList<cgList>();
-  lists.add(new cgList(true,1,res.getString(R.string.list_inbox)));
+  lists.add(new cgList(cgList.STANDARD_LIST_ID,res.getString(R.string.list_inbox)));
   ArrayList<cgList> storedLists=readLists(null,"title COLLATE NOCASE ASC");
   lists.addAll(storedLists);
   return lists;

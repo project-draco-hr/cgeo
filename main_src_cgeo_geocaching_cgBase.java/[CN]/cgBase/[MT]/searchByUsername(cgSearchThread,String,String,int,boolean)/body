@@ -1,0 +1,13 @@
+{
+  if (StringUtils.isBlank(userName)) {
+    Log.e(Settings.tag,"cgeoBase.searchByUsername: No user name given");
+    return null;
+  }
+  final Parameters params=new Parameters("ul",userName);
+  boolean my=false;
+  if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
+    my=true;
+    Log.i(Settings.tag,"cgBase.searchByUsername: Overriding users choice, downloading all caches.");
+  }
+  return searchByAny(thread,cacheType,my,reason,showCaptcha,params);
+}

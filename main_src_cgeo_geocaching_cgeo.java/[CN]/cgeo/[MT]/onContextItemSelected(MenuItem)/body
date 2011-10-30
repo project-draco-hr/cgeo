@@ -1,13 +1,13 @@
 {
   final int id=item.getItemId();
   if (id == 0) {
-    settings.setCacheType(null);
+    Settings.setCacheType(null);
     setFilterTitle();
     return true;
   }
  else   if (id > MENU_OPEN_LIST) {
     int listId=id - MENU_OPEN_LIST;
-    settings.saveLastList(listId);
+    Settings.saveLastList(listId);
     cgeocaches.startActivityOffline(context);
     return true;
   }
@@ -21,10 +21,10 @@
       }
     }
     if (choice == null) {
-      settings.setCacheType(null);
+      Settings.setCacheType(null);
     }
  else {
-      settings.setCacheType(choice);
+      Settings.setCacheType(choice);
     }
     setFilterTitle();
     return true;

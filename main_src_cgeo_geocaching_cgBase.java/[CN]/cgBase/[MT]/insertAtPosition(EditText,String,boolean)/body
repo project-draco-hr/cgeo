@@ -8,6 +8,6 @@
     insertText=" " + insertText;
   }
   editText.getText().replace(start,end,insertText);
-  int newCursor=start + insertText.length();
+  int newCursor=moveCursor ? start + insertText.length() : start;
   editText.setSelection(newCursor,newCursor);
 }

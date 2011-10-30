@@ -1,9 +1,19 @@
 {
   final Button typeButton=(Button)findViewById(R.id.type);
-  if (cgBase.logTypes2.get(type) != null)   typeSelected=type;
-  if (cgBase.logTypes2.get(typeSelected) == null)   typeSelected=0;
+  if (cgBase.logTypes2.get(type) != null) {
+    typeSelected=type;
+  }
+  if (cgBase.logTypes2.get(typeSelected) == null) {
+    typeSelected=0;
+  }
   typeButton.setText(cgBase.logTypes2.get(typeSelected));
-  if (tweetBox == null)   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
-  if (settings.twitter == 1)   tweetBox.setVisibility(View.VISIBLE);
- else   tweetBox.setVisibility(View.GONE);
+  if (tweetBox == null) {
+    tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
+  }
+  if (Settings.isUseTwitter()) {
+    tweetBox.setVisibility(View.VISIBLE);
+  }
+ else {
+    tweetBox.setVisibility(View.GONE);
+  }
 }

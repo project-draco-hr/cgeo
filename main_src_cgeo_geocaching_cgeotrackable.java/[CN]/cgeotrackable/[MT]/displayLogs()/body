@@ -2,8 +2,8 @@
   LinearLayout listView=(LinearLayout)findViewById(R.id.log_list);
   listView.removeAllViews();
   RelativeLayout rowView;
-  if (trackable != null && trackable.logs != null) {
-    for (    cgLog log : trackable.logs) {
+  if (trackable != null && trackable.getLogs() != null) {
+    for (    cgLog log : trackable.getLogs()) {
       rowView=(RelativeLayout)inflater.inflate(R.layout.trackable_logitem,null);
       if (log.date > 0) {
         ((TextView)rowView.findViewById(R.id.added)).setText(base.formatShortDate(log.date));
@@ -25,18 +25,18 @@
         ((TextView)rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener(){
           public void onClick(          View arg0){
             Intent cacheIntent=new Intent(cgeotrackable.this,cgeodetail.class);
-            cacheIntent.putExtra("guid",(String)cacheGuid);
-            cacheIntent.putExtra("name",(String)Html.fromHtml(cacheName).toString());
+            cacheIntent.putExtra("guid",cacheGuid);
+            cacheIntent.putExtra("name",Html.fromHtml(cacheName).toString());
             startActivity(cacheIntent);
           }
         }
 );
       }
-      ((TextView)rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log,new cgHtmlImg(cgeotrackable.this,null,false,0,false),null),TextView.BufferType.SPANNABLE);
+      ((TextView)rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log,new HtmlImage(cgeotrackable.this,null,false,0,false),null),TextView.BufferType.SPANNABLE);
       ((TextView)rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
       listView.addView(rowView);
     }
-    if (trackable.logs.size() > 0) {
+    if (trackable.getLogs().size() > 0) {
       ((LinearLayout)findViewById(R.id.log_box)).setVisibility(View.VISIBLE);
     }
   }

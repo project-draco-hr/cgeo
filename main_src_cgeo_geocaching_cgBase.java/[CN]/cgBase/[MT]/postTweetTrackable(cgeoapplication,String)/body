@@ -1,0 +1,11 @@
+{
+  final cgTrackable trackable=app.getTrackableByGeocode(geocode);
+  String name=trackable.getName();
+  if (name.length() > 82) {
+    name=name.substring(0,79) + "...";
+  }
+  String status="I touched " + name + " ("+ trackable.getUrl()+ ")!";
+  status=Twitter.appendHashTag(status,"cgeo");
+  status=Twitter.appendHashTag(status,"geocaching");
+  Twitter.postTweet(app,status,null);
+}

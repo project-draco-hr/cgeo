@@ -1,0 +1,17 @@
+{
+  super.onResume();
+  app.setAction(null);
+  if (geo == null) {
+    geo=app.startGeo(activity,geoUpdate,base,0,0);
+  }
+  if (Settings.isUseCompass() && dir == null) {
+    dir=app.startDir(activity,dirUpdate);
+  }
+  if (geo != null) {
+    geoUpdate.updateLoc(geo);
+  }
+  if (dir != null) {
+    dirUpdate.updateDir(dir);
+  }
+  startTimer();
+}

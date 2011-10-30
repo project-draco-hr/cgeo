@@ -1,0 +1,19 @@
+{
+  final cgCache cache=app.getCacheByGeocode(geocode);
+  String status;
+  final String url=cache.getUrl();
+  if (url.length() >= 100) {
+    status="I found " + url;
+  }
+ else {
+    String name=cache.name;
+    status="I found " + name + " ("+ url+ ")";
+    if (status.length() > Twitter.MAX_TWEET_SIZE) {
+      name=name.substring(0,name.length() - (status.length() - Twitter.MAX_TWEET_SIZE) - 3) + "...";
+    }
+    status="I found " + name + " ("+ url+ ")";
+    status=Twitter.appendHashTag(status,"cgeo");
+    status=Twitter.appendHashTag(status,"geocaching");
+  }
+  Twitter.postTweet(app,status,null);
+}

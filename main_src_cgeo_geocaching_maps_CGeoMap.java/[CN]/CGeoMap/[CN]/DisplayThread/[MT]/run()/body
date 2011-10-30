@@ -1,0 +1,51 @@
+{
+  try {
+    stop=false;
+    working=true;
+    if (mapView == null || caches == null) {
+      displayHandler.sendEmptyMessage(0);
+      working=false;
+      return;
+    }
+    final List<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
+    final List<CachesOverlayItemImpl> items=new ArrayList<CachesOverlayItemImpl>();
+    if (!cachesProtected.isEmpty()) {
+      for (      cgCache cacheOne : cachesProtected) {
+        if (stop) {
+          displayHandler.sendEmptyMessage(0);
+          working=false;
+          return;
+        }
+        if (cacheOne.coords == null) {
+          continue;
+        }
+        if (cacheOne.waypoints != null && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold())) && !cacheOne.waypoints.isEmpty()) {
+          for (          cgWaypoint oneWaypoint : cacheOne.waypoints) {
+            if (oneWaypoint.coords == null) {
+              continue;
+            }
+            items.add(getWaypointItem(new cgCoord(oneWaypoint),oneWaypoint.type));
+          }
+        }
+        items.add(getCacheItem(new cgCoord(cacheOne),cacheOne.type,cacheOne.own,cacheOne.found,cacheOne.disabled));
+      }
+      overlayCaches.updateItems(items);
+      displayHandler.sendEmptyMessage(1);
+      cachesCnt=cachesProtected.size();
+      if (stop) {
+        displayHandler.sendEmptyMessage(0);
+        working=false;
+        return;
+      }
+    }
+ else {
+      overlayCaches.updateItems(items);
+      displayHandler.sendEmptyMessage(1);
+    }
+    cachesProtected.clear();
+    displayHandler.sendEmptyMessage(0);
+  }
+  finally {
+    working=false;
+  }
+}

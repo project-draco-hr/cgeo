@@ -1,0 +1,26 @@
+{
+  final Pattern oldFilePattern=Pattern.compile("^[GC|TB|O][A-Z0-9]{4,7}$");
+  final SQLiteStatement select=db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
+  final File[] files=LocalStorage.getStorage().listFiles();
+  final ArrayList<File> toRemove=new ArrayList<File>(files.length);
+  for (  final File file : files) {
+    if (file.isDirectory()) {
+      final String geocode=file.getName();
+      if (oldFilePattern.matcher(geocode).find()) {
+        select.bindString(1,geocode);
+        if (select.simpleQueryForLong() == 0) {
+          toRemove.add(file);
+        }
+      }
+    }
+  }
+  new Thread(new Runnable(){
+    @Override public void run(){
+      for (      final File dir : toRemove) {
+        Log.i(Settings.tag,"Removing obsolete cache directory for " + dir.getName());
+        cgBase.deleteDirectory(dir);
+      }
+    }
+  }
+).start();
+}

@@ -1,18 +1,18 @@
 {
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
+    geo=app.startGeo(this,geoUpdate,base,0,0);
   }
-  if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
+  if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
     dir=app.startDir(this,dirUpdate);
   }
   if (cacheList != null) {
     setTitle(title);
   }
   if (CollectionUtils.isNotEmpty(cacheList)) {
-    final Integer count=app.getTotal(searchId);
+    final Integer count=cgeoapplication.getTotal(search);
     if (count != null && count > 0) {
       setTitle(title);
-      if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < MAX_LIST_ITEMS) {
+      if (cacheList.size() < cgeoapplication.getTotal(search) && cacheList.size() < MAX_LIST_ITEMS) {
         setMoreCaches(true);
       }
  else {

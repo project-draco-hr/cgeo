@@ -2,7 +2,7 @@
   if (cache == null || cache.coords == null) {
     return null;
   }
-  Location loc=new Location(cgSettings.tag);
+  Location loc=new Location(Settings.tag);
   loc.setLatitude(cache.coords.getLatitude());
   loc.setLongitude(cache.coords.getLongitude());
   Point p=new Point(cache.name,loc);
@@ -41,7 +41,7 @@
       PointGeocachingDataWaypoint wp=new PointGeocachingDataWaypoint();
       wp.code=waypoint.geocode;
       wp.name=waypoint.name;
-      String locusWpId=toLocusId(WaypointType.FIND_BY_ID.get(waypoint.type));
+      String locusWpId=toLocusId(waypoint.type);
       if (locusWpId != null) {
         wp.type=locusWpId;
       }

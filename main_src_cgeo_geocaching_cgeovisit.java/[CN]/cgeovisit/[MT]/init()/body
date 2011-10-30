@@ -2,23 +2,23 @@
   if (geocode != null) {
     app.setAction(geocode);
   }
-  types=cache.getPossibleLogTypes(settings);
+  types=cache.getPossibleLogTypes();
   final cgLog log=app.loadLogOffline(geocode);
   if (log != null) {
     typeSelected=log.type;
     date.setTime(new Date(log.date));
     text=log.log;
-    if (typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
+    if (typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
       if (post == null) {
         post=(Button)findViewById(R.id.post);
       }
       post.setText(res.getString(R.string.log_post_no_rate));
     }
   }
- else   if (StringUtils.isNotBlank(settings.getSignature()) && settings.signatureAutoinsert && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
-    insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(),base,false));
+ else   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
+    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),base,false),false);
   }
-  if (types.contains(typeSelected) == false) {
+  if (!types.contains(typeSelected)) {
     if (alreadyFound) {
       typeSelected=cgBase.LOG_NOTE;
     }
@@ -70,8 +70,7 @@
   }
   save.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      String log=((EditText)findViewById(R.id.log)).getText().toString();
-      cache.logOffline(cgeovisit.this,log,date,typeSelected);
+      saveLog(true);
     }
   }
 );

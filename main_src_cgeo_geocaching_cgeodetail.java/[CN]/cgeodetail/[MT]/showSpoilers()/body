@@ -1,9 +1,10 @@
 {
-  if (cache == null || cache.spoilers == null || cache.spoilers.isEmpty()) {
+  if (cache == null || CollectionUtils.isEmpty(cache.spoilers)) {
     showToast(res.getString(R.string.err_detail_no_spoiler));
   }
   Intent spoilersIntent=new Intent(this,cgeoimages.class);
   spoilersIntent.putExtra("geocode",geocode.toUpperCase());
-  spoilersIntent.putExtra("type",cgeoimages.SPOILER_IMAGE);
+  spoilersIntent.putExtra("type",cgeoimages.SPOILER_IMAGES);
+  spoilersIntent.putParcelableArrayListExtra("images",cache.spoilers);
   startActivity(spoilersIntent);
 }

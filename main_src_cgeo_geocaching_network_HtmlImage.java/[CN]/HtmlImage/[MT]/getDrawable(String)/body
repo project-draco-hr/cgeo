@@ -1,0 +1,66 @@
+{
+  if (StringUtils.isBlank(url) || isCounter(url)) {
+    return null;
+  }
+  Bitmap imagePre=null;
+  if (!onlySave) {
+    imagePre=loadImageFromStorage(url);
+  }
+  if (imagePre == null || onlySave) {
+    final String absoluteURL=makeAbsoluteURL(url);
+    BufferedHttpEntity bufferedEntity=null;
+    if (absoluteURL != null) {
+      try {
+        final HttpResponse httpResponse=cgBase.request(absoluteURL,null,false);
+        if (httpResponse != null) {
+          bufferedEntity=new BufferedHttpEntity(httpResponse.getEntity());
+        }
+      }
+ catch (      Exception e) {
+        Log.e(Settings.tag,"cgHtmlImg.getDrawable (downloading from web)",e);
+      }
+    }
+    if (save) {
+      final File file=LocalStorage.getStorageFile(geocode,url,true);
+      LocalStorage.saveEntityToFile(bufferedEntity,file);
+    }
+  }
+  if (onlySave) {
+    return null;
+  }
+  if (imagePre == null) {
+    imagePre=loadImageFromStorage(url);
+  }
+  if (imagePre == null) {
+    Log.d(Settings.tag,"cgHtmlImg.getDrawable: Failed to obtain image");
+    if (returnErrorImage) {
+      imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_not_loaded);
+    }
+ else {
+      imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_no_placement);
+    }
+  }
+  final int imgWidth=imagePre.getWidth();
+  final int imgHeight=imagePre.getHeight();
+  int width;
+  int height;
+  if (imgWidth > maxWidth || imgHeight > maxHeight) {
+    final double ratio=Math.min((double)maxHeight / (double)imgHeight,(double)maxWidth / (double)imgWidth);
+    width=(int)Math.ceil(imgWidth * ratio);
+    height=(int)Math.ceil(imgHeight * ratio);
+    try {
+      imagePre=Bitmap.createScaledBitmap(imagePre,width,height,true);
+    }
+ catch (    Exception e) {
+      Log.d(Settings.tag,"cgHtmlImg.getDrawable: Failed to scale image");
+      return null;
+    }
+  }
+ else {
+    width=imgWidth;
+    height=imgHeight;
+  }
+  final BitmapDrawable image=new BitmapDrawable(imagePre);
+  image.setBounds(new Rect(0,0,width,height));
+  return image;
+}

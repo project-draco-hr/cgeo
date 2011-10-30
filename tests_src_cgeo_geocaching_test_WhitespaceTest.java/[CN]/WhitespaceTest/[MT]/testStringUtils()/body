@@ -1,0 +1,8 @@
+{
+  String result;
+  final long start=System.currentTimeMillis();
+  result=replaceWhitespaceStringUtils(data);
+  final long end=System.currentTimeMillis();
+  assertEquals(111956,result.length());
+  Log.d(Settings.tag,(end - start) + " ms StringUtils");
+}

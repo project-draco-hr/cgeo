@@ -1,19 +1,4 @@
 {
-  try {
-    InputStream is=this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/" + getGeocode() + ".html");
-    ByteArrayOutputStream buffer=new ByteArrayOutputStream();
-    int nRead;
-    byte[] data=new byte[16384];
-    while ((nRead=is.read(data,0,data.length)) != -1) {
-      buffer.write(data,0,nRead);
-    }
-    buffer.flush();
-    StringBuffer sb=new StringBuffer(buffer.toString());
-    cgBase.replaceWhitespace(sb);
-    return sb.toString();
-  }
- catch (  IOException e) {
-    e.printStackTrace();
-  }
-  return null;
+  data=MockedCache.readCachePage(getGeocode());
+  return data;
 }

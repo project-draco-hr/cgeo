@@ -12,13 +12,13 @@
     specifySql.append('"');
   }
   try {
-    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode"},specifySql.toString(),null,null,null,"visiteddate",null);
+    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},specifySql.toString(),null,null,null,"visiteddate",null);
     if (cursor != null) {
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();
         int index=cursor.getColumnIndex("geocode");
         do {
-          geocodes.add((String)cursor.getString(index));
+          geocodes.add(cursor.getString(index));
         }
  while (cursor.moveToNext());
       }
@@ -30,7 +30,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgData.loadBatchOfHistoricGeocodes: " + e.toString());
+    Log.e(Settings.tag,"cgData.loadBatchOfHistoricGeocodes: " + e.toString());
   }
   return geocodes;
 }

@@ -1,0 +1,15 @@
+{
+  try {
+    final File file=LocalStorage.getStorageFile(geocode,url,true);
+    final Bitmap image=loadCachedImage(file);
+    if (image != null) {
+      return image;
+    }
+    final File fileSec=LocalStorage.getStorageSecFile(geocode,url,true);
+    return loadCachedImage(fileSec);
+  }
+ catch (  Exception e) {
+    Log.w(Settings.tag,"cgHtmlImg.getDrawable (reading cache): " + e.toString());
+  }
+  return null;
+}

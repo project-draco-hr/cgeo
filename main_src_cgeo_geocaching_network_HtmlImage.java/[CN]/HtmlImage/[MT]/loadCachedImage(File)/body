@@ -1,0 +1,9 @@
+{
+  if (file.exists()) {
+    if (reason > 0 || file.lastModified() > (new Date().getTime() - (24 * 60 * 60* 1000))) {
+      setSampleSize(file.length());
+      return BitmapFactory.decodeFile(file.getPath(),bfOptions);
+    }
+  }
+  return null;
+}

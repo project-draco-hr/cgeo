@@ -16,10 +16,13 @@ case MENU_IMPORT_GPX:
 importGpx();
 return false;
 case MENU_CREATE_LIST:
-createList();
+createList(null);
 return false;
 case MENU_DROP_LIST:
 removeList();
+return false;
+case MENU_RENAME_LIST:
+renameList();
 return false;
 case MENU_INVERT_SELECTION:
 if (adapter != null) {
@@ -103,5 +106,5 @@ openContextMenu(getListView());
 contextMenuMoveToList=false;
 return false;
 }
-return CacheListAppFactory.onMenuItemSelected(item,geo,cacheList,this,res,searchId);
+return CacheListAppFactory.onMenuItemSelected(item,geo,cacheList,this,res,search);
 }

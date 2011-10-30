@@ -1,6 +1,5 @@
 {
   super.onResume();
-  settings.load();
   init();
   if (adapter != null && geo != null && geo.coordsNow != null) {
     adapter.setActualCoordinates(geo.coordsNow);
@@ -12,7 +11,13 @@
       adapter.forceSort(geo.coordsNow);
     }
   }
-  if (loadCachesHandler != null && searchId != null) {
+  if (loadCachesHandler != null && search != null) {
     loadCachesHandler.sendEmptyMessage(0);
+  }
+  if (type == CacheListType.OFFLINE && listId == cgList.STANDARD_LIST_ID && search != null) {
+    cgSearch newSearch=base.searchByOffline(coords,cachetype,listId);
+    if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
+      refreshCurrentList();
+    }
   }
 }

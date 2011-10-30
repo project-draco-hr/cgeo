@@ -1,0 +1,7 @@
+{
+  long start=System.currentTimeMillis();
+  for (int j=0; j < iterations; j++) {
+    BaseUtils.getMatch(page,pattern,true,"");
+  }
+  return (System.currentTimeMillis() - start);
+}

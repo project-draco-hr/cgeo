@@ -10,8 +10,8 @@
     int indexLongitude=cursor.getColumnIndex("longitude");
     do {
       final cgDestination dest=new cgDestination();
-      dest.setId((long)cursor.getLong(indexId));
-      dest.setDate((long)cursor.getLong(indexDate));
+      dest.setId(cursor.getLong(indexId));
+      dest.setDate(cursor.getLong(indexDate));
       dest.setCoords(getCoords(cursor,indexLatitude,indexLongitude));
       if (dest.getCoords() != null) {
         destinations.add(dest);

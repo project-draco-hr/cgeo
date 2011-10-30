@@ -19,7 +19,7 @@
       return true;
     }
  else     if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-      if (cache.statusChecked == false) {
+      if (!cache.statusChecked) {
         return true;
       }
       if (holder != null && holder.oneInfo != null) {
@@ -35,7 +35,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(cgSettings.tag,"cgCacheListAdapter.detectGesture.onFling: " + e.toString());
+    Log.w(Settings.tag,"cgCacheListAdapter.detectGesture.onFling: " + e.toString());
   }
   return false;
 }

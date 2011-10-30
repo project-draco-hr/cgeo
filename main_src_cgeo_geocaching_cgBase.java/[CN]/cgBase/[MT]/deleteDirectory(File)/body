@@ -1,7 +1,6 @@
 {
   if (path.exists()) {
-    File[] files=path.listFiles();
-    for (    File file : files) {
+    for (    final File file : path.listFiles()) {
       if (file.isDirectory()) {
         deleteDirectory(file);
       }
@@ -10,5 +9,5 @@
       }
     }
   }
-  return (path.delete());
+  return path.delete();
 }

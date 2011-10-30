@@ -1,5 +1,5 @@
 {
-  if (gettingViewstate == false) {
+  if (!gettingViewstate) {
     waitDialog=ProgressDialog.show(cgeovisit.this,null,res.getString(R.string.log_saving),true);
     waitDialog.setCancelable(true);
     String log=((EditText)findViewById(R.id.log)).getText().toString();

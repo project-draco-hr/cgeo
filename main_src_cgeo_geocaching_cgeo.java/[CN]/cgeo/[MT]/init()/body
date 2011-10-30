@@ -9,18 +9,18 @@
     StringUtils.isNotBlank("haha");
   }
   initialized=true;
-  settings.getLogin();
-  settings.reloadCacheType();
+  Settings.setLanguage(Settings.isUseEnglish());
+  Settings.getLogin();
   if (app.firstRun) {
     (new firstLogin()).start();
   }
   (new countBubbleUpdate()).start();
   (new cleanDatabase()).start();
-  if (settings.cacheType != null && cgBase.cacheTypesInv.containsKey(settings.cacheType) == false) {
-    settings.setCacheType(null);
+  if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
+    Settings.setCacheType(null);
   }
   if (geo == null) {
-    geo=app.startGeo(context,geoUpdate,base,settings,0,0);
+    geo=app.startGeo(context,geoUpdate,base,0,0);
   }
   navType=(TextView)findViewById(R.id.nav_type);
   navAccuracy=(TextView)findViewById(R.id.nav_accuracy);

@@ -2,38 +2,24 @@
   if (cache == null) {
     return;
   }
-  try {
-    holder.checkbox.setChecked(cache.statusChecked);
-    Animation hideCheckbox=new TranslateAnimation((int)(SWIPE_DISTANCE * pixelDensity),0,0,0);
-    hideCheckbox.setRepeatCount(0);
-    if (force) {
-      hideCheckbox.setDuration(0);
-    }
- else {
-      hideCheckbox.setDuration(400);
-    }
-    hideCheckbox.setFillEnabled(true);
-    hideCheckbox.setFillAfter(true);
-    hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
-    Animation brightenInfo=new AlphaAnimation(SWIPE_OPACITY,1.0f);
-    brightenInfo.setRepeatCount(0);
-    if (force) {
-      brightenInfo.setDuration(0);
-    }
- else {
-      brightenInfo.setDuration(400);
-    }
-    brightenInfo.setFillEnabled(true);
-    brightenInfo.setFillAfter(true);
-    brightenInfo.setInterpolator(new AccelerateDecelerateInterpolator());
-    AnimationSet selectAnimation=new AnimationSet(true);
-    selectAnimation.setFillEnabled(true);
-    selectAnimation.setFillAfter(true);
-    selectAnimation.addAnimation(hideCheckbox);
-    selectAnimation.addAnimation(brightenInfo);
-    holder.oneInfo.startAnimation(selectAnimation);
-    cache.statusCheckedView=false;
-  }
- catch (  Exception e) {
-  }
+  holder.checkbox.setChecked(cache.statusChecked);
+  final Animation hideCheckbox=new TranslateAnimation((int)(SWIPE_DISTANCE * pixelDensity),0,0,0);
+  hideCheckbox.setRepeatCount(0);
+  hideCheckbox.setDuration(force ? 0 : 400);
+  hideCheckbox.setFillEnabled(true);
+  hideCheckbox.setFillAfter(true);
+  hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
+  final Animation brightenInfo=new AlphaAnimation(SWIPE_OPACITY,1.0f);
+  brightenInfo.setRepeatCount(0);
+  brightenInfo.setDuration(force ? 0 : 400);
+  brightenInfo.setFillEnabled(true);
+  brightenInfo.setFillAfter(true);
+  brightenInfo.setInterpolator(new AccelerateDecelerateInterpolator());
+  final AnimationSet selectAnimation=new AnimationSet(true);
+  selectAnimation.setFillEnabled(true);
+  selectAnimation.setFillAfter(true);
+  selectAnimation.addAnimation(hideCheckbox);
+  selectAnimation.addAnimation(brightenInfo);
+  holder.oneInfo.startAnimation(selectAnimation);
+  cache.statusCheckedView=false;
 }

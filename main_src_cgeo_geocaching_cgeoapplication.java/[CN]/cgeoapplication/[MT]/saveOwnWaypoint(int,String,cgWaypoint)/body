@@ -1,6 +1,3 @@
 {
-  if (storage == null) {
-    storage=new cgData(this);
-  }
-  return storage.saveOwnWaypoint(id,geocode,waypoint);
+  return getStorage().saveOwnWaypoint(id,geocode,waypoint);
 }

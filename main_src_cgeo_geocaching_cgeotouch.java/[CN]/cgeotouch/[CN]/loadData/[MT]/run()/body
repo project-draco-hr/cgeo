@@ -1,5 +1,5 @@
 {
-  final Map<String,String> params=new HashMap<String,String>();
+  final Parameters params=new Parameters();
   showProgressHandler.sendEmptyMessage(0);
   gettingViewstate=true;
   attempts++;
@@ -11,7 +11,7 @@
       loadDataHandler.sendEmptyMessage(0);
       return;
     }
-    final String page=base.request(false,"www.geocaching.com","/track/log.aspx","GET",params,false,false,false).getData();
+    final String page=cgBase.getResponseData(cgBase.request("http://www.geocaching.com/track/log.aspx",params,false,false,false));
     viewstates=cgBase.getViewstates(page);
     final List<Integer> typesPre=cgBase.parseTypes(page);
     if (typesPre.size() > 0) {
@@ -19,14 +19,14 @@
       types.addAll(typesPre);
     }
     typesPre.clear();
-    if (types.contains(typeSelected) == false) {
+    if (!types.contains(typeSelected)) {
       typeSelected=types.get(0);
       setType(typeSelected);
       showToast(res.getString(R.string.info_log_type_changed));
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeotouch.loadData.run: " + e.toString());
+    Log.e(Settings.tag,"cgeotouch.loadData.run: " + e.toString());
   }
   loadDataHandler.sendEmptyMessage(0);
 }

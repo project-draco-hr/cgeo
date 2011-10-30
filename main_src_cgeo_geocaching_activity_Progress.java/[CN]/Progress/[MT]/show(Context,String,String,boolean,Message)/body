@@ -1,0 +1,8 @@
+{
+  if (dialog == null) {
+    dialog=ProgressDialog.show(context,title,message,indeterminate,cancelMessage != null);
+    if (cancelMessage != null) {
+      dialog.setCancelMessage(cancelMessage);
+    }
+  }
+}

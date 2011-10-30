@@ -11,7 +11,7 @@
     addresses=geocoder.getFromLocation(geo.coordsNow.getLatitude(),geo.coordsNow.getLongitude(),1);
   }
  catch (  Exception e) {
-    Log.i(cgSettings.tag,"Failed to obtain address");
+    Log.i(Settings.tag,"Failed to obtain address");
   }
   obtainAddressHandler.sendEmptyMessage(0);
   addressObtaining=false;

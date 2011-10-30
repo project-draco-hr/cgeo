@@ -3,8 +3,8 @@
     return null;
   }
   init();
-  cgWaypoint waypoint=new cgWaypoint();
-  Cursor cursor=databaseRO.query(dbTableWaypoints,new String[]{"_id","geocode","updated","type","prefix","lookup","name","latlon","latitude_string","longitude_string","latitude","longitude","note"},"_id = " + id,null,null,null,null,"1");
+  cgWaypoint waypoint=null;
+  Cursor cursor=databaseRO.query(dbTableWaypoints,new String[]{"_id","geocode","updated","type","prefix","lookup","name","latlon","latitude","longitude","note"},"_id = ?",new String[]{Integer.toString(id)},null,null,null,"1");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     waypoint=createWaypointFromDatabaseContent(cursor);

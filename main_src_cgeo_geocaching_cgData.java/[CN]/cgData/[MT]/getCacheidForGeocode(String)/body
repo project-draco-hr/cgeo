@@ -6,18 +6,18 @@
   Cursor cursor=null;
   String cacheid=null;
   try {
-    cursor=databaseRO.query(dbTableCaches,new String[]{"_id","cacheid"},"geocode = \"" + geocode + "\"",null,null,null,null,"1");
+    cursor=databaseRO.query(dbTableCaches,new String[]{"cacheid"},"geocode = ?",new String[]{geocode},null,null,null,"1");
     if (cursor != null) {
       int index=0;
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();
         index=cursor.getColumnIndex("cacheid");
-        cacheid=(String)cursor.getString(index);
+        cacheid=cursor.getString(index);
       }
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgData.getCacheidForGeocode: " + e.toString());
+    Log.e(Settings.tag,"cgData.getCacheidForGeocode: " + e.toString());
   }
   if (cursor != null) {
     cursor.close();

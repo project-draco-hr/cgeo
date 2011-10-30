@@ -1,5 +1,5 @@
 {
-  final Map<String,String> params=new HashMap<String,String>();
+  final Parameters params=new Parameters();
   showProgressHandler.sendEmptyMessage(0);
   gettingViewstate=true;
   attempts++;
@@ -11,7 +11,7 @@
       loadDataHandler.sendEmptyMessage(0);
       return;
     }
-    final String page=base.request(false,"www.geocaching.com","/seek/log.aspx","GET",params,false,false,false).getData();
+    final String page=cgBase.getResponseData(cgBase.request("http://www.geocaching.com/seek/log.aspx",params,false,false,false));
     viewstates=cgBase.getViewstates(page);
     trackables=cgBase.parseTrackableLog(page);
     final List<Integer> typesPre=cgBase.parseTypes(page);
@@ -23,7 +23,7 @@
     typesPre.clear();
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeovisit.loadData.run: " + e.toString());
+    Log.e(Settings.tag,"cgeovisit.loadData.run: " + e.toString());
   }
   loadDataHandler.sendEmptyMessage(0);
 }

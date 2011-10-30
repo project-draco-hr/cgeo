@@ -1,12 +1,4 @@
 {
-  StringBuilder zeros=new StringBuilder();
-  if (value == 0) {
-    value=1;
-  }
-  double wantedLength=Math.pow(10,len - 1);
-  while (value < wantedLength) {
-    zeros.append('0');
-    value*=10;
-  }
-  return zeros.toString();
+  final String n=Integer.toString(value);
+  return StringUtils.repeat('0',Math.max(0,len - n.length())) + n;
 }

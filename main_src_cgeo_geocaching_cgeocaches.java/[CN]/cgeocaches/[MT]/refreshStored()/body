@@ -15,20 +15,20 @@
           threadD.kill();
         }
         if (geo == null) {
-          geo=app.startGeo(cgeocaches.this,geoUpdate,base,settings,0,0);
+          geo=app.startGeo(cgeocaches.this,geoUpdate,base,0,0);
         }
-        if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
+        if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
           dir=app.startDir(cgeocaches.this,dirUpdate);
         }
       }
  catch (      Exception e) {
-        Log.e(cgSettings.tag,"cgeocaches.onOptionsItemSelected.onCancel: " + e.toString());
+        Log.e(Settings.tag,"cgeocaches.onOptionsItemSelected.onCancel: " + e.toString());
       }
     }
   }
 );
   waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-  int etaTime=(int)((detailTotal * 25) / 60);
+  int etaTime=((detailTotal * 25) / 60);
   if (etaTime < 1) {
     waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
   }

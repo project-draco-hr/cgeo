@@ -16,9 +16,9 @@
   menu.add(1,2,0,res.getString(R.string.multi));
   menu.add(1,3,0,res.getString(R.string.mystery));
   Map<String,String> allTypes=new HashMap<String,String>(cgBase.cacheTypesInv);
-  allTypes.remove("traditional");
-  allTypes.remove("multi");
-  allTypes.remove("mystery");
+  allTypes.remove(CacheType.TRADITIONAL.id);
+  allTypes.remove(CacheType.MULTI.id);
+  allTypes.remove(CacheType.MYSTERY.id);
   List<String> sorted=new ArrayList<String>(allTypes.values());
   Collections.sort(sorted);
   for (  String choice : sorted) {
@@ -27,8 +27,8 @@
   menu.setGroupCheckable(1,true,true);
   boolean foundItem=false;
   int itemCount=menu.size();
-  if (settings.cacheType != null) {
-    String typeTitle=cgBase.cacheTypesInv.get(settings.cacheType);
+  if (Settings.getCacheType() != null) {
+    String typeTitle=cgBase.cacheTypesInv.get(Settings.getCacheType());
     if (typeTitle != null) {
       for (int i=0; i < itemCount; i++) {
         if (menu.getItem(i).getTitle().equals(typeTitle)) {

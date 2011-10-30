@@ -1,0 +1,7 @@
+{
+  final Intent cachesIntent=new Intent(context,cgeocaches.class);
+  cachesIntent.putExtra(EXTRAS_LIST_TYPE,CacheListType.COORDINATE);
+  cachesIntent.putExtra("latitude",latitude);
+  cachesIntent.putExtra("longitude",longitude);
+  context.startActivity(cachesIntent);
+}

@@ -1,4 +1,5 @@
 {
+  closePreparedStatements();
   if (databaseRO != null) {
     path=databaseRO.getPath();
     if (databaseRO.inTransaction()) {
@@ -7,7 +8,7 @@
     databaseRO.close();
     databaseRO=null;
     SQLiteDatabase.releaseMemory();
-    Log.d(cgSettings.tag,"Closing RO database");
+    Log.d(Settings.tag,"Closing RO database");
   }
   if (databaseRW != null) {
     path=databaseRW.getPath();
@@ -17,7 +18,7 @@
     databaseRW.close();
     databaseRW=null;
     SQLiteDatabase.releaseMemory();
-    Log.d(cgSettings.tag,"Closing RW database");
+    Log.d(Settings.tag,"Closing RW database");
   }
   if (dbHelper != null) {
     dbHelper.close();

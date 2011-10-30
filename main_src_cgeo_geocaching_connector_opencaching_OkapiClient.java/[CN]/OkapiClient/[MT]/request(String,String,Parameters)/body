@@ -1,0 +1,12 @@
+{
+  final IConnector connector=ConnectorFactory.getConnector(geoCode);
+  if (connector == null) {
+    return null;
+  }
+  if (!(connector instanceof ApiOpenCachingConnector)) {
+    return null;
+  }
+  final String uri="http://" + connector.getHost() + service;
+  ((ApiOpenCachingConnector)connector).addAuthentication(params);
+  return cgBase.requestJSON(uri,params);
+}

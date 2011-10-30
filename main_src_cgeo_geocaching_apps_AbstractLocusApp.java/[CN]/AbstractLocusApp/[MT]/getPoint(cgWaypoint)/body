@@ -2,10 +2,10 @@
   if (waypoint == null || waypoint.coords == null) {
     return null;
   }
-  Location loc=new Location(cgSettings.tag);
+  Location loc=new Location(Settings.tag);
   loc.setLatitude(waypoint.coords.getLatitude());
   loc.setLongitude(waypoint.coords.getLongitude());
   Point p=new Point(waypoint.name,loc);
-  p.setDescription("<a href=\"http://coord.info/" + waypoint.geocode + "\">"+ waypoint.geocode+ "</a>");
+  p.setDescription("<a href=\"" + waypoint.getUrl() + "\">"+ waypoint.geocode+ "</a>");
   return p;
 }

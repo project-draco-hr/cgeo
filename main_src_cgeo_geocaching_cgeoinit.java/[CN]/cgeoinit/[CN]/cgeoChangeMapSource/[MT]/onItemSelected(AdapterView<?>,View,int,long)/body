@@ -1,6 +1,3 @@
 {
-  settings.mapSource=mapSourceEnum.fromInt(arg2);
-  SharedPreferences.Editor edit=prefs.edit();
-  edit.putInt("mapsource",arg2);
-  edit.commit();
+  Settings.setMapSource(mapSourceEnum.fromInt(arg2));
 }

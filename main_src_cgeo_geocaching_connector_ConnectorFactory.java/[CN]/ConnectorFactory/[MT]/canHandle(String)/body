@@ -1,4 +1,7 @@
 {
+  if (isInvalidGeocode(geocode)) {
+    return false;
+  }
   for (  IConnector connector : connectors) {
     if (connector.canHandle(geocode)) {
       return true;

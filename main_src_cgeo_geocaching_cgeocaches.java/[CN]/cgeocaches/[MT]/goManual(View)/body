@@ -1,11 +1,13 @@
 {
-  if (type != null && type.equals("offline")) {
+switch (type) {
+case OFFLINE:
     ActivityMixin.goManual(this,"c:geo-stored");
-  }
- else   if (type != null && type.equals("history")) {
-    ActivityMixin.goManual(this,"c:geo-history");
-  }
- else {
-    ActivityMixin.goManual(this,"c:geo-nearby");
-  }
+  break;
+case HISTORY:
+ActivityMixin.goManual(this,"c:geo-history");
+break;
+default :
+ActivityMixin.goManual(this,"c:geo-nearby");
+break;
+}
 }

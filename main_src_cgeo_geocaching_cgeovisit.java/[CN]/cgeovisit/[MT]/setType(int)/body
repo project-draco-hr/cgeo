@@ -10,11 +10,11 @@
   if (tweetBox == null) {
     tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   }
-  if (type == 2 && tbChanged == false) {
+  if (type == 2 && !tbChanged) {
   }
- else   if (type != 2 && tbChanged == false) {
+ else   if (type != 2 && !tbChanged) {
   }
-  if (type == cgBase.LOG_FOUND_IT && settings.twitter == 1) {
+  if (type == cgBase.LOG_FOUND_IT && Settings.isUseTwitter()) {
     tweetBox.setVisibility(View.VISIBLE);
   }
  else {
@@ -23,7 +23,7 @@
   if (post == null) {
     post=(Button)findViewById(R.id.post);
   }
-  if (type == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
+  if (type == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
     if (rating == 0) {
       post.setText(res.getString(R.string.log_post_no_rate));
     }

@@ -3,8 +3,7 @@
   try {
     if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
       boolean loaded=false;
-      for (      String baseFolder : getBaseFolders()) {
-        final File dir=new File(baseFolder);
+      for (      final File dir : getBaseFolders()) {
         if (dir.exists() && dir.isDirectory()) {
           listDir(list,dir);
           if (list.size() > 0) {
@@ -18,11 +17,11 @@
       }
     }
  else {
-      Log.w(cgSettings.tag,"No external media mounted.");
+      Log.w(Settings.tag,"No external media mounted.");
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgFileList.loadFiles.run: " + e.toString());
+    Log.e(Settings.tag,"cgFileList.loadFiles.run: " + e.toString());
   }
   final Message msg=new Message();
   msg.obj="loaded directories";

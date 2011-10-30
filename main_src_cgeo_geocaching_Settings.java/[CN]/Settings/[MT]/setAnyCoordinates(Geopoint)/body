@@ -1,0 +1,15 @@
+{
+  editSharedSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      if (null != coords) {
+        edit.putFloat(KEY_ANYLATITUDE,(float)coords.getLatitude());
+        edit.putFloat(KEY_ANYLONGITUDE,(float)coords.getLongitude());
+      }
+ else {
+        edit.remove(KEY_ANYLATITUDE);
+        edit.remove(KEY_ANYLONGITUDE);
+      }
+    }
+  }
+);
+}

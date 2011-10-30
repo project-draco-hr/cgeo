@@ -15,11 +15,7 @@
     final Matcher matcherName=patternName.matcher(pointString);
     if (matcherName.find()) {
       String name=matcherName.group(1).trim();
-      int pos=name.indexOf(" by ");
-      if (pos > 0) {
-        name=name.substring(0,pos).trim();
-      }
-      pointCoord.name=name;
+      pointCoord.name=StringUtils.substringBeforeLast(name," by ").trim();
     }
     final Matcher matcherLat=patternLat.matcher(pointString);
     final Matcher matcherLon=patternLon.matcher(pointString);
@@ -66,6 +62,6 @@
       coords.put(pointCoord.geocode,pointCoord);
     }
   }
-  Log.i(cgSettings.tag,"Coordinates found in .loc file: " + coords.size());
+  Log.i(Settings.tag,"Coordinates found in .loc file: " + coords.size());
   return coords;
 }

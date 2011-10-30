@@ -1,10 +1,12 @@
 {
-  final String host="www.geocaching.com";
-  final String path="/account/ManagePreferences.aspx";
-  final String result=request(false,host,path,"GET",null,false,false,false).getData();
+  final String result=getResponseData(request("http://www.geocaching.com/account/ManagePreferences.aspx",null,false,false,false));
+  if (null == result) {
+    Log.w(Settings.tag,"cgeoBase.detectGcCustomDate: result is null");
+    return;
+  }
   final Pattern pattern=Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">",Pattern.CASE_INSENSITIVE);
   final Matcher matcher=pattern.matcher(result);
   if (matcher.find()) {
-    settings.setGcCustomDate(matcher.group(1));
+    Settings.setGcCustomDate(new String(matcher.group(1).trim()));
   }
 }

@@ -3,10 +3,7 @@
     return;
   }
   init();
-  if (listId <= 0) {
-    listId=1;
-  }
   ContentValues values=new ContentValues();
-  values.put("reason",listId);
+  values.put("reason",Math.max(listId,1));
   databaseRW.update(dbTableCaches,values,"geocode = ? and reason < 1",new String[]{geocode});
 }

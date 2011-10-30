@@ -1,0 +1,7 @@
+{
+  if (search == null) {
+    return null;
+  }
+  final List<String> geocodeList=search.getGeocodes();
+  return getCacheByGeocode(geocodeList.get(0),cgCache.LOADALL);
+}

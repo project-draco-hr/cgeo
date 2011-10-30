@@ -1,15 +1,15 @@
 {
   if (StringUtils.isEmpty(data)) {
-    Log.e(cgSettings.tag,"cgeoBase.parseMapJSON: No page given");
+    Log.e(Settings.tag,"cgeoBase.parseMapJSON: No page given");
     return null;
   }
   final cgCacheWrap caches=new cgCacheWrap();
-  caches.url=url;
+  caches.url=uri;
   try {
     final JSONObject yoDawg=new JSONObject(data);
     final String json=yoDawg.getString("d");
     if (StringUtils.isBlank(json)) {
-      Log.e(cgSettings.tag,"cgeoBase.parseMapJSON: No JSON inside JSON");
+      Log.e(Settings.tag,"cgeoBase.parseMapJSON: No JSON inside JSON");
       return null;
     }
     final JSONObject dataJSON=new JSONObject(json);
@@ -35,53 +35,56 @@
             cacheToAdd.disabled=!oneCache.getBoolean("ia");
             int ctid=oneCache.getInt("ctid");
             if (ctid == 2) {
-              cacheToAdd.type="traditional";
+              cacheToAdd.type=CacheType.TRADITIONAL.id;
             }
  else             if (ctid == 3) {
-              cacheToAdd.type="multi";
+              cacheToAdd.type=CacheType.MULTI.id;
             }
  else             if (ctid == 4) {
-              cacheToAdd.type="virtual";
+              cacheToAdd.type=CacheType.VIRTUAL.id;
             }
  else             if (ctid == 5) {
-              cacheToAdd.type="letterbox";
+              cacheToAdd.type=CacheType.LETTERBOX.id;
             }
  else             if (ctid == 6) {
-              cacheToAdd.type="event";
+              cacheToAdd.type=CacheType.EVENT.id;
             }
  else             if (ctid == 8) {
-              cacheToAdd.type="mystery";
+              cacheToAdd.type=CacheType.MYSTERY.id;
             }
  else             if (ctid == 11) {
-              cacheToAdd.type="webcam";
+              cacheToAdd.type=CacheType.WEBCAM.id;
             }
  else             if (ctid == 13) {
-              cacheToAdd.type="cito";
+              cacheToAdd.type=CacheType.CITO.id;
             }
  else             if (ctid == 137) {
-              cacheToAdd.type="earth";
+              cacheToAdd.type=CacheType.EARTH.id;
             }
  else             if (ctid == 453) {
-              cacheToAdd.type="mega";
+              cacheToAdd.type=CacheType.MEGA_EVENT.id;
             }
  else             if (ctid == 1858) {
-              cacheToAdd.type="wherigo";
+              cacheToAdd.type=CacheType.WHERIGO.id;
             }
  else             if (ctid == 3653) {
-              cacheToAdd.type="lost";
+              cacheToAdd.type=CacheType.LOSTANDFOUND.id;
+            }
+ else {
+              cacheToAdd.type=CacheType.UNKNOWN.id;
             }
             caches.cacheList.add(cacheToAdd);
           }
         }
       }
  else {
-        Log.w(cgSettings.tag,"There are no caches in viewport");
+        Log.w(Settings.tag,"There are no caches in viewport");
       }
       caches.totalCnt=caches.cacheList.size();
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgBase.parseMapJSON: " + e.toString());
+    Log.e(Settings.tag,"cgBase.parseMapJSON",e);
   }
   return caches;
 }

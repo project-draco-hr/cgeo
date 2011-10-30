@@ -1,0 +1,9 @@
+{
+  boolean oldIsGoogle=Settings.getMapSource().isGoogleMapSource();
+  Settings.setMapSource(mapSource);
+  boolean mapRestartRequired=mapSource.isGoogleMapSource() != oldIsGoogle;
+  if (!mapRestartRequired) {
+    mapView.setMapSource();
+  }
+  return mapRestartRequired;
+}

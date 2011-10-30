@@ -3,63 +3,46 @@
     return null;
   }
   final List<cgTrackableLog> trackables=new ArrayList<cgTrackableLog>();
-  int startPos=-1;
-  int endPos=-1;
-  startPos=page.indexOf("<table id=\"tblTravelBugs\"");
-  if (startPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackableLog: ID \"tblTravelBugs\" not found on page");
+  String table=StringUtils.substringBetween(page,"<table id=\"tblTravelBugs\"","</table>");
+  if (StringUtils.isBlank(table)) {
+    return trackables;
+  }
+  table=StringUtils.substringBetween(table,"<tbody>","</tbody>");
+  if (StringUtils.isBlank(table)) {
+    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: tbody not found on page");
     return null;
   }
-  page=page.substring(startPos);
-  endPos=page.indexOf("</table>");
-  if (endPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackableLog: end of ID \"tblTravelBugs\" not found on page");
-    return null;
-  }
-  page=page.substring(0,endPos);
-  startPos=page.indexOf("<tbody>");
-  if (startPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackableLog: tbody not found on page");
-    return null;
-  }
-  page=page.substring(startPos);
-  endPos=page.indexOf("</tbody>");
-  if (endPos == -1) {
-    Log.e(cgSettings.tag,"cgeoBase.parseTrackableLog: end of tbody not found on page");
-    return null;
-  }
-  page=page.substring(0,endPos);
   final Pattern trackablePattern=Pattern.compile("<tr id=\"ctl00_ContentBody_LogBookPanel1_uxTrackables_repTravelBugs_ctl[0-9]+_row\"[^>]*>" + "[^<]*<td>[^<]*<a href=\"[^\"]+\">([A-Z0-9]+)</a>[^<]*</td>[^<]*<td>([^<]+)</td>[^<]*<td>" + "[^<]*<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$uxTrackables\\$repTravelBugs\\$ctl([0-9]+)\\$ddlAction\"[^>]*>"+ "([^<]*<option value=\"([0-9]+)(_[a-z]+)?\">[^<]+</option>)+"+ "[^<]*</select>[^<]*</td>[^<]*</tr>",Pattern.CASE_INSENSITIVE);
   final Matcher trackableMatcher=trackablePattern.matcher(page);
   while (trackableMatcher.find()) {
     if (trackableMatcher.groupCount() > 0) {
-      final cgTrackableLog trackable=new cgTrackableLog();
+      final cgTrackableLog trackableLog=new cgTrackableLog();
       if (trackableMatcher.group(1) != null) {
-        trackable.trackCode=trackableMatcher.group(1);
+        trackableLog.trackCode=trackableMatcher.group(1);
       }
  else {
         continue;
       }
       if (trackableMatcher.group(2) != null) {
-        trackable.name=Html.fromHtml(trackableMatcher.group(2)).toString();
+        trackableLog.name=Html.fromHtml(trackableMatcher.group(2)).toString();
       }
  else {
         continue;
       }
       if (trackableMatcher.group(3) != null) {
-        trackable.ctl=Integer.valueOf(trackableMatcher.group(3));
+        trackableLog.ctl=Integer.valueOf(trackableMatcher.group(3));
       }
  else {
         continue;
       }
       if (trackableMatcher.group(5) != null) {
-        trackable.id=Integer.valueOf(trackableMatcher.group(5));
+        trackableLog.id=Integer.valueOf(trackableMatcher.group(5));
       }
  else {
         continue;
       }
-      Log.i(cgSettings.tag,"Trackable in inventory (#" + trackable.ctl + "/"+ trackable.id+ "): "+ trackable.trackCode+ " - "+ trackable.name);
-      trackables.add(trackable);
+      Log.i(Settings.tag,"Trackable in inventory (#" + trackableLog.ctl + "/"+ trackableLog.id+ "): "+ trackableLog.trackCode+ " - "+ trackableLog.name);
+      trackables.add(trackableLog);
     }
   }
   return trackables;

@@ -1,7 +1,5 @@
 {
-  final String directoryImg=cgSettings.cache;
-  final String fileSource=Environment.getExternalStorageDirectory() + "/" + directoryImg+ "/cgeo.sqlite";
-  File fileSourceFile=new File(fileSource);
+  final File fileSourceFile=backupFile();
   if (fileSourceFile.exists()) {
     return fileSourceFile;
   }

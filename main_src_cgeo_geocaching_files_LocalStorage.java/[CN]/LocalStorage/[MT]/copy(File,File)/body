@@ -1,0 +1,23 @@
+{
+  destination.getParentFile().mkdirs();
+  InputStream input;
+  OutputStream output;
+  try {
+    input=new FileInputStream(source);
+    output=new FileOutputStream(destination);
+  }
+ catch (  FileNotFoundException e) {
+    Log.e(Settings.tag,"LocalStorage.copy: could not open file",e);
+    return false;
+  }
+  boolean copyDone=copy(input,output);
+  try {
+    input.close();
+    output.close();
+  }
+ catch (  IOException e) {
+    Log.e(Settings.tag,"LocalStorage.copy: could not close file",e);
+    return false;
+  }
+  return copyDone;
+}

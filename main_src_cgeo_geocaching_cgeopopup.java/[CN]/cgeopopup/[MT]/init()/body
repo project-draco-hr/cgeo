@@ -1,6 +1,6 @@
 {
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,base,settings,0,0);
+    geo=app.startGeo(this,geoUpdate,base,0,0);
   }
   app.setAction(geocode);
   cache=app.getCacheByGeocode(geocode);
@@ -25,7 +25,7 @@
     ((ScrollView)findViewById(R.id.details_list_box)).setVisibility(View.VISIBLE);
     LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
-    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable)getResources().getDrawable(cgBase.getCacheIcon(cache.type)),null,null,null);
+    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)),null,null,null);
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
@@ -40,10 +40,10 @@
     }
  else {
       if (cache.size != null) {
-        itemValue.setText(cgBase.cacheTypesInv.get("mystery") + " (" + res.getString(cache.size.stringId)+ ")");
+        itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id) + " (" + res.getString(cache.size.stringId)+ ")");
       }
  else {
-        itemValue.setText(cgBase.cacheTypesInv.get("mystery"));
+        itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id));
       }
     }
     detailsList.addView(itemLayout);
@@ -100,7 +100,7 @@
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
       itemStars=(LinearLayout)itemLayout.findViewById(R.id.stars);
       itemName.setText(res.getString(R.string.cache_difficulty));
-      itemValue.setText(String.format(Locale.getDefault(),"%.1f",cache.difficulty) + " of 5");
+      itemValue.setText(String.format(Locale.getDefault(),"%.1f",cache.difficulty) + ' ' + res.getString(R.string.cache_rating_of)+ " 5");
       for (int i=0; i <= 4; i++) {
         ImageView star=(ImageView)inflater.inflate(R.layout.star,null);
         if ((cache.difficulty - i) >= 1.0) {
@@ -122,7 +122,7 @@
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
       itemStars=(LinearLayout)itemLayout.findViewById(R.id.stars);
       itemName.setText(res.getString(R.string.cache_terrain));
-      itemValue.setText(String.format(Locale.getDefault(),"%.1f",cache.terrain) + " of 5");
+      itemValue.setText(String.format(Locale.getDefault(),"%.1f",cache.terrain) + ' ' + res.getString(R.string.cache_rating_of)+ " 5");
       for (int i=0; i <= 4; i++) {
         ImageView star=(ImageView)inflater.inflate(R.layout.star,null);
         if ((cache.terrain - i) >= 1.0) {
@@ -142,23 +142,25 @@
       setRating(cache.rating,cache.votes);
     }
  else {
-      (new Thread(){
-        public void run(){
-          cgRating rating=base.getRating(cache.guid,geocode);
-          Message msg=new Message();
-          Bundle bundle=new Bundle();
-          if (rating == null || rating.rating == null) {
-            return;
+      if (cache.supportsGCVote()) {
+        (new Thread(){
+          public void run(){
+            cgRating rating=GCVote.getRating(cache.guid,geocode);
+            Message msg=new Message();
+            Bundle bundle=new Bundle();
+            if (rating == null || rating.rating == null) {
+              return;
+            }
+            bundle.putFloat("rating",rating.rating);
+            bundle.putInt("votes",rating.votes);
+            msg.setData(bundle);
+            ratingHandler.sendMessage(msg);
           }
-          bundle.putFloat("rating",rating.rating);
-          bundle.putInt("votes",rating.votes);
-          msg.setData(bundle);
-          ratingHandler.sendMessage(msg);
         }
-      }
 ).start();
+      }
     }
-    if (fromDetail == false) {
+    if (!fromDetail) {
       ((LinearLayout)findViewById(R.id.more_details_box)).setVisibility(View.VISIBLE);
       Button buttonMore=(Button)findViewById(R.id.more_details);
       buttonMore.setOnClickListener(new OnClickListener(){
@@ -175,7 +177,7 @@
  else {
       ((LinearLayout)findViewById(R.id.more_details_box)).setVisibility(View.GONE);
     }
-    if (fromDetail == false) {
+    if (!fromDetail) {
       ((LinearLayout)findViewById(R.id.offline_box)).setVisibility(View.VISIBLE);
       final TextView offlineText=(TextView)findViewById(R.id.offline_text);
       final Button offlineRefresh=(Button)findViewById(R.id.offline_refresh);
@@ -222,7 +224,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeopopup.init: " + e.toString());
+    Log.e(Settings.tag,"cgeopopup.init: " + e.toString());
   }
   if (geo != null) {
     geoUpdate.updateLoc(geo);

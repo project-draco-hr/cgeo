@@ -1,6 +1,11 @@
 {
-  final String input=inputUntrimmed.trim();
-  if (input.length() >= 3 && input.charAt(input.length() - 3) == ':') {
+  String input=inputUntrimmed.trim();
+  final Matcher matcher=PATTERN_MILLISECONDS.matcher(input);
+  input=matcher.replaceFirst("");
+  if (input.contains("Z")) {
+    return formatSimpleZ.parse(input);
+  }
+  if (StringUtils.countMatches(input,":") == 3) {
     final String removeColon=input.substring(0,input.length() - 3) + input.substring(input.length() - 2);
     return formatTimezone.parse(removeColon);
   }

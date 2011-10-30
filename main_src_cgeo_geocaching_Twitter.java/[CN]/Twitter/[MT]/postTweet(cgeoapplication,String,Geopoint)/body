@@ -1,0 +1,25 @@
+{
+  if (app == null) {
+    return;
+  }
+  if (!Settings.isTwitterLoginValid()) {
+    return;
+  }
+  try {
+    Parameters parameters=new Parameters("status",status);
+    if (coords != null) {
+      parameters.put("lat",String.format("%.6f",coords.getLatitude()),"long",String.format("%.6f",coords.getLongitude()),"display_coordinates","true");
+    }
+    OAuth.signOAuth("api.twitter.com","/1/statuses/update.json","POST",false,parameters,Settings.getTokenPublic(),Settings.getTokenSecret());
+    final HttpResponse httpResponse=cgBase.postRequest("http://api.twitter.com/1/statuses/update.json",parameters);
+    if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
+      Log.i(Settings.tag,"Tweet posted");
+    }
+ else {
+      Log.e(Settings.tag,"Tweet could not be posted");
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgBase.postTweet: " + e.toString());
+  }
+}

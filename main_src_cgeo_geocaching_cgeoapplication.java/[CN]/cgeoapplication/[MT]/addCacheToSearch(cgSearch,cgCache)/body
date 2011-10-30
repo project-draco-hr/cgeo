@@ -2,10 +2,6 @@
   if (search == null || cache == null) {
     return false;
   }
-  final UUID searchId=search.getCurrentId();
-  if (searches.containsKey(searchId) == false) {
-    searches.put(searchId,search);
-  }
   final boolean status=storeWithMerge(cache,cache.reason >= 1);
   if (status) {
     search.addGeocode(cache.geocode);

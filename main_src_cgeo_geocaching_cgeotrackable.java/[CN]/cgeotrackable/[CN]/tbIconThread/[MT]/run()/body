@@ -4,12 +4,12 @@
   }
   BitmapDrawable image=null;
   try {
-    cgHtmlImg imgGetter=new cgHtmlImg(cgeotrackable.this,trackable.geocode,false,0,false);
+    HtmlImage imgGetter=new HtmlImage(cgeotrackable.this,trackable.getGeocode(),false,0,false);
     image=imgGetter.getDrawable(url);
     Message message=handler.obtainMessage(0,image);
     handler.sendMessage(message);
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgeotrackable.tbIconThread.run: " + e.toString());
+    Log.e(Settings.tag,"cgeotrackable.tbIconThread.run: " + e.toString());
   }
 }

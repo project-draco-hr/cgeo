@@ -1,0 +1,27 @@
+{
+  Map<String,cgCoord> caches=null;
+  final Resources res=getInstrumentation().getContext().getResources();
+  final InputStream instream=res.openRawResource(resourceId);
+  try {
+    final StringBuilder buffer=new StringBuilder();
+    int ch;
+    while ((ch=instream.read()) != -1) {
+      buffer.append((char)ch);
+    }
+    caches=LocParser.parseCoordinates(buffer.toString());
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+ finally {
+    try {
+      instream.close();
+    }
+ catch (    IOException e) {
+      e.printStackTrace();
+    }
+  }
+  assertNotNull(caches);
+  assertTrue(caches.size() > 0);
+  return caches;
+}

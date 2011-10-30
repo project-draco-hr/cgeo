@@ -1,11 +1,9 @@
 {
-  Map<String,Object> params=new HashMap<String,Object>();
   if (coords != null) {
-    params.put("latitude",coords.getLatitude());
-    params.put("longitude",coords.getLongitude());
-    params.put("cachetype",settings.cacheType);
-    params.put("list",listId);
+    search=base.searchByOffline(coords,Settings.getCacheType(),listId);
   }
-  searchId=base.searchByOffline(params);
+ else {
+    search=base.searchByOffline(null,null,cgList.STANDARD_LIST_ID);
+  }
   handler.sendMessage(new Message());
 }

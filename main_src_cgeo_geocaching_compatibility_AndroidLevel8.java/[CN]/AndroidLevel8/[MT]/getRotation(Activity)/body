@@ -1,3 +1,4 @@
 {
-  return internal.getRotation(activity);
+  Display display=activity.getWindowManager().getDefaultDisplay();
+  return display.getRotation();
 }

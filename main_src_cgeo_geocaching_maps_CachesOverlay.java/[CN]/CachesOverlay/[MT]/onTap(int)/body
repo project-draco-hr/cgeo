@@ -1,0 +1,48 @@
+{
+  try {
+    if (items.size() <= index) {
+      return false;
+    }
+    if (waitDialog == null) {
+      waitDialog=new ProgressDialog(context);
+      waitDialog.setMessage("loading details...");
+      waitDialog.setCancelable(false);
+    }
+    waitDialog.show();
+    CachesOverlayItemImpl item=null;
+    getOverlayImpl().lock();
+    try {
+      if (index < items.size()) {
+        item=items.get(index);
+      }
+    }
+  finally {
+      getOverlayImpl().unlock();
+    }
+    if (item == null) {
+      return false;
+    }
+    cgCoord coordinate=item.getCoord();
+    if (StringUtils.isNotBlank(coordinate.type) && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
+      Intent popupIntent=new Intent(context,cgeopopup.class);
+      popupIntent.putExtra("fromdetail",fromDetail);
+      popupIntent.putExtra("geocode",coordinate.geocode);
+      context.startActivity(popupIntent);
+    }
+ else     if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") && coordinate.id != null && coordinate.id > 0) {
+      Intent popupIntent=new Intent(context,cgeowaypoint.class);
+      popupIntent.putExtra("waypoint",coordinate.id);
+      popupIntent.putExtra("geocode",coordinate.geocode);
+      context.startActivity(popupIntent);
+    }
+ else {
+      waitDialog.dismiss();
+      return false;
+    }
+    waitDialog.dismiss();
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgMapOverlay.onTap: " + e.toString());
+  }
+  return false;
+}

@@ -1,12 +1,9 @@
 {
   init();
-  if (list < 1) {
-    list=1;
-  }
   List<String> geocodes=new ArrayList<String>();
   StringBuilder specifySql=new StringBuilder();
   specifySql.append("reason = ");
-  specifySql.append(list);
+  specifySql.append(Math.max(list,1));
   if (detailedOnly) {
     specifySql.append(" and detailed = 1 ");
   }
@@ -16,13 +13,13 @@
     specifySql.append('"');
   }
   try {
-    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"_id","geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},specifySql.toString(),null,null,null,"dif",null);
+    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},specifySql.toString(),null,null,null,"dif",null);
     if (cursor != null) {
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();
         int index=cursor.getColumnIndex("geocode");
         do {
-          geocodes.add((String)cursor.getString(index));
+          geocodes.add(cursor.getString(index));
         }
  while (cursor.moveToNext());
       }
@@ -34,7 +31,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(cgSettings.tag,"cgData.loadBatchOfStoredGeocodes: " + e.toString());
+    Log.e(Settings.tag,"cgData.loadBatchOfStoredGeocodes: " + e.toString());
   }
   return geocodes;
 }

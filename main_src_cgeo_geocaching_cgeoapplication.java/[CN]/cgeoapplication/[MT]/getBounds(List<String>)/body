@@ -1,9 +1,6 @@
 {
-  if (geocodes == null || geocodes.isEmpty()) {
+  if (CollectionUtils.isEmpty(geocodes)) {
     return null;
   }
-  if (storage == null) {
-    storage=new cgData(this);
-  }
-  return storage.getBounds(geocodes.toArray());
+  return getStorage().getBounds(geocodes.toArray());
 }
