@@ -4,6 +4,6 @@
   }
   if (overlayPosition != null && mapView != null && (geo == null || geo.speedNow == null || geo.speedNow <= 5)) {
     overlayPosition.setHeading(dir.directionNow);
-    mapView.invalidate();
+    mapView.repaintRequired(overlayPosition);
   }
 }

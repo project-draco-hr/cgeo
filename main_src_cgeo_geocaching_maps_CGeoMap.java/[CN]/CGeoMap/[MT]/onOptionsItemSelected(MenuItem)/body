@@ -85,7 +85,7 @@ if (overlayCaches == null) {
 return false;
 }
 overlayCaches.switchCircles();
-mapView.invalidate();
+mapView.repaintRequired(overlayCaches);
 return true;
 case MENU_AS_LIST:
 {

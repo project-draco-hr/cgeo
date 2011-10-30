@@ -1,11 +1,16 @@
 {
-  try {
-    MapsforgeOverlay ovl=(MapsforgeOverlay)overlay.getOverlayImpl();
-    if (ovl != null) {
-      ovl.requestRedraw();
-    }
+  if (null == overlay) {
+    invalidate();
   }
- catch (  Exception e) {
-    Log.e(Settings.tag,"mfMapView.repaintRequired: " + e.toString());
+ else {
+    try {
+      Overlay ovl=(Overlay)overlay.getOverlayImpl();
+      if (ovl != null) {
+        ovl.requestRedraw();
+      }
+    }
+ catch (    Exception e) {
+      Log.e(Settings.tag,"mfMapView.repaintRequired: " + e.toString());
+    }
   }
 }

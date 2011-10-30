@@ -36,7 +36,7 @@
   if (overlayScale == null) {
     overlayScale=mapView.createAddScaleOverlay(activity);
   }
-  mapView.invalidate();
+  mapView.repaintRequired(null);
   mapController=mapView.getMapController();
   mapController.setZoom(Settings.getMapZoom());
   if (geo != null) {
