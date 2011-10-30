@@ -1,9 +1,9 @@
 {
-  if (cache == null || cache.geocode == null) {
+  if (cache == null || cache.getGeocode() == null) {
     return;
   }
-  if (cachesCache.containsKey(cache.geocode)) {
-    cachesCache.remove(cache.geocode);
+  if (cachesCache.containsKey(cache.getGeocode())) {
+    cachesCache.remove(cache.getGeocode());
   }
-  cachesCache.put(cache.geocode,cache);
+  cachesCache.put(cache.getGeocode(),cache);
 }

@@ -7,19 +7,19 @@
       return false;
     }
     if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-      if (cache.statusChecked) {
+      if (cache.isStatusChecked()) {
         return true;
       }
       if (holder != null && holder.oneInfo != null) {
         checkChecked(+1);
         holder.checkbox.setChecked(true);
-        cache.statusChecked=true;
+        cache.setStatusChecked(true);
         moveRight(holder,cache,false);
       }
       return true;
     }
  else     if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-      if (!cache.statusChecked) {
+      if (!cache.isStatusChecked()) {
         return true;
       }
       if (holder != null && holder.oneInfo != null) {
@@ -28,7 +28,7 @@
         }
         checkChecked(-1);
         holder.checkbox.setChecked(false);
-        cache.statusChecked=false;
+        cache.setStatusChecked(false);
         moveLeft(holder,cache,false);
       }
       return true;

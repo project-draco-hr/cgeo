@@ -1,13 +1,13 @@
 {
   String type;
-  if (cache.found) {
-    type=cache.type + "_found";
+  if (cache.isFound()) {
+    type=cache.getType() + "_found";
   }
- else   if (cache.disabled) {
-    type=cache.type + "_disabled";
+ else   if (cache.isDisabled()) {
+    type=cache.getType() + "_disabled";
   }
  else {
-    type=cache.type;
+    type=cache.getType();
   }
   return cgBase.urlencode_rfc3986(MARKERS_URL + "marker_cache_" + type+ ".png");
 }

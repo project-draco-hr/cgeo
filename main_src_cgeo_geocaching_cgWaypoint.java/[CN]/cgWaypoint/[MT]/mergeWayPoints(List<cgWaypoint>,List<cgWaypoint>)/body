@@ -2,10 +2,10 @@
   if (newPoints != null && oldPoints != null) {
     for (    cgWaypoint old : oldPoints) {
       boolean merged=false;
-      if (old != null && old.name != null && old.name.length() > 0) {
+      if (old != null && old.getName() != null && old.getName().length() > 0) {
         for (        cgWaypoint waypoint : newPoints) {
-          if (waypoint != null && waypoint.name != null) {
-            if (old.name.equalsIgnoreCase(waypoint.name)) {
+          if (waypoint != null && waypoint.getName() != null) {
+            if (old.getName().equalsIgnoreCase(waypoint.getName())) {
               waypoint.merge(old);
               merged=true;
               break;

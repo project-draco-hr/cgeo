@@ -4,9 +4,9 @@
   }
   if (coordsIntent != null) {
     final cgCoord coord=new cgCoord();
-    coord.type="waypoint";
-    coord.coords=coordsIntent;
-    coord.name="some place";
+    coord.setType("waypoint");
+    coord.setCoords(coordsIntent);
+    coord.setName("some place");
     coordinates.add(coord);
     final CachesOverlayItemImpl item=Settings.getMapFactory().getCachesOverlayItem(coord,null);
     final int icon;

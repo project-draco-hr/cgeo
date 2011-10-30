@@ -2,14 +2,14 @@
   selectMode=status;
   if (!selectMode && clear) {
     for (    final cgCache cache : list) {
-      cache.statusChecked=false;
-      cache.statusCheckedView=false;
+      cache.setStatusChecked(false);
+      cache.setStatusCheckedView(false);
     }
     checked=0;
   }
  else   if (selectMode) {
     for (    final cgCache cache : list) {
-      cache.statusCheckedView=false;
+      cache.setStatusCheckedView(false);
     }
   }
   checkChecked(0);

@@ -1,6 +1,6 @@
 {
   for (  cgCache cache : cacheList) {
-    if (checked > 0 && !cache.statusChecked) {
+    if (checked > 0 && !cache.isStatusChecked()) {
       handler.sendEmptyMessage(0);
       yield();
       continue;
@@ -10,7 +10,7 @@
         Log.i(Settings.tag,"Stopped removing process.");
         break;
       }
-      app.clearVisitDate(cache.geocode);
+      app.clearVisitDate(cache.getGeocode());
       handler.sendEmptyMessage(cacheList.indexOf(cache));
       yield();
     }

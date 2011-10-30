@@ -49,20 +49,20 @@
       return;
     }
     final cgCache cache=adapter.getItem(adapterInfo.position);
-    if (StringUtils.isNotBlank(cache.name)) {
-      menu.setHeaderTitle(cache.name);
+    if (StringUtils.isNotBlank(cache.getName())) {
+      menu.setHeaderTitle(cache.getName());
     }
  else {
-      menu.setHeaderTitle(cache.geocode);
+      menu.setHeaderTitle(cache.getGeocode());
     }
-    if (cache.coords != null) {
+    if (cache.getCoords() != null) {
       menu.add(0,MENU_COMPASS,0,res.getString(R.string.cache_menu_compass));
       SubMenu subMenu=menu.addSubMenu(1,0,0,res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
       NavigationAppFactory.addMenuItems(subMenu,this,res);
       addVisitMenu(menu,cache);
       menu.add(0,MENU_CACHE_DETAILS,0,res.getString(R.string.cache_menu_details));
     }
-    if (cache.reason >= 1) {
+    if (cache.getReason() >= 1) {
       menu.add(0,MENU_DROP_CACHE,0,res.getString(R.string.cache_offline_drop));
       List<cgList> cacheLists=app.getLists();
       int listCount=cacheLists.size();

@@ -83,72 +83,72 @@
         do {
           cgCache cache=createCacheFromDatabaseContent(cursor);
           if ((loadFlags & cgCache.LOADATTRIBUTES) != 0) {
-            final List<String> attributes=loadAttributes(cache.geocode);
+            final List<String> attributes=loadAttributes(cache.getGeocode());
             if (CollectionUtils.isNotEmpty(attributes)) {
-              if (cache.attributes == null) {
-                cache.attributes=new ArrayList<String>();
+              if (cache.getAttributes() == null) {
+                cache.setAttributes(new ArrayList<String>());
               }
  else {
-                cache.attributes.clear();
+                cache.getAttributes().clear();
               }
-              cache.attributes.addAll(attributes);
+              cache.getAttributes().addAll(attributes);
             }
           }
           if ((loadFlags & cgCache.LOADWAYPOINTS) != 0) {
-            final List<cgWaypoint> waypoints=loadWaypoints(cache.geocode);
+            final List<cgWaypoint> waypoints=loadWaypoints(cache.getGeocode());
             if (CollectionUtils.isNotEmpty(waypoints)) {
-              if (cache.waypoints == null) {
-                cache.waypoints=new ArrayList<cgWaypoint>();
+              if (cache.getWaypoints() == null) {
+                cache.setWaypoints(new ArrayList<cgWaypoint>());
               }
  else {
-                cache.waypoints.clear();
+                cache.getWaypoints().clear();
               }
-              cache.waypoints.addAll(waypoints);
+              cache.getWaypoints().addAll(waypoints);
             }
           }
           if ((loadFlags & cgCache.LOADSPOILERS) != 0) {
-            final List<cgImage> spoilers=loadSpoilers(cache.geocode);
+            final List<cgImage> spoilers=loadSpoilers(cache.getGeocode());
             if (CollectionUtils.isNotEmpty(spoilers)) {
-              if (cache.spoilers == null) {
-                cache.spoilers=new ArrayList<cgImage>();
+              if (cache.getSpoilers() == null) {
+                cache.setSpoilers(new ArrayList<cgImage>());
               }
  else {
-                cache.spoilers.clear();
+                cache.getSpoilers().clear();
               }
-              cache.spoilers.addAll(spoilers);
+              cache.getSpoilers().addAll(spoilers);
             }
           }
           if ((loadFlags & cgCache.LOADLOGS) != 0) {
-            final List<cgLog> logs=loadLogs(cache.geocode);
+            final List<cgLog> logs=loadLogs(cache.getGeocode());
             if (CollectionUtils.isNotEmpty(logs)) {
-              if (cache.logs == null) {
-                cache.logs=new ArrayList<cgLog>();
+              if (cache.getLogs() == null) {
+                cache.setLogs(new ArrayList<cgLog>());
               }
  else {
-                cache.logs.clear();
+                cache.getLogs().clear();
               }
-              cache.logs.addAll(logs);
+              cache.getLogs().addAll(logs);
             }
-            final Map<Integer,Integer> logCounts=loadLogCounts(cache.geocode);
+            final Map<Integer,Integer> logCounts=loadLogCounts(cache.getGeocode());
             if (MapUtils.isNotEmpty(logCounts)) {
-              cache.logCounts.clear();
-              cache.logCounts.putAll(logCounts);
+              cache.getLogCounts().clear();
+              cache.getLogCounts().putAll(logCounts);
             }
           }
           if ((loadFlags & cgCache.LOADINVENTORY) != 0) {
-            final List<cgTrackable> inventory=loadInventory(cache.geocode);
+            final List<cgTrackable> inventory=loadInventory(cache.getGeocode());
             if (CollectionUtils.isNotEmpty(inventory)) {
-              if (cache.inventory == null) {
-                cache.inventory=new ArrayList<cgTrackable>();
+              if (cache.getInventory() == null) {
+                cache.setInventory(new ArrayList<cgTrackable>());
               }
  else {
-                cache.inventory.clear();
+                cache.getInventory().clear();
               }
-              cache.inventory.addAll(inventory);
+              cache.getInventory().addAll(inventory);
             }
           }
           if ((loadFlags & cgCache.LOADOFFLINELOG) != 0) {
-            cache.logOffline=hasLogOffline(cache.geocode);
+            cache.setLogOffline(hasLogOffline(cache.getGeocode()));
           }
           caches.add(cache);
         }

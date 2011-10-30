@@ -11,7 +11,7 @@
   logTypes.put(cgBase.LOG_ATTENDED,"Attended");
   logTypes.put(cgBase.LOG_WEBCAM_PHOTO_TAKEN,"Webcam Photo Taken");
   for (  cgCache cache : cacheList) {
-    if (checked > 0 && !cache.statusChecked) {
+    if (checked > 0 && !cache.isStatusChecked()) {
       handler.sendEmptyMessage(0);
       yield();
       continue;
@@ -21,10 +21,10 @@
         Log.i(Settings.tag,"Stopped exporting process.");
         break;
       }
-      if (cache.logOffline) {
-        cgLog log=app.loadLogOffline(cache.geocode);
+      if (cache.isLogOffline()) {
+        cgLog log=app.loadLogOffline(cache.getGeocode());
         if (null != logTypes.get(log.type)) {
-          fieldNoteBuffer.append(cache.geocode).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(logTypes.get(log.type)).append(",\"").append(log.log.replaceAll("\"","'")).append("\"\n");
+          fieldNoteBuffer.append(cache.getGeocode()).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(logTypes.get(log.type)).append(",\"").append(log.log.replaceAll("\"","'")).append("\"\n");
         }
       }
       detailProgress++;

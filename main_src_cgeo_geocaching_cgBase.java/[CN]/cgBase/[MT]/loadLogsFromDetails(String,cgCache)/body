@@ -59,10 +59,10 @@
         }
         logDone.logImages.add(logImage);
       }
-      if (null == cache.logs) {
-        cache.logs=new ArrayList<cgLog>();
+      if (null == cache.getLogs()) {
+        cache.setLogs(new ArrayList<cgLog>());
       }
-      cache.logs.add(logDone);
+      cache.getLogs().add(logDone);
     }
   }
  catch (  JSONException e) {

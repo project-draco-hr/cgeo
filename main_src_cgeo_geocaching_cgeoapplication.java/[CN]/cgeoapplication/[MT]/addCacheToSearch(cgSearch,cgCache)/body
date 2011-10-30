@@ -2,9 +2,9 @@
   if (search == null || cache == null) {
     return false;
   }
-  final boolean status=storeWithMerge(cache,cache.reason >= 1);
+  final boolean status=storeWithMerge(cache,cache.getReason() >= 1);
   if (status) {
-    search.addGeocode(cache.geocode);
+    search.addGeocode(cache.getGeocode());
   }
   return status;
 }

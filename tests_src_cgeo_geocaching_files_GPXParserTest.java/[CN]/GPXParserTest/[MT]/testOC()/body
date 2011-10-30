@@ -1,16 +1,16 @@
 {
   final List<cgCache> caches=readGPX(R.raw.oc5952_gpx);
   final cgCache cache=caches.get(0);
-  assertEquals("OC5952",cache.geocode);
-  assertEquals(CacheType.TRADITIONAL.id,cache.type);
-  assertEquals(false,cache.archived);
-  assertEquals(false,cache.disabled);
-  assertEquals("Die Schatzinsel / treasure island",cache.name);
-  assertEquals("Die unbesiegbaren Geo - Geparden",cache.owner);
-  assertEquals(CacheSize.SMALL,cache.size);
-  assertEquals(1.0f,cache.difficulty.floatValue());
-  assertEquals(4.0f,cache.terrain.floatValue());
-  assertEquals("Baden-W??rttemberg, Germany",cache.location);
-  assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is",cache.shortdesc);
-  assertTrue(new Geopoint(48.85968,9.18740).isEqualTo(cache.coords));
+  assertEquals("OC5952",cache.getGeocode());
+  assertEquals(CacheType.TRADITIONAL.id,cache.getType());
+  assertEquals(false,cache.isArchived());
+  assertEquals(false,cache.isDisabled());
+  assertEquals("Die Schatzinsel / treasure island",cache.getName());
+  assertEquals("Die unbesiegbaren Geo - Geparden",cache.getOwner());
+  assertEquals(CacheSize.SMALL,cache.getSize());
+  assertEquals(1.0f,cache.getDifficulty().floatValue());
+  assertEquals(4.0f,cache.getTerrain().floatValue());
+  assertEquals("Baden-W??rttemberg, Germany",cache.getLocation());
+  assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is",cache.getShortdesc());
+  assertTrue(new Geopoint(48.85968,9.18740).isEqualTo(cache.getCoords()));
 }

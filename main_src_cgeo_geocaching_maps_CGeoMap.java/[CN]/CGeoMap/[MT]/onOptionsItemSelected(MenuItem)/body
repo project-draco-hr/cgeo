@@ -22,9 +22,9 @@ final int mapCenterLon=mapCenter.getLongitudeE6();
 final int mapSpanLat=mapView.getLatitudeSpan();
 final int mapSpanLon=mapView.getLongitudeSpan();
 for (cgCache oneCache : cachesProtected) {
-if (oneCache != null && oneCache.coords != null) {
-if (cgBase.isCacheInViewPort(mapCenterLat,mapCenterLon,mapSpanLat,mapSpanLon,oneCache.coords) && !app.isOffline(oneCache.geocode,null)) {
-  geocodes.add(oneCache.geocode);
+if (oneCache != null && oneCache.getCoords() != null) {
+if (cgBase.isCacheInViewPort(mapCenterLat,mapCenterLon,mapSpanLat,mapSpanLon,oneCache.getCoords()) && !app.isOffline(oneCache.getGeocode(),null)) {
+  geocodes.add(oneCache.getGeocode());
 }
 }
 }
@@ -92,7 +92,7 @@ case MENU_AS_LIST:
 final cgSearch search=new cgSearch();
 search.totalCnt=caches.size();
 for (cgCache cache : caches) {
-search.addGeocode(cache.geocode);
+search.addGeocode(cache.getGeocode());
 }
 cgeocaches.startActivityMap(activity,app.addSearch(search,caches,true,0));
 return true;

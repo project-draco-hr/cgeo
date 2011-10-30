@@ -1,12 +1,12 @@
 {
-  if (input == null || StringUtils.isNotBlank(cache.geocode)) {
+  if (input == null || StringUtils.isNotBlank(cache.getGeocode())) {
     return;
   }
   final Matcher matcherGeocode=patternGeocode.matcher(input);
   if (matcherGeocode.find()) {
     final String geocode=matcherGeocode.group(1);
     if (ConnectorFactory.canHandle(geocode)) {
-      cache.geocode=geocode;
+      cache.setGeocode(geocode);
     }
   }
 }

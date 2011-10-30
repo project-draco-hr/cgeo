@@ -3,93 +3,93 @@
     return false;
   }
   ContentValues values=new ContentValues();
-  if (cache.updated == null) {
+  if (cache.getUpdated() == null) {
     values.put("updated",System.currentTimeMillis());
   }
  else {
-    values.put("updated",cache.updated);
+    values.put("updated",cache.getUpdated());
   }
-  values.put("reason",cache.reason);
-  values.put("detailed",cache.detailed ? 1 : 0);
-  values.put("detailedupdate",cache.detailedUpdate);
-  values.put("visiteddate",cache.visitedDate);
-  values.put("geocode",cache.geocode);
-  values.put("cacheid",cache.cacheId);
-  values.put("guid",cache.guid);
-  values.put("type",cache.type);
-  values.put("name",cache.name);
-  values.put("own",cache.own ? 1 : 0);
-  values.put("owner",cache.owner);
-  values.put("owner_real",cache.ownerReal);
-  if (cache.hidden == null) {
+  values.put("reason",cache.getReason());
+  values.put("detailed",cache.getDetailed() ? 1 : 0);
+  values.put("detailedupdate",cache.getDetailedUpdate());
+  values.put("visiteddate",cache.getVisitedDate());
+  values.put("geocode",cache.getGeocode());
+  values.put("cacheid",cache.getCacheId());
+  values.put("guid",cache.getGuid());
+  values.put("type",cache.getCacheType().id);
+  values.put("name",cache.getName());
+  values.put("own",cache.isOwn() ? 1 : 0);
+  values.put("owner",cache.getOwner());
+  values.put("owner_real",cache.getOwnerReal());
+  if (cache.getHidden() == null) {
     values.put("hidden",0);
   }
  else {
-    values.put("hidden",cache.hidden.getTime());
+    values.put("hidden",cache.getHidden().getTime());
   }
-  values.put("hint",cache.hint);
-  values.put("size",cache.size == null ? "" : cache.size.id);
-  values.put("difficulty",cache.difficulty);
-  values.put("terrain",cache.terrain);
-  values.put("latlon",cache.latlon);
-  values.put("location",cache.location);
-  values.put("distance",cache.distance);
-  values.put("direction",cache.direction);
-  putCoords(values,cache.coords);
-  values.put("reliable_latlon",cache.reliableLatLon ? 1 : 0);
-  values.put("elevation",cache.elevation);
-  values.put("shortdesc",cache.shortdesc);
-  values.put("personal_note",cache.personalNote);
+  values.put("hint",cache.getHint());
+  values.put("size",cache.getSize() == null ? "" : cache.getSize().id);
+  values.put("difficulty",cache.getDifficulty());
+  values.put("terrain",cache.getTerrain());
+  values.put("latlon",cache.getLatlon());
+  values.put("location",cache.getLocation());
+  values.put("distance",cache.getDistance());
+  values.put("direction",cache.getDirection());
+  putCoords(values,cache.getCoords());
+  values.put("reliable_latlon",cache.isReliableLatLon() ? 1 : 0);
+  values.put("elevation",cache.getElevation());
+  values.put("shortdesc",cache.getShortdesc());
+  values.put("personal_note",cache.getPersonalNote());
   values.put("description",cache.getDescription());
-  values.put("favourite_cnt",cache.favouriteCnt);
-  values.put("rating",cache.rating);
-  values.put("votes",cache.votes);
-  values.put("myvote",cache.myVote);
-  values.put("disabled",cache.disabled ? 1 : 0);
-  values.put("archived",cache.archived ? 1 : 0);
-  values.put("members",cache.members ? 1 : 0);
-  values.put("found",cache.found ? 1 : 0);
-  values.put("favourite",cache.favourite ? 1 : 0);
-  values.put("inventoryunknown",cache.inventoryItems);
-  values.put("onWatchlist",cache.onWatchlist ? 1 : 0);
+  values.put("favourite_cnt",cache.getFavouriteCnt());
+  values.put("rating",cache.getRating());
+  values.put("votes",cache.getVotes());
+  values.put("myvote",cache.getMyVote());
+  values.put("disabled",cache.isDisabled() ? 1 : 0);
+  values.put("archived",cache.isArchived() ? 1 : 0);
+  values.put("members",cache.isMembers() ? 1 : 0);
+  values.put("found",cache.isFound() ? 1 : 0);
+  values.put("favourite",cache.isFavourite() ? 1 : 0);
+  values.put("inventoryunknown",cache.getInventoryItems());
+  values.put("onWatchlist",cache.isOnWatchlist() ? 1 : 0);
   boolean statusOk=true;
-  if (cache.attributes != null) {
-    if (!saveAttributes(cache.geocode,cache.attributes)) {
+  if (cache.getAttributes() != null) {
+    if (!saveAttributes(cache.getGeocode(),cache.getAttributes())) {
       statusOk=false;
     }
   }
-  if (cache.waypoints != null) {
-    if (!saveWaypoints(cache.geocode,cache.waypoints,true)) {
+  if (cache.getWaypoints() != null) {
+    if (!saveWaypoints(cache.getGeocode(),cache.getWaypoints(),true)) {
       statusOk=false;
     }
   }
-  if (cache.spoilers != null) {
-    if (!saveSpoilers(cache.geocode,cache.spoilers)) {
+  if (cache.getSpoilers() != null) {
+    if (!saveSpoilers(cache.getGeocode(),cache.getSpoilers())) {
       statusOk=false;
     }
   }
-  if (cache.logs != null) {
-    if (!saveLogs(cache.geocode,cache.logs)) {
+  if (cache.getLogs() != null) {
+    if (!saveLogs(cache.getGeocode(),cache.getLogs())) {
       statusOk=false;
     }
   }
-  if (MapUtils.isNotEmpty(cache.logCounts)) {
-    if (!saveLogCount(cache.geocode,cache.logCounts)) {
+  if (MapUtils.isNotEmpty(cache.getLogCounts())) {
+    if (!saveLogCount(cache.getGeocode(),cache.getLogCounts())) {
       statusOk=false;
     }
   }
-  if (cache.inventory != null) {
-    if (!saveInventory(cache.geocode,cache.inventory)) {
+  if (cache.getInventory() != null) {
+    if (!saveInventory(cache.getGeocode(),cache.getInventory())) {
       statusOk=false;
     }
   }
   if (!statusOk) {
-    cache.detailed=false;
-    cache.detailedUpdate=0L;
+    cache.setDetailed(false);
+    cache.setDetailedUpdate(0L);
   }
   init();
   try {
-    int rows=databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{cache.geocode});
+    int rows=databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
     if (rows > 0) {
       values=null;
       return true;

@@ -1,6 +1,6 @@
 {
   Geopoint gp=null;
-  if (waypoint != null && waypoint.coords != null)   gp=waypoint.coords;
+  if (waypoint != null && waypoint.getCoords() != null)   gp=waypoint.getCoords();
   cgeocoords coordsDialog=new cgeocoords(cgeowaypointadd.this,gp,geo);
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
@@ -8,7 +8,7 @@
       ((Button)findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
       ((Button)findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
       if (waypoint != null) {
-        waypoint.coords=gp;
+        waypoint.setCoords(gp);
       }
     }
   }

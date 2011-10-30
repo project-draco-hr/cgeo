@@ -1,9 +1,9 @@
 {
   int finds=0;
-  if (cache.logCounts.isEmpty()) {
-    cache.logCounts=app.loadLogCounts(cache.geocode);
+  if (cache.getLogCounts().isEmpty()) {
+    cache.setLogCounts(app.loadLogCounts(cache.getGeocode()));
   }
-  Integer logged=cache.logCounts.get(cgBase.LOG_FOUND_IT);
+  Integer logged=cache.getLogCounts().get(cgBase.LOG_FOUND_IT);
   if (logged != null) {
     finds=logged;
   }

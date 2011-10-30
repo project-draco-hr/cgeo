@@ -73,13 +73,13 @@
   }
   final String note=((EditText)findViewById(R.id.note)).getText().toString().trim();
   final cgWaypoint waypoint=new cgWaypoint();
-  waypoint.type=type;
-  waypoint.geocode=geocode;
+  waypoint.setWaypointType(type);
+  waypoint.setGeocode(geocode);
   waypoint.setPrefix(prefix);
-  waypoint.lookup=lookup;
-  waypoint.name=name;
-  waypoint.coords=new Geopoint(coords.get(0),coords.get(1));
-  waypoint.note=note;
+  waypoint.setLookup(lookup);
+  waypoint.setName(name);
+  waypoint.setCoords(new Geopoint(coords.get(0),coords.get(1)));
+  waypoint.setNote(note);
   if (app.saveOwnWaypoint(id,geocode,waypoint)) {
     app.removeCacheFromCache(geocode);
     finish();

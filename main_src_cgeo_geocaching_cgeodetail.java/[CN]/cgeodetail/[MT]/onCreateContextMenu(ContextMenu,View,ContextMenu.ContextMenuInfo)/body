@@ -8,11 +8,11 @@ case R.id.value:
       contextMenuUser=((TextView)view).getText().toString();
     }
  else     if (viewId == R.id.value) {
-      if (StringUtils.isNotBlank(cache.ownerReal)) {
-        contextMenuUser=cache.ownerReal;
+      if (StringUtils.isNotBlank(cache.getOwnerReal())) {
+        contextMenuUser=cache.getOwnerReal();
       }
  else {
-        contextMenuUser=cache.owner;
+        contextMenuUser=cache.getOwner();
       }
     }
   menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
@@ -25,15 +25,15 @@ menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
 addNavigationMenuItems(menu);
 break;
 case -1:
-if (null != cache.waypoints) {
+if (null != cache.getWaypoints()) {
 try {
 final ViewGroup parent=((ViewGroup)view.getParent());
 for (int i=0; i < parent.getChildCount(); i++) {
 if (parent.getChildAt(i) == view) {
-final List<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.waypoints);
+final List<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.getWaypoints());
 Collections.sort(sortedWaypoints);
 final cgWaypoint waypoint=sortedWaypoints.get(i);
-final int index=cache.waypoints.indexOf(waypoint);
+final int index=cache.getWaypoints().indexOf(waypoint);
 menu.setHeaderTitle(res.getString(R.string.waypoint));
 menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE,index,0,R.string.waypoint_duplicate);
 if (waypoint.isUserDefined()) {

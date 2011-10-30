@@ -8,34 +8,34 @@
     detailedUpdate=updated;
   }
   if (visitedDate == null || visitedDate == 0) {
-    visitedDate=other.visitedDate;
+    visitedDate=other.getVisitedDate();
   }
   if (reason == null || reason == 0) {
     reason=other.reason;
   }
   if (StringUtils.isBlank(geocode)) {
-    geocode=other.geocode;
+    geocode=other.getGeocode();
   }
   if (StringUtils.isBlank(cacheId)) {
     cacheId=other.cacheId;
   }
   if (StringUtils.isBlank(guid)) {
-    guid=other.guid;
+    guid=other.getGuid();
   }
-  if (StringUtils.isBlank(type)) {
-    type=other.type;
+  if (null == cacheType) {
+    cacheType=other.getCacheType();
   }
   if (StringUtils.isBlank(name)) {
-    name=other.name;
+    name=other.getName();
   }
   if (StringUtils.isBlank(nameSp)) {
     nameSp=other.nameSp;
   }
   if (StringUtils.isBlank(owner)) {
-    owner=other.owner;
+    owner=other.getOwner();
   }
   if (StringUtils.isBlank(ownerReal)) {
-    ownerReal=other.ownerReal;
+    ownerReal=other.getOwnerReal();
   }
   if (hidden == null) {
     hidden=other.hidden;
@@ -47,16 +47,16 @@
     size=other.size;
   }
   if (difficulty == null || difficulty == 0) {
-    difficulty=other.difficulty;
+    difficulty=other.getDifficulty();
   }
   if (terrain == null || terrain == 0) {
-    terrain=other.terrain;
+    terrain=other.getTerrain();
   }
   if (direction == null) {
     direction=other.direction;
   }
   if (distance == null) {
-    distance=other.distance;
+    distance=other.getDistance();
   }
   if (StringUtils.isBlank(latlon)) {
     latlon=other.latlon;
@@ -65,7 +65,7 @@
     location=other.location;
   }
   if (coords == null) {
-    coords=other.coords;
+    coords=other.getCoords();
   }
   if (elevation == null) {
     elevation=other.elevation;
@@ -74,31 +74,31 @@
     personalNote=other.personalNote;
   }
   if (StringUtils.isBlank(shortdesc)) {
-    shortdesc=other.shortdesc;
+    shortdesc=other.getShortdesc();
   }
   if (StringUtils.isBlank(description)) {
     description=other.description;
   }
   if (favouriteCnt == null) {
-    favouriteCnt=other.favouriteCnt;
+    favouriteCnt=other.getFavouriteCnt();
   }
   if (rating == null) {
-    rating=other.rating;
+    rating=other.getRating();
   }
   if (votes == null) {
     votes=other.votes;
   }
   if (myVote == null) {
-    myVote=other.myVote;
+    myVote=other.getMyVote();
   }
   if (attributes == null) {
-    attributes=other.attributes;
+    attributes=other.getAttributes();
   }
   if (waypoints == null) {
-    waypoints=other.waypoints;
+    waypoints=other.getWaypoints();
   }
  else {
-    cgWaypoint.mergeWayPoints(waypoints,other.waypoints);
+    cgWaypoint.mergeWayPoints(waypoints,other.getWaypoints());
   }
   if (spoilers == null) {
     spoilers=other.spoilers;

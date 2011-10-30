@@ -7,12 +7,12 @@
   }
   try {
     StringBuilder dist=new StringBuilder();
-    if (geo.coordsNow != null && cache != null && cache.coords != null) {
-      dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+    if (geo.coordsNow != null && cache != null && cache.getCoords() != null) {
+      dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
     }
-    if (cache != null && cache.elevation != null) {
+    if (cache != null && cache.getElevation() != null) {
       if (geo.altitudeNow != null) {
-        Double diff=(cache.elevation - geo.altitudeNow);
+        Double diff=(cache.getElevation() - geo.altitudeNow);
         if (diff >= 0) {
           dist.append(" ???");
         }

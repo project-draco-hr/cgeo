@@ -9,8 +9,8 @@
   }
   if (search != null) {
     cache=app.getCache(search);
-    if (cache != null && cache.geocode != null) {
-      geocode=cache.geocode;
+    if (cache != null && cache.getGeocode() != null) {
+      geocode=cache.getGeocode();
     }
   }
   if (StringUtils.isNotBlank(geocode)) {

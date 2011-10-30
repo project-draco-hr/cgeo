@@ -9,57 +9,57 @@
     final Matcher matcherGeocode=patternGeocode.matcher(pointString);
     if (matcherGeocode.find()) {
       String geocode=matcherGeocode.group(1).trim().toUpperCase();
-      pointCoord.name=geocode;
-      pointCoord.geocode=geocode;
+      pointCoord.setName(geocode);
+      pointCoord.setGeocode(geocode);
     }
     final Matcher matcherName=patternName.matcher(pointString);
     if (matcherName.find()) {
       String name=matcherName.group(1).trim();
-      pointCoord.name=StringUtils.substringBeforeLast(name," by ").trim();
+      pointCoord.setName(StringUtils.substringBeforeLast(name," by ").trim());
     }
     final Matcher matcherLat=patternLat.matcher(pointString);
     final Matcher matcherLon=patternLon.matcher(pointString);
     if (matcherLat.find() && matcherLon.find()) {
-      pointCoord.coords=GeopointParser.parse(matcherLat.group(1).trim(),matcherLon.group(1).trim());
+      pointCoord.setCoords(GeopointParser.parse(matcherLat.group(1).trim(),matcherLon.group(1).trim()));
     }
     final Matcher matcherDifficulty=patternDifficulty.matcher(pointString);
     if (matcherDifficulty.find()) {
-      pointCoord.difficulty=new Float(matcherDifficulty.group(1).trim());
+      pointCoord.setDifficulty(new Float(matcherDifficulty.group(1).trim()));
     }
     final Matcher matcherTerrain=patternTerrain.matcher(pointString);
     if (matcherTerrain.find()) {
-      pointCoord.terrain=new Float(matcherTerrain.group(1).trim());
+      pointCoord.setTerrain(new Float(matcherTerrain.group(1).trim()));
     }
     final Matcher matcherContainer=patternContainer.matcher(pointString);
     if (matcherContainer.find()) {
       final int size=Integer.parseInt(matcherContainer.group(1).trim());
       if (size == 1) {
-        pointCoord.size=CacheSize.NOT_CHOSEN;
+        pointCoord.setSize(CacheSize.NOT_CHOSEN);
       }
  else       if (size == 2) {
-        pointCoord.size=CacheSize.MICRO;
+        pointCoord.setSize(CacheSize.MICRO);
       }
  else       if (size == 3) {
-        pointCoord.size=CacheSize.REGULAR;
+        pointCoord.setSize(CacheSize.REGULAR);
       }
  else       if (size == 4) {
-        pointCoord.size=CacheSize.LARGE;
+        pointCoord.setSize(CacheSize.LARGE);
       }
  else       if (size == 5) {
-        pointCoord.size=CacheSize.VIRTUAL;
+        pointCoord.setSize(CacheSize.VIRTUAL);
       }
  else       if (size == 6) {
-        pointCoord.size=CacheSize.OTHER;
+        pointCoord.setSize(CacheSize.OTHER);
       }
  else       if (size == 8) {
-        pointCoord.size=CacheSize.SMALL;
+        pointCoord.setSize(CacheSize.SMALL);
       }
  else {
-        pointCoord.size=null;
+        pointCoord.setSize(null);
       }
     }
-    if (StringUtils.isNotBlank(pointCoord.geocode)) {
-      coords.put(pointCoord.geocode,pointCoord);
+    if (StringUtils.isNotBlank(pointCoord.getGeocode())) {
+      coords.put(pointCoord.getGeocode(),pointCoord);
     }
   }
   Log.i(Settings.tag,"Coordinates found in .loc file: " + coords.size());

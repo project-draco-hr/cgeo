@@ -80,27 +80,17 @@
       while (matcherGuidAndDisabled.find()) {
         if (matcherGuidAndDisabled.groupCount() > 0) {
           guids.add(matcherGuidAndDisabled.group(1));
-          cache.guid=matcherGuidAndDisabled.group(1);
+          cache.setGuid(matcherGuidAndDisabled.group(1));
           if (matcherGuidAndDisabled.group(4) != null) {
-            cache.name=Html.fromHtml(matcherGuidAndDisabled.group(4).trim()).toString();
+            cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(4).trim()).toString());
           }
           if (matcherGuidAndDisabled.group(6) != null) {
-            cache.location=Html.fromHtml(matcherGuidAndDisabled.group(6).trim()).toString();
+            cache.setLocation(Html.fromHtml(matcherGuidAndDisabled.group(6).trim()).toString());
           }
           final String attr=matcherGuidAndDisabled.group(2);
           if (attr != null) {
-            if (attr.contains("Strike")) {
-              cache.disabled=true;
-            }
- else {
-              cache.disabled=false;
-            }
-            if (attr.contains("OldWarning")) {
-              cache.archived=true;
-            }
- else {
-              cache.archived=false;
-            }
+            cache.setDisabled(attr.contains("Strike"));
+            cache.setArchived(attr.contains("OldWarning"));
           }
         }
       }
@@ -108,7 +98,7 @@
  catch (    Exception e) {
       Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
     }
-    if (Settings.isExcludeDisabledCaches() && (cache.disabled || cache.archived)) {
+    if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
       cache=null;
       continue;
     }
@@ -117,7 +107,7 @@
       final Matcher matcherCode=patternCode.matcher(row);
       while (matcherCode.find()) {
         if (matcherCode.groupCount() > 0) {
-          cache.geocode=new String(matcherCode.group(1).toUpperCase().trim());
+          cache.setGeocode(new String(matcherCode.group(1).toUpperCase().trim()));
         }
       }
     }
@@ -128,7 +118,7 @@
       final Matcher matcherCacheType=patternCacheType.matcher(row);
       while (matcherCacheType.find()) {
         if (matcherCacheType.groupCount() > 0) {
-          cache.type=cacheTypes.get(matcherCacheType.group(1).toLowerCase());
+          cache.setCacheType(CacheType.getById(matcherCacheType.group(1)));
         }
       }
     }
@@ -140,7 +130,7 @@
         final Matcher matcherDirection=patternDirection.matcher(row);
         while (matcherDirection.find()) {
           if (matcherDirection.groupCount() > 0) {
-            cache.directionImg=matcherDirection.group(1);
+            cache.setDirectionImg(matcherDirection.group(1));
           }
         }
       }
@@ -152,7 +142,7 @@
       final Matcher matcherTbs=patternTbs.matcher(row);
       while (matcherTbs.find()) {
         if (matcherTbs.groupCount() > 0) {
-          cache.inventoryItems=Integer.parseInt(matcherTbs.group(1));
+          cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
           inventoryPre=matcherTbs.group(2);
         }
       }
@@ -170,8 +160,8 @@
               continue;
             }
  else {
-              if (cache.inventoryItems <= 0) {
-                cache.inventoryItems=1;
+              if (cache.getInventoryItems() <= 0) {
+                cache.setInventoryItems(1);
               }
             }
           }
@@ -181,15 +171,15 @@
         Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory info");
       }
     }
-    cache.members=row.contains("/images/small_profile.gif");
-    cache.found=row.contains("/images/icons/icon_smile");
-    cache.own=row.contains("/images/silk/star.png");
+    cache.setMembers(row.contains("/images/small_profile.gif"));
+    cache.setFound(row.contains("/images/icons/icon_smile"));
+    cache.setOwn(row.contains("/images/silk/star.png"));
     try {
       final Matcher matcherId=patternId.matcher(row);
       while (matcherId.find()) {
         if (matcherId.groupCount() > 0) {
-          cache.cacheId=matcherId.group(1);
-          cids.add(cache.cacheId);
+          cache.setCacheId(matcherId.group(1));
+          cids.add(cache.getCacheId());
         }
       }
     }
@@ -200,17 +190,17 @@
       final Matcher matcherFavourite=patternFavourite.matcher(row);
       while (matcherFavourite.find()) {
         if (matcherFavourite.groupCount() > 0) {
-          cache.favouriteCnt=Integer.parseInt(matcherFavourite.group(1));
+          cache.setFavouriteCnt(Integer.parseInt(matcherFavourite.group(1)));
         }
       }
     }
  catch (    Exception e) {
       Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse favourite count");
     }
-    if (cache.nameSp == null) {
-      cache.nameSp=(new Spannable.Factory()).newSpannable(cache.name);
-      if (cache.disabled || cache.archived) {
-        cache.nameSp.setSpan(new StrikethroughSpan(),0,cache.nameSp.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    if (cache.getNameSp() == null) {
+      cache.setNameSp((new Spannable.Factory()).newSpannable(cache.getName()));
+      if (cache.isDisabled() || cache.isArchived()) {
+        cache.getNameSp().setSpan(new StrikethroughSpan(),0,cache.getNameSp().toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
       }
     }
     caches.cacheList.add(cache);
@@ -271,8 +261,8 @@
   }
   if (Settings.getLoadDirImg()) {
     for (    cgCache oneCache : caches.cacheList) {
-      if (oneCache.coords == null && oneCache.directionImg != null) {
-        cgDirectionImg.getDrawable(oneCache.geocode,oneCache.directionImg);
+      if (oneCache.getCoords() == null && oneCache.getDirectionImg() != null) {
+        cgDirectionImg.getDrawable(oneCache.getGeocode(),oneCache.getDirectionImg());
       }
     }
   }
@@ -283,11 +273,11 @@
         final Map<String,cgRating> ratings=GCVote.getRating(guids,null);
         if (MapUtils.isNotEmpty(ratings)) {
           for (          cgCache oneCache : caches.cacheList) {
-            if (ratings.containsKey(oneCache.guid)) {
-              cgRating thisRating=ratings.get(oneCache.guid);
-              oneCache.rating=thisRating.rating;
-              oneCache.votes=thisRating.votes;
-              oneCache.myVote=thisRating.myVote;
+            if (ratings.containsKey(oneCache.getGuid())) {
+              cgRating thisRating=ratings.get(oneCache.getGuid());
+              oneCache.setRating(thisRating.rating);
+              oneCache.setVotes(thisRating.votes);
+              oneCache.setMyVote(thisRating.myVote);
             }
           }
         }

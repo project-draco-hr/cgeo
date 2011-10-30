@@ -1,11 +1,11 @@
 {
-  if (cache == null || cache.coords == null) {
+  if (cache == null || cache.getCoords() == null) {
     showToast(res.getString(R.string.err_location_unknown));
   }
   cgeonavigate navigateActivity=new cgeonavigate();
   Intent navigateIntent=new Intent(this,navigateActivity.getClass());
-  navigateIntent.putExtra("latitude",cache.coords.getLatitude());
-  navigateIntent.putExtra("longitude",cache.coords.getLongitude());
+  navigateIntent.putExtra("latitude",cache.getCoords().getLatitude());
+  navigateIntent.putExtra("longitude",cache.getCoords().getLongitude());
   navigateIntent.putExtra("geocode","");
   navigateIntent.putExtra("name",res.getString(R.string.search_some_destination));
   startActivity(navigateIntent);

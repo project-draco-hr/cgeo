@@ -13,14 +13,14 @@
       logNow.date=date.getTimeInMillis();
       logNow.type=typeSelected;
       logNow.log=log;
-      if (cache != null && null != cache.logs) {
-        cache.logs.add(0,logNow);
+      if (cache != null && null != cache.getLogs()) {
+        cache.getLogs().add(0,logNow);
       }
       app.addLog(geocode,logNow);
       if (typeSelected == cgBase.LOG_FOUND_IT) {
         app.markFound(geocode);
         if (cache != null) {
-          cache.found=true;
+          cache.setFound(true);
         }
       }
       if (cache != null) {

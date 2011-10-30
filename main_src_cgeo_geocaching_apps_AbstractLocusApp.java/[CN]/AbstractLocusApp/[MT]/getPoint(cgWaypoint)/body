@@ -1,11 +1,11 @@
 {
-  if (waypoint == null || waypoint.coords == null) {
+  if (waypoint == null || waypoint.getCoords() == null) {
     return null;
   }
   Location loc=new Location(Settings.tag);
-  loc.setLatitude(waypoint.coords.getLatitude());
-  loc.setLongitude(waypoint.coords.getLongitude());
-  Point p=new Point(waypoint.name,loc);
-  p.setDescription("<a href=\"" + waypoint.getUrl() + "\">"+ waypoint.geocode+ "</a>");
+  loc.setLatitude(waypoint.getCoords().getLatitude());
+  loc.setLongitude(waypoint.getCoords().getLongitude());
+  Point p=new Point(waypoint.getName(),loc);
+  p.setDescription("<a href=\"" + waypoint.getUrl() + "\">"+ waypoint.getGeocode()+ "</a>");
   return p;
 }

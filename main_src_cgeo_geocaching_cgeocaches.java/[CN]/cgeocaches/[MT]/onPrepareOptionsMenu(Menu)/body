@@ -89,7 +89,7 @@
     if (null != item) {
       item.setEnabled(false);
       for (      cgCache cache : cacheList) {
-        if (cache.logOffline) {
+        if (cache.isLogOffline()) {
           item.setEnabled(true);
           break;
         }
