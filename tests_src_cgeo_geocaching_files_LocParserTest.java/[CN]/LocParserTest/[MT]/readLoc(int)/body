@@ -1,27 +1,16 @@
 {
-  Map<String,cgCoord> caches=null;
+  LocParser parser=new LocParser(1);
+  Collection<cgCache> caches=null;
   final Resources res=getInstrumentation().getContext().getResources();
   final InputStream instream=res.openRawResource(resourceId);
   try {
-    final StringBuilder buffer=new StringBuilder();
-    int ch;
-    while ((ch=instream.read()) != -1) {
-      buffer.append((char)ch);
-    }
-    caches=LocParser.parseCoordinates(buffer.toString());
+    caches=parser.parse(instream,new Handler());
+    assertNotNull(caches);
+    assertTrue(caches.size() > 0);
   }
- catch (  Exception e) {
-    e.printStackTrace();
+  finally {
+    instream.close();
   }
- finally {
-    try {
-      instream.close();
-    }
- catch (    IOException e) {
-      e.printStackTrace();
-    }
-  }
-  assertNotNull(caches);
-  assertTrue(caches.size() > 0);
-  return caches;
+  List<cgCache> cacheList=new ArrayList<cgCache>(caches);
+  return cacheList;
 }

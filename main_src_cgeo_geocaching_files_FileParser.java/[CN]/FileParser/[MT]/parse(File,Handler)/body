@@ -1,0 +1,9 @@
+{
+  FileInputStream fis=new FileInputStream(file);
+  try {
+    return parse(fis,progressHandler);
+  }
+  finally {
+    fis.close();
+  }
+}

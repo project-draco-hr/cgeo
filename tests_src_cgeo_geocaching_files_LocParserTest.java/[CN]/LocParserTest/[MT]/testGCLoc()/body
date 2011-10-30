@@ -1,11 +1,12 @@
 {
-  final Map<String,cgCoord> coords=readLoc(R.raw.gc1bkp3_loc);
-  final cgCoord coord=coords.get("GC1BKP3");
-  assertNotNull(coord);
-  assertEquals("GC1BKP3",coord.geocode);
-  assertEquals("Die Schatzinsel / treasure island",coord.name);
-  assertTrue(new Geopoint(48.859683,9.1874).isEqualTo(coord.coords));
-  assertEquals(1.0f,coord.difficulty.floatValue());
-  assertEquals(5.0f,coord.terrain.floatValue());
-  assertEquals(CacheSize.MICRO,coord.size);
+  final List<cgCache> caches=readLoc(R.raw.gc1bkp3_loc);
+  assertEquals(1,caches.size());
+  final cgCache cache=caches.get(0);
+  assertNotNull(cache);
+  assertEquals("GC1BKP3",cache.geocode);
+  assertEquals("Die Schatzinsel / treasure island",cache.name);
+  assertTrue(new Geopoint(48.859683,9.1874).isEqualTo(cache.coords));
+  assertEquals(1.0f,cache.difficulty.floatValue());
+  assertEquals(5.0f,cache.terrain.floatValue());
+  assertEquals(CacheSize.MICRO,cache.size);
 }

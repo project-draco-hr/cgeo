@@ -1,0 +1,9 @@
+{
+  File gc31j2h=new File(tempDir,"gc31j2h.gpx");
+  copyResourceToFile(R.raw.gc31j2h_err,gc31j2h);
+  cgeogpxes.ImportGpxFileThread importThread=new cgeogpxes.ImportGpxFileThread(gc31j2h,listId,importStepHandler,progressHandler);
+  importThread.run();
+  assertEquals(2,importStepHandler.messages.size());
+  assertEquals(cgeogpxes.IMPORT_STEP_READ_FILE,importStepHandler.messages.get(0).what);
+  assertEquals(cgeogpxes.IMPORT_STEP_FINISHED_WITH_ERROR,importStepHandler.messages.get(1).what);
+}

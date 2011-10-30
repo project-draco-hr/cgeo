@@ -1,0 +1,13 @@
+{
+  assertEquals(new File("1234567-wpts.gpx"),cgeogpxes.getWaypointsFileForGpx(new File("1234567.gpx")));
+  assertEquals(new File("/mnt/sdcard/1234567-wpts.gpx"),cgeogpxes.getWaypointsFileForGpx(new File("/mnt/sdcard/1234567.gpx")));
+  assertEquals(new File("/mnt/sdcard/1-wpts.gpx"),cgeogpxes.getWaypointsFileForGpx(new File("/mnt/sdcard/1.gpx")));
+  assertEquals(new File("/mnt/sd.card/1-wpts.gpx"),cgeogpxes.getWaypointsFileForGpx(new File("/mnt/sd.card/1.gpx")));
+  assertEquals(new File("1234567.9-wpts.gpx"),cgeogpxes.getWaypointsFileForGpx(new File("1234567.9.gpx")));
+  assertEquals(new File("1234567-wpts.gpx"),cgeogpxes.getWaypointsFileForGpx(new File("1234567.GPX")));
+  assertEquals(new File("gpx.gpx-wpts.gpx"),cgeogpxes.getWaypointsFileForGpx(new File("gpx.gpx.gpx")));
+  assertNull(cgeogpxes.getWaypointsFileForGpx(new File("123.gpy")));
+  assertNull(cgeogpxes.getWaypointsFileForGpx(new File("gpx")));
+  assertNull(cgeogpxes.getWaypointsFileForGpx(new File(".gpx")));
+  assertNull(cgeogpxes.getWaypointsFileForGpx(new File("/mnt/sdcard/.gpx")));
+}
