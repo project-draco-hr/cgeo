@@ -19,7 +19,7 @@
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
-    final cgHtmlImg imgGetter=new cgHtmlImg(activity,cache.geocode,false,listId,true);
+    final HtmlImage imgGetter=new HtmlImage(activity,cache.geocode,false,listId,true);
     if (StringUtils.isNotBlank(cache.getDescription())) {
       Html.fromHtml(cache.getDescription(),imgGetter,null);
     }

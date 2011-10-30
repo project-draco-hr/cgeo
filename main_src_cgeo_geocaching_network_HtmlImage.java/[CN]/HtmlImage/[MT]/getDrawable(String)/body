@@ -2,19 +2,9 @@
   if (StringUtils.isBlank(url) || isCounter(url)) {
     return null;
   }
-  final File file=LocalStorage.getStorageFile(geocode,url,true);
-  final File fileSec=LocalStorage.getStorageSecFile(geocode,url,true);
   Bitmap imagePre=null;
   if (!onlySave) {
-    try {
-      imagePre=loadCachedImage(file);
-      if (imagePre == null) {
-        imagePre=loadCachedImage(fileSec);
-      }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgHtmlImg.getDrawable (reading cache): " + e.toString());
-    }
+    imagePre=loadImageFromStorage(url);
   }
   if (imagePre == null || onlySave) {
     final String absoluteURL=makeAbsoluteURL(url);
@@ -24,14 +14,6 @@
         final HttpResponse httpResponse=cgBase.request(absoluteURL,null,false);
         if (httpResponse != null) {
           bufferedEntity=new BufferedHttpEntity(httpResponse.getEntity());
-          setSampleSize(bufferedEntity.getContentLength());
-          final InputStream is=bufferedEntity.getContent();
-          try {
-            imagePre=BitmapFactory.decodeStream(is,null,bfOptions);
-          }
-  finally {
-            is.close();
-          }
         }
       }
  catch (      Exception e) {
@@ -39,6 +21,7 @@
       }
     }
     if (save) {
+      final File file=LocalStorage.getStorageFile(geocode,url,true);
       LocalStorage.saveEntityToFile(bufferedEntity,file);
     }
   }
@@ -46,8 +29,11 @@
     return null;
   }
   if (imagePre == null) {
+    imagePre=loadImageFromStorage(url);
+  }
+  if (imagePre == null) {
     Log.d(Settings.tag,"cgHtmlImg.getDrawable: Failed to obtain image");
-    if (placement) {
+    if (returnErrorImage) {
       imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_not_loaded);
     }
  else {
@@ -59,13 +45,7 @@
   int width;
   int height;
   if (imgWidth > maxWidth || imgHeight > maxHeight) {
-    double ratio;
-    if ((maxWidth / imgWidth) > (maxHeight / imgHeight)) {
-      ratio=(double)maxHeight / (double)imgHeight;
-    }
- else {
-      ratio=(double)maxWidth / (double)imgWidth;
-    }
+    final double ratio=Math.min((double)maxHeight / (double)imgHeight,(double)maxWidth / (double)imgWidth);
     width=(int)Math.ceil(imgWidth * ratio);
     height=(int)Math.ceil(imgHeight * ratio);
     try {

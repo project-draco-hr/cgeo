@@ -274,7 +274,7 @@
       ((LinearLayout)findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
       TextView descView=(TextView)findViewById(R.id.shortdesc);
       descView.setVisibility(View.VISIBLE);
-      descView.setText(Html.fromHtml(cache.shortdesc.trim(),new cgHtmlImg(this,geocode,true,cache.reason,false),null),TextView.BufferType.SPANNABLE);
+      descView.setText(Html.fromHtml(cache.shortdesc.trim(),new HtmlImage(this,geocode,true,cache.reason,false),null),TextView.BufferType.SPANNABLE);
       descView.setMovementMethod(LinkMovementMethod.getInstance());
     }
     if (longDescDisplayed) {

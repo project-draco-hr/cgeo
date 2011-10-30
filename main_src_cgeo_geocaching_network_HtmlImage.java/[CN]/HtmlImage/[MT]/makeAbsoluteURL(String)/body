@@ -4,7 +4,7 @@
       return url;
     }
  else {
-      String host=ConnectorFactory.getConnector(geocode).getHost();
+      final String host=ConnectorFactory.getConnector(geocode).getHost();
       if (StringUtils.isNotEmpty(host)) {
         return "http://" + host + url;
       }
