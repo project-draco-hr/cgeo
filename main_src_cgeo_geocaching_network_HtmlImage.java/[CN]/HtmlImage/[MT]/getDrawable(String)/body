@@ -24,6 +24,17 @@
       final File file=LocalStorage.getStorageFile(geocode,url,true);
       LocalStorage.saveEntityToFile(bufferedEntity,file);
     }
+ else {
+      setSampleSize(bufferedEntity.getContentLength());
+      InputStream is;
+      try {
+        is=bufferedEntity.getContent();
+        imagePre=BitmapFactory.decodeStream(is,null,bfOptions);
+      }
+ catch (      IOException e) {
+        Log.e(Settings.tag,"HtmlImage.getDrawable (decoding image)",e);
+      }
+    }
   }
   if (onlySave) {
     return null;
