@@ -1,0 +1,16 @@
+{
+  final StringBuilder buffer=new StringBuilder();
+  ProgressInputStream progressInputStream=new ProgressInputStream(is);
+  final BufferedReader input=new BufferedReader(new InputStreamReader(progressInputStream));
+  try {
+    String line=null;
+    while ((line=input.readLine()) != null) {
+      buffer.append(line);
+      showProgressMessage(progressHandler,progressInputStream.getProgress());
+    }
+    return buffer;
+  }
+  finally {
+    input.close();
+  }
+}

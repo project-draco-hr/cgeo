@@ -1,0 +1,11 @@
+{
+  final cgSearch search=new cgSearch();
+  final cgeoapplication app=cgeoapplication.getInstance();
+  int storedCaches=0;
+  for (  cgCache cache : caches) {
+    app.removeCacheFromCache(cache.getGeocode());
+    app.addCacheToSearch(search,cache);
+    progressHandler.sendMessage(progressHandler.obtainMessage(0,++storedCaches,0));
+  }
+  return search;
+}

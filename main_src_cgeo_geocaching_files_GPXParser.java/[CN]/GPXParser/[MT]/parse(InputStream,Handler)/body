@@ -1,6 +1,4 @@
 {
-  importedRecords=0;
-  handler=handlerIn;
   final RootElement root=new RootElement(namespace,"gpx");
   final Element waypoint=root.getChild(namespace,"wpt");
   waypoint.setStartElementListener(new StartElementListener(){
@@ -29,7 +27,7 @@
         cache.setDetailed(true);
         createNoteFromGSAKUserdata();
         result.put(cache.getGeocode(),cache);
-        showCountMessage(handler,R.string.gpx_import_loading_caches,++importedRecords,progressStream.getProgress());
+        showProgressMessage(progressHandler,progressStream.getProgress());
       }
  else       if (StringUtils.isNotBlank(cache.getName()) && cache.getCoords() != null && StringUtils.contains(type,"waypoint")) {
         addWaypointToCache();
@@ -56,7 +54,7 @@
           }
           cgWaypoint.mergeWayPoints(cacheForWaypoint.getWaypoints(),Collections.singletonList(waypoint));
           result.put(cacheGeocodeForWaypoint,cacheForWaypoint);
-          showCountMessage(handler,R.string.gpx_import_loading_waypoints,++importedRecords,progressStream.getProgress());
+          showProgressMessage(progressHandler,progressStream.getProgress());
         }
       }
     }
@@ -364,13 +362,10 @@
   try {
     progressStream=new ProgressInputStream(stream);
     Xml.parse(progressStream,Xml.Encoding.UTF_8,root.getContentHandler());
-    return true;
+    return result.values();
   }
- catch (  IOException e) {
-    Log.e(Settings.tag,"Cannot parse .gpx file as GPX " + version + ": could not read file!");
-  }
-catch (  SAXException e) {
+ catch (  SAXException e) {
     Log.e(Settings.tag,"Cannot parse .gpx file as GPX " + version + ": could not parse XML - "+ e.toString());
+    throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML",e);
   }
-  return false;
 }

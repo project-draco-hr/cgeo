@@ -1,4 +1,22 @@
 {
-  final cgSearch search=doImport();
-  loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0,cgeoapplication.getCount(search),0));
+  final Collection<cgCache> caches;
+  try {
+    caches=doImport();
+    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_CACHES,R.string.gpx_import_storing,caches.size()));
+    cgSearch search=storeParsedCaches(caches);
+    Log.i(Settings.tag,"Imported successfully " + caches.size() + " caches.");
+    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED,cgeoapplication.getCount(search),0,search));
+  }
+ catch (  IOException e) {
+    Log.i(Settings.tag,"Importing caches failed - error reading data: " + e.getMessage());
+    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR,R.string.gpx_import_error_io,0,e.getLocalizedMessage()));
+  }
+catch (  ParserException e) {
+    Log.i(Settings.tag,"Importing caches failed - data format error" + e.getMessage());
+    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR,R.string.gpx_import_error_parser,0,e.getLocalizedMessage()));
+  }
+catch (  Exception e) {
+    Log.e(Settings.tag,"Importing caches failed - unknown error: ",e);
+    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR,R.string.gpx_import_error_unexpected,0,e.getLocalizedMessage()));
+  }
 }

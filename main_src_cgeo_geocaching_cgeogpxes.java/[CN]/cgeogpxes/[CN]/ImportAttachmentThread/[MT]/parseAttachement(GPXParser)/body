@@ -1,0 +1,9 @@
+{
+  InputStream is=contentResolver.openInputStream(uri);
+  try {
+    return parser.parse(is,progressHandler);
+  }
+  finally {
+    is.close();
+  }
+}

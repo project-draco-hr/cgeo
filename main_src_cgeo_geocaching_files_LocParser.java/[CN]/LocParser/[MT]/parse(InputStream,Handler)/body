@@ -1,0 +1,20 @@
+{
+  String streamContent=readStream(stream,progressHandler).toString();
+  final Map<String,cgCoord> coords=parseCoordinates(streamContent);
+  final List<cgCache> caches=new ArrayList<cgCache>();
+  for (  Entry<String,cgCoord> entry : coords.entrySet()) {
+    cgCoord coord=entry.getValue();
+    if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
+      continue;
+    }
+    cgCache cache=new cgCache();
+    copyCoordToCache(coord,cache);
+    caches.add(cache);
+    fixCache(cache);
+    cache.setCacheType(CacheType.UNKNOWN);
+    cache.setReason(listId);
+    cache.setDetailed(true);
+  }
+  Log.i(Settings.tag,"Caches found in .loc file: " + caches.size());
+  return caches;
+}

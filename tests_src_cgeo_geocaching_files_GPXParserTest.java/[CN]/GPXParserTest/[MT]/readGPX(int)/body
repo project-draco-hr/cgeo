@@ -1,17 +1,17 @@
 {
   final GPX10Parser parser=new GPX10Parser(1);
+  Collection<cgCache> caches=null;
   for (  int resourceId : resourceIds) {
     final Resources res=getInstrumentation().getContext().getResources();
     final InputStream instream=res.openRawResource(resourceId);
     try {
-      assertTrue(parser.parse(instream,new Handler()));
+      caches=parser.parse(instream,new Handler());
+      assertNotNull(caches);
     }
   finally {
       instream.close();
     }
   }
-  Collection<cgCache> caches=parser.getParsedCaches();
-  assertNotNull(caches);
   List<cgCache> cacheList=new ArrayList<cgCache>(caches);
   return cacheList;
 }

@@ -1,0 +1,7 @@
+{
+  super.setUp();
+  tempDir=new File(System.getProperty("java.io.tmpdir"),"cgeogpxesTest");
+  tempDir.mkdir();
+  cgeoapplication.getInstance().getAllHistoricCachesCount();
+  listId=cgeoapplication.getInstance().createList("cgeogpxesTest");
+}

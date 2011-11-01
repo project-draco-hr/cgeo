@@ -1,4 +1,9 @@
 {
-  createProgressDialog((int)file.length());
-  new ImportFileThread(file).start();
+  createProgressDialog();
+  if (StringUtils.endsWithIgnoreCase(file.getName(),GPX_FILE_EXTENSION)) {
+    new ImportGpxFileThread(file,listId,importStepHandler,progressHandler).start();
+  }
+ else {
+    new ImportLocFileThread(file,listId,importStepHandler,progressHandler).start();
+  }
 }
