@@ -5,28 +5,11 @@
   if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
     dir=app.startDir(this,dirUpdate);
   }
-  if (cacheList != null) {
-    setTitle(title);
-  }
   if (CollectionUtils.isNotEmpty(cacheList)) {
     final Integer count=cgeoapplication.getTotal(search);
-    if (count != null && count > 0) {
-      setTitle(title);
-      if (cacheList.size() < cgeoapplication.getTotal(search) && cacheList.size() < MAX_LIST_ITEMS) {
-        setMoreCaches(true);
-      }
- else {
-        setMoreCaches(false);
-      }
-    }
- else {
-      setTitle(title);
-      setMoreCaches(false);
-    }
+    setMoreCaches(count != null && count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
   }
- else {
-    setTitle(title);
-  }
+  setTitle(title);
   setAdapter();
   if (geo != null) {
     geoUpdate.updateLoc(geo);
