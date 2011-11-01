@@ -1,11 +1,11 @@
 {
   if (isInvalidGeocode(geocode)) {
-    return GC_CONNECTOR;
+    return UNKNOWN_CONNECTOR;
   }
   for (  IConnector connector : connectors) {
     if (connector.canHandle(geocode)) {
       return connector;
     }
   }
-  return GC_CONNECTOR;
+  return UNKNOWN_CONNECTOR;
 }

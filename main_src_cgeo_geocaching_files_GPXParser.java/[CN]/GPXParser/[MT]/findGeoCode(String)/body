@@ -2,11 +2,14 @@
   if (input == null || StringUtils.isNotBlank(cache.getGeocode())) {
     return;
   }
-  final Matcher matcherGeocode=patternGeocode.matcher(input);
+  final String trimmed=input.trim();
+  final Matcher matcherGeocode=patternGeocode.matcher(trimmed);
   if (matcherGeocode.find()) {
     final String geocode=matcherGeocode.group(1);
-    if (ConnectorFactory.canHandle(geocode)) {
-      cache.setGeocode(geocode);
+    if (geocode.length() == trimmed.length() || Character.isWhitespace(trimmed.charAt(geocode.length()))) {
+      if (ConnectorFactory.canHandle(geocode)) {
+        cache.setGeocode(geocode);
+      }
     }
   }
 }

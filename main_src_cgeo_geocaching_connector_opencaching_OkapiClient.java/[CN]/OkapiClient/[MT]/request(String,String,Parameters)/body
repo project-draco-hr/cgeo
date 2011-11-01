@@ -6,7 +6,11 @@
   if (!(connector instanceof ApiOpenCachingConnector)) {
     return null;
   }
-  final String uri="http://" + connector.getHost() + service;
+  final String host=connector.getHost();
+  if (StringUtils.isBlank(host)) {
+    return null;
+  }
+  final String uri="http://" + host + service;
   ((ApiOpenCachingConnector)connector).addAuthentication(params);
   return cgBase.requestJSON(uri,params);
 }

@@ -21,6 +21,11 @@
         findGeoCode(desc);
         findGeoCode(cmt);
       }
+      if (StringUtils.isBlank(cache.getGeocode())) {
+        if (StringUtils.isNotBlank(name)) {
+          cache.setGeocode(name.trim());
+        }
+      }
       if (StringUtils.isNotBlank(cache.getGeocode()) && cache.getCoords() != null && ((type == null && sym == null) || StringUtils.contains(type,"geocache") || StringUtils.contains(sym,"geocache"))) {
         fixCache(cache);
         cache.setReason(listId);
