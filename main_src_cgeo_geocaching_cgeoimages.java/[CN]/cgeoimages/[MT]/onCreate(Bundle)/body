@@ -31,6 +31,5 @@
   }
   final int message=img_type == SPOILER_IMAGES ? R.string.cache_spoiler_images_loading : R.string.cache_log_images_loading;
   final boolean offline=app.isOffline(geocode,null) && (img_type == SPOILER_IMAGES || Settings.isStoreLogImages());
-  final boolean save=img_type == SPOILER_IMAGES ? true : Settings.isStoreLogImages();
-  loadImages(images,message,save,offline);
+  loadImages(images,message,offline);
 }
