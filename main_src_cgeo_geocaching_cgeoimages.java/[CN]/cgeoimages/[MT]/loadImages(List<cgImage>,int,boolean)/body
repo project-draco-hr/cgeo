@@ -15,7 +15,7 @@
       descView.setText(Html.fromHtml(img.description),TextView.BufferType.SPANNABLE);
       descView.setVisibility(View.VISIBLE);
     }
-    new AsyncImgLoader(rowView,img,save,offline).execute();
+    new AsyncImgLoader(rowView,img,offline).execute();
     imagesView.addView(rowView);
   }
 }

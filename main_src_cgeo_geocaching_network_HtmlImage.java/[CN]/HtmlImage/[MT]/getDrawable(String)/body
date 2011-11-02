@@ -20,21 +20,8 @@
         Log.e(Settings.tag,"HtmlImage.getDrawable (downloading from web)",e);
       }
     }
-    if (save) {
-      final File file=LocalStorage.getStorageFile(geocode,url,true);
-      LocalStorage.saveEntityToFile(bufferedEntity,file);
-    }
- else {
-      setSampleSize(bufferedEntity.getContentLength());
-      InputStream is;
-      try {
-        is=bufferedEntity.getContent();
-        imagePre=BitmapFactory.decodeStream(is,null,bfOptions);
-      }
- catch (      IOException e) {
-        Log.e(Settings.tag,"HtmlImage.getDrawable (decoding image)",e);
-      }
-    }
+    final File file=LocalStorage.getStorageFile(geocode,url,true);
+    LocalStorage.saveEntityToFile(bufferedEntity,file);
   }
   if (onlySave) {
     return null;

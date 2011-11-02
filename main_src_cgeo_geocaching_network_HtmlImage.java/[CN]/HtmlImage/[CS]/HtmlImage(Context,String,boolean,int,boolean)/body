@@ -1,3 +1,12 @@
 {
-  this(context,geocode,returnErrorImage,reason,onlySave,true);
+  this.context=contextIn;
+  this.geocode=geocode;
+  this.returnErrorImage=returnErrorImage;
+  this.reason=reason;
+  this.onlySave=onlySave;
+  bfOptions=new BitmapFactory.Options();
+  bfOptions.inTempStorage=new byte[16 * 1024];
+  final Display display=((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+  this.maxWidth=display.getWidth() - 25;
+  this.maxHeight=display.getHeight() - 25;
 }
