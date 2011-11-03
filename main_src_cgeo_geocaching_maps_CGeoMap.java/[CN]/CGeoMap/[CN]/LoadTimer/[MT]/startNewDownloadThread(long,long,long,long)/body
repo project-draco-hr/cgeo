@@ -1,0 +1,7 @@
+{
+  if (downloadThread != null && downloadThread.isWorking()) {
+    downloadThread.stopIt();
+  }
+  downloadThread=new DownloadThread(centerLat,centerLon,spanLat,spanLon);
+  downloadThread.start();
+}

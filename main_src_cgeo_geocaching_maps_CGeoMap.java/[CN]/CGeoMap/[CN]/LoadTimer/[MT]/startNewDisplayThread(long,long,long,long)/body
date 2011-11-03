@@ -1,0 +1,7 @@
+{
+  if (displayThread != null && displayThread.isWorking()) {
+    displayThread.stopIt();
+  }
+  displayThread=new DisplayThread(centerLat,centerLon,spanLat,spanLon);
+  displayThread.start();
+}

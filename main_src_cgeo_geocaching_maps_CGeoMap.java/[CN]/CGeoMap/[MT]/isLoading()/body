@@ -1,15 +1,6 @@
 {
-  boolean loading=false;
   if (loadTimer != null) {
-    if (loadTimer.getLoadThread() != null && loadTimer.getLoadThread().isWorking()) {
-      loading=true;
-    }
- else     if (loadTimer.getDownloadThread() != null && loadTimer.getDownloadThread().isWorking()) {
-      loading=true;
-    }
- else     if (loadTimer.getDownloadThread() != null && loadTimer.getDisplayThread().isWorking()) {
-      loading=true;
-    }
+    return loadTimer.isLoading();
   }
-  return loading;
+  return false;
 }

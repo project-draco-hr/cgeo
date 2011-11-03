@@ -39,11 +39,7 @@
       return;
     }
     if (loadTimer != null) {
-      if (loadTimer.getDisplayThread() != null && loadTimer.getDisplayThread().isWorking()) {
-        loadTimer.getDisplayThread().stopIt();
-      }
-      loadTimer.setDisplayThread(new DisplayThread(centerLat,centerLon,spanLat,spanLon));
-      loadTimer.getDisplayThread().start();
+      loadTimer.startNewDisplayThread(centerLat,centerLon,spanLat,spanLon);
     }
   }
   finally {

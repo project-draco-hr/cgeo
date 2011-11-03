@@ -44,26 +44,19 @@
       return;
     }
     if (loadTimer != null) {
-      if (loadTimer.getDisplayThread() != null && loadTimer.getDisplayThread().isWorking()) {
-        loadTimer.getDisplayThread().stopIt();
-      }
+      loadTimer.startNewDisplayThread(centerLat,centerLon,spanLat,spanLon);
     }
-    loadTimer.setDisplayThread(new DisplayThread(centerLat,centerLon,spanLat,spanLon));
-    loadTimer.getDisplayThread().start();
     if (stop) {
-      loadTimer.getDisplayThread().stopIt();
+      if (loadTimer != null) {
+        loadTimer.stopDisplayThread();
+      }
       displayHandler.sendEmptyMessage(0);
       working=false;
       return;
     }
     if (live && Settings.isLiveMap()) {
       if (loadTimer != null) {
-        if (loadTimer.getDownloadThread() != null && loadTimer.getDownloadThread().isWorking()) {
-          loadTimer.getDownloadThread().stopIt();
-        }
-        loadTimer.setDownloadThread(new DownloadThread(centerLat,centerLon,spanLat,spanLon));
-        loadTimer.getDownloadThread().setName("downloadThread");
-        loadTimer.getDownloadThread().start();
+        loadTimer.startNewDownloadThread(centerLat,centerLon,spanLat,spanLon);
       }
     }
   }

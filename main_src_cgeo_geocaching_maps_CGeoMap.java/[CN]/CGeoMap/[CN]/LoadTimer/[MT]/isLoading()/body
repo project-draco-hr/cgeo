@@ -1,0 +1,12 @@
+{
+  if (loadThread != null && loadThread.isWorking()) {
+    return true;
+  }
+  if (downloadThread != null && downloadThread.isWorking()) {
+    return true;
+  }
+  if (displayThread != null && displayThread.isWorking()) {
+    return true;
+  }
+  return false;
+}
