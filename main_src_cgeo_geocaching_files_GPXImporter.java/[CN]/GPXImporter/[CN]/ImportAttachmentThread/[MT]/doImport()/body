@@ -1,0 +1,15 @@
+{
+  Log.i(Settings.tag,"Import GPX from uri: " + uri);
+  importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE,R.string.gpx_import_loading_caches,-1));
+  Collection<cgCache> caches;
+  GPXParser parser;
+  try {
+    parser=new GPX10Parser(listId);
+    caches=parseAttachment(parser);
+  }
+ catch (  ParserException pe) {
+    parser=new GPX11Parser(listId);
+    caches=parseAttachment(parser);
+  }
+  return caches;
+}
