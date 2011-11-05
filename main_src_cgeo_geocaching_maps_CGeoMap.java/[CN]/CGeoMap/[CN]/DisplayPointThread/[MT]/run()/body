@@ -27,11 +27,11 @@
     }
     item.setMarker(pin);
     overlayCaches.updateItems(item);
-    displayHandler.sendEmptyMessage(1);
+    displayHandler.sendEmptyMessage(INVALIDATE_MAP);
     cachesCnt=1;
   }
  else {
     cachesCnt=0;
   }
-  displayHandler.sendEmptyMessage(0);
+  displayHandler.sendEmptyMessage(UPDATE_TITLE);
 }

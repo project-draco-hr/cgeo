@@ -3,7 +3,7 @@
     stop=false;
     working=true;
     if (mapView == null || caches == null) {
-      displayHandler.sendEmptyMessage(0);
+      displayHandler.sendEmptyMessage(UPDATE_TITLE);
       working=false;
       return;
     }
@@ -12,7 +12,7 @@
     if (!cachesProtected.isEmpty()) {
       for (      cgCache cacheOne : cachesProtected) {
         if (stop) {
-          displayHandler.sendEmptyMessage(0);
+          displayHandler.sendEmptyMessage(UPDATE_TITLE);
           working=false;
           return;
         }
@@ -30,20 +30,20 @@
         items.add(getCacheItem(new cgCoord(cacheOne),cacheOne.getType(),cacheOne.isOwn(),cacheOne.isFound(),cacheOne.isDisabled()));
       }
       overlayCaches.updateItems(items);
-      displayHandler.sendEmptyMessage(1);
+      displayHandler.sendEmptyMessage(INVALIDATE_MAP);
       cachesCnt=cachesProtected.size();
       if (stop) {
-        displayHandler.sendEmptyMessage(0);
+        displayHandler.sendEmptyMessage(UPDATE_TITLE);
         working=false;
         return;
       }
     }
  else {
       overlayCaches.updateItems(items);
-      displayHandler.sendEmptyMessage(1);
+      displayHandler.sendEmptyMessage(INVALIDATE_MAP);
     }
     cachesProtected.clear();
-    displayHandler.sendEmptyMessage(0);
+    displayHandler.sendEmptyMessage(UPDATE_TITLE);
   }
   finally {
     working=false;

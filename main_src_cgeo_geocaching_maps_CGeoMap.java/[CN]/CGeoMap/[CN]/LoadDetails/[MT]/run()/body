@@ -37,10 +37,10 @@
     }
  finally {
       detailProgress++;
-      handler.sendEmptyMessage(0);
+      handler.sendEmptyMessage(UPDATE_PROGRESS);
     }
     yield();
     last=System.currentTimeMillis();
   }
-  handler.sendEmptyMessage(1);
+  handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
 }

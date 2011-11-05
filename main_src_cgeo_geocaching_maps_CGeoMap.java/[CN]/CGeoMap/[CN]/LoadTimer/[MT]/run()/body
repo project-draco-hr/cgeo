@@ -59,14 +59,14 @@
             centerLongitude=centerLongitudeNow;
             spanLatitude=spanLatitudeNow;
             spanLongitude=spanLongitudeNow;
-            showProgressHandler.sendEmptyMessage(1);
+            showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
             loadThread=new LoadThread(centerLatitude,centerLongitude,spanLatitude,spanLongitude);
             loadThread.start();
           }
         }
       }
       if (!isLoading()) {
-        showProgressHandler.sendEmptyMessage(0);
+        showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
       }
       yield();
     }
