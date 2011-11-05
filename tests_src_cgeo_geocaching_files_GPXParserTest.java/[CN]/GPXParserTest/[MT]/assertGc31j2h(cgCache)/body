@@ -11,7 +11,7 @@
   assertEquals(cgBase.formatLongitude(refCoordinates.getLongitude(),true),cache.getLongitude());
   assertEquals("vptsz",cache.getOwner());
   assertEquals(CacheSize.SMALL,cache.getSize());
-  assertEquals("multi",cache.getType());
+  assertEquals(CacheType.MULTI,cache.getCacheType());
   assertFalse(cache.isArchived());
   assertFalse(cache.isDisabled());
   assertFalse(cache.isEventCache());
