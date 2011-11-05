@@ -10,5 +10,5 @@
   cgSearch search=(cgSearch)importStepHandler.messages.get(2).obj;
   assertEquals(Collections.singletonList("GC31J2H"),search.getGeocodes());
   cgCache cache=cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
-  assertNotNull(cache);
+  assertCacheProperties(cache);
 }

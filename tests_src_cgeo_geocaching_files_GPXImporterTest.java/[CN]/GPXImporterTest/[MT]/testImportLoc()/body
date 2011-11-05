@@ -10,5 +10,5 @@
   cgSearch search=(cgSearch)importStepHandler.messages.get(2).obj;
   assertEquals(Collections.singletonList("OC5952"),search.getGeocodes());
   cgCache cache=cgeoapplication.getInstance().getCacheByGeocode("OC5952");
-  assertNotNull(cache);
+  assertCacheProperties(cache);
 }
