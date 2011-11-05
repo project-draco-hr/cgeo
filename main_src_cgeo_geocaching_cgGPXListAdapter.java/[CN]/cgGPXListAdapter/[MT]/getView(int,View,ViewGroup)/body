@@ -1,5 +1,7 @@
 {
-  if (inflater == null)   inflater=((Activity)getContext()).getLayoutInflater();
+  if (inflater == null) {
+    inflater=((Activity)getContext()).getLayoutInflater();
+  }
   if (position > getCount()) {
     Log.w(Settings.tag,"cgGPXListAdapter.getView: Attempt to access missing item #" + position);
     return null;

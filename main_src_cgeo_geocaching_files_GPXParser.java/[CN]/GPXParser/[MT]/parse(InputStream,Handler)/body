@@ -243,11 +243,14 @@
 );
     gcCache.getChild(nsGC,"state").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String state){
-        if (StringUtils.isBlank(cache.getLocation())) {
-          cache.setLocation(validate(state));
-        }
+        String trimmedState=state.trim();
+        if (StringUtils.isNotEmpty(trimmedState)) {
+          if (StringUtils.isBlank(cache.getLocation())) {
+            cache.setLocation(validate(state));
+          }
  else {
-          cache.setLocation(state.trim() + ", " + cache.getLocation());
+            cache.setLocation(trimmedState + ", " + cache.getLocation());
+          }
         }
       }
     }
