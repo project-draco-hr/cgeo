@@ -1,6 +1,5 @@
 {
-  final String id=StringUtils.isEmpty(cache.getCacheId()) ? CryptUtils.convertToGcBase31(cache.getGeocode()) : cache.getCacheId();
-  final String uri="http://www.geocaching.com/my/watchlist.aspx?w=" + id;
+  final String uri="http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
   String page=postRequestLogged(uri);
   if (StringUtils.isBlank(page)) {
     Log.e(Settings.tag,"cgBase.addToWatchlist: No data from server");

@@ -1,3 +1,6 @@
 {
+  if (StringUtils.isBlank(cacheId)) {
+    return CryptUtils.convertToGcBase31(geocode);
+  }
   return cacheId;
 }
