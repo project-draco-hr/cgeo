@@ -5,8 +5,8 @@
   final String lonText=lonView.getText().toString();
   if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
     if (geo.coordsNow != null) {
-      latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(),true));
-      lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(),true));
+      latView.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE));
+      lonView.setText(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE));
     }
   }
  else {

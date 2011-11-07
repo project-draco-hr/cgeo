@@ -3,8 +3,8 @@
     return;
   }
   try {
-    latButton.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(),false));
-    lonButton.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(),false));
+    latButton.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+    lonButton.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
   }
  catch (  Exception e) {
     Log.w(Settings.tag,"Failed to update location.");

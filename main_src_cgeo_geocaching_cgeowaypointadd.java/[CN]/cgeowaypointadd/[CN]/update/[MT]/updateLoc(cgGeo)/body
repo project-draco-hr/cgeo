@@ -5,8 +5,8 @@
   try {
     Button bLat=(Button)findViewById(R.id.buttonLatitude);
     Button bLon=(Button)findViewById(R.id.buttonLongitude);
-    bLat.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(),false));
-    bLon.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(),false));
+    bLat.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+    bLon.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
   }
  catch (  Exception e) {
     Log.w(Settings.tag,"Failed to update location.");

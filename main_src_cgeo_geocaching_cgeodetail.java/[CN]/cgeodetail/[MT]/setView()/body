@@ -327,7 +327,7 @@
         }
         TextView nameView=(TextView)waypointView.findViewById(R.id.name);
         if (StringUtils.isBlank(wpt.getName())) {
-          nameView.setText(cgBase.formatCoords(wpt.getCoords(),true));
+          nameView.setText(wpt.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE));
         }
  else {
           nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
