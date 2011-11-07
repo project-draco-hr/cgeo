@@ -4,7 +4,7 @@
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
   app.setAction(null);
-  base=new cgBase(app);
+  base=cgBase.getInstance(app);
   MapFactory mapFactory=Settings.getMapFactory();
   noMapTokenShowed=false;
   activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

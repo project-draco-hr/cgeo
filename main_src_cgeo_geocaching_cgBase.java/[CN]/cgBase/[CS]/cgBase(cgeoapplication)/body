@@ -1,6 +1,7 @@
 {
-  context=appIn.getBaseContext();
-  res=appIn.getBaseContext().getResources();
+  this.app=app;
+  context=app.getBaseContext();
+  res=app.getBaseContext().getResources();
   final String CACHETYPE_ALL_GUID="9a79e6ce-3344-409c-bbe9-496530baf758";
   cacheIDs.put("all",CACHETYPE_ALL_GUID);
   cacheIDsChoices.put(res.getString(R.string.all),CACHETYPE_ALL_GUID);
@@ -56,7 +57,6 @@
   logTypes2.put(LOG_DISCOVERED_IT,res.getString(R.string.log_discovered));
   logTypes2.put(LOG_POST_REVIEWER_NOTE,res.getString(R.string.log_reviewed));
   logTypes2.put(LOG_ANNOUNCEMENT,res.getString(R.string.log_announcement));
-  app=appIn;
   try {
     final PackageManager manager=app.getPackageManager();
     final PackageInfo info=manager.getPackageInfo(app.getPackageName(),0);

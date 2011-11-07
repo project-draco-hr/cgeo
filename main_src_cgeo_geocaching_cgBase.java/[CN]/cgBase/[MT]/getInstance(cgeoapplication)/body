@@ -1,0 +1,10 @@
+{
+  if (instance == null) {
+synchronized (cgBase.class) {
+      if (instance == null) {
+        instance=new cgBase(app);
+      }
+    }
+  }
+  return instance;
+}

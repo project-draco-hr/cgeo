@@ -3,5 +3,5 @@
   res=this.getResources();
   app=(cgeoapplication)this.getApplication();
   prefs=getSharedPreferences(Settings.preferences,Context.MODE_PRIVATE);
-  base=new cgBase(app);
+  base=cgBase.getInstance(app);
 }
