@@ -9,8 +9,7 @@
     public void onClick(    DialogInterface dialog,    int whichButton){
       String listName=StringUtils.trim(input.getText().toString());
       if (StringUtils.isNotBlank(listName)) {
-        runnable.setArgument(listName);
-        runnable.run();
+        runnable.run(listName);
       }
     }
   }

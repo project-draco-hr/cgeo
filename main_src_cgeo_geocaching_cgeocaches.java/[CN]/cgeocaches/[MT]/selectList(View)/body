@@ -18,8 +18,8 @@
     public void onClick(    DialogInterface dialogInterface,    int itemId){
       if (itemId >= lists.size()) {
         createList(new RunnableWithArgument<Integer>(){
-          @Override public void run(){
-            switchListById(getArgument());
+          @Override public void run(          final Integer arg){
+            switchListById(arg);
           }
         }
 );

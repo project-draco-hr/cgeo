@@ -1,13 +1,11 @@
 {
   handleListNameInput("",R.string.list_dialog_create_title,R.string.list_dialog_create,new RunnableWithArgument<String>(){
-    @Override public void run(){
-      String listName=getArgument();
-      int newId=app.createList(listName);
+    @Override public void run(    final String listName){
+      final int newId=app.createList(listName);
       if (newId >= 10) {
         showToast(res.getString(R.string.list_dialog_create_ok));
         if (runAfterwards != null) {
-          runAfterwards.setArgument(newId);
-          runAfterwards.run();
+          runAfterwards.run(newId);
         }
       }
  else {
