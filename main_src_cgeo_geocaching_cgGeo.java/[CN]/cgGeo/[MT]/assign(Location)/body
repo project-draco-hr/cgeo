@@ -41,7 +41,7 @@
     accuracyNow=999f;
   }
   if (gps == 1) {
-    if (coordsBefore != null && coordsNow != null) {
+    if (coordsBefore != null) {
       final float dst=coordsBefore.distanceTo(coordsNow);
       if (dst > 0.005) {
         distanceNow+=dst;
@@ -56,6 +56,6 @@
     geoUpdate.updateLoc(this);
   }
   if (gps > -1) {
-    (new publishLoc()).start();
+    Go4Cache.signalCoordinates(app,coordsNow);
   }
 }

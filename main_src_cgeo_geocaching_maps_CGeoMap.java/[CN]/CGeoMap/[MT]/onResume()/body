@@ -2,7 +2,7 @@
   super.onResume();
   app.setAction(null);
   if (geo == null) {
-    geo=app.startGeo(activity,geoUpdate,base,0,0);
+    geo=app.startGeo(activity,geoUpdate,0,0);
   }
   if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(activity,dirUpdate);
