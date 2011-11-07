@@ -1,6 +1,6 @@
 {
   super.onResume();
-  app.setAction(null);
+  app.setAction(StringUtils.defaultIfBlank(geocodeIntent,null));
   if (geo == null) {
     geo=app.startGeo(activity,geoUpdate,0,0);
   }
