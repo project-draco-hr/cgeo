@@ -1,5 +1,5 @@
 {
-  if (msg.what == 0) {
+  if (msg.what == UPDATE_PROGRESS) {
     if (waitDialog != null) {
       int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
       int secondsRemaining;
@@ -21,7 +21,7 @@
       }
     }
   }
- else {
+ else   if (msg.what == FINISHED_LOADING_DETAILS) {
     if (waitDialog != null) {
       waitDialog.dismiss();
       waitDialog.setOnCancelListener(null);
