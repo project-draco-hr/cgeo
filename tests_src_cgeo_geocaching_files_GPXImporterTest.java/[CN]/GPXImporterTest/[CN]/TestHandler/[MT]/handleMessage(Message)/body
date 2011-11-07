@@ -1,5 +1,7 @@
 {
-  Message msg1=new Message();
+  final Message msg1=new Message();
   msg1.copyFrom(msg);
   messages.add(msg1);
+  lastMessage=System.currentTimeMillis();
+  notify();
 }

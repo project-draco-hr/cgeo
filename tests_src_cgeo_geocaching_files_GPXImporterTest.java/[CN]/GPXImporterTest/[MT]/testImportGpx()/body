@@ -3,6 +3,7 @@
   copyResourceToFile(R.raw.gc31j2h,gc31j2h);
   GPXImporter.ImportGpxFileThread importThread=new GPXImporter.ImportGpxFileThread(gc31j2h,listId,importStepHandler,progressHandler);
   importThread.run();
+  importStepHandler.waitForCompletion();
   assertEquals(3,importStepHandler.messages.size());
   assertEquals(GPXImporter.IMPORT_STEP_READ_FILE,importStepHandler.messages.get(0).what);
   assertEquals(GPXImporter.IMPORT_STEP_STORE_CACHES,importStepHandler.messages.get(1).what);

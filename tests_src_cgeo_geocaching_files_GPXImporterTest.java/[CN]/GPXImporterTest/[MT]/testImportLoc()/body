@@ -3,6 +3,7 @@
   copyResourceToFile(R.raw.oc5952_loc,oc5952);
   GPXImporter.ImportLocFileThread importThread=new GPXImporter.ImportLocFileThread(oc5952,listId,importStepHandler,progressHandler);
   importThread.run();
+  importStepHandler.waitForCompletion();
   assertEquals(3,importStepHandler.messages.size());
   assertEquals(GPXImporter.IMPORT_STEP_READ_FILE,importStepHandler.messages.get(0).what);
   assertEquals(GPXImporter.IMPORT_STEP_STORE_CACHES,importStepHandler.messages.get(1).what);

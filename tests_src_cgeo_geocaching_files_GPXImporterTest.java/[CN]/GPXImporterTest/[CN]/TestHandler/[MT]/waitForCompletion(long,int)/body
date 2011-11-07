@@ -1,0 +1,9 @@
+{
+  try {
+    while (System.currentTimeMillis() - lastMessage <= milliseconds && messages.size() <= maxMessages) {
+      wait(milliseconds);
+    }
+  }
+ catch (  InterruptedException e) {
+  }
+}
