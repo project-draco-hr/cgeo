@@ -1,14 +1,21 @@
 {
   try {
-    if (cache != null) {
-      if (cache.getReason() > 0 || StringUtils.isBlank(cache.getDescription())) {
-        final cgSearch search=searchByGeocode(cache.getGeocode(),null,listId,false,null);
+    cgCache cache;
+    if (origCache != null) {
+      if (origCache.getReason() > 0 || StringUtils.isBlank(origCache.getDescription())) {
+        final cgSearch search=searchByGeocode(origCache.getGeocode(),null,listId,false,null);
         cache=app.getCache(search);
+      }
+ else {
+        cache=origCache;
       }
     }
  else     if (StringUtils.isNotBlank(geocode)) {
       final cgSearch search=searchByGeocode(geocode,null,listId,false,null);
       cache=app.getCache(search);
+    }
+ else {
+      cache=null;
     }
     if (cache == null) {
       if (handler != null) {

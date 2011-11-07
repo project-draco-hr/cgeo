@@ -3,11 +3,15 @@
   int selectionEnd=editText.getSelectionEnd();
   int start=Math.min(selectionStart,selectionEnd);
   int end=Math.max(selectionStart,selectionEnd);
-  String content=editText.getText().toString();
+  final String content=editText.getText().toString();
+  String completeText;
   if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
-    insertText=" " + insertText;
+    completeText=" " + insertText;
   }
-  editText.getText().replace(start,end,insertText);
-  int newCursor=moveCursor ? start + insertText.length() : start;
+ else {
+    completeText=insertText;
+  }
+  editText.getText().replace(start,end,completeText);
+  int newCursor=moveCursor ? start + completeText.length() : start;
   editText.setSelection(newCursor,newCursor);
 }

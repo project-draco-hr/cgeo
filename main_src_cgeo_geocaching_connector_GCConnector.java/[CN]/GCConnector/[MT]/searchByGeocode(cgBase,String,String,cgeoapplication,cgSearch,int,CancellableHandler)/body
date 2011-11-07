@@ -16,9 +16,11 @@
     if (app.isThere(geocode,guid,true,false)) {
       if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
         Log.i(Settings.tag,"Loading old cache from cache.");
-        geocode=app.getGeocode(guid);
+        search.addGeocode(app.getGeocode(guid));
       }
-      search.addGeocode(geocode);
+ else {
+        search.addGeocode(geocode);
+      }
       search.error=null;
       return search;
     }
