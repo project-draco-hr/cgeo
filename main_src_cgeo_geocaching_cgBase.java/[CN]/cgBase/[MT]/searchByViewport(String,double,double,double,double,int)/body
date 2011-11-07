@@ -17,6 +17,6 @@
     return null;
   }
   List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
-  app.addSearch(search,cacheList,true,reason);
+  app.addSearch(cacheList,reason);
   return search;
 }

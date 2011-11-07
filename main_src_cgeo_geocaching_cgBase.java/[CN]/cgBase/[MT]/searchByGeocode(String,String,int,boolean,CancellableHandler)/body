@@ -6,12 +6,7 @@
   }
   if (!forceReload && reason == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
     final String realGeocode=StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
-    List<cgCache> cacheList=new ArrayList<cgCache>();
-    cacheList.add(app.getCacheByGeocode(realGeocode,cgCache.LOADALL));
     search.addGeocode(realGeocode);
-    app.addSearch(search,cacheList,false,reason);
-    cacheList.clear();
-    cacheList=null;
     return search;
   }
   return ConnectorFactory.getConnector(geocode).searchByGeocode(this,geocode,guid,app,search,reason,handler);

@@ -18,12 +18,8 @@
         Log.i(Settings.tag,"Loading old cache from cache.");
         geocode=app.getGeocode(guid);
       }
-      final List<cgCache> cacheList=new ArrayList<cgCache>();
-      cacheList.add(app.getCacheByGeocode(geocode));
       search.addGeocode(geocode);
       search.error=null;
-      app.addSearch(search,cacheList,false,reason);
-      cacheList.clear();
       return search;
     }
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No data from server");
@@ -37,11 +33,11 @@
     if (caches != null && StringUtils.isNotBlank(caches.url)) {
       search.url=caches.url;
     }
-    app.addSearch(search,null,true,reason);
+    app.addSearch(null,reason);
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No cache parsed");
     return null;
   }
   final List<cgCache> cacheList=cgBase.filterSearchResults(search,caches,false,false,null);
-  app.addSearch(search,cacheList,true,reason);
+  app.addSearch(cacheList,reason);
   return search;
 }

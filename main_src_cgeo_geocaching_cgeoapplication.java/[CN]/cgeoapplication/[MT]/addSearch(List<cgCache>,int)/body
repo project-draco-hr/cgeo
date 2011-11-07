@@ -1,0 +1,12 @@
+{
+  if (CollectionUtils.isEmpty(cacheList)) {
+    return;
+  }
+  if (storage == null) {
+    storage=new cgData(this);
+  }
+  for (  final cgCache cache : cacheList) {
+    cache.setReason(reason);
+    storeWithMerge(cache,false);
+  }
+}
