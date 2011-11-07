@@ -46,19 +46,21 @@
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_type));
-    String size="";
-    if (cache.getSize() != null) {
-      if (cache.showSize()) {
-        size=" (" + res.getString(cache.getSize().stringId) + ")";
-      }
-    }
     if (cgBase.cacheTypesInv.containsKey(cache.getType())) {
-      itemValue.setText(cgBase.cacheTypesInv.get(cache.getType()) + size);
+      itemValue.setText(cgBase.cacheTypesInv.get(cache.getType()));
     }
  else {
-      itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id) + size);
+      itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id));
     }
     detailsList.addView(itemLayout);
+    if (null != cache.getSize() && cache.showSize()) {
+      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
+      itemName=(TextView)itemLayout.findViewById(R.id.name);
+      itemValue=(TextView)itemLayout.findViewById(R.id.value);
+      itemName.setText(res.getString(R.string.cache_size));
+      itemValue.setText(res.getString(cache.getSize().stringId));
+      detailsList.addView(itemLayout);
+    }
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
