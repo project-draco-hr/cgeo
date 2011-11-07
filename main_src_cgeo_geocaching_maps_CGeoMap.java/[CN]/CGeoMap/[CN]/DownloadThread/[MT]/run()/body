@@ -23,7 +23,8 @@
       working=false;
       return;
     }
-    search=base.searchByViewport(token,latMin,latMax,lonMin,lonMax,0);
+    final Viewport viewport=new Viewport(new Geopoint(latMin,lonMin),new Geopoint(latMax,lonMax));
+    search=base.searchByViewport(token,viewport);
     if (search != null) {
       downloaded=true;
     }

@@ -1,7 +1,7 @@
 {
   final cgSearch search=new cgSearch();
   String page=null;
-  final String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|"+ latMin+ "|"+ lonMax+ "|"+ lonMin+ "\"},\"ut\":\""+ StringUtils.defaultString(userToken)+ "\"}}";
+  final String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + viewport.getLatitudeMax() + "|"+ viewport.getLatitudeMin()+ "|"+ viewport.getLongitudeMax()+ "|"+ viewport.getLongitudeMin()+ "\"},\"ut\":\""+ StringUtils.defaultString(userToken)+ "\"}}";
   final String uri="http://www.geocaching.com/map/default.aspx/MapAction";
   page=requestJSONgc(uri,params);
   if (StringUtils.isBlank(page)) {
@@ -17,6 +17,6 @@
     return null;
   }
   List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
-  app.addSearch(cacheList,reason);
+  app.addSearch(cacheList,0);
   return search;
 }
