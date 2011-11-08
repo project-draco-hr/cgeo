@@ -5,7 +5,10 @@
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
   HttpResponse loginResponse=request("https://www.geocaching.com/login/default.aspx",null,false,false,false);
-  String loginData=getResponseData(loginResponse);
+  String loginData=getResponseDataOnError(loginResponse);
+  if (loginResponse.getStatusLine().getStatusCode() == 503 && patternMaintenance.matcher(loginData).find()) {
+    return StatusCode.MAINTENANCE;
+  }
   if (StringUtils.isBlank(loginData)) {
     Log.e(Settings.tag,"cgeoBase.login: Failed to retrieve login page (1st)");
     return StatusCode.CONNECTION_FAILED;

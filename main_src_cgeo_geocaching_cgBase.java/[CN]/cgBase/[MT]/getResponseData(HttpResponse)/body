@@ -2,11 +2,5 @@
   if (!isSuccess(response)) {
     return null;
   }
-  try {
-    return BaseUtils.replaceWhitespace(EntityUtils.toString(response.getEntity(),HTTP.UTF_8));
-  }
- catch (  Exception e) {
-    Log.e(Settings.tag,"getResponseData",e);
-    return null;
-  }
+  return getResponseDataOnError(response);
 }
