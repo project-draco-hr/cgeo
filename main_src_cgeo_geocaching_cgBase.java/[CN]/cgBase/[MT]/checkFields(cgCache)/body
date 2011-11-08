@@ -29,7 +29,7 @@
   if (cache.getSize() == null) {
     Log.e(Settings.tag,"size not parsed correctly");
   }
-  if (StringUtils.isBlank(cache.getType())) {
+  if (cache.getCacheType() == null || cache.getCacheType() == CacheType.UNKNOWN) {
     Log.e(Settings.tag,"type not parsed correctly");
   }
   if (cache.getCoords() == null) {

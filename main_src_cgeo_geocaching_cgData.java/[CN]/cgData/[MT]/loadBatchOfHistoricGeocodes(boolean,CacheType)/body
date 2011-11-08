@@ -1,0 +1,36 @@
+{
+  init();
+  List<String> geocodes=new ArrayList<String>();
+  StringBuilder specifySql=new StringBuilder();
+  specifySql.append("visiteddate > 0");
+  if (detailedOnly) {
+    specifySql.append(" and detailed = 1");
+  }
+  if (cachetype != null) {
+    specifySql.append(" and type = \"");
+    specifySql.append(cachetype.id);
+    specifySql.append('"');
+  }
+  try {
+    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},specifySql.toString(),null,null,null,"visiteddate",null);
+    if (cursor != null) {
+      if (cursor.getCount() > 0) {
+        cursor.moveToFirst();
+        int index=cursor.getColumnIndex("geocode");
+        do {
+          geocodes.add(cursor.getString(index));
+        }
+ while (cursor.moveToNext());
+      }
+ else {
+        cursor.close();
+        return null;
+      }
+      cursor.close();
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgData.loadBatchOfHistoricGeocodes: " + e.toString());
+  }
+  return geocodes;
+}

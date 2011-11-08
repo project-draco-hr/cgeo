@@ -12,20 +12,15 @@
     return true;
   }
  else   if (id > 0) {
-    String itemTitle=item.getTitle().toString();
-    String choice=null;
-    for (    Entry<String,String> entry : cgBase.cacheTypesInv.entrySet()) {
+    final String itemTitle=item.getTitle().toString();
+    CacheType choice=null;
+    for (    Entry<CacheType,String> entry : cgBase.cacheTypesInv.entrySet()) {
       if (entry.getValue().equalsIgnoreCase(itemTitle)) {
         choice=entry.getKey();
         break;
       }
     }
-    if (choice == null) {
-      Settings.setCacheType(null);
-    }
- else {
-      Settings.setCacheType(choice);
-    }
+    Settings.setCacheType(choice);
     setFilterTitle();
     return true;
   }

@@ -1,0 +1,14 @@
+{
+  editSharedSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      if (cacheType == null) {
+        edit.remove(KEY_CACHE_TYPE);
+      }
+ else {
+        edit.putString(KEY_CACHE_TYPE,cacheType.id);
+      }
+    }
+  }
+);
+  return cacheType;
+}

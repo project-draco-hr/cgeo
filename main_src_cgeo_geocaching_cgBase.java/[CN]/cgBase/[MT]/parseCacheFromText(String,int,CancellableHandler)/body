@@ -75,7 +75,7 @@
     cache.setSize(CacheSize.FIND_BY_ID.get(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id).toLowerCase()));
   }
   cache.setFound(BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));
-  cache.setCacheType(CacheType.getByPattern(BaseUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getType())));
+  cache.setCacheType(CacheType.getByPattern(BaseUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getCacheType().id)));
   cache.setOnWatchlist(BaseUtils.matches(page,GCConstants.PATTERN_WATCHLIST));
   cache.setLatlon(BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,cache.getLatlon()));
   if (StringUtils.isNotEmpty(cache.getLatlon())) {
