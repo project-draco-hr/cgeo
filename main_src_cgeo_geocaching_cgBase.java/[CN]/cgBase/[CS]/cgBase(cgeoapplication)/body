@@ -2,9 +2,7 @@
   this.app=app;
   context=app.getBaseContext();
   res=app.getBaseContext().getResources();
-  final String CACHETYPE_ALL_GUID="9a79e6ce-3344-409c-bbe9-496530baf758";
-  cacheIDs.put("all",CACHETYPE_ALL_GUID);
-  cacheIDsChoices.put(res.getString(R.string.all),CACHETYPE_ALL_GUID);
+  cacheIDsChoices.put(res.getString(R.string.all),CacheType.ALL_GUID);
   for (  CacheType ct : CacheType.values()) {
     String l10n=res.getString(ct.stringId);
     cacheTypesInv.put(ct,l10n);

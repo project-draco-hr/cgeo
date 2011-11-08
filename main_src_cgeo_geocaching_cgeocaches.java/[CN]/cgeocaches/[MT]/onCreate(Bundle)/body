@@ -9,7 +9,7 @@
     Object typeObject=extras.get(EXTRAS_LIST_TYPE);
     type=(typeObject instanceof CacheListType) ? (CacheListType)typeObject : CacheListType.OFFLINE;
     coords=new Geopoint(extras.getDouble("latitude"),extras.getDouble("longitude"));
-    cachetype=Settings.getCacheType();
+    cachetype=CacheType.getById(Settings.getCacheType());
     keyword=extras.getString("keyword");
     address=extras.getString("address");
     username=extras.getString("username");

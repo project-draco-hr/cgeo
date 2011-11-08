@@ -1,0 +1,11 @@
+{
+  setPriority(Thread.MIN_PRIORITY);
+  this.handler=handler;
+  this.keyword=keyword;
+  this.cacheType=cacheType;
+  if (keyword == null) {
+    showToast(res.getString(R.string.warn_no_keyword));
+    finish();
+    return;
+  }
+}

@@ -1,6 +1,6 @@
 {
   if (coords != null) {
-    search=base.searchByOffline(coords,Settings.getCacheType(),listId);
+    search=base.searchByOffline(coords,CacheType.getById(Settings.getCacheType()),listId);
   }
  else {
     search=base.searchByOffline(null,null,cgList.STANDARD_LIST_ID);
