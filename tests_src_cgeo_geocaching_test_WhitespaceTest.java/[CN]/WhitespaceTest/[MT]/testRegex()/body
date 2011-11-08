@@ -4,6 +4,6 @@
   Matcher matcher=pattern.matcher(data);
   String result=matcher.replaceAll(" ").trim();
   final long end=System.currentTimeMillis();
-  assertEquals(111956,result.length());
+  assertEquals(EXPECTED_SIZE - 1,result.length());
   Log.d(Settings.tag,(end - start) + " ms regex");
 }
