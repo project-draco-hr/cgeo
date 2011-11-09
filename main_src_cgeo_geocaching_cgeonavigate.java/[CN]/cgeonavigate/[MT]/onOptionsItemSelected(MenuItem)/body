@@ -30,7 +30,7 @@
     setTitle();
     setDestCoords();
     updateDistanceInfo();
-    Log.d(Settings.tag,"destination set: " + title + " ("+ String.format(Locale.getDefault(),"%.8f",dstCoords.getLatitude())+ " | "+ String.format(Locale.getDefault(),"%.8f",dstCoords.getLongitude())+ ")");
+    Log.d(Settings.tag,"destination set: " + title + " ("+ dstCoords.format(Format.LAT_LON_DECMINUTE_PIPE)+ ")");
     return true;
   }
   return false;

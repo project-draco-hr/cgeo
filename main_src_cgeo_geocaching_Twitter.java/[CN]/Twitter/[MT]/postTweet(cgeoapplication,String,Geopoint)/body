@@ -8,7 +8,7 @@
   try {
     Parameters parameters=new Parameters("status",status);
     if (coords != null) {
-      parameters.put("lat",String.format("%.6f",coords.getLatitude()),"long",String.format("%.6f",coords.getLongitude()),"display_coordinates","true");
+      parameters.put("lat",coords.format(Format.LAT_DECDEGREE_RAW),"long",coords.format(Format.LON_DECDEGREE_RAW),"display_coordinates","true");
     }
     OAuth.signOAuth("api.twitter.com","/1/statuses/update.json","POST",false,parameters,Settings.getTokenPublic(),Settings.getTokenSecret());
     final HttpResponse httpResponse=cgBase.postRequest("http://api.twitter.com/1/statuses/update.json",parameters);

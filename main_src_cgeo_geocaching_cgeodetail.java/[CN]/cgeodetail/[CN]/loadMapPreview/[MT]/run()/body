@@ -4,7 +4,7 @@
   }
   BitmapDrawable image=null;
   try {
-    final String latlonMap=String.format((Locale)null,"%.6f",cache.getCoords().getLatitude()) + "," + String.format((Locale)null,"%.6f",cache.getCoords().getLongitude());
+    final String latlonMap=cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
     final Display display=((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
     int width=display.getWidth();
     int height=(int)(90 * pixelRatio);
