@@ -4,7 +4,7 @@
     final Resources res=getInstrumentation().getContext().getResources();
     final InputStream instream=res.openRawResource(resourceId);
     try {
-      caches=parser.parse(instream,new Handler());
+      caches=parser.parse(instream,null);
       assertNotNull(caches);
     }
   finally {
