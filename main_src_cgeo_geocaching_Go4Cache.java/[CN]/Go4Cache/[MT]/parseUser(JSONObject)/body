@@ -1,0 +1,10 @@
+{
+  final cgUser user=new cgUser();
+  final String located=oneUser.getString("located");
+  user.located=cgBase.dateSqlIn.parse(located);
+  user.username=oneUser.getString("user");
+  user.coords=new Geopoint(oneUser.getDouble("latitude"),oneUser.getDouble("longitude"));
+  user.action=oneUser.getString("action");
+  user.client=oneUser.getString("client");
+  return user;
+}

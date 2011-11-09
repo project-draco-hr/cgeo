@@ -1,0 +1,24 @@
+{
+  final List<cgUser> users=new ArrayList<cgUser>();
+  if (username == null) {
+    return users;
+  }
+  final Parameters params=new Parameters("u",username,"ltm",viewport.bottomLeft.format(Format.LAT_DECDEGREE_RAW),"ltx",viewport.topRight.format(Format.LAT_DECDEGREE_RAW),"lnm",viewport.bottomLeft.format(Format.LON_DECDEGREE_RAW),"lnx",viewport.topRight.format(Format.LON_DECDEGREE_RAW));
+  final String data=cgBase.getResponseData(cgBase.postRequest("http://api.go4cache.com/get.php",params));
+  if (StringUtils.isBlank(data)) {
+    Log.e(Settings.tag,"cgeoBase.getGeocachersInViewport: No data from server");
+    return null;
+  }
+  try {
+    final JSONArray usersData=new JSONObject(data).getJSONArray("users");
+    final int count=usersData.length();
+    for (int i=0; i < count; i++) {
+      final JSONObject oneUser=usersData.getJSONObject(i);
+      users.add(parseUser(oneUser));
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgBase.getGeocachersInViewport: " + e.toString());
+  }
+  return Collections.unmodifiableList(users);
+}
