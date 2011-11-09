@@ -2,11 +2,5 @@
   if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
     return null;
   }
-  try {
-    return new Geopoint(cursor.getDouble(indexLat),cursor.getDouble(indexLon));
-  }
- catch (  MalformedCoordinateException e) {
-    Log.e(Settings.tag,"cannot parse geopoint from database: " + e.getMessage());
-    return null;
-  }
+  return new Geopoint(cursor.getDouble(indexLat),cursor.getDouble(indexLon));
 }
