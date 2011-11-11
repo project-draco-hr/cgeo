@@ -1,8 +1,7 @@
 {
   Collection<cgCache> caches=null;
   for (  int resourceId : resourceIds) {
-    final Resources res=getInstrumentation().getContext().getResources();
-    final InputStream instream=res.openRawResource(resourceId);
+    final InputStream instream=getResourceStream(resourceId);
     try {
       caches=parser.parse(instream,new Handler());
       assertNotNull(caches);

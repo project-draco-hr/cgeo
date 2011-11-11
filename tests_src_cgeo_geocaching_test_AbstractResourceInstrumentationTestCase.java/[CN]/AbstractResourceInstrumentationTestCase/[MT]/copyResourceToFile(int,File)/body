@@ -1,5 +1,5 @@
 {
-  final InputStream is=getInstrumentation().getContext().getResources().openRawResource(resourceId);
+  final InputStream is=getResourceStream(resourceId);
   final FileOutputStream os=new FileOutputStream(file);
   try {
     byte[] buffer=new byte[4096];

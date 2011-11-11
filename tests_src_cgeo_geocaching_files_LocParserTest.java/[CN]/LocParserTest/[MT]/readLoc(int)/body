@@ -1,8 +1,7 @@
 {
   LocParser parser=new LocParser(1);
   Collection<cgCache> caches=null;
-  final Resources res=getInstrumentation().getContext().getResources();
-  final InputStream instream=res.openRawResource(resourceId);
+  final InputStream instream=getResourceStream(resourceId);
   try {
     caches=parser.parse(instream,new Handler());
     assertNotNull(caches);
