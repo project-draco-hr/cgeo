@@ -1,25 +1,3 @@
 {
-  final ProgressDialog dialog=ProgressDialog.show(this,res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_running),true,false);
-  final AtomicBoolean atomic=new AtomicBoolean(false);
-  Thread restoreThread=new Thread(){
-    final Handler handler=new Handler(){
-      public void handleMessage(      Message msg){
-        dialog.dismiss();
-        boolean restored=atomic.get();
-        if (restored) {
-          helpDialog(res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_success));
-        }
- else {
-          helpDialog(res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_failed));
-        }
-      }
-    }
-;
-    @Override public void run(){
-      atomic.set(app.restoreDatabase());
-      handler.sendMessage(handler.obtainMessage());
-    }
-  }
-;
-  restoreThread.start();
+  app.restoreDatabase(this);
 }

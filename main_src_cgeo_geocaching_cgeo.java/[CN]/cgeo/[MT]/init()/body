@@ -14,7 +14,7 @@
   if (app.firstRun) {
     (new firstLogin()).start();
   }
-  (new countBubbleUpdate()).start();
+  updateCacheCounter();
   (new cleanDatabase()).start();
   if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
     Settings.setCacheType(null);
@@ -42,7 +42,7 @@
   }
 );
   registerForContextMenu(findByOffline);
-  (new countBubbleUpdate()).start();
+  updateCacheCounter();
   final View advanced=findViewById(R.id.advanced_button);
   advanced.setClickable(true);
   advanced.setOnClickListener(new OnClickListener(){
@@ -69,4 +69,5 @@
   }
 );
   setFilterTitle();
+  checkRestore();
 }
