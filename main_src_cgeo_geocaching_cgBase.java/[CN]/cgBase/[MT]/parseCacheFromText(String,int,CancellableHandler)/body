@@ -139,14 +139,16 @@
       sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_spoilers);
       final Matcher matcherSpoilersInside=GCConstants.PATTERN_SPOILERSINSIDE.matcher(spoilers);
       while (matcherSpoilersInside.find()) {
-        final cgImage spoiler=new cgImage();
-        spoiler.url=matcherSpoilersInside.group(1);
+        String url=matcherSpoilersInside.group(1);
+        String title=null;
         if (matcherSpoilersInside.group(2) != null) {
-          spoiler.title=matcherSpoilersInside.group(2);
+          title=matcherSpoilersInside.group(2);
         }
+        String description=null;
         if (matcherSpoilersInside.group(3) != null) {
-          spoiler.description=matcherSpoilersInside.group(3);
+          description=matcherSpoilersInside.group(3);
         }
+        final cgImage spoiler=new cgImage(url,title,description);
         if (cache.getSpoilers() == null) {
           cache.setSpoilers(new ArrayList<cgImage>());
         }

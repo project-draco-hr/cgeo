@@ -17,11 +17,13 @@
           Log.e(Settings.tag,"cgeoimages.handleMessage.onClick: " + e.toString());
           return;
         }
-        Intent intent=new Intent();
+        final Intent intent=new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file),"image/jpg");
         startActivity(intent);
-        if (file.exists())         file.deleteOnExit();
+        if (file.exists()) {
+          file.deleteOnExit();
+        }
       }
     }
 );

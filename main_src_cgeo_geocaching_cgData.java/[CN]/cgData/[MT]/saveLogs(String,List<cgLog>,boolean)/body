@@ -26,8 +26,8 @@
           for (          cgImage img : log.logImages) {
             values.clear();
             values.put("log_id",log_id);
-            values.put("title",img.title);
-            values.put("url",img.url);
+            values.put("title",img.getTitle());
+            values.put("url",img.getUrl());
             databaseRW.insert(dbTableLogImages,null,values);
           }
         }

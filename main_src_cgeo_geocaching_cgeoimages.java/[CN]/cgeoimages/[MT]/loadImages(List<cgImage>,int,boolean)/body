@@ -9,10 +9,10 @@
   LinearLayout rowView=null;
   for (  final cgImage img : images) {
     rowView=(LinearLayout)inflater.inflate(R.layout.cache_image_item,null);
-    ((TextView)rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
-    if (StringUtils.isNotBlank(img.description)) {
+    ((TextView)rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
+    if (StringUtils.isNotBlank(img.getDescription())) {
       final TextView descView=(TextView)rowView.findViewById(R.id.description);
-      descView.setText(Html.fromHtml(img.description),TextView.BufferType.SPANNABLE);
+      descView.setText(Html.fromHtml(img.getDescription()),TextView.BufferType.SPANNABLE);
       descView.setVisibility(View.VISIBLE);
     }
     new AsyncImgLoader(rowView,img,offline).execute();

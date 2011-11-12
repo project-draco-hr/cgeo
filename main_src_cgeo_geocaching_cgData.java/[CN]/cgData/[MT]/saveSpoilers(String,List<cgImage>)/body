@@ -13,9 +13,9 @@
         values.clear();
         values.put("geocode",geocode);
         values.put("updated",timeStamp);
-        values.put("url",oneSpoiler.url);
-        values.put("title",oneSpoiler.title);
-        values.put("description",oneSpoiler.description);
+        values.put("url",oneSpoiler.getUrl());
+        values.put("title",oneSpoiler.getTitle());
+        values.put("description",oneSpoiler.getDescription());
         databaseRW.insert(dbTableSpoilers,null,values);
       }
     }

@@ -1,0 +1,7 @@
+{
+  final Intent logImgIntent=new Intent(fromActivity,cgeoimages.class);
+  logImgIntent.putExtra("geocode",geocode.toUpperCase());
+  logImgIntent.putExtra("type",imageType);
+  logImgIntent.putParcelableArrayListExtra("images",logImages);
+  fromActivity.startActivity(logImgIntent);
+}

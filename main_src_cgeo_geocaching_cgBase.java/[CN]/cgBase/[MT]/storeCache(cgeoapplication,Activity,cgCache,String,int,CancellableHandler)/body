@@ -35,7 +35,7 @@
     }
     if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
       for (      cgImage oneSpoiler : cache.getSpoilers()) {
-        imgGetter.getDrawable(oneSpoiler.url);
+        imgGetter.getDrawable(oneSpoiler.getUrl());
       }
     }
     if (CancellableHandler.isCancelled(handler)) {
@@ -45,7 +45,7 @@
       for (      cgLog log : cache.getLogs()) {
         if (CollectionUtils.isNotEmpty(log.logImages)) {
           for (          cgImage oneLogImg : log.logImages) {
-            imgGetter.getDrawable(oneLogImg.url);
+            imgGetter.getDrawable(oneLogImg.getUrl());
           }
         }
       }

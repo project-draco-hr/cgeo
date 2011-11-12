@@ -11,10 +11,7 @@
     int indexTitle=cursor.getColumnIndex("title");
     int indexDescription=cursor.getColumnIndex("description");
     do {
-      cgImage spoiler=new cgImage();
-      spoiler.url=cursor.getString(indexUrl);
-      spoiler.title=cursor.getString(indexTitle);
-      spoiler.description=cursor.getString(indexDescription);
+      cgImage spoiler=new cgImage(cursor.getString(indexUrl),cursor.getString(indexTitle),cursor.getString(indexDescription));
       spoilers.add(spoiler);
     }
  while (cursor.moveToNext());

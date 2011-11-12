@@ -51,9 +51,9 @@
       final JSONArray images=entry.getJSONArray("Images");
       for (int i=0; i < images.length(); i++) {
         final JSONObject image=images.getJSONObject(i);
-        final cgImage logImage=new cgImage();
-        logImage.url="http://img.geocaching.com/cache/log/" + image.getString("FileName");
-        logImage.title=image.getString("Name");
+        String url="http://img.geocaching.com/cache/log/" + image.getString("FileName");
+        String title=image.getString("Name");
+        final cgImage logImage=new cgImage(url,title);
         if (logDone.logImages == null) {
           logDone.logImages=new ArrayList<cgImage>();
         }
