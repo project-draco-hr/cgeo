@@ -2,4 +2,5 @@
   assertFalse(ConnectorFactory.canHandle(""));
   assertTrue(ConnectorFactory.canHandle("GC12345"));
   assertTrue(ConnectorFactory.canHandle("some string"));
+  assertFalse(ConnectorFactory.canHandle("[/start with special char"));
 }
