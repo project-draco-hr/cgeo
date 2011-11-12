@@ -1,0 +1,9 @@
+{
+  final String located=user.getString("located");
+  final Date userlocated=cgBase.dateSqlIn.parse(located);
+  final String username=user.getString("user");
+  final Geopoint coords=new Geopoint(user.getDouble("latitude"),user.getDouble("longitude"));
+  final String action=user.getString("action");
+  final String client=user.getString("client");
+  return new Go4CacheUser(username,coords,userlocated,action,client);
+}

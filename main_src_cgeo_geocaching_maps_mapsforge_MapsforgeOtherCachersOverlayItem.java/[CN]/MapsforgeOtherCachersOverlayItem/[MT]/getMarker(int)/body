@@ -1,6 +1,6 @@
 {
   Drawable marker=null;
-  if (user != null && user.located != null && user.located.getTime() >= (System.currentTimeMillis() - (20 * 60 * 1000))) {
+  if (user != null && user.getLocated() != null && user.getLocated().getTime() >= (System.currentTimeMillis() - (20 * 60 * 1000))) {
     marker=context.getResources().getDrawable(R.drawable.user_location_active);
   }
  else {

@@ -1,0 +1,30 @@
+{
+  Log.d(Settings.tag,"Go4Cache task started");
+  Geopoint latestCoords=null;
+  String latestAction=null;
+  try {
+    for (; ; ) {
+      final Geopoint currentCoords=queue.take();
+      final String currentAction=app.getAction();
+      if (null != latestCoords && latestCoords.distanceTo(currentCoords) < 0.75 && StringUtils.equals(latestAction,currentAction)) {
+        continue;
+      }
+      final String username=Settings.getUsername();
+      if (StringUtils.isBlank(username)) {
+        continue;
+      }
+      final String latStr=currentCoords.format(Format.LAT_DECDEGREE_RAW);
+      final String lonStr=currentCoords.format(Format.LON_DECDEGREE_RAW);
+      final Parameters params=new Parameters("u",username,"lt",latStr,"ln",lonStr,"a",currentAction,"s",(CryptUtils.sha1(username + "|" + latStr+ "|"+ lonStr+ "|"+ currentAction+ "|"+ CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
+      if (null != base.version) {
+        params.put("v",base.version);
+      }
+      cgBase.postRequest("http://api.go4cache.com/",params);
+      latestCoords=currentCoords;
+      latestAction=currentAction;
+    }
+  }
+ catch (  InterruptedException e) {
+    Log.e(Settings.tag,"Go4Cache.run: interrupted",e);
+  }
+}

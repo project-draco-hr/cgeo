@@ -1,0 +1,24 @@
+{
+  final Matcher matcherGeocode=patternGeocode.matcher(action.trim());
+  geocode="";
+  if (0 == action.length() || action.equalsIgnoreCase("pending")) {
+    actionForDisplay="Looking around";
+  }
+ else   if (action.equalsIgnoreCase("tweeting")) {
+    actionForDisplay="Tweeting";
+  }
+ else   if (matcherGeocode.find()) {
+    if (null != matcherGeocode.group(1)) {
+      geocode=matcherGeocode.group(1).trim().toUpperCase();
+    }
+    if (null != matcherGeocode.group(3)) {
+      actionForDisplay="Heading to " + geocode + " ("+ matcherGeocode.group(3).trim()+ ")";
+    }
+ else {
+      actionForDisplay="Heading to " + geocode;
+    }
+  }
+ else {
+    actionForDisplay=action;
+  }
+}

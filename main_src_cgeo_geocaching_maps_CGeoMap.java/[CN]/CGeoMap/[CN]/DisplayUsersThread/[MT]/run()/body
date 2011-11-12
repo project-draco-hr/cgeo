@@ -8,11 +8,11 @@
     List<OtherCachersOverlayItemImpl> items=new ArrayList<OtherCachersOverlayItemImpl>();
     int counter=0;
     OtherCachersOverlayItemImpl item=null;
-    for (    cgUser userOne : users) {
+    for (    Go4CacheUser userOne : users) {
       if (stop) {
         return;
       }
-      if (userOne.coords == null) {
+      if (userOne.getCoords() == null) {
         continue;
       }
       item=Settings.getMapFactory().getOtherCachersOverlayItemBase(activity,userOne);

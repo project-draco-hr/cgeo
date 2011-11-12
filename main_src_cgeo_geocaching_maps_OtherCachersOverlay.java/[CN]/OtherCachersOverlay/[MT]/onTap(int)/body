@@ -4,45 +4,15 @@
       return false;
     }
     final OtherCachersOverlayItemImpl item=items.get(index);
-    final cgUser user=item.getUser();
-    String action=null;
-    String geocode=null;
-    final Matcher matcherGeocode=patternGeocode.matcher(user.action.trim());
-    if (user.action.length() == 0 || user.action.equalsIgnoreCase("pending")) {
-      action="Looking around";
-    }
- else     if (user.action.equalsIgnoreCase("tweeting")) {
-      action="Tweeting";
-    }
- else     if (matcherGeocode.find()) {
-      if (matcherGeocode.group(1) != null) {
-        geocode=matcherGeocode.group(1).trim().toUpperCase();
-      }
-      if (matcherGeocode.group(3) != null) {
-        action="Heading to " + geocode + " ("+ matcherGeocode.group(3).trim()+ ")";
-      }
- else {
-        action="Heading to " + geocode;
-      }
-    }
- else {
-      action=user.action;
-    }
-    int icon=-1;
-    if (user.client.equalsIgnoreCase("c:geo")) {
-      icon=R.drawable.client_cgeo;
-    }
- else     if (user.client.equalsIgnoreCase("preCaching")) {
-      icon=R.drawable.client_precaching;
-    }
- else     if (user.client.equalsIgnoreCase("Handy Geocaching")) {
-      icon=R.drawable.client_handygeocaching;
-    }
+    final Go4CacheUser user=item.getUser();
+    String action=user.getAction();
+    String geocode=user.getGeocode();
+    int icon=user.getIconId();
     final AlertDialog.Builder dialog=new AlertDialog.Builder(context);
     if (icon > -1) {
       dialog.setIcon(icon);
     }
-    dialog.setTitle(user.username);
+    dialog.setTitle(user.getUsername());
     dialog.setMessage(action);
     dialog.setCancelable(true);
     if (StringUtils.isNotBlank(geocode)) {

@@ -1,0 +1,9 @@
+{
+  if (null == instance) {
+synchronized (Go4Cache.class) {
+      instance=new Go4Cache(app);
+      instance.start();
+    }
+  }
+  return instance;
+}
