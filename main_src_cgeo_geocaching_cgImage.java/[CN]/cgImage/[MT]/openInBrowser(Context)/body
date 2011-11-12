@@ -1,0 +1,7 @@
+{
+  if (StringUtils.isBlank(url)) {
+    return;
+  }
+  final Intent browserIntent=new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+  fromActivity.startActivity(browserIntent);
+}
