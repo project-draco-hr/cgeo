@@ -3,7 +3,7 @@
   if (menuItem == 0) {
     return false;
   }
-  if (menuItem == 2) {
+  if (menuItem == MENU_NAVIGATE) {
     navigateTo();
     return true;
   }
@@ -11,23 +11,23 @@
     logVisit();
     return true;
   }
- else   if (menuItem == 5) {
+ else   if (menuItem == MENU_SPOILERS) {
     showSpoilers();
     return true;
   }
- else   if (menuItem == 7) {
+ else   if (menuItem == MENU_BROWSER) {
     cache.openInBrowser(this);
     return true;
   }
- else   if (menuItem == 10) {
+ else   if (menuItem == MENU_CACHES_AROUND) {
     cachesAround();
     return true;
   }
- else   if (menuItem == 11) {
+ else   if (menuItem == MENU_CALENDAR) {
     addToCalendar();
     return true;
   }
- else   if (menuItem == 12) {
+ else   if (menuItem == MENU_SHARE) {
     if (cache != null) {
       cache.shareCache(this,res);
       return true;

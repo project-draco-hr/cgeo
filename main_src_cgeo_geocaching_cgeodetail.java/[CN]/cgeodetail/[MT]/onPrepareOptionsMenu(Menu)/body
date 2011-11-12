@@ -1,0 +1,8 @@
+{
+  menu.findItem(MENU_NAVIGATE).setVisible(null != cache.getCoords());
+  menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
+  menu.findItem(MENU_SPOILERS).setVisible(CollectionUtils.isNotEmpty(cache.getSpoilers()));
+  menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
+  menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
+  return super.onPrepareOptionsMenu(menu);
+}
