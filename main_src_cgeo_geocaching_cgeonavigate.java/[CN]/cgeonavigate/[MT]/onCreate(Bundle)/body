@@ -12,7 +12,8 @@
   }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    title=extras.getString(EXTRAS_GEOCODE);
+    geocode=extras.getString(EXTRAS_GEOCODE);
+    title=geocode;
     name=extras.getString(EXTRAS_NAME);
     dstCoords=new Geopoint(extras.getDouble(EXTRAS_LATITUDE),extras.getDouble(EXTRAS_LONGITUDE));
     if (StringUtils.isNotBlank(name)) {
@@ -30,12 +31,7 @@
     finish();
     return;
   }
-  if (StringUtils.isNotBlank(title)) {
-    app.setAction(title);
-  }
- else   if (StringUtils.isNotBlank(name)) {
-    app.setAction(name);
-  }
+  setGo4CacheAction();
   setTitle();
   setDestCoords();
   compassView=(cgCompass)findViewById(R.id.rose);

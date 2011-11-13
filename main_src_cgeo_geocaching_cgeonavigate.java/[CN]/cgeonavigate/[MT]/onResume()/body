@@ -1,11 +1,6 @@
 {
   super.onResume();
-  if (StringUtils.isNotBlank(title)) {
-    app.setAction(title);
-  }
- else   if (StringUtils.isNotBlank(name)) {
-    app.setAction(name);
-  }
+  setGo4CacheAction();
   if (geo == null) {
     geo=app.startGeo(this,geoUpdate,0,0);
   }
