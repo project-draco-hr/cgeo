@@ -1,0 +1,8 @@
+{
+  if (StringUtils.endsWithIgnoreCase(name,GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
+    return StringUtils.substringBeforeLast(name,".") + WAYPOINTS_FILE_SUFFIX_AND_EXTENSION;
+  }
+ else {
+    return null;
+  }
+}
