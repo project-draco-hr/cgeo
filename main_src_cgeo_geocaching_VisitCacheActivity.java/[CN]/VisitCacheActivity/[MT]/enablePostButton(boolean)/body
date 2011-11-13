@@ -1,0 +1,11 @@
+{
+  postButton.setEnabled(enabled);
+  if (enabled) {
+    postButton.setOnClickListener(new PostListener());
+  }
+ else {
+    postButton.setOnTouchListener(null);
+    postButton.setOnClickListener(null);
+    postButton.setText(res.getString(R.string.log_post_not_possible));
+  }
+}

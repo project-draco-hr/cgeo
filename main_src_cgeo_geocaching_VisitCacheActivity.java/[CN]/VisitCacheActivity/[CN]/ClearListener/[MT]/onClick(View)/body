@@ -1,0 +1,19 @@
+{
+  app.clearLogOffline(geocode);
+  if (alreadyFound) {
+    typeSelected=cgBase.LOG_NOTE;
+  }
+ else {
+    typeSelected=types.get(0);
+  }
+  date.setTime(new Date());
+  text=null;
+  setType(typeSelected);
+  final Button dateButton=(Button)findViewById(R.id.date);
+  dateButton.setText(base.formatShortDate(date.getTime().getTime()));
+  dateButton.setOnClickListener(new DateListener());
+  final EditText logView=(EditText)findViewById(R.id.log);
+  logView.setText("");
+  clearButton.setOnClickListener(new ClearListener());
+  showToast(res.getString(R.string.info_log_cleared));
+}
