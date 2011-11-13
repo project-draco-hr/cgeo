@@ -5,27 +5,25 @@
     }
     final OtherCachersOverlayItemImpl item=items.get(index);
     final Go4CacheUser user=item.getUser();
-    String action=user.getAction();
-    String geocode=user.getGeocode();
-    int icon=user.getIconId();
+    final String geocode=user.getGeocode();
+    final int icon=user.getIconId();
     final AlertDialog.Builder dialog=new AlertDialog.Builder(context);
     if (icon > -1) {
       dialog.setIcon(icon);
     }
     dialog.setTitle(user.getUsername());
-    dialog.setMessage(action);
+    dialog.setMessage(user.getAction());
     dialog.setCancelable(true);
     if (StringUtils.isNotBlank(geocode)) {
-      dialog.setPositiveButton(geocode + "?",new cacheDetails(geocode));
+      dialog.setPositiveButton(geocode,new cacheDetails(geocode));
     }
-    dialog.setNeutralButton("Dismiss",new DialogInterface.OnClickListener(){
+    dialog.setNeutralButton(cgeoapplication.getInstance().getResources().getString(android.R.string.ok),new DialogInterface.OnClickListener(){
       public void onClick(      DialogInterface dialog,      int id){
         dialog.cancel();
       }
     }
 );
-    AlertDialog alert=dialog.create();
-    alert.show();
+    dialog.create().show();
     return true;
   }
  catch (  Exception e) {

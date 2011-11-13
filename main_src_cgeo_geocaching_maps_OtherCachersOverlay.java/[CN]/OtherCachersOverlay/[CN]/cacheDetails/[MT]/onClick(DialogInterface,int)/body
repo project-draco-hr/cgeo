@@ -1,6 +1,6 @@
 {
   if (geocode != null) {
-    Intent detailIntent=new Intent(context,cgeodetail.class);
+    final Intent detailIntent=new Intent(context,cgeodetail.class);
     detailIntent.putExtra("geocode",geocode);
     context.startActivity(detailIntent);
   }
