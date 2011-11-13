@@ -1,0 +1,8 @@
+{
+  if (handler != null) {
+    if (handler.isCancelled()) {
+      throw new CancellationException();
+    }
+    handler.sendMessage(handler.obtainMessage(0,bytesRead,0));
+  }
+}

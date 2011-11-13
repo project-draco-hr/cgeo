@@ -1,0 +1,16 @@
+{
+  if (dialog == null) {
+    dialog=new ProgressDialog(context);
+    dialog.setTitle(title);
+    dialog.setMessage(message);
+    dialog.setProgressStyle(style);
+    if (cancelMessage != null) {
+      dialog.setCancelable(true);
+      dialog.setCancelMessage(cancelMessage);
+    }
+ else {
+      dialog.setCancelable(false);
+    }
+    dialog.show();
+  }
+}

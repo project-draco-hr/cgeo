@@ -3,7 +3,7 @@
   Collection<cgCache> caches=null;
   final InputStream instream=getResourceStream(resourceId);
   try {
-    caches=parser.parse(instream,new Handler());
+    caches=parser.parse(instream,null);
     assertNotNull(caches);
     assertTrue(caches.size() > 0);
   }

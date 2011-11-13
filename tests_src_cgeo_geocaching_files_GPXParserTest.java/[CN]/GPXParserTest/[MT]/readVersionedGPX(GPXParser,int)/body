@@ -3,7 +3,7 @@
   for (  int resourceId : resourceIds) {
     final InputStream instream=getResourceStream(resourceId);
     try {
-      caches=parser.parse(instream,new Handler());
+      caches=parser.parse(instream,null);
       assertNotNull(caches);
     }
   finally {

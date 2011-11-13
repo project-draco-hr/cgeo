@@ -5,6 +5,9 @@
   for (  cgCache cache : caches) {
     app.removeCacheFromCache(cache.getGeocode());
     app.addCacheToSearch(search,cache);
+    if (progressHandler.isCancelled()) {
+      throw new CancellationException();
+    }
     progressHandler.sendMessage(progressHandler.obtainMessage(0,++storedCaches,0));
   }
   return search;
