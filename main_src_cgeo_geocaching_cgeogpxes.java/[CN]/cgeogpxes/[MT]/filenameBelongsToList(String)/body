@@ -1,5 +1,8 @@
 {
   if (super.filenameBelongsToList(filename)) {
+    if (StringUtils.endsWithIgnoreCase(filename,GPXImporter.ZIP_FILE_EXTENSION)) {
+      return gpxZipFilePattern.matcher(filename).matches();
+    }
     return !StringUtils.endsWithIgnoreCase(filename,GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION);
   }
   return false;
