@@ -1,27 +1,52 @@
 {
-  if (currentFormat == coordInputFormatEnum.Plain)   return;
-  int maxLength=2;
-  if (editText == eLonDeg || editText == eLatSub || editText == eLonSub) {
-    maxLength=3;
+  if (currentFormat == coordInputFormatEnum.Plain) {
+    return;
   }
-  if ((editText == eLatMin || editText == eLonMin) && currentFormat == coordInputFormatEnum.Deg) {
-    maxLength=5;
-  }
-  if ((editText == eLatSec || editText == eLonSec) && currentFormat == coordInputFormatEnum.Min) {
-    maxLength=3;
-  }
+  final int maxLength=getMaxLengthFromCurrentField(editText);
   if (s.length() == maxLength) {
-    if (editText == eLatDeg)     eLatMin.requestFocus();
- else     if (editText == eLatMin)     if (eLatSec.getVisibility() == View.GONE)     eLonDeg.requestFocus();
- else     eLatSec.requestFocus();
- else     if (editText == eLatSec)     if (eLatSub.getVisibility() == View.GONE)     eLonDeg.requestFocus();
- else     eLatSub.requestFocus();
- else     if (editText == eLatSub)     eLonDeg.requestFocus();
- else     if (editText == eLonDeg)     eLonMin.requestFocus();
- else     if (editText == eLonMin)     if (eLonSec.getVisibility() == View.GONE)     eLatDeg.requestFocus();
- else     eLonSec.requestFocus();
- else     if (editText == eLonSec)     if (eLonSub.getVisibility() == View.GONE)     eLatDeg.requestFocus();
- else     eLonSub.requestFocus();
- else     if (editText == eLonSub)     eLatDeg.requestFocus();
+    if (editText == eLatDeg) {
+      eLatMin.requestFocus();
+    }
+ else     if (editText == eLatMin) {
+      if (eLatSec.getVisibility() == View.GONE) {
+        eLonDeg.requestFocus();
+      }
+ else {
+        eLatSec.requestFocus();
+      }
+    }
+ else     if (editText == eLatSec) {
+      if (eLatSub.getVisibility() == View.GONE) {
+        eLonDeg.requestFocus();
+      }
+ else {
+        eLatSub.requestFocus();
+      }
+    }
+ else     if (editText == eLatSub) {
+      eLonDeg.requestFocus();
+    }
+ else     if (editText == eLonDeg) {
+      eLonMin.requestFocus();
+    }
+ else     if (editText == eLonMin) {
+      if (eLonSec.getVisibility() == View.GONE) {
+        eLatDeg.requestFocus();
+      }
+ else {
+        eLonSec.requestFocus();
+      }
+    }
+ else     if (editText == eLonSec) {
+      if (eLonSub.getVisibility() == View.GONE) {
+        eLatDeg.requestFocus();
+      }
+ else {
+        eLonSub.requestFocus();
+      }
+    }
+ else     if (editText == eLonSub) {
+      eLatDeg.requestFocus();
+    }
   }
 }

@@ -8,7 +8,7 @@
   }
   setContentView(R.layout.coords);
   spinner=(Spinner)findViewById(R.id.spinnerCoordinateFormats);
-  ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(context,R.array.waypoint_coordinate_formats,android.R.layout.simple_spinner_item);
+  final ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(context,R.array.waypoint_coordinate_formats,android.R.layout.simple_spinner_item);
   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
   spinner.setAdapter(adapter);
   spinner.setSelection(Settings.getCoordInputFormat().ordinal());
@@ -41,8 +41,8 @@
   eLonSub.addTextChangedListener(new TextChanged(eLonSub));
   bLat.setOnClickListener(new ButtonClickListener());
   bLon.setOnClickListener(new ButtonClickListener());
-  Button buttonCurrent=(Button)findViewById(R.id.current);
+  final Button buttonCurrent=(Button)findViewById(R.id.current);
   buttonCurrent.setOnClickListener(new CurrentListener());
-  Button buttonDone=(Button)findViewById(R.id.done);
+  final Button buttonDone=(Button)findViewById(R.id.done);
   buttonDone.setOnClickListener(new InputDoneListener());
 }

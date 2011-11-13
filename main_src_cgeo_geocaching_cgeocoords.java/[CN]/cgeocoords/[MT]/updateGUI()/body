@@ -1,5 +1,7 @@
 {
-  if (gp == null)   return;
+  if (gp == null) {
+    return;
+  }
   Double lat=0.0;
   if (gp.getLatitude() < 0) {
     bLat.setText("S");
@@ -16,18 +18,18 @@
     bLon.setText("E");
   }
   lon=Math.abs(gp.getLongitude());
-  int latDeg=(int)Math.floor(lat);
-  int latDegFrac=(int)Math.round((lat - latDeg) * 100000);
-  int latMin=(int)Math.floor((lat - latDeg) * 60);
-  int latMinFrac=(int)Math.round(((lat - latDeg) * 60 - latMin) * 1000);
-  int latSec=(int)Math.floor(((lat - latDeg) * 60 - latMin) * 60);
-  int latSecFrac=(int)Math.round((((lat - latDeg) * 60 - latMin) * 60 - latSec) * 1000);
-  int lonDeg=(int)Math.floor(lon);
-  int lonDegFrac=(int)Math.round((lon - lonDeg) * 100000);
-  int lonMin=(int)Math.floor((lon - lonDeg) * 60);
-  int lonMinFrac=(int)Math.round(((lon - lonDeg) * 60 - lonMin) * 1000);
-  int lonSec=(int)Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
-  int lonSecFrac=(int)Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
+  final int latDeg=(int)Math.floor(lat);
+  final int latDegFrac=(int)Math.round((lat - latDeg) * 100000);
+  final int latMin=(int)Math.floor((lat - latDeg) * 60);
+  final int latMinFrac=(int)Math.round(((lat - latDeg) * 60 - latMin) * 1000);
+  final int latSec=(int)Math.floor(((lat - latDeg) * 60 - latMin) * 60);
+  final int latSecFrac=(int)Math.round((((lat - latDeg) * 60 - latMin) * 60 - latSec) * 1000);
+  final int lonDeg=(int)Math.floor(lon);
+  final int lonDegFrac=(int)Math.round((lon - lonDeg) * 100000);
+  final int lonMin=(int)Math.floor((lon - lonDeg) * 60);
+  final int lonMinFrac=(int)Math.round(((lon - lonDeg) * 60 - lonMin) * 1000);
+  final int lonSec=(int)Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
+  final int lonSecFrac=(int)Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
 switch (currentFormat) {
 case Plain:
     findViewById(R.id.coordTable).setVisibility(View.GONE);
