@@ -5,4 +5,8 @@
     finish();
     return;
   }
+  if (!Settings.isLogin()) {
+    showToast(res.getString(R.string.err_login));
+    return;
+  }
 }
