@@ -1,0 +1,8 @@
+{
+  MapProvider mp=MapProviderFactory.getMapProvider(sourceId);
+  if (mp instanceof MapsforgeMapProvider) {
+    MapsforgeMapProvider mfp=(MapsforgeMapProvider)mp;
+    return sourceId - mfp.baseId;
+  }
+  return 0;
+}

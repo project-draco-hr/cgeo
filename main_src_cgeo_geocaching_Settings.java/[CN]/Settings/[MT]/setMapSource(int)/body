@@ -1,0 +1,11 @@
+{
+  if (!MapProviderFactory.IsSameProvider(getMapSource(),newMapSource)) {
+    mapProvider=null;
+  }
+  editSharedSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      edit.putInt(KEY_MAP_SOURCE,newMapSource);
+    }
+  }
+);
+}

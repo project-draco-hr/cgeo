@@ -1,0 +1,10 @@
+{
+  int count=1;
+  for (  int key : getFactory().mapSources.keySet()) {
+    if (sourceOrdinal == count) {
+      return key;
+    }
+    count++;
+  }
+  return getFactory().mapSources.firstKey();
+}

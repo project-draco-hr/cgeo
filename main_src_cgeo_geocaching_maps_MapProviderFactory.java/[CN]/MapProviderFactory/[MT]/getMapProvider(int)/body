@@ -1,0 +1,8 @@
+{
+  for (  MapProvider mp : getFactory().mapProviders) {
+    if (mp.IsMySource(sourceId)) {
+      return mp;
+    }
+  }
+  return getFactory().mapProviders[0];
+}

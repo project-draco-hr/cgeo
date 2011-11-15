@@ -75,7 +75,7 @@
     scale.setTextSize(14 * pixelDensity);
     scale.setTypeface(Typeface.DEFAULT_BOLD);
   }
-  if (mapSourceEnum.googleSat == Settings.getMapSource()) {
+  if (mapView.NeedsInvertedColors()) {
     scaleShadow.setColor(0xFF000000);
     scale.setColor(0xFFFFFFFF);
   }

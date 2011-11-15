@@ -30,7 +30,6 @@
  else {
       item.setTitle(res.getString(R.string.map_circles_show));
     }
-    menu.findItem(SUBMENU_VIEW_MF_OFFLINE).setEnabled(Settings.isValidMapFile());
     item=menu.findItem(MENU_AS_LIST);
     item.setVisible(live);
     item.setEnabled(CollectionUtils.isNotEmpty(caches));

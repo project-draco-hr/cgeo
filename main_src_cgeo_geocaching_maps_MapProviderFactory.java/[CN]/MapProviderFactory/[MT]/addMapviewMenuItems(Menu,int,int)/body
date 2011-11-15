@@ -1,0 +1,6 @@
+{
+  SortedMap<Integer,String> mapSources=getFactory().mapSources;
+  for (  int key : mapSources.keySet()) {
+    parentMenu.add(groupId,key,0,mapSources.get(key)).setCheckable(true).setChecked(key == currentSource);
+  }
+}
