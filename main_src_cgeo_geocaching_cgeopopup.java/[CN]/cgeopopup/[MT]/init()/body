@@ -145,14 +145,14 @@
       if (cache.supportsGCVote()) {
         (new Thread(){
           @Override public void run(){
-            cgRating rating=GCVote.getRating(cache.getGuid(),geocode);
+            GCVoteRating rating=GCVote.getRating(cache.getGuid(),geocode);
             Message msg=new Message();
             Bundle bundle=new Bundle();
-            if (rating == null || rating.rating == null) {
+            if (rating == null) {
               return;
             }
-            bundle.putFloat("rating",rating.rating);
-            bundle.putInt("votes",rating.votes);
+            bundle.putFloat("rating",rating.getRating());
+            bundle.putInt("votes",rating.getVotes());
             msg.setData(bundle);
             ratingHandler.sendMessage(msg);
           }

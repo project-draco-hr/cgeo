@@ -271,14 +271,14 @@
     if (guids.size() > 0) {
       Log.i(Settings.tag,"Trying to get ratings for " + cids.size() + " caches");
       try {
-        final Map<String,cgRating> ratings=GCVote.getRating(guids,null);
+        final Map<String,GCVoteRating> ratings=GCVote.getRating(guids,null);
         if (MapUtils.isNotEmpty(ratings)) {
-          for (          cgCache oneCache : caches.cacheList) {
-            if (ratings.containsKey(oneCache.getGuid())) {
-              cgRating thisRating=ratings.get(oneCache.getGuid());
-              oneCache.setRating(thisRating.rating);
-              oneCache.setVotes(thisRating.votes);
-              oneCache.setMyVote(thisRating.myVote);
+          for (          cgCache cache : caches.cacheList) {
+            if (ratings.containsKey(cache.getGuid())) {
+              GCVoteRating rating=ratings.get(cache.getGuid());
+              cache.setRating(rating.getRating());
+              cache.setVotes(rating.getVotes());
+              cache.setMyVote(rating.getMyVote());
             }
           }
         }

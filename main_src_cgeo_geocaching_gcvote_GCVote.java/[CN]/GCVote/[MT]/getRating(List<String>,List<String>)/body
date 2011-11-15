@@ -2,7 +2,7 @@
   if (guids == null && geocodes == null) {
     return null;
   }
-  final Map<String,cgRating> ratings=new HashMap<String,cgRating>();
+  final Map<String,GCVoteRating> ratings=new HashMap<String,GCVoteRating>();
   try {
     final Parameters params=new Parameters();
     if (Settings.isLogin()) {
@@ -18,22 +18,18 @@
       params.put("waypoints",StringUtils.join(geocodes.toArray(),','));
     }
     params.put("version","cgeo");
-    final String votes=cgBase.getResponseData(cgBase.request("http://gcvote.com/getVotes.php",params,false,false,false));
-    if (votes == null) {
+    final String page=cgBase.getResponseData(cgBase.request("http://gcvote.com/getVotes.php",params,false,false,false));
+    if (page == null) {
       return null;
     }
     String voteData=null;
-    final Matcher matcherVoteElement=patternVoteElement.matcher(votes);
+    final Matcher matcherVoteElement=patternVoteElement.matcher(page);
     while (matcherVoteElement.find()) {
-      if (matcherVoteElement.groupCount() > 0) {
-        voteData=matcherVoteElement.group(1);
-      }
+      voteData=matcherVoteElement.group(1);
       if (voteData == null) {
         continue;
       }
       String guid=null;
-      cgRating rating=new cgRating();
-      boolean loggedIn=false;
       try {
         final Matcher matcherGuid=patternGuid.matcher(voteData);
         if (matcherGuid.find()) {
@@ -45,8 +41,12 @@
  catch (      Exception e) {
         Log.w(Settings.tag,"cgBase.getRating: Failed to parse guid");
       }
+      if (guid == null) {
+        continue;
+      }
+      boolean loggedIn=false;
       try {
-        final Matcher matcherLoggedIn=patternLogIn.matcher(votes);
+        final Matcher matcherLoggedIn=patternLogIn.matcher(page);
         if (matcherLoggedIn.find()) {
           if (matcherLoggedIn.groupCount() > 0) {
             if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
@@ -58,35 +58,38 @@
  catch (      Exception e) {
         Log.w(Settings.tag,"cgBase.getRating: Failed to parse loggedIn");
       }
+      float rating=0;
       try {
         final Matcher matcherRating=patternRating.matcher(voteData);
         if (matcherRating.find()) {
-          if (matcherRating.groupCount() > 0) {
-            rating.rating=Float.parseFloat(matcherRating.group(1));
-          }
+          rating=Float.parseFloat(matcherRating.group(1));
         }
       }
  catch (      Exception e) {
         Log.w(Settings.tag,"cgBase.getRating: Failed to parse rating");
       }
+      if (rating <= 0) {
+        continue;
+      }
+      int votes=-1;
       try {
         final Matcher matcherVotes=patternVotes.matcher(voteData);
         if (matcherVotes.find()) {
-          if (matcherVotes.groupCount() > 0) {
-            rating.votes=Integer.parseInt(matcherVotes.group(1));
-          }
+          votes=Integer.parseInt(matcherVotes.group(1));
         }
       }
  catch (      Exception e) {
         Log.w(Settings.tag,"cgBase.getRating: Failed to parse vote count");
       }
+      if (votes < 0) {
+        continue;
+      }
+      Float myVote=null;
       if (loggedIn) {
         try {
           final Matcher matcherVote=patternVote.matcher(voteData);
           if (matcherVote.find()) {
-            if (matcherVote.groupCount() > 0) {
-              rating.myVote=Float.parseFloat(matcherVote.group(1));
-            }
+            myVote=Float.parseFloat(matcherVote.group(1));
           }
         }
  catch (        Exception e) {
@@ -94,7 +97,8 @@
         }
       }
       if (StringUtils.isNotBlank(guid)) {
-        ratings.put(guid,rating);
+        GCVoteRating gcvoteRating=new GCVoteRating(rating,votes,myVote);
+        ratings.put(guid,gcvoteRating);
       }
     }
   }

@@ -12,9 +12,9 @@
  else {
     return null;
   }
-  final Map<String,cgRating> ratings=getRating(guids,geocodes);
+  final Map<String,GCVoteRating> ratings=getRating(guids,geocodes);
   if (ratings != null) {
-    for (    Entry<String,cgRating> entry : ratings.entrySet()) {
+    for (    Entry<String,GCVoteRating> entry : ratings.entrySet()) {
       return entry.getValue();
     }
   }

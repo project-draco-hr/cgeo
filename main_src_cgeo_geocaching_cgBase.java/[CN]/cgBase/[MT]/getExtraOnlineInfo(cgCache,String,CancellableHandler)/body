@@ -18,11 +18,11 @@
       return;
     }
     sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_gcvote);
-    final cgRating rating=GCVote.getRating(cache.getGuid(),cache.getGeocode());
+    final GCVoteRating rating=GCVote.getRating(cache.getGuid(),cache.getGeocode());
     if (rating != null) {
-      cache.setRating(rating.rating);
-      cache.setVotes(rating.votes);
-      cache.setMyVote(rating.myVote);
+      cache.setRating(rating.getRating());
+      cache.setVotes(rating.getVotes());
+      cache.setMyVote(rating.getMyVote());
     }
   }
 }
