@@ -13,9 +13,7 @@
     typeSelected=log.type;
     date.setTime(new Date(log.date));
     text=log.log;
-    if (typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
-      postButton.setText(res.getString(R.string.log_post_no_rate));
-    }
+    updatePostButtonText();
   }
  else   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
     insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),base,false),false);

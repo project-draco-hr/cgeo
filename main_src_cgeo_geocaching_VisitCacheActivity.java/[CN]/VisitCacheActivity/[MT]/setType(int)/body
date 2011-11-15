@@ -17,15 +17,5 @@
  else {
     tweetBox.setVisibility(View.GONE);
   }
-  if (type == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
-    if (rating == 0) {
-      postButton.setText(res.getString(R.string.log_post_no_rate));
-    }
- else {
-      postButton.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating)+ "*");
-    }
-  }
- else {
-    postButton.setText(res.getString(R.string.log_post));
-  }
+  updatePostButtonText();
 }
