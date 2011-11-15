@@ -9,5 +9,8 @@
     search.addGeocode(realGeocode);
     return search;
   }
+  if (geocode == null && guid != null) {
+    return GCConnector.getInstance().searchByGeocode(this,geocode,guid,app,search,reason,handler);
+  }
   return ConnectorFactory.getConnector(geocode).searchByGeocode(this,geocode,guid,app,search,reason,handler);
 }
