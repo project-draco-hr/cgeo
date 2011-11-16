@@ -247,12 +247,13 @@
   }
   Button webAuth=(Button)findViewById(R.id.sendToCgeo_register);
   webAuth.setOnClickListener(new webAuth());
+  SortedMap<Integer,String> mapSources=MapProviderFactory.getMapSources();
   Spinner mapSourceSelector=(Spinner)findViewById(R.id.mapsource);
-  ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.map_sources,android.R.layout.simple_spinner_item);
+  ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_item,mapSources.values().toArray(new String[]{}));
   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
   mapSourceSelector.setAdapter(adapter);
   int mapsource=prefs.getInt("mapsource",0);
-  mapSourceSelector.setSelection(mapsource);
+  mapSourceSelector.setSelection(MapProviderFactory.getSourceOrdinalFromId(mapsource));
   mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
   initMapfileEdittext(false);
   Button selectMapfile=(Button)findViewById(R.id.select_mapfile);
