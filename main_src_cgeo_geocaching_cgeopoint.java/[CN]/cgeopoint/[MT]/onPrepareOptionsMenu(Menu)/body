@@ -3,16 +3,16 @@
   try {
     final Geopoint coords=getDestination();
     if (coords != null) {
-      menu.findItem(0).setVisible(true);
-      menu.findItem(2).setVisible(true);
-      menu.findItem(5).setVisible(true);
+      menu.findItem(MENU_NAVIGATE).setVisible(true);
+      menu.findItem(MENU_COMPASS).setVisible(true);
+      menu.findItem(MENU_CACHES_AROUND).setVisible(true);
     }
  else {
-      menu.findItem(0).setVisible(false);
-      menu.findItem(2).setVisible(false);
-      menu.findItem(5).setVisible(false);
+      menu.findItem(MENU_NAVIGATE).setVisible(false);
+      menu.findItem(MENU_COMPASS).setVisible(false);
+      menu.findItem(MENU_CACHES_AROUND).setVisible(false);
     }
-    menu.findItem(6).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
+    menu.findItem(MENU_CLEAR_HISTORY).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
   }
  catch (  Exception e) {
   }

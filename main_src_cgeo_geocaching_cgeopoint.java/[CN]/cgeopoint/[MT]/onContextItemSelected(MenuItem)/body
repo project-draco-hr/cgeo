@@ -1,13 +1,27 @@
 {
+  AdapterView.AdapterContextMenuInfo menuInfo=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+  final int position=(null != menuInfo) ? menuInfo.position : contextMenuItemPosition;
+  Object destination=historyListView.getItemAtPosition(position);
 switch (item.getItemId()) {
+case CONTEXT_MENU_NAVIGATE:
+    contextMenuItemPosition=position;
+  break;
 case CONTEXT_MENU_DELETE_WAYPOINT:
-    AdapterView.AdapterContextMenuInfo menuInfo=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-  Object destination=historyListView.getItemAtPosition(menuInfo.position);
 if (destination instanceof cgDestination) {
   removeFromHistory((cgDestination)destination);
 }
 return true;
-default :
-return super.onContextItemSelected(item);
+case CONTEXT_MENU_EDIT_WAYPOINT:
+if (destination instanceof cgDestination) {
+final Geopoint gp=((cgDestination)destination).getCoords();
+latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
 }
+return true;
+default :
+if (destination instanceof cgDestination) {
+return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,null,null,null,((cgDestination)destination).getCoords());
+}
+}
+return super.onContextItemSelected(item);
 }

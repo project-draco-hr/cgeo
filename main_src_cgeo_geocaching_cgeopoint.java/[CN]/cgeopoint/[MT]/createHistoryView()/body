@@ -15,8 +15,12 @@
     }
   }
 );
+  final Activity thisActivity=this;
   historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener(){
     @Override public void onCreateContextMenu(    ContextMenu menu,    View v,    ContextMenuInfo menuInfo){
+      SubMenu subMenu=menu.addSubMenu(Menu.NONE,CONTEXT_MENU_NAVIGATE,Menu.NONE,res.getString(R.string.cache_menu_navigate));
+      NavigationAppFactory.addMenuItems(subMenu,thisActivity,res);
+      menu.add(Menu.NONE,CONTEXT_MENU_EDIT_WAYPOINT,Menu.NONE,R.string.waypoint_edit);
       menu.add(Menu.NONE,CONTEXT_MENU_DELETE_WAYPOINT,Menu.NONE,R.string.waypoint_delete);
     }
   }

@@ -4,17 +4,17 @@
   if (coords != null) {
     addToHistory(coords);
   }
-  if (menuItem == 2) {
+switch (menuItem) {
+case MENU_COMPASS:
     navigateTo();
-    return true;
-  }
- else   if (menuItem == 5) {
-    cachesAround();
-    return true;
-  }
- else   if (menuItem == 6) {
-    clearHistory();
-    return true;
-  }
-  return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,null,null,null,coords);
+  return true;
+case MENU_CACHES_AROUND:
+cachesAround();
+return true;
+case MENU_CLEAR_HISTORY:
+clearHistory();
+return true;
+default :
+return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,null,null,null,coords);
+}
 }
