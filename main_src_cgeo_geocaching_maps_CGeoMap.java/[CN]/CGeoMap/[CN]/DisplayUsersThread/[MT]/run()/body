@@ -15,7 +15,7 @@
       if (userOne.getCoords() == null) {
         continue;
       }
-      item=Settings.getMapFactory().getOtherCachersOverlayItemBase(activity,userOne);
+      item=mapProvider.getOtherCachersOverlayItemBase(activity,userOne);
       items.add(item);
       counter++;
       if ((counter % 10) == 0) {

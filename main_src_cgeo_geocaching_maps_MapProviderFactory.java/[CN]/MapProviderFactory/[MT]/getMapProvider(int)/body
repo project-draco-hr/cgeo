@@ -1,0 +1,8 @@
+{
+  for (  MapProvider mp : getInstance().mapProviders) {
+    if (mp.IsMySource(sourceId)) {
+      return mp;
+    }
+  }
+  return getInstance().mapProviders[0];
+}

@@ -1,0 +1,7 @@
+{
+  mapProviders=new MapProvider[]{new GoogleMapProvider(GOOGLEMAP_BASEID),new MapsforgeMapProvider(MFMAP_BASEID)};
+  mapSources=new TreeMap<Integer,String>();
+  for (  MapProvider mp : mapProviders) {
+    mapSources.putAll(mp.getMapSources());
+  }
+}

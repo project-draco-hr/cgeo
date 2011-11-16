@@ -21,9 +21,9 @@
         float[] result=new float[1];
         Location.distanceBetween(itemCoord.getCoords().getLatitude(),itemCoord.getCoords().getLongitude(),itemCoord.getCoords().getLatitude(),itemCoord.getCoords().getLongitude() + 1,result);
         final float longitudeLineDistance=result[0];
-        GeoPointImpl itemGeo=mapFactory.getGeoPointBase(itemCoord.getCoords());
+        GeoPointImpl itemGeo=mapProvider.getGeoPointBase(itemCoord.getCoords());
         final Geopoint leftCoords=new Geopoint(itemCoord.getCoords().getLatitude(),itemCoord.getCoords().getLongitude() - 161 / longitudeLineDistance);
-        GeoPointImpl leftGeo=mapFactory.getGeoPointBase(leftCoords);
+        GeoPointImpl leftGeo=mapProvider.getGeoPointBase(leftCoords);
         projection.toPixels(itemGeo,center);
         projection.toPixels(leftGeo,left);
         int radius=center.x - left.x;

@@ -99,13 +99,13 @@ cgeocaches.startActivityMap(activity,search);
 return true;
 }
 default :
-if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
+if (MapProviderFactory.IsValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
 item.setChecked(true);
-mapSourceEnum mapSource=getMapSourceFromMenuId(id);
+int mapSource=MapProviderFactory.getMapSourceFromMenuId(id);
 boolean mapRestartRequired=switchMapSource(mapSource);
 if (mapRestartRequired) {
 activity.finish();
-Intent mapIntent=new Intent(activity,Settings.getMapFactory().getMapClass());
+Intent mapIntent=new Intent(activity,Settings.getMapProvider().getMapClass());
 mapIntent.putExtra(EXTRAS_DETAIL,fromDetailIntent);
 mapIntent.putExtra(EXTRAS_SEARCH,searchIntent);
 mapIntent.putExtra(EXTRAS_GEOCODE,geocodeIntent);
