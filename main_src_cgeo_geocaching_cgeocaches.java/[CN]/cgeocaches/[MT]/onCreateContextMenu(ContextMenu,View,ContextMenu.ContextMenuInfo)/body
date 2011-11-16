@@ -45,7 +45,7 @@
     }
   }
  else {
-    if (adapterInfo.position >= adapter.getCount()) {
+    if (adapterInfo == null || adapterInfo.position >= adapter.getCount()) {
       return;
     }
     final cgCache cache=adapter.getItem(adapterInfo.position);
