@@ -8,7 +8,7 @@
  else   if (id > MENU_OPEN_LIST) {
     int listId=id - MENU_OPEN_LIST;
     Settings.saveLastList(listId);
-    cgeocaches.startActivityOffline(context);
+    cgeocaches.startActivityOffline(this);
     return true;
   }
  else   if (id > 0) {

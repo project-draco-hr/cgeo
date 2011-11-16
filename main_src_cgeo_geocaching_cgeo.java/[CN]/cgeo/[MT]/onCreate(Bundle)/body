@@ -1,6 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  context=this;
   app.setAction(null);
   app.cleanGeo();
   app.cleanDir();
@@ -25,7 +24,7 @@
         helper.setClickable(true);
         helper.setOnClickListener(new View.OnClickListener(){
           public void onClick(          View view){
-            ActivityMixin.goManual(context,"c:geo-intro");
+            ActivityMixin.goManual(cgeo.this,"c:geo-intro");
             view.setVisibility(View.GONE);
           }
         }
