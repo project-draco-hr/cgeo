@@ -11,7 +11,7 @@
         params.put("userName",login.left,"password",login.right);
       }
     }
-    if (CollectionUtils.isNotEmpty(guids)) {
+    if (guids != null && !guids.isEmpty()) {
       params.put("cacheIds",StringUtils.join(guids.toArray(),','));
     }
  else {
