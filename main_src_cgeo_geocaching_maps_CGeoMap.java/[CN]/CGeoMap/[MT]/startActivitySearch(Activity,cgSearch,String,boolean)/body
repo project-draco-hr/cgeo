@@ -1,5 +1,5 @@
 {
-  Intent mapIntent=new Intent(fromActivity,Settings.getMapProvider().getMapClass());
+  final Intent mapIntent=newIntent(fromActivity);
   mapIntent.putExtra(EXTRAS_DETAIL,detail);
   mapIntent.putExtra(EXTRAS_SEARCH,search);
   if (StringUtils.isNotBlank(title)) {

@@ -1,5 +1,5 @@
 {
-  Intent mapIntent=new Intent(context,Settings.getMapProvider().getMapClass());
+  final Intent mapIntent=newIntent(fromActivity);
   mapIntent.putExtra(EXTRAS_DETAIL,false);
   mapIntent.putExtra(EXTRAS_LATITUDE,coords.getLatitude());
   mapIntent.putExtra(EXTRAS_LONGITUDE,coords.getLongitude());
@@ -9,5 +9,5 @@
   if (StringUtils.isNotBlank(title)) {
     mapIntent.putExtra(EXTRAS_MAP_TITLE,title);
   }
-  context.startActivity(mapIntent);
+  fromActivity.startActivity(mapIntent);
 }
