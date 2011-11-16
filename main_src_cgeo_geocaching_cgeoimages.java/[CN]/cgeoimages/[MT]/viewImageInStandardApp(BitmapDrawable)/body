@@ -1,5 +1,5 @@
 {
-  final File file=LocalStorage.getStorageFile(null,"temp.jpg",false);
+  final File file=LocalStorage.getStorageFile(null,"temp.jpg",false,true);
   try {
     final FileOutputStream fos=new FileOutputStream(file);
     image.getBitmap().compress(CompressFormat.JPEG,100,fos);

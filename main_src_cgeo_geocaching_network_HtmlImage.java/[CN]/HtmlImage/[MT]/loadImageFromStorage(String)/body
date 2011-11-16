@@ -1,6 +1,6 @@
 {
   try {
-    final File file=LocalStorage.getStorageFile(geocode,url,true);
+    final File file=LocalStorage.getStorageFile(geocode,url,true,false);
     final Bitmap image=loadCachedImage(file);
     if (image != null) {
       return image;

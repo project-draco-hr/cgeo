@@ -20,7 +20,7 @@
         Log.e(Settings.tag,"HtmlImage.getDrawable (downloading from web)",e);
       }
     }
-    final File file=LocalStorage.getStorageFile(geocode,url,true);
+    final File file=LocalStorage.getStorageFile(geocode,url,true,true);
     LocalStorage.saveEntityToFile(bufferedEntity,file);
   }
   if (onlySave) {
