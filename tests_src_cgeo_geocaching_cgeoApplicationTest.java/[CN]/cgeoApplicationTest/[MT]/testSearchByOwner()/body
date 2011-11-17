@@ -1,0 +1,6 @@
+{
+  final cgSearch search=base.searchByOwner(null,"blafoo",CacheType.EVENT,0,false);
+  assertNotNull(search);
+  assertEquals(1,search.getGeocodes().size());
+  assertTrue(search.getGeocodes().contains("GC36K5E"));
+}
