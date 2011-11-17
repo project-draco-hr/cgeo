@@ -19,7 +19,7 @@
           if (tbText == null) {
             return false;
           }
-          tbText.setText(res.getString(logType.resourceId));
+          tbText.setText(res.getString(logType.resourceId) + " ???");
         }
         for (        cgTrackableLog tb : trackables) {
           tb.action=logType;
@@ -48,7 +48,7 @@
           if (tb.id == group) {
             tbChanged=true;
             tb.action=logType;
-            tbText.setText(res.getString(logType.resourceId));
+            tbText.setText(res.getString(logType.resourceId) + " ???");
             Log.i(Settings.tag,"Trackable " + tb.trackCode + " ("+ tb.name+ ") has new action: #"+ id);
           }
         }
