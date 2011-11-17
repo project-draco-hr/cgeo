@@ -1,7 +1,4 @@
 {
-  RelativeLayout itemLayout;
-  TextView itemName;
-  TextView itemValue;
   if (search == null) {
     return;
   }
@@ -29,54 +26,29 @@
     inflater=getLayoutInflater();
     ScrollView scroll=(ScrollView)findViewById(R.id.details_list_box);
     scroll.setVisibility(View.VISIBLE);
-    LinearLayout detailsList=(LinearLayout)findViewById(R.id.details_list);
+    detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
     ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getCacheType())),null,null,null);
-    itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-    itemName=(TextView)itemLayout.findViewById(R.id.name);
-    itemValue=(TextView)itemLayout.findViewById(R.id.value);
-    itemName.setText(res.getString(R.string.cache_name));
     Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
     if (cache.isDisabled() || cache.isArchived()) {
       span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
-    itemValue.setText(span);
-    detailsList.addView(itemLayout);
-    itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-    itemName=(TextView)itemLayout.findViewById(R.id.name);
-    itemValue=(TextView)itemLayout.findViewById(R.id.value);
-    itemName.setText(res.getString(R.string.cache_type));
+    addCacheDetail(R.string.cache_name,span);
+    String cacheType;
     if (cgBase.cacheTypesInv.containsKey(cache.getCacheType())) {
-      itemValue.setText(cgBase.cacheTypesInv.get(cache.getCacheType()));
+      cacheType=cgBase.cacheTypesInv.get(cache.getCacheType());
     }
  else {
-      itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY));
+      cacheType=cgBase.cacheTypesInv.get(CacheType.MYSTERY);
     }
-    detailsList.addView(itemLayout);
+    addCacheDetail(R.string.cache_type,cacheType);
     if (null != cache.getSize() && cache.showSize()) {
-      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-      itemName=(TextView)itemLayout.findViewById(R.id.name);
-      itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      itemName.setText(res.getString(R.string.cache_size));
-      itemValue.setText(res.getString(cache.getSize().stringId));
-      detailsList.addView(itemLayout);
+      addCacheDetail(R.string.cache_size,res.getString(cache.getSize().stringId));
     }
-    itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-    itemName=(TextView)itemLayout.findViewById(R.id.name);
-    itemValue=(TextView)itemLayout.findViewById(R.id.value);
-    itemName.setText(res.getString(R.string.cache_geocode));
-    itemValue.setText(cache.getGeocode().toUpperCase());
-    detailsList.addView(itemLayout);
+    addCacheDetail(R.string.cache_geocode,cache.getGeocode().toUpperCase());
     if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled()|| cache.isMembers()|| cache.isFound()) {
-      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-      itemName=(TextView)itemLayout.findViewById(R.id.name);
-      itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      itemName.setText(res.getString(R.string.cache_status));
-      StringBuilder state=new StringBuilder();
+      final StringBuilder state=new StringBuilder();
       if (cache.isLogOffline()) {
-        if (state.length() > 0) {
-          state.append(", ");
-        }
         state.append(res.getString(R.string.cache_status_offline_log));
       }
       if (cache.isFound()) {
@@ -103,30 +75,17 @@
         }
         state.append(res.getString(R.string.cache_status_premium));
       }
-      itemValue.setText(state.toString());
-      detailsList.addView(itemLayout);
-      state=null;
+      addCacheDetail(R.string.cache_status,state.toString());
     }
-    itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-    itemName=(TextView)itemLayout.findViewById(R.id.name);
-    itemValue=(TextView)itemLayout.findViewById(R.id.value);
-    itemName.setText(res.getString(R.string.cache_distance));
-    if (cache.getDistance() != null) {
-      itemValue.setText("~" + cgBase.getHumanDistance(cache.getDistance()));
-    }
- else {
-      itemValue.setText("--");
-    }
-    detailsList.addView(itemLayout);
-    cacheDistance=itemValue;
+    cacheDistance=addCacheDetail(R.string.cache_distance,cache.getDistance() != null ? "~" + cgBase.getHumanDistance(cache.getDistance()) : "--");
     if (cache.getDifficulty() != null && cache.getDifficulty() > 0) {
-      addStarRating(detailsList,res.getString(R.string.cache_difficulty),cache.getDifficulty());
+      addStarRating(R.string.cache_difficulty,cache.getDifficulty());
     }
     if (cache.getTerrain() != null && cache.getTerrain() > 0) {
-      addStarRating(detailsList,res.getString(R.string.cache_terrain),cache.getTerrain());
+      addStarRating(R.string.cache_terrain,cache.getTerrain());
     }
     if (cache.getRating() != null && cache.getRating() > 0) {
-      itemLayout=addStarRating(detailsList,res.getString(R.string.cache_rating),cache.getRating());
+      final RelativeLayout itemLayout=addStarRating(R.string.cache_rating,cache.getRating());
       if (cache.getVotes() != null) {
         final TextView itemAddition=(TextView)itemLayout.findViewById(R.id.addition);
         itemAddition.setText("(" + cache.getVotes() + ")");
@@ -134,55 +93,26 @@
       }
     }
     if (cache.getFavouriteCnt() != null) {
-      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-      itemName=(TextView)itemLayout.findViewById(R.id.name);
-      itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      itemName.setText(res.getString(R.string.cache_favourite));
-      itemValue.setText(String.format("%d",cache.getFavouriteCnt()) + "??");
-      detailsList.addView(itemLayout);
+      addCacheDetail(R.string.cache_favourite,String.format("%d",cache.getFavouriteCnt()) + "??");
     }
     if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
-      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-      itemName=(TextView)itemLayout.findViewById(R.id.name);
-      itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      itemName.setText(res.getString(R.string.cache_owner));
+      TextView ownerView=addCacheDetail(R.string.cache_owner,"");
       if (StringUtils.isNotBlank(cache.getOwner())) {
-        itemValue.setText(Html.fromHtml(cache.getOwner()),TextView.BufferType.SPANNABLE);
+        ownerView.setText(Html.fromHtml(cache.getOwner()),TextView.BufferType.SPANNABLE);
       }
  else       if (StringUtils.isNotBlank(cache.getOwnerReal())) {
-        itemValue.setText(Html.fromHtml(cache.getOwnerReal()),TextView.BufferType.SPANNABLE);
+        ownerView.setText(Html.fromHtml(cache.getOwnerReal()),TextView.BufferType.SPANNABLE);
       }
-      itemValue.setOnClickListener(new userActions());
-      detailsList.addView(itemLayout);
+      ownerView.setOnClickListener(new userActions());
     }
     if (cache.getHidden() != null && cache.getHidden().getTime() > 0) {
-      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-      itemName=(TextView)itemLayout.findViewById(R.id.name);
-      itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      if (cache.isEventCache()) {
-        itemName.setText(res.getString(R.string.cache_event));
-      }
- else {
-        itemName.setText(res.getString(R.string.cache_hidden));
-      }
-      itemValue.setText(base.formatFullDate(cache.getHidden().getTime()));
-      detailsList.addView(itemLayout);
+      addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,base.formatFullDate(cache.getHidden().getTime()));
     }
     if (StringUtils.isNotBlank(cache.getLocation())) {
-      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-      itemName=(TextView)itemLayout.findViewById(R.id.name);
-      itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      itemName.setText(res.getString(R.string.cache_location));
-      itemValue.setText(cache.getLocation());
-      detailsList.addView(itemLayout);
+      addCacheDetail(R.string.cache_location,cache.getLocation());
     }
     if (cache.getCoords() != null) {
-      itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
-      itemName=(TextView)itemLayout.findViewById(R.id.name);
-      itemValue=(TextView)itemLayout.findViewById(R.id.value);
-      itemName.setText(res.getString(R.string.cache_coordinates));
-      itemValue.setText(cache.getLatitude() + " | " + cache.getLongitude());
-      detailsList.addView(itemLayout);
+      addCacheDetail(R.string.cache_coordinates,cache.getLatitude() + " | " + cache.getLongitude());
     }
     if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
       final LinearLayout attribBox=(LinearLayout)findViewById(R.id.attributes_innerbox);
