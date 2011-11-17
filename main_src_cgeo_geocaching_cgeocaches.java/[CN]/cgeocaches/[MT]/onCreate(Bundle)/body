@@ -57,7 +57,7 @@ thread.start();
 break;
 case COORDINATE:
 action="planning";
-title=coords.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE);
+title=coords.toString();
 setTitle(title);
 showProgress(true);
 setLoadingCaches();
@@ -83,7 +83,7 @@ showProgress(true);
 setLoadingCaches();
 }
  else {
-title=coords.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE);
+title=coords.toString();
 setTitle(title);
 showProgress(true);
 setLoadingCaches();

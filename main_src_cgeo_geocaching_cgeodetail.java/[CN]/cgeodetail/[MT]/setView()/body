@@ -112,7 +112,7 @@
       addCacheDetail(R.string.cache_location,cache.getLocation());
     }
     if (cache.getCoords() != null) {
-      addCacheDetail(R.string.cache_coordinates,cache.getLatitude() + " | " + cache.getLongitude());
+      addCacheDetail(R.string.cache_coordinates,cache.getCoords().toString());
     }
     if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
       final LinearLayout attribBox=(LinearLayout)findViewById(R.id.attributes_innerbox);
@@ -257,7 +257,7 @@
         }
         TextView nameView=(TextView)waypointView.findViewById(R.id.name);
         if (StringUtils.isBlank(wpt.getName())) {
-          nameView.setText(wpt.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE));
+          nameView.setText(wpt.getCoords().toString());
         }
  else {
           nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
