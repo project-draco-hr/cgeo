@@ -112,7 +112,16 @@
       addCacheDetail(R.string.cache_location,cache.getLocation());
     }
     if (cache.getCoords() != null) {
-      addCacheDetail(R.string.cache_coordinates,cache.getCoords().toString());
+      addCacheDetail(R.string.cache_coordinates,cache.getCoords().toString()).setOnClickListener(new View.OnClickListener(){
+        private int position=0;
+        private GeopointFormatter.Format[] availableFormats=new GeopointFormatter.Format[]{GeopointFormatter.Format.LAT_LON_DECMINUTE,GeopointFormatter.Format.LAT_LON_DECSECOND,GeopointFormatter.Format.LAT_LON_DECDEGREE};
+        @Override public void onClick(        View view){
+          position=(position + 1) % availableFormats.length;
+          final TextView valueView=(TextView)view.findViewById(R.id.value);
+          valueView.setText(cache.getCoords().format(availableFormats[position]));
+        }
+      }
+);
     }
     if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
       final LinearLayout attribBox=(LinearLayout)findViewById(R.id.attributes_innerbox);
