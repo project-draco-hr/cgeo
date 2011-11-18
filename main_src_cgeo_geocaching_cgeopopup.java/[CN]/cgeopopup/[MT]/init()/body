@@ -142,7 +142,7 @@
       setRating(cache.getRating(),cache.getVotes());
     }
  else {
-      if (cache.supportsGCVote()) {
+      if (Settings.isRatingWanted() && cache.supportsGCVote()) {
         (new Thread(){
           @Override public void run(){
             GCVoteRating rating=GCVote.getRating(cache.getGuid(),geocode);
