@@ -108,8 +108,8 @@
     }
   }
   holder.text.setText(cache.getNameSp(),TextView.BufferType.SPANNABLE);
-  if (gcIconDrawables.containsKey(cache.getCacheType())) {
-    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getCacheType()),null,null,null);
+  if (gcIconDrawables.containsKey(cache.getType())) {
+    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getType()),null,null,null);
   }
  else {
     holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY),null,null,null);
@@ -249,7 +249,7 @@
       if (cacheInfo.length() > 0) {
         cacheInfo.append(SEPARATOR);
       }
-      cacheInfo.append(res.getString(cache.getSize().stringId));
+      cacheInfo.append(cache.getSize().getL10n());
     }
  else     if (cache.isEventCache() && cache.getHiddenDate() != null) {
       if (cacheInfo.length() > 0) {

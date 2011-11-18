@@ -2,8 +2,8 @@
   init();
   List<String> geocodes=new ArrayList<String>();
   StringBuilder where=new StringBuilder();
-  if (cachetype != null) {
-    where.append(cachetype);
+  if (cacheType != CacheType.ALL) {
+    where.append(cacheType);
     where.append('"');
   }
   if (where.length() > 0) {

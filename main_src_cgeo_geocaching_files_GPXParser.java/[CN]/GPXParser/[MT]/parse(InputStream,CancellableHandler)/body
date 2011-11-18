@@ -176,13 +176,13 @@
 );
     gcCache.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
-        cache.setCacheType(CacheType.getByPattern(validate(body.toLowerCase())));
+        cache.setType(CacheType.getByPattern(validate(body.toLowerCase())));
       }
     }
 );
     gcCache.getChild(nsGC,"container").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
-        cache.setSize(CacheSize.FIND_BY_ID.get(validate(body.toLowerCase())));
+        cache.setSize(CacheSize.getById(validate(body.toLowerCase())));
       }
     }
 );

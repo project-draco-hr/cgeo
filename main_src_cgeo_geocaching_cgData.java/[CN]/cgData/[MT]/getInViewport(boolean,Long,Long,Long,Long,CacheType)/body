@@ -28,9 +28,9 @@
   where.append(String.format((Locale)null,"%.6f",lonMin));
   where.append(" and longitude <= ");
   where.append(String.format((Locale)null,"%.6f",lonMax));
-  if (cachetype != null) {
+  if (cacheType != CacheType.ALL) {
     where.append(" and type = \"");
-    where.append(cachetype.id);
+    where.append(cacheType.id);
     where.append('"');
   }
   if (stored) {

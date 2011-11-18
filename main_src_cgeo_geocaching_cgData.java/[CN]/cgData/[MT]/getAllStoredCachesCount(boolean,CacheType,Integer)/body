@@ -16,7 +16,7 @@
   try {
     String sql="select count(_id) from " + dbTableCaches;
     if (!detailedOnly) {
-      if (cacheType == null) {
+      if (cacheType == CacheType.ALL) {
         sql="select count(_id) from " + dbTableCaches + listSql;
       }
  else {
@@ -24,7 +24,7 @@
       }
     }
  else {
-      if (cacheType == null) {
+      if (cacheType == CacheType.ALL) {
         sql="select count(_id) from " + dbTableCaches + " where detailed = 1"+ listSqlW;
       }
  else {

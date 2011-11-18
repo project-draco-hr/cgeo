@@ -78,9 +78,5 @@
   myLocSwitch.setOutAnimation(activity,android.R.anim.fade_out);
   myLocSwitch.setOnClickListener(new MyLocationListener());
   switchMyLocationButton();
-  if (Settings.getCacheType() != null) {
-    String cacheType=cgBase.cacheTypesInv.get(Settings.getCacheType());
-    ((TextView)activity.findViewById(R.id.filter_text)).setText(cacheType);
-    activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
-  }
+  prepareFilterBar();
 }

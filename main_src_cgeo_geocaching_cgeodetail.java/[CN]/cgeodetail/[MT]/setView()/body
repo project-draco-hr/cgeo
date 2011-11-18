@@ -28,22 +28,15 @@
     scroll.setVisibility(View.VISIBLE);
     detailsList=(LinearLayout)findViewById(R.id.details_list);
     detailsList.removeAllViews();
-    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getCacheType())),null,null,null);
+    ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())),null,null,null);
     Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
     if (cache.isDisabled() || cache.isArchived()) {
       span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
     addCacheDetail(R.string.cache_name,span);
-    String cacheType;
-    if (cgBase.cacheTypesInv.containsKey(cache.getCacheType())) {
-      cacheType=cgBase.cacheTypesInv.get(cache.getCacheType());
-    }
- else {
-      cacheType=cgBase.cacheTypesInv.get(CacheType.MYSTERY);
-    }
-    addCacheDetail(R.string.cache_type,cacheType);
+    addCacheDetail(R.string.cache_type,cache.getType().getL10n());
     if (null != cache.getSize() && cache.showSize()) {
-      addCacheDetail(R.string.cache_size,res.getString(cache.getSize().stringId));
+      addCacheDetail(R.string.cache_size,cache.getSize().getL10n());
     }
     addCacheDetail(R.string.cache_geocode,cache.getGeocode().toUpperCase());
     if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled()|| cache.isMembers()|| cache.isFound()) {

@@ -3,7 +3,7 @@
     search=base.searchByOffline(coords,Settings.getCacheType(),listId);
   }
  else {
-    search=base.searchByOffline(null,null,cgList.STANDARD_LIST_ID);
+    search=base.searchByOffline(null,Settings.getCacheType(),cgList.STANDARD_LIST_ID);
   }
   handler.sendMessage(new Message());
 }

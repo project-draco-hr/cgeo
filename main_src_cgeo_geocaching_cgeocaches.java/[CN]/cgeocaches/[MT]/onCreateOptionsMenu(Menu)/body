@@ -1,7 +1,7 @@
 {
   SubMenu subMenuFilter=menu.addSubMenu(0,SUBMENU_FILTER,0,res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
   subMenuFilter.setHeaderTitle(res.getString(R.string.caches_filter_title));
-  if (Settings.getCacheType() == null) {
+  if (Settings.getCacheType() == CacheType.ALL) {
     subMenuFilter.add(0,SUBMENU_FILTER_TYPE,0,res.getString(R.string.caches_filter_type));
   }
   subMenuFilter.add(0,SUBMENU_FILTER_SIZE,0,res.getString(R.string.caches_filter_size));
