@@ -287,18 +287,41 @@
     Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
     addWaypoint.setClickable(true);
     addWaypoint.setOnClickListener(new addWaypoint());
-    if (StringUtils.isNotBlank(cache.getHint())) {
+    if (StringUtils.isNotBlank(cache.getHint()) || CollectionUtils.isNotEmpty(cache.getSpoilers())) {
       ((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
+    }
+ else {
+      ((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.GONE);
+    }
+    if (StringUtils.isNotBlank(cache.getHint())) {
       TextView hintView=((TextView)findViewById(R.id.hint));
       hintView.setText(CryptUtils.rot13(cache.getHint().trim()));
+      hintView.setVisibility(View.VISIBLE);
       hintView.setClickable(true);
       hintView.setOnClickListener(new codeHint());
     }
  else {
-      ((LinearLayout)findViewById(R.id.hint_box)).setVisibility(View.GONE);
       TextView hintView=((TextView)findViewById(R.id.hint));
+      hintView.setVisibility(View.GONE);
       hintView.setClickable(false);
       hintView.setOnClickListener(null);
+    }
+    if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+      TextView spoilerlinkView=((TextView)findViewById(R.id.hint_spoilerlink));
+      spoilerlinkView.setVisibility(View.VISIBLE);
+      spoilerlinkView.setClickable(true);
+      spoilerlinkView.setOnClickListener(new View.OnClickListener(){
+        @Override public void onClick(        View arg0){
+          showSpoilers();
+        }
+      }
+);
+    }
+ else {
+      TextView spoilerlinkView=((TextView)findViewById(R.id.hint_spoilerlink));
+      spoilerlinkView.setVisibility(View.GONE);
+      spoilerlinkView.setClickable(true);
+      spoilerlinkView.setOnClickListener(null);
     }
     if (geo != null && geo.coordsNow != null && cache != null && cache.getCoords() != null) {
       cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
