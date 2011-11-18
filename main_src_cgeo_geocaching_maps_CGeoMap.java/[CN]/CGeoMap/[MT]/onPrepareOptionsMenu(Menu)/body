@@ -31,9 +31,7 @@
       item.setTitle(res.getString(R.string.map_circles_show));
     }
     item=menu.findItem(MENU_AS_LIST);
-    item.setVisible(live);
-    item.setEnabled(CollectionUtils.isNotEmpty(caches));
-    menu.findItem(MENU_NAVIGATE).setEnabled(cachesCnt <= 1);
+    item.setEnabled(live && CollectionUtils.isNotEmpty(caches));
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgeomap.onPrepareOptionsMenu: " + e.toString());
