@@ -32,9 +32,8 @@
   if (cache.getOwnerReal() != null && username != null && cache.getOwnerReal().equalsIgnoreCase(username)) {
     cache.setOwn(true);
   }
-  int pos=-1;
   String tableInside=page;
-  pos=tableInside.indexOf("id=\"cacheDetails\"");
+  int pos=tableInside.indexOf("id=\"cacheDetails\"");
   if (pos == -1) {
     Log.e(Settings.tag,"cgeoBase.parseCache: ID \"cacheDetails\" not found on page");
     return null;
@@ -88,17 +87,12 @@
     }
   }
   cache.setLocation(BaseUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,cache.getLocation()));
-  try {
-    final Matcher matcherHint=GCConstants.PATTERN_HINT.matcher(page);
-    if (matcherHint.find() && matcherHint.group(1) != null) {
-      String hint=Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(1)).replaceAll("\n");
-      if (hint != null) {
-        cache.setHint(hint.replaceAll(Pattern.quote("</p>"),"").trim());
-      }
+  String result=BaseUtils.getMatch(page,GCConstants.PATTERN_HINT,false,null);
+  if (result != null) {
+    String hint=GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
+    if (hint != null) {
+      cache.setHint(hint.replaceAll(GCConstants.PATTERN_PARAGRAPH,"").trim());
     }
-  }
- catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hint");
   }
   checkFields(cache);
   cache.setPersonalNote(BaseUtils.getMatch(page,GCConstants.PATTERN_PERSONALNOTE,true,cache.getPersonalNote()));
@@ -210,10 +204,6 @@
       return null;
     }
     sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_waypoints);
-    final Pattern patternWpType=Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg",Pattern.CASE_INSENSITIVE);
-    final Pattern patternWpPrefixOrLookupOrLatlon=Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>",Pattern.CASE_INSENSITIVE);
-    final Pattern patternWpName=Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>",Pattern.CASE_INSENSITIVE);
-    final Pattern patternWpNote=Pattern.compile("colspan=\"6\">(.*)<\\/td>",Pattern.CASE_INSENSITIVE);
     String wpList=page.substring(wpBegin);
     wpEnd=wpList.indexOf("</p>");
     if (wpEnd > -1 && wpEnd <= wpList.length()) {
@@ -232,76 +222,23 @@
       for (int j=1; j < wpItems.length; j++) {
         final cgWaypoint waypoint=new cgWaypoint();
         wp=wpItems[j].split("<td");
-        try {
-          final Matcher matcherWpType=patternWpType.matcher(wp[3]);
-          if (matcherWpType.find() && matcherWpType.groupCount() > 0) {
-            waypoint.setWaypointType(WaypointType.findById(matcherWpType.group(1).trim()));
-          }
+        String resulttype=BaseUtils.getMatch(wp[3],GCConstants.PATTERN_WPTYPE,null);
+        if (null != resulttype) {
+          waypoint.setWaypointType(WaypointType.findById(resulttype));
         }
- catch (        Exception e) {
-          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint type");
-        }
-        try {
-          final Matcher matcherWpPrefix=patternWpPrefixOrLookupOrLatlon.matcher(wp[4]);
-          if (matcherWpPrefix.find() && matcherWpPrefix.groupCount() > 1) {
-            waypoint.setPrefix(matcherWpPrefix.group(2).trim());
-          }
-        }
- catch (        Exception e) {
-          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint prefix");
-        }
-        try {
-          final Matcher matcherWpLookup=patternWpPrefixOrLookupOrLatlon.matcher(wp[5]);
-          if (matcherWpLookup.find() && matcherWpLookup.groupCount() > 1) {
-            waypoint.setLookup(matcherWpLookup.group(2).trim());
-          }
-        }
- catch (        Exception e) {
-          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint lookup");
-        }
-        try {
-          final Matcher matcherWpName=patternWpName.matcher(wp[6]);
-          while (matcherWpName.find()) {
-            if (matcherWpName.groupCount() > 0) {
-              waypoint.setName(matcherWpName.group(1).trim());
-              if (StringUtils.isNotBlank(waypoint.getName())) {
-                waypoint.setName(waypoint.getName().trim());
-              }
-            }
-            if (matcherWpName.find() && matcherWpName.groupCount() > 0) {
-              waypoint.setName(matcherWpName.group(1).trim());
-            }
-          }
-        }
- catch (        Exception e) {
-          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint name");
-        }
-        try {
-          final Matcher matcherWpLatLon=patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
-          if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
-            String latlon=Html.fromHtml(matcherWpLatLon.group(2)).toString().trim();
-            if (!StringUtils.startsWith(latlon,"???")) {
-              waypoint.setLatlon(latlon);
-              waypoint.setCoords(new Geopoint(latlon));
-            }
-          }
-        }
- catch (        Exception e) {
-          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint coordinates");
+        waypoint.setPrefix(BaseUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));
+        waypoint.setPrefix(BaseUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
+        waypoint.setPrefix(BaseUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,waypoint.getName(),true));
+        String latlon=Html.fromHtml(BaseUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();
+        if (!StringUtils.startsWith(latlon,"???")) {
+          waypoint.setLatlon(latlon);
+          waypoint.setCoords(new Geopoint(latlon));
         }
         j++;
         if (wpItems.length > j) {
           wp=wpItems[j].split("<td");
         }
-        try {
-          final Matcher matcherWpNote=patternWpNote.matcher(wp[3]);
-          if (matcherWpNote.find() && matcherWpNote.groupCount() > 0) {
-            waypoint.setNote(matcherWpNote.group(1).trim());
-          }
-        }
- catch (        Exception e) {
-          Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse waypoint note");
-        }
+        waypoint.setNote(BaseUtils.getMatch(wp[3],GCConstants.PATTERN_WPNOTE,waypoint.getNote()));
         if (cache.getWaypoints() == null) {
           cache.setWaypoints(new ArrayList<cgWaypoint>());
         }

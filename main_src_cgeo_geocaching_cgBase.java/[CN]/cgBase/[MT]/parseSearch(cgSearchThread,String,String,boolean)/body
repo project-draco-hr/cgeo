@@ -10,42 +10,15 @@
   String recaptchaText=null;
   String page=pageContent;
   caches.url=url;
-  final Pattern patternCacheType=Pattern.compile("<td class=\"Merge\">[^<]*<a href=\"[^\"]*/seek/cache_details\\.aspx\\?guid=[^\"]+\"[^>]+>[^<]*<img src=\"[^\"]*/images/wpttypes/[^.]+\\.gif\" alt=\"([^\"]+)\" title=\"[^\"]+\"[^>]*>[^<]*</a>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternGuidAndDisabled=Pattern.compile("<img src=\"[^\"]*/images/wpttypes/[^>]*>[^<]*</a></td><td class=\"Merge\">[^<]*<a href=\"[^\"]*/seek/cache_details\\.aspx\\?guid=([a-z0-9\\-]+)\" class=\"lnk([^\"]*)\">([^<]*<span>)?([^<]*)(</span>[^<]*)?</a>[^<]+<br />([^<]*)<span[^>]+>([^<]*)</span>([^<]*<img[^>]+>)?[^<]*<br />[^<]*</td>",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternTbs=Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternTbsInside=Pattern.compile("(<img src=\"[^\"]+\" alt=\"([^\"]+)\" title=\"[^\"]*\" />[^<]*)",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternDirection=Pattern.compile("<img id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxDistanceAndHeading\" title=\"[^\"]*\" src=\"[^\"]*/seek/CacheDir\\.ashx\\?k=([^\"]+)\"[^>]*>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternCode=Pattern.compile("\\|\\W*(GC[a-z0-9]+)[^\\|]*\\|",Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-  final Pattern patternId=Pattern.compile("name=\"CID\"[^v]*value=\"([0-9]+)\"",Pattern.CASE_INSENSITIVE);
-  final Pattern patternFavourite=Pattern.compile("<span id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxFavoritesValue\" title=\"[^\"]*\" class=\"favorite-rank\">([0-9]+)</span>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternTotalCnt=Pattern.compile("<td class=\"PageBuilderWidget\"><span>Total Records[^<]*<b>(\\d+)<\\/b>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternRecaptcha=Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>",Pattern.CASE_INSENSITIVE);
-  final Pattern patternRecaptchaChallenge=Pattern.compile("challenge : '([^']+)'",Pattern.CASE_INSENSITIVE);
   caches.viewstates=getViewstates(page);
   if (showCaptcha) {
-    try {
-      String recaptchaJsParam=null;
-      final Matcher matcherRecaptcha=patternRecaptcha.matcher(page);
-      while (matcherRecaptcha.find()) {
-        if (matcherRecaptcha.groupCount() > 0) {
-          recaptchaJsParam=matcherRecaptcha.group(1);
-        }
+    String recaptchaJsParam=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
+    if (recaptchaJsParam != null) {
+      final Parameters params=new Parameters("k",recaptchaJsParam.trim());
+      final String recaptchaJs=cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge",params,true));
+      if (StringUtils.isNotBlank(recaptchaJs)) {
+        recaptchaChallenge=BaseUtils.getMatch(recaptchaJs,GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE,true,1,recaptchaChallenge,true);
       }
-      if (recaptchaJsParam != null) {
-        final Parameters params=new Parameters("k",recaptchaJsParam.trim());
-        final String recaptchaJs=cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge",params,true));
-        if (StringUtils.isNotBlank(recaptchaJs)) {
-          final Matcher matcherRecaptchaChallenge=patternRecaptchaChallenge.matcher(recaptchaJs);
-          while (matcherRecaptchaChallenge.find()) {
-            if (matcherRecaptchaChallenge.groupCount() > 0) {
-              recaptchaChallenge=matcherRecaptchaChallenge.group(1).trim();
-            }
-          }
-        }
-      }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse recaptcha challenge");
     }
     if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
       thread.setChallenge(recaptchaChallenge);
@@ -77,7 +50,7 @@
       continue;
     }
     try {
-      final Matcher matcherGuidAndDisabled=patternGuidAndDisabled.matcher(row);
+      final Matcher matcherGuidAndDisabled=GCConstants.PATTERN_SEARCH_GUIDANDDISABLED.matcher(row);
       while (matcherGuidAndDisabled.find()) {
         if (matcherGuidAndDisabled.groupCount() > 0) {
           guids.add(matcherGuidAndDisabled.group(1));
@@ -104,98 +77,49 @@
       continue;
     }
     String inventoryPre=null;
-    try {
-      final Matcher matcherCode=patternCode.matcher(row);
-      while (matcherCode.find()) {
-        if (matcherCode.groupCount() > 0) {
-          cache.setGeocode(new String(matcherCode.group(1).toUpperCase().trim()));
-        }
-      }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache code");
-    }
-    try {
-      final Matcher matcherCacheType=patternCacheType.matcher(row);
-      while (matcherCacheType.find()) {
-        if (matcherCacheType.groupCount() > 0) {
-          cache.setCacheType(CacheType.getByPattern(matcherCacheType.group(1)));
-        }
-      }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache type");
-    }
+    cache.setGeocode(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_GEOCODE,true,1,cache.getGeocode(),true).toUpperCase());
+    cache.setCacheType(CacheType.getByPattern(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_TYPE,true,1,null,true)));
     if (Settings.getLoadDirImg()) {
-      try {
-        final Matcher matcherDirection=patternDirection.matcher(row);
-        while (matcherDirection.find()) {
-          if (matcherDirection.groupCount() > 0) {
-            cache.setDirectionImg(URLDecoder.decode(matcherDirection.group(1)));
-          }
-        }
-      }
- catch (      Exception e) {
-        Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache direction image");
-      }
+      cache.setDirectionImg(URLDecoder.decode(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION,true,1,cache.getDirectionImg(),true)));
     }
-    try {
-      final Matcher matcherTbs=patternTbs.matcher(row);
-      while (matcherTbs.find()) {
-        if (matcherTbs.groupCount() > 0) {
-          cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
-          inventoryPre=matcherTbs.group(2);
-        }
+    final Matcher matcherTbs=GCConstants.PATTERN_SEARCH_TRACKABLES.matcher(row);
+    while (matcherTbs.find()) {
+      if (matcherTbs.groupCount() > 0) {
+        cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
+        inventoryPre=matcherTbs.group(2);
       }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory (1)");
     }
     if (StringUtils.isNotBlank(inventoryPre)) {
-      try {
-        final Matcher matcherTbsInside=patternTbsInside.matcher(inventoryPre);
-        while (matcherTbsInside.find()) {
-          if (matcherTbsInside.groupCount() == 2 && matcherTbsInside.group(2) != null) {
-            final String inventoryItem=matcherTbsInside.group(2).toLowerCase();
-            if (inventoryItem.equals("premium member only cache")) {
-              continue;
-            }
+      final Matcher matcherTbsInside=GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE.matcher(inventoryPre);
+      while (matcherTbsInside.find()) {
+        if (matcherTbsInside.groupCount() == 2 && matcherTbsInside.group(2) != null) {
+          final String inventoryItem=matcherTbsInside.group(2).toLowerCase();
+          if (inventoryItem.equals("premium member only cache")) {
+            continue;
+          }
  else {
-              if (cache.getInventoryItems() <= 0) {
-                cache.setInventoryItems(1);
-              }
+            if (cache.getInventoryItems() <= 0) {
+              cache.setInventoryItems(1);
             }
           }
         }
-      }
- catch (      Exception e) {
-        Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache inventory info");
       }
     }
     cache.setMembers(row.contains("/images/small_profile.gif"));
     cache.setFound(row.contains("/images/icons/icon_smile"));
     cache.setOwn(row.contains("/images/silk/star.png"));
-    try {
-      final Matcher matcherId=patternId.matcher(row);
-      while (matcherId.find()) {
-        if (matcherId.groupCount() > 0) {
-          cache.setCacheId(matcherId.group(1));
-          cids.add(cache.getCacheId());
-        }
-      }
-    }
- catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache id");
+    String result=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_ID,null);
+    if (null != result) {
+      cache.setCacheId(result);
+      cids.add(cache.getCacheId());
     }
     try {
-      final Matcher matcherFavourite=patternFavourite.matcher(row);
-      while (matcherFavourite.find()) {
-        if (matcherFavourite.groupCount() > 0) {
-          cache.setFavouriteCnt(Integer.parseInt(matcherFavourite.group(1)));
-        }
+      result=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_FAVORITE,false,1,null,true);
+      if (null != result) {
+        cache.setFavouriteCnt(Integer.parseInt(result));
       }
     }
- catch (    Exception e) {
+ catch (    NumberFormatException e) {
       Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse favourite count");
     }
     if (cache.getNameSp() == null) {
@@ -207,16 +131,12 @@
     caches.cacheList.add(cache);
   }
   try {
-    final Matcher matcherTotalCnt=patternTotalCnt.matcher(page);
-    while (matcherTotalCnt.find()) {
-      if (matcherTotalCnt.groupCount() > 0) {
-        if (matcherTotalCnt.group(1) != null) {
-          caches.totalCnt=Integer.valueOf(matcherTotalCnt.group(1));
-        }
-      }
+    String result=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTOALCOUNT,false,1,null,true);
+    if (null != result) {
+      caches.totalCnt=Integer.parseInt(result);
     }
   }
- catch (  Exception e) {
+ catch (  NumberFormatException e) {
     Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache count");
   }
   if (thread != null && recaptchaChallenge != null) {
@@ -262,7 +182,7 @@
   }
   if (Settings.getLoadDirImg()) {
     for (    cgCache oneCache : caches.cacheList) {
-      if (oneCache.getCoords() == null && oneCache.getDirectionImg() != null) {
+      if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
         cgDirectionImg.getDrawable(oneCache.getGeocode(),oneCache.getDirectionImg());
       }
     }

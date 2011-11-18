@@ -1,5 +1,5 @@
 {
-  final Matcher userTokenMatcher=patternUserToken.matcher(page);
+  final Matcher userTokenMatcher=GCConstants.PATTERN_USERTOKEN2.matcher(page);
   if (!userTokenMatcher.find()) {
     Log.e(Settings.tag,"cgBase.loadLogsFromDetails: unable to extract userToken");
     return;

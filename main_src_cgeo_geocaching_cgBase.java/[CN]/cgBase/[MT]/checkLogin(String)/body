@@ -3,12 +3,10 @@
     Log.e(Settings.tag,"cgeoBase.checkLogin: No page given");
     return false;
   }
-  final Matcher matcherLogged2In=patternLogged2In.matcher(page);
-  if (matcherLogged2In.find()) {
+  if (BaseUtils.matches(page,GCConstants.PATTERN_LOGGEDIN2)) {
     return true;
   }
-  final Matcher matcherLoggedIn=patternLoggedIn.matcher(page);
-  if (matcherLoggedIn.find()) {
+  if (BaseUtils.matches(page,GCConstants.PATTERN_LOGGEDIN)) {
     return true;
   }
   return false;

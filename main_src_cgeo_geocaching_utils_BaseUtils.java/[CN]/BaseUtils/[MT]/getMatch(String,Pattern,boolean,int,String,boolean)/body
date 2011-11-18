@@ -1,0 +1,19 @@
+{
+  String result=null;
+  boolean lastInternal=false;
+  final Matcher matcher=p.matcher(data);
+  if (lastInternal) {
+    while (matcher.find()) {
+      result=matcher.group(group);
+    }
+  }
+ else {
+    if (matcher.find()) {
+      result=matcher.group(group);
+    }
+  }
+  if (null != result) {
+    return trim ? new String(result).trim() : new String(result);
+  }
+  return defaultValue;
+}

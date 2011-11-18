@@ -12,8 +12,7 @@
     Log.e(Settings.tag,"cgeoBase.parseTrackableLog: tbody not found on page");
     return null;
   }
-  final Pattern trackablePattern=Pattern.compile("<tr id=\"ctl00_ContentBody_LogBookPanel1_uxTrackables_repTravelBugs_ctl[0-9]+_row\"[^>]*>" + "[^<]*<td>[^<]*<a href=\"[^\"]+\">([A-Z0-9]+)</a>[^<]*</td>[^<]*<td>([^<]+)</td>[^<]*<td>" + "[^<]*<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$uxTrackables\\$repTravelBugs\\$ctl([0-9]+)\\$ddlAction\"[^>]*>"+ "([^<]*<option value=\"([0-9]+)(_[a-z]+)?\">[^<]+</option>)+"+ "[^<]*</select>[^<]*</td>[^<]*</tr>",Pattern.CASE_INSENSITIVE);
-  final Matcher trackableMatcher=trackablePattern.matcher(page);
+  final Matcher trackableMatcher=GCConstants.PATTERN_TRACKABLE.matcher(page);
   while (trackableMatcher.find()) {
     if (trackableMatcher.groupCount() > 0) {
       final cgTrackableLog trackableLog=new cgTrackableLog();

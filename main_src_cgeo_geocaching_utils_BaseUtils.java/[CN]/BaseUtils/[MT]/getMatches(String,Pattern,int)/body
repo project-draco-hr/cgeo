@@ -1,0 +1,10 @@
+{
+  ArrayList<String> result=new ArrayList<String>();
+  final Matcher matcher=p.matcher(data);
+  while (matcher.find()) {
+    for (int i=0; i < count; i++) {
+      result.add(matcher.group(i));
+    }
+  }
+  return result;
+}

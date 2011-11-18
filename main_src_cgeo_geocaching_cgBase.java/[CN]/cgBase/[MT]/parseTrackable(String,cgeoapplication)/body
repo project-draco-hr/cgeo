@@ -58,10 +58,7 @@
     trackable.setReleased(null);
   }
   try {
-    String distanceString=BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_DISTANCE,false,null);
-    if (distanceString != null) {
-      trackable.setDistance(DistanceParser.parseDistance(distanceString,Settings.isUseMetricUnits()));
-    }
+    trackable.setDistance(DistanceParser.parseDistance(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_DISTANCE,false,null),Settings.isUseMetricUnits()));
   }
  catch (  NumberFormatException e) {
     trackable.setDistance(null);
