@@ -16,7 +16,7 @@
     updatePostButtonText();
   }
  else   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
-    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),base,false),false);
+    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),false),false);
   }
   if (!types.contains(typeSelected)) {
     if (alreadyFound) {
@@ -37,7 +37,7 @@
   }
 );
   final Button dateButton=(Button)findViewById(R.id.date);
-  dateButton.setText(base.formatShortDate(date.getTime().getTime()));
+  dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new DateListener());
   final EditText logView=(EditText)findViewById(R.id.log);
   if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text)) {

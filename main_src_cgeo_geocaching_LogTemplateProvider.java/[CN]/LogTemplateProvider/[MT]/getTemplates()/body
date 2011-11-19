@@ -1,28 +1,28 @@
 {
   if (templates == null) {
     templates=new LogTemplate[]{new LogTemplate("DATE",R.string.init_signature_template_date){
-      @Override String getValue(      final cgBase base,      final boolean offline){
-        return base.formatFullDate(System.currentTimeMillis());
+      @Override String getValue(      final boolean offline){
+        return cgBase.formatFullDate(System.currentTimeMillis());
       }
     }
 ,new LogTemplate("TIME",R.string.init_signature_template_time){
-      @Override String getValue(      final cgBase base,      final boolean offline){
-        return base.formatTime(System.currentTimeMillis());
+      @Override String getValue(      final boolean offline){
+        return cgBase.formatTime(System.currentTimeMillis());
       }
     }
 ,new LogTemplate("DATETIME",R.string.init_signature_template_datetime){
-      @Override String getValue(      final cgBase base,      final boolean offline){
+      @Override String getValue(      final boolean offline){
         final long currentTime=System.currentTimeMillis();
-        return base.formatFullDate(currentTime) + " " + base.formatTime(currentTime);
+        return cgBase.formatFullDate(currentTime) + " " + cgBase.formatTime(currentTime);
       }
     }
 ,new LogTemplate("USER",R.string.init_signature_template_user){
-      @Override String getValue(      final cgBase base,      final boolean offline){
+      @Override String getValue(      final boolean offline){
         return Settings.getUsername();
       }
     }
 ,new LogTemplate("NUMBER",R.string.init_signature_template_number){
-      @Override String getValue(      final cgBase base,      final boolean offline){
+      @Override String getValue(      final boolean offline){
         if (offline) {
           return "";
         }

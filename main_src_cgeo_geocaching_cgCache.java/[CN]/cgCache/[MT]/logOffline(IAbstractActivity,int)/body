@@ -1,7 +1,7 @@
 {
   String log="";
   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature()) {
-    log=LogTemplateProvider.applyTemplates(Settings.getSignature(),base,true);
+    log=LogTemplateProvider.applyTemplates(Settings.getSignature(),true);
   }
   logOffline(fromActivity,log,Calendar.getInstance(),logType);
   return true;

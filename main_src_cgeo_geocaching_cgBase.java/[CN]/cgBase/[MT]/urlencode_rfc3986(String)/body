@@ -1,4 +1,4 @@
 {
-  final String encoded=URLEncoder.encode(text).replace("+","%20").replaceAll("%7E","~");
+  final String encoded=StringUtils.replace(URLEncoder.encode(text).replace("+","%20"),"%7E","~");
   return encoded;
 }

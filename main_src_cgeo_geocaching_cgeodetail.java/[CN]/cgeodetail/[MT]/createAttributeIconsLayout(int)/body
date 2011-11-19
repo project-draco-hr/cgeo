@@ -5,6 +5,7 @@
   LinearLayout attributeRow=newAttributeIconsRow();
   rows.addView(attributeRow);
   noAttributeIconsFound=true;
+  final String packageName=cgeoapplication.getInstance().getBaseContext().getPackageName();
   for (  String attributeName : cache.getAttributes()) {
     boolean strikethru=attributeName.endsWith("_no");
     if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
@@ -19,7 +20,7 @@
       rows.addView(attributeRow);
     }
     Drawable d=null;
-    int id=res.getIdentifier("attribute_" + attributeName,"drawable",base.context.getPackageName());
+    int id=res.getIdentifier("attribute_" + attributeName,"drawable",packageName);
     if (id > 0) {
       noAttributeIconsFound=false;
       d=res.getDrawable(id);

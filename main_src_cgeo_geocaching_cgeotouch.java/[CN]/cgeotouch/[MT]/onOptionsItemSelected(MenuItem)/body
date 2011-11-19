@@ -9,8 +9,8 @@
     text=(EditText)findViewById(R.id.log);
     textContent=text.getText().toString();
     final long now=System.currentTimeMillis();
-    dateString=base.formatDate(now);
-    timeString=base.formatTime(now);
+    dateString=cgBase.formatDate(now);
+    timeString=cgBase.formatTime(now);
     if ((id & 0x4) == 0x4) {
       addText+=dateString;
       if ((id & 0x2) == 0x2) {
@@ -24,7 +24,7 @@
       if (addText.length() > 0) {
         addText+="\n";
       }
-      addText+=Settings.getSignature().replaceAll("\\[DATE\\]",dateString).replaceAll("\\[TIME\\]",timeString).replaceAll("\\[USER\\]",Settings.getUsername()).replaceAll("\\[NUMBER\\]","");
+      addText+=StringUtils.replaceEach(Settings.getSignature(),new String[]{"[DATE]","[TIME]","[USER]","[NUMBER]"},new String[]{dateString,timeString,Settings.getUsername(),""});
     }
     if (textContent.length() > 0 && addText.length() > 0) {
       addText="\n" + addText;

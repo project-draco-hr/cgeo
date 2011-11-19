@@ -91,7 +91,7 @@
   if (result != null) {
     String hint=GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
     if (hint != null) {
-      cache.setHint(hint.replaceAll(GCConstants.PATTERN_PARAGRAPH,"").trim());
+      cache.setHint(StringUtils.replace(hint,"</p>","").trim());
     }
   }
   checkFields(cache);
