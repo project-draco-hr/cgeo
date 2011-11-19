@@ -10,8 +10,11 @@ case MENU_REFRESH_STORED:
 refreshStored();
 return true;
 case MENU_DROP_CACHES:
-dropStored();
+dropStored(false);
 return false;
+case MENU_DROP_CACHES_AND_LIST:
+dropStored(true);
+return true;
 case MENU_IMPORT_GPX:
 importGpx();
 return false;
@@ -19,7 +22,7 @@ case MENU_CREATE_LIST:
 createList(null);
 return false;
 case MENU_DROP_LIST:
-removeList();
+removeList(true);
 return false;
 case MENU_RENAME_LIST:
 renameList();

@@ -17,6 +17,7 @@
  else {
         menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_all));
       }
+      menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection);
       if (hasSelection) {
         menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked()+ ")");
       }
