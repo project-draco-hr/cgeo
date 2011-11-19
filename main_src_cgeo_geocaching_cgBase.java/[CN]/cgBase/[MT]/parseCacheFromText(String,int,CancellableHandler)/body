@@ -60,7 +60,7 @@
       if (StringUtils.isNotBlank(hiddenString)) {
         cache.setHidden(parseGcCustomDate(hiddenString));
       }
-      if (cache.getHidden() == null) {
+      if (cache.getHiddenDate() == null) {
         hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null);
         if (StringUtils.isNotBlank(hiddenString)) {
           cache.setHidden(parseGcCustomDate(hiddenString));

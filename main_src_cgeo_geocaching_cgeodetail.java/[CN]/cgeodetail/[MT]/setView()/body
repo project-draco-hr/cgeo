@@ -105,8 +105,8 @@
       }
       ownerView.setOnClickListener(new userActions());
     }
-    if (cache.getHidden() != null && cache.getHidden().getTime() > 0) {
-      addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,cgBase.formatFullDate(cache.getHidden().getTime()));
+    if (cache.getHiddenDate() != null && cache.getHiddenDate().getTime() > 0) {
+      addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,cgBase.formatFullDate(cache.getHiddenDate().getTime()));
     }
     if (StringUtils.isNotBlank(cache.getLocation())) {
       addCacheDetail(R.string.cache_location,cache.getLocation());

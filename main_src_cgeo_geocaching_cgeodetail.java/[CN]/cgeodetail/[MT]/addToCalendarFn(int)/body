@@ -6,7 +6,7 @@
     Uri calendarProvider=Compatibility.getCalenderEventsProviderURI();
     final Integer[] keys=calendars.keySet().toArray(new Integer[calendars.size()]);
     final Integer calId=keys[index];
-    final Date eventDate=cache.getHidden();
+    final Date eventDate=cache.getHiddenDate();
     eventDate.setHours(0);
     eventDate.setMinutes(0);
     eventDate.setSeconds(0);
