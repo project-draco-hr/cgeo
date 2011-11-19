@@ -99,7 +99,7 @@ cgeocaches.startActivityMap(activity,search);
 return true;
 }
 default :
-if (MapProviderFactory.IsValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
+if (MapProviderFactory.isValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
 item.setChecked(true);
 int mapSource=MapProviderFactory.getMapSourceFromMenuId(id);
 boolean mapRestartRequired=switchMapSource(mapSource);

@@ -1,5 +1,5 @@
 {
-  boolean mapRestartRequired=!MapProviderFactory.IsSameProvider(Settings.getMapSource(),sourceId);
+  boolean mapRestartRequired=!MapProviderFactory.isSameProvider(Settings.getMapSource(),sourceId);
   Settings.setMapSource(sourceId);
   if (!mapRestartRequired) {
     mapView.setMapSource();
