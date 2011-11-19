@@ -41,6 +41,6 @@
   for (  final cgCache cache : caches.cacheList) {
     cgeoapplication.addGeocode(search,cache.getGeocode());
   }
-  app.addSearch(caches.cacheList,reason);
+  cgeoapplication.getInstance().addSearch(caches.cacheList,reason);
   return search;
 }

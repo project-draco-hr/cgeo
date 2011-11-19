@@ -1,8 +1,5 @@
 {
-  if (app == null) {
-    Log.e(Settings.tag,"cgeoBase.searchByOffline: No application found");
-    return null;
-  }
+  cgeoapplication app=cgeoapplication.getInstance();
   final cgSearch search=app.getBatchOfStoredCaches(true,coords,cacheType,list);
   search.totalCnt=app.getAllStoredCachesCount(true,cacheType,list);
   return search;

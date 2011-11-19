@@ -1,7 +1,6 @@
 {
-  this.app=app;
   context=app.getBaseContext();
-  res=app.getBaseContext().getResources();
+  res=context.getResources();
   cacheIDsChoices.put(res.getString(R.string.all),CacheType.ALL_GUID);
   for (  CacheType ct : CacheType.values()) {
     String l10n=res.getString(ct.stringId);

@@ -1,8 +1,5 @@
 {
-  if (app == null) {
-    Log.e(Settings.tag,"cgeoBase.searchByHistory: No application found");
-    return null;
-  }
+  final cgeoapplication app=cgeoapplication.getInstance();
   final cgSearch search=app.getHistoryOfCaches(true,cacheType);
   search.totalCnt=app.getAllHistoricCachesCount();
   return search;

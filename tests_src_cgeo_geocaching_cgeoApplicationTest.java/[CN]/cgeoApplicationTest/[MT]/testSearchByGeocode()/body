@@ -1,5 +1,5 @@
 {
-  final cgSearch search=base.searchByGeocode("GC1RMM2",null,0,true,null);
+  final cgSearch search=cgBase.searchByGeocode("GC1RMM2",null,0,true,null);
   assertNotNull(search);
   assertEquals(1,search.getGeocodes().size());
   assertTrue(search.getGeocodes().contains("GC1RMM2"));

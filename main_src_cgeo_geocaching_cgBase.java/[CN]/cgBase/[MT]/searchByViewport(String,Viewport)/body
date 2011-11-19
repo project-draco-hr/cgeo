@@ -12,11 +12,7 @@
   if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
     Log.e(Settings.tag,"cgeoBase.searchByViewport: No cache parsed");
   }
-  if (app == null) {
-    Log.e(Settings.tag,"cgeoBase.searchByViewport: No application found");
-    return null;
-  }
   List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
-  app.addSearch(cacheList,0);
+  cgeoapplication.getInstance().addSearch(cacheList,0);
   return search;
 }

@@ -24,7 +24,7 @@
       return;
     }
     final Viewport viewport=new Viewport(new Geopoint(latMin,lonMin),new Geopoint(latMax,lonMax));
-    search=base.searchByViewport(token,viewport);
+    search=cgBase.searchByViewport(token,viewport);
     if (search != null) {
       downloaded=true;
     }
