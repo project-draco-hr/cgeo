@@ -242,8 +242,8 @@
           waypoint.setWaypointType(WaypointType.findById(resulttype));
         }
         waypoint.setPrefix(BaseUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));
-        waypoint.setPrefix(BaseUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
-        waypoint.setPrefix(BaseUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,waypoint.getName(),true));
+        waypoint.setLookup(BaseUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
+        waypoint.setName(BaseUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,waypoint.getName(),true));
         String latlon=Html.fromHtml(BaseUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();
         if (!StringUtils.startsWith(latlon,"???")) {
           waypoint.setLatlon(latlon);
