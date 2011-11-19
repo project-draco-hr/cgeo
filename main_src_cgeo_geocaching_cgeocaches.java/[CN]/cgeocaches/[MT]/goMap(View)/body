@@ -3,5 +3,10 @@
     showToast(res.getString(R.string.warn_no_cache_coord));
     return;
   }
-  CGeoMap.startActivitySearch(this,search,title + " [" + cgeoapplication.getCount(search)+ "]",false);
+  int count=cgeoapplication.getCount(search);
+  String mapTitle=title;
+  if (count > 0) {
+    mapTitle=title + " [" + count+ "]";
+  }
+  CGeoMap.startActivitySearch(this,search,mapTitle,false);
 }
