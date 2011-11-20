@@ -1,6 +1,7 @@
 {
   try {
-    @SuppressWarnings("unused") final Parameters params=new Parameters("aaa","AAA","bbb");
+    final Parameters params=new Parameters("aaa","AAA","bbb");
+    params.clear();
     Assert.fail("Exception not raised");
   }
  catch (  InvalidParameterException e) {

@@ -1,0 +1,10 @@
+{
+  importThread.start();
+  try {
+    importThread.join();
+  }
+ catch (  InterruptedException e) {
+    e.printStackTrace();
+  }
+  importStepHandler.waitForCompletion();
+}

@@ -5,7 +5,7 @@
   try {
     for (; ; ) {
       final Geopoint currentCoords=queue.take();
-      final String currentAction=app.getAction();
+      final String currentAction=cgeoapplication.getInstance().getAction();
       if (null != latestCoords && latestCoords.distanceTo(currentCoords) < 0.75 && StringUtils.equals(latestAction,currentAction)) {
         continue;
       }

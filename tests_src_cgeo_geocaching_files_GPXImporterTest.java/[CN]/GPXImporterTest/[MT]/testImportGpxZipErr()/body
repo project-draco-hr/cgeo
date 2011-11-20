@@ -2,8 +2,7 @@
   File pq1=new File(tempDir,"1.zip");
   copyResourceToFile(R.raw.pq7545915,pq1);
   GPXImporter.ImportGpxZipFileThread importThread=new GPXImporter.ImportGpxZipFileThread(pq1,listId,importStepHandler,progressHandler);
-  importThread.run();
-  importStepHandler.waitForCompletion();
+  runImportThread(importThread);
   assertEquals(1,importStepHandler.messages.size());
   assertEquals(GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR,importStepHandler.messages.get(0).what);
 }
