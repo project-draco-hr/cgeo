@@ -1,0 +1,35 @@
+{
+  Collection<cgCache> caches=Collections.emptySet();
+  ZipInputStream zis=new ZipInputStream(contentResolver.openInputStream(uri));
+  try {
+    for (ZipEntry zipEntry=zis.getNextEntry(); zipEntry != null; zipEntry=zis.getNextEntry()) {
+      if (StringUtils.endsWithIgnoreCase(zipEntry.getName(),GPX_FILE_EXTENSION)) {
+        if (!StringUtils.endsWithIgnoreCase(zipEntry.getName(),WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
+          importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE,R.string.gpx_import_loading_caches,(int)zipEntry.getSize()));
+          caches=parser.parse(new NoCloseInputStream(zis),progressHandler);
+        }
+      }
+ else {
+        throw new ParserException(uri.toString() + " is not a GPX zip file");
+      }
+      zis.closeEntry();
+    }
+  }
+  finally {
+    zis.close();
+  }
+  zis=new ZipInputStream(contentResolver.openInputStream(uri));
+  try {
+    for (ZipEntry zipEntry=zis.getNextEntry(); zipEntry != null; zipEntry=zis.getNextEntry()) {
+      if (StringUtils.endsWithIgnoreCase(zipEntry.getName(),WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
+        importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE,R.string.gpx_import_loading_waypoints,(int)zipEntry.getSize()));
+        caches=parser.parse(new NoCloseInputStream(zis),progressHandler);
+      }
+      zis.closeEntry();
+    }
+  }
+  finally {
+    zis.close();
+  }
+  return caches;
+}
