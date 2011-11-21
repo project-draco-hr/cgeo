@@ -1,6 +1,6 @@
 {
   Collection<cgCache> caches=Collections.emptySet();
-  ZipInputStream zis=new ZipInputStream(contentResolver.openInputStream(uri));
+  ZipInputStream zis=new ZipInputStream(getInputStream());
   try {
     for (ZipEntry zipEntry=zis.getNextEntry(); zipEntry != null; zipEntry=zis.getNextEntry()) {
       if (StringUtils.endsWithIgnoreCase(zipEntry.getName(),GPX_FILE_EXTENSION)) {
@@ -10,7 +10,7 @@
         }
       }
  else {
-        throw new ParserException(uri.toString() + " is not a GPX zip file");
+        throw new ParserException("Imported zip is not a GPX zip file.");
       }
       zis.closeEntry();
     }
@@ -18,7 +18,7 @@
   finally {
     zis.close();
   }
-  zis=new ZipInputStream(contentResolver.openInputStream(uri));
+  zis=new ZipInputStream(getInputStream());
   try {
     for (ZipEntry zipEntry=zis.getNextEntry(); zipEntry != null; zipEntry=zis.getNextEntry()) {
       if (StringUtils.endsWithIgnoreCase(zipEntry.getName(),WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {

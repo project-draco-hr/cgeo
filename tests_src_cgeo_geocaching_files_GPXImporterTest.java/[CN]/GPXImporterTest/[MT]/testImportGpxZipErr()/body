@@ -1,8 +1,7 @@
 {
-  File pq1=new File(tempDir,"1.zip");
-  copyResourceToFile(R.raw.pq7545915,pq1);
-  GPXImporter.ImportGpxZipFileThread importThread=new GPXImporter.ImportGpxZipFileThread(pq1,listId,importStepHandler,progressHandler);
+  File pqError=new File(tempDir,"pq_error.zip");
+  copyResourceToFile(R.raw.pq_error,pqError);
+  GPXImporter.ImportGpxZipFileThread importThread=new GPXImporter.ImportGpxZipFileThread(pqError,listId,importStepHandler,progressHandler);
   runImportThread(importThread);
-  assertEquals(1,importStepHandler.messages.size());
-  assertEquals(GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR,importStepHandler.messages.get(0).what);
+  assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR);
 }

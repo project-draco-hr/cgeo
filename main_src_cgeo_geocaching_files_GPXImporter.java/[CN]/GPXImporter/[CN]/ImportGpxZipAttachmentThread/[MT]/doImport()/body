@@ -1,9 +1,0 @@
-{
-  Log.i(Settings.tag,"Import zipped GPX from uri: " + uri);
-  try {
-    return parseAttachment(new GPX10Parser(listId));
-  }
- catch (  ParserException pe) {
-    return parseAttachment(new GPX11Parser(listId));
-  }
-}

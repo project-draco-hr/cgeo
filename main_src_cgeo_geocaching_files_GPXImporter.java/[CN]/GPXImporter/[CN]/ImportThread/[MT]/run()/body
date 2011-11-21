@@ -1,6 +1,7 @@
 {
   final Collection<cgCache> caches;
   try {
+    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_START));
     caches=doImport();
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_CACHES,R.string.gpx_import_storing,caches.size()));
     cgSearch search=storeParsedCaches(caches);
