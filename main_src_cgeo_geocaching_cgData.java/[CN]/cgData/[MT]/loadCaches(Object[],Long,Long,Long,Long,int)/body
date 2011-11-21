@@ -1,9 +1,6 @@
 {
   init();
-  if (((geocodes != null && geocodes.length > 0) && (guids != null && guids.length > 0))) {
-    throw new IllegalArgumentException("Please use only one parameter");
-  }
-  if (((geocodes != null && geocodes.length > 0) || (guids != null && guids.length > 0)) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
+  if ((geocodes != null && geocodes.length > 0) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
     throw new IllegalArgumentException("Please use only one parameter");
   }
   StringBuilder where=new StringBuilder();
@@ -24,23 +21,6 @@
         where.append(" and ");
       }
       where.append("geocode in (");
-      where.append(all);
-      where.append(')');
-    }
- else     if (guids != null && guids.length > 0) {
-      StringBuilder all=new StringBuilder();
-      for (      Object one : guids) {
-        if (all.length() > 0) {
-          all.append(", ");
-        }
-        all.append('"');
-        all.append((String)one);
-        all.append('"');
-      }
-      if (where.length() > 0) {
-        where.append(" and ");
-      }
-      where.append("guid in (");
       where.append(all);
       where.append(')');
     }
