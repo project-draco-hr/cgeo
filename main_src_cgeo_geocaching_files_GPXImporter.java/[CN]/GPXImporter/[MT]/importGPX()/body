@@ -1,0 +1,23 @@
+{
+  closeOnFinish=true;
+  final ContentResolver contentResolver=((Activity)fromActivity).getContentResolver();
+  final Intent intent=((Activity)fromActivity).getIntent();
+  final Uri uri=intent.getData();
+  String mimeType=intent.getType();
+  if (mimeType == null) {
+    mimeType=contentResolver.getType(uri);
+  }
+  if (mimeType == null) {
+    mimeType="application/zip";
+  }
+  Log.i(Settings.tag,"importGPX: " + uri + ", mimetype="+ mimeType);
+  if (StringUtils.equalsIgnoreCase("text/xml",mimeType) || StringUtils.equalsIgnoreCase("application/xml",mimeType)) {
+    new ImportGpxAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
+  }
+ else   if (StringUtils.equalsIgnoreCase("application/zip",mimeType)) {
+    new ImportGpxZipAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
+  }
+ else {
+    closeActivity();
+  }
+}
