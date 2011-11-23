@@ -1,0 +1,11 @@
+{
+  storeThread=null;
+  try {
+    cache=app.getCache(search);
+  }
+ catch (  Exception e) {
+    showToast(res.getString(R.string.err_store_failed));
+    Log.e(Settings.tag,"CacheDetailActivity.storeCacheHandler: " + e.toString());
+  }
+  CacheDetailActivity.this.notifyDataSetChanged();
+}

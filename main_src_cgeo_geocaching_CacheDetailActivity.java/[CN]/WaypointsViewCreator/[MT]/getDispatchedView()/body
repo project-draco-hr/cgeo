@@ -1,0 +1,57 @@
+{
+  if (cache == null) {
+    return null;
+  }
+  view=(ScrollView)getLayoutInflater().inflate(R.layout.cacheview_waypoints,null);
+  LinearLayout waypoints=(LinearLayout)view.findViewById(R.id.waypoints);
+  if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+    LinearLayout waypointView;
+    List<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.getWaypoints());
+    Collections.sort(sortedWaypoints);
+    for (    cgWaypoint wpt : sortedWaypoints) {
+      waypointView=(LinearLayout)getLayoutInflater().inflate(R.layout.waypoint_item,null);
+      final List<String> infoTextList=new ArrayList<String>(3);
+      infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
+      if ("OWN".equalsIgnoreCase(wpt.getPrefix())) {
+        infoTextList.add(res.getString(R.string.waypoint_custom));
+      }
+ else {
+        if (StringUtils.isNotBlank(wpt.getPrefix())) {
+          infoTextList.add(wpt.getPrefix());
+        }
+        if (StringUtils.isNotBlank(wpt.getLookup())) {
+          infoTextList.add(wpt.getLookup());
+        }
+      }
+      ((TextView)waypointView.findViewById(R.id.info)).setText(StringUtils.join(infoTextList," ?? "));
+      TextView nameView=(TextView)waypointView.findViewById(R.id.name);
+      if (StringUtils.isNotBlank(wpt.getName())) {
+        nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
+      }
+ else       if (null != wpt.getCoords()) {
+        nameView.setText(wpt.getCoords().toString());
+      }
+ else {
+        nameView.setText(res.getString(R.string.waypoint));
+      }
+      wpt.setIcon(res,nameView);
+      if (StringUtils.isNotBlank(wpt.getNote())) {
+        TextView noteView=(TextView)waypointView.findViewById(R.id.note);
+        noteView.setVisibility(View.VISIBLE);
+        if (BaseUtils.containsHtml(wpt.getNote())) {
+          noteView.setText(Html.fromHtml(wpt.getNote().trim()),TextView.BufferType.SPANNABLE);
+        }
+ else {
+          noteView.setText(wpt.getNote().trim());
+        }
+      }
+      waypointView.setOnClickListener(new WaypointInfoClickListener(wpt.getId()));
+      registerForContextMenu(waypointView);
+      waypoints.addView(waypointView);
+    }
+  }
+  Button addWaypoint=(Button)view.findViewById(R.id.add_waypoint);
+  addWaypoint.setClickable(true);
+  addWaypoint.setOnClickListener(new AddWaypointClickListener());
+  return view;
+}

@@ -1,0 +1,35 @@
+{
+  final Page page=pageOrder.get(position);
+  PageViewCreator creator=viewCreators.get(page);
+  if (null == creator) {
+switch (page) {
+case DETAILS:
+      creator=new DetailsViewCreator();
+    break;
+case DESCRIPTION:
+  creator=new DescriptionViewCreator();
+break;
+case LOGS:
+creator=new LogsViewCreator();
+break;
+case WAYPOINTS:
+creator=new WaypointsViewCreator();
+break;
+case INVENTORY:
+creator=new InventoryViewCreator();
+break;
+}
+viewCreators.put(page,creator);
+}
+View view=null;
+try {
+if (null != creator) {
+view=creator.getView();
+((ViewPager)container).addView(view,0);
+}
+}
+ catch (Exception e) {
+Log.e(Settings.tag,"ViewPagerAdapter.instantiateItem ",e);
+}
+return view;
+}

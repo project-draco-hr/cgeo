@@ -1,0 +1,10 @@
+{
+  super.onResume();
+  if (geolocation == null) {
+    geolocation=app.startGeo(this,locationUpdater,0,0);
+  }
+  if (refreshOnResume) {
+    notifyDataSetChanged();
+    refreshOnResume=false;
+  }
+}

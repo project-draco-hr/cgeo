@@ -1,0 +1,19 @@
+{
+  if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+    updateStatusMsg((String)msg.obj);
+  }
+ else {
+    if (search == null) {
+      showToast(res.getString(R.string.err_dwld_details_failed));
+      finish();
+      return;
+    }
+    if (cgeoapplication.getError(search) != null) {
+      showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + cgeoapplication.getError(search)+ ".");
+      finish();
+      return;
+    }
+    updateStatusMsg(res.getString(R.string.cache_dialog_loading_details_status_render));
+    notifyDataSetChanged();
+  }
+}

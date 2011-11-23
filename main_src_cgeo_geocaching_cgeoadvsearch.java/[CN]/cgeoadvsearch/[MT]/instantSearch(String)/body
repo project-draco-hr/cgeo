@@ -6,7 +6,7 @@
   final Matcher tbCodeM=tbCode.matcher(query);
   try {
     if (gcCodeM.find()) {
-      final Intent cachesIntent=new Intent(this,cgeodetail.class);
+      final Intent cachesIntent=new Intent(this,CacheDetailActivity.class);
       cachesIntent.putExtra("geocode",query.trim().toUpperCase());
       startActivity(cachesIntent);
       found=true;

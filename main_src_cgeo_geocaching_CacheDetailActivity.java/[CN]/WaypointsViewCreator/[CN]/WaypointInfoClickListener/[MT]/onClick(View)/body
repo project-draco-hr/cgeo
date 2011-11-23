@@ -1,0 +1,6 @@
+{
+  Intent waypointIntent=new Intent(CacheDetailActivity.this,cgeowaypoint.class);
+  waypointIntent.putExtra("waypoint",id);
+  waypointIntent.putExtra("geocode",cache.getGeocode());
+  startActivity(waypointIntent);
+}

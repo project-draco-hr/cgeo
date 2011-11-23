@@ -1,0 +1,23 @@
+{
+  Spanned longDesc=(Spanned)msg.obj;
+  if (longDesc != null) {
+    TextView descView=(TextView)view.findViewById(R.id.longdesc);
+    if (StringUtils.isNotBlank(cache.getDescription())) {
+      descView.setText(longDesc,TextView.BufferType.SPANNABLE);
+      descView.setMovementMethod(LinkMovementMethod.getInstance());
+      if (!Settings.isLightSkin()) {
+        if (cache.getDescription().contains("color=\"#000000")) {
+          descView.setBackgroundResource(color.darker_gray);
+        }
+ else {
+          descView.setBackgroundResource(color.black);
+        }
+      }
+    }
+    descView.setVisibility(View.VISIBLE);
+  }
+ else {
+    showToast(res.getString(R.string.err_load_descr_failed));
+  }
+  view.findViewById(R.id.loading).setVisibility(View.GONE);
+}

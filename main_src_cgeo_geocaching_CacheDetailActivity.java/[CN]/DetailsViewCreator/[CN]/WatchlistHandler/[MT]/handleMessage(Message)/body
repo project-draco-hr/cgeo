@@ -1,0 +1,10 @@
+{
+  watchlistThread=null;
+  progress.dismiss();
+  if (msg.what == -1) {
+    showToast(res.getString(R.string.err_watchlist_failed));
+  }
+ else {
+    updateWatchlistBox();
+  }
+}
