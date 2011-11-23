@@ -14,6 +14,12 @@
     address=extras.getString("address");
     username=extras.getString("username");
   }
+  if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+    type=CacheListType.OFFLINE;
+    if (coords == null) {
+      coords=new Geopoint(0,0);
+    }
+  }
   init();
   Thread threadPure;
   cgSearchThread thread;
@@ -124,4 +130,7 @@ Log.e(Settings.tag,"cgeocaches.onCreate: No action or unknown action specified")
 break;
 }
 prepareFilterBar();
+if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+importGpxAttachement();
+}
 }
