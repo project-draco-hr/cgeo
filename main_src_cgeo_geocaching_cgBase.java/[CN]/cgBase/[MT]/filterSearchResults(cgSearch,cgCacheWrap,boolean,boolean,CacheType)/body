@@ -11,7 +11,7 @@
     search.totalCnt=caches.totalCnt;
     if (CollectionUtils.isNotEmpty(caches.cacheList)) {
       for (      final cgCache cache : caches.cacheList) {
-        final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwn() || cache.isFound())) || (cacheType != null && cacheType != cache.getCacheType());
+        final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwn() || cache.isFound())) || (cacheType != CacheType.ALL && cacheType != cache.getType());
         if (!excludeCache) {
           search.addGeocode(cache.getGeocode());
           cacheList.add(cache);

@@ -1,8 +1,8 @@
 {
   Map<String,String> params=new HashMap<String,String>();
   params.put("username",username);
-  if (cachetype != null) {
-    params.put("cachetype",cachetype.id);
+  if (cacheType != null) {
+    params.put("cacheType",cacheType.id);
   }
   search=cgBase.searchByOwner(this,username,cacheType,0,Settings.isShowCaptcha());
   handler.sendMessage(new Message());

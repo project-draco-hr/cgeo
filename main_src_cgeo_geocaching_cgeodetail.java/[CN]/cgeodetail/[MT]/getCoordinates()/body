@@ -3,7 +3,7 @@
   List<cgCoord> coordinates=new ArrayList<cgCoord>();
   try {
     coords=new cgCoord();
-    coords.setType("cache");
+    coords.setCoordType("cache");
     if (StringUtils.isNotBlank(name)) {
       coords.setName(name);
     }
@@ -21,7 +21,7 @@
       for (      cgWaypoint waypoint : cache.getWaypoints()) {
         if (null != waypoint.getCoords()) {
           coords=new cgCoord();
-          coords.setType("waypoint");
+          coords.setCoordType("waypoint");
           coords.setName(waypoint.getName());
           coords.setCoords(waypoint.getCoords());
           coordinates.add(coords);

@@ -16,9 +16,6 @@
   }
   updateCacheCounter();
   (new cleanDatabase()).start();
-  if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
-    Settings.setCacheType(null);
-  }
   if (geo == null) {
     geo=app.startGeo(this,geoUpdate,0,0);
   }

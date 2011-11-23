@@ -1,21 +1,14 @@
 {
-  TextView filterTextView=(TextView)findViewById(R.id.filter_text);
-  View filterBar=findViewById(R.id.filter_bar);
-  String cacheType="", filter="";
-  if (Settings.getCacheType() != null || adapter.isFilter()) {
-    if (Settings.getCacheType() != null) {
-      cacheType=cgBase.cacheTypesInv.get(Settings.getCacheType());
-    }
+  if (Settings.getCacheType() != CacheType.ALL || adapter.isFilter()) {
+    String filter="";
+    String cacheType=Settings.getCacheType().getL10n();
     if (adapter.isFilter()) {
-      filter=adapter.getFilterName();
+      filter=", " + adapter.getFilterName();
     }
-    if (Settings.getCacheType() != null && adapter.isFilter()) {
-      filter=", " + filter;
-    }
-    filterTextView.setText(cacheType + filter);
-    filterBar.setVisibility(View.VISIBLE);
+    ((TextView)findViewById(R.id.filter_text)).setText(cacheType + filter);
+    findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
   }
  else {
-    filterBar.setVisibility(View.GONE);
+    findViewById(R.id.filter_bar).setVisibility(View.GONE);
   }
 }

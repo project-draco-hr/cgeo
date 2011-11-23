@@ -1,15 +1,6 @@
 {
   context=app.getBaseContext();
-  res=context.getResources();
-  cacheIDsChoices.put(res.getString(R.string.all),CacheType.ALL_GUID);
-  for (  CacheType ct : CacheType.values()) {
-    String l10n=res.getString(ct.stringId);
-    cacheTypesInv.put(ct,l10n);
-    cacheIDsChoices.put(l10n,ct.guid);
-  }
-  for (  CacheSize cs : CacheSize.values()) {
-    cacheSizesInv.put(cs,res.getString(cs.stringId));
-  }
+  res=app.getBaseContext().getResources();
   for (  WaypointType wt : WaypointType.values()) {
     if (wt != WaypointType.OWN) {
       waypointTypes.put(wt,res.getString(wt.stringId));

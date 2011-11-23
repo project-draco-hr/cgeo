@@ -6,9 +6,9 @@
   if (detailedOnly) {
     specifySql.append(" and detailed = 1");
   }
-  if (cachetype != null) {
+  if (cacheType != CacheType.ALL) {
     specifySql.append(" and type = \"");
-    specifySql.append(cachetype.id);
+    specifySql.append(cacheType.id);
     specifySql.append('"');
   }
   try {

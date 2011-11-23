@@ -1,7 +1,7 @@
 {
   final int id=item.getItemId();
   if (id == 0) {
-    Settings.setCacheType(null);
+    Settings.setCacheType(CacheType.ALL);
     setFilterTitle();
     return true;
   }
@@ -13,14 +13,14 @@
   }
  else   if (id > 0) {
     final String itemTitle=item.getTitle().toString();
-    CacheType choice=null;
-    for (    Entry<CacheType,String> entry : cgBase.cacheTypesInv.entrySet()) {
-      if (entry.getValue().equalsIgnoreCase(itemTitle)) {
-        choice=entry.getKey();
+    CacheType cacheType=CacheType.ALL;
+    for (    CacheType ct : CacheType.values()) {
+      if (ct.getL10n().equalsIgnoreCase(itemTitle)) {
+        cacheType=ct;
         break;
       }
     }
-    Settings.setCacheType(choice);
+    Settings.setCacheType(cacheType);
     setFilterTitle();
     return true;
   }

@@ -4,7 +4,7 @@
     cache.setGeocode(response.getString(CACHE_CODE));
     cache.setName(response.getString(CACHE_NAME));
     setLocation(cache,response.getString(CACHE_LOCATION));
-    cache.setCacheType(getCacheType(response.getString(CACHE_TYPE)));
+    cache.setType(getCacheType(response.getString(CACHE_TYPE)));
     final String status=response.getString(CACHE_STATUS);
     cache.setDisabled(status.equalsIgnoreCase("Temporarily unavailable"));
     cache.setArchived(status.equalsIgnoreCase("Archived"));

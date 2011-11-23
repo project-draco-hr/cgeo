@@ -2,7 +2,7 @@
   final List<cgCache> caches=readGPX10(R.raw.oc5952_gpx);
   final cgCache cache=caches.get(0);
   assertEquals("OC5952",cache.getGeocode());
-  assertEquals(CacheType.TRADITIONAL,cache.getCacheType());
+  assertEquals(CacheType.TRADITIONAL,cache.getType());
   assertEquals(false,cache.isArchived());
   assertEquals(false,cache.isDisabled());
   assertEquals("Die Schatzinsel / treasure island",cache.getName());
