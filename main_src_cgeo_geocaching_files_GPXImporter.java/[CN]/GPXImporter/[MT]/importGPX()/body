@@ -1,12 +1,8 @@
 {
-  closeOnFinish=true;
   final ContentResolver contentResolver=((Activity)fromActivity).getContentResolver();
   final Intent intent=((Activity)fromActivity).getIntent();
   final Uri uri=intent.getData();
   String mimeType=intent.getType();
-  if (mimeType == null) {
-    mimeType=contentResolver.getType(uri);
-  }
   if (mimeType == null) {
     mimeType="application/zip";
   }
@@ -18,6 +14,6 @@
     new ImportGpxZipAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
   }
  else {
-    closeActivity();
+    importFinished();
   }
 }

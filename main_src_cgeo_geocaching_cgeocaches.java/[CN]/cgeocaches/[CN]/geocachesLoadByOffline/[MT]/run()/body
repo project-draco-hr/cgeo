@@ -1,9 +1,4 @@
 {
-  if (coords != null) {
-    search=cgBase.searchByOffline(coords,Settings.getCacheType(),listId);
-  }
- else {
-    search=cgBase.searchByOffline(null,Settings.getCacheType(),cgList.STANDARD_LIST_ID);
-  }
+  search=cgBase.searchByOffline(coords,Settings.getCacheType(),listId);
   handler.sendMessage(new Message());
 }

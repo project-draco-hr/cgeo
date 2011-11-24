@@ -1,13 +1,12 @@
 {
   new AlertDialog.Builder(this).setTitle(res.getString(R.string.gpx_import_title)).setMessage(res.getString(R.string.gpx_import_confirm)).setCancelable(false).setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int id){
-      (new GPXImporter(GPXImportActivity.this,cgList.STANDARD_LIST_ID)).importGPX();
+      new GPXImporter(cgeocaches.this,listId,importGpxAttachementFinishedHandler).importGPX();
     }
   }
 ).setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int id){
       dialog.cancel();
-      finish();
     }
   }
 ).create().show();
