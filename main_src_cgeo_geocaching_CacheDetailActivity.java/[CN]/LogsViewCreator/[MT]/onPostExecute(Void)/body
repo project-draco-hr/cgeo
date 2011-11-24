@@ -1,0 +1,13 @@
+{
+  view.findViewById(R.id.loading).setVisibility(View.GONE);
+  TextView logCounterView=(TextView)view.findViewById(R.id.log_count);
+  if (showLogCounter) {
+    logCounterView.setText(logCounter);
+    logCounterView.setVisibility(View.VISIBLE);
+  }
+  LinearLayout loglistView=(LinearLayout)view.findViewById(R.id.log_list);
+  for (  RelativeLayout log : loglist) {
+    loglistView.addView(log);
+  }
+  loglistView.setVisibility(View.VISIBLE);
+}
