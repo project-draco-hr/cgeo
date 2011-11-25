@@ -1,11 +1,16 @@
 {
-  refreshThread=null;
-  try {
-    cache=app.getCache(search);
+  if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+    updateStatusMsg((String)msg.obj);
   }
- catch (  Exception e) {
-    showToast(res.getString(R.string.err_refresh_failed));
-    Log.e(Settings.tag,"CacheDetailActivity.refreshCacheHandler: " + e.toString());
+ else {
+    refreshThread=null;
+    try {
+      cache=app.getCache(search);
+    }
+ catch (    Exception e) {
+      showToast(res.getString(R.string.err_refresh_failed));
+      Log.e(Settings.tag,"CacheDetailActivity.refreshCacheHandler: " + e.toString());
+    }
+    CacheDetailActivity.this.notifyDataSetChanged();
   }
-  CacheDetailActivity.this.notifyDataSetChanged();
 }
