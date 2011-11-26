@@ -1,46 +1,46 @@
 {
   if (loc == null) {
-    gps=-1;
+    locationProvider=LocationProviderType.LAST;
     return;
   }
   location=loc;
   String provider=location.getProvider();
   if (provider.equals(LocationManager.GPS_PROVIDER)) {
-    gps=1;
+    locationProvider=LocationProviderType.GPS;
   }
  else   if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-    gps=0;
+    locationProvider=LocationProviderType.NETWORK;
   }
- else   if (provider.equals("last")) {
-    gps=-1;
+ else   if (provider.equalsIgnoreCase("last")) {
+    locationProvider=LocationProviderType.LAST;
   }
   coordsNow=new Geopoint(location.getLatitude(),location.getLongitude());
   app.setLastLoc(coordsNow);
-  if (location.hasAltitude() && gps != -1) {
+  if (location.hasAltitude() && locationProvider != LocationProviderType.LAST) {
     altitudeNow=location.getAltitude() + Settings.getAltCorrection();
   }
  else {
     altitudeNow=null;
   }
-  if (location.hasBearing() && gps != -1) {
+  if (location.hasBearing() && locationProvider != LocationProviderType.LAST) {
     bearingNow=location.getBearing();
   }
  else {
     bearingNow=0f;
   }
-  if (location.hasSpeed() && gps != -1) {
+  if (location.hasSpeed() && locationProvider != LocationProviderType.LAST) {
     speedNow=location.getSpeed();
   }
  else {
     speedNow=0f;
   }
-  if (location.hasAccuracy() && gps != -1) {
+  if (location.hasAccuracy() && locationProvider != LocationProviderType.LAST) {
     accuracyNow=location.getAccuracy();
   }
  else {
     accuracyNow=999f;
   }
-  if (gps == 1) {
+  if (locationProvider == LocationProviderType.GPS) {
     if (coordsBefore != null) {
       final float dst=coordsBefore.distanceTo(coordsNow);
       if (dst > 0.005) {
@@ -55,7 +55,7 @@
   if (geoUpdate != null) {
     geoUpdate.updateLoc(this);
   }
-  if (gps > -1) {
+  if (locationProvider == LocationProviderType.GPS || locationProvider == LocationProviderType.NETWORK) {
     Go4Cache.signalCoordinates(coordsNow);
   }
 }
