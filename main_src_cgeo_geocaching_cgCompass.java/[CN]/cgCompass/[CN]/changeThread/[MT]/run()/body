@@ -6,8 +6,8 @@
  catch (    Exception e) {
     }
 synchronized (cgCompass.this) {
-      azimuth=smoothUpdate(northHeading,azimuth);
-      heading=smoothUpdate(cacheHeading,heading);
+      azimuthShown=smoothUpdate(northMeasured,azimuthShown);
+      cacheHeadingShown=smoothUpdate(cacheHeadingMeasured,cacheHeadingShown);
     }
     changeHandler.sendMessage(new Message());
   }

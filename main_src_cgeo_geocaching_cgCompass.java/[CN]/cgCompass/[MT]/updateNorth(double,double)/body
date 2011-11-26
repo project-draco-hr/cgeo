@@ -1,9 +1,11 @@
 {
   if (initialDisplay) {
-    azimuth=northHeadingIn;
-    heading=cacheHeadingIn;
-    initialDisplay=false;
+    azimuthShown=northHeadingIn;
+    cacheHeadingShown=cacheHeadingIn;
+    if (northHeadingIn != 0.0) {
+      initialDisplay=false;
+    }
   }
-  northHeading=northHeadingIn;
-  cacheHeading=cacheHeadingIn;
+  northMeasured=northHeadingIn;
+  cacheHeadingMeasured=cacheHeadingIn;
 }

@@ -1,9 +1,9 @@
 {
   int id=item.getItemId();
-  if (id == 0) {
+  if (id == MENU_MAP) {
     CGeoMap.startActivityCoords(this,dstCoords,null,null);
   }
- else   if (id == 1) {
+ else   if (id == MENU_SWITCH_COMPASS_GPS) {
     boolean oldSetting=Settings.isUseCompass();
     Settings.setUseCompass(!oldSetting);
     if (oldSetting) {

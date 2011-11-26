@@ -1,12 +1,12 @@
 {
-  double currentAzimuth;
-  double currentHeading;
+  double azimuthDrawn;
+  double headingDrawn;
 synchronized (this) {
-    currentAzimuth=azimuth;
-    currentHeading=heading;
+    azimuthDrawn=azimuthShown;
+    headingDrawn=cacheHeadingShown;
   }
-  double azimuthTemp=currentAzimuth;
-  double azimuthRelative=azimuthTemp - currentHeading;
+  double azimuthTemp=azimuthDrawn;
+  double azimuthRelative=azimuthTemp - headingDrawn;
   if (azimuthRelative < 0) {
     azimuthRelative=azimuthRelative + 360;
   }

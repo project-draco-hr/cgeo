@@ -34,13 +34,13 @@
   setGo4CacheAction();
   setTitle();
   setDestCoords();
-  compassView=(cgCompass)findViewById(R.id.rose);
-  updater=new updaterThread(updaterHandler);
-  updater.start();
   if (geo != null) {
     geoUpdate.updateLoc(geo);
   }
   if (dir != null) {
     dirUpdate.updateDir(dir);
   }
+  compassView=(cgCompass)findViewById(R.id.rose);
+  updater=new updaterThread(updaterHandler);
+  updater.start();
 }
