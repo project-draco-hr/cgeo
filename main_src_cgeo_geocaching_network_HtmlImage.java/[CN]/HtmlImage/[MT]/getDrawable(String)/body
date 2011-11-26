@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(url) || isCounter(url)) {
-    return null;
+    return new BitmapDrawable(getTransparent1x1Image());
   }
   Bitmap imagePre=null;
   if (!onlySave) {
@@ -35,7 +35,7 @@
       imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_not_loaded);
     }
  else {
-      imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_no_placement);
+      imagePre=getTransparent1x1Image();
     }
   }
   final int imgWidth=imagePre.getWidth();
