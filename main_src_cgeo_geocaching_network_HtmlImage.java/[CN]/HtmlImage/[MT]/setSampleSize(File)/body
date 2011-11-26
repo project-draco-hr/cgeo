@@ -1,16 +1,23 @@
 {
   BitmapFactory.Options options=new BitmapFactory.Options();
   options.inJustDecodeBounds=true;
+  FileInputStream fis=null;
   try {
-    FileInputStream fis=new FileInputStream(file);
+    fis=new FileInputStream(file);
     BitmapFactory.decodeStream(fis,null,options);
-    fis.close();
   }
  catch (  FileNotFoundException e) {
     e.printStackTrace();
   }
-catch (  IOException e) {
-    e.printStackTrace();
+ finally {
+    if (fis != null) {
+      try {
+        fis.close();
+      }
+ catch (      IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
   int scale=1;
   if (options.outHeight > maxHeight || options.outWidth > maxWidth) {
