@@ -63,6 +63,9 @@
   if (cache.getFavouriteCnt() != null) {
     addCacheDetail(R.string.cache_favourite,String.format("%d",cache.getFavouriteCnt()) + "??");
   }
+  if (cache.getMyVote() != null && cache.getMyVote() > 0) {
+    addStarRating(R.string.cache_own_rating,cache.getMyVote());
+  }
   if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
     TextView ownerView=addCacheDetail(R.string.cache_owner,"");
     if (StringUtils.isNotBlank(cache.getOwner())) {
