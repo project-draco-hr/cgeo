@@ -1,0 +1,48 @@
+{
+  final int groupId=item.getGroupId();
+  final int index=item.getItemId();
+switch (groupId) {
+case R.id.author:
+case R.id.value:
+    final int itemId=item.getItemId();
+switch (itemId) {
+case 1:
+    cgeocaches.startActivityOwner(this,contextMenuUser);
+  return true;
+case 2:
+cgeocaches.startActivityUserName(this,contextMenuUser);
+return true;
+case 3:
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+return true;
+default :
+break;
+}
+break;
+case CONTEXT_MENU_WAYPOINT_DUPLICATE:
+if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+final cgWaypoint copy=new cgWaypoint(cache.getWaypoints().get(index));
+copy.setUserDefined();
+copy.setName(res.getString(R.string.waypoint_copy_of) + " " + copy.getName());
+cache.getWaypoints().add(index + 1,copy);
+app.saveOwnWaypoint(-1,cache.getGeocode(),copy);
+app.removeCacheFromCache(cache.getGeocode());
+notifyDataSetChanged();
+}
+break;
+case CONTEXT_MENU_WAYPOINT_DELETE:
+if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+final cgWaypoint waypoint=cache.getWaypoints().get(index);
+if (waypoint.isUserDefined()) {
+cache.getWaypoints().remove(index);
+app.deleteWaypoint(waypoint.getId());
+app.removeCacheFromCache(cache.getGeocode());
+notifyDataSetChanged();
+}
+}
+break;
+default :
+return onOptionsItemSelected(item);
+}
+return false;
+}

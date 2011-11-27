@@ -1,0 +1,7 @@
+{
+  Button showDesc=(Button)view.findViewById(R.id.show_description);
+  showDesc.setVisibility(View.GONE);
+  showDesc.setOnClickListener(null);
+  view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
+  new LoadLongDescriptionTask().execute((Void)null);
+}

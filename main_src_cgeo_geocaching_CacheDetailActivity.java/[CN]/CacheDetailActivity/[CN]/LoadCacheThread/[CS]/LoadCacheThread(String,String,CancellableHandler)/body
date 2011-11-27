@@ -1,0 +1,10 @@
+{
+  handler=handlerIn;
+  if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+    showToast(res.getString(R.string.err_detail_cache_forgot));
+    finish();
+    return;
+  }
+  this.geocode=geocode;
+  this.guid=guid;
+}

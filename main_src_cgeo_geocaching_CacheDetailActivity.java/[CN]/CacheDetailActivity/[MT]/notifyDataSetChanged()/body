@@ -1,0 +1,30 @@
+{
+  if (search == null) {
+    return;
+  }
+  cache=app.getCache(search);
+  if (cache == null) {
+    progress.dismiss();
+    showToast(res.getString(R.string.err_detail_cache_find_some));
+    finish();
+    return;
+  }
+  for (  PageViewCreator creator : viewCreators.values()) {
+    creator.notifyDataSetChanged();
+  }
+  setTitle(cache.getGeocode().toUpperCase());
+  ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())),null,null,null);
+  pageOrder.clear();
+  pageOrder.add(Page.DETAILS);
+  pageOrder.add(Page.DESCRIPTION);
+  if (CollectionUtils.isNotEmpty(cache.getLogs())) {
+    pageOrder.add(Page.LOGS);
+  }
+  pageOrder.add(Page.WAYPOINTS);
+  if (CollectionUtils.isNotEmpty(cache.getInventory())) {
+    pageOrder.add(Page.INVENTORY);
+  }
+  viewPagerAdapter.notifyDataSetChanged();
+  viewPagerIndicator.onPageSelected(currentPageIndex);
+  progress.dismiss();
+}

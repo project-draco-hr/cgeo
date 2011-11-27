@@ -1,0 +1,118 @@
+{
+  if (cache == null) {
+    return null;
+  }
+  view=(ScrollView)getLayoutInflater().inflate(R.layout.cacheview_details,null);
+  detailsList=(LinearLayout)view.findViewById(R.id.details_list);
+  Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
+  if (cache.isDisabled() || cache.isArchived()) {
+    span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+  }
+  addCacheDetail(R.string.cache_name,span);
+  addCacheDetail(R.string.cache_type,cache.getType().getL10n());
+  if (null != cache.getSize() && cache.showSize()) {
+    addCacheDetail(R.string.cache_size,cache.getSize().getL10n());
+  }
+  addCacheDetail(R.string.cache_geocode,cache.getGeocode().toUpperCase());
+  if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled()|| cache.isMembers()|| cache.isFound()) {
+    final StringBuilder state=new StringBuilder();
+    if (cache.isLogOffline()) {
+      state.append(res.getString(R.string.cache_status_offline_log));
+    }
+    if (cache.isFound()) {
+      if (state.length() > 0) {
+        state.append(", ");
+      }
+      state.append(res.getString(R.string.cache_status_found));
+    }
+    if (cache.isArchived()) {
+      if (state.length() > 0) {
+        state.append(", ");
+      }
+      state.append(res.getString(R.string.cache_status_archived));
+    }
+    if (cache.isDisabled()) {
+      if (state.length() > 0) {
+        state.append(", ");
+      }
+      state.append(res.getString(R.string.cache_status_disabled));
+    }
+    if (cache.isMembers()) {
+      if (state.length() > 0) {
+        state.append(", ");
+      }
+      state.append(res.getString(R.string.cache_status_premium));
+    }
+    addCacheDetail(R.string.cache_status,state.toString());
+  }
+  cacheDistanceView=addCacheDetail(R.string.cache_distance,cache.getDistance() != null ? "~" + cgBase.getHumanDistance(cache.getDistance()) : "--");
+  if (cache.getDifficulty() != null && cache.getDifficulty() > 0) {
+    addStarRating(R.string.cache_difficulty,cache.getDifficulty());
+  }
+  if (cache.getTerrain() != null && cache.getTerrain() > 0) {
+    addStarRating(R.string.cache_terrain,cache.getTerrain());
+  }
+  if (cache.getRating() != null && cache.getRating() > 0) {
+    final RelativeLayout itemLayout=addStarRating(R.string.cache_rating,cache.getRating());
+    if (cache.getVotes() != null) {
+      final TextView itemAddition=(TextView)itemLayout.findViewById(R.id.addition);
+      itemAddition.setText("(" + cache.getVotes() + ")");
+      itemAddition.setVisibility(View.VISIBLE);
+    }
+  }
+  if (cache.getFavouriteCnt() != null) {
+    addCacheDetail(R.string.cache_favourite,String.format("%d",cache.getFavouriteCnt()) + "??");
+  }
+  if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
+    TextView ownerView=addCacheDetail(R.string.cache_owner,"");
+    if (StringUtils.isNotBlank(cache.getOwner())) {
+      ownerView.setText(Html.fromHtml(cache.getOwner()),TextView.BufferType.SPANNABLE);
+    }
+ else     if (StringUtils.isNotBlank(cache.getOwnerReal())) {
+      ownerView.setText(Html.fromHtml(cache.getOwnerReal()),TextView.BufferType.SPANNABLE);
+    }
+    ownerView.setOnClickListener(new UserActionsClickListener());
+  }
+  if (cache.getHiddenDate() != null && cache.getHiddenDate().getTime() > 0) {
+    addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,cgBase.formatFullDate(cache.getHiddenDate().getTime()));
+  }
+  if (StringUtils.isNotBlank(cache.getLocation())) {
+    addCacheDetail(R.string.cache_location,cache.getLocation());
+  }
+  if (cache.getCoords() != null) {
+    addCacheDetail(R.string.cache_coordinates,cache.getCoords().toString()).setOnClickListener(new View.OnClickListener(){
+      private int position=0;
+      private GeopointFormatter.Format[] availableFormats=new GeopointFormatter.Format[]{GeopointFormatter.Format.LAT_LON_DECMINUTE,GeopointFormatter.Format.LAT_LON_DECSECOND,GeopointFormatter.Format.LAT_LON_DECDEGREE};
+      @Override public void onClick(      View view){
+        position=(position + 1) % availableFormats.length;
+        final TextView valueView=(TextView)view.findViewById(R.id.value);
+        valueView.setText(cache.getCoords().format(availableFormats[position]));
+      }
+    }
+);
+  }
+  updateOfflineBox();
+  Button buttonWatchlistAdd=(Button)view.findViewById(R.id.add_to_watchlist);
+  Button buttonWatchlistRemove=(Button)view.findViewById(R.id.remove_from_watchlist);
+  buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
+  buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
+  updateWatchlistBox();
+  IConnector connector=ConnectorFactory.getConnector(cache);
+  if (connector != null) {
+    String license=connector.getLicenseText(cache);
+    if (StringUtils.isNotBlank(license)) {
+      ((LinearLayout)view.findViewById(R.id.license_box)).setVisibility(View.VISIBLE);
+      TextView licenseView=((TextView)view.findViewById(R.id.license));
+      licenseView.setText(Html.fromHtml(license),BufferType.SPANNABLE);
+      licenseView.setClickable(true);
+      licenseView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+ else {
+      ((LinearLayout)view.findViewById(R.id.license_box)).setVisibility(View.GONE);
+    }
+  }
+  if (geolocation != null) {
+    locationUpdater.updateLoc(geolocation);
+  }
+  return view;
+}

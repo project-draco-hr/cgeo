@@ -1,0 +1,8 @@
+{
+  if (cache == null) {
+    return null;
+  }
+  view=(ScrollView)getLayoutInflater().inflate(R.layout.cacheview_logs,null);
+  new LogInflaterTask().execute((Void)null);
+  return view;
+}

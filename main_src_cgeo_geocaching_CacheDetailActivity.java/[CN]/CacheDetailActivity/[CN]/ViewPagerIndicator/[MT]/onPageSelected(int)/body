@@ -1,0 +1,18 @@
+{
+  currentPageIndex=position;
+  indicatorCurrent.setText(res.getString(pageOrder.get(position).titleStringId));
+  if (position > 0) {
+    indicatorPrev.setText(res.getString(pageOrder.get(position - 1).titleStringId));
+    indicatorPrev.setVisibility(View.VISIBLE);
+  }
+ else {
+    indicatorPrev.setVisibility(View.GONE);
+  }
+  if (position < (pageOrder.size() - 1)) {
+    indicatorNext.setText(res.getString(pageOrder.get(position + 1).titleStringId));
+    indicatorNext.setVisibility(View.VISIBLE);
+  }
+ else {
+    indicatorNext.setVisibility(View.GONE);
+  }
+}
