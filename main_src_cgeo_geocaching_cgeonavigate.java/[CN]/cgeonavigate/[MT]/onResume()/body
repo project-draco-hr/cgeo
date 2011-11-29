@@ -2,7 +2,7 @@
   super.onResume();
   setGo4CacheAction();
   if (geo == null) {
-    geo=app.startGeo(this,geoUpdate,0,0);
+    geo=app.startGeo(geoUpdate);
   }
   if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(this,dirUpdate);

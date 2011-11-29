@@ -5,8 +5,7 @@
  catch (  Exception e) {
   }
   if (!dirInUse && dir != null) {
-    dir.closeDir();
-    dir=null;
+    cleanDir();
     Log.i(Settings.tag,"Direction service stopped");
   }
 }

@@ -1,5 +1,5 @@
 {
-  assign(app.getLastCoords());
+  assign(cgeoapplication.getInstance().getLastCoords());
   Location lastGps=geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
   if (lastGps != null) {
     lastGps.setProvider("last");

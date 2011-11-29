@@ -15,7 +15,7 @@
     locationProvider=LocationProviderType.LAST;
   }
   coordsNow=new Geopoint(location.getLatitude(),location.getLongitude());
-  app.setLastLoc(coordsNow);
+  cgeoapplication.getInstance().setLastCoords(coordsNow);
   if (location.hasAltitude() && locationProvider != LocationProviderType.LAST) {
     altitudeNow=location.getAltitude() + Settings.getAltCorrection();
   }
@@ -44,7 +44,6 @@
     if (coordsBefore != null) {
       final float dst=coordsBefore.distanceTo(coordsNow);
       if (dst > 0.005) {
-        distanceNow+=dst;
         coordsBefore=coordsNow;
       }
     }

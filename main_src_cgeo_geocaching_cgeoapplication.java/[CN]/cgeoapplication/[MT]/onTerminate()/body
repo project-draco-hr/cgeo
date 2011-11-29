@@ -1,13 +1,7 @@
 {
   Log.d(Settings.tag,"Terminating c:geo...");
-  if (geo != null) {
-    geo.closeGeo();
-    geo=null;
-  }
-  if (dir != null) {
-    dir.closeDir();
-    dir=null;
-  }
+  cleanGeo();
+  cleanDir();
   if (storage != null) {
     storage.clean();
     storage.closeDb();

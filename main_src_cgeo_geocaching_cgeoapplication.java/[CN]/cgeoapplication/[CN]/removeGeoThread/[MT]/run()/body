@@ -5,8 +5,7 @@
  catch (  Exception e) {
   }
   if (!geoInUse && geo != null) {
-    geo.closeGeo();
-    geo=null;
+    cleanGeo();
     Log.i(Settings.tag,"Location service stopped");
   }
 }

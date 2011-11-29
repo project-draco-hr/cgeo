@@ -1,0 +1,9 @@
+{
+  geoUpdate=geoUpdateIn;
+  geoNetListener=new cgeoGeoListener();
+  geoNetListener.setProvider(LocationManager.NETWORK_PROVIDER);
+  geoGpsListener=new cgeoGeoListener();
+  geoGpsListener.setProvider(LocationManager.GPS_PROVIDER);
+  geoGpsStatusListener=new cgeoGpsStatusListener();
+  initGeo();
+}

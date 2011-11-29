@@ -9,20 +9,20 @@
   satellitesVisible=0;
   satellitesFixed=0;
   if (geoManager == null) {
-    geoManager=(LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+    geoManager=(LocationManager)cgeoapplication.getInstance().getSystemService(Context.LOCATION_SERVICE);
   }
   lastLoc();
   geoNetListener.setProvider(LocationManager.NETWORK_PROVIDER);
   geoGpsListener.setProvider(LocationManager.GPS_PROVIDER);
   geoManager.addGpsStatusListener(geoGpsStatusListener);
   try {
-    geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,time,distance,geoNetListener);
+    geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,geoNetListener);
   }
  catch (  Exception e) {
     Log.w(Settings.tag,"There is no NETWORK location provider");
   }
   try {
-    geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,time,distance,geoGpsListener);
+    geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,geoGpsListener);
   }
  catch (  Exception e) {
     Log.w(Settings.tag,"There is no GPS location provider");
