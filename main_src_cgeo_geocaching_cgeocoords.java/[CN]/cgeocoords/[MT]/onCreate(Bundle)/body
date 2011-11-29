@@ -45,6 +45,14 @@
   eLonMin.addTextChangedListener(new TextChanged(eLonMin));
   eLonSec.addTextChangedListener(new TextChanged(eLonSec));
   eLonSub.addTextChangedListener(new TextChanged(eLonSub));
+  Compatibility.disableSuggestions(eLatDeg);
+  Compatibility.disableSuggestions(eLatMin);
+  Compatibility.disableSuggestions(eLatSec);
+  Compatibility.disableSuggestions(eLatSub);
+  Compatibility.disableSuggestions(eLonDeg);
+  Compatibility.disableSuggestions(eLonMin);
+  Compatibility.disableSuggestions(eLonSec);
+  Compatibility.disableSuggestions(eLonSub);
   bLat.setOnClickListener(new ButtonClickListener());
   bLon.setOnClickListener(new ButtonClickListener());
   final Button buttonCurrent=(Button)findViewById(R.id.current);
