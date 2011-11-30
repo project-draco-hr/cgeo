@@ -274,7 +274,8 @@
     }
 );
     final Element gcTBs=gcCache.getChild(nsGC,"travelbugs");
-    gcTBs.getChild(nsGC,"travelbug").setStartElementListener(new StartElementListener(){
+    final Element gcTB=gcTBs.getChild(nsGC,"travelbug");
+    gcTB.setStartElementListener(new StartElementListener(){
       @Override public void start(      Attributes attrs){
         trackable=new cgTrackable();
         try {
@@ -287,7 +288,6 @@
       }
     }
 );
-    final Element gcTB=gcTBs.getChild(nsGC,"travelbug");
     gcTB.setEndElementListener(new EndElementListener(){
       @Override public void end(){
         if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {

@@ -1,10 +1,10 @@
 {
 switch (item.getItemId()) {
-case 1:
+case MENU_LOG_TOUCH:
     logTouch();
   return true;
-case 2:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/track/details.aspx?tracker=" + trackable.getGeocode())));
+case MENU_BROWSER_TRACKABLE:
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(trackable.getUrl())));
 return true;
 }
 return false;

@@ -1,4 +1,9 @@
 {
-  trackable=cgBase.searchTrackable(geocode,guid,id);
-  handler.sendMessage(new Message());
+  if (StringUtils.startsWithIgnoreCase(geocode,"GK")) {
+    trackable=cgeoapplication.getInstance().getTrackableByGeocode(geocode);
+  }
+ else {
+    trackable=cgBase.searchTrackable(geocode,guid,id);
+  }
+  handler.sendMessage(Message.obtain());
 }

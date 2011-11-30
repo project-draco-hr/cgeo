@@ -4,8 +4,13 @@
   if (name.length() > 82) {
     name=name.substring(0,79) + "...";
   }
-  String status="I touched " + name + " ("+ trackable.getUrl()+ ")!";
-  status=Twitter.appendHashTag(status,"cgeo");
+  StringBuilder builder=new StringBuilder("I touched ");
+  builder.append(name);
+  if (trackable.getUrl() != null) {
+    builder.append(" (").append(trackable.getUrl()).append(')');
+  }
+  builder.append('!');
+  String status=Twitter.appendHashTag(builder.toString(),"cgeo");
   status=Twitter.appendHashTag(status,"geocaching");
   Twitter.postTweet(app,status,null);
 }

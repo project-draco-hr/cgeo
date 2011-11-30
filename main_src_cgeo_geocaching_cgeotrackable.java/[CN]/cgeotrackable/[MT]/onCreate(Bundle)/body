@@ -57,17 +57,17 @@
     finish();
     return;
   }
+  String message;
   if (StringUtils.isNotBlank(name)) {
-    waitDialog=ProgressDialog.show(this,Html.fromHtml(name).toString(),res.getString(R.string.trackable_details_loading),true);
+    message=Html.fromHtml(name).toString();
   }
  else   if (StringUtils.isNotBlank(geocode)) {
-    waitDialog=ProgressDialog.show(this,geocode.toUpperCase(),res.getString(R.string.trackable_details_loading),true);
+    message=geocode.toUpperCase();
   }
  else {
-    waitDialog=ProgressDialog.show(this,res.getString(R.string.trackable),res.getString(R.string.trackable_details_loading),true);
+    message=res.getString(R.string.trackable);
   }
-  waitDialog.setCancelable(true);
-  loadTrackable thread;
-  thread=new loadTrackable(loadTrackableHandler,geocode,guid,id);
+  waitDialog=ProgressDialog.show(this,message,res.getString(R.string.trackable_details_loading),true,true);
+  loadTrackable thread=new loadTrackable(loadTrackableHandler,geocode,guid,id);
   thread.start();
 }

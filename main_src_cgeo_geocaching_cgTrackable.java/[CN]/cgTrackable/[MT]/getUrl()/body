@@ -1,3 +1,14 @@
 {
+  if (StringUtils.startsWithIgnoreCase(geocode,"GK")) {
+    String hex=geocode.substring(3);
+    try {
+      int id=Integer.parseInt(hex,16);
+      return "http://geokrety.org/konkret.php?id=" + id;
+    }
+ catch (    NumberFormatException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
   return "http://coord.info/" + geocode.toUpperCase();
 }

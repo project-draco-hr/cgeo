@@ -1,12 +1,13 @@
 {
-  cgTrackable trackable=new cgTrackable();
   if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
     Log.w(Settings.tag,"cgeoBase.searchTrackable: No geocode nor guid nor id given");
     return null;
   }
+  cgTrackable trackable=new cgTrackable();
   final Parameters params=new Parameters();
   if (StringUtils.isNotBlank(geocode)) {
     params.put("tracker",geocode);
+    trackable.setGeocode(geocode);
   }
  else   if (StringUtils.isNotBlank(guid)) {
     params.put("guid",guid);
@@ -22,7 +23,7 @@
   trackable=parseTrackable(page,cgeoapplication.getInstance());
   if (trackable == null) {
     Log.e(Settings.tag,"cgeoBase.searchTrackable: No trackable parsed");
-    return trackable;
+    return null;
   }
   return trackable;
 }
