@@ -38,10 +38,10 @@
   mapController=mapView.getMapController();
   mapController.setZoom(Settings.getMapZoom());
   if (geo != null) {
-    geoUpdate.updateLoc(geo);
+    geoUpdate.updateLocation(geo);
   }
   if (dir != null) {
-    dirUpdate.updateDir(dir);
+    dirUpdate.updateDirection(dir);
   }
   Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {

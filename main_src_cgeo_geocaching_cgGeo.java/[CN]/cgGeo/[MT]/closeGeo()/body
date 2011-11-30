@@ -1,11 +1,5 @@
 {
-  if (geoManager != null && geoNetListener != null) {
-    geoManager.removeUpdates(geoNetListener);
-  }
-  if (geoManager != null && geoGpsListener != null) {
-    geoManager.removeUpdates(geoGpsListener);
-  }
-  if (geoManager != null) {
-    geoManager.removeGpsStatusListener(geoGpsStatusListener);
-  }
+  geoManager.removeUpdates(networkListener);
+  geoManager.removeUpdates(gpsListener);
+  geoManager.removeGpsStatusListener(gpsStatusListener);
 }

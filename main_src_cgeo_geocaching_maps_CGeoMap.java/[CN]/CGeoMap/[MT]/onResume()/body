@@ -7,9 +7,9 @@
   if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(activity,dirUpdate);
   }
-  geoUpdate.updateLoc(geo);
+  geoUpdate.updateLocation(geo);
   if (dir != null) {
-    dirUpdate.updateDir(dir);
+    dirUpdate.updateDirection(dir);
   }
   startTimer();
 }

@@ -1,23 +1,11 @@
 {
-  if (locNet == null && locGps != null) {
-    assign(locGps);
-    return;
-  }
   if (locNet != null && locGps == null) {
     assign(locNet);
-    return;
   }
-  if (satellitesFixed > 0) {
+ else   if ((locNet == null && locGps != null) || (satellitesFixed > 0) || (signallingProvider != null && signallingProvider.equals(LocationManager.GPS_PROVIDER))|| locGpsLast > (System.currentTimeMillis() - 30 * 1000)) {
     assign(locGps);
-    return;
   }
-  if (initProvider != null && initProvider.equals(LocationManager.GPS_PROVIDER)) {
-    assign(locGps);
-    return;
+ else {
+    assign(locNet);
   }
-  if (locGpsLast > (System.currentTimeMillis() - 30 * 1000)) {
-    assign(locGps);
-    return;
-  }
-  assign(locNet);
 }

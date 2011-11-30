@@ -4,14 +4,14 @@
     return;
   }
   location=loc;
-  String provider=location.getProvider();
+  final String provider=location.getProvider();
   if (provider.equals(LocationManager.GPS_PROVIDER)) {
     locationProvider=LocationProviderType.GPS;
   }
  else   if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
     locationProvider=LocationProviderType.NETWORK;
   }
- else   if (provider.equalsIgnoreCase("last")) {
+ else   if (provider.equalsIgnoreCase(LAST_LOCATION_PSEUDO_PROVIDER)) {
     locationProvider=LocationProviderType.LAST;
   }
   coordsNow=new Geopoint(location.getLatitude(),location.getLongitude());
@@ -40,20 +40,7 @@
  else {
     accuracyNow=999f;
   }
-  if (locationProvider == LocationProviderType.GPS) {
-    if (coordsBefore != null) {
-      final float dst=coordsBefore.distanceTo(coordsNow);
-      if (dst > 0.005) {
-        coordsBefore=coordsNow;
-      }
-    }
- else     if (coordsBefore == null) {
-      coordsBefore=coordsNow;
-    }
-  }
-  if (geoUpdate != null) {
-    geoUpdate.updateLoc(this);
-  }
+  fireLocationCallback();
   if (locationProvider == LocationProviderType.GPS || locationProvider == LocationProviderType.NETWORK) {
     Go4Cache.signalCoordinates(coordsNow);
   }

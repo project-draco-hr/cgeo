@@ -35,10 +35,10 @@
   setTitle();
   setDestCoords();
   if (geo != null) {
-    geoUpdate.updateLoc(geo);
+    geoUpdate.updateLocation(geo);
   }
   if (dir != null) {
-    dirUpdate.updateDir(dir);
+    dirUpdate.updateDirection(dir);
   }
   compassView=(cgCompass)findViewById(R.id.rose);
   updater=new updaterThread(updaterHandler);
