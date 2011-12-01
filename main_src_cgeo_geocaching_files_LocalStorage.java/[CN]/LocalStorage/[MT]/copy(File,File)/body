@@ -1,6 +1,6 @@
 {
   destination.getParentFile().mkdirs();
-  InputStream input;
+  InputStream input=null;
   OutputStream output;
   try {
     input=new FileInputStream(source);
@@ -8,6 +8,14 @@
   }
  catch (  FileNotFoundException e) {
     Log.e(Settings.tag,"LocalStorage.copy: could not open file",e);
+    if (input != null) {
+      try {
+        input.close();
+      }
+ catch (      IOException e1) {
+        e1.printStackTrace();
+      }
+    }
     return false;
   }
   boolean copyDone=copy(input,output);

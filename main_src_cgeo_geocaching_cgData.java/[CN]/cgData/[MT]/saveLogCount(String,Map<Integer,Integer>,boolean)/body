@@ -15,8 +15,8 @@
       values.clear();
       values.put("geocode",geocode);
       values.put("updated",timeStamp);
-      values.put("type",pair.getKey().intValue());
-      values.put("count",pair.getValue().intValue());
+      values.put("type",pair.getKey());
+      values.put("count",pair.getValue());
       databaseRW.insert(dbTableLogCount,null,values);
     }
     databaseRW.setTransactionSuccessful();

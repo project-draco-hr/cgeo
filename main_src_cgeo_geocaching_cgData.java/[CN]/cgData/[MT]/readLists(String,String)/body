@@ -7,10 +7,8 @@
         cursor.moveToFirst();
         int indexId=cursor.getColumnIndex("_id");
         int indexTitle=cursor.getColumnIndex("title");
-        int indexUpdated=cursor.getColumnIndex("updated");
         do {
           cgList list=new cgList(cursor.getInt(indexId) + 10,cursor.getString(indexTitle));
-          list.updated=cursor.getLong(indexUpdated);
           result.add(list);
         }
  while (cursor.moveToNext());
