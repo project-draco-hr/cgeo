@@ -7,7 +7,7 @@
     BitmapFactory.decodeStream(fis,null,options);
   }
  catch (  FileNotFoundException e) {
-    e.printStackTrace();
+    Log.e(Settings.tag,"HtmlImage.setSampleSize",e);
   }
  finally {
     if (fis != null) {
@@ -15,7 +15,6 @@
         fis.close();
       }
  catch (      IOException e) {
-        e.printStackTrace();
       }
     }
   }

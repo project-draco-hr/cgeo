@@ -42,7 +42,7 @@
     cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
   }
  catch (  JSONException e) {
-    e.printStackTrace();
+    Log.e(Settings.tag,"OkapiClient.parseCache",e);
   }
   return cache;
 }

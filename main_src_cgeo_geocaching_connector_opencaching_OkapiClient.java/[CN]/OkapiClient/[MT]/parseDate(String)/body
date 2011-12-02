@@ -5,7 +5,7 @@
     return ISO8601DATEFORMAT.parse(strippedDate);
   }
  catch (  ParseException e) {
-    e.printStackTrace();
+    Log.e(Settings.tag,"OkapiClient.parseDate",e);
   }
   return null;
 }

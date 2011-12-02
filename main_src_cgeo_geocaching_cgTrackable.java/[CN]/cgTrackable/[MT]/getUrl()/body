@@ -6,7 +6,7 @@
       return "http://geokrety.org/konkret.php?id=" + id;
     }
  catch (    NumberFormatException e) {
-      e.printStackTrace();
+      Log.e(Settings.tag,"cgTrackable.getUrl",e);
       return null;
     }
   }

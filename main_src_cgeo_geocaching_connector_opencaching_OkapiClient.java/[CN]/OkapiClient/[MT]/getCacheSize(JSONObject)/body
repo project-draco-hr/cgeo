@@ -4,7 +4,7 @@
     size=response.getDouble("size");
   }
  catch (  JSONException e) {
-    e.printStackTrace();
+    Log.e(Settings.tag,"OkapiClient.getCacheSize",e);
   }
 switch ((int)Math.round(size)) {
 case 1:

@@ -1,5 +1,5 @@
 {
-  if (StringUtils.isBlank(cacheId)) {
+  if (StringUtils.isBlank(cacheId) && getConnector().equals(GCConnector.getInstance())) {
     return CryptUtils.convertToGcBase31(geocode);
   }
   return cacheId;

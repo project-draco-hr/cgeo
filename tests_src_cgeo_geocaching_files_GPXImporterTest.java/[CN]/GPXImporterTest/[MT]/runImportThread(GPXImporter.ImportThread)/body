@@ -4,7 +4,7 @@
     importThread.join();
   }
  catch (  InterruptedException e) {
-    e.printStackTrace();
+    Log.e(Settings.tag,"GPXImporterTest.runImportThread",e);
   }
   importStepHandler.waitForCompletion();
 }
