@@ -174,7 +174,7 @@
       final Button offlineRefresh=(Button)findViewById(R.id.offline_refresh);
       final Button offlineStore=(Button)findViewById(R.id.offline_store);
       if (cache.getReason() > 0) {
-        Long diff=(System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000));
+        long diff=(System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000));
         String ago="";
         if (diff < 15) {
           ago=res.getString(R.string.cache_offline_time_mins_few);

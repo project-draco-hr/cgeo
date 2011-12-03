@@ -211,9 +211,9 @@
     gcCache.getChild(nsGC,"difficulty").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
         try {
-          cache.setDifficulty(new Float(body));
+          cache.setDifficulty(Float.parseFloat(body));
         }
- catch (        Exception e) {
+ catch (        NumberFormatException e) {
           Log.w(Settings.tag,"Failed to parse difficulty: " + e.toString());
         }
       }
@@ -222,9 +222,9 @@
     gcCache.getChild(nsGC,"terrain").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
         try {
-          cache.setTerrain(new Float(body));
+          cache.setTerrain(Float.parseFloat(body));
         }
- catch (        Exception e) {
+ catch (        NumberFormatException e) {
           Log.w(Settings.tag,"Failed to parse terrain: " + e.toString());
         }
       }

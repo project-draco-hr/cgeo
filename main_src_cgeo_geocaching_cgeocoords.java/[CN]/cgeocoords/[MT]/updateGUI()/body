@@ -2,7 +2,7 @@
   if (gp == null) {
     return;
   }
-  Double lat=0.0;
+  double lat=0.0;
   if (gp.getLatitude() < 0) {
     bLat.setText("S");
   }
@@ -10,7 +10,7 @@
     bLat.setText("N");
   }
   lat=Math.abs(gp.getLatitude());
-  Double lon=0.0;
+  double lon=0.0;
   if (gp.getLongitude() < 0) {
     bLon.setText("W");
   }

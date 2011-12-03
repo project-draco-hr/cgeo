@@ -4,8 +4,8 @@
   assertTrue("Hockenheimer City-Brunnen by vptsz, Multi-cache (2/1)",cache.getShortDescription().startsWith("Kurzer informativer Multi entlang der Brunnen"));
   assertTrue(cache.getDescription().startsWith("Cachemobile k??nnen kostenfrei am Messplatz geparkt werden."));
   assertTrue(cache.hasTrackables());
-  assertEquals(2.0f,cache.getDifficulty().floatValue(),0.01f);
-  assertEquals(1.0f,cache.getTerrain().floatValue(),0.01f);
+  assertEquals(2.0f,cache.getDifficulty(),0.01f);
+  assertEquals(1.0f,cache.getTerrain(),0.01f);
   final Geopoint refCoordinates=new Geopoint("N 49?? 19.122","E 008?? 32.739");
   assertEquals(refCoordinates.format(GeopointFormatter.Format.LAT_DECMINUTE),cache.getLatitude());
   assertEquals(refCoordinates.format(GeopointFormatter.Format.LON_DECMINUTE),cache.getLongitude());

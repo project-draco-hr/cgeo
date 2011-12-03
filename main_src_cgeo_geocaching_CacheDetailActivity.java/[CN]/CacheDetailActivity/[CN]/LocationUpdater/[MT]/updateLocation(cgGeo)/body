@@ -12,7 +12,7 @@
     }
     if (cache != null && cache.getElevation() != null) {
       if (geo.altitudeNow != null) {
-        Double diff=(cache.getElevation() - geo.altitudeNow);
+        double diff=(cache.getElevation() - geo.altitudeNow);
         if (diff >= 0) {
           dist.append(" ???");
         }

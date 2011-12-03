@@ -46,10 +46,10 @@
     addCacheDetail(R.string.cache_status,state.toString());
   }
   cacheDistanceView=addCacheDetail(R.string.cache_distance,cache.getDistance() != null ? "~" + cgBase.getHumanDistance(cache.getDistance()) : "--");
-  if (cache.getDifficulty() != null && cache.getDifficulty() > 0) {
+  if (cache.getDifficulty() > 0) {
     addStarRating(R.string.cache_difficulty,cache.getDifficulty());
   }
-  if (cache.getTerrain() != null && cache.getTerrain() > 0) {
+  if (cache.getTerrain() > 0) {
     addStarRating(R.string.cache_terrain,cache.getTerrain());
   }
   if (cache.getRating() != null && cache.getRating() > 0) {

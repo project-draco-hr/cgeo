@@ -16,7 +16,7 @@
       do {
         calIdPre=cursor.getString(calIdIn);
         if (calIdPre != null) {
-          calId=new Integer(calIdPre);
+          calId=Integer.parseInt(calIdPre);
         }
         calName=cursor.getString(calNameIn);
         if (calId > 0 && calName != null) {

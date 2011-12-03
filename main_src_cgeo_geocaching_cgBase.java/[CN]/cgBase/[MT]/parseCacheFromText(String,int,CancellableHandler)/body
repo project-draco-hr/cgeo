@@ -48,11 +48,11 @@
   if (StringUtils.isNotBlank(tableInside)) {
     String result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_TERRAIN,true,null);
     if (result != null) {
-      cache.setTerrain(new Float(StringUtils.replaceChars(result,'_','.')));
+      cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
     }
     result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_DIFFICULTY,true,null);
     if (result != null) {
-      cache.setDifficulty(new Float(StringUtils.replaceChars(result,'_','.')));
+      cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
     }
     cache.setOwner(Html.fromHtml(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER,true,cache.getOwner())).toString());
     try {
