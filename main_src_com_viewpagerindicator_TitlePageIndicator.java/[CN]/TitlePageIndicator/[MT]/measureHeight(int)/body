@@ -1,0 +1,17 @@
+{
+  float result=0;
+  int specMode=MeasureSpec.getMode(measureSpec);
+  int specSize=MeasureSpec.getSize(measureSpec);
+  if (specMode == MeasureSpec.EXACTLY) {
+    result=specSize;
+  }
+ else {
+    RectF bounds=new RectF();
+    bounds.bottom=mPaintText.descent() - mPaintText.ascent();
+    result=bounds.bottom - bounds.top + mFooterLineHeight + mFooterPadding + mTopPadding;
+    if (mFooterIndicatorStyle != IndicatorStyle.None) {
+      result+=mFooterIndicatorHeight;
+    }
+  }
+  return (int)result;
+}
