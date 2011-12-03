@@ -1,6 +1,7 @@
 {
   super.onCreateContextMenu(menu,view,info);
   final int viewId=view.getId();
+  contextMenuWPIndex=-1;
 switch (viewId) {
 case R.id.author:
 case R.id.value:
@@ -31,10 +32,19 @@ Collections.sort(sortedWaypoints);
 final cgWaypoint waypoint=sortedWaypoints.get(i);
 final int index=cache.getWaypoints().indexOf(waypoint);
 menu.setHeaderTitle(res.getString(R.string.waypoint));
+menu.add(CONTEXT_MENU_WAYPOINT_EDIT,index,0,R.string.waypoint_edit);
 menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE,index,0,R.string.waypoint_duplicate);
+contextMenuWPIndex=index;
 if (waypoint.isUserDefined()) {
   menu.add(CONTEXT_MENU_WAYPOINT_DELETE,index,0,R.string.waypoint_delete);
 }
+if (waypoint.getCoords() != null) {
+  menu.add(CONTEXT_MENU_WAYPOINT_COMPASS,index,0,R.string.cache_menu_compass);
+  SubMenu subMenu=menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE,index,0,R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
+  NavigationAppFactory.addMenuItems(subMenu,this,res);
+  menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND,index,0,R.string.cache_menu_around);
+}
+break;
 }
 }
 }
