@@ -1,5 +1,7 @@
 {
-  if (mViewPager == null)   return false;
+  if ((mViewPager == null) || (mViewPager.getAdapter().getCount() == 0)) {
+    return false;
+  }
   final int action=ev.getAction();
 switch (action & MotionEventCompat.ACTION_MASK) {
 case MotionEvent.ACTION_DOWN:

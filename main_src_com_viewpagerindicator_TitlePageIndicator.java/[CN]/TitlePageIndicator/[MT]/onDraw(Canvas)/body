@@ -1,7 +1,16 @@
 {
   super.onDraw(canvas);
-  ArrayList<RectF> bounds=calculateAllBounds(mPaintText);
+  if (mViewPager == null) {
+    return;
+  }
   final int count=mViewPager.getAdapter().getCount();
+  if (count == 0) {
+    return;
+  }
+  ArrayList<RectF> bounds=calculateAllBounds(mPaintText);
+  if (mCurrentPage >= bounds.size()) {
+    setCurrentItem(bounds.size() - 1);
+  }
   final int countMinusOne=count - 1;
   final float halfWidth=getWidth() / 2f;
   final int left=getLeft();
@@ -100,6 +109,8 @@ mPath.close();
 mPaintFooterIndicator.setAlpha((int)(0xFF * selectedPercent));
 canvas.drawPath(mPath,mPaintFooterIndicator);
 mPaintFooterIndicator.setAlpha(0xFF);
+break;
+default :
 break;
 }
 }
