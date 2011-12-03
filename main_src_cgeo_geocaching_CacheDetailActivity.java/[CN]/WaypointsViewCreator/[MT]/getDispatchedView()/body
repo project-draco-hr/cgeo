@@ -10,6 +10,11 @@
     Collections.sort(sortedWaypoints);
     for (    cgWaypoint wpt : sortedWaypoints) {
       waypointView=(LinearLayout)getLayoutInflater().inflate(R.layout.waypoint_item,null);
+      if (null != wpt.getCoords()) {
+        final TextView coordinatesView=(TextView)waypointView.findViewById(R.id.coordinates);
+        coordinatesView.setText(wpt.getCoords().toString());
+        coordinatesView.setVisibility(View.VISIBLE);
+      }
       final List<String> infoTextList=new ArrayList<String>(3);
       if (StringUtils.isNotBlank(cgBase.waypointTypes.get(wpt.getWaypointType()))) {
         infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
@@ -25,7 +30,11 @@
           infoTextList.add(wpt.getLookup());
         }
       }
-      ((TextView)waypointView.findViewById(R.id.info)).setText(StringUtils.join(infoTextList," ?? "));
+      if (CollectionUtils.isNotEmpty(infoTextList)) {
+        final TextView infoView=(TextView)waypointView.findViewById(R.id.info);
+        infoView.setText(StringUtils.join(infoTextList," ?? "));
+        infoView.setVisibility(View.VISIBLE);
+      }
       TextView nameView=(TextView)waypointView.findViewById(R.id.name);
       if (StringUtils.isNotBlank(wpt.getName())) {
         nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
@@ -38,7 +47,7 @@
       }
       wpt.setIcon(res,nameView);
       if (StringUtils.isNotBlank(wpt.getNote())) {
-        TextView noteView=(TextView)waypointView.findViewById(R.id.note);
+        final TextView noteView=(TextView)waypointView.findViewById(R.id.note);
         noteView.setVisibility(View.VISIBLE);
         if (BaseUtils.containsHtml(wpt.getNote())) {
           noteView.setText(Html.fromHtml(wpt.getNote().trim()),TextView.BufferType.SPANNABLE);
@@ -47,8 +56,8 @@
           noteView.setText(wpt.getNote().trim());
         }
       }
-      waypointView.setOnClickListener(new WaypointInfoClickListener(wpt.getId()));
       registerForContextMenu(waypointView);
+      waypointView.setOnClickListener(new WaypointInfoClickListener());
       waypoints.addView(waypointView);
     }
   }
