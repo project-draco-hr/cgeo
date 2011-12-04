@@ -84,7 +84,7 @@
   ViewPager pager=(ViewPager)findViewById(R.id.viewpager);
   viewPagerAdapter=new ViewPagerAdapter();
   pager.setAdapter(viewPagerAdapter);
-  TitlePageIndicator titleIndicator=(TitlePageIndicator)findViewById(R.id.pager_indicator);
+  titleIndicator=(TitlePageIndicator)findViewById(R.id.pager_indicator);
   titleIndicator.setViewPager(pager);
   new LoadCacheThread(geocode,guid,loadCacheHandler).start();
 }
