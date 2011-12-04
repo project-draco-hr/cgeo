@@ -14,8 +14,6 @@
   app.cleanDatabase(more);
   cleanupRunning=false;
   if (version > 0) {
-    SharedPreferences.Editor edit=prefs.edit();
-    edit.putInt("version",version);
-    edit.commit();
+    Settings.setVersion(version);
   }
 }

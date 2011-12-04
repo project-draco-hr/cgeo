@@ -2,8 +2,9 @@
   startButton=(Button)findViewById(R.id.start);
   pinEntry=(EditText)findViewById(R.id.pin);
   pinEntryButton=(Button)findViewById(R.id.pin_button);
-  OAtoken=prefs.getString("temp-token-public",null);
-  OAtokenSecret=prefs.getString("temp-token-secret",null);
+  ImmutablePair<String,String> tempToken=Settings.getTempToken();
+  OAtoken=tempToken.left;
+  OAtokenSecret=tempToken.right;
   startButton.setEnabled(true);
   startButton.setOnClickListener(new startListener());
   if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {

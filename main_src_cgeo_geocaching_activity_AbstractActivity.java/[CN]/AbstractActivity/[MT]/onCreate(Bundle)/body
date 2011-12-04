@@ -2,7 +2,6 @@
   super.onCreate(savedInstanceState);
   res=this.getResources();
   app=(cgeoapplication)this.getApplication();
-  prefs=getSharedPreferences(Settings.preferences,Context.MODE_PRIVATE);
   cgBase.initialize(app);
   cgBase.restoreCookieStore(Settings.getCookieStore());
 }

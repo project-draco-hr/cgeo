@@ -18,10 +18,7 @@
         OAtokenSecret=paramsMatcher2.group(1);
       }
       if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-        final SharedPreferences.Editor prefsEdit=getSharedPreferences(Settings.preferences,0).edit();
-        prefsEdit.putString("temp-token-public",OAtoken);
-        prefsEdit.putString("temp-token-secret",OAtokenSecret);
-        prefsEdit.commit();
+        Settings.setTwitterTempTokens(OAtoken,OAtokenSecret);
         try {
           final Parameters paramsBrowser=new Parameters();
           paramsBrowser.put("oauth_callback","oob");

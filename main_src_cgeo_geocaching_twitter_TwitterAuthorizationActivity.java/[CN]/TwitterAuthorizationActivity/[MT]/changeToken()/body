@@ -20,20 +20,10 @@
     if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
       OAtoken="";
       OAtokenSecret="";
-      final SharedPreferences.Editor prefs=getSharedPreferences(Settings.preferences,0).edit();
-      prefs.putString("tokenpublic",null);
-      prefs.putString("tokensecret",null);
-      prefs.putInt("twitter",0);
-      prefs.commit();
+      Settings.setTwitterTokens(null,null,false);
     }
  else {
-      final SharedPreferences.Editor prefs=getSharedPreferences(Settings.preferences,0).edit();
-      prefs.remove("temp-token-public");
-      prefs.remove("temp-token-secret");
-      prefs.putString("tokenpublic",OAtoken);
-      prefs.putString("tokensecret",OAtokenSecret);
-      prefs.putInt("twitter",1);
-      prefs.commit();
+      Settings.setTwitterTokens(OAtoken,OAtokenSecret,true);
       status=1;
     }
   }
