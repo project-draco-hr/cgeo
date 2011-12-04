@@ -70,7 +70,7 @@
  catch (    ParseException e) {
       Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hidden (event) date");
     }
-    cache.setFavouriteCnt(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
+    cache.setFavouritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
     cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id).toLowerCase()));
   }
   cache.setFound(BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));

@@ -47,13 +47,8 @@
       navAccuracy.setText(null);
       navLocation.setText(res.getString(R.string.loc_trying));
     }
-    if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) {
-      if (geo.bearingNow != null) {
-        northHeading=geo.bearingNow;
-      }
- else {
-        northHeading=0f;
-      }
+    if (!Settings.isUseCompass() || geo.speedNow > 5) {
+      northHeading=geo.bearingNow;
     }
   }
  catch (  Exception e) {

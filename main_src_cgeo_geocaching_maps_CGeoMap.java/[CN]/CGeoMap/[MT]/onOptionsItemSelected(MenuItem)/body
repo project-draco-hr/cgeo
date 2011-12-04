@@ -64,7 +64,7 @@ Log.e(Settings.tag,"cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
 }
 }
 );
-Float etaTime=Float.valueOf((detailTotal * (float)7) / 60);
+float etaTime=detailTotal * 7.0f / 60.0f;
 if (etaTime < 0.4) {
 waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
 }

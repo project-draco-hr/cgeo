@@ -26,13 +26,11 @@
     coords=geo.coordsNow;
   }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
-    Double bearing=null;
+    double bearing=0;
     try {
-      bearing=new Double(bearingText);
+      bearing=Double.parseDouble(bearingText);
     }
- catch (    Exception e) {
-    }
-    if (bearing == null) {
+ catch (    NumberFormatException e) {
       helpDialog(res.getString(R.string.err_point_bear_and_dist_title),res.getString(R.string.err_point_bear_and_dist));
       return null;
     }

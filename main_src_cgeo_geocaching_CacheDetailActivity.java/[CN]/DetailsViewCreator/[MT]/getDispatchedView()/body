@@ -52,18 +52,16 @@
   if (cache.getTerrain() > 0) {
     addStarRating(R.string.cache_terrain,cache.getTerrain());
   }
-  if (cache.getRating() != null && cache.getRating() > 0) {
+  if (cache.getRating() > 0) {
     final RelativeLayout itemLayout=addStarRating(R.string.cache_rating,cache.getRating());
-    if (cache.getVotes() != null) {
+    if (cache.getVotes() > 0) {
       final TextView itemAddition=(TextView)itemLayout.findViewById(R.id.addition);
       itemAddition.setText("(" + cache.getVotes() + ")");
       itemAddition.setVisibility(View.VISIBLE);
     }
   }
-  if (cache.getFavouriteCnt() != null) {
-    addCacheDetail(R.string.cache_favourite,String.format("%d",cache.getFavouriteCnt()) + "??");
-  }
-  if (cache.getMyVote() != null && cache.getMyVote() > 0) {
+  addCacheDetail(R.string.cache_favourite,String.format("%d",cache.getFavoritePoints()) + "??");
+  if (cache.getMyVote() > 0) {
     addStarRating(R.string.cache_own_rating,cache.getMyVote());
   }
   if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {

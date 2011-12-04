@@ -16,7 +16,7 @@
       if (!app.isOffline(geocode,null)) {
         if ((System.currentTimeMillis() - last) < 1500) {
           try {
-            int delay=1000 + ((Double)(Math.random() * 1000)).intValue() - (int)(System.currentTimeMillis() - last);
+            int delay=1000 + (int)(Math.random() * 1000.0) - (int)(System.currentTimeMillis() - last);
             if (delay < 0) {
               delay=500;
             }

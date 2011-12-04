@@ -18,13 +18,8 @@
         repaintRequired=true;
       }
     }
-    if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) {
-      if (geo.bearingNow != null) {
-        overlayPosition.setHeading(geo.bearingNow);
-      }
- else {
-        overlayPosition.setHeading(0f);
-      }
+    if (!Settings.isUseCompass() || geo.speedNow > 5) {
+      overlayPosition.setHeading(geo.bearingNow);
       repaintRequired=true;
     }
     if (repaintRequired && mapView != null) {

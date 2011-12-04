@@ -9,14 +9,9 @@
     if (cacheList != null && geo.coordsNow != null) {
       adapter.setActualCoordinates(geo.coordsNow);
     }
-    if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) {
+    if (!Settings.isUseCompass() || geo.speedNow > 5) {
       if (!Settings.isUseCompass()) {
-        if (geo.bearingNow != null) {
-          adapter.setActualHeading(geo.bearingNow);
-        }
- else {
-          adapter.setActualHeading(0f);
-        }
+        adapter.setActualHeading(geo.bearingNow);
       }
       if (northHeading != null) {
         adapter.setActualHeading(northHeading);

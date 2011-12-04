@@ -7,7 +7,7 @@
     detailed=true;
     detailedUpdate=updated;
   }
-  if (visitedDate == null || visitedDate == 0) {
+  if (visitedDate == 0) {
     visitedDate=other.getVisitedDate();
   }
   if (reason == 0) {
@@ -79,16 +79,16 @@
   if (StringUtils.isBlank(description)) {
     description=other.description;
   }
-  if (favouriteCnt == null) {
-    favouriteCnt=other.getFavouriteCnt();
+  if (favouritePoints == 0) {
+    favouritePoints=other.getFavoritePoints();
   }
-  if (rating == null) {
+  if (rating == 0) {
     rating=other.getRating();
   }
-  if (votes == null) {
+  if (votes == 0) {
     votes=other.votes;
   }
-  if (myVote == null) {
+  if (myVote == 0) {
     myVote=other.getMyVote();
   }
   if (attributes == null) {

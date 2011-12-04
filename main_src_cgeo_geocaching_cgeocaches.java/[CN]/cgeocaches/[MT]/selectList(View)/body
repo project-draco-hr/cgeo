@@ -19,7 +19,7 @@
       if (itemId >= lists.size()) {
         createList(new RunnableWithArgument<Integer>(){
           @Override public void run(          final Integer arg){
-            switchListById(arg);
+            switchListById(arg.intValue());
           }
         }
 );

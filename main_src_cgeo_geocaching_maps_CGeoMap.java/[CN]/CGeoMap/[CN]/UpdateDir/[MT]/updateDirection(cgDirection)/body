@@ -2,7 +2,7 @@
   if (dir == null || dir.directionNow == null) {
     return;
   }
-  if (overlayPosition != null && mapView != null && (geo == null || geo.speedNow == null || geo.speedNow <= 5)) {
+  if (overlayPosition != null && mapView != null && (geo == null || geo.speedNow <= 5)) {
     overlayPosition.setHeading(dir.directionNow);
     mapView.repaintRequired(overlayPosition);
   }
