@@ -40,7 +40,7 @@
   Button authorizeTwitter=(Button)findViewById(R.id.authorize_twitter);
   authorizeTwitter.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View arg0){
-      Intent authIntent=new Intent(cgeoinit.this,cgeoauth.class);
+      Intent authIntent=new Intent(cgeoinit.this,TwitterAuthorizationActivity.class);
       startActivity(authIntent);
     }
   }
@@ -51,7 +51,7 @@
     @Override public void onClick(    View v){
       Settings.setUseTwitter(twitterButton.isChecked());
       if (Settings.isUseTwitter() && !Settings.isTwitterLoginValid()) {
-        Intent authIntent=new Intent(cgeoinit.this,cgeoauth.class);
+        Intent authIntent=new Intent(cgeoinit.this,TwitterAuthorizationActivity.class);
         startActivity(authIntent);
       }
       twitterButton.setChecked(Settings.isUseTwitter());
