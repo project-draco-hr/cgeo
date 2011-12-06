@@ -3,7 +3,7 @@
     inflater=((Activity)getContext()).getLayoutInflater();
   }
   if (position > getCount()) {
-    Log.w(Settings.tag,"cgCacheListAdapter.getView: Attempt to access missing item #" + position);
+    Log.w(Settings.tag,"CacheListAdapter.getView: Attempt to access missing item #" + position);
     return null;
   }
   cgCache cache=getItem(position);
@@ -217,55 +217,37 @@
     }
   }
   holder.favourite.setBackgroundResource(favoriteBack);
-  StringBuilder cacheInfo=new StringBuilder(50);
   if (historic && cache.getVisitedDate() > 0) {
+    StringBuilder cacheInfo=new StringBuilder(50);
     cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
     cacheInfo.append("; ");
     cacheInfo.append(cgBase.formatDate(cache.getVisitedDate()));
+    holder.info.setText(cacheInfo.toString());
   }
  else {
+    ArrayList<String> infos=new ArrayList<String>();
     if (StringUtils.isNotBlank(cache.getGeocode())) {
-      cacheInfo.append(cache.getGeocode());
+      infos.add(cache.getGeocode());
     }
     if (cache.hasDifficulty()) {
-      if (cacheInfo.length() > 0) {
-        cacheInfo.append(SEPARATOR);
-      }
-      cacheInfo.append("D ");
-      cacheInfo.append(String.format("%.1f",cache.getDifficulty()));
+      infos.add("D " + String.format("%.1f",cache.getDifficulty()));
     }
     if (cache.hasTerrain()) {
-      if (cacheInfo.length() > 0) {
-        cacheInfo.append(SEPARATOR);
-      }
-      cacheInfo.append("T ");
-      cacheInfo.append(String.format("%.1f",cache.getTerrain()));
+      infos.add("T " + String.format("%.1f",cache.getTerrain()));
     }
     if (cache.getSize() != null && cache.showSize()) {
-      if (cacheInfo.length() > 0) {
-        cacheInfo.append(SEPARATOR);
-      }
-      cacheInfo.append(cache.getSize().getL10n());
+      infos.add(cache.getSize().getL10n());
     }
  else     if (cache.isEventCache() && cache.getHiddenDate() != null) {
-      if (cacheInfo.length() > 0) {
-        cacheInfo.append(SEPARATOR);
-      }
-      cacheInfo.append(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
+      infos.add(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
     }
     if (cache.isMembers()) {
-      if (cacheInfo.length() > 0) {
-        cacheInfo.append(SEPARATOR);
-      }
-      cacheInfo.append(res.getString(R.string.cache_premium));
+      infos.add(res.getString(R.string.cache_premium));
     }
-    if (cache.getReason() == 1) {
-      if (cacheInfo.length() > 0) {
-        cacheInfo.append(SEPARATOR);
-      }
-      cacheInfo.append(res.getString(R.string.cache_offline));
+    if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getReason() > 0) {
+      infos.add(res.getString(R.string.cache_offline));
     }
+    holder.info.setText(StringUtils.join(infos,SEPARATOR));
   }
-  holder.info.setText(cacheInfo.toString());
   return v;
 }
