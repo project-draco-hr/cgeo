@@ -15,7 +15,7 @@
     cache.setSize(getCacheSize(response));
     cache.setDifficulty((float)response.getDouble(CACHE_DIFFICULTY));
     cache.setTerrain((float)response.getDouble(CACHE_TERRAIN));
-    if (response.has(CACHE_RATING) && !isNull(response.getString(CACHE_RATING))) {
+    if (!response.isNull(CACHE_RATING)) {
       cache.setRating((float)response.getDouble(CACHE_RATING));
     }
     cache.setVotes(response.getInt(CACHE_VOTES));

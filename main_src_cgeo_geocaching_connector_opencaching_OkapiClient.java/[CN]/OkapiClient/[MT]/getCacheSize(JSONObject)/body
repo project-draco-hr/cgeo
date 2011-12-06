@@ -1,7 +1,10 @@
 {
+  if (response.isNull(CACHE_SIZE)) {
+    return CacheSize.NOT_CHOSEN;
+  }
   double size=0;
   try {
-    size=response.getDouble("size");
+    size=response.getDouble(CACHE_SIZE);
   }
  catch (  JSONException e) {
     Log.e(Settings.tag,"OkapiClient.getCacheSize",e);
