@@ -15,14 +15,17 @@
   setTitle(cache.getGeocode().toUpperCase());
   ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())),null,null,null);
   pageOrder.clear();
+  pageOrder.add(Page.WAYPOINTS);
   pageOrder.add(Page.DETAILS);
   pageOrder.add(Page.DESCRIPTION);
   if (CollectionUtils.isNotEmpty(cache.getLogs())) {
     pageOrder.add(Page.LOGS);
   }
-  pageOrder.add(Page.WAYPOINTS);
   if (CollectionUtils.isNotEmpty(cache.getInventory())) {
     pageOrder.add(Page.INVENTORY);
+  }
+  if (viewPager.getCurrentItem() < 0 || viewPager.getCurrentItem() >= viewPagerAdapter.getCount()) {
+    viewPager.setCurrentItem(1,false);
   }
   viewPagerAdapter.notifyDataSetChanged();
   titleIndicator.notifyDataSetChanged();

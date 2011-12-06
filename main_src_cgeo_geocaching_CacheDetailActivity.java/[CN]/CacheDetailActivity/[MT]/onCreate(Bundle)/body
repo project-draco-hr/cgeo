@@ -81,10 +81,29 @@
   }
  catch (  Exception e) {
   }
-  ViewPager pager=(ViewPager)findViewById(R.id.viewpager);
+  viewPager=(ViewPager)findViewById(R.id.viewpager);
   viewPagerAdapter=new ViewPagerAdapter();
-  pager.setAdapter(viewPagerAdapter);
+  viewPager.setAdapter(viewPagerAdapter);
   titleIndicator=(TitlePageIndicator)findViewById(R.id.pager_indicator);
-  titleIndicator.setViewPager(pager);
+  titleIndicator.setViewPager(viewPager);
+  titleIndicator.setOnPageChangeListener(new OnPageChangeListener(){
+    @Override public void onPageSelected(    int position){
+      if (Settings.isOpenLastDetailsPage()) {
+        Settings.setLastDetailsPage(position);
+      }
+    }
+    @Override public void onPageScrolled(    int position,    float positionOffset,    int positionOffsetPixels){
+    }
+    @Override public void onPageScrollStateChanged(    int state){
+    }
+  }
+);
+  final int entryPageIndex=Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+  if (viewPagerAdapter.getCount() < entryPageIndex) {
+    for (int i=0; i <= entryPageIndex; i++) {
+      pageOrder.add(null);
+    }
+  }
+  viewPager.setCurrentItem(entryPageIndex,false);
   new LoadCacheThread(geocode,guid,loadCacheHandler).start();
 }
