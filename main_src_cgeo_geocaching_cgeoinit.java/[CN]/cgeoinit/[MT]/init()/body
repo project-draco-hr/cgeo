@@ -108,6 +108,14 @@
     }
   }
 );
+  final CheckBox openLastDetailsPageButton=(CheckBox)findViewById(R.id.openlastdetailspage);
+  openLastDetailsPageButton.setChecked(Settings.isOpenLastDetailsPage());
+  openLastDetailsPageButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setOpenLastDetailsPage(openLastDetailsPageButton.isChecked());
+    }
+  }
+);
   final CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
   skinButton.setChecked(Settings.isLightSkin());
   skinButton.setOnClickListener(new View.OnClickListener(){
