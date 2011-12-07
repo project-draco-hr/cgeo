@@ -14,5 +14,5 @@
   Settings.saveLastList(listId);
   showProgress(true);
   setLoadingCaches();
-  (new moveCachesToList(listId,new MoveHandler())).start();
+  (new MoveCachesToListThread(listId,new MoveHandler())).start();
 }

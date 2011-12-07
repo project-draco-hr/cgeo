@@ -1,0 +1,67 @@
+{
+  SimpleDateFormat fieldNoteDateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+  StringBuffer fieldNoteBuffer=new StringBuffer(500);
+  Map<Integer,String> logTypes=new HashMap<Integer,String>();
+  logTypes.put(cgBase.LOG_FOUND_IT,"Found it");
+  logTypes.put(cgBase.LOG_DIDNT_FIND_IT,"Didn't find it");
+  logTypes.put(cgBase.LOG_NOTE,"Write Note");
+  logTypes.put(cgBase.LOG_NEEDS_ARCHIVE,"Needs archived");
+  logTypes.put(cgBase.LOG_NEEDS_MAINTENANCE,"Needs Maintenance");
+  logTypes.put(cgBase.LOG_WILL_ATTEND,"Will Attend");
+  logTypes.put(cgBase.LOG_ATTENDED,"Attended");
+  logTypes.put(cgBase.LOG_WEBCAM_PHOTO_TAKEN,"Webcam Photo Taken");
+  for (  cgCache cache : cacheList) {
+    if (checked > 0 && !cache.isStatusChecked()) {
+      handler.sendEmptyMessage(0);
+      yield();
+      continue;
+    }
+    try {
+      if (needToStop) {
+        Log.i(Settings.tag,"Stopped exporting process.");
+        break;
+      }
+      if (cache.isLogOffline()) {
+        cgLog log=app.loadLogOffline(cache.getGeocode());
+        if (null != logTypes.get(log.type)) {
+          fieldNoteBuffer.append(cache.getGeocode()).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(logTypes.get(log.type)).append(",\"").append(StringUtils.replaceChars(log.log,'"','\'')).append("\"\n");
+        }
+      }
+      detailProgress++;
+      handler.sendEmptyMessage(cacheList.indexOf(cache));
+      yield();
+    }
+ catch (    Exception e) {
+      Log.e(Settings.tag,"cgeocaches.ExportFieldNotesThread: " + e.toString());
+    }
+  }
+  if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    File exportLocation=new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
+    exportLocation.mkdirs();
+    SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+    File exportFile=new File(exportLocation + "/" + fileNameDateFormat.format(new Date())+ ".txt");
+    OutputStream os=null;
+    Writer fw=null;
+    try {
+      os=new FileOutputStream(exportFile);
+      fw=new OutputStreamWriter(os,"ISO-8859-1");
+      fw.write(fieldNoteBuffer.toString());
+      Message.obtain(handler,-2,exportFile).sendToTarget();
+    }
+ catch (    IOException e) {
+      Log.e(Settings.tag,"cgeocaches.ExportFieldNotesThread: " + e.toString());
+      handler.sendEmptyMessage(-3);
+    }
+ finally {
+      if (fw != null) {
+        try {
+          fw.close();
+        }
+ catch (        IOException e) {
+          Log.e(Settings.tag,"cgeocaches.ExportFieldNotesThread: " + e.toString());
+        }
+      }
+    }
+  }
+  handler.sendEmptyMessage(-1);
+}

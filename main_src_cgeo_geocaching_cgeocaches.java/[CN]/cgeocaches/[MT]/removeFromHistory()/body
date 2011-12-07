@@ -26,6 +26,6 @@
   waitDialog.setCancelable(true);
   waitDialog.setMax(detailTotal);
   waitDialog.show();
-  threadH=new geocachesRemoveFromHistory(removeFromHistoryHandler);
+  threadH=new RemoveFromHistoryThread(removeFromHistoryHandler);
   threadH.start();
 }

@@ -8,10 +8,10 @@ synchronized (this) {
   double azimuthTemp=azimuthDrawn;
   double azimuthRelative=azimuthTemp - headingDrawn;
   if (azimuthRelative < 0) {
-    azimuthRelative=azimuthRelative + 360;
+    azimuthRelative+=360;
   }
  else   if (azimuthRelative >= 360) {
-    azimuthRelative=azimuthRelative - 360;
+    azimuthRelative-=360;
   }
   int canvasCenterX=(compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
   int canvasCenterY=(compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);

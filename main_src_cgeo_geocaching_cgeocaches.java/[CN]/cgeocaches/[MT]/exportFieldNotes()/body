@@ -26,6 +26,6 @@
   waitDialog.setCancelable(true);
   waitDialog.setMax(detailTotal);
   waitDialog.show();
-  threadF=new geocachesExportFieldNotes(exportFieldNotesHandler);
+  threadF=new ExportFieldNotesThread(exportFieldNotesHandler);
   threadF.start();
 }

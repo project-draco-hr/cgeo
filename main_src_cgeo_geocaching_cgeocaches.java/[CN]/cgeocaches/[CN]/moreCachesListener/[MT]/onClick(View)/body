@@ -1,9 +1,0 @@
-{
-  showProgress(true);
-  setLoadingCaches();
-  listFooter.setOnClickListener(null);
-  geocachesLoadNextPage thread;
-  thread=new geocachesLoadNextPage(loadNextPageHandler);
-  thread.setRecaptchaHandler(new cgSearchHandler(cgeocaches.this,res,thread));
-  thread.start();
-}

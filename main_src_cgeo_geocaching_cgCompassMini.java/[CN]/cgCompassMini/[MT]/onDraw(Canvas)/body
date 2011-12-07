@@ -2,10 +2,10 @@
   super.onDraw(canvas);
   float azimuthRelative=azimuth - heading;
   if (azimuthRelative < 0) {
-    azimuthRelative=azimuthRelative + 360;
+    azimuthRelative+=360;
   }
  else   if (azimuthRelative >= 360) {
-    azimuthRelative=azimuthRelative - 360;
+    azimuthRelative-=360;
   }
   canvas.setDrawFilter(setfil);
   int marginLeft=0;

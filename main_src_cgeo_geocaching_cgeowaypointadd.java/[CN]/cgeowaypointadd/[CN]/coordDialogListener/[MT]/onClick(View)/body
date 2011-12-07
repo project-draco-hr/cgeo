@@ -1,6 +1,8 @@
 {
   Geopoint gp=null;
-  if (waypoint != null && waypoint.getCoords() != null)   gp=waypoint.getCoords();
+  if (waypoint != null && waypoint.getCoords() != null) {
+    gp=waypoint.getCoords();
+  }
   cgeocoords coordsDialog=new cgeocoords(cgeowaypointadd.this,gp,geo);
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
