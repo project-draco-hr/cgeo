@@ -18,8 +18,11 @@
   pageOrder.add(Page.WAYPOINTS);
   pageOrder.add(Page.DETAILS);
   pageOrder.add(Page.DESCRIPTION);
-  if (CollectionUtils.isNotEmpty(cache.getLogs())) {
+  if (CollectionUtils.isNotEmpty(cache.getLogs(true))) {
     pageOrder.add(Page.LOGS);
+  }
+  if (CollectionUtils.isNotEmpty(cache.getLogs(false))) {
+    pageOrder.add(Page.LOGSFRIENDS);
   }
   if (CollectionUtils.isNotEmpty(cache.getInventory())) {
     pageOrder.add(Page.INVENTORY);

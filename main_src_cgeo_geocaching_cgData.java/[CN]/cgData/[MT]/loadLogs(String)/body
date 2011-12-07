@@ -4,7 +4,7 @@
   }
   init();
   List<cgLog> logs=new ArrayList<cgLog>();
-  Cursor cursor=databaseRO.rawQuery("SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "+ dbTableLogs+ " LEFT OUTER JOIN "+ dbTableLogImages+ " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc",new String[]{geocode});
+  Cursor cursor=databaseRO.rawQuery("SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "+ dbTableLogs+ " LEFT OUTER JOIN "+ dbTableLogImages+ " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc",new String[]{geocode});
   if (cursor != null && cursor.getCount() > 0) {
     cgLog log=null;
     int indexLogsId=cursor.getColumnIndex("cg_logs_id");
@@ -13,6 +13,7 @@
     int indexLog=cursor.getColumnIndex("log");
     int indexDate=cursor.getColumnIndex("date");
     int indexFound=cursor.getColumnIndex("found");
+    int indexFriend=cursor.getColumnIndex("friend");
     int indexLogImagesId=cursor.getColumnIndex("cg_logImages_id");
     int indexTitle=cursor.getColumnIndex("title");
     int indexUrl=cursor.getColumnIndex("url");
@@ -25,6 +26,7 @@
         log.log=cursor.getString(indexLog);
         log.date=cursor.getLong(indexDate);
         log.found=cursor.getInt(indexFound);
+        log.friend=cursor.getInt(indexFriend) == 1 ? true : false;
         logs.add(log);
       }
       if (!cursor.isNull(indexLogImagesId)) {
