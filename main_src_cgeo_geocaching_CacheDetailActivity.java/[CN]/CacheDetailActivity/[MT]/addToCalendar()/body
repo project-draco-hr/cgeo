@@ -2,7 +2,7 @@
   String[] projection=new String[]{"_id","displayName"};
   Uri calendarProvider=Compatibility.getCalendarProviderURI();
   Cursor cursor=managedQuery(calendarProvider,projection,"selected=1",null,null);
-  calendars.clear();
+  final Map<Integer,String> calendars=new HashMap<Integer,String>();
   int cnt=0;
   if (cursor != null) {
     cnt=cursor.getCount();
@@ -31,7 +31,7 @@
   builder.setTitle(R.string.cache_calendars);
   builder.setItems(items,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int item){
-      addToCalendarFn(item);
+      addToCalendarFn(calendars,item);
     }
   }
 );
