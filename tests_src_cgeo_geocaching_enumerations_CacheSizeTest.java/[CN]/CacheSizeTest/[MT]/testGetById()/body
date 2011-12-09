@@ -1,0 +1,6 @@
+{
+  assertEquals(CacheSize.UNKNOWN,CacheSize.getById(""));
+  assertEquals(CacheSize.UNKNOWN,CacheSize.getById(null));
+  assertEquals(CacheSize.UNKNOWN,CacheSize.getById("random garbage"));
+  assertEquals(CacheSize.LARGE,CacheSize.getById("large"));
+}
