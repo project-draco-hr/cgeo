@@ -235,7 +235,7 @@
     if (cache.hasTerrain()) {
       infos.add("T " + String.format("%.1f",cache.getTerrain()));
     }
-    if (cache.getSize() != null && cache.showSize()) {
+    if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
       infos.add(cache.getSize().getL10n());
     }
  else     if (cache.isEventCache() && cache.getHiddenDate() != null) {

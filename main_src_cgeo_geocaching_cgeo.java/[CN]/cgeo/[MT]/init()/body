@@ -10,6 +10,12 @@
   }
   initialized=true;
   Settings.setLanguage(Settings.isUseEnglish());
+  for (  CacheSize cacheSize : CacheSize.values()) {
+    cacheSize.setL10n();
+  }
+  for (  CacheType cacheType : CacheType.values()) {
+    cacheType.setL10n();
+  }
   Settings.getLogin();
   if (app.firstRun) {
     (new firstLogin()).start();
