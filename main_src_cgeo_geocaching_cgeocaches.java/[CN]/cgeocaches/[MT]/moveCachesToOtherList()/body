@@ -1,0 +1,16 @@
+{
+  final List<cgList> cacheLists=app.getLists();
+  ArrayList<String> listNames=new ArrayList<String>();
+  for (  cgList list : cacheLists) {
+    listNames.add(list.title);
+  }
+  AlertDialog.Builder builder=new AlertDialog.Builder(this);
+  builder.setTitle(res.getString(R.string.cache_menu_move_list));
+  builder.setItems(listNames.toArray(new String[listNames.size()]),new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int item){
+      moveCachesToList(cacheLists.get(item));
+    }
+  }
+);
+  builder.create().show();
+}

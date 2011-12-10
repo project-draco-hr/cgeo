@@ -104,10 +104,8 @@ case MENU_REMOVE_FROM_HISTORY:
 removeFromHistoryCheck();
 return false;
 case MENU_MOVE_TO_LIST:
-contextMenuMoveToList=true;
-openContextMenu(getListView());
-contextMenuMoveToList=false;
-return false;
+moveCachesToOtherList();
+return true;
 }
 return CacheListAppFactory.onMenuItemSelected(item,geo,cacheList,this,res,search);
 }

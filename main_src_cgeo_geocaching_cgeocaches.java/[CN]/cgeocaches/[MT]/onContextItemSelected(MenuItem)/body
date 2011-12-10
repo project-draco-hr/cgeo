@@ -117,18 +117,6 @@
     refreshCurrentList();
     return true;
   }
- else   if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
-    final int newListId=id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
-    final boolean moveAll=adapter.getChecked() == 0;
-    for (    final cgCache c : Collections.unmodifiableList(cacheList)) {
-      if (moveAll || c.isStatusChecked()) {
-        app.moveToList(c.getGeocode(),newListId);
-      }
-    }
-    adapter.resetChecks();
-    refreshCurrentList();
-    return true;
-  }
   lastMenuInfo=info;
   if (adapterInfo != null) {
     final cgCache cache=getCacheFromAdapter(adapterInfo);
