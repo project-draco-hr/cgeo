@@ -41,8 +41,8 @@
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
-    if (Settings.isStoreLogImages() && cache.getLogs() != null) {
-      for (      cgLog log : cache.getLogs()) {
+    if (Settings.isStoreLogImages() && cache.getLogs(true) != null) {
+      for (      cgLog log : cache.getLogs(true)) {
         if (CollectionUtils.isNotEmpty(log.logImages)) {
           for (          cgImage oneLogImg : log.logImages) {
             imgGetter.getDrawable(oneLogImg.getUrl());

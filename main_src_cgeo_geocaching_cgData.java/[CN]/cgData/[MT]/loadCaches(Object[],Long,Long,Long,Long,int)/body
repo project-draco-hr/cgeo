@@ -109,7 +109,7 @@
               }
               cache.getLogs().addAll(logs);
             }
-            final Map<Integer,Integer> logCounts=loadLogCounts(cache.getGeocode());
+            final Map<LogType,Integer> logCounts=loadLogCounts(cache.getGeocode());
             if (MapUtils.isNotEmpty(logCounts)) {
               cache.getLogCounts().clear();
               cache.getLogCounts().putAll(logCounts);

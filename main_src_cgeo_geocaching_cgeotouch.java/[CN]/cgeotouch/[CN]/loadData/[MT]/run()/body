@@ -13,14 +13,14 @@
     }
     final String page=cgBase.getResponseData(cgBase.request("http://www.geocaching.com/track/log.aspx",params,false,false,false));
     viewstates=cgBase.getViewstates(page);
-    final List<Integer> typesPre=cgBase.parseTypes(page);
+    final List<LogType> typesPre=cgBase.parseTypes(page);
     if (typesPre.size() > 0) {
-      types.clear();
-      types.addAll(typesPre);
+      logTypes.clear();
+      logTypes.addAll(typesPre);
     }
     typesPre.clear();
-    if (!types.contains(typeSelected)) {
-      typeSelected=types.get(0);
+    if (!logTypes.contains(typeSelected)) {
+      typeSelected=logTypes.get(0);
       setType(typeSelected);
       showToast(res.getString(R.string.info_log_type_changed));
     }

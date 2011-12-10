@@ -1,15 +1,15 @@
 {
   SimpleDateFormat fieldNoteDateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
   StringBuffer fieldNoteBuffer=new StringBuffer(500);
-  Map<Integer,String> logTypes=new HashMap<Integer,String>();
-  logTypes.put(cgBase.LOG_FOUND_IT,"Found it");
-  logTypes.put(cgBase.LOG_DIDNT_FIND_IT,"Didn't find it");
-  logTypes.put(cgBase.LOG_NOTE,"Write Note");
-  logTypes.put(cgBase.LOG_NEEDS_ARCHIVE,"Needs archived");
-  logTypes.put(cgBase.LOG_NEEDS_MAINTENANCE,"Needs Maintenance");
-  logTypes.put(cgBase.LOG_WILL_ATTEND,"Will Attend");
-  logTypes.put(cgBase.LOG_ATTENDED,"Attended");
-  logTypes.put(cgBase.LOG_WEBCAM_PHOTO_TAKEN,"Webcam Photo Taken");
+  Map<LogType,String> logTypes=new HashMap<LogType,String>();
+  logTypes.put(LogType.LOG_FOUND_IT,"Found it");
+  logTypes.put(LogType.LOG_DIDNT_FIND_IT,"Didn't find it");
+  logTypes.put(LogType.LOG_NOTE,"Write Note");
+  logTypes.put(LogType.LOG_NEEDS_ARCHIVE,"Needs archived");
+  logTypes.put(LogType.LOG_NEEDS_MAINTENANCE,"Needs Maintenance");
+  logTypes.put(LogType.LOG_WILL_ATTEND,"Will Attend");
+  logTypes.put(LogType.LOG_ATTENDED,"Attended");
+  logTypes.put(LogType.LOG_WEBCAM_PHOTO_TAKEN,"Webcam Photo Taken");
   for (  cgCache cache : cacheList) {
     if (checked > 0 && !cache.isStatusChecked()) {
       handler.sendEmptyMessage(0);

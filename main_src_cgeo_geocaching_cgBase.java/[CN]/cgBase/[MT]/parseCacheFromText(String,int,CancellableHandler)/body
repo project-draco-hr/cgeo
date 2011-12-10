@@ -187,8 +187,8 @@
       while (matcherLog.find()) {
         String typeStr=matcherLog.group(1);
         String countStr=matcherLog.group(2).replaceAll("[.,]","");
-        if (StringUtils.isNotBlank(typeStr) && logTypes.containsKey(typeStr.toLowerCase()) && StringUtils.isNotBlank(countStr)) {
-          cache.getLogCounts().put(logTypes.get(typeStr.toLowerCase()),Integer.parseInt(countStr));
+        if (StringUtils.isNotBlank(typeStr) && LogType.LOG_UNKNOWN != LogType.getByIconName(typeStr) && StringUtils.isNotBlank(countStr)) {
+          cache.getLogCounts().put(LogType.getByIconName(typeStr),Integer.parseInt(countStr));
         }
       }
     }

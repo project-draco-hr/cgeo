@@ -3,14 +3,14 @@
     return null;
   }
   init();
-  Map<Integer,Integer> logCounts=new HashMap<Integer,Integer>();
+  Map<LogType,Integer> logCounts=new HashMap<LogType,Integer>();
   Cursor cursor=databaseRO.query(dbTableLogCount,new String[]{"type","count"},"geocode = ?",new String[]{geocode},null,null,null,"100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     int indexType=cursor.getColumnIndex("type");
     int indexCount=cursor.getColumnIndex("count");
     do {
-      Integer type=cursor.getInt(indexType);
+      LogType type=LogType.getById(cursor.getInt(indexType));
       Integer count=cursor.getInt(indexCount);
       logCounts.put(type,count);
     }

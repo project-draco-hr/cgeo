@@ -9,7 +9,7 @@
     cursor.moveToFirst();
     log=new cgLog();
     log.id=cursor.getInt(cursor.getColumnIndex("_id"));
-    log.type=cursor.getInt(cursor.getColumnIndex("type"));
+    log.type=LogType.getById(cursor.getInt(cursor.getColumnIndex("type")));
     log.log=cursor.getString(cursor.getColumnIndex("log"));
     log.date=cursor.getLong(cursor.getColumnIndex("date"));
   }

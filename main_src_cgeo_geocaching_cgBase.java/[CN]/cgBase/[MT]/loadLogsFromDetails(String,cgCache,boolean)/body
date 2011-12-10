@@ -35,12 +35,7 @@
       logDone.friend=friends;
       final String logIconNameExt=entry.optString("LogTypeImage",".gif");
       final String logIconName=logIconNameExt.substring(0,logIconNameExt.length() - 4);
-      if (logTypes.containsKey(logIconName)) {
-        logDone.type=logTypes.get(logIconName);
-      }
- else {
-        logDone.type=logTypes.get("icon_note");
-      }
+      logDone.type=LogType.getByIconName(logIconName);
       try {
         logDone.date=parseGcCustomDate(entry.getString("Visited")).getTime();
       }
