@@ -1,0 +1,10 @@
+{
+  if (!Settings.isLightSkin()) {
+    if (-1 != StringUtils.indexOfAny(text,new String[]{"color=\"#000000","color=\"black"})) {
+      view.setBackgroundResource(color.darker_gray);
+    }
+ else {
+      view.setBackgroundResource(color.black);
+    }
+  }
+}

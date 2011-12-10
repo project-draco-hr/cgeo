@@ -4,14 +4,7 @@
     if (StringUtils.isNotBlank(cache.getDescription())) {
       descView.setText(longDesc,TextView.BufferType.SPANNABLE);
       descView.setMovementMethod(LinkMovementMethod.getInstance());
-      if (!Settings.isLightSkin()) {
-        if (-1 != StringUtils.indexOfAny(cache.getDescription(),new String[]{"color=\"#000000","color=\"black"})) {
-          descView.setBackgroundResource(color.darker_gray);
-        }
- else {
-          descView.setBackgroundResource(color.black);
-        }
-      }
+      fixBlackTextColor(descView,cache.getDescription());
     }
     descView.setVisibility(View.VISIBLE);
   }
