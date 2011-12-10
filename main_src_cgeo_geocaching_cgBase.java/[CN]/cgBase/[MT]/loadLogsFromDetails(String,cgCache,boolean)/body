@@ -2,35 +2,37 @@
   final Matcher userTokenMatcher=GCConstants.PATTERN_USERTOKEN2.matcher(page);
   if (!userTokenMatcher.find()) {
     Log.e(Settings.tag,"cgBase.loadLogsFromDetails: unable to extract userToken");
-    return;
+    return null;
   }
   final String userToken=userTokenMatcher.group(1);
-  final Parameters params=new Parameters("tkn",userToken,"idx","1","num","35","decrypt","true");
+  final Parameters params=new Parameters("tkn",userToken,"idx","1","num","35","decrypt","true","sf",Boolean.toString(friends));
   final HttpResponse response=request("http://www.geocaching.com/seek/geocache.logbook",params,false,false,false);
   if (response == null) {
     Log.e(Settings.tag,"cgBase.loadLogsFromDetails: cannot log logs, response is null");
-    return;
+    return null;
   }
   final int statusCode=response.getStatusLine().getStatusCode();
   if (statusCode != 200) {
     Log.e(Settings.tag,"cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
-    return;
+    return null;
   }
+  List<cgLog> logs=new ArrayList<cgLog>();
   try {
     final String rawResponse=cgBase.getResponseData(response);
     if (rawResponse == null) {
       Log.e(Settings.tag,"cgBase.loadLogsFromDetails: unable to read whole response");
-      return;
+      return null;
     }
     final JSONObject resp=new JSONObject(rawResponse);
     if (!resp.getString("status").equals("success")) {
       Log.e(Settings.tag,"cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
-      return;
+      return null;
     }
     final JSONArray data=resp.getJSONArray("data");
     for (int index=0; index < data.length(); index++) {
       final JSONObject entry=data.getJSONObject(index);
       final cgLog logDone=new cgLog();
+      logDone.friend=friends;
       final String logIconNameExt=entry.optString("LogTypeImage",".gif");
       final String logIconName=logIconNameExt.substring(0,logIconNameExt.length() - 4);
       if (logTypes.containsKey(logIconName)) {
@@ -59,13 +61,11 @@
         }
         logDone.logImages.add(logImage);
       }
-      if (null == cache.getLogs()) {
-        cache.setLogs(new ArrayList<cgLog>());
-      }
-      cache.getLogs().add(logDone);
+      logs.add(logDone);
     }
   }
  catch (  JSONException e) {
     Log.w(Settings.tag,"cgBase.loadLogsFromDetails: Failed to parse cache logs",e);
   }
+  return logs;
 }

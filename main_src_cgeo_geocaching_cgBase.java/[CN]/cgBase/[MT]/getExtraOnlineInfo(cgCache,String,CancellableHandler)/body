@@ -3,7 +3,12 @@
     return;
   }
   sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
-  loadLogsFromDetails(page,cache);
+  cache.setLogs(loadLogsFromDetails(page,cache,false));
+  if (Settings.isFriendLogsWanted()) {
+    Set<cgLog> logs=new HashSet<cgLog>(loadLogsFromDetails(page,cache,true));
+    logs.addAll(cache.getLogs());
+    cache.setLogs(new ArrayList<cgLog>(logs));
+  }
   if (Settings.isElevationWanted()) {
     if (CancellableHandler.isCancelled(handler)) {
       return;

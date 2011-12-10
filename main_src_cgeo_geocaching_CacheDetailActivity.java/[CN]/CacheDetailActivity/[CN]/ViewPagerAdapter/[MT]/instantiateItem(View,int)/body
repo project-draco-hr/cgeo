@@ -10,7 +10,10 @@ case DESCRIPTION:
   creator=new DescriptionViewCreator();
 break;
 case LOGS:
-creator=new LogsViewCreator();
+creator=new LogsViewCreator(true);
+break;
+case LOGSFRIENDS:
+creator=new LogsViewCreator(false);
 break;
 case WAYPOINTS:
 creator=new WaypointsViewCreator();
