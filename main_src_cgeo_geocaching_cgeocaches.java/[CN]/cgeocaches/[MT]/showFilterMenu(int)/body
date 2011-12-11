@@ -10,7 +10,7 @@ names.add(cacheSize.getL10n());
 }
 builder.setItems(names.toArray(new String[names.size()]),new DialogInterface.OnClickListener(){
 public void onClick(DialogInterface dialog,int item){
-setFilter(new cgFilterBySize(cacheSizes[item]));
+setFilter(new FilterBySize(cacheSizes[item]));
 }
 }
 );
@@ -26,7 +26,7 @@ typeNames.add(cacheType.getL10n());
 }
 builder.setItems(typeNames.toArray(new String[typeNames.size()]),new DialogInterface.OnClickListener(){
 public void onClick(DialogInterface dialog,int item){
-setFilter(new cgFilterByType(cacheTypes[item]));
+setFilter(new FilterByType(cacheTypes[item]));
 }
 }
 );
