@@ -1,0 +1,20 @@
+{
+  if (CollectionUtils.isNotEmpty(cacheList)) {
+    boolean eventsOnly=true;
+    for (    cgCache cache : cacheList) {
+      if (!cache.isEventCache()) {
+        eventsOnly=false;
+        break;
+      }
+    }
+    if (eventsOnly) {
+      adapter.setComparator(new DateComparator());
+    }
+ else     if (type == CacheListType.HISTORY) {
+      adapter.setComparator(new VisitComparator());
+    }
+ else {
+      adapter.setComparator(null);
+    }
+  }
+}
