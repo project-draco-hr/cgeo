@@ -3,8 +3,8 @@
     return;
   }
   coords=coordsIn;
-  if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
-    Collections.sort(list,statComparator != null ? statComparator : new DistanceComparator(coordsIn));
+  if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && sort && isSortedByDistance()) {
+    Collections.sort(list,new DistanceComparator(coordsIn));
     notifyDataSetChanged();
     lastSort=System.currentTimeMillis();
   }

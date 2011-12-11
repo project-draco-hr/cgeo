@@ -2,9 +2,5 @@
   if (search == null) {
     return null;
   }
-  if (storage == null) {
-    storage=new cgData(this);
-  }
-  final List<String> geocodeList=search.getGeocodes();
-  return getBounds(geocodeList);
+  return getBounds(search.getGeocodes());
 }

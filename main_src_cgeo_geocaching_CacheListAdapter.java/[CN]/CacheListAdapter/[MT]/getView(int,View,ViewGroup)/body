@@ -217,7 +217,7 @@
     }
   }
   holder.favourite.setBackgroundResource(favoriteBack);
-  if (historic && cache.getVisitedDate() > 0) {
+  if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
     StringBuilder cacheInfo=new StringBuilder(50);
     cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
     cacheInfo.append("; ");

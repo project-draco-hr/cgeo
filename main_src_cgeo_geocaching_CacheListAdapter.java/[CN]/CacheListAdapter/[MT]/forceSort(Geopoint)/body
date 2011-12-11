@@ -2,15 +2,14 @@
   if (CollectionUtils.isEmpty(list) || !sort) {
     return;
   }
-  if (statComparator != null) {
-    Collections.sort(list,statComparator);
-  }
- else {
+  if (isSortedByDistance()) {
     if (coordsIn == null) {
       return;
     }
-    final DistanceComparator dstComparator=new DistanceComparator(coordsIn);
-    Collections.sort(list,dstComparator);
+    Collections.sort(list,new DistanceComparator(coordsIn));
+  }
+ else {
+    Collections.sort(list,cacheComparator);
   }
   notifyDataSetChanged();
 }

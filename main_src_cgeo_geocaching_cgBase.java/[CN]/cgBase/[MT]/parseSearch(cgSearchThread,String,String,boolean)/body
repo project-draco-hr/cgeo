@@ -73,7 +73,6 @@
       Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
     }
     if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
-      cache=null;
       continue;
     }
     String inventoryPre=null;
