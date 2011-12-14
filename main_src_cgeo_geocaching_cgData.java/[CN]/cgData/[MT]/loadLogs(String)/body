@@ -21,7 +21,7 @@
       if (log == null || log.id != cursor.getInt(indexLogsId)) {
         log=new cgLog();
         log.id=cursor.getInt(indexLogsId);
-        log.type=cursor.getInt(indexType);
+        log.type=LogType.getById(cursor.getInt(indexType));
         log.author=cursor.getString(indexAuthor);
         log.log=cursor.getString(indexLog);
         log.date=cursor.getLong(indexDate);

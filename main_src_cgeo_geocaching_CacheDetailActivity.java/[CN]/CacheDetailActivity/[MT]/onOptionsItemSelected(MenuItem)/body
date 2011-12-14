@@ -38,6 +38,6 @@
     return true;
   }
   int logType=menuItem - MENU_LOG_VISIT_OFFLINE;
-  cache.logOffline(this,logType);
+  cache.logOffline(this,LogType.getById(logType));
   return true;
 }

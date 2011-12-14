@@ -2,7 +2,7 @@
   final int group=item.getGroupId();
   final int id=item.getItemId();
   if (group == R.id.type) {
-    setType(id);
+    setType(LogType.getById(id));
     return true;
   }
   return false;

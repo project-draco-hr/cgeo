@@ -1,0 +1,14 @@
+{
+  final Button typeButton=(Button)findViewById(R.id.type);
+  typeSelected=type;
+  typeButton.setText(typeSelected.getL10n());
+  if (tweetBox == null) {
+    tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
+  }
+  if (Settings.isUseTwitter()) {
+    tweetBox.setVisibility(View.VISIBLE);
+  }
+ else {
+    tweetBox.setVisibility(View.GONE);
+  }
+}

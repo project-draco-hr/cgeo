@@ -87,12 +87,7 @@
     final Matcher matcherLogs=GCConstants.PATTERN_TRACKABLE_LOG.matcher(page);
     while (matcherLogs.find()) {
       final cgLog logDone=new cgLog();
-      if (logTypes.containsKey(matcherLogs.group(1).toLowerCase())) {
-        logDone.type=logTypes.get(matcherLogs.group(1).toLowerCase().trim());
-      }
- else {
-        logDone.type=logTypes.get("icon_note");
-      }
+      logDone.type=LogType.getByIconName(matcherLogs.group(1));
       logDone.author=Html.fromHtml(matcherLogs.group(3)).toString().trim();
       try {
         logDone.date=parseGcCustomDate(matcherLogs.group(2)).getTime();

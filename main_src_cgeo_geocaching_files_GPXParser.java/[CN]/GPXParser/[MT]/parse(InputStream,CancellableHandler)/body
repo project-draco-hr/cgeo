@@ -345,12 +345,7 @@
     gcLog.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
         final String logType=validate(body).toLowerCase();
-        if (cgBase.logTypes0.containsKey(logType)) {
-          log.type=cgBase.logTypes0.get(logType);
-        }
- else {
-          log.type=cgBase.LOG_NOTE;
-        }
+        log.type=LogType.getByType(logType);
       }
     }
 );

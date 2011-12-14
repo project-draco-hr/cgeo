@@ -2,7 +2,7 @@
   if (StringUtils.isEmpty(page)) {
     return null;
   }
-  final List<Integer> types=new ArrayList<Integer>();
+  final List<LogType> types=new ArrayList<LogType>();
   final Matcher typeBoxMatcher=GCConstants.PATTERN_TYPEBOX.matcher(page);
   String typesText=null;
   if (typeBoxMatcher.find()) {
@@ -16,7 +16,7 @@
       if (typeMatcher.groupCount() > 1) {
         final int type=Integer.parseInt(typeMatcher.group(2));
         if (type > 0) {
-          types.add(type);
+          types.add(LogType.getById(type));
         }
       }
     }

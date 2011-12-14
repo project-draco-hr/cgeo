@@ -7,7 +7,7 @@
   tweetCheck=(CheckBox)findViewById(R.id.tweet);
   clearButton=(Button)findViewById(R.id.clear);
   saveButton=(Button)findViewById(R.id.save);
-  types=cache.getPossibleLogTypes();
+  possibleLogTypes=cache.getPossibleLogTypes();
   final cgLog log=app.loadLogOffline(geocode);
   if (log != null) {
     typeSelected=log.type;
@@ -18,18 +18,18 @@
  else   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
     insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),false),false);
   }
-  if (!types.contains(typeSelected)) {
+  if (!possibleLogTypes.contains(typeSelected)) {
     if (alreadyFound) {
-      typeSelected=cgBase.LOG_NOTE;
+      typeSelected=LogType.LOG_NOTE;
     }
  else {
-      typeSelected=types.get(0);
+      typeSelected=possibleLogTypes.get(0);
     }
     setType(typeSelected);
   }
   final Button typeButton=(Button)findViewById(R.id.type);
   registerForContextMenu(typeButton);
-  typeButton.setText(cgBase.logTypes2.get(typeSelected));
+  typeButton.setText(typeSelected.getL10n());
   typeButton.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View view){
       openContextMenu(view);
