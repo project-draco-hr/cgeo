@@ -1,0 +1,7 @@
+{
+  final cgSearch search=cgBase.searchByGeocode(geocode,null,0,true,null);
+  assertNotNull(search);
+  assertEquals(1,search.getGeocodes().size());
+  assertTrue(search.getGeocodes().contains(geocode));
+  return cgeoapplication.getInstance().getCacheByGeocode(geocode);
+}
