@@ -14,7 +14,7 @@
             }
           }
         }
-        if (!merged && old.isUserDefined()) {
+        if (!merged && (old.isUserDefined() || forceMerge)) {
           newPoints.add(old);
         }
       }
