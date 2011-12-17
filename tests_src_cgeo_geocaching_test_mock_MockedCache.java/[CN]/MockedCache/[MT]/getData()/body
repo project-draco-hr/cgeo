@@ -1,4 +1,6 @@
 {
-  data=MockedCache.readCachePage(getGeocode());
+  if (StringUtils.isEmpty(data)) {
+    data=MockedCache.readCachePage(getGeocode());
+  }
   return data;
 }

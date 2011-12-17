@@ -1,0 +1,39 @@
+{
+  Assert.assertEquals(expected.getGeocode(),actual.getGeocode());
+  Assert.assertTrue(expected.getType() == actual.getType());
+  Assert.assertEquals(expected.getOwner(),actual.getOwner());
+  Assert.assertEquals(expected.getDifficulty(),actual.getDifficulty());
+  Assert.assertEquals(expected.getTerrain(),actual.getTerrain());
+  Assert.assertEquals(expected.getLatitude(),actual.getLatitude());
+  Assert.assertEquals(expected.getLongitude(),actual.getLongitude());
+  Assert.assertEquals(expected.isDisabled(),actual.isDisabled());
+  Assert.assertEquals(expected.isOwn(),actual.isOwn());
+  Assert.assertEquals(expected.isArchived(),actual.isArchived());
+  Assert.assertEquals(expected.isMembersOnly(),actual.isMembersOnly());
+  Assert.assertEquals(expected.getOwnerReal(),actual.getOwnerReal());
+  Assert.assertEquals(expected.getSize(),actual.getSize());
+  Assert.assertEquals(expected.getHint(),actual.getHint());
+  Assert.assertTrue(actual.getDescription().startsWith(expected.getDescription()));
+  Assert.assertEquals(expected.getShortDescription(),actual.getShortDescription());
+  Assert.assertEquals(expected.getName(),actual.getName());
+  Assert.assertEquals(expected.getCacheId(),actual.getCacheId());
+  Assert.assertEquals(expected.getGuid(),actual.getGuid());
+  Assert.assertEquals(expected.getPersonalNote(),actual.getPersonalNote());
+  Assert.assertEquals(expected.isFound(),actual.isFound());
+  Assert.assertEquals(expected.isFavorite(),actual.isFavorite());
+  Assert.assertEquals(expected.getFavoritePoints(),actual.getFavoritePoints());
+  Assert.assertEquals(expected.isWatchlist(),actual.isWatchlist());
+  Assert.assertEquals(expected.getHiddenDate().toString(),actual.getHiddenDate().toString());
+  for (  String attribute : expected.getAttributes()) {
+    Assert.assertTrue(actual.getAttributes().contains(attribute));
+  }
+  for (  LogType logType : expected.getLogCounts().keySet()) {
+    Assert.assertEquals(expected.getLogCounts().get(logType),actual.getLogCounts().get(logType));
+  }
+  if (null != expected.getInventory() || null != actual.getInventory()) {
+    Assert.assertEquals(expected.getInventory().size(),actual.getInventory().size());
+  }
+  if (null != expected.getSpoilers() || null != actual.getSpoilers()) {
+    Assert.assertEquals(expected.getSpoilers().size(),actual.getSpoilers().size());
+  }
+}

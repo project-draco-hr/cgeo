@@ -1,0 +1,7 @@
+{
+  for (  MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+    cgCacheWrap caches=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
+    cgCache parsedCache=caches.cacheList.get(0);
+    cgBaseTest.testCompareCaches(mockedCache,parsedCache);
+  }
+}
