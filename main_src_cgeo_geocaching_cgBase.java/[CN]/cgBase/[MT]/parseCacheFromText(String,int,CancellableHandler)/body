@@ -5,7 +5,6 @@
     return null;
   }
   final cgCacheWrap caches=new cgCacheWrap();
-  final cgCache cache=new cgCache();
   if (page.contains("Cache is Unpublished")) {
     caches.error=StatusCode.UNPUBLISHED_CACHE;
     return caches;
@@ -18,6 +17,7 @@
     caches.error=StatusCode.PREMIUM_ONLY;
     return caches;
   }
+  final cgCache cache=new cgCache();
   cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
   cache.setArchived(page.contains("<li>This cache has been archived,"));
   cache.setMembers(BaseUtils.matches(page,GCConstants.PATTERN_MEMBERS));

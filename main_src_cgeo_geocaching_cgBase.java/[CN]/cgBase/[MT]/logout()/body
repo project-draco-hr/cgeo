@@ -1,0 +1,10 @@
+{
+  HttpResponse logoutResponse=request("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f",null,false,false,false);
+  String logoutData=getResponseData(logoutResponse);
+  if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(logoutData,GCConstants.PATTERN_MAINTENANCE)) {
+    return StatusCode.MAINTENANCE;
+  }
+  clearCookies();
+  Settings.setCookieStore(null);
+  return StatusCode.NO_ERROR;
+}
