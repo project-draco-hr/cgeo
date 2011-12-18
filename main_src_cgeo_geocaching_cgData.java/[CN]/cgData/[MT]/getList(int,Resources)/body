@@ -1,13 +1,11 @@
 {
-  if (id == cgList.STANDARD_LIST_ID) {
-    return new cgList(cgList.STANDARD_LIST_ID,res.getString(R.string.list_inbox));
-  }
- else   if (id == 2) {
-    return new cgList(2,res.getString(R.string.list_wpt));
+  if (id == StoredList.STANDARD_LIST_ID) {
+    return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)getStatementStandardList().simpleQueryForLong());
   }
  else   if (id >= 10) {
     init();
-    ArrayList<cgList> lists=readLists("_id = " + (id - 10),null);
+    Cursor cursor=databaseRO.query(dbTableLists,new String[]{"_id","title"},"_id = " + (id - 10),null,null,null,null);
+    ArrayList<StoredList> lists=getListsFromCursor(cursor);
     if (!lists.isEmpty()) {
       return lists.get(0);
     }

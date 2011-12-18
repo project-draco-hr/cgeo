@@ -1,5 +1,5 @@
 {
-  final cgList list=app.getList(listId);
+  final StoredList list=app.getList(listId);
   handleListNameInput(list.title,R.string.list_dialog_rename_title,R.string.list_dialog_rename,new RunnableWithArgument<String>(){
     @Override public void run(    final String listName){
       app.renameList(listId,listName);

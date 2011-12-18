@@ -7,8 +7,8 @@
     return;
   }
   final List<CharSequence> listsTitle=new ArrayList<CharSequence>();
-  for (  cgList list : lists) {
-    listsTitle.add(list.title);
+  for (  StoredList list : lists) {
+    listsTitle.add(list.getTitleAndCount());
   }
   listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
   final CharSequence[] items=new CharSequence[listsTitle.size()];

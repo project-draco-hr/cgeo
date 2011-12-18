@@ -1,0 +1,6 @@
+{
+  if (statementStandardList == null) {
+    statementStandardList=databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = "+ StoredList.STANDARD_LIST_ID);
+  }
+  return statementStandardList;
+}
