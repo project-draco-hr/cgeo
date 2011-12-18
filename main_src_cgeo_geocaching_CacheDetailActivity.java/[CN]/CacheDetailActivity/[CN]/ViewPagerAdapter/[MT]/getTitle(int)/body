@@ -1,3 +1,11 @@
 {
-  return (null == pageOrder.get(position)) ? "" : res.getString(pageOrder.get(position).titleStringId);
+  final Page page=pageOrder.get(position);
+  if (null == page) {
+    return "";
+  }
+  if (page == Page.WAYPOINTS) {
+    int waypointCount=(cache.getWaypoints() == null ? 0 : cache.getWaypoints().size());
+    return res.getQuantityString(R.plurals.waypoints,waypointCount,waypointCount);
+  }
+  return res.getString(page.titleStringId);
 }
