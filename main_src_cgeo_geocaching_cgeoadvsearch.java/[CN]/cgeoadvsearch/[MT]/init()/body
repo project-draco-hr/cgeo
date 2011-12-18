@@ -7,11 +7,21 @@
   ((Button)findViewById(R.id.buttonLongitude)).setOnClickListener(new findByCoordsAction());
   final Button findByCoords=(Button)findViewById(R.id.search_coordinates);
   findByCoords.setOnClickListener(new findByCoordsListener());
-  ((EditText)findViewById(R.id.address)).setOnEditorActionListener(new findByAddressAction());
+  EditUtils.setActionListener((EditText)findViewById(R.id.address),new Runnable(){
+    @Override public void run(){
+      findByAddressFn();
+    }
+  }
+);
   final Button findByAddress=(Button)findViewById(R.id.search_address);
   findByAddress.setOnClickListener(new findByAddressListener());
   final AutoCompleteTextView geocodeEdit=(AutoCompleteTextView)findViewById(R.id.geocode);
-  geocodeEdit.setOnEditorActionListener(new findByGeocodeAction());
+  EditUtils.setActionListener(geocodeEdit,new Runnable(){
+    @Override public void run(){
+      findByGeocodeFn();
+    }
+  }
+);
   geocodesInCache=app.geocodesInCache();
   if (geocodesInCache != null) {
     final ArrayAdapter<String> geocodesAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,geocodesInCache);
@@ -19,13 +29,28 @@
   }
   final Button displayByGeocode=(Button)findViewById(R.id.display_geocode);
   displayByGeocode.setOnClickListener(new findByGeocodeListener());
-  ((EditText)findViewById(R.id.keyword)).setOnEditorActionListener(new findByKeywordAction());
+  EditUtils.setActionListener((EditText)findViewById(R.id.keyword),new Runnable(){
+    @Override public void run(){
+      findByKeywordFn();
+    }
+  }
+);
   final Button findByKeyword=(Button)findViewById(R.id.search_keyword);
   findByKeyword.setOnClickListener(new findByKeywordListener());
-  ((EditText)findViewById(R.id.username)).setOnEditorActionListener(new findByUsernameAction());
+  EditUtils.setActionListener((EditText)findViewById(R.id.username),new Runnable(){
+    @Override public void run(){
+      findByUsernameFn();
+    }
+  }
+);
   final Button findByUserName=(Button)findViewById(R.id.search_username);
   findByUserName.setOnClickListener(new findByUsernameListener());
-  ((EditText)findViewById(R.id.owner)).setOnEditorActionListener(new findByOwnerAction());
+  EditUtils.setActionListener((EditText)findViewById(R.id.owner),new Runnable(){
+    @Override public void run(){
+      findByOwnerFn();
+    }
+  }
+);
   final Button findByOwner=(Button)findViewById(R.id.search_owner);
   findByOwner.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
@@ -34,7 +59,12 @@
   }
 );
   EditText trackable=(EditText)findViewById(R.id.trackable);
-  trackable.setOnEditorActionListener(new findTrackableAction());
+  EditUtils.setActionListener(trackable,new Runnable(){
+    @Override public void run(){
+      findTrackableFn();
+    }
+  }
+);
   disableSuggestions(trackable);
   final Button displayTrackable=(Button)findViewById(R.id.display_trackable);
   displayTrackable.setOnClickListener(new findTrackableListener());
