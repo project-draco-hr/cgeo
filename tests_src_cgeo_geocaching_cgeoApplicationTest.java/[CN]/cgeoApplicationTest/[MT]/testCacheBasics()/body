@@ -1,6 +1,9 @@
 {
   for (  MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+    mockedCache.setMockedDataUser(Settings.getUsername());
     cgCache parsedCache=cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
-    cgBaseTest.testCompareCaches(mockedCache,parsedCache);
+    if (null != parsedCache) {
+      cgBaseTest.testCompareCaches(mockedCache,parsedCache);
+    }
   }
 }

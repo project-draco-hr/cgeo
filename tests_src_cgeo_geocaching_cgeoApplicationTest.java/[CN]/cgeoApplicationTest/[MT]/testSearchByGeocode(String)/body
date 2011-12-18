@@ -1,7 +1,11 @@
 {
-  final cgSearch search=cgBase.searchByGeocode(geocode,null,0,true,null);
+  final cgSearch search=cgBase.searchByGeocode(geocode,null,1,true,null);
   assertNotNull(search);
-  assertEquals(1,search.getGeocodes().size());
-  assertTrue(search.getGeocodes().contains(geocode));
-  return cgeoapplication.getInstance().getCacheByGeocode(geocode);
+  if (Settings.isPremiumMember() || search.error == null) {
+    assertEquals(1,search.getGeocodes().size());
+    assertTrue(search.getGeocodes().contains(geocode));
+    return cgeoapplication.getInstance().getCacheByGeocode(geocode);
+  }
+  assertEquals(0,search.getGeocodes().size());
+  return null;
 }
