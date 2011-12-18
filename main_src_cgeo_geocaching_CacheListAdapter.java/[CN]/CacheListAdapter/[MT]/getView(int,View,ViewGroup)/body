@@ -184,7 +184,7 @@
       holder.dirImgLayout.setVisibility(View.GONE);
     }
   }
-  holder.favourite.setText(String.format("%d",cache.getFavoritePoints()));
+  holder.favourite.setText(Integer.toString(cache.getFavoritePoints()));
   int favoriteBack;
   if (Settings.isLightSkin()) {
     favoriteBack=R.drawable.favourite_background_light;

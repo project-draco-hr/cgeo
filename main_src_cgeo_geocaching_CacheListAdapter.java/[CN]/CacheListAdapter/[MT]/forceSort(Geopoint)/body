@@ -6,7 +6,7 @@
     if (coordsIn == null) {
       return;
     }
-    Collections.sort(list,new DistanceComparator(coordsIn));
+    Collections.sort(list,new DistanceComparator(coordsIn,list));
   }
  else {
     Collections.sort(list,cacheComparator);

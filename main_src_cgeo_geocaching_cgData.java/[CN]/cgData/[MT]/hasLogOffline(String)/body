@@ -6,7 +6,7 @@
   try {
     final SQLiteStatement logCount=getStatementLogCount();
 synchronized (logCount) {
-      statementLogCount.bindString(1,geocode.toUpperCase());
+      statementLogCount.bindString(1,geocode);
       return statementLogCount.simpleQueryForLong() > 0;
     }
   }

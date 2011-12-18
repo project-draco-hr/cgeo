@@ -1,4 +1,7 @@
 {
+  if (initialized) {
+    return;
+  }
   if (databaseRW == null || !databaseRW.isOpen()) {
     try {
       if (dbHelper == null) {

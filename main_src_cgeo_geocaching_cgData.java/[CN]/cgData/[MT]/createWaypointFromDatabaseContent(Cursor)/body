@@ -7,7 +7,7 @@
   waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
   waypoint.setName(cursor.getString(cursor.getColumnIndex("name")));
   waypoint.setLatlon(cursor.getString(cursor.getColumnIndex("latlon")));
-  waypoint.setCoords(getCoords(cursor));
+  waypoint.setCoords(getCoords(cursor,cursor.getColumnIndex("latitude"),cursor.getColumnIndex("longitude")));
   waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
   return waypoint;
 }

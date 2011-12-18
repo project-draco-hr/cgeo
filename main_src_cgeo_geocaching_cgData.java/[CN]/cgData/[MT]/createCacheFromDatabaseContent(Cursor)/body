@@ -2,7 +2,7 @@
   int index;
   cgCache cache=new cgCache();
   if (cacheColumnIndex == null) {
-    int[] local_cci=new int[37];
+    int[] local_cci=new int[40];
     local_cci[0]=cursor.getColumnIndex("updated");
     local_cci[1]=cursor.getColumnIndex("reason");
     local_cci[2]=cursor.getColumnIndex("detailed");
@@ -40,6 +40,8 @@
     local_cci[34]=cursor.getColumnIndex("inventoryunknown");
     local_cci[35]=cursor.getColumnIndex("onWatchlist");
     local_cci[36]=cursor.getColumnIndex("reliable_latlon");
+    local_cci[38]=cursor.getColumnIndex("latitude");
+    local_cci[39]=cursor.getColumnIndex("longitude");
     cacheColumnIndex=local_cci;
   }
   cache.setUpdated(cursor.getLong(cacheColumnIndex[0]));
@@ -79,7 +81,7 @@
   cache.setTerrain(cursor.getFloat(cacheColumnIndex[19]));
   cache.setLatlon(cursor.getString(cacheColumnIndex[20]));
   cache.setLocation(cursor.getString(cacheColumnIndex[21]));
-  cache.setCoords(getCoords(cursor));
+  cache.setCoords(getCoords(cursor,cacheColumnIndex[38],cacheColumnIndex[39]));
   index=cacheColumnIndex[22];
   if (cursor.isNull(index)) {
     cache.setElevation(null);

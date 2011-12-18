@@ -14,10 +14,10 @@
         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
       }
  else       if (secondsRemaining < 90) {
-        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%d",(secondsRemaining / 60))+ " "+ res.getString(R.string.caches_eta_min));
+        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + (secondsRemaining / 60)+ " "+ res.getString(R.string.caches_eta_min));
       }
  else {
-        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%d",(secondsRemaining / 60))+ " "+ res.getString(R.string.caches_eta_mins));
+        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + (secondsRemaining / 60)+ " "+ res.getString(R.string.caches_eta_mins));
       }
     }
   }
