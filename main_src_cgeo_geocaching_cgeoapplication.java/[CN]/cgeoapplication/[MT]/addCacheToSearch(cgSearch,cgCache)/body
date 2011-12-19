@@ -2,7 +2,7 @@
   if (search == null || cache == null) {
     return false;
   }
-  final boolean status=storeWithMerge(cache,cache.getReason() >= 1);
+  final boolean status=storeWithMerge(cache,cache.getListId() >= 1);
   if (status) {
     search.addGeocode(cache.getGeocode());
   }

@@ -1,5 +1,5 @@
 {
-  final cgCacheWrap caches=parseCacheFromText(page,reason,handler);
+  final cgCacheWrap caches=parseCacheFromText(page,listId,handler);
   if (caches != null && !caches.cacheList.isEmpty()) {
     final cgCache cache=caches.cacheList.get(0);
     getExtraOnlineInfo(cache,page,handler);

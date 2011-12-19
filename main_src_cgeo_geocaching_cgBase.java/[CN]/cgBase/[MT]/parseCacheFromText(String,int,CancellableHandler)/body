@@ -22,7 +22,7 @@
   cache.setArchived(page.contains("<li>This cache has been archived,"));
   cache.setMembers(BaseUtils.matches(page,GCConstants.PATTERN_MEMBERS));
   cache.setFavourite(BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE));
-  cache.setReason(reason);
+  cache.setListId(listId);
   cache.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.getGeocode()));
   cache.setCacheId(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.getCacheId()));
   cache.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.getGuid()));

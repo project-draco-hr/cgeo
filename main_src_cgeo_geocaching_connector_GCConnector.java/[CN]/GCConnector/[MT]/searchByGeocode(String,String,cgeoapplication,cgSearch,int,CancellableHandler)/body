@@ -27,7 +27,7 @@
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No data from server");
     return null;
   }
-  final cgCacheWrap caches=cgBase.parseCache(page,reason,handler);
+  final cgCacheWrap caches=cgBase.parseCache(page,listId,handler);
   if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
     if (caches != null && caches.error != null) {
       search.error=caches.error;
@@ -35,11 +35,11 @@
     if (caches != null && StringUtils.isNotBlank(caches.url)) {
       search.url=caches.url;
     }
-    app.addSearch(null,reason);
+    app.addSearch(null,listId);
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No cache parsed");
     return search;
   }
   final List<cgCache> cacheList=cgBase.filterSearchResults(search,caches,false,false,Settings.getCacheType());
-  app.addSearch(cacheList,reason);
+  app.addSearch(cacheList,listId);
   return search;
 }

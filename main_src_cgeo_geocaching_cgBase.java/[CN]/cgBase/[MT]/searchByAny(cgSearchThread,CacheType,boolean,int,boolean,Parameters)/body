@@ -13,6 +13,6 @@
     Log.e(Settings.tag,"cgeoBase.searchByAny: No cache parsed");
   }
   List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),false,cacheType);
-  cgeoapplication.getInstance().addSearch(cacheList,reason);
+  cgeoapplication.getInstance().addSearch(cacheList,listId);
   return search;
 }

@@ -28,7 +28,7 @@
       }
       if (StringUtils.isNotBlank(cache.getGeocode()) && cache.getCoords() != null && ((type == null && sym == null) || StringUtils.contains(type,"geocache") || StringUtils.contains(sym,"geocache"))) {
         fixCache(cache);
-        cache.setReason(listId);
+        cache.setListId(listId);
         cache.setDetailed(true);
         createNoteFromGSAKUserdata();
         result.put(cache.getGeocode(),cache);

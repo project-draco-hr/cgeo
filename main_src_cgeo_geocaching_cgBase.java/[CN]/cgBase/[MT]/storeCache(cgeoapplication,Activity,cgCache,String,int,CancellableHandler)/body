@@ -2,7 +2,7 @@
   try {
     cgCache cache;
     if (origCache != null) {
-      if (origCache.getReason() > 0 || StringUtils.isBlank(origCache.getDescription())) {
+      if (origCache.getListId() > 0 || StringUtils.isBlank(origCache.getDescription())) {
         final cgSearch search=searchByGeocode(origCache.getGeocode(),null,listId,false,null);
         cache=app.getCache(search);
       }
