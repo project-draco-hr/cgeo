@@ -1,3 +1,7 @@
 {
-  return "Premium Member".compareTo(Settings.getMemberStatus()) == 0;
+  String memberStatus=Settings.getMemberStatus();
+  if (memberStatus == null) {
+    return false;
+  }
+  return "Premium Member".equalsIgnoreCase(memberStatus);
 }
