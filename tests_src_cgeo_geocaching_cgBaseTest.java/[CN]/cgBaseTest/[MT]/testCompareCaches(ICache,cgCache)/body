@@ -24,7 +24,9 @@
   Assert.assertEquals(expected.isFavorite(),actual.isFavorite());
   Assert.assertEquals(expected.getFavoritePoints(),actual.getFavoritePoints());
   Assert.assertEquals(expected.isWatchlist(),actual.isWatchlist());
-  Assert.assertEquals(expected.getHiddenDate().toString(),actual.getHiddenDate().toString());
+  Date date1=expected.getHiddenDate();
+  Date date2=actual.getHiddenDate();
+  Assert.assertEquals(date1.toString(),date2.toString());
   for (  String attribute : expected.getAttributes()) {
     Assert.assertTrue(actual.getAttributes().contains(attribute));
   }

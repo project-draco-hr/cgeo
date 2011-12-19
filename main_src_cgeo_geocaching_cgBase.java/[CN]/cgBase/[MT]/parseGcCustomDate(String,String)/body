@@ -1,0 +1,21 @@
+{
+  if (StringUtils.isBlank(input)) {
+    throw new ParseException("Input is null",0);
+  }
+  final String trimmed=input.trim();
+  if (gcCustomDateFormats.containsKey(format)) {
+    try {
+      return gcCustomDateFormats.get(format).parse(trimmed);
+    }
+ catch (    ParseException e) {
+    }
+  }
+  for (  SimpleDateFormat sdf : gcCustomDateFormats.values()) {
+    try {
+      return sdf.parse(trimmed);
+    }
+ catch (    ParseException e) {
+    }
+  }
+  throw new ParseException("No matching pattern",0);
+}
