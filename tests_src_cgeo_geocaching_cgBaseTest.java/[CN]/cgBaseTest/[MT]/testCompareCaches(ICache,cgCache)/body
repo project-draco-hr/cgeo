@@ -19,12 +19,7 @@
   Assert.assertEquals(expected.getCacheId(),actual.getCacheId());
   Assert.assertEquals(expected.getGuid(),actual.getGuid());
   Assert.assertEquals(expected.getLocation(),actual.getLocation());
-  int actualPersonalNoteLength=null != actual.getPersonalNote() ? actual.getPersonalNote().length() : 0;
-  int expectedPersonalNoteLength=null != expected.getPersonalNote() ? expected.getPersonalNote().length() : 0;
-  Assert.assertEquals(expectedPersonalNoteLength,actualPersonalNoteLength);
-  if (expectedPersonalNoteLength == actualPersonalNoteLength && expectedPersonalNoteLength > 0) {
-    Assert.assertEquals(expected.getPersonalNote(),actual.getPersonalNote());
-  }
+  Assert.assertEquals(expected.getPersonalNote(),actual.getPersonalNote());
   Assert.assertEquals(expected.isFound(),actual.isFound());
   Assert.assertEquals(expected.isFavorite(),actual.isFavorite());
   Assert.assertEquals(expected.getFavoritePoints(),actual.getFavoritePoints());
