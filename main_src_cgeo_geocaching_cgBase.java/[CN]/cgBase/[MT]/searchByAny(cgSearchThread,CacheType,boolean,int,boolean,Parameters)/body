@@ -1,5 +1,4 @@
 {
-  final cgSearch search=new cgSearch();
   insertCacheType(params,cacheType);
   final String uri="http://www.geocaching.com/seek/nearest.aspx";
   final String fullUri=uri + "?" + addFToParams(params,false,true);
@@ -8,11 +7,12 @@
     Log.e(Settings.tag,"cgeoBase.searchByAny: No data from server");
     return null;
   }
-  final cgCacheWrap caches=parseSearch(thread,fullUri,page,showCaptcha);
-  if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
+  final ParseResult parseResult=parseSearch(thread,fullUri,page,showCaptcha);
+  if (parseResult == null || CollectionUtils.isEmpty(parseResult.cacheList)) {
     Log.e(Settings.tag,"cgeoBase.searchByAny: No cache parsed");
+    return parseResult;
   }
-  List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),false,cacheType);
-  cgeoapplication.getInstance().addSearch(cacheList,listId);
+  final ParseResult search=ParseResult.filterParseResults(parseResult,Settings.isExcludeDisabledCaches(),false,cacheType);
+  cgeoapplication.getInstance().addSearch(search.cacheList,listId);
   return search;
 }

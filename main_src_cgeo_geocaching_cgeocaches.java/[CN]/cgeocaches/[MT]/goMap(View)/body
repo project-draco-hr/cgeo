@@ -3,15 +3,15 @@
     showToast(res.getString(R.string.warn_no_cache_coord));
     return;
   }
-  cgSearch searchToUse=search;
+  SearchResult searchToUse=search;
   if (adapter != null) {
     List<String> geocodes=new ArrayList<String>();
     for (    cgCache cache : adapter.getFilteredList()) {
       geocodes.add(cache.getGeocode());
     }
-    searchToUse=new cgSearch(geocodes);
+    searchToUse=new SearchResult(geocodes);
   }
-  int count=cgeoapplication.getCount(searchToUse);
+  int count=SearchResult.getCount(searchToUse);
   String mapTitle=title;
   if (count > 0) {
     mapTitle=title + " [" + count+ "]";

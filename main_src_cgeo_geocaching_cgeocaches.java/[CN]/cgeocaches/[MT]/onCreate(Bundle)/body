@@ -117,7 +117,8 @@ case MAP:
 title=res.getString(R.string.map_map);
 setTitle(title);
 showProgress(true);
-search=extras != null ? (cgSearch)extras.get("search") : null;
+SearchResult result=extras != null ? (SearchResult)extras.get("search") : null;
+search=new ParseResult(result);
 loadCachesHandler.sendMessage(Message.obtain());
 break;
 default :

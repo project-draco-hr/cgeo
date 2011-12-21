@@ -4,18 +4,18 @@
     Log.e(Settings.tag,"cgeoBase.parseCache: No page given");
     return null;
   }
-  final cgCacheWrap caches=new cgCacheWrap();
+  final ParseResult parseResult=new ParseResult();
   if (page.contains("Cache is Unpublished")) {
-    caches.error=StatusCode.UNPUBLISHED_CACHE;
-    return caches;
+    parseResult.error=StatusCode.UNPUBLISHED_CACHE;
+    return parseResult;
   }
   if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
-    caches.error=StatusCode.PREMIUM_ONLY;
-    return caches;
+    parseResult.error=StatusCode.PREMIUM_ONLY;
+    return parseResult;
   }
   if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
-    caches.error=StatusCode.PREMIUM_ONLY;
-    return caches;
+    parseResult.error=StatusCode.PREMIUM_ONLY;
+    return parseResult;
   }
   final cgCache cache=new cgCache();
   cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
@@ -263,6 +263,6 @@
       }
     }
   }
-  caches.cacheList.add(cache);
-  return caches;
+  parseResult.cacheList.add(cache);
+  return parseResult;
 }

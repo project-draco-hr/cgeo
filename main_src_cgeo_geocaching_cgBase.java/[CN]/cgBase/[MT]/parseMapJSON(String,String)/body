@@ -3,8 +3,8 @@
     Log.e(Settings.tag,"cgeoBase.parseMapJSON: No page given");
     return null;
   }
-  final cgCacheWrap caches=new cgCacheWrap();
-  caches.url=uri;
+  final ParseResult parseResult=new ParseResult();
+  parseResult.url=uri;
   try {
     final JSONObject yoDawg=new JSONObject(data);
     final String json=yoDawg.getString("d");
@@ -73,18 +73,18 @@
  else {
               cacheToAdd.setType(CacheType.UNKNOWN);
             }
-            caches.cacheList.add(cacheToAdd);
+            parseResult.cacheList.add(cacheToAdd);
           }
         }
       }
  else {
         Log.w(Settings.tag,"There are no caches in viewport");
       }
-      caches.totalCnt=caches.cacheList.size();
+      parseResult.totalCnt=parseResult.cacheList.size();
     }
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgBase.parseMapJSON",e);
   }
-  return caches;
+  return parseResult;
 }

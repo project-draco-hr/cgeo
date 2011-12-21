@@ -3,14 +3,14 @@
     Log.e(Settings.tag,"cgeoBase.parseSearch: No page given");
     return null;
   }
-  final cgCacheWrap caches=new cgCacheWrap();
   final List<String> cids=new ArrayList<String>();
   final List<String> guids=new ArrayList<String>();
   String recaptchaChallenge=null;
   String recaptchaText=null;
   String page=pageContent;
-  caches.url=url;
-  caches.viewstates=getViewstates(page);
+  final ParseResult parseResult=new ParseResult();
+  parseResult.url=url;
+  parseResult.viewstates=getViewstates(page);
   if (showCaptcha) {
     String recaptchaJsParam=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
     if (recaptchaJsParam != null) {
@@ -26,7 +26,7 @@
     }
   }
   if (!page.contains("SearchResultsTable")) {
-    return caches;
+    return parseResult;
   }
   int startPos=page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
   if (startPos == -1) {
@@ -127,12 +127,12 @@
         cache.getNameSp().setSpan(new StrikethroughSpan(),0,cache.getNameSp().toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
       }
     }
-    caches.cacheList.add(cache);
+    parseResult.cacheList.add(cache);
   }
   try {
     String result=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
     if (null != result) {
-      caches.totalCnt=Integer.parseInt(result);
+      parseResult.totalCnt=Integer.parseInt(result);
     }
   }
  catch (  NumberFormatException e) {
@@ -148,13 +148,13 @@
     Log.i(Settings.tag,"Trying to get .loc for " + cids.size() + " caches");
     try {
       final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","");
-      if (ArrayUtils.isNotEmpty(caches.viewstates)) {
-        params.put("__VIEWSTATE",caches.viewstates[0]);
-        if (caches.viewstates.length > 1) {
-          for (int i=1; i < caches.viewstates.length; i++) {
-            params.put("__VIEWSTATE" + i,caches.viewstates[i]);
+      if (ArrayUtils.isNotEmpty(parseResult.viewstates)) {
+        params.put("__VIEWSTATE",parseResult.viewstates[0]);
+        if (parseResult.viewstates.length > 1) {
+          for (int i=1; i < parseResult.viewstates.length; i++) {
+            params.put("__VIEWSTATE" + i,parseResult.viewstates[i]);
           }
-          params.put("__VIEWSTATEFIELDCOUNT","" + caches.viewstates.length);
+          params.put("__VIEWSTATEFIELDCOUNT","" + parseResult.viewstates.length);
         }
       }
       for (      String cid : cids) {
@@ -169,18 +169,18 @@
       if (StringUtils.isNotBlank(coordinates)) {
         if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
           Log.i(Settings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");
-          caches.error=StatusCode.UNAPPROVED_LICENSE;
-          return caches;
+          parseResult.error=StatusCode.UNAPPROVED_LICENSE;
+          return parseResult;
         }
       }
-      LocParser.parseLoc(caches,coordinates);
+      LocParser.parseLoc(parseResult,coordinates);
     }
  catch (    Exception e) {
       Log.e(Settings.tag,"cgBase.parseSearch.CIDs: " + e.toString());
     }
   }
   if (Settings.getLoadDirImg()) {
-    for (    cgCache oneCache : caches.cacheList) {
+    for (    cgCache oneCache : parseResult.cacheList) {
       if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
         cgDirectionImg.getDrawable(oneCache.getGeocode(),oneCache.getDirectionImg());
       }
@@ -192,7 +192,7 @@
       try {
         final Map<String,GCVoteRating> ratings=GCVote.getRating(guids,null);
         if (MapUtils.isNotEmpty(ratings)) {
-          for (          cgCache cache : caches.cacheList) {
+          for (          cgCache cache : parseResult.cacheList) {
             if (ratings.containsKey(cache.getGuid())) {
               GCVoteRating rating=ratings.get(cache.getGuid());
               cache.setRating(rating.getRating());
@@ -207,5 +207,5 @@
       }
     }
   }
-  return caches;
+  return parseResult;
 }

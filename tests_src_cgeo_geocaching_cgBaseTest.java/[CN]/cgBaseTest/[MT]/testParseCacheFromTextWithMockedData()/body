@@ -2,8 +2,8 @@
   String gcCustomDate=Settings.getGcCustomDate();
   for (  MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
     Settings.setGcCustomDate(mockedCache.getDateFormat());
-    cgCacheWrap caches=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
-    cgCache parsedCache=caches.cacheList.get(0);
+    ParseResult parseResult=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
+    cgCache parsedCache=parseResult.cacheList.get(0);
     cgBaseTest.testCompareCaches(mockedCache,parsedCache);
   }
   Settings.setGcCustomDate(gcCustomDate);

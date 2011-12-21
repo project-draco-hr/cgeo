@@ -54,7 +54,7 @@
   lastMenuInfo=info;
   if (adapterInfo != null) {
     final cgCache cache=getCacheFromAdapter(adapterInfo);
-    final cgSearch singleSearch=cgBase.searchByGeocode(cache.getGeocode(),null,0,false,null);
+    final SearchResult singleSearch=cgBase.searchByGeocode(cache.getGeocode(),null,0,false,null);
     if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearch,null,null)) {
       return true;
     }

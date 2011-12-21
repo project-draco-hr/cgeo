@@ -1,17 +1,17 @@
 {
-  final cgSearch search=new cgSearch();
   if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No geocode nor guid given");
     return null;
   }
   cgeoapplication app=cgeoapplication.getInstance();
   if (!forceReload && listId == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
+    final ParseResult search=new ParseResult();
     final String realGeocode=StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
     search.addGeocode(realGeocode);
     return search;
   }
   if (geocode == null && guid != null) {
-    return GCConnector.getInstance().searchByGeocode(null,guid,app,search,listId,handler);
+    return GCConnector.getInstance().searchByGeocode(null,guid,app,listId,handler);
   }
-  return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode,guid,app,search,listId,handler);
+  return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode,guid,app,listId,handler);
 }
