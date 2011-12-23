@@ -1,9 +1,3 @@
 {
-  if (cache == null || cache.getGeocode() == null) {
-    return;
-  }
-  if (cachesCache.containsKey(cache.getGeocode())) {
-    cachesCache.remove(cache.getGeocode());
-  }
-  cachesCache.put(cache.getGeocode(),cache);
+  CacheCache.getInstance().putCacheInCache(cache);
 }

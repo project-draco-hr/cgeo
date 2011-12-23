@@ -1,0 +1,10 @@
+{
+  if (cache == null || cache.getGeocode() == null) {
+    return;
+  }
+  if (cachesCache.containsKey(cache.getGeocode())) {
+    cachesCache.remove(cache.getGeocode());
+  }
+  cache.addStorageLocation(StorageLocations.CACHE);
+  cachesCache.put(cache.getGeocode(),cache);
+}

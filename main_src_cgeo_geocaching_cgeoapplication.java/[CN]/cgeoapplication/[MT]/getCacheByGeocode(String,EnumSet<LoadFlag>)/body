@@ -1,10 +1,11 @@
 {
-  if (cachesCache.containsKey(geocode)) {
-    return cachesCache.get(geocode);
+  cgCache cache=CacheCache.getInstance().getCacheFromCache(geocode);
+  if (cache != null) {
+    return cache;
   }
-  final cgCache cache=storage.loadCache(geocode,loadFlags);
-  if (cache != null && cache.getDetailed() && loadFlags == LoadFlags.LOADALL) {
-    putCacheInCache(cache);
+  cache=storage.loadCache(geocode,loadFlags);
+  if (cache != null && cache.isDetailed() && loadFlags == LoadFlags.LOADALL) {
+    CacheCache.getInstance().putCacheInCache(cache);
   }
   return cache;
 }
