@@ -3,7 +3,7 @@
     return cachesCache.get(geocode);
   }
   final cgCache cache=getStorage().loadCache(geocode,loadFlags);
-  if (cache != null && cache.getDetailed() && loadFlags == cgCache.LOADALL) {
+  if (cache != null && cache.getDetailed() && loadFlags == LoadFlags.LOADALL) {
     putCacheInCache(cache);
   }
   return cache;
