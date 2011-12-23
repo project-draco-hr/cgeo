@@ -50,5 +50,10 @@
       pg.waypoints.add(wp);
     }
   }
+  if (withCacheDetails) {
+    pg.shortDescription=cache.getShortDescription();
+    pg.longDescription=cache.getDescription();
+    pg.encodedHints=cache.getHint();
+  }
   return p;
 }
