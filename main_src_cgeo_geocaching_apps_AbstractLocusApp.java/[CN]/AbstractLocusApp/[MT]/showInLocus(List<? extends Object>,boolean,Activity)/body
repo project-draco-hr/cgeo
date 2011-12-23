@@ -2,12 +2,13 @@
   if (objectsToShow == null) {
     return;
   }
+  boolean withCacheDetails=objectsToShow.size() < 200;
   int pc=0;
   PointsData pd=new PointsData("c:geo");
   for (  Object o : objectsToShow) {
     Point p=null;
     if (o instanceof cgCache) {
-      p=getPoint((cgCache)o,withCacheWaypoints);
+      p=getPoint((cgCache)o,withCacheWaypoints,withCacheDetails);
     }
  else     if (o instanceof cgWaypoint) {
       p=getPoint((cgWaypoint)o);
