@@ -2,7 +2,7 @@
   if (cachesCache.containsKey(geocode)) {
     return cachesCache.get(geocode);
   }
-  final cgCache cache=getStorage().loadCache(geocode,loadFlags);
+  final cgCache cache=storage.loadCache(geocode,loadFlags);
   if (cache != null && cache.getDetailed() && loadFlags == LoadFlags.LOADALL) {
     putCacheInCache(cache);
   }

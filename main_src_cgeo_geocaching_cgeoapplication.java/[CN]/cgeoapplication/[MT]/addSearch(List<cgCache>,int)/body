@@ -2,9 +2,6 @@
   if (CollectionUtils.isEmpty(cacheList)) {
     return;
   }
-  if (storage == null) {
-    storage=new cgData(this);
-  }
   for (  final cgCache cache : cacheList) {
     cache.setListId(listId);
     storeWithMerge(cache,listId >= 1);
