@@ -1,5 +1,4 @@
 {
-  final cgSearch search=new cgSearch();
   String page=null;
   final String params="{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + viewport.getLatitudeMax() + "|"+ viewport.getLatitudeMin()+ "|"+ viewport.getLongitudeMax()+ "|"+ viewport.getLongitudeMin()+ "\"},\"ut\":\""+ StringUtils.defaultString(userToken)+ "\"}}";
   final String uri="http://www.geocaching.com/map/default.aspx/MapAction";
@@ -8,11 +7,12 @@
     Log.e(Settings.tag,"cgeoBase.searchByViewport: No data from server");
     return null;
   }
-  final cgCacheWrap caches=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
-  if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
+  final ParseResult parseResult=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
+  if (parseResult == null || CollectionUtils.isEmpty(parseResult.cacheList)) {
     Log.e(Settings.tag,"cgeoBase.searchByViewport: No cache parsed");
+    return parseResult;
   }
-  List<cgCache> cacheList=filterSearchResults(search,caches,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
-  cgeoapplication.getInstance().addSearch(cacheList,0);
+  final ParseResult search=ParseResult.filterParseResults(parseResult,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
+  cgeoapplication.getInstance().addSearch(search.cacheList,0);
   return search;
 }

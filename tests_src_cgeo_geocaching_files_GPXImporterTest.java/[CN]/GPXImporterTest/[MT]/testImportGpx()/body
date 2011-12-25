@@ -9,7 +9,7 @@
   assertEquals(GPXImporter.IMPORT_STEP_READ_FILE,iMsg.next().what);
   assertEquals(GPXImporter.IMPORT_STEP_STORE_CACHES,iMsg.next().what);
   assertEquals(GPXImporter.IMPORT_STEP_FINISHED,iMsg.next().what);
-  cgSearch search=(cgSearch)importStepHandler.messages.get(3).obj;
+  SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
   assertEquals(Collections.singletonList("GC31J2H"),search.getGeocodes());
   cgCache cache=cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
   assertCacheProperties(cache);

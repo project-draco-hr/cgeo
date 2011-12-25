@@ -3,7 +3,7 @@
     cgCache cache;
     if (origCache != null) {
       if (origCache.getListId() > 0 || StringUtils.isBlank(origCache.getDescription())) {
-        final cgSearch search=searchByGeocode(origCache.getGeocode(),null,listId,false,null);
+        final SearchResult search=searchByGeocode(origCache.getGeocode(),null,listId,false,null);
         cache=app.getCache(search);
       }
  else {
@@ -11,7 +11,7 @@
       }
     }
  else     if (StringUtils.isNotBlank(geocode)) {
-      final cgSearch search=searchByGeocode(geocode,null,listId,false,null);
+      final SearchResult search=searchByGeocode(geocode,null,listId,false,null);
       cache=app.getCache(search);
     }
  else {

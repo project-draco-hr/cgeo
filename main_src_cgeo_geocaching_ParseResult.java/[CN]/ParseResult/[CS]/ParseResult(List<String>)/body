@@ -1,0 +1,7 @@
+{
+  super(geocodes);
+  cgeoapplication app=cgeoapplication.getInstance();
+  for (  String geocode : geocodes) {
+    cacheList.add(app.getCacheByGeocode(geocode,LoadFlags.LOADALL));
+  }
+}

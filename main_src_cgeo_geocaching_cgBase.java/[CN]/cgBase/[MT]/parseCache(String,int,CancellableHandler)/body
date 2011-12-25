@@ -1,7 +1,7 @@
 {
-  final cgCacheWrap caches=parseCacheFromText(page,listId,handler);
-  if (caches != null && !caches.cacheList.isEmpty()) {
-    final cgCache cache=caches.cacheList.get(0);
+  final ParseResult parseResult=parseCacheFromText(page,listId,handler);
+  if (parseResult != null && !parseResult.cacheList.isEmpty()) {
+    final cgCache cache=parseResult.cacheList.get(0);
     getExtraOnlineInfo(cache,page,handler);
     cache.setUpdated(System.currentTimeMillis());
     cache.setDetailedUpdate(cache.getUpdated());
@@ -10,5 +10,5 @@
   if (CancellableHandler.isCancelled(handler)) {
     return null;
   }
-  return caches;
+  return parseResult;
 }

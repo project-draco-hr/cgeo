@@ -1,5 +1,5 @@
 {
-  final cgSearch search=cgBase.searchByOwner(null,"blafoo",CacheType.MYSTERY,0,false);
+  final ParseResult search=cgBase.searchByOwner(null,"blafoo",CacheType.MYSTERY,0,false);
   assertNotNull(search);
   assertEquals(3,search.getGeocodes().size());
   assertTrue(search.getGeocodes().contains("GC36RT6"));

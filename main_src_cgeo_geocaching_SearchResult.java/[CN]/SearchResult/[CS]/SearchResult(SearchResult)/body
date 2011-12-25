@@ -1,0 +1,12 @@
+{
+  if (searchResult != null) {
+    this.geocodes=new ArrayList<String>(searchResult.geocodes);
+    this.error=searchResult.error;
+    this.url=searchResult.url;
+    this.viewstates=searchResult.viewstates;
+    this.totalCnt=searchResult.totalCnt;
+  }
+ else {
+    this.geocodes=new ArrayList<String>();
+  }
+}
