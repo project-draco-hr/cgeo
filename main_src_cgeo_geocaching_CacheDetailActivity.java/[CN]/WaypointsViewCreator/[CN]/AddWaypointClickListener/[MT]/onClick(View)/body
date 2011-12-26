@@ -2,7 +2,7 @@
   Intent addWptIntent=new Intent(CacheDetailActivity.this,cgeowaypointadd.class);
   addWptIntent.putExtra("geocode",cache.getGeocode());
   int wpCount=0;
-  if (cache.getWaypoints() != null) {
+  if (cache.hasWaypoints()) {
     wpCount=cache.getWaypoints().size();
   }
   addWptIntent.putExtra("count",wpCount);

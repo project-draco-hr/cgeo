@@ -20,7 +20,7 @@ break;
 }
 break;
 case CONTEXT_MENU_WAYPOINT_EDIT:
-if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+if (cache.hasWaypoints() && index < cache.getWaypoints().size()) {
 final cgWaypoint waypoint=cache.getWaypoints().get(index);
 Intent editIntent=new Intent(this,cgeowaypointadd.class);
 editIntent.putExtra("waypoint",waypoint.getId());
@@ -29,49 +29,39 @@ refreshOnResume=true;
 }
 break;
 case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
-final cgWaypoint copy=new cgWaypoint(cache.getWaypoints().get(index));
-copy.setUserDefined();
-copy.setName(res.getString(R.string.waypoint_copy_of) + " " + copy.getName());
-cache.getWaypoints().add(index + 1,copy);
-app.saveOwnWaypoint(-1,cache.getGeocode(),copy);
-app.removeCacheFromCache(cache.getGeocode());
+if (cache.duplicateWaypoint(index)) {
 notifyDataSetChanged();
 }
 break;
 case CONTEXT_MENU_WAYPOINT_DELETE:
-if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
-final cgWaypoint waypoint=cache.getWaypoints().get(index);
-if (waypoint.isUserDefined()) {
-cache.getWaypoints().remove(index);
-app.deleteWaypoint(waypoint.getId());
-app.removeCacheFromCache(cache.getGeocode());
+if (cache.deleteWaypoint(index)) {
 notifyDataSetChanged();
-}
 }
 break;
 case CONTEXT_MENU_WAYPOINT_COMPASS:
-if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
-final cgWaypoint waypoint=cache.getWaypoints().get(index);
+{
+final cgWaypoint waypoint=cache.getWaypoint(index);
+if (waypoint != null) {
 Collection<cgCoord> coordinatesWithType=new ArrayList<cgCoord>();
 coordinatesWithType.add(new cgCoord(waypoint));
 cgeonavigate.startActivity(this,waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(),waypoint.getName(),waypoint.getCoords(),coordinatesWithType);
+}
 }
 break;
 case CONTEXT_MENU_WAYPOINT_NAVIGATE:
 break;
 case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
-if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
-final cgWaypoint waypoint=cache.getWaypoints().get(index);
+{
+final cgWaypoint waypoint=cache.getWaypoint(index);
+if (waypoint != null) {
 cgeocaches.startActivityCachesAround(this,waypoint.getCoords());
+}
 }
 break;
 default :
-if (null != cache.getWaypoints() && 0 <= contextMenuWPIndex && contextMenuWPIndex < cache.getWaypoints().size()) {
-final cgWaypoint waypoint=cache.getWaypoints().get(contextMenuWPIndex);
-if (NavigationAppFactory.onMenuItemSelected(item,geolocation,this,res,null,null,waypoint,null)) {
+final cgWaypoint waypoint=cache.getWaypoint(contextMenuWPIndex);
+if (waypoint != null && NavigationAppFactory.onMenuItemSelected(item,geolocation,this,res,null,null,waypoint,null)) {
 return true;
-}
 }
 return onOptionsItemSelected(item);
 }

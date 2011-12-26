@@ -1,3 +1,6 @@
 {
-  return waypoints;
+  if (waypoints == null) {
+    return Collections.emptyList();
+  }
+  return Collections.unmodifiableList(waypoints);
 }

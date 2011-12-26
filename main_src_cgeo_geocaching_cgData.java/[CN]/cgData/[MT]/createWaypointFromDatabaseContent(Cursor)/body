@@ -1,11 +1,11 @@
 {
-  cgWaypoint waypoint=new cgWaypoint();
+  String name=cursor.getString(cursor.getColumnIndex("name"));
+  WaypointType type=WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
+  cgWaypoint waypoint=new cgWaypoint(name,type);
   waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
   waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
-  waypoint.setWaypointType(WaypointType.findById(cursor.getString(cursor.getColumnIndex("type"))));
   waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
   waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
-  waypoint.setName(cursor.getString(cursor.getColumnIndex("name")));
   waypoint.setLatlon(cursor.getString(cursor.getColumnIndex("latlon")));
   waypoint.setCoords(getCoords(cursor,cursor.getColumnIndex("latitude"),cursor.getColumnIndex("longitude")));
   waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));

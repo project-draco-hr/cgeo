@@ -32,7 +32,7 @@
     pg.terrain=cache.getTerrain();
   }
   pg.found=cache.isFound();
-  if (withWaypoints && cache.getWaypoints() != null) {
+  if (withWaypoints && cache.hasWaypoints()) {
     pg.waypoints=new ArrayList<PointGeocachingDataWaypoint>();
     for (    cgWaypoint waypoint : cache.getWaypoints()) {
       if (waypoint == null || waypoint.getCoords() == null) {

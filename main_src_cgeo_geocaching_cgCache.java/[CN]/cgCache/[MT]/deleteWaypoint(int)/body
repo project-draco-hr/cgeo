@@ -1,0 +1,13 @@
+{
+  if (!isValidWaypointIndex(index)) {
+    return false;
+  }
+  final cgWaypoint waypoint=waypoints.get(index);
+  if (waypoint.isUserDefined()) {
+    waypoints.remove(index);
+    cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
+    cgeoapplication.getInstance().removeCacheFromCache(geocode);
+    return true;
+  }
+  return false;
+}

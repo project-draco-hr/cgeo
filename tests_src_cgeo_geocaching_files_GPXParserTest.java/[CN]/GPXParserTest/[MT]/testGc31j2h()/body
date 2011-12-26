@@ -4,5 +4,5 @@
   final cgCache cache=caches.get(0);
   assertGc31j2h(cache);
   assertSame(cache,caches.get(0));
-  assertNull(cache.getWaypoints());
+  assertEquals(0,cache.getWaypoints().size());
 }

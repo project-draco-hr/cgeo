@@ -4,7 +4,7 @@
   }
   view=(ScrollView)getLayoutInflater().inflate(R.layout.cacheview_waypoints,null);
   LinearLayout waypoints=(LinearLayout)view.findViewById(R.id.waypoints);
-  if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+  if (cache.hasWaypoints()) {
     LinearLayout waypointView;
     List<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.getWaypoints());
     Collections.sort(sortedWaypoints);
@@ -19,7 +19,7 @@
       if (StringUtils.isNotBlank(cgBase.waypointTypes.get(wpt.getWaypointType()))) {
         infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
       }
-      if ("OWN".equalsIgnoreCase(wpt.getPrefix())) {
+      if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(wpt.getPrefix())) {
         infoTextList.add(res.getString(R.string.waypoint_custom));
       }
  else {

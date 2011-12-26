@@ -1,0 +1,12 @@
+{
+  if (!isValidWaypointIndex(index)) {
+    return false;
+  }
+  final cgWaypoint copy=new cgWaypoint(waypoints.get(index));
+  copy.setUserDefined();
+  copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
+  waypoints.add(index + 1,copy);
+  cgeoapplication.getInstance().saveOwnWaypoint(-1,geocode,copy);
+  cgeoapplication.getInstance().removeCacheFromCache(geocode);
+  return true;
+}

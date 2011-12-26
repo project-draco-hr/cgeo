@@ -14,7 +14,7 @@
     edge=maxHeight;
   }
   final StringBuilder waypoints=new StringBuilder();
-  if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+  if (cache.hasWaypoints()) {
     for (    cgWaypoint waypoint : cache.getWaypoints()) {
       if (waypoint.getCoords() == null) {
         continue;

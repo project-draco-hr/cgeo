@@ -16,7 +16,7 @@
     Log.e(Settings.tag,"CacheDetailActivity.getCoordinates (cache)",e);
   }
   try {
-    if (null != cache.getWaypoints()) {
+    if (cache.hasWaypoints()) {
       for (      cgWaypoint waypoint : cache.getWaypoints()) {
         if (null != waypoint.getCoords()) {
           final cgCoord coords=new cgCoord();

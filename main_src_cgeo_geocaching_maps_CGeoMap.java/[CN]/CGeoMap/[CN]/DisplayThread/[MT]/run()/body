@@ -19,7 +19,7 @@
         if (cacheOne.getCoords() == null) {
           continue;
         }
-        if (cacheOne.getWaypoints() != null && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold())) && !cacheOne.getWaypoints().isEmpty()) {
+        if (cacheOne.hasWaypoints() && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold()))) {
           for (          cgWaypoint oneWaypoint : cacheOne.getWaypoints()) {
             if (oneWaypoint.getCoords() == null) {
               continue;
