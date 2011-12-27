@@ -23,14 +23,10 @@
   if (app.firstRun) {
     (new firstLogin()).start();
   }
-  updateCacheCounter();
-  (new cleanDatabase()).start();
   if (geo == null) {
+    geoUpdate=new UpdateLocation();
     geo=app.startGeo(geoUpdate);
   }
-  navType=(TextView)findViewById(R.id.nav_type);
-  navAccuracy=(TextView)findViewById(R.id.nav_accuracy);
-  navLocation=(TextView)findViewById(R.id.nav_location);
   final View findOnMap=findViewById(R.id.map);
   findOnMap.setClickable(true);
   findOnMap.setOnClickListener(new OnClickListener(){
@@ -48,7 +44,6 @@
   }
 );
   registerForContextMenu(findByOffline);
-  updateCacheCounter();
   final View advanced=findViewById(R.id.advanced_button);
   advanced.setClickable(true);
   advanced.setOnClickListener(new OnClickListener(){
@@ -74,6 +69,8 @@
     }
   }
 );
+  updateCacheCounter();
   setFilterTitle();
   checkRestore();
+  (new cleanDatabase()).start();
 }
