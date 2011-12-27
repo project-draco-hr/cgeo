@@ -1,6 +1,6 @@
 {
   final cgeoapplication app=cgeoapplication.getInstance();
-  final ParseResult search=app.getHistoryOfCaches(true,cacheType);
+  final SearchResult search=app.getHistoryOfCaches(true,cacheType);
   search.totalCnt=app.getAllHistoricCachesCount();
   return search;
 }
