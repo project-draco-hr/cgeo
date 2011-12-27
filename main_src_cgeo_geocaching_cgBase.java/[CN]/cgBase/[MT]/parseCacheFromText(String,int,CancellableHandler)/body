@@ -250,6 +250,28 @@
       }
     }
   }
+  if (StringUtils.isNotBlank(cache.getPersonalNote())) {
+    final Pattern coordPattern=Pattern.compile("[nNsS]{1}\\s*\\d");
+    int count=1;
+    String note=cache.getPersonalNote();
+    Matcher matcher=coordPattern.matcher(note);
+    while (matcher.find()) {
+      try {
+        final Geopoint point=GeopointParser.parse(note);
+        if (point != null) {
+          final String name=cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
+          final cgWaypoint waypoint=new cgWaypoint(name,WaypointType.WAYPOINT);
+          waypoint.setCoords(point);
+          cache.addWaypoint(waypoint);
+          count++;
+        }
+      }
+ catch (      GeopointParser.ParseException e) {
+      }
+      note=note.substring(matcher.start() + 1);
+      matcher=coordPattern.matcher(note);
+    }
+  }
   parseResult.cacheList.add(cache);
   return parseResult;
 }

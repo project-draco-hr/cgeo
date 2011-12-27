@@ -1,3 +1,8 @@
 {
   this.waypoints=waypoints;
+  if (waypoints != null) {
+    for (    cgWaypoint waypoint : waypoints) {
+      waypoint.setGeocode(geocode);
+    }
+  }
 }

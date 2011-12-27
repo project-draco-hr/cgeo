@@ -1,3 +1,7 @@
 {
-  return storage.saveOwnWaypoint(id,geocode,waypoint);
+  if (storage.saveOwnWaypoint(id,geocode,waypoint)) {
+    removeCacheFromCache(geocode);
+    return true;
+  }
+  return false;
 }
