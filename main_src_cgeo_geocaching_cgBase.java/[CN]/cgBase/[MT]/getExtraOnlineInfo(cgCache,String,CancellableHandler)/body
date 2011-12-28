@@ -8,12 +8,14 @@
     int position=0;
     List<cgLog> allLogs=cache.getLogs();
     List<cgLog> friendLogs=loadLogsFromDetails(page,cache,true);
-    for (    cgLog log : friendLogs) {
-      if (allLogs.contains(log)) {
-        allLogs.get(allLogs.indexOf(log)).friend=true;
-      }
+    if (friendLogs != null) {
+      for (      cgLog log : friendLogs) {
+        if (allLogs.contains(log)) {
+          allLogs.get(allLogs.indexOf(log)).friend=true;
+        }
  else {
-        allLogs.add(position++,log);
+          allLogs.add(position++,log);
+        }
       }
     }
   }

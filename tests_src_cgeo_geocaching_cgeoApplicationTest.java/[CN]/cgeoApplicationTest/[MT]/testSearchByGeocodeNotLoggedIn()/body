@@ -1,0 +1,22 @@
+{
+  ImmutablePair<String,String> login=Settings.getLogin();
+  try {
+    MockedCache cache=new GC1ZXX2();
+    deleteCacheFromDBAndLogout(cache.getGeocode());
+    ParseResult search=cgBase.searchByGeocode(cache.getGeocode(),null,0,true,null);
+    assertNotNull(search);
+    assertEquals(1,search.getGeocodes().size());
+    assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+    cgCache searchedCache=search.cacheList.get(0);
+    assertNull(searchedCache.getCoords());
+    cache=new GC2JVEH();
+    deleteCacheFromDBAndLogout(cache.getGeocode());
+    search=cgBase.searchByGeocode(cache.getGeocode(),null,0,true,null);
+    assertNotNull(search);
+    assertEquals(0,search.getGeocodes().size());
+  }
+  finally {
+    Settings.setLogin(login.left,login.right);
+    cgBase.login();
+  }
+}
