@@ -272,6 +272,7 @@
       matcher=coordPattern.matcher(note);
     }
   }
+  cache.setLogs(loadLogsFromDetails(page,cache,false,true));
   parseResult.cacheList.add(cache);
   return parseResult;
 }
