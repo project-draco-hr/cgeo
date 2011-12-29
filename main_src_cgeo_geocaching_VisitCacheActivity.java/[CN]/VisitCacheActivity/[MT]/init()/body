@@ -44,12 +44,16 @@
     logView.setText(text);
   }
   tweetCheck.setChecked(true);
+  final ActivityState lastState=(ActivityState)getLastNonConfigurationInstance();
+  if (lastState != null) {
+    lastState.restore(this);
+  }
   if (cgBase.isEmpty(viewstates)) {
     enablePostButton(false);
     new LoadDataThread().start();
   }
  else {
-    enablePostButton(false);
+    enablePostButton(true);
   }
   saveButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
