@@ -15,14 +15,14 @@
         seconds=Double.parseDouble(matcher.group(5));
       }
     }
-    return sign * (degree + minutes / 60.0 + seconds / 3600.0);
+    return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0),matcher.group().length());
   }
  else {
     try {
       final String[] items=StringUtils.split(text.trim());
       if (items.length > 0) {
         final int index=latlon == LatLon.LON ? items.length - 1 : 0;
-        return Double.parseDouble(items[index]);
+        return new ResultWrapper(Double.parseDouble(items[index]),items[index].length());
       }
     }
  catch (    NumberFormatException e) {

@@ -1,5 +1,6 @@
 {
-  double lat=parseLatitude(text);
-  double lon=parseLongitude(text);
+  ResultWrapper resultWrapper=parseHelper(text,LatLon.LAT);
+  double lat=resultWrapper.result;
+  double lon=parseLongitude(text.substring(resultWrapper.stringLength));
   return new Geopoint(lat,lon);
 }
