@@ -21,7 +21,7 @@
   cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
   cache.setArchived(page.contains("<li>This cache has been archived,"));
   cache.setMembers(BaseUtils.matches(page,GCConstants.PATTERN_MEMBERS));
-  cache.setFavourite(BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE));
+  cache.setFavorite(BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE));
   cache.setListId(listId);
   cache.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.getGeocode()));
   cache.setCacheId(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.getCacheId()));
@@ -70,7 +70,7 @@
  catch (    ParseException e) {
       Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hidden (event) date");
     }
-    cache.setFavouritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
+    cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
     cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id).toLowerCase()));
   }
   cache.setFound(BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));
