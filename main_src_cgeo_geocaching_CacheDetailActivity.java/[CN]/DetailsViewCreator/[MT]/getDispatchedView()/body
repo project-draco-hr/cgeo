@@ -92,7 +92,7 @@
     }
 );
   }
-  if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
+  if (cache.hasAttributes()) {
     new AttributeViewBuilder().fillView((LinearLayout)view.findViewById(R.id.attributes_innerbox));
     view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
   }

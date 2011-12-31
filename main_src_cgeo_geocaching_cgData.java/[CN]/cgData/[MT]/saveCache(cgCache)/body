@@ -53,7 +53,7 @@
   values.put("inventoryunknown",cache.getInventoryItems());
   values.put("onWatchlist",cache.isOnWatchlist() ? 1 : 0);
   boolean statusOk=true;
-  if (cache.getAttributes() != null) {
+  if (cache.hasAttributes()) {
     if (!saveAttributes(cache.getGeocode(),cache.getAttributes())) {
       statusOk=false;
     }

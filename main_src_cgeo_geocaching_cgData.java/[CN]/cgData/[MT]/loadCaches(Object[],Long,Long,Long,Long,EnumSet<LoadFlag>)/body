@@ -63,16 +63,7 @@
         do {
           cgCache cache=createCacheFromDatabaseContent(cursor);
           if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
-            final List<String> attributes=loadAttributes(cache.getGeocode());
-            if (CollectionUtils.isNotEmpty(attributes)) {
-              if (cache.getAttributes() == null) {
-                cache.setAttributes(new ArrayList<String>());
-              }
- else {
-                cache.getAttributes().clear();
-              }
-              cache.getAttributes().addAll(attributes);
-            }
+            cache.setAttributes(loadAttributes(cache.getGeocode()));
           }
           if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {
             final List<cgWaypoint> waypoints=loadWaypoints(cache.getGeocode());

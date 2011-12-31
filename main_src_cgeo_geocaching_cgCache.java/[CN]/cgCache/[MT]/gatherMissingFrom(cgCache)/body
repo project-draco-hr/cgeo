@@ -92,10 +92,10 @@
     myVote=other.getMyVote();
   }
   if (attributes == null) {
-    attributes=other.getAttributes();
+    attributes=other.attributes;
   }
   if (waypoints == null) {
-    waypoints=other.getWaypoints();
+    waypoints=other.waypoints;
   }
  else {
     cgWaypoint.mergeWayPoints(waypoints,other.getWaypoints(),waypoints == null || waypoints.isEmpty());

@@ -2,10 +2,9 @@
   final LinearLayout descriptions=(LinearLayout)getLayoutInflater().inflate(R.layout.attribute_descriptions,null);
   TextView attribView=(TextView)descriptions.getChildAt(0);
   StringBuilder buffer=new StringBuilder();
-  String attribute;
   final String packageName=cgeoapplication.getInstance().getBaseContext().getPackageName();
-  for (int i=0; i < cache.getAttributes().size(); i++) {
-    attribute=cache.getAttributes().get(i);
+  final List<String> attributes=cache.getAttributes();
+  for (  String attribute : attributes) {
     int id=res.getIdentifier("attribute_" + attribute,"string",packageName);
     if (id > 0) {
       String translated=res.getString(id);

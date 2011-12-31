@@ -104,9 +104,6 @@
       final Matcher matcherAttributesInside=GCConstants.PATTERN_ATTRIBUTESINSIDE.matcher(attributesPre);
       while (matcherAttributesInside.find()) {
         if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
-          if (cache.getAttributes() == null) {
-            cache.setAttributes(new ArrayList<String>());
-          }
           String attribute=matcherAttributesInside.group(2).toLowerCase();
           String imageName=matcherAttributesInside.group(1).trim();
           if (imageName.length() > 0) {
@@ -116,7 +113,7 @@
               attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase();
             }
           }
-          cache.getAttributes().add(attribute);
+          cache.addAttribute(attribute);
         }
       }
     }
