@@ -42,7 +42,7 @@
 );
     return true;
   }
- else   if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + 100) {
+ else   if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + maxListId) {
     final int newListId=id - CONTEXT_MENU_MOVE_TO_LIST;
     if (adapterInfo != null) {
       app.moveToList(getCacheFromAdapter(adapterInfo).getGeocode(),newListId);
