@@ -20,7 +20,7 @@
   final cgCache cache=new cgCache();
   cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
   cache.setArchived(page.contains("<li>This cache has been archived,"));
-  cache.setMembers(BaseUtils.matches(page,GCConstants.PATTERN_MEMBERS));
+  cache.setPremiumMembersOnly(BaseUtils.matches(page,GCConstants.PATTERN_PREMIUMMEMBERS));
   cache.setFavorite(BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE));
   cache.setListId(listId);
   cache.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.getGeocode()));
