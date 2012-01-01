@@ -39,7 +39,7 @@ if (waypoint.isUserDefined()) {
   menu.add(CONTEXT_MENU_WAYPOINT_DELETE,index,0,R.string.waypoint_delete);
 }
 if (waypoint.getCoords() != null) {
-  menu.add(CONTEXT_MENU_WAYPOINT_COMPASS,index,0,R.string.cache_menu_compass);
+  menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION,index,0,R.string.cache_menu_default_navigation);
   SubMenu subMenu=menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE,index,0,R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
   NavigationAppFactory.addMenuItems(subMenu,this,res);
   menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND,index,0,R.string.cache_menu_around);

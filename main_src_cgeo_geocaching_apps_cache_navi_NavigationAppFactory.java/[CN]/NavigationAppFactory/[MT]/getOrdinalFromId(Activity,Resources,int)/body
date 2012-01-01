@@ -1,0 +1,12 @@
+{
+  int ordinal=0;
+  for (  NavigationApp app : getNavigationApps(res)) {
+    if (app.isInstalled(activity)) {
+      if (app.getId() == id) {
+        return ordinal;
+      }
+      ordinal++;
+    }
+  }
+  return 0;
+}
