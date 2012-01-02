@@ -7,8 +7,7 @@
     assertNotNull(search);
     assertTrue(search.cacheList.size() >= 1);
     assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-    Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewport: Coords = " + cache.getCoords());
-    assertTrue(cache.getCoords().toString().compareTo(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords().toString()) == 0);
-    assertFalse(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).isReliableLatLon());
+    assertTrue(cache.getCoords().isEqualTo(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords()));
+    assertTrue(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).isReliableLatLon());
   }
 }

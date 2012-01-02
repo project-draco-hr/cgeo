@@ -10,7 +10,7 @@
   final ParseResult parseResult=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
   if (parseResult == null || CollectionUtils.isEmpty(parseResult.cacheList)) {
     Log.e(Settings.tag,"cgeoBase.searchByViewport: No cache parsed");
-    return parseResult;
+    return null;
   }
   final ParseResult search=ParseResult.filterParseResults(parseResult,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
   cgeoapplication.getInstance().addSearch(search.cacheList,0);
