@@ -1,9 +1,0 @@
-{
-  for (  NavigationApp app : getNavigationApps(res)) {
-    if (app.isInstalled(activity)) {
-      if (showInternalMap || !(app instanceof InternalMap)) {
-        menu.add(0,app.getId(),0,app.getName());
-      }
-    }
-  }
-}
