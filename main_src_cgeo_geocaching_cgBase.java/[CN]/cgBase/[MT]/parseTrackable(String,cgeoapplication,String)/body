@@ -105,6 +105,9 @@
  catch (  Exception e) {
     Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache logs");
   }
+  if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(),possibleTrackingcode)) {
+    trackable.setTrackingcode(possibleTrackingcode);
+  }
   if (app != null) {
     app.saveTrackable(trackable);
   }
