@@ -1,14 +1,16 @@
 {
-  int defaultNavigationTool=Settings.getDefaultNavigationTool();
-  if (defaultNavigationTool == 0) {
-    return;
-  }
+  final int defaultNavigationTool=Settings.getDefaultNavigationTool();
   NavigationApp app=null;
   List<NavigationApp> installedNavigationApps=getInstalledNavigationApps(activity,res);
-  for (  NavigationApp navigationApp : installedNavigationApps) {
-    if (navigationApp.getId() == defaultNavigationTool) {
-      app=navigationApp;
-      break;
+  if (defaultNavigationTool == 0) {
+    app=installedNavigationApps.get(0);
+  }
+ else {
+    for (    NavigationApp navigationApp : installedNavigationApps) {
+      if (navigationApp.getId() == defaultNavigationTool) {
+        app=navigationApp;
+        break;
+      }
     }
   }
   if (app != null) {
