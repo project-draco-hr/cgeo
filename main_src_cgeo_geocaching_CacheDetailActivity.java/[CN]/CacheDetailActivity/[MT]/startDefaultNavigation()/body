@@ -3,5 +3,5 @@
     showToast(res.getString(R.string.err_location_unknown));
     return;
   }
-  cgeonavigate.startActivity(this,cache.getGeocode(),cache.getName(),cache.getCoords(),getCoordinates());
+  NavigationAppFactory.startDefaultNavigationApplication(geolocation,this,getResources(),cache,null,null,null);
 }
