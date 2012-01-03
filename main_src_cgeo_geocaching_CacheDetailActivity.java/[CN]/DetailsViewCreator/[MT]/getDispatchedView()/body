@@ -3,6 +3,9 @@
     return null;
   }
   view=(ScrollView)getLayoutInflater().inflate(R.layout.cacheview_details,null);
+  if (Settings.isStoreOfflineMaps()) {
+    new PreviewMapTask().execute((Void)null);
+  }
   detailsList=(LinearLayout)view.findViewById(R.id.details_list);
   Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
   if (cache.isDisabled() || cache.isArchived()) {
