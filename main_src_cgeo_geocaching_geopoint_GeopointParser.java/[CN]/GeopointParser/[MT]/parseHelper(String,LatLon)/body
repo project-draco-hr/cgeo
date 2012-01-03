@@ -12,7 +12,7 @@
         seconds=Double.parseDouble("0." + matcher.group(4)) * 60.0;
       }
  else       if (null != matcher.group(5)) {
-        seconds=Double.parseDouble(matcher.group(5));
+        seconds=Double.parseDouble(matcher.group(5).replace(",","."));
       }
     }
     return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0),matcher.start(),matcher.group().length());
