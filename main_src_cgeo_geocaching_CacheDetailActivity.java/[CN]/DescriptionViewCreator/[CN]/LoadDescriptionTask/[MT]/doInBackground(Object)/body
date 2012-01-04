@@ -1,0 +1,17 @@
+{
+  try {
+    descriptionString=((String)params[0]).trim();
+    descriptionView=(TextView)params[1];
+    loadingIndicatorView=(View)params[2];
+  }
+ catch (  Exception e) {
+  }
+  HtmlImageCounter imageCounter=new HtmlImageCounter();
+  description=Html.fromHtml(descriptionString,imageCounter,new UnknownTagsHandler());
+  publishProgress();
+  if (imageCounter.getImageCount() > 0) {
+    description=Html.fromHtml(descriptionString,new HtmlImage(CacheDetailActivity.this,cache.getGeocode(),true,cache.getListId(),false),new UnknownTagsHandler());
+    publishProgress();
+  }
+  return null;
+}
