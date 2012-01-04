@@ -68,7 +68,7 @@
       statusOk=false;
     }
   }
-  if (cache.getLogs() != null) {
+  if (CollectionUtils.isNotEmpty(cache.getLogs())) {
     if (!saveLogs(cache.getGeocode(),cache.getLogs())) {
       statusOk=false;
     }
