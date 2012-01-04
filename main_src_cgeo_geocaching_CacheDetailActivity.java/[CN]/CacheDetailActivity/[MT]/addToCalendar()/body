@@ -25,6 +25,7 @@
       }
  while (cursor.moveToNext());
     }
+    cursor.close();
   }
   final CharSequence[] items=calendars.values().toArray(new CharSequence[calendars.size()]);
   AlertDialog.Builder builder=new AlertDialog.Builder(this);
