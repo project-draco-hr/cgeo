@@ -1,5 +1,7 @@
 {
   ParseResult result=new ParseResult(parseResult);
+  result.cacheList.clear();
+  result.geocodes.clear();
   if (parseResult != null) {
     for (    final cgCache cache : parseResult.cacheList) {
       final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwn() || cache.isFound())) || (cacheType != CacheType.ALL && cacheType != cache.getType());
