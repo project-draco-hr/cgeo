@@ -1,0 +1,18 @@
+{
+  if (cache == null && waypoint == null && coords == null) {
+    return false;
+  }
+  try {
+    if (isInstalled(activity)) {
+      Geopoint usedCoords=getCoords(cache,waypoint,coords);
+      final Intent intent=new Intent(INTENT);
+      intent.putExtra(INTENT_EXTRA_KEY_LATITUDE,(float)usedCoords.getLatitude());
+      intent.putExtra(INTENT_EXTRA_KEY_LONGITUDE,(float)usedCoords.getLongitude());
+      activity.startActivity(intent);
+      return true;
+    }
+  }
+ catch (  Exception e) {
+  }
+  return false;
+}
