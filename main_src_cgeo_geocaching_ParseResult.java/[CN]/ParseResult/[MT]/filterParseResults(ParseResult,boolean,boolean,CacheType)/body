@@ -6,8 +6,9 @@
     for (    final cgCache cache : parseResult.cacheList) {
       final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwn() || cache.isFound())) || (cacheType != CacheType.ALL && cacheType != cache.getType());
       if (!excludeCache) {
-        result.addGeocode(cache.getGeocode());
-        result.cacheList.add(cache);
+        if (result.addGeocode(cache.getGeocode())) {
+          result.cacheList.add(cache);
+        }
       }
     }
   }

@@ -1,5 +1,5 @@
 {
-  final List<String> geocodes=storage.loadBatchOfStoredGeocodes(detailedOnly,coords,cacheType,list);
+  final Set<String> geocodes=storage.loadBatchOfStoredGeocodes(detailedOnly,coords,cacheType,list);
   final SearchResult search=new SearchResult(geocodes);
   search.totalCnt=getAllStoredCachesCount(true,cacheType,list);
   return search;
