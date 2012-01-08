@@ -2,6 +2,7 @@
   if (cache == null) {
     return false;
   }
+  cgeoapplication.getInstance().putCacheInCache(cache);
   ContentValues values=new ContentValues();
   if (cache.getUpdated() == 0) {
     values.put("updated",System.currentTimeMillis());
