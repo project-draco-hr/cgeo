@@ -2,6 +2,10 @@
   List<String> guids=null;
   List<String> geocodes=null;
   if (StringUtils.isNotBlank(guid)) {
+    GCVoteRating rating=ratingsCache.get(guid);
+    if (rating != null) {
+      return rating;
+    }
     guids=new ArrayList<String>();
     guids.add(guid);
   }

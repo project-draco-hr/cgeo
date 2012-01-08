@@ -99,6 +99,7 @@
       if (StringUtils.isNotBlank(guid)) {
         GCVoteRating gcvoteRating=new GCVoteRating(rating,votes,myVote);
         ratings.put(guid,gcvoteRating);
+        ratingsCache.put(guid,gcvoteRating);
       }
     }
   }
