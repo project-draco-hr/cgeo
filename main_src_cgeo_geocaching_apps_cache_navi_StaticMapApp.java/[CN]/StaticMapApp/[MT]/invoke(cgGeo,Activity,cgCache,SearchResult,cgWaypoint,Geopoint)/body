@@ -4,7 +4,7 @@
     return true;
   }
   if (cache.getGeocode() != null) {
-    final Intent intent=new Intent(activity,cgeosmaps.class);
+    final Intent intent=new Intent(activity,StaticMapsActivity.class);
     intent.putExtra("geocode",cache.getGeocode().toUpperCase());
     activity.startActivity(intent);
     return true;

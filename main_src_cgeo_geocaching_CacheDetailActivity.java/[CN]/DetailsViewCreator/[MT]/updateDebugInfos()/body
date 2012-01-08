@@ -3,10 +3,10 @@
     ((LinearLayout)view.findViewById(R.id.debug_box)).setVisibility(View.VISIBLE);
     final TextView internalsText=(TextView)view.findViewById(R.id.debug_text);
     String sl="Storage location: ";
-    if (cache.getStorageLocation().contains(StorageLocations.CACHE)) {
+    if (cache.getStorageLocation().contains(StorageLocation.CACHE)) {
       sl+="Cache ";
     }
-    if (cache.getStorageLocation().contains(StorageLocations.DATABASE)) {
+    if (cache.getStorageLocation().contains(StorageLocation.DATABASE)) {
       sl+="Database (" + cache.getListId() + ")";
     }
     internalsText.setText(sl);

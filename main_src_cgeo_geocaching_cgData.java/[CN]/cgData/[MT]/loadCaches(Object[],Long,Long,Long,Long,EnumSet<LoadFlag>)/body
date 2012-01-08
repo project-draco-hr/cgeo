@@ -106,7 +106,7 @@
           if (loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
           }
-          cache.addStorageLocation(StorageLocations.DATABASE);
+          cache.addStorageLocation(StorageLocation.DATABASE);
           caches.add(cache);
         }
  while (cursor.moveToNext());

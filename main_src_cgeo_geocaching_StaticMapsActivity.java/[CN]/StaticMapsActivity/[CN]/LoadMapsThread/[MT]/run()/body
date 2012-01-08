@@ -11,7 +11,7 @@
         }
       }
  catch (      Exception e) {
-        Log.e(Settings.tag,"cgeosmaps.loadMaps.run.1: " + e.toString());
+        Log.e(Settings.tag,"StaticMapsActivity.LoadMapsThread.run.1: " + e.toString());
       }
     }
     if (maps.isEmpty()) {
@@ -23,13 +23,13 @@
           }
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"cgeosmaps.loadMaps.run.2: " + e.toString());
+          Log.e(Settings.tag,"StaticMapsActivity.LoadMapsThread.run.2: " + e.toString());
         }
       }
     }
     loadMapsHandler.sendMessage(new Message());
   }
  catch (  Exception e) {
-    Log.e(Settings.tag,"cgeosmaps.loadMaps.run: " + e.toString());
+    Log.e(Settings.tag,"StaticMapsActivity.LoadMapsThread.run: " + e.toString());
   }
 }
