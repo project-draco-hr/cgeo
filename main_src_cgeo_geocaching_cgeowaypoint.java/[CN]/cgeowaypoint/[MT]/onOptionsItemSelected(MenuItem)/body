@@ -8,5 +8,9 @@
     cachesAround();
     return true;
   }
+ else   if (menuItem == MENU_ID_OPEN_GEOCACHE) {
+    goToGeocache();
+    return true;
+  }
   return NavigationAppFactory.onMenuItemSelected(item,geo,this,null,null,waypoint,null);
 }
