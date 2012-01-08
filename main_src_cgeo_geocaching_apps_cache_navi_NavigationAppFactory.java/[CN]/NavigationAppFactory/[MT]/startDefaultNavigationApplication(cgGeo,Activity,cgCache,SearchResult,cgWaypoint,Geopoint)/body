@@ -1,0 +1,24 @@
+{
+  final int defaultNavigationTool=Settings.getDefaultNavigationTool();
+  NavigationApp app=null;
+  final List<NavigationApp> installedNavigationApps=getInstalledNavigationApps(activity);
+  if (defaultNavigationTool == 0) {
+    app=installedNavigationApps.get(0);
+  }
+ else {
+    for (    NavigationApp navigationApp : installedNavigationApps) {
+      if (navigationApp.getId() == defaultNavigationTool) {
+        app=navigationApp;
+        break;
+      }
+    }
+  }
+  if (app != null) {
+    try {
+      app.invoke(geo,activity,cache,search,waypoint,destination);
+    }
+ catch (    Exception e) {
+      Log.e(Settings.tag,"NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
+    }
+  }
+}

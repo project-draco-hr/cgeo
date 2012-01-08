@@ -1,0 +1,7 @@
+{
+  for (  GeneralApp app : getGeneralApps()) {
+    if (app.isInstalled(activity) && app.isEnabled(cache)) {
+      menu.add(0,app.getId(),0,app.getName());
+    }
+  }
+}

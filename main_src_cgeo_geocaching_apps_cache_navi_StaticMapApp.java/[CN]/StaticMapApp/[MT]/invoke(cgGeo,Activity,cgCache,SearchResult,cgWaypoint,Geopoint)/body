@@ -1,0 +1,13 @@
+{
+  if (cache == null || cache.getListId() == 0) {
+    ActivityMixin.showToast(activity,getString(R.string.err_detail_no_map_static));
+    return true;
+  }
+  if (cache.getGeocode() != null) {
+    final Intent intent=new Intent(activity,cgeosmaps.class);
+    intent.putExtra("geocode",cache.getGeocode().toUpperCase());
+    activity.startActivity(intent);
+    return true;
+  }
+  return false;
+}

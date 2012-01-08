@@ -1,33 +1,31 @@
 {
-  if (objectsToShow == null) {
-    return;
+  if (objectsToShow == null || objectsToShow.isEmpty()) {
+    return false;
   }
-  boolean withCacheDetails=objectsToShow.size() < 200;
-  int pc=0;
-  PointsData pd=new PointsData("c:geo");
+  final boolean withCacheDetails=objectsToShow.size() < 200;
+  final PointsData pd=new PointsData("c:geo");
   for (  Object o : objectsToShow) {
     Point p=null;
     if (o instanceof cgCache) {
-      p=getPoint((cgCache)o,withCacheWaypoints,withCacheDetails);
+      p=getCachePoint((cgCache)o,withCacheWaypoints,withCacheDetails);
     }
  else     if (o instanceof cgWaypoint) {
-      p=getPoint((cgWaypoint)o);
+      p=getWaypointPoint((cgWaypoint)o);
     }
- else {
-      continue;
+    if (p != null) {
+      pd.addPoint(p);
     }
-    if (p == null) {
-      continue;
-    }
-    pd.addPoint(p);
-    ++pc;
   }
-  if (pc <= 1000) {
+  if (pd.getPoints().isEmpty()) {
+    return false;
+  }
+  if (pd.getPoints().size() <= 1000) {
     DisplayData.sendData(activity,pd,false);
   }
  else {
-    ArrayList<PointsData> data=new ArrayList<PointsData>();
+    final ArrayList<PointsData> data=new ArrayList<PointsData>();
     data.add(pd);
     DisplayData.sendDataCursor(activity,data,"content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(),false);
   }
+  return true;
 }
