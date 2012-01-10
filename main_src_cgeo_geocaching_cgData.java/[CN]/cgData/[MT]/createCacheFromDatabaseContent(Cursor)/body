@@ -40,6 +40,7 @@
     local_cci[34]=cursor.getColumnIndex("inventoryunknown");
     local_cci[35]=cursor.getColumnIndex("onWatchlist");
     local_cci[36]=cursor.getColumnIndex("reliable_latlon");
+    local_cci[37]=cursor.getColumnIndex("coordsChanged");
     local_cci[38]=cursor.getColumnIndex("latitude");
     local_cci[39]=cursor.getColumnIndex("longitude");
     cacheColumnIndex=local_cci;
@@ -103,5 +104,6 @@
   cache.setInventoryItems(cursor.getInt(cacheColumnIndex[34]));
   cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
   cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
+  cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
   return cache;
 }

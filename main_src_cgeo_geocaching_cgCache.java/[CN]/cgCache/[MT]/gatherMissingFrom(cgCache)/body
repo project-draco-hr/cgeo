@@ -50,7 +50,7 @@
   if (StringUtils.isBlank(hint)) {
     hint=other.hint;
   }
-  if (size == null) {
+  if (size == null || CacheSize.UNKNOWN == size) {
     size=other.size;
   }
   if (difficulty == 0) {
@@ -119,6 +119,12 @@
   }
   if (logCounts.size() == 0) {
     logCounts=other.logCounts;
+  }
+  if (userModifiedCoords == false) {
+    userModifiedCoords=other.userModifiedCoords;
+  }
+  if (reliableLatLon == false) {
+    reliableLatLon=other.reliableLatLon;
   }
   return isEqualTo(other);
 }

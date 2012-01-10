@@ -199,6 +199,7 @@
       final cgWaypoint waypoint=new cgWaypoint(res.getString(R.string.cache_coordinates_original),WaypointType.WAYPOINT);
       waypoint.setCoords(new Geopoint(originalCoords));
       cache.addWaypoint(waypoint);
+      cache.setUserModifiedCoords(true);
     }
   }
  catch (  Geopoint.GeopointException e) {
