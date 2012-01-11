@@ -3,11 +3,21 @@
     if (factory == null) {
       factory=new BitmapFactory();
     }
+    Log.d(Settings.tag,"StaticMapsActivity.run: waypoint_id = " + waypoint_id);
+    Log.d(Settings.tag,"StaticMapsActivity.run: geocode = " + geocode);
     for (int level=1; level <= 5; level++) {
       try {
-        final Bitmap image=BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode,level,false).getPath());
-        if (image != null) {
-          maps.add(image);
+        if (waypoint_id != null) {
+          final Bitmap image=BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode,"wp" + waypoint_id + "_",level,false).getPath());
+          if (image != null) {
+            maps.add(image);
+          }
+        }
+ else {
+          final Bitmap image=BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode,"",level,false).getPath());
+          if (image != null) {
+            maps.add(image);
+          }
         }
       }
  catch (      Exception e) {
@@ -17,9 +27,17 @@
     if (maps.isEmpty()) {
       for (int level=1; level <= 5; level++) {
         try {
-          final Bitmap image=BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode,level,false).getPath());
-          if (image != null) {
-            maps.add(image);
+          if (waypoint_id != null) {
+            final Bitmap image=BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode,"wp" + waypoint_id + "_",level,false).getPath());
+            if (image != null) {
+              maps.add(image);
+            }
+          }
+ else {
+            final Bitmap image=BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode,"",level,false).getPath());
+            if (image != null) {
+              maps.add(image);
+            }
           }
         }
  catch (        Exception e) {

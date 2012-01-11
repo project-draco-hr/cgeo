@@ -27,5 +27,17 @@
       waypoints.append(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
     }
   }
-  downloadMaps(cache,latlonMap,edge,waypoints.toString());
+  downloadMaps(cache,"",latlonMap,edge,waypoints.toString());
+  if (!Settings.isStoreOfflineWpMaps()) {
+    return;
+  }
+  if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+    for (    cgWaypoint waypoint : cache.getWaypoints()) {
+      if (waypoint.getCoords() == null) {
+        continue;
+      }
+      String wpLatlonMap=waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
+      downloadMaps(cache,"wp" + waypoint.getId() + "_",wpLatlonMap,edge,"");
+    }
+  }
 }
