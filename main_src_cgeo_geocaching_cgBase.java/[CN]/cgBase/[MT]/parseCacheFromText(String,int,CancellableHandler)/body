@@ -94,7 +94,6 @@
       cache.setHint(StringUtils.replace(hint,"</p>","").trim());
     }
   }
-  checkFields(cache);
   cache.setPersonalNote(BaseUtils.getMatch(page,GCConstants.PATTERN_PERSONALNOTE,true,cache.getPersonalNote()));
   cache.setShortdesc(BaseUtils.getMatch(page,GCConstants.PATTERN_SHORTDESC,true,cache.getShortdesc()));
   cache.setDescription(BaseUtils.getMatch(page,GCConstants.PATTERN_DESC,true,""));
