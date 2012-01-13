@@ -6,7 +6,9 @@
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString("geocode");
-    waypoint_id=extras.getInt("waypoint");
+    if (extras.containsKey("waypoint")) {
+      waypoint_id=extras.getInt("waypoint");
+    }
   }
   if (geocode == null) {
     showToast("Sorry, c:geo forgot for what cache you want to load static maps.");

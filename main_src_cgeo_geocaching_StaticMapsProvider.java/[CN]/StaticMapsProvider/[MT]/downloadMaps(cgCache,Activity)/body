@@ -19,15 +19,15 @@
       if (waypoint.getCoords() == null) {
         continue;
       }
+      String wpMarkerUrl=getWpMarkerUrl(waypoint);
       waypoints.append("&markers=icon%3A");
-      waypoints.append(MARKERS_URL);
-      waypoints.append("marker_waypoint_");
-      waypoints.append(waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
-      waypoints.append(".png%7C");
+      waypoints.append(wpMarkerUrl);
+      waypoints.append("%7C");
       waypoints.append(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
     }
   }
-  downloadMaps(cache,"",latlonMap,edge,waypoints.toString());
+  final String cacheMarkerUrl=getCacheMarkerUrl(cache);
+  downloadMaps(cache,cacheMarkerUrl,"",latlonMap,edge,waypoints.toString());
   if (!Settings.isStoreOfflineWpMaps()) {
     return;
   }
@@ -37,7 +37,8 @@
         continue;
       }
       String wpLatlonMap=waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-      downloadMaps(cache,"wp" + waypoint.getId() + "_",wpLatlonMap,edge,"");
+      String wpMarkerUrl=getWpMarkerUrl(waypoint);
+      downloadMaps(cache,wpMarkerUrl,"wp" + waypoint.getId() + "_",wpLatlonMap,edge,"");
     }
   }
 }
