@@ -7,10 +7,17 @@
  catch (  Exception e) {
   }
   HtmlImageCounter imageCounter=new HtmlImageCounter();
-  description=Html.fromHtml(descriptionString,imageCounter,new UnknownTagsHandler());
+  final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
+  description=Html.fromHtml(descriptionString,imageCounter,unknownTagsHandler);
   publishProgress();
   if (imageCounter.getImageCount() > 0) {
-    description=Html.fromHtml(descriptionString,new HtmlImage(CacheDetailActivity.this,cache.getGeocode(),true,cache.getListId(),false),new UnknownTagsHandler());
+    description=Html.fromHtml(descriptionString,new HtmlImage(CacheDetailActivity.this,cache.getGeocode(),true,cache.getListId(),false),unknownTagsHandler);
+    publishProgress();
+  }
+  if (unknownTagsHandler.isTableDetected() && descriptionView == view.findViewById(R.id.longdesc)) {
+    final int startPos=description.length();
+    ((Editable)description).append("\n" + res.getString(R.string.cache_description_table_note));
+    ((Editable)description).setSpan(new StyleSpan(Typeface.ITALIC),startPos,description.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     publishProgress();
   }
   return null;
