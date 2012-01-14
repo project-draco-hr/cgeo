@@ -77,8 +77,15 @@
     }
     ownerView.setOnClickListener(new UserActionsClickListener());
   }
-  if (cache.getHiddenDate() != null && cache.getHiddenDate().getTime() > 0) {
-    addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,cgBase.formatFullDate(cache.getHiddenDate().getTime()));
+  if (cache.getHiddenDate() != null) {
+    long time=cache.getHiddenDate().getTime();
+    if (time > 0) {
+      String dateString=cgBase.formatFullDate(time);
+      if (cache.isEventCache()) {
+        dateString=DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(),time,DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
+      }
+      addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,dateString);
+    }
   }
   if (StringUtils.isNotBlank(cache.getLocation())) {
     addCacheDetail(R.string.cache_location,cache.getLocation());

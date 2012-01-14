@@ -2,4 +2,13 @@
   if (tag.equalsIgnoreCase("strike") || tag.equals("s")) {
     handleStrike(opening,output);
   }
+ else   if (tag.equalsIgnoreCase("table")) {
+    handleTable();
+  }
+ else   if (tag.equalsIgnoreCase("td")) {
+    handleTd(opening,output);
+  }
+ else   if (tag.equalsIgnoreCase("tr")) {
+    handleTr(opening,output);
+  }
 }

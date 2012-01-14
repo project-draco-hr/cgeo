@@ -13,7 +13,7 @@
  else     if (type == CacheListType.HISTORY) {
       adapter.setComparator(new VisitComparator());
     }
- else {
+ else     if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof DateComparator) {
       adapter.setComparator(null);
     }
   }
