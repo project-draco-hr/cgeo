@@ -182,7 +182,7 @@
   if (Settings.getLoadDirImg()) {
     for (    cgCache oneCache : parseResult.cacheList) {
       if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
-        cgDirectionImg.getDrawable(oneCache.getGeocode(),oneCache.getDirectionImg());
+        DirectionImage.getDrawable(oneCache.getGeocode(),oneCache.getDirectionImg());
       }
     }
   }

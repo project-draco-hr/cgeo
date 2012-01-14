@@ -1,0 +1,11 @@
+{
+  if (directionNow == null) {
+    return;
+  }
+  azimuth=directionNow;
+  if (CollectionUtils.isNotEmpty(compasses)) {
+    for (    CompassMiniView compass : compasses) {
+      compass.updateAzimuth(azimuth);
+    }
+  }
+}

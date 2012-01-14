@@ -1,0 +1,17 @@
+{
+  if (coordsIn == null) {
+    return;
+  }
+  coords=coordsIn;
+  if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && sort && isSortedByDistance()) {
+    Collections.sort(list,new DistanceComparator(coordsIn,list));
+    notifyDataSetChanged();
+    lastSort=System.currentTimeMillis();
+  }
+  for (  final DistanceView distance : distances) {
+    distance.update(coordsIn);
+  }
+  for (  final CompassMiniView compass : compasses) {
+    compass.updateCoords(coordsIn);
+  }
+}
