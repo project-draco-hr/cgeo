@@ -4,6 +4,7 @@
     if (cidCoords.containsKey(cache.getGeocode())) {
       cgCoord coord=cidCoords.get(cache.getGeocode());
       copyCoordToCache(coord,cache);
+      cache.setReliableLatLon(false);
     }
   }
 }
