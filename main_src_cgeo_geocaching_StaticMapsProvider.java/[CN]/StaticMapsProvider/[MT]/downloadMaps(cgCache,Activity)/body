@@ -2,42 +2,13 @@
   if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
     return;
   }
-  final Display display=((WindowManager)activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-  final int maxWidth=display.getWidth() - 25;
-  final int maxHeight=display.getHeight() - 25;
-  int edge=0;
-  if (maxWidth > maxHeight) {
-    edge=maxWidth;
-  }
- else {
-    edge=maxHeight;
-  }
+  int edge=guessMinDisplaySide(activity);
   if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-    final String latlonMap=cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-    final StringBuilder waypoints=new StringBuilder();
-    if (cache.hasWaypoints()) {
-      for (      cgWaypoint waypoint : cache.getWaypoints()) {
-        if (waypoint.getCoords() == null) {
-          continue;
-        }
-        String wpMarkerUrl=getWpMarkerUrl(waypoint);
-        waypoints.append("&markers=icon%3A");
-        waypoints.append(wpMarkerUrl);
-        waypoints.append("%7C");
-        waypoints.append(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
-      }
-    }
-    final String cacheMarkerUrl=getCacheMarkerUrl(cache);
-    downloadMaps(cache,cacheMarkerUrl,"",latlonMap,edge,waypoints.toString());
+    storeCacheStaticMap(cache,edge);
   }
   if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
     for (    cgWaypoint waypoint : cache.getWaypoints()) {
-      if (waypoint.getCoords() == null) {
-        continue;
-      }
-      String wpLatlonMap=waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-      String wpMarkerUrl=getWpMarkerUrl(waypoint);
-      downloadMaps(cache,wpMarkerUrl,"wp" + waypoint.getId() + "_",wpLatlonMap,edge,"");
+      storeWaypointStaticMap(cache,edge,waypoint);
     }
   }
 }

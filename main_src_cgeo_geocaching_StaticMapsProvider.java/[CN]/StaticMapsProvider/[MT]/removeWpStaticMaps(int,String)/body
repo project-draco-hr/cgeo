@@ -1,0 +1,12 @@
+{
+  for (int level=1; level <= 5; level++) {
+    try {
+      if (wp_id > 0) {
+        StaticMapsProvider.getMapFile(geocode,"wp" + wp_id + "_",level,false).delete();
+      }
+    }
+ catch (    Exception e) {
+      Log.e(Settings.tag,"StaticMapsProvider.removeWpStaticMaps: " + e.toString());
+    }
+  }
+}
