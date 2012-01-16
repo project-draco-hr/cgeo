@@ -8,12 +8,12 @@
       }
     }
     if (eventsOnly) {
-      adapter.setComparator(new DateComparator());
+      adapter.setComparator(new EventDateComparator());
     }
  else     if (type == CacheListType.HISTORY) {
       adapter.setComparator(new VisitComparator());
     }
- else     if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof DateComparator) {
+ else     if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof EventDateComparator) {
       adapter.setComparator(null);
     }
   }
