@@ -4,13 +4,18 @@
   final Uri uri=intent.getData();
   String mimeType=intent.getType();
   if (mimeType == null) {
-    mimeType="application/zip";
+    if (StringUtils.endsWithIgnoreCase(uri.getPath(),GPX_FILE_EXTENSION)) {
+      mimeType="application/xml";
+    }
+ else {
+      mimeType="application/zip";
+    }
   }
   Log.i(Settings.tag,"importGPX: " + uri + ", mimetype="+ mimeType);
-  if (StringUtils.equalsIgnoreCase("text/xml",mimeType) || StringUtils.equalsIgnoreCase("application/xml",mimeType)) {
+  if (GPX_MIME_TYPES.contains(mimeType)) {
     new ImportGpxAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
   }
- else   if (StringUtils.equalsIgnoreCase("application/zip",mimeType)) {
+ else   if (ZIP_MIME_TYPES.contains(mimeType)) {
     new ImportGpxZipAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
   }
  else {
