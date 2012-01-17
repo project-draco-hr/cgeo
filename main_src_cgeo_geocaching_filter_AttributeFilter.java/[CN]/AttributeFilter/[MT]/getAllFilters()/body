@@ -1,0 +1,10 @@
+{
+  final String packageName=cgeoapplication.getInstance().getBaseContext().getPackageName();
+  final Resources res=cgeoapplication.getInstance().getResources();
+  final String[] ids=res.getStringArray(R.array.attribute_ids);
+  final IFilter[] filters=new IFilter[ids.length];
+  for (int i=0; i < ids.length; i++) {
+    filters[i]=new AttributeFilter(getName("attribute_" + ids[i],res,packageName),ids[i]);
+  }
+  return filters;
+}
