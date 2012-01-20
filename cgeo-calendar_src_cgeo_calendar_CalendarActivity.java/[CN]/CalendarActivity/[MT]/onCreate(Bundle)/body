@@ -1,0 +1,26 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.main);
+  try {
+    uri=getIntent().getData();
+    if (uri == null) {
+      finish();
+      return;
+    }
+    shortDesc=getParameter(ICalendar.PARAM_SHORT_DESC);
+    hiddenDate=getParameter(ICalendar.PARAM_HIDDEN_DATE);
+    url=getParameter(ICalendar.PARAM_URL);
+    personalNote=getParameter(ICalendar.PARAM_NOTE);
+    name=getParameter(ICalendar.PARAM_NAME);
+    location=getParameter(ICalendar.PARAM_LOCATION);
+    coords=getParameter(ICalendar.PARAM_COORDS);
+    if (name.length() > 0 && hiddenDate.length() > 0) {
+      selectCalendarForAdding();
+    }
+  }
+ catch (  Exception e) {
+    Log.e(LOG_TAG,e.getMessage(),e);
+    finish();
+    return;
+  }
+}
