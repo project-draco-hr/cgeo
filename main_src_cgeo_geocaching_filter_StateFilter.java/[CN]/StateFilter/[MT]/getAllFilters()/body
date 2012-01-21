@@ -1,0 +1,16 @@
+{
+  final Resources res=cgeoapplication.getInstance().getResources();
+  final ArrayList<StateFilter> filters=new ArrayList<StateFilter>();
+  filters.add(new StateFoundFilter(res.getString(R.string.cache_status_found)));
+  filters.add(new StateArchivedFilter(res.getString(R.string.cache_status_archived)));
+  filters.add(new StateDisabledFilter(res.getString(R.string.cache_status_disabled)));
+  filters.add(new StatePremiumFilter(res.getString(R.string.cache_status_premium)));
+  filters.add(new StateOfflineLogFilter(res.getString(R.string.cache_status_offline_log)));
+  Collections.sort(filters,new Comparator<StateFilter>(){
+    @Override public int compare(    StateFilter filter1,    StateFilter filter2){
+      return filter1.getName().compareToIgnoreCase(filter2.getName());
+    }
+  }
+);
+  return filters.toArray(new StateFilter[filters.size()]);
+}

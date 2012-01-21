@@ -5,7 +5,7 @@
   }
   final cgTrackable trackable=new cgTrackable();
   trackable.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()).toUpperCase());
-  trackable.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ID,true,trackable.getGuid()));
+  trackable.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GUID,true,trackable.getGuid()));
   trackable.setIconUrl(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ICON,true,trackable.getIconUrl()));
   trackable.setName(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,true,trackable.getName()));
   if (StringUtils.isNotBlank(trackable.getName())) {

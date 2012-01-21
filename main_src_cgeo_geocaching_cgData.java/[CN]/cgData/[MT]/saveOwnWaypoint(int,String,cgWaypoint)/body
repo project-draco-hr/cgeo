@@ -17,7 +17,8 @@
     putCoords(values,waypoint.getCoords());
     values.put("note",waypoint.getNote());
     if (id <= 0) {
-      databaseRW.insert(dbTableWaypoints,null,values);
+      final long rowId=databaseRW.insert(dbTableWaypoints,null,values);
+      waypoint.setId((int)rowId);
       ok=true;
     }
  else {
