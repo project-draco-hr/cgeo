@@ -1,28 +1,28 @@
 {
   if (templates == null) {
     templates=new LogTemplate[]{new LogTemplate("DATE",R.string.init_signature_template_date){
-      @Override String getValue(      final boolean offline){
+      @Override public String getValue(      final boolean offline){
         return cgBase.formatFullDate(System.currentTimeMillis());
       }
     }
 ,new LogTemplate("TIME",R.string.init_signature_template_time){
-      @Override String getValue(      final boolean offline){
+      @Override public String getValue(      final boolean offline){
         return cgBase.formatTime(System.currentTimeMillis());
       }
     }
 ,new LogTemplate("DATETIME",R.string.init_signature_template_datetime){
-      @Override String getValue(      final boolean offline){
+      @Override public String getValue(      final boolean offline){
         final long currentTime=System.currentTimeMillis();
         return cgBase.formatFullDate(currentTime) + " " + cgBase.formatTime(currentTime);
       }
     }
 ,new LogTemplate("USER",R.string.init_signature_template_user){
-      @Override String getValue(      final boolean offline){
+      @Override public String getValue(      final boolean offline){
         return Settings.getUsername();
       }
     }
 ,new LogTemplate("NUMBER",R.string.init_signature_template_number){
-      @Override String getValue(      final boolean offline){
+      @Override public String getValue(      final boolean offline){
         if (offline) {
           return "";
         }
