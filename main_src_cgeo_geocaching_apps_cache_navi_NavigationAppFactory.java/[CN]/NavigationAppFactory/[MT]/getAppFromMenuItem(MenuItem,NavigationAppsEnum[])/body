@@ -1,0 +1,9 @@
+{
+  final int id=item.getItemId();
+  for (  NavigationAppsEnum navApp : apps) {
+    if (navApp.id == id) {
+      return navApp.app;
+    }
+  }
+  return null;
+}
