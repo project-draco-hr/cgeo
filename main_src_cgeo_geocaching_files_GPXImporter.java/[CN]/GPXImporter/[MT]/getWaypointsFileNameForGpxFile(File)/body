@@ -1,0 +1,18 @@
+{
+  if (gpxfile == null || !gpxfile.canRead()) {
+    return null;
+  }
+  final String gpxFileName=gpxfile.getName();
+  File dir=gpxfile.getParentFile();
+  String[] filenameList=dir.list();
+  for (  String filename : filenameList) {
+    if (StringUtils.lastIndexOfIgnoreCase(filename,WAYPOINTS_FILE_SUFFIX) == -1) {
+      continue;
+    }
+    String expectedGpxFileName=StringUtils.substringBeforeLast(filename,WAYPOINTS_FILE_SUFFIX) + StringUtils.substringAfterLast(filename,WAYPOINTS_FILE_SUFFIX);
+    if (gpxFileName.equals(expectedGpxFileName)) {
+      return filename;
+    }
+  }
+  return null;
+}
