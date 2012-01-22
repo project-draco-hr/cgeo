@@ -5,7 +5,12 @@
   if (listFooterText == null) {
     return;
   }
-  if (more) {
+  boolean enableMore=type != CacheListType.OFFLINE && cacheList != null && cacheList.size() < MAX_LIST_ITEMS;
+  if (enableMore) {
+    final int count=SearchResult.getTotal(search);
+    enableMore=enableMore && count > 0 && cacheList.size() < count;
+  }
+  if (enableMore) {
     listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently)+ ": "+ cacheList.size()+ ")");
     listFooter.setOnClickListener(new MoreCachesListener());
   }
@@ -18,5 +23,5 @@
     }
     listFooter.setOnClickListener(null);
   }
-  listFooter.setClickable(more);
+  listFooter.setClickable(enableMore);
 }
