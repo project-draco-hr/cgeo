@@ -8,7 +8,7 @@
     return cachesOut;
   }
   List<cgCache> cachesOut=new ArrayList<cgCache>();
-  final List<String> geocodeList=search.getGeocodes();
+  final Set<String> geocodeList=search.getGeocodes();
   final List<cgCache> cachesPre=storage.loadCaches(geocodeList.toArray(),null,null,null,null,loadFlags);
   if (cachesPre != null) {
     cachesOut.addAll(cachesPre);

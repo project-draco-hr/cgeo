@@ -1,6 +1,7 @@
 {
   if (app.deleteWaypoint(id)) {
-    app.removeCacheFromCache(geocode);
+    StaticMapsProvider.removeWpStaticMaps(id,geocode);
+    cgeoapplication.removeCacheFromCache(geocode);
     finish();
     return;
   }

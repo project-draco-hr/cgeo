@@ -1,0 +1,9 @@
+{
+  final List<NavigationApp> installedNavigationApps=new ArrayList<NavigationApp>();
+  for (  NavigationApp app : getNavigationApps()) {
+    if (app.isInstalled(activity)) {
+      installedNavigationApps.add(app);
+    }
+  }
+  return installedNavigationApps;
+}

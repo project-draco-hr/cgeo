@@ -1,0 +1,8 @@
+{
+  if (waypoint.getCoords() == null) {
+    return;
+  }
+  String wpLatlonMap=waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
+  String wpMarkerUrl=getWpMarkerUrl(waypoint);
+  downloadMaps(cache,wpMarkerUrl,"wp" + waypoint.getId() + "_",wpLatlonMap,edge,"");
+}

@@ -20,8 +20,8 @@
   final cgCache cache=new cgCache();
   cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
   cache.setArchived(page.contains("<li>This cache has been archived,"));
-  cache.setMembers(BaseUtils.matches(page,GCConstants.PATTERN_MEMBERS));
-  cache.setFavourite(BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE));
+  cache.setPremiumMembersOnly(BaseUtils.matches(page,GCConstants.PATTERN_PREMIUMMEMBERS));
+  cache.setFavorite(BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE));
   cache.setListId(listId);
   cache.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.getGeocode()));
   cache.setCacheId(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.getCacheId()));
@@ -70,7 +70,7 @@
  catch (    ParseException e) {
       Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache hidden (event) date");
     }
-    cache.setFavouritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
+    cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
     cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id).toLowerCase()));
   }
   cache.setFound(BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));
@@ -104,9 +104,6 @@
       final Matcher matcherAttributesInside=GCConstants.PATTERN_ATTRIBUTESINSIDE.matcher(attributesPre);
       while (matcherAttributesInside.find()) {
         if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
-          if (cache.getAttributes() == null) {
-            cache.setAttributes(new ArrayList<String>());
-          }
           String attribute=matcherAttributesInside.group(2).toLowerCase();
           String imageName=matcherAttributesInside.group(1).trim();
           if (imageName.length() > 0) {
@@ -116,7 +113,7 @@
               attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase();
             }
           }
-          cache.getAttributes().add(attribute);
+          cache.addAttribute(attribute);
         }
       }
     }
@@ -202,6 +199,7 @@
       final cgWaypoint waypoint=new cgWaypoint(res.getString(R.string.cache_coordinates_original),WaypointType.WAYPOINT);
       waypoint.setCoords(new Geopoint(originalCoords));
       cache.addWaypoint(waypoint);
+      cache.setUserModifiedCoords(true);
     }
   }
  catch (  Geopoint.GeopointException e) {
@@ -250,28 +248,7 @@
       }
     }
   }
-  if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-    final Pattern coordPattern=Pattern.compile("[nNsS]{1}\\s*\\d");
-    int count=1;
-    String note=cache.getPersonalNote();
-    Matcher matcher=coordPattern.matcher(note);
-    while (matcher.find()) {
-      try {
-        final Geopoint point=GeopointParser.parse(note);
-        if (point != null) {
-          final String name=cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-          final cgWaypoint waypoint=new cgWaypoint(name,WaypointType.WAYPOINT);
-          waypoint.setCoords(point);
-          cache.addWaypoint(waypoint);
-          count++;
-        }
-      }
- catch (      GeopointParser.ParseException e) {
-      }
-      note=note.substring(matcher.start() + 1);
-      matcher=coordPattern.matcher(note);
-    }
-  }
+  cache.parseWaypointsFromNote();
   cache.setLogs(loadLogsFromDetails(page,cache,false,true));
   parseResult.cacheList.add(cache);
   return parseResult;

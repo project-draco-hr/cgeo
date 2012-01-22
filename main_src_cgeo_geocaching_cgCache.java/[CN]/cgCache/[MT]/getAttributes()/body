@@ -1,3 +1,6 @@
 {
-  return attributes;
+  if (attributes == null) {
+    return Collections.emptyList();
+  }
+  return Collections.unmodifiableList(attributes);
 }

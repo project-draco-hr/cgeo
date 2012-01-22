@@ -1,5 +1,5 @@
 {
-  out.writeStringList(geocodes);
+  out.writeStringArray(geocodes.toArray(new String[geocodes.size()]));
   out.writeSerializable(error);
   out.writeString(url);
   if (viewstates == null) {

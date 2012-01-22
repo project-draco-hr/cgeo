@@ -1,6 +1,6 @@
 {
   historyListView=(ListView)findViewById(R.id.historyList);
-  View pointControls=getLayoutInflater().inflate(R.layout.point_controls,null);
+  final View pointControls=getLayoutInflater().inflate(R.layout.point_controls,null);
   historyListView.addHeaderView(pointControls,null,false);
   if (getHistoryOfSearchedLocations().isEmpty()) {
     historyListView.addFooterView(getEmptyHistoryFooter(),null,false);
@@ -8,18 +8,17 @@
   historyListView.setAdapter(getDestionationHistoryAdapter());
   historyListView.setOnItemClickListener(new OnItemClickListener(){
     @Override public void onItemClick(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
-      Object selection=arg0.getItemAtPosition(arg2);
+      final Object selection=arg0.getItemAtPosition(arg2);
       if (selection instanceof cgDestination) {
         navigateTo(((cgDestination)selection).getCoords());
       }
     }
   }
 );
-  final Activity thisActivity=this;
   historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener(){
     @Override public void onCreateContextMenu(    ContextMenu menu,    View v,    ContextMenuInfo menuInfo){
-      SubMenu subMenu=menu.addSubMenu(Menu.NONE,CONTEXT_MENU_NAVIGATE,Menu.NONE,res.getString(R.string.cache_menu_navigate));
-      NavigationAppFactory.addMenuItems(subMenu,thisActivity,res);
+      final SubMenu subMenu=menu.addSubMenu(Menu.NONE,CONTEXT_MENU_NAVIGATE,Menu.NONE,res.getString(R.string.cache_menu_navigate));
+      NavigationAppFactory.addMenuItems(subMenu,cgeopoint.this);
       menu.add(Menu.NONE,CONTEXT_MENU_EDIT_WAYPOINT,Menu.NONE,R.string.waypoint_edit);
       menu.add(Menu.NONE,CONTEXT_MENU_DELETE_WAYPOINT,Menu.NONE,R.string.waypoint_delete);
     }

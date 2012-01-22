@@ -1,0 +1,11 @@
+{
+  if (image == null) {
+    return;
+  }
+  final Bitmap bitmap=image.getBitmap();
+  if (bitmap == null || bitmap.getWidth() <= 10) {
+    return;
+  }
+  ((ImageView)view.findViewById(R.id.map_preview)).setImageDrawable(image);
+  view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
+}

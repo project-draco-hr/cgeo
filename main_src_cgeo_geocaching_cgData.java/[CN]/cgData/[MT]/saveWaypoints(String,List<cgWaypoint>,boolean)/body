@@ -3,6 +3,7 @@
   if (StringUtils.isBlank(geocode) || waypoints == null) {
     return false;
   }
+  Log.d(Settings.tag,"cgData.saveWaypoints(drop=" + drop + ")");
   boolean ok=false;
   databaseRW.beginTransaction();
   try {
@@ -26,7 +27,8 @@
         values.put("latlon",oneWaypoint.getLatlon());
         putCoords(values,oneWaypoint.getCoords());
         values.put("note",oneWaypoint.getNote());
-        databaseRW.insert(dbTableWaypoints,null,values);
+        final long rowId=databaseRW.insert(dbTableWaypoints,null,values);
+        oneWaypoint.setId((int)rowId);
       }
     }
     databaseRW.setTransactionSuccessful();

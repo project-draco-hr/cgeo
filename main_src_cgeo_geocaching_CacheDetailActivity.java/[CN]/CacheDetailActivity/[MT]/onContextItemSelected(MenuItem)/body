@@ -38,13 +38,11 @@ if (cache.deleteWaypoint(index)) {
 notifyDataSetChanged();
 }
 break;
-case CONTEXT_MENU_WAYPOINT_COMPASS:
+case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
 {
 final cgWaypoint waypoint=cache.getWaypoint(index);
 if (waypoint != null) {
-Collection<cgCoord> coordinatesWithType=new ArrayList<cgCoord>();
-coordinatesWithType.add(new cgCoord(waypoint));
-cgeonavigate.startActivity(this,waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(),waypoint.getName(),waypoint.getCoords(),coordinatesWithType);
+NavigationAppFactory.startDefaultNavigationApplication(geolocation,this,null,null,waypoint,null);
 }
 }
 break;
@@ -60,7 +58,7 @@ cgeocaches.startActivityCachesAround(this,waypoint.getCoords());
 break;
 default :
 final cgWaypoint waypoint=cache.getWaypoint(contextMenuWPIndex);
-if (waypoint != null && NavigationAppFactory.onMenuItemSelected(item,geolocation,this,res,null,null,waypoint,null)) {
+if (waypoint != null && NavigationAppFactory.onMenuItemSelected(item,geolocation,this,null,null,waypoint,null)) {
 return true;
 }
 return onOptionsItemSelected(item);

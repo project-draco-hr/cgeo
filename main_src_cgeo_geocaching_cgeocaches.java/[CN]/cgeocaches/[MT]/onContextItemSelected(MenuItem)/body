@@ -12,14 +12,10 @@
  catch (  Exception e) {
     Log.w(Settings.tag,"cgeocaches.onContextItemSelected: " + e.toString());
   }
-  if (id == MENU_COMPASS) {
-    final Intent navigateIntent=new Intent(this,cgeonavigate.class);
+  if (id == MENU_DEFAULT_NAVIGATION) {
     final cgCache cache=getCacheFromAdapter(adapterInfo);
-    navigateIntent.putExtra("latitude",cache.getCoords().getLatitude());
-    navigateIntent.putExtra("longitude",cache.getCoords().getLongitude());
-    navigateIntent.putExtra("geocode",cache.getGeocode().toUpperCase());
-    navigateIntent.putExtra("name",cache.getName());
-    startActivity(navigateIntent);
+    final SearchResult singleSearch=cgBase.searchByGeocode(cache.getGeocode(),null,0,false,null);
+    NavigationAppFactory.startDefaultNavigationApplication(geo,this,cache,singleSearch,null,null);
     return true;
   }
  else   if (id == MENU_LOG_VISIT) {
@@ -42,20 +38,32 @@
 );
     return true;
   }
- else   if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + 100) {
-    final int newListId=id - CONTEXT_MENU_MOVE_TO_LIST;
-    if (adapterInfo != null) {
-      app.moveToList(getCacheFromAdapter(adapterInfo).getGeocode(),newListId);
+ else   if (id == MENU_MOVE_TO_LIST) {
+    final String geocode=getCacheFromAdapter(adapterInfo).getGeocode();
+    final List<StoredList> cacheLists=app.getLists();
+    ArrayList<String> listNames=new ArrayList<String>();
+    for (    StoredList list : cacheLists) {
+      listNames.add(list.getTitleAndCount());
     }
-    adapter.resetChecks();
-    refreshCurrentList();
+    AlertDialog.Builder builder=new AlertDialog.Builder(this);
+    builder.setTitle(res.getString(R.string.cache_menu_move_list));
+    builder.setItems(listNames.toArray(new String[listNames.size()]),new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int item){
+        final int newListId=cacheLists.get(item).id;
+        app.moveToList(geocode,newListId);
+        adapter.resetChecks();
+        refreshCurrentList();
+      }
+    }
+);
+    builder.create().show();
     return true;
   }
   lastMenuInfo=info;
   if (adapterInfo != null) {
     final cgCache cache=getCacheFromAdapter(adapterInfo);
     final SearchResult singleSearch=cgBase.searchByGeocode(cache.getGeocode(),null,0,false,null);
-    if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,singleSearch,null,null)) {
+    if (NavigationAppFactory.onMenuItemSelected(item,geo,this,cache,singleSearch,null,null)) {
       return true;
     }
     int logType=id - MENU_LOG_VISIT_OFFLINE;

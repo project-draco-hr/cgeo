@@ -1,0 +1,22 @@
+{
+  String geocode=null;
+  if (cache != null && cache.getListId() != 0) {
+    geocode=cache.getGeocode().toUpperCase();
+  }
+  if (waypoint != null) {
+    geocode=waypoint.getGeocode().toUpperCase();
+  }
+  if (geocode == null) {
+    ActivityMixin.showToast(activity,getString(R.string.err_detail_no_map_static));
+    return true;
+  }
+ else {
+    final Intent intent=new Intent(activity,StaticMapsActivity.class);
+    intent.putExtra("geocode",geocode);
+    if (waypoint != null) {
+      intent.putExtra("waypoint",waypoint.getId());
+    }
+    activity.startActivity(intent);
+    return true;
+  }
+}

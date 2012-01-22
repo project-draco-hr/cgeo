@@ -1,0 +1,8 @@
+{
+  try {
+    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.streetview:cbll=" + point.getLatitude() + ","+ point.getLongitude())));
+  }
+ catch (  ActivityNotFoundException e) {
+    ActivityMixin.showToast(activity,cgeoapplication.getInstance().getString(R.string.err_application_no));
+  }
+}

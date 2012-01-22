@@ -17,7 +17,7 @@
     startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode())));
     return true;
   }
-  if (NavigationAppFactory.onMenuItemSelected(item,geo,this,res,cache,null,null,null)) {
+  if (NavigationAppFactory.onMenuItemSelected(item,geo,this,cache,null,null,null)) {
     return true;
   }
   int logType=menuItem - MENU_LOG_VISIT_OFFLINE;

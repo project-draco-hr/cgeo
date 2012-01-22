@@ -1,0 +1,8 @@
+{
+  final CacheSize[] cacheSizes=CacheSize.values();
+  SizeFilter[] filters=new SizeFilter[cacheSizes.length];
+  for (int i=0; i < cacheSizes.length; i++) {
+    filters[i]=new SizeFilter(cacheSizes[i]);
+  }
+  return filters;
+}

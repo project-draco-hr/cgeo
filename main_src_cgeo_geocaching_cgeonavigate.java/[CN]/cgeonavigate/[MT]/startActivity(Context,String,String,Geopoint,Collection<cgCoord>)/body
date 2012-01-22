@@ -1,6 +1,8 @@
 {
   coordinates.clear();
-  coordinates.addAll(coordinatesWithType);
+  if (coordinatesWithType != null) {
+    coordinates.addAll(coordinatesWithType);
+  }
   final Intent navigateIntent=new Intent(context,cgeonavigate.class);
   navigateIntent.putExtra(EXTRAS_LATITUDE,coords.getLatitude());
   navigateIntent.putExtra(EXTRAS_LONGITUDE,coords.getLongitude());

@@ -7,8 +7,8 @@
       logNow.date=date.getTimeInMillis();
       logNow.type=typeSelected;
       logNow.log=log;
-      if (cache != null && null != cache.getLogs()) {
-        cache.getLogs().add(0,logNow);
+      if (cache != null) {
+        cache.prependLog(logNow);
       }
       app.addLog(geocode,logNow);
       if (typeSelected == LogType.LOG_FOUND_IT) {
@@ -18,10 +18,10 @@
         }
       }
       if (cache != null) {
-        app.putCacheInCache(cache);
+        cgeoapplication.putCacheInCache(cache);
       }
  else {
-        app.removeCacheFromCache(geocode);
+        cgeoapplication.removeCacheFromCache(geocode);
       }
     }
     if (status == StatusCode.NO_ERROR) {

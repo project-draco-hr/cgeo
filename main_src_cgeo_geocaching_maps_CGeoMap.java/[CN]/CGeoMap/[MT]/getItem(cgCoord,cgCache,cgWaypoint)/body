@@ -1,0 +1,66 @@
+{
+  coordinates.add(coord);
+  if (cache != null) {
+    CachesOverlayItemImpl item=mapProvider.getCachesOverlayItem(coord,cache.getType());
+    int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled()).append(cache.isOwn()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).toHashCode();
+    LayerDrawable ldFromCache=CGeoMap.overlaysCache.get(hashcode);
+    if (ldFromCache != null) {
+      item.setMarker(ldFromCache);
+      return item;
+    }
+    ArrayList<Drawable> layers=new ArrayList<Drawable>();
+    ArrayList<int[]> insets=new ArrayList<int[]>();
+    Drawable marker=getResources().getDrawable(R.drawable.marker);
+    if (cache.isDisabled()) {
+      marker=getResources().getDrawable(R.drawable.marker_disabled);
+    }
+    layers.add(marker);
+    int resolution=marker.getIntrinsicWidth() > 40 ? 1 : 0;
+    if (!cache.isReliableLatLon()) {
+      insets.add(INSET_RELIABLE[resolution]);
+      layers.add(getResources().getDrawable(R.drawable.marker_notreliable));
+    }
+    layers.add(getResources().getDrawable(cache.getType().markerId));
+    insets.add(INSET_TYPE[resolution]);
+    if (cache.isOwn()) {
+      layers.add(getResources().getDrawable(R.drawable.marker_own));
+      insets.add(INSET_OWN[resolution]);
+    }
+    if (cache.isFound()) {
+      layers.add(getResources().getDrawable(R.drawable.marker_found));
+      insets.add(INSET_FOUND[resolution]);
+    }
+    if (cache.hasUserModifiedCoords()) {
+      layers.add(getResources().getDrawable(R.drawable.marker_usermodifiedcoords));
+      insets.add(INSET_USERMODIFIEDCOORDS[resolution]);
+    }
+    if (cache.getPersonalNote() != null) {
+      layers.add(getResources().getDrawable(R.drawable.marker_personalnote));
+      insets.add(INSET_PERSONALNOTE[resolution]);
+    }
+    LayerDrawable ld=new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
+    int index=1;
+    for (    int[] inset : insets) {
+      ld.setLayerInset(index++,inset[0],inset[1],inset[2],inset[3]);
+    }
+    CGeoMap.overlaysCache.put(hashcode,ld);
+    item.setMarker(ld);
+    return item;
+  }
+ else   if (waypoint != null) {
+    CachesOverlayItemImpl item=mapProvider.getCachesOverlayItem(coord,null);
+    Drawable[] layers=new Drawable[2];
+    layers[0]=getResources().getDrawable(R.drawable.marker);
+    layers[1]=getResources().getDrawable(waypoint.getWaypointType().markerId);
+    LayerDrawable ld=new LayerDrawable(layers);
+    if (layers[0].getIntrinsicWidth() > 40) {
+      ld.setLayerInset(1,9,12,10,13);
+    }
+ else {
+      ld.setLayerInset(1,9,12,8,12);
+    }
+    item.setMarker(ld);
+    return item;
+  }
+  return null;
+}

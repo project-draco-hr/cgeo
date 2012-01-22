@@ -1,11 +1,18 @@
 {
   if (other == null) {
-    return;
+    return false;
   }
   updated=System.currentTimeMillis();
   if (!detailed && other.detailed) {
     detailed=true;
     detailedUpdate=other.detailedUpdate;
+    coords=other.coords;
+    premiumMembersOnly=other.premiumMembersOnly;
+    reliableLatLon=other.reliableLatLon;
+    archived=other.archived;
+    favorite=other.favorite;
+    onWatchlist=other.onWatchlist;
+    logOffline=other.logOffline;
   }
   if (visitedDate == 0) {
     visitedDate=other.getVisitedDate();
@@ -43,7 +50,7 @@
   if (StringUtils.isBlank(hint)) {
     hint=other.hint;
   }
-  if (size == null) {
+  if (size == null || CacheSize.UNKNOWN == size) {
     size=other.size;
   }
   if (difficulty == 0) {
@@ -79,8 +86,8 @@
   if (StringUtils.isBlank(description)) {
     description=other.description;
   }
-  if (favouritePoints == 0) {
-    favouritePoints=other.getFavoritePoints();
+  if (favoritePoints == 0) {
+    favoritePoints=other.getFavoritePoints();
   }
   if (rating == 0) {
     rating=other.getRating();
@@ -92,10 +99,10 @@
     myVote=other.getMyVote();
   }
   if (attributes == null) {
-    attributes=other.getAttributes();
+    attributes=other.attributes;
   }
   if (waypoints == null) {
-    waypoints=other.getWaypoints();
+    waypoints=other.waypoints;
   }
  else {
     cgWaypoint.mergeWayPoints(waypoints,other.getWaypoints(),waypoints == null || waypoints.isEmpty());
@@ -110,4 +117,14 @@
   if (CollectionUtils.isEmpty(logs)) {
     logs=other.logs;
   }
+  if (logCounts.size() == 0) {
+    logCounts=other.logCounts;
+  }
+  if (userModifiedCoords == false) {
+    userModifiedCoords=other.userModifiedCoords;
+  }
+  if (reliableLatLon == false) {
+    reliableLatLon=other.reliableLatLon;
+  }
+  return isEqualTo(other);
 }

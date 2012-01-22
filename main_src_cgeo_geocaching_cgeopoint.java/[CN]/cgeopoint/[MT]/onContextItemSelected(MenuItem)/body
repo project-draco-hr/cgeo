@@ -20,7 +20,7 @@ lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
 return true;
 default :
 if (destination instanceof cgDestination) {
-return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,null,null,null,((cgDestination)destination).getCoords());
+return NavigationAppFactory.onMenuItemSelected(item,geo,this,null,null,null,((cgDestination)destination).getCoords());
 }
 }
 return super.onContextItemSelected(item);

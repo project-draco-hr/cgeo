@@ -15,7 +15,7 @@
   assertFalse(cache.isArchived());
   assertFalse(cache.isDisabled());
   assertFalse(cache.isEventCache());
-  assertFalse(cache.isMembersOnly());
+  assertFalse(cache.isPremiumMembersOnly());
   assertFalse(cache.isOwn());
   assertTrue(cache.isFound());
   assertEquals("Station3: Der zerbrochene Stein z??hlt doppelt.\nFinal: Oben neben dem Tor",cache.getHint());
@@ -25,5 +25,5 @@
   assertEquals(parseTime("2011-09-11T07:00:00Z"),log.date);
   assertEquals(-1,log.found);
   assertEquals("Sehr sch??ne Runde und wir haben wieder etwas Neues ??ber Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel",log.log);
-  assertNull(cache.getAttributes());
+  assertEquals(0,cache.getAttributes().size());
 }

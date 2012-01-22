@@ -1,7 +1,7 @@
 {
-  if (search == null) {
+  if (search == null || search.getCount() < 1) {
     return null;
   }
-  final List<String> geocodeList=search.getGeocodes();
-  return getCacheByGeocode(geocodeList.get(0),LoadFlags.LOADALL);
+  final Set<String> geocodeList=search.getGeocodes();
+  return getCacheByGeocode(geocodeList.toArray(new String[geocodeList.size()])[0],LoadFlags.LOADALL);
 }

@@ -16,6 +16,10 @@
     final JSONObject extra=dataJSON.getJSONObject("cs");
     if (extra != null && extra.length() > 0) {
       int count=extra.getInt("count");
+      boolean pm=extra.getBoolean("pm");
+      if (Settings.isPremiumMember() && !pm) {
+        parseResult.error=StatusCode.NOT_LOGGED_IN;
+      }
       if (count > 0 && extra.has("cc")) {
         final JSONArray cachesData=extra.getJSONArray("cc");
         if (cachesData != null && cachesData.length() > 0) {
@@ -26,7 +30,8 @@
               break;
             }
             final cgCache cacheToAdd=new cgCache();
-            cacheToAdd.setReliableLatLon(false);
+            cacheToAdd.setDetailed(false);
+            cacheToAdd.setReliableLatLon(pm);
             cacheToAdd.setGeocode(oneCache.getString("gc"));
             cacheToAdd.setCoords(new Geopoint(oneCache.getDouble("lat"),oneCache.getDouble("lon")));
             cacheToAdd.setName(oneCache.getString("nn"));

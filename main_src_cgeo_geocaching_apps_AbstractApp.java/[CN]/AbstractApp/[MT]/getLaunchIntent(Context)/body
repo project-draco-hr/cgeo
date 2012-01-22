@@ -2,9 +2,9 @@
   if (packageName == null) {
     return null;
   }
-  PackageManager packageManager=context.getPackageManager();
+  final PackageManager packageManager=context.getPackageManager();
   try {
-    Intent intent=packageManager.getLaunchIntentForPackage(packageName);
+    final Intent intent=packageManager.getLaunchIntentForPackage(packageName);
     return intent;
   }
  catch (  Exception e) {

@@ -1,0 +1,9 @@
+{
+  Geopoint point=null;
+  try {
+    point=GeopointParser.parse("N51 21.523 and some words in between, so there is no relation E07 02.680");
+  }
+ catch (  ParseException e) {
+  }
+  assertEquals(null,point);
+}

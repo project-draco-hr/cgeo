@@ -1,0 +1,20 @@
+{
+  try {
+    final ArrayList<String> locations=new ArrayList<String>();
+    if (cache != null && cache.getCoords() != null) {
+      locations.add(cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA) + ";" + cache.getGeocode()+ ";"+ cache.getName());
+    }
+ else     if (waypoint != null && waypoint.getCoords() != null) {
+      locations.add(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA) + ";" + waypoint.getLookup()+ ";"+ waypoint.getName());
+    }
+    if (!locations.isEmpty()) {
+      final Intent intent=new Intent(INTENT);
+      intent.putStringArrayListExtra("locations",locations);
+      activity.startActivity(intent);
+      return true;
+    }
+  }
+ catch (  Exception e) {
+  }
+  return false;
+}

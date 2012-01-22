@@ -1,12 +1,16 @@
 {
   final int menuItem=item.getItemId();
-  if (menuItem == MENU_ID_COMPASS) {
-    goCompass(null);
+  if (menuItem == MENU_ID_DEFAULT_NAVIGATION) {
+    goDefaultNavigation(null);
     return true;
   }
  else   if (menuItem == MENU_ID_CACHES_AROUND) {
     cachesAround();
     return true;
   }
-  return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,null,null,waypoint,null);
+ else   if (menuItem == MENU_ID_OPEN_GEOCACHE) {
+    goToGeocache();
+    return true;
+  }
+  return NavigationAppFactory.onMenuItemSelected(item,geo,this,null,null,waypoint,null);
 }

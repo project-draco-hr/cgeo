@@ -12,17 +12,18 @@
         seconds=Double.parseDouble("0." + matcher.group(4)) * 60.0;
       }
  else       if (null != matcher.group(5)) {
-        seconds=Double.parseDouble(matcher.group(5));
+        seconds=Double.parseDouble(matcher.group(5).replace(",","."));
       }
     }
-    return sign * (degree + minutes / 60.0 + seconds / 3600.0);
+    return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0),matcher.start(),matcher.group().length());
   }
  else {
     try {
       final String[] items=StringUtils.split(text.trim());
       if (items.length > 0) {
-        final int index=latlon == LatLon.LON ? items.length - 1 : 0;
-        return Double.parseDouble(items[index]);
+        final int index=(latlon == LatLon.LON ? items.length - 1 : 0);
+        final int pos=(latlon == LatLon.LON ? text.lastIndexOf(items[index]) : text.indexOf(items[index]));
+        return new ResultWrapper(Double.parseDouble(items[index]),pos,items[index].length());
       }
     }
  catch (    NumberFormatException e) {

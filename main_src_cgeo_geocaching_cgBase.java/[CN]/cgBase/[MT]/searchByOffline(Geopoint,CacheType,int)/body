@@ -1,6 +1,3 @@
 {
-  cgeoapplication app=cgeoapplication.getInstance();
-  final SearchResult search=app.getBatchOfStoredCaches(true,coords,cacheType,list);
-  search.totalCnt=app.getAllStoredCachesCount(true,cacheType,list);
-  return search;
+  return cgeoapplication.getInstance().getBatchOfStoredCaches(true,coords,cacheType,list);
 }

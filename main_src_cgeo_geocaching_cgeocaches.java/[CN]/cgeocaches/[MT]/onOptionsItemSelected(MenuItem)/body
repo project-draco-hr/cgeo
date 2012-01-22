@@ -75,13 +75,19 @@ case MENU_SORT_STATE:
 setComparator(item,new StateComparator());
 return true;
 case SUBMENU_FILTER_TYPE:
-showFilterMenu(SUBMENU_FILTER_TYPE);
+showFilterMenu(TypeFilter.getAllFilters(),res.getString(R.string.caches_filter_type_title));
 return true;
 case SUBMENU_FILTER_SIZE:
-showFilterMenu(SUBMENU_FILTER_SIZE);
+showFilterMenu(SizeFilter.getAllFilters(),res.getString(R.string.caches_filter_size_title));
+return true;
+case SUBMENU_FILTER_ATTRIBUTES:
+showFilterMenu(AttributeFilter.getAllFilters(),res.getString(R.string.cache_attributes));
+return true;
+case SUBMENU_FILTER_STATE:
+showFilterMenu(StateFilter.getAllFilters(),res.getString(R.string.cache_status));
 return true;
 case MENU_FILTER_TRACKABLES:
-setFilter(new FilterByTrackables(res.getString(R.string.caches_filter_track)));
+setFilter(new TrackablesFilter(res.getString(R.string.caches_filter_track)));
 return true;
 case MENU_FILTER_CLEAR:
 if (adapter != null) {
@@ -101,5 +107,5 @@ case MENU_MOVE_TO_LIST:
 moveCachesToOtherList();
 return true;
 }
-return CacheListAppFactory.onMenuItemSelected(item,geo,cacheList,this,res,search);
+return CacheListAppFactory.onMenuItemSelected(item,geo,cacheList,this,search);
 }

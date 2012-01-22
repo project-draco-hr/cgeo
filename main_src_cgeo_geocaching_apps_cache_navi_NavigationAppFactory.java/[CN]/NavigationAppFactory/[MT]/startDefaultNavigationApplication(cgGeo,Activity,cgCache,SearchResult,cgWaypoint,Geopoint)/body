@@ -1,0 +1,11 @@
+{
+  NavigationApp app=getDefaultNavigationApplication(activity);
+  if (app != null) {
+    try {
+      app.invoke(geo,activity,cache,search,waypoint,destination);
+    }
+ catch (    Exception e) {
+      Log.e(Settings.tag,"NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
+    }
+  }
+}

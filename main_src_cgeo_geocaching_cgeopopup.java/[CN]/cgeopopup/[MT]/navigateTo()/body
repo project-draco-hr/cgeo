@@ -1,12 +1,7 @@
 {
   if (cache == null || cache.getCoords() == null) {
     showToast(res.getString(R.string.err_location_unknown));
+    return;
   }
-  cgeonavigate navigateActivity=new cgeonavigate();
-  Intent navigateIntent=new Intent(this,navigateActivity.getClass());
-  navigateIntent.putExtra("latitude",cache.getCoords().getLatitude());
-  navigateIntent.putExtra("longitude",cache.getCoords().getLongitude());
-  navigateIntent.putExtra("geocode","");
-  navigateIntent.putExtra("name",res.getString(R.string.search_some_destination));
-  startActivity(navigateIntent);
+  NavigationAppFactory.startDefaultNavigationApplication(geo,this,cache,null,null,null);
 }

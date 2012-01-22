@@ -5,7 +5,7 @@
     addToHistory(coords);
   }
 switch (menuItem) {
-case MENU_COMPASS:
+case MENU_DEFAULT_NAVIGATION:
     navigateTo();
   return true;
 case MENU_CACHES_AROUND:
@@ -15,6 +15,6 @@ case MENU_CLEAR_HISTORY:
 clearHistory();
 return true;
 default :
-return NavigationAppFactory.onMenuItemSelected(item,geo,this,res,null,null,null,coords);
+return NavigationAppFactory.onMenuItemSelected(item,geo,this,null,null,null,coords);
 }
 }

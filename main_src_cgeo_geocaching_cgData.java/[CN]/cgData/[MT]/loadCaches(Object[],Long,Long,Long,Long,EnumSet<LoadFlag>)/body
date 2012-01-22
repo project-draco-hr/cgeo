@@ -63,16 +63,7 @@
         do {
           cgCache cache=createCacheFromDatabaseContent(cursor);
           if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
-            final List<String> attributes=loadAttributes(cache.getGeocode());
-            if (CollectionUtils.isNotEmpty(attributes)) {
-              if (cache.getAttributes() == null) {
-                cache.setAttributes(new ArrayList<String>());
-              }
- else {
-                cache.getAttributes().clear();
-              }
-              cache.getAttributes().addAll(attributes);
-            }
+            cache.setAttributes(loadAttributes(cache.getGeocode()));
           }
           if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {
             final List<cgWaypoint> waypoints=loadWaypoints(cache.getGeocode());
@@ -93,16 +84,7 @@
             }
           }
           if (loadFlags.contains(LoadFlag.LOADLOGS)) {
-            final List<cgLog> logs=loadLogs(cache.getGeocode());
-            if (CollectionUtils.isNotEmpty(logs)) {
-              if (cache.getLogs() == null) {
-                cache.setLogs(new ArrayList<cgLog>());
-              }
- else {
-                cache.getLogs().clear();
-              }
-              cache.getLogs().addAll(logs);
-            }
+            cache.setLogs(loadLogs(cache.getGeocode()));
             final Map<LogType,Integer> logCounts=loadLogCounts(cache.getGeocode());
             if (MapUtils.isNotEmpty(logCounts)) {
               cache.getLogCounts().clear();
@@ -124,7 +106,7 @@
           if (loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
           }
-          cache.addStorageLocation(StorageLocations.DATABASE);
+          cache.addStorageLocation(StorageLocation.DATABASE);
           caches.add(cache);
         }
  while (cursor.moveToNext());

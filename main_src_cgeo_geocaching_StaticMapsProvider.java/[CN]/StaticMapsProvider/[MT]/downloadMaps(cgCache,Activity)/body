@@ -1,31 +1,14 @@
 {
-  if (!Settings.isStoreOfflineMaps() || cache.getCoords() == null || StringUtils.isBlank(cache.getGeocode())) {
+  if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
     return;
   }
-  final String latlonMap=cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-  final Display display=((WindowManager)activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-  final int maxWidth=display.getWidth() - 25;
-  final int maxHeight=display.getHeight() - 25;
-  int edge=0;
-  if (maxWidth > maxHeight) {
-    edge=maxWidth;
+  int edge=guessMinDisplaySide(activity);
+  if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
+    storeCacheStaticMap(cache,edge);
   }
- else {
-    edge=maxHeight;
-  }
-  final StringBuilder waypoints=new StringBuilder();
-  if (cache.hasWaypoints()) {
+  if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
     for (    cgWaypoint waypoint : cache.getWaypoints()) {
-      if (waypoint.getCoords() == null) {
-        continue;
-      }
-      waypoints.append("&markers=icon%3A");
-      waypoints.append(MARKERS_URL);
-      waypoints.append("marker_waypoint_");
-      waypoints.append(waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
-      waypoints.append(".png%7C");
-      waypoints.append(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
+      storeWaypointStaticMap(cache,edge,waypoint);
     }
   }
-  downloadMaps(cache,latlonMap,edge,waypoints.toString());
 }

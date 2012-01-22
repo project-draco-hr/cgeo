@@ -1,0 +1,11 @@
+{
+  final List<cgCache> caches=new ArrayList<cgCache>();
+  for (int i=0; i < 37; i++) {
+    cgCache cache=new cgCache();
+    if (i % 3 == 0) {
+      cache.setCoords(new Geopoint(i,i));
+    }
+    caches.add(cache);
+  }
+  Collections.sort(caches,new DistanceComparator(new Geopoint(0,0),caches));
+}

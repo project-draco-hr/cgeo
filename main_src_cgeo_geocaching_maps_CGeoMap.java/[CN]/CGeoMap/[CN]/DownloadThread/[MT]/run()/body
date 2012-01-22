@@ -15,19 +15,31 @@
     double latMax=Math.max(lat1,lat2);
     double lonMin=Math.min(lon1,lon2);
     double lonMax=Math.max(lon1,lon2);
-    if (token == null) {
-      token=cgBase.getMapUserToken(noMapTokenHandler);
+    int count=0;
+    do {
+      if (token == null) {
+        token=cgBase.getMapUserToken(noMapTokenHandler);
+      }
+      if (stop) {
+        displayHandler.sendEmptyMessage(UPDATE_TITLE);
+        working=false;
+        return;
+      }
+      final Viewport viewport=new Viewport(new Geopoint(latMin,lonMin),new Geopoint(latMax,lonMax));
+      search=cgBase.searchByViewport(token,viewport);
+      if (search != null) {
+        downloaded=true;
+        if (search.error == StatusCode.NOT_LOGGED_IN) {
+          cgBase.login();
+          token=null;
+        }
+ else {
+          break;
+        }
+      }
+      count++;
     }
-    if (stop) {
-      displayHandler.sendEmptyMessage(UPDATE_TITLE);
-      working=false;
-      return;
-    }
-    final Viewport viewport=new Viewport(new Geopoint(latMin,lonMin),new Geopoint(latMax,lonMax));
-    search=cgBase.searchByViewport(token,viewport);
-    if (search != null) {
-      downloaded=true;
-    }
+ while (count < 2);
     if (stop) {
       displayHandler.sendEmptyMessage(UPDATE_TITLE);
       working=false;

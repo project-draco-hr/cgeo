@@ -1,6 +1,7 @@
 {
-  geocodes=new ArrayList<String>();
-  in.readStringList(geocodes);
+  ArrayList<String> list=new ArrayList<String>();
+  in.readStringList(list);
+  geocodes=new HashSet<String>(list);
   error=(StatusCode)in.readSerializable();
   url=in.readString();
   final int length=in.readInt();

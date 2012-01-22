@@ -3,6 +3,9 @@
     return null;
   }
   view=(ScrollView)getLayoutInflater().inflate(R.layout.cacheview_details,null);
+  if (Settings.isStoreOfflineMaps()) {
+    new PreviewMapTask().execute((Void)null);
+  }
   detailsList=(LinearLayout)view.findViewById(R.id.details_list);
   Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
   if (cache.isDisabled() || cache.isArchived()) {
@@ -14,7 +17,7 @@
     addCacheDetail(R.string.cache_size,cache.getSize().getL10n());
   }
   addCacheDetail(R.string.cache_geocode,cache.getGeocode().toUpperCase());
-  if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled()|| cache.isMembers()|| cache.isFound()) {
+  if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled()|| cache.isPremiumMembersOnly()|| cache.isFound()) {
     final StringBuilder state=new StringBuilder();
     if (cache.isLogOffline()) {
       state.append(res.getString(R.string.cache_status_offline_log));
@@ -37,7 +40,7 @@
       }
       state.append(res.getString(R.string.cache_status_disabled));
     }
-    if (cache.isMembers()) {
+    if (cache.isPremiumMembersOnly()) {
       if (state.length() > 0) {
         state.append(", ");
       }
@@ -74,8 +77,15 @@
     }
     ownerView.setOnClickListener(new UserActionsClickListener());
   }
-  if (cache.getHiddenDate() != null && cache.getHiddenDate().getTime() > 0) {
-    addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,cgBase.formatFullDate(cache.getHiddenDate().getTime()));
+  if (cache.getHiddenDate() != null) {
+    long time=cache.getHiddenDate().getTime();
+    if (time > 0) {
+      String dateString=cgBase.formatFullDate(time);
+      if (cache.isEventCache()) {
+        dateString=DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(),time,DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
+      }
+      addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,dateString);
+    }
   }
   if (StringUtils.isNotBlank(cache.getLocation())) {
     addCacheDetail(R.string.cache_location,cache.getLocation());
@@ -92,7 +102,7 @@
     }
 );
   }
-  if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
+  if (cache.hasAttributes()) {
     new AttributeViewBuilder().fillView((LinearLayout)view.findViewById(R.id.attributes_innerbox));
     view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
   }

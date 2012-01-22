@@ -5,7 +5,7 @@
   }
   SearchResult searchToUse=search;
   if (adapter != null) {
-    List<String> geocodes=new ArrayList<String>();
+    Set<String> geocodes=new HashSet<String>();
     for (    cgCache cache : adapter.getFilteredList()) {
       geocodes.add(cache.getGeocode());
     }

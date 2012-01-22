@@ -3,8 +3,8 @@
   if (menuItem == 0) {
     return false;
   }
-  if (menuItem == MENU_NAVIGATE) {
-    startCompassNavigation();
+  if (menuItem == MENU_DEFAULT_NAVIGATION) {
+    startDefaultNavigation();
     return true;
   }
  else   if (menuItem == MENU_LOG_VISIT) {
@@ -31,7 +31,7 @@
     }
     return false;
   }
-  if (NavigationAppFactory.onMenuItemSelected(item,geolocation,this,res,cache,search,null,null)) {
+  if (NavigationAppFactory.onMenuItemSelected(item,geolocation,this,cache,search,null,null)) {
     return true;
   }
   if (GeneralAppsFactory.onMenuItemSelected(item,this,cache)) {

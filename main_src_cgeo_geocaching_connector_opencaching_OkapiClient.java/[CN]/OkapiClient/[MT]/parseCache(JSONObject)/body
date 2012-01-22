@@ -1,5 +1,6 @@
 {
   final cgCache cache=new cgCache();
+  cache.setReliableLatLon(true);
   try {
     cache.setGeocode(response.getString(CACHE_CODE));
     cache.setName(response.getString(CACHE_NAME));
@@ -19,7 +20,7 @@
       cache.setRating((float)response.getDouble(CACHE_RATING));
     }
     cache.setVotes(response.getInt(CACHE_VOTES));
-    cache.setFavouritePoints(response.getInt(CACHE_RECOMMENDATIONS));
+    cache.setFavoritePoints(response.getInt(CACHE_RECOMMENDATIONS));
     cache.setDescription(response.getString(CACHE_DESCRIPTION));
     cache.setHint(Html.fromHtml(response.getString(CACHE_HINT)).toString());
     final JSONArray images=response.getJSONArray(CACHE_IMAGES);

@@ -21,8 +21,7 @@
     typesPre.clear();
     if (!logTypes.contains(typeSelected)) {
       typeSelected=logTypes.get(0);
-      setType(typeSelected);
-      showToast(res.getString(R.string.info_log_type_changed));
+      loadDataHandler.obtainMessage(MSG_UPDATE_TYPE,typeSelected).sendToTarget();
     }
   }
  catch (  Exception e) {

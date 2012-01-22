@@ -104,7 +104,7 @@
         }
       }
     }
-    cache.setMembers(row.contains("/images/small_profile.gif"));
+    cache.setPremiumMembersOnly(row.contains("/images/small_profile.gif"));
     cache.setFound(row.contains("/images/icons/icon_smile"));
     cache.setOwn(row.contains("/images/silk/star.png"));
     String result=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_ID,null);
@@ -115,7 +115,7 @@
     try {
       result=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_FAVORITE,false,1,null,true);
       if (null != result) {
-        cache.setFavouritePoints(Integer.parseInt(result));
+        cache.setFavoritePoints(Integer.parseInt(result));
       }
     }
  catch (    NumberFormatException e) {
@@ -182,7 +182,7 @@
   if (Settings.getLoadDirImg()) {
     for (    cgCache oneCache : parseResult.cacheList) {
       if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
-        cgDirectionImg.getDrawable(oneCache.getGeocode(),oneCache.getDirectionImg());
+        DirectionImage.getDrawable(oneCache.getGeocode(),oneCache.getDirectionImg());
       }
     }
   }

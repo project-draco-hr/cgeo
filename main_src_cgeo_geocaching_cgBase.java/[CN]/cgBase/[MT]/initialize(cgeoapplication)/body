@@ -1,11 +1,6 @@
 {
   context=app.getBaseContext();
   res=app.getBaseContext().getResources();
-  for (  WaypointType wt : WaypointType.values()) {
-    if (wt != WaypointType.OWN) {
-      waypointTypes.put(wt,res.getString(wt.stringId));
-    }
-  }
   try {
     final PackageManager manager=app.getPackageManager();
     final PackageInfo info=manager.getPackageInfo(app.getPackageName(),0);

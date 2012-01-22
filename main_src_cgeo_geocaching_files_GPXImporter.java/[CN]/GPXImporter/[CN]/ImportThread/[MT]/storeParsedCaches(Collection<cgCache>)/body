@@ -3,8 +3,9 @@
   final cgeoapplication app=cgeoapplication.getInstance();
   int storedCaches=0;
   for (  cgCache cache : caches) {
-    app.removeCacheFromCache(cache.getGeocode());
+    cgeoapplication.removeCacheFromCache(cache.getGeocode());
     app.addCacheToSearch(search,cache);
+    cgeoapplication.removeCacheFromCache(cache.getGeocode());
     if (progressHandler.isCancelled()) {
       throw new CancellationException();
     }
