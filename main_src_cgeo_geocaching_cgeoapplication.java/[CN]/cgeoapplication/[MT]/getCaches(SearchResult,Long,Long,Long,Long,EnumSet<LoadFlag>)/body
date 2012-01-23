@@ -1,15 +1,15 @@
 {
   if (search == null) {
-    List<cgCache> cachesOut=new ArrayList<cgCache>();
-    final List<cgCache> cachesPre=storage.loadCaches(null,centerLat,centerLon,spanLat,spanLon,loadFlags);
+    Set<cgCache> cachesOut=new HashSet<cgCache>();
+    final Set<cgCache> cachesPre=storage.loadCaches(null,centerLat,centerLon,spanLat,spanLon,loadFlags);
     if (cachesPre != null) {
       cachesOut.addAll(cachesPre);
     }
     return cachesOut;
   }
-  List<cgCache> cachesOut=new ArrayList<cgCache>();
+  Set<cgCache> cachesOut=new HashSet<cgCache>();
   final Set<String> geocodeList=search.getGeocodes();
-  final List<cgCache> cachesPre=storage.loadCaches(geocodeList.toArray(),null,null,null,null,loadFlags);
+  final Set<cgCache> cachesPre=storage.loadCaches(geocodeList.toArray(),null,null,null,null,loadFlags);
   if (cachesPre != null) {
     cachesOut.addAll(cachesPre);
   }

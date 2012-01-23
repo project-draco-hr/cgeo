@@ -1,7 +1,7 @@
 {
   final ParseResult parseResult=parseCacheFromText(page,listId,handler);
   if (parseResult != null && !parseResult.cacheList.isEmpty()) {
-    final cgCache cache=parseResult.cacheList.get(0);
+    final cgCache cache=cgBase.getFirstElementFromSet(parseResult.cacheList);
     getExtraOnlineInfo(cache,page,handler);
     cache.setUpdated(System.currentTimeMillis());
     cache.setDetailedUpdate(cache.getUpdated());
