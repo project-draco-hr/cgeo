@@ -1,0 +1,41 @@
+{
+  if (templates == null) {
+    templates=new LogTemplate[]{new LogTemplate("DATE",R.string.init_signature_template_date){
+      @Override public String getValue(      final boolean offline){
+        return cgBase.formatFullDate(System.currentTimeMillis());
+      }
+    }
+,new LogTemplate("TIME",R.string.init_signature_template_time){
+      @Override public String getValue(      final boolean offline){
+        return cgBase.formatTime(System.currentTimeMillis());
+      }
+    }
+,new LogTemplate("DATETIME",R.string.init_signature_template_datetime){
+      @Override public String getValue(      final boolean offline){
+        final long currentTime=System.currentTimeMillis();
+        return cgBase.formatFullDate(currentTime) + " " + cgBase.formatTime(currentTime);
+      }
+    }
+,new LogTemplate("USER",R.string.init_signature_template_user){
+      @Override public String getValue(      final boolean offline){
+        return Settings.getUsername();
+      }
+    }
+,new LogTemplate("NUMBER",R.string.init_signature_template_number){
+      @Override public String getValue(      final boolean offline){
+        if (offline) {
+          return "";
+        }
+        String findCount="";
+        final String page=cgBase.getResponseData(cgBase.request("http://www.geocaching.com/email/",null,false,false,false));
+        int current=parseFindCount(page);
+        if (current >= 0) {
+          findCount=String.valueOf(current + 1);
+        }
+        return findCount;
+      }
+    }
+};
+  }
+  return templates;
+}

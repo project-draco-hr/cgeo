@@ -8,7 +8,7 @@
       }
       return false;
     }
-    return !StringUtils.endsWithIgnoreCase(filename,GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION);
+    return !StringUtils.containsIgnoreCase(filename,GPXImporter.WAYPOINTS_FILE_SUFFIX);
   }
   return false;
 }

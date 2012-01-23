@@ -6,8 +6,7 @@
     dir=app.startDir(this,dirUpdate);
   }
   if (CollectionUtils.isNotEmpty(cacheList)) {
-    final int count=SearchResult.getTotal(search);
-    setMoreCaches(count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
+    setMoreCaches();
   }
   setTitle(title);
   setAdapter();
