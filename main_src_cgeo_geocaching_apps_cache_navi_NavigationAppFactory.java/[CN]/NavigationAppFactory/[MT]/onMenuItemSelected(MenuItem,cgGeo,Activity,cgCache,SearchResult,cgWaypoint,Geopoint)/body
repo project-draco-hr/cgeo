@@ -2,7 +2,7 @@
   if (cache == null && waypoint == null && destination == null) {
     return false;
   }
-  final NavigationApp app=getAppFromMenuItem(item,NavigationAppsEnum.values());
+  final NavigationApp app=getAppFromMenuItem(item);
   if (app != null) {
     try {
       return app.invoke(geo,activity,cache,search,waypoint,destination);
