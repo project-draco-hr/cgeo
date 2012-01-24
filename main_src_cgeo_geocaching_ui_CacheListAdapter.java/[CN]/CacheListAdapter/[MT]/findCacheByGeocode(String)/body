@@ -1,0 +1,8 @@
+{
+  for (int i=0; i < getCount(); i++) {
+    if (getItem(i).getGeocode().compareToIgnoreCase(geocode) == 0) {
+      return getItem(i);
+    }
+  }
+  return null;
+}
