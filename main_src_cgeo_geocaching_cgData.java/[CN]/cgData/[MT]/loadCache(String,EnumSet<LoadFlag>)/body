@@ -1,11 +1,9 @@
 {
-  Object[] geocodes=new Object[1];
-  if (StringUtils.isNotBlank(geocode)) {
-    geocodes[0]=geocode;
+  if (StringUtils.isBlank(geocode)) {
+    return null;
   }
- else {
-    geocodes=null;
-  }
-  Set<cgCache> caches=loadCaches(geocodes,null,null,null,null,loadFlags);
+  Set<String> geocodes=new HashSet<String>();
+  geocodes.add(geocode);
+  Set<cgCache> caches=loadCaches(geocodes,loadFlags);
   return cgBase.getFirstElementFromSet(caches);
 }
