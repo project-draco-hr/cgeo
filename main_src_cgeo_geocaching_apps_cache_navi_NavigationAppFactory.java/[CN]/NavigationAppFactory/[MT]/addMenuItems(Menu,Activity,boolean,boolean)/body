@@ -1,8 +1,8 @@
 {
   final int defaultNavigationTool=Settings.getDefaultNavigationTool();
-  for (  NavigationApp app : getInstalledNavigationApps(activity)) {
-    if ((showInternalMap || !(app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != app.getId())) {
-      menu.add(0,app.getId(),0,app.getName());
+  for (  NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
+    if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
+      menu.add(0,navApp.id,0,navApp.app.getName());
     }
   }
 }

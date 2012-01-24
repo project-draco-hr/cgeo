@@ -2,14 +2,14 @@
   AlertDialog.Builder builder=new AlertDialog.Builder(activity);
   builder.setTitle(R.string.cache_menu_navigate);
   builder.setIcon(android.R.drawable.ic_menu_mapmode);
-  final List<NavigationApp> installed=getInstalledNavigationApps(activity);
+  final List<NavigationAppsEnum> installed=getInstalledNavigationApps(activity);
   String[] items=new String[installed.size()];
   for (int i=0; i < installed.size(); i++) {
-    items[i]=installed.get(i).getName();
+    items[i]=installed.get(i).app.getName();
   }
   builder.setItems(items,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int item){
-      installed.get(item).invoke(geo,activity,cache,search,null,null);
+      installed.get(item).app.invoke(geo,activity,cache,search,null,null);
     }
   }
 );
