@@ -3,6 +3,9 @@
     return false;
   }
   cgeoapplication.putCacheInCache(cache);
+  if (!cache.isDetailed()) {
+    return false;
+  }
   ContentValues values=new ContentValues();
   if (cache.getUpdated() == 0) {
     values.put("updated",System.currentTimeMillis());

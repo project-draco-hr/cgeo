@@ -1,3 +1,8 @@
 {
-  return getCaches(search,centerLat,centerLon,spanLat,spanLon,EnumSet.of(LoadFlag.LOADWAYPOINTS,LoadFlag.LOADOFFLINELOG));
+  if (search == null) {
+    final Set<cgCache> cachesPre=storage.loadCaches(null,centerLat,centerLon,spanLat,spanLon,EnumSet.of(LoadFlag.LOADWAYPOINTS,LoadFlag.LOADOFFLINELOG));
+    return cachesPre != null ? cachesPre : new HashSet<cgCache>();
+  }
+  final Set<cgCache> cachesPre=storage.loadCaches(search.getGeocodes(),EnumSet.of(LoadFlag.LOADWAYPOINTS,LoadFlag.LOADOFFLINELOG));
+  return cachesPre != null ? cachesPre : new HashSet<cgCache>();
 }

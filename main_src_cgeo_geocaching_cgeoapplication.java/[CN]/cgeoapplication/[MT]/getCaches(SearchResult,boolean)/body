@@ -1,3 +1,3 @@
 {
-  return getCaches(search,null,null,null,null,loadWaypoints ? EnumSet.of(LoadFlag.LOADWAYPOINTS,LoadFlag.LOADOFFLINELOG) : EnumSet.of(LoadFlag.LOADOFFLINELOG));
+  return storage.loadCaches(search.getGeocodes(),loadWaypoints ? EnumSet.of(LoadFlag.LOADWAYPOINTS,LoadFlag.LOADOFFLINELOG) : EnumSet.of(LoadFlag.LOADOFFLINELOG));
 }

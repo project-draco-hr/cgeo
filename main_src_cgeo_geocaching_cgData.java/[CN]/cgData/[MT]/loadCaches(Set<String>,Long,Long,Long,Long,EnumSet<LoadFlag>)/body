@@ -1,13 +1,13 @@
 {
   init();
-  if ((geocodes != null && geocodes.length > 0) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
+  if ((geocodes != null && geocodes.size() > 0) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
     throw new IllegalArgumentException("Please use only one parameter");
   }
   StringBuilder where=new StringBuilder();
   Cursor cursor=null;
   Set<cgCache> caches=new HashSet<cgCache>();
   try {
-    if (geocodes != null && geocodes.length > 0) {
+    if (geocodes != null && geocodes.size() > 0) {
       StringBuilder all=new StringBuilder();
       for (      Object one : geocodes) {
         if (all.length() > 0) {
@@ -107,6 +107,7 @@
             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
           }
           cache.addStorageLocation(StorageLocation.DATABASE);
+          cgeoapplication.putCacheInCache(cache);
           caches.add(cache);
         }
  while (cursor.moveToNext());

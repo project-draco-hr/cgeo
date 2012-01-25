@@ -1,11 +1,3 @@
 {
-  cgCache cache=CacheCache.getInstance().getCacheFromCache(geocode);
-  if (cache != null) {
-    return cache;
-  }
-  cache=storage.loadCache(geocode,loadFlags);
-  if (cache != null && cache.isDetailed() && loadFlags == LoadFlags.LOADALL) {
-    CacheCache.getInstance().putCacheInCache(cache);
-  }
-  return cache;
+  return storage.loadCache(geocode,loadFlags);
 }
