@@ -6,6 +6,7 @@
   if (status == StatusCode.NO_ERROR) {
     app.firstRun=false;
     cgBase.detectGcCustomDate();
+    updateUserInfoHandler.sendEmptyMessage(-1);
   }
   if (app.showLoginToast) {
     firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0,status));

@@ -42,7 +42,7 @@
   }
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
   String page=getResponseData(postRequest(uri,params));
-  if (!checkLogin(page)) {
+  if (!getLoginStatus(page)) {
     final StatusCode loginState=login();
     if (loginState == StatusCode.NO_ERROR) {
       page=getResponseData(postRequest(uri,params));
@@ -105,6 +105,7 @@
       if (app != null && geocode != null) {
         app.saveVisitDate(geocode);
       }
+      getLoginStatus(page);
       return StatusCode.NO_ERROR;
     }
   }
