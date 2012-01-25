@@ -1,0 +1,62 @@
+{
+  progress=(ProgressBar)findViewById(R.id.actionbar_progress);
+  showProgressHandler.sendEmptyMessage(1);
+  new Thread(new Runnable(){
+    @Override public void run(){
+      int maxWidth=80, maxHeight=80;
+      String iconUserUrl="";
+      HttpResponse loginResponse=null;
+      String loginData=null;
+      String[] viewstates=null;
+      final ImmutablePair<String,String> loginStart=Settings.getLogin();
+      if (loginStart != null) {
+        loginResponse=cgBase.request("https://www.geocaching.com/default.aspx",null,false,false,false);
+        loginData=cgBase.getResponseData(loginResponse);
+        if (loginData != null && loginData.length() > 0) {
+          String premium=Settings.getMemberStatus();
+          if (cgBase.UsernameLogin(loginData) == "") {
+            infoUser="";
+          }
+ else {
+            infoUser=cgBase.UsernameLogin(loginData) + "\n" + premium+ "\n"+ "caches: "+ cgBase.UserNbCaches(loginData);
+          }
+          try {
+            BitmapDrawable imageAvatar=cgBase.downloadAvatarAndGetMemberStatus(cgeo.this);
+            Bitmap imagePre=imageAvatar.getBitmap();
+            if (imagePre != null) {
+              int width, height, imgWidth=imagePre.getWidth(), imgHeight=imagePre.getHeight();
+              double ratio;
+              if (imgWidth > maxWidth || imgHeight > maxHeight) {
+                if ((maxWidth / imgWidth) > (maxHeight / imgHeight)) {
+                  ratio=(double)maxHeight / (double)imgHeight;
+                }
+ else {
+                  ratio=(double)maxWidth / (double)imgWidth;
+                }
+                width=(int)Math.ceil(imgWidth * ratio);
+                height=(int)Math.ceil(imgHeight * ratio);
+                try {
+                  imagePre=Bitmap.createScaledBitmap(imagePre,width,height,true);
+                }
+ catch (                Exception e) {
+                  Log.d(Settings.tag,"cgeo.displayInfoUser: Failed to scale image");
+                }
+              }
+ else {
+                width=imgWidth;
+                height=imgHeight;
+              }
+              image=new BitmapDrawable(imagePre);
+              image.setBounds(new Rect(0,0,width,height));
+            }
+          }
+ catch (          Exception e) {
+            Log.e(Settings.tag,"cgeo.displayInfoUser (downloading from web): " + e.toString());
+          }
+        }
+      }
+      showProgressHandler.sendEmptyMessage(0);
+    }
+  }
+).start();
+}
