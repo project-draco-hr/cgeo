@@ -1,3 +1,7 @@
 {
-  return adapter.getItem(adapterInfo.position);
+  final cgCache cache=adapter.getItem(adapterInfo.position);
+  if (cache.getGeocode().equalsIgnoreCase(contextMenuGeocode)) {
+    return cache;
+  }
+  return adapter.findCacheByGeocode(contextMenuGeocode);
 }
