@@ -1,15 +1,10 @@
 {
   final int defaultNavigationTool=Settings.getDefaultNavigationTool();
-  NavigationApp app=null;
   final List<NavigationAppsEnum> installedNavigationApps=getInstalledNavigationApps(activity);
   for (  NavigationAppsEnum navigationApp : installedNavigationApps) {
     if (navigationApp.id == defaultNavigationTool) {
-      app=navigationApp.app;
-      break;
+      return navigationApp.app;
     }
   }
-  if (app == null) {
-    app=installedNavigationApps.get(0).app;
-  }
-  return app;
+  return NavigationAppsEnum.COMPASS.app;
 }
