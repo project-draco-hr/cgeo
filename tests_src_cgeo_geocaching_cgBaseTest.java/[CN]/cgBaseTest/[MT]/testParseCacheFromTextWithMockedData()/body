@@ -3,7 +3,7 @@
   for (  MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
     Settings.setGcCustomDate(mockedCache.getDateFormat());
     ParseResult parseResult=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
-    cgCache parsedCache=parseResult.cacheList.get(0);
+    cgCache parsedCache=cgBase.getFirstElementFromSet(parseResult.cacheList);
     cgBaseTest.testCompareCaches(mockedCache,parsedCache);
   }
   Settings.setGcCustomDate(gcCustomDate);

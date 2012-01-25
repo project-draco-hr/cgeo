@@ -6,9 +6,6 @@
  else {
     geocodes=null;
   }
-  List<cgCache> caches=loadCaches(geocodes,null,null,null,null,loadFlags);
-  if (CollectionUtils.isNotEmpty(caches)) {
-    return caches.get(0);
-  }
-  return null;
+  Set<cgCache> caches=loadCaches(geocodes,null,null,null,null,loadFlags);
+  return cgBase.getFirstElementFromSet(caches);
 }

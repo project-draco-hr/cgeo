@@ -9,14 +9,14 @@
       return;
     }
     if (fromDetailIntent || searchIntent != null) {
-      search=searchIntent;
+      search=new ParseResult(searchIntent);
     }
  else {
       if (!live || !Settings.isLiveMap()) {
-        search=app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType());
+        search=new ParseResult(app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType()));
       }
  else {
-        search=app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType());
+        search=new ParseResult(app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType()));
       }
     }
     if (search != null) {
@@ -31,10 +31,9 @@
     if (live && Settings.isLiveMap()) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
-      for (int i=caches.size() - 1; i >= 0; i--) {
-        cgCache cache=caches.get(i);
+      for (      cgCache cache : caches) {
         if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
-          caches.remove(i);
+          caches.remove(cache);
         }
       }
     }
