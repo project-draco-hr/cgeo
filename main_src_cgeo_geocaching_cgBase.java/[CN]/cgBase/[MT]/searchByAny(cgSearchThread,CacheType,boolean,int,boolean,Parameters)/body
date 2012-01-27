@@ -14,5 +14,6 @@
   }
   final ParseResult search=ParseResult.filterParseResults(parseResult,Settings.isExcludeDisabledCaches(),false,cacheType);
   cgeoapplication.getInstance().addSearch(search.cacheList,listId);
+  getLoginStatus(page);
   return search;
 }

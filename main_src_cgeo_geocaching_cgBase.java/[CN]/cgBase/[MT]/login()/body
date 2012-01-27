@@ -13,7 +13,7 @@
     Log.e(Settings.tag,"cgeoBase.login: Failed to retrieve login page (1st)");
     return StatusCode.CONNECTION_FAILED;
   }
-  if (checkLogin(loginData)) {
+  if (getLoginStatus(loginData)) {
     Log.i(Settings.tag,"Already logged in Geocaching.com as " + login.left);
     switchToEnglish(loginData);
     return StatusCode.NO_ERROR;
@@ -30,7 +30,7 @@
   loginResponse=postRequest("https://www.geocaching.com/login/default.aspx",params);
   loginData=getResponseData(loginResponse);
   if (StringUtils.isNotBlank(loginData)) {
-    if (checkLogin(loginData)) {
+    if (getLoginStatus(loginData)) {
       Log.i(Settings.tag,"Successfully logged in Geocaching.com as " + login.left);
       switchToEnglish(loginData);
       Settings.setCookieStore(dumpCookieStore());

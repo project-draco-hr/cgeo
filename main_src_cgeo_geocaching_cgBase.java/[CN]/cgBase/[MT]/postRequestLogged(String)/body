@@ -1,7 +1,7 @@
 {
   HttpResponse response=postRequest(uri,null);
   String data=getResponseData(response);
-  if (!checkLogin(data)) {
+  if (!getLoginStatus(data)) {
     if (login() == StatusCode.NO_ERROR) {
       response=postRequest(uri,null);
       data=getResponseData(response);
