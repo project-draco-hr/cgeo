@@ -1,7 +1,7 @@
 {
   final int id=item.getItemId();
   for (  NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
-    if (navApp.id == id) {
+    if (MENU_ITEM_OFFSET + navApp.id == id) {
       return navApp.app;
     }
   }
