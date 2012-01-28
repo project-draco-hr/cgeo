@@ -4,19 +4,19 @@
     return false;
   }
   cgBase.actualStatus=res.getString(R.string.init_login_popup_ok);
-  cgBase.actualLoginStatus=BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME);
-  if (cgBase.actualLoginStatus) {
-    cgBase.actualUserName=BaseUtils.getMatch(page,GCConstants.PATTERN_LOGIN_NAME,true,"???");
-    cgBase.actualMemberStatus=BaseUtils.getMatch(page,GCConstants.PATTERN_MEMBER_STATUS,true,"???");
-    cgBase.actualCachesFound=Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0"));
+  cgBase.setActualLoginStatus(BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME));
+  if (cgBase.isActualLoginStatus()) {
+    cgBase.setActualUserName(BaseUtils.getMatch(page,GCConstants.PATTERN_LOGIN_NAME,true,"???"));
+    cgBase.setActualMemberStatus(BaseUtils.getMatch(page,GCConstants.PATTERN_MEMBER_STATUS,true,"???"));
+    cgBase.setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0")));
     return true;
   }
-  cgBase.actualLoginStatus=BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE);
-  if (cgBase.actualLoginStatus) {
-    cgBase.actualUserName=Settings.getUsername();
-    cgBase.actualMemberStatus=Settings.getMemberStatus();
+  cgBase.setActualLoginStatus(BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
+  if (cgBase.isActualLoginStatus()) {
+    cgBase.setActualUserName(Settings.getUsername());
+    cgBase.setActualMemberStatus(Settings.getMemberStatus());
     return true;
   }
-  cgBase.actualStatus=res.getString(R.string.err_login_failed);
+  cgBase.actualStatus=res.getString(R.string.init_login_popup_failed);
   return false;
 }
