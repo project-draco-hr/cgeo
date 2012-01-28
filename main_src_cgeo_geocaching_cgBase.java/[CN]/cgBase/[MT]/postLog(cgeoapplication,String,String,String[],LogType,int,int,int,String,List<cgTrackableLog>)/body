@@ -106,7 +106,9 @@
         app.saveVisitDate(geocode);
       }
       getLoginStatus(page);
-      actualCachesFound++;
+      if (getActualCachesFound() >= 0) {
+        setActualCachesFound(getActualCachesFound() + 1);
+      }
       return StatusCode.NO_ERROR;
     }
   }

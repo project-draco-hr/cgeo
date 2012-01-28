@@ -3,7 +3,7 @@
     Log.e(Settings.tag,"cgeoBase.checkLogin: No page given");
     return false;
   }
-  cgBase.actualStatus=res.getString(R.string.init_login_popup_ok);
+  setActualStatus(res.getString(R.string.init_login_popup_ok));
   cgBase.setActualLoginStatus(BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME));
   if (cgBase.isActualLoginStatus()) {
     cgBase.setActualUserName(BaseUtils.getMatch(page,GCConstants.PATTERN_LOGIN_NAME,true,"???"));
@@ -17,6 +17,6 @@
     cgBase.setActualMemberStatus(Settings.getMemberStatus());
     return true;
   }
-  cgBase.actualStatus=res.getString(R.string.init_login_popup_failed);
+  setActualStatus(res.getString(R.string.init_login_popup_failed));
   return false;
 }
