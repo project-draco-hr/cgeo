@@ -1,3 +1,6 @@
 {
+  if (!isLogin()) {
+    return false;
+  }
   return sharedPrefs.getBoolean(KEY_FRIENDLOGS_WANTED,true);
 }
