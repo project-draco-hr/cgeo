@@ -4,7 +4,4 @@
   Assert.assertEquals("Premium Member",BaseUtils.getMatch(page,GCConstants.PATTERN_MEMBER_STATUS,true,"???"));
   int cachesFound=Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0"));
   Assert.assertTrue(cachesFound >= 491);
-  page="<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 149</strong>";
-  cachesFound=Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0"));
-  Assert.assertEquals(149,cachesFound);
 }
