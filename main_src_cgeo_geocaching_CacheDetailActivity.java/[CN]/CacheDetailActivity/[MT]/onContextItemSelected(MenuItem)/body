@@ -19,6 +19,21 @@ default :
 break;
 }
 break;
+case R.id.log:
+switch (index) {
+case 1:
+ClipboardUtils.copyToClipboardAsPlainText(contextMenuLogText);
+return true;
+case 2:
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(TranslationUtils.buildTranslationURI(Locale.getDefault().getLanguage(),contextMenuLogText.toString()))));
+return true;
+case 3:
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(TranslationUtils.buildTranslationURI(Locale.ENGLISH.getLanguage(),contextMenuLogText.toString()))));
+return true;
+default :
+break;
+}
+break;
 case CONTEXT_MENU_WAYPOINT_EDIT:
 if (cache.hasWaypoints() && index < cache.getWaypoints().size()) {
 final cgWaypoint waypoint=cache.getWaypoints().get(index);
