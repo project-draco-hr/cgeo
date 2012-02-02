@@ -1,3 +1,7 @@
 {
-  return onOptionsItemSelected(item);
+  boolean handled=onOptionsItemSelected(item);
+  if (handled) {
+    return true;
+  }
+  return NavigationAppFactory.onMenuItemSelected(item,geo,this,null,null,waypoint,null);
 }

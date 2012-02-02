@@ -18,6 +18,12 @@
     NavigationAppFactory.startDefaultNavigationApplication(geo,this,cache,singleSearch,null,null);
     return true;
   }
+ else   if (id == MENU_NAVIGATION) {
+    final cgCache cache=getCacheFromAdapter(adapterInfo);
+    final SearchResult singleSearch=cgBase.searchByGeocode(cache.getGeocode(),null,0,false,null);
+    NavigationAppFactory.showNavigationMenu(geo,this,cache,singleSearch,null,null);
+    return true;
+  }
  else   if (id == MENU_LOG_VISIT) {
     return getCacheFromAdapter(adapterInfo).logVisit(this);
   }
@@ -62,10 +68,6 @@
   lastMenuInfo=info;
   if (adapterInfo != null) {
     final cgCache cache=getCacheFromAdapter(adapterInfo);
-    final SearchResult singleSearch=cgBase.searchByGeocode(cache.getGeocode(),null,0,false,null);
-    if (NavigationAppFactory.onMenuItemSelected(item,geo,this,cache,singleSearch,null,null)) {
-      return true;
-    }
     int logType=id - MENU_LOG_VISIT_OFFLINE;
     cache.logOffline(this,LogType.getById(logType));
   }

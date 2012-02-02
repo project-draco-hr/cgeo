@@ -5,10 +5,14 @@
 switch (item.getItemId()) {
 case CONTEXT_MENU_NAVIGATE:
     contextMenuItemPosition=position;
-  break;
+  if (destination instanceof cgDestination) {
+    NavigationAppFactory.showNavigationMenu(geo,this,null,null,null,((cgDestination)destination).getCoords());
+    return true;
+  }
+break;
 case CONTEXT_MENU_DELETE_WAYPOINT:
 if (destination instanceof cgDestination) {
-  removeFromHistory((cgDestination)destination);
+removeFromHistory((cgDestination)destination);
 }
 return true;
 case CONTEXT_MENU_EDIT_WAYPOINT:
@@ -19,9 +23,6 @@ lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
 }
 return true;
 default :
-if (destination instanceof cgDestination) {
-return NavigationAppFactory.onMenuItemSelected(item,geo,this,null,null,null,((cgDestination)destination).getCoords());
-}
 }
 return super.onContextItemSelected(item);
 }

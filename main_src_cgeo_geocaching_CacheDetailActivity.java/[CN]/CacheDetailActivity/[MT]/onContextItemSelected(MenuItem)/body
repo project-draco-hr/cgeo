@@ -47,6 +47,12 @@ NavigationAppFactory.startDefaultNavigationApplication(geolocation,this,null,nul
 }
 break;
 case CONTEXT_MENU_WAYPOINT_NAVIGATE:
+{
+final cgWaypoint waypoint=cache.getWaypoint(contextMenuWPIndex);
+if (waypoint != null) {
+NavigationAppFactory.showNavigationMenu(geolocation,this,null,null,waypoint,null);
+}
+}
 break;
 case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
 {
@@ -57,10 +63,6 @@ cgeocaches.startActivityCachesAround(this,waypoint.getCoords());
 }
 break;
 default :
-final cgWaypoint waypoint=cache.getWaypoint(contextMenuWPIndex);
-if (waypoint != null && NavigationAppFactory.onMenuItemSelected(item,geolocation,this,null,null,waypoint,null)) {
-return true;
-}
 return onOptionsItemSelected(item);
 }
 return false;
