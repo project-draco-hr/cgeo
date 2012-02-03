@@ -4,8 +4,14 @@
   builder.setIcon(android.R.drawable.ic_menu_mapmode);
   final List<NavigationAppsEnum> items=new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
   final int defaultNavigationTool=Settings.getDefaultNavigationTool();
+  final boolean hasStaticMaps=hasStaticMap(cache,waypoint);
   for (  NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
-    if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
+    if (NavigationAppsEnum.STATIC_MAP.id == navApp.id) {
+      if (hasStaticMaps) {
+        items.add(navApp);
+      }
+    }
+ else     if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
       items.add(navApp);
     }
   }
