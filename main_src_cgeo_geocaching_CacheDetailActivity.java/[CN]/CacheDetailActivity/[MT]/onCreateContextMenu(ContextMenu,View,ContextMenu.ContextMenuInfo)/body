@@ -21,14 +21,31 @@ menu.add(viewId,1,0,res.getString(R.string.user_menu_view_hidden));
 menu.add(viewId,2,0,res.getString(R.string.user_menu_view_found));
 menu.add(viewId,3,0,res.getString(R.string.user_menu_open_browser));
 break;
-case R.id.log:
-contextMenuLogText=((TextView)view).getText();
-menu.setHeaderTitle(res.getString(R.string.log_context_menu_title));
-menu.add(viewId,1,0,res.getString(R.string.log_context_menu_copy));
-menu.add(viewId,2,0,res.getString(R.string.translate_to_sys_lang,Locale.getDefault().getDisplayLanguage()));
-if (Settings.isUseEnglish() && Locale.getDefault() != Locale.ENGLISH) {
-menu.add(viewId,3,0,res.getString(R.string.translate_to_english));
+case R.id.shortdesc:
+clickedItemText=((TextView)view).getText();
+buildOptionsContextmenu(menu,viewId,res.getString(R.string.copy_desc),false);
+break;
+case R.id.longdesc:
+String shortDesc=cache.getShortDescription();
+if (shortDesc.compareTo("") == 0) {
+clickedItemText=((TextView)view).getText();
 }
+ else {
+clickedItemText=shortDesc + "\n\n" + ((TextView)view).getText();
+}
+buildOptionsContextmenu(menu,viewId,res.getString(R.string.copy_desc),false);
+break;
+case R.id.personalnote:
+clickedItemText=((TextView)view).getText();
+buildOptionsContextmenu(menu,viewId,res.getString(R.string.copy_personalnote),true);
+break;
+case R.id.hint:
+clickedItemText=((TextView)view).getText();
+buildOptionsContextmenu(menu,viewId,res.getString(R.string.copy_hint),false);
+break;
+case R.id.log:
+clickedItemText=((TextView)view).getText();
+buildOptionsContextmenu(menu,viewId,res.getString(R.string.copy_log),false);
 break;
 case -1:
 if (null != cache.getWaypoints()) {

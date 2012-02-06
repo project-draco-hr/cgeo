@@ -19,16 +19,20 @@ default :
 break;
 }
 break;
+case R.id.shortdesc:
+case R.id.longdesc:
+case R.id.personalnote:
+case R.id.hint:
 case R.id.log:
 switch (index) {
 case 1:
-ClipboardUtils.copyToClipboard(contextMenuLogText);
+ClipboardUtils.copyToClipboard(clickedItemText);
 return true;
 case 2:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(TranslationUtils.buildTranslationURI(Locale.getDefault().getLanguage(),contextMenuLogText.toString()))));
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(TranslationUtils.buildTranslationURI(Locale.getDefault().getLanguage(),clickedItemText.toString()))));
 return true;
 case 3:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(TranslationUtils.buildTranslationURI(Locale.ENGLISH.getLanguage(),contextMenuLogText.toString()))));
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(TranslationUtils.buildTranslationURI(Locale.ENGLISH.getLanguage(),clickedItemText.toString()))));
 return true;
 default :
 break;
