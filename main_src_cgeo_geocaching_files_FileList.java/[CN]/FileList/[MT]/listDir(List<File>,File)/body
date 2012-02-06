@@ -24,9 +24,7 @@
         if (name.length() > 16) {
           name=name.substring(0,14) + "...";
         }
-        final Message msg=new Message();
-        msg.obj=name;
-        changeWaitDialogHandler.sendMessage(msg);
+        changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler,0,name));
         listDir(result,file);
       }
     }

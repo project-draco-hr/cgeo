@@ -1,0 +1,41 @@
+{
+  final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+  builder.setTitle(R.string.cache_menu_navigate);
+  builder.setIcon(android.R.drawable.ic_menu_mapmode);
+  final List<NavigationAppsEnum> items=new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
+  final int defaultNavigationTool=Settings.getDefaultNavigationTool();
+  final boolean hasStaticMaps=hasStaticMap(cache,waypoint);
+  for (  NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
+    if (NavigationAppsEnum.STATIC_MAP.id == navApp.id) {
+      if (hasStaticMaps) {
+        items.add(navApp);
+      }
+    }
+ else     if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
+      items.add(navApp);
+    }
+  }
+  final ArrayAdapter<NavigationAppsEnum> adapter=new ArrayAdapter<NavigationAppsEnum>(activity,android.R.layout.select_dialog_item,items){
+    @Override public View getView(    int position,    View convertView,    ViewGroup parent){
+      TextView textView=(TextView)super.getView(position,convertView,parent);
+      textView.setText(getItem(position).app.getName());
+      return textView;
+    }
+    @Override public View getDropDownView(    int position,    View convertView,    ViewGroup parent){
+      TextView textView=(TextView)super.getDropDownView(position,convertView,parent);
+      textView.setText(getItem(position).app.getName());
+      return textView;
+    }
+  }
+;
+  adapter.setDropDownViewResource(android.R.layout.select_dialog_item);
+  builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int item){
+      NavigationAppsEnum selectedItem=adapter.getItem(item);
+      selectedItem.app.invoke(geo,activity,cache,search,waypoint,destination);
+    }
+  }
+);
+  final AlertDialog alert=builder.create();
+  alert.show();
+}

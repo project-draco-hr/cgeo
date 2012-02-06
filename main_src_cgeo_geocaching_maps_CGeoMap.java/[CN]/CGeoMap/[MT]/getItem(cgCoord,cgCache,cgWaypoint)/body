@@ -2,7 +2,7 @@
   coordinates.add(coord);
   if (cache != null) {
     CachesOverlayItemImpl item=mapProvider.getCachesOverlayItem(coord,cache.getType());
-    int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled()).append(cache.isOwn()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).toHashCode();
+    int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled()).append(cache.isOwn()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).toHashCode();
     LayerDrawable ldFromCache=CGeoMap.overlaysCache.get(hashcode);
     if (ldFromCache != null) {
       item.setMarker(ldFromCache);
@@ -28,6 +28,10 @@
     }
     if (cache.isFound()) {
       layers.add(getResources().getDrawable(R.drawable.marker_found));
+      insets.add(INSET_FOUND[resolution]);
+    }
+ else     if (cache.isLogOffline()) {
+      layers.add(getResources().getDrawable(R.drawable.marker_found_offline));
       insets.add(INSET_FOUND[resolution]);
     }
     if (cache.hasUserModifiedCoords()) {

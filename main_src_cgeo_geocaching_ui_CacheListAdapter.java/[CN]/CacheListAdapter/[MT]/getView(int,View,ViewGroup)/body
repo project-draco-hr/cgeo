@@ -107,8 +107,9 @@
     }
   }
   holder.text.setText(cache.getNameSp(),TextView.BufferType.SPANNABLE);
-  if (gcIconDrawables.containsKey(cache.getType())) {
-    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getType()),null,null,null);
+  int hashCode=new HashCodeBuilder().append(cache.getType()).append(cache.hasUserModifiedCoords()).toHashCode();
+  if (gcIconDrawables.containsKey(hashCode)) {
+    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(hashCode),null,null,null);
   }
  else {
     holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY),null,null,null);
@@ -218,11 +219,11 @@
   }
   holder.favourite.setBackgroundResource(favoriteBack);
   if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
-    StringBuilder cacheInfo=new StringBuilder(50);
-    cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
-    cacheInfo.append("; ");
-    cacheInfo.append(cgBase.formatDate(cache.getVisitedDate()));
-    holder.info.setText(cacheInfo.toString());
+    ArrayList<String> infos=new ArrayList<String>();
+    infos.add(StringUtils.upperCase(cache.getGeocode()));
+    infos.add(cgBase.formatDate(cache.getVisitedDate()));
+    infos.add(cgBase.formatTime(cache.getVisitedDate()));
+    holder.info.setText(StringUtils.join(infos,SEPARATOR));
   }
  else {
     ArrayList<String> infos=new ArrayList<String>();

@@ -49,8 +49,7 @@ menu.add(CONTEXT_MENU_WAYPOINT_DELETE,index,0,R.string.waypoint_delete);
 }
 if (waypoint.getCoords() != null) {
 menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION,index,0,NavigationAppFactory.getDefaultNavigationApplication(this).getName());
-SubMenu subMenu=menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE,index,0,R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
-NavigationAppFactory.addMenuItems(subMenu,this);
+menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE,index,0,R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
 menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND,index,0,R.string.cache_menu_around);
 }
 break;
