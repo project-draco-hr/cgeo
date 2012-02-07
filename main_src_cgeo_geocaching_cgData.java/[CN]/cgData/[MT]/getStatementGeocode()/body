@@ -1,0 +1,6 @@
+{
+  if (statementDescription == null) {
+    statementDescription=databaseRO.compileStatement("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?");
+  }
+  return statementDescription;
+}

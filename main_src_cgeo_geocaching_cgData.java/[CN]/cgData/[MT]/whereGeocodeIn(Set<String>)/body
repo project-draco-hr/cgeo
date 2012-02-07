@@ -1,0 +1,18 @@
+{
+  final StringBuilder where=new StringBuilder();
+  if (geocodes != null && geocodes.size() > 0) {
+    StringBuilder all=new StringBuilder();
+    for (    String geocode : geocodes) {
+      if (all.length() > 0) {
+        all.append(", ");
+      }
+      all.append('"');
+      all.append(geocode);
+      all.append('"');
+    }
+    where.append("geocode in (");
+    where.append(all);
+    where.append(')');
+  }
+  return where;
+}

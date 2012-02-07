@@ -1,6 +1,6 @@
 {
   if (storage.saveOwnWaypoint(id,geocode,waypoint)) {
-    removeCacheFromCache(geocode);
+    this.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVECACHE));
     return true;
   }
   return false;

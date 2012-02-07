@@ -16,7 +16,7 @@
   if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
     geocode=app.getGeocode(cacheid);
   }
-  cache=app.getCacheByGeocode(geocode);
+  cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOADCACHEORDB);
   if (StringUtils.isNotBlank(cache.getName())) {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
   }

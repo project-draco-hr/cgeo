@@ -1,0 +1,11 @@
+{
+  init();
+  try {
+    final ContentValues values=new ContentValues();
+    values.put("reason",StoredList.TEMPORARY_LIST_ID);
+    databaseRW.update(dbTableCaches,values,"reason = ?",new String[]{Integer.toString(listId)});
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"cgData.dropList: error when updating reason",e);
+  }
+}

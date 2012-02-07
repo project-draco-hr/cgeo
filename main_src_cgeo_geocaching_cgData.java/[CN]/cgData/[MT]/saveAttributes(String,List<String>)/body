@@ -1,8 +1,8 @@
 {
-  init();
   if (StringUtils.isBlank(geocode) || attributes == null) {
     return false;
   }
+  init();
   databaseRW.beginTransaction();
   try {
     databaseRW.delete(dbTableAttributes,"geocode = ?",new String[]{geocode});

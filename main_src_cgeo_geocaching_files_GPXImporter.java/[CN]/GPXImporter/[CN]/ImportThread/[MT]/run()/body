@@ -6,7 +6,7 @@
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_CACHES,R.string.gpx_import_storing,caches.size()));
     SearchResult search=storeParsedCaches(caches);
     Log.i(Settings.tag,"Imported successfully " + caches.size() + " caches.");
-    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED,SearchResult.getCount(search),0,search));
+    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED,search.getCount(),0,search));
   }
  catch (  IOException e) {
     Log.i(Settings.tag,"Importing caches failed - error reading data: " + e.getMessage());

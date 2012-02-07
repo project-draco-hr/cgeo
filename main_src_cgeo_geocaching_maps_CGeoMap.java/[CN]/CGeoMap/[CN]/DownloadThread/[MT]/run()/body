@@ -45,7 +45,9 @@
       working=false;
       return;
     }
-    caches=app.getCaches(search,centerLat,centerLon,spanLat,spanLon);
+    if (search != null) {
+      caches=search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
+    }
     if (stop) {
       displayHandler.sendEmptyMessage(UPDATE_TITLE);
       working=false;

@@ -6,6 +6,6 @@
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_CACHES,GPXImporter.IMPORT_STEP_FINISHED);
   SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
   assertEquals(Collections.singletonList("OC5952"),new ArrayList<String>(search.getGeocodes()));
-  cgCache cache=cgeoapplication.getInstance().getCacheByGeocode("OC5952");
+  cgCache cache=cgeoapplication.getInstance().loadCache("OC5952",LoadFlags.LOADCACHEORDB);
   assertCacheProperties(cache);
 }

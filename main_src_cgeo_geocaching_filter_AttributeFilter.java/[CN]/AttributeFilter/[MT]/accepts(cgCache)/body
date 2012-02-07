@@ -1,4 +1,4 @@
 {
-  final cgCache fullCache=cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode());
+  final cgCache fullCache=cgeoapplication.getInstance().loadCache(cache.getGeocode(),EnumSet.of(LoadFlag.LOADATTRIBUTES));
   return fullCache.getAttributes().contains(attribute);
 }

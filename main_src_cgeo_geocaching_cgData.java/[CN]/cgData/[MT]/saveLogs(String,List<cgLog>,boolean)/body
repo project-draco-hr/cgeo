@@ -1,8 +1,8 @@
 {
-  init();
   if (StringUtils.isBlank(geocode) || logs == null) {
     return false;
   }
+  init();
   databaseRW.beginTransaction();
   try {
     if (drop) {

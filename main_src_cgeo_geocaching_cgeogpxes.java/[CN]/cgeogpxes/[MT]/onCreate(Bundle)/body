@@ -4,7 +4,7 @@
   if (extras != null) {
     listId=extras.getInt(EXTRAS_LIST_ID);
   }
-  if (listId <= 0) {
+  if (listId <= StoredList.TEMPORARY_LIST_ID) {
     listId=StoredList.STANDARD_LIST_ID;
   }
 }

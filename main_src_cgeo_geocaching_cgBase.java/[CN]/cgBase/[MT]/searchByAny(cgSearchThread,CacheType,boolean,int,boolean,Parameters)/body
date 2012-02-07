@@ -7,13 +7,12 @@
     Log.e(Settings.tag,"cgeoBase.searchByAny: No data from server");
     return null;
   }
-  final ParseResult parseResult=parseSearch(thread,fullUri,page,showCaptcha);
-  if (parseResult == null || CollectionUtils.isEmpty(parseResult.cacheList)) {
+  final SearchResult searchResult=parseSearch(thread,fullUri,page,showCaptcha,listId);
+  if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
     Log.e(Settings.tag,"cgeoBase.searchByAny: No cache parsed");
-    return parseResult;
+    return searchResult;
   }
-  final ParseResult search=ParseResult.filterParseResults(parseResult,Settings.isExcludeDisabledCaches(),false,cacheType);
-  cgeoapplication.getInstance().addSearch(search.cacheList,listId);
+  final SearchResult search=searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(),false,cacheType,listId);
   getLoginStatus(page);
   return search;
 }

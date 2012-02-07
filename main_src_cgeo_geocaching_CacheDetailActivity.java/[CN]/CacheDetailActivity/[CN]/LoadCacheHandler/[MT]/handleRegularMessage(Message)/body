@@ -8,8 +8,8 @@
       finish();
       return;
     }
-    if (SearchResult.getError(search) != null) {
-      showToast(res.getString(R.string.err_dwld_details_failed) + " " + SearchResult.getError(search).getErrorString(res)+ ".");
+    if (search.getError() != null) {
+      showToast(res.getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(res)+ ".");
       finish();
       return;
     }

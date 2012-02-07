@@ -6,7 +6,7 @@
   if (waypoint.isUserDefined()) {
     waypoints.remove(index);
     cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-    cgeoapplication.removeCacheFromCache(geocode);
+    cgeoapplication.getInstance().removeCache(geocode,EnumSet.of(RemoveFlag.REMOVECACHE));
     return true;
   }
   return false;

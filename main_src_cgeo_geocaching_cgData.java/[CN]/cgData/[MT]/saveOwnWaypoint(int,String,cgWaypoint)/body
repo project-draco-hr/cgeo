@@ -1,8 +1,8 @@
 {
-  init();
   if ((StringUtils.isBlank(geocode) && id <= 0) || waypoint == null) {
     return false;
   }
+  init();
   boolean ok=false;
   databaseRW.beginTransaction();
   try {

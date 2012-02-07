@@ -1,8 +1,8 @@
 {
-  init();
   if (StringUtils.isBlank(geocode) || spoilers == null) {
     return false;
   }
+  init();
   databaseRW.beginTransaction();
   try {
     databaseRW.delete(dbTableSpoilers,"geocode = ?",new String[]{geocode});

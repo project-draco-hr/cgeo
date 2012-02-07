@@ -1,0 +1,10 @@
+{
+  final Map<String,cgCoord> cidCoords=parseCoordinates(fileContent);
+  for (  String geocode : searchResult.getGeocodes()) {
+    if (cidCoords.containsKey(geocode)) {
+      cgCache cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOADCACHEORDB);
+      cgCoord coord=cidCoords.get(cache.getGeocode());
+      copyCoordToCache(coord,cache);
+    }
+  }
+}

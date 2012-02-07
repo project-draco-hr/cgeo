@@ -1,9 +1,0 @@
-{
-  if (StringUtils.isBlank(geocode)) {
-    return;
-  }
-  init();
-  ContentValues values=new ContentValues();
-  values.put("reason",Math.max(listId,1));
-  databaseRW.update(dbTableCaches,values,"geocode = ? and reason < 1",new String[]{geocode});
-}

@@ -1,15 +1,21 @@
 {
-  if (StringUtils.isBlank(geocode) || listId <= 0) {
+  if (StringUtils.isBlank(geocode)) {
     return;
   }
+  init();
+  ContentValues values=new ContentValues();
+  values.put("reason",listId);
   databaseRW.beginTransaction();
   try {
-    ContentValues values=new ContentValues();
-    values.put("reason",listId);
     databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{geocode});
     databaseRW.setTransactionSuccessful();
   }
   finally {
     databaseRW.endTransaction();
+  }
+  cgCache cache=cacheCache.getCacheFromCache(geocode);
+  if (cache != null) {
+    cache.setListId(listId);
+    cacheCache.putCacheInCache(cache);
   }
 }

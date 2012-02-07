@@ -3,8 +3,8 @@
     Log.e(Settings.tag,"cgeoBase.parseMapJSON: No page given");
     return null;
   }
-  final ParseResult parseResult=new ParseResult();
-  parseResult.url=uri;
+  final SearchResult searchResult=new SearchResult();
+  searchResult.setUrl(uri);
   try {
     final JSONObject yoDawg=new JSONObject(data);
     final String json=yoDawg.getString("d");
@@ -18,7 +18,7 @@
       int count=extra.getInt("count");
       boolean li=extra.getBoolean("li");
       if (!li) {
-        parseResult.error=StatusCode.NOT_LOGGED_IN;
+        searchResult.error=StatusCode.NOT_LOGGED_IN;
       }
       if (count > 0 && extra.has("cc")) {
         final JSONArray cachesData=extra.getJSONArray("cc");
@@ -78,18 +78,18 @@
  else {
               cacheToAdd.setType(CacheType.UNKNOWN);
             }
-            parseResult.cacheList.add(cacheToAdd);
+            searchResult.addCache(cacheToAdd);
           }
         }
       }
  else {
-        Log.w(Settings.tag,"There are no caches in viewport");
+        Log.w(Settings.tag,"There are no caches in viewport. Probably the viewport is to big");
       }
-      parseResult.totalCnt=parseResult.cacheList.size();
+      searchResult.totalCnt=searchResult.getGeocodes().size();
     }
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgBase.parseMapJSON",e);
   }
-  return parseResult;
+  return searchResult;
 }

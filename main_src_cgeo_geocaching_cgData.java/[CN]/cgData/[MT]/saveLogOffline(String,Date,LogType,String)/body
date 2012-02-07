@@ -5,6 +5,7 @@
   if (LogType.LOG_UNKNOWN == type && StringUtils.isBlank(log)) {
     return false;
   }
+  init();
   boolean status=false;
   ContentValues values=new ContentValues();
   values.put("geocode",geocode);

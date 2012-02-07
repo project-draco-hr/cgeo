@@ -1,9 +1,9 @@
 {
-  if (cache == null || cache.getGeocode() == null) {
-    return;
+  if (cache == null) {
+    throw new IllegalArgumentException("cache must not be null");
   }
-  if (cachesCache.containsKey(cache.getGeocode())) {
-    cachesCache.remove(cache.getGeocode());
+  if (StringUtils.isBlank(cache.getGeocode())) {
+    throw new IllegalArgumentException("geocode must not be empty");
   }
   cache.addStorageLocation(StorageLocation.CACHE);
   cachesCache.put(cache.getGeocode(),cache);

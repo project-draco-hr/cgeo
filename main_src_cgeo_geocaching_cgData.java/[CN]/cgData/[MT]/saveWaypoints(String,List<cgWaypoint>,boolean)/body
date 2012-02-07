@@ -1,8 +1,8 @@
 {
-  init();
   if (StringUtils.isBlank(geocode) || waypoints == null) {
     return false;
   }
+  init();
   Log.d(Settings.tag,"cgData.saveWaypoints(drop=" + drop + ")");
   boolean ok=false;
   databaseRW.beginTransaction();

@@ -1,8 +1,8 @@
 {
-  init();
   if (id == 0) {
     return false;
   }
+  init();
   int deleted=databaseRW.delete(dbTableWaypoints,"_id = " + id,null);
   if (deleted > 0) {
     return true;

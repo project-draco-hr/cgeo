@@ -3,7 +3,7 @@
     geo=app.startGeo(geoUpdate);
   }
   app.setAction(geocode);
-  cache=app.getCacheByGeocode(geocode);
+  cache=app.loadCache(geocode,LoadFlags.LOADCACHEORDB);
   if (cache == null) {
     showToast(res.getString(R.string.err_detail_cache_find));
     finish();

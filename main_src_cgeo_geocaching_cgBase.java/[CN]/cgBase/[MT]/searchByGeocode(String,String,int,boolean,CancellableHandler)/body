@@ -4,8 +4,8 @@
     return null;
   }
   cgeoapplication app=cgeoapplication.getInstance();
-  if (!forceReload && listId == 0 && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
-    final ParseResult search=new ParseResult();
+  if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
+    final SearchResult search=new SearchResult();
     final String realGeocode=StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
     search.addGeocode(realGeocode);
     return search;

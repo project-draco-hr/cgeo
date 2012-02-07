@@ -7,8 +7,8 @@
   if (extras != null) {
     listId=extras.getInt("list");
   }
-  if (listId <= 0) {
-    listId=1;
+  if (listId <= StoredList.TEMPORARY_LIST_ID) {
+    listId=StoredList.STANDARD_LIST_ID;
   }
   setAdapter();
   waitDialog=ProgressDialog.show(this,res.getString(R.string.file_title_searching),res.getString(R.string.file_searching),true,true,new DialogInterface.OnCancelListener(){

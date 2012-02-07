@@ -1,5 +1,5 @@
 {
-  cgeoapplication.removeCacheFromCache(cache.getGeocode());
+  app.removeCache(cache.getGeocode(),EnumSet.of(RemoveFlag.REMOVECACHE));
   search=cgBase.searchByGeocode(cache.getGeocode(),null,0,true,handler);
   handler.sendEmptyMessage(0);
 }

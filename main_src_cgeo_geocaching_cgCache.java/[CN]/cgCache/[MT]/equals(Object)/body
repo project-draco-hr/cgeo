@@ -8,5 +8,5 @@
   if (getClass() != obj.getClass()) {
     return false;
   }
-  return isEqualTo((cgCache)obj);
+  return geocode != null ? geocode.compareTo(((cgCache)obj).geocode) == 0 : false;
 }

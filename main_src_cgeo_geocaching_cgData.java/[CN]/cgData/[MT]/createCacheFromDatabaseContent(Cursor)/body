@@ -105,5 +105,6 @@
   cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
   cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
   cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
+  Log.d(Settings.tag,"Loading " + cache.toString() + " ("+ cache.getListId()+ ") from DB");
   return cache;
 }

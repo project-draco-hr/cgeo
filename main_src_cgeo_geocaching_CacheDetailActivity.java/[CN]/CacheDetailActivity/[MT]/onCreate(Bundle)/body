@@ -10,7 +10,7 @@
   String guid=null;
   String name=null;
   if (search != null) {
-    cache=app.getCache(search);
+    cache=search.getFirstCacheFromResult(LoadFlags.LOADALLDBONLY);
     if (cache != null && cache.getGeocode() != null) {
       geocode=cache.getGeocode();
     }

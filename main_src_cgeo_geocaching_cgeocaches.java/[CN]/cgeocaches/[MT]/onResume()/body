@@ -15,7 +15,7 @@
     loadCachesHandler.sendEmptyMessage(0);
   }
   if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-    SearchResult newSearch=cgBase.searchByOffline(coords,cacheType,listId);
+    SearchResult newSearch=cgBase.searchByStored(coords,cacheType,listId);
     if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
       refreshCurrentList();
     }

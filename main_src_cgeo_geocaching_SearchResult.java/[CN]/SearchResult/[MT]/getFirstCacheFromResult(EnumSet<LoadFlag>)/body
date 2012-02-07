@@ -1,0 +1,6 @@
+{
+  if (geocodes != null && geocodes.size() >= 1) {
+    return cgeoapplication.getInstance().loadCache((String)geocodes.toArray()[0],loadFlags);
+  }
+  return null;
+}

@@ -1,9 +1,0 @@
-{
-  if (CollectionUtils.isEmpty(cacheList)) {
-    return;
-  }
-  for (  final cgCache cache : cacheList) {
-    cache.setListId(listId);
-    storeWithMerge(cache,false);
-  }
-}

@@ -1,0 +1,23 @@
+{
+  if (StringUtils.isBlank(geocode)) {
+    return;
+  }
+  init();
+  databaseRW.beginTransaction();
+  try {
+    ContentValues values=new ContentValues();
+    values.put("visiteddate",visitedDate);
+    int rows=databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{geocode});
+    if (rows > 0) {
+      cgCache cache=cacheCache.getCacheFromCache(geocode);
+      if (cache != null) {
+        cache.setFound(true);
+        cacheCache.putCacheInCache(cache);
+      }
+    }
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+}

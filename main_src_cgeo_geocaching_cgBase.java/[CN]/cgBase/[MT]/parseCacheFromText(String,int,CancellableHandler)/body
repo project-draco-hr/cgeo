@@ -4,18 +4,18 @@
     Log.e(Settings.tag,"cgeoBase.parseCache: No page given");
     return null;
   }
-  final ParseResult parseResult=new ParseResult();
+  final SearchResult searchResult=new SearchResult();
   if (page.contains("Cache is Unpublished")) {
-    parseResult.error=StatusCode.UNPUBLISHED_CACHE;
-    return parseResult;
+    searchResult.error=StatusCode.UNPUBLISHED_CACHE;
+    return searchResult;
   }
   if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
-    parseResult.error=StatusCode.PREMIUM_ONLY;
-    return parseResult;
+    searchResult.error=StatusCode.PREMIUM_ONLY;
+    return searchResult;
   }
   if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
-    parseResult.error=StatusCode.PREMIUM_ONLY;
-    return parseResult;
+    searchResult.error=StatusCode.PREMIUM_ONLY;
+    return searchResult;
   }
   final cgCache cache=new cgCache();
   cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
@@ -196,7 +196,7 @@
   try {
     final String originalCoords=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON_ORIG,false,null);
     if (null != originalCoords) {
-      final cgWaypoint waypoint=new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "",WaypointType.WAYPOINT);
+      final cgWaypoint waypoint=new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "res = null",WaypointType.WAYPOINT);
       waypoint.setCoords(new Geopoint(originalCoords));
       cache.addWaypoint(waypoint);
       cache.setUserModifiedCoords(true);
@@ -229,7 +229,7 @@
       String[] wp;
       for (int j=1; j < wpItems.length; j++) {
         wp=wpItems[j].split("<td");
-        final String name=BaseUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,res != null ? res.getString(R.string.waypoint) : null,true);
+        final String name=BaseUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,res != null ? res.getString(R.string.waypoint) : "res = null",true);
         final String resulttype=BaseUtils.getMatch(wp[3],GCConstants.PATTERN_WPTYPE,null);
         final cgWaypoint waypoint=new cgWaypoint(name,WaypointType.findById(resulttype));
         waypoint.setPrefix(BaseUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));
@@ -250,6 +250,6 @@
   }
   cache.parseWaypointsFromNote();
   cache.setLogs(loadLogsFromDetails(page,cache,false,true));
-  parseResult.cacheList.add(cache);
-  return parseResult;
+  searchResult.addCache(cache);
+  return searchResult;
 }

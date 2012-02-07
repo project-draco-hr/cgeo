@@ -3,24 +3,17 @@
     return null;
   }
   init();
-  Cursor cursor=null;
-  String cacheid=null;
   try {
-    cursor=databaseRO.query(dbTableCaches,new String[]{"cacheid"},"geocode = ?",new String[]{geocode},null,null,null,"1");
-    if (cursor != null) {
-      int index=0;
-      if (cursor.getCount() > 0) {
-        cursor.moveToFirst();
-        index=cursor.getColumnIndex("cacheid");
-        cacheid=cursor.getString(index);
-      }
+    final SQLiteStatement description=getStatementCacheId();
+synchronized (description) {
+      description.bindString(1,geocode);
+      return description.simpleQueryForString();
     }
   }
- catch (  Exception e) {
-    Log.e(Settings.tag,"cgData.getCacheidForGeocode: " + e.toString());
+ catch (  SQLiteDoneException e) {
   }
-  if (cursor != null) {
-    cursor.close();
+catch (  Exception e) {
+    Log.e(Settings.tag,"cgData.getCacheidForGeocode",e);
   }
-  return cacheid;
+  return null;
 }

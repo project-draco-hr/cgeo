@@ -1,6 +1,6 @@
 {
   try {
-    final StatusCode status=cgBase.postLog(app,geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
+    final StatusCode status=cgBase.postLog(geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
     if (status == StatusCode.NO_ERROR) {
       final cgLog logNow=new cgLog();
       logNow.author=Settings.getUsername();
@@ -17,12 +17,18 @@
           cache.setFound(true);
         }
       }
+      if (cache != null) {
+        app.saveCache(cache,EnumSet.of(SaveFlag.SAVECACHE));
+      }
+ else {
+        app.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVECACHE));
+      }
     }
     if (status == StatusCode.NO_ERROR) {
       app.clearLogOffline(geocode);
     }
     if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-      cgBase.postTweetCache(app,geocode);
+      cgBase.postTweetCache(geocode);
     }
     if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
       GCVote.setRating(cache,rating);

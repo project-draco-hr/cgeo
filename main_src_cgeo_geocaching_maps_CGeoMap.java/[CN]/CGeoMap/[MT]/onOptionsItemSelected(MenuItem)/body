@@ -89,12 +89,11 @@ mapView.repaintRequired(overlayCaches);
 return true;
 case MENU_AS_LIST:
 {
-final SearchResult search=new SearchResult();
+final SearchResult searchResult=new SearchResult();
 search.totalCnt=caches.size();
 for (cgCache cache : caches) {
-search.addGeocode(cache.getGeocode());
+searchResult.addCache(cache);
 }
-app.addSearch(caches,0);
 cgeocaches.startActivityMap(activity,search);
 return true;
 }

@@ -10,7 +10,7 @@
       menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
     }
     boolean hasSelection=adapter != null && adapter.getChecked() > 0;
-    boolean isNonDefaultList=listId != 1;
+    boolean isNonDefaultList=listId != StoredList.STANDARD_LIST_ID;
     if (type == CacheListType.OFFLINE) {
       if (hasSelection) {
         menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked()+ ")");

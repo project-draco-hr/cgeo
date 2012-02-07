@@ -16,9 +16,8 @@
     cache1.setListId(listId1);
     cache2.setDetailed(true);
     cache2.setListId(listId1);
-    SearchResult searchResult=new SearchResult();
-    app.addCacheToSearch(searchResult,cache1);
-    app.addCacheToSearch(searchResult,cache2);
+    app.saveCache(cache1,LoadFlags.SAVEALL);
+    app.saveCache(cache2,LoadFlags.SAVEALL);
     assertTrue(app.getAllStoredCachesCount(false,CacheType.ALL,null) >= 2);
     assertEquals(1,app.renameList(listId1,"cgData Test (renamed)"));
     StoredList list1=app.getList(listId1);
@@ -26,16 +25,16 @@
     app.moveToList(cache1.getGeocode(),listId2);
     assertEquals(1,app.getAllStoredCachesCount(false,CacheType.ALL,listId2));
     assertTrue(app.removeList(listId1));
-    assertTrue(app.markDropped(cache2.getGeocode()));
+    app.markDropped(cache2.getGeocode());
     app.markStored(cache2.getGeocode(),listId2);
     StoredList list2=app.getList(listId2);
-    app.dropStored(listId2);
+    app.dropList(listId2);
   }
   finally {
-    List<String> geocodes=new ArrayList<String>();
+    Set<String> geocodes=new HashSet<String>();
     geocodes.add(cache1.getGeocode());
     geocodes.add(cache2.getGeocode());
-    app.dropCaches(geocodes);
+    app.removeCaches(geocodes,LoadFlags.REMOVEALL);
     app.removeList(listId1);
     app.removeList(listId2);
   }

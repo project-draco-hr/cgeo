@@ -3,15 +3,15 @@
   try {
     MockedCache cache=new GC1ZXX2();
     deleteCacheFromDBAndLogout(cache.getGeocode());
-    ParseResult search=cgBase.searchByGeocode(cache.getGeocode(),null,0,true,null);
+    SearchResult search=cgBase.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
     assertNotNull(search);
     assertEquals(1,search.getGeocodes().size());
     assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-    cgCache searchedCache=cgBase.getFirstElementFromSet(search.cacheList);
+    cgCache searchedCache=search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
     assertNull(searchedCache.getCoords());
     cache=new GC2JVEH();
     deleteCacheFromDBAndLogout(cache.getGeocode());
-    search=cgBase.searchByGeocode(cache.getGeocode(),null,0,true,null);
+    search=cgBase.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
     assertNotNull(search);
     assertEquals(0,search.getGeocodes().size());
   }

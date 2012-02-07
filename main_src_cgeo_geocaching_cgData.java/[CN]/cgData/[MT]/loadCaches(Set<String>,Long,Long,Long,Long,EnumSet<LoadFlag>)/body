@@ -1,32 +1,16 @@
 {
-  init();
-  if ((geocodes != null && geocodes.size() > 0) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
+  final Set<cgCache> caches=new HashSet<cgCache>();
+  if (CollectionUtils.isEmpty(geocodes)) {
+    return caches;
+  }
+  if (CollectionUtils.isNotEmpty(geocodes) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
     throw new IllegalArgumentException("Please use only one parameter");
   }
-  StringBuilder where=new StringBuilder();
+  Log.d(Settings.tag,"cgData.loadCaches(" + geocodes.toString() + ") from DB");
+  init();
   Cursor cursor=null;
-  final Set<cgCache> caches=new HashSet<cgCache>();
   try {
-    if (geocodes != null && geocodes.size() > 0) {
-      StringBuilder all=new StringBuilder();
-      for (      Object one : geocodes) {
-        if (all.length() > 0) {
-          all.append(", ");
-        }
-        all.append('"');
-        all.append((String)one);
-        all.append('"');
-      }
-      if (where.length() > 0) {
-        where.append(" and ");
-      }
-      where.append("geocode in (");
-      where.append(all);
-      where.append(')');
-    }
- else {
-      return caches;
-    }
+    StringBuilder where=cgData.whereGeocodeIn(geocodes);
     if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
       double latMin=(centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
       double latMax=(centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -61,7 +45,7 @@
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();
         do {
-          cgCache cache=createCacheFromDatabaseContent(cursor);
+          cgCache cache=cgData.createCacheFromDatabaseContent(cursor);
           if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
             cache.setAttributes(loadAttributes(cache.getGeocode()));
           }
@@ -107,7 +91,7 @@
             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
           }
           cache.addStorageLocation(StorageLocation.DATABASE);
-          cgeoapplication.putCacheInCache(cache);
+          cacheCache.putCacheInCache(cache);
           caches.add(cache);
         }
  while (cursor.moveToNext());
@@ -115,7 +99,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(Settings.tag,"cgData.loadCaches: " + e.toString());
+    Log.e(Settings.tag,"cgData.getCaches: " + e.toString());
   }
   if (cursor != null) {
     cursor.close();

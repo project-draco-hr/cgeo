@@ -1,16 +1,16 @@
 {
   boolean status=false;
-  if (id < 10) {
+  if (listId < 10) {
     return status;
   }
   init();
   databaseRW.beginTransaction();
   try {
-    int cnt=databaseRW.delete(dbTableLists,"_id = " + (id - 10),null);
+    int cnt=databaseRW.delete(dbTableLists,"_id = " + (listId - 10),null);
     if (cnt > 0) {
       ContentValues values=new ContentValues();
       values.put("reason",1);
-      databaseRW.update(dbTableCaches,values,"reason = " + id,null);
+      databaseRW.update(dbTableCaches,values,"reason = " + listId,null);
       status=true;
     }
     databaseRW.setTransactionSuccessful();

@@ -1,9 +1,12 @@
 {
   if (StringUtils.isBlank(geocode)) {
-    return null;
+    throw new IllegalArgumentException("geocode must not be empty");
   }
   Set<String> geocodes=new HashSet<String>();
   geocodes.add(geocode);
   Set<cgCache> caches=loadCaches(geocodes,loadFlags);
-  return cgBase.getFirstElementFromSet(caches);
+  if (caches != null && caches.size() >= 1) {
+    return (cgCache)caches.toArray()[0];
+  }
+  return null;
 }

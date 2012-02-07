@@ -1,6 +1,3 @@
 {
-  if (CollectionUtils.isEmpty(geocodes)) {
-    return null;
-  }
-  return storage.getBounds(geocodes.toArray());
+  return storage.getBounds(geocodes);
 }

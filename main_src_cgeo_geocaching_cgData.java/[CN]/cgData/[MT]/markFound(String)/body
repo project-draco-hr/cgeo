@@ -3,16 +3,24 @@
     return false;
   }
   init();
+  boolean result=false;
+  databaseRW.beginTransaction();
   try {
     ContentValues values=new ContentValues();
     values.put("found",1);
     int rows=databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{geocode});
     if (rows > 0) {
-      return true;
+      cgCache cache=cacheCache.getCacheFromCache(geocode);
+      if (cache != null) {
+        cache.setFound(true);
+        cacheCache.putCacheInCache(cache);
+      }
+      result=true;
     }
+    databaseRW.setTransactionSuccessful();
   }
- catch (  Exception e) {
-    Log.e(Settings.tag,"cgData.markFound: " + e.toString());
+  finally {
+    databaseRW.endTransaction();
   }
-  return false;
+  return result;
 }

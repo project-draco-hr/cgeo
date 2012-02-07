@@ -11,7 +11,7 @@
     }
     searchToUse=new SearchResult(geocodes);
   }
-  int count=SearchResult.getCount(searchToUse);
+  int count=searchToUse.getCount();
   String mapTitle=title;
   if (count > 0) {
     mapTitle=title + " [" + count+ "]";

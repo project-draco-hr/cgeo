@@ -1,5 +1,6 @@
 {
-  if (geocode != null && cachesCache.containsKey(geocode)) {
-    cachesCache.remove(geocode);
+  if (StringUtils.isBlank(geocode)) {
+    throw new IllegalArgumentException("geocode must not be empty");
   }
+  cachesCache.remove(geocode);
 }

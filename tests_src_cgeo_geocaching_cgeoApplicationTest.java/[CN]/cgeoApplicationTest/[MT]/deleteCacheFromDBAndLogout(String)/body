@@ -1,6 +1,5 @@
 {
-  cgeoapplication.getInstance().dropCaches(Arrays.asList(geocode));
-  cgeoapplication.removeCacheFromCache(geocode);
+  cgeoapplication.getInstance().removeCache(geocode,LoadFlags.REMOVEALL);
   cgBase.logout();
   Settings.setLogin("c:geo","c:geo");
 }

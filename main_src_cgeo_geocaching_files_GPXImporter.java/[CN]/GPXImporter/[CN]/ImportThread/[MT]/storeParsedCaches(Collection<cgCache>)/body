@@ -3,13 +3,14 @@
   final cgeoapplication app=cgeoapplication.getInstance();
   int storedCaches=0;
   for (  cgCache cache : caches) {
-    cgeoapplication.removeCacheFromCache(cache.getGeocode());
-    app.addCacheToSearch(search,cache);
-    cgeoapplication.removeCacheFromCache(cache.getGeocode());
+    search.addCache(cache);
+    if (app.saveCache(cache,EnumSet.of(SaveFlag.SAVEDB))) {
+      storedCaches++;
+    }
     if (progressHandler.isCancelled()) {
       throw new CancellationException();
     }
-    progressHandler.sendMessage(progressHandler.obtainMessage(0,++storedCaches,0));
+    progressHandler.sendMessage(progressHandler.obtainMessage(0,storedCaches,0));
   }
   return search;
 }

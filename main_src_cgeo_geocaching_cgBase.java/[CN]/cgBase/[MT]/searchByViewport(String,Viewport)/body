@@ -7,12 +7,11 @@
     Log.e(Settings.tag,"cgeoBase.searchByViewport: No data from server");
     return null;
   }
-  final ParseResult parseResult=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
-  if (parseResult == null || CollectionUtils.isEmpty(parseResult.cacheList)) {
+  final SearchResult searchResult=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
+  if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
     Log.e(Settings.tag,"cgeoBase.searchByViewport: No cache parsed");
     return null;
   }
-  final ParseResult search=ParseResult.filterParseResults(parseResult,Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType());
-  cgeoapplication.getInstance().addSearch(search.cacheList,0);
+  final SearchResult search=searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType(),StoredList.TEMPORARY_LIST_ID);
   return search;
 }

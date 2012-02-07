@@ -6,8 +6,8 @@
     return;
   }
   boolean enableMore=type != CacheListType.OFFLINE && cacheList != null && cacheList.size() < MAX_LIST_ITEMS;
-  if (enableMore) {
-    final int count=SearchResult.getTotal(search);
+  if (enableMore && search != null) {
+    final int count=search.getTotal();
     enableMore=enableMore && count > 0 && cacheList.size() < count;
   }
   if (enableMore) {

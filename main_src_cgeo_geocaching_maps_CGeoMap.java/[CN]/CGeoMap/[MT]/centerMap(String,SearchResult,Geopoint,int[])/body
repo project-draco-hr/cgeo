@@ -16,7 +16,9 @@
         viewport=app.getBounds(geocodeCenter);
       }
  else {
-        viewport=app.getBounds(searchCenter);
+        if (searchCenter != null) {
+          viewport=app.getBounds(searchCenter.getGeocodes());
+        }
       }
       if (viewport == null || viewport.size() < 5) {
         return;

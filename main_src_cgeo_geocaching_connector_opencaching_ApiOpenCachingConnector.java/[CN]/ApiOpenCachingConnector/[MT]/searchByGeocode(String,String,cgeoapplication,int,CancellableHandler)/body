@@ -3,9 +3,8 @@
   if (cache == null) {
     return null;
   }
-  final ParseResult parseResult=new ParseResult();
-  parseResult.cacheList.add(cache);
-  final ParseResult search=ParseResult.filterParseResults(parseResult,false,false,Settings.getCacheType());
-  app.addSearch(search.cacheList,listId);
+  final SearchResult searchResult=new SearchResult();
+  searchResult.addCache(cache);
+  final SearchResult search=searchResult.filterSearchResults(false,false,Settings.getCacheType(),listId);
   return search;
 }

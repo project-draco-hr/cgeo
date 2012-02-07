@@ -26,7 +26,7 @@
 switch (type) {
 case OFFLINE:
     listId=Settings.getLastList();
-  if (listId <= 0) {
+  if (listId <= StoredList.TEMPORARY_LIST_ID) {
     listId=StoredList.STANDARD_LIST_ID;
     title=res.getString(R.string.stored_caches_button);
   }
@@ -118,7 +118,7 @@ title=res.getString(R.string.map_map);
 setTitle(title);
 showProgress(true);
 SearchResult result=extras != null ? (SearchResult)extras.get("search") : null;
-search=new ParseResult(result);
+search=new SearchResult(result);
 loadCachesHandler.sendMessage(Message.obtain());
 break;
 default :
