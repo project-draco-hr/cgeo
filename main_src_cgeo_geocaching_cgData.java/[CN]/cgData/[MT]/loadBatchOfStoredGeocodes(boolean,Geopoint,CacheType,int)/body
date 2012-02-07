@@ -1,4 +1,10 @@
 {
+  if (coords == null) {
+    throw new IllegalArgumentException("coords must not be null");
+  }
+  if (cacheType == null) {
+    throw new IllegalArgumentException("cacheType must not be null");
+  }
   init();
   Set<String> geocodes=new HashSet<String>();
   StringBuilder specifySql=new StringBuilder();

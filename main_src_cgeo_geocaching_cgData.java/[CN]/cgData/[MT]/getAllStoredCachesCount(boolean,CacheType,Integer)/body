@@ -1,4 +1,7 @@
 {
+  if (cacheType == null) {
+    throw new IllegalArgumentException("cacheType must not be null");
+  }
   String listSql=null;
   String listSqlW=null;
   if (list == null) {

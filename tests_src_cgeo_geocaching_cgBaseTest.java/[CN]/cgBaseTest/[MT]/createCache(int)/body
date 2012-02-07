@@ -1,5 +1,5 @@
 {
-  final MockedCache mockedCache=RegExPerformanceTest.MOCKED_CACHES.get(0);
+  final MockedCache mockedCache=RegExPerformanceTest.MOCKED_CACHES.get(index);
   Settings.setGcCustomDate(mockedCache.getDateFormat());
   final ParseResult parseResult=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
   return cgBase.getFirstElementFromSet(parseResult.cacheList);
