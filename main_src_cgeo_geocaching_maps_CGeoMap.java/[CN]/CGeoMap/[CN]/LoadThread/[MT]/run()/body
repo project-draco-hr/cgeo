@@ -27,7 +27,7 @@
       working=false;
       return;
     }
-    caches=search.getCachesFromSearchResult(LoadFlags.LOADWAYPOINTS);
+    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOADWAYPOINTS));
     if (live && Settings.isLiveMap()) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();

@@ -46,7 +46,7 @@
       return;
     }
     if (search != null) {
-      caches=search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
+      caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB));
     }
     if (stop) {
       displayHandler.sendEmptyMessage(UPDATE_TITLE);
