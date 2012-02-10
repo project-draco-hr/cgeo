@@ -8,8 +8,11 @@
       working=false;
       return;
     }
-    if (fromDetailIntent || searchIntent != null) {
+    if (fromDetailIntent || searchIntent != null || geocodeIntent != null) {
       search=new SearchResult(searchIntent);
+      if (geocodeIntent != null) {
+        search.addGeocode(geocodeIntent);
+      }
     }
  else {
       if (!live || !Settings.isLiveMap()) {

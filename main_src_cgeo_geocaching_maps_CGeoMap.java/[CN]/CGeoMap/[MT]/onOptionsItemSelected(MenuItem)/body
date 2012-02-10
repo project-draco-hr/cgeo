@@ -120,6 +120,7 @@ mapState[1]=mapCenter.getLongitudeE6();
 mapState[2]=mapView.getMapZoomLevel();
 mapState[3]=followMyLocation ? 1 : 0;
 mapIntent.putExtra(EXTRAS_MAPSTATE,mapState);
+mapIntent.putExtra(EXTRAS_MAP_TITLE,mapTitle);
 activity.startActivity(mapIntent);
 }
 return true;
