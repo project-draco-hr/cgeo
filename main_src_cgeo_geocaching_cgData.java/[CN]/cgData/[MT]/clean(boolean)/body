@@ -8,7 +8,7 @@
       cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null);
     }
  else {
-      long timestamp=System.currentTimeMillis() - (3 * 24 * 60* 60* 1000);
+      long timestamp=System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED;
       String timestampString=Long.toString(timestamp);
       cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",new String[]{timestampString,timestampString,timestampString},null,null,null,null);
     }

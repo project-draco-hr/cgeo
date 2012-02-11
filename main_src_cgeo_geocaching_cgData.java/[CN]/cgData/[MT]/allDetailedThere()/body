@@ -3,7 +3,7 @@
   Cursor cursor=null;
   List<String> list=new ArrayList<String>();
   try {
-    long timestamp=System.currentTimeMillis() - (3 * 24 * 60* 60* 1000);
+    long timestamp=System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED;
     cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"(detailed = 1 and detailedupdate > ?) or reason > 0",new String[]{Long.toString(timestamp)},null,null,"detailedupdate desc","100");
     if (cursor != null) {
       int index=0;

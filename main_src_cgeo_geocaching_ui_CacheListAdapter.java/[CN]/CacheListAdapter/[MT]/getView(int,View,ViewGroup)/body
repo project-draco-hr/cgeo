@@ -223,7 +223,7 @@
     infos.add(StringUtils.upperCase(cache.getGeocode()));
     infos.add(cgBase.formatDate(cache.getVisitedDate()));
     infos.add(cgBase.formatTime(cache.getVisitedDate()));
-    holder.info.setText(StringUtils.join(infos,SEPARATOR));
+    holder.info.setText(StringUtils.join(infos,Constants.SEPARATOR));
   }
  else {
     ArrayList<String> infos=new ArrayList<String>();
@@ -248,7 +248,7 @@
     if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {
       infos.add(res.getString(R.string.cache_offline));
     }
-    holder.info.setText(StringUtils.join(infos,SEPARATOR));
+    holder.info.setText(StringUtils.join(infos,Constants.SEPARATOR));
   }
   return v;
 }
