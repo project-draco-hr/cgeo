@@ -8,7 +8,7 @@
   databaseRW.beginTransaction();
   try {
     if (drop) {
-      databaseRW.delete(dbTableWaypoints,"geocode = ? and type <> ?",new String[]{geocode,"own"});
+      databaseRW.delete(dbTableWaypoints,"geocode = ? and type <> ? and own = 0",new String[]{geocode,"own"});
     }
     if (!waypoints.isEmpty()) {
       ContentValues values=new ContentValues();
@@ -27,6 +27,7 @@
         values.put("latlon",oneWaypoint.getLatlon());
         putCoords(values,oneWaypoint.getCoords());
         values.put("note",oneWaypoint.getNote());
+        values.put("own",oneWaypoint.isUserDefined() ? 1 : 0);
         final long rowId=databaseRW.insert(dbTableWaypoints,null,values);
         oneWaypoint.setId((int)rowId);
       }
