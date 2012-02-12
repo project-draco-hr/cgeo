@@ -8,7 +8,7 @@
   if (cgBase.isActualLoginStatus()) {
     cgBase.setActualUserName(BaseUtils.getMatch(page,GCConstants.PATTERN_LOGIN_NAME,true,"???"));
     cgBase.setActualMemberStatus(BaseUtils.getMatch(page,GCConstants.PATTERN_MEMBER_STATUS,true,"???"));
-    cgBase.setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0")));
+    cgBase.setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll(",","")));
     return true;
   }
   cgBase.setActualLoginStatus(BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
