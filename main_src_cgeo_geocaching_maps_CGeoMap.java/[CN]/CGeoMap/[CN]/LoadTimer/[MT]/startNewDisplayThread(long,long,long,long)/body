@@ -1,7 +1,12 @@
 {
-  if (displayThread != null && displayThread.isWorking()) {
+  if (displayThread.isWorking()) {
     displayThread.stopIt();
+    displayThread=null;
+    displayThread=new DisplayThread(centerLat,centerLon,spanLat,spanLon);
+    displayThread.start();
   }
-  displayThread=new DisplayThread(centerLat,centerLon,spanLat,spanLon);
-  displayThread.start();
+ else {
+    displayThread.setCenterSpan(centerLat,centerLon,spanLat,spanLon);
+    displayThread.run();
+  }
 }

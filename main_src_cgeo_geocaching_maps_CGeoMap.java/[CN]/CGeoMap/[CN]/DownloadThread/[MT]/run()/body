@@ -1,12 +1,6 @@
 {
   try {
-    stop=false;
     working=true;
-    if (stop) {
-      displayHandler.sendEmptyMessage(UPDATE_TITLE);
-      working=false;
-      return;
-    }
     double lat1=(centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
     double lat2=(centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
     double lon1=(centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
@@ -17,13 +11,14 @@
     double lonMax=Math.max(lon1,lon2);
     int count=0;
     do {
+      if (stop) {
+        throw new ThreadDeath();
+      }
       if (token == null) {
         token=cgBase.getMapUserToken(noMapTokenHandler);
       }
       if (stop) {
-        displayHandler.sendEmptyMessage(UPDATE_TITLE);
-        working=false;
-        return;
+        throw new ThreadDeath();
       }
       final Viewport viewport=new Viewport(new Geopoint(latMin,lonMin),new Geopoint(latMax,lonMax));
       search=cgBase.searchByViewport(token,viewport);
@@ -41,23 +36,24 @@
     }
  while (count < 2);
     if (stop) {
-      displayHandler.sendEmptyMessage(UPDATE_TITLE);
-      working=false;
-      return;
+      throw new ThreadDeath();
     }
     if (search != null) {
       caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB));
     }
     if (stop) {
-      displayHandler.sendEmptyMessage(UPDATE_TITLE);
-      working=false;
-      return;
+      throw new ThreadDeath();
     }
     if (loadTimer != null) {
       loadTimer.startNewDisplayThread(centerLat,centerLon,spanLat,spanLon);
     }
   }
-  finally {
+ catch (  ThreadDeath e) {
+    Log.d(Settings.tag,"DownloadThread stopped");
+    displayHandler.sendEmptyMessage(UPDATE_TITLE);
+  }
+ finally {
+    stop=false;
     working=false;
   }
 }

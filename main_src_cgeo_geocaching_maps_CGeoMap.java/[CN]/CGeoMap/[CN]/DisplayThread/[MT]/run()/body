@@ -1,20 +1,15 @@
 {
   try {
-    stop=false;
     working=true;
     if (mapView == null || caches == null) {
-      displayHandler.sendEmptyMessage(UPDATE_TITLE);
-      working=false;
-      return;
+      throw new ThreadDeath();
     }
     final List<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
     final List<CachesOverlayItemImpl> items=new ArrayList<CachesOverlayItemImpl>();
     if (!cachesProtected.isEmpty()) {
       for (      cgCache cacheOne : cachesProtected) {
         if (stop) {
-          displayHandler.sendEmptyMessage(UPDATE_TITLE);
-          working=false;
-          return;
+          throw new ThreadDeath();
         }
         if (cacheOne.getCoords() == null) {
           continue;
@@ -33,9 +28,7 @@
       displayHandler.sendEmptyMessage(INVALIDATE_MAP);
       cachesCnt=cachesProtected.size();
       if (stop) {
-        displayHandler.sendEmptyMessage(UPDATE_TITLE);
-        working=false;
-        return;
+        throw new ThreadDeath();
       }
     }
  else {
@@ -45,7 +38,12 @@
     cachesProtected.clear();
     displayHandler.sendEmptyMessage(UPDATE_TITLE);
   }
-  finally {
+ catch (  ThreadDeath e) {
+    Log.d(Settings.tag,"DisplayThread stopped");
+    displayHandler.sendEmptyMessage(UPDATE_TITLE);
+  }
+ finally {
+    stop=false;
     working=false;
   }
 }

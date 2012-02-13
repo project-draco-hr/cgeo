@@ -9,7 +9,7 @@
   }
   final SearchResult searchResult=parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(),page);
   if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-    Log.e(Settings.tag,"cgeoBase.searchByViewport: No cache parsed");
+    Log.e(Settings.tag,"cgeoBase.searchByViewport: No cache parsed for viewport " + viewport);
     return null;
   }
   final SearchResult search=searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(),Settings.isExcludeMyCaches(),Settings.getCacheType(),StoredList.TEMPORARY_LIST_ID);
