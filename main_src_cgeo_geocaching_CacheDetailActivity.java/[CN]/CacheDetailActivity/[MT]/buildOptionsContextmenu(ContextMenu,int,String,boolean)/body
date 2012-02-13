@@ -2,6 +2,9 @@
   menu.setHeaderTitle(res.getString(R.string.options_context_menu_title));
   menu.add(viewId,1,0,copyPrompt);
   if (!copyOnly) {
+    if (clickedItemText.length() > TranslationUtils.translationTextLengthToWarn) {
+      showToast(res.getString(R.string.translate_length_warning));
+    }
     menu.add(viewId,2,0,res.getString(R.string.translate_to_sys_lang,Locale.getDefault().getDisplayLanguage()));
     if (Settings.isUseEnglish() && Locale.getDefault() != Locale.ENGLISH) {
       menu.add(viewId,3,0,res.getString(R.string.translate_to_english));

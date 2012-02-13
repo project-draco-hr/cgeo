@@ -2,23 +2,7 @@
   final int groupId=item.getGroupId();
   final int index=item.getItemId();
 switch (groupId) {
-case R.id.author:
 case R.id.value:
-    final int itemId=item.getItemId();
-switch (itemId) {
-case 1:
-    cgeocaches.startActivityOwner(this,contextMenuUser);
-  return true;
-case 2:
-cgeocaches.startActivityUserName(this,contextMenuUser);
-return true;
-case 3:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
-return true;
-default :
-break;
-}
-break;
 case R.id.shortdesc:
 case R.id.longdesc:
 case R.id.personalnote:
@@ -26,13 +10,13 @@ case R.id.hint:
 case R.id.log:
 switch (index) {
 case 1:
-ClipboardUtils.copyToClipboard(clickedItemText);
-return true;
+      ClipboardUtils.copyToClipboard(clickedItemText);
+    return true;
 case 2:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(TranslationUtils.buildTranslationURI(Locale.getDefault().getLanguage(),clickedItemText.toString()))));
+  TranslationUtils.startActivityTranslate(this,Locale.getDefault().getLanguage(),clickedItemText.toString());
 return true;
 case 3:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(TranslationUtils.buildTranslationURI(Locale.ENGLISH.getLanguage(),clickedItemText.toString()))));
+TranslationUtils.startActivityTranslate(this,Locale.ENGLISH.getLanguage(),clickedItemText.toString());
 return true;
 default :
 break;

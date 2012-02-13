@@ -91,7 +91,8 @@
     addCacheDetail(R.string.cache_location,cache.getLocation());
   }
   if (cache.getCoords() != null) {
-    addCacheDetail(R.string.cache_coordinates,cache.getCoords().toString()).setOnClickListener(new View.OnClickListener(){
+    TextView valueView=addCacheDetail(R.string.cache_coordinates,cache.getCoords().toString());
+    valueView.setOnClickListener(new View.OnClickListener(){
       private int position=0;
       private GeopointFormatter.Format[] availableFormats=new GeopointFormatter.Format[]{GeopointFormatter.Format.LAT_LON_DECMINUTE,GeopointFormatter.Format.LAT_LON_DECSECOND,GeopointFormatter.Format.LAT_LON_DECDEGREE};
       @Override public void onClick(      View view){
@@ -101,6 +102,7 @@
       }
     }
 );
+    registerForContextMenu(valueView);
   }
   if (cache.hasAttributes()) {
     new AttributeViewBuilder().fillView((LinearLayout)view.findViewById(R.id.attributes_innerbox));
