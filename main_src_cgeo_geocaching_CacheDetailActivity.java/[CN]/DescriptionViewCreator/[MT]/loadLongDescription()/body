@@ -4,4 +4,5 @@
   showDesc.setOnClickListener(null);
   view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
   new LoadDescriptionTask().execute(cache.getDescription(),view.findViewById(R.id.longdesc),view.findViewById(R.id.loading));
+  registerForContextMenu(view.findViewById(R.id.longdesc));
 }
