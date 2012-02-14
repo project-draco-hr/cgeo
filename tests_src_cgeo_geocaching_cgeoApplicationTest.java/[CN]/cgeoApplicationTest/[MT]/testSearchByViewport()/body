@@ -1,20 +1,22 @@
 {
-  GC2JVEH cache=new GC2JVEH();
-  final String token=cgBase.getMapUserToken(new Handler());
-  final Viewport viewport=new Viewport(cache.getCoords(),0.003,0.003);
-  final SearchResult search=cgBase.searchByViewport(token,viewport);
-  if (Settings.isPremiumMember()) {
-    assertNotNull(search);
-    if (search.error != null) {
-      if (search.getGeocodes().contains(cache.getGeocode())) {
-        assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords()));
-        assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
+  if (LIVEMAPENABLED) {
+    GC2JVEH cache=new GC2JVEH();
+    final String token=cgBase.getMapUserToken(new Handler());
+    final Viewport viewport=new Viewport(cache.getCoords(),0.003,0.003);
+    final SearchResult search=cgBase.searchByViewport(token,viewport);
+    if (Settings.isPremiumMember()) {
+      assertNotNull(search);
+      if (search.error != null) {
+        if (search.getGeocodes().contains(cache.getGeocode())) {
+          assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords()));
+          assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
+        }
       }
-    }
  else {
-      assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-      assertEquals(cache.getCoords().toString(),cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords().toString());
-      assertTrue(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
+        assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+        assertEquals(cache.getCoords().toString(),cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords().toString());
+        assertTrue(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
+      }
     }
   }
 }

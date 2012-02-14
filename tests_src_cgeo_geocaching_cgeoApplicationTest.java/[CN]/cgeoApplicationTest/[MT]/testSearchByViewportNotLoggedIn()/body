@@ -1,26 +1,28 @@
 {
-  ImmutablePair<String,String> login=Settings.getLogin();
-  try {
-    final String token=null;
-    MockedCache cache=new GC2CJPF();
-    deleteCacheFromDBAndLogout(cache.getGeocode());
-    Viewport viewport=new Viewport(cache.getCoords(),0.003,0.003);
-    SearchResult search=cgBase.searchByViewport(token,viewport);
-    assertNotNull(search);
-    assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-    Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
-    Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords());
-    assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords(),1e-3));
-    assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
-    cache=new GC2JVEH();
-    deleteCacheFromDBAndLogout(cache.getGeocode());
-    viewport=new Viewport(cache.getCoords(),0.003,0.003);
-    search=cgBase.searchByViewport(token,viewport);
-    assertNotNull(search);
-    assertFalse(search.getGeocodes().contains(cache.getGeocode()));
-  }
+  if (LIVEMAPENABLED) {
+    ImmutablePair<String,String> login=Settings.getLogin();
+    try {
+      final String token=null;
+      MockedCache cache=new GC2CJPF();
+      deleteCacheFromDBAndLogout(cache.getGeocode());
+      Viewport viewport=new Viewport(cache.getCoords(),0.003,0.003);
+      SearchResult search=cgBase.searchByViewport(token,viewport);
+      assertNotNull(search);
+      assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+      Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
+      Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords());
+      assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords(),1e-3));
+      assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
+      cache=new GC2JVEH();
+      deleteCacheFromDBAndLogout(cache.getGeocode());
+      viewport=new Viewport(cache.getCoords(),0.003,0.003);
+      search=cgBase.searchByViewport(token,viewport);
+      assertNotNull(search);
+      assertFalse(search.getGeocodes().contains(cache.getGeocode()));
+    }
   finally {
-    Settings.setLogin(login.left,login.right);
-    cgBase.login();
+      Settings.setLogin(login.left,login.right);
+      cgBase.login();
+    }
   }
 }
