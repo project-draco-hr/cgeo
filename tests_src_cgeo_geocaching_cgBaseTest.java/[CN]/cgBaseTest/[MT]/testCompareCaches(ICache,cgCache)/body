@@ -23,19 +23,16 @@
   Assert.assertEquals(expected.getPersonalNote(),actual.getPersonalNote());
   Assert.assertEquals(expected.isFound(),actual.isFound());
   Assert.assertEquals(expected.isFavorite(),actual.isFavorite());
+  System.out.println(expected.getFavoritePoints() + " " + actual.getFavoritePoints());
   Assert.assertTrue(expected.getFavoritePoints() <= actual.getFavoritePoints());
   Assert.assertEquals(expected.isWatchlist(),actual.isWatchlist());
-  Date date1=expected.getHiddenDate();
-  Date date2=actual.getHiddenDate();
-  Assert.assertEquals(date1.toString(),date2.toString());
+  Assert.assertEquals(expected.getHiddenDate().toString(),actual.getHiddenDate().toString());
   for (  String attribute : expected.getAttributes()) {
     Assert.assertTrue(actual.getAttributes().contains(attribute));
   }
   for (  LogType logType : expected.getLogCounts().keySet()) {
     Assert.assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
   }
-  int actualInventorySize=null != actual.getInventory() ? actual.getInventory().size() : 0;
-  int expectedInventorySize=null != expected.getInventory() ? expected.getInventory().size() : 0;
   int actualSpoilersSize=null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
   int expectedSpoilersSize=null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
   Assert.assertEquals(expectedSpoilersSize,actualSpoilersSize);
