@@ -37,9 +37,14 @@
   ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,wayPointNames);
   textView.setAdapter(adapter);
   if (id > 0) {
+    Spinner waypointTypeSelector=(Spinner)findViewById(R.id.type);
+    waypointTypeSelector.setVisibility(View.GONE);
     waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
     waitDialog.setCancelable(true);
     (new loadWaypoint()).start();
+  }
+ else {
+    initializeWaypointTypeSelector();
   }
   disableSuggestions((EditText)findViewById(R.id.distance));
 }

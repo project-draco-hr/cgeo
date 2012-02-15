@@ -107,7 +107,7 @@
     }
   }
   holder.text.setText(cache.getNameSp(),TextView.BufferType.SPANNABLE);
-  int hashCode=new HashCodeBuilder().append(cache.getType()).append(cache.hasUserModifiedCoords()).toHashCode();
+  int hashCode=new HashCodeBuilder().append(cache.getType()).append(cache.hasUserModifiedCoords() || cache.hasFinalDefined()).toHashCode();
   if (gcIconDrawables.containsKey(hashCode)) {
     holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(hashCode),null,null,null);
   }

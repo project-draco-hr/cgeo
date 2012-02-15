@@ -1,8 +1,12 @@
 {
   this.waypoints=waypoints;
+  finalDefined=false;
   if (waypoints != null) {
     for (    cgWaypoint waypoint : waypoints) {
       waypoint.setGeocode(geocode);
+      if (isFinalWithCoords(waypoint)) {
+        finalDefined=true;
+      }
     }
   }
 }

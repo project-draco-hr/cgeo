@@ -2,7 +2,7 @@
   int index;
   cgCache cache=new cgCache();
   if (cacheColumnIndex == null) {
-    int[] local_cci=new int[40];
+    int[] local_cci=new int[41];
     local_cci[0]=cursor.getColumnIndex("updated");
     local_cci[1]=cursor.getColumnIndex("reason");
     local_cci[2]=cursor.getColumnIndex("detailed");
@@ -43,6 +43,7 @@
     local_cci[37]=cursor.getColumnIndex("coordsChanged");
     local_cci[38]=cursor.getColumnIndex("latitude");
     local_cci[39]=cursor.getColumnIndex("longitude");
+    local_cci[40]=cursor.getColumnIndex("finalDefined");
     cacheColumnIndex=local_cci;
   }
   cache.setUpdated(cursor.getLong(cacheColumnIndex[0]));
@@ -105,6 +106,7 @@
   cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
   cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
   cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
+  cache.setFinalDefined(cursor.getInt(cacheColumnIndex[40]) > 0);
   Log.d(Settings.tag,"Loading " + cache.toString() + " ("+ cache.getListId()+ ") from DB");
   return cache;
 }

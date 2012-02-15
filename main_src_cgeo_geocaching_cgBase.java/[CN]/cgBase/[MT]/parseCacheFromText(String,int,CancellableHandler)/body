@@ -196,7 +196,7 @@
   try {
     final String originalCoords=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON_ORIG,false,null);
     if (null != originalCoords) {
-      final cgWaypoint waypoint=new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "res = null",WaypointType.WAYPOINT);
+      final cgWaypoint waypoint=new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "res = null",WaypointType.WAYPOINT,false);
       waypoint.setCoords(new Geopoint(originalCoords));
       cache.addWaypoint(waypoint);
       cache.setUserModifiedCoords(true);
@@ -231,7 +231,7 @@
         wp=wpItems[j].split("<td");
         final String name=BaseUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,res != null ? res.getString(R.string.waypoint) : "res = null",true);
         final String resulttype=BaseUtils.getMatch(wp[3],GCConstants.PATTERN_WPTYPE,null);
-        final cgWaypoint waypoint=new cgWaypoint(name,WaypointType.findById(resulttype));
+        final cgWaypoint waypoint=new cgWaypoint(name,WaypointType.findById(resulttype),false);
         waypoint.setPrefix(BaseUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));
         waypoint.setLookup(BaseUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
         String latlon=Html.fromHtml(BaseUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();
