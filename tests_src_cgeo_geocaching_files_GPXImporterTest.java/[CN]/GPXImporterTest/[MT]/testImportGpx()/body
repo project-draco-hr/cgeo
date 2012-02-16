@@ -11,6 +11,6 @@
   assertEquals(GPXImporter.IMPORT_STEP_FINISHED,iMsg.next().what);
   SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
   assertEquals(Collections.singletonList("GC31J2H"),new ArrayList<String>(search.getGeocodes()));
-  cgCache cache=cgeoapplication.getInstance().loadCache("GC31J2H",LoadFlags.LOADCACHEORDB);
+  cgCache cache=cgeoapplication.getInstance().loadCache("GC31J2H",LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
 }

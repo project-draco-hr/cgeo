@@ -8,14 +8,14 @@
       assertNotNull(search);
       if (search.error != null) {
         if (search.getGeocodes().contains(cache.getGeocode())) {
-          assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords()));
-          assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
+          assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB).getCoords()));
+          assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB).isReliableLatLon());
         }
       }
  else {
         assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-        assertEquals(cache.getCoords().toString(),cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords().toString());
-        assertTrue(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
+        assertEquals(cache.getCoords().toString(),cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB).getCoords().toString());
+        assertTrue(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB).isReliableLatLon());
       }
     }
   }

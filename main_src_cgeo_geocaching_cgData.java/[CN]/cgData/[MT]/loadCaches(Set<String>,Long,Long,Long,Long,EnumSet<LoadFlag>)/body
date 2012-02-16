@@ -46,16 +46,16 @@
         cursor.moveToFirst();
         do {
           cgCache cache=cgData.createCacheFromDatabaseContent(cursor);
-          if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
+          if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
             cache.setAttributes(loadAttributes(cache.getGeocode()));
           }
-          if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {
+          if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
             final List<cgWaypoint> waypoints=loadWaypoints(cache.getGeocode());
             if (CollectionUtils.isNotEmpty(waypoints)) {
               cache.setWaypoints(waypoints);
             }
           }
-          if (loadFlags.contains(LoadFlag.LOADSPOILERS)) {
+          if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
             final List<cgImage> spoilers=loadSpoilers(cache.getGeocode());
             if (CollectionUtils.isNotEmpty(spoilers)) {
               if (cache.getSpoilers() == null) {
@@ -67,7 +67,7 @@
               cache.getSpoilers().addAll(spoilers);
             }
           }
-          if (loadFlags.contains(LoadFlag.LOADLOGS)) {
+          if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
             cache.setLogs(loadLogs(cache.getGeocode()));
             final Map<LogType,Integer> logCounts=loadLogCounts(cache.getGeocode());
             if (MapUtils.isNotEmpty(logCounts)) {
@@ -75,7 +75,7 @@
               cache.getLogCounts().putAll(logCounts);
             }
           }
-          if (loadFlags.contains(LoadFlag.LOADINVENTORY)) {
+          if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
             final List<cgTrackable> inventory=loadInventory(cache.getGeocode());
             if (CollectionUtils.isNotEmpty(inventory)) {
               if (cache.getInventory() == null) {
@@ -87,7 +87,7 @@
               cache.getInventory().addAll(inventory);
             }
           }
-          if (loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
+          if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
           }
           cache.addStorageLocation(StorageLocation.DATABASE);

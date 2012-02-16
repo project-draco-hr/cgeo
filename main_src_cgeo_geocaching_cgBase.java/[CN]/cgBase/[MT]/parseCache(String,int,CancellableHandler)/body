@@ -1,7 +1,7 @@
 {
   final SearchResult searchResult=parseCacheFromText(page,listId,handler);
   if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
-    final cgCache cache=searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+    final cgCache cache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     getExtraOnlineInfo(cache,page,handler);
     cache.setUpdated(System.currentTimeMillis());
     cache.setDetailedUpdate(cache.getUpdated());
@@ -11,7 +11,7 @@
     }
     sendLoadProgressDetail(handler,R.string.cache_dialog_offline_save_message);
     cache.setListId(StoredList.TEMPORARY_LIST_ID);
-    cgeoapplication.getInstance().saveCache(cache,EnumSet.of(SaveFlag.SAVEDB));
+    cgeoapplication.getInstance().saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
   }
   return searchResult;
 }

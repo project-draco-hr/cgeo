@@ -4,7 +4,7 @@
     if (origCache != null) {
       if (origCache.getListId() >= StoredList.STANDARD_LIST_ID || StringUtils.isBlank(origCache.getDescription())) {
         final SearchResult search=searchByGeocode(origCache.getGeocode(),null,listId,false,null);
-        cache=search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+        cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
       }
  else {
         cache=origCache;
@@ -12,7 +12,7 @@
     }
  else     if (StringUtils.isNotBlank(geocode)) {
       final SearchResult search=searchByGeocode(geocode,null,listId,false,null);
-      cache=search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+      cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     }
  else {
       cache=null;
@@ -58,7 +58,7 @@
       return;
     }
     cache.setListId(listId);
-    cgeoapplication.getInstance().saveCache(cache,EnumSet.of(SaveFlag.SAVEDB));
+    cgeoapplication.getInstance().saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
     if (handler != null) {
       handler.sendMessage(new Message());
     }

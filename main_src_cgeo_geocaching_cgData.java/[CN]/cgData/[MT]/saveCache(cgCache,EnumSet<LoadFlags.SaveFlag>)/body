@@ -2,14 +2,14 @@
   if (cache == null) {
     throw new IllegalArgumentException("cache must not be null");
   }
-  if (saveFlags.contains(SaveFlag.SAVECACHE)) {
+  if (saveFlags.contains(SaveFlag.SAVE_CACHE)) {
     cache.gatherMissingFrom(cacheCache.getCacheFromCache(cache.getGeocode()));
     cacheCache.putCacheInCache(cache);
   }
-  if (!saveFlags.contains(SaveFlag.SAVEDB)) {
+  if (!saveFlags.contains(SaveFlag.SAVE_DB)) {
     return true;
   }
-  boolean updateRequired=!cache.gatherMissingFrom(loadCache(cache.getGeocode(),LoadFlags.LOADALLDBONLY));
+  boolean updateRequired=!cache.gatherMissingFrom(loadCache(cache.getGeocode(),LoadFlags.LOAD_ALL_DB_ONLY));
   if ((!updateRequired || !cache.isDetailed()) && cache.getStorageLocation().contains(StorageLocation.DATABASE)) {
     return false;
   }

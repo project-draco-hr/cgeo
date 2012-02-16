@@ -2,7 +2,7 @@
   if (search == null) {
     return;
   }
-  cache=search.getFirstCacheFromResult(LoadFlags.LOADALLDBONLY);
+  cache=search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
   if (cache == null) {
     progress.dismiss();
     showToast(res.getString(R.string.err_detail_cache_find_some));

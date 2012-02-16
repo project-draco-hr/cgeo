@@ -183,7 +183,7 @@
   }
   if (Settings.getLoadDirImg()) {
     for (    String geocode : searchResult.getGeocodes()) {
-      cgCache oneCache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOADCACHEORDB);
+      cgCache oneCache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
       if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
         DirectionImage.getDrawable(oneCache.getGeocode(),oneCache.getDirectionImg());
       }
@@ -196,7 +196,7 @@
         final Map<String,GCVoteRating> ratings=GCVote.getRating(guids,null);
         if (MapUtils.isNotEmpty(ratings)) {
           for (          String geocode : searchResult.getGeocodes()) {
-            cgCache cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOADCACHEORDB);
+            cgCache cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
             if (ratings.containsKey(cache.getGuid())) {
               GCVoteRating rating=ratings.get(cache.getGuid());
               cache.setRating(rating.getRating());

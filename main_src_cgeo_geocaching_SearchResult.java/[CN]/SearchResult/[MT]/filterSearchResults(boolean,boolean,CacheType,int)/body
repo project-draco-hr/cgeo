@@ -2,7 +2,7 @@
   SearchResult result=new SearchResult(this);
   result.geocodes.clear();
   for (  final String geocode : geocodes) {
-    cgCache cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOADCACHEORDB);
+    cgCache cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
     final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwn() || cache.isFound())) || (cacheType != CacheType.ALL && cacheType != cache.getType());
     if (!excludeCache) {
       cache.setListId(listId);

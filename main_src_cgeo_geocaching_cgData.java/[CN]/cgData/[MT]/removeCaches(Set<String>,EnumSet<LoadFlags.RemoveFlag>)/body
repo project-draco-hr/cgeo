@@ -3,12 +3,12 @@
     return;
   }
   init();
-  if (removeFlags.contains(RemoveFlag.REMOVECACHE)) {
+  if (removeFlags.contains(RemoveFlag.REMOVE_CACHE)) {
     for (    final String geocode : geocodes) {
       cacheCache.removeCacheFromCache(geocode);
     }
   }
-  if (removeFlags.contains(RemoveFlag.REMOVEDB)) {
+  if (removeFlags.contains(RemoveFlag.REMOVE_DB)) {
     final ArrayList<String> quotedGeocodes=new ArrayList<String>(geocodes.size());
     for (    final String geocode : geocodes) {
       quotedGeocodes.add('"' + geocode + '"');

@@ -5,7 +5,7 @@
  else {
     refreshThread=null;
     try {
-      cache=search.getFirstCacheFromResult(LoadFlags.LOADALLDBONLY);
+      cache=search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
     }
  catch (    Exception e) {
       showToast(res.getString(R.string.err_refresh_failed));

@@ -10,9 +10,9 @@
       assertNotNull(search);
       assertTrue(search.getGeocodes().contains(cache.getGeocode()));
       Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
-      Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords());
-      assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).getCoords(),1e-3));
-      assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOADCACHEORDB).isReliableLatLon());
+      Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB).getCoords());
+      assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB).getCoords(),1e-3));
+      assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB).isReliableLatLon());
       cache=new GC2JVEH();
       deleteCacheFromDBAndLogout(cache.getGeocode());
       viewport=new Viewport(cache.getCoords(),0.003,0.003);

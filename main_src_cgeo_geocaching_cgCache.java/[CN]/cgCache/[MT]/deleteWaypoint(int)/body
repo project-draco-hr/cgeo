@@ -6,7 +6,7 @@
   if (waypoint.isUserDefined()) {
     waypoints.remove(index);
     cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-    cgeoapplication.getInstance().removeCache(geocode,EnumSet.of(RemoveFlag.REMOVECACHE));
+    cgeoapplication.getInstance().removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
     if (isFinalWithCoords(waypoint)) {
       finalDefined=false;
       for (      cgWaypoint wp : waypoints) {

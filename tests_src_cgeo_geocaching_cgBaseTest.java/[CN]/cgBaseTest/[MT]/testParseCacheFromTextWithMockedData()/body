@@ -3,7 +3,7 @@
   for (  MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
     Settings.setGcCustomDate(mockedCache.getDateFormat());
     SearchResult searchResult=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
-    cgCache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+    cgCache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     cgBaseTest.testCompareCaches(mockedCache,parsedCache);
   }
   Settings.setGcCustomDate(gcCustomDate);

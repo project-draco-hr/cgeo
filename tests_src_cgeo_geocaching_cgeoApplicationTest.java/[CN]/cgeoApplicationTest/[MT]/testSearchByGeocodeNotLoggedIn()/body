@@ -7,7 +7,7 @@
     assertNotNull(search);
     assertEquals(1,search.getGeocodes().size());
     assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-    cgCache searchedCache=search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+    cgCache searchedCache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     assertNull(searchedCache.getCoords());
     cache=new GC2JVEH();
     deleteCacheFromDBAndLogout(cache.getGeocode());
