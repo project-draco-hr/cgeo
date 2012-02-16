@@ -31,7 +31,7 @@
       return;
     }
     caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
-    if (live && Settings.isLiveMap()) {
+    if (live) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
       final ArrayList<cgCache> tempList=new ArrayList<cgCache>(caches);
