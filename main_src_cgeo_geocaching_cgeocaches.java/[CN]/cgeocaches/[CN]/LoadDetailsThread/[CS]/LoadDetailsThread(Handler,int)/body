@@ -1,7 +1,7 @@
 {
   setPriority(Thread.MIN_PRIORITY);
   handler=handlerIn;
-  this.listIdLD=listId;
+  this.listIdLD=Math.max(listId,StoredList.STANDARD_LIST_ID);
   if (adapter != null) {
     checked=adapter.getChecked();
   }
