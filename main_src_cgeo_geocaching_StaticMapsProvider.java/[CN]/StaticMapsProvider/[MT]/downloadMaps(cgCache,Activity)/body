@@ -4,11 +4,11 @@
   }
   int edge=guessMinDisplaySide(activity);
   if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-    storeCacheStaticMap(cache,edge);
+    storeCacheStaticMap(cache,edge,false);
   }
   if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
     for (    cgWaypoint waypoint : cache.getWaypoints()) {
-      storeWaypointStaticMap(cache,edge,waypoint);
+      storeWaypointStaticMap(cache,edge,waypoint,false);
     }
   }
 }

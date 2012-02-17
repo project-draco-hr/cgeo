@@ -1,0 +1,15 @@
+{
+  if (waitForResult) {
+    downloadDifferentZooms(cache,markerUrl,prefix,latlonMap,edge,waypoints);
+  }
+ else {
+    Thread staticMapsThread=new Thread("getting static map"){
+      @Override public void run(){
+        downloadDifferentZooms(cache,markerUrl,prefix,latlonMap,edge,waypoints);
+      }
+    }
+;
+    staticMapsThread.setPriority(Thread.MIN_PRIORITY);
+    staticMapsThread.start();
+  }
+}
