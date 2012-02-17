@@ -1,5 +1,4 @@
 {
-  String page;
   final HttpPost request=new HttpPost("http://www.geocaching.com/map/default.aspx/MapAction");
   try {
     request.setEntity(new StringEntity(params,HTTP.UTF_8));
@@ -11,6 +10,6 @@
   request.addHeader("X-Requested-With","XMLHttpRequest");
   request.addHeader("Accept","application/json, text/javascript, */*; q=0.01");
   request.addHeader("Referer",uri);
-  page=getResponseData(request(request));
+  String page=getResponseData(request(request));
   return page;
 }
