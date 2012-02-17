@@ -1,7 +1,7 @@
 {
   if (isLevel8) {
     try {
-      final int rotation=(Integer)getRotationMethod.invoke(null,activity);
+      final int rotation=level8.getRotation(activity);
       if (rotation == Surface.ROTATION_90) {
         return directionNowPre + 90;
       }
