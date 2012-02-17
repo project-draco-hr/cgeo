@@ -1,6 +1,12 @@
 {
-  double lat=Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac),3)) / D60;
-  double lon=Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac),3)) / D60;
+  double lat=0.0d;
+  double lon=0.0d;
+  try {
+    lat=Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac),3)) / D60;
+    lon=Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac),3)) / D60;
+  }
+ catch (  NumberFormatException e) {
+  }
   lat*="S".equalsIgnoreCase(latDir) ? -1 : 1;
   lon*="W".equalsIgnoreCase(lonDir) ? -1 : 1;
   return new Geopoint(lat,lon);
