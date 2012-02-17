@@ -5,24 +5,31 @@ case MENU_SWITCH_SELECT_MODE:
     if (adapter != null) {
       adapter.switchSelectMode();
     }
-  return true;
+  invalidateOptionsMenuCompatible();
+return true;
 case MENU_REFRESH_STORED:
 refreshStored();
+invalidateOptionsMenuCompatible();
 return true;
 case MENU_DROP_CACHES:
 dropStored(false);
+invalidateOptionsMenuCompatible();
 return false;
 case MENU_DROP_CACHES_AND_LIST:
 dropStored(true);
+invalidateOptionsMenuCompatible();
 return true;
 case MENU_IMPORT_GPX:
 importGpx();
+invalidateOptionsMenuCompatible();
 return false;
 case MENU_CREATE_LIST:
 createList(null);
+invalidateOptionsMenuCompatible();
 return false;
 case MENU_DROP_LIST:
 removeList(true);
+invalidateOptionsMenuCompatible();
 return false;
 case MENU_RENAME_LIST:
 renameList();
@@ -31,6 +38,7 @@ case MENU_INVERT_SELECTION:
 if (adapter != null) {
 adapter.invertSelection();
 }
+invalidateOptionsMenuCompatible();
 return false;
 case MENU_SORT_DISTANCE:
 setComparator(item,null);
@@ -55,6 +63,7 @@ setComparator(item,new GeocodeComparator());
 return false;
 case MENU_SWITCH_LIST:
 selectList(null);
+invalidateOptionsMenuCompatible();
 return false;
 case MENU_SORT_RATING:
 setComparator(item,new RatingComparator());
@@ -102,9 +111,11 @@ exportFieldNotes();
 return false;
 case MENU_REMOVE_FROM_HISTORY:
 removeFromHistoryCheck();
+invalidateOptionsMenuCompatible();
 return false;
 case MENU_MOVE_TO_LIST:
 moveCachesToOtherList();
+invalidateOptionsMenuCompatible();
 return true;
 }
 return CacheListAppFactory.onMenuItemSelected(item,geo,cacheList,this,search);

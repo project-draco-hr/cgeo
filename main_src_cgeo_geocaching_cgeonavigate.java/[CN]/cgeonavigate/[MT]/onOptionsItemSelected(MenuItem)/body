@@ -6,6 +6,7 @@
  else   if (id == MENU_SWITCH_COMPASS_GPS) {
     boolean oldSetting=Settings.isUseCompass();
     Settings.setUseCompass(!oldSetting);
+    invalidateOptionsMenuCompatible();
     if (oldSetting) {
       if (dir != null) {
         dir=app.removeDir();

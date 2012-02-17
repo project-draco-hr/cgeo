@@ -3,12 +3,14 @@
 switch (id) {
 case MENU_TRAIL_MODE:
     Settings.setMapTrail(!Settings.isMapTrail());
-  return true;
+  ActivityMixin.invalidateOptionsMenu(activity);
+return true;
 case MENU_MAP_LIVE:
 Settings.setLiveMap(!Settings.isLiveMap());
 liveChanged=true;
 search=null;
 searchIntent=null;
+ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case MENU_STORE_CACHES:
 if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
@@ -24,7 +26,7 @@ final int mapSpanLon=mapView.getLongitudeSpan();
 for (cgCache oneCache : cachesProtected) {
 if (oneCache != null && oneCache.getCoords() != null) {
 if (cgBase.isCacheInViewPort(mapCenterLat,mapCenterLon,mapSpanLat,mapSpanLon,oneCache.getCoords()) && !app.isOffline(oneCache.getGeocode(),null)) {
-  geocodes.add(oneCache.getGeocode());
+geocodes.add(oneCache.getGeocode());
 }
 }
 }
@@ -86,6 +88,7 @@ return false;
 }
 overlayCaches.switchCircles();
 mapView.repaintRequired(overlayCaches);
+ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case MENU_AS_LIST:
 {
