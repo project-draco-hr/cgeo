@@ -1,0 +1,22 @@
+{
+  final Geopoint gp1=new Geopoint(51.3d,13.8d);
+  DMS dms1=gp1.asDMS();
+  checkDMS(dms1,'N',51,18,0,0,'E',13,48,0,0);
+  Geopoint gp1a=DMS.createGeopoint(String.valueOf(dms1.latDir),String.valueOf(dms1.latDeg),String.valueOf(dms1.latMin),String.valueOf(dms1.latSec),String.valueOf(dms1.latSecFrac),String.valueOf(dms1.lonDir),String.valueOf(dms1.lonDeg),String.valueOf(dms1.lonMin),String.valueOf(dms1.lonSec),String.valueOf(dms1.lonSecFrac));
+  Assert.assertTrue(gp1a.isEqualTo(gp1));
+  final Geopoint gp2=new Geopoint(51.34567d,13.87654d);
+  DMS dms2=gp2.asDMS();
+  checkDMS(dms2,'N',51,20,44,412,'E',13,52,35,544);
+  Geopoint gp2a=DMS.createGeopoint(String.valueOf(dms2.latDir),String.valueOf(dms2.latDeg),String.valueOf(dms2.latMin),String.valueOf(dms2.latSec),String.valueOf(dms2.latSecFrac),String.valueOf(dms2.lonDir),String.valueOf(dms2.lonDeg),String.valueOf(dms2.lonMin),String.valueOf(dms2.lonSec),String.valueOf(dms2.lonSecFrac));
+  checkTolerance(gp2,gp2a,5e-6);
+  final Geopoint gp3=new Geopoint(51.29999833333333d,13.8d);
+  DMS dms3=gp3.asDMS();
+  checkDMS(dms3,'N',51,17,59,994,'E',13,48,0,0);
+  Geopoint gp3a=DMS.createGeopoint(String.valueOf(dms3.latDir),String.valueOf(dms3.latDeg),String.valueOf(dms3.latMin),String.valueOf(dms3.latSec),String.valueOf(dms3.latSecFrac),String.valueOf(dms3.lonDir),String.valueOf(dms3.lonDeg),String.valueOf(dms3.lonMin),String.valueOf(dms3.lonSec),String.valueOf(dms3.lonSecFrac));
+  checkTolerance(gp3,gp3a,5e-6);
+  final Geopoint gp4=new Geopoint(51.00012d,13.00089d);
+  DMS dms4=gp4.asDMS();
+  checkDMS(dms4,'N',51,0,0,432,'E',13,0,3,204);
+  Geopoint gp4a=DMS.createGeopoint(String.valueOf(dms4.latDir),String.valueOf(dms4.latDeg),String.valueOf(dms4.latMin),String.valueOf(dms4.latSec),String.valueOf(dms4.latSecFrac),String.valueOf(dms4.lonDir),String.valueOf(dms4.lonDeg),String.valueOf(dms4.lonMin),String.valueOf(dms4.lonSec),String.valueOf(dms4.lonSecFrac));
+  checkTolerance(gp4,gp4a,5e-6);
+}

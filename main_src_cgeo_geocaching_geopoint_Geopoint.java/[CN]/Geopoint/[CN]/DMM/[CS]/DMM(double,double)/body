@@ -1,0 +1,19 @@
+{
+  super(latSigned,lonSigned);
+  BigDecimal bdLat=BigDecimal.valueOf(latSigned).abs();
+  latDeg=bdLat.intValue();
+  BigDecimal bdLatMin=bdLat.subtract(BigDecimal.valueOf(latDeg)).multiply(BD_SIXTY);
+  bdLatMin=bdLatMin.setScale(3,RoundingMode.HALF_UP);
+  latMinRaw=bdLatMin.doubleValue();
+  latMin=bdLatMin.intValue();
+  BigDecimal bdLatMinFrac=bdLatMin.subtract(BigDecimal.valueOf(latMin)).multiply(BD_THOUSAND);
+  latMinFrac=bdLatMinFrac.setScale(0,RoundingMode.HALF_UP).intValue();
+  BigDecimal bdlon=BigDecimal.valueOf(lonSigned).abs();
+  lonDeg=bdlon.intValue();
+  BigDecimal bdLonMin=bdlon.subtract(BigDecimal.valueOf(lonDeg)).multiply(BD_SIXTY);
+  bdLonMin=bdLonMin.setScale(3,RoundingMode.HALF_UP);
+  lonMinRaw=bdLonMin.doubleValue();
+  lonMin=bdLonMin.intValue();
+  BigDecimal bdLonMinFrac=bdLonMin.subtract(BigDecimal.valueOf(lonMin)).multiply(BD_THOUSAND);
+  lonMinFrac=bdLonMinFrac.setScale(0,RoundingMode.HALF_UP).intValue();
+}

@@ -3,6 +3,9 @@
   if (waypoint != null && waypoint.getCoords() != null) {
     gp=waypoint.getCoords();
   }
+ else   if (gpTemp != null) {
+    gp=gpTemp;
+  }
   cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
   cgeocoords coordsDialog=new cgeocoords(cgeowaypointadd.this,cache,gp,geo);
   coordsDialog.setCancelable(true);
@@ -12,6 +15,9 @@
       ((Button)findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
       if (waypoint != null) {
         waypoint.setCoords(gp);
+      }
+ else {
+        gpTemp=gp;
       }
     }
   }

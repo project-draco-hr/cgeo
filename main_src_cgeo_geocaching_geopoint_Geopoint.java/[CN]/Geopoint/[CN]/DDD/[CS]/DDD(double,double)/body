@@ -1,0 +1,11 @@
+{
+  super(latSigned,lonSigned);
+  BigDecimal bdLat=BigDecimal.valueOf(latSigned).abs();
+  latDeg=bdLat.intValue();
+  BigDecimal bdLatFrac=bdLat.subtract(BigDecimal.valueOf(latDeg)).multiply(BD_ONEHOUNDREDTHOUSAND);
+  latDegFrac=bdLatFrac.setScale(0,RoundingMode.HALF_UP).intValue();
+  BigDecimal bdlon=BigDecimal.valueOf(lonSigned).abs();
+  lonDeg=bdlon.intValue();
+  BigDecimal bdLonFrac=bdlon.subtract(BigDecimal.valueOf(lonDeg)).multiply(BD_ONEHOUNDREDTHOUSAND);
+  lonDegFrac=bdLonFrac.setScale(0,RoundingMode.HALF_UP).intValue();
+}

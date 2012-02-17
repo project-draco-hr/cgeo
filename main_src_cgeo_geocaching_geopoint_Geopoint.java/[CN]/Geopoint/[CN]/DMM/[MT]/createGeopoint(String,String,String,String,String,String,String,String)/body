@@ -1,0 +1,7 @@
+{
+  double lat=Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac),3)) / D60;
+  double lon=Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac),3)) / D60;
+  lat*="S".equalsIgnoreCase(latDir) ? -1 : 1;
+  lon*="W".equalsIgnoreCase(lonDir) ? -1 : 1;
+  return new Geopoint(lat,lon);
+}
