@@ -1,0 +1,7 @@
+{
+  String gccode=modulo(gcid + 411120,GC_BASE31,SEQUENCE_GCID);
+  if ((gccode.length() < 4) || (gccode.length() == 4 && SEQUENCE_GCID.indexOf(gccode.charAt(0)) < 16)) {
+    gccode=modulo(gcid,GC_BASE16,SEQUENCE_GCID);
+  }
+  return "GC" + gccode;
+}

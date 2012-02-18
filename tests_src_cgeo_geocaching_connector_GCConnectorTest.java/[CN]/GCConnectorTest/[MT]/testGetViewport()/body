@@ -1,7 +1,8 @@
 {
   GC2JVEH cache=new GC2JVEH();
   final Viewport viewport=new Viewport(cache.getCoords(),1.0,1.0);
-  SearchResult searchResult=GCConnectorImpl.searchByViewport(viewport);
+  SearchResult searchResult=GCBase.searchByViewport(viewport);
   assertTrue(searchResult != null);
-  assertTrue(searchResult.getGeocodes().contains(cache.getGeocode()));
+  assertEquals(3,searchResult.getCount());
+  assertTrue(searchResult.getGeocodes().contains("GC211WG"));
 }
