@@ -1,0 +1,7 @@
+{
+  long gcid=0;
+  for (int p=0; p < newid.length(); p++) {
+    gcid=GC_BASE57 * gcid + SEQUENCE_NEWID.indexOf(newid.charAt(p));
+  }
+  return gcid;
+}
