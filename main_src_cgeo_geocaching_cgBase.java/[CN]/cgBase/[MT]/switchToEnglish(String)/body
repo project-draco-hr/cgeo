@@ -2,9 +2,11 @@
   final String ENGLISH="English&#9660;";
   if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
     Log.i(Settings.tag,"Geocaching.com language already set to English");
+    getLoginStatus(getResponseData(request("http://www.geocaching.com/email/",null,false)));
   }
  else {
     final String page=getResponseData(request("http://www.geocaching.com/default.aspx",null,false));
+    getLoginStatus(page);
     if (page == null) {
       Log.e(Settings.tag,"Failed to read viewstates to set geocaching.com language");
     }
