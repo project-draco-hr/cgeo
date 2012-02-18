@@ -127,5 +127,7 @@
   if (reliableLatLon == false) {
     reliableLatLon=other.reliableLatLon;
   }
-  return isEqualTo(other);
+  boolean isEqual=isEqualTo(other);
+  if (!isEqual)   notifyChange();
+  return isEqual;
 }

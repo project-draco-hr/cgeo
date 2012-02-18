@@ -7,4 +7,7 @@
     notifyDataSetChanged();
     refreshOnResume=false;
   }
+  if (cache != null) {
+    cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
+  }
 }
