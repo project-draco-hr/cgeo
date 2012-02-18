@@ -5,7 +5,6 @@
   setTitle(res.getString(R.string.detail));
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    fromDetail=extras.getBoolean("fromdetail");
     geocode=extras.getString("geocode");
   }
   if (StringUtils.isBlank(geocode)) {

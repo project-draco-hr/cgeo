@@ -45,7 +45,7 @@ case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
 {
 final cgWaypoint waypoint=cache.getWaypoint(index);
 if (waypoint != null) {
-NavigationAppFactory.startDefaultNavigationApplication(geolocation,this,null,null,waypoint,null);
+NavigationAppFactory.startDefaultNavigationApplication(geolocation,this,null,waypoint,null);
 }
 }
 break;
@@ -53,7 +53,7 @@ case CONTEXT_MENU_WAYPOINT_NAVIGATE:
 {
 final cgWaypoint waypoint=cache.getWaypoint(contextMenuWPIndex);
 if (waypoint != null) {
-NavigationAppFactory.showNavigationMenu(geolocation,this,null,null,waypoint,null);
+NavigationAppFactory.showNavigationMenu(geolocation,this,null,waypoint,null);
 }
 }
 break;

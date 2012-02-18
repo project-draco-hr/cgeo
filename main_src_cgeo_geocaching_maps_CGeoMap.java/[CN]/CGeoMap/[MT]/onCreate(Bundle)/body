@@ -29,7 +29,7 @@
     overlayOtherCachers=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
   }
   if (overlayCaches == null) {
-    overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker),fromDetailIntent);
+    overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker));
   }
   if (overlayScale == null) {
     overlayScale=mapView.createAddScaleOverlay(activity);
@@ -45,7 +45,6 @@
   }
   Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {
-    fromDetailIntent=extras.getBoolean(EXTRAS_DETAIL);
     searchIntent=(SearchResult)extras.getParcelable(EXTRAS_SEARCH);
     geocodeIntent=extras.getString(EXTRAS_GEOCODE);
     final double latitudeIntent=extras.getDouble(EXTRAS_LATITUDE);

@@ -8,7 +8,7 @@
       working=false;
       return;
     }
-    if (fromDetailIntent || searchIntent != null || geocodeIntent != null) {
+    if (searchIntent != null || geocodeIntent != null) {
       search=new SearchResult(searchIntent);
       if (geocodeIntent != null) {
         search.addGeocode(geocodeIntent);

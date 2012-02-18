@@ -25,7 +25,6 @@
     cgCoord coordinate=item.getCoord();
     if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
       Intent popupIntent=new Intent(context,cgeopopup.class);
-      popupIntent.putExtra("fromdetail",fromDetail);
       popupIntent.putExtra("geocode",coordinate.getGeocode());
       context.startActivity(popupIntent);
     }

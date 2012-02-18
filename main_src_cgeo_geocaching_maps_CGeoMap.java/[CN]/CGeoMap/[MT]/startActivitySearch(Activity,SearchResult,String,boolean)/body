@@ -1,9 +1,0 @@
-{
-  final Intent mapIntent=newIntent(fromActivity);
-  mapIntent.putExtra(EXTRAS_DETAIL,detail);
-  mapIntent.putExtra(EXTRAS_SEARCH,search);
-  if (StringUtils.isNotBlank(title)) {
-    mapIntent.putExtra(CGeoMap.EXTRAS_MAP_TITLE,title);
-  }
-  fromActivity.startActivity(mapIntent);
-}
