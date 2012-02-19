@@ -128,6 +128,8 @@
     reliableLatLon=other.reliableLatLon;
   }
   boolean isEqual=isEqualTo(other);
-  if (!isEqual)   notifyChange();
+  if (!isEqual) {
+    notifyChange();
+  }
   return isEqual;
 }
