@@ -1,15 +1,14 @@
 {
   Spinner distanceUnitSelector=(Spinner)findViewById(R.id.distanceUnit);
-  ArrayAdapter<String> unitAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,distanceUnits);
-  unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-  distanceUnitSelector.setAdapter(unitAdapter);
-  if (Settings.isUseMetricUnits()) {
-    distanceUnitSelector.setSelection(0);
-    distanceUnit=cgeopoint.distanceUnits[0];
-  }
+  if (StringUtils.isBlank(distanceUnit)) {
+    if (Settings.isUseMetricUnits()) {
+      distanceUnitSelector.setSelection(0);
+      distanceUnit=res.getStringArray(R.array.distance_units)[0];
+    }
  else {
-    distanceUnitSelector.setSelection(2);
-    distanceUnit=cgeopoint.distanceUnits[2];
+      distanceUnitSelector.setSelection(2);
+      distanceUnit=res.getStringArray(R.array.distance_units)[2];
+    }
   }
   distanceUnitSelector.setOnItemSelectedListener(new changeDistanceUnit(this));
 }
