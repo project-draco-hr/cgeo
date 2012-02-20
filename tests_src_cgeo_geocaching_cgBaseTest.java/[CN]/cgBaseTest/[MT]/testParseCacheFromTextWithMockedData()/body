@@ -4,6 +4,7 @@
     Settings.setGcCustomDate(mockedCache.getDateFormat());
     SearchResult searchResult=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
     cgCache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+    assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
     cgBaseTest.testCompareCaches(mockedCache,parsedCache);
   }
   Settings.setGcCustomDate(gcCustomDate);
