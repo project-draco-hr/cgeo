@@ -1,6 +1,6 @@
 {
   final String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
-  final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString();
+  final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString() + distanceUnit;
   final String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
   final String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
