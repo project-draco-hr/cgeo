@@ -1,3 +1,6 @@
 {
+  if (StringUtils.isBlank(geocode)) {
+    throw new IllegalArgumentException("geocode must not be blank");
+  }
   return geocodes.add(geocode);
 }
