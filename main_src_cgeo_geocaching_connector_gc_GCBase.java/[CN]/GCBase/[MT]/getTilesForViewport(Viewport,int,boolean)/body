@@ -1,0 +1,23 @@
+{
+  Tile tileBottomLeft=new Tile(viewport.bottomLeft,zoomlevel);
+  Tile tileTopRight=new Tile(viewport.topRight,zoomlevel);
+  int minX=Math.min(tileBottomLeft.getX(),tileTopRight.getX());
+  int maxX=Math.max(tileBottomLeft.getX(),tileTopRight.getX());
+  int minY=Math.min(tileBottomLeft.getY(),tileTopRight.getY());
+  int maxY=Math.max(tileBottomLeft.getY(),tileTopRight.getY());
+  if (autoAdjust && zoomlevel >= Tile.ZOOMLEVEL_MIN && ((maxX - minX + 1) * (maxY - minY + 1) > 4)) {
+    return getTilesForViewport(viewport,zoomlevel - 1,autoAdjust);
+  }
+  List<Tile> tiles=new ArrayList<Tile>();
+  if (tileBottomLeft.getX() == tileTopRight.getX() && tileBottomLeft.getY() == tileTopRight.getY()) {
+    tiles.add(tileBottomLeft);
+    return tiles;
+  }
+  for (int x=minX; x <= maxX; x++) {
+    for (int y=minY; y <= maxY; y++) {
+      tiles.add(new Tile(x,y,zoomlevel));
+    }
+  }
+  Log.d(Settings.tag,"# tiles=" + tiles.size() + " "+ minX+ "/"+ minY+ " "+ maxX+ "/"+ maxY);
+  return tiles;
+}
