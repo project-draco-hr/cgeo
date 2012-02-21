@@ -48,7 +48,7 @@
     }
     addCacheDetail(R.string.cache_status,state.toString());
   }
-  cacheDistanceView=addCacheDetail(R.string.cache_distance,cache.getDistance() != null ? "~" + cgBase.getHumanDistance(cache.getDistance()) : "--");
+  cacheDistanceView=addCacheDetail(R.string.cache_distance,cache.getDistance() != null ? "~" + HumanDistance.getHumanDistance(cache.getDistance()) : "--");
   if (cache.getDifficulty() > 0) {
     addStarRating(R.string.cache_difficulty,cache.getDifficulty());
   }

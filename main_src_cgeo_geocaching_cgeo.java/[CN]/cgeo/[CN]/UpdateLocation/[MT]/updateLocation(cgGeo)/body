@@ -48,7 +48,7 @@
       }
  else {
         if (geo.altitudeNow != null) {
-          final String humanAlt=cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
+          final String humanAlt=HumanDistance.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
           navLocation.setText(geo.coordsNow + " | " + humanAlt);
         }
  else {

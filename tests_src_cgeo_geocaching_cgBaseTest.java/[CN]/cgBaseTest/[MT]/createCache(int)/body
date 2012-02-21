@@ -1,6 +1,6 @@
 {
   final MockedCache mockedCache=RegExPerformanceTest.MOCKED_CACHES.get(index);
-  Settings.setGcCustomDate(mockedCache.getDateFormat());
+  Settings.setGcCustomDate(MockedCache.getDateFormat());
   final SearchResult searchResult=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
   return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
 }

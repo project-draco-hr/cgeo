@@ -4,7 +4,7 @@
   }
   try {
     if (geo.coordsNow != null && cache != null && cache.getCoords() != null) {
-      cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
+      cacheDistance.setText(HumanDistance.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
       cacheDistance.bringToFront();
     }
   }

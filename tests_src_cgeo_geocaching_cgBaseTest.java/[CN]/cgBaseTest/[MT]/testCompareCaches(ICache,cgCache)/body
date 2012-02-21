@@ -1,39 +1,39 @@
 {
-  Assert.assertEquals(expected.getGeocode(),actual.getGeocode());
-  Assert.assertTrue(expected.getType() == actual.getType());
-  Assert.assertEquals(expected.getOwner(),actual.getOwner());
-  Assert.assertEquals(expected.getDifficulty(),actual.getDifficulty());
-  Assert.assertEquals(expected.getTerrain(),actual.getTerrain());
-  Assert.assertEquals(expected.getLatitude(),actual.getLatitude());
-  Assert.assertEquals(expected.getLongitude(),actual.getLongitude());
+  assertEquals(expected.getGeocode(),actual.getGeocode());
+  assertTrue(expected.getType() == actual.getType());
+  assertEquals(expected.getOwner(),actual.getOwner());
+  assertEquals(expected.getDifficulty(),actual.getDifficulty());
+  assertEquals(expected.getTerrain(),actual.getTerrain());
+  assertEquals(expected.getLatitude(),actual.getLatitude());
+  assertEquals(expected.getLongitude(),actual.getLongitude());
   assertTrue(actual.isReliableLatLon());
-  Assert.assertEquals(expected.isDisabled(),actual.isDisabled());
-  Assert.assertEquals(expected.isOwn(),actual.isOwn());
-  Assert.assertEquals(expected.isArchived(),actual.isArchived());
-  Assert.assertEquals(expected.isPremiumMembersOnly(),actual.isPremiumMembersOnly());
-  Assert.assertEquals(expected.getOwnerReal(),actual.getOwnerReal());
-  Assert.assertEquals(expected.getSize(),actual.getSize());
-  Assert.assertEquals(expected.getHint(),actual.getHint());
-  Assert.assertTrue(actual.getDescription().startsWith(expected.getDescription()));
-  Assert.assertEquals(expected.getShortDescription(),actual.getShortDescription());
-  Assert.assertEquals(expected.getName(),actual.getName());
-  Assert.assertEquals(expected.getCacheId(),actual.getCacheId());
-  Assert.assertEquals(expected.getGuid(),actual.getGuid());
-  Assert.assertEquals(expected.getLocation(),actual.getLocation());
-  Assert.assertEquals(expected.getPersonalNote(),actual.getPersonalNote());
-  Assert.assertEquals(expected.isFound(),actual.isFound());
-  Assert.assertEquals(expected.isFavorite(),actual.isFavorite());
+  assertEquals(expected.isDisabled(),actual.isDisabled());
+  assertEquals(expected.isOwn(),actual.isOwn());
+  assertEquals(expected.isArchived(),actual.isArchived());
+  assertEquals(expected.isPremiumMembersOnly(),actual.isPremiumMembersOnly());
+  assertEquals(expected.getOwnerReal(),actual.getOwnerReal());
+  assertEquals(expected.getSize(),actual.getSize());
+  assertEquals(expected.getHint(),actual.getHint());
+  assertTrue(actual.getDescription().startsWith(expected.getDescription()));
+  assertEquals(expected.getShortDescription(),actual.getShortDescription());
+  assertEquals(expected.getName(),actual.getName());
+  assertEquals(expected.getCacheId(),actual.getCacheId());
+  assertEquals(expected.getGuid(),actual.getGuid());
+  assertEquals(expected.getLocation(),actual.getLocation());
+  assertEquals(expected.getPersonalNote(),actual.getPersonalNote());
+  assertEquals(expected.isFound(),actual.isFound());
+  assertEquals(expected.isFavorite(),actual.isFavorite());
   System.out.println(expected.getFavoritePoints() + " " + actual.getFavoritePoints());
-  Assert.assertTrue(expected.getFavoritePoints() <= actual.getFavoritePoints());
-  Assert.assertEquals(expected.isWatchlist(),actual.isWatchlist());
-  Assert.assertEquals(expected.getHiddenDate().toString(),actual.getHiddenDate().toString());
+  assertTrue(expected.getFavoritePoints() <= actual.getFavoritePoints());
+  assertEquals(expected.isWatchlist(),actual.isWatchlist());
+  assertEquals(expected.getHiddenDate().toString(),actual.getHiddenDate().toString());
   for (  String attribute : expected.getAttributes()) {
-    Assert.assertTrue(actual.getAttributes().contains(attribute));
+    assertTrue(actual.getAttributes().contains(attribute));
   }
   for (  LogType logType : expected.getLogCounts().keySet()) {
-    Assert.assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
+    assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
   }
   int actualSpoilersSize=null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
   int expectedSpoilersSize=null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
-  Assert.assertEquals(expectedSpoilersSize,actualSpoilersSize);
+  assertEquals(expectedSpoilersSize,actualSpoilersSize);
 }

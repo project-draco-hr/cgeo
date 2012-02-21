@@ -54,7 +54,7 @@
             final String listTitle=StringUtils.join(lines,"; ");
             if (lastLoc != null) {
               if (address.hasLatitude() && address.hasLongitude()) {
-                lines.add(cgBase.getHumanDistance(lastLoc.distanceTo(new Geopoint(address.getLatitude(),address.getLongitude()))));
+                lines.add(HumanDistance.getHumanDistance(lastLoc.distanceTo(new Geopoint(address.getLatitude(),address.getLongitude()))));
               }
             }
             oneAdd.setText(StringUtils.join(lines,"\n"));

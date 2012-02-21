@@ -8,7 +8,7 @@
   try {
     StringBuilder dist=new StringBuilder();
     if (geo.coordsNow != null && cache != null && cache.getCoords() != null) {
-      dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
+      dist.append(HumanDistance.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
     }
     if (cache != null && cache.getElevation() != null) {
       if (geo.altitudeNow != null) {

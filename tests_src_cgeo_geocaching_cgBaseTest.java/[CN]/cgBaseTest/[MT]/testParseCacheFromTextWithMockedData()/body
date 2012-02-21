@@ -1,7 +1,7 @@
 {
   String gcCustomDate=Settings.getGcCustomDate();
   for (  MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
-    Settings.setGcCustomDate(mockedCache.getDateFormat());
+    Settings.setGcCustomDate(MockedCache.getDateFormat());
     SearchResult searchResult=cgBase.parseCacheFromText(mockedCache.getData(),0,null);
     cgCache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
