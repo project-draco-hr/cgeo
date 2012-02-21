@@ -1,13 +1,12 @@
 {
   final SearchResult searchResult=new SearchResult();
-  searchResult.setUrl(url);
   try {
-    if (StringUtils.isEmpty(page)) {
+    if (StringUtils.isEmpty(data)) {
       throw new JSONException("No page given");
     }
-    final JSONObject json=new JSONObject(page);
+    final JSONObject json=new JSONObject(data);
     final JSONArray grid=json.getJSONArray("grid");
-    if (grid == null || grid.length() != 64) {
+    if (grid == null || grid.length() != (UTFGrid.GRID_MAXY + 1)) {
       throw new JSONException("No grid inside JSON");
     }
     final JSONArray keys=json.getJSONArray("keys");
@@ -18,19 +17,23 @@
     if (dataObject == null) {
       throw new JSONException("No data inside JSON");
     }
-    Map<String,ImmutablePair<Integer,Integer>> keyPositions=new HashMap<String,ImmutablePair<Integer,Integer>>();
+    Map<String,UTFGridPosition> keyPositions=new HashMap<String,UTFGridPosition>();
     for (int y=0; y < grid.length(); y++) {
-      byte[] row=grid.getString(y).getBytes();
-      for (int x=0; x < row.length; x++) {
-        if (row[x] != 32) {
-          byte id=UTFGrid.getUTFGridId(row[x]);
-          keyPositions.put(keys.getString(id),new ImmutablePair<Integer,Integer>(x,y));
+      String rowUTF8=grid.getString(y);
+      if (rowUTF8.length() != (UTFGrid.GRID_MAXX + 1)) {
+        throw new JSONException("Grid has wrong size");
+      }
+      for (int x=0; x < UTFGrid.GRID_MAXX; x++) {
+        char c=rowUTF8.charAt(x);
+        if (c != ' ') {
+          short id=UTFGrid.getUTFGridId(c);
+          keyPositions.put(keys.getString(id),new UTFGridPosition(x,y));
         }
       }
     }
     Map<String,cgCache> caches=new HashMap<String,cgCache>();
-    Map<String,List<ImmutablePair<Integer,Integer>>> positions=new HashMap<String,List<ImmutablePair<Integer,Integer>>>();
-    for (int i=0; i < keys.length(); i++) {
+    Map<String,List<UTFGridPosition>> positions=new HashMap<String,List<UTFGridPosition>>();
+    for (int i=1; i < keys.length(); i++) {
       String key=keys.getString(i);
       if (StringUtils.isNotBlank(key)) {
         JSONArray dataForKey=dataObject.getJSONArray(key);
@@ -47,25 +50,29 @@
             cache.setType(CacheType.GC_LIVE_MAP);
             caches.put(id,cache);
           }
-          List<ImmutablePair<Integer,Integer>> pos=positions.get(id);
-          if (pos == null) {
-            pos=new ArrayList<ImmutablePair<Integer,Integer>>();
+          List<UTFGridPosition> listOfPositions=positions.get(id);
+          if (listOfPositions == null) {
+            listOfPositions=new ArrayList<UTFGridPosition>();
           }
-          pos.add(keyPositions.get(key));
-          positions.put(id,pos);
+          UTFGridPosition pos=keyPositions.get(key);
+          if (pos == null) {
+            Log.e(Settings.tag,"key " + key + " not found in keyPositions");
+          }
+ else {
+            listOfPositions.add(pos);
+          }
+          positions.put(id,listOfPositions);
         }
       }
     }
     for (    String id : positions.keySet()) {
-      List<ImmutablePair<Integer,Integer>> pos=positions.get(id);
+      List<UTFGridPosition> pos=positions.get(id);
       cgCache cache=caches.get(id);
-      cache.setCoords(getCoordsForUTFGrid(pos));
-      Log.d(Settings.tag,"id= " + id + " geocode= "+ cache.getGeocode());
-      for (      ImmutablePair<Integer,Integer> ImmutablePair : pos) {
-        Log.d(Settings.tag,"(" + ImmutablePair.left + ","+ ImmutablePair.right+ ")");
-      }
+      cache.setCoords(getCoordsForUTFGrid(tile,pos));
+      Log.d(Settings.tag,"id=" + id + " geocode="+ cache.getGeocode()+ " coords="+ cache.getCoords().toString());
       searchResult.addCache(cache);
     }
+    Log.d(Settings.tag,"Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"GCBase.parseMapJSON",e);

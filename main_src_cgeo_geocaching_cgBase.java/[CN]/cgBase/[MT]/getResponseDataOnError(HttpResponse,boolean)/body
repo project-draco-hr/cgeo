@@ -1,0 +1,10 @@
+{
+  try {
+    String data=EntityUtils.toString(response.getEntity(),HTTP.UTF_8);
+    return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"getResponseData",e);
+    return null;
+  }
+}

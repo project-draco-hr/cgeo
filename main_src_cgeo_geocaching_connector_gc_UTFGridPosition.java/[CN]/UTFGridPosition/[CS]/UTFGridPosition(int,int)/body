@@ -1,8 +1,10 @@
 {
   if (x > UTFGrid.GRID_MAXX) {
+    Log.e(Settings.tag,"x outside grid");
     throw new IllegalArgumentException("x outside grid");
   }
   if (y > UTFGrid.GRID_MAXY) {
+    Log.e(Settings.tag,"y outside grid");
     throw new IllegalArgumentException("y outside grid");
   }
   this.x=x;

@@ -5,7 +5,9 @@
     Log.e(Settings.tag,"cgeoBase.login: No login information stored");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
-  cgBase.setActualStatus(res.getString(R.string.init_login_popup_working));
+  if (res != null) {
+    cgBase.setActualStatus(res.getString(R.string.init_login_popup_working));
+  }
   HttpResponse loginResponse=request("https://www.geocaching.com/login/default.aspx",null,false,false,false);
   String loginData=getResponseData(loginResponse);
   if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData,GCConstants.PATTERN_MAINTENANCE)) {

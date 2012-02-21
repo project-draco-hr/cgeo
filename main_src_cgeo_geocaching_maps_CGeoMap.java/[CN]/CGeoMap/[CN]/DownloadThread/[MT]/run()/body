@@ -15,13 +15,13 @@
         throw new ThreadDeath();
       }
       if (token == null) {
-        token=cgBase.getMapUserToken(noMapTokenHandler);
+        token=GCBase.getSessionToken();
       }
       if (stop) {
         throw new ThreadDeath();
       }
       final Viewport viewport=new Viewport(new Geopoint(latMin,lonMin),new Geopoint(latMax,lonMax));
-      search=cgBase.searchByViewport(token,viewport);
+      search=GCBase.searchByViewport(viewport,14,true,token);
       if (search != null) {
         downloaded=true;
         if (search.error == StatusCode.NOT_LOGGED_IN) {
