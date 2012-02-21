@@ -12,4 +12,12 @@
     finish();
     return;
   }
+  ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
+  defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      startDefaultNavigation2();
+      return true;
+    }
+  }
+);
 }
