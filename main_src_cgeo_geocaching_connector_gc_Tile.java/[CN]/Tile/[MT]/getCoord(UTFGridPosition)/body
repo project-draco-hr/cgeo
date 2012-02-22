@@ -1,8 +1,7 @@
 {
   double pixX=tileX * TILE_SIZE + pos.x * 4;
   double pixY=tileY * TILE_SIZE + pos.y * 4;
-  long numberOfPixels=TILE_SIZE * numberOfTiles;
-  double lon=((360.0 * pixX) / numberOfPixels) - 180.0;
-  double latRad=Math.atan(Math.sinh(Math.PI * (1 - 2 * pixY / numberOfPixels)));
-  return new Geopoint(latRad * Geopoint.rad2deg,lon);
+  double lonDeg=((360.0 * pixX) / NUMBER_OF_PIXELS[this.zoomlevel]) - 180.0;
+  double latRad=Math.atan(Math.sinh(Math.PI * (1 - 2 * pixY / NUMBER_OF_PIXELS[this.zoomlevel])));
+  return new Geopoint(Math.toDegrees(latRad),lonDeg);
 }
