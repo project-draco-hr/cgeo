@@ -3,14 +3,14 @@
   String[] tokens=GCBase.getTokens();
 {
     final Viewport viewport=new Viewport(new Geopoint("N 52?? 25.369 E 9?? 35.499"),new Geopoint("N 52?? 25.371 E 9?? 35.501"));
-    SearchResult searchResult=GCBase.searchByViewport(viewport,14,false,tokens);
+    SearchResult searchResult=GCBase.searchByViewport(viewport,tokens);
     assertTrue(searchResult != null);
     assertEquals(7,searchResult.getCount());
     assertTrue(searchResult.getGeocodes().contains("GC211WG"));
   }
 {
     final Viewport viewport=new Viewport(new Geopoint("N 52?? 24.000 E 9?? 34.500"),new Geopoint("N 52?? 26.000 E 9?? 38.500"));
-    SearchResult searchResult=GCBase.searchByViewport(viewport,14,false,tokens);
+    SearchResult searchResult=GCBase.searchByViewport(viewport,tokens);
     assertTrue(searchResult != null);
     assertTrue(searchResult.getGeocodes().contains("GC211WG"));
   }
