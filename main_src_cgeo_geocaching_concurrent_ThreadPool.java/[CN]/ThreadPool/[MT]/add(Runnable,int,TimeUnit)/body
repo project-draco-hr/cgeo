@@ -1,7 +1,0 @@
-{
-  this.executor.setCorePoolSize(this.executor.getMaximumPoolSize());
-  this.executor.prestartAllCoreThreads();
-  boolean successfull=this.queue.offer(task,timeout,unit);
-  this.executor.setCorePoolSize(0);
-  return successfull;
-}
