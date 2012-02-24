@@ -1,0 +1,15 @@
+{
+  if (view == null) {
+    return;
+  }
+  if (!cache.supportsUserActions()) {
+    return;
+  }
+  if (StringUtils.isNotBlank(cache.getOwnerReal())) {
+    clickedItemText=cache.getOwnerReal();
+  }
+ else {
+    clickedItemText=((TextView)view).getText().toString();
+  }
+  showUserActionsDialog(clickedItemText);
+}
