@@ -5,16 +5,20 @@
       if (StringUtils.isBlank(scan)) {
         return;
       }
-      String host="http://coord.info/";
-      if (scan.toLowerCase().startsWith(host)) {
-        String geocode=scan.substring(host.length()).trim();
-        CacheDetailActivity.startActivity(this,geocode);
-      }
- else {
-        showToast(res.getString(R.string.unknown_scan));
-      }
+      Intent searchIntent=new Intent(this,cgeoadvsearch.class);
+      searchIntent.setAction(Intent.ACTION_SEARCH).putExtra(SearchManager.QUERY,scan).putExtra(cgeoadvsearch.EXTRAS_KEYWORDSEARCH,false);
+      startActivityForResult(searchIntent,SEARCH_REQUEST_CODE);
     }
  else     if (resultCode == RESULT_CANCELED) {
+    }
+  }
+ else   if (requestCode == SEARCH_REQUEST_CODE) {
+    if (resultCode == RESULT_CANCELED) {
+      String query=intent.getStringExtra(SearchManager.QUERY);
+      if (query == null) {
+        query="";
+      }
+      new AlertDialog.Builder(this).setMessage(res.getString(R.string.unknown_scan) + "\n\n" + query).setPositiveButton(getString(android.R.string.ok),null).create().show();
     }
   }
 }
