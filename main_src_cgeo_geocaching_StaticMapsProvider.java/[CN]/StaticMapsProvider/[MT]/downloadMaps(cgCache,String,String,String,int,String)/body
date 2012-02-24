@@ -1,10 +1,14 @@
 {
-  Thread staticMapsThread=new Thread("getting static map"){
+  Task currentTask=new Task("getting static map"){
     @Override public void run(){
       downloadMapsInThread(cache,markerUrl,prefix,latlonMap,edge,waypoints);
     }
   }
 ;
-  staticMapsThread.setPriority(Thread.MIN_PRIORITY);
-  staticMapsThread.start();
+  try {
+    pool.add(currentTask,20,TimeUnit.SECONDS);
+  }
+ catch (  InterruptedException e) {
+    Log.e(Settings.tag,"StaticMapsProvider.downloadMaps error adding task: " + e.toString());
+  }
 }

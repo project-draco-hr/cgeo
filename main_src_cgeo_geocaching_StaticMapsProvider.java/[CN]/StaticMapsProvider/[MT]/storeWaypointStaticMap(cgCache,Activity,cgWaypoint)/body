@@ -1,4 +1,5 @@
 {
-  int edge=StaticMapsProvider.guessMinDisplaySide(activity);
+  final Display display=((WindowManager)activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+  int edge=StaticMapsProvider.guessMinDisplaySide(display);
   storeWaypointStaticMap(cache,edge,waypoint);
 }
