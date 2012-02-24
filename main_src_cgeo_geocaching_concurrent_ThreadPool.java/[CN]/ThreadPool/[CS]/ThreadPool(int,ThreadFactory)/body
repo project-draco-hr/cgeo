@@ -1,0 +1,5 @@
+{
+  this.queue=new ArrayBlockingQueue<Runnable>(poolSize,true);
+  this.executor=new ThreadPoolExecutor(0,poolSize,5,TimeUnit.SECONDS,this.queue);
+  this.executor.setThreadFactory(threadFactory);
+}
