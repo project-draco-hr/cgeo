@@ -72,10 +72,10 @@
     if (StringUtils.isNotBlank(cache.getOwner())) {
       ownerView.setText(Html.fromHtml(cache.getOwner()),TextView.BufferType.SPANNABLE);
     }
- else     if (StringUtils.isNotBlank(cache.getOwnerReal())) {
+ else {
       ownerView.setText(Html.fromHtml(cache.getOwnerReal()),TextView.BufferType.SPANNABLE);
     }
-    ownerView.setOnClickListener(new UserActionsClickListener());
+    ownerView.setOnClickListener(new OwnerActionsClickListener());
   }
   if (cache.getHiddenDate() != null) {
     long time=cache.getHiddenDate().getTime();
