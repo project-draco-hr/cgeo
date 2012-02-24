@@ -6,7 +6,7 @@
       MockedCache cache=new GC2CJPF();
       deleteCacheFromDBAndLogout(cache.getGeocode());
       Viewport viewport=new Viewport(cache.getCoords(),0.003,0.003);
-      SearchResult search=GCBase.searchByViewport(viewport,tokens);
+      SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
       assertNotNull(search);
       assertTrue(search.getGeocodes().contains(cache.getGeocode()));
       Log.d(Settings.tag,"cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
@@ -16,7 +16,7 @@
       cache=new GC2JVEH();
       deleteCacheFromDBAndLogout(cache.getGeocode());
       viewport=new Viewport(cache.getCoords(),0.003,0.003);
-      search=GCBase.searchByViewport(viewport,tokens);
+      search=ConnectorFactory.searchByViewport(viewport,tokens);
       assertNotNull(search);
       assertFalse(search.getGeocodes().contains(cache.getGeocode()));
     }

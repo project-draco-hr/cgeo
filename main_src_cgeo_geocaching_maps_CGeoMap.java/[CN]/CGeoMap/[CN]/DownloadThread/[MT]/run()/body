@@ -16,12 +16,15 @@
       }
       if (tokens == null) {
         tokens=GCBase.getTokens();
+        if (noMapTokenHandler != null && tokens == null) {
+          noMapTokenHandler.sendEmptyMessage(0);
+        }
       }
       if (stop) {
         throw new ThreadDeath();
       }
       final Viewport viewport=new Viewport(new Geopoint(latMin,lonMin),new Geopoint(latMax,lonMax));
-      search=GCBase.searchByViewport(viewport,tokens);
+      search=ConnectorFactory.searchByViewport(viewport,tokens);
       if (search != null) {
         downloaded=true;
         if (search.error == StatusCode.NOT_LOGGED_IN) {
