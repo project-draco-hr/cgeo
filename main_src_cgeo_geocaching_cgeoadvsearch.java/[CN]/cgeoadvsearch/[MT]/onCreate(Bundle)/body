@@ -4,7 +4,8 @@
   Intent intent=getIntent();
   if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
     final String query=intent.getStringExtra(SearchManager.QUERY);
-    final boolean found=instantSearch(query);
+    final boolean keywordSearch=intent.getBooleanExtra(EXTRAS_KEYWORDSEARCH,true);
+    final boolean found=instantSearch(query,keywordSearch);
     if (found) {
       finish();
       return;

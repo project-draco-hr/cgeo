@@ -16,7 +16,7 @@
         startActivity(trackablesIntent);
         return true;
       }
- else {
+ else       if (keywordSearch) {
         cgeocaches.startActivityKeyword(this,query);
         return true;
       }
