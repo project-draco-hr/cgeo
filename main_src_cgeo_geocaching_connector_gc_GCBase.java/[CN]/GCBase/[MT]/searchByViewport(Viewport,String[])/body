@@ -1,4 +1,5 @@
 {
+  Log.d(Settings.tag,"GCBase.searchByViewport" + viewport.toString());
   String referer=GCConstants.URL_LIVE_MAP;
   final SearchResult searchResult=new SearchResult();
   searchResult.setUrl(referer + "?ll=" + viewport.getCenter().getLatitude()+ ","+ viewport.getCenter().getLongitude());
@@ -38,6 +39,10 @@
       }
       searchResult.addGeocodes(search.getGeocodes());
     }
+  }
+  if (Settings.isPremiumMember()) {
+    SearchResult search=cgBase.searchByCoords(null,viewport.getCenter(),Settings.getCacheType(),StoredList.TEMPORARY_LIST_ID,Settings.isShowCaptcha());
+    searchResult.addGeocodes(search.getGeocodes());
   }
   return searchResult;
 }
