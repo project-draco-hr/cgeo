@@ -10,7 +10,7 @@
   if (isActualLoginStatus()) {
     setActualUserName(BaseUtils.getMatch(page,GCConstants.PATTERN_LOGIN_NAME,true,"???"));
     setActualMemberStatus(BaseUtils.getMatch(page,GCConstants.PATTERN_MEMBER_STATUS,true,"???"));
-    setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll(",","")));
+    setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll("[,.]","")));
     return true;
   }
   setActualLoginStatus(BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
