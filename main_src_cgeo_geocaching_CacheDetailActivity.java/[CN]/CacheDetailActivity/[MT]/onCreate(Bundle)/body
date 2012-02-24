@@ -81,6 +81,14 @@
   }
  catch (  Exception e) {
   }
+  ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
+  defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      startDefaultNavigation2();
+      return true;
+    }
+  }
+);
   viewPager=(ViewPager)findViewById(R.id.viewpager);
   viewPagerAdapter=new ViewPagerAdapter();
   viewPager.setAdapter(viewPagerAdapter);

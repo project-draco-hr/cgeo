@@ -19,4 +19,12 @@
   waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
   waitDialog.setCancelable(true);
   (new loadWaypoint()).start();
+  ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
+  defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      startDefaultNavigation2();
+      return true;
+    }
+  }
+);
 }

@@ -1,0 +1,7 @@
+{
+  if (cache == null || cache.getCoords() == null) {
+    showToast(res.getString(R.string.err_location_unknown));
+    return;
+  }
+  NavigationAppFactory.startDefaultNavigationApplication2(geolocation,this,cache,null,null);
+}
