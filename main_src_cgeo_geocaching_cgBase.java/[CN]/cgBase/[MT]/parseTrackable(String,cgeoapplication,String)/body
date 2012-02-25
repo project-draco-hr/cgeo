@@ -99,11 +99,19 @@
         logDone.cacheGuid=matcherLogs.group(4);
         logDone.cacheName=matcherLogs.group(6);
       }
+      final Matcher matcherLogImages=GCConstants.PATTERN_TRACKABLE_LOG_IMAGES.matcher(matcherLogs.group(0));
+      while (matcherLogImages.find()) {
+        final cgImage logImage=new cgImage(matcherLogImages.group(1),matcherLogImages.group(2));
+        if (logDone.logImages == null) {
+          logDone.logImages=new ArrayList<cgImage>();
+        }
+        logDone.logImages.add(logImage);
+      }
       trackable.getLogs().add(logDone);
     }
   }
  catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache logs");
+    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache logs" + e.toString());
   }
   if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(),possibleTrackingcode)) {
     trackable.setTrackingcode(possibleTrackingcode);
