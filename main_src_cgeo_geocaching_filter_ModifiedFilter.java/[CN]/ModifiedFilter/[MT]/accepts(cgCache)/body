@@ -1,0 +1,11 @@
+{
+  if (cache.hasUserModifiedCoords()) {
+    return true;
+  }
+  for (  cgWaypoint waypoint : cache.getWaypoints()) {
+    if (waypoint.isUserDefined()) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -98,6 +98,9 @@ return true;
 case MENU_FILTER_TRACKABLES:
 setFilter(new TrackablesFilter(res.getString(R.string.caches_filter_track)));
 return true;
+case MENU_FILTER_MODIFIED:
+setFilter(new ModifiedFilter(res.getString(R.string.caches_filter_modified)));
+return true;
 case MENU_FILTER_CLEAR:
 if (adapter != null) {
 setFilter(null);
