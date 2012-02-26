@@ -1,12 +1,9 @@
 {
   if (app.deleteWaypoint(id)) {
-    String tmpCode=geocode;
-    if (StringUtils.isEmpty(tmpCode)) {
-      tmpCode=waypoint.getGeocode();
-    }
-    StaticMapsProvider.removeWpStaticMaps(id,tmpCode);
-    if (!StringUtils.isEmpty(tmpCode)) {
-      app.removeCache(tmpCode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    String geocode=waypoint.getGeocode();
+    StaticMapsProvider.removeWpStaticMaps(id,geocode);
+    if (!StringUtils.isEmpty(geocode)) {
+      app.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
     }
     finish();
     return;
