@@ -107,13 +107,7 @@
     }
   }
   holder.text.setText(cache.getNameSp(),TextView.BufferType.SPANNABLE);
-  int hashCode=new HashCodeBuilder().append(cache.getType()).append(cache.hasUserModifiedCoords() || cache.hasFinalDefined()).toHashCode();
-  if (gcIconDrawables.containsKey(hashCode)) {
-    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(hashCode),null,null,null);
-  }
- else {
-    holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY),null,null,null);
-  }
+  holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache),null,null,null);
   if (holder.inventory.getChildCount() > 0) {
     holder.inventory.removeAllViews();
   }

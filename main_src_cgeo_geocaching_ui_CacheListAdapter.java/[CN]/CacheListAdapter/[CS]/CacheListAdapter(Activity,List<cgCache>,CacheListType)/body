@@ -11,9 +11,9 @@
   pixelDensity=metrics.density;
   Drawable modifiedCoordinatesMarker=activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
   for (  final CacheType cacheType : CacheType.values()) {
-    int hashCode=new HashCodeBuilder().append(cacheType).append(false).toHashCode();
+    int hashCode=getIconHashCode(cacheType,false);
     gcIconDrawables.put(hashCode,activity.getResources().getDrawable(cacheType.markerId));
-    hashCode=new HashCodeBuilder().append(cacheType).append(true).toHashCode();
+    hashCode=getIconHashCode(cacheType,true);
     Drawable[] layers=new Drawable[2];
     layers[0]=activity.getResources().getDrawable(cacheType.markerId);
     layers[1]=modifiedCoordinatesMarker;
