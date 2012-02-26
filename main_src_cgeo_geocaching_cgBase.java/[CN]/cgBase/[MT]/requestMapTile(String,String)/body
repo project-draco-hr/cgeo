@@ -1,8 +1,15 @@
 {
   final HttpGet request=new HttpGet(url);
   request.addHeader("Accept","image/png,image/*;q=0.8,*/*;q=0.5");
-  request.addHeader("Accept-Encoding","gzip, deflate");
   request.addHeader("Referer",referer);
   request.addHeader("X-Requested-With","XMLHttpRequest");
-  request(request);
+  final HttpResponse response=request(request);
+  try {
+    final HttpEntity entity=response.getEntity();
+    return BitmapFactory.decodeStream(entity.getContent());
+  }
+ catch (  IOException e) {
+    Log.e(Settings.tag,"cgBase.requestMapTile() " + e.getMessage());
+  }
+  return null;
 }

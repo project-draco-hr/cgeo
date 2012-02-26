@@ -52,7 +52,9 @@
       cgCache cache=liveMapCache.get(id);
       if (cache != null) {
         if (cache.getZoomlevel() < tile.getZoomlevel() || cache.getCoords() == null) {
-          cache.setCoords(getCoordsForUTFGrid(tile,pos));
+          UTFGridPosition xy=getPositionInGrid(pos);
+          cache.setCoords(tile.getCoord(xy));
+          parsePNG(cache,bitmap,xy);
         }
         searchResult.addCache(cache);
       }

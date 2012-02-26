@@ -9,5 +9,5 @@
     minY=Math.min(minY,pos.y);
     maxY=Math.max(maxY,pos.y);
   }
-  return tile.getCoord(new UTFGridPosition((minX + maxX) / 2,(minY + maxY) / 2));
+  return new UTFGridPosition((minX + maxX) / 2,(minY + maxY) / 2);
 }
