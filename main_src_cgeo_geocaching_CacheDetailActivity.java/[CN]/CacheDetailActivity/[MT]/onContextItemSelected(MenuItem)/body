@@ -9,14 +9,20 @@ case R.id.personalnote:
 case R.id.hint:
 case R.id.log:
 switch (index) {
-case 1:
+case MENU_FIELD_COPY:
       ClipboardUtils.copyToClipboard(clickedItemText);
     return true;
-case 2:
+case MENU_FIELD_TRANSLATE:
   TranslationUtils.startActivityTranslate(this,Locale.getDefault().getLanguage(),clickedItemText.toString());
 return true;
-case 3:
+case MENU_FIELD_TRANSLATE_EN:
 TranslationUtils.startActivityTranslate(this,Locale.ENGLISH.getLanguage(),clickedItemText.toString());
+return true;
+case MENU_FIELD_SHARE:
+final Intent intent=new Intent(Intent.ACTION_SEND);
+intent.setType("text/plain");
+intent.putExtra(Intent.EXTRA_TEXT,clickedItemText.toString());
+startActivity(Intent.createChooser(intent,res.getText(R.string.cache_share_field)));
 return true;
 default :
 break;
