@@ -6,7 +6,6 @@
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     id=extras.getInt("waypoint");
-    geocode=extras.getString("geocode");
   }
   if (id <= 0) {
     showToast(res.getString(R.string.err_waypoint_unknown));
