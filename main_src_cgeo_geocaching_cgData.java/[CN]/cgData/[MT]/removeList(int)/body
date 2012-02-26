@@ -1,12 +1,12 @@
 {
   boolean status=false;
-  if (listId < 10) {
+  if (listId < customListIdOffset) {
     return status;
   }
   init();
   databaseRW.beginTransaction();
   try {
-    int cnt=databaseRW.delete(dbTableLists,"_id = " + (listId - 10),null);
+    int cnt=databaseRW.delete(dbTableLists,"_id = " + (listId - customListIdOffset),null);
     if (cnt > 0) {
       ContentValues values=new ContentValues();
       values.put("reason",1);
