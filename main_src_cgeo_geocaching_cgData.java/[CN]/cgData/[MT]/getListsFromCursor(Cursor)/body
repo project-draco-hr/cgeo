@@ -11,7 +11,7 @@
         if (indexCount >= 0) {
           count=cursor.getInt(indexCount);
         }
-        StoredList list=new StoredList(cursor.getInt(indexId) + 10,cursor.getString(indexTitle),count);
+        StoredList list=new StoredList(cursor.getInt(indexId) + customListIdOffset,cursor.getString(indexTitle),count);
         result.add(list);
       }
  while (cursor.moveToNext());

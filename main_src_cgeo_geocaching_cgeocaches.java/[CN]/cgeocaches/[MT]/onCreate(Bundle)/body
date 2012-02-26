@@ -32,13 +32,8 @@ case OFFLINE:
   }
  else {
     final StoredList list=app.getList(listId);
-    if (null == list) {
-      listId=StoredList.STANDARD_LIST_ID;
-      title=res.getString(R.string.stored_caches_button);
-    }
- else {
-      title=list.title;
-    }
+    listId=list.id;
+    title=list.title;
   }
 setTitle(title);
 showProgress(true);

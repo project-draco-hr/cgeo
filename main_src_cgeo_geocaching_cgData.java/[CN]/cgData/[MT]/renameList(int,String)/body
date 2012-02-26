@@ -1,5 +1,5 @@
 {
-  if (StringUtils.isBlank(name)) {
+  if (StringUtils.isBlank(name) || StoredList.STANDARD_LIST_ID == listId) {
     return 0;
   }
   init();
@@ -9,7 +9,7 @@
     ContentValues values=new ContentValues();
     values.put("title",name);
     values.put("updated",System.currentTimeMillis());
-    count=databaseRW.update(dbTableLists,values,"_id = " + (listId - 10),null);
+    count=databaseRW.update(dbTableLists,values,"_id = " + (listId - customListIdOffset),null);
     databaseRW.setTransactionSuccessful();
   }
   finally {
