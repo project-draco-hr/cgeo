@@ -7,11 +7,12 @@
     waypoints.remove(index);
     cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
     cgeoapplication.getInstance().removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
-    if (isFinalWithCoords(waypoint)) {
+    if (waypoint.isFinalWithCoords()) {
       finalDefined=false;
       for (      cgWaypoint wp : waypoints) {
-        if (isFinalWithCoords(wp)) {
+        if (wp.isFinalWithCoords()) {
           finalDefined=true;
+          break;
         }
       }
     }

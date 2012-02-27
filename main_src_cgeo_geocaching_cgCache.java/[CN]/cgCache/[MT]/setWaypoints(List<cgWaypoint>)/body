@@ -4,7 +4,7 @@
   if (waypoints != null) {
     for (    cgWaypoint waypoint : waypoints) {
       waypoint.setGeocode(geocode);
-      if (isFinalWithCoords(waypoint)) {
+      if (waypoint.isFinalWithCoords()) {
         finalDefined=true;
       }
     }
