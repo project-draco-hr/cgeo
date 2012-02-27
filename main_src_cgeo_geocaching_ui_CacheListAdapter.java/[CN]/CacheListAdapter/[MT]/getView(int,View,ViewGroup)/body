@@ -10,7 +10,7 @@
   View v=rowView;
   if (v == null) {
     v=inflater.inflate(R.layout.cache,null);
-    holder=new CacheView();
+    holder=new CacheListView();
     holder.checkbox=(CheckBox)v.findViewById(R.id.checkbox);
     holder.oneInfo=(RelativeLayout)v.findViewById(R.id.one_info);
     holder.oneCheckbox=(RelativeLayout)v.findViewById(R.id.one_checkbox);
@@ -27,7 +27,7 @@
     v.setTag(holder);
   }
  else {
-    holder=(CacheView)v.getTag();
+    holder=(CacheListView)v.getTag();
   }
   if (cache.isOwn()) {
     if (Settings.isLightSkin()) {

@@ -1,0 +1,28 @@
+{
+  if (inflater == null) {
+    inflater=((Activity)getContext()).getLayoutInflater();
+  }
+  final Address address=getItem(position);
+  View view=convertView;
+  if (view == null) {
+    view=inflater.inflate(R.layout.addresses_item,null);
+    holder=new AddressListView();
+    holder.label=(TextView)view.findViewById(R.id.label);
+    holder.distance=(TextView)view.findViewById(R.id.distance);
+    view.setTag(holder);
+  }
+ else {
+    holder=(AddressListView)view.getTag();
+  }
+  view.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Activity activity=(Activity)v.getContext();
+      cgeocaches.startActivityAddress(activity,address.getLatitude(),address.getLongitude(),StringUtils.defaultString(address.getAddressLine(0)));
+      activity.finish();
+    }
+  }
+);
+  holder.label.setText(getAddressText(address));
+  holder.distance.setText(getDistanceText(address));
+  return view;
+}

@@ -1,0 +1,50 @@
+{
+  super.onCreate(savedInstanceState);
+  setTheme();
+  setContentView(R.layout.addresses);
+  setTitle(res.getString(R.string.search_address_result));
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    keyword=extras.getString("keyword");
+  }
+  if (keyword == null) {
+    showToast(res.getString(R.string.err_search_address_forgot));
+    finish();
+    return;
+  }
+  adapter=new AddressListAdapter(this);
+  setListAdapter(adapter);
+  waitDialog=ProgressDialog.show(this,res.getString(R.string.search_address_started),keyword,true);
+  waitDialog.setCancelable(true);
+  new AsyncTask<Void,Void,List<Address>>(){
+    @Override protected List<Address> doInBackground(    Void... params){
+      final Geocoder geocoder=new Geocoder(AdressListActivity.this,Locale.getDefault());
+      try {
+        return geocoder.getFromLocationName(keyword,20);
+      }
+ catch (      Exception e) {
+        Log.e(Settings.tag,"AdressListActivity.doInBackground",e);
+        return null;
+      }
+    }
+    @Override protected void onPostExecute(    final List<Address> addresses){
+      waitDialog.dismiss();
+      try {
+        if (CollectionUtils.isEmpty(addresses)) {
+          showToast(res.getString(R.string.err_search_address_no_match));
+          finish();
+          return;
+        }
+ else {
+          for (          Address address : addresses) {
+            adapter.add(address);
+          }
+        }
+      }
+ catch (      Exception e) {
+        Log.e(Settings.tag,"AdressListActivity.onPostExecute",e);
+      }
+    }
+  }
+.execute();
+}
