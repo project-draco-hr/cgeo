@@ -1,5 +1,6 @@
 {
   ImmutablePair<String,String> login=Settings.getLogin();
+  String memberStatus=Settings.getMemberStatus();
   try {
     MockedCache cache=new GC1ZXX2();
     deleteCacheFromDBAndLogout(cache.getGeocode());
@@ -17,6 +18,7 @@
   }
   finally {
     Settings.setLogin(login.left,login.right);
+    Settings.setMemberStatus(memberStatus);
     cgBase.login();
   }
 }
