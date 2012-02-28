@@ -29,7 +29,7 @@
     itemName=(TextView)itemLayout.findViewById(R.id.name);
     itemValue=(TextView)itemLayout.findViewById(R.id.value);
     itemName.setText(res.getString(R.string.cache_type));
-    String cacheType=cache.getType() != CacheType.UNKNOWN ? cache.getType().getL10n() : CacheType.MYSTERY.getL10n();
+    String cacheType=cache.getType().getL10n();
     String cacheSize=cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
     itemValue.setText(cacheType + cacheSize);
     detailsList.addView(itemLayout);
