@@ -1,0 +1,37 @@
+{
+  int x=xy.getX() * 4 + 2;
+  int y=xy.getY() * 4 + 2;
+  int countX=0;
+  int countY=0;
+  while ((bitmap.getPixel(x,y) & 0x00FFFFFF) != BORDER_GRAY) {
+    if (--x < 0 || ++countX > 20) {
+      return;
+    }
+  }
+  while ((bitmap.getPixel(x,y) & 0x00FFFFFF) != 0x000000) {
+    if (++y >= Tile.TILE_SIZE || ++countY > 20) {
+      return;
+    }
+  }
+  try {
+    if ((bitmap.getPixel(x + POSX_TRADI,y + POSY_TRADI) & 0x00FFFFFF) == DARK_GREEN) {
+      cache.setType(CacheType.TRADITIONAL);
+      return;
+    }
+    if ((bitmap.getPixel(x + POSX_MYSTERY,y + POSY_MYSTERY) & 0x00FFFFFF) == DARK_BLUE) {
+      cache.setType(CacheType.MYSTERY);
+      return;
+    }
+    if ((bitmap.getPixel(x + POSX_MULTI,y + POSY_MULTI) & 0x00FFFFFF) == YELLOW) {
+      cache.setType(CacheType.MULTI);
+      return;
+    }
+    if ((bitmap.getPixel(x + POSX_FOUND,y + POSY_FOUND) & 0x00FFFFFF) == FOUND) {
+      cache.setFound(true);
+      return;
+    }
+  }
+ catch (  IllegalArgumentException e) {
+  }
+  return;
+}

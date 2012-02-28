@@ -53,7 +53,12 @@
         if (cache.getZoomlevel() < tile.getZoomlevel() || cache.getCoords() == null) {
           UTFGridPosition xy=getPositionInGrid(pos);
           cache.setCoords(tile.getCoord(xy));
-          parsePNG(cache,bitmap,xy);
+          if (tile.getZoomlevel() >= 14) {
+            parseMapPNG14(cache,bitmap,xy);
+          }
+ else {
+            parseMapPNG13(cache,bitmap,xy);
+          }
         }
         searchResult.addCache(cache);
       }

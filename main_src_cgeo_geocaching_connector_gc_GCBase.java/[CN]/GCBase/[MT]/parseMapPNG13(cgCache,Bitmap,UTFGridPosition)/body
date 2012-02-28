@@ -1,0 +1,28 @@
+{
+  int x=xy.getX() * 4 + 2;
+  int y=xy.getY() * 4 + 2;
+  int countY=0;
+  while ((bitmap.getPixel(x,y) & 0x00FFFFFF) != BORDER_GRAY) {
+    if (--y < 0 || ++countY > 12) {
+      return;
+    }
+  }
+  try {
+    int color=bitmap.getPixel(x,y + 2) & 0x00FFFFFF;
+switch (color) {
+case LIGHT_GREEN:
+      cache.setType(CacheType.TRADITIONAL);
+    return;
+case YELLOW:
+  cache.setType(CacheType.MULTI);
+return;
+}
+if ((color | 0x00FFFF) == 0x00FFFF) {
+cache.setType(CacheType.MYSTERY);
+return;
+}
+}
+ catch (IllegalArgumentException e) {
+}
+return;
+}
