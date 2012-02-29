@@ -11,5 +11,14 @@
   if (dir != null) {
     dirUpdate.updateDirection(dir);
   }
+  if (!CollectionUtils.isEmpty(dirtyCaches)) {
+    for (    String geocode : dirtyCaches) {
+      cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+      caches.remove(cache);
+      caches.add(cache);
+    }
+    dirtyCaches.clear();
+    liveChanged=true;
+  }
   startTimer();
 }

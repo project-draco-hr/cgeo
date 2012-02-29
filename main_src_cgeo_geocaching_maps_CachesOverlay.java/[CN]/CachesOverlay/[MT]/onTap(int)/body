@@ -26,6 +26,7 @@
     if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
       Intent popupIntent=new Intent(context,cgeopopup.class);
       popupIntent.putExtra("geocode",coordinate.getGeocode());
+      CGeoMap.markCacheAsDirty(coordinate.getGeocode());
       context.startActivity(popupIntent);
     }
  else     if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {

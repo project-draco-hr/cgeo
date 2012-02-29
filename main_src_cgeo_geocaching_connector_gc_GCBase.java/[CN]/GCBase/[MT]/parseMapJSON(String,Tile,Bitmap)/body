@@ -1,6 +1,7 @@
 {
   final SearchResult searchResult=new SearchResult();
   try {
+    final LeastRecentlyUsedCache<String,String> nameCache=new LeastRecentlyUsedCache<String,String>(2000);
     if (StringUtils.isEmpty(data)) {
       throw new JSONException("No page given");
     }
@@ -26,16 +27,7 @@
         for (int j=0; j < dataForKey.length(); j++) {
           JSONObject cacheInfo=dataForKey.getJSONObject(j);
           String id=cacheInfo.getString("i");
-          cgCache cache=liveMapCache.get(id);
-          if (cache == null) {
-            cache=new cgCache();
-            cache.setDetailed(false);
-            cache.setReliableLatLon(false);
-            cache.setGeocode(newidToGeocode(id));
-            cache.setName(cacheInfo.getString("n"));
-            cache.setZoomlevel(tile.getZoomlevel());
-            liveMapCache.put(id,cache);
-          }
+          nameCache.put(id,cacheInfo.getString("n"));
           List<UTFGridPosition> listOfPositions=positions.get(id);
           if (listOfPositions == null) {
             listOfPositions=new ArrayList<UTFGridPosition>();
@@ -47,21 +39,27 @@
       }
     }
     for (    String id : positions.keySet()) {
-      List<UTFGridPosition> pos=positions.get(id);
-      cgCache cache=liveMapCache.get(id);
-      if (cache != null) {
-        if (cache.getZoomlevel() < tile.getZoomlevel() || cache.getCoords() == null) {
-          UTFGridPosition xy=getPositionInGrid(pos);
-          cache.setCoords(tile.getCoord(xy));
-          if (tile.getZoomlevel() >= 14) {
-            parseMapPNG14(cache,bitmap,xy);
-          }
- else {
-            parseMapPNG13(cache,bitmap,xy);
-          }
-        }
-        searchResult.addCache(cache);
+      String geocode=geocodeCache.get(id);
+      if (geocode == null) {
+        geocode=newidToGeocode(id);
+        geocodeCache.put(id,geocode);
       }
+      List<UTFGridPosition> pos=positions.get(id);
+      UTFGridPosition xy=getPositionInGrid(pos);
+      cgCache cache=new cgCache();
+      cache.setDetailed(false);
+      cache.setReliableLatLon(false);
+      cache.setGeocode(geocode);
+      cache.setName(nameCache.get(id));
+      cache.setZoomlevel(tile.getZoomlevel());
+      cache.setCoords(tile.getCoord(xy));
+      if (tile.getZoomlevel() >= 14) {
+        parseMapPNG14(cache,bitmap,xy);
+      }
+ else {
+        parseMapPNG13(cache,bitmap,xy);
+      }
+      searchResult.addCache(cache);
     }
     Log.d(Settings.tag,"Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
   }

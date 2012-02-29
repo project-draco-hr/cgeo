@@ -43,7 +43,9 @@
       throw new ThreadDeath();
     }
     if (search != null) {
-      caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+      Set<cgCache> result=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+      caches.removeAll(result);
+      caches.addAll(result);
     }
     if (stop) {
       throw new ThreadDeath();
