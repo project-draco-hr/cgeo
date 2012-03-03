@@ -1,0 +1,12 @@
+{
+  final PackageManager packageManager=context.getPackageManager();
+  final Intent intent;
+  if (uri == null) {
+    intent=new Intent(action);
+  }
+ else {
+    intent=new Intent(action,uri);
+  }
+  List<ResolveInfo> list=packageManager.queryIntentActivities(intent,PackageManager.MATCH_DEFAULT_ONLY);
+  return list.size() > 0;
+}
