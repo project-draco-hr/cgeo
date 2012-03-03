@@ -1,7 +1,7 @@
 {
   init();
   List<StoredList> lists=new ArrayList<StoredList>();
-  lists.add(new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)getStatementStandardList().simpleQueryForLong()));
+  lists.add(new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)getStatementCountStandardList().simpleQueryForLong()));
   try {
     String query="SELECT l._id as _id, l.title as title, COUNT(c._id) as count" + " FROM " + dbTableLists + " l LEFT OUTER JOIN "+ dbTableCaches+ " c"+ " ON l._id + "+ customListIdOffset+ " = c.reason"+ " GROUP BY l._id"+ " ORDER BY l.title COLLATE NOCASE ASC";
     Cursor cursor=databaseRO.rawQuery(query,null);

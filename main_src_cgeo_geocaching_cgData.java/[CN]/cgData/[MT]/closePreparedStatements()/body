@@ -1,14 +1,5 @@
 {
-  if (statementDescription != null) {
-    statementDescription.close();
-    statementDescription=null;
-  }
-  if (statementLogCount != null) {
-    statementLogCount.close();
-    statementLogCount=null;
-  }
-  if (statementStandardList != null) {
-    statementStandardList.close();
-    statementStandardList=null;
+  for (  SQLiteStatement statement : statements.values()) {
+    statement.close();
   }
 }

@@ -1,6 +1,3 @@
 {
-  if (statementDescription == null) {
-    statementDescription=databaseRO.compileStatement("SELECT cacheid FROM " + dbTableCaches + " WHERE geocode = ?");
-  }
-  return statementDescription;
+  return getStatement("cacheIdFromGeocode","SELECT cacheid FROM " + dbTableCaches + " WHERE geocode = ?");
 }

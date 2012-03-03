@@ -1,0 +1,8 @@
+{
+  SQLiteStatement statement=statements.get(key);
+  if (statement == null) {
+    statement=databaseRO.compileStatement(query);
+    statements.put(key,statement);
+  }
+  return statement;
+}

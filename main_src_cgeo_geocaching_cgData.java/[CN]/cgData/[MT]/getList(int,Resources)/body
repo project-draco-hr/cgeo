@@ -8,7 +8,7 @@
     }
   }
   if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
-    return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)getStatementStandardList().simpleQueryForLong());
+    return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)getStatementCountStandardList().simpleQueryForLong());
   }
   return null;
 }

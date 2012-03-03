@@ -1,6 +1,3 @@
 {
-  if (statementLogCount == null) {
-    statementLogCount=databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
-  }
-  return statementLogCount;
+  return getStatement("LogCountFromGeocode","SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
 }

@@ -6,8 +6,8 @@
   try {
     final SQLiteStatement logCount=getStatementLogCount();
 synchronized (logCount) {
-      statementLogCount.bindString(1,geocode);
-      return statementLogCount.simpleQueryForLong() > 0;
+      logCount.bindString(1,geocode);
+      return logCount.simpleQueryForLong() > 0;
     }
   }
  catch (  Exception e) {
