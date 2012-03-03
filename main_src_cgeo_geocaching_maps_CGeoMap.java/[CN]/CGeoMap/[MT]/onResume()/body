@@ -13,7 +13,7 @@
   }
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
     for (    String geocode : dirtyCaches) {
-      cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+      cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
       caches.remove(cache);
       caches.add(cache);
     }
