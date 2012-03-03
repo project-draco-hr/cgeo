@@ -7,6 +7,6 @@
     for (int i=1; i < viewstates.length; i++) {
       params.put("__VIEWSTATE" + i,viewstates[i]);
     }
-    params.put("__VIEWSTATEFIELDCOUNT",viewstates.length + "");
+    params.put("__VIEWSTATEFIELDCOUNT",String.valueOf(viewstates.length));
   }
 }

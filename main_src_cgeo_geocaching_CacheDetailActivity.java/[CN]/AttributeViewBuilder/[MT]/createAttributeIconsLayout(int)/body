@@ -9,7 +9,7 @@
   for (  String attributeName : cache.getAttributes()) {
     boolean strikethru=attributeName.endsWith("_no");
     if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
-      attributeName=attributeName.substring(0,attributeName.lastIndexOf("_"));
+      attributeName=attributeName.substring(0,attributeName.lastIndexOf('_'));
     }
     attributeRow.measure(0,0);
     int rowWidth=attributeRow.getMeasuredWidth();

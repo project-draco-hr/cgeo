@@ -261,9 +261,9 @@
   }
   Button webAuth=(Button)findViewById(R.id.sendToCgeo_register);
   webAuth.setOnClickListener(new webAuth());
-  SortedMap<Integer,String> mapSources=MapProviderFactory.getMapSources();
+  Collection<String> mapSourceValues=MapProviderFactory.getMapSources().values();
   Spinner mapSourceSelector=(Spinner)findViewById(R.id.mapsource);
-  ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_item,mapSources.values().toArray(new String[]{}));
+  ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_item,mapSourceValues.toArray(new String[mapSourceValues.size()]));
   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
   mapSourceSelector.setAdapter(adapter);
   int mapsource=Settings.getMapSource();
