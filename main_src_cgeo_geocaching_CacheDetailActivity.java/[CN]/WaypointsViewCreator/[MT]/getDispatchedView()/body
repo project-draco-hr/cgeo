@@ -50,10 +50,10 @@
         final TextView noteView=(TextView)waypointView.findViewById(R.id.note);
         noteView.setVisibility(View.VISIBLE);
         if (BaseUtils.containsHtml(wpt.getNote())) {
-          noteView.setText(Html.fromHtml(wpt.getNote().trim()),TextView.BufferType.SPANNABLE);
+          noteView.setText(Html.fromHtml(wpt.getNote()),TextView.BufferType.SPANNABLE);
         }
  else {
-          noteView.setText(wpt.getNote().trim());
+          noteView.setText(wpt.getNote());
         }
       }
       registerForContextMenu(waypointView);
