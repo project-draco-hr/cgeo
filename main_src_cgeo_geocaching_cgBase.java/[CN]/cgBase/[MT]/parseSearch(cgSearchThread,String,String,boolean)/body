@@ -1,0 +1,214 @@
+{
+  if (StringUtils.isBlank(pageContent)) {
+    Log.e(Settings.tag,"cgeoBase.parseSearch: No page given");
+    return null;
+  }
+  final List<String> cids=new ArrayList<String>();
+  final List<String> guids=new ArrayList<String>();
+  String recaptchaChallenge=null;
+  String recaptchaText=null;
+  String page=pageContent;
+  final SearchResult searchResult=new SearchResult();
+  searchResult.setUrl(url);
+  searchResult.viewstates=getViewstates(page);
+  if (showCaptcha) {
+    String recaptchaJsParam=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
+    if (recaptchaJsParam != null) {
+      final Parameters params=new Parameters("k",recaptchaJsParam.trim());
+      final String recaptchaJs=cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge",params,true));
+      if (StringUtils.isNotBlank(recaptchaJs)) {
+        recaptchaChallenge=BaseUtils.getMatch(recaptchaJs,GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE,true,1,recaptchaChallenge,true);
+      }
+    }
+    if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
+      thread.setChallenge(recaptchaChallenge);
+      thread.notifyNeed();
+    }
+  }
+  if (!page.contains("SearchResultsTable")) {
+    return searchResult;
+  }
+  int startPos=page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
+  if (startPos == -1) {
+    Log.e(Settings.tag,"cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
+    return null;
+  }
+  page=page.substring(startPos);
+  startPos=page.indexOf(">");
+  int endPos=page.indexOf("ctl00_ContentBody_UnitTxt");
+  if (startPos == -1 || endPos == -1) {
+    Log.e(Settings.tag,"cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
+    return null;
+  }
+  page=page.substring(startPos + 1,endPos - startPos + 1);
+  final String[] rows=page.split("<tr class=");
+  final int rows_count=rows.length;
+  for (int z=1; z < rows_count; z++) {
+    final cgCache cache=new cgCache();
+    String row=rows[z];
+    if (!row.contains("images/wpttypes")) {
+      continue;
+    }
+    try {
+      final Matcher matcherGuidAndDisabled=GCConstants.PATTERN_SEARCH_GUIDANDDISABLED.matcher(row);
+      while (matcherGuidAndDisabled.find()) {
+        if (matcherGuidAndDisabled.groupCount() > 0) {
+          guids.add(matcherGuidAndDisabled.group(1));
+          cache.setGuid(matcherGuidAndDisabled.group(1));
+          if (matcherGuidAndDisabled.group(4) != null) {
+            cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(4).trim()).toString());
+          }
+          if (matcherGuidAndDisabled.group(6) != null) {
+            cache.setLocation(Html.fromHtml(matcherGuidAndDisabled.group(6).trim()).toString());
+          }
+          final String attr=matcherGuidAndDisabled.group(2);
+          if (attr != null) {
+            cache.setDisabled(attr.contains("Strike"));
+            cache.setArchived(attr.contains("OldWarning"));
+          }
+        }
+      }
+    }
+ catch (    Exception e) {
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
+    }
+    if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
+      continue;
+    }
+    String inventoryPre=null;
+    cache.setGeocode(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_GEOCODE,true,1,cache.getGeocode(),true).toUpperCase());
+    cache.setType(CacheType.getByPattern(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_TYPE,true,1,null,true)));
+    if (Settings.getLoadDirImg()) {
+      cache.setDirectionImg(URLDecoder.decode(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION,true,1,cache.getDirectionImg(),true)));
+    }
+    final Matcher matcherTbs=GCConstants.PATTERN_SEARCH_TRACKABLES.matcher(row);
+    while (matcherTbs.find()) {
+      if (matcherTbs.groupCount() > 0) {
+        cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
+        inventoryPre=matcherTbs.group(2);
+      }
+    }
+    if (StringUtils.isNotBlank(inventoryPre)) {
+      final Matcher matcherTbsInside=GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE.matcher(inventoryPre);
+      while (matcherTbsInside.find()) {
+        if (matcherTbsInside.groupCount() == 2 && matcherTbsInside.group(2) != null) {
+          final String inventoryItem=matcherTbsInside.group(2).toLowerCase();
+          if (inventoryItem.equals("premium member only cache")) {
+            continue;
+          }
+ else {
+            if (cache.getInventoryItems() <= 0) {
+              cache.setInventoryItems(1);
+            }
+          }
+        }
+      }
+    }
+    cache.setPremiumMembersOnly(row.contains("/images/small_profile.gif"));
+    cache.setFound(row.contains("/images/icons/icon_smile"));
+    cache.setOwn(row.contains("/images/silk/star.png"));
+    String result=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_ID,null);
+    if (null != result) {
+      cache.setCacheId(result);
+      cids.add(cache.getCacheId());
+    }
+    try {
+      result=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_FAVORITE,false,1,null,true);
+      if (null != result) {
+        cache.setFavoritePoints(Integer.parseInt(result));
+      }
+    }
+ catch (    NumberFormatException e) {
+      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse favourite count");
+    }
+    if (cache.getNameSp() == null) {
+      cache.setNameSp((new Spannable.Factory()).newSpannable(cache.getName()));
+      if (cache.isDisabled() || cache.isArchived()) {
+        cache.getNameSp().setSpan(new StrikethroughSpan(),0,cache.getNameSp().toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+      }
+    }
+    cache.setReliableLatLon(true);
+    searchResult.addCache(cache);
+  }
+  try {
+    String result=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
+    if (null != result) {
+      searchResult.totalCnt=Integer.parseInt(result);
+    }
+  }
+ catch (  NumberFormatException e) {
+    Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache count");
+  }
+  if (thread != null && recaptchaChallenge != null) {
+    if (thread.getText() == null) {
+      thread.waitForUser();
+    }
+    recaptchaText=thread.getText();
+  }
+  if (cids.size() > 0 && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
+    Log.i(Settings.tag,"Trying to get .loc for " + cids.size() + " caches");
+    try {
+      final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","");
+      if (ArrayUtils.isNotEmpty(searchResult.viewstates)) {
+        params.put("__VIEWSTATE",searchResult.viewstates[0]);
+        if (searchResult.viewstates.length > 1) {
+          for (int i=1; i < searchResult.viewstates.length; i++) {
+            params.put("__VIEWSTATE" + i,searchResult.viewstates[i]);
+          }
+          params.put("__VIEWSTATEFIELDCOUNT","" + searchResult.viewstates.length);
+        }
+      }
+      for (      String cid : cids) {
+        params.put("CID",cid);
+      }
+      if (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)) {
+        params.put("recaptcha_challenge_field",recaptchaChallenge);
+        params.put("recaptcha_response_field",recaptchaText);
+      }
+      params.put("ctl00$ContentBody$uxDownloadLoc","Download Waypoints");
+      final String coordinates=getResponseData(postRequest("http://www.geocaching.com/seek/nearest.aspx",params));
+      if (StringUtils.isNotBlank(coordinates)) {
+        if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
+          Log.i(Settings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");
+          searchResult.error=StatusCode.UNAPPROVED_LICENSE;
+          return searchResult;
+        }
+      }
+      LocParser.parseLoc(searchResult,coordinates);
+    }
+ catch (    Exception e) {
+      Log.e(Settings.tag,"cgBase.parseSearch.CIDs: " + e.toString());
+    }
+  }
+  if (Settings.getLoadDirImg()) {
+    final Set<cgCache> caches=cgeoapplication.getInstance().loadCaches(searchResult.getGeocodes(),LoadFlags.LOAD_CACHE_OR_DB);
+    for (    cgCache cache : caches) {
+      if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
+        DirectionImage.getDrawable(cache.getGeocode(),cache.getDirectionImg());
+      }
+    }
+  }
+  if (Settings.isRatingWanted()) {
+    if (guids.size() > 0) {
+      Log.i(Settings.tag,"Trying to get ratings for " + cids.size() + " caches");
+      try {
+        final Map<String,GCVoteRating> ratings=GCVote.getRating(guids,null);
+        if (MapUtils.isNotEmpty(ratings)) {
+          final Set<cgCache> caches=cgeoapplication.getInstance().loadCaches(searchResult.getGeocodes(),LoadFlags.LOAD_CACHE_OR_DB);
+          for (          cgCache cache : caches) {
+            if (ratings.containsKey(cache.getGuid())) {
+              GCVoteRating rating=ratings.get(cache.getGuid());
+              cache.setRating(rating.getRating());
+              cache.setVotes(rating.getVotes());
+              cache.setMyVote(rating.getMyVote());
+            }
+          }
+        }
+      }
+ catch (      Exception e) {
+        Log.e(Settings.tag,"cgBase.parseSearch.GCvote: " + e.toString());
+      }
+    }
+  }
+  return searchResult;
+}

@@ -1,0 +1,18 @@
+{
+  insertCacheType(params,cacheType);
+  final String uri="http://www.geocaching.com/seek/nearest.aspx";
+  final String fullUri=uri + "?" + addFToParams(params,false,true);
+  String page=requestLogged(uri,params,false,my,true);
+  if (StringUtils.isBlank(page)) {
+    Log.e(Settings.tag,"cgeoBase.searchByAny: No data from server");
+    return null;
+  }
+  final SearchResult searchResult=parseSearch(thread,fullUri,page,showCaptcha);
+  if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
+    Log.e(Settings.tag,"cgeoBase.searchByAny: No cache parsed");
+    return searchResult;
+  }
+  final SearchResult search=searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(),false,cacheType);
+  getLoginStatus(page);
+  return search;
+}

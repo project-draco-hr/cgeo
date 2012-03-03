@@ -11,7 +11,7 @@
     return search;
   }
   if (geocode == null && guid != null) {
-    return GCConnector.getInstance().searchByGeocode(null,guid,app,listId,handler);
+    return GCConnector.getInstance().searchByGeocode(null,guid,app,handler);
   }
-  return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode,guid,app,listId,handler);
+  return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode,guid,app,handler);
 }

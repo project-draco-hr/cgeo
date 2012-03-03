@@ -4,6 +4,6 @@
   if (cacheType != null) {
     params.put("cacheType",cacheType.id);
   }
-  search=cgBase.searchByOwner(this,username,cacheType,0,Settings.isShowCaptcha());
+  search=cgBase.searchByOwner(this,username,cacheType,Settings.isShowCaptcha());
   handler.sendMessage(new Message());
 }

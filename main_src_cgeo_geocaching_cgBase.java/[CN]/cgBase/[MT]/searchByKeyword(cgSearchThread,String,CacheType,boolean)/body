@@ -1,0 +1,8 @@
+{
+  if (StringUtils.isBlank(keyword)) {
+    Log.e(Settings.tag,"cgeoBase.searchByKeyword: No keyword given");
+    return null;
+  }
+  final Parameters params=new Parameters("key",keyword);
+  return searchByAny(thread,cacheType,false,showCaptcha,params);
+}
