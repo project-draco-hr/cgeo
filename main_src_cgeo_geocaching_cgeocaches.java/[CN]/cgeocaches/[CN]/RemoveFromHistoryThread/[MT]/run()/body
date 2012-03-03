@@ -11,6 +11,7 @@
         break;
       }
       app.clearVisitDate(cache.getGeocode());
+      detailProgress++;
       handler.sendEmptyMessage(cacheList.indexOf(cache));
       yield();
     }
