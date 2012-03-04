@@ -2,5 +2,7 @@
   cgeoapplication.getInstance().dropList(listId);
   cgeoapplication.getInstance().removeList(listId);
   deleteDirectory(tempDir);
+  Settings.setStoreOfflineMaps(importCacheStaticMaps);
+  Settings.setStoreOfflineWpMaps(importWpStaticMaps);
   super.tearDown();
 }

@@ -4,4 +4,8 @@
   tempDir.mkdir();
   cgeoapplication.getInstance().getAllHistoricCachesCount();
   listId=cgeoapplication.getInstance().createList("cgeogpxesTest");
+  importCacheStaticMaps=Settings.isStoreOfflineMaps();
+  Settings.setStoreOfflineMaps(true);
+  importWpStaticMaps=Settings.isStoreOfflineWpMaps();
+  Settings.setStoreOfflineWpMaps(true);
 }
