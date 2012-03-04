@@ -32,7 +32,7 @@
       }
       if (CollectionUtils.isNotEmpty(infoTextList)) {
         final TextView infoView=(TextView)waypointView.findViewById(R.id.info);
-        infoView.setText(StringUtils.join(infoTextList," ?? "));
+        infoView.setText(StringUtils.join(infoTextList,Formatter.SEPARATOR));
         infoView.setVisibility(View.VISIBLE);
       }
       TextView nameView=(TextView)waypointView.findViewById(R.id.name);
