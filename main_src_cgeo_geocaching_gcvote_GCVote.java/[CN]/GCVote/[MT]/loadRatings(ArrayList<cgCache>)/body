@@ -9,6 +9,9 @@
       guids.add(guid);
     }
   }
+  if (guids.isEmpty()) {
+    return;
+  }
   try {
     final Map<String,GCVoteRating> ratings=GCVote.getRating(guids,null);
     if (MapUtils.isNotEmpty(ratings)) {
