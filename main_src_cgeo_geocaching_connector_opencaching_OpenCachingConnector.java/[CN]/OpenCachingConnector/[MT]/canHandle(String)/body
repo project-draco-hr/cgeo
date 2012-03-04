@@ -1,3 +1,6 @@
 {
-  return StringUtils.startsWithIgnoreCase(geocode,prefix);
+  if (geocode == null) {
+    return false;
+  }
+  return codePattern.matcher(geocode).matches();
 }

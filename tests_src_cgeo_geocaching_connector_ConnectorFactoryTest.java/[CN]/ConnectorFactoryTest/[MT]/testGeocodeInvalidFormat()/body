@@ -1,0 +1,11 @@
+{
+  assertTrue(ConnectorFactory.getConnector("GC") instanceof UnknownConnector);
+  assertTrue(ConnectorFactory.getConnector("OC") instanceof UnknownConnector);
+  assertTrue(ConnectorFactory.getConnector("OX") instanceof UnknownConnector);
+  assertTrue(ConnectorFactory.getConnector("GC 1234") instanceof UnknownConnector);
+  assertTrue(ConnectorFactory.getConnector("OC 1234") instanceof UnknownConnector);
+  assertTrue(ConnectorFactory.getConnector("OX 1234") instanceof UnknownConnector);
+  assertTrue(ConnectorFactory.getConnector("GC-1234") instanceof UnknownConnector);
+  assertTrue(ConnectorFactory.getConnector("OC-1234") instanceof UnknownConnector);
+  assertTrue(ConnectorFactory.getConnector("OX-1234") instanceof UnknownConnector);
+}
