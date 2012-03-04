@@ -1,6 +1,6 @@
 {
-  menu.setHeaderTitle(res.getString(R.string.options_context_menu_title));
-  menu.add(viewId,MENU_FIELD_COPY,0,copyPrompt);
+  menu.setHeaderTitle(fieldTitle);
+  menu.add(viewId,MENU_FIELD_COPY,0,res.getString(android.R.string.copy));
   if (!copyOnly) {
     if (clickedItemText.length() > TranslationUtils.translationTextLengthToWarn) {
       showToast(res.getString(R.string.translate_length_warning));
