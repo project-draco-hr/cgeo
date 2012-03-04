@@ -19,7 +19,7 @@
     }
     if (cache == null) {
       if (handler != null) {
-        handler.sendMessage(new Message());
+        handler.sendMessage(Message.obtain());
       }
       return;
     }
@@ -60,7 +60,7 @@
     cache.setListId(listId);
     cgeoapplication.getInstance().saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
     if (handler != null) {
-      handler.sendMessage(new Message());
+      handler.sendMessage(Message.obtain());
     }
   }
  catch (  Exception e) {

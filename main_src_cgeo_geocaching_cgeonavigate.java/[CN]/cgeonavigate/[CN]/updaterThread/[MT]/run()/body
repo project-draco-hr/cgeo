@@ -1,7 +1,7 @@
 {
   while (!Thread.currentThread().isInterrupted()) {
     if (handler != null) {
-      handler.sendMessage(new Message());
+      handler.sendMessage(Message.obtain());
     }
     try {
       Thread.sleep(20);

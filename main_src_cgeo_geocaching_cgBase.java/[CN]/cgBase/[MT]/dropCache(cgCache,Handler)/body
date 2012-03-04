@@ -2,7 +2,7 @@
   try {
     cgeoapplication.getInstance().markDropped(cache.getGeocode());
     cgeoapplication.getInstance().removeCache(cache.getGeocode(),EnumSet.of(RemoveFlag.REMOVE_CACHE));
-    handler.sendMessage(new Message());
+    handler.sendMessage(Message.obtain());
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgBase.dropCache: " + e.toString());

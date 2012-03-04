@@ -9,6 +9,6 @@ synchronized (CompassView.this) {
       azimuthShown=smoothUpdate(northMeasured,azimuthShown);
       cacheHeadingShown=smoothUpdate(cacheHeadingMeasured,cacheHeadingShown);
     }
-    changeHandler.sendMessage(new Message());
+    changeHandler.sendMessage(Message.obtain());
   }
 }

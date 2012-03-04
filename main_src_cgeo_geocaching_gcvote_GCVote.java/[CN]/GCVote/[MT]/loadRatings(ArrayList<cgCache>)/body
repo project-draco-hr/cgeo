@@ -1,0 +1,28 @@
+{
+  if (!Settings.isRatingWanted()) {
+    return;
+  }
+  final ArrayList<String> guids=new ArrayList<String>(caches.size());
+  for (  final cgCache cache : caches) {
+    String guid=cache.getGuid();
+    if (StringUtils.isNotBlank(guid)) {
+      guids.add(guid);
+    }
+  }
+  try {
+    final Map<String,GCVoteRating> ratings=GCVote.getRating(guids,null);
+    if (MapUtils.isNotEmpty(ratings)) {
+      for (      cgCache cache : caches) {
+        if (ratings.containsKey(cache.getGuid())) {
+          GCVoteRating rating=ratings.get(cache.getGuid());
+          cache.setRating(rating.getRating());
+          cache.setVotes(rating.getVotes());
+          cache.setMyVote(rating.getMyVote());
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"GCvote.loadRatings: " + e.toString());
+  }
+}

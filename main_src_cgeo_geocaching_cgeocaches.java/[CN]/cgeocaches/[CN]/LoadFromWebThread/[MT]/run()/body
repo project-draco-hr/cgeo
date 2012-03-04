@@ -23,13 +23,13 @@
       if (response.length() > 2) {
         String GCcode=response;
         delay=1;
-        Message mes=new Message();
+        Message mes=Message.obtain();
         mes.what=1;
         mes.obj=GCcode;
         handler.sendMessage(mes);
         yield();
         cgBase.storeCache(cgeocaches.this,null,GCcode,listIdLFW,null);
-        Message mes1=new Message();
+        Message mes1=Message.obtain();
         mes1.what=2;
         mes1.obj=GCcode;
         handler.sendMessage(mes1);

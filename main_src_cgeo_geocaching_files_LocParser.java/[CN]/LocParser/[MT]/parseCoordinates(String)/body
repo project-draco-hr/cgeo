@@ -20,7 +20,7 @@
     final Matcher matcherLat=patternLat.matcher(pointString);
     final Matcher matcherLon=patternLon.matcher(pointString);
     if (matcherLat.find() && matcherLon.find()) {
-      pointCoord.setCoords(GeopointParser.parse(matcherLat.group(1).trim(),matcherLon.group(1).trim()));
+      pointCoord.setCoords(parsePoint(matcherLat.group(1).trim(),matcherLon.group(1).trim()));
     }
     final Matcher matcherDifficulty=patternDifficulty.matcher(pointString);
     if (matcherDifficulty.find()) {
