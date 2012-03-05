@@ -1,0 +1,13 @@
+{
+  if (waypoint.getId() <= 0) {
+    return false;
+  }
+  int index=0;
+  for (  cgWaypoint wp : waypoints) {
+    if (wp.getId() == waypoint.getId()) {
+      return deleteWaypoint(index);
+    }
+    index++;
+  }
+  return false;
+}
