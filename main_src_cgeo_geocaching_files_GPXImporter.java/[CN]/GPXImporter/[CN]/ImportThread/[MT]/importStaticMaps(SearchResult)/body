@@ -1,0 +1,14 @@
+{
+  final cgeoapplication app=cgeoapplication.getInstance();
+  Set<cgCache> caches=importedCaches.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+  int storedCacheMaps=0;
+  for (  cgCache cache : caches) {
+    Log.d(Settings.tag,"GPXImporter.ImportThread.importStaticMaps start downloadMaps");
+    StaticMapsProvider.downloadMaps(cache,app);
+    storedCacheMaps++;
+    if (progressHandler.isCancelled()) {
+      throw new CancellationException();
+    }
+    progressHandler.sendMessage(progressHandler.obtainMessage(0,storedCacheMaps,0));
+  }
+}

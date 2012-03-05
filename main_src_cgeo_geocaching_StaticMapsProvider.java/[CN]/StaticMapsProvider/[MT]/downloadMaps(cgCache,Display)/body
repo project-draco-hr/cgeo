@@ -1,0 +1,14 @@
+{
+  if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
+    return;
+  }
+  int edge=guessMinDisplaySide(display);
+  if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
+    storeCacheStaticMap(cache,edge,false);
+  }
+  if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+    for (    cgWaypoint waypoint : cache.getWaypoints()) {
+      storeWaypointStaticMap(cache,edge,waypoint,false);
+    }
+  }
+}

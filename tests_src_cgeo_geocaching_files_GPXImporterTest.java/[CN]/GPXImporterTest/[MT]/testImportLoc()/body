@@ -3,8 +3,8 @@
   copyResourceToFile(R.raw.oc5952_loc,oc5952);
   GPXImporter.ImportLocFileThread importThread=new GPXImporter.ImportLocFileThread(oc5952,listId,importStepHandler,progressHandler);
   runImportThread(importThread);
-  assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_CACHES,GPXImporter.IMPORT_STEP_FINISHED);
-  SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
+  assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_CACHES,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
+  SearchResult search=(SearchResult)importStepHandler.messages.get(4).obj;
   assertEquals(Collections.singletonList("OC5952"),new ArrayList<String>(search.getGeocodes()));
   cgCache cache=cgeoapplication.getInstance().loadCache("OC5952",LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
