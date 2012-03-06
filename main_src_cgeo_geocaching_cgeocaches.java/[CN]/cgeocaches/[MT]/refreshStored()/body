@@ -7,40 +7,19 @@
   }
   detailProgress=0;
   showProgress(false);
-  waitDialog=new ProgressDialog(this);
-  waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
-    public void onCancel(    DialogInterface arg0){
-      try {
-        if (threadDetails != null) {
-          threadDetails.kill();
-        }
-        if (geo == null) {
-          geo=app.startGeo(geoUpdate);
-        }
-        if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-          dir=app.startDir(cgeocaches.this,dirUpdate);
-        }
-      }
- catch (      Exception e) {
-        Log.e(Settings.tag,"cgeocaches.onOptionsItemSelected.onCancel: " + e.toString());
-      }
-    }
-  }
-);
-  waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
   int etaTime=((detailTotal * 25) / 60);
+  String message;
   if (etaTime < 1) {
-    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+    message=res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
   }
  else   if (etaTime == 1) {
-    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getString(R.string.caches_eta_min));
+    message=res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getString(R.string.caches_eta_min);
   }
  else {
-    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getString(R.string.caches_eta_mins));
+    message=res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getString(R.string.caches_eta_mins);
   }
-  waitDialog.setCancelable(true);
-  waitDialog.setMax(detailTotal);
-  waitDialog.show();
+  progress.show(this,null,message,ProgressDialog.STYLE_HORIZONTAL,loadDetailsHandler.obtainMessage(MSG_CANCEL));
+  progress.setMaxProgressAndReset(detailTotal);
   detailProgressTime=System.currentTimeMillis();
   threadDetails=new LoadDetailsThread(loadDetailsHandler,listId);
   threadDetails.start();

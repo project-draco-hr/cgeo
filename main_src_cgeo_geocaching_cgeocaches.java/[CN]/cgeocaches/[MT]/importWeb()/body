@@ -1,30 +1,7 @@
 {
   detailProgress=0;
   showProgress(false);
-  waitDialog=new ProgressDialog(this);
-  waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
-    public void onCancel(    DialogInterface arg0){
-      try {
-        if (threadWeb != null) {
-          threadWeb.kill();
-        }
-        if (geo == null) {
-          geo=app.startGeo(geoUpdate);
-        }
-        if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-          dir=app.startDir(cgeocaches.this,dirUpdate);
-        }
-      }
- catch (      Exception e) {
-        Log.e(Settings.tag,"cgeocaches.importWeb.onCancel: " + e.toString());
-      }
-    }
-  }
-);
-  waitDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-  waitDialog.setMessage(res.getString(R.string.web_import_waiting));
-  waitDialog.setCancelable(true);
-  waitDialog.show();
+  progress.show(this,null,res.getString(R.string.web_import_waiting),true,downloadFromWebHandler.obtainMessage(MSG_CANCEL));
   threadWeb=new LoadFromWebThread(downloadFromWebHandler,listId);
   threadWeb.start();
 }
