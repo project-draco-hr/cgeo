@@ -7,25 +7,8 @@
   }
   detailProgress=0;
   showProgress(false);
-  waitDialog=new ProgressDialog(this);
-  waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
-    public void onCancel(    DialogInterface arg0){
-      try {
-        if (threadH != null) {
-          threadH.kill();
-        }
-      }
- catch (      Exception e) {
-        Log.e(Settings.tag,"cgeocaches.removeFromHistory.onCancel: " + e.toString());
-      }
-    }
-  }
-);
-  waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-  waitDialog.setMessage(res.getString(R.string.caches_removing_from_history));
-  waitDialog.setCancelable(true);
-  waitDialog.setMax(detailTotal);
-  waitDialog.show();
+  progress.show(this,null,res.getString(R.string.caches_removing_from_history),ProgressDialog.STYLE_HORIZONTAL,removeFromHistoryHandler.obtainMessage(MSG_CANCEL));
+  progress.setMaxProgressAndReset(detailTotal);
   threadH=new RemoveFromHistoryThread(removeFromHistoryHandler);
   threadH.start();
 }
