@@ -9,4 +9,8 @@
       }
     }
   }
+  if (saveToDatabase) {
+    return cgeoapplication.getInstance().saveWaypoints(geocode,waypoints,false);
+  }
+  return false;
 }

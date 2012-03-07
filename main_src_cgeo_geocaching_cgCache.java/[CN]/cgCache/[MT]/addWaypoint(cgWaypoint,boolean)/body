@@ -1,0 +1,34 @@
+{
+  if (null == waypoints) {
+    waypoints=new ArrayList<cgWaypoint>();
+  }
+  waypoint.setGeocode(geocode);
+  if (waypoint.getId() <= 0) {
+    waypoints.add(waypoint);
+    if (waypoint.isFinalWithCoords()) {
+      finalDefined=true;
+    }
+  }
+ else {
+    int index=0;
+    for (    cgWaypoint wp : waypoints) {
+      if (wp.getId() == waypoint.getId()) {
+        waypoints.remove(index);
+        break;
+      }
+      index++;
+    }
+    waypoints.add(waypoint);
+    finalDefined=false;
+    for (    cgWaypoint wp : waypoints) {
+      if (wp.isFinalWithCoords()) {
+        finalDefined=true;
+        break;
+      }
+    }
+  }
+  if (saveToDatabase) {
+    return cgeoapplication.getInstance().saveOwnWaypoint(waypoint.getId(),geocode,waypoint);
+  }
+  return false;
+}

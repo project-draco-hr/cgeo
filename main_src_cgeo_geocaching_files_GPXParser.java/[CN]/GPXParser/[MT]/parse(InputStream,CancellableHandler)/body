@@ -56,7 +56,7 @@
           ArrayList<cgWaypoint> mergedWayPoints=new ArrayList<cgWaypoint>();
           mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
           cgWaypoint.mergeWayPoints(mergedWayPoints,Collections.singletonList(waypoint),true);
-          cacheForWaypoint.setWaypoints(mergedWayPoints);
+          cacheForWaypoint.setWaypoints(mergedWayPoints,false);
           result.put(cacheGeocodeForWaypoint,cacheForWaypoint);
           showProgressMessage(progressHandler,progressStream.getProgress());
         }
