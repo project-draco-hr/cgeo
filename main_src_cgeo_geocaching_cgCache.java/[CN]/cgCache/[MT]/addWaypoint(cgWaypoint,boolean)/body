@@ -10,14 +10,7 @@
     }
   }
  else {
-    int index=0;
-    for (    cgWaypoint wp : waypoints) {
-      if (wp.getId() == waypoint.getId()) {
-        waypoints.remove(index);
-        break;
-      }
-      index++;
-    }
+    deleteWaypoint(waypoint);
     waypoints.add(waypoint);
     finalDefined=false;
     for (    cgWaypoint wp : waypoints) {
