@@ -1,17 +1,9 @@
 {
-  if (dir != null) {
-    dir=app.removeDir();
-  }
-  if (geo != null) {
-    geo=app.removeGeo();
-  }
+  int ret=MSG_DONE;
+  removeGeoAndDir();
   int delay=-1;
   int times=0;
-  while (times < 3 * 60 / 5) {
-    if (needToStop) {
-      handler.sendEmptyMessage(-1);
-      break;
-    }
+  while (!needToStop && times < 3 * 60 / 5) {
     String deviceCode=Settings.getWebDeviceCode();
     if (deviceCode == null) {
       deviceCode="";
@@ -23,23 +15,17 @@
       if (response.length() > 2) {
         String GCcode=response;
         delay=1;
-        Message mes=Message.obtain();
-        mes.what=1;
-        mes.obj=GCcode;
-        handler.sendMessage(mes);
+        handler.sendMessage(handler.obtainMessage(1,GCcode));
         yield();
         cgBase.storeCache(cgeocaches.this,null,GCcode,listIdLFW,null);
-        Message mes1=Message.obtain();
-        mes1.what=2;
-        mes1.obj=GCcode;
-        handler.sendMessage(mes1);
+        handler.sendMessage(handler.obtainMessage(2,GCcode));
         yield();
       }
- else       if ("RG".equals(cgBase.getResponseData(responseFromWeb))) {
+ else       if ("RG".equals(response)) {
         Settings.setWebNameCode(null,null);
+        ret=-3;
         needToStop=true;
-        handler.sendEmptyMessage(-3);
-        return;
+        break;
       }
  else {
         delay=0;
@@ -48,9 +34,9 @@
       }
     }
     if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
+      ret=-2;
       needToStop=true;
-      handler.sendEmptyMessage(-2);
-      return;
+      break;
     }
     try {
       yield();
@@ -67,5 +53,5 @@
       Log.e(Settings.tag,"cgeocaches.LoadFromWebThread.sleep: " + e.toString());
     }
   }
-  handler.sendEmptyMessage(MSG_DONE);
+  handler.sendEmptyMessage(ret);
 }
