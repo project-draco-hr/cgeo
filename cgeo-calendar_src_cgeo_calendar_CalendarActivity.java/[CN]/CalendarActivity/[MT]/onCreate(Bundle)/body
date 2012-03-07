@@ -14,7 +14,13 @@
     location=getParameter(ICalendar.PARAM_LOCATION);
     coords=getParameter(ICalendar.PARAM_COORDS);
     if (name.length() > 0 && hiddenDate.length() > 0) {
-      selectCalendarForAdding();
+      if (Compatibility.isLevel14()) {
+        addToCalendarLevel14();
+        finish();
+      }
+ else {
+        selectCalendarForAdding();
+      }
     }
   }
  catch (  Exception e) {
