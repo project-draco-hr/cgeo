@@ -1,2 +1,8 @@
 {
+  Strategy strategy=Settings.getLiveMapStrategy();
+  if (strategy == Strategy.AUTO) {
+    float speedNow=cgeoapplication.getInstance().getSpeedFromGeo();
+    strategy=speedNow >= 8 ? Strategy.FASTEST : Strategy.DETAILED;
+  }
+  return searchByViewport(viewport,tokens,strategy);
 }

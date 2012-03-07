@@ -100,6 +100,30 @@ searchResult.addCache(cache);
 cgeocaches.startActivityMap(activity,search);
 return true;
 }
+case MENU_STRATEGY_FASTEST:
+{
+item.setChecked(true);
+Settings.setLiveMapStrategy(Strategy.FASTEST);
+return true;
+}
+case MENU_STRATEGY_FAST:
+{
+item.setChecked(true);
+Settings.setLiveMapStrategy(Strategy.FAST);
+return true;
+}
+case MENU_STRATEGY_AUTO:
+{
+item.setChecked(true);
+Settings.setLiveMapStrategy(Strategy.AUTO);
+return true;
+}
+case MENU_STRATEGY_DETAILED:
+{
+item.setChecked(true);
+Settings.setLiveMapStrategy(Strategy.DETAILED);
+return true;
+}
 default :
 if (MapProviderFactory.isValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
 item.setChecked(true);

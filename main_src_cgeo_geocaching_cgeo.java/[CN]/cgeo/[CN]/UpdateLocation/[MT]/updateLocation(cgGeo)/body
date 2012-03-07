@@ -28,11 +28,12 @@
       navSatellites.setText(satellites);
       navType.setText(res.getString(geo.locationProvider.resourceId));
       if (geo.accuracyNow >= 0) {
+        int speed=Math.round(geo.speedNow) * 60 * 60 / 1000;
         if (Settings.isUseMetricUnits()) {
-          navAccuracy.setText("??" + Math.round(geo.accuracyNow) + " m");
+          navAccuracy.setText("??" + Math.round(geo.accuracyNow) + " m"+ Formatter.SEPARATOR+ speed+ " km/h");
         }
  else {
-          navAccuracy.setText("??" + Math.round(geo.accuracyNow * IConversion.METERS_TO_FEET) + " ft");
+          navAccuracy.setText("??" + Math.round(geo.accuracyNow * IConversion.METERS_TO_FEET) + " ft"+ Formatter.SEPARATOR+ speed / IConversion.MILES_TO_KILOMETER + " mph");
         }
       }
  else {

@@ -1,8 +1,9 @@
 {
-  List<Tile> tiles=new ArrayList<Tile>();
-  if (!Settings.isPremiumMember()) {
-    tiles.add(new Tile(viewport.getCenter(),14));
-  }
-  tiles.add(new Tile(viewport.getCenter(),12));
+  Set<Tile> tiles=new HashSet<Tile>();
+  int zoom=Math.min(Tile.calcZoomLon(viewport.bottomLeft,viewport.topRight),Tile.calcZoomLat(viewport.bottomLeft,viewport.topRight));
+  tiles.add(new Tile(viewport.bottomLeft,zoom));
+  tiles.add(new Tile(new Geopoint(viewport.getLatitudeMin(),viewport.getLongitudeMax()),zoom));
+  tiles.add(new Tile(new Geopoint(viewport.getLatitudeMax(),viewport.getLongitudeMin()),zoom));
+  tiles.add(new Tile(viewport.topRight,zoom));
   return tiles;
 }

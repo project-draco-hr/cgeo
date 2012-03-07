@@ -48,11 +48,16 @@
       cache.setName(nameCache.get(id));
       cache.setZoomlevel(tile.getZoomlevel());
       cache.setCoords(tile.getCoord(xy));
-      if (tile.getZoomlevel() >= 14) {
-        parseMapPNG14(cache,bitmap,xy);
+      if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+        if (tile.getZoomlevel() >= 14) {
+          parseMapPNG14(cache,bitmap,xy);
+        }
+ else {
+          parseMapPNG13(cache,bitmap,xy);
+        }
       }
  else {
-        parseMapPNG13(cache,bitmap,xy);
+        cache.setType(CacheType.UNKNOWN);
       }
       searchResult.addCache(cache);
     }

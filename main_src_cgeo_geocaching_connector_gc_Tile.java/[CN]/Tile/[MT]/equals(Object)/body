@@ -1,0 +1,9 @@
+{
+  if (this == o) {
+    return true;
+  }
+  if (!(o instanceof Tile)) {
+    return false;
+  }
+  return (this.getX() == ((Tile)o).getX()) && (this.getY() == ((Tile)o).getY()) && (this.getZoomlevel() == ((Tile)o).getZoomlevel());
+}
