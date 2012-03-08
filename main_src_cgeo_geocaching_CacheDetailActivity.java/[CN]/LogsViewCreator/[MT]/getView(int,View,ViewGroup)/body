@@ -76,9 +76,9 @@
     holder.statusMarker.setVisibility(View.GONE);
   }
   if (null == convertView) {
-    holder.author.setOnClickListener(new UserActionsClickListener());
+    holder.author.setOnClickListener(userActionsClickListener);
     holder.text.setMovementMethod(LinkMovementMethod.getInstance());
-    holder.text.setOnClickListener(new DecryptTextClickListener());
+    holder.text.setOnClickListener(decryptTextClickListener);
     registerForContextMenu(holder.text);
   }
   return rowView;
