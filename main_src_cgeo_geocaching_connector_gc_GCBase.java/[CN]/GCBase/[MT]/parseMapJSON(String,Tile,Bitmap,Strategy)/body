@@ -48,7 +48,7 @@
       cache.setName(nameCache.get(id));
       cache.setZoomlevel(tile.getZoomlevel());
       cache.setCoords(tile.getCoord(xy));
-      if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+      if (strategy.flags.contains(StrategyFlag.PARSE_TILES)) {
         if (tile.getZoomlevel() >= 14) {
           parseMapPNG14(cache,bitmap,xy);
         }
