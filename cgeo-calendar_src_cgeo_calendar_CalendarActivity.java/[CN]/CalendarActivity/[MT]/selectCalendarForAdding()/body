@@ -2,31 +2,30 @@
   final String[] projection=new String[]{"_id","displayName"};
   final Uri calendarProvider=Compatibility.getCalendarProviderURI();
   final Cursor cursor=managedQuery(calendarProvider,projection,"selected=1",null,null);
+  if (cursor == null || cursor.getCount() <= 0) {
+    showToast(getResources().getString(R.string.event_fail));
+    return;
+  }
   final Map<Integer,String> calendars=new HashMap<Integer,String>();
-  if (cursor != null) {
-    if (cursor.getCount() > 0) {
-      cursor.moveToFirst();
-      final int indexId=cursor.getColumnIndex("_id");
-      final int indexName=cursor.getColumnIndex("displayName");
-      do {
-        final String idString=cursor.getString(indexId);
-        if (idString != null) {
-          try {
-            int id=Integer.parseInt(idString);
-            final String calName=cursor.getString(indexName);
-            if (id > 0 && calName != null) {
-              calendars.put(id,calName);
-            }
-          }
- catch (          NumberFormatException e) {
-            e.printStackTrace();
-          }
+  cursor.moveToFirst();
+  final int indexId=cursor.getColumnIndex("_id");
+  final int indexName=cursor.getColumnIndex("displayName");
+  do {
+    final String idString=cursor.getString(indexId);
+    if (idString != null) {
+      try {
+        int id=Integer.parseInt(idString);
+        final String calName=cursor.getString(indexName);
+        if (id > 0 && calName != null) {
+          calendars.put(id,calName);
         }
       }
- while (cursor.moveToNext());
+ catch (      NumberFormatException e) {
+        e.printStackTrace();
+      }
     }
-    cursor.close();
   }
+ while (cursor.moveToNext());
   if (calendars.isEmpty()) {
     return;
   }

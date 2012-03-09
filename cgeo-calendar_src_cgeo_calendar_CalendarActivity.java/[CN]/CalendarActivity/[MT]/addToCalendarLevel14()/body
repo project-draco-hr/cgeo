@@ -1,0 +1,13 @@
+{
+  try {
+    final Date eventDate=parseDate();
+    final String description=parseDescription();
+    final String location=parseLocation();
+    Intent intent=new Intent(Intent.ACTION_INSERT).setData(Compatibility.getCalendarEventsProviderURI()).putExtra("beginTime",eventDate.getTime() + 43200000).putExtra("allDay",true).putExtra("title",Html.fromHtml(name).toString()).putExtra("description",description).putExtra("hasAlarm",false).putExtra("eventTimezone","UTC").putExtra("eventLocation",location);
+    startActivity(intent);
+  }
+ catch (  Exception e) {
+    showToast(getResources().getString(R.string.event_fail));
+    Log.e(LOG_TAG,"CalendarActivity.addToCalendarLevel14: " + e.toString());
+  }
+}
