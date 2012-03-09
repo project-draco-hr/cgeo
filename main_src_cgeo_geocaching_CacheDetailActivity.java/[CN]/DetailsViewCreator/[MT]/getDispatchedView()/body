@@ -102,7 +102,6 @@
   buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
   buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
   updateWatchlistBox();
-  updateDebugInfos();
   IConnector connector=ConnectorFactory.getConnector(cache);
   if (connector != null) {
     String license=connector.getLicenseText(cache);
