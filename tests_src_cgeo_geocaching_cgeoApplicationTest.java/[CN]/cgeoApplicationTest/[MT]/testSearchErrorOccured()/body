@@ -2,17 +2,9 @@
   ImmutablePair<String,String> login=Settings.getLogin();
   String memberStatus=Settings.getMemberStatus();
   try {
-    MockedCache cache=new GC2CJPF();
+    MockedCache cache=new GC1ZXX2();
     deleteCacheFromDBAndLogout(cache.getGeocode());
     SearchResult search=cgBase.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
-    assertNotNull(search);
-    assertEquals(1,search.getGeocodes().size());
-    assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-    cgCache searchedCache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-    assertNull(searchedCache.getCoords());
-    cache=new GC2JVEH();
-    deleteCacheFromDBAndLogout(cache.getGeocode());
-    search=cgBase.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
     assertNotNull(search);
     assertEquals(0,search.getGeocodes().size());
   }
