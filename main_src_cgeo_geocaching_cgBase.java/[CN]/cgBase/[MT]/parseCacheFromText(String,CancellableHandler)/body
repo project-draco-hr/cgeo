@@ -17,6 +17,11 @@
     searchResult.error=StatusCode.PREMIUM_ONLY;
     return searchResult;
   }
+  final String cacheName=Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_NAME,true,"")).toString();
+  if ("An Error Has Occurred".equalsIgnoreCase(cacheName)) {
+    searchResult.error=StatusCode.UNKNOWN_ERROR;
+    return searchResult;
+  }
   final cgCache cache=new cgCache();
   cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
   cache.setArchived(page.contains("<li>This cache has been archived,"));
@@ -25,7 +30,7 @@
   cache.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.getGeocode()));
   cache.setCacheId(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.getCacheId()));
   cache.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.getGuid()));
-  cache.setName(Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_NAME,true,cache.getName())).toString());
+  cache.setName(cacheName);
   cache.setOwnerReal(URLDecoder.decode(BaseUtils.getMatch(page,GCConstants.PATTERN_OWNERREAL,true,cache.getOwnerReal())));
   final String username=Settings.getUsername();
   if (cache.getOwnerReal() != null && username != null && cache.getOwnerReal().equalsIgnoreCase(username)) {
