@@ -15,7 +15,7 @@
   cgBase.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_loadpage);
   final String page=cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx",params,false,false,false);
   if (StringUtils.isEmpty(page)) {
-    SearchResult search=new SearchResult();
+    final SearchResult search=new SearchResult();
     if (app.isThere(geocode,guid,true,false)) {
       if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
         Log.i(Settings.tag,"Loading old cache from cache.");
@@ -36,6 +36,6 @@
     Log.e(Settings.tag,"cgeoBase.searchByGeocode: No cache parsed");
     return searchResult;
   }
-  SearchResult search=searchResult.filterSearchResults(false,false,Settings.getCacheType());
+  final SearchResult search=searchResult.filterSearchResults(false,false,Settings.getCacheType());
   return search;
 }
