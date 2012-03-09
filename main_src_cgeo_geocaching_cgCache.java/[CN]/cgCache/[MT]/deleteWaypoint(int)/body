@@ -8,13 +8,7 @@
     cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
     cgeoapplication.getInstance().removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
     if (waypoint.isFinalWithCoords()) {
-      finalDefined=false;
-      for (      cgWaypoint wp : waypoints) {
-        if (wp.isFinalWithCoords()) {
-          finalDefined=true;
-          break;
-        }
-      }
+      resetFinalDefined();
     }
     return true;
   }

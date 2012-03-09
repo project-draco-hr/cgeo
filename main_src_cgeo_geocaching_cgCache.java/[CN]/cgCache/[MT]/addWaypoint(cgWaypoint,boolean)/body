@@ -10,15 +10,12 @@
     }
   }
  else {
-    deleteWaypoint(waypoint);
-    waypoints.add(waypoint);
-    finalDefined=false;
-    for (    cgWaypoint wp : waypoints) {
-      if (wp.isFinalWithCoords()) {
-        finalDefined=true;
-        break;
-      }
+    final int index=getWaypointIndex(waypoint);
+    if (index >= 0) {
+      waypoints.remove(index);
     }
+    waypoints.add(waypoint);
+    resetFinalDefined();
   }
   if (saveToDatabase) {
     return cgeoapplication.getInstance().saveOwnWaypoint(waypoint.getId(),geocode,waypoint);
