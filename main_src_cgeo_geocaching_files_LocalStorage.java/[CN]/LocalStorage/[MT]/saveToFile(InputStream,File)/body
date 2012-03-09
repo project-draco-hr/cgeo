@@ -1,24 +1,23 @@
 {
-  if (entity == null) {
+  if (inputStream == null) {
     return false;
   }
   try {
-    final InputStream is=entity.getContent();
     try {
       final FileOutputStream fos=new FileOutputStream(targetFile);
       try {
-        return copy(is,fos);
+        return copy(inputStream,fos);
       }
   finally {
         fos.close();
       }
     }
   finally {
-      is.close();
+      inputStream.close();
     }
   }
  catch (  IOException e) {
-    Log.e(Settings.tag,"LocalStorage.saveEntityToFile",e);
+    Log.e(Settings.tag,"LocalStorage.saveToFile",e);
   }
   return false;
 }

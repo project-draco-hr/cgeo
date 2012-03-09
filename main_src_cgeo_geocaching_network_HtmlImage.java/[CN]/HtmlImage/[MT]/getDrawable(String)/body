@@ -8,20 +8,18 @@
   }
   if (imagePre == null || onlySave) {
     final String absoluteURL=makeAbsoluteURL(url);
-    BufferedHttpEntity bufferedEntity=null;
     if (absoluteURL != null) {
       try {
         final HttpResponse httpResponse=cgBase.request(absoluteURL,null,false);
         if (httpResponse != null) {
-          bufferedEntity=new BufferedHttpEntity(httpResponse.getEntity());
+          final File file=LocalStorage.getStorageFile(geocode,url,true,true);
+          LocalStorage.saveEntityToFile(httpResponse,file);
         }
       }
  catch (      Exception e) {
         Log.e(Settings.tag,"HtmlImage.getDrawable (downloading from web)",e);
       }
     }
-    final File file=LocalStorage.getStorageFile(geocode,url,true,true);
-    LocalStorage.saveEntityToFile(bufferedEntity,file);
   }
   if (onlySave) {
     return null;

@@ -1,0 +1,12 @@
+{
+  if (response == null) {
+    return false;
+  }
+  try {
+    return saveToFile(response.getEntity().getContent(),targetFile);
+  }
+ catch (  IOException e) {
+    Log.e(Settings.tag,"LocalStorage.saveEntityToFile",e);
+  }
+  return false;
+}

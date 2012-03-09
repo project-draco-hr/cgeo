@@ -4,7 +4,7 @@
   final File file=getMapFile(cache.getGeocode(),prefix,level,true);
   final HttpResponse httpResponse=cgBase.request(url,null,false);
   if (httpResponse != null) {
-    if (LocalStorage.saveEntityToFile(httpResponse.getEntity(),file)) {
+    if (LocalStorage.saveEntityToFile(httpResponse,file)) {
       final long fileSize=file.length();
       if (fileSize < MIN_MAP_IMAGE_BYTES) {
         file.delete();
