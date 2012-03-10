@@ -22,7 +22,7 @@
     for (int i=1; i < keys.length(); i++) {
       String key=keys.getString(i);
       if (StringUtils.isNotBlank(key)) {
-        int[] xy=splitJSONKey(key);
+        UTFGridPosition pos=UTFGridPosition.fromString(key);
         JSONArray dataForKey=dataObject.getJSONArray(key);
         for (int j=0; j < dataForKey.length(); j++) {
           JSONObject cacheInfo=dataForKey.getJSONObject(j);
@@ -31,10 +31,9 @@
           List<UTFGridPosition> listOfPositions=positions.get(id);
           if (listOfPositions == null) {
             listOfPositions=new ArrayList<UTFGridPosition>();
+            positions.put(id,listOfPositions);
           }
-          UTFGridPosition pos=new UTFGridPosition(xy[0],xy[1]);
           listOfPositions.add(pos);
-          positions.put(id,listOfPositions);
         }
       }
     }
@@ -50,10 +49,10 @@
       cache.setCoords(tile.getCoord(xy));
       if (strategy.flags.contains(StrategyFlag.PARSE_TILES)) {
         if (tile.getZoomlevel() >= 14) {
-          parseMapPNG14(cache,bitmap,xy);
+          IconDecoder.parseMapPNG14(cache,bitmap,xy);
         }
  else {
-          parseMapPNG13(cache,bitmap,xy);
+          IconDecoder.parseMapPNG13(cache,bitmap,xy);
         }
       }
  else {

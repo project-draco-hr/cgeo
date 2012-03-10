@@ -1,13 +1,13 @@
 {
-  final Matcher matcher=PATTERN_JSON_KEY.matcher(key);
+  final Matcher matcher=UTFGridPosition.PATTERN_JSON_KEY.matcher(key);
   try {
     if (matcher.matches()) {
       final int x=Integer.parseInt(matcher.group(1));
       final int y=Integer.parseInt(matcher.group(2));
-      return new int[]{x,y};
+      return new UTFGridPosition(x,y);
     }
   }
  catch (  NumberFormatException e) {
   }
-  return new int[]{0,0};
+  return new UTFGridPosition(0,0);
 }

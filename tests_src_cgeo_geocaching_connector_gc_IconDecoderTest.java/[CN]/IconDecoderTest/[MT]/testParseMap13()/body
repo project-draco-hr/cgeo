@@ -1,0 +1,6 @@
+{
+  final Bitmap bitmap=getBitmap(R.raw.tile13);
+  assertEquals(CacheType.TRADITIONAL,parse13(bitmap,146 / 4,225 / 4).getType());
+  assertEquals(CacheType.MYSTERY,parse13(bitmap,181 / 4,116 / 4).getType());
+  assertEquals(CacheType.MULTI,parse13(bitmap,118 / 4,230 / 4).getType());
+}

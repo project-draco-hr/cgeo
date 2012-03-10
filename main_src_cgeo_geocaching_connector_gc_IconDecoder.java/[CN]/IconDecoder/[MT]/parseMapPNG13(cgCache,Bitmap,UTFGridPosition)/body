@@ -1,0 +1,49 @@
+{
+  final int xCenter=xy.getX() * 4 + 2;
+  final int yCenter=xy.getY() * 4 + 2;
+  final int bitmapWidth=bitmap.getWidth();
+  final int bitmapHeight=bitmap.getHeight();
+  int countMulti=0;
+  int countFound=0;
+  for (int i=0; i < OFFSET_X.length; i++) {
+    final int x=xCenter + OFFSET_X[i];
+    if (x < 0 || x >= bitmapWidth) {
+      continue;
+    }
+    final int y=yCenter + OFFSET_Y[i];
+    if (y < 0 || y >= bitmapHeight) {
+      continue;
+    }
+    int color=bitmap.getPixel(x,y) & 0x00FFFFFF;
+    if (color == 0) {
+      continue;
+    }
+    int red=(color & 0xFF0000) >> 16;
+    int green=(color & 0xFF00) >> 8;
+    int blue=color & 0xFF;
+    if (green > 0x80 && green > red && green > blue) {
+      cache.setType(CacheType.TRADITIONAL);
+      return;
+    }
+    if (blue > 0x80 && blue > red && blue > green) {
+      cache.setType(CacheType.MYSTERY);
+      return;
+    }
+    if (red > 0x90 && blue < 0x10 && green < 0x10) {
+      cache.setType(CacheType.EVENT);
+      return;
+    }
+    if (red > 0xFA && green > 0xD0) {
+      countMulti++;
+    }
+    if (red < 0xF3 && red > 0xa0 && green > 0x20 && blue < 0x80) {
+      countFound++;
+    }
+  }
+  if (countFound > countMulti && countFound >= 2) {
+    cache.setFound(true);
+  }
+  if (countMulti > countFound && countMulti >= 5) {
+    cache.setType(CacheType.MULTI);
+  }
+}
