@@ -40,7 +40,7 @@
     }
     for (    String id : positions.keySet()) {
       List<UTFGridPosition> pos=positions.get(id);
-      UTFGridPosition xy=getPositionInGrid(pos);
+      UTFGridPosition xy=UTFGrid.getPositionInGrid(pos);
       cgCache cache=new cgCache();
       cache.setDetailed(false);
       cache.setReliableLatLon(false);

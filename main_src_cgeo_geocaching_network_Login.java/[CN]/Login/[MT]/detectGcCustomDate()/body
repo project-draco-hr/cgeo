@@ -1,0 +1,11 @@
+{
+  final String result=Network.getResponseData(Network.request("http://www.geocaching.com/account/ManagePreferences.aspx",null,false,false,false));
+  if (null == result) {
+    Log.w(Settings.tag,"cgeoBase.detectGcCustomDate: result is null");
+    return;
+  }
+  String customDate=BaseUtils.getMatch(result,GCConstants.PATTERN_CUSTOMDATE,true,null);
+  if (null != customDate) {
+    Settings.setGcCustomDate(customDate);
+  }
+}

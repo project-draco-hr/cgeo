@@ -5,7 +5,7 @@
   LinearLayout layoutStars=(LinearLayout)layout.findViewById(R.id.stars);
   viewName.setText(res.getString(nameId));
   viewValue.setText(String.format("%.1f",value) + ' ' + res.getString(R.string.cache_rating_of)+ " 5");
-  layoutStars.addView(cgBase.createStarRating(value,5,CacheDetailActivity.this),1);
+  layoutStars.addView(createStarRating(value,5,CacheDetailActivity.this),1);
   detailsList.addView(layout);
   return layout;
 }

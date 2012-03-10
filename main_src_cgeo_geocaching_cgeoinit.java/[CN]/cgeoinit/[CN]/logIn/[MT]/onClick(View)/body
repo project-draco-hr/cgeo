@@ -8,14 +8,14 @@
   loginDialog=ProgressDialog.show(cgeoinit.this,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
   loginDialog.setCancelable(false);
   Settings.setLogin(username,password);
-  cgBase.clearCookies();
+  Network.clearCookies();
   (new Thread(){
     @Override public void run(){
-      final StatusCode loginResult=cgBase.login();
+      final StatusCode loginResult=Login.login();
       Object payload=loginResult;
       if (loginResult == StatusCode.NO_ERROR) {
-        cgBase.detectGcCustomDate();
-        payload=cgBase.downloadAvatarAndGetMemberStatus(cgeoinit.this);
+        Login.detectGcCustomDate();
+        payload=Login.downloadAvatarAndGetMemberStatus(cgeoinit.this);
       }
       logInHandler.obtainMessage(0,payload).sendToTarget();
     }

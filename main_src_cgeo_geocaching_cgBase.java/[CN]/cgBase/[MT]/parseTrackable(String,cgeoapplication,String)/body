@@ -90,7 +90,7 @@
       logDone.type=LogType.getByIconName(matcherLogs.group(1));
       logDone.author=Html.fromHtml(matcherLogs.group(3)).toString().trim();
       try {
-        logDone.date=parseGcCustomDate(matcherLogs.group(2)).getTime();
+        logDone.date=Login.parseGcCustomDate(matcherLogs.group(2)).getTime();
       }
  catch (      ParseException e) {
       }

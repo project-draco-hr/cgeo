@@ -8,7 +8,7 @@
     }
     final String userToken=userTokenMatcher.group(1);
     final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),"decrypt","true","sf",Boolean.toString(friends));
-    final HttpResponse response=request("http://www.geocaching.com/seek/geocache.logbook",params,false,false,false);
+    final HttpResponse response=Network.request("http://www.geocaching.com/seek/geocache.logbook",params,false,false,false);
     if (response == null) {
       Log.e(Settings.tag,"cgBase.loadLogsFromDetails: cannot log logs, response is null");
       return null;
@@ -18,7 +18,7 @@
       Log.e(Settings.tag,"cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
       return null;
     }
-    rawResponse=cgBase.getResponseData(response);
+    rawResponse=Network.getResponseData(response);
     if (rawResponse == null) {
       Log.e(Settings.tag,"cgBase.loadLogsFromDetails: unable to read whole response");
       return null;
@@ -43,7 +43,7 @@
       final String logIconName=logIconNameExt.substring(0,logIconNameExt.length() - 4);
       logDone.type=LogType.getByIconName(logIconName);
       try {
-        logDone.date=parseGcCustomDate(entry.getString("Visited")).getTime();
+        logDone.date=Login.parseGcCustomDate(entry.getString("Visited")).getTime();
       }
  catch (      ParseException e) {
         Log.e(Settings.tag,"cgBase.loadLogsFromDetails: failed to parse log date.");

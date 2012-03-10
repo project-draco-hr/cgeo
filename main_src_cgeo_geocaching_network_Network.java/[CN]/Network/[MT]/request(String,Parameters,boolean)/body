@@ -1,0 +1,9 @@
+{
+  final String fullUri=params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
+  final HttpRequestBase request=new HttpGet(fullUri);
+  request.setHeader("X-Requested-With","XMLHttpRequest");
+  if (xContentType) {
+    request.setHeader("Content-Type","application/x-www-form-urlencoded");
+  }
+  return Network.request(request);
+}

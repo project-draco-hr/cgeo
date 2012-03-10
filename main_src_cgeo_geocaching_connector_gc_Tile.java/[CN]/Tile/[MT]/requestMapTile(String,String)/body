@@ -1,0 +1,14 @@
+{
+  final HttpGet request=new HttpGet(url);
+  request.addHeader("Accept","image/png,image/*;q=0.8,*/*;q=0.5");
+  request.addHeader("Referer",referer);
+  request.addHeader("X-Requested-With","XMLHttpRequest");
+  final HttpResponse response=Network.request(request);
+  try {
+    return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
+  }
+ catch (  IOException e) {
+    Log.e(Settings.tag,"cgBase.requestMapTile() " + e.getMessage());
+  }
+  return null;
+}

@@ -1,6 +1,6 @@
 {
-  final HttpResponse response=cgBase.request(GCConstants.URL_LIVE_MAP,null,false);
-  final String data=cgBase.getResponseData(response);
+  final HttpResponse response=Network.request(GCConstants.URL_LIVE_MAP,null,false);
+  final String data=Network.getResponseData(response);
   String userSession=BaseUtils.getMatch(data,GCConstants.PATTERN_USERSESSION,"");
   String sessionToken=BaseUtils.getMatch(data,GCConstants.PATTERN_SESSIONTOKEN,"");
   return new String[]{userSession,sessionToken};

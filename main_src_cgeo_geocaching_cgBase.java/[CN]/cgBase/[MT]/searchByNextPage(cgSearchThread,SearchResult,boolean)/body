@@ -14,12 +14,12 @@
   }
   final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
   final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
-  putViewstates(params,viewstates);
-  String page=getResponseData(postRequest(uri,params));
-  if (!getLoginStatus(page)) {
-    final StatusCode loginState=login();
+  Login.putViewstates(params,viewstates);
+  String page=Network.getResponseData(Network.postRequest(uri,params));
+  if (!Login.getLoginStatus(page)) {
+    final StatusCode loginState=Login.login();
     if (loginState == StatusCode.NO_ERROR) {
-      page=getResponseData(postRequest(uri,params));
+      page=Network.getResponseData(Network.postRequest(uri,params));
     }
  else     if (loginState == StatusCode.NO_LOGIN_INFO_STORED) {
       Log.i(Settings.tag,"Working as guest.");

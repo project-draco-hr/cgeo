@@ -1,0 +1,26 @@
+{
+  if (StringUtils.isBlank(page)) {
+    Log.e(Settings.tag,"cgeoBase.checkLogin: No page given");
+    return false;
+  }
+  if (cgBase.res != null) {
+    setActualStatus(cgBase.res.getString(R.string.init_login_popup_ok));
+  }
+  setActualLoginStatus(BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME));
+  if (isActualLoginStatus()) {
+    setActualUserName(BaseUtils.getMatch(page,GCConstants.PATTERN_LOGIN_NAME,true,"???"));
+    setActualMemberStatus(BaseUtils.getMatch(page,GCConstants.PATTERN_MEMBER_STATUS,true,"???"));
+    setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll("[,.]","")));
+    return true;
+  }
+  setActualLoginStatus(BaseUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
+  if (isActualLoginStatus()) {
+    setActualUserName(Settings.getUsername());
+    setActualMemberStatus(Settings.getMemberStatus());
+    return true;
+  }
+  if (cgBase.res != null) {
+    setActualStatus(cgBase.res.getString(R.string.init_login_popup_failed));
+  }
+  return false;
+}

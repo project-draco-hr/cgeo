@@ -13,8 +13,8 @@
       loadDataHandler.sendEmptyMessage(0);
       return;
     }
-    final String page=cgBase.getResponseData(cgBase.request("http://www.geocaching.com/seek/log.aspx",params,false,false,false));
-    viewstates=cgBase.getViewstates(page);
+    final String page=Network.getResponseData(Network.request("http://www.geocaching.com/seek/log.aspx",params,false,false,false));
+    viewstates=Login.getViewstates(page);
     trackables=cgBase.parseTrackableLog(page);
     final List<LogType> typesPre=cgBase.parseTypes(page);
     if (CollectionUtils.isNotEmpty(typesPre)) {

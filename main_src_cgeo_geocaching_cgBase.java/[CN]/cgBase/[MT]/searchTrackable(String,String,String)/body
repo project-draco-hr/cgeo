@@ -15,7 +15,7 @@
  else   if (StringUtils.isNotBlank(id)) {
     params.put("id",id);
   }
-  String page=requestLogged("http://www.geocaching.com/track/details.aspx",params,false,false,false);
+  String page=Network.requestLogged("http://www.geocaching.com/track/details.aspx",params,false,false,false);
   if (StringUtils.isBlank(page)) {
     Log.e(Settings.tag,"cgeoBase.searchTrackable: No data from server");
     return trackable;

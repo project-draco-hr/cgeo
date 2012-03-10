@@ -10,12 +10,12 @@
   String page=pageContent;
   final SearchResult searchResult=new SearchResult();
   searchResult.setUrl(url);
-  searchResult.viewstates=getViewstates(page);
+  searchResult.viewstates=Login.getViewstates(page);
   if (showCaptcha) {
     String recaptchaJsParam=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
     if (recaptchaJsParam != null) {
       final Parameters params=new Parameters("k",recaptchaJsParam.trim());
-      final String recaptchaJs=cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge",params,true));
+      final String recaptchaJs=Network.getResponseData(Network.request("http://www.google.com/recaptcha/api/challenge",params,true));
       if (StringUtils.isNotBlank(recaptchaJs)) {
         recaptchaChallenge=BaseUtils.getMatch(recaptchaJs,GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE,true,1,null,true);
       }
@@ -166,7 +166,7 @@
         params.put("recaptcha_response_field",recaptchaText);
       }
       params.put("ctl00$ContentBody$uxDownloadLoc","Download Waypoints");
-      final String coordinates=getResponseData(postRequest("http://www.geocaching.com/seek/nearest.aspx",params),false);
+      final String coordinates=Network.getResponseData(Network.postRequest("http://www.geocaching.com/seek/nearest.aspx",params),false);
       if (StringUtils.isNotBlank(coordinates)) {
         if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
           Log.i(Settings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");

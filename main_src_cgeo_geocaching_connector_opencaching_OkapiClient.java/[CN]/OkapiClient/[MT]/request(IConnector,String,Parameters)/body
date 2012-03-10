@@ -11,5 +11,5 @@
   }
   final String uri="http://" + host + service;
   ((ApiOpenCachingConnector)connector).addAuthentication(params);
-  return cgBase.requestJSON(uri,params);
+  return Network.requestJSON(uri,params);
 }

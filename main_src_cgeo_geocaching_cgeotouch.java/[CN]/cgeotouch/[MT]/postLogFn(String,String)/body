@@ -8,7 +8,7 @@
     }
     final StatusCode status=cgBase.postLogTrackable(guid,tracking,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log);
     if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-      cgBase.postTweetTrackable(geocode);
+      Twitter.postTweetTrackable(geocode);
     }
     return status;
   }

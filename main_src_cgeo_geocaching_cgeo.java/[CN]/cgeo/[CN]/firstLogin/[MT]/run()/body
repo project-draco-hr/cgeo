@@ -2,10 +2,10 @@
   if (app == null) {
     return;
   }
-  final StatusCode status=cgBase.login();
+  final StatusCode status=Login.login();
   if (status == StatusCode.NO_ERROR) {
     app.firstRun=false;
-    cgBase.detectGcCustomDate();
+    Login.detectGcCustomDate();
     updateUserInfoHandler.sendEmptyMessage(-1);
   }
   if (app.showLoginToast) {

@@ -4,7 +4,7 @@
     return users;
   }
   final Parameters params=new Parameters("u",username,"ltm",viewport.bottomLeft.format(Format.LAT_DECDEGREE_RAW),"ltx",viewport.topRight.format(Format.LAT_DECDEGREE_RAW),"lnm",viewport.bottomLeft.format(Format.LON_DECDEGREE_RAW),"lnx",viewport.topRight.format(Format.LON_DECDEGREE_RAW));
-  final String data=cgBase.getResponseData(cgBase.postRequest("http://api.go4cache.com/get.php",params));
+  final String data=Network.getResponseData(Network.postRequest("http://api.go4cache.com/get.php",params));
   if (StringUtils.isBlank(data)) {
     Log.e(Settings.tag,"cgeoBase.getGeocachersInViewport: No data from server");
     return null;

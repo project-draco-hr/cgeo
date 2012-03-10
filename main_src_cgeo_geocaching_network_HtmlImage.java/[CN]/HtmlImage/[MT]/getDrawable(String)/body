@@ -10,7 +10,7 @@
     final String absoluteURL=makeAbsoluteURL(url);
     if (absoluteURL != null) {
       try {
-        final HttpResponse httpResponse=cgBase.request(absoluteURL,null,false);
+        final HttpResponse httpResponse=Network.request(absoluteURL,null,false);
         if (httpResponse != null) {
           final File file=LocalStorage.getStorageFile(geocode,url,true,true);
           LocalStorage.saveEntityToFile(httpResponse,file);

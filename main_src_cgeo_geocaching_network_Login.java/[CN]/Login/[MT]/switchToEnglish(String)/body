@@ -1,0 +1,19 @@
+{
+  if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
+    Log.i(Settings.tag,"Geocaching.com language already set to English");
+    getLoginStatus(Network.getResponseData(Network.request("http://www.geocaching.com/email/",null,false)));
+  }
+ else {
+    final String page=Network.getResponseData(Network.request("http://www.geocaching.com/default.aspx",null,false));
+    getLoginStatus(page);
+    if (page == null) {
+      Log.e(Settings.tag,"Failed to read viewstates to set geocaching.com language");
+    }
+    final Parameters params=new Parameters("__EVENTTARGET","ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem","__EVENTARGUMENT","");
+    Login.transferViewstates(page,params);
+    final HttpResponse response=Network.postRequest("http://www.geocaching.com/default.aspx",params);
+    if (!Network.isSuccess(response)) {
+      Log.e(Settings.tag,"Failed to set geocaching.com language to English");
+    }
+  }
+}

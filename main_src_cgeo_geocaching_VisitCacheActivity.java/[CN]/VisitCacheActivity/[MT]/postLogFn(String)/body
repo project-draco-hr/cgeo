@@ -28,7 +28,7 @@
       app.clearLogOffline(geocode);
     }
     if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-      cgBase.postTweetCache(geocode);
+      Twitter.postTweetCache(geocode);
     }
     if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
       GCVote.setRating(cache,rating);

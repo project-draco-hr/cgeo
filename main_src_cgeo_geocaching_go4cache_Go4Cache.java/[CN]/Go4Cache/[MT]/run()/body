@@ -19,7 +19,7 @@
       if (null != cgBase.version) {
         params.put("v",cgBase.version);
       }
-      cgBase.postRequest("http://api.go4cache.com/",params);
+      Network.postRequest("http://api.go4cache.com/",params);
       latestCoords=currentCoords;
       latestAction=currentAction;
     }

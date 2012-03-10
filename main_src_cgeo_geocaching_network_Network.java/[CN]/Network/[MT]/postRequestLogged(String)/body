@@ -1,0 +1,14 @@
+{
+  HttpResponse response=postRequest(uri,null);
+  String data=getResponseData(response);
+  if (!Login.getLoginStatus(data)) {
+    if (Login.login() == StatusCode.NO_ERROR) {
+      response=postRequest(uri,null);
+      data=getResponseData(response);
+    }
+ else {
+      Log.i(Settings.tag,"Working as guest.");
+    }
+  }
+  return data;
+}

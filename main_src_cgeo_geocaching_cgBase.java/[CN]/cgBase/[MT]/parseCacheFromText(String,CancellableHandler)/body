@@ -62,12 +62,12 @@
     try {
       String hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null);
       if (StringUtils.isNotBlank(hiddenString)) {
-        cache.setHidden(parseGcCustomDate(hiddenString));
+        cache.setHidden(Login.parseGcCustomDate(hiddenString));
       }
       if (cache.getHiddenDate() == null) {
         hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null);
         if (StringUtils.isNotBlank(hiddenString)) {
-          cache.setHidden(parseGcCustomDate(hiddenString));
+          cache.setHidden(Login.parseGcCustomDate(hiddenString));
         }
       }
     }
