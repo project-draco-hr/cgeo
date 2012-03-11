@@ -23,10 +23,10 @@ final int mapCenterLat=mapCenter.getLatitudeE6();
 final int mapCenterLon=mapCenter.getLongitudeE6();
 final int mapSpanLat=mapView.getLatitudeSpan();
 final int mapSpanLon=mapView.getLongitudeSpan();
-for (cgCache oneCache : cachesProtected) {
-if (oneCache != null && oneCache.getCoords() != null) {
-if (Viewport.isCacheInViewPort(mapCenterLat,mapCenterLon,mapSpanLat,mapSpanLon,oneCache.getCoords()) && !app.isOffline(oneCache.getGeocode(),null)) {
-geocodes.add(oneCache.getGeocode());
+for (cgCache cache : cachesProtected) {
+if (cache != null && cache.getCoords() != null) {
+if (Viewport.isCacheInViewPort(mapCenterLat,mapCenterLon,mapSpanLat,mapSpanLon,cache.getCoords()) && !app.isOffline(cache.getGeocode(),null)) {
+geocodes.add(cache.getGeocode());
 }
 }
 }

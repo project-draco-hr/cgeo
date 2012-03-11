@@ -1,3 +1,3 @@
 {
-  return Math.abs(coords.getLatitudeE6() - centerLat) <= Math.abs(spanLat) * 0.6 && Math.abs(coords.getLongitudeE6() - centerLon) <= Math.abs(spanLon) * 0.6;
+  return 2 * Math.abs(coords.getLatitudeE6() - centerLat) <= Math.abs(spanLat) && 2 * Math.abs(coords.getLongitudeE6() - centerLon) <= Math.abs(spanLon);
 }

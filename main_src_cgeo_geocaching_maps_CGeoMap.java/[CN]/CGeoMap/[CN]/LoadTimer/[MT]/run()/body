@@ -4,6 +4,7 @@
   int centerLongitudeNow;
   int spanLatitudeNow;
   int spanLongitudeNow;
+  int zoomNow;
   boolean moved=false;
   boolean force=false;
   long currentTime=0;
@@ -37,6 +38,11 @@
         if (moved && caches != null && centerLatitude != null && centerLongitude != null && ((Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow * 1.2)) || (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow * 1.2)))) {
           force=true;
         }
+        zoomNow=mapView.getMapZoomLevel();
+        if (moved || zoomNow != zoom || spanLatitudeNow != spanLatitude || spanLongitudeNow != spanLongitude || centerLatitudeNow != centerLatitude || centerLongitudeNow != centerLongitude) {
+          displayHandler.sendEmptyMessage(UPDATE_TITLE);
+        }
+        zoom=zoomNow;
         if (moved) {
           liveChanged=false;
           currentTime=System.currentTimeMillis();
