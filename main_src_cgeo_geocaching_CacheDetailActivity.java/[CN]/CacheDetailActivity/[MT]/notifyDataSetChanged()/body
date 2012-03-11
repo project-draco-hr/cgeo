@@ -9,6 +9,7 @@
     finish();
     return;
   }
+  cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
   for (  PageViewCreator creator : viewCreators.values()) {
     creator.notifyDataSetChanged();
   }
