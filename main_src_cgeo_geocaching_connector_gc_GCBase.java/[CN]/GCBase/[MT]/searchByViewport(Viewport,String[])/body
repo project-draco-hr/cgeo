@@ -4,5 +4,17 @@
     float speedNow=cgeoapplication.getInstance().getSpeedFromGeo();
     strategy=speedNow >= 8 ? Strategy.FASTEST : Strategy.DETAILED;
   }
-  return searchByViewport(viewport,tokens,strategy);
+{
+    SearchResult result=searchByViewport(viewport,tokens,strategy);
+    String text=Formatter.SEPARATOR + strategy.getL10n() + Formatter.SEPARATOR;
+    int speed=(int)cgeoapplication.getInstance().getSpeedFromGeo();
+    if (Settings.isUseMetricUnits()) {
+      text+=speed + " km/h";
+    }
+ else {
+      text+=speed / IConversion.MILES_TO_KILOMETER + " mph";
+    }
+    result.setUrl(result.getUrl() + text);
+    return result;
+  }
 }

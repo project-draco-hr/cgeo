@@ -47,13 +47,8 @@
       cache.setName(nameCache.get(id));
       cache.setZoomlevel(tile.getZoomlevel());
       cache.setCoords(tile.getCoord(xy));
-      if (strategy.flags.contains(StrategyFlag.PARSE_TILES)) {
-        if (tile.getZoomlevel() >= 14) {
-          IconDecoder.parseMapPNG14(cache,bitmap,xy);
-        }
- else {
-          IconDecoder.parseMapPNG13(cache,bitmap,xy);
-        }
+      if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && positions.size() < 64) {
+        IconDecoder.parseMapPNG(cache,bitmap,xy,tile.getZoomlevel());
       }
  else {
         cache.setType(CacheType.UNKNOWN);

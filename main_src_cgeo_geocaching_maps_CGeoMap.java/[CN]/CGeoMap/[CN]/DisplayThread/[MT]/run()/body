@@ -4,38 +4,38 @@
     if (mapView == null || caches == null) {
       throw new ThreadDeath();
     }
-    final List<cgCache> cachesProtected=new ArrayList<cgCache>(caches);
-    final List<CachesOverlayItemImpl> items=new ArrayList<CachesOverlayItemImpl>();
-    if (!cachesProtected.isEmpty()) {
-      for (      cgCache cacheOne : cachesProtected) {
+    final List<cgCache> cachesToDisplay=new ArrayList<cgCache>(caches);
+    final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<CachesOverlayItemImpl>();
+    if (!cachesToDisplay.isEmpty()) {
+      for (      cgCache cache : cachesToDisplay) {
         if (stop) {
           throw new ThreadDeath();
         }
-        if (cacheOne.getCoords() == null) {
+        if (cache.getCoords() == null) {
           continue;
         }
-        if (cacheOne.hasWaypoints() && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold()))) {
-          for (          cgWaypoint oneWaypoint : cacheOne.getWaypoints()) {
-            if (oneWaypoint.getCoords() == null) {
+        if (cache.hasWaypoints() && (cachesToDisplay.size() == 1 || (cachesToDisplay.size() < Settings.getWayPointsThreshold()))) {
+          for (          cgWaypoint waypoint : cache.getWaypoints()) {
+            if (waypoint.getCoords() == null) {
               continue;
             }
-            items.add(getItem(new cgCoord(oneWaypoint),null,oneWaypoint));
+            itemsToDisplay.add(getItem(new cgCoord(waypoint),null,waypoint));
           }
         }
-        items.add(getItem(new cgCoord(cacheOne),cacheOne,null));
+        itemsToDisplay.add(getItem(new cgCoord(cache),cache,null));
       }
-      overlayCaches.updateItems(items);
+      overlayCaches.updateItems(itemsToDisplay);
       displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-      cachesCnt=cachesProtected.size();
+      cachesCnt=cachesToDisplay.size();
       if (stop) {
         throw new ThreadDeath();
       }
     }
  else {
-      overlayCaches.updateItems(items);
+      overlayCaches.updateItems(itemsToDisplay);
       displayHandler.sendEmptyMessage(INVALIDATE_MAP);
     }
-    cachesProtected.clear();
+    cachesToDisplay.clear();
     displayHandler.sendEmptyMessage(UPDATE_TITLE);
   }
  catch (  ThreadDeath e) {
