@@ -1,0 +1,41 @@
+{
+  try {
+    showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
+    loadThreadRun=System.currentTimeMillis();
+    if (searchIntent != null || geocodeIntent != null) {
+      search=new SearchResult(searchIntent);
+      if (geocodeIntent != null) {
+        search.addGeocode(geocodeIntent);
+      }
+    }
+ else {
+      if (!live || !Settings.isLiveMap()) {
+        search=new SearchResult(app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType()));
+      }
+ else {
+        search=new SearchResult(app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType()));
+      }
+    }
+    if (search != null) {
+      downloaded=true;
+    }
+    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
+    if (live) {
+      final boolean excludeMine=Settings.isExcludeMyCaches();
+      final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
+      final ArrayList<cgCache> tempList=new ArrayList<cgCache>(caches);
+      for (      cgCache cache : tempList) {
+        if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
+          caches.remove(cache);
+        }
+      }
+    }
+    displayExecutor.execute(new DisplayRunnable(centerLat,centerLon,spanLat,spanLon));
+    if (live && Settings.isLiveMap()) {
+      downloadExecutor.execute(new DownloadRunnable(centerLat,centerLon,spanLat,spanLon));
+    }
+  }
+  finally {
+    showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
+  }
+}

@@ -1,5 +1,4 @@
 {
-  coordinates.add(coord);
   if (cache != null) {
     CachesOverlayItemImpl item=mapProvider.getCachesOverlayItem(coord,cache.getType());
     int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.isOwn()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).toHashCode();

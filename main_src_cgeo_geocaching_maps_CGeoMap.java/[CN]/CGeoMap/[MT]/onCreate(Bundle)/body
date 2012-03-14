@@ -25,8 +25,8 @@
   if (overlayPosition == null) {
     overlayPosition=mapView.createAddPositionOverlay(activity);
   }
-  if (Settings.isPublicLoc() && overlayOtherCachers == null) {
-    overlayOtherCachers=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
+  if (Settings.isPublicLoc() && overlayGo4Cache == null) {
+    overlayGo4Cache=mapView.createAddUsersOverlay(activity,getResources().getDrawable(R.drawable.user_location));
   }
   if (overlayCaches == null) {
     overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker));

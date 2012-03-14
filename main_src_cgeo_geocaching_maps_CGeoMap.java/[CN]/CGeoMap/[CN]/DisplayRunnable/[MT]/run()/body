@@ -1,0 +1,41 @@
+{
+  try {
+    showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
+    if (mapView == null || caches == null) {
+      throw new ThreadDeath();
+    }
+    final List<cgCache> cachesToDisplay=new ArrayList<cgCache>(caches);
+    final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<CachesOverlayItemImpl>();
+    if (!cachesToDisplay.isEmpty()) {
+      for (      cgCache cache : cachesToDisplay) {
+        if (cache.getCoords() == null) {
+          continue;
+        }
+        if (cache.hasWaypoints() && (cachesToDisplay.size() == 1 || (cachesToDisplay.size() < Settings.getWayPointsThreshold()))) {
+          for (          cgWaypoint waypoint : cache.getWaypoints()) {
+            if (waypoint.getCoords() == null) {
+              continue;
+            }
+            itemsToDisplay.add(getItem(new cgCoord(waypoint),null,waypoint));
+          }
+        }
+        itemsToDisplay.add(getItem(new cgCoord(cache),cache,null));
+      }
+      overlayCaches.updateItems(itemsToDisplay);
+      displayHandler.sendEmptyMessage(INVALIDATE_MAP);
+      cachesCnt=cachesToDisplay.size();
+    }
+ else {
+      overlayCaches.updateItems(itemsToDisplay);
+      displayHandler.sendEmptyMessage(INVALIDATE_MAP);
+    }
+    displayHandler.sendEmptyMessage(UPDATE_TITLE);
+  }
+ catch (  ThreadDeath e) {
+    Log.d(Settings.tag,"DisplayThread stopped");
+    displayHandler.sendEmptyMessage(UPDATE_TITLE);
+  }
+ finally {
+    showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
+  }
+}
