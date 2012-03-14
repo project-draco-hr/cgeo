@@ -1,9 +1,9 @@
 {
-  StoredList list=null;
-  if (id >= 0) {
-    list=app.getList(id);
+  if (id < 0) {
+    return;
   }
- else {
+  StoredList list=app.getList(id);
+  if (list == null) {
     return;
   }
   listId=list.id;
