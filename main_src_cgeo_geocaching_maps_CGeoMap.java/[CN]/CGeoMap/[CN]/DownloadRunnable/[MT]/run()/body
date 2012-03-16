@@ -1,0 +1,41 @@
+{
+  try {
+    showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
+    int count=0;
+    do {
+      if (tokens == null) {
+        tokens=GCBase.getTokens();
+        if (noMapTokenHandler != null && tokens == null) {
+          noMapTokenHandler.sendEmptyMessage(0);
+        }
+      }
+      final Viewport viewport=new Viewport(new Geopoint(centerLat / 1e6,centerLon / 1e6),0.8 * spanLat / 1e6,0.8 * spanLon / 1e6);
+      search=ConnectorFactory.searchByViewport(viewport,tokens);
+      if (search != null) {
+        downloaded=true;
+        if (search.error == StatusCode.NOT_LOGGED_IN) {
+          Login.login();
+          tokens=null;
+        }
+ else {
+          break;
+        }
+      }
+      count++;
+    }
+ while (count < 2);
+    if (search != null) {
+      Set<cgCache> result=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+      caches.removeAll(result);
+      caches.addAll(result);
+    }
+    displayExecutor.execute(new DisplayRunnable(centerLat,centerLon,spanLat,spanLon));
+  }
+ catch (  ThreadDeath e) {
+    Log.d(Settings.tag,"DownloadThread stopped");
+    displayHandler.sendEmptyMessage(UPDATE_TITLE);
+  }
+ finally {
+    showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
+  }
+}

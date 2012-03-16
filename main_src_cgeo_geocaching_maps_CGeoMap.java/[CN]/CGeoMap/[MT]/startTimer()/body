@@ -11,11 +11,11 @@
     loadTimer.start();
   }
   if (Settings.isPublicLoc()) {
-    if (usersTimer != null) {
-      usersTimer.stopIt();
-      usersTimer=null;
+    if (go4CacheTimer != null) {
+      go4CacheTimer.stopIt();
+      go4CacheTimer=null;
     }
-    usersTimer=new UsersTimer();
-    usersTimer.start();
+    go4CacheTimer=new Go4CacheTimer();
+    go4CacheTimer.start();
   }
 }

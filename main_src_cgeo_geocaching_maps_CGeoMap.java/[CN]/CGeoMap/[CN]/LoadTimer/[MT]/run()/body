@@ -1,27 +1,16 @@
 {
-  GeoPointImpl mapCenterNow;
-  int centerLatitudeNow;
-  int centerLongitudeNow;
-  int spanLatitudeNow;
-  int spanLongitudeNow;
-  int zoomNow;
-  boolean moved=false;
-  boolean force=false;
-  long currentTime=0;
   while (!stop) {
     try {
       sleep(250);
       if (mapView != null) {
-        mapCenterNow=mapView.getMapViewCenter();
-        centerLatitudeNow=mapCenterNow.getLatitudeE6();
-        centerLongitudeNow=mapCenterNow.getLongitudeE6();
-        spanLatitudeNow=mapView.getLatitudeSpan();
-        spanLongitudeNow=mapView.getLongitudeSpan();
-        moved=false;
-        force=false;
+        GeoPointImpl mapCenterNow=mapView.getMapViewCenter();
+        int centerLatitudeNow=mapCenterNow.getLatitudeE6();
+        int centerLongitudeNow=mapCenterNow.getLongitudeE6();
+        int spanLatitudeNow=mapView.getLatitudeSpan();
+        int spanLongitudeNow=mapView.getLongitudeSpan();
+        boolean moved=false;
         if (liveChanged) {
           moved=true;
-          force=true;
         }
  else         if (live && Settings.isLiveMap() && !downloaded) {
           moved=true;
@@ -35,44 +24,22 @@
  else         if (((Math.abs(spanLatitudeNow - spanLatitude) > 50) || (Math.abs(spanLongitudeNow - spanLongitude) > 50) || (Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow / 4))|| (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow / 4))) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !Viewport.isInViewPort(centerLatitude,centerLongitude,centerLatitudeNow,centerLongitudeNow,spanLatitude,spanLongitude,spanLatitudeNow,spanLongitudeNow))) {
           moved=true;
         }
-        if (moved && caches != null && centerLatitude != null && centerLongitude != null && ((Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow * 1.2)) || (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow * 1.2)))) {
-          force=true;
-        }
-        zoomNow=mapView.getMapZoomLevel();
+        int zoomNow=mapView.getMapZoomLevel();
         if (moved || zoomNow != zoom || spanLatitudeNow != spanLatitude || spanLongitudeNow != spanLongitude || centerLatitudeNow != centerLatitude || centerLongitudeNow != centerLongitude) {
           displayHandler.sendEmptyMessage(UPDATE_TITLE);
         }
         zoom=zoomNow;
         if (moved) {
           liveChanged=false;
-          currentTime=System.currentTimeMillis();
+          long currentTime=System.currentTimeMillis();
           if (1000 < (currentTime - loadThreadRun)) {
-            if (20000 < (currentTime - loadThreadRun)) {
-              force=true;
-            }
-            if (force && loadThread != null && loadThread.isWorking()) {
-              loadThread.stopIt();
-              try {
-                sleep(100);
-              }
- catch (              Exception e) {
-              }
-            }
-            if (loadThread != null && loadThread.isWorking()) {
-              continue;
-            }
             centerLatitude=centerLatitudeNow;
             centerLongitude=centerLongitudeNow;
             spanLatitude=spanLatitudeNow;
             spanLongitude=spanLongitudeNow;
-            showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
-            loadThread=new LoadThread(centerLatitude,centerLongitude,spanLatitude,spanLongitude);
-            loadThread.start();
+            loadExecutor.execute(new LoadRunnable(centerLatitude,centerLongitude,spanLatitude,spanLongitude));
           }
         }
-      }
-      if (!isLoading()) {
-        showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
       }
       yield();
     }
