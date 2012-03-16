@@ -9,6 +9,12 @@
     finish();
     return;
   }
+  if (CacheType.UNKNOWN == cache.getType()) {
+    Set<String> geocodes=new HashSet<String>();
+    geocodes.add(geocode);
+    SearchResult search=ConnectorFactory.searchByGeocodes(geocodes);
+    cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+  }
   try {
     RelativeLayout itemLayout;
     TextView itemName;

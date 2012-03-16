@@ -5,7 +5,7 @@
     SearchResult searchResult=cgBase.parseCacheFromText(mockedCache.getData(),null);
     cgCache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
-    cgBaseTest.testCompareCaches(mockedCache,parsedCache);
+    cgBaseTest.testCompareCaches(mockedCache,parsedCache,true);
   }
   Settings.setGcCustomDate(gcCustomDate);
 }

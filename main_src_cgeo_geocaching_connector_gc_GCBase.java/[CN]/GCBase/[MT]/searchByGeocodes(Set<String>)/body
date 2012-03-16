@@ -1,0 +1,54 @@
+{
+  SearchResult result=new SearchResult();
+  final String geocodeList=StringUtils.join(geocodes.toArray(),"|");
+  String referer=GCConstants.URL_LIVE_MAP_DETAILS;
+  StringBuilder url=new StringBuilder();
+  url.append("?i=").append(geocodeList).append("&_=").append(String.valueOf(System.currentTimeMillis()));
+  final String urlString=url.toString();
+  try {
+    String data=Tile.requestMapInfo(referer + urlString,referer);
+    final JSONObject json=new JSONObject(data);
+    final String status=json.getString("status");
+    if (StringUtils.isBlank(status)) {
+      throw new JSONException("No status inside JSON");
+    }
+    if ("success".compareTo(status) != 0) {
+      throw new JSONException("Wrong status inside JSON");
+    }
+    final JSONArray dataArray=json.getJSONArray("data");
+    if (dataArray == null) {
+      throw new JSONException("No data inside JSON");
+    }
+    for (int j=0; j < dataArray.length(); j++) {
+      cgCache cache=new cgCache();
+      JSONObject dataObject=dataArray.getJSONObject(j);
+      cache.setName(dataObject.getString("name"));
+      cache.setGeocode(dataObject.getString("gc"));
+      cache.setGuid(dataObject.getString("g"));
+      cache.setDisabled(!dataObject.getBoolean("available"));
+      cache.setArchived(dataObject.getBoolean("archived"));
+      cache.setPremiumMembersOnly(dataObject.getBoolean("subrOnly"));
+      boolean li=dataObject.getBoolean("li");
+      cache.setFavoritePoints(Integer.parseInt(dataObject.getString("fp")));
+      JSONObject difficultyObj=dataObject.getJSONObject("difficulty");
+      cache.setDifficulty(Float.parseFloat(difficultyObj.getString("text")));
+      JSONObject terrainObj=dataObject.getJSONObject("terrain");
+      cache.setTerrain(Float.parseFloat(terrainObj.getString("text")));
+      cache.setHidden(Login.parseGcCustomDate(dataObject.getString("hidden"),"MM/dd/yyyy"));
+      JSONObject containerObj=dataObject.getJSONObject("container");
+      cache.setSize(CacheSize.getById(containerObj.getString("text")));
+      JSONObject typeObj=dataObject.getJSONObject("type");
+      cache.setType(CacheType.getByPattern(typeObj.getString("text")));
+      JSONObject ownerObj=dataObject.getJSONObject("owner");
+      cache.setOwner(ownerObj.getString("text"));
+      result.addCache(cache);
+    }
+  }
+ catch (  JSONException e) {
+    result.setError(StatusCode.UNKNOWN_ERROR);
+  }
+catch (  ParseException e) {
+    result.setError(StatusCode.UNKNOWN_ERROR);
+  }
+  return result;
+}
