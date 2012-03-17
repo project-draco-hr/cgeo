@@ -4,6 +4,7 @@
   final Cursor cursor=managedQuery(calendarProvider,projection,"selected=1",null,null);
   if (cursor == null || cursor.getCount() <= 0) {
     showToast(getResources().getString(R.string.event_fail));
+    finish();
     return;
   }
   final Map<Integer,String> calendars=new HashMap<Integer,String>();
@@ -27,6 +28,8 @@
   }
  while (cursor.moveToNext());
   if (calendars.isEmpty()) {
+    showToast(getResources().getString(R.string.event_fail));
+    finish();
     return;
   }
   final CharSequence[] items=calendars.values().toArray(new CharSequence[calendars.size()]);
