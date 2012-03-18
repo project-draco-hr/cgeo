@@ -1,18 +1,18 @@
 {
-  if (StringUtils.isBlank(getPrefix())) {
-    setPrefix(old.getPrefix());
+  if (StringUtils.isBlank(prefix)) {
+    setPrefix(old.prefix);
   }
   if (StringUtils.isBlank(lookup)) {
     lookup=old.lookup;
   }
   if (StringUtils.isBlank(name)) {
-    setName(old.getName());
+    setName(old.name);
   }
   if (StringUtils.isBlank(latlon) || latlon.startsWith("?")) {
     latlon=old.latlon;
   }
   if (coords == null) {
-    coords=old.getCoords();
+    coords=old.coords;
   }
   if (StringUtils.isBlank(note)) {
     note=old.note;
