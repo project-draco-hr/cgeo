@@ -7,7 +7,7 @@
     StaticMapsProvider.downloadMaps(cache,app);
     storedCacheMaps++;
     if (progressHandler.isCancelled()) {
-      throw new CancellationException();
+      return;
     }
     progressHandler.sendMessage(progressHandler.obtainMessage(0,storedCacheMaps,0));
   }
