@@ -5,7 +5,7 @@
     startActivity(new Intent(ICalendar.INTENT,Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST+ "?"+ params.toString())));
   }
  else {
-    new AlertDialog.Builder(this).setTitle(res.getString(R.string.addon_missing_title)).setMessage(new StringBuilder(res.getString(R.string.helper_calendar_missing)).append(" ").append(res.getString(R.string.addon_download_prompt)).toString()).setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
+    new AlertDialog.Builder(this).setTitle(res.getString(R.string.addon_missing_title)).setMessage(new StringBuilder(res.getString(R.string.helper_calendar_missing)).append(' ').append(res.getString(R.string.addon_download_prompt)).toString()).setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
       public void onClick(      DialogInterface dialog,      int id){
         Intent intent=new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(CALENDAR_ADDON_URI));

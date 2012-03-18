@@ -2,10 +2,7 @@
   if (this == obj) {
     return true;
   }
-  if (obj == null) {
-    return false;
-  }
-  if (getClass() != obj.getClass()) {
+  if (!(obj instanceof cgCache)) {
     return false;
   }
   return geocode != null ? geocode.compareTo(((cgCache)obj).geocode) == 0 : false;

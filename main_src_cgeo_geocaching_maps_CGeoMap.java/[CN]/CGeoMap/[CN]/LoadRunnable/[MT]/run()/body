@@ -18,8 +18,8 @@
     }
     if (search != null) {
       downloaded=true;
+      caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
     }
-    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
     if (live) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();

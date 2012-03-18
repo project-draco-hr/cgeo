@@ -5,7 +5,12 @@
   int count=1;
   final Matcher matcherViewstateCount=GCConstants.PATTERN_VIEWSTATEFIELDCOUNT.matcher(page);
   if (matcherViewstateCount.find()) {
-    count=Integer.parseInt(matcherViewstateCount.group(1));
+    try {
+      count=Integer.parseInt(matcherViewstateCount.group(1));
+    }
+ catch (    NumberFormatException e) {
+      Log.e(Settings.tag,"getViewStates",e);
+    }
   }
   String[] viewstates=new String[count];
   int no;
@@ -16,7 +21,13 @@
       no=0;
     }
  else {
-      no=Integer.parseInt(sno);
+      try {
+        no=Integer.parseInt(sno);
+      }
+ catch (      NumberFormatException e) {
+        Log.e(Settings.tag,"getViewStates",e);
+        no=0;
+      }
     }
     viewstates[no]=matcherViewstates.group(2);
   }

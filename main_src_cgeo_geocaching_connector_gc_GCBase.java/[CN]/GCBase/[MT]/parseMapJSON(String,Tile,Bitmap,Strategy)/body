@@ -37,8 +37,9 @@
         }
       }
     }
-    for (    String id : positions.keySet()) {
-      List<UTFGridPosition> pos=positions.get(id);
+    for (    Entry<String,List<UTFGridPosition>> entry : positions.entrySet()) {
+      String id=entry.getKey();
+      List<UTFGridPosition> pos=entry.getValue();
       UTFGridPosition xy=UTFGrid.getPositionInGrid(pos);
       cgCache cache=new cgCache();
       cache.setDetailed(false);

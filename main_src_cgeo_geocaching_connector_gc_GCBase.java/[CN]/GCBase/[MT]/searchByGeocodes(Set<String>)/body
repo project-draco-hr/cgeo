@@ -28,7 +28,6 @@
       cache.setDisabled(!dataObject.getBoolean("available"));
       cache.setArchived(dataObject.getBoolean("archived"));
       cache.setPremiumMembersOnly(dataObject.getBoolean("subrOnly"));
-      boolean li=dataObject.getBoolean("li");
       cache.setFavoritePoints(Integer.parseInt(dataObject.getString("fp")));
       JSONObject difficultyObj=dataObject.getJSONObject("difficulty");
       cache.setDifficulty(Float.parseFloat(difficultyObj.getString("text")));
@@ -48,6 +47,9 @@
     result.setError(StatusCode.UNKNOWN_ERROR);
   }
 catch (  ParseException e) {
+    result.setError(StatusCode.UNKNOWN_ERROR);
+  }
+catch (  NumberFormatException e) {
     result.setError(StatusCode.UNKNOWN_ERROR);
   }
   return result;
