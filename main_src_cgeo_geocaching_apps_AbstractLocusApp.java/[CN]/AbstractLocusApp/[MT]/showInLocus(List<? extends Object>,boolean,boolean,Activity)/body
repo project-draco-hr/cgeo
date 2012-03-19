@@ -20,12 +20,12 @@
     return false;
   }
   if (pd.getPoints().size() <= 1000) {
-    DisplayData.sendData(activity,pd,false);
+    DisplayData.sendData(activity,pd,export);
   }
  else {
     final ArrayList<PointsData> data=new ArrayList<PointsData>();
     data.add(pd);
-    DisplayData.sendDataCursor(activity,data,"content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(),false);
+    DisplayData.sendDataCursor(activity,data,"content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(),export);
   }
   return true;
 }
