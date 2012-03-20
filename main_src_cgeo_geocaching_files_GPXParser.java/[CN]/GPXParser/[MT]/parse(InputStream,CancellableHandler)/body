@@ -32,7 +32,11 @@
         cache.setListId(listId);
         cache.setDetailed(true);
         createNoteFromGSAKUserdata();
-        result.put(cache.getGeocode(),cache);
+        final String key=cache.getGeocode();
+        if (result.containsKey(key)) {
+          Log.w(Settings.tag,"Duplicate geocode during GPX import: " + key);
+        }
+        result.put(key,cache);
         showProgressMessage(progressHandler,progressStream.getProgress());
       }
  else       if (StringUtils.isNotBlank(cache.getName()) && cache.getCoords() != null && StringUtils.contains(type,"waypoint")) {
@@ -129,16 +133,18 @@
   }
 );
   final Element cacheParent=getCacheParent(waypoint);
-  final Element gsak=cacheParent.getChild(GSAK_NS,"wptExtension");
-  gsak.getChild(GSAK_NS,"Watch").setEndTextElementListener(new EndTextElementListener(){
-    @Override public void end(    String watchList){
-      cache.setOnWatchlist(Boolean.valueOf(watchList.trim()).booleanValue());
+  for (  String gsakNamespace : GSAK_NS) {
+    final Element gsak=cacheParent.getChild(gsakNamespace,"wptExtension");
+    gsak.getChild(gsakNamespace,"Watch").setEndTextElementListener(new EndTextElementListener(){
+      @Override public void end(      String watchList){
+        cache.setOnWatchlist(Boolean.valueOf(watchList.trim()).booleanValue());
+      }
     }
-  }
 );
-  gsak.getChild(GSAK_NS,"UserData").setEndTextElementListener(new UserDataListener(1));
-  for (int i=2; i <= 4; i++) {
-    gsak.getChild(GSAK_NS,"User" + i).setEndTextElementListener(new UserDataListener(i));
+    gsak.getChild(gsakNamespace,"UserData").setEndTextElementListener(new UserDataListener(1));
+    for (int i=2; i <= 4; i++) {
+      gsak.getChild(gsakNamespace,"User" + i).setEndTextElementListener(new UserDataListener(i));
+    }
   }
   for (  String nsGC : nsGCList) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");
