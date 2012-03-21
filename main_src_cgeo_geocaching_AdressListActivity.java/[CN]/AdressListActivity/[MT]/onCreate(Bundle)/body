@@ -3,18 +3,15 @@
   setTheme();
   setContentView(R.layout.addresses);
   setTitle(res.getString(R.string.search_address_result));
-  Bundle extras=getIntent().getExtras();
-  if (extras != null) {
-    keyword=extras.getString("keyword");
-  }
+  final String keyword=getIntent().getStringExtra("keyword");
   if (keyword == null) {
     showToast(res.getString(R.string.err_search_address_forgot));
     finish();
     return;
   }
-  adapter=new AddressListAdapter(this);
+  final AddressListAdapter adapter=new AddressListAdapter(this);
   setListAdapter(adapter);
-  waitDialog=ProgressDialog.show(this,res.getString(R.string.search_address_started),keyword,true);
+  final ProgressDialog waitDialog=ProgressDialog.show(this,res.getString(R.string.search_address_started),keyword,true);
   waitDialog.setCancelable(true);
   new AsyncTask<Void,Void,List<Address>>(){
     @Override protected List<Address> doInBackground(    Void... params){
