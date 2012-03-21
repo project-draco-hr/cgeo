@@ -5,7 +5,7 @@
     return null;
   }
   final SearchResult searchResult=new SearchResult();
-  if (page.contains("Cache is Unpublished")) {
+  if (page.contains("Cache is Unpublished") || page.contains("you cannot view this cache listing until it has been published")) {
     searchResult.error=StatusCode.UNPUBLISHED_CACHE;
     return searchResult;
   }
@@ -254,6 +254,10 @@
   }
   cache.parseWaypointsFromNote();
   cache.setLogs(loadLogsFromDetails(page,cache,false,true));
+  if (StringUtils.isBlank(cache.getGeocode())) {
+    searchResult.error=StatusCode.UNKNOWN_ERROR;
+    return searchResult;
+  }
   searchResult.addCache(cache);
   return searchResult;
 }
