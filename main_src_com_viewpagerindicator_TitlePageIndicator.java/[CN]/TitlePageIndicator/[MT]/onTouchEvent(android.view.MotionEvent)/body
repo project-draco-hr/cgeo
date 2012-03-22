@@ -45,7 +45,9 @@ return true;
 }
 mIsDragging=false;
 mActivePointerId=INVALID_POINTER;
-if (mViewPager.isFakeDragging()) mViewPager.endFakeDrag();
+if (mViewPager.isFakeDragging()) {
+mViewPager.endFakeDrag();
+}
 break;
 case MotionEventCompat.ACTION_POINTER_DOWN:
 {

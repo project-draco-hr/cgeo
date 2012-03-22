@@ -81,14 +81,14 @@
       }
     }
   }
-  mPath=new Path();
+  mPath.reset();
   mPath.moveTo(0,height - mFooterLineHeight / 2f);
   mPath.lineTo(width,height - mFooterLineHeight / 2f);
   mPath.close();
   canvas.drawPath(mPath,mPaintFooterLine);
 switch (mFooterIndicatorStyle) {
 case Triangle:
-    mPath=new Path();
+    mPath.reset();
   mPath.moveTo(halfWidth,height - mFooterLineHeight - mFooterIndicatorHeight);
 mPath.lineTo(halfWidth + mFooterIndicatorHeight,height - mFooterLineHeight);
 mPath.lineTo(halfWidth - mFooterIndicatorHeight,height - mFooterLineHeight);
@@ -100,7 +100,7 @@ if (!currentSelected) {
 break;
 }
 RectF underlineBounds=bounds.get(page);
-mPath=new Path();
+mPath.reset();
 mPath.moveTo(underlineBounds.left - mFooterIndicatorUnderlinePadding,height - mFooterLineHeight);
 mPath.lineTo(underlineBounds.right + mFooterIndicatorUnderlinePadding,height - mFooterLineHeight);
 mPath.lineTo(underlineBounds.right + mFooterIndicatorUnderlinePadding,height - mFooterLineHeight - mFooterIndicatorHeight);
