@@ -9,6 +9,7 @@
     if (CancellableHandler.isCancelled(handler)) {
       return null;
     }
+    sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_render);
     cgeoapplication.getInstance().saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
   }
   return searchResult;

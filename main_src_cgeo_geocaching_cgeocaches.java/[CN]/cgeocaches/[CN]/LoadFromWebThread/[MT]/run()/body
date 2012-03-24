@@ -17,7 +17,7 @@
         delay=1;
         handler.sendMessage(handler.obtainMessage(1,GCcode));
         yield();
-        cgBase.storeCache(cgeocaches.this,null,GCcode,listIdLFW,null);
+        cgBase.storeCache(cgeocaches.this,null,GCcode,listIdLFW,false,null);
         handler.sendMessage(handler.obtainMessage(2,GCcode));
         yield();
       }

@@ -30,7 +30,7 @@
         break;
       }
       detailProgress++;
-      cgBase.storeCache(cgeocaches.this,cache,null,listIdLD,null);
+      cgBase.refreshCache(cgeocaches.this,cache.getGeocode(),listIdLD,null);
       handler.sendEmptyMessage(cacheList.indexOf(cache));
       yield();
     }

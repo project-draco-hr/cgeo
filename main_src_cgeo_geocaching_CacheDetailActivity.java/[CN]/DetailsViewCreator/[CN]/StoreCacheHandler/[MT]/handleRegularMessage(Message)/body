@@ -5,12 +5,11 @@
  else {
     storeThread=null;
     try {
-      cache=search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
+      CacheDetailActivity.this.notifyDataSetChanged();
     }
  catch (    Exception e) {
       showToast(res.getString(R.string.err_store_failed));
       Log.e(Settings.tag,"CacheDetailActivity.storeCacheHandler: " + e.toString());
     }
-    CacheDetailActivity.this.notifyDataSetChanged();
   }
 }
