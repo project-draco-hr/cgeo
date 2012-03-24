@@ -1,6 +1,7 @@
 {
   if (dialog != null && dialog.isShowing()) {
-    dialog.setMax(max);
+    final int modMax=max / this.progressDivider;
+    dialog.setMax(modMax);
     dialog.setProgress(0);
   }
 }
