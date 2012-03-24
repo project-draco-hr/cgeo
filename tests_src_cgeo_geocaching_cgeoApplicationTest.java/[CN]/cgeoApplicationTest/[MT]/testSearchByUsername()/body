@@ -1,6 +1,6 @@
 {
   final SearchResult search=cgBase.searchByUsername(null,"blafoo",CacheType.WEBCAM,false);
   assertNotNull(search);
-  assertEquals(3,search.totalCnt);
+  assertEquals(3,search.getTotal());
   assertTrue(search.getGeocodes().contains("GCP0A9"));
 }

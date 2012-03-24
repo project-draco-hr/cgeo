@@ -4,7 +4,7 @@
     this.error=searchResult.error;
     this.url=searchResult.url;
     this.viewstates=searchResult.viewstates;
-    this.totalCnt=searchResult.totalCnt;
+    this.setTotal(searchResult.getTotal());
   }
  else {
     this.geocodes=new HashSet<String>();

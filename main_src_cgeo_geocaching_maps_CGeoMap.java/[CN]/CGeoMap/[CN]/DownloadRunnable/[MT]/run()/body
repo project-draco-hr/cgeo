@@ -13,7 +13,7 @@
       search=ConnectorFactory.searchByViewport(viewport,tokens);
       if (search != null) {
         downloaded=true;
-        if (search.error == StatusCode.NOT_LOGGED_IN) {
+        if (search.getError() == StatusCode.NOT_LOGGED_IN) {
           Login.login();
           tokens=null;
         }

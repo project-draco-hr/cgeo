@@ -1,9 +1,3 @@
 {
-  if (geocodes == null) {
-    this.geocodes=new HashSet<String>();
-  }
- else {
-    this.geocodes=new HashSet<String>(geocodes.size());
-    this.geocodes.addAll(geocodes);
-  }
+  this(geocodes,geocodes == null ? 0 : geocodes.size());
 }

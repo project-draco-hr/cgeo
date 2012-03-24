@@ -1,6 +1,4 @@
 {
   final Set<String> geocodes=storage.loadBatchOfHistoricGeocodes(detailedOnly,cacheType);
-  final SearchResult search=new SearchResult(geocodes);
-  search.totalCnt=getAllHistoricCachesCount();
-  return search;
+  return new SearchResult(geocodes,getAllHistoricCachesCount());
 }

@@ -1,0 +1,9 @@
+{
+  final HashSet<String> geocodes=new HashSet<String>();
+  geocodes.add("GC12345");
+  geocodes.add("GC23456");
+  final SearchResult searchResult=new SearchResult(geocodes);
+  assertEquals(2,searchResult.getCount());
+  assertEquals(2,searchResult.getTotal());
+  assertTrue(searchResult.getGeocodes().contains("GC12345"));
+}

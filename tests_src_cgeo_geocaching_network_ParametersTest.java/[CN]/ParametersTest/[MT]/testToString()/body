@@ -1,0 +1,6 @@
+{
+  final Parameters params=new Parameters();
+  params.put("name","foo&bar");
+  params.put("type","moving");
+  Assert.assertEquals("name=foo%26bar&type=moving",params.toString());
+}

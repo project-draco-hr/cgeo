@@ -6,20 +6,20 @@
   }
   final SearchResult searchResult=new SearchResult();
   if (page.contains("Cache is Unpublished") || page.contains("you cannot view this cache listing until it has been published")) {
-    searchResult.error=StatusCode.UNPUBLISHED_CACHE;
+    searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
     return searchResult;
   }
   if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
-    searchResult.error=StatusCode.PREMIUM_ONLY;
+    searchResult.setError(StatusCode.PREMIUM_ONLY);
     return searchResult;
   }
   if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
-    searchResult.error=StatusCode.PREMIUM_ONLY;
+    searchResult.setError(StatusCode.PREMIUM_ONLY);
     return searchResult;
   }
   final String cacheName=Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_NAME,true,"")).toString();
   if ("An Error Has Occurred".equalsIgnoreCase(cacheName)) {
-    searchResult.error=StatusCode.UNKNOWN_ERROR;
+    searchResult.setError(StatusCode.UNKNOWN_ERROR);
     return searchResult;
   }
   final cgCache cache=new cgCache();
@@ -255,7 +255,7 @@
   cache.parseWaypointsFromNote();
   cache.setLogs(loadLogsFromDetails(page,cache,false,true));
   if (StringUtils.isBlank(cache.getGeocode())) {
-    searchResult.error=StatusCode.UNKNOWN_ERROR;
+    searchResult.setError(StatusCode.UNKNOWN_ERROR);
     return searchResult;
   }
   searchResult.addCache(cache);
