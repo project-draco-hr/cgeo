@@ -4,9 +4,5 @@
   if (data == null) {
     return null;
   }
-  final cgCache cache=parseCache(data);
-  long time=new Date().getTime();
-  cache.setUpdated(time);
-  cache.setDetailedUpdate(time);
-  return cache;
+  return parseCache(data);
 }
