@@ -1,0 +1,14 @@
+{
+switch (msg.what) {
+case START:
+    removeMessages(ACT);
+  sendEmptyMessage(ACT);
+break;
+case STOP:
+removeMessages(ACT);
+break;
+case ACT:
+sendEmptyMessageDelayed(ACT,period);
+act();
+}
+}
