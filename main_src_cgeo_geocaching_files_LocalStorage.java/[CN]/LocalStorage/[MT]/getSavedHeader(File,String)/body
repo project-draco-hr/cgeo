@@ -1,0 +1,20 @@
+{
+  try {
+    final File file=filenameForHeader(baseFile,name);
+    final FileReader f=new FileReader(file);
+    try {
+      final char[] value=new char[256];
+      final int count=f.read(value);
+      return new String(value,0,count);
+    }
+  finally {
+      f.close();
+    }
+  }
+ catch (  final FileNotFoundException e) {
+  }
+catch (  final Exception e) {
+    Log.w(Settings.tag,"could not read saved header " + name + " for "+ baseFile,e);
+  }
+  return null;
+}

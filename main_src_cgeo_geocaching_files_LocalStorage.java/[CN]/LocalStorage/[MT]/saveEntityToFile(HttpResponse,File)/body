@@ -3,7 +3,10 @@
     return false;
   }
   try {
-    return saveToFile(response.getEntity().getContent(),targetFile);
+    final boolean saved=saveToFile(response.getEntity().getContent(),targetFile);
+    saveHeader("etag",response,targetFile);
+    saveHeader("last-modified",response,targetFile);
+    return saved;
   }
  catch (  IOException e) {
     Log.e(Settings.tag,"LocalStorage.saveEntityToFile",e);

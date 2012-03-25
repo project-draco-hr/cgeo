@@ -2,24 +2,14 @@
   if (StringUtils.isBlank(url) || isCounter(url)) {
     return new BitmapDrawable(getTransparent1x1Image());
   }
-  Bitmap imagePre=null;
-  if (onlySave) {
-    final long localDate=LocalStorage.getStorageFile(geocode,url,true,false).lastModified();
-    final long onlineDate=Network.requestLastModifiedDate(makeAbsoluteURL(url));
-    if (localDate > onlineDate) {
-      return null;
-    }
-  }
-  if (!onlySave) {
-    imagePre=loadImageFromStorage(url);
-  }
+  Bitmap imagePre=onlySave ? null : loadImageFromStorage(url);
   if (imagePre == null || onlySave) {
     final String absoluteURL=makeAbsoluteURL(url);
     if (absoluteURL != null) {
       try {
-        final HttpResponse httpResponse=Network.request(absoluteURL,null,false);
-        if (httpResponse != null) {
-          final File file=LocalStorage.getStorageFile(geocode,url,true,true);
+        final File file=LocalStorage.getStorageFile(geocode,url,true,true);
+        final HttpResponse httpResponse=Network.request(absoluteURL,null,false,file);
+        if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
           LocalStorage.saveEntityToFile(httpResponse,file);
         }
       }

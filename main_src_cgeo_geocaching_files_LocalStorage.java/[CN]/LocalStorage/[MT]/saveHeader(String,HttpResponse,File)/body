@@ -1,0 +1,10 @@
+{
+  final Header header=response.getFirstHeader(name);
+  final File file=filenameForHeader(baseFile,name);
+  if (header == null) {
+    file.delete();
+  }
+ else {
+    saveToFile(new ByteArrayInputStream(header.getValue().getBytes()),file);
+  }
+}
