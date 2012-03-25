@@ -3,6 +3,13 @@
     return new BitmapDrawable(getTransparent1x1Image());
   }
   Bitmap imagePre=null;
+  if (onlySave) {
+    final long localDate=LocalStorage.getStorageFile(geocode,url,true,false).lastModified();
+    final long onlineDate=Network.requestLastModifiedDate(makeAbsoluteURL(url));
+    if (localDate > onlineDate) {
+      return null;
+    }
+  }
   if (!onlySave) {
     imagePre=loadImageFromStorage(url);
   }

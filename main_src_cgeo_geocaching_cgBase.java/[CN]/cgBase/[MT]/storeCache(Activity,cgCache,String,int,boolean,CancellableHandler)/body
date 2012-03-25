@@ -3,7 +3,7 @@
     cgCache cache;
     if (origCache != null) {
       if (origCache.getListId() >= StoredList.STANDARD_LIST_ID || StringUtils.isBlank(origCache.getDescription())) {
-        final SearchResult search=searchByGeocode(origCache.getGeocode(),null,listId,false,null);
+        final SearchResult search=searchByGeocode(origCache.getGeocode(),null,listId,false,handler);
         cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
       }
  else {
@@ -11,7 +11,7 @@
       }
     }
  else     if (StringUtils.isNotBlank(geocode)) {
-      final SearchResult search=searchByGeocode(geocode,null,listId,false,null);
+      final SearchResult search=searchByGeocode(geocode,null,listId,forceRedownload,handler);
       cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     }
  else {
