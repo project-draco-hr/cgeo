@@ -7,8 +7,9 @@
     StaticMapsProvider.downloadMaps(cache,app);
     storedCacheMaps++;
     if (progressHandler.isCancelled()) {
-      return;
+      return false;
     }
     progressHandler.sendMessage(progressHandler.obtainMessage(0,storedCacheMaps,0));
   }
+  return true;
 }
