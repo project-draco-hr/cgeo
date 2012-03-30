@@ -77,4 +77,8 @@
   myLocSwitch.setOnClickListener(new MyLocationListener());
   switchMyLocationButton();
   prepareFilterBar();
+  if (!Settings.getHideLiveMapHint()) {
+    Intent hintIntent=new Intent(activity,LiveMapInfo.class);
+    activity.startActivity(hintIntent);
+  }
 }
