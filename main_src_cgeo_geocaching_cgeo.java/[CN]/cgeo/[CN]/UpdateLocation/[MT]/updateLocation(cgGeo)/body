@@ -15,17 +15,12 @@
 );
         nearestView.setBackgroundResource(R.drawable.main_nearby);
       }
-      String satellites=null;
-      if (geo.satellitesFixed > 0) {
-        satellites=res.getString(R.string.loc_sat) + ": " + geo.satellitesFixed+ "/"+ geo.satellitesVisible;
-      }
- else       if (geo.satellitesVisible >= 0) {
-        satellites=res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
+      if (!gpsEnabled) {
+        satellitesHandler.noGps();
       }
  else {
-        satellites="";
+        satellitesHandler.satellites(geo.satellitesFixed,geo.satellitesVisible);
       }
-      navSatellites.setText(satellites);
       navType.setText(res.getString(geo.locationProvider.resourceId));
       if (geo.accuracyNow >= 0) {
         int speed=Math.round(geo.speedNow) * 60 * 60 / 1000;

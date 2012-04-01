@@ -1,0 +1,20 @@
+{
+  String satellites="";
+switch (msg.what) {
+case NO_GPS:
+    satellites=res.getString(R.string.loc_gps_disabled);
+  break;
+case SATELLITES:
+final int satellitesFixed=msg.arg1;
+final int satellitesVisible=msg.arg2;
+if (satellitesFixed > 0) {
+satellites=res.getString(R.string.loc_sat) + ": " + satellitesFixed+ "/"+ satellitesVisible;
+}
+ else if (satellitesVisible >= 0) {
+satellites=res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
+}
+break;
+}
+final TextView navSatellites=(TextView)findViewById(R.id.nav_satellites);
+navSatellites.setText(satellites);
+}
