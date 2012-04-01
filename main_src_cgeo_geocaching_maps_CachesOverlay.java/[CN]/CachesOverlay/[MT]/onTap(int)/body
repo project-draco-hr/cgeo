@@ -22,7 +22,7 @@
     if (item == null) {
       return false;
     }
-    cgCoord coordinate=item.getCoord();
+    final IWaypoint coordinate=item.getCoord();
     if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
       Intent popupIntent=new Intent(context,cgeopopup.class);
       popupIntent.putExtra("geocode",coordinate.getGeocode());

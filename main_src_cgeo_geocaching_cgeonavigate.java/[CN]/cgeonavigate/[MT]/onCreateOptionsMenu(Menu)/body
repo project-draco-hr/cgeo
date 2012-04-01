@@ -10,7 +10,7 @@
   if (coordinates.size() > 1) {
     SubMenu subMenu=menu.addSubMenu(0,3,0,res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
     int cnt=4;
-    for (    cgCoord coordinate : coordinates) {
+    for (    IWaypoint coordinate : coordinates) {
       subMenu.add(0,cnt,0,coordinate.getName() + " (" + coordinate.getCoordType()+ ")");
       cnt++;
     }

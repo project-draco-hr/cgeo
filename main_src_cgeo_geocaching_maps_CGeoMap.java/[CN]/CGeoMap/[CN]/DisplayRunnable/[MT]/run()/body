@@ -16,10 +16,10 @@
             if (waypoint.getCoords() == null) {
               continue;
             }
-            itemsToDisplay.add(getItem(new cgCoord(waypoint),null,waypoint));
+            itemsToDisplay.add(getItem(waypoint,null,waypoint));
           }
         }
-        itemsToDisplay.add(getItem(new cgCoord(cache),cache,null));
+        itemsToDisplay.add(getItem(cache,cache,null));
       }
       overlayCaches.updateItems(itemsToDisplay);
       displayHandler.sendEmptyMessage(INVALIDATE_MAP);

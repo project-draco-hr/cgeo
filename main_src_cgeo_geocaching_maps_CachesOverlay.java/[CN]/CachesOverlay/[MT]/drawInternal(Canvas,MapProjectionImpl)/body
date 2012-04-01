@@ -17,7 +17,7 @@
       }
       canvas.setDrawFilter(setfil);
       for (      CachesOverlayItemImpl item : items) {
-        final cgCoord itemCoord=item.getCoord();
+        final IWaypoint itemCoord=item.getCoord();
         float[] result=new float[1];
         Location.distanceBetween(itemCoord.getCoords().getLatitude(),itemCoord.getCoords().getLongitude(),itemCoord.getCoords().getLatitude(),itemCoord.getCoords().getLongitude() + 1,result);
         final float longitudeLineDistance=result[0];

@@ -25,7 +25,7 @@
     return true;
   }
  else   if (id > 3 && coordinates.get(id - 4) != null) {
-    cgCoord coordinate=coordinates.get(id - 4);
+    final IWaypoint coordinate=coordinates.get(id - 4);
     title=coordinate.getName();
     dstCoords=coordinate.getCoords();
     setTitle();
