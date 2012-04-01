@@ -3,12 +3,9 @@
     return;
   }
   if (coordsIntent != null) {
-    final cgCoord coord=new cgCoord();
-    coord.setCoordType("waypoint");
-    coord.setCoords(coordsIntent);
-    coord.setName("some place");
     final cgWaypoint waypoint=new cgWaypoint("some place",waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT,false);
-    final CachesOverlayItemImpl item=getItem(coord,null,waypoint);
+    waypoint.setCoords(coordsIntent);
+    final CachesOverlayItemImpl item=getItem(waypoint,null,waypoint);
     overlayCaches.updateItems(item);
     displayHandler.sendEmptyMessage(INVALIDATE_MAP);
     cachesCnt=1;

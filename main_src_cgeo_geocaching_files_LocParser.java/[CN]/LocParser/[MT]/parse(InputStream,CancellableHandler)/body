@@ -1,9 +1,9 @@
 {
   String streamContent=readStream(stream,progressHandler).toString();
-  final Map<String,cgCoord> coords=parseCoordinates(streamContent);
+  final Map<String,cgCache> coords=parseCoordinates(streamContent);
   final List<cgCache> caches=new ArrayList<cgCache>();
-  for (  Entry<String,cgCoord> entry : coords.entrySet()) {
-    cgCoord coord=entry.getValue();
+  for (  Entry<String,cgCache> entry : coords.entrySet()) {
+    cgCache coord=entry.getValue();
     if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
       continue;
     }
