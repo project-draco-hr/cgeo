@@ -24,7 +24,7 @@
       }
       if (StringUtils.isBlank(cache.getGeocode())) {
         if (StringUtils.isNotBlank(name)) {
-          cache.setGeocode(name.trim());
+          cache.setGeocode(name.trim().toUpperCase());
         }
       }
       if (StringUtils.isNotBlank(cache.getGeocode()) && cache.getCoords() != null && ((type == null && sym == null) || StringUtils.contains(type,"geocache") || StringUtils.contains(sym,"geocache"))) {
@@ -47,7 +47,7 @@
     private void addWaypointToCache(){
       fixCache(cache);
       if (cache.getName().length() > 2) {
-        final String cacheGeocodeForWaypoint="GC" + cache.getName().substring(2);
+        final String cacheGeocodeForWaypoint="GC" + cache.getName().substring(2).toUpperCase();
         final cgCache cacheForWaypoint=result.get(cacheGeocodeForWaypoint);
         if (cacheForWaypoint != null) {
           final cgWaypoint waypoint=new cgWaypoint(cache.getShortdesc(),convertWaypointSym2Type(sym),false);
