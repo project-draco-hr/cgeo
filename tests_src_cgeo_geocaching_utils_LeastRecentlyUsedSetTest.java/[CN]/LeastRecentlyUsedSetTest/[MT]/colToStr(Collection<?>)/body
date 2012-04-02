@@ -1,0 +1,12 @@
+{
+  StringBuilder strb=new StringBuilder();
+  boolean first=true;
+  for (  Object o : col) {
+    if (!first) {
+      strb.append(", ");
+    }
+    first=false;
+    strb.append(o.toString());
+  }
+  return strb.toString();
+}

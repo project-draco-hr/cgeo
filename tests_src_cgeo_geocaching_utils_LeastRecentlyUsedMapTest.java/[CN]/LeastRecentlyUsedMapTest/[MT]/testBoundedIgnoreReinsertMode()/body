@@ -1,0 +1,14 @@
+{
+  Map<String,String> map=new LeastRecentlyUsedMap<String,String>(5,OperationModes.BOUNDED_IGNORE_REINSERT);
+  map.put("one","1");
+  map.put("two","2");
+  map.put("three","3");
+  map.get("one");
+  map.put("four","4");
+  map.put("two","2");
+  map.put("five","5");
+  map.get("one");
+  map.put("six","6");
+  map.put("seven","7");
+  assertEquals("three, four, five, six, seven",colToStr(map.keySet()));
+}

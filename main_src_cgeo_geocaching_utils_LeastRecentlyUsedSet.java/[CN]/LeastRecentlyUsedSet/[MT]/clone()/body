@@ -1,0 +1,10 @@
+{
+  try {
+    LeastRecentlyUsedSet<E> newSet=(LeastRecentlyUsedSet<E>)super.clone();
+    newSet.map=(LeastRecentlyUsedMap<E,Object>)map.clone();
+    return newSet;
+  }
+ catch (  CloneNotSupportedException e) {
+    throw new InternalError();
+  }
+}

@@ -1,0 +1,11 @@
+{
+  s.defaultWriteObject();
+  s.writeInt(map.initialCapacity);
+  s.writeFloat(map.loadFactor);
+  s.writeInt(map.getMaxEntries());
+  s.writeUTF(map.getOpMode().name());
+  s.writeInt(map.size());
+  for (Iterator<E> i=map.keySet().iterator(); i.hasNext(); ) {
+    s.writeObject(i.next());
+  }
+}

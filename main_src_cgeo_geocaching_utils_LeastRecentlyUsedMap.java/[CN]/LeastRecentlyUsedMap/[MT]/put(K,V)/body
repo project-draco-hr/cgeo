@@ -1,0 +1,10 @@
+{
+  if (opMode == OperationModes.BOUNDED && containsKey(key)) {
+    V oldVal=remove(key);
+    put(key,value);
+    return oldVal;
+  }
+ else {
+    return super.put(key,value);
+  }
+}
