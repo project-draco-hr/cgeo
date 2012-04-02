@@ -3,7 +3,7 @@
   try {
     GC2CJPF mockedCache=new GC2CJPF();
     deleteCacheFromDB(mockedCache.getGeocode());
-    final String tokens[]=GCBase.getTokens();
+    final String[] tokens=GCBase.getTokens();
     final Viewport viewport=new Viewport(mockedCache.getCoords(),0.003,0.003);
     Settings.setLiveMapStrategy(Strategy.DETAILED);
     SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);

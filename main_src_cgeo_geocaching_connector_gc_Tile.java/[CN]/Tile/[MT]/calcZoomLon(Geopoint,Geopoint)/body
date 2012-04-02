@@ -3,7 +3,7 @@
   Tile tileLeft=new Tile(left,zoom);
   Tile tileRight=new Tile(right,zoom);
   if (tileLeft.tileX == tileRight.tileX) {
-    zoom=zoom + 1;
+    zoom+=1;
   }
   return Math.min(zoom,ZOOMLEVEL_MAX);
 }

@@ -1,3 +1,8 @@
 {
-  assertEquals(count,Integer.parseInt(BaseUtils.getMatch(html,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll("[,.]","")));
+  try {
+    assertEquals(count,Integer.parseInt(BaseUtils.getMatch(html,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll("[,.]","")));
+  }
+ catch (  NumberFormatException e) {
+    fail();
+  }
 }
