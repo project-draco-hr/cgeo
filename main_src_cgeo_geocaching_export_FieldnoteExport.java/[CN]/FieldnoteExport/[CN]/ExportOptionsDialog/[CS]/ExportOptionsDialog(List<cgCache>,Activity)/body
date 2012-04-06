@@ -1,0 +1,12 @@
+{
+  super(activity);
+  View layout=activity.getLayoutInflater().inflate(R.layout.fieldnote_export_dialog,null);
+  setView(layout);
+  ((Button)layout.findViewById(R.id.export)).setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      dismiss();
+      new ExportTask(caches,activity,((CheckBox)findViewById(R.id.upload)).isChecked(),((CheckBox)findViewById(R.id.onlynew)).isChecked()).execute((Void)null);
+    }
+  }
+);
+}
