@@ -77,21 +77,12 @@
         item.setTitle(res.getString(R.string.cache_clear_history));
       }
     }
-    item=menu.findItem(MENU_EXPORT_NOTES);
-    if (null != item) {
-      item.setVisible(false);
-      for (      cgCache cache : cacheList) {
-        if (cache.isLogOffline()) {
-          item.setVisible(true);
-          if (hasSelection) {
-            item.setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked()+ ")");
-          }
+    item=menu.findItem(MENU_EXPORT);
+    if (hasSelection) {
+      item.setTitle(res.getString(R.string.export) + " (" + adapter.getChecked()+ ")");
+    }
  else {
-            item.setTitle(res.getString(R.string.cache_export_fieldnote));
-          }
-          break;
-        }
-      }
+      item.setTitle(res.getString(R.string.export));
     }
   }
  catch (  Exception e) {

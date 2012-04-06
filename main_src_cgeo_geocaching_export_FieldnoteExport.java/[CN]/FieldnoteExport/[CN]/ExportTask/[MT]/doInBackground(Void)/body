@@ -1,0 +1,60 @@
+{
+  final StringBuilder fieldNoteBuffer=new StringBuilder();
+  Map<LogType,String> logTypes=new HashMap<LogType,String>();
+  logTypes.put(LogType.LOG_FOUND_IT,"Found it");
+  logTypes.put(LogType.LOG_DIDNT_FIND_IT,"Didn't find it");
+  logTypes.put(LogType.LOG_NOTE,"Write Note");
+  logTypes.put(LogType.LOG_NEEDS_ARCHIVE,"Needs archived");
+  logTypes.put(LogType.LOG_NEEDS_MAINTENANCE,"Needs Maintenance");
+  logTypes.put(LogType.LOG_WILL_ATTEND,"Will Attend");
+  logTypes.put(LogType.LOG_ATTENDED,"Attended");
+  logTypes.put(LogType.LOG_WEBCAM_PHOTO_TAKEN,"Webcam Photo Taken");
+  for (int i=0; i < caches.size(); i++) {
+    try {
+      final cgCache cache=caches.get(i);
+      if (cache.isLogOffline()) {
+        cgLog log=cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
+        if (null != logTypes.get(log.type)) {
+          fieldNoteBuffer.append(cache.getGeocode()).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(logTypes.get(log.type)).append(",\"").append(StringUtils.replaceChars(log.log,'"','\'')).append("\"\n");
+        }
+      }
+      publishProgress(i + 1);
+    }
+ catch (    Exception e) {
+      Log.e(Settings.tag,"FieldnoteExport.ExportTask generation",e);
+      return false;
+    }
+  }
+  fieldNoteBuffer.append("\n");
+  if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    exportLocation.mkdirs();
+    SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+    exportFile=new File(exportLocation + "/" + fileNameDateFormat.format(new Date())+ ".txt");
+    OutputStream os=null;
+    Writer fw=null;
+    try {
+      os=new FileOutputStream(exportFile);
+      fw=new OutputStreamWriter(os,"ISO-8859-1");
+      fw.write(fieldNoteBuffer.toString());
+    }
+ catch (    IOException e) {
+      Log.e(Settings.tag,"FieldnoteExport.ExportTask export",e);
+      return false;
+    }
+ finally {
+      if (fw != null) {
+        try {
+          fw.close();
+        }
+ catch (        IOException e) {
+          Log.e(Settings.tag,"FieldnoteExport.ExportTask export",e);
+          return false;
+        }
+      }
+    }
+  }
+ else {
+    return false;
+  }
+  return true;
+}

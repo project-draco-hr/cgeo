@@ -1,0 +1,15 @@
+{
+  List<cgCache> caches;
+  if (adapter != null && adapter.getChecked() > 0) {
+    caches=new LinkedList<cgCache>();
+    for (    cgCache cache : cacheList) {
+      if (cache.isStatusChecked()) {
+        caches.add(cache);
+      }
+    }
+  }
+ else {
+    caches=cacheList;
+  }
+  ExportFactory.showExportMenu(caches,this);
+}
