@@ -1,0 +1,9 @@
+{
+  final cgCache one=new cgCache();
+  final cgCache two=new cgCache();
+  assertTrue(one.equals(one));
+  assertFalse(one.equals(two));
+  one.setGeocode("geocode");
+  two.setGeocode("geocode");
+  assertTrue(one.equals(two));
+}

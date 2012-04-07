@@ -1,0 +1,11 @@
+{
+  final ArrayList<cgCache> list=new ArrayList<cgCache>();
+  traditionalFilter.filter(list);
+  assertEquals(0,list.size());
+  list.add(traditional);
+  list.add(mystery);
+  assertEquals(2,list.size());
+  traditionalFilter.filter(list);
+  assertEquals(1,list.size());
+  assertTrue(list.contains(traditional));
+}
