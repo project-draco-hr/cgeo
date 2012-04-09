@@ -29,7 +29,7 @@
   if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
     exportLocation.mkdirs();
     SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
-    exportFile=new File(exportLocation + "/" + fileNameDateFormat.format(new Date())+ ".txt");
+    exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".txt");
     OutputStream os=null;
     Writer fw=null;
     try {
