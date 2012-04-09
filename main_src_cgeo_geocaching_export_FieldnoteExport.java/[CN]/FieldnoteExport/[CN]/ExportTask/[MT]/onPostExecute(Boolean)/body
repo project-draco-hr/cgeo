@@ -1,11 +1,13 @@
 {
-  progress.dismiss();
-  if (result) {
-    if (onlyNew) {
+  if (null != activity) {
+    progress.dismiss();
+    if (result) {
+      if (onlyNew) {
+      }
+      ActivityMixin.showToast(activity,getName() + " " + getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
     }
-    ActivityMixin.showToast(activity,getName() + " " + getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
-  }
  else {
-    ActivityMixin.showToast(activity,getString(R.string.export_failed));
+      ActivityMixin.showToast(activity,getString(R.string.export_failed));
+    }
   }
 }
