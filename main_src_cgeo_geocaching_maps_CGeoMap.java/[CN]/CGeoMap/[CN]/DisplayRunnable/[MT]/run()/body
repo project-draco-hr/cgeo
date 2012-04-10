@@ -5,19 +5,20 @@
       throw new ThreadDeath();
     }
     final List<cgCache> cachesToDisplay=new ArrayList<cgCache>(caches);
+    final List<cgWaypoint> waypointsToDisplay=new ArrayList<cgWaypoint>(waypoints);
     final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<CachesOverlayItemImpl>();
     if (!cachesToDisplay.isEmpty()) {
+      if (cachesToDisplay.size() == 1 || (cachesCnt < Settings.getWayPointsThreshold())) {
+        for (        cgWaypoint waypoint : waypointsToDisplay) {
+          if (waypoint.getCoords() == null) {
+            continue;
+          }
+          itemsToDisplay.add(getItem(waypoint,null,waypoint));
+        }
+      }
       for (      cgCache cache : cachesToDisplay) {
         if (cache.getCoords() == null) {
           continue;
-        }
-        if (cache.hasWaypoints() && (cachesToDisplay.size() == 1 || (cachesToDisplay.size() < Settings.getWayPointsThreshold()))) {
-          for (          cgWaypoint waypoint : cache.getWaypoints()) {
-            if (waypoint.getCoords() == null) {
-              continue;
-            }
-            itemsToDisplay.add(getItem(waypoint,null,waypoint));
-          }
         }
         itemsToDisplay.add(getItem(cache,cache,null));
       }
