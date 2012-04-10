@@ -1,4 +1,7 @@
 {
+  if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    return false;
+  }
   final StringBuilder gpx=new StringBuilder();
   gpx.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
   gpx.append("<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd\">");
@@ -54,10 +57,10 @@
           gpx.append(attr.id);
           gpx.append("\" inc=\"");
           if (enabled) {
-            gpx.append("1");
+            gpx.append('1');
           }
  else {
-            gpx.append("0");
+            gpx.append('0');
           }
           gpx.append("\">");
           gpx.append(StringEscapeUtils.escapeXml(attr.getL10n(enabled)));
@@ -135,7 +138,7 @@
   if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
     exportLocation.mkdirs();
     SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
-    exportFile=new File(exportLocation + "/" + fileNameDateFormat.format(new Date())+ ".gpx");
+    exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".gpx");
     OutputStream os=null;
     Writer fw=null;
     try {
