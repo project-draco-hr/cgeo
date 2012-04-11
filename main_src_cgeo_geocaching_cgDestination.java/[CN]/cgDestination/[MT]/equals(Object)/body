@@ -1,13 +1,3 @@
 {
-  if (this == obj) {
-    return true;
-  }
-  if (obj == null) {
-    return false;
-  }
-  if (!(obj instanceof cgDestination)) {
-    return false;
-  }
-  cgDestination other=(cgDestination)obj;
-  return coords.isEqualTo(other.coords);
+  return obj != null && obj instanceof cgDestination && ((cgDestination)obj).coords.equals(coords);
 }
