@@ -15,7 +15,7 @@
       where.append(buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon));
     }
  else {
-      cgData.whereGeocodeIn(geocodes);
+      where=cgData.whereGeocodeIn(geocodes);
     }
     cursor=databaseRO.query(dbTableCaches,CACHE_COLUMNS,where.toString(),null,null,null,null,null);
     if (cursor != null) {
