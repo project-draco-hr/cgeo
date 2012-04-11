@@ -3,7 +3,7 @@
   DMS dms1=gp1.asDMS();
   checkDMS(dms1,'N',51,18,0,0,'E',13,48,0,0);
   Geopoint gp1a=DMS.createGeopoint(String.valueOf(dms1.latDir),String.valueOf(dms1.latDeg),String.valueOf(dms1.latMin),String.valueOf(dms1.latSec),String.valueOf(dms1.latSecFrac),String.valueOf(dms1.lonDir),String.valueOf(dms1.lonDeg),String.valueOf(dms1.lonMin),String.valueOf(dms1.lonSec),String.valueOf(dms1.lonSecFrac));
-  Assert.assertTrue(gp1a.isEqualTo(gp1));
+  Assert.assertTrue(gp1a.equals(gp1));
   final Geopoint gp2=new Geopoint(51.34567d,13.87654d);
   DMS dms2=gp2.asDMS();
   checkDMS(dms2,'N',51,20,44,412,'E',13,52,35,544);

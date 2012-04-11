@@ -1,7 +1,7 @@
 {
   editSharedSettings(new PrefRunnable(){
     @Override public void edit(    Editor edit){
-      edit.putInt(KEY_METRIC_UNITS,metric ? unitsMetric : unitsImperial);
+      edit.putBoolean(KEY_METRIC_UNITS,metric);
     }
   }
 );

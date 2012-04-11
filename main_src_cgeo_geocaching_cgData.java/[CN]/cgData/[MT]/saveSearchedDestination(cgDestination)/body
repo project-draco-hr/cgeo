@@ -1,26 +1,17 @@
 {
-  boolean success=true;
-  if (destination == null) {
-    success=false;
+  init();
+  databaseRW.beginTransaction();
+  try {
+    ContentValues values=new ContentValues();
+    values.put("date",destination.getDate());
+    putCoords(values,destination.getCoords());
+    databaseRW.insert(dbTableSearchDestionationHistory,null,values);
+    databaseRW.setTransactionSuccessful();
   }
- else {
-    init();
-    databaseRW.beginTransaction();
-    try {
-      ContentValues values=new ContentValues();
-      values.put("date",destination.getDate());
-      putCoords(values,destination.getCoords());
-      long id=databaseRW.insert(dbTableSearchDestionationHistory,null,values);
-      destination.setId(id);
-      databaseRW.setTransactionSuccessful();
-    }
- catch (    Exception e) {
-      success=false;
-      Log.e(Settings.tag,"Updating searchedDestinations db failed",e);
-    }
+ catch (  Exception e) {
+    Log.e(Settings.tag,"Updating searchedDestinations db failed",e);
+  }
  finally {
-      databaseRW.endTransaction();
-    }
+    databaseRW.endTransaction();
   }
-  return success;
 }

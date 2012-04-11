@@ -1,7 +1,7 @@
 {
   editSharedSettings(new PrefRunnable(){
     @Override public void edit(    Editor edit){
-      edit.putInt(KEY_HIDE_LIVE_MAP_HINT,hide ? 1 : 0);
+      edit.putBoolean(KEY_HIDE_LIVE_MAP_HINT,hide);
     }
   }
 );

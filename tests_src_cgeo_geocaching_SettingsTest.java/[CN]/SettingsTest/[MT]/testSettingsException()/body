@@ -1,3 +1,5 @@
 {
-  assertTrue(Settings.isValidMapFile() || !Settings.isValidMapFile());
+  final String mapFile=Settings.getMapFile();
+  assertNotNull(mapFile);
+  MapDatabase.isValidMapFile(mapFile);
 }

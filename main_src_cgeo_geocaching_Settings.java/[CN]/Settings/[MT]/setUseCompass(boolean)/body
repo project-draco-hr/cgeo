@@ -1,7 +1,7 @@
 {
   editSharedSettings(new PrefRunnable(){
     @Override public void edit(    Editor edit){
-      edit.putInt(KEY_USE_COMPASS,useCompass ? 1 : 0);
+      edit.putBoolean(KEY_USE_COMPASS,useCompass);
     }
   }
 );

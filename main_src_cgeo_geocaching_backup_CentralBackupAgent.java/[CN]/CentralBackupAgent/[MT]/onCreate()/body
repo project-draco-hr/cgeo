@@ -1,4 +1,4 @@
 {
-  SharedPreferencesBackupHelper helper=new SharedPreferencesBackupHelper(this,Settings.preferences);
+  final SharedPreferencesBackupHelper helper=new SharedPreferencesBackupHelper(this,Settings.getPreferencesName());
   addHelper(PREFS_BACKUP_KEY,helper);
 }

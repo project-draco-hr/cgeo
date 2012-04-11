@@ -1,10 +1,9 @@
 {
-  cgDestination loc=new cgDestination();
-  loc.setCoords(coords);
+  final cgDestination loc=new cgDestination(0,0,coords);
   if (!getHistoryOfSearchedLocations().contains(loc)) {
-    loc.setDate(System.currentTimeMillis());
-    getHistoryOfSearchedLocations().add(0,loc);
-    app.saveSearchedDestination(loc);
+    final cgDestination updatedLoc=loc.withDate(System.currentTimeMillis());
+    getHistoryOfSearchedLocations().add(0,updatedLoc);
+    app.saveSearchedDestination(updatedLoc);
     historyListView.removeFooterView(getEmptyHistoryFooter());
   }
 }
