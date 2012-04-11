@@ -10,9 +10,12 @@
   init();
   Cursor cursor=null;
   try {
-    StringBuilder where=cgData.whereGeocodeIn(geocodes);
+    StringBuilder where=new StringBuilder();
     if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
       where.append(buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon));
+    }
+ else {
+      cgData.whereGeocodeIn(geocodes);
     }
     cursor=databaseRO.query(dbTableCaches,CACHE_COLUMNS,where.toString(),null,null,null,null,null);
     if (cursor != null) {
