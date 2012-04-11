@@ -1,0 +1,10 @@
+{
+  if (this == obj) {
+    return true;
+  }
+  if (obj == null || !(obj instanceof Geopoint)) {
+    return false;
+  }
+  final Geopoint gp=(Geopoint)obj;
+  return getLatitudeE6() == gp.getLatitudeE6() && getLongitudeE6() == gp.getLongitudeE6();
+}

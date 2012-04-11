@@ -3,7 +3,7 @@
   DMM dmm1=gp1.asDMM();
   checkDMM(dmm1,'N',51,18,0,'E',13,48,0);
   Geopoint gp1a=DMM.createGeopoint(String.valueOf(dmm1.latDir),String.valueOf(dmm1.latDeg),String.valueOf(dmm1.latMin),String.valueOf(dmm1.latMinFrac),String.valueOf(dmm1.lonDir),String.valueOf(dmm1.lonDeg),String.valueOf(dmm1.lonMin),String.valueOf(dmm1.lonMinFrac));
-  Assert.assertTrue(gp1a.isEqualTo(gp1));
+  Assert.assertTrue(gp1a.equals(gp1));
   final Geopoint gp2=new Geopoint(51.34567d,13.87654d);
   DMM dmm2=gp2.asDMM();
   checkDMM(dmm2,'N',51,20,740,'E',13,52,592);
