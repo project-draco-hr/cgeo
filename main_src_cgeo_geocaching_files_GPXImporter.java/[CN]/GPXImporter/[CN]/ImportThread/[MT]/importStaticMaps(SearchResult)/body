@@ -3,7 +3,7 @@
   int storedCacheMaps=0;
   for (  String geocode : importedCaches.getGeocodes()) {
     cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
-    Log.d(Settings.tag,"GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
+    Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
     StaticMapsProvider.downloadMaps(cache,app);
     storedCacheMaps++;
     if (progressHandler.isCancelled()) {

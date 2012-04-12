@@ -1,6 +1,6 @@
 {
   final String reqLogStr=request.getMethod() + " " + hidePassword(request.getURI().toString());
-  Log.d(Settings.tag,reqLogStr);
+  Log.d(reqLogStr);
   final HttpClient client=getHttpClient();
   for (int i=0; i <= NB_DOWNLOAD_RETRIES; i++) {
     final long before=System.currentTimeMillis();
@@ -8,10 +8,10 @@
       final HttpResponse response=client.execute(request);
       int status=response.getStatusLine().getStatusCode();
       if (status == 200) {
-        Log.d(Settings.tag,status + Network.formatTimeSpan(before) + reqLogStr);
+        Log.d(status + Network.formatTimeSpan(before) + reqLogStr);
       }
  else {
-        Log.w(Settings.tag,status + " [" + response.getStatusLine().getReasonPhrase()+ "]"+ Network.formatTimeSpan(before)+ reqLogStr);
+        Log.w(status + " [" + response.getStatusLine().getReasonPhrase()+ "]"+ Network.formatTimeSpan(before)+ reqLogStr);
       }
       return response;
     }
@@ -19,10 +19,10 @@
       final String timeSpan=Network.formatTimeSpan(before);
       final String tries=(i + 1) + "/" + (NB_DOWNLOAD_RETRIES + 1);
       if (i == NB_DOWNLOAD_RETRIES) {
-        Log.e(Settings.tag,"Failure " + tries + timeSpan+ reqLogStr,e);
+        Log.e("Failure " + tries + timeSpan+ reqLogStr,e);
       }
  else {
-        Log.e(Settings.tag,"Failure " + tries + " ("+ e.toString()+ ")"+ timeSpan+ "- retrying "+ reqLogStr);
+        Log.e("Failure " + tries + " ("+ e.toString()+ ")"+ timeSpan+ "- retrying "+ reqLogStr);
       }
     }
   }

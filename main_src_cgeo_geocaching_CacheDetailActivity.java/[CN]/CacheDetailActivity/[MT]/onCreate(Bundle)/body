@@ -27,10 +27,10 @@
     String uriPath=uri.getPath().toLowerCase();
     String uriQuery=uri.getQuery();
     if (uriQuery != null) {
-      Log.i(Settings.tag,"Opening URI: " + uriHost + uriPath+ "?"+ uriQuery);
+      Log.i("Opening URI: " + uriHost + uriPath+ "?"+ uriQuery);
     }
  else {
-      Log.i(Settings.tag,"Opening URI: " + uriHost + uriPath);
+      Log.i("Opening URI: " + uriHost + uriPath);
     }
     if (uriHost.contains("geocaching.com")) {
       geocode=uri.getQueryParameter("wp");

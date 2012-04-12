@@ -19,7 +19,7 @@
           HeaderElement[] codecs=ceheader.getElements();
           for (int i=0; i < codecs.length; i++) {
             if (codecs[i].getName().equalsIgnoreCase("gzip")) {
-              Log.d(Settings.tag,"Decompressing response");
+              Log.d("Decompressing response");
               response.setEntity(new Network.GzipDecompressingEntity(response.getEntity()));
               return;
             }

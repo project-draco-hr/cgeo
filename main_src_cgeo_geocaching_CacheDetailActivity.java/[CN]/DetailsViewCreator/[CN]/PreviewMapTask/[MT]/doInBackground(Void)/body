@@ -11,7 +11,7 @@
     image=mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?zoom=15&size=" + width + "x"+ height+ "&maptype=roadmap&markers=icon%3A"+ markerUrl+ "%7Cshadow:false%7C"+ latlonMap+ "&sensor=false");
   }
  catch (  Exception e) {
-    Log.w(Settings.tag,"CacheDetailActivity.PreviewMapTask",e);
+    Log.w("CacheDetailActivity.PreviewMapTask",e);
   }
   return image;
 }

@@ -7,7 +7,7 @@
     output=new FileOutputStream(destination);
   }
  catch (  FileNotFoundException e) {
-    Log.e(Settings.tag,"LocalStorage.copy: could not open file",e);
+    Log.e("LocalStorage.copy: could not open file",e);
     if (input != null) {
       try {
         input.close();
@@ -23,7 +23,7 @@
     output.close();
   }
  catch (  IOException e) {
-    Log.e(Settings.tag,"LocalStorage.copy: could not close file",e);
+    Log.e("LocalStorage.copy: could not close file",e);
     return false;
   }
   return copyDone;

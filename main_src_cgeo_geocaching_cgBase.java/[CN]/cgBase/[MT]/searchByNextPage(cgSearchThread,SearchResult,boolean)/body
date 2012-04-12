@@ -5,11 +5,11 @@
   final String[] viewstates=search.getViewstates();
   final String url=search.getUrl();
   if (StringUtils.isBlank(url)) {
-    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No url found");
+    Log.e("cgeoBase.searchByNextPage: No url found");
     return search;
   }
   if (isEmpty(viewstates)) {
-    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No viewstate given");
+    Log.e("cgeoBase.searchByNextPage: No viewstate given");
     return search;
   }
   final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
@@ -22,21 +22,21 @@
       page=Network.getResponseData(Network.postRequest(uri,params));
     }
  else     if (loginState == StatusCode.NO_LOGIN_INFO_STORED) {
-      Log.i(Settings.tag,"Working as guest.");
+      Log.i("Working as guest.");
     }
  else {
       search.setError(loginState);
-      Log.e(Settings.tag,"cgeoBase.searchByNextPage: Can not log in geocaching");
+      Log.e("cgeoBase.searchByNextPage: Can not log in geocaching");
       return search;
     }
   }
   if (StringUtils.isBlank(page)) {
-    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No data from server");
+    Log.e("cgeoBase.searchByNextPage: No data from server");
     return search;
   }
   final SearchResult searchResult=parseSearch(thread,url,page,showCaptcha);
   if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-    Log.e(Settings.tag,"cgeoBase.searchByNextPage: No cache parsed");
+    Log.e("cgeoBase.searchByNextPage: No cache parsed");
     return search;
   }
   search.setError(searchResult.getError());

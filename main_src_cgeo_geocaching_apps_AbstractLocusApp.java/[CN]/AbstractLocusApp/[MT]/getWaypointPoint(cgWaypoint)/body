@@ -2,7 +2,7 @@
   if (waypoint == null || waypoint.getCoords() == null) {
     return null;
   }
-  final Location loc=new Location(Settings.tag);
+  final Location loc=new Location("cgeo");
   loc.setLatitude(waypoint.getCoords().getLatitude());
   loc.setLongitude(waypoint.getCoords().getLongitude());
   final Point p=new Point(waypoint.getName(),loc);

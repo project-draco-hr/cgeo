@@ -21,7 +21,7 @@
       publishProgress(i + 1);
     }
  catch (    Exception e) {
-      Log.e(Settings.tag,"FieldnoteExport.ExportTask generation",e);
+      Log.e("FieldnoteExport.ExportTask generation",e);
       return false;
     }
   }
@@ -38,7 +38,7 @@
       fw.write(fieldNoteBuffer.toString());
     }
  catch (    IOException e) {
-      Log.e(Settings.tag,"FieldnoteExport.ExportTask export",e);
+      Log.e("FieldnoteExport.ExportTask export",e);
       return false;
     }
  finally {
@@ -47,7 +47,7 @@
           fw.close();
         }
  catch (        IOException e) {
-          Log.e(Settings.tag,"FieldnoteExport.ExportTask export",e);
+          Log.e("FieldnoteExport.ExportTask export",e);
           return false;
         }
       }

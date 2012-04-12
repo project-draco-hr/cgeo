@@ -1,6 +1,6 @@
 {
   final Bitmap bitmap=getBitmap(R.raw.tile14);
-  Log.d(Settings.tag,"Bitmap=" + bitmap.getWidth() + "x"+ bitmap.getHeight());
+  Log.d("Bitmap=" + bitmap.getWidth() + "x"+ bitmap.getHeight());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,97,136,14).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,226,104,14).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,54,97,14).getType());

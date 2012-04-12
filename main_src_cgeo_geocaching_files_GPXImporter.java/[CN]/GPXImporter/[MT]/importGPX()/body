@@ -11,7 +11,7 @@
       mimeType="application/zip";
     }
   }
-  Log.i(Settings.tag,"importGPX: " + uri + ", mimetype="+ mimeType);
+  Log.i("importGPX: " + uri + ", mimetype="+ mimeType);
   if (GPX_MIME_TYPES.contains(mimeType)) {
     new ImportGpxAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
   }

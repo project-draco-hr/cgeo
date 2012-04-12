@@ -7,7 +7,7 @@
     }
     try {
       if (needToStop) {
-        Log.i(Settings.tag,"Stopped removing process.");
+        Log.i("Stopped removing process.");
         break;
       }
       app.clearVisitDate(cache.getGeocode());
@@ -16,7 +16,7 @@
       yield();
     }
  catch (    Exception e) {
-      Log.e(Settings.tag,"cgeocaches.RemoveFromHistoryThread: " + e.toString());
+      Log.e("cgeocaches.RemoveFromHistoryThread: " + e.toString());
     }
   }
   handler.sendEmptyMessage(MSG_DONE);

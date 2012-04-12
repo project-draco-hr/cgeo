@@ -9,7 +9,7 @@
       count=Integer.parseInt(matcherViewstateCount.group(1));
     }
  catch (    NumberFormatException e) {
-      Log.e(Settings.tag,"getViewStates",e);
+      Log.e("getViewStates",e);
     }
   }
   String[] viewstates=new String[count];
@@ -25,7 +25,7 @@
         no=Integer.parseInt(sno);
       }
  catch (      NumberFormatException e) {
-        Log.e(Settings.tag,"getViewStates",e);
+        Log.e("getViewStates",e);
         no=0;
       }
     }

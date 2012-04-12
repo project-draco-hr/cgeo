@@ -15,7 +15,7 @@
   }
   cache.addStorageLocation(StorageLocation.DATABASE);
   cacheCache.putCacheInCache(cache);
-  Log.d(Settings.tag,"Saving " + cache.toString() + " ("+ cache.getListId()+ ") to DB");
+  Log.d("Saving " + cache.toString() + " ("+ cache.getListId()+ ") to DB");
   ContentValues values=new ContentValues();
   if (cache.getUpdated() == 0) {
     values.put("updated",System.currentTimeMillis());

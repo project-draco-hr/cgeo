@@ -20,7 +20,7 @@
         }
       }
  catch (      Exception e) {
-        Log.e(Settings.tag,"HtmlImage.getDrawable (downloading from web)",e);
+        Log.e("HtmlImage.getDrawable (downloading from web)",e);
       }
     }
   }
@@ -31,7 +31,7 @@
     imagePre=loadImageFromStorage(url);
   }
   if (imagePre == null) {
-    Log.d(Settings.tag,"HtmlImage.getDrawable: Failed to obtain image");
+    Log.d("HtmlImage.getDrawable: Failed to obtain image");
     if (returnErrorImage) {
       imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_not_loaded);
     }
@@ -51,7 +51,7 @@
       imagePre=Bitmap.createScaledBitmap(imagePre,width,height,true);
     }
  catch (    Exception e) {
-      Log.d(Settings.tag,"HtmlImage.getDrawable: Failed to scale image");
+      Log.d("HtmlImage.getDrawable: Failed to scale image");
       return null;
     }
   }

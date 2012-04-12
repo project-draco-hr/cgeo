@@ -8,10 +8,10 @@
       final HtmlImage imgGetter=new HtmlImage(context,"",false,0,false);
       return imgGetter.getDrawable(avatarURL);
     }
-    Log.d(Settings.tag,"No avatar set for user");
+    Log.d("No avatar set for user");
   }
  catch (  Exception e) {
-    Log.w(Settings.tag,"Error when retrieving user avatar",e);
+    Log.w("Error when retrieving user avatar",e);
   }
   return null;
 }

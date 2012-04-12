@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(pageContent)) {
-    Log.e(Settings.tag,"cgeoBase.parseSearch: No page given");
+    Log.e("cgeoBase.parseSearch: No page given");
     return null;
   }
   final List<String> cids=new ArrayList<String>();
@@ -30,14 +30,14 @@
   }
   int startPos=page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
   if (startPos == -1) {
-    Log.e(Settings.tag,"cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
+    Log.e("cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
     return null;
   }
   page=page.substring(startPos);
   startPos=page.indexOf('>');
   int endPos=page.indexOf("ctl00_ContentBody_UnitTxt");
   if (startPos == -1 || endPos == -1) {
-    Log.e(Settings.tag,"cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
+    Log.e("cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
     return null;
   }
   page=page.substring(startPos + 1,endPos - startPos + 1);
@@ -70,7 +70,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
+      Log.w("cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
     }
     if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
       continue;
@@ -119,7 +119,7 @@
       }
     }
  catch (    NumberFormatException e) {
-      Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse favourite count");
+      Log.w("cgeoBase.parseSearch: Failed to parse favourite count");
     }
     if (cache.getNameSp() == null) {
       cache.setNameSp((new Spannable.Factory()).newSpannable(cache.getName()));
@@ -136,7 +136,7 @@
     }
   }
  catch (  NumberFormatException e) {
-    Log.w(Settings.tag,"cgeoBase.parseSearch: Failed to parse cache count");
+    Log.w("cgeoBase.parseSearch: Failed to parse cache count");
   }
   if (thread != null && recaptchaChallenge != null) {
     if (thread.getText() == null) {
@@ -145,7 +145,7 @@
     recaptchaText=thread.getText();
   }
   if (cids.size() > 0 && (Settings.isPremiumMember() || showCaptcha) && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
-    Log.i(Settings.tag,"Trying to get .loc for " + cids.size() + " caches");
+    Log.i("Trying to get .loc for " + cids.size() + " caches");
     try {
       final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","");
       if (ArrayUtils.isNotEmpty(searchResult.viewstates)) {
@@ -168,7 +168,7 @@
       final String coordinates=Network.getResponseData(Network.postRequest("http://www.geocaching.com/seek/nearest.aspx",params),false);
       if (StringUtils.isNotBlank(coordinates)) {
         if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
-          Log.i(Settings.tag,"User has not agreed to the license agreement. Can\'t download .loc file.");
+          Log.i("User has not agreed to the license agreement. Can\'t download .loc file.");
           searchResult.setError(StatusCode.UNAPPROVED_LICENSE);
           return searchResult;
         }
@@ -176,7 +176,7 @@
       LocParser.parseLoc(searchResult,coordinates);
     }
  catch (    Exception e) {
-      Log.e(Settings.tag,"cgBase.parseSearch.CIDs: " + e.toString());
+      Log.e("cgBase.parseSearch.CIDs: " + e.toString());
     }
   }
   if (Settings.getLoadDirImg()) {

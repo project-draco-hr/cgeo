@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(page)) {
-    Log.e(Settings.tag,"cgeoBase.parseTrackable: No page given");
+    Log.e("cgeoBase.parseTrackable: No page given");
     return null;
   }
   final cgTrackable trackable=new cgTrackable();
@@ -19,7 +19,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable owner name");
+    Log.w("cgeoBase.parseTrackable: Failed to parse trackable owner name");
   }
   trackable.setOrigin(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ORIGIN,true,trackable.getOrigin()));
   try {
@@ -43,7 +43,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable last known place");
+    Log.w("cgeoBase.parseTrackable: Failed to parse trackable last known place");
   }
   try {
     String releaseString=BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null);
@@ -81,7 +81,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseTrackable: Failed to parse trackable details & image");
+    Log.w("cgeoBase.parseTrackable: Failed to parse trackable details & image");
   }
   try {
     final Matcher matcherLogs=GCConstants.PATTERN_TRACKABLE_LOG.matcher(page);
@@ -111,7 +111,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w(Settings.tag,"cgeoBase.parseCache: Failed to parse cache logs" + e.toString());
+    Log.w("cgeoBase.parseCache: Failed to parse cache logs" + e.toString());
   }
   if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(),possibleTrackingcode)) {
     trackable.setTrackingcode(possibleTrackingcode);

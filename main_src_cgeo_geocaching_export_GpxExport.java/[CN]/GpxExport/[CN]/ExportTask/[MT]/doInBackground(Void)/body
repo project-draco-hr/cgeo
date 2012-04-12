@@ -131,7 +131,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(Settings.tag,"GpxExport.ExportTask generation",e);
+    Log.e("GpxExport.ExportTask generation",e);
     return false;
   }
   gpx.append("</gpx>");
@@ -147,7 +147,7 @@
       fw.write(gpx.toString());
     }
  catch (    IOException e) {
-      Log.e(Settings.tag,"GpxExport.ExportTask export",e);
+      Log.e("GpxExport.ExportTask export",e);
       return false;
     }
  finally {
@@ -156,7 +156,7 @@
           fw.close();
         }
  catch (        IOException e) {
-          Log.e(Settings.tag,"GpxExport.ExportTask export",e);
+          Log.e("GpxExport.ExportTask export",e);
           return false;
         }
       }

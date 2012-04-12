@@ -32,7 +32,7 @@
     displayExecutor.execute(new DisplayRunnable(centerLat,centerLon,spanLat,spanLon));
   }
  catch (  ThreadDeath e) {
-    Log.d(Settings.tag,"DownloadThread stopped");
+    Log.d("DownloadThread stopped");
     displayHandler.sendEmptyMessage(UPDATE_TITLE);
   }
  finally {

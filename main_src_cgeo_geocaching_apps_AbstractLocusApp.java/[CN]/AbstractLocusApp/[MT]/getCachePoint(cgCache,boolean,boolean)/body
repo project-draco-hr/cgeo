@@ -2,7 +2,7 @@
   if (cache == null || cache.getCoords() == null) {
     return null;
   }
-  final Location loc=new Location(Settings.tag);
+  final Location loc=new Location("cgeo");
   loc.setLatitude(cache.getCoords().getLatitude());
   loc.setLongitude(cache.getCoords().getLongitude());
   final Point p=new Point(cache.getName(),loc);

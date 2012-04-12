@@ -5,7 +5,7 @@
     caches=doImport();
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_CACHES,R.string.gpx_import_storing,caches.size()));
     SearchResult search=storeParsedCaches(caches);
-    Log.i(Settings.tag,"Imported successfully " + caches.size() + " caches.");
+    Log.i("Imported successfully " + caches.size() + " caches.");
     if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {
       importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_STATIC_MAPS,R.string.gpx_import_store_static_maps,search.getCount()));
       boolean finishedWithoutCancel=importStaticMaps(search);
@@ -16,19 +16,19 @@
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED,search.getCount(),0,search));
   }
  catch (  IOException e) {
-    Log.i(Settings.tag,"Importing caches failed - error reading data: " + e.getMessage());
+    Log.i("Importing caches failed - error reading data: " + e.getMessage());
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR,R.string.gpx_import_error_io,0,e.getLocalizedMessage()));
   }
 catch (  ParserException e) {
-    Log.i(Settings.tag,"Importing caches failed - data format error" + e.getMessage());
+    Log.i("Importing caches failed - data format error" + e.getMessage());
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR,R.string.gpx_import_error_parser,0,e.getLocalizedMessage()));
   }
 catch (  CancellationException e) {
-    Log.i(Settings.tag,"Importing caches canceled");
+    Log.i("Importing caches canceled");
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_CANCELED));
   }
 catch (  Exception e) {
-    Log.e(Settings.tag,"Importing caches failed - unknown error: ",e);
+    Log.e("Importing caches failed - unknown error: ",e);
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR,R.string.gpx_import_error_unexpected,0,e.getLocalizedMessage()));
   }
 }

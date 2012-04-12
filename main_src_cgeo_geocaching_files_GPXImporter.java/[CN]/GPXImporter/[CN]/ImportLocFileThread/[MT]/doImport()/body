@@ -1,5 +1,5 @@
 {
-  Log.i(Settings.tag,"Import LOC file: " + file.getAbsolutePath());
+  Log.i("Import LOC file: " + file.getAbsolutePath());
   importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE,R.string.gpx_import_loading_caches,(int)file.length()));
   LocParser parser=new LocParser(listId);
   return parser.parse(file,progressHandler);

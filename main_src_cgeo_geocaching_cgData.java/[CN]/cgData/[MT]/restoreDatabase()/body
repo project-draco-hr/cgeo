@@ -1,6 +1,6 @@
 {
   if (!LocalStorage.isExternalStorageAvailable()) {
-    Log.w(Settings.tag,"Database wasn't restored: no external memory");
+    Log.w("Database wasn't restored: no external memory");
     return false;
   }
   final File sourceFile=backupFile();
@@ -8,10 +8,10 @@
   final boolean restoreDone=LocalStorage.copy(sourceFile,new File(path));
   init();
   if (restoreDone) {
-    Log.i(Settings.tag,"Database succesfully restored from " + sourceFile.getPath());
+    Log.i("Database succesfully restored from " + sourceFile.getPath());
   }
  else {
-    Log.e(Settings.tag,"Could not restore database from " + sourceFile.getPath());
+    Log.e("Could not restore database from " + sourceFile.getPath());
   }
   return restoreDone;
 }

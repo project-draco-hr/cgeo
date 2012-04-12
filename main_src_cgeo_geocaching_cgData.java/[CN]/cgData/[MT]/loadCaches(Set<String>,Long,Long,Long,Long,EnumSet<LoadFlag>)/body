@@ -6,7 +6,7 @@
   if (CollectionUtils.isNotEmpty(geocodes) && centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
     throw new IllegalArgumentException("Please use only one parameter");
   }
-  Log.d(Settings.tag,"cgData.loadCaches(" + geocodes.toString() + ") from DB");
+  Log.d("cgData.loadCaches(" + geocodes.toString() + ") from DB");
   init();
   Cursor cursor=null;
   try {
@@ -76,7 +76,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e(Settings.tag,"cgData.getCaches: " + e.toString());
+    Log.e("cgData.getCaches: " + e.toString());
   }
   if (cursor != null) {
     cursor.close();

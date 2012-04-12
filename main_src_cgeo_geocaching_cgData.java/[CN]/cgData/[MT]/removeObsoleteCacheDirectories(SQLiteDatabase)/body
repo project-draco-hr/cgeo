@@ -17,7 +17,7 @@
   new Thread(new Runnable(){
     @Override public void run(){
       for (      final File dir : toRemove) {
-        Log.i(Settings.tag,"Removing obsolete cache directory for " + dir.getName());
+        Log.i("Removing obsolete cache directory for " + dir.getName());
         LocalStorage.deleteDirectory(dir);
       }
     }

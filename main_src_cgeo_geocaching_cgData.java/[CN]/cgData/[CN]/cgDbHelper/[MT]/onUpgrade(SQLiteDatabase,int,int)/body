@@ -1,5 +1,5 @@
 {
-  Log.i(Settings.tag,"Upgrade database from ver. " + oldVersion + " to ver. "+ newVersion+ ": start");
+  Log.i("Upgrade database from ver. " + oldVersion + " to ver. "+ newVersion+ ": start");
   try {
     if (db.isReadOnly()) {
       return;
@@ -8,7 +8,7 @@
     if (oldVersion <= 0) {
       dropDatabase(db);
       onCreate(db);
-      Log.i(Settings.tag,"Database structure created.");
+      Log.i("Database structure created.");
     }
     if (oldVersion > 0) {
       db.execSQL("delete from " + dbTableCaches + " where reason = 0");
@@ -25,49 +25,49 @@
           db.execSQL("create index if not exists in_a on " + dbTableSpoilers + " (geocode)");
           db.execSQL("create index if not exists in_a on " + dbTableLogs + " (geocode)");
           db.execSQL("create index if not exists in_a on " + dbTableTrackables + " (geocode)");
-          Log.i(Settings.tag,"Indexes added.");
+          Log.i("Indexes added.");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 34: " + e.toString());
+          Log.e("Failed to upgrade to ver. 34: " + e.toString());
         }
       }
       if (oldVersion < 37) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column direction text");
           db.execSQL("alter table " + dbTableCaches + " add column distance double");
-          Log.i(Settings.tag,"Columns direction and distance added to " + dbTableCaches + ".");
+          Log.i("Columns direction and distance added to " + dbTableCaches + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 37: " + e.toString());
+          Log.e("Failed to upgrade to ver. 37: " + e.toString());
         }
       }
       if (oldVersion < 38) {
         try {
           db.execSQL("drop table " + dbTableLogs);
           db.execSQL(dbCreateLogs);
-          Log.i(Settings.tag,"Changed type column in " + dbTableLogs + " to integer.");
+          Log.i("Changed type column in " + dbTableLogs + " to integer.");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 38: " + e.toString());
+          Log.e("Failed to upgrade to ver. 38: " + e.toString());
         }
       }
       if (oldVersion < 39) {
         try {
           db.execSQL(dbCreateLists);
-          Log.i(Settings.tag,"Created lists table.");
+          Log.i("Created lists table.");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 39: " + e.toString());
+          Log.e("Failed to upgrade to ver. 39: " + e.toString());
         }
       }
       if (oldVersion < 40) {
         try {
           db.execSQL("drop table " + dbTableTrackables);
           db.execSQL(dbCreateTrackables);
-          Log.i(Settings.tag,"Changed type of geocode column in trackables table.");
+          Log.i("Changed type of geocode column in trackables table.");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 40: " + e.toString());
+          Log.e("Failed to upgrade to ver. 40: " + e.toString());
         }
       }
       if (oldVersion < 41) {
@@ -75,19 +75,19 @@
           db.execSQL("alter table " + dbTableCaches + " add column rating float");
           db.execSQL("alter table " + dbTableCaches + " add column votes integer");
           db.execSQL("alter table " + dbTableCaches + " add column vote integer");
-          Log.i(Settings.tag,"Added columns for GCvote.");
+          Log.i("Added columns for GCvote.");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 41: " + e.toString());
+          Log.e("Failed to upgrade to ver. 41: " + e.toString());
         }
       }
       if (oldVersion < 42) {
         try {
           db.execSQL(dbCreateLogsOffline);
-          Log.i(Settings.tag,"Added table for offline logs");
+          Log.i("Added table for offline logs");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 42: " + e.toString());
+          Log.e("Failed to upgrade to ver. 42: " + e.toString());
         }
       }
       if (oldVersion < 43) {
@@ -103,10 +103,10 @@
           db.execSQL("insert into " + dbTableCaches + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, null, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from "+ dbTableCachesTemp);
           db.execSQL("drop table " + dbTableCachesTemp);
           db.setTransactionSuccessful();
-          Log.i(Settings.tag,"Changed direction column");
+          Log.i("Changed direction column");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 43: " + e.toString());
+          Log.e("Failed to upgrade to ver. 43: " + e.toString());
         }
  finally {
           db.endTransaction();
@@ -115,92 +115,92 @@
       if (oldVersion < 44) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column favourite_cnt integer");
-          Log.i(Settings.tag,"Column favourite_cnt added to " + dbTableCaches + ".");
+          Log.i("Column favourite_cnt added to " + dbTableCaches + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 44: " + e.toString());
+          Log.e("Failed to upgrade to ver. 44: " + e.toString());
         }
       }
       if (oldVersion < 45) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column owner_real text");
-          Log.i(Settings.tag,"Column owner_real added to " + dbTableCaches + ".");
+          Log.i("Column owner_real added to " + dbTableCaches + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 45: " + e.toString());
+          Log.e("Failed to upgrade to ver. 45: " + e.toString());
         }
       }
       if (oldVersion < 46) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column visiteddate long");
           db.execSQL("create index if not exists in_f on " + dbTableCaches + " (visiteddate, detailedupdate)");
-          Log.i(Settings.tag,"Added column for date of visit.");
+          Log.i("Added column for date of visit.");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 46: " + e.toString());
+          Log.e("Failed to upgrade to ver. 46: " + e.toString());
         }
       }
       if (oldVersion < 47) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column own integer not null default 0");
-          Log.i(Settings.tag,"Added column own.");
+          Log.i("Added column own.");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 47: " + e.toString());
+          Log.e("Failed to upgrade to ver. 47: " + e.toString());
         }
       }
       if (oldVersion < 48) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column elevation double");
-          Log.i(Settings.tag,"Column elevation added to " + dbTableCaches + ".");
+          Log.i("Column elevation added to " + dbTableCaches + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 48: " + e.toString());
+          Log.e("Failed to upgrade to ver. 48: " + e.toString());
         }
       }
       if (oldVersion < 49) {
         try {
           db.execSQL(dbCreateLogCount);
-          Log.i(Settings.tag,"Created table " + dbTableLogCount + ".");
+          Log.i("Created table " + dbTableLogCount + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 49: " + e.toString());
+          Log.e("Failed to upgrade to ver. 49: " + e.toString());
         }
       }
       if (oldVersion < 50) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column myvote float");
-          Log.i(Settings.tag,"Added float column for votes to " + dbTableCaches + ".");
+          Log.i("Added float column for votes to " + dbTableCaches + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 50: " + e.toString());
+          Log.e("Failed to upgrade to ver. 50: " + e.toString());
         }
       }
       if (oldVersion < 51) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column reliable_latlon integer");
-          Log.i(Settings.tag,"Column reliable_latlon added to " + dbTableCaches + ".");
+          Log.i("Column reliable_latlon added to " + dbTableCaches + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 51: " + e.toString());
+          Log.e("Failed to upgrade to ver. 51: " + e.toString());
         }
       }
       if (oldVersion < 52) {
         try {
           db.execSQL(dbCreateSearchDestinationHistory);
-          Log.i(Settings.tag,"Added table " + dbTableSearchDestionationHistory + ".");
+          Log.i("Added table " + dbTableSearchDestionationHistory + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 52",e);
+          Log.e("Failed to upgrade to ver. 52",e);
         }
       }
       if (oldVersion < 53) {
         try {
           db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
-          Log.i(Settings.tag,"Column onWatchlist added to " + dbTableCaches + ".");
+          Log.i("Column onWatchlist added to " + dbTableCaches + ".");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 53",e);
+          Log.e("Failed to upgrade to ver. 53",e);
         }
       }
       if (oldVersion < 54) {
@@ -208,7 +208,7 @@
           db.execSQL(dbCreateLogImages);
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 54: " + e.toString());
+          Log.e("Failed to upgrade to ver. 54: " + e.toString());
         }
       }
       if (oldVersion < 55) {
@@ -216,7 +216,7 @@
           db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 55: " + e.toString());
+          Log.e("Failed to upgrade to ver. 55: " + e.toString());
         }
       }
       if (oldVersion < 56) {
@@ -224,7 +224,7 @@
           db.execSQL("update " + dbTableAttributes + " set attribute = "+ "lower(attribute) where attribute like \"%_yes\" "+ "or attribute like \"%_no\"");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 56: " + e.toString());
+          Log.e("Failed to upgrade to ver. 56: " + e.toString());
         }
       }
       if (oldVersion < 57) {
@@ -238,7 +238,7 @@
           createIndices(db);
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 57: " + e.toString());
+          Log.e("Failed to upgrade to ver. 57: " + e.toString());
         }
       }
       if (oldVersion < 58) {
@@ -258,10 +258,10 @@
           db.execSQL("alter table " + dbTableWaypointsTemp + " rename to "+ dbTableWaypoints);
           createIndices(db);
           db.setTransactionSuccessful();
-          Log.i(Settings.tag,"Removed latitude_string and longitude_string columns");
+          Log.i("Removed latitude_string and longitude_string columns");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 58",e);
+          Log.e("Failed to upgrade to ver. 58",e);
         }
  finally {
           db.endTransaction();
@@ -273,7 +273,7 @@
           removeObsoleteCacheDirectories(db);
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 59",e);
+          Log.e("Failed to upgrade to ver. 59",e);
         }
       }
       if (oldVersion < 60) {
@@ -281,7 +281,7 @@
           removeSecEmptyDirs();
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 60",e);
+          Log.e("Failed to upgrade to ver. 60",e);
         }
       }
       if (oldVersion < 61) {
@@ -290,7 +290,7 @@
           db.execSQL("alter table " + dbTableCaches + " add column coordsChanged integer default 0");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 61: " + e.toString());
+          Log.e("Failed to upgrade to ver. 61: " + e.toString());
         }
       }
       if (oldVersion < 62) {
@@ -300,7 +300,7 @@
           db.execSQL("update " + dbTableWaypoints + " set own = 1 where type = 'own'");
         }
  catch (        Exception e) {
-          Log.e(Settings.tag,"Failed to upgrade to ver. 62: " + e.toString());
+          Log.e("Failed to upgrade to ver. 62: " + e.toString());
         }
       }
     }
@@ -309,5 +309,5 @@
   finally {
     db.endTransaction();
   }
-  Log.i(Settings.tag,"Upgrade database from ver. " + oldVersion + " to ver. "+ newVersion+ ": completed");
+  Log.i("Upgrade database from ver. " + oldVersion + " to ver. "+ newVersion+ ": completed");
 }

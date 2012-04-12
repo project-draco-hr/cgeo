@@ -9,7 +9,7 @@
   }
   table=StringUtils.substringBetween(table,"<tbody>","</tbody>");
   if (StringUtils.isBlank(table)) {
-    Log.e(Settings.tag,"cgeoBase.parseTrackableLog: tbody not found on page");
+    Log.e("cgeoBase.parseTrackableLog: tbody not found on page");
     return null;
   }
   final Matcher trackableMatcher=GCConstants.PATTERN_TRACKABLE.matcher(page);
@@ -40,7 +40,7 @@
  else {
         continue;
       }
-      Log.i(Settings.tag,"Trackable in inventory (#" + trackableLog.ctl + "/"+ trackableLog.id+ "): "+ trackableLog.trackCode+ " - "+ trackableLog.name);
+      Log.i("Trackable in inventory (#" + trackableLog.ctl + "/"+ trackableLog.id+ "): "+ trackableLog.trackCode+ " - "+ trackableLog.name);
       trackables.add(trackableLog);
     }
   }

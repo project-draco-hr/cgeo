@@ -9,12 +9,12 @@
     PackageManager manager=this.getPackageManager();
     PackageInfo info=manager.getPackageInfo(this.getPackageName(),0);
     version=info.versionCode;
-    Log.i(Settings.tag,"Starting " + info.packageName + " "+ info.versionCode+ " a.k.a "+ info.versionName+ "...");
+    Log.i("Starting " + info.packageName + " "+ info.versionCode+ " a.k.a "+ info.versionName+ "...");
     info=null;
     manager=null;
   }
  catch (  Exception e) {
-    Log.i(Settings.tag,"No info.");
+    Log.i("No info.");
   }
   try {
     if (!Settings.isHelpShown()) {

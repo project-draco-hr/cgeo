@@ -56,10 +56,10 @@
       }
       searchResult.addCache(cache);
     }
-    Log.d(Settings.tag,"Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
+    Log.d("Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
   }
  catch (  Exception e) {
-    Log.e(Settings.tag,"GCBase.parseMapJSON",e);
+    Log.e("GCBase.parseMapJSON",e);
   }
   return searchResult;
 }

@@ -10,7 +10,7 @@
     databaseRO.close();
     databaseRO=null;
     SQLiteDatabase.releaseMemory();
-    Log.d(Settings.tag,"Closing RO database");
+    Log.d("Closing RO database");
   }
   if (databaseRW != null) {
     path=databaseRW.getPath();
@@ -20,7 +20,7 @@
     databaseRW.close();
     databaseRW=null;
     SQLiteDatabase.releaseMemory();
-    Log.d(Settings.tag,"Closing RW database");
+    Log.d("Closing RW database");
   }
   if (dbHelper != null) {
     dbHelper.close();
