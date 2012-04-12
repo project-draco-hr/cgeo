@@ -1,18 +1,15 @@
 {
-  final String fullUri=params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
-  final HttpRequestBase request=new HttpGet(fullUri);
-  request.setHeader("X-Requested-With","XMLHttpRequest");
   if (cacheFile != null && cacheFile.exists()) {
     final String etag=LocalStorage.getSavedHeader(cacheFile,"etag");
     if (etag != null) {
-      request.setHeader("If-None-Match",etag);
+      return request(uri,params,new Parameters("If-None-Match",etag));
     }
  else {
       final String lastModified=LocalStorage.getSavedHeader(cacheFile,"last-modified");
       if (lastModified != null) {
-        request.setHeader("If-Modified-Since",lastModified);
+        return request(uri,params,new Parameters("If-Modified-Since",lastModified));
       }
     }
   }
-  return Network.request(request);
+  return request(uri,params,(Parameters)null);
 }
