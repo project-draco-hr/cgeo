@@ -4,6 +4,9 @@
   }
   init();
   Set<String> geocodes=new HashSet<String>();
+  if (!stored) {
+    geocodes.addAll(CacheCache.getInstance().getInViewport(centerLat,centerLon,spanLat,spanLon,cacheType));
+  }
   double latMin=(centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
   double latMax=(centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
   double lonMin=(centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
@@ -49,7 +52,7 @@
       }
  else {
         cursor.close();
-        return null;
+        return geocodes.isEmpty() ? null : geocodes;
       }
       cursor.close();
     }

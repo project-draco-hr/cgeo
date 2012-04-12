@@ -1,6 +1,6 @@
 {
   if (opMode == OperationModes.BOUNDED && containsKey(key)) {
-    final V oldVal=remove(key);
+    final V oldVal=super.remove(key);
     put(key,value);
     return oldVal;
   }

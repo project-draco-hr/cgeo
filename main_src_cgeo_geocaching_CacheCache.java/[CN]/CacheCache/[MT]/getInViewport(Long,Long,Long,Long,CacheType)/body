@@ -1,0 +1,11 @@
+{
+  Set<String> geocodes=new HashSet<String>();
+  for (  cgCache cache : cachesCache.values()) {
+    if (Viewport.isCacheInViewPort(centerLat.intValue(),centerLon.intValue(),spanLat.intValue(),spanLon.intValue(),cache.getCoords())) {
+      if (CacheType.ALL == cacheType || cache.getType() == cacheType) {
+        geocodes.add(cache.getGeocode());
+      }
+    }
+  }
+  return geocodes;
+}

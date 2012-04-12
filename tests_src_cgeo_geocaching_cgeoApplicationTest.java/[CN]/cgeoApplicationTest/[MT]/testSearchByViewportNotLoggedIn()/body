@@ -8,6 +8,7 @@
     final String[] tokens=null;
     MockedCache cache=new GC2CJPF();
     deleteCacheFromDBAndLogout(cache.getGeocode());
+    GCBase.removeFromTileCache(cache.getCoords());
     Viewport viewport=new Viewport(cache.getCoords(),0.003,0.003);
     SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
     assertNotNull(search);

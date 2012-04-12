@@ -13,6 +13,7 @@
     assertEquals(Settings.isPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
     assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
     Settings.setLiveMapStrategy(Strategy.FAST);
+    GCBase.removeFromTileCache(mockedCache.getCoords());
     search=ConnectorFactory.searchByViewport(viewport,tokens);
     assertNotNull(search);
     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
