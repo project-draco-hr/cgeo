@@ -10,35 +10,12 @@
   init();
   Cursor cursor=null;
   try {
-    StringBuilder where=cgData.whereGeocodeIn(geocodes);
+    StringBuilder where=null;
     if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
-      double latMin=(centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
-      double latMax=(centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
-      double lonMin=(centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
-      double lonMax=(centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
-      double llCache;
-      if (latMin > latMax) {
-        llCache=latMax;
-        latMax=latMin;
-        latMin=llCache;
-      }
-      if (lonMin > lonMax) {
-        llCache=lonMax;
-        lonMax=lonMin;
-        lonMin=llCache;
-      }
-      if (where.length() > 0) {
-        where.append(" and ");
-      }
-      where.append("(latitude >= ");
-      where.append(String.format((Locale)null,"%.6f",latMin));
-      where.append(" and latitude <= ");
-      where.append(String.format((Locale)null,"%.6f",latMax));
-      where.append(" and longitude >= ");
-      where.append(String.format((Locale)null,"%.6f",lonMin));
-      where.append(" and longitude <= ");
-      where.append(String.format((Locale)null,"%.6f",lonMax));
-      where.append(')');
+      where=buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon);
+    }
+ else {
+      where=cgData.whereGeocodeIn(geocodes);
     }
     cursor=databaseRO.query(dbTableCaches,CACHE_COLUMNS,where.toString(),null,null,null,null,null);
     if (cursor != null) {
