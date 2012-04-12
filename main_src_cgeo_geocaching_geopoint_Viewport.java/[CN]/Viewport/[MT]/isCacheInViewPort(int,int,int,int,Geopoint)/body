@@ -1,3 +1,4 @@
 {
-  return 2 * Math.abs(coords.getLatitudeE6() - centerLat) <= Math.abs(spanLat) && 2 * Math.abs(coords.getLongitudeE6() - centerLon) <= Math.abs(spanLon);
+  final Viewport viewport=new Viewport(new Geopoint(centerLat / 1e6,centerLon / 1e6),spanLat / 1e6,spanLon / 1e6);
+  return viewport.isInViewport(coords);
 }

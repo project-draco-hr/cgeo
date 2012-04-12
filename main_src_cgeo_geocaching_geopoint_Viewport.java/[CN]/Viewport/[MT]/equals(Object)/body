@@ -1,0 +1,7 @@
+{
+  if (other == null || !(other instanceof Viewport)) {
+    return false;
+  }
+  final Viewport vp=(Viewport)other;
+  return bottomLeft.equals(vp.bottomLeft) && topRight.equals(vp.topRight);
+}

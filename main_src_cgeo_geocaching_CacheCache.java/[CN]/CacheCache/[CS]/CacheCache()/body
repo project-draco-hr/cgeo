@@ -1,3 +1,5 @@
 {
   cachesCache=new LeastRecentlyUsedMap.LruCache<String,cgCache>(MAX_CACHED_CACHES);
+  removeHandler=new CacheRemoveHandler();
+  cachesCache.setRemoveHandler(removeHandler);
 }

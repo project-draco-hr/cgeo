@@ -1,6 +1,6 @@
 {
-  final Geopoint center=new Geopoint((int)centerLat,(int)centerLon);
-  final Viewport viewport=new Viewport(center,spanLat / 1e6 * 1.5,spanLon / 1e6 * 1.5);
+  final Geopoint center=new Geopoint(centerLat / 1e6,centerLon / 1e6);
+  final Viewport viewport=new Viewport(center,spanLat / 1e6,spanLon / 1e6).resize(1.5);
   try {
     go4CacheThreadRun=System.currentTimeMillis();
     List<Go4CacheUser> go4CacheUsers=Go4Cache.getGeocachersInViewport(Settings.getUsername(),viewport);

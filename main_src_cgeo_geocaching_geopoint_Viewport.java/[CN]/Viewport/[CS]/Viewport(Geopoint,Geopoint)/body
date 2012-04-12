@@ -1,5 +1,5 @@
 {
-  this.bottomLeft=bottomLeft;
-  this.topRight=topRight;
-  this.center=new Geopoint((bottomLeft.getLatitude() + topRight.getLatitude()) / 2,(bottomLeft.getLongitude() + topRight.getLongitude()) / 2);
+  this.bottomLeft=new Geopoint(Math.min(gp1.getLatitude(),gp2.getLatitude()),Math.min(gp1.getLongitude(),gp2.getLongitude()));
+  this.topRight=new Geopoint(Math.max(gp1.getLatitude(),gp2.getLatitude()),Math.max(gp1.getLongitude(),gp2.getLongitude()));
+  this.center=new Geopoint((gp1.getLatitude() + gp2.getLatitude()) / 2,(gp1.getLongitude() + gp2.getLongitude()) / 2);
 }

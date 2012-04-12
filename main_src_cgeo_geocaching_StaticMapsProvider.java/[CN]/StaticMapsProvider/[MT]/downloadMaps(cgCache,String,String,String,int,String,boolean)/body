@@ -3,7 +3,7 @@
     downloadDifferentZooms(cache,markerUrl,prefix,latlonMap,edge,waypoints);
   }
  else {
-    Task currentTask=new Task("getting static map"){
+    final Runnable currentTask=new Runnable(){
       @Override public void run(){
         downloadDifferentZooms(cache,markerUrl,prefix,latlonMap,edge,waypoints);
       }
