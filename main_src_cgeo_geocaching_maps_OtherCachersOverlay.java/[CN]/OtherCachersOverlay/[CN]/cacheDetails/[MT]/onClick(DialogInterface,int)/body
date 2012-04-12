@@ -1,8 +1,6 @@
 {
   if (geocode != null) {
-    final Intent detailIntent=new Intent(context,CacheDetailActivity.class);
-    detailIntent.putExtra("geocode",geocode);
-    context.startActivity(detailIntent);
+    CacheDetailActivity.startActivity(context,geocode);
   }
   dialog.cancel();
 }

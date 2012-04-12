@@ -6,8 +6,5 @@
   if (getSelectMode() || getChecked() > 0) {
     return;
   }
-  Intent cachesIntent=new Intent(getContext(),CacheDetailActivity.class);
-  cachesIntent.putExtra("geocode",geocode);
-  cachesIntent.putExtra("name",name);
-  getContext().startActivity(cachesIntent);
+  CacheDetailActivity.startActivity(getContext(),geocode,name);
 }
