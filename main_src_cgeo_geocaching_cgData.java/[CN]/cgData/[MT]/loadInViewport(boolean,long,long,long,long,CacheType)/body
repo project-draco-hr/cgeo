@@ -1,9 +1,6 @@
 {
-  if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
-    return null;
-  }
   init();
-  Set<String> geocodes=new HashSet<String>();
+  final Set<String> geocodes=new HashSet<String>();
   if (!stored) {
     geocodes.addAll(CacheCache.getInstance().getInViewport(centerLat,centerLon,spanLat,spanLon,cacheType));
   }
@@ -22,7 +19,7 @@
     lonMax=lonMin;
     lonMin=llCache;
   }
-  StringBuilder where=new StringBuilder();
+  final StringBuilder where=new StringBuilder();
   where.append("latitude >= ");
   where.append(String.format((Locale)null,"%.6f",latMin));
   where.append(" and latitude <= ");
@@ -40,22 +37,15 @@
     where.append(" and reason >= 1");
   }
   try {
-    Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},where.toString(),null,null,null,null,"500");
-    if (cursor != null) {
-      if (cursor.getCount() > 0) {
-        cursor.moveToFirst();
-        int index=cursor.getColumnIndex("geocode");
-        do {
-          geocodes.add(cursor.getString(index));
-        }
+    final Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},where.toString(),null,null,null,null,"500");
+    if (cursor.moveToFirst()) {
+      final int index=cursor.getColumnIndex("geocode");
+      do {
+        geocodes.add(cursor.getString(index));
+      }
  while (cursor.moveToNext());
-      }
- else {
-        cursor.close();
-        return geocodes.isEmpty() ? null : geocodes;
-      }
-      cursor.close();
     }
+    cursor.close();
   }
  catch (  Exception e) {
     Log.e(Settings.tag,"cgData.loadInViewport: " + e.toString());
