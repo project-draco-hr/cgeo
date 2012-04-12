@@ -1,12 +1,10 @@
 {
-  SearchResult result=new SearchResult();
+  final SearchResult result=new SearchResult();
   final String geocodeList=StringUtils.join(geocodes.toArray(),"|");
-  String referer=GCConstants.URL_LIVE_MAP_DETAILS;
-  StringBuilder url=new StringBuilder();
-  url.append("?i=").append(geocodeList).append("&_=").append(String.valueOf(System.currentTimeMillis()));
-  final String urlString=url.toString();
+  final String referer=GCConstants.URL_LIVE_MAP_DETAILS;
   try {
-    String data=Tile.requestMapInfo(referer + urlString,referer);
+    final Parameters params=new Parameters("i",geocodeList,"_",String.valueOf(System.currentTimeMillis()));
+    final String data=Tile.requestMapInfo(referer,params,referer);
     final JSONObject json=new JSONObject(data);
     final String status=json.getString("status");
     if (StringUtils.isBlank(status)) {
