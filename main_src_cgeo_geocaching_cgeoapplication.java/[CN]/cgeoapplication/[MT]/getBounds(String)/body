@@ -2,7 +2,5 @@
   if (geocode == null) {
     return null;
   }
-  Set<String> geocodeList=new HashSet<String>();
-  geocodeList.add(geocode);
-  return getBounds(geocodeList);
+  return getBounds(Collections.singleton(geocode));
 }
