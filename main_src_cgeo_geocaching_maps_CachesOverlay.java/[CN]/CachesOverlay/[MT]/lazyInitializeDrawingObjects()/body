@@ -1,0 +1,15 @@
+{
+  if (blockedCircle == null) {
+    blockedCircle=new Paint();
+    blockedCircle.setAntiAlias(true);
+    blockedCircle.setStrokeWidth(2.0f);
+    blockedCircle.setARGB(127,0,0,0);
+    blockedCircle.setPathEffect(new DashPathEffect(new float[]{3,2},0));
+  }
+  if (setFilter == null) {
+    setFilter=new PaintFlagsDrawFilter(0,Paint.FILTER_BITMAP_FLAG);
+  }
+  if (removeFilter == null) {
+    removeFilter=new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG,0);
+  }
+}
