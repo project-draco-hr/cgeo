@@ -7,7 +7,7 @@
   try {
     final Parameters params=new Parameters();
     OAuth.signOAuth(host,pathRequest,method,true,params,null,null);
-    final String line=Network.getResponseData(Network.request("https://" + host + pathRequest,params,false));
+    final String line=Network.getResponseData(Network.request("https://" + host + pathRequest,params));
     if (StringUtils.isNotBlank(line)) {
       final Matcher paramsMatcher1=paramsPattern1.matcher(line);
       if (paramsMatcher1.find()) {

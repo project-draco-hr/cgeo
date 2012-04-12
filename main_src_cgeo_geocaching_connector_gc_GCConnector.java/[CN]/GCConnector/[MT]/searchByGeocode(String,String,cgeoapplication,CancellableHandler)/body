@@ -13,7 +13,7 @@
   params.put("log","y");
   params.put("numlogs",String.valueOf(GCConstants.NUMBER_OF_LOGS));
   cgBase.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_loadpage);
-  final String page=Network.requestLogged("http://www.geocaching.com/seek/cache_details.aspx",params,false,false,false);
+  final String page=Network.requestLogged("http://www.geocaching.com/seek/cache_details.aspx",params,false,false);
   if (StringUtils.isEmpty(page)) {
     final SearchResult search=new SearchResult();
     if (app.isThere(geocode,guid,true,false)) {

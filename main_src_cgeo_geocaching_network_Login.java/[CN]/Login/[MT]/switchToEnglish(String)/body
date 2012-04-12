@@ -1,10 +1,10 @@
 {
   if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
     Log.i(Settings.tag,"Geocaching.com language already set to English");
-    getLoginStatus(Network.getResponseData(Network.request("http://www.geocaching.com/email/",null,false)));
+    getLoginStatus(Network.getResponseData(Network.request("http://www.geocaching.com/email/")));
   }
  else {
-    final String page=Network.getResponseData(Network.request("http://www.geocaching.com/default.aspx",null,false));
+    final String page=Network.getResponseData(Network.request("http://www.geocaching.com/default.aspx"));
     getLoginStatus(page);
     if (page == null) {
       Log.e(Settings.tag,"Failed to read viewstates to set geocaching.com language");

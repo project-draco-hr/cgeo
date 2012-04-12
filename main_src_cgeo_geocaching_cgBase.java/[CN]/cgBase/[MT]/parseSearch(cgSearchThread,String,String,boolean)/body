@@ -15,7 +15,7 @@
     String recaptchaJsParam=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
     if (recaptchaJsParam != null) {
       final Parameters params=new Parameters("k",recaptchaJsParam.trim());
-      final String recaptchaJs=Network.getResponseData(Network.request("http://www.google.com/recaptcha/api/challenge",params,true));
+      final String recaptchaJs=Network.getResponseData(Network.request("http://www.google.com/recaptcha/api/challenge",params));
       if (StringUtils.isNotBlank(recaptchaJs)) {
         recaptchaChallenge=BaseUtils.getMatch(recaptchaJs,GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE,true,1,null,true);
       }
