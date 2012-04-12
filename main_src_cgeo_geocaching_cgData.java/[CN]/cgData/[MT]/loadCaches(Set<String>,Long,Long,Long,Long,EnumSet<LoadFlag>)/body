@@ -10,9 +10,9 @@
   init();
   Cursor cursor=null;
   try {
-    StringBuilder where=new StringBuilder();
+    StringBuilder where=null;
     if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
-      where.append(buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon));
+      where=buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon);
     }
  else {
       where=cgData.whereGeocodeIn(geocodes);

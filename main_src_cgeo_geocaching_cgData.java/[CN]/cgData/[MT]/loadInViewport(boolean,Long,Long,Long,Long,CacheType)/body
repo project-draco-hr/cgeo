@@ -4,8 +4,7 @@
   }
   init();
   Set<String> geocodes=new HashSet<String>();
-  StringBuilder where=new StringBuilder();
-  where.append(buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon));
+  StringBuilder where=buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon);
   if (cacheType != CacheType.ALL) {
     where.append(" and type = \"");
     where.append(cacheType.id);
