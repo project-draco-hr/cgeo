@@ -1,0 +1,10 @@
+{
+  final HttpResponse response=Network.request(url,params,new Parameters("Referer",referer));
+  try {
+    return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
+  }
+ catch (  IOException e) {
+    Log.e("cgBase.requestMapTile() " + e.getMessage());
+  }
+  return null;
+}

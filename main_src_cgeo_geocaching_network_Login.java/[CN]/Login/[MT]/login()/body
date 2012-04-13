@@ -8,7 +8,7 @@
   if (cgBase.res != null) {
     Login.setActualStatus(cgBase.res.getString(R.string.init_login_popup_working));
   }
-  HttpResponse loginResponse=Network.request("https://www.geocaching.com/login/default.aspx",null,false,false,false);
+  HttpResponse loginResponse=Network.request("https://www.geocaching.com/login/default.aspx");
   String loginData=Network.getResponseData(loginResponse);
   if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData,GCConstants.PATTERN_MAINTENANCE)) {
     return StatusCode.MAINTENANCE;
