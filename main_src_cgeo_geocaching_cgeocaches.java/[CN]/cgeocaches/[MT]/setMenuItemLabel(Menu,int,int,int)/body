@@ -1,0 +1,13 @@
+{
+  final MenuItem menuItem=menu.findItem(menuId);
+  if (menuItem == null) {
+    return;
+  }
+  boolean hasSelection=adapter != null && adapter.getChecked() > 0;
+  if (hasSelection) {
+    menuItem.setTitle(res.getString(resIdSelection) + " (" + adapter.getChecked()+ ")");
+  }
+ else {
+    menuItem.setTitle(res.getString(resId));
+  }
+}
