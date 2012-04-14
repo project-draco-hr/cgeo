@@ -1,0 +1,9 @@
+{
+  final cgCache easy=new cgCache();
+  easy.setDifficulty(1.5f);
+  final cgCache hard=new cgCache();
+  hard.setDifficulty(5f);
+  final DifficultyFilter easyFilter=new DifficultyFilter(1);
+  assertTrue(easyFilter.accepts(easy));
+  assertFalse(easyFilter.accepts(hard));
+}

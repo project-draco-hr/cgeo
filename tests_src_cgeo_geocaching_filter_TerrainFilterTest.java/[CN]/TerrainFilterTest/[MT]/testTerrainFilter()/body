@@ -1,0 +1,9 @@
+{
+  final cgCache easy=new cgCache();
+  easy.setTerrain(1.5f);
+  final cgCache hard=new cgCache();
+  hard.setTerrain(5f);
+  final AbstractRangeFilter easyFilter=new TerrainFilter(1);
+  assertTrue(easyFilter.accepts(easy));
+  assertFalse(easyFilter.accepts(hard));
+}

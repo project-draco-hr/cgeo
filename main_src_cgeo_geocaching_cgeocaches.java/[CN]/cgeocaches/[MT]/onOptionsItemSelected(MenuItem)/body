@@ -84,16 +84,22 @@ case MENU_SORT_STATE:
 setComparator(item,new StateComparator());
 return true;
 case SUBMENU_FILTER_TYPE:
-showFilterMenu(TypeFilter.getAllFilters(),res.getString(R.string.caches_filter_type_title));
+showFilterMenu(new TypeFilter.Factory().getFilters(),res.getString(R.string.caches_filter_type_title));
 return true;
 case SUBMENU_FILTER_SIZE:
-showFilterMenu(SizeFilter.getAllFilters(),res.getString(R.string.caches_filter_size_title));
+showFilterMenu(new SizeFilter.Factory().getFilters(),res.getString(R.string.caches_filter_size_title));
 return true;
 case SUBMENU_FILTER_ATTRIBUTES:
-showFilterMenu(AttributeFilter.getAllFilters(),res.getString(R.string.cache_attributes));
+showFilterMenu(new AttributeFilter.Factory().getFilters(),res.getString(R.string.cache_attributes));
+return true;
+case SUBMENU_FILTER_DIFFICULTY:
+showFilterMenu(new DifficultyFilter.Factory().getFilters(),res.getString(R.string.cache_difficulty));
+return true;
+case SUBMENU_FILTER_TERRAIN:
+showFilterMenu(new TerrainFilter.Factory().getFilters(),res.getString(R.string.cache_terrain));
 return true;
 case SUBMENU_FILTER_STATE:
-showFilterMenu(StateFilter.getAllFilters(),res.getString(R.string.cache_status));
+showFilterMenu(new StateFilter.Factory().getFilters(),res.getString(R.string.cache_status));
 return true;
 case MENU_FILTER_TRACKABLES:
 setFilter(new TrackablesFilter(res.getString(R.string.caches_filter_track)));

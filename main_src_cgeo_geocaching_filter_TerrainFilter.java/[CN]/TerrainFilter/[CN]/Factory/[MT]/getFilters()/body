@@ -1,0 +1,7 @@
+{
+  final ArrayList<IFilter> filters=new ArrayList<IFilter>(5);
+  for (int terrain=1; terrain <= 5; terrain++) {
+    filters.add(new TerrainFilter(terrain));
+  }
+  return filters.toArray(new IFilter[filters.size()]);
+}

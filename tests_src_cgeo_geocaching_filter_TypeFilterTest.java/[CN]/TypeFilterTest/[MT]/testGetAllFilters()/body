@@ -1,4 +1,4 @@
 {
   final int expectedEntries=CacheType.values().length - 1;
-  assertEquals(expectedEntries,TypeFilter.getAllFilters().length);
+  assertEquals(expectedEntries,new TypeFilter.Factory().getFilters().length);
 }
