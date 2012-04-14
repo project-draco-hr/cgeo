@@ -1,0 +1,15 @@
+{
+  Viewport viewport=null;
+  for (  final ICoordinates point : points) {
+    final Geopoint coords=point == null ? null : point.getCoords();
+    if (coords != null) {
+      if (viewport == null) {
+        viewport=new Viewport(coords,coords);
+      }
+ else {
+        viewport=viewport.expand(coords);
+      }
+    }
+  }
+  return viewport;
+}
