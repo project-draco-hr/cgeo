@@ -1,7 +1,7 @@
 {
-  this.center=center;
-  final double centerLat=center.getLatitude();
-  final double centerLon=center.getLongitude();
+  this.center=center.getCoords();
+  final double centerLat=this.center.getLatitude();
+  final double centerLon=this.center.getLongitude();
   final double latHalfSpan=Math.abs(latSpan) / 2;
   final double lonHalfSpan=Math.abs(lonSpan) / 2;
   bottomLeft=new Geopoint(centerLat - latHalfSpan,centerLon - lonHalfSpan);

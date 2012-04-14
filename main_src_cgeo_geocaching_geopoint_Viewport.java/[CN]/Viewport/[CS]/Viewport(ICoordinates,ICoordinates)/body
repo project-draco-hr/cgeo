@@ -1,4 +1,6 @@
 {
+  final Geopoint gp1=point1.getCoords();
+  final Geopoint gp2=point2.getCoords();
   this.bottomLeft=new Geopoint(Math.min(gp1.getLatitude(),gp2.getLatitude()),Math.min(gp1.getLongitude(),gp2.getLongitude()));
   this.topRight=new Geopoint(Math.max(gp1.getLatitude(),gp2.getLatitude()),Math.max(gp1.getLongitude(),gp2.getLongitude()));
   this.center=new Geopoint((gp1.getLatitude() + gp2.getLatitude()) / 2,(gp1.getLongitude() + gp2.getLongitude()) / 2);

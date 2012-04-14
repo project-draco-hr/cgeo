@@ -1,8 +1,9 @@
 {
-  if (contains(coords)) {
+  if (contains(point)) {
     return this;
   }
  else {
+    final Geopoint coords=point.getCoords();
     final double latitude=coords.getLatitude();
     final double longitude=coords.getLongitude();
     final double latMin=Math.min(getLatitudeMin(),latitude);
