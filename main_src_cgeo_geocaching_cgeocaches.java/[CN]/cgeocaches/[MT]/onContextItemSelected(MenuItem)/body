@@ -54,6 +54,11 @@
 );
     return true;
   }
+ else   if (id == MENU_STORE_CACHE) {
+    final cgCache cache=getCacheFromAdapter(adapterInfo);
+    cache.store(this,null);
+    return true;
+  }
   lastMenuInfo=info;
   if (adapterInfo != null) {
     final cgCache cache=getCacheFromAdapter(adapterInfo);
