@@ -83,35 +83,21 @@ return true;
 case MENU_SORT_STATE:
 setComparator(item,new StateComparator());
 return true;
-case SUBMENU_FILTER_TYPE:
-showFilterMenu(new TypeFilter.Factory().getFilters(),res.getString(R.string.caches_filter_type_title));
-return true;
-case SUBMENU_FILTER_SIZE:
-showFilterMenu(new SizeFilter.Factory().getFilters(),res.getString(R.string.caches_filter_size_title));
-return true;
-case SUBMENU_FILTER_ATTRIBUTES:
-showFilterMenu(new AttributeFilter.Factory().getFilters(),res.getString(R.string.cache_attributes));
-return true;
-case SUBMENU_FILTER_DIFFICULTY:
-showFilterMenu(new DifficultyFilter.Factory().getFilters(),res.getString(R.string.cache_difficulty));
-return true;
-case SUBMENU_FILTER_TERRAIN:
-showFilterMenu(new TerrainFilter.Factory().getFilters(),res.getString(R.string.cache_terrain));
-return true;
-case SUBMENU_FILTER_STATE:
-showFilterMenu(new StateFilter.Factory().getFilters(),res.getString(R.string.cache_status));
-return true;
-case MENU_FILTER_TRACKABLES:
-setFilter(new TrackablesFilter(res.getString(R.string.caches_filter_track)));
-return true;
-case MENU_FILTER_MODIFIED:
-setFilter(new ModifiedFilter(res.getString(R.string.caches_filter_modified)));
-return true;
-case MENU_FILTER_CLEAR:
+case MENU_FILTER:
+new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>(){
+@Override public void run(IFilter selectedFilter){
+if (selectedFilter != null) {
+setFilter(selectedFilter);
+}
+ else {
 if (adapter != null) {
 setFilter(null);
 }
-return false;
+}
+}
+}
+);
+return true;
 case MENU_IMPORT_WEB:
 importWeb();
 return false;

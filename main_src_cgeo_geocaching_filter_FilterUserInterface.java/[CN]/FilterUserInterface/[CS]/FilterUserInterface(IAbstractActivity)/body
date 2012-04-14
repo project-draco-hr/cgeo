@@ -1,0 +1,15 @@
+{
+  this.activity=activity;
+  this.res=cgeoapplication.getInstance().getResources();
+  registry=new HashMap<Integer,Class<? extends IFilterFactory>>();
+  if (Settings.getCacheType() == CacheType.ALL) {
+    registry.put(R.string.caches_filter_type,TypeFilter.Factory.class);
+  }
+  registry.put(R.string.caches_filter_size,SizeFilter.Factory.class);
+  registry.put(R.string.cache_terrain,TerrainFilter.Factory.class);
+  registry.put(R.string.cache_difficulty,DifficultyFilter.Factory.class);
+  registry.put(R.string.cache_attributes,AttributeFilter.Factory.class);
+  registry.put(R.string.cache_status,StateFilter.Factory.class);
+  registry.put(R.string.caches_filter_track,TrackablesFilter.class);
+  registry.put(R.string.caches_filter_modified,ModifiedFilter.class);
+}

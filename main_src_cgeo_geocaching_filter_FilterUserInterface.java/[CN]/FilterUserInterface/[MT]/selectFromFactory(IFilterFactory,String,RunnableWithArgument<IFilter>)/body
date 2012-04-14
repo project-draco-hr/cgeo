@@ -1,5 +1,10 @@
 {
-  final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+  final IFilter[] filters=factory.getFilters();
+  if (filters.length == 1) {
+    runAfterwards.run(filters[0]);
+    return;
+  }
+  final AlertDialog.Builder builder=new AlertDialog.Builder((Activity)activity);
   builder.setTitle(menuTitle);
   final String[] names=new String[filters.length];
   for (int i=0; i < filters.length; i++) {
@@ -7,7 +12,7 @@
   }
   builder.setItems(names,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int item){
-      setFilter(filters[item]);
+      runAfterwards.run(filters[item]);
     }
   }
 );

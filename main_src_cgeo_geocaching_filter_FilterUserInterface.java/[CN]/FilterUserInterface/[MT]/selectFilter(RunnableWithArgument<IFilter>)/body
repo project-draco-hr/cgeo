@@ -1,0 +1,36 @@
+{
+  final AlertDialog.Builder builder=new AlertDialog.Builder((Activity)activity);
+  builder.setTitle(R.string.caches_filter);
+  ArrayList<String> names=new ArrayList<String>(registry.size() + 1);
+  for (  Entry<Integer,Class<? extends IFilterFactory>> entry : registry.entrySet()) {
+    names.add(res.getString(entry.getKey()));
+  }
+  Collections.sort(names);
+  names.add(res.getString(R.string.caches_filter_clear));
+  final String[] array=names.toArray(new String[names.size()]);
+  builder.setItems(array,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int itemIndex){
+      if (itemIndex >= registry.size()) {
+        runAfterwards.run(null);
+      }
+ else {
+        final String name=array[itemIndex];
+        for (        Entry<Integer,Class<? extends IFilterFactory>> entry : registry.entrySet()) {
+          if (name.equals(res.getString(entry.getKey()))) {
+            Class<? extends IFilterFactory> producer=entry.getValue();
+            try {
+              IFilterFactory factory=producer.newInstance();
+              selectFromFactory(factory,name,runAfterwards);
+            }
+ catch (            Exception e) {
+              Log.e("selectFilter",e);
+            }
+            return;
+          }
+        }
+      }
+    }
+  }
+);
+  builder.create().show();
+}
