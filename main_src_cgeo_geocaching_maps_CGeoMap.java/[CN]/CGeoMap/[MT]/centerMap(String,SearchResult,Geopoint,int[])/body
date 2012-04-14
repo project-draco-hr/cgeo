@@ -11,23 +11,16 @@
   }
  else   if (!centered && (geocodeCenter != null || searchIntent != null)) {
     try {
-      List<Number> vp=null;
+      Viewport viewport=null;
       if (geocodeCenter != null) {
-        vp=app.getBounds(geocodeCenter);
+        viewport=app.getBounds(geocodeCenter);
       }
- else {
-        if (searchCenter != null) {
-          vp=app.getBounds(searchCenter.getGeocodes());
-        }
+ else       if (searchCenter != null) {
+        viewport=app.getBounds(searchCenter.getGeocodes());
       }
-      if (vp == null || vp.size() < 5) {
+      if (viewport == null) {
         return;
       }
-      int cnt=(Integer)vp.get(0);
-      if (cnt <= 0) {
-        return;
-      }
-      final Viewport viewport=listToViewport(vp);
       mapController.setCenter(mapProvider.getGeoPointBase(viewport.center));
       if (viewport.getLatitudeSpan() != 0 && viewport.getLongitudeSpan() != 0) {
         mapController.zoomToSpan((int)(viewport.getLatitudeSpan() * 1e6),(int)(viewport.getLongitudeSpan() * 1e6));
