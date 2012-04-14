@@ -1,0 +1,28 @@
+{
+  final List<StoredList> lists=app.getLists();
+  if (lists == null) {
+    return;
+  }
+  final List<CharSequence> listsTitle=new ArrayList<CharSequence>();
+  for (  StoredList list : lists) {
+    listsTitle.add(list.getTitleAndCount());
+  }
+  listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
+  final CharSequence[] items=new CharSequence[listsTitle.size()];
+  AlertDialog.Builder builder=new AlertDialog.Builder((Activity)activity);
+  builder.setTitle(res.getString(titleId));
+  builder.setItems(listsTitle.toArray(items),new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialogInterface,    int itemId){
+      if (itemId >= lists.size()) {
+        promptForListCreation(runAfterwards);
+      }
+ else {
+        if (runAfterwards != null) {
+          runAfterwards.run(lists.get(itemId).id);
+        }
+      }
+    }
+  }
+);
+  builder.create().show();
+}

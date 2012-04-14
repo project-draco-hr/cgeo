@@ -24,7 +24,7 @@ importGpx();
 invalidateOptionsMenuCompatible();
 return false;
 case MENU_CREATE_LIST:
-createList(null);
+new StoredList.UserInterface(this).promptForListCreation(null);
 invalidateOptionsMenuCompatible();
 return false;
 case MENU_DROP_LIST:

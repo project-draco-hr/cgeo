@@ -1,16 +1,15 @@
 {
-  final List<StoredList> cacheLists=app.getLists();
-  ArrayList<String> listNames=new ArrayList<String>();
-  for (  StoredList list : cacheLists) {
-    listNames.add(list.getTitleAndCount());
-  }
-  AlertDialog.Builder builder=new AlertDialog.Builder(this);
-  builder.setTitle(res.getString(R.string.cache_menu_move_list));
-  builder.setItems(listNames.toArray(new String[listNames.size()]),new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int item){
-      moveCachesToList(cacheLists.get(item));
+  new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
+    @Override public void run(    Integer newListId){
+      final boolean moveAll=adapter.getChecked() == 0;
+      for (      final cgCache c : Collections.unmodifiableList(cacheList)) {
+        if (moveAll || c.isStatusChecked()) {
+          app.moveToList(c.getGeocode(),newListId);
+        }
+      }
+      adapter.resetChecks();
+      refreshCurrentList();
     }
   }
 );
-  builder.create().show();
 }

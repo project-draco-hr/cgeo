@@ -2,33 +2,11 @@
   if (type != CacheListType.OFFLINE) {
     return;
   }
-  lists=app.getLists();
-  if (lists == null) {
-    return;
-  }
-  final List<CharSequence> listsTitle=new ArrayList<CharSequence>();
-  for (  StoredList list : lists) {
-    listsTitle.add(list.getTitleAndCount());
-  }
-  listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
-  final CharSequence[] items=new CharSequence[listsTitle.size()];
-  AlertDialog.Builder builder=new AlertDialog.Builder(this);
-  builder.setTitle(res.getString(R.string.list_title));
-  builder.setItems(listsTitle.toArray(items),new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialogInterface,    int itemId){
-      if (itemId >= lists.size()) {
-        createList(new RunnableWithArgument<Integer>(){
-          @Override public void run(          final Integer arg){
-            switchListById(arg.intValue());
-          }
-        }
-);
-      }
- else {
-        switchListById(lists.get(itemId).id);
-      }
+  new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
+    @Override public void run(    final Integer selectedListId){
+      switchListById(selectedListId.intValue());
     }
   }
 );
-  builder.create().show();
+  lists=app.getLists();
 }
