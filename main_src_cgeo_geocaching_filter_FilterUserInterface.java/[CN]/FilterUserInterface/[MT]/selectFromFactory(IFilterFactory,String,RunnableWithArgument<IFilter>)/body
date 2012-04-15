@@ -6,11 +6,8 @@
   }
   final AlertDialog.Builder builder=new AlertDialog.Builder((Activity)activity);
   builder.setTitle(menuTitle);
-  final String[] names=new String[filters.length];
-  for (int i=0; i < filters.length; i++) {
-    names[i]=filters[i].getName();
-  }
-  builder.setItems(names,new DialogInterface.OnClickListener(){
+  final ArrayAdapter<IFilter> adapter=new ArrayAdapter<IFilter>((Activity)activity,android.R.layout.select_dialog_item,filters);
+  builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int item){
       runAfterwards.run(filters[item]);
     }

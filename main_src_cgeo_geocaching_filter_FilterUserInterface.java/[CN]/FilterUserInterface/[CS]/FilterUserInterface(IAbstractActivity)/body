@@ -1,15 +1,22 @@
 {
   this.activity=activity;
   this.res=cgeoapplication.getInstance().getResources();
-  registry=new HashMap<Integer,Class<? extends IFilterFactory>>();
+  registry=new ArrayList<FactoryEntry>();
   if (Settings.getCacheType() == CacheType.ALL) {
-    registry.put(R.string.caches_filter_type,TypeFilter.Factory.class);
+    register(R.string.caches_filter_type,TypeFilter.Factory.class);
   }
-  registry.put(R.string.caches_filter_size,SizeFilter.Factory.class);
-  registry.put(R.string.cache_terrain,TerrainFilter.Factory.class);
-  registry.put(R.string.cache_difficulty,DifficultyFilter.Factory.class);
-  registry.put(R.string.cache_attributes,AttributeFilter.Factory.class);
-  registry.put(R.string.cache_status,StateFilter.Factory.class);
-  registry.put(R.string.caches_filter_track,TrackablesFilter.class);
-  registry.put(R.string.caches_filter_modified,ModifiedFilter.class);
+  register(R.string.caches_filter_size,SizeFilter.Factory.class);
+  register(R.string.cache_terrain,TerrainFilter.Factory.class);
+  register(R.string.cache_difficulty,DifficultyFilter.Factory.class);
+  register(R.string.cache_attributes,AttributeFilter.Factory.class);
+  register(R.string.cache_status,StateFilter.Factory.class);
+  register(R.string.caches_filter_track,TrackablesFilter.class);
+  register(R.string.caches_filter_modified,ModifiedFilter.class);
+  Collections.sort(registry,new Comparator<FactoryEntry>(){
+    @Override public int compare(    FactoryEntry lhs,    FactoryEntry rhs){
+      return lhs.name.compareToIgnoreCase(rhs.name);
+    }
+  }
+);
+  register(R.string.caches_filter_clear,null);
 }
