@@ -24,7 +24,7 @@
     if (live) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
-      final ArrayList<cgCache> tempList=new ArrayList<cgCache>(caches);
+      final List<cgCache> tempList=caches.getAsList();
       for (      cgCache cache : tempList) {
         if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
           caches.remove(cache);

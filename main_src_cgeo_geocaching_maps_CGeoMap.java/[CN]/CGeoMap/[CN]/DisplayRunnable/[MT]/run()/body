@@ -4,7 +4,7 @@
     if (mapView == null || caches == null) {
       throw new ThreadDeath();
     }
-    final List<cgCache> cachesToDisplay=new ArrayList<cgCache>(caches);
+    final List<cgCache> cachesToDisplay=caches.getAsList();
     final List<cgWaypoint> waypointsToDisplay=new ArrayList<cgWaypoint>(waypoints);
     final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<CachesOverlayItemImpl>();
     if (!cachesToDisplay.isEmpty()) {
