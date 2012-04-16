@@ -2,8 +2,8 @@
   if (StringUtils.isBlank(url) || isCounter(url)) {
     return new BitmapDrawable(getTransparent1x1Image());
   }
-  Bitmap imagePre=onlySave ? null : loadImageFromStorage(url);
-  if (imagePre == null || onlySave) {
+  Bitmap imagePre=loadImageFromStorage(url);
+  if (imagePre == null) {
     final String absoluteURL=makeAbsoluteURL(url);
     if (absoluteURL != null) {
       try {
