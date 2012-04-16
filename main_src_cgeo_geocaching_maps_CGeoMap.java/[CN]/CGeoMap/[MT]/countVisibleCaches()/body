@@ -1,5 +1,5 @@
 {
-  final ArrayList<cgCache> protectedCaches=new ArrayList<cgCache>(caches);
+  final List<cgCache> protectedCaches=caches.getAsList();
   int count=0;
   if (protectedCaches.size() > 0) {
     final GeoPointImpl mapCenter=mapView.getMapViewCenter();
