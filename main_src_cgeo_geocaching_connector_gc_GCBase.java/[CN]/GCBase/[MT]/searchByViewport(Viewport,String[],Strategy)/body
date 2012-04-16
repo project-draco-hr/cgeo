@@ -27,7 +27,7 @@
           params.put("_",String.valueOf(System.currentTimeMillis()));
         }
         Bitmap bitmap=Tile.requestMapTile(GCConstants.URL_MAP_TILE,params,referer);
-        if (bitmap.getWidth() != Tile.TILE_SIZE || bitmap.getHeight() != Tile.TILE_SIZE) {
+        if (bitmap != null && (bitmap.getWidth() != Tile.TILE_SIZE || bitmap.getHeight() != Tile.TILE_SIZE)) {
           bitmap.recycle();
           bitmap=null;
         }
