@@ -1,5 +1,8 @@
 {
   super.onResume();
+  if (changeMapSource(Settings.getMapSource())) {
+    return;
+  }
   app.setAction(StringUtils.defaultIfBlank(geocodeIntent,null));
   if (geo == null) {
     geo=app.startGeo(geoUpdate);
