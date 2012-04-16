@@ -1,0 +1,12 @@
+{
+  final boolean restartRequired=!MapProviderFactory.isSameProvider(currentSourceId,mapSource);
+  Settings.setMapSource(mapSource);
+  currentSourceId=mapSource;
+  if (restartRequired) {
+    mapRestart();
+  }
+ else   if (mapView != null) {
+    mapView.setMapSource();
+  }
+  return restartRequired;
+}

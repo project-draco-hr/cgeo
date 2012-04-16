@@ -123,27 +123,7 @@ default :
 if (MapProviderFactory.isValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
 item.setChecked(true);
 int mapSource=MapProviderFactory.getMapSourceFromMenuId(id);
-boolean mapRestartRequired=switchMapSource(mapSource);
-if (mapRestartRequired) {
-activity.finish();
-Intent mapIntent=new Intent(activity,Settings.getMapProvider().getMapClass());
-mapIntent.putExtra(EXTRAS_SEARCH,searchIntent);
-mapIntent.putExtra(EXTRAS_GEOCODE,geocodeIntent);
-if (coordsIntent != null) {
-mapIntent.putExtra(EXTRAS_LATITUDE,coordsIntent.getLatitude());
-mapIntent.putExtra(EXTRAS_LONGITUDE,coordsIntent.getLongitude());
-}
-mapIntent.putExtra(EXTRAS_WPTTYPE,waypointTypeIntent != null ? waypointTypeIntent.id : null);
-int[] mapState=new int[4];
-GeoPointImpl mapCenter=mapView.getMapViewCenter();
-mapState[0]=mapCenter.getLatitudeE6();
-mapState[1]=mapCenter.getLongitudeE6();
-mapState[2]=mapView.getMapZoomLevel();
-mapState[3]=followMyLocation ? 1 : 0;
-mapIntent.putExtra(EXTRAS_MAPSTATE,mapState);
-mapIntent.putExtra(EXTRAS_MAP_TITLE,mapTitle);
-activity.startActivity(mapIntent);
-}
+changeMapSource(mapSource);
 return true;
 }
 }

@@ -4,6 +4,32 @@
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
   mapProvider=Settings.getMapProvider();
+  if (savedInstanceState != null) {
+    currentSourceId=savedInstanceState.getInt(BUNDLE_MAP_SOURCE,Settings.getMapSource());
+  }
+ else {
+    currentSourceId=Settings.getMapSource();
+  }
+  Bundle extras=activity.getIntent().getExtras();
+  if (extras != null) {
+    searchIntent=(SearchResult)extras.getParcelable(EXTRAS_SEARCH);
+    geocodeIntent=extras.getString(EXTRAS_GEOCODE);
+    final double latitudeIntent=extras.getDouble(EXTRAS_LATITUDE);
+    final double longitudeIntent=extras.getDouble(EXTRAS_LONGITUDE);
+    coordsIntent=new Geopoint(latitudeIntent,longitudeIntent);
+    waypointTypeIntent=WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
+    mapStateIntent=extras.getIntArray(EXTRAS_MAPSTATE);
+    mapTitle=extras.getString(EXTRAS_MAP_TITLE);
+    if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
+      coordsIntent=null;
+    }
+  }
+  if (StringUtils.isBlank(mapTitle)) {
+    mapTitle=res.getString(R.string.map_map);
+  }
+  if (changeMapSource(Settings.getMapSource())) {
+    return;
+  }
   noMapTokenShowed=false;
   ActivityMixin.keepScreenOn(activity,true);
   ActivityMixin.setTheme(activity);
@@ -42,23 +68,6 @@
   }
   if (dir != null) {
     dirUpdate.updateDirection(dir);
-  }
-  Bundle extras=activity.getIntent().getExtras();
-  if (extras != null) {
-    searchIntent=(SearchResult)extras.getParcelable(EXTRAS_SEARCH);
-    geocodeIntent=extras.getString(EXTRAS_GEOCODE);
-    final double latitudeIntent=extras.getDouble(EXTRAS_LATITUDE);
-    final double longitudeIntent=extras.getDouble(EXTRAS_LONGITUDE);
-    coordsIntent=new Geopoint(latitudeIntent,longitudeIntent);
-    waypointTypeIntent=WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
-    mapStateIntent=extras.getIntArray(EXTRAS_MAPSTATE);
-    mapTitle=extras.getString(EXTRAS_MAP_TITLE);
-    if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
-      coordsIntent=null;
-    }
-  }
-  if (StringUtils.isBlank(mapTitle)) {
-    mapTitle=res.getString(R.string.map_map);
   }
   live=(searchIntent == null && geocodeIntent == null && coordsIntent == null);
   if (null == mapStateIntent) {
