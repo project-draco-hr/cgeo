@@ -4,13 +4,7 @@
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
   mapProvider=Settings.getMapProvider();
-  if (savedInstanceState != null) {
-    currentSourceId=savedInstanceState.getInt(BUNDLE_MAP_SOURCE,Settings.getMapSource());
-  }
- else {
-    currentSourceId=Settings.getMapSource();
-  }
-  Bundle extras=activity.getIntent().getExtras();
+  final Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {
     searchIntent=(SearchResult)extras.getParcelable(EXTRAS_SEARCH);
     geocodeIntent=extras.getString(EXTRAS_GEOCODE);
@@ -21,6 +15,13 @@
   }
   if (StringUtils.isBlank(mapTitle)) {
     mapTitle=res.getString(R.string.map_map);
+  }
+  if (savedInstanceState != null) {
+    currentSourceId=savedInstanceState.getInt(BUNDLE_MAP_SOURCE,Settings.getMapSource());
+    mapStateIntent=savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
+  }
+ else {
+    currentSourceId=Settings.getMapSource();
   }
   if (changeMapSource(Settings.getMapSource())) {
     return;

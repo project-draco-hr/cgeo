@@ -4,18 +4,12 @@
   mapIntent.putExtra(EXTRAS_SEARCH,searchIntent);
   mapIntent.putExtra(EXTRAS_GEOCODE,geocodeIntent);
   if (coordsIntent != null) {
-    mapIntent.putExtra(EXTRAS_LATITUDE,coordsIntent.getLatitude());
-    mapIntent.putExtra(EXTRAS_LONGITUDE,coordsIntent.getLongitude());
+    mapIntent.putExtra(EXTRAS_COORDS,coordsIntent);
   }
   mapIntent.putExtra(EXTRAS_WPTTYPE,waypointTypeIntent != null ? waypointTypeIntent.id : null);
   mapIntent.putExtra(EXTRAS_MAP_TITLE,mapTitle);
-  if (mapView != null) {
-    int[] mapState=new int[4];
-    GeoPointImpl mapCenter=mapView.getMapViewCenter();
-    mapState[0]=mapCenter.getLatitudeE6();
-    mapState[1]=mapCenter.getLongitudeE6();
-    mapState[2]=mapView.getMapZoomLevel();
-    mapState[3]=followMyLocation ? 1 : 0;
+  final int[] mapState=currentMapState();
+  if (mapState != null) {
     mapIntent.putExtra(EXTRAS_MAPSTATE,mapState);
   }
   activity.startActivity(mapIntent);

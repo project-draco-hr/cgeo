@@ -1,0 +1,14 @@
+{
+  if (mapView != null) {
+    int[] mapState=new int[4];
+    GeoPointImpl mapCenter=mapView.getMapViewCenter();
+    mapState[0]=mapCenter.getLatitudeE6();
+    mapState[1]=mapCenter.getLongitudeE6();
+    mapState[2]=mapView.getMapZoomLevel();
+    mapState[3]=followMyLocation ? 1 : 0;
+    return mapState;
+  }
+ else {
+    return mapStateIntent;
+  }
+}
