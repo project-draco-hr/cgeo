@@ -8,7 +8,7 @@
   if (extras != null) {
     Object typeObject=extras.get(EXTRAS_LIST_TYPE);
     type=(typeObject instanceof CacheListType) ? (CacheListType)typeObject : CacheListType.OFFLINE;
-    coords=new Geopoint(extras.getDouble("latitude"),extras.getDouble("longitude"));
+    coords=(Geopoint)extras.getParcelable(EXTRAS_COORDS);
     cacheType=Settings.getCacheType();
     keyword=extras.getString("keyword");
     address=extras.getString("address");

@@ -14,7 +14,7 @@
     geocode=extras.getString(EXTRAS_GEOCODE);
     title=geocode;
     name=extras.getString(EXTRAS_NAME);
-    dstCoords=new Geopoint(extras.getDouble(EXTRAS_LATITUDE),extras.getDouble(EXTRAS_LONGITUDE));
+    dstCoords=(Geopoint)extras.getParcelable(EXTRAS_COORDS);
     if (StringUtils.isNotBlank(name)) {
       if (StringUtils.isNotBlank(title)) {
         title+=": " + name;
