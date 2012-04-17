@@ -4,7 +4,6 @@
     if (params != null) {
       request.setEntity(new UrlEncodedFormEntity(params,HTTP.UTF_8));
     }
-    request.setHeader("X-Requested-With","XMLHttpRequest");
     return Network.request(request);
   }
  catch (  final Exception e) {

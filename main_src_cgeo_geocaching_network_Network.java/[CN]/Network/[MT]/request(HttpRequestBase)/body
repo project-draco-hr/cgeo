@@ -1,6 +1,7 @@
 {
   request.setHeader("Accept-Charset","utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
   request.setHeader("Accept-Language","en-US,*;q=0.9");
+  request.setHeader("X-Requested-With","XMLHttpRequest");
   request.getParams().setParameter(CoreProtocolPNames.USER_AGENT,USER_AGENT);
   final String reqLogStr=request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
   Log.d(reqLogStr);

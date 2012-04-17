@@ -1,7 +1,6 @@
 {
   final String fullUri=params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
   final HttpRequestBase request=new HttpGet(fullUri);
-  request.setHeader("X-Requested-With","XMLHttpRequest");
   if (headers != null) {
     for (    final NameValuePair header : headers) {
       request.setHeader(header.getName(),header.getValue());
