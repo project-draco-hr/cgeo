@@ -8,7 +8,7 @@
     }
     final String userToken=userTokenMatcher.group(1);
     final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),"decrypt","true","sf",Boolean.toString(friends));
-    final HttpResponse response=Network.request("http://www.geocaching.com/seek/geocache.logbook",params);
+    final HttpResponse response=Network.getRequest("http://www.geocaching.com/seek/geocache.logbook",params);
     if (response == null) {
       Log.e("cgBase.loadLogsFromDetails: cannot log logs, response is null");
       return null;

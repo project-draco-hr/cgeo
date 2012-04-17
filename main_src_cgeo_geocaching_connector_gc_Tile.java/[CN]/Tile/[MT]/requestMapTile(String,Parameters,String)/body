@@ -1,5 +1,5 @@
 {
-  final HttpResponse response=Network.request(url,params,new Parameters("Referer",referer));
+  final HttpResponse response=Network.getRequest(url,params,new Parameters("Referer",referer));
   try {
     return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
   }

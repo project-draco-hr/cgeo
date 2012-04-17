@@ -1,6 +1,6 @@
 {
   try {
-    final String profile=BaseUtils.replaceWhitespace(Network.getResponseData(Network.request("http://www.geocaching.com/my/")));
+    final String profile=BaseUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
     Settings.setMemberStatus(BaseUtils.getMatch(profile,GCConstants.PATTERN_MEMBER_STATUS,true,null));
     setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(profile,GCConstants.PATTERN_CACHES_FOUND,true,"-1").replaceAll("[,.]","")));
     final String avatarURL=BaseUtils.getMatch(profile,GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE,false,null);

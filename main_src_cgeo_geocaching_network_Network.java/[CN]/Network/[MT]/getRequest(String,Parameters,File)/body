@@ -2,14 +2,14 @@
   if (cacheFile != null && cacheFile.exists()) {
     final String etag=LocalStorage.getSavedHeader(cacheFile,"etag");
     if (etag != null) {
-      return request(uri,params,new Parameters("If-None-Match",etag));
+      return getRequest(uri,params,new Parameters("If-None-Match",etag));
     }
  else {
       final String lastModified=LocalStorage.getSavedHeader(cacheFile,"last-modified");
       if (lastModified != null) {
-        return request(uri,params,new Parameters("If-Modified-Since",lastModified));
+        return getRequest(uri,params,new Parameters("If-Modified-Since",lastModified));
       }
     }
   }
-  return request(uri,params,(Parameters)null);
+  return getRequest(uri,params,(Parameters)null);
 }
