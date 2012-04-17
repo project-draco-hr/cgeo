@@ -1,6 +1,6 @@
 {
   if (!cookieStoreRestored) {
-    Network.clearCookies();
+    clearCookies();
     if (oldCookies != null) {
       for (      final String cookie : StringUtils.split(oldCookies,';')) {
         final String[] split=StringUtils.split(cookie,"=",3);

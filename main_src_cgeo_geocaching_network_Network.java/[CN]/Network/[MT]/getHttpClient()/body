@@ -1,6 +1,6 @@
 {
   final DefaultHttpClient client=new DefaultHttpClient();
-  client.setCookieStore(cookieStore);
+  client.setCookieStore(Cookies.cookieStore);
   client.setParams(clientParams);
   client.addRequestInterceptor(new HttpRequestInterceptor(){
     @Override public void process(    final HttpRequest request,    final HttpContext context) throws HttpException, IOException {

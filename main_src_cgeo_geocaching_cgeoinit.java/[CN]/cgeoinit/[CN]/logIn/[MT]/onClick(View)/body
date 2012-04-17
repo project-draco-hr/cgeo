@@ -8,7 +8,7 @@
   loginDialog=ProgressDialog.show(cgeoinit.this,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
   loginDialog.setCancelable(false);
   Settings.setLogin(username,password);
-  Network.clearCookies();
+  Cookies.clearCookies();
   (new Thread(){
     @Override public void run(){
       final StatusCode loginResult=Login.login();
