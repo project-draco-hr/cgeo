@@ -1,9 +1,9 @@
 {
-  HttpResponse response=request(uri,params,my,addF);
+  HttpResponse response=request(uri,params);
   String data=getResponseData(response);
   if (!Login.getLoginStatus(data)) {
     if (Login.login() == StatusCode.NO_ERROR) {
-      response=request(uri,params,my,addF);
+      response=request(uri,params);
       data=getResponseData(response);
     }
  else {
