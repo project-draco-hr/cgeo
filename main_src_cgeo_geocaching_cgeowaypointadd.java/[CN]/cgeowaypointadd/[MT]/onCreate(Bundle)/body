@@ -32,7 +32,10 @@
   buttonLon.setOnClickListener(new coordDialogListener());
   Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
   addWaypoint.setOnClickListener(new coordsListener());
-  List<String> wayPointNames=new ArrayList<String>(WaypointType.ALL_TYPES_EXCEPT_OWN.values());
+  List<String> wayPointNames=new ArrayList<String>();
+  for (  WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN) {
+    wayPointNames.add(wpt.getL10n());
+  }
   AutoCompleteTextView textView=(AutoCompleteTextView)findViewById(R.id.name);
   ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,wayPointNames);
   textView.setAdapter(adapter);
