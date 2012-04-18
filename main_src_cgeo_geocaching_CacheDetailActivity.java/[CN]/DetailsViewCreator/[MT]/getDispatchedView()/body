@@ -68,7 +68,7 @@
   if (cache.getHiddenDate() != null) {
     long time=cache.getHiddenDate().getTime();
     if (time > 0) {
-      String dateString=cgBase.formatFullDate(time);
+      String dateString=Formatter.formatFullDate(time);
       if (cache.isEventCache()) {
         dateString=DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(),time,DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
       }

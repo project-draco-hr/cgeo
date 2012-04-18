@@ -15,8 +15,8 @@
     }
     final String page=Network.getResponseData(Network.getRequest("http://www.geocaching.com/seek/log.aspx",params));
     viewstates=Login.getViewstates(page);
-    trackables=cgBase.parseTrackableLog(page);
-    final List<LogType> typesPre=cgBase.parseTypes(page);
+    trackables=GCParser.parseTrackableLog(page);
+    final List<LogType> typesPre=GCParser.parseTypes(page);
     if (CollectionUtils.isNotEmpty(typesPre)) {
       possibleLogTypes.clear();
       possibleLogTypes.addAll(typesPre);

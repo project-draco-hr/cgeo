@@ -34,7 +34,7 @@
     return true;
   }
  else   if (id == MENU_DROP_CACHE) {
-    cgBase.dropCache(getCacheFromAdapter(adapterInfo),new Handler(){
+    getCacheFromAdapter(adapterInfo).drop(new Handler(){
       @Override public void handleMessage(      Message msg){
         refreshCurrentList();
       }

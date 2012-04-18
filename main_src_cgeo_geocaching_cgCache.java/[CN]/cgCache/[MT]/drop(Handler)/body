@@ -1,0 +1,10 @@
+{
+  try {
+    cgeoapplication.getInstance().markDropped(getGeocode());
+    cgeoapplication.getInstance().removeCache(getGeocode(),EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    handler.sendMessage(Message.obtain());
+  }
+ catch (  Exception e) {
+    Log.e("cache.drop: ",e);
+  }
+}

@@ -12,7 +12,7 @@
   }
   params.put("log","y");
   params.put("numlogs",String.valueOf(GCConstants.NUMBER_OF_LOGS));
-  cgBase.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_loadpage);
+  CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_loadpage);
   final String page=Login.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx",params);
   if (StringUtils.isEmpty(page)) {
     final SearchResult search=new SearchResult();
@@ -31,7 +31,7 @@
     search.setError(StatusCode.COMMUNICATION_ERROR);
     return search;
   }
-  final SearchResult searchResult=cgBase.parseCache(page,handler);
+  final SearchResult searchResult=GCParser.parseCache(page,handler);
   if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
     Log.e("cgeoBase.searchByGeocode: No cache parsed");
     return searchResult;

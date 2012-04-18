@@ -1,0 +1,41 @@
+{
+  if (StringUtils.isBlank(getGeocode())) {
+    Log.e("cgBase.loadLogsFromDetails: geo code not parsed correctly");
+  }
+  if (StringUtils.isBlank(getName())) {
+    Log.e("name not parsed correctly");
+  }
+  if (StringUtils.isBlank(getGuid())) {
+    Log.e("guid not parsed correctly");
+  }
+  if (getTerrain() == 0.0) {
+    Log.e("terrain not parsed correctly");
+  }
+  if (getDifficulty() == 0.0) {
+    Log.e("difficulty not parsed correctly");
+  }
+  if (StringUtils.isBlank(getOwner())) {
+    Log.e("owner not parsed correctly");
+  }
+  if (StringUtils.isBlank(getOwnerReal())) {
+    Log.e("owner real not parsed correctly");
+  }
+  if (getHiddenDate() == null) {
+    Log.e("hidden not parsed correctly");
+  }
+  if (getFavoritePoints() < 0) {
+    Log.e("favoriteCount not parsed correctly");
+  }
+  if (getSize() == null) {
+    Log.e("size not parsed correctly");
+  }
+  if (getType() == null || getType() == CacheType.UNKNOWN) {
+    Log.e("type not parsed correctly");
+  }
+  if (getCoords() == null) {
+    Log.e("coordinates not parsed correctly");
+  }
+  if (StringUtils.isBlank(getLocation())) {
+    Log.e("location not parsed correctly");
+  }
+}

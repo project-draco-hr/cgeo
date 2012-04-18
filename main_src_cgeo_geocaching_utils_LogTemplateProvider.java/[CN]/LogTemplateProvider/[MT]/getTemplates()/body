@@ -2,18 +2,18 @@
   if (templates == null) {
     templates=new LogTemplate[]{new LogTemplate("DATE",R.string.init_signature_template_date){
       @Override public String getValue(      final boolean offline){
-        return cgBase.formatFullDate(System.currentTimeMillis());
+        return Formatter.formatFullDate(System.currentTimeMillis());
       }
     }
 ,new LogTemplate("TIME",R.string.init_signature_template_time){
       @Override public String getValue(      final boolean offline){
-        return cgBase.formatTime(System.currentTimeMillis());
+        return Formatter.formatTime(System.currentTimeMillis());
       }
     }
 ,new LogTemplate("DATETIME",R.string.init_signature_template_datetime){
       @Override public String getValue(      final boolean offline){
         final long currentTime=System.currentTimeMillis();
-        return cgBase.formatFullDate(currentTime) + " " + cgBase.formatTime(currentTime);
+        return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
       }
     }
 ,new LogTemplate("USER",R.string.init_signature_template_user){

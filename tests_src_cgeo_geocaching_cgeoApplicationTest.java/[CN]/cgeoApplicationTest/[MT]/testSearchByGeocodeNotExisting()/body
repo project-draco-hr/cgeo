@@ -1,5 +1,5 @@
 {
-  final SearchResult search=cgBase.searchByGeocode("GC123456",null,0,true,null);
+  final SearchResult search=cgCache.searchByGeocode("GC123456",null,0,true,null);
   assertNotNull(search);
   assertEquals(StatusCode.UNPUBLISHED_CACHE,search.getError());
 }

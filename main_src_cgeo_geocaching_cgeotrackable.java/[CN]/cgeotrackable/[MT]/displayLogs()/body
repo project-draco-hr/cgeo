@@ -6,7 +6,7 @@
     for (    cgLog log : trackable.getLogs()) {
       rowView=(RelativeLayout)inflater.inflate(R.layout.trackable_logs_item,null);
       if (log.date > 0) {
-        ((TextView)rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
+        ((TextView)rowView.findViewById(R.id.added)).setText(Formatter.formatShortDate(log.date));
       }
       ((TextView)rowView.findViewById(R.id.type)).setText(log.type.getL10n());
       ((TextView)rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author),TextView.BufferType.SPANNABLE);

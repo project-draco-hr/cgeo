@@ -11,6 +11,6 @@
   String latString=loc.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE);
   longitude.setText(lonString);
   latitude.setText(latString);
-  date.setText(cgBase.formatShortDateTime(getContext(),loc.getDate()));
+  date.setText(Formatter.formatShortDateTime(getContext(),loc.getDate()));
   return v;
 }

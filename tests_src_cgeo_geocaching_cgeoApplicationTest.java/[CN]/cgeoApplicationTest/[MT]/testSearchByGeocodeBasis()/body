@@ -3,7 +3,7 @@
     mockedCache.setMockedDataUser(Settings.getUsername());
     cgCache parsedCache=cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
     if (null != parsedCache) {
-      cgBaseTest.testCompareCaches(mockedCache,parsedCache,true);
+      Compare.assertCompareCaches(mockedCache,parsedCache,true);
     }
   }
 }

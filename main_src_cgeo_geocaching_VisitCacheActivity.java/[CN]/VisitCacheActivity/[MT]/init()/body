@@ -37,7 +37,7 @@
   }
 );
   final Button dateButton=(Button)findViewById(R.id.date);
-  dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
+  dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new DateListener());
   final EditText logView=(EditText)findViewById(R.id.log);
   if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text)) {
@@ -48,7 +48,7 @@
   if (lastState != null) {
     lastState.restore(this);
   }
-  if (cgBase.isEmpty(viewstates)) {
+  if (Login.isEmpty(viewstates)) {
     enablePostButton(false);
     new LoadDataThread().start();
   }

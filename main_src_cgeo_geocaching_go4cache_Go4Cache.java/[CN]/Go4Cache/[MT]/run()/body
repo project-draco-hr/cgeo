@@ -16,8 +16,8 @@
       final String latStr=currentCoords.format(Format.LAT_DECDEGREE_RAW);
       final String lonStr=currentCoords.format(Format.LON_DECDEGREE_RAW);
       final Parameters params=new Parameters("u",username,"lt",latStr,"ln",lonStr,"a",currentAction,"s",(CryptUtils.sha1(username + "|" + latStr+ "|"+ lonStr+ "|"+ currentAction+ "|"+ CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
-      if (null != cgBase.version) {
-        params.put("v",cgBase.version);
+      if (null != packageVersion) {
+        params.put("v",packageVersion);
       }
       Network.postRequest("http://api.go4cache.com/",params);
       latestCoords=currentCoords;

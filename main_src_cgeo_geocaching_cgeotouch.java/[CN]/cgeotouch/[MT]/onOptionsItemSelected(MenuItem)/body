@@ -9,8 +9,8 @@
     text=(EditText)findViewById(R.id.log);
     textContent=text.getText().toString();
     final long now=System.currentTimeMillis();
-    dateString=cgBase.formatDate(now);
-    timeString=cgBase.formatTime(now);
+    dateString=Formatter.formatDate(now);
+    timeString=Formatter.formatTime(now);
     if ((id & 0x4) == 0x4) {
       addText+=dateString;
       if ((id & 0x2) == 0x2) {

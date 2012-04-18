@@ -4,7 +4,7 @@
   try {
     MockedCache cache=new GC2CJPF();
     deleteCacheFromDBAndLogout(cache.getGeocode());
-    SearchResult search=cgBase.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
+    SearchResult search=cgCache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
     assertNotNull(search);
     assertEquals(1,search.getGeocodes().size());
     assertTrue(search.getGeocodes().contains(cache.getGeocode()));
@@ -12,7 +12,7 @@
     assertNull(searchedCache.getCoords());
     cache=new GC2JVEH();
     deleteCacheFromDBAndLogout(cache.getGeocode());
-    search=cgBase.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
+    search=cgCache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
     assertNotNull(search);
     assertEquals(0,search.getGeocodes().size());
   }

@@ -1,13 +1,11 @@
 {
   final ImmutablePair<String,String> login=Settings.getLogin();
   if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
-    Login.setActualStatus(cgBase.res.getString(R.string.err_login));
+    Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
     Log.e("cgeoBase.login: No login information stored");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
-  if (cgBase.res != null) {
-    Login.setActualStatus(cgBase.res.getString(R.string.init_login_popup_working));
-  }
+  Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
   HttpResponse loginResponse=Network.getRequest("https://www.geocaching.com/login/default.aspx");
   String loginData=Network.getResponseData(loginResponse);
   if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData,GCConstants.PATTERN_MAINTENANCE)) {
@@ -26,7 +24,7 @@
   Settings.setCookieStore(null);
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$tbUsername",login.left,"ctl00$ContentBody$tbPassword",login.right,"ctl00$ContentBody$cbRememberMe","on","ctl00$ContentBody$btnSignIn","Login");
   final String[] viewstates=Login.getViewstates(loginData);
-  if (cgBase.isEmpty(viewstates)) {
+  if (isEmpty(viewstates)) {
     Log.e("cgeoBase.login: Failed to find viewstates");
     return StatusCode.LOGIN_PARSE_ERROR;
   }

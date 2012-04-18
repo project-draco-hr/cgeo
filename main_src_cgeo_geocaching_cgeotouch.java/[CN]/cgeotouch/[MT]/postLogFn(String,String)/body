@@ -6,7 +6,7 @@
     if (tweetCheck == null) {
       tweetCheck=(CheckBox)findViewById(R.id.tweet);
     }
-    final StatusCode status=cgBase.postLogTrackable(guid,tracking,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log);
+    final StatusCode status=GCParser.postLogTrackable(guid,tracking,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log);
     if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
       Twitter.postTweetTrackable(geocode);
     }

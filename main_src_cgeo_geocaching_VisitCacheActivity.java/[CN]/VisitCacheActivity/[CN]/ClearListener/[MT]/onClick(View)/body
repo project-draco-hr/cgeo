@@ -10,7 +10,7 @@
   text=null;
   setType(typeSelected);
   final Button dateButton=(Button)findViewById(R.id.date);
-  dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
+  dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new DateListener());
   final EditText logView=(EditText)findViewById(R.id.log);
   logView.setText("");

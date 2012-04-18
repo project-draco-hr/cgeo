@@ -4,5 +4,5 @@
   geocodes.add(mockedCache.getGeocode());
   SearchResult result=GCBase.searchByGeocodes(geocodes);
   cgCache parsedCache=result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
-  cgBaseTest.testCompareCaches(mockedCache,parsedCache,false);
+  Compare.assertCompareCaches(mockedCache,parsedCache,false);
 }

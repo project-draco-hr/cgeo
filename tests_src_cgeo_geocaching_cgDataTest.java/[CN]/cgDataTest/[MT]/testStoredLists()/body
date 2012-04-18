@@ -2,9 +2,10 @@
   cgeoapplication app=cgeoapplication.getInstance();
   int listId1=StoredList.STANDARD_LIST_ID;
   int listId2=StoredList.STANDARD_LIST_ID;
-  final cgCache cache1=cgBaseTest.createCache(0);
-  assertNotNull(cache1);
-  final cgCache cache2=cgBaseTest.createCache(1);
+  final cgCache cache1=new cgCache();
+  cache1.setGeocode("Cache 1");
+  final cgCache cache2=new cgCache();
+  cache2.setGeocode("Cache 2");
   assertNotNull(cache2);
   try {
     listId1=app.createList("cgData Test");

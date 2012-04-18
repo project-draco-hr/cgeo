@@ -1,5 +1,5 @@
 {
-  final SearchResult search=cgBase.searchByGeocode(geocode,null,0,true,null);
+  final SearchResult search=cgCache.searchByGeocode(geocode,null,0,true,null);
   assertNotNull(search);
   if (Settings.isPremiumMember() || search.getError() == null) {
     assertEquals(1,search.getGeocodes().size());
