@@ -1,8 +1,25 @@
 {
-  request.setHeader("Accept-Charset","utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
-  request.setHeader("Accept-Language","en-US,*;q=0.9");
-  request.setHeader("X-Requested-With","XMLHttpRequest");
-  request.getParams().setParameter(CoreProtocolPNames.USER_AGENT,USER_AGENT);
+  HttpRequestBase request;
+  if (method.equals("GET")) {
+    final String fullUri=params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
+    request=new HttpGet(fullUri);
+  }
+ else {
+    request=new HttpPost(uri);
+    if (params != null) {
+      try {
+        ((HttpPost)request).setEntity(new UrlEncodedFormEntity(params,HTTP.UTF_8));
+      }
+ catch (      final UnsupportedEncodingException e) {
+        Log.e("request",e);
+        return null;
+      }
+    }
+  }
+  for (  final NameValuePair header : Parameters.extend(Parameters.merge(headers,cacheHeaders(cacheFile)),"Accept-Charset","utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7","Accept-Language","en-US,*;q=0.9","X-Requested-With","XMLHttpRequest")) {
+    request.setHeader(header.getName(),header.getValue());
+  }
+  request.getParams().setParameter(CoreProtocolPNames.USER_AGENT,Network.USER_AGENT);
   final String reqLogStr=request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
   Log.d(reqLogStr);
   final HttpClient client=Network.getHttpClient();

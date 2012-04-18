@@ -1,5 +1,5 @@
 {
-  final HttpResponse response=getRequest(uri,params,new Parameters("Accept","application/json, text/javascript, */*; q=0.01"));
+  final HttpResponse response=request("GET",uri,params,new Parameters("Accept","application/json, text/javascript, */*; q=0.01"),null);
   if (isSuccess(response)) {
     try {
       return new JSONObject(Network.getResponseData(response));
