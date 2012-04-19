@@ -13,7 +13,7 @@
     try {
       final cgCache cache=caches.get(i);
       if (cache.isLogOffline()) {
-        cgLog log=cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
+        LogEntry log=cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
         if (null != logTypes.get(log.type)) {
           fieldNoteBuffer.append(cache.getGeocode()).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(logTypes.get(log.type)).append(",\"").append(StringUtils.replaceChars(log.log,'"','\'')).append("\"\n");
         }

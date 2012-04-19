@@ -2,7 +2,7 @@
   try {
     final StatusCode status=GCParser.postLog(geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
     if (status == StatusCode.NO_ERROR) {
-      final cgLog logNow=new cgLog();
+      final LogEntry logNow=new LogEntry();
       logNow.author=Settings.getUsername();
       logNow.date=date.getTimeInMillis();
       logNow.type=typeSelected;

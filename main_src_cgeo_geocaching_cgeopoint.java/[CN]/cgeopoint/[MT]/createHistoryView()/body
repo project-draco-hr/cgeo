@@ -9,8 +9,8 @@
   historyListView.setOnItemClickListener(new OnItemClickListener(){
     @Override public void onItemClick(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
       final Object selection=arg0.getItemAtPosition(arg2);
-      if (selection instanceof cgDestination) {
-        navigateTo(((cgDestination)selection).getCoords());
+      if (selection instanceof Destination) {
+        navigateTo(((Destination)selection).getCoords());
       }
     }
   }

@@ -21,7 +21,7 @@
           }
           tbText.setText(res.getString(logType.resourceId) + " ???");
         }
-        for (        cgTrackableLog tb : trackables) {
+        for (        TrackableLog tb : trackables) {
           tb.action=logType;
         }
         tbChanged=true;
@@ -44,7 +44,7 @@
         if (tbText == null) {
           return false;
         }
-        for (        cgTrackableLog tb : trackables) {
+        for (        TrackableLog tb : trackables) {
           if (tb.id == group) {
             tbChanged=true;
             tb.action=logType;

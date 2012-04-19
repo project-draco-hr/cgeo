@@ -1,15 +1,15 @@
 {
-  List<cgLog> result=null;
+  List<LogEntry> result=null;
   for (int i=0; i < logsJSON.length(); i++) {
     try {
       JSONObject logResponse=logsJSON.getJSONObject(i);
-      cgLog log=new cgLog();
+      LogEntry log=new LogEntry();
       log.date=parseDate(logResponse.getString(LOG_DATE)).getTime();
       log.log=logResponse.getString(LOG_COMMENT).trim();
       log.type=parseLogType(logResponse.getString(LOG_TYPE));
       log.author=parseUser(logResponse.getJSONObject(LOG_USER));
       if (result == null) {
-        result=new ArrayList<cgLog>();
+        result=new ArrayList<LogEntry>();
       }
       result.add(log);
     }

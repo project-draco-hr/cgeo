@@ -5,19 +5,19 @@
 switch (item.getItemId()) {
 case CONTEXT_MENU_NAVIGATE:
     contextMenuItemPosition=position;
-  if (destination instanceof cgDestination) {
-    NavigationAppFactory.showNavigationMenu(geo,this,null,null,((cgDestination)destination).getCoords());
+  if (destination instanceof Destination) {
+    NavigationAppFactory.showNavigationMenu(geo,this,null,null,((Destination)destination).getCoords());
     return true;
   }
 break;
 case CONTEXT_MENU_DELETE_WAYPOINT:
-if (destination instanceof cgDestination) {
-removeFromHistory((cgDestination)destination);
+if (destination instanceof Destination) {
+removeFromHistory((Destination)destination);
 }
 return true;
 case CONTEXT_MENU_EDIT_WAYPOINT:
-if (destination instanceof cgDestination) {
-final Geopoint gp=((cgDestination)destination).getCoords();
+if (destination instanceof Destination) {
+final Geopoint gp=((Destination)destination).getCoords();
 latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
 lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
 }

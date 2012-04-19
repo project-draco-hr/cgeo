@@ -42,9 +42,9 @@
       return;
     }
     if (Settings.isStoreLogImages()) {
-      for (      cgLog log : cache.getLogs(true)) {
-        if (CollectionUtils.isNotEmpty(log.logImages)) {
-          for (          cgImage oneLogImg : log.logImages) {
+      for (      LogEntry log : cache.getLogs(true)) {
+        if (log.hasLogImages()) {
+          for (          cgImage oneLogImg : log.getLogImages()) {
             imgGetter.getDrawable(oneLogImg.getUrl());
           }
         }

@@ -3,11 +3,11 @@
     return null;
   }
   init();
-  cgLog log=null;
+  LogEntry log=null;
   Cursor cursor=databaseRO.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = ?",new String[]{geocode},null,null,"_id desc","1");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
-    log=new cgLog();
+    log=new LogEntry();
     log.id=cursor.getInt(cursor.getColumnIndex("_id"));
     log.type=LogType.getById(cursor.getInt(cursor.getColumnIndex("type")));
     log.log=cursor.getString(cursor.getColumnIndex("log"));

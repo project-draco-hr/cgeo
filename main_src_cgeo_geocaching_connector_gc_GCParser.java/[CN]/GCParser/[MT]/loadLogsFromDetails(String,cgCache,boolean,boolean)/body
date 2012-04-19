@@ -27,7 +27,7 @@
  else {
     rawResponse=BaseUtils.getMatch(page,GCConstants.PATTERN_LOGBOOK,"");
   }
-  List<cgLog> logs=new ArrayList<cgLog>();
+  List<LogEntry> logs=new ArrayList<LogEntry>();
   try {
     final JSONObject resp=new JSONObject(rawResponse);
     if (!resp.getString("status").equals("success")) {
@@ -37,7 +37,7 @@
     final JSONArray data=resp.getJSONArray("data");
     for (int index=0; index < data.length(); index++) {
       final JSONObject entry=data.getJSONObject(index);
-      final cgLog logDone=new cgLog();
+      final LogEntry logDone=new LogEntry();
       logDone.friend=friends;
       final String logIconNameExt=entry.optString("LogTypeImage",".gif");
       final String logIconName=logIconNameExt.substring(0,logIconNameExt.length() - 4);
@@ -57,10 +57,7 @@
         String url="http://img.geocaching.com/cache/log/" + image.getString("FileName");
         String title=image.getString("Name");
         final cgImage logImage=new cgImage(url,title);
-        if (logDone.logImages == null) {
-          logDone.logImages=new ArrayList<cgImage>();
-        }
-        logDone.logImages.add(logImage);
+        logDone.addLogImage(logImage);
       }
       logs.add(logDone);
     }

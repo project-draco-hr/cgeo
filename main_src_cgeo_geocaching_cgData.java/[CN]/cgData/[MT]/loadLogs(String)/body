@@ -3,10 +3,10 @@
     return null;
   }
   init();
-  List<cgLog> logs=new ArrayList<cgLog>();
+  List<LogEntry> logs=new ArrayList<LogEntry>();
   Cursor cursor=databaseRO.rawQuery("SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "+ dbTableLogs+ " LEFT OUTER JOIN "+ dbTableLogImages+ " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc",new String[]{geocode});
   if (cursor != null && cursor.getCount() > 0) {
-    cgLog log=null;
+    LogEntry log=null;
     int indexLogsId=cursor.getColumnIndex("cg_logs_id");
     int indexType=cursor.getColumnIndex("type");
     int indexAuthor=cursor.getColumnIndex("author");
@@ -19,7 +19,7 @@
     int indexUrl=cursor.getColumnIndex("url");
     while (cursor.moveToNext() && logs.size() < 100) {
       if (log == null || log.id != cursor.getInt(indexLogsId)) {
-        log=new cgLog();
+        log=new LogEntry();
         log.id=cursor.getInt(indexLogsId);
         log.type=LogType.getById(cursor.getInt(indexType));
         log.author=cursor.getString(indexAuthor);
@@ -32,11 +32,7 @@
       if (!cursor.isNull(indexLogImagesId)) {
         String title=cursor.getString(indexTitle);
         String url=cursor.getString(indexUrl);
-        if (log.logImages == null) {
-          log.logImages=new ArrayList<cgImage>();
-        }
-        final cgImage log_img=new cgImage(url,title);
-        log.logImages.add(log_img);
+        log.addLogImage(new cgImage(url,title));
       }
     }
   }

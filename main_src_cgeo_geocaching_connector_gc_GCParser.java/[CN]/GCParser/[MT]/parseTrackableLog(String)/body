@@ -2,47 +2,34 @@
   if (StringUtils.isEmpty(page)) {
     return null;
   }
-  final List<cgTrackableLog> trackables=new ArrayList<cgTrackableLog>();
   String table=StringUtils.substringBetween(page,"<table id=\"tblTravelBugs\"","</table>");
   if (StringUtils.isBlank(table)) {
-    return trackables;
+    return Collections.emptyList();
   }
   table=StringUtils.substringBetween(table,"<tbody>","</tbody>");
   if (StringUtils.isBlank(table)) {
     Log.e("cgeoBase.parseTrackableLog: tbody not found on page");
     return null;
   }
+  final List<TrackableLog> trackableLogs=new ArrayList<TrackableLog>();
   final Matcher trackableMatcher=GCConstants.PATTERN_TRACKABLE.matcher(page);
   while (trackableMatcher.find()) {
     if (trackableMatcher.groupCount() > 0) {
-      final cgTrackableLog trackableLog=new cgTrackableLog();
-      if (trackableMatcher.group(1) != null) {
-        trackableLog.trackCode=trackableMatcher.group(1);
+      final String trackCode=trackableMatcher.group(1);
+      final String name=Html.fromHtml(trackableMatcher.group(2)).toString();
+      try {
+        final Integer ctl=Integer.valueOf(trackableMatcher.group(3));
+        final Integer id=Integer.valueOf(trackableMatcher.group(5));
+        if (trackCode != null && name != null && ctl != null && id != null) {
+          final TrackableLog entry=new TrackableLog(trackCode,name,id.intValue(),ctl.intValue());
+          Log.i("Trackable in inventory (#" + entry.ctl + "/"+ entry.id+ "): "+ entry.trackCode+ " - "+ entry.name);
+          trackableLogs.add(entry);
+        }
       }
- else {
-        continue;
+ catch (      NumberFormatException e) {
+        Log.e("GCParser.parseTrackableLog",e);
       }
-      if (trackableMatcher.group(2) != null) {
-        trackableLog.name=Html.fromHtml(trackableMatcher.group(2)).toString();
-      }
- else {
-        continue;
-      }
-      if (trackableMatcher.group(3) != null) {
-        trackableLog.ctl=Integer.valueOf(trackableMatcher.group(3));
-      }
- else {
-        continue;
-      }
-      if (trackableMatcher.group(5) != null) {
-        trackableLog.id=Integer.valueOf(trackableMatcher.group(5));
-      }
- else {
-        continue;
-      }
-      Log.i("Trackable in inventory (#" + trackableLog.ctl + "/"+ trackableLog.id+ "): "+ trackableLog.trackCode+ " - "+ trackableLog.name);
-      trackables.add(trackableLog);
     }
   }
-  return trackables;
+  return trackableLogs;
 }

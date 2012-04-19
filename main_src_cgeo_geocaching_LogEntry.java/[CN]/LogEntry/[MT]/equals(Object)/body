@@ -1,0 +1,10 @@
+{
+  if (this == obj) {
+    return true;
+  }
+  if (!(obj instanceof LogEntry)) {
+    return false;
+  }
+  final LogEntry otherLog=(LogEntry)obj;
+  return date == otherLog.date && type == otherLog.type && author.compareTo(otherLog.author) == 0 && log.compareTo(otherLog.log) == 0;
+}

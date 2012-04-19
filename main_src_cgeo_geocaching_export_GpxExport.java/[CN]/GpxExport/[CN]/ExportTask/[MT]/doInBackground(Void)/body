@@ -106,7 +106,7 @@
       gpx.append("</groundspeak:cache>");
       if (cache.getLogs().size() > 0) {
         gpx.append("<groundspeak:logs>");
-        for (        cgLog log : cache.getLogs()) {
+        for (        LogEntry log : cache.getLogs()) {
           gpx.append("<groundspeak:log id=\"");
           gpx.append(log.id);
           gpx.append("\">");

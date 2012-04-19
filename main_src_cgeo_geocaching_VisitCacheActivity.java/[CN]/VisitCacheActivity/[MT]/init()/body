@@ -8,7 +8,7 @@
   clearButton=(Button)findViewById(R.id.clear);
   saveButton=(Button)findViewById(R.id.save);
   possibleLogTypes=cache.getPossibleLogTypes();
-  final cgLog log=app.loadLogOffline(geocode);
+  final LogEntry log=app.loadLogOffline(geocode);
   if (log != null) {
     typeSelected=log.type;
     date.setTime(new Date(log.date));
