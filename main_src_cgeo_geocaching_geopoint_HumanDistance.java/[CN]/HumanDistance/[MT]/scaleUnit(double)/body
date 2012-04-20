@@ -1,0 +1,25 @@
+{
+  double distance;
+  String units;
+  if (Settings.isUseMetricUnits()) {
+    if (distanceKilometers >= 1) {
+      distance=distanceKilometers;
+      units="km";
+    }
+ else {
+      distance=distanceKilometers * 1000;
+      units="m";
+    }
+  }
+ else {
+    distance=distanceKilometers / IConversion.MILES_TO_KILOMETER;
+    if (distance >= 0.1) {
+      units="mi";
+    }
+ else {
+      distance*=5280;
+      units="ft";
+    }
+  }
+  return new ImmutablePair<Double,String>(distance,units);
+}

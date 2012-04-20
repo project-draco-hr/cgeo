@@ -1,0 +1,6 @@
+{
+  final String humanDistance=HumanDistance.getHumanDistance(distance);
+  if (!Pattern.compile('^' + ok + '$').matcher(humanDistance).find()) {
+    fail("getHumanDistance(" + distance + ") [metric: "+ (Settings.isUseMetricUnits() ? "yes" : "no")+ "] fails to match "+ ok+ ": "+ humanDistance);
+  }
+}
