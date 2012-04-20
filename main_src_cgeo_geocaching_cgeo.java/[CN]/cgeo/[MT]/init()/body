@@ -10,21 +10,6 @@
   }
   initialized=true;
   Settings.setLanguage(Settings.isUseEnglish());
-  for (  CacheSize cacheSize : CacheSize.values()) {
-    cacheSize.setL10n();
-  }
-  for (  CacheType cacheType : CacheType.values()) {
-    cacheType.setL10n();
-  }
-  for (  LogType logType : LogType.values()) {
-    logType.setL10n();
-  }
-  for (  WaypointType waypointType : WaypointType.values()) {
-    waypointType.setL10n();
-  }
-  for (  Strategy strategy : Strategy.values()) {
-    strategy.setL10n();
-  }
   Settings.getLogin();
   if (app.firstRun) {
     (new firstLogin()).start();
