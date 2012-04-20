@@ -1,8 +1,8 @@
 {
-  if (coords != null) {
+  if (point != null) {
     Collection<Tile> tiles=new ArrayList<Tile>(tileCache.values());
     for (    Tile tile : tiles) {
-      if (tile.containsPoint(coords)) {
+      if (tile.containsPoint(point)) {
         tileCache.remove(tile.hashCode());
       }
     }

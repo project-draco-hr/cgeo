@@ -52,7 +52,7 @@
     }
   }
   if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
-    Geopoint center=viewport.getCenter();
+    final Geopoint center=viewport.getCenter();
     if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
       SearchResult search=GCParser.searchByCoords(null,center,Settings.getCacheType(),false);
       if (search != null && !search.isEmpty()) {
