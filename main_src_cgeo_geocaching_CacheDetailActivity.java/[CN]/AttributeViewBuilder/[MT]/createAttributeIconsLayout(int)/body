@@ -1,11 +1,10 @@
 {
-  LinearLayout rows=new LinearLayout(CacheDetailActivity.this);
+  final LinearLayout rows=new LinearLayout(CacheDetailActivity.this);
   rows.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
   rows.setOrientation(LinearLayout.VERTICAL);
   LinearLayout attributeRow=newAttributeIconsRow();
   rows.addView(attributeRow);
   noAttributeIconsFound=true;
-  final String packageName=cgeoapplication.getInstance().getBaseContext().getPackageName();
   for (  String attributeName : cache.getAttributes()) {
     boolean strikethru=attributeName.endsWith("_no");
     if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
@@ -19,11 +18,10 @@
       attributeRow=newAttributeIconsRow();
       rows.addView(attributeRow);
     }
-    Drawable d=null;
-    int id=res.getIdentifier("attribute_" + attributeName,"drawable",packageName);
-    if (id > 0) {
+    CacheAttribute attrib=CacheAttribute.getByGcRawName(attributeName);
+    if (attrib != CacheAttribute.UNKNOWN) {
       noAttributeIconsFound=false;
-      d=res.getDrawable(id);
+      Drawable d=res.getDrawable(attrib.drawableId);
       iv.setImageDrawable(d);
       if (strikethru) {
         ImageView strikethruImage=new ImageView(CacheDetailActivity.this);
@@ -34,7 +32,7 @@
       }
     }
  else {
-      d=res.getDrawable(R.drawable.attribute_icon_not_found);
+      Drawable d=res.getDrawable(R.drawable.attribute_icon_not_found);
       iv.setImageDrawable(d);
     }
     attributeRow.addView(fl);

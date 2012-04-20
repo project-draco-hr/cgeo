@@ -1,21 +1,24 @@
 {
   final LinearLayout descriptions=(LinearLayout)getLayoutInflater().inflate(R.layout.attribute_descriptions,null);
-  TextView attribView=(TextView)descriptions.getChildAt(0);
-  StringBuilder buffer=new StringBuilder();
-  final String packageName=cgeoapplication.getInstance().getBaseContext().getPackageName();
+  final TextView attribView=(TextView)descriptions.getChildAt(0);
+  final StringBuilder buffer=new StringBuilder();
   final List<String> attributes=cache.getAttributes();
-  for (  String attribute : attributes) {
-    int id=res.getIdentifier("attribute_" + attribute,"string",packageName);
-    if (id > 0) {
-      String translated=res.getString(id);
+  for (  String attributeName : attributes) {
+    boolean negated=attributeName.endsWith("_no");
+    if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
+      attributeName=attributeName.substring(0,attributeName.lastIndexOf('_'));
+    }
+    CacheAttribute attrib=CacheAttribute.getByGcRawName(attributeName);
+    if (attrib != CacheAttribute.UNKNOWN) {
+      String translated=res.getString(negated ? attrib.stringIdNo : attrib.stringIdYes);
       if (StringUtils.isNotBlank(translated)) {
-        attribute=translated;
+        attributeName=translated;
       }
     }
     if (buffer.length() > 0) {
       buffer.append('\n');
     }
-    buffer.append(attribute);
+    buffer.append(attributeName);
   }
   if (noAttributeIconsFound) {
     buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
