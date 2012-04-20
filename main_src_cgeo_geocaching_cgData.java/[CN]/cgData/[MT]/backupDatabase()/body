@@ -7,12 +7,10 @@
   closeDb();
   final boolean backupDone=LocalStorage.copy(new File(path),target);
   init();
-  if (backupDone) {
-    Log.i("Database was copied to " + target);
-    return target.getPath();
-  }
- else {
+  if (!backupDone) {
     Log.e("Database could not be copied to " + target);
     return null;
   }
+  Log.i("Database was copied to " + target);
+  return target.getPath();
 }

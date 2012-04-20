@@ -1,9 +1,7 @@
 {
   final coordInputFormatEnum[] values=coordInputFormatEnum.values();
-  if (id >= 0 && id < values.length) {
-    return values[id];
-  }
- else {
+  if (id < 0 || id >= values.length) {
     return Min;
   }
+  return values[id];
 }

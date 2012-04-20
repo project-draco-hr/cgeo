@@ -1,12 +1,11 @@
 {
   final String data=Network.getResponseData(Network.getRequest(uri,params));
-  if (!getLoginStatus(data)) {
-    if (login() == StatusCode.NO_ERROR) {
-      return Network.getResponseData(Network.getRequest(uri,params));
-    }
- else {
-      Log.i("Working as guest.");
-    }
+  if (getLoginStatus(data)) {
+    return data;
   }
+  if (login() == StatusCode.NO_ERROR) {
+    return Network.getResponseData(Network.getRequest(uri,params));
+  }
+  Log.w("Working as guest.");
   return data;
 }

@@ -1,8 +1,3 @@
 {
-  if (params == null) {
-    return new Parameters(keyValues);
-  }
- else {
-    return params.put(keyValues);
-  }
+  return params == null ? new Parameters(keyValues) : params.put(keyValues);
 }

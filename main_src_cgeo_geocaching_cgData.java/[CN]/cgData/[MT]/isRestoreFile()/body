@@ -1,9 +1,4 @@
 {
   final File fileSourceFile=backupFile();
-  if (fileSourceFile.exists()) {
-    return fileSourceFile;
-  }
- else {
-    return null;
-  }
+  return fileSourceFile.exists() ? fileSourceFile : null;
 }

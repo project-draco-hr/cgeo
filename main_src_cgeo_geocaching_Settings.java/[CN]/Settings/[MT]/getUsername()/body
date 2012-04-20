@@ -1,8 +1,3 @@
 {
-  if (null == username) {
-    return sharedPrefs.getString(KEY_USERNAME,null);
-  }
- else {
-    return username;
-  }
+  return username != null ? username : sharedPrefs.getString(KEY_USERNAME,null);
 }

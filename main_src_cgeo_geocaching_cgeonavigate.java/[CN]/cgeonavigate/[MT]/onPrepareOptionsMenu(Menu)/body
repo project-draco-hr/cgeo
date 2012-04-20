@@ -1,11 +1,5 @@
 {
   super.onPrepareOptionsMenu(menu);
-  MenuItem item=menu.findItem(MENU_SWITCH_COMPASS_GPS);
-  if (Settings.isUseCompass()) {
-    item.setTitle(res.getString(R.string.use_gps));
-  }
- else {
-    item.setTitle(res.getString(R.string.use_compass));
-  }
+  menu.findItem(MENU_SWITCH_COMPASS_GPS).setTitle(res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
   return true;
 }

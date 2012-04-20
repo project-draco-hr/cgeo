@@ -15,10 +15,5 @@
   finally {
     databaseRW.endTransaction();
   }
-  if (id < 0) {
-    return -1;
-  }
- else {
-    return (id + customListIdOffset);
-  }
+  return id >= 0 ? id + customListIdOffset : -1;
 }

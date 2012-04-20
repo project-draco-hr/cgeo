@@ -31,26 +31,20 @@
   Login.putViewstates(params,viewstates);
   loginResponse=Network.postRequest("https://www.geocaching.com/login/default.aspx",params);
   loginData=Network.getResponseData(loginResponse);
-  if (StringUtils.isNotBlank(loginData)) {
-    if (Login.getLoginStatus(loginData)) {
-      Log.i("Successfully logged in Geocaching.com as " + login.left);
-      Login.switchToEnglish(loginData);
-      Settings.setCookieStore(Cookies.dumpCookieStore());
-      return StatusCode.NO_ERROR;
-    }
- else {
-      if (loginData.contains("Your username/password combination does not match.")) {
-        Log.i("Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
-        return StatusCode.WRONG_LOGIN_DATA;
-      }
- else {
-        Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
-        return StatusCode.UNKNOWN_ERROR;
-      }
-    }
-  }
- else {
+  if (StringUtils.isBlank(loginData)) {
     Log.e("cgeoBase.login: Failed to retrieve login page (2nd)");
     return StatusCode.COMMUNICATION_ERROR;
   }
+  if (Login.getLoginStatus(loginData)) {
+    Log.i("Successfully logged in Geocaching.com as " + login.left);
+    Login.switchToEnglish(loginData);
+    Settings.setCookieStore(Cookies.dumpCookieStore());
+    return StatusCode.NO_ERROR;
+  }
+  if (loginData.contains("Your username/password combination does not match.")) {
+    Log.i("Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
+    return StatusCode.WRONG_LOGIN_DATA;
+  }
+  Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
+  return StatusCode.UNKNOWN_ERROR;
 }
