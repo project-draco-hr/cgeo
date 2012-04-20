@@ -1,0 +1,4 @@
+{
+  final String prefix=dbTable == null ? "" : (dbTable + ".");
+  return String.format((Locale)null,"%slatitude >= %s and %slatitude <= %s and %slongitude >= %s and %slongitude <= %s",prefix,getLatitudeMin(),prefix,getLatitudeMax(),prefix,getLongitudeMin(),prefix,getLongitudeMax());
+}
