@@ -19,7 +19,7 @@
     cache2.setListId(listId1);
     app.saveCache(cache1,LoadFlags.SAVE_ALL);
     app.saveCache(cache2,LoadFlags.SAVE_ALL);
-    assertTrue(app.getAllStoredCachesCount(false,CacheType.ALL,null) >= 2);
+    assertTrue(app.getAllStoredCachesCount(false,CacheType.ALL) >= 2);
     assertEquals(1,app.renameList(listId1,"cgData Test (renamed)"));
     StoredList list1=app.getList(listId1);
     assertEquals("cgData Test (renamed)",list1.title);
