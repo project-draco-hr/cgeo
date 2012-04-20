@@ -4,7 +4,7 @@
   if (!stored) {
     geocodes.addAll(CacheCache.getInstance().getInViewport(centerLat,centerLon,spanLat,spanLon,cacheType));
   }
-  StringBuilder where=buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon);
+  StringBuilder where=buildCoordinateWhere(dbTableCaches,centerLat,centerLon,spanLat,spanLon);
   if (cacheType != CacheType.ALL) {
     where.append(" and type = \"");
     where.append(cacheType.id);

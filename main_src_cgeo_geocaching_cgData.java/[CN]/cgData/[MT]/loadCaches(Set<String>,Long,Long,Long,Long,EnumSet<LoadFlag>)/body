@@ -12,7 +12,7 @@
   try {
     StringBuilder where=null;
     if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
-      where=buildCoordinateWhere(centerLat,centerLon,spanLat,spanLon);
+      where=buildCoordinateWhere(dbTableCaches,centerLat,centerLon,spanLat,spanLon);
     }
  else {
       where=cgData.whereGeocodeIn(geocodes);
