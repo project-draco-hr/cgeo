@@ -1,0 +1,31 @@
+{
+  init();
+  final Set<String> geocodes=new HashSet<String>();
+  if (!stored) {
+    geocodes.addAll(CacheCache.getInstance().getInViewport(viewport,cacheType));
+  }
+  final StringBuilder where=new StringBuilder(buildCoordinateWhere(dbTableCaches,viewport));
+  if (cacheType != CacheType.ALL) {
+    where.append(" and type = \"");
+    where.append(cacheType.id);
+    where.append('"');
+  }
+  if (stored) {
+    where.append(" and reason >= 1");
+  }
+  try {
+    final Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},where.toString(),null,null,null,null,"500");
+    if (cursor.moveToFirst()) {
+      final int index=cursor.getColumnIndex("geocode");
+      do {
+        geocodes.add(cursor.getString(index));
+      }
+ while (cursor.moveToNext());
+    }
+    cursor.close();
+  }
+ catch (  Exception e) {
+    Log.e("cgData.loadInViewport: " + e.toString());
+  }
+  return geocodes;
+}

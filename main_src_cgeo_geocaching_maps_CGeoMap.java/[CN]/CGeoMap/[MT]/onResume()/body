@@ -21,12 +21,7 @@
       caches.add(cache);
     }
     dirtyCaches.clear();
-    GeoPointImpl mapCenterNow=mapView.getMapViewCenter();
-    int centerLatitudeNow=mapCenterNow.getLatitudeE6();
-    int centerLongitudeNow=mapCenterNow.getLongitudeE6();
-    int spanLatitudeNow=mapView.getLatitudeSpan();
-    int spanLongitudeNow=mapView.getLongitudeSpan();
-    displayExecutor.execute(new DisplayRunnable(centerLatitudeNow,centerLongitudeNow,spanLatitudeNow,spanLongitudeNow));
+    displayExecutor.execute(new DisplayRunnable(mapView.getViewport()));
   }
   startTimer();
 }

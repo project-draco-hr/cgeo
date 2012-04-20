@@ -3,11 +3,7 @@
     try {
       sleep(250);
       if (mapView != null) {
-        GeoPointImpl mapCenterNow=mapView.getMapViewCenter();
-        int centerLatitudeNow=mapCenterNow.getLatitudeE6();
-        int centerLongitudeNow=mapCenterNow.getLongitudeE6();
-        int spanLatitudeNow=mapView.getLatitudeSpan();
-        int spanLongitudeNow=mapView.getLongitudeSpan();
+        final Viewport viewportNow=mapView.getViewport();
         int zoomNow=mapView.getMapZoomLevel();
         boolean moved=false;
         if (liveChanged) {
@@ -16,19 +12,16 @@
  else         if (live && Settings.isLiveMap() && !downloaded) {
           moved=true;
         }
- else         if (centerLatitude == null || centerLongitude == null) {
-          moved=true;
-        }
- else         if (spanLatitude == null || spanLongitude == null) {
+ else         if (viewport == null) {
           moved=true;
         }
  else         if (zoomNow != zoom) {
           moved=true;
         }
- else         if (((Math.abs(spanLatitudeNow - spanLatitude) > 50) || (Math.abs(spanLongitudeNow - spanLongitude) > 50) || (Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow / 4))|| (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow / 4))) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !Viewport.isInViewPort(centerLatitude,centerLongitude,centerLatitudeNow,centerLongitudeNow,spanLatitude,spanLongitude,spanLatitudeNow,spanLongitudeNow))) {
+ else         if (mapMoved(viewport,viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow))) {
           moved=true;
         }
-        if (moved || zoomNow != zoom || spanLatitudeNow != spanLatitude || spanLongitudeNow != spanLongitude || centerLatitudeNow != centerLatitude || centerLongitudeNow != centerLongitude) {
+        if (moved || zoomNow != zoom || !viewportNow.equals(viewport)) {
           displayHandler.sendEmptyMessage(UPDATE_TITLE);
         }
         zoom=zoomNow;
@@ -36,11 +29,8 @@
           liveChanged=false;
           long currentTime=System.currentTimeMillis();
           if (1000 < (currentTime - loadThreadRun)) {
-            centerLatitude=centerLatitudeNow;
-            centerLongitude=centerLongitudeNow;
-            spanLatitude=spanLatitudeNow;
-            spanLongitude=spanLongitudeNow;
-            loadExecutor.execute(new LoadRunnable(centerLatitude,centerLongitude,spanLatitude,spanLongitude));
+            viewport=viewportNow;
+            loadExecutor.execute(new LoadRunnable(viewport));
           }
         }
       }

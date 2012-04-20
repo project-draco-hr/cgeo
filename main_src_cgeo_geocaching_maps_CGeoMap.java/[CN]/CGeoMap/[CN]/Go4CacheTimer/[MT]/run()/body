@@ -3,31 +3,21 @@
     try {
       sleep(250);
       if (mapView != null) {
-        GeoPointImpl mapCenterNow=mapView.getMapViewCenter();
-        int centerLatitudeNow=mapCenterNow.getLatitudeE6();
-        int centerLongitudeNow=mapCenterNow.getLongitudeE6();
-        int spanLatitudeNow=mapView.getLatitudeSpan();
-        int spanLongitudeNow=mapView.getLongitudeSpan();
+        final Viewport viewportNow=mapView.getViewport();
         boolean moved=false;
         long currentTime=System.currentTimeMillis();
         if (60000 < (currentTime - go4CacheThreadRun)) {
           moved=true;
         }
- else         if (centerLatitudeUsers == null || centerLongitudeUsers == null) {
+ else         if (viewportUsers == null) {
           moved=true;
         }
- else         if (spanLatitudeUsers == null || spanLongitudeUsers == null) {
-          moved=true;
-        }
- else         if (((Math.abs(spanLatitudeNow - spanLatitudeUsers) > 50) || (Math.abs(spanLongitudeNow - spanLongitudeUsers) > 50) || (Math.abs(centerLatitudeNow - centerLatitudeUsers) > (spanLatitudeNow / 4))|| (Math.abs(centerLongitudeNow - centerLongitudeUsers) > (spanLongitudeNow / 4))) && !Viewport.isInViewPort(centerLatitudeUsers,centerLongitudeUsers,centerLatitudeNow,centerLongitudeNow,spanLatitudeUsers,spanLongitudeUsers,spanLatitudeNow,spanLongitudeNow)) {
+ else         if (mapMoved(viewportUsers,viewportNow) && !viewportUsers.includes(viewportNow)) {
           moved=true;
         }
         if (moved && (1000 < (currentTime - go4CacheThreadRun))) {
-          centerLatitudeUsers=centerLatitudeNow;
-          centerLongitudeUsers=centerLongitudeNow;
-          spanLatitudeUsers=spanLatitudeNow;
-          spanLongitudeUsers=spanLongitudeNow;
-          Go4CacheExecutor.execute(new Go4CacheRunnable(centerLatitudeNow,centerLongitudeNow,spanLatitudeNow,spanLongitudeNow));
+          viewportUsers=viewportNow;
+          Go4CacheExecutor.execute(new Go4CacheRunnable(viewportUsers));
         }
       }
       yield();

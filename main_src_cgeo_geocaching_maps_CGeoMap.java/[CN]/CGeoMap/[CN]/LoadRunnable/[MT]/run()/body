@@ -10,10 +10,10 @@
     }
  else {
       if (!live || !Settings.isLiveMap()) {
-        search=new SearchResult(app.getStoredInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType()));
+        search=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
       }
  else {
-        search=new SearchResult(app.getCachedInViewport(centerLat,centerLon,spanLat,spanLon,Settings.getCacheType()));
+        search=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
       }
     }
     if (search != null) {
@@ -35,7 +35,7 @@
     if (cachesCnt < Settings.getWayPointsThreshold()) {
       waypoints.clear();
       if (searchIntent == null && geocodeIntent == null) {
-        waypoints.addAll(app.getWaypointsInViewport(centerLat,centerLon,spanLat,spanLon,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches()));
+        waypoints.addAll(app.getWaypointsInViewport(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches()));
       }
  else {
         for (        cgCache c : caches.getAsList()) {
@@ -43,9 +43,9 @@
         }
       }
     }
-    displayExecutor.execute(new DisplayRunnable(centerLat,centerLon,spanLat,spanLon));
+    displayExecutor.execute(new DisplayRunnable(viewport));
     if (live && Settings.isLiveMap()) {
-      downloadExecutor.execute(new DownloadRunnable(centerLat,centerLon,spanLat,spanLon));
+      downloadExecutor.execute(new DownloadRunnable(viewport));
     }
   }
   finally {

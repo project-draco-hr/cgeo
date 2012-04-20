@@ -1,0 +1,29 @@
+{
+  final StringBuilder where=new StringBuilder(buildCoordinateWhere(dbTableWaypoints,viewport));
+  if (excludeMine) {
+    where.append("and " + dbTableCaches + ".own == 0 and "+ dbTableCaches+ ".found == 0 ");
+  }
+  if (excludeDisabled) {
+    where.append("and " + dbTableCaches + ".disabled == 0 ");
+  }
+  init();
+  List<cgWaypoint> waypoints=new ArrayList<cgWaypoint>();
+  String query="SELECT ";
+  for (int i=0; i < WAYPOINT_COLUMNS.length; i++) {
+    query+=(i > 0 ? ", " : "") + dbTableWaypoints + "."+ WAYPOINT_COLUMNS[i]+ " ";
+  }
+  query+=" FROM " + dbTableWaypoints + ", "+ dbTableCaches+ " WHERE "+ dbTableWaypoints+ "._id == "+ dbTableCaches+ "._id and "+ where;
+  Cursor cursor=databaseRO.rawQuery(query,null);
+  if (cursor != null && cursor.getCount() > 0) {
+    cursor.moveToFirst();
+    do {
+      cgWaypoint waypoint=createWaypointFromDatabaseContent(cursor);
+      waypoints.add(waypoint);
+    }
+ while (cursor.moveToNext());
+  }
+  if (cursor != null) {
+    cursor.close();
+  }
+  return waypoints;
+}

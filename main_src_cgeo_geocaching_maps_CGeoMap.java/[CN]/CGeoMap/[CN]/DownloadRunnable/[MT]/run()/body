@@ -9,8 +9,7 @@
           noMapTokenHandler.sendEmptyMessage(0);
         }
       }
-      final Viewport viewport=new Viewport(new Geopoint(centerLat / 1e6,centerLon / 1e6),0.8 * spanLat / 1e6,0.8 * spanLon / 1e6);
-      search=ConnectorFactory.searchByViewport(viewport,tokens);
+      search=ConnectorFactory.searchByViewport(viewport.resize(0.8),tokens);
       if (search != null) {
         downloaded=true;
         if (search.getError() == StatusCode.NOT_LOGGED_IN) {
@@ -29,7 +28,7 @@
       caches.removeAll(result);
       caches.addAll(result);
     }
-    displayExecutor.execute(new DisplayRunnable(centerLat,centerLon,spanLat,spanLon));
+    displayExecutor.execute(new DisplayRunnable(viewport));
   }
  catch (  ThreadDeath e) {
     Log.d("DownloadThread stopped");
