@@ -14,12 +14,10 @@
     }
   }
   if (loadFlags.contains(LoadFlag.LOAD_DB_MINIMAL) || loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES) || loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)|| loadFlags.contains(LoadFlag.LOAD_SPOILERS)|| loadFlags.contains(LoadFlag.LOAD_LOGS)|| loadFlags.contains(LoadFlag.LOAD_INVENTORY)|| loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
-    Set<cgCache> cachesFromDB=loadCaches(remaining,null,null,null,null,loadFlags);
-    if (cachesFromDB != null) {
-      result.addAll(cachesFromDB);
-      for (      cgCache cache : cachesFromDB) {
-        remaining.remove(cache.getGeocode());
-      }
+    final Set<cgCache> cachesFromDB=loadCachesFromGeocodes(remaining,loadFlags);
+    result.addAll(cachesFromDB);
+    for (    final cgCache cache : cachesFromDB) {
+      remaining.remove(cache.getGeocode());
     }
   }
   if (loadFlags.contains(LoadFlag.LOAD_CACHE_AFTER)) {

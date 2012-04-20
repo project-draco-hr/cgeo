@@ -1,0 +1,71 @@
+{
+  if (CollectionUtils.isEmpty(geocodes)) {
+    return Collections.emptySet();
+  }
+  Log.d("cgData.loadCachesFromGeocodes(" + geocodes.toString() + ") from DB");
+  init();
+  final Cursor cursor=databaseRO.query(dbTableCaches,CACHE_COLUMNS,cgData.whereGeocodeIn(geocodes),null,null,null,null,null);
+  try {
+    if (cursor.moveToFirst()) {
+      final Set<cgCache> caches=new HashSet<cgCache>();
+      do {
+        cgCache cache=cgData.createCacheFromDatabaseContent(cursor);
+        if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
+          cache.setAttributes(loadAttributes(cache.getGeocode()));
+        }
+        if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
+          final List<cgWaypoint> waypoints=loadWaypoints(cache.getGeocode());
+          if (CollectionUtils.isNotEmpty(waypoints)) {
+            cache.setWaypoints(waypoints,false);
+          }
+        }
+        if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
+          final List<cgImage> spoilers=loadSpoilers(cache.getGeocode());
+          if (CollectionUtils.isNotEmpty(spoilers)) {
+            if (cache.getSpoilers() == null) {
+              cache.setSpoilers(new ArrayList<cgImage>());
+            }
+ else {
+              cache.getSpoilers().clear();
+            }
+            cache.getSpoilers().addAll(spoilers);
+          }
+        }
+        if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
+          cache.setLogs(loadLogs(cache.getGeocode()));
+          final Map<LogType,Integer> logCounts=loadLogCounts(cache.getGeocode());
+          if (MapUtils.isNotEmpty(logCounts)) {
+            cache.getLogCounts().clear();
+            cache.getLogCounts().putAll(logCounts);
+          }
+        }
+        if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
+          final List<cgTrackable> inventory=loadInventory(cache.getGeocode());
+          if (CollectionUtils.isNotEmpty(inventory)) {
+            if (cache.getInventory() == null) {
+              cache.setInventory(new ArrayList<cgTrackable>());
+            }
+ else {
+              cache.getInventory().clear();
+            }
+            cache.getInventory().addAll(inventory);
+          }
+        }
+        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+          cache.setLogOffline(hasLogOffline(cache.getGeocode()));
+        }
+        cache.addStorageLocation(StorageLocation.DATABASE);
+        cacheCache.putCacheInCache(cache);
+        caches.add(cache);
+      }
+ while (cursor.moveToNext());
+      return caches;
+    }
+ else {
+      return Collections.emptySet();
+    }
+  }
+  finally {
+    cursor.close();
+  }
+}
