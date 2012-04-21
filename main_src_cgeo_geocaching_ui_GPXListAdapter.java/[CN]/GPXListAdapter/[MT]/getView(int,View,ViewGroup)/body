@@ -8,6 +8,7 @@
   }
   final File file=getItem(position);
   View v=rowView;
+  GPXListView holder=null;
   if (v == null) {
     v=inflater.inflate(R.layout.gpx_item,null);
     holder=new GPXListView();

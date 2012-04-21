@@ -2,7 +2,7 @@
   super.onCreate(savedInstanceState);
   setTheme(R.style.transparent);
   setContentView(R.layout.livemapinfo);
-  showCount=Settings.getLiveMapHintShowCount();
+  final int showCount=Settings.getLiveMapHintShowCount();
   if (showCount > 2) {
     final CheckBox cb=(CheckBox)findViewById(R.id.live_map_hint_hide);
     cb.setVisibility(View.VISIBLE);

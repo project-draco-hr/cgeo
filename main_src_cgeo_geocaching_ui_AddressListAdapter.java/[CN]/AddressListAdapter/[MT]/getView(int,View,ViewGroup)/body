@@ -4,6 +4,7 @@
   }
   final Address address=getItem(position);
   View view=convertView;
+  AddressListView holder;
   if (view == null) {
     view=inflater.inflate(R.layout.addresses_item,null);
     holder=new AddressListView();

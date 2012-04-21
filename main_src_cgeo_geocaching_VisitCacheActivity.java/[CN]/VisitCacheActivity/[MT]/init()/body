@@ -6,7 +6,7 @@
   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   tweetCheck=(CheckBox)findViewById(R.id.tweet);
   clearButton=(Button)findViewById(R.id.clear);
-  saveButton=(Button)findViewById(R.id.save);
+  final Button saveButton=(Button)findViewById(R.id.save);
   possibleLogTypes=cache.getPossibleLogTypes();
   final LogEntry log=app.loadLogOffline(geocode);
   if (log != null) {

@@ -22,7 +22,7 @@
     }
   }
 );
-  geocodesInCache=app.geocodesInCache();
+  final String[] geocodesInCache=app.geocodesInCache();
   if (geocodesInCache != null) {
     final ArrayAdapter<String> geocodesAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,geocodesInCache);
     geocodeEdit.setAdapter(geocodesAdapter);

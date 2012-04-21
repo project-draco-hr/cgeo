@@ -15,8 +15,7 @@
     (new firstLogin()).start();
   }
   if (geo == null) {
-    geoUpdate=new UpdateLocation();
-    geo=app.startGeo(geoUpdate);
+    geo=app.startGeo(new UpdateLocation());
   }
   final View findOnMap=findViewById(R.id.map);
   findOnMap.setClickable(true);
