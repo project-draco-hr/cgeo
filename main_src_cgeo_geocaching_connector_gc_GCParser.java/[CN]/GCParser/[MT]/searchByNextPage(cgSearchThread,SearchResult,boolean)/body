@@ -15,20 +15,10 @@
   final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
   final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
   Login.putViewstates(params,viewstates);
-  String page=Network.getResponseData(Network.postRequest(uri,params));
+  final String page=Login.postRequestLogged(uri,params);
   if (!Login.getLoginStatus(page)) {
-    final StatusCode loginState=Login.login();
-    if (loginState == StatusCode.NO_ERROR) {
-      page=Network.getResponseData(Network.postRequest(uri,params));
-    }
- else     if (loginState == StatusCode.NO_LOGIN_INFO_STORED) {
-      Log.i("Working as guest.");
-    }
- else {
-      search.setError(loginState);
-      Log.e("cgeoBase.searchByNextPage: Can not log in geocaching");
-      return search;
-    }
+    Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+    return search;
   }
   if (StringUtils.isBlank(page)) {
     Log.e("cgeoBase.searchByNextPage: No data from server");

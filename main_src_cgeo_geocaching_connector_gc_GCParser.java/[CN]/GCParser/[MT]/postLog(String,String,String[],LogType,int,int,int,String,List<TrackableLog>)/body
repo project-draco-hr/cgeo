@@ -41,20 +41,10 @@
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString(),"ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
   }
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
-  String page=Network.getResponseData(Network.postRequest(uri,params));
+  String page=Login.postRequestLogged(uri,params);
   if (!Login.getLoginStatus(page)) {
-    final StatusCode loginState=Login.login();
-    if (loginState == StatusCode.NO_ERROR) {
-      page=Network.getResponseData(Network.postRequest(uri,params));
-    }
- else {
-      Log.e("cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
-      return loginState;
-    }
-  }
-  if (StringUtils.isBlank(page)) {
-    Log.e("cgeoBase.postLog: No data from server");
-    return StatusCode.NO_DATA_FROM_SERVER;
+    Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+    return StatusCode.NOT_LOGGED_IN;
   }
   final Matcher matcher=GCConstants.PATTERN_MAINTENANCE.matcher(page);
   try {

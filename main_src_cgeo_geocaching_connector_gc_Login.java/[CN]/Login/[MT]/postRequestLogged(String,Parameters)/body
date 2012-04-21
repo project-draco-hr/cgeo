@@ -1,9 +1,9 @@
 {
-  HttpResponse response=Network.postRequest(uri,null);
+  HttpResponse response=Network.postRequest(uri,params);
   String data=Network.getResponseData(response);
   if (!getLoginStatus(data)) {
     if (login() == StatusCode.NO_ERROR) {
-      response=Network.postRequest(uri,null);
+      response=Network.postRequest(uri,params);
       data=Network.getResponseData(response);
     }
  else {
