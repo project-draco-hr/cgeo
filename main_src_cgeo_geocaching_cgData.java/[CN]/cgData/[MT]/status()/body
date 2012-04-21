@@ -1,6 +1,3 @@
 {
-  if (databaseRO == null || databaseRW == null || !initialized) {
-    return false;
-  }
-  return true;
+  return databaseRO != null && databaseRW != null && initialized;
 }
