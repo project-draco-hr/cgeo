@@ -3,7 +3,7 @@
     try {
       gp=new Geopoint(eLat.getText().toString(),eLon.getText().toString());
     }
- catch (    ParseException e) {
+ catch (    Geopoint.ParseException e) {
       if (signalError) {
         context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
       }

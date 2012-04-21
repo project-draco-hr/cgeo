@@ -1,3 +1,5 @@
 {
-  this(GeopointParser.parseLatitude(text),GeopointParser.parseLongitude(text));
+  final Geopoint parsed=GeopointParser.parse(text);
+  this.latitude=parsed.latitude;
+  this.longitude=parsed.longitude;
 }

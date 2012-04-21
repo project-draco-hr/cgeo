@@ -1,5 +1,5 @@
 {
   final String latitude=StringUtils.substringBefore(location,"|");
   final String longitude=StringUtils.substringAfter(location,"|");
-  cache.setCoords(GeopointParser.parse(latitude,longitude));
+  cache.setCoords(new Geopoint(latitude,longitude));
 }

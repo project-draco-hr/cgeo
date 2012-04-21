@@ -7,27 +7,23 @@
     helpDialog(res.getString(R.string.err_point_no_position_given_title),res.getString(R.string.err_point_no_position_given));
     return;
   }
-  double latitude;
-  double longitude;
+  Geopoint coords;
   if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
     try {
-      latitude=GeopointParser.parseLatitude(latText);
-      longitude=GeopointParser.parseLongitude(lonText);
+      coords=new Geopoint(latText,lonText);
     }
- catch (    GeopointParser.ParseException e) {
+ catch (    Geopoint.ParseException e) {
       showToast(res.getString(e.resource));
       return;
     }
   }
- else {
-    if (geo == null || geo.coordsNow == null) {
-      showToast(res.getString(R.string.err_point_curr_position_unavailable));
-      return;
-    }
-    latitude=geo.coordsNow.getLatitude();
-    longitude=geo.coordsNow.getLongitude();
+ else   if (geo == null || geo.coordsNow == null) {
+    showToast(res.getString(R.string.err_point_curr_position_unavailable));
+    return;
   }
-  Geopoint coords=null;
+ else {
+    coords=geo.coordsNow;
+  }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     double bearing=0;
     try {
@@ -45,10 +41,7 @@
       showToast(res.getString(R.string.err_parse_dist));
       return;
     }
-    coords=new Geopoint(latitude,longitude).project(bearing,distance);
-  }
- else {
-    coords=new Geopoint(latitude,longitude);
+    coords=coords.project(bearing,distance);
   }
   String name=((EditText)findViewById(R.id.name)).getText().toString().trim();
   if (name.length() == 0) {

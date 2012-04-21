@@ -3,7 +3,7 @@
   final double lat=latitudeWrapper.result;
   final ResultWrapper longitudeWrapper=parseHelper(text.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength),LatLon.LON);
   if (longitudeWrapper.matcherPos - (latitudeWrapper.matcherPos + latitudeWrapper.matcherLength) >= 10) {
-    throw new ParseException("Distance between latitude and longitude text is to large.",LatLon.LON);
+    throw new Geopoint.ParseException("Distance between latitude and longitude text is to large.",LatLon.LON);
   }
   final double lon=longitudeWrapper.result;
   return new Geopoint(lat,lon);

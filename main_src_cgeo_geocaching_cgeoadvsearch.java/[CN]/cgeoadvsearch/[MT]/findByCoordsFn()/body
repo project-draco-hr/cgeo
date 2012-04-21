@@ -11,9 +11,9 @@
   }
  else {
     try {
-      cgeocaches.startActivityCoordinates(this,GeopointParser.parse(latText,lonText));
+      cgeocaches.startActivityCoordinates(this,new Geopoint(latText,lonText));
     }
- catch (    GeopointParser.ParseException e) {
+ catch (    Geopoint.ParseException e) {
       showToast(res.getString(e.resource));
     }
   }

@@ -11,9 +11,9 @@
   }
   if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
     try {
-      coords=GeopointParser.parse(latText,lonText);
+      coords=new Geopoint(latText,lonText);
     }
- catch (    GeopointParser.ParseException e) {
+ catch (    Geopoint.ParseException e) {
       showToast(res.getString(e.resource));
       return null;
     }
