@@ -4,8 +4,7 @@
   }
   final PackageManager packageManager=context.getPackageManager();
   try {
-    final Intent intent=packageManager.getLaunchIntentForPackage(packageName);
-    return intent;
+    return packageManager.getLaunchIntentForPackage(packageName);
   }
  catch (  Exception e) {
     return null;
