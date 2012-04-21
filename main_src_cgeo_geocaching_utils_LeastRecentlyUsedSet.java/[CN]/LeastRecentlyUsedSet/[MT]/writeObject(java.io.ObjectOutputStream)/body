@@ -4,7 +4,7 @@
   s.writeFloat(map.loadFactor);
   s.writeInt(map.getMaxEntries());
   s.writeInt(map.size());
-  for (final Iterator<E> i=map.keySet().iterator(); i.hasNext(); ) {
-    s.writeObject(i.next());
+  for (  final E e : map.keySet()) {
+    s.writeObject(e);
   }
 }
