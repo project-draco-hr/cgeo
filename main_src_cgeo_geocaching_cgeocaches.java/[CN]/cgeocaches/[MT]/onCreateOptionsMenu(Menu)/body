@@ -20,7 +20,7 @@
   Collections.sort(sortedLabels);
   for (  String label : sortedLabels) {
     Integer id=comparators.get(label);
-    subMenuSort.add(1,id.intValue(),0,label).setCheckable(true).setChecked(id.intValue() == MENU_SORT_DISTANCE);
+    subMenuSort.add(1,id,0,label).setCheckable(true).setChecked(id == MENU_SORT_DISTANCE);
   }
   subMenuSort.setGroupCheckable(1,true,true);
   menu.add(0,MENU_SWITCH_SELECT_MODE,0,res.getString(R.string.caches_select_mode)).setIcon(android.R.drawable.ic_menu_agenda);

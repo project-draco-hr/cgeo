@@ -4,7 +4,7 @@
   }
   new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
     @Override public void run(    final Integer selectedListId){
-      switchListById(selectedListId.intValue());
+      switchListById(selectedListId);
     }
   }
 );
