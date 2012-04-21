@@ -4,16 +4,10 @@
   final StringBuilder buffer=new StringBuilder();
   final List<String> attributes=cache.getAttributes();
   for (  String attributeName : attributes) {
-    boolean negated=attributeName.endsWith("_no");
-    if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
-      attributeName=attributeName.substring(0,attributeName.lastIndexOf('_'));
-    }
-    CacheAttribute attrib=CacheAttribute.getByGcRawName(attributeName);
+    final boolean enabled=CacheAttribute.isEnabled(attributeName);
+    CacheAttribute attrib=CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
     if (attrib != CacheAttribute.UNKNOWN) {
-      String translated=res.getString(negated ? attrib.stringIdNo : attrib.stringIdYes);
-      if (StringUtils.isNotBlank(translated)) {
-        attributeName=translated;
-      }
+      attributeName=attrib.getL10n(enabled);
     }
     if (buffer.length() > 0) {
       buffer.append('\n');

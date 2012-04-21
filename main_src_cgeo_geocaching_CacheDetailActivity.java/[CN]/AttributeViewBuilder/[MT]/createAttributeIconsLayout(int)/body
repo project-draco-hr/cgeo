@@ -6,10 +6,6 @@
   rows.addView(attributeRow);
   noAttributeIconsFound=true;
   for (  String attributeName : cache.getAttributes()) {
-    boolean strikethru=attributeName.endsWith("_no");
-    if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
-      attributeName=attributeName.substring(0,attributeName.lastIndexOf('_'));
-    }
     attributeRow.measure(0,0);
     int rowWidth=attributeRow.getMeasuredWidth();
     FrameLayout fl=(FrameLayout)getLayoutInflater().inflate(R.layout.attribute_image,null);
@@ -18,7 +14,8 @@
       attributeRow=newAttributeIconsRow();
       rows.addView(attributeRow);
     }
-    CacheAttribute attrib=CacheAttribute.getByGcRawName(attributeName);
+    final boolean strikethru=!CacheAttribute.isEnabled(attributeName);
+    final CacheAttribute attrib=CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
     if (attrib != CacheAttribute.UNKNOWN) {
       noAttributeIconsFound=false;
       Drawable d=res.getDrawable(attrib.drawableId);
