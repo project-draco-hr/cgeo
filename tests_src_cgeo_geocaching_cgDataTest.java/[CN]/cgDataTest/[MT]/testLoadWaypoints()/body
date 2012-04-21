@@ -1,0 +1,8 @@
+{
+  final Viewport viewport=new Viewport(new Geopoint(-1,-2),new Geopoint(3,4));
+  final cgeoapplication app=cgeoapplication.getInstance();
+  app.getWaypointsInViewport(viewport,false,false);
+  app.getWaypointsInViewport(viewport,false,true);
+  app.getWaypointsInViewport(viewport,true,false);
+  app.getWaypointsInViewport(viewport,true,true);
+}
