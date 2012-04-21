@@ -17,10 +17,8 @@
     return null;
   }
   final Map<String,GCVoteRating> ratings=getRating(guids,geocodes);
-  if (ratings != null) {
-    for (    Entry<String,GCVoteRating> entry : ratings.entrySet()) {
-      return entry.getValue();
-    }
+  if (MapUtils.isEmpty(ratings)) {
+    return null;
   }
-  return null;
+  return ratings.values().iterator().next();
 }
