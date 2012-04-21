@@ -1,3 +1,3 @@
 {
-  return isPremiumMember() ? false : sharedPrefs.getBoolean(KEY_SHOW_CAPTCHA,false);
+  return !isPremiumMember() && sharedPrefs.getBoolean(KEY_SHOW_CAPTCHA,false);
 }

@@ -5,5 +5,5 @@
   if (!(obj instanceof cgCache)) {
     return false;
   }
-  return StringUtils.isNotBlank(geocode) ? geocode.equals(((cgCache)obj).geocode) : false;
+  return StringUtils.isNotBlank(geocode) && geocode.equals(((cgCache)obj).geocode);
 }
