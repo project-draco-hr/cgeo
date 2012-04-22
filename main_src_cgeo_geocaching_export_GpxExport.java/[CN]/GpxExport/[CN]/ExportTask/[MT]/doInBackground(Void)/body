@@ -65,7 +65,7 @@
           final CacheAttribute attr=CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attribute));
           final boolean enabled=CacheAttribute.isEnabled(attribute);
           gpx.write("<groundspeak:attribute id=\"");
-          gpx.write(attr.id);
+          gpx.write(Integer.toString(attr.id));
           gpx.write("\" inc=\"");
           if (enabled) {
             gpx.write('1');
@@ -119,7 +119,7 @@
         gpx.write("<groundspeak:logs>");
         for (        LogEntry log : cache.getLogs()) {
           gpx.write("<groundspeak:log id=\"");
-          gpx.write(log.id);
+          gpx.write(Integer.toString(log.id));
           gpx.write("\">");
           gpx.write("<groundspeak:date>");
           gpx.write(StringEscapeUtils.escapeXml(dateFormatZ.format(new Date(log.date))));
