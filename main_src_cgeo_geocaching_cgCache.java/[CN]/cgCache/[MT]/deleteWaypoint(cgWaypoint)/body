@@ -3,8 +3,5 @@
     return false;
   }
   final int index=getWaypointIndex(waypoint);
-  if (index >= 0) {
-    return deleteWaypoint(index);
-  }
-  return false;
+  return index >= 0 && deleteWaypoint(index);
 }

@@ -1,8 +1,5 @@
 {
-  if (StringUtils.isBlank(page)) {
-    return false;
-  }
-  if (StringUtils.isBlank(guid)) {
+  if (StringUtils.isBlank(page) || StringUtils.isBlank(guid)) {
     return false;
   }
   final Boolean found=Pattern.compile(guid,Pattern.CASE_INSENSITIVE).matcher(page).find();

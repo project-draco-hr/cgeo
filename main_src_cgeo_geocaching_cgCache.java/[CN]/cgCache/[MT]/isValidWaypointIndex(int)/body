@@ -1,6 +1,3 @@
 {
-  if (!hasWaypoints()) {
-    return false;
-  }
-  return index >= 0 && index < waypoints.size();
+  return hasWaypoints() && index >= 0 && index < waypoints.size();
 }

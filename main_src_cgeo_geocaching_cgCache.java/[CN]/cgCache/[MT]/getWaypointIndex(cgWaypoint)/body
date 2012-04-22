@@ -1,10 +1,9 @@
 {
-  int index=0;
-  for (  cgWaypoint wp : waypoints) {
-    if (wp.getId() == waypoint.getId()) {
+  final int id=waypoint.getId();
+  for (int index=0; index < waypoints.size(); index++) {
+    if (waypoints.get(index).getId() == id) {
       return index;
     }
-    index++;
   }
   return -1;
 }

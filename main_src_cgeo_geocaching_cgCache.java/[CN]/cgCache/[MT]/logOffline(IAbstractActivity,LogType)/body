@@ -1,8 +1,5 @@
 {
-  String log="";
-  if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature()) {
-    log=LogTemplateProvider.applyTemplates(Settings.getSignature(),true);
-  }
-  logOffline(fromActivity,log,Calendar.getInstance(),logType);
-  return true;
+  final boolean mustIncludeSignature=StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature();
+  final String initial=mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(),true) : "";
+  logOffline(fromActivity,initial,Calendar.getInstance(),logType);
 }

@@ -17,8 +17,5 @@
     waypoints.add(waypoint);
     resetFinalDefined();
   }
-  if (saveToDatabase) {
-    return cgeoapplication.getInstance().saveOwnWaypoint(waypoint.getId(),geocode,waypoint);
-  }
-  return false;
+  return saveToDatabase && cgeoapplication.getInstance().saveOwnWaypoint(waypoint.getId(),geocode,waypoint);
 }
