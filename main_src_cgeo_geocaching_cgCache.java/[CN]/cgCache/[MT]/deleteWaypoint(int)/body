@@ -1,8 +1,8 @@
 {
-  if (!isValidWaypointIndex(index)) {
+  final cgWaypoint waypoint=getWaypoint(index);
+  if (waypoint == null) {
     return false;
   }
-  final cgWaypoint waypoint=waypoints.get(index);
   if (waypoint.isUserDefined()) {
     waypoints.remove(index);
     cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());

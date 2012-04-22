@@ -29,14 +29,16 @@ break;
 }
 break;
 case CONTEXT_MENU_WAYPOINT_EDIT:
-if (cache.hasWaypoints() && index < cache.getWaypoints().size()) {
-final cgWaypoint waypoint=cache.getWaypoints().get(index);
+{
+final cgWaypoint waypoint=cache.getWaypoint(index);
+if (waypoint != null) {
 Intent editIntent=new Intent(this,cgeowaypointadd.class);
 editIntent.putExtra("waypoint",waypoint.getId());
 startActivity(editIntent);
 refreshOnResume=true;
 }
 break;
+}
 case CONTEXT_MENU_WAYPOINT_DUPLICATE:
 if (cache.duplicateWaypoint(index)) {
 app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));

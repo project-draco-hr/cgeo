@@ -4,7 +4,7 @@
     return "";
   }
   if (page == Page.WAYPOINTS) {
-    int waypointCount=(cache.hasWaypoints() ? cache.getWaypoints().size() : 0);
+    final int waypointCount=cache.getWaypoints().size();
     return res.getQuantityString(R.plurals.waypoints,waypointCount,waypointCount);
   }
   return res.getString(page.titleStringId);

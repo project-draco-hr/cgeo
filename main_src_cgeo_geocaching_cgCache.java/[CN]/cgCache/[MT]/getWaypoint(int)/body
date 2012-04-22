@@ -1,6 +1,3 @@
 {
-  if (!isValidWaypointIndex(index)) {
-    return null;
-  }
-  return waypoints.get(index);
+  return waypoints != null && index >= 0 && index < waypoints.size() ? waypoints.get(index) : null;
 }

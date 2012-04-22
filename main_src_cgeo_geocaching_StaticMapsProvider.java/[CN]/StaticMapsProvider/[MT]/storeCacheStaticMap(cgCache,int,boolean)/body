@@ -1,14 +1,12 @@
 {
   final String latlonMap=cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
   final Parameters waypoints=new Parameters();
-  if (cache.hasWaypoints()) {
-    for (    cgWaypoint waypoint : cache.getWaypoints()) {
-      if (waypoint.getCoords() == null) {
-        continue;
-      }
-      final String wpMarkerUrl=getWpMarkerUrl(waypoint);
-      waypoints.put("markers","icon:" + wpMarkerUrl + "|"+ waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
+  for (  final cgWaypoint waypoint : cache.getWaypoints()) {
+    if (waypoint.getCoords() == null) {
+      continue;
     }
+    final String wpMarkerUrl=getWpMarkerUrl(waypoint);
+    waypoints.put("markers","icon:" + wpMarkerUrl + "|"+ waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
   }
   final String cacheMarkerUrl=getCacheMarkerUrl(cache);
   downloadMaps(cache,cacheMarkerUrl,"",latlonMap,edge,waypoints,waitForResult);
