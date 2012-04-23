@@ -6,7 +6,7 @@
   try {
     exportLocation.mkdirs();
     final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
-    exportFile=new File(exportLocation.toString() + File.separatorChar + fileNameDateFormat.format(new Date())+ ".gpx");
+    exportFile=new File(exportLocation.toString() + File.separatorChar + "export_"+ fileNameDateFormat.format(new Date())+ ".gpx");
     gpx=new BufferedWriter(new FileWriter(exportFile));
     gpx.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     gpx.write("<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd\">");
