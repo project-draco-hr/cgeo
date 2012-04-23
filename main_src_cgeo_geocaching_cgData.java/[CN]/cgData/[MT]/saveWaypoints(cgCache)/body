@@ -1,0 +1,17 @@
+{
+  boolean result=false;
+  init();
+  databaseRW.beginTransaction();
+  try {
+    saveWaypointsWithoutTransaction(cache);
+    databaseRW.setTransactionSuccessful();
+    result=true;
+  }
+ catch (  Exception e) {
+    Log.e("saveWaypoints",e);
+  }
+ finally {
+    databaseRW.endTransaction();
+  }
+  return result;
+}

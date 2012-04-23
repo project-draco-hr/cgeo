@@ -2,27 +2,12 @@
   try {
     final StatusCode status=GCParser.postLog(geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
     if (status == StatusCode.NO_ERROR) {
-      final LogEntry logNow=new LogEntry();
-      logNow.author=Settings.getUsername();
-      logNow.date=date.getTimeInMillis();
-      logNow.type=typeSelected;
-      logNow.log=log;
-      if (cache != null) {
-        cache.prependLog(logNow);
-      }
-      app.addLog(geocode,logNow);
+      final LogEntry logNow=new LogEntry(date,typeSelected,log);
+      cache.prependLog(logNow);
       if (typeSelected == LogType.LOG_FOUND_IT) {
-        app.markFound(geocode);
-        if (cache != null) {
-          cache.setFound(true);
-        }
+        cache.setFound(true);
       }
-      if (cache != null) {
-        app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
-      }
- else {
-        app.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
-      }
+      app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
     }
     if (status == StatusCode.NO_ERROR) {
       app.clearLogOffline(geocode);

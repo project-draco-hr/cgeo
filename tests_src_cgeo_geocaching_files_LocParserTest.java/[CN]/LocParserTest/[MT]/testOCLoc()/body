@@ -5,5 +5,5 @@
   assertNotNull(cache);
   assertEquals("OC5952",cache.getGeocode());
   assertEquals("Die Schatzinsel / treasure island",cache.getName());
-  assertTrue(new Geopoint(48.85968,9.18740).equals(cache.getCoords()));
+  assertEquals(new Geopoint(48.85968,9.18740),cache.getCoords());
 }

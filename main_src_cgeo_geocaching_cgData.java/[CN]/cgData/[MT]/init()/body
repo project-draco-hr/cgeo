@@ -5,7 +5,7 @@
   if (databaseRW == null || !databaseRW.isOpen()) {
     try {
       if (dbHelper == null) {
-        dbHelper=new cgDbHelper(context);
+        dbHelper=new DbHelper(context);
       }
       databaseRW=dbHelper.getWritableDatabase();
       if (databaseRW != null && databaseRW.isOpen()) {
@@ -25,7 +25,7 @@
   if (databaseRO == null || !databaseRO.isOpen()) {
     try {
       if (dbHelper == null) {
-        dbHelper=new cgDbHelper(context);
+        dbHelper=new DbHelper(context);
       }
       databaseRO=dbHelper.getReadableDatabase();
       if (databaseRO.needUpgrade(dbVersion)) {

@@ -1,12 +1,15 @@
 {
   new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
     @Override public void run(    Integer newListId){
+      List<cgCache> selected;
       final boolean moveAll=adapter.getChecked() == 0;
-      for (      final cgCache c : Collections.unmodifiableList(cacheList)) {
-        if (moveAll || c.isStatusChecked()) {
-          app.moveToList(c.getGeocode(),newListId);
-        }
+      if (moveAll) {
+        selected=new ArrayList<cgCache>(cacheList);
       }
+ else {
+        selected=adapter.getCheckedCaches();
+      }
+      app.moveToList(selected,newListId);
       adapter.resetChecks();
       refreshCurrentList();
     }

@@ -1,0 +1,27 @@
+{
+  String geocode=cache.getGeocode();
+  databaseRW.delete(dbTableWaypoints,"geocode = ? and type <> ? and own = 0",new String[]{geocode,"own"});
+  List<cgWaypoint> waypoints=cache.getWaypoints();
+  if (CollectionUtils.isNotEmpty(waypoints)) {
+    ContentValues values=new ContentValues();
+    long timeStamp=System.currentTimeMillis();
+    for (    cgWaypoint oneWaypoint : waypoints) {
+      if (oneWaypoint.isUserDefined()) {
+        continue;
+      }
+      values.clear();
+      values.put("geocode",geocode);
+      values.put("updated",timeStamp);
+      values.put("type",oneWaypoint.getWaypointType() != null ? oneWaypoint.getWaypointType().id : null);
+      values.put("prefix",oneWaypoint.getPrefix());
+      values.put("lookup",oneWaypoint.getLookup());
+      values.put("name",oneWaypoint.getName());
+      values.put("latlon",oneWaypoint.getLatlon());
+      putCoords(values,oneWaypoint.getCoords());
+      values.put("note",oneWaypoint.getNote());
+      values.put("own",oneWaypoint.isUserDefined() ? 1 : 0);
+      final long rowId=databaseRW.insert(dbTableWaypoints,null,values);
+      oneWaypoint.setId((int)rowId);
+    }
+  }
+}

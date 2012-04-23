@@ -68,45 +68,16 @@
   values.put("onWatchlist",cache.isOnWatchlist() ? 1 : 0);
   values.put("coordsChanged",cache.hasUserModifiedCoords() ? 1 : 0);
   values.put("finalDefined",cache.hasFinalDefined() ? 1 : 0);
-  boolean statusOk=true;
-  if (cache.hasAttributes()) {
-    if (!saveAttributes(cache.getGeocode(),cache.getAttributes())) {
-      statusOk=false;
-    }
-  }
-  if (cache.hasWaypoints()) {
-    if (!saveWaypoints(cache.getGeocode(),cache.getWaypoints(),true)) {
-      statusOk=false;
-    }
-  }
-  if (cache.getSpoilers() != null) {
-    if (!saveSpoilers(cache.getGeocode(),cache.getSpoilers())) {
-      statusOk=false;
-    }
-  }
-  if (CollectionUtils.isNotEmpty(cache.getLogs())) {
-    if (!saveLogs(cache.getGeocode(),cache.getLogs())) {
-      statusOk=false;
-    }
-  }
-  if (MapUtils.isNotEmpty(cache.getLogCounts())) {
-    if (!saveLogCount(cache.getGeocode(),cache.getLogCounts())) {
-      statusOk=false;
-    }
-  }
-  if (cache.getInventory() != null) {
-    if (!saveInventory(cache.getGeocode(),cache.getInventory())) {
-      statusOk=false;
-    }
-  }
-  if (!statusOk) {
-    cache.setDetailed(false);
-    cache.setDetailedUpdate(0L);
-  }
-  init();
   boolean result=false;
+  init();
   databaseRW.beginTransaction();
   try {
+    saveAttributesWithoutTransaction(cache);
+    saveWaypointsWithoutTransaction(cache);
+    saveSpoilersWithoutTransaction(cache);
+    saveLogsWithoutTransaction(cache.getGeocode(),cache.getLogs());
+    saveLogCountsWithoutTransaction(cache);
+    saveInventoryWithoutTransaction(cache.getGeocode(),cache.getInventory());
     int rows=databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
     if (rows == 0) {
       databaseRW.insert(dbTableCaches,null,values);
@@ -119,6 +90,5 @@
  finally {
     databaseRW.endTransaction();
   }
-  values=null;
   return result;
 }

@@ -1,0 +1,30 @@
+{
+  databaseRW.delete(dbTableLogs,"geocode = ?",new String[]{geocode});
+  if (CollectionUtils.isNotEmpty(logs)) {
+    InsertHelper helper=new InsertHelper(databaseRW,dbTableLogs);
+    long timeStamp=System.currentTimeMillis();
+    for (    LogEntry log : logs) {
+      helper.prepareForInsert();
+      helper.bind(LOGS_GEOCODE,geocode);
+      helper.bind(LOGS_UPDATED,timeStamp);
+      helper.bind(LOGS_TYPE,log.type.id);
+      helper.bind(LOGS_AUTHOR,log.author);
+      helper.bind(LOGS_LOG,log.log);
+      helper.bind(LOGS_DATE,log.date);
+      helper.bind(LOGS_FOUND,log.found);
+      helper.bind(LOGS_FRIEND,log.friend);
+      long log_id=helper.execute();
+      if (log.hasLogImages()) {
+        ContentValues values=new ContentValues();
+        for (        cgImage img : log.getLogImages()) {
+          values.clear();
+          values.put("log_id",log_id);
+          values.put("title",img.getTitle());
+          values.put("url",img.getUrl());
+          databaseRW.insert(dbTableLogImages,null,values);
+        }
+      }
+    }
+    helper.close();
+  }
+}

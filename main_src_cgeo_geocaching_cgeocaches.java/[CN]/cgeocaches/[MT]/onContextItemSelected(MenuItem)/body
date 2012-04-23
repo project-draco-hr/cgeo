@@ -44,10 +44,10 @@
     return true;
   }
  else   if (id == MENU_MOVE_TO_LIST) {
-    final String geocode=getCacheFromAdapter(adapterInfo).getGeocode();
+    final cgCache cache=getCacheFromAdapter(adapterInfo);
     new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
       @Override public void run(      Integer newListId){
-        app.moveToList(geocode,newListId);
+        app.moveToList(Collections.singletonList(cache),newListId);
         adapter.resetChecks();
         refreshCurrentList();
       }

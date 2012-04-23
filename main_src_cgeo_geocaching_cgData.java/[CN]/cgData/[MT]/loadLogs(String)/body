@@ -19,12 +19,8 @@
     int indexUrl=cursor.getColumnIndex("url");
     while (cursor.moveToNext() && logs.size() < 100) {
       if (log == null || log.id != cursor.getInt(indexLogsId)) {
-        log=new LogEntry();
+        log=new LogEntry(cursor.getString(indexAuthor),cursor.getLong(indexDate),LogType.getById(cursor.getInt(indexType)),cursor.getString(indexLog));
         log.id=cursor.getInt(indexLogsId);
-        log.type=LogType.getById(cursor.getInt(indexType));
-        log.author=cursor.getString(indexAuthor);
-        log.log=cursor.getString(indexLog);
-        log.date=cursor.getLong(indexDate);
         log.found=cursor.getInt(indexFound);
         log.friend=cursor.getInt(indexFriend) == 1 ? true : false;
         logs.add(log);

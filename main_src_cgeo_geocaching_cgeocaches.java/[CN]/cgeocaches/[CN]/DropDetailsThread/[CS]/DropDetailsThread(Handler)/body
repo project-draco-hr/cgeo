@@ -1,7 +1,11 @@
 {
   setPriority(Thread.MIN_PRIORITY);
   handler=handlerIn;
-  if (adapter != null) {
-    checked=adapter.getChecked();
+  int checked=adapter.getChecked();
+  if (checked == 0) {
+    selected=new ArrayList<cgCache>(cacheList);
+  }
+ else {
+    selected=adapter.getCheckedCaches();
   }
 }

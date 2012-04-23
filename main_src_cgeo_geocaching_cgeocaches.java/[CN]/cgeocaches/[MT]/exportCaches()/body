@@ -1,12 +1,7 @@
 {
   List<cgCache> caches;
   if (adapter != null && adapter.getChecked() > 0) {
-    caches=new LinkedList<cgCache>();
-    for (    cgCache cache : cacheList) {
-      if (cache.isStatusChecked()) {
-        caches.add(cache);
-      }
-    }
+    caches=adapter.getCheckedCaches();
   }
  else {
     caches=cacheList;

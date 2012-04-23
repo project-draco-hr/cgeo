@@ -1,6 +1,6 @@
 {
   try {
-    cgeoapplication.getInstance().markDropped(getGeocode());
+    cgeoapplication.getInstance().markDropped(Collections.singletonList(this));
     cgeoapplication.getInstance().removeCache(getGeocode(),EnumSet.of(RemoveFlag.REMOVE_CACHE));
     handler.sendMessage(Message.obtain());
   }

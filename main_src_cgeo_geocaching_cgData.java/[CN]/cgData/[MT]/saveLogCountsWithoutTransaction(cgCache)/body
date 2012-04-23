@@ -1,0 +1,18 @@
+{
+  String geocode=cache.getGeocode();
+  databaseRW.delete(dbTableLogCount,"geocode = ?",new String[]{geocode});
+  Map<LogType,Integer> logCounts=cache.getLogCounts();
+  if (MapUtils.isNotEmpty(logCounts)) {
+    ContentValues values=new ContentValues();
+    Set<Entry<LogType,Integer>> logCountsItems=logCounts.entrySet();
+    long timeStamp=System.currentTimeMillis();
+    for (    Entry<LogType,Integer> pair : logCountsItems) {
+      values.clear();
+      values.put("geocode",geocode);
+      values.put("updated",timeStamp);
+      values.put("type",pair.getKey().id);
+      values.put("count",pair.getValue());
+      databaseRW.insert(dbTableLogCount,null,values);
+    }
+  }
+}

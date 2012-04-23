@@ -1,0 +1,18 @@
+{
+  String geocode=cache.getGeocode();
+  databaseRW.delete(dbTableSpoilers,"geocode = ?",new String[]{geocode});
+  List<cgImage> spoilers=cache.getSpoilers();
+  if (CollectionUtils.isNotEmpty(spoilers)) {
+    ContentValues values=new ContentValues();
+    long timeStamp=System.currentTimeMillis();
+    for (    cgImage spoiler : spoilers) {
+      values.clear();
+      values.put("geocode",geocode);
+      values.put("updated",timeStamp);
+      values.put("url",spoiler.getUrl());
+      values.put("title",spoiler.getTitle());
+      values.put("description",spoiler.getDescription());
+      databaseRW.insert(dbTableSpoilers,null,values);
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  if (caches.isEmpty()) {
+    return;
+  }
+  init();
+  final ContentValues values=new ContentValues();
+  values.put("reason",listId);
+  databaseRW.beginTransaction();
+  try {
+    for (    cgCache cache : caches) {
+      databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
+      cache.setListId(listId);
+    }
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+}

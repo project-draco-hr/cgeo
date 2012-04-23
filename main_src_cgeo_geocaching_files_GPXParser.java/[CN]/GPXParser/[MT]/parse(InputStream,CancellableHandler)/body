@@ -311,7 +311,7 @@
     final Element gcLog=gcLogs.getChild(nsGC,"log");
     gcLog.setStartElementListener(new StartElementListener(){
       @Override public void start(      Attributes attrs){
-        log=new LogEntry();
+        log=new LogEntry("",0,LogType.LOG_UNKNOWN,"");
         try {
           if (attrs.getIndex("id") > -1) {
             log.id=Integer.parseInt(attrs.getValue("id"));

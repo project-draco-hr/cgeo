@@ -1,0 +1,12 @@
+{
+  init();
+  databaseRW.beginTransaction();
+  try {
+    saveInventoryWithoutTransaction(null,Collections.singletonList(trackable));
+    databaseRW.setTransactionSuccessful();
+  }
+  finally {
+    databaseRW.endTransaction();
+  }
+  return true;
+}

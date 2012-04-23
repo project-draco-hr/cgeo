@@ -1,21 +1,5 @@
 {
   removeGeoAndDir();
-  final List<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
-  for (  cgCache cache : cacheListTemp) {
-    if (checked > 0 && !cache.isStatusChecked()) {
-      continue;
-    }
-    try {
-      if (needToStop) {
-        Log.i("Stopped dropping process.");
-        break;
-      }
-      app.markDropped(cache.getGeocode());
-    }
- catch (    Exception e) {
-      Log.e("cgeocaches.DropDetailsThread: " + e.toString());
-    }
-  }
-  cacheListTemp.clear();
+  app.markDropped(selected);
   handler.sendEmptyMessage(MSG_DONE);
 }
