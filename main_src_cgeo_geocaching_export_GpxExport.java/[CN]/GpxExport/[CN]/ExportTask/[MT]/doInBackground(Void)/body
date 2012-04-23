@@ -163,24 +163,21 @@
       publishProgress(i + 1);
     }
     gpx.write("</gpx>");
+    gpx.close();
   }
  catch (  Exception e) {
     Log.e("GpxExport.ExportTask export",e);
-    if (exportFile.exists()) {
-      exportFile.delete();
-    }
-    return false;
-  }
- finally {
     if (gpx != null) {
       try {
         gpx.close();
       }
- catch (      IOException e) {
-        Log.e("GpxExport.ExportTask export",e);
-        return false;
+ catch (      IOException ee) {
       }
     }
+    if (exportFile.exists()) {
+      exportFile.delete();
+    }
+    return false;
   }
   return true;
 }
