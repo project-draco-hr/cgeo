@@ -8,7 +8,7 @@
   }
   if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
     for (    cgWaypoint waypoint : cache.getWaypoints()) {
-      storeWaypointStaticMap(cache,edge,waypoint,false);
+      storeWaypointStaticMap(cache.getGeocode(),edge,waypoint,false);
     }
   }
 }
