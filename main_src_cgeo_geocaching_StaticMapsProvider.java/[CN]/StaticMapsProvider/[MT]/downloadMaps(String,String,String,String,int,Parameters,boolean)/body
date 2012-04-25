@@ -1,11 +1,11 @@
 {
   if (waitForResult) {
-    downloadDifferentZooms(cache,markerUrl,prefix,latlonMap,edge,waypoints);
+    downloadDifferentZooms(geocode,markerUrl,prefix,latlonMap,edge,waypoints);
   }
  else {
     final Runnable currentTask=new Runnable(){
       @Override public void run(){
-        downloadDifferentZooms(cache,markerUrl,prefix,latlonMap,edge,waypoints);
+        downloadDifferentZooms(geocode,markerUrl,prefix,latlonMap,edge,waypoints);
       }
     }
 ;
