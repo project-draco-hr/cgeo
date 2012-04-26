@@ -16,7 +16,7 @@
     return StatusCode.CONNECTION_FAILED;
   }
   if (Login.getLoginStatus(loginData)) {
-    Log.i("Already logged in Geocaching.com as " + login.left);
+    Log.i("Already logged in Geocaching.com as " + login.left + " ("+ Settings.getMemberStatus()+ ')');
     Login.switchToEnglish(loginData);
     return StatusCode.NO_ERROR;
   }
@@ -36,7 +36,7 @@
     return StatusCode.COMMUNICATION_ERROR;
   }
   if (Login.getLoginStatus(loginData)) {
-    Log.i("Successfully logged in Geocaching.com as " + login.left);
+    Log.i("Successfully logged in Geocaching.com as " + login.left + " ("+ Settings.getMemberStatus()+ ')');
     Login.switchToEnglish(loginData);
     Settings.setCookieStore(Cookies.dumpCookieStore());
     return StatusCode.NO_ERROR;
