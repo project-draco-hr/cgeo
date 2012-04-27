@@ -1,0 +1,9 @@
+{
+  if (provider.equals(LocationManager.GPS_PROVIDER)) {
+    return LocationProviderType.GPS;
+  }
+  if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
+    return LocationProviderType.NETWORK;
+  }
+  return LocationProviderType.LAST;
+}

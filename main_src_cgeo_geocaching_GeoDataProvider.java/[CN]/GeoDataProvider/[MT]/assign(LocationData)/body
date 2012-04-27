@@ -1,0 +1,8 @@
+{
+  if (locationData.location == null) {
+    return;
+  }
+  current.location=locationData.location;
+  notifyObservers(current.makeImmutable());
+  Go4Cache.signalCoordinates(current.getCoordsNow());
+}

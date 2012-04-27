@@ -1,6 +1,6 @@
 {
   geoManager.addGpsStatusListener(gpsStatusListener);
-  for (  final AbstractLocationListener listener : new AbstractLocationListener[]{networkListener,gpsListener}) {
+  for (  final Listener listener : new Listener[]{networkListener,gpsListener}) {
     try {
       geoManager.requestLocationUpdates(listener.locationProvider,0,0,listener);
     }
