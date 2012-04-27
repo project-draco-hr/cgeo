@@ -4,34 +4,32 @@ switch (event) {
 case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
 {
       final GpsStatus status=geoManager.getGpsStatus(null);
-      int satellites=0;
+      int visible=0;
       int fixed=0;
       for (      final GpsSatellite satellite : status.getSatellites()) {
         if (satellite.usedInFix()) {
           fixed++;
         }
-        satellites++;
+        visible++;
       }
-      if (satellites != current.satellitesVisible || fixed != current.satellitesFixed) {
-        current.satellitesVisible=satellites;
-        current.satellitesFixed=fixed;
+      if (visible != satellitesVisible || fixed != satellitesFixed) {
+        satellitesVisible=visible;
+        satellitesFixed=fixed;
         changed=true;
       }
       break;
     }
 case GpsStatus.GPS_EVENT_STARTED:
-  if (!current.gpsEnabled) {
-    current.gpsEnabled=true;
-    current.satellitesFixed=0;
-    current.satellitesVisible=0;
+  if (!gpsEnabled) {
+    gpsEnabled=true;
     changed=true;
   }
 break;
 case GpsStatus.GPS_EVENT_STOPPED:
-if (current.gpsEnabled) {
-current.gpsEnabled=false;
-current.satellitesFixed=0;
-current.satellitesVisible=0;
+if (gpsEnabled) {
+gpsEnabled=false;
+satellitesFixed=0;
+satellitesVisible=0;
 changed=true;
 }
 break;

@@ -1,6 +1,6 @@
 {
   if (gpsLocation.isRecent() || !netLocation.isValid()) {
-    return gpsLocation;
+    return gpsLocation.isValid() ? gpsLocation : null;
   }
   if (!gpsLocation.isValid()) {
     return netLocation;

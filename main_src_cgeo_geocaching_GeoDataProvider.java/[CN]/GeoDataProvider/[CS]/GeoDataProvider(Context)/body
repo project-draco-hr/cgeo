@@ -1,5 +1,5 @@
 {
   geoManager=(LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
   unregisterer.start();
-  notifyObservers(new GeoData());
+  notifyObservers(new GeoData(new Location(LAST_LOCATION_PSEUDO_PROVIDER),false,0,0));
 }
