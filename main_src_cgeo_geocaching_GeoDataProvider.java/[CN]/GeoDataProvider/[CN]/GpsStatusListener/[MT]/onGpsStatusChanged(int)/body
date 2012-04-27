@@ -1,4 +1,5 @@
 {
+  boolean changed=false;
   if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
     final GpsStatus status=geoManager.getGpsStatus(null);
     final Iterator<GpsSatellite> statusIterator=status.getSatellites().iterator();
@@ -11,7 +12,6 @@
       }
       satellites++;
     }
-    boolean changed=false;
     if (satellites != current.satellitesVisible) {
       current.satellitesVisible=satellites;
       changed=true;
@@ -20,8 +20,20 @@
       current.satellitesFixed=fixed;
       changed=true;
     }
-    if (changed) {
-      selectBest(null);
-    }
+  }
+ else   if (event == GpsStatus.GPS_EVENT_STARTED && !current.gpsEnabled) {
+    current.gpsEnabled=true;
+    current.satellitesFixed=0;
+    current.satellitesVisible=0;
+    changed=true;
+  }
+ else   if (event == GpsStatus.GPS_EVENT_STOPPED && current.gpsEnabled) {
+    current.gpsEnabled=false;
+    current.satellitesFixed=0;
+    current.satellitesVisible=0;
+    changed=true;
+  }
+  if (changed) {
+    selectBest(null);
   }
 }
