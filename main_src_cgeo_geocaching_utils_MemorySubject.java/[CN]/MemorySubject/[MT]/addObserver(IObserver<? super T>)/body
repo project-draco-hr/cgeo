@@ -1,0 +1,7 @@
+{
+  final boolean added=super.addObserver(observer);
+  if (added && memory != null) {
+    observer.update(memory);
+  }
+  return added;
+}
