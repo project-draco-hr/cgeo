@@ -57,13 +57,13 @@
     final View wpNavView=waypointView.findViewById(R.id.wpDefaultNavigation);
     wpNavView.setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      View v){
-        NavigationAppFactory.startDefaultNavigationApplication(geolocation,CacheDetailActivity.this,null,wpt,null);
+        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(),CacheDetailActivity.this,null,wpt,null);
       }
     }
 );
     wpNavView.setOnLongClickListener(new View.OnLongClickListener(){
       @Override public boolean onLongClick(      View v){
-        NavigationAppFactory.startDefaultNavigationApplication2(geolocation,CacheDetailActivity.this,null,wpt,null);
+        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(),CacheDetailActivity.this,null,wpt,null);
         return true;
       }
     }

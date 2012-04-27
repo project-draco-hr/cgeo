@@ -2,7 +2,5 @@
   if (StringUtils.isBlank(geocode)) {
     return null;
   }
-  cgTrackable trackable=null;
-  trackable=storage.loadTrackable(geocode);
-  return trackable;
+  return storage.loadTrackable(geocode);
 }

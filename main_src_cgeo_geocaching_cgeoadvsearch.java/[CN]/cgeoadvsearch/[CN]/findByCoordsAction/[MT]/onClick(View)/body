@@ -1,5 +1,5 @@
 {
-  cgeocoords coordsDialog=new cgeocoords(cgeoadvsearch.this,null,null,geo);
+  cgeocoords coordsDialog=new cgeocoords(cgeoadvsearch.this,null,null,app.currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
     @Override public void update(    Geopoint gp){

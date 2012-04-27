@@ -1,5 +1,6 @@
 {
   super.onResume();
+  app.addGeoObserver(locationUpdater);
   gpsEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
   locationManager.addGpsStatusListener(gpsListener);
   updateUserInfoHandler.sendEmptyMessage(-1);

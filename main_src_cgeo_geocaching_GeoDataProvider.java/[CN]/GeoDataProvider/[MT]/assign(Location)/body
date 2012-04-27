@@ -1,0 +1,29 @@
+{
+  if (loc == null) {
+    current.locationProvider=LocationProviderType.LAST;
+    return;
+  }
+  current.location=loc;
+  final String provider=current.location.getProvider();
+  if (provider.equals(LocationManager.GPS_PROVIDER)) {
+    current.locationProvider=LocationProviderType.GPS;
+  }
+ else   if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
+    current.locationProvider=LocationProviderType.NETWORK;
+  }
+ else   if (provider.equalsIgnoreCase(LAST_LOCATION_PSEUDO_PROVIDER)) {
+    current.locationProvider=LocationProviderType.LAST;
+  }
+  current.coordsNow=new Geopoint(current.location.getLatitude(),current.location.getLongitude());
+  cgeoapplication.getInstance().setLastCoords(current.coordsNow);
+  final Location location=current.location;
+  final LocationProviderType locationProvider=current.locationProvider;
+  current.altitudeNow=location.hasAltitude() && locationProvider != LocationProviderType.LAST ? location.getAltitude() + Settings.getAltCorrection() : null;
+  current.bearingNow=location.hasBearing() && locationProvider != LocationProviderType.LAST ? location.getBearing() : 0f;
+  current.speedNow=location.hasSpeed() && locationProvider != LocationProviderType.LAST ? location.getSpeed() : 0f;
+  current.accuracyNow=location.hasAccuracy() && locationProvider != LocationProviderType.LAST ? location.getAccuracy() : 999f;
+  notifyObservers(current.makeImmutable());
+  if (locationProvider == LocationProviderType.GPS || locationProvider == LocationProviderType.NETWORK) {
+    Go4Cache.signalCoordinates(current.coordsNow);
+  }
+}

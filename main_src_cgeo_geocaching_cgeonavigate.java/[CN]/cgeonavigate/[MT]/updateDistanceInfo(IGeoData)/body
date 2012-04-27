@@ -1,0 +1,14 @@
+{
+  if (geo.getCoordsNow() == null || dstCoords == null) {
+    return;
+  }
+  if (distanceView == null) {
+    distanceView=(TextView)findViewById(R.id.distance);
+  }
+  if (headingView == null) {
+    headingView=(TextView)findViewById(R.id.heading);
+  }
+  cacheHeading=geo.getCoordsNow().bearingTo(dstCoords);
+  distanceView.setText(HumanDistance.getHumanDistance(geo.getCoordsNow().distanceTo(dstCoords)));
+  headingView.setText(Math.round(cacheHeading) + "??");
+}

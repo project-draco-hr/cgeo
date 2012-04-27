@@ -14,9 +14,6 @@
   if (app.firstRun) {
     (new firstLogin()).start();
   }
-  if (geo == null) {
-    geo=app.startGeo(new UpdateLocation());
-  }
   final View findOnMap=findViewById(R.id.map);
   findOnMap.setClickable(true);
   findOnMap.setOnClickListener(new OnClickListener(){

@@ -2,9 +2,6 @@
   if (loadDetailsThread != null) {
     loadDetailsThread.stopIt();
   }
-  if (geo == null) {
-    geo=app.startGeo(geoUpdate);
-  }
   if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(activity,dirUpdate);
   }

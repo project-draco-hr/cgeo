@@ -1,0 +1,27 @@
+{
+  if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
+    final GpsStatus status=geoManager.getGpsStatus(null);
+    final Iterator<GpsSatellite> statusIterator=status.getSatellites().iterator();
+    int satellites=0;
+    int fixed=0;
+    while (statusIterator.hasNext()) {
+      final GpsSatellite sat=statusIterator.next();
+      if (sat.usedInFix()) {
+        fixed++;
+      }
+      satellites++;
+    }
+    boolean changed=false;
+    if (satellites != current.satellitesVisible) {
+      current.satellitesVisible=satellites;
+      changed=true;
+    }
+    if (fixed != current.satellitesFixed) {
+      current.satellitesFixed=fixed;
+      changed=true;
+    }
+    if (changed) {
+      selectBest(null);
+    }
+  }
+}

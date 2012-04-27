@@ -1,0 +1,54 @@
+{
+  try {
+    if (navType == null || navLocation == null || navAccuracy == null) {
+      navType=(TextView)findViewById(R.id.nav_type);
+      navAccuracy=(TextView)findViewById(R.id.nav_accuracy);
+      navSatellites=(TextView)findViewById(R.id.nav_satellites);
+      navLocation=(TextView)findViewById(R.id.nav_location);
+    }
+    if (geo.getCoordsNow() != null) {
+      String satellites=null;
+      if (geo.getSatellitesFixed() > 0) {
+        satellites=res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed()+ "/"+ geo.getSatellitesVisible();
+      }
+ else       if (geo.getSatellitesVisible() >= 0) {
+        satellites=res.getString(R.string.loc_sat) + ": 0/" + geo.getSatellitesVisible();
+      }
+ else {
+        satellites="";
+      }
+      navSatellites.setText(satellites);
+      navType.setText(res.getString(geo.getLocationProvider().resourceId));
+      if (geo.getAccuracyNow() >= 0) {
+        if (Settings.isUseMetricUnits()) {
+          navAccuracy.setText("??" + Math.round(geo.getAccuracyNow()) + " m");
+        }
+ else {
+          navAccuracy.setText("??" + Math.round(geo.getAccuracyNow() * IConversion.METERS_TO_FEET) + " ft");
+        }
+      }
+ else {
+        navAccuracy.setText(null);
+      }
+      if (geo.getAltitudeNow() != null) {
+        final String humanAlt=HumanDistance.getHumanDistance(geo.getAltitudeNow().floatValue() / 1000);
+        navLocation.setText(geo.getCoordsNow() + " | " + humanAlt);
+      }
+ else {
+        navLocation.setText(geo.getCoordsNow().toString());
+      }
+      updateDistanceInfo(geo);
+    }
+ else {
+      navType.setText(null);
+      navAccuracy.setText(null);
+      navLocation.setText(res.getString(R.string.loc_trying));
+    }
+    if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) {
+      northHeading=geo.getBearingNow();
+    }
+  }
+ catch (  Exception e) {
+    Log.w("Failed to LocationUpdater location.");
+  }
+}

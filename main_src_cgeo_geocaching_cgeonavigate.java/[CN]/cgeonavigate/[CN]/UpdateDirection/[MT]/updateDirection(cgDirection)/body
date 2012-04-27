@@ -2,7 +2,7 @@
   if (dir == null || dir.directionNow == null) {
     return;
   }
-  if (geo == null || geo.speedNow <= 5) {
+  if (app.currentGeo().getSpeedNow() <= 5) {
     northHeading=dir.directionNow;
   }
 }

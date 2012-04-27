@@ -4,9 +4,10 @@
   final String latText=latView.getText().toString();
   final String lonText=lonView.getText().toString();
   if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
-    if (geo.coordsNow != null) {
-      latView.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE));
-      lonView.setText(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE));
+    final IGeoData geo=app.currentGeo();
+    if (geo.getCoordsNow() != null) {
+      latView.setText(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE));
+      lonView.setText(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE));
     }
   }
  else {

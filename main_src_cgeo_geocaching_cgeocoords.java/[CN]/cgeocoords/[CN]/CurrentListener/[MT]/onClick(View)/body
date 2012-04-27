@@ -1,8 +1,8 @@
 {
-  if (geo == null || geo.coordsNow == null) {
+  if (geo == null || geo.getCoordsNow() == null) {
     context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
     return;
   }
-  gp=geo.coordsNow;
+  gp=geo.getCoordsNow();
   updateGUI();
 }

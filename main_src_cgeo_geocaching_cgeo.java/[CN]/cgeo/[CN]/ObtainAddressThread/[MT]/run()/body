@@ -1,14 +1,12 @@
 {
-  if (geo == null) {
-    return;
-  }
   if (addressObtaining) {
     return;
   }
   addressObtaining=true;
   try {
     final Geocoder geocoder=new Geocoder(cgeo.this,Locale.getDefault());
-    addresses=geocoder.getFromLocation(geo.coordsNow.getLatitude(),geo.coordsNow.getLongitude(),1);
+    final Geopoint coords=app.currentGeo().getCoordsNow();
+    addresses=geocoder.getFromLocation(coords.getLatitude(),coords.getLongitude(),1);
   }
  catch (  Exception e) {
     Log.i("Failed to obtain address");

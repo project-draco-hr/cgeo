@@ -22,9 +22,7 @@
     adapter.notifyDataSetChanged();
   }
   adapter.reFilter();
-  if (geo != null) {
-    adapter.setActualCoordinates(geo.coordsNow);
-  }
+  adapter.setActualCoordinates(app.currentGeo().getCoordsNow());
   if (dir != null) {
     adapter.setActualHeading(dir.directionNow);
   }

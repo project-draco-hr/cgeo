@@ -31,9 +31,6 @@
   ActivityMixin.setTheme(activity);
   activity.setContentView(mapProvider.getMapLayoutId());
   ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
-  if (geo == null) {
-    geo=app.startGeo(geoUpdate);
-  }
   if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(activity,dirUpdate);
   }
@@ -59,9 +56,6 @@
   mapView.repaintRequired(null);
   mapController=mapView.getMapController();
   mapController.setZoom(Settings.getMapZoom());
-  if (geo != null) {
-    geoUpdate.updateLocation(geo);
-  }
   if (dir != null) {
     dirUpdate.updateDirection(dir);
   }

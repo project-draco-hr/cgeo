@@ -1,0 +1,21 @@
+{
+  if (adapter == null) {
+    return;
+  }
+  try {
+    if (cacheList != null && geo.getCoordsNow() != null) {
+      adapter.setActualCoordinates(geo.getCoordsNow());
+    }
+    if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) {
+      if (!Settings.isUseCompass()) {
+        adapter.setActualHeading(geo.getBearingNow());
+      }
+      if (northHeading != null) {
+        adapter.setActualHeading(northHeading);
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w("Failed to UpdateLocation location.");
+  }
+}

@@ -1,8 +1,6 @@
 {
   initialized=false;
+  app.deleteGeoObserver(locationUpdater);
   locationManager.removeGpsStatusListener(gpsListener);
-  if (geo != null) {
-    geo=app.removeGeo();
-  }
   super.onPause();
 }

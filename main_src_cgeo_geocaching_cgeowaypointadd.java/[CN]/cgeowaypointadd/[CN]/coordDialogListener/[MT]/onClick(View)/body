@@ -7,7 +7,7 @@
     gp=gpTemp;
   }
   cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
-  cgeocoords coordsDialog=new cgeocoords(cgeowaypointadd.this,cache,gp,geo);
+  cgeocoords coordsDialog=new cgeocoords(cgeowaypointadd.this,cache,gp,app.currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
     @Override public void update(    final Geopoint gp){

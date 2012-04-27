@@ -1,5 +1,10 @@
 {
   super.onCreate(savedInstanceState);
+  if (CollectionUtils.isNotEmpty(cacheList)) {
+    setMoreCaches();
+  }
+  setTitle(title);
+  setAdapter();
   app.setAction(action);
   setTheme();
   setContentView(R.layout.caches);
@@ -20,7 +25,6 @@
       coords=new Geopoint(0.0,0.0);
     }
   }
-  init();
   Thread threadPure;
   cgSearchThread thread;
 switch (type) {

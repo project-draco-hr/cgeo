@@ -1,24 +1,20 @@
 {
   super.onCreate(savedInstanceState);
   app.setAction(null);
-  app.cleanGeo();
   app.cleanDir();
   setContentView(R.layout.main);
   setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
   try {
-    PackageManager manager=this.getPackageManager();
-    PackageInfo info=manager.getPackageInfo(this.getPackageName(),0);
+    final PackageInfo info=getPackageManager().getPackageInfo(this.getPackageName(),0);
     version=info.versionCode;
-    Log.i("Starting " + info.packageName + " "+ info.versionCode+ " a.k.a "+ info.versionName+ "...");
-    info=null;
-    manager=null;
+    Log.i("Starting " + info.packageName + " "+ info.versionCode+ " a.k.a "+ info.versionName+ "???");
   }
- catch (  Exception e) {
+ catch (  final NameNotFoundException e) {
     Log.i("No info.");
   }
   try {
     if (!Settings.isHelpShown()) {
-      RelativeLayout helper=(RelativeLayout)findViewById(R.id.helper);
+      final RelativeLayout helper=(RelativeLayout)findViewById(R.id.helper);
       if (helper != null) {
         helper.setVisibility(View.VISIBLE);
         helper.setClickable(true);

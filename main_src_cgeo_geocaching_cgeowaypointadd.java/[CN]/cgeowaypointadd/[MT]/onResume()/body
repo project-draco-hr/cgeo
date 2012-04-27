@@ -1,8 +1,6 @@
 {
   super.onResume();
-  if (geo == null) {
-    geo=app.startGeo(geoUpdate);
-  }
+  app.addGeoObserver(this);
   if (id > 0) {
     if (waitDialog == null) {
       waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);

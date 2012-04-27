@@ -1,0 +1,21 @@
+{
+  try {
+    if (latEdit == null) {
+      latEdit=(EditText)findViewById(R.id.latitude);
+    }
+    if (lonEdit == null) {
+      lonEdit=(EditText)findViewById(R.id.longitude);
+    }
+    if (geo.getCoordsNow() != null) {
+      if (latEdit != null) {
+        latEdit.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+      }
+      if (lonEdit != null) {
+        lonEdit.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w("Failed to update location.");
+  }
+}

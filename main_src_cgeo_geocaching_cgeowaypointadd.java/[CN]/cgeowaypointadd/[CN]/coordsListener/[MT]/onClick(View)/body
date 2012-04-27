@@ -17,12 +17,15 @@
       return;
     }
   }
- else   if (geo == null || geo.coordsNow == null) {
-    showToast(res.getString(R.string.err_point_curr_position_unavailable));
-    return;
-  }
  else {
-    coords=geo.coordsNow;
+    final IGeoData geo=app.currentGeo();
+    if (geo.getCoordsNow() == null) {
+      showToast(res.getString(R.string.err_point_curr_position_unavailable));
+      return;
+    }
+ else {
+      coords=geo.getCoordsNow();
+    }
   }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     double bearing=0;

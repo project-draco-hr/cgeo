@@ -1,14 +1,13 @@
 {
   super.onResume();
   init();
-  if (adapter != null && geo != null && geo.coordsNow != null) {
-    adapter.setActualCoordinates(geo.coordsNow);
-    adapter.setActualHeading(northHeading);
-  }
   if (adapter != null) {
     adapter.setSelectMode(false,true);
-    if (geo != null && geo.coordsNow != null) {
-      adapter.forceSort(geo.coordsNow);
+    final Geopoint coordsNow=app.currentGeo().getCoordsNow();
+    if (coordsNow != null) {
+      adapter.setActualCoordinates(coordsNow);
+      adapter.setActualHeading(northHeading);
+      adapter.forceSort(coordsNow);
     }
   }
   if (loadCachesHandler != null && search != null) {

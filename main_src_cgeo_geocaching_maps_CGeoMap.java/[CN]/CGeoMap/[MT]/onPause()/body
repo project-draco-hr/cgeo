@@ -10,9 +10,7 @@
   if (dir != null) {
     dir=app.removeDir();
   }
-  if (geo != null) {
-    geo=app.removeGeo();
-  }
+  app.deleteGeoObserver(geoUpdate);
   savePrefs();
   if (mapView != null) {
     mapView.destroyDrawingCache();

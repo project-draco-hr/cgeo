@@ -1,8 +1,6 @@
 {
   super.onResume();
-  if (geolocation == null) {
-    geolocation=app.startGeo(locationUpdater);
-  }
+  app.addGeoObserver(locationUpdater);
   if (refreshOnResume) {
     notifyDataSetChanged();
     refreshOnResume=false;

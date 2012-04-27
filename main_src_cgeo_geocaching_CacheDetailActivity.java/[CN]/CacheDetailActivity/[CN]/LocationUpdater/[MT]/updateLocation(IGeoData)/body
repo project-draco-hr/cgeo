@@ -1,0 +1,35 @@
+{
+  if (cacheDistanceView == null) {
+    return;
+  }
+  try {
+    StringBuilder dist=new StringBuilder();
+    if (geo.getCoordsNow() != null && cache != null && cache.getCoords() != null) {
+      dist.append(HumanDistance.getHumanDistance(geo.getCoordsNow().distanceTo(cache.getCoords())));
+    }
+    if (cache != null && cache.getElevation() != null) {
+      if (geo.getAltitudeNow() != null) {
+        double diff=(cache.getElevation() - geo.getAltitudeNow());
+        if (diff >= 0) {
+          dist.append(" ???");
+        }
+ else         if (diff < 0) {
+          dist.append(" ???");
+        }
+        if (Settings.isUseMetricUnits()) {
+          dist.append(Math.abs((int)diff));
+          dist.append(" m");
+        }
+ else {
+          dist.append(Math.abs((int)(diff * IConversion.METERS_TO_FEET)));
+          dist.append(" ft");
+        }
+      }
+    }
+    cacheDistanceView.setText(dist.toString());
+    cacheDistanceView.bringToFront();
+  }
+ catch (  Exception e) {
+    Log.w("Failed to update location.");
+  }
+}

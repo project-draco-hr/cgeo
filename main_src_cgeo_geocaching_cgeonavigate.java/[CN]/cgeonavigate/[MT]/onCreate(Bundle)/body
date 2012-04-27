@@ -3,9 +3,6 @@
   setTheme();
   setContentView(R.layout.navigate);
   setTitle(res.getString(R.string.compass_title));
-  if (geo == null) {
-    geo=app.startGeo(geoUpdate);
-  }
   if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(this,dirUpdate);
   }
@@ -33,9 +30,6 @@
   setGo4CacheAction();
   setTitle();
   setDestCoords();
-  if (geo != null) {
-    geoUpdate.updateLocation(geo);
-  }
   if (dir != null) {
     dirUpdate.updateDirection(dir);
   }

@@ -1,7 +1,7 @@
 {
-  if (geo == null || geo.coordsNow == null) {
+  if (app.currentGeo().getCoordsNow() == null) {
     return;
   }
   findViewById(R.id.nearest).setPressed(true);
-  cgeocaches.startActivityNearest(this,geo.coordsNow);
+  cgeocaches.startActivityNearest(this,app.currentGeo().getCoordsNow());
 }

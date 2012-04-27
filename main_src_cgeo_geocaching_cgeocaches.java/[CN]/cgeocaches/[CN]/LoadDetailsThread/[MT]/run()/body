@@ -40,5 +40,6 @@
     last=System.currentTimeMillis();
   }
   cacheListTemp.clear();
+  handler.sendEmptyMessage(MSG_RESTART_GEO_AND_DIR);
   handler.sendEmptyMessage(MSG_DONE);
 }

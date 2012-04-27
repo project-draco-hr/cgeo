@@ -1,9 +1,10 @@
 {
-  if (geo == null || geo.coordsNow == null) {
+  final Geopoint coords=app.currentGeo().getCoordsNow();
+  if (coords == null) {
     showToast(res.getString(R.string.err_point_unknown_position));
     return;
   }
-  latButton.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE));
-  lonButton.setText(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE));
+  latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
+  lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
   changed=false;
 }

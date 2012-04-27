@@ -1,0 +1,71 @@
+{
+  final View nearestView=findViewById(R.id.nearest);
+  final TextView navType=(TextView)findViewById(R.id.nav_type);
+  final TextView navAccuracy=(TextView)findViewById(R.id.nav_accuracy);
+  final TextView navLocation=(TextView)findViewById(R.id.nav_location);
+  try {
+    if (geo.getCoordsNow() != null) {
+      if (!nearestView.isClickable()) {
+        nearestView.setFocusable(true);
+        nearestView.setClickable(true);
+        nearestView.setOnClickListener(new OnClickListener(){
+          public void onClick(          View v){
+            cgeoFindNearest(v);
+          }
+        }
+);
+        nearestView.setBackgroundResource(R.drawable.main_nearby);
+      }
+      if (!gpsEnabled) {
+        satellitesHandler.noGps();
+      }
+ else {
+        satellitesHandler.satellites(geo.getSatellitesFixed(),geo.getSatellitesVisible());
+      }
+      navType.setText(res.getString(geo.getLocationProvider().resourceId));
+      if (geo.getAccuracyNow() >= 0) {
+        int speed=Math.round(geo.getSpeedNow()) * 60 * 60 / 1000;
+        if (Settings.isUseMetricUnits()) {
+          navAccuracy.setText("??" + Math.round(geo.getAccuracyNow()) + " m"+ Formatter.SEPARATOR+ speed+ " km/h");
+        }
+ else {
+          navAccuracy.setText("??" + Math.round(geo.getAccuracyNow() * IConversion.METERS_TO_FEET) + " ft"+ Formatter.SEPARATOR+ speed / IConversion.MILES_TO_KILOMETER + " mph");
+        }
+      }
+ else {
+        navAccuracy.setText(null);
+      }
+      if (Settings.isShowAddress()) {
+        if (addCoords == null) {
+          navLocation.setText(res.getString(R.string.loc_no_addr));
+        }
+        if (addCoords == null || (geo.getCoordsNow().distanceTo(addCoords) > 0.5 && !addressObtaining)) {
+          (new ObtainAddressThread()).start();
+        }
+      }
+ else {
+        if (geo.getAltitudeNow() != null) {
+          final String humanAlt=HumanDistance.getHumanDistance(geo.getAltitudeNow().floatValue() / 1000);
+          navLocation.setText(geo.getCoordsNow() + " | " + humanAlt);
+        }
+ else {
+          navLocation.setText(geo.getCoordsNow().toString());
+        }
+      }
+    }
+ else {
+      if (nearestView.isClickable()) {
+        nearestView.setFocusable(false);
+        nearestView.setClickable(false);
+        nearestView.setOnClickListener(null);
+        nearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
+      }
+      navType.setText(null);
+      navAccuracy.setText(null);
+      navLocation.setText(res.getString(R.string.loc_trying));
+    }
+  }
+ catch (  Exception e) {
+    Log.w("Failed to update location.");
+  }
+}

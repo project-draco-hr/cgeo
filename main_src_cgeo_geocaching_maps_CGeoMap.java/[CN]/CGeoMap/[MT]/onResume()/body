@@ -4,13 +4,10 @@
     return;
   }
   app.setAction(StringUtils.defaultIfBlank(geocodeIntent,null));
-  if (geo == null) {
-    geo=app.startGeo(geoUpdate);
-  }
+  app.addGeoObserver(geoUpdate);
   if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(activity,dirUpdate);
   }
-  geoUpdate.updateLocation(geo);
   if (dir != null) {
     dirUpdate.updateDirection(dir);
   }

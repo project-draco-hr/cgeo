@@ -5,10 +5,8 @@
   if (dir != null) {
     dir=app.removeDir();
   }
-  if (geo != null) {
-    geo=app.removeGeo();
-  }
-  for (  String geocode : geocodes) {
+  app.deleteGeoObserver(geoUpdate);
+  for (  final String geocode : geocodes) {
     try {
       if (handler.isCancelled()) {
         break;
@@ -43,4 +41,5 @@
     last=System.currentTimeMillis();
   }
   handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
+  app.addGeoObserver(geoUpdate);
 }

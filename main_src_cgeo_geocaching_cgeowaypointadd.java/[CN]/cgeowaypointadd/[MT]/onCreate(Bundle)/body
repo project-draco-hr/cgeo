@@ -3,9 +3,6 @@
   setTheme();
   setContentView(R.layout.waypoint_new);
   setTitle("waypoint");
-  if (geo == null) {
-    geo=app.startGeo(geoUpdate);
-  }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString("geocode");

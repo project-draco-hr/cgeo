@@ -1,9 +1,7 @@
 {
   super.onResume();
   setGo4CacheAction();
-  if (geo == null) {
-    geo=app.startGeo(geoUpdate);
-  }
+  app.addGeoObserver(this);
   if (Settings.isUseCompass() && dir == null) {
     dir=app.startDir(this,dirUpdate);
   }

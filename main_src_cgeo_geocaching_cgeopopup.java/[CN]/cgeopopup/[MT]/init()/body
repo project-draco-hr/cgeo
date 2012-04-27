@@ -1,7 +1,4 @@
 {
-  if (geo == null) {
-    geo=app.startGeo(geoUpdate);
-  }
   app.setAction(geocode);
   cache=app.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   if (cache == null) {
@@ -205,8 +202,5 @@
   }
  catch (  Exception e) {
     Log.e("cgeopopup.init: " + e.toString());
-  }
-  if (geo != null) {
-    geoUpdate.updateLocation(geo);
   }
 }
