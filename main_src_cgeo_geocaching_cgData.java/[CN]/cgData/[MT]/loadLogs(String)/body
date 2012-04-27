@@ -22,7 +22,7 @@
         log=new LogEntry(cursor.getString(indexAuthor),cursor.getLong(indexDate),LogType.getById(cursor.getInt(indexType)),cursor.getString(indexLog));
         log.id=cursor.getInt(indexLogsId);
         log.found=cursor.getInt(indexFound);
-        log.friend=cursor.getInt(indexFriend) == 1 ? true : false;
+        log.friend=cursor.getInt(indexFriend) == 1;
         logs.add(log);
       }
       if (!cursor.isNull(indexLogImagesId)) {

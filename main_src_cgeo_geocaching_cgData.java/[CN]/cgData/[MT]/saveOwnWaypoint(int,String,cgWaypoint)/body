@@ -24,12 +24,7 @@
     }
  else {
       final int rows=databaseRW.update(dbTableWaypoints,values,"_id = " + id,null);
-      if (rows > 0) {
-        ok=true;
-      }
- else {
-        ok=false;
-      }
+      ok=rows > 0;
     }
     databaseRW.setTransactionSuccessful();
   }
