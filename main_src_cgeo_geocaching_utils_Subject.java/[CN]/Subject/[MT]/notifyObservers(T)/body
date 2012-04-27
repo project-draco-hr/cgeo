@@ -1,0 +1,7 @@
+{
+  final boolean nonEmpty=!observers.isEmpty();
+  for (  final IObserver<? super T> observer : observers) {
+    observer.update(arg);
+  }
+  return nonEmpty;
+}

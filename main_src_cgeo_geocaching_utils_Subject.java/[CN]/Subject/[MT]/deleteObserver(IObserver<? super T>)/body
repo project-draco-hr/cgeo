@@ -1,0 +1,7 @@
+{
+  final boolean removed=observers.remove(observer);
+  if (removed && observers.isEmpty()) {
+    onLastObserver();
+  }
+  return removed;
+}
