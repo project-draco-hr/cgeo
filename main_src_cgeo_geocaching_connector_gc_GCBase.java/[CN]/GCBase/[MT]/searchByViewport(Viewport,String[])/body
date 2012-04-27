@@ -1,13 +1,13 @@
 {
   Strategy strategy=Settings.getLiveMapStrategy();
   if (strategy == Strategy.AUTO) {
-    float speedNow=cgeoapplication.getInstance().currentGeo().getSpeedNow();
+    float speedNow=cgeoapplication.getInstance().currentGeo().getSpeed();
     strategy=speedNow >= 8 ? Strategy.FAST : Strategy.DETAILED;
   }
 {
     SearchResult result=searchByViewport(viewport,tokens,strategy);
     String text=Formatter.SEPARATOR + strategy.getL10n() + Formatter.SEPARATOR;
-    int speed=(int)cgeoapplication.getInstance().currentGeo().getSpeedNow();
+    int speed=(int)cgeoapplication.getInstance().currentGeo().getSpeed();
     if (Settings.isUseMetricUnits()) {
       text+=speed + " km/h";
     }

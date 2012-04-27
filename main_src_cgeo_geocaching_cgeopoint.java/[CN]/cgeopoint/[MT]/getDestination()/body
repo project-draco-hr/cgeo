@@ -19,11 +19,11 @@
     }
   }
  else {
-    if (app.currentGeo().getCoordsNow() == null) {
+    if (app.currentGeo().getCoords() == null) {
       showToast(res.getString(R.string.err_point_curr_position_unavailable));
       return null;
     }
-    coords=app.currentGeo().getCoordsNow();
+    coords=app.currentGeo().getCoords();
   }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     double bearing=0;

@@ -7,7 +7,7 @@
     if (overlayPosition != null && geo.getLocation() != null) {
       overlayPosition.setCoordinates(geo.getLocation());
     }
-    if (geo.getCoordsNow() != null) {
+    if (geo.getCoords() != null) {
       if (followMyLocation) {
         myLocationInMiddle(geo);
       }
@@ -15,8 +15,8 @@
         repaintRequired=true;
       }
     }
-    if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) {
-      overlayPosition.setHeading(geo.getBearingNow());
+    if (!Settings.isUseCompass() || geo.getSpeed() > 5) {
+      overlayPosition.setHeading(geo.getBearing());
       repaintRequired=true;
     }
     if (repaintRequired && mapView != null) {

@@ -3,12 +3,12 @@
     return;
   }
   try {
-    if (cacheList != null && geo.getCoordsNow() != null) {
-      adapter.setActualCoordinates(geo.getCoordsNow());
+    if (cacheList != null && geo.getCoords() != null) {
+      adapter.setActualCoordinates(geo.getCoords());
     }
-    if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) {
+    if (!Settings.isUseCompass() || geo.getSpeed() > 5) {
       if (!Settings.isUseCompass()) {
-        adapter.setActualHeading(geo.getBearingNow());
+        adapter.setActualHeading(geo.getBearing());
       }
       if (northHeading != null) {
         adapter.setActualHeading(northHeading);

@@ -6,7 +6,7 @@
       navSatellites=(TextView)findViewById(R.id.nav_satellites);
       navLocation=(TextView)findViewById(R.id.nav_location);
     }
-    if (geo.getCoordsNow() != null) {
+    if (geo.getCoords() != null) {
       String satellites=null;
       if (geo.getSatellitesFixed() > 0) {
         satellites=res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed()+ "/"+ geo.getSatellitesVisible();
@@ -19,23 +19,23 @@
       }
       navSatellites.setText(satellites);
       navType.setText(res.getString(geo.getLocationProvider().resourceId));
-      if (geo.getAccuracyNow() >= 0) {
+      if (geo.getAccuracy() >= 0) {
         if (Settings.isUseMetricUnits()) {
-          navAccuracy.setText("??" + Math.round(geo.getAccuracyNow()) + " m");
+          navAccuracy.setText("??" + Math.round(geo.getAccuracy()) + " m");
         }
  else {
-          navAccuracy.setText("??" + Math.round(geo.getAccuracyNow() * IConversion.METERS_TO_FEET) + " ft");
+          navAccuracy.setText("??" + Math.round(geo.getAccuracy() * IConversion.METERS_TO_FEET) + " ft");
         }
       }
  else {
         navAccuracy.setText(null);
       }
-      if (geo.getAltitudeNow() != null) {
-        final String humanAlt=HumanDistance.getHumanDistance(geo.getAltitudeNow().floatValue() / 1000);
-        navLocation.setText(geo.getCoordsNow() + " | " + humanAlt);
+      if (geo.getAltitude() != 0.0f) {
+        final String humanAlt=HumanDistance.getHumanDistance((float)geo.getAltitude() / 1000);
+        navLocation.setText(geo.getCoords() + " | " + humanAlt);
       }
  else {
-        navLocation.setText(geo.getCoordsNow().toString());
+        navLocation.setText(geo.getCoords().toString());
       }
       updateDistanceInfo(geo);
     }
@@ -44,8 +44,8 @@
       navAccuracy.setText(null);
       navLocation.setText(res.getString(R.string.loc_trying));
     }
-    if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) {
-      northHeading=geo.getBearingNow();
+    if (!Settings.isUseCompass() || geo.getSpeed() > 5) {
+      northHeading=geo.getBearing();
     }
   }
  catch (  Exception e) {

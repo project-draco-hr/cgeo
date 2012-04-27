@@ -1,5 +1,5 @@
 {
-  final Geopoint coordsNow=geo == null ? null : geo.getCoordsNow();
+  final Geopoint coordsNow=geo == null ? null : geo.getCoords();
   if (Settings.isUseGoogleNavigation()) {
     try {
       activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:ll=" + coords.getLatitude() + ","+ coords.getLongitude())));

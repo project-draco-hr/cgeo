@@ -3,7 +3,7 @@
   init();
   if (adapter != null) {
     adapter.setSelectMode(false,true);
-    final Geopoint coordsNow=app.currentGeo().getCoordsNow();
+    final Geopoint coordsNow=app.currentGeo().getCoords();
     if (coordsNow != null) {
       adapter.setActualCoordinates(coordsNow);
       adapter.setActualHeading(northHeading);
