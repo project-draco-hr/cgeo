@@ -16,12 +16,6 @@
 );
         nearestView.setBackgroundResource(R.drawable.main_nearby);
       }
-      if (!gpsEnabled) {
-        satellitesHandler.noGps();
-      }
- else {
-        satellitesHandler.satellites(geo.getSatellitesFixed(),geo.getSatellitesVisible());
-      }
       navType.setText(res.getString(geo.getLocationProvider().resourceId));
       if (geo.getAccuracyNow() >= 0) {
         int speed=Math.round(geo.getSpeedNow()) * 60 * 60 / 1000;
