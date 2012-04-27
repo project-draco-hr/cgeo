@@ -15,7 +15,6 @@
     current.locationProvider=LocationProviderType.LAST;
   }
   current.coordsNow=new Geopoint(current.location.getLatitude(),current.location.getLongitude());
-  cgeoapplication.getInstance().setLastCoords(current.coordsNow);
   final Location location=current.location;
   final LocationProviderType locationProvider=current.locationProvider;
   current.altitudeNow=location.hasAltitude() && locationProvider != LocationProviderType.LAST ? location.getAltitude() + Settings.getAltCorrection() : null;
