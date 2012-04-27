@@ -11,9 +11,10 @@ case R.id.log:
 switch (index) {
 case MENU_FIELD_COPY:
       ClipboardUtils.copyToClipboard(clickedItemText);
-    return true;
+    showToast(res.getString(R.string.clipboard_copy_ok));
+  return true;
 case MENU_FIELD_TRANSLATE:
-  TranslationUtils.startActivityTranslate(this,Locale.getDefault().getLanguage(),clickedItemText.toString());
+TranslationUtils.startActivityTranslate(this,Locale.getDefault().getLanguage(),clickedItemText.toString());
 return true;
 case MENU_FIELD_TRANSLATE_EN:
 TranslationUtils.startActivityTranslate(this,Locale.ENGLISH.getLanguage(),clickedItemText.toString());
