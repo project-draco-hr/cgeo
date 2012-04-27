@@ -1,7 +1,4 @@
 {
-  if (location == null) {
-    location=cgeoapplication.getInstance().getLastCoords();
-  }
   if (location != null && address.hasLatitude() && address.hasLongitude()) {
     return HumanDistance.getHumanDistance(location.distanceTo(new Geopoint(address.getLatitude(),address.getLongitude())));
   }
