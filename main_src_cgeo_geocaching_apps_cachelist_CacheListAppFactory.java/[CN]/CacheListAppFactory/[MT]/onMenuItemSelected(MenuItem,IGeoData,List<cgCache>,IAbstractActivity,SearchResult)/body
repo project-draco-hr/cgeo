@@ -1,5 +1,5 @@
 {
-  CacheListApp app=(CacheListApp)getAppFromMenuItem(item,apps);
+  final CacheListApp app=(CacheListApp)getAppFromMenuItem(item,LazyHolder.apps);
   if (app != null) {
     try {
       boolean result=app.invoke(geo,caches,(Activity)activity,search);
