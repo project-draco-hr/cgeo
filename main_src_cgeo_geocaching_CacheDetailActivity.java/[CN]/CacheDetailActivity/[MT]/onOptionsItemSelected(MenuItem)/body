@@ -1,43 +1,37 @@
 {
   final int menuItem=item.getItemId();
-  if (menuItem == 0) {
+switch (menuItem) {
+case 0:
     return false;
-  }
-  if (menuItem == MENU_DEFAULT_NAVIGATION) {
-    startDefaultNavigation();
-    return true;
-  }
- else   if (menuItem == MENU_LOG_VISIT) {
-    refreshOnResume=true;
-    cache.logVisit(this);
-    return true;
-  }
- else   if (menuItem == MENU_BROWSER) {
-    cache.openInBrowser(this);
-    return true;
-  }
- else   if (menuItem == MENU_CACHES_AROUND) {
-    cgeocaches.startActivityCachesAround(this,cache.getCoords());
-    return true;
-  }
- else   if (menuItem == MENU_CALENDAR) {
-    addToCalendarWithIntent();
-    return true;
-  }
- else   if (menuItem == MENU_SHARE) {
-    if (cache != null) {
-      cache.shareCache(this,res);
-      return true;
-    }
-    return false;
-  }
-  if (NavigationAppFactory.onMenuItemSelected(item,app.currentGeo(),this,cache,null,null)) {
-    return true;
-  }
-  if (GeneralAppsFactory.onMenuItemSelected(item,this,cache)) {
-    return true;
-  }
-  int logType=menuItem - MENU_LOG_VISIT_OFFLINE;
-  cache.logOffline(this,LogType.getById(logType));
-  return true;
+case MENU_DEFAULT_NAVIGATION:
+  startDefaultNavigation();
+return true;
+case MENU_LOG_VISIT:
+refreshOnResume=true;
+cache.logVisit(this);
+return true;
+case MENU_BROWSER:
+cache.openInBrowser(this);
+return true;
+case MENU_CACHES_AROUND:
+cgeocaches.startActivityCachesAround(this,cache.getCoords());
+return true;
+case MENU_CALENDAR:
+addToCalendarWithIntent();
+return true;
+case MENU_SHARE:
+if (cache != null) {
+cache.shareCache(this,res);
+return true;
+}
+return false;
+}
+if (NavigationAppFactory.onMenuItemSelected(item,app.currentGeo(),this,cache,null,null)) {
+return true;
+}
+if (GeneralAppsFactory.onMenuItemSelected(item,this,cache)) {
+return true;
+}
+cache.logOffline(this,LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
+return true;
 }
