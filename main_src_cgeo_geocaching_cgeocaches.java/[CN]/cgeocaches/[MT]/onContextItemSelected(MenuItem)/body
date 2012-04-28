@@ -1,5 +1,4 @@
 {
-  final int id=item.getItemId();
   ContextMenu.ContextMenuInfo info=item.getMenuInfo();
   if (info == null) {
     info=lastMenuInfo;
@@ -12,59 +11,50 @@
  catch (  Exception e) {
     Log.w("cgeocaches.onContextItemSelected: " + e.toString());
   }
-  if (id == MENU_DEFAULT_NAVIGATION) {
-    final cgCache cache=getCacheFromAdapter(adapterInfo);
+  final cgCache cache=adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
+  final int id=item.getItemId();
+switch (id) {
+case MENU_DEFAULT_NAVIGATION:
     NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(),this,cache,null,null);
-    return true;
-  }
- else   if (id == MENU_NAVIGATION) {
-    final cgCache cache=getCacheFromAdapter(adapterInfo);
-    NavigationAppFactory.showNavigationMenu(app.currentGeo(),this,cache,null,null);
-    return true;
-  }
- else   if (id == MENU_LOG_VISIT) {
-    getCacheFromAdapter(adapterInfo).logVisit(this);
-    return true;
-  }
- else   if (id == MENU_CACHE_DETAILS) {
-    final Intent cachesIntent=new Intent(this,CacheDetailActivity.class);
-    final cgCache cache=getCacheFromAdapter(adapterInfo);
-    cachesIntent.putExtra("geocode",cache.getGeocode().toUpperCase());
-    cachesIntent.putExtra("name",cache.getName());
-    startActivity(cachesIntent);
-    return true;
-  }
- else   if (id == MENU_DROP_CACHE) {
-    getCacheFromAdapter(adapterInfo).drop(new Handler(){
-      @Override public void handleMessage(      Message msg){
-        refreshCurrentList();
-      }
-    }
+  break;
+case MENU_NAVIGATION:
+NavigationAppFactory.showNavigationMenu(app.currentGeo(),this,cache,null,null);
+break;
+case MENU_LOG_VISIT:
+cache.logVisit(this);
+break;
+case MENU_CACHE_DETAILS:
+final Intent cachesIntent=new Intent(this,CacheDetailActivity.class);
+cachesIntent.putExtra("geocode",cache.getGeocode().toUpperCase());
+cachesIntent.putExtra("name",cache.getName());
+startActivity(cachesIntent);
+break;
+case MENU_DROP_CACHE:
+cache.drop(new Handler(){
+@Override public void handleMessage(Message msg){
+refreshCurrentList();
+}
+}
 );
-    return true;
-  }
- else   if (id == MENU_MOVE_TO_LIST) {
-    final cgCache cache=getCacheFromAdapter(adapterInfo);
-    new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
-      @Override public void run(      Integer newListId){
-        app.moveToList(Collections.singletonList(cache),newListId);
-        adapter.resetChecks();
-        refreshCurrentList();
-      }
-    }
+break;
+case MENU_MOVE_TO_LIST:
+new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
+@Override public void run(Integer newListId){
+app.moveToList(Collections.singletonList(cache),newListId);
+adapter.resetChecks();
+refreshCurrentList();
+}
+}
 );
-    return true;
-  }
- else   if (id == MENU_STORE_CACHE) {
-    final cgCache cache=getCacheFromAdapter(adapterInfo);
-    cache.store(this,null);
-    return true;
-  }
-  lastMenuInfo=info;
-  if (adapterInfo != null) {
-    final cgCache cache=getCacheFromAdapter(adapterInfo);
-    int logType=id - MENU_LOG_VISIT_OFFLINE;
-    cache.logOffline(this,LogType.getById(logType));
-  }
-  return true;
+break;
+case MENU_STORE_CACHE:
+cache.store(this,null);
+break;
+default :
+lastMenuInfo=info;
+if (cache != null) {
+cache.logOffline(this,LogType.getById(id - MENU_LOG_VISIT_OFFLINE));
+}
+}
+return true;
 }
