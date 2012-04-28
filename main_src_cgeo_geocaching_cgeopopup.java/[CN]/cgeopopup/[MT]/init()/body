@@ -47,7 +47,7 @@
       itemName=(TextView)itemLayout.findViewById(R.id.name);
       itemValue=(TextView)itemLayout.findViewById(R.id.value);
       itemName.setText(res.getString(R.string.cache_status));
-      StringBuilder state=new StringBuilder();
+      final StringBuilder state=new StringBuilder();
       if (cache.isFound()) {
         if (state.length() > 0) {
           state.append(", ");
@@ -74,7 +74,6 @@
       }
       itemValue.setText(state.toString());
       detailsList.addView(itemLayout);
-      state=null;
     }
     itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
     itemName=(TextView)itemLayout.findViewById(R.id.name);

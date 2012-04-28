@@ -1,9 +1,7 @@
 {
   try {
-    PackageManager manager=this.getPackageManager();
-    PackageInfo info=manager.getPackageInfo(this.getPackageName(),0);
+    final PackageInfo info=getPackageManager().getPackageInfo(this.getPackageName(),0);
     setTitle(res.getString(R.string.about) + " (ver. " + info.versionName+ ")");
-    manager=null;
     ((TextView)findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
     ((TextView)findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
   }
