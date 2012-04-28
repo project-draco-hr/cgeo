@@ -7,7 +7,7 @@
       navLocation=(TextView)findViewById(R.id.nav_location);
     }
     if (geo.getCoords() != null) {
-      String satellites=null;
+      String satellites;
       if (geo.getSatellitesFixed() > 0) {
         satellites=res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed()+ "/"+ geo.getSatellitesVisible();
       }

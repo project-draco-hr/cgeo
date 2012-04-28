@@ -65,7 +65,7 @@
       if (trackables != null && !trackables.isEmpty()) {
         final StringBuilder hdnSelected=new StringBuilder();
         for (        TrackableLog tb : trackables) {
-          String ctl=null;
+          String ctl;
           final String action=Integer.toString(tb.id) + tb.action.action;
           if (tb.ctl < 10) {
             ctl="0" + Integer.toString(tb.ctl);

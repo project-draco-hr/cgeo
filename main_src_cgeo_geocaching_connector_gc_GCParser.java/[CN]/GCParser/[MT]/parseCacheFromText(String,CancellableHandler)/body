@@ -208,8 +208,8 @@
   }
  catch (  Geopoint.GeopointException e) {
   }
-  int wpBegin=0;
-  int wpEnd=0;
+  int wpBegin;
+  int wpEnd;
   wpBegin=page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
   if (wpBegin != -1) {
     if (CancellableHandler.isCancelled(handler)) {

@@ -1,6 +1,6 @@
 {
   init();
-  Cursor cursor=null;
+  Cursor cursor;
   long listId=StoredList.TEMPORARY_LIST_ID;
   try {
     if (StringUtils.isNotBlank(geocode)) {
@@ -14,7 +14,7 @@
     }
     if (cursor != null) {
       final int cnt=cursor.getCount();
-      int index=0;
+      int index;
       if (cnt > 0) {
         cursor.moveToFirst();
         index=cursor.getColumnIndex("reason");

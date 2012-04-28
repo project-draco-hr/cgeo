@@ -1,5 +1,5 @@
 {
-  SubMenu menuLog=null;
+  SubMenu menuLog;
   menuLog=menu.addSubMenu(0,0,0,res.getString(R.string.log_add)).setIcon(android.R.drawable.ic_menu_add);
   for (  LogTemplate template : LogTemplateProvider.getTemplates()) {
     menuLog.add(0,template.getItemId(),0,template.getResourceId());

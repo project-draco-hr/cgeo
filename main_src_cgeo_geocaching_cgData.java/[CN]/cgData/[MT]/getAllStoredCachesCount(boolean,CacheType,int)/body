@@ -3,8 +3,8 @@
     throw new IllegalArgumentException("cacheType must not be null");
   }
   init();
-  String listSql=null;
-  String listSqlW=null;
+  String listSql;
+  String listSqlW;
   if (list == 0) {
     listSql=" where reason >= 1";
     listSqlW=" and reason >= 1";
@@ -18,7 +18,7 @@
   }
   int count=0;
   try {
-    String sql="select count(_id) from " + dbTableCaches;
+    String sql;
     if (!detailedOnly) {
       if (cacheType == CacheType.ALL) {
         sql="select count(_id) from " + dbTableCaches + listSql;

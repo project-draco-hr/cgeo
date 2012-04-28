@@ -2,7 +2,7 @@
   if (url == null || handler == null) {
     return;
   }
-  BitmapDrawable image=null;
+  BitmapDrawable image;
   try {
     HtmlImage imgGetter=new HtmlImage(cgeotrackable.this,trackable.getGeocode(),false,0,false);
     image=imgGetter.getDrawable(url);
