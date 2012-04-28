@@ -9,17 +9,10 @@
   hideCheckbox.setFillEnabled(true);
   hideCheckbox.setFillAfter(true);
   hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
-  final Animation brightenInfo=new AlphaAnimation(SWIPE_OPACITY,1.0f);
-  brightenInfo.setRepeatCount(0);
-  brightenInfo.setDuration(force ? 0 : 400);
-  brightenInfo.setFillEnabled(true);
-  brightenInfo.setFillAfter(true);
-  brightenInfo.setInterpolator(new AccelerateDecelerateInterpolator());
   final AnimationSet selectAnimation=new AnimationSet(true);
   selectAnimation.setFillEnabled(true);
   selectAnimation.setFillAfter(true);
   selectAnimation.addAnimation(hideCheckbox);
-  selectAnimation.addAnimation(brightenInfo);
   holder.oneInfo.startAnimation(selectAnimation);
   cache.setStatusCheckedView(false);
 }
