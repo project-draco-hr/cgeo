@@ -4,7 +4,7 @@
     insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),false),true);
     return true;
   }
- else   if (id >= 10 && id <= 19) {
+  if (id >= 10 && id <= 19) {
     rating=(id - 9) / 2.0;
     if (rating < 1) {
       rating=0;
@@ -14,8 +14,7 @@
   }
   final LogTemplate template=LogTemplateProvider.getTemplate(id);
   if (template != null) {
-    final String newText=template.getValue(false);
-    insertIntoLog(newText,true);
+    insertIntoLog(template.getValue(false),true);
     return true;
   }
   return false;

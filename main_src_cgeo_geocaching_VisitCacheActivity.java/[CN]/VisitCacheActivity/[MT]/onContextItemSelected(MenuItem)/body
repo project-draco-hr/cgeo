@@ -5,7 +5,7 @@
     setType(LogType.getById(id));
     return true;
   }
- else   if (group == R.id.changebutton) {
+  if (group == R.id.changebutton) {
     try {
       final LogTypeTrackable logType=LogTypeTrackable.findById(id);
       if (logType != null) {
