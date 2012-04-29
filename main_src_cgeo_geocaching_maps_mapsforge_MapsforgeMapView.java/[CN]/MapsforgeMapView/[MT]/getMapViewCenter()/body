@@ -1,4 +1,4 @@
 {
-  GeoPoint point=getMapCenter();
-  return new MapsforgeGeoPoint(point.getLatitudeE6(),point.getLongitudeE6());
+  GeoPoint point=getMapPosition().getMapCenter();
+  return new MapsforgeGeoPoint(point.latitudeE6,point.longitudeE6);
 }

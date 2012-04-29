@@ -1,3 +1,9 @@
 {
-  return MapDatabase.isValidMapFile(mapFileIn);
+  if (StringUtils.isEmpty(mapFileIn)) {
+    return false;
+  }
+  MapDatabase mapDB=new MapDatabase();
+  FileOpenResult result=mapDB.openFile(new File(mapFileIn));
+  mapDB.closeFile();
+  return result.isSuccess();
 }

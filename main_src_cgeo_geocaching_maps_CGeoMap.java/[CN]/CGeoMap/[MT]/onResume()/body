@@ -1,8 +1,5 @@
 {
   super.onResume();
-  if (changeMapSource(Settings.getMapSource())) {
-    return;
-  }
   app.setAction(StringUtils.defaultIfBlank(geocodeIntent,null));
   addGeoDirObservers();
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
