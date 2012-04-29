@@ -7,7 +7,7 @@
   trackable.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()).toUpperCase());
   trackable.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GUID,true,trackable.getGuid()));
   trackable.setIconUrl(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ICON,true,trackable.getIconUrl()));
-  trackable.setName(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,true,trackable.getName()));
+  trackable.setName(Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,true,"")).toString());
   if (StringUtils.isNotBlank(trackable.getName())) {
     trackable.setType(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_TYPE,true,trackable.getType()));
   }
