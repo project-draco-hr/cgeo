@@ -4,6 +4,7 @@
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
   mapProvider=Settings.getMapProvider();
+  mapItemFactory=mapProvider.getMapItemFactory();
   final Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {
     searchIntent=(SearchResult)extras.getParcelable(EXTRAS_SEARCH);

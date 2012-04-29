@@ -5,5 +5,9 @@
   MapDatabase mapDB=new MapDatabase();
   FileOpenResult result=mapDB.openFile(new File(mapFileIn));
   mapDB.closeFile();
-  return result.isSuccess();
+  boolean isValid=result.isSuccess();
+  if (!isValid) {
+    isValid=isMapfile024(mapFileIn);
+  }
+  return isValid;
 }
