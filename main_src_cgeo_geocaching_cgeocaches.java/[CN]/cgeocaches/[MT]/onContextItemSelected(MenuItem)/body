@@ -12,6 +12,9 @@
     Log.w("cgeocaches.onContextItemSelected: " + e.toString());
   }
   final cgCache cache=adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
+  if (cache == null) {
+    return true;
+  }
   final int id=item.getItemId();
 switch (id) {
 case MENU_DEFAULT_NAVIGATION:
@@ -52,9 +55,7 @@ cache.store(this,null);
 break;
 default :
 lastMenuInfo=info;
-if (cache != null) {
 cache.logOffline(this,LogType.getById(id - MENU_LOG_VISIT_OFFLINE));
-}
 }
 return true;
 }
