@@ -5,7 +5,7 @@
     GeoPoint low=projection.fromPixels(0,0);
     GeoPoint high=projection.fromPixels(0,getHeight());
     if (low != null && high != null) {
-      span=Math.abs(high.getLatitudeE6() - low.getLatitudeE6());
+      span=Math.abs(high.latitudeE6 - low.latitudeE6);
     }
   }
   return span;

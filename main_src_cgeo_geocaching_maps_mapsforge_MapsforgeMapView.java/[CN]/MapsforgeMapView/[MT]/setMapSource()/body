@@ -1,16 +1,21 @@
 {
+  MapGeneratorInternal newMapType=MapGeneratorInternal.MAPNIK;
 switch (MapsforgeMapProvider.getMapsforgeSource(Settings.getMapSource())) {
 case MapsforgeMapProvider.CYCLEMAP:
-    setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
+    newMapType=MapGeneratorInternal.OPENCYCLEMAP;
   break;
 case MapsforgeMapProvider.OFFLINE:
-setMapViewMode(MapViewMode.CANVAS_RENDERER);
-super.setMapFile(Settings.getMapFile());
+newMapType=MapGeneratorInternal.DATABASE_RENDERER;
+break;
+default :
+newMapType=MapGeneratorInternal.MAPNIK;
+}
+MapGenerator mapGenerator=MapGeneratorFactory.createMapGenerator(newMapType);
+setMapGenerator(mapGenerator);
+if (!mapGenerator.requiresInternetConnection()) {
+setMapFile(new File(Settings.getMapFile()));
 if (!Settings.isValidMapFile(Settings.getMapFile())) {
 Toast.makeText(getContext(),getContext().getResources().getString(R.string.warn_invalid_mapfile),Toast.LENGTH_LONG).show();
 }
-break;
-default :
-setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
 }
 }
