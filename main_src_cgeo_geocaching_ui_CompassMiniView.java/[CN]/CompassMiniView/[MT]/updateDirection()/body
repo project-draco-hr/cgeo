@@ -2,9 +2,7 @@
   if (compassArrow == null || compassArrow.isRecycled()) {
     return;
   }
-  int compassRoseWidth=compassArrow.getWidth();
-  int compassRoseHeight=compassArrow.getWidth();
-  int marginLeft=(getWidth() - compassRoseWidth) / 2;
-  int marginTop=(getHeight() - compassRoseHeight) / 2;
-  invalidate(marginLeft,marginTop,(marginLeft + compassRoseWidth),(marginTop + compassRoseHeight));
+  final int marginLeft=(getWidth() - compassArrowWidth) / 2;
+  final int marginTop=(getHeight() - compassArrowHeight) / 2;
+  invalidate(marginLeft,marginTop,(marginLeft + compassArrowWidth),(marginTop + compassArrowHeight));
 }

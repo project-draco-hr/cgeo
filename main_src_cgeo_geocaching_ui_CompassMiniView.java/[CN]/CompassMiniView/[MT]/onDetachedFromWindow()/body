@@ -1,6 +1,9 @@
 {
-  if (compassArrow != null) {
-    compassArrow.recycle();
-    compassArrow=null;
+  instances--;
+  if (instances == 0) {
+    if (compassArrow != null) {
+      compassArrow.recycle();
+      compassArrow=null;
+    }
   }
 }

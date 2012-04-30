@@ -1,15 +1,12 @@
 {
-  int result;
-  int specMode=MeasureSpec.getMode(measureSpec);
-  int specSize=MeasureSpec.getSize(measureSpec);
+  final int specMode=MeasureSpec.getMode(measureSpec);
+  final int specSize=MeasureSpec.getSize(measureSpec);
   if (specMode == MeasureSpec.EXACTLY) {
-    result=specSize;
+    return specSize;
   }
- else {
-    result=21 + getPaddingTop() + getPaddingBottom();
-    if (specMode == MeasureSpec.AT_MOST) {
-      result=Math.min(result,specSize);
-    }
+  int result=ARROW_BITMAP_SIZE + getPaddingTop() + getPaddingBottom();
+  if (specMode == MeasureSpec.AT_MOST) {
+    result=Math.min(result,specSize);
   }
   return result;
 }
