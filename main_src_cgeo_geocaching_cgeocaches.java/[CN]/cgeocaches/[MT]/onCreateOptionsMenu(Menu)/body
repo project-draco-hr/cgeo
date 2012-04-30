@@ -1,6 +1,6 @@
 {
   menu.add(0,MENU_FILTER,0,res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
-  SubMenu subMenuSort=menu.addSubMenu(0,SUBMENU_SORT,0,res.getString(R.string.caches_sort)).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+  SubMenu subMenuSort=menu.addSubMenu(0,SUBMENU_SORT,0,res.getString(R.string.caches_sort)).setIcon(R.drawable.ic_menu_sort_alphabetically);
   subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
   Map<String,Integer> comparators=new HashMap<String,Integer>();
   comparators.put(res.getString(R.string.caches_sort_distance),MENU_SORT_DISTANCE);
@@ -23,10 +23,10 @@
     subMenuSort.add(1,id,0,label).setCheckable(true).setChecked(id == MENU_SORT_DISTANCE);
   }
   subMenuSort.setGroupCheckable(1,true,true);
-  menu.add(0,MENU_SWITCH_SELECT_MODE,0,res.getString(R.string.caches_select_mode)).setIcon(android.R.drawable.ic_menu_agenda);
+  menu.add(0,MENU_SWITCH_SELECT_MODE,0,res.getString(R.string.caches_select_mode)).setIcon(R.drawable.ic_menu_agenda);
   menu.add(0,MENU_INVERT_SELECTION,0,res.getString(R.string.caches_select_invert)).setIcon(R.drawable.ic_menu_mark);
   if (type == CacheListType.OFFLINE) {
-    SubMenu subMenu=menu.addSubMenu(0,SUBMENU_MANAGE_OFFLINE,0,res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
+    SubMenu subMenu=menu.addSubMenu(0,SUBMENU_MANAGE_OFFLINE,0,res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
     subMenu.add(0,MENU_DROP_CACHES,0,res.getString(R.string.caches_drop_all));
     subMenu.add(0,MENU_DROP_CACHES_AND_LIST,0,res.getString(R.string.caches_drop_all_and_list));
     subMenu.add(0,MENU_REFRESH_STORED,0,res.getString(R.string.cache_offline_refresh));
@@ -39,15 +39,15 @@
   }
  else {
     if (type == CacheListType.HISTORY) {
-      SubMenu subMenu=menu.addSubMenu(0,SUBMENU_MANAGE_HISTORY,0,res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
+      SubMenu subMenu=menu.addSubMenu(0,SUBMENU_MANAGE_HISTORY,0,res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
       subMenu.add(0,MENU_REMOVE_FROM_HISTORY,0,res.getString(R.string.cache_clear_history));
       subMenu.add(0,MENU_EXPORT,0,res.getString(R.string.export));
     }
-    menu.add(0,MENU_REFRESH_STORED,0,res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as);
+    menu.add(0,MENU_REFRESH_STORED,0,res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as);
   }
   navigationMenu=CacheListAppFactory.addMenuItems(menu,this,res);
   if (type == CacheListType.OFFLINE) {
-    SubMenu subMenu=menu.addSubMenu(0,SUBMENU_MANAGE_LISTS,0,res.getString(R.string.list_menu)).setIcon(android.R.drawable.ic_menu_more);
+    SubMenu subMenu=menu.addSubMenu(0,SUBMENU_MANAGE_LISTS,0,res.getString(R.string.list_menu)).setIcon(R.drawable.ic_menu_more);
     subMenu.add(0,MENU_CREATE_LIST,0,res.getString(R.string.list_menu_create));
     subMenu.add(0,MENU_DROP_LIST,0,res.getString(R.string.list_menu_drop));
     subMenu.add(0,MENU_RENAME_LIST,0,res.getString(R.string.list_menu_rename));
