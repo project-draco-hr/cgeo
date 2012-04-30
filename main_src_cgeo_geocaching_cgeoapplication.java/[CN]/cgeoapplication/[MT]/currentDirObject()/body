@@ -1,0 +1,10 @@
+{
+  if (dir == null) {
+synchronized (this) {
+      if (dir == null) {
+        dir=new DirectionProvider(this);
+      }
+    }
+  }
+  return dir;
+}

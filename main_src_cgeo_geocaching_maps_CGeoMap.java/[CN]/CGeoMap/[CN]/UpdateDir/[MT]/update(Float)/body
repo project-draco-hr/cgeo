@@ -1,0 +1,6 @@
+{
+  if (overlayPosition != null && mapView != null && (app.currentGeo().getSpeed() <= 5)) {
+    overlayPosition.setHeading(DirectionProvider.getDirectionNow(activity,direction));
+    mapView.repaintRequired(overlayPosition);
+  }
+}

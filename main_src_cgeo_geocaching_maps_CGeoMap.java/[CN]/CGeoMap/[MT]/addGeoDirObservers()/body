@@ -1,7 +1,5 @@
 {
-  if (loadDetailsThread != null) {
-    loadDetailsThread.stopIt();
-  }
+  app.addGeoObserver(geoUpdate);
   if (Settings.isUseCompass()) {
     app.addDirectionObserver(dirUpdate);
   }

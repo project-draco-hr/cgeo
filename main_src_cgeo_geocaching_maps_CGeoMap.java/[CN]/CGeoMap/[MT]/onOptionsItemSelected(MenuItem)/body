@@ -49,8 +49,8 @@ try {
 if (loadDetailsThread != null) {
 loadDetailsThread.stopIt();
 }
-if (Settings.isUseCompass() && dir == null) {
-dir=app.startDir(activity,dirUpdate);
+if (Settings.isUseCompass()) {
+app.addDirectionObserver(dirUpdate);
 }
 }
  catch (Exception e) {

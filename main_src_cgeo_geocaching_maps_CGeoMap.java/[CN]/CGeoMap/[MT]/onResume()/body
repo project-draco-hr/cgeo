@@ -4,13 +4,7 @@
     return;
   }
   app.setAction(StringUtils.defaultIfBlank(geocodeIntent,null));
-  app.addGeoObserver(geoUpdate);
-  if (Settings.isUseCompass() && dir == null) {
-    dir=app.startDir(activity,dirUpdate);
-  }
-  if (dir != null) {
-    dirUpdate.updateDirection(dir);
-  }
+  addGeoDirObservers();
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
     for (    String geocode : dirtyCaches) {
       cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);

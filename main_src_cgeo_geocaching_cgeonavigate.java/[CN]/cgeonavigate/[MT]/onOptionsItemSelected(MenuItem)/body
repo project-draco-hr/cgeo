@@ -8,14 +8,10 @@
     Settings.setUseCompass(!oldSetting);
     invalidateOptionsMenuCompatible();
     if (oldSetting) {
-      if (dir != null) {
-        dir=app.removeDir();
-      }
+      app.deleteDirectionObserver(this);
     }
  else {
-      if (dir == null) {
-        dir=app.startDir(this,dirUpdate);
-      }
+      app.addDirectionObserver(this);
     }
   }
  else   if (id == 2) {

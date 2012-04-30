@@ -1,0 +1,9 @@
+{
+  if (!Settings.isLiveList()) {
+    return;
+  }
+  northHeading=DirectionProvider.getDirectionNow(this,direction);
+  if (northHeading != null && adapter != null && (app.currentGeo().getSpeed() <= 5)) {
+    adapter.setActualHeading(northHeading);
+  }
+}

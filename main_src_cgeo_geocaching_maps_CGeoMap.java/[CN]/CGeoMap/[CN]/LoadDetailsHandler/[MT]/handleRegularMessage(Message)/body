@@ -26,8 +26,8 @@
       waitDialog.dismiss();
       waitDialog.setOnCancelListener(null);
     }
-    if (Settings.isUseCompass() && dir == null) {
-      dir=app.startDir(activity,dirUpdate);
+    if (Settings.isUseCompass()) {
+      app.addDirectionObserver(dirUpdate);
     }
   }
 }

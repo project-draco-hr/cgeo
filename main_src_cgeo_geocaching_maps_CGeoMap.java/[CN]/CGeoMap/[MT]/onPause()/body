@@ -7,10 +7,7 @@
     go4CacheTimer.stopIt();
     go4CacheTimer=null;
   }
-  if (dir != null) {
-    dir=app.removeDir();
-  }
-  app.deleteGeoObserver(geoUpdate);
+  deleteGeoDirObservers();
   savePrefs();
   if (mapView != null) {
     mapView.destroyDrawingCache();

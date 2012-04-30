@@ -1,9 +1,0 @@
-{
-  if (dir == null || dir.directionNow == null) {
-    return;
-  }
-  if (overlayPosition != null && mapView != null && (app.currentGeo().getSpeed() <= 5)) {
-    overlayPosition.setHeading(dir.directionNow);
-    mapView.repaintRequired(overlayPosition);
-  }
-}

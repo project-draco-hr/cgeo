@@ -3,9 +3,6 @@
   setTheme();
   setContentView(R.layout.navigate);
   setTitle(res.getString(R.string.compass_title));
-  if (Settings.isUseCompass() && dir == null) {
-    dir=app.startDir(this,dirUpdate);
-  }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(EXTRAS_GEOCODE);
@@ -30,8 +27,5 @@
   setGo4CacheAction();
   setTitle();
   setDestCoords();
-  if (dir != null) {
-    dirUpdate.updateDirection(dir);
-  }
   compassView=(CompassView)findViewById(R.id.rose);
 }

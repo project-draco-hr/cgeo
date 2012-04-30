@@ -1,6 +1,6 @@
 {
   super.onResume();
-  init();
+  startGeoAndDir();
   if (adapter != null) {
     adapter.setSelectMode(false,true);
     final Geopoint coordsNow=app.currentGeo().getCoords();

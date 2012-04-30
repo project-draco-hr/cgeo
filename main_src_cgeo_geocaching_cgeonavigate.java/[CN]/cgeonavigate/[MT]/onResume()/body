@@ -2,8 +2,8 @@
   super.onResume();
   setGo4CacheAction();
   app.addGeoObserver(this);
-  if (Settings.isUseCompass() && dir == null) {
-    dir=app.startDir(this,dirUpdate);
+  if (Settings.isUseCompass()) {
+    app.addDirectionObserver(this);
   }
   if (pm == null) {
     pm=(PowerManager)getSystemService(Context.POWER_SERVICE);

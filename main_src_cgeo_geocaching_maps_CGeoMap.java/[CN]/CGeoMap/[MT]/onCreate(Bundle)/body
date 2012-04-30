@@ -31,9 +31,6 @@
   ActivityMixin.setTheme(activity);
   activity.setContentView(mapProvider.getMapLayoutId());
   ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
-  if (Settings.isUseCompass() && dir == null) {
-    dir=app.startDir(activity,dirUpdate);
-  }
   mapView=(MapViewImpl)activity.findViewById(mapProvider.getMapViewId());
   mapView.setMapSource();
   mapView.setBuiltInZoomControls(true);
@@ -56,9 +53,6 @@
   mapView.repaintRequired(null);
   mapController=mapView.getMapController();
   mapController.setZoom(Settings.getMapZoom());
-  if (dir != null) {
-    dirUpdate.updateDirection(dir);
-  }
   live=(searchIntent == null && geocodeIntent == null && coordsIntent == null);
   if (null == mapStateIntent) {
     followMyLocation=live;
