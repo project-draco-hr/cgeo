@@ -4,7 +4,7 @@
     if (status == StatusCode.NO_ERROR) {
       final LogEntry logNow=new LogEntry(date,typeSelected,log);
       cache.prependLog(logNow);
-      if (typeSelected == LogType.LOG_FOUND_IT) {
+      if (typeSelected == LogType.FOUND_IT) {
         cache.setFound(true);
       }
       app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
@@ -12,10 +12,10 @@
     if (status == StatusCode.NO_ERROR) {
       app.clearLogOffline(geocode);
     }
-    if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+    if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
       Twitter.postTweetCache(geocode);
     }
-    if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
+    if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
       GCVote.setRating(cache,rating);
     }
     return status;

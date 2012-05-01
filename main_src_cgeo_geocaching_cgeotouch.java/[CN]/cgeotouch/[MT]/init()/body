@@ -3,12 +3,12 @@
     app.setAction("logging trackable");
   }
   logTypes.clear();
-  logTypes.add(LogType.LOG_RETRIEVED_IT);
-  logTypes.add(LogType.LOG_GRABBED_IT);
-  logTypes.add(LogType.LOG_NOTE);
-  logTypes.add(LogType.LOG_DISCOVERED_IT);
-  if (LogType.LOG_UNKNOWN == typeSelected) {
-    typeSelected=LogType.LOG_RETRIEVED_IT;
+  logTypes.add(LogType.RETRIEVED_IT);
+  logTypes.add(LogType.GRABBED_IT);
+  logTypes.add(LogType.NOTE);
+  logTypes.add(LogType.DISCOVERED_IT);
+  if (LogType.UNKNOWN == typeSelected) {
+    typeSelected=LogType.RETRIEVED_IT;
   }
   setType(typeSelected);
   Button typeButton=(Button)findViewById(R.id.type);

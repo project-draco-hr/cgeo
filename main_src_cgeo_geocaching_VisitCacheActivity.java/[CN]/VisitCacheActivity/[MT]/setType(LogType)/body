@@ -2,11 +2,11 @@
   final Button typeButton=(Button)findViewById(R.id.type);
   typeSelected=type;
   typeButton.setText(typeSelected.getL10n());
-  if (LogType.LOG_FOUND_IT == type && !tbChanged) {
+  if (LogType.FOUND_IT == type && !tbChanged) {
   }
- else   if (LogType.LOG_FOUND_IT != type && !tbChanged) {
+ else   if (LogType.FOUND_IT != type && !tbChanged) {
   }
-  if (type == LogType.LOG_FOUND_IT && Settings.isUseTwitter()) {
+  if (type == LogType.FOUND_IT && Settings.isUseTwitter()) {
     tweetBox.setVisibility(View.VISIBLE);
   }
  else {
