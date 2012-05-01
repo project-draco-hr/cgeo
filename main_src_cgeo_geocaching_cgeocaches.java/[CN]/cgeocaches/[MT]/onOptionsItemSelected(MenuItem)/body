@@ -61,6 +61,9 @@ return false;
 case MENU_SORT_GEOCODE:
 setComparator(item,new GeocodeComparator());
 return false;
+case MENU_SORT_STORAGE:
+setComparator(item,new StorageTimeComparator());
+return false;
 case MENU_SWITCH_LIST:
 selectList(null);
 invalidateOptionsMenuCompatible();
