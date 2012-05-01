@@ -44,7 +44,7 @@ case MENU_MOVE_TO_LIST:
 new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
 @Override public void run(Integer newListId){
 app.moveToList(Collections.singletonList(cache),newListId);
-adapter.resetChecks();
+adapter.setSelectMode(false);
 refreshCurrentList();
 }
 }

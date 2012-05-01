@@ -1,11 +1,8 @@
 {
   if (keyCode == KeyEvent.KEYCODE_BACK) {
     if (adapter != null) {
-      if (adapter.resetChecks()) {
-        return true;
-      }
- else       if (adapter.getSelectMode()) {
-        adapter.setSelectMode(false,true);
+      if (adapter.getSelectMode()) {
+        adapter.setSelectMode(false);
         return true;
       }
     }

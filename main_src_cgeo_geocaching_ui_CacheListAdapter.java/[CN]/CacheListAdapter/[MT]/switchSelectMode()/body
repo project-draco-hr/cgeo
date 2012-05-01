@@ -1,17 +1,3 @@
 {
-  selectMode=!selectMode;
-  if (!selectMode) {
-    for (    final cgCache cache : list) {
-      cache.setStatusChecked(false);
-      cache.setStatusCheckedView(false);
-    }
-    checked=0;
-  }
- else {
-    for (    final cgCache cache : list) {
-      cache.setStatusCheckedView(false);
-    }
-  }
-  checkChecked(0);
-  notifyDataSetChanged();
+  setSelectMode(!getSelectMode());
 }

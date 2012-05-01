@@ -1,6 +1,6 @@
 {
   int hashCode=getIconHashCode(cache.getType(),cache.hasUserModifiedCoords() || cache.hasFinalDefined());
-  Drawable drawable=gcIconDrawables.get(hashCode);
+  final Drawable drawable=gcIconDrawables.get(hashCode);
   if (drawable != null) {
     return drawable;
   }

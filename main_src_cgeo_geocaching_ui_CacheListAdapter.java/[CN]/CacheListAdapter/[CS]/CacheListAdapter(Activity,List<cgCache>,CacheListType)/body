@@ -6,10 +6,7 @@
   if (cacheListType == CacheListType.HISTORY) {
     cacheComparator=new VisitComparator();
   }
-  final DisplayMetrics metrics=new DisplayMetrics();
-  activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-  pixelDensity=metrics.density;
-  Drawable modifiedCoordinatesMarker=activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
+  final Drawable modifiedCoordinatesMarker=activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
   for (  final CacheType cacheType : CacheType.values()) {
     int hashCode=getIconHashCode(cacheType,false);
     gcIconDrawables.put(hashCode,activity.getResources().getDrawable(cacheType.markerId));

@@ -1,11 +1,8 @@
 {
-  ArrayList<cgCache> result=new ArrayList<cgCache>();
-  int checked=getChecked();
-  if (checked > 0) {
-    for (    cgCache cache : list) {
-      if (cache.isStatusChecked()) {
-        result.add(cache);
-      }
+  final ArrayList<cgCache> result=new ArrayList<cgCache>();
+  for (  cgCache cache : list) {
+    if (cache.isStatusChecked()) {
+      result.add(cache);
     }
   }
   return result;

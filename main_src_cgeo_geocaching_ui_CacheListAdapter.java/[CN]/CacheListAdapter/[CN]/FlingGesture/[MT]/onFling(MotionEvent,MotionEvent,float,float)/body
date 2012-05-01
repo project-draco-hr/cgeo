@@ -1,0 +1,24 @@
+{
+  try {
+    if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
+      return false;
+    }
+    if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
+      if (!selectMode) {
+        switchSelectMode();
+        cache.setStatusChecked(true);
+      }
+      return true;
+    }
+    if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
+      if (selectMode) {
+        switchSelectMode();
+      }
+      return true;
+    }
+  }
+ catch (  Exception e) {
+    Log.w("CacheListAdapter.FlingGesture.onFling: " + e.toString());
+  }
+  return false;
+}

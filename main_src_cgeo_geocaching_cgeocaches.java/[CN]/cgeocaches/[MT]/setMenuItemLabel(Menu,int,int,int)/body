@@ -3,9 +3,9 @@
   if (menuItem == null) {
     return;
   }
-  boolean hasSelection=adapter != null && adapter.getChecked() > 0;
+  boolean hasSelection=adapter != null && adapter.getCheckedCount() > 0;
   if (hasSelection) {
-    menuItem.setTitle(res.getString(resIdSelection) + " (" + adapter.getChecked()+ ")");
+    menuItem.setTitle(res.getString(resIdSelection) + " (" + adapter.getCheckedCount()+ ")");
   }
  else {
     menuItem.setTitle(res.getString(resId));

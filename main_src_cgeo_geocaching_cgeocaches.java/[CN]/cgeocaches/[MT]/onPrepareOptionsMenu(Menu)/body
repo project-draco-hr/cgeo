@@ -9,7 +9,7 @@
       menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode)).setIcon(R.drawable.ic_menu_agenda);
       menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
     }
-    boolean hasSelection=adapter != null && adapter.getChecked() > 0;
+    boolean hasSelection=adapter != null && adapter.getCheckedCount() > 0;
     boolean isNonDefaultList=listId != StoredList.STANDARD_LIST_ID;
     if (type == CacheListType.OFFLINE) {
       setMenuItemLabel(menu,MENU_DROP_CACHES,R.string.caches_drop_selected,R.string.caches_drop_all);

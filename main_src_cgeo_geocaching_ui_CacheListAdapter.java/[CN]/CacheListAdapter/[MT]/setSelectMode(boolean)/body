@@ -1,0 +1,9 @@
+{
+  this.selectMode=selectMode;
+  if (!selectMode) {
+    for (    final cgCache cache : list) {
+      cache.setStatusChecked(false);
+    }
+  }
+  notifyDataSetChanged();
+}

@@ -2,7 +2,7 @@
   AlertDialog.Builder dialog=new AlertDialog.Builder(this);
   dialog.setCancelable(true);
   dialog.setTitle(res.getString(R.string.caches_removing_from_history));
-  dialog.setMessage((adapter != null && adapter.getChecked() > 0) ? res.getString(R.string.cache_remove_from_history) : res.getString(R.string.cache_clear_history));
+  dialog.setMessage((adapter != null && adapter.getCheckedCount() > 0) ? res.getString(R.string.cache_remove_from_history) : res.getString(R.string.cache_clear_history));
   dialog.setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int id){
       removeFromHistory();

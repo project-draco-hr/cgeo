@@ -2,7 +2,7 @@
   super.onResume();
   startGeoAndDir();
   if (adapter != null) {
-    adapter.setSelectMode(false,true);
+    adapter.setSelectMode(false);
     final Geopoint coordsNow=app.currentGeo().getCoords();
     if (coordsNow != null) {
       adapter.setActualCoordinates(coordsNow);

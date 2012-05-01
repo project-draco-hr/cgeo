@@ -1,16 +1,6 @@
 {
-  int check=0;
   for (  cgCache cache : list) {
-    if (cache.isStatusChecked()) {
-      cache.setStatusChecked(false);
-      cache.setStatusCheckedView(false);
-    }
- else {
-      cache.setStatusChecked(true);
-      cache.setStatusCheckedView(true);
-      check++;
-    }
+    cache.setStatusChecked(!cache.isStatusChecked());
   }
-  checkChecked(check);
   notifyDataSetChanged();
 }

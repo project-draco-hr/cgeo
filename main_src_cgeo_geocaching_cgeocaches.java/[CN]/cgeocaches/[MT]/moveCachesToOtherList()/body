@@ -2,7 +2,7 @@
   new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
     @Override public void run(    Integer newListId){
       List<cgCache> selected;
-      final boolean moveAll=adapter.getChecked() == 0;
+      final boolean moveAll=adapter.getCheckedCount() == 0;
       if (moveAll) {
         selected=new ArrayList<cgCache>(cacheList);
       }
@@ -10,7 +10,7 @@
         selected=adapter.getCheckedCaches();
       }
       app.moveToList(selected,newListId);
-      adapter.resetChecks();
+      adapter.setSelectMode(false);
       refreshCurrentList();
     }
   }
