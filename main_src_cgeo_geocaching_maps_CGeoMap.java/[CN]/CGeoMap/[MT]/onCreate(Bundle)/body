@@ -3,7 +3,7 @@
   res=this.getResources();
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
-  mapProvider=Settings.getMapProvider();
+  final MapProvider mapProvider=Settings.getMapProvider();
   mapItemFactory=mapProvider.getMapItemFactory();
   final Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {

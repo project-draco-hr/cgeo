@@ -8,6 +8,7 @@
   }
   final cgCache cache=getItem(position);
   View v=rowView;
+  CacheListView holder;
   if (v == null) {
     v=inflater.inflate(R.layout.caches_item,null);
     holder=new CacheListView();
