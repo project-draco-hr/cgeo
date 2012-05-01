@@ -36,7 +36,19 @@
     }
     addCacheDetail(R.string.cache_status,StringUtils.join(states,", "));
   }
-  cacheDistanceView=addCacheDetail(R.string.cache_distance,cache.getDistance() != null ? "~" + HumanDistance.getHumanDistance(cache.getDistance()) : "--");
+{
+    Float distance=null;
+    if (cache.getDistance() != null) {
+      distance=cache.getDistance();
+    }
+ else     if (cache.getCoords() != null) {
+      final Geopoint currentCoords=app.currentGeo().getCoords();
+      if (currentCoords != null) {
+        distance=currentCoords.distanceTo(cache);
+      }
+    }
+    cacheDistanceView=addCacheDetail(R.string.cache_distance,distance != null ? HumanDistance.getHumanDistance(distance) : "--");
+  }
   if (cache.getDifficulty() > 0) {
     addStarRating(R.string.cache_difficulty,cache.getDifficulty());
   }

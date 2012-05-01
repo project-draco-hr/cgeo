@@ -1,8 +1,8 @@
 {
   super.onResume();
-  app.addGeoObserver(locationUpdater);
   if (refreshOnResume) {
     notifyDataSetChanged();
     refreshOnResume=false;
   }
+  app.addGeoObserver(locationUpdater);
 }

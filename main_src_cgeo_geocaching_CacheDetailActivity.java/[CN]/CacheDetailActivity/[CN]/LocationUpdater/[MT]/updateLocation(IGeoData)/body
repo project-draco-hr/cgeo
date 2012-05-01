@@ -3,19 +3,14 @@
     return;
   }
   try {
-    StringBuilder dist=new StringBuilder();
+    final StringBuilder dist=new StringBuilder();
     if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
       dist.append(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
     }
     if (cache != null && cache.getElevation() != null) {
       if (geo.getAltitude() != 0.0) {
-        double diff=cache.getElevation() - geo.getAltitude();
-        if (diff >= 0) {
-          dist.append(" ???");
-        }
- else         if (diff < 0) {
-          dist.append(" ???");
-        }
+        final double diff=cache.getElevation() - geo.getAltitude();
+        dist.append(diff >= 0 ? " ???" : " ???");
         if (Settings.isUseMetricUnits()) {
           dist.append(Math.abs((int)diff));
           dist.append(" m");
