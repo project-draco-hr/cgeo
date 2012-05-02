@@ -1,0 +1,19 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  try {
+    if (cache != null && cache.getCoords() != null) {
+      menu.findItem(2).setVisible(true);
+      menu.findItem(3).setVisible(true);
+      menu.findItem(5).setVisible(true);
+    }
+ else {
+      menu.findItem(2).setVisible(false);
+      menu.findItem(3).setVisible(false);
+      menu.findItem(5).setVisible(false);
+    }
+    menu.findItem(MENU_LOG_VISIT).setEnabled(Settings.isLogin());
+  }
+ catch (  Exception e) {
+  }
+  return true;
+}

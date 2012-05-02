@@ -1,0 +1,8 @@
+{
+  if (waypoint == null || waypoint.getCoords() == null) {
+    showToast(res.getString(R.string.err_location_unknown));
+    return;
+  }
+  cgeocaches.startActivityCachesAround(this,waypoint.getCoords());
+  finish();
+}

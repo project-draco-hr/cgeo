@@ -1,0 +1,24 @@
+{
+  final int menuItem=item.getItemId();
+switch (menuItem) {
+case 2:
+    navigateTo();
+  break;
+case 3:
+NavigationAppFactory.showNavigationMenu(app.currentGeo(),this,cache,null,null);
+break;
+case 5:
+cachesAround();
+break;
+case MENU_LOG_VISIT:
+cache.logVisit(this);
+finish();
+break;
+case 7:
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode())));
+break;
+default :
+cache.logOffline(this,LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
+}
+return true;
+}
