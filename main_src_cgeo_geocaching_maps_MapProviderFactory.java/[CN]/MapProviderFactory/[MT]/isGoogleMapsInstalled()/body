@@ -1,0 +1,10 @@
+{
+  boolean googleMaps=true;
+  try {
+    Class.forName("com.google.android.maps.MapActivity");
+  }
+ catch (  ClassNotFoundException e) {
+    googleMaps=false;
+  }
+  return googleMaps;
+}

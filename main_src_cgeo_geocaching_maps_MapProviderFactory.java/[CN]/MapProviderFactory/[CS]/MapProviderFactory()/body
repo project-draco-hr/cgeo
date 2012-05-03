@@ -1,18 +1,11 @@
 {
-  boolean googleMaps=true;
-  try {
-    Class.forName("com.google.android.maps.MapActivity");
-  }
- catch (  ClassNotFoundException e) {
-    googleMaps=false;
-  }
-  if (googleMaps) {
+  if (isGoogleMapsInstalled()) {
     mapProviders=new MapProvider[]{new GoogleMapProvider(GOOGLEMAP_BASEID),new MapsforgeMapProvider(MFMAP_BASEID)};
   }
  else {
     mapProviders=new MapProvider[]{new MapsforgeMapProvider(MFMAP_BASEID)};
   }
-  mapSources=new TreeMap<Integer,String>();
+  mapSources=new TreeMap<Integer,MapSource>();
   for (  MapProvider mp : mapProviders) {
     mapSources.putAll(mp.getMapSources());
   }

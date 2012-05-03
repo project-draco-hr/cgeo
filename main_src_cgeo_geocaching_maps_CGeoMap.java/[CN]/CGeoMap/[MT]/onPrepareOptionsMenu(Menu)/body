@@ -1,5 +1,14 @@
 {
   super.onPrepareOptionsMenu(menu);
+  for (  Integer mapSourceId : MapProviderFactory.getMapSources().keySet()) {
+    final MenuItem menuItem=menu.findItem(mapSourceId);
+    if (menuItem != null) {
+      final MapSource mapSource=MapProviderFactory.getMapSources().get(mapSourceId);
+      if (mapSource != null) {
+        menuItem.setEnabled(mapSource.isAvailable());
+      }
+    }
+  }
   MenuItem item;
   try {
     item=menu.findItem(MENU_TRAIL_MODE);

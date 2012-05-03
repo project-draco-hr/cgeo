@@ -113,9 +113,9 @@ Settings.setLiveMapStrategy(Strategy.DETAILED);
 return true;
 }
 default :
-if (MapProviderFactory.isValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
-item.setChecked(true);
 int mapSource=MapProviderFactory.getMapSourceFromMenuId(id);
+if (MapProviderFactory.isValidSourceId(mapSource)) {
+item.setChecked(true);
 changeMapSource(mapSource);
 return true;
 }
