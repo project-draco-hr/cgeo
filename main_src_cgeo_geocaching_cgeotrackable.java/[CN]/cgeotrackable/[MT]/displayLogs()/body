@@ -26,7 +26,7 @@
       }
       TextView logView=(TextView)rowView.findViewById(R.id.log);
       logView.setMovementMethod(LinkMovementMethod.getInstance());
-      logView.setText(Html.fromHtml(log.log,new HtmlImage(this,null,false,StoredList.TEMPORARY_LIST_ID,false),null),TextView.BufferType.SPANNABLE);
+      logView.setText(Html.fromHtml(log.log,new HtmlImage(null,false,StoredList.TEMPORARY_LIST_ID,false),null),TextView.BufferType.SPANNABLE);
       LinearLayout logLayout=(LinearLayout)rowView.findViewById(R.id.log_layout);
       if (log.hasLogImages()) {
         final ArrayList<cgImage> logImages=new ArrayList<cgImage>(log.getLogImages());

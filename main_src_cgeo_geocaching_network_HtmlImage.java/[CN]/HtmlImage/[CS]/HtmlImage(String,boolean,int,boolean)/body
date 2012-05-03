@@ -1,12 +1,12 @@
 {
-  this.context=contextIn;
   this.geocode=geocode;
   this.returnErrorImage=returnErrorImage;
   this.listId=listId;
   this.onlySave=onlySave;
   bfOptions=new BitmapFactory.Options();
   bfOptions.inTempStorage=new byte[16 * 1024];
-  final Display display=((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+  final Display display=((WindowManager)cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
   this.maxWidth=display.getWidth() - 25;
   this.maxHeight=display.getHeight() - 25;
+  this.resources=cgeoapplication.getInstance().getResources();
 }

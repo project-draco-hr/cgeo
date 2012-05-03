@@ -4,7 +4,7 @@
   }
   BitmapDrawable image;
   try {
-    HtmlImage imgGetter=new HtmlImage(cgeotrackable.this,trackable.getGeocode(),false,0,false);
+    HtmlImage imgGetter=new HtmlImage(trackable.getGeocode(),false,0,false);
     image=imgGetter.getDrawable(url);
     Message message=handler.obtainMessage(0,image);
     handler.sendMessage(message);

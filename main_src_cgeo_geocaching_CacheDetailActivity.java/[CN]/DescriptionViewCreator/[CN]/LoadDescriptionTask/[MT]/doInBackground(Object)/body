@@ -11,7 +11,7 @@
   description=Html.fromHtml(descriptionString,imageCounter,unknownTagsHandler);
   publishProgress();
   if (imageCounter.getImageCount() > 0) {
-    description=Html.fromHtml(descriptionString,new HtmlImage(CacheDetailActivity.this,cache.getGeocode(),true,cache.getListId(),false),unknownTagsHandler);
+    description=Html.fromHtml(descriptionString,new HtmlImage(cache.getGeocode(),true,cache.getListId(),false),unknownTagsHandler);
     publishProgress();
   }
   if (unknownTagsHandler.isTableDetected() && descriptionView == view.findViewById(R.id.longdesc)) {

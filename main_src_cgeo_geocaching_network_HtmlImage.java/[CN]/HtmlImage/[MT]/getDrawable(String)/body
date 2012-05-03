@@ -33,7 +33,7 @@
   if (imagePre == null) {
     Log.d("HtmlImage.getDrawable: Failed to obtain image");
     if (returnErrorImage) {
-      imagePre=BitmapFactory.decodeResource(context.getResources(),R.drawable.image_not_loaded);
+      imagePre=BitmapFactory.decodeResource(resources,R.drawable.image_not_loaded);
     }
  else {
       imagePre=getTransparent1x1Image();
