@@ -1,21 +1,15 @@
 {
   MapGeneratorInternal newMapType=MapGeneratorInternal.MAPNIK;
-switch (MapsforgeMapProvider.getMapsforgeSource(Settings.getMapSource())) {
-case MapsforgeMapProvider.CYCLEMAP:
-    newMapType=MapGeneratorInternal.OPENCYCLEMAP;
-  break;
-case MapsforgeMapProvider.OFFLINE:
-newMapType=MapGeneratorInternal.DATABASE_RENDERER;
-break;
-default :
-newMapType=MapGeneratorInternal.MAPNIK;
-}
-MapGenerator mapGenerator=MapGeneratorFactory.createMapGenerator(newMapType);
-setMapGenerator(mapGenerator);
-if (!mapGenerator.requiresInternetConnection()) {
-setMapFile(new File(Settings.getMapFile()));
-if (!Settings.isValidMapFile(Settings.getMapFile())) {
-Toast.makeText(getContext(),getContext().getResources().getString(R.string.warn_invalid_mapfile),Toast.LENGTH_LONG).show();
-}
-}
+  final MapSource mapSource=MapProviderFactory.getMapSource(Settings.getMapSource());
+  if (mapSource instanceof MapsforgeMapSource) {
+    newMapType=((MapsforgeMapSource)mapSource).getGenerator();
+  }
+  MapGenerator mapGenerator=MapGeneratorFactory.createMapGenerator(newMapType);
+  setMapGenerator(mapGenerator);
+  if (!mapGenerator.requiresInternetConnection()) {
+    setMapFile(new File(Settings.getMapFile()));
+    if (!Settings.isValidMapFile(Settings.getMapFile())) {
+      Toast.makeText(getContext(),getContext().getResources().getString(R.string.warn_invalid_mapfile),Toast.LENGTH_LONG).show();
+    }
+  }
 }

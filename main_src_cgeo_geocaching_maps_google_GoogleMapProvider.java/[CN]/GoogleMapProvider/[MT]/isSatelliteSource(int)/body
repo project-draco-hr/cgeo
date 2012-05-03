@@ -1,10 +1,4 @@
 {
-  MapProvider mp=MapProviderFactory.getMapProvider(sourceId);
-  if (mp instanceof GoogleMapProvider) {
-    GoogleMapProvider gp=(GoogleMapProvider)mp;
-    if (gp.baseId + SATELLITE == sourceId) {
-      return true;
-    }
-  }
-  return false;
+  final MapSource mapSource=MapProviderFactory.getMapSource(sourceId);
+  return mapSource != null && mapSource instanceof GoogleMapSatelliteSource;
 }
