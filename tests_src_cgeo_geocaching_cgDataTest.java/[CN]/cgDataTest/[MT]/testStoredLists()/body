@@ -29,7 +29,7 @@
     app.markDropped(Collections.singletonList(cache2));
     app.markStored(Collections.singletonList(cache2),listId2);
     assertEquals(2,app.getAllStoredCachesCount(false,CacheType.ALL,listId2));
-    app.dropList(listId2);
+    app.removeList(listId2);
   }
   finally {
     Set<String> geocodes=new HashSet<String>();
