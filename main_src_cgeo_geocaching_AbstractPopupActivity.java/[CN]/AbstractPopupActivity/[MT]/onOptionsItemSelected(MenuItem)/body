@@ -1,0 +1,23 @@
+{
+  final int menuItem=item.getItemId();
+switch (menuItem) {
+case MENU_DEFAULT_NAVIGATION:
+    navigateTo();
+  break;
+case MENU_NAVIGATION:
+showNavigationMenu();
+break;
+case MENU_CACHES_AROUND:
+cachesAround();
+break;
+case MENU_LOG_VISIT:
+logVisit();
+break;
+case MENU_SHOW_IN_BROWSER:
+showInBrowser();
+break;
+default :
+logOffline(menuItem);
+}
+return true;
+}

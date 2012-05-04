@@ -25,7 +25,7 @@
     final IWaypoint coordinate=item.getCoord();
     if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
       CGeoMap.markCacheAsDirty(coordinate.getGeocode());
-      cgeopopup.startActivity(context,coordinate.getGeocode());
+      CachePopup.startActivity(context,coordinate.getGeocode());
     }
  else     if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {
       CGeoMap.markCacheAsDirty(coordinate.getGeocode());

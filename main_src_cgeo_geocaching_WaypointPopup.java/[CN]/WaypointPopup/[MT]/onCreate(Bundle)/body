@@ -1,24 +1,7 @@
 {
   super.onCreate(savedInstanceState);
-  setTheme(R.style.transparent);
-  setContentView(R.layout.waypoint_popup);
-  setTitle(res.getString(R.string.detail));
-  Bundle extras=getIntent().getExtras();
+  final Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    geocode=extras.getString(EXTRA_GEOCODE);
-    waypoint_id=extras.getInt(EXTRA_WAYPOINT_ID);
+    waypointId=extras.getInt(EXTRA_WAYPOINT_ID);
   }
-  if (StringUtils.isBlank(geocode)) {
-    showToast(res.getString(R.string.err_detail_cache_find));
-    finish();
-    return;
-  }
-  ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
-  defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){
-    @Override public boolean onLongClick(    View v){
-      startDefaultNavigation2();
-      return true;
-    }
-  }
-);
 }

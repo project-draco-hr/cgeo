@@ -1,8 +1,8 @@
 {
-  if (cache == null || cache.getCoords() == null) {
+  if (waypoint == null || waypoint.getCoords() == null) {
     showToast(res.getString(R.string.cache_coordinates_no));
     return;
   }
-  NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(),this,cache,null,null);
+  NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(),this,null,waypoint,null);
   finish();
 }
