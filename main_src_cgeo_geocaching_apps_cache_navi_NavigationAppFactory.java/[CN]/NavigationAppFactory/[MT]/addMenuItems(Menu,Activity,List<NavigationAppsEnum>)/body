@@ -1,0 +1,8 @@
+{
+  for (  NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
+    if (filter.contains(navApp)) {
+      continue;
+    }
+    menu.add(0,MENU_ITEM_OFFSET + navApp.id,0,navApp.app.getName());
+  }
+}
