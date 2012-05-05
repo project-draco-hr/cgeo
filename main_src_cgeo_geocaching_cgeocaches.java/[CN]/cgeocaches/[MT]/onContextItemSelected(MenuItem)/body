@@ -18,10 +18,10 @@
   final int id=item.getItemId();
 switch (id) {
 case MENU_DEFAULT_NAVIGATION:
-    NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(),this,cache,null,null);
+    NavigationAppFactory.startDefaultNavigationApplication(this,cache,null,null);
   break;
 case MENU_NAVIGATION:
-NavigationAppFactory.showNavigationMenu(app.currentGeo(),this,cache,null,null);
+NavigationAppFactory.showNavigationMenu(this,cache,null,null);
 break;
 case MENU_LOG_VISIT:
 cache.logVisit(this);

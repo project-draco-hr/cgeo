@@ -51,7 +51,7 @@ if (waypoint.isUserDefined()) {
 menu.add(CONTEXT_MENU_WAYPOINT_DELETE,index,0,R.string.waypoint_delete);
 }
 if (waypoint.getCoords() != null) {
-menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION,index,0,NavigationAppFactory.getDefaultNavigationApplication(this).getName());
+menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION,index,0,NavigationAppFactory.getDefaultNavigationApplication().getName());
 menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE,index,0,R.string.cache_menu_navigate).setIcon(R.drawable.ic_menu_mapmode);
 menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND,index,0,R.string.cache_menu_around);
 }

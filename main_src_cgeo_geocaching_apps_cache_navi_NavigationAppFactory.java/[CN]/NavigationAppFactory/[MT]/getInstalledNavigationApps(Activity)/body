@@ -1,9 +1,0 @@
-{
-  final List<NavigationAppsEnum> installedNavigationApps=new ArrayList<NavigationAppsEnum>();
-  for (  NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
-    if (appEnum.app.isInstalled(activity)) {
-      installedNavigationApps.add(appEnum);
-    }
-  }
-  return installedNavigationApps;
-}

@@ -6,7 +6,7 @@ switch (item.getItemId()) {
 case CONTEXT_MENU_NAVIGATE:
     contextMenuItemPosition=position;
   if (destination instanceof Destination) {
-    NavigationAppFactory.showNavigationMenu(app.currentGeo(),this,null,null,((Destination)destination).getCoords());
+    NavigationAppFactory.showNavigationMenu(this,null,null,((Destination)destination).getCoords());
     return true;
   }
 break;
