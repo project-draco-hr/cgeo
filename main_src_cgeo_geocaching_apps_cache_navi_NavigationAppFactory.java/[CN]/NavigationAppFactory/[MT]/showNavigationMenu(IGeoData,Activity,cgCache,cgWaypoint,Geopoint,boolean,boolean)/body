@@ -11,6 +11,11 @@
         items.add(navApp);
       }
     }
+ else     if (NavigationAppsEnum.DOWNLOAD_STATIC_MAPS.id == navApp.id) {
+      if (!hasStaticMaps) {
+        items.add(navApp);
+      }
+    }
  else     if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
       items.add(navApp);
     }
