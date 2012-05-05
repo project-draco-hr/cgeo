@@ -1,15 +1,3 @@
 {
-  final ILogable logable=cache != null && cache.getListId() != 0 ? cache : waypoint;
-  final String geocode=logable.getGeocode().toUpperCase();
-  if (geocode == null) {
-    ActivityMixin.showToast(activity,getString(R.string.err_detail_no_map_static));
-    return true;
-  }
-  final Intent intent=new Intent(activity,StaticMapsActivity.class);
-  intent.putExtra("geocode",geocode);
-  if (waypoint != null) {
-    intent.putExtra("waypoint",waypoint.getId());
-  }
-  activity.startActivity(intent);
-  return true;
+  return invoke(activity,cache,waypoint,false);
 }

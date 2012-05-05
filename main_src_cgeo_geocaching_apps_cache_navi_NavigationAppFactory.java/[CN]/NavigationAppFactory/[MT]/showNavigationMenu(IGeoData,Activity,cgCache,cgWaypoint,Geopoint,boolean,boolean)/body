@@ -4,20 +4,11 @@
   builder.setIcon(R.drawable.ic_menu_mapmode);
   final List<NavigationAppsEnum> items=new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
   final int defaultNavigationTool=Settings.getDefaultNavigationTool();
-  final boolean hasStaticMaps=hasStaticMap(cache,waypoint);
   for (  NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
-    if (NavigationAppsEnum.STATIC_MAP.id == navApp.id) {
-      if (hasStaticMaps) {
+    if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
+      if ((cache != null && navApp.app.isEnabled(cache)) || (waypoint != null && navApp.app.isEnabled(waypoint))) {
         items.add(navApp);
       }
-    }
- else     if (NavigationAppsEnum.DOWNLOAD_STATIC_MAPS.id == navApp.id) {
-      if (!hasStaticMaps) {
-        items.add(navApp);
-      }
-    }
- else     if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-      items.add(navApp);
     }
   }
   final ArrayAdapter<NavigationAppsEnum> adapter=new ArrayAdapter<NavigationAppsEnum>(activity,android.R.layout.select_dialog_item,items);
