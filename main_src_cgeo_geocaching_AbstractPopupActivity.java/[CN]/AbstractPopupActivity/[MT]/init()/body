@@ -7,9 +7,8 @@
     return;
   }
   if (CacheType.UNKNOWN == cache.getType()) {
-    SearchResult search=GCMap.searchByGeocodes(Collections.singleton(geocode));
+    final SearchResult search=GCMap.searchByGeocodes(Collections.singleton(geocode));
     cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
   }
-  inflater=getLayoutInflater();
   geocode=cache.getGeocode().toUpperCase();
 }

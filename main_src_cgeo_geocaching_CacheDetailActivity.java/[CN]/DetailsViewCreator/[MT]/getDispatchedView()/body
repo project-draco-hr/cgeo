@@ -7,35 +7,16 @@
     new PreviewMapTask().execute((Void)null);
   }
   detailsList=(LinearLayout)view.findViewById(R.id.details_list);
+  final CacheDetailsCreator details=new CacheDetailsCreator(CacheDetailActivity.this,detailsList);
   Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
   if (cache.isDisabled() || cache.isArchived()) {
     span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
-  addCacheDetail(R.string.cache_name,span);
-  addCacheDetail(R.string.cache_type,cache.getType().getL10n());
-  if (null != cache.getSize() && cache.showSize()) {
-    addCacheDetail(R.string.cache_size,cache.getSize().getL10n());
-  }
-  addCacheDetail(R.string.cache_geocode,cache.getGeocode().toUpperCase());
-  if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled()|| cache.isPremiumMembersOnly()|| cache.isFound()) {
-    List<String> states=new ArrayList<String>(5);
-    if (cache.isLogOffline()) {
-      states.add(res.getString(R.string.cache_status_offline_log));
-    }
-    if (cache.isFound()) {
-      states.add(res.getString(R.string.cache_status_found));
-    }
-    if (cache.isArchived()) {
-      states.add(res.getString(R.string.cache_status_archived));
-    }
-    if (cache.isDisabled()) {
-      states.add(res.getString(R.string.cache_status_disabled));
-    }
-    if (cache.isPremiumMembersOnly()) {
-      states.add(res.getString(R.string.cache_status_premium));
-    }
-    addCacheDetail(R.string.cache_status,StringUtils.join(states,", "));
-  }
+  details.add(R.string.cache_name,span);
+  details.add(R.string.cache_type,cache.getType().getL10n());
+  details.addSize(cache);
+  details.add(R.string.cache_geocode,cache.getGeocode().toUpperCase());
+  details.addCacheState(cache);
 {
     Float distance=null;
     if (cache.getDistance() != null) {
@@ -47,28 +28,17 @@
         distance=currentCoords.distanceTo(cache);
       }
     }
-    cacheDistanceView=addCacheDetail(R.string.cache_distance,distance != null ? HumanDistance.getHumanDistance(distance) : "--");
+    cacheDistanceView=details.add(R.string.cache_distance,distance != null ? HumanDistance.getHumanDistance(distance) : "--");
   }
-  if (cache.getDifficulty() > 0) {
-    addStarRating(R.string.cache_difficulty,cache.getDifficulty());
-  }
-  if (cache.getTerrain() > 0) {
-    addStarRating(R.string.cache_terrain,cache.getTerrain());
-  }
-  if (cache.getRating() > 0) {
-    final RelativeLayout itemLayout=addStarRating(R.string.cache_rating,cache.getRating());
-    if (cache.getVotes() > 0) {
-      final TextView itemAddition=(TextView)itemLayout.findViewById(R.id.addition);
-      itemAddition.setText("(" + cache.getVotes() + ")");
-      itemAddition.setVisibility(View.VISIBLE);
-    }
-  }
-  addCacheDetail(R.string.cache_favourite,cache.getFavoritePoints() + "??");
+  details.addDifficulty(cache);
+  details.addTerrain(cache);
+  details.addRating(cache);
+  details.add(R.string.cache_favourite,cache.getFavoritePoints() + "??");
   if (cache.getMyVote() > 0) {
-    addStarRating(R.string.cache_own_rating,cache.getMyVote());
+    details.addStars(R.string.cache_own_rating,cache.getMyVote());
   }
   if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
-    TextView ownerView=addCacheDetail(R.string.cache_owner,"");
+    TextView ownerView=details.add(R.string.cache_owner,"");
     if (StringUtils.isNotBlank(cache.getOwner())) {
       ownerView.setText(Html.fromHtml(cache.getOwner()),TextView.BufferType.SPANNABLE);
     }
@@ -84,14 +54,14 @@
       if (cache.isEventCache()) {
         dateString=DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(),time,DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
       }
-      addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,dateString);
+      details.add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,dateString);
     }
   }
   if (StringUtils.isNotBlank(cache.getLocation())) {
-    addCacheDetail(R.string.cache_location,cache.getLocation());
+    details.add(R.string.cache_location,cache.getLocation());
   }
   if (cache.getCoords() != null) {
-    TextView valueView=addCacheDetail(R.string.cache_coordinates,cache.getCoords().toString());
+    TextView valueView=details.add(R.string.cache_coordinates,cache.getCoords().toString());
     valueView.setOnClickListener(new View.OnClickListener(){
       private int position=0;
       private GeopointFormatter.Format[] availableFormats=new GeopointFormatter.Format[]{GeopointFormatter.Format.LAT_LON_DECMINUTE,GeopointFormatter.Format.LAT_LON_DECSECOND,GeopointFormatter.Format.LAT_LON_DECDEGREE};

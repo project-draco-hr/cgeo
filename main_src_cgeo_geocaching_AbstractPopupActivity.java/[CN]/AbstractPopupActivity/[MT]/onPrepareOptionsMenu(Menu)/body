@@ -1,16 +1,10 @@
 {
   super.onPrepareOptionsMenu(menu);
   try {
-    if (cache != null && cache.getCoords() != null) {
-      menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(true);
-      menu.findItem(MENU_NAVIGATION).setVisible(true);
-      menu.findItem(MENU_CACHES_AROUND).setVisible(true);
-    }
- else {
-      menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(false);
-      menu.findItem(MENU_NAVIGATION).setVisible(false);
-      menu.findItem(MENU_CACHES_AROUND).setVisible(false);
-    }
+    final boolean visible=getCoordinates() != null;
+    menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(visible);
+    menu.findItem(MENU_NAVIGATION).setVisible(visible);
+    menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
     menu.findItem(MENU_LOG_VISIT).setEnabled(Settings.isLogin());
   }
  catch (  Exception e) {

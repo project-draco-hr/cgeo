@@ -1,0 +1,25 @@
+{
+  final String cacheType=cache.getType().getL10n();
+  final String cacheSize=cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
+  details.add(R.string.cache_type,cacheType + cacheSize);
+  details.add(R.string.cache_geocode,cache.getGeocode().toUpperCase());
+  details.addCacheState(cache);
+  details.add(R.string.cache_distance,"--");
+  cacheDistance=details.getValueView();
+  details.addDifficulty(cache);
+  details.addTerrain(cache);
+  if (cache.getRating() > 0) {
+    details.addRating(cache);
+  }
+ else {
+    aquireGCVote();
+  }
+  final Button buttonMore=(Button)findViewById(R.id.more_details);
+  buttonMore.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View arg0){
+      CacheDetailActivity.startActivity(AbstractPopupActivity.this,geocode.toUpperCase());
+      finish();
+    }
+  }
+);
+}

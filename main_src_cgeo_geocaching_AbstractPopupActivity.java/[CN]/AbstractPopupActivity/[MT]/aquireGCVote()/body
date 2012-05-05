@@ -1,19 +1,21 @@
 {
-  if (Settings.isRatingWanted() && cache.supportsGCVote()) {
-    (new Thread(){
-      @Override public void run(){
-        GCVoteRating rating=GCVote.getRating(cache.getGuid(),geocode);
-        if (rating == null) {
-          return;
-        }
-        Message msg=Message.obtain();
-        Bundle bundle=new Bundle();
-        bundle.putFloat("rating",rating.getRating());
-        bundle.putInt("votes",rating.getVotes());
-        msg.setData(bundle);
-        ratingHandler.sendMessage(msg);
-      }
-    }
-).start();
+  if (!Settings.isRatingWanted()) {
+    return;
   }
+  if (!cache.supportsGCVote()) {
+    return;
+  }
+  (new Thread("Load GCVote"){
+    @Override public void run(){
+      final GCVoteRating rating=GCVote.getRating(cache.getGuid(),geocode);
+      if (rating == null) {
+        return;
+      }
+      cache.setRating(rating.getRating());
+      cache.setVotes(rating.getVotes());
+      final Message msg=Message.obtain();
+      ratingHandler.sendMessage(msg);
+    }
+  }
+).start();
 }

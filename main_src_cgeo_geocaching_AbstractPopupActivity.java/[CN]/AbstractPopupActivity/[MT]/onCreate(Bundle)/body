@@ -3,7 +3,7 @@
   setTheme(R.style.transparent);
   setContentView(layout);
   setTitle(res.getString(R.string.detail));
-  Bundle extras=getIntent().getExtras();
+  final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(EXTRA_GEOCODE);
   }
@@ -12,7 +12,7 @@
     finish();
     return;
   }
-  ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
+  final ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
   defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){
     @Override public boolean onLongClick(    View v){
       startDefaultNavigation2();

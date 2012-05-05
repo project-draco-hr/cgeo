@@ -1,6 +1,7 @@
 {
   if (waypoint == null || waypoint.getGeocode() == null) {
     showToast(res.getString(R.string.err_waypoint_open_cache_failed));
+    return;
   }
   CacheDetailActivity.startActivity(this,waypoint.getGeocode());
   finish();

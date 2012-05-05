@@ -1,0 +1,9 @@
+{
+  final Geopoint coords=getCoordinates();
+  if (coords == null) {
+    showToast(res.getString(R.string.err_location_unknown));
+    return;
+  }
+  cgeocaches.startActivityCoordinates(this,coords);
+  finish();
+}

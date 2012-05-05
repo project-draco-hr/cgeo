@@ -1,0 +1,21 @@
+{
+  if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled()|| cache.isPremiumMembersOnly()|| cache.isFound()) {
+    final List<String> states=new ArrayList<String>(5);
+    if (cache.isLogOffline()) {
+      states.add(res.getString(R.string.cache_status_offline_log));
+    }
+    if (cache.isFound()) {
+      states.add(res.getString(R.string.cache_status_found));
+    }
+    if (cache.isArchived()) {
+      states.add(res.getString(R.string.cache_status_archived));
+    }
+    if (cache.isDisabled()) {
+      states.add(res.getString(R.string.cache_status_disabled));
+    }
+    if (cache.isPremiumMembersOnly()) {
+      states.add(res.getString(R.string.cache_status_premium));
+    }
+    add(R.string.cache_status,StringUtils.join(states,", "));
+  }
+}
