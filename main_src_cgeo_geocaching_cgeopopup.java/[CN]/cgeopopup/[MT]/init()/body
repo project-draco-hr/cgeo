@@ -9,7 +9,7 @@
   if (CacheType.UNKNOWN == cache.getType()) {
     Set<String> geocodes=new HashSet<String>();
     geocodes.add(geocode);
-    SearchResult search=ConnectorFactory.searchByGeocodes(geocodes);
+    SearchResult search=GCMap.searchByGeocodes(geocodes);
     cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
   }
   try {

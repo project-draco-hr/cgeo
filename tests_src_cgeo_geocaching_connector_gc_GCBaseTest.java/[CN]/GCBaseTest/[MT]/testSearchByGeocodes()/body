@@ -1,8 +1,0 @@
-{
-  MockedCache mockedCache=new GC2CJPF();
-  Set<String> geocodes=new HashSet<String>();
-  geocodes.add(mockedCache.getGeocode());
-  SearchResult result=GCBase.searchByGeocodes(geocodes);
-  cgCache parsedCache=result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
-  Compare.assertCompareCaches(mockedCache,parsedCache,false);
-}

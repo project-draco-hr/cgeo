@@ -8,7 +8,7 @@
     final String[] tokens=null;
     MockedCache cache=new GC2CJPF();
     deleteCacheFromDBAndLogout(cache.getGeocode());
-    GCBase.removeFromTileCache(cache);
+    Tile.Cache.removeFromTileCache(cache);
     Viewport viewport=new Viewport(cache,0.003,0.003);
     SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
     assertNotNull(search);

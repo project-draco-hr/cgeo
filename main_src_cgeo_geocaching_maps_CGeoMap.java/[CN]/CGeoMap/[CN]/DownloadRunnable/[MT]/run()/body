@@ -4,7 +4,7 @@
     int count=0;
     do {
       if (tokens == null) {
-        tokens=GCBase.getTokens();
+        tokens=Login.getMapTokens();
         if (noMapTokenHandler != null && tokens == null) {
           noMapTokenHandler.sendEmptyMessage(0);
         }

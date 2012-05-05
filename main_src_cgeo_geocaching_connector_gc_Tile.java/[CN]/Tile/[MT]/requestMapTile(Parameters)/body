@@ -1,0 +1,10 @@
+{
+  final HttpResponse response=Network.getRequest(GCConstants.URL_MAP_TILE,params,new Parameters("Referer",GCConstants.URL_LIVE_MAP));
+  try {
+    return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
+  }
+ catch (  IOException e) {
+    Log.e("cgBase.requestMapTile() " + e.getMessage());
+  }
+  return null;
+}

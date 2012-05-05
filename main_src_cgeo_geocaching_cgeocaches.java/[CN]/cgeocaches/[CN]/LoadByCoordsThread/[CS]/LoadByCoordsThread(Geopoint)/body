@@ -1,0 +1,8 @@
+{
+  super(loadCachesHandler);
+  this.coords=coords;
+  if (coords == null) {
+    showToast(res.getString(R.string.warn_no_coordinates));
+    finish();
+  }
+}

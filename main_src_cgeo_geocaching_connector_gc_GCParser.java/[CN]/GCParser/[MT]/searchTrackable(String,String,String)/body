@@ -20,7 +20,7 @@
     Log.e("cgeoBase.searchTrackable: No data from server");
     return trackable;
   }
-  trackable=parseTrackable(page,cgeoapplication.getInstance(),geocode);
+  trackable=parseTrackable(page,geocode);
   if (trackable == null) {
     Log.e("cgeoBase.searchTrackable: No trackable parsed");
     return null;

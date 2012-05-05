@@ -1,0 +1,22 @@
+{
+  if (response == null) {
+    return Collections.emptyList();
+  }
+  Collection<cgCache> caches=null;
+  try {
+    caches=new GPX10Parser(StoredList.STANDARD_LIST_ID).parse(response.getEntity().getContent(),null);
+  }
+ catch (  Exception e) {
+    Log.e("Error importing from OpenCaching.com",e);
+    return Collections.emptyList();
+  }
+  for (  cgCache cache : caches) {
+    cache.setUpdated(System.currentTimeMillis());
+    if (isDetailed) {
+      cache.setDetailedUpdate(cache.getUpdated());
+      cache.setDetailed(true);
+    }
+    cgeoapplication.getInstance().saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+  }
+  return caches;
+}

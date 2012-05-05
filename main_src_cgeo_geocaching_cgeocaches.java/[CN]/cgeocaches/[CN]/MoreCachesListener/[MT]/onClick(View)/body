@@ -2,8 +2,7 @@
   showProgress(true);
   setLoadingCaches();
   listFooter.setOnClickListener(null);
-  LoadNextPageThread thread;
-  thread=new LoadNextPageThread(loadNextPageHandler);
-  thread.setRecaptchaHandler(new cgSearchHandler(cgeocaches.this,res,thread));
+  final LoadNextPageThread thread=new LoadNextPageThread();
+  thread.setRecaptchaHandler(new SearchHandler(cgeocaches.this,res,thread));
   thread.start();
 }

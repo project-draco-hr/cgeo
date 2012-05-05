@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(cacheId) && getConnector().equals(GCConnector.getInstance())) {
-    return String.valueOf(GCBase.gccodeToGCId(geocode));
+    return String.valueOf(GCConstants.gccodeToGCId(geocode));
   }
   return cacheId;
 }

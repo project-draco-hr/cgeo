@@ -26,7 +26,7 @@
     }
   }
   Thread threadPure;
-  cgSearchThread thread;
+  AbstractSearchThread thread;
 switch (type) {
 case OFFLINE:
     listId=Settings.getLastList();
@@ -42,7 +42,7 @@ case OFFLINE:
 setTitle(title);
 showProgress(true);
 setLoadingCaches();
-threadPure=new LoadByOfflineThread(loadCachesHandler,coords,listId);
+threadPure=new LoadByOfflineThread(coords,listId);
 threadPure.start();
 break;
 case HISTORY:
@@ -50,7 +50,7 @@ title=res.getString(R.string.caches_history);
 setTitle(title);
 showProgress(true);
 setLoadingCaches();
-threadPure=new LoadByHistoryThread(loadCachesHandler);
+threadPure=new LoadByHistoryThread();
 threadPure.start();
 break;
 case NEAREST:
@@ -59,8 +59,8 @@ title=res.getString(R.string.caches_nearby);
 setTitle(title);
 showProgress(true);
 setLoadingCaches();
-thread=new LoadByCoordsThread(loadCachesHandler,coords);
-thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
+thread=new LoadByCoordsThread(coords);
+thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case COORDINATE:
@@ -69,8 +69,8 @@ title=coords.toString();
 setTitle(title);
 showProgress(true);
 setLoadingCaches();
-thread=new LoadByCoordsThread(loadCachesHandler,coords);
-thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
+thread=new LoadByCoordsThread(coords);
+thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case KEYWORD:
@@ -78,8 +78,8 @@ title=keyword;
 setTitle(title);
 showProgress(true);
 setLoadingCaches();
-thread=new LoadByKeywordThread(loadCachesHandler,keyword);
-thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
+thread=new LoadByKeywordThread(keyword);
+thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case ADDRESS:
@@ -96,8 +96,8 @@ setTitle(title);
 showProgress(true);
 setLoadingCaches();
 }
-thread=new LoadByCoordsThread(loadCachesHandler,coords);
-thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
+thread=new LoadByCoordsThread(coords);
+thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case USERNAME:
@@ -105,8 +105,8 @@ title=username;
 setTitle(title);
 showProgress(true);
 setLoadingCaches();
-thread=new LoadByUserNameThread(loadCachesHandler,username);
-thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
+thread=new LoadByUserNameThread(username);
+thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case OWNER:
@@ -114,8 +114,8 @@ title=username;
 setTitle(title);
 showProgress(true);
 setLoadingCaches();
-thread=new LoadByOwnerThread(loadCachesHandler,username);
-thread.setRecaptchaHandler(new cgSearchHandler(this,res,thread));
+thread=new LoadByOwnerThread(username);
+thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case MAP:

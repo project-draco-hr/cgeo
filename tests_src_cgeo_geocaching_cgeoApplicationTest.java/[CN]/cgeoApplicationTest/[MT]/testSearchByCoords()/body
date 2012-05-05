@@ -1,5 +1,5 @@
 {
-  final SearchResult search=GCParser.searchByCoords(null,new Geopoint("N 52?? 24.972 E 009?? 35.647"),CacheType.MYSTERY,false);
+  final SearchResult search=GCParser.searchByCoords(new Geopoint("N 52?? 24.972 E 009?? 35.647"),CacheType.MYSTERY,false);
   assertNotNull(search);
   assertTrue(18 <= search.getGeocodes().size());
   assertTrue(search.getGeocodes().contains("GC1RMM2"));

@@ -1,0 +1,4 @@
+{
+  final HttpResponse response=Network.getRequest("http://www.opencaching.com/api/geocache/.gpx",new Parameters("Authorization",DEV_KEY,"log_limit","0","hint","false","description","none","limit","10","center",center.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA)));
+  return importCachesFromResponse(response,false);
+}
