@@ -1,0 +1,36 @@
+{
+  RelativeLayout itemLayout;
+  TextView itemName;
+  TextView itemValue;
+  itemLayout=(RelativeLayout)inflater.inflate(R.layout.cache_item,null);
+  itemName=(TextView)itemLayout.findViewById(R.id.name);
+  itemValue=(TextView)itemLayout.findViewById(R.id.value);
+  itemName.setText(res.getString(R.string.cache_status));
+  final StringBuilder state=new StringBuilder();
+  if (cache.isFound()) {
+    if (state.length() > 0) {
+      state.append(", ");
+    }
+    state.append(res.getString(R.string.cache_status_found));
+  }
+  if (cache.isArchived()) {
+    if (state.length() > 0) {
+      state.append(", ");
+    }
+    state.append(res.getString(R.string.cache_status_archived));
+  }
+  if (cache.isDisabled()) {
+    if (state.length() > 0) {
+      state.append(", ");
+    }
+    state.append(res.getString(R.string.cache_status_disabled));
+  }
+  if (cache.isPremiumMembersOnly()) {
+    if (state.length() > 0) {
+      state.append(", ");
+    }
+    state.append(res.getString(R.string.cache_status_premium));
+  }
+  itemValue.setText(state.toString());
+  return itemLayout;
+}

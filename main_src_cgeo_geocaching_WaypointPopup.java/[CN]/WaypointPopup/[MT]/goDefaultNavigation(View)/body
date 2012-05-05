@@ -1,0 +1,8 @@
+{
+  if (waypoint == null || waypoint.getCoords() == null) {
+    showToast(res.getString(R.string.cache_coordinates_no));
+    return;
+  }
+  NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(),this,null,waypoint,null);
+  finish();
+}

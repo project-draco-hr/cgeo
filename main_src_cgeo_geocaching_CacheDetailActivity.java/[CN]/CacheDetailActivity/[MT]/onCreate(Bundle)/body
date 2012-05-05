@@ -103,10 +103,16 @@
     }
   }
 );
-  final int entryPageIndex=Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
-  if (viewPagerAdapter.getCount() < entryPageIndex) {
-    for (int i=0; i <= entryPageIndex; i++) {
-      pageOrder.add(null);
+  int entryPageIndex;
+  if (extras != null && extras.get("page") != null) {
+    entryPageIndex=extras.getInt("page");
+  }
+ else {
+    entryPageIndex=Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+    if (viewPagerAdapter.getCount() < entryPageIndex) {
+      for (int i=0; i <= entryPageIndex; i++) {
+        pageOrder.add(null);
+      }
     }
   }
   viewPager.setCurrentItem(entryPageIndex,false);

@@ -1,0 +1,15 @@
+{
+  app.setAction(geocode);
+  cache=app.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  if (cache == null) {
+    showToast(res.getString(R.string.err_detail_cache_find));
+    finish();
+    return;
+  }
+  if (CacheType.UNKNOWN == cache.getType()) {
+    SearchResult search=GCMap.searchByGeocodes(Collections.singleton(geocode));
+    cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+  }
+  inflater=getLayoutInflater();
+  geocode=cache.getGeocode().toUpperCase();
+}

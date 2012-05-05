@@ -4,7 +4,7 @@
     if (overlayPosition == null && mapView != null) {
       overlayPosition=mapView.createAddPositionOverlay(activity);
     }
-    if (overlayPosition != null && geo.getLocation() != null) {
+    if ((overlayPosition != null && geo.getLocation() != null)) {
       overlayPosition.setCoordinates(geo.getLocation());
     }
     if (geo.getCoords() != null) {
