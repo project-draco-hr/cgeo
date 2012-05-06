@@ -1,0 +1,22 @@
+{
+  Float distance=null;
+  if (cache.getCoords() != null) {
+    final Geopoint currentCoords=cgeoapplication.getInstance().currentGeo().getCoords();
+    if (currentCoords != null) {
+      distance=currentCoords.distanceTo(cache);
+    }
+  }
+  if (distance == null) {
+    if (cache.getDistance() != null) {
+      distance=cache.getDistance();
+    }
+  }
+  String text="--";
+  if (distance != null) {
+    text=HumanDistance.getHumanDistance(distance);
+  }
+ else   if (cacheDistanceView != null) {
+    text=cacheDistanceView.getText().toString();
+  }
+  add(R.string.cache_distance,text);
+}

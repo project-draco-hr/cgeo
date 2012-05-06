@@ -17,19 +17,8 @@
   details.addSize(cache);
   details.add(R.string.cache_geocode,cache.getGeocode().toUpperCase());
   details.addCacheState(cache);
-{
-    Float distance=null;
-    if (cache.getDistance() != null) {
-      distance=cache.getDistance();
-    }
- else     if (cache.getCoords() != null) {
-      final Geopoint currentCoords=app.currentGeo().getCoords();
-      if (currentCoords != null) {
-        distance=currentCoords.distanceTo(cache);
-      }
-    }
-    cacheDistanceView=details.add(R.string.cache_distance,distance != null ? HumanDistance.getHumanDistance(distance) : "--");
-  }
+  details.addDistance(cache,cacheDistanceView);
+  cacheDistanceView=details.getValueView();
   details.addDifficulty(cache);
   details.addTerrain(cache);
   details.addRating(cache);

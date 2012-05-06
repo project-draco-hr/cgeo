@@ -4,7 +4,7 @@
   details.add(R.string.cache_type,cacheType + cacheSize);
   details.add(R.string.cache_geocode,cache.getGeocode().toUpperCase());
   details.addCacheState(cache);
-  details.add(R.string.cache_distance,cacheDistance != null ? cacheDistance.getText().toString() : "--");
+  details.addDistance(cache,cacheDistance);
   cacheDistance=details.getValueView();
   details.addDifficulty(cache);
   details.addTerrain(cache);
