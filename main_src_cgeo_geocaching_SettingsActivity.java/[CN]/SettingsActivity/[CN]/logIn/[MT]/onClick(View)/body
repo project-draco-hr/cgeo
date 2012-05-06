@@ -1,0 +1,24 @@
+{
+  final String username=((EditText)findViewById(R.id.username)).getText().toString();
+  final String password=((EditText)findViewById(R.id.password)).getText().toString();
+  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+    showToast(res.getString(R.string.err_missing_auth));
+    return;
+  }
+  loginDialog=ProgressDialog.show(SettingsActivity.this,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
+  loginDialog.setCancelable(false);
+  Settings.setLogin(username,password);
+  Cookies.clearCookies();
+  (new Thread(){
+    @Override public void run(){
+      final StatusCode loginResult=Login.login();
+      Object payload=loginResult;
+      if (loginResult == StatusCode.NO_ERROR) {
+        Login.detectGcCustomDate();
+        payload=Login.downloadAvatarAndGetMemberStatus();
+      }
+      logInHandler.obtainMessage(0,payload).sendToTarget();
+    }
+  }
+).start();
+}

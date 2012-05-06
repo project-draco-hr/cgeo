@@ -5,8 +5,8 @@
       if (StringUtils.isBlank(scan)) {
         return;
       }
-      Intent searchIntent=new Intent(this,cgeoadvsearch.class);
-      searchIntent.setAction(Intent.ACTION_SEARCH).putExtra(SearchManager.QUERY,scan).putExtra(cgeoadvsearch.EXTRAS_KEYWORDSEARCH,false);
+      Intent searchIntent=new Intent(this,SearchActivity.class);
+      searchIntent.setAction(Intent.ACTION_SEARCH).putExtra(SearchManager.QUERY,scan).putExtra(SearchActivity.EXTRAS_KEYWORDSEARCH,false);
       startActivityForResult(searchIntent,SEARCH_REQUEST_CODE);
     }
  else     if (resultCode == RESULT_CANCELED) {

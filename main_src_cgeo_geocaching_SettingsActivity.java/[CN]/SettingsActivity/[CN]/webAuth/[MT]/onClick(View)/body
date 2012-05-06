@@ -1,0 +1,32 @@
+{
+  final String deviceName=((EditText)findViewById(R.id.webDeviceName)).getText().toString();
+  final String deviceCode=Settings.getWebDeviceCode();
+  if (StringUtils.isBlank(deviceName)) {
+    showToast(res.getString(R.string.err_missing_device_name));
+    return;
+  }
+  webDialog=ProgressDialog.show(SettingsActivity.this,res.getString(R.string.init_sendToCgeo),res.getString(R.string.init_sendToCgeo_registering),true);
+  webDialog.setCancelable(false);
+  (new Thread(){
+    @Override public void run(){
+      int pin=0;
+      final String nam=StringUtils.defaultString(deviceName);
+      final String cod=StringUtils.defaultString(deviceCode);
+      final Parameters params=new Parameters("name",nam,"code",cod);
+      HttpResponse response=Network.getRequest("http://send2.cgeo.org/auth.html",params);
+      if (response != null && response.getStatusLine().getStatusCode() == 200) {
+        String[] strings=Network.getResponseData(response).split(",");
+        try {
+          pin=Integer.parseInt(strings[1].trim());
+        }
+ catch (        Exception e) {
+          Log.e("webDialog: " + e.toString());
+        }
+        String code=strings[0];
+        Settings.setWebNameCode(nam,code);
+      }
+      webAuthHandler.sendEmptyMessage(pin);
+    }
+  }
+).start();
+}

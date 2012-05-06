@@ -1,0 +1,71 @@
+{
+  final String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
+  final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString() + distanceUnit;
+  final String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
+  final String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
+  if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
+    helpDialog(res.getString(R.string.err_point_no_position_given_title),res.getString(R.string.err_point_no_position_given));
+    return;
+  }
+  Geopoint coords;
+  if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
+    try {
+      coords=new Geopoint(latText,lonText);
+    }
+ catch (    Geopoint.ParseException e) {
+      showToast(res.getString(e.resource));
+      return;
+    }
+  }
+ else {
+    final IGeoData geo=app.currentGeo();
+    if (geo.getCoords() == null) {
+      showToast(res.getString(R.string.err_point_curr_position_unavailable));
+      return;
+    }
+    coords=geo.getCoords();
+  }
+  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+    double bearing;
+    try {
+      bearing=Double.parseDouble(bearingText);
+    }
+ catch (    NumberFormatException e) {
+      helpDialog(res.getString(R.string.err_point_bear_and_dist_title),res.getString(R.string.err_point_bear_and_dist));
+      return;
+    }
+    double distance;
+    try {
+      distance=DistanceParser.parseDistance(distanceText,Settings.isUseMetricUnits());
+    }
+ catch (    NumberFormatException e) {
+      showToast(res.getString(R.string.err_parse_dist));
+      return;
+    }
+    coords=coords.project(bearing,distance);
+  }
+  String name=((EditText)findViewById(R.id.name)).getText().toString().trim();
+  if (name.length() == 0) {
+    name=res.getString(R.string.waypoint) + " " + String.valueOf(wpCount + 1);
+  }
+  final String note=((EditText)findViewById(R.id.note)).getText().toString().trim();
+  final cgWaypoint waypoint=new cgWaypoint(name,type,own);
+  waypoint.setGeocode(geocode);
+  waypoint.setPrefix(prefix);
+  waypoint.setLookup(lookup);
+  waypoint.setCoords(coords);
+  waypoint.setNote(note);
+  waypoint.setId(id);
+  cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+  if (null != cache && cache.addWaypoint(waypoint,true)) {
+    app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    StaticMapsProvider.removeWpStaticMaps(id,geocode);
+    if (Settings.isStoreOfflineWpMaps()) {
+      StaticMapsProvider.storeWaypointStaticMap(cache,EditWaypointActivity.this,waypoint,false);
+    }
+    finish();
+  }
+ else {
+    showToast(res.getString(R.string.err_waypoint_add_failed));
+  }
+}
