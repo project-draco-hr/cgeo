@@ -35,10 +35,10 @@
       offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
       offlineRefresh.setVisibility(View.VISIBLE);
       offlineRefresh.setEnabled(true);
-      offlineRefresh.setOnClickListener(new StoreCache());
+      offlineRefresh.setOnClickListener(new RefreshCacheClickListener());
       offlineStore.setText(res.getString(R.string.cache_offline_drop));
       offlineStore.setEnabled(true);
-      offlineStore.setOnClickListener(new DropCache());
+      offlineStore.setOnClickListener(new DropCacheClickListener());
     }
  else {
       offlineText.setText(res.getString(R.string.cache_offline_not_ready));
@@ -48,10 +48,11 @@
       offlineRefresh.setOnClickListener(null);
       offlineStore.setText(res.getString(R.string.cache_offline_store));
       offlineStore.setEnabled(true);
-      offlineStore.setOnClickListener(new StoreCache());
+      offlineStore.setOnClickListener(new StoreCacheClickListener());
     }
   }
  catch (  Exception e) {
     Log.e("cgeopopup.init: " + e.toString());
   }
+  progress.dismiss();
 }
