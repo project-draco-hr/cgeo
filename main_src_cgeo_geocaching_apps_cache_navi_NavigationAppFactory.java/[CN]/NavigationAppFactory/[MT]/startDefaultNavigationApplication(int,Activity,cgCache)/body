@@ -1,0 +1,7 @@
+{
+  if (cache == null || cache.getCoords() == null) {
+    ActivityMixin.showToast(activity,cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+    return;
+  }
+  invokeApp(activity,cache,null,null,getDefaultNavigationApplication(defaultNavigation));
+}

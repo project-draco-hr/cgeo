@@ -1,0 +1,7 @@
+{
+  if (destination == null) {
+    ActivityMixin.showToast(activity,cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+    return;
+  }
+  invokeApp(activity,null,null,destination,getDefaultNavigationApplication(defaultNavigation));
+}

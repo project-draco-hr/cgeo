@@ -1,7 +1,3 @@
 {
-  if (geopoint == null) {
-    showToast(res.getString(R.string.err_location_unknown));
-    return;
-  }
-  NavigationAppFactory.startDefaultNavigationApplication(this,null,null,geopoint);
+  NavigationAppFactory.startDefaultNavigationApplication(1,this,geopoint);
 }
