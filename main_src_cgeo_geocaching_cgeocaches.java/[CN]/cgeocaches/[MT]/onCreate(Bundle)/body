@@ -1,10 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  if (CollectionUtils.isNotEmpty(cacheList)) {
-    setMoreCaches();
-  }
-  setTitle(title);
-  setAdapter();
   app.setAction(action);
   setTheme();
   setContentView(R.layout.caches);
@@ -25,6 +20,11 @@
       coords=new Geopoint(0.0,0.0);
     }
   }
+  if (CollectionUtils.isNotEmpty(cacheList)) {
+    showFooterMoreCaches();
+  }
+  setTitle(title);
+  setAdapter();
   Thread threadPure;
   AbstractSearchThread thread;
 switch (type) {
@@ -41,7 +41,7 @@ case OFFLINE:
   }
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 threadPure=new LoadByOfflineThread(coords,listId);
 threadPure.start();
 break;
@@ -49,7 +49,7 @@ case HISTORY:
 title=res.getString(R.string.caches_history);
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 threadPure=new LoadByHistoryThread();
 threadPure.start();
 break;
@@ -58,7 +58,7 @@ action="pending";
 title=res.getString(R.string.caches_nearby);
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 thread=new LoadByCoordsThread(coords);
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
@@ -68,7 +68,7 @@ action="planning";
 title=coords.toString();
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 thread=new LoadByCoordsThread(coords);
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
@@ -77,7 +77,7 @@ case KEYWORD:
 title=keyword;
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 thread=new LoadByKeywordThread(keyword);
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
@@ -88,13 +88,13 @@ if (StringUtils.isNotBlank(address)) {
 title=address;
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 }
  else {
 title=coords.toString();
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 }
 thread=new LoadByCoordsThread(coords);
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
@@ -104,7 +104,7 @@ case USERNAME:
 title=username;
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 thread=new LoadByUserNameThread(username);
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
@@ -113,7 +113,7 @@ case OWNER:
 title=username;
 setTitle(title);
 showProgress(true);
-setLoadingCaches();
+showFooterLoadingCaches();
 thread=new LoadByOwnerThread(username);
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();

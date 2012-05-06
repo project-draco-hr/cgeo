@@ -10,7 +10,7 @@
   title=list.title;
   Settings.saveLastList(listId);
   showProgress(true);
-  setLoadingCaches();
+  showFooterLoadingCaches();
   (new MoveCachesToListThread(listId,new MoveHandler())).start();
   invalidateOptionsMenuCompatible();
 }

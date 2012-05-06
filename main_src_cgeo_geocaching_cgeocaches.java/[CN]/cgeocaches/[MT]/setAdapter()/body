@@ -6,15 +6,13 @@
     listFooter=inflater.inflate(R.layout.caches_footer,null);
     listFooter.setClickable(true);
     listFooter.setOnClickListener(new MoreCachesListener());
-  }
-  if (listFooterText == null) {
     listFooterText=(TextView)listFooter.findViewById(R.id.more_caches);
+    getListView().addFooterView(listFooter);
   }
   if (adapter == null) {
     final ListView list=getListView();
     registerForContextMenu(list);
     list.setLongClickable(true);
-    list.addFooterView(listFooter);
     adapter=new CacheListAdapter(this,cacheList,type);
     setListAdapter(adapter);
   }
