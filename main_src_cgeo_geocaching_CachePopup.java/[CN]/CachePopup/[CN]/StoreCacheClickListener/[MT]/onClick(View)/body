@@ -1,0 +1,9 @@
+{
+  if (progress.isShowing()) {
+    showToast(res.getString(R.string.err_detail_still_working));
+    return;
+  }
+  final StoreCacheHandler storeCacheHandler=new StoreCacheHandler();
+  progress.show(CachePopup.this,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,storeCacheHandler.cancelMessage());
+  new StoreCacheThread(storeCacheHandler).start();
+}
