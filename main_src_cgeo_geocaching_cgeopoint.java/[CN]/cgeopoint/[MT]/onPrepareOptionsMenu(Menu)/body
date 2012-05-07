@@ -1,17 +1,10 @@
 {
   super.onPrepareOptionsMenu(menu);
   try {
-    final Geopoint coords=getDestination();
-    if (coords != null) {
-      menu.findItem(MENU_NAVIGATE).setVisible(true);
-      menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(true);
-      menu.findItem(MENU_CACHES_AROUND).setVisible(true);
-    }
- else {
-      menu.findItem(MENU_NAVIGATE).setVisible(false);
-      menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(false);
-      menu.findItem(MENU_CACHES_AROUND).setVisible(false);
-    }
+    boolean visible=getDestination() != null;
+    menu.findItem(MENU_NAVIGATE).setVisible(visible);
+    menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(visible);
+    menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
     menu.findItem(MENU_CLEAR_HISTORY).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
   }
  catch (  Exception e) {
