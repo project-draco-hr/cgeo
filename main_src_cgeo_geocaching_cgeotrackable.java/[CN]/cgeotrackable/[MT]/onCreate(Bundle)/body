@@ -68,6 +68,6 @@
     message=res.getString(R.string.trackable);
   }
   waitDialog=ProgressDialog.show(this,message,res.getString(R.string.trackable_details_loading),true,true);
-  loadTrackable thread=new loadTrackable(loadTrackableHandler,geocode,guid,id);
+  LoadTrackableThread thread=new LoadTrackableThread(loadTrackableHandler,geocode,guid,id);
   thread.start();
 }

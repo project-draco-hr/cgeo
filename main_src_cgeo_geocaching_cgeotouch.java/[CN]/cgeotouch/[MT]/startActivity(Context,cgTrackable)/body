@@ -1,7 +1,7 @@
 {
-  Intent logTouchIntent=new Intent(this,cgeotouch.class);
+  final Intent logTouchIntent=new Intent(context,cgeotouch.class);
   logTouchIntent.putExtra("geocode",trackable.getGeocode().toUpperCase());
   logTouchIntent.putExtra("guid",trackable.getGuid());
   logTouchIntent.putExtra("trackingcode",trackable.getTrackingcode());
-  startActivity(logTouchIntent);
+  context.startActivity(logTouchIntent);
 }
