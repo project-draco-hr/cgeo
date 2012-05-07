@@ -7,7 +7,7 @@
       if (typeSelected == LogType.FOUND_IT) {
         cache.setFound(true);
       }
-      app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
+      app.saveCache(cache,cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
     }
     if (status == StatusCode.NO_ERROR) {
       app.clearLogOffline(geocode);
