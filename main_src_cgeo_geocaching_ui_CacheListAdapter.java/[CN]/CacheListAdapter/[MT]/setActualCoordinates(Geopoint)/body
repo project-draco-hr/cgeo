@@ -3,11 +3,7 @@
     return;
   }
   coords=coordsIn;
-  if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && !selectMode && isSortedByDistance()) {
-    Collections.sort(list,new DistanceComparator(coordsIn,list));
-    notifyDataSetChanged();
-    lastSort=System.currentTimeMillis();
-  }
+  updateSortByDistance();
   for (  final DistanceView distance : distances) {
     distance.update(coordsIn);
   }

@@ -3,10 +3,8 @@
     return;
   }
   if (isSortedByDistance()) {
-    if (coordsIn == null) {
-      return;
-    }
-    Collections.sort(list,new DistanceComparator(coordsIn,list));
+    lastSort=0;
+    updateSortByDistance();
   }
  else {
     Collections.sort(list,cacheComparator);
