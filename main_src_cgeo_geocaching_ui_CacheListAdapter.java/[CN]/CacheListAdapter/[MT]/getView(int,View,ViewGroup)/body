@@ -144,25 +144,25 @@
   final float myVote=cache.getMyVote();
   if (myVote > 0) {
     if (myVote >= 4) {
-      favoriteBack=ratingBcgs[2];
+      favoriteBack=RATING_BACKGROUND[2];
     }
  else     if (myVote >= 3) {
-      favoriteBack=ratingBcgs[1];
+      favoriteBack=RATING_BACKGROUND[1];
     }
  else     if (myVote > 0) {
-      favoriteBack=ratingBcgs[0];
+      favoriteBack=RATING_BACKGROUND[0];
     }
   }
  else {
     final float rating=cache.getRating();
     if (rating >= 3.5) {
-      favoriteBack=ratingBcgs[2];
+      favoriteBack=RATING_BACKGROUND[2];
     }
  else     if (rating >= 2.1) {
-      favoriteBack=ratingBcgs[1];
+      favoriteBack=RATING_BACKGROUND[1];
     }
  else     if (rating > 0.0) {
-      favoriteBack=ratingBcgs[0];
+      favoriteBack=RATING_BACKGROUND[0];
     }
   }
   holder.favourite.setBackgroundResource(favoriteBack);

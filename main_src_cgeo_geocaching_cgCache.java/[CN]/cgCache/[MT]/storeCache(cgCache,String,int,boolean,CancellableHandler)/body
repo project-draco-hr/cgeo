@@ -2,7 +2,7 @@
   try {
     cgCache cache;
     if (origCache != null) {
-      if (origCache.getListId() >= StoredList.STANDARD_LIST_ID || StringUtils.isBlank(origCache.getDescription())) {
+      if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
         final SearchResult search=searchByGeocode(origCache.getGeocode(),null,listId,false,handler);
         cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
       }

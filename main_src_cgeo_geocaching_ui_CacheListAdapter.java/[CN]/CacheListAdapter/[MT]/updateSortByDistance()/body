@@ -11,7 +11,9 @@
   if (!isSortedByDistance()) {
     return;
   }
-  Log.w(System.currentTimeMillis() + ":  " + coords.toString());
+  if (coords == null) {
+    return;
+  }
   Collections.sort(list,new DistanceComparator(coords,list));
   notifyDataSetChanged();
   lastSort=System.currentTimeMillis();

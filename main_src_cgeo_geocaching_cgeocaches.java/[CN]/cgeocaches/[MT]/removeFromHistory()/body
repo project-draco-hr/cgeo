@@ -1,10 +1,5 @@
 {
-  if (adapter != null && adapter.getCheckedCount() > 0) {
-    detailTotal=adapter.getCheckedCount();
-  }
- else {
-    detailTotal=cacheList.size();
-  }
+  detailTotal=adapter.getCheckedOrAllCount();
   detailProgress=0;
   showProgress(false);
   progress.show(this,null,res.getString(R.string.caches_removing_from_history),ProgressDialog.STYLE_HORIZONTAL,removeFromHistoryHandler.obtainMessage(MSG_CANCEL));

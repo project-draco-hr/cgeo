@@ -105,7 +105,7 @@ case MENU_IMPORT_WEB:
 importWeb();
 return false;
 case MENU_EXPORT:
-exportCaches();
+ExportFactory.showExportMenu(adapter.getCheckedOrAllCaches(),this);
 return false;
 case MENU_REMOVE_FROM_HISTORY:
 removeFromHistoryCheck();

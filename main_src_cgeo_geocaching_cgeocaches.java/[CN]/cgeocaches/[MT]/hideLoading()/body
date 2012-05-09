@@ -1,8 +1,8 @@
 {
   final ListView list=getListView();
-  final View loading=findViewById(R.id.loading);
   if (list.getVisibility() == View.GONE) {
     list.setVisibility(View.VISIBLE);
+    final View loading=findViewById(R.id.loading);
     loading.setVisibility(View.GONE);
   }
 }

@@ -1,23 +1,4 @@
 {
-  for (  cgCache cache : cacheList) {
-    if (checked > 0 && !cache.isStatusChecked()) {
-      handler.sendEmptyMessage(0);
-      yield();
-      continue;
-    }
-    try {
-      if (needToStop) {
-        Log.i("Stopped removing process.");
-        break;
-      }
-      app.clearVisitDate(cache.getGeocode());
-      detailProgress++;
-      handler.sendEmptyMessage(cacheList.indexOf(cache));
-      yield();
-    }
- catch (    Exception e) {
-      Log.e("cgeocaches.RemoveFromHistoryThread: " + e.toString());
-    }
-  }
+  app.clearVisitDate(selected);
   handler.sendEmptyMessage(MSG_DONE);
 }

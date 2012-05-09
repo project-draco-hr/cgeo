@@ -1,15 +1,7 @@
 {
   new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
     @Override public void run(    Integer newListId){
-      List<cgCache> selected;
-      final boolean moveAll=adapter.getCheckedCount() == 0;
-      if (moveAll) {
-        selected=new ArrayList<cgCache>(cacheList);
-      }
- else {
-        selected=adapter.getCheckedCaches();
-      }
-      app.moveToList(selected,newListId);
+      app.moveToList(adapter.getCheckedOrAllCaches(),newListId);
       adapter.setSelectMode(false);
       refreshCurrentList();
     }

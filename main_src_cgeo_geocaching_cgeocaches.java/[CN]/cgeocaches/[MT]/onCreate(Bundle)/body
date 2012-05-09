@@ -5,15 +5,13 @@
   setContentView(R.layout.caches);
   setTitle("caches");
   final Bundle extras=getIntent().getExtras();
-  if (extras != null) {
-    Object typeObject=extras.get(EXTRAS_LIST_TYPE);
-    type=(typeObject instanceof CacheListType) ? (CacheListType)typeObject : CacheListType.OFFLINE;
-    coords=(Geopoint)extras.getParcelable(EXTRAS_COORDS);
-    cacheType=Settings.getCacheType();
-    keyword=extras.getString("keyword");
-    address=extras.getString("address");
-    username=extras.getString("username");
+  if (extras == null) {
+    throw new UnsupportedOperationException();
   }
+  Object typeObject=extras.get(EXTRAS_LIST_TYPE);
+  type=(typeObject instanceof CacheListType) ? (CacheListType)typeObject : CacheListType.OFFLINE;
+  coords=(Geopoint)extras.getParcelable(EXTRAS_COORDS);
+  cacheType=Settings.getCacheType();
   if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
     type=CacheListType.OFFLINE;
     if (coords == null) {
@@ -27,6 +25,7 @@
   setAdapter();
   Thread threadPure;
   AbstractSearchThread thread;
+  final String username=extras.getString(EXTRAS_USERNAME);
 switch (type) {
 case OFFLINE:
     listId=Settings.getLastList();
@@ -74,6 +73,7 @@ thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case KEYWORD:
+final String keyword=extras.getString(EXTRAS_KEYWORD);
 title=keyword;
 setTitle(title);
 showProgress(true);
@@ -84,6 +84,7 @@ thread.start();
 break;
 case ADDRESS:
 action="planning";
+final String address=extras.getString(EXTRAS_ADDRESS);
 if (StringUtils.isNotBlank(address)) {
 title=address;
 setTitle(title);
@@ -122,7 +123,7 @@ case MAP:
 title=res.getString(R.string.map_map);
 setTitle(title);
 showProgress(true);
-SearchResult result=extras != null ? (SearchResult)extras.get("search") : null;
+SearchResult result=(SearchResult)extras.get(EXTRAS_SEARCH);
 search=new SearchResult(result);
 loadCachesHandler.sendMessage(Message.obtain());
 break;

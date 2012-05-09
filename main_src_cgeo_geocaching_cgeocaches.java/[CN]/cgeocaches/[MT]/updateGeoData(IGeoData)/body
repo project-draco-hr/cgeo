@@ -3,7 +3,7 @@
     return;
   }
   try {
-    if (cacheList != null && geo.getCoords() != null) {
+    if (geo.getCoords() != null) {
       adapter.setActualCoordinates(geo.getCoords());
     }
     if (!Settings.isUseCompass() || geo.getSpeed() > 5) {

@@ -1,6 +1,9 @@
 {
+  if (!isValidUsername(context,userName)) {
+    return;
+  }
   final Intent cachesIntent=new Intent(context,cgeocaches.class);
   cachesIntent.putExtra(EXTRAS_LIST_TYPE,CacheListType.USERNAME);
-  cachesIntent.putExtra("username",userName);
+  cachesIntent.putExtra(EXTRAS_USERNAME,userName);
   context.startActivity(cachesIntent);
 }
