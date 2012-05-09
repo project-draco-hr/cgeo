@@ -2,12 +2,14 @@
   if (StringUtils.isBlank(url) || isCounter(url)) {
     return new BitmapDrawable(getTransparent1x1Image());
   }
-  Bitmap imagePre=loadImageFromStorage(url);
+  final boolean shared=url.contains("/images/icons/icon_");
+  final String pseudoGeocode=shared ? "shared" : geocode;
+  Bitmap imagePre=loadImageFromStorage(url,pseudoGeocode,shared);
   if (imagePre == null) {
     final String absoluteURL=makeAbsoluteURL(url);
     if (absoluteURL != null) {
       try {
-        final File file=LocalStorage.getStorageFile(geocode,url,true,true);
+        final File file=LocalStorage.getStorageFile(pseudoGeocode,url,true,true);
         final HttpResponse httpResponse=Network.getRequest(absoluteURL,null,file);
         if (httpResponse != null) {
           final int statusCode=httpResponse.getStatusLine().getStatusCode();
@@ -28,7 +30,7 @@
     return null;
   }
   if (imagePre == null) {
-    imagePre=loadImageFromStorage(url);
+    imagePre=loadImageFromStorage(url,pseudoGeocode,shared);
   }
   if (imagePre == null) {
     Log.d("HtmlImage.getDrawable: Failed to obtain image");
