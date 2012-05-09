@@ -1,3 +1,7 @@
 {
-  handler.sendEmptyMessage(GCConnector.removeFromWatchlist(cache));
+  final int result=GCConnector.removeFromWatchlist(cache);
+  if (-1 != result) {
+    app.saveCache(cache,cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+  }
+  handler.sendEmptyMessage(result);
 }
