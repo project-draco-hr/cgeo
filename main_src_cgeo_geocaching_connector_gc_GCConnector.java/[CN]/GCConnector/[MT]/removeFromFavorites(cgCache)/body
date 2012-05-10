@@ -1,0 +1,7 @@
+{
+  final boolean removed=GCParser.removeFromFavorites(cache);
+  if (removed) {
+    cgeoapplication.getInstance().updateCache(cache);
+  }
+  return removed;
+}

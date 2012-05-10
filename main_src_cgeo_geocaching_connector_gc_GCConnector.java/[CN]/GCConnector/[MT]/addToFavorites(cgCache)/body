@@ -1,0 +1,7 @@
+{
+  final boolean added=GCParser.addToFavorites(cache);
+  if (added) {
+    cgeoapplication.getInstance().updateCache(cache);
+  }
+  return added;
+}

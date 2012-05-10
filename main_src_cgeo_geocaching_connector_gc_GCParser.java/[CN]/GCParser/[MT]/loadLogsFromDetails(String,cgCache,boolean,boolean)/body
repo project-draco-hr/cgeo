@@ -1,26 +1,26 @@
 {
   String rawResponse;
   if (!getDataFromPage) {
-    final Matcher userTokenMatcher=GCConstants.PATTERN_USERTOKEN2.matcher(page);
+    final Matcher userTokenMatcher=GCConstants.PATTERN_USERTOKEN.matcher(page);
     if (!userTokenMatcher.find()) {
-      Log.e("cgBase.loadLogsFromDetails: unable to extract userToken");
+      Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
       return null;
     }
     final String userToken=userTokenMatcher.group(1);
     final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),"decrypt","true","sf",Boolean.toString(friends));
     final HttpResponse response=Network.getRequest("http://www.geocaching.com/seek/geocache.logbook",params);
     if (response == null) {
-      Log.e("cgBase.loadLogsFromDetails: cannot log logs, response is null");
+      Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
       return null;
     }
     final int statusCode=response.getStatusLine().getStatusCode();
     if (statusCode != 200) {
-      Log.e("cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
+      Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
       return null;
     }
     rawResponse=Network.getResponseData(response);
     if (rawResponse == null) {
-      Log.e("cgBase.loadLogsFromDetails: unable to read whole response");
+      Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
       return null;
     }
   }
@@ -31,7 +31,7 @@
   try {
     final JSONObject resp=new JSONObject(rawResponse);
     if (!resp.getString("status").equals("success")) {
-      Log.e("cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
+      Log.e("GCParser.loadLogsFromDetails: status is " + resp.getString("status"));
       return null;
     }
     final JSONArray data=resp.getJSONArray("data");
@@ -61,7 +61,7 @@
     }
   }
  catch (  JSONException e) {
-    Log.w("cgBase.loadLogsFromDetails: Failed to parse cache logs",e);
+    Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs",e);
   }
   return logs;
 }

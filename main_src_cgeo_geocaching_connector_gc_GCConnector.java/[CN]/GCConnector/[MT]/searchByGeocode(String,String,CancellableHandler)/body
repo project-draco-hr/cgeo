@@ -1,15 +1,6 @@
 {
-  final Parameters params=new Parameters("decrypt","y");
-  if (StringUtils.isNotBlank(geocode)) {
-    params.put("wp",geocode);
-  }
- else   if (StringUtils.isNotBlank(guid)) {
-    params.put("guid",guid);
-  }
-  params.put("log","y");
-  params.put("numlogs",String.valueOf(GCConstants.NUMBER_OF_LOGS));
   CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_loadpage);
-  final String page=Login.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx",params);
+  final String page=GCParser.requestHtmlPage(geocode,guid,"y",String.valueOf(GCConstants.NUMBER_OF_LOGS));
   if (StringUtils.isEmpty(page)) {
     final SearchResult search=new SearchResult();
     if (cgeoapplication.getInstance().isThere(geocode,guid,true,false)) {

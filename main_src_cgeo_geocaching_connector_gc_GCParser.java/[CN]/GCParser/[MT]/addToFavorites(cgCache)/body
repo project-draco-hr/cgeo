@@ -1,0 +1,17 @@
+{
+  final String page=requestHtmlPage(cache.getGeocode(),null,"n","0");
+  final String userToken=BaseUtils.getMatch(page,GCConstants.PATTERN_USERTOKEN,"");
+  if (StringUtils.isEmpty(userToken)) {
+    return false;
+  }
+  final String uri="http://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=true";
+  HttpResponse response=Network.postRequest(uri,null);
+  if (response != null && response.getStatusLine().getStatusCode() == 200) {
+    Log.i("GCParser.addToFavorites: cache added to favorites");
+    cache.setFavorite(true);
+    cache.setFavoritePoints(cache.getFavoritePoints() + 1);
+    return true;
+  }
+  Log.e("GCParser.addToFavorites: cache not added to favorites");
+  return false;
+}
