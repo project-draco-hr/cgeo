@@ -9,7 +9,7 @@
     int cnt=databaseRW.delete(dbTableLists,"_id = " + (listId - customListIdOffset),null);
     if (cnt > 0) {
       ContentValues values=new ContentValues();
-      values.put("reason",1);
+      values.put("reason",StoredList.STANDARD_LIST_ID);
       databaseRW.update(dbTableCaches,values,"reason = " + listId,null);
       status=true;
     }

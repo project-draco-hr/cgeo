@@ -11,7 +11,7 @@
     where.append('"');
   }
   if (stored) {
-    where.append(" and reason >= 1");
+    where.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
   }
   try {
     final Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},where.toString(),null,null,null,null,"500");
