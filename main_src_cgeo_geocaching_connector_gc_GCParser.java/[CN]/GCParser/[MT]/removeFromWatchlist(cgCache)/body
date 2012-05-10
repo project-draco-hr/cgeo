@@ -3,7 +3,7 @@
   String page=Login.postRequestLogged(uri,null);
   if (StringUtils.isBlank(page)) {
     Log.e("cgBase.removeFromWatchlist: No data from server");
-    return -1;
+    return false;
   }
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$btnYes","Yes");
   Login.transferViewstates(page,params);
@@ -16,5 +16,5 @@
  else {
     Log.e("cgBase.removeFromWatchlist: cache not removed from watchlist");
   }
-  return guidOnPage ? -1 : 0;
+  return !guidOnPage;
 }

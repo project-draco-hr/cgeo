@@ -1,3 +1,7 @@
 {
-  return GCParser.addToWatchlist(cache);
+  final boolean added=GCParser.addToWatchlist(cache);
+  if (added) {
+    cgeoapplication.getInstance().saveCache(cache,cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+  }
+  return added;
 }
