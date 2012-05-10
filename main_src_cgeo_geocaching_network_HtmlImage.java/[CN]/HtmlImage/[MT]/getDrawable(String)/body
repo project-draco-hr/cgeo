@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(url) || isCounter(url)) {
-    return new BitmapDrawable(getTransparent1x1Image());
+    return new BitmapDrawable(resources,getTransparent1x1Image());
   }
   final boolean shared=url.contains("/images/icons/icon_");
   final String pseudoGeocode=shared ? "shared" : geocode;
@@ -61,7 +61,7 @@
     width=imgWidth;
     height=imgHeight;
   }
-  final BitmapDrawable image=new BitmapDrawable(imagePre);
+  final BitmapDrawable image=new BitmapDrawable(resources,imagePre);
   image.setBounds(new Rect(0,0,width,height));
   return image;
 }
