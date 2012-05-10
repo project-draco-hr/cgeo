@@ -1,6 +1,13 @@
 {
-  final SearchResult search=GCParser.searchByUsername("blafoo",CacheType.WEBCAM,false);
-  assertNotNull(search);
-  assertEquals(3,search.getTotal());
-  assertTrue(search.getGeocodes().contains("GCP0A9"));
+  final boolean excludeMine=Settings.isExcludeMyCaches();
+  try {
+    Settings.setExcludeMine(false);
+    final SearchResult search=GCParser.searchByUsername("blafoo",CacheType.WEBCAM,false);
+    assertNotNull(search);
+    assertEquals(3,search.getTotal());
+    assertTrue(search.getGeocodes().contains("GCP0A9"));
+  }
+  finally {
+    Settings.setExcludeMine(excludeMine);
+  }
 }

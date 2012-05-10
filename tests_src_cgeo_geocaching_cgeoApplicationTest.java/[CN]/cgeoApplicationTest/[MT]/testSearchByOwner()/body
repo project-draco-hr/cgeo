@@ -1,6 +1,13 @@
 {
-  final SearchResult search=GCParser.searchByOwner("blafoo",CacheType.MYSTERY,false);
-  assertNotNull(search);
-  assertEquals(3,search.getGeocodes().size());
-  assertTrue(search.getGeocodes().contains("GC36RT6"));
+  final boolean excludeMine=Settings.isExcludeMyCaches();
+  try {
+    Settings.setExcludeMine(false);
+    final SearchResult search=GCParser.searchByOwner("blafoo",CacheType.MYSTERY,false);
+    assertNotNull(search);
+    assertEquals(3,search.getGeocodes().size());
+    assertTrue(search.getGeocodes().contains("GC36RT6"));
+  }
+  finally {
+    Settings.setExcludeMine(excludeMine);
+  }
 }

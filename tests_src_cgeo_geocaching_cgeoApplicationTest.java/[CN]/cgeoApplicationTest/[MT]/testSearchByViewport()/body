@@ -1,6 +1,8 @@
 {
+  final boolean excludeMine=Settings.isExcludeMyCaches();
   final Strategy strategy=Settings.getLiveMapStrategy();
   try {
+    Settings.setExcludeMine(false);
     final GC2CJPF mockedCache=new GC2CJPF();
     deleteCacheFromDB(mockedCache.getGeocode());
     final String[] tokens=Login.getMapTokens();
@@ -22,6 +24,7 @@
     assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
   }
   finally {
+    Settings.setExcludeMine(excludeMine);
     Settings.setLiveMapStrategy(strategy);
   }
 }
