@@ -56,5 +56,37 @@
  else {
     return false;
   }
+  if (upload) {
+    publishProgress(STATUS_UPLOAD);
+    final String uri="http://www.geocaching.com/my/uploadfieldnotes.aspx";
+    if (!Login.isActualLoginStatus()) {
+      final StatusCode loginState=Login.login();
+      if (loginState != StatusCode.NO_ERROR) {
+        Log.e("FieldnoteExport.ExportTask upload: Login failed");
+      }
+    }
+    String page=Network.getResponseData(Network.getRequest(uri));
+    if (!Login.getLoginStatus(page)) {
+      final StatusCode loginState=Login.login();
+      if (loginState == StatusCode.NO_ERROR) {
+        page=Network.getResponseData(Network.getRequest(uri));
+      }
+ else {
+        Log.e("FieldnoteExport.ExportTask upload: No login (error: " + loginState + ")");
+        return false;
+      }
+    }
+    final String[] viewstates=Login.getViewstates(page);
+    final Parameters uploadParams=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$btnUpload","Upload Field Note");
+    if (onlyNew) {
+      uploadParams.put("ctl00$ContentBody$chkSuppressDate","on");
+    }
+    Login.putViewstates(uploadParams,viewstates);
+    Network.getResponseData(Network.postRequest(uri,uploadParams,"ctl00$ContentBody$FieldNoteLoader","text/plain",exportFile));
+    if (StringUtils.isBlank(page)) {
+      Log.e("FieldnoteExport.ExportTask upload: No data from server");
+      return false;
+    }
+  }
   return true;
 }

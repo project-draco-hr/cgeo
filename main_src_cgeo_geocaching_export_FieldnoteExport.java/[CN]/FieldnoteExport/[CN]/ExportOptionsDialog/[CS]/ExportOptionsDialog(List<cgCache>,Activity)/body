@@ -2,10 +2,18 @@
   super(activity);
   View layout=activity.getLayoutInflater().inflate(R.layout.fieldnote_export_dialog,null);
   setView(layout);
+  final CheckBox uploadOption=(CheckBox)layout.findViewById(R.id.upload);
+  final CheckBox onlyNewOption=(CheckBox)layout.findViewById(R.id.onlynew);
+  uploadOption.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      onlyNewOption.setEnabled(uploadOption.isChecked());
+    }
+  }
+);
   ((Button)layout.findViewById(R.id.export)).setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       dismiss();
-      new ExportTask(caches,activity,((CheckBox)findViewById(R.id.upload)).isChecked(),((CheckBox)findViewById(R.id.onlynew)).isChecked()).execute((Void)null);
+      new ExportTask(caches,activity,uploadOption.isChecked(),onlyNewOption.isChecked()).execute((Void)null);
     }
   }
 );
