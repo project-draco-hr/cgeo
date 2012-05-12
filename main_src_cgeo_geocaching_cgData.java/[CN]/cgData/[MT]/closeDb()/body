@@ -1,7 +1,7 @@
 {
   cacheCache.removeAllFromCache();
   initialized=false;
-  closePreparedStatements();
+  clearPreparedStatements();
   if (databaseRO != null) {
     path=databaseRO.getPath();
     if (databaseRO.inTransaction()) {

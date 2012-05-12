@@ -1,0 +1,21 @@
+{
+  if (!LocalStorage.isExternalStorageAvailable()) {
+    Log.w("Database was not moved: external memory not available");
+    return false;
+  }
+  final File target=Settings.isDbOnSDCard() ? internalDb() : externalDb();
+  closeDb();
+  final File source=new File(path);
+  final boolean moveDone=LocalStorage.copy(source,target);
+  if (moveDone) {
+    source.delete();
+    Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
+  }
+  init();
+  if (!moveDone) {
+    Log.e("Database could not be moved to " + target);
+    return false;
+  }
+  Log.i("Database was moved to " + target);
+  return true;
+}
