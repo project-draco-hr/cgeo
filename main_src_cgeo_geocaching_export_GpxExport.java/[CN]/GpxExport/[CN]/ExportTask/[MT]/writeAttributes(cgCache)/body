@@ -1,0 +1,23 @@
+{
+  if (!cache.hasAttributes()) {
+    return;
+  }
+  gpx.write("<groundspeak:attributes>");
+  for (  String attribute : cache.getAttributes()) {
+    final CacheAttribute attr=CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attribute));
+    final boolean enabled=CacheAttribute.isEnabled(attribute);
+    gpx.write("<groundspeak:attribute id=\"");
+    gpx.write(Integer.toString(attr.id));
+    gpx.write("\" inc=\"");
+    if (enabled) {
+      gpx.write('1');
+    }
+ else {
+      gpx.write('0');
+    }
+    gpx.write("\">");
+    gpx.write(StringEscapeUtils.escapeXml(attr.getL10n(enabled)));
+    gpx.write("</groundspeak:attribute>");
+  }
+  gpx.write("</groundspeak:attributes>");
+}

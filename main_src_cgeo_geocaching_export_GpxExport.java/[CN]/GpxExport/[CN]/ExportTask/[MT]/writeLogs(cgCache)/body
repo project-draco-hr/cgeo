@@ -1,0 +1,25 @@
+{
+  if (cache.getLogs().size() <= 0) {
+    return;
+  }
+  gpx.write("<groundspeak:logs>");
+  for (  LogEntry log : cache.getLogs()) {
+    gpx.write("<groundspeak:log id=\"");
+    gpx.write(Integer.toString(log.id));
+    gpx.write("\">");
+    gpx.write("<groundspeak:date>");
+    gpx.write(StringEscapeUtils.escapeXml(dateFormatZ.format(new Date(log.date))));
+    gpx.write("</groundspeak:date>");
+    gpx.write("<groundspeak:type>");
+    gpx.write(StringEscapeUtils.escapeXml(log.type.type));
+    gpx.write("</groundspeak:type>");
+    gpx.write("<groundspeak:finder id=\"\">");
+    gpx.write(StringEscapeUtils.escapeXml(log.author));
+    gpx.write("</groundspeak:finder>");
+    gpx.write("<groundspeak:text encoded=\"False\">");
+    gpx.write(StringEscapeUtils.escapeXml(log.log));
+    gpx.write("</groundspeak:text>");
+    gpx.write("</groundspeak:log>");
+  }
+  gpx.write("</groundspeak:logs>");
+}

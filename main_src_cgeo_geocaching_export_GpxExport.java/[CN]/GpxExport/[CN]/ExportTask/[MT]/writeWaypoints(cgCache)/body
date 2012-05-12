@@ -1,0 +1,25 @@
+{
+  for (  cgWaypoint wp : cache.getWaypoints()) {
+    gpx.write("<wpt lat=\"");
+    final Geopoint coords=wp.getCoords();
+    gpx.write(coords != null ? Double.toString(coords.getLatitude()) : "");
+    gpx.write("\" lon=\"");
+    gpx.write(coords != null ? Double.toString(coords.getLongitude()) : "");
+    gpx.write("\">");
+    gpx.write("<name>");
+    gpx.write(StringEscapeUtils.escapeXml(wp.getPrefix()));
+    gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode().substring(2)));
+    gpx.write("</name>");
+    gpx.write("<cmt />");
+    gpx.write("<desc>");
+    gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
+    gpx.write("</desc>");
+    gpx.write("<sym>");
+    gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
+    gpx.write("</sym>");
+    gpx.write("<type>Waypoint|");
+    gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
+    gpx.write("</type>");
+    gpx.write("</wpt>");
+  }
+}
