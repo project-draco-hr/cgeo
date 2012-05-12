@@ -53,6 +53,9 @@ break;
 case MENU_STORE_CACHE:
 cache.store(null);
 break;
+case MENU_EXPORT:
+ExportFactory.showExportMenu(Collections.singletonList(cache),this);
+return false;
 default :
 lastMenuInfo=info;
 cache.logOffline(this,LogType.getById(id - MENU_LOG_VISIT_OFFLINE));
