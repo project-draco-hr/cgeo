@@ -1,0 +1,17 @@
+{
+  final MultipartEntity entity=new MultipartEntity();
+  for (  final NameValuePair param : params) {
+    try {
+      entity.addPart(param.getName(),new StringBody(param.getValue()));
+    }
+ catch (    final UnsupportedEncodingException e) {
+      Log.e("Network.postRequest: unsupported encoding for parameter " + param.getName(),e);
+      return null;
+    }
+  }
+  entity.addPart(fileFieldName,new FileBody(file,fileContentType));
+  final HttpPost request=new HttpPost(uri);
+  request.setEntity(entity);
+  addHeaders(request,null,null);
+  return doRepeatedRequests(request);
+}
