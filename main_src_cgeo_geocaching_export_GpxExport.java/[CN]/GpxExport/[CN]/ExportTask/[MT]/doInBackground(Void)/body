@@ -85,9 +85,7 @@
       gpx.write("<groundspeak:country>");
       gpx.write(StringEscapeUtils.escapeXml(cache.getLocation()));
       gpx.write("</groundspeak:country>");
-      gpx.write("<groundspeak:state>");
-      gpx.write(StringEscapeUtils.escapeXml(cache.getLocation()));
-      gpx.write("</groundspeak:state>");
+      gpx.write("<groundspeak:state></groundspeak:state>");
       gpx.write("<groundspeak:short_description html=\"");
       if (BaseUtils.containsHtml(cache.getShortDescription())) {
         gpx.write("True");
