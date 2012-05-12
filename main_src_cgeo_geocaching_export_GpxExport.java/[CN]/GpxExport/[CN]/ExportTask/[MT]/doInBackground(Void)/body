@@ -32,7 +32,7 @@
       gpx.write(cache.isFound() ? "Geocache Found" : "Geocache");
       gpx.write("</sym>");
       gpx.write("<type>");
-      gpx.write(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().id));
+      gpx.write(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().pattern));
       gpx.write("</type>");
       gpx.write("<groundspeak:cache ");
       gpx.write("available=\"");
@@ -51,7 +51,7 @@
       gpx.write(StringEscapeUtils.escapeXml(cache.getOwnerReal()));
       gpx.write("</groundspeak:owner>");
       gpx.write("<groundspeak:type>");
-      gpx.write(StringEscapeUtils.escapeXml(cache.getType().id));
+      gpx.write(StringEscapeUtils.escapeXml(cache.getType().pattern));
       gpx.write("</groundspeak:type>");
       gpx.write("<groundspeak:container>");
       gpx.write(StringEscapeUtils.escapeXml(cache.getSize().id));
