@@ -7,6 +7,7 @@
     storeCacheStaticMap(cache,edge,false);
   }
   if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+    LocalStorage.deleteFilesWithPrefix(cache.getGeocode(),"map_wp");
     for (    cgWaypoint waypoint : cache.getWaypoints()) {
       storeWaypointStaticMap(cache.getGeocode(),edge,waypoint,false);
     }

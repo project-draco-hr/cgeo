@@ -1,0 +1,13 @@
+{
+  final File[] filesToDelete=getFilesWithPrefix(geocode,prefix);
+  for (  final File file : filesToDelete) {
+    try {
+      if (!file.delete()) {
+        Log.w("LocalStorage.deleteFilesPrefix: Can't delete file " + file.getName());
+      }
+    }
+ catch (    Exception e) {
+      Log.e("LocalStorage.deleteFilesPrefix: " + e.toString());
+    }
+  }
+}
