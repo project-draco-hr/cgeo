@@ -2,7 +2,7 @@
   for (int level=1; level <= 5; level++) {
     try {
       if (wp_id > 0) {
-        StaticMapsProvider.getMapFile(geocode,"wp" + wp_id + "_",level,false).delete();
+        StaticMapsProvider.getMapFile(geocode,WAYPOINT_PREFIX + wp_id + "_",level,false).delete();
       }
     }
  catch (    Exception e) {

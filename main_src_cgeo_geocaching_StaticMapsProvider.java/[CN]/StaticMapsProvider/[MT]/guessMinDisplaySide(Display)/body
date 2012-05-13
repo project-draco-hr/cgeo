@@ -1,12 +1,8 @@
 {
   final int maxWidth=display.getWidth() - 25;
   final int maxHeight=display.getHeight() - 25;
-  int edge;
   if (maxWidth > maxHeight) {
-    edge=maxWidth;
+    return maxWidth;
   }
- else {
-    edge=maxHeight;
-  }
-  return edge;
+  return maxHeight;
 }
