@@ -26,8 +26,6 @@
       waitDialog.dismiss();
       waitDialog.setOnCancelListener(null);
     }
-    if (Settings.isUseCompass()) {
-      app.addDirectionObserver(dirUpdate);
-    }
+    geoDirUpdate.startDir();
   }
 }

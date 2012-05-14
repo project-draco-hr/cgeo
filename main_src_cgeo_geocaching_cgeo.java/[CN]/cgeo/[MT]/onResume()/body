@@ -1,7 +1,7 @@
 {
   super.onResume();
-  app.addGeoObserver(locationUpdater);
-  app.addGeoObserver(satellitesHandler);
+  locationUpdater.startGeo();
+  satellitesHandler.startGeo();
   updateUserInfoHandler.sendEmptyMessage(-1);
   init();
 }

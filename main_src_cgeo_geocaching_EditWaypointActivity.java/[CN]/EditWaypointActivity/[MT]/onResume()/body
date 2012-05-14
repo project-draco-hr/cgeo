@@ -1,6 +1,6 @@
 {
   super.onResume();
-  app.addGeoObserver(this);
+  geoDirHandler.startGeo();
   if (id > 0) {
     if (waitDialog == null) {
       waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
