@@ -1,6 +1,6 @@
 {
   initialized=false;
-  app.deleteGeoObserver(locationUpdater);
-  app.deleteGeoObserver(satellitesHandler);
+  locationUpdater.stopGeo();
+  satellitesHandler.stopGeo();
   super.onPause();
 }

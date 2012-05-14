@@ -2,7 +2,5 @@
   if (loadDetailsThread != null) {
     loadDetailsThread.stopIt();
   }
-  if (Settings.isUseCompass()) {
-    app.addDirectionObserver(dirUpdate);
-  }
+  geoDirUpdate.startDir();
 }

@@ -49,9 +49,7 @@ try {
 if (loadDetailsThread != null) {
 loadDetailsThread.stopIt();
 }
-if (Settings.isUseCompass()) {
-app.addDirectionObserver(dirUpdate);
-}
+geoDirUpdate.startDir();
 }
  catch (Exception e) {
 Log.e("cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());

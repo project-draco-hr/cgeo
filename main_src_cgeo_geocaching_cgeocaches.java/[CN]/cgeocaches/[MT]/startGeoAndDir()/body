@@ -1,6 +1,6 @@
 {
-  app.addGeoObserver(updateHandler);
-  if (Settings.isLiveList() && Settings.isUseCompass()) {
-    app.addDirectionObserver(updateHandler);
+  geoDirHandler.startGeo();
+  if (Settings.isLiveMap()) {
+    geoDirHandler.startDir();
   }
 }

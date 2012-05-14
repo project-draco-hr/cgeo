@@ -8,10 +8,10 @@
     Settings.setUseCompass(!oldSetting);
     invalidateOptionsMenuCompatible();
     if (oldSetting) {
-      app.deleteDirectionObserver(this);
+      geoDirHandler.stopDir();
     }
  else {
-      app.addDirectionObserver(this);
+      geoDirHandler.startDir();
     }
   }
  else   if (id == 2) {
