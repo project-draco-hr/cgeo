@@ -1,6 +1,5 @@
 {
   File f=new File(name);
   f.getParentFile().mkdirs();
-  SQLiteDatabase db=SQLiteDatabase.openOrCreateDatabase(f,factory);
-  return db;
+  return SQLiteDatabase.openOrCreateDatabase(f,factory);
 }
