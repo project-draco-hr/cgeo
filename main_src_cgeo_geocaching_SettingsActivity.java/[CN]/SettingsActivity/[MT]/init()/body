@@ -364,6 +364,14 @@
   }
 );
   refreshBackupLabel();
+  refreshDbOnSDCardSetting();
+  final CheckBox dbOnSDCardButton=(CheckBox)findViewById(R.id.dbonsdcard);
+  dbOnSDCardButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      app.moveDatabase(SettingsActivity.this);
+    }
+  }
+);
   final CheckBox debugButton=(CheckBox)findViewById(R.id.debug);
   debugButton.setChecked(Settings.isDebug());
   debugButton.setOnClickListener(new View.OnClickListener(){
