@@ -5,15 +5,15 @@
   init();
   final ContentValues values=new ContentValues();
   values.put("reason",listId);
-  databaseRW.beginTransaction();
+  database.beginTransaction();
   try {
     for (    cgCache cache : caches) {
-      databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
+      database.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
       cache.setListId(listId);
     }
-    databaseRW.setTransactionSuccessful();
+    database.setTransactionSuccessful();
   }
   finally {
-    databaseRW.endTransaction();
+    database.endTransaction();
   }
 }

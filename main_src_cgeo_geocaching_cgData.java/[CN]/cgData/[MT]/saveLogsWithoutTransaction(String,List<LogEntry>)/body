@@ -1,7 +1,7 @@
 {
-  databaseRW.delete(dbTableLogs,"geocode = ?",new String[]{geocode});
+  database.delete(dbTableLogs,"geocode = ?",new String[]{geocode});
   if (CollectionUtils.isNotEmpty(logs)) {
-    InsertHelper helper=new InsertHelper(databaseRW,dbTableLogs);
+    InsertHelper helper=new InsertHelper(database,dbTableLogs);
     long timeStamp=System.currentTimeMillis();
     for (    LogEntry log : logs) {
       helper.prepareForInsert();
@@ -21,7 +21,7 @@
           values.put("log_id",log_id);
           values.put("title",img.getTitle());
           values.put("url",img.getUrl());
-          databaseRW.insert(dbTableLogImages,null,values);
+          database.insert(dbTableLogImages,null,values);
         }
       }
     }

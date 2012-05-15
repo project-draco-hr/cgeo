@@ -4,7 +4,7 @@
   }
   Log.d("cgData.loadCachesFromGeocodes(" + geocodes.toString() + ") from DB");
   init();
-  final Cursor cursor=databaseRO.query(dbTableCaches,CACHE_COLUMNS,cgData.whereGeocodeIn(geocodes),null,null,null,null,null);
+  final Cursor cursor=database.query(dbTableCaches,CACHE_COLUMNS,cgData.whereGeocodeIn(geocodes),null,null,null,null,null);
   try {
     if (!cursor.moveToFirst()) {
       return Collections.emptySet();

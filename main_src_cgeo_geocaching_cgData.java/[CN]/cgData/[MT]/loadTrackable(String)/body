@@ -4,7 +4,7 @@
   }
   init();
   cgTrackable trackable=new cgTrackable();
-  Cursor cursor=databaseRO.query(dbTableTrackables,new String[]{"updated","tbcode","guid","title","owner","released","goal","description"},"tbcode = ?",new String[]{geocode},null,null,null,"1");
+  Cursor cursor=database.query(dbTableTrackables,new String[]{"updated","tbcode","guid","title","owner","released","goal","description"},"tbcode = ?",new String[]{geocode},null,null,null,"1");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     trackable=createTrackableFromDatabaseContent(cursor);

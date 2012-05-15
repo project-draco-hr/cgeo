@@ -4,7 +4,7 @@
   }
   init();
   List<cgTrackable> trackables=new ArrayList<cgTrackable>();
-  Cursor cursor=databaseRO.query(dbTableTrackables,new String[]{"_id","updated","tbcode","guid","title","owner","released","goal","description"},"geocode = ?",new String[]{geocode},null,null,"title COLLATE NOCASE ASC","100");
+  Cursor cursor=database.query(dbTableTrackables,new String[]{"_id","updated","tbcode","guid","title","owner","released","goal","description"},"geocode = ?",new String[]{geocode},null,null,"title COLLATE NOCASE ASC","100");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();
     do {

@@ -3,16 +3,16 @@
     return;
   }
   init();
-  databaseRW.beginTransaction();
+  database.beginTransaction();
   try {
     ContentValues values=new ContentValues();
     values.put("visiteddate",visitedDate);
     for (    String geocode : geocodes) {
-      databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{geocode});
+      database.update(dbTableCaches,values,"geocode = ?",new String[]{geocode});
     }
-    databaseRW.setTransactionSuccessful();
+    database.setTransactionSuccessful();
   }
   finally {
-    databaseRW.endTransaction();
+    database.endTransaction();
   }
 }

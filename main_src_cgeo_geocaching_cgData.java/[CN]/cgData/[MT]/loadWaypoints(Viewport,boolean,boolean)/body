@@ -12,7 +12,7 @@
     query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
   }
   query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where);
-  final Cursor cursor=databaseRO.rawQuery(query.toString(),null);
+  final Cursor cursor=database.rawQuery(query.toString(),null);
   try {
     if (!cursor.moveToFirst()) {
       return Collections.emptySet();

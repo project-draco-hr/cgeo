@@ -4,16 +4,16 @@
     return id;
   }
   init();
-  databaseRW.beginTransaction();
+  database.beginTransaction();
   try {
     ContentValues values=new ContentValues();
     values.put("title",name);
     values.put("updated",System.currentTimeMillis());
-    id=(int)databaseRW.insert(dbTableLists,null,values);
-    databaseRW.setTransactionSuccessful();
+    id=(int)database.insert(dbTableLists,null,values);
+    database.setTransactionSuccessful();
   }
   finally {
-    databaseRW.endTransaction();
+    database.endTransaction();
   }
   return id >= 0 ? id + customListIdOffset : -1;
 }

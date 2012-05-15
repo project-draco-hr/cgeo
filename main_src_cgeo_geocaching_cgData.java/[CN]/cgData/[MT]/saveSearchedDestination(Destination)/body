@@ -1,17 +1,17 @@
 {
   init();
-  databaseRW.beginTransaction();
+  database.beginTransaction();
   try {
     ContentValues values=new ContentValues();
     values.put("date",destination.getDate());
     putCoords(values,destination.getCoords());
-    databaseRW.insert(dbTableSearchDestionationHistory,null,values);
-    databaseRW.setTransactionSuccessful();
+    database.insert(dbTableSearchDestionationHistory,null,values);
+    database.setTransactionSuccessful();
   }
  catch (  Exception e) {
     Log.e("Updating searchedDestinations db failed",e);
   }
  finally {
-    databaseRW.endTransaction();
+    database.endTransaction();
   }
 }

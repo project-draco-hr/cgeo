@@ -1,29 +1,9 @@
 {
+  if (database == null) {
+    return;
+  }
   cacheCache.removeAllFromCache();
-  initialized=false;
   clearPreparedStatements();
-  if (databaseRO != null) {
-    path=databaseRO.getPath();
-    if (databaseRO.inTransaction()) {
-      databaseRO.endTransaction();
-    }
-    databaseRO.close();
-    databaseRO=null;
-    SQLiteDatabase.releaseMemory();
-    Log.d("Closing RO database");
-  }
-  if (databaseRW != null) {
-    path=databaseRW.getPath();
-    if (databaseRW.inTransaction()) {
-      databaseRW.endTransaction();
-    }
-    databaseRW.close();
-    databaseRW=null;
-    SQLiteDatabase.releaseMemory();
-    Log.d("Closing RW database");
-  }
-  if (dbHelper != null) {
-    dbHelper.close();
-    dbHelper=null;
-  }
+  database.close();
+  database=null;
 }

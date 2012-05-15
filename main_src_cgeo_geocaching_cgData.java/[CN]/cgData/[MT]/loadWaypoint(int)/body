@@ -4,7 +4,7 @@
   }
   init();
   cgWaypoint waypoint=null;
-  Cursor cursor=databaseRO.query(dbTableWaypoints,WAYPOINT_COLUMNS,"_id = ?",new String[]{Integer.toString(id)},null,null,null,"1");
+  Cursor cursor=database.query(dbTableWaypoints,WAYPOINT_COLUMNS,"_id = ?",new String[]{Integer.toString(id)},null,null,null,"1");
   Log.d("cgData.loadWaypoint(" + id + ")");
   if (cursor != null && cursor.getCount() > 0) {
     cursor.moveToFirst();

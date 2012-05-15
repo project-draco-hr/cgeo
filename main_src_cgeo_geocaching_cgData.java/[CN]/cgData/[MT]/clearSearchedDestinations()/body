@@ -1,17 +1,17 @@
 {
   boolean success=true;
   init();
-  databaseRW.beginTransaction();
+  database.beginTransaction();
   try {
-    databaseRW.delete(dbTableSearchDestionationHistory,null,null);
-    databaseRW.setTransactionSuccessful();
+    database.delete(dbTableSearchDestionationHistory,null,null);
+    database.setTransactionSuccessful();
   }
  catch (  Exception e) {
     success=false;
     Log.e("Unable to clear searched destinations",e);
   }
  finally {
-    databaseRW.endTransaction();
+    database.endTransaction();
   }
   return success;
 }

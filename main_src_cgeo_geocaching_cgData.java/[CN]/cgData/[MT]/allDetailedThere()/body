@@ -4,7 +4,7 @@
   List<String> list=new ArrayList<String>();
   try {
     long timestamp=System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
-    cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"(detailed = 1 and detailedupdate > ?) or reason > 0",new String[]{Long.toString(timestamp)},null,null,"detailedupdate desc","100");
+    cursor=database.query(dbTableCaches,new String[]{"geocode"},"(detailed = 1 and detailedupdate > ?) or reason > 0",new String[]{Long.toString(timestamp)},null,null,"detailedupdate desc","100");
     if (cursor != null) {
       int index;
       if (cursor.getCount() > 0) {

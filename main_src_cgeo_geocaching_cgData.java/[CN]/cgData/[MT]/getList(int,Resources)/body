@@ -1,7 +1,7 @@
 {
   init();
   if (id >= customListIdOffset) {
-    Cursor cursor=databaseRO.query(dbTableLists,new String[]{"_id","title"},"_id = " + (id - customListIdOffset),null,null,null,null);
+    Cursor cursor=database.query(dbTableLists,new String[]{"_id","title"},"_id = " + (id - customListIdOffset),null,null,null,null);
     ArrayList<StoredList> lists=getListsFromCursor(cursor);
     if (!lists.isEmpty()) {
       return lists.get(0);

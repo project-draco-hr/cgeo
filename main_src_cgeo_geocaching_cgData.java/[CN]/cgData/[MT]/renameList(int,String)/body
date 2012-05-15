@@ -4,16 +4,16 @@
   }
   init();
   int count=0;
-  databaseRW.beginTransaction();
+  database.beginTransaction();
   try {
     ContentValues values=new ContentValues();
     values.put("title",name);
     values.put("updated",System.currentTimeMillis());
-    count=databaseRW.update(dbTableLists,values,"_id = " + (listId - customListIdOffset),null);
-    databaseRW.setTransactionSuccessful();
+    count=database.update(dbTableLists,values,"_id = " + (listId - customListIdOffset),null);
+    database.setTransactionSuccessful();
   }
   finally {
-    databaseRW.endTransaction();
+    database.endTransaction();
   }
   return count;
 }

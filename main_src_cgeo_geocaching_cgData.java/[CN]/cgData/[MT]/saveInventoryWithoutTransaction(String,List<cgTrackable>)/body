@@ -1,6 +1,6 @@
 {
   if (geocode != null) {
-    databaseRW.delete(dbTableTrackables,"geocode = ?",new String[]{geocode});
+    database.delete(dbTableTrackables,"geocode = ?",new String[]{geocode});
   }
   if (CollectionUtils.isNotEmpty(trackables)) {
     ContentValues values=new ContentValues();
@@ -23,7 +23,7 @@
       }
       values.put("goal",trackable.getGoal());
       values.put("description",trackable.getDetails());
-      databaseRW.insert(dbTableTrackables,null,values);
+      database.insert(dbTableTrackables,null,values);
       saveLogsWithoutTransaction(trackable.getGeocode(),trackable.getLogs());
     }
   }

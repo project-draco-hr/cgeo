@@ -18,10 +18,10 @@
   try {
     Cursor cursor;
     if (coords != null) {
-      cursor=databaseRO.query(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},specifySql.toString(),null,null,null,"dif",null);
+      cursor=database.query(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},specifySql.toString(),null,null,null,"dif",null);
     }
  else {
-      cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},specifySql.toString(),null,null,null,"geocode");
+      cursor=database.query(dbTableCaches,new String[]{"geocode"},specifySql.toString(),null,null,null,"geocode");
     }
     if (cursor.moveToFirst()) {
       final int index=cursor.getColumnIndex("geocode");
