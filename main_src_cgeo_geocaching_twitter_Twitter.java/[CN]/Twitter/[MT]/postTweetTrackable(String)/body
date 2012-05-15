@@ -1,16 +1,2 @@
 {
-  final cgTrackable trackable=cgeoapplication.getInstance().getTrackableByGeocode(geocode);
-  String name=trackable.getName();
-  if (name.length() > 82) {
-    name=name.substring(0,79) + "...";
-  }
-  StringBuilder builder=new StringBuilder("I touched ");
-  builder.append(name);
-  if (trackable.getUrl() != null) {
-    builder.append(" (").append(trackable.getUrl()).append(')');
-  }
-  builder.append('!');
-  String status=appendHashTag(builder.toString(),"cgeo");
-  status=appendHashTag(status,"geocaching");
-  postTweet(cgeoapplication.getInstance(),status,null);
 }
