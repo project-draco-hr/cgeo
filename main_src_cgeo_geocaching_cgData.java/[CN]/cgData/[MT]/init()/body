@@ -1,26 +1,12 @@
 {
-  if (initialized) {
+  if (database != null) {
     return;
   }
-  if (database == null || !database.isOpen()) {
-    try {
-      if (dbHelper == null) {
-        dbHelper=new DbHelper(new DBContext(context));
-      }
-      database=dbHelper.getWritableDatabase();
-      if (database != null && database.isOpen()) {
-        Log.i("Connection to RW database established.");
-      }
- else {
-        Log.e("Failed to open connection to RW database.");
-      }
-      if (database != null && database.inTransaction()) {
-        database.endTransaction();
-      }
-    }
- catch (    Exception e) {
-      Log.e("cgData.openDb.RW: " + e.toString());
-    }
+  try {
+    final DbHelper dbHelper=new DbHelper(new DBContext(context));
+    database=dbHelper.getWritableDatabase();
   }
-  initialized=true;
+ catch (  Exception e) {
+    Log.e("cgData.init: unable to open database for R/W",e);
+  }
 }

@@ -5,7 +5,7 @@
   }
   final File sourceFile=backupFile();
   closeDb();
-  final boolean restoreDone=LocalStorage.copy(sourceFile,new File(path));
+  final boolean restoreDone=LocalStorage.copy(sourceFile,databasePath());
   init();
   if (restoreDone) {
     Log.i("Database succesfully restored from " + sourceFile.getPath());

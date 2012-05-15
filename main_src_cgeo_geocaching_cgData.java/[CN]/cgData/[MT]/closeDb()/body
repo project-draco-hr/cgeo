@@ -1,19 +1,9 @@
 {
+  if (database == null) {
+    return;
+  }
   cacheCache.removeAllFromCache();
-  initialized=false;
   clearPreparedStatements();
-  if (database != null) {
-    path=database.getPath();
-    if (database.inTransaction()) {
-      database.endTransaction();
-    }
-    database.close();
-    database=null;
-    SQLiteDatabase.releaseMemory();
-    Log.d("Closing RW database");
-  }
-  if (dbHelper != null) {
-    dbHelper.close();
-    dbHelper=null;
-  }
+  database.close();
+  database=null;
 }
