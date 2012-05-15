@@ -2,23 +2,13 @@
   cacheCache.removeAllFromCache();
   initialized=false;
   clearPreparedStatements();
-  if (databaseRO != null) {
-    path=databaseRO.getPath();
-    if (databaseRO.inTransaction()) {
-      databaseRO.endTransaction();
+  if (database != null) {
+    path=database.getPath();
+    if (database.inTransaction()) {
+      database.endTransaction();
     }
-    databaseRO.close();
-    databaseRO=null;
-    SQLiteDatabase.releaseMemory();
-    Log.d("Closing RO database");
-  }
-  if (databaseRW != null) {
-    path=databaseRW.getPath();
-    if (databaseRW.inTransaction()) {
-      databaseRW.endTransaction();
-    }
-    databaseRW.close();
-    databaseRW=null;
+    database.close();
+    database=null;
     SQLiteDatabase.releaseMemory();
     Log.d("Closing RW database");
   }

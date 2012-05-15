@@ -35,7 +35,7 @@
         sql="select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \""+ cacheType.id+ "\""+ listSqlW;
       }
     }
-    SQLiteStatement compiledStmnt=databaseRO.compileStatement(sql);
+    SQLiteStatement compiledStmnt=database.compileStatement(sql);
     count=(int)compiledStmnt.simpleQueryForLong();
     compiledStmnt.close();
   }

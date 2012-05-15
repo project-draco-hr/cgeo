@@ -5,12 +5,12 @@
   Set<String> geocodes=new HashSet<String>();
   try {
     if (more) {
-      cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null);
+      cursor=database.query(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null);
     }
  else {
       long timestamp=System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
       String timestampString=Long.toString(timestamp);
-      cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},"reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",new String[]{timestampString,timestampString,timestampString},null,null,null,null);
+      cursor=database.query(dbTableCaches,new String[]{"geocode"},"reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",new String[]{timestampString,timestampString,timestampString},null,null,null,null);
     }
     if (cursor != null) {
       if (cursor.getCount() > 0) {
@@ -28,7 +28,7 @@
       Log.d("Database clean: removing " + size + " geocaches from listId=0");
       removeCaches(geocodes,LoadFlags.REMOVE_ALL);
     }
-    final SQLiteStatement countSql=databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
+    final SQLiteStatement countSql=database.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
     final int count=(int)countSql.simpleQueryForLong();
     countSql.close();
     Log.d("Database clean: " + count + " geocaches remaining for listId=0");

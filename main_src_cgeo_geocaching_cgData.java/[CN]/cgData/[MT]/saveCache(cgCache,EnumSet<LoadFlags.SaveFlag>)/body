@@ -70,7 +70,7 @@
   values.put("finalDefined",cache.hasFinalDefined() ? 1 : 0);
   boolean result=false;
   init();
-  databaseRW.beginTransaction();
+  database.beginTransaction();
   try {
     saveAttributesWithoutTransaction(cache);
     saveOriginalWaypointsWithoutTransaction(cache);
@@ -78,17 +78,17 @@
     saveLogsWithoutTransaction(cache.getGeocode(),cache.getLogs());
     saveLogCountsWithoutTransaction(cache);
     saveInventoryWithoutTransaction(cache.getGeocode(),cache.getInventory());
-    int rows=databaseRW.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
+    int rows=database.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
     if (rows == 0) {
-      databaseRW.insert(dbTableCaches,null,values);
+      database.insert(dbTableCaches,null,values);
     }
-    databaseRW.setTransactionSuccessful();
+    database.setTransactionSuccessful();
     result=true;
   }
  catch (  Exception e) {
   }
  finally {
-    databaseRW.endTransaction();
+    database.endTransaction();
   }
   return result;
 }

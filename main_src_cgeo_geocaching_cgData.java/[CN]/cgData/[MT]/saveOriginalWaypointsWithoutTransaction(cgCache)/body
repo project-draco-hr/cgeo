@@ -1,6 +1,6 @@
 {
   String geocode=cache.getGeocode();
-  databaseRW.delete(dbTableWaypoints,"geocode = ? and type <> ? and own = 0",new String[]{geocode,"own"});
+  database.delete(dbTableWaypoints,"geocode = ? and type <> ? and own = 0",new String[]{geocode,"own"});
   List<cgWaypoint> waypoints=cache.getWaypoints();
   if (CollectionUtils.isNotEmpty(waypoints)) {
     ContentValues values=new ContentValues();
@@ -20,7 +20,7 @@
       putCoords(values,oneWaypoint.getCoords());
       values.put("note",oneWaypoint.getNote());
       values.put("own",oneWaypoint.isUserDefined() ? 1 : 0);
-      final long rowId=databaseRW.insert(dbTableWaypoints,null,values);
+      final long rowId=database.insert(dbTableWaypoints,null,values);
       oneWaypoint.setId((int)rowId);
     }
   }

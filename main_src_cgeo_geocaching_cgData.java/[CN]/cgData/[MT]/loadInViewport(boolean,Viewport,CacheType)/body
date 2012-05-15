@@ -14,7 +14,7 @@
     where.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
   }
   try {
-    final Cursor cursor=databaseRO.query(dbTableCaches,new String[]{"geocode"},where.toString(),null,null,null,null,"500");
+    final Cursor cursor=database.query(dbTableCaches,new String[]{"geocode"},where.toString(),null,null,null,null,"500");
     if (cursor.moveToFirst()) {
       final int index=cursor.getColumnIndex("geocode");
       do {

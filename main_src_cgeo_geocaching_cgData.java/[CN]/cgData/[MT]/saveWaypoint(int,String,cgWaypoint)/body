@@ -4,7 +4,7 @@
   }
   init();
   boolean ok=false;
-  databaseRW.beginTransaction();
+  database.beginTransaction();
   try {
     ContentValues values=new ContentValues();
     values.put("geocode",geocode);
@@ -18,18 +18,18 @@
     values.put("note",waypoint.getNote());
     values.put("own",waypoint.isUserDefined() ? 1 : 0);
     if (id <= 0) {
-      final long rowId=databaseRW.insert(dbTableWaypoints,null,values);
+      final long rowId=database.insert(dbTableWaypoints,null,values);
       waypoint.setId((int)rowId);
       ok=true;
     }
  else {
-      final int rows=databaseRW.update(dbTableWaypoints,values,"_id = " + id,null);
+      final int rows=database.update(dbTableWaypoints,values,"_id = " + id,null);
       ok=rows > 0;
     }
-    databaseRW.setTransactionSuccessful();
+    database.setTransactionSuccessful();
   }
   finally {
-    databaseRW.endTransaction();
+    database.endTransaction();
   }
   return ok;
 }

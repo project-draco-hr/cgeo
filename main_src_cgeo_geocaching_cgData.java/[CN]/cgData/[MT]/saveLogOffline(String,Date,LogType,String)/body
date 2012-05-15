@@ -15,13 +15,13 @@
   values.put("date",date.getTime());
   try {
     if (hasLogOffline(geocode)) {
-      final int rows=databaseRW.update(dbTableLogsOffline,values,"geocode = ?",new String[]{geocode});
+      final int rows=database.update(dbTableLogsOffline,values,"geocode = ?",new String[]{geocode});
       if (rows > 0) {
         status=true;
       }
     }
  else {
-      final long id=databaseRW.insert(dbTableLogsOffline,null,values);
+      final long id=database.insert(dbTableLogsOffline,null,values);
       if (id > 0) {
         status=true;
       }

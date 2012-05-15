@@ -15,20 +15,20 @@
     }
     final String geocodeList=StringUtils.join(quotedGeocodes.toArray(),',');
     final String baseWhereClause="geocode in (" + geocodeList + ")";
-    databaseRW.beginTransaction();
+    database.beginTransaction();
     try {
-      databaseRW.delete(dbTableCaches,baseWhereClause,null);
-      databaseRW.delete(dbTableAttributes,baseWhereClause,null);
-      databaseRW.delete(dbTableSpoilers,baseWhereClause,null);
-      databaseRW.delete(dbTableLogs,baseWhereClause,null);
-      databaseRW.delete(dbTableLogCount,baseWhereClause,null);
-      databaseRW.delete(dbTableLogsOffline,baseWhereClause,null);
-      databaseRW.delete(dbTableWaypoints,baseWhereClause + " and type <> \"own\"",null);
-      databaseRW.delete(dbTableTrackables,baseWhereClause,null);
-      databaseRW.setTransactionSuccessful();
+      database.delete(dbTableCaches,baseWhereClause,null);
+      database.delete(dbTableAttributes,baseWhereClause,null);
+      database.delete(dbTableSpoilers,baseWhereClause,null);
+      database.delete(dbTableLogs,baseWhereClause,null);
+      database.delete(dbTableLogCount,baseWhereClause,null);
+      database.delete(dbTableLogsOffline,baseWhereClause,null);
+      database.delete(dbTableWaypoints,baseWhereClause + " and type <> \"own\"",null);
+      database.delete(dbTableTrackables,baseWhereClause,null);
+      database.setTransactionSuccessful();
     }
   finally {
-      databaseRW.endTransaction();
+      database.endTransaction();
     }
     for (    final String geocode : geocodes) {
       LocalStorage.deleteDirectory(LocalStorage.getStorageDir(geocode));

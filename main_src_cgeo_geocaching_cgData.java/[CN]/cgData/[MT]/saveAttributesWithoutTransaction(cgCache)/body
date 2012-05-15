@@ -1,9 +1,9 @@
 {
   String geocode=cache.getGeocode();
-  databaseRW.delete(dbTableAttributes,"geocode = ?",new String[]{geocode});
+  database.delete(dbTableAttributes,"geocode = ?",new String[]{geocode});
   final List<String> attributes=cache.getAttributes();
   if (CollectionUtils.isNotEmpty(attributes)) {
-    InsertHelper helper=new InsertHelper(databaseRW,dbTableAttributes);
+    InsertHelper helper=new InsertHelper(database,dbTableAttributes);
     long timeStamp=System.currentTimeMillis();
     for (    String attribute : attributes) {
       helper.prepareForInsert();

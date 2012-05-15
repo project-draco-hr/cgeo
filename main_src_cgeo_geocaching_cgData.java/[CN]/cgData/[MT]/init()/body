@@ -2,47 +2,24 @@
   if (initialized) {
     return;
   }
-  if (databaseRW == null || !databaseRW.isOpen()) {
+  if (database == null || !database.isOpen()) {
     try {
       if (dbHelper == null) {
         dbHelper=new DbHelper(new DBContext(context));
       }
-      databaseRW=dbHelper.getWritableDatabase();
-      if (databaseRW != null && databaseRW.isOpen()) {
+      database=dbHelper.getWritableDatabase();
+      if (database != null && database.isOpen()) {
         Log.i("Connection to RW database established.");
       }
  else {
         Log.e("Failed to open connection to RW database.");
       }
-      if (databaseRW != null && databaseRW.inTransaction()) {
-        databaseRW.endTransaction();
+      if (database != null && database.inTransaction()) {
+        database.endTransaction();
       }
     }
  catch (    Exception e) {
       Log.e("cgData.openDb.RW: " + e.toString());
-    }
-  }
-  if (databaseRO == null || !databaseRO.isOpen()) {
-    try {
-      if (dbHelper == null) {
-        dbHelper=new DbHelper(new DBContext(context));
-      }
-      databaseRO=dbHelper.getReadableDatabase();
-      if (databaseRO.needUpgrade(dbVersion)) {
-        databaseRO=null;
-      }
-      if (databaseRO != null && databaseRO.isOpen()) {
-        Log.i("Connection to RO database established.");
-      }
- else {
-        Log.e("Failed to open connection to RO database.");
-      }
-      if (databaseRO != null && databaseRO.inTransaction()) {
-        databaseRO.endTransaction();
-      }
-    }
- catch (    Exception e) {
-      Log.e("cgData.openDb.RO: " + e.toString());
     }
   }
   initialized=true;
