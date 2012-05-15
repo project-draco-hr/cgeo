@@ -4,6 +4,5 @@
   showProgress(false);
   progress.show(this,null,res.getString(R.string.caches_removing_from_history),ProgressDialog.STYLE_HORIZONTAL,removeFromHistoryHandler.obtainMessage(MSG_CANCEL));
   progress.setMaxProgressAndReset(detailTotal);
-  threadH=new RemoveFromHistoryThread(removeFromHistoryHandler);
-  threadH.start();
+  new RemoveFromHistoryThread(removeFromHistoryHandler).start();
 }
