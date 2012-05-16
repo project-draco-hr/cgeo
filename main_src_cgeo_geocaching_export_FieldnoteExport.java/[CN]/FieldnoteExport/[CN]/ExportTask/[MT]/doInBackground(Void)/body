@@ -1,29 +1,18 @@
 {
   final StringBuilder fieldNoteBuffer=new StringBuilder();
-  Map<LogType,String> logTypes=new HashMap<LogType,String>();
-  logTypes.put(LogType.FOUND_IT,"Found it");
-  logTypes.put(LogType.DIDNT_FIND_IT,"Didn't find it");
-  logTypes.put(LogType.NOTE,"Write Note");
-  logTypes.put(LogType.NEEDS_ARCHIVE,"Needs archived");
-  logTypes.put(LogType.NEEDS_MAINTENANCE,"Needs Maintenance");
-  logTypes.put(LogType.WILL_ATTEND,"Will Attend");
-  logTypes.put(LogType.ATTENDED,"Attended");
-  logTypes.put(LogType.WEBCAM_PHOTO_TAKEN,"Webcam Photo Taken");
-  int i=0;
-  for (  cgCache cache : caches) {
-    try {
+  try {
+    int i=0;
+    for (    cgCache cache : caches) {
       if (cache.isLogOffline()) {
-        LogEntry log=cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
-        if (null != logTypes.get(log.type)) {
-          fieldNoteBuffer.append(cache.getGeocode()).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(logTypes.get(log.type)).append(",\"").append(StringUtils.replaceChars(log.log,'"','\'')).append("\"\n");
-          publishProgress(++i);
-        }
+        final LogEntry log=cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
+        fieldNoteBuffer.append(cache.getGeocode()).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(log.type.type).append(",\"").append(StringUtils.replaceChars(log.log,'"','\'')).append("\"\n");
+        publishProgress(++i);
       }
     }
- catch (    Exception e) {
-      Log.e("FieldnoteExport.ExportTask generation",e);
-      return false;
-    }
+  }
+ catch (  Exception e) {
+    Log.e("FieldnoteExport.ExportTask generation",e);
+    return false;
   }
   fieldNoteBuffer.append('\n');
   if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
