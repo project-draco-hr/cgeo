@@ -9,16 +9,16 @@
   logTypes.put(LogType.WILL_ATTEND,"Will Attend");
   logTypes.put(LogType.ATTENDED,"Attended");
   logTypes.put(LogType.WEBCAM_PHOTO_TAKEN,"Webcam Photo Taken");
-  for (int i=0; i < caches.size(); i++) {
+  int i=0;
+  for (  cgCache cache : caches) {
     try {
-      final cgCache cache=caches.get(i);
       if (cache.isLogOffline()) {
         LogEntry log=cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
         if (null != logTypes.get(log.type)) {
           fieldNoteBuffer.append(cache.getGeocode()).append(',').append(fieldNoteDateFormat.format(new Date(log.date))).append(',').append(logTypes.get(log.type)).append(",\"").append(StringUtils.replaceChars(log.log,'"','\'')).append("\"\n");
+          publishProgress(++i);
         }
       }
-      publishProgress(i + 1);
     }
  catch (    Exception e) {
       Log.e("FieldnoteExport.ExportTask generation",e);
@@ -72,7 +72,7 @@
         page=Network.getResponseData(Network.getRequest(uri));
       }
  else {
-        Log.e("FieldnoteExport.ExportTask upload: No login (error: " + loginState + ")");
+        Log.e("FieldnoteExport.ExportTask upload: No login (error: " + loginState + ')');
         return false;
       }
     }

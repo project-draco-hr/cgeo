@@ -2,9 +2,10 @@
   if (null != activity) {
     progress.dismiss();
     if (result) {
-      if (onlyNew) {
-      }
       ActivityMixin.showToast(activity,getName() + ' ' + getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
+      if (upload) {
+        ActivityMixin.showToast(activity,getString(R.string.export_fieldnotes_upload_success));
+      }
     }
  else {
       ActivityMixin.showToast(activity,getString(R.string.export_failed));
