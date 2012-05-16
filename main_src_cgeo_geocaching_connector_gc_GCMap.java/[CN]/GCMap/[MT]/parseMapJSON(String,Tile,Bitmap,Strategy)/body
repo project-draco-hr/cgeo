@@ -54,7 +54,16 @@
  else {
         cache.setType(CacheType.UNKNOWN);
       }
-      searchResult.addCache(cache);
+      boolean exclude=false;
+      if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwn())) {
+        exclude=true;
+      }
+      if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {
+        exclude=true;
+      }
+      if (!exclude) {
+        searchResult.addCache(cache);
+      }
     }
     Log.d("Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
   }
