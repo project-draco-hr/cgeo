@@ -1,14 +1,14 @@
 {
   try {
-    final String latlonMap=cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
-    DisplayMetrics metrics=new DisplayMetrics();
-    getWindowManager().getDefaultDisplay().getMetrics(metrics);
-    final int width=metrics.widthPixels;
-    final int height=(int)(110 * metrics.density);
-    final String markerUrl="http://cgeo.carnero.cc/_markers/my_location_mdpi.png";
-    final HtmlImage mapGetter=new HtmlImage(cache.getGeocode(),false,0,false);
-    final Parameters params=new Parameters("zoom","15","size",width + "x" + height,"maptype","roadmap","markers","icon:" + markerUrl + "|shadow:false|"+ latlonMap,"sensor","false");
-    return mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?" + params);
+    Bitmap image=decode(cache);
+    if (image == null) {
+      StaticMapsProvider.storeCachePreviewMap(cache);
+      image=decode(cache);
+      if (image == null) {
+        return null;
+      }
+    }
+    return ImageHelper.scaleBitmapToFitDisplay(image);
   }
  catch (  Exception e) {
     Log.w("CacheDetailActivity.PreviewMapTask",e);

@@ -1,6 +1,6 @@
 {
   for (int level=1; level <= 5; level++) {
-    File mapFile=StaticMapsProvider.getMapFile(geocode,WAYPOINT_PREFIX + waypointId + "_",level,false);
+    File mapFile=StaticMapsProvider.getMapFile(geocode,WAYPOINT_PREFIX + waypointId + "_"+ level,false);
     if (mapFile != null && mapFile.exists()) {
       return true;
     }

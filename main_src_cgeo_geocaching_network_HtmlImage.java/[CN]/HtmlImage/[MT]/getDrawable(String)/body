@@ -41,27 +41,5 @@
       imagePre=getTransparent1x1Image();
     }
   }
-  final int imgWidth=imagePre.getWidth();
-  final int imgHeight=imagePre.getHeight();
-  int width;
-  int height;
-  if (imgWidth > maxWidth || imgHeight > maxHeight) {
-    final double ratio=Math.min((double)maxHeight / (double)imgHeight,(double)maxWidth / (double)imgWidth);
-    width=(int)Math.ceil(imgWidth * ratio);
-    height=(int)Math.ceil(imgHeight * ratio);
-    try {
-      imagePre=Bitmap.createScaledBitmap(imagePre,width,height,true);
-    }
- catch (    Exception e) {
-      Log.d("HtmlImage.getDrawable: Failed to scale image");
-      return null;
-    }
-  }
- else {
-    width=imgWidth;
-    height=imgHeight;
-  }
-  final BitmapDrawable image=new BitmapDrawable(resources,imagePre);
-  image.setBounds(new Rect(0,0,width,height));
-  return image;
+  return imagePre != null ? ImageHelper.scaleBitmapToFitDisplay(imagePre) : null;
 }

@@ -1,13 +1,12 @@
 {
-  final String mapUrl="http://maps.google.com/maps/api/staticmap";
-  final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(zoom),"size",edge + "x" + edge,"maptype",mapType,"markers","icon:" + markerUrl + '|'+ latlonMap,"sensor","false");
+  final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(zoom),"size",width + "x" + height,"maptype",mapType,"markers","icon:" + markerUrl + '|'+ shadow+ latlonMap,"sensor","false");
   if (waypoints != null) {
     params.addAll(waypoints);
   }
-  final HttpResponse httpResponse=Network.getRequest(mapUrl,params);
+  final HttpResponse httpResponse=Network.getRequest(GOOGLE_STATICMAP_URL,params);
   if (httpResponse != null) {
     if (httpResponse.getStatusLine().getStatusCode() == 200) {
-      final File file=getMapFile(geocode,prefix,level,true);
+      final File file=getMapFile(geocode,prefix,true);
       if (LocalStorage.saveEntityToFile(httpResponse,file)) {
         final long fileSize=file.length();
         if (fileSize < MIN_MAP_IMAGE_BYTES) {
