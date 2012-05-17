@@ -3,12 +3,7 @@
     if (items.size() <= index) {
       return false;
     }
-    if (waitDialog == null) {
-      waitDialog=new ProgressDialog(context);
-      waitDialog.setMessage("loading details???");
-      waitDialog.setCancelable(false);
-    }
-    waitDialog.show();
+    progress.show(context,context.getResources().getString(R.string.map_live),context.getResources().getString(R.string.cache_dialog_loading_details),true,null);
     CachesOverlayItemImpl item=null;
     getOverlayImpl().lock();
     try {
@@ -24,23 +19,28 @@
     }
     final IWaypoint coordinate=item.getCoord();
     if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
-      CGeoMap.markCacheAsDirty(coordinate.getGeocode());
-      CachePopup.startActivity(context,coordinate.getGeocode());
+      cgCache cache=cgeoapplication.getInstance().loadCache(coordinate.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+      if (CacheType.UNKNOWN != cache.getType()) {
+        progress.dismiss();
+      }
+      RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
+      requestDetailsThread.start();
+      return true;
     }
  else     if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {
       CGeoMap.markCacheAsDirty(coordinate.getGeocode());
       WaypointPopup.startActivity(context,coordinate.getId(),coordinate.getGeocode());
     }
  else {
-      waitDialog.dismiss();
+      progress.dismiss();
       return false;
     }
-    waitDialog.dismiss();
+    progress.dismiss();
   }
  catch (  Exception e) {
     Log.e("cgMapOverlay.onTap: " + e.toString());
-    if (waitDialog != null) {
-      waitDialog.dismiss();
+    if (progress != null) {
+      progress.dismiss();
     }
   }
   return true;

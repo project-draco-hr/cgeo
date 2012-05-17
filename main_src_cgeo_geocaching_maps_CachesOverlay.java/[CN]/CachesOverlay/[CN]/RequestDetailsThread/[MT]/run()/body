@@ -1,0 +1,8 @@
+{
+  if (CacheType.UNKNOWN == cache.getType()) {
+    GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+  }
+  CGeoMap.markCacheAsDirty(cache.getGeocode());
+  CachePopup.startActivity(context,cache.getGeocode());
+  progress.dismiss();
+}
