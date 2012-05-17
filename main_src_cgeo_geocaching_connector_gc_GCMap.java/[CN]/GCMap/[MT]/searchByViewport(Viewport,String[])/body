@@ -1,13 +1,12 @@
 {
+  int speed=(int)cgeoapplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000;
   Strategy strategy=Settings.getLiveMapStrategy();
   if (strategy == Strategy.AUTO) {
-    float speedNow=cgeoapplication.getInstance().currentGeo().getSpeed();
-    strategy=speedNow >= 8 ? Strategy.FAST : Strategy.DETAILED;
+    strategy=speed >= 30 ? Strategy.FAST : Strategy.DETAILED;
   }
-{
-    SearchResult result=searchByViewport(viewport,tokens,strategy);
+  SearchResult result=searchByViewport(viewport,tokens,strategy);
+  if (Settings.isDebug()) {
     String text=Formatter.SEPARATOR + strategy.getL10n() + Formatter.SEPARATOR;
-    int speed=(int)cgeoapplication.getInstance().currentGeo().getSpeed();
     if (Settings.isUseMetricUnits()) {
       text+=speed + " km/h";
     }
@@ -15,6 +14,6 @@
       text+=speed / IConversion.MILES_TO_KILOMETER + " mph";
     }
     result.setUrl(result.getUrl() + text);
-    return result;
   }
+  return result;
 }
