@@ -20,10 +20,10 @@
     final IWaypoint coordinate=item.getCoord();
     if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
       cgCache cache=cgeoapplication.getInstance().loadCache(coordinate.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
-      if (CacheType.UNKNOWN != cache.getType()) {
+      RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
+      if (!requestDetailsThread.requestRequired()) {
         progress.dismiss();
       }
-      RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
       requestDetailsThread.start();
       return true;
     }
