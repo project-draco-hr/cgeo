@@ -2,6 +2,11 @@
   if (compassArrow == null || compassArrow.isRecycled()) {
     return;
   }
+  float azimuthRelative=calculateAzimuthRelative();
+  float change=Math.abs(azimuthRelative - lastDrawingAzimuth);
+  if (change < MINIMUM_ROTATION_DEGREES_FOR_REPAINT) {
+    return;
+  }
   final int marginLeft=(getWidth() - compassArrowWidth) / 2;
   final int marginTop=(getHeight() - compassArrowHeight) / 2;
   invalidate(marginLeft,marginTop,(marginLeft + compassArrowWidth),(marginTop + compassArrowHeight));

@@ -1,15 +1,10 @@
 {
   super.onDraw(canvas);
-  float azimuthRelative=azimuth - heading;
-  if (azimuthRelative < 0) {
-    azimuthRelative+=360;
-  }
- else   if (azimuthRelative >= 360) {
-    azimuthRelative-=360;
-  }
+  float azimuthRelative=calculateAzimuthRelative();
+  lastDrawingAzimuth=azimuthRelative;
   canvas.setDrawFilter(FILTER_SET);
-  final int canvasCenterX=(compassArrowWidth / 2) + ((getWidth() - compassArrowWidth) / 2);
-  final int canvasCenterY=(compassArrowHeight / 2) + ((getHeight() - compassArrowHeight) / 2);
+  final int canvasCenterX=getWidth() / 2;
+  final int canvasCenterY=getHeight() / 2;
   final int marginLeft=(getWidth() - compassArrowWidth) / 2;
   final int marginTop=(getHeight() - compassArrowHeight) / 2;
   canvas.rotate(-azimuthRelative,canvasCenterX,canvasCenterY);

@@ -1,0 +1,10 @@
+{
+  float azimuthRelative=azimuth - heading;
+  if (azimuthRelative < 0) {
+    azimuthRelative+=360;
+  }
+ else   if (azimuthRelative >= 360) {
+    azimuthRelative-=360;
+  }
+  return azimuthRelative;
+}
