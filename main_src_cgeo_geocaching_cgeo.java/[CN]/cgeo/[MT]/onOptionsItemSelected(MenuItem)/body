@@ -14,9 +14,7 @@ case MENU_HISTORY:
 cgeocaches.startActivityHistory(this);
 return true;
 case MENU_SCAN:
-Intent intent=new Intent(SCAN_INTENT);
-intent.putExtra("SCAN_MODE","QR_CODE_MODE");
-startActivityForResult(intent,SCAN_REQUEST_CODE);
+startScannerApplication();
 return true;
 default :
 break;

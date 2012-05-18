@@ -1,0 +1,6 @@
+{
+  Intent intent=new Intent(SCAN_INTENT);
+  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+  intent.putExtra("SCAN_MODE","QR_CODE_MODE");
+  startActivityForResult(intent,SCAN_REQUEST_CODE);
+}
