@@ -1,16 +1,16 @@
 {
   final Address address=getItem(position);
-  final AddressListView holder;
   View view=convertView;
+  final ViewHolder holder;
   if (view == null) {
     view=inflater.inflate(R.layout.addresses_item,null);
-    holder=new AddressListView();
+    holder=new ViewHolder();
     holder.label=(TextView)view.findViewById(R.id.label);
     holder.distance=(TextView)view.findViewById(R.id.distance);
     view.setTag(holder);
   }
  else {
-    holder=(AddressListView)view.getTag();
+    holder=(ViewHolder)view.getTag();
   }
   view.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View v){

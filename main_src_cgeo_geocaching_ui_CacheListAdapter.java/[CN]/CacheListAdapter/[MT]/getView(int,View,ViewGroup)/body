@@ -8,10 +8,10 @@
   }
   final cgCache cache=getItem(position);
   View v=rowView;
-  CacheListView holder;
+  final ViewHolder holder;
   if (v == null) {
     v=inflater.inflate(R.layout.caches_item,null);
-    holder=new CacheListView();
+    holder=new ViewHolder();
     holder.checkbox=(CheckBox)v.findViewById(R.id.checkbox);
     holder.logStatusMark=(ImageView)v.findViewById(R.id.log_status_mark);
     holder.text=(TextView)v.findViewById(R.id.text);
@@ -26,7 +26,7 @@
     v.setTag(holder);
   }
  else {
-    holder=(CacheListView)v.getTag();
+    holder=(ViewHolder)v.getTag();
   }
   final boolean lightSkin=Settings.isLightSkin();
   final TouchListener touchLst=new TouchListener(cache);

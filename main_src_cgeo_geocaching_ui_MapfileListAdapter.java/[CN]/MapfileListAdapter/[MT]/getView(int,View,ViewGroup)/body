@@ -8,16 +8,16 @@
   }
   File file=getItem(position);
   View v=rowView;
-  MapfileView holder;
+  ViewHolder holder;
   if (v == null) {
     v=inflater.inflate(R.layout.mapfile_item,null);
-    holder=new MapfileView();
+    holder=new ViewHolder();
     holder.filepath=(TextView)v.findViewById(R.id.mapfilepath);
     holder.filename=(TextView)v.findViewById(R.id.mapfilename);
     v.setTag(holder);
   }
  else {
-    holder=(MapfileView)v.getTag();
+    holder=(ViewHolder)v.getTag();
   }
   File current=new File(parentView.getCurrentMapfile());
   if (file.equals(current)) {

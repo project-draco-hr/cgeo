@@ -8,16 +8,16 @@
   }
   final File file=getItem(position);
   View v=rowView;
-  GPXListView holder;
+  final ViewHolder holder;
   if (v == null) {
     v=inflater.inflate(R.layout.gpx_item,null);
-    holder=new GPXListView();
+    holder=new ViewHolder();
     holder.filepath=(TextView)v.findViewById(R.id.filepath);
     holder.filename=(TextView)v.findViewById(R.id.filename);
     v.setTag(holder);
   }
  else {
-    holder=(GPXListView)v.getTag();
+    holder=(ViewHolder)v.getTag();
   }
   v.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
