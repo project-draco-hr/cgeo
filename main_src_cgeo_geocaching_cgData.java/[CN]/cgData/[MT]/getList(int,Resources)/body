@@ -7,6 +7,9 @@
       return lists.get(0);
     }
   }
+  if (id == StoredList.ALL_LIST_ID) {
+    return new StoredList(StoredList.ALL_LIST_ID,res.getString(R.string.list_all_lists),(int)getStatementCountAllLists().simpleQueryForLong());
+  }
   if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
     return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)getStatementCountStandardList().simpleQueryForLong());
   }

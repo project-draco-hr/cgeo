@@ -21,7 +21,7 @@
       navigationMenu.setVisible(listNotEmpty);
     }
     final boolean hasSelection=adapter != null && adapter.getCheckedCount() > 0;
-    final boolean isNonDefaultList=listId != StoredList.STANDARD_LIST_ID;
+    final boolean isNonDefaultList=(listId != StoredList.STANDARD_LIST_ID) && (listId != StoredList.ALL_LIST_ID);
     if (type == CacheListType.OFFLINE) {
       setMenuItemLabel(menu,MENU_DROP_CACHES,R.string.caches_drop_selected,R.string.caches_drop_all);
       menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());

@@ -5,8 +5,8 @@
   init();
   Set<String> geocodes=new HashSet<String>();
   StringBuilder specifySql=new StringBuilder();
-  specifySql.append("reason = ");
-  specifySql.append(Math.max(listId,1));
+  specifySql.append("reason ");
+  specifySql.append(listId != StoredList.ALL_LIST_ID ? "=" + Math.max(listId,1) : ">= " + StoredList.STANDARD_LIST_ID);
   if (detailedOnly) {
     specifySql.append(" and detailed = 1 ");
   }
