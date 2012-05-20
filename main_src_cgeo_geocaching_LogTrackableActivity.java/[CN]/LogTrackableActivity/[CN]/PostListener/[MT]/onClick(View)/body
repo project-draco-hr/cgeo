@@ -1,0 +1,13 @@
+{
+  if (!gettingViewstate) {
+    waitDialog=ProgressDialog.show(LogTrackableActivity.this,null,res.getString(R.string.log_saving),true);
+    waitDialog.setCancelable(true);
+    Settings.setTrackableAction(typeSelected.id);
+    final String tracking=((EditText)findViewById(R.id.tracking)).getText().toString();
+    final String log=((EditText)findViewById(R.id.log)).getText().toString();
+    new PostLogThread(postLogHandler,tracking,log).start();
+  }
+ else {
+    showToast(res.getString(R.string.err_log_load_data_still));
+  }
+}

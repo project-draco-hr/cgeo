@@ -1,0 +1,39 @@
+{
+  if (geocode != null) {
+    app.setAction("logging trackable");
+  }
+  final Button typeButton=(Button)findViewById(R.id.type);
+  registerForContextMenu(typeButton);
+  typeButton.setText(typeSelected.getL10n());
+  typeButton.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View view){
+      openContextMenu(view);
+    }
+  }
+);
+  final Button dateButton=(Button)findViewById(R.id.date);
+  dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
+  dateButton.setOnClickListener(new DateListener());
+  if (tweetBox == null) {
+    tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
+  }
+  if (tweetCheck == null) {
+    tweetCheck=(CheckBox)findViewById(R.id.tweet);
+  }
+  tweetCheck.setChecked(true);
+  if (CollectionUtils.isEmpty(possibleLogTypes)) {
+    possibleLogTypes=cgTrackable.getPossibleLogTypes();
+  }
+  final Button buttonPost=(Button)findViewById(R.id.post);
+  if (Login.isEmpty(viewstates)) {
+    buttonPost.setEnabled(false);
+    buttonPost.setOnTouchListener(null);
+    buttonPost.setOnClickListener(null);
+    new LoadDataThread().start();
+  }
+ else {
+    buttonPost.setEnabled(true);
+    buttonPost.setOnClickListener(new PostListener());
+  }
+  disableSuggestions((EditText)findViewById(R.id.tracking));
+}
