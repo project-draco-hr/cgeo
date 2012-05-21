@@ -5,11 +5,13 @@
   if (mapView == null) {
     return;
   }
-  if (!alreadyCentered) {
-    alreadyCentered=true;
-    mapController.setCenter(makeGeoPoint(coords));
+  final MapControllerImpl mapController=mapView.getMapController();
+  final GeoPointImpl target=makeGeoPoint(coords);
+  if (alreadyCentered) {
+    mapController.animateTo(target);
   }
  else {
-    mapController.animateTo(makeGeoPoint(coords));
+    mapController.setCenter(target);
   }
+  alreadyCentered=true;
 }

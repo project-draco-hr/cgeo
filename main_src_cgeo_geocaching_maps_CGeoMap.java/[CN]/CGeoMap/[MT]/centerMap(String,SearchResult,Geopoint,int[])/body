@@ -1,4 +1,5 @@
 {
+  final MapControllerImpl mapController=mapView.getMapController();
   if (!centered && mapState != null) {
     try {
       mapController.setCenter(mapItemFactory.getGeoPointBase(new Geopoint(mapState[0] / 1.0e6,mapState[1] / 1.0e6)));

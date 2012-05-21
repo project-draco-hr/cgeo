@@ -52,8 +52,7 @@
     overlayScale=mapView.createAddScaleOverlay(activity);
   }
   mapView.repaintRequired(null);
-  mapController=mapView.getMapController();
-  mapController.setZoom(Settings.getMapZoom());
+  mapView.getMapController().setZoom(Settings.getMapZoom());
   live=(searchIntent == null && geocodeIntent == null && coordsIntent == null);
   if (null == mapStateIntent) {
     followMyLocation=live;
