@@ -5,6 +5,10 @@
     newMapType=((MapsforgeMapSource)mapSource).getGenerator();
   }
   MapGenerator mapGenerator=MapGeneratorFactory.createMapGenerator(newMapType);
+  final int maxZoom=mapGenerator.getZoomLevelMax();
+  if (getMapPosition().getZoomLevel() > maxZoom) {
+    getController().setZoom(maxZoom);
+  }
   setMapGenerator(mapGenerator);
   if (!mapGenerator.requiresInternetConnection()) {
     setMapFile(new File(Settings.getMapFile()));
