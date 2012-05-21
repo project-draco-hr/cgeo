@@ -16,6 +16,7 @@
     image_view.setScaleType(ImageView.ScaleType.CENTER_CROP);
     image_view.setLayoutParams(new LayoutParams(bounds.width(),bounds.height()));
     view.addView(image_view);
+    image_view.setId(image.hashCode());
     images.put(image_view.getId(),img);
   }
 synchronized (cgeoimages.this) {
