@@ -1,7 +1,3 @@
 {
-  int mfzoom=mapzoom - 1;
-  if (mfzoom > maxZoomLevel) {
-    mfzoom=maxZoomLevel;
-  }
-  mapController.setZoom(mfzoom);
+  mapController.setZoom(Math.min(mapzoom - 1,maxZoomLevel));
 }

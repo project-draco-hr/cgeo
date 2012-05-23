@@ -1,6 +1,6 @@
 {
   try {
-    if (getMapZoomLevel() >= 22) {
+    if (getActualMapZoomLevel() > 22) {
       getController().setZoom(22);
     }
     super.draw(canvas);
