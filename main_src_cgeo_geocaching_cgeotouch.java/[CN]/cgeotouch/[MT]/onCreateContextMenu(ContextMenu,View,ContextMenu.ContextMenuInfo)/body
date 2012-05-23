@@ -1,9 +1,0 @@
-{
-  super.onCreateContextMenu(menu,view,info);
-  final int viewId=view.getId();
-  if (viewId == R.id.type) {
-    for (    final LogType typeOne : logTypes) {
-      menu.add(viewId,typeOne.id,0,typeOne.getL10n());
-    }
-  }
-}
