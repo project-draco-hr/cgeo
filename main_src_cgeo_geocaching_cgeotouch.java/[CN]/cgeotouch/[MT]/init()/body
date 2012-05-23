@@ -15,7 +15,7 @@
   registerForContextMenu(typeButton);
   typeButton.setText(typeSelected.getL10n());
   typeButton.setOnClickListener(new View.OnClickListener(){
-    public void onClick(    View view){
+    @Override public void onClick(    View view){
       openContextMenu(view);
     }
   }

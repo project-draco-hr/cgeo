@@ -6,14 +6,14 @@
   }
  else {
     new AlertDialog.Builder(this).setTitle(res.getString(R.string.addon_missing_title)).setMessage(new StringBuilder(res.getString(R.string.helper_calendar_missing)).append(' ').append(res.getString(R.string.addon_download_prompt)).toString()).setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
-      public void onClick(      DialogInterface dialog,      int id){
+      @Override public void onClick(      DialogInterface dialog,      int id){
         Intent intent=new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
         startActivity(intent);
       }
     }
 ).setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
-      public void onClick(      DialogInterface dialog,      int id){
+      @Override public void onClick(      DialogInterface dialog,      int id){
         dialog.cancel();
       }
     }

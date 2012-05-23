@@ -9,7 +9,7 @@
     dialog.setMessage(res.getString(R.string.caches_drop_all_ask));
   }
   dialog.setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int id){
+    @Override public void onClick(    DialogInterface dialog,    int id){
       dropSelected();
       if (removeListAfterwards) {
         removeList(false);
@@ -19,7 +19,7 @@
   }
 );
   dialog.setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int id){
+    @Override public void onClick(    DialogInterface dialog,    int id){
       dialog.cancel();
     }
   }

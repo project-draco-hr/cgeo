@@ -18,7 +18,7 @@
       dialog.setPositiveButton(geocode,new cacheDetails(geocode));
     }
     dialog.setNeutralButton(cgeoapplication.getInstance().getResources().getString(android.R.string.ok),new DialogInterface.OnClickListener(){
-      public void onClick(      DialogInterface dialog,      int id){
+      @Override public void onClick(      DialogInterface dialog,      int id){
         dialog.cancel();
       }
     }

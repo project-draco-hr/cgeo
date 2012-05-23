@@ -18,7 +18,7 @@
         helper.setVisibility(View.VISIBLE);
         helper.setClickable(true);
         helper.setOnClickListener(new View.OnClickListener(){
-          public void onClick(          View view){
+          @Override public void onClick(          View view){
             ActivityMixin.goManual(cgeo.this,"c:geo-intro");
             view.setVisibility(View.GONE);
           }

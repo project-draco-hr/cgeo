@@ -6,7 +6,7 @@
   alert.setTitle(dialogTitle);
   alert.setView(view);
   alert.setPositiveButton(buttonTitle,new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int whichButton){
+    @Override public void onClick(    DialogInterface dialog,    int whichButton){
       String listName=StringUtils.trim(input.getText().toString());
       if (StringUtils.isNotBlank(listName)) {
         runnable.run(listName);
@@ -15,7 +15,7 @@
   }
 );
   alert.setNegativeButton(res.getString(R.string.list_dialog_cancel),new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int whichButton){
+    @Override public void onClick(    DialogInterface dialog,    int whichButton){
       dialog.dismiss();
     }
   }

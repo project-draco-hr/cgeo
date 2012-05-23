@@ -3,7 +3,7 @@
   builder.setTitle(R.string.caches_filter);
   final ArrayAdapter<FactoryEntry> adapter=new ArrayAdapter<FactoryEntry>((Activity)activity,android.R.layout.select_dialog_item,registry);
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int itemIndex){
+    @Override public void onClick(    DialogInterface dialog,    int itemIndex){
       FactoryEntry entry=adapter.getItem(itemIndex);
       if (entry.filterFactory == null) {
         runAfterwards.run(null);

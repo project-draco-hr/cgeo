@@ -12,7 +12,7 @@
   }
   setAdapter();
   waitDialog=ProgressDialog.show(this,res.getString(R.string.file_title_searching),res.getString(R.string.file_searching),true,true,new DialogInterface.OnCancelListener(){
-    public void onCancel(    DialogInterface arg0){
+    @Override public void onCancel(    DialogInterface arg0){
       if (searchingThread != null && searchingThread.isAlive()) {
         searchingThread.notifyEnd();
       }

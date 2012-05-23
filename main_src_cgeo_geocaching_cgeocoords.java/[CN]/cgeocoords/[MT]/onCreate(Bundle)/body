@@ -8,7 +8,7 @@
   }
   setContentView(R.layout.coords);
   findViewById(R.id.actionBarManualbutton).setOnClickListener(new View.OnClickListener(){
-    public void onClick(    View view){
+    @Override public void onClick(    View view){
       ActivityMixin.goManual(context,"c:geo-geocoordinate-input");
     }
   }

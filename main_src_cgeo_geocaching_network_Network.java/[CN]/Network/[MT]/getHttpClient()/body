@@ -30,7 +30,7 @@
   }
 );
   client.addResponseInterceptor(new HttpResponseInterceptor(){
-    public void process(    final HttpResponse response,    final HttpContext context) throws HttpException, IOException {
+    @Override public void process(    final HttpResponse response,    final HttpContext context) throws HttpException, IOException {
       final HttpEntity entity=response.getEntity();
       if (entity != null) {
         final Header contentEncoding=entity.getContentEncoding();

@@ -3,7 +3,7 @@
   AlertDialog.Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(res.getString(R.string.user_menu_title) + " " + name);
   builder.setItems(items,new DialogInterface.OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int item){
+    @Override public void onClick(    DialogInterface dialog,    int item){
 switch (item) {
 case 0:
         cgeocaches.startActivityOwner(CacheDetailActivity.this,name.toString());

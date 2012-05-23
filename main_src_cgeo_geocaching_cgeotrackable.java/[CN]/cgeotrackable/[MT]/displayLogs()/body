@@ -18,7 +18,7 @@
         final String cacheGuid=log.cacheGuid;
         final String cacheName=log.cacheName;
         ((TextView)rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener(){
-          public void onClick(          View arg0){
+          @Override public void onClick(          View arg0){
             CacheDetailActivity.startActivityGuid(cgeotrackable.this,cacheGuid,Html.fromHtml(cacheName).toString());
           }
         }
