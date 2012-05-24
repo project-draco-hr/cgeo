@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
-    Log.w("cgeoBase.searchTrackable: No geocode nor guid nor id given");
+    Log.w("GCParser.searchTrackable: No geocode nor guid nor id given");
     return null;
   }
   cgTrackable trackable=new cgTrackable();
@@ -17,12 +17,12 @@
   }
   final String page=Login.getRequestLogged("http://www.geocaching.com/track/details.aspx",params);
   if (StringUtils.isBlank(page)) {
-    Log.e("cgeoBase.searchTrackable: No data from server");
+    Log.e("GCParser.searchTrackable: No data from server");
     return trackable;
   }
   trackable=parseTrackable(page,geocode);
   if (trackable == null) {
-    Log.e("cgeoBase.searchTrackable: No trackable parsed");
+    Log.e("GCParser.searchTrackable: No trackable parsed");
     return null;
   }
   return trackable;

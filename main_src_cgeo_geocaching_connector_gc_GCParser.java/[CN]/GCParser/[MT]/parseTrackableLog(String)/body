@@ -8,7 +8,7 @@
   }
   table=StringUtils.substringBetween(table,"<tbody>","</tbody>");
   if (StringUtils.isBlank(table)) {
-    Log.e("cgeoBase.parseTrackableLog: tbody not found on page");
+    Log.e("GCParser.parseTrackableLog: tbody not found on page");
     return null;
   }
   final List<TrackableLog> trackableLogs=new ArrayList<TrackableLog>();

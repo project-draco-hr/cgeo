@@ -1,7 +1,7 @@
 {
   CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_details);
   if (StringUtils.isBlank(page)) {
-    Log.e("cgeoBase.parseCache: No page given");
+    Log.e("GCParser.parseCache: No page given");
     return null;
   }
   final SearchResult searchResult=new SearchResult();
@@ -32,13 +32,13 @@
   String tableInside=page;
   int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
   if (pos == -1) {
-    Log.e("cgeoBase.parseCache: ID \"cacheDetails\" not found on page");
+    Log.e("GCParser.parseCache: ID \"cacheDetails\" not found on page");
     return null;
   }
   tableInside=tableInside.substring(pos);
   pos=tableInside.indexOf(GCConstants.STRING_CACHEINFORMATIONTABLE);
   if (pos == -1) {
-    Log.e("cgeoBase.parseCache: class \"CacheInformationTable\" not found on page");
+    Log.e("GCParser.parseCache: class \"CacheInformationTable\" not found on page");
     return null;
   }
   tableInside=tableInside.substring(0,pos);
@@ -65,7 +65,7 @@
       }
     }
  catch (    ParseException e) {
-      Log.w("cgeoBase.parseCache: Failed to parse cache hidden (event) date");
+      Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
     }
     cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
     cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id).toLowerCase()));
@@ -80,7 +80,7 @@
       cache.setReliableLatLon(true);
     }
  catch (    Geopoint.GeopointException e) {
-      Log.w("cgeoBase.parseCache: Failed to parse cache coordinates: " + e.toString());
+      Log.w("GCParser.parseCache: Failed to parse cache coordinates: " + e.toString());
     }
   }
   cache.setLocation(BaseUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,cache.getLocation()));
@@ -116,7 +116,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w("cgeoBase.parseCache: Failed to parse cache attributes");
+    Log.w("GCParser.parseCache: Failed to parse cache attributes");
   }
   try {
     final String spoilers=BaseUtils.getMatch(page,GCConstants.PATTERN_SPOILERS,false,null);
@@ -145,7 +145,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w("cgeoBase.parseCache: Failed to parse cache spoilers");
+    Log.w("GCParser.parseCache: Failed to parse cache spoilers");
   }
   try {
     cache.setInventoryItems(0);
@@ -172,7 +172,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w("cgeoBase.parseCache: Failed to parse cache inventory (2)");
+    Log.w("GCParser.parseCache: Failed to parse cache inventory (2)");
   }
   try {
     final String countlogs=BaseUtils.getMatch(page,GCConstants.PATTERN_COUNTLOGS,true,null);
@@ -188,7 +188,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w("cgeoBase.parseCache: Failed to parse cache log count");
+    Log.w("GCParser.parseCache: Failed to parse cache log count");
   }
   try {
     final String originalCoords=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON_ORIG,false,null);

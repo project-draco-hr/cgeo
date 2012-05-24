@@ -2,7 +2,7 @@
   final ImmutablePair<String,String> login=Settings.getLogin();
   if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
     Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
-    Log.e("cgeoBase.login: No login information stored");
+    Log.e("Login.login: No login information stored");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
   Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
@@ -12,7 +12,7 @@
     return StatusCode.MAINTENANCE;
   }
   if (StringUtils.isBlank(loginData)) {
-    Log.e("cgeoBase.login: Failed to retrieve login page (1st)");
+    Log.e("Login.login: Failed to retrieve login page (1st)");
     return StatusCode.CONNECTION_FAILED;
   }
   if (Login.getLoginStatus(loginData)) {
@@ -25,14 +25,14 @@
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$tbUsername",login.left,"ctl00$ContentBody$tbPassword",login.right,"ctl00$ContentBody$cbRememberMe","on","ctl00$ContentBody$btnSignIn","Login");
   final String[] viewstates=Login.getViewstates(loginData);
   if (isEmpty(viewstates)) {
-    Log.e("cgeoBase.login: Failed to find viewstates");
+    Log.e("Login.login: Failed to find viewstates");
     return StatusCode.LOGIN_PARSE_ERROR;
   }
   Login.putViewstates(params,viewstates);
   loginResponse=Network.postRequest("https://www.geocaching.com/login/default.aspx",params);
   loginData=Network.getResponseData(loginResponse);
   if (StringUtils.isBlank(loginData)) {
-    Log.e("cgeoBase.login: Failed to retrieve login page (2nd)");
+    Log.e("Login.login: Failed to retrieve login page (2nd)");
     return StatusCode.COMMUNICATION_ERROR;
   }
   if (Login.getLoginStatus(loginData)) {

@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(pageContent)) {
-    Log.e("cgeoBase.parseSearch: No page given");
+    Log.e("GCParser.parseSearch: No page given");
     return null;
   }
   final List<String> cids=new ArrayList<String>();
@@ -30,14 +30,14 @@
   }
   int startPos=page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
   if (startPos == -1) {
-    Log.e("cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
+    Log.e("GCParser.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
     return null;
   }
   page=page.substring(startPos);
   startPos=page.indexOf('>');
   int endPos=page.indexOf("ctl00_ContentBody_UnitTxt");
   if (startPos == -1 || endPos == -1) {
-    Log.e("cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
+    Log.e("GCParser.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
     return null;
   }
   page=page.substring(startPos + 1,endPos - startPos + 1);
@@ -69,7 +69,7 @@
       }
     }
  catch (    Exception e) {
-      Log.w("cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
+      Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data");
     }
     if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
       continue;
@@ -110,7 +110,7 @@
       }
     }
  catch (    NumberFormatException e) {
-      Log.w("cgeoBase.parseSearch: Failed to parse favourite count");
+      Log.w("GCParser.parseSearch: Failed to parse favourite count");
     }
     if (cache.getNameSp() == null) {
       cache.setNameSp((new Spannable.Factory()).newSpannable(cache.getName()));
@@ -127,7 +127,7 @@
     }
   }
  catch (  NumberFormatException e) {
-    Log.w("cgeoBase.parseSearch: Failed to parse cache count");
+    Log.w("GCParser.parseSearch: Failed to parse cache count");
   }
   if (thread != null && recaptchaChallenge != null) {
     if (thread.getText() == null) {

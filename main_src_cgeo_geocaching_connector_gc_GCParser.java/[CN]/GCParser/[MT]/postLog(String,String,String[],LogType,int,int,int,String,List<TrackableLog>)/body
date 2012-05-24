@@ -1,10 +1,10 @@
 {
   if (Login.isEmpty(viewstates)) {
-    Log.e("cgeoBase.postLog: No viewstate given");
+    Log.e("GCParser.postLog: No viewstate given");
     return StatusCode.LOG_POST_ERROR;
   }
   if (StringUtils.isBlank(log)) {
-    Log.e("cgeoBase.postLog: No log text given");
+    Log.e("GCParser.postLog: No log text given");
     return StatusCode.NO_LOG_TEXT;
   }
   final int logLen=log.length();
@@ -43,7 +43,7 @@
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
   String page=Login.postRequestLogged(uri,params);
   if (!Login.getLoginStatus(page)) {
-    Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+    Log.e("GCParser.postLogTrackable: Can not log in geocaching");
     return StatusCode.NOT_LOGGED_IN;
   }
   final Matcher matcher=GCConstants.PATTERN_MAINTENANCE.matcher(page);
@@ -51,7 +51,7 @@
     if (matcher.find() && matcher.groupCount() > 0) {
       final String[] viewstatesConfirm=Login.getViewstates(page);
       if (Login.isEmpty(viewstatesConfirm)) {
-        Log.e("cgeoBase.postLog: No viewstate for confirm log");
+        Log.e("GCParser.postLog: No viewstate for confirm log");
         return StatusCode.LOG_POST_ERROR;
       }
       params.clear();
@@ -84,7 +84,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e("cgeoBase.postLog.confim: " + e.toString());
+    Log.e("GCParser.postLog.confim: " + e.toString());
   }
   try {
     final Matcher matcherOk=GCConstants.PATTERN_OK1.matcher(page);
@@ -101,8 +101,8 @@
     }
   }
  catch (  Exception e) {
-    Log.e("cgeoBase.postLog.check: " + e.toString());
+    Log.e("GCParser.postLog.check: " + e.toString());
   }
-  Log.e("cgeoBase.postLog: Failed to post log because of unknown error");
+  Log.e("GCParser.postLog: Failed to post log because of unknown error");
   return StatusCode.LOG_POST_ERROR;
 }

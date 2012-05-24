@@ -1,10 +1,10 @@
 {
   if (Login.isEmpty(viewstates)) {
-    Log.e("cgeoBase.postLogTrackable: No viewstate given");
+    Log.e("GCParser.postLogTrackable: No viewstate given");
     return StatusCode.LOG_POST_ERROR;
   }
   if (StringUtils.isBlank(log)) {
-    Log.e("cgeoBase.postLogTrackable: No log text given");
+    Log.e("GCParser.postLogTrackable: No log text given");
     return StatusCode.NO_LOG_TEXT;
   }
   Log.i("Trying to post log for trackable #" + trackingCode + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log);
@@ -22,7 +22,7 @@
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
   final String page=Login.postRequestLogged(uri,params);
   if (!Login.getLoginStatus(page)) {
-    Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+    Log.e("GCParser.postLogTrackable: Can not log in geocaching");
     return StatusCode.NOT_LOGGED_IN;
   }
   try {
@@ -33,8 +33,8 @@
     }
   }
  catch (  Exception e) {
-    Log.e("cgeoBase.postLogTrackable.check: " + e.toString());
+    Log.e("GCParser.postLogTrackable.check: " + e.toString());
   }
-  Log.e("cgeoBase.postLogTrackable: Failed to post log because of unknown error");
+  Log.e("GCParser.postLogTrackable: Failed to post log because of unknown error");
   return StatusCode.LOG_POST_ERROR;
 }
