@@ -1,10 +1,8 @@
 {
-  if (waypoint != null) {
-    String geocode=waypoint.getGeocode();
-    int id=waypoint.getId();
-    if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode,null)) {
-      return StaticMapsProvider.doesExistStaticMapForWaypoint(geocode,id);
-    }
+  String geocode=waypoint.getGeocode();
+  int id=waypoint.getId();
+  if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode,null)) {
+    return StaticMapsProvider.doesExistStaticMapForWaypoint(geocode,id);
   }
   return false;
 }

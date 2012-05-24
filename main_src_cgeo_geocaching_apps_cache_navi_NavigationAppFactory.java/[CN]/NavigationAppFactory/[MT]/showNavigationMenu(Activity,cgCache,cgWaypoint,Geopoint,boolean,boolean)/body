@@ -6,7 +6,17 @@
   final int defaultNavigationTool=Settings.getDefaultNavigationTool();
   for (  NavigationAppsEnum navApp : getInstalledNavigationApps()) {
     if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-      if (navApp.app.isEnabled(cache) || navApp.app.isEnabled(waypoint) || navApp.app.isEnabled(destination)) {
+      boolean add=false;
+      if (cache != null && navApp.app instanceof CacheNavigationApp && ((CacheNavigationApp)navApp.app).isEnabled(cache)) {
+        add=true;
+      }
+      if (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp)navApp.app).isEnabled(waypoint)) {
+        add=true;
+      }
+      if (destination != null && navApp.app instanceof GeopointNavigationApp) {
+        add=true;
+      }
+      if (add) {
         items.add(navApp);
       }
     }
@@ -15,7 +25,18 @@
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int item){
       NavigationAppsEnum selectedItem=adapter.getItem(item);
-      selectedItem.app.invoke(activity,cache,waypoint,destination);
+      if (cache != null) {
+        CacheNavigationApp cacheApp=(CacheNavigationApp)selectedItem.app;
+        cacheApp.navigate(activity,cache);
+      }
+ else       if (waypoint != null) {
+        WaypointNavigationApp waypointApp=(WaypointNavigationApp)selectedItem.app;
+        waypointApp.navigate(activity,waypoint);
+      }
+ else {
+        GeopointNavigationApp geopointApp=(GeopointNavigationApp)selectedItem.app;
+        geopointApp.navigate(activity,destination);
+      }
     }
   }
 );

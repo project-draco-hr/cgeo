@@ -1,9 +1,7 @@
 {
-  if (cache != null) {
-    String geocode=cache.getGeocode();
-    if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode,null)) {
-      return StaticMapsProvider.doesExistStaticMapForCache(geocode);
-    }
+  String geocode=cache.getGeocode();
+  if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode,null)) {
+    return StaticMapsProvider.doesExistStaticMapForCache(geocode);
   }
   return false;
 }
