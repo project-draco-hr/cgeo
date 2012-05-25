@@ -29,6 +29,7 @@
     Log.e("GCParser.searchByNextPage: No cache parsed");
     return search;
   }
+  GCVote.loadRatings(new ArrayList<cgCache>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
   search.setError(searchResult.getError());
   search.setViewstates(searchResult.viewstates);
   for (  String geocode : searchResult.getGeocodes()) {
