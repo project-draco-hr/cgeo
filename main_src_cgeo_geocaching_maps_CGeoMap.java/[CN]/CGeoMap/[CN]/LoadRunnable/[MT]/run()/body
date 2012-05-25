@@ -1,19 +1,20 @@
 {
+  final boolean isLiveMapOrCoords=searchIntent == null && geocodeIntent == null;
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     loadThreadRun=System.currentTimeMillis();
-    if (searchIntent != null || geocodeIntent != null) {
-      search=new SearchResult(searchIntent);
-      if (geocodeIntent != null) {
-        search.addGeocode(geocodeIntent);
-      }
-    }
- else {
+    if (isLiveMapOrCoords) {
       if (!live || !Settings.isLiveMap()) {
         search=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
       }
  else {
         search=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
+      }
+    }
+ else {
+      search=new SearchResult(searchIntent);
+      if (geocodeIntent != null) {
+        search.addGeocode(geocodeIntent);
       }
     }
     if (search != null) {
@@ -34,7 +35,7 @@
     countVisibleCaches();
     if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
       waypoints.clear();
-      if (searchIntent == null && geocodeIntent == null) {
+      if (isLiveMapOrCoords) {
         waypoints.addAll(app.getWaypointsInViewport(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches()));
       }
  else {
