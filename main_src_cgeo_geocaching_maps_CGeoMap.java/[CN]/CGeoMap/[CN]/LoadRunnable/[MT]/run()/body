@@ -32,7 +32,7 @@
       }
     }
     countVisibleCaches();
-    if (cachesCnt < Settings.getWayPointsThreshold()) {
+    if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
       waypoints.clear();
       if (searchIntent == null && geocodeIntent == null) {
         waypoints.addAll(app.getWaypointsInViewport(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches()));
