@@ -1,6 +1,7 @@
 {
   final Intent mapIntent=newIntent(fromActivity);
   mapIntent.putExtra(EXTRAS_SEARCH,search);
+  mapIntent.putExtra(EXTRAS_MAP_MODE,MapMode.LIST);
   if (StringUtils.isNotBlank(title)) {
     mapIntent.putExtra(CGeoMap.EXTRAS_MAP_TITLE,title);
   }

@@ -9,12 +9,16 @@
   mapItemFactory=mapProvider.getMapItemFactory();
   final Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {
+    mapMode=(MapMode)extras.get(EXTRAS_MAP_MODE);
     searchIntent=(SearchResult)extras.getParcelable(EXTRAS_SEARCH);
     geocodeIntent=extras.getString(EXTRAS_GEOCODE);
     coordsIntent=(Geopoint)extras.getParcelable(EXTRAS_COORDS);
     waypointTypeIntent=WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
     mapStateIntent=extras.getIntArray(EXTRAS_MAPSTATE);
     mapTitle=extras.getString(EXTRAS_MAP_TITLE);
+  }
+ else {
+    mapMode=Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
   }
   if (StringUtils.isBlank(mapTitle)) {
     mapTitle=res.getString(R.string.map_map);
@@ -55,9 +59,8 @@
   }
   mapView.repaintRequired(null);
   mapView.getMapController().setZoom(Settings.getMapZoom());
-  live=(searchIntent == null && geocodeIntent == null && coordsIntent == null);
   if (null == mapStateIntent) {
-    followMyLocation=live;
+    followMyLocation=mapMode == MapMode.LIVE_OFFLINE || mapMode == MapMode.LIVE_ONLINE;
   }
  else {
     followMyLocation=1 == mapStateIntent[3];

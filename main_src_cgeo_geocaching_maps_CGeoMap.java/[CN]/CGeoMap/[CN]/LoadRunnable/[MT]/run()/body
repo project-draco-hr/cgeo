@@ -1,15 +1,12 @@
 {
-  final boolean isLiveMapOrCoords=searchIntent == null && geocodeIntent == null;
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     loadThreadRun=System.currentTimeMillis();
-    if (isLiveMapOrCoords) {
-      if (!live || !Settings.isLiveMap()) {
-        search=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
-      }
- else {
-        search=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
-      }
+    if (mapMode == MapMode.LIVE_ONLINE) {
+      search=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
+    }
+ else     if (mapMode == MapMode.LIVE_OFFLINE) {
+      search=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
     }
  else {
       search=new SearchResult(searchIntent);
@@ -22,7 +19,7 @@
       Set<cgCache> cachesFromSearchResult=search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
       caches.addAll(cachesFromSearchResult);
     }
-    if (live) {
+    if (isLiveMode()) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
       final List<cgCache> tempList=caches.getAsList();
@@ -35,7 +32,7 @@
     countVisibleCaches();
     if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
       waypoints.clear();
-      if (isLiveMapOrCoords) {
+      if (isLiveMode() || mapMode == MapMode.COORDS) {
         waypoints.addAll(app.getWaypointsInViewport(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches()));
       }
  else {
@@ -45,7 +42,7 @@
       }
     }
     displayExecutor.execute(new DisplayRunnable(viewport));
-    if (live && Settings.isLiveMap()) {
+    if (mapMode == MapMode.LIVE_ONLINE) {
       downloadExecutor.execute(new DownloadRunnable(viewport));
     }
   }
