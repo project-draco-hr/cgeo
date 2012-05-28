@@ -7,13 +7,14 @@ case MENU_TRAIL_MODE:
 return true;
 case MENU_MAP_LIVE:
 Settings.setLiveMap(!Settings.isLiveMap());
+mapMode=Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
 liveChanged=true;
 search=null;
 searchIntent=null;
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case MENU_STORE_CACHES:
-if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
+if (isLiveMode() && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
 final List<String> geocodes=new ArrayList<String>();
 final List<cgCache> cachesProtected=caches.getAsList();
 try {

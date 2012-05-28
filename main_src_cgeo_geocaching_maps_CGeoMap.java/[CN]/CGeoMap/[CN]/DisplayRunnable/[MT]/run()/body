@@ -8,7 +8,7 @@
     final List<cgWaypoint> waypointsToDisplay=new ArrayList<cgWaypoint>(waypoints);
     final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<CachesOverlayItemImpl>();
     if (!cachesToDisplay.isEmpty()) {
-      if (cachesToDisplay.size() == 1 || (cachesCnt < Settings.getWayPointsThreshold())) {
+      if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
         for (        cgWaypoint waypoint : waypointsToDisplay) {
           if (waypoint.getCoords() == null) {
             continue;

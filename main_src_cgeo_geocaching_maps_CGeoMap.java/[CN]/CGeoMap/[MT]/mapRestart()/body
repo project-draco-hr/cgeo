@@ -8,6 +8,7 @@
   }
   mapIntent.putExtra(EXTRAS_WPTTYPE,waypointTypeIntent != null ? waypointTypeIntent.id : null);
   mapIntent.putExtra(EXTRAS_MAP_TITLE,mapTitle);
+  mapIntent.putExtra(EXTRAS_MAP_MODE,mapMode);
   final int[] mapState=currentMapState();
   if (mapState != null) {
     mapIntent.putExtra(EXTRAS_MAPSTATE,mapState);

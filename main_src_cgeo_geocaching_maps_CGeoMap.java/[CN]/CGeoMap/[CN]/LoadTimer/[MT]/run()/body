@@ -9,7 +9,7 @@
         if (liveChanged) {
           moved=true;
         }
- else         if (live && Settings.isLiveMap() && !downloaded) {
+ else         if (mapMode == MapMode.LIVE_ONLINE && !downloaded) {
           moved=true;
         }
  else         if (viewport == null) {
