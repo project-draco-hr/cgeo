@@ -1,0 +1,12 @@
+{
+switch (Version.getVersionKind()) {
+case RELEASE_CANDIDATE:
+    return new Status(null,"status_default_rc",null,null);
+case NIGHTLY_BUILD:
+  return new Status(null,"status_default_nightly",null,null);
+case DEVELOPER_BUILD:
+return new Status(null,"status_default_developer_build",null,null);
+default :
+return null;
+}
+}
