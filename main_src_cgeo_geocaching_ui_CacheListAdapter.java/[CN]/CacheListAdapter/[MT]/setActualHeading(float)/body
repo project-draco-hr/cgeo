@@ -1,8 +1,9 @@
 {
-  if (directionNow == null) {
+  final float delta=(360 + azimuth - direction) % 360;
+  if (delta < 10 || delta > 350) {
     return;
   }
-  azimuth=directionNow;
+  azimuth=direction;
   for (  final CompassMiniView compass : compasses) {
     compass.updateAzimuth(azimuth);
   }

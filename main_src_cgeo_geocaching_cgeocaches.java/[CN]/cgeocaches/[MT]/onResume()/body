@@ -3,12 +3,7 @@
   startGeoAndDir();
   if (adapter != null) {
     adapter.setSelectMode(false);
-    final Geopoint coordsNow=app.currentGeo().getCoords();
-    if (coordsNow != null) {
-      adapter.setActualCoordinates(coordsNow);
-      adapter.setActualHeading(northHeading);
-      adapter.forceSort();
-    }
+    setAdapterCurrentCoordinates(true);
   }
   if (loadCachesHandler != null && search != null) {
     loadCachesHandler.sendEmptyMessage(0);

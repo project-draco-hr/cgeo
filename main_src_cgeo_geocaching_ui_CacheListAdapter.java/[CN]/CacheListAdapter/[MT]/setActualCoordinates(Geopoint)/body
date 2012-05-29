@@ -1,13 +1,10 @@
 {
-  if (coordsIn == null) {
-    return;
-  }
-  coords=coordsIn;
+  this.coords=coords;
   updateSortByDistance();
   for (  final DistanceView distance : distances) {
-    distance.update(coordsIn);
+    distance.update(coords);
   }
   for (  final CompassMiniView compass : compasses) {
-    compass.updateCurrentCoords(coordsIn);
+    compass.updateCurrentCoords(coords);
   }
 }
