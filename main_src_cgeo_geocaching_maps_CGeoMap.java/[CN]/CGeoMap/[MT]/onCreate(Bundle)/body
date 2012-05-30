@@ -64,6 +64,9 @@
   }
  else {
     followMyLocation=1 == mapStateIntent[3];
+    if ((overlayCaches.getCircles() ? 1 : 0) != mapStateIntent[4]) {
+      overlayCaches.switchCircles();
+    }
   }
   if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
     centerMap(geocodeIntent,searchIntent,coordsIntent,mapStateIntent);
