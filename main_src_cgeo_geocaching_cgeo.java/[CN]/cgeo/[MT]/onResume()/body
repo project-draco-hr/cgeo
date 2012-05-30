@@ -1,5 +1,6 @@
 {
   super.onResume();
+  app.getStatusUpdater().addObserver(statusHandler);
   locationUpdater.startGeo();
   satellitesHandler.startGeo();
   updateUserInfoHandler.sendEmptyMessage(-1);

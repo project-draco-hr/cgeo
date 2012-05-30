@@ -2,7 +2,7 @@
   init();
   final Set<String> geocodes=new HashSet<String>();
   if (!stored) {
-    geocodes.addAll(CacheCache.getInstance().getInViewport(viewport,cacheType));
+    geocodes.addAll(cacheCache.getInViewport(viewport,cacheType));
   }
   final StringBuilder where=new StringBuilder(buildCoordinateWhere(dbTableCaches,viewport));
   if (cacheType != CacheType.ALL) {
