@@ -1,12 +1,2 @@
 {
-  final Context app=cgeoapplication.getInstance();
-  packageName=app.getPackageName();
-  try {
-    final PackageInfo packageInfo=app.getPackageManager().getPackageInfo(packageName,0);
-    versionName=packageInfo.versionName;
-    versionCode=packageInfo.versionCode;
-  }
- catch (  final NameNotFoundException e) {
-    Log.e("Version: unable to get package information",e);
-  }
 }
