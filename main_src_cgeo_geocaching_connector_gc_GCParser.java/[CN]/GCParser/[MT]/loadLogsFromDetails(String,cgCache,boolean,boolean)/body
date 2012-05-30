@@ -46,7 +46,8 @@
  catch (      ParseException e) {
         Log.e("GCParser.loadLogsFromDetails: failed to parse log date.");
       }
-      final LogEntry logDone=new LogEntry(entry.getString("UserName"),date,LogType.getByIconName(logIconName),entry.getString("LogText"));
+      final String latLon=entry.getString("LatLonString");
+      final LogEntry logDone=new LogEntry(entry.getString("UserName"),date,LogType.getByIconName(logIconName),(StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + entry.getString("LogText"));
       logDone.found=entry.getInt("GeocacheFindCount");
       logDone.friend=friends;
       final JSONArray images=entry.getJSONArray("Images");
