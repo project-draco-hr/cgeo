@@ -1,10 +1,12 @@
 {
-  String type=cache.getType().id;
+  StringBuilder url=new StringBuilder(MARKERS_URL);
+  url.append("marker_cache_").append(cache.getType().id);
   if (cache.isFound()) {
-    type+="_found";
+    url.append("_found");
   }
  else   if (cache.isDisabled()) {
-    type+="_disabled";
+    url.append("_disabled");
   }
-  return MARKERS_URL + "marker_cache_" + type+ ".png";
+  url.append(".png");
+  return url.toString();
 }
