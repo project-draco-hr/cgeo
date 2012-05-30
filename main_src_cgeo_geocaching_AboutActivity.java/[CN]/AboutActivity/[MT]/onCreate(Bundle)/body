@@ -3,5 +3,7 @@
   setTheme();
   setContentView(R.layout.about);
   setTitle(res.getString(R.string.about));
-  init();
+  ((TextView)findViewById(R.id.about_version_string)).setText(Version.getVersionName());
+  ((TextView)findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
+  ((TextView)findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
 }

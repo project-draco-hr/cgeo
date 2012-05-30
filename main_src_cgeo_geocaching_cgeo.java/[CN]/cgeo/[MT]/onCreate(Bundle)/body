@@ -3,14 +3,8 @@
   app.setAction(null);
   setContentView(R.layout.main);
   setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
-  try {
-    final PackageInfo info=getPackageManager().getPackageInfo(this.getPackageName(),0);
-    version=info.versionCode;
-    Log.i("Starting " + info.packageName + " "+ info.versionCode+ " a.k.a "+ info.versionName+ "???");
-  }
- catch (  final NameNotFoundException e) {
-    Log.i("No info.");
-  }
+  version=Version.getVersionCode();
+  Log.i("Starting " + Version.getPackageName() + ' '+ version+ " a.k.a "+ Version.getVersionName()+ " ("+ Version.getVersionKind()+ ')');
   try {
     if (!Settings.isHelpShown()) {
       final RelativeLayout helper=(RelativeLayout)findViewById(R.id.helper);

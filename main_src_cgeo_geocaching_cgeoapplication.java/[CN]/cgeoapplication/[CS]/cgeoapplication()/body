@@ -1,4 +1,6 @@
 {
   instance=this;
   storage=new cgData(this);
+  statusUpdater=new StatusUpdater();
+  new Thread(statusUpdater).start();
 }

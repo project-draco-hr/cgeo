@@ -1,5 +1,6 @@
 {
   initialized=false;
+  app.getStatusUpdater().deleteObserver(statusHandler);
   locationUpdater.stopGeo();
   satellitesHandler.stopGeo();
   super.onPause();
