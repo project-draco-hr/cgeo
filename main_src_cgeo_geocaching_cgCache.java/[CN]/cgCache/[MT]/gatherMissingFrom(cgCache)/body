@@ -3,10 +3,12 @@
     return false;
   }
   updated=System.currentTimeMillis();
-  if (!detailed && other.detailed) {
-    detailed=true;
+  if (!detailed && (other.detailed || zoomlevel < other.zoomlevel)) {
+    detailed=other.detailed;
     detailedUpdate=other.detailedUpdate;
     coords=other.coords;
+    cacheType=other.cacheType;
+    zoomlevel=other.zoomlevel;
     premiumMembersOnly=other.premiumMembersOnly;
     reliableLatLon=other.reliableLatLon;
     archived=other.archived;
@@ -76,10 +78,6 @@
     location=other.location;
   }
   if (coords == null) {
-    coords=other.coords;
-  }
-  if (zoomlevel < other.zoomlevel) {
-    zoomlevel=other.zoomlevel;
     coords=other.coords;
   }
   if (elevation == null) {
