@@ -1,6 +1,5 @@
 {
-  final float delta=(360 + azimuth - direction) % 360;
-  if (delta < 10 || delta > 350) {
+  if (Math.abs(AngleUtils.difference(azimuth,direction)) < 10) {
     return;
   }
   azimuth=direction;

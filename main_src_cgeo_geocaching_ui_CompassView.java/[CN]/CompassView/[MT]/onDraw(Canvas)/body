@@ -1,12 +1,12 @@
 {
-  double azimuthDrawn;
-  double headingDrawn;
+  float azimuthDrawn;
+  float headingDrawn;
 synchronized (this) {
     azimuthDrawn=azimuthShown;
     headingDrawn=cacheHeadingShown;
   }
-  double azimuthTemp=azimuthDrawn;
-  final double azimuthRelative=(azimuthTemp - headingDrawn + 360) % 360;
+  float azimuthTemp=azimuthDrawn;
+  final float azimuthRelative=AngleUtils.normalize(azimuthTemp - headingDrawn);
   int canvasCenterX=(compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
   int canvasCenterY=(compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
   int marginLeftTemp;
