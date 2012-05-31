@@ -1,3 +1,7 @@
 {
-  notifyObservers(event.values[0]);
+  final float direction=event.values[0];
+  if (direction != previous) {
+    notifyObservers(direction);
+    previous=direction;
+  }
 }
