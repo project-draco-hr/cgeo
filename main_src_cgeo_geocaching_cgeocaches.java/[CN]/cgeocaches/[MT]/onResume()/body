@@ -9,7 +9,7 @@
     loadCachesHandler.sendEmptyMessage(0);
   }
   if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-    SearchResult newSearch=cgeoapplication.getInstance().getBatchOfStoredCaches(true,coords,cacheType,listId);
+    SearchResult newSearch=cgeoapplication.getInstance().getBatchOfStoredCaches(true,coords,Settings.getCacheType(),listId);
     if (newSearch != null && newSearch.getTotal() != search.getTotal()) {
       refreshCurrentList();
     }
