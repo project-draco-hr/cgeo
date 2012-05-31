@@ -40,52 +40,10 @@ adapter.invertSelection();
 }
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_SORT_DISTANCE:
-setComparator(item,null);
-return false;
-case MENU_SORT_DIFFICULTY:
-setComparator(item,new DifficultyComparator());
-return false;
-case MENU_SORT_TERRAIN:
-setComparator(item,new TerrainComparator());
-return false;
-case MENU_SORT_SIZE:
-setComparator(item,new SizeComparator());
-return false;
-case MENU_SORT_FAVORITES:
-setComparator(item,new PopularityComparator());
-return false;
-case MENU_SORT_NAME:
-setComparator(item,new NameComparator());
-return false;
-case MENU_SORT_GEOCODE:
-setComparator(item,new GeocodeComparator());
-return false;
-case MENU_SORT_STORAGE:
-setComparator(item,new StorageTimeComparator());
-return false;
 case MENU_SWITCH_LIST:
 selectList(null);
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_SORT_RATING:
-setComparator(item,new RatingComparator());
-return false;
-case MENU_SORT_VOTE:
-setComparator(item,new VoteComparator());
-return false;
-case MENU_SORT_INVENTORY:
-setComparator(item,new InventoryComparator());
-return false;
-case MENU_SORT_DATE:
-setComparator(item,new DateComparator());
-return true;
-case MENU_SORT_FINDS:
-setComparator(item,new FindsComparator(app));
-return true;
-case MENU_SORT_STATE:
-setComparator(item,new StateComparator());
-return true;
 case MENU_FILTER:
 new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>(){
 @Override public void run(IFilter selectedFilter){
@@ -97,6 +55,14 @@ if (adapter != null) {
 setFilter(null);
 }
 }
+}
+}
+);
+return true;
+case MENU_SORT:
+new ComparatorUserInterface(this).selectComparator(adapter.getCacheComparator(),new RunnableWithArgument<CacheComparator>(){
+@Override public void run(CacheComparator selectedComparator){
+setComparator(selectedComparator);
 }
 }
 );

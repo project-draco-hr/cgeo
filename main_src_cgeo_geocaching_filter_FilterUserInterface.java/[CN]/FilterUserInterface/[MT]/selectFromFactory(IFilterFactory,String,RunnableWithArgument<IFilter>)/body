@@ -4,9 +4,9 @@
     runAfterwards.run(filters[0]);
     return;
   }
-  final AlertDialog.Builder builder=new AlertDialog.Builder((Activity)activity);
+  final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
   builder.setTitle(menuTitle);
-  final ArrayAdapter<IFilter> adapter=new ArrayAdapter<IFilter>((Activity)activity,android.R.layout.select_dialog_item,filters);
+  final ArrayAdapter<IFilter> adapter=new ArrayAdapter<IFilter>(activity,android.R.layout.select_dialog_item,filters);
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int item){
       runAfterwards.run(filters[item]);

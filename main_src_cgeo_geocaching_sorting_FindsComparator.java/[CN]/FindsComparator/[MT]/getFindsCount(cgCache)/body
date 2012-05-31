@@ -1,11 +1,10 @@
 {
-  int finds=0;
   if (cache.getLogCounts().isEmpty()) {
     cache.setLogCounts(app.loadLogCounts(cache.getGeocode()));
   }
   Integer logged=cache.getLogCounts().get(LogType.FOUND_IT);
   if (logged != null) {
-    finds=logged;
+    return logged;
   }
-  return finds;
+  return 0;
 }

@@ -9,7 +9,7 @@
       menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode)).setIcon(R.drawable.ic_menu_agenda);
       menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
     }
-    int[] hideIfEmptyList=new int[]{MENU_SWITCH_SELECT_MODE,SUBMENU_MANAGE_HISTORY,SUBMENU_SHOW_MAP,SUBMENU_SORT,MENU_REFRESH_STORED,MENU_DROP_CACHES,MENU_DROP_CACHES_AND_LIST,MENU_MOVE_TO_LIST,MENU_EXPORT,MENU_REMOVE_FROM_HISTORY};
+    int[] hideIfEmptyList=new int[]{MENU_SWITCH_SELECT_MODE,SUBMENU_MANAGE_HISTORY,SUBMENU_SHOW_MAP,MENU_SORT,MENU_REFRESH_STORED,MENU_DROP_CACHES,MENU_DROP_CACHES_AND_LIST,MENU_MOVE_TO_LIST,MENU_EXPORT,MENU_REMOVE_FROM_HISTORY};
     final boolean listNotEmpty=cacheList.size() > 0;
     for (    int itemId : hideIfEmptyList) {
       MenuItem item=menu.findItem(itemId);
