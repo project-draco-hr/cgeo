@@ -1,15 +1,16 @@
 {
+  float offset=0;
   if (isLevel8) {
     try {
       final int rotation=level8.getRotation(activity);
       if (rotation == Surface.ROTATION_90) {
-        return directionNowPre + 90;
+        offset=90;
       }
  else       if (rotation == Surface.ROTATION_180) {
-        return directionNowPre + 180;
+        offset=180;
       }
  else       if (rotation == Surface.ROTATION_270) {
-        return directionNowPre + 270;
+        offset=270;
       }
     }
  catch (    final Exception e) {
@@ -20,8 +21,8 @@
     final Display display=activity.getWindowManager().getDefaultDisplay();
     final int rotation=display.getOrientation();
     if (rotation == Configuration.ORIENTATION_LANDSCAPE) {
-      return directionNowPre + 90;
+      offset=90;
     }
   }
-  return directionNowPre;
+  return AngleUtils.normalize(directionNowPre + offset);
 }
