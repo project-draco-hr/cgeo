@@ -1,4 +1,11 @@
 {
+  if (!MapProviderFactory.isValidSourceId(mapSource)) {
+    Log.e("CGeoMap.onCreate: invalid map source requested: " + mapSource);
+    currentSourceId=MapProviderFactory.getSourceIdFromOrdinal(0);
+    Settings.setMapSource(currentSourceId);
+    mapRestart();
+    return true;
+  }
   final boolean restartRequired=!MapProviderFactory.isSameActivity(currentSourceId,mapSource);
   Settings.setMapSource(mapSource);
   currentSourceId=mapSource;
