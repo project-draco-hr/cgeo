@@ -2,6 +2,7 @@
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     int count=0;
+    SearchResult searchResult=null;
     do {
       if (tokens == null) {
         tokens=Login.getMapTokens();
@@ -9,10 +10,10 @@
           noMapTokenHandler.sendEmptyMessage(0);
         }
       }
-      search=ConnectorFactory.searchByViewport(viewport.resize(0.8),tokens);
-      if (search != null) {
+      searchResult=ConnectorFactory.searchByViewport(viewport.resize(0.8),tokens);
+      if (searchResult != null) {
         downloaded=true;
-        if (search.getError() == StatusCode.NOT_LOGGED_IN) {
+        if (searchResult.getError() == StatusCode.NOT_LOGGED_IN) {
           Login.login();
           tokens=null;
         }
@@ -23,10 +24,11 @@
       count++;
     }
  while (count < 2);
-    if (search != null) {
-      Set<cgCache> result=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    if (searchResult != null) {
+      Set<cgCache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
       caches.removeAll(result);
       caches.addAll(result);
+      lastSearchResult=searchResult;
     }
     displayExecutor.execute(new DisplayRunnable(viewport));
   }

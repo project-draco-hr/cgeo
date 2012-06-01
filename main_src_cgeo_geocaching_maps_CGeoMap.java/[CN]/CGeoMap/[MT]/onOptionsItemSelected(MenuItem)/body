@@ -9,7 +9,7 @@ case MENU_MAP_LIVE:
 Settings.setLiveMap(!Settings.isLiveMap());
 mapMode=Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
 liveChanged=true;
-search=null;
+lastSearchResult=null;
 searchIntent=null;
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
@@ -84,7 +84,7 @@ ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case MENU_AS_LIST:
 {
-cgeocaches.startActivityMap(activity,search);
+cgeocaches.startActivityMap(activity,lastSearchResult);
 return true;
 }
 case MENU_STRATEGY_FASTEST:
