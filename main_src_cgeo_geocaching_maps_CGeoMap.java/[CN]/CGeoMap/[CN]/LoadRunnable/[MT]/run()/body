@@ -4,10 +4,10 @@
     loadThreadRun=System.currentTimeMillis();
     SearchResult searchResult=null;
     if (mapMode == MapMode.LIVE_ONLINE) {
-      searchResult=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
+      searchResult=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
     }
  else     if (mapMode == MapMode.LIVE_OFFLINE) {
-      searchResult=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
+      searchResult=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
     }
  else {
       searchResult=new SearchResult(searchIntent);
@@ -15,11 +15,9 @@
         searchResult.addGeocode(geocodeIntent);
       }
     }
-    if (searchResult != null) {
-      downloaded=true;
-      Set<cgCache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
-      caches.addAll(cachesFromSearchResult);
-    }
+    downloaded=true;
+    Set<cgCache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+    caches.addAll(cachesFromSearchResult);
     if (isLiveMode()) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
