@@ -17,6 +17,7 @@
     if (search != null) {
       downloaded=true;
       Set<cgCache> cachesFromSearchResult=search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+      caches.removeAll(cachesFromSearchResult);
       caches.addAll(cachesFromSearchResult);
     }
     if (isLiveMode()) {
