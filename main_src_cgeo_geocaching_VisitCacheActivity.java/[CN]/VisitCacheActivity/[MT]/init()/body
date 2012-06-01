@@ -37,7 +37,7 @@
   }
 );
   final Button dateButton=(Button)findViewById(R.id.date);
-  dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
+  setDate(date);
   dateButton.setOnClickListener(new DateListener());
   final EditText logView=(EditText)findViewById(R.id.log);
   if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text)) {

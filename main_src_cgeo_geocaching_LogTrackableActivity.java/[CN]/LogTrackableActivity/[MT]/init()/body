@@ -12,8 +12,8 @@
   }
 );
   final Button dateButton=(Button)findViewById(R.id.date);
-  dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
   dateButton.setOnClickListener(new DateListener());
+  setDate(date);
   if (tweetBox == null) {
     tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   }

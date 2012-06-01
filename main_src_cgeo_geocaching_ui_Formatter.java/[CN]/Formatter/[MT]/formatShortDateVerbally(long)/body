@@ -1,0 +1,11 @@
+{
+  int diff=cgeo.geocaching.utils.DateUtils.daysSince(date);
+switch (diff) {
+case 0:
+    return cgeoapplication.getInstance().getString(R.string.log_today);
+case 1:
+  return cgeoapplication.getInstance().getString(R.string.log_yesterday);
+default :
+return formatShortDate(date);
+}
+}
