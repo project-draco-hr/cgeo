@@ -1,7 +1,12 @@
 {
-  if (cache == null || CollectionUtils.isEmpty(cache.getSpoilers())) {
-    showToast(res.getString(R.string.err_detail_no_spoiler));
-    return;
+  EditorDialog editor=new EditorDialog(CacheDetailActivity.this,personalNoteText.getText());
+  editor.setOnEditorUpdate(new EditorDialog.EditorUpdate(){
+    @Override public void update(    CharSequence editorText){
+      personalNoteText.setText(editorText);
+      cache.setPersonalNote(editorText.toString());
+      app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    }
   }
-  cgeoimages.startActivitySpoilerImages(CacheDetailActivity.this,cache.getGeocode(),cache.getSpoilers());
+);
+  editor.show();
 }
