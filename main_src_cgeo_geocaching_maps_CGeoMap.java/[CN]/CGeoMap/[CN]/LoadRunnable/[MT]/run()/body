@@ -2,24 +2,23 @@
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     loadThreadRun=System.currentTimeMillis();
+    SearchResult searchResult=null;
     if (mapMode == MapMode.LIVE_ONLINE) {
-      search=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
+      searchResult=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
     }
  else     if (mapMode == MapMode.LIVE_OFFLINE) {
-      search=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
+      searchResult=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
     }
  else {
-      search=new SearchResult(searchIntent);
+      searchResult=new SearchResult(searchIntent);
       if (geocodeIntent != null) {
-        search.addGeocode(geocodeIntent);
+        searchResult.addGeocode(geocodeIntent);
       }
     }
-    if (search != null) {
-      downloaded=true;
-      Set<cgCache> cachesFromSearchResult=search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
-      caches.removeAll(cachesFromSearchResult);
-      caches.addAll(cachesFromSearchResult);
-    }
+    downloaded=true;
+    Set<cgCache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+    caches.removeAll(cachesFromSearchResult);
+    caches.addAll(cachesFromSearchResult);
     if (isLiveMode()) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
@@ -46,6 +45,7 @@
     if (mapMode == MapMode.LIVE_ONLINE) {
       downloadExecutor.execute(new DownloadRunnable(viewport));
     }
+    lastSearchResult=searchResult;
   }
   finally {
     showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
