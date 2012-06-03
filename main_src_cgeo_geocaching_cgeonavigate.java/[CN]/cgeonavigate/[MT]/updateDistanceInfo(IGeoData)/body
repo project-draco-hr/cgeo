@@ -9,6 +9,6 @@
     headingView=(TextView)findViewById(R.id.heading);
   }
   cacheHeading=geo.getCoords().bearingTo(dstCoords);
-  distanceView.setText(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(dstCoords)));
+  distanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(dstCoords)));
   headingView.setText(Math.round(cacheHeading) + "??");
 }

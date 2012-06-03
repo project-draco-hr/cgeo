@@ -13,7 +13,7 @@
   }
   String text="--";
   if (distance != null) {
-    text=HumanDistance.getHumanDistance(distance);
+    text=Units.getDistanceFromKilometers(distance);
   }
  else   if (cacheDistanceView != null) {
     text=cacheDistanceView.getText().toString();

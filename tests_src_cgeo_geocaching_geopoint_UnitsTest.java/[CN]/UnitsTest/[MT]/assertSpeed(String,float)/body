@@ -1,0 +1,6 @@
+{
+  final String actual=Units.getSpeed(kilometersPerHour);
+  if (!StringUtils.equals(expected,actual.replace(',','.'))) {
+    fail("speed " + actual + " does not match expected "+ expected);
+  }
+}

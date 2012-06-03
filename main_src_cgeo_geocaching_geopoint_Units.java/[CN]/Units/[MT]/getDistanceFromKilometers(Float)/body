@@ -2,7 +2,7 @@
   if (distanceKilometers == null) {
     return "?";
   }
-  final ImmutablePair<Double,String> scaled=scaleUnit(distanceKilometers);
+  final ImmutablePair<Double,String> scaled=scaleDistance(distanceKilometers);
   String formatString;
   if (scaled.left >= 100) {
     formatString="%.0f";

@@ -1,0 +1,7 @@
+{
+  final String speed=getDistanceFromKilometers(kilometersPerHour);
+  if (speed.endsWith("mi")) {
+    return speed.substring(0,speed.length() - 2) + "mph";
+  }
+  return speed + (Settings.isUseMetricUnits() ? "/h" : "ph");
+}
