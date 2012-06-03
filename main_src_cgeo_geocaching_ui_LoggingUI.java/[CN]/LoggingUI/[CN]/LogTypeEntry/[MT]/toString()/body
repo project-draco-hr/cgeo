@@ -1,6 +1,10 @@
 {
   if (logType == null) {
-    return res.getString(R.string.cache_menu_visit);
+    return specialLogType.getL10n();
   }
-  return logType.getL10n();
+  String text=logType.getL10n();
+  if (isActive) {
+    text+=" ???";
+  }
+  return text;
 }

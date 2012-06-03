@@ -1,24 +1,35 @@
 {
+  final LogEntry currentLog=cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
+  final LogType currentLogType=currentLog == null ? null : currentLog.type;
   final List<LogType> logTypes=cache.getPossibleLogTypes();
   final ArrayList<LogTypeEntry> list=new ArrayList<LogTypeEntry>();
   for (  LogType logType : logTypes) {
-    list.add(new LogTypeEntry(logType));
+    list.add(new LogTypeEntry(logType,null,logType == currentLogType));
   }
-  list.add(new LogTypeEntry(null));
+  if (cache.isLogOffline()) {
+    list.add(new LogTypeEntry(null,SpecialLogType.CLEAR_LOG,false));
+  }
+  list.add(new LogTypeEntry(null,SpecialLogType.LOG_CACHE,false));
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
   builder.setTitle(R.string.cache_menu_visit_offline);
   final ArrayAdapter<LogTypeEntry> adapter=new ArrayAdapter<LogTypeEntry>(activity,android.R.layout.select_dialog_item,list);
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int item){
       final LogTypeEntry logTypeEntry=adapter.getItem(item);
-      if (logTypeEntry.logType != null) {
-        cache.logOffline(activity,logTypeEntry.logType);
-      }
- else {
-        cache.logVisit((IAbstractActivity)activity);
-      }
-    }
+      if (logTypeEntry.logType == null) {
+switch (logTypeEntry.specialLogType) {
+case LOG_CACHE:
+          cache.logVisit((IAbstractActivity)activity);
+        break;
+case CLEAR_LOG:
+      cgeoapplication.getInstance().clearLogOffline(cache.getGeocode());
   }
+}
+ else {
+  cache.logOffline(activity,logTypeEntry.logType);
+}
+}
+}
 );
-  builder.create().show();
+builder.create().show();
 }
