@@ -3,6 +3,5 @@
   if (cache == null) {
     return null;
   }
-  final SearchResult searchResult=new SearchResult(cache);
-  return searchResult.filterSearchResults(false,false,Settings.getCacheType());
+  return new SearchResult(cache);
 }

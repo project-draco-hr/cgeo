@@ -1,0 +1,5 @@
+{
+  final Intent searchIntent=new Intent(fromActivity,SearchActivity.class);
+  searchIntent.setAction(Intent.ACTION_SEARCH).putExtra(SearchManager.QUERY,scan).putExtra(SearchActivity.EXTRAS_KEYWORDSEARCH,false);
+  fromActivity.startActivityForResult(searchIntent,cgeo.SEARCH_REQUEST_CODE);
+}
