@@ -1,4 +1,5 @@
 {
-  navigateCache(activity,cache,getAppFromMenuItem(item));
-  return true;
+  final App menuItem=getAppFromMenuItem(item);
+  navigateCache(activity,cache,menuItem);
+  return menuItem != null;
 }

@@ -1,4 +1,5 @@
 {
-  navigateWaypoint(activity,waypoint,getAppFromMenuItem(item));
-  return true;
+  final App menuItem=getAppFromMenuItem(item);
+  navigateWaypoint(activity,waypoint,menuItem);
+  return menuItem != null;
 }
