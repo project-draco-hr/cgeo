@@ -14,7 +14,11 @@
   if (coords == null) {
     return;
   }
+  final ArrayList<cgCache> oldList=new ArrayList<cgCache>(list);
   Collections.sort(list,new DistanceComparator(coords,list));
+  if (list.equals(oldList)) {
+    return;
+  }
   notifyDataSetChanged();
   lastSort=System.currentTimeMillis();
 }
