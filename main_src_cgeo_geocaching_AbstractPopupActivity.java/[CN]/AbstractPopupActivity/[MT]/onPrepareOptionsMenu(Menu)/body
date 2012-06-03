@@ -5,7 +5,7 @@
     menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(visible);
     menu.findItem(MENU_NAVIGATION).setVisible(visible);
     menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
-    menu.findItem(MENU_LOG_VISIT).setEnabled(Settings.isLogin());
+    LoggingUI.onPrepareOptionsMenu(menu);
   }
  catch (  Exception e) {
   }

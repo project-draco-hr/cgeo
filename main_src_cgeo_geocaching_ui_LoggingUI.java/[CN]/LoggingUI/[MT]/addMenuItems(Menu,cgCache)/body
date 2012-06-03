@@ -1,0 +1,14 @@
+{
+  if (cache == null) {
+    return;
+  }
+  if (!cache.supportsLogging()) {
+    return;
+  }
+  if (Settings.getLogOffline()) {
+    menu.add(0,MENU_LOG_VISIT_OFFLINE,0,res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
+  }
+ else {
+    menu.add(0,MENU_LOG_VISIT,0,res.getString(R.string.cache_menu_visit)).setIcon(MENU_ICON_LOG_VISIT);
+  }
+}

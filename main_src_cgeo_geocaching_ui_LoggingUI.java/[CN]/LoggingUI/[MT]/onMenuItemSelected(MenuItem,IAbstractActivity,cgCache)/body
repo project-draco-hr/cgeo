@@ -1,0 +1,12 @@
+{
+switch (item.getItemId()) {
+case MENU_LOG_VISIT:
+    cache.logVisit(activity);
+  return true;
+case MENU_LOG_VISIT_OFFLINE:
+showOfflineMenu(cache,(Activity)activity);
+return true;
+default :
+return false;
+}
+}

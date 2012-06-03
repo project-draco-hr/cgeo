@@ -23,9 +23,6 @@ case MENU_DEFAULT_NAVIGATION:
 case MENU_NAVIGATION:
 NavigationAppFactory.showNavigationMenu(this,cache,null,null);
 break;
-case MENU_LOG_VISIT:
-cache.logVisit(this);
-break;
 case MENU_CACHE_DETAILS:
 final Intent cachesIntent=new Intent(this,CacheDetailActivity.class);
 cachesIntent.putExtra("geocode",cache.getGeocode().toUpperCase());
@@ -58,7 +55,7 @@ ExportFactory.showExportMenu(Collections.singletonList(cache),this);
 return false;
 default :
 lastMenuInfo=info;
-cache.logOffline(this,LogType.getById(id - MENU_LOG_VISIT_OFFLINE));
+LoggingUI.onMenuItemSelected(item,this,cache);
 }
 return true;
 }

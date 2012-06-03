@@ -3,21 +3,19 @@
 switch (menuItem) {
 case MENU_DEFAULT_NAVIGATION:
     navigateTo();
-  break;
+  return true;
 case MENU_NAVIGATION:
 showNavigationMenu();
-break;
+return true;
 case MENU_CACHES_AROUND:
 cachesAround();
-break;
-case MENU_LOG_VISIT:
-logVisit();
-break;
+return true;
 case MENU_SHOW_IN_BROWSER:
 showInBrowser();
-break;
-default :
-logOffline(menuItem);
+return true;
+}
+if (LoggingUI.onMenuItemSelected(item,this,cache)) {
+return true;
 }
 return true;
 }

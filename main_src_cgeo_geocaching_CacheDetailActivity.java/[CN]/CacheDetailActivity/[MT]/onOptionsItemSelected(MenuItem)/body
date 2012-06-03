@@ -6,10 +6,6 @@ case 0:
 case MENU_DEFAULT_NAVIGATION:
   startDefaultNavigation();
 return true;
-case MENU_LOG_VISIT:
-refreshOnResume=true;
-cache.logVisit(this);
-return true;
 case MENU_BROWSER:
 cache.openInBrowser(this);
 return true;
@@ -32,6 +28,9 @@ return true;
 if (GeneralAppsFactory.onMenuItemSelected(item,this,cache)) {
 return true;
 }
-cache.logOffline(this,LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
+if (LoggingUI.onMenuItemSelected(item,this,cache)) {
+refreshOnResume=true;
+return true;
+}
 return true;
 }
