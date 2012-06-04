@@ -1,3 +1,5 @@
 {
-  Tile.Cache.removeFromTileCache(removed);
+  if (removed.getCoords() != null) {
+    Tile.Cache.removeFromTileCache(removed);
+  }
 }

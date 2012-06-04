@@ -2,5 +2,7 @@
   if (StringUtils.isBlank(geocode)) {
     throw new IllegalArgumentException("geocode must not be empty");
   }
-  return cachesCache.get(geocode);
+synchronized (this) {
+    return cachesCache.get(geocode);
+  }
 }
