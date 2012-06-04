@@ -14,7 +14,7 @@
     description=Html.fromHtml(descriptionString,new HtmlImage(cache.getGeocode(),true,cache.getListId(),false),unknownTagsHandler);
     publishProgress();
   }
-  if (unknownTagsHandler.isTableDetected() && descriptionView == view.findViewById(R.id.longdesc)) {
+  if (unknownTagsHandler.isProblematicDetected() && descriptionView == view.findViewById(R.id.longdesc)) {
     final int startPos=description.length();
     ((Editable)description).append("\n\n").append(res.getString(R.string.cache_description_table_note));
     ((Editable)description).setSpan(new StyleSpan(Typeface.ITALIC),startPos,description.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
