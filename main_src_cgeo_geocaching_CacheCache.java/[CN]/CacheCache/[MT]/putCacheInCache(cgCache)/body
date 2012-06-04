@@ -5,6 +5,8 @@
   if (StringUtils.isBlank(cache.getGeocode())) {
     throw new IllegalArgumentException("geocode must not be empty");
   }
-  cache.addStorageLocation(StorageLocation.CACHE);
-  cachesCache.put(cache.getGeocode(),cache);
+synchronized (this) {
+    cache.addStorageLocation(StorageLocation.CACHE);
+    cachesCache.put(cache.getGeocode(),cache);
+  }
 }
