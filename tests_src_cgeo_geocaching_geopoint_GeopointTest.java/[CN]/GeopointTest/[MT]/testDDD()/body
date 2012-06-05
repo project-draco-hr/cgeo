@@ -1,22 +1,18 @@
 {
   final Geopoint gp1=new Geopoint(51.3d,13.8d);
-  DDD ddd1=gp1.asDDD();
-  checkDDD(ddd1,'N',51,30000,'E',13,80000);
-  Geopoint gp1a=DDD.createGeopoint(String.valueOf(ddd1.latDir),String.valueOf(ddd1.latDeg),String.valueOf(ddd1.latDegFrac),String.valueOf(ddd1.lonDir),String.valueOf(ddd1.lonDeg),String.valueOf(ddd1.lonDegFrac));
+  checkDDD(gp1,'N',51,30000,'E',13,80000);
+  Geopoint gp1a=new Geopoint(String.valueOf(gp1.getLatDir()),String.valueOf(gp1.getLatDeg()),String.valueOf(gp1.getLatDegFrac()),String.valueOf(gp1.getLonDir()),String.valueOf(gp1.getLonDeg()),String.valueOf(gp1.getLonDegFrac()));
   Assert.assertTrue(gp1a.equals(gp1));
   final Geopoint gp2=new Geopoint(51.34567d,13.87654d);
-  DDD ddd2=gp2.asDDD();
-  checkDDD(ddd2,'N',51,34567,'E',13,87654);
-  Geopoint gp2a=DDD.createGeopoint(String.valueOf(ddd2.latDir),String.valueOf(ddd2.latDeg),String.valueOf(ddd2.latDegFrac),String.valueOf(ddd2.lonDir),String.valueOf(ddd2.lonDeg),String.valueOf(ddd2.lonDegFrac));
+  checkDDD(gp2,'N',51,34567,'E',13,87654);
+  Geopoint gp2a=new Geopoint(String.valueOf(gp2.getLatDir()),String.valueOf(gp2.getLatDeg()),String.valueOf(gp2.getLatDegFrac()),String.valueOf(gp2.getLonDir()),String.valueOf(gp2.getLonDeg()),String.valueOf(gp2.getLonDegFrac()));
   Assert.assertTrue(gp2a.equals(gp2));
   final Geopoint gp3=new Geopoint(51.29999833333333d,13.8d);
-  DDD ddd3=gp3.asDDD();
-  checkDDD(ddd3,'N',51,30000,'E',13,80000);
-  Geopoint gp3a=DDD.createGeopoint(String.valueOf(ddd3.latDir),String.valueOf(ddd3.latDeg),String.valueOf(ddd3.latDegFrac),String.valueOf(ddd3.lonDir),String.valueOf(ddd3.lonDeg),String.valueOf(ddd3.lonDegFrac));
+  checkDDD(gp3,'N',51,30000,'E',13,80000);
+  Geopoint gp3a=new Geopoint(String.valueOf(gp3.getLatDir()),String.valueOf(gp3.getLatDeg()),String.valueOf(gp3.getLatDegFrac()),String.valueOf(gp3.getLonDir()),String.valueOf(gp3.getLonDeg()),String.valueOf(gp3.getLonDegFrac()));
   checkTolerance(gp3,gp3a,5e-5);
   final Geopoint gp4=new Geopoint(51.00012d,13.00089d);
-  DDD ddd4=gp4.asDDD();
-  checkDDD(ddd4,'N',51,12,'E',13,89);
-  Geopoint gp4a=DDD.createGeopoint(String.valueOf(ddd4.latDir),String.valueOf(ddd4.latDeg),String.valueOf(ddd4.latDegFrac),String.valueOf(ddd4.lonDir),String.valueOf(ddd4.lonDeg),String.valueOf(ddd4.lonDegFrac));
+  checkDDD(gp4,'N',51,12,'E',13,89);
+  Geopoint gp4a=new Geopoint(String.valueOf(gp4.getLatDir()),String.valueOf(gp4.getLatDeg()),String.valueOf(gp4.getLatDegFrac()),String.valueOf(gp4.getLonDir()),String.valueOf(gp4.getLonDeg()),String.valueOf(gp4.getLonDegFrac()));
   checkTolerance(gp4,gp4a,5e-5);
 }
