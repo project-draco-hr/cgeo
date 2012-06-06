@@ -27,13 +27,13 @@
   String lonSecFrac=eLonSub.getText().toString();
 switch (currentFormat) {
 case Deg:
-    gp=DDD.createGeopoint(latDir,latDeg,latDegFrac,lonDir,lonDeg,lonDegFrac);
+    gp=new Geopoint(latDir,latDeg,latDegFrac,lonDir,lonDeg,lonDegFrac);
   break;
 case Min:
-gp=DMM.createGeopoint(latDir,latDeg,latMin,latMinFrac,lonDir,lonDeg,lonMin,lonMinFrac);
+gp=new Geopoint(latDir,latDeg,latMin,latMinFrac,lonDir,lonDeg,lonMin,lonMinFrac);
 break;
 case Sec:
-gp=DMS.createGeopoint(latDir,latDeg,latMin,latSec,latSecFrac,lonDir,lonDeg,lonMin,lonSec,lonSecFrac);
+gp=new Geopoint(latDir,latDeg,latMin,latSec,latSecFrac,lonDir,lonDeg,lonMin,lonSec,lonSecFrac);
 break;
 case Plain:
 }
