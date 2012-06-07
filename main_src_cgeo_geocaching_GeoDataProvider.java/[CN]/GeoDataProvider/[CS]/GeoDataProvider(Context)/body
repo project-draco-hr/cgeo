@@ -1,5 +1,27 @@
 {
   geoManager=(LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
   unregisterer.start();
-  notifyObservers(new GeoData(new Location(LAST_LOCATION_PSEUDO_PROVIDER),false,0,0));
+  final Location initialLocation=new Location(LAST_LOCATION_PSEUDO_PROVIDER);
+  try {
+    final Location lastGpsLocation=geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    final Location lastNetworkLocation=geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+    if (lastGpsLocation != null && lastNetworkLocation != null) {
+      if (lastGpsLocation.getTime() >= lastNetworkLocation.getTime()) {
+        copyCoords(initialLocation,lastGpsLocation);
+      }
+ else {
+        copyCoords(initialLocation,lastNetworkLocation);
+      }
+    }
+ else     if (lastGpsLocation != null) {
+      copyCoords(initialLocation,lastGpsLocation);
+    }
+ else {
+      copyCoords(initialLocation,lastNetworkLocation);
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("GeoDataProvider: error when retrieving last known location",e);
+  }
+  notifyObservers(new GeoData(initialLocation,false,0,0));
 }
