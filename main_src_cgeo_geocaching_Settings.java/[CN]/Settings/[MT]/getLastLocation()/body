@@ -1,0 +1,12 @@
+{
+  final String savedCoords=sharedPrefs.getString(KEY_LASTLOC,null);
+  try {
+    if (savedCoords != null) {
+      return new Geopoint(savedCoords);
+    }
+  }
+ catch (  final ParseException e) {
+    Log.e("getLastLocation: cannot parse last saved location " + savedCoords,e);
+  }
+  return new Geopoint(0,0);
+}
