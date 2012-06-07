@@ -1,5 +1,9 @@
 {
   geoManager=(LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
   unregisterer.start();
-  notifyObservers(new GeoData(new Location(LAST_LOCATION_PSEUDO_PROVIDER),false,0,0));
+  final Geopoint lastKnownCoords=Settings.getLastLocation().getCoords();
+  final Location initialLocation=new Location(LAST_LOCATION_PSEUDO_PROVIDER);
+  initialLocation.setLatitude(lastKnownCoords.getLatitude());
+  initialLocation.setLongitude(lastKnownCoords.getLongitude());
+  notifyObservers(new GeoData(initialLocation,false,0,0));
 }
