@@ -10,14 +10,14 @@
     if (!cachesToDisplay.isEmpty()) {
       if (cachesToDisplay.size() == 1 || (cachesCnt < Settings.getWayPointsThreshold())) {
         for (        cgWaypoint waypoint : waypointsToDisplay) {
-          if (waypoint.getCoords() == null) {
+          if (waypoint == null || waypoint.getCoords() == null) {
             continue;
           }
           itemsToDisplay.add(getItem(waypoint,null,waypoint));
         }
       }
       for (      cgCache cache : cachesToDisplay) {
-        if (cache.getCoords() == null) {
+        if (cache == null || cache.getCoords() == null) {
           continue;
         }
         itemsToDisplay.add(getItem(cache,cache,null));
