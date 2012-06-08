@@ -117,6 +117,9 @@
       if (cache.isDisabled() || cache.isArchived()) {
         cache.getNameSp().setSpan(new StrikethroughSpan(),0,cache.getNameSp().toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
       }
+      if (cache.isArchived()) {
+        cache.getNameSp().setSpan(new ForegroundColorSpan(cgeoapplication.getInstance().getResources().getColor(R.color.archived_cache_color)),0,cache.getNameSp().toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+      }
     }
     searchResult.addCache(cache);
   }
