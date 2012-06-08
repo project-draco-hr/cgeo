@@ -33,8 +33,8 @@
   values.put("type",cache.getType().id);
   values.put("name",cache.getName());
   values.put("own",cache.isOwn() ? 1 : 0);
-  values.put("owner",cache.getOwner());
-  values.put("owner_real",cache.getOwnerReal());
+  values.put("owner",cache.getOwnerDisplayName());
+  values.put("owner_real",cache.getOwnerUserId());
   if (cache.getHiddenDate() == null) {
     values.put("hidden",0);
   }

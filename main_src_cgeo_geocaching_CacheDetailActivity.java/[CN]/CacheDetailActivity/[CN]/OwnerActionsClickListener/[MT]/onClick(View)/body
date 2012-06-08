@@ -5,8 +5,8 @@
   if (!cache.supportsUserActions()) {
     return;
   }
-  if (StringUtils.isNotBlank(cache.getOwnerReal())) {
-    clickedItemText=cache.getOwnerReal();
+  if (StringUtils.isNotBlank(cache.getOwnerUserId())) {
+    clickedItemText=cache.getOwnerUserId();
   }
  else {
     clickedItemText=((TextView)view).getText().toString();

@@ -27,8 +27,8 @@
   cache.setCacheId(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.getCacheId()));
   cache.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.getGuid()));
   cache.setName(cacheName);
-  cache.setOwnerReal(URLDecoder.decode(BaseUtils.getMatch(page,GCConstants.PATTERN_OWNERREAL,true,cache.getOwnerReal())));
-  cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerReal(),Settings.getUsername()));
+  cache.setOwnerUserId(URLDecoder.decode(BaseUtils.getMatch(page,GCConstants.PATTERN_OWNER_USERID,true,cache.getOwnerUserId())));
+  cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerUserId(),Settings.getUsername()));
   String tableInside=page;
   int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
   if (pos == -1) {
@@ -45,7 +45,7 @@
     if (result != null) {
       cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
     }
-    cache.setOwner(Html.fromHtml(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER,true,cache.getOwner())).toString());
+    cache.setOwnerDisplayName(Html.fromHtml(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER_DISPLAYNAME,true,cache.getOwnerDisplayName())).toString());
     try {
       String hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null);
       if (StringUtils.isNotBlank(hiddenString)) {

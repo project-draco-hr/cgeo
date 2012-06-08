@@ -174,8 +174,14 @@
     }
 );
     gcCache.getChild(nsGC,"owner").setEndTextElementListener(new EndTextElementListener(){
-      @Override public void end(      String cacheOwner){
-        cache.setOwner(validate(cacheOwner));
+      @Override public void end(      String ownerUserId){
+        cache.setOwnerUserId(validate(ownerUserId));
+      }
+    }
+);
+    gcCache.getChild(nsGC,"placed_by").setEndTextElementListener(new EndTextElementListener(){
+      @Override public void end(      String ownerDisplayName){
+        cache.setOwnerDisplayName(validate(ownerDisplayName));
       }
     }
 );

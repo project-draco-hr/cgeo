@@ -10,7 +10,7 @@
     cache.setDisabled(status.equalsIgnoreCase("Temporarily unavailable"));
     cache.setArchived(status.equalsIgnoreCase("Archived"));
     final JSONObject owner=response.getJSONObject(CACHE_OWNER);
-    cache.setOwner(parseUser(owner));
+    cache.setOwnerDisplayName(parseUser(owner));
     cache.getLogCounts().put(LogType.FOUND_IT,response.getInt(CACHE_FOUNDS));
     cache.getLogCounts().put(LogType.DIDNT_FIND_IT,response.getInt(CACHE_NOTFOUNDS));
     cache.setSize(getCacheSize(response));

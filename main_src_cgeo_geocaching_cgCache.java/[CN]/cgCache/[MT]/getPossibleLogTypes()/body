@@ -1,5 +1,5 @@
 {
-  boolean isOwner=owner != null && owner.equalsIgnoreCase(Settings.getUsername());
+  boolean isOwner=getOwnerUserId() != null && getOwnerUserId().equalsIgnoreCase(Settings.getUsername());
   List<LogType> logTypes=new ArrayList<LogType>();
   if (isEventCache()) {
     logTypes.add(LogType.WILL_ATTEND);
