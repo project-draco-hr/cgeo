@@ -66,6 +66,9 @@
     if (cache.isDisabled() || cache.isArchived()) {
       cache.getNameSp().setSpan(new StrikethroughSpan(),0,cache.getNameSp().toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
+    if (cache.isArchived()) {
+      cache.getNameSp().setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)),0,cache.getNameSp().toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
   }
   holder.text.setText(cache.getNameSp(),TextView.BufferType.SPANNABLE);
   holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache),null,null,null);
