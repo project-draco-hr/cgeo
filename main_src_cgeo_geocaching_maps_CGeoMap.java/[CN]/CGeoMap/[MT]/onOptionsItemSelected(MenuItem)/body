@@ -13,23 +13,13 @@ searchIntent=null;
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case MENU_STORE_CACHES:
-if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
+if (!isLoading()) {
+final Set<String> geocodesInViewport=getGeocodesForCachesInViewport();
 final List<String> geocodes=new ArrayList<String>();
-final List<cgCache> cachesProtected=caches.getAsList();
-try {
-if (cachesProtected.size() > 0) {
-final Viewport viewport=mapView.getViewport();
-for (final cgCache cache : cachesProtected) {
-if (cache != null && cache.getCoords() != null) {
-if (viewport.contains(cache) && !app.isOffline(cache.getGeocode(),null)) {
-geocodes.add(cache.getGeocode());
+for (final String geocode : geocodesInViewport) {
+if (!app.isOffline(geocode,null)) {
+geocodes.add(geocode);
 }
-}
-}
-}
-}
- catch (Exception e) {
-Log.e("cgeomap.onOptionsItemSelected.#4: " + e.toString());
 }
 detailTotal=geocodes.size();
 detailProgress=0;
@@ -83,7 +73,7 @@ ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case MENU_AS_LIST:
 {
-cgeocaches.startActivityMap(activity,search);
+cgeocaches.startActivityMap(activity,new SearchResult(getGeocodesForCachesInViewport()));
 return true;
 }
 case MENU_STRATEGY_FASTEST:
