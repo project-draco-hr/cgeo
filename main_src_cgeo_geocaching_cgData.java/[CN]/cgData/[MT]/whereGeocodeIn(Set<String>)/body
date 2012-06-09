@@ -6,13 +6,9 @@
       if (all.length() > 0) {
         all.append(", ");
       }
-      all.append('"');
-      all.append(geocode);
-      all.append('"');
+      all.append('"').append(geocode).append('"');
     }
-    where.append("geocode in (");
-    where.append(all);
-    where.append(')');
+    where.append("geocode in (").append(all).append(')');
   }
   return where.toString();
 }
