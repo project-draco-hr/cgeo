@@ -1,3 +1,5 @@
 {
   search=GCParser.searchByCoords(coords,Settings.getCacheType(),Settings.isShowCaptcha());
+  cacheList.clear();
+  cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
 }

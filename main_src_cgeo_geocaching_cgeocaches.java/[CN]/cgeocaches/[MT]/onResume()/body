@@ -6,6 +6,8 @@
     setAdapterCurrentCoordinates(true);
   }
   if (loadCachesHandler != null && search != null) {
+    cacheList.clear();
+    cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
     loadCachesHandler.sendEmptyMessage(0);
   }
   if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
