@@ -290,6 +290,14 @@
     }
   }
 );
+  final CheckBox shareAfterExportButton=(CheckBox)findViewById(R.id.share_after_export);
+  shareAfterExportButton.setChecked(Settings.getShareAfterExport());
+  shareAfterExportButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setShareAfterExport(shareAfterExportButton.isChecked());
+    }
+  }
+);
   Spinner defaultNavigationToolSelector=(Spinner)findViewById(R.id.default_navigation_tool);
   final List<NavigationAppsEnum> apps=NavigationAppFactory.getInstalledDefaultNavigationApps();
   ArrayAdapter<NavigationAppsEnum> naviAdapter=new ArrayAdapter<NavigationAppsEnum>(this,android.R.layout.simple_spinner_item,apps){
