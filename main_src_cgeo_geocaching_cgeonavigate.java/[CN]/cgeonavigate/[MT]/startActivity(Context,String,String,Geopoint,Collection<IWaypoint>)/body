@@ -1,13 +1,3 @@
 {
-  coordinates.clear();
-  if (coordinatesWithType != null) {
-    coordinates.addAll(coordinatesWithType);
-  }
-  final Intent navigateIntent=new Intent(context,cgeonavigate.class);
-  navigateIntent.putExtra(EXTRAS_COORDS,coords);
-  navigateIntent.putExtra(EXTRAS_GEOCODE,geocode.toUpperCase());
-  if (null != displayedName) {
-    navigateIntent.putExtra(EXTRAS_NAME,displayedName);
-  }
-  context.startActivity(navigateIntent);
+  cgeonavigate.startActivity(context,geocode,displayedName,coords,coordinatesWithType,null);
 }
