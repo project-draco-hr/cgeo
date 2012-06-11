@@ -34,7 +34,9 @@
       gpx.write(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().pattern));
       gpx.write("</type>");
       gpx.write("<groundspeak:cache ");
-      gpx.write("available=\"");
+      gpx.write("id=\"");
+      gpx.write(cache.getCacheId());
+      gpx.write("\" available=\"");
       gpx.write(!cache.isDisabled() ? "True" : "False");
       gpx.write("\" archived=\"");
       gpx.write(cache.isArchived() ? "True" : "False");

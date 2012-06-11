@@ -1,25 +1,32 @@
 {
+  List<cgWaypoint> waypoints=cache.getWaypoints();
+  List<cgWaypoint> ownWaypoints=new ArrayList<cgWaypoint>(waypoints.size());
+  List<cgWaypoint> originWaypoints=new ArrayList<cgWaypoint>(waypoints.size());
   for (  cgWaypoint wp : cache.getWaypoints()) {
-    gpx.write("<wpt lat=\"");
-    final Geopoint coords=wp.getCoords();
-    gpx.write(coords != null ? Double.toString(coords.getLatitude()) : "");
-    gpx.write("\" lon=\"");
-    gpx.write(coords != null ? Double.toString(coords.getLongitude()) : "");
-    gpx.write("\">");
-    gpx.write("<name>");
-    gpx.write(StringEscapeUtils.escapeXml(wp.getPrefix()));
-    gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode().substring(2)));
-    gpx.write("</name>");
-    gpx.write("<cmt />");
-    gpx.write("<desc>");
-    gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
-    gpx.write("</desc>");
-    gpx.write("<sym>");
-    gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
-    gpx.write("</sym>");
-    gpx.write("<type>Waypoint|");
-    gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
-    gpx.write("</type>");
-    gpx.write("</wpt>");
+    if (wp.isUserDefined()) {
+      ownWaypoints.add(wp);
+    }
+ else {
+      originWaypoints.add(wp);
+    }
+  }
+  int maxPrefix=0;
+  for (  cgWaypoint wp : originWaypoints) {
+    String prefix=wp.getPrefix();
+    try {
+      maxPrefix=Math.max(Integer.parseInt(prefix),maxPrefix);
+    }
+ catch (    NumberFormatException ex) {
+      Log.e("Unexpected origin waypoint prefix='" + prefix + "'",ex);
+    }
+    writeCacheWaypoint(wp,prefix);
+  }
+  for (  cgWaypoint wp : ownWaypoints) {
+    maxPrefix++;
+    String prefix=String.valueOf(maxPrefix);
+    if (prefix.length() == 1) {
+      prefix="0" + prefix;
+    }
+    writeCacheWaypoint(wp,prefix);
   }
 }
