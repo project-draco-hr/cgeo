@@ -1,8 +1,8 @@
 {
-  if (directionNow == null) {
+  if (Math.abs(AngleUtils.difference(azimuth,direction)) < 10) {
     return;
   }
-  azimuth=directionNow;
+  azimuth=direction;
   for (  final CompassMiniView compass : compasses) {
     compass.updateAzimuth(azimuth);
   }
