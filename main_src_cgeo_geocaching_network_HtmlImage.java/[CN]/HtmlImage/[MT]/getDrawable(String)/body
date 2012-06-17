@@ -17,7 +17,9 @@
             LocalStorage.saveEntityToFile(httpResponse,file);
           }
  else           if (statusCode == 304) {
-            file.setLastModified(System.currentTimeMillis());
+            if (!file.setLastModified(System.currentTimeMillis())) {
+              makeFreshCopy(file);
+            }
           }
         }
       }

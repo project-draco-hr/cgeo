@@ -1,0 +1,6 @@
+{
+  final File tempFile=new File(file.getParentFile(),file.getName() + "-temp");
+  file.renameTo(tempFile);
+  LocalStorage.copy(tempFile,file);
+  tempFile.delete();
+}
