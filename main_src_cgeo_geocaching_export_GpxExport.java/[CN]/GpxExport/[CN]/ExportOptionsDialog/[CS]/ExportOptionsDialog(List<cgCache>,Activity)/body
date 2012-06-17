@@ -1,0 +1,20 @@
+{
+  super(activity);
+  View layout=activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog,null);
+  setView(layout);
+  final CheckBox shareOption=(CheckBox)layout.findViewById(R.id.share);
+  shareOption.setChecked(Settings.getShareAfterExport());
+  shareOption.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setShareAfterExport(shareOption.isChecked());
+    }
+  }
+);
+  ((Button)layout.findViewById(R.id.export)).setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      dismiss();
+      new ExportTask(caches,activity).execute((Void)null);
+    }
+  }
+);
+}
