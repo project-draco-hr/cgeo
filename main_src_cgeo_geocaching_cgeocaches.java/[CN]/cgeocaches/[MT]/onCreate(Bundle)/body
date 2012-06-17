@@ -126,8 +126,7 @@ setTitle(title);
 showProgress(true);
 SearchResult result=(SearchResult)extras.get(EXTRAS_SEARCH);
 search=new SearchResult(result);
-cacheList.clear();
-cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+replaceCacheListFromSearch();
 loadCachesHandler.sendMessage(Message.obtain());
 break;
 default :

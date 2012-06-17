@@ -1,6 +1,5 @@
 {
   search=cgeoapplication.getInstance().getHistoryOfCaches(true,coords != null ? Settings.getCacheType() : CacheType.ALL);
-  cacheList.clear();
-  cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+  replaceCacheListFromSearch();
   loadCachesHandler.sendMessage(Message.obtain());
 }
