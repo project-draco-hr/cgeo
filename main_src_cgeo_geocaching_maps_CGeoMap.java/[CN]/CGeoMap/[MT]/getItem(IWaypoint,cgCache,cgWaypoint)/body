@@ -2,7 +2,7 @@
   if (cache != null) {
     final CachesOverlayItemImpl item=mapItemFactory.getCachesOverlayItem(coord,cache.getType());
     final int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.isOwn()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).toHashCode();
-    final LayerDrawable ldFromCache=CGeoMap.overlaysCache.get(hashcode);
+    final LayerDrawable ldFromCache=overlaysCache.get(hashcode);
     if (ldFromCache != null) {
       item.setMarker(ldFromCache);
       return item;
@@ -47,7 +47,7 @@
     for (    final int[] inset : insets) {
       ld.setLayerInset(index++,inset[0],inset[1],inset[2],inset[3]);
     }
-    CGeoMap.overlaysCache.put(hashcode,ld);
+    overlaysCache.put(hashcode,ld);
     item.setMarker(ld);
     return item;
   }
