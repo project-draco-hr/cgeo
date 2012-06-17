@@ -2,7 +2,7 @@
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     loadThreadRun=System.currentTimeMillis();
-    SearchResult searchResult=null;
+    SearchResult searchResult;
     if (mapMode == MapMode.LIVE_ONLINE) {
       searchResult=new SearchResult(app.getCachedInViewport(viewport,Settings.getCacheType()));
     }
