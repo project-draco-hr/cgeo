@@ -1,0 +1,9 @@
+{
+  assertEquals(0.0f,AngleUtils.normalize(0));
+  assertEquals(0.0f,AngleUtils.normalize(360));
+  assertEquals(0.0f,AngleUtils.normalize(720));
+  assertEquals(0.0f,AngleUtils.normalize(-360));
+  assertEquals(0.0f,AngleUtils.normalize(-720));
+  assertEquals(1.0f,AngleUtils.normalize(721));
+  assertEquals(359.0f,AngleUtils.normalize(-721));
+}

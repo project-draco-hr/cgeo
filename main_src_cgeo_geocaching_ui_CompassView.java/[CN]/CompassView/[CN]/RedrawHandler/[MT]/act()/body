@@ -1,7 +1,7 @@
 {
-  final double newAzimuthShown=smoothUpdate(northMeasured,azimuthShown);
-  final double newCacheHeadingShown=smoothUpdate(cacheHeadingMeasured,cacheHeadingShown);
-  if (Math.abs(DirectionProvider.difference(azimuthShown,newAzimuthShown)) >= 2 || Math.abs(DirectionProvider.difference(cacheHeadingShown,newCacheHeadingShown)) >= 2) {
+  final float newAzimuthShown=smoothUpdate(northMeasured,azimuthShown);
+  final float newCacheHeadingShown=smoothUpdate(cacheHeadingMeasured,cacheHeadingShown);
+  if (Math.abs(AngleUtils.difference(azimuthShown,newAzimuthShown)) >= 2 || Math.abs(AngleUtils.difference(cacheHeadingShown,newCacheHeadingShown)) >= 2) {
 synchronized (CompassView.this) {
       azimuthShown=newAzimuthShown;
       cacheHeadingShown=newCacheHeadingShown;
