@@ -55,6 +55,7 @@
   }
   mapView.repaintRequired(null);
   mapView.getMapController().setZoom(Settings.getMapZoom());
+  mapView.getMapController().setCenter(Settings.getMapCenter());
   live=(searchIntent == null && geocodeIntent == null && coordsIntent == null);
   if (null == mapStateIntent) {
     followMyLocation=live;

@@ -1,7 +1,13 @@
 {
-  currentLocation=geo.getLocation();
-  if (!Settings.isUseCompass() || geo.getSpeed() > 5) {
-    currentHeading=geo.getBearing();
+  if (geo.isPseudoLocation()) {
+    locationValid=false;
   }
-  repaintPositionOverlay();
+ else {
+    locationValid=true;
+    currentLocation=geo.getLocation();
+    if (!Settings.isUseCompass() || geo.getSpeed() > 5) {
+      currentHeading=geo.getBearing();
+    }
+    repaintPositionOverlay();
+  }
 }

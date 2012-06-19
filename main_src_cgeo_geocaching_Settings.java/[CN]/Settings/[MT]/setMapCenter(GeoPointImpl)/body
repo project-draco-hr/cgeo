@@ -1,0 +1,9 @@
+{
+  editSharedSettings(new PrefRunnable(){
+    @Override public void edit(    Editor edit){
+      edit.putInt(KEY_LAST_MAP_LAT,mapViewCenter.getLatitudeE6());
+      edit.putInt(KEY_LAST_MAP_LON,mapViewCenter.getLongitudeE6());
+    }
+  }
+);
+}
