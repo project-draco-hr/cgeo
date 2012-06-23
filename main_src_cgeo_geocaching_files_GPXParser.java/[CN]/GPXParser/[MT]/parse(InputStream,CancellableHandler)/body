@@ -129,6 +129,11 @@
           cache.setGuid(guid);
         }
       }
+      final Matcher matcherCode=patternUrlGeocode.matcher(url);
+      if (matcherCode.matches()) {
+        String geocode=matcherCode.group(1);
+        cache.setGeocode(geocode);
+      }
     }
   }
 );
