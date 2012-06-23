@@ -7,9 +7,8 @@
     specifySql.append(" and detailed = 1");
   }
   if (cacheType != CacheType.ALL) {
-    specifySql.append(" and type = \"");
-    specifySql.append(cacheType.id);
-    specifySql.append('"');
+    specifySql.append(" and type = ");
+    specifySql.append(DatabaseUtils.sqlEscapeString(cacheType.id));
   }
   try {
     Cursor cursor=database.query(dbTableCaches,new String[]{"geocode"},specifySql.toString(),null,null,null,"visiteddate",null);

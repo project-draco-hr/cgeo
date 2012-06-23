@@ -11,7 +11,7 @@
   if (removeFlags.contains(RemoveFlag.REMOVE_DB)) {
     final ArrayList<String> quotedGeocodes=new ArrayList<String>(geocodes.size());
     for (    final String geocode : geocodes) {
-      quotedGeocodes.add('"' + geocode + '"');
+      quotedGeocodes.add(DatabaseUtils.sqlEscapeString(geocode));
     }
     final String geocodeList=StringUtils.join(quotedGeocodes.toArray(),',');
     final String baseWhereClause="geocode in (" + geocodeList + ")";
@@ -23,7 +23,7 @@
       database.delete(dbTableLogs,baseWhereClause,null);
       database.delete(dbTableLogCount,baseWhereClause,null);
       database.delete(dbTableLogsOffline,baseWhereClause,null);
-      database.delete(dbTableWaypoints,baseWhereClause + " and type <> \"own\"",null);
+      database.delete(dbTableWaypoints,baseWhereClause + " and type <> 'own'",null);
       database.delete(dbTableTrackables,baseWhereClause,null);
       database.setTransactionSuccessful();
     }
