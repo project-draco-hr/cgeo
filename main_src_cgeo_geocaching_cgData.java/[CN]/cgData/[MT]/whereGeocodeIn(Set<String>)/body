@@ -6,7 +6,7 @@
       if (all.length() > 0) {
         all.append(", ");
       }
-      all.append('"').append(geocode).append('"');
+      all.append(DatabaseUtils.sqlEscapeString(geocode));
     }
     where.append("geocode in (").append(all).append(')');
   }

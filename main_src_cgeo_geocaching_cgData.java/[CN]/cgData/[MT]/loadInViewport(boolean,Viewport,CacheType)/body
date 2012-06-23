@@ -6,9 +6,8 @@
   }
   final StringBuilder where=new StringBuilder(buildCoordinateWhere(dbTableCaches,viewport));
   if (cacheType != CacheType.ALL) {
-    where.append(" and type = \"");
-    where.append(cacheType.id);
-    where.append('"');
+    where.append(" and type = ");
+    where.append(DatabaseUtils.sqlEscapeString(cacheType.id));
   }
   if (stored) {
     where.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
