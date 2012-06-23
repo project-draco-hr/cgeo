@@ -1,5 +1,5 @@
 {
-  List<File> list=new ArrayList<File>();
+  final List<File> list=new ArrayList<File>();
   try {
     if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
       boolean loaded=false;
@@ -26,6 +26,11 @@
   }
   changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler,0,"loaded directories"));
   files.addAll(list);
-  list.clear();
+  Collections.sort(files,new Comparator<File>(){
+    @Override public int compare(    File lhs,    File rhs){
+      return lhs.getName().compareToIgnoreCase(rhs.getName());
+    }
+  }
+);
   loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
 }
