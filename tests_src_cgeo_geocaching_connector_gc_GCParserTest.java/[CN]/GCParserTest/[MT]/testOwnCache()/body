@@ -1,0 +1,14 @@
+{
+  final String page=getFileContent(R.raw.own_cache);
+  SearchResult result=GCParser.parseCacheFromText(page,null);
+  assertNotNull(result);
+  assertFalse(result.isEmpty());
+  final cgCache cache=result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+  assertNotNull(cache);
+  assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
+  assertEquals(1,cache.getSpoilers().size());
+  final cgImage spoiler=cache.getSpoilers().get(0);
+  assertEquals("http://img.geocaching.com/cache/large/3f9365c3-f55c-4e55-9992-ee0e5175712c.jpg",spoiler.getUrl());
+  assertEquals("SPOILER",spoiler.getTitle());
+  assertNull(spoiler.getDescription());
+}
