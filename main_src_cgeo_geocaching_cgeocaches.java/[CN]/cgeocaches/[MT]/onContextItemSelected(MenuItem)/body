@@ -32,6 +32,7 @@ break;
 case MENU_DROP_CACHE:
 cache.drop(new Handler(){
 @Override public void handleMessage(Message msg){
+adapter.notifyDataSetChanged();
 refreshCurrentList();
 }
 }
