@@ -2,10 +2,10 @@
   final float diff=AngleUtils.difference(actual,goal);
   float offset=0;
   if (diff > 1.0) {
-    offset=(float)Math.ceil(diff / 10.0);
+    offset=FloatMath.ceil(diff / 10.0f);
   }
  else   if (diff < 1.0) {
-    offset=(float)Math.floor(diff / 10.0);
+    offset=FloatMath.floor(diff / 10.0f);
   }
   return AngleUtils.normalize(actual + offset);
 }
