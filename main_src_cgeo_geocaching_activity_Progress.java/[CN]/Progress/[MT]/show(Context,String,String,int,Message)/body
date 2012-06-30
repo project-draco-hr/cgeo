@@ -2,6 +2,7 @@
   if (dialog == null) {
     dialog=new ProgressDialog(context);
     dialog.setProgress(0);
+    dialog.setCanceledOnTouchOutside(false);
     this.progress=0;
     dialog.setTitle(title);
     dialog.setMessage(message);
