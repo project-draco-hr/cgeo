@@ -45,7 +45,7 @@
     if (result != null) {
       cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
     }
-    cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER_DISPLAYNAME,true,cache.getOwnerDisplayName())).toString());
+    cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER_DISPLAYNAME,true,cache.getOwnerDisplayName())));
     try {
       String hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null);
       if (StringUtils.isNotBlank(hiddenString)) {
