@@ -1,7 +1,12 @@
 {
-  final Date eventDate=new Date(Long.parseLong(hiddenDate));
-  eventDate.setHours(0);
-  eventDate.setMinutes(0);
-  eventDate.setSeconds(0);
-  return eventDate;
+  try {
+    final Date eventDate=new Date(Long.parseLong(hiddenDate));
+    eventDate.setHours(0);
+    eventDate.setMinutes(0);
+    eventDate.setSeconds(0);
+    return eventDate;
+  }
+ catch (  NumberFormatException e) {
+  }
+  return null;
 }

@@ -3,7 +3,13 @@
     final Date eventDate=parseDate();
     final String description=parseDescription();
     final String eventLocation=parseLocation();
-    final Intent intent=new Intent(Intent.ACTION_INSERT).setData(Compatibility.getCalendarEventsProviderURI()).putExtra("beginTime",eventDate.getTime() + 43200000).putExtra("allDay",true).putExtra("title",Html.fromHtml(name).toString()).putExtra("description",description).putExtra("hasAlarm",false).putExtra("eventTimezone","UTC").putExtra("eventLocation",eventLocation);
+    final Intent intent=new Intent(Intent.ACTION_INSERT).setData(Compatibility.getCalendarEventsProviderURI()).putExtra("title",Html.fromHtml(name).toString()).putExtra("description",description).putExtra("hasAlarm",false).putExtra("eventTimezone","UTC").putExtra("eventLocation",eventLocation);
+    if (startTimeMinutes >= 0) {
+      intent.putExtra("beginTime",eventDate.getTime() + startTimeMinutes * 60000);
+    }
+ else {
+      intent.putExtra("allDay",true);
+    }
     startActivity(intent);
   }
  catch (  Exception e) {

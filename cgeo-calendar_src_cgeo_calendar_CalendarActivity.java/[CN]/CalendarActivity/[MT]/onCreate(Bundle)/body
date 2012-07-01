@@ -13,6 +13,14 @@
     name=getParameter(ICalendar.PARAM_NAME);
     location=getParameter(ICalendar.PARAM_LOCATION);
     coords=getParameter(ICalendar.PARAM_COORDS);
+    final String startTime=getParameter(ICalendar.PARAM_START_TIME_MINUTES);
+    if (startTime.length() > 0) {
+      try {
+        startTimeMinutes=Integer.valueOf(startTime);
+      }
+ catch (      NumberFormatException e) {
+      }
+    }
     if (name.length() > 0 && hiddenDate.length() > 0) {
       if (Compatibility.isLevel14()) {
         addToCalendarLevel14();
