@@ -1,10 +1,10 @@
 {
   int count=0;
-  for (  int key : getInstance().mapSources.keySet()) {
+  for (  int key : mapSources.keySet()) {
     if (sourceOrdinal == count) {
       return key;
     }
     count++;
   }
-  return getInstance().mapSources.firstKey();
+  return mapSources.firstKey();
 }

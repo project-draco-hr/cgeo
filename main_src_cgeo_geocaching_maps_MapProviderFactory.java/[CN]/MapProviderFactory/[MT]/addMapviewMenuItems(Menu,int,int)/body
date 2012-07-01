@@ -1,6 +1,5 @@
 {
-  SortedMap<Integer,MapSource> mapSources=getInstance().mapSources;
-  for (  int key : mapSources.keySet()) {
-    parentMenu.add(groupId,key,0,mapSources.get(key).getName()).setCheckable(true).setChecked(key == currentSource);
+  for (  Integer key : mapSources.keySet()) {
+    parentMenu.add(groupId,key,0,mapSources.get(key).getName()).setCheckable(true).setChecked(key.intValue() == currentSource);
   }
 }

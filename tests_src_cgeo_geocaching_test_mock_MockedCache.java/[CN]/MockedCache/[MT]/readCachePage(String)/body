@@ -1,17 +1,22 @@
 {
+  InputStream is=null;
+  BufferedReader br=null;
   try {
-    final InputStream is=MockedCache.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
-    final BufferedReader br=new BufferedReader(new InputStreamReader(is),150000);
+    is=MockedCache.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
+    br=new BufferedReader(new InputStreamReader(is),150000);
     final StringBuilder buffer=new StringBuilder();
     String line;
     while ((line=br.readLine()) != null) {
       buffer.append(line).append('\n');
     }
-    br.close();
     return BaseUtils.replaceWhitespace(buffer.toString());
   }
  catch (  IOException e) {
     e.printStackTrace();
+  }
+ finally {
+    IOUtils.closeQuietly(is);
+    IOUtils.closeQuietly(br);
   }
   return null;
 }
