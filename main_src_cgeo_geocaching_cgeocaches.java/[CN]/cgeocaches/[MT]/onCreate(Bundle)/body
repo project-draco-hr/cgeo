@@ -3,7 +3,6 @@
   app.setAction(action);
   setTheme();
   setContentView(R.layout.caches);
-  setTitle("caches");
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     Object typeObject=extras.get(EXTRAS_LIST_TYPE);
@@ -88,16 +87,13 @@ action="planning";
 final String address=extras.getString(EXTRAS_ADDRESS);
 if (StringUtils.isNotBlank(address)) {
 title=address;
-setTitle(title);
-showProgress(true);
-showFooterLoadingCaches();
 }
  else {
 title=coords.toString();
+}
 setTitle(title);
 showProgress(true);
 showFooterLoadingCaches();
-}
 thread=new LoadByCoordsThread(coords);
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
