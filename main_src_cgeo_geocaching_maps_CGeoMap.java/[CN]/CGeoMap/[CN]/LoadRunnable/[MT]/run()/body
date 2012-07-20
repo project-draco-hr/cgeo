@@ -33,7 +33,9 @@
     if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
       waypoints.clear();
       if (isLiveMode() || mapMode == MapMode.COORDS) {
-        waypoints.addAll(app.getWaypointsInViewport(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches()));
+        CacheType type=Settings.getCacheType();
+        Set<cgWaypoint> waypointsInViewport=app.getWaypointsInViewport(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches(),type);
+        waypoints.addAll(waypointsInViewport);
       }
  else {
         for (        cgCache c : caches.getAsList()) {
