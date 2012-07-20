@@ -1,0 +1,14 @@
+{
+  Option o=adapter.getItem(position);
+  if (o.getName().equals(PARENT_DIR)) {
+    currentDir=new File(o.getPath());
+    fill(currentDir);
+  }
+ else {
+    File dir=new File(o.getPath());
+    if (dir.list(new DirOnlyFilenameFilter()).length > 0) {
+      currentDir=dir;
+      fill(currentDir);
+    }
+  }
+}

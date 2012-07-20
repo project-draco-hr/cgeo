@@ -1,0 +1,38 @@
+{
+  super.onCreate(savedInstanceState);
+  final Bundle extras=getIntent().getExtras();
+  String startDir=extras.getString(START_DIR);
+  if (startDir == null) {
+    startDir="/sdcard";
+  }
+ else {
+    startDir=startDir.substring(0,startDir.lastIndexOf(File.separatorChar));
+  }
+  currentDir=new File(startDir);
+  ActivityMixin.setTheme(this);
+  setContentView(R.layout.simple_dir_chooser);
+  setTitle(this.getResources().getString(R.string.simple_dir_chooser_title));
+  fill(currentDir);
+  okButton=(Button)findViewById(R.id.simple_dir_chooser_ok);
+  okButton.setEnabled(false);
+  okButton.setVisibility(View.INVISIBLE);
+  okButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Intent intent=new Intent();
+      String chosenDirName=File.separator + checkedText;
+      intent.putExtra("chosenDir",currentDir.getAbsolutePath() + chosenDirName);
+      setResult(RESULT_OK,intent);
+      finish();
+    }
+  }
+);
+  Button cancelButton=(Button)findViewById(R.id.simple_dir_chooser_cancel);
+  cancelButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Intent intent=new Intent();
+      setResult(RESULT_CANCELED,intent);
+      finish();
+    }
+  }
+);
+}

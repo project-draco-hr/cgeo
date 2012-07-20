@@ -1,0 +1,19 @@
+{
+  EditText path=(EditText)findViewById(R.id.simple_dir_chooser_path);
+  path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
+  final File[] dirs=dir.listFiles(new DirOnlyFilenameFilter());
+  List<Option> listDirs=new ArrayList<Option>();
+  try {
+    for (    File currentDir : dirs) {
+      listDirs.add(new Option(currentDir.getName(),currentDir.getAbsolutePath()));
+    }
+  }
+ catch (  Exception e) {
+  }
+  Collections.sort(listDirs);
+  if (dir.getParent() != null) {
+    listDirs.add(0,new Option(PARENT_DIR,dir.getParent()));
+  }
+  this.adapter=new FileArrayAdapter(SimpleDirChooser.this,R.layout.simple_dir_item,listDirs);
+  this.setListAdapter(adapter);
+}
