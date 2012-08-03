@@ -2,6 +2,8 @@
   super(activity);
   View layout=activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog,null);
   setView(layout);
+  final TextView text=(TextView)layout.findViewById(R.id.info);
+  text.setText(getString(R.string.export_gpx_info,Settings.getGpxExportDir()));
   final CheckBox shareOption=(CheckBox)layout.findViewById(R.id.share);
   shareOption.setChecked(Settings.getShareAfterExport());
   shareOption.setOnClickListener(new View.OnClickListener(){
