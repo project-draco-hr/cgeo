@@ -11,4 +11,14 @@
     }
     initMapfileEdittext(true);
   }
+  if (requestCode == SELECT_GPXDIR_REQUEST) {
+    if (resultCode == RESULT_OK) {
+      if (data.hasExtra("chosenDir")) {
+        Settings.setGpxExportDir(data.getStringExtra("chosenDir"));
+      }
+    }
+    EditText gpxExportDir=(EditText)findViewById(R.id.gpx_exportdir);
+    gpxExportDir.setText(Settings.getGpxExportDir());
+    gpxExportDir.requestFocus();
+  }
 }

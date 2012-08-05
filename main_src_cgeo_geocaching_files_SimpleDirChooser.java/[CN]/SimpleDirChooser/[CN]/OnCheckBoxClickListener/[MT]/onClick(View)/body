@@ -1,0 +1,20 @@
+{
+  CheckBox check=(CheckBox)arg0;
+  if (lastBoxChecked == check) {
+    check.setChecked(false);
+    lastBoxChecked=null;
+    okButton.setEnabled(false);
+    okButton.setVisibility(View.INVISIBLE);
+    SimpleDirChooser.this.checkedText="";
+  }
+ else {
+    if (lastBoxChecked != null) {
+      lastBoxChecked.setChecked(false);
+    }
+    check.setChecked(true);
+    lastBoxChecked=check;
+    okButton.setEnabled(true);
+    okButton.setVisibility(View.VISIBLE);
+    SimpleDirChooser.this.checkedText=checkedText;
+  }
+}

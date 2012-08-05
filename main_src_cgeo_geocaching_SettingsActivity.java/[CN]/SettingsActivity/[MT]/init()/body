@@ -282,6 +282,17 @@
     }
   }
 );
+  final EditText gpxExportDir=(EditText)findViewById(R.id.gpx_exportdir);
+  gpxExportDir.setText(Settings.getGpxExportDir());
+  Button selectGpxExportDir=(Button)findViewById(R.id.select_gpx_exportdir);
+  selectGpxExportDir.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Intent dirChooser=new Intent(SettingsActivity.this,SimpleDirChooser.class);
+      dirChooser.putExtra(SimpleDirChooser.START_DIR,Settings.getGpxExportDir());
+      startActivityForResult(dirChooser,SELECT_GPXDIR_REQUEST);
+    }
+  }
+);
   final CheckBox trailButton=(CheckBox)findViewById(R.id.trail);
   trailButton.setChecked(Settings.isMapTrail());
   trailButton.setOnClickListener(new View.OnClickListener(){
