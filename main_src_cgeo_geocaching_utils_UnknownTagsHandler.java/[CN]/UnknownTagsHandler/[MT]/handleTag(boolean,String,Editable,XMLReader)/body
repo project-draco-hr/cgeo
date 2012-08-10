@@ -14,4 +14,10 @@
  else   if (tag.equalsIgnoreCase("pre")) {
     handleProblematic();
   }
+ else   if (tag.equalsIgnoreCase("ol")) {
+    handleOl(opening);
+  }
+ else   if (tag.equalsIgnoreCase("li")) {
+    handleLi(opening,output);
+  }
 }
