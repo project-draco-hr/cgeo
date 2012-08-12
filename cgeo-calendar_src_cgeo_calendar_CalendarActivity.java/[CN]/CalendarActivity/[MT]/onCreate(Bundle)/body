@@ -6,29 +6,16 @@
       finish();
       return;
     }
-    shortDesc=getParameter(ICalendar.PARAM_SHORT_DESC);
-    hiddenDate=getParameter(ICalendar.PARAM_HIDDEN_DATE);
-    url=getParameter(ICalendar.PARAM_URL);
-    personalNote=getParameter(ICalendar.PARAM_NOTE);
-    name=getParameter(ICalendar.PARAM_NAME);
-    location=getParameter(ICalendar.PARAM_LOCATION);
-    coords=getParameter(ICalendar.PARAM_COORDS);
-    final String startTime=getParameter(ICalendar.PARAM_START_TIME_MINUTES);
-    if (startTime.length() > 0) {
-      try {
-        startTimeMinutes=Integer.valueOf(startTime);
-      }
- catch (      NumberFormatException e) {
-      }
+    final CalendarEntry entry=new CalendarEntry(uri);
+    if (!entry.isValid()) {
+      return;
     }
-    if (name.length() > 0 && hiddenDate.length() > 0) {
-      if (Compatibility.isLevel14()) {
-        addToCalendarLevel14();
-        finish();
-      }
+    if (Compatibility.isLevel14()) {
+      new AddEntryLevel14(entry,this).addEntryToCalendar();
+      finish();
+    }
  else {
-        selectCalendarForAdding();
-      }
+      selectCalendarForAdding(entry);
     }
   }
  catch (  Exception e) {

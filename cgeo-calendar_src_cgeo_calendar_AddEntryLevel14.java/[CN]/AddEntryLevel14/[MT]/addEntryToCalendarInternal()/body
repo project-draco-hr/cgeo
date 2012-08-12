@@ -1,0 +1,14 @@
+{
+  final Date eventDate=entry.parseDate();
+  final String description=entry.parseDescription();
+  final String eventLocation=entry.parseLocation();
+  final Intent intent=new Intent(Intent.ACTION_INSERT).setData(Compatibility.getCalendarEventsProviderURI()).putExtra("title",Html.fromHtml(entry.getName()).toString()).putExtra("description",description).putExtra("hasAlarm",false).putExtra("eventTimezone","UTC").putExtra("eventLocation",eventLocation);
+  if (entry.getStartTimeMinutes() >= 0) {
+    intent.putExtra("beginTime",eventDate.getTime() + entry.getStartTimeMinutes() * 60000);
+  }
+ else {
+    intent.putExtra("beginTime",eventDate.getTime() + 43200000);
+    intent.putExtra("allDay",true);
+  }
+  activity.startActivity(intent);
+}
