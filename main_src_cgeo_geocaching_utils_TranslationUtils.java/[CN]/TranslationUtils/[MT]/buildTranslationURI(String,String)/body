@@ -1,3 +1,3 @@
 {
-  return translationWebsite + translationForceClassicMode + translationAutoSelect+ translationFieldSeparator+ toLang+ translationFieldSeparator+ URLEncoder.encode(text).replace("+","%20");
+  return translationWebsite + translationForceClassicMode + translationAutoSelect+ translationFieldSeparator+ toLang+ translationFieldSeparator+ URLEncoder.encode(Html.fromHtml(text).toString());
 }
