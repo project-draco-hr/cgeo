@@ -1,44 +1,33 @@
 {
   removeGeoAndDir();
   final List<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
+  final List<cgCache> weHaveStaticMaps=new ArrayList<cgCache>(cacheList.size());
   for (  cgCache cache : cacheListTemp) {
     if (checked > 0 && !cache.isStatusChecked()) {
       handler.sendEmptyMessage(0);
       yield();
       continue;
     }
+    if (Settings.isStoreOfflineMaps() && StaticMapsProvider.hasStaticMapForCache(cache.getGeocode())) {
+      weHaveStaticMaps.add(cache);
+      continue;
+    }
     try {
-      if (needToStop) {
-        Log.i("Stopped storing process.");
-        break;
-      }
-      if ((System.currentTimeMillis() - last) < 1500) {
-        try {
-          int delay=1000 + ((Double)(Math.random() * 1000)).intValue() - (int)(System.currentTimeMillis() - last);
-          if (delay < 0) {
-            delay=500;
-          }
-          Log.i("Waiting for next cache " + delay + " ms");
-        }
- catch (        Exception e) {
-          Log.e("cgeocaches.LoadDetailsThread.sleep: " + e.toString());
-        }
-      }
-      if (needToStop) {
-        Log.i("Stopped storing process.");
-        break;
-      }
-      detailProgress++;
-      cache.refresh(listIdLD,null);
-      handler.sendEmptyMessage(cacheList.indexOf(cache));
-      yield();
+      refreshCache(cache);
     }
- catch (    Exception e) {
-      Log.e("cgeocaches.LoadDetailsThread: " + e.toString());
+ catch (    InterruptedException e) {
+      Log.i(e.getMessage());
     }
-    last=System.currentTimeMillis();
   }
   cacheListTemp.clear();
+  for (  cgCache cache : weHaveStaticMaps) {
+    try {
+      refreshCache(cache);
+    }
+ catch (    InterruptedException e) {
+      Log.i(e.getMessage());
+    }
+  }
   handler.sendEmptyMessage(MSG_RESTART_GEO_AND_DIR);
   handler.sendEmptyMessage(MSG_DONE);
 }
