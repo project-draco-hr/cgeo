@@ -1,13 +1,7 @@
 {
   removeGeoAndDir();
-  final List<cgCache> cacheListTemp=new ArrayList<cgCache>(cacheList);
-  final List<cgCache> weHaveStaticMaps=new ArrayList<cgCache>(cacheList.size());
-  for (  cgCache cache : cacheListTemp) {
-    if (checked > 0 && !cache.isStatusChecked()) {
-      handler.sendEmptyMessage(0);
-      yield();
-      continue;
-    }
+  final List<cgCache> weHaveStaticMaps=new ArrayList<cgCache>(selected.size());
+  for (  cgCache cache : selected) {
     if (Settings.isStoreOfflineMaps() && StaticMapsProvider.hasStaticMapForCache(cache.getGeocode())) {
       weHaveStaticMaps.add(cache);
       continue;
@@ -19,7 +13,6 @@
       Log.i(e.getMessage());
     }
   }
-  cacheListTemp.clear();
   for (  cgCache cache : weHaveStaticMaps) {
     try {
       refreshCache(cache);
