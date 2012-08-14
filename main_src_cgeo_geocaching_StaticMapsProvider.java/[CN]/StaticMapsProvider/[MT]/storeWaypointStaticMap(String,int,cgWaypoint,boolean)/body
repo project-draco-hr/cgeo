@@ -1,4 +1,12 @@
 {
+  if (geocode == null) {
+    Log.e("storeWaypointStaticMap - missing input parameter geocode");
+    return;
+  }
+  if (waypoint == null) {
+    Log.e("storeWaypointStaticMap - missing input parameter waypoint");
+    return;
+  }
   if (waypoint.getCoords() == null) {
     return;
   }
