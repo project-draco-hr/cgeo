@@ -1,24 +1,19 @@
 {
   removeGeoAndDir();
-  final List<cgCache> weHaveStaticMaps=new ArrayList<cgCache>(selected.size());
+  final List<cgCache> cachesWithStaticMaps=new ArrayList<cgCache>(selected.size());
   for (  cgCache cache : selected) {
     if (Settings.isStoreOfflineMaps() && StaticMapsProvider.hasStaticMapForCache(cache.getGeocode())) {
-      weHaveStaticMaps.add(cache);
+      cachesWithStaticMaps.add(cache);
       continue;
     }
-    try {
-      refreshCache(cache);
-    }
- catch (    InterruptedException e) {
-      Log.i(e.getMessage());
+    if (!refreshCache(cache)) {
+      cachesWithStaticMaps.clear();
+      break;
     }
   }
-  for (  cgCache cache : weHaveStaticMaps) {
-    try {
-      refreshCache(cache);
-    }
- catch (    InterruptedException e) {
-      Log.i(e.getMessage());
+  for (  cgCache cache : cachesWithStaticMaps) {
+    if (!refreshCache(cache)) {
+      break;
     }
   }
   handler.sendEmptyMessage(MSG_RESTART_GEO_AND_DIR);

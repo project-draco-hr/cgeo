@@ -24,10 +24,12 @@
     yield();
   }
  catch (  InterruptedException e) {
-    throw e;
+    Log.i(e.getMessage());
+    return false;
   }
 catch (  Exception e) {
     Log.e("cgeocaches.LoadDetailsThread: " + e.toString());
   }
   last=System.currentTimeMillis();
+  return true;
 }
