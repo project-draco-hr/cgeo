@@ -1,8 +1,0 @@
-{
-  final Date date=dateFormat.parse(user.getString("located"));
-  final String username=user.getString("user");
-  final Geopoint coords=new Geopoint(user.getDouble("latitude"),user.getDouble("longitude"));
-  final String action=user.getString("action");
-  final String client=user.getString("client");
-  return new Go4CacheUser(username,coords,date,action,client);
-}

@@ -10,12 +10,4 @@
     loadTimer=new LoadTimer();
     loadTimer.start();
   }
-  if (Settings.isPublicLoc()) {
-    if (go4CacheTimer != null) {
-      go4CacheTimer.stopIt();
-      go4CacheTimer=null;
-    }
-    go4CacheTimer=new Go4CacheTimer();
-    go4CacheTimer.start();
-  }
 }

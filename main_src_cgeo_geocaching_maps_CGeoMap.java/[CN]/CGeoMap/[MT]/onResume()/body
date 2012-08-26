@@ -1,6 +1,5 @@
 {
   super.onResume();
-  app.setAction(StringUtils.defaultIfBlank(geocodeIntent,null));
   addGeoDirObservers();
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
     for (    String geocode : dirtyCaches) {
