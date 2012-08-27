@@ -1,3 +1,4 @@
 {
-  return new File[]{new File(Environment.getExternalStorageDirectory(),"gpx")};
+  String gpxImportDir=Settings.getGpxImportDir();
+  return new File[]{new File(gpxImportDir)};
 }
