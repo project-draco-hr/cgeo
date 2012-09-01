@@ -21,4 +21,14 @@
     gpxExportDir.setText(Settings.getGpxExportDir());
     gpxExportDir.requestFocus();
   }
+  if (requestCode == SELECT_IMPGPXDIR_REQUEST) {
+    if (resultCode == RESULT_OK) {
+      if (data.hasExtra("chosenDir")) {
+        Settings.setGpxImportDir(data.getStringExtra("chosenDir"));
+      }
+    }
+    EditText gpxImportDir=(EditText)findViewById(R.id.gpx_importdir);
+    gpxImportDir.setText(Settings.getGpxExportDir());
+    gpxImportDir.requestFocus();
+  }
 }
