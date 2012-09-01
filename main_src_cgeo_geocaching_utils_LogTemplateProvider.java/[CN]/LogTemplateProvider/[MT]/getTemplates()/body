@@ -1,44 +1,61 @@
 {
-  if (templates == null) {
-    templates=new LogTemplate[]{new LogTemplate("DATE",R.string.init_signature_template_date){
-      @Override public String getValue(      final boolean offline){
-        return Formatter.formatFullDate(System.currentTimeMillis());
-      }
+  ArrayList<LogTemplate> templates=new ArrayList<LogTemplateProvider.LogTemplate>();
+  templates.add(new LogTemplate("DATE",R.string.init_signature_template_date){
+    @Override public String getValue(    final LogContext context){
+      return Formatter.formatFullDate(System.currentTimeMillis());
     }
-,new LogTemplate("TIME",R.string.init_signature_template_time){
-      @Override public String getValue(      final boolean offline){
-        return Formatter.formatTime(System.currentTimeMillis());
-      }
-    }
-,new LogTemplate("DATETIME",R.string.init_signature_template_datetime){
-      @Override public String getValue(      final boolean offline){
-        final long currentTime=System.currentTimeMillis();
-        return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
-      }
-    }
-,new LogTemplate("USER",R.string.init_signature_template_user){
-      @Override public String getValue(      final boolean offline){
-        return Settings.getUsername();
-      }
-    }
-,new LogTemplate("NUMBER",R.string.init_signature_template_number){
-      @Override public String getValue(      final boolean offline){
-        int current=Login.getActualCachesFound();
-        if (current == 0) {
-          if (offline) {
-            return "";
-          }
-          final String page=Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/"));
-          current=parseFindCount(page);
-        }
-        String findCount="";
-        if (current >= 0) {
-          findCount=String.valueOf(current + 1);
-        }
-        return findCount;
-      }
-    }
-};
   }
+);
+  templates.add(new LogTemplate("TIME",R.string.init_signature_template_time){
+    @Override public String getValue(    final LogContext context){
+      return Formatter.formatTime(System.currentTimeMillis());
+    }
+  }
+);
+  templates.add(new LogTemplate("DATETIME",R.string.init_signature_template_datetime){
+    @Override public String getValue(    final LogContext context){
+      final long currentTime=System.currentTimeMillis();
+      return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
+    }
+  }
+);
+  templates.add(new LogTemplate("USER",R.string.init_signature_template_user){
+    @Override public String getValue(    final LogContext context){
+      return Settings.getUsername();
+    }
+  }
+);
+  templates.add(new LogTemplate("NUMBER",R.string.init_signature_template_number){
+    @Override public String getValue(    final LogContext context){
+      int current=Login.getActualCachesFound();
+      if (current == 0) {
+        if (context.isOffline()) {
+          return "";
+        }
+        final String page=Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/"));
+        current=parseFindCount(page);
+      }
+      String findCount="";
+      if (current >= 0) {
+        findCount=String.valueOf(current + 1);
+      }
+      return findCount;
+    }
+  }
+);
+  templates.add(new LogTemplate("OWNER",R.string.init_signature_template_owner){
+    @Override public String getValue(    final LogContext context){
+      cgTrackable trackable=context.getTrackable();
+      if (trackable != null) {
+        return trackable.getOwner();
+      }
+      cgCache cache=context.getCache();
+      if (cache != null) {
+        return cache.getOwnerDisplayName();
+      }
+      return "";
+    }
+  }
+);
   return templates;
 }

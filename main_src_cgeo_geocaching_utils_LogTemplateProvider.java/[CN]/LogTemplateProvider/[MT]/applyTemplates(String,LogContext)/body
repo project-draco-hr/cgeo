@@ -4,7 +4,7 @@
   }
   String result=signature;
   for (  LogTemplate template : getTemplates()) {
-    result=template.apply(result,offline);
+    result=template.apply(result,context);
   }
   return result;
 }

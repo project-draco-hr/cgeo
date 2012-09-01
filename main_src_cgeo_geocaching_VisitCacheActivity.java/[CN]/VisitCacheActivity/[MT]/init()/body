@@ -13,7 +13,7 @@
     updatePostButtonText();
   }
  else   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
-    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),false),false);
+    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),new LogContext(cache)),false);
   }
   if (!possibleLogTypes.contains(typeSelected)) {
     if (alreadyFound) {

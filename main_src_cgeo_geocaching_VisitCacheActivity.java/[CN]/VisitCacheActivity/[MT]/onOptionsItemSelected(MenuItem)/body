@@ -1,7 +1,8 @@
 {
   final int id=item.getItemId();
   if (id == MENU_SIGNATURE) {
-    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),false),true);
+    final LogContext logContext=new LogContext(cache);
+    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),logContext),true);
     return true;
   }
   if (id >= 10 && id <= 19) {
@@ -14,7 +15,8 @@
   }
   final LogTemplate template=LogTemplateProvider.getTemplate(id);
   if (template != null) {
-    insertIntoLog(template.getValue(false),true);
+    final LogContext logContext=new LogContext(cache);
+    insertIntoLog(template.getValue(logContext),true);
     return true;
   }
   return false;
