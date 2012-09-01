@@ -1,5 +1,5 @@
 {
-  if (getLaunchIntent() != null) {
+  if (ProcessUtils.isInstalled(packageName)) {
     return true;
   }
   return cgeo.isIntentAvailable(intent);

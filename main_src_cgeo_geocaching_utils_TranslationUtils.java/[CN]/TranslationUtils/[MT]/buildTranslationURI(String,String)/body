@@ -1,3 +1,7 @@
 {
-  return translationWebsite + translationForceClassicMode + translationAutoSelect+ translationFieldSeparator+ toLang+ translationFieldSeparator+ URLEncoder.encode(Html.fromHtml(text).toString());
+  String content=URLEncoder.encode(text);
+  if (ProcessUtils.isInstalled(TRANSLATION_APP)) {
+    content=content.replace("+","%20");
+  }
+  return translationWebsite + translationForceClassicMode + translationAutoSelect+ translationFieldSeparator+ toLang+ translationFieldSeparator+ content;
 }

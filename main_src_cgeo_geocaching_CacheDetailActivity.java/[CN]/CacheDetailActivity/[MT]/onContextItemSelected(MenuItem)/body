@@ -14,10 +14,10 @@ case MENU_FIELD_COPY:
     showToast(res.getString(R.string.clipboard_copy_ok));
   return true;
 case MENU_FIELD_TRANSLATE:
-TranslationUtils.startActivityTranslate(this,Locale.getDefault().getLanguage(),clickedItemText.toString());
+TranslationUtils.startActivityTranslate(this,Locale.getDefault().getLanguage(),HtmlUtils.extractText(clickedItemText));
 return true;
 case MENU_FIELD_TRANSLATE_EN:
-TranslationUtils.startActivityTranslate(this,Locale.ENGLISH.getLanguage(),clickedItemText.toString());
+TranslationUtils.startActivityTranslate(this,Locale.ENGLISH.getLanguage(),HtmlUtils.extractText(clickedItemText));
 return true;
 case MENU_FIELD_SHARE:
 final Intent intent=new Intent(Intent.ACTION_SEND);
