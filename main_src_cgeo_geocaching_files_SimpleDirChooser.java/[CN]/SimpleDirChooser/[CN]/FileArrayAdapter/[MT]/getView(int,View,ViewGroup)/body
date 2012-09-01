@@ -1,19 +1,19 @@
 {
   View v=convertView;
   if (v == null) {
-    LayoutInflater vi=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    LayoutInflater vi=(LayoutInflater)content.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     v=vi.inflate(id,null);
   }
-  final Option o=items.get(position);
-  if (o != null) {
+  final Option option=items.get(position);
+  if (option != null) {
     TextView t1=(TextView)v.findViewById(R.id.TextView01);
     if (t1 != null) {
       t1.setOnClickListener(new OnTextViewClickListener(position));
-      t1.setText(o.getName());
+      t1.setText(option.getName());
     }
     CheckBox check=(CheckBox)v.findViewById(R.id.CheckBox);
     if (check != null) {
-      check.setOnClickListener(new OnCheckBoxClickListener(o.getName()));
+      check.setOnClickListener(new OnCheckBoxClickListener(option.getName()));
     }
   }
   return v;

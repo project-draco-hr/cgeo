@@ -273,7 +273,7 @@
     @Override public void onClick(    View v){
       Intent dirChooser=new Intent(SettingsActivity.this,SimpleDirChooser.class);
       dirChooser.putExtra(SimpleDirChooser.START_DIR,Settings.getGpxExportDir());
-      startActivityForResult(dirChooser,SELECT_GPXDIR_REQUEST);
+      startActivityForResult(dirChooser,SELECT_GPX_EXPORT_REQUEST);
     }
   }
 );
@@ -284,7 +284,7 @@
     @Override public void onClick(    View v){
       Intent dirChooser=new Intent(SettingsActivity.this,SimpleDirChooser.class);
       dirChooser.putExtra(SimpleDirChooser.START_DIR,Settings.getGpxImportDir());
-      startActivityForResult(dirChooser,SELECT_IMPGPXDIR_REQUEST);
+      startActivityForResult(dirChooser,SELECT_GPX_IMPORT_REQUEST);
     }
   }
 );

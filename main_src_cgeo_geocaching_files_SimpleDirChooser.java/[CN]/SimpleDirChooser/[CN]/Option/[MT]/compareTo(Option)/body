@@ -1,6 +1,6 @@
 {
-  if (o != null && this.name != null) {
-    return this.name.toLowerCase().compareTo(o.getName().toLowerCase());
+  if (other != null && this.name != null) {
+    return String.CASE_INSENSITIVE_ORDER.compare(this.name,other.getName());
   }
   throw new IllegalArgumentException("");
 }

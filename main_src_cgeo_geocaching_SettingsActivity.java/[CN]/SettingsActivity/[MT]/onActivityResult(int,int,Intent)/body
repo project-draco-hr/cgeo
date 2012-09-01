@@ -11,24 +11,20 @@
     }
     initMapfileEdittext(true);
   }
-  if (requestCode == SELECT_GPXDIR_REQUEST) {
-    if (resultCode == RESULT_OK) {
-      if (data.hasExtra("chosenDir")) {
-        Settings.setGpxExportDir(data.getStringExtra("chosenDir"));
+  if (requestCode == SELECT_GPX_EXPORT_REQUEST) {
+    checkDirectory(resultCode,data,R.id.gpx_exportdir,new RunnableWithArgument<String>(){
+      @Override public void run(      String directory){
+        Settings.setGpxExportDir(directory);
       }
     }
-    EditText gpxExportDir=(EditText)findViewById(R.id.gpx_exportdir);
-    gpxExportDir.setText(Settings.getGpxExportDir());
-    gpxExportDir.requestFocus();
+);
   }
-  if (requestCode == SELECT_IMPGPXDIR_REQUEST) {
-    if (resultCode == RESULT_OK) {
-      if (data.hasExtra("chosenDir")) {
-        Settings.setGpxImportDir(data.getStringExtra("chosenDir"));
+  if (requestCode == SELECT_GPX_IMPORT_REQUEST) {
+    checkDirectory(resultCode,data,R.id.gpx_importdir,new RunnableWithArgument<String>(){
+      @Override public void run(      String directory){
+        Settings.setGpxImportDir(directory);
       }
     }
-    EditText gpxImportDir=(EditText)findViewById(R.id.gpx_importdir);
-    gpxImportDir.setText(Settings.getGpxExportDir());
-    gpxImportDir.requestFocus();
+);
   }
 }

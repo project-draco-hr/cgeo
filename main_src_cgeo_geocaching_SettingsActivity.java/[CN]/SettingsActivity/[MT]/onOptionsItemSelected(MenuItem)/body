@@ -1,11 +1,9 @@
 {
   if (item.getItemId() == 0) {
-    boolean status;
     ((EditText)findViewById(R.id.username)).setText("");
     ((EditText)findViewById(R.id.password)).setText("");
     ((EditText)findViewById(R.id.passvote)).setText("");
-    status=saveValues();
-    if (status) {
+    if (saveValues()) {
       showToast(res.getString(R.string.init_cleared));
     }
  else {

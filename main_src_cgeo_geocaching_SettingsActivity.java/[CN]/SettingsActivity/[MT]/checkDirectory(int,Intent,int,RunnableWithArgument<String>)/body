@@ -1,0 +1,11 @@
+{
+  if (resultCode == RESULT_OK) {
+    if (data.hasExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR)) {
+      final String directory=data.getStringExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR);
+      runnableSetDir.run(directory);
+      EditText directoryText=(EditText)findViewById(textField);
+      directoryText.setText(directory);
+      directoryText.requestFocus();
+    }
+  }
+}

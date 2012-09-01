@@ -3,7 +3,7 @@
   final Bundle extras=getIntent().getExtras();
   String startDir=extras.getString(START_DIR);
   if (startDir == null) {
-    startDir="/sdcard";
+    startDir=Environment.getExternalStorageDirectory().getPath();
   }
  else {
     startDir=startDir.substring(0,startDir.lastIndexOf(File.separatorChar));
@@ -20,7 +20,7 @@
     @Override public void onClick(    View v){
       Intent intent=new Intent();
       String chosenDirName=File.separator + checkedText;
-      intent.putExtra("chosenDir",currentDir.getAbsolutePath() + chosenDirName);
+      intent.putExtra(EXTRA_CHOSEN_DIR,currentDir.getAbsolutePath() + chosenDirName);
       setResult(RESULT_OK,intent);
       finish();
     }
