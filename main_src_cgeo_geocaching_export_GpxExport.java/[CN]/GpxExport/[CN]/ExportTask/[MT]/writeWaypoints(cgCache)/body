@@ -23,10 +23,7 @@
   }
   for (  cgWaypoint wp : ownWaypoints) {
     maxPrefix++;
-    String prefix=String.valueOf(maxPrefix);
-    if (prefix.length() == 1) {
-      prefix="0" + prefix;
-    }
+    String prefix=StringUtils.leftPad(String.valueOf(maxPrefix),2,'0');
     writeCacheWaypoint(wp,prefix);
   }
 }
