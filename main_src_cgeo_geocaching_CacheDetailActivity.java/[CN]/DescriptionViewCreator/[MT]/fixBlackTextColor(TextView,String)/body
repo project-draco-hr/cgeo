@@ -1,10 +1,16 @@
 {
-  if (!Settings.isLightSkin()) {
-    if (-1 != StringUtils.indexOfAny(text,new String[]{"color=\"#000000","color=\"black"})) {
-      view.setBackgroundResource(color.darker_gray);
-    }
+  if (Settings.isLightSkin()) {
+    return;
+  }
+  int backcolor=color.black;
+  if (-1 != StringUtils.indexOfAny(text,new String[]{"color=\"black","color=\"#000080\""})) {
+    backcolor=color.darker_gray;
+  }
  else {
-      view.setBackgroundResource(color.black);
+    Matcher matcher=DARK_COLOR_PATTERN.matcher(text);
+    if (matcher.find()) {
+      backcolor=color.darker_gray;
     }
   }
+  view.setBackgroundResource(backcolor);
 }
