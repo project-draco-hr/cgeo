@@ -8,14 +8,14 @@
     }
   }
  else   if (viewId == R.id.changebutton) {
-    final int textId=((TextView)findViewById(viewId)).getId();
+    final int textId=findViewById(viewId).getId();
     menu.setHeaderTitle(res.getString(R.string.log_tb_changeall));
     for (    LogTypeTrackable logType : LogTypeTrackable.values()) {
       menu.add(textId,logType.id,0,res.getString(logType.resourceId));
     }
   }
  else {
-    final int realViewId=((LinearLayout)findViewById(viewId)).getId();
+    final int realViewId=findViewById(viewId).getId();
     for (    final TrackableLog tb : trackables) {
       if (tb.id == realViewId) {
         menu.setHeaderTitle(tb.name);

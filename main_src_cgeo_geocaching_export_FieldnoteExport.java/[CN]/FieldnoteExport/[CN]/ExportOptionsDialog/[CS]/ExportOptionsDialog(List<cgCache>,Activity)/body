@@ -10,7 +10,7 @@
     }
   }
 );
-  ((Button)layout.findViewById(R.id.export)).setOnClickListener(new View.OnClickListener(){
+  layout.findViewById(R.id.export).setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       dismiss();
       new ExportTask(caches,activity,uploadOption.isChecked(),onlyNewOption.isChecked()).execute((Void)null);
