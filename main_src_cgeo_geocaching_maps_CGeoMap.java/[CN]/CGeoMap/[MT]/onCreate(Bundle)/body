@@ -27,6 +27,8 @@
   if (savedInstanceState != null) {
     currentSourceId=savedInstanceState.getInt(BUNDLE_MAP_SOURCE,Settings.getMapSource());
     mapStateIntent=savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
+    mapMode=Enum.valueOf(MapMode.class,savedInstanceState.getString(BUNDLE_MAP_MODE));
+    Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE);
   }
  else {
     currentSourceId=Settings.getMapSource();
