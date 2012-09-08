@@ -52,7 +52,6 @@ threadPure=new LoadByHistoryThread();
 threadPure.start();
 break;
 case NEAREST:
-String action="pending";
 title=res.getString(R.string.caches_nearby);
 setTitle(title);
 showProgress(true);
@@ -62,7 +61,6 @@ thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case COORDINATE:
-action="planning";
 title=coords.toString();
 setTitle(title);
 showProgress(true);
@@ -82,7 +80,6 @@ thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case ADDRESS:
-action="planning";
 final String address=extras.getString(EXTRAS_ADDRESS);
 if (StringUtils.isNotBlank(address)) {
 title=address;
@@ -95,7 +92,6 @@ showProgress(true);
 showFooterLoadingCaches();
 thread=new LoadByCoordsThread(coords);
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
-thread.start();
 break;
 case USERNAME:
 title=username;

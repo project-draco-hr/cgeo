@@ -2,7 +2,7 @@
   removeGeoAndDir();
   final List<cgCache> cachesWithStaticMaps=new ArrayList<cgCache>(selected.size());
   for (  cgCache cache : selected) {
-    if (Settings.isStoreOfflineMaps() && StaticMapsProvider.hasStaticMapForCache(cache.getGeocode())) {
+    if (Settings.isStoreOfflineMaps() && cache.hasStaticMap()) {
       cachesWithStaticMaps.add(cache);
       continue;
     }
