@@ -1,4 +1,6 @@
 {
   cacheList.clear();
-  cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+  if (search != null) {
+    cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+  }
 }
