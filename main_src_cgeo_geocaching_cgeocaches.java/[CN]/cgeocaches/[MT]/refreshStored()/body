@@ -7,11 +7,8 @@
   if (etaTime < 1) {
     message=res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
   }
- else   if (etaTime == 1) {
-    message=res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getString(R.string.caches_eta_min);
-  }
  else {
-    message=res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getString(R.string.caches_eta_mins);
+    message=res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getQuantityString(R.plurals.caches_eta_mins,etaTime);
   }
   progress.show(this,null,message,ProgressDialog.STYLE_HORIZONTAL,loadDetailsHandler.obtainMessage(MSG_CANCEL));
   progress.setMaxProgressAndReset(detailTotal);
