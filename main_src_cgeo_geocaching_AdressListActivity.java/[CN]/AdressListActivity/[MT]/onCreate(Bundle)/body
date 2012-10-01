@@ -20,7 +20,12 @@
         return geocoder.getFromLocationName(keyword,20);
       }
  catch (      Exception e) {
-        Log.e("AdressListActivity.doInBackground",e);
+        if (StringUtils.containsIgnoreCase(e.getMessage(),"Service not Available")) {
+          Log.i("No geocoder available");
+        }
+ else {
+          Log.e("AdressListActivity.doInBackground",e);
+        }
         return null;
       }
     }
@@ -32,8 +37,8 @@
         }
       }
  else {
-        showToast(res.getString(R.string.err_search_address_no_match));
         finish();
+        cgeocaches.startActivityAddress(AdressListActivity.this,null,keyword);
       }
     }
   }

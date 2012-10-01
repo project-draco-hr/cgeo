@@ -90,8 +90,14 @@ title=coords.toString();
 setTitle(title);
 showProgress(true);
 showFooterLoadingCaches();
+if (coords != null) {
 thread=new LoadByCoordsThread(coords);
+}
+ else {
+thread=new LoadByAddressThread(address);
+}
 thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
+thread.start();
 break;
 case USERNAME:
 title=username;
