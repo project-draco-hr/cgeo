@@ -1,4 +1,5 @@
 {
+  if (waypoint == null)   return false;
   String geocode=waypoint.getGeocode();
   int id=waypoint.getId();
   if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode,null)) {
