@@ -23,7 +23,7 @@
     holder.count.setVisibility(View.GONE);
   }
  else {
-    holder.count.setText(res.getQuantityText(R.plurals.cache_counts,log.found));
+    holder.count.setText(log.found + " " + res.getQuantityText(R.plurals.cache_counts,log.found));
   }
   if (BaseUtils.containsHtml(log.log)) {
     holder.text.setText(Html.fromHtml(log.log,new HtmlImage(cache.getGeocode(),false,cache.getListId(),false),null),TextView.BufferType.SPANNABLE);
