@@ -25,11 +25,13 @@
  else {
     holder.count.setText(log.found + " " + res.getQuantityText(R.plurals.cache_counts,log.found));
   }
-  if (BaseUtils.containsHtml(log.log)) {
-    holder.text.setText(Html.fromHtml(log.log,new HtmlImage(cache.getGeocode(),false,cache.getListId(),false),null),TextView.BufferType.SPANNABLE);
+  String logText=log.log;
+  if (BaseUtils.containsHtml(logText)) {
+    logText=removeColors(logText);
+    holder.text.setText(Html.fromHtml(logText,new HtmlImage(cache.getGeocode(),false,cache.getListId(),false),null),TextView.BufferType.SPANNABLE);
   }
  else {
-    holder.text.setText(log.log);
+    holder.text.setText(logText);
   }
   if (log.hasLogImages()) {
     holder.images.setText(log.getImageTitles());

@@ -1,0 +1,7 @@
+{
+  if (Settings.getPlainLogs()) {
+    Matcher matcher=PATTERN_REMOVE_COLORS.matcher(log);
+    return matcher.replaceAll("");
+  }
+  return log;
+}
