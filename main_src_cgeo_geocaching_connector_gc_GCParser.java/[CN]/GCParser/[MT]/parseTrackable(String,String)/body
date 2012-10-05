@@ -61,7 +61,7 @@
   if (null != distance) {
     trackable.setDistance(DistanceParser.parseDistance(distance,Settings.isUseMetricUnits()));
   }
-  trackable.setGoal(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GOAL,true,trackable.getGoal()));
+  trackable.setGoal(convertLinks(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GOAL,true,trackable.getGoal())));
   try {
     final Matcher matcherDetailsImage=GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE.matcher(page);
     if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
@@ -71,7 +71,7 @@
         trackable.setImage(image);
       }
       if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details,"No additional details available.")) {
-        trackable.setDetails(details);
+        trackable.setDetails(convertLinks(details));
       }
     }
   }

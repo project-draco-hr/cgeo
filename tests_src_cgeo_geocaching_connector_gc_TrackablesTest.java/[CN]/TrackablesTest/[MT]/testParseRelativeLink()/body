@@ -1,0 +1,9 @@
+{
+  final cgTrackable trackable=GCParser.parseTrackable(getFileContent(R.raw.tb4cwjx),null);
+  assertNotNull(trackable);
+  assertEquals("The Golden Lisa",trackable.getName());
+  final String goal=trackable.getGoal();
+  assertNotNull(goal);
+  assertFalse(goal.contains(".."));
+  assertTrue(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\""));
+}
