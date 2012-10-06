@@ -1,8 +1,0 @@
-{
-  final SubMenu subMenu=menu.addSubMenu(0,0,0,res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
-  for (  LogTemplate template : LogTemplateProvider.getTemplates()) {
-    subMenu.add(0,template.getItemId(),0,template.getResourceId());
-  }
-  subMenu.add(0,MENU_SIGNATURE,0,res.getString(R.string.init_signature));
-  return true;
-}

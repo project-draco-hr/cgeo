@@ -1,22 +1,14 @@
 {
-  final int id=item.getItemId();
-  if (id == MENU_SIGNATURE) {
-    final LogContext logContext=new LogContext(cache);
-    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),logContext),true);
+  if (super.onOptionsItemSelected(item)) {
     return true;
   }
+  final int id=item.getItemId();
   if (id >= 10 && id <= 19) {
     rating=(id - 9) / 2.0;
     if (rating < 1) {
       rating=0;
     }
     updatePostButtonText();
-    return true;
-  }
-  final LogTemplate template=LogTemplateProvider.getTemplate(id);
-  if (template != null) {
-    final LogContext logContext=new LogContext(cache);
-    insertIntoLog(template.getValue(logContext),true);
     return true;
   }
   return false;

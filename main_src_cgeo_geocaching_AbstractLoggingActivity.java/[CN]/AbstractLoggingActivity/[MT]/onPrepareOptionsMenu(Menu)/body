@@ -1,0 +1,15 @@
+{
+  final boolean signatureAvailable=StringUtils.isNotBlank(Settings.getSignature());
+  menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
+  boolean smileyVisible=false;
+  final cgCache cache=getLogContext().getCache();
+  if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
+    smileyVisible=true;
+  }
+  final cgTrackable trackable=getLogContext().getTrackable();
+  if (trackable != null && ConnectorFactory.getConnector(trackable).equals(GCConnector.getInstance())) {
+    smileyVisible=true;
+  }
+  menu.findItem(MENU_SMILEY).setVisible(smileyVisible);
+  return true;
+}
