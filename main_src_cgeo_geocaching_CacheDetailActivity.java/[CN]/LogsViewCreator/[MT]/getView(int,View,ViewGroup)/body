@@ -27,7 +27,7 @@
   }
   String logText=log.log;
   if (BaseUtils.containsHtml(logText)) {
-    logText=removeColors(logText);
+    logText=log.getDisplayText();
     holder.text.setText(Html.fromHtml(logText,new HtmlImage(cache.getGeocode(),false,cache.getListId(),false),null),TextView.BufferType.SPANNABLE);
   }
  else {
