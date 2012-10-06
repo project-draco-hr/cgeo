@@ -1,21 +1,7 @@
 {
   if (dialog == null) {
-    dialog=new ProgressDialog(context);
-    dialog.setProgress(0);
-    dialog.setCanceledOnTouchOutside(false);
-    this.progress=0;
-    dialog.setTitle(title);
-    dialog.setMessage(message);
+    createProgressDialog(context,title,message,cancelMessage);
     dialog.setProgressStyle(style);
-    if (cancelMessage != null) {
-      dialog.setCancelable(true);
-      dialog.setCancelMessage(cancelMessage);
-      dialog.setButton(DialogInterface.BUTTON_NEGATIVE,context.getResources().getString(android.R.string.cancel),cancelMessage);
-    }
- else {
-      dialog.setCancelable(false);
-    }
-    dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     dialog.show();
   }
 }

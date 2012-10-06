@@ -1,12 +1,7 @@
 {
   if (dialog == null) {
-    dialog=ProgressDialog.show(context,title,message,indeterminate,cancelMessage != null);
-    dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-    dialog.setProgress(0);
-    dialog.setCanceledOnTouchOutside(false);
-    this.progress=0;
-    if (cancelMessage != null) {
-      dialog.setCancelMessage(cancelMessage);
-    }
+    createProgressDialog(context,title,message,cancelMessage);
+    dialog.setIndeterminate(indeterminate);
+    dialog.show();
   }
 }
