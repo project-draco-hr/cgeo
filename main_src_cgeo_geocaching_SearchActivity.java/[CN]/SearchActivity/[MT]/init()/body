@@ -19,11 +19,7 @@
     }
   }
 );
-  final String[] geocodesInCache=app.geocodesInCache();
-  if (geocodesInCache != null) {
-    final ArrayAdapter<String> geocodesAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,geocodesInCache);
-    geocodeEdit.setAdapter(geocodesAdapter);
-  }
+  addHistoryEntries(geocodeEdit,app.geocodesInCache());
   final Button displayByGeocode=(Button)findViewById(R.id.display_geocode);
   displayByGeocode.setOnClickListener(new findByGeocodeListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.keyword),new Runnable(){
@@ -55,13 +51,14 @@
     }
   }
 );
-  EditText trackable=(EditText)findViewById(R.id.trackable);
+  AutoCompleteTextView trackable=(AutoCompleteTextView)findViewById(R.id.trackable);
   EditUtils.setActionListener(trackable,new Runnable(){
     @Override public void run(){
       findTrackableFn();
     }
   }
 );
+  addHistoryEntries(trackable,app.getTrackableCodes());
   disableSuggestions(trackable);
   final Button displayTrackable=(Button)findViewById(R.id.display_trackable);
   displayTrackable.setOnClickListener(new findTrackableListener());
