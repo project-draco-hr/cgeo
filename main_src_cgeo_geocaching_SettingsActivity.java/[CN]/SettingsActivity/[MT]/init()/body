@@ -243,6 +243,15 @@
     }
   }
 );
+  final CheckBox useNativeUserAgent=(CheckBox)findViewById(R.id.use_native_ua);
+  useNativeUserAgent.setChecked(Settings.getUseNativeUa());
+  useNativeUserAgent.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseNativeUa(!Settings.getUseNativeUa());
+      useNativeUserAgent.setChecked(Settings.getUseNativeUa());
+    }
+  }
+);
   EditText altitudeEdit=(EditText)findViewById(R.id.altitude);
   altitudeEdit.setText(String.valueOf(Settings.getAltCorrection()));
   String webDeviceName=Settings.getWebDeviceName();
