@@ -1,0 +1,46 @@
+{
+  String extStorage=Environment.getExternalStorageDirectory().getAbsolutePath();
+  List<File> storages=new ArrayList<File>();
+  storages.add(new File(extStorage));
+  File file=new File("/system/etc/vold.fstab");
+  if (file.canRead()) {
+    FileReader fr=null;
+    BufferedReader br=null;
+    try {
+      fr=new FileReader(file);
+      br=new BufferedReader(fr);
+      String s=br.readLine();
+      while (s != null) {
+        if (s.startsWith("dev_mount")) {
+          String[] tokens=StringUtils.split(s);
+          if (tokens.length >= 3) {
+            String path=tokens[2];
+            if (!extStorage.equals(path)) {
+              File directory=new File(path);
+              if (directory.exists() && directory.isDirectory()) {
+                storages.add(directory);
+              }
+            }
+          }
+        }
+        s=br.readLine();
+      }
+    }
+ catch (    IOException e) {
+      Log.e("Could not get additional mount points for user content. " + "Proceeding with external storage only (" + extStorage + ")");
+    }
+ finally {
+      try {
+        if (fr != null) {
+          fr.close();
+        }
+        if (br != null) {
+          br.close();
+        }
+      }
+ catch (      IOException e) {
+      }
+    }
+  }
+  return storages;
+}

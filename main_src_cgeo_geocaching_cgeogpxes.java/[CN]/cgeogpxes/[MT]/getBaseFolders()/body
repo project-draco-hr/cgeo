@@ -1,4 +1,3 @@
 {
-  String gpxImportDir=Settings.getGpxImportDir();
-  return new File[]{new File(gpxImportDir)};
+  return Collections.singletonList(new File(Settings.getGpxImportDir()));
 }

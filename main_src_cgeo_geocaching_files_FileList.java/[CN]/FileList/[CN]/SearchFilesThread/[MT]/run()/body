@@ -6,7 +6,7 @@
       for (      final File dir : getBaseFolders()) {
         if (dir.exists() && dir.isDirectory()) {
           listDir(list,dir);
-          if (list.size() > 0) {
+          if (!list.isEmpty()) {
             loaded=true;
             break;
           }
@@ -14,7 +14,7 @@
       }
       if (!loaded) {
         changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler,MSG_SEARCH_WHOLE_SD_CARD,Environment.getExternalStorageDirectory().getName()));
-        listDir(list,Environment.getExternalStorageDirectory());
+        listDirs(list,getStorages());
       }
     }
  else {
