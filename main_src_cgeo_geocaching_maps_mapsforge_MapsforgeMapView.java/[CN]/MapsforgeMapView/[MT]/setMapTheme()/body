@@ -1,0 +1,14 @@
+{
+  String customRenderTheme=Settings.getCustomRenderThemeFile();
+  if (!StringUtils.isEmpty(customRenderTheme)) {
+    try {
+      setRenderTheme(new File(customRenderTheme));
+    }
+ catch (    FileNotFoundException e) {
+      Toast.makeText(getContext(),getContext().getResources().getString(R.string.warn_rendertheme_missing),Toast.LENGTH_LONG).show();
+    }
+  }
+ else {
+    setRenderTheme(DEFAULT_RENDER_THEME);
+  }
+}

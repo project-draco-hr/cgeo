@@ -34,6 +34,8 @@
  else {
       item.setTitle(res.getString(R.string.map_circles_show));
     }
+    item=menu.findItem(MENU_THEME_MODE);
+    item.setVisible(mapView.hasMapThemes());
     menu.findItem(MENU_AS_LIST).setEnabled(isLiveEnabled && !isLoading());
     menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveEnabled);
   }

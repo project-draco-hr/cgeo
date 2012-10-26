@@ -284,6 +284,16 @@
     }
   }
 );
+  initThemefolderEdittext(false);
+  Button selectThemefolder=(Button)findViewById(R.id.select_themefolder);
+  selectThemefolder.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Intent dirChooser=new Intent(SettingsActivity.this,SimpleDirChooser.class);
+      dirChooser.putExtra(SimpleDirChooser.START_DIR,Settings.getCustomRenderThemeBasefolder());
+      startActivityForResult(dirChooser,SELECT_THEMEFOLDER_REQUEST);
+    }
+  }
+);
   final EditText gpxExportDir=(EditText)findViewById(R.id.gpx_exportdir);
   gpxExportDir.setText(Settings.getGpxExportDir());
   Button selectGpxExportDir=(Button)findViewById(R.id.select_gpx_exportdir);

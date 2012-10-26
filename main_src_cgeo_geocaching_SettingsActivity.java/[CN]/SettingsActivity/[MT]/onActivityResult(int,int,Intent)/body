@@ -27,4 +27,12 @@
     }
 );
   }
+  if (requestCode == SELECT_THEMEFOLDER_REQUEST) {
+    checkDirectory(resultCode,data,R.id.themefolder,new RunnableWithArgument<String>(){
+      @Override public void run(      String directory){
+        Settings.setCustomRenderThemeBasefolder(directory);
+      }
+    }
+);
+  }
 }

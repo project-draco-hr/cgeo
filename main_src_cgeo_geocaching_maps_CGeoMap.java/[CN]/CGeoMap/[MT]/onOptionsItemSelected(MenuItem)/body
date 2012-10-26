@@ -72,6 +72,9 @@ overlayCaches.switchCircles();
 mapView.repaintRequired(overlayCaches);
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
+case MENU_THEME_MODE:
+selectMapTheme();
+return true;
 case MENU_AS_LIST:
 {
 cgeocaches.startActivityMap(activity,new SearchResult(getGeocodesForCachesInViewport()));
