@@ -75,7 +75,12 @@ cgeocaches.startActivityCoordinates(this,waypoint.getCoords());
 }
 break;
 default :
+{
+if (imagesList != null && imagesList.onContextItemSelected(item)) {
+return true;
+}
 return onOptionsItemSelected(item);
+}
 }
 return false;
 }

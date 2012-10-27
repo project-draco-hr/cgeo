@@ -7,6 +7,6 @@
  else {
     intent=new Intent(action,uri);
   }
-  List<ResolveInfo> list=packageManager.queryIntentActivities(intent,PackageManager.MATCH_DEFAULT_ONLY);
-  return list.size() > 0;
+  final List<ResolveInfo> list=packageManager.queryIntentActivities(intent,PackageManager.MATCH_DEFAULT_ONLY);
+  return !list.isEmpty();
 }

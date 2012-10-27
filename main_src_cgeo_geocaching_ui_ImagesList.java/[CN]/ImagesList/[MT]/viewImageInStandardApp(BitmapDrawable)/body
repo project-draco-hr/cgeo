@@ -1,0 +1,22 @@
+{
+  final File file=LocalStorage.getStorageFile(null,"temp.jpg",false,true);
+  FileOutputStream fos=null;
+  try {
+    fos=new FileOutputStream(file);
+    image.getBitmap().compress(CompressFormat.JPEG,100,fos);
+  }
+ catch (  Exception e) {
+    Log.e("ImagesActivity.handleMessage.onClick: " + e.toString());
+    return;
+  }
+ finally {
+    IOUtils.closeQuietly(fos);
+  }
+  final Intent intent=new Intent();
+  intent.setAction(android.content.Intent.ACTION_VIEW);
+  intent.setDataAndType(Uri.fromFile(file),"image/jpeg");
+  activity.startActivity(intent);
+  if (file.exists()) {
+    file.deleteOnExit();
+  }
+}

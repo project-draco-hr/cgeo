@@ -1,0 +1,29 @@
+{
+  if (image != null) {
+    bitmaps.add(image.getBitmap());
+    final ImageView imageView=(ImageView)inflater.inflate(R.layout.image_item,null);
+    final Rect bounds=image.getBounds();
+    imageView.setImageResource(R.drawable.image_not_loaded);
+    imageView.setClickable(true);
+    imageView.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View arg0){
+        viewImageInStandardApp(image);
+      }
+    }
+);
+    activity.registerForContextMenu(imageView);
+    imageView.setImageDrawable(image);
+    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+    imageView.setLayoutParams(new LayoutParams(bounds.width(),bounds.height()));
+    view.addView(imageView);
+    imageView.setId(image.hashCode());
+    images.put(imageView.getId(),img);
+  }
+synchronized (activity) {
+    countDone++;
+    progressDialog.setProgress(countDone);
+    if (progressDialog.getProgress() >= count) {
+      progressDialog.dismiss();
+    }
+  }
+}

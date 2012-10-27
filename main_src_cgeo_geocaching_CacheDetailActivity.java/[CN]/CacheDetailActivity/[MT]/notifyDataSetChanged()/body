@@ -14,7 +14,7 @@
     creator.notifyDataSetChanged();
   }
   if (StringUtils.isNotBlank(cache.getName())) {
-    setTitle(cache.getName() + " (" + cache.getGeocode().toUpperCase()+ ")");
+    setTitle(cache.getName() + " (" + cache.getGeocode().toUpperCase()+ ')');
   }
  else {
     setTitle(cache.getGeocode().toUpperCase());
@@ -23,6 +23,7 @@
   pageOrder.clear();
   pageOrder.add(Page.WAYPOINTS);
   pageOrder.add(Page.DETAILS);
+  final int detailsIndex=pageOrder.size() - 1;
   pageOrder.add(Page.DESCRIPTION);
   if (CollectionUtils.isNotEmpty(cache.getLogs(true))) {
     pageOrder.add(Page.LOGS);
@@ -33,8 +34,11 @@
   if (CollectionUtils.isNotEmpty(cache.getInventory())) {
     pageOrder.add(Page.INVENTORY);
   }
+  if (CollectionUtils.isNotEmpty(cache.getImages())) {
+    pageOrder.add(Page.IMAGES);
+  }
   if (viewPager.getCurrentItem() < 0 || viewPager.getCurrentItem() >= viewPagerAdapter.getCount()) {
-    viewPager.setCurrentItem(1,false);
+    viewPager.setCurrentItem(detailsIndex,false);
   }
   viewPagerAdapter.notifyDataSetChanged();
   titleIndicator.notifyDataSetChanged();

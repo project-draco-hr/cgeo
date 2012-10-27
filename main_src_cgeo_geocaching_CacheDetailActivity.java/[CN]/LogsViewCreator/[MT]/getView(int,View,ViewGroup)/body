@@ -38,7 +38,7 @@
     holder.images.setVisibility(View.VISIBLE);
     holder.images.setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      View v){
-        cgeoimages.startActivityLogImages(CacheDetailActivity.this,cache.getGeocode(),new ArrayList<cgImage>(log.getLogImages()));
+        ImagesActivity.startActivityLogImages(CacheDetailActivity.this,cache.getGeocode(),new ArrayList<cgImage>(log.getLogImages()));
       }
     }
 );

@@ -1,3 +1,6 @@
 {
-  return spoilers;
+  if (spoilers == null) {
+    return Collections.emptyList();
+  }
+  return Collections.unmodifiableList(spoilers);
 }

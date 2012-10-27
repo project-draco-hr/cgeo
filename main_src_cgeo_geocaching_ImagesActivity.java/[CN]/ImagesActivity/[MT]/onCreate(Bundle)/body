@@ -1,0 +1,25 @@
+{
+  super.onCreate(savedInstanceState);
+  final Bundle extras=getIntent().getExtras();
+  String geocode=null;
+  if (extras != null) {
+    geocode=extras.getString(EXTRAS_GEOCODE);
+    imgType=(ImageType)extras.getSerializable(EXTRAS_TYPE);
+  }
+  if (extras == null || geocode == null) {
+    showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
+    finish();
+    return;
+  }
+  setTheme();
+  setContentView(R.layout.spoilers);
+  setTitle(res.getString(imgType.getTitle()));
+  imagesList=new ImagesList(this,geocode);
+  imageNames=extras.getParcelableArrayList(EXTRAS_IMAGES);
+  if (CollectionUtils.isEmpty(imageNames)) {
+    showToast(res.getString(R.string.warn_load_images));
+    finish();
+    return;
+  }
+  offline=app.isOffline(geocode,null) && (imgType == ImageType.SpoilerImages || Settings.isStoreLogImages());
+}

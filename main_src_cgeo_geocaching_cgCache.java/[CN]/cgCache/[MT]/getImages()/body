@@ -1,0 +1,8 @@
+{
+  List<cgImage> result=new ArrayList<cgImage>();
+  result.addAll(getSpoilers());
+  for (  LogEntry log : getLogs()) {
+    result.addAll(log.getLogImages());
+  }
+  return result;
+}

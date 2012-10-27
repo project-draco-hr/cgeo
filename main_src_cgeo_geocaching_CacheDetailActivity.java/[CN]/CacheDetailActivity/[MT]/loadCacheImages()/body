@@ -1,0 +1,15 @@
+{
+  if (imagesList != null) {
+    return;
+  }
+  PageViewCreator creator=viewCreators.get(Page.IMAGES);
+  if (creator == null) {
+    return;
+  }
+  View imageView=creator.getView();
+  if (imageView == null) {
+    return;
+  }
+  imagesList=new ImagesList(CacheDetailActivity.this,cache.getGeocode());
+  imagesList.loadImages(imageView,cache.getImages(),ImageType.AllImages,false);
+}

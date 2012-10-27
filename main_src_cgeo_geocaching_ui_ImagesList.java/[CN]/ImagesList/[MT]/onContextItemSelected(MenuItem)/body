@@ -1,0 +1,14 @@
+{
+switch (item.getItemId()) {
+case MENU_FILE:
+    viewImageInStandardApp(currentDrawable);
+  return true;
+case MENU_BROWSER:
+if (currentImage != null) {
+  currentImage.openInBrowser(activity);
+}
+return true;
+default :
+return false;
+}
+}

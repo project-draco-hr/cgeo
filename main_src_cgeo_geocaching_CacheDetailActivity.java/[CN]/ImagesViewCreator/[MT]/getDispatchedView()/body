@@ -1,0 +1,10 @@
+{
+  if (cache == null) {
+    return null;
+  }
+  view=getLayoutInflater().inflate(R.layout.caches_images,null);
+  if (imagesList == null && viewPager.getCurrentItem() == pageOrder.indexOf(Page.IMAGES)) {
+    loadCacheImages();
+  }
+  return view;
+}
