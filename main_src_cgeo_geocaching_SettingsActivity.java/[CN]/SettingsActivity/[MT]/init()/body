@@ -289,7 +289,7 @@
   selectThemefolder.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       Intent dirChooser=new Intent(SettingsActivity.this,SimpleDirChooser.class);
-      dirChooser.putExtra(SimpleDirChooser.START_DIR,Settings.getCustomRenderThemeBasefolder());
+      dirChooser.putExtra(SimpleDirChooser.START_DIR,Settings.getCustomRenderThemeBaseFolder());
       startActivityForResult(dirChooser,SELECT_THEMEFOLDER_REQUEST);
     }
   }
