@@ -10,13 +10,13 @@
   final Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {
     mapMode=(MapMode)extras.get(EXTRAS_MAP_MODE);
+    isLiveEnabled=extras.getBoolean(EXTRAS_LIVE_ENABLED,false);
     searchIntent=(SearchResult)extras.getParcelable(EXTRAS_SEARCH);
     geocodeIntent=extras.getString(EXTRAS_GEOCODE);
     coordsIntent=(Geopoint)extras.getParcelable(EXTRAS_COORDS);
     waypointTypeIntent=WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
     mapStateIntent=extras.getIntArray(EXTRAS_MAPSTATE);
     mapTitle=extras.getString(EXTRAS_MAP_TITLE);
-    Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE);
   }
  else {
     mapMode=Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
@@ -27,11 +27,7 @@
   if (savedInstanceState != null) {
     currentSourceId=savedInstanceState.getInt(BUNDLE_MAP_SOURCE,Settings.getMapSource());
     mapStateIntent=savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
-    String lastMapmode=savedInstanceState.getString(BUNDLE_MAP_MODE);
-    if (lastMapmode != null) {
-      mapMode=Enum.valueOf(MapMode.class,lastMapmode);
-    }
-    Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE);
+    isLiveEnabled=savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED,false);
   }
  else {
     currentSourceId=Settings.getMapSource();
