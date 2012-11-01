@@ -19,7 +19,7 @@
       item.setTitle(res.getString(R.string.map_trail_show));
     }
     item=menu.findItem(MENU_MAP_LIVE);
-    if (mapMode == MapMode.LIVE_ONLINE) {
+    if (isLiveEnabled) {
       item.setTitle(res.getString(R.string.map_live_disable));
     }
  else {
@@ -34,8 +34,8 @@
  else {
       item.setTitle(res.getString(R.string.map_circles_show));
     }
-    menu.findItem(MENU_AS_LIST).setEnabled(isLiveMode() && !isLoading());
-    menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveMode());
+    menu.findItem(MENU_AS_LIST).setEnabled(isLiveEnabled && !isLoading());
+    menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveEnabled);
   }
  catch (  Exception e) {
     Log.e("cgeomap.onPrepareOptionsMenu: " + e);

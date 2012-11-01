@@ -6,8 +6,11 @@ case MENU_TRAIL_MODE:
   ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case MENU_MAP_LIVE:
-Settings.setLiveMap(!Settings.isLiveMap());
-mapMode=Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
+isLiveEnabled=!isLiveEnabled;
+if (mapMode == MapMode.LIVE_ONLINE || mapMode == MapMode.LIVE_OFFLINE) {
+Settings.setLiveMap(isLiveEnabled);
+mapMode=isLiveEnabled ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
+}
 liveChanged=true;
 lastSearchResult=null;
 searchIntent=null;

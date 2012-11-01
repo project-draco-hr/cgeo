@@ -1,10 +1,5 @@
 {
   outState.putInt(BUNDLE_MAP_SOURCE,currentSourceId);
   outState.putIntArray(BUNDLE_MAP_STATE,currentMapState());
-  if (isLiveMode()) {
-    outState.putString(BUNDLE_MAP_MODE,mapMode.name());
-  }
- else {
-    outState.putString(BUNDLE_MAP_MODE,null);
-  }
+  outState.putBoolean(BUNDLE_LIVE_ENABLED,isLiveEnabled);
 }
