@@ -19,7 +19,8 @@
     mapTitle=extras.getString(EXTRAS_MAP_TITLE);
   }
  else {
-    mapMode=Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
+    mapMode=MapMode.LIVE;
+    isLiveEnabled=Settings.isLiveMap();
   }
   if (StringUtils.isBlank(mapTitle)) {
     mapTitle=res.getString(R.string.map_map);
@@ -60,7 +61,7 @@
   mapView.getMapController().setZoom(Settings.getMapZoom());
   mapView.getMapController().setCenter(Settings.getMapCenter());
   if (null == mapStateIntent) {
-    followMyLocation=mapMode == MapMode.LIVE_OFFLINE || mapMode == MapMode.LIVE_ONLINE;
+    followMyLocation=mapMode == MapMode.LIVE;
   }
  else {
     followMyLocation=1 == mapStateIntent[3];
