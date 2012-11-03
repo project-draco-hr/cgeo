@@ -7,9 +7,8 @@ case MENU_TRAIL_MODE:
 return true;
 case MENU_MAP_LIVE:
 isLiveEnabled=!isLiveEnabled;
-if (mapMode == MapMode.LIVE_ONLINE || mapMode == MapMode.LIVE_OFFLINE) {
+if (mapMode == MapMode.LIVE) {
 Settings.setLiveMap(isLiveEnabled);
-mapMode=isLiveEnabled ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
 }
 liveChanged=true;
 lastSearchResult=null;

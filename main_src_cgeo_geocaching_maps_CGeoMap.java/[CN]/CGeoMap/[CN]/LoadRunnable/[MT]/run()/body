@@ -3,11 +3,13 @@
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     loadThreadRun=System.currentTimeMillis();
     SearchResult searchResult;
-    if (mapMode == MapMode.LIVE_ONLINE) {
-      searchResult=new SearchResult();
-    }
- else     if (mapMode == MapMode.LIVE_OFFLINE) {
-      searchResult=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
+    if (mapMode == MapMode.LIVE) {
+      if (isLiveEnabled) {
+        searchResult=new SearchResult();
+      }
+ else {
+        searchResult=new SearchResult(app.getStoredInViewport(viewport,Settings.getCacheType()));
+      }
     }
  else {
       searchResult=new SearchResult(searchIntent);

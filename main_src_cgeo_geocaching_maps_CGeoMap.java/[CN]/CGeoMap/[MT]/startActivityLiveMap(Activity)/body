@@ -1,6 +1,6 @@
 {
   final Intent mapIntent=newIntent(fromActivity);
-  mapIntent.putExtra(EXTRAS_MAP_MODE,Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE);
+  mapIntent.putExtra(EXTRAS_MAP_MODE,MapMode.LIVE);
   mapIntent.putExtra(EXTRAS_LIVE_ENABLED,Settings.isLiveMap());
   fromActivity.startActivity(mapIntent);
 }
