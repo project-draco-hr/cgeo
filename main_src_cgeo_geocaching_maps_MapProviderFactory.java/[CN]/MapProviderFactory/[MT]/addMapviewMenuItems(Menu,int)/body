@@ -1,0 +1,8 @@
+{
+  final int currentSource=Settings.getMapSource().getNumericalId();
+  for (int i=0; i < mapSources.size(); i++) {
+    final MapSource mapSource=mapSources.get(i);
+    final int id=mapSource.getNumericalId();
+    parentMenu.add(groupId,id,i,mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
+  }
+}

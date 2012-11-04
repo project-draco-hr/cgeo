@@ -1,0 +1,22 @@
+{
+  final String mapFile=Settings.getMapFile();
+  if (StringUtils.isEmpty(mapFile)) {
+    return Collections.emptyList();
+  }
+  try {
+    File directory=new File(mapFile).getParentFile();
+    ArrayList<String> mapFileList=new ArrayList<String>();
+    for (    File file : directory.listFiles()) {
+      if (file.getName().endsWith(".map")) {
+        if (MapsforgeMapProvider.isValidMapFile(file.getAbsolutePath())) {
+          mapFileList.add(file.getAbsolutePath());
+        }
+      }
+    }
+    return mapFileList;
+  }
+ catch (  Exception e) {
+    Log.e("Settings.getOfflineMaps: " + e);
+  }
+  return Collections.emptyList();
+}

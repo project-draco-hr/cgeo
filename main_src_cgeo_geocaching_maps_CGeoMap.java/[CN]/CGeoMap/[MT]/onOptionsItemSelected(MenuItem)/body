@@ -105,8 +105,8 @@ Settings.setLiveMapStrategy(Strategy.DETAILED);
 return true;
 }
 default :
-int mapSource=MapProviderFactory.getMapSourceFromMenuId(id);
-if (MapProviderFactory.isValidSourceId(mapSource)) {
+final MapSource mapSource=MapProviderFactory.getMapSource(id);
+if (mapSource != null) {
 item.setChecked(true);
 changeMapSource(mapSource);
 return true;

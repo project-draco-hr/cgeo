@@ -1,12 +1,9 @@
 {
   super.onPrepareOptionsMenu(menu);
-  for (  Integer mapSourceId : MapProviderFactory.getMapSources().keySet()) {
-    final MenuItem menuItem=menu.findItem(mapSourceId);
+  for (  MapSource mapSource : MapProviderFactory.getMapSources()) {
+    final MenuItem menuItem=menu.findItem(mapSource.getNumericalId());
     if (menuItem != null) {
-      final MapSource mapSource=MapProviderFactory.getMapSource(mapSourceId);
-      if (mapSource != null) {
-        menuItem.setEnabled(mapSource.isAvailable());
-      }
+      menuItem.setEnabled(mapSource.isAvailable());
     }
   }
   MenuItem item;

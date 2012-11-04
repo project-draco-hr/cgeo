@@ -3,13 +3,15 @@
   if (requestCode == SELECT_MAPFILE_REQUEST) {
     if (resultCode == RESULT_OK) {
       if (data.hasExtra("mapfile")) {
-        Settings.setMapFile(data.getStringExtra("mapfile"));
+        final String mapFile=data.getStringExtra("mapfile");
+        Settings.setMapFile(mapFile);
         if (!Settings.isValidMapFile(Settings.getMapFile())) {
           showToast(res.getString(R.string.warn_invalid_mapfile));
         }
       }
     }
-    initMapfileEdittext(true);
+    updateMapSourceMenu();
+    initMapDirectoryEdittext(true);
   }
   if (requestCode == SELECT_GPX_EXPORT_REQUEST) {
     checkDirectory(resultCode,data,R.id.gpx_exportdir,new RunnableWithArgument<String>(){

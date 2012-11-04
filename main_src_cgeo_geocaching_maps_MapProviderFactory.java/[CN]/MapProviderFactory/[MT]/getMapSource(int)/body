@@ -1,3 +1,8 @@
 {
-  return mapSources.get(sourceId);
+  for (  MapSource mapSource : mapSources) {
+    if (mapSource.getNumericalId() == id) {
+      return mapSource;
+    }
+  }
+  return null;
 }

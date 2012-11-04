@@ -1,6 +1,6 @@
 {
   MapGeneratorInternal newMapType=MapGeneratorInternal.MAPNIK;
-  final MapSource mapSource=MapProviderFactory.getMapSource(Settings.getMapSource());
+  final MapSource mapSource=Settings.getMapSource();
   if (mapSource instanceof MapsforgeMapSource) {
     newMapType=((MapsforgeMapSource)mapSource).getGenerator();
   }

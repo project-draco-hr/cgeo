@@ -26,12 +26,12 @@
     mapTitle=res.getString(R.string.map_map);
   }
   if (savedInstanceState != null) {
-    currentSourceId=savedInstanceState.getInt(BUNDLE_MAP_SOURCE,Settings.getMapSource());
+    currentSourceId=savedInstanceState.getInt(BUNDLE_MAP_SOURCE,Settings.getMapSource().getNumericalId());
     mapStateIntent=savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
     isLiveEnabled=savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED,false);
   }
  else {
-    currentSourceId=Settings.getMapSource();
+    currentSourceId=Settings.getMapSource().getNumericalId();
   }
   if (changeMapSource(Settings.getMapSource())) {
     return;

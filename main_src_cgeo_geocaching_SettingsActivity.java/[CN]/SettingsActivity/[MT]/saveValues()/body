@@ -3,7 +3,7 @@
   String passwordNew=StringUtils.trimToEmpty(((EditText)findViewById(R.id.password)).getText().toString());
   String passvoteNew=StringUtils.trimToEmpty(((EditText)findViewById(R.id.passvote)).getText().toString());
   String signatureNew=((EditText)findViewById(R.id.signature)).getText().toString();
-  String mapFileNew=StringUtils.trimToEmpty(((EditText)findViewById(R.id.mapfile)).getText().toString());
+  String mapDirectoryNew=StringUtils.trimToEmpty(((EditText)findViewById(R.id.map_directory)).getText().toString());
   String altitudeNew=StringUtils.trimToNull(((EditText)findViewById(R.id.altitude)).getText().toString());
   int altitudeNewInt=parseNumber(altitudeNew,0);
   TextView field=(TextView)findViewById(R.id.showwaypointsthreshold);
@@ -12,7 +12,7 @@
   final boolean status2=Settings.setGCvoteLogin(passvoteNew);
   final boolean status3=Settings.setSignature(signatureNew);
   final boolean status4=Settings.setAltCorrection(altitudeNewInt);
-  final boolean status5=Settings.setMapFile(mapFileNew);
+  final boolean status5=Settings.setMapFileDirectory(mapDirectoryNew);
   Settings.setShowWaypointsThreshold(waypointThreshold);
   String importNew=StringUtils.trimToEmpty(((EditText)findViewById(R.id.gpx_importdir)).getText().toString());
   String exportNew=StringUtils.trimToEmpty(((EditText)findViewById(R.id.gpx_exportdir)).getText().toString());

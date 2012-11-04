@@ -1,0 +1,14 @@
+{
+  Collection<String> mapSourceNames=new ArrayList<String>();
+  for (  MapSource mapSource : MapProviderFactory.getMapSources()) {
+    mapSourceNames.add(mapSource.getName());
+  }
+  Spinner mapSourceSelector=(Spinner)findViewById(R.id.mapsource);
+  ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_item,mapSourceNames.toArray(new String[mapSourceNames.size()]));
+  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+  mapSourceSelector.setAdapter(adapter);
+  final int index=MapProviderFactory.getMapSources().indexOf(Settings.getMapSource());
+  mapSourceSelector.setSelection(index);
+  mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
+  initMapDirectoryEdittext(false);
+}

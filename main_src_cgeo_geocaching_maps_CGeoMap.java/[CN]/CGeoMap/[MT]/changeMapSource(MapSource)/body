@@ -1,0 +1,13 @@
+{
+  final boolean restartRequired=!MapProviderFactory.isSameActivity(Settings.getMapSource(),mapSource);
+  Settings.setMapSource(mapSource);
+  currentSourceId=mapSource.getNumericalId();
+  if (restartRequired) {
+    mapRestart();
+  }
+ else   if (mapView != null) {
+    mapView.setMapSource();
+    ActivityMixin.invalidateOptionsMenu(activity);
+  }
+  return restartRequired;
+}

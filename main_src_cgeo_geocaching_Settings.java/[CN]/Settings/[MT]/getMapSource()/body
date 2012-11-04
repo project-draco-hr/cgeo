@@ -1,3 +1,8 @@
 {
-  return sharedPrefs.getInt(KEY_MAP_SOURCE,0);
+  final int id=getConvertedMapId();
+  final MapSource map=MapProviderFactory.getMapSource(id);
+  if (map != null) {
+    return map;
+  }
+  return MapProviderFactory.getDefaultSource();
 }

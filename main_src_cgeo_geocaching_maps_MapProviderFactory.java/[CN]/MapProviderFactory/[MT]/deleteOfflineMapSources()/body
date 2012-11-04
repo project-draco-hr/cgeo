@@ -1,0 +1,9 @@
+{
+  final ArrayList<MapSource> deletion=new ArrayList<MapSource>();
+  for (  MapSource mapSource : mapSources) {
+    if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
+      deletion.add(mapSource);
+    }
+  }
+  mapSources.removeAll(deletion);
+}

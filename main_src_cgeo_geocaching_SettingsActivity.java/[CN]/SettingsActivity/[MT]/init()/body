@@ -264,20 +264,9 @@
   }
   Button webAuth=(Button)findViewById(R.id.sendToCgeo_register);
   webAuth.setOnClickListener(new webAuth());
-  Collection<String> mapSourceNames=new ArrayList<String>();
-  for (  MapSource mapSource : MapProviderFactory.getMapSources().values()) {
-    mapSourceNames.add(mapSource.getName());
-  }
-  Spinner mapSourceSelector=(Spinner)findViewById(R.id.mapsource);
-  ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_item,mapSourceNames.toArray(new String[mapSourceNames.size()]));
-  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-  mapSourceSelector.setAdapter(adapter);
-  int mapsource=Settings.getMapSource();
-  mapSourceSelector.setSelection(MapProviderFactory.getSourceOrdinalFromId(mapsource));
-  mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
-  initMapfileEdittext(false);
-  Button selectMapfile=(Button)findViewById(R.id.select_mapfile);
-  selectMapfile.setOnClickListener(new View.OnClickListener(){
+  updateMapSourceMenu();
+  Button selectMapDirectory=(Button)findViewById(R.id.select_map_directory);
+  selectMapDirectory.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       Intent selectIntent=new Intent(SettingsActivity.this,cgSelectMapfile.class);
       startActivityForResult(selectIntent,SELECT_MAPFILE_REQUEST);
