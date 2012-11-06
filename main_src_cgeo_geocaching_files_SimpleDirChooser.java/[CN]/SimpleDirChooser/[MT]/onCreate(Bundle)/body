@@ -2,7 +2,7 @@
   super.onCreate(savedInstanceState);
   final Bundle extras=getIntent().getExtras();
   String startDir=extras.getString(START_DIR);
-  if (startDir == null) {
+  if (StringUtils.isBlank(startDir)) {
     startDir=Environment.getExternalStorageDirectory().getPath();
   }
  else {
