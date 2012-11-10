@@ -1,17 +1,19 @@
 {
+  final String geocode="GC31J2H";
+  removeCacheCompletely(geocode);
   File gc31j2h=new File(tempDir,"gc31j2h.gpx");
   copyResourceToFile(R.raw.gc31j2h,gc31j2h);
   GPXImporter.ImportGpxFileThread importThread=new GPXImporter.ImportGpxFileThread(gc31j2h,listId,importStepHandler,progressHandler);
   runImportThread(importThread);
-  assertEquals(5,importStepHandler.messages.size());
+  assertEquals(4,importStepHandler.messages.size());
   Iterator<Message> iMsg=importStepHandler.messages.iterator();
   assertEquals(GPXImporter.IMPORT_STEP_START,iMsg.next().what);
   assertEquals(GPXImporter.IMPORT_STEP_READ_FILE,iMsg.next().what);
-  assertEquals(GPXImporter.IMPORT_STEP_STORE_CACHES,iMsg.next().what);
   assertEquals(GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,iMsg.next().what);
   assertEquals(GPXImporter.IMPORT_STEP_FINISHED,iMsg.next().what);
-  SearchResult search=(SearchResult)importStepHandler.messages.get(4).obj;
-  assertEquals(Collections.singletonList("GC31J2H"),new ArrayList<String>(search.getGeocodes()));
-  cgCache cache=cgeoapplication.getInstance().loadCache("GC31J2H",LoadFlags.LOAD_CACHE_OR_DB);
+  SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
+  assertEquals(Collections.singletonList(geocode),new ArrayList<String>(search.getGeocodes()));
+  cgCache cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
+  assertTrue(cache.getWaypoints().isEmpty());
 }

@@ -1,10 +1,13 @@
 {
+  final String geocode="GC31J2H";
+  removeCacheCompletely(geocode);
   Uri uri=Uri.parse("android.resource://cgeo.geocaching.test/raw/gc31j2h");
   GPXImporter.ImportGpxAttachmentThread importThread=new GPXImporter.ImportGpxAttachmentThread(uri,getInstrumentation().getContext().getContentResolver(),listId,importStepHandler,progressHandler);
   runImportThread(importThread);
-  assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_CACHES,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
-  SearchResult search=(SearchResult)importStepHandler.messages.get(4).obj;
-  assertEquals(Collections.singletonList("GC31J2H"),new ArrayList<String>(search.getGeocodes()));
-  cgCache cache=cgeoapplication.getInstance().loadCache("GC31J2H",LoadFlags.LOAD_CACHE_OR_DB);
+  assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
+  SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
+  assertEquals(Collections.singletonList(geocode),new ArrayList<String>(search.getGeocodes()));
+  cgCache cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
+  assertTrue(cache.getWaypoints().isEmpty());
 }

@@ -1,7 +1,7 @@
 {
   assertNotNull(cache.getWaypoints());
   assertEquals(2,cache.getWaypoints().size());
-  cgWaypoint wp=cache.getWaypoints().get(0);
+  cgWaypoint wp=cache.getWaypoints().get(1);
   assertEquals("GC31J2H",wp.getGeocode());
   assertEquals("00",wp.getPrefix());
   assertEquals("---",wp.getLookup());
@@ -10,7 +10,7 @@
   assertEquals(WaypointType.PARKING,wp.getWaypointType());
   assertEquals(49.317517,wp.getCoords().getLatitude(),0.000001);
   assertEquals(8.545083,wp.getCoords().getLongitude(),0.000001);
-  wp=cache.getWaypoints().get(1);
+  wp=cache.getWaypoints().get(0);
   assertEquals("GC31J2H",wp.getGeocode());
   assertEquals("S1",wp.getPrefix());
   assertEquals("---",wp.getLookup());

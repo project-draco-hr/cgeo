@@ -3,9 +3,11 @@
   try {
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_START));
     caches=doImport();
-    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_CACHES,R.string.gpx_import_storing,caches.size()));
-    SearchResult search=storeParsedCaches(caches);
     Log.i("Imported successfully " + caches.size() + " caches.");
+    final SearchResult search=new SearchResult();
+    for (    cgCache cache : caches) {
+      search.addCache(cache);
+    }
     if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {
       importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_STATIC_MAPS,R.string.gpx_import_store_static_maps,search.getCount()));
       boolean finishedWithoutCancel=importStaticMaps(search);
