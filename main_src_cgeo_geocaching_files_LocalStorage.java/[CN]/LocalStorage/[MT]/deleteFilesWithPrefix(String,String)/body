@@ -1,5 +1,8 @@
 {
   final File[] filesToDelete=getFilesWithPrefix(geocode,prefix);
+  if (filesToDelete == null) {
+    return;
+  }
   for (  final File file : filesToDelete) {
     try {
       if (!file.delete()) {
