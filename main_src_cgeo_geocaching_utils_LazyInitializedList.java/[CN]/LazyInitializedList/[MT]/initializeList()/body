@@ -1,5 +1,9 @@
 {
   if (list == null) {
-    list=loadFromDatabase();
+synchronized (this) {
+      if (list == null) {
+        list=loadFromDatabase();
+      }
+    }
   }
 }
