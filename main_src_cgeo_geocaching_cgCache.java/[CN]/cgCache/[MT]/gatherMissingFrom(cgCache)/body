@@ -104,14 +104,16 @@
   if (myVote == 0) {
     myVote=other.myVote;
   }
-  if (attributes == null) {
-    attributes=other.attributes;
+  if (attributes.isEmpty()) {
+    attributes.set(other.attributes.get());
   }
-  if (waypoints == null) {
-    waypoints=other.waypoints;
+  if (waypoints.isEmpty()) {
+    waypoints.set(other.waypoints.get());
   }
  else {
-    cgWaypoint.mergeWayPoints(waypoints,other.getWaypoints(),waypoints == null || waypoints.isEmpty());
+    ArrayList<cgWaypoint> newPoints=new ArrayList<cgWaypoint>(waypoints.get());
+    cgWaypoint.mergeWayPoints(newPoints,other.getWaypoints(),false);
+    waypoints.set(newPoints);
   }
   if (spoilers == null) {
     spoilers=other.spoilers;
@@ -120,8 +122,8 @@
     inventory=other.inventory;
     inventoryItems=other.inventoryItems;
   }
-  if (CollectionUtils.isEmpty(logs)) {
-    logs=other.logs;
+  if (logs.isEmpty()) {
+    logs.set(other.logs.get());
   }
   if (logCounts.size() == 0) {
     logCounts=other.logCounts;

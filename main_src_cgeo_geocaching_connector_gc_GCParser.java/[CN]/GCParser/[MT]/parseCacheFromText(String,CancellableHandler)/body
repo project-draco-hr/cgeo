@@ -102,6 +102,7 @@
     final String attributesPre=BaseUtils.getMatch(page,GCConstants.PATTERN_ATTRIBUTES,true,null);
     if (null != attributesPre) {
       final Matcher matcherAttributesInside=GCConstants.PATTERN_ATTRIBUTESINSIDE.matcher(attributesPre);
+      final ArrayList<String> attributes=new ArrayList<String>();
       while (matcherAttributesInside.find()) {
         if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
           String attribute=matcherAttributesInside.group(2).toLowerCase();
@@ -113,9 +114,10 @@
               attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase();
             }
           }
-          cache.addAttribute(attribute);
+          attributes.add(attribute);
         }
       }
+      cache.setAttributes(attributes);
     }
   }
  catch (  Exception e) {
