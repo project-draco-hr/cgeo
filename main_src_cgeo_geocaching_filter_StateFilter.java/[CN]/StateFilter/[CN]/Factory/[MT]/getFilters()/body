@@ -4,6 +4,7 @@
   filters.add(new StateArchivedFilter());
   filters.add(new StateDisabledFilter());
   filters.add(new StatePremiumFilter());
+  filters.add(new StateNonPremiumFilter());
   filters.add(new StateOfflineLogFilter());
   Collections.sort(filters,new Comparator<StateFilter>(){
     @Override public int compare(    StateFilter filter1,    StateFilter filter2){
