@@ -5,7 +5,7 @@
   try {
     final File exportLocation=new File(Settings.getGpxExportDir());
     exportLocation.mkdirs();
-    final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+    final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
     exportFile=new File(Settings.getGpxExportDir() + File.separatorChar + "export_"+ fileNameDateFormat.format(new Date())+ ".gpx");
     gpx=new BufferedWriter(new FileWriter(exportFile));
     gpx.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
