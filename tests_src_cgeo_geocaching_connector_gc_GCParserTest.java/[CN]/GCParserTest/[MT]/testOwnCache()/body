@@ -1,9 +1,5 @@
 {
-  final String page=getFileContent(R.raw.own_cache);
-  SearchResult result=GCParser.parseCacheFromText(page,null);
-  assertNotNull(result);
-  assertFalse(result.isEmpty());
-  final cgCache cache=result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+  final cgCache cache=parseCache(R.raw.own_cache);
   assertNotNull(cache);
   assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
   assertEquals(1,cache.getSpoilers().size());

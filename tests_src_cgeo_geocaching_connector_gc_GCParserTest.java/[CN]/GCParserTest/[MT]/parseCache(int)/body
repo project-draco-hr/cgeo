@@ -1,0 +1,7 @@
+{
+  final String page=getFileContent(resourceId);
+  SearchResult result=GCParser.parseCacheFromText(page,null);
+  assertNotNull(result);
+  assertFalse(result.isEmpty());
+  return result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+}
