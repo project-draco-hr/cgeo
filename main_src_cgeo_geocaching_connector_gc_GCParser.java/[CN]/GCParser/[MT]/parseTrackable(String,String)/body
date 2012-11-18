@@ -3,6 +3,9 @@
     Log.e("GCParser.parseTrackable: No page given");
     return null;
   }
+  if (page.contains(GCConstants.ERROR_TB_DOES_NOT_EXIST) || page.contains(GCConstants.ERROR_TB_ARITHMETIC_OVERFLOW) || page.contains(GCConstants.ERROR_TB_ELEMENT_EXCEPTION)) {
+    return null;
+  }
   final cgTrackable trackable=new cgTrackable();
   trackable.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()).toUpperCase());
   trackable.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GUID,true,trackable.getGuid()));
