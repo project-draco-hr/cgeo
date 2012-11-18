@@ -42,7 +42,7 @@
       return;
     }
     if (Settings.isStoreLogImages()) {
-      for (      LogEntry log : cache.getLogs(true)) {
+      for (      LogEntry log : cache.getLogs()) {
         if (log.hasLogImages()) {
           for (          cgImage oneLogImg : log.getLogImages()) {
             imgGetter.getDrawable(oneLogImg.getUrl());

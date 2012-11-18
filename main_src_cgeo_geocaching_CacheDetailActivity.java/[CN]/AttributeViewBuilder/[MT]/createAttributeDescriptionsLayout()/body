@@ -2,8 +2,7 @@
   final LinearLayout descriptions=(LinearLayout)getLayoutInflater().inflate(R.layout.attribute_descriptions,null);
   final TextView attribView=(TextView)descriptions.getChildAt(0);
   final StringBuilder buffer=new StringBuilder();
-  final List<String> attributes=cache.getAttributes();
-  for (  String attributeName : attributes) {
+  for (  String attributeName : cache.getAttributes()) {
     final boolean enabled=CacheAttribute.isEnabled(attributeName);
     CacheAttribute attrib=CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
     if (attrib != CacheAttribute.UNKNOWN) {

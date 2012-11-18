@@ -1,11 +1,10 @@
 {
   String geocode=cache.getGeocode();
   database.delete(dbTableAttributes,"geocode = ?",new String[]{geocode});
-  final List<String> attributes=cache.getAttributes();
-  if (CollectionUtils.isNotEmpty(attributes)) {
+  if (cache.getAttributes().isNotEmpty()) {
     InsertHelper helper=new InsertHelper(database,dbTableAttributes);
     long timeStamp=System.currentTimeMillis();
-    for (    String attribute : attributes) {
+    for (    String attribute : cache.getAttributes()) {
       helper.prepareForInsert();
       helper.bind(ATTRIBUTES_GEOCODE,geocode);
       helper.bind(ATTRIBUTES_UPDATED,timeStamp);

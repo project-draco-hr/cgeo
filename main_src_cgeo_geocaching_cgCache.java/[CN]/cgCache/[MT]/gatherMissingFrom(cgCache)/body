@@ -105,13 +105,13 @@
     myVote=other.myVote;
   }
   if (attributes.isEmpty()) {
-    attributes.set(other.attributes.get());
+    attributes.set(other.attributes);
   }
   if (waypoints.isEmpty()) {
-    waypoints.set(other.waypoints.get());
+    waypoints.set(other.waypoints);
   }
  else {
-    ArrayList<cgWaypoint> newPoints=new ArrayList<cgWaypoint>(waypoints.get());
+    ArrayList<cgWaypoint> newPoints=new ArrayList<cgWaypoint>(waypoints.asList());
     cgWaypoint.mergeWayPoints(newPoints,other.getWaypoints(),false);
     waypoints.set(newPoints);
   }
@@ -123,7 +123,7 @@
     inventoryItems=other.inventoryItems;
   }
   if (logs.isEmpty()) {
-    logs.set(other.logs.get());
+    logs.set(other.logs);
   }
   if (logCounts.size() == 0) {
     logCounts=other.logCounts;

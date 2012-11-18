@@ -1,12 +1,9 @@
 {
-  if (allLogs) {
-    return logs.get();
-  }
   ArrayList<LogEntry> friendLogs=new ArrayList<LogEntry>();
-  for (  LogEntry log : logs.get()) {
+  for (  LogEntry log : logs) {
     if (log.friend) {
       friendLogs.add(log);
     }
   }
-  return friendLogs;
+  return Collections.unmodifiableList(friendLogs);
 }

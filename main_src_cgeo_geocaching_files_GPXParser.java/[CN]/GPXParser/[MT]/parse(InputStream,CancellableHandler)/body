@@ -221,7 +221,7 @@
             boolean attributeActive=Integer.parseInt(attrs.getValue("inc")) != 0;
             String internalId=CacheAttributeTranslator.getInternalId(attributeId,attributeActive);
             if (internalId != null) {
-              cache.addAttribute(internalId);
+              cache.getAttributes().add(internalId);
             }
           }
         }
@@ -345,7 +345,7 @@
     gcLog.setEndElementListener(new EndElementListener(){
       @Override public void end(){
         if (log.type != LogType.UNKNOWN) {
-          cache.appendLog(log);
+          cache.getLogs().add(log);
         }
       }
     }

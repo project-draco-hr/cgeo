@@ -25,10 +25,10 @@
   pageOrder.add(Page.DETAILS);
   final int detailsIndex=pageOrder.size() - 1;
   pageOrder.add(Page.DESCRIPTION);
-  if (CollectionUtils.isNotEmpty(cache.getLogs(true))) {
+  if (cache.getLogs().isNotEmpty()) {
     pageOrder.add(Page.LOGS);
   }
-  if (CollectionUtils.isNotEmpty(cache.getLogs(false))) {
+  if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
     pageOrder.add(Page.LOGSFRIENDS);
   }
   if (CollectionUtils.isNotEmpty(cache.getInventory())) {
