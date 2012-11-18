@@ -1,10 +1,5 @@
 {
-  final LazyInitializedList<String> list=new LazyInitializedList<String>(){
-    @Override protected List<String> loadFromDatabase(){
-      return new ArrayList<String>();
-    }
-  }
-;
+  final LazyInitializedList<String> list=new MockedLazyInitializedList();
   assertTrue(list.isEmpty());
   list.add("Test");
   assertFalse(list.isEmpty());

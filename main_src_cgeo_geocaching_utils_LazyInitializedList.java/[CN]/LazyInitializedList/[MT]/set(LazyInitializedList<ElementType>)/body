@@ -1,3 +1,8 @@
 {
-  list=new ArrayList<ElementType>(other.asList());
+  if (other != null) {
+    list=new ArrayList<ElementType>(other.asList());
+  }
+ else {
+    list=new ArrayList<ElementType>();
+  }
 }

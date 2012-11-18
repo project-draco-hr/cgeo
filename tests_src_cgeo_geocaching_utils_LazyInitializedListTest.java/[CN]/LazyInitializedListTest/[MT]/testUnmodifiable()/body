@@ -1,0 +1,11 @@
+{
+  final MockedLazyInitializedList list=new MockedLazyInitializedList();
+  boolean unsupported=false;
+  try {
+    list.asList().add("this is not possible");
+  }
+ catch (  UnsupportedOperationException e) {
+    unsupported=true;
+  }
+  assertTrue(unsupported);
+}
