@@ -1,0 +1,18 @@
+{
+  try {
+    final int rotation=getRotation(activity);
+    if (rotation == Surface.ROTATION_90) {
+      return 90;
+    }
+ else     if (rotation == Surface.ROTATION_180) {
+      return 180;
+    }
+ else     if (rotation == Surface.ROTATION_270) {
+      return 270;
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("Cannot call getRotation()",e);
+  }
+  return 0;
+}

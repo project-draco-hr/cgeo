@@ -1,6 +1,6 @@
 {
   attributeBox.removeAllViews();
-  attributeBoxMaxWidth=((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
+  attributeBoxMaxWidth=Compatibility.getDisplayWidth();
   ViewParent child=attributeBox;
   do {
     if (child instanceof View) {

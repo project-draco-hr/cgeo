@@ -7,7 +7,7 @@ case 2:
 cgeocaches.startActivityUserName(this,contextMenuUser);
 return true;
 case 3:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(contextMenuUser))));
 return true;
 default :
 return false;

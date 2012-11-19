@@ -12,7 +12,7 @@ case 1:
     cgeocaches.startActivityUserName(CacheDetailActivity.this,name.toString());
   return;
 case 2:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(name.toString()))));
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(name.toString()))));
 return;
 default :
 break;

@@ -27,7 +27,7 @@
   cache.setCacheId(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.getCacheId()));
   cache.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.getGuid()));
   cache.setName(cacheName);
-  cache.setOwnerUserId(URLDecoder.decode(BaseUtils.getMatch(page,GCConstants.PATTERN_OWNER_USERID,true,cache.getOwnerUserId())));
+  cache.setOwnerUserId(Network.decode(BaseUtils.getMatch(page,GCConstants.PATTERN_OWNER_USERID,true,cache.getOwnerUserId())));
   cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerUserId(),Settings.getUsername()));
   String tableInside=page;
   int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);

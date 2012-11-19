@@ -1,16 +1,15 @@
 {
   String geocode=cache.getGeocode();
   database.delete(dbTableAttributes,"geocode = ?",new String[]{geocode});
-  if (cache.getAttributes().isNotEmpty()) {
-    InsertHelper helper=new InsertHelper(database,dbTableAttributes);
-    long timeStamp=System.currentTimeMillis();
-    for (    String attribute : cache.getAttributes()) {
-      helper.prepareForInsert();
-      helper.bind(ATTRIBUTES_GEOCODE,geocode);
-      helper.bind(ATTRIBUTES_UPDATED,timeStamp);
-      helper.bind(ATTRIBUTES_ATTRIBUTE,attribute);
-      helper.execute();
-    }
-    helper.close();
+  if (cache.getAttributes().isEmpty()) {
+    return;
+  }
+  SQLiteStatement statement=getStatementInsertAttribute();
+  long timeStamp=System.currentTimeMillis();
+  for (  String attribute : cache.getAttributes()) {
+    statement.bindString(1,geocode);
+    statement.bindLong(2,timeStamp);
+    statement.bindString(3,attribute);
+    statement.executeInsert();
   }
 }

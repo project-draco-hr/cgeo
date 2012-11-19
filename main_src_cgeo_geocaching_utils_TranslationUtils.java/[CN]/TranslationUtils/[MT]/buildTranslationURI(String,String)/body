@@ -1,5 +1,5 @@
 {
-  String content=URLEncoder.encode(text);
+  String content=Network.encode(text);
   if (ProcessUtils.isInstalled(TRANSLATION_APP)) {
     content=content.replace("+","%20");
   }

@@ -5,8 +5,8 @@
   this.onlySave=onlySave;
   bfOptions=new BitmapFactory.Options();
   bfOptions.inTempStorage=new byte[16 * 1024];
-  final Display display=((WindowManager)cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-  this.maxWidth=display.getWidth() - 25;
-  this.maxHeight=display.getHeight() - 25;
+  Point displaySize=Compatibility.getDisplaySize();
+  this.maxWidth=displaySize.x - 25;
+  this.maxHeight=displaySize.y - 25;
   this.resources=cgeoapplication.getInstance().getResources();
 }
