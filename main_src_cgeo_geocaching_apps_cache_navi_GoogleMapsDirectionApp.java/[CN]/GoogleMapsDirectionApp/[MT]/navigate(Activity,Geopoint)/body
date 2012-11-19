@@ -1,25 +1,15 @@
 {
-  IGeoData geo=cgeoapplication.getInstance().currentGeo();
-  final Geopoint coordsNow=geo == null ? null : geo.getCoords();
-  if (Settings.isUseGoogleNavigation()) {
-    try {
-      activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:ll=" + coords.getLatitude() + ","+ coords.getLongitude())));
-      return true;
-    }
- catch (    Exception e) {
-    }
-  }
   try {
+    IGeoData geo=cgeoapplication.getInstance().currentGeo();
+    final Geopoint coordsNow=geo == null ? null : geo.getCoords();
     if (coordsNow != null) {
       activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?f=d&saddr=" + coordsNow.getLatitude() + ","+ coordsNow.getLongitude()+ "&daddr="+ coords.getLatitude()+ ","+ coords.getLongitude())));
     }
  else {
       activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?f=d&daddr=" + coords.getLatitude() + ","+ coords.getLongitude())));
     }
-    return true;
   }
  catch (  Exception e) {
+    Log.i("GoogleMapsDirection: application not available.");
   }
-  Log.i("cgBase.runNavigation: No navigation application available.");
-  return false;
 }

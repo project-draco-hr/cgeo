@@ -1,5 +1,8 @@
 {
-  if (!navigateToCoordinates(activity,coords)) {
-    ActivityMixin.showToast(activity,getString(R.string.err_navigation_no));
+  try {
+    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:ll=" + coords.getLatitude() + ","+ coords.getLongitude()+ mode)));
+  }
+ catch (  Exception e) {
+    Log.i("cgBase.runNavigation: No navigation application available.");
   }
 }
