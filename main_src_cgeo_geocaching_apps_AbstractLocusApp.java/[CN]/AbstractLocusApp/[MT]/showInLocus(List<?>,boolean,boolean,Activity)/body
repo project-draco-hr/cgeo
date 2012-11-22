@@ -25,7 +25,7 @@
  else {
     final ArrayList<PointsData> data=new ArrayList<PointsData>();
     data.add(pd);
-    DisplayData.sendDataCursor(activity,data,"content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(),export);
+    DisplayData.sendDataCursor(activity,data,"content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(Locale.US),export);
   }
   return true;
 }

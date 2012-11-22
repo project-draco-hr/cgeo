@@ -20,8 +20,8 @@
     guid=extras.getString("guid");
   }
   if (geocode == null && guid == null && uri != null) {
-    String uriHost=uri.getHost().toLowerCase();
-    String uriPath=uri.getPath().toLowerCase();
+    String uriHost=uri.getHost().toLowerCase(Locale.US);
+    String uriPath=uri.getPath().toLowerCase(Locale.US);
     String uriQuery=uri.getQuery();
     if (uriQuery != null) {
       Log.i("Opening URI: " + uriHost + uriPath+ "?"+ uriQuery);
@@ -33,12 +33,12 @@
       geocode=uri.getQueryParameter("wp");
       guid=uri.getQueryParameter("guid");
       if (StringUtils.isNotBlank(geocode)) {
-        geocode=geocode.toUpperCase();
+        geocode=geocode.toUpperCase(Locale.US);
         guid=null;
       }
  else       if (StringUtils.isNotBlank(guid)) {
         geocode=null;
-        guid=guid.toLowerCase();
+        guid=guid.toLowerCase(Locale.US);
       }
  else {
         showToast(res.getString(R.string.err_detail_open));
@@ -48,7 +48,7 @@
     }
  else     if (uriHost.contains("coord.info")) {
       if (uriPath != null && uriPath.startsWith("/gc")) {
-        geocode=uriPath.substring(1).toUpperCase();
+        geocode=uriPath.substring(1).toUpperCase(Locale.US);
       }
  else {
         showToast(res.getString(R.string.err_detail_open));
@@ -69,7 +69,7 @@
       title=name;
     }
  else     if (null != geocode && StringUtils.isNotBlank(geocode)) {
-      title=geocode.toUpperCase();
+      title=geocode;
     }
     progress.show(this,title,res.getString(R.string.cache_dialog_loading_details),true,loadCacheHandler.cancelMessage());
   }

@@ -4,7 +4,7 @@
     throw new NumberFormatException(distanceText);
   }
   final float value=Float.parseFloat(matcher.group(1).replace(',','.'));
-  final String unit=matcher.group(2).toLowerCase();
+  final String unit=matcher.group(2).toLowerCase(Locale.US);
   if (unit.equals("m") || (unit.length() == 0 && metricUnit)) {
     return value / 1000;
   }

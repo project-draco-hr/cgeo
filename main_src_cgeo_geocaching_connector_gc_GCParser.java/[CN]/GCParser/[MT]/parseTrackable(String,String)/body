@@ -7,7 +7,7 @@
     return null;
   }
   final cgTrackable trackable=new cgTrackable();
-  trackable.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()).toUpperCase());
+  trackable.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()));
   trackable.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GUID,true,trackable.getGuid()));
   trackable.setIconUrl(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ICON,true,trackable.getIconUrl()));
   trackable.setName(Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,true,"")).toString());

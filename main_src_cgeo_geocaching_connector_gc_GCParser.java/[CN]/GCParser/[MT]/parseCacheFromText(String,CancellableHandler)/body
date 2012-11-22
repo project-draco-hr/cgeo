@@ -62,7 +62,7 @@
       Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
     }
     cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
-    cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id).toLowerCase()));
+    cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id)));
   }
   cache.setFound(BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));
   try {
@@ -105,13 +105,13 @@
       final ArrayList<String> attributes=new ArrayList<String>();
       while (matcherAttributesInside.find()) {
         if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
-          String attribute=matcherAttributesInside.group(2).toLowerCase();
+          String attribute=matcherAttributesInside.group(2).toLowerCase(Locale.US);
           String imageName=matcherAttributesInside.group(1).trim();
           if (imageName.length() > 0) {
             int start=imageName.lastIndexOf('/');
             int end=imageName.lastIndexOf('.');
             if (start >= 0 && end >= 0) {
-              attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase();
+              attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase(Locale.US);
             }
           }
           attributes.add(attribute);

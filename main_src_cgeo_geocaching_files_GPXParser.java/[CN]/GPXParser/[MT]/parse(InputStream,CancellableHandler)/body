@@ -28,7 +28,7 @@
       }
       if (StringUtils.isBlank(cache.getGeocode())) {
         if (StringUtils.isNotBlank(name)) {
-          cache.setGeocode(name.trim().toUpperCase());
+          cache.setGeocode(name.trim());
         }
       }
       if (StringUtils.isNotBlank(cache.getGeocode()) && cache.getCoords() != null && ((type == null && sym == null) || StringUtils.contains(type,"geocache") || StringUtils.contains(sym,"geocache"))) {
@@ -54,7 +54,7 @@
     private void addWaypointToCache(){
       fixCache(cache);
       if (cache.getName().length() > 2) {
-        final String cacheGeocodeForWaypoint="GC" + cache.getName().substring(2).toUpperCase();
+        final String cacheGeocodeForWaypoint="GC" + cache.getName().substring(2).toUpperCase(Locale.US);
         final cgCache cacheForWaypoint=cgeoapplication.getInstance().loadCache(cacheGeocodeForWaypoint,LoadFlags.LOAD_CACHE_OR_DB);
         if (cacheForWaypoint != null) {
           final cgWaypoint waypoint=new cgWaypoint(cache.getShortdesc(),convertWaypointSym2Type(sym),false);
@@ -115,14 +115,14 @@
     @Override public void end(    String body){
       final String[] content=body.split("\\|");
       if (content.length > 0) {
-        type=content[0].toLowerCase().trim();
+        type=content[0].toLowerCase(Locale.US).trim();
       }
     }
   }
 );
   waypoint.getChild(namespace,"sym").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    final String body){
-      sym=body.toLowerCase();
+      sym=body.toLowerCase(Locale.US);
       if (sym.contains("geocache") && sym.contains("found")) {
         cache.setFound(true);
       }
@@ -201,13 +201,13 @@
 );
     gcCache.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
-        cache.setType(CacheType.getByPattern(validate(body.toLowerCase())));
+        cache.setType(CacheType.getByPattern(validate(body)));
       }
     }
 );
     gcCache.getChild(nsGC,"container").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
-        cache.setSize(CacheSize.getById(validate(body.toLowerCase())));
+        cache.setSize(CacheSize.getById(validate(body)));
       }
     }
 );
@@ -302,7 +302,7 @@
         trackable=new cgTrackable();
         try {
           if (attrs.getIndex("ref") > -1) {
-            trackable.setGeocode(attrs.getValue("ref").toUpperCase());
+            trackable.setGeocode(attrs.getValue("ref"));
           }
         }
  catch (        Exception e) {
@@ -363,7 +363,7 @@
 );
     gcLog.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String body){
-        final String logType=validate(body).toLowerCase();
+        final String logType=validate(body);
         log.type=LogType.getByType(logType);
       }
     }

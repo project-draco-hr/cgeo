@@ -2,8 +2,7 @@
   final cgCache cache=new cgCache();
   final Matcher matcherGeocode=patternGeocode.matcher(pointString);
   if (matcherGeocode.find()) {
-    final String geocode=matcherGeocode.group(1).trim().toUpperCase();
-    cache.setGeocode(geocode.toUpperCase());
+    cache.setGeocode(matcherGeocode.group(1).trim());
   }
   final Matcher matcherName=patternName.matcher(pointString);
   if (matcherName.find()) {

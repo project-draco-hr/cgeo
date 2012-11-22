@@ -5,7 +5,7 @@
       setTitle(cache.getName());
     }
  else {
-      setTitle(geocode.toUpperCase());
+      setTitle(geocode);
     }
     ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId),null,null,null);
     details=new CacheDetailsCreator(this,(LinearLayout)findViewById(R.id.details_list));

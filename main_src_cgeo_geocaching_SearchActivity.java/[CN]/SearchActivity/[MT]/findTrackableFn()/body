@@ -5,6 +5,6 @@
     return;
   }
   final Intent trackablesIntent=new Intent(this,cgeotrackable.class);
-  trackablesIntent.putExtra("geocode",trackableText.toUpperCase());
+  trackablesIntent.putExtra("geocode",trackableText.toUpperCase(Locale.US));
   startActivity(trackablesIntent);
 }
