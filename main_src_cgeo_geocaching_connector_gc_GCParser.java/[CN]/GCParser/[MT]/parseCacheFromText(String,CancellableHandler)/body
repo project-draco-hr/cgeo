@@ -188,6 +188,7 @@
  catch (  Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache log count");
   }
+  cache.setWaypoints(Collections.<cgWaypoint>emptyList(),false);
   try {
     final String originalCoords=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON_ORIG,false,null);
     if (null != originalCoords) {
@@ -199,7 +200,6 @@
   }
  catch (  Geopoint.GeopointException e) {
   }
-  cache.setWaypoints(Collections.<cgWaypoint>emptyList(),false);
   int wpBegin;
   int wpEnd;
   wpBegin=page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
