@@ -6,8 +6,8 @@
   database.beginTransaction();
   try {
     SQLiteStatement setVisit=PreparedStatements.getUpdateVisitDate();
-    setVisit.bindLong(1,visitedDate);
     for (    String geocode : geocodes) {
+      setVisit.bindLong(1,visitedDate);
       setVisit.bindString(2,geocode);
       setVisit.execute();
     }

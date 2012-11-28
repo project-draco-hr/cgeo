@@ -5,9 +5,10 @@
   if (MapUtils.isNotEmpty(logCounts)) {
     Set<Entry<LogType,Integer>> logCountsItems=logCounts.entrySet();
     SQLiteStatement insertLogCounts=PreparedStatements.getInsertLogCounts();
-    insertLogCounts.bindLong(2,System.currentTimeMillis());
+    final long timestamp=System.currentTimeMillis();
     for (    Entry<LogType,Integer> pair : logCountsItems) {
       insertLogCounts.bindString(1,geocode);
+      insertLogCounts.bindLong(2,timestamp);
       insertLogCounts.bindLong(3,pair.getKey().id);
       insertLogCounts.bindLong(4,pair.getValue());
       insertLogCounts.executeInsert();
