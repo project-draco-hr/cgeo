@@ -1,0 +1,36 @@
+{
+  if (cacheType == null) {
+    throw new IllegalArgumentException("cacheType must not be null");
+  }
+  init();
+  Set<String> geocodes=new HashSet<String>();
+  StringBuilder specifySql=new StringBuilder();
+  specifySql.append("reason ");
+  specifySql.append(listId != StoredList.ALL_LIST_ID ? "=" + Math.max(listId,1) : ">= " + StoredList.STANDARD_LIST_ID);
+  specifySql.append(" and detailed = 1 ");
+  if (cacheType != CacheType.ALL) {
+    specifySql.append(" and type = ");
+    specifySql.append(DatabaseUtils.sqlEscapeString(cacheType.id));
+  }
+  try {
+    Cursor cursor;
+    if (coords != null) {
+      cursor=database.query(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},specifySql.toString(),null,null,null,"dif",null);
+    }
+ else {
+      cursor=database.query(dbTableCaches,new String[]{"geocode"},specifySql.toString(),null,null,null,"geocode");
+    }
+    if (cursor.moveToFirst()) {
+      final int index=cursor.getColumnIndex("geocode");
+      do {
+        geocodes.add(cursor.getString(index));
+      }
+ while (cursor.moveToNext());
+    }
+    cursor.close();
+  }
+ catch (  Exception e) {
+    Log.e("cgData.loadBatchOfStoredGeocodes: " + e.toString());
+  }
+  return geocodes;
+}

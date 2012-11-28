@@ -3,16 +3,20 @@
   database.delete(dbTableSpoilers,"geocode = ?",new String[]{geocode});
   List<cgImage> spoilers=cache.getSpoilers();
   if (CollectionUtils.isNotEmpty(spoilers)) {
-    ContentValues values=new ContentValues();
-    long timeStamp=System.currentTimeMillis();
+    SQLiteStatement insertSpoiler=PreparedStatements.getInsertSpoiler();
+    insertSpoiler.bindLong(2,System.currentTimeMillis());
     for (    cgImage spoiler : spoilers) {
-      values.clear();
-      values.put("geocode",geocode);
-      values.put("updated",timeStamp);
-      values.put("url",spoiler.getUrl());
-      values.put("title",spoiler.getTitle());
-      values.put("description",spoiler.getDescription());
-      database.insert(dbTableSpoilers,null,values);
+      insertSpoiler.bindString(1,geocode);
+      insertSpoiler.bindString(3,spoiler.getUrl());
+      insertSpoiler.bindString(4,spoiler.getTitle());
+      final String description=spoiler.getDescription();
+      if (description != null) {
+        insertSpoiler.bindString(5,description);
+      }
+ else {
+        insertSpoiler.bindNull(5);
+      }
+      insertSpoiler.executeInsert();
     }
   }
 }

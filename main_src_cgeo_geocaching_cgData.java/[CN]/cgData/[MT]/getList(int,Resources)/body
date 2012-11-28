@@ -8,10 +8,10 @@
     }
   }
   if (id == StoredList.ALL_LIST_ID) {
-    return new StoredList(StoredList.ALL_LIST_ID,res.getString(R.string.list_all_lists),(int)getStatementCountAllLists().simpleQueryForLong());
+    return new StoredList(StoredList.ALL_LIST_ID,res.getString(R.string.list_all_lists),getAllCachesCount());
   }
   if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
-    return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)getStatementCountStandardList().simpleQueryForLong());
+    return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong());
   }
   return null;
 }

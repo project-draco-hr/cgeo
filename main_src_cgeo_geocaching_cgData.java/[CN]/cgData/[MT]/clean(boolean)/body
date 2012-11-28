@@ -28,10 +28,6 @@
       Log.d("Database clean: removing " + size + " geocaches from listId=0");
       removeCaches(geocodes,LoadFlags.REMOVE_ALL);
     }
-    final SQLiteStatement countSql=database.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
-    final int count=(int)countSql.simpleQueryForLong();
-    countSql.close();
-    Log.d("Database clean: " + count + " geocaches remaining for listId=0");
   }
  catch (  Exception e) {
     Log.w("cgData.clean: " + e.toString());

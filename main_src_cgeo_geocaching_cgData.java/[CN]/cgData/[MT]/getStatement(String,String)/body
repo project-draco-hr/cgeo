@@ -1,8 +1,0 @@
-{
-  SQLiteStatement statement=statements.get(key);
-  if (statement == null) {
-    statement=database.compileStatement(query);
-    statements.put(key,statement);
-  }
-  return statement;
-}

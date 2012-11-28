@@ -4,7 +4,7 @@
   }
   init();
   try {
-    final SQLiteStatement description=getStatementCacheId();
+    final SQLiteStatement description=PreparedStatements.getCacheIdOfGeocode();
 synchronized (description) {
       description.bindString(1,geocode);
       return description.simpleQueryForString();

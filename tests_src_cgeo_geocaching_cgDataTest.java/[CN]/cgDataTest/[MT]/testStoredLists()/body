@@ -19,16 +19,16 @@
     cache2.setListId(listId1);
     app.saveCache(cache1,LoadFlags.SAVE_ALL);
     app.saveCache(cache2,LoadFlags.SAVE_ALL);
-    assertTrue(app.getAllStoredCachesCount(false,CacheType.ALL) >= 2);
+    assertTrue(cgeoapplication.getAllCachesCount() >= 2);
     assertEquals(1,app.renameList(listId1,"cgData Test (renamed)"));
     StoredList list1=app.getList(listId1);
     assertEquals("cgData Test (renamed)",list1.title);
     app.moveToList(Collections.singletonList(cache1),listId2);
-    assertEquals(1,app.getAllStoredCachesCount(false,CacheType.ALL,listId2));
+    assertEquals(1,app.getAllStoredCachesCount(CacheType.ALL,listId2));
     assertTrue(app.removeList(listId1));
     app.markDropped(Collections.singletonList(cache2));
     app.markStored(Collections.singletonList(cache2),listId2);
-    assertEquals(2,app.getAllStoredCachesCount(false,CacheType.ALL,listId2));
+    assertEquals(2,app.getAllStoredCachesCount(CacheType.ALL,listId2));
     app.removeList(listId2);
   }
   finally {

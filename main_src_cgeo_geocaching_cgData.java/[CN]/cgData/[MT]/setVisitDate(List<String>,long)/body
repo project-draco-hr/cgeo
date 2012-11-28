@@ -5,10 +5,11 @@
   init();
   database.beginTransaction();
   try {
-    ContentValues values=new ContentValues();
-    values.put("visiteddate",visitedDate);
+    SQLiteStatement setVisit=PreparedStatements.getUpdateVisitDate();
+    setVisit.bindLong(1,visitedDate);
     for (    String geocode : geocodes) {
-      database.update(dbTableCaches,values,"geocode = ?",new String[]{geocode});
+      setVisit.bindString(2,geocode);
+      setVisit.execute();
     }
     database.setTransactionSuccessful();
   }

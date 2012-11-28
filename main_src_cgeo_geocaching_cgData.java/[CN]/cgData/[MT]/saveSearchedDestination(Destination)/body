@@ -2,10 +2,8 @@
   init();
   database.beginTransaction();
   try {
-    ContentValues values=new ContentValues();
-    values.put("date",destination.getDate());
-    putCoords(values,destination.getCoords());
-    database.insert(dbTableSearchDestionationHistory,null,values);
+    SQLiteStatement insertDestination=PreparedStatements.getInsertSearchDestination(destination);
+    insertDestination.executeInsert();
     database.setTransactionSuccessful();
   }
  catch (  Exception e) {

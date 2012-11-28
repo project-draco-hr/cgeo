@@ -7,11 +7,11 @@
     final SQLiteStatement listId;
     final String value;
     if (StringUtils.isNotBlank(geocode)) {
-      listId=getStatementListIdFromGeocode();
+      listId=PreparedStatements.getListIdOfGeocode();
       value=geocode;
     }
  else {
-      listId=getStatementListIdFromGuid();
+      listId=PreparedStatements.getListIdOfGuid();
       value=guid;
     }
 synchronized (listId) {

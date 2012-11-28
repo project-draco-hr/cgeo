@@ -3,26 +3,24 @@
   if (!logs.iterator().hasNext()) {
     return;
   }
-  SQLiteStatement statement=getStatementInsertLog();
-  long timeStamp=System.currentTimeMillis();
+  SQLiteStatement insertLog=PreparedStatements.getInsertLog();
+  insertLog.bindLong(2,System.currentTimeMillis());
   for (  LogEntry log : logs) {
-    statement.bindString(1,geocode);
-    statement.bindLong(2,timeStamp);
-    statement.bindLong(3,log.type.id);
-    statement.bindString(4,log.author);
-    statement.bindString(5,log.log);
-    statement.bindLong(6,log.date);
-    statement.bindLong(7,log.found);
-    statement.bindLong(8,log.friend ? 1 : 0);
-    long logId=statement.executeInsert();
+    insertLog.bindString(1,geocode);
+    insertLog.bindLong(3,log.type.id);
+    insertLog.bindString(4,log.author);
+    insertLog.bindString(5,log.log);
+    insertLog.bindLong(6,log.date);
+    insertLog.bindLong(7,log.found);
+    insertLog.bindLong(8,log.friend ? 1 : 0);
+    long logId=insertLog.executeInsert();
     if (log.hasLogImages()) {
-      ContentValues values=new ContentValues();
+      SQLiteStatement insertImage=PreparedStatements.getInsertLogImage();
+      insertImage.bindLong(1,logId);
       for (      cgImage img : log.getLogImages()) {
-        values.clear();
-        values.put("log_id",logId);
-        values.put("title",img.getTitle());
-        values.put("url",img.getUrl());
-        database.insert(dbTableLogImages,null,values);
+        insertImage.bindString(2,img.getTitle());
+        insertImage.bindString(3,img.getUrl());
+        insertImage.executeInsert();
       }
     }
   }

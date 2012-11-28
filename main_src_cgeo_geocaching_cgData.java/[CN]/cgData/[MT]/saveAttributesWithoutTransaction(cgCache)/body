@@ -4,11 +4,10 @@
   if (cache.getAttributes().isEmpty()) {
     return;
   }
-  SQLiteStatement statement=getStatementInsertAttribute();
-  long timeStamp=System.currentTimeMillis();
+  SQLiteStatement statement=PreparedStatements.getInsertAttribute();
+  statement.bindLong(2,System.currentTimeMillis());
   for (  String attribute : cache.getAttributes()) {
     statement.bindString(1,geocode);
-    statement.bindLong(2,timeStamp);
     statement.bindString(3,attribute);
     statement.executeInsert();
   }

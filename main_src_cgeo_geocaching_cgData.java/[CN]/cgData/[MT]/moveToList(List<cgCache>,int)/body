@@ -6,12 +6,13 @@
     return;
   }
   init();
-  final ContentValues values=new ContentValues();
-  values.put("reason",listId);
+  SQLiteStatement move=PreparedStatements.getMoveToList();
+  move.bindLong(1,listId);
   database.beginTransaction();
   try {
     for (    cgCache cache : caches) {
-      database.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
+      move.bindString(2,cache.getGeocode());
+      move.execute();
       cache.setListId(listId);
     }
     database.setTransactionSuccessful();

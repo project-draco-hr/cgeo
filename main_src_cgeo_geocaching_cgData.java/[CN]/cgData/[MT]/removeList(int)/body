@@ -1,16 +1,16 @@
 {
-  boolean status=false;
   if (listId < customListIdOffset) {
-    return status;
+    return false;
   }
   init();
+  boolean status=false;
   database.beginTransaction();
   try {
     int cnt=database.delete(dbTableLists,"_id = " + (listId - customListIdOffset),null);
     if (cnt > 0) {
-      ContentValues values=new ContentValues();
-      values.put("reason",StoredList.STANDARD_LIST_ID);
-      database.update(dbTableCaches,values,"reason = " + listId,null);
+      SQLiteStatement moveToStandard=PreparedStatements.getMoveToStandardList();
+      moveToStandard.bindLong(1,listId);
+      moveToStandard.execute();
       status=true;
     }
     database.setTransactionSuccessful();

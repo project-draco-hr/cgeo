@@ -4,7 +4,7 @@
   }
   init();
   try {
-    final SQLiteStatement description=getStatementDescription();
+    final SQLiteStatement description=PreparedStatements.getDescriptionOfGeocode();
 synchronized (description) {
       description.bindString(1,geocode);
       return description.simpleQueryForString();
