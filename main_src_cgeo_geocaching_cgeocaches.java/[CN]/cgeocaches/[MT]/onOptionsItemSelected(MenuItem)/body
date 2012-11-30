@@ -45,19 +45,7 @@ selectList(null);
 invalidateOptionsMenuCompatible();
 return false;
 case MENU_FILTER:
-new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>(){
-@Override public void run(IFilter selectedFilter){
-if (selectedFilter != null) {
-setFilter(selectedFilter);
-}
- else {
-if (adapter != null) {
-setFilter(null);
-}
-}
-}
-}
-);
+showFilterMenu(null);
 return true;
 case MENU_SORT:
 new ComparatorUserInterface(this).selectComparator(adapter.getCacheComparator(),new RunnableWithArgument<CacheComparator>(){

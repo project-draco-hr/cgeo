@@ -1,0 +1,15 @@
+{
+  new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>(){
+    @Override public void run(    IFilter selectedFilter){
+      if (selectedFilter != null) {
+        setFilter(selectedFilter);
+      }
+ else {
+        if (adapter != null) {
+          setFilter(null);
+        }
+      }
+    }
+  }
+);
+}
