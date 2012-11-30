@@ -1,40 +1,45 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
-  if (requestCode == SELECT_MAPFILE_REQUEST) {
-    if (resultCode == RESULT_OK) {
-      if (data.hasExtra("mapfile")) {
-        final String mapFile=data.getStringExtra("mapfile");
-        Settings.setMapFile(mapFile);
-        if (!Settings.isValidMapFile(Settings.getMapFile())) {
-          showToast(res.getString(R.string.warn_invalid_mapfile));
-        }
-      }
-    }
-    updateMapSourceMenu();
-    initMapDirectoryEdittext(true);
+  if (resultCode != RESULT_OK) {
+    return;
   }
-  if (requestCode == SELECT_GPX_EXPORT_REQUEST) {
-    checkDirectory(resultCode,data,R.id.gpx_exportdir,new RunnableWithArgument<String>(){
-      @Override public void run(      String directory){
-        Settings.setGpxExportDir(directory);
+switch (requestCode) {
+case SELECT_MAPFILE_REQUEST:
+    if (data.hasExtra("mapfile")) {
+      final String mapFile=data.getStringExtra("mapfile");
+      Settings.setMapFile(mapFile);
+      if (!Settings.isValidMapFile(Settings.getMapFile())) {
+        showToast(res.getString(R.string.warn_invalid_mapfile));
       }
     }
+  updateMapSourceMenu();
+initMapDirectoryEdittext(true);
+break;
+case SELECT_GPX_EXPORT_REQUEST:
+checkDirectory(resultCode,data,R.id.gpx_exportdir,new RunnableWithArgument<String>(){
+@Override public void run(String directory){
+Settings.setGpxExportDir(directory);
+}
+}
 );
-  }
-  if (requestCode == SELECT_GPX_IMPORT_REQUEST) {
-    checkDirectory(resultCode,data,R.id.gpx_importdir,new RunnableWithArgument<String>(){
-      @Override public void run(      String directory){
-        Settings.setGpxImportDir(directory);
-      }
-    }
+break;
+case SELECT_GPX_IMPORT_REQUEST:
+checkDirectory(resultCode,data,R.id.gpx_importdir,new RunnableWithArgument<String>(){
+@Override public void run(String directory){
+Settings.setGpxImportDir(directory);
+}
+}
 );
-  }
-  if (requestCode == SELECT_THEMEFOLDER_REQUEST) {
-    checkDirectory(resultCode,data,R.id.themefolder,new RunnableWithArgument<String>(){
-      @Override public void run(      String directory){
-        Settings.setCustomRenderThemeBaseFolder(directory);
-      }
-    }
+break;
+case SELECT_THEMEFOLDER_REQUEST:
+checkDirectory(resultCode,data,R.id.themefolder,new RunnableWithArgument<String>(){
+@Override public void run(String directory){
+Settings.setCustomRenderThemeBaseFolder(directory);
+}
+}
 );
-  }
+break;
+default :
+throw new IllegalArgumentException();
+}
 }

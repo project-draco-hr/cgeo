@@ -1,11 +1,18 @@
 {
-  if (resultCode == RESULT_OK) {
-    if (data.hasExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR)) {
-      final String directory=data.getStringExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR);
-      runnableSetDir.run(directory);
-      EditText directoryText=(EditText)findViewById(textField);
-      directoryText.setText(directory);
-      directoryText.requestFocus();
-    }
+  if (resultCode != RESULT_OK) {
+    return;
+  }
+  String directory=null;
+  if (data.hasExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR)) {
+    directory=data.getStringExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR);
+  }
+ else {
+    directory=new File(data.getData().getPath()).getAbsolutePath();
+  }
+  if (StringUtils.isNotBlank(directory)) {
+    runnableSetDir.run(directory);
+    EditText directoryText=(EditText)findViewById(textField);
+    directoryText.setText(directory);
+    directoryText.requestFocus();
   }
 }
