@@ -34,6 +34,15 @@
  else {
         logView.setText(logText);
       }
+      ImageView statusMarker=(ImageView)rowView.findViewById(R.id.log_mark);
+      int marker=log.type.markerId;
+      if (marker != 0) {
+        statusMarker.setVisibility(View.VISIBLE);
+        statusMarker.setImageResource(marker);
+      }
+ else {
+        statusMarker.setVisibility(View.GONE);
+      }
       LinearLayout logLayout=(LinearLayout)rowView.findViewById(R.id.log_layout);
       if (log.hasLogImages()) {
         final ArrayList<cgImage> logImages=new ArrayList<cgImage>(log.getLogImages());
