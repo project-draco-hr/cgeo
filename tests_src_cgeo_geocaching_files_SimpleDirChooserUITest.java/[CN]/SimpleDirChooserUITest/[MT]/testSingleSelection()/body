@@ -1,0 +1,15 @@
+{
+  assertChecked(0);
+  solo.scrollToBottom();
+  final ArrayList<CheckBox> boxes=solo.getCurrentCheckBoxes();
+  final int lastIndex=boxes.size() - 1;
+  solo.clickOnCheckBox(lastIndex);
+  assertTrue(solo.getCurrentCheckBoxes().get(lastIndex).isChecked());
+  assertFalse(solo.getCurrentCheckBoxes().get(0).isChecked());
+  assertChecked(1);
+  solo.scrollUp();
+  assertChecked(1);
+  solo.clickOnCheckBox(0);
+  assertChecked(1);
+  assertTrue(solo.getCurrentCheckBoxes().get(0).isChecked());
+}
