@@ -1,8 +1,8 @@
 {
-  final cgWaypoint original=getWaypoint(index);
   if (original == null) {
     return false;
   }
+  final int index=getWaypointIndex(original);
   final cgWaypoint copy=new cgWaypoint(original);
   copy.setUserDefined();
   copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());

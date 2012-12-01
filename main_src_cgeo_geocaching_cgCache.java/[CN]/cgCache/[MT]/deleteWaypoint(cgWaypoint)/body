@@ -1,7 +1,19 @@
 {
+  if (waypoint == null) {
+    return false;
+  }
   if (waypoint.getId() <= 0) {
     return false;
   }
-  final int index=getWaypointIndex(waypoint);
-  return index >= 0 && deleteWaypoint(index);
+  if (waypoint.isUserDefined()) {
+    final int index=getWaypointIndex(waypoint);
+    waypoints.remove(index);
+    cgData.deleteWaypoint(waypoint.getId());
+    cgData.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    if (waypoint.isFinalWithCoords()) {
+      resetFinalDefined();
+    }
+    return true;
+  }
+  return false;
 }

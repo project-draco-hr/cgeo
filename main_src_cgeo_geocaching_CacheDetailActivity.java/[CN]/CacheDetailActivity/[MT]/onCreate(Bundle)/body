@@ -103,13 +103,7 @@
     }
   }
 );
-  int entryPageIndex;
-  if (extras != null && extras.get(EXTRAS_PAGE) != null) {
-    entryPageIndex=extras.getInt(EXTRAS_PAGE);
-  }
- else {
-    entryPageIndex=Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
-  }
+  int entryPageIndex=Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
   if (viewPagerAdapter.getCount() < entryPageIndex) {
     for (int i=0; i <= entryPageIndex; i++) {
       pageOrder.add(null);
