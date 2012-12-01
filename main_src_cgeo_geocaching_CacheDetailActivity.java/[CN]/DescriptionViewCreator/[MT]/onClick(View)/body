@@ -4,7 +4,7 @@
     @Override public void update(    CharSequence editorText){
       cache.setPersonalNote(editorText.toString());
       setPersonalNote(personalNoteView);
-      app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+      cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
     }
   }
 );

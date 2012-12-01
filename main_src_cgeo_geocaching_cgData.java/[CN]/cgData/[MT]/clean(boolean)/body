@@ -1,4 +1,7 @@
 {
+  if (databaseCleaned) {
+    return;
+  }
   init();
   Log.d("Database clean: started");
   Cursor cursor;
@@ -33,4 +36,5 @@
     Log.w("cgData.clean: " + e.toString());
   }
   Log.d("Database clean: finished");
+  databaseCleaned=true;
 }

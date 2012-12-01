@@ -3,7 +3,7 @@
     return;
   }
   int checks=0;
-  while (!app.storageStatus()) {
+  while (!cgData.isInitialized()) {
     try {
       wait(500);
       checks++;
@@ -14,6 +14,6 @@
       return;
     }
   }
-  countBubbleCnt=cgeoapplication.getAllCachesCount();
+  countBubbleCnt=cgData.getAllCachesCount();
   countBubbleHandler.sendEmptyMessage(0);
 }

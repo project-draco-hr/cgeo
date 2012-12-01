@@ -11,7 +11,7 @@
     SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
     assertNotNull(search);
     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
-    cgCache parsedCache=cgeoapplication.getInstance().loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+    cgCache parsedCache=cgData.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
     assertEquals(Settings.isPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
     assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
     Settings.setLiveMapStrategy(Strategy.FAST);
@@ -19,7 +19,7 @@
     search=ConnectorFactory.searchByViewport(viewport,tokens);
     assertNotNull(search);
     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
-    parsedCache=cgeoapplication.getInstance().loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+    parsedCache=cgData.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
     assertEquals(Settings.isPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
     assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
   }

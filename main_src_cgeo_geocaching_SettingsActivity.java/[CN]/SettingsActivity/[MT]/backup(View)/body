@@ -1,12 +1,12 @@
 {
-  if (cgeoapplication.getAllCachesCount() == 0) {
+  if (cgData.getAllCachesCount() == 0) {
     helpDialog(res.getString(R.string.init_backup),res.getString(R.string.init_backup_unnecessary));
     return;
   }
   final ProgressDialog dialog=ProgressDialog.show(this,res.getString(R.string.init_backup),res.getString(R.string.init_backup_running),true,false);
   new Thread(){
     @Override public void run(){
-      final String backupFileName=app.backupDatabase();
+      final String backupFileName=cgData.backupDatabase();
       runOnUiThread(new Runnable(){
         @Override public void run(){
           dialog.dismiss();

@@ -20,7 +20,7 @@ if (!isLoading()) {
 final Set<String> geocodesInViewport=getGeocodesForCachesInViewport();
 final List<String> geocodes=new ArrayList<String>();
 for (final String geocode : geocodesInViewport) {
-if (!app.isOffline(geocode,null)) {
+if (!cgData.isOffline(geocode,null)) {
 geocodes.add(geocode);
 }
 }

@@ -2,7 +2,7 @@
   final Destination loc=new Destination(coords);
   if (!getHistoryOfSearchedLocations().contains(loc)) {
     getHistoryOfSearchedLocations().add(0,loc);
-    app.saveSearchedDestination(loc);
+    cgData.saveSearchedDestination(loc);
     historyListView.removeFooterView(getEmptyHistoryFooter());
   }
 }

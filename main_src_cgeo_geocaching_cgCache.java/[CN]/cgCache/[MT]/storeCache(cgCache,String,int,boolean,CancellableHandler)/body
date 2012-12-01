@@ -54,7 +54,7 @@
       return;
     }
     cache.setListId(listId);
-    cgeoapplication.getInstance().saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }

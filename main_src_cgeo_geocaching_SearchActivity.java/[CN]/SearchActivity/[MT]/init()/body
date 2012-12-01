@@ -19,7 +19,7 @@
     }
   }
 );
-  addHistoryEntries(geocodeEdit,app.geocodesInCache());
+  addHistoryEntries(geocodeEdit,cgData.getRecentGeocodesForSearch());
   final Button displayByGeocode=(Button)findViewById(R.id.display_geocode);
   displayByGeocode.setOnClickListener(new findByGeocodeListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.keyword),new Runnable(){
@@ -58,7 +58,7 @@
     }
   }
 );
-  addHistoryEntries(trackable,app.getTrackableCodes());
+  addHistoryEntries(trackable,cgData.getTrackableCodes());
   disableSuggestions(trackable);
   final Button displayTrackable=(Button)findViewById(R.id.display_trackable);
   displayTrackable.setOnClickListener(new findTrackableListener());

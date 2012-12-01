@@ -1,22 +1,20 @@
 {
-  boolean success=true;
   if (destination == null) {
-    success=false;
+    return false;
   }
- else {
-    init();
-    database.beginTransaction();
-    try {
-      database.delete(dbTableSearchDestionationHistory,"_id = " + destination.getId(),null);
-      database.setTransactionSuccessful();
-    }
- catch (    Exception e) {
-      Log.e("Unable to remove searched destination",e);
-      success=false;
-    }
+  init();
+  boolean result=false;
+  database.beginTransaction();
+  try {
+    database.delete(dbTableSearchDestionationHistory,"_id = " + destination.getId(),null);
+    database.setTransactionSuccessful();
+    result=true;
+  }
+ catch (  Exception e) {
+    Log.e("Unable to remove searched destination",e);
+  }
  finally {
-      database.endTransaction();
-    }
+    database.endTransaction();
   }
-  return success;
+  return result;
 }

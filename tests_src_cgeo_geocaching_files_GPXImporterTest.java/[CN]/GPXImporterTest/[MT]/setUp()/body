@@ -2,8 +2,8 @@
   super.setUp();
   tempDir=new File(System.getProperty("java.io.tmpdir"),"cgeogpxesTest");
   tempDir.mkdir();
-  cgeoapplication.getInstance().getAllHistoricCachesCount();
-  listId=cgeoapplication.getInstance().createList("cgeogpxesTest");
+  cgData.getAllHistoryCachesCount();
+  listId=cgData.createList("cgeogpxesTest");
   importCacheStaticMaps=Settings.isStoreOfflineMaps();
   Settings.setStoreOfflineMaps(true);
   importWpStaticMaps=Settings.isStoreOfflineWpMaps();

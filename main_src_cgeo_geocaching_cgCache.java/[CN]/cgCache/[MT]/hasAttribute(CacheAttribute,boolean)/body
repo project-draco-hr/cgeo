@@ -1,5 +1,5 @@
 {
-  cgCache fullCache=cgeoapplication.getInstance().loadCache(getGeocode(),EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
+  cgCache fullCache=cgData.loadCache(getGeocode(),EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
   if (fullCache == null) {
     fullCache=this;
   }

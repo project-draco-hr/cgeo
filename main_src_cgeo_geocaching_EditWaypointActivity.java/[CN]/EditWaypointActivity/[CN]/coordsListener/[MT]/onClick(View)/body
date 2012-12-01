@@ -56,9 +56,9 @@
   waypoint.setCoords(coords);
   waypoint.setNote(note);
   waypoint.setId(id);
-  cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+  cgCache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
   if (null != cache && cache.addOrChangeWaypoint(waypoint,true)) {
-    app.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
     StaticMapsProvider.removeWpStaticMaps(id,geocode);
     if (Settings.isStoreOfflineWpMaps()) {
       StaticMapsProvider.storeWaypointStaticMap(cache,waypoint,false);

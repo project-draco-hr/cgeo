@@ -7,7 +7,7 @@
     where.append(" and ").append(dbTableCaches).append(".disabled == 0");
   }
   if (type != CacheType.ALL) {
-    where.append(" and ").append(dbTableCaches).append(".type == '").append(type.id).append("'");
+    where.append(" and ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
   }
   init();
   final StringBuilder query=new StringBuilder("SELECT ");

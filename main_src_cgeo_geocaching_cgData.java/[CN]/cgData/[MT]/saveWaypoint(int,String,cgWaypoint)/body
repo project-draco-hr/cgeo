@@ -1,35 +1,7 @@
 {
-  if ((StringUtils.isBlank(geocode) && id <= 0) || waypoint == null) {
-    return false;
+  if (cgData.saveWaypointInternal(id,geocode,waypoint)) {
+    cgData.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    return true;
   }
-  init();
-  boolean ok=false;
-  database.beginTransaction();
-  try {
-    ContentValues values=new ContentValues();
-    values.put("geocode",geocode);
-    values.put("updated",System.currentTimeMillis());
-    values.put("type",waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
-    values.put("prefix",waypoint.getPrefix());
-    values.put("lookup",waypoint.getLookup());
-    values.put("name",waypoint.getName());
-    values.put("latlon",waypoint.getLatlon());
-    putCoords(values,waypoint.getCoords());
-    values.put("note",waypoint.getNote());
-    values.put("own",waypoint.isUserDefined() ? 1 : 0);
-    if (id <= 0) {
-      final long rowId=database.insert(dbTableWaypoints,null,values);
-      waypoint.setId((int)rowId);
-      ok=true;
-    }
- else {
-      final int rows=database.update(dbTableWaypoints,values,"_id = " + id,null);
-      ok=rows > 0;
-    }
-    database.setTransactionSuccessful();
-  }
-  finally {
-    database.endTransaction();
-  }
-  return ok;
+  return false;
 }

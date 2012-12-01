@@ -11,12 +11,12 @@
     alreadyFound=extras.getBoolean(EXTRAS_FOUND);
   }
   if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
-    cacheid=app.getCacheid(geocode);
+    cacheid=cgData.getCacheidForGeocode(geocode);
   }
   if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
-    geocode=app.getGeocode(cacheid);
+    geocode=cgData.getGeocodeForGuid(cacheid);
   }
-  cache=cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   if (StringUtils.isNotBlank(cache.getName())) {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
   }

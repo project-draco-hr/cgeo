@@ -2,7 +2,7 @@
   super.onCreateContextMenu(menu,v,menuInfo);
   if (v.getId() == R.id.search_offline) {
     menu.setHeaderTitle(res.getString(R.string.list_title));
-    for (    final StoredList list : app.getLists()) {
+    for (    final StoredList list : cgData.getLists()) {
       menu.add(Menu.NONE,MENU_OPEN_LIST + list.id,Menu.NONE,list.getTitleAndCount());
     }
     return;

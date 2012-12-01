@@ -1,12 +1,11 @@
 {
   final Viewport viewport=new Viewport(new Geopoint(-1,-2),new Geopoint(3,4));
-  final cgeoapplication app=cgeoapplication.getInstance();
-  app.getWaypointsInViewport(viewport,false,false,CacheType.ALL);
-  app.getWaypointsInViewport(viewport,false,true,CacheType.ALL);
-  app.getWaypointsInViewport(viewport,true,false,CacheType.ALL);
-  app.getWaypointsInViewport(viewport,true,true,CacheType.ALL);
-  app.getWaypointsInViewport(viewport,false,false,CacheType.TRADITIONAL);
-  app.getWaypointsInViewport(viewport,false,true,CacheType.TRADITIONAL);
-  app.getWaypointsInViewport(viewport,true,false,CacheType.TRADITIONAL);
-  app.getWaypointsInViewport(viewport,true,true,CacheType.TRADITIONAL);
+  cgData.loadWaypoints(viewport,false,false,CacheType.ALL);
+  cgData.loadWaypoints(viewport,false,true,CacheType.ALL);
+  cgData.loadWaypoints(viewport,true,false,CacheType.ALL);
+  cgData.loadWaypoints(viewport,true,true,CacheType.ALL);
+  cgData.loadWaypoints(viewport,false,false,CacheType.TRADITIONAL);
+  cgData.loadWaypoints(viewport,false,true,CacheType.TRADITIONAL);
+  cgData.loadWaypoints(viewport,true,false,CacheType.TRADITIONAL);
+  cgData.loadWaypoints(viewport,true,true,CacheType.TRADITIONAL);
 }

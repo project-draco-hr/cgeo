@@ -1,11 +1,10 @@
 {
   final StringBuilder fieldNoteBuffer=new StringBuilder();
-  final cgeoapplication app=cgeoapplication.getInstance();
   try {
     int i=0;
     for (    cgCache cache : caches) {
       if (cache.isLogOffline()) {
-        appendFieldNote(fieldNoteBuffer,cache,app.loadLogOffline(cache.getGeocode()));
+        appendFieldNote(fieldNoteBuffer,cache,cgData.loadLogOffline(cache.getGeocode()));
         publishProgress(++i);
       }
     }

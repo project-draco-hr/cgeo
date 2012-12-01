@@ -57,7 +57,7 @@
       if (search != null && !search.isEmpty()) {
         final Set<String> geocodes=search.getGeocodes();
         if (Settings.isPremiumMember()) {
-          lastSearchViewport=cgeoapplication.getInstance().getBounds(geocodes);
+          lastSearchViewport=cgData.getBounds(geocodes);
         }
  else {
           lastSearchViewport=new Viewport(center,center);

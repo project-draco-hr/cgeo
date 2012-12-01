@@ -3,10 +3,9 @@
     Log.e("cgCache.searchByGeocode: No geocode nor guid given");
     return null;
   }
-  final cgeoapplication app=cgeoapplication.getInstance();
-  if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (app.isOffline(geocode,guid) || app.isThere(geocode,guid,true,true))) {
+  if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (cgData.isOffline(geocode,guid) || cgData.isThere(geocode,guid,true,true))) {
     final SearchResult search=new SearchResult();
-    final String realGeocode=StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
+    final String realGeocode=StringUtils.isNotBlank(geocode) ? geocode : cgData.getGeocodeForGuid(guid);
     search.addGeocode(realGeocode);
     return search;
   }

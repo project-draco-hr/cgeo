@@ -1,6 +1,6 @@
 {
   TextView lastBackup=(TextView)findViewById(R.id.backup_last);
-  File lastBackupFile=cgeoapplication.isRestoreFile();
+  File lastBackupFile=cgData.getRestoreFile();
   if (lastBackupFile != null) {
     lastBackup.setText(res.getString(R.string.init_backup_last) + " " + Formatter.formatTime(lastBackupFile.lastModified())+ ", "+ Formatter.formatDate(lastBackupFile.lastModified()));
   }

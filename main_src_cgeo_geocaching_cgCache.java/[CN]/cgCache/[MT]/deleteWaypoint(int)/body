@@ -5,8 +5,8 @@
   }
   if (waypoint.isUserDefined()) {
     waypoints.remove(index);
-    cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-    cgeoapplication.getInstance().removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    cgData.deleteWaypoint(waypoint.getId());
+    cgData.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
     if (waypoint.isFinalWithCoords()) {
       resetFinalDefined();
     }

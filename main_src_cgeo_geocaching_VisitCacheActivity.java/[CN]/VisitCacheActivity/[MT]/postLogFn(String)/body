@@ -7,10 +7,10 @@
       if (typeSelected == LogType.FOUND_IT) {
         cache.setFound(true);
       }
-      app.updateCache(cache);
+      cgData.saveChangedCache(cache);
     }
     if (status == StatusCode.NO_ERROR) {
-      app.clearLogOffline(geocode);
+      cgData.clearLogOffline(geocode);
     }
     if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
       Twitter.postTweetCache(geocode);

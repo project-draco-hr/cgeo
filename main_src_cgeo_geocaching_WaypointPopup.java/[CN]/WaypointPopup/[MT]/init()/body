@@ -1,6 +1,6 @@
 {
   super.init();
-  waypoint=app.loadWaypoint(waypointId);
+  waypoint=cgData.loadWaypoint(waypointId);
   try {
     if (StringUtils.isNotBlank(waypoint.getName())) {
       setTitle(waypoint.getName());

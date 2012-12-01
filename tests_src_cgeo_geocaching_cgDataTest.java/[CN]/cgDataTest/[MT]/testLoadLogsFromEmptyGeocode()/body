@@ -1,6 +1,5 @@
 {
-  cgeoapplication app=cgeoapplication.getInstance();
-  List<LogEntry> logs=app.loadLogs("");
+  List<LogEntry> logs=cgData.loadLogs("");
   assertNotNull("Logs must not be null",logs);
   assertEquals("Logs from empty geocode must be empty",0,logs.size());
 }

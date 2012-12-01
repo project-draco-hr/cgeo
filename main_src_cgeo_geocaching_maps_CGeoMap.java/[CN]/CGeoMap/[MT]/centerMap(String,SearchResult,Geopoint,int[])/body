@@ -14,10 +14,10 @@
     try {
       Viewport viewport=null;
       if (geocodeCenter != null) {
-        viewport=app.getBounds(geocodeCenter);
+        viewport=cgData.getBounds(geocodeCenter);
       }
  else       if (searchCenter != null) {
-        viewport=app.getBounds(searchCenter.getGeocodes());
+        viewport=cgData.getBounds(searchCenter.getGeocodes());
       }
       if (viewport == null) {
         return;

@@ -4,7 +4,7 @@
   if (Settings.isPremiumMember() || search.getError() == null) {
     assertEquals(1,search.getGeocodes().size());
     assertTrue(search.getGeocodes().contains(geocode));
-    return cgeoapplication.getInstance().loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+    return cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   }
   assertEquals(0,search.getGeocodes().size());
   return null;

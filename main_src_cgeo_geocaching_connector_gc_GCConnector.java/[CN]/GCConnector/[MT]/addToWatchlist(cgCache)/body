@@ -1,7 +1,7 @@
 {
   final boolean added=GCParser.addToWatchlist(cache);
   if (added) {
-    cgeoapplication.getInstance().updateCache(cache);
+    cgData.saveChangedCache(cache);
   }
   return added;
 }

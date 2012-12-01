@@ -1,7 +1,7 @@
 {
   try {
-    cgeoapplication.getInstance().markDropped(Collections.singletonList(this));
-    cgeoapplication.getInstance().removeCache(getGeocode(),EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    cgData.markDropped(Collections.singletonList(this));
+    cgData.removeCache(getGeocode(),EnumSet.of(RemoveFlag.REMOVE_CACHE));
     handler.sendMessage(Message.obtain());
   }
  catch (  Exception e) {
