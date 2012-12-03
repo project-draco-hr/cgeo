@@ -1,0 +1,56 @@
+{
+  try {
+    setAdapter();
+    updateTitle();
+    setDateComparatorForEventList();
+    showFooterMoreCaches();
+    if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
+      AlertDialog.Builder dialog=new AlertDialog.Builder(cgeocaches.this);
+      dialog.setTitle(res.getString(R.string.license));
+      dialog.setMessage(res.getString(R.string.err_license));
+      dialog.setCancelable(true);
+      dialog.setNegativeButton(res.getString(R.string.license_dismiss),new DialogInterface.OnClickListener(){
+        @Override public void onClick(        DialogInterface dialog,        int id){
+          Cookies.clearCookies();
+          dialog.cancel();
+        }
+      }
+);
+      dialog.setPositiveButton(res.getString(R.string.license_show),new DialogInterface.OnClickListener(){
+        @Override public void onClick(        DialogInterface dialog,        int id){
+          Cookies.clearCookies();
+          startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
+        }
+      }
+);
+      AlertDialog alert=dialog.create();
+      alert.show();
+    }
+ else     if (search != null && search.getError() != null) {
+      showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString(res)+ '.');
+      hideLoading();
+      showProgress(false);
+      finish();
+      return;
+    }
+    setAdapterCurrentCoordinates(false);
+  }
+ catch (  Exception e) {
+    showToast(res.getString(R.string.err_detail_cache_find_any));
+    Log.e("cgeocaches.loadCachesHandler: " + e.toString());
+    hideLoading();
+    showProgress(false);
+    finish();
+    return;
+  }
+  try {
+    hideLoading();
+    showProgress(false);
+  }
+ catch (  Exception e2) {
+    Log.e("cgeocaches.loadCachesHandler.2: " + e2.toString());
+  }
+  if (adapter != null) {
+    adapter.setSelectMode(false);
+  }
+}
