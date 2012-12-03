@@ -1,20 +1,19 @@
 {
-  CheckBox check=(CheckBox)arg0;
-  if (lastBoxChecked == check) {
-    check.setChecked(false);
-    lastBoxChecked=null;
-    okButton.setEnabled(false);
-    okButton.setVisibility(View.INVISIBLE);
-    SimpleDirChooser.this.checkedText="";
+  Option lastOption=(lastPosition > -1) ? adapter.getItem(lastPosition) : null;
+  Option currentOption=adapter.getItem(position);
+  if (lastOption != null) {
+    lastOption.setChecked(false);
   }
- else {
-    if (lastBoxChecked != null) {
-      lastBoxChecked.setChecked(false);
-    }
-    check.setChecked(true);
-    lastBoxChecked=check;
+  if (currentOption != lastOption) {
+    currentOption.setChecked(true);
+    lastPosition=position;
     okButton.setEnabled(true);
     okButton.setVisibility(View.VISIBLE);
-    SimpleDirChooser.this.checkedText=checkedText;
   }
+ else {
+    lastPosition=-1;
+    okButton.setEnabled(false);
+    okButton.setVisibility(View.INVISIBLE);
+  }
+  arg0.refreshDrawableState();
 }
