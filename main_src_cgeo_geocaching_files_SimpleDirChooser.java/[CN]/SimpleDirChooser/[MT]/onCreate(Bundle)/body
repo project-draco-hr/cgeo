@@ -19,7 +19,7 @@
   okButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       Intent intent=new Intent();
-      String chosenDirName=File.separator + checkedText;
+      String chosenDirName=File.separator + adapter.getItem(lastPosition).getName();
       intent.putExtra(EXTRA_CHOSEN_DIR,currentDir.getAbsolutePath() + chosenDirName);
       setResult(RESULT_OK,intent);
       finish();
