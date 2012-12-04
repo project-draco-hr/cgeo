@@ -13,7 +13,8 @@
     }
     CheckBox check=(CheckBox)v.findViewById(R.id.CheckBox);
     if (check != null) {
-      check.setOnClickListener(new OnCheckBoxClickListener(option.getName()));
+      check.setOnClickListener(new OnCheckBoxClickListener(position));
+      check.setChecked(option.isChecked());
     }
   }
   return v;
