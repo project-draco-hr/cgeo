@@ -1,12 +1,12 @@
 {
   int checked=0;
   final ArrayList<CheckBox> boxes=solo.getCurrentCheckBoxes();
-  assertNotNull(boxes);
-  assertTrue(boxes.size() > 1);
+  assertNotNull("Could not get checkboxes",boxes);
+  assertTrue("There are no checkboxes",boxes.size() > 1);
   for (  CheckBox checkBox : boxes) {
     if (checkBox.isChecked()) {
       checked++;
     }
   }
-  assertEquals(expectedChecked,checked);
+  assertEquals(message,expectedChecked,checked);
 }
