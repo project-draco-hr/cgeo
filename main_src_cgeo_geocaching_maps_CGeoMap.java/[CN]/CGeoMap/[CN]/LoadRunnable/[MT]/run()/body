@@ -25,7 +25,7 @@
     Set<cgCache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
     caches.removeAll(cachesFromSearchResult);
     caches.addAll(cachesFromSearchResult);
-    if (isLiveEnabled) {
+    if (mapMode == MapMode.LIVE) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
       final List<cgCache> tempList=caches.getAsList();
