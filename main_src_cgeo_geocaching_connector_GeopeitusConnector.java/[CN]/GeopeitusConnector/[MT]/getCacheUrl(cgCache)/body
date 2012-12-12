@@ -1,3 +1,3 @@
 {
-  return "http://" + getHost() + "/aare/"+ StringUtils.stripStart(cache.getGeocode().substring(2),"0");
+  return getCacheUrlPrefix() + StringUtils.stripStart(cache.getGeocode().substring(2),"0");
 }

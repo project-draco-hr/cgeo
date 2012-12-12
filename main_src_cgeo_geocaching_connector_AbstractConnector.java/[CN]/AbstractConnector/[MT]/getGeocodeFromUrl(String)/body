@@ -1,0 +1,10 @@
+{
+  final String urlPrefix=getCacheUrlPrefix();
+  if (StringUtils.startsWith(url,urlPrefix)) {
+    String geocode=url.substring(urlPrefix.length());
+    if (canHandle(geocode)) {
+      return geocode;
+    }
+  }
+  return null;
+}

@@ -1,0 +1,5 @@
+{
+  assertEquals("GC34PLO",ConnectorFactory.getGeocodeFromURL("http://coord.info/GC34PLO"));
+  assertEquals("OX1234",ConnectorFactory.getGeocodeFromURL("http://www.opencaching.com/#!geocache/OX1234"));
+  assertNull(ConnectorFactory.getGeocodeFromURL("http://www.opencaching.com/#!geocache/" + "GC12345"));
+}

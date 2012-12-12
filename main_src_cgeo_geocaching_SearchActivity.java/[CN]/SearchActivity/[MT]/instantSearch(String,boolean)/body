@@ -1,5 +1,8 @@
 {
-  final String geocode=StringUtils.trim(query);
+  String geocode=ConnectorFactory.getGeocodeFromURL(query);
+  if (StringUtils.isEmpty(geocode)) {
+    geocode=StringUtils.trim(query);
+  }
   final IConnector connector=ConnectorFactory.getConnector(geocode);
   if (connector instanceof ISearchByGeocode) {
     final Intent cachesIntent=new Intent(this,CacheDetailActivity.class);
