@@ -15,7 +15,7 @@
     return;
   }
   final ArrayList<cgCache> oldList=new ArrayList<cgCache>(list);
-  Collections.sort(list,new DistanceComparator(coords,list));
+  Collections.sort(list,getPotentialInversion(new DistanceComparator(coords,list)));
   if (list.equals(oldList)) {
     return;
   }

@@ -1,4 +1,10 @@
 {
+  if (cacheComparator != null && comparator != null && cacheComparator.getClass() == comparator.getClass()) {
+    inverseSort=!inverseSort;
+  }
+ else {
+    inverseSort=false;
+  }
   cacheComparator=comparator;
   forceSort();
 }

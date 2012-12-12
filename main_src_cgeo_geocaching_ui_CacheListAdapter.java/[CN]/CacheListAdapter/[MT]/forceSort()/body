@@ -7,7 +7,7 @@
     updateSortByDistance();
   }
  else {
-    Collections.sort(list,cacheComparator);
+    Collections.sort(list,getPotentialInversion(cacheComparator));
   }
   notifyDataSetChanged();
 }

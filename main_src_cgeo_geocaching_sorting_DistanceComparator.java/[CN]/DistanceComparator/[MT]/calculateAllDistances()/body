@@ -1,0 +1,14 @@
+{
+  if (cachedDistances) {
+    return;
+  }
+  for (  cgCache cache : list) {
+    if (cache.getCoords() != null) {
+      cache.setDistance(coords.distanceTo(cache.getCoords()));
+    }
+ else {
+      cache.setDistance(null);
+    }
+  }
+  cachedDistances=true;
+}
