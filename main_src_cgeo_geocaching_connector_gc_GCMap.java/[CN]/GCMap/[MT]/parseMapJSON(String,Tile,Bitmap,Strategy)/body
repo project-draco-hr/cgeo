@@ -19,6 +19,7 @@
       throw new JSONException("No data inside JSON");
     }
     Map<String,List<UTFGridPosition>> positions=new HashMap<String,List<UTFGridPosition>>();
+    Map<String,List<UTFGridPosition>> singlePositions=new HashMap<String,List<UTFGridPosition>>();
     for (int i=1; i < keys.length(); i++) {
       String key=keys.getString(i);
       if (StringUtils.isNotBlank(key)) {
@@ -29,11 +30,17 @@
           String id=cacheInfo.getString("i");
           nameCache.put(id,cacheInfo.getString("n"));
           List<UTFGridPosition> listOfPositions=positions.get(id);
+          List<UTFGridPosition> singleListOfPositions=singlePositions.get(id);
           if (listOfPositions == null) {
             listOfPositions=new ArrayList<UTFGridPosition>();
             positions.put(id,listOfPositions);
+            singleListOfPositions=new ArrayList<UTFGridPosition>();
+            singlePositions.put(id,singleListOfPositions);
           }
           listOfPositions.add(pos);
+          if (dataForKey.length() == 1) {
+            singleListOfPositions.add(pos);
+          }
         }
       }
     }
@@ -48,8 +55,12 @@
       cache.setName(nameCache.get(id));
       cache.setZoomlevel(tile.getZoomlevel());
       cache.setCoords(tile.getCoord(xy));
-      if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && positions.size() < 64 && bitmap != null) {
-        IconDecoder.parseMapPNG(cache,bitmap,xy,tile.getZoomlevel());
+      if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
+        for (        UTFGridPosition singlePos : singlePositions.get(id)) {
+          if (IconDecoder.parseMapPNG(cache,bitmap,singlePos,tile.getZoomlevel())) {
+            break;
+          }
+        }
       }
  else {
         cache.setType(CacheType.UNKNOWN);

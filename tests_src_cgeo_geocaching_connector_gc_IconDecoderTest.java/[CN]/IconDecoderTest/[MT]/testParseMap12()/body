@@ -24,7 +24,13 @@
   tradi=parseMapPNG(bitmap,9,146,12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
   tradi=parseMapPNG(bitmap,117,225,12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
   tradi=parseMapPNG(bitmap,90,107,12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
+  int found=0;
+  found=parseMapPNG(bitmap,150,124,12).isFound() ? found + 1 : found;
+  found=parseMapPNG(bitmap,176,82,12).isFound() ? found + 1 : found;
+  found=parseMapPNG(bitmap,240,140,12).isFound() ? found + 1 : found;
+  found=parseMapPNG(bitmap,211,127,12).isFound() ? found + 1 : found;
   assertEquals(7,multi);
   assertEquals(7,mystery);
   assertEquals(7,tradi);
+  assertEquals(4,found);
 }

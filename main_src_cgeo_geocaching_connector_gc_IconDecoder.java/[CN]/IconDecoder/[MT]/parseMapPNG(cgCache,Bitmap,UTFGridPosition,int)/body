@@ -1,8 +1,9 @@
 {
   if (zoomlevel >= 14) {
-    parseMapPNG14(cache,bitmap,xy);
+    return parseMapPNG14(cache,bitmap,xy);
   }
- else {
-    parseMapPNG13(cache,bitmap,xy);
+  if (zoomlevel <= 11) {
+    return parseMapPNG11(cache,bitmap,xy);
   }
+  return parseMapPNG13(cache,bitmap,xy);
 }

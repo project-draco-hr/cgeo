@@ -3,29 +3,29 @@
   final int topY=xy.getY() * 4;
   final int bitmapWidth=bitmap.getWidth();
   final int bitmapHeight=bitmap.getHeight();
-  int[] pngType=new int[7];
+  int[] pngType=new int[5];
   if ((topX < 0) || (topY < 0) || (topX + 4 > bitmapWidth)|| (topY + 4 > bitmapHeight)) {
     return false;
   }
   for (int x=topX; x < topX + 4; x++) {
     for (int y=topY; y < topY + 4; y++) {
       int color=bitmap.getPixel(x,y);
-      if ((color & 0xFFFFFF) == 0x5f5f5f) {
-        continue;
-      }
       if ((color >>> 24) != 255) {
         continue;
       }
-      int red=(color & 0xFF0000) >> 16;
-      int green=(color & 0xFF00) >> 8;
-      int blue=color & 0xFF;
-      int type=getCacheTypeFromPixel13(red,green,blue);
+      int r=(color & 0xFF0000) >> 16;
+      int g=(color & 0xFF00) >> 8;
+      int b=color & 0xFF;
+      if (((r == 52) && (g == 52) && (b == 52)) || ((r == 69) && (g == 69) && (b == 69)) || ((r == 90) && (g == 90) && (b == 90))|| ((r == 233) && (g == 233) && (b == 234))|| ((r == 255) && (g == 255) && (b == 255))) {
+        continue;
+      }
+      int type=getCacheTypeFromPixel11(r,g,b);
       pngType[type]++;
     }
   }
   int type=-1;
   int count=0;
-  for (int x=0; x < 7; x++) {
+  for (int x=0; x < 5; x++) {
     if (pngType[x] > count) {
       count=pngType[x];
       type=x;
@@ -47,12 +47,6 @@ cache.setType(CacheType.EVENT);
 return true;
 case 4:
 cache.setType(CacheType.EARTH);
-return true;
-case 5:
-cache.setFound(true);
-return true;
-case 6:
-cache.setOwn(true);
 return true;
 }
 }
