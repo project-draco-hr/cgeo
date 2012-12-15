@@ -39,11 +39,21 @@
   if (StringUtils.isNotBlank(tableInside)) {
     String result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_TERRAIN,true,null);
     if (result != null) {
-      cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
+      try {
+        cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
+      }
+ catch (      NumberFormatException e) {
+        Log.e("Error parsing terrain value",e);
+      }
     }
     result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_DIFFICULTY,true,null);
     if (result != null) {
-      cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
+      try {
+        cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
+      }
+ catch (      NumberFormatException e) {
+        Log.e("Error parsing difficulty value",e);
+      }
     }
     cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER_DISPLAYNAME,true,cache.getOwnerDisplayName())));
     try {
@@ -61,7 +71,12 @@
  catch (    ParseException e) {
       Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
     }
-    cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
+    try {
+      cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
+    }
+ catch (    NumberFormatException e) {
+      Log.e("Error parsing favourite count",e);
+    }
     cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id)));
   }
   cache.setFound(BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));

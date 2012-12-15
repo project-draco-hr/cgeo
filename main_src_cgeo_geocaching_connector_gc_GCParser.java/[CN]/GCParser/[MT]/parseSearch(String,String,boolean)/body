@@ -83,7 +83,12 @@
     final Matcher matcherTbs=GCConstants.PATTERN_SEARCH_TRACKABLES.matcher(row);
     while (matcherTbs.find()) {
       if (matcherTbs.groupCount() > 0) {
-        cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
+        try {
+          cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
+        }
+ catch (        NumberFormatException e) {
+          Log.e("Error parsing trackables count",e);
+        }
         inventoryPre=matcherTbs.group(2);
       }
     }

@@ -3,7 +3,7 @@
     return URLDecoder.decode(text,CharEncoding.UTF_8);
   }
  catch (  UnsupportedEncodingException e) {
-    e.printStackTrace();
+    Log.e("Network.decode",e);
   }
   return null;
 }

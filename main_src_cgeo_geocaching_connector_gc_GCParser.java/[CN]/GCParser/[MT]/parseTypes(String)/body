@@ -14,9 +14,14 @@
     final Matcher typeMatcher=GCConstants.PATTERN_TYPE2.matcher(typesText);
     while (typeMatcher.find()) {
       if (typeMatcher.groupCount() > 1) {
-        final int type=Integer.parseInt(typeMatcher.group(2));
-        if (type > 0) {
-          types.add(LogType.getById(type));
+        try {
+          int type=Integer.parseInt(typeMatcher.group(2));
+          if (type > 0) {
+            types.add(LogType.getById(type));
+          }
+        }
+ catch (        NumberFormatException e) {
+          Log.e("Error parsing log types",e);
         }
       }
     }

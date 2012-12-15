@@ -1,5 +1,8 @@
 {
-  if (other == null || !(other instanceof Viewport)) {
+  if (this == other) {
+    return true;
+  }
+  if (!(other instanceof Viewport)) {
     return false;
   }
   final Viewport vp=(Viewport)other;
