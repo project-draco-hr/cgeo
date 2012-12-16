@@ -1,17 +1,17 @@
 {
   init();
   Set<String> geocodes=new HashSet<String>();
-  StringBuilder specifySql=new StringBuilder();
-  specifySql.append("visiteddate > 0");
+  StringBuilder selection=new StringBuilder("visiteddate > 0");
   if (detailedOnly) {
-    specifySql.append(" and detailed = 1");
+    selection.append(" and detailed = 1");
   }
+  String[] selectionArgs=null;
   if (cacheType != CacheType.ALL) {
-    specifySql.append(" and type = ");
-    specifySql.append(DatabaseUtils.sqlEscapeString(cacheType.id));
+    selection.append(" and type = ?");
+    selectionArgs=new String[]{String.valueOf(cacheType.id)};
   }
   try {
-    Cursor cursor=database.query(dbTableCaches,new String[]{"geocode"},specifySql.toString(),null,null,null,"visiteddate",null);
+    Cursor cursor=database.query(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,"visiteddate",null);
     if (cursor != null) {
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();

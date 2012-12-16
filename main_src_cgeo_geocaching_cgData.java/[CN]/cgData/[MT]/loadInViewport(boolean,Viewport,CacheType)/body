@@ -4,16 +4,17 @@
   if (!stored) {
     geocodes.addAll(cacheCache.getInViewport(viewport,cacheType));
   }
-  final StringBuilder where=new StringBuilder(buildCoordinateWhere(dbTableCaches,viewport));
+  final StringBuilder selection=new StringBuilder(buildCoordinateWhere(dbTableCaches,viewport));
+  String[] selectionArgs=null;
   if (cacheType != CacheType.ALL) {
-    where.append(" and type = ");
-    where.append(DatabaseUtils.sqlEscapeString(cacheType.id));
+    selection.append(" and type = ?");
+    selectionArgs=new String[]{String.valueOf(cacheType.id)};
   }
   if (stored) {
-    where.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
+    selection.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
   }
   try {
-    final Cursor cursor=database.query(dbTableCaches,new String[]{"geocode"},where.toString(),null,null,null,null,"500");
+    final Cursor cursor=database.query(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,null,"500");
     if (cursor.moveToFirst()) {
       final int index=cursor.getColumnIndex("geocode");
       do {
