@@ -4,11 +4,13 @@
   Strategy strategy=Settings.getLiveMapStrategy();
   Strategy testStrategy=Strategy.FAST;
   Settings.setLiveMapStrategy(testStrategy);
+  final CacheType cacheType=Settings.getCacheType();
   try {
     final String[] tokens=null;
     MockedCache cache=new GC2CJPF();
     deleteCacheFromDBAndLogout(cache.getGeocode());
     Tile.Cache.removeFromTileCache(cache);
+    Settings.setCacheType(CacheType.ALL);
     Viewport viewport=new Viewport(cache,0.003,0.003);
     SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
     assertNotNull(search);
@@ -30,5 +32,6 @@
     Settings.setMemberStatus(memberStatus);
     Login.login();
     Settings.setLiveMapStrategy(strategy);
+    Settings.setCacheType(cacheType);
   }
 }
