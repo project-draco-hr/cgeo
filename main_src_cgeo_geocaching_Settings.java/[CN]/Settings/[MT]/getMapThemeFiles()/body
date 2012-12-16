@@ -2,5 +2,5 @@
   File directory=new File(Settings.getCustomRenderThemeBaseFolder());
   List<File> result=new ArrayList<File>();
   FileUtils.listDir(result,directory,new ExtensionsBasedFileSelector(new String[]{"xml"}),null);
-  return result.toArray(new File[]{});
+  return result.toArray(new File[result.size()]);
 }
