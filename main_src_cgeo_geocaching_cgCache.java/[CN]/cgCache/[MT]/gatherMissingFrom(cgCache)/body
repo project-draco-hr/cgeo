@@ -125,8 +125,14 @@
   if (logCounts.size() == 0) {
     logCounts=other.logCounts;
   }
-  if (!userModifiedCoords) {
-    userModifiedCoords=other.userModifiedCoords;
+  userModifiedCoords=false;
+  if (waypoints != null) {
+    for (    cgWaypoint wpt : waypoints) {
+      if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
+        userModifiedCoords=true;
+        break;
+      }
+    }
   }
   if (!reliableLatLon) {
     reliableLatLon=other.reliableLatLon;

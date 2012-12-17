@@ -44,10 +44,15 @@ Collections.sort(sortedWaypoints);
 final cgWaypoint waypoint=sortedWaypoints.get(i);
 final int index=cache.getWaypoints().indexOf(waypoint);
 menu.setHeaderTitle(res.getString(R.string.waypoint));
+if (waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
+menu.add(CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES,index,0,R.string.waypoint_reset_cache_coords);
+}
+ else {
 menu.add(CONTEXT_MENU_WAYPOINT_EDIT,index,0,R.string.waypoint_edit);
 menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE,index,0,R.string.waypoint_duplicate);
+}
 contextMenuWPIndex=index;
-if (waypoint.isUserDefined()) {
+if (waypoint.isUserDefined() && !waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
 menu.add(CONTEXT_MENU_WAYPOINT_DELETE,index,0,R.string.waypoint_delete);
 }
 if (waypoint.getCoords() != null) {
