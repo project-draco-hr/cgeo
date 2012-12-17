@@ -1,12 +1,7 @@
 {
-  if (searchResult != null) {
-    this.geocodes=new HashSet<String>(searchResult.geocodes);
-    this.error=searchResult.error;
-    this.url=searchResult.url;
-    this.viewstates=searchResult.viewstates;
-    this.setTotal(searchResult.getTotal());
-  }
- else {
-    this.geocodes=new HashSet<String>();
-  }
+  geocodes=new HashSet<String>(searchResult.geocodes);
+  error=searchResult.error;
+  url=searchResult.url;
+  viewstates=searchResult.viewstates;
+  setTotal(searchResult.getTotal());
 }
