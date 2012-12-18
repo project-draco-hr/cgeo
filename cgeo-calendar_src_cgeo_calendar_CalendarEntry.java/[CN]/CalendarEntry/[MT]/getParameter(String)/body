@@ -7,6 +7,7 @@
     return URLDecoder.decode(param,"UTF-8").trim();
   }
  catch (  UnsupportedEncodingException e) {
+    Log.e("CalendarEntry.getParameter",e);
   }
   return "";
 }
