@@ -48,7 +48,7 @@
   }
   String name=((EditText)findViewById(R.id.name)).getText().toString().trim();
   if (name.isEmpty()) {
-    name=res.getString(R.string.waypoint) + " " + String.valueOf(wpCount + 1);
+    name=res.getString(R.string.waypoint) + " " + (wpCount + 1);
   }
   final String note=((EditText)findViewById(R.id.note)).getText().toString().trim();
   final cgWaypoint waypoint=new cgWaypoint(name,type,own);
