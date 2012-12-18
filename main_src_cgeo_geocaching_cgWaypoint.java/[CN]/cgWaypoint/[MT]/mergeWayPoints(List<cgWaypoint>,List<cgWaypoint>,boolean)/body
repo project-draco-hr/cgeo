@@ -3,7 +3,7 @@
     for (    cgWaypoint old : oldPoints) {
       if (old != null) {
         boolean merged=false;
-        if (old.name != null && old.name.length() > 0) {
+        if (old.name != null && !old.name.isEmpty()) {
           for (          cgWaypoint waypoint : newPoints) {
             if (waypoint != null && waypoint.name != null) {
               if (old.name.equalsIgnoreCase(waypoint.name)) {

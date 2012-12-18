@@ -1,6 +1,6 @@
 {
   final String log=currentLogText();
-  if (force || (log.length() > 0 && !StringUtils.equals(log,text))) {
+  if (force || (!log.isEmpty() && !StringUtils.equals(log,text))) {
     cache.logOffline(this,log,date,typeSelected);
   }
   text=log;

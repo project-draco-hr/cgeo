@@ -1,7 +1,7 @@
 {
   final List<cgCache> protectedCaches=caches.getAsList();
   int count=0;
-  if (protectedCaches.size() > 0) {
+  if (!protectedCaches.isEmpty()) {
     final Viewport viewport=mapView.getViewport();
     for (    final cgCache cache : protectedCaches) {
       if (cache != null && cache.getCoords() != null) {

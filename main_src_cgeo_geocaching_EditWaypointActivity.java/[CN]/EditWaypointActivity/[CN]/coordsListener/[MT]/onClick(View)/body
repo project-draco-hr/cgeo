@@ -47,7 +47,7 @@
     coords=coords.project(bearing,distance);
   }
   String name=((EditText)findViewById(R.id.name)).getText().toString().trim();
-  if (name.length() == 0) {
+  if (name.isEmpty()) {
     name=res.getString(R.string.waypoint) + " " + String.valueOf(wpCount + 1);
   }
   final String note=((EditText)findViewById(R.id.note)).getText().toString().trim();

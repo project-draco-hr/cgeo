@@ -1,5 +1,5 @@
 {
-  if (((EditText)findViewById(R.id.pin)).getText().toString().length() == 0) {
+  if (((EditText)findViewById(R.id.pin)).getText().toString().isEmpty()) {
     helpDialog(res.getString(R.string.auth_dialog_pin_title),res.getString(R.string.auth_dialog_pin_message));
     return;
   }
