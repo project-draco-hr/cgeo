@@ -68,13 +68,14 @@ if (waypointAround != null) {
 cgeocaches.startActivityCoordinates(this,waypointAround.getCoords());
 }
 break;
+case CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES:
+new ResetCacheCoordinatesDialog(cache,cache.getWaypoint(index),this).show();
+break;
 default :
-{
 if (imagesList != null && imagesList.onContextItemSelected(item)) {
 return true;
 }
 return onOptionsItemSelected(item);
-}
 }
 return false;
 }

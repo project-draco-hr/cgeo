@@ -1,0 +1,28 @@
+{
+  super(activity);
+  View layout=activity.getLayoutInflater().inflate(R.layout.reset_cache_coords_dialog,null);
+  setView(layout);
+  uploadOption=(CheckBox)layout.findViewById(R.id.upload);
+  resetLocalyOption=(CheckBox)layout.findViewById(R.id.local);
+  if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
+    uploadOption.setChecked(true);
+    uploadOption.setVisibility(View.VISIBLE);
+  }
+  uploadOption.setOnCheckedChangeListener(this);
+  resetLocalyOption.setOnCheckedChangeListener(this);
+  layout.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      dismiss();
+      final ProgressDialog p=ProgressDialog.show(CacheDetailActivity.this,res.getString(R.string.cache),res.getString(R.string.waypoint_reset),true);
+      Handler h=new Handler(){
+        @Override public void handleMessage(        Message msg){
+          p.dismiss();
+          notifyDataSetChanged();
+        }
+      }
+;
+      new ResetCoordsThread(cache,h,wpt,resetLocalyOption.isChecked(),uploadOption.isChecked(),p).start();
+    }
+  }
+);
+}

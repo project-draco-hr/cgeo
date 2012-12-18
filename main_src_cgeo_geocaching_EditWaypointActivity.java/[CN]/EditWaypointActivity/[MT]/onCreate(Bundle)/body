@@ -27,7 +27,7 @@
   Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
   addWaypoint.setOnClickListener(new coordsListener());
   List<String> wayPointNames=new ArrayList<String>();
-  for (  WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN) {
+  for (  WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
     wayPointNames.add(wpt.getL10n());
   }
   AutoCompleteTextView textView=(AutoCompleteTextView)findViewById(R.id.name);
@@ -42,6 +42,11 @@
   }
  else {
     initializeWaypointTypeSelector();
+  }
+  IConnector con;
+  if (geocode != null) {
+    con=ConnectorFactory.getConnector(geocode);
+    setUploadingCheckBoxVisibleByConnector(con);
   }
   initializeDistanceUnitSelector();
   disableSuggestions((EditText)findViewById(R.id.distance));

@@ -3,6 +3,8 @@
   final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString() + distanceUnit;
   final String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
   final String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
+  final CheckBox setAsCacheCoordsCheckBox=(CheckBox)findViewById(R.id.setAsCacheCoordsCheckBox);
+  final CheckBox uploadCoordsToWebsiteCheckBox=(CheckBox)findViewById(R.id.uploadCoordsToWebsiteCheckBox);
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     helpDialog(res.getString(R.string.err_point_no_position_given_title),res.getString(R.string.err_point_no_position_given));
     return;
@@ -63,7 +65,35 @@
     if (Settings.isStoreOfflineWpMaps()) {
       StaticMapsProvider.storeWaypointStaticMap(cache,waypoint,false);
     }
-    finish();
+    if (setAsCacheCoordsCheckBox.isChecked()) {
+      if (!cache.hasUserModifiedCoords()) {
+        final cgWaypoint origWaypoint=new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);
+        origWaypoint.setCoords(cache.getCoords());
+        cache.addOrChangeWaypoint(origWaypoint,false);
+        cache.setUserModifiedCoords(true);
+      }
+      cache.setCoords(waypoint.getCoords());
+      cgData.saveChangedCache(cache);
+    }
+    if (uploadCoordsToWebsiteCheckBox.isChecked() && waypoint != null && waypoint.getCoords() != null) {
+      if (cache.supportsOwnCoordinates()) {
+        final ProgressDialog progress=ProgressDialog.show(EditWaypointActivity.this,getString(R.string.cache),getString(R.string.waypoint_coordinates_uploading_to_website,waypoint.getCoords()),true);
+        Handler finishHandler=new Handler(){
+          @Override public void handleMessage(          Message msg){
+            progress.dismiss();
+            finish();
+          }
+        }
+;
+        new UploadModifiedCoordsThread(cache,waypoint.getCoords(),progress,finishHandler).start();
+      }
+ else {
+        showToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+      }
+    }
+ else {
+      finish();
+    }
   }
  else {
     showToast(res.getString(R.string.err_waypoint_add_failed));

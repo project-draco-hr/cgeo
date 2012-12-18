@@ -1,0 +1,23 @@
+{
+  boolean result=false;
+  IConnector con=ConnectorFactory.getConnector(cache);
+  if (con.supportsOwnCoordinates()) {
+    result=con.uploadModifiedCoordinates(cache,waypoint_uploaded);
+  }
+  final boolean res=result;
+  runOnUiThread(new Runnable(){
+    @Override public void run(){
+      if (res) {
+        showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website,waypoint_uploaded.getCoords().toString()));
+      }
+ else {
+        showToast(getString(R.string.waypoint_coordinates_upload_error));
+      }
+      if (progress != null) {
+        progress.dismiss();
+      }
+      handler.sendMessage(Message.obtain());
+    }
+  }
+);
+}
