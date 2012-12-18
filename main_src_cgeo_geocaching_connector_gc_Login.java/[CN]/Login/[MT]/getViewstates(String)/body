@@ -13,10 +13,10 @@
     }
   }
   String[] viewstates=new String[count];
-  int no;
   final Matcher matcherViewstates=GCConstants.PATTERN_VIEWSTATES.matcher(page);
   while (matcherViewstates.find()) {
     String sno=matcherViewstates.group(1);
+    int no;
     if (sno.isEmpty()) {
       no=0;
     }

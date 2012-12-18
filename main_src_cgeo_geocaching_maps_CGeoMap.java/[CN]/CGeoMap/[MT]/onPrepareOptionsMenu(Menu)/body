@@ -6,9 +6,8 @@
       menuItem.setEnabled(mapSource.isAvailable());
     }
   }
-  MenuItem item;
   try {
-    item=menu.findItem(MENU_TRAIL_MODE);
+    MenuItem item=menu.findItem(MENU_TRAIL_MODE);
     if (Settings.isMapTrail()) {
       item.setTitle(res.getString(R.string.map_trail_hide));
     }

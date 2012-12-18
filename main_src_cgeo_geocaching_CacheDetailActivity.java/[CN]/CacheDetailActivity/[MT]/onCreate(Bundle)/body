@@ -4,8 +4,6 @@
   setContentView(R.layout.cacheview);
   setTitle(res.getString(R.string.cache));
   String geocode=null;
-  String guid=null;
-  String name=null;
   if (search != null) {
     cache=search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
     if (cache != null && cache.getGeocode() != null) {
@@ -14,6 +12,8 @@
   }
   final Bundle extras=getIntent().getExtras();
   final Uri uri=getIntent().getData();
+  String name=null;
+  String guid=null;
   if (geocode == null && extras != null) {
     geocode=extras.getString("geocode");
     name=extras.getString("name");

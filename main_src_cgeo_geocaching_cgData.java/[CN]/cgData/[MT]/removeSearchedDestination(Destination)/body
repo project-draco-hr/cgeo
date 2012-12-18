@@ -3,8 +3,8 @@
     return false;
   }
   init();
-  boolean result=false;
   database.beginTransaction();
+  boolean result=false;
   try {
     database.delete(dbTableSearchDestionationHistory,"_id = " + destination.getId(),null);
     database.setTransactionSuccessful();

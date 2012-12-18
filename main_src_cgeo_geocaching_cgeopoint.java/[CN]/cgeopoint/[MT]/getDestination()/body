@@ -1,6 +1,4 @@
 {
-  Geopoint result;
-  Geopoint coords;
   String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
   String distanceText=((EditText)findViewById(R.id.distance)).getText().toString() + distanceUnit;
   String latText=latButton.getText().toString();
@@ -9,6 +7,7 @@
     showToast(res.getString(R.string.err_point_no_position_given));
     return null;
   }
+  Geopoint coords;
   if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
     try {
       coords=new Geopoint(latText,lonText);
@@ -25,6 +24,7 @@
     }
     coords=app.currentGeo().getCoords();
   }
+  Geopoint result;
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     double bearing;
     try {

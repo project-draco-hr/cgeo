@@ -3,8 +3,8 @@
     return false;
   }
   init();
-  boolean status=false;
   database.beginTransaction();
+  boolean status=false;
   try {
     int cnt=database.delete(dbTableLists,"_id = " + (listId - customListIdOffset),null);
     if (cnt > 0) {

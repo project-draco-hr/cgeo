@@ -1,10 +1,10 @@
 {
-  final String host="api.twitter.com";
-  final String path="/oauth/access_token";
-  final String method="POST";
   int status=0;
   try {
     final Parameters params=new Parameters("oauth_verifier",pinEntry.getText().toString());
+    final String method="POST";
+    final String path="/oauth/access_token";
+    final String host="api.twitter.com";
     OAuth.signOAuth(host,path,method,true,params,OAtoken,OAtokenSecret);
     final String line=StringUtils.defaultString(Network.getResponseData(Network.postRequest("https://" + host + path,params)));
     OAtoken="";

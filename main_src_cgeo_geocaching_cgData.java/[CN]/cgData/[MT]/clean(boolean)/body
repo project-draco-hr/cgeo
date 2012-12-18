@@ -4,9 +4,9 @@
   }
   init();
   Log.d("Database clean: started");
-  Cursor cursor;
   Set<String> geocodes=new HashSet<String>();
   try {
+    Cursor cursor;
     if (more) {
       cursor=database.query(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null);
     }

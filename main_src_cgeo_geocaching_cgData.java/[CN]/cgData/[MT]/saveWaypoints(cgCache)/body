@@ -1,7 +1,7 @@
 {
-  boolean result=false;
   init();
   database.beginTransaction();
+  boolean result=false;
   try {
     saveOriginalWaypointsWithoutTransaction(cache);
     database.setTransactionSuccessful();

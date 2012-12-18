@@ -1,10 +1,9 @@
 {
   LinearLayout listView=(LinearLayout)findViewById(R.id.log_list);
   listView.removeAllViews();
-  RelativeLayout rowView;
   if (trackable != null && trackable.getLogs() != null) {
     for (    LogEntry log : trackable.getLogs()) {
-      rowView=(RelativeLayout)inflater.inflate(R.layout.trackable_logs_item,null);
+      RelativeLayout rowView=(RelativeLayout)inflater.inflate(R.layout.trackable_logs_item,null);
       if (log.date > 0) {
         ((TextView)rowView.findViewById(R.id.added)).setText(Formatter.formatShortDate(log.date));
       }

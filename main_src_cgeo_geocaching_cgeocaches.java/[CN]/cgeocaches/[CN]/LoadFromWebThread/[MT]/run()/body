@@ -1,8 +1,8 @@
 {
-  int ret=MSG_DONE;
   removeGeoAndDir();
   int delay=-1;
   int times=0;
+  int ret=MSG_DONE;
   while (!needToStop && times < 3 * 60 / 5) {
     String deviceCode=Settings.getWebDeviceCode();
     if (deviceCode == null) {

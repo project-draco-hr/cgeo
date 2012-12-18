@@ -1,5 +1,4 @@
 {
-  int index;
   cgCache cache=new cgCache();
   if (cacheColumnIndex == null) {
     int[] local_cci=new int[41];
@@ -66,7 +65,7 @@
   cache.setHint(cursor.getString(cacheColumnIndex[14]));
   cache.setSize(CacheSize.getById(cursor.getString(cacheColumnIndex[15])));
   cache.setDifficulty(cursor.getFloat(cacheColumnIndex[16]));
-  index=cacheColumnIndex[17];
+  int index=cacheColumnIndex[17];
   if (cursor.isNull(index)) {
     cache.setDirection(null);
   }

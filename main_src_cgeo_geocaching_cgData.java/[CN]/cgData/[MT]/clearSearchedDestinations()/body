@@ -1,7 +1,7 @@
 {
-  boolean success=true;
   init();
   database.beginTransaction();
+  boolean success=true;
   try {
     database.delete(dbTableSearchDestionationHistory,null,null);
     database.setTransactionSuccessful();

@@ -6,10 +6,9 @@
     long timestamp=System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
     cursor=database.query(dbTableCaches,new String[]{"geocode"},"(detailed = 1 and detailedupdate > ?) or reason > 0",new String[]{Long.toString(timestamp)},null,null,"detailedupdate desc","100");
     if (cursor != null) {
-      int index;
       if (cursor.getCount() > 0) {
         cursor.moveToFirst();
-        index=cursor.getColumnIndex("geocode");
+        int index=cursor.getColumnIndex("geocode");
         do {
           list.add(cursor.getString(index));
         }

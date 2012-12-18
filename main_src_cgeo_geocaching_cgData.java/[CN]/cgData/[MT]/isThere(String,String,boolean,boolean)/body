@@ -16,11 +16,10 @@
       return false;
     }
     if (cursor != null) {
-      int index;
       cnt=cursor.getCount();
       if (cnt > 0) {
         cursor.moveToFirst();
-        index=cursor.getColumnIndex("updated");
+        int index=cursor.getColumnIndex("updated");
         dataUpdated=cursor.getLong(index);
         index=cursor.getColumnIndex("detailedupdate");
         dataDetailedUpdate=cursor.getLong(index);

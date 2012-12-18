@@ -68,9 +68,9 @@
   values.put("onWatchlist",cache.isOnWatchlist() ? 1 : 0);
   values.put("coordsChanged",cache.hasUserModifiedCoords() ? 1 : 0);
   values.put("finalDefined",cache.hasFinalDefined() ? 1 : 0);
-  boolean result=false;
   init();
   database.beginTransaction();
+  boolean result=false;
   try {
     saveAttributesWithoutTransaction(cache);
     saveOriginalWaypointsWithoutTransaction(cache);
