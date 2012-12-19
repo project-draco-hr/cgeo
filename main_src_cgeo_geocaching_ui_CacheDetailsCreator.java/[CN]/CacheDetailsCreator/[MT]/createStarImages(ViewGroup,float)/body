@@ -1,7 +1,5 @@
 {
   final LayoutInflater inflater=LayoutInflater.from(activity);
-  final LinearLayout starsContainer=new LinearLayout(activity);
-  starsContainer.setOrientation(LinearLayout.HORIZONTAL);
   for (int i=0; i < 5; i++) {
     ImageView star=(ImageView)inflater.inflate(R.layout.star,null);
     if (value - i >= 0.75) {
@@ -15,5 +13,4 @@
     }
     starsContainer.addView(star);
   }
-  return starsContainer;
 }

@@ -5,7 +5,8 @@
   final LinearLayout layoutStars=(LinearLayout)layout.findViewById(R.id.stars);
   nameView.setText(activity.getResources().getString(nameId));
   lastValueView.setText(String.format("%.1f",value) + ' ' + activity.getResources().getString(R.string.cache_rating_of)+ " 5");
-  layoutStars.addView(createStarImages(value),1);
+  createStarImages(layoutStars,value);
+  layoutStars.setVisibility(View.VISIBLE);
   parentView.addView(layout);
   return layout;
 }
