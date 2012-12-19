@@ -35,7 +35,7 @@
           db.execSQL(dbCreateLogImages);
         }
  catch (        Exception e) {
-          Log.e("Failed to upgrade to ver. 54: " + e.toString());
+          Log.e("Failed to upgrade to ver. 54",e);
         }
       }
       if (oldVersion < 55) {
@@ -43,7 +43,7 @@
           db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
         }
  catch (        Exception e) {
-          Log.e("Failed to upgrade to ver. 55: " + e.toString());
+          Log.e("Failed to upgrade to ver. 55",e);
         }
       }
       if (oldVersion < 56) {
@@ -51,7 +51,7 @@
           db.execSQL("update " + dbTableAttributes + " set attribute = "+ "lower(attribute) where attribute like \"%_yes\" "+ "or attribute like \"%_no\"");
         }
  catch (        Exception e) {
-          Log.e("Failed to upgrade to ver. 56: " + e.toString());
+          Log.e("Failed to upgrade to ver. 56",e);
         }
       }
       if (oldVersion < 57) {
@@ -65,7 +65,7 @@
           createIndices(db);
         }
  catch (        Exception e) {
-          Log.e("Failed to upgrade to ver. 57: " + e.toString());
+          Log.e("Failed to upgrade to ver. 57",e);
         }
       }
       if (oldVersion < 58) {
@@ -117,7 +117,7 @@
           db.execSQL("alter table " + dbTableCaches + " add column coordsChanged integer default 0");
         }
  catch (        Exception e) {
-          Log.e("Failed to upgrade to ver. 61: " + e.toString());
+          Log.e("Failed to upgrade to ver. 61",e);
         }
       }
       if (oldVersion < 62) {
@@ -127,7 +127,7 @@
           db.execSQL("update " + dbTableWaypoints + " set own = 1 where type = 'own'");
         }
  catch (        Exception e) {
-          Log.e("Failed to upgrade to ver. 62: " + e.toString());
+          Log.e("Failed to upgrade to ver. 62",e);
         }
       }
       if (oldVersion < 63) {
@@ -135,7 +135,7 @@
           removeDoubleUnderscoreMapFiles();
         }
  catch (        Exception e) {
-          Log.e("Failed to upgrade to ver. 63: " + e.toString());
+          Log.e("Failed to upgrade to ver. 63",e);
         }
       }
       if (oldVersion < 64) {
