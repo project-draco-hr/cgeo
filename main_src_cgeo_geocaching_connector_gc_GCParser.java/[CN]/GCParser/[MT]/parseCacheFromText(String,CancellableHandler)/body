@@ -122,8 +122,8 @@
       while (matcherAttributesInside.find()) {
         if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
           String attribute=matcherAttributesInside.group(2).toLowerCase(Locale.US);
-          String imageName=matcherAttributesInside.group(1).trim();
-          if (!imageName.isEmpty()) {
+          final String imageName=matcherAttributesInside.group(1).trim();
+          if (StringUtils.isNotEmpty(imageName)) {
             int start=imageName.lastIndexOf('/');
             int end=imageName.lastIndexOf('.');
             if (start >= 0 && end >= 0) {
