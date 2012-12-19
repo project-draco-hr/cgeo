@@ -15,14 +15,26 @@
       dismiss();
       final ProgressDialog p=ProgressDialog.show(CacheDetailActivity.this,res.getString(R.string.cache),res.getString(R.string.waypoint_reset),true);
       Handler h=new Handler(){
+        private boolean remoteFinished=false;
+        private boolean localFinished=false;
         @Override public void handleMessage(        Message msg){
-          p.dismiss();
-          notifyDataSetChanged();
-        }
-      }
-;
-      new ResetCoordsThread(cache,h,wpt,resetLocalyOption.isChecked(),uploadOption.isChecked(),p).start();
-    }
+switch (msg.what) {
+case ResetCoordsThread.LOCAL:
+            localFinished=true;
+          break;
+case ResetCoordsThread.ON_WEBSITE:
+        remoteFinished=true;
+      break;
   }
+  if ((localFinished || !resetLocalyOption.isChecked()) && (remoteFinished || !uploadOption.isChecked())) {
+    p.dismiss();
+    notifyDataSetChanged();
+  }
+}
+}
+;
+new ResetCoordsThread(cache,h,wpt,resetLocalyOption.isChecked(),uploadOption.isChecked(),p).start();
+}
+}
 );
 }
