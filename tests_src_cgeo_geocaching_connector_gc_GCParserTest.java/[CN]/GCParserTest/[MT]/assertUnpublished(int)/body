@@ -1,5 +1,5 @@
 {
-  final String page=getFileContent(R.raw.cache_unpublished);
+  final String page=getFileContent(cache);
   SearchResult result=GCParser.parseCacheFromText(page,null);
   assertNotNull(result);
   assertTrue(result.isEmpty());

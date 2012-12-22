@@ -1,0 +1,8 @@
+{
+  final String page=getFileContent(cachePage);
+  SearchResult result=GCParser.parseCacheFromText(page,null);
+  assertNotNull(result);
+  assertEquals(1,result.getCount());
+  cgCache cache=result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+  assertEquals(cacheName,cache.getName());
+}
