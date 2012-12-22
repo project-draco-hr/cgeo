@@ -1,0 +1,25 @@
+{
+  viewPager=(ViewPager)findViewById(R.id.viewpager);
+  viewPagerAdapter=new ViewPagerAdapter();
+  viewPager.setAdapter(viewPagerAdapter);
+  titleIndicator=(TitlePageIndicator)findViewById(R.id.pager_indicator);
+  titleIndicator.setViewPager(viewPager);
+  if (pageSelectedListener != null) {
+    titleIndicator.setOnPageChangeListener(new OnPageChangeListener(){
+      @Override public void onPageSelected(      int position){
+        pageSelectedListener.onPageSelected(position);
+      }
+      @Override public void onPageScrolled(      int position,      float positionOffset,      int positionOffsetPixels){
+      }
+      @Override public void onPageScrollStateChanged(      int state){
+      }
+    }
+);
+  }
+  if (viewPagerAdapter.getCount() < entryPageIndex) {
+    for (int i=0; i <= entryPageIndex; i++) {
+      pageOrder.add(null);
+    }
+  }
+  viewPager.setCurrentItem(entryPageIndex,false);
+}

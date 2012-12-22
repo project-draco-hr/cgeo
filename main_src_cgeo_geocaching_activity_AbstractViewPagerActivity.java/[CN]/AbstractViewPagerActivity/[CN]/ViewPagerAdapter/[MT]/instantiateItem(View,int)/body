@@ -1,0 +1,19 @@
+{
+  final Page page=pageOrder.get(position);
+  PageViewCreator creator=viewCreators.get(page);
+  if (null == creator && null != page) {
+    creator=AbstractViewPagerActivity.this.createViewCreator(page);
+    viewCreators.put(page,creator);
+  }
+  View view=null;
+  try {
+    if (null != creator) {
+      view=creator.getView();
+      ((ViewPager)container).addView(view,0);
+    }
+  }
+ catch (  Exception e) {
+    Log.e("ViewPagerAdapter.instantiateItem ",e);
+  }
+  return view;
+}

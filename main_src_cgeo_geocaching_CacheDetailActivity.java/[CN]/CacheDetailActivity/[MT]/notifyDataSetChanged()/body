@@ -10,9 +10,6 @@
     return;
   }
   cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
-  for (  PageViewCreator creator : viewCreators.values()) {
-    creator.notifyDataSetChanged();
-  }
   if (StringUtils.isNotBlank(cache.getName())) {
     setTitle(cache.getName() + " (" + cache.getGeocode()+ ')');
   }
@@ -20,27 +17,6 @@
     setTitle(cache.getGeocode());
   }
   ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId),null,null,null);
-  pageOrder.clear();
-  pageOrder.add(Page.WAYPOINTS);
-  pageOrder.add(Page.DETAILS);
-  final int detailsIndex=pageOrder.size() - 1;
-  pageOrder.add(Page.DESCRIPTION);
-  if (cache.getLogs().isNotEmpty()) {
-    pageOrder.add(Page.LOGS);
-  }
-  if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
-    pageOrder.add(Page.LOGSFRIENDS);
-  }
-  if (CollectionUtils.isNotEmpty(cache.getInventory())) {
-    pageOrder.add(Page.INVENTORY);
-  }
-  if (CollectionUtils.isNotEmpty(cache.getImages())) {
-    pageOrder.add(Page.IMAGES);
-  }
-  if (viewPager.getCurrentItem() < 0 || viewPager.getCurrentItem() >= viewPagerAdapter.getCount()) {
-    viewPager.setCurrentItem(detailsIndex,false);
-  }
-  viewPagerAdapter.notifyDataSetChanged();
-  titleIndicator.notifyDataSetChanged();
+  reinitializeViewPager();
   progress.dismiss();
 }

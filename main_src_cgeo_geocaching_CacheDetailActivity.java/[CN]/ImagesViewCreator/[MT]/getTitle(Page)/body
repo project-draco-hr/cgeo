@@ -1,0 +1,7 @@
+{
+  if (page == Page.WAYPOINTS) {
+    final int waypointCount=cache.getWaypoints().size();
+    return res.getQuantityString(R.plurals.waypoints,waypointCount,waypointCount);
+  }
+  return res.getString(page.titleStringId);
+}

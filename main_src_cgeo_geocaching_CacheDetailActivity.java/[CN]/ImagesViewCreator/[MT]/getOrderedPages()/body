@@ -1,0 +1,20 @@
+{
+  final ArrayList<Page> pages=new ArrayList<Page>();
+  pages.add(Page.WAYPOINTS);
+  pages.add(Page.DETAILS);
+  final int detailsIndex=pages.size() - 1;
+  pages.add(Page.DESCRIPTION);
+  if (cache.getLogs().isNotEmpty()) {
+    pages.add(Page.LOGS);
+  }
+  if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
+    pages.add(Page.LOGSFRIENDS);
+  }
+  if (CollectionUtils.isNotEmpty(cache.getInventory())) {
+    pages.add(Page.INVENTORY);
+  }
+  if (CollectionUtils.isNotEmpty(cache.getImages())) {
+    pages.add(Page.IMAGES);
+  }
+  return new ImmutablePair<List<? extends Page>,Integer>(pages,detailsIndex);
+}

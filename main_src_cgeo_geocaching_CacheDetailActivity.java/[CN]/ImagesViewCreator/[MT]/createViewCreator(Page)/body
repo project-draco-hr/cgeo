@@ -1,0 +1,20 @@
+{
+switch (page) {
+case DETAILS:
+    return new DetailsViewCreator();
+case DESCRIPTION:
+  return new DescriptionViewCreator();
+case LOGS:
+return new LogsViewCreator(true);
+case LOGSFRIENDS:
+return new LogsViewCreator(false);
+case WAYPOINTS:
+return new WaypointsViewCreator();
+case INVENTORY:
+return new InventoryViewCreator();
+case IMAGES:
+return new ImagesViewCreator();
+default :
+throw new IllegalArgumentException();
+}
+}
