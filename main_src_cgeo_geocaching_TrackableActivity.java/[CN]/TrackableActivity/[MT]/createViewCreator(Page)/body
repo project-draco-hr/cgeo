@@ -1,0 +1,10 @@
+{
+switch (page) {
+case DETAILS:
+    return new DetailsViewCreator();
+case LOGS:
+  return new LogsViewCreator();
+default :
+throw new IllegalArgumentException();
+}
+}

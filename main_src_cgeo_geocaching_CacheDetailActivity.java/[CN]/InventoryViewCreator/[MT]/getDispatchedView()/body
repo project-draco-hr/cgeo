@@ -9,7 +9,7 @@
       Object selection=arg0.getItemAtPosition(arg2);
       if (selection instanceof cgTrackable) {
         cgTrackable trackable=(cgTrackable)selection;
-        cgeotrackable.startActivity(CacheDetailActivity.this,trackable.getGuid(),trackable.getGeocode(),trackable.getName());
+        TrackableActivity.startActivity(CacheDetailActivity.this,trackable.getGuid(),trackable.getGeocode(),trackable.getName());
       }
     }
   }

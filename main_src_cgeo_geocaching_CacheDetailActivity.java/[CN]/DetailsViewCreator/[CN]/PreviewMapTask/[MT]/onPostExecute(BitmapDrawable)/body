@@ -2,10 +2,15 @@
   if (image == null) {
     return;
   }
-  final Bitmap bitmap=image.getBitmap();
-  if (bitmap == null || bitmap.getWidth() <= 10) {
-    return;
+  try {
+    final Bitmap bitmap=image.getBitmap();
+    if (bitmap == null || bitmap.getWidth() <= 10) {
+      return;
+    }
+    ((ImageView)view.findViewById(R.id.map_preview)).setImageDrawable(image);
+    view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
   }
-  ((ImageView)view.findViewById(R.id.map_preview)).setImageDrawable(image);
-  view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
+ catch (  Exception e) {
+    Log.e("CacheDetailActivity.PreviewMapTask",e);
+  }
 }

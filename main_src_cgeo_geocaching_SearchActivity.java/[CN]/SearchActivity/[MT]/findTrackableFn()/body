@@ -4,7 +4,7 @@
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_tb));
     return;
   }
-  final Intent trackablesIntent=new Intent(this,cgeotrackable.class);
+  final Intent trackablesIntent=new Intent(this,TrackableActivity.class);
   trackablesIntent.putExtra("geocode",trackableText.toUpperCase(Locale.US));
   startActivity(trackablesIntent);
 }
