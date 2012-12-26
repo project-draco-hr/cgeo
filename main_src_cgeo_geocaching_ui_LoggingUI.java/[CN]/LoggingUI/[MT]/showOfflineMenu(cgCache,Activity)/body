@@ -23,10 +23,11 @@ case LOG_CACHE:
         break;
 case CLEAR_LOG:
       cgData.clearLogOffline(cache.getGeocode());
-  }
+    break;
+}
 }
  else {
-  cache.logOffline(activity,logTypeEntry.logType);
+cache.logOffline(activity,logTypeEntry.logType);
 }
 }
 }

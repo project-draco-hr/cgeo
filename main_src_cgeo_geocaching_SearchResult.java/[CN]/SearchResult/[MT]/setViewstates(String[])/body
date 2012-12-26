@@ -2,5 +2,5 @@
   if (Login.isEmpty(viewstates)) {
     return;
   }
-  this.viewstates=viewstates;
+  System.arraycopy(viewstates,0,this.viewstates,0,viewstates.length);
 }

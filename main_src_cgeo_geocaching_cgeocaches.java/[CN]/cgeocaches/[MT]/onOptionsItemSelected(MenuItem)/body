@@ -69,6 +69,7 @@ case MENU_MOVE_TO_LIST:
 moveCachesToOtherList();
 invalidateOptionsMenuCompatible();
 return true;
-}
+default :
 return CacheListAppFactory.onMenuItemSelected(item,cacheList,this,search);
+}
 }

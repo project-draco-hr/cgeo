@@ -96,7 +96,6 @@
         logDone.cacheName=matcherLogs.group(6);
       }
       final String logEntry=matcherLogs.group(0);
-      System.out.println(logEntry);
       final Matcher matcherLogImages=GCConstants.PATTERN_TRACKABLE_LOG_IMAGES.matcher(logEntry);
       while (matcherLogImages.find()) {
         final cgImage logImage=new cgImage(matcherLogImages.group(1),matcherLogImages.group(2));

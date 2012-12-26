@@ -14,34 +14,24 @@
     return false;
   }
   fieldNoteBuffer.append('\n');
-  if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-    exportLocation.mkdirs();
-    SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
-    exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".txt");
-    Writer fw=null;
-    try {
-      OutputStream os=new FileOutputStream(exportFile);
-      fw=new OutputStreamWriter(os,"UTF-16");
-      fw.write(fieldNoteBuffer.toString());
-    }
- catch (    IOException e) {
-      Log.e("FieldnoteExport.ExportTask export",e);
-      return false;
-    }
- finally {
-      if (fw != null) {
-        try {
-          fw.close();
-        }
- catch (        IOException e) {
-          Log.e("FieldnoteExport.ExportTask export",e);
-          return false;
-        }
-      }
-    }
-  }
- else {
+  if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
     return false;
+  }
+  exportLocation.mkdirs();
+  SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
+  exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".txt");
+  Writer fw=null;
+  try {
+    OutputStream os=new FileOutputStream(exportFile);
+    fw=new OutputStreamWriter(os,CharEncoding.UTF_16);
+    fw.write(fieldNoteBuffer.toString());
+  }
+ catch (  IOException e) {
+    Log.e("FieldnoteExport.ExportTask export",e);
+    return false;
+  }
+ finally {
+    IOUtils.closeQuietly(fw);
   }
   if (upload) {
     publishProgress(STATUS_UPLOAD);

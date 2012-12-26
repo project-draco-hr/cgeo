@@ -1,6 +1,6 @@
 {
   try {
-    String data=EntityUtils.toString(response.getEntity(),"UTF-8");
+    String data=EntityUtils.toString(response.getEntity(),CharEncoding.UTF_8);
     return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
   }
  catch (  Exception e) {

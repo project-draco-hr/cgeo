@@ -8,7 +8,7 @@
     request=new HttpPost(uri);
     if (params != null) {
       try {
-        ((HttpPost)request).setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
+        ((HttpPost)request).setEntity(new UrlEncodedFormEntity(params,CharEncoding.UTF_8));
       }
  catch (      final UnsupportedEncodingException e) {
         Log.e("request",e);
