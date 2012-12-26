@@ -44,8 +44,9 @@
     initializeWaypointTypeSelector();
   }
   if (geocode != null) {
+    cgCache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
     IConnector con=ConnectorFactory.getConnector(geocode);
-    setUploadingCheckBoxVisibleByConnector(con);
+    setCoordsCheckBoxesVisibility(con,cache);
   }
   initializeDistanceUnitSelector();
   disableSuggestions((EditText)findViewById(R.id.distance));
