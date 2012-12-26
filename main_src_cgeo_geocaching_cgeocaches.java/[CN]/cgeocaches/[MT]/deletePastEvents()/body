@@ -1,0 +1,13 @@
+{
+  progress.show(this,null,res.getString(R.string.caches_drop_progress),true,dropDetailsHandler.obtainMessage(MSG_CANCEL));
+  final List<cgCache> deletion=new ArrayList<cgCache>();
+  for (  cgCache cache : adapter.getCheckedOrAllCaches()) {
+    if (cache.isEventCache()) {
+      final Date eventDate=cache.getHiddenDate();
+      if (DateUtils.daysSince(eventDate.getTime()) > 0) {
+        deletion.add(cache);
+      }
+    }
+  }
+  new DropDetailsThread(dropDetailsHandler,deletion).start();
+}
