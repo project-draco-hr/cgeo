@@ -24,7 +24,20 @@
     }
   }
 );
-  registerForContextMenu(findByOffline);
+  findByOffline.setOnLongClickListener(new View.OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      new StoredList.UserInterface(cgeo.this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
+        @Override public void run(        Integer selectedListId){
+          Settings.saveLastList(selectedListId);
+          cgeocaches.startActivityOffline(cgeo.this);
+        }
+      }
+);
+      return true;
+    }
+  }
+);
+  findByOffline.setLongClickable(true);
   final View advanced=findViewById(R.id.advanced_button);
   advanced.setClickable(true);
   advanced.setOnClickListener(new OnClickListener(){
@@ -43,10 +56,16 @@
 );
   final View filter=findViewById(R.id.filter_button);
   filter.setClickable(true);
-  registerForContextMenu(filter);
   filter.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      openContextMenu(v);
+      selectGlobalTypeFilter();
+    }
+  }
+);
+  filter.setOnLongClickListener(new View.OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      selectGlobalTypeFilter();
+      return true;
     }
   }
 );

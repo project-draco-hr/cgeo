@@ -1,23 +1,22 @@
 {
   final int id=item.getItemId();
 switch (id) {
-case MENU_ABOUT:
+case R.id.menu_about:
     showAbout(null);
   return true;
-case MENU_HELPERS:
+case R.id.menu_helpers:
 startActivity(new Intent(this,UsefulAppsActivity.class));
 return true;
-case MENU_SETTINGS:
+case R.id.menu_settings:
 startActivity(new Intent(this,SettingsActivity.class));
 return true;
-case MENU_HISTORY:
+case R.id.menu_history:
 cgeocaches.startActivityHistory(this);
 return true;
-case MENU_SCAN:
+case R.id.menu_scan:
 startScannerApplication();
 return true;
 default :
-break;
+return super.onOptionsItemSelected(item);
 }
-return false;
 }
