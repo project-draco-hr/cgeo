@@ -30,16 +30,8 @@
       Log.e("Could not get additional mount points for user content. " + "Proceeding with external storage only (" + extStorage + ")");
     }
  finally {
-      try {
-        if (fr != null) {
-          fr.close();
-        }
-        if (br != null) {
-          br.close();
-        }
-      }
- catch (      IOException e) {
-      }
+      IOUtils.closeQuietly(fr);
+      IOUtils.closeQuietly(br);
     }
   }
   return storages;
