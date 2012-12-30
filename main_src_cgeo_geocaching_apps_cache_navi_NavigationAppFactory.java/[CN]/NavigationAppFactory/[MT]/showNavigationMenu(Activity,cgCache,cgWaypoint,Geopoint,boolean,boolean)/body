@@ -1,7 +1,6 @@
 {
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
   builder.setTitle(R.string.cache_menu_navigate);
-  builder.setIcon(R.drawable.ic_menu_mapmode);
   final List<NavigationAppsEnum> items=new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
   final int defaultNavigationTool=Settings.getDefaultNavigationTool();
   for (  NavigationAppsEnum navApp : getInstalledNavigationApps()) {
@@ -25,17 +24,15 @@
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int item){
       NavigationAppsEnum selectedItem=adapter.getItem(item);
+      App app=selectedItem.app;
       if (cache != null) {
-        CacheNavigationApp cacheApp=(CacheNavigationApp)selectedItem.app;
-        cacheApp.navigate(activity,cache);
+        navigateCache(activity,cache,app);
       }
  else       if (waypoint != null) {
-        WaypointNavigationApp waypointApp=(WaypointNavigationApp)selectedItem.app;
-        waypointApp.navigate(activity,waypoint);
+        navigateWaypoint(activity,waypoint,app);
       }
  else {
-        GeopointNavigationApp geopointApp=(GeopointNavigationApp)selectedItem.app;
-        geopointApp.navigate(activity,destination);
+        navigateGeopoint(activity,destination,app);
       }
     }
   }
