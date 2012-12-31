@@ -1,0 +1,7 @@
+{
+  String ocConnectorUser=sharedPrefs.getString(KEY_CONNECTOR_OC_USER,null);
+  if (StringUtils.isBlank(ocConnectorUser)) {
+    return StringUtils.EMPTY;
+  }
+  return ocConnectorUser;
+}

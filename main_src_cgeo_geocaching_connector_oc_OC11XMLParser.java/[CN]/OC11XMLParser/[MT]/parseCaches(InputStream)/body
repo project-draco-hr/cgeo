@@ -1,0 +1,243 @@
+{
+  final int CACHE_PARSE_LIMIT=250;
+  final Map<String,cgCache> caches=new HashMap<String,cgCache>();
+  final CacheHolder cacheHolder=new CacheHolder();
+  final CacheLog logHolder=new CacheLog();
+  final CacheDescription descHolder=new CacheDescription();
+  final RootElement root=new RootElement("oc11xml");
+  final Element cacheNode=root.getChild("cache");
+  cacheNode.setStartElementListener(new StartElementListener(){
+    @Override public void start(    Attributes attributes){
+      resetCache(cacheHolder);
+    }
+  }
+);
+  cacheNode.setEndElementListener(new EndElementListener(){
+    @Override public void end(){
+      cgCache cache=cacheHolder.cache;
+      Geopoint coords=new Geopoint(cacheHolder.latitude,cacheHolder.longitude);
+      if (StringUtils.isNotBlank(cache.getGeocode()) && !coords.equals(Geopoint.ZERO) && !cache.isArchived()&& caches.size() < CACHE_PARSE_LIMIT) {
+        cache.setCoords(coords);
+        caches.put(cache.getCacheId(),cache);
+      }
+    }
+  }
+);
+  cacheNode.getChild("id").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      cacheHolder.cache.setCacheId(body);
+    }
+  }
+);
+  cacheNode.getChild("longitude").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      String longitude=body.trim();
+      if (StringUtils.isNotBlank(longitude)) {
+        cacheHolder.longitude=longitude;
+      }
+    }
+  }
+);
+  cacheNode.getChild("latitude").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      String latitude=body.trim();
+      if (StringUtils.isNotBlank(latitude)) {
+        cacheHolder.latitude=latitude;
+      }
+    }
+  }
+);
+  cacheNode.getChild("name").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      final String content=body.trim();
+      cacheHolder.cache.setName(content);
+    }
+  }
+);
+  cacheNode.getChild("waypoints").setStartElementListener(new StartElementListener(){
+    @Override public void start(    Attributes attrs){
+      if (attrs.getIndex("oc") > -1) {
+        cacheHolder.cache.setGeocode(attrs.getValue("oc"));
+      }
+      if (attrs.getIndex("gccom") > -1) {
+        String gccode=attrs.getValue("gccom");
+        if (!StringUtils.isBlank(gccode)) {
+          cacheHolder.cache.setDescription(String.format("Listed on geocaching com: <a href=\"http://coord.info/%s\">%s</a><br /><br />",gccode,gccode));
+        }
+      }
+    }
+  }
+);
+  cacheNode.getChild("type").setStartElementListener(new StartElementListener(){
+    @Override public void start(    Attributes attrs){
+      if (attrs.getIndex("id") > -1) {
+        final String typeId=attrs.getValue("id");
+        cacheHolder.cache.setType(getCacheType(typeId));
+      }
+    }
+  }
+);
+  cacheNode.getChild("status").setStartElementListener(new StartElementListener(){
+    @Override public void start(    Attributes attrs){
+      if (attrs.getIndex("id") > -1) {
+        try {
+          final int statusId=Integer.parseInt(attrs.getValue("id"));
+          setCacheStatus(statusId,cacheHolder.cache);
+        }
+ catch (        NumberFormatException e) {
+          Log.w(String.format("Failed to parse status of cache '%s'.",cacheHolder.cache.getGeocode()));
+        }
+      }
+    }
+  }
+);
+  cacheNode.getChild("size").setStartElementListener(new StartElementListener(){
+    @Override public void start(    Attributes attrs){
+      if (attrs.getIndex("id") > -1) {
+        final String typeId=attrs.getValue("id");
+        cacheHolder.cache.setSize(getCacheSize(typeId));
+      }
+    }
+  }
+);
+  cacheNode.getChild("difficulty").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      final String content=body.trim();
+      cacheHolder.cache.setDifficulty(Float.valueOf(content));
+    }
+  }
+);
+  cacheNode.getChild("terrain").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      final String content=body.trim();
+      cacheHolder.cache.setTerrain(Float.valueOf(content));
+    }
+  }
+);
+  cacheNode.getChild("datehidden").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      final String content=body.trim();
+      cacheHolder.cache.setHidden(parseFullDate(content));
+    }
+  }
+);
+  cacheNode.getChild("attributes").getChild("attribute").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      if (StringUtils.isNotBlank(body)) {
+        cacheHolder.cache.getAttributes().add(body.trim());
+      }
+    }
+  }
+);
+  final Element cacheDesc=root.getChild("cachedesc");
+  cacheDesc.setStartElementListener(new StartElementListener(){
+    @Override public void start(    Attributes attributes){
+      resetDesc(descHolder);
+    }
+  }
+);
+  cacheDesc.setEndElementListener(new EndElementListener(){
+    @Override public void end(){
+      final cgCache cache=caches.get(descHolder.cacheId);
+      if (cache != null) {
+        cache.setShortdesc(descHolder.shortDesc);
+        cache.setDescription(cache.getDescription() + descHolder.desc);
+        cache.setHint(descHolder.hint);
+      }
+    }
+  }
+);
+  cacheDesc.getChild("cacheid").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      descHolder.cacheId=body;
+    }
+  }
+);
+  cacheDesc.getChild("shortdesc").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      final String content=body.trim();
+      descHolder.shortDesc=content;
+    }
+  }
+);
+  cacheDesc.getChild("desc").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      final String content=body.trim();
+      descHolder.desc=content;
+    }
+  }
+);
+  cacheDesc.getChild("hint").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      final String content=body.trim();
+      descHolder.hint=content;
+    }
+  }
+);
+  final Element cacheLog=root.getChild("cachelog");
+  cacheLog.setStartElementListener(new StartElementListener(){
+    @Override public void start(    Attributes attrs){
+      resetLog(logHolder);
+    }
+  }
+);
+  cacheLog.setEndElementListener(new EndElementListener(){
+    @Override public void end(){
+      final cgCache cache=caches.get(logHolder.cacheId);
+      if (cache != null && logHolder.logEntry.type != LogType.UNKNOWN) {
+        cache.getLogs().prepend(logHolder.logEntry);
+        if (logHolder.logEntry.type == LogType.FOUND_IT && StringUtils.equals(logHolder.logEntry.author,Settings.getOCConnectorUserName())) {
+          cache.setFound(true);
+          cache.setVisitedDate(logHolder.logEntry.date);
+        }
+      }
+    }
+  }
+);
+  cacheLog.getChild("cacheid").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      logHolder.cacheId=body;
+    }
+  }
+);
+  cacheLog.getChild("date").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      try {
+        logHolder.logEntry.date=parseDayDate(body).getTime();
+      }
+ catch (      Exception e) {
+        Log.w("Failed to parse log date: " + e.toString());
+      }
+    }
+  }
+);
+  cacheLog.getChild("logtype").setStartElementListener(new StartElementListener(){
+    @Override public void start(    Attributes attrs){
+      if (attrs.getIndex("id") > -1) {
+        final int typeId=Integer.parseInt(attrs.getValue("id"));
+        logHolder.logEntry.type=getLogType(typeId);
+      }
+    }
+  }
+);
+  cacheLog.getChild("userid").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String finderName){
+      logHolder.logEntry.author=finderName;
+    }
+  }
+);
+  cacheLog.getChild("text").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String logText){
+      logHolder.logEntry.log=logText;
+    }
+  }
+);
+  try {
+    Xml.parse(stream,Xml.Encoding.UTF_8,root.getContentHandler());
+    return caches.values();
+  }
+ catch (  SAXException e) {
+    Log.e("Cannot parse .gpx file as oc11xml: could not parse XML - " + e.toString());
+    return null;
+  }
+}

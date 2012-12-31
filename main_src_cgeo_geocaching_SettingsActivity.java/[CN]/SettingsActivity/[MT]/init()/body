@@ -14,6 +14,18 @@
     }
   }
 );
+  final CheckBox ocCheck=(CheckBox)findViewById(R.id.oc_option);
+  ocCheck.setChecked(Settings.isOCConnectorActive());
+  ocCheck.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setOCConnectorActive(ocCheck.isChecked());
+    }
+  }
+);
+  EditText ocUserEdit=(EditText)findViewById(R.id.oc_username);
+  if (ocUserEdit.getText().length() == 0) {
+    ocUserEdit.setText(Settings.getOCConnectorUserName());
+  }
   final ImmutablePair<String,String> gcvoteLogin=Settings.getGCvoteLogin();
   if (null != gcvoteLogin && null != gcvoteLogin.right) {
     ((EditText)findViewById(R.id.passvote)).setText(gcvoteLogin.right);
