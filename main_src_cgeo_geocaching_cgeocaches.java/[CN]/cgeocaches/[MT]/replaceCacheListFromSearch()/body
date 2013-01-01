@@ -1,6 +1,12 @@
 {
   if (search != null) {
-    cachesFromSearchResult=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    final Set<cgCache> cachesFromSearchResult=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    runOnUiThread(new Runnable(){
+      @Override public void run(){
+        cacheList.clear();
+        cacheList.addAll((Set<cgCache>)cachesFromSearchResult);
+      }
+    }
+);
   }
-  refreshCacheListHandler.sendEmptyMessage(0);
 }
