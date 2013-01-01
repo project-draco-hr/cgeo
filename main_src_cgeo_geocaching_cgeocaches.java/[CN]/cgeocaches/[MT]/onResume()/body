@@ -1,10 +1,8 @@
 {
   super.onResume();
   startGeoAndDir();
-  if (adapter != null) {
-    adapter.setSelectMode(false);
-    setAdapterCurrentCoordinates(true);
-  }
+  adapter.setSelectMode(false);
+  setAdapterCurrentCoordinates(true);
   if (loadCachesHandler != null && search != null) {
     replaceCacheListFromSearch();
     loadCachesHandler.sendEmptyMessage(0);

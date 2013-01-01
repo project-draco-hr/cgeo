@@ -4,13 +4,11 @@
     return;
   }
   SearchResult searchToUse=search;
-  if (adapter != null) {
-    Set<String> geocodes=new HashSet<String>();
-    for (    cgCache cache : adapter.getFilteredList()) {
-      geocodes.add(cache.getGeocode());
-    }
-    searchToUse=new SearchResult(geocodes);
+  Set<String> geocodes=new HashSet<String>();
+  for (  cgCache cache : adapter.getFilteredList()) {
+    geocodes.add(cache.getGeocode());
   }
+  searchToUse=new SearchResult(geocodes);
   int count=searchToUse.getCount();
   String mapTitle=title;
   if (count > 0) {

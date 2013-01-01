@@ -2,7 +2,7 @@
   AlertDialog.Builder dialog=new AlertDialog.Builder(this);
   dialog.setCancelable(true);
   dialog.setTitle(res.getString(R.string.caches_drop_stored));
-  if (adapter != null && adapter.getCheckedCount() > 0) {
+  if (adapter.getCheckedCount() > 0) {
     dialog.setMessage(res.getString(R.string.caches_drop_selected_ask));
   }
  else {

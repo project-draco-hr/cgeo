@@ -2,9 +2,7 @@
   int itemId=item.getItemId();
 switch (itemId) {
 case MENU_SWITCH_SELECT_MODE:
-    if (adapter != null) {
-      adapter.switchSelectMode();
-    }
+    adapter.switchSelectMode();
   invalidateOptionsMenuCompatible();
 return true;
 case MENU_REFRESH_STORED:
@@ -35,9 +33,7 @@ case MENU_RENAME_LIST:
 renameList();
 return false;
 case MENU_INVERT_SELECTION:
-if (adapter != null) {
 adapter.invertSelection();
-}
 invalidateOptionsMenuCompatible();
 return false;
 case MENU_SWITCH_LIST:

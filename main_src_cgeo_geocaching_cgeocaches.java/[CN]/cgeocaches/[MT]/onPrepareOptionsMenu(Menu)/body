@@ -1,7 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
   try {
-    if (adapter != null && adapter.isSelectMode()) {
+    if (adapter.isSelectMode()) {
       menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit)).setIcon(R.drawable.ic_menu_clear_playlist);
       menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
     }
