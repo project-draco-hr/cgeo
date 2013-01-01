@@ -5,6 +5,9 @@
       @Override public void run(){
         cacheList.clear();
         cacheList.addAll((Set<cgCache>)cachesFromSearchResult);
+        adapter.reFilter();
+        updateTitle();
+        showFooterMoreCaches();
       }
     }
 );
