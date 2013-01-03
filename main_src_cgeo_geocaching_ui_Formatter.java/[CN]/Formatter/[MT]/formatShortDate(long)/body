@@ -1,3 +1,4 @@
 {
-  return DateUtils.formatDateTime(context,date,DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE);
+  DateFormat dateFormat=android.text.format.DateFormat.getDateFormat(context);
+  return dateFormat.format(date);
 }
