@@ -130,14 +130,14 @@
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_spoilers);
     final Matcher matcherSpoilersInside=GCConstants.PATTERN_SPOILER_IMAGE.matcher(page);
     while (matcherSpoilersInside.find()) {
-      String url=matcherSpoilersInside.group(1).replace("/display","");
+      String url=new String(matcherSpoilersInside.group(1).replace("/display",""));
       String title=null;
       if (matcherSpoilersInside.group(3) != null) {
-        title=matcherSpoilersInside.group(3);
+        title=new String(matcherSpoilersInside.group(3));
       }
       String description=null;
       if (matcherSpoilersInside.group(4) != null) {
-        description=matcherSpoilersInside.group(4);
+        description=new String(matcherSpoilersInside.group(4));
       }
       cache.addSpoiler(new cgImage(url,title,description));
     }
@@ -159,8 +159,8 @@
           while (matcherInventoryInside.find()) {
             if (matcherInventoryInside.groupCount() > 0) {
               final cgTrackable inventoryItem=new cgTrackable();
-              inventoryItem.setGuid(matcherInventoryInside.group(1));
-              inventoryItem.setName(matcherInventoryInside.group(2));
+              inventoryItem.setGuid(new String(matcherInventoryInside.group(1)));
+              inventoryItem.setName(new String(matcherInventoryInside.group(2)));
               cache.getInventory().add(inventoryItem);
               cache.setInventoryItems(cache.getInventoryItems() + 1);
             }
