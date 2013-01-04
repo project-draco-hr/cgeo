@@ -25,7 +25,9 @@
   details.addDifficulty(cache);
   details.addTerrain(cache);
   details.addRating(cache);
-  details.add(R.string.cache_favourite,cache.getFavoritePoints() + "??");
+  if (cache.getFavoritePoints() > 0) {
+    details.add(R.string.cache_favourite,cache.getFavoritePoints() + "??");
+  }
   if (cache.getMyVote() > 0) {
     details.addStars(R.string.cache_own_rating,cache.getMyVote());
   }
