@@ -1,6 +1,6 @@
 {
   if (Settings.getPlainLogs()) {
-    Matcher matcher=PATTERN_REMOVE_COLORS.matcher(log);
+    MatcherWrapper matcher=new MatcherWrapper(PATTERN_REMOVE_COLORS,log);
     return matcher.replaceAll("");
   }
   return log;

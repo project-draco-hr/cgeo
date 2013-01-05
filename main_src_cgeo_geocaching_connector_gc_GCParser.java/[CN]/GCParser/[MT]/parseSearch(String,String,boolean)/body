@@ -49,7 +49,7 @@
       continue;
     }
     try {
-      final Matcher matcherGuidAndDisabled=GCConstants.PATTERN_SEARCH_GUIDANDDISABLED.matcher(row);
+      final MatcherWrapper matcherGuidAndDisabled=new MatcherWrapper(GCConstants.PATTERN_SEARCH_GUIDANDDISABLED,row);
       while (matcherGuidAndDisabled.find()) {
         if (matcherGuidAndDisabled.groupCount() > 0) {
           cache.setGuid(matcherGuidAndDisabled.group(1));
@@ -78,7 +78,7 @@
     if (Settings.getLoadDirImg()) {
       cache.setDirectionImg(Network.decode(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION,true,1,cache.getDirectionImg(),true)));
     }
-    final Matcher matcherTbs=GCConstants.PATTERN_SEARCH_TRACKABLES.matcher(row);
+    final MatcherWrapper matcherTbs=new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES,row);
     String inventoryPre=null;
     while (matcherTbs.find()) {
       if (matcherTbs.groupCount() > 0) {
@@ -92,7 +92,7 @@
       }
     }
     if (StringUtils.isNotBlank(inventoryPre)) {
-      final Matcher matcherTbsInside=GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE.matcher(inventoryPre);
+      final MatcherWrapper matcherTbsInside=new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE,inventoryPre);
       while (matcherTbsInside.find()) {
         if (matcherTbsInside.groupCount() == 2 && matcherTbsInside.group(2) != null && !matcherTbsInside.group(2).equalsIgnoreCase("premium member only cache") && cache.getInventoryItems() <= 0) {
           cache.setInventoryItems(1);

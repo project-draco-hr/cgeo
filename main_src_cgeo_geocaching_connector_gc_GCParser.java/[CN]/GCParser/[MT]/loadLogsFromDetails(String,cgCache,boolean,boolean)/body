@@ -1,7 +1,7 @@
 {
   String rawResponse;
   if (!getDataFromPage) {
-    final Matcher userTokenMatcher=GCConstants.PATTERN_USERTOKEN.matcher(page);
+    final MatcherWrapper userTokenMatcher=new MatcherWrapper(GCConstants.PATTERN_USERTOKEN,page);
     if (!userTokenMatcher.find()) {
       Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
       return null;

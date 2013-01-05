@@ -1,6 +1,6 @@
 {
   if (null == nameForSorting) {
-    final Matcher matcher=NUMBER_PATTERN.matcher(name);
+    final MatcherWrapper matcher=new MatcherWrapper(NUMBER_PATTERN,name);
     if (matcher.find()) {
       nameForSorting=name.replace(matcher.group(),StringUtils.leftPad(matcher.group(),6,'0'));
     }

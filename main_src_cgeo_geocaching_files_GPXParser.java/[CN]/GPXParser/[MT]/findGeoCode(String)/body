@@ -3,7 +3,7 @@
     return;
   }
   final String trimmed=input.trim();
-  final Matcher matcherGeocode=patternGeocode.matcher(trimmed);
+  final MatcherWrapper matcherGeocode=new MatcherWrapper(patternGeocode,trimmed);
   if (matcherGeocode.find()) {
     final String geocode=matcherGeocode.group(1);
     if (geocode.length() == trimmed.length() || Character.isWhitespace(trimmed.charAt(geocode.length()))) {

@@ -131,14 +131,14 @@
 );
   waypoint.getChild(namespace,"url").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String url){
-      final Matcher matcher=patternGuid.matcher(url);
+      final MatcherWrapper matcher=new MatcherWrapper(patternGuid,url);
       if (matcher.matches()) {
         final String guid=matcher.group(1);
         if (StringUtils.isNotBlank(guid)) {
           cache.setGuid(guid);
         }
       }
-      final Matcher matcherCode=patternUrlGeocode.matcher(url);
+      final MatcherWrapper matcherCode=new MatcherWrapper(patternUrlGeocode,url);
       if (matcherCode.matches()) {
         String geocode=matcherCode.group(1);
         cache.setGeocode(geocode);

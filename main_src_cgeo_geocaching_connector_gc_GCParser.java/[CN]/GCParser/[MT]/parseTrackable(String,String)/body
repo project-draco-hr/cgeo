@@ -15,7 +15,7 @@
     trackable.setType(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_TYPE,true,trackable.getType()));
   }
   try {
-    final Matcher matcherOwner=GCConstants.PATTERN_TRACKABLE_OWNER.matcher(page);
+    final MatcherWrapper matcherOwner=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER,page);
     if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
       trackable.setOwnerGuid(matcherOwner.group(1));
       trackable.setOwner(matcherOwner.group(2).trim());
@@ -26,13 +26,13 @@
   }
   trackable.setOrigin(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ORIGIN,true,trackable.getOrigin()));
   try {
-    final Matcher matcherSpottedCache=GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE.matcher(page);
+    final MatcherWrapper matcherSpottedCache=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE,page);
     if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
       trackable.setSpottedGuid(matcherSpottedCache.group(1));
       trackable.setSpottedName(matcherSpottedCache.group(2).trim());
       trackable.setSpottedType(cgTrackable.SPOTTED_CACHE);
     }
-    final Matcher matcherSpottedUser=GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER.matcher(page);
+    final MatcherWrapper matcherSpottedUser=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER,page);
     if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
       trackable.setSpottedGuid(matcherSpottedUser.group(1));
       trackable.setSpottedName(matcherSpottedUser.group(2).trim());
@@ -66,7 +66,7 @@
   }
   trackable.setGoal(convertLinks(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GOAL,true,trackable.getGoal())));
   try {
-    final Matcher matcherDetailsImage=GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE.matcher(page);
+    final MatcherWrapper matcherDetailsImage=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE,page);
     if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
       final String image=StringUtils.trim(matcherDetailsImage.group(3));
       final String details=StringUtils.trim(matcherDetailsImage.group(4));
@@ -82,7 +82,7 @@
     Log.w("GCParser.parseTrackable: Failed to parse trackable details & image");
   }
   try {
-    final Matcher matcherLogs=GCConstants.PATTERN_TRACKABLE_LOG.matcher(page);
+    final MatcherWrapper matcherLogs=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG,page);
     while (matcherLogs.find()) {
       long date=0;
       try {
@@ -96,7 +96,7 @@
         logDone.cacheName=matcherLogs.group(6);
       }
       final String logEntry=matcherLogs.group(0);
-      final Matcher matcherLogImages=GCConstants.PATTERN_TRACKABLE_LOG_IMAGES.matcher(logEntry);
+      final MatcherWrapper matcherLogImages=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG_IMAGES,logEntry);
       while (matcherLogImages.find()) {
         final cgImage logImage=new cgImage(matcherLogImages.group(1),matcherLogImages.group(2));
         logDone.addLogImage(logImage);

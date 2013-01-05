@@ -6,7 +6,7 @@
     final Pattern coordPattern=Pattern.compile("\\b[nNsS]{1}\\s*\\d");
     int count=1;
     String note=getPersonalNote();
-    Matcher matcher=coordPattern.matcher(note);
+    MatcherWrapper matcher=new MatcherWrapper(coordPattern,note);
     while (matcher.find()) {
       try {
         final Geopoint point=new Geopoint(note.substring(matcher.start()));
@@ -21,7 +21,7 @@
  catch (      Geopoint.ParseException e) {
       }
       note=note.substring(matcher.start() + 1);
-      matcher=coordPattern.matcher(note);
+      matcher=new MatcherWrapper(coordPattern,note);
     }
   }
  catch (  Exception e) {

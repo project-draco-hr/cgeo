@@ -7,7 +7,7 @@
     backcolor=color.darker_gray;
   }
  else {
-    Matcher matcher=DARK_COLOR_PATTERN.matcher(text);
+    MatcherWrapper matcher=new MatcherWrapper(DARK_COLOR_PATTERN,text);
     if (matcher.find()) {
       backcolor=color.darker_gray;
     }

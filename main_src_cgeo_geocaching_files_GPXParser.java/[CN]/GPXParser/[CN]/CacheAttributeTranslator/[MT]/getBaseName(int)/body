@@ -16,7 +16,7 @@
   if (stringName == null) {
     return null;
   }
-  final Matcher m=BASENAME_PATTERN.matcher(stringName);
+  final MatcherWrapper m=new MatcherWrapper(BASENAME_PATTERN,stringName);
   if (!m.matches()) {
     return null;
   }

@@ -1,5 +1,5 @@
 {
-  final Matcher matcher=pattern.matcher(distanceText);
+  final MatcherWrapper matcher=new MatcherWrapper(pattern,distanceText);
   if (!matcher.find()) {
     throw new NumberFormatException(distanceText);
   }

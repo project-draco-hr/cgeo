@@ -3,7 +3,7 @@
     return null;
   }
   final Pattern time=Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b");
-  final Matcher matcher=time.matcher(getDescription());
+  final MatcherWrapper matcher=new MatcherWrapper(time,getDescription());
   while (matcher.find()) {
     try {
       final int hours=Integer.valueOf(matcher.group(1));
@@ -18,7 +18,7 @@
   final String hourLocalized=cgeoapplication.getInstance().getString(R.string.cache_time_full_hours);
   if (StringUtils.isNotBlank(hourLocalized)) {
     final Pattern fullHours=Pattern.compile("\\b(\\d{1,2})\\s+" + Pattern.quote(hourLocalized),Pattern.CASE_INSENSITIVE);
-    final Matcher matcherHours=fullHours.matcher(getDescription());
+    final MatcherWrapper matcherHours=new MatcherWrapper(fullHours,getDescription());
     if (matcherHours.find()) {
       try {
         final int hours=Integer.valueOf(matcherHours.group(1));

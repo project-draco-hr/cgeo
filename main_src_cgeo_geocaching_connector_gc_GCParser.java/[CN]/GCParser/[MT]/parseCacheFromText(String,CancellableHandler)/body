@@ -117,7 +117,7 @@
   try {
     final String attributesPre=BaseUtils.getMatch(page,GCConstants.PATTERN_ATTRIBUTES,true,null);
     if (null != attributesPre) {
-      final Matcher matcherAttributesInside=GCConstants.PATTERN_ATTRIBUTESINSIDE.matcher(attributesPre);
+      final MatcherWrapper matcherAttributesInside=new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE,attributesPre);
       final ArrayList<String> attributes=new ArrayList<String>();
       while (matcherAttributesInside.find()) {
         if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
@@ -144,16 +144,16 @@
       return null;
     }
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_spoilers);
-    final Matcher matcherSpoilersInside=GCConstants.PATTERN_SPOILER_IMAGE.matcher(page);
+    final MatcherWrapper matcherSpoilersInside=new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE,page);
     while (matcherSpoilersInside.find()) {
-      String url=new String(matcherSpoilersInside.group(1).replace("/display",""));
+      String url=matcherSpoilersInside.group(1).replace("/display","");
       String title=null;
       if (matcherSpoilersInside.group(3) != null) {
-        title=new String(matcherSpoilersInside.group(3));
+        title=matcherSpoilersInside.group(3);
       }
       String description=null;
       if (matcherSpoilersInside.group(4) != null) {
-        description=new String(matcherSpoilersInside.group(4));
+        description=matcherSpoilersInside.group(4);
       }
       cache.addSpoiler(new cgImage(url,title,description));
     }
@@ -163,7 +163,7 @@
   }
   try {
     cache.setInventoryItems(0);
-    final Matcher matcherInventory=GCConstants.PATTERN_INVENTORY.matcher(page);
+    final MatcherWrapper matcherInventory=new MatcherWrapper(GCConstants.PATTERN_INVENTORY,page);
     if (matcherInventory.find()) {
       if (cache.getInventory() == null) {
         cache.setInventory(new ArrayList<cgTrackable>());
@@ -171,12 +171,12 @@
       if (matcherInventory.groupCount() > 1) {
         final String inventoryPre=matcherInventory.group(2);
         if (StringUtils.isNotBlank(inventoryPre)) {
-          final Matcher matcherInventoryInside=GCConstants.PATTERN_INVENTORYINSIDE.matcher(inventoryPre);
+          final MatcherWrapper matcherInventoryInside=new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE,inventoryPre);
           while (matcherInventoryInside.find()) {
             if (matcherInventoryInside.groupCount() > 0) {
               final cgTrackable inventoryItem=new cgTrackable();
-              inventoryItem.setGuid(new String(matcherInventoryInside.group(1)));
-              inventoryItem.setName(new String(matcherInventoryInside.group(2)));
+              inventoryItem.setGuid(matcherInventoryInside.group(1));
+              inventoryItem.setName(matcherInventoryInside.group(2));
               cache.getInventory().add(inventoryItem);
               cache.setInventoryItems(cache.getInventoryItems() + 1);
             }
@@ -191,7 +191,7 @@
   try {
     final String countlogs=BaseUtils.getMatch(page,GCConstants.PATTERN_COUNTLOGS,true,null);
     if (null != countlogs) {
-      final Matcher matcherLog=GCConstants.PATTERN_COUNTLOG.matcher(countlogs);
+      final MatcherWrapper matcherLog=new MatcherWrapper(GCConstants.PATTERN_COUNTLOG,countlogs);
       while (matcherLog.find()) {
         String typeStr=matcherLog.group(1);
         String countStr=matcherLog.group(2).replaceAll("[.,]","");

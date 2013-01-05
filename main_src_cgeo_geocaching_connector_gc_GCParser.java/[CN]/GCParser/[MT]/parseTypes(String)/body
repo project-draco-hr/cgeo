@@ -3,7 +3,7 @@
     return null;
   }
   final List<LogType> types=new ArrayList<LogType>();
-  final Matcher typeBoxMatcher=GCConstants.PATTERN_TYPEBOX.matcher(page);
+  final MatcherWrapper typeBoxMatcher=new MatcherWrapper(GCConstants.PATTERN_TYPEBOX,page);
   String typesText=null;
   if (typeBoxMatcher.find()) {
     if (typeBoxMatcher.groupCount() > 0) {
@@ -11,7 +11,7 @@
     }
   }
   if (typesText != null) {
-    final Matcher typeMatcher=GCConstants.PATTERN_TYPE2.matcher(typesText);
+    final MatcherWrapper typeMatcher=new MatcherWrapper(GCConstants.PATTERN_TYPE2,typesText);
     while (typeMatcher.find()) {
       if (typeMatcher.groupCount() > 1) {
         try {

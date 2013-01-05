@@ -22,7 +22,7 @@
     if (page == null) {
       return null;
     }
-    final Matcher matcherVoteElement=patternVoteElement.matcher(page);
+    final MatcherWrapper matcherVoteElement=new MatcherWrapper(patternVoteElement,page);
     while (matcherVoteElement.find()) {
       String voteData=matcherVoteElement.group(1);
       if (voteData == null) {
@@ -30,7 +30,7 @@
       }
       String guid=null;
       try {
-        final Matcher matcherGuid=patternGuid.matcher(voteData);
+        final MatcherWrapper matcherGuid=new MatcherWrapper(patternGuid,voteData);
         if (matcherGuid.find()) {
           if (matcherGuid.groupCount() > 0) {
             guid=matcherGuid.group(1);
@@ -45,7 +45,7 @@
       }
       boolean loggedIn=false;
       try {
-        final Matcher matcherLoggedIn=patternLogIn.matcher(page);
+        final MatcherWrapper matcherLoggedIn=new MatcherWrapper(patternLogIn,page);
         if (matcherLoggedIn.find()) {
           if (matcherLoggedIn.groupCount() > 0) {
             if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
@@ -59,7 +59,7 @@
       }
       float rating=0;
       try {
-        final Matcher matcherRating=patternRating.matcher(voteData);
+        final MatcherWrapper matcherRating=new MatcherWrapper(patternRating,voteData);
         if (matcherRating.find()) {
           rating=Float.parseFloat(matcherRating.group(1));
         }
@@ -72,7 +72,7 @@
       }
       int votes=-1;
       try {
-        final Matcher matcherVotes=patternVotes.matcher(voteData);
+        final MatcherWrapper matcherVotes=new MatcherWrapper(patternVotes,voteData);
         if (matcherVotes.find()) {
           votes=Integer.parseInt(matcherVotes.group(1));
         }
@@ -86,7 +86,7 @@
       float myVote=0;
       if (loggedIn) {
         try {
-          final Matcher matcherVote=patternVote.matcher(voteData);
+          final MatcherWrapper matcherVote=new MatcherWrapper(patternVote,voteData);
           if (matcherVote.find()) {
             myVote=Float.parseFloat(matcherVote.group(1));
           }

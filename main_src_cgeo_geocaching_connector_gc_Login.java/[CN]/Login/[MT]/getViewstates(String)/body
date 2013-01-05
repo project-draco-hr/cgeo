@@ -3,7 +3,7 @@
     return null;
   }
   int count=1;
-  final Matcher matcherViewstateCount=GCConstants.PATTERN_VIEWSTATEFIELDCOUNT.matcher(page);
+  final MatcherWrapper matcherViewstateCount=new MatcherWrapper(GCConstants.PATTERN_VIEWSTATEFIELDCOUNT,page);
   if (matcherViewstateCount.find()) {
     try {
       count=Integer.parseInt(matcherViewstateCount.group(1));
@@ -13,7 +13,7 @@
     }
   }
   String[] viewstates=new String[count];
-  final Matcher matcherViewstates=GCConstants.PATTERN_VIEWSTATES.matcher(page);
+  final MatcherWrapper matcherViewstates=new MatcherWrapper(GCConstants.PATTERN_VIEWSTATES,page);
   while (matcherViewstates.find()) {
     String sno=matcherViewstates.group(1);
     int no;

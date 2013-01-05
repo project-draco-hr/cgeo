@@ -46,7 +46,7 @@
     Log.e("GCParser.postLogTrackable: Can not log in geocaching");
     return StatusCode.NOT_LOGGED_IN;
   }
-  final Matcher matcher=GCConstants.PATTERN_MAINTENANCE.matcher(page);
+  final MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_MAINTENANCE,page);
   try {
     if (matcher.find() && matcher.groupCount() > 0) {
       final String[] viewstatesConfirm=Login.getViewstates(page);
@@ -87,7 +87,7 @@
     Log.e("GCParser.postLog.confim: " + e.toString());
   }
   try {
-    final Matcher matcherOk=GCConstants.PATTERN_OK1.matcher(page);
+    final MatcherWrapper matcherOk=new MatcherWrapper(GCConstants.PATTERN_OK1,page);
     if (matcherOk.find()) {
       Log.i("Log successfully posted to cache #" + cacheid);
       if (geocode != null) {
