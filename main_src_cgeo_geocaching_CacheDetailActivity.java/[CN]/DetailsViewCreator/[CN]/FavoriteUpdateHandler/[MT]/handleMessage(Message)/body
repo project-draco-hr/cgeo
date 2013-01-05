@@ -1,3 +1,9 @@
 {
-  updateFavPointBox();
+  progress.dismiss();
+  if (msg.what == -1) {
+    showToast(res.getString(R.string.err_favorite_failed));
+  }
+ else {
+    updateFavPointBox();
+  }
 }
