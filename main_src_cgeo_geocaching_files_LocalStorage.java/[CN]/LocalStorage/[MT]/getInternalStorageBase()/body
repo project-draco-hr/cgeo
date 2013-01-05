@@ -1,3 +1,6 @@
 {
-  return new File(new File(Environment.getDataDirectory(),"data"),"cgeo.geocaching");
+  if (internalStorageBase == null) {
+    internalStorageBase=cgeoapplication.getInstance().getApplicationContext().getFilesDir().getParentFile();
+  }
+  return internalStorageBase;
 }
