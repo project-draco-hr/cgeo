@@ -1,0 +1,17 @@
+{
+  try {
+    final Parameters params=getOCXmlQueryParameters(false,false);
+    params.put("lat",GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,center));
+    params.put("lon",GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,center));
+    params.put("distance",String.format(Locale.US,"%f",distance));
+    final InputStream data=request(ConnectorFactory.getConnector("OCXXX"),SERVICE_CACHE,params);
+    if (data == null) {
+      return CollectionUtils.EMPTY_COLLECTION;
+    }
+    return OC11XMLParser.parseCaches(new GZIPInputStream(data));
+  }
+ catch (  IOException e) {
+    Log.e("Error parsing nearby search result: " + e.toString());
+    return CollectionUtils.EMPTY_COLLECTION;
+  }
+}

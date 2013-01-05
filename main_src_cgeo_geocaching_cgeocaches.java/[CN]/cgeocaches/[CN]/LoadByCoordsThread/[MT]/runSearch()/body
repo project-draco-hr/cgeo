@@ -1,4 +1,12 @@
 {
   search=GCParser.searchByCoords(coords,Settings.getCacheType(),Settings.isShowCaptcha());
+  for (  ISearchByCenter centerConn : ConnectorFactory.getSearchByCenterConnectors()) {
+    if (centerConn.isActivated()) {
+      SearchResult temp=centerConn.searchByCenter(coords);
+      if (temp != null) {
+        search.addGeocodes(temp.getGeocodes());
+      }
+    }
+  }
   replaceCacheListFromSearch();
 }

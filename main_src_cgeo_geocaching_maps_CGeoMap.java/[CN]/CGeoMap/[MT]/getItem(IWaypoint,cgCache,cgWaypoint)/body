@@ -1,7 +1,7 @@
 {
   if (cache != null) {
     final CachesOverlayItemImpl item=mapItemFactory.getCachesOverlayItem(coord,cache.getType());
-    final int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.isOwn()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).toHashCode();
+    final int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.getCacheRealm().id).append(cache.isOwn()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).toHashCode();
     final LayerDrawable ldFromCache=overlaysCache.get(hashcode);
     if (ldFromCache != null) {
       item.setMarker(ldFromCache);
@@ -9,7 +9,7 @@
     }
     final ArrayList<Drawable> layers=new ArrayList<Drawable>(9);
     final ArrayList<int[]> insets=new ArrayList<int[]>(8);
-    final Drawable marker=getResources().getDrawable(cache.isDisabled() || cache.isArchived() ? R.drawable.marker_disabled : R.drawable.marker);
+    final Drawable marker=getResources().getDrawable(cache.isDisabled() || cache.isArchived() ? cache.getCacheRealm().markerDisabledId : cache.getCacheRealm().markerId);
     layers.add(marker);
     final int resolution=marker.getIntrinsicWidth() > 40 ? 1 : 0;
     if (!cache.isReliableLatLon()) {

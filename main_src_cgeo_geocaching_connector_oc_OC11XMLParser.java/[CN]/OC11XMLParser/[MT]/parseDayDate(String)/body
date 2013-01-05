@@ -1,0 +1,12 @@
+{
+  final SimpleDateFormat ISO8601DATEFORMAT=new SimpleDateFormat("yyyy-MM-dd",Locale.US);
+  ISO8601DATEFORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+  final String strippedDate=STRIP_DATE.matcher(date).replaceAll("+0$100");
+  try {
+    return ISO8601DATEFORMAT.parse(strippedDate);
+  }
+ catch (  ParseException e) {
+    Log.e("OC11XMLParser.parseDayDate",e);
+  }
+  return null;
+}

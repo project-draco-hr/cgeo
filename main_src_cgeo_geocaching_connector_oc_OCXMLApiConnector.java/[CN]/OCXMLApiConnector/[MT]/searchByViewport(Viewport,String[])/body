@@ -1,0 +1,8 @@
+{
+  final Geopoint center=viewport.getCenter();
+  double distance=center.distanceTo(viewport.bottomLeft) * 1.15;
+  if (distance > SEARCH_DISTANCE_LIMIT) {
+    distance=SEARCH_DISTANCE_LIMIT;
+  }
+  return new SearchResult(OCXMLClient.getCachesAround(center,distance));
+}

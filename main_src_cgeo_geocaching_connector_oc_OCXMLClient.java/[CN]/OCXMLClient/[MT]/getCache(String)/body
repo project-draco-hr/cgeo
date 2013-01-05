@@ -1,0 +1,22 @@
+{
+  try {
+    final Parameters params=getOCXmlQueryParameters(true,true);
+    params.put("wp",geoCode);
+    final InputStream data=request(ConnectorFactory.getConnector(geoCode),SERVICE_CACHE,params);
+    if (data == null) {
+      return null;
+    }
+    Collection<cgCache> caches=OC11XMLParser.parseCaches(new GZIPInputStream(data));
+    if (caches.iterator().hasNext()) {
+      cgCache cache=caches.iterator().next();
+      cache.setDetailed(true);
+      cgData.saveCache(cache,LoadFlags.SAVE_ALL);
+      return cache;
+    }
+    return null;
+  }
+ catch (  IOException e) {
+    Log.e("Error parsing cache '" + geoCode + "': "+ e.toString());
+    return null;
+  }
+}
