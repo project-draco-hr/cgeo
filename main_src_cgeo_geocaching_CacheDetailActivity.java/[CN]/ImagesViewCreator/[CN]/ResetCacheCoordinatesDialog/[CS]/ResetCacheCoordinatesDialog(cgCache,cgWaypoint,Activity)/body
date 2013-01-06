@@ -2,14 +2,11 @@
   super(activity);
   View layout=activity.getLayoutInflater().inflate(R.layout.reset_cache_coords_dialog,null);
   setView(layout);
-  uploadOption=(CheckBox)layout.findViewById(R.id.upload);
-  resetLocalyOption=(CheckBox)layout.findViewById(R.id.local);
+  resetLocal=(RadioButton)layout.findViewById(R.id.reset_cache_coordinates_local);
+  resetBoth=(RadioButton)layout.findViewById(R.id.reset_cache_coordinates_local_and_remote);
   if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-    uploadOption.setChecked(true);
-    uploadOption.setVisibility(View.VISIBLE);
+    resetBoth.setVisibility(View.VISIBLE);
   }
-  uploadOption.setOnCheckedChangeListener(this);
-  resetLocalyOption.setOnCheckedChangeListener(this);
   layout.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       dismiss();
@@ -24,14 +21,14 @@
  else {
             remoteFinished=true;
           }
-          if ((localFinished || !resetLocalyOption.isChecked()) && (remoteFinished || !uploadOption.isChecked())) {
+          if ((localFinished) && (remoteFinished || !resetBoth.isChecked())) {
             p.dismiss();
             notifyDataSetChanged();
           }
         }
       }
 ;
-      new ResetCoordsThread(cache,h,wpt,resetLocalyOption.isChecked(),uploadOption.isChecked(),p).start();
+      new ResetCoordsThread(cache,h,wpt,resetLocal.isChecked() || resetBoth.isChecked(),resetBoth.isChecked(),p).start();
     }
   }
 );
