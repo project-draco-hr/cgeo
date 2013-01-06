@@ -9,14 +9,13 @@
     Collection<cgCache> caches=OC11XMLParser.parseCaches(new GZIPInputStream(data));
     if (caches.iterator().hasNext()) {
       cgCache cache=caches.iterator().next();
-      cache.setDetailed(true);
       cgData.saveCache(cache,LoadFlags.SAVE_ALL);
       return cache;
     }
     return null;
   }
  catch (  IOException e) {
-    Log.e("Error parsing cache '" + geoCode + "': "+ e.toString());
+    Log.e("Error parsing cache '" + geoCode + "'",e);
     return null;
   }
 }

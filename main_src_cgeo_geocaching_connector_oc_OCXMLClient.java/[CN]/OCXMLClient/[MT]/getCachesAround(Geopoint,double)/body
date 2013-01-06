@@ -6,12 +6,12 @@
     params.put("distance",String.format(Locale.US,"%f",distance));
     final InputStream data=request(ConnectorFactory.getConnector("OCXXX"),SERVICE_CACHE,params);
     if (data == null) {
-      return CollectionUtils.EMPTY_COLLECTION;
+      return Collections.emptyList();
     }
     return OC11XMLParser.parseCaches(new GZIPInputStream(data));
   }
  catch (  IOException e) {
-    Log.e("Error parsing nearby search result: " + e.toString());
-    return CollectionUtils.EMPTY_COLLECTION;
+    Log.e("Error parsing nearby search result",e);
+    return Collections.emptyList();
   }
 }
