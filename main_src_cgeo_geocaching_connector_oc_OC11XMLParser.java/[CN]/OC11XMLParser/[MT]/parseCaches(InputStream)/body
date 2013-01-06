@@ -104,14 +104,24 @@
   cacheNode.getChild("difficulty").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       final String content=body.trim();
-      cacheHolder.cache.setDifficulty(Float.valueOf(content));
+      try {
+        cacheHolder.cache.setDifficulty(Float.valueOf(content));
+      }
+ catch (      NumberFormatException e) {
+        Log.e("OC11XMLParser: unknown difficulty " + content,e);
+      }
     }
   }
 );
   cacheNode.getChild("terrain").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       final String content=body.trim();
-      cacheHolder.cache.setTerrain(Float.valueOf(content));
+      try {
+        cacheHolder.cache.setTerrain(Float.valueOf(content));
+      }
+ catch (      NumberFormatException e) {
+        Log.e("OC11XMLParser: unknown terrain " + content,e);
+      }
     }
   }
 );
@@ -187,7 +197,7 @@
       final cgCache cache=caches.get(logHolder.cacheId);
       if (cache != null && logHolder.logEntry.type != LogType.UNKNOWN) {
         cache.getLogs().prepend(logHolder.logEntry);
-        if (logHolder.logEntry.type == LogType.FOUND_IT && StringUtils.equals(logHolder.logEntry.author,Settings.getOCConnectorUserName())) {
+        if (logHolder.logEntry.type == LogType.FOUND_IT && StringUtils.equalsIgnoreCase(logHolder.logEntry.author,Settings.getOCConnectorUserName())) {
           cache.setFound(true);
           cache.setVisitedDate(logHolder.logEntry.date);
         }
@@ -206,8 +216,8 @@
       try {
         logHolder.logEntry.date=parseDayDate(body).getTime();
       }
- catch (      Exception e) {
-        Log.w("Failed to parse log date: " + e.toString());
+ catch (      NullPointerException e) {
+        Log.w("Failed to parse log date",e);
       }
     }
   }
@@ -215,8 +225,14 @@
   cacheLog.getChild("logtype").setStartElementListener(new StartElementListener(){
     @Override public void start(    Attributes attrs){
       if (attrs.getIndex("id") > -1) {
-        final int typeId=Integer.parseInt(attrs.getValue("id"));
-        logHolder.logEntry.type=getLogType(typeId);
+        final String id=attrs.getValue("id");
+        try {
+          final int typeId=Integer.parseInt(id);
+          logHolder.logEntry.type=getLogType(typeId);
+        }
+ catch (        NumberFormatException e) {
+          Log.e("OC11XMLParser, unknown logtype " + id,e);
+        }
       }
     }
   }

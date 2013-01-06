@@ -1,12 +1,13 @@
 {
-  int size=Integer.parseInt(sizeId);
+  try {
+    int size=Integer.parseInt(sizeId);
 switch (size) {
 case 1:
-    return CacheSize.OTHER;
+      return CacheSize.OTHER;
 case 2:
-  return CacheSize.MICRO;
+    return CacheSize.MICRO;
 case 3:
-return CacheSize.SMALL;
+  return CacheSize.SMALL;
 case 4:
 return CacheSize.REGULAR;
 case 5:
@@ -16,6 +17,10 @@ case 8:
 return CacheSize.VIRTUAL;
 default :
 break;
+}
+}
+ catch (NumberFormatException e) {
+Log.e("OC11XMLParser.getCacheSize",e);
 }
 return CacheSize.NOT_CHOSEN;
 }

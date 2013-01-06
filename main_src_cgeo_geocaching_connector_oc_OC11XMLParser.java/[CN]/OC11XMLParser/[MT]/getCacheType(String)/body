@@ -1,12 +1,13 @@
 {
-  int type=Integer.parseInt(typeId);
+  try {
+    int type=Integer.parseInt(typeId);
 switch (type) {
 case 1:
-    return CacheType.UNKNOWN;
+      return CacheType.UNKNOWN;
 case 2:
-  return CacheType.TRADITIONAL;
+    return CacheType.TRADITIONAL;
 case 3:
-return CacheType.MULTI;
+  return CacheType.MULTI;
 case 4:
 return CacheType.VIRTUAL;
 case 5:
@@ -21,6 +22,10 @@ case 9:
 return CacheType.UNKNOWN;
 case 10:
 return CacheType.TRADITIONAL;
+}
+}
+ catch (NumberFormatException e) {
+Log.e("OC11XMLParser.getCacheType",e);
 }
 return CacheType.UNKNOWN;
 }
