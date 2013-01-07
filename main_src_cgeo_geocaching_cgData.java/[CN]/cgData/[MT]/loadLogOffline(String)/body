@@ -3,15 +3,12 @@
     return null;
   }
   init();
+  final Cursor cursor=database.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = ?",new String[]{geocode},null,null,"_id desc","1");
   LogEntry log=null;
-  Cursor cursor=database.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = ?",new String[]{geocode},null,null,"_id desc","1");
-  if (cursor != null && cursor.getCount() > 0) {
-    cursor.moveToFirst();
-    log=new LogEntry(cursor.getLong(cursor.getColumnIndex("date")),LogType.getById(cursor.getInt(cursor.getColumnIndex("type"))),cursor.getString(cursor.getColumnIndex("log")));
-    log.id=cursor.getInt(cursor.getColumnIndex("_id"));
+  if (cursor.moveToFirst()) {
+    log=new LogEntry(cursor.getLong(3),LogType.getById(cursor.getInt(1)),cursor.getString(2));
+    log.id=cursor.getInt(0);
   }
-  if (cursor != null) {
-    cursor.close();
-  }
+  cursor.close();
   return log;
 }

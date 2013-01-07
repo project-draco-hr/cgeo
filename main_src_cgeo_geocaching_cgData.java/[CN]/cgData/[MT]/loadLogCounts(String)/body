@@ -3,21 +3,11 @@
     return null;
   }
   init();
-  Map<LogType,Integer> logCounts=new HashMap<LogType,Integer>();
-  Cursor cursor=database.query(dbTableLogCount,new String[]{"type","count"},"geocode = ?",new String[]{geocode},null,null,null,"100");
-  if (cursor != null && cursor.getCount() > 0) {
-    cursor.moveToFirst();
-    int indexType=cursor.getColumnIndex("type");
-    int indexCount=cursor.getColumnIndex("count");
-    do {
-      LogType type=LogType.getById(cursor.getInt(indexType));
-      Integer count=cursor.getInt(indexCount);
-      logCounts.put(type,count);
-    }
- while (cursor.moveToNext());
+  final Map<LogType,Integer> logCounts=new HashMap<LogType,Integer>();
+  final Cursor cursor=database.query(dbTableLogCount,new String[]{"type","count"},"geocode = ?",new String[]{geocode},null,null,null,"100");
+  while (cursor.moveToNext()) {
+    logCounts.put(LogType.getById(cursor.getInt(0)),cursor.getInt(1));
   }
-  if (cursor != null) {
-    cursor.close();
-  }
+  cursor.close();
   return logCounts;
 }

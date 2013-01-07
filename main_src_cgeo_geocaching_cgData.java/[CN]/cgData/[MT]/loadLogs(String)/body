@@ -4,36 +4,20 @@
     return logs;
   }
   init();
-  Cursor cursor=database.rawQuery("SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "+ dbTableLogs+ " LEFT OUTER JOIN "+ dbTableLogImages+ " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc",new String[]{geocode});
-  if (cursor != null && cursor.getCount() > 0) {
-    LogEntry log=null;
-    int indexLogsId=cursor.getColumnIndex("cg_logs_id");
-    int indexType=cursor.getColumnIndex("type");
-    int indexAuthor=cursor.getColumnIndex("author");
-    int indexLog=cursor.getColumnIndex("log");
-    int indexDate=cursor.getColumnIndex("date");
-    int indexFound=cursor.getColumnIndex("found");
-    int indexFriend=cursor.getColumnIndex("friend");
-    int indexLogImagesId=cursor.getColumnIndex("cg_logImages_id");
-    int indexTitle=cursor.getColumnIndex("title");
-    int indexUrl=cursor.getColumnIndex("url");
-    while (cursor.moveToNext() && logs.size() < 100) {
-      if (log == null || log.id != cursor.getInt(indexLogsId)) {
-        log=new LogEntry(cursor.getString(indexAuthor),cursor.getLong(indexDate),LogType.getById(cursor.getInt(indexType)),cursor.getString(indexLog));
-        log.id=cursor.getInt(indexLogsId);
-        log.found=cursor.getInt(indexFound);
-        log.friend=cursor.getInt(indexFriend) == 1;
-        logs.add(log);
-      }
-      if (!cursor.isNull(indexLogImagesId)) {
-        String title=cursor.getString(indexTitle);
-        String url=cursor.getString(indexUrl);
-        log.addLogImage(new cgImage(url,title));
-      }
+  final Cursor cursor=database.rawQuery("SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url"+ " FROM "+ dbTableLogs+ " LEFT OUTER JOIN "+ dbTableLogImages+ " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc",new String[]{geocode});
+  LogEntry log=null;
+  while (cursor.moveToNext() && logs.size() < 100) {
+    if (log == null || log.id != cursor.getInt(0)) {
+      log=new LogEntry(cursor.getString(2),cursor.getLong(4),LogType.getById(cursor.getInt(1)),cursor.getString(3));
+      log.id=cursor.getInt(0);
+      log.found=cursor.getInt(5);
+      log.friend=cursor.getInt(6) == 1;
+      logs.add(log);
+    }
+    if (!cursor.isNull(7)) {
+      log.addLogImage(new cgImage(cursor.getString(10),cursor.getString(9)));
     }
   }
-  if (cursor != null) {
-    cursor.close();
-  }
+  cursor.close();
   return logs;
 }

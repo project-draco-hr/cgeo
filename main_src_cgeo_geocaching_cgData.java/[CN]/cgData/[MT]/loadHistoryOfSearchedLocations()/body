@@ -1,23 +1,13 @@
 {
   init();
-  Cursor cursor=database.query(dbTableSearchDestionationHistory,new String[]{"_id","date","latitude","longitude"},null,null,null,null,"date desc","100");
+  final Cursor cursor=database.query(dbTableSearchDestionationHistory,new String[]{"_id","date","latitude","longitude"},null,null,null,null,"date desc","100");
   final List<Destination> destinations=new LinkedList<Destination>();
-  if (cursor != null && cursor.getCount() > 0) {
-    cursor.moveToFirst();
-    int indexId=cursor.getColumnIndex("_id");
-    int indexDate=cursor.getColumnIndex("date");
-    int indexLatitude=cursor.getColumnIndex("latitude");
-    int indexLongitude=cursor.getColumnIndex("longitude");
-    do {
-      final Destination dest=new Destination(cursor.getLong(indexId),cursor.getLong(indexDate),getCoords(cursor,indexLatitude,indexLongitude));
-      if (dest.getCoords() != null) {
-        destinations.add(dest);
-      }
+  while (cursor.moveToNext()) {
+    final Destination dest=new Destination(cursor.getLong(0),cursor.getLong(1),getCoords(cursor,2,3));
+    if (dest.getCoords() != null) {
+      destinations.add(dest);
     }
- while (cursor.moveToNext());
   }
-  if (cursor != null) {
-    cursor.close();
-  }
+  cursor.close();
   return destinations;
 }

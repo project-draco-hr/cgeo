@@ -21,16 +21,12 @@
  else {
       cursor=database.query(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,"geocode");
     }
-    if (cursor.moveToFirst()) {
-      final int index=cursor.getColumnIndex("geocode");
-      do {
-        geocodes.add(cursor.getString(index));
-      }
- while (cursor.moveToNext());
+    while (cursor.moveToNext()) {
+      geocodes.add(cursor.getString(0));
     }
     cursor.close();
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("cgData.loadBatchOfStoredGeocodes",e);
   }
   return geocodes;

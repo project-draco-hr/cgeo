@@ -1,16 +1,16 @@
 {
-  cgTrackable trackable=new cgTrackable();
+  final cgTrackable trackable=new cgTrackable();
   trackable.setGeocode(cursor.getString(cursor.getColumnIndex("tbcode")));
   trackable.setGuid(cursor.getString(cursor.getColumnIndex("guid")));
   trackable.setName(cursor.getString(cursor.getColumnIndex("title")));
   trackable.setOwner(cursor.getString(cursor.getColumnIndex("owner")));
-  String released=cursor.getString(cursor.getColumnIndex("released"));
+  final String released=cursor.getString(cursor.getColumnIndex("released"));
   if (released != null) {
     try {
       long releaseMilliSeconds=Long.parseLong(released);
       trackable.setReleased(new Date(releaseMilliSeconds));
     }
- catch (    NumberFormatException e) {
+ catch (    final NumberFormatException e) {
       Log.e("createTrackableFromDatabaseContent",e);
     }
   }

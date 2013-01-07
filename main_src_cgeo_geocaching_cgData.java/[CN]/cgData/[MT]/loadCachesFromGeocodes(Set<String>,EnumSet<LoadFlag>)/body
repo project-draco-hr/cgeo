@@ -19,12 +19,9 @@
   query.append(cgData.whereGeocodeIn(geocodes));
   Cursor cursor=database.rawQuery(query.toString(),null);
   try {
-    if (!cursor.moveToFirst()) {
-      return Collections.emptySet();
-    }
     final Set<cgCache> caches=new HashSet<cgCache>();
     int logIndex=-1;
-    do {
+    while (cursor.moveToNext()) {
       cgCache cache=cgData.createCacheFromDatabaseContent(cursor);
       if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
         cache.setAttributes(loadAttributes(cache.getGeocode()));
@@ -69,7 +66,7 @@
       cacheCache.putCacheInCache(cache);
       caches.add(cache);
     }
- while (cursor.moveToNext());
+    while (cursor.moveToNext())     ;
     return caches;
   }
   finally {

@@ -3,18 +3,11 @@
     return null;
   }
   init();
-  List<cgTrackable> trackables=new ArrayList<cgTrackable>();
-  Cursor cursor=database.query(dbTableTrackables,new String[]{"_id","updated","tbcode","guid","title","owner","released","goal","description"},"geocode = ?",new String[]{geocode},null,null,"title COLLATE NOCASE ASC","100");
-  if (cursor != null && cursor.getCount() > 0) {
-    cursor.moveToFirst();
-    do {
-      cgTrackable trackable=createTrackableFromDatabaseContent(cursor);
-      trackables.add(trackable);
-    }
- while (cursor.moveToNext());
+  final List<cgTrackable> trackables=new ArrayList<cgTrackable>();
+  final Cursor cursor=database.query(dbTableTrackables,new String[]{"_id","updated","tbcode","guid","title","owner","released","goal","description"},"geocode = ?",new String[]{geocode},null,null,"title COLLATE NOCASE ASC","100");
+  while (cursor.moveToNext()) {
+    trackables.add(createTrackableFromDatabaseContent(cursor));
   }
-  if (cursor != null) {
-    cursor.close();
-  }
+  cursor.close();
   return trackables;
 }

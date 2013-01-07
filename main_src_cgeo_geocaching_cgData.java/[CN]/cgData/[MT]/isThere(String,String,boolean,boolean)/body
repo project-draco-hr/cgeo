@@ -1,11 +1,10 @@
 {
   init();
-  Cursor cursor=null;
-  int cnt=0;
   long dataUpdated=0;
   long dataDetailedUpdate=0;
   int dataDetailed=0;
   try {
+    Cursor cursor;
     if (StringUtils.isNotBlank(geocode)) {
       cursor=database.query(dbTableCaches,new String[]{"detailed","detailedupdate","updated"},"geocode = ?",new String[]{geocode},null,null,null,"1");
     }
@@ -15,36 +14,24 @@
  else {
       return false;
     }
-    if (cursor != null) {
-      cnt=cursor.getCount();
-      if (cnt > 0) {
-        cursor.moveToFirst();
-        int index=cursor.getColumnIndex("updated");
-        dataUpdated=cursor.getLong(index);
-        index=cursor.getColumnIndex("detailedupdate");
-        dataDetailedUpdate=cursor.getLong(index);
-        index=cursor.getColumnIndex("detailed");
-        dataDetailed=cursor.getInt(index);
-      }
+    if (cursor.moveToFirst()) {
+      dataDetailed=cursor.getInt(0);
+      dataDetailedUpdate=cursor.getLong(1);
+      dataUpdated=cursor.getLong(2);
     }
-  }
- catch (  Exception e) {
-    Log.e("cgData.isThere",e);
-  }
-  if (cursor != null) {
     cursor.close();
   }
-  if (cnt > 0) {
-    if (detailed && dataDetailed == 0) {
-      return false;
-    }
-    if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
-      return false;
-    }
-    if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
-      return false;
-    }
-    return true;
+ catch (  final Exception e) {
+    Log.e("cgData.isThere",e);
   }
-  return false;
+  if (detailed && dataDetailed == 0) {
+    return false;
+  }
+  if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
+    return false;
+  }
+  if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
+    return false;
+  }
+  return true;
 }

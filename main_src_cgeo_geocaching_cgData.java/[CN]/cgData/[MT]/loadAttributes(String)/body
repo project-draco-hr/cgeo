@@ -3,18 +3,11 @@
     return null;
   }
   init();
-  ArrayList<String> attributes=new ArrayList<String>();
-  Cursor cursor=database.query(dbTableAttributes,new String[]{"attribute"},"geocode = ?",new String[]{geocode},null,null,null,"100");
-  if (cursor != null && cursor.getCount() > 0) {
-    cursor.moveToFirst();
-    int index=cursor.getColumnIndex("attribute");
-    do {
-      attributes.add(cursor.getString(index));
-    }
- while (cursor.moveToNext());
+  final ArrayList<String> attributes=new ArrayList<String>();
+  final Cursor cursor=database.query(dbTableAttributes,new String[]{"attribute"},"geocode = ?",new String[]{geocode},null,null,null,"100");
+  while (cursor.moveToNext()) {
+    attributes.add(cursor.getString(0));
   }
-  if (cursor != null) {
-    cursor.close();
-  }
+  cursor.close();
   return attributes;
 }

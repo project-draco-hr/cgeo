@@ -1,22 +1,13 @@
 {
-  ArrayList<StoredList> result=new ArrayList<StoredList>();
-  if (cursor != null) {
-    if (cursor.getCount() > 0) {
-      cursor.moveToFirst();
-      int indexId=cursor.getColumnIndex("_id");
-      int indexTitle=cursor.getColumnIndex("title");
-      int indexCount=cursor.getColumnIndex("count");
-      do {
-        int count=0;
-        if (indexCount >= 0) {
-          count=cursor.getInt(indexCount);
-        }
-        StoredList list=new StoredList(cursor.getInt(indexId) + customListIdOffset,cursor.getString(indexTitle),count);
-        result.add(list);
-      }
- while (cursor.moveToNext());
-    }
-    cursor.close();
+  final int indexId=cursor.getColumnIndex("_id");
+  final int indexTitle=cursor.getColumnIndex("title");
+  final int indexCount=cursor.getColumnIndex("count");
+  final ArrayList<StoredList> result=new ArrayList<StoredList>();
+  while (cursor.moveToNext()) {
+    final int count=indexCount != -1 ? cursor.getInt(indexCount) : 0;
+    final StoredList list=new StoredList(cursor.getInt(indexId) + customListIdOffset,cursor.getString(indexTitle),count);
+    result.add(list);
   }
+  cursor.close();
   return result;
 }

@@ -4,7 +4,6 @@
   }
   init();
   Log.d("Database clean: started");
-  Set<String> geocodes=new HashSet<String>();
   try {
     Cursor cursor;
     if (more) {
@@ -15,24 +14,17 @@
       String timestampString=Long.toString(timestamp);
       cursor=database.query(dbTableCaches,new String[]{"geocode"},"reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",new String[]{timestampString,timestampString,timestampString},null,null,null,null);
     }
-    if (cursor != null) {
-      if (cursor.getCount() > 0) {
-        cursor.moveToFirst();
-        final int index=cursor.getColumnIndex("geocode");
-        do {
-          geocodes.add(cursor.getString(index));
-        }
- while (cursor.moveToNext());
-      }
-      cursor.close();
+    Set<String> geocodes=new HashSet<String>();
+    while (cursor.moveToNext()) {
+      geocodes.add(cursor.getString(0));
     }
-    final int size=geocodes.size();
-    if (size > 0) {
-      Log.d("Database clean: removing " + size + " geocaches from listId=0");
+    cursor.close();
+    if (!geocodes.isEmpty()) {
+      Log.d("Database clean: removing " + geocodes.size() + " geocaches from listId=0");
       removeCaches(geocodes,LoadFlags.REMOVE_ALL);
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("cgData.clean",e);
   }
   Log.d("Database clean: finished");

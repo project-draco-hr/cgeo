@@ -3,21 +3,11 @@
     return null;
   }
   init();
-  List<cgImage> spoilers=new ArrayList<cgImage>();
-  Cursor cursor=database.query(dbTableSpoilers,new String[]{"url","title","description"},"geocode = ?",new String[]{geocode},null,null,null,"100");
-  if (cursor != null && cursor.getCount() > 0) {
-    cursor.moveToFirst();
-    int indexUrl=cursor.getColumnIndex("url");
-    int indexTitle=cursor.getColumnIndex("title");
-    int indexDescription=cursor.getColumnIndex("description");
-    do {
-      cgImage spoiler=new cgImage(cursor.getString(indexUrl),cursor.getString(indexTitle),cursor.getString(indexDescription));
-      spoilers.add(spoiler);
-    }
- while (cursor.moveToNext());
+  final List<cgImage> spoilers=new ArrayList<cgImage>();
+  final Cursor cursor=database.query(dbTableSpoilers,new String[]{"url","title","description"},"geocode = ?",new String[]{geocode},null,null,null,"100");
+  while (cursor.moveToNext()) {
+    spoilers.add(new cgImage(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
   }
-  if (cursor != null) {
-    cursor.close();
-  }
+  cursor.close();
   return spoilers;
 }

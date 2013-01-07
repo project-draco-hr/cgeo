@@ -3,18 +3,11 @@
     return null;
   }
   init();
-  List<cgWaypoint> waypoints=new ArrayList<cgWaypoint>();
-  Cursor cursor=database.query(dbTableWaypoints,WAYPOINT_COLUMNS,"geocode = ?",new String[]{geocode},null,null,"_id","100");
-  if (cursor != null && cursor.getCount() > 0) {
-    cursor.moveToFirst();
-    do {
-      cgWaypoint waypoint=createWaypointFromDatabaseContent(cursor);
-      waypoints.add(waypoint);
-    }
- while (cursor.moveToNext());
+  final List<cgWaypoint> waypoints=new ArrayList<cgWaypoint>();
+  final Cursor cursor=database.query(dbTableWaypoints,WAYPOINT_COLUMNS,"geocode = ?",new String[]{geocode},null,null,"_id","100");
+  while (cursor.moveToNext()) {
+    waypoints.add(createWaypointFromDatabaseContent(cursor));
   }
-  if (cursor != null) {
-    cursor.close();
-  }
+  cursor.close();
   return waypoints;
 }
