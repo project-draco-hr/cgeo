@@ -45,7 +45,7 @@
 );
   templates.add(new LogTemplate("OWNER",R.string.init_signature_template_owner){
     @Override public String getValue(    final LogContext context){
-      cgTrackable trackable=context.getTrackable();
+      Trackable trackable=context.getTrackable();
       if (trackable != null) {
         return trackable.getOwner();
       }

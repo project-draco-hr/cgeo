@@ -6,7 +6,7 @@
   if (page.contains(GCConstants.ERROR_TB_DOES_NOT_EXIST) || page.contains(GCConstants.ERROR_TB_ARITHMETIC_OVERFLOW) || page.contains(GCConstants.ERROR_TB_ELEMENT_EXCEPTION)) {
     return null;
   }
-  final cgTrackable trackable=new cgTrackable();
+  final Trackable trackable=new Trackable();
   trackable.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()));
   trackable.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GUID,true,trackable.getGuid()));
   trackable.setIconUrl(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ICON,true,trackable.getIconUrl()));
@@ -30,19 +30,19 @@
     if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
       trackable.setSpottedGuid(matcherSpottedCache.group(1));
       trackable.setSpottedName(matcherSpottedCache.group(2).trim());
-      trackable.setSpottedType(cgTrackable.SPOTTED_CACHE);
+      trackable.setSpottedType(Trackable.SPOTTED_CACHE);
     }
     final MatcherWrapper matcherSpottedUser=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER,page);
     if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
       trackable.setSpottedGuid(matcherSpottedUser.group(1));
       trackable.setSpottedName(matcherSpottedUser.group(2).trim());
-      trackable.setSpottedType(cgTrackable.SPOTTED_USER);
+      trackable.setSpottedType(Trackable.SPOTTED_USER);
     }
     if (BaseUtils.matches(page,GCConstants.PATTERN_TRACKABLE_SPOTTEDUNKNOWN)) {
-      trackable.setSpottedType(cgTrackable.SPOTTED_UNKNOWN);
+      trackable.setSpottedType(Trackable.SPOTTED_UNKNOWN);
     }
     if (BaseUtils.matches(page,GCConstants.PATTERN_TRACKABLE_SPOTTEDOWNER)) {
-      trackable.setSpottedType(cgTrackable.SPOTTED_OWNER);
+      trackable.setSpottedType(Trackable.SPOTTED_OWNER);
     }
   }
  catch (  Exception e) {

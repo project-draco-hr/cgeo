@@ -5,7 +5,7 @@
   if (CollectionUtils.isNotEmpty(trackables)) {
     ContentValues values=new ContentValues();
     long timeStamp=System.currentTimeMillis();
-    for (    cgTrackable trackable : trackables) {
+    for (    Trackable trackable : trackables) {
       final String tbCode=trackable.getGeocode();
       if (StringUtils.isNotBlank(tbCode)) {
         database.delete(dbTableTrackables,"tbcode = ?",new String[]{tbCode});

@@ -45,10 +45,10 @@
         }
       }
       if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
-        final List<cgTrackable> inventory=loadInventory(cache.getGeocode());
+        final List<Trackable> inventory=loadInventory(cache.getGeocode());
         if (CollectionUtils.isNotEmpty(inventory)) {
           if (cache.getInventory() == null) {
-            cache.setInventory(new ArrayList<cgTrackable>());
+            cache.setInventory(new ArrayList<Trackable>());
           }
  else {
             cache.getInventory().clear();

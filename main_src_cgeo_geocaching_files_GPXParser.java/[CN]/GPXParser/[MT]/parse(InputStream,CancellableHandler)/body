@@ -299,7 +299,7 @@
     final Element gcTB=gcTBs.getChild(nsGC,"travelbug");
     gcTB.setStartElementListener(new StartElementListener(){
       @Override public void start(      Attributes attrs){
-        trackable=new cgTrackable();
+        trackable=new Trackable();
         try {
           if (attrs.getIndex("ref") > -1) {
             trackable.setGeocode(attrs.getValue("ref"));
@@ -314,7 +314,7 @@
       @Override public void end(){
         if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
           if (cache.getInventory() == null) {
-            cache.setInventory(new ArrayList<cgTrackable>());
+            cache.setInventory(new ArrayList<Trackable>());
           }
           cache.getInventory().add(trackable);
         }

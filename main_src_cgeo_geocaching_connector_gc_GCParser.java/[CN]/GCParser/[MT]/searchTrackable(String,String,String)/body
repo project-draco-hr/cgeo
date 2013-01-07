@@ -3,7 +3,7 @@
     Log.w("GCParser.searchTrackable: No geocode nor guid nor id given");
     return null;
   }
-  cgTrackable trackable=new cgTrackable();
+  Trackable trackable=new Trackable();
   final Parameters params=new Parameters();
   if (StringUtils.isNotBlank(geocode)) {
     params.put("tracker",geocode);

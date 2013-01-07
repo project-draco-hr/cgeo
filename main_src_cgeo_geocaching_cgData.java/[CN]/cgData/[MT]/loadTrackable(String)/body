@@ -4,7 +4,7 @@
   }
   init();
   final Cursor cursor=database.query(dbTableTrackables,new String[]{"updated","tbcode","guid","title","owner","released","goal","description"},"tbcode = ?",new String[]{geocode},null,null,null,"1");
-  final cgTrackable trackable=cursor.moveToFirst() ? createTrackableFromDatabaseContent(cursor) : null;
+  final Trackable trackable=cursor.moveToFirst() ? createTrackableFromDatabaseContent(cursor) : null;
   cursor.close();
   return trackable;
 }
