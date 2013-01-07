@@ -17,7 +17,7 @@
     long logId=insertLog.executeInsert();
     if (log.hasLogImages()) {
       SQLiteStatement insertImage=PreparedStatements.getInsertLogImage();
-      for (      cgImage img : log.getLogImages()) {
+      for (      Image img : log.getLogImages()) {
         insertImage.bindLong(1,logId);
         insertImage.bindString(2,img.getTitle());
         insertImage.bindString(3,img.getUrl());

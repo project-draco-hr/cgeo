@@ -4,14 +4,14 @@
   List<LogEntry> log=trackable.getLogs();
   assertNotNull(log);
   assertEquals(10,log.size());
-  final List<cgImage> log4Images=log.get(4).getLogImages();
+  final List<Image> log4Images=log.get(4).getLogImages();
   assertNotNull(log4Images);
   assertEquals(5,log4Images.size());
   assertEquals("http://img.geocaching.com/track/log/large/f2e24c50-394c-4d74-8fb4-87298d8bff1d.jpg",log4Images.get(0).getUrl());
   assertEquals("7b Welcome to Geowoodstock",log4Images.get(0).getTitle());
   assertEquals("http://img.geocaching.com/track/log/large/b57c29c3-134e-4202-a2a1-69ce8920b055.jpg",log4Images.get(1).getUrl());
   assertEquals("8 Crater Lake Natl Park Oregon",log4Images.get(1).getTitle());
-  final List<cgImage> log5Images=log.get(5).getLogImages();
+  final List<Image> log5Images=log.get(5).getLogImages();
   assertNotNull(log5Images);
   assertEquals(1,log5Images.size());
   assertEquals("http://img.geocaching.com/track/log/large/0096b42d-4d10-45fa-9be2-2d08c0d5cc61.jpg",log5Images.get(0).getUrl());

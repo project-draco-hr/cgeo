@@ -30,7 +30,7 @@
         if (imageResponse.getBoolean(CACHE_IMAGE_IS_SPOILER)) {
           final String title=imageResponse.getString(CACHE_IMAGE_CAPTION);
           final String url=absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL),cache.getGeocode());
-          cache.addSpoiler(new cgImage(url,title));
+          cache.addSpoiler(new Image(url,title));
         }
       }
     }

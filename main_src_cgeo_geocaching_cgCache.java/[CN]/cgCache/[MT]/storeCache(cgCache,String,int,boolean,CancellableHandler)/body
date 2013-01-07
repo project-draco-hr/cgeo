@@ -34,7 +34,7 @@
       return;
     }
     if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-      for (      cgImage oneSpoiler : cache.getSpoilers()) {
+      for (      Image oneSpoiler : cache.getSpoilers()) {
         imgGetter.getDrawable(oneSpoiler.getUrl());
       }
     }
@@ -44,7 +44,7 @@
     if (Settings.isStoreLogImages()) {
       for (      LogEntry log : cache.getLogs()) {
         if (log.hasLogImages()) {
-          for (          cgImage oneLogImg : log.getLogImages()) {
+          for (          Image oneLogImg : log.getLogImages()) {
             imgGetter.getDrawable(oneLogImg.getUrl());
           }
         }

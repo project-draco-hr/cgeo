@@ -55,7 +55,7 @@
         final JSONObject image=images.getJSONObject(i);
         String url="http://img.geocaching.com/cache/log/" + image.getString("FileName");
         String title=image.getString("Name");
-        final cgImage logImage=new cgImage(url,title);
+        final Image logImage=new Image(url,title);
         logDone.addLogImage(logImage);
       }
       logs.add(logDone);

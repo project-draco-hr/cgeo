@@ -7,7 +7,7 @@
   progressDialog.setCancelable(true);
   progressDialog.setMax(count);
   progressDialog.show();
-  for (  final cgImage img : images) {
+  for (  final Image img : images) {
     LinearLayout rowView=(LinearLayout)inflater.inflate(R.layout.cache_image_item,null);
     if (StringUtils.isNotBlank(img.getTitle())) {
       ((TextView)rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
