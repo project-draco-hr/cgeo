@@ -1,13 +1,11 @@
 {
-  final boolean excludeMine=Settings.isExcludeMyCaches();
-  try {
-    Settings.setExcludeMine(false);
-    final SearchResult search=GCParser.searchByCoords(new Geopoint("N 52?? 24.972 E 009?? 35.647"),CacheType.MYSTERY,false);
-    assertNotNull(search);
-    assertTrue(20 <= search.getGeocodes().size());
-    assertTrue(search.getGeocodes().contains("GC1RMM2"));
+  withMockedFilters(new Runnable(){
+    @Override public void run(){
+      final SearchResult search=GCParser.searchByCoords(new Geopoint("N 52?? 24.972 E 009?? 35.647"),CacheType.MYSTERY,false);
+      assertNotNull(search);
+      assertTrue(20 <= search.getGeocodes().size());
+      assertTrue(search.getGeocodes().contains("GC1RMM2"));
+    }
   }
-  finally {
-    Settings.setExcludeMine(excludeMine);
-  }
+);
 }

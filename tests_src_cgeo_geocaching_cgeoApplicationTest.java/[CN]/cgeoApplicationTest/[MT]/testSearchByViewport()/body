@@ -1,33 +1,36 @@
 {
-  final boolean excludeMine=Settings.isExcludeMyCaches();
-  final Strategy strategy=Settings.getLiveMapStrategy();
-  final CacheType cacheType=Settings.getCacheType();
-  try {
-    Settings.setExcludeMine(false);
-    Settings.setCacheType(CacheType.ALL);
-    final GC2CJPF mockedCache=new GC2CJPF();
-    deleteCacheFromDB(mockedCache.getGeocode());
-    final String[] tokens=Login.getMapTokens();
-    final Viewport viewport=new Viewport(mockedCache,0.003,0.003);
-    Settings.setLiveMapStrategy(Strategy.DETAILED);
-    SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
-    assertNotNull(search);
-    assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
-    cgCache parsedCache=cgData.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
-    assertEquals(Settings.isPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
-    assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
-    Settings.setLiveMapStrategy(Strategy.FAST);
-    Tile.Cache.removeFromTileCache(mockedCache);
-    search=ConnectorFactory.searchByViewport(viewport,tokens);
-    assertNotNull(search);
-    assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
-    parsedCache=cgData.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
-    assertEquals(Settings.isPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
-    assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
-  }
+  withMockedFilters(new Runnable(){
+    @Override public void run(){
+      final Strategy strategy=Settings.getLiveMapStrategy();
+      final CacheType cacheType=Settings.getCacheType();
+      try {
+        Settings.setExcludeMine(false);
+        Settings.setCacheType(CacheType.ALL);
+        final GC2CJPF mockedCache=new GC2CJPF();
+        deleteCacheFromDB(mockedCache.getGeocode());
+        final String[] tokens=Login.getMapTokens();
+        final Viewport viewport=new Viewport(mockedCache,0.003,0.003);
+        Settings.setLiveMapStrategy(Strategy.DETAILED);
+        SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
+        assertNotNull(search);
+        assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
+        cgCache parsedCache=cgData.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+        assertEquals(Settings.isPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
+        assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
+        Settings.setLiveMapStrategy(Strategy.FAST);
+        Tile.Cache.removeFromTileCache(mockedCache);
+        search=ConnectorFactory.searchByViewport(viewport,tokens);
+        assertNotNull(search);
+        assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
+        parsedCache=cgData.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+        assertEquals(Settings.isPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
+        assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
+      }
   finally {
-    Settings.setExcludeMine(excludeMine);
-    Settings.setLiveMapStrategy(strategy);
-    Settings.setCacheType(cacheType);
+        Settings.setLiveMapStrategy(strategy);
+        Settings.setCacheType(cacheType);
+      }
+    }
   }
+);
 }
