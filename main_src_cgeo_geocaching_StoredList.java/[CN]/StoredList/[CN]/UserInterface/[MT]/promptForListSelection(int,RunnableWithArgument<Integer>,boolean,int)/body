@@ -3,6 +3,12 @@
   if (lists == null) {
     return;
   }
+  if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
+    StoredList exceptList=cgData.getList(exceptListId);
+    if (exceptList != null) {
+      lists.remove(exceptList);
+    }
+  }
   final List<CharSequence> listsTitle=new ArrayList<CharSequence>();
   for (  StoredList list : lists) {
     listsTitle.add(list.getTitleAndCount());
