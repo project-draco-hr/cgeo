@@ -108,8 +108,8 @@
     this.setWaypoints(other.waypoints.asList(),false);
   }
  else {
-    ArrayList<cgWaypoint> newPoints=new ArrayList<cgWaypoint>(waypoints.asList());
-    cgWaypoint.mergeWayPoints(newPoints,other.waypoints.asList(),false);
+    ArrayList<Waypoint> newPoints=new ArrayList<Waypoint>(waypoints.asList());
+    Waypoint.mergeWayPoints(newPoints,other.waypoints.asList(),false);
     this.setWaypoints(newPoints,false);
   }
   if (spoilers == null) {
@@ -127,7 +127,7 @@
   }
   userModifiedCoords=false;
   if (waypoints != null) {
-    for (    cgWaypoint wpt : waypoints) {
+    for (    Waypoint wpt : waypoints) {
       if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
         userModifiedCoords=true;
         break;

@@ -1,0 +1,13 @@
+{
+  this.waypoints.set(waypoints);
+  finalDefined=false;
+  if (waypoints != null) {
+    for (    Waypoint waypoint : waypoints) {
+      waypoint.setGeocode(geocode);
+      if (waypoint.isFinalWithCoords()) {
+        finalDefined=true;
+      }
+    }
+  }
+  return saveToDatabase && cgData.saveWaypoints(this);
+}

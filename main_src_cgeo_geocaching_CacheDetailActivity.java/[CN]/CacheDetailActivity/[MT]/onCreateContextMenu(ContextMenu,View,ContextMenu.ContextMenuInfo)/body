@@ -39,9 +39,9 @@ try {
 final ViewGroup parent=((ViewGroup)view.getParent());
 for (int i=0; i < parent.getChildCount(); i++) {
 if (parent.getChildAt(i) == view) {
-final List<cgWaypoint> sortedWaypoints=new ArrayList<cgWaypoint>(cache.getWaypoints());
+final List<Waypoint> sortedWaypoints=new ArrayList<Waypoint>(cache.getWaypoints());
 Collections.sort(sortedWaypoints);
-final cgWaypoint waypoint=sortedWaypoints.get(i);
+final Waypoint waypoint=sortedWaypoints.get(i);
 final int index=cache.getWaypoints().indexOf(waypoint);
 menu.setHeaderTitle(res.getString(R.string.waypoint));
 if (waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {

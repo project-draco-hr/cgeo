@@ -30,40 +30,40 @@ break;
 }
 break;
 case CONTEXT_MENU_WAYPOINT_EDIT:
-final cgWaypoint waypointEdit=cache.getWaypoint(index);
+final Waypoint waypointEdit=cache.getWaypoint(index);
 if (waypointEdit != null) {
 EditWaypointActivity.startActivityEditWaypoint(this,waypointEdit.getId());
 refreshOnResume=true;
 }
 break;
 case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-final cgWaypoint waypointDuplicate=cache.getWaypoint(index);
+final Waypoint waypointDuplicate=cache.getWaypoint(index);
 if (cache.duplicateWaypoint(waypointDuplicate)) {
 cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 notifyDataSetChanged();
 }
 break;
 case CONTEXT_MENU_WAYPOINT_DELETE:
-final cgWaypoint waypointDelete=cache.getWaypoint(index);
+final Waypoint waypointDelete=cache.getWaypoint(index);
 if (cache.deleteWaypoint(waypointDelete)) {
 cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 notifyDataSetChanged();
 }
 break;
 case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
-final cgWaypoint waypointNavigation=cache.getWaypoint(index);
+final Waypoint waypointNavigation=cache.getWaypoint(index);
 if (waypointNavigation != null) {
 NavigationAppFactory.startDefaultNavigationApplication(1,this,waypointNavigation);
 }
 break;
 case CONTEXT_MENU_WAYPOINT_NAVIGATE:
-final cgWaypoint waypointNav=cache.getWaypoint(contextMenuWPIndex);
+final Waypoint waypointNav=cache.getWaypoint(contextMenuWPIndex);
 if (waypointNav != null) {
 NavigationAppFactory.showNavigationMenu(this,null,waypointNav,null);
 }
 break;
 case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
-final cgWaypoint waypointAround=cache.getWaypoint(index);
+final Waypoint waypointAround=cache.getWaypoint(index);
 if (waypointAround != null) {
 cgeocaches.startActivityCoordinates(this,waypointAround.getCoords());
 }

@@ -35,7 +35,7 @@
       waypoints.clear();
       if (isLiveEnabled || mapMode == MapMode.COORDS) {
         CacheType type=Settings.getCacheType();
-        Set<cgWaypoint> waypointsInViewport=cgData.loadWaypoints(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches(),type);
+        Set<Waypoint> waypointsInViewport=cgData.loadWaypoints(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches(),type);
         waypoints.addAll(waypointsInViewport);
       }
  else {

@@ -2,7 +2,7 @@
   final String name=cursor.getString(cursor.getColumnIndex("name"));
   final WaypointType type=WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
   final boolean own=cursor.getInt(cursor.getColumnIndex("own")) != 0;
-  final cgWaypoint waypoint=new cgWaypoint(name,type,own);
+  final Waypoint waypoint=new Waypoint(name,type,own);
   waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
   waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
   waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));

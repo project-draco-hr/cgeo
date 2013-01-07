@@ -3,7 +3,7 @@
     return;
   }
   if (coordsIntent != null) {
-    final cgWaypoint waypoint=new cgWaypoint("some place",waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT,false);
+    final Waypoint waypoint=new Waypoint("some place",waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT,false);
     waypoint.setCoords(coordsIntent);
     final CachesOverlayItemImpl item=getItem(waypoint,null,waypoint);
     overlayCaches.updateItems(item);

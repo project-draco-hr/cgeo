@@ -9,8 +9,8 @@
     if (o instanceof cgCache) {
       p=getCachePoint((cgCache)o,withCacheWaypoints,withCacheDetails);
     }
- else     if (o instanceof cgWaypoint) {
-      p=getWaypointPoint((cgWaypoint)o);
+ else     if (o instanceof Waypoint) {
+      p=getWaypointPoint((Waypoint)o);
     }
     if (p != null) {
       pd.addPoint(p);

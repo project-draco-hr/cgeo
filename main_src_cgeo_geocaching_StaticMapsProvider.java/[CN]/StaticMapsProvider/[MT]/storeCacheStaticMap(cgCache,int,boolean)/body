@@ -1,7 +1,7 @@
 {
   final String latlonMap=cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
   final Parameters waypoints=new Parameters();
-  for (  final cgWaypoint waypoint : cache.getWaypoints()) {
+  for (  final Waypoint waypoint : cache.getWaypoints()) {
     if (waypoint.getCoords() == null) {
       continue;
     }

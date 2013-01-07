@@ -15,7 +15,7 @@
     query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
   }
   query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where);
-  final Set<cgWaypoint> waypoints=new HashSet<cgWaypoint>();
+  final Set<Waypoint> waypoints=new HashSet<Waypoint>();
   final Cursor cursor=database.rawQuery(query.toString(),null);
   while (cursor.moveToNext()) {
     waypoints.add(createWaypointFromDatabaseContent(cursor));

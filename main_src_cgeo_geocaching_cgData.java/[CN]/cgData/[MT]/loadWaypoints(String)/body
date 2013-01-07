@@ -3,7 +3,7 @@
     return null;
   }
   init();
-  final List<cgWaypoint> waypoints=new ArrayList<cgWaypoint>();
+  final List<Waypoint> waypoints=new ArrayList<Waypoint>();
   final Cursor cursor=database.query(dbTableWaypoints,WAYPOINT_COLUMNS,"geocode = ?",new String[]{geocode},null,null,"_id","100");
   while (cursor.moveToNext()) {
     waypoints.add(createWaypointFromDatabaseContent(cursor));

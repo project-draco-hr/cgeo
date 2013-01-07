@@ -5,7 +5,7 @@
     StaticMapsProvider.storeCacheStaticMap(cache,true);
     return cache.hasStaticMap();
   }
-  final cgWaypoint waypoint=cache.getWaypointById(waypoint_id);
+  final Waypoint waypoint=cache.getWaypointById(waypoint_id);
   if (waypoint != null) {
     showToast(res.getString(R.string.info_storing_static_maps));
     StaticMapsProvider.storeWaypointStaticMap(cache,waypoint,true);

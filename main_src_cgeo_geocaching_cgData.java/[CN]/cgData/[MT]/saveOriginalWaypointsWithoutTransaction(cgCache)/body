@@ -1,11 +1,11 @@
 {
   String geocode=cache.getGeocode();
   database.delete(dbTableWaypoints,"geocode = ? and type <> ? and own = 0",new String[]{geocode,"own"});
-  List<cgWaypoint> waypoints=cache.getWaypoints();
+  List<Waypoint> waypoints=cache.getWaypoints();
   if (CollectionUtils.isNotEmpty(waypoints)) {
     ContentValues values=new ContentValues();
     long timeStamp=System.currentTimeMillis();
-    for (    cgWaypoint oneWaypoint : waypoints) {
+    for (    Waypoint oneWaypoint : waypoints) {
       if (oneWaypoint.isUserDefined()) {
         continue;
       }

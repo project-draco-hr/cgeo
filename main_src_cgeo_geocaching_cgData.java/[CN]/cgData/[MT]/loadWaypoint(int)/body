@@ -5,7 +5,7 @@
   init();
   final Cursor cursor=database.query(dbTableWaypoints,WAYPOINT_COLUMNS,"_id = ?",new String[]{Integer.toString(id)},null,null,null,"1");
   Log.d("cgData.loadWaypoint(" + id + ")");
-  final cgWaypoint waypoint=cursor.moveToFirst() ? createWaypointFromDatabaseContent(cursor) : null;
+  final Waypoint waypoint=cursor.moveToFirst() ? createWaypointFromDatabaseContent(cursor) : null;
   cursor.close();
   return waypoint;
 }

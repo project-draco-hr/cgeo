@@ -204,11 +204,11 @@
  catch (  Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache log count");
   }
-  cache.setWaypoints(Collections.<cgWaypoint>emptyList(),false);
+  cache.setWaypoints(Collections.<Waypoint>emptyList(),false);
   try {
     final String originalCoords=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON_ORIG,false,null);
     if (null != originalCoords) {
-      final cgWaypoint waypoint=new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);
+      final Waypoint waypoint=new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);
       waypoint.setCoords(new Geopoint(originalCoords));
       cache.addOrChangeWaypoint(waypoint,false);
       cache.setUserModifiedCoords(true);
@@ -240,7 +240,7 @@
         String[] wp=wpItems[j].split("<td");
         final String name=BaseUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,cgeoapplication.getInstance().getString(R.string.waypoint),true);
         final String resulttype=BaseUtils.getMatch(wp[3],GCConstants.PATTERN_WPTYPE,null);
-        final cgWaypoint waypoint=new cgWaypoint(name,WaypointType.findById(resulttype),false);
+        final Waypoint waypoint=new Waypoint(name,WaypointType.findById(resulttype),false);
         waypoint.setPrefix(BaseUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));
         waypoint.setLookup(BaseUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
         String latlon=Html.fromHtml(BaseUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();

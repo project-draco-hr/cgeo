@@ -5,11 +5,11 @@
       throw new ThreadDeath();
     }
     final List<cgCache> cachesToDisplay=caches.getAsList();
-    final List<cgWaypoint> waypointsToDisplay=new ArrayList<cgWaypoint>(waypoints);
+    final List<Waypoint> waypointsToDisplay=new ArrayList<Waypoint>(waypoints);
     final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<CachesOverlayItemImpl>();
     if (!cachesToDisplay.isEmpty()) {
       if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
-        for (        cgWaypoint waypoint : waypointsToDisplay) {
+        for (        Waypoint waypoint : waypointsToDisplay) {
           if (waypoint == null || waypoint.getCoords() == null) {
             continue;
           }
