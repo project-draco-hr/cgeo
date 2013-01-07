@@ -1,0 +1,9 @@
+{
+  if (StringUtils.startsWith(input,PARAGRAPH_BEGIN) && StringUtils.endsWith(input,PARAGRAPH_END)) {
+    String inner=input.substring(PARAGRAPH_BEGIN.length(),input.length() - PARAGRAPH_END.length());
+    if (inner.indexOf(PARAGRAPH_BEGIN) < 0) {
+      return inner;
+    }
+  }
+  return input;
+}

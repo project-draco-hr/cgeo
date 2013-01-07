@@ -245,7 +245,7 @@
 );
   cacheLog.getChild("text").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String logText){
-      logHolder.logEntry.log=logText;
+      logHolder.logEntry.log=stripMarkup(logText);
     }
   }
 );
