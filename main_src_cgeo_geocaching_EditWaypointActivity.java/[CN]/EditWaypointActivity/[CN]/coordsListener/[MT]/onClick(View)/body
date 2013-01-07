@@ -3,8 +3,6 @@
   final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString() + distanceUnit;
   final String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
   final String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
-  final CheckBox setAsCacheCoordsCheckBox=(CheckBox)findViewById(R.id.setAsCacheCoordsCheckBox);
-  final CheckBox uploadCoordsToWebsiteCheckBox=(CheckBox)findViewById(R.id.uploadCoordsToWebsiteCheckBox);
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     helpDialog(res.getString(R.string.err_point_no_position_given_title),res.getString(R.string.err_point_no_position_given));
     return;
@@ -65,7 +63,9 @@
     if (Settings.isStoreOfflineWpMaps()) {
       StaticMapsProvider.storeWaypointStaticMap(cache,waypoint,false);
     }
-    if (setAsCacheCoordsCheckBox.isChecked()) {
+    final RadioButton modifyLocal=(RadioButton)findViewById(R.id.modify_cache_coordinates_local);
+    final RadioButton modifyBoth=(RadioButton)findViewById(R.id.modify_cache_coordinates_local_and_remote);
+    if (modifyLocal.isChecked() || modifyBoth.isChecked()) {
       if (!cache.hasUserModifiedCoords()) {
         final Waypoint origWaypoint=new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);
         origWaypoint.setCoords(cache.getCoords());
@@ -75,7 +75,7 @@
       cache.setCoords(waypoint.getCoords());
       cgData.saveChangedCache(cache);
     }
-    if (uploadCoordsToWebsiteCheckBox.isChecked() && waypoint.getCoords() != null) {
+    if (modifyBoth.isChecked() && waypoint.getCoords() != null) {
       if (cache.supportsOwnCoordinates()) {
         final ProgressDialog progress=ProgressDialog.show(EditWaypointActivity.this,getString(R.string.cache),getString(R.string.waypoint_coordinates_uploading_to_website,waypoint.getCoords()),true);
         Handler finishHandler=new Handler(){
