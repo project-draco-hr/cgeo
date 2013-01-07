@@ -4,7 +4,7 @@
     runOnUiThread(new Runnable(){
       @Override public void run(){
         cacheList.clear();
-        cacheList.addAll((Set<cgCache>)cachesFromSearchResult);
+        cacheList.addAll(cachesFromSearchResult);
         adapter.reFilter();
         updateTitle();
         showFooterMoreCaches();
