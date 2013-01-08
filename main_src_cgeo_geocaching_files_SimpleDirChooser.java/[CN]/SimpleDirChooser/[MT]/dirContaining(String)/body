@@ -1,0 +1,3 @@
+{
+  return StringUtils.contains(path,File.separatorChar) ? new File(StringUtils.substringBeforeLast(path,Character.toString(File.separatorChar))) : Environment.getExternalStorageDirectory();
+}

@@ -1,17 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   final Bundle extras=getIntent().getExtras();
-  String startDir="";
-  if (extras != null) {
-    startDir=extras.getString(START_DIR);
-  }
-  if (StringUtils.isBlank(startDir)) {
-    startDir=Environment.getExternalStorageDirectory().getPath();
-  }
- else {
-    startDir=startDir.substring(0,startDir.lastIndexOf(File.separatorChar));
-  }
-  currentDir=new File(startDir);
+  currentDir=dirContaining(extras.getString(START_DIR));
   ActivityMixin.setTheme(this);
   setContentView(R.layout.simple_dir_chooser);
   setTitle(this.getResources().getString(R.string.simple_dir_chooser_title));
