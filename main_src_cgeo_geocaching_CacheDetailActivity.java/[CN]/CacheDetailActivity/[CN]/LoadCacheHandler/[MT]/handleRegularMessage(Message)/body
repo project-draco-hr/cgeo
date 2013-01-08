@@ -5,11 +5,13 @@
  else {
     if (search == null) {
       showToast(res.getString(R.string.err_dwld_details_failed));
+      progress.dismiss();
       finish();
       return;
     }
     if (search.getError() != null) {
       showToast(res.getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(res)+ ".");
+      progress.dismiss();
       finish();
       return;
     }
