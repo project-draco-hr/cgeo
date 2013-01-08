@@ -23,5 +23,61 @@
  else {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
   }
-  init();
+  postButton=(Button)findViewById(R.id.post);
+  tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
+  tweetCheck=(CheckBox)findViewById(R.id.tweet);
+  clearButton=(Button)findViewById(R.id.clear);
+  date=Calendar.getInstance();
+  if (savedInstanceState != null) {
+    rating=savedInstanceState.getDouble(SAVED_STATE_RATING);
+    typeSelected=LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
+    date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
+  }
+ else {
+    rating=0.0;
+    if (alreadyFound) {
+      typeSelected=LogType.NOTE;
+    }
+ else {
+      typeSelected=LogType.FOUND_IT;
+    }
+    final LogEntry log=cgData.loadLogOffline(geocode);
+    if (log != null) {
+      typeSelected=log.type;
+      date.setTime(new Date(log.date));
+      text=log.log;
+    }
+ else     if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(((EditText)findViewById(R.id.log)).getText())) {
+      insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),new LogContext(cache)),false);
+    }
+  }
+  updatePostButtonText();
+  final Button saveButton=(Button)findViewById(R.id.save);
+  possibleLogTypes=cache.getPossibleLogTypes();
+  enablePostButton(false);
+  final Button typeButton=(Button)findViewById(R.id.type);
+  registerForContextMenu(typeButton);
+  typeButton.setText(typeSelected.getL10n());
+  typeButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View view){
+      openContextMenu(view);
+    }
+  }
+);
+  final Button dateButton=(Button)findViewById(R.id.date);
+  setDate(date);
+  dateButton.setOnClickListener(new DateListener());
+  final EditText logView=(EditText)findViewById(R.id.log);
+  if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text)) {
+    logView.setText(text);
+  }
+  tweetCheck.setChecked(true);
+  saveButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      saveLog(true);
+    }
+  }
+);
+  clearButton.setOnClickListener(new ClearListener());
+  getSupportLoaderManager().initLoader(0,null,this);
 }
