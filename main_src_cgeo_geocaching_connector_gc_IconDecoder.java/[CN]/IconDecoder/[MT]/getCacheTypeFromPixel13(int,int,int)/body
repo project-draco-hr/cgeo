@@ -1,33 +1,48 @@
 {
-  if (g < 110) {
-    if (r > 87) {
-      return ((g > 73) && (b < 63)) ? CT_FOUND : CT_EVENT;
-    }
-    return CT_MYSTERY;
-  }
-  if (b > 137) {
-    if ((r < 184) && (g > 190)) {
-      return CT_TRADITIONAL;
-    }
-    if ((r < 184) && (g < 191) && (r < 136)) {
+  if (b < 130) {
+    if (r < 41) {
       return CT_MYSTERY;
     }
-    return CT_VIRTUAL;
-  }
-  if (r < 158) {
-    return ((r > 129) && (r < 153)) ? CT_FOUND : CT_TRADITIONAL;
-  }
-  if (b > 33) {
-    if (b > 57) {
-      if (b > 100) {
-        return (r > 229) ? CT_MULTI : CT_EVENT;
+    if (g < 74) {
+      return CT_EVENT;
+    }
+    if (r < 130) {
+      return CT_TRADITIONAL;
+    }
+    if (b < 31) {
+      return CT_MULTI;
+    }
+    if (b < 101) {
+      if (g < 99) {
+        return r < 178 ? CT_FOUND : CT_EVENT;
       }
-      return ((r > 254) && (g < 236)) ? CT_MULTI : CT_FOUND;
+      if (b < 58) {
+        if (g < 174) {
+          return CT_FOUND;
+        }
+        if (r < 224) {
+          return CT_OWN;
+        }
+        if (b < 49) {
+          return g < 210 ? CT_FOUND : CT_OWN;
+        }
+        if (g < 205) {
+          return g < 202 ? CT_FOUND : CT_OWN;
+        }
+        return CT_FOUND;
+      }
+      if (r < 255) {
+        return CT_FOUND;
+      }
+      return g < 236 ? CT_MULTI : CT_FOUND;
     }
-    if ((g > 173) && ((g < 224))) {
-      return ((r < 243) && (r > 223)) ? CT_FOUND : CT_OWN;
-    }
-    return CT_FOUND;
+    return g < 182 ? CT_EVENT : CT_MULTI;
   }
-  return CT_MULTI;
+  if (r < 136) {
+    return CT_MYSTERY;
+  }
+  if (b < 168) {
+    return g < 174 ? CT_EARTH : CT_TRADITIONAL;
+  }
+  return CT_EARTH;
 }

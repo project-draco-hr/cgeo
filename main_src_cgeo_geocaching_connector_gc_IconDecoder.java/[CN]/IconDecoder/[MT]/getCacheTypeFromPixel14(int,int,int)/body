@@ -1,156 +1,219 @@
 {
-  if (b < 140) {
-    if (r > 155) {
-      if (g < 159) {
-        if (r < 173) {
-          return (r > 161) ? CT_MEGAEVENT : CT_OWN;
-        }
-        if (r < 206) {
-          if (b > 49) {
-            return (b > 83) ? CT_EVENT : CT_FOUND;
+  if (b < 128) {
+    if (r < 214) {
+      if (b < 37) {
+        if (g < 50) {
+          if (b < 19) {
+            if (g < 16) {
+              if (b < 4) {
+                return CT_FOUND;
+              }
+              return r < 8 ? CT_VIRTUAL : CT_WEBCAM;
+            }
+            return CT_FOUND;
           }
-          return (b < 31) ? CT_EARTH : CT_FOUND;
-        }
-        return (r < 221) ? CT_FOUND : CT_MULTI;
-      }
-      if (r > 210) {
-        if (g < 188) {
-          return CT_FOUND;
-        }
-        if (r < 246) {
-          return CT_OWN;
-        }
-        if (r < 254) {
-          return CT_FOUND;
-        }
-        if (r < 255) {
-          return CT_EVENT;
-        }
-        if (g < 208) {
-          return CT_EARTH;
-        }
-        if (g > 225) {
-          return CT_EARTH;
-        }
-        return (b < 36) ? CT_MULTI : CT_OWN;
-      }
-      return (b < 66) ? CT_OWN : CT_EARTH;
-    }
-    if (r < 63) {
-      if (b > 26) {
-        if (b < 29) {
           return CT_WEBCAM;
         }
-        if (g > 102) {
-          return CT_CITO;
+        if (b < 24) {
+          if (b < 18) {
+            return CT_EARTH;
+          }
+          return r < 127 ? CT_TRADITIONAL : CT_EARTH;
         }
-        return (r < 26) ? CT_CITO : CT_WEBCAM;
+        return CT_FOUND;
       }
-      if (g < 38) {
-        return CT_WEBCAM;
+      if (r < 142) {
+        if (r < 63) {
+          if (r < 26) {
+            return CT_CITO;
+          }
+          return r < 51 ? CT_WEBCAM : CT_CITO;
+        }
+        return g < 107 ? CT_WEBCAM : CT_MULTI;
       }
-      return (r < 41) ? CT_EARTH : CT_TRADITIONAL;
+      if (g < 138) {
+        return r < 178 ? CT_MEGAEVENT : CT_EVENT;
+      }
+      return b < 71 ? CT_FOUND : CT_EARTH;
     }
-    if (b < 119) {
-      if (g < 81) {
-        return CT_WEBCAM;
-      }
-      if (b < 90) {
+    if (b < 77) {
+      if (g < 166) {
+        if (r < 238) {
+          return g < 120 ? CT_MULTI : CT_OWN;
+        }
+        if (b < 57) {
+          if (r < 254) {
+            if (b < 39) {
+              if (r < 239) {
+                return CT_OWN;
+              }
+              if (b < 36) {
+                if (g < 150) {
+                  if (b < 24) {
+                    return b < 22 ? CT_FOUND : CT_OWN;
+                  }
+                  if (g < 138) {
+                    return b < 25 ? CT_FOUND : CT_OWN;
+                  }
+                  return CT_FOUND;
+                }
+                return CT_OWN;
+              }
+              if (b < 38) {
+                if (b < 37) {
+                  if (g < 153) {
+                    return r < 242 ? CT_OWN : CT_FOUND;
+                  }
+                  return CT_OWN;
+                }
+                return CT_FOUND;
+              }
+              return CT_OWN;
+            }
+            if (g < 148) {
+              return CT_OWN;
+            }
+            if (r < 244) {
+              return CT_FOUND;
+            }
+            if (b < 45) {
+              if (b < 42) {
+                return CT_FOUND;
+              }
+              if (g < 162) {
+                return r < 245 ? CT_OWN : CT_FOUND;
+              }
+              return CT_OWN;
+            }
+            return CT_FOUND;
+          }
+          return g < 3 ? CT_FOUND : CT_VIRTUAL;
+        }
         return CT_OWN;
       }
-      return (r < 104) ? CT_WEBCAM : CT_OWN;
+      if (b < 51) {
+        if (r < 251) {
+          return CT_OWN;
+        }
+        return g < 208 ? CT_EARTH : CT_MULTI;
+      }
+      if (b < 63) {
+        if (r < 247) {
+          return CT_FOUND;
+        }
+        if (r < 250) {
+          if (g < 169) {
+            return CT_FOUND;
+          }
+          if (g < 192) {
+            if (b < 54) {
+              return CT_OWN;
+            }
+            if (r < 248) {
+              return g < 180 ? CT_FOUND : CT_OWN;
+            }
+            return CT_OWN;
+          }
+          return g < 193 ? CT_FOUND : CT_OWN;
+        }
+        return CT_FOUND;
+      }
+      return CT_FOUND;
     }
-    if (r < 132) {
-      return (b < 124) ? CT_MULTI : CT_WHEREIGO;
-    }
-    if (g > 164) {
-      return CT_TRADITIONAL;
-    }
-    if (b < 134) {
+    if (g < 177) {
       return CT_OWN;
     }
-    return (b > 137) ? CT_OWN : CT_WHEREIGO;
+    if (r < 239) {
+      return CT_FOUND;
+    }
+    if (g < 207) {
+      return CT_OWN;
+    }
+    return r < 254 ? CT_FOUND : CT_EARTH;
   }
-  if (b < 245) {
-    if (r < 180) {
-      if (b < 218) {
+  if (r < 203) {
+    if (b < 218) {
+      if (g < 158) {
         if (g < 71) {
           return CT_MYSTERY;
         }
-        if (r < 96) {
-          return CT_WHEREIGO;
-        }
-        if (b > 165) {
-          return CT_WHEREIGO;
-        }
-        if (r < 153) {
-          return CT_WHEREIGO;
-        }
-        if (r < 160) {
-          return CT_WEBCAM;
-        }
-        return (r < 162) ? CT_WHEREIGO : CT_WEBCAM;
+        return r < 153 ? CT_WHEREIGO : CT_WEBCAM;
       }
-      return (r < 158) ? CT_MEGAEVENT : CT_EARTH;
+      if (b < 167) {
+        return r < 157 ? CT_TRADITIONAL : CT_WEBCAM;
+      }
+      return CT_WHEREIGO;
     }
-    if (g > 232) {
-      if (g > 247) {
-        return CT_CITO;
+    if (g < 199) {
+      if (r < 142) {
+        return CT_LETTERBOX;
       }
-      if (r < 237) {
-        return CT_OWN;
-      }
-      if (g < 238) {
-        return CT_OWN;
-      }
-      if (r > 243) {
-        return CT_WEBCAM;
-      }
-      return (g > 238) ? CT_OWN : CT_WEBCAM;
+      return r < 175 ? CT_CITO : CT_LETTERBOX;
     }
-    if (r < 228) {
-      if (b > 238) {
-        return CT_MYSTERY;
-      }
-      if (r < 193) {
-        if (r < 184) {
-          return CT_OWN;
-        }
-        if (g < 186) {
-          return CT_WHEREIGO;
-        }
-        return (r > 189) ? CT_WHEREIGO : CT_OWN;
-      }
-      if (g < 223) {
-        if (r > 216) {
-          return CT_OWN;
-        }
-        if (g > 217) {
-          return CT_WHEREIGO;
-        }
-        if (b > 211) {
-          return CT_WEBCAM;
-        }
-        if (b < 196) {
-          return CT_WEBCAM;
-        }
-        if (r > 210) {
-          return CT_OWN;
-        }
-        return (g > 206) ? CT_WHEREIGO : CT_OWN;
-      }
-      if (g < 224) {
-        return CT_OWN;
-      }
-      return (r < 226) ? CT_WHEREIGO : CT_OWN;
+    if (g < 207) {
+      return r < 167 ? CT_MEGAEVENT : CT_CITO;
     }
-    return (b < 216) ? CT_FOUND : CT_OWN;
+    return CT_EARTH;
   }
-  if (r < 238) {
-    if (r > 141) {
-      return (r > 185) ? CT_LETTERBOX : CT_CITO;
+  if (b < 224) {
+    if (g < 235) {
+      if (b < 163) {
+        if (r < 249) {
+          return b < 133 ? CT_FOUND : CT_OWN;
+        }
+        return CT_FOUND;
+      }
+      if (r < 235) {
+        if (r < 213) {
+          if (r < 207) {
+            return CT_FOUND;
+          }
+          if (g < 206) {
+            return CT_OWN;
+          }
+          return g < 207 ? CT_FOUND : CT_OWN;
+        }
+        return g < 194 ? CT_OWN : CT_FOUND;
+      }
+      if (g < 230) {
+        return CT_OWN;
+      }
+      return b < 205 ? CT_FOUND : CT_OWN;
     }
-    return (r < 41) ? CT_EARTH : CT_LETTERBOX;
+    if (r < 238) {
+      return CT_CITO;
+    }
+    return b < 170 ? CT_EVENT : CT_FOUND;
   }
-  return (r < 243) ? CT_WHEREIGO : CT_OWN;
+  if (r < 251) {
+    if (r < 210) {
+      return CT_MYSTERY;
+    }
+    if (b < 252) {
+      if (r < 243) {
+        if (r < 225) {
+          return CT_WHEREIGO;
+        }
+        if (b < 232) {
+          if (g < 228) {
+            return CT_WEBCAM;
+          }
+          return r < 231 ? CT_VIRTUAL : CT_TRADITIONAL;
+        }
+        if (r < 236) {
+          return CT_WHEREIGO;
+        }
+        return r < 240 ? CT_WEBCAM : CT_WHEREIGO;
+      }
+      if (g < 247) {
+        return r < 245 ? CT_WEBCAM : CT_FOUND;
+      }
+      return CT_WHEREIGO;
+    }
+    return CT_LETTERBOX;
+  }
+  if (r < 255) {
+    return CT_OWN;
+  }
+  return g < 254 ? CT_FOUND : CT_OWN;
 }

@@ -1,18 +1,12 @@
 {
-  if (b < 139) {
-    if (g > 104) {
-      if (r < 173) {
-        return CT_TRADITIONAL;
-      }
-      return (r > 225) ? CT_MULTI : CT_EVENT;
+  if (g < 136) {
+    if (r < 90) {
+      return g < 111 ? CT_MYSTERY : CT_TRADITIONAL;
     }
-    if (b < 25) {
-      return CT_EVENT;
-    }
-    return (r < 87) ? CT_MYSTERY : CT_EVENT;
+    return b < 176 ? CT_EVENT : CT_MYSTERY;
   }
-  if (r > 140) {
-    return (r < 197) ? CT_TRADITIONAL : CT_VIRTUAL;
+  if (r < 197) {
+    return CT_TRADITIONAL;
   }
-  return CT_MYSTERY;
+  return b < 155 ? CT_MULTI : CT_EARTH;
 }
