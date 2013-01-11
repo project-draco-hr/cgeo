@@ -1,9 +1,96 @@
 {
-  if (zoomlevel >= 14) {
-    return parseMapPNG14(cache,bitmap,xy);
+  final int topX=xy.getX() * 4;
+  final int topY=xy.getY() * 4;
+  final int bitmapWidth=bitmap.getWidth();
+  final int bitmapHeight=bitmap.getHeight();
+  if ((topX < 0) || (topY < 0) || (topX + 4 > bitmapWidth)|| (topY + 4 > bitmapHeight)) {
+    return false;
   }
-  if (zoomlevel <= 11) {
-    return parseMapPNG11(cache,bitmap,xy);
+  int numberOfDetections=7;
+  if (zoomlevel < 12) {
+    numberOfDetections=5;
   }
-  return parseMapPNG13(cache,bitmap,xy);
+  if (zoomlevel > 13) {
+    numberOfDetections=13;
+  }
+  int[] pngType=new int[numberOfDetections];
+  for (int x=topX; x < topX + 4; x++) {
+    for (int y=topY; y < topY + 4; y++) {
+      int color=bitmap.getPixel(x,y);
+      if ((color >>> 24) != 255) {
+        continue;
+      }
+      int r=(color & 0xFF0000) >> 16;
+      int g=(color & 0xFF00) >> 8;
+      int b=color & 0xFF;
+      if (isPixelDuplicated(r,g,b,zoomlevel)) {
+        continue;
+      }
+      int type;
+      if (zoomlevel < 12) {
+        type=getCacheTypeFromPixel11(r,g,b);
+      }
+ else {
+        if (zoomlevel > 13) {
+          type=getCacheTypeFromPixel14(r,g,b);
+        }
+ else {
+          type=getCacheTypeFromPixel13(r,g,b);
+        }
+      }
+      pngType[type]++;
+    }
+  }
+  int type=-1;
+  int count=0;
+  for (int x=0; x < pngType.length; x++) {
+    if (pngType[x] > count) {
+      count=pngType[x];
+      type=x;
+    }
+  }
+  if (count > 1) {
+switch (type) {
+case CT_TRADITIONAL:
+      cache.setType(CacheType.TRADITIONAL);
+    return true;
+case CT_MULTI:
+  cache.setType(CacheType.MULTI);
+return true;
+case CT_MYSTERY:
+cache.setType(CacheType.MYSTERY);
+return true;
+case CT_EVENT:
+cache.setType(CacheType.EVENT);
+return true;
+case CT_EARTH:
+cache.setType(CacheType.EARTH);
+return true;
+case CT_FOUND:
+cache.setFound(true);
+return true;
+case CT_OWN:
+cache.setOwn(true);
+return true;
+case CT_MEGAEVENT:
+cache.setType(CacheType.MEGA_EVENT);
+return true;
+case CT_CITO:
+cache.setType(CacheType.CITO);
+return true;
+case CT_WEBCAM:
+cache.setType(CacheType.WEBCAM);
+return true;
+case CT_WHEREIGO:
+cache.setType(CacheType.WHERIGO);
+return true;
+case CT_VIRTUAL:
+cache.setType(CacheType.VIRTUAL);
+return true;
+case CT_LETTERBOX:
+cache.setType(CacheType.LETTERBOX);
+return true;
+}
+}
+return false;
 }
