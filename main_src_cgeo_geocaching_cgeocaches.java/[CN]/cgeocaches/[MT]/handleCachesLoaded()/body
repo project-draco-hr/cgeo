@@ -37,7 +37,7 @@
   }
  catch (  Exception e) {
     showToast(res.getString(R.string.err_detail_cache_find_any));
-    Log.e("cgeocaches.loadCachesHandler: " + e.toString());
+    Log.e("cgeocaches.loadCachesHandler",e);
     hideLoading();
     showProgress(false);
     finish();
@@ -48,7 +48,7 @@
     showProgress(false);
   }
  catch (  Exception e2) {
-    Log.e("cgeocaches.loadCachesHandler.2: " + e2.toString());
+    Log.e("cgeocaches.loadCachesHandler.2",e2);
   }
   adapter.setSelectMode(false);
 }

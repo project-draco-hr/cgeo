@@ -1,5 +1,4 @@
 {
-  final int CACHE_PARSE_LIMIT=250;
   final Map<String,cgCache> caches=new HashMap<String,cgCache>();
   final CacheHolder cacheHolder=new CacheHolder();
   final CacheLog logHolder=new CacheLog();
@@ -254,7 +253,7 @@
     return caches.values();
   }
  catch (  SAXException e) {
-    Log.e("Cannot parse .gpx file as oc11xml: could not parse XML - " + e.toString());
+    Log.e("Cannot parse .gpx file as oc11xml: could not parse XML",e);
     return null;
   }
 }

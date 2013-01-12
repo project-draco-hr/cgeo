@@ -99,7 +99,7 @@
       cache.setReliableLatLon(true);
     }
  catch (    Geopoint.GeopointException e) {
-      Log.w("GCParser.parseCache: Failed to parse cache coordinates: " + e.toString());
+      Log.w("GCParser.parseCache: Failed to parse cache coordinates",e);
     }
   }
   cache.setLocation(BaseUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,cache.getLocation()));

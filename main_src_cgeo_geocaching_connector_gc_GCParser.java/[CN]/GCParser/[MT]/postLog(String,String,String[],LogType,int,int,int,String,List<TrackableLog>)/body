@@ -84,7 +84,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e("GCParser.postLog.confim: " + e.toString());
+    Log.e("GCParser.postLog.confim",e);
   }
   try {
     final MatcherWrapper matcherOk=new MatcherWrapper(GCConstants.PATTERN_OK1,page);
@@ -101,7 +101,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e("GCParser.postLog.check: " + e.toString());
+    Log.e("GCParser.postLog.check",e);
   }
   Log.e("GCParser.postLog: Failed to post log because of unknown error");
   return StatusCode.LOG_POST_ERROR;

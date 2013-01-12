@@ -22,7 +22,7 @@
     }
   }
  catch (  Exception e) {
-    Log.e("cgFileList.loadFiles.run: " + e.toString());
+    Log.e("cgFileList.loadFiles.run",e);
   }
   changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler,0,"loaded directories"));
   files.addAll(list);

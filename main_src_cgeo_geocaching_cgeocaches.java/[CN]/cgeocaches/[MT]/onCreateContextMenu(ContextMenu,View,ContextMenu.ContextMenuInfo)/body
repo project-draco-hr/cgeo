@@ -5,7 +5,7 @@
     adapterInfo=(AdapterContextMenuInfo)info;
   }
  catch (  Exception e) {
-    Log.w("cgeocaches.onCreateContextMenu: " + e.toString());
+    Log.w("cgeocaches.onCreateContextMenu",e);
   }
   if (adapterInfo == null || adapterInfo.position >= adapter.getCount()) {
     return;

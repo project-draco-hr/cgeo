@@ -105,7 +105,7 @@
     }
   }
  catch (  Exception e) {
-    Log.w("GCParser.parseCache: Failed to parse cache logs" + e.toString());
+    Log.w("GCParser.parseCache: Failed to parse cache logs",e);
   }
   if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(),possibleTrackingcode)) {
     trackable.setTrackingcode(possibleTrackingcode);

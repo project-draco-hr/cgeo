@@ -12,7 +12,7 @@
         Log.i("Waiting for next cache " + delay + " ms");
       }
  catch (      Exception e) {
-        Log.e("cgeocaches.LoadDetailsThread.sleep: " + e.toString());
+        Log.e("cgeocaches.LoadDetailsThread.sleep",e);
       }
     }
     if (needToStop) {
@@ -28,7 +28,7 @@
     return false;
   }
 catch (  Exception e) {
-    Log.e("cgeocaches.LoadDetailsThread: " + e.toString());
+    Log.e("cgeocaches.LoadDetailsThread",e);
   }
   last=System.currentTimeMillis();
   return true;

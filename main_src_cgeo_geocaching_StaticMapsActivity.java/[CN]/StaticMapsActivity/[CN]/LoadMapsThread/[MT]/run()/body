@@ -17,7 +17,7 @@
           }
         }
  catch (        Exception e) {
-          Log.e("StaticMapsActivity.LoadMapsThread.run: " + e.toString());
+          Log.e("StaticMapsActivity.LoadMapsThread.run",e);
         }
       }
       if (!maps.isEmpty()) {
@@ -27,6 +27,6 @@
     loadMapsHandler.sendMessage(Message.obtain());
   }
  catch (  Exception e) {
-    Log.e("StaticMapsActivity.LoadMapsThread.run: " + e.toString());
+    Log.e("StaticMapsActivity.LoadMapsThread.run",e);
   }
 }
