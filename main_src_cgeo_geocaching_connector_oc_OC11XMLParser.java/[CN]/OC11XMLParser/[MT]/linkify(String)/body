@@ -1,0 +1,14 @@
+{
+  String result=input;
+  Matcher matcher=LOCAL_URL.matcher(result);
+  while (matcher.find()) {
+    String url=matcher.group(1);
+    if (!url.contains(":/")) {
+      IConnector ocConnector=ConnectorFactory.getConnector("OCXXX");
+      String prefix="http://" + ocConnector.getHost() + "/";
+      result=StringUtils.replace(result,url,prefix + url);
+      matcher=LOCAL_URL.matcher(result);
+    }
+  }
+  return result;
+}
