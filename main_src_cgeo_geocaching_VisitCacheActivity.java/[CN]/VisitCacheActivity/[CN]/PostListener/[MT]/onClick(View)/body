@@ -1,7 +1,6 @@
 {
   waitDialog=ProgressDialog.show(VisitCacheActivity.this,null,res.getString(R.string.log_saving),true);
   waitDialog.setCancelable(true);
-  final String log=((EditText)findViewById(R.id.log)).getText().toString();
-  final Thread thread=new PostLogThread(postLogHandler,log);
+  final Thread thread=new PostLogThread(postLogHandler,currentLogText());
   thread.start();
 }
