@@ -1,0 +1,15 @@
+{
+  Builder alert=new AlertDialog.Builder(VisitCacheActivity.this);
+  String[] choices=new String[possibleLogTypes.size()];
+  for (int i=0; i < choices.length; i++) {
+    choices[i]=possibleLogTypes.get(i).getL10n();
+  }
+  alert.setSingleChoiceItems(choices,possibleLogTypes.indexOf(typeSelected),new OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int position){
+      setType(possibleLogTypes.get(position));
+      dialog.dismiss();
+    }
+  }
+);
+  alert.create().show();
+}

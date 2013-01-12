@@ -13,7 +13,7 @@
   dateButton.setOnClickListener(new DateListener());
   setDate(date);
   final EditText logView=(EditText)findViewById(R.id.log);
-  logView.setText("");
+  logView.setText(StringUtils.EMPTY);
   clearButton.setOnClickListener(new ClearListener());
   showToast(res.getString(R.string.info_log_cleared));
 }

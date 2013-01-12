@@ -1,18 +1,3 @@
 {
-  if (postButton.isEnabled()) {
-    if (typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
-      if (rating == 0) {
-        postButton.setText(res.getString(R.string.log_post_no_rate));
-      }
- else {
-        postButton.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating)+ "*");
-      }
-    }
- else {
-      postButton.setText(res.getString(R.string.log_post));
-    }
-  }
- else {
-    postButton.setText(res.getString(R.string.log_post_not_possible));
-  }
+  postButton.setText(getPostButtonText());
 }

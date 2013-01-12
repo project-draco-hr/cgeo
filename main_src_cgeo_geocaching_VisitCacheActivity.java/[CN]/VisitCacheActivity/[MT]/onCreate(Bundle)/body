@@ -56,11 +56,10 @@
   possibleLogTypes=cache.getPossibleLogTypes();
   enablePostButton(false);
   final Button typeButton=(Button)findViewById(R.id.type);
-  registerForContextMenu(typeButton);
   typeButton.setText(typeSelected.getL10n());
   typeButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
-      openContextMenu(view);
+      selectLogType();
     }
   }
 );

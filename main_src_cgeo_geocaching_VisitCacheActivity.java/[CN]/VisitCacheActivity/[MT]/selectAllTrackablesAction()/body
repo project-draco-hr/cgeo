@@ -1,0 +1,18 @@
+{
+  Builder alert=new AlertDialog.Builder(VisitCacheActivity.this);
+  alert.setTitle(res.getString(R.string.log_tb_changeall));
+  String[] tbLogTypes=getTBLogTypes();
+  alert.setItems(tbLogTypes,new OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int position){
+      final LogTypeTrackable logType=LogTypeTrackable.values()[position];
+      for (      TrackableLog tb : trackables) {
+        tb.action=logType;
+      }
+      tbChanged=true;
+      updateTrackablesList();
+      dialog.dismiss();
+    }
+  }
+);
+  alert.create().show();
+}
