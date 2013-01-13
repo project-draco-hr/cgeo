@@ -26,7 +26,6 @@
  while (count < 2);
     if (searchResult != null) {
       Set<cgCache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-      caches.removeAll(result);
       caches.addAll(result);
       lastSearchResult=searchResult;
     }
