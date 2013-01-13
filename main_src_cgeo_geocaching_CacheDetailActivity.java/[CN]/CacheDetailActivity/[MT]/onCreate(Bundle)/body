@@ -83,7 +83,7 @@
     }
   }
 );
-  final int pageToOpen=Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+  final int pageToOpen=savedInstanceState != null ? savedInstanceState.getInt(STATE_PAGE_INDEX,0) : Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
   createViewPager(pageToOpen,new OnPageSelectedListener(){
     @Override public void onPageSelected(    int position){
       if (Settings.isOpenLastDetailsPage()) {
