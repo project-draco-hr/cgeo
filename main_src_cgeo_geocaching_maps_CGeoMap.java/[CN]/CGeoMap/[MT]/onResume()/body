@@ -4,8 +4,10 @@
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
     for (    String geocode : dirtyCaches) {
       cgCache cache=app.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
-      caches.remove(cache);
-      caches.add(cache);
+      if (cache != null) {
+        caches.remove(cache);
+        caches.add(cache);
+      }
     }
     dirtyCaches.clear();
     displayExecutor.execute(new DisplayRunnable(mapView.getViewport()));
