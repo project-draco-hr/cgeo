@@ -1,14 +1,12 @@
 {
   final HttpResponse response=request("GET",uri,params,new Parameters("Accept","application/json, text/javascript, */*; q=0.01"),null);
-  if (isSuccess(response)) {
+  final String responseData=Network.getResponseData(response,false);
+  if (responseData != null) {
     try {
-      return new JSONObject(Network.getResponseData(response));
+      return new JSONObject(responseData);
     }
  catch (    final JSONException e) {
-      Log.e("Network.requestJSON",e);
-    }
-catch (    final NullPointerException e) {
-      Log.e("Network.requestJSON",e);
+      Log.w("Network.requestJSON",e);
     }
   }
   return null;
