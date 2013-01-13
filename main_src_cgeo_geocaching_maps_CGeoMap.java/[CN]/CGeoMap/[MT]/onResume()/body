@@ -5,7 +5,6 @@
     for (    String geocode : dirtyCaches) {
       cgCache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
       if (cache != null) {
-        caches.remove(cache);
         caches.add(cache);
       }
     }
