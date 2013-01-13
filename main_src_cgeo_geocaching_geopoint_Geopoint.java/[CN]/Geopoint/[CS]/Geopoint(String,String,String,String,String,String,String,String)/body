@@ -1,4 +1,3 @@
 {
-  latitude=(Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac),3)) / 60) * (getLatSign(latDir));
-  longitude=(Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac),3)) / 60) * (getLonSign(lonDir));
+  this(latDir + " " + latDeg+ " "+ latMin+ "."+ addZeros(latMinFrac,3),lonDir + " " + lonDeg+ " "+ lonMin+ "."+ addZeros(lonMinFrac,3));
 }
