@@ -19,11 +19,11 @@
  catch (    NumberFormatException ex) {
       Log.e("Unexpected origin waypoint prefix='" + prefix + "'",ex);
     }
-    writeCacheWaypoint(wp,prefix);
+    writeCacheWaypoint(gpx,wp,prefix);
   }
   for (  Waypoint wp : ownWaypoints) {
     maxPrefix++;
     String prefix=StringUtils.leftPad(String.valueOf(maxPrefix),2,'0');
-    writeCacheWaypoint(wp,prefix);
+    writeCacheWaypoint(gpx,wp,prefix);
   }
 }

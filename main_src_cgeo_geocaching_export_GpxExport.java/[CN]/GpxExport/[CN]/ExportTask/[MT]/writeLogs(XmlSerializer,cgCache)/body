@@ -1,0 +1,20 @@
+{
+  if (cache.getLogs().isEmpty()) {
+    return;
+  }
+  gpx.startTag(PREFIX_GROUNDSPEAK,"logs");
+  for (  LogEntry log : cache.getLogs()) {
+    gpx.startTag(PREFIX_GROUNDSPEAK,"log");
+    gpx.attribute("","id",Integer.toString(log.id));
+    XmlUtils.multipleTexts(gpx,PREFIX_GROUNDSPEAK,"date",dateFormatZ.format(new Date(log.date)),"type",log.type.type);
+    gpx.startTag(PREFIX_GROUNDSPEAK,"finder");
+    gpx.attribute("","id",log.author);
+    gpx.endTag(PREFIX_GROUNDSPEAK,"finder");
+    gpx.startTag(PREFIX_GROUNDSPEAK,"text");
+    gpx.attribute("","encoded","False");
+    gpx.text(log.log);
+    gpx.endTag(PREFIX_GROUNDSPEAK,"text");
+    gpx.endTag(PREFIX_GROUNDSPEAK,"log");
+  }
+  gpx.endTag(PREFIX_GROUNDSPEAK,"logs");
+}
