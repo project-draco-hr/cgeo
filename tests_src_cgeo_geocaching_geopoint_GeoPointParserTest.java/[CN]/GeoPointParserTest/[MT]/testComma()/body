@@ -3,5 +3,5 @@
   final Geopoint pointDot=GeopointParser.parse("N 46?? 27' 55.65''\n" + "E 15?? 53' 41.68''");
   assertNotNull(pointComma);
   assertNotNull(pointDot);
-  assertTrue(pointComma.equals(pointDot));
+  assertEquals(pointComma,pointDot);
 }

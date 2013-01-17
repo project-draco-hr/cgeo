@@ -1,6 +1,8 @@
 {
-  final Pattern pattern=LatLon.LAT == latlon ? patternLat : patternLon;
-  final MatcherWrapper matcher=new MatcherWrapper(pattern,text);
+  MatcherWrapper matcher=new MatcherWrapper(PATTERN_BAD_BLANK,text);
+  String replaceSpaceAfterComma=matcher.replaceAll("$1.$2");
+  final Pattern pattern=LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON;
+  matcher=new MatcherWrapper(pattern,replaceSpaceAfterComma);
   if (matcher.find()) {
     final double sign=matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
     final double degree=Integer.valueOf(matcher.group(2)).doubleValue();
