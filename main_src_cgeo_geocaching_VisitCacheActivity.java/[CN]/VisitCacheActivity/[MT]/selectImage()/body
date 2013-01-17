@@ -1,0 +1,7 @@
+{
+  Intent selectImageIntent=new Intent(this,ImageSelectActivity.class);
+  selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_CAPTION,imageCaption);
+  selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_DESCRIPTION,imageDescription);
+  selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING,imageUri.toString());
+  startActivityForResult(selectImageIntent,SELECT_IMAGE);
+}
