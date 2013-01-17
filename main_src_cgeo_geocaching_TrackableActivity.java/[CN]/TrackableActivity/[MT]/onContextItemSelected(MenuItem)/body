@@ -9,6 +9,9 @@ return true;
 case 3:
 startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(contextMenuUser))));
 return true;
+case 4:
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(contextMenuUser))));
+return true;
 default :
 return false;
 }
