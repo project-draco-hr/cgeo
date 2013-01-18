@@ -1,0 +1,12 @@
+{
+  if (!new File(imageUri.getPath()).exists()) {
+    Log.i("loading Image Preview with nonexistant file");
+    return;
+  }
+  final ImageView imagePreview=(ImageView)findViewById(R.id.image_preview);
+  BitmapFactory.Options bitmapOptions=new BitmapFactory.Options();
+  bitmapOptions.inSampleSize=8;
+  final Bitmap bitmap=BitmapFactory.decodeFile(imageUri.getPath(),bitmapOptions);
+  imagePreview.setImageBitmap(bitmap);
+  imagePreview.setVisibility(View.VISIBLE);
+}

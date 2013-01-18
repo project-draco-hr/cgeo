@@ -1,0 +1,11 @@
+{
+  File mediaStorageDir=new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"cgeo");
+  if (!mediaStorageDir.exists()) {
+    if (!mediaStorageDir.mkdirs()) {
+      Log.w("Failed to create directory");
+      return null;
+    }
+  }
+  String timeStamp=new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.US).format(new Date());
+  return new File(mediaStorageDir.getPath() + File.separator + "IMG_"+ timeStamp+ ".jpg");
+}

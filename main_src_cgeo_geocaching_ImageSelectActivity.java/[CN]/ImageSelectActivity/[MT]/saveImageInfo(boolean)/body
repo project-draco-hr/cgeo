@@ -1,0 +1,14 @@
+{
+  if (saveInfo) {
+    Intent intent=new Intent();
+    currentEditTexts();
+    intent.putExtra(EXTRAS_CAPTION,imageCaption);
+    intent.putExtra(EXTRAS_DESCRIPTION,imageDescription);
+    intent.putExtra(EXTRAS_URI_AS_STRING,imageUri.toString());
+    setResult(RESULT_OK,intent);
+  }
+ else {
+    setResult(RESULT_CANCELED);
+  }
+  finish();
+}
