@@ -15,10 +15,10 @@
   if (cache.isArchived()) {
     span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
-  details.add(R.string.cache_name,span);
+  registerForContextMenu(details.add(R.string.cache_name,span));
   details.add(R.string.cache_type,cache.getType().getL10n());
   details.addSize(cache);
-  details.add(R.string.cache_geocode,cache.getGeocode());
+  registerForContextMenu(details.add(R.string.cache_geocode,cache.getGeocode()));
   details.addCacheState(cache);
   details.addDistance(cache,cacheDistanceView);
   cacheDistanceView=details.getValueView();

@@ -5,7 +5,8 @@
 switch (viewId) {
 case R.id.value:
     clickedItemText=((TextView)view).getText();
-  buildOptionsContextmenu(menu,viewId,res.getString(R.string.cache_coordinates),true);
+  String itemTitle=(String)((TextView)((View)view.getParent()).findViewById(R.id.name)).getText();
+buildOptionsContextmenu(menu,viewId,itemTitle,true);
 break;
 case R.id.shortdesc:
 clickedItemText=((TextView)view).getText();
