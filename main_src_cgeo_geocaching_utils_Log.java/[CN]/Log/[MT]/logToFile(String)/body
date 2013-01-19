@@ -1,5 +1,5 @@
 {
-  final File file=new File("/sdcard/cgeo-debug.log");
+  final File file=new File(Environment.getExternalStorageDirectory(),"cgeo-debug.log");
   if (first) {
     first=false;
     file.delete();
