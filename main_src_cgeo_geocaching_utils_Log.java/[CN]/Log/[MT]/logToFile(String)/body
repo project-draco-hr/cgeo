@@ -1,0 +1,15 @@
+{
+  final File file=new File("/sdcard/cgeo-debug.log");
+  if (first) {
+    first=false;
+    file.delete();
+  }
+  try {
+    final Writer writer=new FileWriter(file,true);
+    writer.write(msg);
+    writer.close();
+  }
+ catch (  final IOException e) {
+    Log.e("logToFile: cannot write to " + file,e);
+  }
+}
