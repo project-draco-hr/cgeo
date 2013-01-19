@@ -7,20 +7,7 @@
     Log.e("GCParser.postLog: No log text given");
     return new ImmutablePair<StatusCode,String>(StatusCode.NO_LOG_TEXT,"");
   }
-  final int logLen=log.length();
-  final StringBuilder logUpdated=new StringBuilder();
-  for (int i=0; i < logLen; i++) {
-    char c=log.charAt(i);
-    if (c > 300) {
-      logUpdated.append("&#");
-      logUpdated.append(Integer.toString(c));
-      logUpdated.append(';');
-    }
- else {
-      logUpdated.append(c);
-    }
-  }
-  final String logInfo=logUpdated.toString().replace("\n","\r\n").trim();
+  final String logInfo=HtmlUtils.convertNonLatinCharactersToHTML(log).replace("\n","\r\n").trim();
   if (trackables != null) {
     Log.i("Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: "+ trackables.size());
   }
