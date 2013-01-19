@@ -5,7 +5,7 @@
   pageOrder.clear();
   final Pair<List<? extends Page>,Integer> pagesAndIndex=getOrderedPages();
   pageOrder.addAll(pagesAndIndex.getLeft());
-  final int defaultPage=pagesAndIndex.getRight().intValue();
+  final int defaultPage=pagesAndIndex.getRight();
   if (getCurrentItem() < 0 || getCurrentItem() >= viewPagerAdapter.getCount()) {
     viewPager.setCurrentItem(defaultPage,false);
   }
