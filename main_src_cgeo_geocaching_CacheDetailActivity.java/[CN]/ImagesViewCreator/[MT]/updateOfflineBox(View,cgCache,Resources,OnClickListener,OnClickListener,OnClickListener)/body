@@ -21,17 +21,17 @@
       ago=res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60))+ " "+ res.getString(R.string.cache_offline_time_days);
     }
     offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-    offlineRefresh.setOnClickListener(new RefreshCacheClickListener());
+    offlineRefresh.setOnClickListener(refreshCacheClickListener);
     offlineStore.setText(res.getString(R.string.cache_offline_drop));
     offlineStore.setClickable(true);
-    offlineStore.setOnClickListener(new DropCacheClickListener());
+    offlineStore.setOnClickListener(dropCacheClickListener);
   }
  else {
     offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-    offlineRefresh.setOnClickListener(new RefreshCacheClickListener());
+    offlineRefresh.setOnClickListener(refreshCacheClickListener);
     offlineStore.setText(res.getString(R.string.cache_offline_store));
     offlineStore.setClickable(true);
-    offlineStore.setOnClickListener(new StoreCacheClickListener());
+    offlineStore.setOnClickListener(storeCacheClickListener);
   }
   offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
   offlineRefresh.setClickable(true);
