@@ -1,6 +1,3 @@
 {
-  this.zoomlevel=Math.max(Math.min(zoomlevel,ZOOMLEVEL_MAX),ZOOMLEVEL_MIN);
-  tileX=calcX(origin);
-  tileY=calcY(origin);
-  viewPort=new Viewport(getCoord(new UTFGridPosition(0,0)),getCoord(new UTFGridPosition(63,63)));
+  this(calcX(origin,clippedZoomlevel(zoomlevel)),calcY(origin,clippedZoomlevel(zoomlevel)),clippedZoomlevel(zoomlevel));
 }
