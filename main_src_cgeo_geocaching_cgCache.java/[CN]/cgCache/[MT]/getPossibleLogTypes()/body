@@ -1,12 +1,11 @@
 {
-  boolean isOwner=getOwnerUserId() != null && getOwnerUserId().equalsIgnoreCase(Settings.getUsername());
-  List<LogType> logTypes=new ArrayList<LogType>();
+  final List<LogType> logTypes=new LinkedList<LogType>();
   if (isEventCache()) {
     logTypes.add(LogType.WILL_ATTEND);
     logTypes.add(LogType.NOTE);
     logTypes.add(LogType.ATTENDED);
     logTypes.add(LogType.NEEDS_ARCHIVE);
-    if (isOwner) {
+    if (isOwner()) {
       logTypes.add(LogType.ANNOUNCEMENT);
     }
   }
@@ -24,7 +23,7 @@
     logTypes.add(LogType.NEEDS_ARCHIVE);
     logTypes.add(LogType.NEEDS_MAINTENANCE);
   }
-  if (isOwner) {
+  if (isOwner()) {
     logTypes.add(LogType.OWNER_MAINTENANCE);
     logTypes.add(LogType.TEMP_DISABLE_LISTING);
     logTypes.add(LogType.ENABLE_LISTING);

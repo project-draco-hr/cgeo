@@ -70,7 +70,7 @@ case CT_FOUND:
 cache.setFound(true);
 return true;
 case CT_OWN:
-cache.setOwn(true);
+cache.setOwnerUserId(Settings.getUsername());
 return true;
 case CT_MEGAEVENT:
 cache.setType(CacheType.MEGA_EVENT);

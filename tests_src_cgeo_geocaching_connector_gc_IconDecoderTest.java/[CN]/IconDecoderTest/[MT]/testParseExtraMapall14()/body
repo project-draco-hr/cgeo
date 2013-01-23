@@ -4,9 +4,9 @@
   assertTrue(parseMapPNG(bitmap,72,16,14).isFound());
   assertTrue(parseMapPNG(bitmap,100,16,14).isFound());
   assertTrue(parseMapPNG(bitmap,128,16,14).isFound());
-  assertTrue(parseMapPNG(bitmap,44,44,14).isOwn());
-  assertTrue(parseMapPNG(bitmap,76,44,14).isOwn());
-  assertTrue(parseMapPNG(bitmap,132,44,14).isOwn());
+  assertTrue(parseMapPNG(bitmap,44,44,14).isOwner());
+  assertTrue(parseMapPNG(bitmap,76,44,14).isOwner());
+  assertTrue(parseMapPNG(bitmap,132,44,14).isOwner());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,40,72,14).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,72,72,14).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,100,72,14).getType());

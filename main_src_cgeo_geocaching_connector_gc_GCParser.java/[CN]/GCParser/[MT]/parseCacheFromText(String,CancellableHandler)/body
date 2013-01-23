@@ -28,7 +28,6 @@
   cache.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.getGuid()));
   cache.setName(cacheName);
   cache.setOwnerUserId(Network.decode(BaseUtils.getMatch(page,GCConstants.PATTERN_OWNER_USERID,true,cache.getOwnerUserId())));
-  cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerUserId(),Settings.getUsername()));
   cache.setUserModifiedCoords(false);
   String tableInside=page;
   int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
