@@ -1,7 +1,7 @@
 {
-  super(activity);
+  AlertDialog.Builder builder=new AlertDialog.Builder(activity);
   View layout=activity.getLayoutInflater().inflate(R.layout.fieldnote_export_dialog,null);
-  setView(layout);
+  builder.setView(layout);
   final CheckBox uploadOption=(CheckBox)layout.findViewById(R.id.upload);
   final CheckBox onlyNewOption=(CheckBox)layout.findViewById(R.id.onlynew);
   uploadOption.setOnClickListener(new View.OnClickListener(){
@@ -10,11 +10,12 @@
     }
   }
 );
-  layout.findViewById(R.id.export).setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      dismiss();
+  builder.setPositiveButton(R.string.export,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+      dialog.dismiss();
       new ExportTask(caches,activity,uploadOption.isChecked(),onlyNewOption.isChecked()).execute((Void)null);
     }
   }
 );
+  return builder.create();
 }
