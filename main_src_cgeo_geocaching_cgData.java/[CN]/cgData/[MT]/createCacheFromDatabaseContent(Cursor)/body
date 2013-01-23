@@ -13,7 +13,6 @@
     local_cci[7]=cursor.getColumnIndex("guid");
     local_cci[8]=cursor.getColumnIndex("type");
     local_cci[9]=cursor.getColumnIndex("name");
-    local_cci[10]=cursor.getColumnIndex("own");
     local_cci[11]=cursor.getColumnIndex("owner");
     local_cci[12]=cursor.getColumnIndex("owner_real");
     local_cci[13]=cursor.getColumnIndex("hidden");
@@ -56,7 +55,6 @@
   cache.setGuid(cursor.getString(cacheColumnIndex[7]));
   cache.setType(CacheType.getById(cursor.getString(cacheColumnIndex[8])));
   cache.setName(cursor.getString(cacheColumnIndex[9]));
-  cache.setOwn(cursor.getInt(cacheColumnIndex[10]) == 1);
   cache.setOwnerDisplayName(cursor.getString(cacheColumnIndex[11]));
   cache.setOwnerUserId(cursor.getString(cacheColumnIndex[12]));
   long dateValue=cursor.getLong(cacheColumnIndex[13]);

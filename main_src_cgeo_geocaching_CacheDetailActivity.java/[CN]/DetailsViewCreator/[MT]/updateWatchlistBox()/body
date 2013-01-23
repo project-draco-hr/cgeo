@@ -8,7 +8,7 @@
   Button buttonAdd=(Button)view.findViewById(R.id.add_to_watchlist);
   Button buttonRemove=(Button)view.findViewById(R.id.remove_from_watchlist);
   TextView text=(TextView)view.findViewById(R.id.watchlist_text);
-  if (cache.isOnWatchlist() || cache.isOwn()) {
+  if (cache.isOnWatchlist() || cache.isOwner()) {
     buttonAdd.setVisibility(View.GONE);
     buttonRemove.setVisibility(View.VISIBLE);
     text.setText(R.string.cache_watchlist_on);
@@ -18,7 +18,7 @@
     buttonRemove.setVisibility(View.GONE);
     text.setText(R.string.cache_watchlist_not_on);
   }
-  if (cache.isOwn()) {
+  if (cache.isOwner()) {
     buttonAdd.setEnabled(false);
     buttonAdd.setVisibility(View.GONE);
     buttonRemove.setEnabled(false);
