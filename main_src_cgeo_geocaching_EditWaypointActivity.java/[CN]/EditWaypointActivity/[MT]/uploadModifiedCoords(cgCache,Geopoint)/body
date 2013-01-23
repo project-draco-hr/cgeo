@@ -1,0 +1,7 @@
+{
+  IConnector con=ConnectorFactory.getConnector(cache);
+  if (con.supportsOwnCoordinates()) {
+    return con.uploadModifiedCoordinates(cache,waypoint_uploaded);
+  }
+  return false;
+}
