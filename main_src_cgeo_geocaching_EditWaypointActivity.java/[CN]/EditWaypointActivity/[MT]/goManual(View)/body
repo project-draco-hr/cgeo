@@ -1,8 +1,3 @@
 {
-  if (id >= 0) {
-    ActivityMixin.goManual(this,"c:geo-waypoint-edit");
-  }
- else {
-    ActivityMixin.goManual(this,"c:geo-waypoint-new");
-  }
+  ActivityMixin.goManual(this,id >= 0 ? "c:geo-waypoint-edit" : "c:geo-waypoint-new");
 }

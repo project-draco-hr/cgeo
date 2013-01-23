@@ -1,5 +1,3 @@
 {
-  final Intent addWptIntent=new Intent(context,EditWaypointActivity.class);
-  addWptIntent.putExtra("geocode",cache.getGeocode()).putExtra("count",cache.getWaypoints().size());
-  context.startActivity(addWptIntent);
+  context.startActivity(new Intent(context,EditWaypointActivity.class).putExtra("geocode",cache.getGeocode()).putExtra("count",cache.getWaypoints().size()));
 }

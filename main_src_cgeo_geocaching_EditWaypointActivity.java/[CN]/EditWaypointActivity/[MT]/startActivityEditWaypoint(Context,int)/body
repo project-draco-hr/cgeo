@@ -1,5 +1,3 @@
 {
-  final Intent editIntent=new Intent(context,EditWaypointActivity.class);
-  editIntent.putExtra("waypoint",waypointId);
-  context.startActivity(editIntent);
+  context.startActivity(new Intent(context,EditWaypointActivity.class).putExtra("waypoint",waypointId));
 }
