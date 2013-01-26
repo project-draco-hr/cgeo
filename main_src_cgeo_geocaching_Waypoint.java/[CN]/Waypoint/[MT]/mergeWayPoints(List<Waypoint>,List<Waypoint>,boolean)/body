@@ -1,23 +1,15 @@
 {
-  if (newPoints != null && oldPoints != null) {
-    for (    Waypoint old : oldPoints) {
-      if (old != null) {
-        boolean merged=false;
-        if (StringUtils.isNotEmpty(old.name)) {
-          for (          Waypoint waypoint : newPoints) {
-            if (waypoint != null && waypoint.name != null) {
-              if (old.name.equalsIgnoreCase(waypoint.name)) {
-                waypoint.merge(old);
-                merged=true;
-                break;
-              }
-            }
-          }
-        }
-        if (!merged && (old.isUserDefined() || forceMerge)) {
-          newPoints.add(old);
-        }
-      }
+  final Map<String,Waypoint> newPrefixes=new HashMap<String,Waypoint>(newPoints.size());
+  for (  final Waypoint waypoint : newPoints) {
+    newPrefixes.put(waypoint.getPrefix(),waypoint);
+  }
+  for (  final Waypoint oldWaypoint : oldPoints) {
+    final String prefix=oldWaypoint.getPrefix();
+    if (newPrefixes.containsKey(prefix)) {
+      newPrefixes.get(prefix).merge(oldWaypoint);
+    }
+ else     if (oldWaypoint.isUserDefined() || forceMerge) {
+      newPoints.add(oldWaypoint);
     }
   }
 }
