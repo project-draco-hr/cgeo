@@ -1,6 +1,6 @@
 {
   waypoint.setGeocode(geocode);
-  if (waypoint.getId() <= 0) {
+  if (waypoint.getId() < 0) {
     waypoints.add(waypoint);
     if (waypoint.isFinalWithCoords()) {
       finalDefined=true;
