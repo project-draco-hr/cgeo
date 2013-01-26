@@ -2,7 +2,7 @@
   try {
     final Intent dirChooser=new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
     if (StringUtils.isNotBlank(startDirectory)) {
-      dirChooser.setData(Uri.parse("file://" + new File(startDirectory).getAbsolutePath()));
+      dirChooser.setData(Uri.fromFile(new File(startDirectory)));
     }
     dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,res.getString(R.string.simple_dir_chooser_title));
     dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,res.getString(android.R.string.ok));

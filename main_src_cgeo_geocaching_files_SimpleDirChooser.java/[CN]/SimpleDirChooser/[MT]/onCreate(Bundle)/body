@@ -11,10 +11,7 @@
   okButton.setVisibility(View.INVISIBLE);
   okButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      Intent intent=new Intent();
-      String chosenDirName=File.separator + adapter.getItem(lastPosition).getName();
-      intent.putExtra(EXTRA_CHOSEN_DIR,currentDir.getAbsolutePath() + chosenDirName);
-      setResult(RESULT_OK,intent);
+      setResult(RESULT_OK,new Intent().setData(Uri.fromFile(new File(currentDir,adapter.getItem(lastPosition).getName()))));
       finish();
     }
   }

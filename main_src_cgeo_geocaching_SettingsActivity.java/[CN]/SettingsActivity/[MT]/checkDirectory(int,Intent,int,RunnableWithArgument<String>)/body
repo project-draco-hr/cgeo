@@ -2,7 +2,7 @@
   if (resultCode != RESULT_OK) {
     return;
   }
-  final String directory=data.hasExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR) ? data.getStringExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR) : new File(data.getData().getPath()).getAbsolutePath();
+  final String directory=new File(data.getData().getPath()).getAbsolutePath();
   if (StringUtils.isNotBlank(directory)) {
     runnableSetDir.run(directory);
     EditText directoryText=(EditText)findViewById(textField);
