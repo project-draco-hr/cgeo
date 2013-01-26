@@ -1,6 +1,6 @@
 {
   final Intent cacheIntent=new Intent(context,CacheDetailActivity.class);
-  cacheIntent.putExtra("guid",guid);
-  cacheIntent.putExtra("name",cacheName);
+  cacheIntent.putExtra(Intents.EXTRA_GUID,guid);
+  cacheIntent.putExtra(Intents.EXTRA_NAME,cacheName);
   context.startActivity(cacheIntent);
 }

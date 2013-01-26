@@ -5,6 +5,6 @@
     return;
   }
   final Intent addressesIntent=new Intent(this,AdressListActivity.class);
-  addressesIntent.putExtra("keyword",addText);
+  addressesIntent.putExtra(Intents.EXTRA_KEYWORD,addText);
   startActivity(addressesIntent);
 }

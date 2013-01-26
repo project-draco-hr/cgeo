@@ -15,9 +15,9 @@
   String name=null;
   String guid=null;
   if (geocode == null && extras != null) {
-    geocode=extras.getString("geocode");
-    name=extras.getString("name");
-    guid=extras.getString("guid");
+    geocode=extras.getString(Intents.EXTRA_GEOCODE);
+    name=extras.getString(Intents.EXTRA_NAME);
+    guid=extras.getString(Intents.EXTRA_GUID);
   }
   if (geocode == null && guid == null && uri != null) {
     String uriHost=uri.getHost().toLowerCase(Locale.US);

@@ -3,7 +3,7 @@
   setTheme();
   setContentView(R.layout.addresses);
   setTitle(res.getString(R.string.search_address_result));
-  final String keyword=getIntent().getStringExtra("keyword");
+  final String keyword=getIntent().getStringExtra(Intents.EXTRA_KEYWORD);
   if (keyword == null) {
     showToast(res.getString(R.string.err_search_address_forgot));
     finish();

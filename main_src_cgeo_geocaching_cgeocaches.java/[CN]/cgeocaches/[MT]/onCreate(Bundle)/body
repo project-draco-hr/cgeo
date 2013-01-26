@@ -4,9 +4,9 @@
   setContentView(R.layout.caches);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    Object typeObject=extras.get(EXTRAS_LIST_TYPE);
+    Object typeObject=extras.get(Intents.EXTRA_LIST_TYPE);
     type=(typeObject instanceof CacheListType) ? (CacheListType)typeObject : CacheListType.OFFLINE;
-    coords=(Geopoint)extras.getParcelable(EXTRAS_COORDS);
+    coords=(Geopoint)extras.getParcelable(Intents.EXTRAS_COORDS);
   }
  else {
     extras=new Bundle();
@@ -24,7 +24,7 @@
   setAdapter();
   Thread threadPure;
   AbstractSearchThread thread;
-  final String username=extras.getString(EXTRAS_USERNAME);
+  final String username=extras.getString(Intents.EXTRA_USERNAME);
 switch (type) {
 case OFFLINE:
     listId=Settings.getLastList();
@@ -70,7 +70,7 @@ thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case KEYWORD:
-final String keyword=extras.getString(EXTRAS_KEYWORD);
+final String keyword=extras.getString(Intents.EXTRA_KEYWORD);
 title=keyword;
 setTitle(title);
 showProgress(true);
@@ -80,7 +80,7 @@ thread.setRecaptchaHandler(new SearchHandler(this,res,thread));
 thread.start();
 break;
 case ADDRESS:
-final String address=extras.getString(EXTRAS_ADDRESS);
+final String address=extras.getString(Intents.EXTRA_ADDRESS);
 if (StringUtils.isNotBlank(address)) {
 title=address;
 }
@@ -121,7 +121,7 @@ case MAP:
 title=res.getString(R.string.map_map);
 setTitle(title);
 showProgress(true);
-search=(SearchResult)extras.get(EXTRAS_SEARCH);
+search=(SearchResult)extras.get(Intents.EXTRA_SEARCH);
 replaceCacheListFromSearch();
 loadCachesHandler.sendMessage(Message.obtain());
 break;

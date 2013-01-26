@@ -1,6 +1,6 @@
 {
   final Intent cachesIntent=new Intent(context,CacheDetailActivity.class);
-  cachesIntent.putExtra("geocode",geocode);
-  cachesIntent.putExtra("name",cacheName);
+  cachesIntent.putExtra(Intents.EXTRA_GEOCODE,geocode);
+  cachesIntent.putExtra(Intents.EXTRA_NAME,cacheName);
   context.startActivity(cachesIntent);
 }

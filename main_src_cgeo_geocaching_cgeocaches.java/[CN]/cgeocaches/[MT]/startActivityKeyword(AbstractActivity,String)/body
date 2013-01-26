@@ -4,7 +4,7 @@
     return;
   }
   final Intent cachesIntent=new Intent(context,cgeocaches.class);
-  cachesIntent.putExtra(EXTRAS_LIST_TYPE,CacheListType.KEYWORD);
-  cachesIntent.putExtra(EXTRAS_KEYWORD,keyword);
+  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.KEYWORD);
+  cachesIntent.putExtra(Intents.EXTRA_KEYWORD,keyword);
   context.startActivity(cachesIntent);
 }

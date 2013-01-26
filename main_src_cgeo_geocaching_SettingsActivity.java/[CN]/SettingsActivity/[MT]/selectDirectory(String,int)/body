@@ -1,7 +1,6 @@
 {
-  Intent dirChooser;
   try {
-    dirChooser=new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
+    final Intent dirChooser=new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
     if (StringUtils.isNotBlank(startDirectory)) {
       dirChooser.setData(Uri.parse("file://" + new File(startDirectory).getAbsolutePath()));
     }
@@ -10,8 +9,8 @@
     startActivityForResult(dirChooser,directoryKind);
   }
  catch (  android.content.ActivityNotFoundException ex) {
-    dirChooser=new Intent(this,SimpleDirChooser.class);
-    dirChooser.putExtra(SimpleDirChooser.START_DIR,startDirectory);
+    final Intent dirChooser=new Intent(this,SimpleDirChooser.class);
+    dirChooser.putExtra(Intents.EXTRA_START_DIR,startDirectory);
     startActivityForResult(dirChooser,directoryKind);
   }
 }

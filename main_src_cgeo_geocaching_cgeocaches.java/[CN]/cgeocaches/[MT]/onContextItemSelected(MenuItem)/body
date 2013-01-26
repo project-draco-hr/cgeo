@@ -25,8 +25,8 @@ NavigationAppFactory.showNavigationMenu(this,cache,null,null);
 break;
 case MENU_CACHE_DETAILS:
 final Intent cachesIntent=new Intent(this,CacheDetailActivity.class);
-cachesIntent.putExtra("geocode",cache.getGeocode());
-cachesIntent.putExtra("name",cache.getName());
+cachesIntent.putExtra(Intents.EXTRA_GEOCODE,cache.getGeocode());
+cachesIntent.putExtra(Intents.EXTRA_NAME,cache.getName());
 startActivity(cachesIntent);
 break;
 case MENU_DROP_CACHE:

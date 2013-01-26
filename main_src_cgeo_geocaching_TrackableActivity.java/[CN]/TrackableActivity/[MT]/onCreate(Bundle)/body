@@ -6,10 +6,10 @@
   Bundle extras=getIntent().getExtras();
   Uri uri=getIntent().getData();
   if (extras != null) {
-    geocode=extras.getString("geocode");
-    name=extras.getString("name");
-    guid=extras.getString("guid");
-    id=extras.getString("id");
+    geocode=extras.getString(Intents.EXTRA_GEOCODE);
+    name=extras.getString(Intents.EXTRA_NAME);
+    guid=extras.getString(Intents.EXTRA_GUID);
+    id=extras.getString(Intents.EXTRA_ID);
   }
   if (geocode == null && guid == null && id == null && uri != null) {
     String uriHost=uri.getHost().toLowerCase(Locale.US);

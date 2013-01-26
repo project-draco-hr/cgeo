@@ -1,6 +1,6 @@
 {
   final Intent popupIntent=new Intent(context,WaypointPopup.class);
-  popupIntent.putExtra(EXTRA_WAYPOINT_ID,waypointId);
-  popupIntent.putExtra(EXTRA_GEOCODE,geocode);
+  popupIntent.putExtra(Intents.EXTRA_WAYPOINT_ID,waypointId);
+  popupIntent.putExtra(Intents.EXTRA_GEOCODE,geocode);
   context.startActivity(popupIntent);
 }

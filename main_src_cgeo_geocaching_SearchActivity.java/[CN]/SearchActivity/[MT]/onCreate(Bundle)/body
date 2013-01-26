@@ -3,7 +3,7 @@
   Intent intent=getIntent();
   if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
     final String query=intent.getStringExtra(SearchManager.QUERY);
-    final boolean keywordSearch=intent.getBooleanExtra(EXTRAS_KEYWORDSEARCH,true);
+    final boolean keywordSearch=intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH,true);
     if (instantSearch(query,keywordSearch)) {
       setResult(RESULT_OK);
     }

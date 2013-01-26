@@ -3,7 +3,7 @@
     return;
   }
   final Intent cachesIntent=new Intent(context,cgeocaches.class);
-  cachesIntent.putExtra(EXTRAS_LIST_TYPE,CacheListType.NEAREST);
-  cachesIntent.putExtra(EXTRAS_COORDS,coordsNow);
+  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.NEAREST);
+  cachesIntent.putExtra(Intents.EXTRAS_COORDS,coordsNow);
   context.startActivity(cachesIntent);
 }

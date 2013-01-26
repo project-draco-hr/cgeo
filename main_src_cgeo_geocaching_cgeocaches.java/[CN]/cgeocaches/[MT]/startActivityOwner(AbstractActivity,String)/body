@@ -3,7 +3,7 @@
     return;
   }
   final Intent cachesIntent=new Intent(context,cgeocaches.class);
-  cachesIntent.putExtra(EXTRAS_LIST_TYPE,CacheListType.OWNER);
-  cachesIntent.putExtra(EXTRAS_USERNAME,userName);
+  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.OWNER);
+  cachesIntent.putExtra(Intents.EXTRA_USERNAME,userName);
   context.startActivity(cachesIntent);
 }

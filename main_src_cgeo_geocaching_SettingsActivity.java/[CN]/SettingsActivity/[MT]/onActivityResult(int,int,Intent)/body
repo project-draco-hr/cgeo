@@ -5,8 +5,8 @@
   }
 switch (requestCode) {
 case SELECT_MAPFILE_REQUEST:
-    if (data.hasExtra("mapfile")) {
-      final String mapFile=data.getStringExtra("mapfile");
+    if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
+      final String mapFile=data.getStringExtra(Intents.EXTRA_MAP_FILE);
       Settings.setMapFile(mapFile);
       if (!Settings.isValidMapFile(Settings.getMapFile())) {
         showToast(res.getString(R.string.warn_invalid_mapfile));
