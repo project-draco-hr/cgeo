@@ -7,9 +7,9 @@
     gp=gpTemp;
   }
   cgCache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
-  cgeocoords coordsDialog=new cgeocoords(EditWaypointActivity.this,cache,gp,app.currentGeo());
+  CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(EditWaypointActivity.this,cache,gp,app.currentGeo());
   coordsDialog.setCancelable(true);
-  coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate(){
+  coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate(){
     @Override public void update(    final Geopoint gp){
       ((Button)findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
       ((Button)findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
