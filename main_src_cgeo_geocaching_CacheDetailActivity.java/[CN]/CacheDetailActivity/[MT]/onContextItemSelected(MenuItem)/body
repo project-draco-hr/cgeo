@@ -69,7 +69,15 @@ cgeocaches.startActivityCoordinates(this,waypointAround.getCoords());
 }
 break;
 case CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES:
-new ResetCacheCoordinatesDialog(cache,cache.getWaypoint(index),this).show();
+final Waypoint waypointReset=cache.getWaypoint(index);
+if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
+createResetCacheCoordinatesDialog(cache,waypointReset).show();
+}
+ else {
+final ProgressDialog progressDialog=ProgressDialog.show(CacheDetailActivity.this,getString(R.string.cache),getString(R.string.waypoint_reset),true);
+final HandlerResetCoordinates handler=new HandlerResetCoordinates(CacheDetailActivity.this,progressDialog,false);
+new ResetCoordsThread(cache,handler,waypointReset,true,false,progressDialog).start();
+}
 break;
 default :
 if (imagesList != null && imagesList.onContextItemSelected(item)) {

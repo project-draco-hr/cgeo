@@ -1,0 +1,15 @@
+{
+  if (msg.what == ResetCoordsThread.LOCAL) {
+    localFinished=true;
+  }
+ else {
+    remoteFinished=true;
+  }
+  if (localFinished && (remoteFinished || !resetRemote)) {
+    progressDialog.dismiss();
+    final CacheDetailActivity activity=getActivity();
+    if (activity != null) {
+      activity.notifyDataSetChanged();
+    }
+  }
+}
