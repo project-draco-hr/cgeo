@@ -1,6 +1,3 @@
 {
-  if (geocodes != null && geocodes.size() >= 1) {
-    return cgData.loadCache((String)geocodes.toArray()[0],loadFlags);
-  }
-  return null;
+  return CollectionUtils.isNotEmpty(geocodes) ? cgData.loadCache(geocodes.iterator().next(),loadFlags) : null;
 }
