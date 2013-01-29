@@ -5,9 +5,10 @@
     return cursor;
   }
   for (int i=0; i < data.size(); i++) {
-    Parcel par=Parcel.obtain();
+    final Parcel par=Parcel.obtain();
     data.get(i).writeToParcel(par,0);
-    byte[] byteData=par.marshall();
+    final byte[] byteData=par.marshall();
+    par.recycle();
     cursor.addRow(new Object[]{byteData});
   }
   DataStorage.clearData();
