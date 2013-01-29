@@ -74,8 +74,8 @@ if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
 createResetCacheCoordinatesDialog(cache,waypointReset).show();
 }
  else {
-final ProgressDialog progressDialog=ProgressDialog.show(CacheDetailActivity.this,getString(R.string.cache),getString(R.string.waypoint_reset),true);
-final HandlerResetCoordinates handler=new HandlerResetCoordinates(CacheDetailActivity.this,progressDialog,false);
+final ProgressDialog progressDialog=ProgressDialog.show(this,getString(R.string.cache),getString(R.string.waypoint_reset),true);
+final HandlerResetCoordinates handler=new HandlerResetCoordinates(this,progressDialog,false);
 new ResetCoordsThread(cache,handler,waypointReset,true,false,progressDialog).start();
 }
 break;
