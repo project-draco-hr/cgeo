@@ -62,7 +62,7 @@
       if (attrs.getIndex("gccom") > -1) {
         String gccode=attrs.getValue("gccom");
         if (!StringUtils.isBlank(gccode)) {
-          cacheHolder.cache.setDescription(String.format("Listed on geocaching com: <a href=\"http://coord.info/%s\">%s</a><br /><br />",gccode,gccode));
+          cacheHolder.cache.setDescription(res.getString(R.string.cache_listed_on,GCConnector.getInstance().getName()) + ": <a href=\"http://coord.info/" + gccode+ "\">"+ gccode+ "</a><br /><br />");
         }
       }
     }
