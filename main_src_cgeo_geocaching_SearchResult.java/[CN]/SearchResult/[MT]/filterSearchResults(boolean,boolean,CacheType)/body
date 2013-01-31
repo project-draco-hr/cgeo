@@ -4,7 +4,7 @@
   final ArrayList<cgCache> cachesForVote=new ArrayList<cgCache>();
   final Set<cgCache> caches=cgData.loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
   for (  cgCache cache : caches) {
-    final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwner() || cache.isFound())) || (cacheType != CacheType.ALL && cacheType != cache.getType());
+    final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwner() || cache.isFound())) || (!cacheType.contains(cache));
     if (!excludeCache) {
       result.addCache(cache);
       cachesForVote.add(cache);
