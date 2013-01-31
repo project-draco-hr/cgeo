@@ -15,7 +15,7 @@
     @Override public void end(){
       cgCache cache=cacheHolder.cache;
       Geopoint coords=new Geopoint(cacheHolder.latitude,cacheHolder.longitude);
-      if (StringUtils.isNotBlank(cache.getGeocode()) && !coords.equals(Geopoint.ZERO) && !cache.isArchived()&& caches.size() < CACHE_PARSE_LIMIT) {
+      if (StringUtils.isNotBlank(cache.getGeocode()) && !coords.equals(Geopoint.ZERO) && !cache.isArchived()&& Settings.getCacheType().contains(cache)&& caches.size() < CACHE_PARSE_LIMIT) {
         cache.setCoords(coords);
         cache.setDetailedUpdatedNow();
         caches.put(cache.getCacheId(),cache);
