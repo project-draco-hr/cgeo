@@ -1,6 +1,6 @@
 {
   final String GEOCODE_CACHE="TEST";
-  final cgCache cache=new cgCache();
+  final Geocache cache=new Geocache();
   cache.setGeocode(GEOCODE_CACHE);
   cache.setDetailed(true);
   final Trackable trackable=new Trackable();
@@ -10,7 +10,7 @@
   cache.setInventory(inventory);
   try {
     cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
-    final cgCache loadedCache=cgData.loadCache(GEOCODE_CACHE,LoadFlags.LOAD_ALL_DB_ONLY);
+    final Geocache loadedCache=cgData.loadCache(GEOCODE_CACHE,LoadFlags.LOAD_ALL_DB_ONLY);
     assertNotNull("Cache was not saved!",loadedCache);
     assertEquals(1,loadedCache.getInventory().size());
   }

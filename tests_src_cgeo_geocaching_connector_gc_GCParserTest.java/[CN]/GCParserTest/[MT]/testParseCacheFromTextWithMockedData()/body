@@ -4,7 +4,7 @@
     for (    MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
       Settings.setGcCustomDate(MockedCache.getDateFormat());
       SearchResult searchResult=GCParser.parseCacheFromText(mockedCache.getData(),null);
-      cgCache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+      Geocache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
       assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
       Compare.assertCompareCaches(mockedCache,parsedCache,true);
     }

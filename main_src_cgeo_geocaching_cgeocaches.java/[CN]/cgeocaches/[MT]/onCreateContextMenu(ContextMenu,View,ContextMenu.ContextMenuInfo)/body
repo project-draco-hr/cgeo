@@ -10,7 +10,7 @@
   if (adapterInfo == null || adapterInfo.position >= adapter.getCount()) {
     return;
   }
-  final cgCache cache=adapter.getItem(adapterInfo.position);
+  final Geocache cache=adapter.getItem(adapterInfo.position);
   menu.setHeaderTitle(StringUtils.defaultIfBlank(cache.getName(),cache.getGeocode()));
   contextMenuGeocode=cache.getGeocode();
   if (cache.getCoords() != null) {

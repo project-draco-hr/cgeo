@@ -1,11 +1,11 @@
 {
-  final Map<String,cgCache> coords=new HashMap<String,cgCache>();
+  final Map<String,Geocache> coords=new HashMap<String,Geocache>();
   if (StringUtils.isBlank(fileContent)) {
     return coords;
   }
   final String[] points=fileContent.split("<waypoint>");
   for (  String pointString : points) {
-    final cgCache pointCoord=parseCache(pointString);
+    final Geocache pointCoord=parseCache(pointString);
     if (StringUtils.isNotBlank(pointCoord.getGeocode())) {
       coords.put(pointCoord.getGeocode(),pointCoord);
     }

@@ -2,7 +2,7 @@
   final StringBuilder fieldNoteBuffer=new StringBuilder();
   try {
     int i=0;
-    for (    cgCache cache : caches) {
+    for (    Geocache cache : caches) {
       if (cache.isLogOffline()) {
         appendFieldNote(fieldNoteBuffer,cache,cgData.loadLogOffline(cache.getGeocode()));
         publishProgress(++i);

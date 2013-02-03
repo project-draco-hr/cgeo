@@ -1,0 +1,9 @@
+{
+  final List<Geocache> itemsToRemove=new ArrayList<Geocache>();
+  for (  Geocache item : list) {
+    if (!accepts(item)) {
+      itemsToRemove.add(item);
+    }
+  }
+  list.removeAll(itemsToRemove);
+}

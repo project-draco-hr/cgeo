@@ -18,7 +18,7 @@
     searchResult.setError(StatusCode.UNKNOWN_ERROR);
     return searchResult;
   }
-  final cgCache cache=new cgCache();
+  final Geocache cache=new Geocache();
   cache.setDisabled(page.contains(GCConstants.STRING_DISABLED));
   cache.setArchived(page.contains(GCConstants.STRING_ARCHIVED));
   cache.setPremiumMembersOnly(BaseUtils.matches(page,GCConstants.PATTERN_PREMIUMMEMBERS));

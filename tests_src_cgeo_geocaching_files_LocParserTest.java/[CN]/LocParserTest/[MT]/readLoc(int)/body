@@ -1,6 +1,6 @@
 {
   final LocParser parser=new LocParser(1);
-  Collection<cgCache> caches=null;
+  Collection<Geocache> caches=null;
   final InputStream instream=getResourceStream(resourceId);
   try {
     caches=parser.parse(instream,null);
@@ -10,5 +10,5 @@
   finally {
     instream.close();
   }
-  return new ArrayList<cgCache>(caches);
+  return new ArrayList<Geocache>(caches);
 }

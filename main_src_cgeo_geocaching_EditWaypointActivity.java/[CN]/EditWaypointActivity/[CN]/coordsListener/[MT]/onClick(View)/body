@@ -89,7 +89,7 @@ waypoint.setLookup(lookup);
 waypoint.setCoords(coordsToSave);
 waypoint.setNote(note);
 waypoint.setId(id);
-cgCache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
 if (null != cache && cache.addOrChangeWaypoint(waypoint,true)) {
 cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 StaticMapsProvider.removeWpStaticMaps(id,geocode);

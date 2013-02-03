@@ -1,6 +1,6 @@
 {
   SearchResult search=cgData.getBatchOfStoredCaches(null,CacheType.ALL,listId);
-  List<cgCache> cachesInList=new ArrayList<cgCache>();
+  List<Geocache> cachesInList=new ArrayList<Geocache>();
   cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
   cgData.markDropped(cachesInList);
   cgData.removeList(listId);

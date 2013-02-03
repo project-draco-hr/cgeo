@@ -3,7 +3,7 @@
     String oldUser=mockedCache.getMockedDataUser();
     try {
       mockedCache.setMockedDataUser(Settings.getUsername());
-      cgCache parsedCache=cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
+      Geocache parsedCache=cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
       if (null != parsedCache) {
         Compare.assertCompareCaches(mockedCache,parsedCache,true);
       }

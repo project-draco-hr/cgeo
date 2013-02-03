@@ -1,10 +1,10 @@
 {
   try {
     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_START));
-    final Collection<cgCache> caches=doImport();
+    final Collection<Geocache> caches=doImport();
     Log.i("Imported successfully " + caches.size() + " caches.");
     final SearchResult search=new SearchResult();
-    for (    cgCache cache : caches) {
+    for (    Geocache cache : caches) {
       search.addCache(cache);
     }
     if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {

@@ -1,8 +1,8 @@
 {
-  final LeastRecentlyUsedMap<String,cgCache> cache=new LeastRecentlyUsedMap.LruCache<String,cgCache>(10);
-  final cgCache first=new cgCache();
+  final LeastRecentlyUsedMap<String,Geocache> cache=new LeastRecentlyUsedMap.LruCache<String,Geocache>(10);
+  final Geocache first=new Geocache();
   assertNull(cache.put("1",first));
-  final cgCache second=new cgCache();
+  final Geocache second=new Geocache();
   assertNull(cache.put("2",second));
   assertEquals(2,cache.size());
   assertTrue(cache.containsKey("1"));
@@ -10,7 +10,7 @@
   assertTrue(cache.containsKey("2"));
   assertTrue(cache.containsValue(second));
   for (int i=3; i <= 10; i++) {
-    assertNull(cache.put(Integer.toString(i),new cgCache()));
+    assertNull(cache.put(Integer.toString(i),new Geocache()));
   }
   assertEquals(10,cache.size());
   assertTrue(cache.containsKey("1"));
@@ -18,8 +18,8 @@
   assertTrue(cache.containsKey("2"));
   assertTrue(cache.containsValue(second));
   assertNotNull(cache.remove("1"));
-  assertNull(cache.put("1",new cgCache()));
-  assertNull(cache.put("11",new cgCache()));
+  assertNull(cache.put("1",new Geocache()));
+  assertNull(cache.put("11",new Geocache()));
   assertEquals(10,cache.size());
   assertTrue(cache.containsKey("1"));
   assertFalse(cache.containsKey("2"));

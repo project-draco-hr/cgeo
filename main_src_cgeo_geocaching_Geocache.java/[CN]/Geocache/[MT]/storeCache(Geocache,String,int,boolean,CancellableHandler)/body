@@ -1,0 +1,69 @@
+{
+  try {
+    Geocache cache;
+    if (origCache != null) {
+      if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
+        final SearchResult search=searchByGeocode(origCache.getGeocode(),null,listId,false,handler);
+        cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+      }
+ else {
+        cache=origCache;
+      }
+    }
+ else     if (StringUtils.isNotBlank(geocode)) {
+      final SearchResult search=searchByGeocode(geocode,null,listId,forceRedownload,handler);
+      cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+    }
+ else {
+      cache=null;
+    }
+    if (cache == null) {
+      if (handler != null) {
+        handler.sendMessage(Message.obtain());
+      }
+      return;
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    final HtmlImage imgGetter=new HtmlImage(cache.getGeocode(),false,listId,true);
+    if (StringUtils.isNotBlank(cache.getDescription())) {
+      Html.fromHtml(cache.getDescription(),imgGetter,null);
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+      for (      Image oneSpoiler : cache.getSpoilers()) {
+        imgGetter.getDrawable(oneSpoiler.getUrl());
+      }
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    if (Settings.isStoreLogImages()) {
+      for (      LogEntry log : cache.getLogs()) {
+        if (log.hasLogImages()) {
+          for (          Image oneLogImg : log.getLogImages()) {
+            imgGetter.getDrawable(oneLogImg.getUrl());
+          }
+        }
+      }
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    cache.setListId(listId);
+    cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    StaticMapsProvider.downloadMaps(cache);
+    if (handler != null) {
+      handler.sendMessage(Message.obtain());
+    }
+  }
+ catch (  Exception e) {
+    Log.e("cgBase.storeCache");
+  }
+}

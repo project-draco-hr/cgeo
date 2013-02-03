@@ -4,7 +4,7 @@
     if (mapView == null || caches == null) {
       throw new ThreadDeath();
     }
-    final List<cgCache> cachesToDisplay=caches.getAsList();
+    final List<Geocache> cachesToDisplay=caches.getAsList();
     final List<Waypoint> waypointsToDisplay=new ArrayList<Waypoint>(waypoints);
     final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<CachesOverlayItemImpl>();
     if (!cachesToDisplay.isEmpty()) {
@@ -16,7 +16,7 @@
           itemsToDisplay.add(getWaypointItem(waypoint));
         }
       }
-      for (      cgCache cache : cachesToDisplay) {
+      for (      Geocache cache : cachesToDisplay) {
         if (cache == null || cache.getCoords() == null) {
           continue;
         }

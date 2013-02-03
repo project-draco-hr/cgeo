@@ -1,7 +1,7 @@
 {
   removeGeoAndDir();
-  final List<cgCache> cachesWithStaticMaps=new ArrayList<cgCache>(selected.size());
-  for (  cgCache cache : selected) {
+  final List<Geocache> cachesWithStaticMaps=new ArrayList<Geocache>(selected.size());
+  for (  Geocache cache : selected) {
     if (Settings.isStoreOfflineMaps() && cache.hasStaticMap()) {
       cachesWithStaticMaps.add(cache);
       continue;
@@ -11,7 +11,7 @@
       break;
     }
   }
-  for (  cgCache cache : cachesWithStaticMaps) {
+  for (  Geocache cache : cachesWithStaticMaps) {
     if (!refreshCache(cache)) {
       break;
     }

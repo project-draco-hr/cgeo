@@ -1,5 +1,5 @@
 {
-  final cgCache cache=new cgCache();
+  final Geocache cache=new Geocache();
   final MatcherWrapper matcherGeocode=new MatcherWrapper(patternGeocode,pointString);
   if (matcherGeocode.find()) {
     cache.setGeocode(matcherGeocode.group(1).trim());

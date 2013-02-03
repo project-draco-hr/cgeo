@@ -44,7 +44,7 @@
     initializeWaypointTypeSelector();
   }
   if (geocode != null) {
-    cgCache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+    Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
     IConnector con=ConnectorFactory.getConnector(geocode);
     setCoordsModificationVisibility(con,cache);
   }

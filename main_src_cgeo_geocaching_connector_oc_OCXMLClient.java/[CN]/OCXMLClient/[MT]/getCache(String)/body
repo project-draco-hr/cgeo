@@ -6,9 +6,9 @@
     if (data == null) {
       return null;
     }
-    Collection<cgCache> caches=OC11XMLParser.parseCaches(new GZIPInputStream(data));
+    Collection<Geocache> caches=OC11XMLParser.parseCaches(new GZIPInputStream(data));
     if (caches.iterator().hasNext()) {
-      cgCache cache=caches.iterator().next();
+      Geocache cache=caches.iterator().next();
       cgData.saveCache(cache,LoadFlags.SAVE_ALL);
       return cache;
     }

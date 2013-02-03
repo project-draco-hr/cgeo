@@ -1,0 +1,7 @@
+{
+  Geocache fullCache=cgData.loadCache(cache.getGeocode(),EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
+  if (fullCache == null) {
+    fullCache=cache;
+  }
+  return fullCache.getAttributes().contains(attribute);
+}

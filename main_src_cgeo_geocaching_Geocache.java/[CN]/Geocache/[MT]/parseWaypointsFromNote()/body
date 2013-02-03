@@ -1,0 +1,30 @@
+{
+  try {
+    if (StringUtils.isBlank(getPersonalNote())) {
+      return;
+    }
+    final Pattern coordPattern=Pattern.compile("\\b[nNsS]{1}\\s*\\d");
+    int count=1;
+    String note=getPersonalNote();
+    MatcherWrapper matcher=new MatcherWrapper(coordPattern,note);
+    while (matcher.find()) {
+      try {
+        final Geopoint point=new Geopoint(note.substring(matcher.start()));
+        if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
+          final String name=cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
+          final Waypoint waypoint=new Waypoint(name,WaypointType.WAYPOINT,false);
+          waypoint.setCoords(point);
+          addOrChangeWaypoint(waypoint,false);
+          count++;
+        }
+      }
+ catch (      Geopoint.ParseException e) {
+      }
+      note=note.substring(matcher.start() + 1);
+      matcher=new MatcherWrapper(coordPattern,note);
+    }
+  }
+ catch (  Exception e) {
+    Log.e("Geocache.parseWaypointsFromNote",e);
+  }
+}

@@ -6,7 +6,7 @@
  else   if (gpTemp != null) {
     gp=gpTemp;
   }
-  cgCache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+  Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
   CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(EditWaypointActivity.this,cache,gp,app.currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate(){

@@ -1,13 +1,13 @@
 {
   String streamContent=readStream(stream,progressHandler).toString();
-  final Map<String,cgCache> coords=parseCoordinates(streamContent);
-  final List<cgCache> caches=new ArrayList<cgCache>();
-  for (  Entry<String,cgCache> entry : coords.entrySet()) {
-    cgCache coord=entry.getValue();
+  final Map<String,Geocache> coords=parseCoordinates(streamContent);
+  final List<Geocache> caches=new ArrayList<Geocache>();
+  for (  Entry<String,Geocache> entry : coords.entrySet()) {
+    Geocache coord=entry.getValue();
     if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
       continue;
     }
-    cgCache cache=new cgCache();
+    Geocache cache=new Geocache();
     cache.setReliableLatLon(true);
     copyCoordToCache(coord,cache);
     caches.add(cache);

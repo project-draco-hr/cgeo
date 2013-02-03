@@ -19,10 +19,10 @@
   query.append(cgData.whereGeocodeIn(geocodes));
   Cursor cursor=database.rawQuery(query.toString(),null);
   try {
-    final Set<cgCache> caches=new HashSet<cgCache>();
+    final Set<Geocache> caches=new HashSet<Geocache>();
     int logIndex=-1;
     while (cursor.moveToNext()) {
-      cgCache cache=cgData.createCacheFromDatabaseContent(cursor);
+      Geocache cache=cgData.createCacheFromDatabaseContent(cursor);
       if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
         cache.setAttributes(loadAttributes(cache.getGeocode()));
       }

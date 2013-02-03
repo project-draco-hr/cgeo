@@ -1,7 +1,7 @@
 {
   Log.i("Import GPX file: " + cacheFile.getAbsolutePath());
   importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE,R.string.gpx_import_loading_caches,(int)cacheFile.length()));
-  Collection<cgCache> caches=parser.parse(cacheFile,progressHandler);
+  Collection<Geocache> caches=parser.parse(cacheFile,progressHandler);
   final String wptsFilename=getWaypointsFileNameForGpxFile(cacheFile);
   if (wptsFilename != null) {
     final File wptsFile=new File(cacheFile.getParentFile(),wptsFilename);

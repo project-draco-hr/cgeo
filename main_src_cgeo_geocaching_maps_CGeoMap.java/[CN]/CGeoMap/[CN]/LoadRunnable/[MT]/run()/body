@@ -17,13 +17,13 @@
       searchResult.addGeocodes(liveResult.getGeocodes());
     }
     downloaded=true;
-    Set<cgCache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+    Set<Geocache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
     caches.addAll(cachesFromSearchResult);
     if (mapMode == MapMode.LIVE) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
       final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
-      final List<cgCache> tempList=caches.getAsList();
-      for (      cgCache cache : tempList) {
+      final List<Geocache> tempList=caches.getAsList();
+      for (      Geocache cache : tempList) {
         if ((cache.isFound() && excludeMine) || (cache.isOwner() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
           caches.remove(cache);
         }
@@ -38,7 +38,7 @@
         waypoints.addAll(waypointsInViewport);
       }
  else {
-        for (        cgCache c : caches.getAsList()) {
+        for (        Geocache c : caches.getAsList()) {
           waypoints.addAll(c.getWaypoints());
         }
       }

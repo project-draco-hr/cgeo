@@ -55,7 +55,7 @@
       fixCache(cache);
       if (cache.getName().length() > 2) {
         final String cacheGeocodeForWaypoint="GC" + cache.getName().substring(2).toUpperCase(Locale.US);
-        final cgCache cacheForWaypoint=cgData.loadCache(cacheGeocodeForWaypoint,LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cacheForWaypoint=cgData.loadCache(cacheGeocodeForWaypoint,LoadFlags.LOAD_CACHE_OR_DB);
         if (cacheForWaypoint != null) {
           final Waypoint waypoint=new Waypoint(cache.getShortdesc(),convertWaypointSym2Type(sym),false);
           waypoint.setId(-1);

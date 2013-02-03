@@ -3,9 +3,9 @@
   for (  int resourceId : resourceIds) {
     final InputStream instream=getResourceStream(resourceId);
     try {
-      Collection<cgCache> caches=parser.parse(instream,null);
+      Collection<Geocache> caches=parser.parse(instream,null);
       assertNotNull(caches);
-      for (      cgCache cache : caches) {
+      for (      Geocache cache : caches) {
         result.add(cache.getGeocode());
       }
     }
@@ -13,5 +13,5 @@
       instream.close();
     }
   }
-  return new ArrayList<cgCache>(cgData.loadCaches(result,LoadFlags.LOAD_ALL_DB_ONLY));
+  return new ArrayList<Geocache>(cgData.loadCaches(result,LoadFlags.LOAD_ALL_DB_ONLY));
 }

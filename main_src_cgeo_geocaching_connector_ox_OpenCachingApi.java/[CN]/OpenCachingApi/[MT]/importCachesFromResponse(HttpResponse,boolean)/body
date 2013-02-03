@@ -2,7 +2,7 @@
   if (response == null) {
     return Collections.emptyList();
   }
-  Collection<cgCache> caches;
+  Collection<Geocache> caches;
   try {
     caches=new OXGPXParser(StoredList.STANDARD_LIST_ID,isDetailed).parse(response.getEntity().getContent(),null);
   }

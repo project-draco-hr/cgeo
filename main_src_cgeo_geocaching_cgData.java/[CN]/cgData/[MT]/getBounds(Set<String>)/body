@@ -2,6 +2,6 @@
   if (CollectionUtils.isEmpty(geocodes)) {
     return null;
   }
-  final Set<cgCache> caches=loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
+  final Set<Geocache> caches=loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
   return Viewport.containing(caches);
 }

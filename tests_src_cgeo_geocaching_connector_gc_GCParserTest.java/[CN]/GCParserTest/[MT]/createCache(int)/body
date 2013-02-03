@@ -11,7 +11,7 @@
   }
   assertNotNull(searchResult);
   assertEquals(1,searchResult.getCount());
-  final cgCache cache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+  final Geocache cache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
   assertNotNull(cache);
   return cache;
 }

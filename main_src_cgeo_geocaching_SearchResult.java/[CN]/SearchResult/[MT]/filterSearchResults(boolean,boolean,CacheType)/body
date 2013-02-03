@@ -1,9 +1,9 @@
 {
   SearchResult result=new SearchResult(this);
   result.geocodes.clear();
-  final ArrayList<cgCache> cachesForVote=new ArrayList<cgCache>();
-  final Set<cgCache> caches=cgData.loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
-  for (  cgCache cache : caches) {
+  final ArrayList<Geocache> cachesForVote=new ArrayList<Geocache>();
+  final Set<Geocache> caches=cgData.loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
+  for (  Geocache cache : caches) {
     final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwner() || cache.isFound())) || (!cacheType.contains(cache));
     if (!excludeCache) {
       result.addCache(cache);

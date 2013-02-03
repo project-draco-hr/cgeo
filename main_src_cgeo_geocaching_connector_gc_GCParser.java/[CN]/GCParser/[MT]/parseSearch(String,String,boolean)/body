@@ -43,7 +43,7 @@
   final String[] rows=page.split("<tr class=");
   final int rows_count=rows.length;
   for (int z=1; z < rows_count; z++) {
-    final cgCache cache=new cgCache();
+    final Geocache cache=new Geocache();
     String row=rows[z];
     if (!row.contains("images/wpttypes")) {
       continue;
@@ -169,8 +169,8 @@
     }
   }
   if (Settings.getLoadDirImg()) {
-    final Set<cgCache> caches=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-    for (    cgCache cache : caches) {
+    final Set<Geocache> caches=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    for (    Geocache cache : caches) {
       if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
         DirectionImage.getDrawable(cache.getGeocode(),cache.getDirectionImg());
       }

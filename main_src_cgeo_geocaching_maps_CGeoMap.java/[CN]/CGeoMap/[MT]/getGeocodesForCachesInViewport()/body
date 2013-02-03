@@ -1,8 +1,8 @@
 {
   final Set<String> geocodes=new HashSet<String>();
-  final List<cgCache> cachesProtected=caches.getAsList();
+  final List<Geocache> cachesProtected=caches.getAsList();
   final Viewport viewport=mapView.getViewport();
-  for (  final cgCache cache : cachesProtected) {
+  for (  final Geocache cache : cachesProtected) {
     if (viewport.contains(cache)) {
       geocodes.add(cache.getGeocode());
     }
