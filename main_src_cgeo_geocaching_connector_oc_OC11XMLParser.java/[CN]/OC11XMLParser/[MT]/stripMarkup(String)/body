@@ -2,7 +2,7 @@
   if (StringUtils.startsWith(input,PARAGRAPH_BEGIN) && StringUtils.endsWith(input,PARAGRAPH_END)) {
     String inner=input.substring(PARAGRAPH_BEGIN.length(),input.length() - PARAGRAPH_END.length());
     if (!inner.contains(PARAGRAPH_BEGIN)) {
-      return inner;
+      return inner.trim();
     }
   }
   return input;
