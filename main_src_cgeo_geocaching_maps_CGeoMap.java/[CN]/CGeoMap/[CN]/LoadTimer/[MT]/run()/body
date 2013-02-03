@@ -5,23 +5,8 @@
       if (mapView != null) {
         final Viewport viewportNow=mapView.getViewport();
         final int zoomNow=mapView.getMapZoomLevel();
-        boolean moved=false;
-        if (liveChanged) {
-          moved=true;
-        }
- else         if (isLiveEnabled && !downloaded) {
-          moved=true;
-        }
- else         if (viewport == null) {
-          moved=true;
-        }
- else         if (zoomNow != zoom) {
-          moved=true;
-        }
- else         if (mapMoved(viewport,viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow))) {
-          moved=true;
-        }
-        if (moved || zoomNow != zoom || !viewportNow.equals(viewport)) {
+        final boolean moved=liveChanged || (isLiveEnabled && !downloaded) || (viewport == null)|| zoomNow != zoom || (mapMoved(viewport,viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow)));
+        if (moved || !viewportNow.equals(viewport)) {
           displayHandler.sendEmptyMessage(UPDATE_TITLE);
         }
         zoom=zoomNow;
