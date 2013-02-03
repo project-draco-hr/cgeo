@@ -1,0 +1,15 @@
+{
+  final CachesOverlayItemImpl item=mapItemFactory.getCachesOverlayItem(waypoint,null);
+  Drawable[] layers=new Drawable[2];
+  layers[0]=getResources().getDrawable(R.drawable.marker);
+  layers[1]=getResources().getDrawable(waypoint.getWaypointType().markerId);
+  LayerDrawable ld=new LayerDrawable(layers);
+  if (layers[0].getIntrinsicWidth() > 40) {
+    ld.setLayerInset(1,9,12,10,13);
+  }
+ else {
+    ld.setLayerInset(1,9,12,8,12);
+  }
+  item.setMarker(ld);
+  return item;
+}
