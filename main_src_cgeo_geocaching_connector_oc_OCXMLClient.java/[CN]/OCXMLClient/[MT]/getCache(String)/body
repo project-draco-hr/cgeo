@@ -1,6 +1,6 @@
 {
   try {
-    final Parameters params=getOCXmlQueryParameters(true,true);
+    final Parameters params=getOCXmlQueryParameters(true,true,true);
     params.put("wp",geoCode);
     final InputStream data=request(ConnectorFactory.getConnector(geoCode),SERVICE_CACHE,params);
     if (data == null) {

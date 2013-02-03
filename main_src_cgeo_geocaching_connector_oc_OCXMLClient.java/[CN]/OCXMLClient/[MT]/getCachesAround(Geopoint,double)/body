@@ -1,6 +1,6 @@
 {
   try {
-    final Parameters params=getOCXmlQueryParameters(false,false);
+    final Parameters params=getOCXmlQueryParameters(false,false,false);
     params.put("lat",GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,center));
     params.put("lon",GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,center));
     params.put("distance",String.format(Locale.US,"%f",distance));
