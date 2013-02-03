@@ -101,7 +101,10 @@
     myVote=other.myVote;
   }
   if (attributes.isEmpty()) {
-    attributes.set(other.attributes);
+    attributes.clear();
+    if (other.attributes != null) {
+      attributes.addAll(other.attributes);
+    }
   }
   if (waypoints.isEmpty()) {
     this.setWaypoints(other.waypoints,false);
@@ -119,7 +122,10 @@
     inventoryItems=other.inventoryItems;
   }
   if (logs.isEmpty()) {
-    logs.set(other.logs);
+    logs.clear();
+    if (other.logs != null) {
+      logs.addAll(other.logs);
+    }
   }
   if (logCounts.isEmpty()) {
     logCounts=other.logCounts;

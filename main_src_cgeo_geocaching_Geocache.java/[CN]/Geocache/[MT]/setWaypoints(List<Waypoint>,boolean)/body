@@ -1,5 +1,8 @@
 {
-  this.waypoints.set(waypoints);
+  this.waypoints.clear();
+  if (waypoints != null) {
+    this.waypoints.addAll(waypoints);
+  }
   finalDefined=false;
   if (waypoints != null) {
     for (    Waypoint waypoint : waypoints) {
