@@ -1,0 +1,34 @@
+{
+  final LoadDetailsHandler loadDetailsHandler=new LoadDetailsHandler();
+  waitDialog=new ProgressDialog(activity);
+  waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+  waitDialog.setCancelable(true);
+  waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
+  waitDialog.setMax(detailTotal);
+  waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
+    @Override public void onCancel(    DialogInterface arg0){
+      try {
+        if (loadDetailsThread != null) {
+          loadDetailsThread.stopIt();
+        }
+        geoDirUpdate.startDir();
+      }
+ catch (      Exception e) {
+        Log.e("cgeocaches.onPrepareOptionsMenu.onCancel",e);
+      }
+    }
+  }
+);
+  float etaTime=detailTotal * 7.0f / 60.0f;
+  int roundedEta=Math.round(etaTime);
+  if (etaTime < 0.4) {
+    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+  }
+ else {
+    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + roundedEta+ " "+ res.getQuantityString(R.plurals.caches_eta_mins,roundedEta));
+  }
+  waitDialog.show();
+  detailProgressTime=System.currentTimeMillis();
+  loadDetailsThread=new LoadDetails(loadDetailsHandler,geocodes,listId);
+  loadDetailsThread.start();
+}

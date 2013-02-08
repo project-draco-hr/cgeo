@@ -1,0 +1,6 @@
+{
+  if (listId < StoredList.STANDARD_LIST_ID) {
+    listId=Math.max(getListId(),StoredList.STANDARD_LIST_ID);
+  }
+  storeCache(this,null,listId,false,handler);
+}

@@ -1,5 +1,4 @@
 {
-  detailTotal=adapter.getCheckedOrAllCount();
   detailProgress=0;
   showProgress(false);
   int etaTime=((detailTotal * 25) / 60);
@@ -13,6 +12,6 @@
   progress.show(this,null,message,ProgressDialog.STYLE_HORIZONTAL,loadDetailsHandler.obtainMessage(MSG_CANCEL));
   progress.setMaxProgressAndReset(detailTotal);
   detailProgressTime=System.currentTimeMillis();
-  threadDetails=new LoadDetailsThread(loadDetailsHandler,listId);
+  threadDetails=new LoadDetailsThread(loadDetailsHandler,caches,storeListId);
   threadDetails.start();
 }

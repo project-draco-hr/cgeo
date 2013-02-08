@@ -1,0 +1,8 @@
+{
+  if (listId < 0) {
+    return;
+  }
+  Settings.saveLastList(listId);
+  cgData.moveToList(cache,listId);
+  updateListBox();
+}

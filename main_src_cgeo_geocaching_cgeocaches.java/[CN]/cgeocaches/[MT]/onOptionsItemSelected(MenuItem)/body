@@ -6,7 +6,7 @@ case MENU_SWITCH_SELECT_MODE:
   invalidateOptionsMenuCompatible();
 return true;
 case MENU_REFRESH_STORED:
-refreshStored();
+refreshStored(adapter.getCheckedOrAllCaches());
 invalidateOptionsMenuCompatible();
 return true;
 case MENU_DROP_CACHES:

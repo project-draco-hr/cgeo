@@ -3,13 +3,13 @@
     @Override public void run(    final String listName){
       final int newId=cgData.createList(listName);
       if (newId >= cgData.customListIdOffset) {
-        activity.showToast(res.getString(R.string.list_dialog_create_ok));
+        ActivityMixin.showToast(activity,res.getString(R.string.list_dialog_create_ok));
         if (runAfterwards != null) {
           runAfterwards.run(newId);
         }
       }
  else {
-        activity.showToast(res.getString(R.string.list_dialog_create_err));
+        ActivityMixin.showToast(activity,res.getString(R.string.list_dialog_create_err));
       }
     }
   }

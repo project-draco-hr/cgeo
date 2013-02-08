@@ -1,0 +1,17 @@
+{
+  View box=view.findViewById(R.id.list_box);
+  if (cache.isOffline()) {
+    box.setVisibility(View.VISIBLE);
+    TextView text=(TextView)view.findViewById(R.id.list_text);
+    StoredList list=cgData.getList(cache.getListId());
+    if (list != null) {
+      text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
+    }
+ else {
+      text.setText(R.string.cache_list_unknown);
+    }
+  }
+ else {
+    box.setVisibility(View.GONE);
+  }
+}
