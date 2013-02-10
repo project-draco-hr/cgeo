@@ -1,0 +1,7 @@
+{
+  CacheAttribute attribute=CacheAttribute.HIKING;
+  String hiking_yes=attribute.getAttributeName(true);
+  String hiking_no=attribute.getAttributeName(false);
+  assertTrue(CacheAttribute.isEnabled(hiking_yes));
+  assertFalse(CacheAttribute.isEnabled(hiking_no));
+}
