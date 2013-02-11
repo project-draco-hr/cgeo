@@ -144,6 +144,12 @@
     }
   }
 );
+  cacheNode.getChild("userid").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      cacheHolder.cache.setOwnerDisplayName(body);
+    }
+  }
+);
   final Element attributeNode=cacheNode.getChild("attributes").getChild("attribute");
   attributeNode.setStartElementListener(new StartElementListener(){
     @Override public void start(    Attributes attributes){
