@@ -147,6 +147,7 @@
   cacheNode.getChild("userid").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       cacheHolder.cache.setOwnerDisplayName(body);
+      cacheHolder.cache.setOwnerUserId(body);
     }
   }
 );
