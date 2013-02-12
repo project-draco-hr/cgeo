@@ -15,8 +15,8 @@
       rows.addView(attributeRow);
     }
     final boolean strikethru=!CacheAttribute.isEnabled(attributeName);
-    final CacheAttribute attrib=CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
-    if (attrib != CacheAttribute.UNKNOWN) {
+    final CacheAttribute attrib=CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+    if (attrib != null) {
       noAttributeIconsFound=false;
       Drawable d=res.getDrawable(attrib.drawableId);
       iv.setImageDrawable(d);
@@ -29,7 +29,7 @@
       }
     }
  else {
-      Drawable d=res.getDrawable(R.drawable.attribute_icon_not_found);
+      Drawable d=res.getDrawable(R.drawable.attribute_unknown);
       iv.setImageDrawable(d);
     }
     attributeRow.addView(fl);

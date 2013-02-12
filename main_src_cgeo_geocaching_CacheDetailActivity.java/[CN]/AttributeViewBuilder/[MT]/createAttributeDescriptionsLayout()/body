@@ -4,10 +4,11 @@
   final StringBuilder buffer=new StringBuilder();
   for (  String attributeName : cache.getAttributes()) {
     final boolean enabled=CacheAttribute.isEnabled(attributeName);
-    CacheAttribute attrib=CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
-    if (attrib != CacheAttribute.UNKNOWN) {
-      attributeName=attrib.getL10n(enabled);
+    CacheAttribute attrib=CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+    if (attrib == null) {
+      attrib=CacheAttribute.UNKNOWN;
     }
+    attributeName=attrib.getL10n(enabled);
     if (buffer.length() > 0) {
       buffer.append('\n');
     }

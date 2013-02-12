@@ -167,7 +167,7 @@
 );
   attributeNode.setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
-      CacheAttribute attribute=AttributeMapper.getAttribute(attributeId);
+      CacheAttribute attribute=CacheAttribute.getByOcId(attributeId);
       if (attribute != null) {
         cacheHolder.cache.getAttributes().add(attribute.getAttributeName(true));
       }
