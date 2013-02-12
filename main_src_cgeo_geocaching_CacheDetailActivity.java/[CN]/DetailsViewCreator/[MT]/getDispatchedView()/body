@@ -83,6 +83,9 @@
   buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
   buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
   updateFavPointBox();
+  Button buttonChangeList=(Button)view.findViewById(R.id.change_list);
+  buttonChangeList.setOnClickListener(new ChangeListClickListener());
+  updateListBox();
   IConnector connector=ConnectorFactory.getConnector(cache);
   if (connector != null) {
     String license=connector.getLicenseText(cache);

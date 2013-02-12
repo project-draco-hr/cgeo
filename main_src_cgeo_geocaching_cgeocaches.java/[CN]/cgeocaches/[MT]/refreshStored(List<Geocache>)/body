@@ -1,0 +1,17 @@
+{
+  detailTotal=caches.size();
+  if (detailTotal == 0) {
+    return;
+  }
+  if (Settings.getChooseList() && type != CacheListType.OFFLINE) {
+    new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
+      @Override public void run(      final Integer selectedListId){
+        refreshStored(caches,selectedListId);
+      }
+    }
+,true,StoredList.TEMPORARY_LIST_ID);
+  }
+ else {
+    refreshStored(caches,this.listId);
+  }
+}

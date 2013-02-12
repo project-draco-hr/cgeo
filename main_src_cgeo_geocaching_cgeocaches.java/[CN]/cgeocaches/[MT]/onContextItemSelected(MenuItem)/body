@@ -49,7 +49,7 @@ refreshCurrentList();
 ,true,listId);
 break;
 case MENU_STORE_CACHE:
-cache.store(null);
+refreshStored(Collections.singletonList(cache));
 break;
 case MENU_EXPORT:
 ExportFactory.showExportMenu(Collections.singletonList(cache),this);
