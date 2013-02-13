@@ -1,0 +1,13 @@
+{
+  final ArrayList<OriginFilter> filters=new ArrayList<OriginFilter>();
+  for (  IConnector connector : ConnectorFactory.getConnectors()) {
+    filters.add(new OriginFilter(connector));
+  }
+  Collections.sort(filters,new Comparator<OriginFilter>(){
+    @Override public int compare(    OriginFilter lhs,    OriginFilter rhs){
+      return lhs.getName().compareToIgnoreCase(rhs.getName());
+    }
+  }
+);
+  return filters.toArray(new OriginFilter[filters.size()]);
+}
