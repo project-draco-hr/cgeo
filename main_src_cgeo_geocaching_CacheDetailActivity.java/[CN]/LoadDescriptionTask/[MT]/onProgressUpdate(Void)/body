@@ -2,7 +2,7 @@
   if (description != null) {
     if (StringUtils.isNotBlank(descriptionString)) {
       descriptionView.setText(description,TextView.BufferType.SPANNABLE);
-      descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+      descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
       fixBlackTextColor(descriptionView,descriptionString);
     }
     descriptionView.setVisibility(View.VISIBLE);
