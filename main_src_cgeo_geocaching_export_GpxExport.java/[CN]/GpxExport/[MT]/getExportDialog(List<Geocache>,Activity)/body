@@ -1,6 +1,6 @@
 {
   AlertDialog.Builder builder=new AlertDialog.Builder(activity);
-  View layout=activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog,null);
+  View layout=View.inflate(new ContextThemeWrapper(activity,R.style.dark),R.layout.gpx_export_dialog,null);
   builder.setView(layout);
   final TextView text=(TextView)layout.findViewById(R.id.info);
   text.setText(getString(R.string.export_gpx_info,Settings.getGpxExportDir()));

@@ -1,6 +1,6 @@
 {
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
-  final View layout=activity.getLayoutInflater().inflate(R.layout.livemapinfo,null);
+  final View layout=View.inflate(new ContextThemeWrapper(activity,R.style.dark),R.layout.livemapinfo,null);
   builder.setView(layout);
   final CheckBox checkBoxHide=(CheckBox)layout.findViewById(R.id.live_map_hint_hide);
   final int showCount=Settings.getLiveMapHintShowCount();
