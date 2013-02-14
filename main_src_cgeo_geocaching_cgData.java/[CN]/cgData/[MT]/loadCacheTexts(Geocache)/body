@@ -1,0 +1,23 @@
+{
+  final String geocode=cache.getGeocode();
+  if (StringUtils.isBlank(geocode)) {
+    return null;
+  }
+  init();
+  try {
+    final Cursor cursor=database.query(dbTableCaches,new String[]{"description","shortdesc","hint","location"},"geocode = ?",new String[]{geocode},null,null,null,"1");
+    if (cursor.moveToFirst()) {
+      cache.setDescription(StringUtils.defaultString(cursor.getString(0)));
+      cache.setShortDescription(StringUtils.defaultString(cursor.getString(1)));
+      cache.setHint(StringUtils.defaultString(cursor.getString(2)));
+      cache.setLocation(StringUtils.defaultString(cursor.getString(3)));
+    }
+    cursor.close();
+  }
+ catch (  SQLiteDoneException e) {
+  }
+catch (  Exception e) {
+    Log.e("cgData.getCacheDescription",e);
+  }
+  return null;
+}

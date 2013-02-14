@@ -91,17 +91,17 @@
   }
   cache.setType(CacheType.getByPattern(BaseUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getType().id)));
   cache.setOnWatchlist(BaseUtils.matches(page,GCConstants.PATTERN_WATCHLIST));
-  cache.setLatlon(BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,cache.getLatlon()));
-  if (StringUtils.isNotEmpty(cache.getLatlon())) {
+  String latlon=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,"");
+  if (StringUtils.isNotEmpty(latlon)) {
     try {
-      cache.setCoords(new Geopoint(cache.getLatlon()));
+      cache.setCoords(new Geopoint(latlon));
       cache.setReliableLatLon(true);
     }
  catch (    Geopoint.GeopointException e) {
       Log.w("GCParser.parseCache: Failed to parse cache coordinates",e);
     }
   }
-  cache.setLocation(BaseUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,cache.getLocation()));
+  cache.setLocation(BaseUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,""));
   String result=BaseUtils.getMatch(page,GCConstants.PATTERN_HINT,false,null);
   if (result != null) {
     String hint=GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
@@ -111,7 +111,7 @@
   }
   cache.checkFields();
   cache.setPersonalNote(BaseUtils.getMatch(page,GCConstants.PATTERN_PERSONALNOTE,true,cache.getPersonalNote()));
-  cache.setShortdesc(BaseUtils.getMatch(page,GCConstants.PATTERN_SHORTDESC,true,cache.getShortdesc()));
+  cache.setShortDescription(BaseUtils.getMatch(page,GCConstants.PATTERN_SHORTDESC,true,""));
   cache.setDescription(BaseUtils.getMatch(page,GCConstants.PATTERN_DESC,true,""));
   try {
     final String attributesPre=BaseUtils.getMatch(page,GCConstants.PATTERN_ATTRIBUTES,true,null);
@@ -242,7 +242,7 @@
         final Waypoint waypoint=new Waypoint(name,WaypointType.findById(resulttype),false);
         waypoint.setPrefix(BaseUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));
         waypoint.setLookup(BaseUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
-        String latlon=Html.fromHtml(BaseUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();
+        latlon=Html.fromHtml(BaseUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();
         if (!StringUtils.startsWith(latlon,"???")) {
           waypoint.setLatlon(latlon);
           waypoint.setCoords(new Geopoint(latlon));

@@ -49,8 +49,8 @@
   if (hidden == null) {
     hidden=other.hidden;
   }
-  if (StringUtils.isBlank(hint)) {
-    hint=other.hint;
+  if (StringUtils.isBlank(getHint())) {
+    hint=other.getHint();
   }
   if (size == null || CacheSize.UNKNOWN == size) {
     size=other.size;
@@ -67,11 +67,8 @@
   if (distance == null) {
     distance=other.distance;
   }
-  if (StringUtils.isBlank(latlon)) {
-    latlon=other.latlon;
-  }
-  if (StringUtils.isBlank(location)) {
-    location=other.location;
+  if (StringUtils.isBlank(getLocation())) {
+    location=other.getLocation();
   }
   if (coords == null) {
     coords=other.coords;
@@ -82,11 +79,11 @@
   if (personalNote == null) {
     personalNote=other.personalNote;
   }
-  if (StringUtils.isBlank(shortdesc)) {
-    shortdesc=other.shortdesc;
+  if (StringUtils.isBlank(getShortDescription())) {
+    shortdesc=other.getShortDescription();
   }
-  if (StringUtils.isBlank(description)) {
-    description=other.description;
+  if (StringUtils.isBlank(getDescription())) {
+    description=other.getDescription();
   }
   if (favoritePoints == 0) {
     favoritePoints=other.favoritePoints;

@@ -4,11 +4,11 @@
     StringBuilder all=new StringBuilder();
     for (    String geocode : geocodes) {
       if (all.length() > 0) {
-        all.append(", ");
+        all.append(',');
       }
       all.append(DatabaseUtils.sqlEscapeString(geocode));
     }
     where.append("geocode in (").append(all).append(')');
   }
-  return where.toString();
+  return where;
 }

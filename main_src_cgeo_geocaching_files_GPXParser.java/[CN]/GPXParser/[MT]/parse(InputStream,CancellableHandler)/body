@@ -57,7 +57,7 @@
         final String cacheGeocodeForWaypoint="GC" + cache.getName().substring(2).toUpperCase(Locale.US);
         final Geocache cacheForWaypoint=cgData.loadCache(cacheGeocodeForWaypoint,LoadFlags.LOAD_CACHE_OR_DB);
         if (cacheForWaypoint != null) {
-          final Waypoint waypoint=new Waypoint(cache.getShortdesc(),convertWaypointSym2Type(sym),false);
+          final Waypoint waypoint=new Waypoint(cache.getShortDescription(),convertWaypointSym2Type(sym),false);
           waypoint.setId(-1);
           waypoint.setGeocode(cacheGeocodeForWaypoint);
           waypoint.setPrefix(cache.getName().substring(0,2));
@@ -100,7 +100,7 @@
   waypoint.getChild(namespace,"desc").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       desc=body;
-      cache.setShortdesc(validate(body));
+      cache.setShortDescription(validate(body));
     }
   }
 );
@@ -285,7 +285,7 @@
 );
     gcCache.getChild(nsGC,"short_description").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String shortDesc){
-        cache.setShortdesc(validate(shortDesc));
+        cache.setShortDescription(validate(shortDesc));
       }
     }
 );

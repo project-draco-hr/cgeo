@@ -1,9 +1,9 @@
 {
   if (search != null) {
-    final Set<Geocache> cachesFromSearchResult=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
     runOnUiThread(new Runnable(){
       @Override public void run(){
         cacheList.clear();
+        final Set<Geocache> cachesFromSearchResult=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
         cacheList.addAll(cachesFromSearchResult);
         adapter.reFilter();
         updateTitle();

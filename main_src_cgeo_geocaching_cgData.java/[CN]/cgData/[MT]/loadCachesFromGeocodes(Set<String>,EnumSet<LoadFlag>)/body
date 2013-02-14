@@ -2,7 +2,6 @@
   if (CollectionUtils.isEmpty(geocodes)) {
     return Collections.emptySet();
   }
-  Log.d("cgData.loadCachesFromGeocodes(" + geocodes.toString() + ") from DB");
   init();
   final StringBuilder query=new StringBuilder("SELECT ");
   for (int i=0; i < CACHE_COLUMNS.length; i++) {
