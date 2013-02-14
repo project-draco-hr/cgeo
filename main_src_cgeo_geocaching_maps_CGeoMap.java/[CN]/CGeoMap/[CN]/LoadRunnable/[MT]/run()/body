@@ -43,6 +43,9 @@
         }
       }
     }
+ else {
+      waypoints.clear();
+    }
     displayExecutor.execute(new DisplayRunnable(viewport));
     if (isLiveEnabled) {
       downloadExecutor.execute(new DownloadRunnable(viewport));
