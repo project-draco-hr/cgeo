@@ -1,0 +1,17 @@
+{
+  boolean oldExcludeDisabled=Settings.isExcludeDisabledCaches();
+  boolean oldExcludeMine=Settings.isExcludeMyCaches();
+  try {
+    Settings.setExcludeDisabledCaches(false);
+    Settings.setExcludeMine(false);
+    Geocache cache=OCXMLClient.getCache("OCD541");
+    assertNotNull(cache);
+    assertTrue(cache.isArchived());
+    Collection<Geocache> caches=OCXMLClient.getCachesAround(cache.getCoords(),0.5);
+    assertFalse(caches.contains(cache));
+  }
+  finally {
+    Settings.setExcludeDisabledCaches(oldExcludeDisabled);
+    Settings.setExcludeMine(oldExcludeMine);
+  }
+}
