@@ -19,9 +19,9 @@
     downloaded=true;
     Set<Geocache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
     caches.addAll(cachesFromSearchResult);
+    final boolean excludeMine=Settings.isExcludeMyCaches();
+    final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
     if (mapMode == MapMode.LIVE) {
-      final boolean excludeMine=Settings.isExcludeMyCaches();
-      final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
       final List<Geocache> tempList=caches.getAsList();
       for (      Geocache cache : tempList) {
         if ((cache.isFound() && excludeMine) || (cache.isOwner() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
@@ -32,9 +32,9 @@
     countVisibleCaches();
     if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
       waypoints.clear();
-      if (isLiveEnabled || mapMode == MapMode.COORDS) {
+      if (mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
         CacheType type=Settings.getCacheType();
-        Set<Waypoint> waypointsInViewport=cgData.loadWaypoints(viewport,Settings.isExcludeMyCaches(),Settings.isExcludeDisabledCaches(),type);
+        Set<Waypoint> waypointsInViewport=cgData.loadWaypoints(viewport,excludeMine,excludeDisabled,type);
         waypoints.addAll(waypointsInViewport);
       }
  else {
