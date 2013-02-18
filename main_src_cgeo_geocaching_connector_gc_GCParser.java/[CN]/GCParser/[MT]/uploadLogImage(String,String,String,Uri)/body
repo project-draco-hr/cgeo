@@ -1,0 +1,21 @@
+{
+  final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
+  String page=Network.getResponseData(Network.getRequest(uri));
+  if (!Login.getLoginStatus(page)) {
+    final StatusCode loginState=Login.login();
+    if (loginState == StatusCode.NO_ERROR) {
+      page=Network.getResponseData(Network.getRequest(uri));
+    }
+ else {
+      Log.e("xxx upload: No login (error: " + loginState + ')');
+      return StatusCode.NOT_LOGGED_IN;
+    }
+  }
+  final String[] viewstates=Login.getViewstates(page);
+  final Parameters uploadParams=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$ImageUploadControl1$uxFileCaption",HtmlUtils.convertNonLatinCharactersToHTML(caption),"ctl00$ContentBody$ImageUploadControl1$uxFileDesc",HtmlUtils.convertNonLatinCharactersToHTML(description),"ctl00$ContentBody$ImageUploadControl1$uxUpload","Upload");
+  Login.putViewstates(uploadParams,viewstates);
+  final File image=new File(imageUri.getPath());
+  final String response=Network.getResponseData(Network.postRequest(uri,uploadParams,"ctl00$ContentBody$ImageUploadControl1$uxFileUpload","image/jpeg",image));
+  Log.e("GCParser.postLog: Failed to post log because of unknown error");
+  return StatusCode.LOG_POST_ERROR;
+}

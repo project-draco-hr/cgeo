@@ -1,0 +1,57 @@
+{
+  super.onCreate(savedInstanceState);
+  setTheme();
+  setContentView(R.layout.visit_image);
+  setTitle(res.getString(R.string.log_image));
+  imageCaption="";
+  imageDescription="";
+  imageUri=Uri.EMPTY;
+  final Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    imageCaption=extras.getString(EXTRAS_CAPTION);
+    imageDescription=extras.getString(EXTRAS_DESCRIPTION);
+    imageUri=Uri.parse(extras.getString(EXTRAS_URI_AS_STRING));
+  }
+  if (savedInstanceState != null) {
+    imageCaption=savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
+    imageDescription=savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
+    imageUri=Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+  }
+  final Button cameraButton=(Button)findViewById(R.id.camera);
+  cameraButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View view){
+      selectImageFromCamera();
+    }
+  }
+);
+  final Button storedButton=(Button)findViewById(R.id.stored);
+  storedButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View view){
+      selectImageFromStorage();
+    }
+  }
+);
+  captionView=(EditText)findViewById(R.id.caption);
+  if (StringUtils.isNotBlank(imageCaption)) {
+    captionView.setText(imageCaption);
+  }
+  descriptionView=(EditText)findViewById(R.id.description);
+  if (StringUtils.isNotBlank(imageDescription)) {
+    descriptionView.setText(imageDescription);
+  }
+  final Button saveButton=(Button)findViewById(R.id.save);
+  saveButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      saveImageInfo(true);
+    }
+  }
+);
+  final Button clearButton=(Button)findViewById(R.id.cancel);
+  clearButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      saveImageInfo(false);
+    }
+  }
+);
+  loadImagePreview();
+}
