@@ -4,15 +4,10 @@
       imageCaption=data.getStringExtra(ImageSelectActivity.EXTRAS_CAPTION);
       imageDescription=data.getStringExtra(ImageSelectActivity.EXTRAS_DESCRIPTION);
       imageUri=Uri.parse(data.getStringExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING));
-      showToast("Image saved to:\n" + imageUri);
     }
- else     if (resultCode == RESULT_CANCELED) {
-      showToast("Cancelled");
+ else     if (resultCode != RESULT_CANCELED) {
+      showToast(getResources().getString(R.string.err_select_logimage_failed));
     }
- else {
-      showToast("Unknown Error");
-    }
-    final Button imageButton=(Button)findViewById(R.id.image_btn);
-    imageButton.setText(StringUtils.isNotBlank(imageUri.getPath()) ? res.getString(R.string.log_image_edit) : res.getString(R.string.log_image_attach));
+    setImageButtonText();
   }
 }

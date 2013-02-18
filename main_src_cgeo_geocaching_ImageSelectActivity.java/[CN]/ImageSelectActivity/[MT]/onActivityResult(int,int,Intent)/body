@@ -1,19 +1,10 @@
 {
   if (resultCode == RESULT_CANCELED) {
-    showToast("Cancelled");
+    showToast(getResources().getString(R.string.info_select_logimage_cancelled));
     return;
   }
   if (resultCode == RESULT_OK) {
-    if (requestCode == SELECT_NEW_IMAGE) {
-      showToast("Image saved to:\n" + imageUri);
-      if (data != null) {
-        Log.d("SELECT_NEW_IMAGE data = " + data.toString());
-      }
- else {
-        Log.d("SELECT_NEW_IMAGE data is null");
-      }
-    }
- else     if (requestCode == SELECT_STORED_IMAGE) {
+    if (data != null) {
       Uri selectedImage=data.getData();
       String[] filePathColumn={MediaColumns.DATA};
       Cursor cursor=getContentResolver().query(selectedImage,filePathColumn,null,null,null);
@@ -22,16 +13,17 @@
       String filePath=cursor.getString(columnIndex);
       imageUri=Uri.parse(filePath);
       cursor.close();
-      if (data != null) {
-        Log.d("SELECT_STORED_IMAGE data = " + data.toString());
-      }
+      Log.d("SELECT IMAGE data = " + data.toString());
+    }
  else {
-        Log.d("SELECT_STORED_IMAGE data is null");
-      }
+      Log.d("SELECT IMAGE data is null");
+    }
+    if (requestCode == SELECT_NEW_IMAGE) {
+      showToast(getResources().getString(R.string.info_stored_image) + "\n" + imageUri);
     }
   }
  else {
-    showToast("Unknown Error");
+    showToast(getResources().getString(R.string.err_aquire_image_failed));
     return;
   }
   loadImagePreview();

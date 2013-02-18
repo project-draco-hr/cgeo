@@ -1,10 +1,12 @@
 {
+  StatusCode result=StatusCode.LOG_POST_ERROR;
   try {
     final ImmutablePair<StatusCode,String> logResult=GCParser.postLog(geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
+    result=logResult.left;
     if (logResult.left == StatusCode.NO_ERROR) {
       final LogEntry logNow=new LogEntry(date,typeSelected,log);
       cache.getLogs().add(0,logNow);
-      if (typeSelected == LogType.FOUND_IT) {
+      if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
         cache.setFound(true);
       }
       cgData.saveChangedCache(cache);
@@ -18,10 +20,10 @@
     if (logResult.left == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
       GCVote.setRating(cache,rating);
     }
-    if (StringUtils.isNotBlank(imageUri.getPath())) {
-      final StatusCode status=GCParser.uploadLogImage(logResult.right,imageCaption,imageDescription,imageUri);
+    if (logResult.left == StatusCode.NO_ERROR && StringUtils.isNotBlank(imageUri.getPath())) {
+      result=GCParser.uploadLogImage(logResult.right,imageCaption,imageDescription,imageUri);
     }
-    return logResult.left;
+    return result;
   }
  catch (  Exception e) {
     Log.e("cgeovisit.postLogFn",e);
