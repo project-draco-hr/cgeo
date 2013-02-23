@@ -1,0 +1,30 @@
+{
+  if (resultCode == RESULT_CANCELED) {
+    showToast(getResources().getString(R.string.info_select_logimage_cancelled));
+    return;
+  }
+  if (resultCode == RESULT_OK) {
+    if (data != null) {
+      Uri selectedImage=data.getData();
+      String[] filePathColumn={MediaColumns.DATA};
+      Cursor cursor=getContentResolver().query(selectedImage,filePathColumn,null,null,null);
+      cursor.moveToFirst();
+      int columnIndex=cursor.getColumnIndex(filePathColumn[0]);
+      String filePath=cursor.getString(columnIndex);
+      imageUri=Uri.parse(filePath);
+      cursor.close();
+      Log.d("SELECT IMAGE data = " + data.toString());
+    }
+ else {
+      Log.d("SELECT IMAGE data is null");
+    }
+    if (requestCode == SELECT_NEW_IMAGE) {
+      showToast(getResources().getString(R.string.info_stored_image) + "\n" + imageUri);
+    }
+  }
+ else {
+    showToast(getResources().getString(R.string.err_aquire_image_failed));
+    return;
+  }
+  loadImagePreview();
+}

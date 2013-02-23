@@ -1,24 +1,29 @@
 {
+  StatusCode result=StatusCode.LOG_POST_ERROR;
   try {
-    final StatusCode status=GCParser.postLog(geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
-    if (status == StatusCode.NO_ERROR) {
+    final ImmutablePair<StatusCode,String> logResult=GCParser.postLog(geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
+    result=logResult.left;
+    if (logResult.left == StatusCode.NO_ERROR) {
       final LogEntry logNow=new LogEntry(date,typeSelected,log);
       cache.getLogs().add(0,logNow);
-      if (typeSelected == LogType.FOUND_IT) {
+      if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
         cache.setFound(true);
       }
       cgData.saveChangedCache(cache);
     }
-    if (status == StatusCode.NO_ERROR) {
+    if (logResult.left == StatusCode.NO_ERROR) {
       cgData.clearLogOffline(geocode);
     }
-    if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+    if (logResult.left == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
       Twitter.postTweetCache(geocode);
     }
-    if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
+    if (logResult.left == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
       GCVote.setRating(cache,rating);
     }
-    return status;
+    if (logResult.left == StatusCode.NO_ERROR && StringUtils.isNotBlank(imageUri.getPath())) {
+      result=GCParser.uploadLogImage(logResult.right,imageCaption,imageDescription,imageUri);
+    }
+    return result;
   }
  catch (  Exception e) {
     Log.e("cgeovisit.postLogFn",e);

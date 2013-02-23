@@ -30,6 +30,9 @@
     rating=savedInstanceState.getDouble(SAVED_STATE_RATING);
     typeSelected=LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
     date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
+    imageCaption=savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
+    imageDescription=savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
+    imageUri=Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
   }
  else {
     final LogEntry log=cgData.loadLogOffline(geocode);
@@ -43,6 +46,7 @@
     }
   }
   updatePostButtonText();
+  setImageButtonText();
   enablePostButton(false);
   final Button typeButton=(Button)findViewById(R.id.type);
   typeButton.setText(typeSelected.getL10n());
@@ -60,6 +64,13 @@
     logView.setText(text);
   }
   tweetCheck.setChecked(true);
+  final Button imageButton=(Button)findViewById(R.id.image_btn);
+  imageButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View view){
+      selectImage();
+    }
+  }
+);
   final Button saveButton=(Button)findViewById(R.id.save);
   saveButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
