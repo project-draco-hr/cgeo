@@ -18,6 +18,7 @@
     }
     downloaded=true;
     Set<Geocache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+    caches.removeAll(cachesFromSearchResult);
     caches.addAll(cachesFromSearchResult);
     if (mapMode == MapMode.LIVE) {
       final boolean excludeMine=Settings.isExcludeMyCaches();
