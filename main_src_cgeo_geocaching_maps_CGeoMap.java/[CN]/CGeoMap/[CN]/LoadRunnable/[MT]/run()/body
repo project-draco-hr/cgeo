@@ -32,12 +32,13 @@
     countVisibleCaches();
     if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
       waypoints.clear();
-      if (mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
+      if (isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
         CacheType type=Settings.getCacheType();
         Set<Waypoint> waypointsInViewport=cgData.loadWaypoints(viewport,excludeMine,excludeDisabled,type);
         waypoints.addAll(waypointsInViewport);
       }
  else {
+        waypoints.clear();
         for (        Geocache c : caches.getAsList()) {
           waypoints.addAll(c.getWaypoints());
         }
