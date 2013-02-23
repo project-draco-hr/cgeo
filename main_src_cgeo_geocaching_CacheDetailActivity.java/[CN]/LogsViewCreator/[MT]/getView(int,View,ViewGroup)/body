@@ -28,7 +28,13 @@
   String logText=log.log;
   if (BaseUtils.containsHtml(logText)) {
     logText=log.getDisplayText();
-    holder.text.setText(Html.fromHtml(logText,new HtmlImage(cache.getGeocode(),false,cache.getListId(),false),null),TextView.BufferType.SPANNABLE);
+    HtmlImageCounter imageCounter=new HtmlImageCounter();
+    final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
+    holder.text.setText(Html.fromHtml(logText,imageCounter,unknownTagsHandler));
+    if (imageCounter.getImageCount() > 0) {
+      LogImageLoader loader=new LogImageLoader(holder);
+      loader.execute(new String[]{logText});
+    }
   }
  else {
     holder.text.setText(logText);
