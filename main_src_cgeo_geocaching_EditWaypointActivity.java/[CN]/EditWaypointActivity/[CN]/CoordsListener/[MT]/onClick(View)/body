@@ -93,6 +93,7 @@ waypoint.setPrefix(prefix);
 waypoint.setLookup(lookup);
 waypoint.setCoords(coordsToSave);
 waypoint.setNote(note);
+waypoint.setVisited(visited);
 waypoint.setId(id);
 Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
 if (null != cache && cache.addOrChangeWaypoint(waypoint,true)) {

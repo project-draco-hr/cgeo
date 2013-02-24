@@ -1,3 +1,14 @@
 {
-  nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(waypointType.markerId),null,null,null);
+  Drawable icon;
+  if (visited) {
+    LayerDrawable ld=new LayerDrawable(new Drawable[]{res.getDrawable(waypointType.markerId),res.getDrawable(R.drawable.tick)});
+    ld.setLayerInset(0,0,0,10,10);
+    ld.setLayerInset(1,10,10,0,0);
+    icon=ld;
+  }
+ else {
+    icon=res.getDrawable(waypointType.markerId);
+  }
+  final Drawable fIcon=icon;
+  nameView.setCompoundDrawablesWithIntrinsicBounds(fIcon,null,null,null);
 }

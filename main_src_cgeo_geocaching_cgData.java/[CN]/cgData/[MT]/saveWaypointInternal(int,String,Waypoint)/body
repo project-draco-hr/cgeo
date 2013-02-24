@@ -17,6 +17,7 @@
     putCoords(values,waypoint.getCoords());
     values.put("note",waypoint.getNote());
     values.put("own",waypoint.isUserDefined() ? 1 : 0);
+    values.put("visited",waypoint.isVisited() ? 1 : 0);
     if (id <= 0) {
       final long rowId=database.insert(dbTableWaypoints,null,values);
       waypoint.setId((int)rowId);

@@ -3,6 +3,7 @@
   final WaypointType type=WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
   final boolean own=cursor.getInt(cursor.getColumnIndex("own")) != 0;
   final Waypoint waypoint=new Waypoint(name,type,own);
+  waypoint.setVisited(cursor.getInt(cursor.getColumnIndex("visited")) != 0);
   waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
   waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
   waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));

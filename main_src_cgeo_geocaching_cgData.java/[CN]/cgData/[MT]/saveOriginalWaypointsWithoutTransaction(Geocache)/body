@@ -19,6 +19,7 @@
       putCoords(values,oneWaypoint.getCoords());
       values.put("note",oneWaypoint.getNote());
       values.put("own",oneWaypoint.isUserDefined() ? 1 : 0);
+      values.put("visited",oneWaypoint.isVisited() ? 1 : 0);
       if (oneWaypoint.getId() < 0) {
         final long rowId=database.insert(dbTableWaypoints,null,values);
         oneWaypoint.setId((int)rowId);

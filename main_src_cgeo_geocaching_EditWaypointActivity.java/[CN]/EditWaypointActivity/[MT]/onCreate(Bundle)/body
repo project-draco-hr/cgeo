@@ -48,6 +48,14 @@
     IConnector con=ConnectorFactory.getConnector(geocode);
     setCoordsModificationVisibility(con,cache);
   }
+  CheckBox visitedCheckBox=((CheckBox)findViewById(R.id.wpt_visited_checkbox));
+  visitedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+    @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
+      visited=isChecked;
+    }
+  }
+);
+  buttonLat.setOnClickListener(new coordDialogListener());
   initializeDistanceUnitSelector();
   disableSuggestions((EditText)findViewById(R.id.distance));
 }
