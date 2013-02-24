@@ -5,7 +5,7 @@
     ((EditText)findViewById(R.id.password)).setText(login.right);
   }
   Button logMeIn=(Button)findViewById(R.id.log_me_in);
-  logMeIn.setOnClickListener(new logIn());
+  logMeIn.setOnClickListener(new LoginListener());
   TextView legalNote=(TextView)findViewById(R.id.legal_note);
   legalNote.setClickable(true);
   legalNote.setOnClickListener(new View.OnClickListener(){
@@ -276,12 +276,12 @@
     ((EditText)findViewById(R.id.webDeviceName)).setText(s);
   }
   Button webAuth=(Button)findViewById(R.id.sendToCgeo_register);
-  webAuth.setOnClickListener(new webAuth());
+  webAuth.setOnClickListener(new WebAuthListener());
   updateMapSourceMenu();
   Button selectMapDirectory=(Button)findViewById(R.id.select_map_directory);
   selectMapDirectory.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      Intent selectIntent=new Intent(SettingsActivity.this,cgSelectMapfile.class);
+      Intent selectIntent=new Intent(SettingsActivity.this,SelectMapfileActivity.class);
       startActivityForResult(selectIntent,SELECT_MAPFILE_REQUEST);
     }
   }

@@ -31,8 +31,8 @@
     for (    LogType logType : expected.getLogCounts().keySet()) {
       assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
     }
-    int actualSpoilersSize=null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
-    int expectedSpoilersSize=null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
+    final int actualSpoilersSize=null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
+    final int expectedSpoilersSize=null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
     assertEquals(expectedSpoilersSize,actualSpoilersSize);
   }
 }

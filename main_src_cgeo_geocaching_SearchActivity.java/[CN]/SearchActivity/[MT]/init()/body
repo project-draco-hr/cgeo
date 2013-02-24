@@ -1,9 +1,9 @@
 {
   Settings.getLogin();
-  findViewById(R.id.buttonLatitude).setOnClickListener(new findByCoordsAction());
-  findViewById(R.id.buttonLongitude).setOnClickListener(new findByCoordsAction());
+  findViewById(R.id.buttonLatitude).setOnClickListener(new FindByCoordsAction());
+  findViewById(R.id.buttonLongitude).setOnClickListener(new FindByCoordsAction());
   final Button findByCoords=(Button)findViewById(R.id.search_coordinates);
-  findByCoords.setOnClickListener(new findByCoordsListener());
+  findByCoords.setOnClickListener(new FindByCoordsListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.address),new Runnable(){
     @Override public void run(){
       findByAddressFn();
@@ -11,7 +11,7 @@
   }
 );
   final Button findByAddress=(Button)findViewById(R.id.search_address);
-  findByAddress.setOnClickListener(new findByAddressListener());
+  findByAddress.setOnClickListener(new FindByAddressListener());
   final AutoCompleteTextView geocodeEdit=(AutoCompleteTextView)findViewById(R.id.geocode);
   EditUtils.setActionListener(geocodeEdit,new Runnable(){
     @Override public void run(){
@@ -21,7 +21,7 @@
 );
   addHistoryEntries(geocodeEdit,cgData.getRecentGeocodesForSearch());
   final Button displayByGeocode=(Button)findViewById(R.id.display_geocode);
-  displayByGeocode.setOnClickListener(new findByGeocodeListener());
+  displayByGeocode.setOnClickListener(new FindByGeocodeListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.keyword),new Runnable(){
     @Override public void run(){
       findByKeywordFn();
@@ -29,7 +29,7 @@
   }
 );
   final Button findByKeyword=(Button)findViewById(R.id.search_keyword);
-  findByKeyword.setOnClickListener(new findByKeywordListener());
+  findByKeyword.setOnClickListener(new FindByKeywordListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.username),new Runnable(){
     @Override public void run(){
       findByUsernameFn();
@@ -37,7 +37,7 @@
   }
 );
   final Button findByUserName=(Button)findViewById(R.id.search_username);
-  findByUserName.setOnClickListener(new findByUsernameListener());
+  findByUserName.setOnClickListener(new FindByUsernameListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.owner),new Runnable(){
     @Override public void run(){
       findByOwnerFn();
@@ -61,5 +61,5 @@
   addHistoryEntries(trackable,cgData.getTrackableCodes());
   disableSuggestions(trackable);
   final Button displayTrackable=(Button)findViewById(R.id.display_trackable);
-  displayTrackable.setOnClickListener(new findTrackableListener());
+  displayTrackable.setOnClickListener(new FindTrackableListener());
 }

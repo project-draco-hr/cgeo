@@ -1,7 +1,7 @@
 {
   final MockedCache mockedCache=RegExPerformanceTest.MOCKED_CACHES.get(index);
-  String oldCustomDate=Settings.getGcCustomDate();
-  SearchResult searchResult;
+  final String oldCustomDate=Settings.getGcCustomDate();
+  final SearchResult searchResult;
   try {
     Settings.setGcCustomDate(MockedCache.getDateFormat());
     searchResult=GCParser.parseCacheFromText(mockedCache.getData(),null);

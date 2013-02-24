@@ -1,7 +1,7 @@
 {
   final List<Geocache> caches=readGPX10(R.raw.geotoad);
   assertEquals(2,caches.size());
-  List<String> codes=new ArrayList<String>();
+  final List<String> codes=new ArrayList<String>();
   for (  Geocache cache : caches) {
     codes.add(cache.getGeocode());
   }

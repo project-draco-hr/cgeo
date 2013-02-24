@@ -5,7 +5,7 @@
       final LayoutInflater inflater=activity.getLayoutInflater();
       final View view=inflater.inflate(R.layout.recaptcha_dialog,null);
       imageView=(ImageView)view.findViewById(R.id.image);
-      (new getCaptcha(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
+      (new GetCaptchaThread(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
       dlg.setTitle(res.getString(R.string.caches_recaptcha_title));
       dlg.setView(view);
       dlg.setNeutralButton(res.getString(R.string.caches_recaptcha_continue),new DialogInterface.OnClickListener(){

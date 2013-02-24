@@ -1,8 +1,8 @@
 {
   removeCacheCompletely("GC31J2H");
-  List<Geocache> caches=readGPX10(R.raw.gc31j2h,R.raw.gc31j2h_wpts);
+  final List<Geocache> caches=readGPX10(R.raw.gc31j2h,R.raw.gc31j2h_wpts);
   assertEquals(1,caches.size());
-  Geocache cache=caches.get(0);
+  final Geocache cache=caches.get(0);
   assertGc31j2h(cache);
   assertGc31j2hWaypoints(cache);
 }

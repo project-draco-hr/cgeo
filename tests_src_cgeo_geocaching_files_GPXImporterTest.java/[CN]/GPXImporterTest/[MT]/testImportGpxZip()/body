@@ -1,14 +1,14 @@
 {
   final String geocode="GC31J2H";
   removeCacheCompletely(geocode);
-  File pq7545915=new File(tempDir,"7545915.zip");
+  final File pq7545915=new File(tempDir,"7545915.zip");
   copyResourceToFile(R.raw.pq7545915,pq7545915);
-  GPXImporter.ImportGpxZipFileThread importThread=new GPXImporter.ImportGpxZipFileThread(pq7545915,listId,importStepHandler,progressHandler);
+  final GPXImporter.ImportGpxZipFileThread importThread=new GPXImporter.ImportGpxZipFileThread(pq7545915,listId,importStepHandler,progressHandler);
   runImportThread(importThread);
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_READ_WPT_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
-  SearchResult search=(SearchResult)importStepHandler.messages.get(4).obj;
+  final SearchResult search=(SearchResult)importStepHandler.messages.get(4).obj;
   assertEquals(Collections.singletonList(geocode),new ArrayList<String>(search.getGeocodes()));
-  Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  final Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
   assertEquals(1,cache.getWaypoints().size());
 }

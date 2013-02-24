@@ -6,7 +6,7 @@
   Settings.setLanguage(Settings.isUseEnglish());
   Settings.getLogin();
   if (app.firstRun) {
-    (new firstLogin()).start();
+    (new FirstLoginThread()).start();
   }
   final View findOnMap=findViewById(R.id.map);
   findOnMap.setClickable(true);
@@ -72,5 +72,5 @@
   updateCacheCounter();
   setFilterTitle();
   checkRestore();
-  (new cleanDatabase()).start();
+  (new CleanDatabaseThread()).start();
 }

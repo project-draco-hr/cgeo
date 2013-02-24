@@ -6,7 +6,7 @@
   OAtoken=tempToken.left;
   OAtokenSecret=tempToken.right;
   startButton.setEnabled(true);
-  startButton.setOnClickListener(new startListener());
+  startButton.setOnClickListener(new StartListener());
   if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
     startButton.setText(res.getString(R.string.auth_start));
   }
@@ -14,6 +14,6 @@
     startButton.setText(res.getString(R.string.auth_again));
     pinEntry.setVisibility(View.VISIBLE);
     pinEntryButton.setVisibility(View.VISIBLE);
-    pinEntryButton.setOnClickListener(new confirmPINListener());
+    pinEntryButton.setOnClickListener(new ConfirmPINListener());
   }
 }

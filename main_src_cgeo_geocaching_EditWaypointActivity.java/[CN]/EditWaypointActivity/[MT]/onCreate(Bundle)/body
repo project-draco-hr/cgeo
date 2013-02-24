@@ -21,11 +21,11 @@
     setTitle(res.getString(R.string.waypoint_edit_title));
   }
   Button buttonLat=(Button)findViewById(R.id.buttonLatitude);
-  buttonLat.setOnClickListener(new coordDialogListener());
+  buttonLat.setOnClickListener(new CoordDialogListener());
   Button buttonLon=(Button)findViewById(R.id.buttonLongitude);
-  buttonLon.setOnClickListener(new coordDialogListener());
+  buttonLon.setOnClickListener(new CoordDialogListener());
   Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
-  addWaypoint.setOnClickListener(new coordsListener());
+  addWaypoint.setOnClickListener(new CoordsListener());
   List<String> wayPointNames=new ArrayList<String>();
   for (  WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
     wayPointNames.add(wpt.getL10n());
@@ -38,7 +38,7 @@
     waypointTypeSelector.setVisibility(View.GONE);
     waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
     waitDialog.setCancelable(true);
-    (new loadWaypoint()).start();
+    (new LoadWaypointThread()).start();
   }
  else {
     initializeWaypointTypeSelector();

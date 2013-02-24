@@ -5,7 +5,7 @@
     if (waitDialog == null) {
       waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
       waitDialog.setCancelable(true);
-      (new loadWaypoint()).start();
+      (new LoadWaypointThread()).start();
     }
   }
 }

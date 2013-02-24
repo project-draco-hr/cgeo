@@ -9,6 +9,6 @@
   mapSourceSelector.setAdapter(adapter);
   final int index=MapProviderFactory.getMapSources().indexOf(Settings.getMapSource());
   mapSourceSelector.setSelection(index);
-  mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
+  mapSourceSelector.setOnItemSelectedListener(new ChangeMapSourceListener());
   initMapDirectoryEdittext(false);
 }

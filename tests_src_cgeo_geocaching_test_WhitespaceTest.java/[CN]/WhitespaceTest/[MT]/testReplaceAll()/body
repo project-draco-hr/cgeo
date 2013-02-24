@@ -1,6 +1,6 @@
 {
   final long start=System.currentTimeMillis();
-  String result=data.replaceAll("\\s+"," ");
+  final String result=data.replaceAll("\\s+"," ");
   final long end=System.currentTimeMillis();
   assertEquals(EXPECTED_SIZE + 1,result.length());
   Log.d((end - start) + " ms replaceAll");

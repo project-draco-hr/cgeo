@@ -1,8 +1,8 @@
 {
-  ImmutablePair<String,String> login=Settings.getLogin();
-  String memberStatus=Settings.getMemberStatus();
-  Strategy strategy=Settings.getLiveMapStrategy();
-  Strategy testStrategy=Strategy.FAST;
+  final ImmutablePair<String,String> login=Settings.getLogin();
+  final String memberStatus=Settings.getMemberStatus();
+  final Strategy strategy=Settings.getLiveMapStrategy();
+  final Strategy testStrategy=Strategy.FAST;
   Settings.setLiveMapStrategy(testStrategy);
   final CacheType cacheType=Settings.getCacheType();
   try {
@@ -15,7 +15,7 @@
     SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
     assertNotNull(search);
     assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-    Geocache cacheFromViewport=cgData.loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+    final Geocache cacheFromViewport=cgData.loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
     assertFalse(cache.getCoords().isEqualTo(cacheFromViewport.getCoords(),1e-3));

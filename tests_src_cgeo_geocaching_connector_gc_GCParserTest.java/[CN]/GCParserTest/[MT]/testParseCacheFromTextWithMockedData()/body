@@ -1,5 +1,5 @@
 {
-  String gcCustomDate=Settings.getGcCustomDate();
+  final String gcCustomDate=Settings.getGcCustomDate();
   try {
     for (    MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
       Settings.setGcCustomDate(MockedCache.getDateFormat());

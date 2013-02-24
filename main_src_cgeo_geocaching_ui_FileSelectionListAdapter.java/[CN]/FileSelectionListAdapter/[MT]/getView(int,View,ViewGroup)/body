@@ -26,7 +26,7 @@
  else {
     holder.filename.setTypeface(holder.filename.getTypeface(),Typeface.NORMAL);
   }
-  final touchListener touchLst=new touchListener(file);
+  final TouchListener touchLst=new TouchListener(file);
   v.setOnClickListener(touchLst);
   holder.filepath.setText(file.getParent());
   holder.filename.setText(file.getName());

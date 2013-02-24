@@ -4,6 +4,6 @@
   final List<LogEntry> logs=trackable.getLogs();
   assertNotNull(logs);
   assertFalse(logs.isEmpty());
-  LogEntry marked=logs.get(4);
+  final LogEntry marked=logs.get(4);
   assertEquals(LogType.MARKED_MISSING,marked.type);
 }

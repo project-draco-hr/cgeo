@@ -1,7 +1,7 @@
 {
   final Trackable trackable=getTBXATG();
   assertEquals("TBXATG",trackable.getGeocode());
-  List<LogEntry> log=trackable.getLogs();
+  final List<LogEntry> log=trackable.getLogs();
   assertNotNull(log);
   assertEquals(10,log.size());
   final List<Image> log4Images=log.get(4).getLogImages();

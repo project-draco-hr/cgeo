@@ -20,7 +20,7 @@
     cgData.saveCache(cache2,LoadFlags.SAVE_ALL);
     assertTrue(cgData.getAllCachesCount() >= 2);
     assertEquals(1,cgData.renameList(listId1,"cgData Test (renamed)"));
-    StoredList list1=cgData.getList(listId1);
+    final StoredList list1=cgData.getList(listId1);
     assertEquals("cgData Test (renamed)",list1.title);
     cgData.moveToList(Collections.singletonList(cache1),listId2);
     assertEquals(1,cgData.getAllStoredCachesCount(CacheType.ALL,listId2));
@@ -31,7 +31,7 @@
     cgData.removeList(listId2);
   }
   finally {
-    Set<String> geocodes=new HashSet<String>();
+    final Set<String> geocodes=new HashSet<String>();
     geocodes.add(cache1.getGeocode());
     geocodes.add(cache2.getGeocode());
     cgData.removeCaches(geocodes,LoadFlags.REMOVE_ALL);

@@ -1,10 +1,10 @@
 {
-  ImmutablePair<String,String> login=Settings.getLogin();
-  String memberStatus=Settings.getMemberStatus();
+  final ImmutablePair<String,String> login=Settings.getLogin();
+  final String memberStatus=Settings.getMemberStatus();
   try {
-    MockedCache cache=new GC1ZXX2();
+    final MockedCache cache=new GC1ZXX2();
     deleteCacheFromDBAndLogout(cache.getGeocode());
-    SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
+    final SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
     assertNotNull(search);
     assertEquals(0,search.getGeocodes().size());
   }

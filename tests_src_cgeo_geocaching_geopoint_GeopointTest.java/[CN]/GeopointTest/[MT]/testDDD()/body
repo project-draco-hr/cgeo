@@ -1,18 +1,18 @@
 {
   final Geopoint gp1=new Geopoint(51.3d,13.8d);
   checkDDD(gp1,'N',51,30000,'E',13,80000);
-  Geopoint gp1a=new Geopoint(String.valueOf(gp1.getLatDir()),String.valueOf(gp1.getLatDeg()),String.valueOf(gp1.getLatDegFrac()),String.valueOf(gp1.getLonDir()),String.valueOf(gp1.getLonDeg()),String.valueOf(gp1.getLonDegFrac()));
+  final Geopoint gp1a=new Geopoint(String.valueOf(gp1.getLatDir()),String.valueOf(gp1.getLatDeg()),String.valueOf(gp1.getLatDegFrac()),String.valueOf(gp1.getLonDir()),String.valueOf(gp1.getLonDeg()),String.valueOf(gp1.getLonDegFrac()));
   Assert.assertTrue(gp1a.equals(gp1));
   final Geopoint gp2=new Geopoint(51.34567d,13.87654d);
   checkDDD(gp2,'N',51,34567,'E',13,87654);
-  Geopoint gp2a=new Geopoint(String.valueOf(gp2.getLatDir()),String.valueOf(gp2.getLatDeg()),String.valueOf(gp2.getLatDegFrac()),String.valueOf(gp2.getLonDir()),String.valueOf(gp2.getLonDeg()),String.valueOf(gp2.getLonDegFrac()));
+  final Geopoint gp2a=new Geopoint(String.valueOf(gp2.getLatDir()),String.valueOf(gp2.getLatDeg()),String.valueOf(gp2.getLatDegFrac()),String.valueOf(gp2.getLonDir()),String.valueOf(gp2.getLonDeg()),String.valueOf(gp2.getLonDegFrac()));
   Assert.assertTrue(gp2a.equals(gp2));
   final Geopoint gp3=new Geopoint(51.29999833333333d,13.8d);
   checkDDD(gp3,'N',51,30000,'E',13,80000);
-  Geopoint gp3a=new Geopoint(String.valueOf(gp3.getLatDir()),String.valueOf(gp3.getLatDeg()),String.valueOf(gp3.getLatDegFrac()),String.valueOf(gp3.getLonDir()),String.valueOf(gp3.getLonDeg()),String.valueOf(gp3.getLonDegFrac()));
+  final Geopoint gp3a=new Geopoint(String.valueOf(gp3.getLatDir()),String.valueOf(gp3.getLatDeg()),String.valueOf(gp3.getLatDegFrac()),String.valueOf(gp3.getLonDir()),String.valueOf(gp3.getLonDeg()),String.valueOf(gp3.getLonDegFrac()));
   checkTolerance(gp3,gp3a,5e-5);
   final Geopoint gp4=new Geopoint(51.00012d,13.00089d);
   checkDDD(gp4,'N',51,12,'E',13,89);
-  Geopoint gp4a=new Geopoint(String.valueOf(gp4.getLatDir()),String.valueOf(gp4.getLatDeg()),String.valueOf(gp4.getLatDegFrac()),String.valueOf(gp4.getLonDir()),String.valueOf(gp4.getLonDeg()),String.valueOf(gp4.getLonDegFrac()));
+  final Geopoint gp4a=new Geopoint(String.valueOf(gp4.getLatDir()),String.valueOf(gp4.getLatDeg()),String.valueOf(gp4.getLatDegFrac()),String.valueOf(gp4.getLonDir()),String.valueOf(gp4.getLonDeg()),String.valueOf(gp4.getLonDegFrac()));
   checkTolerance(gp4,gp4a,5e-5);
 }

@@ -1,0 +1,138 @@
+{
+  final String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
+  final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString() + distanceUnit;
+  final String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
+  final String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
+  if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
+    helpDialog(res.getString(R.string.err_point_no_position_given_title),res.getString(R.string.err_point_no_position_given));
+    return;
+  }
+  Geopoint coords;
+  if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
+    try {
+      coords=new Geopoint(latText,lonText);
+    }
+ catch (    Geopoint.ParseException e) {
+      showToast(res.getString(e.resource));
+      return;
+    }
+  }
+ else {
+    final IGeoData geo=app.currentGeo();
+    if (geo.getCoords() == null) {
+      showToast(res.getString(R.string.err_point_curr_position_unavailable));
+      return;
+    }
+    coords=geo.getCoords();
+  }
+  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+    double bearing;
+    try {
+      bearing=Double.parseDouble(bearingText);
+    }
+ catch (    NumberFormatException e) {
+      helpDialog(res.getString(R.string.err_point_bear_and_dist_title),res.getString(R.string.err_point_bear_and_dist));
+      return;
+    }
+    double distance;
+    try {
+      distance=DistanceParser.parseDistance(distanceText,Settings.isUseMetricUnits());
+    }
+ catch (    NumberFormatException e) {
+      showToast(res.getString(R.string.err_parse_dist));
+      return;
+    }
+    coords=coords.project(bearing,distance);
+  }
+  final String givenName=((EditText)findViewById(R.id.name)).getText().toString().trim();
+  final String name=StringUtils.isNotEmpty(givenName) ? givenName : res.getString(R.string.waypoint) + " " + (wpCount + 1);
+  final String note=((EditText)findViewById(R.id.note)).getText().toString().trim();
+  final Geopoint coordsToSave=coords;
+  final ProgressDialog progress=ProgressDialog.show(EditWaypointActivity.this,getString(R.string.cache),getString(R.string.waypoint_being_saved),true);
+  final Handler finishHandler=new Handler(){
+    @Override public void handleMessage(    Message msg){
+switch (msg.what) {
+case UPLOAD_SUCCESS:
+        showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website,coordsToSave));
+      progress.dismiss();
+    finish();
+  break;
+case SUCCESS:
+progress.dismiss();
+finish();
+break;
+case UPLOAD_START:
+progress.setMessage(getString(R.string.waypoint_coordinates_uploading_to_website,coordsToSave));
+break;
+case UPLOAD_ERROR:
+progress.dismiss();
+finish();
+showToast(getString(R.string.waypoint_coordinates_upload_error));
+break;
+case UPLOAD_NOT_POSSIBLE:
+progress.dismiss();
+finish();
+showToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+break;
+case SAVE_ERROR:
+progress.dismiss();
+finish();
+showToast(res.getString(R.string.err_waypoint_add_failed));
+break;
+default :
+throw new UnsupportedOperationException();
+}
+}
+}
+;
+class SaveWptTask extends AsyncTask<Void,Void,Void> {
+@Override protected Void doInBackground(Void... params){
+final Waypoint waypoint=new Waypoint(name,type,own);
+waypoint.setGeocode(geocode);
+waypoint.setPrefix(prefix);
+waypoint.setLookup(lookup);
+waypoint.setCoords(coordsToSave);
+waypoint.setNote(note);
+waypoint.setId(id);
+Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+if (null != cache && cache.addOrChangeWaypoint(waypoint,true)) {
+cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+StaticMapsProvider.removeWpStaticMaps(id,geocode);
+if (Settings.isStoreOfflineWpMaps()) {
+StaticMapsProvider.storeWaypointStaticMap(cache,waypoint,false);
+}
+final RadioButton modifyLocal=(RadioButton)findViewById(R.id.modify_cache_coordinates_local);
+final RadioButton modifyBoth=(RadioButton)findViewById(R.id.modify_cache_coordinates_local_and_remote);
+if (modifyLocal.isChecked() || modifyBoth.isChecked()) {
+if (!cache.hasUserModifiedCoords()) {
+final Waypoint origWaypoint=new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);
+origWaypoint.setCoords(cache.getCoords());
+cache.addOrChangeWaypoint(origWaypoint,false);
+cache.setUserModifiedCoords(true);
+}
+cache.setCoords(waypoint.getCoords());
+cgData.saveChangedCache(cache);
+}
+if (modifyBoth.isChecked() && waypoint.getCoords() != null) {
+finishHandler.sendEmptyMessage(UPLOAD_START);
+if (cache.supportsOwnCoordinates()) {
+boolean result=uploadModifiedCoords(cache,waypoint.getCoords());
+finishHandler.sendEmptyMessage(result ? SUCCESS : UPLOAD_ERROR);
+}
+ else {
+showToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+finishHandler.sendEmptyMessage(UPLOAD_NOT_POSSIBLE);
+}
+}
+ else {
+finishHandler.sendEmptyMessage(SUCCESS);
+}
+}
+ else {
+finishHandler.sendEmptyMessage(SAVE_ERROR);
+}
+return null;
+}
+}
+new SaveWptTask().execute();
+}

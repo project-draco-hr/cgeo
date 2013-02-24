@@ -1,5 +1,5 @@
 {
-  SearchResult search=cgData.getBatchOfStoredCaches(null,CacheType.ALL,listId);
+  final SearchResult search=cgData.getBatchOfStoredCaches(null,CacheType.ALL,listId);
   assertNotNull(search);
   cgData.removeCaches(search.getGeocodes(),LoadFlags.REMOVE_ALL);
   cgData.removeList(listId);

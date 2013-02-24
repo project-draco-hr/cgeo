@@ -1,18 +1,18 @@
 {
   final Geopoint gp1=new Geopoint(51.3d,13.8d);
   checkDMM(gp1,'N',51,18,0,'E',13,48,0);
-  Geopoint gp1a=new Geopoint(String.valueOf(gp1.getLatDir()),String.valueOf(gp1.getLatDeg()),String.valueOf(gp1.getLatMin()),String.valueOf(gp1.getLatMinFrac()),String.valueOf(gp1.getLonDir()),String.valueOf(gp1.getLonDeg()),String.valueOf(gp1.getLonMin()),String.valueOf(gp1.getLonMinFrac()));
+  final Geopoint gp1a=new Geopoint(String.valueOf(gp1.getLatDir()),String.valueOf(gp1.getLatDeg()),String.valueOf(gp1.getLatMin()),String.valueOf(gp1.getLatMinFrac()),String.valueOf(gp1.getLonDir()),String.valueOf(gp1.getLonDeg()),String.valueOf(gp1.getLonMin()),String.valueOf(gp1.getLonMinFrac()));
   Assert.assertTrue(gp1a.equals(gp1));
   final Geopoint gp2=new Geopoint(51.34567d,13.87654d);
   checkDMM(gp2,'N',51,20,740,'E',13,52,592);
-  Geopoint gp2a=new Geopoint(String.valueOf(gp2.getLatDir()),String.valueOf(gp2.getLatDeg()),String.valueOf(gp2.getLatMin()),String.valueOf(gp2.getLatMinFrac()),String.valueOf(gp2.getLonDir()),String.valueOf(gp2.getLonDeg()),String.valueOf(gp2.getLonMin()),String.valueOf(gp2.getLonMinFrac()));
+  final Geopoint gp2a=new Geopoint(String.valueOf(gp2.getLatDir()),String.valueOf(gp2.getLatDeg()),String.valueOf(gp2.getLatMin()),String.valueOf(gp2.getLatMinFrac()),String.valueOf(gp2.getLonDir()),String.valueOf(gp2.getLonDeg()),String.valueOf(gp2.getLonMin()),String.valueOf(gp2.getLonMinFrac()));
   checkTolerance(gp2,gp2a,5e-5);
   final Geopoint gp3=new Geopoint(51.3d,13.8d);
   checkDMM(gp3,'N',51,18,0,'E',13,48,0);
-  Geopoint gp3a=new Geopoint(String.valueOf(gp3.getLatDir()),String.valueOf(gp3.getLatDeg()),String.valueOf(gp3.getLatMin()),String.valueOf(gp3.getLatMinFrac()),String.valueOf(gp3.getLonDir()),String.valueOf(gp3.getLonDeg()),String.valueOf(gp3.getLonMin()),String.valueOf(gp3.getLonMinFrac()));
+  final Geopoint gp3a=new Geopoint(String.valueOf(gp3.getLatDir()),String.valueOf(gp3.getLatDeg()),String.valueOf(gp3.getLatMin()),String.valueOf(gp3.getLatMinFrac()),String.valueOf(gp3.getLonDir()),String.valueOf(gp3.getLonDeg()),String.valueOf(gp3.getLonMin()),String.valueOf(gp3.getLonMinFrac()));
   checkTolerance(gp3,gp3a,5e-5);
   final Geopoint gp4=new Geopoint(51.00012d,13.00089d);
   checkDMM(gp4,'N',51,0,7,'E',13,0,53);
-  Geopoint gp4a=new Geopoint(String.valueOf(gp4.getLatDir()),String.valueOf(gp4.getLatDeg()),String.valueOf(gp4.getLatMin()),String.valueOf(gp4.getLatMinFrac()),String.valueOf(gp4.getLonDir()),String.valueOf(gp4.getLonDeg()),String.valueOf(gp4.getLonMin()),String.valueOf(gp4.getLonMinFrac()));
+  final Geopoint gp4a=new Geopoint(String.valueOf(gp4.getLatDir()),String.valueOf(gp4.getLatDeg()),String.valueOf(gp4.getLatMin()),String.valueOf(gp4.getLatMinFrac()),String.valueOf(gp4.getLonDir()),String.valueOf(gp4.getLonDeg()),String.valueOf(gp4.getLonMin()),String.valueOf(gp4.getLonMinFrac()));
   checkTolerance(gp4,gp4a,5e-5);
 }
