@@ -1,0 +1,4 @@
+{
+  progress.show(this,null,res.getString(R.string.caches_clear_offlinelogs_progress),true,clearOfflineLogsHandler.obtainMessage(MSG_CANCEL));
+  new ClearOfflineLogsThread(clearOfflineLogsHandler).start();
+}
