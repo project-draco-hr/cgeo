@@ -1,0 +1,18 @@
+{
+  final String geoCode="OCEFBA";
+  final String description="<p><span>Bei dem Cache kannst du einen kleinen Schatz bergen. Bitte lege aber einen ander Schatz in das D??schen. Achtung vor Automuggels.</span></p>";
+  deleteCacheFromDB(geoCode);
+  Geocache cache=OCXMLClient.getCache(geoCode);
+  assertNotNull(cache);
+  try {
+    assertEquals(geoCode,cache.getGeocode());
+    assertEquals(description,cache.getDescription());
+    cache.store(null);
+    cache=OCXMLClient.getCache(geoCode);
+    assertNotNull(cache);
+    assertEquals(description,cache.getDescription());
+  }
+  finally {
+    deleteCacheFromDB(geoCode);
+  }
+}
