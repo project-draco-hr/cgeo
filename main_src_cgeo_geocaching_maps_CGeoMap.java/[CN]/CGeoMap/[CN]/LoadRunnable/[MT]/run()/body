@@ -23,12 +23,7 @@
     final boolean excludeMine=Settings.isExcludeMyCaches();
     final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
     if (mapMode == MapMode.LIVE) {
-      final List<Geocache> tempList=caches.getAsList();
-      for (      Geocache cache : tempList) {
-        if ((cache.isFound() && excludeMine) || (cache.isOwner() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
-          caches.remove(cache);
-        }
-      }
+      CGeoMap.filter(caches);
     }
     countVisibleCaches();
     if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
