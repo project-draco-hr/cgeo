@@ -4,7 +4,8 @@
       for (int level=1; level <= 5; level++) {
         try {
           if (waypoint_id != null) {
-            final Bitmap image=StaticMapsProvider.getWaypointMap(geocode,waypoint_id,level);
+            final Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+            final Bitmap image=StaticMapsProvider.getWaypointMap(geocode,cache.getWaypointById(waypoint_id),level);
             if (image != null) {
               maps.add(image);
             }

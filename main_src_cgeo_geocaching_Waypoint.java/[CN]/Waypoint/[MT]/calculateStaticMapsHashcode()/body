@@ -1,0 +1,8 @@
+{
+  long hash=0;
+  if (coords != null) {
+    hash=coords.hashCode();
+  }
+  hash=hash ^ waypointType.markerId;
+  return (int)hash;
+}
