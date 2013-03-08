@@ -218,14 +218,14 @@
   cacheDesc.getChild("shortdesc").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       final String content=body.trim();
-      descHolder.shortDesc=linkify(content);
+      descHolder.shortDesc=linkify(stripMarkup(content));
     }
   }
 );
   cacheDesc.getChild("desc").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       final String content=body.trim();
-      descHolder.desc=linkify(content);
+      descHolder.desc=linkify(stripMarkup(content));
     }
   }
 );

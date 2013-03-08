@@ -1,9 +1,20 @@
 {
-  if (StringUtils.startsWith(input,PARAGRAPH_BEGIN) && StringUtils.endsWith(input,PARAGRAPH_END)) {
-    String inner=input.substring(PARAGRAPH_BEGIN.length(),input.length() - PARAGRAPH_END.length());
-    if (!inner.contains(PARAGRAPH_BEGIN)) {
-      return inner.trim();
+  if (!StringUtils.startsWith(input,"<")) {
+    return input;
+  }
+  String result=input.trim();
+  for (  String tagName : MARKUP) {
+    final String startTag="<" + tagName + ">";
+    if (StringUtils.startsWith(result,startTag)) {
+      final String endTag="</" + tagName + ">";
+      if (StringUtils.endsWith(result,endTag)) {
+        String inner=result.substring(startTag.length(),result.length() - endTag.length()).trim();
+        String nested=stripMarkup(inner);
+        if (!nested.contains(startTag)) {
+          result=nested;
+        }
+      }
     }
   }
-  return input;
+  return result;
 }

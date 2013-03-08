@@ -69,6 +69,10 @@ case MENU_DELETE_EVENTS:
 deletePastEvents();
 invalidateOptionsMenuCompatible();
 return true;
+case MENU_CLEAR_OFFLINE_LOGS:
+clearOfflineLogs();
+invalidateOptionsMenuCompatible();
+return true;
 default :
 return CacheListAppFactory.onMenuItemSelected(item,cacheList,this,search);
 }

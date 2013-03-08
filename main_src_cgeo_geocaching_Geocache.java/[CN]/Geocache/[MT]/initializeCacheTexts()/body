@@ -1,5 +1,17 @@
 {
   if (description == null || shortdesc == null || hint == null || location == null) {
-    cgData.loadCacheTexts(this);
+    Geocache partial=cgData.loadCacheTexts(this.getGeocode());
+    if (description == null) {
+      setDescription(partial.getDescription());
+    }
+    if (shortdesc == null) {
+      setShortDescription(partial.getShortDescription());
+    }
+    if (hint == null) {
+      setHint(partial.getHint());
+    }
+    if (location == null) {
+      setLocation(partial.getLocation());
+    }
   }
 }
