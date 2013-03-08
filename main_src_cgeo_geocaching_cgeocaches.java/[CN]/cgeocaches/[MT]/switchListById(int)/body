@@ -11,6 +11,10 @@
   Settings.saveLastList(listId);
   showProgress(true);
   showFooterLoadingCaches();
-  (new MoveCachesToListThread(listId,new MoveHandler())).start();
+  final List<Geocache> caches=adapter.getCheckedCaches();
+  cgData.moveToList(caches,listId);
+  currentLoader=(AbstractSearchLoader)getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(),new Bundle(),this);
+  currentLoader.reset();
+  currentLoader.startLoading();
   invalidateOptionsMenuCompatible();
 }

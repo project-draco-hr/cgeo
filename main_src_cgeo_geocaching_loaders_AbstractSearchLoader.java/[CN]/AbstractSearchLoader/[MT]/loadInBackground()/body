@@ -1,0 +1,14 @@
+{
+  loading=true;
+  if (search == null) {
+    search=runSearch();
+  }
+ else {
+    SearchResult newSearch=new SearchResult(search);
+    newSearch.setUrl(search.getUrl());
+    newSearch.setViewstates(search.getViewstates());
+    search=GCParser.searchByNextPage(newSearch,Settings.isShowCaptcha(),this);
+  }
+  loading=false;
+  return search;
+}

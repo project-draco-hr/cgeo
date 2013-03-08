@@ -1,0 +1,108 @@
+{
+  AbstractSearchLoader loader=null;
+  CacheListLoaderType enumType=CacheListLoaderType.values()[type];
+  final String username=extras.getString(Intents.EXTRA_USERNAME);
+switch (enumType) {
+case OFFLINE:
+    listId=Settings.getLastList();
+  if (listId <= StoredList.TEMPORARY_LIST_ID) {
+    listId=StoredList.STANDARD_LIST_ID;
+    title=res.getString(R.string.stored_caches_button);
+  }
+ else {
+    final StoredList list=cgData.getList(listId);
+    listId=list.id;
+    title=list.title;
+  }
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+loader=new OfflineGeocacheListLoader(this.getBaseContext(),coords,listId);
+break;
+case HISTORY:
+title=res.getString(R.string.caches_history);
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+loader=new HistoryGeocacheListLoader(app,coords);
+break;
+case NEAREST:
+title=res.getString(R.string.caches_nearby);
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+loader=new CoordsGeocacheListLoader(app,coords);
+break;
+case COORDINATE:
+title=coords.toString();
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+loader=new CoordsGeocacheListLoader(app,coords);
+break;
+case KEYWORD:
+final String keyword=extras.getString(Intents.EXTRA_KEYWORD);
+title=keyword;
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+loader=new KeywordGeocacheListLoader(app,keyword);
+break;
+case ADDRESS:
+final String address=extras.getString(Intents.EXTRA_ADDRESS);
+if (StringUtils.isNotBlank(address)) {
+title=address;
+}
+ else {
+title=coords.toString();
+}
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+if (coords != null) {
+loader=new CoordsGeocacheListLoader(app,coords);
+}
+ else {
+loader=new AddressGeocacheListLoader(app,address);
+}
+break;
+case USERNAME:
+title=username;
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+loader=new UsernameGeocacheListLoader(app,username);
+break;
+case OWNER:
+title=username;
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+loader=new OwnerGeocacheListLoader(app,username);
+break;
+case MAP:
+title=res.getString(R.string.map_map);
+setTitle(title);
+showProgress(true);
+search=(SearchResult)extras.get(Intents.EXTRA_SEARCH);
+replaceCacheListFromSearch();
+loadCachesHandler.sendMessage(Message.obtain());
+break;
+case REMOVE_FROM_HISTORY:
+title=res.getString(R.string.caches_history);
+setTitle(title);
+showProgress(true);
+showFooterLoadingCaches();
+loader=new RemoveFromHistoryLoader(app,extras.getStringArray(EXTRA_CACHELIST),coords);
+break;
+default :
+title="caches";
+setTitle(title);
+Log.e("cgeocaches.onCreate: No action or unknown action specified");
+break;
+}
+if (loader != null) {
+loader.setRecaptchaHandler(new SearchHandler(this,res,loader));
+}
+return loader;
+}
