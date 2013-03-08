@@ -1,0 +1,5 @@
+{
+  int waypointId=waypoint.getId();
+  int waypointMapHash=waypoint.calculateStaticMapsHashcode();
+  return decodeFile(StaticMapsProvider.getMapFile(geocode,WAYPOINT_PREFIX + waypointId + "_"+ waypointMapHash+ "_"+ level,false));
+}
