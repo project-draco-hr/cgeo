@@ -13,6 +13,6 @@
   String wpLatlonMap=waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
   String wpMarkerUrl=getWpMarkerUrl(waypoint);
   if (!hasAllStaticMapsForWaypoint(geocode,waypoint)) {
-    downloadMaps(geocode,wpMarkerUrl,WAYPOINT_PREFIX + waypoint.getId() + '_'+ waypoint.calculateStaticMapsHashcode()+ "_",wpLatlonMap,edge,null,waitForResult);
+    downloadMaps(geocode,wpMarkerUrl,WAYPOINT_PREFIX + waypoint.getId() + '_'+ waypoint.getStaticMapsHashcode()+ "_",wpLatlonMap,edge,null,waitForResult);
   }
 }
