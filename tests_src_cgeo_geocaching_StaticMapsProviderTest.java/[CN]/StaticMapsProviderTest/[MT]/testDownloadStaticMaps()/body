@@ -2,8 +2,10 @@
   final double lat=52.354176d;
   final double lon=9.745685d;
   String geocode="GCTEST1";
+  boolean backupStore=Settings.isStoreOfflineMaps();
   boolean backupStoreWP=Settings.isStoreOfflineWpMaps();
   Settings.setStoreOfflineMaps(true);
+  Settings.setStoreOfflineWpMaps(true);
   try {
     Geopoint gp=new Geopoint(lat + 0.25d,lon + 0.25d);
     Geocache cache=new Geocache();
@@ -20,6 +22,10 @@
     trailhead.setCoords(trailheadGp);
     trailhead.setId(2);
     cache.addOrChangeWaypoint(trailhead,false);
+    deleteCacheDirectory(geocode);
+    assertFalse(StaticMapsProvider.hasStaticMap(cache));
+    assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode,theFinal));
+    assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode,trailhead));
     StaticMapsProvider.downloadMaps(cache);
     try {
       Thread.sleep(10000);
@@ -35,9 +41,7 @@
   }
   finally {
     Settings.setStoreOfflineWpMaps(backupStoreWP);
-    File cacheDir=LocalStorage.getStorageDir(geocode);
-    if (!cacheDir.delete()) {
-      cacheDir.deleteOnExit();
-    }
+    Settings.setStoreOfflineMaps(backupStore);
+    deleteCacheDirectory(geocode);
   }
 }
