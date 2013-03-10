@@ -1,9 +1,10 @@
 {
-  ArrayList<String> geocodes=new ArrayList<String>(adapter.getCheckedOrAllCaches().size());
-  for (  Geocache cache : adapter.getCheckedOrAllCaches()) {
-    geocodes.add(cache.getGeocode());
+  final List<Geocache> caches=adapter.getCheckedOrAllCaches();
+  final String geocodes[]=new String[caches.size()];
+  for (int i=0; i < geocodes.length; i++) {
+    geocodes[i]=caches.get(i).getGeocode();
   }
   Bundle b=new Bundle();
-  b.putStringArray(EXTRA_CACHELIST,geocodes.toArray(new String[geocodes.size()]));
+  b.putStringArray(Intents.EXTRA_CACHELIST,geocodes);
   getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.ordinal(),b,this);
 }

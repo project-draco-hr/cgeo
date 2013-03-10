@@ -11,8 +11,7 @@
   Settings.saveLastList(listId);
   showProgress(true);
   showFooterLoadingCaches();
-  final List<Geocache> caches=adapter.getCheckedCaches();
-  cgData.moveToList(caches,listId);
+  cgData.moveToList(adapter.getCheckedCaches(),listId);
   currentLoader=(AbstractSearchLoader)getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(),new Bundle(),this);
   currentLoader.reset();
   currentLoader.startLoading();

@@ -4,10 +4,7 @@
     search=runSearch();
   }
  else {
-    SearchResult newSearch=new SearchResult(search);
-    newSearch.setUrl(search.getUrl());
-    newSearch.setViewstates(search.getViewstates());
-    search=GCParser.searchByNextPage(newSearch,Settings.isShowCaptcha(),this);
+    search=GCParser.searchByNextPage(new SearchResult(search),Settings.isShowCaptcha(),this);
   }
   loading=false;
   return search;
