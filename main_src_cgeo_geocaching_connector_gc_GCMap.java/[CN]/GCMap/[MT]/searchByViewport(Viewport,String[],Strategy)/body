@@ -53,7 +53,7 @@
   if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
     final Geopoint center=viewport.getCenter();
     if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
-      SearchResult search=GCParser.searchByCoords(center,Settings.getCacheType(),false);
+      SearchResult search=GCParser.searchByCoords(center,Settings.getCacheType(),false,null);
       if (search != null && !search.isEmpty()) {
         final Set<String> geocodes=search.getGeocodes();
         if (Settings.isPremiumMember()) {

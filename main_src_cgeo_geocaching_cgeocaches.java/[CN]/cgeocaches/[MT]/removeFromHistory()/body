@@ -1,8 +1,10 @@
 {
-  detailTotal=adapter.getCheckedOrAllCount();
-  detailProgress=0;
-  showProgress(false);
-  progress.show(this,null,res.getString(R.string.caches_removing_from_history),ProgressDialog.STYLE_HORIZONTAL,removeFromHistoryHandler.obtainMessage(MSG_CANCEL));
-  progress.setMaxProgressAndReset(detailTotal);
-  new RemoveFromHistoryThread(removeFromHistoryHandler).start();
+  final List<Geocache> caches=adapter.getCheckedOrAllCaches();
+  final String geocodes[]=new String[caches.size()];
+  for (int i=0; i < geocodes.length; i++) {
+    geocodes[i]=caches.get(i).getGeocode();
+  }
+  Bundle b=new Bundle();
+  b.putStringArray(Intents.EXTRA_CACHELIST,geocodes);
+  getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.ordinal(),b,this);
 }

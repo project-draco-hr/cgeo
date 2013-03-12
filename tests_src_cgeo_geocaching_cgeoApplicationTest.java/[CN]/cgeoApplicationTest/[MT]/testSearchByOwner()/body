@@ -1,7 +1,7 @@
 {
   withMockedFilters(new Runnable(){
     @Override public void run(){
-      final SearchResult search=GCParser.searchByOwner("blafoo",CacheType.MYSTERY,false);
+      final SearchResult search=GCParser.searchByOwner("blafoo",CacheType.MYSTERY,false,null);
       assertNotNull(search);
       assertEquals(3,search.getGeocodes().size());
       assertTrue(search.getGeocodes().contains("GC36RT6"));

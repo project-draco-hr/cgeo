@@ -1,0 +1,13 @@
+{
+  if (searchIn != null) {
+    cacheList.clear();
+    final Set<Geocache> cachesFromSearchResult=searchIn.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    cacheList.addAll(cachesFromSearchResult);
+    search=searchIn;
+    adapter.reFilter();
+    updateTitle();
+    showFooterMoreCaches();
+  }
+  showProgress(false);
+  hideLoading();
+}
