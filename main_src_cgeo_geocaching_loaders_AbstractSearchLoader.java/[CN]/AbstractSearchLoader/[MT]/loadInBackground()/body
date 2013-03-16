@@ -1,11 +1,19 @@
 {
   loading=true;
-  if (search == null) {
-    search=runSearch();
-  }
+  try {
+    if (search == null) {
+      search=runSearch();
+    }
  else {
-    search=GCParser.searchByNextPage(new SearchResult(search),Settings.isShowCaptcha(),this);
+      search=GCParser.searchByNextPage(new SearchResult(search),Settings.isShowCaptcha(),this);
+    }
+  }
+ catch (  Exception e) {
+    Log.e("Error in Loader ",e);
   }
   loading=false;
+  if (search == null) {
+    search=new SearchResult();
+  }
   return search;
 }
