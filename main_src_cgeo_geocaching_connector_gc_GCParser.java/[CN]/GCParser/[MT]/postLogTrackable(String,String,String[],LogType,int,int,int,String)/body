@@ -8,7 +8,7 @@
     return StatusCode.NO_LOG_TEXT;
   }
   Log.i("Trying to post log for trackable #" + trackingCode + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ log);
-  final String logInfo=HtmlUtils.convertNonLatinCharactersToHTML(log).replace("\n","\r\n");
+  final String logInfo=log.replace("\n","\r\n");
   final Calendar currentDate=Calendar.getInstance();
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","__LASTFOCUS","","ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType.id),"ctl00$ContentBody$LogBookPanel1$tbCode",trackingCode);
   Login.putViewstates(params,viewstates);
