@@ -44,8 +44,15 @@ case MENU_FILTER:
 showFilterMenu(null);
 return true;
 case MENU_SORT:
-new ComparatorUserInterface(this).selectComparator(adapter.getCacheComparator(),new RunnableWithArgument<CacheComparator>(){
+final CacheComparator oldComparator=adapter.getCacheComparator();
+new ComparatorUserInterface(this).selectComparator(oldComparator,new RunnableWithArgument<CacheComparator>(){
 @Override public void run(CacheComparator selectedComparator){
+if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
+adapter.toggleInverseSort();
+}
+ else {
+adapter.resetInverseSort();
+}
 setComparator(selectedComparator);
 }
 }
