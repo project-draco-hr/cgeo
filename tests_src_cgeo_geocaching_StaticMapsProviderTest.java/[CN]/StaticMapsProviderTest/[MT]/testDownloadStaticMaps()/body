@@ -26,6 +26,8 @@
     assertFalse(StaticMapsProvider.hasStaticMap(cache));
     assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode,theFinal));
     assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode,trailhead));
+    StaticMapsProvider.DownloadState state=StaticMapsProvider.storeCachePreviewMap(cache);
+    assertEquals(StaticMapsProvider.DownloadState.OK,state);
     StaticMapsProvider.downloadMaps(cache);
     try {
       Thread.sleep(10000);

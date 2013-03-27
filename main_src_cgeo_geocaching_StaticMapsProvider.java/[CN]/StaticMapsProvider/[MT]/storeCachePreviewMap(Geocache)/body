@@ -1,7 +1,7 @@
 {
   if (cache == null) {
     Log.e("storeCachePreviewMap - missing input parameter cache");
-    return;
+    return DownloadState.FAILED;
   }
   final String latlonMap=cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
   final Display display=((WindowManager)cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -10,5 +10,6 @@
   final int width=metrics.widthPixels;
   final int height=(int)(110 * metrics.density);
   final String markerUrl=MARKERS_URL + "my_location_mdpi.png";
-  downloadMap(cache.getGeocode(),15,ROADMAP,markerUrl,PREFIX_PREVIEW,"shadow:false|",latlonMap,width,height,null);
+  DownloadState state=downloadMap(cache.getGeocode(),15,ROADMAP,markerUrl,PREFIX_PREVIEW,"shadow:false|",latlonMap,width,height,null);
+  return state;
 }
