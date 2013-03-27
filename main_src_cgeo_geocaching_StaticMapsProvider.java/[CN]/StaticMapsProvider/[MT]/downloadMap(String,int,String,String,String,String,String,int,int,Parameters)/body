@@ -6,20 +6,20 @@
   final HttpResponse httpResponse=Network.getRequest(GOOGLE_STATICMAP_URL,params);
   if (httpResponse == null) {
     Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
-    return DownloadState.REQUEST_FAILED;
+    return;
   }
   if (httpResponse.getStatusLine().getStatusCode() != 200) {
     Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + httpResponse.getStatusLine().getStatusCode());
-    return DownloadState.STATUS_CODE_NOK;
+    return;
   }
   final File file=getMapFile(geocode,prefix,true);
   if (LocalStorage.saveEntityToFile(httpResponse,file)) {
     final long fileSize=file.length();
     if (fileSize < MIN_MAP_IMAGE_BYTES) {
       file.delete();
-      return DownloadState.FILE_TOO_SMALL;
+      return;
     }
-    return DownloadState.OK;
+    return;
   }
-  return DownloadState.NOT_SAVED;
+  return;
 }
