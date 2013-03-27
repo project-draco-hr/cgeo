@@ -17,18 +17,18 @@
       coords=new Geopoint(0.0,0.0);
     }
   }
+  setTitle(title);
+  setAdapter();
+  prepareFilterBar();
   currentLoader=(AbstractSearchLoader)getSupportLoaderManager().initLoader(type.ordinal(),extras,this);
   if (CollectionUtils.isNotEmpty(cacheList)) {
-    if (currentLoader.isStarted()) {
+    if (currentLoader != null && currentLoader.isStarted()) {
       showFooterLoadingCaches();
     }
  else {
       showFooterMoreCaches();
     }
   }
-  setTitle(title);
-  setAdapter();
-  prepareFilterBar();
   if (isInvokedFromAttachment()) {
     importGpxAttachement();
   }
