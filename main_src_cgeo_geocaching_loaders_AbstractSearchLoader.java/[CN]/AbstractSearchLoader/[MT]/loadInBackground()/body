@@ -5,7 +5,7 @@
       search=runSearch();
     }
  else {
-      search=GCParser.searchByNextPage(new SearchResult(search),Settings.isShowCaptcha(),this);
+      search=new SearchResult(search);
     }
   }
  catch (  Exception e) {
