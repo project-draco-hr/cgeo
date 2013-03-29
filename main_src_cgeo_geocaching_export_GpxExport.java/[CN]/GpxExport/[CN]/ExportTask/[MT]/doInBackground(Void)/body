@@ -19,40 +19,21 @@
     gpx.attribute("","version","1.0");
     gpx.attribute("","creator","c:geo - http://www.cgeo.org/");
     gpx.attribute(PREFIX_XSI,"schemaLocation",PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " + PREFIX_GROUNDSPEAK+ " http://www.groundspeak.com/cache/1/0/1/cache.xsd");
-    for (int i=0; i < caches.size(); i++) {
-      final Geocache cache=cgData.loadCache(caches.get(i).getGeocode(),LoadFlags.LOAD_ALL_DB_ONLY);
-      gpx.startTag(PREFIX_GPX,"wpt");
-      gpx.attribute("","lat",Double.toString(cache.getCoords().getLatitude()));
-      gpx.attribute("","lon",Double.toString(cache.getCoords().getLongitude()));
-      final Date hiddenDate=cache.getHiddenDate();
-      if (hiddenDate != null) {
-        XmlUtils.simpleText(gpx,PREFIX_GPX,"time",dateFormatZ.format(hiddenDate));
+    while (!allGeocodes.isEmpty()) {
+      int cachesInBatch=0;
+      HashSet<String> geocodesOfBatch=new HashSet<String>(CACHES_PER_BATCH);
+      for (Iterator<String> iterator=allGeocodes.iterator(); iterator.hasNext() && cachesInBatch < CACHES_PER_BATCH; ) {
+        final String geocode=iterator.next();
+        geocodesOfBatch.add(geocode);
+        cachesInBatch++;
       }
-      XmlUtils.multipleTexts(gpx,PREFIX_GPX,"name",cache.getGeocode(),"desc",cache.getName(),"url",cache.getUrl(),"urlname",cache.getName(),"sym",cache.isFound() ? "Geocache Found" : "Geocache","type","Geocache|" + cache.getType().pattern);
-      gpx.startTag(PREFIX_GROUNDSPEAK,"cache");
-      gpx.attribute("","id",cache.getCacheId());
-      gpx.attribute("","available",!cache.isDisabled() ? "True" : "False");
-      gpx.attribute("","archives",cache.isArchived() ? "True" : "False");
-      XmlUtils.multipleTexts(gpx,PREFIX_GROUNDSPEAK,"name",cache.getName(),"placed_by",cache.getOwnerDisplayName(),"owner",cache.getOwnerUserId(),"type",cache.getType().pattern,"container",cache.getSize().id,"difficulty",Float.toString(cache.getDifficulty()),"terrain",Float.toString(cache.getTerrain()),"country",cache.getLocation(),"state","","encoded_hints",cache.getHint());
-      writeAttributes(gpx,cache);
-      gpx.startTag(PREFIX_GROUNDSPEAK,"short_description");
-      gpx.attribute("","html",BaseUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
-      gpx.text(cache.getShortDescription());
-      gpx.endTag(PREFIX_GROUNDSPEAK,"short_description");
-      gpx.startTag(PREFIX_GROUNDSPEAK,"long_description");
-      gpx.attribute("","html",BaseUtils.containsHtml(cache.getDescription()) ? "True" : "False");
-      gpx.text(cache.getDescription());
-      gpx.endTag(PREFIX_GROUNDSPEAK,"long_description");
-      writeLogs(gpx,cache);
-      gpx.endTag(PREFIX_GROUNDSPEAK,"cache");
-      gpx.endTag(PREFIX_GPX,"wpt");
-      writeWaypoints(gpx,cache);
-      publishProgress(i + 1);
+      allGeocodes.removeAll(geocodesOfBatch);
+      exportBatch(gpx,geocodesOfBatch);
     }
     gpx.endTag(PREFIX_GPX,"gpx");
     gpx.endDocument();
   }
- catch (  final IOException e) {
+ catch (  final Exception e) {
     Log.e("GpxExport.ExportTask export",e);
     if (writer != null) {
       try {

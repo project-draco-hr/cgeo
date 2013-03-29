@@ -1,5 +1,7 @@
 {
   super(activity,caches.size(),getProgressTitle(),cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,caches.size(),caches.size()));
-  this.caches=caches;
+  for (  Geocache geocache : caches) {
+    allGeocodes.add(geocache.getGeocode());
+  }
   this.activity=activity;
 }
