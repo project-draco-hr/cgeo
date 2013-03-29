@@ -1,6 +1,6 @@
 {
+  super.onPostExecute(result);
   if (null != activity) {
-    progress.dismiss();
     if (result) {
       ActivityMixin.showToast(activity,getName() + ' ' + getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
       if (upload) {

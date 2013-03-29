@@ -1,6 +1,6 @@
 {
+  super.onPostExecute(exportFile);
   if (null != activity) {
-    progress.dismiss();
     if (exportFile != null) {
       ActivityMixin.showToast(activity,getName() + ' ' + getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
       if (Settings.getShareAfterExport()) {
