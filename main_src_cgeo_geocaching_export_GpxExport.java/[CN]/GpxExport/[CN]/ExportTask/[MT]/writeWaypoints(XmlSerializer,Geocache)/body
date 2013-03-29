@@ -14,10 +14,10 @@
   for (  Waypoint wp : originWaypoints) {
     String prefix=wp.getPrefix();
     try {
-      maxPrefix=Math.max(Integer.parseInt(prefix),maxPrefix);
+      final int numericPrefix=Integer.parseInt(prefix);
+      maxPrefix=Math.max(numericPrefix,maxPrefix);
     }
  catch (    NumberFormatException ex) {
-      Log.e("Unexpected origin waypoint prefix='" + prefix + "'",ex);
     }
     writeCacheWaypoint(gpx,wp,prefix);
   }
