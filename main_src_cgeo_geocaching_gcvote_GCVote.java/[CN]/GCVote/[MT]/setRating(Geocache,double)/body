@@ -1,4 +1,7 @@
 {
+  if (!Settings.isGCvoteLogin()) {
+    return false;
+  }
   if (!cache.supportsGCVote()) {
     return false;
   }
