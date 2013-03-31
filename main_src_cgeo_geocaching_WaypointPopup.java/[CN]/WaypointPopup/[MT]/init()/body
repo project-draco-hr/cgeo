@@ -13,6 +13,7 @@
     details.add(R.string.cache_geocode,waypoint.getPrefix() + waypoint.getGeocode().substring(2));
     details.addDistance(waypoint,waypointDistance);
     waypointDistance=details.getValueView();
+    details.add(R.string.waypoint_note,waypoint.getNote());
     final Button buttonEdit=(Button)findViewById(R.id.edit);
     buttonEdit.setOnClickListener(new OnClickListener(){
       @Override public void onClick(      View arg0){
