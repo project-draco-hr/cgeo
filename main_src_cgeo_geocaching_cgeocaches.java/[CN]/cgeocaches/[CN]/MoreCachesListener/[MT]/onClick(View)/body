@@ -2,5 +2,5 @@
   showProgress(true);
   showFooterLoadingCaches();
   listFooter.setOnClickListener(null);
-  currentLoader.startLoading();
+  getSupportLoaderManager().restartLoader(CacheListLoaderType.NEXT_PAGE.ordinal(),null,cgeocaches.this);
 }
