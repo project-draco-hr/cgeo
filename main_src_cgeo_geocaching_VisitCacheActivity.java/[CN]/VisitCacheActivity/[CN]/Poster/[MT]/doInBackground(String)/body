@@ -1,4 +1,5 @@
 {
+  final String log=args[0];
   try {
     final ImmutablePair<StatusCode,String> postResult=GCParser.postLog(geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
     if (postResult.left == StatusCode.NO_ERROR) {
