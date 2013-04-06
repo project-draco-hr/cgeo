@@ -1,7 +1,7 @@
 {
-  final IFilter[] filters=factory.getFilters();
-  if (filters.length == 1) {
-    runAfterwards.run(filters[0]);
+  final List<IFilter> filters=Collections.unmodifiableList(factory.getFilters());
+  if (filters.size() == 1) {
+    runAfterwards.run(filters.get(0));
     return;
   }
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
@@ -9,7 +9,7 @@
   final ArrayAdapter<IFilter> adapter=new ArrayAdapter<IFilter>(activity,android.R.layout.select_dialog_item,filters);
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int item){
-      runAfterwards.run(filters[item]);
+      runAfterwards.run(filters.get(item));
     }
   }
 );

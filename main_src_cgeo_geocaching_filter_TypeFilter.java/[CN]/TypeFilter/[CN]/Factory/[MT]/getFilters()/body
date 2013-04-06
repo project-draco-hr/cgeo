@@ -1,10 +1,10 @@
 {
   final CacheType[] types=CacheType.values();
-  final ArrayList<IFilter> filters=new ArrayList<IFilter>(types.length);
+  final List<IFilter> filters=new LinkedList<IFilter>();
   for (  CacheType cacheType : types) {
     if (cacheType != CacheType.ALL) {
       filters.add(new TypeFilter(cacheType));
     }
   }
-  return filters.toArray(new IFilter[filters.size()]);
+  return filters;
 }

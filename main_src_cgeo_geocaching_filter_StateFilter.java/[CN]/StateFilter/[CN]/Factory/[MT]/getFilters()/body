@@ -1,5 +1,5 @@
 {
-  final ArrayList<StateFilter> filters=new ArrayList<StateFilter>();
+  final List<StateFilter> filters=new ArrayList<StateFilter>(6);
   filters.add(new StateFoundFilter());
   filters.add(new StateArchivedFilter());
   filters.add(new StateDisabledFilter());
@@ -12,5 +12,5 @@
     }
   }
 );
-  return filters.toArray(new StateFilter[filters.size()]);
+  return filters;
 }
