@@ -33,7 +33,7 @@
     holder.text.setText(Html.fromHtml(logText,imageCounter,unknownTagsHandler));
     if (imageCounter.getImageCount() > 0) {
       LogImageLoader loader=new LogImageLoader(holder);
-      loader.execute(new String[]{logText});
+      loader.execute(logText);
     }
   }
  else {
