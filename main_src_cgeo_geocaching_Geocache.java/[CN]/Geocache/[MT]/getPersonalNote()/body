@@ -1,6 +1,3 @@
 {
-  if (StringUtils.isBlank(personalNote)) {
-    return null;
-  }
-  return personalNote;
+  return StringUtils.defaultIfBlank(personalNote,null);
 }
