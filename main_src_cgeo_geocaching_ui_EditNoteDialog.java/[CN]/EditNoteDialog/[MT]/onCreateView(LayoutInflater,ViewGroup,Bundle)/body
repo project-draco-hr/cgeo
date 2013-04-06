@@ -1,0 +1,13 @@
+{
+  View view=inflater.inflate(R.layout.fragment_edit_note,container);
+  mEditText=(EditText)view.findViewById(R.id.note);
+  if (initialNote != null) {
+    mEditText.setText(initialNote);
+    initialNote=null;
+  }
+  getDialog().setTitle(string.cache_personal_note);
+  mEditText.requestFocus();
+  getDialog().getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+  mEditText.setOnEditorActionListener(this);
+  return view;
+}

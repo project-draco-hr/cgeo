@@ -1,12 +1,13 @@
 {
-  EditorDialog editor=new EditorDialog(CacheDetailActivity.this,personalNoteView.getText());
-  editor.setOnEditorUpdate(new EditorDialog.EditorUpdate(){
-    @Override public void update(    CharSequence editorText){
-      cache.setPersonalNote(editorText.toString());
+  editNoteDialogListener=new EditNoteDialogListener(){
+    @Override public void onFinishEditNoteDialog(    final String note){
+      cache.setPersonalNote(note);
       setPersonalNote(personalNoteView);
       cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
     }
   }
-);
-  editor.show();
+;
+  final FragmentManager fm=getSupportFragmentManager();
+  final EditNoteDialog dialog=new EditNoteDialog(cache.getPersonalNote());
+  dialog.show(fm,"fragment_edit_note");
 }
