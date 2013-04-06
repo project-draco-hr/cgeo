@@ -1,6 +1,6 @@
 {
   super.onConfigurationChanged(newConfig);
-  if (currentLoader.isLoading()) {
+  if (currentLoader != null && currentLoader.isLoading()) {
     showFooterLoadingCaches();
   }
 }
