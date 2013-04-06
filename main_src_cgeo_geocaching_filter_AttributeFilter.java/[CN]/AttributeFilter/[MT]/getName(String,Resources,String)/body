@@ -1,10 +1,4 @@
 {
   final int id=res.getIdentifier(attribute,"string",packageName);
-  if (id > 0) {
-    final String translated=res.getString(id);
-    if (StringUtils.isNotBlank(translated)) {
-      return translated;
-    }
-  }
-  return attribute;
+  return id > 0 ? res.getString(id) : attribute;
 }
