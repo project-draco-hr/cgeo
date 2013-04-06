@@ -13,11 +13,11 @@
   for (int i=nspCounts[depth - 1]; i < nspCounts[depth]; i++) {
     writer.write(' ');
     writer.write("xmlns");
-    if (!nspStack[i * 2].isEmpty()) {
+    if (!StringUtils.isEmpty(nspStack[i * 2])) {
       writer.write(':');
       writer.write(nspStack[i * 2]);
     }
- else     if (getNamespace().isEmpty() && !nspStack[i * 2 + 1].isEmpty()) {
+ else     if (StringUtils.isEmpty(getNamespace()) && !StringUtils.isEmpty(nspStack[i * 2 + 1])) {
       throw new IllegalStateException("Cannot set default namespace for elements in no namespace");
     }
     writer.write("=\"");

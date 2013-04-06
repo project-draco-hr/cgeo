@@ -13,9 +13,9 @@
     elementStack=hlp;
   }
   String prefix=namespace == null ? "" : getPrefix(namespace,true,true);
-  if (namespace != null && namespace.isEmpty()) {
+  if (namespace != null && StringUtils.isEmpty(namespace)) {
     for (int i=nspCounts[depth]; i < nspCounts[depth + 1]; i++) {
-      if (nspStack[i * 2].isEmpty() && !nspStack[i * 2 + 1].isEmpty()) {
+      if (StringUtils.isEmpty(nspStack[i * 2]) && !StringUtils.isEmpty(nspStack[i * 2 + 1])) {
         throw new IllegalStateException("Cannot set default namespace for elements in no namespace");
       }
     }
@@ -24,7 +24,7 @@
   elementStack[esp++]=prefix;
   elementStack[esp]=name;
   writer.write('<');
-  if (!prefix.isEmpty()) {
+  if (!StringUtils.isEmpty(prefix)) {
     writer.write(prefix);
     writer.write(':');
   }

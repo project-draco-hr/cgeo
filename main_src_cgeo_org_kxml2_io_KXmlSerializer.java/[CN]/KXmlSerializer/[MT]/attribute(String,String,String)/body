@@ -5,9 +5,9 @@
   if (namespace == null) {
     namespace="";
   }
-  String prefix=namespace.isEmpty() ? "" : getPrefix(namespace,false,true);
+  String prefix=StringUtils.isEmpty(namespace) ? "" : getPrefix(namespace,false,true);
   writer.write(' ');
-  if (!prefix.isEmpty()) {
+  if (!StringUtils.isEmpty(prefix)) {
     writer.write(prefix);
     writer.write(':');
   }
