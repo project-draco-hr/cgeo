@@ -10,7 +10,7 @@
   try {
     final File exportLocation=new File(Settings.getGpxExportDir());
     exportLocation.mkdirs();
-    final XmlSerializer gpx=Xml.newSerializer();
+    final XmlSerializer gpx=new KXmlSerializer();
     writer=new FileWriter(exportFile);
     gpx.setOutput(writer);
     gpx.startDocument("UTF-8",true);

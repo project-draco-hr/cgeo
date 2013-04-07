@@ -1,0 +1,26 @@
+{
+  final Geocache cache=new Geocache();
+  cache.setGeocode("GCX1234");
+  cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
+  final LogEntry log=new LogEntry(1353244820000L,LogType.FOUND_IT,"Smile: \ud83d\ude0a");
+  cache.getLogs().add(log);
+  cgData.saveCache(cache,LoadFlags.SAVE_ALL);
+  ArrayList<Geocache> exportList=new ArrayList<Geocache>();
+  exportList.add(cache);
+  GpxExportTester gpxExport=new GpxExportTester();
+  File result=null;
+  try {
+    result=gpxExport.testExportSync(exportList);
+  }
+ catch (  InterruptedException e) {
+    fail(e.getCause().toString());
+  }
+catch (  ExecutionException e) {
+    fail(e.getCause().toString());
+  }
+ finally {
+    cgData.removeCache(cache.getGeocode(),LoadFlags.REMOVE_ALL);
+  }
+  assertNotNull(result);
+  result.delete();
+}
