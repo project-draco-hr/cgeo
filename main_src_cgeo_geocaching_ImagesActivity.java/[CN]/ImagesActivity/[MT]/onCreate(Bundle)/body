@@ -3,8 +3,8 @@
   final Bundle extras=getIntent().getExtras();
   String geocode=null;
   if (extras != null) {
-    geocode=extras.getString(EXTRAS_GEOCODE);
-    imgType=(ImageType)extras.getSerializable(EXTRAS_TYPE);
+    geocode=extras.getString(Intents.EXTRA_GEOCODE);
+    imgType=(ImageType)extras.getSerializable(Intents.EXTRA_TYPE);
   }
   if (extras == null || geocode == null) {
     showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
@@ -15,7 +15,7 @@
   setContentView(R.layout.spoilers);
   setTitle(res.getString(imgType.getTitle()));
   imagesList=new ImagesList(this,geocode);
-  imageNames=extras.getParcelableArrayList(EXTRAS_IMAGES);
+  imageNames=extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
   if (CollectionUtils.isEmpty(imageNames)) {
     showToast(res.getString(R.string.warn_load_images));
     finish();
