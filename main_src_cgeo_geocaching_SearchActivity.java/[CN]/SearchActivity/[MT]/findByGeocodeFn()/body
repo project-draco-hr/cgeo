@@ -4,5 +4,5 @@
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_gccode));
     return;
   }
-  CacheDetailActivity.startActivity(this,geocodeText);
+  CacheDetailActivity.startActivity(this,StringUtils.trim(geocodeText));
 }
