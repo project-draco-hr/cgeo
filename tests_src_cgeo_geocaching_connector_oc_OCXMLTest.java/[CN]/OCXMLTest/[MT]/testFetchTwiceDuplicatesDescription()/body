@@ -6,11 +6,11 @@
   assertNotNull(cache);
   try {
     assertEquals(geoCode,cache.getGeocode());
-    assertEquals(description,cache.getDescription());
+    assertEquals(description,removeCopyrightAndTags(cache.getDescription()));
     cache.store(null);
     cache=OCXMLClient.getCache(geoCode);
     assertNotNull(cache);
-    assertEquals(description,cache.getDescription());
+    assertEquals(description,removeCopyrightAndTags(cache.getDescription()));
   }
   finally {
     deleteCacheFromDB(geoCode);
