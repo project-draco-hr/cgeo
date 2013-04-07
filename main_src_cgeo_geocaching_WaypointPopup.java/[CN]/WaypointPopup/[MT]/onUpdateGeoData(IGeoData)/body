@@ -1,0 +1,6 @@
+{
+  if (geo.getCoords() != null && waypoint != null && waypoint.getCoords() != null) {
+    waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(waypoint.getCoords())));
+    waypointDistance.bringToFront();
+  }
+}
