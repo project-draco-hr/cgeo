@@ -1,5 +1,4 @@
 {
-  progress.show(this,null,res.getString(R.string.caches_drop_progress),true,dropDetailsHandler.obtainMessage(MSG_CANCEL));
   final List<Geocache> deletion=new ArrayList<Geocache>();
   for (  Geocache cache : adapter.getCheckedOrAllCaches()) {
     if (cache.isEventCache()) {
@@ -9,5 +8,5 @@
       }
     }
   }
-  new DropDetailsThread(dropDetailsHandler,deletion).start();
+  new DropDetailsTask(false).execute(deletion.toArray(new Geocache[deletion.size()]));
 }
