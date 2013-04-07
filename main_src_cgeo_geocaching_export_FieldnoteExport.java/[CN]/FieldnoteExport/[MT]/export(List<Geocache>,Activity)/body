@@ -1,6 +1,7 @@
 {
+  final Geocache[] caches=cachesList.toArray(new Geocache[cachesList.size()]);
   if (null == activity) {
-    new ExportTask(caches,null,false,false).execute((Void)null);
+    new ExportTask(null,false,false).execute(caches);
   }
  else {
     getExportOptionsDialog(caches,activity).show();

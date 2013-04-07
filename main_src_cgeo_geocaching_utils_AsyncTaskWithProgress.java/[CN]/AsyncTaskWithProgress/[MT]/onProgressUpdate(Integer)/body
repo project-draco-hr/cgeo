@@ -1,5 +1,7 @@
 {
-  if (null != activity) {
-    progress.setProgress(status[0]);
+  final int progressValue=status[0];
+  if (null != activity && progressValue >= 0) {
+    progress.setProgress(progressValue);
   }
+  onProgressUpdateInternal(progressValue);
 }

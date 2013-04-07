@@ -1,11 +1,11 @@
 {
   if (null != activity) {
-    if (maxProgress <= 0) {
+    if (indeterminate) {
       progress.show(activity,progressTitle,progressMessage,true,null);
     }
  else {
       progress.show(activity,progressTitle,progressMessage,ProgressDialog.STYLE_HORIZONTAL,null);
     }
-    progress.setMaxProgressAndReset(maxProgress);
   }
+  onPreExecuteInternal();
 }
