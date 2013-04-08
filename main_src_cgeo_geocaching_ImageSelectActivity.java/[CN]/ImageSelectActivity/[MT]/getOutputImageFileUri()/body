@@ -1,3 +1,7 @@
 {
-  return Uri.fromFile(getOutputImageFile());
+  final File file=getOutputImageFile();
+  if (file == null) {
+    return null;
+  }
+  return Uri.fromFile(file);
 }

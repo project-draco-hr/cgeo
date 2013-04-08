@@ -1,6 +1,10 @@
 {
   Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
   imageUri=getOutputImageFileUri();
+  if (imageUri == null) {
+    showFailure();
+    return;
+  }
   intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
   startActivityForResult(intent,SELECT_NEW_IMAGE);
 }
