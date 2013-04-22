@@ -1,0 +1,11 @@
+{
+  if (shortDescView != null) {
+    final String shortDescription=cache.getShortDescription();
+    if (StringUtils.isNotBlank(shortDescription)) {
+      int index=descriptionString.indexOf(shortDescription);
+      if (index >= 0 && index < 200) {
+        shortDescView.setVisibility(View.GONE);
+      }
+    }
+  }
+}
