@@ -3,7 +3,7 @@
   if (StringUtils.isNotBlank(cache.getGeocode())) {
     infos.add(cache.getGeocode());
   }
-  infos.add(Formatter.formatCacheInfoShort(cache));
+  addShortInfos(cache,infos);
   if (cache.isPremiumMembersOnly()) {
     infos.add(cgeoapplication.getInstance().getString(R.string.cache_premium));
   }
