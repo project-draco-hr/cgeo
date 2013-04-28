@@ -26,10 +26,10 @@
 );
   findByOffline.setOnLongClickListener(new View.OnLongClickListener(){
     @Override public boolean onLongClick(    View v){
-      new StoredList.UserInterface(cgeo.this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
+      new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
         @Override public void run(        Integer selectedListId){
           Settings.saveLastList(selectedListId);
-          cgeocaches.startActivityOffline(cgeo.this);
+          cgeocaches.startActivityOffline(MainActivity.this);
         }
       }
 );

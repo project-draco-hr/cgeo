@@ -4,7 +4,7 @@
   }
   addressObtaining=true;
   try {
-    final Geocoder geocoder=new Geocoder(cgeo.this,Locale.getDefault());
+    final Geocoder geocoder=new Geocoder(MainActivity.this,Locale.getDefault());
     final Geopoint coords=app.currentGeo().getCoords();
     addresses=geocoder.getFromLocation(coords.getLatitude(),coords.getLongitude(),1);
   }
