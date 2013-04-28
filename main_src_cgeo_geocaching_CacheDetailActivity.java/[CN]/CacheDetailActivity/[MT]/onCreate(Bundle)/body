@@ -1,8 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.cacheview);
-  setTitle(res.getString(R.string.cache));
+  super.onCreate(savedInstanceState,R.layout.cacheview);
   String geocode=null;
   if (search != null) {
     cache=search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);

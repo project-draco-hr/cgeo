@@ -1,8 +1,8 @@
 {
-  final String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
-  final String distanceText=((EditText)findViewById(R.id.distance)).getText().toString() + distanceUnit;
-  final String latText=((Button)findViewById(R.id.buttonLatitude)).getText().toString();
-  final String lonText=((Button)findViewById(R.id.buttonLongitude)).getText().toString();
+  final String bearingText=bearing.getText().toString();
+  final String distanceText=distanceView.getText().toString() + distanceUnit;
+  final String latText=buttonLat.getText().toString();
+  final String lonText=buttonLon.getText().toString();
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     helpDialog(res.getString(R.string.err_point_no_position_given_title),res.getString(R.string.err_point_no_position_given));
     return;
@@ -44,9 +44,9 @@
     }
     coords=coords.project(bearing,distance);
   }
-  final String givenName=((EditText)findViewById(R.id.name)).getText().toString().trim();
+  final String givenName=waypointName.getText().toString().trim();
   final String name=StringUtils.isNotEmpty(givenName) ? givenName : res.getString(R.string.waypoint) + " " + (wpCount + 1);
-  final String note=((EditText)findViewById(R.id.note)).getText().toString().trim();
+  final String noteText=note.getText().toString().trim();
   final Geopoint coordsToSave=coords;
   final ProgressDialog progress=ProgressDialog.show(EditWaypointActivity.this,getString(R.string.cache),getString(R.string.waypoint_being_saved),true);
   final Handler finishHandler=new Handler(){
@@ -92,7 +92,7 @@ waypoint.setGeocode(geocode);
 waypoint.setPrefix(prefix);
 waypoint.setLookup(lookup);
 waypoint.setCoords(coordsToSave);
-waypoint.setNote(note);
+waypoint.setNote(noteText);
 waypoint.setVisited(visited);
 waypoint.setId(id);
 Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
@@ -109,8 +109,6 @@ if (Settings.isStoreOfflineWpMaps()) {
 StaticMapsProvider.storeWaypointStaticMap(cache,waypoint,false);
 }
 }
-final RadioButton modifyLocal=(RadioButton)findViewById(R.id.modify_cache_coordinates_local);
-final RadioButton modifyBoth=(RadioButton)findViewById(R.id.modify_cache_coordinates_local_and_remote);
 if (modifyLocal.isChecked() || modifyBoth.isChecked()) {
 if (!cache.hasUserModifiedCoords()) {
 final Waypoint origWaypoint=new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);

@@ -1,8 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.trackable_activity);
-  setTitle(res.getString(R.string.trackable));
+  super.onCreate(savedInstanceState,R.layout.trackable_activity);
   Bundle extras=getIntent().getExtras();
   Uri uri=getIntent().getData();
   if (extras != null) {
