@@ -1,8 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.navigate);
-  setTitle(res.getString(R.string.compass_title));
+  super.onCreate(savedInstanceState,R.layout.navigate);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     title=extras.getString(EXTRAS_GEOCODE);

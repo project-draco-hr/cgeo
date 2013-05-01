@@ -1,8 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.edit_waypoint_activity);
-  setTitle("waypoint");
+  super.onCreate(savedInstanceState,R.layout.edit_waypoint_activity);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
@@ -20,21 +17,16 @@
  else {
     setTitle(res.getString(R.string.waypoint_edit_title));
   }
-  Button buttonLat=(Button)findViewById(R.id.buttonLatitude);
   buttonLat.setOnClickListener(new CoordDialogListener());
-  Button buttonLon=(Button)findViewById(R.id.buttonLongitude);
   buttonLon.setOnClickListener(new CoordDialogListener());
-  Button addWaypoint=(Button)findViewById(R.id.add_waypoint);
   addWaypoint.setOnClickListener(new CoordsListener());
   List<String> wayPointNames=new ArrayList<String>();
   for (  WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
     wayPointNames.add(wpt.getL10n());
   }
-  AutoCompleteTextView textView=(AutoCompleteTextView)findViewById(R.id.name);
   ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,wayPointNames);
-  textView.setAdapter(adapter);
+  waypointName.setAdapter(adapter);
   if (id > 0) {
-    Spinner waypointTypeSelector=(Spinner)findViewById(R.id.type);
     waypointTypeSelector.setVisibility(View.GONE);
     waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
     waitDialog.setCancelable(true);
@@ -48,7 +40,6 @@
     IConnector con=ConnectorFactory.getConnector(geocode);
     setCoordsModificationVisibility(con,cache);
   }
-  CheckBox visitedCheckBox=((CheckBox)findViewById(R.id.wpt_visited_checkbox));
   visitedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener(){
     @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
       visited=isChecked;
@@ -56,5 +47,5 @@
   }
 );
   initializeDistanceUnitSelector();
-  disableSuggestions((EditText)findViewById(R.id.distance));
+  disableSuggestions(distanceView);
 }

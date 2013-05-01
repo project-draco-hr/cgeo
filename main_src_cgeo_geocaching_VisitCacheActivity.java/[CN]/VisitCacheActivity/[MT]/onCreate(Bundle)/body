@@ -1,8 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.visit);
-  setTitle(res.getString(R.string.log_new_log));
+  super.onCreate(savedInstanceState,R.layout.visit);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     cacheid=extras.getString(EXTRAS_ID);

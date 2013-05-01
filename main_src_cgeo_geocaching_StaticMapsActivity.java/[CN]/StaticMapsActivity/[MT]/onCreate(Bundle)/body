@@ -1,8 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.map_static);
-  setTitle(res.getString(R.string.map_static_title));
+  super.onCreate(savedInstanceState,R.layout.map_static);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     download=extras.getBoolean(EXTRAS_DOWNLOAD,false);

@@ -11,8 +11,8 @@
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate(){
     @Override public void update(    final Geopoint gp){
-      ((Button)findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-      ((Button)findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+      buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+      buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
       if (waypoint != null) {
         waypoint.setCoords(gp);
       }

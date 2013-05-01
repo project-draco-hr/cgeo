@@ -2,7 +2,6 @@
   super.onCreate(savedInstanceState);
   this.setTheme(ActivityMixin.getDialogTheme());
   setContentView(layout);
-  setTitle(res.getString(R.string.detail));
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
