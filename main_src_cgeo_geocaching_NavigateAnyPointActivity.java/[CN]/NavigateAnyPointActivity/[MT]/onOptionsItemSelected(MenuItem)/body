@@ -5,16 +5,16 @@
     addToHistory(coords);
   }
 switch (menuItem) {
-case MENU_DEFAULT_NAVIGATION:
+case R.id.menu_default_navigation:
     navigateTo();
   return true;
-case MENU_CACHES_AROUND:
+case R.id.menu_caches_around:
 cachesAround();
 return true;
-case MENU_CLEAR_HISTORY:
+case R.id.menu_clear_history:
 clearHistory();
 return true;
-case MENU_NAVIGATE:
+case R.id.menu_navigate:
 NavigationAppFactory.showNavigationMenu(this,null,null,coords);
 return true;
 default :

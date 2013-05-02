@@ -1,0 +1,14 @@
+{
+  coordinates.clear();
+  if (coordinatesWithType != null) {
+    coordinates.addAll(coordinatesWithType);
+  }
+  final Intent navigateIntent=new Intent(context,CompassActivity.class);
+  navigateIntent.putExtra(EXTRAS_COORDS,coords);
+  navigateIntent.putExtra(EXTRAS_GEOCODE,geocode);
+  if (null != displayedName) {
+    navigateIntent.putExtra(EXTRAS_NAME,displayedName);
+  }
+  navigateIntent.putExtra(EXTRAS_CACHE_INFO,info);
+  context.startActivity(navigateIntent);
+}

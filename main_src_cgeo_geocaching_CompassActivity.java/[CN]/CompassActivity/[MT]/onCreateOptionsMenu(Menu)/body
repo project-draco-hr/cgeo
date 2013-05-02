@@ -1,0 +1,15 @@
+{
+  getMenuInflater().inflate(R.menu.compass_activity_options,menu);
+  final SubMenu subMenu=menu.findItem(R.id.menu_select_destination).getSubMenu();
+  if (coordinates.size() > 1) {
+    int cnt=4;
+    for (    final IWaypoint coordinate : coordinates) {
+      subMenu.add(0,cnt,0,coordinate.getName() + " (" + coordinate.getCoordType()+ ")");
+      cnt++;
+    }
+  }
+ else {
+    menu.findItem(R.id.menu_select_destination).setVisible(false);
+  }
+  return true;
+}

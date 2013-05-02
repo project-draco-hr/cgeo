@@ -1,0 +1,37 @@
+{
+  int id=item.getItemId();
+switch (id) {
+case R.id.menu_map:
+    CGeoMap.startActivityCoords(this,dstCoords,null,null);
+  return true;
+case R.id.menu_switch_compass_gps:
+boolean oldSetting=Settings.isUseCompass();
+Settings.setUseCompass(!oldSetting);
+invalidateOptionsMenuCompatible();
+if (oldSetting) {
+geoDirHandler.stopDir();
+}
+ else {
+geoDirHandler.startDir();
+}
+return true;
+case R.id.menu_edit_destination:
+Intent pointIntent=new Intent(this,NavigateAnyPointActivity.class);
+startActivity(pointIntent);
+finish();
+return true;
+default :
+if (id > 3 && coordinates.get(id - 4) != null) {
+final IWaypoint coordinate=coordinates.get(id - 4);
+title=coordinate.getName();
+dstCoords=coordinate.getCoords();
+setTitle();
+setDestCoords();
+setCacheInfo();
+updateDistanceInfo(app.currentGeo());
+Log.d("destination set: " + title + " ("+ dstCoords+ ")");
+return true;
+}
+}
+return false;
+}

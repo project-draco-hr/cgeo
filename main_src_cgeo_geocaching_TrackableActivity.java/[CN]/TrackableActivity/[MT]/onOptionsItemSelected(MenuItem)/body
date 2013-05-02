@@ -1,9 +1,9 @@
 {
 switch (item.getItemId()) {
-case MENU_LOG_TOUCH:
+case R.id.menu_log_touch:
     LogTrackableActivity.startActivity(this,trackable);
   return true;
-case MENU_BROWSER_TRACKABLE:
+case R.id.menu_browser_trackable:
 startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(trackable.getUrl())));
 return true;
 default :

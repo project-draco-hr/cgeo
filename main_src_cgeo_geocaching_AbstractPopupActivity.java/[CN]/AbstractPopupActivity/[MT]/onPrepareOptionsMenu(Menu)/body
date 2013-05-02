@@ -2,10 +2,10 @@
   super.onPrepareOptionsMenu(menu);
   try {
     final boolean visible=getCoordinates() != null;
-    menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(visible);
-    menu.findItem(MENU_NAVIGATION).setVisible(visible);
-    menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
-    LoggingUI.onPrepareOptionsMenu(menu);
+    menu.findItem(R.id.menu_default_navigation).setVisible(visible);
+    menu.findItem(R.id.menu_navigate).setVisible(visible);
+    menu.findItem(R.id.menu_caches_around).setVisible(visible);
+    LoggingUI.onPrepareOptionsMenu(menu,cache);
   }
  catch (  Exception e) {
   }

@@ -1,6 +1,6 @@
 {
   final boolean signatureAvailable=StringUtils.isNotBlank(Settings.getSignature());
-  menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
+  menu.findItem(R.id.menu_signature).setVisible(signatureAvailable);
   boolean smileyVisible=false;
   final Geocache cache=getLogContext().getCache();
   if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
@@ -10,6 +10,6 @@
   if (trackable != null && ConnectorFactory.getConnector(trackable).equals(GCConnector.getInstance())) {
     smileyVisible=true;
   }
-  menu.findItem(MENU_SMILEY).setVisible(smileyVisible);
+  menu.findItem(R.id.menu_smilies).setVisible(smileyVisible);
   return true;
 }
