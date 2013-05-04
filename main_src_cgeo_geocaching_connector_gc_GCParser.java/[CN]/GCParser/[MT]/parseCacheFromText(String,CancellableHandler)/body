@@ -75,7 +75,7 @@
       cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
     }
  catch (    NumberFormatException e) {
-      Log.e("Error parsing favourite count",e);
+      Log.e("Error parsing favorite count",e);
     }
     cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id)));
   }
