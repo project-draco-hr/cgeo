@@ -1,5 +1,5 @@
 {
-  final List<LogType> logTypes=new LinkedList<LogType>();
+  final List<LogType> logTypes=new ArrayList<LogType>();
   if (isEventCache()) {
     logTypes.add(LogType.WILL_ATTEND);
     logTypes.add(LogType.NOTE);
@@ -28,7 +28,6 @@
     logTypes.add(LogType.TEMP_DISABLE_LISTING);
     logTypes.add(LogType.ENABLE_LISTING);
     logTypes.add(LogType.ARCHIVE);
-    logTypes.remove(LogType.UPDATE_COORDINATES);
   }
   return logTypes;
 }
