@@ -1,0 +1,8 @@
+{
+  boolean my=false;
+  if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
+    my=true;
+    Log.i("Overriding users choice because of self search, downloading all caches.");
+  }
+  return my;
+}

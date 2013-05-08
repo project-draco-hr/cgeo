@@ -4,5 +4,5 @@
     return null;
   }
   final Parameters params=new Parameters("u",userName);
-  return searchByAny(cacheType,false,showCaptcha,params,recaptchaReceiver);
+  return searchByAny(cacheType,isSearchForMyCaches(userName),showCaptcha,params,recaptchaReceiver);
 }
