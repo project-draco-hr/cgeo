@@ -4,5 +4,11 @@
     getHistoryOfSearchedLocations().add(0,loc);
     cgData.saveSearchedDestination(loc);
     historyListView.removeFooterView(getEmptyHistoryFooter());
+    runOnUiThread(new Runnable(){
+      @Override public void run(){
+        destionationHistoryAdapter.notifyDataSetChanged();
+      }
+    }
+);
   }
 }
