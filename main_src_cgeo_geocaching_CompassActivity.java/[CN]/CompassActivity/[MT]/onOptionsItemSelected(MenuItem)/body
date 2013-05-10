@@ -21,8 +21,9 @@ startActivity(pointIntent);
 finish();
 return true;
 default :
-if (id > 3 && coordinates.get(id - 4) != null) {
-final IWaypoint coordinate=coordinates.get(id - 4);
+int coordinatesIndex=id - COORDINATES_OFFSET;
+if (coordinatesIndex >= 0 && coordinatesIndex < coordinates.size()) {
+final IWaypoint coordinate=coordinates.get(coordinatesIndex);
 title=coordinate.getName();
 dstCoords=coordinate.getCoords();
 setTitle();
