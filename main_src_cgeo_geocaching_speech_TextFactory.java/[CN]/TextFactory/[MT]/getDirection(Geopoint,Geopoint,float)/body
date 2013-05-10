@@ -1,0 +1,9 @@
+{
+  final int bearing=(int)position.bearingTo(target);
+  int degrees=(int)AngleUtils.normalize(bearing - direction);
+  int hours=(degrees + 15) / 30;
+  if (hours == 0) {
+    hours=12;
+  }
+  return getString(R.string.tts_oclock,String.valueOf(hours));
+}

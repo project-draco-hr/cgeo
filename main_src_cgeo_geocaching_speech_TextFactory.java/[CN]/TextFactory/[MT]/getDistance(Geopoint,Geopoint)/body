@@ -1,0 +1,15 @@
+{
+  float kilometers=position.distanceTo(target);
+  if (kilometers >= 5.0) {
+    return getString(R.string.tts_kilometers,String.valueOf(Math.round(kilometers)));
+  }
+  if (kilometers >= 1.0) {
+    String digits=String.format(Locale.getDefault(),"%.1f",kilometers);
+    return getString(R.string.tts_kilometers,digits);
+  }
+  int meters=(int)(kilometers * 1000.0);
+  if (meters > 50) {
+    return getString(R.string.tts_meters,String.valueOf(Math.round(meters / 10.0) * 10));
+  }
+  return getString(R.string.tts_meters,String.valueOf(meters));
+}

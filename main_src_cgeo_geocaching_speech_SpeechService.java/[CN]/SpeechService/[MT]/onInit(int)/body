@@ -1,0 +1,13 @@
+{
+  if (status != TextToSpeech.SUCCESS) {
+    Log.e("Text to speech cannot be initialized.");
+    return;
+  }
+  int switchLocale=tts.setLanguage(Locale.getDefault());
+  if (switchLocale == TextToSpeech.LANG_MISSING_DATA || switchLocale == TextToSpeech.LANG_NOT_SUPPORTED) {
+    Log.e("Current languge not supported by text to speech.");
+    return;
+  }
+  initialized=true;
+  geoHandler.startGeoAndDir();
+}
