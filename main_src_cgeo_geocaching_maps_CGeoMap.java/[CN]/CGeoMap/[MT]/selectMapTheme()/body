@@ -20,9 +20,7 @@
   builder.setTitle(R.string.map_theme_select);
   builder.setSingleChoiceItems(names.toArray(new String[names.size()]),selectedItem,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int newItem){
-      if (newItem == selectedItem) {
-      }
- else {
+      if (newItem != selectedItem) {
         if (newItem > 0) {
           Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
         }

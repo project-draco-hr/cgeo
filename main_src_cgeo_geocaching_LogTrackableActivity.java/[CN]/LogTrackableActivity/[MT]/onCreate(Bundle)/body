@@ -1,8 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.touch);
-  setTitle(res.getString(R.string.trackable_touch));
+  super.onCreate(savedInstanceState,R.layout.touch);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);

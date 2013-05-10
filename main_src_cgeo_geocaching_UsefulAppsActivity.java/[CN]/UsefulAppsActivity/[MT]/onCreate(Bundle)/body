@@ -1,22 +1,33 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.useful_apps);
-  setTitle(res.getString(R.string.helpers));
-  parentLayout=(LinearLayout)findViewById(R.id.parent);
-  final Locale loc=Locale.getDefault();
-  final String language=loc.getLanguage();
-  final String tutorialUrl;
-  if ("de".equalsIgnoreCase(language)) {
-    tutorialUrl="gnu.android.app.cgeomanual.de";
+  super.onCreate(savedInstanceState,R.layout.useful_apps_activity);
+  Views.inject(this);
+  list.setAdapter(new ArrayAdapter<HelperApp>(this,R.layout.useful_apps_item,HELPER_APPS){
+    @Override public View getView(    int position,    View convertView,    android.view.ViewGroup parent){
+      View rowView=convertView;
+      if (null == rowView) {
+        rowView=getLayoutInflater().inflate(R.layout.useful_apps_item,null);
+      }
+      ViewHolder holder=(ViewHolder)rowView.getTag();
+      if (null == holder) {
+        holder=new ViewHolder(rowView);
+        rowView.setTag(holder);
+      }
+      final HelperApp app=getItem(position);
+      fillViewHolder(holder,app);
+      return rowView;
+    }
+    private void fillViewHolder(    ViewHolder holder,    HelperApp app){
+      holder.title.setText(res.getString(app.titleId));
+      holder.image.setImageDrawable(res.getDrawable(app.iconId));
+      holder.description.setText(res.getString(app.descriptionId));
+    }
   }
- else {
-    tutorialUrl="gnu.android.app.cgeomanual.en";
+);
+  list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+    @Override public void onItemClick(    AdapterView<?> parent,    View view,    int position,    long id){
+      HelperApp helperApp=HELPER_APPS[position];
+      helperApp.installFromMarket(UsefulAppsActivity.this);
+    }
   }
-  addApp(R.string.helper_manual_title,R.string.helper_manual_description,R.drawable.helper_manual,tutorialUrl);
-  addApp(R.string.helper_calendar_title,R.string.helper_calendar_description,R.drawable.cgeo,"cgeo.calendar");
-  addApp(R.string.helper_locus_title,R.string.helper_locus_description,R.drawable.helper_locus,"menion.android.locus");
-  addApp(R.string.helper_gpsstatus_title,R.string.helper_gpsstatus_description,R.drawable.helper_gpsstatus,"com.eclipsim.gpsstatus2");
-  addApp(R.string.helper_bluetoothgps_title,R.string.helper_bluetoothgps_description,R.drawable.helper_bluetoothgps,"googoo.android.btgps");
-  addApp(R.string.helper_barcode_title,R.string.helper_barcode_description,R.drawable.helper_barcode,"com.google.zxing.client.android");
+);
 }

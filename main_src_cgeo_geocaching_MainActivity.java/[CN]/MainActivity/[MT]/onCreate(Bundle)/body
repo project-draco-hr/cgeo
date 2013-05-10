@@ -1,0 +1,13 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.main);
+  Views.inject(this);
+  if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+    finish();
+    return;
+  }
+  setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
+  version=Version.getVersionCode(this);
+  Log.i("Starting " + getPackageName() + ' '+ version+ " a.k.a "+ Version.getVersionName(this));
+  init();
+}

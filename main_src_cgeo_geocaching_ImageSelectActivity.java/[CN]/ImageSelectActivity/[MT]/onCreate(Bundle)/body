@@ -1,8 +1,6 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.visit_image);
-  setTitle(res.getString(R.string.log_image));
+  super.onCreate(savedInstanceState,R.layout.visit_image);
+  scaleChoiceIndex=Settings.getLogImageScale();
   imageCaption="";
   imageDescription="";
   imageUri=Uri.EMPTY;
@@ -11,11 +9,13 @@
     imageCaption=extras.getString(EXTRAS_CAPTION);
     imageDescription=extras.getString(EXTRAS_DESCRIPTION);
     imageUri=Uri.parse(extras.getString(EXTRAS_URI_AS_STRING));
+    scaleChoiceIndex=extras.getInt(EXTRAS_SCALE,scaleChoiceIndex);
   }
   if (savedInstanceState != null) {
     imageCaption=savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
     imageDescription=savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
     imageUri=Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+    scaleChoiceIndex=savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
   }
   final Button cameraButton=(Button)findViewById(R.id.camera);
   cameraButton.setOnClickListener(new View.OnClickListener(){
@@ -39,6 +39,17 @@
   if (StringUtils.isNotBlank(imageDescription)) {
     descriptionView.setText(imageDescription);
   }
+  scaleView=(Spinner)findViewById(R.id.logImageScale);
+  scaleView.setSelection(scaleChoiceIndex);
+  scaleView.setOnItemSelectedListener(new OnItemSelectedListener(){
+    @Override public void onItemSelected(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
+      scaleChoiceIndex=scaleView.getSelectedItemPosition();
+      Settings.setLogImageScale(scaleChoiceIndex);
+    }
+    @Override public void onNothingSelected(    AdapterView<?> arg0){
+    }
+  }
+);
   final Button saveButton=(Button)findViewById(R.id.save);
   saveButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){

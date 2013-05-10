@@ -1,8 +1,5 @@
 {
-  if (!StringUtils.startsWith(input,"<")) {
-    return input;
-  }
-  String result=input.trim();
+  String result=input;
   for (  String tagName : MARKUP) {
     final String startTag="<" + tagName + ">";
     if (StringUtils.startsWith(result,startTag)) {

@@ -1,0 +1,20 @@
+{
+  if (requestCode == SCAN_REQUEST_CODE) {
+    if (resultCode == RESULT_OK) {
+      String scan=intent.getStringExtra("SCAN_RESULT");
+      if (StringUtils.isBlank(scan)) {
+        return;
+      }
+      SearchActivity.startActivityScan(scan,this);
+    }
+  }
+ else   if (requestCode == SEARCH_REQUEST_CODE) {
+    if (resultCode == RESULT_CANCELED) {
+      String query=intent.getStringExtra(SearchManager.QUERY);
+      if (query == null) {
+        query="";
+      }
+      new AlertDialog.Builder(this).setMessage(res.getString(R.string.unknown_scan) + "\n\n" + query).setPositiveButton(getString(android.R.string.ok),null).create().show();
+    }
+  }
+}

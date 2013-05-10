@@ -15,15 +15,9 @@
     imageView.setImageDrawable(image);
     imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     imageView.setLayoutParams(new LayoutParams(bounds.width(),bounds.height()));
+    view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
     view.addView(imageView);
     imageView.setId(image.hashCode());
     images.put(imageView.getId(),img);
-  }
-synchronized (activity) {
-    countDone++;
-    progressDialog.setProgress(countDone);
-    if (progressDialog.getProgress() >= count) {
-      progressDialog.dismiss();
-    }
   }
 }
