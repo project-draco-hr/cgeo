@@ -1,0 +1,21 @@
+{
+  final AlertDialog.Builder builder=new AlertDialog.Builder(CacheDetailActivity.this);
+  builder.setTitle(R.string.cache_personal_note_unstored);
+  builder.setMessage(R.string.cache_personal_note_store);
+  builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+    }
+  }
+);
+  builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+      dialog.dismiss();
+      cache.store(null);
+      editPersonalNote();
+    }
+  }
+);
+  final AlertDialog dialog=builder.create();
+  dialog.setOwnerActivity(CacheDetailActivity.this);
+  dialog.show();
+}

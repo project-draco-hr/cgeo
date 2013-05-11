@@ -1,13 +1,8 @@
 {
-  editNoteDialogListener=new EditNoteDialogListener(){
-    @Override public void onFinishEditNoteDialog(    final String note){
-      cache.setPersonalNote(note);
-      setPersonalNote(personalNoteView);
-      cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
-    }
+  if (cache.isOffline()) {
+    editPersonalNote();
   }
-;
-  final FragmentManager fm=getSupportFragmentManager();
-  final EditNoteDialog dialog=EditNoteDialog.newInstance(cache.getPersonalNote());
-  dialog.show(fm,"fragment_edit_note");
+ else {
+    warnPersonalNoteNeedsStoring();
+  }
 }
