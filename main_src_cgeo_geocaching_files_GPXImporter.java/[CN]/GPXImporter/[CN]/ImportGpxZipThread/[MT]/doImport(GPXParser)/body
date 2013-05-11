@@ -1,6 +1,6 @@
 {
   Collection<Geocache> caches=Collections.emptySet();
-  ZipInputStream zis=new ZipInputStream(getInputStream());
+  ZipInputStream zis=new ZipInputStream(new BufferedInputStream(getInputStream()));
   try {
     for (ZipEntry zipEntry=zis.getNextEntry(); zipEntry != null; zipEntry=zis.getNextEntry()) {
       if (StringUtils.endsWithIgnoreCase(zipEntry.getName(),GPX_FILE_EXTENSION)) {
@@ -18,7 +18,7 @@
   finally {
     zis.close();
   }
-  zis=new ZipInputStream(getInputStream());
+  zis=new ZipInputStream(new BufferedInputStream(getInputStream()));
   try {
     for (ZipEntry zipEntry=zis.getNextEntry(); zipEntry != null; zipEntry=zis.getNextEntry()) {
       if (StringUtils.endsWithIgnoreCase(zipEntry.getName(),WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {

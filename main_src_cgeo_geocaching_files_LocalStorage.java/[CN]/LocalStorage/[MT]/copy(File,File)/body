@@ -1,20 +1,15 @@
 {
   destination.getParentFile().mkdirs();
   InputStream input=null;
-  OutputStream output;
+  OutputStream output=null;
   try {
-    input=new FileInputStream(source);
-    output=new FileOutputStream(destination);
+    input=new BufferedInputStream(new FileInputStream(source));
+    output=new BufferedOutputStream(new FileOutputStream(destination));
   }
  catch (  FileNotFoundException e) {
     Log.e("LocalStorage.copy: could not open file",e);
-    if (input != null) {
-      try {
-        input.close();
-      }
- catch (      IOException e1) {
-      }
-    }
+    IOUtils.closeQuietly(input);
+    IOUtils.closeQuietly(output);
     return false;
   }
   boolean copyDone=copy(input,output);

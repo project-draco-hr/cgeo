@@ -1,9 +1,9 @@
 {
-  FileInputStream fis=new FileInputStream(file);
+  BufferedInputStream stream=new BufferedInputStream(new FileInputStream(file));
   try {
-    return parse(fis,progressHandler);
+    return parse(stream,progressHandler);
   }
   finally {
-    fis.close();
+    IOUtils.closeQuietly(stream);
   }
 }

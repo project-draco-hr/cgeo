@@ -8,7 +8,10 @@
     if (data == null) {
       return Collections.emptyList();
     }
-    return OC11XMLParser.parseCachesFiltered(new GZIPInputStream(data));
+    final BufferedInputStream stream=new BufferedInputStream(new GZIPInputStream(data));
+    final Collection<Geocache> result=OC11XMLParser.parseCachesFiltered(stream);
+    IOUtils.closeQuietly(stream);
+    return result;
   }
  catch (  IOException e) {
     Log.e("Error parsing nearby search result",e);

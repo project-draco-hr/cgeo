@@ -6,10 +6,12 @@
     if (data == null) {
       return null;
     }
-    Collection<Geocache> caches=OC11XMLParser.parseCaches(new GZIPInputStream(data));
+    final BufferedInputStream stream=new BufferedInputStream(new GZIPInputStream(data));
+    Collection<Geocache> caches=OC11XMLParser.parseCaches(stream);
     if (caches.iterator().hasNext()) {
       Geocache cache=caches.iterator().next();
       cgData.saveCache(cache,LoadFlags.SAVE_ALL);
+      IOUtils.closeQuietly(stream);
       return cache;
     }
     return null;
