@@ -85,7 +85,7 @@
       TextView licenseView=((TextView)view.findViewById(R.id.license));
       licenseView.setText(Html.fromHtml(license),BufferType.SPANNABLE);
       licenseView.setClickable(true);
-      licenseView.setMovementMethod(LinkMovementMethod.getInstance());
+      licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
     }
  else {
       view.findViewById(R.id.license_box).setVisibility(View.GONE);
