@@ -3,6 +3,7 @@
   final String geocodeList=StringUtils.join(geocodes.toArray(),"|");
   try {
     final Parameters params=new Parameters("i",geocodeList,"_",String.valueOf(System.currentTimeMillis()));
+    params.add("app","cgeo");
     final String referer=GCConstants.URL_LIVE_MAP_DETAILS;
     final String data=StringUtils.defaultString(Tile.requestMapInfo(referer,params,referer));
     final JSONObject json=new JSONObject(data);
