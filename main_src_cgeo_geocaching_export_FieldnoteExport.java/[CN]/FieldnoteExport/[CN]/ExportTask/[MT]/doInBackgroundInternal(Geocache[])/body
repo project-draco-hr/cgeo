@@ -33,8 +33,8 @@
     return false;
   }
  finally {
-    IOUtils.closeQuietly(buffer);
     IOUtils.closeQuietly(fileWriter);
+    IOUtils.closeQuietly(buffer);
   }
   if (upload) {
     publishProgress(STATUS_UPLOAD);
