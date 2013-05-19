@@ -95,6 +95,8 @@
         cache.setTerrain(terrain);
       }
     }
+    final String container=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_CONTAINER,false,1,null,false);
+    cache.setSize(CacheSize.getById(container));
     final MatcherWrapper matcherTbs=new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES,row);
     String inventoryPre=null;
     while (matcherTbs.find()) {
