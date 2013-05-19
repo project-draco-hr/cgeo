@@ -1,5 +1,10 @@
 {
   super.onCreate(savedInstanceState,R.layout.navigate);
+  final SensorManager sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
+  hasMagneticFieldSensor=sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
+  if (!hasMagneticFieldSensor) {
+    Settings.setUseCompass(false);
+  }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
     title=extras.getString(EXTRAS_GEOCODE);
