@@ -75,8 +75,28 @@
     cache.setGeocode(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_GEOCODE,true,1,cache.getGeocode(),true));
     cache.setType(CacheType.getByPattern(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_TYPE,true,1,null,true)));
     if (Settings.getLoadDirImg()) {
-      cache.setDirectionImg(Network.decode(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION,true,1,cache.getDirectionImg(),true)));
+      final String direction=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,1,null,false);
+      final String distance=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,2,null,false);
+      if (direction != null) {
+        cache.setDirectionImg(direction);
+      }
+      if (distance != null) {
+        cache.setDistance(DistanceParser.parseDistance(distance,Settings.isUseMetricUnits()));
+      }
     }
+    final MatcherWrapper matcherDT=new MatcherWrapper(GCConstants.PATTERN_SEARCH_DIFFICULTY_TERRAIN,row);
+    if (matcherDT.find()) {
+      final Float difficulty=parseStars(matcherDT.group(1));
+      if (difficulty != null) {
+        cache.setDifficulty(difficulty);
+      }
+      final Float terrain=parseStars(matcherDT.group(3));
+      if (terrain != null) {
+        cache.setTerrain(terrain);
+      }
+    }
+    final String container=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_CONTAINER,false,1,null,false);
+    cache.setSize(CacheSize.getById(container));
     final MatcherWrapper matcherTbs=new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES,row);
     String inventoryPre=null;
     while (matcherTbs.find()) {
@@ -171,7 +191,7 @@
     final Set<Geocache> caches=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
     for (    Geocache cache : caches) {
       if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
-        DirectionImage.getDrawable(cache.getGeocode(),cache.getDirectionImg());
+        DirectionImage.getDrawable(cache.getDirectionImg());
       }
     }
   }
