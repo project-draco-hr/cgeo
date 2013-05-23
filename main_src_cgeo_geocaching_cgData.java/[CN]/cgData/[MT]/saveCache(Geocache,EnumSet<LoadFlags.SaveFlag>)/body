@@ -10,5 +10,5 @@
   if (!saveFlags.contains(SaveFlag.SAVE_DB)) {
     return true;
   }
-  return cache.isDetailed() && dbUpdateRequired ? storeIntoDatabase(cache) : false;
+  return cache.isDetailed() && dbUpdateRequired && storeIntoDatabase(cache);
 }
