@@ -21,7 +21,7 @@ startActivity(pointIntent);
 finish();
 return true;
 case R.id.menu_tts_start:
-SpeechService.startService(this,dstCoords);
+initTextToSpeech();
 return true;
 case R.id.menu_tts_stop:
 SpeechService.stopService(this);
