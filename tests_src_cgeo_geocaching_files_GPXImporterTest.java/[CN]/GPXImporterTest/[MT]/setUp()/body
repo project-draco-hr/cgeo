@@ -1,7 +1,10 @@
 {
   super.setUp();
-  tempDir=new File(System.getProperty("java.io.tmpdir"),"cgeogpxesTest");
+  final String globalTempDir=System.getProperty("java.io.tmpdir");
+  assertTrue("java.io.tmpdir is not defined",StringUtils.isNotBlank(globalTempDir));
+  tempDir=new File(globalTempDir,"cgeogpxesTest");
   tempDir.mkdir();
+  assertTrue("Could not create directory " + tempDir.getPath(),tempDir.exists());
   cgData.getAllHistoryCachesCount();
   listId=cgData.createList("cgeogpxesTest");
   importCacheStaticMaps=Settings.isStoreOfflineMaps();
