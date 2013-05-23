@@ -4,7 +4,7 @@
   }
   final String geocode=cache.getGeocode();
   final Geocache cacheFromCache=cacheCache.getCacheFromCache(geocode);
-  final boolean dbUpdateRequired=!cache.gatherMissingFrom(cacheFromCache != null ? cacheFromCache : loadCache(cache.getGeocode(),LoadFlags.LOAD_ALL_DB_ONLY)) || cacheFromCache != null;
+  final boolean dbUpdateRequired=!cache.gatherMissingFrom(cacheFromCache != null ? cacheFromCache : loadCache(geocode,LoadFlags.LOAD_ALL_DB_ONLY)) || cacheFromCache != null;
   cache.addStorageLocation(StorageLocation.CACHE);
   cacheCache.putCacheInCache(cache);
   if (!saveFlags.contains(SaveFlag.SAVE_DB)) {
