@@ -17,6 +17,7 @@
     setTitle(cache.getGeocode());
   }
   ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId),null,null,null);
+  imagesList=null;
   reinitializeViewPager();
   invalidateOptionsMenuCompatible();
   progress.dismiss();
