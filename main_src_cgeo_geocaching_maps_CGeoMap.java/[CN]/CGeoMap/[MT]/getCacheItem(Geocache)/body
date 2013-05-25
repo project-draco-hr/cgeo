@@ -1,5 +1,5 @@
 {
-  final CachesOverlayItemImpl item=mapItemFactory.getCachesOverlayItem(cache,cache.getType());
+  final CachesOverlayItemImpl item=mapItemFactory.getCachesOverlayItem(cache,cache.getType().applyDistanceRule());
   final int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.getCacheRealm().id).append(cache.isOwner()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).toHashCode();
   final LayerDrawable ldFromCache=overlaysCache.get(hashcode);
   if (ldFromCache != null) {
