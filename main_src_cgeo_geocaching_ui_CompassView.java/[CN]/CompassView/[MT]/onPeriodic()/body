@@ -2,7 +2,7 @@
   final float newAzimuthShown=smoothUpdate(northMeasured,azimuthShown);
   final float newCacheHeadingShown=smoothUpdate(cacheHeadingMeasured,cacheHeadingShown);
   if (Math.abs(AngleUtils.difference(azimuthShown,newAzimuthShown)) >= 2 || Math.abs(AngleUtils.difference(cacheHeadingShown,newCacheHeadingShown)) >= 2) {
-synchronized (CompassView.this) {
+synchronized (this) {
       azimuthShown=newAzimuthShown;
       cacheHeadingShown=newCacheHeadingShown;
     }

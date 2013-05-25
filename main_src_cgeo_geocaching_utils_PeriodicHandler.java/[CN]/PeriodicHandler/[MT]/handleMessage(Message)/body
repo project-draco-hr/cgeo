@@ -8,8 +8,11 @@ case STOP:
 removeMessages(ACT);
 break;
 case ACT:
+final PeriodicHandlerListener listener=listenerRef.get();
+if (listener != null) {
 sendEmptyMessageDelayed(ACT,period);
-act();
+listener.onPeriodic();
+}
 break;
 default :
 throw new UnsupportedOperationException();
