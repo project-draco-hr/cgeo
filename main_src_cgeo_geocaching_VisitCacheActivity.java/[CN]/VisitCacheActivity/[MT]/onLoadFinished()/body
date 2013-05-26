@@ -1,0 +1,21 @@
+{
+  if (loggingManager.hasLoaderError()) {
+    showErrorLoadingData();
+    return;
+  }
+  trackables=loggingManager.getTrackables();
+  possibleLogTypes=loggingManager.getPossibleLogTypes();
+  if (possibleLogTypes.isEmpty()) {
+    showErrorLoadingData();
+    return;
+  }
+  if (!possibleLogTypes.contains(typeSelected)) {
+    typeSelected=possibleLogTypes.get(0);
+    setType(typeSelected);
+    showToast(res.getString(R.string.info_log_type_changed));
+  }
+  enablePostButton(true);
+  initializeTrackablesAction();
+  updateTrackablesList();
+  showProgress(false);
+}

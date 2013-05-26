@@ -1,9 +1,15 @@
 {
   String centerString=GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,center) + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,center);
-  final Parameters params=new Parameters("center",centerString);
-  final JSONObject data=request(connector,SERVICE_NEAREST,params);
+  final Parameters params=new Parameters("search_method",METHOD_SEARCH_NEAREST);
+  final Map<String,String> valueMap=new LinkedHashMap<String,String>();
+  valueMap.put("center",centerString);
+  valueMap.put("limit","20");
+  addFilterParams(valueMap);
+  params.add("search_params",new JSONObject(valueMap).toString());
+  addRetrieveParams(params);
+  final JSONObject data=request(connector,SERVICE_SEARCH_AND_RETRIEVE,params);
   if (data == null) {
-    return null;
+    return Collections.emptyList();
   }
   return parseCaches(data);
 }

@@ -1,7 +1,0 @@
-{
-  if (!Settings.isLogin()) {
-    showToast(res.getString(R.string.err_login));
-    return null;
-  }
-  return new UrlLoader(getBaseContext(),"http://www.geocaching.com/seek/log.aspx",new Parameters("ID",cacheid));
-}

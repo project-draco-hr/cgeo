@@ -1,8 +1,8 @@
 {
   final String log=logTexts[0];
   try {
-    final ImmutablePair<StatusCode,String> postResult=GCParser.postLog(geocode,cacheid,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackables);
-    if (postResult.left == StatusCode.NO_ERROR) {
+    final LogResult logResult=loggingManager.postLog(cache,typeSelected,date,log,trackables);
+    if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
       final LogEntry logNow=new LogEntry(date,typeSelected,log);
       cache.getLogs().add(0,logNow);
       if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
@@ -17,16 +17,16 @@
         GCVote.setRating(cache,rating);
       }
       if (StringUtils.isNotBlank(imageUri.getPath())) {
-        ImmutablePair<StatusCode,String> imageResult=GCParser.uploadLogImage(postResult.right,imageCaption,imageDescription,imageUri);
-        final String uploadedImageUrl=imageResult.right;
+        ImageResult imageResult=loggingManager.postLogImage(logResult.getLogId(),imageCaption,imageDescription,imageUri);
+        final String uploadedImageUrl=imageResult.getImageUri();
         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
           logNow.addLogImage(new Image(uploadedImageUrl,imageCaption,imageDescription));
           cgData.saveChangedCache(cache);
         }
-        return imageResult.left;
+        return imageResult.getPostResult();
       }
     }
-    return postResult.left;
+    return logResult.getPostLogResult();
   }
  catch (  Exception e) {
     Log.e("cgeovisit.postLogFn",e);

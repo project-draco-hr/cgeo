@@ -30,10 +30,8 @@
     }
   }
 );
-  EditText ocUserEdit=(EditText)findViewById(R.id.oc_username);
-  if (ocUserEdit.getText().length() == 0) {
-    ocUserEdit.setText(Settings.getOCConnectorUserName());
-  }
+  Button checkOCUser=(Button)findViewById(R.id.register_oc_de);
+  checkOCUser.setOnClickListener(new OCDEAuthorizeCgeoListener());
   final ImmutablePair<String,String> gcvoteLogin=Settings.getGCvoteLogin();
   if (null != gcvoteLogin && null != gcvoteLogin.right) {
     ((EditText)findViewById(R.id.passvote)).setText(gcvoteLogin.right);
