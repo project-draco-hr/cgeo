@@ -19,7 +19,7 @@
     }
     description.append(response.getString(CACHE_DESCRIPTION));
     cache.setDescription(description.toString());
-    cache.setHint(Html.escapeHtml(response.getString(CACHE_HINT)));
+    cache.setHint(response.getString(CACHE_HINT));
     final JSONArray images=response.getJSONArray(CACHE_IMAGES);
     if (images != null) {
       for (int i=0; i < images.length(); i++) {
