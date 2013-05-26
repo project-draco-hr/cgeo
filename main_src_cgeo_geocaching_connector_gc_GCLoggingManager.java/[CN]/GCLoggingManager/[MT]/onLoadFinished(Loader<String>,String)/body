@@ -6,12 +6,7 @@
     viewstates=Login.getViewstates(page);
     trackables=GCParser.parseTrackableLog(page);
     possibleLogTypes=GCParser.parseTypes(page);
-    if (possibleLogTypes.isEmpty()) {
-      hasLoaderError=true;
-    }
- else {
-      hasLoaderError=false;
-    }
+    hasLoaderError=possibleLogTypes.isEmpty();
   }
   activity.onLoadFinished();
 }
