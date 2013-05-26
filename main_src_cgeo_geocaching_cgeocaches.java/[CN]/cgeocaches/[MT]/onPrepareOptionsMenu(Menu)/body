@@ -28,7 +28,7 @@
     }
     final boolean hasSelection=adapter != null && adapter.getCheckedCount() > 0;
     final boolean isNonDefaultList=isConcrete && listId != StoredList.STANDARD_LIST_ID;
-    if (type == CacheListType.OFFLINE) {
+    if (type == CacheListType.OFFLINE || type == CacheListType.HISTORY) {
       setMenuItemLabel(menu,MENU_DROP_CACHES,R.string.caches_drop_selected,R.string.caches_drop_all);
       menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
       setMenuItemLabel(menu,MENU_REFRESH_STORED,R.string.caches_refresh_selected,R.string.caches_refresh_all);
