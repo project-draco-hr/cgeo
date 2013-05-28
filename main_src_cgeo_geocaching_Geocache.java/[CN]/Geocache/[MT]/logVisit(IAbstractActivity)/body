@@ -1,5 +1,5 @@
 {
-  if (StringUtils.isBlank(cacheId)) {
+  if (!getConnector().canLog(this)) {
     fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
     return;
   }
