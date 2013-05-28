@@ -31,14 +31,14 @@
     logText=log.getDisplayText();
     HtmlImageCounter imageCounter=new HtmlImageCounter();
     final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
-    holder.text.setText(Html.fromHtml(logText,imageCounter,unknownTagsHandler));
+    holder.text.setText(Html.fromHtml(logText,imageCounter,unknownTagsHandler),TextView.BufferType.SPANNABLE);
     if (imageCounter.getImageCount() > 0) {
       LogImageLoader loader=new LogImageLoader(holder);
       loader.execute(logText);
     }
   }
  else {
-    holder.text.setText(logText);
+    holder.text.setText(logText,TextView.BufferType.SPANNABLE);
   }
   if (log.hasLogImages()) {
     holder.images.setText(log.getImageTitles());
