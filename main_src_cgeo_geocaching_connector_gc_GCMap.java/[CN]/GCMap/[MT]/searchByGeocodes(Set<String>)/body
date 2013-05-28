@@ -39,7 +39,7 @@
       cache.setType(CacheType.getByPattern(typeObj.getString("text")));
       JSONObject ownerObj=dataObject.getJSONObject("owner");
       cache.setOwnerDisplayName(ownerObj.getString("text"));
-      result.addCache(cache);
+      result.addAndPutInCache(cache);
     }
   }
  catch (  JSONException e) {

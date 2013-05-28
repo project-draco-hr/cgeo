@@ -134,7 +134,7 @@
  catch (    NumberFormatException e) {
       Log.w("GCParser.parseSearch: Failed to parse favorite count");
     }
-    searchResult.addCache(cache);
+    searchResult.addAndPutInCache(cache);
   }
   try {
     String result=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
