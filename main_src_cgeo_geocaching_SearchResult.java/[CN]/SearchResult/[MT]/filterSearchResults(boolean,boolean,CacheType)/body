@@ -6,7 +6,7 @@
   for (  Geocache cache : caches) {
     final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwner() || cache.isFound())) || (!cacheType.contains(cache));
     if (!excludeCache) {
-      result.addCache(cache);
+      result.addAndPutInCache(cache);
       cachesForVote.add(cache);
     }
   }

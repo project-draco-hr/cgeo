@@ -76,7 +76,7 @@
         exclude=true;
       }
       if (!exclude) {
-        searchResult.addCache(cache);
+        searchResult.addAndPutInCache(cache);
       }
     }
     Log.d("Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
