@@ -101,9 +101,13 @@
     holder.direction.updateAzimuth(azimuth);
     holder.direction.updateHeading(cache.getDirection());
   }
- else {
+ else   if (StringUtils.isNotBlank(cache.getDirectionImg())) {
     holder.dirImg.setImageDrawable(DirectionImage.getDrawable(cache.getDirectionImg()));
     holder.dirImg.setVisibility(View.VISIBLE);
+    holder.direction.setVisibility(View.GONE);
+  }
+ else {
+    holder.dirImg.setVisibility(View.GONE);
     holder.direction.setVisibility(View.GONE);
   }
   holder.favorite.setText(Integer.toString(cache.getFavoritePoints()));
