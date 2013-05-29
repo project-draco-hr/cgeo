@@ -2,6 +2,9 @@
   if (app == null) {
     return;
   }
+  if (!Settings.isGCConnectorActive()) {
+    return;
+  }
   final StatusCode status=Login.login();
   if (status == StatusCode.NO_ERROR) {
     app.firstRun=false;

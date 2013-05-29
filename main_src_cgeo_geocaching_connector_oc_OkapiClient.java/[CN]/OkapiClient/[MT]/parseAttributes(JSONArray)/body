@@ -1,0 +1,16 @@
+{
+  List<String> result=new ArrayList<String>();
+  for (int i=0; i < nameList.length(); i++) {
+    try {
+      String name=nameList.getString(i);
+      CacheAttribute attr=CacheAttribute.getByOcId(AttributeParser.getOcDeId(name));
+      if (attr != null) {
+        result.add(attr.rawName);
+      }
+    }
+ catch (    JSONException e) {
+      Log.e("OkapiClient.parseAttributes",e);
+    }
+  }
+  return result;
+}

@@ -1,0 +1,12 @@
+{
+  final Geocache cache=new Geocache();
+  cache.setReliableLatLon(true);
+  try {
+    parseCoreCache(response,cache);
+    cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
+  }
+ catch (  JSONException e) {
+    Log.e("OkapiClient.parseSmallCache",e);
+  }
+  return cache;
+}

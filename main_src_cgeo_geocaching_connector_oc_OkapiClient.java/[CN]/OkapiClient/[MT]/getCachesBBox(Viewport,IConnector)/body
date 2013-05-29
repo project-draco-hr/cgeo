@@ -1,0 +1,17 @@
+{
+  if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
+    return Collections.emptyList();
+  }
+  String bboxString=GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,viewport.bottomLeft) + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,viewport.bottomLeft)+ "|"+ GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,viewport.topRight)+ "|"+ GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,viewport.topRight);
+  final Parameters params=new Parameters("search_method",METHOD_SEARCH_BBOX);
+  final Map<String,String> valueMap=new LinkedHashMap<String,String>();
+  valueMap.put("bbox",bboxString);
+  addFilterParams(valueMap);
+  params.add("search_params",new JSONObject(valueMap).toString());
+  addRetrieveParams(params);
+  final JSONObject data=request(connector,SERVICE_SEARCH_AND_RETRIEVE,params);
+  if (data == null) {
+    return Collections.emptyList();
+  }
+  return parseCaches(data);
+}

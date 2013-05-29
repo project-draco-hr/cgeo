@@ -2,27 +2,24 @@
   final Geocache cache=new Geocache();
   cache.setReliableLatLon(true);
   try {
-    cache.setGeocode(response.getString(CACHE_CODE));
-    cache.setName(response.getString(CACHE_NAME));
-    setLocation(cache,response.getString(CACHE_LOCATION));
-    cache.setType(getCacheType(response.getString(CACHE_TYPE)));
-    final String status=response.getString(CACHE_STATUS);
-    cache.setDisabled(status.equalsIgnoreCase("Temporarily unavailable"));
-    cache.setArchived(status.equalsIgnoreCase("Archived"));
+    parseCoreCache(response,cache);
     final JSONObject owner=response.getJSONObject(CACHE_OWNER);
     cache.setOwnerDisplayName(parseUser(owner));
     cache.getLogCounts().put(LogType.FOUND_IT,response.getInt(CACHE_FOUNDS));
     cache.getLogCounts().put(LogType.DIDNT_FIND_IT,response.getInt(CACHE_NOTFOUNDS));
-    cache.setSize(getCacheSize(response));
-    cache.setDifficulty((float)response.getDouble(CACHE_DIFFICULTY));
-    cache.setTerrain((float)response.getDouble(CACHE_TERRAIN));
     if (!response.isNull(CACHE_RATING)) {
       cache.setRating((float)response.getDouble(CACHE_RATING));
     }
     cache.setVotes(response.getInt(CACHE_VOTES));
     cache.setFavoritePoints(response.getInt(CACHE_RECOMMENDATIONS));
-    cache.setDescription(response.getString(CACHE_DESCRIPTION));
-    cache.setHint(Html.fromHtml(response.getString(CACHE_HINT)).toString());
+    StringBuilder description=new StringBuilder(500);
+    if (!response.isNull("gc_code")) {
+      String gccode=response.getString("gc_code");
+      description.append(cgeoapplication.getInstance().getResources().getString(R.string.cache_listed_on,GCConnector.getInstance().getName())).append(": <a href=\"http://coord.info/").append(gccode).append("\">").append(gccode).append("</a><br /><br />");
+    }
+    description.append(response.getString(CACHE_DESCRIPTION));
+    cache.setDescription(description.toString());
+    cache.setHint(response.getString(CACHE_HINT));
     final JSONArray images=response.getJSONArray(CACHE_IMAGES);
     if (images != null) {
       for (int i=0; i < images.length(); i++) {
@@ -34,8 +31,11 @@
         }
       }
     }
+    cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES)));
     cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
     cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
+    cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)),false);
+    cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
     cache.setDetailedUpdatedNow();
     cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
   }

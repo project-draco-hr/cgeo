@@ -43,7 +43,7 @@
     }
   }
   updatePostButtonText();
-  setImageButtonText();
+  updateImageButton();
   enablePostButton(false);
   final Button typeButton=(Button)findViewById(R.id.type);
   typeButton.setText(typeSelected.getL10n());
@@ -83,5 +83,6 @@
     }
   }
 );
-  getSupportLoaderManager().initLoader(0,null,this);
+  loggingManager=cache.getLoggingManager(this);
+  loggingManager.init();
 }

@@ -1,4 +1,12 @@
 {
+  final CheckBox gcCheck=(CheckBox)findViewById(R.id.gc_option);
+  gcCheck.setChecked(Settings.isGCConnectorActive());
+  gcCheck.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setGCConnectorActive(gcCheck.isChecked());
+    }
+  }
+);
   final ImmutablePair<String,String> login=Settings.getLogin();
   if (login != null) {
     ((EditText)findViewById(R.id.username)).setText(login.left);
@@ -22,10 +30,8 @@
     }
   }
 );
-  EditText ocUserEdit=(EditText)findViewById(R.id.oc_username);
-  if (ocUserEdit.getText().length() == 0) {
-    ocUserEdit.setText(Settings.getOCConnectorUserName());
-  }
+  Button checkOCUser=(Button)findViewById(R.id.register_oc_de);
+  checkOCUser.setOnClickListener(new OCDEAuthorizeCgeoListener());
   final ImmutablePair<String,String> gcvoteLogin=Settings.getGCvoteLogin();
   if (null != gcvoteLogin && null != gcvoteLogin.right) {
     ((EditText)findViewById(R.id.passvote)).setText(gcvoteLogin.right);

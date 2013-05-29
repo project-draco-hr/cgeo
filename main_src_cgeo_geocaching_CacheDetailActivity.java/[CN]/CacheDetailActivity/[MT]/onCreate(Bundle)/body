@@ -54,6 +54,27 @@
         return;
       }
     }
+ else     if (uriHost.contains("opencaching.de")) {
+      if (uriPath != null && uriPath.startsWith("/oc")) {
+        geocode=uriPath.substring(1).toUpperCase(Locale.US);
+      }
+ else {
+        geocode=uri.getQueryParameter("wp");
+        if (StringUtils.isNotBlank(geocode)) {
+          geocode=geocode.toUpperCase(Locale.US);
+        }
+ else {
+          showToast(res.getString(R.string.err_detail_open));
+          finish();
+          return;
+        }
+      }
+    }
+ else {
+      showToast(res.getString(R.string.err_detail_open));
+      finish();
+      return;
+    }
   }
   if (geocode == null && guid == null) {
     showToast(res.getString(R.string.err_detail_cache));

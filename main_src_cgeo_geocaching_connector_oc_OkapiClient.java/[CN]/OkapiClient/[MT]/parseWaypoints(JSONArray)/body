@@ -1,0 +1,22 @@
+{
+  List<Waypoint> result=null;
+  for (int i=0; i < wptsJson.length(); i++) {
+    try {
+      JSONObject wptResponse=wptsJson.getJSONObject(i);
+      Waypoint wpt=new Waypoint(wptResponse.getString(WPT_NAME),parseWptType(wptResponse.getString(WPT_TYPE)),false);
+      wpt.setNote(wptResponse.getString(WPT_DESCRIPTION));
+      Geopoint pt=parseCoords(wptResponse.getString(WPT_LOCATION));
+      if (pt != null) {
+        wpt.setCoords(pt);
+      }
+      if (result == null) {
+        result=new ArrayList<Waypoint>();
+      }
+      result.add(wpt);
+    }
+ catch (    JSONException e) {
+      Log.e("OkapiClient.parseWaypoints",e);
+    }
+  }
+  return result;
+}

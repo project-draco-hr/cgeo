@@ -3,8 +3,8 @@
     final String oldPreferencesName="cgeo.pref";
     final SharedPreferences old=cgeoapplication.getInstance().getSharedPreferences(oldPreferencesName,Context.MODE_PRIVATE);
     final Editor e=sharedPrefs.edit();
-    e.putString(KEY_TEMP_TOKEN_SECRET,old.getString(KEY_TEMP_TOKEN_SECRET,null));
-    e.putString(KEY_TEMP_TOKEN_PUBLIC,old.getString(KEY_TEMP_TOKEN_PUBLIC,null));
+    e.putString(KEY_TEMP_TWITTER_TOKEN_SECRET,old.getString(KEY_TEMP_TWITTER_TOKEN_SECRET,null));
+    e.putString(KEY_TEMP_TWITTER_TOKEN_PUBLIC,old.getString(KEY_TEMP_TWITTER_TOKEN_PUBLIC,null));
     e.putBoolean(KEY_HELP_SHOWN,old.getInt(KEY_HELP_SHOWN,0) != 0);
     e.putFloat(KEY_ANYLONGITUDE,old.getFloat(KEY_ANYLONGITUDE,0));
     e.putFloat(KEY_ANYLATITUDE,old.getFloat(KEY_ANYLATITUDE,0));

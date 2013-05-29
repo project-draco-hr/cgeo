@@ -1,3 +1,3 @@
 {
-  handler.sendEmptyMessage(GCConnector.removeFromWatchlist(cache) ? 1 : -1);
+  handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).removeFromWatchlist(cache) ? 1 : -1);
 }

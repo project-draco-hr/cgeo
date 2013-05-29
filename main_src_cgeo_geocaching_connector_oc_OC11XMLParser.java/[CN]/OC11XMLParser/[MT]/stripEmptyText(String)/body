@@ -1,8 +1,0 @@
-{
-  final Matcher matcher=WHITESPACE.matcher(input);
-  String result=matcher.replaceAll("").trim();
-  if (!StringUtils.startsWith(result,"<")) {
-    return result;
-  }
-  return stripMarkup(result);
-}
