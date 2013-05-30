@@ -6,7 +6,7 @@
   if (StringUtils.isNotBlank(descriptionString)) {
     descriptionView.setText(description,TextView.BufferType.SPANNABLE);
     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-    fixBlackTextColor(descriptionView,descriptionString);
+    fixTextColor(descriptionView,descriptionString);
     descriptionView.setVisibility(View.VISIBLE);
     registerForContextMenu(descriptionView);
     hideDuplicatedShortDescription();
