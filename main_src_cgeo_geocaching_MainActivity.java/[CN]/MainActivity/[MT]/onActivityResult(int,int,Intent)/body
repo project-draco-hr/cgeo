@@ -1,12 +1,11 @@
 {
-  if (requestCode == SCAN_REQUEST_CODE) {
-    if (resultCode == RESULT_OK) {
-      String scan=intent.getStringExtra("SCAN_RESULT");
-      if (StringUtils.isBlank(scan)) {
-        return;
-      }
-      SearchActivity.startActivityScan(scan,this);
+  IntentResult scanResult=IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
+  if (scanResult != null) {
+    String scan=scanResult.getContents();
+    if (StringUtils.isBlank(scan)) {
+      return;
     }
+    SearchActivity.startActivityScan(scan,this);
   }
  else   if (requestCode == SEARCH_REQUEST_CODE) {
     if (resultCode == RESULT_CANCELED) {
