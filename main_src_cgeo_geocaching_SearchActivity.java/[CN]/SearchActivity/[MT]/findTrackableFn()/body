@@ -1,5 +1,5 @@
 {
-  final String trackableText=((EditText)findViewById(R.id.trackable)).getText().toString();
+  final String trackableText=trackableEditText.getText().toString();
   if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_tb));
     return;

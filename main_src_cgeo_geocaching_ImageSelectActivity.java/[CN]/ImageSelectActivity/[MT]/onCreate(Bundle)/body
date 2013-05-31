@@ -1,5 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.visit_image);
+  Views.inject(this);
   scaleChoiceIndex=Settings.getLogImageScale();
   imageCaption="";
   imageDescription="";
@@ -17,29 +18,24 @@
     imageUri=Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
     scaleChoiceIndex=savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
   }
-  final Button cameraButton=(Button)findViewById(R.id.camera);
   cameraButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
       selectImageFromCamera();
     }
   }
 );
-  final Button storedButton=(Button)findViewById(R.id.stored);
   storedButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
       selectImageFromStorage();
     }
   }
 );
-  captionView=(EditText)findViewById(R.id.caption);
   if (StringUtils.isNotBlank(imageCaption)) {
     captionView.setText(imageCaption);
   }
-  descriptionView=(EditText)findViewById(R.id.description);
   if (StringUtils.isNotBlank(imageDescription)) {
     descriptionView.setText(imageDescription);
   }
-  scaleView=(Spinner)findViewById(R.id.logImageScale);
   scaleView.setSelection(scaleChoiceIndex);
   scaleView.setOnItemSelectedListener(new OnItemSelectedListener(){
     @Override public void onItemSelected(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
@@ -50,14 +46,12 @@
     }
   }
 );
-  final Button saveButton=(Button)findViewById(R.id.save);
   saveButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       saveImageInfo(true);
     }
   }
 );
-  final Button clearButton=(Button)findViewById(R.id.cancel);
   clearButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       saveImageInfo(false);

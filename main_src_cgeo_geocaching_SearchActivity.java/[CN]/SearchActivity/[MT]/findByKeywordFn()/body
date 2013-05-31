@@ -1,5 +1,5 @@
 {
-  String keyText=((EditText)findViewById(R.id.keyword)).getText().toString();
+  String keyText=keywordEditText.getText().toString();
   if (StringUtils.isBlank(keyText)) {
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_keyword));
     return;

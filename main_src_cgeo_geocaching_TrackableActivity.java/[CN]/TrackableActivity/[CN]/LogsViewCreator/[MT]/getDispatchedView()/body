@@ -10,7 +10,6 @@
         LogViewHolder holder=(LogViewHolder)rowView.getTag();
         if (null == holder) {
           holder=new LogViewHolder(rowView);
-          rowView.setTag(holder);
         }
         final LogEntry log=getItem(position);
         fillViewHolder(holder,log);

@@ -1,9 +1,4 @@
 {
-  added=((TextView)rowView.findViewById(R.id.added));
-  type=((TextView)rowView.findViewById(R.id.type));
-  author=((TextView)rowView.findViewById(R.id.author));
-  location=((TextView)rowView.findViewById(R.id.location));
-  text=(TextView)rowView.findViewById(R.id.log);
-  images=(TextView)rowView.findViewById(R.id.log_images);
-  marker=(ImageView)rowView.findViewById(R.id.log_mark);
+  Views.inject(this,rowView);
+  rowView.setTag(this);
 }

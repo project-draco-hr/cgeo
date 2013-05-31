@@ -11,17 +11,7 @@
   final ViewHolder holder;
   if (v == null) {
     v=inflater.inflate(R.layout.caches_item,null);
-    holder=new ViewHolder();
-    holder.checkbox=(CheckBox)v.findViewById(R.id.checkbox);
-    holder.logStatusMark=(ImageView)v.findViewById(R.id.log_status_mark);
-    holder.text=(TextView)v.findViewById(R.id.text);
-    holder.distance=(DistanceView)v.findViewById(R.id.distance);
-    holder.direction=(CompassMiniView)v.findViewById(R.id.direction);
-    holder.dirImg=(ImageView)v.findViewById(R.id.dirimg);
-    holder.inventory=(ImageView)v.findViewById(R.id.inventory);
-    holder.favorite=(TextView)v.findViewById(R.id.favorite);
-    holder.info=(TextView)v.findViewById(R.id.info);
-    v.setTag(holder);
+    holder=new ViewHolder(v);
   }
  else {
     holder=(ViewHolder)v.getTag();

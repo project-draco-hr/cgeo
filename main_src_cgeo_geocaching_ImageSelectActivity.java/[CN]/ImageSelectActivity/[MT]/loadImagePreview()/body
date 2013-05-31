@@ -6,7 +6,6 @@
     Log.i("Image does not exist");
     return;
   }
-  final ImageView imagePreview=(ImageView)findViewById(R.id.image_preview);
   BitmapFactory.Options bitmapOptions=new BitmapFactory.Options();
   bitmapOptions.inSampleSize=8;
   final Bitmap bitmap=BitmapFactory.decodeFile(imageUri.getPath(),bitmapOptions);
