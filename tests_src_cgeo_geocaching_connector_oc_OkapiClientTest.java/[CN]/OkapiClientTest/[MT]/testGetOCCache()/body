@@ -1,2 +1,13 @@
 {
+  final String geoCode="OU0331";
+  Geocache cache=OkapiClient.getCache(geoCode);
+  assertNotNull(cache);
+  assertEquals(geoCode,cache.getGeocode());
+  assertEquals("Oshkosh Municipal Tank",cache.getName());
+  assertTrue(cache.isDetailed());
+  cache=cgData.loadCache(geoCode,LoadFlags.LOAD_ALL_DB_ONLY);
+  assertNotNull(cache);
+  assertEquals(geoCode,cache.getGeocode());
+  assertEquals("Oshkosh Municipal Tank",cache.getName());
+  assertTrue(cache.isDetailed());
 }

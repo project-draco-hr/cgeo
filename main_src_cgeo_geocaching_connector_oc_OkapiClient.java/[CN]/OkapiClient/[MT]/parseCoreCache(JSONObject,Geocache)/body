@@ -9,5 +9,7 @@
   cache.setSize(getCacheSize(response));
   cache.setDifficulty((float)response.getDouble(CACHE_DIFFICULTY));
   cache.setTerrain((float)response.getDouble(CACHE_TERRAIN));
-  cache.setFound(response.getBoolean(CACHE_IS_FOUND));
+  if (!response.isNull(CACHE_IS_FOUND)) {
+    cache.setFound(response.getBoolean(CACHE_IS_FOUND));
+  }
 }

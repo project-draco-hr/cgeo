@@ -1,0 +1,18 @@
+{
+  if (connector == null) {
+    return null;
+  }
+  final String host=connector.getHost();
+  if (StringUtils.isBlank(host)) {
+    return null;
+  }
+  params.add("langpref",getPreferredLanguage());
+  if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+    OAuth.signOAuth(host,service,"GET",false,params,Settings.getOCDETokenPublic(),Settings.getOCDETokenSecret(),connector.getCK(),connector.getCS());
+  }
+ else {
+    connector.addAuthentication(params);
+  }
+  final String uri="http://" + host + service;
+  return Network.requestJSON(uri,params);
+}
