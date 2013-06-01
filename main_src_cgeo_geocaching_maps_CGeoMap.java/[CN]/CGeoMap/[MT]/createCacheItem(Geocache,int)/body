@@ -1,7 +1,7 @@
 {
   final ArrayList<Drawable> layers=new ArrayList<Drawable>(9);
   final ArrayList<int[]> insets=new ArrayList<int[]>(8);
-  final Drawable marker=getResources().getDrawable(cache.isDisabled() || cache.isArchived() ? cache.getCacheRealm().markerDisabledId : cache.getCacheRealm().markerId);
+  final Drawable marker=getResources().getDrawable(cache.getMapMarkerId());
   layers.add(marker);
   final int resolution=marker.getIntrinsicWidth() > 40 ? 1 : 0;
   if (!cache.isReliableLatLon()) {
