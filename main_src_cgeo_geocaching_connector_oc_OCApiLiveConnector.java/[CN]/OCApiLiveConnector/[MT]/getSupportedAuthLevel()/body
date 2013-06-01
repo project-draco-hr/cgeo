@@ -1,3 +1,6 @@
 {
-  return OAuthLevel.Level3;
+  if (StringUtils.isNotBlank(Settings.getOCDETokenPublic()) && StringUtils.isNotBlank(Settings.getOCDETokenSecret())) {
+    return OAuthLevel.Level3;
+  }
+  return OAuthLevel.Level1;
 }

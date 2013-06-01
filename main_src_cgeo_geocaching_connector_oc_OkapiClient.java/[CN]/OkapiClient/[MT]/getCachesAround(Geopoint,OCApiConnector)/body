@@ -11,7 +11,7 @@
   addFilterParams(valueMap);
   params.add("search_params",new JSONObject(valueMap).toString());
   addRetrieveParams(params,connector);
-  final JSONObject data=request(connector,SERVICE_SEARCH_AND_RETRIEVE,params);
+  final JSONObject data=request(connector,OkapiService.SERVICE_SEARCH_AND_RETRIEVE,params);
   if (data == null) {
     return Collections.emptyList();
   }
