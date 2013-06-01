@@ -4,7 +4,13 @@
     return;
   }
   if (StringUtils.isNotBlank(descriptionString)) {
-    descriptionView.setText(description,TextView.BufferType.SPANNABLE);
+    try {
+      descriptionView.setText(description,TextView.BufferType.SPANNABLE);
+    }
+ catch (    Exception e) {
+      Log.e("Android bug setting text: ",e);
+      descriptionView.setText(description.toString());
+    }
     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
     fixTextColor(descriptionView,descriptionString);
     descriptionView.setVisibility(View.VISIBLE);
