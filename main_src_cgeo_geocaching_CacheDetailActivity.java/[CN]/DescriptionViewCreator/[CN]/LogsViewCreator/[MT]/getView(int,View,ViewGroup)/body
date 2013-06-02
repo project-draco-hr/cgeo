@@ -6,7 +6,6 @@
   LogViewHolder holder=(LogViewHolder)rowView.getTag();
   if (null == holder) {
     holder=new LogViewHolder(rowView);
-    rowView.setTag(holder);
   }
   holder.setPosition(position);
   final LogEntry log=getItem(position);
@@ -19,12 +18,12 @@
   }
   holder.type.setText(log.type.getL10n());
   holder.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
-  holder.count.setVisibility(View.VISIBLE);
+  holder.countOrLocation.setVisibility(View.VISIBLE);
   if (log.found == -1) {
-    holder.count.setVisibility(View.GONE);
+    holder.countOrLocation.setVisibility(View.GONE);
   }
  else {
-    holder.count.setText(res.getQuantityString(R.plurals.cache_counts,log.found,log.found));
+    holder.countOrLocation.setText(res.getQuantityString(R.plurals.cache_counts,log.found,log.found));
   }
   String logText=log.log;
   if (BaseUtils.containsHtml(logText)) {
@@ -55,11 +54,11 @@
   }
   int marker=log.type.markerId;
   if (marker != 0) {
-    holder.statusMarker.setVisibility(View.VISIBLE);
-    holder.statusMarker.setImageResource(marker);
+    holder.marker.setVisibility(View.VISIBLE);
+    holder.marker.setImageResource(marker);
   }
  else {
-    holder.statusMarker.setVisibility(View.GONE);
+    holder.marker.setVisibility(View.GONE);
   }
   if (null == convertView) {
     holder.author.setOnClickListener(userActionsClickListener);
