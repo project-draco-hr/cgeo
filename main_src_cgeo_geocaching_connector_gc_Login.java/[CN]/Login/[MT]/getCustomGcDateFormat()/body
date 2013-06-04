@@ -1,0 +1,7 @@
+{
+  final String format=Settings.getGcCustomDate();
+  if (gcCustomDateFormats.containsKey(format)) {
+    return gcCustomDateFormats.get(format);
+  }
+  return gcCustomDateFormats.get("MM/dd/yyyy");
+}
