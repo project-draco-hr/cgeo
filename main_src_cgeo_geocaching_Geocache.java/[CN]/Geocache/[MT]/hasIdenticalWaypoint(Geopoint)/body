@@ -1,6 +1,7 @@
 {
   for (  final Waypoint waypoint : waypoints) {
-    if (waypoint.getCoords().equals(point)) {
+    final Geopoint coords=waypoint.getCoords();
+    if (coords != null && coords.equals(point)) {
       return true;
     }
   }
