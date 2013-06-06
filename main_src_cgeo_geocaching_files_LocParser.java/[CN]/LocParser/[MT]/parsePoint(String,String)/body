@@ -3,7 +3,7 @@
     return new Geopoint(Double.valueOf(latitude),Double.valueOf(longitude));
   }
  catch (  NumberFormatException e) {
-    Log.e("LOC format has changed");
+    Log.e("LOC format has changed",e);
   }
   return new Geopoint(latitude,longitude);
 }
