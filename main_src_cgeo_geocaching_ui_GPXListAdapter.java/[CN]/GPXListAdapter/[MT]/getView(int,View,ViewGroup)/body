@@ -1,7 +1,4 @@
 {
-  if (inflater == null) {
-    inflater=((Activity)getContext()).getLayoutInflater();
-  }
   if (position > getCount()) {
     Log.w("GPXListAdapter.getView: Attempt to access missing item #" + position);
     return null;
@@ -11,10 +8,7 @@
   final ViewHolder holder;
   if (view == null) {
     view=inflater.inflate(R.layout.gpx_item,null);
-    holder=new ViewHolder();
-    holder.filepath=(TextView)view.findViewById(R.id.filepath);
-    holder.filename=(TextView)view.findViewById(R.id.filename);
-    view.setTag(holder);
+    holder=new ViewHolder(view);
   }
  else {
     holder=(ViewHolder)view.getTag();

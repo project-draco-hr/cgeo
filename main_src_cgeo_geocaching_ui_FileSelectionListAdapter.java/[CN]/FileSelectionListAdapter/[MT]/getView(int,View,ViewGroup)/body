@@ -1,7 +1,4 @@
 {
-  if (inflater == null) {
-    inflater=((Activity)getContext()).getLayoutInflater();
-  }
   if (position > getCount()) {
     Log.w("FileSelectionListAdapter.getView: Attempt to access missing item #" + position);
     return null;
@@ -11,10 +8,7 @@
   ViewHolder holder;
   if (v == null) {
     v=inflater.inflate(R.layout.mapfile_item,null);
-    holder=new ViewHolder();
-    holder.filepath=(TextView)v.findViewById(R.id.mapfilepath);
-    holder.filename=(TextView)v.findViewById(R.id.mapfilename);
-    v.setTag(holder);
+    holder=new ViewHolder(v);
   }
  else {
     holder=(ViewHolder)v.getTag();

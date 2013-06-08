@@ -4,10 +4,7 @@
   final ViewHolder holder;
   if (view == null) {
     view=inflater.inflate(R.layout.addresses_item,null);
-    holder=new ViewHolder();
-    holder.label=(TextView)view.findViewById(R.id.label);
-    holder.distance=(TextView)view.findViewById(R.id.distance);
-    view.setTag(holder);
+    holder=new ViewHolder(view);
   }
  else {
     holder=(ViewHolder)view.getTag();
