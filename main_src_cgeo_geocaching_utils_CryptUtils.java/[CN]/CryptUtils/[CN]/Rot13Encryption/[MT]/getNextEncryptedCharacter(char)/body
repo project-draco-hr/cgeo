@@ -1,0 +1,15 @@
+{
+  int result=c;
+  if (result == '[') {
+    plaintext=true;
+  }
+ else   if (result == ']') {
+    plaintext=false;
+  }
+ else   if (!plaintext) {
+    int capitalized=result & 32;
+    result&=~capitalized;
+    result=((result >= 'A') && (result <= 'Z') ? ((result - 'A' + 13) % 26 + 'A') : result) | capitalized;
+  }
+  return (char)result;
+}
