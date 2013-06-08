@@ -31,7 +31,7 @@
           cache.setGeocode(name.trim());
         }
       }
-      if (StringUtils.isNotBlank(cache.getGeocode()) && cache.getCoords() != null && ((type == null && sym == null) || StringUtils.contains(type,"geocache") || StringUtils.contains(sym,"geocache"))) {
+      if (isValidForImport()) {
         fixCache(cache);
         cache.setListId(listId);
         cache.setDetailed(true);
@@ -142,6 +142,14 @@
       if (matcherCode.matches()) {
         String geocode=matcherCode.group(1);
         cache.setGeocode(geocode);
+      }
+    }
+  }
+);
+  waypoint.getChild(namespace,"urlname").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String urlName){
+      if (cache.getName().equals(cache.getGeocode()) && StringUtils.startsWith(cache.getGeocode(),"WM")) {
+        cache.setName(StringUtils.trim(urlName));
       }
     }
   }

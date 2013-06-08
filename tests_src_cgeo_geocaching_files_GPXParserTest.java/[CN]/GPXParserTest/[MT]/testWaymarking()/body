@@ -1,0 +1,11 @@
+{
+  final List<Geocache> caches=readGPX10(R.raw.waymarking_gpx);
+  assertEquals(1,caches.size());
+  final Geocache waymark=caches.get(0);
+  assertNotNull(waymark);
+  assertEquals("WM7BM7",waymark.getGeocode());
+  assertEquals("Roman water pipe Kornwestheim",waymark.getName());
+  assertTrue(StringUtils.isNotBlank(waymark.getUrl()));
+  assertEquals(CacheType.UNKNOWN,waymark.getType());
+  assertEquals(CacheSize.UNKNOWN,waymark.getSize());
+}

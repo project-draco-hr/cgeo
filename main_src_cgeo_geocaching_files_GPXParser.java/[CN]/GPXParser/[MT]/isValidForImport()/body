@@ -1,0 +1,9 @@
+{
+  if (StringUtils.isBlank(cache.getGeocode())) {
+    return false;
+  }
+  if (cache.getCoords() == null) {
+    return false;
+  }
+  return ((type == null && sym == null) || StringUtils.contains(type,"geocache") || StringUtils.contains(sym,"geocache")|| StringUtils.containsIgnoreCase(sym,"waymark"));
+}
