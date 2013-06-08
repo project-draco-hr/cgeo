@@ -5,13 +5,13 @@
   }
   StringBuilder res=new StringBuilder(500);
   res.append(SERVICE_CACHE_CORE_FIELDS);
-  res.append("|").append(SERVICE_CACHE_ADDITIONAL_FIELDS);
+  res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_FIELDS);
   if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-    res.append("|").append(SERVICE_CACHE_CORE_L3_FIELDS);
-    res.append("|").append(SERVICE_CACHE_ADDITIONAL_L3_FIELDS);
+    res.append(SEPARATOR).append(SERVICE_CACHE_CORE_L3_FIELDS);
+    res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_L3_FIELDS);
   }
   if (connector.getApiSupport() == ApiSupport.current) {
-    res.append("|").append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS);
+    res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS);
   }
   return res.toString();
 }

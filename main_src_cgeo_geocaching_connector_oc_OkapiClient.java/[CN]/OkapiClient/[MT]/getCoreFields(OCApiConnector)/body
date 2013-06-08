@@ -4,7 +4,7 @@
     return StringUtils.EMPTY;
   }
   if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-    return SERVICE_CACHE_CORE_FIELDS + "|" + SERVICE_CACHE_CORE_L3_FIELDS;
+    return SERVICE_CACHE_CORE_FIELDS + SEPARATOR + SERVICE_CACHE_CORE_L3_FIELDS;
   }
   return SERVICE_CACHE_CORE_FIELDS;
 }
