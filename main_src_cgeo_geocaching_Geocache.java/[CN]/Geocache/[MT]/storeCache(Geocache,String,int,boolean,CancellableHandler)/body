@@ -2,8 +2,11 @@
   try {
     Geocache cache;
     if (origCache != null) {
+      SearchResult search=null;
       if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
-        final SearchResult search=searchByGeocode(origCache.getGeocode(),null,listId,false,handler);
+        search=searchByGeocode(origCache.getGeocode(),null,listId,false,handler);
+      }
+      if (search != null) {
         cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
       }
  else {
