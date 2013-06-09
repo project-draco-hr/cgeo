@@ -9,7 +9,7 @@
   final LinearLayout inventoryView=(LinearLayout)findViewById(R.id.inventory);
   inventoryView.removeAllViews();
   for (  TrackableLog tb : trackables) {
-    LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.visit_trackable,null);
+    LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.logcache_trackable_item,null);
     ((TextView)inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
     ((TextView)inventoryItem.findViewById(R.id.name)).setText(tb.name);
     final TextView actionButton=(TextView)inventoryItem.findViewById(R.id.action);
@@ -26,7 +26,7 @@
     inventoryItem.setClickable(true);
     inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      View view){
-        final Intent trackablesIntent=new Intent(VisitCacheActivity.this,TrackableActivity.class);
+        final Intent trackablesIntent=new Intent(LogCacheActivity.this,TrackableActivity.class);
         trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,tbCode);
         startActivity(trackablesIntent);
       }
