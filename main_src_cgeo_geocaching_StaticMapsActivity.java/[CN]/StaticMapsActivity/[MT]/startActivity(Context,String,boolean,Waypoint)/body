@@ -1,12 +1,7 @@
 {
-  final Intent intent=new Intent(activity,StaticMapsActivity.class);
-  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-  intent.putExtra(EXTRAS_GEOCODE,geocode);
-  if (download) {
-    intent.putExtra(EXTRAS_DOWNLOAD,true);
-  }
+  IntentBuilder_ builder=StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
   if (waypoint != null) {
-    intent.putExtra(EXTRAS_WAYPOINT,waypoint.getId());
+    builder.waypoint_id(waypoint.getId());
   }
-  activity.startActivity(intent);
+  builder.start();
 }

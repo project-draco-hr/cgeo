@@ -1,13 +1,5 @@
 {
   super.onCreate(savedInstanceState,R.layout.map_static);
-  final Bundle extras=getIntent().getExtras();
-  if (extras != null) {
-    download=extras.getBoolean(EXTRAS_DOWNLOAD,false);
-    geocode=extras.getString(EXTRAS_GEOCODE);
-    if (extras.containsKey(EXTRAS_WAYPOINT)) {
-      waypoint_id=extras.getInt(EXTRAS_WAYPOINT);
-    }
-  }
   if (geocode == null) {
     showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
     finish();
