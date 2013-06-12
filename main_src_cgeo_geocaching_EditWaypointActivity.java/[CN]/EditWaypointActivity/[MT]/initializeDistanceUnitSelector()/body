@@ -1,13 +1,6 @@
 {
-  if (StringUtils.isBlank(distanceUnit)) {
-    if (Settings.isUseMetricUnits()) {
-      distanceUnitSelector.setSelection(0);
-      distanceUnit=res.getStringArray(R.array.distance_units)[0];
-    }
- else {
-      distanceUnitSelector.setSelection(2);
-      distanceUnit=res.getStringArray(R.array.distance_units)[2];
-    }
+  distanceUnits=new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.distance_units)));
+  if (initViews) {
+    distanceUnitSelector.setSelection(Settings.isUseMetricUnits() ? 0 : 2);
   }
-  distanceUnitSelector.setOnItemSelectedListener(new ChangeDistanceUnit(this));
 }

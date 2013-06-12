@@ -1,11 +1,5 @@
 {
   super.onCreate(savedInstanceState,R.layout.editwaypoint_activity);
-  Bundle extras=getIntent().getExtras();
-  if (extras != null) {
-    geocode=extras.getString(Intents.EXTRA_GEOCODE);
-    wpCount=extras.getInt(Intents.EXTRA_COUNT,0);
-    id=extras.getInt(Intents.EXTRA_WAYPOINT_ID);
-  }
   if (StringUtils.isBlank(geocode) && id <= 0) {
     showToast(res.getString(R.string.err_waypoint_cache_unknown));
     finish();
@@ -19,33 +13,28 @@
   }
   buttonLat.setOnClickListener(new CoordDialogListener());
   buttonLon.setOnClickListener(new CoordDialogListener());
-  addWaypoint.setOnClickListener(new CoordsListener());
+  addWaypoint.setOnClickListener(new SaveWaypointListener());
   List<String> wayPointNames=new ArrayList<String>();
   for (  WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
     wayPointNames.add(wpt.getL10n());
   }
   ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,wayPointNames);
   waypointName.setAdapter(adapter);
+  if (savedInstanceState != null) {
+    initViews=false;
+  }
   if (id > 0) {
-    waypointTypeSelector.setVisibility(View.GONE);
     waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
     waitDialog.setCancelable(true);
     (new LoadWaypointThread()).start();
   }
  else {
     initializeWaypointTypeSelector();
-  }
-  if (geocode != null) {
-    Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
-    IConnector con=ConnectorFactory.getConnector(geocode);
-    setCoordsModificationVisibility(con,cache);
-  }
-  visitedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-    @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
-      visited=isChecked;
+    if (geocode != null) {
+      final Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+      setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode),cache);
     }
   }
-);
   initializeDistanceUnitSelector();
   disableSuggestions(distanceView);
 }
