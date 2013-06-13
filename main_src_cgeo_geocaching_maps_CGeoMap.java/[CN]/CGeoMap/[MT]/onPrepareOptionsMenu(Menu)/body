@@ -34,14 +34,22 @@
     item.setVisible(mapView.hasMapThemes());
     menu.findItem(R.id.menu_as_list).setEnabled(isLiveEnabled && !isLoading());
     menu.findItem(R.id.submenu_strategy).setEnabled(isLiveEnabled);
-    Strategy strategy=Settings.getLiveMapStrategy();
-    menu.findItem(R.id.menu_strategy_fastest).setChecked(strategy == Strategy.FASTEST);
-    menu.findItem(R.id.menu_strategy_fast).setChecked(strategy == Strategy.FAST);
-    menu.findItem(R.id.menu_strategy_auto).setChecked(strategy == Strategy.AUTO);
-    menu.findItem(R.id.menu_strategy_detailed).setChecked(strategy == Strategy.DETAILED);
-  }
- catch (  Exception e) {
-    Log.e("CGeoMap.onPrepareOptionsMenu",e);
-  }
-  return true;
+switch (Settings.getLiveMapStrategy()) {
+case FASTEST:
+      menu.findItem(R.id.menu_strategy_fastest).setChecked(true);
+    break;
+case FAST:
+  menu.findItem(R.id.menu_strategy_fast).setChecked(true);
+break;
+case AUTO:
+menu.findItem(R.id.menu_strategy_auto).setChecked(true);
+break;
+default :
+menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
+}
+}
+ catch (Exception e) {
+Log.e("CGeoMap.onPrepareOptionsMenu",e);
+}
+return true;
 }
