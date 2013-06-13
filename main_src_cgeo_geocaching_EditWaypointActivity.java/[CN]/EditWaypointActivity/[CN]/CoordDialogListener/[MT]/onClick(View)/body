@@ -1,10 +1,9 @@
 {
   Geopoint gp=null;
-  if (waypoint != null && waypoint.getCoords() != null) {
-    gp=waypoint.getCoords();
+  try {
+    gp=new Geopoint(buttonLat.getText().toString(),buttonLon.getText().toString());
   }
- else   if (gpTemp != null) {
-    gp=gpTemp;
+ catch (  Geopoint.ParseException e) {
   }
   Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
   CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(EditWaypointActivity.this,cache,gp,app.currentGeo());
@@ -13,12 +12,6 @@
     @Override public void update(    final Geopoint gp){
       buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
       buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-      if (waypoint != null) {
-        waypoint.setCoords(gp);
-      }
- else {
-        gpTemp=gp;
-      }
     }
   }
 );

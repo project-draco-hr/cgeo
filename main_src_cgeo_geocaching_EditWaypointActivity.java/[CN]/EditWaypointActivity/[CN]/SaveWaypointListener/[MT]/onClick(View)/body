@@ -1,6 +1,6 @@
 {
   final String bearingText=bearing.getText().toString();
-  final String distanceText=distanceView.getText().toString() + distanceUnit;
+  final String distanceText=distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
   final String latText=buttonLat.getText().toString();
   final String lonText=buttonLon.getText().toString();
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
@@ -48,6 +48,8 @@
   final String name=StringUtils.isNotEmpty(givenName) ? givenName : res.getString(R.string.waypoint) + " " + (wpCount + 1);
   final String noteText=note.getText().toString().trim();
   final Geopoint coordsToSave=coords;
+  final WaypointType type=wpTypes.get(waypointTypeSelector.getSelectedItemPosition());
+  final boolean visited=visitedCheckBox.isChecked();
   final ProgressDialog progress=ProgressDialog.show(EditWaypointActivity.this,getString(R.string.cache),getString(R.string.waypoint_being_saved),true);
   final Handler finishHandler=new Handler(){
     @Override public void handleMessage(    Message msg){
