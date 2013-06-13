@@ -1,4 +1,7 @@
 {
+  if (StringUtils.isBlank(html)) {
+    return StringUtils.EMPTY;
+  }
   String result=html.toString();
   if (html instanceof Spanned) {
     Spanned text=(Spanned)html;
