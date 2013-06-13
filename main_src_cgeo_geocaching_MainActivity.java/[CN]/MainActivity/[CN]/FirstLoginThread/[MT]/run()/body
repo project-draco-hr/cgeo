@@ -2,20 +2,29 @@
   if (app == null) {
     return;
   }
-  if (!Settings.isGCConnectorActive()) {
-    return;
+  if (Settings.isGCConnectorActive()) {
+    final StatusCode status=Login.login();
+    if (status == StatusCode.NO_ERROR) {
+      app.firstRun=false;
+      Login.detectGcCustomDate();
+      updateUserInfoHandler.sendEmptyMessage(-1);
+    }
+    if (app.showLoginToast) {
+      firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0,status));
+      app.showLoginToast=false;
+      if (status == StatusCode.NO_LOGIN_INFO_STORED) {
+        SettingsActivity.startActivity(MainActivity.this);
+      }
+    }
   }
-  final StatusCode status=Login.login();
-  if (status == StatusCode.NO_ERROR) {
-    app.firstRun=false;
-    Login.detectGcCustomDate();
-    updateUserInfoHandler.sendEmptyMessage(-1);
-  }
-  if (app.showLoginToast) {
-    firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0,status));
-    app.showLoginToast=false;
-    if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-      SettingsActivity.startActivity(MainActivity.this);
+  if (Settings.isOCConnectorActive()) {
+    IConnector conn=ConnectorFactory.getConnector("OCXXXX");
+    if (conn instanceof OCApiLiveConnector) {
+      OCApiLiveConnector ocapiConn=(OCApiLiveConnector)conn;
+      if (ocapiConn.supportsPersonalization()) {
+        ocapiConn.retrieveUserInfo();
+      }
+      updateUserInfoHandler.sendEmptyMessage(-1);
     }
   }
 }

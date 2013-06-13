@@ -1,0 +1,35 @@
+{
+  final Parameters params=new Parameters("fields",USER_INFO_FIELDS);
+  final JSONObject data=request(connector,OkapiService.SERVICE_USER,params);
+  if (data == null) {
+    return new UserInfo(StringUtils.EMPTY,0,false);
+  }
+  String name=StringUtils.EMPTY;
+  int finds=0;
+  boolean success=true;
+  if (!data.isNull(USER_USERNAME)) {
+    try {
+      name=data.getString(USER_USERNAME);
+    }
+ catch (    JSONException e) {
+      Log.e("OkapiClient.getUserInfo - name",e);
+      success=false;
+    }
+  }
+ else {
+    success=false;
+  }
+  if (!data.isNull(USER_CACHES_FOUND)) {
+    try {
+      finds=data.getInt(USER_CACHES_FOUND);
+    }
+ catch (    JSONException e) {
+      Log.e("OkapiClient.getUserInfo - finds",e);
+      success=false;
+    }
+  }
+ else {
+    success=false;
+  }
+  return new UserInfo(name,finds,success);
+}
