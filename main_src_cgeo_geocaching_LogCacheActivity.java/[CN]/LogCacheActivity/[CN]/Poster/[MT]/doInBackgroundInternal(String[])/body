@@ -9,7 +9,7 @@
         cache.setFound(true);
       }
       cgData.saveChangedCache(cache);
-      cgData.clearLogOffline(geocode);
+      cache.clearOfflineLog();
       if (typeSelected == LogType.FOUND_IT) {
         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
           Twitter.postTweetCache(geocode);
