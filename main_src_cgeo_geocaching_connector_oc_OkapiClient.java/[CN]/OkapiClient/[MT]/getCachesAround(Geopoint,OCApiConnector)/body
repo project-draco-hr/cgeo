@@ -4,11 +4,7 @@
   final Map<String,String> valueMap=new LinkedHashMap<String,String>();
   valueMap.put("center",centerString);
   valueMap.put("limit","20");
-  if (connector.getSupportedAuthLevel() != OAuthLevel.Level3) {
-    Log.e("Calling OkapiClient.getCachesAround with wrong connector");
-    return Collections.emptyList();
-  }
-  addFilterParams(valueMap);
+  addFilterParams(valueMap,connector);
   params.add("search_params",new JSONObject(valueMap).toString());
   addRetrieveParams(params,connector);
   final JSONObject data=request(connector,OkapiService.SERVICE_SEARCH_AND_RETRIEVE,params);
