@@ -79,7 +79,7 @@
       if (Login.getActualCachesFound() >= 0) {
         Login.setActualCachesFound(Login.getActualCachesFound() + 1);
       }
-      final String logID=BaseUtils.getMatch(page,GCConstants.PATTERN_LOG_IMAGE_UPLOAD,"");
+      final String logID=TextUtils.getMatch(page,GCConstants.PATTERN_LOG_IMAGE_UPLOAD,"");
       return new ImmutablePair<StatusCode,String>(StatusCode.NO_ERROR,logID);
     }
   }

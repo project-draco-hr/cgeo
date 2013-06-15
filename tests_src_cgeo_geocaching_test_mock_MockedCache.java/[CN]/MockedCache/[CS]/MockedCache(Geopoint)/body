@@ -1,5 +1,5 @@
 {
   this.coords=coords;
   this.data=MockedCache.readCachePage(getGeocode());
-  this.mockedDataUser=BaseUtils.getMatch(data,GCConstants.PATTERN_LOGIN_NAME,true,"");
+  this.mockedDataUser=TextUtils.getMatch(data,GCConstants.PATTERN_LOGIN_NAME,true,"");
 }

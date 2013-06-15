@@ -9,7 +9,7 @@
     while ((line=br.readLine()) != null) {
       buffer.append(line).append('\n');
     }
-    return BaseUtils.replaceWhitespace(buffer.toString());
+    return TextUtils.replaceWhitespace(buffer.toString());
   }
  catch (  IOException e) {
     Assert.fail(e.getMessage());

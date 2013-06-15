@@ -16,11 +16,11 @@
     XmlUtils.multipleTexts(gpx,PREFIX_GROUNDSPEAK,"name",cache.getName(),"placed_by",cache.getOwnerDisplayName(),"owner",cache.getOwnerUserId(),"type",cache.getType().pattern,"container",cache.getSize().id,"difficulty",Float.toString(cache.getDifficulty()),"terrain",Float.toString(cache.getTerrain()),"country",cache.getLocation(),"state","","encoded_hints",cache.getHint());
     writeAttributes(gpx,cache);
     gpx.startTag(PREFIX_GROUNDSPEAK,"short_description");
-    gpx.attribute("","html",BaseUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
+    gpx.attribute("","html",TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
     gpx.text(cache.getShortDescription());
     gpx.endTag(PREFIX_GROUNDSPEAK,"short_description");
     gpx.startTag(PREFIX_GROUNDSPEAK,"long_description");
-    gpx.attribute("","html",BaseUtils.containsHtml(cache.getDescription()) ? "True" : "False");
+    gpx.attribute("","html",TextUtils.containsHtml(cache.getDescription()) ? "True" : "False");
     gpx.text(cache.getDescription());
     gpx.endTag(PREFIX_GROUNDSPEAK,"long_description");
     writeLogs(gpx,cache);

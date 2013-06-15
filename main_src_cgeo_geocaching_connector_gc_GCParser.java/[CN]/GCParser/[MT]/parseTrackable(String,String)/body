@@ -7,12 +7,12 @@
     return null;
   }
   final Trackable trackable=new Trackable();
-  trackable.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()));
-  trackable.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GUID,true,trackable.getGuid()));
-  trackable.setIconUrl(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ICON,true,trackable.getIconUrl()));
-  trackable.setName(Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,true,"")).toString());
+  trackable.setGeocode(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GEOCODE,true,trackable.getGeocode()));
+  trackable.setGuid(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GUID,true,trackable.getGuid()));
+  trackable.setIconUrl(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ICON,true,trackable.getIconUrl()));
+  trackable.setName(Html.fromHtml(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,true,"")).toString());
   if (StringUtils.isNotBlank(trackable.getName())) {
-    trackable.setType(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_TYPE,true,trackable.getType()));
+    trackable.setType(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_TYPE,true,trackable.getType()));
   }
   try {
     final MatcherWrapper matcherOwner=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER,page);
@@ -24,7 +24,7 @@
  catch (  Exception e) {
     Log.w("GCParser.parseTrackable: Failed to parse trackable owner name");
   }
-  trackable.setOrigin(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ORIGIN,true,trackable.getOrigin()));
+  trackable.setOrigin(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ORIGIN,true,trackable.getOrigin()));
   try {
     final MatcherWrapper matcherSpottedCache=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE,page);
     if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
@@ -38,10 +38,10 @@
       trackable.setSpottedName(matcherSpottedUser.group(2).trim());
       trackable.setSpottedType(Trackable.SPOTTED_USER);
     }
-    if (BaseUtils.matches(page,GCConstants.PATTERN_TRACKABLE_SPOTTEDUNKNOWN)) {
+    if (TextUtils.matches(page,GCConstants.PATTERN_TRACKABLE_SPOTTEDUNKNOWN)) {
       trackable.setSpottedType(Trackable.SPOTTED_UNKNOWN);
     }
-    if (BaseUtils.matches(page,GCConstants.PATTERN_TRACKABLE_SPOTTEDOWNER)) {
+    if (TextUtils.matches(page,GCConstants.PATTERN_TRACKABLE_SPOTTEDOWNER)) {
       trackable.setSpottedType(Trackable.SPOTTED_OWNER);
     }
   }
@@ -49,7 +49,7 @@
     Log.w("GCParser.parseTrackable: Failed to parse trackable last known place");
   }
   try {
-    String releaseString=BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null);
+    String releaseString=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null);
     if (releaseString != null) {
       trackable.setReleased(dateTbIn1.parse(releaseString));
       if (trackable.getReleased() == null) {
@@ -60,7 +60,7 @@
  catch (  ParseException e1) {
     trackable.setReleased(null);
   }
-  final String distance=BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_DISTANCE,false,null);
+  final String distance=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_DISTANCE,false,null);
   if (null != distance) {
     try {
       trackable.setDistance(DistanceParser.parseDistance(distance,Settings.isUseMetricUnits()));
@@ -69,7 +69,7 @@
       Log.e("GCParser.parseTrackable: Failed to parse distance",e);
     }
   }
-  trackable.setGoal(convertLinks(BaseUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GOAL,true,trackable.getGoal())));
+  trackable.setGoal(convertLinks(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GOAL,true,trackable.getGoal())));
   try {
     final MatcherWrapper matcherDetailsImage=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE,page);
     if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {

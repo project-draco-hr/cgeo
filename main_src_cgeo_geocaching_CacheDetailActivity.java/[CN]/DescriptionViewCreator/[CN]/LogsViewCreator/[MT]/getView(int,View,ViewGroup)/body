@@ -26,7 +26,7 @@
     holder.countOrLocation.setText(res.getQuantityString(R.plurals.cache_counts,log.found,log.found));
   }
   String logText=log.log;
-  if (BaseUtils.containsHtml(logText)) {
+  if (TextUtils.containsHtml(logText)) {
     logText=log.getDisplayText();
     HtmlImageCounter imageCounter=new HtmlImageCounter();
     final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();

@@ -1,12 +1,12 @@
 {
   try {
-    final String profile=BaseUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
-    Settings.setMemberStatus(BaseUtils.getMatch(profile,GCConstants.PATTERN_MEMBER_STATUS,true,null));
+    final String profile=TextUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
+    Settings.setMemberStatus(TextUtils.getMatch(profile,GCConstants.PATTERN_MEMBER_STATUS,true,null));
     if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
       Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
     }
-    setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(profile,GCConstants.PATTERN_CACHES_FOUND,true,"-1").replaceAll("[,.]","")));
-    final String avatarURL=BaseUtils.getMatch(profile,GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE,false,null);
+    setActualCachesFound(Integer.parseInt(TextUtils.getMatch(profile,GCConstants.PATTERN_CACHES_FOUND,true,"-1").replaceAll("[,.]","")));
+    final String avatarURL=TextUtils.getMatch(profile,GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE,false,null);
     if (null != avatarURL) {
       final HtmlImage imgGetter=new HtmlImage("",false,0,false);
       return imgGetter.getDrawable(avatarURL);

@@ -10,7 +10,7 @@
     startActivity(cachesIntent);
     return true;
   }
-  final String trackable=BaseUtils.getMatch(query,GCConstants.PATTERN_TB_CODE,true,0,"",false);
+  final String trackable=TextUtils.getMatch(query,GCConstants.PATTERN_TB_CODE,true,0,"",false);
   if (StringUtils.isNotBlank(trackable)) {
     final Intent trackablesIntent=new Intent(this,TrackableActivity.class);
     trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,trackable.toUpperCase(Locale.US));

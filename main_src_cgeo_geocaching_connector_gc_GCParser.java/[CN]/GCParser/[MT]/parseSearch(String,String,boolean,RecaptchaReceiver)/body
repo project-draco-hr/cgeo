@@ -10,12 +10,12 @@
   searchResult.viewstates=Login.getViewstates(page);
   String recaptchaChallenge=null;
   if (showCaptcha) {
-    String recaptchaJsParam=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
+    String recaptchaJsParam=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
     if (recaptchaJsParam != null) {
       final Parameters params=new Parameters("k",recaptchaJsParam.trim());
       final String recaptchaJs=Network.getResponseData(Network.getRequest("http://www.google.com/recaptcha/api/challenge",params));
       if (StringUtils.isNotBlank(recaptchaJs)) {
-        recaptchaChallenge=BaseUtils.getMatch(recaptchaJs,GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE,true,1,null,true);
+        recaptchaChallenge=TextUtils.getMatch(recaptchaJs,GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE,true,1,null,true);
       }
     }
     if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
@@ -72,15 +72,15 @@
     if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
       continue;
     }
-    cache.setGeocode(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_GEOCODE,true,1,cache.getGeocode(),true));
-    cache.setType(CacheType.getByPattern(BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_TYPE,true,1,null,true)));
+    cache.setGeocode(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_GEOCODE,true,1,cache.getGeocode(),true));
+    cache.setType(CacheType.getByPattern(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_TYPE,true,1,null,true)));
     if (Settings.getLoadDirImg()) {
-      final String direction=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,1,null,false);
+      final String direction=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,1,null,false);
       if (direction != null) {
         cache.setDirectionImg(direction);
       }
     }
-    final String distance=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,2,null,false);
+    final String distance=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,2,null,false);
     if (distance != null) {
       cache.setDistance(DistanceParser.parseDistance(distance,Settings.isUseMetricUnits()));
     }
@@ -95,7 +95,7 @@
         cache.setTerrain(terrain);
       }
     }
-    final String container=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_CONTAINER,false,1,null,false);
+    final String container=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_CONTAINER,false,1,null,false);
     cache.setSize(CacheSize.getById(container));
     final MatcherWrapper matcherTbs=new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES,row);
     String inventoryPre=null;
@@ -120,13 +120,13 @@
     }
     cache.setPremiumMembersOnly(row.contains("/images/icons/16/premium_only.png"));
     cache.setFound(row.contains("/images/icons/16/found.png"));
-    String result=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_ID,null);
+    String result=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_ID,null);
     if (null != result) {
       cache.setCacheId(result);
       cids.add(cache.getCacheId());
     }
     try {
-      result=BaseUtils.getMatch(row,GCConstants.PATTERN_SEARCH_FAVORITE,false,1,null,true);
+      result=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_FAVORITE,false,1,null,true);
       if (null != result) {
         cache.setFavoritePoints(Integer.parseInt(result));
       }
@@ -137,7 +137,7 @@
     searchResult.addAndPutInCache(cache);
   }
   try {
-    String result=BaseUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
+    String result=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
     if (null != result) {
       searchResult.setTotal(Integer.parseInt(result));
     }

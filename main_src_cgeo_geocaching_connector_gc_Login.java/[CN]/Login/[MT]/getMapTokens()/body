@@ -1,7 +1,7 @@
 {
   final HttpResponse response=Network.getRequest(GCConstants.URL_LIVE_MAP);
   final String data=Network.getResponseData(response);
-  final String userSession=BaseUtils.getMatch(data,GCConstants.PATTERN_USERSESSION,"");
-  final String sessionToken=BaseUtils.getMatch(data,GCConstants.PATTERN_SESSIONTOKEN,"");
+  final String userSession=TextUtils.getMatch(data,GCConstants.PATTERN_USERSESSION,"");
+  final String sessionToken=TextUtils.getMatch(data,GCConstants.PATTERN_SESSIONTOKEN,"");
   return new String[]{userSession,sessionToken};
 }
