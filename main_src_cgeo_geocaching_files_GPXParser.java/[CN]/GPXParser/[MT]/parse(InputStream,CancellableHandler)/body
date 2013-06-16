@@ -13,7 +13,7 @@
           }
         }
       }
- catch (      Exception e) {
+ catch (      final Exception e) {
         Log.w("Failed to parse waypoint's latitude and/or longitude.");
       }
     }
@@ -82,7 +82,7 @@
       try {
         cache.setHidden(parseDate(body));
       }
- catch (      Exception e) {
+ catch (      final Exception e) {
         Log.w("Failed to parse cache date",e);
       }
     }
@@ -140,7 +140,7 @@
       }
       final MatcherWrapper matcherCode=new MatcherWrapper(patternUrlGeocode,url);
       if (matcherCode.matches()) {
-        String geocode=matcherCode.group(1);
+        final String geocode=matcherCode.group(1);
         cache.setGeocode(geocode);
       }
     }
@@ -155,7 +155,7 @@
   }
 );
   final Element cacheParent=getCacheParent(waypoint);
-  for (  String gsakNamespace : GSAK_NS) {
+  for (  final String gsakNamespace : GSAK_NS) {
     final Element gsak=cacheParent.getChild(gsakNamespace,"wptExtension");
     gsak.getChild(gsakNamespace,"Watch").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String watchList){
@@ -168,7 +168,7 @@
       gsak.getChild(gsakNamespace,"User" + i).setEndTextElementListener(new UserDataListener(i));
     }
   }
-  for (  String nsGC : nsGCList) {
+  for (  final String nsGC : nsGCList) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");
     gcCache.setStartElementListener(new StartElementListener(){
       @Override public void start(      Attributes attrs){
@@ -183,7 +183,7 @@
             cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
           }
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.w("Failed to parse cache attributes.");
         }
       }
@@ -225,15 +225,15 @@
       @Override public void start(      Attributes attrs){
         try {
           if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
-            int attributeId=Integer.parseInt(attrs.getValue("id"));
-            boolean attributeActive=Integer.parseInt(attrs.getValue("inc")) != 0;
-            String internalId=CacheAttributeTranslator.getInternalId(attributeId,attributeActive);
+            final int attributeId=Integer.parseInt(attrs.getValue("id"));
+            final boolean attributeActive=Integer.parseInt(attrs.getValue("inc")) != 0;
+            final String internalId=CacheAttributeTranslator.getInternalId(attributeId,attributeActive);
             if (internalId != null) {
               cache.getAttributes().add(internalId);
             }
           }
         }
- catch (        NumberFormatException e) {
+ catch (        final NumberFormatException e) {
         }
       }
     }
@@ -243,7 +243,7 @@
         try {
           cache.setDifficulty(Float.parseFloat(body));
         }
- catch (        NumberFormatException e) {
+ catch (        final NumberFormatException e) {
           Log.w("Failed to parse difficulty",e);
         }
       }
@@ -254,7 +254,7 @@
         try {
           cache.setTerrain(Float.parseFloat(body));
         }
- catch (        NumberFormatException e) {
+ catch (        final NumberFormatException e) {
           Log.w("Failed to parse terrain",e);
         }
       }
@@ -273,7 +273,7 @@
 );
     gcCache.getChild(nsGC,"state").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      String state){
-        String trimmedState=state.trim();
+        final String trimmedState=state.trim();
         if (StringUtils.isNotEmpty(trimmedState)) {
           if (StringUtils.isBlank(cache.getLocation())) {
             cache.setLocation(validate(state));
@@ -313,7 +313,7 @@
             trackable.setGeocode(attrs.getValue("ref"));
           }
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
         }
       }
     }
@@ -345,7 +345,7 @@
             log.id=Integer.parseInt(attrs.getValue("id"));
           }
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
         }
       }
     }
@@ -363,7 +363,7 @@
         try {
           log.date=parseDate(body).getTime();
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.w("Failed to parse log date",e);
         }
       }
@@ -394,7 +394,7 @@
     Xml.parse(progressStream,Xml.Encoding.UTF_8,root.getContentHandler());
     return cgData.loadCaches(result,EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
   }
- catch (  SAXException e) {
+ catch (  final SAXException e) {
     Log.w("Cannot parse .gpx file as GPX " + version + ": could not parse XML - ",e);
     throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML",e);
   }
