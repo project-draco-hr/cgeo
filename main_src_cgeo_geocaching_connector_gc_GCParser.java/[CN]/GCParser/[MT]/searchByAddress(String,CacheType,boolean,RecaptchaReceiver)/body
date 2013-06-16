@@ -4,7 +4,7 @@
     return null;
   }
   try {
-    JSONObject response=Network.requestJSON("http://www.geocaching.com/api/geocode",new Parameters("q",address));
+    final JSONObject response=Network.requestJSON("http://www.geocaching.com/api/geocode",new Parameters("q",address));
     if (response == null) {
       return null;
     }
@@ -14,13 +14,13 @@
     if (!response.has("data")) {
       return null;
     }
-    JSONObject data=response.getJSONObject("data");
+    final JSONObject data=response.getJSONObject("data");
     if (data == null) {
       return null;
     }
     return searchByCoords(new Geopoint(data.getDouble("lat"),data.getDouble("lng")),cacheType,showCaptcha,recaptchaReceiver);
   }
- catch (  JSONException e) {
+ catch (  final JSONException e) {
     Log.w("GCParser.searchByAddress",e);
   }
   return null;

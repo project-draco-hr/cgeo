@@ -1,14 +1,3 @@
 {
-  if (StringUtils.startsWithIgnoreCase(getGeocode(),"GK")) {
-    String hex=getGeocode().substring(3);
-    try {
-      int id=Integer.parseInt(hex,16);
-      return "http://geokrety.org/konkret.php?id=" + id;
-    }
- catch (    NumberFormatException e) {
-      Log.e("Trackable.getUrl",e);
-      return null;
-    }
-  }
-  return "http://www.geocaching.com//track/details.aspx?tracker=" + geocode;
+  return getConnector().getUrl(this);
 }

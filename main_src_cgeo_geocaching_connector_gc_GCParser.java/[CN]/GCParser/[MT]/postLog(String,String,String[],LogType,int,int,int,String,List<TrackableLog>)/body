@@ -46,7 +46,7 @@
       params.put("ctl00$ContentBody$uxVistOtherListingGC","");
       if (trackables != null && !trackables.isEmpty()) {
         final StringBuilder hdnSelected=new StringBuilder();
-        for (        TrackableLog tb : trackables) {
+        for (        final TrackableLog tb : trackables) {
           final String action=Integer.toString(tb.id) + tb.action.action;
           final StringBuilder paramText=new StringBuilder("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl");
           if (tb.ctl < 10) {
@@ -65,7 +65,7 @@
       page=Network.getResponseData(Network.postRequest(uri,params));
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("GCParser.postLog.confim",e);
   }
   try {
@@ -83,7 +83,7 @@
       return new ImmutablePair<StatusCode,String>(StatusCode.NO_ERROR,logID);
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("GCParser.postLog.check",e);
   }
   Log.e("GCParser.postLog: Failed to post log because of unknown error");

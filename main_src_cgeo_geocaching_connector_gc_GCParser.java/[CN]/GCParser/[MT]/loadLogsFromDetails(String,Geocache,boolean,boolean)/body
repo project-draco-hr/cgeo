@@ -27,7 +27,7 @@
  else {
     rawResponse=TextUtils.getMatch(page,GCConstants.PATTERN_LOGBOOK,"");
   }
-  List<LogEntry> logs=new ArrayList<LogEntry>();
+  final List<LogEntry> logs=new ArrayList<LogEntry>();
   try {
     final JSONObject resp=new JSONObject(rawResponse);
     if (!resp.getString("status").equals("success")) {
@@ -43,7 +43,7 @@
       try {
         date=Login.parseGcCustomDate(entry.getString("Visited")).getTime();
       }
- catch (      ParseException e) {
+ catch (      final ParseException e) {
         Log.e("GCParser.loadLogsFromDetails: failed to parse log date.");
       }
       final String latLon=entry.getString("LatLonString");
@@ -61,7 +61,7 @@
       logs.add(logDone);
     }
   }
- catch (  JSONException e) {
+ catch (  final JSONException e) {
     Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs",e);
   }
   return logs;

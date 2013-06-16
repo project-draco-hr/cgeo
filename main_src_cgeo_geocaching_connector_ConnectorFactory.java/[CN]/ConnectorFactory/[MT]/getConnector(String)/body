@@ -3,7 +3,7 @@
   if (isInvalidGeocode(geocode)) {
     return UNKNOWN_CONNECTOR;
   }
-  for (  IConnector connector : connectors) {
+  for (  final IConnector connector : connectors) {
     if (connector.canHandle(geocode)) {
       return connector;
     }

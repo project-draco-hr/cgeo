@@ -10,7 +10,7 @@
   searchResult.viewstates=Login.getViewstates(page);
   String recaptchaChallenge=null;
   if (showCaptcha) {
-    String recaptchaJsParam=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
+    final String recaptchaJsParam=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
     if (recaptchaJsParam != null) {
       final Parameters params=new Parameters("k",recaptchaJsParam.trim());
       final String recaptchaJs=Network.getResponseData(Network.getRequest("http://www.google.com/recaptcha/api/challenge",params));
@@ -33,7 +33,7 @@
   }
   page=page.substring(startPos);
   startPos=page.indexOf('>');
-  int endPos=page.indexOf("ctl00_ContentBody_UnitTxt");
+  final int endPos=page.indexOf("ctl00_ContentBody_UnitTxt");
   if (startPos == -1 || endPos == -1) {
     Log.e("GCParser.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
     return null;
@@ -43,7 +43,7 @@
   final int rows_count=rows.length;
   for (int z=1; z < rows_count; z++) {
     final Geocache cache=new Geocache();
-    String row=rows[z];
+    final String row=rows[z];
     if (!row.contains("images/wpttypes")) {
       continue;
     }
@@ -66,7 +66,7 @@
         }
       }
     }
- catch (    Exception e) {
+ catch (    final Exception e) {
       Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data");
     }
     if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
@@ -104,7 +104,7 @@
         try {
           cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
         }
- catch (        NumberFormatException e) {
+ catch (        final NumberFormatException e) {
           Log.e("Error parsing trackables count",e);
         }
         inventoryPre=matcherTbs.group(2);
@@ -131,18 +131,18 @@
         cache.setFavoritePoints(Integer.parseInt(result));
       }
     }
- catch (    NumberFormatException e) {
+ catch (    final NumberFormatException e) {
       Log.w("GCParser.parseSearch: Failed to parse favorite count");
     }
     searchResult.addAndPutInCache(cache);
   }
   try {
-    String result=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
+    final String result=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
     if (null != result) {
       searchResult.setTotal(Integer.parseInt(result));
     }
   }
- catch (  NumberFormatException e) {
+ catch (  final NumberFormatException e) {
     Log.w("GCParser.parseSearch: Failed to parse cache count");
   }
   String recaptchaText=null;
@@ -165,7 +165,7 @@
           params.put("__VIEWSTATEFIELDCOUNT",String.valueOf(searchResult.viewstates.length));
         }
       }
-      for (      String cid : cids) {
+      for (      final String cid : cids) {
         params.put("CID",cid);
       }
       if (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)) {
@@ -183,13 +183,13 @@
       }
       LocParser.parseLoc(searchResult,coordinates);
     }
- catch (    Exception e) {
+ catch (    final Exception e) {
       Log.e("GCParser.parseSearch.CIDs",e);
     }
   }
   if (Settings.getLoadDirImg()) {
     final Set<Geocache> caches=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-    for (    Geocache cache : caches) {
+    for (    final Geocache cache : caches) {
       if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
         DirectionImage.getDrawable(cache.getDirectionImg());
       }

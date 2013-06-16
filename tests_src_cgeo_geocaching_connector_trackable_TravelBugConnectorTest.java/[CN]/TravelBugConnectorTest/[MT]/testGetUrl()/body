@@ -1,0 +1,5 @@
+{
+  final Trackable trackable=new Trackable();
+  trackable.setGeocode("TB2345");
+  assertEquals("http://www.geocaching.com//track/details.aspx?tracker=TB2345",new TravelBugConnector().getUrl(trackable));
+}

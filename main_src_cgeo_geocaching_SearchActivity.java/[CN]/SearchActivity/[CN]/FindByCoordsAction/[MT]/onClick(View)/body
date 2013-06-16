@@ -1,5 +1,5 @@
 {
-  CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(SearchActivity.this,null,null,app.currentGeo());
+  final CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(SearchActivity.this,null,null,app.currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate(){
     @Override public void update(    Geopoint gp){

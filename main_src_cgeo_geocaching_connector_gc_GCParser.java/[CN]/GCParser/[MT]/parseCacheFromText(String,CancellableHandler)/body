@@ -30,7 +30,7 @@
   cache.setOwnerUserId(Network.decode(TextUtils.getMatch(page,GCConstants.PATTERN_OWNER_USERID,true,cache.getOwnerUserId())));
   cache.setUserModifiedCoords(false);
   String tableInside=page;
-  int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
+  final int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
   if (pos == -1) {
     Log.e("GCParser.parseCache: ID \"cacheDetails\" not found on page");
     return null;
@@ -42,7 +42,7 @@
       try {
         cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
       }
- catch (      NumberFormatException e) {
+ catch (      final NumberFormatException e) {
         Log.e("Error parsing terrain value",e);
       }
     }
@@ -51,7 +51,7 @@
       try {
         cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
       }
- catch (      NumberFormatException e) {
+ catch (      final NumberFormatException e) {
         Log.e("Error parsing difficulty value",e);
       }
     }
@@ -68,13 +68,13 @@
         }
       }
     }
- catch (    ParseException e) {
+ catch (    final ParseException e) {
       Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
     }
     try {
       cache.setFavoritePoints(Integer.parseInt(TextUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
     }
- catch (    NumberFormatException e) {
+ catch (    final NumberFormatException e) {
       Log.e("Error parsing favorite count",e);
     }
     cache.setSize(CacheSize.getById(TextUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id)));
@@ -86,7 +86,7 @@
       cache.setVisitedDate(Login.parseGcCustomDate(foundDateString).getTime());
     }
   }
- catch (  ParseException e) {
+ catch (  final ParseException e) {
     Log.w("GCParser.parseCache: Failed to parse cache found date");
   }
   cache.setType(CacheType.getByPattern(TextUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getType().id)));
@@ -97,14 +97,14 @@
       cache.setCoords(new Geopoint(latlon));
       cache.setReliableLatLon(true);
     }
- catch (    Geopoint.GeopointException e) {
+ catch (    final Geopoint.GeopointException e) {
       Log.w("GCParser.parseCache: Failed to parse cache coordinates",e);
     }
   }
   cache.setLocation(TextUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,""));
-  String result=TextUtils.getMatch(page,GCConstants.PATTERN_HINT,false,null);
+  final String result=TextUtils.getMatch(page,GCConstants.PATTERN_HINT,false,null);
   if (result != null) {
-    String hint=GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
+    final String hint=GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
     if (hint != null) {
       cache.setHint(StringUtils.replace(hint,"</p>","").trim());
     }
@@ -123,8 +123,8 @@
           String attribute=matcherAttributesInside.group(2).toLowerCase(Locale.US);
           final String imageName=matcherAttributesInside.group(1).trim();
           if (StringUtils.isNotEmpty(imageName)) {
-            int start=imageName.lastIndexOf('/');
-            int end=imageName.lastIndexOf('.');
+            final int start=imageName.lastIndexOf('/');
+            final int end=imageName.lastIndexOf('.');
             if (start >= 0 && end >= 0) {
               attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase(Locale.US);
             }
@@ -135,7 +135,7 @@
       cache.setAttributes(attributes);
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache attributes");
   }
   try {
@@ -145,7 +145,7 @@
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_spoilers);
     final MatcherWrapper matcherSpoilersInside=new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE,page);
     while (matcherSpoilersInside.find()) {
-      String url=matcherSpoilersInside.group(1).replace("/display","");
+      final String url=matcherSpoilersInside.group(1).replace("/display","");
       String title=null;
       if (matcherSpoilersInside.group(3) != null) {
         title=matcherSpoilersInside.group(3);
@@ -157,7 +157,7 @@
       cache.addSpoiler(new Image(url,title,description));
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache spoilers");
   }
   try {
@@ -184,7 +184,7 @@
       }
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache inventory (2)");
   }
   try {
@@ -192,15 +192,15 @@
     if (null != countlogs) {
       final MatcherWrapper matcherLog=new MatcherWrapper(GCConstants.PATTERN_COUNTLOG,countlogs);
       while (matcherLog.find()) {
-        String typeStr=matcherLog.group(1);
-        String countStr=matcherLog.group(2).replaceAll("[.,]","");
+        final String typeStr=matcherLog.group(1);
+        final String countStr=matcherLog.group(2).replaceAll("[.,]","");
         if (StringUtils.isNotBlank(typeStr) && LogType.UNKNOWN != LogType.getByIconName(typeStr) && StringUtils.isNotBlank(countStr)) {
           cache.getLogCounts().put(LogType.getByIconName(typeStr),Integer.parseInt(countStr));
         }
       }
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache log count");
   }
   cache.setWaypoints(Collections.<Waypoint>emptyList(),false);
@@ -213,7 +213,7 @@
       cache.setUserModifiedCoords(true);
     }
   }
- catch (  Geopoint.GeopointException e) {
+ catch (  final Geopoint.GeopointException e) {
   }
   int wpBegin=page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
   if (wpBegin != -1) {
