@@ -5,9 +5,9 @@
     contextMenuUser=((TextView)view).getText().toString();
   }
  else {
-    RelativeLayout itemLayout=(RelativeLayout)view.getParent();
-    TextView itemName=(TextView)itemLayout.findViewById(R.id.name);
-    String selectedName=itemName.getText().toString();
+    final RelativeLayout itemLayout=(RelativeLayout)view.getParent();
+    final TextView itemName=(TextView)itemLayout.findViewById(R.id.name);
+    final String selectedName=itemName.getText().toString();
     if (selectedName.equals(res.getString(R.string.trackable_owner))) {
       contextMenuUser=trackable.getOwner();
     }
