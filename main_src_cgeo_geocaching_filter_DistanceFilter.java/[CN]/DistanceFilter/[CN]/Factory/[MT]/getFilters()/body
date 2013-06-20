@@ -1,0 +1,8 @@
+{
+  final CacheDistance[] cacheDistances=CacheDistance.values();
+  final List<IFilter> filters=new LinkedList<IFilter>();
+  for (  CacheDistance cacheDistance : cacheDistances) {
+    filters.add(new DistanceFilter(cacheDistance));
+  }
+  return filters;
+}
