@@ -1,0 +1,9 @@
+{
+  int sumCaches=0;
+  for (  CacheType cacheType : CacheType.values()) {
+    SearchResult historyOfType=cgData.getHistoryOfCaches(false,cacheType);
+    assertNotNull(historyOfType);
+    sumCaches+=historyOfType.getCount();
+  }
+  assertEquals(cgData.getAllHistoryCachesCount(),sumCaches);
+}
