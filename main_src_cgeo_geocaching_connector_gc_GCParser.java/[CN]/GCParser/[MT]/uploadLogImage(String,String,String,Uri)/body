@@ -1,15 +1,9 @@
 {
-  final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
-  String page=Network.getResponseData(Network.getRequest(uri));
-  if (!Login.getLoginStatus(page)) {
-    final StatusCode loginState=Login.login();
-    if (loginState == StatusCode.NO_ERROR) {
-      page=Network.getResponseData(Network.getRequest(uri));
-    }
- else {
-      Log.e("Image upload: No login (error: " + loginState + ')');
-      return ImmutablePair.of(StatusCode.NOT_LOGGED_IN,null);
-    }
+  final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").build().toString();
+  final String page=Login.getRequestLogged(uri,new Parameters("LID=",logId));
+  if (StringUtils.isBlank(page)) {
+    Log.e("GCParser.uploadLogImage: No data from server");
+    return new ImmutablePair<StatusCode,String>(StatusCode.UNKNOWN_ERROR,null);
   }
   final String[] viewstates=Login.getViewstates(page);
   final Parameters uploadParams=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$ImageUploadControl1$uxFileCaption",caption,"ctl00$ContentBody$ImageUploadControl1$uxFileDesc",description,"ctl00$ContentBody$ImageUploadControl1$uxUpload","Upload");

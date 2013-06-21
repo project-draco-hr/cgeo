@@ -2,14 +2,14 @@
   final StringBuilder fieldNoteBuffer=new StringBuilder();
   try {
     int i=0;
-    for (    Geocache cache : caches) {
+    for (    final Geocache cache : caches) {
       if (cache.isLogOffline()) {
         appendFieldNote(fieldNoteBuffer,cache,cgData.loadLogOffline(cache.getGeocode()));
         publishProgress(++i);
       }
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("FieldnoteExport.ExportTask generation",e);
     return false;
   }
@@ -18,17 +18,17 @@
     return false;
   }
   exportLocation.mkdirs();
-  SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
+  final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
   exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".txt");
   Writer fileWriter=null;
   BufferedOutputStream buffer=null;
   try {
-    OutputStream os=new FileOutputStream(exportFile);
+    final OutputStream os=new FileOutputStream(exportFile);
     buffer=new BufferedOutputStream(os);
     fileWriter=new OutputStreamWriter(buffer,CharEncoding.UTF_16);
     fileWriter.write(fieldNoteBuffer.toString());
   }
- catch (  IOException e) {
+ catch (  final IOException e) {
     Log.e("FieldnoteExport.ExportTask export",e);
     return false;
   }
@@ -45,16 +45,10 @@
       }
     }
     final String uri="http://www.geocaching.com/my/uploadfieldnotes.aspx";
-    String page=Network.getResponseData(Network.getRequest(uri));
-    if (!Login.getLoginStatus(page)) {
-      final StatusCode loginState=Login.login();
-      if (loginState == StatusCode.NO_ERROR) {
-        page=Network.getResponseData(Network.getRequest(uri));
-      }
- else {
-        Log.e("FieldnoteExport.ExportTask upload: No login (error: " + loginState + ')');
-        return false;
-      }
+    final String page=Login.getRequestLogged(uri,null);
+    if (StringUtils.isBlank(page)) {
+      Log.e("FieldnoteExport.ExportTask get page: No data from server");
+      return false;
     }
     final String[] viewstates=Login.getViewstates(page);
     final Parameters uploadParams=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$btnUpload","Upload Field Note");

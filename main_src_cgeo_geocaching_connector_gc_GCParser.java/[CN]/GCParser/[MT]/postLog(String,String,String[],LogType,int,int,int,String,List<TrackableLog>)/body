@@ -25,7 +25,7 @@
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
   String page=Login.postRequestLogged(uri,params);
   if (!Login.getLoginStatus(page)) {
-    Log.e("GCParser.postLogTrackable: Can not log in geocaching");
+    Log.e("GCParser.postLog: Cannot log in geocaching");
     return new ImmutablePair<StatusCode,String>(StatusCode.NOT_LOGGED_IN,"");
   }
   final MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_MAINTENANCE,page);
