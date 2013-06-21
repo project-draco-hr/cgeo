@@ -1,0 +1,9 @@
+{
+  final List<PackageInfo> packs=cgeoapplication.getInstance().getPackageManager().getInstalledPackages(0);
+  for (  final PackageInfo packageInfo : packs) {
+    if (packageName.equals(packageInfo.packageName)) {
+      return true;
+    }
+  }
+  return false;
+}

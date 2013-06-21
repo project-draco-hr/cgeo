@@ -1,5 +1,5 @@
 {
-  if (ProcessUtils.isInstalled(packageName)) {
+  if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isInstalled(packageName)) {
     return true;
   }
   return MainActivity.isIntentAvailable(intent);
