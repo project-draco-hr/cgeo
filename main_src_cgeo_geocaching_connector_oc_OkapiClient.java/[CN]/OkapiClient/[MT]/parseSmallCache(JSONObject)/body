@@ -5,7 +5,7 @@
     parseCoreCache(response,cache);
     cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
   }
- catch (  JSONException e) {
+ catch (  final JSONException e) {
     Log.e("OkapiClient.parseSmallCache",e);
   }
   return cache;

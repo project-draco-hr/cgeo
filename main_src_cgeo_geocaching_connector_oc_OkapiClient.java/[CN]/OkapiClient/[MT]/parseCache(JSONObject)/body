@@ -12,9 +12,9 @@
     }
     cache.setVotes(response.getInt(CACHE_VOTES));
     cache.setFavoritePoints(response.getInt(CACHE_RECOMMENDATIONS));
-    StringBuilder description=new StringBuilder(500);
+    final StringBuilder description=new StringBuilder(500);
     if (!response.isNull("gc_code")) {
-      String gccode=response.getString("gc_code");
+      final String gccode=response.getString("gc_code");
       description.append(cgeoapplication.getInstance().getResources().getString(R.string.cache_listed_on,GCConnector.getInstance().getName())).append(": <a href=\"http://coord.info/").append(gccode).append("\">").append(gccode).append("</a><br /><br />");
     }
     description.append(response.getString(CACHE_DESCRIPTION));
@@ -23,7 +23,7 @@
     final JSONArray images=response.getJSONArray(CACHE_IMAGES);
     if (images != null) {
       for (int i=0; i < images.length(); i++) {
-        JSONObject imageResponse=images.getJSONObject(i);
+        final JSONObject imageResponse=images.getJSONObject(i);
         if (imageResponse.getBoolean(CACHE_IMAGE_IS_SPOILER)) {
           final String title=imageResponse.getString(CACHE_IMAGE_CAPTION);
           final String url=absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL),cache.getGeocode());
@@ -41,7 +41,7 @@
     cache.setDetailedUpdatedNow();
     cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
   }
- catch (  JSONException e) {
+ catch (  final JSONException e) {
     Log.e("OkapiClient.parseCache",e);
   }
   return cache;
