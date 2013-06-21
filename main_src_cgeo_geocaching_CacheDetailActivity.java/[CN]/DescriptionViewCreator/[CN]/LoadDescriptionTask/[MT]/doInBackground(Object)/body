@@ -1,6 +1,6 @@
 {
   try {
-    HtmlImageCounter imageCounter=new HtmlImageCounter();
+    final HtmlImageCounter imageCounter=new HtmlImageCounter();
     final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
     description=Html.fromHtml(descriptionString,imageCounter,unknownTagsHandler);
     publishProgress();
@@ -21,7 +21,7 @@
       publishProgress();
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("LoadDescriptionTask: ",e);
   }
   return null;

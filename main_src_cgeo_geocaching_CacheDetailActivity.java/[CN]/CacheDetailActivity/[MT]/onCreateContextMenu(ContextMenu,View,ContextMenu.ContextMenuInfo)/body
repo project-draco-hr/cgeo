@@ -5,7 +5,7 @@
 switch (viewId) {
 case R.id.value:
     clickedItemText=((TextView)view).getText();
-  String itemTitle=(String)((TextView)((View)view.getParent()).findViewById(R.id.name)).getText();
+  final String itemTitle=(String)((TextView)((View)view.getParent()).findViewById(R.id.name)).getText();
 buildOptionsContextmenu(menu,viewId,itemTitle,true);
 break;
 case R.id.shortdesc:
@@ -13,7 +13,7 @@ clickedItemText=((TextView)view).getText();
 buildOptionsContextmenu(menu,viewId,res.getString(R.string.cache_description),false);
 break;
 case R.id.longdesc:
-String shortDesc=cache.getShortDescription();
+final String shortDesc=cache.getShortDescription();
 if (StringUtils.isBlank(shortDesc)) {
 clickedItemText=((TextView)view).getText();
 }
@@ -65,7 +65,7 @@ break;
 }
 }
 }
- catch (Exception e) {
+ catch (final Exception e) {
 }
 }
 break;

@@ -5,11 +5,11 @@
   LinearLayout attributeRow=newAttributeIconsRow();
   rows.addView(attributeRow);
   noAttributeIconsFound=true;
-  for (  String attributeName : cache.getAttributes()) {
+  for (  final String attributeName : cache.getAttributes()) {
     attributeRow.measure(0,0);
-    int rowWidth=attributeRow.getMeasuredWidth();
-    FrameLayout fl=(FrameLayout)getLayoutInflater().inflate(R.layout.attribute_image,null);
-    ImageView iv=(ImageView)fl.getChildAt(0);
+    final int rowWidth=attributeRow.getMeasuredWidth();
+    final FrameLayout fl=(FrameLayout)getLayoutInflater().inflate(R.layout.attribute_image,null);
+    final ImageView iv=(ImageView)fl.getChildAt(0);
     if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
       attributeRow=newAttributeIconsRow();
       rows.addView(attributeRow);
@@ -21,7 +21,7 @@
       Drawable d=res.getDrawable(attrib.drawableId);
       iv.setImageDrawable(d);
       if (strikethru) {
-        ImageView strikethruImage=new ImageView(CacheDetailActivity.this);
+        final ImageView strikethruImage=new ImageView(CacheDetailActivity.this);
         strikethruImage.setLayoutParams(iv.getLayoutParams());
         d=res.getDrawable(R.drawable.attribute__strikethru);
         strikethruImage.setImageDrawable(d);
@@ -29,7 +29,7 @@
       }
     }
  else {
-      Drawable d=res.getDrawable(R.drawable.attribute_unknown);
+      final Drawable d=res.getDrawable(R.drawable.attribute_unknown);
       iv.setImageDrawable(d);
     }
     attributeRow.addView(fl);

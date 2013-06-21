@@ -28,11 +28,11 @@
   String logText=log.log;
   if (TextUtils.containsHtml(logText)) {
     logText=log.getDisplayText();
-    HtmlImageCounter imageCounter=new HtmlImageCounter();
+    final HtmlImageCounter imageCounter=new HtmlImageCounter();
     final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
     holder.text.setText(Html.fromHtml(logText,imageCounter,unknownTagsHandler),TextView.BufferType.SPANNABLE);
     if (imageCounter.getImageCount() > 0) {
-      LogImageLoader loader=new LogImageLoader(holder);
+      final LogImageLoader loader=new LogImageLoader(holder);
       loader.execute(logText);
     }
   }
@@ -52,7 +52,7 @@
  else {
     holder.images.setVisibility(View.GONE);
   }
-  int marker=log.type.markerId;
+  final int marker=log.type.markerId;
   if (marker != 0) {
     holder.marker.setVisibility(View.VISIBLE);
     holder.marker.setImageResource(marker);

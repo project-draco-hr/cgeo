@@ -8,7 +8,7 @@
   }
   detailsList=(LinearLayout)view.findViewById(R.id.details_list);
   final CacheDetailsCreator details=new CacheDetailsCreator(CacheDetailActivity.this,detailsList);
-  Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
+  final Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
   if (cache.isDisabled() || cache.isArchived()) {
     span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
@@ -32,17 +32,17 @@
     details.addStars(R.string.cache_own_rating,cache.getMyVote());
   }
   if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
-    TextView ownerView=details.add(R.string.cache_owner,"");
+    final TextView ownerView=details.add(R.string.cache_owner,"");
     if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
       ownerView.setText(cache.getOwnerDisplayName(),TextView.BufferType.SPANNABLE);
     }
  else {
       ownerView.setText(cache.getOwnerUserId(),TextView.BufferType.SPANNABLE);
     }
-    ownerView.setOnClickListener(new OwnerActionsClickListener());
+    ownerView.setOnClickListener(new OwnerActionsClickListener(cache));
   }
   if (cache.getHiddenDate() != null) {
-    long time=cache.getHiddenDate().getTime();
+    final long time=cache.getHiddenDate().getTime();
     if (time > 0) {
       String dateString=Formatter.formatFullDate(time);
       if (cache.isEventCache()) {
@@ -55,7 +55,7 @@
     details.add(R.string.cache_location,cache.getLocation());
   }
   if (cache.getCoords() != null) {
-    TextView valueView=details.add(R.string.cache_coordinates,cache.getCoords().toString());
+    final TextView valueView=details.add(R.string.cache_coordinates,cache.getCoords().toString());
     valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
     registerForContextMenu(valueView);
   }
@@ -64,25 +64,25 @@
     view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
   }
   updateOfflineBox(view,cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
-  Button buttonWatchlistAdd=(Button)view.findViewById(R.id.add_to_watchlist);
-  Button buttonWatchlistRemove=(Button)view.findViewById(R.id.remove_from_watchlist);
+  final Button buttonWatchlistAdd=(Button)view.findViewById(R.id.add_to_watchlist);
+  final Button buttonWatchlistRemove=(Button)view.findViewById(R.id.remove_from_watchlist);
   buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
   buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
   updateWatchlistBox();
-  Button buttonFavPointAdd=(Button)view.findViewById(R.id.add_to_favpoint);
-  Button buttonFavPointRemove=(Button)view.findViewById(R.id.remove_from_favpoint);
+  final Button buttonFavPointAdd=(Button)view.findViewById(R.id.add_to_favpoint);
+  final Button buttonFavPointRemove=(Button)view.findViewById(R.id.remove_from_favpoint);
   buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
   buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
   updateFavPointBox();
-  Button buttonChangeList=(Button)view.findViewById(R.id.change_list);
+  final Button buttonChangeList=(Button)view.findViewById(R.id.change_list);
   buttonChangeList.setOnClickListener(new ChangeListClickListener());
   updateListBox();
-  IConnector connector=ConnectorFactory.getConnector(cache);
+  final IConnector connector=ConnectorFactory.getConnector(cache);
   if (connector != null) {
-    String license=connector.getLicenseText(cache);
+    final String license=connector.getLicenseText(cache);
     if (StringUtils.isNotBlank(license)) {
       view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
-      TextView licenseView=((TextView)view.findViewById(R.id.license));
+      final TextView licenseView=((TextView)view.findViewById(R.id.license));
       licenseView.setText(Html.fromHtml(license),BufferType.SPANNABLE);
       licenseView.setClickable(true);
       licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());

@@ -18,9 +18,9 @@
     guid=extras.getString(Intents.EXTRA_GUID);
   }
   if (geocode == null && guid == null && uri != null) {
-    String uriHost=uri.getHost().toLowerCase(Locale.US);
-    String uriPath=uri.getPath().toLowerCase(Locale.US);
-    String uriQuery=uri.getQuery();
+    final String uriHost=uri.getHost().toLowerCase(Locale.US);
+    final String uriPath=uri.getPath().toLowerCase(Locale.US);
+    final String uriQuery=uri.getQuery();
     if (uriQuery != null) {
       Log.i("Opening URI: " + uriHost + uriPath+ "?"+ uriQuery);
     }
@@ -92,9 +92,9 @@
     }
     progress.show(this,title,res.getString(R.string.cache_dialog_loading_details),true,loadCacheHandler.cancelMessage());
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
   }
-  ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
+  final ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
   defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){
     @Override public boolean onLongClick(    View v){
       startDefaultNavigation2();
