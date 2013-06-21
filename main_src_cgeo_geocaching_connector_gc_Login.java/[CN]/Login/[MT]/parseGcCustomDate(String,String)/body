@@ -7,14 +7,14 @@
     try {
       return gcCustomDateFormats.get(format).parse(trimmed);
     }
- catch (    ParseException e) {
+ catch (    final ParseException e) {
     }
   }
-  for (  SimpleDateFormat sdf : gcCustomDateFormats.values()) {
+  for (  final SimpleDateFormat sdf : gcCustomDateFormats.values()) {
     try {
       return sdf.parse(trimmed);
     }
- catch (    ParseException e) {
+ catch (    final ParseException e) {
     }
   }
   throw new ParseException("No matching pattern",0);

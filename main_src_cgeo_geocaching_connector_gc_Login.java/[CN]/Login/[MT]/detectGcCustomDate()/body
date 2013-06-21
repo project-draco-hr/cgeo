@@ -4,7 +4,7 @@
     Log.w("Login.detectGcCustomDate: result is null");
     return;
   }
-  String customDate=TextUtils.getMatch(result,GCConstants.PATTERN_CUSTOMDATE,true,null);
+  final String customDate=TextUtils.getMatch(result,GCConstants.PATTERN_CUSTOMDATE,true,null);
   if (null != customDate) {
     Settings.setGcCustomDate(customDate);
   }

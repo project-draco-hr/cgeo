@@ -11,7 +11,7 @@
     try {
       cachesCount=Integer.parseInt(TextUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll("[,.]",""));
     }
- catch (    NumberFormatException e) {
+ catch (    final NumberFormatException e) {
       Log.e("getLoginStatus: bad cache count",e);
     }
     setActualCachesFound(cachesCount);
