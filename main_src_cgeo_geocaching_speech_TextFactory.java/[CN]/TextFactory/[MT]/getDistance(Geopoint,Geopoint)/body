@@ -1,30 +1,7 @@
 {
   float kilometers=position.distanceTo(target);
   if (Settings.isUseMetricUnits()) {
-    if (kilometers >= 5.0) {
-      return getString(R.string.tts_kilometers,String.valueOf(Math.round(kilometers)));
-    }
-    if (kilometers >= 1.0) {
-      String digits=String.format(Locale.getDefault(),"%.1f",kilometers);
-      return getString(R.string.tts_kilometers,digits);
-    }
-    int meters=(int)(kilometers * 1000.0);
-    if (meters > 50) {
-      return getString(R.string.tts_meters,String.valueOf(Math.round(meters / 10.0) * 10));
-    }
-    return getString(R.string.tts_meters,String.valueOf(meters));
+    return getDistance(kilometers,(int)(kilometers * 1000.0),5.0f,1.0f,50,R.plurals.tts_kilometers,R.string.tts_one_kilometer,R.plurals.tts_meters,R.string.tts_one_meter);
   }
-  float miles=kilometers / IConversion.MILES_TO_KILOMETER;
-  if (miles >= 3.0) {
-    return getString(R.string.tts_miles,String.valueOf(Math.round(miles)));
-  }
-  if (miles >= 0.2) {
-    String digits=String.format(Locale.getDefault(),"%.1f",miles);
-    return getString(R.string.tts_miles,digits);
-  }
-  int feet=(int)(kilometers * 1000.0 * IConversion.METERS_TO_FEET);
-  if (feet > 300) {
-    return getString(R.string.tts_feet,String.valueOf(Math.round(feet / 10.0) * 10));
-  }
-  return getString(R.string.tts_feet,String.valueOf(feet));
+  return getDistance(kilometers / IConversion.MILES_TO_KILOMETER,(int)(kilometers * 1000.0 * IConversion.METERS_TO_FEET),3.0f,0.2f,300,R.plurals.tts_miles,R.string.tts_one_mile,R.plurals.tts_feet,R.string.tts_one_foot);
 }
