@@ -1,5 +1,5 @@
 {
-  for (  final IConnector connector : connectors) {
+  for (  final IConnector connector : CONNECTORS) {
     final String geocode=connector.getGeocodeFromUrl(url);
     if (StringUtils.isNotBlank(geocode)) {
       return geocode;
