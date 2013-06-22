@@ -5,9 +5,10 @@
     menu.findItem(R.id.menu_default_navigation).setVisible(visible);
     menu.findItem(R.id.menu_navigate).setVisible(visible);
     menu.findItem(R.id.menu_caches_around).setVisible(visible);
+    menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
     LoggingUI.onPrepareOptionsMenu(menu,cache);
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
   }
   return true;
 }
