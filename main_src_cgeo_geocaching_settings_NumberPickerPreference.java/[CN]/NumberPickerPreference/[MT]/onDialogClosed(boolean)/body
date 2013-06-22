@@ -1,0 +1,10 @@
+{
+  if (positiveResult) {
+    Integer value=getValue();
+    if (value != null) {
+      persistInt(value);
+      callChangeListener(value);
+    }
+  }
+  super.onDialogClosed(positiveResult);
+}

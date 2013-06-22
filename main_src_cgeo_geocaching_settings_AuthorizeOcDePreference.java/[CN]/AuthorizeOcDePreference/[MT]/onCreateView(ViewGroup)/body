@@ -1,0 +1,11 @@
+{
+  setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    Preference preference){
+      Intent authIntent=new Intent(preference.getContext(),OCAuthorizationActivity.class);
+      ((Activity)preference.getContext()).startActivity(authIntent);
+      return false;
+    }
+  }
+);
+  return super.onCreateView(parent);
+}

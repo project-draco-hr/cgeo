@@ -1,0 +1,10 @@
+{
+  Preference p=findPreference(Settings.KEY_DEBUG);
+  p.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
+      Log.setDebug((Boolean)newValue);
+      return true;
+    }
+  }
+);
+}

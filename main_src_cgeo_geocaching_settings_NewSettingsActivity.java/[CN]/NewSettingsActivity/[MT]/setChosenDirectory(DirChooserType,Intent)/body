@@ -1,0 +1,11 @@
+{
+  final String directory=new File(data.getData().getPath()).getAbsolutePath();
+  if (StringUtils.isNotBlank(directory)) {
+    Preference p=findPreference(dct.key);
+    if (p == null) {
+      return;
+    }
+    Settings.putString(dct.key,directory);
+    p.setSummary(directory);
+  }
+}

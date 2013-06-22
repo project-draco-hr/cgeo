@@ -1,0 +1,23 @@
+{
+  View v=super.onCreateView(parent);
+  SeekBar seekBar=(SeekBar)v.findViewById(R.id.wp_threshold_seekbar);
+  valueView=(TextView)v.findViewById(R.id.wp_threshold_value_view);
+  seekBar.setMax(Settings.SHOW_WP_THRESHOLD_MAX);
+  int threshold=Settings.getWayPointsThreshold();
+  valueView.setText(String.valueOf(threshold));
+  seekBar.setProgress(threshold);
+  seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+    @Override public void onProgressChanged(    SeekBar seekBar,    int progress,    boolean fromUser){
+      if (fromUser) {
+        valueView.setText(String.valueOf(progress));
+      }
+    }
+    @Override public void onStartTrackingTouch(    SeekBar seekBar){
+    }
+    @Override public void onStopTrackingTouch(    SeekBar seekBar){
+      Settings.setShowWaypointsThreshold(seekBar.getProgress());
+    }
+  }
+);
+  return v;
+}

@@ -1,0 +1,15 @@
+{
+  final List<NavigationAppsEnum> apps=NavigationAppFactory.getInstalledDefaultNavigationApps();
+  CharSequence[] entries=new CharSequence[apps.size()];
+  CharSequence[] values=new CharSequence[apps.size()];
+  for (int i=0; i < apps.size(); ++i) {
+    entries[i]=apps.get(i).toString();
+    values[i]=String.valueOf(apps.get(i).id);
+  }
+  ListPreference pref=(ListPreference)findPreference(Settings.KEY_DEFAULT_NAVIGATION_TOOL);
+  pref.setEntries(entries);
+  pref.setEntryValues(values);
+  pref=(ListPreference)findPreference(Settings.KEY_DEFAULT_NAVIGATION_TOOL_2);
+  pref.setEntries(entries);
+  pref.setEntryValues(values);
+}

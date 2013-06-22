@@ -1,0 +1,30 @@
+{
+  String msg=(String)this.getDialogMessage();
+  if (StringUtils.isNotBlank(msg)) {
+    TextView tv=(TextView)view.findViewById(R.id.number_picker_message);
+    tv.setText(msg);
+  }
+  editText=(EditText)view.findViewById(R.id.number_picker_input);
+  setValue(getPersistedInt(0));
+  Button minus=(Button)view.findViewById(R.id.number_picker_minus);
+  Button plus=(Button)view.findViewById(R.id.number_picker_plus);
+  minus.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View button){
+      Integer value=getValue();
+      if (value != null) {
+        setValue(--value);
+      }
+    }
+  }
+);
+  plus.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View button){
+      Integer value=getValue();
+      if (value != null) {
+        setValue(++value);
+      }
+    }
+  }
+);
+  super.onBindDialogView(view);
+}

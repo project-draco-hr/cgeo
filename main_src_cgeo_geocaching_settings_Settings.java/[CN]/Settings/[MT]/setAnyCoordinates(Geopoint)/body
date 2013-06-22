@@ -1,0 +1,10 @@
+{
+  if (null != coords) {
+    putFloat(KEY_ANYLATITUDE,(float)coords.getLatitude());
+    putFloat(KEY_ANYLONGITUDE,(float)coords.getLongitude());
+  }
+ else {
+    remove(KEY_ANYLATITUDE);
+    remove(KEY_ANYLONGITUDE);
+  }
+}

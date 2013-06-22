@@ -1,12 +1,12 @@
 {
   if (StringUtils.isBlank(distanceUnit)) {
-    if (Settings.isUseMetricUnits()) {
-      distanceUnitSelector.setSelection(0);
-      distanceUnit=res.getStringArray(R.array.distance_units)[0];
-    }
- else {
+    if (Settings.isUseImperialUnits()) {
       distanceUnitSelector.setSelection(2);
       distanceUnit=res.getStringArray(R.array.distance_units)[2];
+    }
+ else {
+      distanceUnitSelector.setSelection(0);
+      distanceUnit=res.getStringArray(R.array.distance_units)[0];
     }
   }
   distanceUnitSelector.setOnItemSelectedListener(new ChangeDistanceUnit(this));

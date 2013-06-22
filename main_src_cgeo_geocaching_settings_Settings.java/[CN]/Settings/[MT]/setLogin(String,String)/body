@@ -1,0 +1,12 @@
+{
+  Settings.username=username;
+  Settings.password=password;
+  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+    boolean a=remove(KEY_USERNAME);
+    boolean b=remove(KEY_PASSWORD);
+    return a && b;
+  }
+  boolean a=putString(KEY_USERNAME,username);
+  boolean b=putString(KEY_PASSWORD,password);
+  return a && b;
+}

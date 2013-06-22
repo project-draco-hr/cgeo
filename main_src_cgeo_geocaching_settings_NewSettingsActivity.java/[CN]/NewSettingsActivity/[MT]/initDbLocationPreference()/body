@@ -1,0 +1,12 @@
+{
+  Preference p=findPreference(Settings.KEY_DB_ON_SDCARD);
+  p.setPersistent(false);
+  p.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    Preference preference){
+      boolean oldValue=Settings.isDbOnSDCard();
+      ((cgeoapplication)NewSettingsActivity.this.getApplication()).moveDatabase(NewSettingsActivity.this);
+      return oldValue != Settings.isDbOnSDCard();
+    }
+  }
+);
+}

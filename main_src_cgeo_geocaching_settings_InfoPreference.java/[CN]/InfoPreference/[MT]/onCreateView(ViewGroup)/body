@@ -1,0 +1,24 @@
+{
+  setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    final Preference preference){
+      AlertDialog.Builder builder=new AlertDialog.Builder(preference.getContext());
+      builder.setMessage(text).setIcon(android.R.drawable.ic_dialog_info).setTitle(preference.getTitle()).setPositiveButton(R.string.err_none,new DialogInterface.OnClickListener(){
+        @Override public void onClick(        DialogInterface dialog,        int id){
+          dialog.cancel();
+        }
+      }
+).setNegativeButton(urlButton,new DialogInterface.OnClickListener(){
+        @Override public void onClick(        DialogInterface dialog,        int id){
+          Intent i=new Intent(Intent.ACTION_VIEW);
+          i.setData(Uri.parse(url));
+          preference.getContext().startActivity(i);
+        }
+      }
+);
+      builder.create().show();
+      return false;
+    }
+  }
+);
+  return super.onCreateView(parent);
+}

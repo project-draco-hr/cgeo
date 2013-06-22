@@ -1,0 +1,6 @@
+{
+  if (StringUtils.isBlank(password)) {
+    return remove(KEY_GCVOTE_PASSWORD);
+  }
+  return putString(KEY_GCVOTE_PASSWORD,password);
+}

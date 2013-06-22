@@ -1,14 +1,14 @@
 {
   assertEquals("?",Units.getDistanceFromKilometers(null));
-  final boolean savedMetrics=Settings.isUseMetricUnits();
+  final boolean savedImperial=Settings.isUseImperialUnits();
   try {
-    Settings.setUseMetricUnits(true);
+    Settings.setUseImperialUnits(false);
     assertDistance("123 km",122.782f);
     assertDistance("123 km",123.456f);
     assertDistance("12.3 km",12.3456f);
     assertDistance("1.23 km",1.23456f);
     assertDistance("123 m",0.123456f);
-    Settings.setUseMetricUnits(false);
+    Settings.setUseImperialUnits(true);
     assertDistance("76.7 mi",123.456f);
     assertDistance("7.67 mi",12.3456f);
     assertDistance("0.77 mi",1.23456f);
@@ -16,6 +16,6 @@
     assertDistance("40.5 ft",0.0123456f);
   }
   finally {
-    Settings.setUseMetricUnits(savedMetrics);
+    Settings.setUseImperialUnits(savedImperial);
   }
 }

@@ -1,0 +1,414 @@
+{
+  final CheckBox gcCheck=(CheckBox)findViewById(R.id.gc_option);
+  gcCheck.setChecked(Settings.isGCConnectorActive());
+  gcCheck.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setGCConnectorActive(gcCheck.isChecked());
+    }
+  }
+);
+  final ImmutablePair<String,String> login=Settings.getGcLogin();
+  if (login != null) {
+    ((EditText)findViewById(R.id.username)).setText(login.left);
+    ((EditText)findViewById(R.id.password)).setText(login.right);
+  }
+  Button logMeIn=(Button)findViewById(R.id.log_me_in);
+  logMeIn.setOnClickListener(new LoginListener());
+  TextView legalNote=(TextView)findViewById(R.id.legal_note);
+  legalNote.setClickable(true);
+  legalNote.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View arg0){
+      startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
+    }
+  }
+);
+  final CheckBox ocCheck=(CheckBox)findViewById(R.id.oc_option);
+  ocCheck.setChecked(Settings.isOCConnectorActive());
+  ocCheck.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setOCConnectorActive(ocCheck.isChecked());
+    }
+  }
+);
+  Button checkOCUser=(Button)findViewById(R.id.register_oc_de);
+  checkOCUser.setOnClickListener(new OCDEAuthorizeCgeoListener());
+  final ImmutablePair<String,String> gcvoteLogin=Settings.getGCvoteLogin();
+  if (null != gcvoteLogin && null != gcvoteLogin.right) {
+    ((EditText)findViewById(R.id.passvote)).setText(gcvoteLogin.right);
+  }
+  Button authorizeTwitter=(Button)findViewById(R.id.authorize_twitter);
+  authorizeTwitter.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View arg0){
+      Intent authIntent=new Intent(SettingsActivity.this,TwitterAuthorizationActivity.class);
+      startActivity(authIntent);
+    }
+  }
+);
+  final CheckBox twitterButton=(CheckBox)findViewById(R.id.twitter_option);
+  twitterButton.setChecked(Settings.isUseTwitter() && Settings.isTwitterLoginValid());
+  twitterButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseTwitter(twitterButton.isChecked());
+      if (Settings.isUseTwitter() && !Settings.isTwitterLoginValid()) {
+        Intent authIntent=new Intent(SettingsActivity.this,TwitterAuthorizationActivity.class);
+        startActivity(authIntent);
+      }
+      twitterButton.setChecked(Settings.isUseTwitter());
+    }
+  }
+);
+  EditText sigEdit=(EditText)findViewById(R.id.signature);
+  if (sigEdit.getText().length() == 0) {
+    sigEdit.setText(Settings.getSignature());
+  }
+  Button sigBtn=(Button)findViewById(R.id.signature_help);
+  sigBtn.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      helpDialog(res.getString(R.string.init_signature_help_title),res.getString(R.string.init_signature_help_text));
+    }
+  }
+);
+  Button templates=(Button)findViewById(R.id.signature_template);
+  registerForContextMenu(templates);
+  templates.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      enableTemplatesMenu=true;
+      openContextMenu(v);
+      enableTemplatesMenu=false;
+    }
+  }
+);
+  final CheckBox autoinsertButton=(CheckBox)findViewById(R.id.sigautoinsert);
+  autoinsertButton.setChecked(Settings.isAutoInsertSignature());
+  autoinsertButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setAutoInsertSignature(autoinsertButton.isChecked());
+    }
+  }
+);
+  final CheckBox autoloadButton=(CheckBox)findViewById(R.id.autoload);
+  autoloadButton.setChecked(Settings.isAutoLoadDescription());
+  autoloadButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setAutoLoadDesc(autoloadButton.isChecked());
+    }
+  }
+);
+  final CheckBox ratingWantedButton=(CheckBox)findViewById(R.id.ratingwanted);
+  ratingWantedButton.setChecked(Settings.isRatingWanted());
+  ratingWantedButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setRatingWanted(ratingWantedButton.isChecked());
+    }
+  }
+);
+  final CheckBox elevationWantedButton=(CheckBox)findViewById(R.id.elevationwanted);
+  elevationWantedButton.setChecked(Settings.isElevationWanted());
+  elevationWantedButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setElevationWanted(elevationWantedButton.isChecked());
+    }
+  }
+);
+  final CheckBox friendLogsWantedButton=(CheckBox)findViewById(R.id.friendlogswanted);
+  friendLogsWantedButton.setChecked(Settings.isFriendLogsWanted());
+  friendLogsWantedButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setFriendLogsWanted(friendLogsWantedButton.isChecked());
+    }
+  }
+);
+  final CheckBox openLastDetailsPageButton=(CheckBox)findViewById(R.id.openlastdetailspage);
+  openLastDetailsPageButton.setChecked(Settings.isOpenLastDetailsPage());
+  openLastDetailsPageButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setOpenLastDetailsPage(openLastDetailsPageButton.isChecked());
+    }
+  }
+);
+  final CheckBox skinButton=(CheckBox)findViewById(R.id.skin);
+  skinButton.setChecked(Settings.isLightSkin());
+  skinButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setLightSkin(skinButton.isChecked());
+    }
+  }
+);
+  final CheckBox addressButton=(CheckBox)findViewById(R.id.address);
+  addressButton.setChecked(Settings.isShowAddress());
+  addressButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setShowAddress(addressButton.isChecked());
+    }
+  }
+);
+  final CheckBox captchaButton=(CheckBox)findViewById(R.id.captcha);
+  captchaButton.setEnabled(!Settings.isPremiumMember());
+  captchaButton.setChecked(Settings.isShowCaptcha());
+  captchaButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setShowCaptcha(captchaButton.isChecked());
+    }
+  }
+);
+  final CheckBox dirImgButton=(CheckBox)findViewById(R.id.loaddirectionimg);
+  dirImgButton.setEnabled(!Settings.isPremiumMember());
+  dirImgButton.setChecked(Settings.getLoadDirImg());
+  dirImgButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setLoadDirImg(!Settings.getLoadDirImg());
+      dirImgButton.setChecked(Settings.getLoadDirImg());
+    }
+  }
+);
+  final CheckBox useEnglishButton=(CheckBox)findViewById(R.id.useenglish);
+  useEnglishButton.setChecked(Settings.isUseEnglish());
+  useEnglishButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseEnglish(useEnglishButton.isChecked());
+    }
+  }
+);
+  final CheckBox excludeButton=(CheckBox)findViewById(R.id.exclude);
+  excludeButton.setChecked(Settings.isExcludeMyCaches());
+  excludeButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setExcludeMine(excludeButton.isChecked());
+    }
+  }
+);
+  final CheckBox disabledButton=(CheckBox)findViewById(R.id.disabled);
+  disabledButton.setChecked(Settings.isExcludeDisabledCaches());
+  disabledButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setExcludeDisabledCaches(disabledButton.isChecked());
+    }
+  }
+);
+  TextView showWaypointsThreshold=(TextView)findViewById(R.id.showwaypointsthreshold);
+  showWaypointsThreshold.setText(String.valueOf(Settings.getWayPointsThreshold()));
+  final CheckBox autovisitButton=(CheckBox)findViewById(R.id.trackautovisit);
+  autovisitButton.setChecked(Settings.isTrackableAutoVisit());
+  autovisitButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setTrackableAutoVisit(autovisitButton.isChecked());
+    }
+  }
+);
+  final CheckBox offlineButton=(CheckBox)findViewById(R.id.offline);
+  offlineButton.setChecked(Settings.isStoreOfflineMaps());
+  offlineButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setStoreOfflineMaps(offlineButton.isChecked());
+    }
+  }
+);
+  final CheckBox offlineWpButton=(CheckBox)findViewById(R.id.offline_wp);
+  offlineWpButton.setChecked(Settings.isStoreOfflineWpMaps());
+  offlineWpButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setStoreOfflineWpMaps(offlineWpButton.isChecked());
+    }
+  }
+);
+  final CheckBox saveLogImgButton=(CheckBox)findViewById(R.id.save_log_img);
+  saveLogImgButton.setChecked(Settings.isStoreLogImages());
+  saveLogImgButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setStoreLogImages(saveLogImgButton.isChecked());
+    }
+  }
+);
+  final CheckBox livelistButton=(CheckBox)findViewById(R.id.livelist);
+  livelistButton.setChecked(Settings.isLiveList());
+  livelistButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setLiveList(livelistButton.isChecked());
+    }
+  }
+);
+  final CheckBox unitsButton=(CheckBox)findViewById(R.id.units);
+  unitsButton.setChecked(Settings.isUseImperialUnits());
+  unitsButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseImperialUnits(unitsButton.isChecked());
+    }
+  }
+);
+  final CheckBox logOffline=(CheckBox)findViewById(R.id.log_offline);
+  logOffline.setChecked(Settings.getLogOffline());
+  logOffline.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setLogOffline(!Settings.getLogOffline());
+      logOffline.setChecked(Settings.getLogOffline());
+    }
+  }
+);
+  final CheckBox chooseList=(CheckBox)findViewById(R.id.choose_list);
+  chooseList.setChecked(Settings.getChooseList());
+  chooseList.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setChooseList(!Settings.getChooseList());
+      chooseList.setChecked(Settings.getChooseList());
+    }
+  }
+);
+  final CheckBox plainLogs=(CheckBox)findViewById(R.id.plain_logs);
+  plainLogs.setChecked(Settings.getPlainLogs());
+  plainLogs.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setPlainLogs(!Settings.getPlainLogs());
+      plainLogs.setChecked(Settings.getPlainLogs());
+    }
+  }
+);
+  final CheckBox useNativeUserAgent=(CheckBox)findViewById(R.id.use_native_ua);
+  useNativeUserAgent.setChecked(Settings.getUseNativeUa());
+  useNativeUserAgent.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setUseNativeUa(!Settings.getUseNativeUa());
+      useNativeUserAgent.setChecked(Settings.getUseNativeUa());
+    }
+  }
+);
+  EditText altitudeEdit=(EditText)findViewById(R.id.altitude);
+  altitudeEdit.setText(String.valueOf(Settings.getAltitudeCorrection()));
+  String webDeviceName=Settings.getWebDeviceName();
+  ((EditText)findViewById(R.id.webDeviceName)).setText(webDeviceName);
+  Button webAuth=(Button)findViewById(R.id.sendToCgeo_register);
+  webAuth.setOnClickListener(new WebAuthListener());
+  updateMapSourceMenu();
+  Button selectMapDirectory=(Button)findViewById(R.id.select_map_directory);
+  selectMapDirectory.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Intent selectIntent=new Intent(SettingsActivity.this,SelectMapfileActivity.class);
+      startActivityForResult(selectIntent,SELECT_MAPFILE_REQUEST);
+    }
+  }
+);
+  initThemefolderEdittext(false);
+  Button selectThemefolder=(Button)findViewById(R.id.select_themefolder);
+  selectThemefolder.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      selectDirectory(Settings.getCustomRenderThemeBaseFolder(),SELECT_THEMEFOLDER_REQUEST);
+    }
+  }
+);
+  final EditText gpxExportDir=(EditText)findViewById(R.id.gpx_exportdir);
+  gpxExportDir.setText(Settings.getGpxExportDir());
+  Button selectGpxExportDir=(Button)findViewById(R.id.select_gpx_exportdir);
+  selectGpxExportDir.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      selectDirectory(Settings.getGpxExportDir(),SELECT_GPX_EXPORT_REQUEST);
+    }
+  }
+);
+  final EditText gpxImportDir=(EditText)findViewById(R.id.gpx_importdir);
+  gpxImportDir.setText(Settings.getGpxImportDir());
+  Button selectGpxImportDir=(Button)findViewById(R.id.select_gpx_importdir);
+  selectGpxImportDir.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      selectDirectory(Settings.getGpxImportDir(),SELECT_GPX_IMPORT_REQUEST);
+    }
+  }
+);
+  final CheckBox trailButton=(CheckBox)findViewById(R.id.trail);
+  trailButton.setChecked(Settings.isMapTrail());
+  trailButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setMapTrail(trailButton.isChecked());
+    }
+  }
+);
+  Spinner defaultNavigationToolSelector=(Spinner)findViewById(R.id.default_navigation_tool);
+  final List<NavigationAppsEnum> apps=NavigationAppFactory.getInstalledDefaultNavigationApps();
+  ArrayAdapter<NavigationAppsEnum> naviAdapter=new ArrayAdapter<NavigationAppsEnum>(this,android.R.layout.simple_spinner_item,apps){
+    @Override public View getView(    int position,    View convertView,    ViewGroup parent){
+      TextView textView=(TextView)super.getView(position,convertView,parent);
+      textView.setText(getItem(position).app.getName());
+      return textView;
+    }
+    @Override public View getDropDownView(    int position,    View convertView,    ViewGroup parent){
+      TextView textView=(TextView)super.getDropDownView(position,convertView,parent);
+      textView.setText(getItem(position).app.getName());
+      return textView;
+    }
+  }
+;
+  naviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+  defaultNavigationToolSelector.setAdapter(naviAdapter);
+  int defaultNavigationTool=Settings.getDefaultNavigationTool();
+  int ordinal=0;
+  for (int i=0; i < apps.size(); i++) {
+    if (apps.get(i).id == defaultNavigationTool) {
+      ordinal=i;
+      break;
+    }
+  }
+  defaultNavigationToolSelector.setSelection(ordinal);
+  defaultNavigationToolSelector.setOnItemSelectedListener(new OnItemSelectedListener(){
+    @Override public void onItemSelected(    AdapterView<?> parent,    View view,    int position,    long id){
+      NavigationAppsEnum item=(NavigationAppsEnum)parent.getItemAtPosition(position);
+      if (item != null) {
+        Settings.setDefaultNavigationTool(item.id);
+      }
+    }
+    @Override public void onNothingSelected(    AdapterView<?> arg0){
+    }
+  }
+);
+  Spinner defaultNavigationTool2Selector=(Spinner)findViewById(R.id.default_navigation_tool_2);
+  ArrayAdapter<NavigationAppsEnum> navi2Adapter=new ArrayAdapter<NavigationAppsEnum>(this,android.R.layout.simple_spinner_item,apps){
+    @Override public View getView(    int position,    View convertView,    ViewGroup parent){
+      TextView textView=(TextView)super.getView(position,convertView,parent);
+      textView.setText(getItem(position).app.getName());
+      return textView;
+    }
+    @Override public View getDropDownView(    int position,    View convertView,    ViewGroup parent){
+      TextView textView=(TextView)super.getDropDownView(position,convertView,parent);
+      textView.setText(getItem(position).app.getName());
+      return textView;
+    }
+  }
+;
+  navi2Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+  defaultNavigationTool2Selector.setAdapter(navi2Adapter);
+  int defaultNavigationTool2=Settings.getDefaultNavigationTool2();
+  int ordinal2=0;
+  for (int i=0; i < apps.size(); i++) {
+    if (apps.get(i).id == defaultNavigationTool2) {
+      ordinal2=i;
+      break;
+    }
+  }
+  defaultNavigationTool2Selector.setSelection(ordinal2);
+  defaultNavigationTool2Selector.setOnItemSelectedListener(new OnItemSelectedListener(){
+    @Override public void onItemSelected(    AdapterView<?> parent,    View view,    int position,    long id){
+      NavigationAppsEnum item=(NavigationAppsEnum)parent.getItemAtPosition(position);
+      if (item != null) {
+        Settings.setDefaultNavigationTool2(item.id);
+      }
+    }
+    @Override public void onNothingSelected(    AdapterView<?> arg0){
+    }
+  }
+);
+  refreshBackupLabel();
+  refreshDbOnSDCardSetting();
+  final CheckBox dbOnSDCardButton=(CheckBox)findViewById(R.id.dbonsdcard);
+  dbOnSDCardButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      app.moveDatabase(SettingsActivity.this);
+    }
+  }
+);
+  final CheckBox debugButton=(CheckBox)findViewById(R.id.debug);
+  debugButton.setChecked(Settings.isDebug());
+  debugButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Settings.setDebug(!Settings.isDebug());
+      debugButton.setChecked(Settings.isDebug());
+    }
+  }
+);
+}

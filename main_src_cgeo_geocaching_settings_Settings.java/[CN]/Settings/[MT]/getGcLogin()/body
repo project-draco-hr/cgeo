@@ -1,0 +1,12 @@
+{
+  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+    final String preUsername=sharedPrefs.getString(KEY_USERNAME,null);
+    final String prePassword=sharedPrefs.getString(KEY_PASSWORD,null);
+    if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
+      return null;
+    }
+    username=preUsername;
+    password=prePassword;
+  }
+  return new ImmutablePair<String,String>(username,password);
+}

@@ -1,0 +1,27 @@
+{
+  super.onActivityResult(requestCode,resultCode,data);
+  if (resultCode != RESULT_OK) {
+    return;
+  }
+  for (  DirChooserType dct : DirChooserType.values()) {
+    if (requestCode == dct.requestCode) {
+      setChosenDirectory(dct,data);
+      return;
+    }
+  }
+switch (requestCode) {
+case DIR_CHOOSER_MAPS_DIRECTORY_REQUEST:
+    if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
+      final String mapFile=data.getStringExtra(Intents.EXTRA_MAP_FILE);
+      Settings.setMapFile(mapFile);
+      if (!Settings.isValidMapFile(Settings.getMapFile())) {
+        ActivityMixin.showToast(this,R.string.warn_invalid_mapfile);
+      }
+    }
+  initMapSourcePreference();
+findPreference(Settings.KEY_MAP_DIRECTORY).setSummary(Settings.getMapFileDirectory());
+break;
+default :
+throw new IllegalArgumentException();
+}
+}

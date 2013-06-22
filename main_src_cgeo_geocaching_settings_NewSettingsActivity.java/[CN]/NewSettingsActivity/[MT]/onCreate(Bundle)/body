@@ -1,0 +1,18 @@
+{
+  if (Settings.isLightSkin()) {
+    setTheme(R.style.settings_light);
+  }
+ else {
+    setTheme(R.style.settings);
+  }
+  super.onCreate(savedInstanceState);
+  addPreferencesFromResource(R.xml.preferences);
+  initPreferences();
+  Intent intent=getIntent();
+  int gotoPage=intent.getIntExtra(INTENT_GOTO,0);
+  if (gotoPage == INTENT_GOTO_SERVICES) {
+    PreferenceScreen main=(PreferenceScreen)findPreference(FAKEKEY_MAIN_SCREEN);
+    int index=findPreference(FAKEKEY_SERVICES_SCREEN).getOrder();
+    main.onItemClick(null,null,index,0);
+  }
+}

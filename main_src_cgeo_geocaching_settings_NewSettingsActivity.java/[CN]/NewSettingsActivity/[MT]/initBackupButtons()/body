@@ -1,0 +1,37 @@
+{
+  Preference backup=findPreference(Settings.FAKEKEY_PREFERENCE_BACKUP);
+  backup.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    final Preference preference){
+      final Context context=preference.getContext();
+      if (cgData.getAllCachesCount() == 0) {
+        ActivityMixin.helpDialog(NewSettingsActivity.this,context.getString(R.string.init_backup),context.getString(R.string.init_backup_unnecessary));
+        return false;
+      }
+      final ProgressDialog dialog=ProgressDialog.show(context,context.getString(R.string.init_backup),context.getString(R.string.init_backup_running),true,false);
+      new Thread(){
+        @Override public void run(){
+          final String backupFileName=cgData.backupDatabase();
+          runOnUiThread(new Runnable(){
+            @Override public void run(){
+              dialog.dismiss();
+              ActivityMixin.helpDialog(NewSettingsActivity.this,context.getString(R.string.init_backup_backup),backupFileName != null ? context.getString(R.string.init_backup_success) + "\n" + backupFileName : context.getString(R.string.init_backup_failed));
+              VALUE_CHANGE_LISTENER.onPreferenceChange(findPreference(Settings.FAKEKEY_PREFERENCE_BACKUP_INFO),"");
+            }
+          }
+);
+        }
+      }
+.start();
+      return true;
+    }
+  }
+);
+  Preference restore=findPreference(Settings.FAKEKEY_PREFERENCE_RESTORE);
+  restore.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    final Preference preference){
+      ((cgeoapplication)NewSettingsActivity.this.getApplication()).restoreDatabase(NewSettingsActivity.this);
+      return true;
+    }
+  }
+);
+}
