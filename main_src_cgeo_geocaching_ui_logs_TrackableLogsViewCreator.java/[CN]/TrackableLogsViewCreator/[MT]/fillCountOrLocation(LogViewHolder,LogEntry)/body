@@ -1,0 +1,16 @@
+{
+  if (StringUtils.isBlank(log.cacheName)) {
+    holder.countOrLocation.setVisibility(View.GONE);
+  }
+ else {
+    holder.countOrLocation.setText(Html.fromHtml(log.cacheName));
+    final String cacheGuid=log.cacheGuid;
+    final String cacheName=log.cacheName;
+    holder.countOrLocation.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View arg0){
+        CacheDetailActivity.startActivityGuid(activity,cacheGuid,Html.fromHtml(cacheName).toString());
+      }
+    }
+);
+  }
+}

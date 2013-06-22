@@ -5,9 +5,9 @@ case DETAILS:
 case DESCRIPTION:
   return new DescriptionViewCreator();
 case LOGS:
-return new LogsViewCreator(true);
+return new CacheLogsViewCreator(this,cache,true);
 case LOGSFRIENDS:
-return new LogsViewCreator(false);
+return new CacheLogsViewCreator(this,cache,false);
 case WAYPOINTS:
 return new WaypointsViewCreator();
 case INVENTORY:

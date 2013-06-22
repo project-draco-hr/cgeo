@@ -3,7 +3,7 @@ switch (page) {
 case DETAILS:
     return new DetailsViewCreator();
 case LOGS:
-  return new LogsViewCreator();
+  return new TrackableLogsViewCreator(this,trackable);
 default :
 throw new IllegalArgumentException();
 }
