@@ -3,7 +3,7 @@
   builder.setTitle(R.string.cache_menu_navigate);
   final List<NavigationAppsEnum> items=new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
   final int defaultNavigationTool=Settings.getDefaultNavigationTool();
-  for (  NavigationAppsEnum navApp : getInstalledNavigationApps()) {
+  for (  final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
     if ((showInternalMap || !(navApp.app instanceof InternalMap)) && (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
       boolean add=false;
       if (cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache)) {
@@ -23,8 +23,8 @@
   final ArrayAdapter<NavigationAppsEnum> adapter=new ArrayAdapter<NavigationAppsEnum>(activity,android.R.layout.select_dialog_item,items);
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int item){
-      NavigationAppsEnum selectedItem=adapter.getItem(item);
-      App app=selectedItem.app;
+      final NavigationAppsEnum selectedItem=adapter.getItem(item);
+      final App app=selectedItem.app;
       if (cache != null) {
         navigateCache(activity,cache,app);
       }

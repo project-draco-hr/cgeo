@@ -1,8 +1,8 @@
 {
   try {
-    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:ll=" + coords.getLatitude() + ","+ coords.getLongitude()+ mode)));
+    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:ll=" + coords.getLatitude() + ","+ coords.getLongitude()+ "&mode="+ mode)));
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.i("GoogleNavigationApp.navigate: No navigation application available.",e);
   }
 }
