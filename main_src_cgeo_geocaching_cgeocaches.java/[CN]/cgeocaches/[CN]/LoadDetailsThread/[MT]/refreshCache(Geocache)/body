@@ -11,7 +11,7 @@
         }
         Log.i("Waiting for next cache " + delay + " ms");
       }
- catch (      Exception e) {
+ catch (      final Exception e) {
         Log.e("cgeocaches.LoadDetailsThread.sleep",e);
       }
     }
@@ -23,11 +23,11 @@
     handler.sendEmptyMessage(cacheList.indexOf(cache));
     yield();
   }
- catch (  InterruptedException e) {
+ catch (  final InterruptedException e) {
     Log.i(e.getMessage());
     return false;
   }
-catch (  Exception e) {
+catch (  final Exception e) {
     Log.e("cgeocaches.LoadDetailsThread",e);
   }
   last=System.currentTimeMillis();

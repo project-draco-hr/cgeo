@@ -4,7 +4,7 @@
   setContentView(R.layout.cacheslist_activity);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    Object typeObject=extras.get(Intents.EXTRA_LIST_TYPE);
+    final Object typeObject=extras.get(Intents.EXTRA_LIST_TYPE);
     type=(typeObject instanceof CacheListType) ? (CacheListType)typeObject : CacheListType.OFFLINE;
     coords=extras.getParcelable(Intents.EXTRA_COORDS);
   }

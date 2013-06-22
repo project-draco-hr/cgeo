@@ -3,8 +3,8 @@
     showToast(res.getString(R.string.warn_no_cache_coord));
     return;
   }
-  Set<String> geocodes=new HashSet<String>();
-  for (  Geocache cache : adapter.getFilteredList()) {
+  final Set<String> geocodes=new HashSet<String>();
+  for (  final Geocache cache : adapter.getFilteredList()) {
     geocodes.add(cache.getGeocode());
   }
   final SearchResult searchToUse=new SearchResult(geocodes);

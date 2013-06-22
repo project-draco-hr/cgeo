@@ -9,7 +9,7 @@
       deviceCode="";
     }
     final Parameters params=new Parameters("code",deviceCode);
-    HttpResponse responseFromWeb=Network.getRequest("http://send2.cgeo.org/read.html",params);
+    final HttpResponse responseFromWeb=Network.getRequest("http://send2.cgeo.org/read.html",params);
     if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
       final String response=Network.getResponseData(responseFromWeb);
       if (response.length() > 2) {
@@ -48,7 +48,7 @@
         times=0;
       }
     }
- catch (    InterruptedException e) {
+ catch (    final InterruptedException e) {
       Log.e("cgeocaches.LoadFromWebThread.sleep",e);
     }
   }

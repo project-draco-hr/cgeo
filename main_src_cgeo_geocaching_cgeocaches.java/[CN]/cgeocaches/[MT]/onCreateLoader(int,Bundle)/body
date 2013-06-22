@@ -2,7 +2,7 @@
   if (type >= CacheListLoaderType.values().length) {
     throw new IllegalArgumentException("invalid loader type " + type);
   }
-  CacheListLoaderType enumType=CacheListLoaderType.values()[type];
+  final CacheListLoaderType enumType=CacheListLoaderType.values()[type];
   AbstractSearchLoader loader=null;
 switch (enumType) {
 case OFFLINE:

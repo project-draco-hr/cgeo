@@ -1,6 +1,6 @@
 {
   final List<Geocache> deletion=new ArrayList<Geocache>();
-  for (  Geocache cache : adapter.getCheckedOrAllCaches()) {
+  for (  final Geocache cache : adapter.getCheckedOrAllCaches()) {
     if (cache.isEventCache()) {
       final Date eventDate=cache.getHiddenDate();
       if (DateUtils.daysSince(eventDate.getTime()) > 0) {

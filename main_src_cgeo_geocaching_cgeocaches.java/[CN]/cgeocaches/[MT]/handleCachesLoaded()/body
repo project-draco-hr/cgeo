@@ -5,7 +5,7 @@
     setDateComparatorForEventList();
     showFooterMoreCaches();
     if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
-      AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+      final AlertDialog.Builder dialog=new AlertDialog.Builder(this);
       dialog.setTitle(res.getString(R.string.license));
       dialog.setMessage(res.getString(R.string.err_license));
       dialog.setCancelable(true);
@@ -23,7 +23,7 @@
         }
       }
 );
-      AlertDialog alert=dialog.create();
+      final AlertDialog alert=dialog.create();
       alert.show();
     }
  else     if (search != null && search.getError() != null) {
@@ -35,7 +35,7 @@
     }
     setAdapterCurrentCoordinates(false);
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     showToast(res.getString(R.string.err_detail_cache_find_any));
     Log.e("cgeocaches.loadCachesHandler",e);
     hideLoading();
@@ -47,7 +47,7 @@
     hideLoading();
     showProgress(false);
   }
- catch (  Exception e2) {
+ catch (  final Exception e2) {
     Log.e("cgeocaches.loadCachesHandler.2",e2);
   }
   adapter.setSelectMode(false);

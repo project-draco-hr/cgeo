@@ -8,7 +8,7 @@
   try {
     adapterInfo=(AdapterContextMenuInfo)info;
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("cgeocaches.onContextItemSelected",e);
   }
   final Geocache cache=adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
