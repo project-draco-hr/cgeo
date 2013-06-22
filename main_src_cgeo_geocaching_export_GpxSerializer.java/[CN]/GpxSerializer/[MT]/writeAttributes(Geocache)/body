@@ -3,7 +3,7 @@
     return;
   }
   gpx.startTag(PREFIX_GROUNDSPEAK,"attributes");
-  for (  String attribute : cache.getAttributes()) {
+  for (  final String attribute : cache.getAttributes()) {
     final CacheAttribute attr=CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attribute));
     if (attr == null) {
       continue;

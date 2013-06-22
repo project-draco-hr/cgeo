@@ -1,6 +1,6 @@
 {
-  Set<Geocache> caches=cgData.loadCaches(geocodesOfBatch,LoadFlags.LOAD_ALL_DB_ONLY);
-  for (  Geocache cache : caches) {
+  final Set<Geocache> caches=cgData.loadCaches(geocodesOfBatch,LoadFlags.LOAD_ALL_DB_ONLY);
+  for (  final Geocache cache : caches) {
     gpx.startTag(PREFIX_GPX,"wpt");
     gpx.attribute("","lat",Double.toString(cache.getCoords().getLatitude()));
     gpx.attribute("","lon",Double.toString(cache.getCoords().getLongitude()));
@@ -14,7 +14,7 @@
     gpx.attribute("","available",!cache.isDisabled() ? "True" : "False");
     gpx.attribute("","archives",cache.isArchived() ? "True" : "False");
     XmlUtils.multipleTexts(gpx,PREFIX_GROUNDSPEAK,"name",cache.getName(),"placed_by",cache.getOwnerDisplayName(),"owner",cache.getOwnerUserId(),"type",cache.getType().pattern,"container",cache.getSize().id,"difficulty",Float.toString(cache.getDifficulty()),"terrain",Float.toString(cache.getTerrain()),"country",cache.getLocation(),"state","","encoded_hints",cache.getHint());
-    writeAttributes(gpx,cache);
+    writeAttributes(cache);
     gpx.startTag(PREFIX_GROUNDSPEAK,"short_description");
     gpx.attribute("","html",TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
     gpx.text(cache.getShortDescription());
@@ -23,11 +23,13 @@
     gpx.attribute("","html",TextUtils.containsHtml(cache.getDescription()) ? "True" : "False");
     gpx.text(cache.getDescription());
     gpx.endTag(PREFIX_GROUNDSPEAK,"long_description");
-    writeLogs(gpx,cache);
+    writeLogs(cache);
     gpx.endTag(PREFIX_GROUNDSPEAK,"cache");
     gpx.endTag(PREFIX_GPX,"wpt");
-    writeWaypoints(gpx,cache);
+    writeWaypoints(cache);
     countExported++;
-    publishProgress(countExported);
+    if (progressListener != null) {
+      progressListener.publishProgress(countExported);
+    }
   }
 }

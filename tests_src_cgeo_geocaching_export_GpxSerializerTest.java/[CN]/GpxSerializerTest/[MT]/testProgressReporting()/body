@@ -1,0 +1,13 @@
+{
+  final AtomicReference<Integer> importedCount=new AtomicReference<Integer>(0);
+  final StringWriter writer=new StringWriter();
+  Geocache cache=loadCacheFromResource(R.raw.gc1bkp3_gpx101);
+  assertNotNull(cache);
+  new GpxSerializer().writeGPX(Collections.singletonList("GC1BKP3"),writer,new GpxSerializer.ProgressListener(){
+    @Override public void publishProgress(    int countExported){
+      importedCount.set(countExported);
+    }
+  }
+);
+  assertEquals("Progress listener not called",1,importedCount.get().intValue());
+}
