@@ -1,0 +1,12 @@
+{
+switch (userInfo.getStatus()) {
+case NOT_RETRIEVED:
+    return cgeoapplication.getInstance().getString(R.string.init_login_popup_working);
+case SUCCESSFUL:
+  return cgeoapplication.getInstance().getString(R.string.init_login_popup_ok);
+case FAILED:
+return cgeoapplication.getInstance().getString(R.string.init_login_popup_failed);
+default :
+return "Error";
+}
+}
