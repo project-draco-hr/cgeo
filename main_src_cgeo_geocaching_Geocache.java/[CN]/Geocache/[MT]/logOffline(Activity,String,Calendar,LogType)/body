@@ -3,7 +3,7 @@
     return;
   }
   final boolean status=cgData.saveLogOffline(geocode,date.getTime(),logType,log);
-  Resources res=fromActivity.getResources();
+  final Resources res=fromActivity.getResources();
   if (status) {
     ActivityMixin.showToast(fromActivity,res.getString(R.string.info_log_saved));
     cgData.saveVisitDate(geocode);

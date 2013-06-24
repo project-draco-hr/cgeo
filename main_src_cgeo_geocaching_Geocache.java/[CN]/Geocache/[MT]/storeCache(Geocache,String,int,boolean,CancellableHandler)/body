@@ -37,7 +37,7 @@
       return;
     }
     if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-      for (      Image oneSpoiler : cache.getSpoilers()) {
+      for (      final Image oneSpoiler : cache.getSpoilers()) {
         imgGetter.getDrawable(oneSpoiler.getUrl());
       }
     }
@@ -45,9 +45,9 @@
       return;
     }
     if (Settings.isStoreLogImages()) {
-      for (      LogEntry log : cache.getLogs()) {
+      for (      final LogEntry log : cache.getLogs()) {
         if (log.hasLogImages()) {
-          for (          Image oneLogImg : log.getLogImages()) {
+          for (          final Image oneLogImg : log.getLogImages()) {
             imgGetter.getDrawable(oneLogImg.getUrl());
           }
         }
@@ -66,7 +66,7 @@
       handler.sendMessage(Message.obtain());
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("Geocache.storeCache",e);
   }
 }

@@ -107,7 +107,7 @@
     this.setWaypoints(other.waypoints,false);
   }
  else {
-    ArrayList<Waypoint> newPoints=new ArrayList<Waypoint>(waypoints);
+    final ArrayList<Waypoint> newPoints=new ArrayList<Waypoint>(waypoints);
     Waypoint.mergeWayPoints(newPoints,other.waypoints,false);
     this.setWaypoints(newPoints,false);
   }
@@ -128,12 +128,10 @@
     logCounts=other.logCounts;
   }
   userModifiedCoords=false;
-  if (waypoints != null) {
-    for (    Waypoint wpt : waypoints) {
-      if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
-        userModifiedCoords=true;
-        break;
-      }
+  for (  final Waypoint wpt : waypoints) {
+    if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
+      userModifiedCoords=true;
+      break;
     }
   }
   if (!reliableLatLon) {

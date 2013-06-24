@@ -1,6 +1,6 @@
 {
   final String lowerInput=StringUtils.substring(input,0,20).toLowerCase(Locale.getDefault());
-  for (  WaypointType wpType : WaypointType.values()) {
+  for (  final WaypointType wpType : WaypointType.values()) {
     if (lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
       return wpType;
     }

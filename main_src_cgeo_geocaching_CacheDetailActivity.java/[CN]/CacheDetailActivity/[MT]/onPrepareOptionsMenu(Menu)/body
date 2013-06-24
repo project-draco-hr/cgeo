@@ -4,7 +4,7 @@
     menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
     menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
     menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
+    LoggingUI.onPrepareOptionsMenu(menu,cache);
   }
-  LoggingUI.onPrepareOptionsMenu(menu,cache);
   return super.onPrepareOptionsMenu(menu);
 }

@@ -19,13 +19,13 @@
           count++;
         }
       }
- catch (      Geopoint.ParseException e) {
+ catch (      final Geopoint.ParseException e) {
       }
       note=note.substring(matcher.start() + 1);
       matcher=new MatcherWrapper(coordPattern,note);
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("Geocache.parseWaypointsFromNote",e);
   }
 }
