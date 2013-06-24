@@ -1,22 +1,22 @@
 {
   if (farDistance >= farFarAway) {
-    int quantity=Math.round(farDistance);
+    final int quantity=Math.round(farDistance);
     if (quantity == 1) {
       return getString(farOneId,quantity,String.valueOf(quantity));
     }
     return getQuantityString(farId,quantity,String.valueOf(quantity));
   }
   if (farDistance >= farNearAway) {
-    float precision1=Math.round(farDistance * 10.0f) / 10.0f;
-    float precision0=Math.round(farDistance);
-    if (precision1 == precision0) {
-      int quantity=(int)precision0;
+    final float precision1=Math.round(farDistance * 10.0f) / 10.0f;
+    final float precision0=Math.round(farDistance);
+    if (Math.abs(precision1 - precision0) < 0.0001) {
+      final int quantity=(int)precision0;
       if (quantity == 1) {
         return getString(farOneId,quantity,String.valueOf(quantity));
       }
       return getQuantityString(farId,quantity,String.valueOf(quantity));
     }
-    String digits=String.format(Locale.getDefault(),"%.1f",farDistance);
+    final String digits=String.format(Locale.getDefault(),"%.1f",farDistance);
     return getQuantityString(farId,9,digits);
   }
   int quantity=nearDistance;

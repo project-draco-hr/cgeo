@@ -1,6 +1,6 @@
 {
   final int bearing=(int)position.bearingTo(target);
-  int degrees=(int)AngleUtils.normalize(bearing - direction);
+  final int degrees=(int)AngleUtils.normalize(bearing - direction);
   int hours=(degrees + 15) / 30;
   if (hours == 0) {
     hours=12;
