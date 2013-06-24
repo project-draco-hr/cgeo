@@ -13,7 +13,7 @@
     writer=new BufferedWriter(new FileWriter(exportFile));
     new GpxSerializer().writeGPX(allGeocodes,writer,new GpxSerializer.ProgressListener(){
       @Override public void publishProgress(      int countExported){
-        this.publishProgress(countExported);
+        ExportTask.this.publishProgress(countExported);
       }
     }
 );
