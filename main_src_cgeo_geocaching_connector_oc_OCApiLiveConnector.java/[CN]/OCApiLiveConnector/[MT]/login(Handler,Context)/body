@@ -2,5 +2,8 @@
   if (supportsPersonalization()) {
     userInfo=OkapiClient.getUserInfo(this);
   }
+ else {
+    userInfo=new UserInfo(StringUtils.EMPTY,0,UserInfoStatus.NOT_SUPPORTED);
+  }
   return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
 }
