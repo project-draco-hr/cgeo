@@ -1,0 +1,8 @@
+{
+  final StringBuffer buffer=new StringBuffer();
+  if (cgeoNote != null) {
+    buffer.append(MERGED_PREFIX).append(cgeoNote).append("\n").append(SEPARATOR);
+  }
+  buffer.append(providerNote);
+  return buffer.toString();
+}

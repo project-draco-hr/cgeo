@@ -1,0 +1,8 @@
+{
+  final String testString="merged:\nSimple cgeo note\n--\nSimple provider note";
+  Geocache cache=new Geocache();
+  cache.setPersonalNote(testString);
+  PersonalNote parsedNote=new PersonalNote(cache);
+  assertEquals(testString,parsedNote.toString());
+  assertPersonalNote(parsedNote,"Simple cgeo note","Simple provider note");
+}
