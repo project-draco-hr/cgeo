@@ -1,3 +1,3 @@
 {
-  return (getLaunchIntent(packageName) != null) || hasPackageInstalled(packageName);
+  return isLaunchable(packageName) || hasPackageInstalled(packageName);
 }
