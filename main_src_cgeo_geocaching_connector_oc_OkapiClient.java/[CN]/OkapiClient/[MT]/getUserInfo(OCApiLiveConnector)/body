@@ -2,7 +2,7 @@
   final Parameters params=new Parameters("fields",USER_INFO_FIELDS);
   final JSONObject data=request(connector,OkapiService.SERVICE_USER,params);
   if (data == null) {
-    return new UserInfo(StringUtils.EMPTY,0,false);
+    return new UserInfo(StringUtils.EMPTY,0,UserInfoStatus.FAILED);
   }
   String name=StringUtils.EMPTY;
   int finds=0;
@@ -31,5 +31,5 @@
  else {
     success=false;
   }
-  return new UserInfo(name,finds,success);
+  return new UserInfo(name,finds,success ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
 }

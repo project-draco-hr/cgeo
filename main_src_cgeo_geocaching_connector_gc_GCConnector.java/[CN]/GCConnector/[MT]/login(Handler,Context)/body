@@ -1,0 +1,15 @@
+{
+  final StatusCode status=Login.login();
+  if (status == StatusCode.NO_ERROR) {
+    cgeoapplication.getInstance().firstRun=false;
+    Login.detectGcCustomDate();
+  }
+  if (cgeoapplication.getInstance().showLoginToast && handler != null) {
+    handler.sendMessage(handler.obtainMessage(0,status));
+    cgeoapplication.getInstance().showLoginToast=false;
+    if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
+      SettingsActivity.startActivity(fromActivity);
+    }
+  }
+  return status == StatusCode.NO_ERROR;
+}

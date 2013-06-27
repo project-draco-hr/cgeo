@@ -1,0 +1,9 @@
+{
+  final List<ILogin> liveConns=new ArrayList<ILogin>();
+  for (  final IConnector conn : CONNECTORS) {
+    if (conn instanceof ILogin && conn.isActivated()) {
+      liveConns.add((ILogin)conn);
+    }
+  }
+  return liveConns.toArray(new ILogin[liveConns.size()]);
+}
