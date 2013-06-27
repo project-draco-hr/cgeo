@@ -63,6 +63,7 @@
   cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[35]) > 0);
   cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[36]) > 0);
   cache.setFinalDefined(cursor.getInt(cacheColumnIndex[39]) > 0);
+  cache.setLogPasswordRequired(cursor.getInt(cacheColumnIndex[43]) > 0);
   Log.d("Loading " + cache.toString() + " ("+ cache.getListId()+ ") from DB");
   return cache;
 }

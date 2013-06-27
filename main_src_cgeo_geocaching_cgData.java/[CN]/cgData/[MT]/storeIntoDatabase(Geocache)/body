@@ -52,6 +52,7 @@
   values.put("onWatchlist",cache.isOnWatchlist() ? 1 : 0);
   values.put("coordsChanged",cache.hasUserModifiedCoords() ? 1 : 0);
   values.put("finalDefined",cache.hasFinalDefined() ? 1 : 0);
+  values.put("logPasswordRequired",cache.isLogPasswordRequired() ? 1 : 0);
   init();
   database.beginTransaction();
   boolean result=false;

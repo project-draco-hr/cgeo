@@ -1,7 +1,8 @@
 {
   final String log=logTexts[0];
+  final String logPwd=logTexts.length > 1 ? logTexts[1] : null;
   try {
-    final LogResult logResult=loggingManager.postLog(cache,typeSelected,date,log,trackables);
+    final LogResult logResult=loggingManager.postLog(cache,typeSelected,date,log,logPwd,trackables);
     if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
       final LogEntry logNow=new LogEntry(date,typeSelected,log);
       cache.getLogs().add(0,logNow);

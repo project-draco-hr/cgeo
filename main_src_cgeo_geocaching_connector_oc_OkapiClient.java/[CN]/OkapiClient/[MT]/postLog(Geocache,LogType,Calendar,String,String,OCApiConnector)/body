@@ -7,6 +7,9 @@
   if (logType.equals(LogType.NEEDS_MAINTENANCE)) {
     params.add("needs_maintenance","true");
   }
+  if (logPassword != null) {
+    params.add("password",logPassword);
+  }
   final JSONObject data=request(connector,OkapiService.SERVICE_SUBMIT_LOG,params);
   if (data == null) {
     return new LogResult(StatusCode.LOG_POST_ERROR,"");

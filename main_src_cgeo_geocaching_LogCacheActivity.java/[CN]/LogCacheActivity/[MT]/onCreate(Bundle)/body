@@ -22,6 +22,7 @@
   postButton=(Button)findViewById(R.id.post);
   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   tweetCheck=(CheckBox)findViewById(R.id.tweet);
+  logPasswordBox=(LinearLayout)findViewById(R.id.log_password_box);
   setDefaultValues();
   if (savedInstanceState != null) {
     rating=savedInstanceState.getDouble(SAVED_STATE_RATING);
@@ -62,6 +63,7 @@
   }
   tweetCheck.setChecked(true);
   updateTweetBox(typeSelected);
+  updateLogPasswordBox(typeSelected);
   final Button imageButton=(Button)findViewById(R.id.image_btn);
   imageButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
