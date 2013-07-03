@@ -126,7 +126,7 @@
       cids.add(cache.getCacheId());
     }
     try {
-      result=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_FAVORITE,false,1,null,true);
+      result=getNumberString(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_FAVORITE,false,1,null,true));
       if (null != result) {
         cache.setFavoritePoints(Integer.parseInt(result));
       }

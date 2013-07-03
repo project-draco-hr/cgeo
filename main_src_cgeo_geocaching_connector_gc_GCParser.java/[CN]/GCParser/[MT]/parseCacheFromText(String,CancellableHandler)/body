@@ -193,7 +193,7 @@
       final MatcherWrapper matcherLog=new MatcherWrapper(GCConstants.PATTERN_COUNTLOG,countlogs);
       while (matcherLog.find()) {
         final String typeStr=matcherLog.group(1);
-        final String countStr=matcherLog.group(2).replaceAll("[.,]","");
+        final String countStr=getNumberString(matcherLog.group(2));
         if (StringUtils.isNotBlank(typeStr) && LogType.UNKNOWN != LogType.getByIconName(typeStr) && StringUtils.isNotBlank(countStr)) {
           cache.getLogCounts().put(LogType.getByIconName(typeStr),Integer.parseInt(countStr));
         }
