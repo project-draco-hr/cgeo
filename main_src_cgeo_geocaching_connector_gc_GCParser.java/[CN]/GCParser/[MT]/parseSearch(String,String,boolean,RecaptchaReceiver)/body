@@ -41,6 +41,7 @@
   page=page.substring(startPos + 1,endPos - startPos + 1);
   final String[] rows=page.split("<tr class=");
   final int rows_count=rows.length;
+  int excludedCaches=0;
   for (int z=1; z < rows_count; z++) {
     final Geocache cache=new Geocache();
     final String row=rows[z];
@@ -70,6 +71,7 @@
       Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data");
     }
     if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
+      excludedCaches++;
       continue;
     }
     cache.setGeocode(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_GEOCODE,true,1,cache.getGeocode(),true));
@@ -139,7 +141,7 @@
   try {
     final String result=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
     if (null != result) {
-      searchResult.setTotal(Integer.parseInt(result));
+      searchResult.setTotal(Integer.parseInt(result) - excludedCaches);
     }
   }
  catch (  final NumberFormatException e) {
