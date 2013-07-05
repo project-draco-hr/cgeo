@@ -1,10 +1,10 @@
 {
-  final String data=Network.getResponseData(Network.getRequest(uri,params));
+  final String data=Network.getResponseData(Network.getRequest(uri,params),canRemoveWhitespace(uri));
   if (getLoginStatus(data)) {
     return data;
   }
   if (login() == StatusCode.NO_ERROR) {
-    return Network.getResponseData(Network.getRequest(uri,params));
+    return Network.getResponseData(Network.getRequest(uri,params),canRemoveWhitespace(uri));
   }
   Log.w("Working as guest.");
   return data;
