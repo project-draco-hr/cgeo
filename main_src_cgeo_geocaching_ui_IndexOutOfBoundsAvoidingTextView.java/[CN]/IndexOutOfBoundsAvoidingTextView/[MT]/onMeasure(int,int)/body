@@ -1,0 +1,9 @@
+{
+  try {
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  }
+ catch (  IndexOutOfBoundsException e) {
+    setText(getText().toString());
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  }
+}
