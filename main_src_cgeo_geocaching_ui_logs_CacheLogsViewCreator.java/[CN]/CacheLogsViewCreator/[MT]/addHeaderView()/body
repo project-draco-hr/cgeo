@@ -1,5 +1,5 @@
 {
-  final Map<LogType,Integer> logCounts=cache.getLogCounts();
+  final Map<LogType,Integer> logCounts=getCache().getLogCounts();
   if (logCounts != null) {
     final List<Entry<LogType,Integer>> sortedLogCounts=new ArrayList<Entry<LogType,Integer>>(logCounts.size());
     for (    final Entry<LogType,Integer> entry : logCounts.entrySet()) {
