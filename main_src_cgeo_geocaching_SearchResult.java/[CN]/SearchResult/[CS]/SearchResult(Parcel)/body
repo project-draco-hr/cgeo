@@ -2,6 +2,9 @@
   final ArrayList<String> list=new ArrayList<String>();
   in.readStringList(list);
   geocodes=new HashSet<String>(list);
+  final ArrayList<String> filteredList=new ArrayList<String>();
+  in.readStringList(filteredList);
+  filteredGeocodes=new HashSet<String>(filteredList);
   error=(StatusCode)in.readSerializable();
   url=in.readString();
   final int length=in.readInt();

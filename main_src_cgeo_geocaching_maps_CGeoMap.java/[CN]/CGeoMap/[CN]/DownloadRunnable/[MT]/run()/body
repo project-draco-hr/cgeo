@@ -27,6 +27,10 @@
     if (searchResult != null) {
       Set<Geocache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
       CGeoMap.filter(result);
+      final Set<String> filteredCodes=searchResult.getFilteredGeocodes();
+      Log.d("Filtering out " + filteredCodes.size() + " caches: "+ filteredCodes.toString());
+      caches.removeAll(cgData.loadCaches(filteredCodes,LoadFlags.LOAD_CACHE_ONLY));
+      cgData.removeCaches(filteredCodes,EnumSet.of(RemoveFlag.REMOVE_CACHE));
       caches.removeAll(result);
       caches.addAll(result);
       lastSearchResult=searchResult;
