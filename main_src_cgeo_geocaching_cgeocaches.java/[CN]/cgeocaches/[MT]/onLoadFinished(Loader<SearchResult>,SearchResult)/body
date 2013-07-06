@@ -5,6 +5,7 @@
     cacheList.addAll(cachesFromSearchResult);
     search=searchIn;
     adapter.reFilter();
+    adapter.setInitialComparator();
     adapter.forceSort();
     adapter.notifyDataSetChanged();
     updateTitle();
