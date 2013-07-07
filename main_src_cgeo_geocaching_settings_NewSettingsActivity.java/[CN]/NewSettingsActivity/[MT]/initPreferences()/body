@@ -7,8 +7,14 @@
   initDebugPreference();
   initBasicMemberPreferences();
   initSend2CgeoPreferences();
-  for (  String k : new String[]{Settings.KEY_USERNAME,Settings.KEY_PASSWORD,Settings.KEY_GCVOTE_PASSWORD,Settings.KEY_SIGNATURE,Settings.KEY_MAP_SOURCE,Settings.KEY_RENDER_THEME_BASE_FOLDER,Settings.KEY_GPX_EXPORT_DIR,Settings.KEY_GPX_IMPORT_DIR,Settings.KEY_MAP_DIRECTORY,Settings.KEY_DEFAULT_NAVIGATION_TOOL,Settings.KEY_DEFAULT_NAVIGATION_TOOL_2,Settings.KEY_WEBDEVICE_NAME,Settings.FAKEKEY_PREFERENCE_BACKUP_INFO}) {
-    bindSummaryToStringValue(k);
+  Map<String,?> prefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getAll();
+  for (  String key : prefs.keySet()) {
+    Preference pref=findPreference(key);
+    if (pref instanceof EditTextPreference || pref instanceof EditPasswordPreference) {
+      bindSummaryToStringValue(pref);
+    }
+ else     if (pref instanceof NumberPickerPreference) {
+      bindSummaryToIntValue(pref);
+    }
   }
-  bindSummaryToIntValue(Settings.KEY_ALTITUDE_CORRECTION);
 }

@@ -1,8 +1,0 @@
-{
-  Preference p=findPreference(key);
-  if (p == null) {
-    return;
-  }
-  int value=PreferenceManager.getDefaultSharedPreferences(p.getContext()).getInt(p.getKey(),0);
-  bindSummaryToValue(p,value);
-}
