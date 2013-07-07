@@ -131,14 +131,14 @@
 );
   waypoint.getChild(namespace,"url").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String url){
-      final MatcherWrapper matcher=new MatcherWrapper(patternGuid,url);
+      final MatcherWrapper matcher=new MatcherWrapper(PATTERN_GUID,url);
       if (matcher.matches()) {
         final String guid=matcher.group(1);
         if (StringUtils.isNotBlank(guid)) {
           cache.setGuid(guid);
         }
       }
-      final MatcherWrapper matcherCode=new MatcherWrapper(patternUrlGeocode,url);
+      final MatcherWrapper matcherCode=new MatcherWrapper(PATTERN_URL_GEOCODE,url);
       if (matcherCode.matches()) {
         final String geocode=matcherCode.group(1);
         cache.setGeocode(geocode);
@@ -168,7 +168,7 @@
       gsak.getChild(gsakNamespace,"User" + i).setEndTextElementListener(new UserDataListener(i));
     }
   }
-  for (  final String nsGC : nsGCList) {
+  for (  final String nsGC : GROUNDSPEAK_NAMESPACE) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");
     gcCache.setStartElementListener(new StartElementListener(){
       @Override public void start(      Attributes attrs){
