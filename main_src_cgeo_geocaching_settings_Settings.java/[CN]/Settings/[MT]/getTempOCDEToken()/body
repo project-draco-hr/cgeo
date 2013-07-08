@@ -1,5 +1,5 @@
 {
-  String tokenPublic=sharedPrefs.getString(KEY_TEMP_OCDE_TOKEN_PUBLIC,null);
-  String tokenSecret=sharedPrefs.getString(KEY_TEMP_OCDE_TOKEN_SECRET,null);
+  String tokenPublic=getString(R.string.pref_temp_ocde_token_public,null);
+  String tokenSecret=getString(R.string.pref_temp_ocde_token_secret,null);
   return new ImmutablePair<String,String>(tokenPublic,tokenSecret);
 }

@@ -1,9 +1,9 @@
 {
-  putString(KEY_TWITTER_TOKEN_PUBLIC,tokenPublic);
-  putString(KEY_TWITTER_TOKEN_SECRET,tokenSecret);
+  putString(R.string.pref_twitter_token_public,tokenPublic);
+  putString(R.string.pref_twitter_token_secret,tokenSecret);
   if (tokenPublic != null) {
-    remove(KEY_TEMP_TWITTER_TOKEN_PUBLIC);
-    remove(KEY_TEMP_TWITTER_TOKEN_SECRET);
+    remove(R.string.pref_temp_twitter_token_public);
+    remove(R.string.pref_temp_twitter_token_secret);
   }
   setUseTwitter(enableTwitter);
 }

@@ -2,11 +2,11 @@
   Settings.username=username;
   Settings.password=password;
   if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-    boolean a=remove(KEY_USERNAME);
-    boolean b=remove(KEY_PASSWORD);
+    boolean a=remove(R.string.pref_username);
+    boolean b=remove(R.string.pref_password);
     return a && b;
   }
-  boolean a=putString(KEY_USERNAME,username);
-  boolean b=putString(KEY_PASSWORD,password);
+  boolean a=putString(R.string.pref_username,username);
+  boolean b=putString(R.string.pref_password,password);
   return a && b;
 }

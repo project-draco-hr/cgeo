@@ -1,7 +1,7 @@
 {
   if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-    final String preUsername=sharedPrefs.getString(KEY_USERNAME,null);
-    final String prePassword=sharedPrefs.getString(KEY_PASSWORD,null);
+    final String preUsername=getString(R.string.pref_username,null);
+    final String prePassword=getString(R.string.pref_password,null);
     if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
       return null;
     }

@@ -2,7 +2,7 @@
   if (!MapProviderFactory.isSameActivity(getMapSource(),newMapSource)) {
     mapProvider=null;
   }
-  putString(KEY_MAP_SOURCE,String.valueOf(newMapSource.getNumericalId()));
+  putString(R.string.pref_mapsource,String.valueOf(newMapSource.getNumericalId()));
   if (newMapSource instanceof OfflineMapSource) {
     setMapFile(((OfflineMapSource)newMapSource).getFileName());
   }

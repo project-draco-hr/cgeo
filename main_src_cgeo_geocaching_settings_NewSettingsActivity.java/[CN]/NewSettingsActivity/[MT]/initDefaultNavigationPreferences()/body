@@ -6,10 +6,10 @@
     entries[i]=apps.get(i).toString();
     values[i]=String.valueOf(apps.get(i).id);
   }
-  ListPreference pref=(ListPreference)findPreference(Settings.KEY_DEFAULT_NAVIGATION_TOOL);
+  ListPreference pref=(ListPreference)findPreference(getKey(R.string.pref_defaultNavigationTool));
   pref.setEntries(entries);
   pref.setEntryValues(values);
-  pref=(ListPreference)findPreference(Settings.KEY_DEFAULT_NAVIGATION_TOOL_2);
+  pref=(ListPreference)findPreference(getKey(R.string.pref_defaultNavigationTool2));
   pref.setEntries(entries);
   pref.setEntryValues(values);
 }

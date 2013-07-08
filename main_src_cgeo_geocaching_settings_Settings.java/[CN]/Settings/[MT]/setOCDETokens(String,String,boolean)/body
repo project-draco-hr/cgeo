@@ -1,9 +1,9 @@
 {
-  putString(KEY_OCDE_TOKEN_PUBLIC,tokenPublic);
-  putString(KEY_OCDE_TOKEN_SECRET,tokenSecret);
+  putString(R.string.pref_ocde_tokenpublic,tokenPublic);
+  putString(R.string.pref_ocde_tokensecret,tokenSecret);
   if (tokenPublic != null) {
-    remove(KEY_TEMP_OCDE_TOKEN_PUBLIC);
-    remove(KEY_TEMP_OCDE_TOKEN_SECRET);
+    remove(R.string.pref_temp_ocde_token_public);
+    remove(R.string.pref_temp_ocde_token_secret);
   }
   setOCConnectorActive(enableOcDe);
 }

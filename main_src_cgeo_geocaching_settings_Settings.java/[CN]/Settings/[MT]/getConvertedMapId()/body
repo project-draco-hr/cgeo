@@ -1,5 +1,5 @@
 {
-  final int id=Integer.parseInt(sharedPrefs.getString(KEY_MAP_SOURCE,String.valueOf(MAP_SOURCE_DEFAULT)));
+  final int id=Integer.parseInt(getString(R.string.pref_mapsource,String.valueOf(MAP_SOURCE_DEFAULT)));
 switch (id) {
 case GOOGLEMAP_BASEID + MAP:
     return GoogleMapProvider.GOOGLE_MAP_ID.hashCode();

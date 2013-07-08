@@ -19,7 +19,7 @@ case DIR_CHOOSER_MAPS_DIRECTORY_REQUEST:
       }
     }
   initMapSourcePreference();
-findPreference(Settings.KEY_MAP_DIRECTORY).setSummary(Settings.getMapFileDirectory());
+findPreference(getKey(R.string.pref_mapDirectory)).setSummary(Settings.getMapFileDirectory());
 break;
 default :
 throw new IllegalArgumentException();
