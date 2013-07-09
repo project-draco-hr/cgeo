@@ -4,8 +4,8 @@
   String geocode="GCTEST1";
   boolean backupStore=Settings.isStoreOfflineMaps();
   boolean backupStoreWP=Settings.isStoreOfflineWpMaps();
-  Settings.setStoreOfflineMaps(true);
-  Settings.setStoreOfflineWpMaps(true);
+  TestSettings.setStoreOfflineMaps(true);
+  TestSettings.setStoreOfflineWpMaps(true);
   try {
     Geopoint gp=new Geopoint(lat + 0.25d,lon + 0.25d);
     Geocache cache=new Geocache();
@@ -40,8 +40,8 @@
     assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode,trailhead));
   }
   finally {
-    Settings.setStoreOfflineWpMaps(backupStoreWP);
-    Settings.setStoreOfflineMaps(backupStore);
+    TestSettings.setStoreOfflineWpMaps(backupStoreWP);
+    TestSettings.setStoreOfflineMaps(backupStore);
     deleteCacheDirectory(geocode);
   }
 }

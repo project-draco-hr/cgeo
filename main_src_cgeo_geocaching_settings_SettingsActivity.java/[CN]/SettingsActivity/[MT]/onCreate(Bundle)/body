@@ -1,4 +1,18 @@
 {
-  super.onCreate(savedInstanceState,R.layout.settings_activity);
-  init();
+  if (Settings.isLightSkin()) {
+    setTheme(R.style.settings_light);
+  }
+ else {
+    setTheme(R.style.settings);
+  }
+  super.onCreate(savedInstanceState);
+  addPreferencesFromResource(R.xml.preferences);
+  initPreferences();
+  Intent intent=getIntent();
+  int gotoPage=intent.getIntExtra(INTENT_GOTO,0);
+  if (gotoPage == INTENT_GOTO_SERVICES) {
+    PreferenceScreen main=(PreferenceScreen)findPreference(getKey(R.string.pref_fakekey_main_screen));
+    int index=findPreference(getKey(R.string.pref_fakekey_services_screen)).getOrder();
+    main.onItemClick(null,null,index,0);
+  }
 }
