@@ -1,8 +1,8 @@
 {
-  Preference p=findPreference(getKey(R.string.pref_dbonsdcard));
+  Preference p=SettingsActivity.findPreference(this,getKey(R.string.pref_dbonsdcard));
   p.setPersistent(false);
   p.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-    @Override public boolean onPreferenceClick(    Preference preference){
+    @Override public boolean onPreferenceClick(    final Preference preference){
       boolean oldValue=Settings.isDbOnSDCard();
       ((cgeoapplication)SettingsActivity.this.getApplication()).moveDatabase(SettingsActivity.this);
       return oldValue != Settings.isDbOnSDCard();

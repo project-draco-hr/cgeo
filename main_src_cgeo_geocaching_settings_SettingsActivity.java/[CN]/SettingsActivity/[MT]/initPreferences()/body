@@ -9,7 +9,7 @@
   initSend2CgeoPreferences();
   Map<String,?> prefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getAll();
   for (  String key : prefs.keySet()) {
-    Preference pref=findPreference(key);
+    Preference pref=SettingsActivity.findPreference(this,key);
     if (pref instanceof EditTextPreference || pref instanceof EditPasswordPreference) {
       bindSummaryToStringValue(pref);
     }

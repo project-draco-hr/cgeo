@@ -1,4 +1,4 @@
 {
-  findPreference(getKey(R.string.pref_loaddirectionimg)).setEnabled(!Settings.isPremiumMember());
-  findPreference(getKey(R.string.pref_showcaptcha)).setEnabled(!Settings.isPremiumMember());
+  SettingsActivity.findPreference(this,getKey(R.string.pref_loaddirectionimg)).setEnabled(!Settings.isPremiumMember());
+  SettingsActivity.findPreference(this,getKey(R.string.pref_showcaptcha)).setEnabled(!Settings.isPremiumMember());
 }

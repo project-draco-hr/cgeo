@@ -6,13 +6,13 @@
     setTheme(R.style.settings);
   }
   super.onCreate(savedInstanceState);
-  addPreferencesFromResource(R.xml.preferences);
+  SettingsActivity.addPreferencesFromResource(this,R.xml.preferences);
   initPreferences();
   Intent intent=getIntent();
   int gotoPage=intent.getIntExtra(INTENT_GOTO,0);
   if (gotoPage == INTENT_GOTO_SERVICES) {
-    PreferenceScreen main=(PreferenceScreen)findPreference(getKey(R.string.pref_fakekey_main_screen));
-    int index=findPreference(getKey(R.string.pref_fakekey_services_screen)).getOrder();
+    PreferenceScreen main=(PreferenceScreen)SettingsActivity.findPreference(this,getKey(R.string.pref_fakekey_main_screen));
+    int index=SettingsActivity.findPreference(this,getKey(R.string.pref_fakekey_services_screen)).getOrder();
     main.onItemClick(null,null,index,0);
   }
 }
