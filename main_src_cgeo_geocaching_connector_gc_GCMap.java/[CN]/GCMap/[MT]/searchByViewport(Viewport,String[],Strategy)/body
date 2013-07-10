@@ -53,18 +53,13 @@
       searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult,tiles,GCConnector.getInstance(),Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
     }
   }
-  if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+  if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isPremiumMember()) {
     final Geopoint center=viewport.getCenter();
     if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
       SearchResult search=GCParser.searchByCoords(center,Settings.getCacheType(),false,null);
       if (search != null && !search.isEmpty()) {
         final Set<String> geocodes=search.getGeocodes();
-        if (Settings.isPremiumMember()) {
-          lastSearchViewport=cgData.getBounds(geocodes);
-        }
- else {
-          lastSearchViewport=new Viewport(center,center);
-        }
+        lastSearchViewport=cgData.getBounds(geocodes);
         searchResult.addGeocodes(geocodes);
       }
     }
