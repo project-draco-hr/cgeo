@@ -50,7 +50,7 @@
       }
     }
     if (tiles.iterator().next().getZoomlevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
-      searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult,tiles,GCConnector.getInstance()));
+      searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult,tiles,GCConnector.getInstance(),Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
     }
   }
   if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
