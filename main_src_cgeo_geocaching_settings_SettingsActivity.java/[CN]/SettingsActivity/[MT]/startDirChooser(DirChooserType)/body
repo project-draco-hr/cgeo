@@ -1,4 +1,5 @@
 {
+  final String startDirectory=Settings.getString(dct.keyId,dct.defaultValue);
   try {
     final Intent dirChooser=new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
     if (StringUtils.isNotBlank(startDirectory)) {
