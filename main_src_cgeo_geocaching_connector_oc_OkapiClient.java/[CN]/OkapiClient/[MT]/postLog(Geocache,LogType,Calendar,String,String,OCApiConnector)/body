@@ -3,7 +3,7 @@
   params.add("logtype",logType.oc_type);
   params.add("comment",log);
   params.add("comment_format","plaintext");
-  params.add("when",logDateFormat.format(date.getTime()));
+  params.add("when",LOG_DATE_FORMAT.format(date.getTime()));
   if (logType.equals(LogType.NEEDS_MAINTENANCE)) {
     params.add("needs_maintenance","true");
   }
