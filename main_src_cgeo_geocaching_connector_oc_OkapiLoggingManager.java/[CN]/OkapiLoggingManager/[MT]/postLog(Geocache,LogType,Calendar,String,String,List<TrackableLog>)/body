@@ -1,3 +1,5 @@
 {
-  return OkapiClient.postLog(cache,logType,date,log,logPassword,connector);
+  final LogResult result=OkapiClient.postLog(cache,logType,date,log,logPassword,connector);
+  connector.login(null,null);
+  return result;
 }
