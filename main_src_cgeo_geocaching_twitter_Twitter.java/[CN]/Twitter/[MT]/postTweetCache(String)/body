@@ -1,7 +1,4 @@
 {
-  if (!Settings.isUseTwitter() || !Settings.isTwitterLoginValid()) {
-    return;
-  }
   final Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   postTweet(cgeoapplication.getInstance(),getStatusMessage(cache),null);
 }

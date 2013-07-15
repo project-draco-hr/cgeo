@@ -1,8 +1,5 @@
 {
-  if (app == null) {
-    return;
-  }
-  if (!Settings.isTwitterLoginValid()) {
+  if (app == null || !Settings.isUseTwitter() || !Settings.isTwitterLoginValid()) {
     return;
   }
   try {
@@ -10,13 +7,18 @@
     if (coords != null) {
       parameters.put("lat",coords.format(Format.LAT_DECDEGREE_RAW),"long",coords.format(Format.LON_DECDEGREE_RAW),"display_coordinates","true");
     }
-    OAuth.signOAuth("api.twitter.com","/1/statuses/update.json","POST",false,parameters,Settings.getTokenPublic(),Settings.getTokenSecret(),Settings.getKeyConsumerPublic(),Settings.getKeyConsumerSecret());
-    final HttpResponse httpResponse=Network.postRequest("http://api.twitter.com/1/statuses/update.json",parameters);
-    if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
-      Log.i("Tweet posted");
+    OAuth.signOAuth("api.twitter.com","/1.1/statuses/update.json","POST",false,parameters,Settings.getTokenPublic(),Settings.getTokenSecret(),Settings.getKeyConsumerPublic(),Settings.getKeyConsumerSecret());
+    final HttpResponse httpResponse=Network.postRequest("http://api.twitter.com/1.1/statuses/update.json",parameters);
+    if (httpResponse != null) {
+      if (httpResponse.getStatusLine().getStatusCode() == 200) {
+        Log.i("Tweet posted");
+      }
+ else {
+        Log.e("Tweet could not be posted. Reason: " + httpResponse.toString());
+      }
     }
  else {
-      Log.e("Tweet could not be posted");
+      Log.e("Tweet could not be posted. Reason: httpResponse Object is null");
     }
   }
  catch (  Exception e) {
