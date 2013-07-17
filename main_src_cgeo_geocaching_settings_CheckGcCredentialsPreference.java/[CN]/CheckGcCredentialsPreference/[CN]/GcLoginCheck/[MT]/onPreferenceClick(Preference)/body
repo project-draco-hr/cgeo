@@ -1,5 +1,5 @@
 {
-  this.activity=(Activity)CheckGcCredentialsPreference.this.getContext();
+  this.activity=(SettingsActivity)CheckGcCredentialsPreference.this.getContext();
   this.res=activity.getResources();
   ImmutablePair<String,String> credentials=Settings.getGcLogin();
   if (credentials == null || StringUtils.isBlank(credentials.getLeft()) || StringUtils.isBlank(credentials.getRight())) {
