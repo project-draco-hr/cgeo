@@ -3,7 +3,7 @@
     return -1;
   }
   try {
-    return Integer.parseInt(TextUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"-1").replaceAll("[,.]",""));
+    return Integer.parseInt(TextUtils.getMatch(page,GCConstants.PATTERN_CACHES_FOUND,true,"-1").replaceAll("[,.]",StringUtils.EMPTY));
   }
  catch (  NumberFormatException e) {
     Log.e("parseFindCount",e);

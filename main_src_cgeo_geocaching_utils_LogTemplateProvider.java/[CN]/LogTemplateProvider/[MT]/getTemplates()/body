@@ -27,15 +27,19 @@
 );
   templates.add(new LogTemplate("NUMBER",R.string.init_signature_template_number){
     @Override public String getValue(    final LogContext context){
+      Geocache cache=context.getCache();
+      if (cache == null) {
+        return StringUtils.EMPTY;
+      }
       int current=Login.getActualCachesFound();
       if (current == 0) {
         if (context.isOffline()) {
-          return "";
+          return StringUtils.EMPTY;
         }
         final String page=Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/"));
         current=parseFindCount(page);
       }
-      String findCount="";
+      String findCount=StringUtils.EMPTY;
       if (current >= 0) {
         findCount=String.valueOf(current + 1);
       }
@@ -53,7 +57,7 @@
       if (cache != null) {
         return cache.getOwnerDisplayName();
       }
-      return "";
+      return StringUtils.EMPTY;
     }
   }
 );
