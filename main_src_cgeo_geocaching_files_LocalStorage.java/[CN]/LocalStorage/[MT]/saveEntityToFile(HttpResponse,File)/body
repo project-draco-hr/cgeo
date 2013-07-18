@@ -4,8 +4,8 @@
   }
   try {
     final boolean saved=saveToFile(response.getEntity().getContent(),targetFile);
-    saveHeader("etag",saved ? response : null,targetFile);
-    saveHeader("last-modified",saved ? response : null,targetFile);
+    saveHeader(HEADER_ETAG,saved ? response : null,targetFile);
+    saveHeader(HEADER_LAST_MODIFIED,saved ? response : null,targetFile);
     return saved;
   }
  catch (  IOException e) {
