@@ -1,0 +1,9 @@
+{
+  if (msg.what == -1) {
+    dismissProgress();
+    showToast(R.string.err_favorite_failed);
+  }
+ else {
+    notifyDatasetChanged(activityRef);
+  }
+}

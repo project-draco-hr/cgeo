@@ -81,7 +81,7 @@
     finish();
     return;
   }
-  final LoadCacheHandler loadCacheHandler=new LoadCacheHandler();
+  final LoadCacheHandler loadCacheHandler=new LoadCacheHandler(this,progress);
   try {
     String title=res.getString(R.string.cache);
     if (StringUtils.isNotBlank(name)) {

@@ -1,3 +1,7 @@
 {
-  progress.setMessage(res.getString(R.string.cache_dialog_loading_details) + "\n\n" + msg);
+  CacheDetailActivity activity=((CacheDetailActivity)activityRef.get());
+  if (activity == null) {
+    return;
+  }
+  setProgressMessage(activity.getResources().getString(R.string.cache_dialog_loading_details) + "\n\n" + msg);
 }
