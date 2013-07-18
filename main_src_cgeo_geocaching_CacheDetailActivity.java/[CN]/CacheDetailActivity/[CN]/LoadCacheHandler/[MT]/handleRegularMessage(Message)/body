@@ -3,19 +3,24 @@
     updateStatusMsg((String)msg.obj);
   }
  else {
+    CacheDetailActivity activity=((CacheDetailActivity)activityRef.get());
+    if (activity == null) {
+      return;
+    }
+    SearchResult search=activity.getSearch();
     if (search == null) {
-      showToast(res.getString(R.string.err_dwld_details_failed));
-      progress.dismiss();
-      finish();
+      showToast(R.string.err_dwld_details_failed);
+      dismissProgress();
+      finishActivity();
       return;
     }
     if (search.getError() != null) {
-      showToast(res.getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(res)+ ".");
-      progress.dismiss();
-      finish();
+      activity.showToast(activity.getResources().getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(activity.getResources())+ ".");
+      dismissProgress();
+      finishActivity();
       return;
     }
-    updateStatusMsg(res.getString(R.string.cache_dialog_loading_details_status_render));
-    notifyDataSetChanged();
+    updateStatusMsg(activity.getResources().getString(R.string.cache_dialog_loading_details_status_render));
+    activity.notifyDataSetChanged();
   }
 }
