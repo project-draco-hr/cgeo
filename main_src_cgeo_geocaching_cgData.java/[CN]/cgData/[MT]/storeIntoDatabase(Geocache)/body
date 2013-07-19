@@ -54,7 +54,6 @@
   values.put("logPasswordRequired",cache.isLogPasswordRequired() ? 1 : 0);
   init();
   database.beginTransaction();
-  boolean result=false;
   try {
     saveAttributesWithoutTransaction(cache);
     saveOriginalWaypointsWithoutTransaction(cache);
@@ -67,7 +66,7 @@
       database.insert(dbTableCaches,null,values);
     }
     database.setTransactionSuccessful();
-    result=true;
+    return true;
   }
  catch (  Exception e) {
     Log.e("SaveCache",e);
@@ -75,5 +74,5 @@
  finally {
     database.endTransaction();
   }
-  return result;
+  return false;
 }

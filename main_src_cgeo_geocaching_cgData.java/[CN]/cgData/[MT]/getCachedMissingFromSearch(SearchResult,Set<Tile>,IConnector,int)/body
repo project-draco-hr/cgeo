@@ -9,14 +9,14 @@
     if (connector.canHandle(geocode)) {
       Geocache geocache=cacheCache.getCacheFromCache(geocode);
       if (geocache.getZoomLevel() <= maxZoom) {
-        boolean bFound=false;
+        boolean found=false;
         for (        Tile tile : tiles) {
           if (tile.containsPoint(geocache)) {
-            bFound=true;
+            found=true;
             break;
           }
         }
-        if (bFound) {
+        if (found) {
           missingFromSearch.add(geocode);
         }
       }

@@ -4,11 +4,10 @@
   }
   init();
   database.beginTransaction();
-  boolean result=false;
   try {
     database.delete(dbTableSearchDestionationHistory,"_id = " + destination.getId(),null);
     database.setTransactionSuccessful();
-    result=true;
+    return true;
   }
  catch (  Exception e) {
     Log.e("Unable to remove searched destination",e);
@@ -16,5 +15,5 @@
  finally {
     database.endTransaction();
   }
-  return result;
+  return false;
 }
