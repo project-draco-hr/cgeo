@@ -21,6 +21,14 @@ case DIR_CHOOSER_MAPS_DIRECTORY_REQUEST:
   initMapSourcePreference();
 SettingsActivity.findPreference(this,getKey(R.string.pref_mapDirectory)).setSummary(Settings.getMapFileDirectory());
 break;
+case OAUTH_OCDE_REQUEST:
+setOCDEAuthTitle();
+redrawScreen(R.string.pref_fakekey_services_screen);
+break;
+case OAUTH_TWITTER_REQUEST:
+setTwitterAuthTitle();
+redrawScreen(R.string.pref_fakekey_services_screen);
+break;
 default :
 throw new IllegalArgumentException();
 }
