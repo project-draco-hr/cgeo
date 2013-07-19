@@ -11,7 +11,7 @@ isLiveEnabled=!isLiveEnabled;
 if (mapMode == MapMode.LIVE) {
 Settings.setLiveMap(isLiveEnabled);
 }
-liveChanged=true;
+markersInvalidated=true;
 lastSearchResult=null;
 searchIntent=null;
 ActivityMixin.invalidateOptionsMenu(activity);
@@ -50,6 +50,11 @@ return false;
 }
 overlayCaches.switchCircles();
 mapView.repaintRequired(overlayCaches);
+ActivityMixin.invalidateOptionsMenu(activity);
+return true;
+case R.id.menu_mycaches_mode:
+Settings.setExcludeMine(!Settings.isExcludeMyCaches());
+markersInvalidated=true;
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case R.id.menu_theme_mode:
