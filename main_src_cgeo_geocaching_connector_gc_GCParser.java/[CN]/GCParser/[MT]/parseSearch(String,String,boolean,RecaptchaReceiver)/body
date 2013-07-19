@@ -99,6 +99,18 @@
     }
     final String container=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_CONTAINER,false,1,null,false);
     cache.setSize(CacheSize.getById(container));
+    final String dateHidden=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_HIDDEN_DATE,false,1,null,false);
+    if (StringUtils.isNotBlank(dateHidden)) {
+      try {
+        Date date=Login.parseGcCustomDate(dateHidden);
+        if (date != null) {
+          cache.setHidden(date);
+        }
+      }
+ catch (      ParseException e) {
+        Log.e("Error parsing event date from search");
+      }
+    }
     final MatcherWrapper matcherTbs=new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES,row);
     String inventoryPre=null;
     while (matcherTbs.find()) {
