@@ -1,5 +1,5 @@
 {
-  ListPreference pref=(ListPreference)SettingsActivity.findPreference(this,getKey(R.string.pref_mapsource));
+  ListPreference pref=(ListPreference)getPreference(R.string.pref_mapsource);
   List<MapSource> mapSources=MapProviderFactory.getMapSources();
   CharSequence[] entries=new CharSequence[mapSources.size()];
   CharSequence[] values=new CharSequence[mapSources.size()];

@@ -1,7 +1,7 @@
 {
   final String directory=new File(data.getData().getPath()).getAbsolutePath();
   if (StringUtils.isNotBlank(directory)) {
-    Preference p=SettingsActivity.findPreference(this,getKey(dct.keyId));
+    Preference p=getPreference(dct.keyId);
     if (p == null) {
       return;
     }
