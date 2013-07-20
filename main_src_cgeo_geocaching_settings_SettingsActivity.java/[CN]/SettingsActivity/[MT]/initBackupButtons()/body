@@ -1,5 +1,5 @@
 {
-  Preference backup=SettingsActivity.findPreference(this,getKey(R.string.pref_fakekey_preference_backup));
+  Preference backup=getPreference(R.string.pref_fakekey_preference_backup);
   backup.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    final Preference preference){
       final Context context=preference.getContext();
@@ -15,7 +15,7 @@
             @Override public void run(){
               dialog.dismiss();
               ActivityMixin.helpDialog(SettingsActivity.this,context.getString(R.string.init_backup_backup),backupFileName != null ? context.getString(R.string.init_backup_success) + "\n" + backupFileName : context.getString(R.string.init_backup_failed));
-              VALUE_CHANGE_LISTENER.onPreferenceChange(SettingsActivity.findPreference(SettingsActivity.this,getKey(R.string.pref_fakekey_preference_backup_info)),"");
+              VALUE_CHANGE_LISTENER.onPreferenceChange(SettingsActivity.this.getPreference(R.string.pref_fakekey_preference_backup_info),"");
             }
           }
 );
@@ -26,7 +26,7 @@
     }
   }
 );
-  Preference restore=SettingsActivity.findPreference(this,getKey(R.string.pref_fakekey_preference_restore));
+  Preference restore=getPreference(R.string.pref_fakekey_preference_restore);
   restore.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    final Preference preference){
       ((cgeoapplication)SettingsActivity.this.getApplication()).restoreDatabase(SettingsActivity.this);
