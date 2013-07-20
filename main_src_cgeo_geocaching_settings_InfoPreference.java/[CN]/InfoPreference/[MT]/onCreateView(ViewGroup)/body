@@ -20,5 +20,10 @@
     }
   }
 );
-  return super.onCreateView(parent);
+  View v=super.onCreateView(parent);
+  ImageView i=(ImageView)inflater.inflate(R.layout.preference_info_icon,parent,false);
+  LinearLayout l=(LinearLayout)v.findViewById(android.R.id.widget_frame);
+  l.setVisibility(View.VISIBLE);
+  l.addView(i);
+  return v;
 }
