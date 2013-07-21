@@ -3,14 +3,14 @@
     return;
   }
   new AlertDialog.Builder(this).setTitle(res.getString(R.string.init_backup_restore)).setMessage(res.getString(R.string.init_restore_confirm)).setCancelable(false).setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int id){
+    @Override public void onClick(    final DialogInterface dialog,    final int id){
       dialog.dismiss();
       cgData.resetNewlyCreatedDatabase();
       app.restoreDatabase(MainActivity.this);
     }
   }
 ).setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int id){
+    @Override public void onClick(    final DialogInterface dialog,    final int id){
       dialog.cancel();
       cgData.resetNewlyCreatedDatabase();
     }

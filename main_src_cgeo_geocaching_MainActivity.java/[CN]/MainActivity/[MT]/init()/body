@@ -10,22 +10,22 @@
   }
   findOnMap.setClickable(true);
   findOnMap.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       cgeoFindOnMap(v);
     }
   }
 );
   findByOffline.setClickable(true);
   findByOffline.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       cgeoFindByOffline(v);
     }
   }
 );
   findByOffline.setOnLongClickListener(new View.OnLongClickListener(){
-    @Override public boolean onLongClick(    View v){
+    @Override public boolean onLongClick(    final View v){
       new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
-        @Override public void run(        Integer selectedListId){
+        @Override public void run(        final Integer selectedListId){
           Settings.saveLastList(selectedListId);
           cgeocaches.startActivityOffline(MainActivity.this);
         }
@@ -38,27 +38,27 @@
   findByOffline.setLongClickable(true);
   advanced.setClickable(true);
   advanced.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       cgeoSearch(v);
     }
   }
 );
   any.setClickable(true);
   any.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       cgeoPoint(v);
     }
   }
 );
   filter.setClickable(true);
   filter.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       selectGlobalTypeFilter();
     }
   }
 );
   filter.setOnLongClickListener(new View.OnLongClickListener(){
-    @Override public boolean onLongClick(    View v){
+    @Override public boolean onLongClick(    final View v){
       selectGlobalTypeFilter();
       return true;
     }
