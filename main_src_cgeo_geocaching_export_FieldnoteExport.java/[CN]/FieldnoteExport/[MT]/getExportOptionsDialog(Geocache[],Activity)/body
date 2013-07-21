@@ -4,12 +4,9 @@
   builder.setView(layout);
   final CheckBox uploadOption=(CheckBox)layout.findViewById(R.id.upload);
   final CheckBox onlyNewOption=(CheckBox)layout.findViewById(R.id.onlynew);
-  uploadOption.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      onlyNewOption.setEnabled(uploadOption.isChecked());
-    }
+  if (Settings.getFieldnoteExportDate() > 0) {
+    onlyNewOption.setText(getString(R.string.export_fieldnotes_onlynew) + "\n(" + Formatter.formatShortDateTime(activity,Settings.getFieldnoteExportDate())+ ')');
   }
-);
   builder.setPositiveButton(R.string.export,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       dialog.dismiss();

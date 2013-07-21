@@ -4,7 +4,10 @@
     int i=0;
     for (    final Geocache cache : caches) {
       if (cache.isLogOffline()) {
-        appendFieldNote(fieldNoteBuffer,cache,cgData.loadLogOffline(cache.getGeocode()));
+        final LogEntry log=cgData.loadLogOffline(cache.getGeocode());
+        if (!onlyNew || onlyNew && log.date > Settings.getFieldnoteExportDate()) {
+          appendFieldNote(fieldNoteBuffer,cache,log);
+        }
         publishProgress(++i);
       }
     }
@@ -52,9 +55,6 @@
     }
     final String[] viewstates=Login.getViewstates(page);
     final Parameters uploadParams=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$btnUpload","Upload Field Note");
-    if (onlyNew) {
-      uploadParams.put("ctl00$ContentBody$chkSuppressDate","on");
-    }
     Login.putViewstates(uploadParams,viewstates);
     Network.getResponseData(Network.postRequest(uri,uploadParams,"ctl00$ContentBody$FieldNoteLoader","text/plain",exportFile));
     if (StringUtils.isBlank(page)) {
