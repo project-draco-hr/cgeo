@@ -9,7 +9,7 @@
   filters.add(new StateStoredFilter());
   filters.add(new StateNotStoredFilter());
   Collections.sort(filters,new Comparator<StateFilter>(){
-    @Override public int compare(    StateFilter filter1,    StateFilter filter2){
+    @Override public int compare(    final StateFilter filter1,    final StateFilter filter2){
       return filter1.getName().compareToIgnoreCase(filter2.getName());
     }
   }

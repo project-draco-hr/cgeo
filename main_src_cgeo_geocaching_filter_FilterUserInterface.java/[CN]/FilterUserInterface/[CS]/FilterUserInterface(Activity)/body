@@ -14,7 +14,7 @@
   register(R.string.caches_filter_modified,ModifiedFilter.class);
   register(R.string.caches_filter_origin,OriginFilter.Factory.class);
   Collections.sort(registry,new Comparator<FactoryEntry>(){
-    @Override public int compare(    FactoryEntry lhs,    FactoryEntry rhs){
+    @Override public int compare(    final FactoryEntry lhs,    final FactoryEntry rhs){
       return lhs.name.compareToIgnoreCase(rhs.name);
     }
   }
