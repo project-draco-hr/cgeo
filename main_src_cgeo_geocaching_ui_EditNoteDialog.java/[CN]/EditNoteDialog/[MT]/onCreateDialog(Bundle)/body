@@ -12,8 +12,7 @@
   builder.setView(view);
   builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int whichButton){
-      final EditNoteDialogListener activity=(EditNoteDialogListener)getActivity();
-      activity.onFinishEditNoteDialog(mEditText.getText().toString());
+      listener.onFinishEditNoteDialog(mEditText.getText().toString());
       dialog.dismiss();
     }
   }
