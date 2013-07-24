@@ -1,0 +1,15 @@
+{
+  if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+    updateStatusMsg(R.string.cache_dialog_offline_save_message,(String)msg.obj);
+  }
+ else {
+    Progress progress=progressDialogRef.get();
+    if (progress != null) {
+      progress.dismiss();
+    }
+    CacheDetailActivity activity=(CacheDetailActivity)activityRef.get();
+    if (activity != null) {
+      editPersonalNote(activity.getCache(),activity);
+    }
+  }
+}
