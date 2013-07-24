@@ -1,4 +1,14 @@
 {
   watchlistThread=null;
-  handler.sendEmptyMessage(GCConnector.addToFavorites(cache) ? 1 : -1);
+  Message msg;
+  if (GCConnector.addToFavorites(cache)) {
+    msg=Message.obtain(handler,MESSAGE_SUCCEEDED);
+  }
+ else {
+    msg=Message.obtain(handler,MESSAGE_FAILED);
+    Bundle bundle=new Bundle();
+    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,res.getString(R.string.err_favorite_failed));
+    msg.setData(bundle);
+  }
+  handler.sendMessage(msg);
 }
