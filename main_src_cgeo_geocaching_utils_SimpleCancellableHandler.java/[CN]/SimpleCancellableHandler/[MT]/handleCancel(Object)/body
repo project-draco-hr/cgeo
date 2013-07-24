@@ -3,8 +3,5 @@
   if (activity != null) {
     activity.showToast((String)extra);
   }
-  Progress progressDialog=progressDialogRef.get();
-  if (progressDialog != null) {
-    progressDialog.dismiss();
-  }
+  dismissProgress();
 }

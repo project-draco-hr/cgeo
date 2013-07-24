@@ -3,10 +3,7 @@
     updateStatusMsg(R.string.cache_dialog_offline_save_message,(String)msg.obj);
   }
  else {
-    Progress progress=progressDialogRef.get();
-    if (progress != null) {
-      progress.dismiss();
-    }
+    dismissProgress();
     CacheDetailActivity activity=(CacheDetailActivity)activityRef.get();
     if (activity != null) {
       editPersonalNote(activity.getCache(),activity);
