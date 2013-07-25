@@ -8,18 +8,13 @@
   final SearchResult searchResult=new SearchResult();
   searchResult.setUrl(url);
   searchResult.viewstates=Login.getViewstates(page);
-  String recaptchaChallenge=null;
   if (showCaptcha) {
     final String recaptchaJsParam=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
     if (recaptchaJsParam != null) {
-      final Parameters params=new Parameters("k",recaptchaJsParam.trim());
-      final String recaptchaJs=Network.getResponseData(Network.getRequest("http://www.google.com/recaptcha/api/challenge",params));
-      if (StringUtils.isNotBlank(recaptchaJs)) {
-        recaptchaChallenge=TextUtils.getMatch(recaptchaJs,GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE,true,1,null,true);
-      }
+      thread.setKey(recaptchaJsParam.trim());
+      thread.fetchChallenge();
     }
-    if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
-      thread.setChallenge(recaptchaChallenge);
+    if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
       thread.notifyNeed();
     }
   }
@@ -160,13 +155,13 @@
     Log.w("GCParser.parseSearch: Failed to parse cache count");
   }
   String recaptchaText=null;
-  if (thread != null && recaptchaChallenge != null) {
+  if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
     if (thread.getText() == null) {
       thread.waitForUser();
     }
     recaptchaText=thread.getText();
   }
-  if (!cids.isEmpty() && (Settings.isPremiumMember() || showCaptcha) && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
+  if (!cids.isEmpty() && (Settings.isPremiumMember() || showCaptcha) && ((thread == null || StringUtils.isBlank(thread.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
     Log.i("Trying to get .loc for " + cids.size() + " caches");
     try {
       final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","");
@@ -182,8 +177,8 @@
       for (      final String cid : cids) {
         params.put("CID",cid);
       }
-      if (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)) {
-        params.put("recaptcha_challenge_field",recaptchaChallenge);
+      if (thread != null && StringUtils.isNotBlank(thread.getChallenge()) && StringUtils.isNotBlank(recaptchaText)) {
+        params.put("recaptcha_challenge_field",thread.getChallenge());
         params.put("recaptcha_response_field",recaptchaText);
       }
       params.put("ctl00$ContentBody$uxDownloadLoc","Download Waypoints");
