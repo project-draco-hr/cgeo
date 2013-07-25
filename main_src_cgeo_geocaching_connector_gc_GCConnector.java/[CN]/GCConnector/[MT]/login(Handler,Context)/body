@@ -1,7 +1,7 @@
 {
   final StatusCode status=Login.login();
   if (status == StatusCode.NO_ERROR) {
-    cgeoapplication.getInstance().firstRun=false;
+    cgeoapplication.getInstance().checkLogin=false;
     Login.detectGcCustomDate();
   }
   if (cgeoapplication.getInstance().showLoginToast && handler != null) {

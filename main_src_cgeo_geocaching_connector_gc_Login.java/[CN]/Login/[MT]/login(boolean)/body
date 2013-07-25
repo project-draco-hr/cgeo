@@ -1,7 +1,7 @@
 {
   final ImmutablePair<String,String> login=Settings.getGcLogin();
   if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
-    Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
+    clearLoginInfo();
     Log.e("Login.login: No login information stored");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }

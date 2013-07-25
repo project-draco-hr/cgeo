@@ -4,7 +4,6 @@
   if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(logoutData,GCConstants.PATTERN_MAINTENANCE)) {
     return StatusCode.MAINTENANCE;
   }
-  Cookies.clearCookies();
-  Settings.setCookieStore(null);
+  resetLoginStatus();
   return StatusCode.NO_ERROR;
 }
