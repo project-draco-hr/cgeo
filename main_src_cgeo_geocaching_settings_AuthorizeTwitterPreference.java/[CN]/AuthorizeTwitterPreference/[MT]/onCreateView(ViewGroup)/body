@@ -3,7 +3,7 @@
   setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    Preference preference){
       Intent authIntent=new Intent(preference.getContext(),TwitterAuthorizationActivity.class);
-      activity.startActivityForResult(authIntent,SettingsActivity.OAUTH_TWITTER_REQUEST);
+      activity.startActivityForResult(authIntent,R.string.pref_fakekey_twitter_authorization);
       return false;
     }
   }

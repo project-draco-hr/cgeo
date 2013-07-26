@@ -1,3 +1,6 @@
 {
-  Settings.setOCDETokens(tokenPublic,tokenSecret,enable);
+  Settings.setTokens(authParams.getTokenPublicPrefKey(),tokenPublic,authParams.getTokenSecretPrefKey(),tokenSecret);
+  if (tokenPublic != null) {
+    Settings.setTokens(authParams.getTempTokenPublicPrefKey(),null,authParams.getTempTokenSecretPrefKey(),null);
+  }
 }

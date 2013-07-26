@@ -10,7 +10,7 @@
     }
   }
 switch (requestCode) {
-case DIR_CHOOSER_MAPS_DIRECTORY_REQUEST:
+case R.string.pref_mapDirectory:
     if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
       final String mapFile=data.getStringExtra(Intents.EXTRA_MAP_FILE);
       Settings.setMapFile(mapFile);
@@ -21,11 +21,15 @@ case DIR_CHOOSER_MAPS_DIRECTORY_REQUEST:
   initMapSourcePreference();
 getPreference(R.string.pref_mapDirectory).setSummary(Settings.getMapFileDirectory());
 break;
-case OAUTH_OCDE_REQUEST:
+case R.string.pref_fakekey_ocde_authorization:
 setOCDEAuthTitle();
 redrawScreen(R.string.pref_fakekey_services_screen);
 break;
-case OAUTH_TWITTER_REQUEST:
+case R.string.pref_fakekey_ocpl_authorization:
+setOCPLAuthTitle();
+redrawScreen(R.string.pref_fakekey_services_screen);
+break;
+case R.string.pref_fakekey_twitter_authorization:
 setTwitterAuthTitle();
 redrawScreen(R.string.pref_fakekey_services_screen);
 break;
