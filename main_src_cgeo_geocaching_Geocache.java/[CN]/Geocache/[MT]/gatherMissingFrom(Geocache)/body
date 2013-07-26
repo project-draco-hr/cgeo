@@ -9,15 +9,27 @@
     coords=other.coords;
     cacheType=other.cacheType;
     zoomlevel=other.zoomlevel;
-    premiumMembersOnly=other.premiumMembersOnly;
+    if (other.premiumMembersOnly != null) {
+      premiumMembersOnly=other.premiumMembersOnly;
+    }
     reliableLatLon=other.reliableLatLon;
-    found=other.found;
-    disabled=other.disabled;
-    favorite=other.favorite;
-    onWatchlist=other.onWatchlist;
+    if (other.found != null) {
+      found=other.found;
+    }
+    if (other.disabled != null) {
+      disabled=other.disabled;
+    }
+    if (other.favorite != null) {
+      favorite=other.favorite;
+    }
+    if (other.archived != null) {
+      archived=other.archived;
+    }
+    if (other.onWatchlist != null) {
+      onWatchlist=other.onWatchlist;
+    }
     logOffline=other.logOffline;
     finalDefined=other.finalDefined;
-    archived=other.archived;
   }
   if (visitedDate == 0) {
     visitedDate=other.visitedDate;
