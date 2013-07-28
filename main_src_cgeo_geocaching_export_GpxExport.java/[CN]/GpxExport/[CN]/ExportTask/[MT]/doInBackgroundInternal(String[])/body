@@ -4,8 +4,7 @@
   }
   final List<String> allGeocodes=new ArrayList<String>(Arrays.asList(geocodes));
   setMessage(cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,allGeocodes.size(),allGeocodes.size()));
-  final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
-  final File exportFile=new File(Settings.getGpxExportDir() + File.separatorChar + "export_"+ fileNameDateFormat.format(new Date())+ ".gpx");
+  final File exportFile=getExportFile();
   BufferedWriter writer=null;
   try {
     final File exportLocation=new File(Settings.getGpxExportDir());
