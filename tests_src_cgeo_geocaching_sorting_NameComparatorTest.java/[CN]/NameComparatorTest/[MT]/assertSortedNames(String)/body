@@ -1,0 +1,10 @@
+{
+  ArrayList<Geocache> caches=new ArrayList<Geocache>(names.length);
+  for (  String name : names) {
+    caches.add(new NamedCache(name));
+  }
+  Collections.sort(caches,comp);
+  for (int i=0; i < caches.size(); i++) {
+    assertEquals(names[i],caches.get(i).getName());
+  }
+}
