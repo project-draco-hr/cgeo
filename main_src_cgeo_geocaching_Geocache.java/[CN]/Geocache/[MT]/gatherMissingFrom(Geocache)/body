@@ -7,29 +7,33 @@
     detailed=other.detailed;
     detailedUpdate=other.detailedUpdate;
     coords=other.coords;
-    cacheType=other.cacheType;
+    if (null != other.cacheType && CacheType.UNKNOWN != other.cacheType) {
+      cacheType=other.cacheType;
+    }
     zoomlevel=other.zoomlevel;
-    if (other.premiumMembersOnly != null) {
-      premiumMembersOnly=other.premiumMembersOnly;
-    }
     reliableLatLon=other.reliableLatLon;
-    if (other.found != null) {
-      found=other.found;
-    }
-    if (other.disabled != null) {
-      disabled=other.disabled;
-    }
-    if (other.favorite != null) {
-      favorite=other.favorite;
-    }
-    if (other.archived != null) {
-      archived=other.archived;
-    }
-    if (other.onWatchlist != null) {
-      onWatchlist=other.onWatchlist;
-    }
-    logOffline=other.logOffline;
     finalDefined=other.finalDefined;
+  }
+  if (premiumMembersOnly == null) {
+    premiumMembersOnly=other.premiumMembersOnly;
+  }
+  if (found == null) {
+    found=other.found;
+  }
+  if (disabled == null) {
+    disabled=other.disabled;
+  }
+  if (favorite == null) {
+    favorite=other.favorite;
+  }
+  if (archived == null) {
+    archived=other.archived;
+  }
+  if (onWatchlist == null) {
+    onWatchlist=other.onWatchlist;
+  }
+  if (logOffline == null) {
+    logOffline=other.logOffline;
   }
   if (visitedDate == 0) {
     visitedDate=other.visitedDate;

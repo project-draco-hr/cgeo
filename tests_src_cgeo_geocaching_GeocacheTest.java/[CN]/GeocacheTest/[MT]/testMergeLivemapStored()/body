@@ -8,8 +8,7 @@
   Geocache livemap=new Geocache();
   livemap.setGeocode("GC12345");
   livemap.setType(CacheType.MULTI);
-  livemap.setCoords(new Geopoint(41.0,9.0));
-  livemap.setZoomlevel(12);
+  livemap.setCoords(new Geopoint(41.0,9.0),12);
   livemap.gatherMissingFrom(stored);
   assertTrue("Detailed not merged correctly",livemap.isDetailed());
   assertTrue("Disabled not merged correctly",livemap.isDisabled());

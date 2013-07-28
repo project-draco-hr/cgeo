@@ -2,13 +2,11 @@
   Geocache livemapFirst=new Geocache();
   livemapFirst.setGeocode("GC12345");
   livemapFirst.setType(CacheType.TRADITIONAL);
-  livemapFirst.setCoords(new Geopoint(40.0,8.0));
-  livemapFirst.setZoomlevel(12);
+  livemapFirst.setCoords(new Geopoint(40.0,8.0),12);
   Geocache livemapSecond=new Geocache();
   livemapSecond.setGeocode("GC12345");
   livemapSecond.setType(CacheType.MULTI);
-  livemapSecond.setCoords(new Geopoint(41.0,9.0));
-  livemapSecond.setZoomlevel(11);
+  livemapSecond.setCoords(new Geopoint(41.0,9.0),11);
   livemapSecond.gatherMissingFrom(livemapFirst);
   assertEquals("Type not merged correctly",CacheType.TRADITIONAL,livemapSecond.getType());
   assertEquals("Longitude not merged correctly",8.0,livemapSecond.getCoords().getLongitude(),0.1);

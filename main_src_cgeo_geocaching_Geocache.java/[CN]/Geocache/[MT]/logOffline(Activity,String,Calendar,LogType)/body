@@ -7,7 +7,7 @@
   if (status) {
     ActivityMixin.showToast(fromActivity,res.getString(R.string.info_log_saved));
     cgData.saveVisitDate(geocode);
-    logOffline=true;
+    logOffline=Boolean.TRUE;
     notifyChange();
   }
  else {
