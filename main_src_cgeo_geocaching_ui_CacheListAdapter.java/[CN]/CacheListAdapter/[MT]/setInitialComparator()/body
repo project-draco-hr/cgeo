@@ -1,4 +1,7 @@
 {
+  if (cacheComparator != null) {
+    return;
+  }
   CacheComparator comparator=null;
   if (cacheListType == CacheListType.HISTORY) {
     comparator=new VisitComparator();

@@ -16,6 +16,7 @@
   currentLoader.reset();
   ((OfflineGeocacheListLoader)currentLoader).setListId(listId);
   ((OfflineGeocacheListLoader)currentLoader).setSearchCenter(coords);
+  adapter.setComparator(null);
   currentLoader.startLoading();
   invalidateOptionsMenuCompatible();
 }
