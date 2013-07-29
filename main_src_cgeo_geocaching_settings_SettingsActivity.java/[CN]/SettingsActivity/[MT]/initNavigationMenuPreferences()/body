@@ -1,0 +1,9 @@
+{
+  for (  NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
+    if (appEnum.app.isInstalled()) {
+      getPreference(appEnum.preferenceKey).setEnabled(true);
+    }
+  }
+  getPreference(R.string.pref_fakekey_basicmembers_screen).setEnabled(!Settings.isPremiumMember());
+  redrawScreen(R.string.pref_fakekey_navigation_menu_screen);
+}
