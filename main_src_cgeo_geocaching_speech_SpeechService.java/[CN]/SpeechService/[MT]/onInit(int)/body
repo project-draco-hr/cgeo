@@ -9,5 +9,10 @@
     return;
   }
   initialized=true;
-  geoHandler.startGeoAndDir();
+  if (Settings.isUseCompass()) {
+    geoHandler.startGeoAndDir();
+  }
+ else {
+    geoHandler.startGeo();
+  }
 }
