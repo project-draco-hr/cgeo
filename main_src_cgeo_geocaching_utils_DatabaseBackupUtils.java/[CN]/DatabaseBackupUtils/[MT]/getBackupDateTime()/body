@@ -1,0 +1,7 @@
+{
+  final File restoreFile=getRestoreFile();
+  if (restoreFile == null) {
+    return StringUtils.EMPTY;
+  }
+  return Formatter.formatShortDateTime(restoreFile.lastModified());
+}

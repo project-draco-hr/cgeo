@@ -3,7 +3,7 @@
     Log.w("Database wasn't backed up: no external memory");
     return null;
   }
-  final File target=getBackupFile();
+  final File target=getBackupFileInternal();
   closeDb();
   final boolean backupDone=LocalStorage.copy(databasePath(),target);
   init();
