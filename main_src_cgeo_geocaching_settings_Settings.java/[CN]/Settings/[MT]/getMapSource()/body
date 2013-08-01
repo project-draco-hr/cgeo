@@ -1,9 +1,12 @@
 {
+  if (mapSource != null) {
+    return mapSource;
+  }
   final int id=getConvertedMapId();
-  final MapSource map=MapProviderFactory.getMapSource(id);
-  if (map != null) {
-    if ((!(map instanceof OfflineMapSource)) || (isValidMapFile())) {
-      return map;
+  mapSource=MapProviderFactory.getMapSource(id);
+  if (mapSource != null) {
+    if ((!(mapSource instanceof OfflineMapSource)) || (isValidMapFile())) {
+      return mapSource;
     }
   }
   return MapProviderFactory.getDefaultSource();
