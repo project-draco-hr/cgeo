@@ -1,5 +1,5 @@
 {
-  handleListNameInput("",R.string.list_dialog_create_title,R.string.list_dialog_create,new RunnableWithArgument<String>(){
+  handleListNameInput(newListName,R.string.list_dialog_create_title,R.string.list_dialog_create,new RunnableWithArgument<String>(){
     @Override public void run(    final String listName){
       final int newId=cgData.createList(listName);
       if (newId >= cgData.customListIdOffset) {
