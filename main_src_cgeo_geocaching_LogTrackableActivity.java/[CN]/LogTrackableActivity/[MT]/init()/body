@@ -1,15 +1,15 @@
 {
   registerForContextMenu(typeButton);
-  typeButton.setText(typeSelected.getL10n());
   typeButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
       openContextMenu(view);
     }
   }
 );
+  setType(typeSelected);
   dateButton.setOnClickListener(new DateListener());
   setDate(date);
-  tweetCheck.setChecked(true);
+  initTwitter();
   if (CollectionUtils.isEmpty(possibleLogTypes)) {
     possibleLogTypes=Trackable.getPossibleLogTypes();
   }
