@@ -14,7 +14,7 @@
       }
       if (!loaded) {
         changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler,MSG_SEARCH_WHOLE_SD_CARD,Environment.getExternalStorageDirectory().getName()));
-        listDirs(list,getStorages(),selector,changeWaitDialogHandler);
+        listDirs(list,LocalStorage.getStorages(),selector,changeWaitDialogHandler);
       }
     }
  else {
