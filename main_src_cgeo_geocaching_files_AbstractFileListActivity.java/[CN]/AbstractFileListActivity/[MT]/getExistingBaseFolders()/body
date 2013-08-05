@@ -1,0 +1,9 @@
+{
+  ArrayList<File> result=new ArrayList<File>();
+  for (  final File dir : getBaseFolders()) {
+    if (dir.exists() && dir.isDirectory()) {
+      result.add(dir);
+    }
+  }
+  return result;
+}
