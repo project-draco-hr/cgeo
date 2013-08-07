@@ -53,10 +53,10 @@
       cache.setReliableLatLon(false);
       cache.setGeocode(id);
       cache.setName(nameCache.get(id));
-      cache.setCoords(tile.getCoord(xy),tile.getZoomlevel());
+      cache.setCoords(tile.getCoord(xy),tile.getZoomLevel());
       if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
         for (        UTFGridPosition singlePos : singlePositions.get(id)) {
-          if (IconDecoder.parseMapPNG(cache,bitmap,singlePos,tile.getZoomlevel())) {
+          if (IconDecoder.parseMapPNG(cache,bitmap,singlePos,tile.getZoomLevel())) {
             break;
           }
         }
