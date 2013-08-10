@@ -3,14 +3,9 @@
     return false;
   }
   updated=System.currentTimeMillis();
-  if (!detailed && (other.detailed || zoomlevel < other.zoomlevel)) {
+  if (!detailed && other.detailed) {
     detailed=other.detailed;
     detailedUpdate=other.detailedUpdate;
-    coords=other.coords;
-    if (null != other.cacheType && CacheType.UNKNOWN != other.cacheType) {
-      cacheType=other.cacheType;
-    }
-    zoomlevel=other.zoomlevel;
     reliableLatLon=other.reliableLatLon;
     finalDefined=other.finalDefined;
   }
@@ -50,8 +45,11 @@
   if (StringUtils.isBlank(guid)) {
     guid=other.guid;
   }
-  if (null == cacheType || CacheType.UNKNOWN == cacheType) {
+  if (null == cacheType) {
     cacheType=other.cacheType;
+  }
+ else {
+    cacheType=cacheType.getMergedProperty(other.cacheType);
   }
   if (StringUtils.isBlank(name)) {
     name=other.name;
@@ -88,6 +86,9 @@
   }
   if (coords == null) {
     coords=other.coords;
+  }
+ else {
+    coords=coords.getMergedProperty(other.coords);
   }
   if (personalNote == null) {
     personalNote=other.personalNote;
@@ -155,9 +156,6 @@
   }
   if (!reliableLatLon) {
     reliableLatLon=other.reliableLatLon;
-  }
-  if (zoomlevel == -1) {
-    zoomlevel=other.zoomlevel;
   }
   return isEqualTo(other);
 }
