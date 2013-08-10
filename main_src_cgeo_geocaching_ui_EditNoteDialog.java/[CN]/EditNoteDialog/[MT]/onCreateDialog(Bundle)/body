@@ -1,6 +1,5 @@
 {
-  LayoutInflater inflater=getActivity().getLayoutInflater();
-  View view=inflater.inflate(R.layout.fragment_edit_note,null);
+  View view=View.inflate(new ContextThemeWrapper(getActivity(),R.style.dark),R.layout.fragment_edit_note,null);
   mEditText=(EditText)view.findViewById(R.id.note);
   String initialNote=getArguments().getString(ARGUMENT_INITIAL_NOTE);
   if (initialNote != null) {
