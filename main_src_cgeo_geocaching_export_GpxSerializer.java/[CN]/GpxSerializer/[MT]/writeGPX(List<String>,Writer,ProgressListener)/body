@@ -2,7 +2,7 @@
   final ArrayList<String> allGeocodes=new ArrayList<String>(allGeocodesIn);
   this.progressListener=progressListener;
   gpx.setOutput(writer);
-  gpx.startDocument("UTF-8",true);
+  gpx.startDocument(CharEncoding.UTF_8,true);
   gpx.setPrefix("",PREFIX_GPX);
   gpx.setPrefix("xsi",PREFIX_XSI);
   gpx.setPrefix("groundspeak",PREFIX_GROUNDSPEAK);
