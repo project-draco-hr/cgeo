@@ -1,6 +1,6 @@
 {
-  final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").build().toString();
-  final String page=Login.getRequestLogged(uri,new Parameters("LID=",logId));
+  final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
+  final String page=Login.getRequestLogged(uri,null);
   if (StringUtils.isBlank(page)) {
     Log.e("GCParser.uploadLogImage: No data from server");
     return new ImmutablePair<StatusCode,String>(StatusCode.UNKNOWN_ERROR,null);
