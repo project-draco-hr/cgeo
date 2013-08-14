@@ -62,7 +62,7 @@
         }
       }
  else {
-        cache.setType(CacheType.UNKNOWN);
+        cache.setType(CacheType.UNKNOWN,tile.getZoomLevel());
       }
       boolean exclude=false;
       if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwner())) {
