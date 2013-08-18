@@ -1,0 +1,9 @@
+{
+  final String prefKey=getKey();
+  for (  OCAuthorizations auth : OCAuthorizations.values()) {
+    if (auth.prefKeyId != NO_KEY && prefKey.equals(cgeoapplication.getInstance().getString(auth.prefKeyId))) {
+      return auth;
+    }
+  }
+  return OCAuthorizations.NONE;
+}

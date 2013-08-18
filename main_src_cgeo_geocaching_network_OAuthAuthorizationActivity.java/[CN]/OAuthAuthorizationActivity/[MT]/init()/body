@@ -6,7 +6,7 @@
   auth.setText(getAboutAuth1());
   auth=(TextView)findViewById(R.id.auth_2);
   auth.setText(getAboutAuth2());
-  ImmutablePair<String,String> tempToken=getTempToken();
+  ImmutablePair<String,String> tempToken=getTempTokens();
   OAtoken=tempToken.left;
   OAtokenSecret=tempToken.right;
   startButton.setText(getAuthAuthorize());
