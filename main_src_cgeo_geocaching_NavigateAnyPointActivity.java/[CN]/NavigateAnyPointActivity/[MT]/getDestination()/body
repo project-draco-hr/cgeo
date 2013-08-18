@@ -24,8 +24,7 @@
     }
     coords=app.currentGeo().getCoords();
   }
-  Geopoint result;
-  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+  if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     double bearing;
     try {
       bearing=Double.parseDouble(bearingText);
@@ -42,19 +41,10 @@
       showToast(res.getString(R.string.err_parse_dist));
       return null;
     }
-    final Geopoint coordsDst=coords.project(bearing,distance);
-    if (coordsDst == null) {
-      showToast(res.getString(R.string.err_point_location_error));
-      return null;
-    }
-    result=coordsDst;
+    coords=coords.project(bearing,distance);
   }
- else   if (coords != null) {
-    result=coords;
+  if (coords != null) {
+    saveCoords(coords);
   }
- else {
-    return null;
-  }
-  saveCoords(result);
-  return result;
+  return coords;
 }

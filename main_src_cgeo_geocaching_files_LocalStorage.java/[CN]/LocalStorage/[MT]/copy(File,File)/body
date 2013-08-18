@@ -1,5 +1,5 @@
 {
-  destination.getParentFile().mkdirs();
+  FileUtils.mkdirs(destination.getParentFile());
   InputStream input=null;
   OutputStream output=null;
   try {
@@ -8,9 +8,11 @@
   }
  catch (  FileNotFoundException e) {
     Log.e("LocalStorage.copy: could not open file",e);
+    return false;
+  }
+ finally {
     IOUtils.closeQuietly(input);
     IOUtils.closeQuietly(output);
-    return false;
   }
   boolean copyDone=copy(input,output);
   try {

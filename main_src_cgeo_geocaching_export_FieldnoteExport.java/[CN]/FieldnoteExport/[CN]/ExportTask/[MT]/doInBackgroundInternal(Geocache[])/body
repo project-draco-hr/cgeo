@@ -20,7 +20,7 @@
   if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
     return false;
   }
-  exportLocation.mkdirs();
+  FileUtils.mkdirs(exportLocation);
   final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
   exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".txt");
   Writer fileWriter=null;
