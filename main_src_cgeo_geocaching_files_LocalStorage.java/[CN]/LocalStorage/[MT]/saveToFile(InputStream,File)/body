@@ -8,17 +8,17 @@
       final boolean written=copy(inputStream,fos);
       fos.close();
       if (!written) {
-        targetFile.delete();
+        FileUtils.deleteIgnoringFailure(targetFile);
       }
       return written;
     }
   finally {
-      inputStream.close();
+      IOUtils.closeQuietly(inputStream);
     }
   }
  catch (  IOException e) {
     Log.e("LocalStorage.saveToFile",e);
-    targetFile.delete();
+    FileUtils.deleteIgnoringFailure(targetFile);
   }
   return false;
 }

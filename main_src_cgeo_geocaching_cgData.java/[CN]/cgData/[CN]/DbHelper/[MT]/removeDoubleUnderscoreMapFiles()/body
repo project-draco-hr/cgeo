@@ -10,7 +10,7 @@
     final File[] wrongFiles=dir.listFiles(filter);
     if (wrongFiles != null) {
       for (      final File wrongFile : wrongFiles) {
-        wrongFile.delete();
+        FileUtils.deleteIgnoringFailure(wrongFile);
       }
     }
   }

@@ -1,7 +1,7 @@
 {
   for (  final File file : LocalStorage.getStorageSec().listFiles()) {
     if (file.isDirectory()) {
-      file.delete();
+      FileUtils.deleteIgnoringFailure(file);
     }
   }
 }

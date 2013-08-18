@@ -2,7 +2,7 @@
   final File file=new File(Environment.getExternalStorageDirectory(),"cgeo-debug.log");
   if (first) {
     first=false;
-    file.delete();
+    FileUtils.delete(file);
   }
   Writer writer=null;
   try {

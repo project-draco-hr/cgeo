@@ -27,7 +27,7 @@
       }
     }
     if (exportFile.exists()) {
-      exportFile.delete();
+      FileUtils.deleteIgnoringFailure(exportFile);
     }
     return null;
   }

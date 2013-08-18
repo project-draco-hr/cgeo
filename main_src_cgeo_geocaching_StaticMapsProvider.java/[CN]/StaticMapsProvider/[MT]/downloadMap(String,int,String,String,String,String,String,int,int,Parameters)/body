@@ -16,7 +16,7 @@
   if (LocalStorage.saveEntityToFile(httpResponse,file)) {
     final long fileSize=file.length();
     if (fileSize < MIN_MAP_IMAGE_BYTES) {
-      file.delete();
+      FileUtils.deleteIgnoringFailure(file);
     }
   }
 }
