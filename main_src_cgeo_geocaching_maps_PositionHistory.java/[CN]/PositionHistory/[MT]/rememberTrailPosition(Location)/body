@@ -1,0 +1,23 @@
+{
+  if (coordinates.getAccuracy() >= 50f) {
+    return;
+  }
+  if (coordinates.getLatitude() == 0.0 && coordinates.getLatitude() == 0.0) {
+    return;
+  }
+  if (history.isEmpty()) {
+    history.add(coordinates);
+    return;
+  }
+  Location historyRecent=history.get(history.size() - 1);
+  if (historyRecent.distanceTo(coordinates) <= MINIMUM_DISTANCE_METERS) {
+    return;
+  }
+  history.add(coordinates);
+  final int itemsToRemove=getHistory().size() - MAX_POSITIONS;
+  if (itemsToRemove > 0) {
+    for (int i=0; i < itemsToRemove; i++) {
+      getHistory().remove(0);
+    }
+  }
+}
