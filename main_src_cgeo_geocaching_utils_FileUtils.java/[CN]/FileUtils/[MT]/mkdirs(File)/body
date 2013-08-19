@@ -1,5 +1,5 @@
 {
-  final boolean success=file.mkdirs();
+  final boolean success=file.mkdirs() || file.isDirectory();
   if (!success) {
     Log.e("Could not make directories " + file.getAbsolutePath());
   }
