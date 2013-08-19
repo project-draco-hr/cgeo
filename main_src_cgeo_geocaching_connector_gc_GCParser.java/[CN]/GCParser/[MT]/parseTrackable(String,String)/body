@@ -48,17 +48,21 @@
  catch (  final Exception e) {
     Log.w("GCParser.parseTrackable: Failed to parse trackable last known place");
   }
-  try {
-    final String releaseString=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null);
-    if (releaseString != null) {
+  final String releaseString=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null);
+  if (releaseString != null) {
+    try {
       trackable.setReleased(dateTbIn1.parse(releaseString));
+    }
+ catch (    ParseException e) {
       if (trackable.getReleased() == null) {
-        trackable.setReleased(dateTbIn2.parse(releaseString));
+        try {
+          trackable.setReleased(dateTbIn2.parse(releaseString));
+        }
+ catch (        ParseException e1) {
+          Log.e("Could not parse trackable release " + releaseString);
+        }
       }
     }
-  }
- catch (  final ParseException e1) {
-    trackable.setReleased(null);
   }
   final String distance=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_DISTANCE,false,null);
   if (null != distance) {
