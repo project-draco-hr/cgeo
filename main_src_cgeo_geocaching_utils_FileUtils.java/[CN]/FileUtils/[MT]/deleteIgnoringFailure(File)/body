@@ -1,5 +1,6 @@
 {
-  if (!file.delete()) {
+  final boolean success=file.delete() || !file.exists();
+  if (!success) {
     Log.i("Could not delete " + file.getAbsolutePath());
   }
 }
