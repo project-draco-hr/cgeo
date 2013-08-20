@@ -1,3 +1,7 @@
 {
-  return pathTo(point.getCoords())[0] / 1000;
+  final Geopoint otherCoords=point.getCoords();
+  if (DISTANCE_BROKEN) {
+    return (float)(getDistance(latitude,longitude,otherCoords.latitude,otherCoords.longitude) / 1000);
+  }
+  return pathTo(otherCoords)[0] / 1000;
 }
