@@ -1,0 +1,16 @@
+{
+switch (page) {
+case VERSION:
+    return new VersionViewCreator();
+case HELP:
+  return new HelpViewCreator();
+case CHANGELOG:
+return new ChangeLogViewCreator();
+case CONTRIBUTORS:
+return new ContributorsViewCreator();
+case LICENSE:
+return new LicenseViewCreator();
+default :
+throw new IllegalArgumentException();
+}
+}

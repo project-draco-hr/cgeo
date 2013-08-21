@@ -1,0 +1,11 @@
+{
+  final InputStream ins=res.openRawResource(resourceId);
+  final String result=new Scanner(ins).useDelimiter("\\A").next();
+  try {
+    ins.close();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  return result;
+}
