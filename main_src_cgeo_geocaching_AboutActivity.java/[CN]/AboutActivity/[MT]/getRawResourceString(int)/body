@@ -1,6 +1,6 @@
 {
   final InputStream ins=res.openRawResource(resourceId);
-  final String result=new Scanner(ins).useDelimiter("\\A").next();
+  final String result=new Scanner(ins,CharEncoding.UTF_8).useDelimiter("\\A").next();
   try {
     ins.close();
   }
