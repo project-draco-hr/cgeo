@@ -1,5 +1,5 @@
 {
-  boolean googleMaps=true;
+  boolean googleMaps=StringUtils.isNotBlank(cgeoapplication.getInstance().getString(R.string.maps_api_key));
   try {
     Class.forName("com.google.android.maps.MapActivity");
   }
