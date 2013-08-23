@@ -1,8 +1,0 @@
-{
-  final String username=sharedPrefs.getString(KEY_USERNAME,null);
-  final String password=sharedPrefs.getString(KEY_GCVOTE_PASSWORD,null);
-  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-    return null;
-  }
-  return new ImmutablePair<String,String>(username,password);
-}

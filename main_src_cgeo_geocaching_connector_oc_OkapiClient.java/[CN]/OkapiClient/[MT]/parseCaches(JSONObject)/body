@@ -1,26 +1,23 @@
 {
   try {
-    final JSONArray cachesResponse=response.getJSONArray("results");
+    final String result=response.getString("results");
+    if (StringUtils.isBlank(result) || StringUtils.equals(result,"[]")) {
+      return Collections.emptyList();
+    }
+    final JSONObject cachesResponse=response.getJSONObject("results");
     if (cachesResponse != null) {
-      ArrayList<String> geocodes=new ArrayList<String>(cachesResponse.length());
-      for (int i=0; i < cachesResponse.length(); i++) {
-        String geocode=cachesResponse.getString(i);
-        if (StringUtils.isNotBlank(geocode)) {
-          geocodes.add(geocode);
-        }
-      }
-      List<Geocache> caches=new ArrayList<Geocache>(geocodes.size());
-      for (      String geocode : geocodes) {
-        Geocache cache=getCache(geocode);
-        if (cache != null) {
-          caches.add(cache);
-        }
+      final List<Geocache> caches=new ArrayList<Geocache>(cachesResponse.length());
+      @SuppressWarnings("unchecked") final Iterator<String> keys=cachesResponse.keys();
+      while (keys.hasNext()) {
+        final String key=keys.next();
+        final Geocache cache=parseSmallCache(cachesResponse.getJSONObject(key));
+        caches.add(cache);
       }
       return caches;
     }
   }
- catch (  JSONException e) {
-    Log.e("OkapiClient.parseCaches",e);
+ catch (  final JSONException e) {
+    Log.e("OkapiClient.parseCachesResult",e);
   }
-  return null;
+  return Collections.emptyList();
 }

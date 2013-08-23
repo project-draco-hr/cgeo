@@ -2,14 +2,14 @@
   if (imagesList != null) {
     return;
   }
-  PageViewCreator creator=getViewCreator(Page.IMAGES);
+  final PageViewCreator creator=getViewCreator(Page.IMAGES);
   if (creator == null) {
     return;
   }
-  View imageView=creator.getView();
+  final View imageView=creator.getView();
   if (imageView == null) {
     return;
   }
   imagesList=new ImagesList(this,cache.getGeocode());
-  imagesList.loadImages(imageView,cache.getImages(),ImageType.AllImages,false);
+  imagesList.loadImages(imageView,cache.getImages(),false);
 }

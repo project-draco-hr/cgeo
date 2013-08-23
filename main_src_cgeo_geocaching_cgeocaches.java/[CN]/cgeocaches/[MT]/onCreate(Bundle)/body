@@ -1,12 +1,12 @@
 {
   super.onCreate(savedInstanceState);
   setTheme();
-  setContentView(R.layout.caches);
+  setContentView(R.layout.cacheslist_activity);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    Object typeObject=extras.get(Intents.EXTRA_LIST_TYPE);
+    final Object typeObject=extras.get(Intents.EXTRA_LIST_TYPE);
     type=(typeObject instanceof CacheListType) ? (CacheListType)typeObject : CacheListType.OFFLINE;
-    coords=(Geopoint)extras.getParcelable(Intents.EXTRAS_COORDS);
+    coords=extras.getParcelable(Intents.EXTRA_COORDS);
   }
  else {
     extras=new Bundle();
@@ -17,6 +17,14 @@
       coords=new Geopoint(0.0,0.0);
     }
   }
+  final View titleBar=findViewById(R.id.actionbar_title);
+  titleBar.setClickable(true);
+  titleBar.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      selectList(v);
+    }
+  }
+);
   setTitle(title);
   setAdapter();
   prepareFilterBar();

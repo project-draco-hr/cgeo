@@ -1,6 +1,4 @@
 {
-  latButton=(Button)findViewById(R.id.buttonLatitude);
-  lonButton=(Button)findViewById(R.id.buttonLongitude);
   latButton.setOnClickListener(new CoordDialogListener());
   lonButton.setOnClickListener(new CoordDialogListener());
   final Geopoint coords=Settings.getAnyCoordinates();
@@ -8,9 +6,8 @@
     latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
     lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
   }
-  Button buttonCurrent=(Button)findViewById(R.id.current);
   buttonCurrent.setOnClickListener(new CurrentListener());
   getDestionationHistoryAdapter().notifyDataSetChanged();
-  disableSuggestions((EditText)findViewById(R.id.distance));
+  disableSuggestions(distanceEditText);
   initializeDistanceUnitSelector();
 }

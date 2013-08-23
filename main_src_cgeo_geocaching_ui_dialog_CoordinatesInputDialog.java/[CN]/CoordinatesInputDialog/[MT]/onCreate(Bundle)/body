@@ -1,18 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  try {
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
-    getWindow().setLayout(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-  }
- catch (  Exception e) {
-  }
-  setContentView(R.layout.coords);
-  findViewById(R.id.actionBarManualbutton).setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View view){
-      ActivityMixin.goManual(context,"c:geo-geocoordinate-input");
-    }
-  }
-);
+  setContentView(R.layout.coordinatesinput_dialog);
   final Spinner spinner=(Spinner)findViewById(R.id.spinnerCoordinateFormats);
   final ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(context,R.array.waypoint_coordinate_formats,android.R.layout.simple_spinner_item);
   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

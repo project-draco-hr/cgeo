@@ -1,9 +1,6 @@
 {
-  if (inflater == null) {
-    inflater=((Activity)getContext()).getLayoutInflater();
-  }
   if (position > getCount()) {
-    Log.w("cgGPXListAdapter.getView: Attempt to access missing item #" + position);
+    Log.w("GPXListAdapter.getView: Attempt to access missing item #" + position);
     return null;
   }
   final File file=getItem(position);
@@ -11,10 +8,7 @@
   final ViewHolder holder;
   if (view == null) {
     view=inflater.inflate(R.layout.gpx_item,null);
-    holder=new ViewHolder();
-    holder.filepath=(TextView)view.findViewById(R.id.filepath);
-    holder.filename=(TextView)view.findViewById(R.id.filename);
-    view.setTag(holder);
+    holder=new ViewHolder(view);
   }
  else {
     holder=(ViewHolder)view.getTag();
@@ -32,7 +26,7 @@
       AlertDialog.Builder builder=new AlertDialog.Builder(activity);
       builder.setTitle(R.string.gpx_import_delete_title).setMessage(activity.getString(R.string.gpx_import_delete_message,file.getName())).setCancelable(false).setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener(){
         @Override public void onClick(        DialogInterface dialog,        int id){
-          file.delete();
+          FileUtils.deleteIgnoringFailure(file);
           GPXListAdapter.this.remove(file);
         }
       }

@@ -3,18 +3,16 @@
   try {
     if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
       boolean loaded=false;
-      for (      final File dir : getBaseFolders()) {
-        if (dir.exists() && dir.isDirectory()) {
-          FileUtils.listDir(list,dir,selector,changeWaitDialogHandler);
-          if (!list.isEmpty()) {
-            loaded=true;
-            break;
-          }
+      for (      final File dir : getExistingBaseFolders()) {
+        FileUtils.listDir(list,dir,selector,changeWaitDialogHandler);
+        if (!list.isEmpty()) {
+          loaded=true;
+          break;
         }
       }
       if (!loaded) {
         changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler,MSG_SEARCH_WHOLE_SD_CARD,Environment.getExternalStorageDirectory().getName()));
-        listDirs(list,getStorages(),selector,changeWaitDialogHandler);
+        listDirs(list,LocalStorage.getStorages(),selector,changeWaitDialogHandler);
       }
     }
  else {

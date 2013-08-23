@@ -3,13 +3,18 @@
   result.geocodes.clear();
   final ArrayList<Geocache> cachesForVote=new ArrayList<Geocache>();
   final Set<Geocache> caches=cgData.loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
+  int excluded=0;
   for (  Geocache cache : caches) {
     final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwner() || cache.isFound())) || (!cacheType.contains(cache));
-    if (!excludeCache) {
-      result.addCache(cache);
+    if (excludeCache) {
+      excluded++;
+    }
+ else {
+      result.addAndPutInCache(cache);
       cachesForVote.add(cache);
     }
   }
+  result.setTotal(result.getTotal() - excluded);
   GCVote.loadRatings(cachesForVote);
   return result;
 }

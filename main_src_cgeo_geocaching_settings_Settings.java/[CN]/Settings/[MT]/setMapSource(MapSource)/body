@@ -1,0 +1,7 @@
+{
+  putString(R.string.pref_mapsource,String.valueOf(newMapSource.getNumericalId()));
+  if (newMapSource instanceof OfflineMapSource) {
+    setMapFile(((OfflineMapSource)newMapSource).getFileName());
+  }
+  mapSource=newMapSource;
+}

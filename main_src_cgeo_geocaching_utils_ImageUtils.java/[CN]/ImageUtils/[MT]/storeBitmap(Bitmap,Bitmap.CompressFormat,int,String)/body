@@ -1,0 +1,12 @@
+{
+  try {
+    FileOutputStream out=new FileOutputStream(pathOfOutputImage);
+    BufferedOutputStream bos=new BufferedOutputStream(out);
+    bitmap.compress(format,quality,bos);
+    bos.flush();
+    bos.close();
+  }
+ catch (  Exception e) {
+    Log.e("ImageHelper.storeBitmap",e);
+  }
+}

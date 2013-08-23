@@ -5,7 +5,7 @@
   }
   for (  final File file : filesToDelete) {
     try {
-      if (!file.delete()) {
+      if (!FileUtils.delete(file)) {
         Log.w("LocalStorage.deleteFilesPrefix: Can't delete file " + file.getName());
       }
     }

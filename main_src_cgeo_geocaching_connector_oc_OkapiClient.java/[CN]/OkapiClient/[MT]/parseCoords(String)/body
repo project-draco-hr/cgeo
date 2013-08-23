@@ -1,0 +1,8 @@
+{
+  final String latitude=StringUtils.substringBefore(location,SEPARATOR_STRING);
+  final String longitude=StringUtils.substringAfter(location,SEPARATOR_STRING);
+  if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
+    return new Geopoint(latitude,longitude);
+  }
+  return null;
+}

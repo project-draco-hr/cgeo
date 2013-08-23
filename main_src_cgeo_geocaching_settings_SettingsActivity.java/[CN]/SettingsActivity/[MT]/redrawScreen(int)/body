@@ -1,0 +1,10 @@
+{
+  PreferenceScreen screen=(PreferenceScreen)getPreference(key);
+  if (screen == null) {
+    return;
+  }
+  ListAdapter adapter=screen.getRootAdapter();
+  if (adapter instanceof BaseAdapter) {
+    ((BaseAdapter)adapter).notifyDataSetChanged();
+  }
+}

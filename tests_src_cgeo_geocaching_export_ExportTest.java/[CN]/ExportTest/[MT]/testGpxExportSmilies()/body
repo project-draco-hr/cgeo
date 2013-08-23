@@ -12,13 +12,7 @@
   try {
     result=gpxExport.testExportSync(exportList);
   }
- catch (  InterruptedException e) {
-    fail(e.getCause().toString());
-  }
-catch (  ExecutionException e) {
-    fail(e.getCause().toString());
-  }
- finally {
+  finally {
     cgData.removeCache(cache.getGeocode(),LoadFlags.REMOVE_ALL);
   }
   assertNotNull(result);

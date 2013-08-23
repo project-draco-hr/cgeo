@@ -1,6 +1,6 @@
 {
-  if (ProcessUtils.isInstalled(packageName)) {
+  if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isLaunchable(packageName)) {
     return true;
   }
-  return cgeo.isIntentAvailable(intent);
+  return ProcessUtils.isIntentAvailable(intent);
 }

@@ -1,5 +1,5 @@
 {
-  final ImmutablePair<String,String> login=Settings.getLogin();
+  final ImmutablePair<String,String> login=Settings.getGcLogin();
   final String memberStatus=Settings.getMemberStatus();
   try {
     MockedCache cache=new GC2CJPF();
@@ -17,7 +17,7 @@
     assertEquals(0,search.getGeocodes().size());
   }
   finally {
-    Settings.setLogin(login.left,login.right);
+    TestSettings.setLogin(login.left,login.right);
     Settings.setMemberStatus(memberStatus);
     Login.login();
   }

@@ -1,12 +1,11 @@
 {
-  menu.add(0,MENU_SIGNATURE,0,res.getString(R.string.init_signature)).setIcon(R.drawable.ic_menu_edit);
-  final SubMenu menuLog=menu.addSubMenu(0,0,0,res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
-  for (  LogTemplate template : LogTemplateProvider.getTemplates()) {
+  getMenuInflater().inflate(R.menu.abstract_logging_activity,menu);
+  final SubMenu menuLog=menu.findItem(R.id.menu_templates).getSubMenu();
+  for (  final LogTemplate template : LogTemplateProvider.getTemplates()) {
     menuLog.add(0,template.getItemId(),0,template.getResourceId());
   }
-  menuLog.add(0,MENU_SIGNATURE,0,res.getString(R.string.init_signature));
-  final SubMenu menuSmilies=menu.addSubMenu(0,MENU_SMILEY,0,res.getString(R.string.log_smilies)).setIcon(R.drawable.ic_menu_emoticons);
-  for (  Smiley smiley : GCSmiliesProvider.getSmilies()) {
+  final SubMenu menuSmilies=menu.findItem(R.id.menu_smilies).getSubMenu();
+  for (  final Smiley smiley : GCSmiliesProvider.getSmilies()) {
     menuSmilies.add(0,smiley.getItemId(),0,smiley.text);
   }
   return true;

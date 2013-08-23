@@ -5,10 +5,11 @@
   pageOrder.clear();
   final Pair<List<? extends Page>,Integer> pagesAndIndex=getOrderedPages();
   pageOrder.addAll(pagesAndIndex.getLeft());
+  final int currentItem=getCurrentItem();
+  viewPagerAdapter.notifyDataSetChanged();
   final int defaultPage=pagesAndIndex.getRight();
-  if (getCurrentItem() < 0 || getCurrentItem() >= viewPagerAdapter.getCount()) {
+  if (currentItem < 0 || currentItem >= viewPagerAdapter.getCount()) {
     viewPager.setCurrentItem(defaultPage,false);
   }
-  viewPagerAdapter.notifyDataSetChanged();
   titleIndicator.notifyDataSetChanged();
 }

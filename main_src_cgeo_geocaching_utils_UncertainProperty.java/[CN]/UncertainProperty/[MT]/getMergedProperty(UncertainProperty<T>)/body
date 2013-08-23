@@ -1,0 +1,12 @@
+{
+  if (null == other || null == other.value) {
+    return this;
+  }
+  if (null == this.value) {
+    return other;
+  }
+  if (other.certaintyLevel > certaintyLevel) {
+    return other;
+  }
+  return this;
+}

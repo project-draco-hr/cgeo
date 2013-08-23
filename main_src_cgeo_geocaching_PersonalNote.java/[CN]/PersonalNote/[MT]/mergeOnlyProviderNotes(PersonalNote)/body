@@ -1,0 +1,18 @@
+{
+  final PersonalNote result=new PersonalNote();
+  if (StringUtils.isNotEmpty(other.providerNote) && StringUtils.isNotEmpty(providerNote)) {
+    if (providerNote.equals(other.providerNote)) {
+      result.providerNote=providerNote;
+      return result;
+    }
+    if (other.isOffline) {
+      result.cgeoNote=other.providerNote;
+      result.providerNote=providerNote;
+    }
+ else {
+      result.cgeoNote=providerNote;
+      result.providerNote=other.providerNote;
+    }
+  }
+  return result;
+}

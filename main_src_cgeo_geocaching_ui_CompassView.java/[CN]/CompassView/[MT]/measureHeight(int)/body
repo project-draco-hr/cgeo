@@ -1,15 +1,12 @@
 {
-  int result;
-  int specMode=MeasureSpec.getMode(measureSpec);
-  int specSize=MeasureSpec.getSize(measureSpec);
+  final int specMode=MeasureSpec.getMode(measureSpec);
+  final int specSize=MeasureSpec.getSize(measureSpec);
   if (specMode == MeasureSpec.EXACTLY) {
-    result=specSize;
+    return specSize;
   }
- else {
-    result=compassArrow.getHeight() + getPaddingTop() + getPaddingBottom();
-    if (specMode == MeasureSpec.AT_MOST) {
-      result=Math.min(result,specSize);
-    }
+  final int desired=compassArrow.getHeight() + getPaddingTop() + getPaddingBottom();
+  if (specMode == MeasureSpec.AT_MOST) {
+    return Math.min(desired,specSize);
   }
-  return result;
+  return desired;
 }

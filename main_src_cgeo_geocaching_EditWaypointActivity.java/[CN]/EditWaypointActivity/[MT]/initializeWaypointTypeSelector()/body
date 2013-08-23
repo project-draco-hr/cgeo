@@ -1,14 +1,25 @@
 {
-  Spinner waypointTypeSelector=(Spinner)findViewById(R.id.type);
   wpTypes=new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
   ArrayAdapter<WaypointType> wpAdapter=new ArrayAdapter<WaypointType>(this,android.R.layout.simple_spinner_item,wpTypes.toArray(new WaypointType[wpTypes.size()]));
   wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
   waypointTypeSelector.setAdapter(wpAdapter);
-  int typeIndex=wpTypes.indexOf(type);
-  if (typeIndex < 0) {
-    typeIndex=wpTypes.indexOf(WaypointType.WAYPOINT);
+  waypointTypeSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+    @Override public void onItemSelected(    AdapterView<?> parent,    View v,    int pos,    long id){
+      waypointTypeSelectorPosition=pos;
+    }
+    @Override public void onNothingSelected(    AdapterView<?> parent){
+    }
   }
-  waypointTypeSelector.setSelection(typeIndex);
-  waypointTypeSelector.setOnItemSelectedListener(new ChangeWaypointType(this));
+);
+  if (initViews) {
+    int typeIndex=-1;
+    if (waypoint != null) {
+      typeIndex=wpTypes.indexOf(waypoint.getWaypointType());
+    }
+    waypointTypeSelector.setSelection(typeIndex >= 0 ? typeIndex : wpTypes.indexOf(WaypointType.WAYPOINT));
+  }
+ else {
+    waypointTypeSelector.setSelection(waypointTypeSelectorPosition);
+  }
   waypointTypeSelector.setVisibility(View.VISIBLE);
 }

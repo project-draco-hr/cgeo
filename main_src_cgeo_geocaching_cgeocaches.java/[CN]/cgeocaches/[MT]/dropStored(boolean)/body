@@ -1,5 +1,5 @@
 {
-  AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+  final AlertDialog.Builder dialog=new AlertDialog.Builder(this);
   dialog.setCancelable(true);
   dialog.setTitle(res.getString(R.string.caches_drop_stored));
   if (adapter.getCheckedCount() > 0) {
@@ -10,10 +10,7 @@
   }
   dialog.setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int id){
-      dropSelected();
-      if (removeListAfterwards) {
-        removeList(false);
-      }
+      dropSelected(removeListAfterwards);
       dialog.cancel();
     }
   }
@@ -24,6 +21,6 @@
     }
   }
 );
-  AlertDialog alert=dialog.create();
+  final AlertDialog alert=dialog.create();
   alert.show();
 }

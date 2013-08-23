@@ -4,7 +4,6 @@
   currentDir=dirContaining(extras.getString(Intents.EXTRA_START_DIR));
   ActivityMixin.setTheme(this);
   setContentView(R.layout.simple_dir_chooser);
-  setTitle(this.getResources().getString(R.string.simple_dir_chooser_title));
   fill(currentDir);
   okButton=(Button)findViewById(R.id.simple_dir_chooser_ok);
   okButton.setEnabled(false);

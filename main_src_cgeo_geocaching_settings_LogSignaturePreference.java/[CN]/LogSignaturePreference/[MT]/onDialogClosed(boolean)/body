@@ -1,0 +1,8 @@
+{
+  if (positiveResult) {
+    String text=editText.getText().toString();
+    persistString(text);
+    callChangeListener(text);
+  }
+  super.onDialogClosed(positiveResult);
+}

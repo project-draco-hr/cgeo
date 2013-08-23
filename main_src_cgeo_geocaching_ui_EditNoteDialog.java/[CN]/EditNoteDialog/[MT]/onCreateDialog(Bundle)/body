@@ -1,0 +1,26 @@
+{
+  View view=View.inflate(new ContextThemeWrapper(getActivity(),R.style.dark),R.layout.fragment_edit_note,null);
+  mEditText=(EditText)view.findViewById(R.id.note);
+  String initialNote=getArguments().getString(ARGUMENT_INITIAL_NOTE);
+  if (initialNote != null) {
+    mEditText.setText(initialNote);
+    getArguments().remove(ARGUMENT_INITIAL_NOTE);
+  }
+  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+  builder.setTitle(R.string.cache_personal_note);
+  builder.setView(view);
+  builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int whichButton){
+      listener.onFinishEditNoteDialog(mEditText.getText().toString());
+      dialog.dismiss();
+    }
+  }
+);
+  builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int whichButton){
+      dialog.dismiss();
+    }
+  }
+);
+  return builder.create();
+}

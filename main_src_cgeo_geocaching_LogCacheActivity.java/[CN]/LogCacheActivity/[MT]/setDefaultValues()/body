@@ -1,0 +1,31 @@
+{
+  date=Calendar.getInstance();
+  rating=0.0;
+  if (cache.isEventCache()) {
+    final Date eventDate=cache.getHiddenDate();
+    boolean expired=DateUtils.daysSince(eventDate.getTime()) > 0;
+    if (cache.hasOwnLog(LogType.WILL_ATTEND) || expired) {
+      if (cache.hasOwnLog(LogType.ATTENDED)) {
+        typeSelected=LogType.NOTE;
+      }
+ else {
+        typeSelected=LogType.ATTENDED;
+      }
+    }
+ else {
+      typeSelected=LogType.WILL_ATTEND;
+    }
+  }
+ else {
+    if (cache.isFound()) {
+      typeSelected=LogType.NOTE;
+    }
+ else {
+      typeSelected=LogType.FOUND_IT;
+    }
+  }
+  text=null;
+  imageCaption=StringUtils.EMPTY;
+  imageDescription=StringUtils.EMPTY;
+  imageUri=Uri.EMPTY;
+}

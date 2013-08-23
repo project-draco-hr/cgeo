@@ -1,8 +1,7 @@
 {
-  Button showDesc=(Button)view.findViewById(R.id.show_description);
+  final Button showDesc=(Button)view.findViewById(R.id.show_description);
   showDesc.setVisibility(View.GONE);
   showDesc.setOnClickListener(null);
   view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
-  new LoadDescriptionTask().execute(cache.getDescription(),view.findViewById(R.id.longdesc),view.findViewById(R.id.loading));
-  registerForContextMenu(view.findViewById(R.id.longdesc));
+  new LoadDescriptionTask(cache.getDescription(),view.findViewById(R.id.longdesc),view.findViewById(R.id.loading),view.findViewById(R.id.shortdesc)).execute();
 }

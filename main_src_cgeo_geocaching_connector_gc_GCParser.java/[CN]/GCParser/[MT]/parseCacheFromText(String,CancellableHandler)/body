@@ -1,120 +1,124 @@
 {
   CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_details);
-  if (StringUtils.isBlank(page)) {
+  if (StringUtils.isBlank(pageIn)) {
     Log.e("GCParser.parseCache: No page given");
     return null;
   }
   final SearchResult searchResult=new SearchResult();
-  if (page.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || page.contains(GCConstants.STRING_UNPUBLISHED_OWNER) || page.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
+  if (pageIn.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_OWNER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
     searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
     return searchResult;
   }
-  if (page.contains(GCConstants.STRING_PREMIUMONLY_1) || page.contains(GCConstants.STRING_PREMIUMONLY_2)) {
+  if (pageIn.contains(GCConstants.STRING_PREMIUMONLY_1) || pageIn.contains(GCConstants.STRING_PREMIUMONLY_2)) {
     searchResult.setError(StatusCode.PREMIUM_ONLY);
     return searchResult;
   }
-  final String cacheName=Html.fromHtml(BaseUtils.getMatch(page,GCConstants.PATTERN_NAME,true,"")).toString();
+  final String cacheName=Html.fromHtml(TextUtils.getMatch(pageIn,GCConstants.PATTERN_NAME,true,"")).toString();
   if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
     searchResult.setError(StatusCode.UNKNOWN_ERROR);
     return searchResult;
   }
+  String personalNoteWithLineBreaks="";
+  MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE,pageIn);
+  if (matcher.find()) {
+    personalNoteWithLineBreaks=matcher.group(1).trim();
+  }
+  final String page=TextUtils.replaceWhitespace(pageIn);
   final Geocache cache=new Geocache();
   cache.setDisabled(page.contains(GCConstants.STRING_DISABLED));
   cache.setArchived(page.contains(GCConstants.STRING_ARCHIVED));
-  cache.setPremiumMembersOnly(BaseUtils.matches(page,GCConstants.PATTERN_PREMIUMMEMBERS));
-  cache.setFavorite(BaseUtils.matches(page,GCConstants.PATTERN_FAVORITE));
-  cache.setGeocode(BaseUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.getGeocode()));
-  cache.setCacheId(BaseUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.getCacheId()));
-  cache.setGuid(BaseUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.getGuid()));
+  cache.setPremiumMembersOnly(TextUtils.matches(page,GCConstants.PATTERN_PREMIUMMEMBERS));
+  cache.setFavorite(TextUtils.matches(page,GCConstants.PATTERN_FAVORITE));
+  cache.setGeocode(TextUtils.getMatch(page,GCConstants.PATTERN_GEOCODE,true,cache.getGeocode()));
+  cache.setCacheId(TextUtils.getMatch(page,GCConstants.PATTERN_CACHEID,true,cache.getCacheId()));
+  cache.setGuid(TextUtils.getMatch(page,GCConstants.PATTERN_GUID,true,cache.getGuid()));
   cache.setName(cacheName);
-  cache.setOwnerUserId(Network.decode(BaseUtils.getMatch(page,GCConstants.PATTERN_OWNER_USERID,true,cache.getOwnerUserId())));
+  cache.setOwnerUserId(Network.decode(TextUtils.getMatch(page,GCConstants.PATTERN_OWNER_USERID,true,cache.getOwnerUserId())));
   cache.setUserModifiedCoords(false);
   String tableInside=page;
-  int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
+  final int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
   if (pos == -1) {
     Log.e("GCParser.parseCache: ID \"cacheDetails\" not found on page");
     return null;
   }
   tableInside=tableInside.substring(pos);
   if (StringUtils.isNotBlank(tableInside)) {
-    String result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_TERRAIN,true,null);
+    String result=TextUtils.getMatch(tableInside,GCConstants.PATTERN_TERRAIN,true,null);
     if (result != null) {
       try {
         cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
       }
- catch (      NumberFormatException e) {
+ catch (      final NumberFormatException e) {
         Log.e("Error parsing terrain value",e);
       }
     }
-    result=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_DIFFICULTY,true,null);
+    result=TextUtils.getMatch(tableInside,GCConstants.PATTERN_DIFFICULTY,true,null);
     if (result != null) {
       try {
         cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result,'_','.')));
       }
- catch (      NumberFormatException e) {
+ catch (      final NumberFormatException e) {
         Log.e("Error parsing difficulty value",e);
       }
     }
-    cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER_DISPLAYNAME,true,cache.getOwnerDisplayName())));
+    cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(TextUtils.getMatch(tableInside,GCConstants.PATTERN_OWNER_DISPLAYNAME,true,cache.getOwnerDisplayName())));
     try {
-      String hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null);
+      String hiddenString=TextUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null);
       if (StringUtils.isNotBlank(hiddenString)) {
         cache.setHidden(Login.parseGcCustomDate(hiddenString));
       }
       if (cache.getHiddenDate() == null) {
-        hiddenString=BaseUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null);
+        hiddenString=TextUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null);
         if (StringUtils.isNotBlank(hiddenString)) {
           cache.setHidden(Login.parseGcCustomDate(hiddenString));
         }
       }
     }
- catch (    ParseException e) {
+ catch (    final ParseException e) {
       Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
     }
     try {
-      cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
+      cache.setFavoritePoints(Integer.parseInt(TextUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
     }
- catch (    NumberFormatException e) {
-      Log.e("Error parsing favourite count",e);
+ catch (    final NumberFormatException e) {
+      Log.e("Error parsing favorite count",e);
     }
-    cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id)));
+    cache.setSize(CacheSize.getById(TextUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id)));
   }
-  cache.setFound(BaseUtils.matches(page,GCConstants.PATTERN_FOUND) || BaseUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));
+  cache.setFound(TextUtils.matches(page,GCConstants.PATTERN_FOUND) || TextUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));
   try {
-    final String foundDateString=BaseUtils.getMatch(page,GCConstants.PATTERN_FOUND_DATE,true,null);
+    final String foundDateString=TextUtils.getMatch(page,GCConstants.PATTERN_FOUND_DATE,true,null);
     if (StringUtils.isNotBlank(foundDateString)) {
       cache.setVisitedDate(Login.parseGcCustomDate(foundDateString).getTime());
     }
   }
- catch (  ParseException e) {
+ catch (  final ParseException e) {
     Log.w("GCParser.parseCache: Failed to parse cache found date");
   }
-  cache.setType(CacheType.getByPattern(BaseUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getType().id)));
-  cache.setOnWatchlist(BaseUtils.matches(page,GCConstants.PATTERN_WATCHLIST));
-  String latlon=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,"");
+  cache.setType(CacheType.getByPattern(TextUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getType().id)));
+  cache.setOnWatchlist(TextUtils.matches(page,GCConstants.PATTERN_WATCHLIST));
+  String latlon=TextUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,"");
   if (StringUtils.isNotEmpty(latlon)) {
     try {
       cache.setCoords(new Geopoint(latlon));
       cache.setReliableLatLon(true);
     }
- catch (    Geopoint.GeopointException e) {
+ catch (    final Geopoint.GeopointException e) {
       Log.w("GCParser.parseCache: Failed to parse cache coordinates",e);
     }
   }
-  cache.setLocation(BaseUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,""));
-  String result=BaseUtils.getMatch(page,GCConstants.PATTERN_HINT,false,null);
+  cache.setLocation(TextUtils.getMatch(page,GCConstants.PATTERN_LOCATION,true,""));
+  final String result=TextUtils.getMatch(page,GCConstants.PATTERN_HINT,false,null);
   if (result != null) {
-    String hint=GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
-    if (hint != null) {
-      cache.setHint(StringUtils.replace(hint,"</p>","").trim());
-    }
+    final String hint=GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
+    cache.setHint(StringUtils.replace(hint,"</p>","").trim());
   }
   cache.checkFields();
-  cache.setPersonalNote(BaseUtils.getMatch(page,GCConstants.PATTERN_PERSONALNOTE,true,cache.getPersonalNote()));
-  cache.setShortDescription(BaseUtils.getMatch(page,GCConstants.PATTERN_SHORTDESC,true,""));
-  cache.setDescription(BaseUtils.getMatch(page,GCConstants.PATTERN_DESC,true,""));
+  cache.setPersonalNote(personalNoteWithLineBreaks);
+  cache.setShortDescription(TextUtils.getMatch(page,GCConstants.PATTERN_SHORTDESC,true,""));
+  cache.setDescription(TextUtils.getMatch(page,GCConstants.PATTERN_DESC,true,""));
   try {
-    final String attributesPre=BaseUtils.getMatch(page,GCConstants.PATTERN_ATTRIBUTES,true,null);
+    final String attributesPre=TextUtils.getMatch(page,GCConstants.PATTERN_ATTRIBUTES,true,null);
     if (null != attributesPre) {
       final MatcherWrapper matcherAttributesInside=new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE,attributesPre);
       final ArrayList<String> attributes=new ArrayList<String>();
@@ -123,8 +127,8 @@
           String attribute=matcherAttributesInside.group(2).toLowerCase(Locale.US);
           final String imageName=matcherAttributesInside.group(1).trim();
           if (StringUtils.isNotEmpty(imageName)) {
-            int start=imageName.lastIndexOf('/');
-            int end=imageName.lastIndexOf('.');
+            final int start=imageName.lastIndexOf('/');
+            final int end=imageName.lastIndexOf('.');
             if (start >= 0 && end >= 0) {
               attribute=imageName.substring(start + 1,end).replace('-','_').toLowerCase(Locale.US);
             }
@@ -135,7 +139,7 @@
       cache.setAttributes(attributes);
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache attributes");
   }
   try {
@@ -145,7 +149,7 @@
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_spoilers);
     final MatcherWrapper matcherSpoilersInside=new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE,page);
     while (matcherSpoilersInside.find()) {
-      String url=matcherSpoilersInside.group(1).replace("/display","");
+      final String url=matcherSpoilersInside.group(1).replace("/display","");
       String title=null;
       if (matcherSpoilersInside.group(3) != null) {
         title=matcherSpoilersInside.group(3);
@@ -157,7 +161,7 @@
       cache.addSpoiler(new Image(url,title,description));
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache spoilers");
   }
   try {
@@ -184,28 +188,28 @@
       }
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache inventory (2)");
   }
   try {
-    final String countlogs=BaseUtils.getMatch(page,GCConstants.PATTERN_COUNTLOGS,true,null);
+    final String countlogs=TextUtils.getMatch(page,GCConstants.PATTERN_COUNTLOGS,true,null);
     if (null != countlogs) {
       final MatcherWrapper matcherLog=new MatcherWrapper(GCConstants.PATTERN_COUNTLOG,countlogs);
       while (matcherLog.find()) {
-        String typeStr=matcherLog.group(1);
-        String countStr=matcherLog.group(2).replaceAll("[.,]","");
+        final String typeStr=matcherLog.group(1);
+        final String countStr=getNumberString(matcherLog.group(2));
         if (StringUtils.isNotBlank(typeStr) && LogType.UNKNOWN != LogType.getByIconName(typeStr) && StringUtils.isNotBlank(countStr)) {
           cache.getLogCounts().put(LogType.getByIconName(typeStr),Integer.parseInt(countStr));
         }
       }
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.w("GCParser.parseCache: Failed to parse cache log count");
   }
   cache.setWaypoints(Collections.<Waypoint>emptyList(),false);
   try {
-    final String originalCoords=BaseUtils.getMatch(page,GCConstants.PATTERN_LATLON_ORIG,false,null);
+    final String originalCoords=TextUtils.getMatch(page,GCConstants.PATTERN_LATLON_ORIG,false,null);
     if (null != originalCoords) {
       final Waypoint waypoint=new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);
       waypoint.setCoords(new Geopoint(originalCoords));
@@ -213,7 +217,7 @@
       cache.setUserModifiedCoords(true);
     }
   }
- catch (  Geopoint.GeopointException e) {
+ catch (  final Geopoint.GeopointException e) {
   }
   int wpBegin=page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
   if (wpBegin != -1) {
@@ -237,12 +241,12 @@
       final String[] wpItems=wpList.split("<tr");
       for (int j=1; j < wpItems.length; j++) {
         String[] wp=wpItems[j].split("<td");
-        final String name=BaseUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,cgeoapplication.getInstance().getString(R.string.waypoint),true);
-        final String resulttype=BaseUtils.getMatch(wp[3],GCConstants.PATTERN_WPTYPE,null);
+        final String name=TextUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,cgeoapplication.getInstance().getString(R.string.waypoint),true);
+        final String resulttype=TextUtils.getMatch(wp[3],GCConstants.PATTERN_WPTYPE,null);
         final Waypoint waypoint=new Waypoint(name,WaypointType.findById(resulttype),false);
-        waypoint.setPrefix(BaseUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));
-        waypoint.setLookup(BaseUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
-        latlon=Html.fromHtml(BaseUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();
+        waypoint.setPrefix(TextUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));
+        waypoint.setLookup(TextUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
+        latlon=Html.fromHtml(TextUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();
         if (!StringUtils.startsWith(latlon,"???")) {
           waypoint.setLatlon(latlon);
           waypoint.setCoords(new Geopoint(latlon));
@@ -251,7 +255,7 @@
         if (wpItems.length > j) {
           wp=wpItems[j].split("<td");
         }
-        waypoint.setNote(BaseUtils.getMatch(wp[3],GCConstants.PATTERN_WPNOTE,waypoint.getNote()));
+        waypoint.setNote(TextUtils.getMatch(wp[3],GCConstants.PATTERN_WPNOTE,waypoint.getNote()));
         cache.addOrChangeWaypoint(waypoint,false);
       }
     }
@@ -262,6 +266,7 @@
     searchResult.setError(StatusCode.UNKNOWN_ERROR);
     return searchResult;
   }
-  searchResult.addCache(cache);
+  cache.setDetailedUpdatedNow();
+  searchResult.addAndPutInCache(cache);
   return searchResult;
 }

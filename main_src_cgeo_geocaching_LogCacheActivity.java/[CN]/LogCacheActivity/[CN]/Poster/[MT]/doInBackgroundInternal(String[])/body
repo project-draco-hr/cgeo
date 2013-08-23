@@ -1,0 +1,37 @@
+{
+  final String log=logTexts[0];
+  final String logPwd=logTexts.length > 1 ? logTexts[1] : null;
+  try {
+    final LogResult logResult=loggingManager.postLog(cache,typeSelected,date,log,logPwd,trackables);
+    if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
+      final LogEntry logNow=new LogEntry(date,typeSelected,log);
+      cache.getLogs().add(0,logNow);
+      if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
+        cache.setFound(true);
+        cache.setVisitedDate(new Date().getTime());
+      }
+      cgData.saveChangedCache(cache);
+      cache.clearOfflineLog();
+      if (typeSelected == LogType.FOUND_IT) {
+        if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+          Twitter.postTweetCache(geocode);
+        }
+        GCVote.setRating(cache,rating);
+      }
+      if (StringUtils.isNotBlank(imageUri.getPath())) {
+        ImageResult imageResult=loggingManager.postLogImage(logResult.getLogId(),imageCaption,imageDescription,imageUri);
+        final String uploadedImageUrl=imageResult.getImageUri();
+        if (StringUtils.isNotEmpty(uploadedImageUrl)) {
+          logNow.addLogImage(new Image(uploadedImageUrl,imageCaption,imageDescription));
+          cgData.saveChangedCache(cache);
+        }
+        return imageResult.getPostResult();
+      }
+    }
+    return logResult.getPostLogResult();
+  }
+ catch (  Exception e) {
+    Log.e("VisitCacheActivity.Poster.doInBackgroundInternal",e);
+  }
+  return StatusCode.LOG_POST_ERROR;
+}

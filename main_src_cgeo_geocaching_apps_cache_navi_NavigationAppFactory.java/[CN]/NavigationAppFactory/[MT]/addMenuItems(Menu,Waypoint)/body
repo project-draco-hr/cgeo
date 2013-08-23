@@ -1,8 +1,8 @@
 {
-  for (  NavigationAppsEnum navApp : getInstalledNavigationApps()) {
+  for (  final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
     if (navApp.app instanceof WaypointNavigationApp) {
-      WaypointNavigationApp waypointApp=(WaypointNavigationApp)navApp.app;
-      if (waypointApp.isEnabled(waypoint)) {
+      final WaypointNavigationApp waypointApp=(WaypointNavigationApp)navApp.app;
+      if (waypointApp.isEnabled(waypoint) && Settings.isUseNavigationApp(navApp)) {
         menu.add(0,MENU_ITEM_OFFSET + navApp.id,0,navApp.app.getName());
       }
     }

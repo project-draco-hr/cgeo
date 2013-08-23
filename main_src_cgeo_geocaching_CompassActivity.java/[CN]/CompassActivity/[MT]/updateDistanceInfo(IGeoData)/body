@@ -1,0 +1,8 @@
+{
+  if (geo.getCoords() == null || dstCoords == null) {
+    return;
+  }
+  cacheHeading=geo.getCoords().bearingTo(dstCoords);
+  distanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(dstCoords)));
+  headingView.setText(Math.round(cacheHeading) + "??");
+}

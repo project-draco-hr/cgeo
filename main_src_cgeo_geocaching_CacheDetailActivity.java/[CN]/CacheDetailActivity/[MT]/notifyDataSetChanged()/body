@@ -9,7 +9,7 @@
     finish();
     return;
   }
-  cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
+  cache.setChangeNotificationHandler(new ChangeNotificationHandler(this,progress));
   if (StringUtils.isNotBlank(cache.getName())) {
     setTitle(cache.getName() + " (" + cache.getGeocode()+ ')');
   }

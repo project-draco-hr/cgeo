@@ -5,13 +5,13 @@
       if (mapView != null) {
         final Viewport viewportNow=mapView.getViewport();
         final int zoomNow=mapView.getMapZoomLevel();
-        final boolean moved=liveChanged || (isLiveEnabled && !downloaded) || (viewport == null)|| zoomNow != zoom || (mapMoved(viewport,viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow)));
+        final boolean moved=markersInvalidated || (isLiveEnabled && !downloaded) || (viewport == null)|| zoomNow != zoom || (mapMoved(viewport,viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow)));
         if (moved || !viewportNow.equals(viewport)) {
           displayHandler.sendEmptyMessage(UPDATE_TITLE);
         }
         zoom=zoomNow;
         if (moved) {
-          liveChanged=false;
+          markersInvalidated=false;
           long currentTime=System.currentTimeMillis();
           if (1000 < (currentTime - loadThreadRun)) {
             viewport=viewportNow;
@@ -22,7 +22,7 @@
       yield();
     }
  catch (    Exception e) {
-      Log.w("cgeomap.LoadTimer.run",e);
+      Log.w("CGeoMap.LoadTimer.run",e);
     }
   }
 }

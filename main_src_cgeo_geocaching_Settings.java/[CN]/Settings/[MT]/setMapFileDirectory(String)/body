@@ -1,9 +1,0 @@
-{
-  return editSharedSettings(new PrefRunnable(){
-    @Override public void edit(    Editor edit){
-      edit.putString(KEY_MAP_DIRECTORY,mapFileDirectory);
-      MapsforgeMapProvider.getInstance().updateOfflineMaps();
-    }
-  }
-);
-}

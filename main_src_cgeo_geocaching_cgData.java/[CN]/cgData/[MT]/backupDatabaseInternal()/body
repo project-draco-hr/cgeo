@@ -1,0 +1,16 @@
+{
+  if (!LocalStorage.isExternalStorageAvailable()) {
+    Log.w("Database wasn't backed up: no external memory");
+    return null;
+  }
+  final File target=getBackupFileInternal();
+  closeDb();
+  final boolean backupDone=LocalStorage.copy(databasePath(),target);
+  init();
+  if (!backupDone) {
+    Log.e("Database could not be copied to " + target);
+    return null;
+  }
+  Log.i("Database was copied to " + target);
+  return target.getPath();
+}

@@ -4,6 +4,9 @@
   }
   try {
     final TextView logView=(TextView)view;
+    if (logView.getSelectionStart() != -1 || logView.getSelectionEnd() != -1) {
+      return;
+    }
     CharSequence text=logView.getText();
     if (text instanceof Spannable) {
       Spannable span=(Spannable)text;

@@ -1,22 +1,22 @@
 {
   final int id=item.getItemId();
 switch (id) {
-case MENU_TRAIL_MODE:
+case R.id.menu_trail_mode:
     Settings.setMapTrail(!Settings.isMapTrail());
   mapView.repaintRequired(overlayPosition);
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
-case MENU_MAP_LIVE:
+case R.id.menu_map_live:
 isLiveEnabled=!isLiveEnabled;
 if (mapMode == MapMode.LIVE) {
 Settings.setLiveMap(isLiveEnabled);
 }
-liveChanged=true;
+markersInvalidated=true;
 lastSearchResult=null;
 searchIntent=null;
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
-case MENU_STORE_CACHES:
+case R.id.menu_store_caches:
 if (!isLoading()) {
 final Set<String> geocodesInViewport=getGeocodesForCachesInViewport();
 final List<String> geocodes=new ArrayList<String>();
@@ -44,7 +44,7 @@ storeCaches(geocodes,StoredList.STANDARD_LIST_ID);
 }
 }
 return true;
-case MENU_CIRCLE_MODE:
+case R.id.menu_circle_mode:
 if (overlayCaches == null) {
 return false;
 }
@@ -52,33 +52,41 @@ overlayCaches.switchCircles();
 mapView.repaintRequired(overlayCaches);
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
-case MENU_THEME_MODE:
+case R.id.menu_mycaches_mode:
+Settings.setExcludeMine(!Settings.isExcludeMyCaches());
+markersInvalidated=true;
+ActivityMixin.invalidateOptionsMenu(activity);
+if (!Settings.isExcludeMyCaches()) {
+Tile.Cache.clear();
+}
+return true;
+case R.id.menu_theme_mode:
 selectMapTheme();
 return true;
-case MENU_AS_LIST:
+case R.id.menu_as_list:
 {
 cgeocaches.startActivityMap(activity,new SearchResult(getGeocodesForCachesInViewport()));
 return true;
 }
-case MENU_STRATEGY_FASTEST:
+case R.id.menu_strategy_fastest:
 {
 item.setChecked(true);
 Settings.setLiveMapStrategy(Strategy.FASTEST);
 return true;
 }
-case MENU_STRATEGY_FAST:
+case R.id.menu_strategy_fast:
 {
 item.setChecked(true);
 Settings.setLiveMapStrategy(Strategy.FAST);
 return true;
 }
-case MENU_STRATEGY_AUTO:
+case R.id.menu_strategy_auto:
 {
 item.setChecked(true);
 Settings.setLiveMapStrategy(Strategy.AUTO);
 return true;
 }
-case MENU_STRATEGY_DETAILED:
+case R.id.menu_strategy_detailed:
 {
 item.setChecked(true);
 Settings.setLiveMapStrategy(Strategy.DETAILED);

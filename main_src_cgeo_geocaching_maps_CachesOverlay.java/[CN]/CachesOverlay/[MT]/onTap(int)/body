@@ -4,8 +4,8 @@
       return false;
     }
     progress.show(context,context.getResources().getString(R.string.map_live),context.getResources().getString(R.string.cache_dialog_loading_details),true,null);
-    getOverlayImpl().lock();
     CachesOverlayItemImpl item=null;
+    getOverlayImpl().lock();
     try {
       if (index < items.size()) {
         item=items.get(index);
@@ -38,7 +38,7 @@
     progress.dismiss();
   }
  catch (  Exception e) {
-    Log.e("cgMapOverlay.onTap",e);
+    Log.e("CachesOverlay.onTap",e);
     if (progress != null) {
       progress.dismiss();
     }

@@ -1,0 +1,13 @@
+{
+  final InputStream instream=getResourceStream(resourceId);
+  try {
+    GPX10Parser parser=new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
+    Collection<Geocache> caches=parser.parse(instream,null);
+    assertNotNull(caches);
+    assertFalse(caches.isEmpty());
+    return caches.iterator().next();
+  }
+  finally {
+    instream.close();
+  }
+}

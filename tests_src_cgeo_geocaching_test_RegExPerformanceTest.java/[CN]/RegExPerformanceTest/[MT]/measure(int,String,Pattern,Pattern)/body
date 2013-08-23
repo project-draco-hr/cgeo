@@ -3,8 +3,8 @@
   output.add(fieldName + ":");
   for (  MockedCache cache : MOCKED_CACHES) {
     String page=cache.getData();
-    String result1=BaseUtils.getMatch(page,p1,true,"");
-    String result2=BaseUtils.getMatch(page,p2,true,"");
+    String result1=TextUtils.getMatch(page,p1,true,"");
+    String result2=TextUtils.getMatch(page,p2,true,"");
     assertEquals(result1,result2);
     long diff1, diff2;
     output.add("Parsing " + cache.getGeocode() + " "+ cache.getName());

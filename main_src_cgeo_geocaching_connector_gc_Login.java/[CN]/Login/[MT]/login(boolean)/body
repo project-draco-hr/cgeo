@@ -1,14 +1,14 @@
 {
-  final ImmutablePair<String,String> login=Settings.getLogin();
-  if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
-    Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
+  final ImmutablePair<String,String> login=Settings.getGcLogin();
+  if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
+    clearLoginInfo();
     Log.e("Login.login: No login information stored");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
   Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
   HttpResponse loginResponse=Network.getRequest("https://www.geocaching.com/login/default.aspx");
   String loginData=Network.getResponseData(loginResponse);
-  if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData,GCConstants.PATTERN_MAINTENANCE)) {
+  if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData,GCConstants.PATTERN_MAINTENANCE)) {
     return StatusCode.MAINTENANCE;
   }
   if (StringUtils.isBlank(loginData)) {

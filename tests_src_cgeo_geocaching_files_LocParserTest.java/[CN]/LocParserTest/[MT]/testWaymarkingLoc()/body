@@ -1,0 +1,12 @@
+{
+  final List<Geocache> waymarks=readLoc(R.raw.waymarking_loc);
+  assertEquals(1,waymarks.size());
+  final Geocache waymark=waymarks.get(0);
+  assertNotNull(waymark);
+  assertEquals("WM7BK7",waymark.getGeocode());
+  assertEquals("R??merstrasse Kornwestheim",waymark.getName());
+  assertEquals("travelling",waymark.getOwnerUserId());
+  assertEquals(new Geopoint(48.856733,9.197683),waymark.getCoords());
+  assertEquals(CacheSize.UNKNOWN,waymark.getSize());
+  assertEquals(CacheType.UNKNOWN,waymark.getType());
+}

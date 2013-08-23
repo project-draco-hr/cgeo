@@ -1,0 +1,10 @@
+{
+  final Parameters params=new Parameters("cache_code",cache.getGeocode());
+  params.add("watched",watched ? "true" : "false");
+  final JSONObject data=request(connector,OkapiService.SERVICE_MARK_CACHE,params);
+  if (data == null) {
+    return false;
+  }
+  cache.setOnWatchlist(watched);
+  return true;
+}

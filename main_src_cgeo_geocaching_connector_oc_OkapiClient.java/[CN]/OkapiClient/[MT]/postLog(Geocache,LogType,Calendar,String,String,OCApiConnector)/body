@@ -1,0 +1,27 @@
+{
+  final Parameters params=new Parameters("cache_code",cache.getGeocode());
+  params.add("logtype",logType.oc_type);
+  params.add("comment",log);
+  params.add("comment_format","plaintext");
+  params.add("when",LOG_DATE_FORMAT.format(date.getTime()));
+  if (logType.equals(LogType.NEEDS_MAINTENANCE)) {
+    params.add("needs_maintenance","true");
+  }
+  if (logPassword != null) {
+    params.add("password",logPassword);
+  }
+  final JSONObject data=request(connector,OkapiService.SERVICE_SUBMIT_LOG,params);
+  if (data == null) {
+    return new LogResult(StatusCode.LOG_POST_ERROR,"");
+  }
+  try {
+    if (data.getBoolean("success")) {
+      return new LogResult(StatusCode.NO_ERROR,data.getString("log_uuid"));
+    }
+    return new LogResult(StatusCode.LOG_POST_ERROR,"");
+  }
+ catch (  final JSONException e) {
+    Log.e("OkapiClient.postLog",e);
+  }
+  return new LogResult(StatusCode.LOG_POST_ERROR,"");
+}

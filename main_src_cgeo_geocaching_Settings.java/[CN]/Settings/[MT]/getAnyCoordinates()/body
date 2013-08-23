@@ -1,8 +1,0 @@
-{
-  if (sharedPrefs.contains(KEY_ANYLATITUDE) && sharedPrefs.contains(KEY_ANYLONGITUDE)) {
-    float lat=sharedPrefs.getFloat(KEY_ANYLATITUDE,0);
-    float lon=sharedPrefs.getFloat(KEY_ANYLONGITUDE,0);
-    return new Geopoint(lat,lon);
-  }
-  return null;
-}

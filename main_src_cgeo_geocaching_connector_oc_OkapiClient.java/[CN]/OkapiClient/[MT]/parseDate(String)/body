@@ -1,10 +1,9 @@
 {
-  final SimpleDateFormat ISO8601DATEFORMAT=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ",Locale.getDefault());
   final String strippedDate=date.replaceAll("\\+0([0-9]){1}\\:00","+0$100");
   try {
     return ISO8601DATEFORMAT.parse(strippedDate);
   }
- catch (  ParseException e) {
+ catch (  final ParseException e) {
     Log.e("OkapiClient.parseDate",e);
   }
   return null;

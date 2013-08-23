@@ -1,0 +1,7 @@
+{
+  final boolean uploaded=GCParser.uploadPersonalNote(cache);
+  if (uploaded) {
+    cgData.saveChangedCache(cache);
+  }
+  return uploaded;
+}

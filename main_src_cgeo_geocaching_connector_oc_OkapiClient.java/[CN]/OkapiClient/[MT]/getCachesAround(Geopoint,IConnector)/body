@@ -1,9 +1,0 @@
-{
-  String centerString=GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,center) + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,center);
-  final Parameters params=new Parameters("center",centerString);
-  final JSONObject data=request(connector,SERVICE_NEAREST,params);
-  if (data == null) {
-    return null;
-  }
-  return parseCaches(data);
-}

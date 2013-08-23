@@ -1,17 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.about_activity);
-  setTitle(res.getString(R.string.about));
-  final String changeLogMasterString=getString(R.string.changelog_master);
-  final TextView changeLogMaster=(TextView)findViewById(R.id.changelog_master);
-  if (StringUtils.isBlank(changeLogMasterString)) {
-    changeLogMaster.setVisibility(View.GONE);
-  }
- else {
-    changeLogMaster.setMovementMethod(LinkMovementMethod.getInstance());
-  }
-  ((TextView)findViewById(R.id.about_version_string)).setText(Version.getVersionName(this));
-  ((TextView)findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
-  ((TextView)findViewById(R.id.changelog_release)).setMovementMethod(LinkMovementMethod.getInstance());
+  super.onCreate(savedInstanceState,R.layout.viewpager_activity);
+  createViewPager(0,null);
+  reinitializeViewPager();
 }

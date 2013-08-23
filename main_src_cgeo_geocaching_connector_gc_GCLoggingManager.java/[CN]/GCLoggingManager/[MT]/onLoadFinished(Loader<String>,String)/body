@@ -1,0 +1,12 @@
+{
+  if (page == null) {
+    hasLoaderError=true;
+  }
+ else {
+    viewstates=Login.getViewstates(page);
+    trackables=GCParser.parseTrackableLog(page);
+    possibleLogTypes=GCParser.parseTypes(page);
+    hasLoaderError=possibleLogTypes.isEmpty();
+  }
+  activity.onLoadFinished();
+}

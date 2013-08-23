@@ -4,7 +4,7 @@
       final Strategy strategy=Settings.getLiveMapStrategy();
       final CacheType cacheType=Settings.getCacheType();
       try {
-        Settings.setExcludeMine(false);
+        TestSettings.setExcludeMine(false);
         Settings.setCacheType(CacheType.ALL);
         final GC2CJPF mockedCache=new GC2CJPF();
         deleteCacheFromDB(mockedCache.getGeocode());

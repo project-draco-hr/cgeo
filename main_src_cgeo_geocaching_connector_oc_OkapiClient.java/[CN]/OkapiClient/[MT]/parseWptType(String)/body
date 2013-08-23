@@ -1,0 +1,24 @@
+{
+  if ("parking".equalsIgnoreCase(wptType)) {
+    return WaypointType.PARKING;
+  }
+  if ("path".equalsIgnoreCase(wptType)) {
+    return WaypointType.TRAILHEAD;
+  }
+  if ("stage".equalsIgnoreCase(wptType)) {
+    return WaypointType.STAGE;
+  }
+  if ("physical-stage".equalsIgnoreCase(wptType)) {
+    return WaypointType.STAGE;
+  }
+  if ("virtual-stage".equalsIgnoreCase(wptType)) {
+    return WaypointType.PUZZLE;
+  }
+  if ("final".equalsIgnoreCase(wptType)) {
+    return WaypointType.FINAL;
+  }
+  if ("poi".equalsIgnoreCase(wptType)) {
+    return WaypointType.TRAILHEAD;
+  }
+  return WaypointType.WAYPOINT;
+}

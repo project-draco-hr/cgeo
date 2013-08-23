@@ -1,0 +1,11 @@
+{
+  final String mapDir=getString(R.string.pref_mapDirectory,null);
+  if (mapDir != null) {
+    return mapDir;
+  }
+  final String mapFile=getMapFile();
+  if (mapFile != null) {
+    return new File(mapFile).getParent();
+  }
+  return null;
+}

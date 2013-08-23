@@ -7,36 +7,56 @@
     }
   }
   try {
-    MenuItem item=menu.findItem(MENU_TRAIL_MODE);
+    MenuItem item=menu.findItem(R.id.menu_trail_mode);
     if (Settings.isMapTrail()) {
       item.setTitle(res.getString(R.string.map_trail_hide));
     }
  else {
       item.setTitle(res.getString(R.string.map_trail_show));
     }
-    item=menu.findItem(MENU_MAP_LIVE);
+    item=menu.findItem(R.id.menu_map_live);
     if (isLiveEnabled) {
       item.setTitle(res.getString(R.string.map_live_disable));
     }
  else {
       item.setTitle(res.getString(R.string.map_live_enable));
     }
+    item=menu.findItem(R.id.menu_mycaches_mode);
+    if (Settings.isExcludeMyCaches()) {
+      item.setTitle(res.getString(R.string.map_mycaches_show));
+    }
+ else {
+      item.setTitle(res.getString(R.string.map_mycaches_hide));
+    }
     final Set<String> geocodesInViewport=getGeocodesForCachesInViewport();
-    menu.findItem(MENU_STORE_CACHES).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
-    item=menu.findItem(MENU_CIRCLE_MODE);
+    menu.findItem(R.id.menu_store_caches).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
+    item=menu.findItem(R.id.menu_circle_mode);
     if (overlayCaches != null && overlayCaches.getCircles()) {
       item.setTitle(res.getString(R.string.map_circles_hide));
     }
  else {
       item.setTitle(res.getString(R.string.map_circles_show));
     }
-    item=menu.findItem(MENU_THEME_MODE);
+    item=menu.findItem(R.id.menu_theme_mode);
     item.setVisible(mapView.hasMapThemes());
-    menu.findItem(MENU_AS_LIST).setEnabled(isLiveEnabled && !isLoading());
-    menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveEnabled);
-  }
- catch (  Exception e) {
-    Log.e("cgeomap.onPrepareOptionsMenu",e);
-  }
-  return true;
+    menu.findItem(R.id.menu_as_list).setEnabled(isLiveEnabled && !isLoading());
+    menu.findItem(R.id.submenu_strategy).setEnabled(isLiveEnabled);
+switch (Settings.getLiveMapStrategy()) {
+case FASTEST:
+      menu.findItem(R.id.menu_strategy_fastest).setChecked(true);
+    break;
+case FAST:
+  menu.findItem(R.id.menu_strategy_fast).setChecked(true);
+break;
+case AUTO:
+menu.findItem(R.id.menu_strategy_auto).setChecked(true);
+break;
+default :
+menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
+}
+}
+ catch (Exception e) {
+Log.e("CGeoMap.onPrepareOptionsMenu",e);
+}
+return true;
 }

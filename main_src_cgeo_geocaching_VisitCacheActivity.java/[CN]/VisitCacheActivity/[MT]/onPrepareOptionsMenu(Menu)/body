@@ -1,6 +1,0 @@
-{
-  super.onPrepareOptionsMenu(menu);
-  final boolean voteAvailable=Settings.isGCvoteLogin() && typeSelected == LogType.FOUND_IT && StringUtils.isNotBlank(cache.getGuid());
-  menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
-  return true;
-}

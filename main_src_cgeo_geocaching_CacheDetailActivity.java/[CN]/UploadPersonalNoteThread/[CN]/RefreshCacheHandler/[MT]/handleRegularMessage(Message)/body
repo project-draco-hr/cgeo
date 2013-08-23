@@ -1,0 +1,8 @@
+{
+  if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+    updateStatusMsg(R.string.cache_dialog_refresh_message,(String)msg.obj);
+  }
+ else {
+    notifyDatasetChanged(activityRef);
+  }
+}

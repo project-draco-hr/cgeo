@@ -3,21 +3,32 @@
     return false;
   }
   updated=System.currentTimeMillis();
-  if (!detailed && (other.detailed || zoomlevel < other.zoomlevel)) {
+  if (!detailed && other.detailed) {
     detailed=other.detailed;
     detailedUpdate=other.detailedUpdate;
-    coords=other.coords;
-    cacheType=other.cacheType;
-    zoomlevel=other.zoomlevel;
-    premiumMembersOnly=other.premiumMembersOnly;
     reliableLatLon=other.reliableLatLon;
-    archived=other.archived;
-    found=other.found;
-    disabled=other.disabled;
-    favorite=other.favorite;
-    onWatchlist=other.onWatchlist;
-    logOffline=other.logOffline;
     finalDefined=other.finalDefined;
+  }
+  if (premiumMembersOnly == null) {
+    premiumMembersOnly=other.premiumMembersOnly;
+  }
+  if (found == null) {
+    found=other.found;
+  }
+  if (disabled == null) {
+    disabled=other.disabled;
+  }
+  if (favorite == null) {
+    favorite=other.favorite;
+  }
+  if (archived == null) {
+    archived=other.archived;
+  }
+  if (onWatchlist == null) {
+    onWatchlist=other.onWatchlist;
+  }
+  if (logOffline == null) {
+    logOffline=other.logOffline;
   }
   if (visitedDate == 0) {
     visitedDate=other.visitedDate;
@@ -34,9 +45,7 @@
   if (StringUtils.isBlank(guid)) {
     guid=other.guid;
   }
-  if (null == cacheType || CacheType.UNKNOWN == cacheType) {
-    cacheType=other.cacheType;
-  }
+  cacheType=UncertainProperty.getMergedProperty(cacheType,other.cacheType);
   if (StringUtils.isBlank(name)) {
     name=other.name;
   }
@@ -70,14 +79,15 @@
   if (StringUtils.isBlank(getLocation())) {
     location=other.getLocation();
   }
-  if (coords == null) {
-    coords=other.coords;
-  }
-  if (elevation == null) {
-    elevation=other.elevation;
-  }
+  coords=UncertainProperty.getMergedProperty(coords,other.coords);
   if (personalNote == null) {
     personalNote=other.personalNote;
+  }
+ else   if (other.personalNote != null && !personalNote.equals(other.personalNote)) {
+    final PersonalNote myNote=new PersonalNote(this);
+    final PersonalNote otherNote=new PersonalNote(other);
+    final PersonalNote mergedNote=myNote.mergeWith(otherNote);
+    personalNote=mergedNote.toString();
   }
   if (StringUtils.isBlank(getShortDescription())) {
     shortdesc=other.getShortDescription();
@@ -107,7 +117,7 @@
     this.setWaypoints(other.waypoints,false);
   }
  else {
-    ArrayList<Waypoint> newPoints=new ArrayList<Waypoint>(waypoints);
+    final ArrayList<Waypoint> newPoints=new ArrayList<Waypoint>(waypoints);
     Waypoint.mergeWayPoints(newPoints,other.waypoints,false);
     this.setWaypoints(newPoints,false);
   }
@@ -128,19 +138,14 @@
     logCounts=other.logCounts;
   }
   userModifiedCoords=false;
-  if (waypoints != null) {
-    for (    Waypoint wpt : waypoints) {
-      if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
-        userModifiedCoords=true;
-        break;
-      }
+  for (  final Waypoint wpt : waypoints) {
+    if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
+      userModifiedCoords=true;
+      break;
     }
   }
   if (!reliableLatLon) {
     reliableLatLon=other.reliableLatLon;
-  }
-  if (zoomlevel == -1) {
-    zoomlevel=other.zoomlevel;
   }
   return isEqualTo(other);
 }

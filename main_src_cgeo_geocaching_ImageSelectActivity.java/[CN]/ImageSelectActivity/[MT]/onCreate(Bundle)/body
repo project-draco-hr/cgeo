@@ -1,8 +1,7 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.visit_image);
-  setTitle(res.getString(R.string.log_image));
+  super.onCreate(savedInstanceState,R.layout.imageselect_activity);
+  Views.inject(this);
+  scaleChoiceIndex=Settings.getLogImageScale();
   imageCaption="";
   imageDescription="";
   imageUri=Uri.EMPTY;
@@ -11,42 +10,48 @@
     imageCaption=extras.getString(EXTRAS_CAPTION);
     imageDescription=extras.getString(EXTRAS_DESCRIPTION);
     imageUri=Uri.parse(extras.getString(EXTRAS_URI_AS_STRING));
+    scaleChoiceIndex=extras.getInt(EXTRAS_SCALE,scaleChoiceIndex);
   }
   if (savedInstanceState != null) {
     imageCaption=savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
     imageDescription=savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
     imageUri=Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+    scaleChoiceIndex=savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
   }
-  final Button cameraButton=(Button)findViewById(R.id.camera);
   cameraButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
       selectImageFromCamera();
     }
   }
 );
-  final Button storedButton=(Button)findViewById(R.id.stored);
   storedButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
       selectImageFromStorage();
     }
   }
 );
-  captionView=(EditText)findViewById(R.id.caption);
   if (StringUtils.isNotBlank(imageCaption)) {
     captionView.setText(imageCaption);
   }
-  descriptionView=(EditText)findViewById(R.id.description);
   if (StringUtils.isNotBlank(imageDescription)) {
     descriptionView.setText(imageDescription);
   }
-  final Button saveButton=(Button)findViewById(R.id.save);
+  scaleView.setSelection(scaleChoiceIndex);
+  scaleView.setOnItemSelectedListener(new OnItemSelectedListener(){
+    @Override public void onItemSelected(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
+      scaleChoiceIndex=scaleView.getSelectedItemPosition();
+      Settings.setLogImageScale(scaleChoiceIndex);
+    }
+    @Override public void onNothingSelected(    AdapterView<?> arg0){
+    }
+  }
+);
   saveButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       saveImageInfo(true);
     }
   }
 );
-  final Button clearButton=(Button)findViewById(R.id.cancel);
   clearButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       saveImageInfo(false);

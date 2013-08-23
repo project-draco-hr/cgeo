@@ -7,7 +7,11 @@
   final MatcherWrapper matcherName=new MatcherWrapper(patternName,pointString);
   if (matcherName.find()) {
     final String name=matcherName.group(1).trim();
-    cache.setName(StringUtils.substringBeforeLast(name," by ").trim());
+    String ownerName=StringUtils.trim(StringUtils.substringAfterLast(name,NAME_OWNER_SEPARATOR));
+    if (StringUtils.isEmpty(cache.getOwnerUserId()) && StringUtils.isNotEmpty(ownerName)) {
+      cache.setOwnerUserId(ownerName);
+    }
+    cache.setName(StringUtils.substringBeforeLast(name,NAME_OWNER_SEPARATOR).trim());
   }
  else {
     cache.setName(cache.getGeocode());
@@ -17,18 +21,18 @@
   if (matcherLat.find() && matcherLon.find()) {
     cache.setCoords(parsePoint(matcherLat.group(1).trim(),matcherLon.group(1).trim()));
   }
-  final MatcherWrapper matcherDifficulty=new MatcherWrapper(patternDifficulty,pointString);
+  final String difficulty=StringUtils.substringBetween(pointString,"<difficulty>","</difficulty>");
+  final String terrain=StringUtils.substringBetween(pointString,"<terrain>","</terrain>");
+  final String container=StringUtils.substringBetween(pointString,"<container>","</container");
   try {
-    if (matcherDifficulty.find()) {
-      cache.setDifficulty(Float.parseFloat(matcherDifficulty.group(1).trim()));
+    if (StringUtils.isNotBlank(difficulty)) {
+      cache.setDifficulty(Float.parseFloat(difficulty.trim()));
     }
-    final MatcherWrapper matcherTerrain=new MatcherWrapper(patternTerrain,pointString);
-    if (matcherTerrain.find()) {
-      cache.setTerrain(Float.parseFloat(matcherTerrain.group(1).trim()));
+    if (StringUtils.isNotBlank(terrain)) {
+      cache.setTerrain(Float.parseFloat(terrain.trim()));
     }
-    final MatcherWrapper matcherContainer=new MatcherWrapper(patternContainer,pointString);
-    if (matcherContainer.find()) {
-      final int size=Integer.parseInt(matcherContainer.group(1).trim());
+    if (StringUtils.isNotBlank(container)) {
+      final int size=Integer.parseInt(container.trim());
       if (size >= 1 && size <= 8) {
         cache.setSize(SIZES[size - 1]);
       }

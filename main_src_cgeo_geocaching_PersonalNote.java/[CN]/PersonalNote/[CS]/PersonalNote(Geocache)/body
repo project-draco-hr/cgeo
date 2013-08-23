@@ -1,0 +1,15 @@
+{
+  this.isOffline=cache.isOffline();
+  final String personalNote=cache.getPersonalNote();
+  if (StringUtils.isEmpty(personalNote)) {
+    return;
+  }
+  final String[] notes=StringUtils.splitByWholeSeparator(personalNote,SEPARATOR);
+  if (notes.length > 1) {
+    this.cgeoNote=notes[0];
+    this.providerNote=notes[1];
+  }
+ else {
+    this.providerNote=notes[0];
+  }
+}

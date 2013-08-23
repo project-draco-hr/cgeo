@@ -1,0 +1,23 @@
+{
+  Geocache stored=new Geocache();
+  stored.setGeocode("GC12345");
+  stored.setDetailed(true);
+  stored.setDisabled(true);
+  stored.setType(CacheType.TRADITIONAL);
+  stored.setCoords(new Geopoint(40.0,8.0));
+  stored.setDescription("Test1");
+  Geocache download=new Geocache();
+  download.setGeocode("GC12345");
+  download.setDetailed(true);
+  download.setDisabled(false);
+  download.setType(CacheType.MULTI);
+  download.setCoords(new Geopoint(41.0,9.0));
+  download.setDescription("Test2");
+  download.gatherMissingFrom(stored);
+  assertTrue("Detailed not merged correctly",download.isDetailed());
+  assertFalse("Disabled not merged correctly",download.isDisabled());
+  assertEquals("Type not merged correctly",CacheType.MULTI,download.getType());
+  assertEquals("Longitude not merged correctly",9.0,download.getCoords().getLongitude(),0.1);
+  assertEquals("Latitude not merged correctly",41.0,download.getCoords().getLatitude(),0.1);
+  assertEquals("Description not merged correctly","Test2",download.getDescription());
+}

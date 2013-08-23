@@ -1,7 +1,19 @@
 {
-  trackable=cgData.loadTrackable(geocode);
-  if ((trackable == null || trackable.isLoggable()) && !StringUtils.startsWithIgnoreCase(geocode,"GK")) {
-    trackable=GCParser.searchTrackable(geocode,guid,id);
+  if (StringUtils.isNotEmpty(geocode)) {
+    trackable=cgData.loadTrackable(geocode);
+    if (trackable == null || trackable.isLoggable()) {
+      for (      final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+        if (trackableConnector.canHandleTrackable(geocode)) {
+          trackable=trackableConnector.searchTrackable(geocode,guid,id);
+          if (trackable != null) {
+            break;
+          }
+        }
+      }
+    }
+  }
+  if (trackable == null) {
+    trackable=TravelBugConnector.getInstance().searchTrackable(geocode,guid,id);
   }
   handler.sendMessage(Message.obtain());
 }

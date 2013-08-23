@@ -1,5 +1,6 @@
 {
   try {
+    Log.d("Getting reCAPTCHA image from: " + uri.toString());
     HttpURLConnection connection=(HttpURLConnection)uri.openConnection();
     connection.setDoInput(true);
     connection.connect();
@@ -9,6 +10,6 @@
     imgHandler.sendEmptyMessage(0);
   }
  catch (  IOException e) {
-    Log.e("Failed to download reCAPTCHA image");
+    Log.e("Failed to download reCAPTCHA image",e);
   }
 }

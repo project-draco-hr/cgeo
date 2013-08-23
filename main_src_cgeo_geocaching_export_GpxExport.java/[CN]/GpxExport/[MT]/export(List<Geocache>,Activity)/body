@@ -1,8 +1,9 @@
 {
+  final String[] geocodes=getGeocodes(caches);
   if (null == activity) {
-    new ExportTask(caches,null).execute((Void)null);
+    new ExportTask(null).execute(geocodes);
   }
  else {
-    getExportDialog(caches,activity).show();
+    getExportDialog(geocodes,activity).show();
   }
 }

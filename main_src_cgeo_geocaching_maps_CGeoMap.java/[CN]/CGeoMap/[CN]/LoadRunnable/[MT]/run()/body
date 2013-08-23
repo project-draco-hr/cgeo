@@ -13,8 +13,7 @@
       }
     }
     if (isLiveEnabled) {
-      SearchResult liveResult=new SearchResult(cgData.loadCachedInViewport(viewport,Settings.getCacheType()));
-      searchResult.addGeocodes(liveResult.getGeocodes());
+      searchResult.addSearchResult(cgData.loadCachedInViewport(viewport,Settings.getCacheType()));
     }
     downloaded=true;
     Set<Geocache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);

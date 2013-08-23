@@ -1,0 +1,13 @@
+{
+  final SettingsActivity activity=(SettingsActivity)getContext();
+  setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    Preference preference){
+      Intent authIntent=new Intent(preference.getContext(),TwitterAuthorizationActivity.class);
+      activity.startActivityForResult(authIntent,R.string.pref_fakekey_twitter_authorization);
+      return false;
+    }
+  }
+);
+  activity.setTwitterAuthTitle();
+  return super.onCreateView(parent);
+}

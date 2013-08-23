@@ -1,0 +1,10 @@
+{
+  if (null != coords) {
+    putFloat(R.string.pref_anylatitude,(float)coords.getLatitude());
+    putFloat(R.string.pref_anylatitude,(float)coords.getLongitude());
+  }
+ else {
+    remove(R.string.pref_anylatitude);
+    remove(R.string.pref_anylongitude);
+  }
+}

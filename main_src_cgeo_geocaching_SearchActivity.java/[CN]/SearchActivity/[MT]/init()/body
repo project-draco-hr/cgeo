@@ -1,8 +1,6 @@
 {
-  Settings.getLogin();
-  findViewById(R.id.buttonLatitude).setOnClickListener(new FindByCoordsAction());
-  findViewById(R.id.buttonLongitude).setOnClickListener(new FindByCoordsAction());
-  final Button findByCoords=(Button)findViewById(R.id.search_coordinates);
+  buttonLatitude.setOnClickListener(new FindByCoordsAction());
+  buttonLongitude.setOnClickListener(new FindByCoordsAction());
   findByCoords.setOnClickListener(new FindByCoordsListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.address),new Runnable(){
     @Override public void run(){
@@ -10,9 +8,7 @@
     }
   }
 );
-  final Button findByAddress=(Button)findViewById(R.id.search_address);
   findByAddress.setOnClickListener(new FindByAddressListener());
-  final AutoCompleteTextView geocodeEdit=(AutoCompleteTextView)findViewById(R.id.geocode);
   EditUtils.setActionListener(geocodeEdit,new Runnable(){
     @Override public void run(){
       findByGeocodeFn();
@@ -20,7 +16,6 @@
   }
 );
   addHistoryEntries(geocodeEdit,cgData.getRecentGeocodesForSearch());
-  final Button displayByGeocode=(Button)findViewById(R.id.display_geocode);
   displayByGeocode.setOnClickListener(new FindByGeocodeListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.keyword),new Runnable(){
     @Override public void run(){
@@ -28,7 +23,6 @@
     }
   }
 );
-  final Button findByKeyword=(Button)findViewById(R.id.search_keyword);
   findByKeyword.setOnClickListener(new FindByKeywordListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.username),new Runnable(){
     @Override public void run(){
@@ -36,7 +30,6 @@
     }
   }
 );
-  final Button findByUserName=(Button)findViewById(R.id.search_username);
   findByUserName.setOnClickListener(new FindByUsernameListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.owner),new Runnable(){
     @Override public void run(){
@@ -44,14 +37,12 @@
     }
   }
 );
-  final Button findByOwner=(Button)findViewById(R.id.search_owner);
   findByOwner.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       findByOwnerFn();
     }
   }
 );
-  AutoCompleteTextView trackable=(AutoCompleteTextView)findViewById(R.id.trackable);
   EditUtils.setActionListener(trackable,new Runnable(){
     @Override public void run(){
       findTrackableFn();
@@ -60,6 +51,5 @@
 );
   addHistoryEntries(trackable,cgData.getTrackableCodes());
   disableSuggestions(trackable);
-  final Button displayTrackable=(Button)findViewById(R.id.display_trackable);
   displayTrackable.setOnClickListener(new FindTrackableListener());
 }

@@ -1,10 +1,10 @@
 {
   final CacheSize[] cacheSizes=CacheSize.values();
-  final ArrayList<SizeFilter> filters=new ArrayList<SizeFilter>();
+  final List<IFilter> filters=new LinkedList<IFilter>();
   for (  CacheSize cacheSize : cacheSizes) {
     if (cacheSize != CacheSize.UNKNOWN) {
       filters.add(new SizeFilter(cacheSize));
     }
   }
-  return filters.toArray(new SizeFilter[filters.size()]);
+  return filters;
 }

@@ -10,18 +10,8 @@
   View v=rowView;
   final ViewHolder holder;
   if (v == null) {
-    v=inflater.inflate(R.layout.caches_item,null);
-    holder=new ViewHolder();
-    holder.checkbox=(CheckBox)v.findViewById(R.id.checkbox);
-    holder.logStatusMark=(ImageView)v.findViewById(R.id.log_status_mark);
-    holder.text=(TextView)v.findViewById(R.id.text);
-    holder.distance=(DistanceView)v.findViewById(R.id.distance);
-    holder.direction=(CompassMiniView)v.findViewById(R.id.direction);
-    holder.dirImg=(ImageView)v.findViewById(R.id.dirimg);
-    holder.inventory=(ImageView)v.findViewById(R.id.inventory);
-    holder.favourite=(TextView)v.findViewById(R.id.favourite);
-    holder.info=(TextView)v.findViewById(R.id.info);
-    v.setTag(holder);
+    v=inflater.inflate(R.layout.cacheslist_item,null);
+    holder=new ViewHolder(v);
   }
  else {
     holder=(ViewHolder)v.getTag();
@@ -110,13 +100,13 @@
     holder.dirImg.setVisibility(View.GONE);
     holder.direction.setVisibility(View.GONE);
   }
-  holder.favourite.setText(Integer.toString(cache.getFavoritePoints()));
+  holder.favorite.setText(Integer.toString(cache.getFavoritePoints()));
   int favoriteBack;
   if (lightSkin) {
-    favoriteBack=R.drawable.favourite_background_light;
+    favoriteBack=R.drawable.favorite_background_light;
   }
  else {
-    favoriteBack=R.drawable.favourite_background_dark;
+    favoriteBack=R.drawable.favorite_background_dark;
   }
   final float myVote=cache.getMyVote();
   if (myVote > 0) {
@@ -142,7 +132,7 @@
       favoriteBack=RATING_BACKGROUND[0];
     }
   }
-  holder.favourite.setBackgroundResource(favoriteBack);
+  holder.favorite.setBackgroundResource(favoriteBack);
   if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
     holder.info.setText(Formatter.formatCacheInfoHistory(cache));
   }

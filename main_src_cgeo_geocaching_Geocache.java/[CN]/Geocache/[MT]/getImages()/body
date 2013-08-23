@@ -1,7 +1,7 @@
 {
-  List<Image> result=new ArrayList<Image>();
+  final List<Image> result=new ArrayList<Image>();
   result.addAll(getSpoilers());
-  for (  LogEntry log : getLogs()) {
+  for (  final LogEntry log : getLogs()) {
     result.addAll(log.getLogImages());
   }
   return result;

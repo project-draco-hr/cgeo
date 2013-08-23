@@ -1,0 +1,18 @@
+{
+  if (requestTokenDialog == null) {
+    requestTokenDialog=new ProgressDialog(OAuthAuthorizationActivity.this);
+    requestTokenDialog.setCancelable(false);
+    requestTokenDialog.setMessage(getAuthDialogWait());
+  }
+  requestTokenDialog.show();
+  startButton.setEnabled(false);
+  startButton.setOnTouchListener(null);
+  startButton.setOnClickListener(null);
+  setTempTokens(null,null);
+  (new Thread(){
+    @Override public void run(){
+      requestToken();
+    }
+  }
+).start();
+}

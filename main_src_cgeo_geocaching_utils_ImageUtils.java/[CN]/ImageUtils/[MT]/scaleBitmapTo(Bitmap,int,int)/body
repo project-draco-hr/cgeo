@@ -1,0 +1,15 @@
+{
+  final cgeoapplication app=cgeoapplication.getInstance();
+  Bitmap result=image;
+  int width=image.getWidth();
+  int height=image.getHeight();
+  if (width > maxWidth || height > maxHeight) {
+    final double ratio=Math.min((double)maxHeight / (double)height,(double)maxWidth / (double)width);
+    width=(int)Math.ceil(width * ratio);
+    height=(int)Math.ceil(height * ratio);
+    result=Bitmap.createScaledBitmap(image,width,height,true);
+  }
+  final BitmapDrawable resultDrawable=new BitmapDrawable(app.getResources(),result);
+  resultDrawable.setBounds(new Rect(0,0,width,height));
+  return resultDrawable;
+}

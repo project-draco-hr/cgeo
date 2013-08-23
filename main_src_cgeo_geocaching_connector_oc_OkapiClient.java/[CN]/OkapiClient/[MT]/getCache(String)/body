@@ -1,6 +1,13 @@
 {
-  final Parameters params=new Parameters("cache_code",geoCode,"fields",SERVICE_CACHE_FIELDS);
-  final JSONObject data=request(ConnectorFactory.getConnector(geoCode),SERVICE_CACHE,params);
+  final Parameters params=new Parameters("cache_code",geoCode);
+  final IConnector connector=ConnectorFactory.getConnector(geoCode);
+  if (!(connector instanceof OCApiConnector)) {
+    return null;
+  }
+  final OCApiConnector ocapiConn=(OCApiConnector)connector;
+  params.add("fields",getFullFields(ocapiConn));
+  params.add("attribution_append","none");
+  final JSONObject data=request(ocapiConn,OkapiService.SERVICE_CACHE,params);
   if (data == null) {
     return null;
   }

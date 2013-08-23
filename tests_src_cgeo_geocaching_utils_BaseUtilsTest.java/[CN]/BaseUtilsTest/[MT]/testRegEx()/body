@@ -1,5 +1,0 @@
-{
-  final String page=MockedCache.readCachePage("GC2CJPF");
-  assertEquals(GCConstantsTest.MOCK_LOGIN_NAME,BaseUtils.getMatch(page,GCConstants.PATTERN_LOGIN_NAME,true,"???"));
-  assertTrue(page.contains("id=\"ctl00_hlRenew\"") || GCConstants.MEMBER_STATUS_PM.equals(BaseUtils.getMatch(page,GCConstants.PATTERN_MEMBER_STATUS,true,"???")));
-}

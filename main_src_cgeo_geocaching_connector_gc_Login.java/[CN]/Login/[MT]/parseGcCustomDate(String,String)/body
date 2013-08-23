@@ -3,18 +3,18 @@
     throw new ParseException("Input is null",0);
   }
   final String trimmed=input.trim();
-  if (gcCustomDateFormats.containsKey(format)) {
+  if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
     try {
-      return gcCustomDateFormats.get(format).parse(trimmed);
+      return GC_CUSTOM_DATE_FORMATS.get(format).parse(trimmed);
     }
- catch (    ParseException e) {
+ catch (    final ParseException e) {
     }
   }
-  for (  SimpleDateFormat sdf : gcCustomDateFormats.values()) {
+  for (  final SimpleDateFormat sdf : GC_CUSTOM_DATE_FORMATS.values()) {
     try {
       return sdf.parse(trimmed);
     }
- catch (    ParseException e) {
+ catch (    final ParseException e) {
     }
   }
   throw new ParseException("No matching pattern",0);

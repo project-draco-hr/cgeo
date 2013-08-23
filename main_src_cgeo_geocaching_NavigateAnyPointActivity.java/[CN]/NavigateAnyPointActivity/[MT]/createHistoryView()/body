@@ -1,7 +1,7 @@
 {
-  historyListView=(ListView)findViewById(R.id.historyList);
-  final View pointControls=getLayoutInflater().inflate(R.layout.point_controls,null);
+  final View pointControls=getLayoutInflater().inflate(R.layout.navigateanypoint_header,null);
   historyListView.addHeaderView(pointControls,null,false);
+  Views.inject(this);
   if (getHistoryOfSearchedLocations().isEmpty()) {
     historyListView.addFooterView(getEmptyHistoryFooter(),null,false);
   }

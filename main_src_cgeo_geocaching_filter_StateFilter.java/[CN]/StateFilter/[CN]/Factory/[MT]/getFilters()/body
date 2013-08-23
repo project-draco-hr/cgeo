@@ -1,16 +1,18 @@
 {
-  final ArrayList<StateFilter> filters=new ArrayList<StateFilter>();
+  final List<StateFilter> filters=new ArrayList<StateFilter>(6);
   filters.add(new StateFoundFilter());
   filters.add(new StateArchivedFilter());
   filters.add(new StateDisabledFilter());
   filters.add(new StatePremiumFilter());
   filters.add(new StateNonPremiumFilter());
   filters.add(new StateOfflineLogFilter());
+  filters.add(new StateStoredFilter());
+  filters.add(new StateNotStoredFilter());
   Collections.sort(filters,new Comparator<StateFilter>(){
-    @Override public int compare(    StateFilter filter1,    StateFilter filter2){
+    @Override public int compare(    final StateFilter filter1,    final StateFilter filter2){
       return filter1.getName().compareToIgnoreCase(filter2.getName());
     }
   }
 );
-  return filters.toArray(new StateFilter[filters.size()]);
+  return filters;
 }

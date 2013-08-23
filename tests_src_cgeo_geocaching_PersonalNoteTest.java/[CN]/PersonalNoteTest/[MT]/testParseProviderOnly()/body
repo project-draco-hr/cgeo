@@ -1,0 +1,8 @@
+{
+  final String testString="Simple provider note";
+  Geocache cache=new Geocache();
+  cache.setPersonalNote(testString);
+  PersonalNote parsedNote=new PersonalNote(cache);
+  assertEquals(testString,parsedNote.toString());
+  assertPersonalNote(parsedNote,null,"Simple provider note");
+}

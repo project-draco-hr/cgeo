@@ -53,17 +53,16 @@
       cache.setReliableLatLon(false);
       cache.setGeocode(id);
       cache.setName(nameCache.get(id));
-      cache.setZoomlevel(tile.getZoomlevel());
-      cache.setCoords(tile.getCoord(xy));
+      cache.setCoords(tile.getCoord(xy),tile.getZoomLevel());
       if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
         for (        UTFGridPosition singlePos : singlePositions.get(id)) {
-          if (IconDecoder.parseMapPNG(cache,bitmap,singlePos,tile.getZoomlevel())) {
+          if (IconDecoder.parseMapPNG(cache,bitmap,singlePos,tile.getZoomLevel())) {
             break;
           }
         }
       }
  else {
-        cache.setType(CacheType.UNKNOWN);
+        cache.setType(CacheType.UNKNOWN,tile.getZoomLevel());
       }
       boolean exclude=false;
       if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwner())) {
@@ -76,13 +75,13 @@
         exclude=true;
       }
       if (!exclude) {
-        searchResult.addCache(cache);
+        searchResult.addAndPutInCache(cache);
       }
     }
     Log.d("Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
   }
  catch (  Exception e) {
-    Log.e("GCBase.parseMapJSON",e);
+    Log.e("GCMap.parseMapJSON",e);
   }
   return searchResult;
 }

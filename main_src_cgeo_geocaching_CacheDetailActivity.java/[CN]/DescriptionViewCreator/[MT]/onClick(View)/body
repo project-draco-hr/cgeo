@@ -1,12 +1,8 @@
 {
-  EditorDialog editor=new EditorDialog(CacheDetailActivity.this,personalNoteView.getText());
-  editor.setOnEditorUpdate(new EditorDialog.EditorUpdate(){
-    @Override public void update(    CharSequence editorText){
-      cache.setPersonalNote(editorText.toString());
-      setPersonalNote(personalNoteView);
-      cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
-    }
+  if (cache.isOffline()) {
+    editPersonalNote(cache,CacheDetailActivity.this);
   }
-);
-  editor.show();
+ else {
+    warnPersonalNoteNeedsStoring();
+  }
 }

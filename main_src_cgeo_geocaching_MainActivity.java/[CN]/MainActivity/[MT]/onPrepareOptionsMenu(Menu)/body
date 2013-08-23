@@ -1,0 +1,5 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  menu.findItem(R.id.menu_scan).setEnabled(ProcessUtils.isIntentAvailable(SCAN_INTENT));
+  return true;
+}

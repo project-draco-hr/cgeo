@@ -4,27 +4,23 @@
   }
   final List<LogType> types=new ArrayList<LogType>();
   final MatcherWrapper typeBoxMatcher=new MatcherWrapper(GCConstants.PATTERN_TYPEBOX,page);
-  String typesText=null;
-  if (typeBoxMatcher.find()) {
-    if (typeBoxMatcher.groupCount() > 0) {
-      typesText=typeBoxMatcher.group(1);
-    }
-  }
-  if (typesText != null) {
+  if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {
+    final String typesText=typeBoxMatcher.group(1);
     final MatcherWrapper typeMatcher=new MatcherWrapper(GCConstants.PATTERN_TYPE2,typesText);
     while (typeMatcher.find()) {
       if (typeMatcher.groupCount() > 1) {
         try {
-          int type=Integer.parseInt(typeMatcher.group(2));
+          final int type=Integer.parseInt(typeMatcher.group(2));
           if (type > 0) {
             types.add(LogType.getById(type));
           }
         }
- catch (        NumberFormatException e) {
+ catch (        final NumberFormatException e) {
           Log.e("Error parsing log types",e);
         }
       }
     }
   }
+  types.remove(LogType.UPDATE_COORDINATES);
   return types;
 }

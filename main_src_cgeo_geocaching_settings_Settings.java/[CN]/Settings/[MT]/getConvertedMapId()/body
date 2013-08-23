@@ -1,0 +1,24 @@
+{
+  final int id=Integer.parseInt(getString(R.string.pref_mapsource,String.valueOf(MAP_SOURCE_DEFAULT)));
+switch (id) {
+case GOOGLEMAP_BASEID + MAP:
+    return GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
+case GOOGLEMAP_BASEID + SATELLITE:
+  return GoogleMapProvider.GOOGLE_SATELLITE_ID.hashCode();
+case MFMAP_BASEID + MAPNIK:
+return MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode();
+case MFMAP_BASEID + CYCLEMAP:
+return MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode();
+case MFMAP_BASEID + OFFLINE:
+{
+final String mapFile=Settings.getMapFile();
+if (StringUtils.isNotEmpty(mapFile)) {
+return mapFile.hashCode();
+}
+break;
+}
+default :
+break;
+}
+return id;
+}

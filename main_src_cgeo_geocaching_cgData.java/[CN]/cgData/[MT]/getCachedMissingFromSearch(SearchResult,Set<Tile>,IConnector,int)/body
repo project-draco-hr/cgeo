@@ -1,0 +1,26 @@
+{
+  final Set<String> cachedGeocodes=new HashSet<String>();
+  for (  Tile tile : tiles) {
+    cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport(),CacheType.ALL));
+  }
+  cachedGeocodes.removeAll(searchResult.getGeocodes());
+  Set<String> missingFromSearch=new HashSet<String>();
+  for (  String geocode : cachedGeocodes) {
+    if (connector.canHandle(geocode)) {
+      Geocache geocache=cacheCache.getCacheFromCache(geocode);
+      if (geocache.getCoordZoomLevel() <= maxZoom) {
+        boolean found=false;
+        for (        Tile tile : tiles) {
+          if (tile.containsPoint(geocache)) {
+            found=true;
+            break;
+          }
+        }
+        if (found) {
+          missingFromSearch.add(geocode);
+        }
+      }
+    }
+  }
+  return missingFromSearch;
+}

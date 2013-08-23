@@ -1,0 +1,35 @@
+{
+  if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    return null;
+  }
+  final List<String> allGeocodes=new ArrayList<String>(Arrays.asList(geocodes));
+  setMessage(cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,allGeocodes.size(),allGeocodes.size()));
+  final File exportFile=getExportFile();
+  BufferedWriter writer=null;
+  try {
+    final File exportLocation=new File(Settings.getGpxExportDir());
+    FileUtils.mkdirs(exportLocation);
+    writer=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile),CharEncoding.UTF_8));
+    new GpxSerializer().writeGPX(allGeocodes,writer,new GpxSerializer.ProgressListener(){
+      @Override public void publishProgress(      final int countExported){
+        ExportTask.this.publishProgress(countExported);
+      }
+    }
+);
+  }
+ catch (  final Exception e) {
+    Log.e("GpxExport.ExportTask export",e);
+    if (writer != null) {
+      try {
+        writer.close();
+      }
+ catch (      final IOException e1) {
+      }
+    }
+    if (exportFile.exists()) {
+      FileUtils.deleteIgnoringFailure(exportFile);
+    }
+    return null;
+  }
+  return exportFile;
+}

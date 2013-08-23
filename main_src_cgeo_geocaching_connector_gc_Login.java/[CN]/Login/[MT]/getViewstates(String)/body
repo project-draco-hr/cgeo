@@ -8,14 +8,14 @@
     try {
       count=Integer.parseInt(matcherViewstateCount.group(1));
     }
- catch (    NumberFormatException e) {
+ catch (    final NumberFormatException e) {
       Log.e("getViewStates",e);
     }
   }
-  String[] viewstates=new String[count];
+  final String[] viewstates=new String[count];
   final MatcherWrapper matcherViewstates=new MatcherWrapper(GCConstants.PATTERN_VIEWSTATES,page);
   while (matcherViewstates.find()) {
-    String sno=matcherViewstates.group(1);
+    final String sno=matcherViewstates.group(1);
     int no;
     if (StringUtils.isEmpty(sno)) {
       no=0;
@@ -24,7 +24,7 @@
       try {
         no=Integer.parseInt(sno);
       }
- catch (      NumberFormatException e) {
+ catch (      final NumberFormatException e) {
         Log.e("getViewStates",e);
         no=0;
       }

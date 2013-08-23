@@ -1,0 +1,7 @@
+{
+  if (app.currentGeo().getCoords() == null) {
+    return;
+  }
+  nearestView.setPressed(true);
+  cgeocaches.startActivityNearest(this,app.currentGeo().getCoords());
+}

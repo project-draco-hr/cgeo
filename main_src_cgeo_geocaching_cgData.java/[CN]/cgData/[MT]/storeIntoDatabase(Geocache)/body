@@ -1,0 +1,78 @@
+{
+  cache.addStorageLocation(StorageLocation.DATABASE);
+  cacheCache.putCacheInCache(cache);
+  Log.d("Saving " + cache.toString() + " ("+ cache.getListId()+ ") to DB");
+  ContentValues values=new ContentValues();
+  if (cache.getUpdated() == 0) {
+    values.put("updated",System.currentTimeMillis());
+  }
+ else {
+    values.put("updated",cache.getUpdated());
+  }
+  values.put("reason",cache.getListId());
+  values.put("detailed",cache.isDetailed() ? 1 : 0);
+  values.put("detailedupdate",cache.getDetailedUpdate());
+  values.put("visiteddate",cache.getVisitedDate());
+  values.put("geocode",cache.getGeocode());
+  values.put("cacheid",cache.getCacheId());
+  values.put("guid",cache.getGuid());
+  values.put("type",cache.getType().id);
+  values.put("name",cache.getName());
+  values.put("owner",cache.getOwnerDisplayName());
+  values.put("owner_real",cache.getOwnerUserId());
+  if (cache.getHiddenDate() == null) {
+    values.put("hidden",0);
+  }
+ else {
+    values.put("hidden",cache.getHiddenDate().getTime());
+  }
+  values.put("hint",cache.getHint());
+  values.put("size",cache.getSize() == null ? "" : cache.getSize().id);
+  values.put("difficulty",cache.getDifficulty());
+  values.put("terrain",cache.getTerrain());
+  values.put("location",cache.getLocation());
+  values.put("distance",cache.getDistance());
+  values.put("direction",cache.getDirection());
+  putCoords(values,cache.getCoords());
+  values.put("reliable_latlon",cache.isReliableLatLon() ? 1 : 0);
+  values.put("shortdesc",cache.getShortDescription());
+  values.put("personal_note",cache.getPersonalNote());
+  values.put("description",cache.getDescription());
+  values.put("favourite_cnt",cache.getFavoritePoints());
+  values.put("rating",cache.getRating());
+  values.put("votes",cache.getVotes());
+  values.put("myvote",cache.getMyVote());
+  values.put("disabled",cache.isDisabled() ? 1 : 0);
+  values.put("archived",cache.isArchived() ? 1 : 0);
+  values.put("members",cache.isPremiumMembersOnly() ? 1 : 0);
+  values.put("found",cache.isFound() ? 1 : 0);
+  values.put("favourite",cache.isFavorite() ? 1 : 0);
+  values.put("inventoryunknown",cache.getInventoryItems());
+  values.put("onWatchlist",cache.isOnWatchlist() ? 1 : 0);
+  values.put("coordsChanged",cache.hasUserModifiedCoords() ? 1 : 0);
+  values.put("finalDefined",cache.hasFinalDefined() ? 1 : 0);
+  values.put("logPasswordRequired",cache.isLogPasswordRequired() ? 1 : 0);
+  init();
+  database.beginTransaction();
+  try {
+    saveAttributesWithoutTransaction(cache);
+    saveOriginalWaypointsWithoutTransaction(cache);
+    saveSpoilersWithoutTransaction(cache);
+    saveLogsWithoutTransaction(cache.getGeocode(),cache.getLogs());
+    saveLogCountsWithoutTransaction(cache);
+    saveInventoryWithoutTransaction(cache.getGeocode(),cache.getInventory());
+    int rows=database.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
+    if (rows == 0) {
+      database.insert(dbTableCaches,null,values);
+    }
+    database.setTransactionSuccessful();
+    return true;
+  }
+ catch (  Exception e) {
+    Log.e("SaveCache",e);
+  }
+ finally {
+    database.endTransaction();
+  }
+  return false;
+}

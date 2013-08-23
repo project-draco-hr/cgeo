@@ -1,9 +1,9 @@
 {
-  AbstractSearchLoader loader=null;
   if (type >= CacheListLoaderType.values().length) {
     throw new IllegalArgumentException("invalid loader type " + type);
   }
-  CacheListLoaderType enumType=CacheListLoaderType.values()[type];
+  final CacheListLoaderType enumType=CacheListLoaderType.values()[type];
+  AbstractSearchLoader loader=null;
 switch (enumType) {
 case OFFLINE:
     listId=Settings.getLastList();
@@ -32,13 +32,13 @@ loader=new CoordsGeocacheListLoader(app,coords);
 break;
 case KEYWORD:
 final String keyword=extras.getString(Intents.EXTRA_KEYWORD);
-title=keyword;
+rememberTerm(keyword);
 loader=new KeywordGeocacheListLoader(app,keyword);
 break;
 case ADDRESS:
 final String address=extras.getString(Intents.EXTRA_ADDRESS);
 if (StringUtils.isNotBlank(address)) {
-title=address;
+rememberTerm(address);
 }
  else {
 title=coords.toString();
@@ -52,12 +52,12 @@ loader=new AddressGeocacheListLoader(app,address);
 break;
 case USERNAME:
 final String username=extras.getString(Intents.EXTRA_USERNAME);
-title=username;
+rememberTerm(username);
 loader=new UsernameGeocacheListLoader(app,username);
 break;
 case OWNER:
 final String ownerName=extras.getString(Intents.EXTRA_USERNAME);
-title=ownerName;
+rememberTerm(ownerName);
 loader=new OwnerGeocacheListLoader(app,ownerName);
 break;
 case MAP:

@@ -1,0 +1,9 @@
+{
+  try {
+    super.setGravity(gravity);
+  }
+ catch (  IndexOutOfBoundsException e) {
+    setText(getText().toString());
+    super.setGravity(gravity);
+  }
+}

@@ -1,0 +1,21 @@
+{
+  if (StringUtils.isEmpty(((EditText)findViewById(R.id.pin)).getText().toString())) {
+    helpDialog(getAuthDialogPinTitle(),getAuthDialogPinMessage());
+    return;
+  }
+  if (changeTokensDialog == null) {
+    changeTokensDialog=new ProgressDialog(OAuthAuthorizationActivity.this);
+    changeTokensDialog.setCancelable(false);
+    changeTokensDialog.setMessage(getAuthDialogWait());
+  }
+  changeTokensDialog.show();
+  pinEntryButton.setEnabled(false);
+  pinEntryButton.setOnTouchListener(null);
+  pinEntryButton.setOnClickListener(null);
+  (new Thread(){
+    @Override public void run(){
+      changeToken();
+    }
+  }
+).start();
+}

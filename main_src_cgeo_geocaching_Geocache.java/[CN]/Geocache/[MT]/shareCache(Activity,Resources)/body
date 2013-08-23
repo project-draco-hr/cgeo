@@ -2,7 +2,7 @@
   if (geocode == null) {
     return;
   }
-  StringBuilder subject=new StringBuilder("Geocache ");
+  final StringBuilder subject=new StringBuilder("Geocache ");
   subject.append(geocode);
   if (StringUtils.isNotBlank(name)) {
     subject.append(" - ").append(name);

@@ -1,6 +1,0 @@
-{
-  waitDialog=ProgressDialog.show(VisitCacheActivity.this,null,res.getString(StringUtils.isBlank(imageUri.getPath()) ? R.string.log_saving : R.string.log_saving_and_uploading),true);
-  waitDialog.setCancelable(true);
-  final Thread thread=new PostLogThread(postLogHandler,currentLogText());
-  thread.start();
-}

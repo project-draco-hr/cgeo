@@ -3,12 +3,12 @@
     return;
   }
   try {
-    HtmlImage imgGetter=new HtmlImage(trackable.getGeocode(),false,0,false);
-    BitmapDrawable image=imgGetter.getDrawable(url);
-    Message message=handler.obtainMessage(0,image);
+    final HtmlImage imgGetter=new HtmlImage(trackable.getGeocode(),false,0,false);
+    final BitmapDrawable image=imgGetter.getDrawable(url);
+    final Message message=handler.obtainMessage(0,image);
     handler.sendMessage(message);
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("TrackableActivity.TrackableIconThread.run: ",e);
   }
 }

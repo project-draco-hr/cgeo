@@ -1,16 +1,20 @@
 {
-  if (description != null) {
-    if (StringUtils.isNotBlank(descriptionString)) {
-      descriptionView.setText(description,TextView.BufferType.SPANNABLE);
-      descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-      fixBlackTextColor(descriptionView,descriptionString);
-    }
-    descriptionView.setVisibility(View.VISIBLE);
-  }
- else {
+  if (description == null) {
     showToast(res.getString(R.string.err_load_descr_failed));
+    return;
   }
-  if (null != loadingIndicatorView) {
-    loadingIndicatorView.setVisibility(View.GONE);
+  if (StringUtils.isNotBlank(descriptionString)) {
+    try {
+      descriptionView.setText(description,TextView.BufferType.SPANNABLE);
+    }
+ catch (    final Exception e) {
+      Log.e("Android bug setting text: ",e);
+      descriptionView.setText(description.toString());
+    }
+    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+    fixTextColor(descriptionView,descriptionString);
+    descriptionView.setVisibility(View.VISIBLE);
+    registerForContextMenu(descriptionView);
+    hideDuplicatedShortDescription();
   }
 }

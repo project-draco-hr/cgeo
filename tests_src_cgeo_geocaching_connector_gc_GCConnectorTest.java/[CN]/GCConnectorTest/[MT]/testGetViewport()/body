@@ -2,7 +2,7 @@
   final boolean excludeMine=Settings.isExcludeMyCaches();
   final CacheType cacheType=Settings.getCacheType();
   try {
-    Settings.setExcludeMine(false);
+    TestSettings.setExcludeMine(false);
     Settings.setCacheType(CacheType.ALL);
     Login.login();
     final String[] tokens=Login.getMapTokens();
@@ -21,7 +21,7 @@
     }
   }
   finally {
-    Settings.setExcludeMine(excludeMine);
+    TestSettings.setExcludeMine(excludeMine);
     Settings.setCacheType(cacheType);
   }
 }

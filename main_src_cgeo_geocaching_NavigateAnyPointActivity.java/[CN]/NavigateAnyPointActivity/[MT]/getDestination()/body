@@ -1,6 +1,6 @@
 {
-  String bearingText=((EditText)findViewById(R.id.bearing)).getText().toString();
-  String distanceText=((EditText)findViewById(R.id.distance)).getText().toString() + distanceUnit;
+  String bearingText=bearingEditText.getText().toString();
+  String distanceText=distanceEditText.getText().toString() + distanceUnit;
   String latText=latButton.getText().toString();
   String lonText=lonButton.getText().toString();
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
@@ -24,8 +24,7 @@
     }
     coords=app.currentGeo().getCoords();
   }
-  Geopoint result;
-  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+  if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     double bearing;
     try {
       bearing=Double.parseDouble(bearingText);
@@ -36,25 +35,16 @@
     }
     double distance;
     try {
-      distance=DistanceParser.parseDistance(distanceText,Settings.isUseMetricUnits());
+      distance=DistanceParser.parseDistance(distanceText,!Settings.isUseImperialUnits());
     }
  catch (    NumberFormatException e) {
       showToast(res.getString(R.string.err_parse_dist));
       return null;
     }
-    final Geopoint coordsDst=coords.project(bearing,distance);
-    if (coordsDst == null) {
-      showToast(res.getString(R.string.err_point_location_error));
-      return null;
-    }
-    result=coordsDst;
+    coords=coords.project(bearing,distance);
   }
- else   if (coords != null) {
-    result=coords;
+  if (coords != null) {
+    saveCoords(coords);
   }
- else {
-    return null;
-  }
-  saveCoords(result);
-  return result;
+  return coords;
 }

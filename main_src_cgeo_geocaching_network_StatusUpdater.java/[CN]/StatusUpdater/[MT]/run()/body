@@ -1,10 +1,5 @@
 {
   Looper.prepare();
-  new PeriodicHandler(1800000L){
-    @Override public void act(){
-      requestUpdate();
-    }
-  }
-.start();
+  new PeriodicHandler(1800000L,this).start();
   Looper.loop();
 }

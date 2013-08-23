@@ -1,0 +1,8 @@
+{
+  Preference pref=getPreference(key);
+  if (pref == null) {
+    return;
+  }
+  String value=PreferenceManager.getDefaultSharedPreferences(pref.getContext()).getString(pref.getKey(),"");
+  bindSummaryToValue(pref,value);
+}

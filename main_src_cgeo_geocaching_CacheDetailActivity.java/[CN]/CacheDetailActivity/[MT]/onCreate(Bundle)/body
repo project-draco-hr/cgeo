@@ -1,7 +1,5 @@
 {
-  super.onCreate(savedInstanceState);
-  setTheme();
-  setContentView(R.layout.cacheview);
+  super.onCreate(savedInstanceState,R.layout.cachedetail_activity);
   setTitle(res.getString(R.string.cache));
   String geocode=null;
   if (search != null) {
@@ -20,9 +18,9 @@
     guid=extras.getString(Intents.EXTRA_GUID);
   }
   if (geocode == null && guid == null && uri != null) {
-    String uriHost=uri.getHost().toLowerCase(Locale.US);
-    String uriPath=uri.getPath().toLowerCase(Locale.US);
-    String uriQuery=uri.getQuery();
+    final String uriHost=uri.getHost().toLowerCase(Locale.US);
+    final String uriPath=uri.getPath().toLowerCase(Locale.US);
+    final String uriQuery=uri.getQuery();
     if (uriQuery != null) {
       Log.i("Opening URI: " + uriHost + uriPath+ "?"+ uriQuery);
     }
@@ -47,7 +45,7 @@
       }
     }
  else     if (uriHost.contains("coord.info")) {
-      if (uriPath != null && uriPath.startsWith("/gc")) {
+      if (StringUtils.startsWith(uriPath,"/gc")) {
         geocode=uriPath.substring(1).toUpperCase(Locale.US);
       }
  else {
@@ -56,13 +54,34 @@
         return;
       }
     }
+ else     if (uriHost.contains("opencaching.de")) {
+      if (StringUtils.startsWith(uriPath,"/oc")) {
+        geocode=uriPath.substring(1).toUpperCase(Locale.US);
+      }
+ else {
+        geocode=uri.getQueryParameter("wp");
+        if (StringUtils.isNotBlank(geocode)) {
+          geocode=geocode.toUpperCase(Locale.US);
+        }
+ else {
+          showToast(res.getString(R.string.err_detail_open));
+          finish();
+          return;
+        }
+      }
+    }
+ else {
+      showToast(res.getString(R.string.err_detail_open));
+      finish();
+      return;
+    }
   }
   if (geocode == null && guid == null) {
     showToast(res.getString(R.string.err_detail_cache));
     finish();
     return;
   }
-  final LoadCacheHandler loadCacheHandler=new LoadCacheHandler();
+  final LoadCacheHandler loadCacheHandler=new LoadCacheHandler(this,progress);
   try {
     String title=res.getString(R.string.cache);
     if (StringUtils.isNotBlank(name)) {
@@ -73,9 +92,9 @@
     }
     progress.show(this,title,res.getString(R.string.cache_dialog_loading_details),true,loadCacheHandler.cancelMessage());
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
   }
-  ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
+  final ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
   defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){
     @Override public boolean onLongClick(    View v){
       startDefaultNavigation2();

@@ -1,0 +1,5 @@
+{
+  final SharedPreferences.Editor edit=sharedPrefs.edit();
+  edit.remove(getKey(prefKeyId));
+  return edit.commit();
+}

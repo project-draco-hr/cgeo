@@ -5,9 +5,9 @@
         deleteDirectory(file);
       }
  else {
-        file.delete();
+        FileUtils.delete(file);
       }
     }
   }
-  return path.delete();
+  return FileUtils.delete(path);
 }

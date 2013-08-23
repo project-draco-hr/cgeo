@@ -1,0 +1,27 @@
+{
+  setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    final Preference preference,    Object newValue){
+      if (!(Boolean)newValue) {
+        return true;
+      }
+      AlertDialog.Builder builder=new AlertDialog.Builder(preference.getContext());
+      builder.setMessage(text).setIcon(android.R.drawable.ic_dialog_info).setTitle(title).setPositiveButton(R.string.err_none,new DialogInterface.OnClickListener(){
+        @Override public void onClick(        DialogInterface dialog,        int id){
+          dialog.cancel();
+        }
+      }
+).setNegativeButton(urlButton,new DialogInterface.OnClickListener(){
+        @Override public void onClick(        DialogInterface dialog,        int id){
+          Intent i=new Intent(Intent.ACTION_VIEW);
+          i.setData(Uri.parse(url));
+          preference.getContext().startActivity(i);
+        }
+      }
+);
+      builder.create().show();
+      return true;
+    }
+  }
+);
+  return super.onCreateView(parent);
+}

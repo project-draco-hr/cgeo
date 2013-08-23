@@ -11,7 +11,9 @@
     init();
     return false;
   }
-  source.delete();
+  if (!FileUtils.delete(source)) {
+    Log.e("Original database could not be deleted during move");
+  }
   Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
   Log.i("Database was moved to " + target);
   init();

@@ -1,5 +1,5 @@
 {
-  int itemId=item.getItemId();
+  final int itemId=item.getItemId();
 switch (itemId) {
 case MENU_SWITCH_SELECT_MODE:
     adapter.switchSelectMode();
@@ -22,7 +22,7 @@ importGpx();
 invalidateOptionsMenuCompatible();
 return false;
 case MENU_CREATE_LIST:
-new StoredList.UserInterface(this).promptForListCreation(null);
+new StoredList.UserInterface(this).promptForListCreation(null,newListName);
 invalidateOptionsMenuCompatible();
 return false;
 case MENU_DROP_LIST:

@@ -1,0 +1,35 @@
+{
+  final Set<Geocache> caches=cgData.loadCaches(geocodesOfBatch,LoadFlags.LOAD_ALL_DB_ONLY);
+  for (  final Geocache cache : caches) {
+    gpx.startTag(PREFIX_GPX,"wpt");
+    gpx.attribute("","lat",Double.toString(cache.getCoords().getLatitude()));
+    gpx.attribute("","lon",Double.toString(cache.getCoords().getLongitude()));
+    final Date hiddenDate=cache.getHiddenDate();
+    if (hiddenDate != null) {
+      XmlUtils.simpleText(gpx,PREFIX_GPX,"time",dateFormatZ.format(hiddenDate));
+    }
+    XmlUtils.multipleTexts(gpx,PREFIX_GPX,"name",cache.getGeocode(),"desc",cache.getName(),"url",cache.getUrl(),"urlname",cache.getName(),"sym",cache.isFound() ? "Geocache Found" : "Geocache","type","Geocache|" + cache.getType().pattern);
+    gpx.startTag(PREFIX_GROUNDSPEAK,"cache");
+    gpx.attribute("","id",cache.getCacheId());
+    gpx.attribute("","available",!cache.isDisabled() ? "True" : "False");
+    gpx.attribute("","archives",cache.isArchived() ? "True" : "False");
+    XmlUtils.multipleTexts(gpx,PREFIX_GROUNDSPEAK,"name",cache.getName(),"placed_by",cache.getOwnerDisplayName(),"owner",cache.getOwnerUserId(),"type",cache.getType().pattern,"container",cache.getSize().id,"difficulty",Float.toString(cache.getDifficulty()),"terrain",Float.toString(cache.getTerrain()),"country",cache.getLocation(),"state","","encoded_hints",cache.getHint());
+    writeAttributes(cache);
+    gpx.startTag(PREFIX_GROUNDSPEAK,"short_description");
+    gpx.attribute("","html",TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
+    gpx.text(cache.getShortDescription());
+    gpx.endTag(PREFIX_GROUNDSPEAK,"short_description");
+    gpx.startTag(PREFIX_GROUNDSPEAK,"long_description");
+    gpx.attribute("","html",TextUtils.containsHtml(cache.getDescription()) ? "True" : "False");
+    gpx.text(cache.getDescription());
+    gpx.endTag(PREFIX_GROUNDSPEAK,"long_description");
+    writeLogs(cache);
+    gpx.endTag(PREFIX_GROUNDSPEAK,"cache");
+    gpx.endTag(PREFIX_GPX,"wpt");
+    writeWaypoints(cache);
+    countExported++;
+    if (progressListener != null) {
+      progressListener.publishProgress(countExported);
+    }
+  }
+}

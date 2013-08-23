@@ -1,0 +1,10 @@
+{
+  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+    boolean a=remove(R.string.pref_username);
+    boolean b=remove(R.string.pref_password);
+    return a && b;
+  }
+  boolean a=putString(R.string.pref_username,username);
+  boolean b=putString(R.string.pref_password,password);
+  return a && b;
+}

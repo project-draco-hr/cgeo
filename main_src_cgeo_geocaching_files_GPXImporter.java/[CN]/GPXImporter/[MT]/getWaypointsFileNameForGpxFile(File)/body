@@ -3,13 +3,13 @@
     return null;
   }
   final String gpxFileName=gpxfile.getName();
-  File dir=gpxfile.getParentFile();
-  String[] filenameList=dir.list();
-  for (  String filename : filenameList) {
+  final File dir=gpxfile.getParentFile();
+  final String[] filenameList=dir.list();
+  for (  final String filename : filenameList) {
     if (!StringUtils.containsIgnoreCase(filename,WAYPOINTS_FILE_SUFFIX)) {
       continue;
     }
-    String expectedGpxFileName=StringUtils.substringBeforeLast(filename,WAYPOINTS_FILE_SUFFIX) + StringUtils.substringAfterLast(filename,WAYPOINTS_FILE_SUFFIX);
+    final String expectedGpxFileName=StringUtils.substringBeforeLast(filename,WAYPOINTS_FILE_SUFFIX) + StringUtils.substringAfterLast(filename,WAYPOINTS_FILE_SUFFIX);
     if (gpxFileName.equals(expectedGpxFileName)) {
       return filename;
     }

@@ -2,12 +2,12 @@
   final boolean excludeMine=Settings.isExcludeMyCaches();
   final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
   try {
-    Settings.setExcludeMine(false);
-    Settings.setExcludeDisabledCaches(false);
+    TestSettings.setExcludeMine(false);
+    TestSettings.setExcludeDisabledCaches(false);
     runnable.run();
   }
   finally {
-    Settings.setExcludeMine(excludeMine);
-    Settings.setExcludeDisabledCaches(excludeDisabled);
+    TestSettings.setExcludeMine(excludeMine);
+    TestSettings.setExcludeDisabledCaches(excludeDisabled);
   }
 }
