@@ -1,9 +1,0 @@
-{
-  if (request == REQUEST_TTS_DATA_CHECK && result == Engine.CHECK_VOICE_DATA_PASS) {
-    SpeechService.startService(this,dstCoords);
-  }
- else {
-    Log.i("TTS failed to start. Request: " + request + " result: "+ result);
-    startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
-  }
-}
