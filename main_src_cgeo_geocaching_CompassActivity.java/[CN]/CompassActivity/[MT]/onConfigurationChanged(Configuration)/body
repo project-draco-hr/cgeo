@@ -5,5 +5,13 @@
   setTitle();
   setDestCoords();
   setCacheInfo();
-  geoDirHandler.updateAll();
+  final cgeoapplication app=cgeoapplication.getInstance();
+  final IGeoData geo=app.currentGeo();
+  if (geo != null) {
+    geoDirHandler.update(geo);
+  }
+  final Float dir=app.currentDirection();
+  if (dir != null) {
+    geoDirHandler.update(dir);
+  }
 }
