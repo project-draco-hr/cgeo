@@ -1,0 +1,5 @@
+{
+  final UncertainProperty<String> prop1=new UncertainProperty<String>("prop1",10);
+  final UncertainProperty<String> prop2=new UncertainProperty<String>("prop2",20);
+  assertEquals(prop2,UncertainProperty.getMergedProperty(prop1,prop2));
+}
