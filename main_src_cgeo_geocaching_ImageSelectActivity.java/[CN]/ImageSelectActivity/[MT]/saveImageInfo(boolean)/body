@@ -1,14 +1,20 @@
 {
   if (saveInfo) {
-    String filename=writeScaledImage(imageUri.getPath());
-    imageUri=Uri.parse(filename);
-    Intent intent=new Intent();
-    syncEditTexts();
-    intent.putExtra(EXTRAS_CAPTION,imageCaption);
-    intent.putExtra(EXTRAS_DESCRIPTION,imageDescription);
-    intent.putExtra(EXTRAS_URI_AS_STRING,imageUri.toString());
-    intent.putExtra(EXTRAS_SCALE,scaleChoiceIndex);
-    setResult(RESULT_OK,intent);
+    final String filename=writeScaledImage(imageUri.getPath());
+    if (filename != null) {
+      imageUri=Uri.parse(filename);
+      final Intent intent=new Intent();
+      syncEditTexts();
+      intent.putExtra(EXTRAS_CAPTION,imageCaption);
+      intent.putExtra(EXTRAS_DESCRIPTION,imageDescription);
+      intent.putExtra(EXTRAS_URI_AS_STRING,imageUri.toString());
+      intent.putExtra(EXTRAS_SCALE,scaleChoiceIndex);
+      setResult(RESULT_OK,intent);
+    }
+ else {
+      showToast(res.getString(R.string.err_select_logimage_failed));
+      setResult(RESULT_CANCELED);
+    }
   }
  else {
     setResult(RESULT_CANCELED);

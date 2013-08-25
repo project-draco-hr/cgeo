@@ -18,6 +18,9 @@
  else {
     image=BitmapFactory.decodeFile(filePath);
   }
+  if (image == null) {
+    return null;
+  }
   final BitmapDrawable scaledImage=ImageUtils.scaleBitmapTo(image,maxXY,maxXY);
   final String uploadFilename=getOutputImageFile().getPath();
   ImageUtils.storeBitmap(scaledImage.getBitmap(),Bitmap.CompressFormat.JPEG,75,uploadFilename);
