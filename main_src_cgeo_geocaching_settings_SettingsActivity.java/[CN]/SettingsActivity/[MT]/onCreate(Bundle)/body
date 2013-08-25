@@ -1,5 +1,5 @@
 {
-  setTheme(Settings.isLightSkin() ? R.style.settings_light : R.style.settings);
+  setTheme(Settings.isLightSkin() && Build.VERSION.SDK_INT > 10 ? R.style.settings_light : R.style.settings);
   super.onCreate(savedInstanceState);
   SettingsActivity.addPreferencesFromResource(this,R.xml.preferences);
   initPreferences();
