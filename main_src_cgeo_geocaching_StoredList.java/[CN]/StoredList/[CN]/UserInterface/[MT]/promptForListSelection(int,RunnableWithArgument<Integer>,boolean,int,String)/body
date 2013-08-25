@@ -1,8 +1,5 @@
 {
   final List<StoredList> lists=getSortedLists();
-  if (lists == null) {
-    return;
-  }
   if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
     StoredList exceptList=cgData.getList(exceptListId);
     if (exceptList != null) {
