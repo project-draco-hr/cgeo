@@ -1,3 +1,5 @@
 {
-  return mapActivity.superOnCreateOptionsMenu(menu);
+  final boolean result=mapActivity.superOnCreateOptionsMenu(menu);
+  mapActivity.getActivity().getMenuInflater().inflate(R.menu.map_activity,menu);
+  return result;
 }
