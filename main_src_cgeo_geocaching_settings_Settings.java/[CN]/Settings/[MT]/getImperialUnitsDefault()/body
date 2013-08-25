@@ -1,13 +1,4 @@
 {
   final String countryCode=Locale.getDefault().getCountry();
-  if ("US".equals(countryCode)) {
-    return true;
-  }
-  if ("LR".equals(countryCode)) {
-    return true;
-  }
-  if ("MM".equals(countryCode)) {
-    return true;
-  }
-  return false;
+  return "US".equals(countryCode) || "LR".equals(countryCode) || "MM".equals(countryCode);
 }
