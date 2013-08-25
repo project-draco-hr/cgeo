@@ -1,0 +1,5 @@
+{
+  final StringWriter writer=new StringWriter();
+  new GpxSerializer().writeGPX(Collections.singletonList(geocode),writer,null);
+  return writer.toString();
+}

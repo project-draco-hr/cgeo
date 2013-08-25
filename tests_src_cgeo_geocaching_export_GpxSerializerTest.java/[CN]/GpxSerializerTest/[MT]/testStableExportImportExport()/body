@@ -1,0 +1,15 @@
+{
+  final String geocode="GC1BKP3";
+  final int cacheResource=R.raw.gc1bkp3_gpx101;
+  final Geocache cache=loadCacheFromResource(cacheResource);
+  assertNotNull(cache);
+  final String gpxFirst=getGPXFromCache(geocode);
+  assertTrue(gpxFirst.length() > 0);
+  final GPX10Parser parser=new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
+  final InputStream stream=new ByteArrayInputStream(gpxFirst.getBytes(CharEncoding.UTF_8));
+  Collection<Geocache> caches=parser.parse(stream,null);
+  assertNotNull(caches);
+  assertEquals(1,caches.size());
+  final String gpxSecond=getGPXFromCache(geocode);
+  assertEquals(replaceLogIds(gpxFirst),replaceLogIds(gpxSecond));
+}
