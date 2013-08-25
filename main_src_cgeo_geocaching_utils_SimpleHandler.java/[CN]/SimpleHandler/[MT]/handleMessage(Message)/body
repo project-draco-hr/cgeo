@@ -1,7 +1,10 @@
 {
-  AbstractActivity activity=activityRef.get();
+  final AbstractActivity activity=activityRef.get();
   if (activity != null && msg.getData() != null && msg.getData().getString(MESSAGE_TEXT) != null) {
     activity.showToast(msg.getData().getString(MESSAGE_TEXT));
   }
-  dismissProgress();
+  final Progress progressDialog=progressDialogRef.get();
+  if (progressDialog != null) {
+    progressDialog.dismiss();
+  }
 }
