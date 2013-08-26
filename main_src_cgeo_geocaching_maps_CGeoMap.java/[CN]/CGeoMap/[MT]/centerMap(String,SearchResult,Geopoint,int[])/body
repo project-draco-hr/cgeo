@@ -5,7 +5,7 @@
       mapController.setCenter(mapItemFactory.getGeoPointBase(new Geopoint(mapState[0] / 1.0e6,mapState[1] / 1.0e6)));
       mapController.setZoom(mapState[2]);
     }
- catch (    Exception e) {
+ catch (    RuntimeException e) {
     }
     centered=true;
     alreadyCentered=true;
@@ -27,7 +27,7 @@
         mapController.zoomToSpan((int)(viewport.getLatitudeSpan() * 1e6),(int)(viewport.getLongitudeSpan() * 1e6));
       }
     }
- catch (    Exception e) {
+ catch (    RuntimeException e) {
     }
     centered=true;
     alreadyCentered=true;

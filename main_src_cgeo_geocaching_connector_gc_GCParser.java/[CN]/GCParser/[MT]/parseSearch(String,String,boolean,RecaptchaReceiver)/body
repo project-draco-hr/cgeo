@@ -61,7 +61,7 @@
         }
       }
     }
- catch (    final Exception e) {
+ catch (    final RuntimeException e) {
       Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data");
     }
     if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
@@ -191,7 +191,7 @@
       }
       LocParser.parseLoc(searchResult,coordinates);
     }
- catch (    final Exception e) {
+ catch (    final RuntimeException e) {
       Log.e("GCParser.parseSearch.CIDs",e);
     }
   }

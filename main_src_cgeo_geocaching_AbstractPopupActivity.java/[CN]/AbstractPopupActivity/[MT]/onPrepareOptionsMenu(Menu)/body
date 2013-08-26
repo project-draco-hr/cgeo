@@ -8,7 +8,7 @@
     menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
     LoggingUI.onPrepareOptionsMenu(menu,cache);
   }
- catch (  final Exception e) {
+ catch (  final RuntimeException e) {
   }
   return true;
 }

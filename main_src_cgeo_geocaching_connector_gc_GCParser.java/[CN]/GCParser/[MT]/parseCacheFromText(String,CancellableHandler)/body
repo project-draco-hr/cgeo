@@ -139,7 +139,7 @@
       cache.setAttributes(attributes);
     }
   }
- catch (  final Exception e) {
+ catch (  final RuntimeException e) {
     Log.w("GCParser.parseCache: Failed to parse cache attributes");
   }
   try {
@@ -161,7 +161,7 @@
       cache.addSpoiler(new Image(url,title,description));
     }
   }
- catch (  final Exception e) {
+ catch (  final RuntimeException e) {
     Log.w("GCParser.parseCache: Failed to parse cache spoilers");
   }
   try {
@@ -188,7 +188,7 @@
       }
     }
   }
- catch (  final Exception e) {
+ catch (  final RuntimeException e) {
     Log.w("GCParser.parseCache: Failed to parse cache inventory (2)");
   }
   try {
@@ -204,7 +204,7 @@
       }
     }
   }
- catch (  final Exception e) {
+ catch (  final NumberFormatException e) {
     Log.w("GCParser.parseCache: Failed to parse cache log count");
   }
   cache.setWaypoints(Collections.<Waypoint>emptyList(),false);

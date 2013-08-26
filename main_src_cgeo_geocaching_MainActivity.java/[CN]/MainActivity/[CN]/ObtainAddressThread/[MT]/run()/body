@@ -8,7 +8,7 @@
     final Geopoint coords=app.currentGeo().getCoords();
     addresses=geocoder.getFromLocation(coords.getLatitude(),coords.getLongitude(),1);
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     Log.i("Failed to obtain address");
   }
   obtainAddressHandler.sendEmptyMessage(0);

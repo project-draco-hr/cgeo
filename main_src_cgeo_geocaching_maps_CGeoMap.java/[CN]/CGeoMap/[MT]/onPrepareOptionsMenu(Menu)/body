@@ -55,7 +55,7 @@ default :
 menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
 }
 }
- catch (Exception e) {
+ catch (RuntimeException e) {
 Log.e("CGeoMap.onPrepareOptionsMenu",e);
 }
 return true;

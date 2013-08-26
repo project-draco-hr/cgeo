@@ -11,7 +11,13 @@
       }
     }
   }
- catch (  Exception e) {
+ catch (  NoSuchMethodException e) {
+    Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.",e);
+  }
+catch (  IllegalAccessException e) {
+    Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.",e);
+  }
+catch (  InvocationTargetException e) {
     Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.",e);
   }
 }

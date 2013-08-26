@@ -13,7 +13,7 @@
           }
         }
       }
- catch (      final Exception e) {
+ catch (      final NumberFormatException e) {
         Log.w("Failed to parse waypoint's latitude and/or longitude.");
       }
     }
@@ -183,7 +183,7 @@
             cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
           }
         }
- catch (        final Exception e) {
+ catch (        final RuntimeException e) {
           Log.w("Failed to parse cache attributes.");
         }
       }
@@ -313,7 +313,7 @@
             trackable.setGeocode(attrs.getValue("ref"));
           }
         }
- catch (        final Exception e) {
+ catch (        final RuntimeException e) {
         }
       }
     }
@@ -345,7 +345,7 @@
             log.id=Integer.parseInt(attrs.getValue("id"));
           }
         }
- catch (        final Exception e) {
+ catch (        final NumberFormatException e) {
         }
       }
     }

@@ -97,7 +97,7 @@
     }
     progress.show(this,title,res.getString(R.string.cache_dialog_loading_details),true,loadCacheHandler.cancelMessage());
   }
- catch (  final Exception e) {
+ catch (  final RuntimeException e) {
   }
   final ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
   defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){

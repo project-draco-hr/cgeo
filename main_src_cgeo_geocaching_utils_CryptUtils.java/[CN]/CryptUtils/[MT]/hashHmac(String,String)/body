@@ -6,7 +6,7 @@
     mac.init(secretKeySpec);
     macBytes=mac.doFinal(text.getBytes());
   }
- catch (  Exception e) {
+ catch (  GeneralSecurityException e) {
     Log.e("CryptUtils.hashHmac",e);
   }
   return macBytes;

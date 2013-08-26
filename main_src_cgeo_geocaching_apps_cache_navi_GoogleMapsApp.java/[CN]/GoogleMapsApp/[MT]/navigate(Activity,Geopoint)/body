@@ -3,7 +3,7 @@
     activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("geo:" + point.getLatitude() + ","+ point.getLongitude())));
     return;
   }
- catch (  Exception e) {
+ catch (  RuntimeException e) {
   }
   Log.i("GoogleMapsApp.navigate: No maps application available.");
   ActivityMixin.showToast(activity,getString(R.string.err_application_no));

@@ -21,7 +21,7 @@
       trackable.setOwner(matcherOwner.group(2).trim());
     }
   }
- catch (  final Exception e) {
+ catch (  final RuntimeException e) {
     Log.w("GCParser.parseTrackable: Failed to parse trackable owner name");
   }
   trackable.setOrigin(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ORIGIN,true,trackable.getOrigin()));
@@ -45,7 +45,7 @@
       trackable.setSpottedType(Trackable.SPOTTED_OWNER);
     }
   }
- catch (  final Exception e) {
+ catch (  final RuntimeException e) {
     Log.w("GCParser.parseTrackable: Failed to parse trackable last known place");
   }
   final String releaseString=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null);
@@ -87,7 +87,7 @@
       }
     }
   }
- catch (  final Exception e) {
+ catch (  final RuntimeException e) {
     Log.w("GCParser.parseTrackable: Failed to parse trackable details & image");
   }
   if (StringUtils.isEmpty(trackable.getDetails()) && page.contains(GCConstants.ERROR_TB_NOT_ACTIVATED)) {
