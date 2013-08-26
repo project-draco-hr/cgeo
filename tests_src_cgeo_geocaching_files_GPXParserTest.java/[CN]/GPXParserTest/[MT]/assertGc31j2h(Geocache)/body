@@ -25,5 +25,8 @@
   assertEquals(parseTime("2011-09-11T07:00:00Z"),log.date);
   assertEquals(-1,log.found);
   assertEquals("Sehr sch??ne Runde und wir haben wieder etwas Neues ??ber Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel",log.log);
+  assertFalse(log.isOwn());
+  assertEquals(log.log,log.getDisplayText());
+  assertTrue(log.daysSinceLog() > 700);
   assertEquals(0,cache.getAttributes().size());
 }
