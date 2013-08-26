@@ -1,6 +1,6 @@
 {
-  if (StringUtils.isNotBlank(guid) && ratingsCache.containsKey(guid)) {
-    return ratingsCache.get(guid);
+  if (StringUtils.isNotBlank(guid) && RATINGS_CACHE.containsKey(guid)) {
+    return RATINGS_CACHE.get(guid);
   }
   final Map<String,GCVoteRating> ratings=getRating(singletonOrNull(guid),singletonOrNull(geocode));
   return MapUtils.isNotEmpty(ratings) ? ratings.values().iterator().next() : null;

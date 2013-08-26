@@ -24,7 +24,7 @@
     if (page == null) {
       return null;
     }
-    final MatcherWrapper matcherVoteElement=new MatcherWrapper(patternVoteElement,page);
+    final MatcherWrapper matcherVoteElement=new MatcherWrapper(PATTERN_VOTE_ELEMENT,page);
     while (matcherVoteElement.find()) {
       String voteData=matcherVoteElement.group(1);
       if (voteData == null) {
@@ -32,7 +32,7 @@
       }
       String id=null;
       String guid=null;
-      final MatcherWrapper matcherGuid=new MatcherWrapper(patternGuid,voteData);
+      final MatcherWrapper matcherGuid=new MatcherWrapper(PATTERN_GUID,voteData);
       if (matcherGuid.find()) {
         if (matcherGuid.groupCount() > 0) {
           guid=matcherGuid.group(1);
@@ -42,7 +42,7 @@
         }
       }
       if (!requestByGuids) {
-        final MatcherWrapper matcherWp=new MatcherWrapper(patternWaypoint,voteData);
+        final MatcherWrapper matcherWp=new MatcherWrapper(PATTERN_WAYPOINT,voteData);
         if (matcherWp.find()) {
           if (matcherWp.groupCount() > 0) {
             id=matcherWp.group(1);
@@ -53,7 +53,7 @@
         continue;
       }
       boolean loggedIn=false;
-      final MatcherWrapper matcherLoggedIn=new MatcherWrapper(patternLogIn,page);
+      final MatcherWrapper matcherLoggedIn=new MatcherWrapper(PATTERN_LOG_IN,page);
       if (matcherLoggedIn.find()) {
         if (matcherLoggedIn.groupCount() > 0) {
           if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
@@ -63,7 +63,7 @@
       }
       float rating=0;
       try {
-        final MatcherWrapper matcherRating=new MatcherWrapper(patternRating,voteData);
+        final MatcherWrapper matcherRating=new MatcherWrapper(PATTERN_RATING,voteData);
         if (matcherRating.find()) {
           rating=Float.parseFloat(matcherRating.group(1));
         }
@@ -76,7 +76,7 @@
       }
       int votes=-1;
       try {
-        final MatcherWrapper matcherVotes=new MatcherWrapper(patternVotes,voteData);
+        final MatcherWrapper matcherVotes=new MatcherWrapper(PATTERN_VOTES,voteData);
         if (matcherVotes.find()) {
           votes=Integer.parseInt(matcherVotes.group(1));
         }
@@ -90,7 +90,7 @@
       float myVote=0;
       if (loggedIn) {
         try {
-          final MatcherWrapper matcherVote=new MatcherWrapper(patternVote,voteData);
+          final MatcherWrapper matcherVote=new MatcherWrapper(PATTERN_VOTE,voteData);
           if (matcherVote.find()) {
             myVote=Float.parseFloat(matcherVote.group(1));
           }
@@ -102,7 +102,7 @@
       if (StringUtils.isNotBlank(id)) {
         GCVoteRating gcvoteRating=new GCVoteRating(rating,votes,myVote);
         ratings.put(id,gcvoteRating);
-        ratingsCache.put(guid,gcvoteRating);
+        RATINGS_CACHE.put(guid,gcvoteRating);
       }
     }
   }
