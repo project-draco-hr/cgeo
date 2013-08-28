@@ -2,8 +2,8 @@
   final CacheListApp app=(CacheListApp)getAppFromMenuItem(item,LazyHolder.apps);
   if (app != null) {
     try {
-      boolean result=app.invoke(caches,(Activity)activity,search);
-      activity.invalidateOptionsMenuCompatible();
+      boolean result=app.invoke(caches,activity,search);
+      ActivityMixin.invalidateOptionsMenu(activity);
       return result;
     }
  catch (    Exception e) {

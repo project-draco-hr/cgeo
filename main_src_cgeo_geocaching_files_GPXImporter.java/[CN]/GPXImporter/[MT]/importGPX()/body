@@ -1,6 +1,6 @@
 {
-  final ContentResolver contentResolver=((Activity)fromActivity).getContentResolver();
-  final Intent intent=((Activity)fromActivity).getIntent();
+  final ContentResolver contentResolver=fromActivity.getContentResolver();
+  final Intent intent=fromActivity.getIntent();
   final Uri uri=intent.getData();
   String mimeType=intent.getType();
   if (mimeType == null) {
