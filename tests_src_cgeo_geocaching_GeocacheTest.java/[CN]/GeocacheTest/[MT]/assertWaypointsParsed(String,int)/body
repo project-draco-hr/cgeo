@@ -1,6 +1,7 @@
 {
   Geocache cache=new Geocache();
-  cache.setGeocode("Test" + System.nanoTime());
+  final String geocode="Test" + System.nanoTime();
+  cache.setGeocode(geocode);
   cache.setWaypoints(new ArrayList<Waypoint>(),false);
   for (int i=0; i < 2; i++) {
     cache.setPersonalNote(note);
@@ -13,5 +14,5 @@
     assertEquals(cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " 1",waypoint.getName());
     cache.store(StoredList.TEMPORARY_LIST_ID,null);
   }
-  cache.drop(new Handler());
+  removeCacheCompletely(geocode);
 }
