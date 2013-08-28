@@ -1,12 +1,14 @@
 {
-  String hashed="";
   try {
     final MessageDigest digest=MessageDigest.getInstance("MD5");
-    digest.update(text.getBytes(),0,text.length());
-    hashed=new BigInteger(1,digest.digest()).toString(16);
+    digest.update(text.getBytes(CharEncoding.UTF_8),0,text.length());
+    return new BigInteger(1,digest.digest()).toString(16);
   }
- catch (  Exception e) {
+ catch (  NoSuchAlgorithmException e) {
     Log.e("CryptUtils.md5",e);
   }
-  return hashed;
+catch (  UnsupportedEncodingException e) {
+    Log.e("CryptUtils.md5",e);
+  }
+  return StringUtils.EMPTY;
 }
