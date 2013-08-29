@@ -1,0 +1,7 @@
+{
+  if (!oldMapStoreFlagsRecorded) {
+    throw new IllegalStateException("Previous MapStoreFlags havn't been recorded! Setting not allowed");
+  }
+  TestSettings.setStoreOfflineMaps(storeCacheMap);
+  TestSettings.setStoreOfflineWpMaps(storeWpMaps);
+}

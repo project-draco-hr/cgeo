@@ -1,0 +1,8 @@
+{
+  if (oldMapStoreFlagsRecorded) {
+    throw new IllegalStateException("MapStoreFlags already recorded!");
+  }
+  oldStoreMapsFlag=Settings.isStoreOfflineMaps();
+  oldStoreWpMapsFlag=Settings.isStoreOfflineWpMaps();
+  oldMapStoreFlagsRecorded=true;
+}
