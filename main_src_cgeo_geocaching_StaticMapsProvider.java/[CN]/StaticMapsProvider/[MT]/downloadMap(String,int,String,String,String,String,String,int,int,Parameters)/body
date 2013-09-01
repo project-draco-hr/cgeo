@@ -1,5 +1,5 @@
 {
-  final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(zoom),"size",String.valueOf(width) + 'x' + String.valueOf(height),"maptype",mapType,"markers","icon:" + markerUrl + '|'+ shadow+ latlonMap,"sensor","false");
+  final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(zoom),"size",String.valueOf(limitSize(width)) + 'x' + String.valueOf(limitSize(height)),"maptype",mapType,"markers","icon:" + markerUrl + '|'+ shadow+ latlonMap,"sensor","false");
   if (waypoints != null) {
     params.addAll(waypoints);
   }

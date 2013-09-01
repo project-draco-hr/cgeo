@@ -1,10 +1,7 @@
 {
   final String latlonMap=cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-  final Display display=((WindowManager)cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-  DisplayMetrics metrics=new DisplayMetrics();
-  display.getMetrics(metrics);
-  final int width=metrics.widthPixels;
-  final int height=(int)(110 * metrics.density);
+  final Point displaySize=Compatibility.getDisplaySize();
+  final int minSize=Math.min(displaySize.x,displaySize.y);
   final String markerUrl=MARKERS_URL + "my_location_mdpi.png";
-  downloadMap(cache.getGeocode(),15,ROADMAP,markerUrl,PREFIX_PREVIEW,"shadow:false|",latlonMap,width,height,null);
+  downloadMap(cache.getGeocode(),15,ROADMAP,markerUrl,PREFIX_PREVIEW,"shadow:false|",latlonMap,minSize,minSize,null);
 }
