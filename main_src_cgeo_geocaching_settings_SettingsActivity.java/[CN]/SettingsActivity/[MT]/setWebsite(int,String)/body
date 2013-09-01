@@ -1,0 +1,10 @@
+{
+  Preference preference=getPreference(preferenceKey);
+  preference.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    final Preference preference){
+      startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://" + host)));
+      return true;
+    }
+  }
+);
+}

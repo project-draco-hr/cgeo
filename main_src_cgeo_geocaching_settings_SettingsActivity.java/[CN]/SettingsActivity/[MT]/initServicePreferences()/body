@@ -2,4 +2,9 @@
   getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+  setWebsite(R.string.pref_fakekey_gc_website,GCConnector.getInstance().getHost());
+  setWebsite(R.string.pref_fakekey_ocde_website,"opencaching.de");
+  setWebsite(R.string.pref_fakekey_ocpl_website,"opencaching.pl");
+  setWebsite(R.string.pref_fakekey_gcvote_website,"gcvote.com");
+  setWebsite(R.string.pref_fakekey_sendtocgeo_website,"send2.cgeo.org");
 }
