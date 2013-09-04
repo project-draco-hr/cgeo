@@ -1,0 +1,6 @@
+{
+  if (Settings.isGCConnectorActive()) {
+    return GCParser.searchByPocket(guid,Settings.getCacheType(),Settings.isShowCaptcha(),this);
+  }
+  return new SearchResult();
+}
