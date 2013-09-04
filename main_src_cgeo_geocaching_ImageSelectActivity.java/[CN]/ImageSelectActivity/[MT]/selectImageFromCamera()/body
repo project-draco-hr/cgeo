@@ -1,6 +1,6 @@
 {
   Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-  imageUri=getOutputImageFileUri();
+  imageUri=ImageUtils.getOutputImageFileUri();
   if (imageUri == null) {
     showFailure();
     return;
