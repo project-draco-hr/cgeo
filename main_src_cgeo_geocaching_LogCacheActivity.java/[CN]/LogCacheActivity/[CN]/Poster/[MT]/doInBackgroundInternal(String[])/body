@@ -16,6 +16,8 @@
         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
           Twitter.postTweetCache(geocode);
         }
+      }
+      if (rating > 0) {
         GCVote.setRating(cache,rating);
       }
       if (StringUtils.isNotBlank(imageUri.getPath())) {
