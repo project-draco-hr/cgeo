@@ -2,5 +2,6 @@
   if (!isSuccess(response)) {
     return null;
   }
+  assert(response != null);
   return getResponseDataNoError(response,replaceWhitespace);
 }
