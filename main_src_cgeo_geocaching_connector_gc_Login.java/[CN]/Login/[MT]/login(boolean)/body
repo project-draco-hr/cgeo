@@ -31,7 +31,7 @@
   Login.putViewstates(params,viewstates);
   loginResponse=Network.postRequest("https://www.geocaching.com/login/default.aspx",params);
   loginData=Network.getResponseData(loginResponse);
-  if (StringUtils.isBlank(loginData)) {
+  if (loginData == null || StringUtils.isBlank(loginData)) {
     Log.e("Login.login: Failed to retrieve login page (2nd)");
     return StatusCode.COMMUNICATION_ERROR;
   }
