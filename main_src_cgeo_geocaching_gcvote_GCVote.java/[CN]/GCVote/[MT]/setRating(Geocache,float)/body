@@ -11,5 +11,5 @@
   }
   final Parameters params=new Parameters("userName",login.left,"password",login.right,"cacheId",cache.getGuid(),"voteUser",String.format("%.1f",vote).replace(',','.'),"version","cgeo");
   final String result=Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php",params));
-  return result.trim().equalsIgnoreCase("ok");
+  return result != null && result.trim().equalsIgnoreCase("ok");
 }
