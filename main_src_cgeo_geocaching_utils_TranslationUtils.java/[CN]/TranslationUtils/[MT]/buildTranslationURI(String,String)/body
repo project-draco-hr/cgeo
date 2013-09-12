@@ -1,7 +1,7 @@
 {
   String content=Network.encode(text);
   if (ProcessUtils.isLaunchable(TRANSLATION_APP)) {
-    content=content.replace("+","%20");
+    content=StringUtils.replace(content,"+","%20");
   }
   return translationWebsite + translationForceClassicMode + translationAutoSelect+ translationFieldSeparator+ toLang+ translationFieldSeparator+ content;
 }
