@@ -1,12 +1,5 @@
 {
-  if (!Settings.isGCvoteLogin()) {
-    return false;
-  }
-  if (!cache.supportsGCVote()) {
-    return false;
-  }
-  String guid=cache.getGuid();
-  if (StringUtils.isBlank(guid)) {
+  if (!isVotingPossible(cache)) {
     return false;
   }
   if (!isValidRating(vote)) {
@@ -16,7 +9,7 @@
   if (login == null) {
     return false;
   }
-  final Parameters params=new Parameters("userName",login.left,"password",login.right,"cacheId",guid,"voteUser",String.format("%.1f",vote).replace(',','.'),"version","cgeo");
+  final Parameters params=new Parameters("userName",login.left,"password",login.right,"cacheId",cache.getGuid(),"voteUser",String.format("%.1f",vote).replace(',','.'),"version","cgeo");
   final String result=Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php",params));
   return result.trim().equalsIgnoreCase("ok");
 }

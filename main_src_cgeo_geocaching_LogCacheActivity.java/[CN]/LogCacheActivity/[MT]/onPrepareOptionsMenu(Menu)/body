@@ -1,6 +1,5 @@
 {
   super.onPrepareOptionsMenu(menu);
-  final boolean voteAvailable=Settings.isGCvoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
-  menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
+  menu.findItem(SUBMENU_VOTE).setVisible(GCVote.isVotingPossible(cache));
   return true;
 }
