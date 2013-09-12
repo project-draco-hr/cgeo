@@ -61,7 +61,7 @@
           }
         }
       }
-      float rating=0;
+      float rating=NO_RATING;
       try {
         final MatcherWrapper matcherRating=new MatcherWrapper(PATTERN_RATING,voteData);
         if (matcherRating.find()) {
@@ -71,7 +71,7 @@
  catch (      NumberFormatException e) {
         Log.w("GCVote.getRating: Failed to parse rating");
       }
-      if (rating <= 0) {
+      if (!isValidRating(rating)) {
         continue;
       }
       int votes=-1;
@@ -87,7 +87,7 @@
       if (votes < 0) {
         continue;
       }
-      float myVote=0;
+      float myVote=NO_RATING;
       if (loggedIn) {
         try {
           final MatcherWrapper matcherVote=new MatcherWrapper(PATTERN_VOTE,voteData);

@@ -17,7 +17,7 @@
           Twitter.postTweetCache(geocode);
         }
       }
-      if (rating > 0) {
+      if (GCVote.isValidRating(rating)) {
         GCVote.setRating(cache,rating);
       }
       if (StringUtils.isNotBlank(imageUri.getPath())) {

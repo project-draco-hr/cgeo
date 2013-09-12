@@ -4,9 +4,9 @@
   }
   final int id=item.getItemId();
   if (id >= 10 && id <= 19) {
-    rating=(id - 9) / 2.0;
-    if (rating < 1) {
-      rating=0;
+    rating=(id - 9) / 2.0f;
+    if (!GCVote.isValidRating(rating)) {
+      rating=GCVote.NO_RATING;
     }
     updatePostButtonText();
     return true;

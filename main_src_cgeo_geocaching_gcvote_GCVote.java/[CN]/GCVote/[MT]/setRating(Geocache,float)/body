@@ -9,7 +9,7 @@
   if (StringUtils.isBlank(guid)) {
     return false;
   }
-  if (vote <= 0.0 || vote > 5.0) {
+  if (!isValidRating(vote)) {
     return false;
   }
   final ImmutablePair<String,String> login=Settings.getGCvoteLogin();

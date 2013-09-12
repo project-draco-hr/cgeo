@@ -25,7 +25,7 @@
   logPasswordBox=(LinearLayout)findViewById(R.id.log_password_box);
   setDefaultValues();
   if (savedInstanceState != null) {
-    rating=savedInstanceState.getDouble(SAVED_STATE_RATING);
+    rating=savedInstanceState.getFloat(SAVED_STATE_RATING);
     typeSelected=LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
     date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
     imageCaption=savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);

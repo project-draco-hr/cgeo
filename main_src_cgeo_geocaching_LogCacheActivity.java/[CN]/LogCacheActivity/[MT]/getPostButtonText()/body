@@ -5,8 +5,8 @@
   if (!Settings.isGCvoteLogin() || !cache.supportsGCVote()) {
     return res.getString(R.string.log_post);
   }
-  if (rating == 0) {
-    return res.getString(R.string.log_post_no_rate);
+  if (GCVote.isValidRating(rating)) {
+    return res.getString(R.string.log_post_rate) + " " + GCVote.getRatingText(rating)+ "*";
   }
-  return res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating)+ "*";
+  return res.getString(R.string.log_post_no_rate);
 }
