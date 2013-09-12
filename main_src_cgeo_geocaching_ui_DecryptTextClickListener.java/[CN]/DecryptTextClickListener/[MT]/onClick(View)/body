@@ -1,20 +1,16 @@
 {
-  if (view == null) {
-    return;
-  }
   try {
-    final TextView logView=(TextView)view;
-    if (logView.getSelectionStart() != -1 || logView.getSelectionEnd() != -1) {
+    if (targetView.getSelectionStart() != -1 || targetView.getSelectionEnd() != -1) {
       return;
     }
-    CharSequence text=logView.getText();
+    CharSequence text=targetView.getText();
     if (text instanceof Spannable) {
       Spannable span=(Spannable)text;
-      logView.setText(CryptUtils.rot13(span));
+      targetView.setText(CryptUtils.rot13(span));
     }
  else {
       String string=(String)text;
-      logView.setText(CryptUtils.rot13(string));
+      targetView.setText(CryptUtils.rot13(string));
     }
   }
  catch (  RuntimeException e) {
