@@ -1,21 +1,8 @@
 {
-  if (StringUtils.isEmpty(pinEntry.getText().toString())) {
+  final String verifier=pinEntry.getText().toString();
+  if (StringUtils.isEmpty(verifier)) {
     helpDialog(getAuthDialogPinTitle(),getAuthDialogPinMessage());
     return;
   }
-  if (changeTokensDialog == null) {
-    changeTokensDialog=new ProgressDialog(OAuthAuthorizationActivity.this);
-    changeTokensDialog.setCancelable(false);
-    changeTokensDialog.setMessage(getAuthDialogWait());
-  }
-  changeTokensDialog.show();
-  pinEntryButton.setEnabled(false);
-  pinEntryButton.setOnTouchListener(null);
-  pinEntryButton.setOnClickListener(null);
-  (new Thread(){
-    @Override public void run(){
-      changeToken();
-    }
-  }
-).start();
+  exchangeTokens(verifier);
 }

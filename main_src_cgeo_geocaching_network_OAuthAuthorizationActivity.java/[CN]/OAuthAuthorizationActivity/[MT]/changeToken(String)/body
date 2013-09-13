@@ -1,7 +1,7 @@
 {
-  int status=0;
+  int status=NOT_AUTHENTICATED;
   try {
-    final Parameters params=new Parameters("oauth_verifier",pinEntry.getText().toString());
+    final Parameters params=new Parameters("oauth_verifier",verifier);
     final String method="POST";
     OAuth.signOAuth(host,pathAccess,method,https,params,OAtoken,OAtokenSecret,consumerKey,consumerSecret);
     final String line=StringUtils.defaultString(Network.getResponseData(Network.postRequest(getUrlPrefix() + host + pathAccess,params)));
@@ -22,7 +22,7 @@
     }
  else {
       setTokens(OAtoken,OAtokenSecret,true);
-      status=1;
+      status=AUTHENTICATED;
     }
   }
  catch (  Exception e) {
