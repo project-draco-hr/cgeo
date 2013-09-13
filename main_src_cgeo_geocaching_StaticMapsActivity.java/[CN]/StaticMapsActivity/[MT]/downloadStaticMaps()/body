@@ -1,5 +1,5 @@
 {
-  final Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   if (waypointId == null) {
     showToast(res.getString(R.string.info_storing_static_maps));
     StaticMapsProvider.storeCacheStaticMap(cache,true);

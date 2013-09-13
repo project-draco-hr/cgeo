@@ -1,0 +1,11 @@
+{
+  final Viewport viewport=new Viewport(new Geopoint(-1,-2),new Geopoint(3,4));
+  DataStore.loadWaypoints(viewport,false,false,CacheType.ALL);
+  DataStore.loadWaypoints(viewport,false,true,CacheType.ALL);
+  DataStore.loadWaypoints(viewport,true,false,CacheType.ALL);
+  DataStore.loadWaypoints(viewport,true,true,CacheType.ALL);
+  DataStore.loadWaypoints(viewport,false,false,CacheType.TRADITIONAL);
+  DataStore.loadWaypoints(viewport,false,true,CacheType.TRADITIONAL);
+  DataStore.loadWaypoints(viewport,true,false,CacheType.TRADITIONAL);
+  DataStore.loadWaypoints(viewport,true,true,CacheType.TRADITIONAL);
+}

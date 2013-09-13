@@ -5,7 +5,7 @@
   }
  catch (  Geopoint.ParseException e) {
   }
-  Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+  Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
   CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(EditWaypointActivity.this,cache,gp,app.currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate(){

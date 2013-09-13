@@ -1,6 +1,6 @@
 {
   final Collator collator=Collator.getInstance();
-  final List<StoredList> lists=cgData.getLists();
+  final List<StoredList> lists=DataStore.getLists();
   Collections.sort(lists,new Comparator<StoredList>(){
     @Override public int compare(    StoredList lhs,    StoredList rhs){
       if (lhs.id == STANDARD_LIST_ID) {

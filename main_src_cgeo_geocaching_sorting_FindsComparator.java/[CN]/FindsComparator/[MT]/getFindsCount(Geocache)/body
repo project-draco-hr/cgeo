@@ -1,6 +1,6 @@
 {
   if (cache.getLogCounts().isEmpty()) {
-    cache.setLogCounts(cgData.loadLogCounts(cache.getGeocode()));
+    cache.setLogCounts(DataStore.loadLogCounts(cache.getGeocode()));
   }
   Integer logged=cache.getLogCounts().get(LogType.FOUND_IT);
   if (logged != null) {

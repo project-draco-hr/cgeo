@@ -2,11 +2,11 @@
   if (logType == LogType.UNKNOWN) {
     return;
   }
-  final boolean status=cgData.saveLogOffline(geocode,date.getTime(),logType,log);
+  final boolean status=DataStore.saveLogOffline(geocode,date.getTime(),logType,log);
   final Resources res=fromActivity.getResources();
   if (status) {
     ActivityMixin.showToast(fromActivity,res.getString(R.string.info_log_saved));
-    cgData.saveVisitDate(geocode);
+    DataStore.saveVisitDate(geocode);
     logOffline=Boolean.TRUE;
     notifyChange();
   }

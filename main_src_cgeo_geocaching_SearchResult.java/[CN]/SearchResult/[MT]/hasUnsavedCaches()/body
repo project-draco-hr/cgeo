@@ -1,6 +1,6 @@
 {
   for (  final String geocode : getGeocodes()) {
-    if (!cgData.isOffline(geocode,null)) {
+    if (!DataStore.isOffline(geocode,null)) {
       return true;
     }
   }

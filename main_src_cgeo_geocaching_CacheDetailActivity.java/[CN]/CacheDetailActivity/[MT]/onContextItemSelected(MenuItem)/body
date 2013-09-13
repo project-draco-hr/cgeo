@@ -39,14 +39,14 @@ break;
 case CONTEXT_MENU_WAYPOINT_DUPLICATE:
 final Waypoint waypointDuplicate=cache.getWaypoint(index);
 if (cache.duplicateWaypoint(waypointDuplicate)) {
-cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 notifyDataSetChanged();
 }
 break;
 case CONTEXT_MENU_WAYPOINT_DELETE:
 final Waypoint waypointDelete=cache.getWaypoint(index);
 if (cache.deleteWaypoint(waypointDelete)) {
-cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 notifyDataSetChanged();
 }
 break;

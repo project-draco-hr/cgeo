@@ -3,7 +3,7 @@
     return false;
   }
   String geocode=waypoint.getGeocode();
-  if (StringUtils.isNotEmpty(geocode) && cgData.isOffline(geocode,null)) {
+  if (StringUtils.isNotEmpty(geocode) && DataStore.isOffline(geocode,null)) {
     return StaticMapsProvider.hasStaticMapForWaypoint(geocode,waypoint);
   }
   return false;

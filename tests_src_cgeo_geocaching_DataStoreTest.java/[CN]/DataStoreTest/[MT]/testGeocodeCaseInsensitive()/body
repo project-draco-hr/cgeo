@@ -1,0 +1,21 @@
+{
+  final String GEOCODE_CACHE="TEST";
+  final String upperCase=GEOCODE_CACHE;
+  final String lowerCase=StringUtils.lowerCase(upperCase);
+  assertFalse(upperCase.equals(lowerCase));
+  final Geocache cache=new Geocache();
+  cache.setGeocode(upperCase);
+  cache.setDetailed(true);
+  try {
+    final Geocache oldCache=DataStore.loadCache(upperCase,LoadFlags.LOAD_ALL_DB_ONLY);
+    assertNull("Database contained old cache!",oldCache);
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    final Geocache cacheWithOriginalCode=DataStore.loadCache(upperCase,LoadFlags.LOAD_ALL_DB_ONLY);
+    assertNotNull("Cache was not saved correctly!",cacheWithOriginalCode);
+    final Geocache cacheLowerCase=DataStore.loadCache(lowerCase,LoadFlags.LOAD_ALL_DB_ONLY);
+    assertNotNull("Could not find cache by case insensitive geocode",cacheLowerCase);
+  }
+  finally {
+    DataStore.removeCache(upperCase,LoadFlags.REMOVE_ALL);
+  }
+}

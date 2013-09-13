@@ -1,0 +1,12 @@
+{
+  if (database != null) {
+    return;
+  }
+  try {
+    final DbHelper dbHelper=new DbHelper(new DBContext(cgeoapplication.getInstance()));
+    database=dbHelper.getWritableDatabase();
+  }
+ catch (  Exception e) {
+    Log.e("DataStore.init: unable to open database for R/W",e);
+  }
+}

@@ -1,7 +1,7 @@
 {
   try {
-    cgData.markDropped(Collections.singletonList(this));
-    cgData.removeCache(getGeocode(),EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    DataStore.markDropped(Collections.singletonList(this));
+    DataStore.removeCache(getGeocode(),EnumSet.of(RemoveFlag.REMOVE_CACHE));
     handler.sendMessage(Message.obtain());
   }
  catch (  final Exception e) {

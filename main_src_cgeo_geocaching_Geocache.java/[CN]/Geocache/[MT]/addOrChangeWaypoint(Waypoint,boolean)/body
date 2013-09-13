@@ -14,5 +14,5 @@
     waypoints.add(waypoint);
     resetFinalDefined();
   }
-  return saveToDatabase && cgData.saveWaypoint(waypoint.getId(),geocode,waypoint);
+  return saveToDatabase && DataStore.saveWaypoint(waypoint.getId(),geocode,waypoint);
 }

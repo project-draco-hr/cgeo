@@ -3,10 +3,10 @@
   final String page=GCParser.requestHtmlPage(geocode,guid,"y",String.valueOf(GCConstants.NUMBER_OF_LOGS));
   if (StringUtils.isEmpty(page)) {
     final SearchResult search=new SearchResult();
-    if (cgData.isThere(geocode,guid,true,false)) {
+    if (DataStore.isThere(geocode,guid,true,false)) {
       if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
         Log.i("Loading old cache from cache.");
-        search.addGeocode(cgData.getGeocodeForGuid(guid));
+        search.addGeocode(DataStore.getGeocodeForGuid(guid));
       }
  else {
         search.addGeocode(geocode);

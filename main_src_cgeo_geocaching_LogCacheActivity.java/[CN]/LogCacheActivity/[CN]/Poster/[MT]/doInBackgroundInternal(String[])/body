@@ -10,7 +10,7 @@
         cache.setFound(true);
         cache.setVisitedDate(new Date().getTime());
       }
-      cgData.saveChangedCache(cache);
+      DataStore.saveChangedCache(cache);
       cache.clearOfflineLog();
       if (typeSelected == LogType.FOUND_IT) {
         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
@@ -25,7 +25,7 @@
         final String uploadedImageUrl=imageResult.getImageUri();
         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
           logNow.addLogImage(new Image(uploadedImageUrl,imageCaption,imageDescription));
-          cgData.saveChangedCache(cache);
+          DataStore.saveChangedCache(cache);
         }
         return imageResult.getPostResult();
       }

@@ -8,8 +8,8 @@
   if (waypoint.isUserDefined()) {
     final int index=getWaypointIndex(waypoint);
     waypoints.remove(index);
-    cgData.deleteWaypoint(waypoint.getId());
-    cgData.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    DataStore.deleteWaypoint(waypoint.getId());
+    DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
     if (waypoint.isFinalWithCoords()) {
       resetFinalDefined();
     }

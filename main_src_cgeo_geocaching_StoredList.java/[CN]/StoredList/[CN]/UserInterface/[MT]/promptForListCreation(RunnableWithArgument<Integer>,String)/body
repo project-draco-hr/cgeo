@@ -1,8 +1,8 @@
 {
   handleListNameInput(newListName,R.string.list_dialog_create_title,R.string.list_dialog_create,new RunnableWithArgument<String>(){
     @Override public void run(    final String listName){
-      final int newId=cgData.createList(listName);
-      if (newId >= cgData.customListIdOffset) {
+      final int newId=DataStore.createList(listName);
+      if (newId >= DataStore.customListIdOffset) {
         ActivityMixin.showToast(activity,res.getString(R.string.list_dialog_create_ok));
         if (runAfterwards != null) {
           runAfterwards.run(newId);

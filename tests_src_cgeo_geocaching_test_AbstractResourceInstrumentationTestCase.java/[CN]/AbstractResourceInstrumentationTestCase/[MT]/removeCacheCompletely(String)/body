@@ -1,5 +1,5 @@
 {
   final EnumSet<RemoveFlag> flags=EnumSet.copyOf(LoadFlags.REMOVE_ALL);
   flags.add(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING);
-  cgData.removeCache(geocode,flags);
+  DataStore.removeCache(geocode,flags);
 }

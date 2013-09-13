@@ -57,7 +57,7 @@
       return;
     }
     cache.setListId(listId);
-    cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }

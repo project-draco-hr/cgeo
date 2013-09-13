@@ -1,0 +1,12 @@
+{
+  init();
+  try {
+    long timestamp=System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
+    final Cursor cursor=database.query(dbTableCaches,new String[]{"geocode"},"(detailed = 1 and detailedupdate > ?) or reason > 0",new String[]{Long.toString(timestamp)},null,null,"detailedupdate desc","100");
+    return getFirstColumn(cursor);
+  }
+ catch (  final Exception e) {
+    Log.e("DataStore.allDetailedThere",e);
+    return new String[0];
+  }
+}

@@ -98,14 +98,14 @@ waypoint.setCoords(coordsToSave);
 waypoint.setNote(noteText);
 waypoint.setVisited(visited);
 waypoint.setId(id);
-Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
 if (cache == null) {
 finishHandler.sendEmptyMessage(SAVE_ERROR);
 return null;
 }
 Waypoint oldWaypoint=cache.getWaypointById(id);
 if (cache.addOrChangeWaypoint(waypoint,true)) {
-cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode,waypoint)) {
 StaticMapsProvider.removeWpStaticMaps(oldWaypoint,geocode);
 if (Settings.isStoreOfflineWpMaps()) {
@@ -120,7 +120,7 @@ cache.addOrChangeWaypoint(origWaypoint,false);
 cache.setUserModifiedCoords(true);
 }
 cache.setCoords(waypoint.getCoords());
-cgData.saveChangedCache(cache);
+DataStore.saveChangedCache(cache);
 }
 if (modifyBoth.isChecked() && waypoint.getCoords() != null) {
 finishHandler.sendEmptyMessage(UPLOAD_START);

@@ -1,7 +1,7 @@
 {
   final List<StoredList> lists=getSortedLists();
   if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
-    StoredList exceptList=cgData.getList(exceptListId);
+    StoredList exceptList=DataStore.getList(exceptListId);
     if (exceptList != null) {
       lists.remove(exceptList);
     }

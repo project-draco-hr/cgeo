@@ -6,7 +6,7 @@
         cache.parseWaypointsFromNote();
         TextView personalNoteView=(TextView)activity.findViewById(R.id.personalnote);
         setPersonalNote(personalNoteView,note);
-        cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+        DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
         activity.notifyDataSetChanged();
       }
     }

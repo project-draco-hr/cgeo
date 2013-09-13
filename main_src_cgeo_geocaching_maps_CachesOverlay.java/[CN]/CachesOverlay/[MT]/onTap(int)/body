@@ -19,7 +19,7 @@
     }
     final IWaypoint coordinate=item.getCoord();
     if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
-      Geocache cache=cgData.loadCache(coordinate.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+      Geocache cache=DataStore.loadCache(coordinate.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
       RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
       if (!requestDetailsThread.requestRequired()) {
         progress.dismiss();

@@ -43,7 +43,7 @@
     }
     cache.setLogPasswordRequired(response.getBoolean(CACHE_REQ_PASSWORD));
     cache.setDetailedUpdatedNow();
-    cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
   }
  catch (  final JSONException e) {
     Log.e("OkapiClient.parseCache",e);

@@ -5,8 +5,8 @@
   tempDir=new File(globalTempDir,"cgeogpxesTest");
   tempDir.mkdir();
   assertTrue("Could not create directory " + tempDir.getPath(),tempDir.exists());
-  cgData.getAllHistoryCachesCount();
-  listId=cgData.createList("cgeogpxesTest");
+  DataStore.getAllHistoryCachesCount();
+  listId=DataStore.createList("cgeogpxesTest");
   importCacheStaticMaps=Settings.isStoreOfflineMaps();
   TestSettings.setStoreOfflineMaps(true);
   importWpStaticMaps=Settings.isStoreOfflineWpMaps();

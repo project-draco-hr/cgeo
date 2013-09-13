@@ -7,7 +7,7 @@
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_READ_WPT_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
   final SearchResult search=(SearchResult)importStepHandler.messages.get(4).obj;
   assertEquals(Collections.singletonList(geocode),new ArrayList<String>(search.getGeocodes()));
-  final Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
   assertEquals(1,cache.getWaypoints().size());
 }

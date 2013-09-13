@@ -1,0 +1,17 @@
+{
+  if (StringUtils.isBlank(geocode)) {
+    return false;
+  }
+  init();
+  try {
+    final SQLiteStatement logCount=PreparedStatements.getLogCountOfGeocode();
+synchronized (logCount) {
+      logCount.bindString(1,geocode);
+      return logCount.simpleQueryForLong() > 0;
+    }
+  }
+ catch (  Exception e) {
+    Log.e("DataStore.hasLogOffline",e);
+  }
+  return false;
+}

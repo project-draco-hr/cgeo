@@ -13,7 +13,7 @@
     }
 ;
     @Override public void run(){
-      atomic.set(cgData.moveDatabase());
+      atomic.set(DataStore.moveDatabase());
       handler.sendMessage(handler.obtainMessage());
     }
   }

@@ -16,7 +16,7 @@
     }
 ;
     @Override public void run(){
-      restoreSuccessful.set(cgData.restoreDatabaseInternal());
+      restoreSuccessful.set(DataStore.restoreDatabaseInternal());
       handler.sendMessage(handler.obtainMessage());
     }
   }

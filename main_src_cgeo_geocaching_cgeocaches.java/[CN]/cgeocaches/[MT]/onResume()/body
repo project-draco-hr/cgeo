@@ -8,7 +8,7 @@
     loadCachesHandler.sendEmptyMessage(0);
   }
   if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-    final SearchResult newSearch=cgData.getBatchOfStoredCaches(coords,Settings.getCacheType(),listId);
+    final SearchResult newSearch=DataStore.getBatchOfStoredCaches(coords,Settings.getCacheType(),listId);
     if (newSearch.getTotal() != search.getTotal()) {
       refreshCurrentList();
     }

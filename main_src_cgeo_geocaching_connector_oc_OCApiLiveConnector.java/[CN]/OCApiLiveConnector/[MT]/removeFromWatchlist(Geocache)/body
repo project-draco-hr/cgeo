@@ -1,7 +1,7 @@
 {
   final boolean removed=OkapiClient.setWatchState(cache,false,this);
   if (removed) {
-    cgData.saveChangedCache(cache);
+    DataStore.saveChangedCache(cache);
   }
   return removed;
 }

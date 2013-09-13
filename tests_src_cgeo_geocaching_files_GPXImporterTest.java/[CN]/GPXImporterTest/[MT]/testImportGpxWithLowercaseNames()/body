@@ -4,7 +4,7 @@
   final GPXImporter.ImportGpxFileThread importThread=new GPXImporter.ImportGpxFileThread(tc2012,listId,importStepHandler,progressHandler);
   runImportThread(importThread);
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
-  final Geocache cache=cgData.loadCache("AID1",LoadFlags.LOAD_CACHE_OR_DB);
+  final Geocache cache=DataStore.loadCache("AID1",LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
   assertEquals("First Aid Station #1",cache.getName());
 }

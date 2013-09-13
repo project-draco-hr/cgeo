@@ -3,8 +3,8 @@
   removeCacheCompletely(geocode);
   final List<Geocache> caches=readGPX10(R.raw.lazy);
   assertEquals(1,caches.size());
-  cgData.removeAllFromCache();
-  final Geocache minimalCache=cgData.loadCache(geocode,EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+  DataStore.removeAllFromCache();
+  final Geocache minimalCache=DataStore.loadCache(geocode,EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
   assertFalse(minimalCache.getAttributes().isEmpty());
   assertFalse(minimalCache.getLogs().isEmpty());
   removeCacheCompletely(geocode);

@@ -1,13 +1,13 @@
 {
   final Context context=activity;
-  if (cgData.getAllCachesCount() == 0) {
+  if (DataStore.getAllCachesCount() == 0) {
     ActivityMixin.helpDialog(activity,context.getString(R.string.init_backup),context.getString(R.string.init_backup_unnecessary));
     return false;
   }
   final ProgressDialog dialog=ProgressDialog.show(context,context.getString(R.string.init_backup),context.getString(R.string.init_backup_running),true,false);
   new Thread(){
     @Override public void run(){
-      final String backupFileName=cgData.backupDatabaseInternal();
+      final String backupFileName=DataStore.backupDatabaseInternal();
       activity.runOnUiThread(new Runnable(){
         @Override public void run(){
           dialog.dismiss();

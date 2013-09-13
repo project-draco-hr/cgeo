@@ -1,6 +1,6 @@
 {
   if (StringUtils.isNotEmpty(geocode)) {
-    trackable=cgData.loadTrackable(geocode);
+    trackable=DataStore.loadTrackable(geocode);
     if (trackable == null || trackable.isLoggable()) {
       for (      final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
         if (trackableConnector.canHandleTrackable(geocode)) {

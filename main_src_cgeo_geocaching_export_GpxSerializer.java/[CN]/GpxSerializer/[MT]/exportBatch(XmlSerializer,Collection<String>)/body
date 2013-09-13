@@ -1,5 +1,5 @@
 {
-  final Set<Geocache> caches=cgData.loadCaches(geocodesOfBatch,LoadFlags.LOAD_ALL_DB_ONLY);
+  final Set<Geocache> caches=DataStore.loadCaches(geocodesOfBatch,LoadFlags.LOAD_ALL_DB_ONLY);
   for (  final Geocache cache : caches) {
     gpx.startTag(PREFIX_GPX,"wpt");
     gpx.attribute("","lat",Double.toString(cache.getCoords().getLatitude()));

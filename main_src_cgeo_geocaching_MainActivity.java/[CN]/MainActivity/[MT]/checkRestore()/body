@@ -1,18 +1,18 @@
 {
-  if (!cgData.isNewlyCreatedDatebase() || null == DatabaseBackupUtils.getRestoreFile()) {
+  if (!DataStore.isNewlyCreatedDatebase() || null == DatabaseBackupUtils.getRestoreFile()) {
     return;
   }
   new AlertDialog.Builder(this).setTitle(res.getString(R.string.init_backup_restore)).setMessage(res.getString(R.string.init_restore_confirm)).setCancelable(false).setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int id){
       dialog.dismiss();
-      cgData.resetNewlyCreatedDatabase();
+      DataStore.resetNewlyCreatedDatabase();
       DatabaseBackupUtils.restoreDatabase(MainActivity.this);
     }
   }
 ).setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int id){
       dialog.cancel();
-      cgData.resetNewlyCreatedDatabase();
+      DataStore.resetNewlyCreatedDatabase();
     }
   }
 ).create().show();

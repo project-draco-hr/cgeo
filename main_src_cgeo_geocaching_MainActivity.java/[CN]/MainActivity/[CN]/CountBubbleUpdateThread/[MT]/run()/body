@@ -3,7 +3,7 @@
     return;
   }
   int checks=0;
-  while (!cgData.isInitialized()) {
+  while (!DataStore.isInitialized()) {
     try {
       wait(500);
       checks++;
@@ -14,6 +14,6 @@
       return;
     }
   }
-  countBubbleCnt=cgData.getAllCachesCount();
+  countBubbleCnt=DataStore.getAllCachesCount();
   countBubbleHandler.sendEmptyMessage(0);
 }

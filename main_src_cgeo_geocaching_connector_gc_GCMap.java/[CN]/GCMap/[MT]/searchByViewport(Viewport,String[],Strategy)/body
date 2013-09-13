@@ -55,7 +55,7 @@
       }
     }
     if (tiles.iterator().next().getZoomLevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
-      searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult,tiles,GCConnector.getInstance(),Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
+      searchResult.addFilteredGeocodes(DataStore.getCachedMissingFromSearch(searchResult,tiles,GCConnector.getInstance(),Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
     }
   }
   if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isPremiumMember()) {
@@ -64,7 +64,7 @@
       SearchResult search=GCParser.searchByCoords(center,Settings.getCacheType(),false,null);
       if (search != null && !search.isEmpty()) {
         final Set<String> geocodes=search.getGeocodes();
-        lastSearchViewport=cgData.getBounds(geocodes);
+        lastSearchViewport=DataStore.getBounds(geocodes);
         searchResult.addGeocodes(geocodes);
       }
     }

@@ -9,7 +9,7 @@
       trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
     }
   }
-  trackable=cgData.loadTrackable(geocode);
+  trackable=DataStore.loadTrackable(geocode);
   if (StringUtils.isNotBlank(trackable.getName())) {
     setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
   }

@@ -2,7 +2,7 @@
   final Destination loc=new Destination(coords);
   if (!getHistoryOfSearchedLocations().contains(loc)) {
     getHistoryOfSearchedLocations().add(0,loc);
-    cgData.saveSearchedDestination(loc);
+    DataStore.saveSearchedDestination(loc);
     historyListView.removeFooterView(getEmptyHistoryFooter());
     runOnUiThread(new Runnable(){
       @Override public void run(){

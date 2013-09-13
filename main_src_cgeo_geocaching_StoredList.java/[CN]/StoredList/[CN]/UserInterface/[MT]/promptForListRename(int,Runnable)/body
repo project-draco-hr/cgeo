@@ -1,8 +1,8 @@
 {
-  final StoredList list=cgData.getList(listId);
+  final StoredList list=DataStore.getList(listId);
   handleListNameInput(list.title,R.string.list_dialog_rename_title,R.string.list_dialog_rename,new RunnableWithArgument<String>(){
     @Override public void run(    final String listName){
-      cgData.renameList(listId,listName);
+      DataStore.renameList(listId,listName);
       if (runAfterRename != null) {
         runAfterRename.run();
       }

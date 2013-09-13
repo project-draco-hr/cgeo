@@ -1,0 +1,45 @@
+{
+  if (cacheType == null) {
+    throw new IllegalArgumentException("cacheType must not be null");
+  }
+  if (list <= 0) {
+    throw new IllegalArgumentException("list must be > 0");
+  }
+  init();
+  try {
+    StringBuilder sql=new StringBuilder("select count(_id) from " + dbTableCaches + " where detailed = 1");
+    String typeKey;
+    int reasonIndex;
+    if (cacheType != CacheType.ALL) {
+      sql.append(" and type = ?");
+      typeKey=cacheType.id;
+      reasonIndex=2;
+    }
+ else {
+      typeKey="all_types";
+      reasonIndex=1;
+    }
+    String listKey;
+    if (list == StoredList.ALL_LIST_ID) {
+      sql.append(" and reason > 0");
+      listKey="all_list";
+    }
+ else {
+      sql.append(" and reason = ?");
+      listKey="list";
+    }
+    String key="CountCaches_" + typeKey + "_"+ listKey;
+    SQLiteStatement compiledStmnt=PreparedStatements.getStatement(key,sql.toString());
+    if (cacheType != CacheType.ALL) {
+      compiledStmnt.bindString(1,cacheType.id);
+    }
+    if (list != StoredList.ALL_LIST_ID) {
+      compiledStmnt.bindLong(reasonIndex,list);
+    }
+    return (int)compiledStmnt.simpleQueryForLong();
+  }
+ catch (  Exception e) {
+    Log.e("DataStore.loadAllStoredCachesCount",e);
+  }
+  return 0;
+}

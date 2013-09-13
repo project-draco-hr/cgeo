@@ -1,9 +1,9 @@
 {
-  final SearchResult search=cgData.getBatchOfStoredCaches(null,CacheType.ALL,listId);
+  final SearchResult search=DataStore.getBatchOfStoredCaches(null,CacheType.ALL,listId);
   final List<Geocache> cachesInList=new ArrayList<Geocache>();
   cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
-  cgData.markDropped(cachesInList);
-  cgData.removeList(listId);
+  DataStore.markDropped(cachesInList);
+  DataStore.removeList(listId);
   deleteDirectory(tempDir);
   TestSettings.setStoreOfflineMaps(importCacheStaticMaps);
   TestSettings.setStoreOfflineWpMaps(importWpStaticMaps);

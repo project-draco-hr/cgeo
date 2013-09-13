@@ -73,7 +73,7 @@
     if (matcherOk.find()) {
       Log.i("Log successfully posted to cache #" + cacheid);
       if (geocode != null) {
-        cgData.saveVisitDate(geocode);
+        DataStore.saveVisitDate(geocode);
       }
       Login.getLoginStatus(page);
       if (Login.getActualCachesFound() >= 0) {

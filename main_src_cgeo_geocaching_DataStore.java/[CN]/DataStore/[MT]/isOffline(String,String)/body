@@ -1,0 +1,28 @@
+{
+  if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+    return false;
+  }
+  init();
+  try {
+    final SQLiteStatement listId;
+    final String value;
+    if (StringUtils.isNotBlank(geocode)) {
+      listId=PreparedStatements.getListIdOfGeocode();
+      value=geocode;
+    }
+ else {
+      listId=PreparedStatements.getListIdOfGuid();
+      value=guid;
+    }
+synchronized (listId) {
+      listId.bindString(1,value);
+      return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST_ID;
+    }
+  }
+ catch (  SQLiteDoneException e) {
+  }
+catch (  Exception e) {
+    Log.e("DataStore.isOffline",e);
+  }
+  return false;
+}

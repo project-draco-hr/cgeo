@@ -1,7 +1,7 @@
 {
   final boolean deleted=GCParser.deleteModifiedCoordinates(cache);
   if (deleted) {
-    cgData.saveChangedCache(cache);
+    DataStore.saveChangedCache(cache);
   }
   return deleted;
 }

@@ -12,7 +12,7 @@ case OFFLINE:
     title=res.getString(R.string.stored_caches_button);
   }
  else {
-    final StoredList list=cgData.getList(listId);
+    final StoredList list=DataStore.getList(listId);
     listId=list.id;
     title=list.title;
   }

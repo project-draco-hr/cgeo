@@ -1,0 +1,24 @@
+{
+  final Geocache partial=new Geocache();
+  partial.setDescription(StringUtils.EMPTY);
+  partial.setShortDescription(StringUtils.EMPTY);
+  partial.setHint(StringUtils.EMPTY);
+  partial.setLocation(StringUtils.EMPTY);
+  init();
+  try {
+    final Cursor cursor=database.query(dbTableCaches,new String[]{"description","shortdesc","hint","location"},"geocode = ?",new String[]{geocode},null,null,null,"1");
+    if (cursor.moveToFirst()) {
+      partial.setDescription(StringUtils.defaultString(cursor.getString(0)));
+      partial.setShortDescription(StringUtils.defaultString(cursor.getString(1)));
+      partial.setHint(StringUtils.defaultString(cursor.getString(2)));
+      partial.setLocation(StringUtils.defaultString(cursor.getString(3)));
+    }
+    cursor.close();
+  }
+ catch (  SQLiteDoneException e) {
+  }
+catch (  Exception e) {
+    Log.e("DataStore.getCacheDescription",e);
+  }
+  return partial;
+}

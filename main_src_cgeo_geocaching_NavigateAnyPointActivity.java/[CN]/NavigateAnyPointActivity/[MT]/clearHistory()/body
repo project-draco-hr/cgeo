@@ -1,7 +1,7 @@
 {
   if (!getHistoryOfSearchedLocations().isEmpty()) {
     getHistoryOfSearchedLocations().clear();
-    cgData.clearSearchedDestinations();
+    DataStore.clearSearchedDestinations();
     if (historyListView.getFooterViewsCount() == 0) {
       historyListView.addFooterView(getEmptyHistoryFooter());
     }

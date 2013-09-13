@@ -5,7 +5,7 @@
   assertEquals("Unexpected geo code",geoCode,cache.getGeocode());
   assertEquals("Oshkosh Municipal Tank",cache.getName());
   assertTrue(cache.isDetailed());
-  cache=cgData.loadCache(geoCode,LoadFlags.LOAD_ALL_DB_ONLY);
+  cache=DataStore.loadCache(geoCode,LoadFlags.LOAD_ALL_DB_ONLY);
   assertNotNull(cache);
   assertEquals(geoCode,cache.getGeocode());
   assertEquals("Oshkosh Municipal Tank",cache.getName());

@@ -15,7 +15,7 @@
     SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
     assertNotNull(search);
     assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-    final Geocache cacheFromViewport=cgData.loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+    final Geocache cacheFromViewport=DataStore.loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
     assertFalse(cache.getCoords().isEqualTo(cacheFromViewport.getCoords(),1e-3));

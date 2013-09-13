@@ -1,7 +1,7 @@
 {
-  final SearchResult search=cgData.getBatchOfStoredCaches(null,CacheType.ALL,temporaryListId);
+  final SearchResult search=DataStore.getBatchOfStoredCaches(null,CacheType.ALL,temporaryListId);
   assertNotNull(search);
-  cgData.removeCaches(search.getGeocodes(),LoadFlags.REMOVE_ALL);
-  cgData.removeList(temporaryListId);
+  DataStore.removeCaches(search.getGeocodes(),LoadFlags.REMOVE_ALL);
+  DataStore.removeList(temporaryListId);
   super.tearDown();
 }

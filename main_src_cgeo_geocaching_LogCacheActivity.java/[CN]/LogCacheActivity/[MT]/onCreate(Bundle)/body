@@ -6,12 +6,12 @@
     geocode=extras.getString(EXTRAS_GEOCODE);
   }
   if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
-    cacheid=cgData.getCacheidForGeocode(geocode);
+    cacheid=DataStore.getCacheidForGeocode(geocode);
   }
   if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
-    geocode=cgData.getGeocodeForGuid(cacheid);
+    geocode=DataStore.getGeocodeForGuid(cacheid);
   }
-  cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   possibleLogTypes=cache.getPossibleLogTypes();
   if (StringUtils.isNotBlank(cache.getName())) {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
@@ -33,7 +33,7 @@
     imageUri=Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
   }
  else {
-    final LogEntry log=cgData.loadLogOffline(geocode);
+    final LogEntry log=DataStore.loadLogOffline(geocode);
     if (log != null) {
       typeSelected=log.type;
       date.setTime(new Date(log.date));

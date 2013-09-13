@@ -3,7 +3,7 @@
   addGeoDirObservers();
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
     for (    String geocode : dirtyCaches) {
-      Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+      Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
       if (cache != null) {
         caches.remove(cache);
         caches.add(cache);

@@ -3,7 +3,7 @@
   res=this.getResources();
   activity=this.getActivity();
   app=(cgeoapplication)activity.getApplication();
-  int countBubbleCnt=cgData.getAllCachesCount();
+  int countBubbleCnt=DataStore.getAllCachesCount();
   caches=new LeastRecentlyUsedSet<Geocache>(MAX_CACHES + countBubbleCnt);
   final MapProvider mapProvider=Settings.getMapProvider();
   mapItemFactory=mapProvider.getMapItemFactory();

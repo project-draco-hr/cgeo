@@ -13,7 +13,7 @@
   assertEquals(GPXImporter.IMPORT_STEP_FINISHED,iMsg.next().what);
   final SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
   assertEquals(Collections.singletonList(geocode),new ArrayList<String>(search.getGeocodes()));
-  final Geocache cache=cgData.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
   assertTrue(cache.getWaypoints().isEmpty());
 }

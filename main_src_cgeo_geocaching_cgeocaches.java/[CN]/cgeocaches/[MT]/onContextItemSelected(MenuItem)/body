@@ -38,7 +38,7 @@ break;
 case MENU_MOVE_TO_LIST:
 new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
 @Override public void run(Integer newListId){
-cgData.moveToList(Collections.singletonList(cache),newListId);
+DataStore.moveToList(Collections.singletonList(cache),newListId);
 adapter.setSelectMode(false);
 refreshCurrentList();
 }

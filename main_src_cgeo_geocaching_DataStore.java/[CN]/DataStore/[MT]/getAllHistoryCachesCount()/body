@@ -1,0 +1,10 @@
+{
+  init();
+  try {
+    return (int)PreparedStatements.getCountHistoryCaches().simpleQueryForLong();
+  }
+ catch (  Exception e) {
+    Log.e("DataStore.getAllHistoricCachesCount",e);
+  }
+  return 0;
+}

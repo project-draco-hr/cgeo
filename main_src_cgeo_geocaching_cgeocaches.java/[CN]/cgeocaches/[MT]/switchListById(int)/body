@@ -2,7 +2,7 @@
   if (id < 0) {
     return;
   }
-  final StoredList list=cgData.getList(id);
+  final StoredList list=DataStore.getList(id);
   if (list == null) {
     return;
   }
@@ -11,7 +11,7 @@
   Settings.saveLastList(listId);
   showProgress(true);
   showFooterLoadingCaches();
-  cgData.moveToList(adapter.getCheckedCaches(),listId);
+  DataStore.moveToList(adapter.getCheckedCaches(),listId);
   currentLoader=(OfflineGeocacheListLoader)getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(),new Bundle(),this);
   currentLoader.reset();
   ((OfflineGeocacheListLoader)currentLoader).setListId(listId);

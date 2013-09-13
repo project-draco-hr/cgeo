@@ -1,0 +1,37 @@
+{
+  init();
+  long dataUpdated=0;
+  long dataDetailedUpdate=0;
+  int dataDetailed=0;
+  try {
+    Cursor cursor;
+    if (StringUtils.isNotBlank(geocode)) {
+      cursor=database.query(dbTableCaches,new String[]{"detailed","detailedupdate","updated"},"geocode = ?",new String[]{geocode},null,null,null,"1");
+    }
+ else     if (StringUtils.isNotBlank(guid)) {
+      cursor=database.query(dbTableCaches,new String[]{"detailed","detailedupdate","updated"},"guid = ?",new String[]{guid},null,null,null,"1");
+    }
+ else {
+      return false;
+    }
+    if (cursor.moveToFirst()) {
+      dataDetailed=cursor.getInt(0);
+      dataDetailedUpdate=cursor.getLong(1);
+      dataUpdated=cursor.getLong(2);
+    }
+    cursor.close();
+  }
+ catch (  final Exception e) {
+    Log.e("DataStore.isThere",e);
+  }
+  if (detailed && dataDetailed == 0) {
+    return false;
+  }
+  if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
+    return false;
+  }
+  if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
+    return false;
+  }
+  return true;
+}

@@ -8,7 +8,7 @@
       return null;
     }
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_cache);
-    cgData.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_render);
   }
   return searchResult;

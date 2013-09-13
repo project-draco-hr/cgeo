@@ -15,7 +15,7 @@
     }
   }
 );
-  addHistoryEntries(geocodeEdit,cgData.getRecentGeocodesForSearch());
+  addHistoryEntries(geocodeEdit,DataStore.getRecentGeocodesForSearch());
   displayByGeocode.setOnClickListener(new FindByGeocodeListener());
   EditUtils.setActionListener((EditText)findViewById(R.id.keyword),new Runnable(){
     @Override public void run(){
@@ -49,7 +49,7 @@
     }
   }
 );
-  addHistoryEntries(trackable,cgData.getTrackableCodes());
+  addHistoryEntries(trackable,DataStore.getTrackableCodes());
   disableSuggestions(trackable);
   displayTrackable.setOnClickListener(new FindTrackableListener());
 }
