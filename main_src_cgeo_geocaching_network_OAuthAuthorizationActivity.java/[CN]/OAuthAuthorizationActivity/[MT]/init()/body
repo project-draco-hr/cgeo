@@ -1,11 +1,6 @@
 {
-  startButton=(Button)findViewById(R.id.start);
-  pinEntry=(EditText)findViewById(R.id.pin);
-  pinEntryButton=(Button)findViewById(R.id.pin_button);
-  TextView auth=(TextView)findViewById(R.id.auth_1);
-  auth.setText(getAboutAuth1());
-  auth=(TextView)findViewById(R.id.auth_2);
-  auth.setText(getAboutAuth2());
+  auth_1.setText(getAboutAuth1());
+  auth_2.setText(getAboutAuth2());
   ImmutablePair<String,String> tempToken=getTempTokens();
   OAtoken=tempToken.left;
   OAtokenSecret=tempToken.right;
