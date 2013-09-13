@@ -1,6 +1,6 @@
 {
   init();
-  final Resources res=cgeoapplication.getInstance().getResources();
+  final Resources res=CgeoApplication.getInstance().getResources();
   final List<StoredList> lists=new ArrayList<StoredList>();
   lists.add(new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong()));
   try {

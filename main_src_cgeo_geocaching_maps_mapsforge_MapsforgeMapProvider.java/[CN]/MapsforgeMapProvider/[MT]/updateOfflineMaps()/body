@@ -1,6 +1,6 @@
 {
   MapProviderFactory.deleteOfflineMapSources();
-  final Resources resources=cgeoapplication.getInstance().getResources();
+  final Resources resources=CgeoApplication.getInstance().getResources();
   final List<String> offlineMaps=getOfflineMaps();
   for (  String mapFile : offlineMaps) {
     final String mapName=StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(),"."));

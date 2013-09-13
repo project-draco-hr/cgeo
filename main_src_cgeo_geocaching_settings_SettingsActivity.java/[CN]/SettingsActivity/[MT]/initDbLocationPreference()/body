@@ -4,7 +4,7 @@
   p.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    final Preference preference){
       boolean oldValue=Settings.isDbOnSDCard();
-      ((cgeoapplication)SettingsActivity.this.getApplication()).moveDatabase(SettingsActivity.this);
+      ((CgeoApplication)SettingsActivity.this.getApplication()).moveDatabase(SettingsActivity.this);
       return oldValue != Settings.isDbOnSDCard();
     }
   }

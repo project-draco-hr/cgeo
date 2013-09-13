@@ -3,7 +3,7 @@
     Log.e("Login.checkLogin: No page given");
     return false;
   }
-  setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_ok));
+  setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
   setActualLoginStatus(TextUtils.matches(page,GCConstants.PATTERN_LOGIN_NAME));
   if (isActualLoginStatus()) {
     setActualUserName(TextUtils.getMatch(page,GCConstants.PATTERN_LOGIN_NAME,true,"???"));
@@ -26,6 +26,6 @@
     setActualUserName(Settings.getUsername());
     return true;
   }
-  setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_failed));
+  setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
   return false;
 }

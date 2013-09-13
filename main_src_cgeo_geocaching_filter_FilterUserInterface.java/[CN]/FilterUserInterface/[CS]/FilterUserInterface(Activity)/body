@@ -1,6 +1,6 @@
 {
   this.activity=activity;
-  this.res=cgeoapplication.getInstance().getResources();
+  this.res=CgeoApplication.getInstance().getResources();
   registry=new ArrayList<FactoryEntry>();
   if (Settings.getCacheType() == CacheType.ALL) {
     register(R.string.caches_filter_type,TypeFilter.Factory.class);

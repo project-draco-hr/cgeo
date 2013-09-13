@@ -11,7 +11,7 @@
   builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       dialog.dismiss();
-      cgeoapplication.getInstance().setLiveMapHintShown();
+      CgeoApplication.getInstance().setLiveMapHintShown();
       if (checkBoxHide.getVisibility() == View.VISIBLE && checkBoxHide.isChecked()) {
         Settings.setHideLiveHint(true);
       }

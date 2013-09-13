@@ -3,7 +3,7 @@
     return;
   }
   try {
-    final DbHelper dbHelper=new DbHelper(new DBContext(cgeoapplication.getInstance()));
+    final DbHelper dbHelper=new DbHelper(new DBContext(CgeoApplication.getInstance()));
     database=dbHelper.getWritableDatabase();
   }
  catch (  Exception e) {

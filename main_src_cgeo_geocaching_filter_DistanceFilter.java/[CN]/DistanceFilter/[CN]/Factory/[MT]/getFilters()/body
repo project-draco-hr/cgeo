@@ -10,7 +10,7 @@
       maxRange=Integer.MAX_VALUE;
     }
     final String range=maxRange == Integer.MAX_VALUE ? "> " + minRange : minRange + " - " + maxRange;
-    final String name=cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.tts_kilometers,maxRange,range);
+    final String name=CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.tts_kilometers,maxRange,range);
     filters.add(new DistanceFilter(name,minRange,maxRange));
   }
   return filters;

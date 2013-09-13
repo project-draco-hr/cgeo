@@ -211,7 +211,7 @@
   try {
     final String originalCoords=TextUtils.getMatch(page,GCConstants.PATTERN_LATLON_ORIG,false,null);
     if (null != originalCoords) {
-      final Waypoint waypoint=new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);
+      final Waypoint waypoint=new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original),WaypointType.ORIGINAL,false);
       waypoint.setCoords(new Geopoint(originalCoords));
       cache.addOrChangeWaypoint(waypoint,false);
       cache.setUserModifiedCoords(true);
@@ -241,7 +241,7 @@
       final String[] wpItems=wpList.split("<tr");
       for (int j=1; j < wpItems.length; j++) {
         String[] wp=wpItems[j].split("<td");
-        final String name=TextUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,cgeoapplication.getInstance().getString(R.string.waypoint),true);
+        final String name=TextUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,CgeoApplication.getInstance().getString(R.string.waypoint),true);
         final String resulttype=TextUtils.getMatch(wp[3],GCConstants.PATTERN_WPTYPE,null);
         final Waypoint waypoint=new Waypoint(name,WaypointType.findById(resulttype),false);
         waypoint.setPrefix(TextUtils.getMatch(wp[4],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getPrefix(),false));

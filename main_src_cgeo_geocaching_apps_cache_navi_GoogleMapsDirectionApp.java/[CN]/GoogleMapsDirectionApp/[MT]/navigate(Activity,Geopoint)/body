@@ -1,6 +1,6 @@
 {
   try {
-    IGeoData geo=cgeoapplication.getInstance().currentGeo();
+    IGeoData geo=CgeoApplication.getInstance().currentGeo();
     final Geopoint coordsNow=geo == null ? null : geo.getCoords();
     if (coordsNow != null) {
       activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?f=d&saddr=" + coordsNow.getLatitude() + ","+ coordsNow.getLongitude()+ "&daddr="+ coords.getLatitude()+ ","+ coords.getLongitude())));

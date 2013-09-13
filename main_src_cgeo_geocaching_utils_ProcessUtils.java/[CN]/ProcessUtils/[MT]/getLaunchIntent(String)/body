@@ -2,7 +2,7 @@
   if (packageName == null) {
     return null;
   }
-  final PackageManager packageManager=cgeoapplication.getInstance().getPackageManager();
+  final PackageManager packageManager=CgeoApplication.getInstance().getPackageManager();
   try {
     return packageManager.getLaunchIntentForPackage(packageName);
   }

@@ -3,6 +3,6 @@
   final Trackable trackable=GCParser.parseTrackable(page,"TB123E");
   assertNotNull(trackable);
   assertEquals("TB123E",trackable.getGeocode());
-  final String expectedDetails=cgeoapplication.getInstance().getString(cgeo.geocaching.R.string.trackable_not_activated);
+  final String expectedDetails=CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.trackable_not_activated);
   assertEquals(expectedDetails,trackable.getDetails());
 }

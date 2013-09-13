@@ -15,7 +15,7 @@
     final StringBuilder description=new StringBuilder(500);
     if (!response.isNull("gc_code")) {
       final String gccode=response.getString("gc_code");
-      description.append(cgeoapplication.getInstance().getResources().getString(R.string.cache_listed_on,GCConnector.getInstance().getName())).append(": <a href=\"http://coord.info/").append(gccode).append("\">").append(gccode).append("</a><br /><br />");
+      description.append(CgeoApplication.getInstance().getResources().getString(R.string.cache_listed_on,GCConnector.getInstance().getName())).append(": <a href=\"http://coord.info/").append(gccode).append("\">").append(gccode).append("</a><br /><br />");
     }
     description.append(response.getString(CACHE_DESCRIPTION));
     cache.setDescription(description.toString());

@@ -5,7 +5,7 @@
     infos.add(waypointType.getL10n());
   }
   if (Waypoint.PREFIX_OWN.equalsIgnoreCase(waypoint.getPrefix())) {
-    infos.add(cgeoapplication.getInstance().getString(R.string.waypoint_custom));
+    infos.add(CgeoApplication.getInstance().getString(R.string.waypoint_custom));
   }
  else {
     if (StringUtils.isNotBlank(waypoint.getPrefix())) {

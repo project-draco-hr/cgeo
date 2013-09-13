@@ -5,7 +5,7 @@
     Log.e("Login.login: No login information stored");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
-  Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
+  Login.setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
   HttpResponse loginResponse=Network.getRequest("https://www.geocaching.com/login/default.aspx");
   String loginData=Network.getResponseData(loginResponse);
   if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData,GCConstants.PATTERN_MAINTENANCE)) {

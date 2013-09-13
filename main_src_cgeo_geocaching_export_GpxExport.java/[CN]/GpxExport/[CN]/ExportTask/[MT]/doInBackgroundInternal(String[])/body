@@ -3,7 +3,7 @@
     return null;
   }
   final List<String> allGeocodes=new ArrayList<String>(Arrays.asList(geocodes));
-  setMessage(cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,allGeocodes.size(),allGeocodes.size()));
+  setMessage(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,allGeocodes.size(),allGeocodes.size()));
   final File exportFile=getExportFile();
   BufferedWriter writer=null;
   try {

@@ -15,7 +15,7 @@
  catch (    final NumberFormatException e) {
     }
   }
-  final String hourLocalized=cgeoapplication.getInstance().getString(R.string.cache_time_full_hours);
+  final String hourLocalized=CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
   if (StringUtils.isNotBlank(hourLocalized)) {
     final Pattern fullHours=Pattern.compile("\\b(\\d{1,2})\\s+" + Pattern.quote(hourLocalized),Pattern.CASE_INSENSITIVE);
     final MatcherWrapper matcherHours=new MatcherWrapper(fullHours,getDescription());

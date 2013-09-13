@@ -1,6 +1,6 @@
 {
   if (waypoint == null || waypoint.getCoords() == null) {
-    ActivityMixin.showToast(activity,cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+    ActivityMixin.showToast(activity,CgeoApplication.getInstance().getString(R.string.err_location_unknown));
     return;
   }
   navigateWaypoint(activity,waypoint,getDefaultNavigationApplication(defaultNavigation));

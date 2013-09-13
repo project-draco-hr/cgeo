@@ -7,7 +7,7 @@
       return lists.get(0);
     }
   }
-  Resources res=cgeoapplication.getInstance().getResources();
+  Resources res=CgeoApplication.getInstance().getResources();
   if (id == StoredList.ALL_LIST_ID) {
     return new StoredList(StoredList.ALL_LIST_ID,res.getString(R.string.list_all_lists),getAllCachesCount());
   }

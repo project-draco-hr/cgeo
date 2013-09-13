@@ -1,6 +1,6 @@
 {
-  final String packageName=cgeoapplication.getInstance().getBaseContext().getPackageName();
-  final Resources res=cgeoapplication.getInstance().getResources();
+  final String packageName=CgeoApplication.getInstance().getBaseContext().getPackageName();
+  final Resources res=CgeoApplication.getInstance().getResources();
   final List<IFilter> filters=new LinkedList<IFilter>();
   for (  final String id : res.getStringArray(R.array.attribute_ids)) {
     filters.add(new AttributeFilter(getName("attribute_" + id,res,packageName),id));

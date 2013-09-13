@@ -91,7 +91,7 @@
     Log.w("GCParser.parseTrackable: Failed to parse trackable details & image");
   }
   if (StringUtils.isEmpty(trackable.getDetails()) && page.contains(GCConstants.ERROR_TB_NOT_ACTIVATED)) {
-    trackable.setDetails(cgeoapplication.getInstance().getString(R.string.trackable_not_activated));
+    trackable.setDetails(CgeoApplication.getInstance().getString(R.string.trackable_not_activated));
   }
   try {
     final MatcherWrapper matcherLogs=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG,page);
@@ -122,7 +122,7 @@
   if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(),possibleTrackingcode)) {
     trackable.setTrackingcode(possibleTrackingcode);
   }
-  if (cgeoapplication.getInstance() != null) {
+  if (CgeoApplication.getInstance() != null) {
     DataStore.saveTrackable(trackable);
   }
   return trackable;

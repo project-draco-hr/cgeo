@@ -1,5 +1,5 @@
 {
-  int speed=(int)cgeoapplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000;
+  int speed=(int)CgeoApplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000;
   Strategy strategy=Settings.getLiveMapStrategy();
   if (strategy == Strategy.AUTO) {
     strategy=speed >= 30 ? Strategy.FAST : Strategy.DETAILED;
