@@ -1,4 +1,4 @@
 {
-  super(authParams.getSite(),"/okapi/services/oauth/request_token","/okapi/services/oauth/authorize","/okapi/services/oauth/access_token",false,CgeoApplication.getInstance().getResources().getString(authParams.getCKResId()),CgeoApplication.getInstance().getResources().getString(authParams.getCSResId()),null);
+  super(authParams.getSite(),"/okapi/services/oauth/request_token","/okapi/services/oauth/authorize","/okapi/services/oauth/access_token",false,CgeoApplication.getInstance().getResources().getString(authParams.getCKResId()),CgeoApplication.getInstance().getResources().getString(authParams.getCSResId()),authParams.getCallbackUri());
   this.authParams=authParams;
 }
