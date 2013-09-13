@@ -1,5 +1,25 @@
 {
   super.onCreate(savedInstanceState,R.layout.authorization_activity);
   setTitle(getAuthTitle());
-  init();
+  auth_1.setText(getAboutAuth1());
+  auth_2.setText(getAboutAuth2());
+  ImmutablePair<String,String> tempToken=getTempTokens();
+  OAtoken=tempToken.left;
+  OAtokenSecret=tempToken.right;
+  startButton.setText(getAuthAuthorize());
+  pinEntryButton.setText(getAuthFinish());
+  startButton.setEnabled(true);
+  startButton.setOnClickListener(new StartListener());
+  if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
+    startButton.setText(getAuthStart());
+  }
+ else {
+    startButton.setText(getAuthAgain());
+    if (isOOB()) {
+      pinEntry.setHint(getAuthPinHint());
+      pinEntry.setVisibility(View.VISIBLE);
+      pinEntryButton.setVisibility(View.VISIBLE);
+      pinEntryButton.setOnClickListener(new ConfirmPINListener());
+    }
+  }
 }
