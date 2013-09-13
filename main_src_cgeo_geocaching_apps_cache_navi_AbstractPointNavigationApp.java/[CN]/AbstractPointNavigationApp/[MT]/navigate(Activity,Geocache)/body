@@ -1,3 +1,9 @@
 {
-  navigate(activity,cache.getCoords());
+  final Geopoint coords=cache.getCoords();
+  if (coords != null) {
+    navigate(activity,coords);
+  }
+ else {
+    ActivityMixin.showToast(activity,activity.getResources().getString(R.string.err_nav_no_coordinates));
+  }
 }
