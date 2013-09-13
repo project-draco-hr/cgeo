@@ -1,0 +1,9 @@
+{
+  if (!isValidCoords(context,coords)) {
+    return;
+  }
+  final Intent cachesIntent=new Intent(context,CacheListActivity.class);
+  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.COORDINATE);
+  cachesIntent.putExtra(Intents.EXTRA_COORDS,coords);
+  context.startActivity(cachesIntent);
+}

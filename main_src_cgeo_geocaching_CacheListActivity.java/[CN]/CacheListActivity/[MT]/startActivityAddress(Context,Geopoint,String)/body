@@ -1,0 +1,7 @@
+{
+  final Intent addressIntent=new Intent(context,CacheListActivity.class);
+  addressIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.ADDRESS);
+  addressIntent.putExtra(Intents.EXTRA_COORDS,coords);
+  addressIntent.putExtra(Intents.EXTRA_ADDRESS,address);
+  context.startActivity(addressIntent);
+}

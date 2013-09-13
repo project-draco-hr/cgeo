@@ -8,10 +8,10 @@
     @Override public void onClick(    DialogInterface dialog,    int item){
 switch (item) {
 case 0:
-        cgeocaches.startActivityOwner(context,name.toString());
+        CacheListActivity.startActivityOwner(context,name.toString());
       return;
 case 1:
-    cgeocaches.startActivityUserName(context,name.toString());
+    CacheListActivity.startActivityUserName(context,name.toString());
   return;
 case 2:
 context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(name.toString()))));

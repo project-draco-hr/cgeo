@@ -1,9 +1,0 @@
-{
-  new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title,new RunnableWithArgument<Integer>(){
-    @Override public void run(    Integer listId){
-      new GPXImporter(cgeocaches.this,listId,importGpxAttachementFinishedHandler).importGPX();
-      switchListById(listId);
-    }
-  }
-,true,0);
-}
