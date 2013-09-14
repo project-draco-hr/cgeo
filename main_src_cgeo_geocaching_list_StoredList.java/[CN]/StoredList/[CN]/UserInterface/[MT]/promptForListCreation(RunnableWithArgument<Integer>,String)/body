@@ -1,0 +1,15 @@
+{
+  handleListNameInput(newListName,R.string.list_dialog_create_title,R.string.list_dialog_create,new RunnableWithArgument<String>(){
+    @Override public void run(    final String listName){
+      final int newId=DataStore.createList(listName);
+      if (newId >= DataStore.customListIdOffset) {
+        ActivityMixin.showToast(activity,res.getString(R.string.list_dialog_create_ok));
+        runAfterwards.run(newId);
+      }
+ else {
+        ActivityMixin.showToast(activity,res.getString(R.string.list_dialog_create_err));
+      }
+    }
+  }
+);
+}

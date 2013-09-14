@@ -20,7 +20,7 @@
       reasonIndex=1;
     }
     String listKey;
-    if (list == StoredList.ALL_LIST_ID) {
+    if (list == PseudoList.ALL_LIST_ID) {
       sql.append(" and reason > 0");
       listKey="all_list";
     }
@@ -33,7 +33,7 @@
     if (cacheType != CacheType.ALL) {
       compiledStmnt.bindString(1,cacheType.id);
     }
-    if (list != StoredList.ALL_LIST_ID) {
+    if (list != PseudoList.ALL_LIST_ID) {
       compiledStmnt.bindLong(reasonIndex,list);
     }
     return (int)compiledStmnt.simpleQueryForLong();
