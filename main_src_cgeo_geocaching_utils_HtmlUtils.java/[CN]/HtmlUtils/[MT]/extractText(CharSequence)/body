@@ -25,5 +25,5 @@
       result=result.substring(0,removal.getLeft()) + result.substring(removal.getRight());
     }
   }
-  return StringUtils.replace(result,"<br />","\n").trim();
+  return Html.fromHtml(result).toString().trim();
 }
