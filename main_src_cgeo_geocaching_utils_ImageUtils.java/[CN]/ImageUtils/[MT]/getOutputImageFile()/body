@@ -2,6 +2,7 @@
   File mediaStorageDir=new File(Compatibility.getExternalPictureDir(),"cgeo");
   if (!mediaStorageDir.exists()) {
     if (!FileUtils.mkdirs(mediaStorageDir)) {
+      Log.e("ImageUtils.getOutputImageFile: cannot create media storage directory");
       return null;
     }
   }
