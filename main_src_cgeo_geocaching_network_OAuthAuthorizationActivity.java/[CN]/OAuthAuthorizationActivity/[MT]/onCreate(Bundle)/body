@@ -1,8 +1,8 @@
 {
   super.onCreate(savedInstanceState,R.layout.authorization_activity);
   setTitle(getAuthTitle());
-  auth_1.setText(getAboutAuth1());
-  auth_2.setText(getAboutAuth2());
+  auth_1.setText(getAuthExplainShort());
+  auth_2.setText(getAuthExplainLong());
   ImmutablePair<String,String> tempToken=getTempTokens();
   OAtoken=tempToken.left;
   OAtokenSecret=tempToken.right;
