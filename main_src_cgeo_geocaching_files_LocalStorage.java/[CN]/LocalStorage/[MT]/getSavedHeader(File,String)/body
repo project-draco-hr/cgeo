@@ -1,7 +1,7 @@
 {
   try {
     final File file=filenameForHeader(baseFile,name);
-    final FileReader f=new FileReader(file);
+    final Reader f=new InputStreamReader(new FileInputStream(file),"UTF-8");
     try {
       final char[] value=new char[256];
       final int count=f.read(value);

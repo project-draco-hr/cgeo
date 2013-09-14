@@ -5,6 +5,11 @@
     FileUtils.deleteIgnoringFailure(file);
   }
  else {
-    saveToFile(new ByteArrayInputStream(header.getValue().getBytes()),file);
+    try {
+      saveToFile(new ByteArrayInputStream(header.getValue().getBytes("UTF-8")),file);
+    }
+ catch (    final UnsupportedEncodingException e) {
+      Log.e("LocalStorage.saveHeader: unable to decode header",e);
+    }
   }
 }
