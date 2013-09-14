@@ -20,7 +20,12 @@
     return null;
   }
   final BitmapDrawable scaledImage=scaleBitmapTo(image,maxXY,maxXY);
-  final String uploadFilename=ImageUtils.getOutputImageFile().getPath();
+  final File tempImageFile=ImageUtils.getOutputImageFile();
+  if (tempImageFile == null) {
+    Log.e("ImageUtils.readScaleAndWriteImage: unable to write scaled image");
+    return null;
+  }
+  final String uploadFilename=tempImageFile.getPath();
   storeBitmap(scaledImage.getBitmap(),Bitmap.CompressFormat.JPEG,75,uploadFilename);
   return uploadFilename;
 }
