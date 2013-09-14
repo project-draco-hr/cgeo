@@ -1,5 +1,5 @@
 {
-  if (type != CacheListType.OFFLINE) {
+  if (!type.canSwitch) {
     return;
   }
   new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,getListSwitchingRunnable());
