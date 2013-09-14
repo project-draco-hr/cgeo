@@ -1,26 +1,2 @@
 {
-  final String cacheType=cache.getType().getL10n();
-  final String cacheSize=cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
-  details.add(R.string.cache_type,cacheType + cacheSize);
-  details.add(R.string.cache_geocode,cache.getGeocode());
-  details.addCacheState(cache);
-  details.addDistance(cache,cacheDistance);
-  cacheDistance=details.getValueView();
-  details.addDifficulty(cache);
-  details.addTerrain(cache);
-  if (cache.getRating() > 0) {
-    details.addRating(cache);
-  }
- else {
-    aquireGCVote();
-  }
-  details.add(R.string.cache_favorite,cache.getFavoritePoints() + "??");
-  final Button buttonMore=(Button)findViewById(R.id.more_details);
-  buttonMore.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View arg0){
-      CacheDetailActivity.startActivity(AbstractPopupActivity.this,geocode);
-      finish();
-    }
-  }
-);
 }
