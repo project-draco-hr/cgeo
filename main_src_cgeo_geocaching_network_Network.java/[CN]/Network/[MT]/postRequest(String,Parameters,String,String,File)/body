@@ -13,5 +13,5 @@
   final HttpPost request=new HttpPost(uri);
   request.setEntity(entity);
   addHeaders(request,null,null);
-  return doRepeatedRequests(request);
+  return doLogRequest(request);
 }
