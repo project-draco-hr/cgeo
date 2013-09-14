@@ -7,7 +7,6 @@
   OAtoken=tempToken.left;
   OAtokenSecret=tempToken.right;
   startButton.setText(getAuthAuthorize());
-  pinEntryButton.setText(getAuthFinish());
   startButton.setEnabled(true);
   startButton.setOnClickListener(new StartListener());
   if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
@@ -15,11 +14,5 @@
   }
  else {
     startButton.setText(getAuthAgain());
-    if (isOOB()) {
-      pinEntry.setHint(getAuthPinHint());
-      pinEntry.setVisibility(View.VISIBLE);
-      pinEntryButton.setVisibility(View.VISIBLE);
-      pinEntryButton.setOnClickListener(new ConfirmPINListener());
-    }
   }
 }

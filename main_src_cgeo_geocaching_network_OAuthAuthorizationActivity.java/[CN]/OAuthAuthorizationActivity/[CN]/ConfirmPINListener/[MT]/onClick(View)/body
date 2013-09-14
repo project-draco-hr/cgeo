@@ -1,8 +1,0 @@
-{
-  final String verifier=pinEntry.getText().toString();
-  if (StringUtils.isEmpty(verifier)) {
-    helpDialog(getAuthDialogPinTitle(),getAuthDialogPinMessage());
-    return;
-  }
-  exchangeTokens(verifier);
-}

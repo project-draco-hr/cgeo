@@ -5,9 +5,6 @@
     changeTokensDialog.setMessage(getAuthDialogWait());
   }
   changeTokensDialog.show();
-  pinEntryButton.setEnabled(false);
-  pinEntryButton.setOnTouchListener(null);
-  pinEntryButton.setOnClickListener(null);
   (new Thread(){
     @Override public void run(){
       changeToken(verifier);
