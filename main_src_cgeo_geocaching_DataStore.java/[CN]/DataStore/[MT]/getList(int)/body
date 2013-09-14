@@ -8,8 +8,8 @@
     }
   }
   Resources res=CgeoApplication.getInstance().getResources();
-  if (id == PseudoList.ALL_LIST_ID) {
-    return new StoredList(PseudoList.ALL_LIST_ID,res.getString(R.string.list_all_lists),getAllCachesCount());
+  if (id == PseudoList.ALL_LIST.id) {
+    return new StoredList(PseudoList.ALL_LIST.id,res.getString(R.string.list_all_lists),getAllCachesCount());
   }
   if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
     return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong());

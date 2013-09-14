@@ -6,7 +6,7 @@
   final Set<String> geocodes=new HashSet<String>();
   final StringBuilder selection=new StringBuilder();
   selection.append("reason ");
-  selection.append(listId != PseudoList.ALL_LIST_ID ? "=" + Math.max(listId,1) : ">= " + StoredList.STANDARD_LIST_ID);
+  selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId,1) : ">= " + StoredList.STANDARD_LIST_ID);
   selection.append(" and detailed = 1 ");
   String[] selectionArgs=null;
   if (cacheType != CacheType.ALL) {
