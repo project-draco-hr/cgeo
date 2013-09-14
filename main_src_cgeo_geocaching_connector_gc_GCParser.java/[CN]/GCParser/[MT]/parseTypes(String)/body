@@ -1,6 +1,6 @@
 {
   if (StringUtils.isEmpty(page)) {
-    return null;
+    return ListUtils.EMPTY_LIST;
   }
   final List<LogType> types=new ArrayList<LogType>();
   final MatcherWrapper typeBoxMatcher=new MatcherWrapper(GCConstants.PATTERN_TYPEBOX,page);
