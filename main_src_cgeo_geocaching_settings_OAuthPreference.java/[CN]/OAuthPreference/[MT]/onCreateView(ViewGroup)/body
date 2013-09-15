@@ -2,12 +2,14 @@
   final SettingsActivity activity=(SettingsActivity)getContext();
   setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    Preference preference){
-      Intent authIntent=new Intent(preference.getContext(),TwitterAuthorizationActivity.class);
-      activity.startActivityForResult(authIntent,R.string.pref_fakekey_twitter_authorization);
+      if (oAuthMapping.authActivity != null) {
+        Intent authIntent=new Intent(preference.getContext(),oAuthMapping.authActivity);
+        activity.startActivityForResult(authIntent,oAuthMapping.prefKeyId);
+      }
       return false;
     }
   }
 );
-  activity.setTwitterAuthTitle();
+  activity.setOcAuthTitle(oAuthMapping.prefKeyId);
   return super.onCreateView(parent);
 }
