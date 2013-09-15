@@ -1,0 +1,18 @@
+{
+  final long timeout=System.currentTimeMillis() + params[0];
+  try {
+    do {
+      Thread.sleep(50);
+      publishProgress(mReader.readLine());
+    }
+ while (System.currentTimeMillis() < timeout);
+  }
+ catch (  Exception e) {
+    publishProgress("ERROR: " + e);
+  }
+ finally {
+    publishProgress("END");
+    mProc.destroy();
+  }
+  return null;
+}
