@@ -1,6 +1,10 @@
 {
   final String line=values[0];
+  final boolean isAtBottom=scrollView.isAtBottom();
   if (!TextUtils.isEmpty(line)) {
     logView.append(Html.fromHtml("<font color=\"" + color(line) + "\">"+ line+ "</font><br/>"));
+    if (isAtBottom) {
+      scrollView.scrollTo(0,logView.getBottom());
+    }
   }
 }
