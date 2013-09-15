@@ -13,8 +13,12 @@
       }
       cache.setRating(rating.getRating());
       cache.setVotes(rating.getVotes());
-      final Message msg=Message.obtain();
-      ratingHandler.sendMessage(msg);
+      runOnUiThread(new Runnable(){
+        @Override public void run(){
+          details.addRating(cache);
+        }
+      }
+);
     }
   }
 ).start();
