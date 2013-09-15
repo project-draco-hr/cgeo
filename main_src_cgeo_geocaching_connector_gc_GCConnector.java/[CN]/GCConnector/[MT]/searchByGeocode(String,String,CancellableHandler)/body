@@ -1,27 +1,2 @@
 {
-  CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_loadpage);
-  final String page=GCParser.requestHtmlPage(geocode,guid,"y",String.valueOf(GCConstants.NUMBER_OF_LOGS));
-  if (StringUtils.isEmpty(page)) {
-    final SearchResult search=new SearchResult();
-    if (DataStore.isThere(geocode,guid,true,false)) {
-      if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
-        Log.i("Loading old cache from cache.");
-        search.addGeocode(DataStore.getGeocodeForGuid(guid));
-      }
- else {
-        search.addGeocode(geocode);
-      }
-      search.setError(StatusCode.NO_ERROR);
-      return search;
-    }
-    Log.e("GCConnector.searchByGeocode: No data from server");
-    search.setError(StatusCode.COMMUNICATION_ERROR);
-    return search;
-  }
-  final SearchResult searchResult=GCParser.parseCache(page,handler);
-  if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-    Log.w("GCConnector.searchByGeocode: No cache parsed");
-    return searchResult;
-  }
-  return searchResult;
 }

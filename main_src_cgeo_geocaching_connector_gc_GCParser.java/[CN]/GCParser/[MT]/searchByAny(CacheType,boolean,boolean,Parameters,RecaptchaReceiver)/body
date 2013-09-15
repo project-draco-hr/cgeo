@@ -1,18 +1,2 @@
 {
-  insertCacheType(params,cacheType);
-  final String uri="http://www.geocaching.com/seek/nearest.aspx";
-  final String fullUri=uri + "?" + addFToParams(params,my,true);
-  final String page=Login.getRequestLogged(uri,addFToParams(params,my,true));
-  if (StringUtils.isBlank(page)) {
-    Log.e("GCParser.searchByAny: No data from server");
-    return null;
-  }
-  final SearchResult searchResult=parseSearch(fullUri,page,showCaptcha,recaptchaReceiver);
-  if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-    Log.e("GCParser.searchByAny: No cache parsed");
-    return searchResult;
-  }
-  final SearchResult search=searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(),false,cacheType);
-  Login.getLoginStatus(page);
-  return search;
 }

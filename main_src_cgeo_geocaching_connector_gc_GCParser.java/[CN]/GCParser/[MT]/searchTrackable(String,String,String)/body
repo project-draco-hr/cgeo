@@ -1,29 +1,2 @@
 {
-  if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
-    Log.w("GCParser.searchTrackable: No geocode nor guid nor id given");
-    return null;
-  }
-  Trackable trackable=new Trackable();
-  final Parameters params=new Parameters();
-  if (StringUtils.isNotBlank(geocode)) {
-    params.put("tracker",geocode);
-    trackable.setGeocode(geocode);
-  }
- else   if (StringUtils.isNotBlank(guid)) {
-    params.put("guid",guid);
-  }
- else   if (StringUtils.isNotBlank(id)) {
-    params.put("id",id);
-  }
-  final String page=Login.getRequestLogged("http://www.geocaching.com/track/details.aspx",params);
-  if (StringUtils.isBlank(page)) {
-    Log.e("GCParser.searchTrackable: No data from server");
-    return trackable;
-  }
-  trackable=parseTrackable(page,geocode);
-  if (trackable == null) {
-    Log.w("GCParser.searchTrackable: No trackable parsed");
-    return null;
-  }
-  return trackable;
 }

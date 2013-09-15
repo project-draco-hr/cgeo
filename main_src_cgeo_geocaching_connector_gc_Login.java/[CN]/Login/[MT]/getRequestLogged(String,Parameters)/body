@@ -1,6 +1,7 @@
 {
-  final String data=Network.getResponseData(Network.getRequest(uri,params),canRemoveWhitespace(uri));
-  if (getLoginStatus(data)) {
+  final HttpResponse response=Network.getRequest(uri,params);
+  final String data=Network.getResponseData(response,canRemoveWhitespace(uri));
+  if (Network.isPageNotFound(response) || getLoginStatus(data)) {
     return data;
   }
   if (login() == StatusCode.NO_ERROR) {
