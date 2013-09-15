@@ -1,17 +1,7 @@
 {
   removeGeoAndDir();
-  final List<Geocache> cachesWithStaticMaps=new ArrayList<Geocache>(this.caches.size());
-  for (  final Geocache cache : this.caches) {
-    if (Settings.isStoreOfflineMaps() && cache.hasStaticMap()) {
-      cachesWithStaticMaps.add(cache);
-      continue;
-    }
-    if (!refreshCache(cache)) {
-      cachesWithStaticMaps.clear();
-      break;
-    }
-  }
-  for (  final Geocache cache : cachesWithStaticMaps) {
+  final List<Geocache> allCaches=Settings.isStoreOfflineMaps() ? ListUtils.union(ListUtils.selectRejected(caches,Geocache.hasStaticMap),ListUtils.select(caches,Geocache.hasStaticMap)) : caches;
+  for (  final Geocache cache : allCaches) {
     if (!refreshCache(cache)) {
       break;
     }
