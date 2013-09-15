@@ -1,0 +1,43 @@
+{
+  final List<LogEntry> logs=new ArrayList<LogEntry>();
+  if (StringUtils.isBlank(rawResponse)) {
+    return logs;
+  }
+  try {
+    final JSONObject resp=new JSONObject(rawResponse);
+    if (!resp.getString("status").equals("success")) {
+      Log.e("GCParser.loadLogsFromDetails: status is " + resp.getString("status"));
+      return null;
+    }
+    final JSONArray data=resp.getJSONArray("data");
+    for (int index=0; index < data.length(); index++) {
+      final JSONObject entry=data.getJSONObject(index);
+      final String logIconNameExt=entry.optString("LogTypeImage",".gif");
+      final String logIconName=logIconNameExt.substring(0,logIconNameExt.length() - 4);
+      long date=0;
+      try {
+        date=Login.parseGcCustomDate(entry.getString("Visited")).getTime();
+      }
+ catch (      final ParseException e) {
+        Log.e("GCParser.loadLogsFromDetails: failed to parse log date.");
+      }
+      final String latLon=entry.getString("LatLonString");
+      final LogEntry logDone=new LogEntry(entry.getString("UserName"),date,LogType.getByIconName(logIconName),(StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + entry.getString("LogText"));
+      logDone.found=entry.getInt("GeocacheFindCount");
+      logDone.friend=friends;
+      final JSONArray images=entry.getJSONArray("Images");
+      for (int i=0; i < images.length(); i++) {
+        final JSONObject image=images.getJSONObject(i);
+        final String url="http://img.geocaching.com/cache/log/large/" + image.getString("FileName");
+        final String title=image.getString("Name");
+        final Image logImage=new Image(url,title);
+        logDone.addLogImage(logImage);
+      }
+      logs.add(logDone);
+    }
+  }
+ catch (  final JSONException e) {
+    Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs",e);
+  }
+  return logs;
+}
