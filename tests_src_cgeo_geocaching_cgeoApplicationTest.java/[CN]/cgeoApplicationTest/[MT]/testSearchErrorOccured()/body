@@ -1,16 +1,12 @@
 {
-  final ImmutablePair<String,String> login=Settings.getGcLogin();
-  final String memberStatus=Settings.getMemberStatus();
-  try {
-    final MockedCache cache=new GC1ZXX2();
-    deleteCacheFromDBAndLogout(cache.getGeocode());
-    final SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
-    assertNotNull(search);
-    assertEquals(0,search.getGeocodes().size());
+  withMockedLoginDo(new Runnable(){
+    public void run(){
+      final MockedCache cache=new GC1ZXX2();
+      deleteCacheFromDBAndLogout(cache.getGeocode());
+      final SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
+      assertNotNull(search);
+      assertEquals(0,search.getGeocodes().size());
+    }
   }
-  finally {
-    TestSettings.setLogin(login.left,login.right);
-    Settings.setMemberStatus(memberStatus);
-    Login.login();
-  }
+);
 }

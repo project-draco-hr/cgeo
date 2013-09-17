@@ -1,0 +1,12 @@
+{
+  final ImmutablePair<String,String> login=Settings.getGcLogin();
+  final String memberStatus=Settings.getMemberStatus();
+  try {
+    runnable.run();
+  }
+  finally {
+    TestSettings.setLogin(login.left,login.right);
+    Settings.setMemberStatus(memberStatus);
+    Login.login();
+  }
+}
