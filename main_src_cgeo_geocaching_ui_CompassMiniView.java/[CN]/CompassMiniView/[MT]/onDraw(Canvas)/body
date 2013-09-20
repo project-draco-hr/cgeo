@@ -2,13 +2,11 @@
   super.onDraw(canvas);
   float azimuthRelative=calculateAzimuthRelative();
   lastDrawingAzimuth=azimuthRelative;
-  canvas.setDrawFilter(FILTER_SET);
   final int canvasCenterX=getWidth() / 2;
   final int canvasCenterY=getHeight() / 2;
   final int marginLeft=(getWidth() - compassArrowWidth) / 2;
   final int marginTop=(getHeight() - compassArrowHeight) / 2;
+  canvas.setDrawFilter(FILTER_SET);
   canvas.rotate(-azimuthRelative,canvasCenterX,canvasCenterY);
   canvas.drawBitmap(compassArrow,marginLeft,marginTop,null);
-  canvas.rotate(azimuthRelative,canvasCenterX,canvasCenterY);
-  canvas.setDrawFilter(FILTER_REMOVE);
 }
