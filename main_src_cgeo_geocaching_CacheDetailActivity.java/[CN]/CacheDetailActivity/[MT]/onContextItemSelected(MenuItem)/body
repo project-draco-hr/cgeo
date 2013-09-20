@@ -1,25 +1,16 @@
 {
-  final int groupId=item.getGroupId();
-  final int index=item.getItemId();
-switch (groupId) {
-case R.id.value:
-case R.id.shortdesc:
-case R.id.longdesc:
-case R.id.personalnote:
-case R.id.hint:
-case R.id.log:
-switch (index) {
-case MENU_FIELD_COPY:
-      ClipboardUtils.copyToClipboard(clickedItemText);
-    showToast(res.getString(R.string.clipboard_copy_ok));
-  return true;
-case MENU_FIELD_TRANSLATE:
+switch (item.getItemId()) {
+case R.id.menu_copy:
+    ClipboardUtils.copyToClipboard(clickedItemText);
+  showToast(res.getString(R.string.clipboard_copy_ok));
+return true;
+case R.id.menu_translate_to_sys_lang:
 TranslationUtils.startActivityTranslate(this,Locale.getDefault().getLanguage(),HtmlUtils.extractText(clickedItemText));
 return true;
-case MENU_FIELD_TRANSLATE_EN:
+case R.id.menu_translate_to_english:
 TranslationUtils.startActivityTranslate(this,Locale.ENGLISH.getLanguage(),HtmlUtils.extractText(clickedItemText));
 return true;
-case MENU_FIELD_SHARE:
+case R.id.menu_cache_share_field:
 final Intent intent=new Intent(Intent.ACTION_SEND);
 intent.setType("text/plain");
 intent.putExtra(Intent.EXTRA_TEXT,clickedItemText.toString());
@@ -28,7 +19,9 @@ return true;
 default :
 break;
 }
-break;
+final int groupId=item.getGroupId();
+final int index=item.getItemId();
+switch (groupId) {
 case CONTEXT_MENU_WAYPOINT_EDIT:
 final Waypoint waypointEdit=cache.getWaypoint(index);
 if (waypointEdit != null) {
