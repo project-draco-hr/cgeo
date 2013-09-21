@@ -1,7 +1,6 @@
 {
   super.onCreateContextMenu(menu,view,info);
   final int viewId=view.getId();
-  contextMenuWPIndex=-1;
 switch (viewId) {
 case R.id.value:
     clickedItemText=((TextView)view).getText();
@@ -42,25 +41,21 @@ for (int i=0; i < parent.getChildCount(); i++) {
 if (parent.getChildAt(i) == view) {
 final List<Waypoint> sortedWaypoints=new ArrayList<Waypoint>(cache.getWaypoints());
 Collections.sort(sortedWaypoints);
-final Waypoint waypoint=sortedWaypoints.get(i);
-final int index=cache.getWaypoints().indexOf(waypoint);
+selectedWaypoint=sortedWaypoints.get(i);
 menu.setHeaderTitle(res.getString(R.string.waypoint));
-if (waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
-menu.add(CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES,index,0,R.string.waypoint_reset_cache_coords);
-}
- else {
-menu.add(CONTEXT_MENU_WAYPOINT_EDIT,index,0,R.string.waypoint_edit);
-menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE,index,0,R.string.waypoint_duplicate);
-}
-contextMenuWPIndex=index;
-if (waypoint.isUserDefined() && !waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
-menu.add(CONTEXT_MENU_WAYPOINT_DELETE,index,0,R.string.waypoint_delete);
-}
-if (waypoint.getCoords() != null) {
-menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION,index,0,NavigationAppFactory.getDefaultNavigationApplication().getName());
-menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE,index,0,R.string.cache_menu_navigate).setIcon(R.drawable.ic_menu_mapmode);
-menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND,index,0,R.string.cache_menu_around);
-}
+getMenuInflater().inflate(R.menu.waypoint_options,menu);
+final boolean isOriginalWaypoint=selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
+menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
+menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
+menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
+final boolean userDefined=selectedWaypoint.isUserDefined() && !selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
+menu.findItem(R.id.menu_waypoint_delete).setVisible(userDefined);
+final boolean hasCoords=selectedWaypoint.getCoords() != null;
+final MenuItem defaultNavigationMenu=menu.findItem(R.id.menu_waypoint_navigate_default);
+defaultNavigationMenu.setVisible(hasCoords);
+defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
+menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
 break;
 }
 }

@@ -16,67 +16,54 @@ intent.setType("text/plain");
 intent.putExtra(Intent.EXTRA_TEXT,clickedItemText.toString());
 startActivity(Intent.createChooser(intent,res.getText(R.string.cache_share_field)));
 return true;
-default :
-break;
-}
-final int groupId=item.getGroupId();
-final int index=item.getItemId();
-switch (groupId) {
-case CONTEXT_MENU_WAYPOINT_EDIT:
-final Waypoint waypointEdit=cache.getWaypoint(index);
-if (waypointEdit != null) {
-EditWaypointActivity.startActivityEditWaypoint(this,waypointEdit.getId());
+case R.id.menu_waypoint_edit:
+if (selectedWaypoint != null) {
+EditWaypointActivity.startActivityEditWaypoint(this,selectedWaypoint.getId());
 refreshOnResume=true;
 }
-break;
-case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-final Waypoint waypointDuplicate=cache.getWaypoint(index);
-if (cache.duplicateWaypoint(waypointDuplicate)) {
+return true;
+case R.id.menu_waypoint_duplicate:
+if (cache.duplicateWaypoint(selectedWaypoint)) {
 DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 notifyDataSetChanged();
 }
-break;
-case CONTEXT_MENU_WAYPOINT_DELETE:
-final Waypoint waypointDelete=cache.getWaypoint(index);
-if (cache.deleteWaypoint(waypointDelete)) {
+return true;
+case R.id.menu_waypoint_delete:
+if (cache.deleteWaypoint(selectedWaypoint)) {
 DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 notifyDataSetChanged();
 }
-break;
-case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
-final Waypoint waypointNavigation=cache.getWaypoint(index);
-if (waypointNavigation != null) {
-NavigationAppFactory.startDefaultNavigationApplication(1,this,waypointNavigation);
+return true;
+case R.id.menu_waypoint_navigate_default:
+if (selectedWaypoint != null) {
+NavigationAppFactory.startDefaultNavigationApplication(1,this,selectedWaypoint);
 }
-break;
-case CONTEXT_MENU_WAYPOINT_NAVIGATE:
-final Waypoint waypointNav=cache.getWaypoint(contextMenuWPIndex);
-if (waypointNav != null) {
-NavigationAppFactory.showNavigationMenu(this,null,waypointNav,null);
+return true;
+case R.id.menu_waypoint_navigate:
+if (selectedWaypoint != null) {
+NavigationAppFactory.showNavigationMenu(this,null,selectedWaypoint,null);
 }
-break;
-case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
-final Waypoint waypointAround=cache.getWaypoint(index);
-if (waypointAround != null) {
-CacheListActivity.startActivityCoordinates(this,waypointAround.getCoords());
+return true;
+case R.id.menu_waypoint_caches_around:
+if (selectedWaypoint != null) {
+CacheListActivity.startActivityCoordinates(this,selectedWaypoint.getCoords());
 }
-break;
-case CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES:
-final Waypoint waypointReset=cache.getWaypoint(index);
+return true;
+case R.id.menu_waypoint_reset_cache_coords:
 if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-createResetCacheCoordinatesDialog(cache,waypointReset).show();
+createResetCacheCoordinatesDialog(cache,selectedWaypoint).show();
 }
  else {
 final ProgressDialog progressDialog=ProgressDialog.show(this,getString(R.string.cache),getString(R.string.waypoint_reset),true);
 final HandlerResetCoordinates handler=new HandlerResetCoordinates(this,progressDialog,false);
-new ResetCoordsThread(cache,handler,waypointReset,true,false,progressDialog).start();
+new ResetCoordsThread(cache,handler,selectedWaypoint,true,false,progressDialog).start();
 }
-break;
+return true;
 default :
+break;
+}
 if (imagesList != null && imagesList.onContextItemSelected(item)) {
 return true;
 }
 return onOptionsItemSelected(item);
-}
-return false;
 }
