@@ -2,7 +2,6 @@
   final Uri calendarProvider=Compatibility.getCalendarEventsProviderURI();
   final Date eventDate=entry.parseDate();
   final String description=entry.parseDescription();
-  final String eventLocation=entry.parseLocation();
   final ContentValues event=new ContentValues();
   event.put("calendar_id",calendarId);
   if (entry.getStartTimeMinutes() >= 0) {
@@ -16,8 +15,8 @@
   event.put("eventTimezone","UTC");
   event.put("title",Html.fromHtml(entry.getName()).toString());
   event.put("description",description);
-  if (eventLocation.length() > 0) {
-    event.put("eventLocation",eventLocation);
+  if (entry.getCoords().length() > 0) {
+    event.put("eventLocation",entry.getCoords());
   }
   event.put("hasAlarm",0);
   activity.getContentResolver().insert(calendarProvider,event);
