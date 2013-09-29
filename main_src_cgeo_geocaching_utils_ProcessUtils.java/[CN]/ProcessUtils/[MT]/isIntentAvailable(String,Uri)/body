@@ -1,5 +1,5 @@
 {
-  final PackageManager packageManager=context.getPackageManager();
+  final PackageManager packageManager=CgeoApplication.getInstance().getPackageManager();
   final Intent intent;
   if (uri == null) {
     intent=new Intent(action);
@@ -8,5 +8,5 @@
     intent=new Intent(action,uri);
   }
   final List<ResolveInfo> list=packageManager.queryIntentActivities(intent,PackageManager.MATCH_DEFAULT_ONLY);
-  return !list.isEmpty();
+  return CollectionUtils.isNotEmpty(list);
 }

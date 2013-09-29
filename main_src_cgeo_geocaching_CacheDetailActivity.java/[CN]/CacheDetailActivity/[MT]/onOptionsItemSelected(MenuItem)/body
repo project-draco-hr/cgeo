@@ -1,33 +1,18 @@
 {
+  if (CacheMenuHandler.onMenuItemSelected(item,this,cache)) {
+    return true;
+  }
   final int menuItem=item.getItemId();
 switch (menuItem) {
 case 0:
     return false;
-case MENU_DEFAULT_NAVIGATION:
-  startDefaultNavigation();
-return true;
-case MENU_BROWSER:
-cache.openInBrowser(this);
-return true;
-case MENU_CACHES_AROUND:
-CacheListActivity.startActivityCoordinates(this,cache.getCoords());
-return true;
-case MENU_CALENDAR:
-addToCalendarWithIntent();
-return true;
-case MENU_SHARE:
-if (cache != null) {
-cache.shareCache(this,res);
-return true;
-}
-return false;
 default :
-if (NavigationAppFactory.onMenuItemSelected(item,this,cache)) {
-return true;
-}
+  if (NavigationAppFactory.onMenuItemSelected(item,this,cache)) {
+    return true;
+  }
 if (LoggingUI.onMenuItemSelected(item,this,cache)) {
-refreshOnResume=true;
-return true;
+  refreshOnResume=true;
+  return true;
 }
 }
 return true;

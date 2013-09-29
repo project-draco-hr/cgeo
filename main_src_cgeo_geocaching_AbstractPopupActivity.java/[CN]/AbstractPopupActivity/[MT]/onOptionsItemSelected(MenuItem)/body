@@ -1,22 +1,9 @@
 {
-  final int menuItem=item.getItemId();
-switch (menuItem) {
-case R.id.menu_default_navigation:
-    navigateTo();
+  if (CacheMenuHandler.onMenuItemSelected(item,this,cache)) {
+    return true;
+  }
+  if (LoggingUI.onMenuItemSelected(item,this,cache)) {
+    return true;
+  }
   return true;
-case R.id.menu_navigate:
-showNavigationMenu();
-return true;
-case R.id.menu_caches_around:
-cachesAround();
-return true;
-case R.id.menu_show_in_browser:
-showInBrowser();
-return true;
-default :
-if (LoggingUI.onMenuItemSelected(item,this,cache)) {
-return true;
-}
-}
-return true;
 }

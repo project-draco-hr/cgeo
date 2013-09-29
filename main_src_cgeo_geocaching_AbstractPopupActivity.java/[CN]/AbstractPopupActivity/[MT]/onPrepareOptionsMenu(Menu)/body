@@ -1,11 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
   try {
-    final boolean visible=getCoordinates() != null;
-    menu.findItem(R.id.menu_default_navigation).setVisible(visible);
-    menu.findItem(R.id.menu_navigate).setVisible(visible);
-    menu.findItem(R.id.menu_caches_around).setVisible(visible);
-    menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+    CacheMenuHandler.onPrepareOptionsMenu(menu,cache);
     LoggingUI.onPrepareOptionsMenu(menu,cache);
   }
  catch (  final RuntimeException e) {
