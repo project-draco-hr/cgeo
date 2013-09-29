@@ -1,22 +1,2 @@
 {
-switch (item.getItemId()) {
-case R.id.menu_default_navigation:
-    activity.navigateTo();
-  return true;
-case R.id.menu_navigate:
-activity.showNavigationMenu();
-return true;
-case R.id.menu_caches_around:
-activity.cachesAround();
-return true;
-case R.id.menu_show_in_browser:
-cache.openInBrowser((Activity)activity);
-return true;
-case R.id.menu_share:
-cache.shareCache((Activity)activity,res);
-return true;
-case R.id.menu_calendar:
-addToCalendarWithIntent((Activity)activity,cache);
-}
-return false;
 }
