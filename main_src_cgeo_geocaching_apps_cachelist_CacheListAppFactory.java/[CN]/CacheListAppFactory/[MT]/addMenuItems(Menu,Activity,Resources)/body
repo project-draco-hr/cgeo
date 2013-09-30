@@ -1,20 +1,19 @@
 {
-  final List<CacheListApp> activeApps=new ArrayList<CacheListApp>(LazyHolder.apps.length);
-  for (  final CacheListApp app : LazyHolder.apps) {
-    if (app.isInstalled()) {
-      activeApps.add(app);
+  final List<CacheListApp> activeApps=getActiveApps();
+  if (activeApps.isEmpty()) {
+    return;
+  }
+  if (activeApps.size() == 1) {
+    final MenuItem subItem=menu.findItem(R.id.menu_cache_list_app);
+    subItem.setVisible(true);
+    subItem.setTitle(activeApps.get(0).getName());
+  }
+ else {
+    final MenuItem subItem=menu.findItem(R.id.submenu_cache_list_app);
+    subItem.setVisible(true);
+    final SubMenu subMenu=subItem.getSubMenu();
+    for (    final CacheListApp app : activeApps) {
+      subMenu.add(0,app.getId(),0,app.getName());
     }
   }
-switch (activeApps.size()) {
-case 0:
-    return null;
-case 1:
-  return menu.add(0,activeApps.get(0).getId(),0,activeApps.get(0).getName()).setIcon(R.drawable.ic_menu_mapmode);
-default :
-final SubMenu subMenu=menu.addSubMenu(0,101,0,res.getString(R.string.caches_on_map)).setIcon(R.drawable.ic_menu_mapmode);
-for (final CacheListApp app : activeApps) {
-subMenu.add(0,app.getId(),0,app.getName());
-}
-return subMenu.getItem();
-}
 }

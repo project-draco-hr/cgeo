@@ -15,18 +15,17 @@
   if (cache == null) {
     return true;
   }
-  final int id=item.getItemId();
-switch (id) {
-case MENU_DEFAULT_NAVIGATION:
+switch (item.getItemId()) {
+case R.id.menu_default_navigation:
     NavigationAppFactory.startDefaultNavigationApplication(1,this,cache);
   break;
-case MENU_NAVIGATION:
+case R.id.menu_navigate:
 NavigationAppFactory.showNavigationMenu(this,cache,null,null);
 break;
-case MENU_CACHE_DETAILS:
+case R.id.menu_cache_details:
 CacheDetailActivity.startActivity(this,cache.getGeocode(),cache.getName());
 break;
-case MENU_DROP_CACHE:
+case R.id.menu_drop_cache:
 cache.drop(new Handler(){
 @Override public void handleMessage(Message msg){
 adapter.notifyDataSetChanged();
@@ -35,7 +34,7 @@ refreshCurrentList();
 }
 );
 break;
-case MENU_MOVE_TO_LIST:
+case R.id.menu_move_to_list:
 new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
 @Override public void run(Integer newListId){
 DataStore.moveToList(Collections.singletonList(cache),newListId);
@@ -45,11 +44,11 @@ refreshCurrentList();
 }
 ,true,listId,newListName);
 break;
-case MENU_STORE_CACHE:
-case MENU_REFRESH:
+case R.id.menu_store_cache:
+case R.id.menu_refresh:
 refreshStored(Collections.singletonList(cache));
 break;
-case MENU_EXPORT:
+case R.id.menu_export:
 ExportFactory.showExportMenu(Collections.singletonList(cache),this);
 return false;
 default :

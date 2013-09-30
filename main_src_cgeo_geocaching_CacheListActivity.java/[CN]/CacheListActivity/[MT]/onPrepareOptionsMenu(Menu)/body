@@ -1,63 +1,53 @@
 {
   super.onPrepareOptionsMenu(menu);
+  final boolean isHistory=type == CacheListType.HISTORY;
+  final boolean isOffline=type == CacheListType.OFFLINE;
+  final boolean isEmpty=cacheList.isEmpty();
+  final boolean isConcrete=isConcreteList();
   try {
     if (adapter.isSelectMode()) {
-      menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit)).setIcon(R.drawable.ic_menu_clear_playlist);
-      menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
+      menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode_exit)).setIcon(R.drawable.ic_menu_clear_playlist);
     }
  else {
-      menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode)).setIcon(R.drawable.ic_menu_agenda);
-      menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
+      menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode)).setIcon(R.drawable.ic_menu_agenda);
     }
-    final boolean isEmpty=cacheList.isEmpty();
-    final boolean isConcrete=isConcreteList();
-    setVisible(menu,MENU_SWITCH_SELECT_MODE,!isEmpty);
-    setVisible(menu,SUBMENU_MANAGE_HISTORY,!isEmpty);
-    setVisible(menu,SUBMENU_SHOW_MAP,!isEmpty);
-    setVisible(menu,MENU_SORT,!isEmpty);
-    setVisible(menu,MENU_REFRESH_STORED,!isEmpty && (isConcrete || type != CacheListType.OFFLINE));
-    setVisible(menu,MENU_DROP_CACHES,!isEmpty);
-    setVisible(menu,MENU_DROP_CACHES_AND_LIST,isConcrete && !isEmpty);
-    setVisible(menu,MENU_DELETE_EVENTS,isConcrete && !isEmpty && containsEvents());
-    setVisible(menu,MENU_MOVE_TO_LIST,!isEmpty);
-    setVisible(menu,MENU_EXPORT,!isEmpty);
-    setVisible(menu,MENU_REMOVE_FROM_HISTORY,!isEmpty);
-    setVisible(menu,MENU_CLEAR_OFFLINE_LOGS,!isEmpty && containsOfflineLogs());
-    if (navigationMenu != null) {
-      navigationMenu.setVisible(!isEmpty);
+    menu.findItem(R.id.menu_invert_selection).setVisible(adapter.isSelectMode());
+    setVisible(menu,R.id.menu_switch_select_mode,!isEmpty);
+    setVisible(menu,R.id.submenu_manage,isOffline || isHistory);
+    setVisible(menu,R.id.submenu_manage_lists,isOffline);
+    setVisible(menu,R.id.menu_sort,!isEmpty && !isHistory);
+    setVisible(menu,R.id.menu_refresh_stored,!isEmpty && (isConcrete || type != CacheListType.OFFLINE));
+    setVisible(menu,R.id.menu_drop_caches,!isEmpty && isOffline);
+    setVisible(menu,R.id.menu_drop_caches_and_list,isConcrete && !isEmpty && isOffline);
+    setVisible(menu,R.id.menu_delete_events,isConcrete && !isEmpty && containsEvents());
+    setVisible(menu,R.id.menu_move_to_list,isOffline && !isEmpty);
+    setVisible(menu,R.id.menu_export,!isEmpty && (isHistory || isOffline));
+    setVisible(menu,R.id.menu_remove_from_history,!isEmpty && isHistory);
+    setVisible(menu,R.id.menu_clear_offline_logs,!isEmpty && containsOfflineLogs() && (isHistory || isOffline));
+    setVisible(menu,R.id.menu_import_web,isOffline && Settings.getWebDeviceCode() != null);
+    setVisible(menu,R.id.menu_import_gpx,isOffline);
+    setVisible(menu,R.id.menu_refresh_stored_top,!isOffline);
+    if (!isOffline && !isHistory) {
+      menu.findItem(R.id.menu_refresh_stored_top).setTitle(R.string.caches_store_offline);
     }
     final boolean hasSelection=adapter != null && adapter.getCheckedCount() > 0;
     final boolean isNonDefaultList=isConcrete && listId != StoredList.STANDARD_LIST_ID;
-    if (type == CacheListType.OFFLINE || type == CacheListType.HISTORY) {
-      setMenuItemLabel(menu,MENU_DROP_CACHES,R.string.caches_drop_selected,R.string.caches_drop_all);
-      setMenuItemLabel(menu,MENU_REFRESH_STORED,R.string.caches_refresh_selected,R.string.caches_refresh_all);
-      setMenuItemLabel(menu,MENU_MOVE_TO_LIST,R.string.caches_move_selected,R.string.caches_move_all);
+    if (isOffline || type == CacheListType.HISTORY) {
+      setMenuItemLabel(menu,R.id.menu_drop_caches,R.string.caches_drop_selected,R.string.caches_drop_all);
+      setMenuItemLabel(menu,R.id.menu_refresh_stored,R.string.caches_refresh_selected,R.string.caches_refresh_all);
+      setMenuItemLabel(menu,R.id.menu_move_to_list,R.string.caches_move_selected,R.string.caches_move_all);
     }
  else {
-      setMenuItemLabel(menu,MENU_REFRESH_STORED,R.string.caches_store_selected,R.string.caches_store_offline);
+      setMenuItemLabel(menu,R.id.menu_refresh_stored,R.string.caches_store_selected,R.string.caches_store_offline);
     }
-    if (type == CacheListType.OFFLINE) {
-      menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
-    }
-    MenuItem item=menu.findItem(MENU_DROP_LIST);
-    if (item != null) {
-      item.setVisible(isNonDefaultList);
-    }
-    item=menu.findItem(MENU_RENAME_LIST);
-    if (item != null) {
-      item.setVisible(isNonDefaultList);
-    }
+    menu.findItem(R.id.menu_drop_caches_and_list).setVisible(isOffline && !hasSelection && isNonDefaultList&& !adapter.isFiltered());
+    menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
+    menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
     final boolean multipleLists=DataStore.getLists().size() >= 2;
-    item=menu.findItem(MENU_SWITCH_LIST);
-    if (item != null) {
-      item.setVisible(multipleLists);
-    }
-    item=menu.findItem(MENU_MOVE_TO_LIST);
-    if (item != null) {
-      item.setVisible(!isEmpty);
-    }
-    setMenuItemLabel(menu,MENU_REMOVE_FROM_HISTORY,R.string.cache_remove_from_history,R.string.cache_clear_history);
-    setMenuItemLabel(menu,MENU_EXPORT,R.string.export,R.string.export);
+    menu.findItem(R.id.menu_switch_list).setVisible(multipleLists);
+    menu.findItem(R.id.menu_move_to_list).setVisible(!isEmpty);
+    setMenuItemLabel(menu,R.id.menu_remove_from_history,R.string.cache_remove_from_history,R.string.cache_clear_history);
+    setMenuItemLabel(menu,R.id.menu_export,R.string.export,R.string.export);
   }
  catch (  final RuntimeException e) {
     Log.e("CacheListActivity.onPrepareOptionsMenu",e);

@@ -1,49 +1,48 @@
 {
-  final int itemId=item.getItemId();
-switch (itemId) {
-case MENU_SWITCH_SELECT_MODE:
+switch (item.getItemId()) {
+case R.id.menu_switch_select_mode:
     adapter.switchSelectMode();
   invalidateOptionsMenuCompatible();
 return true;
-case MENU_REFRESH_STORED:
+case R.id.menu_refresh_stored:
 refreshStored(adapter.getCheckedOrAllCaches());
 invalidateOptionsMenuCompatible();
 return true;
-case MENU_DROP_CACHES:
+case R.id.menu_drop_caches:
 dropStored(false);
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_DROP_CACHES_AND_LIST:
+case R.id.menu_drop_caches_and_list:
 dropStored(true);
 invalidateOptionsMenuCompatible();
 return true;
-case MENU_IMPORT_GPX:
+case R.id.menu_import_gpx:
 importGpx();
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_CREATE_LIST:
+case R.id.menu_create_list:
 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(),newListName);
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_DROP_LIST:
+case R.id.menu_drop_list:
 removeList(true);
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_RENAME_LIST:
+case R.id.menu_rename_list:
 renameList();
 return false;
-case MENU_INVERT_SELECTION:
+case R.id.menu_invert_selection:
 adapter.invertSelection();
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_SWITCH_LIST:
+case R.id.menu_switch_list:
 selectList();
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_FILTER:
+case R.id.menu_filter:
 showFilterMenu(null);
 return true;
-case MENU_SORT:
+case R.id.menu_sort:
 final CacheComparator oldComparator=adapter.getCacheComparator();
 new ComparatorUserInterface(this).selectComparator(oldComparator,new RunnableWithArgument<CacheComparator>(){
 @Override public void run(CacheComparator selectedComparator){
@@ -58,25 +57,25 @@ setComparator(selectedComparator);
 }
 );
 return true;
-case MENU_IMPORT_WEB:
+case R.id.menu_import_web:
 importWeb();
 return false;
-case MENU_EXPORT:
+case R.id.menu_export:
 ExportFactory.showExportMenu(adapter.getCheckedOrAllCaches(),this);
 return false;
-case MENU_REMOVE_FROM_HISTORY:
+case R.id.menu_remove_from_history:
 removeFromHistoryCheck();
 invalidateOptionsMenuCompatible();
 return false;
-case MENU_MOVE_TO_LIST:
+case R.id.menu_move_to_list:
 moveCachesToOtherList();
 invalidateOptionsMenuCompatible();
 return true;
-case MENU_DELETE_EVENTS:
+case R.id.menu_delete_events:
 deletePastEvents();
 invalidateOptionsMenuCompatible();
 return true;
-case MENU_CLEAR_OFFLINE_LOGS:
+case R.id.menu_clear_offline_logs:
 clearOfflineLogs();
 invalidateOptionsMenuCompatible();
 return true;

@@ -1,5 +1,11 @@
 {
-  final CacheListApp app=(CacheListApp)getAppFromMenuItem(item,LazyHolder.apps);
+  CacheListApp app;
+  if (item.getItemId() == R.id.menu_cache_list_app) {
+    app=getActiveApps().get(0);
+  }
+ else {
+    app=(CacheListApp)getAppFromMenuItem(item,LazyHolder.apps);
+  }
   if (app != null) {
     try {
       boolean result=app.invoke(caches,activity,search);
