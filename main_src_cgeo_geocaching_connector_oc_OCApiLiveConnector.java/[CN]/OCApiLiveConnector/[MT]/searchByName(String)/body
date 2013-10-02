@@ -1,0 +1,4 @@
+{
+  final Geopoint currentPos=CgeoApplication.getInstance().currentGeo().getCoords();
+  return new SearchResult(OkapiClient.getCachesNamed(currentPos,name,this));
+}

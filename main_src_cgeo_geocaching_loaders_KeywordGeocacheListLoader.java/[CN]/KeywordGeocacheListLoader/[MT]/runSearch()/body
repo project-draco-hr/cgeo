@@ -1,3 +1,12 @@
 {
-  return GCParser.searchByKeyword(keyword,Settings.getCacheType(),Settings.isShowCaptcha(),this);
+  SearchResult searchResult=new SearchResult();
+  if (Settings.isGCConnectorActive()) {
+    searchResult=GCParser.searchByKeyword(keyword,Settings.getCacheType(),Settings.isShowCaptcha(),this);
+  }
+  for (  ISearchByKeyword connector : ConnectorFactory.getSearchByKeywordConnectors()) {
+    if (connector.isActivated()) {
+      searchResult.addSearchResult(connector.searchByName(keyword));
+    }
+  }
+  return searchResult;
 }
