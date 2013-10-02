@@ -1,0 +1,6 @@
+{
+  for (  Character c : UNRESERVED) {
+    final String charAsString=String.valueOf(c);
+    assertEquals("wrong OAuth encoding for " + c,charAsString,OAuth.percentEncode(charAsString));
+  }
+}
