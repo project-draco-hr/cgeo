@@ -13,8 +13,14 @@
     }
     CheckBox check=(CheckBox)v.findViewById(R.id.CheckBox);
     if (check != null) {
-      check.setOnClickListener(new OnCheckBoxClickListener(position));
-      check.setChecked(option.isChecked());
+      if (!chooseForWriting || option.isWriteable()) {
+        check.setOnClickListener(new OnCheckBoxClickListener(position));
+        check.setChecked(option.isChecked());
+        check.setEnabled(true);
+      }
+ else {
+        check.setEnabled(false);
+      }
     }
   }
   return v;

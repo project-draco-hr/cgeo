@@ -5,14 +5,14 @@
   List<Option> listDirs=new ArrayList<Option>();
   try {
     for (    File currentDir : dirs) {
-      listDirs.add(new Option(currentDir.getName(),currentDir.getAbsolutePath()));
+      listDirs.add(new Option(currentDir.getName(),currentDir.getAbsolutePath(),currentDir.canWrite()));
     }
   }
  catch (  RuntimeException e) {
   }
   Collections.sort(listDirs);
   if (dir.getParent() != null) {
-    listDirs.add(0,new Option(PARENT_DIR,dir.getParent()));
+    listDirs.add(0,new Option(PARENT_DIR,dir.getParent(),false));
   }
   this.adapter=new FileArrayAdapter(this,R.layout.simple_dir_item,listDirs);
   this.setListAdapter(adapter);
