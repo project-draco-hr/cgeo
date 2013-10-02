@@ -2,7 +2,7 @@
   String extStorage=Environment.getExternalStorageDirectory().getAbsolutePath();
   List<File> storages=new ArrayList<File>();
   storages.add(new File(extStorage));
-  File file=new File("/system/etc/vold.fstab");
+  File file=new File(FILE_SYSTEM_TABLE_PATH);
   if (file.canRead()) {
     Reader fr=null;
     BufferedReader br=null;
