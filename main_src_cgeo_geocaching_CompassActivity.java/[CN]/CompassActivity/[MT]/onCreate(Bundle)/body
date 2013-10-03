@@ -7,7 +7,11 @@
   }
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    title=extras.getString(EXTRAS_GEOCODE);
+    final String geocode=extras.getString(EXTRAS_GEOCODE);
+    if (StringUtils.isNotEmpty(geocode)) {
+      cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+    }
+    title=geocode;
     final String name=extras.getString(EXTRAS_NAME);
     dstCoords=extras.getParcelable(EXTRAS_COORDS);
     info=extras.getString(EXTRAS_CACHE_INFO);

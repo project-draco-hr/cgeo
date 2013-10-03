@@ -11,5 +11,8 @@
  else {
     menu.findItem(R.id.menu_select_destination).setVisible(false);
   }
+  if (cache != null) {
+    LoggingUI.addMenuItems(this,menu,cache);
+  }
   return true;
 }

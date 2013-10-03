@@ -27,6 +27,9 @@ case R.id.menu_tts_stop:
 SpeechService.stopService(this);
 return true;
 default :
+if (LoggingUI.onMenuItemSelected(item,this,cache)) {
+return true;
+}
 int coordinatesIndex=id - COORDINATES_OFFSET;
 if (coordinatesIndex >= 0 && coordinatesIndex < coordinates.size()) {
 final IWaypoint coordinate=coordinates.get(coordinatesIndex);
