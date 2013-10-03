@@ -9,21 +9,6 @@
         break;
       }
       if (!DataStore.isOffline(geocode,null)) {
-        if ((System.currentTimeMillis() - last) < 1500) {
-          try {
-            int delay=1000 + (int)(Math.random() * 1000.0) - (int)(System.currentTimeMillis() - last);
-            if (delay < 0) {
-              delay=500;
-            }
-            sleep(delay);
-          }
- catch (          InterruptedException e) {
-          }
-        }
-        if (handler.isCancelled()) {
-          Log.i("Stopped storing process.");
-          break;
-        }
         Geocache.storeCache(null,geocode,listId,false,handler);
       }
     }
@@ -35,7 +20,6 @@
       handler.sendEmptyMessage(UPDATE_PROGRESS);
     }
     yield();
-    last=System.currentTimeMillis();
   }
   handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
   addGeoDirObservers();
