@@ -1,0 +1,12 @@
+{
+  super.onCreate(savedInstanceState);
+  initializeCommonFields();
+  if (useDialogTheme) {
+    setTheme(ActivityMixin.getDialogTheme());
+  }
+ else {
+    setTheme();
+  }
+  setContentView(resourceLayoutID);
+  Views.inject(this);
+}
