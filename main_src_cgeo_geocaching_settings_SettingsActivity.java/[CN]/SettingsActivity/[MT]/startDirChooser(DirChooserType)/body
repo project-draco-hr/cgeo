@@ -12,6 +12,7 @@
  catch (  android.content.ActivityNotFoundException ex) {
     final Intent dirChooser=new Intent(this,SimpleDirChooser.class);
     dirChooser.putExtra(Intents.EXTRA_START_DIR,startDirectory);
+    dirChooser.putExtra(SimpleDirChooser.EXTRA_CHOOSE_FOR_WRITING,dct.writeMode);
     startActivityForResult(dirChooser,dct.requestCode);
   }
 }
