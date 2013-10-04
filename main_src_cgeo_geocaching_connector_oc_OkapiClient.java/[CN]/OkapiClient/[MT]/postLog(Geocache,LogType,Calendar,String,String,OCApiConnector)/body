@@ -10,7 +10,7 @@
   if (logPassword != null) {
     params.add("password",logPassword);
   }
-  final JSONObject data=request(connector,OkapiService.SERVICE_SUBMIT_LOG,params);
+  final JSONObject data=request(connector,OkapiService.SERVICE_SUBMIT_LOG,params).data;
   if (data == null) {
     return new LogResult(StatusCode.LOG_POST_ERROR,"");
   }

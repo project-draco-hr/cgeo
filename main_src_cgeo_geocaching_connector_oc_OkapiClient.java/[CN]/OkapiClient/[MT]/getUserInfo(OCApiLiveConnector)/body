@@ -1,9 +1,12 @@
 {
   final Parameters params=new Parameters("fields",USER_INFO_FIELDS);
-  final JSONObject data=request(connector,OkapiService.SERVICE_USER,params);
-  if (data == null) {
-    return new UserInfo(StringUtils.EMPTY,0,UserInfoStatus.FAILED);
+  final JSONResult result=request(connector,OkapiService.SERVICE_USER,params);
+  if (!result.isSuccess) {
+    final OkapiError error=new OkapiError(result.data);
+    Log.e("OkapiClient.getUserInfo: error getting user info: '" + error.getMessage() + "'");
+    return new UserInfo(StringUtils.EMPTY,0,UserInfoStatus.getFromOkapiError(error.getResult()));
   }
+  JSONObject data=result.data;
   String name=StringUtils.EMPTY;
   boolean successUserName=false;
   if (!data.isNull(USER_USERNAME)) {

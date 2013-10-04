@@ -1,0 +1,15 @@
+{
+  boolean isSuccess=Network.isSuccess(response);
+  final String responseData=Network.getResponseDataAlways(response);
+  JSONObject data=null;
+  if (responseData != null) {
+    try {
+      data=new JSONObject(responseData);
+    }
+ catch (    final JSONException e) {
+      Log.w("JSONResult",e);
+    }
+  }
+  this.data=data;
+  this.isSuccess=isSuccess && data != null;
+}

@@ -1,10 +1,10 @@
 {
   if (connector == null) {
-    return null;
+    return new JSONResult(null);
   }
   final String host=connector.getHost();
   if (StringUtils.isBlank(host)) {
-    return null;
+    return new JSONResult(null);
   }
   params.add("langpref",getPreferredLanguage());
   if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
@@ -15,5 +15,5 @@
     connector.addAuthentication(params);
   }
   final String uri="http://" + host + service.methodName;
-  return Network.requestJSON(uri,params);
+  return new JSONResult(Network.getRequest(uri,params));
 }
