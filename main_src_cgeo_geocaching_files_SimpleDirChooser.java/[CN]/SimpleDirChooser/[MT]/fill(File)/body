@@ -1,4 +1,5 @@
 {
+  lastPosition=-1;
   EditText path=(EditText)findViewById(R.id.simple_dir_chooser_path);
   path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
   final File[] dirs=dir.listFiles(new DirOnlyFilenameFilter());
