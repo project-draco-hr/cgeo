@@ -1,13 +1,13 @@
 {
   final String oldMessage=Settings.getCacheTwitterMessage();
   try {
-    Settings.setCacheTwitterMessage("I found [NAME] ([URL]).");
+    TestSettings.setCacheTwitterMessage("I found [NAME] ([URL]).");
     Geocache cache=new Geocache();
     cache.setGeocode("GC1234");
     cache.setName("TwitterTest");
     assertEquals("I found TwitterTest (http://coord.info/GC1234). #cgeo #geocaching",Twitter.getStatusMessage(cache));
   }
   finally {
-    Settings.setCacheTwitterMessage(oldMessage);
+    TestSettings.setCacheTwitterMessage(oldMessage);
   }
 }
