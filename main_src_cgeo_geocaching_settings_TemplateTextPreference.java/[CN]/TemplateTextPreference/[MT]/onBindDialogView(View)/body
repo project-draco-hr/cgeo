@@ -1,0 +1,28 @@
+{
+  settingsActivity=(SettingsActivity)this.getContext();
+  editText=(EditText)view.findViewById(R.id.signature_dialog_text);
+  editText.setText(getPersistedString(StringUtils.EMPTY));
+  Button button=(Button)view.findViewById(R.id.signature_templates);
+  button.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View button){
+      AlertDialog.Builder alert=new AlertDialog.Builder(TemplateTextPreference.this.getContext());
+      alert.setTitle(R.string.init_signature_template_button);
+      final ArrayList<LogTemplate> templates=LogTemplateProvider.getTemplates();
+      String[] items=new String[templates.size()];
+      for (int i=0; i < templates.size(); i++) {
+        items[i]=settingsActivity.getResources().getString(templates.get(i).getResourceId());
+      }
+      alert.setItems(items,new DialogInterface.OnClickListener(){
+        @Override public void onClick(        DialogInterface dialog,        int position){
+          dialog.dismiss();
+          final LogTemplate template=templates.get(position);
+          insertSignatureTemplate(template);
+        }
+      }
+);
+      alert.create().show();
+    }
+  }
+);
+  super.onBindDialogView(view);
+}
