@@ -6,6 +6,7 @@
   ArrayList<Pattern> patterns=new ArrayList<Pattern>();
   patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
   if (StringUtils.isNotBlank(hourLocalized)) {
+    patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*-\\s*" + "(?:\\d{1,2})(?:\\.00)?"+ "\\s+"+ Pattern.quote(hourLocalized),Pattern.CASE_INSENSITIVE));
     patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?\\s+" + Pattern.quote(hourLocalized),Pattern.CASE_INSENSITIVE));
   }
   for (  Pattern pattern : patterns) {
