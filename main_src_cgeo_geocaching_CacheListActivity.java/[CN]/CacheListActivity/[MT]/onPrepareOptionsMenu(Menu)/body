@@ -40,7 +40,7 @@
  else {
       setMenuItemLabel(menu,R.id.menu_refresh_stored,R.string.caches_store_selected,R.string.caches_store_offline);
     }
-    menu.findItem(R.id.menu_drop_caches_and_list).setVisible(isOffline && !hasSelection && isNonDefaultList&& !adapter.isFiltered());
+    menu.findItem(R.id.menu_drop_caches_and_list).setVisible(isOffline && !hasSelection && isNonDefaultList&& !adapter.isFiltered()&& Settings.getCacheType() == CacheType.ALL);
     menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
     menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
     final boolean multipleLists=DataStore.getLists().size() >= 2;
