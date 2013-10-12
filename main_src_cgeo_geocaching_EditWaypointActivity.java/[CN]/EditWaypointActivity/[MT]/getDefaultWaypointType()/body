@@ -1,0 +1,16 @@
+{
+  if (waypointTypeSelectorPosition >= 0) {
+    return waypointTypeSelectorPosition;
+  }
+  if (waypoint != null) {
+    return POSSIBLE_WAYPOINT_TYPES.indexOf(waypoint.getWaypointType());
+  }
+switch (cache.getType()) {
+case MYSTERY:
+    return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.FINAL);
+case MULTI:
+  return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.STAGE);
+default :
+return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.WAYPOINT);
+}
+}

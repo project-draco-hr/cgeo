@@ -16,7 +16,7 @@
     details.add(R.string.waypoint_note,waypoint.getNote());
     buttonEdit.setOnClickListener(new OnClickListener(){
       @Override public void onClick(      View arg0){
-        EditWaypointActivity.startActivityEditWaypoint(WaypointPopup.this,waypoint.getId());
+        EditWaypointActivity.startActivityEditWaypoint(WaypointPopup.this,cache,waypoint.getId());
         finish();
       }
     }

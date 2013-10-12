@@ -18,7 +18,7 @@ startActivity(Intent.createChooser(intent,res.getText(R.string.cache_share_field
 return true;
 case R.id.menu_waypoint_edit:
 if (selectedWaypoint != null) {
-EditWaypointActivity.startActivityEditWaypoint(this,selectedWaypoint.getId());
+EditWaypointActivity.startActivityEditWaypoint(this,cache,selectedWaypoint.getId());
 refreshOnResume=true;
 }
 return true;

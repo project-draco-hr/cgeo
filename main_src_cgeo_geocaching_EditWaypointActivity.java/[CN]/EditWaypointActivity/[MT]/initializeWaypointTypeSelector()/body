@@ -1,6 +1,5 @@
 {
-  wpTypes=new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
-  ArrayAdapter<WaypointType> wpAdapter=new ArrayAdapter<WaypointType>(this,android.R.layout.simple_spinner_item,wpTypes.toArray(new WaypointType[wpTypes.size()]));
+  ArrayAdapter<WaypointType> wpAdapter=new ArrayAdapter<WaypointType>(this,android.R.layout.simple_spinner_item,POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
   wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
   waypointTypeSelector.setAdapter(wpAdapter);
   waypointTypeSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -11,15 +10,6 @@
     }
   }
 );
-  if (initViews) {
-    int typeIndex=-1;
-    if (waypoint != null) {
-      typeIndex=wpTypes.indexOf(waypoint.getWaypointType());
-    }
-    waypointTypeSelector.setSelection(typeIndex >= 0 ? typeIndex : wpTypes.indexOf(WaypointType.WAYPOINT));
-  }
- else {
-    waypointTypeSelector.setSelection(waypointTypeSelectorPosition);
-  }
+  waypointTypeSelector.setSelection(getDefaultWaypointType());
   waypointTypeSelector.setVisibility(View.VISIBLE);
 }

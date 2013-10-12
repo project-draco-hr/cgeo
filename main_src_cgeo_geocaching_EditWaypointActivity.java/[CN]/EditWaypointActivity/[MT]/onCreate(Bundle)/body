@@ -23,6 +23,10 @@
   if (savedInstanceState != null) {
     initViews=false;
   }
+  if (geocode != null) {
+    cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+    setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode),cache);
+  }
   if (id > 0) {
     waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
     waitDialog.setCancelable(true);
@@ -30,10 +34,6 @@
   }
  else {
     initializeWaypointTypeSelector();
-    if (geocode != null) {
-      final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
-      setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode),cache);
-    }
   }
   initializeDistanceUnitSelector();
   disableSuggestions(distanceView);
