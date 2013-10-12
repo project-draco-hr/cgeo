@@ -1,8 +1,8 @@
 {
-  final String usernameText=userNameEditText.getText().toString();
+  final String usernameText=StringUtils.trim(userNameEditText.getText().toString());
   if (StringUtils.isBlank(usernameText)) {
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_user));
     return;
   }
-  CacheListActivity.startActivityUserName(this,StringUtils.trim(usernameText));
+  CacheListActivity.startActivityUserName(this,usernameText);
 }

@@ -1,6 +1,6 @@
 {
-  final String latText=buttonLatitude.getText().toString();
-  final String lonText=buttonLongitude.getText().toString();
+  final String latText=StringUtils.trim(buttonLatitude.getText().toString());
+  final String lonText=StringUtils.trim(buttonLongitude.getText().toString());
   if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
     final IGeoData geo=app.currentGeo();
     if (geo.getCoords() != null) {
@@ -10,7 +10,7 @@
   }
  else {
     try {
-      CacheListActivity.startActivityCoordinates(this,new Geopoint(StringUtils.trim(latText),StringUtils.trim(lonText)));
+      CacheListActivity.startActivityCoordinates(this,new Geopoint(latText,lonText));
     }
  catch (    final Geopoint.ParseException e) {
       showToast(res.getString(e.resource));

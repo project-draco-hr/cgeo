@@ -1,10 +1,10 @@
 {
-  final String addText=addressEditText.getText().toString();
+  final String addText=StringUtils.trim(addressEditText.getText().toString());
   if (StringUtils.isBlank(addText)) {
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_address));
     return;
   }
   final Intent addressesIntent=new Intent(this,AddressListActivity.class);
-  addressesIntent.putExtra(Intents.EXTRA_KEYWORD,StringUtils.trim(addText));
+  addressesIntent.putExtra(Intents.EXTRA_KEYWORD,addText);
   startActivity(addressesIntent);
 }

@@ -1,10 +1,10 @@
 {
-  final String trackableText=trackableEditText.getText().toString();
+  final String trackableText=StringUtils.trim(trackableEditText.getText().toString());
   if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_tb));
     return;
   }
   final Intent trackablesIntent=new Intent(this,TrackableActivity.class);
-  trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,StringUtils.trim(trackableText).toUpperCase(Locale.US));
+  trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,trackableText.toUpperCase(Locale.US));
   startActivity(trackablesIntent);
 }

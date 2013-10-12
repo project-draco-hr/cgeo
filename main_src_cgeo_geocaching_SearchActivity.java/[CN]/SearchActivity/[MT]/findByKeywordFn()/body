@@ -1,8 +1,8 @@
 {
-  final String keyText=keywordEditText.getText().toString();
+  final String keyText=StringUtils.trim(keywordEditText.getText().toString());
   if (StringUtils.isBlank(keyText)) {
     helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_keyword));
     return;
   }
-  CacheListActivity.startActivityKeyword(this,StringUtils.trim(keyText));
+  CacheListActivity.startActivityKeyword(this,keyText);
 }

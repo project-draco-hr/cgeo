@@ -1,55 +1,70 @@
 {
   buttonLatitude.setOnClickListener(new FindByCoordsAction());
   buttonLongitude.setOnClickListener(new FindByCoordsAction());
-  findByCoords.setOnClickListener(new FindByCoordsListener());
-  EditUtils.setActionListener((EditText)findViewById(R.id.address),new Runnable(){
+  buttonSearchCoords.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View arg0){
+      findByCoordsFn();
+    }
+  }
+);
+  EditUtils.setActionListener(addressEditText,new Runnable(){
     @Override public void run(){
       findByAddressFn();
     }
   }
 );
-  findByAddress.setOnClickListener(new FindByAddressListener());
-  EditUtils.setActionListener(geocodeEdit,new Runnable(){
+  buttonSearchAddress.setOnClickListener(new FindByAddressListener());
+  EditUtils.setActionListener(geocodeEditText,new Runnable(){
     @Override public void run(){
       findByGeocodeFn();
     }
   }
 );
-  addHistoryEntries(geocodeEdit,DataStore.getRecentGeocodesForSearch());
-  displayByGeocode.setOnClickListener(new FindByGeocodeListener());
-  EditUtils.setActionListener((EditText)findViewById(R.id.keyword),new Runnable(){
+  addHistoryEntries(geocodeEditText,DataStore.getRecentGeocodesForSearch());
+  buttonSearchGeocode.setOnClickListener(new FindByGeocodeListener());
+  EditUtils.setActionListener(keywordEditText,new Runnable(){
     @Override public void run(){
       findByKeywordFn();
     }
   }
 );
-  findByKeyword.setOnClickListener(new FindByKeywordListener());
-  EditUtils.setActionListener((EditText)findViewById(R.id.username),new Runnable(){
+  buttonSearchKeyword.setOnClickListener(new FindByKeywordListener());
+  EditUtils.setActionListener(userNameEditText,new Runnable(){
     @Override public void run(){
       findByUsernameFn();
     }
   }
 );
-  findByUserName.setOnClickListener(new FindByUsernameListener());
-  EditUtils.setActionListener((EditText)findViewById(R.id.owner),new Runnable(){
+  buttonSearchUserName.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View arg0){
+      findByUsernameFn();
+    }
+  }
+);
+  EditUtils.setActionListener(ownerNameEditText,new Runnable(){
     @Override public void run(){
       findByOwnerFn();
     }
   }
 );
-  findByOwner.setOnClickListener(new OnClickListener(){
+  buttonSearchOwner.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       findByOwnerFn();
     }
   }
 );
-  EditUtils.setActionListener(trackable,new Runnable(){
+  EditUtils.setActionListener(trackableEditText,new Runnable(){
     @Override public void run(){
       findTrackableFn();
     }
   }
 );
-  addHistoryEntries(trackable,DataStore.getTrackableCodes());
-  disableSuggestions(trackable);
-  displayTrackable.setOnClickListener(new FindTrackableListener());
+  addHistoryEntries(trackableEditText,DataStore.getTrackableCodes());
+  disableSuggestions(trackableEditText);
+  buttonSearchTrackable.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View arg0){
+      findTrackableFn();
+    }
+  }
+);
 }
