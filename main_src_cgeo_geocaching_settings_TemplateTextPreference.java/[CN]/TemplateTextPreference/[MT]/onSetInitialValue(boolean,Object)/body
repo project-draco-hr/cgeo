@@ -1,0 +1,9 @@
+{
+  if (restorePersistedValue) {
+    initialValue=this.getPersistedString(DEFAULT_VALUE);
+  }
+ else {
+    initialValue=defaultValue.toString();
+    persistString(initialValue);
+  }
+}
