@@ -1,5 +1,7 @@
 {
   final int read=super.read();
-  progress+=read;
+  if (read >= 0) {
+    progress++;
+  }
   return read;
 }
