@@ -2,58 +2,43 @@
   buttonLatitude.setOnClickListener(new FindByCoordsAction());
   buttonLongitude.setOnClickListener(new FindByCoordsAction());
   buttonSearchCoords.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View arg0){
+    @Override public void onClick(    final View arg0){
       findByCoordsFn();
     }
   }
 );
-  EditUtils.setActionListener(addressEditText,new Runnable(){
+  setSearchAction(addressEditText,buttonSearchAddress,new Runnable(){
     @Override public void run(){
       findByAddressFn();
     }
   }
 );
-  buttonSearchAddress.setOnClickListener(new FindByAddressListener());
-  EditUtils.setActionListener(geocodeEditText,new Runnable(){
+  setSearchAction(geocodeEditText,buttonSearchGeocode,new Runnable(){
     @Override public void run(){
       findByGeocodeFn();
     }
   }
 );
   addHistoryEntries(geocodeEditText,DataStore.getRecentGeocodesForSearch());
-  buttonSearchGeocode.setOnClickListener(new FindByGeocodeListener());
-  EditUtils.setActionListener(keywordEditText,new Runnable(){
+  setSearchAction(keywordEditText,buttonSearchKeyword,new Runnable(){
     @Override public void run(){
       findByKeywordFn();
     }
   }
 );
-  buttonSearchKeyword.setOnClickListener(new FindByKeywordListener());
-  EditUtils.setActionListener(userNameEditText,new Runnable(){
+  setSearchAction(userNameEditText,buttonSearchUserName,new Runnable(){
     @Override public void run(){
       findByUsernameFn();
     }
   }
 );
-  buttonSearchUserName.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View arg0){
-      findByUsernameFn();
-    }
-  }
-);
-  EditUtils.setActionListener(ownerNameEditText,new Runnable(){
+  setSearchAction(ownerNameEditText,buttonSearchOwner,new Runnable(){
     @Override public void run(){
       findByOwnerFn();
     }
   }
 );
-  buttonSearchOwner.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View arg0){
-      findByOwnerFn();
-    }
-  }
-);
-  EditUtils.setActionListener(trackableEditText,new Runnable(){
+  setSearchAction(trackableEditText,buttonSearchTrackable,new Runnable(){
     @Override public void run(){
       findTrackableFn();
     }
@@ -61,10 +46,4 @@
 );
   addHistoryEntries(trackableEditText,DataStore.getTrackableCodes());
   disableSuggestions(trackableEditText);
-  buttonSearchTrackable.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View arg0){
-      findTrackableFn();
-    }
-  }
-);
 }
