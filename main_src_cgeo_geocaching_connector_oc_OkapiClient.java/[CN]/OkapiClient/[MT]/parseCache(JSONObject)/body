@@ -31,7 +31,6 @@
     }
     cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES)));
     cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
-    cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
     cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)),false);
     if (!response.isNull(CACHE_IS_WATCHED)) {
       cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));

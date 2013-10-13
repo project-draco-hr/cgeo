@@ -12,4 +12,5 @@
   if (!response.isNull(CACHE_IS_FOUND)) {
     cache.setFound(response.getBoolean(CACHE_IS_FOUND));
   }
+  cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
 }
