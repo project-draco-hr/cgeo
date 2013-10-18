@@ -15,7 +15,7 @@
       if (searchingThread != null && searchingThread.isAlive()) {
         searchingThread.notifyEnd();
       }
-      if (files.isEmpty()) {
+      if (files.isEmpty() && requireFiles()) {
         finish();
       }
     }

@@ -1,0 +1,11 @@
+{
+  super.onActivityResult(requestCode,resultCode,data);
+  if (resultCode != RESULT_OK) {
+    return;
+  }
+  if (requestCode == REQUEST_DIRECTORY) {
+    final String directory=new File(data.getData().getPath()).getAbsolutePath();
+    mapFile=directory;
+    close();
+  }
+}
