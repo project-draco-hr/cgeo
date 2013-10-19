@@ -1,7 +1,7 @@
 {
   if (status.length() + HASH_PREFIX_WITH_BLANK.length() + tag.length() <= MAX_TWEET_SIZE) {
     final String tagWithPrefix=HASH_PREFIX_WITH_BLANK + tag;
-    if (status.indexOf(tagWithPrefix,0) == -1) {
+    if (!StringUtils.contains(status,tagWithPrefix)) {
       status.append(tagWithPrefix);
     }
   }
