@@ -50,7 +50,7 @@
     holder.logStatusMark.setVisibility(View.GONE);
   }
   Spannable spannable=null;
-  if (cache.isDisabled() || cache.isArchived()) {
+  if (cache.isDisabled() || cache.isArchived() || isPastEvent(cache)) {
     spannable=Spannable.Factory.getInstance().newSpannable(cache.getName());
     spannable.setSpan(new StrikethroughSpan(),0,spannable.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
