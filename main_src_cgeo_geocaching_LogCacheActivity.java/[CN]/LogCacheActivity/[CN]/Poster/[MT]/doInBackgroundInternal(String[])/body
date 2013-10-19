@@ -14,7 +14,7 @@
       cache.clearOfflineLog();
       if (typeSelected == LogType.FOUND_IT) {
         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-          Twitter.postTweetCache(geocode);
+          Twitter.postTweetCache(geocode,logNow);
         }
       }
       if (GCVote.isValidRating(rating)) {

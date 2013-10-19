@@ -94,5 +94,15 @@
     }
   }
 );
+  templates.add(new LogTemplate("LOG",R.string.init_signature_template_log){
+    @Override public String getValue(    LogContext context){
+      LogEntry logEntry=context.getLogEntry();
+      if (logEntry != null) {
+        return logEntry.getDisplayText();
+      }
+      return StringUtils.EMPTY;
+    }
+  }
+);
   return templates;
 }
