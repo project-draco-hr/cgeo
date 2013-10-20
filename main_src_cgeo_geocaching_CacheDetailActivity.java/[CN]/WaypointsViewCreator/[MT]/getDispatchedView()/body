@@ -1,2 +1,37 @@
 {
+  if (cache == null) {
+    return null;
+  }
+  final List<Waypoint> sortedWaypoints=new ArrayList<Waypoint>(cache.getWaypoints());
+  Collections.sort(sortedWaypoints);
+  view=(ListView)getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page,null);
+  view.setClickable(true);
+  View addWaypointButton=getLayoutInflater().inflate(R.layout.cachedetail_waypoints_footer,null);
+  view.addFooterView(addWaypointButton);
+  addWaypointButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      EditWaypointActivity.startActivityAddWaypoint(CacheDetailActivity.this,cache);
+      refreshOnResume=true;
+    }
+  }
+);
+  view.setAdapter(new ArrayAdapter<Waypoint>(CacheDetailActivity.this,R.layout.waypoint_item,sortedWaypoints){
+    @Override public View getView(    int position,    View convertView,    ViewGroup parent){
+      View rowView=convertView;
+      if (null == rowView) {
+        rowView=getLayoutInflater().inflate(R.layout.waypoint_item,null);
+        rowView.setClickable(true);
+        rowView.setLongClickable(true);
+      }
+      WaypointViewHolder holder=(WaypointViewHolder)rowView.getTag();
+      if (null == holder) {
+        holder=new WaypointViewHolder(rowView);
+      }
+      final Waypoint waypoint=getItem(position);
+      fillViewHolder(rowView,holder,waypoint);
+      return rowView;
+    }
+  }
+);
+  return view;
 }
