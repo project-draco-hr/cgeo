@@ -3,6 +3,7 @@
     return;
   }
   try {
+    final String status=shortenToMaxSize(statusIn);
     Parameters parameters=new Parameters("status",status);
     if (coords != null) {
       parameters.put("lat",coords.format(Format.LAT_DECDEGREE_RAW),"long",coords.format(Format.LON_DECDEGREE_RAW),"display_coordinates","true");
