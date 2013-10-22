@@ -1,5 +1,9 @@
 {
-  File directory=new File(Settings.getMapFileDirectory());
+  final String directoryPath=Settings.getMapFileDirectory();
+  if (StringUtils.isBlank(directoryPath)) {
+    return Collections.emptyList();
+  }
+  File directory=new File(directoryPath);
   if (directory.isDirectory()) {
     try {
       ArrayList<String> mapFileList=new ArrayList<String>();
