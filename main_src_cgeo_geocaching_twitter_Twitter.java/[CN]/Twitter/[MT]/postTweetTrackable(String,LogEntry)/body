@@ -1,0 +1,7 @@
+{
+  final Trackable trackable=DataStore.loadTrackable(geocode);
+  if (trackable == null) {
+    return;
+  }
+  postTweet(CgeoApplication.getInstance(),getStatusMessage(trackable,logEntry),null);
+}

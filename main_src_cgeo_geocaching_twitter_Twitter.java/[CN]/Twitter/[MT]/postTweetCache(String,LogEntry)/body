@@ -1,4 +1,7 @@
 {
   final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  if (cache == null) {
+    return;
+  }
   postTweet(CgeoApplication.getInstance(),getStatusMessage(cache,logEntry),null);
 }

@@ -1,0 +1,12 @@
+{
+  final String oldMessage=Settings.getCacheTwitterMessage();
+  try {
+    TestSettings.setTrackableTwitterMessage("[LOG]");
+    Trackable trackable=new Trackable();
+    LogEntry log=new LogEntry(0,LogType.FOUND_IT,"trackable log text");
+    assertEquals("trackable log text #cgeo #geocaching",Twitter.getStatusMessage(trackable,log));
+  }
+  finally {
+    TestSettings.setTrackableTwitterMessage(oldMessage);
+  }
+}
