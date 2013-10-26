@@ -1,0 +1,11 @@
+{
+  final String geoCode="OCDDD2";
+  removeCacheCompletely(geoCode);
+  Geocache cache=OkapiClient.getCache(geoCode);
+  assertNotNull("Did not get cache from OKAPI",cache);
+  cache=DataStore.loadCache(geoCode,LoadFlags.LOAD_ALL_DB_ONLY);
+  assertNotNull(cache);
+  assertEquals(3,cache.getWaypoints().size());
+  cache.refresh(cache.getListId(),null);
+  assertEquals(3,cache.getWaypoints().size());
+}
