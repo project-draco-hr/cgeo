@@ -1,0 +1,6 @@
+{
+  this.runAfterwards=runAfterwards;
+  waitDialog=ProgressDialog.show(activity,res.getString(R.string.search_pocket_title),res.getString(R.string.search_pocket_loading),true,true);
+  LoadPocketQueryListThread thread=new LoadPocketQueryListThread(loadPocketQueryHandler);
+  thread.start();
+}

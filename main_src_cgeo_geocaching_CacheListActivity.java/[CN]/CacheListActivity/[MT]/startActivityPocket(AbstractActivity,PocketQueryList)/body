@@ -1,0 +1,12 @@
+{
+  final String guid=pq.getGuid();
+  if (guid == null) {
+    context.showToast(CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
+    return;
+  }
+  final Intent cachesIntent=new Intent(context,CacheListActivity.class);
+  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.POCKET);
+  cachesIntent.putExtra(Intents.EXTRA_NAME,pq.getName());
+  cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID,guid);
+  context.startActivity(cachesIntent);
+}
