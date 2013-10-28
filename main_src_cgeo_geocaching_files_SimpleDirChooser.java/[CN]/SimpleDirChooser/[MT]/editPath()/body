@@ -1,0 +1,29 @@
+{
+  AlertDialog.Builder builder=new AlertDialog.Builder(SimpleDirChooser.this);
+  builder.setTitle(R.string.simple_dir_chooser_current_path);
+  final EditText input=new EditText(SimpleDirChooser.this);
+  input.setInputType(InputType.TYPE_CLASS_TEXT);
+  input.setText(currentDir.getPath());
+  builder.setView(input);
+  builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+      String pathText=input.getText().toString();
+      File newPathDir=new File(pathText);
+      if (newPathDir.exists() && newPathDir.isDirectory()) {
+        currentDir=newPathDir;
+        fill(currentDir);
+      }
+ else {
+        showToast(SimpleDirChooser.this.getResources().getString(R.string.simple_dir_chooser_invalid_path));
+      }
+    }
+  }
+);
+  builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+      dialog.cancel();
+    }
+  }
+);
+  builder.show();
+}
