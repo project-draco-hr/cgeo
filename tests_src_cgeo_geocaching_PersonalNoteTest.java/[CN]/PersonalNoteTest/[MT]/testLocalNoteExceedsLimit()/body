@@ -1,0 +1,12 @@
+{
+  String testString=StringUtils.repeat("x",GCConstants.PERSONAL_NOTE_MAX_CHARS + 1);
+  Geocache truncCache=new Geocache();
+  truncCache.setPersonalNote(testString.substring(0,GCConstants.PERSONAL_NOTE_MAX_CHARS));
+  PersonalNote parsedNote=new PersonalNote(truncCache);
+  Geocache exceedingCache=new Geocache();
+  exceedingCache.setListId(StoredList.STANDARD_LIST_ID);
+  exceedingCache.setPersonalNote(testString.toString());
+  PersonalNote otherNote=new PersonalNote(exceedingCache);
+  PersonalNote result=parsedNote.mergeWith(otherNote);
+  assertPersonalNote(result,null,testString.toString());
+}
