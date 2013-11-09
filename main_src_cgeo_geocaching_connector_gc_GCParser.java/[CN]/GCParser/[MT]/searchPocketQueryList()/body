@@ -26,5 +26,11 @@
     final PocketQueryList pqList=new PocketQueryList(guid,name,maxCaches);
     list.add(pqList);
   }
+  Collections.sort(list,new Comparator<PocketQueryList>(){
+    @Override public int compare(    PocketQueryList left,    PocketQueryList right){
+      return String.CASE_INSENSITIVE_ORDER.compare(left.getName(),right.getName());
+    }
+  }
+);
   return list;
 }
