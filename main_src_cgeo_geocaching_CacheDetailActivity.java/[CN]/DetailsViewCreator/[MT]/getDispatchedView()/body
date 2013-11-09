@@ -41,8 +41,9 @@
     }
     ownerView.setOnClickListener(new OwnerActionsClickListener(cache));
   }
-  if (cache.getHiddenDate() != null) {
-    final long time=cache.getHiddenDate().getTime();
+  final Date hiddenDate=cache.getHiddenDate();
+  if (hiddenDate != null) {
+    final long time=hiddenDate.getTime();
     if (time > 0) {
       String dateString=Formatter.formatFullDate(time);
       if (cache.isEventCache()) {
