@@ -1,0 +1,14 @@
+{
+  List<Trackable> inventory=cache.getInventory();
+  if (inventory.isEmpty()) {
+    return;
+  }
+  gpx.startTag(PREFIX_GROUNDSPEAK,"travelbugs");
+  for (  final Trackable trackable : inventory) {
+    gpx.startTag(PREFIX_GROUNDSPEAK,"travelbug");
+    gpx.attribute("","ref",trackable.getGeocode());
+    XmlUtils.simpleText(gpx,PREFIX_GROUNDSPEAK,"name",trackable.getName());
+    gpx.endTag(PREFIX_GROUNDSPEAK,"travelbug");
+  }
+  gpx.endTag(PREFIX_GROUNDSPEAK,"travelbugs");
+}

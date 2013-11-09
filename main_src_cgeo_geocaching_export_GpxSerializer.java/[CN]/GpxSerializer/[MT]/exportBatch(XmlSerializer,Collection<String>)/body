@@ -24,6 +24,7 @@
     gpx.text(cache.getDescription());
     gpx.endTag(PREFIX_GROUNDSPEAK,"long_description");
     writeLogs(cache);
+    writeTravelBugs(cache);
     gpx.endTag(PREFIX_GROUNDSPEAK,"cache");
     gpx.endTag(PREFIX_GPX,"wpt");
     writeWaypoints(cache);
