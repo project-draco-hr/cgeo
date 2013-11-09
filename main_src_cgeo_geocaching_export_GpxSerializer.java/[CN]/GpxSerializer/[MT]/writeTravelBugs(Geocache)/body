@@ -1,6 +1,6 @@
 {
   List<Trackable> inventory=cache.getInventory();
-  if (inventory.isEmpty()) {
+  if (CollectionUtils.isEmpty(inventory)) {
     return;
   }
   gpx.startTag(PREFIX_GROUNDSPEAK,"travelbugs");
