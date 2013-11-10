@@ -1,4 +1,5 @@
 {
+  final String query=StringUtils.trim(nonTrimmedQuery);
   String geocode=ConnectorFactory.getGeocodeFromURL(query);
   if (StringUtils.isEmpty(geocode)) {
     geocode=StringUtils.upperCase(StringUtils.trim(query));
