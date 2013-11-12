@@ -2,23 +2,7 @@
   if (maxXY <= 0) {
     return filePath;
   }
-  BitmapFactory.Options sizeOnlyOptions=new BitmapFactory.Options();
-  sizeOnlyOptions.inJustDecodeBounds=true;
-  BitmapFactory.decodeFile(filePath,sizeOnlyOptions);
-  final int myMaxXY=Math.max(sizeOnlyOptions.outHeight,sizeOnlyOptions.outWidth);
-  final int sampleSize=myMaxXY / maxXY;
-  Bitmap image;
-  if (sampleSize > 1) {
-    BitmapFactory.Options sampleOptions=new BitmapFactory.Options();
-    sampleOptions.inSampleSize=sampleSize;
-    image=BitmapFactory.decodeFile(filePath,sampleOptions);
-  }
- else {
-    image=BitmapFactory.decodeFile(filePath);
-  }
-  if (image == null) {
-    return null;
-  }
+  Bitmap image=readDownsampledImage(filePath,maxXY,maxXY);
   final BitmapDrawable scaledImage=scaleBitmapTo(image,maxXY,maxXY);
   final File tempImageFile=ImageUtils.getOutputImageFile();
   if (tempImageFile == null) {
