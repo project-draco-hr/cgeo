@@ -5,14 +5,10 @@
   final int myMaxXY=Math.max(sizeOnlyOptions.outHeight,sizeOnlyOptions.outWidth);
   final int maxXY=Math.max(maxX,maxY);
   final int sampleSize=myMaxXY / maxXY;
-  Bitmap image;
   if (sampleSize > 1) {
     BitmapFactory.Options sampleOptions=new BitmapFactory.Options();
     sampleOptions.inSampleSize=sampleSize;
-    image=BitmapFactory.decodeFile(filePath,sampleOptions);
+    return BitmapFactory.decodeFile(filePath,sampleOptions);
   }
- else {
-    image=BitmapFactory.decodeFile(filePath);
-  }
-  return image;
+  return BitmapFactory.decodeFile(filePath);
 }
