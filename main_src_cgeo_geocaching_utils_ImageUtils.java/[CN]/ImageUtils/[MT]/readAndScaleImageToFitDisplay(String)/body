@@ -3,6 +3,9 @@
   final int maxWidth=displaySize.x - 25;
   final int maxHeight=displaySize.y - 25;
   final Bitmap image=readDownsampledImage(filename,maxWidth,maxHeight);
+  if (image == null) {
+    return null;
+  }
   final BitmapDrawable scaledImage=scaleBitmapTo(image,maxWidth,maxHeight);
   return scaledImage.getBitmap();
 }

@@ -3,6 +3,9 @@
     return filePath;
   }
   Bitmap image=readDownsampledImage(filePath,maxXY,maxXY);
+  if (image == null) {
+    return null;
+  }
   final BitmapDrawable scaledImage=scaleBitmapTo(image,maxXY,maxXY);
   final File tempImageFile=ImageUtils.getOutputImageFile();
   if (tempImageFile == null) {
