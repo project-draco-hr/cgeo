@@ -1,4 +1,7 @@
 {
+  if (filePath == null) {
+    return null;
+  }
   scaleChoiceIndex=scaleView.getSelectedItemPosition();
   final int maxXY=getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
   return ImageUtils.readScaleAndWriteImage(filePath,maxXY);

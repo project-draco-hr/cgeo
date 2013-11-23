@@ -1,12 +1,12 @@
 {
-  if (imageUri == null) {
+  if (imageUri == null || imageUri.getPath() == null) {
     return;
   }
   if (!new File(imageUri.getPath()).exists()) {
     Log.i("Image does not exist");
     return;
   }
-  final Bitmap bitmap=ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
+  @SuppressWarnings("null") final Bitmap bitmap=ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
   imagePreview.setImageBitmap(bitmap);
   imagePreview.setVisibility(View.VISIBLE);
 }
