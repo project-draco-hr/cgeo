@@ -2,7 +2,17 @@
   final List<Waypoint> waypoints=cache.getWaypoints();
   final List<Waypoint> ownWaypoints=new ArrayList<Waypoint>(waypoints.size());
   final List<Waypoint> originWaypoints=new ArrayList<Waypoint>(waypoints.size());
+  int maxPrefix=0;
   for (  final Waypoint wp : cache.getWaypoints()) {
+    final String prefix=wp.getPrefix();
+    if (StringUtils.isNotBlank(prefix)) {
+      try {
+        final int numericPrefix=Integer.parseInt(prefix);
+        maxPrefix=Math.max(numericPrefix,maxPrefix);
+      }
+ catch (      final NumberFormatException ex) {
+      }
+    }
     if (wp.isUserDefined()) {
       ownWaypoints.add(wp);
     }
@@ -10,20 +20,14 @@
       originWaypoints.add(wp);
     }
   }
-  int maxPrefix=0;
   for (  final Waypoint wp : originWaypoints) {
-    final String prefix=wp.getPrefix();
-    try {
-      final int numericPrefix=Integer.parseInt(prefix);
-      maxPrefix=Math.max(numericPrefix,maxPrefix);
-    }
- catch (    final NumberFormatException ex) {
-    }
-    writeCacheWaypoint(wp,prefix);
+    writeCacheWaypoint(wp);
   }
   for (  final Waypoint wp : ownWaypoints) {
-    maxPrefix++;
-    final String prefix=StringUtils.leftPad(String.valueOf(maxPrefix),2,'0');
-    writeCacheWaypoint(wp,prefix);
+    if (StringUtils.isBlank(wp.getPrefix()) || StringUtils.equalsIgnoreCase("OWN",wp.getPrefix())) {
+      maxPrefix++;
+      wp.setPrefix(StringUtils.leftPad(String.valueOf(maxPrefix),2,'0'));
+    }
+    writeCacheWaypoint(wp);
   }
 }

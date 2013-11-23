@@ -1,0 +1,7 @@
+{
+  String gpxId=prefix;
+  if (StringUtils.isNotBlank(geocode) && geocode.length() > 2) {
+    gpxId+=geocode.substring(2);
+  }
+  return gpxId;
+}

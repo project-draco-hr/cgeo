@@ -57,7 +57,7 @@
   database.beginTransaction();
   try {
     saveAttributesWithoutTransaction(cache);
-    saveOriginalWaypointsWithoutTransaction(cache);
+    saveWaypointsWithoutTransaction(cache);
     saveSpoilersWithoutTransaction(cache);
     saveLogsWithoutTransaction(cache.getGeocode(),cache.getLogs());
     saveLogCountsWithoutTransaction(cache);

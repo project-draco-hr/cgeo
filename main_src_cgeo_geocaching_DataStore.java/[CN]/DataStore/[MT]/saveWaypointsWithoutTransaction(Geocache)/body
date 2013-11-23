@@ -6,10 +6,6 @@
     ContentValues values=new ContentValues();
     long timeStamp=System.currentTimeMillis();
     for (    Waypoint oneWaypoint : waypoints) {
-      if (oneWaypoint.isUserDefined()) {
-        currentWaypointIds.add(Integer.toString(oneWaypoint.getId()));
-        continue;
-      }
       values.clear();
       values.put("geocode",geocode);
       values.put("updated",timeStamp);
