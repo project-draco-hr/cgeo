@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  Views.inject(this);
+  ButterKnife.inject(this);
   mapFile=Settings.getMapFile();
   selectDirectory.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){

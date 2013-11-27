@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  Views.inject(this);
+  ButterKnife.inject(this);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     waypointId=extras.getInt(Intents.EXTRA_WAYPOINT_ID);

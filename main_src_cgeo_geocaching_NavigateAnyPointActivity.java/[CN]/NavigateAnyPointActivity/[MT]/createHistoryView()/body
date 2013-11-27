@@ -1,7 +1,7 @@
 {
   final View pointControls=getLayoutInflater().inflate(R.layout.navigateanypoint_header,null);
   historyListView.addHeaderView(pointControls,null,false);
-  Views.inject(this);
+  ButterKnife.inject(this);
   if (getHistoryOfSearchedLocations().isEmpty()) {
     historyListView.addFooterView(getEmptyHistoryFooter(),null,false);
   }
