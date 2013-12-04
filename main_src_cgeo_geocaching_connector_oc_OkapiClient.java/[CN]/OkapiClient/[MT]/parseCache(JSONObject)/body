@@ -29,7 +29,7 @@
         cache.addSpoiler(new Image(url,title));
       }
     }
-    cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES)));
+    cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES),response.optJSONArray(CACHE_ATTR_ACODES)));
     cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
     cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)),false);
     if (!response.isNull(CACHE_IS_WATCHED)) {

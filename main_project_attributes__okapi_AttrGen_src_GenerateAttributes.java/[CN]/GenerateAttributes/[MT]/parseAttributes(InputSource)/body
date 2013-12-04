@@ -10,14 +10,21 @@
         if (qName.equalsIgnoreCase("attr")) {
           attr=new AttrInfo();
           names=new ArrayList<String>();
+          attr.acode=Integer.parseInt(attributes.getValue("acode").substring(1));
         }
         if (attr != null && qName.equalsIgnoreCase("opencaching")) {
-          if ("http://opencaching.de/".equalsIgnoreCase(attributes.getValue("site_url"))) {
+          if ("http://www.opencaching.de/".equalsIgnoreCase(attributes.getValue("schema"))) {
             attr.oc_de_id=Integer.parseInt(attributes.getValue("id"));
           }
- else           if ("http://opencaching.pl/".equalsIgnoreCase(attributes.getValue("site_url"))) {
+ else           if ("http://opencaching.pl/".equalsIgnoreCase(attributes.getValue("schema"))) {
             attr.oc_pl_id=Integer.parseInt(attributes.getValue("id"));
           }
+ else           if ("http://www.opencaching.nl/".equalsIgnoreCase(attributes.getValue("schema"))) {
+            attr.oc_nl_id=Integer.parseInt(attributes.getValue("id"));
+          }
+        }
+        if (attr != null && qName.equalsIgnoreCase("groundspeak")) {
+          attr.gc_id=Integer.parseInt(attributes.getValue("id"));
         }
         if (names != null && qName.equalsIgnoreCase("name")) {
           readingName=true;
