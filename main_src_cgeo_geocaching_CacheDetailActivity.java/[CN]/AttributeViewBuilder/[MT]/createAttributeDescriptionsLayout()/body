@@ -5,10 +5,9 @@
   for (  String attributeName : cache.getAttributes()) {
     final boolean enabled=CacheAttribute.isEnabled(attributeName);
     CacheAttribute attrib=CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
-    if (attrib == null) {
-      attrib=CacheAttribute.UNKNOWN;
+    if (attrib != null) {
+      attributeName=attrib.getL10n(enabled);
     }
-    attributeName=attrib.getL10n(enabled);
     if (buffer.length() > 0) {
       buffer.append('\n');
     }
