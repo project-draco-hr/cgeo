@@ -1,0 +1,12 @@
+{
+  if (view == null) {
+    return null;
+  }
+  int position=view.getFirstVisiblePosition();
+  View child=view.getChildAt(0);
+  int positionFromTop=(child == null) ? 0 : child.getTop();
+  Bundle state=new Bundle();
+  state.putInt("position",position);
+  state.putInt("positionFromTop",positionFromTop);
+  return state;
+}

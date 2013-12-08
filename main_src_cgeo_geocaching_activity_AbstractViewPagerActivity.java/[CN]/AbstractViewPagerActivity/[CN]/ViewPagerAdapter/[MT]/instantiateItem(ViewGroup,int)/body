@@ -4,11 +4,14 @@
   if (null == creator && null != page) {
     creator=AbstractViewPagerActivity.this.createViewCreator(page);
     viewCreators.put(page,creator);
+    viewStates.put(page,new Bundle());
   }
   View view=null;
   try {
     if (null != creator) {
       view=creator.getView();
+      Bundle state=viewStates.get(page);
+      creator.setViewState(state);
       container.addView(view,0);
     }
   }

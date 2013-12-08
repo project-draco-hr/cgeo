@@ -2,6 +2,9 @@
   for (  PageViewCreator creator : viewCreators.values()) {
     creator.notifyDataSetChanged();
   }
+  for (  Bundle state : viewStates.values()) {
+    state.clear();
+  }
   pageOrder.clear();
   final Pair<List<? extends Page>,Integer> pagesAndIndex=getOrderedPages();
   pageOrder.addAll(pagesAndIndex.getLeft());
