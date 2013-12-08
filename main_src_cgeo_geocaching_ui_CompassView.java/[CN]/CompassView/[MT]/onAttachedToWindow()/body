@@ -13,6 +13,8 @@
   compassOverlayHeight=compassOverlay.getWidth();
   setfil=new PaintFlagsDrawFilter(0,Paint.FILTER_BITMAP_FLAG);
   remfil=new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG,0);
-  initialDisplay=true;
+synchronized (this) {
+    initialDisplay=true;
+  }
   redrawHandler.start();
 }

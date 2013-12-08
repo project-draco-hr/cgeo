@@ -1,6 +1,8 @@
 {
   try {
-    wait();
+    while (getText() == null) {
+      wait();
+    }
   }
  catch (  InterruptedException e) {
     Log.w("searchThread is not waiting for user???");

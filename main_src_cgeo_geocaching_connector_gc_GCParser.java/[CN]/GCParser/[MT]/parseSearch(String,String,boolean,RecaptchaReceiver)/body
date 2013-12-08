@@ -155,9 +155,7 @@
   }
   String recaptchaText=null;
   if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
-    if (thread.getText() == null) {
-      thread.waitForUser();
-    }
+    thread.waitForUser();
     recaptchaText=thread.getText();
   }
   if (!cids.isEmpty() && (Settings.isPremiumMember() || showCaptcha) && ((thread == null || StringUtils.isBlank(thread.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
