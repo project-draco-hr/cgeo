@@ -6,6 +6,7 @@
       mapController.setZoom(mapState[2]);
     }
  catch (    RuntimeException e) {
+      Log.e("centermap",e);
     }
     centered=true;
     alreadyCentered=true;
@@ -28,6 +29,7 @@
       }
     }
  catch (    RuntimeException e) {
+      Log.e("centermap",e);
     }
     centered=true;
     alreadyCentered=true;
@@ -37,6 +39,7 @@
       mapController.setCenter(makeGeoPoint(coordsCenter));
     }
  catch (    Exception e) {
+      Log.e("centermap",e);
     }
     centered=true;
     alreadyCentered=true;
