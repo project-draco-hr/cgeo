@@ -2,8 +2,8 @@
   if (view == null) {
     return;
   }
-  int logViewPosition=state.getInt("position");
-  int logViewPositionFromTop=state.getInt("positionFromTop");
+  int logViewPosition=state.getInt(STATE_POSITION);
+  int logViewPositionFromTop=state.getInt(STATE_POSITION_FROM_TOP);
   view.setSelectionFromTop(logViewPosition,logViewPositionFromTop);
   return;
 }

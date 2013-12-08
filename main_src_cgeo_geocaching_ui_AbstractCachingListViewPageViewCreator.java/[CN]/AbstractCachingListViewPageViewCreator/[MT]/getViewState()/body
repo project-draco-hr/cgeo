@@ -6,7 +6,7 @@
   View child=view.getChildAt(0);
   int positionFromTop=(child == null) ? 0 : child.getTop();
   Bundle state=new Bundle();
-  state.putInt("position",position);
-  state.putInt("positionFromTop",positionFromTop);
+  state.putInt(STATE_POSITION,position);
+  state.putInt(STATE_POSITION_FROM_TOP,positionFromTop);
   return state;
 }

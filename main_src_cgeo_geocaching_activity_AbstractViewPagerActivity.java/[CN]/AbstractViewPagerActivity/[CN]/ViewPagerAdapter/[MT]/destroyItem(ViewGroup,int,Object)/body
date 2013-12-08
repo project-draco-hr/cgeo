@@ -1,7 +1,9 @@
 {
   final Page page=pageOrder.get(position);
   PageViewCreator creator=viewCreators.get(page);
-  Bundle state=creator.getViewState();
-  viewStates.put(page,state);
+  if (creator != null) {
+    Bundle state=creator.getViewState();
+    viewStates.put(page,state);
+  }
   container.removeView((View)object);
 }
