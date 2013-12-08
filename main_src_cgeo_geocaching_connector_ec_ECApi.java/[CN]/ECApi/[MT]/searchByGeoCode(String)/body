@@ -1,0 +1,10 @@
+{
+  final Parameters params=new Parameters("id",cleanCode(geocode));
+  params.add("cgeo","1");
+  final HttpResponse response=apiRequest("http://extremcaching.com/exports/gpx.php",params);
+  final Collection<Geocache> caches=importCachesFromGPXResponse(response);
+  if (CollectionUtils.isNotEmpty(caches)) {
+    return caches.iterator().next();
+  }
+  return null;
+}

@@ -1,0 +1,14 @@
+{
+  if (response == null) {
+    return Collections.emptyList();
+  }
+  Collection<Geocache> caches;
+  try {
+    caches=new ECGPXParser(StoredList.TEMPORARY_LIST_ID).parse(response.getEntity().getContent(),null);
+  }
+ catch (  Exception e) {
+    Log.e("Error importing gpx from extremcaching.com",e);
+    return Collections.emptyList();
+  }
+  return caches;
+}

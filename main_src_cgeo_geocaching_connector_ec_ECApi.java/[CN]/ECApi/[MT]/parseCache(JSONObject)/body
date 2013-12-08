@@ -1,0 +1,18 @@
+{
+  final Geocache cache=new Geocache();
+  cache.setReliableLatLon(true);
+  try {
+    cache.setGeocode("EC" + response.getString("cache_id"));
+    cache.setName(response.getString("title"));
+    cache.setCoords(new Geopoint(response.getString("lat"),response.getString("lon")));
+    cache.setType(getCacheType(response.getString("type")));
+    cache.setDifficulty((float)response.getDouble("difficulty"));
+    cache.setTerrain((float)response.getDouble("terrain"));
+    cache.setFound(response.getInt("found") == 1 ? true : false);
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
+  }
+ catch (  final JSONException e) {
+    Log.e("ECApi.parseCache",e);
+  }
+  return cache;
+}

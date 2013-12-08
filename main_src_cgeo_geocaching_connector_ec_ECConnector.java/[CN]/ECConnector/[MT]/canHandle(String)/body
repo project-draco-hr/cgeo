@@ -1,0 +1,6 @@
+{
+  if (geocode == null) {
+    return false;
+  }
+  return ECConnector.PATTERN_EC_CODE.matcher(geocode).matches();
+}

@@ -1,5 +1,10 @@
 {
   if (cache.getTerrain() > 0) {
-    addStars(R.string.cache_terrain,cache.getTerrain());
+    if (ECConnector.getInstance().canHandle(cache.getGeocode())) {
+      addStars(R.string.cache_terrain,cache.getTerrain(),7);
+    }
+ else {
+      addStars(R.string.cache_terrain,cache.getTerrain());
+    }
   }
 }

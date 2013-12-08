@@ -1,0 +1,8 @@
+{
+  final Parameters params=new Parameters("fnc","center");
+  params.add("distance","20");
+  params.add("lat",String.valueOf(center.getLatitude()));
+  params.add("lon",String.valueOf(center.getLongitude()));
+  final HttpResponse response=apiRequest(params);
+  return importCachesFromJSON(response);
+}

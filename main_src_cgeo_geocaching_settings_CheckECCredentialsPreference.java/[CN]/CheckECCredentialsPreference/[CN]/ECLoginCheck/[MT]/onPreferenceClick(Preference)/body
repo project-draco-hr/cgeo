@@ -1,0 +1,24 @@
+{
+  this.activity=(SettingsActivity)CheckECCredentialsPreference.this.getContext();
+  this.res=activity.getResources();
+  ImmutablePair<String,String> credentials=Settings.getECLogin();
+  if (StringUtils.isBlank(credentials.getLeft()) || StringUtils.isBlank(credentials.getRight())) {
+    ActivityMixin.showToast(activity,R.string.err_missing_auth);
+    return false;
+  }
+  loginDialog=ProgressDialog.show(activity,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
+  loginDialog.setCancelable(false);
+  Cookies.clearCookies();
+  (new Thread(){
+    @Override public void run(){
+      final StatusCode loginResult=ECLogin.login();
+      Object payload=loginResult;
+      if (loginResult == StatusCode.NO_ERROR) {
+        payload=null;
+      }
+      logInHandler.obtainMessage(0,payload).sendToTarget();
+    }
+  }
+).start();
+  return false;
+}

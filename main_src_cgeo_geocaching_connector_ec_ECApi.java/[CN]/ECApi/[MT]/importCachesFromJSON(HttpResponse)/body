@@ -1,0 +1,21 @@
+{
+  if (response != null) {
+    try {
+      final String data=Network.getResponseDataAlways(response);
+      if (data == null || StringUtils.isBlank(data) || StringUtils.equals(data,"[]")) {
+        return Collections.emptyList();
+      }
+      final JSONArray json=new JSONArray(data);
+      final List<Geocache> caches=new ArrayList<Geocache>(json.length());
+      for (int i=0; i < json.length(); i++) {
+        final Geocache cache=parseCache(json.getJSONObject(i));
+        caches.add(cache);
+      }
+      return caches;
+    }
+ catch (    final JSONException e) {
+      Log.w("JSONResult",e);
+    }
+  }
+  return Collections.emptyList();
+}
