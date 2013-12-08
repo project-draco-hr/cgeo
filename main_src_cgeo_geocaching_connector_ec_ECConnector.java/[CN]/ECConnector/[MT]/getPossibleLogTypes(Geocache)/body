@@ -1,0 +1,15 @@
+{
+  final List<LogType> logTypes=new ArrayList<LogType>();
+  if (geocache.isEventCache()) {
+    logTypes.add(LogType.WILL_ATTEND);
+    logTypes.add(LogType.ATTENDED);
+  }
+ else {
+    logTypes.add(LogType.FOUND_IT);
+  }
+  if (!geocache.isEventCache()) {
+    logTypes.add(LogType.DIDNT_FIND_IT);
+  }
+  logTypes.add(LogType.NOTE);
+  return logTypes;
+}
