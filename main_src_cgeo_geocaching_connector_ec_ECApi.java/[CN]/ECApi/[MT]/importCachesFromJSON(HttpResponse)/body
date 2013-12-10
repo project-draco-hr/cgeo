@@ -2,14 +2,17 @@
   if (response != null) {
     try {
       final String data=Network.getResponseDataAlways(response);
-      if (data == null || StringUtils.isBlank(data) || StringUtils.equals(data,"[]")) {
+      if (StringUtils.isBlank(data) || StringUtils.equals(data,"[]")) {
         return Collections.emptyList();
       }
       final JSONArray json=new JSONArray(data);
-      final List<Geocache> caches=new ArrayList<Geocache>(json.length());
-      for (int i=0; i < json.length(); i++) {
+      final int len=json.length();
+      final List<Geocache> caches=new ArrayList<Geocache>(len);
+      for (int i=0; i < len; i++) {
         final Geocache cache=parseCache(json.getJSONObject(i));
-        caches.add(cache);
+        if (cache != null) {
+          caches.add(cache);
+        }
       }
       return caches;
     }

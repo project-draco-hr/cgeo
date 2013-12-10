@@ -3,7 +3,7 @@
   params.add("type",logType.type);
   params.add("log",log);
   params.add("date",LOG_DATE_FORMAT.format(date.getTime()));
-  final String uri="http://extremcaching.com/exports/log.php";
+  final String uri=API_HOST + "log.php";
   final HttpResponse response=Network.postRequest(uri,params);
   if (response == null) {
     return new LogResult(StatusCode.LOG_POST_ERROR_EC,"");
@@ -17,7 +17,7 @@
     return new LogResult(StatusCode.LOG_POST_ERROR_EC,"");
   }
   final String data=Network.getResponseDataAlways(response);
-  if (data != null && !StringUtils.isBlank(data) && StringUtils.contains(data,"success")) {
+  if (!StringUtils.isBlank(data) && StringUtils.contains(data,"success")) {
     final String uid=StringUtils.remove(data,"success:");
     return new LogResult(StatusCode.NO_ERROR,uid);
   }
