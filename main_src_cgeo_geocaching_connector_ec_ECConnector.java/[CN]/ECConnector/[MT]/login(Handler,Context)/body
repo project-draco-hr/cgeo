@@ -1,5 +1,5 @@
 {
-  final StatusCode status=ECLogin.login();
+  final StatusCode status=ECLogin.getInstance().login();
   if (status == StatusCode.NO_ERROR) {
     CgeoApplication.getInstance().checkLogin=false;
   }

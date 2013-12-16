@@ -23,8 +23,8 @@
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString(),"ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
   }
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
-  String page=GCLogin.postRequestLogged(uri,params);
-  if (!GCLogin.getLoginStatus(page)) {
+  String page=GCLogin.getInstance().postRequestLogged(uri,params);
+  if (!GCLogin.getInstance().getLoginStatus(page)) {
     Log.e("GCParser.postLog: Cannot log in geocaching");
     return new ImmutablePair<StatusCode,String>(StatusCode.NOT_LOGGED_IN,"");
   }
@@ -75,9 +75,9 @@
       if (geocode != null) {
         DataStore.saveVisitDate(geocode);
       }
-      GCLogin.getLoginStatus(page);
-      if (GCLogin.getActualCachesFound() >= 0) {
-        GCLogin.setActualCachesFound(GCLogin.getActualCachesFound() + 1);
+      GCLogin.getInstance().getLoginStatus(page);
+      if (GCLogin.getInstance().getActualCachesFound() >= 0) {
+        GCLogin.getInstance().setActualCachesFound(GCLogin.getInstance().getActualCachesFound() + 1);
       }
       final String logID=TextUtils.getMatch(page,GCConstants.PATTERN_LOG_IMAGE_UPLOAD,"");
       return new ImmutablePair<StatusCode,String>(StatusCode.NO_ERROR,logID);
