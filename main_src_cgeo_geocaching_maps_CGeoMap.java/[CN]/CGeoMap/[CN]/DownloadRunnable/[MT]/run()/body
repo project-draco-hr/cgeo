@@ -5,7 +5,7 @@
     SearchResult searchResult;
     do {
       if (tokens == null) {
-        tokens=Login.getMapTokens();
+        tokens=GCLogin.getMapTokens();
         if (noMapTokenHandler != null && tokens == null) {
           noMapTokenHandler.sendEmptyMessage(0);
         }
@@ -13,7 +13,7 @@
       searchResult=ConnectorFactory.searchByViewport(viewport.resize(0.8),tokens);
       downloaded=true;
       if (searchResult.getError() == StatusCode.NOT_LOGGED_IN && Settings.isGCConnectorActive()) {
-        Login.login();
+        GCLogin.login();
         tokens=null;
       }
  else {

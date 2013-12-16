@@ -1,6 +1,6 @@
 {
   final Parameters params=new Parameters();
-  final String page=Login.getRequestLogged("http://www.geocaching.com/pocket/default.aspx",params);
+  final String page=GCLogin.getRequestLogged("http://www.geocaching.com/pocket/default.aspx",params);
   if (StringUtils.isBlank(page)) {
     Log.e("GCParser.searchPocketQueryList: No data from server");
     return null;

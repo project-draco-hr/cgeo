@@ -1,5 +1,5 @@
 {
-  if (Login.isEmpty(viewstates)) {
+  if (GCLogin.isEmpty(viewstates)) {
     Log.e("GCParser.postLog: No viewstate given");
     return new ImmutablePair<StatusCode,String>(StatusCode.LOG_POST_ERROR,"");
   }
@@ -9,8 +9,8 @@
   }
   final String logInfo=log.replace("\n","\r\n").trim();
   Log.i("Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: "+ (trackables != null ? trackables.size() : "0"));
-  final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","__LASTFOCUS","","ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType.id),"ctl00$ContentBody$LogBookPanel1$uxDateVisited",Login.getCustomGcDateFormat().format(new GregorianCalendar(year,month - 1,day).getTime()),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged",String.format("%02d",month) + "/" + String.format("%02d",day)+ "/"+ String.format("%04d",year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry","ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo,"ctl00$ContentBody$LogBookPanel1$btnSubmitLog","Submit Log Entry","ctl00$ContentBody$LogBookPanel1$uxLogCreationSource","Old","ctl00$ContentBody$uxVistOtherListingGC","");
-  Login.putViewstates(params,viewstates);
+  final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","__LASTFOCUS","","ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType.id),"ctl00$ContentBody$LogBookPanel1$uxDateVisited",GCLogin.getCustomGcDateFormat().format(new GregorianCalendar(year,month - 1,day).getTime()),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged",String.format("%02d",month) + "/" + String.format("%02d",day)+ "/"+ String.format("%04d",year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry","ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo,"ctl00$ContentBody$LogBookPanel1$btnSubmitLog","Submit Log Entry","ctl00$ContentBody$LogBookPanel1$uxLogCreationSource","Old","ctl00$ContentBody$uxVistOtherListingGC","");
+  GCLogin.putViewstates(params,viewstates);
   if (trackables != null && !trackables.isEmpty()) {
     final StringBuilder hdnSelected=new StringBuilder();
     for (    final TrackableLog tb : trackables) {
@@ -23,21 +23,21 @@
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString(),"ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
   }
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
-  String page=Login.postRequestLogged(uri,params);
-  if (!Login.getLoginStatus(page)) {
+  String page=GCLogin.postRequestLogged(uri,params);
+  if (!GCLogin.getLoginStatus(page)) {
     Log.e("GCParser.postLog: Cannot log in geocaching");
     return new ImmutablePair<StatusCode,String>(StatusCode.NOT_LOGGED_IN,"");
   }
   final MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_MAINTENANCE,page);
   try {
     if (matcher.find() && matcher.groupCount() > 0) {
-      final String[] viewstatesConfirm=Login.getViewstates(page);
-      if (Login.isEmpty(viewstatesConfirm)) {
+      final String[] viewstatesConfirm=GCLogin.getViewstates(page);
+      if (GCLogin.isEmpty(viewstatesConfirm)) {
         Log.e("GCParser.postLog: No viewstate for confirm log");
         return new ImmutablePair<StatusCode,String>(StatusCode.LOG_POST_ERROR,"");
       }
       params.clear();
-      Login.putViewstates(params,viewstatesConfirm);
+      GCLogin.putViewstates(params,viewstatesConfirm);
       params.put("__EVENTTARGET","");
       params.put("__EVENTARGUMENT","");
       params.put("__LASTFOCUS","");
@@ -75,9 +75,9 @@
       if (geocode != null) {
         DataStore.saveVisitDate(geocode);
       }
-      Login.getLoginStatus(page);
-      if (Login.getActualCachesFound() >= 0) {
-        Login.setActualCachesFound(Login.getActualCachesFound() + 1);
+      GCLogin.getLoginStatus(page);
+      if (GCLogin.getActualCachesFound() >= 0) {
+        GCLogin.setActualCachesFound(GCLogin.getActualCachesFound() + 1);
       }
       final String logID=TextUtils.getMatch(page,GCConstants.PATTERN_LOG_IMAGE_UPLOAD,"");
       return new ImmutablePair<StatusCode,String>(StatusCode.NO_ERROR,logID);

@@ -65,12 +65,12 @@
     try {
       String hiddenString=TextUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDEN,true,null);
       if (StringUtils.isNotBlank(hiddenString)) {
-        cache.setHidden(Login.parseGcCustomDate(hiddenString));
+        cache.setHidden(GCLogin.parseGcCustomDate(hiddenString));
       }
       if (cache.getHiddenDate() == null) {
         hiddenString=TextUtils.getMatch(tableInside,GCConstants.PATTERN_HIDDENEVENT,true,null);
         if (StringUtils.isNotBlank(hiddenString)) {
-          cache.setHidden(Login.parseGcCustomDate(hiddenString));
+          cache.setHidden(GCLogin.parseGcCustomDate(hiddenString));
         }
       }
     }
@@ -89,7 +89,7 @@
   try {
     final String foundDateString=TextUtils.getMatch(page,GCConstants.PATTERN_FOUND_DATE,true,null);
     if (StringUtils.isNotBlank(foundDateString)) {
-      cache.setVisitedDate(Login.parseGcCustomDate(foundDateString).getTime());
+      cache.setVisitedDate(GCLogin.parseGcCustomDate(foundDateString).getTime());
     }
   }
  catch (  final ParseException e) {

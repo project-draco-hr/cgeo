@@ -16,7 +16,7 @@
       final String logIconName=logIconNameExt.substring(0,logIconNameExt.length() - 4);
       long date=0;
       try {
-        date=Login.parseGcCustomDate(entry.getString("Visited")).getTime();
+        date=GCLogin.parseGcCustomDate(entry.getString("Visited")).getTime();
       }
  catch (      final ParseException e) {
         Log.e("GCParser.loadLogsFromDetails: failed to parse log date.");

@@ -98,7 +98,7 @@
     while (matcherLogs.find()) {
       long date=0;
       try {
-        date=Login.parseGcCustomDate(matcherLogs.group(2)).getTime();
+        date=GCLogin.parseGcCustomDate(matcherLogs.group(2)).getTime();
       }
  catch (      final ParseException e) {
       }

@@ -8,15 +8,15 @@
     Log.e("GCParser.searchByNextPage: No url found");
     return search;
   }
-  if (Login.isEmpty(viewstates)) {
+  if (GCLogin.isEmpty(viewstates)) {
     Log.e("GCParser.searchByNextPage: No viewstate given");
     return search;
   }
   final String uri=Uri.parse(url).buildUpon().query(null).build().toString();
   final Parameters params=new Parameters("__EVENTTARGET","ctl00$ContentBody$pgrBottom$ctl08","__EVENTARGUMENT","");
-  Login.putViewstates(params,viewstates);
-  final String page=Login.postRequestLogged(uri,params);
-  if (!Login.getLoginStatus(page)) {
+  GCLogin.putViewstates(params,viewstates);
+  final String page=GCLogin.postRequestLogged(uri,params);
+  if (!GCLogin.getLoginStatus(page)) {
     Log.e("GCParser.postLogTrackable: Can not log in geocaching");
     return search;
   }

@@ -32,7 +32,7 @@
       cache.setDifficulty(Float.parseFloat(difficultyObj.getString("text")));
       JSONObject terrainObj=dataObject.getJSONObject("terrain");
       cache.setTerrain(Float.parseFloat(terrainObj.getString("text")));
-      cache.setHidden(Login.parseGcCustomDate(dataObject.getString("hidden"),"MM/dd/yyyy"));
+      cache.setHidden(GCLogin.parseGcCustomDate(dataObject.getString("hidden"),"MM/dd/yyyy"));
       JSONObject containerObj=dataObject.getJSONObject("container");
       cache.setSize(CacheSize.getById(containerObj.getString("text")));
       JSONObject typeObj=dataObject.getJSONObject("type");

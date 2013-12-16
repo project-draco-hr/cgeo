@@ -12,7 +12,7 @@
       return;
     }
     final String page=Network.getResponseData(Network.getRequest("http://www.geocaching.com/track/log.aspx",params));
-    viewstates=Login.getViewstates(page);
+    viewstates=GCLogin.getViewstates(page);
     final List<LogType> typesPre=GCParser.parseTypes(page);
     if (CollectionUtils.isNotEmpty(typesPre)) {
       possibleLogTypes.clear();

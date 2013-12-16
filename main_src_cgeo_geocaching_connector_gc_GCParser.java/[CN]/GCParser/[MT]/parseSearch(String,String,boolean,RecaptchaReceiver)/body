@@ -7,7 +7,7 @@
   String page=pageContent;
   final SearchResult searchResult=new SearchResult();
   searchResult.setUrl(url);
-  searchResult.viewstates=Login.getViewstates(page);
+  searchResult.viewstates=GCLogin.getViewstates(page);
   if (showCaptcha) {
     final String recaptchaJsParam=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
     if (recaptchaJsParam != null) {
@@ -96,7 +96,7 @@
     final String dateHidden=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_HIDDEN_DATE,false,1,null,false);
     if (StringUtils.isNotBlank(dateHidden)) {
       try {
-        Date date=Login.parseGcCustomDate(dateHidden);
+        Date date=GCLogin.parseGcCustomDate(dateHidden);
         if (date != null) {
           cache.setHidden(date);
         }

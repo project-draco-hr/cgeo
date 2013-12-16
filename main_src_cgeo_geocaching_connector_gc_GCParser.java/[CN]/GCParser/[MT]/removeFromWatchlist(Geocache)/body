@@ -1,12 +1,12 @@
 {
   final String uri="http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
-  String page=Login.postRequestLogged(uri,null);
+  String page=GCLogin.postRequestLogged(uri,null);
   if (StringUtils.isBlank(page)) {
     Log.e("GCParser.removeFromWatchlist: No data from server");
     return false;
   }
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$btnYes","Yes");
-  Login.transferViewstates(page,params);
+  GCLogin.transferViewstates(page,params);
   page=Network.getResponseData(Network.postRequest(uri,params));
   final boolean guidOnPage=cache.isGuidContainedInPage(page);
   if (!guidOnPage) {
