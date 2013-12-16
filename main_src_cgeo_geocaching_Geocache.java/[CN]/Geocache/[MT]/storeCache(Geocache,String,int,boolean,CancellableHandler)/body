@@ -1,6 +1,6 @@
 {
   try {
-    Geocache cache;
+    Geocache cache=null;
     if (origCache != null) {
       SearchResult search=null;
       if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
@@ -15,10 +15,9 @@
     }
  else     if (StringUtils.isNotBlank(geocode)) {
       final SearchResult search=searchByGeocode(geocode,null,listId,forceRedownload,handler);
-      cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-    }
- else {
-      cache=null;
+      if (search != null) {
+        cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+      }
     }
     if (cache == null) {
       if (handler != null) {
