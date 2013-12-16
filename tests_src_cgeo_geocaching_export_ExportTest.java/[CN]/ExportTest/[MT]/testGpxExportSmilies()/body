@@ -16,5 +16,5 @@
     DataStore.removeCache(cache.getGeocode(),LoadFlags.REMOVE_ALL);
   }
   assertNotNull(result);
-  result.delete();
+  FileUtils.deleteIgnoringFailure(result);
 }

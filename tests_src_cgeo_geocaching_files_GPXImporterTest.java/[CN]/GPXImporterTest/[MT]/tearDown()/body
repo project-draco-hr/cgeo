@@ -4,7 +4,7 @@
   cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
   DataStore.markDropped(cachesInList);
   DataStore.removeList(listId);
-  deleteDirectory(tempDir);
+  FileUtils.deleteDirectory(tempDir);
   TestSettings.setStoreOfflineMaps(importCacheStaticMaps);
   TestSettings.setStoreOfflineWpMaps(importWpStaticMaps);
   super.tearDown();

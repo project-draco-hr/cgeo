@@ -5,8 +5,8 @@
   PersonalNote parsedNote=new PersonalNote(truncCache);
   Geocache exceedingCache=new Geocache();
   exceedingCache.setListId(StoredList.STANDARD_LIST_ID);
-  exceedingCache.setPersonalNote(testString.toString());
+  exceedingCache.setPersonalNote(testString);
   PersonalNote otherNote=new PersonalNote(exceedingCache);
   PersonalNote result=parsedNote.mergeWith(otherNote);
-  assertPersonalNote(result,null,testString.toString());
+  assertPersonalNote(result,null,testString);
 }

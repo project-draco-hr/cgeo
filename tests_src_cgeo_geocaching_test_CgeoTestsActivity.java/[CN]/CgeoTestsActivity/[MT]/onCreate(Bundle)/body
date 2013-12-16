@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.cgeo_tests_activity);
-  logView=(TextView)findViewById(R.id.logOutput);
-  scrollView=(BottomAwareScrollView)findViewById(R.id.scrollView);
+  logView=ButterKnife.findById(this,R.id.logOutput);
+  scrollView=ButterKnife.findById(this,R.id.scrollView);
 }

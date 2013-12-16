@@ -3,7 +3,7 @@
   final String globalTempDir=System.getProperty("java.io.tmpdir");
   assertTrue("java.io.tmpdir is not defined",StringUtils.isNotBlank(globalTempDir));
   tempDir=new File(globalTempDir,"cgeogpxesTest");
-  tempDir.mkdir();
+  cgeo.geocaching.utils.FileUtils.mkdirs(tempDir);
   assertTrue("Could not create directory " + tempDir.getPath(),tempDir.exists());
   DataStore.getAllHistoryCachesCount();
   listId=DataStore.createList("cgeogpxesTest");

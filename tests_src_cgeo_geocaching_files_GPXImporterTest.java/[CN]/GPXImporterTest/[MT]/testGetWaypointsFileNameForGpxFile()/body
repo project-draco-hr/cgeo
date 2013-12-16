@@ -9,8 +9,8 @@
     assertTrue(gpx.createNewFile());
     assertTrue(wpts.createNewFile());
     assertEquals(wptsFileName,GPXImporter.getWaypointsFileNameForGpxFile(gpx));
-    gpx.delete();
-    wpts.delete();
+    FileUtils.deleteQuietly(gpx);
+    FileUtils.deleteQuietly(wpts);
   }
   final File gpx1=new File(tempDir,"abc.gpx");
   assertNull(GPXImporter.getWaypointsFileNameForGpxFile(gpx1));
