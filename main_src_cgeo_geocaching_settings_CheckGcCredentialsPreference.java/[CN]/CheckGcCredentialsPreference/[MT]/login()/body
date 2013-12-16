@@ -1,0 +1,9 @@
+{
+  final StatusCode loginResult=Login.login();
+  Object payload=loginResult;
+  if (loginResult == StatusCode.NO_ERROR) {
+    Login.detectGcCustomDate();
+    payload=Login.downloadAvatarAndGetMemberStatus();
+  }
+  return payload;
+}

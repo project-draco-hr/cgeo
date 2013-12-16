@@ -1,0 +1,8 @@
+{
+  final StatusCode loginResult=ECLogin.login();
+  Object payload=loginResult;
+  if (loginResult == StatusCode.NO_ERROR) {
+    payload=null;
+  }
+  return payload;
+}

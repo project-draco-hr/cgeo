@@ -1,7 +1,7 @@
 {
-  this.activity=(SettingsActivity)CheckECCredentialsPreference.this.getContext();
+  this.activity=(SettingsActivity)AbstractCheckCredentialsPreference.this.getContext();
   this.res=activity.getResources();
-  ImmutablePair<String,String> credentials=Settings.getECLogin();
+  ImmutablePair<String,String> credentials=getCredentials();
   if (StringUtils.isBlank(credentials.getLeft()) || StringUtils.isBlank(credentials.getRight())) {
     ActivityMixin.showToast(activity,R.string.err_missing_auth);
     return false;
@@ -11,11 +11,7 @@
   Cookies.clearCookies();
   (new Thread(){
     @Override public void run(){
-      final StatusCode loginResult=ECLogin.login();
-      Object payload=loginResult;
-      if (loginResult == StatusCode.NO_ERROR) {
-        payload=null;
-      }
+      Object payload=login();
       logInHandler.obtainMessage(0,payload).sendToTarget();
     }
   }
