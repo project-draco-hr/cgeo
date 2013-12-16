@@ -2,6 +2,12 @@
   resetCache();
   final RootElement root=new RootElement(namespace,"gpx");
   final Element waypoint=root.getChild(namespace,"wpt");
+  root.getChild(namespace,"url").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    String body){
+      scriptUrl=body;
+    }
+  }
+);
   waypoint.setStartElementListener(new StartElementListener(){
     @Override public void start(    Attributes attrs){
       try {
@@ -97,7 +103,10 @@
   waypoint.getChild(namespace,"name").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    String body){
       name=body;
-      final String content=body.trim();
+      String content=body.trim();
+      if (StringUtils.startsWithIgnoreCase(content,"GCEC") && StringUtils.containsIgnoreCase(scriptUrl,"extremcaching")) {
+        content=content.substring(2);
+      }
       cache.setName(content);
       findGeoCode(cache.getName());
     }

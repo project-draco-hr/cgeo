@@ -1,0 +1,5 @@
+{
+  assertTrue(ECConnector.getInstance().canHandle("EC380"));
+  assertFalse(ECConnector.getInstance().canHandle("GC380"));
+  assertFalse("faked EC codes must be handled during the import, otherwise GCECxxxx codes belong to 2 connectors",ECConnector.getInstance().canHandle("GCEC380"));
+}
