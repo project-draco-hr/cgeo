@@ -4,7 +4,7 @@
     search=GCParser.searchByCoords(coords,Settings.getCacheType(),Settings.isShowCaptcha(),this);
   }
   for (  ISearchByCenter centerConn : ConnectorFactory.getSearchByCenterConnectors()) {
-    if (centerConn.isActivated()) {
+    if (centerConn.isActive()) {
       search.addSearchResult(centerConn.searchByCenter(coords));
     }
   }

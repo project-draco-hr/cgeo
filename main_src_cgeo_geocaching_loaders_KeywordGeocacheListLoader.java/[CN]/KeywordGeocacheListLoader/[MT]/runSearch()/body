@@ -4,7 +4,7 @@
     searchResult=GCParser.searchByKeyword(keyword,Settings.getCacheType(),Settings.isShowCaptcha(),this);
   }
   for (  ISearchByKeyword connector : ConnectorFactory.getSearchByKeywordConnectors()) {
-    if (connector.isActivated()) {
+    if (connector.isActive()) {
       searchResult.addSearchResult(connector.searchByName(keyword));
     }
   }

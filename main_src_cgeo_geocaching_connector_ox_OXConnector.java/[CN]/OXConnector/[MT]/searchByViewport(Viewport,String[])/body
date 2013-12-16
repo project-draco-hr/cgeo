@@ -1,0 +1,7 @@
+{
+  Collection<Geocache> caches=OpenCachingApi.searchByBoundingBox(viewport);
+  if (caches == null) {
+    return null;
+  }
+  return new SearchResult(caches);
+}
