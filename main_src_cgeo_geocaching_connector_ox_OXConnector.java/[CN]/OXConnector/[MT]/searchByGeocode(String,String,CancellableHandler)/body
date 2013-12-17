@@ -1,4 +1,7 @@
 {
+  if (geocode == null) {
+    return null;
+  }
   final Geocache cache=OpenCachingApi.searchByGeoCode(geocode);
   if (cache == null) {
     return null;
