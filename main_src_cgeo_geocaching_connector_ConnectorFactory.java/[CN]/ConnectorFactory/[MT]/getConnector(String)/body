@@ -1,5 +1,8 @@
 {
   final String geocode=StringUtils.trim(geocodeInput);
+  if (geocode == null) {
+    return UNKNOWN_CONNECTOR;
+  }
   if (isInvalidGeocode(geocode)) {
     return UNKNOWN_CONNECTOR;
   }

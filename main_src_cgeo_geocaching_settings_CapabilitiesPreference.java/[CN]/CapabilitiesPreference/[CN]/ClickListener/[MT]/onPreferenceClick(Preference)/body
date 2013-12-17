@@ -1,0 +1,13 @@
+{
+  WebView htmlView=new WebView(preference.getContext());
+  htmlView.loadData(createCapabilitiesMessage(),"text/html",null);
+  AlertDialog.Builder builder=new AlertDialog.Builder(preference.getContext());
+  builder.setView(htmlView).setIcon(android.R.drawable.ic_dialog_info).setTitle(R.string.settings_features).setPositiveButton(R.string.err_none,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int id){
+      dialog.cancel();
+    }
+  }
+);
+  builder.create().show();
+  return false;
+}

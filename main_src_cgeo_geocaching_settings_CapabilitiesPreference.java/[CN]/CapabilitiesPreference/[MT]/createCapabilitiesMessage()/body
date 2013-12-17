@@ -1,0 +1,7 @@
+{
+  IConnector connector=ConnectorFactory.getConnector(connectorCode + "1234");
+  if (connector == null) {
+    return StringUtils.EMPTY;
+  }
+  return connector.getCapabilitiesMessage();
+}
