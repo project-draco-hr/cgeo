@@ -11,7 +11,7 @@
   }
  catch (  RuntimeException e) {
   }
-  Collections.sort(listDirs);
+  Collections.sort(listDirs,Option.NAME_COMPARATOR);
   if (dir.getParent() != null) {
     listDirs.add(0,new Option(PARENT_DIR,dir.getParent(),false));
   }
