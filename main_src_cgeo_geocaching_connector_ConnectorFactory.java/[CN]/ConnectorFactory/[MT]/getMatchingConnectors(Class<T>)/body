@@ -1,0 +1,10 @@
+{
+  final List<T> matching=new ArrayList<T>();
+  for (  final IConnector conn : CONNECTORS) {
+    if (clazz.isInstance(conn)) {
+      matching.add((T)conn);
+    }
+  }
+  T[] result=(T[])Array.newInstance(clazz,matching.size());
+  return matching.toArray(result);
+}

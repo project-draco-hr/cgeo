@@ -1,11 +1,8 @@
 {
   SearchResult search=new SearchResult();
-  if (Settings.isGCConnectorActive()) {
-    search=GCParser.searchByCoords(coords,Settings.getCacheType(),Settings.isShowCaptcha(),this);
-  }
   for (  ISearchByCenter centerConn : ConnectorFactory.getSearchByCenterConnectors()) {
     if (centerConn.isActive()) {
-      search.addSearchResult(centerConn.searchByCenter(coords));
+      search.addSearchResult(centerConn.searchByCenter(coords,this));
     }
   }
   return search;

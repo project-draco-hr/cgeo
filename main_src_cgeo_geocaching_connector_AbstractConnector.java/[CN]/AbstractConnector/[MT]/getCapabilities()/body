@@ -1,0 +1,26 @@
+{
+  ArrayList<String> builder=new ArrayList<String>();
+  builder.add(capability(ISearchByViewPort.class,R.string.feature_search_live_map));
+  builder.add(capability(ISearchByKeyword.class,R.string.feature_search_keyword));
+  builder.add(capability(ISearchByCenter.class,R.string.feature_search_center));
+  builder.add(capability(ISearchByGeocode.class,R.string.feature_search_geocode));
+  if (supportsUserActions()) {
+    builder.add(feature(R.string.feature_search_user));
+  }
+  if (supportsLogging()) {
+    builder.add(feature(R.string.feature_online_logging));
+  }
+  if (supportsLogImages()) {
+    builder.add(feature(R.string.feature_log_images));
+  }
+  if (supportsPersonalNote()) {
+    builder.add(feature(R.string.feature_personal_notes));
+  }
+  if (supportsOwnCoordinates()) {
+    builder.add(feature(R.string.feature_own_coordinates));
+  }
+  if (supportsWatchList()) {
+    builder.add(feature(R.string.feature_watch_list));
+  }
+  return builder;
+}
