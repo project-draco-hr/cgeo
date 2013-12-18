@@ -1,8 +1,0 @@
-{
-  final String username=getString(R.string.pref_username,null);
-  final String password=getString(R.string.pref_password,null);
-  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-    return new ImmutablePair<String,String>(StringUtils.EMPTY,StringUtils.EMPTY);
-  }
-  return new ImmutablePair<String,String>(username,password);
-}

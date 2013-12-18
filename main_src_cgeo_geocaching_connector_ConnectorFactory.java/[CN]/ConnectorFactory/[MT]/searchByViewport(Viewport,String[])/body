@@ -1,8 +1,8 @@
 {
   final SearchResult result=new SearchResult();
-  for (  final ISearchByViewPort vpconn : searchByViewPortConns) {
-    if (vpconn.isActive()) {
-      result.addSearchResult(vpconn.searchByViewport(viewport,tokens));
+  for (  final ISearchByViewPort connector : searchByViewPortConns) {
+    if (connector.isActive()) {
+      result.addSearchResult(connector.searchByViewport(viewport,tokens));
     }
   }
   return result;
