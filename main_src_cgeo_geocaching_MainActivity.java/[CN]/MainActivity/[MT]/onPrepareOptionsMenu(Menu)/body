@@ -1,5 +1,6 @@
 {
   super.onPrepareOptionsMenu(menu);
   menu.findItem(R.id.menu_scan).setEnabled(ProcessUtils.isIntentAvailable(SCAN_INTENT));
+  menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isPremiumMember());
   return true;
 }
