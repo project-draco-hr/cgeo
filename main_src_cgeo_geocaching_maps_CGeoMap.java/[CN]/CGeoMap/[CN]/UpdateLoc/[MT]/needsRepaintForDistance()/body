@@ -2,7 +2,7 @@
   if (!locationValid) {
     return false;
   }
-  final Location lastLocation=overlayPosition.getCoordinates();
+  final Location lastLocation=overlayPositionAndScale.getCoordinates();
   float dist=Float.MAX_VALUE;
   if (lastLocation != null) {
     dist=currentLocation.distanceTo(lastLocation);
