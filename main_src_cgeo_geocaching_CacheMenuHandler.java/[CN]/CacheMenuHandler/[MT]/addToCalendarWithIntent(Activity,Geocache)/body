@@ -6,18 +6,13 @@
     activity.startActivity(new Intent(ICalendar.INTENT,Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST+ "?"+ params.toString())));
   }
  else {
-    new AlertDialog.Builder(activity).setTitle(res.getString(R.string.addon_missing_title)).setMessage(new StringBuilder(res.getString(R.string.helper_calendar_missing)).append(' ').append(res.getString(R.string.addon_download_prompt)).toString()).setPositiveButton(activity.getString(android.R.string.yes),new DialogInterface.OnClickListener(){
+    Dialogs.confirmYesNo(activity,R.string.addon_missing_title,new StringBuilder(res.getString(R.string.helper_calendar_missing)).append(' ').append(res.getString(R.string.addon_download_prompt)).toString(),new DialogInterface.OnClickListener(){
       @Override public void onClick(      DialogInterface dialog,      int id){
         final Intent intent=new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
         activity.startActivity(intent);
       }
     }
-).setNegativeButton(activity.getString(android.R.string.no),new DialogInterface.OnClickListener(){
-      @Override public void onClick(      DialogInterface dialog,      int id){
-        dialog.cancel();
-      }
-    }
-).create().show();
+);
   }
 }

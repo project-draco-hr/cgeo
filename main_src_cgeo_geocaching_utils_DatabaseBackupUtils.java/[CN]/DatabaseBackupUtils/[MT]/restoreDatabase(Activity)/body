@@ -10,7 +10,7 @@
           dialog.dismiss();
           boolean restored=restoreSuccessful.get();
           String message=restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-          ActivityMixin.helpDialog(activity,res.getString(R.string.init_backup_restore),message);
+          Dialogs.message(activity,R.string.init_backup_restore,message);
           if (activity instanceof MainActivity) {
             ((MainActivity)activity).updateCacheCounter();
           }

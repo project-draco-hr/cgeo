@@ -1,21 +1,9 @@
 {
-  final AlertDialog.Builder builder=new AlertDialog.Builder(CacheDetailActivity.this);
-  builder.setTitle(R.string.cache_personal_note_limit);
-  String lang=getString(R.string.cache_personal_note_truncation,GCConstants.PERSONAL_NOTE_MAX_CHARS);
-  builder.setMessage(lang);
-  builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
-    }
-  }
-);
-  builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
+  Dialogs.confirm(CacheDetailActivity.this,R.string.cache_personal_note_limit,getString(R.string.cache_personal_note_truncation,GCConstants.PERSONAL_NOTE_MAX_CHARS),new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       dialog.dismiss();
       uploadPersonalNote();
     }
   }
 );
-  final AlertDialog dialog=builder.create();
-  dialog.setOwnerActivity(CacheDetailActivity.this);
-  dialog.show();
 }

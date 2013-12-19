@@ -1,7 +1,7 @@
 {
   final String addText=StringUtils.trim(addressEditText.getText().toString());
   if (StringUtils.isBlank(addText)) {
-    helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_address));
+    Dialogs.message(this,R.string.warn_search_help_title,R.string.warn_search_help_address);
     return;
   }
   final Intent addressesIntent=new Intent(this,AddressListActivity.class);

@@ -1,21 +1,10 @@
 {
-  final AlertDialog.Builder dialog=new AlertDialog.Builder(this);
-  dialog.setCancelable(true);
-  dialog.setTitle(res.getString(R.string.caches_removing_from_history));
-  dialog.setMessage((adapter != null && adapter.getCheckedCount() > 0) ? res.getString(R.string.cache_remove_from_history) : res.getString(R.string.cache_clear_history));
-  dialog.setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
+  int message=(adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history : R.string.cache_clear_history;
+  Dialogs.confirmYesNo(this,R.string.caches_removing_from_history,message,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int id){
       removeFromHistory();
       dialog.cancel();
     }
   }
 );
-  dialog.setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int id){
-      dialog.cancel();
-    }
-  }
-);
-  final AlertDialog alert=dialog.create();
-  alert.show();
 }

@@ -1,7 +1,7 @@
 {
   final Context context=activity;
   if (DataStore.getAllCachesCount() == 0) {
-    ActivityMixin.helpDialog(activity,context.getString(R.string.init_backup),context.getString(R.string.init_backup_unnecessary));
+    Dialogs.message(activity,R.string.init_backup,R.string.init_backup_unnecessary);
     return false;
   }
   final ProgressDialog dialog=ProgressDialog.show(context,context.getString(R.string.init_backup),context.getString(R.string.init_backup_running),true,false);
@@ -11,7 +11,7 @@
       activity.runOnUiThread(new Runnable(){
         @Override public void run(){
           dialog.dismiss();
-          ActivityMixin.helpDialog(activity,context.getString(R.string.init_backup_backup),backupFileName != null ? context.getString(R.string.init_backup_success) + "\n" + backupFileName : context.getString(R.string.init_backup_failed));
+          Dialogs.message(activity,R.string.init_backup_backup,backupFileName != null ? context.getString(R.string.init_backup_success) + "\n" + backupFileName : context.getString(R.string.init_backup_failed));
           if (runAfterwards != null) {
             runAfterwards.run();
           }

@@ -10,7 +10,7 @@
           dialog.dismiss();
           boolean success=atomic.get();
           String message=success ? res.getString(R.string.init_dbmove_success) : res.getString(R.string.init_dbmove_failed);
-          ActivityMixin.helpDialog(fromActivity,res.getString(R.string.init_dbmove_dbmove),message);
+          Dialogs.message(fromActivity,R.string.init_dbmove_dbmove,message);
         }
       }
 );

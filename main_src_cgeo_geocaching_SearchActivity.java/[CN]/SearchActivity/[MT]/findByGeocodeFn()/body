@@ -1,7 +1,7 @@
 {
   final String geocodeText=StringUtils.trim(geocodeEditText.getText().toString());
   if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
-    helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_gccode));
+    Dialogs.message(this,R.string.warn_search_help_title,R.string.warn_search_help_gccode);
     return;
   }
   CacheDetailActivity.startActivity(this,geocodeText);

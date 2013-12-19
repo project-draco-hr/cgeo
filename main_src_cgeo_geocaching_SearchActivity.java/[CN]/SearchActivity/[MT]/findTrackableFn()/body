@@ -1,7 +1,7 @@
 {
   final String trackableText=StringUtils.trim(trackableEditText.getText().toString());
   if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
-    helpDialog(res.getString(R.string.warn_search_help_title),res.getString(R.string.warn_search_help_tb));
+    Dialogs.message(this,R.string.warn_search_help_title,R.string.warn_search_help_tb);
     return;
   }
   final Intent trackablesIntent=new Intent(this,TrackableActivity.class);

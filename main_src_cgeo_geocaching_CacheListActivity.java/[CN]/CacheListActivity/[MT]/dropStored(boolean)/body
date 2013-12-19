@@ -1,26 +1,10 @@
 {
-  final AlertDialog.Builder dialog=new AlertDialog.Builder(this);
-  dialog.setCancelable(true);
-  dialog.setTitle(res.getString(R.string.caches_drop_stored));
-  if (adapter.getCheckedCount() > 0) {
-    dialog.setMessage(res.getString(R.string.caches_drop_selected_ask));
-  }
- else {
-    dialog.setMessage(res.getString(R.string.caches_drop_all_ask));
-  }
-  dialog.setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
+  int message=(adapter.getCheckedCount() > 0) ? R.string.caches_drop_selected_ask : R.string.caches_drop_all_ask;
+  Dialogs.confirmYesNo(this,R.string.caches_drop_stored,message,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int id){
       dropSelected(removeListAfterwards);
       dialog.cancel();
     }
   }
 );
-  dialog.setNegativeButton(getString(android.R.string.no),new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int id){
-      dialog.cancel();
-    }
-  }
-);
-  final AlertDialog alert=dialog.create();
-  alert.show();
 }

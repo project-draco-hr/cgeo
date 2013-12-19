@@ -13,7 +13,7 @@
       if (query == null) {
         query="";
       }
-      new AlertDialog.Builder(this).setMessage(res.getString(R.string.unknown_scan) + "\n\n" + query).setPositiveButton(getString(android.R.string.ok),null).create().show();
+      Dialogs.message(this,res.getString(R.string.unknown_scan) + "\n\n" + query);
     }
   }
 }
