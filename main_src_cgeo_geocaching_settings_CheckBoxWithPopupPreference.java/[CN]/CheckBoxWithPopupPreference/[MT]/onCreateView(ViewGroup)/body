@@ -4,21 +4,7 @@
       if (!(Boolean)newValue) {
         return true;
       }
-      AlertDialog.Builder builder=new AlertDialog.Builder(preference.getContext());
-      builder.setMessage(text).setIcon(android.R.drawable.ic_dialog_info).setTitle(title).setPositiveButton(R.string.err_none,new DialogInterface.OnClickListener(){
-        @Override public void onClick(        DialogInterface dialog,        int id){
-          dialog.cancel();
-        }
-      }
-).setNegativeButton(urlButton,new DialogInterface.OnClickListener(){
-        @Override public void onClick(        DialogInterface dialog,        int id){
-          Intent i=new Intent(Intent.ACTION_VIEW);
-          i.setData(Uri.parse(url));
-          preference.getContext().startActivity(i);
-        }
-      }
-);
-      builder.create().show();
+      new UrlPopup(preference.getContext()).show(title,text,url,urlButton);
       return true;
     }
   }
