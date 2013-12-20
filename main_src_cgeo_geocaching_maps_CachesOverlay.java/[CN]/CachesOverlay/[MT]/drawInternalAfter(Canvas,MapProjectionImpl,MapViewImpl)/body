@@ -1,0 +1,10 @@
+{
+  getOverlayImpl().lock();
+  try {
+    scaleDrawer.drawScale(canvas,mapView);
+    positionDrawer.drawPosition(canvas,projection);
+  }
+  finally {
+    getOverlayImpl().unlock();
+  }
+}

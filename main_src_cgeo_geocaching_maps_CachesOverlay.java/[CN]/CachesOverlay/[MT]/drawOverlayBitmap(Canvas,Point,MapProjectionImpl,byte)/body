@@ -1,4 +1,5 @@
 {
-  drawInternal(canvas,projection);
+  drawInternalBefore(canvas,projection,getOverlayImpl().getMapViewImpl());
   super.drawOverlayBitmap(canvas,drawPosition,projection,drawZoomLevel);
+  drawInternalAfter(canvas,projection,getOverlayImpl().getMapViewImpl());
 }

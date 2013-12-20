@@ -1,4 +1,5 @@
 {
-  drawInternal(canvas,mapView.getMapProjection());
+  drawInternalBefore(canvas,mapView.getMapProjection(),mapView);
   super.draw(canvas,mapView,false);
+  drawInternalAfter(canvas,mapView.getMapProjection(),mapView);
 }
