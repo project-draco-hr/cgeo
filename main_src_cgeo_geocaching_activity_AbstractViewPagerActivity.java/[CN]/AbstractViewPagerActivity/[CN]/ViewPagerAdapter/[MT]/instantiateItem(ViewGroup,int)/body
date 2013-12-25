@@ -11,7 +11,9 @@
     if (null != creator) {
       view=creator.getView();
       Bundle state=viewStates.get(page);
-      creator.setViewState(state);
+      if (state != null) {
+        creator.setViewState(state);
+      }
       container.addView(view,0);
     }
   }
