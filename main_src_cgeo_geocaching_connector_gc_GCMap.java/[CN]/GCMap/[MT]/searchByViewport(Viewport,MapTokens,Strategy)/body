@@ -13,7 +13,7 @@
       if (!Tile.Cache.contains(tile)) {
         final Parameters params=new Parameters("x",String.valueOf(tile.getX()),"y",String.valueOf(tile.getY()),"z",String.valueOf(tile.getZoomLevel()),"ep","1","app","cgeo");
         if (tokens != null) {
-          params.put("k",tokens[0],"st",tokens[1]);
+          params.put("k",tokens.getUserSession(),"st",tokens.getSessionToken());
         }
         if (Settings.isExcludeMyCaches()) {
           params.put("hf","1","hh","1");

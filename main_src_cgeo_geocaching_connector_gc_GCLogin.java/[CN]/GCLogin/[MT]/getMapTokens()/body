@@ -3,5 +3,5 @@
   final String data=Network.getResponseData(response);
   final String userSession=TextUtils.getMatch(data,GCConstants.PATTERN_USERSESSION,"");
   final String sessionToken=TextUtils.getMatch(data,GCConstants.PATTERN_SESSIONTOKEN,"");
-  return new String[]{userSession,sessionToken};
+  return new MapTokens(userSession,sessionToken);
 }

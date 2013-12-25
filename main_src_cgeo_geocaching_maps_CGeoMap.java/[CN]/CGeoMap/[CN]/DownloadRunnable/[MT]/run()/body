@@ -6,7 +6,7 @@
     do {
       if (tokens == null) {
         tokens=GCLogin.getMapTokens();
-        if (noMapTokenHandler != null && tokens == null) {
+        if (noMapTokenHandler != null && (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken()))) {
           noMapTokenHandler.sendEmptyMessage(0);
         }
       }
