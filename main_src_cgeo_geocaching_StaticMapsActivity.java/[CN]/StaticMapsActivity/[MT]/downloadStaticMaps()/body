@@ -1,14 +1,17 @@
 {
-  final Geocache cache=DataStore.loadCache(this.geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   if (waypointId == null) {
+    showToast(res.getString(R.string.info_storing_static_maps));
     StaticMapsProvider.storeCacheStaticMap(cache,true);
     return cache.hasStaticMap();
   }
   final Waypoint waypoint=cache.getWaypointById(waypointId);
   if (waypoint != null) {
+    showToast(res.getString(R.string.info_storing_static_maps));
     StaticMapsProvider.removeWpStaticMaps(waypoint,geocode);
     StaticMapsProvider.storeWaypointStaticMap(cache,waypoint,true);
     return StaticMapsProvider.hasStaticMapForWaypoint(geocode,waypoint);
   }
+  showToast(res.getString(R.string.err_detail_not_load_map_static));
   return false;
 }
