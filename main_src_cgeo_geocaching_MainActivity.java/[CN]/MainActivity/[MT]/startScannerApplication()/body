@@ -1,4 +1,8 @@
 {
   IntentIntegrator integrator=new IntentIntegrator(this);
+  integrator.setButtonYesByID(android.R.string.yes);
+  integrator.setButtonNoByID(android.R.string.no);
+  integrator.setTitleByID(R.string.menu_scan_geo);
+  integrator.setMessageByID(R.string.menu_scan_description);
   integrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
 }
