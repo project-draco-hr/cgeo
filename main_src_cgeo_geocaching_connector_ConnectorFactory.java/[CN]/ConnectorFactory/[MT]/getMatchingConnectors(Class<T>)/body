@@ -5,6 +5,5 @@
       matching.add((T)connector);
     }
   }
-  T[] result=(T[])Array.newInstance(clazz,matching.size());
-  return matching.toArray(result);
+  return Collections.unmodifiableCollection(matching);
 }
