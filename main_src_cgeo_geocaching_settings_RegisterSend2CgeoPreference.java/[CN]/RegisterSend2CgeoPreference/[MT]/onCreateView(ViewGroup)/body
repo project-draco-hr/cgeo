@@ -2,6 +2,9 @@
   activity=(SettingsActivity)getContext();
   setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    Preference preference){
+      if (activity == null) {
+        return true;
+      }
       final String deviceName=Settings.getWebDeviceName();
       final String deviceCode=Settings.getWebDeviceCode();
       if (StringUtils.isBlank(deviceName)) {
