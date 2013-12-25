@@ -2,5 +2,8 @@
   if (GCLogin.isEmpty(viewstates)) {
     return;
   }
+  if (this.viewstates == null) {
+    this.viewstates=new String[viewstates.length];
+  }
   System.arraycopy(viewstates,0,this.viewstates,0,viewstates.length);
 }

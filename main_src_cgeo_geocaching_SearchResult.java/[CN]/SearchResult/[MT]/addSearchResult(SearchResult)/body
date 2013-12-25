@@ -1,9 +1,14 @@
 {
-  if (other != null) {
-    addGeocodes(other.geocodes);
-    addFilteredGeocodes(other.filteredGeocodes);
-    if (StringUtils.isBlank(url)) {
-      url=other.url;
-    }
+  if (other == null) {
+    return;
+  }
+  addGeocodes(other.geocodes);
+  addFilteredGeocodes(other.filteredGeocodes);
+  if (StringUtils.isBlank(url)) {
+    url=other.url;
+  }
+  if (getTotalCountGC() == 0 && other.getTotalCountGC() != 0) {
+    setViewstates(other.getViewstates());
+    setTotalCountGC(other.getTotalCountGC());
   }
 }

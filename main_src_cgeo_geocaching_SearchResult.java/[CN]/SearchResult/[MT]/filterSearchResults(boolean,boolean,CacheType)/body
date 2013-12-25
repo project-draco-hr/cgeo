@@ -14,7 +14,7 @@
       cachesForVote.add(cache);
     }
   }
-  result.setTotal(result.getTotal() - excluded);
+  result.setTotalCountGC(result.getTotalCountGC() - excluded);
   GCVote.loadRatings(cachesForVote);
   return result;
 }

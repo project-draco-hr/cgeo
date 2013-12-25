@@ -9,7 +9,7 @@
   }
   if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
     final SearchResult newSearch=DataStore.getBatchOfStoredCaches(coords,Settings.getCacheType(),listId);
-    if (newSearch.getTotal() != search.getTotal()) {
+    if (newSearch.getTotalCountGC() != search.getTotalCountGC()) {
       refreshCurrentList();
     }
   }
