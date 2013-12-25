@@ -1,4 +1,14 @@
 {
+  boolean succeeded=true;
+  if (download) {
+    succeeded=downloadStaticMaps();
+  }
+  if (!succeeded) {
+    Message msg=Message.obtain();
+    msg.obj=RESULT_DOWNLOAD_FAILED;
+    loadMapsHandler.sendMessage(msg);
+    return;
+  }
   try {
     for (int trials=0; trials < 2; trials++) {
       for (int level=1; level <= StaticMapsProvider.MAPS_LEVEL_MAX; level++) {
@@ -25,7 +35,14 @@
         break;
       }
     }
-    loadMapsHandler.sendMessage(Message.obtain());
+    Message msg=Message.obtain();
+    if (maps.isEmpty()) {
+      msg.obj=RESULT_LOAD_FAILED;
+    }
+ else {
+      msg.obj=RESULT_SUCCEEDED;
+    }
+    loadMapsHandler.sendMessage(msg);
   }
  catch (  Exception e) {
     Log.e("StaticMapsActivity.LoadMapsThread.run",e);
