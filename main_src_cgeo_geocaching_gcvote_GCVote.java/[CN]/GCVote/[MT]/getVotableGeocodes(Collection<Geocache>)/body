@@ -1,0 +1,10 @@
+{
+  final ArrayList<String> geocodes=new ArrayList<String>(caches.size());
+  for (  final Geocache cache : caches) {
+    String geocode=cache.getGeocode();
+    if (StringUtils.isNotBlank(geocode) && cache.supportsGCVote()) {
+      geocodes.add(geocode);
+    }
+  }
+  return geocodes;
+}

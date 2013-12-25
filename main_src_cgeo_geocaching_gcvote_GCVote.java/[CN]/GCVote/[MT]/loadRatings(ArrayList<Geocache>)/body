@@ -2,13 +2,7 @@
   if (!Settings.isRatingWanted()) {
     return;
   }
-  final ArrayList<String> geocodes=new ArrayList<String>(caches.size());
-  for (  final Geocache cache : caches) {
-    String geocode=cache.getGeocode();
-    if (StringUtils.isNotBlank(geocode)) {
-      geocodes.add(geocode);
-    }
-  }
+  final ArrayList<String> geocodes=getVotableGeocodes(caches);
   if (geocodes.isEmpty()) {
     return;
   }
