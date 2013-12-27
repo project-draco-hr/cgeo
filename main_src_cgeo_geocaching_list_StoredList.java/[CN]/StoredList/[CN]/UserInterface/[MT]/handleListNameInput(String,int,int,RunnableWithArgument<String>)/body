@@ -1,37 +1,11 @@
 {
-  final EditText input=new EditText(activity);
-  input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
-  input.setText(defaultValue);
-  final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
-  builder.setTitle(dialogTitle);
-  builder.setView(input);
-  builder.setPositiveButton(buttonTitle,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int whichButton){
-      String listName=StringUtils.trim(input.getText().toString());
+  Dialogs.input(activity,dialogTitle,defaultValue,buttonTitle,new RunnableWithArgument<String>(){
+    @Override public void run(    final String input){
+      String listName=StringUtils.trim(input);
       if (StringUtils.isNotBlank(listName)) {
         runnable.run(listName);
       }
     }
   }
 );
-  builder.setNegativeButton(res.getString(R.string.list_dialog_cancel),new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int whichButton){
-      dialog.dismiss();
-    }
-  }
-);
-  final AlertDialog dialog=builder.create();
-  input.addTextChangedListener(new TextWatcher(){
-    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
-    }
-    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
-    }
-    @Override public void afterTextChanged(    Editable editable){
-      enableDialogButton(dialog,editable.toString());
-    }
-  }
-);
-  dialog.show();
-  enableDialogButton(dialog,defaultValue);
-  input.setSelection(input.getText().length());
 }
