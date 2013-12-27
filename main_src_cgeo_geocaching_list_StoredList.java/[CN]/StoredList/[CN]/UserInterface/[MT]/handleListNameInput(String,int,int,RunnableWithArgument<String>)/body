@@ -1,11 +1,11 @@
 {
-  final AlertDialog.Builder alert=new AlertDialog.Builder(activity);
-  final View view=activity.getLayoutInflater().inflate(R.layout.list_create_dialog,null);
-  final EditText input=(EditText)view.findViewById(R.id.text);
+  final EditText input=new EditText(activity);
+  input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
   input.setText(defaultValue);
-  alert.setTitle(dialogTitle);
-  alert.setView(view);
-  alert.setPositiveButton(buttonTitle,new DialogInterface.OnClickListener(){
+  final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+  builder.setTitle(dialogTitle);
+  builder.setView(input);
+  builder.setPositiveButton(buttonTitle,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int whichButton){
       String listName=StringUtils.trim(input.getText().toString());
       if (StringUtils.isNotBlank(listName)) {
@@ -14,11 +14,24 @@
     }
   }
 );
-  alert.setNegativeButton(res.getString(R.string.list_dialog_cancel),new DialogInterface.OnClickListener(){
+  builder.setNegativeButton(res.getString(R.string.list_dialog_cancel),new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int whichButton){
       dialog.dismiss();
     }
   }
 );
-  alert.show();
+  final AlertDialog dialog=builder.create();
+  input.addTextChangedListener(new TextWatcher(){
+    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+    }
+    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    }
+    @Override public void afterTextChanged(    Editable editable){
+      enableDialogButton(dialog,editable.toString());
+    }
+  }
+);
+  dialog.show();
+  enableDialogButton(dialog,defaultValue);
+  input.setSelection(input.getText().length());
 }
