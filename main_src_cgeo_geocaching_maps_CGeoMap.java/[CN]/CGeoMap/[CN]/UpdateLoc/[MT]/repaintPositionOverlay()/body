@@ -4,6 +4,9 @@
     timeLastPositionOverlayCalculation=currentTimeMillis;
     try {
       if (mapView != null) {
+        if (overlayPositionAndScale == null) {
+          overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay(activity);
+        }
         boolean needsRepaintForDistance=needsRepaintForDistance();
         boolean needsRepaintForHeading=needsRepaintForHeading();
         if (needsRepaintForDistance) {
@@ -12,9 +15,9 @@
           }
         }
         if (needsRepaintForDistance || needsRepaintForHeading) {
-          overlayCaches.setCoordinates(currentLocation);
-          overlayCaches.setHeading(currentHeading);
-          mapView.repaintRequired(overlayCaches);
+          overlayPositionAndScale.setCoordinates(currentLocation);
+          overlayPositionAndScale.setHeading(currentHeading);
+          mapView.repaintRequired(overlayPositionAndScale);
         }
       }
     }

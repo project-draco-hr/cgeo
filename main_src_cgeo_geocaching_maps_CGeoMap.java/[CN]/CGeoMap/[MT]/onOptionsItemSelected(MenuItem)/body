@@ -3,7 +3,7 @@
 switch (id) {
 case R.id.menu_trail_mode:
     Settings.setMapTrail(!Settings.isMapTrail());
-  mapView.repaintRequired(overlayCaches);
+  mapView.repaintRequired(overlayPositionAndScale);
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case R.id.menu_map_live:
