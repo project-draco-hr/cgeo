@@ -1,4 +1,5 @@
 {
+  params.add("sid",ECLogin.getInstance().getSessionId());
   final HttpResponse response=Network.getRequest(API_HOST + uri,params);
   if (response == null) {
     return null;

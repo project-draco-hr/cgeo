@@ -8,6 +8,7 @@
     cache.setType(getCacheType(response.getString("type")));
     cache.setDifficulty((float)response.getDouble("difficulty"));
     cache.setTerrain((float)response.getDouble("terrain"));
+    cache.setSize(CacheSize.getById(response.getString("size")));
     cache.setFound(response.getInt("found") == 1 ? true : false);
     DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
   }
