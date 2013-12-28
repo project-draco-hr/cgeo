@@ -8,7 +8,7 @@
         Settings.setCacheType(CacheType.ALL);
         final GC2CJPF mockedCache=new GC2CJPF();
         deleteCacheFromDB(mockedCache.getGeocode());
-        final MapTokens tokens=GCLogin.getMapTokens();
+        final MapTokens tokens=GCLogin.getInstance().getMapTokens();
         final Viewport viewport=new Viewport(mockedCache,0.003,0.003);
         Settings.setLiveMapStrategy(Strategy.DETAILED);
         SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
