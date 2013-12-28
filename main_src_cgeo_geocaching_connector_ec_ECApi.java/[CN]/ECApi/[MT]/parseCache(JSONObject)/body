@@ -8,7 +8,7 @@
     cache.setType(getCacheType(response.getString("type")));
     cache.setDifficulty((float)response.getDouble("difficulty"));
     cache.setTerrain((float)response.getDouble("terrain"));
-    cache.setFound(response.getInt("found") == 1 ? true : false);
+    cache.setFound(response.getInt("found") == 1);
     DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
   }
  catch (  final JSONException e) {
