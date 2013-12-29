@@ -6,7 +6,12 @@
   AbstractSearchLoader loader=null;
 switch (enumType) {
 case OFFLINE:
-    listId=Settings.getLastList();
+    if (extras.containsKey(Intents.EXTRA_LIST_ID)) {
+      listId=extras.getInt(Intents.EXTRA_LIST_ID);
+    }
+ else {
+      listId=Settings.getLastList();
+    }
   if (listId <= StoredList.TEMPORARY_LIST_ID) {
     listId=StoredList.STANDARD_LIST_ID;
     title=res.getString(R.string.stored_caches_button);

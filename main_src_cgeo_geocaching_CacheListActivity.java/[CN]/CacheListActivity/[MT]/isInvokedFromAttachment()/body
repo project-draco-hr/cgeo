@@ -1,3 +1,4 @@
 {
-  return Intent.ACTION_VIEW.equals(getIntent().getAction());
+  final Intent intent=getIntent();
+  return Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null;
 }
