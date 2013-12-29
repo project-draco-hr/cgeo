@@ -1,0 +1,21 @@
+{
+  super.onCreate(savedInstanceState);
+  final Uri uri=getIntent().getData();
+  if (uri == null) {
+    finish();
+    return;
+  }
+  final String nickName=getParameter(uri,IContacts.PARAM_NAME);
+  if (StringUtils.isEmpty(nickName)) {
+    finish();
+    return;
+  }
+  int contactId=getContactId(nickName);
+  if (contactId == 0) {
+    showToast(getString(R.string.contact_not_found,nickName));
+    finish();
+    return;
+  }
+  openContact(contactId);
+  finish();
+}

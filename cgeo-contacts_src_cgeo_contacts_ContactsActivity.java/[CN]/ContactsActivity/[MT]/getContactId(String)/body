@@ -1,0 +1,44 @@
+{
+  Cursor contactCursor=null;
+  int foundId=0;
+  try {
+    contactCursor=getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
+    int idColumn=contactCursor.getColumnIndex(BaseColumns._ID);
+    while (contactCursor.moveToNext()) {
+      int contactId=contactCursor.getInt(idColumn);
+      String where=ContactsContract.Data.CONTACT_ID + " = ? AND " + ContactsContract.Data.MIMETYPE+ " = ?";
+      String[] params=new String[]{String.valueOf(contactId),ContactsContract.CommonDataKinds.Nickname.CONTENT_ITEM_TYPE};
+      Cursor nicknameCursor=null;
+      try {
+        nicknameCursor=getContentResolver().query(ContactsContract.Data.CONTENT_URI,null,where,params,null);
+        while (nicknameCursor.moveToNext()) {
+          String nicknameName=nicknameCursor.getString(nicknameCursor.getColumnIndex(ContactsContract.CommonDataKinds.Nickname.NAME));
+          if (StringUtils.equalsIgnoreCase(nicknameName,searchName)) {
+            foundId=contactId;
+            break;
+          }
+        }
+      }
+ catch (      Exception e) {
+        e.printStackTrace();
+      }
+ finally {
+        if (nicknameCursor != null) {
+          nicknameCursor.close();
+        }
+      }
+      if (foundId != 0) {
+        break;
+      }
+    }
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+ finally {
+    if (contactCursor != null) {
+      contactCursor.close();
+    }
+  }
+  return foundId;
+}
