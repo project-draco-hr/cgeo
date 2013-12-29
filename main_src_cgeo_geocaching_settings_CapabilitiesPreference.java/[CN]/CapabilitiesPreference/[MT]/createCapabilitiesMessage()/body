@@ -3,10 +3,10 @@
   if (connector == null) {
     return StringUtils.EMPTY;
   }
-  StringBuilder builder=new StringBuilder("<p>" + CgeoApplication.getInstance().getString(R.string.feature_description) + "<ul>");
+  StringBuilder builder=new StringBuilder("<p>" + TextUtils.htmlEncode(CgeoApplication.getInstance().getString(R.string.feature_description)) + "</p><ul>");
   for (  String capability : connector.getCapabilities()) {
-    builder.append("<li>").append(capability).append("</li>");
+    builder.append("<li>").append(TextUtils.htmlEncode(capability)).append("</li>");
   }
-  builder.append("</ul></p>");
+  builder.append("</ul>");
   return builder.toString();
 }
