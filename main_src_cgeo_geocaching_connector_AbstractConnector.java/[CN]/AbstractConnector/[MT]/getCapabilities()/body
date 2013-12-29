@@ -1,9 +1,9 @@
 {
   ArrayList<String> builder=new ArrayList<String>();
-  builder.add(capability(ISearchByViewPort.class,R.string.feature_search_live_map));
-  builder.add(capability(ISearchByKeyword.class,R.string.feature_search_keyword));
-  builder.add(capability(ISearchByCenter.class,R.string.feature_search_center));
-  builder.add(capability(ISearchByGeocode.class,R.string.feature_search_geocode));
+  addCapability(builder,ISearchByViewPort.class,R.string.feature_search_live_map);
+  addCapability(builder,ISearchByKeyword.class,R.string.feature_search_keyword);
+  addCapability(builder,ISearchByCenter.class,R.string.feature_search_center);
+  addCapability(builder,ISearchByGeocode.class,R.string.feature_search_geocode);
   if (supportsUserActions()) {
     builder.add(feature(R.string.feature_search_user));
   }
