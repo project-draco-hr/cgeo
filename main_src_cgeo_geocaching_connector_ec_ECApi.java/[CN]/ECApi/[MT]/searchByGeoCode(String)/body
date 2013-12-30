@@ -1,5 +1,5 @@
 {
-  final Parameters params=new Parameters("id",cleanCode(geocode));
+  final Parameters params=new Parameters("id",getIdFromGeocode(geocode));
   final HttpResponse response=apiRequest("gpx.php",params);
   final Collection<Geocache> caches=importCachesFromGPXResponse(response);
   if (CollectionUtils.isNotEmpty(caches)) {
