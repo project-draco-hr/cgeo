@@ -49,7 +49,7 @@
         afterParsing(cache);
         result.add(geocode);
         DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
-        DataStore.removeAllFromCache();
+        DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
         showProgressMessage(progressHandler,progressStream.getProgress());
       }
  else       if (StringUtils.isNotBlank(cache.getName()) && StringUtils.containsIgnoreCase(type,"waypoint")) {
