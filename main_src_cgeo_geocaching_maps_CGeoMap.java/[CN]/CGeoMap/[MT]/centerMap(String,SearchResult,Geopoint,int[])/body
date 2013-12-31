@@ -3,7 +3,7 @@
   if (!centered && mapState != null) {
     try {
       mapController.setCenter(mapItemFactory.getGeoPointBase(new Geopoint(mapState[0] / 1.0e6,mapState[1] / 1.0e6)));
-      mapController.setZoom(mapState[2]);
+      setZoom(mapState[2]);
     }
  catch (    RuntimeException e) {
       Log.e("centermap",e);
