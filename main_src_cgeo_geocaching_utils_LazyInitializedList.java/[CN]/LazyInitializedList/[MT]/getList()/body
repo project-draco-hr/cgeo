@@ -10,6 +10,10 @@ synchronized (this) {
  catch (      final Exception e) {
         Log.e("LazyInitializedList.getList",e);
       }
+      if (list == null) {
+        Log.e("LazyInitializedList.getList: using an empty list as a fallback");
+        list=Collections.emptyList();
+      }
     }
   }
   return list;

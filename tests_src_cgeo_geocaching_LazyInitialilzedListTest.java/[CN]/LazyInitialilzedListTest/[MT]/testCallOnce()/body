@@ -1,0 +1,8 @@
+{
+  final MyList l=new MyList(0);
+  assertEquals("call() must not called prematurely",0,l.getCounter());
+  l.size();
+  assertEquals("call() must be called when needed",1,l.getCounter());
+  l.size();
+  assertEquals("call() must be called only once",1,l.getCounter());
+}
