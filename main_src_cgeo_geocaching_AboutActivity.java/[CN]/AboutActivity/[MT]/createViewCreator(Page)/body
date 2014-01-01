@@ -10,7 +10,6 @@ case CONTRIBUTORS:
 return new ContributorsViewCreator();
 case LICENSE:
 return new LicenseViewCreator();
-default :
-throw new IllegalArgumentException();
 }
+throw new IllegalStateException();
 }

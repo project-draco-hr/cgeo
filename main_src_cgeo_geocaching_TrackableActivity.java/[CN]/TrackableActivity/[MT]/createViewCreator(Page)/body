@@ -4,7 +4,6 @@ case DETAILS:
     return new DetailsViewCreator();
 case LOGS:
   return new TrackableLogsViewCreator(this,trackable);
-default :
-throw new IllegalArgumentException();
 }
+throw new IllegalStateException();
 }

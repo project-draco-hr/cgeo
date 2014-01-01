@@ -84,8 +84,6 @@ final String pocket_name=extras.getString(Intents.EXTRA_NAME);
 title=pocket_name;
 loader=new PocketGeocacheListLoader(app,guid);
 break;
-default :
-throw new IllegalStateException();
 }
 setTitle(title);
 showProgress(true);
