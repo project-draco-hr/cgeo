@@ -1,5 +1,10 @@
 {
   if (Settings.isUseCompass()) {
-    sendEmptyMessage(START_DIR);
+    dirSubscription=app.currentDirObject().subscribeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Float>(){
+      @Override public void call(      final Float direction){
+        updateDirection(direction);
+      }
+    }
+);
   }
 }

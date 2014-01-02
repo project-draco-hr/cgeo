@@ -4,5 +4,5 @@
   }
   final int visible=gpsLocation.isRecent() ? satellitesVisible : 0;
   final IGeoData current=new GeoData(locationData.location,gpsEnabled,visible,satellitesFixed);
-  notifyObservers(current);
+  subject.onNext(current);
 }
