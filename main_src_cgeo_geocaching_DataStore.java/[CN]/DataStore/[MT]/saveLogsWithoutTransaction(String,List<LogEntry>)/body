@@ -1,6 +1,6 @@
 {
   database.delete(dbTableLogs,"geocode = ?",new String[]{geocode});
-  if (!logs.iterator().hasNext()) {
+  if (logs.isEmpty()) {
     return;
   }
   SQLiteStatement insertLog=PreparedStatements.getInsertLog();
