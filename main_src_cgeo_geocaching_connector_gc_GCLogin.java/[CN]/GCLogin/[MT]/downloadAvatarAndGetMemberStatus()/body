@@ -10,7 +10,7 @@
     final String avatarURL=TextUtils.getMatch(profile,GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE,false,null);
     if (null != avatarURL) {
       final HtmlImage imgGetter=new HtmlImage("",false,0,false);
-      return imgGetter.getDrawable(avatarURL);
+      return imgGetter.getDrawable(avatarURL.replace("avatar","user/large"));
     }
     Log.d("No avatar set for user");
   }
