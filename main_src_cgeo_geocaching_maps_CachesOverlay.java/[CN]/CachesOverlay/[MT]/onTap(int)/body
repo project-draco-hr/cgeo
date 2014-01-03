@@ -18,16 +18,21 @@
       return false;
     }
     final IWaypoint coordinate=item.getCoord();
-    if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
-      Geocache cache=DataStore.loadCache(coordinate.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
-      RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
-      if (!requestDetailsThread.requestRequired()) {
-        progress.dismiss();
+    final String coordType=coordinate.getCoordType();
+    if (StringUtils.equalsIgnoreCase(coordType,"cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
+      final Geocache cache=DataStore.loadCache(coordinate.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+      if (cache != null) {
+        RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
+        if (!requestDetailsThread.requestRequired()) {
+          progress.dismiss();
+        }
+        requestDetailsThread.start();
+        return true;
       }
-      requestDetailsThread.start();
-      return true;
+      progress.dismiss();
+      return false;
     }
-    if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() >= 0) {
+    if (StringUtils.equalsIgnoreCase(coordType,"waypoint") && coordinate.getId() >= 0) {
       CGeoMap.markCacheAsDirty(coordinate.getGeocode());
       WaypointPopup.startActivity(context,coordinate.getId(),coordinate.getGeocode());
     }
