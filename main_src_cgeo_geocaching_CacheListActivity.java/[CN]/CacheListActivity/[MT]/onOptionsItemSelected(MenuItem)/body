@@ -20,6 +20,10 @@ return true;
 case R.id.menu_import_gpx:
 importGpx();
 invalidateOptionsMenuCompatible();
+return true;
+case R.id.menu_import_android:
+importGpxFromAndroid();
+invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_create_list:
 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(),newListName);

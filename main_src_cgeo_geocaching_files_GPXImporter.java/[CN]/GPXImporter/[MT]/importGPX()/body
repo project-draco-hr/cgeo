@@ -1,29 +1,6 @@
 {
-  final ContentResolver contentResolver=fromActivity.getContentResolver();
   final Intent intent=fromActivity.getIntent();
   final Uri uri=intent.getData();
-  String mimeType=intent.getType();
-  if (mimeType == null) {
-    if (StringUtils.endsWithIgnoreCase(uri.getPath(),GPX_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(uri.getPath(),LOC_FILE_EXTENSION)) {
-      mimeType="application/xml";
-    }
- else {
-      mimeType="application/zip";
-    }
-  }
-  Log.i("importGPX: " + uri + ", mimetype="+ mimeType);
-  if (GPX_MIME_TYPES.contains(mimeType)) {
-    if (StringUtils.endsWithIgnoreCase(uri.getPath(),LOC_FILE_EXTENSION)) {
-      new ImportLocAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
-    }
- else {
-      new ImportGpxAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
-    }
-  }
- else   if (ZIP_MIME_TYPES.contains(mimeType)) {
-    new ImportGpxZipAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
-  }
- else {
-    importFinished();
-  }
+  final String mimeType=intent.getType();
+  importGPX(uri,mimeType,null);
 }
