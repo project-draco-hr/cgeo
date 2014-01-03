@@ -1,7 +1,6 @@
 {
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
-    SearchResult searchResult=new SearchResult();
     if (Settings.isGCConnectorActive()) {
       if (tokens == null) {
         tokens=GCLogin.getInstance().getMapTokens();
@@ -11,7 +10,7 @@
         }
       }
     }
-    searchResult=ConnectorFactory.searchByViewport(viewport.resize(0.8),tokens);
+    final SearchResult searchResult=ConnectorFactory.searchByViewport(viewport.resize(0.8),tokens);
     downloaded=true;
     Set<Geocache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
     CGeoMap.filter(result);
