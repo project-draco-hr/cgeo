@@ -44,6 +44,7 @@
         }
       }
     }
+    final ArrayList<Geocache> caches=new ArrayList<Geocache>();
     for (    Entry<String,List<UTFGridPosition>> entry : positions.entrySet()) {
       String id=entry.getKey();
       List<UTFGridPosition> pos=entry.getValue();
@@ -75,9 +76,10 @@
         exclude=true;
       }
       if (!exclude) {
-        searchResult.addAndPutInCache(cache);
+        caches.add(cache);
       }
     }
+    searchResult.addAndPutInCache(caches);
     Log.d("Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
   }
  catch (  RuntimeException e) {

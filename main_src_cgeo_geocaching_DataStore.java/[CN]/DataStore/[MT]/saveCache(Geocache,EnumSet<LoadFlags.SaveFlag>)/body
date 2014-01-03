@@ -1,14 +1,3 @@
 {
-  if (cache == null) {
-    throw new IllegalArgumentException("cache must not be null");
-  }
-  final String geocode=cache.getGeocode();
-  final Geocache cacheFromCache=cacheCache.getCacheFromCache(geocode);
-  final boolean dbUpdateRequired=!cache.gatherMissingFrom(cacheFromCache != null ? cacheFromCache : loadCache(geocode,LoadFlags.LOAD_ALL_DB_ONLY)) || cacheFromCache != null;
-  cache.addStorageLocation(StorageLocation.CACHE);
-  cacheCache.putCacheInCache(cache);
-  if (!saveFlags.contains(SaveFlag.SAVE_DB)) {
-    return true;
-  }
-  return cache.isDetailed() && dbUpdateRequired && storeIntoDatabase(cache);
+  saveCaches(Collections.singletonList(cache),saveFlags);
 }

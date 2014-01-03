@@ -37,6 +37,7 @@
   final String[] rows=page.split("<tr class=");
   final int rows_count=rows.length;
   int excludedCaches=0;
+  final ArrayList<Geocache> caches=new ArrayList<Geocache>();
   for (int z=1; z < rows_count; z++) {
     final Geocache cache=new Geocache();
     final String row=rows[z];
@@ -142,8 +143,9 @@
  catch (    final NumberFormatException e) {
       Log.w("GCParser.parseSearch: Failed to parse favorite count");
     }
-    searchResult.addAndPutInCache(cache);
+    caches.add(cache);
   }
+  searchResult.addAndPutInCache(caches);
   try {
     final String result=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_TOTALCOUNT,false,1,null,true);
     if (null != result) {
@@ -192,8 +194,8 @@
     }
   }
   if (Settings.getLoadDirImg()) {
-    final Set<Geocache> caches=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-    for (    final Geocache cache : caches) {
+    final Set<Geocache> cachesReloaded=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    for (    final Geocache cache : cachesReloaded) {
       if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
         DirectionImage.getDrawable(cache.getDirectionImg());
       }

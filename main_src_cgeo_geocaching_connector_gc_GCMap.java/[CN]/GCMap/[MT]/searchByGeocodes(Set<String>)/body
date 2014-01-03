@@ -18,6 +18,7 @@
     if (dataArray == null) {
       throw new JSONException("No data inside JSON");
     }
+    final ArrayList<Geocache> caches=new ArrayList<Geocache>();
     for (int j=0; j < dataArray.length(); j++) {
       final Geocache cache=new Geocache();
       JSONObject dataObject=dataArray.getJSONObject(j);
@@ -39,8 +40,9 @@
       cache.setType(CacheType.getByPattern(typeObj.getString("text")));
       JSONObject ownerObj=dataObject.getJSONObject("owner");
       cache.setOwnerDisplayName(ownerObj.getString("text"));
-      result.addAndPutInCache(cache);
+      caches.add(cache);
     }
+    result.addAndPutInCache(caches);
   }
  catch (  JSONException e) {
     result.setError(StatusCode.UNKNOWN_ERROR);

@@ -1,7 +1,7 @@
 {
   SearchResult result=new SearchResult(this);
   result.geocodes.clear();
-  final ArrayList<Geocache> cachesForVote=new ArrayList<Geocache>();
+  final ArrayList<Geocache> includedCaches=new ArrayList<Geocache>();
   final Set<Geocache> caches=DataStore.loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
   int excluded=0;
   for (  Geocache cache : caches) {
@@ -10,11 +10,11 @@
       excluded++;
     }
  else {
-      result.addAndPutInCache(cache);
-      cachesForVote.add(cache);
+      includedCaches.add(cache);
     }
   }
+  result.addAndPutInCache(includedCaches);
   result.setTotalCountGC(result.getTotalCountGC() - excluded);
-  GCVote.loadRatings(cachesForVote);
+  GCVote.loadRatings(includedCaches);
   return result;
 }

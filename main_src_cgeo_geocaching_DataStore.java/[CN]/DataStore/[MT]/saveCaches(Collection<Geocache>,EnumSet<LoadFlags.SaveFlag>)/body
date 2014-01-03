@@ -1,0 +1,34 @@
+{
+  if (CollectionUtils.isEmpty(caches)) {
+    return;
+  }
+  final ArrayList<String> cachesFromDatabase=new ArrayList<String>();
+  final HashMap<String,Geocache> existingCaches=new HashMap<String,Geocache>();
+  for (  Geocache cache : caches) {
+    final String geocode=cache.getGeocode();
+    final Geocache cacheFromCache=cacheCache.getCacheFromCache(geocode);
+    if (cacheFromCache == null) {
+      cachesFromDatabase.add(geocode);
+    }
+ else {
+      existingCaches.put(geocode,cacheFromCache);
+    }
+  }
+  for (  Geocache cacheFromDatabase : loadCaches(cachesFromDatabase,LoadFlags.LOAD_ALL_DB_ONLY)) {
+    existingCaches.put(cacheFromDatabase.getGeocode(),cacheFromDatabase);
+  }
+  final ArrayList<Geocache> toBeStored=new ArrayList<Geocache>();
+  for (  Geocache cache : caches) {
+    final String geocode=cache.getGeocode();
+    final Geocache existingCache=existingCaches.get(geocode);
+    final boolean dbUpdateRequired=!cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
+    cache.addStorageLocation(StorageLocation.CACHE);
+    cacheCache.putCacheInCache(cache);
+    if (saveFlags.contains(SaveFlag.SAVE_DB) && cache.isDetailed() && dbUpdateRequired) {
+      toBeStored.add(cache);
+    }
+  }
+  for (  Geocache geocache : toBeStored) {
+    storeIntoDatabase(geocache);
+  }
+}

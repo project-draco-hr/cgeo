@@ -1,6 +1,3 @@
 {
-  if (numberWithPunctuation == null) {
-    return null;
-  }
-  return numberWithPunctuation.replaceAll("[.,]","");
+  return StringUtils.replaceChars(numberWithPunctuation,".,","");
 }

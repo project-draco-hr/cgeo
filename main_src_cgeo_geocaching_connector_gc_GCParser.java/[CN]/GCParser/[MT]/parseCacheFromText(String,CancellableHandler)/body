@@ -267,6 +267,6 @@
     return searchResult;
   }
   cache.setDetailedUpdatedNow();
-  searchResult.addAndPutInCache(cache);
+  searchResult.addAndPutInCache(Collections.singletonList(cache));
   return searchResult;
 }
