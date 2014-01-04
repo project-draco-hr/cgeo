@@ -1,3 +1,9 @@
 {
-  return GCParser.searchByOwner(username,Settings.getCacheType(),Settings.isShowCaptcha(),this);
+  SearchResult searchResult=new SearchResult();
+  for (  ISearchByOwner connector : ConnectorFactory.getSearchByOwnerConnectors()) {
+    if (connector.isActive()) {
+      searchResult.addSearchResult(connector.searchByOwner(username,this));
+    }
+  }
+  return searchResult;
 }

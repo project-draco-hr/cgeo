@@ -1,0 +1,9 @@
+{
+  SearchResult searchResult=new SearchResult();
+  for (  ISearchByFinder connector : ConnectorFactory.getSearchByFinderConnectors()) {
+    if (connector.isActive()) {
+      searchResult.addSearchResult(connector.searchByFinder(username,this));
+    }
+  }
+  return searchResult;
+}
