@@ -4,9 +4,6 @@
   addCapability(builder,ISearchByKeyword.class,R.string.feature_search_keyword);
   addCapability(builder,ISearchByCenter.class,R.string.feature_search_center);
   addCapability(builder,ISearchByGeocode.class,R.string.feature_search_geocode);
-  if (supportsUserActions()) {
-    builder.add(feature(R.string.feature_search_user));
-  }
   if (supportsLogging()) {
     builder.add(feature(R.string.feature_online_logging));
   }

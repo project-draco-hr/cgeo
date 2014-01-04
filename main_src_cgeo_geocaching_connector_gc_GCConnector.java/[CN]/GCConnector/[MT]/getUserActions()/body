@@ -1,0 +1,16 @@
+{
+  List<UserAction> actions=super.getUserActions();
+  actions.add(new UserAction(R.string.user_menu_open_browser,new RunnableWithArgument<UserAction.Context>(){
+    @Override public void run(    cgeo.geocaching.connector.UserAction.Context context){
+      context.activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(context.userName))));
+    }
+  }
+));
+  actions.add(new UserAction(R.string.user_menu_send_message,new RunnableWithArgument<UserAction.Context>(){
+    @Override public void run(    cgeo.geocaching.connector.UserAction.Context context){
+      context.activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
+    }
+  }
+));
+  return actions;
+}
