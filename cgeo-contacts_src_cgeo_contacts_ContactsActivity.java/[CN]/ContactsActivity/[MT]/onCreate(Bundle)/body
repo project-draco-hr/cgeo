@@ -10,7 +10,10 @@
     finish();
     return;
   }
-  int contactId=getContactId(nickName);
+  int contactId=getContactId(nickName,ContactsContract.Data.CONTENT_URI,ContactsContract.Data.CONTACT_ID,ContactsContract.CommonDataKinds.Nickname.NAME);
+  if (contactId == 0) {
+    contactId=getContactId(nickName,ContactsContract.Contacts.CONTENT_URI,BaseColumns._ID,ContactsContract.Contacts.DISPLAY_NAME);
+  }
   if (contactId == 0) {
     showToast(getString(R.string.contact_not_found,nickName));
     finish();

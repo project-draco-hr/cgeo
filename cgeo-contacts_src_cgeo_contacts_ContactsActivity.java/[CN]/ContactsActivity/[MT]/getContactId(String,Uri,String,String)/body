@@ -1,0 +1,22 @@
+{
+  int foundId=0;
+  final String[] projection=new String[]{idColumnName};
+  final String selection=selectionColumnName + " = ? COLLATE NOCASE";
+  final String[] selectionArgs=new String[]{searchName};
+  Cursor cursor=null;
+  try {
+    cursor=getContentResolver().query(uri,projection,selection,selectionArgs,null);
+    if (cursor != null && cursor.moveToNext()) {
+      foundId=cursor.getInt(0);
+    }
+  }
+ catch (  Exception e) {
+    Log.e(LOG_TAG,"ContactsActivity.getContactId",e);
+  }
+ finally {
+    if (cursor != null) {
+      cursor.close();
+    }
+  }
+  return foundId;
+}
