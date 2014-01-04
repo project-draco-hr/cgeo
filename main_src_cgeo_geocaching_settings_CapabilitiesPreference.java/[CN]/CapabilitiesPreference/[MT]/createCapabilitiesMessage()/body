@@ -1,8 +1,5 @@
 {
   IConnector connector=ConnectorFactory.getConnector(connectorCode + "1234");
-  if (connector == null) {
-    return StringUtils.EMPTY;
-  }
   StringBuilder builder=new StringBuilder("<p>" + TextUtils.htmlEncode(CgeoApplication.getInstance().getString(R.string.feature_description)) + "</p><ul>");
   for (  String capability : connector.getCapabilities()) {
     builder.append("<li>").append(TextUtils.htmlEncode(capability)).append("</li>");

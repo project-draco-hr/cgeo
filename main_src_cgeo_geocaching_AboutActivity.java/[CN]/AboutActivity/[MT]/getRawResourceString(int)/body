@@ -1,11 +1,8 @@
 {
   final InputStream ins=res.openRawResource(resourceId);
-  final String result=new Scanner(ins,CharEncoding.UTF_8).useDelimiter("\\A").next();
-  try {
-    ins.close();
-  }
- catch (  IOException e) {
-    e.printStackTrace();
-  }
+  final Scanner scanner=new Scanner(ins,CharEncoding.UTF_8);
+  final String result=scanner.useDelimiter("\\A").next();
+  IOUtils.closeQuietly(ins);
+  IOUtils.closeQuietly(scanner);
   return result;
 }
