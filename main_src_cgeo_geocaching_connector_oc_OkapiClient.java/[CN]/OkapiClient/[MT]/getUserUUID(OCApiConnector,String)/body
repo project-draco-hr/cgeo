@@ -1,0 +1,19 @@
+{
+  final Parameters params=new Parameters("fields",USER_UUID,USER_USERNAME,userName);
+  final JSONResult result=request(connector,OkapiService.SERVICE_USER_BY_USERNAME,params);
+  if (!result.isSuccess) {
+    final OkapiError error=new OkapiError(result.data);
+    Log.e("OkapiClient.getUserUUID: error getting user info: '" + error.getMessage() + "'");
+    return null;
+  }
+  JSONObject data=result.data;
+  if (!data.isNull(USER_UUID)) {
+    try {
+      return data.getString(USER_UUID);
+    }
+ catch (    final JSONException e) {
+      Log.e("OkapiClient.getUserUUID - uuid",e);
+    }
+  }
+  return null;
+}

@@ -1,0 +1,7 @@
+{
+  final Parameters params=new Parameters("search_method",METHOD_SEARCH_ALL);
+  final Map<String,String> valueMap=new LinkedHashMap<String,String>();
+  final String uuid=getUserUUID(connector,username);
+  valueMap.put("owner_uuid",uuid);
+  return requestCaches(connector,params,valueMap);
+}
