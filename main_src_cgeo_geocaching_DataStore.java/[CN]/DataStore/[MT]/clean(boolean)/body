@@ -19,6 +19,7 @@
       geocodes.add(cursor.getString(0));
     }
     cursor.close();
+    geocodes=exceptCachesWithOfflineLog(geocodes);
     if (!geocodes.isEmpty()) {
       Log.d("Database clean: removing " + geocodes.size() + " geocaches from listId=0");
       removeCaches(geocodes,LoadFlags.REMOVE_ALL);
