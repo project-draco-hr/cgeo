@@ -1,5 +1,5 @@
 {
-  final Pattern oldFilePattern=Pattern.compile("^[GC|TB|O][A-Z0-9]{4,7}$");
+  final Pattern oldFilePattern=Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
   final SQLiteStatement select=db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
   final File[] files=LocalStorage.getStorage().listFiles();
   final ArrayList<File> toRemove=new ArrayList<File>(files.length);
