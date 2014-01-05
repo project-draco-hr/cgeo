@@ -1,0 +1,21 @@
+{
+  final File dbPath=databasePath();
+  final File corruptedPath=new File(LocalStorage.getStorage(),dbPath.getName() + ".corrupted");
+  if (LocalStorage.copy(dbPath,corruptedPath)) {
+    Log.i("DataStore.init: renamed " + dbPath + " into "+ corruptedPath);
+  }
+ else {
+    Log.e("DataStore.init: unable to rename corrupted database");
+  }
+  try {
+    database=dbHelper.getWritableDatabase();
+  }
+ catch (  Exception f) {
+    Log.e("DataStore.init: unable to recreate database and open it for R/W",f);
+    if (Settings.isDbOnSDCard()) {
+      Log.i("DataStore.init: trying to switch to internal database");
+      Settings.setDbOnSDCard(false);
+      init();
+    }
+  }
+}
