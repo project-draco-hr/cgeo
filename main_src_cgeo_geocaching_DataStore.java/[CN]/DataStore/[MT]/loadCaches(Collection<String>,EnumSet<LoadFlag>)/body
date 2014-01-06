@@ -13,7 +13,7 @@
       }
     }
   }
-  if (loadFlags.contains(LoadFlag.LOAD_DB_MINIMAL) || loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES) || loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)|| loadFlags.contains(LoadFlag.LOAD_SPOILERS)|| loadFlags.contains(LoadFlag.LOAD_LOGS)|| loadFlags.contains(LoadFlag.LOAD_INVENTORY)|| loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+  if (loadFlags.contains(LoadFlag.LOAD_DB_MINIMAL) || loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES) || loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)|| loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
     final Set<Geocache> cachesFromDB=loadCachesFromGeocodes(remaining,loadFlags);
     result.addAll(cachesFromDB);
     for (    final Geocache cache : cachesFromDB) {
