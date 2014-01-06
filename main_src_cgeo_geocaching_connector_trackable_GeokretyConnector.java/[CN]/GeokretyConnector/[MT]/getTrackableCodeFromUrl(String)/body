@@ -1,0 +1,7 @@
+{
+  String id=StringUtils.substringAfterLast(url,"konkret.php?id=");
+  if (StringUtils.isNumeric(id)) {
+    return geocode(Integer.parseInt(id));
+  }
+  return null;
+}

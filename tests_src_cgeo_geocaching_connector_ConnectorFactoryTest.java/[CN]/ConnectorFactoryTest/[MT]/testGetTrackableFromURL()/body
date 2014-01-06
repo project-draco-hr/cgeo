@@ -1,0 +1,10 @@
+{
+  assertEquals("GK78FA",ConnectorFactory.getTrackableFromURL("http://www.geokrety.org/konkret.php?id=30970"));
+  assertEquals("GK78FA",ConnectorFactory.getTrackableFromURL("http://geokrety.org/konkret.php?id=30970"));
+  assertEquals("TB1234",ConnectorFactory.getTrackableFromURL("http://coord.info/TB1234"));
+  assertEquals("TB1234",ConnectorFactory.getTrackableFromURL("http://www.coord.info/TB1234"));
+  assertEquals("TB1234",ConnectorFactory.getTrackableFromURL("http://geocaching.com/track/details.aspx?tracker=TB1234"));
+  assertEquals("TB1234",ConnectorFactory.getTrackableFromURL("http://www.geocaching.com/track/details.aspx?tracker=TB1234"));
+  assertNull(ConnectorFactory.getTrackableFromURL("http://coord.info/GC1234"));
+  assertNull(ConnectorFactory.getTrackableFromURL("http://www.coord.info/GC1234"));
+}

@@ -1,0 +1,8 @@
+{
+  assertEquals("TB1234",TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/TB1234"));
+  assertEquals("TB1234",TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.coord.info/TB1234"));
+  assertEquals("TB1234",TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://geocaching.com/track/details.aspx?tracker=TB1234"));
+  assertEquals("TB1234",TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.geocaching.com/track/details.aspx?tracker=TB1234"));
+  assertNull(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/GC1234"));
+  assertNull(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.coord.info/GC1234"));
+}

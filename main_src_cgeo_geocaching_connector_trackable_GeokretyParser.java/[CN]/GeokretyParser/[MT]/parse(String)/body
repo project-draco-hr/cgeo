@@ -12,8 +12,8 @@
     @Override public void start(    Attributes attributes){
       try {
         final String kretyId=attributes.getValue("id");
-        if (StringUtils.isNotBlank(kretyId)) {
-          trackable.setGeocode(geocode(Integer.parseInt(kretyId)));
+        if (StringUtils.isNumeric(kretyId)) {
+          trackable.setGeocode(GeokretyConnector.geocode(Integer.parseInt(kretyId)));
         }
         final String distance=attributes.getValue("dist");
         if (StringUtils.isNotBlank(distance)) {
