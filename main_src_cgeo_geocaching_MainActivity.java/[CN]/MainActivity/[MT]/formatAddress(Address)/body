@@ -1,0 +1,18 @@
+{
+  final ArrayList<String> addressParts=new ArrayList<String>();
+  final String countryName=address.getCountryName();
+  if (countryName != null) {
+    addressParts.add(countryName);
+  }
+  final String locality=address.getLocality();
+  if (locality != null) {
+    addressParts.add(locality);
+  }
+ else {
+    final String adminArea=address.getAdminArea();
+    if (adminArea != null) {
+      addressParts.add(adminArea);
+    }
+  }
+  return StringUtils.join(addressParts,", ");
+}

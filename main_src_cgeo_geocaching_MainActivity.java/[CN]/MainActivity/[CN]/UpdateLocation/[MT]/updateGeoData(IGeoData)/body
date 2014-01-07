@@ -22,10 +22,34 @@
       }
       if (Settings.isShowAddress()) {
         if (addCoords == null) {
-          navLocation.setText(res.getString(R.string.loc_no_addr));
+          navLocation.setText(R.string.loc_no_addr);
         }
-        if (addCoords == null || (geo.getCoords().distanceTo(addCoords) > 0.5 && !addressObtaining)) {
-          (new ObtainAddressThread()).start();
+        if (addCoords == null || (geo.getCoords().distanceTo(addCoords) > 0.5)) {
+          final Observable<String> address=Observable.create(new OnSubscribeFunc<String>(){
+            @Override public Subscription onSubscribe(            final Observer<? super String> observer){
+              try {
+                addCoords=geo.getCoords();
+                final Geocoder geocoder=new Geocoder(MainActivity.this,Locale.getDefault());
+                final Geopoint coords=app.currentGeo().getCoords();
+                final List<Address> addresses=geocoder.getFromLocation(coords.getLatitude(),coords.getLongitude(),1);
+                if (!addresses.isEmpty()) {
+                  observer.onNext(formatAddress(addresses.get(0)));
+                }
+                observer.onCompleted();
+              }
+ catch (              final IOException e) {
+                observer.onError(e);
+              }
+              return Subscriptions.empty();
+            }
+          }
+).subscribeOn(Schedulers.threadPoolForIO());
+          AndroidObservable.fromActivity(MainActivity.this,address).onErrorResumeNext(Observable.just(geo.getCoords().toString())).subscribe(new Action1<String>(){
+            @Override public void call(            final String address){
+              navLocation.setText(address);
+            }
+          }
+);
         }
       }
  else {
@@ -41,7 +65,7 @@
       }
       navType.setText(null);
       navAccuracy.setText(null);
-      navLocation.setText(res.getString(R.string.loc_trying));
+      navLocation.setText(R.string.loc_trying);
     }
   }
  catch (  RuntimeException e) {
