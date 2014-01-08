@@ -1,5 +1,4 @@
 {
-  removeGeoAndDir();
   final List<Geocache> allCaches=Settings.isStoreOfflineMaps() ? ListUtils.union(ListUtils.selectRejected(caches,Geocache.hasStaticMap),ListUtils.select(caches,Geocache.hasStaticMap)) : caches;
   for (  final Geocache cache : allCaches) {
     if (!refreshCache(cache)) {

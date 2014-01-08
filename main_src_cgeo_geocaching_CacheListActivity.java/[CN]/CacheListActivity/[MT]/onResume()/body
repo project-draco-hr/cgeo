@@ -1,6 +1,9 @@
 {
   super.onResume();
-  startGeoAndDir();
+  geoDirHandler.startGeo();
+  if (Settings.isLiveMap()) {
+    geoDirHandler.startDir();
+  }
   adapter.setSelectMode(false);
   setAdapterCurrentCoordinates(true);
   if (loadCachesHandler != null && search != null) {
