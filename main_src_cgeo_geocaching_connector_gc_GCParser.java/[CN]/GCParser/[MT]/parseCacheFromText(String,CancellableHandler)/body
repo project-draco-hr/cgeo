@@ -261,7 +261,7 @@
     }
   }
   cache.parseWaypointsFromNote();
-  cache.setLogs(loadLogsFromDetails(page,cache,false,true));
+  cache.setLogs(getLogsFromDetails(page,false));
   if (StringUtils.isBlank(cache.getGeocode())) {
     searchResult.setError(StatusCode.UNKNOWN_ERROR);
     return searchResult;

@@ -1,6 +1,6 @@
 {
   String rawResponse;
-  if (!getDataFromPage) {
+  if (friends) {
     final MatcherWrapper userTokenMatcher=new MatcherWrapper(GCConstants.PATTERN_USERTOKEN,page);
     if (!userTokenMatcher.find()) {
       Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
