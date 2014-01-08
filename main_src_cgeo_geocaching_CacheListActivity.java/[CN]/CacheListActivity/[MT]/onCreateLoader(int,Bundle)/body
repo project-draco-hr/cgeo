@@ -80,8 +80,7 @@ loader=new NextPageGeocacheListLoader(app,search);
 break;
 case POCKET:
 final String guid=extras.getString(Intents.EXTRA_POCKET_GUID);
-final String pocket_name=extras.getString(Intents.EXTRA_NAME);
-title=pocket_name;
+title=extras.getString(Intents.EXTRA_NAME);
 loader=new PocketGeocacheListLoader(app,guid);
 break;
 }

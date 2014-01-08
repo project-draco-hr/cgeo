@@ -3,7 +3,7 @@
   if (requestCode == REQUEST_CODE_IMPORT_GPX && resultCode == Activity.RESULT_OK) {
     if (data != null) {
       final Uri uri=data.getData();
-      new GPXImporter(CacheListActivity.this,listId,importGpxAttachementFinishedHandler).importGPX(uri,null,getDisplayName(uri));
+      new GPXImporter(this,listId,importGpxAttachementFinishedHandler).importGPX(uri,null,getDisplayName(uri));
     }
   }
   refreshCurrentList();
