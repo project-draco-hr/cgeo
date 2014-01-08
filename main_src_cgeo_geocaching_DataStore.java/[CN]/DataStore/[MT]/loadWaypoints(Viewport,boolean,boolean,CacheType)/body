@@ -1,5 +1,5 @@
 {
-  final StringBuilder where=new StringBuilder(buildCoordinateWhere(dbTableWaypoints,viewport));
+  final StringBuilder where=buildCoordinateWhere(dbTableWaypoints,viewport);
   if (excludeMine) {
     where.append(" and ").append(dbTableCaches).append(".found == 0");
   }
