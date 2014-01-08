@@ -1,3 +1,6 @@
 {
-  sendEmptyMessage(STOP_DIR);
+  if (dirSubscription != null) {
+    dirSubscription.unsubscribe();
+    dirSubscription=null;
+  }
 }

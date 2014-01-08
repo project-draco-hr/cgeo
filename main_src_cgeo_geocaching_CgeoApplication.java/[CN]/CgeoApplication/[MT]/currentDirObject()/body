@@ -2,7 +2,7 @@
   if (dir == null) {
 synchronized (this) {
       if (dir == null) {
-        dir=new DirectionProvider(this);
+        dir=DirectionProvider.create(this);
       }
     }
   }

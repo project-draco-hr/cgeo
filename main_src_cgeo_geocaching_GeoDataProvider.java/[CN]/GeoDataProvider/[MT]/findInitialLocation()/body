@@ -1,0 +1,28 @@
+{
+  final Location initialLocation=new Location(LAST_LOCATION_PSEUDO_PROVIDER);
+  try {
+    final Location lastGpsLocation=geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    final Location lastNetworkLocation=geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+    if (lastGpsLocation != null && lastNetworkLocation != null) {
+      if (lastGpsLocation.getTime() >= lastNetworkLocation.getTime()) {
+        copyCoords(initialLocation,lastGpsLocation);
+      }
+ else {
+        copyCoords(initialLocation,lastNetworkLocation);
+      }
+    }
+ else     if (lastGpsLocation != null) {
+      copyCoords(initialLocation,lastGpsLocation);
+    }
+ else     if (lastNetworkLocation != null) {
+      copyCoords(initialLocation,lastNetworkLocation);
+    }
+ else {
+      Log.i("GeoDataProvider: no last known location available");
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("GeoDataProvider: error when retrieving last known location",e);
+  }
+  return new GeoData(initialLocation,false,0,0);
+}

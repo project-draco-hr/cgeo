@@ -2,7 +2,7 @@
   if (geo == null) {
 synchronized (this) {
       if (geo == null) {
-        geo=new GeoDataProvider(this);
+        geo=GeoDataProvider.create(this);
       }
     }
   }

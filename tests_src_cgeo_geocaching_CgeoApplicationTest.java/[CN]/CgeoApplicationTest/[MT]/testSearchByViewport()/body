@@ -11,7 +11,7 @@
         final MapTokens tokens=GCLogin.getInstance().getMapTokens();
         final Viewport viewport=new Viewport(mockedCache,0.003,0.003);
         Settings.setLiveMapStrategy(Strategy.DETAILED);
-        SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
+        SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens).toBlockingObservable().single();
         assertNotNull(search);
         assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
         Geocache parsedCache=DataStore.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
@@ -19,7 +19,7 @@
         assertEquals(Settings.isPremiumMember(),parsedCache.isReliableLatLon());
         Settings.setLiveMapStrategy(Strategy.FAST);
         Tile.Cache.removeFromTileCache(mockedCache);
-        search=ConnectorFactory.searchByViewport(viewport,tokens);
+        search=ConnectorFactory.searchByViewport(viewport,tokens).toBlockingObservable().single();
         assertNotNull(search);
         assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
         parsedCache=DataStore.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
