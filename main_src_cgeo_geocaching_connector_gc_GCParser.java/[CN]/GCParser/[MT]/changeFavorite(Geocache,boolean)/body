@@ -1,6 +1,5 @@
 {
-  final String page=requestHtmlPage(cache.getGeocode(),null,"n","0");
-  final String userToken=TextUtils.getMatch(page,GCConstants.PATTERN_USERTOKEN,"");
+  final String userToken=getUserToken(cache);
   if (StringUtils.isEmpty(userToken)) {
     return false;
   }
