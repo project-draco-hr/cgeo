@@ -4,7 +4,7 @@
   if (!stored) {
     geocodes.addAll(cacheCache.getInViewport(viewport,cacheType));
   }
-  final StringBuilder selection=new StringBuilder(buildCoordinateWhere(dbTableCaches,viewport));
+  final StringBuilder selection=buildCoordinateWhere(dbTableCaches,viewport);
   String[] selectionArgs=null;
   if (cacheType != CacheType.ALL) {
     selection.append(" and type = ?");
