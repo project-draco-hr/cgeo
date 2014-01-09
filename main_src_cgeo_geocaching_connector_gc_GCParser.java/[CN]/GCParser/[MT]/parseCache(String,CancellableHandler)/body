@@ -2,6 +2,9 @@
   final SearchResult searchResult=parseCacheFromText(page,handler);
   if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
     final Geocache cache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+    if (cache == null) {
+      return null;
+    }
     getExtraOnlineInfo(cache,page,handler);
     cache.setDetailedUpdatedNow();
     if (CancellableHandler.isCancelled(handler)) {
