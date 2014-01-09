@@ -2,9 +2,9 @@
   if (databaseCleaned) {
     return;
   }
-  init();
   Log.d("Database clean: started");
   try {
+    init();
     Cursor cursor;
     if (more) {
       cursor=database.query(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null);
