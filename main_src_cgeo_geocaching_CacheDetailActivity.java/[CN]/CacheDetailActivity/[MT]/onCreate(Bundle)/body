@@ -1,18 +1,12 @@
 {
   super.onCreate(savedInstanceState,R.layout.cachedetail_activity);
   setTitle(res.getString(R.string.cache));
-  String geocode=null;
-  if (search != null) {
-    cache=search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
-    if (cache != null && cache.getGeocode() != null) {
-      geocode=cache.getGeocode();
-    }
-  }
   final Bundle extras=getIntent().getExtras();
   final Uri uri=getIntent().getData();
   String name=null;
+  String geocode=null;
   String guid=null;
-  if (geocode == null && extras != null) {
+  if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
     name=extras.getString(Intents.EXTRA_NAME);
     guid=extras.getString(Intents.EXTRA_GUID);

@@ -3,19 +3,18 @@
     updateStatusMsg((String)msg.obj);
   }
  else {
-    CacheDetailActivity activity=((CacheDetailActivity)activityRef.get());
+    final CacheDetailActivity activity=((CacheDetailActivity)activityRef.get());
     if (activity == null) {
       return;
     }
-    SearchResult search=activity.getSearch();
-    if (search == null) {
+    if (activity.search == null) {
       showToast(R.string.err_dwld_details_failed);
       dismissProgress();
       finishActivity();
       return;
     }
-    if (search.getError() != null) {
-      activity.showToast(activity.getResources().getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(activity.getResources())+ ".");
+    if (activity.search.getError() != null) {
+      activity.showToast(activity.getResources().getString(R.string.err_dwld_details_failed) + " " + activity.search.getError().getErrorString(activity.getResources())+ ".");
       dismissProgress();
       finishActivity();
       return;
