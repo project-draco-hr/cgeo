@@ -1,7 +1,7 @@
 {
   final SearchResult search=Geocache.searchByGeocode(geocode,null,0,true,null);
   assertNotNull(search);
-  if (Settings.isPremiumMember() || search.getError() == null) {
+  if (Settings.isGCPremiumMember() || search.getError() == null) {
     assertEquals(1,search.getGeocodes().size());
     assertTrue(search.getGeocodes().contains(geocode));
     return DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);

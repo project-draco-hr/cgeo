@@ -1,6 +1,6 @@
 {
-  getPreference(R.string.pref_fakekey_basicmembers_screen).setEnabled(!Settings.isPremiumMember());
-  getPreference(R.string.pref_loaddirectionimg).setEnabled(!Settings.isPremiumMember());
-  getPreference(R.string.pref_showcaptcha).setEnabled(!Settings.isPremiumMember());
+  getPreference(R.string.pref_fakekey_basicmembers_screen).setEnabled(!Settings.isGCPremiumMember());
+  getPreference(R.string.pref_loaddirectionimg).setEnabled(!Settings.isGCPremiumMember());
+  getPreference(R.string.pref_showcaptcha).setEnabled(!Settings.isGCPremiumMember());
   redrawScreen(R.string.pref_fakekey_services_screen);
 }
