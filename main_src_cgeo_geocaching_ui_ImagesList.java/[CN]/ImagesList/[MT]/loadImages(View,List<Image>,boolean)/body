@@ -1,7 +1,8 @@
 {
   imagesView=(LinearLayout)parentView.findViewById(R.id.spoiler_list);
   for (  final Image img : images) {
-    LinearLayout rowView=(LinearLayout)inflater.inflate(R.layout.cache_image_item,null);
+    final LinearLayout rowView=(LinearLayout)inflater.inflate(R.layout.cache_image_item,null);
+    assert(rowView != null);
     if (StringUtils.isNotBlank(img.getTitle())) {
       ((TextView)rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
       rowView.findViewById(R.id.titleLayout).setVisibility(View.VISIBLE);
@@ -11,7 +12,12 @@
       descView.setText(Html.fromHtml(img.getDescription()),TextView.BufferType.SPANNABLE);
       descView.setVisibility(View.VISIBLE);
     }
-    new AsyncImgLoader(rowView,img,offline).execute();
+    subscriptions.add(loadImage(img,offline).subscribeOn(downloadScheduler).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>(){
+      @Override public void call(      final BitmapDrawable image){
+        display(image,img,rowView);
+      }
+    }
+));
     imagesView.addView(rowView);
   }
 }

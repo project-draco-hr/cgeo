@@ -2,6 +2,7 @@
   if (image != null) {
     bitmaps.add(image.getBitmap());
     final ImageView imageView=(ImageView)inflater.inflate(R.layout.image_item,null);
+    assert(imageView != null);
     final Rect bounds=image.getBounds();
     imageView.setImageResource(R.drawable.image_not_loaded);
     imageView.setClickable(true);
