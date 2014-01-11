@@ -1,0 +1,25 @@
+{
+  boolean valid=false;
+  double latMin=Double.MAX_VALUE;
+  double latMax=Double.MIN_VALUE;
+  double lonMin=Double.MAX_VALUE;
+  double lonMax=Double.MIN_VALUE;
+  for (  final ICoordinates point : points) {
+    if (point != null) {
+      final Geopoint coords=point.getCoords();
+      if (coords != null) {
+        valid=true;
+        final double latitude=coords.getLatitude();
+        final double longitude=coords.getLongitude();
+        latMin=Math.min(latMin,latitude);
+        latMax=Math.max(latMax,latitude);
+        lonMin=Math.min(lonMin,longitude);
+        lonMax=Math.max(lonMax,longitude);
+      }
+    }
+  }
+  if (!valid) {
+    return null;
+  }
+  return new Viewport(new Geopoint(latMin,lonMin),new Geopoint(latMax,lonMax));
+}
