@@ -3,7 +3,7 @@
   showDesc.setOnClickListener(null);
   view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
   final String longDescription=cache.getDescription();
-  loadDescription(longDescription,longDescView,loadingView,shortDescView);
+  loadDescription(longDescription,longDescView,loadingView);
   if (shortDescView != null) {
     final String shortDescription=cache.getShortDescription();
     if (StringUtils.isNotBlank(shortDescription)) {
