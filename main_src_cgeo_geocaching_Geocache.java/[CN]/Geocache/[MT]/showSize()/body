@@ -1,9 +1,3 @@
 {
-  if (size == CacheSize.NOT_CHOSEN) {
-    return false;
-  }
-  if (isEventCache() || isVirtual()) {
-    return false;
-  }
-  return true;
+  return !(size == CacheSize.NOT_CHOSEN || isEventCache() || isVirtual());
 }
