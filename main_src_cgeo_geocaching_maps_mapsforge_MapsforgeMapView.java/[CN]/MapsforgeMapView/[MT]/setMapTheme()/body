@@ -1,6 +1,6 @@
 {
   String customRenderTheme=Settings.getCustomRenderThemeFilePath();
-  if (!StringUtils.isEmpty(customRenderTheme)) {
+  if (StringUtils.isNotEmpty(customRenderTheme)) {
     try {
       setRenderTheme(new File(customRenderTheme));
     }
