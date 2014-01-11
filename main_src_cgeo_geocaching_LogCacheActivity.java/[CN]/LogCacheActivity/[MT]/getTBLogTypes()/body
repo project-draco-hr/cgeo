@@ -2,7 +2,7 @@
   final LogTypeTrackable[] logTypeValues=LogTypeTrackable.values();
   String[] logTypes=new String[logTypeValues.length];
   for (int i=0; i < logTypes.length; i++) {
-    logTypes[i]=res.getString(logTypeValues[i].resourceId);
+    logTypes[i]=logTypeValues[i].getLabel();
   }
   return logTypes;
 }

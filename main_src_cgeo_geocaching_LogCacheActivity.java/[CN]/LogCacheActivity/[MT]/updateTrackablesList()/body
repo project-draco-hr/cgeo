@@ -15,7 +15,7 @@
     final TextView actionButton=(TextView)inventoryItem.findViewById(R.id.action);
     actionButton.setId(tb.id);
     actionButtons.put(actionButton.getId(),tb);
-    actionButton.setText(res.getString(tb.action.resourceId) + " ???");
+    actionButton.setText(tb.action.getLabel() + " ???");
     actionButton.setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      View view){
         selectTrackableAction(view);
