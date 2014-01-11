@@ -53,21 +53,6 @@
         fixTextColor(descriptionString);
         descriptionView.setVisibility(View.VISIBLE);
         registerForContextMenu(descriptionView);
-        hideDuplicatedShortDescription(descriptionString);
-      }
-    }
-    /** 
- * Hide the short description, if it is contained somewhere at the start of the long description.
- */
-    private void hideDuplicatedShortDescription(    final String descriptionString){
-      if (shortDescView != null) {
-        final String shortDescription=cache.getShortDescription();
-        if (StringUtils.isNotBlank(shortDescription)) {
-          final int index=descriptionString.indexOf(shortDescription);
-          if (index >= 0 && index < 200) {
-            shortDescView.setVisibility(View.GONE);
-          }
-        }
       }
     }
     /** 

@@ -1,7 +1,16 @@
 {
-  final Button showDesc=(Button)view.findViewById(R.id.show_description);
   showDesc.setVisibility(View.GONE);
   showDesc.setOnClickListener(null);
   view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
-  loadDescription(cache.getDescription(),(IndexOutOfBoundsAvoidingTextView)view.findViewById(R.id.longdesc),view.findViewById(R.id.loading),view.findViewById(R.id.shortdesc));
+  final String longDescription=cache.getDescription();
+  loadDescription(longDescription,longDescView,loadingView,shortDescView);
+  if (shortDescView != null) {
+    final String shortDescription=cache.getShortDescription();
+    if (StringUtils.isNotBlank(shortDescription)) {
+      final int index=longDescription.indexOf(shortDescription);
+      if (index >= 0 && index < 200) {
+        shortDescView.setVisibility(View.GONE);
+      }
+    }
+  }
 }
