@@ -2,13 +2,5 @@
   if (!cache.isEventCache()) {
     return;
   }
-  final Date hiddenDate=cache.getHiddenDate();
-  if (hiddenDate == null) {
-    return;
-  }
-  final long time=hiddenDate.getTime();
-  if (time > 0) {
-    final String dateString=DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(),time,DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + Formatter.formatFullDate(time);
-    add(R.string.cache_event,dateString);
-  }
+  addHiddenDate(cache);
 }

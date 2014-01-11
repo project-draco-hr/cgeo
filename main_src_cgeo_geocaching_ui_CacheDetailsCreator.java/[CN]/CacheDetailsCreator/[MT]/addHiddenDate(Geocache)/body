@@ -1,0 +1,17 @@
+{
+  final Date hiddenDate=cache.getHiddenDate();
+  if (hiddenDate == null) {
+    return null;
+  }
+  final long time=hiddenDate.getTime();
+  if (time > 0) {
+    String dateString=Formatter.formatFullDate(time);
+    if (cache.isEventCache()) {
+      dateString=DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(),time,DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
+    }
+    final TextView view=add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden,dateString);
+    view.setId(R.id.date);
+    return view;
+  }
+  return null;
+}
