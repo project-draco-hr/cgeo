@@ -1,16 +1,16 @@
 {
   List<UserAction> actions=getDefaultUserActions();
   if (this instanceof ISearchByOwner) {
-    actions.add(new UserAction(R.string.user_menu_view_hidden,new RunnableWithArgument<UserAction.Context>(){
-      @Override public void run(      Context context){
+    actions.add(new UserAction(R.string.user_menu_view_hidden,new Action1<Context>(){
+      @Override public void call(      Context context){
         CacheListActivity.startActivityOwner(context.activity,context.userName);
       }
     }
 ));
   }
   if (this instanceof ISearchByFinder) {
-    actions.add(new UserAction(R.string.user_menu_view_found,new RunnableWithArgument<UserAction.Context>(){
-      @Override public void run(      Context context){
+    actions.add(new UserAction(R.string.user_menu_view_found,new Action1<UserAction.Context>(){
+      @Override public void call(      Context context){
         CacheListActivity.startActivityUserName(context.activity,context.userName);
       }
     }

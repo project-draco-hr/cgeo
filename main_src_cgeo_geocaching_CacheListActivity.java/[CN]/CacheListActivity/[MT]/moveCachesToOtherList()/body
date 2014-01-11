@@ -1,6 +1,6 @@
 {
-  new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new RunnableWithArgument<Integer>(){
-    @Override public void run(    Integer newListId){
+  new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new Action1<Integer>(){
+    @Override public void call(    Integer newListId){
       DataStore.moveToList(adapter.getCheckedOrAllCaches(),newListId);
       adapter.setSelectMode(false);
       refreshCurrentList();

@@ -1,0 +1,17 @@
+{
+  if (CollectionUtils.isEmpty(pocketQueryList)) {
+    ActivityMixin.showToast(activity,activity.getString(R.string.warn_no_pocket_query_found));
+    return;
+  }
+  final CharSequence[] items=new CharSequence[pocketQueryList.size()];
+  for (int i=0; i < pocketQueryList.size(); i++) {
+    items[i]=pocketQueryList.get(i).name;
+  }
+  new AlertDialog.Builder(activity).setTitle(activity.getString(R.string.search_pocket_select)).setItems(items,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    final DialogInterface dialogInterface,    final int itemId){
+      dialogInterface.dismiss();
+      runAfterwards.call(pocketQueryList.get(itemId));
+    }
+  }
+).create().show();
+}

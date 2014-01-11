@@ -1,6 +1,6 @@
 {
-  return new RunnableWithArgument<Integer>(){
-    @Override public void run(    final Integer selectedListId){
+  return new Action1<Integer>(){
+    @Override public void call(    final Integer selectedListId){
       switchListById(selectedListId);
     }
   }

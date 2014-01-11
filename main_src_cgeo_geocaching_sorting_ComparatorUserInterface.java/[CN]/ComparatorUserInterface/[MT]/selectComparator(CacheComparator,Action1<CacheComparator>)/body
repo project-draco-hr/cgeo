@@ -1,0 +1,31 @@
+{
+  final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+  builder.setTitle(R.string.caches_sort_title);
+  final String[] items=new String[registry.size()];
+  for (int i=0; i < items.length; i++) {
+    items[i]=registry.get(i).name;
+  }
+  builder.setSingleChoiceItems(items,getCurrentIndex(current),new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int itemIndex){
+      ComparatorEntry entry=registry.get(itemIndex);
+      try {
+        if (entry.cacheComparator == null) {
+          runAfterwards.call(null);
+        }
+ else {
+          CacheComparator comparator=entry.cacheComparator.newInstance();
+          runAfterwards.call(comparator);
+        }
+      }
+ catch (      InstantiationException e) {
+        Log.e("selectComparator",e);
+      }
+catch (      IllegalAccessException e) {
+        Log.e("selectComparator",e);
+      }
+      dialog.dismiss();
+    }
+  }
+);
+  builder.create().show();
+}

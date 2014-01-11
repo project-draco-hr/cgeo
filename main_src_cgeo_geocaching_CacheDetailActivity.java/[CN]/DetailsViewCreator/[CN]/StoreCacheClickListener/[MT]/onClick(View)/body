@@ -4,8 +4,8 @@
     return;
   }
   if (Settings.getChooseList()) {
-    new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
-      @Override public void run(      final Integer selectedListId){
+    new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
+      @Override public void call(      final Integer selectedListId){
         storeCache(selectedListId,new StoreCacheHandler(CacheDetailActivity.this,progress));
       }
     }

@@ -32,8 +32,8 @@ ActivityMixin.showToast(activity,res.getString(R.string.warn_save_nothing));
 return true;
 }
 if (Settings.getChooseList()) {
-new StoredList.UserInterface(activity).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
-@Override public void run(final Integer selectedListId){
+new StoredList.UserInterface(activity).promptForListSelection(R.string.list_title,new Action1<Integer>(){
+@Override public void call(final Integer selectedListId){
 storeCaches(geocodes,selectedListId);
 }
 }

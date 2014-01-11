@@ -20,8 +20,8 @@
 );
   findByOffline.setOnLongClickListener(new View.OnLongClickListener(){
     @Override public boolean onLongClick(    final View v){
-      new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title,new RunnableWithArgument<Integer>(){
-        @Override public void run(        final Integer selectedListId){
+      new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
+        @Override public void call(        final Integer selectedListId){
           Settings.saveLastList(selectedListId);
           CacheListActivity.startActivityOffline(MainActivity.this);
         }

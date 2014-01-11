@@ -20,8 +20,8 @@ case R.id.menu_pocket_queries:
 if (!Settings.isGCPremiumMember()) {
 return true;
 }
-PocketQueryList.promptForListSelection(this,new RunnableWithArgument<PocketQueryList>(){
-@Override public void run(final PocketQueryList pql){
+PocketQueryList.promptForListSelection(this,new Action1<PocketQueryList>(){
+@Override public void call(final PocketQueryList pql){
 CacheListActivity.startActivityPocket(MainActivity.this,pql);
 }
 }

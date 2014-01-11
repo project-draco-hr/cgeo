@@ -1,0 +1,35 @@
+{
+  final EditText input=new EditText(context);
+  input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
+  input.setText(defaultValue);
+  final AlertDialog.Builder builder=new AlertDialog.Builder(context);
+  builder.setTitle(title);
+  builder.setView(input);
+  builder.setPositiveButton(buttonTitle,new OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+      okayListener.call(input.getText().toString());
+    }
+  }
+);
+  builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int whichButton){
+      dialog.dismiss();
+    }
+  }
+);
+  final AlertDialog dialog=builder.create();
+  input.addTextChangedListener(new TextWatcher(){
+    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+    }
+    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    }
+    @Override public void afterTextChanged(    Editable editable){
+      enableDialogButtonIfNotEmpty(dialog,editable.toString());
+    }
+  }
+);
+  dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+  dialog.show();
+  enableDialogButtonIfNotEmpty(dialog,defaultValue);
+  input.setSelection(input.getText().length());
+}

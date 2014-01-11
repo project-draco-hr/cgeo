@@ -1,6 +1,6 @@
 {
-  new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title,new RunnableWithArgument<Integer>(){
-    @Override public void run(    Integer listId){
+  new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title,new Action1<Integer>(){
+    @Override public void call(    Integer listId){
       new GPXImporter(CacheListActivity.this,listId,importGpxAttachementFinishedHandler).importGPX();
       switchListById(listId);
     }

@@ -1,6 +1,6 @@
 {
-  new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>(){
-    @Override public void run(    IFilter selectedFilter){
+  new FilterUserInterface(this).selectFilter(new Action1<IFilter>(){
+    @Override public void call(    IFilter selectedFilter){
       if (selectedFilter != null) {
         setFilter(selectedFilter);
       }

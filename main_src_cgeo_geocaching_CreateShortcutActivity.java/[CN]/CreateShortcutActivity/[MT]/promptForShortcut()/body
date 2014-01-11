@@ -1,6 +1,6 @@
 {
-  new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut,new RunnableWithArgument<Integer>(){
-    @Override public void run(    final Integer listId){
+  new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut,new Action1<Integer>(){
+    @Override public void call(    final Integer listId){
       final Intent shortcut=createShortcut(listId.intValue());
       setResult(RESULT_OK,shortcut);
       finish();
