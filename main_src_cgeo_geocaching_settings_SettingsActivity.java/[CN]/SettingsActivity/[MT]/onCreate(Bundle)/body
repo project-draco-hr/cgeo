@@ -4,17 +4,5 @@
   SettingsActivity.addPreferencesFromResource(this,R.xml.preferences);
   initPreferences();
   Intent intent=getIntent();
-  int gotoPage=intent.getIntExtra(INTENT_GOTO,0);
-  if (gotoPage == INTENT_GOTO_SERVICES) {
-    PreferenceScreen main=(PreferenceScreen)getPreference(R.string.preference_screen_main);
-    try {
-      if (main != null) {
-        int index=getPreference(R.string.preference_screen_services).getOrder();
-        main.onItemClick(null,null,index,0);
-      }
-    }
- catch (    RuntimeException e) {
-      Log.e("could not open services preferences",e);
-    }
-  }
+  openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN,0));
 }

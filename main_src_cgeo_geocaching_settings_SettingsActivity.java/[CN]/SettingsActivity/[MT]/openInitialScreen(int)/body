@@ -1,0 +1,15 @@
+{
+  if (initialScreen == 0) {
+    return;
+  }
+  PreferenceScreen screen=(PreferenceScreen)getPreference(initialScreen);
+  if (screen == null) {
+    return;
+  }
+  try {
+    setPreferenceScreen(screen);
+  }
+ catch (  RuntimeException e) {
+    Log.e("could not open preferences " + initialScreen,e);
+  }
+}
