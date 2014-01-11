@@ -1,0 +1,104 @@
+{
+  final Observable<Spanned> producer=Observable.create(new OnSubscribeFunc<Spanned>(){
+    @Override public Subscription onSubscribe(    final Observer<? super Spanned> observer){
+      try {
+        final HtmlImageCounter imageCounter=new HtmlImageCounter();
+        final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
+        Spanned description=Html.fromHtml(descriptionString,imageCounter,unknownTagsHandler);
+        addWarning(unknownTagsHandler,description);
+        observer.onNext(description);
+        if (imageCounter.getImageCount() > 0) {
+          description=Html.fromHtml(descriptionString,new HtmlImage(cache.getGeocode(),true,cache.getListId(),false),unknownTagsHandler);
+          addWarning(unknownTagsHandler,description);
+          observer.onNext(description);
+        }
+        observer.onCompleted();
+      }
+ catch (      final Exception e) {
+        Log.e("LoadDescriptionTask: ",e);
+        observer.onError(e);
+      }
+      return Subscriptions.empty();
+    }
+    private void addWarning(    final UnknownTagsHandler unknownTagsHandler,    final Spanned description){
+      if (unknownTagsHandler.isProblematicDetected()) {
+        final int startPos=description.length();
+        final IConnector connector=ConnectorFactory.getConnector(cache);
+        final Spanned tableNote=Html.fromHtml(res.getString(R.string.cache_description_table_note,"<a href=\"" + cache.getUrl() + "\">"+ connector.getName()+ "</a>"));
+        ((Editable)description).append("\n\n").append(tableNote);
+        ((Editable)description).setSpan(new StyleSpan(Typeface.ITALIC),startPos,description.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+      }
+    }
+  }
+);
+  AndroidObservable.fromActivity(this,producer.subscribeOn(Schedulers.threadPoolForIO())).subscribe(new Observer<Spanned>(){
+    @Override public void onCompleted(){
+      if (null != loadingIndicatorView) {
+        loadingIndicatorView.setVisibility(View.GONE);
+      }
+    }
+    @Override public void onError(    final Throwable throwable){
+      showToast(res.getString(R.string.err_load_descr_failed));
+    }
+    @Override public void onNext(    final Spanned description){
+      if (StringUtils.isNotBlank(descriptionString)) {
+        try {
+          descriptionView.setText(description,TextView.BufferType.SPANNABLE);
+        }
+ catch (        final Exception e) {
+          Log.e("Android bug setting text: ",e);
+          descriptionView.setText(description.toString());
+        }
+        descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+        fixTextColor(descriptionString);
+        descriptionView.setVisibility(View.VISIBLE);
+        registerForContextMenu(descriptionView);
+        hideDuplicatedShortDescription(descriptionString);
+      }
+    }
+    /** 
+ * Hide the short description, if it is contained somewhere at the start of the long description.
+ */
+    private void hideDuplicatedShortDescription(    final String descriptionString){
+      if (shortDescView != null) {
+        final String shortDescription=cache.getShortDescription();
+        if (StringUtils.isNotBlank(shortDescription)) {
+          final int index=descriptionString.indexOf(shortDescription);
+          if (index >= 0 && index < 200) {
+            shortDescView.setVisibility(View.GONE);
+          }
+        }
+      }
+    }
+    /** 
+ * Handle caches with black font color in dark skin and white font color in light skin
+ * by changing background color of the view
+ * @param textto be checked
+ */
+    private void fixTextColor(    final String text){
+      int backcolor;
+      if (Settings.isLightSkin()) {
+        backcolor=color.white;
+        for (        final Pattern pattern : LIGHT_COLOR_PATTERNS) {
+          final MatcherWrapper matcher=new MatcherWrapper(pattern,text);
+          if (matcher.find()) {
+            descriptionView.setBackgroundResource(color.darker_gray);
+            return;
+          }
+        }
+      }
+ else {
+        backcolor=color.black;
+        for (        final Pattern pattern : DARK_COLOR_PATTERNS) {
+          final MatcherWrapper matcher=new MatcherWrapper(pattern,text);
+          if (matcher.find()) {
+            descriptionView.setBackgroundResource(color.darker_gray);
+            return;
+          }
+        }
+      }
+      descriptionView.setBackgroundResource(backcolor);
+    }
+  }
+);
+}

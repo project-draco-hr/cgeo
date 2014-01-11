@@ -3,5 +3,5 @@
   showDesc.setVisibility(View.GONE);
   showDesc.setOnClickListener(null);
   view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
-  new LoadDescriptionTask(cache.getDescription(),view.findViewById(R.id.longdesc),view.findViewById(R.id.loading),view.findViewById(R.id.shortdesc)).execute();
+  loadDescription(cache.getDescription(),(IndexOutOfBoundsAvoidingTextView)view.findViewById(R.id.longdesc),view.findViewById(R.id.loading),view.findViewById(R.id.shortdesc));
 }
