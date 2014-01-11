@@ -6,10 +6,10 @@
   Intent intent=getIntent();
   int gotoPage=intent.getIntExtra(INTENT_GOTO,0);
   if (gotoPage == INTENT_GOTO_SERVICES) {
-    PreferenceScreen main=(PreferenceScreen)getPreference(R.string.pref_fakekey_main_screen);
+    PreferenceScreen main=(PreferenceScreen)getPreference(R.string.preference_screen_main);
     try {
       if (main != null) {
-        int index=getPreference(R.string.pref_fakekey_services_screen).getOrder();
+        int index=getPreference(R.string.preference_screen_services).getOrder();
         main.onItemClick(null,null,index,0);
       }
     }

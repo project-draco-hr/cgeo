@@ -1,8 +1,9 @@
 {
-  PreferenceScreen screen=(PreferenceScreen)getPreference(key);
-  if (screen == null) {
+  final Preference preference=getPreference(key);
+  if (!(preference instanceof PreferenceScreen)) {
     return;
   }
+  final PreferenceScreen screen=(PreferenceScreen)preference;
   ListAdapter adapter=screen.getRootAdapter();
   if (adapter instanceof BaseAdapter) {
     ((BaseAdapter)adapter).notifyDataSetChanged();
