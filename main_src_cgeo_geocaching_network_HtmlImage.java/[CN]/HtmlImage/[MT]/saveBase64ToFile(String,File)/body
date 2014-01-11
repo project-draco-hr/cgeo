@@ -1,0 +1,13 @@
+{
+  OutputStream out=null;
+  try {
+    out=new FileOutputStream(file);
+    out.write(Base64.decode(StringUtils.substringAfter(url,";base64,"),Base64.DEFAULT));
+  }
+ catch (  final IOException e) {
+    Log.e("HtmlImage.saveBase64ToFile: cannot write file for decoded inline image",e);
+  }
+ finally {
+    IOUtils.closeQuietly(out);
+  }
+}

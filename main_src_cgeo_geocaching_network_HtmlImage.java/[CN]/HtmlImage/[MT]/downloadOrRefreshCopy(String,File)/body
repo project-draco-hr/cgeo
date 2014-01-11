@@ -1,0 +1,22 @@
+{
+  final String absoluteURL=makeAbsoluteURL(url);
+  if (absoluteURL != null) {
+    try {
+      final HttpResponse httpResponse=Network.getRequest(absoluteURL,null,file);
+      if (httpResponse != null) {
+        final int statusCode=httpResponse.getStatusLine().getStatusCode();
+        if (statusCode == 200) {
+          LocalStorage.saveEntityToFile(httpResponse,file);
+        }
+ else         if (statusCode == 304) {
+          if (!file.setLastModified(System.currentTimeMillis())) {
+            makeFreshCopy(file);
+          }
+        }
+      }
+    }
+ catch (    Exception e) {
+      Log.e("HtmlImage.downloadOrRefreshCopy",e);
+    }
+  }
+}
