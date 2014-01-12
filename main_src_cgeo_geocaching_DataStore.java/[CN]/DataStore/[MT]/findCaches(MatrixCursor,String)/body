@@ -1,0 +1,8 @@
+{
+  Cursor cursor=database.query(dbTableCaches,new String[]{"geocode","name"},"geocode IS NOT NULL AND geocode != '' AND (geocode LIKE ? OR name LIKE ?)",new String[]{selectionArg,selectionArg},null,null,"name");
+  while (cursor.moveToNext()) {
+    final String geocode=cursor.getString(0);
+    resultCursor.addRow(new String[]{String.valueOf(resultCursor.getCount()),cursor.getString(1),geocode,Intents.ACTION_GEOCACHE,geocode});
+  }
+  cursor.close();
+}

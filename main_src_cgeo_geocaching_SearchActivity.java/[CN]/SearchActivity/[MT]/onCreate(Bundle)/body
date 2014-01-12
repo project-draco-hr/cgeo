@@ -1,6 +1,16 @@
 {
   super.onCreate(savedInstanceState);
   final Intent intent=getIntent();
+  if (Intents.ACTION_GEOCACHE.equals(intent.getAction())) {
+    CacheDetailActivity.startActivity(this,intent.getStringExtra(SearchManager.QUERY));
+    finish();
+    return;
+  }
+  if (Intents.ACTION_TRACKABLE.equals(intent.getAction())) {
+    TrackableActivity.startActivity(this,null,intent.getStringExtra(SearchManager.QUERY),null);
+    finish();
+    return;
+  }
   if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
     hideKeyboard();
     final String query=intent.getStringExtra(SearchManager.QUERY);

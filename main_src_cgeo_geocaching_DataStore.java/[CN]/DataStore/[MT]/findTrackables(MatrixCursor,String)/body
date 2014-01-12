@@ -1,0 +1,8 @@
+{
+  Cursor cursor=database.query(dbTableTrackables,new String[]{"tbcode","title"},"tbcode IS NOT NULL AND tbcode != '' AND (tbcode LIKE ? OR title LIKE ?)",new String[]{selectionArg,selectionArg},null,null,"title");
+  while (cursor.moveToNext()) {
+    final String tbcode=cursor.getString(0);
+    resultCursor.addRow(new String[]{String.valueOf(resultCursor.getCount()),cursor.getString(1),tbcode,Intents.ACTION_TRACKABLE,tbcode});
+  }
+  cursor.close();
+}
