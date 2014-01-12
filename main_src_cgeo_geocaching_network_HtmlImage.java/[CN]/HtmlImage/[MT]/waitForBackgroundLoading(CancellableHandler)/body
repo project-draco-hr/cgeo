@@ -1,0 +1,7 @@
+{
+  if (handler != null) {
+    handler.unsubscribeIfCancelled(subscription);
+  }
+  loading.onCompleted();
+  waitForEnd.toBlockingObservable().lastOrDefault(null);
+}

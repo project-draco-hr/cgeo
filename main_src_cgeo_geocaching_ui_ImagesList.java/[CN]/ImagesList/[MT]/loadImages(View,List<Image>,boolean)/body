@@ -1,5 +1,6 @@
 {
   imagesView=(LinearLayout)parentView.findViewById(R.id.spoiler_list);
+  final HtmlImage imgGetter=new HtmlImage(geocode,true,offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID,false);
   for (  final Image img : images) {
     final LinearLayout rowView=(LinearLayout)inflater.inflate(R.layout.cache_image_item,null);
     assert(rowView != null);
@@ -12,7 +13,7 @@
       descView.setText(Html.fromHtml(img.getDescription()),TextView.BufferType.SPANNABLE);
       descView.setVisibility(View.VISIBLE);
     }
-    subscriptions.add(loadImage(img,offline).subscribeOn(downloadScheduler).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>(){
+    subscriptions.add(imgGetter.fetchDrawable(img.getUrl()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>(){
       @Override public void call(      final BitmapDrawable image){
         display(image,img,rowView);
       }

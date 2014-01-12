@@ -4,6 +4,7 @@
   }
   if (message.obj instanceof CancelHolder) {
     cancelled=true;
+    subscriptions.unsubscribe();
     handleCancel(((CancelHolder)message.obj).payload);
   }
  else {

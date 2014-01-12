@@ -1,11 +1,12 @@
 {
   return Observable.create(new OnSubscribeFunc<BitmapDrawable>(){
     @Override public Subscription onSubscribe(    final Observer<? super BitmapDrawable> observer){
-      final HtmlImage imgGetter=new HtmlImage(geocode,true,offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID,false);
-      observer.onNext(imgGetter.getDrawable(img.getUrl()));
+      if (!subscription.isUnsubscribed()) {
+        observer.onNext(loadDrawable(url));
+      }
       observer.onCompleted();
       return Subscriptions.empty();
     }
   }
-);
+).subscribeOn(downloadScheduler);
 }
