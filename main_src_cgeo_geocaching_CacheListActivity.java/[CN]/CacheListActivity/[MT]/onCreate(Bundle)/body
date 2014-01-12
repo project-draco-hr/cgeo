@@ -14,7 +14,7 @@
   if (isInvokedFromAttachment()) {
     type=CacheListType.OFFLINE;
     if (coords == null) {
-      coords=new Geopoint(0.0,0.0);
+      coords=Geopoint.ZERO;
     }
   }
   final View titleBar=findViewById(R.id.actionbar_title);
