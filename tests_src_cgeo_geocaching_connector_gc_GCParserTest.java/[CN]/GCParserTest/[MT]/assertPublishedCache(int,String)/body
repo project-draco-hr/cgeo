@@ -4,5 +4,7 @@
   assertNotNull(result);
   assertEquals(1,result.getCount());
   final Geocache cache=result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+  assertNotNull(cache);
+  assert(cache != null);
   assertEquals(cacheName,cache.getName());
 }

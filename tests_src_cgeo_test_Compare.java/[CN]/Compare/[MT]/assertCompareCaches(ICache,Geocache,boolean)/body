@@ -12,7 +12,9 @@
   assertEquals("Cache " + geocode + ": name wrong",expected.getName(),actual.getName());
   assertEquals("Cache " + geocode + ": guid wrong",expected.getGuid(),actual.getGuid());
   assertTrue("Cache " + geocode + ": fav points wrong",expected.getFavoritePoints() <= actual.getFavoritePoints());
-  assertEquals("Cache " + geocode + ": hidden date wrong",expected.getHiddenDate().toString(),actual.getHiddenDate().toString());
+  final Date hiddenDate=actual.getHiddenDate();
+  assertNotNull(hiddenDate);
+  assertEquals("Cache " + geocode + ": hidden date wrong",expected.getHiddenDate().toString(),hiddenDate.toString());
   assertEquals("Cache " + geocode + ": premium only wrong",expected.isPremiumMembersOnly(),actual.isPremiumMembersOnly());
   if (all) {
     assertEquals("Cache " + geocode + ": coords wrong",expected.getCoords(),actual.getCoords());
