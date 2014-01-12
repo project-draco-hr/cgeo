@@ -18,6 +18,9 @@ case OFFLINE:
   }
  else {
     final StoredList list=DataStore.getList(listId);
+    if (list.id != listId) {
+      showToast(getString(R.string.list_not_available));
+    }
     listId=list.id;
     title=list.title;
   }
