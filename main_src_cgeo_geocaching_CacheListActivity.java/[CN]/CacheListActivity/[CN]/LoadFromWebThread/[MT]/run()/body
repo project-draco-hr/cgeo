@@ -2,7 +2,7 @@
   int delay=-1;
   int times=0;
   int ret=MSG_DONE;
-  while (!needToStop && times < 3 * 60 / 5) {
+  while (!handler.isCancelled() && times < 3 * 60 / 5) {
     String deviceCode=Settings.getWebDeviceCode();
     if (deviceCode == null) {
       deviceCode="";
@@ -22,7 +22,7 @@
  else       if ("RG".equals(response)) {
         Settings.setWebNameCode(null,null);
         ret=-3;
-        needToStop=true;
+        handler.cancel();
         break;
       }
  else {
@@ -33,7 +33,7 @@
     }
     if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
       ret=-2;
-      needToStop=true;
+      handler.cancel();
       break;
     }
     try {

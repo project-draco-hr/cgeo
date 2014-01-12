@@ -1,6 +1,6 @@
 {
   try {
-    if (needToStop) {
+    if (handler.isCancelled()) {
       throw new InterruptedException("Stopped storing process.");
     }
     detailProgress++;
