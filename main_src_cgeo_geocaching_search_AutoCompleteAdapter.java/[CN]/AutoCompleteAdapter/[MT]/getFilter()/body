@@ -1,0 +1,27 @@
+{
+  Filter filter=new Filter(){
+    @Override protected FilterResults performFiltering(    CharSequence constraint){
+      FilterResults filterResults=new FilterResults();
+      if (constraint == null) {
+        return filterResults;
+      }
+      String trimmed=StringUtils.trim(constraint.toString());
+      if (StringUtils.length(trimmed) >= 2) {
+        results=suggestionFunction.call(trimmed);
+        filterResults.values=results;
+        filterResults.count=results.length;
+      }
+      return filterResults;
+    }
+    @Override protected void publishResults(    CharSequence constraint,    FilterResults results){
+      if (results != null && results.count > 0) {
+        notifyDataSetChanged();
+      }
+ else {
+        notifyDataSetInvalidated();
+      }
+    }
+  }
+;
+  return filter;
+}

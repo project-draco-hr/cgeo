@@ -12,17 +12,31 @@
       findByAddressFn();
     }
   }
+,new Func1<String,String[]>(){
+    @Override public String[] call(    final String input){
+      return DataStore.getSuggestionsAddress(input);
+    }
+  }
 );
   setSearchAction(geocodeEditText,buttonSearchGeocode,new Runnable(){
     @Override public void run(){
       findByGeocodeFn();
     }
   }
+,new Func1<String,String[]>(){
+    @Override public String[] call(    final String input){
+      return DataStore.getSuggestionsGeocode(input);
+    }
+  }
 );
-  addHistoryEntries(geocodeEditText,DataStore.getRecentGeocodesForSearch());
   setSearchAction(keywordEditText,buttonSearchKeyword,new Runnable(){
     @Override public void run(){
       findByKeywordFn();
+    }
+  }
+,new Func1<String,String[]>(){
+    @Override public String[] call(    final String input){
+      return DataStore.getSuggestionsKeyword(input);
     }
   }
 );
@@ -31,10 +45,20 @@
       findByFinderFn();
     }
   }
+,new Func1<String,String[]>(){
+    @Override public String[] call(    final String input){
+      return DataStore.getSuggestionsFinderName(input);
+    }
+  }
 );
   setSearchAction(ownerNameEditText,buttonSearchOwner,new Runnable(){
     @Override public void run(){
       findByOwnerFn();
+    }
+  }
+,new Func1<String,String[]>(){
+    @Override public String[] call(    final String input){
+      return DataStore.getSuggestionsOwnerName(input);
     }
   }
 );
@@ -43,7 +67,10 @@
       findTrackableFn();
     }
   }
+,new Func1<String,String[]>(){
+    @Override public String[] call(    final String input){
+      return DataStore.getSuggestionsTrackableCode(input);
+    }
+  }
 );
-  addHistoryEntries(trackableEditText,DataStore.getTrackableCodes());
-  disableSuggestions(trackableEditText);
 }

@@ -1,0 +1,4 @@
+{
+  Cursor cursor=database.query(true,table,new String[]{column},column + " LIKE ?",new String[]{getSuggestionArgument(input)},null,null,column,null);
+  return getFirstColumn(cursor);
+}
