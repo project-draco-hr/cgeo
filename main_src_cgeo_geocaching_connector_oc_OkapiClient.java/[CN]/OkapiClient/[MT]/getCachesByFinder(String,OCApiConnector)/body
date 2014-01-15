@@ -1,7 +1,10 @@
 {
   final Parameters params=new Parameters("search_method",METHOD_SEARCH_ALL);
   final Map<String,String> valueMap=new LinkedHashMap<String,String>();
-  final String uuid=getUserUUID(connector,username);
+  final @Nullable String uuid=getUserUUID(connector,username);
+  if (StringUtils.isEmpty(uuid)) {
+    return Collections.emptyList();
+  }
   valueMap.put("found_by",uuid);
   return requestCaches(connector,params,valueMap);
 }
