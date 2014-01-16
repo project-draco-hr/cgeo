@@ -1,0 +1,27 @@
+{
+  if (response.isNull(CACHE_SIZE_DEPRECATED)) {
+    return CacheSize.NOT_CHOSEN;
+  }
+  double size=0;
+  try {
+    size=response.getDouble(CACHE_SIZE_DEPRECATED);
+  }
+ catch (  final JSONException e) {
+    Log.e("OkapiClient.getCacheSize",e);
+  }
+switch ((int)Math.round(size)) {
+case 1:
+    return CacheSize.MICRO;
+case 2:
+  return CacheSize.SMALL;
+case 3:
+return CacheSize.REGULAR;
+case 4:
+return CacheSize.LARGE;
+case 5:
+return CacheSize.VERY_LARGE;
+default :
+break;
+}
+return CacheSize.NOT_CHOSEN;
+}

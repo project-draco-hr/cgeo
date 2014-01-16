@@ -1,27 +1,13 @@
 {
-  if (response.isNull(CACHE_SIZE)) {
-    return CacheSize.NOT_CHOSEN;
+  if (response.isNull(CACHE_SIZE2)) {
+    return getCacheSizeDeprecated(response);
   }
-  double size=0;
   try {
-    size=response.getDouble(CACHE_SIZE);
+    final String size=response.getString(CACHE_SIZE2);
+    return CacheSize.getById(size);
   }
- catch (  final JSONException e) {
+ catch (  JSONException e) {
     Log.e("OkapiClient.getCacheSize",e);
+    return getCacheSizeDeprecated(response);
   }
-switch ((int)Math.round(size)) {
-case 1:
-    return CacheSize.MICRO;
-case 2:
-  return CacheSize.SMALL;
-case 3:
-return CacheSize.REGULAR;
-case 4:
-return CacheSize.LARGE;
-case 5:
-return CacheSize.LARGE;
-default :
-break;
-}
-return CacheSize.NOT_CHOSEN;
 }
