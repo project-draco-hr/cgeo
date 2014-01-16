@@ -2,6 +2,11 @@
   if (id < 0) {
     return;
   }
+  if (id == PseudoList.HISTORY_LIST.id) {
+    CacheListActivity.startActivityHistory(this);
+    finish();
+    return;
+  }
   final StoredList list=DataStore.getList(id);
   if (list == null) {
     return;

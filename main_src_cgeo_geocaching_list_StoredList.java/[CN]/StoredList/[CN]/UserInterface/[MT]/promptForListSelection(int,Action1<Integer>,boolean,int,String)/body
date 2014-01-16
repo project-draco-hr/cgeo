@@ -8,7 +8,12 @@
     }
   }
   if (!onlyConcreteLists) {
-    lists.add(PseudoList.ALL_LIST);
+    if (exceptListId != PseudoList.ALL_LIST.id) {
+      lists.add(PseudoList.ALL_LIST);
+    }
+    if (exceptListId != PseudoList.HISTORY_LIST.id) {
+      lists.add(PseudoList.HISTORY_LIST);
+    }
   }
   lists.add(PseudoList.NEW_LIST);
   final List<CharSequence> listsTitle=new ArrayList<CharSequence>();
