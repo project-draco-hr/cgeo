@@ -11,11 +11,11 @@
   if (showCaptcha) {
     final String recaptchaJsParam=TextUtils.getMatch(page,GCConstants.PATTERN_SEARCH_RECAPTCHA,false,null);
     if (recaptchaJsParam != null) {
-      thread.setKey(recaptchaJsParam.trim());
-      thread.fetchChallenge();
+      recaptchaReceiver.setKey(recaptchaJsParam.trim());
+      recaptchaReceiver.fetchChallenge();
     }
-    if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
-      thread.notifyNeed();
+    if (recaptchaReceiver != null && StringUtils.isNotBlank(recaptchaReceiver.getChallenge())) {
+      recaptchaReceiver.notifyNeed();
     }
   }
   if (!page.contains("SearchResultsTable")) {
@@ -156,11 +156,11 @@
     Log.w("GCParser.parseSearch: Failed to parse cache count");
   }
   String recaptchaText=null;
-  if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
-    thread.waitForUser();
-    recaptchaText=thread.getText();
+  if (recaptchaReceiver != null && StringUtils.isNotBlank(recaptchaReceiver.getChallenge())) {
+    recaptchaReceiver.waitForUser();
+    recaptchaText=recaptchaReceiver.getText();
   }
-  if (!cids.isEmpty() && (Settings.isGCPremiumMember() || showCaptcha) && ((thread == null || StringUtils.isBlank(thread.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
+  if (!cids.isEmpty() && (Settings.isGCPremiumMember() || showCaptcha) && ((recaptchaReceiver == null || StringUtils.isBlank(recaptchaReceiver.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
     Log.i("Trying to get .loc for " + cids.size() + " caches");
     try {
       final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","");
@@ -176,8 +176,8 @@
       for (      final String cid : cids) {
         params.put("CID",cid);
       }
-      if (thread != null && StringUtils.isNotBlank(thread.getChallenge()) && StringUtils.isNotBlank(recaptchaText)) {
-        params.put("recaptcha_challenge_field",thread.getChallenge());
+      if (StringUtils.isNotBlank(recaptchaText)) {
+        params.put("recaptcha_challenge_field",recaptchaReceiver.getChallenge());
         params.put("recaptcha_response_field",recaptchaText);
       }
       params.put("ctl00$ContentBody$uxDownloadLoc","Download Waypoints");
