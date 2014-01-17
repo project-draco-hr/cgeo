@@ -17,7 +17,7 @@
   showProgress(true);
   showFooterLoadingCaches();
   DataStore.moveToList(adapter.getCheckedCaches(),listId);
-  currentLoader=(OfflineGeocacheListLoader)getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(),new Bundle(),this);
+  currentLoader=(OfflineGeocacheListLoader)getSupportLoaderManager().initLoader(CacheListType.OFFLINE.getLoaderId(),new Bundle(),this);
   currentLoader.reset();
   ((OfflineGeocacheListLoader)currentLoader).setListId(listId);
   ((OfflineGeocacheListLoader)currentLoader).setSearchCenter(coords);

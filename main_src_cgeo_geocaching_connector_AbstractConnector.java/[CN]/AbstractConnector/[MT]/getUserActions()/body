@@ -11,7 +11,7 @@
   if (this instanceof ISearchByFinder) {
     actions.add(new UserAction(R.string.user_menu_view_found,new Action1<UserAction.Context>(){
       @Override public void call(      Context context){
-        CacheListActivity.startActivityUserName(context.activity,context.userName);
+        CacheListActivity.startActivityFinder(context.activity,context.userName);
       }
     }
 ));

@@ -6,5 +6,5 @@
   }
   final Bundle b=new Bundle();
   b.putStringArray(Intents.EXTRA_CACHELIST,geocodes);
-  getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.ordinal(),b,this);
+  getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.getLoaderId(),b,this);
 }

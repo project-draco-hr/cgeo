@@ -28,7 +28,7 @@
   setTitle(title);
   setAdapter();
   prepareFilterBar();
-  currentLoader=(AbstractSearchLoader)getSupportLoaderManager().initLoader(type.ordinal(),extras,this);
+  currentLoader=(AbstractSearchLoader)getSupportLoaderManager().initLoader(type.getLoaderId(),extras,this);
   if (CollectionUtils.isNotEmpty(cacheList)) {
     if (currentLoader != null && currentLoader.isStarted()) {
       showFooterLoadingCaches();
