@@ -81,7 +81,7 @@
   myLocSwitch.setOnClickListener(new MyLocationListener());
   switchMyLocationButton();
   prepareFilterBar();
-  if (!app.isLiveMapHintShown() && !Settings.getHideLiveMapHint()) {
+  if (!app.isLiveMapHintShownInThisSession() && !Settings.getHideLiveMapHint() && Settings.getLiveMapHintShowCount() <= 3) {
     LiveMapInfoDialogBuilder.create(activity).show();
   }
 }
