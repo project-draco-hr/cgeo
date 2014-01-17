@@ -91,7 +91,7 @@ setTitle(title);
 showProgress(true);
 showFooterLoadingCaches();
 if (loader != null) {
-loader.setRecaptchaHandler(new SearchHandler(this,res,loader));
+loader.setRecaptchaHandler(new RecaptchaHandler(this,loader));
 }
 return loader;
 }
