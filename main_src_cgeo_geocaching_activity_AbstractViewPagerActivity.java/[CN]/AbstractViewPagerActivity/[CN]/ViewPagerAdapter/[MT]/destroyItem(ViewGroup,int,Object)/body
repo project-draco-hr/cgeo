@@ -1,4 +1,7 @@
 {
+  if (position >= pageOrder.size()) {
+    return;
+  }
   final Page page=pageOrder.get(position);
   PageViewCreator creator=viewCreators.get(page);
   if (creator != null) {
