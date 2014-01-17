@@ -60,6 +60,7 @@
   final EditText logView=(EditText)findViewById(R.id.log);
   if (StringUtils.isBlank(currentLogText()) && StringUtils.isNotBlank(text)) {
     logView.setText(text);
+    Dialogs.moveCursorToEnd(logView);
   }
   tweetCheck.setChecked(true);
   updateTweetBox(typeSelected);

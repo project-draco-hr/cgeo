@@ -7,6 +7,7 @@
     guid=extras.getString(Intents.EXTRA_GUID);
     if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
       trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
+      Dialogs.moveCursorToEnd(trackingEditText);
     }
   }
   trackable=DataStore.loadTrackable(geocode);

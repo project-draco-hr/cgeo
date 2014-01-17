@@ -2,6 +2,7 @@
   settingsActivity=(SettingsActivity)this.getContext();
   editText=(EditText)view.findViewById(R.id.signature_dialog_text);
   editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
+  Dialogs.moveCursorToEnd(editText);
   Button button=(Button)view.findViewById(R.id.signature_templates);
   button.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View button){

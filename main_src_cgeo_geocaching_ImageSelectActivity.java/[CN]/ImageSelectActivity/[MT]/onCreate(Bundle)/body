@@ -32,9 +32,11 @@
 );
   if (StringUtils.isNotBlank(imageCaption)) {
     captionView.setText(imageCaption);
+    Dialogs.moveCursorToEnd(captionView);
   }
   if (StringUtils.isNotBlank(imageDescription)) {
     descriptionView.setText(imageDescription);
+    Dialogs.moveCursorToEnd(captionView);
   }
   scaleView.setSelection(scaleChoiceIndex);
   scaleView.setOnItemSelectedListener(new OnItemSelectedListener(){

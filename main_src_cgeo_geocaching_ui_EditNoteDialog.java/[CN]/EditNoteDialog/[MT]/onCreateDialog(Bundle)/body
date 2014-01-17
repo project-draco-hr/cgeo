@@ -4,6 +4,7 @@
   String initialNote=getArguments().getString(ARGUMENT_INITIAL_NOTE);
   if (initialNote != null) {
     mEditText.setText(initialNote);
+    Dialogs.moveCursorToEnd(mEditText);
     getArguments().remove(ARGUMENT_INITIAL_NOTE);
   }
   AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
