@@ -2,18 +2,16 @@
   if (!onlySave) {
     return loadDrawable(url);
   }
- else {
 synchronized (downloading) {
-      if (!downloading.contains(url)) {
-        loading.onNext(fetchDrawable(url).map(new Func1<BitmapDrawable,String>(){
-          @Override public String call(          final BitmapDrawable bitmapDrawable){
-            return url;
-          }
+    if (!downloading.contains(url)) {
+      loading.onNext(fetchDrawable(url).map(new Func1<BitmapDrawable,String>(){
+        @Override public String call(        final BitmapDrawable bitmapDrawable){
+          return url;
         }
-));
-        downloading.add(url);
       }
-      return null;
+));
+      downloading.add(url);
     }
+    return null;
   }
 }
