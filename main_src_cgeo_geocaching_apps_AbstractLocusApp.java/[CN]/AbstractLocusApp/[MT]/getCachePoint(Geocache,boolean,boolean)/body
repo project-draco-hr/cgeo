@@ -16,7 +16,7 @@
   pg.placedBy=cache.getOwnerDisplayName();
   final Date hiddenDate=cache.getHiddenDate();
   if (hiddenDate != null) {
-    pg.hidden=ISO8601DATE.format(hiddenDate.getTime());
+    pg.hidden=ISO8601DATE.format(hiddenDate);
   }
   int locusId=toLocusType(cache.getType());
   if (locusId != NO_LOCUS_ID) {
