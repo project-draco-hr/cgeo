@@ -31,7 +31,7 @@
     }
   }
 );
-  AndroidObservable.fromActivity(this,producer.subscribeOn(Schedulers.threadPoolForIO())).subscribe(new Observer<Spanned>(){
+  AndroidObservable.fromActivity(this,producer.subscribeOn(Schedulers.io())).subscribe(new Observer<Spanned>(){
     @Override public void onCompleted(){
       if (null != loadingIndicatorView) {
         loadingIndicatorView.setVisibility(View.GONE);

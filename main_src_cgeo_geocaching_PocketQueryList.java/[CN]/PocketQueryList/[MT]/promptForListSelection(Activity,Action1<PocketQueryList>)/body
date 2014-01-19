@@ -7,7 +7,7 @@
       return Subscriptions.empty();
     }
   }
-).subscribeOn(Schedulers.threadPoolForIO())).subscribe(new Action1<List<PocketQueryList>>(){
+).subscribeOn(Schedulers.io())).subscribe(new Action1<List<PocketQueryList>>(){
     @Override public void call(    final List<PocketQueryList> pocketQueryLists){
       waitDialog.dismiss();
       selectFromPocketQueries(activity,pocketQueryLists,runAfterwards);

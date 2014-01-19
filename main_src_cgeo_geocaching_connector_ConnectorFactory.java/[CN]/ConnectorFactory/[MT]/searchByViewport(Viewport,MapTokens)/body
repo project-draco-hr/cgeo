@@ -14,7 +14,7 @@
 );
     }
   }
-,Schedulers.threadPoolForIO()).reduce(new SearchResult(),new Func2<SearchResult,SearchResult,SearchResult>(){
+,Schedulers.io()).reduce(new SearchResult(),new Func2<SearchResult,SearchResult,SearchResult>(){
     @Override public SearchResult call(    final SearchResult result,    final SearchResult searchResult){
       result.addSearchResult(searchResult);
       return result;
