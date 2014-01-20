@@ -1,0 +1,13 @@
+{
+  try {
+    final String geoLocation="geo:" + point.getLatitude() + ","+ point.getLongitude();
+    final String query=point.getLatitude() + "," + point.getLongitude()+ "("+ label+ ")";
+    final String uriString=geoLocation + "?q=" + Uri.encode(query);
+    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(uriString)));
+    return;
+  }
+ catch (  RuntimeException e) {
+  }
+  Log.i("GoogleMapsApp.navigate: No maps application available.");
+  ActivityMixin.showToast(activity,getString(R.string.err_application_no));
+}
