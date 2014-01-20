@@ -1,17 +1,15 @@
 {
-  if (!onlySave) {
-    return loadDrawable(url);
-  }
-synchronized (downloading) {
-    if (!downloading.contains(url)) {
-      loading.onNext(fetchDrawable(url).map(new Func1<BitmapDrawable,String>(){
-        @Override public String call(        final BitmapDrawable bitmapDrawable){
-          return url;
-        }
+  final Observable<BitmapDrawable> drawable=fetchDrawable(url);
+  if (onlySave) {
+    loading.onNext(drawable.map(new Func1<BitmapDrawable,String>(){
+      @Override public String call(      final BitmapDrawable bitmapDrawable){
+        return url;
       }
-));
-      downloading.add(url);
     }
+));
     return null;
+  }
+ else {
+    return drawable.toBlockingObservable().lastOrDefault(null);
   }
 }

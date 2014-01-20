@@ -12,6 +12,7 @@
           if (!file.setLastModified(System.currentTimeMillis())) {
             makeFreshCopy(file);
           }
+          return true;
         }
       }
     }
@@ -19,4 +20,5 @@
       Log.e("HtmlImage.downloadOrRefreshCopy",e);
     }
   }
+  return false;
 }

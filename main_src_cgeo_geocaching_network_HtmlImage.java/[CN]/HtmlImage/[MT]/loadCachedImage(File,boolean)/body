@@ -1,16 +1,19 @@
 {
   if (file.exists()) {
-    if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60* 1000)) || forceKeep) {
-      final BitmapFactory.Options bfOptions=new BitmapFactory.Options();
-      bfOptions.inTempStorage=new byte[16 * 1024];
-      bfOptions.inPreferredConfig=Bitmap.Config.RGB_565;
-      setSampleSize(file,bfOptions);
-      final Bitmap image=BitmapFactory.decodeFile(file.getPath(),bfOptions);
-      if (image == null) {
-        Log.e("Cannot decode bitmap from " + file.getPath());
-      }
-      return image;
+    final boolean freshEnough=listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60* 1000)) || forceKeep;
+    if (onlySave) {
+      return new ImmutablePair<Bitmap,Boolean>(null,true);
     }
+    final BitmapFactory.Options bfOptions=new BitmapFactory.Options();
+    bfOptions.inTempStorage=new byte[16 * 1024];
+    bfOptions.inPreferredConfig=Bitmap.Config.RGB_565;
+    setSampleSize(file,bfOptions);
+    final Bitmap image=BitmapFactory.decodeFile(file.getPath(),bfOptions);
+    if (image == null) {
+      Log.e("Cannot decode bitmap from " + file.getPath());
+      return new ImmutablePair<Bitmap,Boolean>(null,false);
+    }
+    return new ImmutablePair<Bitmap,Boolean>(image,freshEnough);
   }
-  return null;
+  return new ImmutablePair<Bitmap,Boolean>(null,false);
 }

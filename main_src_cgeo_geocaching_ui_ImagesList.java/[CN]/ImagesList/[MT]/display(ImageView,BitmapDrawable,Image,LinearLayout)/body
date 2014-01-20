@@ -1,8 +1,6 @@
 {
   if (image != null) {
     bitmaps.add(image.getBitmap());
-    final ImageView imageView=(ImageView)inflater.inflate(R.layout.image_item,null);
-    assert(imageView != null);
     final Rect bounds=image.getBounds();
     imageView.setImageResource(R.drawable.image_not_loaded);
     imageView.setClickable(true);
@@ -15,10 +13,10 @@
     activity.registerForContextMenu(imageView);
     imageView.setImageDrawable(image);
     imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-    imageView.setLayoutParams(new LayoutParams(bounds.width(),bounds.height()));
+    imageView.setLayoutParams(new LinearLayout.LayoutParams(bounds.width(),bounds.height()));
     view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
-    view.addView(imageView);
     imageView.setId(image.hashCode());
     images.put(imageView.getId(),img);
+    view.invalidate();
   }
 }
