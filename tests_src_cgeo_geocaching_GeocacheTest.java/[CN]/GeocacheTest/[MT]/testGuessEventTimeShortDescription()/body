@@ -1,0 +1,7 @@
+{
+  Geocache cache=new Geocache();
+  cache.setType(CacheType.EVENT);
+  cache.setDescription(StringUtils.EMPTY);
+  cache.setShortDescription("text 14:20 text");
+  assertEquals(String.valueOf(14 * 60 + 20),cache.guessEventTimeMinutes());
+}
