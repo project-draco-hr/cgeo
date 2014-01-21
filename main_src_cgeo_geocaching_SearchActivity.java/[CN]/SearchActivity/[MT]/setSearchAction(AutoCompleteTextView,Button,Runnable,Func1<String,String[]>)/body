@@ -6,5 +6,7 @@
     }
   }
 );
-  editText.setAdapter(new AutoCompleteAdapter(editText.getContext(),android.R.layout.simple_dropdown_item_1line,suggestionFunction));
+  if (suggestionFunction != null) {
+    editText.setAdapter(new AutoCompleteAdapter(editText.getContext(),android.R.layout.simple_dropdown_item_1line,suggestionFunction));
+  }
 }

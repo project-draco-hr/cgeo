@@ -12,12 +12,7 @@
       findByAddressFn();
     }
   }
-,new Func1<String,String[]>(){
-    @Override public String[] call(    final String input){
-      return DataStore.getSuggestionsAddress(input);
-    }
-  }
-);
+,null);
   setSearchAction(geocodeEditText,buttonSearchGeocode,new Runnable(){
     @Override public void run(){
       findByGeocodeFn();
