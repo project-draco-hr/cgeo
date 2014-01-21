@@ -7,8 +7,8 @@
     showFailure();
     return;
   }
-  if (data != null) {
-    Uri selectedImage=data.getData();
+  final Uri selectedImage=data.getData();
+  if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
     String[] filePathColumn={MediaColumns.DATA};
     Cursor cursor=null;
     try {
@@ -38,7 +38,22 @@
     Log.d("SELECT IMAGE data = " + data.toString());
   }
  else {
-    Log.d("SELECT IMAGE data is null");
+    InputStream input=null;
+    OutputStream output=null;
+    try {
+      input=getContentResolver().openInputStream(selectedImage);
+      final File outputFile=ImageUtils.getOutputImageFile();
+      output=new FileOutputStream(outputFile);
+      LocalStorage.copy(input,output);
+      imageUri=Uri.fromFile(outputFile);
+    }
+ catch (    FileNotFoundException e) {
+      Log.e("ImageSelectActivity.onStartResult",e);
+    }
+ finally {
+      IOUtils.closeQuietly(input);
+      IOUtils.closeQuietly(output);
+    }
   }
   if (requestCode == SELECT_NEW_IMAGE) {
     showToast(getResources().getString(R.string.info_stored_image) + "\n" + imageUri);
