@@ -10,7 +10,7 @@
     onlyNewOption.setText(getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate())+ ')');
   }
   builder.setPositiveButton(R.string.export,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
       final boolean upload=uploadOption.isChecked();
       final boolean onlyNew=onlyNewOption.isChecked();
       Settings.setFieldNoteExportUpload(upload);
