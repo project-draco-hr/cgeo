@@ -2,11 +2,11 @@
   if (geoSubscription != null) {
     final Subscription subscription=geoSubscription;
     geoSubscription=null;
-    Observable.interval(2500,TimeUnit.MILLISECONDS).take(1).subscribe(new Action1<Long>(){
-      @Override public void call(      final Long aLong){
+    Schedulers.newThread().schedule(new Action0(){
+      @Override public void call(){
         subscription.unsubscribe();
       }
     }
-);
+,2500,TimeUnit.MILLISECONDS);
   }
 }
