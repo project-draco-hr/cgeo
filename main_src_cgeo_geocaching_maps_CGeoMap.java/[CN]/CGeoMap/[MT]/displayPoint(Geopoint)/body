@@ -1,0 +1,9 @@
+{
+  final Waypoint waypoint=new Waypoint("some place",waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT,false);
+  waypoint.setCoords(coords);
+  final CachesOverlayItemImpl item=getWaypointItem(waypoint);
+  overlayCaches.updateItems(item);
+  displayHandler.sendEmptyMessage(INVALIDATE_MAP);
+  displayHandler.sendEmptyMessage(UPDATE_TITLE);
+  cachesCnt=1;
+}
