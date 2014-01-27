@@ -193,6 +193,12 @@
       }
     }
 );
+    gsak.getChild(gsakNamespace,"FavPoints").setEndTextElementListener(new EndTextElementListener(){
+      @Override public void end(      String favoritePoints){
+        cache.setFavoritePoints(Integer.parseInt(favoritePoints));
+      }
+    }
+);
   }
   final Element cgeoVisited=cacheParent.getChild(CGEO_NS,"visited");
   cgeoVisited.setEndTextElementListener(new EndTextElementListener(){
