@@ -40,9 +40,7 @@
             if (image != null) {
               return image;
             }
- else {
-              return returnErrorImage ? new BitmapDrawable(resources,BitmapFactory.decodeResource(resources,R.drawable.image_not_loaded)) : getTransparent1x1Image(resources);
-            }
+            return returnErrorImage ? new BitmapDrawable(resources,BitmapFactory.decodeResource(resources,R.drawable.image_not_loaded)) : getTransparent1x1Image(resources);
           }
         }
 ).subscribe(observer);
