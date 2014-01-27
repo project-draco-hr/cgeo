@@ -1,5 +1,5 @@
 {
-  final boolean restartRequired=!MapProviderFactory.isSameActivity(Settings.getMapSource(),mapSource);
+  final boolean restartRequired=!MapProviderFactory.isSameActivity(MapProviderFactory.getMapSource(currentSourceId),mapSource);
   Settings.setMapSource(mapSource);
   currentSourceId=mapSource.getNumericalId();
   if (restartRequired) {
