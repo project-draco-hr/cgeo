@@ -6,18 +6,11 @@
   assertEquals(10,log.size());
   final List<Image> log4Images=log.get(4).getLogImages();
   assertNotNull(log4Images);
-  assertEquals(5,log4Images.size());
-  assertEquals("http://img.geocaching.com/track/log/large/f2e24c50-394c-4d74-8fb4-87298d8bff1d.jpg",log4Images.get(0).getUrl());
-  assertEquals("7b Welcome to Geowoodstock",log4Images.get(0).getTitle());
-  assertEquals("http://img.geocaching.com/track/log/large/b57c29c3-134e-4202-a2a1-69ce8920b055.jpg",log4Images.get(1).getUrl());
-  assertEquals("8 Crater Lake Natl Park Oregon",log4Images.get(1).getTitle());
-  final List<Image> log5Images=log.get(5).getLogImages();
-  assertNotNull(log5Images);
-  assertEquals(1,log5Images.size());
-  assertEquals("http://img.geocaching.com/track/log/large/0096b42d-4d10-45fa-9be2-2d08c0d5cc61.jpg",log5Images.get(0).getUrl());
-  assertEquals("Traverski&#39;s GC Univ coin on tour",log5Images.get(0).getTitle());
+  assertEquals(1,log4Images.size());
+  assertEquals("http://imgcdn.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg",log4Images.get(0).getUrl());
+  assertEquals("@Osaka",log4Images.get(0).getTitle());
   for (  LogEntry entry : log) {
     assertFalse(entry.log.startsWith("<div>"));
   }
-  assertEquals("traveling",log.get(0).log);
+  assertEquals("Dropped in Una Bhan (GC49XCJ)",log.get(0).log);
 }
