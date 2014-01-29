@@ -193,6 +193,17 @@
       }
     }
 );
+    gsak.getChild(gsakNamespace,"FavPoints").setEndTextElementListener(new EndTextElementListener(){
+      @Override public void end(      String favoritePoints){
+        try {
+          cache.setFavoritePoints(Integer.parseInt(favoritePoints));
+        }
+ catch (        final NumberFormatException e) {
+          Log.w("Failed to parse favorite points",e);
+        }
+      }
+    }
+);
   }
   final Element cgeoVisited=cacheParent.getChild(CGEO_NS,"visited");
   cgeoVisited.setEndTextElementListener(new EndTextElementListener(){
