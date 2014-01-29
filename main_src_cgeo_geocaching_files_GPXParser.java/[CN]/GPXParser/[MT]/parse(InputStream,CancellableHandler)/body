@@ -204,6 +204,12 @@
       }
     }
 );
+    gsak.getChild(gsakNamespace,"GcNote").setEndTextElementListener(new EndTextElementListener(){
+      @Override public void end(      final String personalNote){
+        cache.setPersonalNote(StringUtils.trim(personalNote));
+      }
+    }
+);
   }
   final Element cgeoVisited=cacheParent.getChild(CGEO_NS,"visited");
   cgeoVisited.setEndTextElementListener(new EndTextElementListener(){
