@@ -175,56 +175,8 @@
   }
 );
   final Element cacheParent=getCacheParent(waypoint);
-  for (  final String gsakNamespace : GSAK_NS) {
-    final Element gsak=cacheParent.getChild(gsakNamespace,"wptExtension");
-    gsak.getChild(gsakNamespace,"Watch").setEndTextElementListener(new EndTextElementListener(){
-      @Override public void end(      String watchList){
-        cache.setOnWatchlist(Boolean.valueOf(watchList.trim()));
-      }
-    }
-);
-    gsak.getChild(gsakNamespace,"UserData").setEndTextElementListener(new UserDataListener(1));
-    for (int i=2; i <= 4; i++) {
-      gsak.getChild(gsakNamespace,"User" + i).setEndTextElementListener(new UserDataListener(i));
-    }
-    gsak.getChild(gsakNamespace,"Parent").setEndTextElementListener(new EndTextElementListener(){
-      @Override public void end(      String body){
-        parentCacheCode=body;
-      }
-    }
-);
-    gsak.getChild(gsakNamespace,"FavPoints").setEndTextElementListener(new EndTextElementListener(){
-      @Override public void end(      String favoritePoints){
-        try {
-          cache.setFavoritePoints(Integer.parseInt(favoritePoints));
-        }
- catch (        final NumberFormatException e) {
-          Log.w("Failed to parse favorite points",e);
-        }
-      }
-    }
-);
-    gsak.getChild(gsakNamespace,"GcNote").setEndTextElementListener(new EndTextElementListener(){
-      @Override public void end(      final String personalNote){
-        cache.setPersonalNote(StringUtils.trim(personalNote));
-      }
-    }
-);
-  }
-  final Element cgeoVisited=cacheParent.getChild(CGEO_NS,"visited");
-  cgeoVisited.setEndTextElementListener(new EndTextElementListener(){
-    @Override public void end(    String visited){
-      wptVisited=Boolean.valueOf(visited.trim());
-    }
-  }
-);
-  final Element cgeoUserDefined=cacheParent.getChild(CGEO_NS,"userdefined");
-  cgeoUserDefined.setEndTextElementListener(new EndTextElementListener(){
-    @Override public void end(    String userDefined){
-      wptUserDefined=Boolean.valueOf(userDefined.trim());
-    }
-  }
-);
+  registerGsakExtensions(cacheParent);
+  registerCgeoExtensions(cacheParent);
   for (  final String nsGC : GROUNDSPEAK_NAMESPACE) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");
     gcCache.setStartElementListener(new StartElementListener(){

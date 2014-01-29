@@ -1,0 +1,7 @@
+{
+  final List<Geocache> caches=readGPX10(gpxResourceId);
+  assertNotNull(caches);
+  assertEquals(1,caches.size());
+  final Geocache cache=caches.get(0);
+  return cache;
+}
