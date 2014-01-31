@@ -1,0 +1,9 @@
+{
+  view.postDelayed(new Runnable(){
+    @Override public void run(){
+      final InputMethodManager keyboard=(InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+      keyboard.showSoftInput(view,0);
+    }
+  }
+,50);
+}
