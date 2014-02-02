@@ -1,0 +1,12 @@
+{
+  if (!LocalStorage.isExternalStorageAvailable()) {
+    return null;
+  }
+  FileUtils.mkdirs(exportLocation);
+  final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
+  final File exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".txt");
+  if (!FileUtils.writeFileUTF16(exportFile,getContent())) {
+    return null;
+  }
+  return exportFile;
+}

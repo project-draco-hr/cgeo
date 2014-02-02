@@ -1,65 +1,7 @@
 {
-  final StringBuilder fieldNoteBuffer=new StringBuilder();
-  try {
-    int i=0;
-    for (    final Geocache cache : caches) {
-      if (cache.isLogOffline()) {
-        final LogEntry log=DataStore.loadLogOffline(cache.getGeocode());
-        if (!onlyNew || log.date > Settings.getFieldnoteExportDate()) {
-          appendFieldNote(fieldNoteBuffer,cache,log);
-        }
-      }
-      publishProgress(++i);
-    }
-  }
- catch (  final Exception e) {
-    Log.e("FieldnoteExport.ExportTask generation",e);
-    return false;
-  }
-  fieldNoteBuffer.append('\n');
-  if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-    return false;
-  }
-  FileUtils.mkdirs(exportLocation);
-  final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
-  exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".txt");
-  Writer fileWriter=null;
-  BufferedOutputStream buffer=null;
-  try {
-    final OutputStream os=new FileOutputStream(exportFile);
-    buffer=new BufferedOutputStream(os);
-    fileWriter=new OutputStreamWriter(buffer,CharEncoding.UTF_16);
-    fileWriter.write(fieldNoteBuffer.toString());
-  }
- catch (  final IOException e) {
-    Log.e("FieldnoteExport.ExportTask export",e);
-    return false;
-  }
- finally {
-    IOUtils.closeQuietly(fileWriter);
-    IOUtils.closeQuietly(buffer);
-  }
-  if (upload) {
-    publishProgress(STATUS_UPLOAD);
-    if (!GCLogin.getInstance().isActualLoginStatus()) {
-      final StatusCode loginState=GCLogin.getInstance().login();
-      if (loginState != StatusCode.NO_ERROR) {
-        Log.e("FieldnoteExport.ExportTask upload: Login failed");
-      }
-    }
-    final String uri="http://www.geocaching.com/my/uploadfieldnotes.aspx";
-    final String page=GCLogin.getInstance().getRequestLogged(uri,null);
-    if (StringUtils.isBlank(page)) {
-      Log.e("FieldnoteExport.ExportTask get page: No data from server");
-      return false;
-    }
-    final String[] viewstates=GCLogin.getViewstates(page);
-    final Parameters uploadParams=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$btnUpload","Upload Field Note");
-    GCLogin.putViewstates(uploadParams,viewstates);
-    Network.getResponseData(Network.postRequest(uri,uploadParams,"ctl00$ContentBody$FieldNoteLoader","text/plain",exportFile));
-    if (StringUtils.isBlank(page)) {
-      Log.e("FieldnoteExport.ExportTask upload: No data from server");
-      return false;
+  for (  IConnector connector : ConnectorFactory.getConnectors()) {
+    if (connector instanceof FieldNotesCapability) {
+      exportFieldNotes((FieldNotesCapability)connector,caches);
     }
   }
   return true;

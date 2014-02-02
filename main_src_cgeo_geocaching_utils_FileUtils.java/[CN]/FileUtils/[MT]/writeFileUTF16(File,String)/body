@@ -1,0 +1,19 @@
+{
+  Writer fileWriter=null;
+  BufferedOutputStream buffer=null;
+  try {
+    final OutputStream os=new FileOutputStream(file);
+    buffer=new BufferedOutputStream(os);
+    fileWriter=new OutputStreamWriter(buffer,CharEncoding.UTF_16);
+    fileWriter.write(content.toString());
+  }
+ catch (  final IOException e) {
+    Log.e("FieldnoteExport.ExportTask export",e);
+    return false;
+  }
+ finally {
+    IOUtils.closeQuietly(fileWriter);
+    IOUtils.closeQuietly(buffer);
+  }
+  return true;
+}
