@@ -1,0 +1,16 @@
+{
+  final List<List<Map<String,String>>> listOfChildGroups=new ArrayList<>();
+  for (  final FactoryEntry factoryEntry : FilterRegistry.getInstance().getFactories()) {
+    final IFilterFactory factory=createFilterFactory(factoryEntry.getFactory());
+    final List<? extends IFilter> filters=factory.getFilters();
+    final List<Map<String,String>> childGroups=new ArrayList<>(filters.size());
+    for (    final IFilter filter : filters) {
+      final HashMap<String,String> hashMap=new HashMap<>(1);
+      hashMap.put(KEY_FILTER_NAME,filter.getName());
+      hashMap.put("CHILD_NAME",filter.getName());
+      childGroups.add(hashMap);
+    }
+    listOfChildGroups.add(childGroups);
+  }
+  return listOfChildGroups;
+}

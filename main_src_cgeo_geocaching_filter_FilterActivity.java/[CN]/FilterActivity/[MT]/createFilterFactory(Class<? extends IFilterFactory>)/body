@@ -1,0 +1,12 @@
+{
+  try {
+    return class1.newInstance();
+  }
+ catch (  final InstantiationException e) {
+    Log.e("createFilterFactory",e);
+  }
+catch (  final IllegalAccessException e) {
+    Log.e("createFilterFactory",e);
+  }
+  return null;
+}

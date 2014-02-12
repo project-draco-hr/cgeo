@@ -1,0 +1,11 @@
+{
+  final SimpleExpandableListAdapter adapter=new SimpleExpandableListAdapter(this,createFilterTopLevelGroups(),android.R.layout.simple_expandable_list_item_1,new String[]{KEY_FILTER_GROUP_NAME},new int[]{android.R.id.text1},createFilterChildren(),android.R.layout.simple_expandable_list_item_2,new String[]{KEY_FILTER_NAME,"CHILD_NAME"},new int[]{android.R.id.text1});
+  filterList.setAdapter(adapter);
+  filterList.setOnChildClickListener(new OnChildClickListener(){
+    @Override public boolean onChildClick(    final ExpandableListView parent,    final View v,    final int groupPosition,    final int childPosition,    final long id){
+      setFilterResult(groupPosition,childPosition);
+      return true;
+    }
+  }
+);
+}

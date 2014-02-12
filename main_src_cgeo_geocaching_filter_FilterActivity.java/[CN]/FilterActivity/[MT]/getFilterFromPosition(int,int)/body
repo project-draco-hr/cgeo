@@ -1,0 +1,7 @@
+{
+  if (groupPosition < 0 || childPosition < 0) {
+    return null;
+  }
+  final FactoryEntry factoryEntry=FilterRegistry.getInstance().getFactories().get(groupPosition);
+  return createFilterFactory(factoryEntry.getFactory()).getFilters().get(childPosition);
+}

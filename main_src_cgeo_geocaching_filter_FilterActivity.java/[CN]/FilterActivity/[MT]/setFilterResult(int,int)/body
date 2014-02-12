@@ -1,0 +1,6 @@
+{
+  final Intent resultIntent=new Intent();
+  resultIntent.putExtra(EXTRA_FILTER_RESULT,new int[]{groupPosition,childPosition});
+  setResult(Activity.RESULT_OK,resultIntent);
+  finish();
+}

@@ -6,5 +6,9 @@
       new GPXImporter(this,listId,importGpxAttachementFinishedHandler).importGPX(uri,null,getDisplayName(uri));
     }
   }
+ else   if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+    final int[] filterIndex=data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
+    setFilter(FilterActivity.getFilterFromPosition(filterIndex[0],filterIndex[1]));
+  }
   refreshCurrentList();
 }

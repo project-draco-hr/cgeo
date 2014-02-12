@@ -1,0 +1,8 @@
+{
+  for (  final FactoryEntry entry : registry) {
+    if (entry.filterFactory == factoryClass) {
+      return entry.name;
+    }
+  }
+  return StringUtils.EMPTY;
+}
