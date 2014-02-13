@@ -24,7 +24,7 @@
         viewport=new Viewport(cache,0.003,0.003);
         search=ConnectorFactory.searchByViewport(viewport,INVALID_TOKEN).toBlockingObservable().single();
         assertNotNull(search);
-        assertEquals(testStrategy == Strategy.DETAILED,search.getGeocodes().contains(cache.getGeocode()));
+        assertTrue(search.getGeocodes().contains(cache.getGeocode()));
       }
   finally {
         Settings.setLiveMapStrategy(strategy);
