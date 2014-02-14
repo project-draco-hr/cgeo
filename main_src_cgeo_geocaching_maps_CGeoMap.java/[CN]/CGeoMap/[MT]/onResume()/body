@@ -1,6 +1,6 @@
 {
   super.onResume();
-  addGeoDirObservers();
+  geoDirUpdate.startGeoAndDir();
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
     for (    String geocode : dirtyCaches) {
       Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);

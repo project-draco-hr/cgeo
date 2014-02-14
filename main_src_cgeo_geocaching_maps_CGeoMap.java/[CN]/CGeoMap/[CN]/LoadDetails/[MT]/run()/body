@@ -2,7 +2,6 @@
   if (CollectionUtils.isEmpty(geocodes)) {
     return;
   }
-  deleteGeoDirObservers();
   for (  final String geocode : geocodes) {
     try {
       if (handler.isCancelled()) {
@@ -22,5 +21,4 @@
     yield();
   }
   handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
-  addGeoDirObservers();
 }
