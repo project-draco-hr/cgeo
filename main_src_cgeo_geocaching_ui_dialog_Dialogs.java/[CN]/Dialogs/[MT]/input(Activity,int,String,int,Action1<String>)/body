@@ -1,8 +1,9 @@
 {
-  final EditText input=new EditText(context);
+  final Context themedContext=new ContextThemeWrapper(context,R.style.dark);
+  final EditText input=new EditText(themedContext);
   input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
   input.setText(defaultValue);
-  final AlertDialog.Builder builder=new AlertDialog.Builder(context);
+  final AlertDialog.Builder builder=new AlertDialog.Builder(themedContext);
   builder.setTitle(title);
   builder.setView(input);
   builder.setPositiveButton(buttonTitle,new OnClickListener(){
