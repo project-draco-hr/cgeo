@@ -1,24 +1,23 @@
 {
-  final Observable<Spanned> producer=Observable.create(new OnSubscribeFunc<Spanned>(){
-    @Override public Subscription onSubscribe(    final Observer<? super Spanned> observer){
+  final Observable<Spanned> producer=Observable.create(new OnSubscribe<Spanned>(){
+    @Override public void call(    final Subscriber<? super Spanned> subscriber){
       try {
         final HtmlImageCounter imageCounter=new HtmlImageCounter();
         final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
         Spanned description=Html.fromHtml(descriptionString,imageCounter,unknownTagsHandler);
         addWarning(unknownTagsHandler,description);
-        observer.onNext(description);
+        subscriber.onNext(description);
         if (imageCounter.getImageCount() > 0) {
           description=Html.fromHtml(descriptionString,new HtmlImage(cache.getGeocode(),true,cache.getListId(),false),unknownTagsHandler);
           addWarning(unknownTagsHandler,description);
-          observer.onNext(description);
+          subscriber.onNext(description);
         }
-        observer.onCompleted();
+        subscriber.onCompleted();
       }
  catch (      final Exception e) {
         Log.e("loadDescription",e);
-        observer.onError(e);
+        subscriber.onError(e);
       }
-      return Subscriptions.empty();
     }
     private void addWarning(    final UnknownTagsHandler unknownTagsHandler,    final Spanned description){
       if (unknownTagsHandler.isProblematicDetected()) {

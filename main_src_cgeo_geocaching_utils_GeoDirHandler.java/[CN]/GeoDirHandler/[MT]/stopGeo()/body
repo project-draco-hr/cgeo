@@ -2,8 +2,8 @@
   if (geoSubscription != null) {
     final Subscription subscription=geoSubscription;
     geoSubscription=null;
-    Schedulers.newThread().schedule(new Action0(){
-      @Override public void call(){
+    Schedulers.newThread().schedule(new Action1<Scheduler.Inner>(){
+      @Override public void call(      final Scheduler.Inner inner){
         subscription.unsubscribe();
       }
     }
