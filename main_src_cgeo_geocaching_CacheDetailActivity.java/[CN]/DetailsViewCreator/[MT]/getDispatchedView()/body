@@ -3,9 +3,7 @@
     return null;
   }
   view=(ScrollView)getLayoutInflater().inflate(R.layout.cachedetail_details_page,null);
-  if (Settings.isStoreOfflineMaps()) {
-    new PreviewMapTask().execute((Void)null);
-  }
+  new PreviewMapTask().execute((Void)null);
   detailsList=(LinearLayout)view.findViewById(R.id.details_list);
   final CacheDetailsCreator details=new CacheDetailsCreator(CacheDetailActivity.this,detailsList);
   final Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());

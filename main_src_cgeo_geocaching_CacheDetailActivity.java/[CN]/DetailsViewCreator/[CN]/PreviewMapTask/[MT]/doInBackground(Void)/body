@@ -2,13 +2,12 @@
   try {
     Bitmap image=decode(cache);
     if (image == null) {
-      StaticMapsProvider.storeCachePreviewMap(cache);
-      image=decode(cache);
-      if (image == null) {
-        return null;
+      if (Settings.isStoreOfflineMaps()) {
+        StaticMapsProvider.storeCachePreviewMap(cache);
+        image=decode(cache);
       }
     }
-    return ImageUtils.scaleBitmapToFitDisplay(image);
+    return image != null ? ImageUtils.scaleBitmapToFitDisplay(image) : null;
   }
  catch (  final Exception e) {
     Log.w("CacheDetailActivity.PreviewMapTask",e);
