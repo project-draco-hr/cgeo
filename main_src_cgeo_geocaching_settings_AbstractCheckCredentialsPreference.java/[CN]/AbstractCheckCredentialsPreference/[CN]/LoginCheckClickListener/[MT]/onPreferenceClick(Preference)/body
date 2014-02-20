@@ -1,18 +1,30 @@
 {
+  final Resources res=activity.getResources();
   final ImmutablePair<String,String> credentials=getCredentials();
   if (StringUtils.isBlank(credentials.getLeft()) || StringUtils.isBlank(credentials.getRight())) {
     ActivityMixin.showToast(activity,R.string.err_missing_auth);
     return false;
   }
-  loginDialog=ProgressDialog.show(activity,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
+  final ProgressDialog loginDialog=ProgressDialog.show(activity,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
   loginDialog.setCancelable(false);
   Cookies.clearCookies();
-  (new Thread(){
-    @Override public void run(){
-      Object payload=login();
-      logInHandler.obtainMessage(0,payload).sendToTarget();
+  AndroidObservable.fromActivity(activity,Observable.defer(new Func0<Observable<?>>(){
+    @Override public Observable<?> call(){
+      return Observable.from(login());
     }
   }
-).start();
+).subscribeOn(Schedulers.io())).subscribe(new Action1<Object>(){
+    @Override public void call(    final Object obj){
+      loginDialog.dismiss();
+      if (obj == null || obj instanceof Drawable) {
+        Dialogs.message(activity,R.string.init_login_popup,R.string.init_login_popup_ok,(Drawable)obj);
+      }
+ else {
+        Dialogs.message(activity,R.string.init_login_popup,res.getString(R.string.init_login_popup_failed_reason) + " " + ((StatusCode)obj).getErrorString(res)+ ".");
+      }
+      activity.initBasicMemberPreferences();
+    }
+  }
+);
   return false;
 }
