@@ -1,8 +1,3 @@
 {
-  final StatusCode loginResult=ECLogin.getInstance().login();
-  Object payload=loginResult;
-  if (loginResult == StatusCode.NO_ERROR) {
-    payload=null;
-  }
-  return payload;
+  return new ImmutablePair<StatusCode,Drawable>(ECLogin.getInstance().login(),null);
 }

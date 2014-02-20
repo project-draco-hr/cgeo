@@ -1,9 +1,10 @@
 {
   final StatusCode loginResult=GCLogin.getInstance().login();
-  Object payload=loginResult;
-  if (loginResult == StatusCode.NO_ERROR) {
+switch (loginResult) {
+case NO_ERROR:
     GCLogin.detectGcCustomDate();
-    payload=GCLogin.getInstance().downloadAvatarAndGetMemberStatus();
-  }
-  return payload;
+  return new ImmutablePair<StatusCode,Drawable>(StatusCode.NO_ERROR,GCLogin.getInstance().downloadAvatarAndGetMemberStatus());
+default :
+return new ImmutablePair<StatusCode,Drawable>(loginResult,null);
+}
 }
