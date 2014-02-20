@@ -1,6 +1,6 @@
 {
-  final SettingsActivity activity=(SettingsActivity)getContext();
-  setOnPreferenceClickListener(new OnPreferenceClickListener(){
+  activity.setOcAuthTitle(oAuthMapping.prefKeyId);
+  return new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    Preference preference){
       if (oAuthMapping.authActivity != null) {
         Intent authIntent=new Intent(preference.getContext(),oAuthMapping.authActivity);
@@ -9,7 +9,5 @@
       return false;
     }
   }
-);
-  activity.setOcAuthTitle(oAuthMapping.prefKeyId);
-  return super.onCreateView(parent);
+;
 }

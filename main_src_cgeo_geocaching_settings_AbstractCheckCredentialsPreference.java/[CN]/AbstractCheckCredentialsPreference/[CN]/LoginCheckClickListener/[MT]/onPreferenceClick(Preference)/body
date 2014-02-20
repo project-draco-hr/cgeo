@@ -1,7 +1,5 @@
 {
-  this.activity=(SettingsActivity)AbstractCheckCredentialsPreference.this.getContext();
-  this.res=activity.getResources();
-  ImmutablePair<String,String> credentials=getCredentials();
+  final ImmutablePair<String,String> credentials=getCredentials();
   if (StringUtils.isBlank(credentials.getLeft()) || StringUtils.isBlank(credentials.getRight())) {
     ActivityMixin.showToast(activity,R.string.err_missing_auth);
     return false;
