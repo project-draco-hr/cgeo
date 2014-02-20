@@ -1,5 +1,5 @@
 {
-  activity=(SettingsActivity)getContext();
+  final SettingsActivity activity=(SettingsActivity)getContext();
   setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    Preference preference){
       if (activity == null) {
@@ -11,30 +11,39 @@
         ActivityMixin.showToast(activity,R.string.err_missing_device_name);
         return false;
       }
-      progressDialog=ProgressDialog.show(activity,activity.getString(R.string.init_sendToCgeo),activity.getString(R.string.init_sendToCgeo_registering),true);
+      final ProgressDialog progressDialog=ProgressDialog.show(activity,activity.getString(R.string.init_sendToCgeo),activity.getString(R.string.init_sendToCgeo_registering),true);
       progressDialog.setCancelable(false);
-      (new Thread(){
-        @Override public void run(){
-          int pin=0;
+      AndroidObservable.fromActivity(activity,Observable.defer(new Func0<Observable<Integer>>(){
+        @Override public Observable<Integer> call(){
           final String nam=StringUtils.defaultString(deviceName);
           final String cod=StringUtils.defaultString(deviceCode);
           final Parameters params=new Parameters("name",nam,"code",cod);
           HttpResponse response=Network.getRequest("http://send2.cgeo.org/auth.html",params);
           if (response != null && response.getStatusLine().getStatusCode() == 200) {
-            String[] strings=StringUtils.split(Network.getResponseData(response),',');
+            final String[] strings=StringUtils.split(Network.getResponseData(response),',');
+            Settings.setWebNameCode(nam,strings[0]);
             try {
-              pin=Integer.parseInt(strings[1].trim());
+              return Observable.from(Integer.parseInt(strings[1].trim()));
             }
- catch (            Exception e) {
-              Log.e("webDialog",e);
+ catch (            final Exception e) {
+              Log.e("RegisterSend2CgeoPreference",e);
             }
-            String code=strings[0];
-            Settings.setWebNameCode(nam,code);
           }
-          webAuthHandler.sendEmptyMessage(pin);
+          return Observable.empty();
         }
       }
-).start();
+).firstOrDefault(0).subscribeOn(Schedulers.io())).subscribe(new Action1<Integer>(){
+        @Override public void call(        final Integer pin){
+          progressDialog.dismiss();
+          if (pin > 0) {
+            Dialogs.message(activity,R.string.init_sendToCgeo,activity.getString(R.string.init_sendToCgeo_register_ok).replace("####",String.valueOf(pin)));
+          }
+ else {
+            Dialogs.message(activity,R.string.init_sendToCgeo,R.string.init_sendToCgeo_register_fail);
+          }
+        }
+      }
+);
       return true;
     }
   }
