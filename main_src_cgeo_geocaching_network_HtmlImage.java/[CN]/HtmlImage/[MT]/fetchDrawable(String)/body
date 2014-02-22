@@ -1,9 +1,9 @@
 {
-  final boolean shared=url.contains("/images/icons/icon_");
-  final String pseudoGeocode=shared ? SHARED : geocode;
   if (StringUtils.isBlank(url) || isCounter(url)) {
     return Observable.from(getTransparent1x1Image(resources));
   }
+  final boolean shared=url.contains("/images/icons/icon_");
+  final String pseudoGeocode=shared ? SHARED : geocode;
   return Observable.create(new OnSubscribe<BitmapDrawable>(){
     @Override public void call(    final Subscriber<? super BitmapDrawable> subscriber){
       Schedulers.computation().schedule(new Action1<Inner>(){
