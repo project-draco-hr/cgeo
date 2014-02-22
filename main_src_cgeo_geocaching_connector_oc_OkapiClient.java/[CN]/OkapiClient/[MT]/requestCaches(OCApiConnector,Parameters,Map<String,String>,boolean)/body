@@ -2,7 +2,7 @@
   if (Settings.getCacheType() != CacheType.ALL && StringUtils.isBlank(getFilterFromType())) {
     return Collections.emptyList();
   }
-  addFilterParams(valueMap,connector);
+  addFilterParams(valueMap,connector,my);
   params.add("search_params",new JSONObject(valueMap).toString());
   addRetrieveParams(params,connector);
   final JSONObject data=request(connector,OkapiService.SERVICE_SEARCH_AND_RETRIEVE,params).data;

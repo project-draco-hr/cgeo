@@ -6,5 +6,5 @@
     return Collections.emptyList();
   }
   valueMap.put(userRequestParam,uuid);
-  return requestCaches(connector,params,valueMap);
+  return requestCaches(connector,params,valueMap,connector.isSearchForMyCaches(username));
 }

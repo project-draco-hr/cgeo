@@ -6,5 +6,5 @@
   final Parameters params=new Parameters("search_method",METHOD_SEARCH_BBOX);
   final Map<String,String> valueMap=new LinkedHashMap<String,String>();
   valueMap.put("bbox",bboxString);
-  return requestCaches(connector,params,valueMap);
+  return requestCaches(connector,params,valueMap,false);
 }

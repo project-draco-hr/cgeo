@@ -2,7 +2,7 @@
   if (!Settings.isExcludeDisabledCaches()) {
     valueMap.put("status","Available|Temporarily unavailable");
   }
-  if (Settings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+  if (!my && Settings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
     valueMap.put("exclude_my_own","true");
     valueMap.put("found_status","notfound_only");
   }
