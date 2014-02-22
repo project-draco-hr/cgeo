@@ -1,0 +1,7 @@
+{
+  OkapiError error=OkapiClient.decodeErrorResponse(response);
+  if (error.getResult() == OkapiErrors.INVALID_TIMESTAMP) {
+    return res.getString(R.string.init_login_popup_invalid_timestamp);
+  }
+  return StringUtils.EMPTY;
+}

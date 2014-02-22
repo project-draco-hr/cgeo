@@ -1,0 +1,7 @@
+{
+  final JSONResult result=new JSONResult(response);
+  if (!result.isSuccess) {
+    return new OkapiError(result.data);
+  }
+  return new OkapiError(new JSONObject());
+}
