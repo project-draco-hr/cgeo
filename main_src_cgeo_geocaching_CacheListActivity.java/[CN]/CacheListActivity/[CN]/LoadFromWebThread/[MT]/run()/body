@@ -1,51 +1,36 @@
 {
-  int delay=-1;
-  int times=0;
-  int ret=MSG_DONE;
-  while (!handler.isCancelled() && times < 3 * 60 / 5) {
-    String deviceCode=Settings.getWebDeviceCode();
-    if (deviceCode == null) {
-      deviceCode="";
-    }
-    final Parameters params=new Parameters("code",deviceCode);
+  final long startTime=System.currentTimeMillis();
+  final String deviceCode=StringUtils.defaultString(Settings.getWebDeviceCode());
+  final Parameters params=new Parameters("code",deviceCode);
+  while (!handler.isCancelled() && System.currentTimeMillis() - startTime < 3 * 60000) {
     final HttpResponse responseFromWeb=Network.getRequest("http://send2.cgeo.org/read.html",params);
     if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
       final String response=Network.getResponseData(responseFromWeb);
       if (response != null && response.length() > 2) {
-        delay=1;
-        handler.sendMessage(handler.obtainMessage(1,response));
+        handler.sendMessage(handler.obtainMessage(MSG_LOADING,response));
         Geocache.storeCache(null,response,listIdLFW,false,null);
-        handler.sendMessage(handler.obtainMessage(2,response));
+        handler.sendMessage(handler.obtainMessage(MSG_LOADED,response));
       }
  else       if ("RG".equals(response)) {
         Settings.setWebNameCode(null,null);
-        ret=-3;
+        handler.sendEmptyMessage(MSG_NO_REGISTRATION);
         handler.cancel();
         break;
       }
  else {
-        delay=0;
-        handler.sendEmptyMessage(0);
+        try {
+          sleep(5000);
+        }
+ catch (        final InterruptedException e) {
+        }
+        handler.sendEmptyMessage(MSG_WAITING);
       }
     }
-    if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
-      ret=-2;
+ else {
+      handler.sendEmptyMessage(MSG_SERVER_FAIL);
       handler.cancel();
       break;
     }
-    try {
-      if (delay == 0) {
-        sleep(5000);
-        times++;
-      }
- else {
-        sleep(500);
-        times=0;
-      }
-    }
- catch (    final InterruptedException e) {
-      Log.e("CacheListActivity.LoadFromWebThread.sleep",e);
-    }
   }
-  handler.sendEmptyMessage(ret);
+  handler.sendEmptyMessage(MSG_DONE);
 }
