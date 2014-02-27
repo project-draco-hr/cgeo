@@ -1,6 +1,6 @@
 {
   final int modProgress=progress / this.progressDivider;
-  if (dialog != null && dialog.isShowing()) {
+  if (isShowing()) {
     dialog.setProgress(modProgress);
   }
   this.progress=modProgress;
