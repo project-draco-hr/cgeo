@@ -2,25 +2,7 @@
   final DefaultHttpClient client=new DefaultHttpClient();
   client.setCookieStore(Cookies.cookieStore);
   client.setParams(clientParams);
-  client.setRedirectStrategy(new DefaultRedirectStrategy(){
-    @Override public boolean isRedirected(    HttpRequest request,    HttpResponse response,    HttpContext context){
-      boolean isRedirect=false;
-      try {
-        isRedirect=super.isRedirected(request,response,context);
-      }
- catch (      final ProtocolException e) {
-        Log.e("httpclient.isRedirected: unable to check for redirection",e);
-      }
-      if (!isRedirect) {
-        final int responseCode=response.getStatusLine().getStatusCode();
-        if (responseCode == 301 || responseCode == 302) {
-          return true;
-        }
-      }
-      return isRedirect;
-    }
-  }
-);
+  client.setRedirectStrategy(new LaxRedirectStrategy());
   client.addRequestInterceptor(new HttpRequestInterceptor(){
     @Override public void process(    final HttpRequest request,    final HttpContext context) throws HttpException, IOException {
       if (!request.containsHeader("Accept-Encoding")) {
