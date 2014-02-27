@@ -14,10 +14,8 @@
       if (response != null && response.length() > 2) {
         delay=1;
         handler.sendMessage(handler.obtainMessage(1,response));
-        yield();
         Geocache.storeCache(null,response,listIdLFW,false,null);
         handler.sendMessage(handler.obtainMessage(2,response));
-        yield();
       }
  else       if ("RG".equals(response)) {
         Settings.setWebNameCode(null,null);
@@ -28,7 +26,6 @@
  else {
         delay=0;
         handler.sendEmptyMessage(0);
-        yield();
       }
     }
     if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
@@ -37,7 +34,6 @@
       break;
     }
     try {
-      yield();
       if (delay == 0) {
         sleep(5000);
         times++;
