@@ -1,8 +1,0 @@
-{
-  if (StringUtils.isBlank(page) || StringUtils.isBlank(guid)) {
-    return false;
-  }
-  final Boolean found=Pattern.compile(guid,Pattern.CASE_INSENSITIVE).matcher(page).find();
-  Log.i("Geocache.isGuidContainedInPage: guid '" + guid + "' "+ (found ? "" : "not ")+ "found");
-  return found;
-}

@@ -5,7 +5,7 @@
     Log.e("GCParser.addToWatchlist: No data from server");
     return false;
   }
-  final boolean guidOnPage=cache.isGuidContainedInPage(page);
+  final boolean guidOnPage=isGuidContainedInPage(cache,page);
   if (guidOnPage) {
     Log.i("GCParser.addToWatchlist: cache is on watchlist");
     cache.setOnWatchlist(true);

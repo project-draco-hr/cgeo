@@ -8,7 +8,7 @@
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","ctl00$ContentBody$btnYes","Yes");
   GCLogin.transferViewstates(page,params);
   page=Network.getResponseData(Network.postRequest(uri,params));
-  final boolean guidOnPage=cache.isGuidContainedInPage(page);
+  final boolean guidOnPage=isGuidContainedInPage(cache,page);
   if (!guidOnPage) {
     Log.i("GCParser.removeFromWatchlist: cache removed from watchlist");
     cache.setOnWatchlist(false);

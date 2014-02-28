@@ -1,0 +1,6 @@
+{
+  if (StringUtils.isBlank(page) || StringUtils.isBlank(cache.getGuid())) {
+    return false;
+  }
+  return Pattern.compile(cache.getGuid(),Pattern.CASE_INSENSITIVE).matcher(page).find();
+}
