@@ -7,8 +7,7 @@
   setContentView(R.layout.simple_dir_chooser);
   fill(currentDir);
   okButton=(Button)findViewById(R.id.simple_dir_chooser_ok);
-  okButton.setEnabled(false);
-  okButton.setVisibility(View.INVISIBLE);
+  resetOkButton();
   okButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       setResult(RESULT_OK,new Intent().setData(Uri.fromFile(new File(currentDir,adapter.getItem(lastPosition).getName()))));
