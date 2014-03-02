@@ -55,7 +55,8 @@
 );
   filter.setOnLongClickListener(new View.OnLongClickListener(){
     @Override public boolean onLongClick(    final View v){
-      selectGlobalTypeFilter();
+      Settings.setCacheType(CacheType.ALL);
+      setFilterTitle();
       return true;
     }
   }
