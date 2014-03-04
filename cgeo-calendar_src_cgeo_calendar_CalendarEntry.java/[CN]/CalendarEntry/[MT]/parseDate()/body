@@ -1,10 +1,11 @@
 {
   try {
-    final Date eventDate=new Date(Long.parseLong(getHiddenDate()));
-    eventDate.setHours(0);
-    eventDate.setMinutes(0);
-    eventDate.setSeconds(0);
-    return eventDate;
+    Calendar cal=Calendar.getInstance();
+    cal.setTimeInMillis(Long.parseLong(getHiddenDate()));
+    cal.set(Calendar.HOUR_OF_DAY,0);
+    cal.set(Calendar.MINUTE,0);
+    cal.set(Calendar.SECOND,0);
+    return cal.getTime();
   }
  catch (  NumberFormatException e) {
   }
