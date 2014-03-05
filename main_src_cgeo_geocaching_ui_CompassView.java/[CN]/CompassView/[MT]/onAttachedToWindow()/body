@@ -16,5 +16,18 @@
 synchronized (this) {
     initialDisplay=true;
   }
-  redrawHandler.start();
+  periodicUpdate=Schedulers.io().schedulePeriodically(new Action1<Scheduler.Inner>(){
+    @Override public void call(    final Scheduler.Inner inner){
+synchronized (CompassView.this) {
+        final float newAzimuthShown=smoothUpdate(northMeasured,azimuthShown);
+        final float newCacheHeadingShown=smoothUpdate(cacheHeadingMeasured,cacheHeadingShown);
+        if (Math.abs(AngleUtils.difference(azimuthShown,newAzimuthShown)) >= 2 || Math.abs(AngleUtils.difference(cacheHeadingShown,newCacheHeadingShown)) >= 2) {
+          azimuthShown=newAzimuthShown;
+          cacheHeadingShown=newCacheHeadingShown;
+          postInvalidate();
+        }
+      }
+    }
+  }
+,0,40,TimeUnit.MILLISECONDS);
 }

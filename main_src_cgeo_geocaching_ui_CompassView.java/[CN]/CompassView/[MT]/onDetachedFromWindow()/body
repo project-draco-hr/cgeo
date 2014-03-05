@@ -1,5 +1,5 @@
 {
-  redrawHandler.stop();
+  periodicUpdate.unsubscribe();
   super.onDetachedFromWindow();
   if (compassUnderlay != null) {
     compassUnderlay.recycle();
