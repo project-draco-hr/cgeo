@@ -18,7 +18,7 @@
         assertEquals(Settings.isGCPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
         assertEquals(Settings.isGCPremiumMember(),parsedCache.isReliableLatLon());
         Settings.setLiveMapStrategy(Strategy.FAST);
-        Tile.Cache.removeFromTileCache(mockedCache);
+        Tile.cache.removeFromTileCache(mockedCache);
         search=ConnectorFactory.searchByViewport(viewport,tokens).toBlockingObservable().single();
         assertNotNull(search);
         assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));

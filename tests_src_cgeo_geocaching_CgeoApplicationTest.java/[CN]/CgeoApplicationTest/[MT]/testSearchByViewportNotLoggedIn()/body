@@ -8,7 +8,7 @@
       try {
         MockedCache cache=new GC2CJPF();
         deleteCacheFromDBAndLogout(cache.getGeocode());
-        Tile.Cache.removeFromTileCache(cache);
+        Tile.cache.removeFromTileCache(cache);
         Settings.setCacheType(CacheType.ALL);
         Viewport viewport=new Viewport(cache,0.003,0.003);
         SearchResult search=ConnectorFactory.searchByViewport(viewport,INVALID_TOKEN).toBlockingObservable().single();
