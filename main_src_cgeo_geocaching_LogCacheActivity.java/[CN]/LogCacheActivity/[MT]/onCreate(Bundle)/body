@@ -2,14 +2,13 @@
   super.onCreate(savedInstanceState,R.layout.logcache_activity);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    cacheid=extras.getString(EXTRAS_ID);
     geocode=extras.getString(EXTRAS_GEOCODE);
-  }
-  if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
-    cacheid=DataStore.getCacheidForGeocode(geocode);
-  }
-  if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
-    geocode=DataStore.getGeocodeForGuid(cacheid);
+    if (StringUtils.isBlank(geocode)) {
+      final String cacheid=extras.getString(EXTRAS_ID);
+      if (StringUtils.isNotBlank(cacheid)) {
+        geocode=DataStore.getGeocodeForGuid(cacheid);
+      }
+    }
   }
   cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   possibleLogTypes=cache.getPossibleLogTypes();
