@@ -4,21 +4,15 @@
   }
   Log.d("Database clean: started");
   try {
-    init();
-    Cursor cursor;
+    Set<String> geocodes=new HashSet<String>();
     if (more) {
-      cursor=database.query(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null);
+      queryToColl(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null,geocodes,GET_STRING_0);
     }
  else {
-      long timestamp=System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
-      String timestampString=Long.toString(timestamp);
-      cursor=database.query(dbTableCaches,new String[]{"geocode"},"reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",new String[]{timestampString,timestampString,timestampString},null,null,null,null);
+      final long timestamp=System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
+      final String timestampString=Long.toString(timestamp);
+      queryToColl(dbTableCaches,new String[]{"geocode"},"reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",new String[]{timestampString,timestampString,timestampString},null,null,null,null,geocodes,GET_STRING_0);
     }
-    Set<String> geocodes=new HashSet<String>();
-    while (cursor.moveToNext()) {
-      geocodes.add(cursor.getString(0));
-    }
-    cursor.close();
     geocodes=exceptCachesWithOfflineLog(geocodes);
     if (!geocodes.isEmpty()) {
       Log.d("Database clean: removing " + geocodes.size() + " geocaches from listId=0");

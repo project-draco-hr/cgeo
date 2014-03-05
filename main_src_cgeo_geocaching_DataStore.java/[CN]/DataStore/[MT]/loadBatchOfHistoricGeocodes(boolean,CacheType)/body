@@ -1,6 +1,4 @@
 {
-  init();
-  final Set<String> geocodes=new HashSet<String>();
   final StringBuilder selection=new StringBuilder("visiteddate > 0");
   if (detailedOnly) {
     selection.append(" and detailed = 1");
@@ -11,14 +9,10 @@
     selectionArgs=new String[]{String.valueOf(cacheType.id)};
   }
   try {
-    final Cursor cursor=database.query(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,"visiteddate",null);
-    while (cursor.moveToNext()) {
-      geocodes.add(cursor.getString(0));
-    }
-    cursor.close();
+    return queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,"visiteddate",null,new HashSet<String>(),GET_STRING_0);
   }
  catch (  Exception e) {
     Log.e("DataStore.loadBatchOfHistoricGeocodes",e);
   }
-  return geocodes;
+  return Collections.EMPTY_SET;
 }

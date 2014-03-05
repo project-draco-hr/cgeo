@@ -1,8 +1,3 @@
 {
-  final String[] result=new String[cursor.getCount()];
-  for (int i=0; cursor.moveToNext(); i++) {
-    result[i]=cursor.getString(0);
-  }
-  cursor.close();
-  return result;
+  return cursorToColl(cursor,new LinkedList<String>(),GET_STRING_0).toArray(new String[cursor.getCount()]);
 }

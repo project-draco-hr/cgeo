@@ -2,12 +2,5 @@
   if (StringUtils.isBlank(geocode)) {
     return null;
   }
-  init();
-  final ArrayList<String> attributes=new ArrayList<String>();
-  final Cursor cursor=database.query(dbTableAttributes,new String[]{"attribute"},"geocode = ?",new String[]{geocode},null,null,null,"100");
-  while (cursor.moveToNext()) {
-    attributes.add(cursor.getString(0));
-  }
-  cursor.close();
-  return attributes;
+  return queryToColl(dbTableAttributes,new String[]{"attribute"},"geocode = ?",new String[]{geocode},null,null,null,"100",new LinkedList<String>(),GET_STRING_0);
 }

@@ -2,12 +2,11 @@
   final int indexId=cursor.getColumnIndex("_id");
   final int indexTitle=cursor.getColumnIndex("title");
   final int indexCount=cursor.getColumnIndex("count");
-  final ArrayList<StoredList> result=new ArrayList<StoredList>();
-  while (cursor.moveToNext()) {
-    final int count=indexCount != -1 ? cursor.getInt(indexCount) : 0;
-    final StoredList list=new StoredList(cursor.getInt(indexId) + customListIdOffset,cursor.getString(indexTitle),count);
-    result.add(list);
+  return cursorToColl(cursor,new ArrayList<StoredList>(),new Func1<Cursor,StoredList>(){
+    @Override public StoredList call(    final Cursor cursor){
+      final int count=indexCount != -1 ? cursor.getInt(indexCount) : 0;
+      return new StoredList(cursor.getInt(indexId) + customListIdOffset,cursor.getString(indexTitle),count);
+    }
   }
-  cursor.close();
-  return result;
+);
 }

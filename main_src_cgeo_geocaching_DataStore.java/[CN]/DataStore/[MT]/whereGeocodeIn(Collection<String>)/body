@@ -1,0 +1,12 @@
+{
+  final StringBuilder whereExpr=new StringBuilder("geocode in (");
+  final Iterator<String> iterator=geocodes.iterator();
+  while (true) {
+    whereExpr.append(DatabaseUtils.sqlEscapeString(StringUtils.upperCase(iterator.next())));
+    if (!iterator.hasNext()) {
+      break;
+    }
+    whereExpr.append(',');
+  }
+  return whereExpr.append(')');
+}

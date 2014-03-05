@@ -2,12 +2,10 @@
   if (StringUtils.isBlank(geocode)) {
     return null;
   }
-  init();
-  final List<Waypoint> waypoints=new ArrayList<Waypoint>();
-  final Cursor cursor=database.query(dbTableWaypoints,WAYPOINT_COLUMNS,"geocode = ?",new String[]{geocode},null,null,"_id","100");
-  while (cursor.moveToNext()) {
-    waypoints.add(createWaypointFromDatabaseContent(cursor));
+  return queryToColl(dbTableWaypoints,WAYPOINT_COLUMNS,"geocode = ?",new String[]{geocode},null,null,"_id","100",new LinkedList<Waypoint>(),new Func1<Cursor,Waypoint>(){
+    @Override public Waypoint call(    final Cursor cursor){
+      return createWaypointFromDatabaseContent(cursor);
+    }
   }
-  cursor.close();
-  return waypoints;
+);
 }

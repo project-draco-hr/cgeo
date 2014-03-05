@@ -2,12 +2,10 @@
   if (StringUtils.isBlank(geocode)) {
     return null;
   }
-  init();
-  final List<Image> spoilers=new ArrayList<Image>();
-  final Cursor cursor=database.query(dbTableSpoilers,new String[]{"url","title","description"},"geocode = ?",new String[]{geocode},null,null,null,"100");
-  while (cursor.moveToNext()) {
-    spoilers.add(new Image(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
+  return queryToColl(dbTableSpoilers,new String[]{"url","title","description"},"geocode = ?",new String[]{geocode},null,null,null,"100",new LinkedList<Image>(),new Func1<Cursor,Image>(){
+    @Override public Image call(    final Cursor cursor){
+      return new Image(cursor.getString(0),cursor.getString(1),cursor.getString(2));
+    }
   }
-  cursor.close();
-  return spoilers;
+);
 }

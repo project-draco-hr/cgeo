@@ -2,8 +2,6 @@
   if (cacheType == null) {
     throw new IllegalArgumentException("cacheType must not be null");
   }
-  init();
-  final Set<String> geocodes=new HashSet<String>();
   final StringBuilder selection=new StringBuilder();
   selection.append("reason ");
   selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId,1) : ">= " + StoredList.STANDARD_LIST_ID);
@@ -14,20 +12,15 @@
     selectionArgs=new String[]{String.valueOf(cacheType.id)};
   }
   try {
-    Cursor cursor;
     if (coords != null) {
-      cursor=database.query(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},selection.toString(),selectionArgs,null,null,"dif",null);
+      return queryToColl(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},selection.toString(),selectionArgs,null,null,"dif",null,new HashSet<String>(),GET_STRING_0);
     }
  else {
-      cursor=database.query(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,"geocode");
+      return queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,"geocode",null,new HashSet<String>(),GET_STRING_0);
     }
-    while (cursor.moveToNext()) {
-      geocodes.add(cursor.getString(0));
-    }
-    cursor.close();
   }
  catch (  final Exception e) {
     Log.e("DataStore.loadBatchOfStoredGeocodes",e);
+    return Collections.EMPTY_SET;
   }
-  return geocodes;
 }
