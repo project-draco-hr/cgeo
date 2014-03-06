@@ -1,0 +1,9 @@
+{
+  if (locationData == null) {
+    return;
+  }
+  final int visible=gpsLocation.isRecent() ? satellitesVisible : 0;
+  final boolean pseudoLocation=StringUtils.equals(locationData.location.getProvider(),LAST_LOCATION_PSEUDO_PROVIDER);
+  final IGeoData current=new GeoData(locationData.location,gpsEnabled,visible,satellitesFixed,pseudoLocation);
+  subject.onNext(current);
+}
