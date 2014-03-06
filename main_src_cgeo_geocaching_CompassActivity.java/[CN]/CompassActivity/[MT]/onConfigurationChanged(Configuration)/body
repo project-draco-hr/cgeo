@@ -8,10 +8,6 @@
   final CgeoApplication app=CgeoApplication.getInstance();
   final IGeoData geo=app.currentGeo();
   if (geo != null) {
-    geoDirHandler.updateGeoData(geo);
-  }
-  final Float dir=app.currentDirection();
-  if (dir != null) {
-    geoDirHandler.updateDirection(dir);
+    geoDirHandler.updateGeoDir(geo,app.currentDirection());
   }
 }

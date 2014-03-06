@@ -12,16 +12,11 @@
     startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
     return;
   }
- else   if (switchLocale == TextToSpeech.LANG_NOT_SUPPORTED) {
+  if (switchLocale == TextToSpeech.LANG_NOT_SUPPORTED) {
     Log.e("Current languge not supported by text to speech.");
     ActivityMixin.showToast(startingActivity,R.string.err_tts_lang_not_supported);
     return;
   }
   initialized=true;
-  if (Settings.isUseCompass()) {
-    geoHandler.startGeoAndDir();
-  }
- else {
-    geoHandler.startGeo();
-  }
+  geoDirHandler.start();
 }

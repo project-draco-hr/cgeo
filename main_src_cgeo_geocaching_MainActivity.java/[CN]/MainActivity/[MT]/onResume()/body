@@ -1,7 +1,7 @@
 {
   super.onResume();
-  locationUpdater.startGeo();
-  satellitesHandler.startGeo();
+  locationUpdater.start();
+  satellitesHandler.start();
   updateUserInfoHandler.sendEmptyMessage(-1);
   startBackgroundLogin();
   init();

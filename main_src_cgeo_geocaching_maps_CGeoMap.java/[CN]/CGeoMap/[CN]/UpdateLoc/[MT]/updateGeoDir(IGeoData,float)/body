@@ -5,9 +5,7 @@
  else {
     locationValid=true;
     currentLocation=geo.getLocation();
-    if (!Settings.isUseCompass() || geo.getSpeed() > 5) {
-      currentHeading=geo.getBearing();
-    }
+    currentHeading=dir;
     repaintPositionOverlay();
   }
 }
