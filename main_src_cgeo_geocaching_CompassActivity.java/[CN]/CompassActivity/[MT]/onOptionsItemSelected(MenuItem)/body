@@ -8,12 +8,6 @@ case R.id.menu_switch_compass_gps:
 boolean oldSetting=Settings.isUseCompass();
 Settings.setUseCompass(!oldSetting);
 invalidateOptionsMenuCompatible();
-if (oldSetting) {
-geoDirHandler.stopDir();
-}
- else {
-geoDirHandler.startDir();
-}
 return true;
 case R.id.menu_edit_destination:
 Intent pointIntent=new Intent(this,NavigateAnyPointActivity.class);

@@ -1,0 +1,5 @@
+{
+  final IGeoData geoData=geoDir.left;
+  final boolean useGPSBearing=!Settings.isUseCompass() || geoData.getSpeed() > 5;
+  updateGeoDir(geoData,useGPSBearing ? geoData.getBearing() : geoDir.right);
+}
