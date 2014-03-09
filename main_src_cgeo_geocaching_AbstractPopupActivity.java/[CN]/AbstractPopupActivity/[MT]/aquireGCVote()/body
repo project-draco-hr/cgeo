@@ -5,21 +5,18 @@
   if (!cache.supportsGCVote()) {
     return;
   }
-  (new Thread("Load GCVote"){
-    @Override public void run(){
+  AndroidObservable.fromActivity(this,Observable.defer(new Func0<Observable<GCVoteRating>>(){
+    @Override public Observable<GCVoteRating> call(){
       final GCVoteRating rating=GCVote.getRating(cache.getGuid(),geocode);
-      if (rating == null) {
-        return;
-      }
-      cache.setRating(rating.getRating());
-      cache.setVotes(rating.getVotes());
-      runOnUiThread(new Runnable(){
-        @Override public void run(){
-          details.addRating(cache);
-        }
-      }
-);
+      return rating != null ? Observable.just(rating) : Observable.<GCVoteRating>empty();
     }
   }
-).start();
+).subscribeOn(Schedulers.io())).subscribe(new Action1<GCVoteRating>(){
+    @Override public void call(    final GCVoteRating rating){
+      cache.setRating(rating.getRating());
+      cache.setVotes(rating.getVotes());
+      details.addRating(cache);
+    }
+  }
+);
 }
