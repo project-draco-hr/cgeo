@@ -1,6 +1,5 @@
 {
-  stopTimer();
-  geoDirUpdate.stop();
+  resumeSubscription.unsubscribe();
   savePrefs();
   if (mapView != null) {
     mapView.destroyDrawingCache();

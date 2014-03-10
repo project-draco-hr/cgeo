@@ -1,10 +1,10 @@
 {
   if (coordsIntent != null) {
     displayPoint(coordsIntent);
+    loadTimer=Subscriptions.empty();
   }
  else {
-    stopTimer();
-    loadTimer=new LoadTimer();
-    loadTimer.start();
+    loadTimer=startLoadTimer();
   }
+  return loadTimer;
 }

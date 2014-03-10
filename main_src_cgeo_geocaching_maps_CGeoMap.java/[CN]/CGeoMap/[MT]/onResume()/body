@@ -1,6 +1,6 @@
 {
   super.onResume();
-  geoDirUpdate.start();
+  resumeSubscription=Subscriptions.from(geoDirUpdate.start(),startTimer());
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
     for (    String geocode : dirtyCaches) {
       Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
@@ -12,5 +12,4 @@
     dirtyCaches.clear();
     displayExecutor.execute(new DisplayRunnable(mapView.getViewport()));
   }
-  startTimer();
 }

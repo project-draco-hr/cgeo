@@ -1,6 +1,3 @@
 {
-  if (loadTimer != null) {
-    return loadTimer.isLoading();
-  }
-  return false;
+  return !loadTimer.isUnsubscribed() && (loadExecutor.getActiveCount() > 0 || downloadExecutor.getActiveCount() > 0 || displayExecutor.getActiveCount() > 0);
 }
