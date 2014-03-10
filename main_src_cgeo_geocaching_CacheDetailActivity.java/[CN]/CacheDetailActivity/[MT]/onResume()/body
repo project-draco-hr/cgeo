@@ -1,8 +1,7 @@
 {
-  super.onResume();
+  super.onResume(locationUpdater.start());
   if (refreshOnResume) {
     notifyDataSetChanged();
     refreshOnResume=false;
   }
-  locationUpdater.start();
 }

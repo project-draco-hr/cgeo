@@ -1,7 +1,5 @@
 {
-  super.onResume();
-  locationUpdater.start();
-  satellitesHandler.start();
+  super.onResume(Subscriptions.from(locationUpdater.start(),satellitesHandler.start()));
   updateUserInfoHandler.sendEmptyMessage(-1);
   startBackgroundLogin();
   init();
