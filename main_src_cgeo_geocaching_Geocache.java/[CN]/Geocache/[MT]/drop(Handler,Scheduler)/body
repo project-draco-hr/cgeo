@@ -1,0 +1,14 @@
+{
+  return scheduler.schedule(new Action1<Inner>(){
+    @Override public void call(    final Inner inner){
+      try {
+        dropSynchronous();
+        handler.sendMessage(Message.obtain());
+      }
+ catch (      final Exception e) {
+        Log.e("cache.drop: ",e);
+      }
+    }
+  }
+);
+}

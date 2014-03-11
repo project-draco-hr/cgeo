@@ -5,5 +5,5 @@
   }
   final DropCacheHandler dropCacheHandler=new DropCacheHandler();
   progress.show(CachePopup.this,res.getString(R.string.cache_dialog_offline_drop_title),res.getString(R.string.cache_dialog_offline_drop_message),true,null);
-  new DropCacheThread(dropCacheHandler).start();
+  cache.drop(dropCacheHandler,Schedulers.io());
 }
