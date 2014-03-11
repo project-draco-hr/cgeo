@@ -8,12 +8,12 @@
   final ProgressDialog loginDialog=ProgressDialog.show(activity,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
   loginDialog.setCancelable(false);
   Cookies.clearCookies();
-  AndroidObservable.fromActivity(activity,Observable.defer(new Func0<Observable<ImmutablePair<StatusCode,Drawable>>>(){
-    @Override public Observable<ImmutablePair<StatusCode,Drawable>> call(){
-      return Observable.from(login());
+  AndroidObservable.fromActivity(activity,Async.start(new Func0<ImmutablePair<StatusCode,Drawable>>(){
+    @Override public ImmutablePair<StatusCode,Drawable> call(){
+      return login();
     }
   }
-).subscribeOn(Schedulers.io())).subscribe(new Action1<ImmutablePair<StatusCode,Drawable>>(){
+,Schedulers.io())).subscribe(new Action1<ImmutablePair<StatusCode,Drawable>>(){
     @Override public void call(    final ImmutablePair<StatusCode,Drawable> loginInfo){
       loginDialog.dismiss();
       if (loginInfo.getLeft() == StatusCode.NO_ERROR) {
