@@ -113,5 +113,13 @@
     }
   }
 );
-  new LoadCacheThread(geocode,guid,loadCacheHandler).start();
+  final String realGeocode=geocode;
+  final String realGuid=guid;
+  Schedulers.io().schedule(new Action1<Inner>(){
+    @Override public void call(    final Inner inner){
+      search=Geocache.searchByGeocode(realGeocode,StringUtils.isBlank(realGeocode) ? realGuid : null,0,false,loadCacheHandler);
+      loadCacheHandler.sendMessage(Message.obtain());
+    }
+  }
+);
 }
