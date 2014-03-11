@@ -1,0 +1,9 @@
+{
+  return scheduler.schedule(new Action1<Inner>(){
+    @Override public void call(    final Inner inner){
+      refreshSynchronous(newListId,handler);
+      handler.sendEmptyMessage(CancellableHandler.DONE);
+    }
+  }
+);
+}

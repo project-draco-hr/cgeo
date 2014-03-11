@@ -4,7 +4,7 @@
       throw new InterruptedException("Stopped storing process.");
     }
     detailProgress++;
-    cache.refresh(listIdLD,null);
+    cache.refreshSynchronous(listIdLD,null);
     handler.sendEmptyMessage(cacheList.indexOf(cache));
   }
  catch (  final InterruptedException e) {

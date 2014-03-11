@@ -9,5 +9,5 @@
   }
   final StoreCacheHandler refreshCacheHandler=new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
   progress.show(CachePopup.this,res.getString(R.string.cache_dialog_refresh_title),res.getString(R.string.cache_dialog_refresh_message),true,refreshCacheHandler.cancelMessage());
-  new RefreshCacheThread(refreshCacheHandler).start();
+  cache.refresh(cache.getListId(),refreshCacheHandler,Schedulers.io());
 }
