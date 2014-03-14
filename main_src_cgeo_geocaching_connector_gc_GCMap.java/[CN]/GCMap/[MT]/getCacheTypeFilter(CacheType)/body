@@ -1,0 +1,47 @@
+{
+  Set<String> filterTypes=new HashSet<String>();
+  filterTypes.addAll(Arrays.asList("2","9","5","3","6","453","13","1304","4","11","137","8","1858"));
+switch (typeToDisplay) {
+case TRADITIONAL:
+    filterTypes.remove("2");
+  break;
+case PROJECT_APE:
+filterTypes.remove("9");
+break;
+case LETTERBOX:
+filterTypes.remove("5");
+break;
+case MULTI:
+filterTypes.remove("3");
+break;
+case EVENT:
+filterTypes.remove("6");
+break;
+case MEGA_EVENT:
+filterTypes.remove("453");
+break;
+case CITO:
+filterTypes.remove("13");
+break;
+case GPS_EXHIBIT:
+filterTypes.remove("1304");
+break;
+case VIRTUAL:
+filterTypes.remove("4");
+break;
+case WEBCAM:
+filterTypes.remove("11");
+break;
+case EARTH:
+filterTypes.remove("137");
+break;
+case MYSTERY:
+filterTypes.remove("8");
+break;
+case WHERIGO:
+filterTypes.remove("1858");
+break;
+default :
+}
+return StringUtils.join(filterTypes.toArray(),",");
+}

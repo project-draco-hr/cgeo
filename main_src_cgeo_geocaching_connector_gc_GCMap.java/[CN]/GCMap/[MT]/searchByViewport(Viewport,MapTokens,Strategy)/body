@@ -18,14 +18,8 @@
         if (Settings.isExcludeMyCaches()) {
           params.put("hf","1","hh","1");
         }
-        if (Settings.getCacheType() == CacheType.TRADITIONAL) {
-          params.put("ect","9,5,3,6,453,13,1304,137,11,4,8,1858");
-        }
- else         if (Settings.getCacheType() == CacheType.MULTI) {
-          params.put("ect","9,5,2,6,453,13,1304,137,11,4,8,1858");
-        }
- else         if (Settings.getCacheType() == CacheType.MYSTERY) {
-          params.put("ect","9,5,3,6,453,13,1304,137,11,4,2,1858");
+        if (Settings.getCacheType() != CacheType.ALL) {
+          params.put("ect",getCacheTypeFilter(Settings.getCacheType()));
         }
         if (tile.getZoomLevel() != 14) {
           params.put("_",String.valueOf(System.currentTimeMillis()));
