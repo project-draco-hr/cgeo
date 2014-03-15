@@ -2,7 +2,7 @@
   final List<String> titles=new ArrayList<String>(5);
   for (  Image image : getLogImages()) {
     if (StringUtils.isNotBlank(image.getTitle())) {
-      titles.add(image.getTitle());
+      titles.add(HtmlUtils.extractText(image.getTitle()));
     }
   }
   if (titles.isEmpty()) {
