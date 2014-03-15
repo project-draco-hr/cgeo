@@ -1,5 +1,9 @@
 {
   final String bbox=viewport.bottomLeft.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA) + "," + viewport.topRight.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
-  final HttpResponse response=getRequest(API_URL_CACHES_GPX,new Parameters("log_limit","0","hint","false","description","none","limit","100","bbox",bbox));
-  return importCachesFromResponse(response,false);
+  final Parameters queryParameters=new Parameters("log_limit","0","hint","false","description","none","limit","100","bbox",bbox);
+  if (addTypeFilter(queryParameters)) {
+    final HttpResponse response=getRequest(API_URL_CACHES_GPX,queryParameters);
+    return importCachesFromResponse(response,false);
+  }
+  return Collections.emptyList();
 }

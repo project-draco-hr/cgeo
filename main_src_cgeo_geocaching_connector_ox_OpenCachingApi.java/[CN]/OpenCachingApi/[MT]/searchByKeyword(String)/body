@@ -1,4 +1,8 @@
 {
-  final HttpResponse response=getRequest(API_URL_CACHES_GPX,new Parameters("log_limit","5","hint","false","description","none","limit","100","name",name));
-  return importCachesFromResponse(response,false);
+  final Parameters queryParameters=new Parameters("log_limit","5","hint","false","description","none","limit","100","name",name);
+  if (addTypeFilter(queryParameters)) {
+    final HttpResponse response=getRequest(API_URL_CACHES_GPX,queryParameters);
+    return importCachesFromResponse(response,false);
+  }
+  return Collections.emptyList();
 }
