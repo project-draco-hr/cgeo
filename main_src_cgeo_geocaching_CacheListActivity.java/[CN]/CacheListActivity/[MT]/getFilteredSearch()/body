@@ -1,0 +1,7 @@
+{
+  final Set<String> geocodes=new HashSet<String>();
+  for (  final Geocache cache : adapter.getFilteredList()) {
+    geocodes.add(cache.getGeocode());
+  }
+  return new SearchResult(geocodes);
+}
