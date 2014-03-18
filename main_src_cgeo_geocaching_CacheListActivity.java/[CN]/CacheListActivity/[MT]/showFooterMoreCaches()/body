@@ -1,8 +1,5 @@
 {
-  if (listFooter == null) {
-    return;
-  }
-  boolean enableMore=(type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS);
+  boolean enableMore=type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS;
   if (enableMore && search != null) {
     final int count=search.getTotalCountGC();
     enableMore=count > 0 && cacheList.size() < count;

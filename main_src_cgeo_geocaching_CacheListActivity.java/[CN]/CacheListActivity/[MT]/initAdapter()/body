@@ -1,0 +1,13 @@
+{
+  final ListView list=getListView();
+  adapter=new CacheListAdapter(this,cacheList,type);
+  setListAdapter(adapter);
+  adapter.forceSort();
+  registerForContextMenu(list);
+  list.setLongClickable(true);
+  listFooter=getLayoutInflater().inflate(R.layout.cacheslist_footer,null);
+  listFooter.setClickable(true);
+  listFooter.setOnClickListener(new MoreCachesListener());
+  listFooterText=(TextView)listFooter.findViewById(R.id.more_caches);
+  list.addFooterView(listFooter);
+}
