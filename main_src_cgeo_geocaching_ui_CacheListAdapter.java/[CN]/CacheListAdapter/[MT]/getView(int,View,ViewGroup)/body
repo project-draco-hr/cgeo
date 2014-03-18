@@ -17,17 +17,10 @@
     holder=(ViewHolder)v.getTag();
   }
   final boolean lightSkin=Settings.isLightSkin();
-  final TouchListener touchLst=new TouchListener(cache);
-  v.setOnClickListener(touchLst);
-  v.setOnLongClickListener(touchLst);
-  v.setOnTouchListener(touchLst);
-  v.setLongClickable(true);
-  if (selectMode) {
-    holder.checkbox.setVisibility(View.VISIBLE);
-  }
- else {
-    holder.checkbox.setVisibility(View.GONE);
-  }
+  final TouchListener touchListener=new TouchListener(cache,v);
+  v.setOnClickListener(touchListener);
+  v.setOnTouchListener(touchListener);
+  holder.checkbox.setVisibility(selectMode ? View.VISIBLE : View.GONE);
   holder.checkbox.setChecked(cache.isStatusChecked());
   holder.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache));
   distances.add(holder.distance);
