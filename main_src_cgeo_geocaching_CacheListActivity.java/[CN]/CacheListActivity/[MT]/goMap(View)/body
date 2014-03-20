@@ -1,13 +1,8 @@
 {
-  if (search == null || CollectionUtils.isEmpty(cacheList)) {
-    showToast(res.getString(R.string.warn_no_cache_coord));
+  if (!isThereAnyCacheToShowOnMap()) {
     return;
   }
-  final Set<String> geocodes=new HashSet<String>();
-  for (  final Geocache cache : adapter.getFilteredList()) {
-    geocodes.add(cache.getGeocode());
-  }
-  final SearchResult searchToUse=new SearchResult(geocodes);
+  final SearchResult searchToUse=getFilteredSearch();
   final int count=searchToUse.getCount();
   String mapTitle=title;
   if (count > 0) {

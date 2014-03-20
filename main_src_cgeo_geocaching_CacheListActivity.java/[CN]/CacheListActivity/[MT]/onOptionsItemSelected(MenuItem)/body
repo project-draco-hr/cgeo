@@ -85,8 +85,7 @@ clearOfflineLogs();
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_cache_list_app:
-if (search == null || CollectionUtils.isEmpty(cacheList)) {
-showToast(res.getString(R.string.warn_no_cache_coord));
+if (!isThereAnyCacheToShowOnMap()) {
 return false;
 }
 return CacheListAppFactory.onMenuItemSelected(item,cacheList,this,getFilteredSearch());
