@@ -1,4 +1,4 @@
 {
-  final String encoded=Network.encode(text);
+  final String encoded=encode(text);
   return encoded != null ? StringUtils.replace(encoded.replace("+","%20"),"%7E","~") : null;
 }

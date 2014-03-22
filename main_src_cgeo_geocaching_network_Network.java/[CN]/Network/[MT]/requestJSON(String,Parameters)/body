@@ -1,6 +1,6 @@
 {
   final HttpResponse response=request("GET",uri,params,new Parameters("Accept","application/json, text/javascript, */*; q=0.01"),null);
-  final String responseData=Network.getResponseData(response,false);
+  final String responseData=getResponseData(response,false);
   if (responseData != null) {
     try {
       return new JSONObject(responseData);

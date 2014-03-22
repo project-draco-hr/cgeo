@@ -1,21 +1,21 @@
 {
-  final String reqLogStr=request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
+  final String reqLogStr=request.getMethod() + " " + hidePassword(request.getURI().toString());
   Log.d(reqLogStr);
-  final HttpClient client=Network.getHttpClient();
+  final HttpClient client=getHttpClient();
   final long before=System.currentTimeMillis();
   try {
     final HttpResponse response=client.execute(request);
     int status=response.getStatusLine().getStatusCode();
     if (status == 200) {
-      Log.d(status + Network.formatTimeSpan(before) + reqLogStr);
+      Log.d(status + formatTimeSpan(before) + reqLogStr);
     }
  else {
-      Log.w(status + " [" + response.getStatusLine().getReasonPhrase()+ "]"+ Network.formatTimeSpan(before)+ reqLogStr);
+      Log.w(status + " [" + response.getStatusLine().getReasonPhrase()+ "]"+ formatTimeSpan(before)+ reqLogStr);
     }
     return response;
   }
  catch (  final IOException e) {
-    final String timeSpan=Network.formatTimeSpan(before);
+    final String timeSpan=formatTimeSpan(before);
     Log.w("Failure" + timeSpan + reqLogStr+ " ("+ e.toString()+ ")");
   }
   return null;
