@@ -1,10 +1,6 @@
 {
   super.onDetachedFromWindow();
-  instances--;
-  if (instances == 0) {
-    if (compassArrow != null) {
-      compassArrow.recycle();
-      compassArrow=null;
-    }
+  if (--instances == 0) {
+    compassArrow.recycle();
   }
 }

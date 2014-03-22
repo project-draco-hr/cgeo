@@ -2,8 +2,8 @@
   if (compassArrow == null || compassArrow.isRecycled()) {
     return;
   }
-  float azimuthRelative=calculateAzimuthRelative();
-  float change=Math.abs(azimuthRelative - lastDrawingAzimuth);
+  azimuthRelative=AngleUtils.normalize(azimuth - heading);
+  float change=Math.abs(azimuthRelative - lastDrawnAzimuth);
   if (change < MINIMUM_ROTATION_DEGREES_FOR_REPAINT) {
     return;
   }
