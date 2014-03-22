@@ -1,12 +1,6 @@
 {
-  float azimuthDrawn;
-  float headingDrawn;
-synchronized (this) {
-    azimuthDrawn=azimuthShown;
-    headingDrawn=cacheHeadingShown;
-  }
-  final float azimuthTemp=azimuthDrawn;
-  final float azimuthRelative=AngleUtils.normalize(azimuthTemp - headingDrawn);
+  final float azimuthTemp=azimuthShown;
+  final float azimuthRelative=AngleUtils.normalize(azimuthTemp - cacheHeadingShown);
   final int canvasCenterX=(compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
   final int canvasCenterY=(compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
   super.onDraw(canvas);
