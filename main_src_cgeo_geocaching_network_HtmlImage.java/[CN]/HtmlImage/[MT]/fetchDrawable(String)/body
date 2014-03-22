@@ -1,5 +1,5 @@
 {
-  if (StringUtils.isBlank(url) || isCounter(url)) {
+  if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url,BLOCKED)) {
     return Observable.from(getTransparent1x1Image(resources));
   }
   final boolean shared=url.contains("/images/icons/icon_");
