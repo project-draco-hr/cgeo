@@ -20,6 +20,7 @@
       database.delete(dbTableCaches,baseWhereClause,null);
       database.delete(dbTableAttributes,baseWhereClause,null);
       database.delete(dbTableSpoilers,baseWhereClause,null);
+      database.delete(dbTableLogImages,"log_id IN (SELECT _id FROM " + dbTableLogs + " WHERE "+ baseWhereClause+ ")",null);
       database.delete(dbTableLogs,baseWhereClause,null);
       database.delete(dbTableLogCount,baseWhereClause,null);
       database.delete(dbTableLogsOffline,baseWhereClause,null);
