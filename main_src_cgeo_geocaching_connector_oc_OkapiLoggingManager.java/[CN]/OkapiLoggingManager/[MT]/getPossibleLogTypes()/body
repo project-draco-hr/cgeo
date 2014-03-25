@@ -1,3 +1,6 @@
 {
+  if (hasLoaderError) {
+    return Collections.emptyList();
+  }
   return connector.getPossibleLogTypes(cache);
 }
