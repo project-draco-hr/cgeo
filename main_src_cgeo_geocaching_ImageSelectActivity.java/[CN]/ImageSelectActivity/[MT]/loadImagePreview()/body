@@ -6,7 +6,7 @@
     Log.i("Image does not exist");
     return;
   }
-  @SuppressWarnings("null") final Bitmap bitmap=ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
+  final Bitmap bitmap=ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
   imagePreview.setImageBitmap(bitmap);
   imagePreview.setVisibility(View.VISIBLE);
 }
