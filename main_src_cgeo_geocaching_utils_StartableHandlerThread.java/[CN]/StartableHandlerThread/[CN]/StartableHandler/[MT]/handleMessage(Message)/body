@@ -1,0 +1,12 @@
+{
+  if (callback != null) {
+switch (message.what) {
+case START:
+      callback.start((Context)message.obj,this);
+    break;
+case STOP:
+  callback.stop();
+break;
+}
+}
+}

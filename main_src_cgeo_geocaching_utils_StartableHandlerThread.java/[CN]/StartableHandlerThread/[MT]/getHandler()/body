@@ -1,0 +1,10 @@
+{
+  if (handler == null) {
+synchronized (this) {
+      if (handler == null) {
+        handler=new StartableHandler();
+      }
+    }
+  }
+  return handler;
+}

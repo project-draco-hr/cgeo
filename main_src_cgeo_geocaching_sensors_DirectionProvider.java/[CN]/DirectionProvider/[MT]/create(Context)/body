@@ -1,3 +1,9 @@
 {
-  return new DirectionProvider((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).worker.refCount();
+  return Observable.create(new OnSubscribe<Float>(){
+    @Override public void call(    final Subscriber<? super Float> subscriber){
+      handlerThread.start(subscriber,context);
+      subject.subscribe(subscriber);
+    }
+  }
+);
 }
