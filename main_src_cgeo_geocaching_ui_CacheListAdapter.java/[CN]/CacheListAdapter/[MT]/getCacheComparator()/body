@@ -1,3 +1,9 @@
 {
+  if (isHistory()) {
+    return VisitComparator.singleton;
+  }
+  if (cacheComparator == null && eventsOnly) {
+    return EventDateComparator.singleton;
+  }
   return cacheComparator;
 }

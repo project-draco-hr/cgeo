@@ -7,9 +7,7 @@
   this.res=activity.getResources();
   this.list=list;
   this.cacheListType=cacheListType;
-  if (cacheListType == CacheListType.HISTORY) {
-    cacheComparator=new VisitComparator();
-  }
+  checkEvents();
   final Drawable modifiedCoordinatesMarker=activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
   for (  final CacheType cacheType : CacheType.values()) {
     int hashCode=getIconHashCode(cacheType,false);

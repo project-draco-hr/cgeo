@@ -1,0 +1,9 @@
+{
+  eventsOnly=true;
+  for (  final Geocache cache : list) {
+    if (!cache.isEventCache()) {
+      eventsOnly=false;
+      return;
+    }
+  }
+}

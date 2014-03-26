@@ -1,3 +1,4 @@
 {
-  return cacheComparator == null || cacheComparator instanceof DistanceComparator;
+  final CacheComparator comparator=getCacheComparator();
+  return comparator == null || comparator instanceof DistanceComparator;
 }
