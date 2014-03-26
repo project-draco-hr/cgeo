@@ -1,3 +1,3 @@
 {
-  return currentGeoDir().left;
+  return currentGeo != null ? currentGeo : geoDataObservable().toBlockingObservable().first();
 }

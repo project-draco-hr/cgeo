@@ -1,6 +1,6 @@
 {
   super.onResume();
-  resumeSubscription=geoDirHandler.start();
+  resumeSubscription=geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION);
   adapter.setSelectMode(false);
   setAdapterCurrentCoordinates(true);
   if (search != null) {

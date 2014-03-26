@@ -1,6 +1,6 @@
 {
   super.onResume();
-  resumeSubscription=Subscriptions.from(geoDirUpdate.start(),startTimer());
+  resumeSubscription=Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR),startTimer());
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
     for (    String geocode : dirtyCaches) {
       Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);

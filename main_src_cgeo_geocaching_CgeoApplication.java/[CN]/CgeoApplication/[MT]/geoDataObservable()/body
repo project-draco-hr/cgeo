@@ -1,0 +1,13 @@
+{
+  if (geoDataObservable == null) {
+    final ConnectableObservable<IGeoData> onDemand=GeoDataProvider.create(this).publish();
+    onDemand.subscribe(new Action1<IGeoData>(){
+      @Override public void call(      final IGeoData geoData){
+        currentGeo=geoData;
+      }
+    }
+);
+    geoDataObservable=onDemand.refCount();
+  }
+  return geoDataObservable;
+}

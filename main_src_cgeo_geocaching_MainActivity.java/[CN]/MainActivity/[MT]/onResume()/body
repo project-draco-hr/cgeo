@@ -1,5 +1,5 @@
 {
-  super.onResume(Subscriptions.from(locationUpdater.start(),satellitesHandler.start()));
+  super.onResume(Subscriptions.from(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA),satellitesHandler.start(GeoDirHandler.UPDATE_GEODATA)));
   updateUserInfoHandler.sendEmptyMessage(-1);
   startBackgroundLogin();
   init();

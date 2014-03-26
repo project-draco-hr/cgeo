@@ -1,0 +1,9 @@
+{
+  return app.directionObservable().map(new Func1<Float,Float>(){
+    @Override public Float call(    final Float direction){
+      final IGeoData geoData=app.currentGeo();
+      return fixDirection(geoData,direction);
+    }
+  }
+);
+}
