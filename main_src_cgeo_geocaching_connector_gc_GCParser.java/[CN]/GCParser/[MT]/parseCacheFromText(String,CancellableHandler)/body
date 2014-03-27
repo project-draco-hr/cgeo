@@ -86,15 +86,6 @@
     cache.setSize(CacheSize.getById(TextUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id)));
   }
   cache.setFound(TextUtils.matches(page,GCConstants.PATTERN_FOUND) || TextUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));
-  try {
-    final String foundDateString=TextUtils.getMatch(page,GCConstants.PATTERN_FOUND_DATE,true,null);
-    if (StringUtils.isNotBlank(foundDateString)) {
-      cache.setVisitedDate(GCLogin.parseGcCustomDate(foundDateString).getTime());
-    }
-  }
- catch (  final ParseException e) {
-    Log.w("GCParser.parseCache: Failed to parse cache found date");
-  }
   cache.setType(CacheType.getByPattern(TextUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getType().id)));
   cache.setOnWatchlist(TextUtils.matches(page,GCConstants.PATTERN_WATCHLIST));
   String latlon=TextUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,"");
