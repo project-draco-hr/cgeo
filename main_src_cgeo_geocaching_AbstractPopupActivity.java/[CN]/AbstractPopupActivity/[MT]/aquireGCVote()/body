@@ -15,6 +15,7 @@
     @Override public void call(    final GCVoteRating rating){
       cache.setRating(rating.getRating());
       cache.setVotes(rating.getVotes());
+      DataStore.saveChangedCache(cache);
       details.addRating(cache);
     }
   }
