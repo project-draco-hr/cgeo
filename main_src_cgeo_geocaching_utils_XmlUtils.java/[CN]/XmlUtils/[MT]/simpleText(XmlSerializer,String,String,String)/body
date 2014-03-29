@@ -1,5 +1,7 @@
 {
-  serializer.startTag(prefix,tag);
-  serializer.text(text);
-  serializer.endTag(prefix,tag);
+  if (text != null) {
+    serializer.startTag(prefix,tag);
+    serializer.text(text);
+    serializer.endTag(prefix,tag);
+  }
 }
