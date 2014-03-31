@@ -11,7 +11,7 @@
         Tile.cache.removeFromTileCache(cache);
         Settings.setCacheType(CacheType.ALL);
         Viewport viewport=new Viewport(cache,0.003,0.003);
-        SearchResult search=ConnectorFactory.searchByViewport(viewport,INVALID_TOKEN).toBlockingObservable().single();
+        SearchResult search=ConnectorFactory.searchByViewport(viewport,INVALID_TOKEN);
         assertNotNull(search);
         assertTrue(search.getGeocodes().contains(cache.getGeocode()));
         final Geocache cacheFromViewport=DataStore.loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
@@ -22,7 +22,7 @@
         cache=new GC2JVEH();
         deleteCacheFromDBAndLogout(cache.getGeocode());
         viewport=new Viewport(cache,0.003,0.003);
-        search=ConnectorFactory.searchByViewport(viewport,INVALID_TOKEN).toBlockingObservable().single();
+        search=ConnectorFactory.searchByViewport(viewport,INVALID_TOKEN);
         assertNotNull(search);
         assertTrue(search.getGeocodes().contains(cache.getGeocode()));
       }
