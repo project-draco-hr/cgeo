@@ -18,12 +18,12 @@
       Log.d("Database clean: removing " + geocodes.size() + " geocaches from listId=0");
       removeCaches(geocodes,LoadFlags.REMOVE_ALL);
     }
+    Log.d("Database clean: removing obsolete log images records");
+    database.delete(dbTableLogImages,"log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")",null);
   }
  catch (  final Exception e) {
     Log.w("DataStore.clean",e);
   }
-  Log.d("Database clean: removing obsolete log images records");
-  database.delete(dbTableLogImages,"log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")",null);
   Log.d("Database clean: finished");
   databaseCleaned=true;
 }
