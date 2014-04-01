@@ -1,9 +1,3 @@
 {
-  if (this == obj) {
-    return true;
-  }
-  if (!(obj instanceof Geocache)) {
-    return false;
-  }
-  return StringUtils.isNotBlank(geocode) && geocode.equals(((Geocache)obj).geocode);
+  return this == obj || (obj instanceof Geocache && StringUtils.isNotEmpty(geocode) && geocode.equals(((Geocache)obj).geocode));
 }
