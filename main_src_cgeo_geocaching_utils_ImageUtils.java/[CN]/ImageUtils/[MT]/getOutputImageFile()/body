@@ -1,5 +1,5 @@
 {
-  File mediaStorageDir=new File(Compatibility.getExternalPictureDir(),"cgeo");
+  final File mediaStorageDir=new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"cgeo");
   if (!mediaStorageDir.exists()) {
     if (!FileUtils.mkdirs(mediaStorageDir)) {
       Log.e("ImageUtils.getOutputImageFile: cannot create media storage directory");

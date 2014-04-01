@@ -1,4 +1,5 @@
 {
-  Compatibility.dataChanged(getPackageName());
+  Log.i("Requesting settings backup with settings manager");
+  BackupManager.dataChanged(getPackageName());
   super.onPause();
 }
