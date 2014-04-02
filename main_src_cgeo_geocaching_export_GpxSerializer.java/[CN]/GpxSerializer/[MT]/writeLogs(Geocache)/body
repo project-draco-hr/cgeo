@@ -13,7 +13,13 @@
     gpx.endTag(PREFIX_GROUNDSPEAK,"finder");
     gpx.startTag(PREFIX_GROUNDSPEAK,"text");
     gpx.attribute("","encoded","False");
-    gpx.text(log.log);
+    try {
+      gpx.text(log.log);
+    }
+ catch (    final IllegalArgumentException e) {
+      Log.e("GpxSerializer.writeLogs: cannot write log " + log.id + " for cache "+ cache.getGeocode(),e);
+      gpx.text(" [end of log omitted due to an invalid character]");
+    }
     gpx.endTag(PREFIX_GROUNDSPEAK,"text");
     gpx.endTag(PREFIX_GROUNDSPEAK,"log");
   }
