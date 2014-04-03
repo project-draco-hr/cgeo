@@ -1,11 +1,17 @@
 {
   getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+  getPreference(R.string.pref_connectorOCNLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+  getPreference(R.string.pref_connectorOCUSActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+  getPreference(R.string.pref_connectorOCROActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   setWebsite(R.string.pref_fakekey_gc_website,GCConnector.getInstance().getHost());
   setWebsite(R.string.pref_fakekey_ocde_website,"opencaching.de");
   setWebsite(R.string.pref_fakekey_ocpl_website,"opencaching.pl");
+  setWebsite(R.string.pref_fakekey_ocnl_website,"opencaching.nl");
+  setWebsite(R.string.pref_fakekey_ocus_website,"opencaching.us");
+  setWebsite(R.string.pref_fakekey_ocro_website,"opencaching.ro");
   setWebsite(R.string.pref_fakekey_ec_website,"extremcaching.com");
   setWebsite(R.string.pref_fakekey_gcvote_website,"gcvote.com");
   setWebsite(R.string.pref_fakekey_sendtocgeo_website,"send2.cgeo.org");
