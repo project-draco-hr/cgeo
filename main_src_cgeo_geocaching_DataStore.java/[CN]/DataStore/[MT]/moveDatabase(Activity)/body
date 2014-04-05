@@ -1,6 +1,6 @@
 {
   final ProgressDialog dialog=ProgressDialog.show(fromActivity,fromActivity.getString(R.string.init_dbmove_dbmove),fromActivity.getString(R.string.init_dbmove_running),true,false);
-  AndroidObservable.bindActivity(fromActivity,Async.fromFunc0(new Func0<Boolean>(){
+  RxUtils.subscribeOnIOThenUI(Async.fromCallable(new Func0<Boolean>(){
     @Override public Boolean call(){
       if (!LocalStorage.isExternalStorageAvailable()) {
         Log.w("Database was not moved: external memory not available");
@@ -23,7 +23,7 @@
       return true;
     }
   }
-)).subscribeOn(Schedulers.io()).subscribe(new Action1<Boolean>(){
+),new Action1<Boolean>(){
     @Override public void call(    final Boolean success){
       dialog.dismiss();
       final String message=success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);

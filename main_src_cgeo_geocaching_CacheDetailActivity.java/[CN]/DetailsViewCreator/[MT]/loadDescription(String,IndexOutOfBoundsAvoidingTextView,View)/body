@@ -30,7 +30,7 @@
     }
   }
 );
-  AndroidObservable.bindActivity(this,producer.subscribeOn(Schedulers.io())).subscribe(new Observer<Spanned>(){
+  RxUtils.subscribeOnIOThenUI(producer,new Observer<Spanned>(){
     @Override public void onCompleted(){
       if (null != loadingIndicatorView) {
         loadingIndicatorView.setVisibility(View.GONE);
