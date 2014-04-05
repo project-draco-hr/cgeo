@@ -5,7 +5,7 @@
  else {
     locationValid=true;
     currentLocation=geo.getLocation();
-    currentHeading=dir;
+    currentHeading=DirectionProvider.getDirectionNow(activity,dir);
     repaintPositionOverlay();
   }
 }
