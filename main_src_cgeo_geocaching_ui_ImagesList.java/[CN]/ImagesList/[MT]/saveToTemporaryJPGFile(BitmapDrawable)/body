@@ -1,0 +1,13 @@
+{
+  final File file=LocalStorage.getStorageFile(null,"temp.jpg",false,true);
+  BufferedOutputStream stream=null;
+  try {
+    stream=new BufferedOutputStream(new FileOutputStream(file));
+    image.getBitmap().compress(CompressFormat.JPEG,100,stream);
+  }
+  finally {
+    IOUtils.closeQuietly(stream);
+  }
+  file.deleteOnExit();
+  return file;
+}

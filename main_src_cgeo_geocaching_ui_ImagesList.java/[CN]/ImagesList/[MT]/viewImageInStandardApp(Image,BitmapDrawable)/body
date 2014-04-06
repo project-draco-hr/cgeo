@@ -1,0 +1,16 @@
+{
+  try {
+    final Intent intent=new Intent().setAction(android.content.Intent.ACTION_VIEW);
+    final File file=LocalStorage.getStorageFile(geocode,img.getUrl(),true,true);
+    if (file.exists()) {
+      intent.setDataAndType(Uri.fromFile(file),mimeTypeForUrl(img.getUrl()));
+    }
+ else {
+      intent.setDataAndType(Uri.fromFile(saveToTemporaryJPGFile(image)),"image/jpeg");
+    }
+    activity.startActivity(intent);
+  }
+ catch (  Exception e) {
+    Log.e("ImagesList.viewImageInStandardApp",e);
+  }
+}
