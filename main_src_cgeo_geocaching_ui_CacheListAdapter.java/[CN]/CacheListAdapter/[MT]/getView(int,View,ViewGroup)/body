@@ -19,6 +19,7 @@
   final boolean lightSkin=Settings.isLightSkin();
   final TouchListener touchListener=new TouchListener(cache,v);
   v.setOnClickListener(touchListener);
+  v.setOnLongClickListener(touchListener);
   v.setOnTouchListener(touchListener);
   holder.checkbox.setVisibility(selectMode ? View.VISIBLE : View.GONE);
   holder.checkbox.setChecked(cache.isStatusChecked());

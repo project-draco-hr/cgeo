@@ -1,12 +1,9 @@
 {
-  if (!touch) {
-    touch=true;
-    return;
-  }
   if (isSelectMode()) {
     cache.setStatusChecked(!cache.isStatusChecked());
     notifyDataSetChanged();
-    return;
   }
-  CacheDetailActivity.startActivity(getContext(),cache.getGeocode(),cache.getName());
+ else {
+    CacheDetailActivity.startActivity(getContext(),cache.getGeocode(),cache.getName());
+  }
 }
