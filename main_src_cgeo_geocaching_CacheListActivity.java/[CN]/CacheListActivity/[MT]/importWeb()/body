@@ -1,6 +1,7 @@
 {
   detailProgress=0;
   showProgress(false);
+  final DownloadFromWebHandler downloadFromWebHandler=new DownloadFromWebHandler();
   progress.show(this,null,res.getString(R.string.web_import_waiting),true,downloadFromWebHandler.cancelMessage());
   final LoadFromWebThread threadWeb=new LoadFromWebThread(downloadFromWebHandler,listId);
   threadWeb.start();
