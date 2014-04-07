@@ -1,0 +1,10 @@
+{
+  super.setOAuthExtras(intent);
+  if (intent != null) {
+    intent.putExtra(Intents.EXTRA_OAUTH_TITLE_RES_ID,authTitleResId);
+    intent.putExtra(Intents.EXTRA_OAUTH_TOKEN_PUBLIC_KEY,tokenPublicPrefKey);
+    intent.putExtra(Intents.EXTRA_OAUTH_TOKEN_SECRET_KEY,tokenSecretPrefKey);
+    intent.putExtra(Intents.EXTRA_OAUTH_TEMP_TOKEN_KEY_PREF,tempTokenPublicPrefKey);
+    intent.putExtra(Intents.EXTRA_OAUTH_TEMP_TOKEN_SECRET_PREF,tempTokenSecretPrefKey);
+  }
+}

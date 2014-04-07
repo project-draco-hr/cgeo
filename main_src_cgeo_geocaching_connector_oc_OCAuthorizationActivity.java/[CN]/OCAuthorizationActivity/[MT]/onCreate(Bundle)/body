@@ -1,0 +1,11 @@
+{
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    titleResId=extras.getInt(Intents.EXTRA_OAUTH_TITLE_RES_ID);
+    tokenPublicPrefKey=extras.getInt(Intents.EXTRA_OAUTH_TOKEN_PUBLIC_KEY);
+    tokenSecretPrefKey=extras.getInt(Intents.EXTRA_OAUTH_TOKEN_SECRET_KEY);
+    tempTokenPublicPrefKey=extras.getInt(Intents.EXTRA_OAUTH_TEMP_TOKEN_KEY_PREF);
+    tempTokenSecretPrefKey=extras.getInt(Intents.EXTRA_OAUTH_TEMP_TOKEN_SECRET_PREF);
+  }
+  super.onCreate(savedInstanceState);
+}

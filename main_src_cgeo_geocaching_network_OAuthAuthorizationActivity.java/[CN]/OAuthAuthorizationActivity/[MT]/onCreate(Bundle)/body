@@ -1,5 +1,16 @@
 {
   super.onCreate(savedInstanceState,R.layout.authorization_activity,true);
+  Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    host=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_HOST,host);
+    pathRequest=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_PATH_REQUEST,pathRequest);
+    pathAuthorize=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_PATH_AUTHORIZE,pathAuthorize);
+    pathAccess=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_PATH_ACCESS,pathAccess);
+    https=extras.getBoolean(Intents.EXTRA_OAUTH_HTTPS,https);
+    consumerKey=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_CONSUMER_KEY,consumerKey);
+    consumerSecret=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_CONSUMER_SECRET,consumerSecret);
+    callback=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_CALLBACK,callback);
+  }
   setTitle(getAuthTitle());
   auth_1.setText(getAuthExplainShort());
   auth_2.setText(getAuthExplainLong());
