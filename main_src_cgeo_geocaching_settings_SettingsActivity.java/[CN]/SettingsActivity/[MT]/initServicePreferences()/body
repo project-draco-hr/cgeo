@@ -15,4 +15,10 @@
   setWebsite(R.string.pref_fakekey_ec_website,"extremcaching.com");
   setWebsite(R.string.pref_fakekey_gcvote_website,"gcvote.com");
   setWebsite(R.string.pref_fakekey_sendtocgeo_website,"send2.cgeo.org");
+  for (  OCPreferenceKeys key : OCPreferenceKeys.values()) {
+    setServiceScreenSummary(getPreferenceManager(),key.isActivePrefId);
+  }
+  setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorGCActive);
+  setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorOXActive);
+  setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorECActive);
 }

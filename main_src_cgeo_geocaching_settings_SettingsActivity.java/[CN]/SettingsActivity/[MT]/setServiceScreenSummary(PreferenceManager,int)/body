@@ -1,0 +1,23 @@
+{
+  String summary=StringUtils.EMPTY;
+switch (preferenceKey) {
+case R.string.pref_connectorGCActive:
+    summary=getServiceSummary(Settings.isGCConnectorActive());
+  preferenceManager.findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
+break;
+case R.string.pref_connectorOXActive:
+summary=getServiceSummary(Settings.isOXConnectorActive());
+preferenceManager.findPreference(getKey(R.string.preference_screen_ox)).setSummary(summary);
+break;
+case R.string.pref_connectorECActive:
+summary=getServiceSummary(Settings.isECConnectorActive());
+preferenceManager.findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
+break;
+default :
+if (OCPreferenceKeys.isOCPreference(preferenceKey)) {
+OCPreferenceKeys prefKey=OCPreferenceKeys.getById(preferenceKey);
+summary=getServiceSummary(Settings.isOCConnectorActive(prefKey.isActivePrefId));
+preferenceManager.findPreference(getKey(prefKey.prefScreenId)).setSummary(summary);
+}
+}
+}
