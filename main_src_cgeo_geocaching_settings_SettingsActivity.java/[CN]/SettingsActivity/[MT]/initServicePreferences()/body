@@ -1,23 +1,17 @@
 {
-  getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-  getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-  getPreference(R.string.pref_connectorOCNLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-  getPreference(R.string.pref_connectorOCUSActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-  getPreference(R.string.pref_connectorOCROActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+  for (  OCPreferenceKeys key : OCPreferenceKeys.values()) {
+    getPreference(key.isActivePrefId).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+    setWebsite(key.websitePrefId,key.authParams.host);
+    setServiceScreenSummary(getPreferenceManager(),key.isActivePrefId);
+  }
   getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+  getPreference(R.string.pref_connectorOXActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   setWebsite(R.string.pref_fakekey_gc_website,GCConnector.getInstance().getHost());
-  setWebsite(R.string.pref_fakekey_ocde_website,OCAuthParams.OC_DE_AUTH_PARAMS.host);
-  setWebsite(R.string.pref_fakekey_ocpl_website,OCAuthParams.OC_PL_AUTH_PARAMS.host);
-  setWebsite(R.string.pref_fakekey_ocnl_website,OCAuthParams.OC_NL_AUTH_PARAMS.host);
-  setWebsite(R.string.pref_fakekey_ocus_website,OCAuthParams.OC_US_AUTH_PARAMS.host);
-  setWebsite(R.string.pref_fakekey_ocro_website,OCAuthParams.OC_RO_AUTH_PARAMS.host);
+  setWebsite(R.string.pref_fakekey_ox_website,"opencaching.com");
   setWebsite(R.string.pref_fakekey_ec_website,"extremcaching.com");
   setWebsite(R.string.pref_fakekey_gcvote_website,"gcvote.com");
   setWebsite(R.string.pref_fakekey_sendtocgeo_website,"send2.cgeo.org");
-  for (  OCPreferenceKeys key : OCPreferenceKeys.values()) {
-    setServiceScreenSummary(getPreferenceManager(),key.isActivePrefId);
-  }
   setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorGCActive);
   setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorOXActive);
   setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorECActive);

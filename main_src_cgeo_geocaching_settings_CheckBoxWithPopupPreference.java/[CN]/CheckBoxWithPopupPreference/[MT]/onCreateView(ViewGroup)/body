@@ -1,6 +1,12 @@
 {
+  if (baseOnPrefChangeListener == null) {
+    baseOnPrefChangeListener=getOnPreferenceChangeListener();
+  }
   setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    final Preference preference,    Object newValue){
+      if (baseOnPrefChangeListener != null) {
+        baseOnPrefChangeListener.onPreferenceChange(preference,newValue);
+      }
       if (!(Boolean)newValue) {
         return true;
       }

@@ -1,20 +1,12 @@
 {
 switch (prefKeyId) {
 case R.string.pref_fakekey_ocde_authorization:
-    setOCDEAuthTitle();
-  break;
 case R.string.pref_fakekey_ocpl_authorization:
-setOCPLAuthTitle();
-break;
 case R.string.pref_fakekey_ocnl_authorization:
-setOCNLAuthTitle();
-break;
 case R.string.pref_fakekey_ocus_authorization:
-setOCUSAuthTitle();
-break;
 case R.string.pref_fakekey_ocro_authorization:
-setOCROAuthTitle();
-break;
+    setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
+  break;
 case R.string.pref_fakekey_twitter_authorization:
 setTwitterAuthTitle();
 break;

@@ -34,24 +34,15 @@ case R.string.pref_mapDirectory:
 getPreference(R.string.pref_mapDirectory).setSummary(StringUtils.defaultString(Settings.getMapFileDirectory()));
 break;
 case R.string.pref_fakekey_ocde_authorization:
-setOCDEAuthTitle();
-redrawScreen(R.string.preference_screen_ocde);
-break;
 case R.string.pref_fakekey_ocpl_authorization:
-setOCPLAuthTitle();
-redrawScreen(R.string.preference_screen_ocpl);
-break;
 case R.string.pref_fakekey_ocnl_authorization:
-setOCNLAuthTitle();
-redrawScreen(R.string.preference_screen_ocnl);
-break;
 case R.string.pref_fakekey_ocus_authorization:
-setOCUSAuthTitle();
-redrawScreen(R.string.preference_screen_ocus);
-break;
 case R.string.pref_fakekey_ocro_authorization:
-setOCROAuthTitle();
-redrawScreen(R.string.preference_screen_ocro);
+OCPreferenceKeys key=OCPreferenceKeys.getByAuthId(requestCode);
+if (key != null) {
+setOCAuthTitle(key);
+redrawScreen(key.prefScreenId);
+}
 break;
 case R.string.pref_fakekey_twitter_authorization:
 setTwitterAuthTitle();

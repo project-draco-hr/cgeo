@@ -1,0 +1,5 @@
+{
+  if (key != null) {
+    getPreference(key.authPrefId).setTitle(getString(Settings.hasOCAuthorization(key.publicTokenPrefId,key.privateTokenPrefId) ? R.string.settings_reauthorize : R.string.settings_authorize));
+  }
+}
