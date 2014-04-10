@@ -1,0 +1,13 @@
+{
+  FileOutputStream out=null;
+  try {
+    out=new FileOutputStream(outFile);
+    decodeBase64ToStream(inString,out);
+  }
+ catch (  final IOException e) {
+    Log.e("HtmlImage.decodeBase64ToFile: cannot write file for decoded inline image",e);
+  }
+ finally {
+    IOUtils.closeQuietly(out);
+  }
+}

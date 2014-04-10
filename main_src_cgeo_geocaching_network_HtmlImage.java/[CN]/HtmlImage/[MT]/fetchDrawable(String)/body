@@ -38,7 +38,7 @@
       final File file=LocalStorage.getStorageFile(pseudoGeocode,url,true,true);
       if (url.startsWith("data:image/")) {
         if (url.contains(";base64,")) {
-          saveBase64ToFile(url,file);
+          ImageUtils.decodeBase64ToFile(StringUtils.substringAfter(url,";base64,"),file);
         }
  else {
           Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
