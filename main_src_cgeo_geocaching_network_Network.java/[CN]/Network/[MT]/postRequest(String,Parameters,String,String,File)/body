@@ -2,7 +2,7 @@
   final MultipartEntity entity=new MultipartEntity();
   for (  final NameValuePair param : params) {
     try {
-      entity.addPart(param.getName(),new StringBody(param.getValue(),CHARSET_UTF8));
+      entity.addPart(param.getName(),new StringBody(param.getValue(),TextUtils.CHARSET_UTF8));
     }
  catch (    final UnsupportedEncodingException e) {
       Log.e("Network.postRequest: unsupported encoding for parameter " + param.getName(),e);
