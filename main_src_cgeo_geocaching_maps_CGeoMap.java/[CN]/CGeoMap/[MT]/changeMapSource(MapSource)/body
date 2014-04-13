@@ -1,7 +1,8 @@
 {
-  final boolean restartRequired=!MapProviderFactory.isSameActivity(MapProviderFactory.getMapSource(currentSourceId),mapSource);
-  Settings.setMapSource(mapSource);
-  currentSourceId=mapSource.getNumericalId();
+  final MapSource oldSource=MapProviderFactory.getMapSource(currentSourceId);
+  final boolean restartRequired=oldSource == null || !MapProviderFactory.isSameActivity(oldSource,newSource);
+  Settings.setMapSource(newSource);
+  currentSourceId=newSource.getNumericalId();
   if (restartRequired) {
     mapRestart();
   }
