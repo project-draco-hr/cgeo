@@ -1,0 +1,12 @@
+{
+  final List<Integer> list=new LinkedList<Integer>();
+  for (int i=0; i < 48; i++) {
+    list.add(i);
+  }
+  int count=0;
+  for (  final List<Integer> subList : MiscUtils.buffer(list,10)) {
+    assertTrue("each sublist has no more than the allowed number of arguments",subList.size() <= 10);
+    count+=subList.size();
+  }
+  assertEquals("all the elements were seen",48,count);
+}

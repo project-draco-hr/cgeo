@@ -1,0 +1,11 @@
+{
+  try {
+    MiscUtils.buffer(new LinkedList<Integer>(),0);
+    fail("an exception should be raised");
+  }
+ catch (  final IllegalArgumentException e) {
+  }
+catch (  final Exception e) {
+    fail("bad exception raised: " + e);
+  }
+}
