@@ -1,21 +1,5 @@
 {
-  final List<AbstractList> lists=new ArrayList<AbstractList>();
-  lists.addAll(getSortedLists());
-  if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
-    StoredList exceptList=DataStore.getList(exceptListId);
-    if (exceptList != null) {
-      lists.remove(exceptList);
-    }
-  }
-  if (!onlyConcreteLists) {
-    if (exceptListId != PseudoList.ALL_LIST.id) {
-      lists.add(PseudoList.ALL_LIST);
-    }
-    if (exceptListId != PseudoList.HISTORY_LIST.id) {
-      lists.add(PseudoList.HISTORY_LIST);
-    }
-  }
-  lists.add(PseudoList.NEW_LIST);
+  final List<AbstractList> lists=getMenuLists(onlyConcreteLists,exceptListId);
   final List<CharSequence> listsTitle=new ArrayList<CharSequence>();
   for (  AbstractList list : lists) {
     listsTitle.add(list.getTitleAndCount());

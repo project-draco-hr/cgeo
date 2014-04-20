@@ -1,0 +1,10 @@
+{
+  FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+  Fragment prev=getSupportFragmentManager().findFragmentByTag("dialog");
+  if (prev != null) {
+    ft.remove(prev);
+  }
+  ft.addToBackStack(null);
+  DialogFragment newFragment=CachePopupFragment.newInstance(geocode);
+  newFragment.show(ft,"dialog");
+}

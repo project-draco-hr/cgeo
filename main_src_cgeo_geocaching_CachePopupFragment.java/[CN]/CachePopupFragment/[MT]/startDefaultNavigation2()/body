@@ -1,0 +1,8 @@
+{
+  if (cache == null || cache.getCoords() == null) {
+    showToast(res.getString(R.string.cache_coordinates_no));
+    return;
+  }
+  NavigationAppFactory.startDefaultNavigationApplication(2,getActivity(),cache);
+  getActivity().finish();
+}

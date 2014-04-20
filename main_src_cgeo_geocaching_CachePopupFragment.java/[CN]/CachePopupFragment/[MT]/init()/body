@@ -1,0 +1,19 @@
+{
+  super.init();
+  try {
+    if (StringUtils.isNotBlank(cache.getName())) {
+      setTitle(cache.getName());
+    }
+ else {
+      setTitle(geocode);
+    }
+    ((TextView)getView().findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId),null,null,null);
+    details=new CacheDetailsCreator(getActivity(),(LinearLayout)getView().findViewById(R.id.details_list));
+    addCacheDetails();
+    CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
+  }
+ catch (  Exception e) {
+    Log.e("CachePopupFragment.init",e);
+  }
+  progress.dismiss();
+}

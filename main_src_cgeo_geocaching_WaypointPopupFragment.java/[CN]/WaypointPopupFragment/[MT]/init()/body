@@ -1,0 +1,31 @@
+{
+  super.init();
+  waypoint=DataStore.loadWaypoint(waypointId);
+  try {
+    if (StringUtils.isNotBlank(waypoint.getName())) {
+      setTitle(waypoint.getName());
+    }
+ else {
+      setTitle(waypoint.getGeocode());
+    }
+    actionBarTitle.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(waypoint.getWaypointType().markerId),null,null,null);
+    details=new CacheDetailsCreator(getActivity(),waypointDetailsLayout);
+    details.add(R.string.cache_geocode,waypoint.getPrefix() + waypoint.getGeocode().substring(2));
+    details.addDistance(waypoint,waypointDistance);
+    waypointDistance=details.getValueView();
+    details.add(R.string.waypoint_note,waypoint.getNote());
+    buttonEdit.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View arg0){
+        EditWaypointActivity.startActivityEditWaypoint(getActivity(),cache,waypoint.getId());
+        getActivity().finish();
+      }
+    }
+);
+    details=new CacheDetailsCreator(getActivity(),cacheDetailsLayout);
+    details.add(R.string.cache_name,cache.getName());
+    addCacheDetails();
+  }
+ catch (  Exception e) {
+    Log.e("WaypointPopup.init",e);
+  }
+}

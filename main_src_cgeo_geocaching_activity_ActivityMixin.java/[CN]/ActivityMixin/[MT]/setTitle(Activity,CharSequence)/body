@@ -2,8 +2,7 @@
   if (StringUtils.isBlank(text)) {
     return;
   }
-  final TextView title=(TextView)activity.findViewById(R.id.actionbar_title);
-  if (title != null) {
-    title.setText(text);
+  if (((ActionBarActivity)activity).getSupportActionBar() != null) {
+    ((ActionBarActivity)activity).getSupportActionBar().setTitle(text);
   }
 }

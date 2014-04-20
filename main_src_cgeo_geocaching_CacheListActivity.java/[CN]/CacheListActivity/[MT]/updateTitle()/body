@@ -1,15 +1,17 @@
 {
-  final ArrayList<Integer> numbers=new ArrayList<Integer>();
+  getSupportActionBar().setTitle(title);
+  final ArrayList<String> numbers=new ArrayList<String>();
   if (adapter.isFiltered()) {
-    numbers.add(adapter.getCount());
+    numbers.add(getCacheNumberString(getResources(),adapter.getCount()));
   }
   if (search != null) {
-    numbers.add(search.getCount());
+    numbers.add(getCacheNumberString(getResources(),search.getCount()));
   }
   if (numbers.isEmpty()) {
-    setTitle(title);
+    getSupportActionBar().setSubtitle(null);
   }
  else {
-    setTitle(title + " [" + StringUtils.join(numbers,'/')+ ']');
+    getSupportActionBar().setSubtitle(StringUtils.join(numbers,'/'));
   }
+  refreshSpinnerAdapter();
 }
