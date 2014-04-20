@@ -30,7 +30,7 @@
     }
   }
 );
-  RxUtils.subscribeOnIOThenUI(producer,new Observer<Spanned>(){
+  AndroidObservable.bindActivity(this,producer).subscribe(new Observer<Spanned>(){
     @Override public void onCompleted(){
       if (null != loadingIndicatorView) {
         loadingIndicatorView.setVisibility(View.GONE);
@@ -84,5 +84,5 @@
       descriptionView.setBackgroundResource(backcolor);
     }
   }
-);
+,Schedulers.io());
 }

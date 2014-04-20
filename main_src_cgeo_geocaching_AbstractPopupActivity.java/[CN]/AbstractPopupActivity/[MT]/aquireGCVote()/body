@@ -5,13 +5,13 @@
   if (!cache.supportsGCVote()) {
     return;
   }
-  RxUtils.subscribeOnIOThenUI(Observable.defer(new Func0<Observable<GCVoteRating>>(){
+  AndroidObservable.bindActivity(this,Observable.defer(new Func0<Observable<GCVoteRating>>(){
     @Override public Observable<GCVoteRating> call(){
       final GCVoteRating rating=GCVote.getRating(cache.getGuid(),geocode);
       return rating != null ? Observable.just(rating) : Observable.<GCVoteRating>empty();
     }
   }
-),new Action1<GCVoteRating>(){
+)).subscribe(new Action1<GCVoteRating>(){
     @Override public void call(    final GCVoteRating rating){
       cache.setRating(rating.getRating());
       cache.setVotes(rating.getVotes());
@@ -19,5 +19,5 @@
       details.addRating(cache);
     }
   }
-);
+,Schedulers.io());
 }
