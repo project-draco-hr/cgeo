@@ -1,7 +1,3 @@
 {
-  Geocache fullCache=DataStore.loadCache(cache.getGeocode(),EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
-  if (fullCache == null) {
-    fullCache=cache;
-  }
-  return fullCache.getAttributes().contains(attribute);
+  return cache.getAttributes().contains(attribute);
 }
