@@ -1,0 +1,11 @@
+{
+  final MWMResponse response=new MWMResponse();
+  final double lat=intent.getDoubleExtra(Const.EXTRA_MWM_RESPONSE_POINT_LAT,INVALID_LL);
+  final double lon=intent.getDoubleExtra(Const.EXTRA_MWM_RESPONSE_POINT_LON,INVALID_LL);
+  final String name=intent.getStringExtra(Const.EXTRA_MWM_RESPONSE_POINT_NAME);
+  final String id=intent.getStringExtra(Const.EXTRA_MWM_RESPONSE_POINT_ID);
+  response.mZoomLevel=intent.getDoubleExtra(Const.EXTRA_MWM_RESPONSE_ZOOM,9);
+  if (lat != INVALID_LL && lon != INVALID_LL)   response.mPoint=new MWMPoint(lat,lon,name,id);
+ else   response.mPoint=null;
+  return response;
+}

@@ -1,0 +1,15 @@
+{
+  final StringBuilder urlBuilder=new StringBuilder("mapswithme://map?");
+  urlBuilder.append("v=").append(Const.API_VERSION).append("&");
+  urlBuilder.append("backurl=").append(getCallbackAction(context)).append("&");
+  appendIfNotNull(urlBuilder,"appname",title);
+  appendIfNotNull(urlBuilder,"z",isValidZoomLevel(zoomLevel) ? String.valueOf(zoomLevel) : null);
+  for (  final MWMPoint point : points) {
+    if (point != null) {
+      urlBuilder.append("ll=").append(String.format(Locale.US,"%f,%f&",point.getLat(),point.getLon()));
+      appendIfNotNull(urlBuilder,"n",point.getName());
+      appendIfNotNull(urlBuilder,"id",point.getId());
+    }
+  }
+  return urlBuilder;
+}

@@ -1,0 +1,9 @@
+{
+  final Intent mwmIntent=request.toIntent(caller);
+  if (isMapsWithMeInstalled(caller)) {
+    final ActivityInfo aInfo=caller.getPackageManager().resolveActivity(mwmIntent,0).activityInfo;
+    mwmIntent.setClassName(aInfo.packageName,aInfo.name);
+    caller.startActivity(mwmIntent);
+  }
+ else   (new DownloadMapsWithMeDialog(caller)).show();
+}

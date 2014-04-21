@@ -1,0 +1,9 @@
+{
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  final MWMPoint other=(MWMPoint)obj;
+  if (Double.doubleToLongBits(mLat) != Double.doubleToLongBits(other.mLat))   return false;
+  if (Double.doubleToLongBits(mLon) != Double.doubleToLongBits(other.mLon))   return false;
+  return mName == null ? other.mName == null : mName.equals(other.mName);
+}

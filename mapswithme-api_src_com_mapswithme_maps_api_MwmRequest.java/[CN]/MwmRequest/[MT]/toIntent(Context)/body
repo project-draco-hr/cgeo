@@ -1,0 +1,14 @@
+{
+  final Intent mwmIntent=new Intent(Const.ACTION_MWM_REQUEST);
+  final String mwmUrl=createMwmUrl(context,mTitle,mZoomLevel,mPoints).toString();
+  mwmIntent.putExtra(Const.EXTRA_URL,mwmUrl);
+  mwmIntent.putExtra(Const.EXTRA_TITLE,mTitle);
+  mwmIntent.putExtra(Const.EXTRA_RETURN_ON_BALLOON_CLICK,mReturnOnBalloonClick);
+  mwmIntent.putExtra(Const.EXTRA_PICK_POINT,mPickPoint);
+  mwmIntent.putExtra(Const.EXTRA_CUSTOM_BUTTON_NAME,mCustomButtonName);
+  final boolean hasIntent=mPendingIntent != null;
+  mwmIntent.putExtra(Const.EXTRA_HAS_PENDING_INTENT,hasIntent);
+  if (hasIntent)   mwmIntent.putExtra(Const.EXTRA_CALLER_PENDING_INTENT,mPendingIntent);
+  addCommonExtras(context,mwmIntent);
+  return mwmIntent;
+}

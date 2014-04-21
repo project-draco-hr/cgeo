@@ -12,6 +12,9 @@
     name=extras.getString(Intents.EXTRA_NAME);
     guid=extras.getString(Intents.EXTRA_GUID);
   }
+  if (StringUtils.isEmpty(geocode)) {
+    geocode=MapsWithMeCacheListApp.getCacheFromMapsWithMe(this,getIntent());
+  }
   if (geocode == null && guid == null && uri != null) {
     final String uriHost=uri.getHost().toLowerCase(Locale.US);
     final String uriPath=uri.getPath().toLowerCase(Locale.US);
