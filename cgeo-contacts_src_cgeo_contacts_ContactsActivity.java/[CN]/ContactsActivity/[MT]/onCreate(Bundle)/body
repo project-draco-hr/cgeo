@@ -10,15 +10,24 @@
     finish();
     return;
   }
-  int contactId=getContactId(nickName,ContactsContract.Data.CONTENT_URI,ContactsContract.Data.CONTACT_ID,ContactsContract.CommonDataKinds.Nickname.NAME);
-  if (contactId == 0) {
-    contactId=getContactId(nickName,ContactsContract.Contacts.CONTENT_URI,BaseColumns._ID,ContactsContract.Contacts.DISPLAY_NAME);
+  List<Pair<Integer,String>> contacts=getContactId(nickName,ContactsContract.Data.CONTENT_URI,ContactsContract.Data.CONTACT_ID,ContactsContract.CommonDataKinds.Nickname.NAME,false);
+  if (contacts.isEmpty()) {
+    contacts=getContactId(nickName,ContactsContract.Contacts.CONTENT_URI,BaseColumns._ID,ContactsContract.Contacts.DISPLAY_NAME,false);
   }
-  if (contactId == 0) {
+  if (contacts.isEmpty()) {
+    contacts.addAll(getContactId(nickName,ContactsContract.Data.CONTENT_URI,ContactsContract.Data.CONTACT_ID,ContactsContract.CommonDataKinds.Nickname.NAME,true));
+    contacts.addAll(getContactId(nickName,ContactsContract.Contacts.CONTENT_URI,BaseColumns._ID,ContactsContract.Contacts.DISPLAY_NAME,true));
+  }
+  if (contacts.isEmpty()) {
     showToast(getString(R.string.contact_not_found,nickName));
     finish();
     return;
   }
-  openContact(contactId);
-  finish();
+  if (contacts.size() > 1) {
+    selectContact(contacts);
+  }
+ else {
+    int contactId=contacts.get(0).first.intValue();
+    openContactAndFinish(contactId);
+  }
 }

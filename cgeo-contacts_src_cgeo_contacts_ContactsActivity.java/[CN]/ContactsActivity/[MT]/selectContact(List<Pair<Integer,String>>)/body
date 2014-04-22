@@ -1,0 +1,15 @@
+{
+  List<String> list=new ArrayList<String>();
+  for (  Pair<Integer,String> p : contacts) {
+    list.add(p.second);
+  }
+  final CharSequence[] items=list.toArray(new CharSequence[list.size()]);
+  new AlertDialog.Builder(this).setTitle(R.string.multiple_matches).setItems(items,new OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int which){
+      int contactId=contacts.get(which).first.intValue();
+      dialog.dismiss();
+      openContactAndFinish(contactId);
+    }
+  }
+).create().show();
+}
