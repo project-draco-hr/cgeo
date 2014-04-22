@@ -10,13 +10,13 @@
     finish();
     return;
   }
-  List<Pair<Integer,String>> contacts=getContactId(nickName,ContactsContract.Data.CONTENT_URI,ContactsContract.Data.CONTACT_ID,ContactsContract.CommonDataKinds.Nickname.NAME,false);
+  List<Pair<Integer,String>> contacts=getContacts(nickName,ContactsContract.Data.CONTENT_URI,ContactsContract.Data.CONTACT_ID,ContactsContract.CommonDataKinds.Nickname.NAME,false);
   if (contacts.isEmpty()) {
-    contacts=getContactId(nickName,ContactsContract.Contacts.CONTENT_URI,BaseColumns._ID,ContactsContract.Contacts.DISPLAY_NAME,false);
+    contacts=getContacts(nickName,ContactsContract.Contacts.CONTENT_URI,BaseColumns._ID,ContactsContract.Contacts.DISPLAY_NAME,false);
   }
   if (contacts.isEmpty()) {
-    contacts.addAll(getContactId(nickName,ContactsContract.Data.CONTENT_URI,ContactsContract.Data.CONTACT_ID,ContactsContract.CommonDataKinds.Nickname.NAME,true));
-    contacts.addAll(getContactId(nickName,ContactsContract.Contacts.CONTENT_URI,BaseColumns._ID,ContactsContract.Contacts.DISPLAY_NAME,true));
+    contacts.addAll(getContacts(nickName,ContactsContract.Data.CONTENT_URI,ContactsContract.Data.CONTACT_ID,ContactsContract.CommonDataKinds.Nickname.NAME,true));
+    contacts.addAll(getContacts(nickName,ContactsContract.Contacts.CONTENT_URI,BaseColumns._ID,ContactsContract.Contacts.DISPLAY_NAME,true));
   }
   if (contacts.isEmpty()) {
     showToast(getString(R.string.contact_not_found,nickName));
