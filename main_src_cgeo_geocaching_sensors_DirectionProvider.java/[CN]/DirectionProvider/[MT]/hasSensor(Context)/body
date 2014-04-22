@@ -1,7 +1,6 @@
 {
   if (hasSensorChecked == false) {
-    SensorManager sensorManager=(SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
-    hasSensor=sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null;
+    hasSensor=getOrientationSensor(context) != null;
   }
   return hasSensor;
 }

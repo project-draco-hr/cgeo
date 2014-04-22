@@ -3,8 +3,7 @@
     return;
   }
   if (++count == 1) {
-    sensorManager=(SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
-    Sensor orientationSensor=sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+    Sensor orientationSensor=getOrientationSensor(context);
     sensorManager.registerListener(this,orientationSensor,SensorManager.SENSOR_DELAY_NORMAL,handler);
   }
 }
