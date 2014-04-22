@@ -1,4 +1,4 @@
 {
   final int expectedSizes=CacheSize.values().length - 1;
-  assertEquals(expectedSizes,new SizeFilter.Factory().getFilters().size());
+  assertThat(new SizeFilter.Factory().getFilters()).hasSize(expectedSizes);
 }

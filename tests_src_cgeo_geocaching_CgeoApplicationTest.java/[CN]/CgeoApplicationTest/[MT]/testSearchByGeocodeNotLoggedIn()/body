@@ -4,18 +4,18 @@
       MockedCache cache=new GC2CJPF();
       deleteCacheFromDBAndLogout(cache.getGeocode());
       SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
-      assertNotNull(search);
-      assertEquals(1,search.getGeocodes().size());
-      assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+      assertThat(search).isNotNull();
+      assertThat(search.getGeocodes()).hasSize(1);
+      assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
       final Geocache searchedCache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-      assertNotNull(searchedCache);
+      assertThat(searchedCache).isNotNull();
       assert(searchedCache != null);
-      assertNull(searchedCache.getCoords());
+      assertThat(searchedCache.getCoords()).isNull();
       cache=new GC2JVEH();
       deleteCacheFromDBAndLogout(cache.getGeocode());
       search=Geocache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST_ID,true,null);
-      assertNotNull(search);
-      assertEquals(0,search.getGeocodes().size());
+      assertThat(search).isNotNull();
+      assertThat(search.getGeocodes()).isEmpty();
     }
   }
 );

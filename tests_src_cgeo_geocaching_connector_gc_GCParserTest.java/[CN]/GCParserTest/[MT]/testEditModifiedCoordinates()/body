@@ -5,15 +5,15 @@
   cache.dropSynchronous();
   final String page=GCParser.requestHtmlPage(cache.getGeocode(),null,"n","0");
   final Geocache cache2=GCParser.parseCacheFromText(page,null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
-  assertNotNull(cache2);
+  assertThat(cache2).isNotNull();
   assert(cache2 != null);
-  assertTrue(cache2.hasUserModifiedCoords());
+  assertThat(cache2.hasUserModifiedCoords()).isTrue();
   assertEquals(new Geopoint("N51 21.544","E07 02.566"),cache2.getCoords());
   GCParser.deleteModifiedCoordinates(cache2);
   cache2.dropSynchronous();
   final String page2=GCParser.requestHtmlPage(cache.getGeocode(),null,"n","0");
   final Geocache cache3=GCParser.parseCacheFromText(page2,null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
-  assertNotNull(cache3);
+  assertThat(cache3).isNotNull();
   assert(cache3 != null);
-  assertFalse(cache3.hasUserModifiedCoords());
+  assertThat(cache3.hasUserModifiedCoords()).isFalse();
 }

@@ -3,7 +3,7 @@
   geocodes.add("GC12345");
   geocodes.add("GC23456");
   final SearchResult searchResult=new SearchResult(geocodes);
-  assertEquals(2,searchResult.getCount());
-  assertEquals(2,searchResult.getTotalCountGC());
-  assertTrue(searchResult.getGeocodes().contains("GC12345"));
+  assertThat(searchResult.getCount()).isEqualTo(2);
+  assertThat(searchResult.getTotalCountGC()).isEqualTo(2);
+  assertThat(searchResult.getGeocodes().contains("GC12345")).isTrue();
 }

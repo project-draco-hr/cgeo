@@ -2,10 +2,10 @@
   final String geocode="GC31J2H";
   removeCacheCompletely(geocode);
   List<Geocache> caches=readGPX10(R.raw.lazy);
-  assertEquals(1,caches.size());
-  assertEquals(6,caches.get(0).getLogs().size());
+  assertThat(caches).hasSize(1);
+  assertThat(caches.get(0).getLogs()).hasSize(6);
   caches=readGPX10(R.raw.lazy);
-  assertEquals(1,caches.size());
-  assertEquals(6,caches.get(0).getLogs().size());
+  assertThat(caches).hasSize(1);
+  assertThat(caches.get(0).getLogs()).hasSize(6);
   removeCacheCompletely(geocode);
 }

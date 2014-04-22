@@ -1,4 +1,4 @@
 {
-  Assert.assertTrue(Math.abs(gp1.getLatitude() - gp2.getLatitude()) <= tolerance);
-  Assert.assertTrue(Math.abs(gp1.getLongitude() - gp2.getLongitude()) <= tolerance);
+  assertThat(Math.abs(gp1.getLatitude() - gp2.getLatitude()) <= tolerance).isTrue();
+  assertThat(Math.abs(gp1.getLongitude() - gp2.getLongitude()) <= tolerance).isTrue();
 }

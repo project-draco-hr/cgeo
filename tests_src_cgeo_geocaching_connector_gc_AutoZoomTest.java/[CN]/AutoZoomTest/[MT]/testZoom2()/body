@@ -2,9 +2,9 @@
   final Geopoint bottomLeft=new Geopoint(49.3,8.3);
   final Geopoint topRight=new Geopoint(49.4,8.4);
   int zoom=Tile.calcZoomLat(bottomLeft,topRight,3);
-  assertTrue(Math.abs(new Tile(bottomLeft,zoom).getY() - new Tile(topRight,zoom).getY()) >= 2);
-  assertTrue(Math.abs(new Tile(bottomLeft,zoom + 1).getY() - new Tile(topRight,zoom + 1).getY()) > 2);
+  assertThat(Math.abs(new Tile(bottomLeft,zoom).getY() - new Tile(topRight,zoom).getY()) >= 2).isTrue();
+  assertThat(Math.abs(new Tile(bottomLeft,zoom + 1).getY() - new Tile(topRight,zoom + 1).getY()) > 2).isTrue();
   zoom=Tile.calcZoomLon(bottomLeft,topRight,3);
-  assertTrue(Math.abs(new Tile(bottomLeft,zoom).getX() - new Tile(topRight,zoom).getX()) >= 2);
-  assertTrue(Math.abs(new Tile(bottomLeft,zoom + 1).getX() - new Tile(topRight,zoom + 1).getX()) > 2);
+  assertThat(Math.abs(new Tile(bottomLeft,zoom).getX() - new Tile(topRight,zoom).getX()) >= 2).isTrue();
+  assertThat(Math.abs(new Tile(bottomLeft,zoom + 1).getX() - new Tile(topRight,zoom + 1).getX()) > 2).isTrue();
 }

@@ -1,7 +1,7 @@
 {
   final Geocache traditional=new Geocache();
   traditional.setType(CacheType.TRADITIONAL);
-  assertTrue(CacheType.ALL.contains(traditional));
-  assertTrue(CacheType.TRADITIONAL.contains(traditional));
-  assertFalse(CacheType.MYSTERY.contains(traditional));
+  assertThat(CacheType.ALL.contains(traditional)).isTrue();
+  assertThat(CacheType.TRADITIONAL.contains(traditional)).isTrue();
+  assertThat(CacheType.MYSTERY.contains(traditional)).isFalse();
 }

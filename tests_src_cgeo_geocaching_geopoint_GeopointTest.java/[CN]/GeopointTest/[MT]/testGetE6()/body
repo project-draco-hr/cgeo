@@ -1,5 +1,5 @@
 {
   final Geopoint gp=new Geopoint(41.2,-3.4);
-  Assert.assertEquals(41200000.0,gp.getLatitudeE6(),1e-6);
-  Assert.assertEquals(-3400000.0,gp.getLongitudeE6(),1e-6);
+  assertThat((double)gp.getLatitudeE6()).isEqualTo(41200000.0,offset(1e-6));
+  assertThat((double)gp.getLongitudeE6()).isEqualTo(-3400000.0,offset(1e-6));
 }

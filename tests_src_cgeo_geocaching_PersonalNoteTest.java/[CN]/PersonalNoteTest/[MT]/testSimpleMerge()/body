@@ -7,6 +7,6 @@
   cache2.setPersonalNote("cgeo note\n--\nProvider note");
   PersonalNote otherNote=new PersonalNote(cache2);
   PersonalNote result=myNote.mergeWith(otherNote);
-  assertEquals("cgeo note\n--\nSimple provider note",result.toString());
+  assertThat(result.toString()).isEqualTo("cgeo note\n--\nSimple provider note");
   assertPersonalNote(result,"cgeo note","Simple provider note");
 }

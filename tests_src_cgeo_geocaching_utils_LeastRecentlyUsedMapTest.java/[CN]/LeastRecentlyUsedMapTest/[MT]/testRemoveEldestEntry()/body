@@ -1,27 +1,27 @@
 {
   final LeastRecentlyUsedMap<String,Geocache> cache=new LeastRecentlyUsedMap.LruCache<String,Geocache>(10);
   final Geocache first=new Geocache();
-  assertNull(cache.put("1",first));
+  assertThat(cache.put("1",first)).isNull();
   final Geocache second=new Geocache();
-  assertNull(cache.put("2",second));
-  assertEquals(2,cache.size());
-  assertTrue(cache.containsKey("1"));
-  assertTrue(cache.containsValue(first));
-  assertTrue(cache.containsKey("2"));
-  assertTrue(cache.containsValue(second));
+  assertThat(cache.put("2",second)).isNull();
+  assertThat(cache).hasSize(2);
+  assertThat(cache.containsKey("1")).isTrue();
+  assertThat(cache.containsValue(first)).isTrue();
+  assertThat(cache.containsKey("2")).isTrue();
+  assertThat(cache.containsValue(second)).isTrue();
   for (int i=3; i <= 10; i++) {
-    assertNull(cache.put(Integer.toString(i),new Geocache()));
+    assertThat(cache.put(Integer.toString(i),new Geocache())).isNull();
   }
-  assertEquals(10,cache.size());
-  assertTrue(cache.containsKey("1"));
-  assertTrue(cache.containsValue(first));
-  assertTrue(cache.containsKey("2"));
-  assertTrue(cache.containsValue(second));
-  assertNotNull(cache.remove("1"));
-  assertNull(cache.put("1",new Geocache()));
-  assertNull(cache.put("11",new Geocache()));
-  assertEquals(10,cache.size());
-  assertTrue(cache.containsKey("1"));
-  assertFalse(cache.containsKey("2"));
-  assertTrue(cache.containsKey("11"));
+  assertThat(cache).hasSize(10);
+  assertThat(cache.containsKey("1")).isTrue();
+  assertThat(cache.containsValue(first)).isTrue();
+  assertThat(cache.containsKey("2")).isTrue();
+  assertThat(cache.containsValue(second)).isTrue();
+  assertThat(cache.remove("1")).isNotNull();
+  assertThat(cache.put("1",new Geocache())).isNull();
+  assertThat(cache.put("11",new Geocache())).isNull();
+  assertThat(cache).hasSize(10);
+  assertThat(cache.containsKey("1")).isTrue();
+  assertThat(cache.containsKey("2")).isFalse();
+  assertThat(cache.containsKey("11")).isTrue();
 }

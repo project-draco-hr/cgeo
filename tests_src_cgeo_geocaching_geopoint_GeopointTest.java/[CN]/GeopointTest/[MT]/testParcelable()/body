@@ -3,5 +3,5 @@
   final String KEY="geopoint";
   final Bundle bundle=new Bundle();
   bundle.putParcelable(KEY,gp);
-  assertEquals(gp,bundle.getParcelable(KEY));
+  assertThat(bundle.getParcelable(KEY)).isEqualTo(gp);
 }

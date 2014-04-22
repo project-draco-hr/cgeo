@@ -1,5 +1,5 @@
 {
-  assertEquals(LogType.UNKNOWN,LogType.getById(0));
-  assertEquals(LogType.UNKNOWN,LogType.getById(4711));
-  assertEquals(LogType.ENABLE_LISTING,LogType.getById(23));
+  assertThat(LogType.getById(0)).isEqualTo(LogType.UNKNOWN);
+  assertThat(LogType.getById(4711)).isEqualTo(LogType.UNKNOWN);
+  assertThat(LogType.getById(23)).isEqualTo(LogType.ENABLE_LISTING);
 }

@@ -1,10 +1,10 @@
 {
-  Assert.assertEquals(latDir,gp.getLatDir());
-  Assert.assertEquals(latDeg,gp.getLatDeg());
-  Assert.assertEquals(latMin,gp.getLatMin());
-  Assert.assertEquals(latMinFrac,gp.getLatMinFrac());
-  Assert.assertEquals(lonDir,gp.getLonDir());
-  Assert.assertEquals(lonDeg,gp.getLonDeg());
-  Assert.assertEquals(lonMin,gp.getLonMin());
-  Assert.assertEquals(lonMinFrac,gp.getLonMinFrac());
+  assertThat(gp.getLatDir()).isEqualTo(latDir);
+  assertThat(gp.getLatDeg()).isEqualTo(latDeg);
+  assertThat(gp.getLatMin()).isEqualTo(latMin);
+  assertThat(gp.getLatMinFrac()).isEqualTo(latMinFrac);
+  assertThat(gp.getLonDir()).isEqualTo(lonDir);
+  assertThat(gp.getLonDeg()).isEqualTo(lonDeg);
+  assertThat(gp.getLonMin()).isEqualTo(lonMin);
+  assertThat(gp.getLonMinFrac()).isEqualTo(lonMinFrac);
 }

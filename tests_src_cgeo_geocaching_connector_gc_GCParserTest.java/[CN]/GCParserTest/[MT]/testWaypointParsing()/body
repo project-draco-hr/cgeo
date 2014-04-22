@@ -1,6 +1,6 @@
 {
   Geocache cache=parseCache(R.raw.gc366bq);
-  assertEquals(13,cache.getWaypoints().size());
+  assertThat(cache.getWaypoints()).hasSize(13);
   cache=parseCache(R.raw.gc366bq);
-  assertEquals(13,cache.getWaypoints().size());
+  assertThat(cache.getWaypoints()).hasSize(13);
 }

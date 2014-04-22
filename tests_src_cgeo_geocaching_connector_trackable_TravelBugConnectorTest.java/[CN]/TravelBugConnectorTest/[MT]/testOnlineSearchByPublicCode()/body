@@ -1,5 +1,5 @@
 {
   Trackable trackable=getConnector().searchTrackable("TB4JD36",null,null);
-  assertNotNull(trackable);
-  assertEquals("Mein Kilometerz??hler",trackable.getName());
+  assertThat(trackable).isNotNull();
+  assertThat(trackable.getName()).isEqualTo("Mein Kilometerz??hler");
 }

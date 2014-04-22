@@ -1,4 +1,4 @@
 {
   Calendar today=Calendar.getInstance();
-  assertEquals(LogType.ATTENDED,createEventCache(today).getDefaultLogType());
+  assertThat(createEventCache(today).getDefaultLogType()).isEqualTo(LogType.ATTENDED);
 }

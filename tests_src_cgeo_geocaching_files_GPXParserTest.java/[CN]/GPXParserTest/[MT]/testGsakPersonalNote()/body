@@ -1,4 +1,4 @@
 {
   final Geocache cache=getFirstCache(R.raw.gc3t1xg_gsak);
-  assertEquals("Personal Note Test",cache.getPersonalNote());
+  assertThat(cache.getPersonalNote()).isEqualTo("Personal Note Test");
 }

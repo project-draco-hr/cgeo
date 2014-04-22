@@ -1,8 +1,8 @@
 {
   final String page=getFileContent(R.raw.tb123e_html);
   final Trackable trackable=GCParser.parseTrackable(page,"TB123E");
-  assertNotNull(trackable);
-  assertEquals("TB123E",trackable.getGeocode());
+  assertThat(trackable).isNotNull();
+  assertThat(trackable.getGeocode()).isEqualTo("TB123E");
   final String expectedDetails=CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.trackable_not_activated);
-  assertEquals(expectedDetails,trackable.getDetails());
+  assertThat(trackable.getDetails()).isEqualTo(expectedDetails);
 }

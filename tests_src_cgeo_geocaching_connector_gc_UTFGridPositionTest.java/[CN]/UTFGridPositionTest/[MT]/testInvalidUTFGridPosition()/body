@@ -1,10 +1,10 @@
 {
   boolean valid=true;
   try {
-    assertNotNull(new UTFGridPosition(-1,0));
+    assertThat(new UTFGridPosition(-1,0)).isNotNull();
   }
  catch (  Exception e) {
     valid=false;
   }
-  assertFalse(valid);
+  assertThat(valid).isFalse();
 }

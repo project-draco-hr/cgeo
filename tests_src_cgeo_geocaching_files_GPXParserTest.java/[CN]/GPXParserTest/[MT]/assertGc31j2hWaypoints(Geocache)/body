@@ -1,22 +1,22 @@
 {
-  assertNotNull(cache.getWaypoints());
-  assertEquals(2,cache.getWaypoints().size());
+  assertThat(cache.getWaypoints()).isNotNull();
+  assertThat(cache.getWaypoints()).hasSize(2);
   Waypoint wp=cache.getWaypoints().get(0);
-  assertEquals("GC31J2H",wp.getGeocode());
-  assertEquals("00",wp.getPrefix());
-  assertEquals("---",wp.getLookup());
-  assertEquals("Parkplatz",wp.getName());
-  assertEquals("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)",wp.getNote());
-  assertEquals(WaypointType.PARKING,wp.getWaypointType());
+  assertThat(wp.getGeocode()).isEqualTo("GC31J2H");
+  assertThat(wp.getPrefix()).isEqualTo("00");
+  assertThat(wp.getLookup()).isEqualTo("---");
+  assertThat(wp.getName()).isEqualTo("Parkplatz");
+  assertThat(wp.getNote()).isEqualTo("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)");
+  assertThat(wp.getWaypointType()).isEqualTo(WaypointType.PARKING);
   assertEquals(49.317517,wp.getCoords().getLatitude(),0.000001);
   assertEquals(8.545083,wp.getCoords().getLongitude(),0.000001);
   wp=cache.getWaypoints().get(1);
-  assertEquals("GC31J2H",wp.getGeocode());
-  assertEquals("S1",wp.getPrefix());
-  assertEquals("---",wp.getLookup());
-  assertEquals("Station 1",wp.getName());
+  assertThat(wp.getGeocode()).isEqualTo("GC31J2H");
+  assertThat(wp.getPrefix()).isEqualTo("S1");
+  assertThat(wp.getLookup()).isEqualTo("---");
+  assertThat(wp.getName()).isEqualTo("Station 1");
   assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.",wp.getNote());
-  assertEquals(WaypointType.STAGE,wp.getWaypointType());
+  assertThat(wp.getWaypointType()).isEqualTo(WaypointType.STAGE);
   assertEquals(49.317500,wp.getCoords().getLatitude(),0.000001);
   assertEquals(8.545100,wp.getCoords().getLongitude(),0.000001);
 }

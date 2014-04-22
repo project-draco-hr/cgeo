@@ -1,4 +1,4 @@
 {
-  assertTrue(GCConnector.getInstance().canHandle("GC2MEGA"));
-  assertFalse(GCConnector.getInstance().canHandle("OXZZZZZ"));
+  assertThat(GCConnector.getInstance().canHandle("GC2MEGA")).isTrue();
+  assertThat(GCConnector.getInstance().canHandle("OXZZZZZ")).isFalse();
 }

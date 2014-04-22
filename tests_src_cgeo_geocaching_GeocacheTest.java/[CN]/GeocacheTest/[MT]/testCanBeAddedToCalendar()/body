@@ -1,8 +1,8 @@
 {
   final Date today=new Date();
   final Geocache cacheToday=new MockedEventCache(today);
-  assertTrue(cacheToday.canBeAddedToCalendar());
+  assertThat(cacheToday.canBeAddedToCalendar()).isTrue();
   final Date yesterday=new Date(today.getTime() - 86400 * 1000);
   final MockedEventCache cacheYesterday=new MockedEventCache(yesterday);
-  assertFalse(cacheYesterday.canBeAddedToCalendar());
+  assertThat(cacheYesterday.canBeAddedToCalendar()).isFalse();
 }

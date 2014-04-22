@@ -6,7 +6,7 @@
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,44,72,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,104,36,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,88,36,12).getType());
-  assertTrue(parseMapPNG(bitmap,116,36,12).isFound());
+  assertThat(parseMapPNG(bitmap,116,36,12).isFound()).isTrue();
   assertEquals(CacheType.EARTH,parseMapPNG(bitmap,28,56,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,96,72,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,140,48,12).getType());
@@ -39,7 +39,7 @@
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,104,88,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,56,248,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,72,32,12).getType());
-  assertTrue(parseMapPNG(bitmap,180,4,12).isFound());
+  assertThat(parseMapPNG(bitmap,180,4,12).isFound()).isTrue();
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,96,100,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,144,160,12).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,12,4,12).getType());
@@ -64,7 +64,7 @@
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,92,192,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,52,84,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,176,196,12).getType());
-  assertTrue(parseMapPNG(bitmap,140,108,12).isFound());
+  assertThat(parseMapPNG(bitmap,140,108,12).isFound()).isTrue();
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,108,148,12).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,168,8,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,196,92,12).getType());
@@ -72,15 +72,15 @@
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,168,28,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,240,52,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,152,148,12).getType());
-  assertTrue(parseMapPNG(bitmap,160,60,12).isFound());
-  assertTrue(parseMapPNG(bitmap,160,100,12).isFound());
+  assertThat(parseMapPNG(bitmap,160,60,12).isFound()).isTrue();
+  assertThat(parseMapPNG(bitmap,160,100,12).isFound()).isTrue();
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,136,32,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,208,164,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,84,244,12).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,172,16,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,104,20,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,144,60,12).getType());
-  assertTrue(parseMapPNG(bitmap,228,56,12).isFound());
+  assertThat(parseMapPNG(bitmap,228,56,12).isFound()).isTrue();
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,144,212,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,180,68,12).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,228,104,12).getType());
@@ -91,7 +91,7 @@
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,84,128,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,248,164,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,232,84,12).getType());
-  assertTrue(parseMapPNG(bitmap,160,88,12).isFound());
+  assertThat(parseMapPNG(bitmap,160,88,12).isFound()).isTrue();
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,132,20,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,56,132,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,28,32,12).getType());

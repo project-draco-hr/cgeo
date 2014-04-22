@@ -1,10 +1,9 @@
 {
   final Geocache cache=parseCache(R.raw.own_cache);
-  assertNotNull("Cache not parsed!",cache);
-  assertTrue("No spoilers found!",CollectionUtils.isNotEmpty(cache.getSpoilers()));
-  assertEquals("Wrong number of spoilers",2,cache.getSpoilers().size());
+  assertThat(cache).isNotNull();
+  assertThat(cache.getSpoilers()).as("spoilers").hasSize(2);
   final Image spoiler=cache.getSpoilers().get(1);
   assertEquals("First spoiler image url wrong","http://imgcdn.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg",spoiler.getUrl());
   assertEquals("First spoiler image text wrong","SPOILER",spoiler.getTitle());
-  assertNull("First spoiler image description not empty",spoiler.getDescription());
+  assertThat(spoiler.getDescription()).as("First spoiler image description").isNull();
 }

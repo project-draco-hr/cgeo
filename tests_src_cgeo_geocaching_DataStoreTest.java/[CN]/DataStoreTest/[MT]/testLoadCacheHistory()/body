@@ -3,7 +3,7 @@
   int allCaches=0;
   for (  CacheType cacheType : CacheType.values()) {
     SearchResult historyOfType=DataStore.getHistoryOfCaches(false,cacheType);
-    assertNotNull(historyOfType);
+    assertThat(historyOfType).isNotNull();
     if (cacheType != CacheType.ALL) {
       sumCaches+=historyOfType.getCount();
     }
@@ -11,6 +11,6 @@
       allCaches=historyOfType.getCount();
     }
   }
-  assertEquals(sumCaches,allCaches);
-  assertEquals(DataStore.getAllHistoryCachesCount(),sumCaches);
+  assertThat(allCaches).isEqualTo(sumCaches);
+  assertThat(sumCaches).isEqualTo(DataStore.getAllHistoryCachesCount());
 }

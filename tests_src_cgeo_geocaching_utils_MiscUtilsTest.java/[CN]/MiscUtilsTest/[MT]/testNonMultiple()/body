@@ -5,7 +5,7 @@
   }
   int count=0;
   for (  final List<Integer> subList : MiscUtils.buffer(list,10)) {
-    assertTrue("each sublist has no more than the allowed number of arguments",subList.size() <= 10);
+    assertThat(subList.size()).overridingErrorMessage("each sublist has no more than the allowed number of arguments").isLessThanOrEqualTo(10);
     count+=subList.size();
   }
   assertEquals("all the elements were seen",48,count);

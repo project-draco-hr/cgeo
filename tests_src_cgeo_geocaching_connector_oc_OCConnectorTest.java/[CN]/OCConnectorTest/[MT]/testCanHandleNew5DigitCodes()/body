@@ -1,5 +1,5 @@
 {
   final IConnector ocConnector=getOcDeConnector();
-  assertTrue(ocConnector.canHandle("OCFFFF"));
-  assertTrue(ocConnector.canHandle("OC10000"));
+  assertThat(ocConnector.canHandle("OCFFFF")).isTrue();
+  assertThat(ocConnector.canHandle("OC10000")).isTrue();
 }

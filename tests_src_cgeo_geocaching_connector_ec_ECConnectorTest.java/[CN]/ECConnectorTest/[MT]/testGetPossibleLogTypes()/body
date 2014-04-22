@@ -1,6 +1,6 @@
 {
   final List<LogType> possibleLogTypes=ECConnector.getInstance().getPossibleLogTypes(createCache());
-  assertNotNull(possibleLogTypes);
-  assertFalse(possibleLogTypes.isEmpty());
-  assertTrue(possibleLogTypes.contains(LogType.FOUND_IT));
+  assertThat(possibleLogTypes).isNotNull();
+  assertThat(possibleLogTypes).isNotEmpty();
+  assertThat(possibleLogTypes).contains(LogType.FOUND_IT);
 }

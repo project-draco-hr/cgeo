@@ -12,19 +12,19 @@
         Settings.setCacheType(CacheType.ALL);
         Viewport viewport=new Viewport(cache,0.003,0.003);
         SearchResult search=ConnectorFactory.searchByViewport(viewport,INVALID_TOKEN);
-        assertNotNull(search);
-        assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+        assertThat(search).isNotNull();
+        assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
         final Geocache cacheFromViewport=DataStore.loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
         Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
         Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
-        assertFalse(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3);
-        assertEquals(testStrategy == Strategy.DETAILED,cacheFromViewport.isReliableLatLon());
+        assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();
+        assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == Strategy.DETAILED);
         cache=new GC2JVEH();
         deleteCacheFromDBAndLogout(cache.getGeocode());
         viewport=new Viewport(cache,0.003,0.003);
         search=ConnectorFactory.searchByViewport(viewport,INVALID_TOKEN);
-        assertNotNull(search);
-        assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+        assertThat(search).isNotNull();
+        assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
       }
   finally {
         Settings.setLiveMapStrategy(strategy);

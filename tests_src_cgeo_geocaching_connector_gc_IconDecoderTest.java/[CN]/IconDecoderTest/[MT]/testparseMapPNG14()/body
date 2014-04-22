@@ -4,5 +4,5 @@
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,88,124,14).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,228,104,14).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,52,92,14).getType());
-  assertTrue(parseMapPNG(bitmap,108,112,14).isFound());
+  assertThat(parseMapPNG(bitmap,108,112,14).isFound()).isTrue();
 }

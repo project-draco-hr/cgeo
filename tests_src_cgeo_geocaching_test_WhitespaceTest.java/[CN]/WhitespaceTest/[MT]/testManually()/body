@@ -3,6 +3,6 @@
   final long start=System.currentTimeMillis();
   result=replaceWhitespaceManually(data);
   final long end=System.currentTimeMillis();
-  assertEquals(EXPECTED_SIZE,result.length());
+  assertThat(result.length()).isEqualTo(EXPECTED_SIZE);
   Log.d((end - start) + " ms manually");
 }

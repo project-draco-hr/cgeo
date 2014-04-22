@@ -1,6 +1,6 @@
 {
-  assertEquals(StringUtils.EMPTY,HtmlUtils.extractText(null));
-  assertEquals(StringUtils.EMPTY,HtmlUtils.extractText(StringUtils.EMPTY));
-  assertEquals(StringUtils.EMPTY,HtmlUtils.extractText("   "));
-  assertEquals("bold",HtmlUtils.extractText("<b>bold</b>"));
+  assertThat(HtmlUtils.extractText(null)).isEqualTo(StringUtils.EMPTY);
+  assertThat(HtmlUtils.extractText(StringUtils.EMPTY)).isEqualTo(StringUtils.EMPTY);
+  assertThat(HtmlUtils.extractText("   ")).isEqualTo(StringUtils.EMPTY);
+  assertThat(HtmlUtils.extractText("<b>bold</b>")).isEqualTo("bold");
 }

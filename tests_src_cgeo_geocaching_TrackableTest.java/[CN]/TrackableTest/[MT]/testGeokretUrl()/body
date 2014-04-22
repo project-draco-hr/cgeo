@@ -1,4 +1,4 @@
 {
   Trackable geokret=createTrackable("GK82A2");
-  assertEquals("http://geokrety.org/konkret.php?id=33442",geokret.getUrl());
+  assertThat(geokret.getUrl()).isEqualTo("http://geokrety.org/konkret.php?id=33442");
 }

@@ -1,8 +1,8 @@
 {
-  final MyList l=new MyList(0);
-  assertEquals("call() must not be called prematurely",0,l.getCounter());
-  l.size();
-  assertEquals("call() must be called when needed",1,l.getCounter());
-  l.size();
-  assertEquals("call() must be called only once",1,l.getCounter());
+  final MyList list=new MyList(0);
+  assertThat(list.getCounter()).overridingErrorMessage("call() must not be called prematurely").isEqualTo(0);
+  list.size();
+  assertThat(list.getCounter()).overridingErrorMessage("call() must be called when needed").isEqualTo(1);
+  list.size();
+  assertThat(list.getCounter()).overridingErrorMessage("call() must be called only once").isEqualTo(1);
 }

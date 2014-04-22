@@ -1,4 +1,4 @@
 {
-  assertTrue(foundFilter.accepts(foundCache));
-  assertFalse(foundFilter.accepts(new Geocache()));
+  assertThat(foundFilter.accepts(foundCache)).isTrue();
+  assertThat(foundFilter.accepts(new Geocache())).isFalse();
 }

@@ -4,8 +4,8 @@
   final InputStream instream=getResourceStream(resourceId);
   try {
     caches=parser.parse(instream,null);
-    assertNotNull(caches);
-    assertTrue(caches.size() > 0);
+    assertThat(caches).isNotNull();
+    assertThat(caches.size() > 0).isTrue();
   }
   finally {
     instream.close();

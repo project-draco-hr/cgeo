@@ -1,4 +1,4 @@
 {
   final Trackable trackable=createTrackable("tb1234");
-  assertEquals("TB1234",trackable.getGeocode());
+  assertThat(trackable.getGeocode()).isEqualTo("TB1234");
 }

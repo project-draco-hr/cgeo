@@ -1,8 +1,8 @@
 {
   final Geopoint gp1=new Geopoint(90.0,10.0);
-  Assert.assertEquals(90,gp1.getLatitude(),1e-8);
+  assertThat(gp1.getLatitude()).isEqualTo(90,offset(1e-8));
   final Geopoint gp2=new Geopoint(-90.0,10.0);
-  Assert.assertEquals(-90,gp2.getLatitude(),1e-8);
+  assertThat(gp2.getLatitude()).isEqualTo(-90,offset(1e-8));
   final Geopoint gp3=new Geopoint(10.0,180.0);
-  Assert.assertEquals(180,gp3.getLongitude(),1e-8);
+  assertThat(gp3.getLongitude()).isEqualTo(180,offset(1e-8));
 }

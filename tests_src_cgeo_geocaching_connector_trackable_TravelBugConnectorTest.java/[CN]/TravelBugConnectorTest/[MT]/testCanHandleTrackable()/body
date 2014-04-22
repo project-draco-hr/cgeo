@@ -1,10 +1,10 @@
 {
-  assertTrue(getConnector().canHandleTrackable("TB1234"));
-  assertTrue(getConnector().canHandleTrackable("TB1"));
-  assertTrue(getConnector().canHandleTrackable("TB123F"));
-  assertTrue(getConnector().canHandleTrackable("TB123Z"));
-  assertTrue(getConnector().canHandleTrackable("TB4JD36"));
-  assertTrue(getConnector().canHandleTrackable("GK1234"));
-  assertTrue(getConnector().canHandleTrackable("GST9HV"));
-  assertFalse(getConnector().canHandleTrackable("UNKNOWN"));
+  assertThat(getConnector().canHandleTrackable("TB1234")).isTrue();
+  assertThat(getConnector().canHandleTrackable("TB1")).isTrue();
+  assertThat(getConnector().canHandleTrackable("TB123F")).isTrue();
+  assertThat(getConnector().canHandleTrackable("TB123Z")).isTrue();
+  assertThat(getConnector().canHandleTrackable("TB4JD36")).isTrue();
+  assertThat(getConnector().canHandleTrackable("GK1234")).isTrue();
+  assertThat(getConnector().canHandleTrackable("GST9HV")).isTrue();
+  assertThat(getConnector().canHandleTrackable("UNKNOWN")).isFalse();
 }

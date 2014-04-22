@@ -1,6 +1,6 @@
 {
-  assertTrue(new GeokretyConnector().canHandleTrackable("GK82A2"));
-  assertFalse(new GeokretyConnector().canHandleTrackable("GKXYZ1"));
-  assertFalse(new GeokretyConnector().canHandleTrackable("TB1234"));
-  assertFalse(new GeokretyConnector().canHandleTrackable("UNKNOWN"));
+  assertThat(new GeokretyConnector().canHandleTrackable("GK82A2")).isTrue();
+  assertThat(new GeokretyConnector().canHandleTrackable("GKXYZ1")).isFalse();
+  assertThat(new GeokretyConnector().canHandleTrackable("TB1234")).isFalse();
+  assertThat(new GeokretyConnector().canHandleTrackable("UNKNOWN")).isFalse();
 }

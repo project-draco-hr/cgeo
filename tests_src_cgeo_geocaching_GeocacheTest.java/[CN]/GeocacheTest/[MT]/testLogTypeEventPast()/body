@@ -1,5 +1,5 @@
 {
   Calendar today=Calendar.getInstance();
   today.add(Calendar.DAY_OF_MONTH,-1);
-  assertEquals(LogType.ATTENDED,createEventCache(today).getDefaultLogType());
+  assertThat(createEventCache(today).getDefaultLogType()).isEqualTo(LogType.ATTENDED);
 }

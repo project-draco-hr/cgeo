@@ -1,3 +1,3 @@
 {
-  assertEquals(WaypointType.WAYPOINT,WaypointType.findById("random garbage"));
+  assertThat(WaypointType.findById("random garbage")).isEqualTo(WaypointType.WAYPOINT);
 }

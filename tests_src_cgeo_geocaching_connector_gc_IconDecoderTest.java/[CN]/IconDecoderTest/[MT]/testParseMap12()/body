@@ -29,8 +29,8 @@
   found=parseMapPNG(bitmap,176,82,12).isFound() ? found + 1 : found;
   found=parseMapPNG(bitmap,240,140,12).isFound() ? found + 1 : found;
   found=parseMapPNG(bitmap,211,127,12).isFound() ? found + 1 : found;
-  assertEquals(7,multi);
-  assertEquals(7,mystery);
-  assertEquals(7,tradi);
-  assertEquals(4,found);
+  assertThat(multi).isEqualTo(7);
+  assertThat(mystery).isEqualTo(7);
+  assertThat(tradi).isEqualTo(7);
+  assertThat(found).isEqualTo(4);
 }

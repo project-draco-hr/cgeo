@@ -1,4 +1,4 @@
 {
-  assertTrue(microFilter.accepts(micro));
-  assertFalse(microFilter.accepts(regular));
+  assertThat(microFilter.accepts(micro)).isTrue();
+  assertThat(microFilter.accepts(regular)).isFalse();
 }

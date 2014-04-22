@@ -1,11 +1,11 @@
 {
   final SearchResult search=Geocache.searchByGeocode(geocode,null,0,true,null);
-  assertNotNull(search);
+  assertThat(search).isNotNull();
   if (Settings.isGCPremiumMember() || search.getError() == null) {
-    assertEquals(1,search.getGeocodes().size());
-    assertTrue(search.getGeocodes().contains(geocode));
+    assertThat(search.getGeocodes()).hasSize(1);
+    assertThat(search.getGeocodes()).contains(geocode);
     return DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   }
-  assertEquals(0,search.getGeocodes().size());
+  assertThat(search.getGeocodes()).isEmpty();
   return null;
 }

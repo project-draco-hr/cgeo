@@ -1,5 +1,5 @@
 {
-  assertEquals("?",Units.getDistanceFromKilometers(null));
+  assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
   final boolean savedImperial=Settings.isUseImperialUnits();
   try {
     TestSettings.setUseImperialUnits(false);

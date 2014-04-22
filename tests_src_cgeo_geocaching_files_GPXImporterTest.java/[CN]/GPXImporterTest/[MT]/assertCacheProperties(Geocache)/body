@@ -1,5 +1,5 @@
 {
-  assertNotNull(cache);
-  assertFalse(cache.getLocation().startsWith(","));
-  assertTrue(cache.isReliableLatLon());
+  assertThat(cache).isNotNull();
+  assertThat(cache.getLocation().startsWith(",")).isFalse();
+  assertThat(cache.isReliableLatLon()).isTrue();
 }

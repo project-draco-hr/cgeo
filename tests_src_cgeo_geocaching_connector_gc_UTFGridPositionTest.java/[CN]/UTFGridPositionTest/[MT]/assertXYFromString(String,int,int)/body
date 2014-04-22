@@ -1,5 +1,5 @@
 {
   final UTFGridPosition pos=UTFGridPosition.fromString(key);
-  assertEquals(x,pos.getX());
-  assertEquals(y,pos.getY());
+  assertThat(pos.getX()).isEqualTo(x);
+  assertThat(pos.getY()).isEqualTo(y);
 }

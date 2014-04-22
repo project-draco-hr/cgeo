@@ -1,4 +1,4 @@
 {
-  assertFalse(storedFilter.accepts(cache));
-  assertTrue(notStoredFilter.accepts(cache));
+  assertThat(storedFilter.accepts(cache)).isFalse();
+  assertThat(notStoredFilter.accepts(cache)).isTrue();
 }

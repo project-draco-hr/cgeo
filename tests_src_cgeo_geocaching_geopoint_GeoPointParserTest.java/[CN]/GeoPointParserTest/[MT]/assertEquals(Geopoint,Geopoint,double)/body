@@ -1,5 +1,5 @@
 {
-  assertNotNull(expected);
-  assertNotNull(actual);
-  assertTrue(expected.distanceTo(actual) <= tolerance);
+  assertThat(expected).isNotNull();
+  assertThat(actual).isNotNull();
+  assertThat(expected.distanceTo(actual) <= tolerance).isTrue();
 }

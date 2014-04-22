@@ -1,5 +1,5 @@
 {
   final Parameters params=new Parameters("aaa","AAA","bbb","BBB");
   params.put("ccc","CCC","ddd","DDD");
-  Assert.assertEquals("aaa=AAA&bbb=BBB&ccc=CCC&ddd=DDD",params.toString());
+  assertThat(params.toString()).isEqualTo("aaa=AAA&bbb=BBB&ccc=CCC&ddd=DDD");
 }

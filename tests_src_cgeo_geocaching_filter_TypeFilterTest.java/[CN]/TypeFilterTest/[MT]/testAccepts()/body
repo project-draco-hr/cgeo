@@ -1,4 +1,4 @@
 {
-  assertTrue(traditionalFilter.accepts(traditional));
-  assertFalse(traditionalFilter.accepts(mystery));
+  assertThat(traditionalFilter.accepts(traditional)).isTrue();
+  assertThat(traditionalFilter.accepts(mystery)).isFalse();
 }

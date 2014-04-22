@@ -1,5 +1,5 @@
 {
   final IConnector connector=ConnectorFactory.getConnector("GC12345");
-  assertNotNull(connector);
-  assertEquals(GCConnector.getInstance().getName(),connector.getName());
+  assertThat(connector).isNotNull();
+  assertThat(connector.getName()).isEqualTo(GCConnector.getInstance().getName());
 }

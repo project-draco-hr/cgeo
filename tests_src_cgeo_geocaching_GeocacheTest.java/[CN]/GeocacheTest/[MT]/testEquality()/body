@@ -1,9 +1,9 @@
 {
   final Geocache one=new Geocache();
   final Geocache two=new Geocache();
-  assertTrue(one.equals(one));
-  assertFalse(one.equals(two));
+  assertThat(one.equals(one)).isTrue();
+  assertThat(one.equals(two)).isFalse();
   one.setGeocode("geocode");
   two.setGeocode("geocode");
-  assertTrue(one.equals(two));
+  assertThat(one.equals(two)).isTrue();
 }

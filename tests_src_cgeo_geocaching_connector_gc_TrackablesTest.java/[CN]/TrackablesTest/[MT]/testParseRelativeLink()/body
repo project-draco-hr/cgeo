@@ -1,9 +1,9 @@
 {
   final Trackable trackable=parseTrackable(R.raw.tb4cwjx);
-  assertNotNull(trackable);
-  assertEquals("The Golden Lisa",trackable.getName());
+  assertThat(trackable).isNotNull();
+  assertThat(trackable.getName()).isEqualTo("The Golden Lisa");
   final String goal=trackable.getGoal();
-  assertNotNull(goal);
-  assertFalse(goal.contains(".."));
-  assertTrue(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\""));
+  assertThat(goal).isNotNull();
+  assertThat(goal.contains("..")).isFalse();
+  assertThat(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\"")).isTrue();
 }

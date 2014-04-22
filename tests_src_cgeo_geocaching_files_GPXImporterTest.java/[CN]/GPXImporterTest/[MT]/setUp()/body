@@ -1,10 +1,10 @@
 {
   super.setUp();
   final String globalTempDir=System.getProperty("java.io.tmpdir");
-  assertTrue("java.io.tmpdir is not defined",StringUtils.isNotBlank(globalTempDir));
+  assertThat(StringUtils.isNotBlank(globalTempDir)).overridingErrorMessage("java.io.tmpdir is not defined").isTrue();
   tempDir=new File(globalTempDir,"cgeogpxesTest");
   cgeo.geocaching.utils.FileUtils.mkdirs(tempDir);
-  assertTrue("Could not create directory " + tempDir.getPath(),tempDir.exists());
+  assertThat(tempDir).overridingErrorMessage("Could not create directory %s",tempDir.getPath()).exists();
   DataStore.getAllHistoryCachesCount();
   listId=DataStore.createList("cgeogpxesTest");
   importCacheStaticMaps=Settings.isStoreOfflineMaps();

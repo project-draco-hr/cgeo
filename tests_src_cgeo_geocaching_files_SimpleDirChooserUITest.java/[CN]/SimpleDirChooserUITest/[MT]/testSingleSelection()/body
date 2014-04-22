@@ -5,8 +5,8 @@
   pause();
   final int lastIndex=getCurrentCheckBoxes().size() - 1;
   solo.clickOnCheckBox(lastIndex);
-  assertTrue(solo.isCheckBoxChecked(lastIndex));
-  assertFalse(solo.isCheckBoxChecked(0));
+  assertThat(solo.isCheckBoxChecked(lastIndex)).isTrue();
+  assertThat(solo.isCheckBoxChecked(0)).isFalse();
   assertChecked("Clicked last checkbox",1);
   solo.scrollUp();
   pause();
@@ -17,8 +17,8 @@
   pause();
   solo.clickOnCheckBox(0);
   assertChecked("Clicked first checkbox",1);
-  assertTrue(solo.isCheckBoxChecked(0));
+  assertThat(solo.isCheckBoxChecked(0)).isTrue();
   solo.clickOnCheckBox(1);
   assertChecked("Clicked second checkbox",1);
-  assertTrue(solo.isCheckBoxChecked(1));
+  assertThat(solo.isCheckBoxChecked(1)).isTrue();
 }

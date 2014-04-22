@@ -1,11 +1,11 @@
 {
   for (  CacheAttribute attribute : CacheAttribute.values()) {
     if (attribute != CacheAttribute.UNKNOWN) {
-      assertTrue(attribute.rawName != null);
-      assertTrue(attribute.rawName.length() > 0);
-      assertTrue(attribute.drawableId != 0);
-      assertTrue(attribute.stringIdYes != 0);
-      assertTrue(attribute.stringIdNo != 0);
+      assertThat(attribute.rawName != null).isTrue();
+      assertThat(attribute.rawName.length() > 0).isTrue();
+      assertThat(attribute.drawableId != 0).isTrue();
+      assertThat(attribute.stringIdYes != 0).isTrue();
+      assertThat(attribute.stringIdNo != 0).isTrue();
     }
   }
 }

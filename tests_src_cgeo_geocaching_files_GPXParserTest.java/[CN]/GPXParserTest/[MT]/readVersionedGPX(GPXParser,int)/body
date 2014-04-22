@@ -4,7 +4,7 @@
     final InputStream instream=getResourceStream(resourceId);
     try {
       Collection<Geocache> caches=parser.parse(instream,null);
-      assertNotNull(caches);
+      assertThat(caches).isNotNull();
       for (      Geocache cache : caches) {
         result.add(cache.getGeocode());
       }

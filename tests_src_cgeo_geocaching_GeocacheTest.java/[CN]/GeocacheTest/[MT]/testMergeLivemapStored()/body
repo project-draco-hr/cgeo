@@ -10,8 +10,8 @@
   livemap.setType(CacheType.MULTI,12);
   livemap.setCoords(new Geopoint(41.0,9.0),12);
   livemap.gatherMissingFrom(stored);
-  assertTrue("Detailed not merged correctly",livemap.isDetailed());
-  assertTrue("Disabled not merged correctly",livemap.isDisabled());
+  assertThat(livemap.isDetailed()).as("merged detailed").isTrue();
+  assertThat(livemap.isDisabled()).as("merged disabled").isTrue();
   assertEquals("Type not merged correctly",CacheType.TRADITIONAL,livemap.getType());
   assertEquals("Longitude not merged correctly",8.0,livemap.getCoords().getLongitude(),0.1);
   assertEquals("Latitude not merged correctly",40.0,livemap.getCoords().getLatitude(),0.1);

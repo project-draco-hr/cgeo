@@ -12,19 +12,19 @@
         final Viewport viewport=new Viewport(mockedCache,0.003,0.003);
         Settings.setLiveMapStrategy(Strategy.DETAILED);
         SearchResult search=ConnectorFactory.searchByViewport(viewport,tokens);
-        assertNotNull(search);
-        assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
+        assertThat(search).isNotNull();
+        assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
         Geocache parsedCache=DataStore.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
-        assertEquals(Settings.isGCPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
-        assertEquals(Settings.isGCPremiumMember(),parsedCache.isReliableLatLon());
+        assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
+        assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
         Settings.setLiveMapStrategy(Strategy.FAST);
         Tile.cache.removeFromTileCache(mockedCache);
         search=ConnectorFactory.searchByViewport(viewport,tokens);
-        assertNotNull(search);
-        assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
+        assertThat(search).isNotNull();
+        assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
         parsedCache=DataStore.loadCache(mockedCache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
-        assertEquals(Settings.isGCPremiumMember(),mockedCache.getCoords().equals(parsedCache.getCoords()));
-        assertEquals(Settings.isGCPremiumMember(),parsedCache.isReliableLatLon());
+        assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
+        assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
       }
   finally {
         Settings.setLiveMapStrategy(strategy);

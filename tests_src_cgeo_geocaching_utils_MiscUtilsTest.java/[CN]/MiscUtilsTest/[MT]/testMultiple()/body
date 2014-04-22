@@ -5,7 +5,7 @@
   }
   int count=0;
   for (  final List<Integer> subList : MiscUtils.buffer(list,10)) {
-    assertEquals("each sublist has the right size",10,subList.size());
+    assertThat(subList).hasSize(10);
     assertEquals("sublist has the right content",count * 10,(int)subList.get(0));
     count++;
   }

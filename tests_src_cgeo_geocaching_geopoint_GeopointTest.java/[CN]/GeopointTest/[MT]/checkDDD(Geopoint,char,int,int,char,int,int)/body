@@ -1,8 +1,8 @@
 {
-  Assert.assertEquals(latDir,gp.getLatDir());
-  Assert.assertEquals(latDeg,gp.getLatDeg());
-  Assert.assertEquals(latDegFrac,gp.getLatDegFrac());
-  Assert.assertEquals(lonDir,gp.getLonDir());
-  Assert.assertEquals(lonDeg,gp.getLonDeg());
-  Assert.assertEquals(lonDegFrac,gp.getLonDegFrac());
+  assertThat(gp.getLatDir()).isEqualTo(latDir);
+  assertThat(gp.getLatDeg()).isEqualTo(latDeg);
+  assertThat(gp.getLatDegFrac()).isEqualTo(latDegFrac);
+  assertThat(gp.getLonDir()).isEqualTo(lonDir);
+  assertThat(gp.getLonDeg()).isEqualTo(lonDeg);
+  assertThat(gp.getLonDegFrac()).isEqualTo(lonDegFrac);
 }

@@ -1,16 +1,16 @@
 {
   final Trackable trackable=getTBXATG();
-  assertEquals("TBXATG",trackable.getGeocode());
+  assertThat(trackable.getGeocode()).isEqualTo("TBXATG");
   final List<LogEntry> log=trackable.getLogs();
-  assertNotNull(log);
-  assertEquals(10,log.size());
+  assertThat(log).isNotNull();
+  assertThat(log).hasSize(10);
   final List<Image> log4Images=log.get(4).getLogImages();
-  assertNotNull(log4Images);
-  assertEquals(1,log4Images.size());
-  assertEquals("http://imgcdn.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg",log4Images.get(0).getUrl());
-  assertEquals("@Osaka",log4Images.get(0).getTitle());
+  assertThat(log4Images).isNotNull();
+  assertThat(log4Images).hasSize(1);
+  assertThat(log4Images.get(0).getUrl()).isEqualTo("http://imgcdn.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg");
+  assertThat(log4Images.get(0).getTitle()).isEqualTo("@Osaka");
   for (  LogEntry entry : log) {
-    assertFalse(entry.log.startsWith("<div>"));
+    assertThat(entry.log.startsWith("<div>")).isFalse();
   }
-  assertEquals("Dropped in Una Bhan (GC49XCJ)",log.get(0).log);
+  assertThat(log.get(0).log).isEqualTo("Dropped in Una Bhan (GC49XCJ)");
 }

@@ -1,4 +1,4 @@
 {
-  assertEquals(CacheSize.REGULAR,CacheSize.getById("3"));
-  assertEquals(CacheSize.UNKNOWN,CacheSize.getById("-1"));
+  assertThat(CacheSize.getById("3")).isEqualTo(CacheSize.REGULAR);
+  assertThat(CacheSize.getById("-1")).isEqualTo(CacheSize.UNKNOWN);
 }

@@ -1,5 +1,5 @@
 {
-  assertEquals(1186660,GCConstants.gccodeToGCId("GC1PKK9"));
-  assertEquals(4660,GCConstants.gccodeToGCId("GC1234"));
-  assertEquals(61731,GCConstants.gccodeToGCId("GCF123"));
+  assertThat(GCConstants.gccodeToGCId("GC1PKK9")).isEqualTo(1186660);
+  assertThat(GCConstants.gccodeToGCId("GC1234")).isEqualTo(4660);
+  assertThat(GCConstants.gccodeToGCId("GCF123")).isEqualTo(61731);
 }

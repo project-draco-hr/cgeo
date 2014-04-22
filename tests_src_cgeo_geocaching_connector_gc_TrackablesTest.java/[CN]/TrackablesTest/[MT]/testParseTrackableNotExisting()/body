@@ -1,4 +1,4 @@
 {
   final Trackable trackable=GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing),null);
-  assertNull(trackable);
+  assertThat(trackable).isNull();
 }

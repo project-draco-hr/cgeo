@@ -1,10 +1,10 @@
 {
   final List<Geocache> caches=readGPX10(R.raw.geotoad);
-  assertEquals(2,caches.size());
+  assertThat(caches).hasSize(2);
   final List<String> codes=new ArrayList<String>();
   for (  Geocache cache : caches) {
     codes.add(cache.getGeocode());
   }
-  assertTrue(codes.contains("GC2KN6K"));
-  assertTrue(codes.contains("GC1T3MK"));
+  assertThat(codes.contains("GC2KN6K")).isTrue();
+  assertThat(codes.contains("GC1T3MK")).isTrue();
 }

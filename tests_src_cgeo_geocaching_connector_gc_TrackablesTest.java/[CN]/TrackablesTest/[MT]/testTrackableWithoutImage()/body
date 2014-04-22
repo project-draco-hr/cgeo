@@ -1,5 +1,5 @@
 {
   final Trackable trackable=getTB2R124();
-  assertNull(trackable.getImage());
-  assertNotNull(trackable.getDetails());
+  assertThat(trackable.getImage()).isNull();
+  assertThat(trackable.getDetails()).isNotNull();
 }

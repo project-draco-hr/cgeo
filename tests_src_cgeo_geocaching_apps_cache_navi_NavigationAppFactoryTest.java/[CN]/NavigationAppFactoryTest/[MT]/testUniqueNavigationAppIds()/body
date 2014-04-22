@@ -3,5 +3,5 @@
   for (  NavigationAppsEnum navigationApp : NavigationAppsEnum.values()) {
     idSet.add(navigationApp.id);
   }
-  assertEquals("Duplicate id in " + NavigationAppsEnum.class.getSimpleName(),NavigationAppsEnum.values().length,idSet.size());
+  assertThat(idSet).doesNotHaveDuplicates();
 }

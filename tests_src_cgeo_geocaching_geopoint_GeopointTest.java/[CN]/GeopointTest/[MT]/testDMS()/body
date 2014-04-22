@@ -2,7 +2,7 @@
   final Geopoint gp1=new Geopoint(51.3d,13.8d);
   checkDMS(gp1,'N',51,18,0,0,'E',13,48,0,0);
   final Geopoint gp1a=new Geopoint(String.valueOf(gp1.getLatDir()),String.valueOf(gp1.getLatDeg()),String.valueOf(gp1.getLatMin()),String.valueOf(gp1.getLatSec()),String.valueOf(gp1.getLatSecFrac()),String.valueOf(gp1.getLonDir()),String.valueOf(gp1.getLonDeg()),String.valueOf(gp1.getLonMin()),String.valueOf(gp1.getLonSec()),String.valueOf(gp1.getLonSecFrac()));
-  Assert.assertTrue(gp1a.equals(gp1));
+  assertThat(gp1a).isEqualTo(gp1);
   final Geopoint gp2=new Geopoint(51.34567d,13.87654d);
   checkDMS(gp2,'N',51,20,44,412,'E',13,52,35,544);
   final Geopoint gp2a=new Geopoint(String.valueOf(gp2.getLatDir()),String.valueOf(gp2.getLatDeg()),String.valueOf(gp2.getLatMin()),String.valueOf(gp2.getLatSec()),String.valueOf(gp2.getLatSecFrac()),String.valueOf(gp2.getLonDir()),String.valueOf(gp2.getLonDeg()),String.valueOf(gp2.getLonMin()),String.valueOf(gp2.getLonSec()),String.valueOf(gp2.getLonSecFrac()));

@@ -1,6 +1,6 @@
 {
   super.setUp();
   temporaryListId=DataStore.createList("Temporary unit testing");
-  assertTrue(temporaryListId != StoredList.TEMPORARY_LIST_ID);
-  assertTrue(temporaryListId != StoredList.STANDARD_LIST_ID);
+  assertThat(temporaryListId != StoredList.TEMPORARY_LIST_ID).isTrue();
+  assertThat(temporaryListId != StoredList.STANDARD_LIST_ID).isTrue();
 }

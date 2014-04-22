@@ -2,5 +2,5 @@
   GCLogin.getInstance().logout();
   GCLogin.getInstance().setActualCachesFound(0);
   GCLogin.getInstance().login();
-  assertTrue(GCLogin.getInstance().getActualCachesFound() > 0);
+  assertThat(GCLogin.getInstance().getActualCachesFound() > 0).isTrue();
 }

@@ -1,11 +1,11 @@
 {
   ProgressInputStream stream=new ProgressInputStream(IOUtils.toInputStream("test"));
-  assertEquals(0,stream.getProgress());
+  assertThat(stream.getProgress()).isEqualTo(0);
   int bytesRead=0;
   while (stream.read() >= 0 && bytesRead < 10000) {
     bytesRead++;
   }
-  assertEquals(4,bytesRead);
-  assertEquals(4,stream.getProgress());
+  assertThat(bytesRead).isEqualTo(4);
+  assertThat(stream.getProgress()).isEqualTo(4);
   IOUtils.closeQuietly(stream);
 }

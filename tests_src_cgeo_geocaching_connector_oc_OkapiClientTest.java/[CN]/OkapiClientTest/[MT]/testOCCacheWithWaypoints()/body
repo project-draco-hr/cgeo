@@ -2,10 +2,10 @@
   final String geoCode="OCDDD2";
   removeCacheCompletely(geoCode);
   Geocache cache=OkapiClient.getCache(geoCode);
-  assertNotNull("Did not get cache from OKAPI",cache);
+  assertThat(cache).as("Cache from OKAPI").isNotNull();
   cache=DataStore.loadCache(geoCode,LoadFlags.LOAD_ALL_DB_ONLY);
-  assertNotNull(cache);
-  assertEquals(3,cache.getWaypoints().size());
+  assertThat(cache).isNotNull();
+  assertThat(cache.getWaypoints()).hasSize(3);
   cache.refreshSynchronous(cache.getListId(),null);
-  assertEquals(3,cache.getWaypoints().size());
+  assertThat(cache.getWaypoints()).hasSize(3);
 }

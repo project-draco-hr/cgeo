@@ -3,8 +3,8 @@
   try {
     GPX10Parser parser=new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
     Collection<Geocache> caches=parser.parse(instream,null);
-    assertNotNull(caches);
-    assertFalse(caches.isEmpty());
+    assertThat(caches).isNotNull();
+    assertThat(caches.isEmpty()).isFalse();
     return caches.iterator().next();
   }
   finally {

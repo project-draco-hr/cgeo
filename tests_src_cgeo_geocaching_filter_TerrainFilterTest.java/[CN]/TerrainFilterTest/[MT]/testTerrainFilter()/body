@@ -4,6 +4,6 @@
   final Geocache hard=new Geocache();
   hard.setTerrain(5f);
   final AbstractRangeFilter easyFilter=new TerrainFilter(1);
-  assertTrue(easyFilter.accepts(easy));
-  assertFalse(easyFilter.accepts(hard));
+  assertThat(easyFilter.accepts(easy)).isTrue();
+  assertThat(easyFilter.accepts(hard)).isFalse();
 }

@@ -1,3 +1,3 @@
 {
-  assertFalse("pseudo lists are not concrete lists",PseudoList.ALL_LIST.isConcrete());
+  assertThat(PseudoList.ALL_LIST.isConcrete()).overridingErrorMessage("pseudo lists are not concrete lists").isFalse();
 }

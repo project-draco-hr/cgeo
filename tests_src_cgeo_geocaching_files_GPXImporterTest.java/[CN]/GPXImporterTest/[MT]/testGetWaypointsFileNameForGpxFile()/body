@@ -6,12 +6,12 @@
     String wptsFileName=wptsFiles[i];
     File gpx=new File(tempDir,gpxFileName);
     File wpts=new File(tempDir,wptsFileName);
-    assertTrue(gpx.createNewFile());
-    assertTrue(wpts.createNewFile());
-    assertEquals(wptsFileName,GPXImporter.getWaypointsFileNameForGpxFile(gpx));
+    assertThat(gpx.createNewFile()).isTrue();
+    assertThat(wpts.createNewFile()).isTrue();
+    assertThat(GPXImporter.getWaypointsFileNameForGpxFile(gpx)).isEqualTo(wptsFileName);
     FileUtils.deleteQuietly(gpx);
     FileUtils.deleteQuietly(wpts);
   }
   final File gpx1=new File(tempDir,"abc.gpx");
-  assertNull(GPXImporter.getWaypointsFileNameForGpxFile(gpx1));
+  assertThat(GPXImporter.getWaypointsFileNameForGpxFile(gpx1)).isNull();
 }

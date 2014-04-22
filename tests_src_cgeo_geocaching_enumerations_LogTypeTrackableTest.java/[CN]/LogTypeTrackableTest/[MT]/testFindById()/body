@@ -1,5 +1,5 @@
 {
   for (  LogTypeTrackable logTypeTrackable : LogTypeTrackable.values()) {
-    assertTrue(StringUtils.isNotEmpty(logTypeTrackable.getLabel()));
+    assertThat(StringUtils.isNotEmpty(logTypeTrackable.getLabel())).isTrue();
   }
 }

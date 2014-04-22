@@ -1,9 +1,9 @@
 {
   final Trackable trackable=parseTrackable(R.raw.tb3f206);
-  assertNotNull(trackable);
+  assertThat(trackable).isNotNull();
   final List<LogEntry> logs=trackable.getLogs();
-  assertNotNull(logs);
-  assertFalse(logs.isEmpty());
+  assertThat(logs).isNotNull();
+  assertThat(logs.isEmpty()).isFalse();
   final LogEntry marked=logs.get(0);
-  assertEquals(LogType.MARKED_MISSING,marked.type);
+  assertThat(marked.type).isEqualTo(LogType.MARKED_MISSING);
 }

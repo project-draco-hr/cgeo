@@ -5,7 +5,7 @@
       Settings.setGcCustomDate(MockedCache.getDateFormat());
       SearchResult searchResult=GCParser.parseCacheFromText(mockedCache.getData(),null);
       Geocache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-      assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
+      assertThat(StringUtils.isNotBlank(mockedCache.getMockedDataUser())).isTrue();
       Compare.assertCompareCaches(mockedCache,parsedCache,true);
     }
   }

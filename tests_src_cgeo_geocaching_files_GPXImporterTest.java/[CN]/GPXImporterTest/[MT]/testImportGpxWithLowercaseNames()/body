@@ -6,5 +6,5 @@
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
   final Geocache cache=DataStore.loadCache("AID1",LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
-  assertEquals("First Aid Station #1",cache.getName());
+  assertThat(cache.getName()).isEqualTo("First Aid Station #1");
 }

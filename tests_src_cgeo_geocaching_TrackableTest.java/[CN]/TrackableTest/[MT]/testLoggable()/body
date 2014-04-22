@@ -1,4 +1,4 @@
 {
-  assertTrue(createTrackable("TB1234").isLoggable());
-  assertFalse(createTrackable("GK1234").isLoggable());
+  assertThat(createTrackable("TB1234").isLoggable()).isTrue();
+  assertThat(createTrackable("GK1234").isLoggable()).isFalse();
 }

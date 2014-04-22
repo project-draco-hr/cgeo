@@ -1,3 +1,3 @@
 {
-  assertEquals("foo bar baz ",TextUtils.replaceWhitespace("  foo\n\tbar   \r   baz  "));
+  assertThat(TextUtils.replaceWhitespace("  foo\n\tbar   \r   baz  ")).isEqualTo("foo bar baz ");
 }

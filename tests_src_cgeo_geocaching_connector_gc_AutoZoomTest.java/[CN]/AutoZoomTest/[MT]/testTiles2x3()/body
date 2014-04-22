@@ -2,5 +2,5 @@
   final Geopoint bottomLeft=new Geopoint(49.3,8.3);
   final Geopoint topRight=new Geopoint(49.4,8.4);
   final Set<Tile> tiles=Tile.getTilesForViewport(new Viewport(bottomLeft,topRight),3,Tile.ZOOMLEVEL_MIN);
-  assertEquals(6,tiles.size());
+  assertThat(tiles).hasSize(6);
 }

@@ -2,5 +2,5 @@
   final String noTemplates=" no templates ";
   assertEquals(noTemplates,LogTemplateProvider.applyTemplates(noTemplates,new LogContext(null,null,true)));
   final String currentYear=Integer.toString(Calendar.YEAR);
-  assertTrue(LogTemplateProvider.applyTemplates("[DATE]",new LogContext(null,null,true)).contains(currentYear));
+  assertThat(LogTemplateProvider.applyTemplates("[DATE]",new LogContext(null,null,true)).contains(currentYear)).isTrue();
 }

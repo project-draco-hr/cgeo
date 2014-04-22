@@ -6,8 +6,8 @@
   runImportThread(importThread);
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_READ_WPT_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
   final SearchResult search=(SearchResult)importStepHandler.messages.get(4).obj;
-  assertEquals(Collections.singletonList("GC31J2H"),new ArrayList<String>(search.getGeocodes()));
+  assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList("GC31J2H"));
   final Geocache cache=DataStore.loadCache("GC31J2H",LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
-  assertEquals(2,cache.getWaypoints().size());
+  assertThat(cache.getWaypoints()).hasSize(2);
 }

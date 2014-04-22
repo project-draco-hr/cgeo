@@ -1,11 +1,11 @@
 {
   final Trackable trackable=parseTrackable(R.raw.tb14wfv);
-  assertNotNull(trackable);
-  assertEquals("The Brickster",trackable.getName());
-  assertEquals("Adrian C",trackable.getOwner());
-  assertTrue(trackable.getGoal().startsWith("I'm on the run from the law."));
-  assertTrue(trackable.getGoal().endsWith("what I've seen."));
-  assertTrue(trackable.getDistance() >= 11663.5f);
-  assertNull(trackable.getReleased());
-  assertNull(trackable.getOrigin());
+  assertThat(trackable).isNotNull();
+  assertThat(trackable.getName()).isEqualTo("The Brickster");
+  assertThat(trackable.getOwner()).isEqualTo("Adrian C");
+  assertThat(trackable.getGoal().startsWith("I'm on the run from the law.")).isTrue();
+  assertThat(trackable.getGoal().endsWith("what I've seen.")).isTrue();
+  assertThat(trackable.getDistance() >= 11663.5f).isTrue();
+  assertThat(trackable.getReleased()).isNull();
+  assertThat(trackable.getOrigin()).isNull();
 }

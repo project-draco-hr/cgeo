@@ -1,8 +1,8 @@
 {
   final List<TrackableLog> tbLogs=GCParser.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
-  assertNotNull(tbLogs);
-  assertEquals(2,tbLogs.size());
+  assertThat(tbLogs).isNotNull();
+  assertThat(tbLogs).hasSize(2);
   final TrackableLog log=tbLogs.get(0);
-  assertEquals("Steffen's Kaiserwagen",log.name);
-  assertEquals("1QG1EE",log.trackCode);
+  assertThat(log.name).isEqualTo("Steffen's Kaiserwagen");
+  assertThat(log.trackCode).isEqualTo("1QG1EE");
 }

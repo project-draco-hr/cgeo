@@ -1,4 +1,4 @@
 {
-  assertTrue(ConnectorFactory.getConnector("   OZ12345   ") instanceof OCConnector);
-  assertTrue(ConnectorFactory.getConnector("   OZ 12345   ") instanceof UnknownConnector);
+  assertThat(ConnectorFactory.getConnector("   OZ12345   ") instanceof OCConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("   OZ 12345   ") instanceof UnknownConnector).isTrue();
 }

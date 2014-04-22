@@ -1,6 +1,6 @@
 {
   for (  CacheAttribute attribute : CacheAttribute.values()) {
     final String rawName=attribute.rawName;
-    assertTrue("bad attribute name " + rawName,CacheAttribute.trimAttributeName(rawName).equals(rawName));
+    assertThat(CacheAttribute.trimAttributeName(rawName)).as("attribute name").isEqualTo(rawName);
   }
 }

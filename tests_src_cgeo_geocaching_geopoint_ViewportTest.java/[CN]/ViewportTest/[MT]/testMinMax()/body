@@ -1,6 +1,6 @@
 {
-  assertEquals(-1.0,vpRef.getLatitudeMin());
-  assertEquals(3.0,vpRef.getLatitudeMax());
-  assertEquals(-2.0,vpRef.getLongitudeMin());
-  assertEquals(4.0,vpRef.getLongitudeMax());
+  assertThat(vpRef.getLatitudeMin()).isEqualTo(-1.0);
+  assertThat(vpRef.getLatitudeMax()).isEqualTo(3.0);
+  assertThat(vpRef.getLongitudeMin()).isEqualTo(-2.0);
+  assertThat(vpRef.getLongitudeMax()).isEqualTo(4.0);
 }

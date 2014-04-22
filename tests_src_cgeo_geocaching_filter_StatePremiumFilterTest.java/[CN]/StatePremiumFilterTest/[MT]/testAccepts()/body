@@ -1,4 +1,4 @@
 {
-  assertTrue(premiumFilter.accepts(premiumCache));
-  assertFalse(premiumFilter.accepts(new Geocache()));
+  assertThat(premiumFilter.accepts(premiumCache)).isTrue();
+  assertThat(premiumFilter.accepts(new Geocache())).isFalse();
 }

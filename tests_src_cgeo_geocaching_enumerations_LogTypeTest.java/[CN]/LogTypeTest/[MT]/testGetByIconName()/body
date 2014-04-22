@@ -1,5 +1,5 @@
 {
-  assertEquals(LogType.UNKNOWN,LogType.getByIconName(""));
-  assertEquals(LogType.UNKNOWN,LogType.getByIconName(null));
-  assertEquals(LogType.WEBCAM_PHOTO_TAKEN,LogType.getByIconName("11"));
+  assertThat(LogType.getByIconName("")).isEqualTo(LogType.UNKNOWN);
+  assertThat(LogType.getByIconName(null)).isEqualTo(LogType.UNKNOWN);
+  assertThat(LogType.getByIconName("11")).isEqualTo(LogType.WEBCAM_PHOTO_TAKEN);
 }

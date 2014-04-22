@@ -1,6 +1,6 @@
 {
-  assertFalse(ConnectorFactory.canHandle(""));
-  assertTrue(ConnectorFactory.canHandle("GC12345"));
-  assertTrue(ConnectorFactory.canHandle("some string"));
-  assertFalse(ConnectorFactory.canHandle("[/start with special char"));
+  assertThat(ConnectorFactory.canHandle("")).isFalse();
+  assertThat(ConnectorFactory.canHandle("GC12345")).isTrue();
+  assertThat(ConnectorFactory.canHandle("some string")).isTrue();
+  assertThat(ConnectorFactory.canHandle("[/start with special char")).isFalse();
 }

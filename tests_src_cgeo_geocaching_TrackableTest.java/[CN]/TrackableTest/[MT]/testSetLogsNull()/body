@@ -1,5 +1,5 @@
 {
   final Trackable trackable=new Trackable();
   trackable.setLogs(null);
-  assertNotNull("Trackable logs must not be null!",trackable.getLogs());
+  assertThat(trackable.getLogs()).as("Trackable logs").isNotNull();
 }

@@ -1,5 +1,5 @@
 {
   final List<TrackableLog> tbLogs=GCParser.parseTrackableLog(getFileContent(R.raw.log_without_tb));
-  assertNotNull(tbLogs);
-  assertEquals(0,tbLogs.size());
+  assertThat(tbLogs).isNotNull();
+  assertThat(tbLogs).isEmpty();
 }

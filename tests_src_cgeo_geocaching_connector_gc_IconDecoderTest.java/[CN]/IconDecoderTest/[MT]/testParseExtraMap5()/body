@@ -16,7 +16,7 @@
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,220,48,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,136,176,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,132,232,12).getType());
-  assertTrue(parseMapPNG(bitmap,240,40,12).isFound());
+  assertThat(parseMapPNG(bitmap,240,40,12).isFound()).isTrue();
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,140,116,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,124,144,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,48,128,12).getType());
@@ -29,7 +29,7 @@
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,108,168,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,232,28,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,200,204,12).getType());
-  assertTrue(parseMapPNG(bitmap,228,28,12).isFound());
+  assertThat(parseMapPNG(bitmap,228,28,12).isFound()).isTrue();
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,220,188,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,168,212,12).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,152,176,12).getType());
@@ -65,7 +65,7 @@
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,248,56,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,100,180,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,220,124,12).getType());
-  assertTrue(parseMapPNG(bitmap,212,4,12).isFound());
+  assertThat(parseMapPNG(bitmap,212,4,12).isFound()).isTrue();
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,28,212,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,128,84,12).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,220,16,12).getType());
@@ -91,7 +91,7 @@
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,120,172,12).getType());
   assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,104,92,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,128,120,12).getType());
-  assertTrue(parseMapPNG(bitmap,204,40,12).isFound());
+  assertThat(parseMapPNG(bitmap,204,40,12).isFound()).isTrue();
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,56,76,12).getType());
   assertEquals(CacheType.MULTI,parseMapPNG(bitmap,196,108,12).getType());
   assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,120,196,12).getType());

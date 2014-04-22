@@ -1,4 +1,4 @@
 {
   assertSorted(new NamedCache("abc123def"),new NamedCache("abc123xyz"));
-  assertEquals("abc000123def000456",(new NamedCache("abc123def456")).getNameForSorting());
+  assertThat((new NamedCache("abc123def456")).getNameForSorting()).isEqualTo("abc000123def000456");
 }

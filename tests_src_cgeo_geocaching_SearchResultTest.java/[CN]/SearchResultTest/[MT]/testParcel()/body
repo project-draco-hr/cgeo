@@ -13,10 +13,10 @@
   parcel.setDataPosition(0);
   final SearchResult receive=new SearchResult(parcel);
   parcel.recycle();
-  assertEquals(3,receive.getCount());
-  assertEquals(2,receive.getFilteredGeocodes().size());
-  assertTrue(receive.getGeocodes().contains("GC12345"));
-  assertFalse(receive.getGeocodes().contains("GC45678"));
-  assertFalse(receive.getFilteredGeocodes().contains("GC12345"));
-  assertTrue(receive.getFilteredGeocodes().contains("GC45678"));
+  assertThat(receive.getCount()).isEqualTo(3);
+  assertThat(receive.getFilteredGeocodes()).hasSize(2);
+  assertThat(receive.getGeocodes().contains("GC12345")).isTrue();
+  assertThat(receive.getGeocodes().contains("GC45678")).isFalse();
+  assertThat(receive.getFilteredGeocodes().contains("GC12345")).isFalse();
+  assertThat(receive.getFilteredGeocodes().contains("GC45678")).isTrue();
 }

@@ -1,4 +1,4 @@
 {
-  final MyList l=new MyList(3);
-  assertEquals("completed size must be identical to call() result",3,l.size());
+  final MyList list=new MyList(3);
+  assertThat(list).overridingErrorMessage("completed size must be identical to call() result").hasSize(3);
 }

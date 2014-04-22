@@ -1,12 +1,12 @@
 {
   final Progress progress=new Progress();
-  assertFalse(progress.isShowing());
+  assertThat(progress.isShowing()).isFalse();
   progress.show(getActivity(),"Title","Message",true,null);
-  assertTrue(progress.isShowing());
+  assertThat(progress.isShowing()).isTrue();
   progress.setMessage("Test");
-  assertTrue(progress.isShowing());
+  assertThat(progress.isShowing()).isTrue();
   for (int i=0; i < 2; i++) {
     progress.dismiss();
-    assertFalse(progress.isShowing());
+    assertThat(progress.isShowing()).isFalse();
   }
 }

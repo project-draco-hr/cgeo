@@ -1,6 +1,6 @@
 {
   final Trackable trackable=getTB2R124();
-  assertEquals("TB2R124",trackable.getGeocode());
-  assertEquals("Bor. Dortmund - FC Schalke 04",trackable.getName());
-  assertEquals("Spiridon Lui",trackable.getOwner());
+  assertThat(trackable.getGeocode()).isEqualTo("TB2R124");
+  assertThat(trackable.getName()).isEqualTo("Bor. Dortmund - FC Schalke 04");
+  assertThat(trackable.getOwner()).isEqualTo("Spiridon Lui");
 }

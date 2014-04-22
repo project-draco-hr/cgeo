@@ -1,12 +1,12 @@
 {
-  assertEquals("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0",vpRef.sqlWhere(null).toString());
-  assertEquals("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0",vpRef.sqlWhere("t").toString());
+  assertThat(vpRef.sqlWhere(null).toString()).isEqualTo("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0");
+  assertThat(vpRef.sqlWhere("t").toString()).isEqualTo("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0");
   Locale current=null;
   try {
     current=Locale.getDefault();
     Locale.setDefault(Locale.FRENCH);
     assertEquals("1,0",String.format("%.2g",1.0d));
-    assertEquals("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0",vpRef.sqlWhere("t").toString());
+    assertThat(vpRef.sqlWhere("t").toString()).isEqualTo("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0");
   }
   finally {
     Locale.setDefault(current);

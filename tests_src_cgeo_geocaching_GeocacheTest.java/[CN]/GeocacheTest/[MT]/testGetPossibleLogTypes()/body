@@ -2,11 +2,11 @@
   Geocache gcCache=new Geocache();
   gcCache.setGeocode("GC123");
   gcCache.setType(CacheType.WEBCAM);
-  assertTrue(gcCache.getPossibleLogTypes().contains(LogType.WEBCAM_PHOTO_TAKEN));
-  assertTrue("GC caches can have maintenance logs",gcCache.getPossibleLogTypes().contains(LogType.NEEDS_MAINTENANCE));
+  assertThat(gcCache.getPossibleLogTypes()).as("possible GC cache log types").contains(LogType.WEBCAM_PHOTO_TAKEN);
+  assertThat(gcCache.getPossibleLogTypes()).as("possible GC cache log types").contains(LogType.NEEDS_MAINTENANCE);
   Geocache ocCache=new Geocache();
   ocCache.setGeocode("OC1234");
   ocCache.setType(CacheType.TRADITIONAL);
-  assertFalse("A traditional cache cannot have a webcam log",ocCache.getPossibleLogTypes().contains(LogType.WEBCAM_PHOTO_TAKEN));
-  assertFalse("OC caches have no maintenance log type",ocCache.getPossibleLogTypes().contains(LogType.NEEDS_MAINTENANCE));
+  assertThat(ocCache.getPossibleLogTypes()).as("traditional cache possible log types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
+  assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log types").doesNotContain(LogType.NEEDS_MAINTENANCE);
 }

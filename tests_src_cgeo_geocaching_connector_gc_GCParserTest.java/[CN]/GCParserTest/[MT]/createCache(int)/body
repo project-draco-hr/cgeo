@@ -9,9 +9,9 @@
   finally {
     Settings.setGcCustomDate(oldCustomDate);
   }
-  assertNotNull(searchResult);
-  assertEquals(1,searchResult.getCount());
+  assertThat(searchResult).isNotNull();
+  assertThat(searchResult.getCount()).isEqualTo(1);
   final Geocache cache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-  assertNotNull(cache);
+  assertThat(cache).isNotNull();
   return cache;
 }

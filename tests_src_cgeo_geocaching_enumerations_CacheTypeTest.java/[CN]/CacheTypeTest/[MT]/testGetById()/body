@@ -1,6 +1,6 @@
 {
-  assertEquals(CacheType.UNKNOWN,CacheType.getById(""));
-  assertEquals(CacheType.UNKNOWN,CacheType.getById(null));
-  assertEquals(CacheType.UNKNOWN,CacheType.getById("random garbage"));
-  assertEquals(CacheType.WHERIGO,CacheType.getById("wherigo"));
+  assertThat(CacheType.getById("")).isEqualTo(CacheType.UNKNOWN);
+  assertThat(CacheType.getById(null)).isEqualTo(CacheType.UNKNOWN);
+  assertThat(CacheType.getById("random garbage")).isEqualTo(CacheType.UNKNOWN);
+  assertThat(CacheType.getById("wherigo")).isEqualTo(CacheType.WHERIGO);
 }

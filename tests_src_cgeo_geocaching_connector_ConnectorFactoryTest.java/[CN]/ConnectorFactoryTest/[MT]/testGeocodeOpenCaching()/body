@@ -1,10 +1,10 @@
 {
-  assertTrue(ConnectorFactory.getConnector("OZ12345") instanceof OCConnector);
-  assertTrue(ConnectorFactory.getConnector("OC12345") instanceof OCConnector);
-  assertTrue(ConnectorFactory.getConnector("OU12345") instanceof OCConnector);
-  assertTrue(ConnectorFactory.getConnector("OK12345") instanceof OCConnector);
-  assertTrue(ConnectorFactory.getConnector("OJ12345") instanceof OCConnector);
-  assertTrue(ConnectorFactory.getConnector("OS12345") instanceof OCConnector);
-  assertTrue(ConnectorFactory.getConnector("OB12345") instanceof OCConnector);
-  assertTrue(ConnectorFactory.getConnector("OP12345") instanceof OCConnector);
+  assertThat(ConnectorFactory.getConnector("OZ12345") instanceof OCConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("OC12345") instanceof OCConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("OU12345") instanceof OCConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("OK12345") instanceof OCConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("OJ12345") instanceof OCConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("OS12345") instanceof OCConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("OB12345") instanceof OCConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("OP12345") instanceof OCConnector).isTrue();
 }

@@ -1,5 +1,5 @@
 {
   final List<LogEntry> logs=DataStore.loadLogs("");
-  assertNotNull("Logs must not be null",logs);
-  assertEquals("Logs from empty geocode must be empty",0,logs.size());
+  assertThat(logs).as("Logs for empty geocode").isNotNull();
+  assertThat(logs).as("Logs for empty geocode").isEmpty();
 }

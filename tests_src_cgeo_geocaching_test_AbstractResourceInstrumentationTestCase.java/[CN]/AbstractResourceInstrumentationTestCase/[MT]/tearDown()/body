@@ -1,6 +1,6 @@
 {
   final SearchResult search=DataStore.getBatchOfStoredCaches(null,CacheType.ALL,temporaryListId);
-  assertNotNull(search);
+  assertThat(search).isNotNull();
   DataStore.removeCaches(search.getGeocodes(),LoadFlags.REMOVE_ALL);
   DataStore.removeList(temporaryListId);
   super.tearDown();

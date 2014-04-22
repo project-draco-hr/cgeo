@@ -3,6 +3,6 @@
   Geocache cache=new Geocache();
   cache.setPersonalNote(testString);
   PersonalNote parsedNote=new PersonalNote(cache);
-  assertEquals(testString,parsedNote.toString());
+  assertThat(parsedNote.toString()).isEqualTo(testString);
   assertPersonalNote(parsedNote,"Simple cgeo note","Simple provider note");
 }

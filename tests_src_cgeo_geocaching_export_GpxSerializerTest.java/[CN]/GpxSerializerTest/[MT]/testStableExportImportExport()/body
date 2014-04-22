@@ -2,14 +2,14 @@
   final String geocode="GC1BKP3";
   final int cacheResource=R.raw.gc1bkp3_gpx101;
   final Geocache cache=loadCacheFromResource(cacheResource);
-  assertNotNull(cache);
+  assertThat(cache).isNotNull();
   final String gpxFirst=getGPXFromCache(geocode);
-  assertTrue(gpxFirst.length() > 0);
+  assertThat(gpxFirst.length() > 0).isTrue();
   final GPX10Parser parser=new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
   final InputStream stream=new ByteArrayInputStream(gpxFirst.getBytes(CharEncoding.UTF_8));
   Collection<Geocache> caches=parser.parse(stream,null);
-  assertNotNull(caches);
-  assertEquals(1,caches.size());
+  assertThat(caches).isNotNull();
+  assertThat(caches).hasSize(1);
   final String gpxSecond=getGPXFromCache(geocode);
-  assertEquals(replaceLogIds(gpxFirst),replaceLogIds(gpxSecond));
+  assertThat(replaceLogIds(gpxSecond)).isEqualTo(replaceLogIds(gpxFirst));
 }

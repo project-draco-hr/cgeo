@@ -1,7 +1,7 @@
 {
-  assertEquals(CacheSize.UNKNOWN,CacheSize.getById(""));
-  assertEquals(CacheSize.UNKNOWN,CacheSize.getById(null));
-  assertEquals(CacheSize.UNKNOWN,CacheSize.getById("random garbage"));
-  assertEquals(CacheSize.LARGE,CacheSize.getById("large"));
-  assertEquals(CacheSize.LARGE,CacheSize.getById("LARGE"));
+  assertThat(CacheSize.getById("")).isEqualTo(CacheSize.UNKNOWN);
+  assertThat(CacheSize.getById(null)).isEqualTo(CacheSize.UNKNOWN);
+  assertThat(CacheSize.getById("random garbage")).isEqualTo(CacheSize.UNKNOWN);
+  assertThat(CacheSize.getById("large")).isEqualTo(CacheSize.LARGE);
+  assertThat(CacheSize.getById("LARGE")).isEqualTo(CacheSize.LARGE);
 }

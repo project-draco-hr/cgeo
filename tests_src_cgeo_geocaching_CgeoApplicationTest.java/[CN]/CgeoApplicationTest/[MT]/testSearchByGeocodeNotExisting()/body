@@ -1,5 +1,5 @@
 {
   final SearchResult search=Geocache.searchByGeocode("GC123456",null,0,true,null);
-  assertNotNull(search);
-  assertEquals(StatusCode.COMMUNICATION_ERROR,search.getError());
+  assertThat(search).isNotNull();
+  assertThat(search.getError()).isEqualTo(StatusCode.COMMUNICATION_ERROR);
 }

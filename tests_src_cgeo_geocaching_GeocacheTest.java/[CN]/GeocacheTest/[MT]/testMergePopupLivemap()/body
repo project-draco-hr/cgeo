@@ -10,6 +10,6 @@
   assertEquals("Type not merged correctly",CacheType.MULTI,popup.getType());
   assertEquals("Longitude not merged correctly",8.0,popup.getCoords().getLongitude(),0.1);
   assertEquals("Latitude not merged correctly",40.0,popup.getCoords().getLatitude(),0.1);
-  assertTrue("Found not merged correctly",popup.isFound());
+  assertThat(popup.isFound()).overridingErrorMessage("Found not merged correctly").isTrue();
   assertEquals("Zoomlevel not merged correctly",12,popup.getCoordZoomLevel());
 }

@@ -1,6 +1,6 @@
 {
-  assertEquals(CacheType.UNKNOWN,CacheType.getByPattern(""));
-  assertEquals(CacheType.UNKNOWN,CacheType.getByPattern(null));
-  assertEquals(CacheType.UNKNOWN,CacheType.getByPattern("random garbage"));
-  assertEquals(CacheType.CITO,CacheType.getByPattern("cache in trash out event"));
+  assertThat(CacheType.getByPattern("")).isEqualTo(CacheType.UNKNOWN);
+  assertThat(CacheType.getByPattern(null)).isEqualTo(CacheType.UNKNOWN);
+  assertThat(CacheType.getByPattern("random garbage")).isEqualTo(CacheType.UNKNOWN);
+  assertThat(CacheType.getByPattern("cache in trash out event")).isEqualTo(CacheType.CITO);
 }

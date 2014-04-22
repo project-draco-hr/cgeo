@@ -3,7 +3,7 @@
   params.put("aaa","AAA");
   params.put("ccc","CCC");
   params.put("bbb","BBB");
-  Assert.assertEquals("aaa=AAA&ccc=CCC&bbb=BBB",params.toString());
+  assertThat(params.toString()).isEqualTo("aaa=AAA&ccc=CCC&bbb=BBB");
   params.sort();
-  Assert.assertEquals("aaa=AAA&bbb=BBB&ccc=CCC",params.toString());
+  assertThat(params.toString()).isEqualTo("aaa=AAA&bbb=BBB&ccc=CCC");
 }

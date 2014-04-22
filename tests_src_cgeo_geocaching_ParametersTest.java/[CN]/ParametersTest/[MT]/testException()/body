@@ -2,14 +2,14 @@
   try {
     final Parameters params=new Parameters("aaa","AAA","bbb");
     params.clear();
-    Assert.fail("Exception not raised");
+    fail("Exception not raised");
   }
  catch (  InvalidParameterException e) {
   }
   try {
     final Parameters params=new Parameters("aaa","AAA");
     params.put("bbb","BBB","ccc");
-    Assert.fail("Exception not raised");
+    fail("Exception not raised");
   }
  catch (  InvalidParameterException e) {
   }

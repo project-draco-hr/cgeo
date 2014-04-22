@@ -5,7 +5,7 @@
     String page=cache.getData();
     String result1=TextUtils.getMatch(page,p1,true,"");
     String result2=TextUtils.getMatch(page,p2,true,"");
-    assertEquals(result1,result2);
+    assertThat(result2).isEqualTo(result1);
     long diff1, diff2;
     output.add("Parsing " + cache.getGeocode() + " "+ cache.getName());
     diff1=parse(page,p1,iterations);

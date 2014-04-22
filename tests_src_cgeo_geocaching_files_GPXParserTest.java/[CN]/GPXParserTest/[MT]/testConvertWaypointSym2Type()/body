@@ -1,10 +1,10 @@
 {
-  assertEquals(WaypointType.WAYPOINT,GPXParser.convertWaypointSym2Type("unknown sym"));
-  assertEquals(WaypointType.PARKING,GPXParser.convertWaypointSym2Type("Parking area"));
-  assertEquals(WaypointType.STAGE,GPXParser.convertWaypointSym2Type("Stages of a multicache"));
-  assertEquals(WaypointType.PUZZLE,GPXParser.convertWaypointSym2Type("Question to answer"));
-  assertEquals(WaypointType.TRAILHEAD,GPXParser.convertWaypointSym2Type("Trailhead"));
-  assertEquals(WaypointType.FINAL,GPXParser.convertWaypointSym2Type("Final location"));
-  assertEquals(WaypointType.WAYPOINT,GPXParser.convertWaypointSym2Type("Reference point"));
-  assertEquals(WaypointType.PARKING,GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n()));
+  assertThat(GPXParser.convertWaypointSym2Type("unknown sym")).isEqualTo(WaypointType.WAYPOINT);
+  assertThat(GPXParser.convertWaypointSym2Type("Parking area")).isEqualTo(WaypointType.PARKING);
+  assertThat(GPXParser.convertWaypointSym2Type("Stages of a multicache")).isEqualTo(WaypointType.STAGE);
+  assertThat(GPXParser.convertWaypointSym2Type("Question to answer")).isEqualTo(WaypointType.PUZZLE);
+  assertThat(GPXParser.convertWaypointSym2Type("Trailhead")).isEqualTo(WaypointType.TRAILHEAD);
+  assertThat(GPXParser.convertWaypointSym2Type("Final location")).isEqualTo(WaypointType.FINAL);
+  assertThat(GPXParser.convertWaypointSym2Type("Reference point")).isEqualTo(WaypointType.WAYPOINT);
+  assertThat(GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n())).isEqualTo(WaypointType.PARKING);
 }

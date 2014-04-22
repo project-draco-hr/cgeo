@@ -1,31 +1,31 @@
 {
   final Trackable tb=GCParser.searchTrackable("TB2J1VZ",null,null);
-  assertNotNull(tb);
+  assertThat(tb).isNotNull();
   assert(tb != null);
-  assertEquals("aefffb86-099f-444f-b132-605436163aa8",tb.getGuid());
-  assertEquals("TB2J1VZ",tb.getGeocode());
-  assertEquals("http://www.geocaching.com/images/wpttypes/21.gif",tb.getIconUrl());
-  assertEquals("blafoo's Children Music CD",tb.getName());
-  assertEquals("Travel Bug Dog Tag",tb.getType());
+  assertThat(tb.getGuid()).isEqualTo("aefffb86-099f-444f-b132-605436163aa8");
+  assertThat(tb.getGeocode()).isEqualTo("TB2J1VZ");
+  assertThat(tb.getIconUrl()).isEqualTo("http://www.geocaching.com/images/wpttypes/21.gif");
+  assertThat(tb.getName()).isEqualTo("blafoo's Children Music CD");
+  assertThat(tb.getType()).isEqualTo("Travel Bug Dog Tag");
   assertEquals(new GregorianCalendar(2009,8 - 1,24).getTime(),tb.getReleased());
   assertEquals("Niedersachsen, Germany",tb.getOrigin());
-  assertEquals("blafoo",tb.getOwner());
-  assertEquals("0564a940-8311-40ee-8e76-7e91b2cf6284",tb.getOwnerGuid());
-  assertEquals("Kinder erfreuen.<br /><br />Make children happy.",tb.getGoal());
-  assertTrue(tb.getDetails().startsWith("Auf der CD sind"));
-  assertEquals("http://imgcdn.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg",tb.getImage());
-  assertTrue(tb.getDistance() >= 10617.8f);
-  assertTrue(tb.getLogs().size() >= 10);
-  assertTrue(Trackable.SPOTTED_CACHE == tb.getSpottedType() || Trackable.SPOTTED_USER == tb.getSpottedType() || Trackable.SPOTTED_UNKNOWN == tb.getSpottedType());
+  assertThat(tb.getOwner()).isEqualTo("blafoo");
+  assertThat(tb.getOwnerGuid()).isEqualTo("0564a940-8311-40ee-8e76-7e91b2cf6284");
+  assertThat(tb.getGoal()).isEqualTo("Kinder erfreuen.<br /><br />Make children happy.");
+  assertThat(tb.getDetails()).startsWith("Auf der CD sind");
+  assertThat(tb.getImage()).isEqualTo("http://imgcdn.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg");
+  assertThat(tb.getDistance()).isGreaterThanOrEqualTo(10617.8f);
+  assertThat(tb.getLogs().size()).isGreaterThanOrEqualTo(10);
+  assertThat(Trackable.SPOTTED_CACHE == tb.getSpottedType() || Trackable.SPOTTED_USER == tb.getSpottedType() || Trackable.SPOTTED_UNKNOWN == tb.getSpottedType()).isTrue();
   for (  LogEntry log : tb.getLogs()) {
-    assertTrue(log.date > 0);
-    assertTrue(StringUtils.isNotEmpty(log.author));
+    assertThat(log.date).isGreaterThan(0);
+    assertThat(log.author).isNotEmpty();
     if (log.type == LogType.PLACED_IT || log.type == LogType.RETRIEVED_IT) {
-      assertTrue(StringUtils.isNotEmpty(log.cacheName));
-      assertTrue(StringUtils.isNotEmpty(log.cacheGuid));
+      assertThat(log.cacheName).isNotEmpty();
+      assertThat(log.cacheGuid).isNotEmpty();
     }
  else {
-      assertTrue(log.type != LogType.UNKNOWN);
+      assertThat(log.type).isNotEqualTo(LogType.UNKNOWN);
     }
   }
 }
