@@ -2,12 +2,12 @@
   try {
     final String param=uri.getQueryParameter(paramKey);
     if (param == null) {
-      return "";
+      return StringUtils.EMPTY;
     }
     return URLDecoder.decode(param,CharEncoding.UTF_8).trim();
   }
  catch (  UnsupportedEncodingException e) {
     Log.e(LOG_TAG,"ContactsActivity.getParameter",e);
   }
-  return "";
+  return StringUtils.EMPTY;
 }
