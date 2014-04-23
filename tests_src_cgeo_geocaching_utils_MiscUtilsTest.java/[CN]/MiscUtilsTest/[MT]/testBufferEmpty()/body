@@ -1,5 +1,6 @@
 {
-  for (  @SuppressWarnings("unused") final List<String> s : MiscUtils.buffer(new LinkedList<String>(),10)) {
+  for (  final List<String> s : MiscUtils.buffer(new LinkedList<String>(),10)) {
+    assertThat(s).isNotNull();
     fail("empty collection should not iterate");
   }
 }
