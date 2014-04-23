@@ -1,18 +1,18 @@
 {
   setLocale(Locale.UK,true);
-  assertEquals("one o'clock. 6 kilometers",TextFactory.getText(MY_POSITION,NORTH_6100M,330));
-  assertEquals("9 o'clock. 1.6 kilometers",TextFactory.getText(MY_POSITION,WEST_1MILE,0));
-  assertEquals("6 o'clock. one kilometer",TextFactory.getText(MY_POSITION,SOUTH_1020M,0));
-  assertEquals("3 o'clock. 120 meters",TextFactory.getText(MY_POSITION,EAST_123M,0));
-  assertEquals("11 o'clock. 34 meters",TextFactory.getText(MY_POSITION,WEST_34M,290));
-  assertEquals("9 o'clock. one meter",TextFactory.getText(MY_POSITION,EAST_1M,180));
-  assertEquals("12 o'clock. 0 meters",TextFactory.getText(MY_POSITION,MY_POSITION,0));
+  assertThat(TextFactory.getText(MY_POSITION,NORTH_6100M,330)).isEqualTo("one o'clock. 6 kilometers");
+  assertThat(TextFactory.getText(MY_POSITION,WEST_1MILE,0)).isEqualTo("9 o'clock. 1.6 kilometers");
+  assertThat(TextFactory.getText(MY_POSITION,SOUTH_1020M,0)).isEqualTo("6 o'clock. one kilometer");
+  assertThat(TextFactory.getText(MY_POSITION,EAST_123M,0)).isEqualTo("3 o'clock. 120 meters");
+  assertThat(TextFactory.getText(MY_POSITION,WEST_34M,290)).isEqualTo("11 o'clock. 34 meters");
+  assertThat(TextFactory.getText(MY_POSITION,EAST_1M,180)).isEqualTo("9 o'clock. one meter");
+  assertThat(TextFactory.getText(MY_POSITION,MY_POSITION,0)).isEqualTo("12 o'clock. 0 meters");
   setLocale(Locale.UK,false);
-  assertEquals("one o'clock. 4 miles",TextFactory.getText(MY_POSITION,NORTH_6100M,330));
-  assertEquals("9 o'clock. one mile",TextFactory.getText(MY_POSITION,WEST_1MILE,0));
-  assertEquals("6 o'clock. 0.6 miles",TextFactory.getText(MY_POSITION,SOUTH_1020M,0));
-  assertEquals("3 o'clock. 400 feet",TextFactory.getText(MY_POSITION,EAST_123M,0));
-  assertEquals("11 o'clock. 111 feet",TextFactory.getText(MY_POSITION,WEST_34M,290));
-  assertEquals("9 o'clock. one foot",TextFactory.getText(MY_POSITION,EAST_1FT,180));
-  assertEquals("12 o'clock. 0 feet",TextFactory.getText(MY_POSITION,MY_POSITION,0));
+  assertThat(TextFactory.getText(MY_POSITION,NORTH_6100M,330)).isEqualTo("one o'clock. 4 miles");
+  assertThat(TextFactory.getText(MY_POSITION,WEST_1MILE,0)).isEqualTo("9 o'clock. one mile");
+  assertThat(TextFactory.getText(MY_POSITION,SOUTH_1020M,0)).isEqualTo("6 o'clock. 0.6 miles");
+  assertThat(TextFactory.getText(MY_POSITION,EAST_123M,0)).isEqualTo("3 o'clock. 400 feet");
+  assertThat(TextFactory.getText(MY_POSITION,WEST_34M,290)).isEqualTo("11 o'clock. 111 feet");
+  assertThat(TextFactory.getText(MY_POSITION,EAST_1FT,180)).isEqualTo("9 o'clock. one foot");
+  assertThat(TextFactory.getText(MY_POSITION,MY_POSITION,0)).isEqualTo("12 o'clock. 0 feet");
 }

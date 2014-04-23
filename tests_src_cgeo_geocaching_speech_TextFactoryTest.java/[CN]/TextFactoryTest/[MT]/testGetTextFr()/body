@@ -1,18 +1,18 @@
 {
   setLocale(Locale.FRANCE,true);
-  assertEquals("une heure. 6 kilom??tres",TextFactory.getText(MY_POSITION,NORTH_6100M,330));
-  assertEquals("9 heures. 1,6 kilom??tres",TextFactory.getText(MY_POSITION,WEST_1MILE,0));
-  assertEquals("6 heures. un kilom??tre",TextFactory.getText(MY_POSITION,SOUTH_1020M,0));
-  assertEquals("3 heures. 120 m??tres",TextFactory.getText(MY_POSITION,EAST_123M,0));
-  assertEquals("11 heures. 34 m??tres",TextFactory.getText(MY_POSITION,WEST_34M,290));
-  assertEquals("9 heures. un m??tre",TextFactory.getText(MY_POSITION,EAST_1M,180));
-  assertEquals("12 heures. 0 m??tre",TextFactory.getText(MY_POSITION,MY_POSITION,0));
+  assertThat(TextFactory.getText(MY_POSITION,NORTH_6100M,330)).isEqualTo("une heure. 6 kilom??tres");
+  assertThat(TextFactory.getText(MY_POSITION,WEST_1MILE,0)).isEqualTo("9 heures. 1,6 kilom??tres");
+  assertThat(TextFactory.getText(MY_POSITION,SOUTH_1020M,0)).isEqualTo("6 heures. un kilom??tre");
+  assertThat(TextFactory.getText(MY_POSITION,EAST_123M,0)).isEqualTo("3 heures. 120 m??tres");
+  assertThat(TextFactory.getText(MY_POSITION,WEST_34M,290)).isEqualTo("11 heures. 34 m??tres");
+  assertThat(TextFactory.getText(MY_POSITION,EAST_1M,180)).isEqualTo("9 heures. un m??tre");
+  assertThat(TextFactory.getText(MY_POSITION,MY_POSITION,0)).isEqualTo("12 heures. 0 m??tre");
   setLocale(Locale.FRANCE,false);
-  assertEquals("une heure. 4 milles",TextFactory.getText(MY_POSITION,NORTH_6100M,330));
-  assertEquals("9 heures. un mille",TextFactory.getText(MY_POSITION,WEST_1MILE,0));
-  assertEquals("6 heures. 0,6 milles",TextFactory.getText(MY_POSITION,SOUTH_1020M,0));
-  assertEquals("3 heures. 400 pieds",TextFactory.getText(MY_POSITION,EAST_123M,0));
-  assertEquals("11 heures. 111 pieds",TextFactory.getText(MY_POSITION,WEST_34M,290));
-  assertEquals("9 heures. un pied",TextFactory.getText(MY_POSITION,EAST_1FT,180));
-  assertEquals("12 heures. 0 pied",TextFactory.getText(MY_POSITION,MY_POSITION,0));
+  assertThat(TextFactory.getText(MY_POSITION,NORTH_6100M,330)).isEqualTo("une heure. 4 milles");
+  assertThat(TextFactory.getText(MY_POSITION,WEST_1MILE,0)).isEqualTo("9 heures. un mille");
+  assertThat(TextFactory.getText(MY_POSITION,SOUTH_1020M,0)).isEqualTo("6 heures. 0,6 milles");
+  assertThat(TextFactory.getText(MY_POSITION,EAST_123M,0)).isEqualTo("3 heures. 400 pieds");
+  assertThat(TextFactory.getText(MY_POSITION,WEST_34M,290)).isEqualTo("11 heures. 111 pieds");
+  assertThat(TextFactory.getText(MY_POSITION,EAST_1FT,180)).isEqualTo("9 heures. un pied");
+  assertThat(TextFactory.getText(MY_POSITION,MY_POSITION,0)).isEqualTo("12 heures. 0 pied");
 }
