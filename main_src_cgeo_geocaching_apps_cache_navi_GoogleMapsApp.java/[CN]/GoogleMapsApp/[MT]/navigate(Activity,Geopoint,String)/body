@@ -1,7 +1,9 @@
 {
   try {
-    final String geoLocation="geo:" + point.getLatitude() + ","+ point.getLongitude();
-    final String query=point.getLatitude() + "," + point.getLongitude()+ "("+ label+ ")";
+    String latitude=GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,point);
+    String longitude=GeopointFormatter.format(Format.LON_DECDEGREE_RAW,point);
+    final String geoLocation="geo:" + latitude + ","+ longitude;
+    final String query=latitude + "," + longitude+ "("+ label+ ")";
     final String uriString=geoLocation + "?q=" + Uri.encode(query);
     activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(uriString)));
     return;
