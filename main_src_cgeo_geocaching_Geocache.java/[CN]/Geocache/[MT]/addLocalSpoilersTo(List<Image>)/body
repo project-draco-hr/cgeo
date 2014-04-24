@@ -1,0 +1,15 @@
+{
+  if (StringUtils.length(geocode) >= 2) {
+    final String suffix=StringUtils.right(geocode,2);
+    final File baseDir=new File(Environment.getExternalStorageDirectory().toString(),"GeocacheSpoilers");
+    final File lastCharDir=new File(baseDir,suffix.substring(1));
+    final File secondToLastCharDir=new File(lastCharDir,suffix.substring(0,1));
+    final File finalDir=new File(secondToLastCharDir,getGeocode());
+    final File[] files=finalDir.listFiles();
+    if (files != null) {
+      for (      final File image : files) {
+        spoilers.add(new Image("file://" + image.getAbsolutePath(),image.getName()));
+      }
+    }
+  }
+}
