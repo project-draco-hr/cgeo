@@ -2,6 +2,15 @@
   if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url,BLOCKED)) {
     return Observable.from(getTransparent1x1Image(resources));
   }
+  if (url.startsWith("file://")) {
+    return Async.fromCallable(new Func0<BitmapDrawable>(){
+      @Override public BitmapDrawable call(){
+        final Bitmap bitmap=loadCachedImage(new File(url.substring(7)),true).getLeft();
+        return bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null;
+      }
+    }
+,RxUtils.computationScheduler);
+  }
   final boolean shared=url.contains("/images/icons/icon_");
   final String pseudoGeocode=shared ? SHARED : geocode;
   return Observable.create(new OnSubscribe<BitmapDrawable>(){
