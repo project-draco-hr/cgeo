@@ -17,6 +17,12 @@
     getSupportActionBar().setTitle(cache.getGeocode());
   }
   getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
+  initializeAndroidBeam(new ActivitySharingInterface(){
+    @Override public String getUri(){
+      return cache.getCgeoUrl();
+    }
+  }
+);
   imagesList=null;
   reinitializeViewPager();
   invalidateOptionsMenuCompatible();
