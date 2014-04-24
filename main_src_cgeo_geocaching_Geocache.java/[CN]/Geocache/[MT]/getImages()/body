@@ -1,6 +1,7 @@
 {
   final LinkedList<Image> result=new LinkedList<Image>();
   result.addAll(getSpoilers());
+  addLocalSpoilersTo(result);
   for (  final LogEntry log : getLogs()) {
     result.addAll(log.getLogImages());
   }

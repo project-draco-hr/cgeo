@@ -1,5 +1,3 @@
 {
-  final List<Image> allSpoilers=new LinkedList<Image>(CollectionUtils.emptyIfNull(spoilers));
-  addLocalSpoilersTo(allSpoilers);
-  return allSpoilers;
+  return ListUtils.unmodifiableList(ListUtils.emptyIfNull(spoilers));
 }
