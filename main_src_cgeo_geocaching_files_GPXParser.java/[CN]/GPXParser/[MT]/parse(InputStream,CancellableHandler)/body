@@ -49,6 +49,7 @@
         afterParsing(cache);
         result.add(geocode);
         DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+        DataStore.saveLogsWithoutTransaction(cache.getGeocode(),logs);
         DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
         showProgressMessage(progressHandler,progressStream.getProgress());
       }
@@ -362,7 +363,7 @@
     gcLog.setEndElementListener(new EndElementListener(){
       @Override public void end(){
         if (log.type != LogType.UNKNOWN) {
-          cache.getLogs().add(log);
+          logs.add(log);
         }
       }
     }

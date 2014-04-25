@@ -252,12 +252,12 @@
     }
   }
   cache.parseWaypointsFromNote();
-  cache.setLogs(getLogsFromDetails(page,false));
   if (StringUtils.isBlank(cache.getGeocode())) {
     searchResult.setError(StatusCode.UNKNOWN_ERROR);
     return searchResult;
   }
   cache.setDetailedUpdatedNow();
   searchResult.addAndPutInCache(Collections.singletonList(cache));
+  DataStore.saveLogsWithoutTransaction(cache.getGeocode(),getLogsFromDetails(page,false));
   return searchResult;
 }

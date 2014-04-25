@@ -59,7 +59,6 @@
     saveAttributesWithoutTransaction(cache);
     saveWaypointsWithoutTransaction(cache);
     saveSpoilersWithoutTransaction(cache);
-    saveLogsWithoutTransaction(cache.getGeocode(),cache.getLogs());
     saveLogCountsWithoutTransaction(cache);
     saveInventoryWithoutTransaction(cache.getGeocode(),cache.getInventory());
     int rows=database.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});

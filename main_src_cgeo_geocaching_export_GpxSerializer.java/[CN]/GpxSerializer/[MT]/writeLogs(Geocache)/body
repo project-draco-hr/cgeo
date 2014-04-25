@@ -1,9 +1,10 @@
 {
-  if (cache.getLogs().isEmpty()) {
+  List<LogEntry> logs=cache.getLogs();
+  if (logs.isEmpty()) {
     return;
   }
   gpx.startTag(PREFIX_GROUNDSPEAK,"logs");
-  for (  final LogEntry log : cache.getLogs()) {
+  for (  final LogEntry log : logs) {
     gpx.startTag(PREFIX_GROUNDSPEAK,"log");
     gpx.attribute("","id",Integer.toString(log.id));
     XmlUtils.multipleTexts(gpx,PREFIX_GROUNDSPEAK,"date",dateFormatZ.format(new Date(log.date)),"type",log.type.type);

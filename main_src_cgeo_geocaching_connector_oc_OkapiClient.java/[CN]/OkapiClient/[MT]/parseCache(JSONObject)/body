@@ -30,7 +30,6 @@
       }
     }
     cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES),response.optJSONArray(CACHE_ATTR_ACODES)));
-    cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
     cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)),false);
     if (!response.isNull(CACHE_IS_WATCHED)) {
       cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
@@ -42,6 +41,7 @@
     cache.setLogPasswordRequired(response.getBoolean(CACHE_REQ_PASSWORD));
     cache.setDetailedUpdatedNow();
     DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveLogsWithoutTransaction(cache.getGeocode(),parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
   }
  catch (  final JSONException e) {
     Log.e("OkapiClient.parseCache",e);

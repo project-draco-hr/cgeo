@@ -4,17 +4,18 @@
   }
   if (Settings.isFriendLogsWanted()) {
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
-    final List<LogEntry> allLogs=cache.getLogs();
     final List<LogEntry> friendLogs=getLogsFromDetails(page,true);
-    if (friendLogs != null) {
+    if (friendLogs != null && !friendLogs.isEmpty()) {
+      ArrayList<LogEntry> mergedLogs=new ArrayList<LogEntry>(cache.getLogs());
       for (      final LogEntry log : friendLogs) {
-        if (allLogs.contains(log)) {
-          allLogs.get(allLogs.indexOf(log)).friend=true;
+        if (mergedLogs.contains(log)) {
+          mergedLogs.get(mergedLogs.indexOf(log)).friend=true;
         }
  else {
-          cache.getLogs().add(log);
+          mergedLogs.add(log);
         }
       }
+      DataStore.saveLogsWithoutTransaction(cache.getGeocode(),mergedLogs);
     }
   }
   if (Settings.isRatingWanted()) {

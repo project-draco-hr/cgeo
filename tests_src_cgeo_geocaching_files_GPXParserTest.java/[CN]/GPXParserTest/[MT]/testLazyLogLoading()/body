@@ -5,7 +5,7 @@
   assertThat(caches).hasSize(1);
   DataStore.removeAllFromCache();
   final Geocache minimalCache=DataStore.loadCache(geocode,EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
-  assertThat(minimalCache.getAttributes().isEmpty()).isFalse();
-  assertThat(minimalCache.getLogs().isEmpty()).isFalse();
+  assertThat(minimalCache.getAttributes()).isNotEmpty();
+  assertThat(minimalCache.getLogs()).isNotEmpty();
   removeCacheCompletely(geocode);
 }

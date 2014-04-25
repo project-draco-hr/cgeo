@@ -33,7 +33,6 @@
         cache.setSpoilers(spoilers);
       }
       if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
-        cache.setLogs(loadLogs(cache.getGeocode()));
         final Map<LogType,Integer> logCounts=loadLogCounts(cache.getGeocode());
         if (MapUtils.isNotEmpty(logCounts)) {
           cache.getLogCounts().clear();
