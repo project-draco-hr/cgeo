@@ -2,18 +2,22 @@
   if (!locationValid) {
     return false;
   }
-  final Location lastLocation=overlayPositionAndScale.getCoordinates();
+  final CGeoMap cgeoMapRef=map.get();
+  if (cgeoMapRef == null) {
+    return false;
+  }
+  final Location lastLocation=cgeoMapRef.overlayPositionAndScale.getCoordinates();
   float dist=Float.MAX_VALUE;
   if (lastLocation != null) {
     dist=currentLocation.distanceTo(lastLocation);
   }
   final float[] mapDimension=new float[1];
-  if (mapView.getWidth() < mapView.getHeight()) {
-    final double span=mapView.getLongitudeSpan() / 1e6;
+  if (cgeoMapRef.mapView.getWidth() < cgeoMapRef.mapView.getHeight()) {
+    final double span=cgeoMapRef.mapView.getLongitudeSpan() / 1e6;
     Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),currentLocation.getLatitude(),currentLocation.getLongitude() + span,mapDimension);
   }
  else {
-    final double span=mapView.getLatitudeSpan() / 1e6;
+    final double span=cgeoMapRef.mapView.getLatitudeSpan() / 1e6;
     Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),currentLocation.getLatitude() + span,currentLocation.getLongitude(),mapDimension);
   }
   return dist > (mapDimension[0] * MIN_LOCATION_DELTA);
