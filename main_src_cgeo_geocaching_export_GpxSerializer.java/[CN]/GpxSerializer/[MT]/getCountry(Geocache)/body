@@ -1,0 +1,7 @@
+{
+  String country=getLocationPart(cache,1);
+  if (StringUtils.isNotEmpty(country)) {
+    return country;
+  }
+  return cache.getLocation();
+}

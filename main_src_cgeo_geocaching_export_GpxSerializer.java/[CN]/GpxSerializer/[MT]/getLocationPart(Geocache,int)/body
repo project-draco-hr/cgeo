@@ -1,0 +1,10 @@
+{
+  final String location=cache.getLocation();
+  if (StringUtils.contains(location,", ")) {
+    final String[] parts=StringUtils.split(location,',');
+    if (parts.length == 2) {
+      return StringUtils.trim(parts[partIndex]);
+    }
+  }
+  return StringUtils.EMPTY;
+}
