@@ -1,7 +1,10 @@
 {
-  for (  final File file : LocalStorage.getStorageSec().listFiles()) {
-    if (file.isDirectory()) {
-      FileUtils.deleteIgnoringFailure(file);
+  final File[] files=LocalStorage.getStorageSec().listFiles();
+  if (ArrayUtils.isNotEmpty(files)) {
+    for (    final File file : files) {
+      if (file.isDirectory()) {
+        FileUtils.deleteIgnoringFailure(file);
+      }
     }
   }
 }
