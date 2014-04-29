@@ -401,7 +401,8 @@
   }
   try {
     progressStream=new ProgressInputStream(stream);
-    Xml.parse(progressStream,Xml.Encoding.UTF_8,root.getContentHandler());
+    BufferedReader reader=new BufferedReader(new InputStreamReader(progressStream,CharEncoding.UTF_8));
+    Xml.parse(new InvalidXMLCharacterFilterReader(reader),root.getContentHandler());
     return DataStore.loadCaches(result,EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
   }
  catch (  final SAXException e) {

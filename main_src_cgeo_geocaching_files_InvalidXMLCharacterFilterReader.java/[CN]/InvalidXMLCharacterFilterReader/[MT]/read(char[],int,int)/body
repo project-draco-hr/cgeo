@@ -1,0 +1,51 @@
+{
+  int read=super.read(cbuf,off,len);
+  if (read == -1) {
+    return -1;
+  }
+  int pos=off - 1;
+  int entityStart=-1;
+  for (int readPos=off; readPos < off + read; readPos++) {
+    boolean useChar=true;
+switch (cbuf[readPos]) {
+case '&':
+      pos++;
+    entityStart=readPos;
+  break;
+case ';':
+pos++;
+if (entityStart >= 0) {
+int entityLength=readPos - entityStart + 1;
+if (entityLength <= 5) {
+  String entity=new String(cbuf,entityStart,entityLength);
+  if (StringUtils.startsWith(entity,"&#")) {
+    String numberString=StringUtils.substringBetween(entity,"&#",";");
+    final int value;
+    if (StringUtils.startsWith(numberString,"x")) {
+      value=Integer.parseInt(numberString.substring(1),16);
+    }
+ else {
+      value=Integer.parseInt(numberString);
+    }
+    if (!isValidXMLChar((char)value)) {
+      pos-=entityLength;
+      useChar=false;
+    }
+  }
+}
+}
+break;
+default :
+if (isValidXMLChar(cbuf[readPos])) {
+pos++;
+}
+ else {
+continue;
+}
+}
+if (pos < readPos && useChar) {
+cbuf[pos]=cbuf[readPos];
+}
+}
+return pos - off + 1;
+}
