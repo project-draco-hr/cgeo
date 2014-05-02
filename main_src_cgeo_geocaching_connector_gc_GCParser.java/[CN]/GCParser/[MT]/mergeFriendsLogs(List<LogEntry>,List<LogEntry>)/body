@@ -1,0 +1,14 @@
+{
+  if (logsToMerge != null && !logsToMerge.isEmpty()) {
+    for (    final LogEntry log : logsToMerge) {
+      if (mergedLogs.contains(log)) {
+        mergedLogs.get(mergedLogs.indexOf(log)).friend=true;
+      }
+ else {
+        mergedLogs.add(log);
+      }
+    }
+    return true;
+  }
+  return false;
+}

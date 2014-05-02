@@ -258,6 +258,6 @@
   }
   cache.setDetailedUpdatedNow();
   searchResult.addAndPutInCache(Collections.singletonList(cache));
-  DataStore.saveLogsWithoutTransaction(cache.getGeocode(),getLogsFromDetails(page,false));
+  DataStore.saveLogsWithoutTransaction(cache.getGeocode(),getLogsFromDetails(page));
   return searchResult;
 }
