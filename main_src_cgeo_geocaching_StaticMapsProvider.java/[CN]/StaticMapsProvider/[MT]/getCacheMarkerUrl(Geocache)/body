@@ -4,7 +4,7 @@
   if (cache.isFound()) {
     url.append("_found");
   }
- else   if (cache.isDisabled()) {
+ else   if (cache.isDisabled() || cache.isArchived()) {
     url.append("_disabled");
   }
   url.append(".png");
