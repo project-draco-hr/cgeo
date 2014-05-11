@@ -1,4 +1,8 @@
 {
+  final Activity activity=activityRef.get();
+  if (activity == null) {
+    return;
+  }
   Dialogs.input(activity,dialogTitle,defaultValue,buttonTitle,new Action1<String>(){
     @Override public void call(    final String input){
       String listName=StringUtils.trim(input);
