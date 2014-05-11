@@ -1,6 +1,16 @@
 {
-  buttonLatitude.setOnClickListener(new FindByCoordsAction());
-  buttonLongitude.setOnClickListener(new FindByCoordsAction());
+  buttonLatitude.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      updateCoordinates();
+    }
+  }
+);
+  buttonLongitude.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      updateCoordinates();
+    }
+  }
+);
   buttonSearchCoords.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View arg0){
       findByCoordsFn();

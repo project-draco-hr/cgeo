@@ -1,6 +1,7 @@
 {
   if (cache == null || cache.getCoords() == null) {
-    context.showToast(context.getResources().getString(R.string.err_location_unknown));
+    final AbstractActivity activity=context.get();
+    activity.showToast(activity.getResources().getString(R.string.err_location_unknown));
     return;
   }
   gp=cache.getCoords();
