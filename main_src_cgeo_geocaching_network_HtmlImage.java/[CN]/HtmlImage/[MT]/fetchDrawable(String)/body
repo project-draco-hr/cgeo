@@ -16,8 +16,8 @@
   return Observable.create(new OnSubscribe<BitmapDrawable>(){
     @Override public void call(    final Subscriber<? super BitmapDrawable> subscriber){
       subscription.add(subscriber);
-      subscriber.add(RxUtils.computationScheduler.schedule(new Action1<Inner>(){
-        @Override public void call(        final Inner inner){
+      subscriber.add(RxUtils.computationScheduler.createWorker().schedule(new Action0(){
+        @Override public void call(){
           final Pair<BitmapDrawable,Boolean> loaded=loadFromDisk();
           final BitmapDrawable bitmap=loaded.getLeft();
           if (loaded.getRight()) {
@@ -28,12 +28,12 @@
           if (bitmap != null && !onlySave) {
             subscriber.onNext(bitmap);
           }
-          subscriber.add(downloadScheduler.schedule(new Action1<Inner>(){
-            @Override public void call(            final Inner inner){
+          downloadExecutor.execute(new Runnable(){
+            @Override public void run(){
               downloadAndSave(subscriber);
             }
           }
-));
+);
         }
       }
 ));
@@ -65,8 +65,8 @@
         subscriber.onCompleted();
       }
  else {
-        RxUtils.computationScheduler.schedule(new Action1<Inner>(){
-          @Override public void call(          final Inner inner){
+        RxUtils.computationScheduler.createWorker().schedule(new Action0(){
+          @Override public void call(){
             final Pair<BitmapDrawable,Boolean> loaded=loadFromDisk();
             final BitmapDrawable image=loaded.getLeft();
             if (image != null) {

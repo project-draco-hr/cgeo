@@ -1,6 +1,6 @@
 {
-  return Schedulers.newThread().schedulePeriodically(new Action1<Scheduler.Inner>(){
-    @Override public void call(    Scheduler.Inner inner){
+  return Schedulers.newThread().createWorker().schedulePeriodically(new Action0(){
+    @Override public void call(){
       try {
         if (mapView != null) {
           final Viewport viewportNow=mapView.getViewport();
