@@ -1,4 +1,3 @@
 {
-  String rawResponse=TextUtils.getMatch(page,GCConstants.PATTERN_LOGBOOK,"");
-  return parseLogs(false,rawResponse);
+  return parseLogs(false,TextUtils.getMatch(page,GCConstants.PATTERN_LOGBOOK,""));
 }

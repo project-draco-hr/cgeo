@@ -4,10 +4,9 @@
   }
   if (Settings.isFriendLogsWanted()) {
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
-    final List<LogEntry> friendLogs=getSpecialLogs(page,SpecialLogs.FRIENDS);
-    final List<LogEntry> ownLogs=getSpecialLogs(page,SpecialLogs.OWN);
+    final Observable<LogEntry> specialLogs=Observable.merge(getSpecialLogs(page,SpecialLogs.FRIENDS),getSpecialLogs(page,SpecialLogs.OWN));
     final List<LogEntry> mergedLogs=new ArrayList<LogEntry>(cache.getLogs());
-    if (mergeFriendsLogs(mergedLogs,friendLogs) | mergeFriendsLogs(mergedLogs,ownLogs)) {
+    if (mergeFriendsLogs(mergedLogs,specialLogs.toBlockingObservable().toIterable())) {
       DataStore.saveLogsWithoutTransaction(cache.getGeocode(),mergedLogs);
     }
   }

@@ -1,25 +1,30 @@
 {
-  final MatcherWrapper userTokenMatcher=new MatcherWrapper(GCConstants.PATTERN_USERTOKEN,page);
-  if (!userTokenMatcher.find()) {
-    Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
-    return null;
+  return Observable.defer(new Func0<Observable<? extends LogEntry>>(){
+    @Override public Observable<? extends LogEntry> call(){
+      final MatcherWrapper userTokenMatcher=new MatcherWrapper(GCConstants.PATTERN_USERTOKEN,page);
+      if (!userTokenMatcher.find()) {
+        Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
+        return Observable.empty();
+      }
+      final String userToken=userTokenMatcher.group(1);
+      final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),logType.getParamName(),Boolean.toString(Boolean.TRUE),"decrypt","true");
+      final HttpResponse response=Network.getRequest("http://www.geocaching.com/seek/geocache.logbook",params);
+      if (response == null) {
+        Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
+        return Observable.empty();
+      }
+      final int statusCode=response.getStatusLine().getStatusCode();
+      if (statusCode != 200) {
+        Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
+        return Observable.empty();
+      }
+      String rawResponse=Network.getResponseData(response);
+      if (rawResponse == null) {
+        Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
+        return Observable.empty();
+      }
+      return parseLogs(true,rawResponse);
+    }
   }
-  final String userToken=userTokenMatcher.group(1);
-  final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),logType.getParamName(),Boolean.toString(Boolean.TRUE),"decrypt","true");
-  final HttpResponse response=Network.getRequest("http://www.geocaching.com/seek/geocache.logbook",params);
-  if (response == null) {
-    Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
-    return null;
-  }
-  final int statusCode=response.getStatusLine().getStatusCode();
-  if (statusCode != 200) {
-    Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
-    return null;
-  }
-  String rawResponse=Network.getResponseData(response);
-  if (rawResponse == null) {
-    Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
-    return null;
-  }
-  return parseLogs(true,rawResponse);
+).subscribeOn(Schedulers.io());
 }
