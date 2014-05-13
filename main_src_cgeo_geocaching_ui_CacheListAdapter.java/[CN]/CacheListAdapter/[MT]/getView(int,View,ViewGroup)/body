@@ -17,7 +17,7 @@
     holder=(ViewHolder)v.getTag();
   }
   final boolean lightSkin=Settings.isLightSkin();
-  final TouchListener touchListener=new TouchListener(cache);
+  final TouchListener touchListener=new TouchListener(cache,this);
   v.setOnClickListener(touchListener);
   v.setOnLongClickListener(touchListener);
   v.setOnTouchListener(touchListener);

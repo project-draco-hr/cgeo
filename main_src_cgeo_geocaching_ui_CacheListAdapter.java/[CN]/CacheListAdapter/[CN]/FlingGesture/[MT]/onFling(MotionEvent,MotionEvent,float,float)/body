@@ -3,16 +3,20 @@
     if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
       return false;
     }
+    final CacheListAdapter adapter=adapterRef.get();
+    if (adapter == null) {
+      return false;
+    }
     if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-      if (!selectMode) {
-        switchSelectMode();
+      if (!adapter.selectMode) {
+        adapter.switchSelectMode();
         cache.setStatusChecked(true);
       }
       return true;
     }
     if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-      if (selectMode) {
-        switchSelectMode();
+      if (adapter.selectMode) {
+        adapter.switchSelectMode();
       }
       return true;
     }

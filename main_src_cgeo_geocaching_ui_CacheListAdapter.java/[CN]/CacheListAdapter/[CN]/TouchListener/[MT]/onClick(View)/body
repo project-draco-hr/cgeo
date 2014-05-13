@@ -1,9 +1,13 @@
 {
-  if (isSelectMode()) {
+  final CacheListAdapter adapter=adapterRef.get();
+  if (adapter == null) {
+    return;
+  }
+  if (adapter.isSelectMode()) {
     cache.setStatusChecked(!cache.isStatusChecked());
-    notifyDataSetChanged();
+    adapter.notifyDataSetChanged();
   }
  else {
-    CacheDetailActivity.startActivity(getContext(),cache.getGeocode(),cache.getName());
+    CacheDetailActivity.startActivity(adapter.getContext(),cache.getGeocode(),cache.getName());
   }
 }
