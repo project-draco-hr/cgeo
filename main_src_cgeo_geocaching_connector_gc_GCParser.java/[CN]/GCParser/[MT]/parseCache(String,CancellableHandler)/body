@@ -1,18 +1,16 @@
 {
-  final SearchResult searchResult=parseCacheFromText(page,handler);
-  if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
-    final Geocache cache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-    if (cache == null) {
-      return null;
-    }
-    getExtraOnlineInfo(cache,page,handler);
-    cache.setDetailedUpdatedNow();
-    if (CancellableHandler.isCancelled(handler)) {
-      return null;
-    }
-    CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_cache);
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
-    CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_render);
+  final ImmutablePair<StatusCode,Geocache> parsed=parseCacheFromText(page,handler);
+  if (parsed.left != StatusCode.NO_ERROR) {
+    return new SearchResult(parsed.left);
   }
-  return searchResult;
+  final Geocache cache=parsed.right;
+  getExtraOnlineInfo(cache,page,handler);
+  cache.setDetailedUpdatedNow();
+  if (CancellableHandler.isCancelled(handler)) {
+    return null;
+  }
+  CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_cache);
+  DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+  CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_render);
+  return new SearchResult(cache);
 }

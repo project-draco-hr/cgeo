@@ -2,14 +2,18 @@
   if (CancellableHandler.isCancelled(handler)) {
     return;
   }
+  Observable<LogEntry> specialLogs;
   if (Settings.isFriendLogsWanted()) {
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
-    final Observable<LogEntry> specialLogs=Observable.merge(getSpecialLogs(page,SpecialLogs.FRIENDS),getSpecialLogs(page,SpecialLogs.OWN));
-    final List<LogEntry> mergedLogs=new ArrayList<LogEntry>(cache.getLogs());
-    if (mergeFriendsLogs(mergedLogs,specialLogs.toBlockingObservable().toIterable())) {
-      DataStore.saveLogsWithoutTransaction(cache.getGeocode(),mergedLogs);
-    }
+    specialLogs=Observable.merge(getSpecialLogs(page,SpecialLogs.FRIENDS),getSpecialLogs(page,SpecialLogs.OWN));
   }
+ else {
+    CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
+    specialLogs=Observable.empty();
+  }
+  final List<LogEntry> mergedLogs=new ArrayList<LogEntry>(getLogsFromDetails(page).toList().toBlockingObservable().single());
+  mergeFriendsLogs(mergedLogs,specialLogs.toBlockingObservable().toIterable());
+  DataStore.saveLogsWithoutTransaction(cache.getGeocode(),mergedLogs);
   if (Settings.isRatingWanted()) {
     if (CancellableHandler.isCancelled(handler)) {
       return;

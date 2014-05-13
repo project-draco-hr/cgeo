@@ -4,7 +4,7 @@
   final SearchResult searchResult;
   try {
     Settings.setGcCustomDate(MockedCache.getDateFormat());
-    searchResult=GCParser.parseCacheFromText(mockedCache.getData(),null);
+    searchResult=GCParser.parseAndSaveCacheFromText(mockedCache.getData(),null);
   }
   finally {
     Settings.setGcCustomDate(oldCustomDate);

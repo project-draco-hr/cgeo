@@ -4,19 +4,15 @@
     Log.e("GCParser.parseCache: No page given");
     return null;
   }
-  final SearchResult searchResult=new SearchResult();
   if (pageIn.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
-    searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
-    return searchResult;
+    return ImmutablePair.of(StatusCode.UNPUBLISHED_CACHE,null);
   }
   if (pageIn.contains(GCConstants.STRING_PREMIUMONLY_1) || pageIn.contains(GCConstants.STRING_PREMIUMONLY_2)) {
-    searchResult.setError(StatusCode.PREMIUM_ONLY);
-    return searchResult;
+    return ImmutablePair.of(StatusCode.PREMIUM_ONLY,null);
   }
   final String cacheName=Html.fromHtml(TextUtils.getMatch(pageIn,GCConstants.PATTERN_NAME,true,"")).toString();
   if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
-    searchResult.setError(StatusCode.UNKNOWN_ERROR);
-    return searchResult;
+    return ImmutablePair.of(StatusCode.UNKNOWN_ERROR,null);
   }
   String personalNoteWithLineBreaks="";
   MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE,pageIn);
@@ -253,11 +249,8 @@
   }
   cache.parseWaypointsFromNote();
   if (StringUtils.isBlank(cache.getGeocode())) {
-    searchResult.setError(StatusCode.UNKNOWN_ERROR);
-    return searchResult;
+    return ImmutablePair.of(StatusCode.UNKNOWN_ERROR,null);
   }
   cache.setDetailedUpdatedNow();
-  searchResult.addAndPutInCache(Collections.singletonList(cache));
-  DataStore.saveLogsWithoutTransaction(cache.getGeocode(),getLogsFromDetails(page).toBlockingObservable().toIterable());
-  return searchResult;
+  return ImmutablePair.of(StatusCode.NO_ERROR,cache);
 }

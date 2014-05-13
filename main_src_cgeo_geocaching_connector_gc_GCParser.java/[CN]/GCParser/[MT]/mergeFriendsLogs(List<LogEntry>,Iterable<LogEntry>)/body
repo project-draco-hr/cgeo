@@ -1,7 +1,5 @@
 {
-  boolean modified=false;
   for (  final LogEntry log : logsToMerge) {
-    modified=true;
     if (mergedLogs.contains(log)) {
       mergedLogs.get(mergedLogs.indexOf(log)).friend=true;
     }
@@ -9,5 +7,4 @@
       mergedLogs.add(log);
     }
   }
-  return modified;
 }
