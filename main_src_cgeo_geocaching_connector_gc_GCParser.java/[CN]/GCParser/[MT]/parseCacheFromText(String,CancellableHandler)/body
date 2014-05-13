@@ -82,7 +82,7 @@
     cache.setSize(CacheSize.getById(TextUtils.getMatch(tableInside,GCConstants.PATTERN_SIZE,true,CacheSize.NOT_CHOSEN.id)));
   }
   cache.setFound(TextUtils.matches(page,GCConstants.PATTERN_FOUND) || TextUtils.matches(page,GCConstants.PATTERN_FOUND_ALTERNATIVE));
-  cache.setType(CacheType.getByPattern(TextUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getType().id)));
+  cache.setType(CacheType.getByGuid(TextUtils.getMatch(page,GCConstants.PATTERN_TYPE,true,cache.getType().id)));
   cache.setOnWatchlist(TextUtils.matches(page,GCConstants.PATTERN_WATCHLIST));
   String latlon=TextUtils.getMatch(page,GCConstants.PATTERN_LATLON,true,"");
   if (StringUtils.isNotEmpty(latlon)) {
