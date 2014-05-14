@@ -9,7 +9,7 @@
     while (cursor != null && cursor.moveToNext()) {
       int foundId=cursor.getInt(0);
       String foundName=cursor.getString(1);
-      result.add(new Pair<Integer,String>(Integer.valueOf(foundId),foundName));
+      result.add(new Pair<Integer,String>(foundId,foundName));
     }
   }
  catch (  Exception e) {
