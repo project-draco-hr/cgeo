@@ -7,4 +7,6 @@
   assertThat(GPXParser.convertWaypointSym2Type("Final location")).isEqualTo(WaypointType.FINAL);
   assertThat(GPXParser.convertWaypointSym2Type("Reference point")).isEqualTo(WaypointType.WAYPOINT);
   assertThat(GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n())).isEqualTo(WaypointType.PARKING);
+  assertThat(GPXParser.convertWaypointSym2Type("Physical Stage")).isEqualTo(WaypointType.STAGE);
+  assertThat(GPXParser.convertWaypointSym2Type("Virtual Stage")).isEqualTo(WaypointType.PUZZLE);
 }
