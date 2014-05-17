@@ -54,7 +54,7 @@
     overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker));
   }
   if (overlayPositionAndScale == null) {
-    overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay(activity);
+    overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay();
     if (trailHistory != null) {
       overlayPositionAndScale.setHistory(trailHistory);
     }

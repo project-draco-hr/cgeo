@@ -1,0 +1,6 @@
+{
+  DisplayMetrics metrics=new DisplayMetrics();
+  WindowManager windowManager=(WindowManager)CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+  windowManager.getDefaultDisplay().getMetrics(metrics);
+  pixelDensity=metrics.density;
+}
