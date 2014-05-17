@@ -1,26 +1,16 @@
 {
   final ContentResolver contentResolver=fromActivity.getContentResolver();
-  String mimeType=knownMimeType;
-  final String pathName=knownPathName != null ? knownPathName : uri.getPath();
-  if (mimeType == null) {
-    if (StringUtils.endsWithIgnoreCase(pathName,GPX_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(pathName,LOC_FILE_EXTENSION)) {
-      mimeType="application/xml";
-    }
- else {
-      mimeType="application/zip";
-    }
-  }
   Log.i("importGPX: " + uri + ", mimetype="+ mimeType);
-  if (GPX_MIME_TYPES.contains(mimeType)) {
-    if (StringUtils.endsWithIgnoreCase(pathName,LOC_FILE_EXTENSION)) {
-      new ImportLocAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
-    }
- else {
-      new ImportGpxAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
-    }
+  @NonNull FileType fileType=new FileTypeDetector(uri,contentResolver).getFileType();
+  if (fileType == FileType.UNKNOWN) {
+    fileType=getFileTypeFromPathName(pathName);
   }
- else   if (ZIP_MIME_TYPES.contains(mimeType)) {
-    new ImportGpxZipAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler).start();
+  if (fileType == FileType.UNKNOWN) {
+    fileType=getFileTypeFromMimeType(mimeType);
+  }
+  ImportThread importer=getImporterFromFileType(uri,contentResolver,fileType);
+  if (importer != null) {
+    importer.start();
   }
  else {
     importFinished();
