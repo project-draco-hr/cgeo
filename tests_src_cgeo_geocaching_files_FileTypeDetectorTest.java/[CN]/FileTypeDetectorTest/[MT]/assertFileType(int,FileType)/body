@@ -1,4 +1,5 @@
 {
   final Uri resourceURI=getResourceURI(resourceId);
-  assertThat(new FileTypeDetector(resourceURI,new FileContentProvider()).getFileType()).isEqualTo(fileType);
+  final FileContentResolver contentResolver=new FileContentResolver(getInstrumentation().getContext());
+  assertThat(new FileTypeDetector(resourceURI,contentResolver).getFileType()).isEqualTo(fileType);
 }
