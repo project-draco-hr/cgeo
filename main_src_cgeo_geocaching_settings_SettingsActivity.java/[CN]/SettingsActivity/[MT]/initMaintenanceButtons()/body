@@ -22,4 +22,12 @@
     }
   }
 );
+  Preference memoryDumpPref=getPreference(R.string.pref_memory_dump);
+  memoryDumpPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    Preference preference){
+      DebugUtils.createMemoryDump(SettingsActivity.this);
+      return true;
+    }
+  }
+);
 }

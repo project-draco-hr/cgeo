@@ -3,11 +3,7 @@
     if (exportFile != null) {
       ActivityMixin.showToast(activity,getName() + ' ' + getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
       if (Settings.getShareAfterExport()) {
-        final Intent shareIntent=new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM,Uri.fromFile(exportFile));
-        shareIntent.setType("application/xml");
-        activity.startActivity(Intent.createChooser(shareIntent,getString(R.string.export_gpx_to)));
+        ShareUtils.share(activity,exportFile,"application/xml",R.string.export_gpx_to);
       }
     }
  else {
