@@ -1,7 +1,7 @@
 {
   return scheduler.createWorker().schedule(new Action0(){
     @Override public void call(){
-      refreshSynchronous(newListId,handler);
+      refreshSynchronous(handler);
       handler.sendEmptyMessage(CancellableHandler.DONE);
     }
   }

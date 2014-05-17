@@ -12,6 +12,6 @@
   progress.show(this,null,message,ProgressDialog.STYLE_HORIZONTAL,loadDetailsHandler.cancelMessage());
   progress.setMaxProgressAndReset(detailTotal);
   detailProgressTime=System.currentTimeMillis();
-  final LoadDetailsThread threadDetails=new LoadDetailsThread(loadDetailsHandler,caches,storeListId);
+  final LoadDetailsThread threadDetails=new LoadDetailsThread(loadDetailsHandler,caches);
   threadDetails.start();
 }
