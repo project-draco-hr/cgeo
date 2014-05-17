@@ -1,4 +1,13 @@
 {
+  if (Settings.getWebDeviceCode() == null) {
+    Dialogs.confirm(this,R.string.web_import_title,R.string.init_sendToCgeo_description,new OnClickListener(){
+      @Override public void onClick(      DialogInterface dialog,      int which){
+        SettingsActivity.openForScreen(R.string.preference_screen_sendtocgeo,CacheListActivity.this);
+      }
+    }
+);
+    return;
+  }
   detailProgress=0;
   showProgress(false);
   final DownloadFromWebHandler downloadFromWebHandler=new DownloadFromWebHandler();
