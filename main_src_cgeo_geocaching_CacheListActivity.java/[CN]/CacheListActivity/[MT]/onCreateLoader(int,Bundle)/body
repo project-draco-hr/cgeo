@@ -28,6 +28,7 @@ loader=new OfflineGeocacheListLoader(this.getBaseContext(),coords,listId);
 break;
 case HISTORY:
 title=res.getString(R.string.caches_history);
+listId=PseudoList.HISTORY_LIST.id;
 loader=new HistoryGeocacheListLoader(app,coords);
 break;
 case NEAREST:

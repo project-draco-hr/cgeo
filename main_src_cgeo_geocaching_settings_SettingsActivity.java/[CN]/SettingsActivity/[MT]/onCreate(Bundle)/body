@@ -3,6 +3,11 @@
   super.onCreate(savedInstanceState);
   SettingsActivity.addPreferencesFromResource(this,R.xml.preferences);
   initPreferences();
+  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB || Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+    Preference pref=findPreference(this,getString(R.string.pref_alwaysshowoverflowmenu));
+    PreferenceScreen appearence=(PreferenceScreen)findPreference(this,getString(R.string.pref_appearance));
+    appearence.removePreference(pref);
+  }
   Intent intent=getIntent();
   openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN,0));
 }

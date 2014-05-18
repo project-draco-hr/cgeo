@@ -1,8 +1,11 @@
 {
   super.onCreate(savedInstanceState);
-  ButterKnife.inject(this);
+  supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+  this.setTheme(ActivityMixin.getDialogTheme());
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     waypointId=extras.getInt(Intents.EXTRA_WAYPOINT_ID);
+    geocode=extras.getString(Intents.EXTRA_GEOCODE);
   }
+  showDialog();
 }

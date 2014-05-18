@@ -1,0 +1,9 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  try {
+    CacheMenuHandler.onPrepareOptionsMenu(menu,cache);
+    LoggingUI.onPrepareOptionsMenu(menu,cache);
+  }
+ catch (  final RuntimeException e) {
+  }
+}

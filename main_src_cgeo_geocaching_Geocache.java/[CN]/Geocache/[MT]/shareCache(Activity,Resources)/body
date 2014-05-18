@@ -2,14 +2,6 @@
   if (geocode == null) {
     return;
   }
-  final StringBuilder subject=new StringBuilder("Geocache ");
-  subject.append(geocode);
-  if (StringUtils.isNotBlank(name)) {
-    subject.append(" - ").append(name);
-  }
-  final Intent intent=new Intent(Intent.ACTION_SEND);
-  intent.setType("text/plain");
-  intent.putExtra(Intent.EXTRA_SUBJECT,subject.toString());
-  intent.putExtra(Intent.EXTRA_TEXT,getUrl());
+  final Intent intent=getIntent();
   fromActivity.startActivity(Intent.createChooser(intent,res.getText(R.string.action_bar_share_title)));
 }

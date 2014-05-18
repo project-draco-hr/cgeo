@@ -11,12 +11,12 @@
   }
   cache.setChangeNotificationHandler(new ChangeNotificationHandler(this,progress));
   if (StringUtils.isNotBlank(cache.getName())) {
-    setTitle(cache.getName() + " (" + cache.getGeocode()+ ')');
+    getSupportActionBar().setTitle(cache.getName() + " (" + cache.getGeocode()+ ')');
   }
  else {
-    setTitle(cache.getGeocode());
+    getSupportActionBar().setTitle(cache.getGeocode());
   }
-  ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId),null,null,null);
+  getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
   imagesList=null;
   reinitializeViewPager();
   invalidateOptionsMenuCompatible();

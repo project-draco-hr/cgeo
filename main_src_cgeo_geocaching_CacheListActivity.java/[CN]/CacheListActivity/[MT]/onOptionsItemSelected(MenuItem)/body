@@ -1,8 +1,14 @@
 {
+  if (super.onOptionsItemSelected(item)) {
+    return true;
+  }
 switch (item.getItemId()) {
+case R.id.menu_show_on_map:
+    goMap();
+  return true;
 case R.id.menu_switch_select_mode:
-    adapter.switchSelectMode();
-  invalidateOptionsMenuCompatible();
+adapter.switchSelectMode();
+invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_refresh_stored_top:
 case R.id.menu_refresh_stored:
@@ -27,6 +33,7 @@ invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_create_list:
 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(),newListName);
+refreshSpinnerAdapter();
 invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_drop_list:

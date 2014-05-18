@@ -1,0 +1,9 @@
+{
+  Bundle args=new Bundle();
+  args.putInt(WAYPOINT_ARG,waypointId);
+  args.putString(GEOCODE_ARG,geocode);
+  DialogFragment f=new WaypointPopupFragment();
+  f.setArguments(args);
+  f.setStyle(DialogFragment.STYLE_NO_TITLE,0);
+  return f;
+}

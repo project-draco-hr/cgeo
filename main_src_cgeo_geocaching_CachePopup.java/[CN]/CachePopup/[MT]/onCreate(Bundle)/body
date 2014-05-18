@@ -1,0 +1,15 @@
+{
+  super.onCreate(savedInstanceState);
+  supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+  this.setTheme(ActivityMixin.getDialogTheme());
+  final Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    geocode=extras.getString(Intents.EXTRA_GEOCODE);
+  }
+  if (StringUtils.isBlank(geocode)) {
+    showToast(res.getString(R.string.err_detail_cache_find));
+    finish();
+    return;
+  }
+  showDialog();
+}

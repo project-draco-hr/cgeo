@@ -1,0 +1,9 @@
+{
+  cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  if (cache == null) {
+    ((AbstractActivity)getActivity()).showToast(res.getString(R.string.err_detail_cache_find));
+    getActivity().finish();
+    return;
+  }
+  geocode=cache.getGeocode();
+}
