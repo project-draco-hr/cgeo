@@ -2,9 +2,10 @@
   final int id=item.getItemId();
 switch (id) {
 case android.R.id.home:
-    return true;
+    showAbout(null);
+  return true;
 case R.id.menu_about:
-  showAbout(null);
+showAbout(null);
 return true;
 case R.id.menu_helpers:
 startActivity(new Intent(this,UsefulAppsActivity.class));
