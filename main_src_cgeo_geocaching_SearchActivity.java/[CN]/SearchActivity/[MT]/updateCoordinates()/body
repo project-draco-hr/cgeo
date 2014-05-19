@@ -1,5 +1,5 @@
 {
-  final CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(SearchActivity.this,null,null,app.currentGeo());
+  final CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(null,null,app.currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate(){
     @Override public void update(    final Geopoint gp){
@@ -8,5 +8,5 @@
     }
   }
 );
-  coordsDialog.show();
+  coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
 }
