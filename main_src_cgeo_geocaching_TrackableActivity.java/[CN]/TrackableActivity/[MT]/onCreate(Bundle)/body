@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.viewpager_activity);
-  setTitle(res.getString(R.string.trackable));
+  getSupportActionBar().setTitle(res.getString(R.string.trackable));
   final Bundle extras=getIntent().getExtras();
   final Uri uri=getIntent().getData();
   if (extras != null) {
