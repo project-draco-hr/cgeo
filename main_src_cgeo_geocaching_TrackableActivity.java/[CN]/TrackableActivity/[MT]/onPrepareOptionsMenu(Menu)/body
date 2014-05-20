@@ -1,7 +1,7 @@
 {
   if (trackable != null) {
     menu.findItem(R.id.menu_log_touch).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
-    menu.findItem(R.id.menu_browser_trackable).setEnabled(StringUtils.isNotBlank(trackable.getUrl()));
+    menu.findItem(R.id.menu_browser_trackable).setEnabled(StringUtils.isNotBlank(trackable.getBrowserUrl()));
   }
   return super.onPrepareOptionsMenu(menu);
 }

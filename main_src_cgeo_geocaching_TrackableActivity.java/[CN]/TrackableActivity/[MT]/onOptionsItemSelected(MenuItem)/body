@@ -4,7 +4,7 @@ case R.id.menu_log_touch:
     LogTrackableActivity.startActivity(this,trackable);
   return true;
 case R.id.menu_browser_trackable:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(trackable.getUrl())));
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(trackable.getBrowserUrl())));
 return true;
 default :
 return false;
