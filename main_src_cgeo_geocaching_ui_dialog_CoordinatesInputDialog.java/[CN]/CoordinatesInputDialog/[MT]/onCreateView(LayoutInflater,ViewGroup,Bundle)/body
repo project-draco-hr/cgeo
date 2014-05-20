@@ -1,0 +1,58 @@
+{
+  getDialog().setTitle(R.string.cache_coordinates);
+  View v=inflater.inflate(R.layout.coordinatesinput_dialog,container,false);
+  final Spinner spinner=(Spinner)v.findViewById(R.id.spinnerCoordinateFormats);
+  final ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getActivity(),R.array.waypoint_coordinate_formats,android.R.layout.simple_spinner_item);
+  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+  spinner.setAdapter(adapter);
+  spinner.setSelection(Settings.getCoordInputFormat().ordinal());
+  spinner.setOnItemSelectedListener(new CoordinateFormatListener());
+  bLat=(Button)v.findViewById(R.id.ButtonLat);
+  eLat=(EditText)v.findViewById(R.id.latitude);
+  eLatDeg=(EditText)v.findViewById(R.id.EditTextLatDeg);
+  eLatMin=(EditText)v.findViewById(R.id.EditTextLatMin);
+  eLatSec=(EditText)v.findViewById(R.id.EditTextLatSec);
+  eLatSub=(EditText)v.findViewById(R.id.EditTextLatSecFrac);
+  tLatSep1=(TextView)v.findViewById(R.id.LatSeparator1);
+  tLatSep2=(TextView)v.findViewById(R.id.LatSeparator2);
+  tLatSep3=(TextView)v.findViewById(R.id.LatSeparator3);
+  bLon=(Button)v.findViewById(R.id.ButtonLon);
+  eLon=(EditText)v.findViewById(R.id.longitude);
+  eLonDeg=(EditText)v.findViewById(R.id.EditTextLonDeg);
+  eLonMin=(EditText)v.findViewById(R.id.EditTextLonMin);
+  eLonSec=(EditText)v.findViewById(R.id.EditTextLonSec);
+  eLonSub=(EditText)v.findViewById(R.id.EditTextLonSecFrac);
+  tLonSep1=(TextView)v.findViewById(R.id.LonSeparator1);
+  tLonSep2=(TextView)v.findViewById(R.id.LonSeparator2);
+  tLonSep3=(TextView)v.findViewById(R.id.LonSeparator3);
+  eLatDeg.addTextChangedListener(new TextChanged(eLatDeg));
+  eLatMin.addTextChangedListener(new TextChanged(eLatMin));
+  eLatSec.addTextChangedListener(new TextChanged(eLatSec));
+  eLatSub.addTextChangedListener(new TextChanged(eLatSub));
+  eLonDeg.addTextChangedListener(new TextChanged(eLonDeg));
+  eLonMin.addTextChangedListener(new TextChanged(eLonMin));
+  eLonSec.addTextChangedListener(new TextChanged(eLonSec));
+  eLonSub.addTextChangedListener(new TextChanged(eLonSub));
+  EditUtils.disableSuggestions(eLatDeg);
+  EditUtils.disableSuggestions(eLatMin);
+  EditUtils.disableSuggestions(eLatSec);
+  EditUtils.disableSuggestions(eLatSub);
+  EditUtils.disableSuggestions(eLonDeg);
+  EditUtils.disableSuggestions(eLonMin);
+  EditUtils.disableSuggestions(eLonSec);
+  EditUtils.disableSuggestions(eLonSub);
+  bLat.setOnClickListener(new ButtonClickListener());
+  bLon.setOnClickListener(new ButtonClickListener());
+  final Button buttonCurrent=(Button)v.findViewById(R.id.current);
+  buttonCurrent.setOnClickListener(new CurrentListener());
+  final Button buttonCache=(Button)v.findViewById(R.id.cache);
+  if (cache != null) {
+    buttonCache.setOnClickListener(new CacheListener());
+  }
+ else {
+    buttonCache.setVisibility(View.GONE);
+  }
+  final Button buttonDone=(Button)v.findViewById(R.id.done);
+  buttonDone.setOnClickListener(new InputDoneListener());
+  return v;
+}
