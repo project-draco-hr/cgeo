@@ -1,0 +1,7 @@
+{
+  super.onCreate(savedInstanceState);
+  gp=getArguments().getParcelable(GEOPOINT_ARG);
+  gpinitial=getArguments().getParcelable(GEOPOINT_INTIAL_ARG);
+  cacheCoords=getArguments().getParcelable(CACHECOORDS_ARG);
+  if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG) != null)   gp=savedInstanceState.getParcelable(GEOPOINT_ARG);
+}

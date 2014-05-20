@@ -1,12 +1,5 @@
 {
-  final CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(null,null,app.currentGeo());
+  final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(null,null,app.currentGeo());
   coordsDialog.setCancelable(true);
-  coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate(){
-    @Override public void update(    final Geopoint gp){
-      buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-      buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-    }
-  }
-);
   coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
 }
