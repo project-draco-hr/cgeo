@@ -1,0 +1,28 @@
+{
+  final CGeoMap map=mapRef.get();
+  if (map == null) {
+    return;
+  }
+  try {
+    if (map.mapView != null) {
+      final Viewport viewportNow=map.mapView.getViewport();
+      final int zoomNow=map.mapView.getMapZoomLevel();
+      final boolean moved=map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (map.viewport == null)|| zoomNow != map.zoom || (mapMoved(map.viewport,viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !map.viewport.includes(viewportNow)));
+      if (moved || !viewportNow.equals(map.viewport)) {
+        map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
+      }
+      map.zoom=zoomNow;
+      if (moved) {
+        map.markersInvalidated=false;
+        long currentTime=System.currentTimeMillis();
+        if (1000 < (currentTime - map.loadThreadRun)) {
+          map.viewport=viewportNow;
+          loadExecutor.execute(map.new LoadRunnable(map.viewport));
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log.w("CGeoMap.startLoadtimer.start",e);
+  }
+}
