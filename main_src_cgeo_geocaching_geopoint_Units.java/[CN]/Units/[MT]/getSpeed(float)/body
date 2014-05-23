@@ -1,7 +1,8 @@
 {
-  final String speed=getDistanceFromKilometers(kilometersPerHour);
-  if (speed.endsWith("mi")) {
-    return speed.substring(0,speed.length() - 2) + "mph";
+  if (Settings.isUseImperialUnits()) {
+    return String.format("%.0f mph",kilometersPerHour / IConversion.MILES_TO_KILOMETER);
   }
-  return speed + (!Settings.isUseImperialUnits() ? "/h" : "ph");
+ else {
+    return String.format("%.0f km/h",kilometersPerHour);
+  }
 }
