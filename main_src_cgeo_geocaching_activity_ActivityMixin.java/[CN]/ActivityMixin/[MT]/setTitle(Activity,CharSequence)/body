@@ -2,7 +2,10 @@
   if (StringUtils.isBlank(text)) {
     return;
   }
-  if (((ActionBarActivity)activity).getSupportActionBar() != null) {
-    ((ActionBarActivity)activity).getSupportActionBar().setTitle(text);
+  if (activity instanceof ActionBarActivity) {
+    final ActionBar actionBar=((ActionBarActivity)activity).getSupportActionBar();
+    if (actionBar != null) {
+      actionBar.setTitle(text);
+    }
   }
 }
