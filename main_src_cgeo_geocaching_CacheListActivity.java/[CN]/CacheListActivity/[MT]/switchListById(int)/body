@@ -15,6 +15,7 @@
   title=list.title;
   type=CacheListType.OFFLINE;
   Settings.saveLastList(listId);
+  initAdapter();
   showProgress(true);
   showFooterLoadingCaches();
   DataStore.moveToList(adapter.getCheckedCaches(),listId);
