@@ -1,7 +1,6 @@
 {
   if (item.getItemId() == android.R.id.home) {
-    ActivityMixin.navigateToMain(this);
-    return true;
+    return ActivityMixin.navigateUp(this);
   }
   return super.onOptionsItemSelected(item);
 }

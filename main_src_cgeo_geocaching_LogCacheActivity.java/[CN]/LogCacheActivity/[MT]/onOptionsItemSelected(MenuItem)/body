@@ -1,7 +1,4 @@
 {
-  if (super.onOptionsItemSelected(item)) {
-    return true;
-  }
   final int id=item.getItemId();
   if (id >= 10 && id <= 19) {
     rating=(id - 9) / 2.0f;
@@ -11,5 +8,5 @@
     updatePostButtonText();
     return true;
   }
-  return false;
+  return super.onOptionsItemSelected(item);
 }
