@@ -22,6 +22,8 @@
   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   tweetCheck=(CheckBox)findViewById(R.id.tweet);
   logPasswordBox=(LinearLayout)findViewById(R.id.log_password_box);
+  final RatingBar ratingBar=(RatingBar)findViewById(R.id.gcvoteRating);
+  initializeRatingBar(ratingBar);
   setDefaultValues();
   if (savedInstanceState != null) {
     rating=savedInstanceState.getFloat(SAVED_STATE_RATING);
