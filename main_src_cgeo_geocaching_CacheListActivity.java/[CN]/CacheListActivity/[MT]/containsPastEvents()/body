@@ -1,6 +1,6 @@
 {
   for (  final Geocache cache : adapter.getCheckedOrAllCaches()) {
-    if (cache.isEventCache()) {
+    if (DateUtils.isPastEvent(cache)) {
       return true;
     }
   }
