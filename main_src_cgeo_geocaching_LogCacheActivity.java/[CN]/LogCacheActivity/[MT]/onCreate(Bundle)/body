@@ -18,7 +18,6 @@
  else {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
   }
-  postButton=(Button)findViewById(R.id.post);
   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   tweetCheck=(CheckBox)findViewById(R.id.tweet);
   logPasswordBox=(LinearLayout)findViewById(R.id.log_password_box);
@@ -44,7 +43,6 @@
       insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),new LogContext(cache,null)),false);
     }
   }
-  updatePostButtonText();
   updateImageButton();
   enablePostButton(false);
   final Button typeButton=(Button)findViewById(R.id.type);

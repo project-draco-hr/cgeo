@@ -1,9 +1,5 @@
 {
   final int id=item.getItemId();
-  if (id == R.id.menu_signature) {
-    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),getLogContext()),true);
-    return true;
-  }
   final LogTemplate template=LogTemplateProvider.getTemplate(id);
   if (template != null) {
     insertIntoLog(template.getValue(getLogContext()),true);

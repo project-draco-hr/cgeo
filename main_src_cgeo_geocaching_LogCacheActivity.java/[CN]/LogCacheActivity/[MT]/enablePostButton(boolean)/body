@@ -1,11 +1,4 @@
 {
-  postButton.setEnabled(enabled);
-  if (enabled) {
-    postButton.setOnClickListener(new PostListener());
-  }
- else {
-    postButton.setOnTouchListener(null);
-    postButton.setOnClickListener(null);
-  }
-  updatePostButtonText();
+  sendButtonEnabled=enabled;
+  invalidateOptionsMenuCompatible();
 }

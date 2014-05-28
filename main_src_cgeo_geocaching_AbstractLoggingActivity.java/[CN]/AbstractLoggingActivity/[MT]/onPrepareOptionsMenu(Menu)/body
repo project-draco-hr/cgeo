@@ -1,6 +1,4 @@
 {
-  final boolean signatureAvailable=StringUtils.isNotBlank(Settings.getSignature());
-  menu.findItem(R.id.menu_signature).setVisible(signatureAvailable);
   boolean smileyVisible=false;
   final Geocache cache=getLogContext().getCache();
   if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
