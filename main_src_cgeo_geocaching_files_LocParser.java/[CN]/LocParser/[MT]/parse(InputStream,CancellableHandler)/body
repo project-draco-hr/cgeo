@@ -17,7 +17,9 @@
     cache.setListId(listId);
     cache.setDetailed(true);
     cache.store(null);
-    progressHandler.sendMessage(progressHandler.obtainMessage(0,maxSize * caches.size() / coords.size(),0));
+    if (progressHandler != null) {
+      progressHandler.sendMessage(progressHandler.obtainMessage(0,maxSize * caches.size() / coords.size(),0));
+    }
   }
   Log.i("Caches found in .loc file: " + caches.size());
   return caches;
