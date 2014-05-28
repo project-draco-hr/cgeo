@@ -11,6 +11,7 @@
     }
   }
   cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  invalidateOptionsMenuCompatible();
   possibleLogTypes=cache.getPossibleLogTypes();
   if (StringUtils.isNotBlank(cache.getName())) {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
@@ -43,7 +44,6 @@
       insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),new LogContext(cache,null)),false);
     }
   }
-  updateImageButton();
   enablePostButton(false);
   final Button typeButton=(Button)findViewById(R.id.type);
   typeButton.setText(typeSelected.getL10n());
@@ -64,13 +64,6 @@
   tweetCheck.setChecked(true);
   updateTweetBox(typeSelected);
   updateLogPasswordBox(typeSelected);
-  final Button imageButton=(Button)findViewById(R.id.image_btn);
-  imageButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View view){
-      selectImage();
-    }
-  }
-);
   final Button saveButton=(Button)findViewById(R.id.save);
   saveButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
