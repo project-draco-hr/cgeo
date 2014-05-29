@@ -3,5 +3,5 @@
   final Point displaySize=Compatibility.getDisplaySize();
   final int minSize=Math.min(displaySize.x,displaySize.y);
   final String markerUrl=MARKERS_URL + "my_location_mdpi.png";
-  downloadMap(cache.getGeocode(),15,ROADMAP,markerUrl,PREFIX_PREVIEW,"shadow:false|",latlonMap,minSize,minSize,null);
+  return downloadMap(cache.getGeocode(),15,ROADMAP,markerUrl,PREFIX_PREVIEW,"shadow:false|",latlonMap,minSize,minSize,null);
 }

@@ -1,17 +1,19 @@
 {
   if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
-    return;
+    return Observable.empty();
   }
   int edge=guessMaxDisplaySide();
+  final List<Observable<String>> downloaders=new LinkedList<Observable<String>>();
   if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-    storeCachePreviewMap(cache);
-    storeCacheStaticMap(cache,edge,false);
+    downloaders.add(storeCachePreviewMap(cache));
+    downloaders.add(storeCacheStaticMap(cache,edge));
   }
   if (Settings.isStoreOfflineWpMaps()) {
     for (    final Waypoint waypoint : cache.getWaypoints()) {
       if (!hasAllStaticMapsForWaypoint(cache.getGeocode(),waypoint)) {
-        refreshAllWpStaticMaps(cache,edge);
+        downloaders.add(refreshAllWpStaticMaps(cache,edge));
       }
     }
   }
+  return Observable.merge(downloaders);
 }

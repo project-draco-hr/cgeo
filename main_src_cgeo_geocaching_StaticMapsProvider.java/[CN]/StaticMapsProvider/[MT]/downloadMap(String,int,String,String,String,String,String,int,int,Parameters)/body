@@ -1,22 +1,27 @@
 {
-  final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(zoom),"size",String.valueOf(limitSize(width)) + 'x' + String.valueOf(limitSize(height)),"maptype",mapType,"markers","icon:" + markerUrl + '|'+ shadow+ latlonMap,"sensor","false");
-  if (waypoints != null) {
-    params.addAll(waypoints);
-  }
-  final HttpResponse httpResponse=Network.getRequest(GOOGLE_STATICMAP_URL,params);
-  if (httpResponse == null) {
-    Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
-    return;
-  }
-  if (httpResponse.getStatusLine().getStatusCode() != 200) {
-    Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + httpResponse.getStatusLine().getStatusCode());
-    return;
-  }
-  final File file=getMapFile(geocode,prefix,true);
-  if (LocalStorage.saveEntityToFile(httpResponse,file)) {
-    final long fileSize=file.length();
-    if (fileSize < MIN_MAP_IMAGE_BYTES) {
-      FileUtils.deleteIgnoringFailure(file);
+  return Async.fromAction(new Action0(){
+    @Override public void call(){
+      final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(zoom),"size",String.valueOf(limitSize(width)) + 'x' + String.valueOf(limitSize(height)),"maptype",mapType,"markers","icon:" + markerUrl + '|'+ shadow+ latlonMap,"sensor","false");
+      if (waypoints != null) {
+        params.addAll(waypoints);
+      }
+      final HttpResponse httpResponse=Network.getRequest(GOOGLE_STATICMAP_URL,params);
+      if (httpResponse == null) {
+        Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
+        return;
+      }
+      if (httpResponse.getStatusLine().getStatusCode() != 200) {
+        Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + httpResponse.getStatusLine().getStatusCode());
+        return;
+      }
+      final File file=getMapFile(geocode,prefix,true);
+      if (LocalStorage.saveEntityToFile(httpResponse,file)) {
+        final long fileSize=file.length();
+        if (fileSize < MIN_MAP_IMAGE_BYTES) {
+          FileUtils.deleteIgnoringFailure(file);
+        }
+      }
     }
   }
+,prefix,Schedulers.io());
 }

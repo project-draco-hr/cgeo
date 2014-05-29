@@ -3,5 +3,5 @@
     handler.unsubscribeIfCancelled(subscription);
   }
   loading.onCompleted();
-  waitForEnd.toBlockingObservable().lastOrDefault(null);
+  return waitForEnd;
 }
