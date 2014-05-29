@@ -1,6 +1,5 @@
 {
-  menu.setHeaderTitle(fieldTitle);
-  getMenuInflater().inflate(R.menu.details_context,menu);
+  actionMode.setTitle(fieldTitle);
   menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
   if (!copyOnly) {
     if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {

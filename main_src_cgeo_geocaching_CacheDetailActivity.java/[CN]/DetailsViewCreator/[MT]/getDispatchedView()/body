@@ -23,10 +23,10 @@
   if (cache.isArchived()) {
     span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
-  registerForContextMenu(details.add(R.string.cache_name,span));
+  addContextMenu(details.add(R.string.cache_name,span));
   details.add(R.string.cache_type,cache.getType().getL10n());
   details.addSize(cache);
-  registerForContextMenu(details.add(R.string.cache_geocode,cache.getGeocode()));
+  addContextMenu(details.add(R.string.cache_geocode,cache.getGeocode()));
   details.addCacheState(cache);
   details.addDistance(cache,cacheDistanceView);
   cacheDistanceView=details.getValueView();
@@ -51,7 +51,7 @@
   }
   final TextView hiddenView=details.addHiddenDate(cache);
   if (hiddenView != null) {
-    registerForContextMenu(hiddenView);
+    addContextMenu(hiddenView);
   }
   if (StringUtils.isNotBlank(cache.getLocation())) {
     details.add(R.string.cache_location,cache.getLocation());
@@ -59,7 +59,7 @@
   if (cache.getCoords() != null) {
     final TextView valueView=details.add(R.string.cache_coordinates,cache.getCoords().toString());
     valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
-    registerForContextMenu(valueView);
+    addContextMenu(valueView);
   }
   if (!cache.getAttributes().isEmpty()) {
     new AttributeViewBuilder().fillView((LinearLayout)view.findViewById(R.id.attributes_innerbox));

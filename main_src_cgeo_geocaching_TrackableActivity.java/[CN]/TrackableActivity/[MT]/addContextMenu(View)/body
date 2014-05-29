@@ -1,0 +1,14 @@
+{
+  view.setOnLongClickListener(new OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      return startContextualActionBar(view);
+    }
+  }
+);
+  view.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      startContextualActionBar(view);
+    }
+  }
+);
+}
