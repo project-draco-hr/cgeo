@@ -1,0 +1,14 @@
+{
+  final ArrayList<LogTemplate> templates=getTemplatesWithoutSignature();
+  templates.add(new LogTemplate("SIGNATURE",R.string.init_signature){
+    @Override public String getValue(    final LogContext context){
+      final String nestedTemplate=StringUtils.defaultString(Settings.getSignature());
+      if (StringUtils.contains(nestedTemplate,"SIGNATURE")) {
+        return "invalid signature template";
+      }
+      return LogTemplateProvider.applyTemplates(nestedTemplate,context);
+    }
+  }
+);
+  return templates;
+}

@@ -1,0 +1,5 @@
+{
+  final String noTemplates=" no templates ";
+  final String signature=LogTemplateProvider.applyTemplates(noTemplates,new LogContext(null,null,true));
+  assertThat(signature).isEqualTo(noTemplates);
+}

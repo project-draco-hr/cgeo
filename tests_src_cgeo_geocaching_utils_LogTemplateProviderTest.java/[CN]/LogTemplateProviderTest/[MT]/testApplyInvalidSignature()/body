@@ -1,0 +1,12 @@
+{
+  String oldSignature=Settings.getSignature();
+  try {
+    final String signatureTemplate="[SIGNATURE]";
+    TestSettings.setSignature(signatureTemplate);
+    final String signature=LogTemplateProvider.applyTemplates(signatureTemplate,new LogContext(null,null,true));
+    assertThat(signature).isEqualTo("invalid signature template");
+  }
+  finally {
+    TestSettings.setSignature(oldSignature);
+  }
+}

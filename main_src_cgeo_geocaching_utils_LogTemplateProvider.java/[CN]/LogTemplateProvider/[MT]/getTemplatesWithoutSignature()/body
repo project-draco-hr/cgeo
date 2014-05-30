@@ -1,5 +1,5 @@
 {
-  ArrayList<LogTemplate> templates=new ArrayList<LogTemplateProvider.LogTemplate>();
+  final ArrayList<LogTemplate> templates=new ArrayList<LogTemplateProvider.LogTemplate>();
   templates.add(new LogTemplate("DATE",R.string.init_signature_template_date){
     @Override public String getValue(    final LogContext context){
       return Formatter.formatFullDate(System.currentTimeMillis());
@@ -54,11 +54,11 @@
 );
   templates.add(new LogTemplate("OWNER",R.string.init_signature_template_owner){
     @Override public String getValue(    final LogContext context){
-      Trackable trackable=context.getTrackable();
+      final Trackable trackable=context.getTrackable();
       if (trackable != null) {
         return trackable.getOwner();
       }
-      Geocache cache=context.getCache();
+      final Geocache cache=context.getCache();
       if (cache != null) {
         return cache.getOwnerDisplayName();
       }
@@ -67,12 +67,12 @@
   }
 );
   templates.add(new LogTemplate("NAME",R.string.init_signature_template_name){
-    @Override public String getValue(    LogContext context){
-      Trackable trackable=context.getTrackable();
+    @Override public String getValue(    final LogContext context){
+      final Trackable trackable=context.getTrackable();
       if (trackable != null) {
         return trackable.getName();
       }
-      Geocache cache=context.getCache();
+      final Geocache cache=context.getCache();
       if (cache != null) {
         return cache.getName();
       }
@@ -81,12 +81,12 @@
   }
 );
   templates.add(new LogTemplate("URL",R.string.init_signature_template_url){
-    @Override public String getValue(    LogContext context){
-      Trackable trackable=context.getTrackable();
+    @Override public String getValue(    final LogContext context){
+      final Trackable trackable=context.getTrackable();
       if (trackable != null) {
         return trackable.getBrowserUrl();
       }
-      Geocache cache=context.getCache();
+      final Geocache cache=context.getCache();
       if (cache != null) {
         return cache.getBrowserUrl();
       }
@@ -95,18 +95,12 @@
   }
 );
   templates.add(new LogTemplate("LOG",R.string.init_signature_template_log){
-    @Override public String getValue(    LogContext context){
-      LogEntry logEntry=context.getLogEntry();
+    @Override public String getValue(    final LogContext context){
+      final LogEntry logEntry=context.getLogEntry();
       if (logEntry != null) {
         return logEntry.getDisplayText();
       }
       return StringUtils.EMPTY;
-    }
-  }
-);
-  templates.add(new LogTemplate("SIGNATURE",R.string.init_signature){
-    @Override public String getValue(    LogContext context){
-      return StringUtils.defaultString(Settings.getSignature());
     }
   }
 );

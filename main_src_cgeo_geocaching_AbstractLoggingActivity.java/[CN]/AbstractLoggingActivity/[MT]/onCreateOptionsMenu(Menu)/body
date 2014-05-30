@@ -1,7 +1,7 @@
 {
   getMenuInflater().inflate(R.menu.abstract_logging_activity,menu);
   final SubMenu menuLog=menu.findItem(R.id.menu_templates).getSubMenu();
-  for (  final LogTemplate template : LogTemplateProvider.getTemplates()) {
+  for (  final LogTemplate template : LogTemplateProvider.getTemplatesWithSignature()) {
     menuLog.add(0,template.getItemId(),0,template.getResourceId());
   }
   final SubMenu menuSmilies=menu.findItem(R.id.menu_smilies).getSubMenu();
