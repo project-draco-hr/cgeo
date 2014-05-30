@@ -9,7 +9,7 @@
         cache.setVisitedDate(new Date().getTime());
       }
       DataStore.saveChangedCache(cache);
-      ArrayList<LogEntry> newLogs=new ArrayList<LogEntry>(cache.getLogs());
+      final ArrayList<LogEntry> newLogs=new ArrayList<LogEntry>(cache.getLogs());
       final LogEntry logNow=new LogEntry(date.getTimeInMillis(),typeSelected,log);
       logNow.friend=true;
       newLogs.add(0,logNow);
@@ -24,7 +24,7 @@
         GCVote.setRating(cache,rating);
       }
       if (StringUtils.isNotBlank(imageUri.getPath())) {
-        ImageResult imageResult=loggingManager.postLogImage(logResult.getLogId(),imageCaption,imageDescription,imageUri);
+        final ImageResult imageResult=loggingManager.postLogImage(logResult.getLogId(),imageCaption,imageDescription,imageUri);
         final String uploadedImageUrl=imageResult.getImageUri();
         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
           logNow.addLogImage(new Image(uploadedImageUrl,imageCaption,imageDescription));
@@ -35,7 +35,7 @@
     }
     return logResult.getPostLogResult();
   }
- catch (  RuntimeException e) {
+ catch (  final RuntimeException e) {
     Log.e("VisitCacheActivity.Poster.doInBackgroundInternal",e);
   }
   return StatusCode.LOG_POST_ERROR;

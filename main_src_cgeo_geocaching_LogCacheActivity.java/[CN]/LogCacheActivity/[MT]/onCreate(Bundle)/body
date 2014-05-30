@@ -48,7 +48,7 @@
   final Button typeButton=(Button)findViewById(R.id.type);
   typeButton.setText(typeSelected.getL10n());
   typeButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View view){
+    @Override public void onClick(    final View view){
       selectLogType();
     }
   }
@@ -64,20 +64,6 @@
   tweetCheck.setChecked(true);
   updateTweetBox(typeSelected);
   updateLogPasswordBox(typeSelected);
-  final Button saveButton=(Button)findViewById(R.id.save);
-  saveButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      saveLog(true);
-    }
-  }
-);
-  final Button clearButton=(Button)findViewById(R.id.clear);
-  clearButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      clearLog();
-    }
-  }
-);
   loggingManager=cache.getLoggingManager(this);
   loggingManager.init();
 }

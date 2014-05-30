@@ -8,8 +8,8 @@
   actionButtons=new SparseArray<TrackableLog>();
   final LinearLayout inventoryView=(LinearLayout)findViewById(R.id.inventory);
   inventoryView.removeAllViews();
-  for (  TrackableLog tb : trackables) {
-    LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.logcache_trackable_item,null);
+  for (  final TrackableLog tb : trackables) {
+    final LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.logcache_trackable_item,null);
     ((TextView)inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
     ((TextView)inventoryItem.findViewById(R.id.name)).setText(tb.name);
     final TextView actionButton=(TextView)inventoryItem.findViewById(R.id.action);
@@ -17,7 +17,7 @@
     actionButtons.put(actionButton.getId(),tb);
     actionButton.setText(tb.action.getLabel() + " ???");
     actionButton.setOnClickListener(new View.OnClickListener(){
-      @Override public void onClick(      View view){
+      @Override public void onClick(      final View view){
         selectTrackableAction(view);
       }
     }
@@ -25,7 +25,7 @@
     final String tbCode=tb.trackCode;
     inventoryItem.setClickable(true);
     inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener(){
-      @Override public void onClick(      View view){
+      @Override public void onClick(      final View view){
         final Intent trackablesIntent=new Intent(LogCacheActivity.this,TrackableActivity.class);
         trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,tbCode);
         startActivity(trackablesIntent);
@@ -41,7 +41,7 @@
     final LinearLayout inventoryChangeAllView=(LinearLayout)findViewById(R.id.inventory_changeall);
     final Button changeButton=(Button)inventoryChangeAllView.findViewById(R.id.changebutton);
     changeButton.setOnClickListener(new View.OnClickListener(){
-      @Override public void onClick(      View view){
+      @Override public void onClick(      final View view){
         selectAllTrackablesAction();
       }
     }

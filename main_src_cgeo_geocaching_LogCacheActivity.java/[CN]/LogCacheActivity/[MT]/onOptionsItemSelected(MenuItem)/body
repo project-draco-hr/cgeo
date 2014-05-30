@@ -6,6 +6,13 @@ case R.id.menu_send:
 case R.id.menu_image:
 selectImage();
 return true;
+case R.id.save:
+saveLog(true);
+finish();
+return true;
+case R.id.clear:
+clearLog();
+return true;
 default :
 break;
 }

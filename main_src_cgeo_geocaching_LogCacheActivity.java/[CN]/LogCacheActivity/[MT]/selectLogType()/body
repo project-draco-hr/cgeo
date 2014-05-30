@@ -1,12 +1,12 @@
 {
   final ArrayList<LogType> possible=new ArrayList<LogType>(possibleLogTypes);
-  Builder alert=new AlertDialog.Builder(this);
-  String[] choices=new String[possible.size()];
+  final Builder alert=new AlertDialog.Builder(this);
+  final String[] choices=new String[possible.size()];
   for (int i=0; i < choices.length; i++) {
     choices[i]=possible.get(i).getL10n();
   }
   alert.setSingleChoiceItems(choices,possible.indexOf(typeSelected),new OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int position){
+    @Override public void onClick(    final DialogInterface dialog,    final int position){
       setType(possible.get(position));
       dialog.dismiss();
     }

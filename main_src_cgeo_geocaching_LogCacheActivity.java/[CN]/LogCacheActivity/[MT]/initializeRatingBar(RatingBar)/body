@@ -5,7 +5,7 @@
     label.setVisibility(View.VISIBLE);
   }
   ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(){
-    @Override public void onRatingChanged(    RatingBar ratingBar,    float stars,    boolean fromUser){
+    @Override public void onRatingChanged(    final RatingBar ratingBar,    final float stars,    final boolean fromUser){
       rating=GCVote.isValidRating(stars) ? stars : 0;
       if (rating < stars) {
         ratingBar.setRating(rating);
