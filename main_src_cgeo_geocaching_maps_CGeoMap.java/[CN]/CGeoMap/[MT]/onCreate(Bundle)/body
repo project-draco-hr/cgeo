@@ -51,7 +51,7 @@
   mapView.setBuiltInZoomControls(true);
   mapView.displayZoomControls(true);
   mapView.preLoad();
-  mapView.setOnDragListener(this);
+  mapView.setOnDragListener(new MapDragListener(this));
   mapView.clearOverlays();
   if (overlayCaches == null) {
     overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker));
