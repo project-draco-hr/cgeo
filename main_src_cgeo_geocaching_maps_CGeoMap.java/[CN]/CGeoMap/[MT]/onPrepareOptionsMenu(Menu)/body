@@ -1,6 +1,6 @@
 {
   super.onPrepareOptionsMenu(menu);
-  for (  MapSource mapSource : MapProviderFactory.getMapSources()) {
+  for (  final MapSource mapSource : MapProviderFactory.getMapSources()) {
     final MenuItem menuItem=menu.findItem(mapSource.getNumericalId());
     if (menuItem != null) {
       menuItem.setVisible(mapSource.isAvailable());
@@ -55,7 +55,7 @@ default :
 menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
 }
 }
- catch (RuntimeException e) {
+ catch (final RuntimeException e) {
 Log.e("CGeoMap.onPrepareOptionsMenu",e);
 }
 return true;

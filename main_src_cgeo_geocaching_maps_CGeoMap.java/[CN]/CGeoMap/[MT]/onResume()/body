@@ -2,14 +2,14 @@
   super.onResume();
   resumeSubscription=Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR),startTimer());
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
-    for (    String geocode : dirtyCaches) {
-      Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+    for (    final String geocode : dirtyCaches) {
+      final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
       if (cache != null) {
         caches.remove(cache);
         caches.add(cache);
       }
     }
     dirtyCaches.clear();
-    displayExecutor.execute(new DisplayRunnable(mapView.getViewport()));
+    displayExecutor.execute(new DisplayRunnable(this));
   }
 }

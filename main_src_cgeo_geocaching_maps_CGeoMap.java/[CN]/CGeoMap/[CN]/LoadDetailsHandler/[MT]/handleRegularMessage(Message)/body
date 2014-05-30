@@ -1,7 +1,7 @@
 {
   if (msg.what == UPDATE_PROGRESS) {
     if (waitDialog != null) {
-      int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
+      final int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
       int secondsRemaining;
       if (detailProgress > 0) {
         secondsRemaining=(detailTotal - detailProgress) * secondsElapsed / detailProgress;
@@ -14,7 +14,7 @@
         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
       }
  else {
-        int minsRemaining=secondsRemaining / 60;
+        final int minsRemaining=secondsRemaining / 60;
         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minsRemaining+ " "+ res.getQuantityString(R.plurals.caches_eta_mins,minsRemaining));
       }
     }

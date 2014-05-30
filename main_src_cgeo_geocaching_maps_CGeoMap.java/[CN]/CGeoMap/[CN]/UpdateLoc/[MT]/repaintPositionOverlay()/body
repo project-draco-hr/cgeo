@@ -3,14 +3,14 @@
   if (currentTimeMillis > timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL) {
     timeLastPositionOverlayCalculation=currentTimeMillis;
     try {
-      CGeoMap cgeoMapRef=map.get();
+      final CGeoMap cgeoMapRef=map.get();
       if (cgeoMapRef != null) {
         if (cgeoMapRef.mapView != null) {
           if (cgeoMapRef.overlayPositionAndScale == null) {
             cgeoMapRef.overlayPositionAndScale=cgeoMapRef.mapView.createAddPositionAndScaleOverlay();
           }
-          boolean needsRepaintForDistance=needsRepaintForDistance();
-          boolean needsRepaintForHeading=needsRepaintForHeading();
+          final boolean needsRepaintForDistance=needsRepaintForDistance();
+          final boolean needsRepaintForHeading=needsRepaintForHeading();
           if (needsRepaintForDistance) {
             if (cgeoMapRef.followMyLocation) {
               cgeoMapRef.centerMap(new Geopoint(currentLocation));
@@ -24,7 +24,7 @@
         }
       }
     }
- catch (    RuntimeException e) {
+ catch (    final RuntimeException e) {
       Log.w("Failed to update location.");
     }
   }

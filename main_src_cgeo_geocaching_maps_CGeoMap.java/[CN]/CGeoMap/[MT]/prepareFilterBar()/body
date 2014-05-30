@@ -1,6 +1,6 @@
 {
   if (Settings.getCacheType() != CacheType.ALL) {
-    String cacheType=Settings.getCacheType().getL10n();
+    final String cacheType=Settings.getCacheType().getL10n();
     ((TextView)activity.findViewById(R.id.filter_text)).setText(cacheType);
     activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
   }

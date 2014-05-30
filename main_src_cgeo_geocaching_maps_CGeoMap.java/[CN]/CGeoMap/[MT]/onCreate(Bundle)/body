@@ -3,7 +3,7 @@
   res=this.getResources();
   activity=this.getActivity();
   app=(CgeoApplication)activity.getApplication();
-  int countBubbleCnt=DataStore.getAllCachesCount();
+  final int countBubbleCnt=DataStore.getAllCachesCount();
   caches=new LeastRecentlyUsedSet<Geocache>(MAX_CACHES + countBubbleCnt);
   final MapProvider mapProvider=Settings.getMapProvider();
   mapItemFactory=mapProvider.getMapItemFactory();
@@ -77,7 +77,7 @@
   if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
     centerMap(geocodeIntent,searchIntent,coordsIntent,mapStateIntent);
   }
-  CheckBox locSwitch=(CheckBox)activity.findViewById(R.id.my_position);
+  final CheckBox locSwitch=(CheckBox)activity.findViewById(R.id.my_position);
   if (locSwitch != null) {
     initMyLocationSwitchButton(locSwitch);
   }
