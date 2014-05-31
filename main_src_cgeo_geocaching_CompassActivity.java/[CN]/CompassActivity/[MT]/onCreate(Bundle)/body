@@ -5,7 +5,7 @@
   if (!hasMagneticFieldSensor) {
     Settings.setUseCompass(false);
   }
-  Bundle extras=getIntent().getExtras();
+  final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     final String geocode=extras.getString(EXTRAS_GEOCODE);
     if (StringUtils.isNotEmpty(geocode)) {
@@ -25,7 +25,7 @@
     }
   }
  else {
-    Intent pointIntent=new Intent(this,NavigateAnyPointActivity.class);
+    final Intent pointIntent=new Intent(this,NavigateAnyPointActivity.class);
     startActivity(pointIntent);
     finish();
     return;
