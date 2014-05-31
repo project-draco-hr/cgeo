@@ -4,15 +4,22 @@
   }
   final int menuItem=item.getItemId();
 switch (menuItem) {
-case 0:
-    return false;
-default :
-  if (NavigationAppFactory.onMenuItemSelected(item,this,cache)) {
-    return true;
-  }
-if (LoggingUI.onMenuItemSelected(item,this,cache)) {
-  refreshOnResume=true;
+case R.id.menu_delete:
+    dropCache();
   return true;
+case R.id.menu_store:
+storeCache();
+return true;
+case R.id.menu_refresh:
+refreshCache();
+return true;
+default :
+if (NavigationAppFactory.onMenuItemSelected(item,this,cache)) {
+return true;
+}
+if (LoggingUI.onMenuItemSelected(item,this,cache)) {
+refreshOnResume=true;
+return true;
 }
 }
 return super.onOptionsItemSelected(item);

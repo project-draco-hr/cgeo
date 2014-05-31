@@ -1,0 +1,14 @@
+{
+  watchlistThread=null;
+  Message msg;
+  if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
+    msg=Message.obtain(handler,MESSAGE_SUCCEEDED);
+  }
+ else {
+    msg=Message.obtain(handler,MESSAGE_FAILED);
+    final Bundle bundle=new Bundle();
+    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,res.getString(R.string.err_watchlist_failed));
+    msg.setData(bundle);
+  }
+  handler.sendMessage(msg);
+}

@@ -4,7 +4,7 @@
   final StringBuilder buffer=new StringBuilder();
   for (  String attributeName : cache.getAttributes()) {
     final boolean enabled=CacheAttribute.isEnabled(attributeName);
-    CacheAttribute attrib=CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+    final CacheAttribute attrib=CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
     if (attrib != null) {
       attributeName=attrib.getL10n(enabled);
     }
