@@ -2,7 +2,7 @@
   if (getLogCounts().isEmpty()) {
     setLogCounts(DataStore.loadLogCounts(getGeocode()));
   }
-  Integer logged=getLogCounts().get(LogType.FOUND_IT);
+  final Integer logged=getLogCounts().get(LogType.FOUND_IT);
   if (logged != null) {
     return logged;
   }
