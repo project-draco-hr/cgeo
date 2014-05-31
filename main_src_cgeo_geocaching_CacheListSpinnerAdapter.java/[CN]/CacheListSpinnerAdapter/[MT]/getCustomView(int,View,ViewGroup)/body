@@ -1,6 +1,6 @@
 {
   View resultView=convertView;
-  LayoutInflater inflater=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  final LayoutInflater inflater=(LayoutInflater)cacheListActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
   CacheListSpinnerAdapter.ViewHolder holder;
   if (resultView == null) {
     resultView=inflater.inflate(R.layout.cachelist_spinneritem,parent,false);
@@ -12,11 +12,11 @@
  else {
     holder=(CacheListSpinnerAdapter.ViewHolder)resultView.getTag();
   }
-  AbstractList list=getItem(position);
+  final AbstractList list=getItem(position);
   holder.title.setText(list.getTitle());
   if (list.getCount() >= 0) {
     holder.subtitle.setVisibility(View.VISIBLE);
-    holder.subtitle.setText(CacheListActivity.getCacheNumberString(mContext.getResources(),list.getCount()));
+    holder.subtitle.setText(cacheListActivity.getCacheListSubtitle(list));
   }
  else {
     holder.subtitle.setVisibility(View.GONE);

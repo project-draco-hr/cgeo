@@ -10,7 +10,7 @@
   if (Settings.getChooseList() && (type != CacheListType.OFFLINE && type != CacheListType.HISTORY)) {
     new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
       @Override public void call(      final Integer selectedListId){
-        for (        Geocache geocache : caches) {
+        for (        final Geocache geocache : caches) {
           geocache.setListId(selectedListId);
         }
         refreshStoredInternal(caches);

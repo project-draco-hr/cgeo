@@ -1,7 +1,7 @@
 {
-  int message=(adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history : R.string.cache_clear_history;
+  final int message=(adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history : R.string.cache_clear_history;
   Dialogs.confirmYesNo(this,R.string.caches_removing_from_history,message,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int id){
+    @Override public void onClick(    final DialogInterface dialog,    final int id){
       removeFromHistory();
       dialog.cancel();
     }

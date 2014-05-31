@@ -3,8 +3,8 @@
     return;
   }
   mCacheListSpinnerAdapter.clear();
-  AbstractList list=AbstractList.getListById(listId);
-  for (  AbstractList l : StoredList.UserInterface.getMenuLists(false,PseudoList.NEW_LIST.id)) {
+  final AbstractList list=AbstractList.getListById(listId);
+  for (  final AbstractList l : StoredList.UserInterface.getMenuLists(false,PseudoList.NEW_LIST.id)) {
     mCacheListSpinnerAdapter.add(l);
   }
   getSupportActionBar().setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));

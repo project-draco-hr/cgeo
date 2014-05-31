@@ -1,7 +1,7 @@
 {
-  int message=(adapter.getCheckedCount() > 0) ? R.string.caches_drop_selected_ask : R.string.caches_drop_all_ask;
+  final int message=(adapter.getCheckedCount() > 0) ? R.string.caches_drop_selected_ask : R.string.caches_drop_all_ask;
   Dialogs.confirmYesNo(this,R.string.caches_drop_stored,message,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int id){
+    @Override public void onClick(    final DialogInterface dialog,    final int id){
       dropSelected(removeListAfterwards);
       dialog.cancel();
     }
