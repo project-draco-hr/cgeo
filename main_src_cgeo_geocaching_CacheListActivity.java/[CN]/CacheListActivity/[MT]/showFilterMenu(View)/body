@@ -1,12 +1,7 @@
 {
   new FilterUserInterface(this).selectFilter(new Action1<IFilter>(){
-    @Override public void call(    final IFilter selectedFilter){
-      if (selectedFilter != null) {
-        setFilter(selectedFilter);
-      }
- else {
-        setFilter(null);
-      }
+    @Override public void call(    @Nullable final IFilter selectedFilter){
+      setFilter(selectedFilter);
     }
   }
 );
