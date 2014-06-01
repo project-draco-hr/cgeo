@@ -1,7 +1,7 @@
 {
-  IntentResult scanResult=IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
+  final IntentResult scanResult=IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
   if (scanResult != null) {
-    String scan=scanResult.getContents();
+    final String scan=scanResult.getContents();
     if (StringUtils.isBlank(scan)) {
       return;
     }

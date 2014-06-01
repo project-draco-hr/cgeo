@@ -12,7 +12,7 @@
   }
   navType.setText(res.getString(geo.getLocationProvider().resourceId));
   if (geo.getAccuracy() >= 0) {
-    int speed=Math.round(geo.getSpeed()) * 60 * 60 / 1000;
+    final int speed=Math.round(geo.getSpeed()) * 60 * 60 / 1000;
     navAccuracy.setText("??" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR+ Units.getSpeed(speed));
   }
  else {

@@ -1,6 +1,6 @@
 {
-  int lastVersion=Settings.getLastChangelogVersion();
-  int version=Version.getVersionCode(this);
+  final int lastVersion=Settings.getLastChangelogVersion();
+  final int version=Version.getVersionCode(this);
   Settings.setLastChangelogVersion(version);
   if (lastVersion > 0 && version != lastVersion) {
     AboutActivity.showChangeLog(this);
