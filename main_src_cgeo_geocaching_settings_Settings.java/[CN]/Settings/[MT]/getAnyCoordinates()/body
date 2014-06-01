@@ -1,7 +1,7 @@
 {
   if (contains(R.string.pref_anylatitude) && contains(R.string.pref_anylongitude)) {
-    float lat=getFloat(R.string.pref_anylatitude,0);
-    float lon=getFloat(R.string.pref_anylongitude,0);
+    final float lat=getFloat(R.string.pref_anylatitude,0);
+    final float lon=getFloat(R.string.pref_anylongitude,0);
     return new Geopoint(lat,lon);
   }
   return null;

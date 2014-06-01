@@ -2,11 +2,11 @@
   if (CollectionUtils.isEmpty(geocodes)) {
     return new HashSet<Geocache>();
   }
-  Set<Geocache> result=new HashSet<Geocache>();
-  Set<String> remaining=new HashSet<String>(geocodes);
+  final Set<Geocache> result=new HashSet<Geocache>();
+  final Set<String> remaining=new HashSet<String>(geocodes);
   if (loadFlags.contains(LoadFlag.LOAD_CACHE_BEFORE)) {
-    for (    String geocode : new HashSet<String>(remaining)) {
-      Geocache cache=cacheCache.getCacheFromCache(geocode);
+    for (    final String geocode : new HashSet<String>(remaining)) {
+      final Geocache cache=cacheCache.getCacheFromCache(geocode);
       if (cache != null) {
         result.add(cache);
         remaining.remove(cache.getGeocode());
@@ -21,8 +21,8 @@
     }
   }
   if (loadFlags.contains(LoadFlag.LOAD_CACHE_AFTER)) {
-    for (    String geocode : new HashSet<String>(remaining)) {
-      Geocache cache=cacheCache.getCacheFromCache(geocode);
+    for (    final String geocode : new HashSet<String>(remaining)) {
+      final Geocache cache=cacheCache.getCacheFromCache(geocode);
       if (cache != null) {
         result.add(cache);
         remaining.remove(cache.getGeocode());

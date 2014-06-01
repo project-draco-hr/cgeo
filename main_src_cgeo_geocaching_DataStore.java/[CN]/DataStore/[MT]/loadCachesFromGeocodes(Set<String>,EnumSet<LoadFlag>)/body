@@ -13,12 +13,12 @@
   }
   query.append(" WHERE ").append(dbTableCaches).append('.');
   query.append(DataStore.whereGeocodeIn(geocodes));
-  Cursor cursor=database.rawQuery(query.toString(),null);
+  final Cursor cursor=database.rawQuery(query.toString(),null);
   try {
     final Set<Geocache> caches=new HashSet<Geocache>();
     int logIndex=-1;
     while (cursor.moveToNext()) {
-      Geocache cache=DataStore.createCacheFromDatabaseContent(cursor);
+      final Geocache cache=DataStore.createCacheFromDatabaseContent(cursor);
       if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
         cache.setAttributes(loadAttributes(cache.getGeocode()));
       }

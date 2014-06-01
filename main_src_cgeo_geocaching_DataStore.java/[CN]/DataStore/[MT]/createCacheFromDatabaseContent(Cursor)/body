@@ -1,5 +1,5 @@
 {
-  Geocache cache=new Geocache();
+  final Geocache cache=new Geocache();
   cache.setUpdated(cursor.getLong(0));
   cache.setListId(cursor.getInt(1));
   cache.setDetailed(cursor.getInt(2) == 1);
@@ -12,7 +12,7 @@
   cache.setName(cursor.getString(9));
   cache.setOwnerDisplayName(cursor.getString(10));
   cache.setOwnerUserId(cursor.getString(11));
-  long dateValue=cursor.getLong(12);
+  final long dateValue=cursor.getLong(12);
   if (dateValue != 0) {
     cache.setHidden(new Date(dateValue));
   }

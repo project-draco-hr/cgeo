@@ -4,7 +4,7 @@
   }
   final ArrayList<String> cachesFromDatabase=new ArrayList<String>();
   final HashMap<String,Geocache> existingCaches=new HashMap<String,Geocache>();
-  for (  Geocache cache : caches) {
+  for (  final Geocache cache : caches) {
     final String geocode=cache.getGeocode();
     final Geocache cacheFromCache=cacheCache.getCacheFromCache(geocode);
     if (cacheFromCache == null) {
@@ -14,11 +14,11 @@
       existingCaches.put(geocode,cacheFromCache);
     }
   }
-  for (  Geocache cacheFromDatabase : loadCaches(cachesFromDatabase,LoadFlags.LOAD_ALL_DB_ONLY)) {
+  for (  final Geocache cacheFromDatabase : loadCaches(cachesFromDatabase,LoadFlags.LOAD_ALL_DB_ONLY)) {
     existingCaches.put(cacheFromDatabase.getGeocode(),cacheFromDatabase);
   }
   final ArrayList<Geocache> toBeStored=new ArrayList<Geocache>();
-  for (  Geocache cache : caches) {
+  for (  final Geocache cache : caches) {
     final String geocode=cache.getGeocode();
     final Geocache existingCache=existingCaches.get(geocode);
     final boolean dbUpdateRequired=!cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
@@ -28,7 +28,7 @@
       toBeStored.add(cache);
     }
   }
-  for (  Geocache geocache : toBeStored) {
+  for (  final Geocache geocache : toBeStored) {
     storeIntoDatabase(geocache);
   }
 }

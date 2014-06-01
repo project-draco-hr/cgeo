@@ -11,7 +11,7 @@
   try {
     return queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,"visiteddate",null,new HashSet<String>(),GET_STRING_0);
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("DataStore.loadBatchOfHistoricGeocodes",e);
   }
   return Collections.emptySet();

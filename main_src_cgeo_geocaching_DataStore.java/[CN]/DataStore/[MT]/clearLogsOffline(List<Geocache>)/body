@@ -3,8 +3,8 @@
     return;
   }
   init();
-  Set<String> geocodes=new HashSet<String>(caches.size());
-  for (  Geocache cache : caches) {
+  final Set<String> geocodes=new HashSet<String>(caches.size());
+  for (  final Geocache cache : caches) {
     geocodes.add(cache.getGeocode());
     cache.setLogOffline(false);
   }

@@ -1,11 +1,11 @@
 {
-  String geocode=cache.getGeocode();
+  final String geocode=cache.getGeocode();
   database.delete(dbTableSpoilers,"geocode = ?",new String[]{geocode});
-  List<Image> spoilers=cache.getSpoilers();
+  final List<Image> spoilers=cache.getSpoilers();
   if (CollectionUtils.isNotEmpty(spoilers)) {
-    SQLiteStatement insertSpoiler=PreparedStatements.getInsertSpoiler();
+    final SQLiteStatement insertSpoiler=PreparedStatements.getInsertSpoiler();
     final long timestamp=System.currentTimeMillis();
-    for (    Image spoiler : spoilers) {
+    for (    final Image spoiler : spoilers) {
       insertSpoiler.bindString(1,geocode);
       insertSpoiler.bindLong(2,timestamp);
       insertSpoiler.bindString(3,spoiler.getUrl());

@@ -6,7 +6,7 @@
   init();
   database.beginTransaction();
   try {
-    ContentValues values=new ContentValues();
+    final ContentValues values=new ContentValues();
     values.put("title",name);
     values.put("updated",System.currentTimeMillis());
     id=(int)database.insert(dbTableLists,null,values);

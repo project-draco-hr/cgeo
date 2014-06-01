@@ -6,7 +6,7 @@
   database.beginTransaction();
   int count=0;
   try {
-    ContentValues values=new ContentValues();
+    final ContentValues values=new ContentValues();
     values.put("title",name);
     values.put("updated",System.currentTimeMillis());
     count=database.update(dbTableLists,values,"_id = " + (listId - customListIdOffset),null);

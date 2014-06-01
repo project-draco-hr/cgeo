@@ -1,0 +1,9 @@
+{
+  final Cursor cursor=database.query(dbTableCaches,new String[]{"geocode","name"},"geocode IS NOT NULL AND geocode != '' AND (geocode LIKE ? OR name LIKE ? OR owner LIKE ?)",new String[]{selectionArg,selectionArg,selectionArg},null,null,"name");
+  while (cursor.moveToNext()) {
+    final String geocode=cursor.getString(0);
+    final String cacheName=cursor.getString(1);
+    resultCursor.addCache(geocode,cacheName);
+  }
+  cursor.close();
+}

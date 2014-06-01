@@ -1,4 +1,4 @@
 {
-  Cursor cursor=database.rawQuery("SELECT DISTINCT " + column + " FROM "+ table+ " WHERE "+ column+ " LIKE ?"+ " ORDER BY "+ column+ " COLLATE NOCASE ASC;",new String[]{getSuggestionArgument(input)});
+  final Cursor cursor=database.rawQuery("SELECT DISTINCT " + column + " FROM "+ table+ " WHERE "+ column+ " LIKE ?"+ " ORDER BY "+ column+ " COLLATE NOCASE ASC;",new String[]{getSuggestionArgument(input)});
   return cursorToColl(cursor,new LinkedList<String>(),GET_STRING_0).toArray(new String[cursor.getCount()]);
 }

@@ -2,11 +2,11 @@
   init();
   database.beginTransaction();
   try {
-    SQLiteStatement insertDestination=PreparedStatements.getInsertSearchDestination(destination);
+    final SQLiteStatement insertDestination=PreparedStatements.getInsertSearchDestination(destination);
     insertDestination.executeInsert();
     database.setTransactionSuccessful();
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("Updating searchedDestinations db failed",e);
   }
  finally {

@@ -10,7 +10,7 @@ synchronized (logCount) {
       return logCount.simpleQueryForLong() > 0;
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("DataStore.hasLogOffline",e);
   }
   return false;

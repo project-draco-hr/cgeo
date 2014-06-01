@@ -2,7 +2,7 @@
   cache.addStorageLocation(StorageLocation.DATABASE);
   cacheCache.putCacheInCache(cache);
   Log.d("Saving " + cache.toString() + " ("+ cache.getListId()+ ") to DB");
-  ContentValues values=new ContentValues();
+  final ContentValues values=new ContentValues();
   if (cache.getUpdated() == 0) {
     values.put("updated",System.currentTimeMillis());
   }
@@ -61,14 +61,14 @@
     saveSpoilersWithoutTransaction(cache);
     saveLogCountsWithoutTransaction(cache);
     saveInventoryWithoutTransaction(cache.getGeocode(),cache.getInventory());
-    int rows=database.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
+    final int rows=database.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
     if (rows == 0) {
       database.insert(dbTableCaches,null,values);
     }
     database.setTransactionSuccessful();
     return true;
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("SaveCache",e);
   }
  finally {

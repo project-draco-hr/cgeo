@@ -17,7 +17,7 @@
           db.execSQL(dbCreateSearchDestinationHistory);
           Log.i("Added table " + dbTableSearchDestionationHistory + ".");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 52",e);
         }
       }
@@ -26,7 +26,7 @@
           db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
           Log.i("Column onWatchlist added to " + dbTableCaches + ".");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 53",e);
         }
       }
@@ -34,7 +34,7 @@
         try {
           db.execSQL(dbCreateLogImages);
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 54",e);
         }
       }
@@ -42,7 +42,7 @@
         try {
           db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 55",e);
         }
       }
@@ -50,7 +50,7 @@
         try {
           db.execSQL("update " + dbTableAttributes + " set attribute = "+ "lower(attribute) where attribute like \"%_yes\" "+ "or attribute like \"%_no\"");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 56",e);
         }
       }
@@ -64,7 +64,7 @@
           db.execSQL("drop index in_f");
           createIndices(db);
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 57",e);
         }
       }
@@ -87,7 +87,7 @@
           db.setTransactionSuccessful();
           Log.i("Removed latitude_string and longitude_string columns");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 58",e);
         }
  finally {
@@ -99,7 +99,7 @@
           createIndices(db);
           removeObsoleteCacheDirectories(db);
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 59",e);
         }
       }
@@ -107,7 +107,7 @@
         try {
           removeSecEmptyDirs();
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 60",e);
         }
       }
@@ -116,7 +116,7 @@
           db.execSQL("alter table " + dbTableLogs + " add column friend integer");
           db.execSQL("alter table " + dbTableCaches + " add column coordsChanged integer default 0");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 61",e);
         }
       }
@@ -126,7 +126,7 @@
           db.execSQL("alter table " + dbTableWaypoints + " add column own integer default 0");
           db.execSQL("update " + dbTableWaypoints + " set own = 1 where type = 'own'");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 62",e);
         }
       }
@@ -134,7 +134,7 @@
         try {
           removeDoubleUnderscoreMapFiles();
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 63",e);
         }
       }
@@ -142,7 +142,7 @@
         try {
           db.execSQL("update " + dbTableCaches + " set reason=1 where reason=2");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 64",e);
         }
       }
@@ -150,7 +150,7 @@
         try {
           db.execSQL("update " + dbTableWaypoints + " set type='original', own=0 where name='Original Coordinates'");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 65:",e);
         }
       }
@@ -158,7 +158,7 @@
         try {
           db.execSQL("alter table " + dbTableWaypoints + " add column visited integer default 0");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 66",e);
         }
       }
@@ -167,7 +167,7 @@
           db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_yes' where geocode like 'OC%' and attribute = 'climbing_yes'");
           db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_no' where geocode like 'OC%' and attribute = 'climbing_no'");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 67",e);
         }
       }
@@ -175,7 +175,7 @@
         try {
           db.execSQL("alter table " + dbTableCaches + " add column logPasswordRequired integer default 0");
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 68",e);
         }
       }

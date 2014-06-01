@@ -6,9 +6,9 @@
   database.beginTransaction();
   boolean status=false;
   try {
-    int cnt=database.delete(dbTableLists,"_id = " + (listId - customListIdOffset),null);
+    final int cnt=database.delete(dbTableLists,"_id = " + (listId - customListIdOffset),null);
     if (cnt > 0) {
-      SQLiteStatement moveToStandard=PreparedStatements.getMoveToStandardList();
+      final SQLiteStatement moveToStandard=PreparedStatements.getMoveToStandardList();
       moveToStandard.bindLong(1,listId);
       moveToStandard.execute();
       status=true;
