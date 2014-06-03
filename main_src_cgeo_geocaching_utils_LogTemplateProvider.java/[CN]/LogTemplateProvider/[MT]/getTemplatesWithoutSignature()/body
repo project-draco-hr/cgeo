@@ -21,6 +21,13 @@
 );
   templates.add(new LogTemplate("USER",R.string.init_signature_template_user){
     @Override public String getValue(    final LogContext context){
+      final Geocache cache=context.getCache();
+      if (cache != null) {
+        final IConnector connector=ConnectorFactory.getConnector(cache);
+        if (connector instanceof ILogin) {
+          return ((ILogin)connector).getUserName();
+        }
+      }
       return Settings.getUsername();
     }
   }
