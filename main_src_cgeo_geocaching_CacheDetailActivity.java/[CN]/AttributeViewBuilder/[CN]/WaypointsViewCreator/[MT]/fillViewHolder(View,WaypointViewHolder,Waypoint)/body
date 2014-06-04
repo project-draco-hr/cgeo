@@ -74,6 +74,7 @@
   rowView.setOnLongClickListener(new View.OnLongClickListener(){
     @Override public boolean onLongClick(    final View v){
       selectedWaypoint=wpt;
+      ensureSaved();
       EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this,cache,wpt.getId());
       refreshOnResume=true;
       return true;

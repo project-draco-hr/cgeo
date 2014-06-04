@@ -10,6 +10,7 @@
   view.addFooterView(addWaypointButton);
   addWaypointButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View v){
+      ensureSaved();
       EditWaypointActivity.startActivityAddWaypoint(CacheDetailActivity.this,cache);
       refreshOnResume=true;
     }

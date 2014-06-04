@@ -2,17 +2,20 @@
 switch (item.getItemId()) {
 case R.id.menu_waypoint_edit:
     if (selectedWaypoint != null) {
+      ensureSaved();
       EditWaypointActivity.startActivityEditWaypoint(this,cache,selectedWaypoint.getId());
       refreshOnResume=true;
     }
   return true;
 case R.id.menu_waypoint_duplicate:
+ensureSaved();
 if (cache.duplicateWaypoint(selectedWaypoint)) {
-  DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
-  notifyDataSetChanged();
+DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+notifyDataSetChanged();
 }
 return true;
 case R.id.menu_waypoint_delete:
+ensureSaved();
 if (cache.deleteWaypoint(selectedWaypoint)) {
 DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
 notifyDataSetChanged();
@@ -34,6 +37,7 @@ CacheListActivity.startActivityCoordinates(this,selectedWaypoint.getCoords());
 }
 return true;
 case R.id.menu_waypoint_reset_cache_coords:
+ensureSaved();
 if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
 createResetCacheCoordinatesDialog(cache,selectedWaypoint).show();
 }
