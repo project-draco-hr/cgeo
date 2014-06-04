@@ -1,9 +1,0 @@
-{
-  Dialogs.confirm(CacheDetailActivity.this,R.string.cache_personal_note_unstored,R.string.cache_personal_note_store,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    final DialogInterface dialog,    final int which){
-      dialog.dismiss();
-      storeCache(StoredList.STANDARD_LIST_ID,new StoreCachePersonalNoteHandler(CacheDetailActivity.this,progress));
-    }
-  }
-);
-}

@@ -1,8 +1,4 @@
 {
-  if (cache.isOffline()) {
-    editPersonalNote(cache,CacheDetailActivity.this);
-  }
- else {
-    warnPersonalNoteNeedsStoring();
-  }
+  ensureSaved();
+  editPersonalNote(cache,CacheDetailActivity.this);
 }
