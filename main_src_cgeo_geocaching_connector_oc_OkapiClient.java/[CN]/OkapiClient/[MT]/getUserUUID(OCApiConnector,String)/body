@@ -6,7 +6,7 @@
     Log.e("OkapiClient.getUserUUID: error getting user info: '" + error.getMessage() + "'");
     return null;
   }
-  JSONObject data=result.data;
+  final JSONObject data=result.data;
   if (!data.isNull(USER_UUID)) {
     try {
       return data.getString(USER_UUID);

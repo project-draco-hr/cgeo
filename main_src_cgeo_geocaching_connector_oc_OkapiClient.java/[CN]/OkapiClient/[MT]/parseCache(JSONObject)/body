@@ -33,6 +33,7 @@
     }
     cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES),response.optJSONArray(CACHE_ATTR_ACODES)));
     cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)),false);
+    cache.setInventory(parseTrackables(response.getJSONArray(CACHE_TRACKABLES)));
     if (!response.isNull(CACHE_IS_WATCHED)) {
       cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
     }
