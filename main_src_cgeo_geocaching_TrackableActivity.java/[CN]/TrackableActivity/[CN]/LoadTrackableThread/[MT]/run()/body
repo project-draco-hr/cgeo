@@ -1,6 +1,5 @@
 {
   if (StringUtils.isNotEmpty(geocode)) {
-    trackable=DataStore.loadTrackable(geocode);
     for (    final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
       if (trackableConnector.canHandleTrackable(geocode)) {
         trackable=trackableConnector.searchTrackable(geocode,guid,id);
@@ -8,6 +7,9 @@
           break;
         }
       }
+    }
+    if (trackable == null) {
+      trackable=DataStore.loadTrackable(geocode);
     }
   }
   if (trackable == null) {
