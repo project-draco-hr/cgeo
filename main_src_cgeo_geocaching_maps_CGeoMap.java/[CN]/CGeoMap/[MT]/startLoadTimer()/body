@@ -1,3 +1,5 @@
 {
-  return Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this),250,250,TimeUnit.MILLISECONDS);
+  final LoadTimerAction action=new LoadTimerAction(this);
+  Schedulers.newThread().createWorker().schedule(action,250,TimeUnit.MILLISECONDS);
+  return action;
 }
