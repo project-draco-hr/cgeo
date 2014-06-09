@@ -4,13 +4,4 @@
   loadingView.setVisibility(View.VISIBLE);
   final String longDescription=cache.getDescription();
   loadDescription(longDescription,longDescView,loadingView);
-  if (shortDescView != null) {
-    final String shortDescription=cache.getShortDescription();
-    if (StringUtils.isNotBlank(shortDescription)) {
-      final int index=longDescription.indexOf(shortDescription);
-      if (index >= 0 && index < 200) {
-        shortDescView.setVisibility(View.GONE);
-      }
-    }
-  }
 }
