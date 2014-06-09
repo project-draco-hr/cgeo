@@ -28,7 +28,7 @@
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
   builder.setTitle(R.string.cache_menu_navigate);
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int item){
+    @Override public void onClick(    final DialogInterface dialog,    final int item){
       final NavigationAppsEnum selectedItem=adapter.getItem(item);
       invokeNavigation(activity,cache,waypoint,destination,selectedItem.app);
     }
