@@ -3,7 +3,7 @@
   final SearchResult result=new SearchResult(parsed.left);
   if (parsed.left == StatusCode.NO_ERROR) {
     result.addAndPutInCache(Collections.singletonList(parsed.right));
-    DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(),getLogsFromDetails(page).toBlockingObservable().toIterable());
+    DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(),getLogsFromDetails(page).toBlocking().toIterable());
   }
   return result;
 }

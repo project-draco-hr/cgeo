@@ -31,7 +31,7 @@
           return Observable.empty();
         }
       }
-).firstOrDefault(0)).subscribe(new Action1<Integer>(){
+).firstOrDefault(0)).subscribeOn(Schedulers.io()).subscribe(new Action1<Integer>(){
         @Override public void call(        final Integer pin){
           progressDialog.dismiss();
           if (pin > 0) {
@@ -42,7 +42,7 @@
           }
         }
       }
-,Schedulers.io());
+);
       return true;
     }
   }

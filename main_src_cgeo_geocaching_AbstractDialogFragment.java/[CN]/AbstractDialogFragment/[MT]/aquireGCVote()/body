@@ -11,7 +11,7 @@
       return rating != null ? Observable.just(rating) : Observable.<GCVoteRating>empty();
     }
   }
-)).subscribe(new Action1<GCVoteRating>(){
+)).subscribeOn(Schedulers.io()).subscribe(new Action1<GCVoteRating>(){
     @Override public void call(    final GCVoteRating rating){
       cache.setRating(rating.getRating());
       cache.setVotes(rating.getVotes());
@@ -19,5 +19,5 @@
       details.addRating(cache);
     }
   }
-,Schedulers.io());
+);
 }

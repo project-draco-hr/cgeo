@@ -3,7 +3,7 @@
     return null;
   }
   view=(ScrollView)getLayoutInflater().inflate(R.layout.cachedetail_details_page,null);
-  AndroidObservable.bindActivity(CacheDetailActivity.this,previewMap).subscribe(new Action1<BitmapDrawable>(){
+  AndroidObservable.bindActivity(CacheDetailActivity.this,previewMap).subscribeOn(Schedulers.io()).subscribe(new Action1<BitmapDrawable>(){
     @Override public void call(    final BitmapDrawable image){
       final Bitmap bitmap=image.getBitmap();
       if (bitmap != null && bitmap.getWidth() > 10) {
@@ -13,7 +13,7 @@
       }
     }
   }
-,Schedulers.io());
+);
   detailsList=(LinearLayout)view.findViewById(R.id.details_list);
   final CacheDetailsCreator details=new CacheDetailsCreator(CacheDetailActivity.this,detailsList);
   final Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
