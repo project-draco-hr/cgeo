@@ -4,9 +4,12 @@ switch (id) {
 case R.id.menu_map:
     CGeoMap.startActivityCoords(this,dstCoords,null,null);
   return true;
-case R.id.menu_switch_compass_gps:
-final boolean oldSetting=Settings.isUseCompass();
-Settings.setUseCompass(!oldSetting);
+case R.id.menu_compass_sensor_gps:
+Settings.setUseCompass(false);
+invalidateOptionsMenuCompatible();
+return true;
+case R.id.menu_compass_sensor_magnetic:
+Settings.setUseCompass(true);
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_tts_start:
