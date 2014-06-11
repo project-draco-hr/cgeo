@@ -9,6 +9,7 @@
     cache.setOwnerUserId(owner);
     cache.getLogCounts().put(LogType.FOUND_IT,response.getInt(CACHE_FOUNDS));
     cache.getLogCounts().put(LogType.DIDNT_FIND_IT,response.getInt(CACHE_NOTFOUNDS));
+    cache.getLogCounts().put(LogType.WILL_ATTEND,response.optInt(CACHE_WILLATTENDS));
     if (!response.isNull(CACHE_RATING)) {
       cache.setRating((float)response.getDouble(CACHE_RATING));
     }
