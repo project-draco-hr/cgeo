@@ -7,13 +7,13 @@
   final CheckBox shareOption=(CheckBox)layout.findViewById(R.id.share);
   shareOption.setChecked(Settings.getShareAfterExport());
   shareOption.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       Settings.setShareAfterExport(shareOption.isChecked());
     }
   }
 );
   builder.setPositiveButton(R.string.export,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
       dialog.dismiss();
       new ExportTask(activity).execute(geocodes);
     }

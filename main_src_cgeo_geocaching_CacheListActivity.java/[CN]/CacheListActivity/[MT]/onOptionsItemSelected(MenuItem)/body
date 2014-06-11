@@ -67,10 +67,13 @@ setComparator(selectedComparator);
 return true;
 case R.id.menu_import_web:
 importWeb();
-return false;
-case R.id.menu_export:
-ExportFactory.showExportMenu(adapter.getCheckedOrAllCaches(),this);
-return false;
+return true;
+case R.id.menu_export_gpx:
+new GpxExport().export(adapter.getCheckedOrAllCaches(),this);
+return true;
+case R.id.menu_export_fieldnotes:
+new FieldnoteExport().export(adapter.getCheckedOrAllCaches(),this);
+return true;
 case R.id.menu_remove_from_history:
 removeFromHistoryCheck();
 invalidateOptionsMenuCompatible();
