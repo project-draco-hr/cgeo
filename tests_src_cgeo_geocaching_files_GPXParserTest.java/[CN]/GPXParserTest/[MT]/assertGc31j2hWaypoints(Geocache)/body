@@ -15,7 +15,7 @@
   assertThat(wp.getPrefix()).isEqualTo("S1");
   assertThat(wp.getLookup()).isEqualTo("---");
   assertThat(wp.getName()).isEqualTo("Station 1");
-  assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.",wp.getNote());
+  assertThat(wp.getNote()).isEqualTo("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.");
   assertThat(wp.getWaypointType()).isEqualTo(WaypointType.STAGE);
   assertEquals(49.317500,wp.getCoords().getLatitude(),0.000001);
   assertEquals(8.545100,wp.getCoords().getLongitude(),0.000001);

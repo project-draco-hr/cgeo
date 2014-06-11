@@ -12,7 +12,7 @@
   assertThat(cache.getDifficulty()).isEqualTo(1.5f);
   assertThat(cache.getTerrain()).isEqualTo(1.0f);
   assertThat(cache.getDescription().startsWith("Dieses sind die Reste einer in Kornwestheim gefundenen")).isTrue();
-  assertEquals(new Geopoint(48.8642167,9.1836),cache.getCoords());
+  assertThat(cache.getCoords()).isEqualTo(new Geopoint(48.8642167,9.1836));
   assertThat(cache.isReliableLatLon()).isTrue();
   assertThat(cache.getHint()).isEqualTo("Wasserleitung");
 }
