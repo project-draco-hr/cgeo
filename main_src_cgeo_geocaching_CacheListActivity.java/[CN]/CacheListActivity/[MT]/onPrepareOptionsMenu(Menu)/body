@@ -33,7 +33,7 @@
     final boolean hasSelection=adapter != null && adapter.getCheckedCount() > 0;
     final boolean isNonDefaultList=isConcrete && listId != StoredList.STANDARD_LIST_ID;
     if (isOffline || type == CacheListType.HISTORY) {
-      setMenuItemLabel(menu,R.id.menu_drop_caches,R.string.caches_drop_selected,R.string.caches_drop_all);
+      setMenuItemLabel(menu,R.id.menu_drop_caches,R.string.caches_remove_selected,R.string.caches_remove_all);
       setMenuItemLabel(menu,R.id.menu_refresh_stored,R.string.caches_refresh_selected,R.string.caches_refresh_all);
       setMenuItemLabel(menu,R.id.menu_move_to_list,R.string.caches_move_selected,R.string.caches_move_all);
     }
