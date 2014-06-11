@@ -1,5 +1,5 @@
 {
-  for (  NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
+  for (  final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
     if (appEnum.app.isInstalled()) {
       getPreference(appEnum.preferenceKey).setEnabled(true);
     }

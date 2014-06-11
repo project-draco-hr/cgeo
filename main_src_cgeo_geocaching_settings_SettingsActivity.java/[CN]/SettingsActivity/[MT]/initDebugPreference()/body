@@ -1,5 +1,5 @@
 {
-  Preference p=getPreference(R.string.pref_debug);
+  final Preference p=getPreference(R.string.pref_debug);
   p.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    final Preference preference,    final Object newValue){
       Log.setDebug((Boolean)newValue);

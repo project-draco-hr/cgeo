@@ -1,9 +1,9 @@
 {
-  Preference dirMaintenance=getPreference(R.string.pref_fakekey_preference_maintenance_directories);
+  final Preference dirMaintenance=getPreference(R.string.pref_fakekey_preference_maintenance_directories);
   dirMaintenance.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    final Preference preference){
       preference.setEnabled(false);
-      Resources res=getResources();
+      final Resources res=getResources();
       final SettingsActivity activity=SettingsActivity.this;
       final ProgressDialog dialog=ProgressDialog.show(activity,res.getString(R.string.init_maintenance),res.getString(R.string.init_maintenance_directories),true,false);
       new Thread(){
@@ -22,9 +22,9 @@
     }
   }
 );
-  Preference memoryDumpPref=getPreference(R.string.pref_memory_dump);
+  final Preference memoryDumpPref=getPreference(R.string.pref_memory_dump);
   memoryDumpPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-    @Override public boolean onPreferenceClick(    Preference preference){
+    @Override public boolean onPreferenceClick(    final Preference preference){
       DebugUtils.createMemoryDump(SettingsActivity.this);
       return true;
     }

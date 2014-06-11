@@ -1,8 +1,8 @@
 {
-  ListPreference pref=(ListPreference)getPreference(R.string.pref_mapsource);
-  List<MapSource> mapSources=MapProviderFactory.getMapSources();
-  CharSequence[] entries=new CharSequence[mapSources.size()];
-  CharSequence[] values=new CharSequence[mapSources.size()];
+  final ListPreference pref=(ListPreference)getPreference(R.string.pref_mapsource);
+  final List<MapSource> mapSources=MapProviderFactory.getMapSources();
+  final CharSequence[] entries=new CharSequence[mapSources.size()];
+  final CharSequence[] values=new CharSequence[mapSources.size()];
   for (int i=0; i < mapSources.size(); ++i) {
     entries[i]=mapSources.get(i).getName();
     values[i]=String.valueOf(mapSources.get(i).getNumericalId());

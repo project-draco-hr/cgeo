@@ -1,5 +1,5 @@
 {
-  for (  OCPreferenceKeys key : OCPreferenceKeys.values()) {
+  for (  final OCPreferenceKeys key : OCPreferenceKeys.values()) {
     getPreference(key.isActivePrefId).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
     setWebsite(key.websitePrefId,key.authParams.host);
     setServiceScreenSummary(getPreferenceManager(),key.isActivePrefId);

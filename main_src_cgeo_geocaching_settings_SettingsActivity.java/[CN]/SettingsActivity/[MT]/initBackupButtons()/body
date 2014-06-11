@@ -1,5 +1,5 @@
 {
-  Preference backup=getPreference(R.string.pref_fakekey_preference_backup);
+  final Preference backup=getPreference(R.string.pref_fakekey_preference_backup);
   backup.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    final Preference preference){
       return DatabaseBackupUtils.createBackup(SettingsActivity.this,new Runnable(){
@@ -11,7 +11,7 @@
     }
   }
 );
-  Preference restore=getPreference(R.string.pref_fakekey_preference_restore);
+  final Preference restore=getPreference(R.string.pref_fakekey_preference_restore);
   restore.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    final Preference preference){
       DatabaseBackupUtils.restoreDatabase(SettingsActivity.this);

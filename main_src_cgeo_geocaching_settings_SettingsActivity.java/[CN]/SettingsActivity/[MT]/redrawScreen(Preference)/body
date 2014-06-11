@@ -3,7 +3,7 @@
     return;
   }
   final PreferenceScreen screen=(PreferenceScreen)preference;
-  ListAdapter adapter=screen.getRootAdapter();
+  final ListAdapter adapter=screen.getRootAdapter();
   if (adapter instanceof BaseAdapter) {
     ((BaseAdapter)adapter).notifyDataSetChanged();
   }

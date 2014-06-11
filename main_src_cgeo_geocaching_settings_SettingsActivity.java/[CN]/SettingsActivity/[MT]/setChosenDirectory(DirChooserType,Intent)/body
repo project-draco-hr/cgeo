@@ -1,7 +1,7 @@
 {
   final String directory=new File(data.getData().getPath()).getAbsolutePath();
   if (StringUtils.isNotBlank(directory)) {
-    Preference p=getPreference(dct.keyId);
+    final Preference p=getPreference(dct.keyId);
     if (p == null) {
       return;
     }
