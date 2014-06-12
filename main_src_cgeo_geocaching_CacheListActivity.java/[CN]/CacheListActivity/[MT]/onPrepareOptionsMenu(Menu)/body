@@ -18,7 +18,6 @@
     setVisible(menu,R.id.menu_sort,!isEmpty && !isHistory);
     setVisible(menu,R.id.menu_refresh_stored,!isEmpty && (isConcrete || type != CacheListType.OFFLINE));
     setVisible(menu,R.id.menu_drop_caches,!isEmpty && isOffline);
-    setVisible(menu,R.id.menu_drop_caches_and_list,isConcrete && !isEmpty && isOffline);
     setVisible(menu,R.id.menu_delete_events,isConcrete && !isEmpty && containsPastEvents());
     setVisible(menu,R.id.menu_move_to_list,isOffline && !isEmpty);
     setVisible(menu,R.id.menu_remove_from_history,!isEmpty && isHistory);
@@ -39,7 +38,6 @@
  else {
       setMenuItemLabel(menu,R.id.menu_refresh_stored,R.string.caches_store_selected,R.string.caches_store_offline);
     }
-    menu.findItem(R.id.menu_drop_caches_and_list).setVisible(isOffline && !hasSelection && isNonDefaultList&& !adapter.isFiltered()&& Settings.getCacheType() == CacheType.ALL);
     menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
     menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
     menu.findItem(R.id.menu_move_to_list).setVisible(!isEmpty);

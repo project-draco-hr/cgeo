@@ -1,9 +1,5 @@
 {
-  if (CollectionUtils.isEmpty(cacheList)) {
-    removeListInternal();
-    return;
-  }
-  if (!askForConfirmation) {
+  if (!askForConfirmation && CollectionUtils.isEmpty(cacheList)) {
     removeListInternal();
     return;
   }

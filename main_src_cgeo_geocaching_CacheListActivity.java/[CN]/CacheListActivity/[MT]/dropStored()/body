@@ -4,7 +4,8 @@
   final String message=getString(messageId,adapter.getCheckedOrAllCount());
   Dialogs.confirmYesNo(this,titleId,message,new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int id){
-      dropSelected(removeListAfterwards);
+      final List<Geocache> selected=adapter.getCheckedOrAllCaches();
+      new DropDetailsTask().execute(selected.toArray(new Geocache[selected.size()]));
       dialog.cancel();
     }
   }

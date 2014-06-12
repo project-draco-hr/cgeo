@@ -16,11 +16,7 @@ refreshStored(adapter.getCheckedOrAllCaches());
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_drop_caches:
-dropStored(false);
-invalidateOptionsMenuCompatible();
-return false;
-case R.id.menu_drop_caches_and_list:
-dropStored(true);
+dropStored();
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_import_gpx:
@@ -37,7 +33,7 @@ refreshSpinnerAdapter();
 invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_drop_list:
-removeList(true);
+removeList(false);
 invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_rename_list:
