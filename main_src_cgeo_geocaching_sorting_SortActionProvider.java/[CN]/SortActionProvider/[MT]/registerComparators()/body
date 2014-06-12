@@ -1,7 +1,4 @@
 {
-  this.activity=activity;
-  res=activity.getResources();
-  registry=new ArrayList<ComparatorUserInterface.ComparatorEntry>(20);
   register(R.string.caches_sort_distance,null);
   register(R.string.caches_sort_date_hidden,DateComparator.class);
   register(R.string.caches_sort_difficulty,DifficultyComparator.class);
@@ -19,7 +16,7 @@
   register(R.string.caches_sort_date_logged,VisitComparator.class);
   register(R.string.caches_sort_vote,VoteComparator.class);
   Collections.sort(registry,new Comparator<ComparatorEntry>(){
-    @Override public int compare(    ComparatorEntry lhs,    ComparatorEntry rhs){
+    @Override public int compare(    final ComparatorEntry lhs,    final ComparatorEntry rhs){
       return lhs.name.compareToIgnoreCase(rhs.name);
     }
   }

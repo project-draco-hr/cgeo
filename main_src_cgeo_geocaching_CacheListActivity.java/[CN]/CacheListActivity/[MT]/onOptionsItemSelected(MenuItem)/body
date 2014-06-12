@@ -50,21 +50,6 @@ return false;
 case R.id.menu_filter:
 showFilterMenu(null);
 return true;
-case R.id.menu_sort:
-final CacheComparator oldComparator=adapter.getCacheComparator();
-new ComparatorUserInterface(this).selectComparator(oldComparator,new Action1<CacheComparator>(){
-@Override public void call(final CacheComparator selectedComparator){
-if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
-adapter.toggleInverseSort();
-}
- else {
-adapter.resetInverseSort();
-}
-setComparator(selectedComparator);
-}
-}
-);
-return true;
 case R.id.menu_import_web:
 importWeb();
 return true;
