@@ -9,9 +9,9 @@
   menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
   menu.findItem(R.id.menu_show_in_browser).setVisible(cache.canOpenInBrowser());
   menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
-  MenuItem shareItem=menu.findItem(R.id.menu_share);
-  ShareActionProvider shareActionProvider=(ShareActionProvider)MenuItemCompat.getActionProvider(shareItem);
+  final MenuItem shareItem=menu.findItem(R.id.menu_share);
+  final ShareActionProvider shareActionProvider=(ShareActionProvider)MenuItemCompat.getActionProvider(shareItem);
   if (shareActionProvider != null) {
-    shareActionProvider.setShareIntent(cache.getIntent());
+    shareActionProvider.setShareIntent(cache.getShareIntent());
   }
 }

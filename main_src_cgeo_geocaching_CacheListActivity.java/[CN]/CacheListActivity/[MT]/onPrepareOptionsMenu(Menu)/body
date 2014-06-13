@@ -28,7 +28,6 @@
     if (!isOffline && !isHistory) {
       menu.findItem(R.id.menu_refresh_stored_top).setTitle(R.string.caches_store_offline);
     }
-    final boolean hasSelection=adapter != null && adapter.getCheckedCount() > 0;
     final boolean isNonDefaultList=isConcrete && listId != StoredList.STANDARD_LIST_ID;
     if (isOffline || type == CacheListType.HISTORY) {
       setMenuItemLabel(menu,R.id.menu_drop_caches,R.string.caches_remove_selected,R.string.caches_remove_all);
