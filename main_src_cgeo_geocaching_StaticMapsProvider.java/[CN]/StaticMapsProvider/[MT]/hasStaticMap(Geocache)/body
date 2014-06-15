@@ -4,7 +4,7 @@
     return false;
   }
   for (int level=1; level <= MAPS_LEVEL_MAX; level++) {
-    File mapFile=StaticMapsProvider.getMapFile(geocode,String.valueOf(level),false);
+    final File mapFile=StaticMapsProvider.getMapFile(geocode,String.valueOf(level),false);
     if (mapFile.exists()) {
       return true;
     }

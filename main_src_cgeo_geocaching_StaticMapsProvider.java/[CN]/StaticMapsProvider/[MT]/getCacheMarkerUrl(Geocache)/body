@@ -1,5 +1,5 @@
 {
-  StringBuilder url=new StringBuilder(MARKERS_URL);
+  final StringBuilder url=new StringBuilder(MARKERS_URL);
   url.append("marker_cache_").append(cache.getType().id);
   if (cache.isFound()) {
     url.append("_found");

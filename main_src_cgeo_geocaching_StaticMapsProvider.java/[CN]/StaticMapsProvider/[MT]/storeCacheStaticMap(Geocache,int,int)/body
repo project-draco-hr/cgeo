@@ -9,5 +9,5 @@
     waypoints.put("markers","icon:" + wpMarkerUrl + '|'+ waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
   }
   final String cacheMarkerUrl=getCacheMarkerUrl(cache);
-  return downloadMaps(cache.getGeocode(),cacheMarkerUrl,"",latlonMap,edge,waypoints);
+  return downloadMaps(cache.getGeocode(),cacheMarkerUrl,"",latlonMap,width,height,waypoints);
 }
