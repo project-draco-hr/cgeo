@@ -1,0 +1,7 @@
+{
+  if (geocode == null) {
+    return;
+  }
+  final Intent intent=getShareIntent();
+  fromActivity.startActivity(Intent.createChooser(intent,res.getText(R.string.cache_menu_share)));
+}
