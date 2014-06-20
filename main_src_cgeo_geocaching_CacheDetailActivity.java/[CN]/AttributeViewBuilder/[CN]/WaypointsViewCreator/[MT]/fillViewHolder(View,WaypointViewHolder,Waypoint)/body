@@ -67,16 +67,16 @@
   rowView.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View v){
       selectedWaypoint=wpt;
-      openContextMenu(v);
+      ensureSaved();
+      EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this,cache,wpt.getId());
+      refreshOnResume=true;
     }
   }
 );
   rowView.setOnLongClickListener(new View.OnLongClickListener(){
     @Override public boolean onLongClick(    final View v){
       selectedWaypoint=wpt;
-      ensureSaved();
-      EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this,cache,wpt.getId());
-      refreshOnResume=true;
+      openContextMenu(v);
       return true;
     }
   }

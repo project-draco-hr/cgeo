@@ -23,6 +23,7 @@
         rowView=getLayoutInflater().inflate(R.layout.waypoint_item,null);
         rowView.setClickable(true);
         rowView.setLongClickable(true);
+        registerForContextMenu(rowView);
       }
       WaypointViewHolder holder=(WaypointViewHolder)rowView.getTag();
       if (null == holder) {
