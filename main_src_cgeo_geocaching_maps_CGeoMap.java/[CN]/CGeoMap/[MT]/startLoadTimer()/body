@@ -1,5 +1,6 @@
 {
-  final LoadTimerAction action=new LoadTimerAction(this);
-  Schedulers.newThread().createWorker().schedule(action,250,TimeUnit.MILLISECONDS);
+  final Scheduler.Worker worker=Schedulers.newThread().createWorker();
+  final LoadTimerAction action=new LoadTimerAction(this,worker);
+  worker.schedule(action,250,TimeUnit.MILLISECONDS);
   return action;
 }
