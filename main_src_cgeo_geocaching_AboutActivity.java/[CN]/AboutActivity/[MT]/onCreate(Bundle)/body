@@ -1,7 +1,7 @@
 {
   super.onCreate(savedInstanceState,R.layout.viewpager_activity);
   int startPage=Page.VERSION.ordinal();
-  Bundle extras=getIntent().getExtras();
+  final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     startPage=extras.getInt(EXTRA_ABOUT_STARTPAGE,startPage);
   }

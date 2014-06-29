@@ -9,15 +9,15 @@
   View view=null;
   try {
     if (null != creator) {
-      view=creator.getView();
-      Bundle state=viewStates.get(page);
+      view=creator.getView(container);
+      final Bundle state=viewStates.get(page);
       if (state != null) {
         creator.setViewState(state);
       }
       container.addView(view,0);
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("ViewPagerAdapter.instantiateItem ",e);
   }
   return view;

@@ -27,7 +27,7 @@
     holder.images.setText(log.getImageTitles());
     holder.images.setVisibility(View.VISIBLE);
     holder.images.setOnClickListener(new View.OnClickListener(){
-      @Override public void onClick(      View v){
+      @Override public void onClick(      final View v){
         ImagesActivity.startActivityLogImages(activity,getGeocode(),new ArrayList<Image>(log.getLogImages()));
       }
     }

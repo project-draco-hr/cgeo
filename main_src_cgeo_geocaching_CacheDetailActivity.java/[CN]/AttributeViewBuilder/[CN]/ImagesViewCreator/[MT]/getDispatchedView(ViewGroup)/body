@@ -1,0 +1,10 @@
+{
+  if (cache == null) {
+    return null;
+  }
+  view=getLayoutInflater().inflate(R.layout.cachedetail_images_page,parentView,false);
+  if (imagesList == null && isCurrentPage(Page.IMAGES)) {
+    loadCacheImages();
+  }
+  return view;
+}

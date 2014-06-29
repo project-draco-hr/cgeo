@@ -1,0 +1,16 @@
+{
+  final ScrollView view=(ScrollView)getLayoutInflater().inflate(R.layout.about_help_page,parentView,false);
+  ButterKnife.inject(this,view);
+  setClickListener(support,"mailto:support@cgeo.org");
+  setClickListener(website,"http://www.cgeo.org/");
+  setClickListener(facebook,"http://www.facebook.com/pages/cgeo/297269860090");
+  setClickListener(twitter,"http://twitter.com/android_gc");
+  setClickListener(faq,"http://faq.cgeo.org/");
+  market.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View v){
+      market();
+    }
+  }
+);
+  return view;
+}

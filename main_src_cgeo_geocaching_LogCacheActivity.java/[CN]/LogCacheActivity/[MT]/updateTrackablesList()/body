@@ -9,7 +9,7 @@
   final LinearLayout inventoryView=(LinearLayout)findViewById(R.id.inventory);
   inventoryView.removeAllViews();
   for (  final TrackableLog tb : trackables) {
-    final LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.logcache_trackable_item,null);
+    final LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.logcache_trackable_item,inventoryView,false);
     ((TextView)inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
     ((TextView)inventoryItem.findViewById(R.id.name)).setText(tb.name);
     final TextView actionButton=(TextView)inventoryItem.findViewById(R.id.action);

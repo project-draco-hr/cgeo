@@ -1,0 +1,26 @@
+{
+  if (!isValid()) {
+    return null;
+  }
+  final List<LogEntry> logs=getLogs();
+  view=(ListView)activity.getLayoutInflater().inflate(R.layout.logs_page,parentView,false);
+  addHeaderView();
+  view.setAdapter(new ArrayAdapter<LogEntry>(activity,R.layout.logs_item,logs){
+    @Override public View getView(    final int position,    final View convertView,    final android.view.ViewGroup parent){
+      View rowView=convertView;
+      if (null == rowView) {
+        rowView=activity.getLayoutInflater().inflate(R.layout.logs_item,parent,false);
+      }
+      LogViewHolder holder=(LogViewHolder)rowView.getTag();
+      if (null == holder) {
+        holder=new LogViewHolder(rowView);
+      }
+      holder.setPosition(position);
+      final LogEntry log=getItem(position);
+      fillViewHolder(convertView,holder,log);
+      return rowView;
+    }
+  }
+);
+  return view;
+}

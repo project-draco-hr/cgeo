@@ -3,17 +3,17 @@
     Log.w("FileSelectionListAdapter.getView: Attempt to access missing item #" + position);
     return null;
   }
-  File file=getItem(position);
+  final File file=getItem(position);
   View v=rowView;
   ViewHolder holder;
   if (v == null) {
-    v=inflater.inflate(R.layout.mapfile_item,null);
+    v=inflater.inflate(R.layout.mapfile_item,parent,false);
     holder=new ViewHolder(v);
   }
  else {
     holder=(ViewHolder)v.getTag();
   }
-  String currentFile=parentView.getCurrentFile();
+  final String currentFile=parentView.getCurrentFile();
   if (currentFile != null && file.equals(new File(currentFile))) {
     holder.filename.setTypeface(holder.filename.getTypeface(),Typeface.BOLD);
   }
