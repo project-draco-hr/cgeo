@@ -44,7 +44,7 @@
     }
     cache.setLogPasswordRequired(response.getBoolean(CACHE_REQ_PASSWORD));
     cache.setDetailedUpdatedNow();
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
     DataStore.saveLogsWithoutTransaction(cache.getGeocode(),parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
   }
  catch (  final JSONException e) {

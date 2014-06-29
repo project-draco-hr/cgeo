@@ -1,6 +1,6 @@
 {
   if (DataStore.saveWaypointInternal(id,geocode,waypoint)) {
-    DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.CACHE));
     return true;
   }
   return false;

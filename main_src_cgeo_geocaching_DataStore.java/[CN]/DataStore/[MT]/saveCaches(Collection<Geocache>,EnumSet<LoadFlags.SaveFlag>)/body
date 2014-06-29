@@ -24,7 +24,7 @@
     final boolean dbUpdateRequired=!cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
     cache.addStorageLocation(StorageLocation.CACHE);
     cacheCache.putCacheInCache(cache);
-    if (saveFlags.contains(SaveFlag.SAVE_DB) && cache.isDetailed() && dbUpdateRequired) {
+    if (saveFlags.contains(SaveFlag.DB) && cache.isDetailed() && dbUpdateRequired) {
       toBeStored.add(cache);
     }
   }

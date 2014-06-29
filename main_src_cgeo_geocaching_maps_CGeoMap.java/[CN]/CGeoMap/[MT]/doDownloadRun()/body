@@ -17,7 +17,7 @@
     final Set<String> filteredCodes=searchResult.getFilteredGeocodes();
     Log.d("Filtering out " + filteredCodes.size() + " caches: "+ filteredCodes.toString());
     caches.removeAll(DataStore.loadCaches(filteredCodes,LoadFlags.LOAD_CACHE_ONLY));
-    DataStore.removeCaches(filteredCodes,EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    DataStore.removeCaches(filteredCodes,EnumSet.of(RemoveFlag.CACHE));
     caches.removeAll(result);
     caches.addAll(result);
     lastSearchResult=searchResult;

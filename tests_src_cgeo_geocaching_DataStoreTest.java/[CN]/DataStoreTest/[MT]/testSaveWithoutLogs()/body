@@ -9,7 +9,7 @@
   inventory.add(trackable);
   cache.setInventory(inventory);
   try {
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
     final Geocache loadedCache=DataStore.loadCache(GEOCODE_CACHE,LoadFlags.LOAD_ALL_DB_ONLY);
     assertThat(loadedCache).overridingErrorMessage("Cache was not saved.").isNotNull();
     assertThat(loadedCache.getInventory()).hasSize(1);

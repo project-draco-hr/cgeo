@@ -3,12 +3,12 @@
     return;
   }
   init();
-  if (removeFlags.contains(RemoveFlag.REMOVE_CACHE)) {
+  if (removeFlags.contains(RemoveFlag.CACHE)) {
     for (    final String geocode : geocodes) {
       cacheCache.removeCacheFromCache(geocode);
     }
   }
-  if (removeFlags.contains(RemoveFlag.REMOVE_DB)) {
+  if (removeFlags.contains(RemoveFlag.DB)) {
     final ArrayList<String> quotedGeocodes=new ArrayList<String>(geocodes.size());
     for (    final String geocode : geocodes) {
       quotedGeocodes.add(DatabaseUtils.sqlEscapeString(geocode));
@@ -25,7 +25,7 @@
       database.delete(dbTableLogCount,baseWhereClause,null);
       database.delete(dbTableLogsOffline,baseWhereClause,null);
       String wayPointClause=baseWhereClause;
-      if (!removeFlags.contains(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING)) {
+      if (!removeFlags.contains(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING)) {
         wayPointClause+=" and type <> 'own'";
       }
       database.delete(dbTableWaypoints,wayPointClause,null);

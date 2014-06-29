@@ -2,6 +2,6 @@
   final int index=getWaypointIndex(waypoint);
   waypoints.remove(index);
   DataStore.deleteWaypoint(waypoint.getId());
-  DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.REMOVE_CACHE));
+  DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.CACHE));
   resetFinalDefined();
 }

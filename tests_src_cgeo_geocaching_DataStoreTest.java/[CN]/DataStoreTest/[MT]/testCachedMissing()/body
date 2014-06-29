@@ -17,11 +17,11 @@
   final Geocache inTileHighZoom=new Geocache();
   inTileHighZoom.setGeocode("GC12348");
   inTileHighZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"),Tile.ZOOMLEVEL_MIN_PERSONALIZED + 1);
-  DataStore.saveCache(main,EnumSet.of(SaveFlag.SAVE_CACHE));
-  DataStore.saveCache(inTileLowZoom,EnumSet.of(SaveFlag.SAVE_CACHE));
-  DataStore.saveCache(inTileHighZoom,EnumSet.of(SaveFlag.SAVE_CACHE));
-  DataStore.saveCache(outTile,EnumSet.of(SaveFlag.SAVE_CACHE));
-  DataStore.saveCache(otherConnector,EnumSet.of(SaveFlag.SAVE_CACHE));
+  DataStore.saveCache(main,EnumSet.of(SaveFlag.CACHE));
+  DataStore.saveCache(inTileLowZoom,EnumSet.of(SaveFlag.CACHE));
+  DataStore.saveCache(inTileHighZoom,EnumSet.of(SaveFlag.CACHE));
+  DataStore.saveCache(outTile,EnumSet.of(SaveFlag.CACHE));
+  DataStore.saveCache(otherConnector,EnumSet.of(SaveFlag.CACHE));
   final SearchResult search=new SearchResult(main);
   Set<String> filteredGeoCodes=DataStore.getCachedMissingFromSearch(search,tiles,GCConnector.getInstance(),Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
   assertThat(filteredGeoCodes.contains(inTileLowZoom.getGeocode())).isTrue();
