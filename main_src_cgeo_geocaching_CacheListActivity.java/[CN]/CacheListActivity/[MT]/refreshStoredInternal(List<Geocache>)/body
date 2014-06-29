@@ -7,7 +7,7 @@
     message=res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
   }
  else {
-    message=res.getString(R.string.caches_downloading) + " " + etaTime+ " "+ res.getQuantityString(R.plurals.caches_eta_mins,etaTime);
+    message=res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins,etaTime,etaTime);
   }
   progress.show(this,null,message,ProgressDialog.STYLE_HORIZONTAL,loadDetailsHandler.cancelMessage());
   progress.setMaxProgressAndReset(detailTotal);

@@ -24,7 +24,7 @@
     waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
   }
  else {
-    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + roundedEta+ " "+ res.getQuantityString(R.plurals.caches_eta_mins,roundedEta));
+    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins,roundedEta,roundedEta));
   }
   waitDialog.show();
   detailProgressTime=System.currentTimeMillis();

@@ -15,7 +15,7 @@
       }
  else {
         final int minsRemaining=secondsRemaining / 60;
-        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minsRemaining+ " "+ res.getQuantityString(R.plurals.caches_eta_mins,minsRemaining));
+        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins,minsRemaining,minsRemaining));
       }
     }
   }
