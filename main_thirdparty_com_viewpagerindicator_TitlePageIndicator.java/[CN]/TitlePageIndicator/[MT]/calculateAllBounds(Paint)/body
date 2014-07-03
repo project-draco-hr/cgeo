@@ -1,12 +1,12 @@
 {
-  ArrayList<RectF> list=new ArrayList<RectF>();
+  final ArrayList<RectF> list=new ArrayList<RectF>();
   final int count=mViewPager.getAdapter().getCount();
   final int width=getWidth();
   final int halfWidth=width / 2;
   for (int i=0; i < count; i++) {
-    RectF bounds=calcBounds(i,paint);
-    float w=(bounds.right - bounds.left);
-    float h=(bounds.bottom - bounds.top);
+    final RectF bounds=calcBounds(i,paint);
+    final float w=(bounds.right - bounds.left);
+    final float h=(bounds.bottom - bounds.top);
     bounds.left=(halfWidth) - (w / 2) - mCurrentOffset + ((i - mCurrentPage) * width);
     bounds.right=bounds.left + w;
     bounds.top=0;

@@ -1,12 +1,12 @@
 {
   float result;
-  int specMode=MeasureSpec.getMode(measureSpec);
-  int specSize=MeasureSpec.getSize(measureSpec);
+  final int specMode=MeasureSpec.getMode(measureSpec);
+  final int specSize=MeasureSpec.getSize(measureSpec);
   if (specMode == MeasureSpec.EXACTLY) {
     result=specSize;
   }
  else {
-    RectF bounds=new RectF();
+    final RectF bounds=new RectF();
     bounds.bottom=mPaintText.descent() - mPaintText.ascent();
     result=bounds.bottom - bounds.top + mFooterLineHeight + mFooterPadding + mTopPadding;
     if (mFooterIndicatorStyle != IndicatorStyle.None) {
