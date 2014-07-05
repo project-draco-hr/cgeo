@@ -1,0 +1,12 @@
+{
+  defaultHandler=Thread.getDefaultUncaughtExceptionHandler();
+  if (!(defaultHandler instanceof OOMDumpingUncaughtExceptionHandler)) {
+    Thread.setDefaultUncaughtExceptionHandler(this);
+    defaultReplaced=true;
+  }
+ else {
+    defaultHandler=null;
+    defaultReplaced=false;
+  }
+  return defaultReplaced;
+}

@@ -1,0 +1,8 @@
+{
+  final boolean resetted=defaultReplaced;
+  if (defaultReplaced) {
+    Thread.setDefaultUncaughtExceptionHandler(defaultHandler);
+    defaultReplaced=false;
+  }
+  return resetted;
+}
