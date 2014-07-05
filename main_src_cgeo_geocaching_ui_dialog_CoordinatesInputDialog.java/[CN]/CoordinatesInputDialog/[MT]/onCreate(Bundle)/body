@@ -4,4 +4,5 @@
   gpinitial=getArguments().getParcelable(GEOPOINT_INTIAL_ARG);
   cacheCoords=getArguments().getParcelable(CACHECOORDS_ARG);
   if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG) != null)   gp=savedInstanceState.getParcelable(GEOPOINT_ARG);
+  if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB && Settings.isLightSkin())   setStyle(STYLE_NORMAL,R.style.DialogFixGingerbread);
 }
