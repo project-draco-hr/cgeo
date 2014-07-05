@@ -1,6 +1,6 @@
 {
   getDialog().setTitle(R.string.cache_coordinates);
-  View v=inflater.inflate(R.layout.coordinatesinput_dialog,container,false);
+  final View v=inflater.inflate(R.layout.coordinatesinput_dialog,container,false);
   final Spinner spinner=(Spinner)v.findViewById(R.id.spinnerCoordinateFormats);
   final ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getActivity(),R.array.waypoint_coordinate_formats,android.R.layout.simple_spinner_item);
   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

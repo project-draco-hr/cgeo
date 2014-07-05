@@ -1,5 +1,5 @@
 {
-  Bundle args=new Bundle();
+  final Bundle args=new Bundle();
   if (gp != null) {
     args.putParcelable(GEOPOINT_ARG,gp);
   }
@@ -9,9 +9,13 @@
  else {
     args.putParcelable(GEOPOINT_ARG,Geopoint.ZERO);
   }
-  if (geo != null)   args.putParcelable(GEOPOINT_INTIAL_ARG,geo.getCoords());
-  if (cache != null)   args.putParcelable(CACHECOORDS_ARG,cache.getCoords());
-  CoordinatesInputDialog cid=new CoordinatesInputDialog();
+  if (geo != null) {
+    args.putParcelable(GEOPOINT_INTIAL_ARG,geo.getCoords());
+  }
+  if (cache != null) {
+    args.putParcelable(CACHECOORDS_ARG,cache.getCoords());
+  }
+  final CoordinatesInputDialog cid=new CoordinatesInputDialog();
   cid.setArguments(args);
   return cid;
 }
