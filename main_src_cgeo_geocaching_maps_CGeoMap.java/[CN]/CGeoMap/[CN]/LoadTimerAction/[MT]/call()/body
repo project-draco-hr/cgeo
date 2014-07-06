@@ -4,7 +4,7 @@
     return;
   }
   try {
-    if (map.mapView != null && !isUnsubscribed) {
+    if (map.mapView != null) {
       final Viewport viewportNow=map.mapView.getViewport();
       final int zoomNow=map.mapView.getMapZoomLevel();
       final boolean moved=map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (map.viewport == null)|| zoomNow != map.zoom || (mapMoved(map.viewport,viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !map.viewport.includes(viewportNow)));
@@ -24,11 +24,5 @@
   }
  catch (  final Exception e) {
     Log.w("CGeoMap.startLoadtimer.start",e);
-  }
-  if (!isUnsubscribed) {
-    if (worker == null) {
-      worker=Schedulers.newThread().createWorker();
-    }
-    worker.schedule(this,250,TimeUnit.MILLISECONDS);
   }
 }
