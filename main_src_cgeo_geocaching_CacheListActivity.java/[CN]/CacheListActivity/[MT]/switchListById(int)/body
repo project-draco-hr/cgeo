@@ -7,12 +7,18 @@
     finish();
     return;
   }
-  final StoredList list=DataStore.getList(id);
-  if (list == null) {
-    return;
+  if (id == PseudoList.ALL_LIST.id) {
+    listId=id;
+    title=res.getString(R.string.list_all_lists);
   }
-  listId=list.id;
-  title=list.title;
+ else {
+    final StoredList list=DataStore.getList(id);
+    if (list == null) {
+      return;
+    }
+    listId=list.id;
+    title=list.title;
+  }
   type=CacheListType.OFFLINE;
   Settings.saveLastList(listId);
   initAdapter();
