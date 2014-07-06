@@ -9,5 +9,5 @@
   }
   final RefreshCacheHandler refreshCacheHandler=new RefreshCacheHandler(CacheDetailActivity.this,progress);
   progress.show(CacheDetailActivity.this,res.getString(R.string.cache_dialog_refresh_title),res.getString(R.string.cache_dialog_refresh_message),true,refreshCacheHandler.cancelMessage());
-  cache.refresh(refreshCacheHandler,Schedulers.io());
+  cache.refresh(refreshCacheHandler,RxUtils.networkScheduler);
 }

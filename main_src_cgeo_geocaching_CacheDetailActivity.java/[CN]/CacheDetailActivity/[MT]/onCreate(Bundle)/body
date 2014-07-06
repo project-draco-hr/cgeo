@@ -111,7 +111,7 @@
 );
   final String realGeocode=geocode;
   final String realGuid=guid;
-  Schedulers.io().createWorker().schedule(new Action0(){
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
     @Override public void call(){
       search=Geocache.searchByGeocode(realGeocode,StringUtils.isBlank(realGeocode) ? realGuid : null,0,false,loadCacheHandler);
       loadCacheHandler.sendMessage(Message.obtain());

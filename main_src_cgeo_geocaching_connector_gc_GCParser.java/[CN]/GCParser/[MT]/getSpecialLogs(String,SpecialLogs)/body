@@ -26,5 +26,5 @@
       return parseLogs(true,rawResponse);
     }
   }
-).subscribeOn(Schedulers.io());
+).subscribeOn(RxUtils.networkScheduler);
 }

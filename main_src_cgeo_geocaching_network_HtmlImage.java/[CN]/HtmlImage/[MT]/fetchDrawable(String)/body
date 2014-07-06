@@ -28,8 +28,8 @@
           if (bitmap != null && !onlySave) {
             subscriber.onNext(bitmap);
           }
-          downloadExecutor.execute(new Runnable(){
-            @Override public void run(){
+          RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+            @Override public void call(){
               downloadAndSave(subscriber);
             }
           }
@@ -55,11 +55,9 @@
           return;
         }
       }
- else {
-        if (subscriber.isUnsubscribed() || downloadOrRefreshCopy(url,file)) {
-          subscriber.onCompleted();
-          return;
-        }
+ else       if (subscriber.isUnsubscribed() || downloadOrRefreshCopy(url,file)) {
+        subscriber.onCompleted();
+        return;
       }
       if (onlySave) {
         subscriber.onCompleted();
