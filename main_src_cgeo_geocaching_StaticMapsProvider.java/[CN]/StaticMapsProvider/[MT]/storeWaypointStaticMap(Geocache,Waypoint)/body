@@ -1,4 +1,4 @@
 {
-  final int edge=StaticMapsProvider.guessMaxDisplaySide();
-  return storeWaypointStaticMap(cache.getGeocode(),edge,waypoint);
+  final Point displaySize=Compatibility.getDisplaySize();
+  return storeWaypointStaticMap(cache.getGeocode(),displaySize.x,displaySize.y,waypoint);
 }

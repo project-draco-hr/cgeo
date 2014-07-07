@@ -1,4 +1,4 @@
 {
-  int edge=guessMaxDisplaySide();
-  return storeCacheStaticMap(cache,edge);
+  final Point displaySize=Compatibility.getDisplaySize();
+  return storeCacheStaticMap(cache,displaySize.x,displaySize.y);
 }
