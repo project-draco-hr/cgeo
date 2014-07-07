@@ -12,6 +12,9 @@
   }
   if (connector.getApiSupport() == ApiSupport.current) {
     res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS);
+    if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+      res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS);
+    }
   }
   return res.toString();
 }

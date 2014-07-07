@@ -1,6 +1,6 @@
 {
   return SearchResult.parallelCombineActive(searchByViewPortConns,new Func1<ISearchByViewPort,SearchResult>(){
-    @Override public SearchResult call(    ISearchByViewPort connector){
+    @Override public SearchResult call(    final ISearchByViewPort connector){
       return connector.searchByViewport(viewport,tokens);
     }
   }
