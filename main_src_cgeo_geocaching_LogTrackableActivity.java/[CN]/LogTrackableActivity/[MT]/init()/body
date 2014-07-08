@@ -1,7 +1,7 @@
 {
   registerForContextMenu(typeButton);
   typeButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View view){
+    @Override public void onClick(    final View view){
       openContextMenu(view);
     }
   }
@@ -14,14 +14,11 @@
     possibleLogTypes=Trackable.getPossibleLogTypes();
   }
   if (GCLogin.isEmpty(viewstates)) {
-    buttonPost.setEnabled(false);
-    buttonPost.setOnTouchListener(null);
-    buttonPost.setOnClickListener(null);
+    setLoggingEnabled(false);
     new LoadDataThread().start();
   }
  else {
-    buttonPost.setEnabled(true);
-    buttonPost.setOnClickListener(new PostListener());
+    setLoggingEnabled(true);
   }
   disableSuggestions(trackingEditText);
 }

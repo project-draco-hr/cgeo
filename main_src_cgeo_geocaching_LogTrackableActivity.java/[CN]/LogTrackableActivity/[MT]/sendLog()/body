@@ -3,6 +3,7 @@
     waitDialog=ProgressDialog.show(LogTrackableActivity.this,null,res.getString(R.string.log_saving),true);
     waitDialog.setCancelable(true);
     Settings.setTrackableAction(typeSelected.id);
+    final EditText logEditText=(EditText)findViewById(R.id.log);
     final String tracking=trackingEditText.getText().toString();
     final String log=logEditText.getText().toString();
     new PostLogThread(postLogHandler,tracking,log).start();
