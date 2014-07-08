@@ -16,7 +16,7 @@
 );
   detailsList=(LinearLayout)view.findViewById(R.id.details_list);
   final CacheDetailsCreator details=new CacheDetailsCreator(CacheDetailActivity.this,detailsList);
-  final Spannable span=(new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
+  final Spannable span=(new Spannable.Factory()).newSpannable(cache.getName());
   if (cache.isDisabled() || cache.isArchived()) {
     span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
