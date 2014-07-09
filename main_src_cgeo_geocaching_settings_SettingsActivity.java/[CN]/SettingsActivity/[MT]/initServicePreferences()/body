@@ -15,6 +15,7 @@
   setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorGCActive);
   setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorOXActive);
   setServiceScreenSummary(getPreferenceManager(),R.string.pref_connectorECActive);
-  registerForSummaryAndUpdate(R.string.preference_screen_sendtocgeo);
-  registerForSummaryAndUpdate(R.string.preference_screen_gcvote);
+  getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
+  getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+  getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
 }
