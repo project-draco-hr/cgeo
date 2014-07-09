@@ -77,7 +77,7 @@
   if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
     centerMap(geocodeIntent,searchIntent,coordsIntent,mapStateIntent);
   }
-  final CheckBox locSwitch=(CheckBox)activity.findViewById(R.id.my_position);
+  final CheckBox locSwitch=ButterKnife.findById(activity,R.id.my_position);
   if (locSwitch != null) {
     initMyLocationSwitchButton(locSwitch);
   }

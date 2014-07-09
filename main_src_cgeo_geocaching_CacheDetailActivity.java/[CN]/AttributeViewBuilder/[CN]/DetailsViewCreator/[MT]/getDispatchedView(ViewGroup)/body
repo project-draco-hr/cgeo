@@ -7,14 +7,14 @@
     @Override public void call(    final BitmapDrawable image){
       final Bitmap bitmap=image.getBitmap();
       if (bitmap != null && bitmap.getWidth() > 10) {
-        final ImageView imageView=(ImageView)view.findViewById(R.id.map_preview);
+        final ImageView imageView=ButterKnife.findById(view,R.id.map_preview);
         imageView.setImageDrawable(image);
         view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
       }
     }
   }
 );
-  detailsList=(LinearLayout)view.findViewById(R.id.details_list);
+  detailsList=ButterKnife.findById(view,R.id.details_list);
   final CacheDetailsCreator details=new CacheDetailsCreator(CacheDetailActivity.this,detailsList);
   final Spannable span=(new Spannable.Factory()).newSpannable(cache.getName());
   if (cache.isDisabled() || cache.isArchived()) {
@@ -62,28 +62,29 @@
     addContextMenu(valueView);
   }
   if (!cache.getAttributes().isEmpty()) {
-    new AttributeViewBuilder().fillView((LinearLayout)view.findViewById(R.id.attributes_innerbox));
+    final LinearLayout innerLayout=ButterKnife.findById(view,R.id.attributes_innerbox);
+    new AttributeViewBuilder().fillView(innerLayout);
     view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
   }
   updateOfflineBox(view,cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
-  final Button buttonWatchlistAdd=(Button)view.findViewById(R.id.add_to_watchlist);
-  final Button buttonWatchlistRemove=(Button)view.findViewById(R.id.remove_from_watchlist);
+  final Button buttonWatchlistAdd=ButterKnife.findById(view,R.id.add_to_watchlist);
+  final Button buttonWatchlistRemove=ButterKnife.findById(view,R.id.remove_from_watchlist);
   buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
   buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
   updateWatchlistBox();
-  final Button buttonFavPointAdd=(Button)view.findViewById(R.id.add_to_favpoint);
-  final Button buttonFavPointRemove=(Button)view.findViewById(R.id.remove_from_favpoint);
+  final Button buttonFavPointAdd=ButterKnife.findById(view,R.id.add_to_favpoint);
+  final Button buttonFavPointRemove=ButterKnife.findById(view,R.id.remove_from_favpoint);
   buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
   buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
   updateFavPointBox();
-  final Button buttonChangeList=(Button)view.findViewById(R.id.change_list);
+  final Button buttonChangeList=ButterKnife.findById(view,R.id.change_list);
   buttonChangeList.setOnClickListener(new ChangeListClickListener());
   updateListBox();
   final IConnector connector=ConnectorFactory.getConnector(cache);
   final String license=connector.getLicenseText(cache);
   if (StringUtils.isNotBlank(license)) {
     view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
-    final TextView licenseView=((TextView)view.findViewById(R.id.license));
+    final TextView licenseView=(ButterKnife.findById(view,R.id.license));
     licenseView.setText(Html.fromHtml(license),BufferType.SPANNABLE);
     licenseView.setClickable(true);
     licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());

@@ -1,21 +1,21 @@
 {
-  final ImageView defaultNavigationImageView=(ImageView)v.findViewById(R.id.defaultNavigation);
+  final ImageView defaultNavigationImageView=ButterKnife.findById(v,R.id.defaultNavigation);
   defaultNavigationImageView.setOnLongClickListener(new View.OnLongClickListener(){
-    @Override public boolean onLongClick(    View v){
+    @Override public boolean onLongClick(    final View v){
       startDefaultNavigation2();
       return true;
     }
   }
 );
   defaultNavigationImageView.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       navigateTo();
     }
   }
 );
   final View overflowActionBar=v.findViewById(R.id.overflowActionBar);
   overflowActionBar.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       showPopup(v);
     }
   }

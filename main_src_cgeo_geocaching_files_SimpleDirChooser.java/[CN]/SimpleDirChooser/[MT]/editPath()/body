@@ -1,14 +1,14 @@
 {
-  AlertDialog.Builder builder=new AlertDialog.Builder(this);
+  final AlertDialog.Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(R.string.simple_dir_chooser_current_path);
   final EditText input=new EditText(this);
   input.setInputType(InputType.TYPE_CLASS_TEXT);
   input.setText(currentDir.getPath());
   builder.setView(input);
   builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
-      String pathText=input.getText().toString();
-      File newPathDir=new File(pathText);
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
+      final String pathText=input.getText().toString();
+      final File newPathDir=new File(pathText);
       if (newPathDir.exists() && newPathDir.isDirectory()) {
         currentDir=newPathDir;
         fill(currentDir);
@@ -20,7 +20,7 @@
   }
 );
   builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
       dialog.cancel();
     }
   }

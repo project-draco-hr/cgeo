@@ -1,8 +1,8 @@
 {
   super.onCreateView(inflater,container,savedInstanceState);
   final ViewGroup statusGroup=(ViewGroup)inflater.inflate(R.layout.status,container,false);
-  final ImageView statusIcon=(ImageView)statusGroup.findViewById(R.id.status_icon);
-  final TextView statusMessage=(TextView)statusGroup.findViewById(R.id.status_message);
+  final ImageView statusIcon=ButterKnife.findById(statusGroup,R.id.status_icon);
+  final TextView statusMessage=ButterKnife.findById(statusGroup,R.id.status_message);
   statusSubscription=AndroidObservable.bindFragment(this,StatusUpdater.latestStatus).subscribeOn(Schedulers.io()).subscribe(new Action1<Status>(){
     @Override public void call(    final Status status){
       if (status == null) {

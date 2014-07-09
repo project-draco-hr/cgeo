@@ -1,7 +1,7 @@
 {
-  final TextView offlineText=(TextView)view.findViewById(R.id.offline_text);
-  final Button offlineRefresh=(Button)view.findViewById(R.id.offline_refresh);
-  final Button offlineStore=(Button)view.findViewById(R.id.offline_store);
+  final TextView offlineText=ButterKnife.findById(view,R.id.offline_text);
+  final Button offlineRefresh=ButterKnife.findById(view,R.id.offline_refresh);
+  final Button offlineStore=ButterKnife.findById(view,R.id.offline_store);
   if (cache.isOffline()) {
     final long diff=(System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000));
     String ago;

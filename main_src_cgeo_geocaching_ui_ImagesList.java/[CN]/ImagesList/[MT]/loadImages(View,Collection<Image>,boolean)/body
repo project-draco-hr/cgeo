@@ -5,17 +5,18 @@
     }
   }
 ));
-  imagesView=(LinearLayout)parentView.findViewById(R.id.spoiler_list);
+  imagesView=ButterKnife.findById(parentView,R.id.spoiler_list);
   final HtmlImage imgGetter=new HtmlImage(geocode,true,offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID,false);
   for (  final Image img : images) {
     final LinearLayout rowView=(LinearLayout)inflater.inflate(R.layout.cache_image_item,imagesView,false);
     assert(rowView != null);
     if (StringUtils.isNotBlank(img.getTitle())) {
-      ((TextView)rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
+      final TextView titleView=ButterKnife.findById(rowView,R.id.title);
+      titleView.setText(Html.fromHtml(img.getTitle()));
       rowView.findViewById(R.id.titleLayout).setVisibility(View.VISIBLE);
     }
     if (StringUtils.isNotBlank(img.getDescription())) {
-      final TextView descView=(TextView)rowView.findViewById(R.id.description);
+      final TextView descView=ButterKnife.findById(rowView,R.id.description);
       descView.setText(Html.fromHtml(img.getDescription()),TextView.BufferType.SPANNABLE);
       descView.setVisibility(View.VISIBLE);
     }

@@ -1,17 +1,17 @@
 {
   View v=convertView;
   if (v == null) {
-    LayoutInflater vi=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    final LayoutInflater vi=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     v=vi.inflate(id,null);
   }
   final Option option=items.get(position);
   if (option != null) {
-    TextView t1=(TextView)v.findViewById(R.id.TextView01);
+    final TextView t1=ButterKnife.findById(v,R.id.TextView01);
     if (t1 != null) {
       t1.setOnClickListener(new OnTextViewClickListener(position));
       t1.setText(option.getName());
     }
-    CheckBox check=(CheckBox)v.findViewById(R.id.CheckBox);
+    final CheckBox check=ButterKnife.findById(v,R.id.CheckBox);
     if (check != null) {
       if (!chooseForWriting || option.isWriteable()) {
         check.setOnClickListener(new OnCheckBoxClickListener(position));

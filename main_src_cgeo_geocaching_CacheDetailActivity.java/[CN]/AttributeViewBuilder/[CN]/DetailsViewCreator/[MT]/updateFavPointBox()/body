@@ -1,13 +1,13 @@
 {
-  final LinearLayout layout=(LinearLayout)view.findViewById(R.id.favpoint_box);
+  final LinearLayout layout=ButterKnife.findById(view,R.id.favpoint_box);
   final boolean supportsFavoritePoints=cache.supportsFavoritePoints();
   layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
   if (!supportsFavoritePoints || cache.isOwner() || !Settings.isGCPremiumMember()) {
     return;
   }
-  final Button buttonAdd=(Button)view.findViewById(R.id.add_to_favpoint);
-  final Button buttonRemove=(Button)view.findViewById(R.id.remove_from_favpoint);
-  final TextView text=(TextView)view.findViewById(R.id.favpoint_text);
+  final Button buttonAdd=ButterKnife.findById(view,R.id.add_to_favpoint);
+  final Button buttonRemove=ButterKnife.findById(view,R.id.remove_from_favpoint);
+  final TextView text=ButterKnife.findById(view,R.id.favpoint_text);
   if (cache.isFavorite()) {
     buttonAdd.setVisibility(View.GONE);
     buttonRemove.setVisibility(View.VISIBLE);

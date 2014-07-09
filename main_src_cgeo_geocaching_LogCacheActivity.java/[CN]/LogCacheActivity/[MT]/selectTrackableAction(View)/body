@@ -7,7 +7,6 @@
   alert.setItems(tbLogTypes,new OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int position){
       final LogTypeTrackable logType=LogTypeTrackable.values()[position];
-      tbChanged=true;
       trackableLog.action=logType;
       Log.i("Trackable " + trackableLog.trackCode + " ("+ trackableLog.name+ ") has new action: #"+ logType);
       updateTrackablesList();

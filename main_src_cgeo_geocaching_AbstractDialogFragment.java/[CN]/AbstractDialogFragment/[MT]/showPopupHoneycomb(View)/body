@@ -1,8 +1,8 @@
 {
-  android.widget.PopupMenu popupMenu=new android.widget.PopupMenu(getActivity(),view);
+  final android.widget.PopupMenu popupMenu=new android.widget.PopupMenu(getActivity(),view);
   CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()),popupMenu.getMenu(),cache);
   popupMenu.setOnMenuItemClickListener(new android.widget.PopupMenu.OnMenuItemClickListener(){
-    @Override public boolean onMenuItemClick(    MenuItem item){
+    @Override public boolean onMenuItemClick(    final MenuItem item){
       return AbstractDialogFragment.this.onMenuItemClick(item);
     }
   }

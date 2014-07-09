@@ -1,16 +1,16 @@
 {
   lastPosition=-1;
   resetOkButton();
-  EditText path=(EditText)findViewById(R.id.simple_dir_chooser_path);
+  final EditText path=(EditText)findViewById(R.id.simple_dir_chooser_path);
   path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
   final File[] dirs=dir.listFiles(new DirOnlyFilenameFilter());
-  List<Option> listDirs=new ArrayList<Option>();
+  final List<Option> listDirs=new ArrayList<Option>();
   try {
-    for (    File currentDir : dirs) {
+    for (    final File currentDir : dirs) {
       listDirs.add(new Option(currentDir.getName(),currentDir.getAbsolutePath(),currentDir.canWrite()));
     }
   }
- catch (  RuntimeException e) {
+ catch (  final RuntimeException e) {
   }
   Collections.sort(listDirs,Option.NAME_COMPARATOR);
   if (dir.getParent() != null) {

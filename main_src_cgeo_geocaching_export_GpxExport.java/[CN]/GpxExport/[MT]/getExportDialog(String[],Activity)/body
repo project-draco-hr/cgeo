@@ -2,9 +2,9 @@
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
   final View layout=View.inflate(new ContextThemeWrapper(activity,R.style.dark),R.layout.gpx_export_dialog,null);
   builder.setView(layout);
-  final TextView text=(TextView)layout.findViewById(R.id.info);
+  final TextView text=ButterKnife.findById(layout,R.id.info);
   text.setText(getString(R.string.export_gpx_info,Settings.getGpxExportDir()));
-  final CheckBox shareOption=(CheckBox)layout.findViewById(R.id.share);
+  final CheckBox shareOption=ButterKnife.findById(layout,R.id.share);
   shareOption.setChecked(Settings.getShareAfterExport());
   shareOption.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View v){

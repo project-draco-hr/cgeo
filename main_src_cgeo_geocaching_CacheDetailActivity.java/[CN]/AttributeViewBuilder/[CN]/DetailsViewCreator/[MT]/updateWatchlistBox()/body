@@ -1,13 +1,13 @@
 {
-  final LinearLayout layout=(LinearLayout)view.findViewById(R.id.watchlist_box);
+  final LinearLayout layout=ButterKnife.findById(view,R.id.watchlist_box);
   final boolean supportsWatchList=cache.supportsWatchList();
   layout.setVisibility(supportsWatchList ? View.VISIBLE : View.GONE);
   if (!supportsWatchList) {
     return;
   }
-  final Button buttonAdd=(Button)view.findViewById(R.id.add_to_watchlist);
-  final Button buttonRemove=(Button)view.findViewById(R.id.remove_from_watchlist);
-  final TextView text=(TextView)view.findViewById(R.id.watchlist_text);
+  final Button buttonAdd=ButterKnife.findById(view,R.id.add_to_watchlist);
+  final Button buttonRemove=ButterKnife.findById(view,R.id.remove_from_watchlist);
+  final TextView text=ButterKnife.findById(view,R.id.watchlist_text);
   if (cache.isOnWatchlist() || cache.isOwner()) {
     buttonAdd.setVisibility(View.GONE);
     buttonRemove.setVisibility(View.VISIBLE);
