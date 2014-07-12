@@ -5,8 +5,10 @@
     menuKeyField.setAccessible(true);
     menuKeyField.setBoolean(config,false);
   }
- catch (  final ReflectiveOperationException ex) {
+ catch (  final IllegalArgumentException e) {
   }
-catch (  final IllegalArgumentException e) {
+catch (  final NoSuchFieldException e) {
+  }
+catch (  final IllegalAccessException e) {
   }
 }
