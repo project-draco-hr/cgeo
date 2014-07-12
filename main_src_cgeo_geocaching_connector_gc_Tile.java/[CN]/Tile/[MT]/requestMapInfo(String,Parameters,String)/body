@@ -1,3 +1,9 @@
 {
-  return Network.getResponseData(Network.getRequest(url,params,new Parameters("Referer",referer)));
+  final HttpResponse response=Network.getRequest(url,params,new Parameters("Referer",referer));
+  return Async.start(new Func0<String>(){
+    @Override public String call(){
+      return Network.getResponseData(response);
+    }
+  }
+,RxUtils.networkScheduler);
 }
