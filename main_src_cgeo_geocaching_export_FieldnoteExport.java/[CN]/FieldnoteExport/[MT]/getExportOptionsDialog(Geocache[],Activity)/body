@@ -1,6 +1,9 @@
 {
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
-  final View layout=View.inflate(new ContextThemeWrapper(activity,R.style.dark),R.layout.fieldnote_export_dialog,null);
+  final Context themedContext;
+  if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)   themedContext=new ContextThemeWrapper(activity,R.style.dark);
+ else   themedContext=activity;
+  final View layout=View.inflate(themedContext,R.layout.fieldnote_export_dialog,null);
   builder.setView(layout);
   final CheckBox uploadOption=ButterKnife.findById(layout,R.id.upload);
   uploadOption.setChecked(Settings.getFieldNoteExportUpload());

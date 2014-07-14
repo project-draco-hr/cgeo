@@ -1,6 +1,9 @@
 {
   final @NonNull FragmentActivity activity=getActivity();
-  final View view=View.inflate(new ContextThemeWrapper(activity,R.style.dark),R.layout.fragment_edit_note,null);
+  final Context themedContext;
+  if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)   themedContext=new ContextThemeWrapper(activity,R.style.dark);
+ else   themedContext=activity;
+  final View view=View.inflate(themedContext,R.layout.fragment_edit_note,null);
   mEditText=ButterKnife.findById(view,R.id.note);
   final String initialNote=getArguments().getString(ARGUMENT_INITIAL_NOTE);
   if (initialNote != null) {
