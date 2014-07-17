@@ -6,7 +6,7 @@
     }
     final JSONObject cachesResponse=response.getJSONObject("results");
     if (cachesResponse != null) {
-      final List<Geocache> caches=new ArrayList<Geocache>(cachesResponse.length());
+      final List<Geocache> caches=new ArrayList<>(cachesResponse.length());
       final Iterator<?> keys=cachesResponse.keys();
       while (keys.hasNext()) {
         final Object next=keys.next();

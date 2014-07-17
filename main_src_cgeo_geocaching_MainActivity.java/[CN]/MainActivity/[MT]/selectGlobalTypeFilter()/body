@@ -1,10 +1,10 @@
 {
-  final List<CacheType> cacheTypes=new ArrayList<CacheType>();
+  final List<CacheType> cacheTypes=new ArrayList<>();
   cacheTypes.add(CacheType.ALL);
   cacheTypes.add(CacheType.TRADITIONAL);
   cacheTypes.add(CacheType.MULTI);
   cacheTypes.add(CacheType.MYSTERY);
-  final List<CacheType> sorted=new ArrayList<CacheType>();
+  final List<CacheType> sorted=new ArrayList<>();
   sorted.addAll(Arrays.asList(CacheType.values()));
   sorted.removeAll(cacheTypes);
   Collections.sort(sorted,new Comparator<CacheType>(){

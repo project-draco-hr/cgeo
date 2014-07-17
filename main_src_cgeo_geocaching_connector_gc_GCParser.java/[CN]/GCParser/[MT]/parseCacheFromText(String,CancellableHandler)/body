@@ -108,7 +108,7 @@
     final String attributesPre=TextUtils.getMatch(page,GCConstants.PATTERN_ATTRIBUTES,true,null);
     if (null != attributesPre) {
       final MatcherWrapper matcherAttributesInside=new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE,attributesPre);
-      final ArrayList<String> attributes=new ArrayList<String>();
+      final ArrayList<String> attributes=new ArrayList<>();
       while (matcherAttributesInside.find()) {
         if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
           String attribute=matcherAttributesInside.group(2).toLowerCase(Locale.US);

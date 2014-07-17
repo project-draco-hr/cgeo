@@ -1,5 +1,5 @@
 {
-  final ArrayList<OriginFilter> filters=new ArrayList<OriginFilter>();
+  final ArrayList<OriginFilter> filters=new ArrayList<>();
   for (  IConnector connector : ConnectorFactory.getConnectors()) {
     filters.add(new OriginFilter(connector));
   }

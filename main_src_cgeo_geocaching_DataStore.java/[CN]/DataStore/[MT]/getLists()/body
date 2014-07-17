@@ -1,7 +1,7 @@
 {
   init();
   final Resources res=CgeoApplication.getInstance().getResources();
-  final List<StoredList> lists=new ArrayList<StoredList>();
+  final List<StoredList> lists=new ArrayList<>();
   lists.add(new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong()));
   try {
     final String query="SELECT l._id as _id, l.title as title, COUNT(c._id) as count" + " FROM " + dbTableLists + " l LEFT OUTER JOIN "+ dbTableCaches+ " c"+ " ON l._id + "+ customListIdOffset+ " = c.reason"+ " GROUP BY l._id"+ " ORDER BY l.title COLLATE NOCASE ASC";

@@ -10,7 +10,7 @@
     Log.e("GCParser.searchPocketQueryList: class \"PocketQueryListTable\" not found on page");
     return Collections.emptyList();
   }
-  List<PocketQueryList> list=new ArrayList<PocketQueryList>();
+  List<PocketQueryList> list=new ArrayList<>();
   final MatcherWrapper matcherPocket=new MatcherWrapper(GCConstants.PATTERN_LIST_PQ,subPage);
   while (matcherPocket.find()) {
     int maxCaches;

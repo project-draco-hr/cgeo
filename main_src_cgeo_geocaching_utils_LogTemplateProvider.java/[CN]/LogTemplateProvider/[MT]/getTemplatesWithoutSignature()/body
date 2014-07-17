@@ -1,5 +1,5 @@
 {
-  final ArrayList<LogTemplate> templates=new ArrayList<LogTemplateProvider.LogTemplate>();
+  final ArrayList<LogTemplate> templates=new ArrayList<>();
   templates.add(new LogTemplate("DATE",R.string.init_signature_template_date){
     @Override public String getValue(    final LogContext context){
       return Formatter.formatFullDate(System.currentTimeMillis());

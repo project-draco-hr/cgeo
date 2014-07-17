@@ -2,8 +2,8 @@
   if (CollectionUtils.isEmpty(caches)) {
     return;
   }
-  final ArrayList<String> cachesFromDatabase=new ArrayList<String>();
-  final HashMap<String,Geocache> existingCaches=new HashMap<String,Geocache>();
+  final ArrayList<String> cachesFromDatabase=new ArrayList<>();
+  final HashMap<String,Geocache> existingCaches=new HashMap<>();
   for (  final Geocache cache : caches) {
     final String geocode=cache.getGeocode();
     final Geocache cacheFromCache=cacheCache.getCacheFromCache(geocode);
@@ -17,7 +17,7 @@
   for (  final Geocache cacheFromDatabase : loadCaches(cachesFromDatabase,LoadFlags.LOAD_ALL_DB_ONLY)) {
     existingCaches.put(cacheFromDatabase.getGeocode(),cacheFromDatabase);
   }
-  final ArrayList<Geocache> toBeStored=new ArrayList<Geocache>();
+  final ArrayList<Geocache> toBeStored=new ArrayList<>();
   for (  final Geocache cache : caches) {
     final String geocode=cache.getGeocode();
     final Geocache existingCache=existingCaches.get(geocode);

@@ -4,7 +4,7 @@
   }
   final String bboxString=GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,viewport.bottomLeft) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,viewport.bottomLeft)+ SEPARATOR+ GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,viewport.topRight)+ SEPARATOR+ GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,viewport.topRight);
   final Parameters params=new Parameters("search_method",METHOD_SEARCH_BBOX);
-  final Map<String,String> valueMap=new LinkedHashMap<String,String>();
+  final Map<String,String> valueMap=new LinkedHashMap<>();
   valueMap.put("bbox",bboxString);
   return requestCaches(connector,params,valueMap,false);
 }

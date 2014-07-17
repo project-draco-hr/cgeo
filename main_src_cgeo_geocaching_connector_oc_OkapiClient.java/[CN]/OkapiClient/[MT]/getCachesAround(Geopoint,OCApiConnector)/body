@@ -1,7 +1,7 @@
 {
   final String centerString=GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,center);
   final Parameters params=new Parameters("search_method",METHOD_SEARCH_NEAREST);
-  final Map<String,String> valueMap=new LinkedHashMap<String,String>();
+  final Map<String,String> valueMap=new LinkedHashMap<>();
   valueMap.put("center",centerString);
   valueMap.put("limit","20");
   valueMap.put("radius","200");

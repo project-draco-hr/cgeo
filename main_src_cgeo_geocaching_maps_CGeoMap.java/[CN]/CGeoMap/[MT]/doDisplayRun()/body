@@ -5,8 +5,8 @@
       throw new ThreadDeath();
     }
     final List<Geocache> cachesToDisplay=caches.getAsList();
-    final List<Waypoint> waypointsToDisplay=new ArrayList<Waypoint>(waypoints);
-    final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<CachesOverlayItemImpl>();
+    final List<Waypoint> waypointsToDisplay=new ArrayList<>(waypoints);
+    final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<>();
     if (!cachesToDisplay.isEmpty()) {
       if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
         for (        final Waypoint waypoint : waypointsToDisplay) {

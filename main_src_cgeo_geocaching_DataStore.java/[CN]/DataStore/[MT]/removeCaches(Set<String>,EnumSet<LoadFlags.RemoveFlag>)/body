@@ -9,7 +9,7 @@
     }
   }
   if (removeFlags.contains(RemoveFlag.DB)) {
-    final ArrayList<String> quotedGeocodes=new ArrayList<String>(geocodes.size());
+    final ArrayList<String> quotedGeocodes=new ArrayList<>(geocodes.size());
     for (    final String geocode : geocodes) {
       quotedGeocodes.add(DatabaseUtils.sqlEscapeString(geocode));
     }

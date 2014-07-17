@@ -9,7 +9,7 @@
         cache.setVisitedDate(new Date().getTime());
       }
       DataStore.saveChangedCache(cache);
-      final ArrayList<LogEntry> newLogs=new ArrayList<LogEntry>(cache.getLogs());
+      final ArrayList<LogEntry> newLogs=new ArrayList<>(cache.getLogs());
       final LogEntry logNow=new LogEntry(date.getTimeInMillis(),typeSelected,log);
       logNow.friend=true;
       newLogs.add(0,logNow);

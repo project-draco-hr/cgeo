@@ -2,7 +2,7 @@
   if (cache == null) {
     return null;
   }
-  final List<Waypoint> sortedWaypoints=new ArrayList<Waypoint>(cache.getWaypoints());
+  final List<Waypoint> sortedWaypoints=new ArrayList<>(cache.getWaypoints());
   Collections.sort(sortedWaypoints,Waypoint.WAYPOINT_COMPARATOR);
   view=(ListView)getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page,parentView,false);
   view.setClickable(true);

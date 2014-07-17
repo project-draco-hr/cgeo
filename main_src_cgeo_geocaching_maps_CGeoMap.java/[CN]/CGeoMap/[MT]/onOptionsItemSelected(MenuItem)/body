@@ -22,7 +22,7 @@ return true;
 case R.id.menu_store_caches:
 if (!isLoading()) {
 final Set<String> geocodesInViewport=getGeocodesForCachesInViewport();
-final List<String> geocodes=new ArrayList<String>();
+final List<String> geocodes=new ArrayList<>();
 for (final String geocode : geocodesInViewport) {
 if (!DataStore.isOffline(geocode,null)) {
 geocodes.add(geocode);

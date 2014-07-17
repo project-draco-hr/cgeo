@@ -5,7 +5,7 @@
   if (inflater == null) {
     inflater=getLayoutInflater();
   }
-  actionButtons=new SparseArray<TrackableLog>();
+  actionButtons=new SparseArray<>();
   final LinearLayout inventoryView=(LinearLayout)findViewById(R.id.inventory);
   inventoryView.removeAllViews();
   for (  final TrackableLog tb : trackables) {

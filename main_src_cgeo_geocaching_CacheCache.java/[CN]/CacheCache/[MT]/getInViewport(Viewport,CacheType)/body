@@ -1,5 +1,5 @@
 {
-  final Set<String> geocodes=new HashSet<String>();
+  final Set<String> geocodes=new HashSet<>();
   for (  final Geocache cache : cachesCache.values()) {
     if (cache.getCoords() == null) {
       Log.e("CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());

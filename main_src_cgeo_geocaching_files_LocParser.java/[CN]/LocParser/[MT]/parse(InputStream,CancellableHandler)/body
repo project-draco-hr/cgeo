@@ -2,7 +2,7 @@
   final String streamContent=readStream(stream,null).toString();
   final int maxSize=streamContent.length();
   final Map<String,Geocache> coords=parseCoordinates(streamContent);
-  final List<Geocache> caches=new ArrayList<Geocache>();
+  final List<Geocache> caches=new ArrayList<>();
   for (  Entry<String,Geocache> entry : coords.entrySet()) {
     Geocache coord=entry.getValue();
     if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {

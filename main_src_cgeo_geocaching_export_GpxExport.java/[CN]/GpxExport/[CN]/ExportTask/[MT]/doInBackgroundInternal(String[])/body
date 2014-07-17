@@ -2,7 +2,7 @@
   if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
     return null;
   }
-  final List<String> allGeocodes=new ArrayList<String>(Arrays.asList(geocodes));
+  final List<String> allGeocodes=new ArrayList<>(Arrays.asList(geocodes));
   setMessage(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,allGeocodes.size(),allGeocodes.size()));
   final File exportFile=getExportFile();
   BufferedWriter writer=null;

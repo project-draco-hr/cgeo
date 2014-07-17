@@ -1,5 +1,5 @@
 {
-  final List<ILogin> liveConns=new ArrayList<ILogin>();
+  final List<ILogin> liveConns=new ArrayList<>();
   for (  final IConnector conn : CONNECTORS) {
     if (conn instanceof ILogin && conn.isActive()) {
       liveConns.add((ILogin)conn);

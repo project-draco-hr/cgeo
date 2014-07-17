@@ -14,11 +14,11 @@
   buttonLat.setOnClickListener(new CoordDialogListener());
   buttonLon.setOnClickListener(new CoordDialogListener());
   addWaypoint.setOnClickListener(new SaveWaypointListener());
-  List<String> wayPointNames=new ArrayList<String>();
+  List<String> wayPointNames=new ArrayList<>();
   for (  WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
     wayPointNames.add(wpt.getL10n());
   }
-  ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,wayPointNames);
+  ArrayAdapter<String> adapter=new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,wayPointNames);
   waypointName.setAdapter(adapter);
   if (savedInstanceState != null) {
     initViews=false;

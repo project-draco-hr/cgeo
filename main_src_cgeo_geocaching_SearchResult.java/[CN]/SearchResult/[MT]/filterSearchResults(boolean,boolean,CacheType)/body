@@ -1,7 +1,7 @@
 {
   SearchResult result=new SearchResult(this);
   result.geocodes.clear();
-  final ArrayList<Geocache> includedCaches=new ArrayList<Geocache>();
+  final ArrayList<Geocache> includedCaches=new ArrayList<>();
   final Set<Geocache> caches=DataStore.loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
   int excluded=0;
   for (  Geocache cache : caches) {

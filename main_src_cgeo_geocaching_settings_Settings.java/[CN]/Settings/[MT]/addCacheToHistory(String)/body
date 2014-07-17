@@ -1,5 +1,5 @@
 {
-  final ArrayList<String> history=new ArrayList<String>(getLastOpenedCaches());
+  final ArrayList<String> history=new ArrayList<>(getLastOpenedCaches());
   history.remove(geocode);
   history.add(0,geocode);
   putString(R.string.pref_caches_history,StringUtils.join(history,HISTORY_SEPARATOR));

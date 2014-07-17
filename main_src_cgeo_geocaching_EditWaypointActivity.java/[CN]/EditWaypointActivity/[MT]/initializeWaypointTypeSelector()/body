@@ -1,5 +1,5 @@
 {
-  ArrayAdapter<WaypointType> wpAdapter=new ArrayAdapter<WaypointType>(this,android.R.layout.simple_spinner_item,POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
+  ArrayAdapter<WaypointType> wpAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
   wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
   waypointTypeSelector.setAdapter(wpAdapter);
   waypointTypeSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){

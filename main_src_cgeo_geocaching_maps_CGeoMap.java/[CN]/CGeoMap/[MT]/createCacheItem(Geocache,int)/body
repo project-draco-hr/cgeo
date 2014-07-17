@@ -1,6 +1,6 @@
 {
-  final ArrayList<Drawable> layers=new ArrayList<Drawable>(9);
-  final ArrayList<int[]> insets=new ArrayList<int[]>(8);
+  final ArrayList<Drawable> layers=new ArrayList<>(9);
+  final ArrayList<int[]> insets=new ArrayList<>(8);
   final Drawable marker=getResources().getDrawable(cache.getMapMarkerId());
   layers.add(marker);
   final int resolution=marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? 2 : 1) : 0;

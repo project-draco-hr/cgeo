@@ -82,9 +82,9 @@
           waypoint.setCoords(cache.getCoords());
           waypoint.setNote(cache.getDescription());
           waypoint.setVisited(wptVisited);
-          final ArrayList<Waypoint> mergedWayPoints=new ArrayList<Waypoint>();
+          final ArrayList<Waypoint> mergedWayPoints=new ArrayList<>();
           mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
-          final ArrayList<Waypoint> newPoints=new ArrayList<Waypoint>();
+          final ArrayList<Waypoint> newPoints=new ArrayList<>();
           newPoints.add(waypoint);
           Waypoint.mergeWayPoints(newPoints,mergedWayPoints,true);
           cacheForWaypoint.setWaypoints(newPoints,false);

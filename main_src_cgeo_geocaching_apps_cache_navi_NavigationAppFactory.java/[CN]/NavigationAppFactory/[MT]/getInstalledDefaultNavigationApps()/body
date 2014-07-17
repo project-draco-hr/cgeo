@@ -1,5 +1,5 @@
 {
-  final List<NavigationAppsEnum> installedNavigationApps=new ArrayList<NavigationAppsEnum>();
+  final List<NavigationAppsEnum> installedNavigationApps=new ArrayList<>();
   for (  final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
     if (appEnum.app.isInstalled() && appEnum.app.isUsableAsDefaultNavigationApp()) {
       installedNavigationApps.add(appEnum);

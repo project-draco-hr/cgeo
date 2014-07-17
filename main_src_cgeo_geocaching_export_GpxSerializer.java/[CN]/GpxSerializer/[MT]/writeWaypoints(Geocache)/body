@@ -1,7 +1,7 @@
 {
   final List<Waypoint> waypoints=cache.getWaypoints();
-  final List<Waypoint> ownWaypoints=new ArrayList<Waypoint>(waypoints.size());
-  final List<Waypoint> originWaypoints=new ArrayList<Waypoint>(waypoints.size());
+  final List<Waypoint> ownWaypoints=new ArrayList<>(waypoints.size());
+  final List<Waypoint> originWaypoints=new ArrayList<>(waypoints.size());
   int maxPrefix=0;
   for (  final Waypoint wp : cache.getWaypoints()) {
     final String prefix=wp.getPrefix();

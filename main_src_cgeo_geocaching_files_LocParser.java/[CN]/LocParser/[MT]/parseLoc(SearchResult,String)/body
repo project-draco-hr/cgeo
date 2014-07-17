@@ -1,6 +1,6 @@
 {
   final Map<String,Geocache> cidCoords=parseCoordinates(fileContent);
-  final HashSet<String> contained=new HashSet<String>();
+  final HashSet<String> contained=new HashSet<>();
   for (  String geocode : searchResult.getGeocodes()) {
     if (cidCoords.containsKey(geocode)) {
       contained.add(geocode);

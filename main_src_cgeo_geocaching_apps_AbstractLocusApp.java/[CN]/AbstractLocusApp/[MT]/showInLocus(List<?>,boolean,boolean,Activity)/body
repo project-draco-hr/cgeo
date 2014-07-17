@@ -23,7 +23,7 @@
     DisplayData.sendData(activity,pd,export);
   }
  else {
-    final ArrayList<PointsData> data=new ArrayList<PointsData>();
+    final ArrayList<PointsData> data=new ArrayList<>();
     data.add(pd);
     DisplayData.sendDataCursor(activity,data,"content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(Locale.US),export);
   }
