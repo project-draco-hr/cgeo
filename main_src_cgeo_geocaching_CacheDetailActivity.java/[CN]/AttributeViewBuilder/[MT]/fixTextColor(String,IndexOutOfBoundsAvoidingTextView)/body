@@ -1,0 +1,24 @@
+{
+  int backcolor;
+  if (Settings.isLightSkin()) {
+    backcolor=color.white;
+    for (    final Pattern pattern : LIGHT_COLOR_PATTERNS) {
+      final MatcherWrapper matcher=new MatcherWrapper(pattern,descriptionString);
+      if (matcher.find()) {
+        descriptionView.setBackgroundResource(color.darker_gray);
+        return;
+      }
+    }
+  }
+ else {
+    backcolor=color.black;
+    for (    final Pattern pattern : DARK_COLOR_PATTERNS) {
+      final MatcherWrapper matcher=new MatcherWrapper(pattern,descriptionString);
+      if (matcher.find()) {
+        descriptionView.setBackgroundResource(color.darker_gray);
+        return;
+      }
+    }
+  }
+  descriptionView.setBackgroundResource(backcolor);
+}

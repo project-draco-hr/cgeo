@@ -1,6 +1,6 @@
 {
   if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url,BLOCKED)) {
-    return Observable.from(getTransparent1x1Image(resources));
+    return Observable.from(ImageUtils.getTransparent1x1Drawable(resources));
   }
   if (FileUtils.isFileUrl(url)) {
     return Observable.defer(new Func0<Observable<? extends BitmapDrawable>>(){
@@ -71,7 +71,7 @@
               subscriber.onNext(image);
             }
  else {
-              subscriber.onNext(returnErrorImage ? new BitmapDrawable(resources,BitmapFactory.decodeResource(resources,R.drawable.image_not_loaded)) : getTransparent1x1Image(resources));
+              subscriber.onNext(returnErrorImage ? new BitmapDrawable(resources,BitmapFactory.decodeResource(resources,R.drawable.image_not_loaded)) : ImageUtils.getTransparent1x1Drawable(resources));
             }
             subscriber.onCompleted();
           }
