@@ -1,20 +1,11 @@
 {
   super.onCreate(savedInstanceState);
   try {
-    final Method method=TextView.class.getMethod("setVisibility",Integer.TYPE);
-    final Field[] fields=this.getClass().getSuperclass().getDeclaredFields();
-    for (    final Field field : fields) {
-      if (field.getName().equalsIgnoreCase("mProgressNumber")) {
-        field.setAccessible(true);
-        final TextView textView=(TextView)field.get(this);
-        method.invoke(textView,View.GONE);
-      }
-    }
+    final Field field=getClass().getSuperclass().getDeclaredField("mProgressNumber");
+    field.setAccessible(true);
+    ((View)field.get(this)).setVisibility(View.GONE);
   }
- catch (  final NoSuchMethodException e) {
-    Log.e("Failed to find the progressDialog method 'setVisibility'.",e);
-  }
-catch (  final IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
-    Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.",e);
+ catch (  NoSuchFieldException|IllegalAccessException e) {
+    Log.e("Failed to find the progressDialog field 'mProgressNumber'",e);
   }
 }
