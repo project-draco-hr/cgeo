@@ -11,7 +11,10 @@
       }
     }
   }
- catch (  final ReflectiveOperationException e) {
+ catch (  final NoSuchMethodException e) {
+    Log.e("Failed to find the progressDialog method 'setVisibility'.",e);
+  }
+catch (  final IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
     Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.",e);
   }
 }
