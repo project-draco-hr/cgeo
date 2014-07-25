@@ -4,9 +4,12 @@
     if (Settings.isGCConnectorActive()) {
       if (tokens == null) {
         tokens=GCLogin.getInstance().getMapTokens();
-        if (noMapTokenHandler != null && (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken()))) {
+        if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
           tokens=null;
-          noMapTokenHandler.sendEmptyMessage(0);
+          if (!noMapTokenShowed) {
+            ActivityMixin.showToast(activity,res.getString(R.string.map_token_err));
+            noMapTokenShowed=true;
+          }
         }
       }
     }
