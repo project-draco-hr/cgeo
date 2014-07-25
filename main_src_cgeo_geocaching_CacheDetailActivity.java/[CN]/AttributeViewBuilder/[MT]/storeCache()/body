@@ -4,7 +4,7 @@
     return;
   }
   if (Settings.getChooseList()) {
-    new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
+    new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
       @Override public void call(      final Integer selectedListId){
         storeCache(selectedListId,new StoreCacheHandler(CacheDetailActivity.this,progress));
       }
@@ -12,6 +12,6 @@
 ,true,StoredList.TEMPORARY_LIST_ID);
   }
  else {
-    storeCache(StoredList.TEMPORARY_LIST_ID,new StoreCacheHandler(CacheDetailActivity.this,progress));
+    storeCache(StoredList.TEMPORARY_LIST_ID,new StoreCacheHandler(this,progress));
   }
 }
