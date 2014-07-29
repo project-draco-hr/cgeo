@@ -48,9 +48,6 @@ storeCaches(geocodes,StoredList.STANDARD_LIST_ID);
 }
 return true;
 case R.id.menu_circle_mode:
-if (overlayCaches == null) {
-return false;
-}
 overlayCaches.switchCircles();
 mapView.repaintRequired(overlayCaches);
 ActivityMixin.invalidateOptionsMenu(activity);

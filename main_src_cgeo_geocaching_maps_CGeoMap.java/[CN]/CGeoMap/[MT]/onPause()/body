@@ -1,9 +1,7 @@
 {
   resumeSubscription.unsubscribe();
   savePrefs();
-  if (mapView != null) {
-    mapView.destroyDrawingCache();
-  }
+  mapView.destroyDrawingCache();
   overlaysCache.clear();
   super.onPause();
 }

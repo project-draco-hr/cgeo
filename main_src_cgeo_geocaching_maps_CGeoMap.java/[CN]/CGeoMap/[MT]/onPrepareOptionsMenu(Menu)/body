@@ -21,7 +21,7 @@
     final Set<String> geocodesInViewport=getGeocodesForCachesInViewport();
     menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
     item=menu.findItem(R.id.menu_circle_mode);
-    item.setChecked(overlayCaches != null && overlayCaches.getCircles());
+    item.setChecked(overlayCaches.getCircles());
     item=menu.findItem(R.id.menu_theme_mode);
     item.setVisible(mapView.hasMapThemes());
     menu.findItem(R.id.menu_as_list).setVisible(!isLoading());

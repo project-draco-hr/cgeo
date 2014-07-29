@@ -14,7 +14,7 @@ case UPDATE_TITLE:
     title.append(map.mapTitle);
   }
 map.countVisibleCaches();
-if (map.caches != null && !map.caches.isEmpty() && !map.mapTitle.contains("[")) {
+if (!map.caches.isEmpty() && !map.mapTitle.contains("[")) {
 title.append(" [").append(map.cachesCnt);
 if (map.cachesCnt != map.caches.size()) {
   title.append('/').append(map.caches.size());

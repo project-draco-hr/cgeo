@@ -2,7 +2,5 @@
   outState.putInt(BUNDLE_MAP_SOURCE,currentSourceId);
   outState.putIntArray(BUNDLE_MAP_STATE,currentMapState());
   outState.putBoolean(BUNDLE_LIVE_ENABLED,isLiveEnabled);
-  if (overlayPositionAndScale != null) {
-    outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY,overlayPositionAndScale.getHistory());
-  }
+  outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY,overlayPositionAndScale.getHistory());
 }

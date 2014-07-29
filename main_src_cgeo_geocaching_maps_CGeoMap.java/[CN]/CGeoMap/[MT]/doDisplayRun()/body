@@ -1,9 +1,6 @@
 {
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
-    if (mapView == null || caches == null) {
-      throw new ThreadDeath();
-    }
     final List<Geocache> cachesToDisplay=caches.getAsList();
     final List<Waypoint> waypointsToDisplay=new ArrayList<>(waypoints);
     final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<>();
