@@ -3,23 +3,23 @@
   if (currentTimeMillis > timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL) {
     timeLastPositionOverlayCalculation=currentTimeMillis;
     try {
-      final CGeoMap cgeoMapRef=map.get();
-      if (cgeoMapRef != null) {
-        if (cgeoMapRef.mapView != null) {
-          if (cgeoMapRef.overlayPositionAndScale == null) {
-            cgeoMapRef.overlayPositionAndScale=cgeoMapRef.mapView.createAddPositionAndScaleOverlay();
+      final CGeoMap map=mapRef.get();
+      if (map != null) {
+        if (map.mapView != null) {
+          if (map.overlayPositionAndScale == null) {
+            map.overlayPositionAndScale=map.mapView.createAddPositionAndScaleOverlay();
           }
           final boolean needsRepaintForDistance=needsRepaintForDistance();
           final boolean needsRepaintForHeading=needsRepaintForHeading();
           if (needsRepaintForDistance) {
-            if (cgeoMapRef.followMyLocation) {
-              cgeoMapRef.centerMap(new Geopoint(currentLocation));
+            if (map.followMyLocation) {
+              map.centerMap(new Geopoint(currentLocation));
             }
           }
           if (needsRepaintForDistance || needsRepaintForHeading) {
-            cgeoMapRef.overlayPositionAndScale.setCoordinates(currentLocation);
-            cgeoMapRef.overlayPositionAndScale.setHeading(currentHeading);
-            cgeoMapRef.mapView.repaintRequired(cgeoMapRef.overlayPositionAndScale);
+            map.overlayPositionAndScale.setCoordinates(currentLocation);
+            map.overlayPositionAndScale.setHeading(currentHeading);
+            map.mapView.repaintRequired(map.overlayPositionAndScale);
           }
         }
       }
