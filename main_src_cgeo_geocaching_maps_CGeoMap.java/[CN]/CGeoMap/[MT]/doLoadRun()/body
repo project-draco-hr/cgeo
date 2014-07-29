@@ -4,7 +4,7 @@
     loadThreadRun=System.currentTimeMillis();
     SearchResult searchResult;
     if (mapMode == MapMode.LIVE) {
-      searchResult=isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(viewport,Settings.getCacheType()));
+      searchResult=isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(),Settings.getCacheType()));
     }
  else {
       searchResult=searchIntent != null ? new SearchResult(searchIntent) : new SearchResult();
@@ -13,7 +13,7 @@
       }
     }
     if (isLiveEnabled) {
-      searchResult.addSearchResult(DataStore.loadCachedInViewport(viewport,Settings.getCacheType()));
+      searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport(),Settings.getCacheType()));
     }
     downloaded=true;
     final Set<Geocache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
@@ -29,7 +29,7 @@
       waypoints.clear();
       if (isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
         final CacheType type=Settings.getCacheType();
-        final Set<Waypoint> waypointsInViewport=DataStore.loadWaypoints(viewport,excludeMine,excludeDisabled,type);
+        final Set<Waypoint> waypointsInViewport=DataStore.loadWaypoints(mapView.getViewport(),excludeMine,excludeDisabled,type);
         waypoints.addAll(waypointsInViewport);
       }
  else {

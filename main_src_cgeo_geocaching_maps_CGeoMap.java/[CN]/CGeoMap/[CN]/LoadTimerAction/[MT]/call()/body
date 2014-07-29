@@ -7,8 +7,8 @@
     if (map.mapView != null) {
       final Viewport viewportNow=map.mapView.getViewport();
       final int zoomNow=map.mapView.getMapZoomLevel();
-      final boolean moved=map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (map.viewport == null)|| zoomNow != previousZoom || (mapMoved(map.viewport,viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !map.viewport.includes(viewportNow)));
-      if (moved || !viewportNow.equals(map.viewport)) {
+      final boolean moved=map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (previousViewport == null)|| zoomNow != previousZoom || (mapMoved(previousViewport,viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
+      if (moved || !viewportNow.equals(previousViewport)) {
         map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
       }
       previousZoom=zoomNow;
@@ -16,7 +16,7 @@
         map.markersInvalidated=false;
         final long currentTime=System.currentTimeMillis();
         if (1000 < (currentTime - map.loadThreadRun)) {
-          map.viewport=viewportNow;
+          previousViewport=viewportNow;
           loadExecutor.execute(new LoadRunnable(map));
         }
       }
