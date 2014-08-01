@@ -1,10 +1,5 @@
 {
   final CachesOverlayItemImpl item=mapItemFactory.getCachesOverlayItem(cache,cache.applyDistanceRule());
-  final int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.getMapMarkerId()).append(cache.isOwner()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).toHashCode();
-  LayerDrawable drawable=overlaysCache.get(hashcode);
-  if (drawable == null) {
-    drawable=createCacheItem(cache,hashcode);
-  }
-  item.setMarker(drawable);
+  item.setMarker(MapUtils.getCacheItem(getResources(),cache));
   return item;
 }
