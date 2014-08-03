@@ -13,13 +13,7 @@
     return;
   }
   cache.setChangeNotificationHandler(new ChangeNotificationHandler(this,progress));
-  if (StringUtils.isNotBlank(cache.getName())) {
-    setTitle(cache.getName() + " (" + cache.getGeocode()+ ')');
-  }
- else {
-    setTitle(cache.getGeocode());
-  }
-  getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
+  updateTitleBar(null);
   initializeAndroidBeam(new ActivitySharingInterface(){
     @Override public String getUri(){
       return cache.getCgeoUrl();

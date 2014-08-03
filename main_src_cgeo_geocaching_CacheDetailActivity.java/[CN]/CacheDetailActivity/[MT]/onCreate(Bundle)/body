@@ -1,8 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.cachedetail_activity);
   createSubscriptions=new CompositeSubscription();
-  setTitle(res.getString(R.string.cache));
-  getSupportActionBar().setIcon(android.R.color.transparent);
   final Bundle extras=getIntent().getExtras();
   final Uri uri=getIntent().getData();
   String name=null;
@@ -85,6 +83,8 @@
     finish();
     return;
   }
+  cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_ONLY);
+  updateTitleBar(geocode);
   final LoadCacheHandler loadCacheHandler=new LoadCacheHandler(this,progress);
   try {
     String title=res.getString(R.string.cache);
