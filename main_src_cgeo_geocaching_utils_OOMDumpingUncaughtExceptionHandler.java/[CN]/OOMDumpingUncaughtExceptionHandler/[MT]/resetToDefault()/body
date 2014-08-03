@@ -1,6 +1,6 @@
 {
-  boolean defaultResetted=false;
   final UncaughtExceptionHandler unspecificHandler=Thread.getDefaultUncaughtExceptionHandler();
+  boolean defaultResetted=unspecificHandler != null;
   if (unspecificHandler instanceof OOMDumpingUncaughtExceptionHandler) {
     final OOMDumpingUncaughtExceptionHandler handler=(OOMDumpingUncaughtExceptionHandler)unspecificHandler;
     defaultResetted=handler.reset();
