@@ -1,5 +1,5 @@
 {
-  super.onResume(Subscriptions.from(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA),satellitesHandler.start(GeoDirHandler.UPDATE_GEODATA)));
+  super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA),app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
   updateUserInfoHandler.sendEmptyMessage(-1);
   startBackgroundLogin();
   init();
