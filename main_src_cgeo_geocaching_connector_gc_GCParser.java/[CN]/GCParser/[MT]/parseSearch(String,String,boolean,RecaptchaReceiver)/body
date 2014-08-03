@@ -97,12 +97,12 @@
     final String dateHidden=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_HIDDEN_DATE,false,1,null,false);
     if (StringUtils.isNotBlank(dateHidden)) {
       try {
-        Date date=GCLogin.parseGcCustomDate(dateHidden);
+        final Date date=GCLogin.parseGcCustomDate(dateHidden);
         if (date != null) {
           cache.setHidden(date);
         }
       }
- catch (      ParseException e) {
+ catch (      final ParseException e) {
         Log.e("Error parsing event date from search");
       }
     }

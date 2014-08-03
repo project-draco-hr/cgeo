@@ -57,12 +57,12 @@
     try {
       trackable.setReleased(dateTbIn1.parse(releaseString));
     }
- catch (    ParseException e) {
+ catch (    final ParseException e) {
       if (trackable.getReleased() == null) {
         try {
           trackable.setReleased(dateTbIn2.parse(releaseString));
         }
- catch (        ParseException e1) {
+ catch (        final ParseException e1) {
           Log.e("Could not parse trackable release " + releaseString);
         }
       }

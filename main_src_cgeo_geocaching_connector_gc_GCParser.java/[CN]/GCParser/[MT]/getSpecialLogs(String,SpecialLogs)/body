@@ -18,7 +18,7 @@
         Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
         return Observable.empty();
       }
-      String rawResponse=Network.getResponseData(response);
+      final String rawResponse=Network.getResponseData(response);
       if (rawResponse == null) {
         Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
         return Observable.empty();

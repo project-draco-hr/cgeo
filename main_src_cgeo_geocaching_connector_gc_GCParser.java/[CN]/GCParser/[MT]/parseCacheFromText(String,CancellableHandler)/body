@@ -15,7 +15,7 @@
     return ImmutablePair.of(StatusCode.UNKNOWN_ERROR,null);
   }
   String personalNoteWithLineBreaks="";
-  MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE,pageIn);
+  final MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE,pageIn);
   if (matcher.find()) {
     personalNoteWithLineBreaks=matcher.group(1).trim();
   }
