@@ -5,7 +5,7 @@
   final int id=getConvertedMapId();
   mapSource=MapProviderFactory.getMapSource(id);
   if (mapSource != null) {
-    if ((!(mapSource instanceof OfflineMapSource)) || (isValidMapFile())) {
+    if (!(mapSource instanceof OfflineMapSource) || isValidMapFile()) {
       return mapSource;
     }
   }
