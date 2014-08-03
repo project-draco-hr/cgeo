@@ -1,0 +1,25 @@
+{
+  final CompositeSubscription subscription=new CompositeSubscription();
+  looperCallbacksWorker.schedule(new Action0(){
+    @Override public void call(){
+      if (counter.getAndIncrement() == 0) {
+        onStart.call();
+      }
+      subscription.add(Subscriptions.create(new Action0(){
+        @Override public void call(){
+          looperCallbacksWorker.schedule(new Action0(){
+            @Override public void call(){
+              if (counter.decrementAndGet() == 0) {
+                onStop.call();
+              }
+            }
+          }
+,stopDelay,stopDelayUnit);
+        }
+      }
+));
+    }
+  }
+);
+  return subscription;
+}
