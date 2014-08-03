@@ -1,3 +1,7 @@
 {
-  params.put(CryptUtils.rot13("pbafhzre_xrl"),CryptUtils.rot13(cK));
+  final String rotCK=CryptUtils.rot13(cK);
+  if (StringUtils.startsWith(rotCK,"${")) {
+    throw new IllegalStateException("invalid OKAPI OAuth token " + rotCK);
+  }
+  params.put(CryptUtils.rot13("pbafhzre_xrl"),rotCK);
 }
