@@ -44,13 +44,7 @@
     }
     result.addAndPutInCache(caches);
   }
- catch (  JSONException e) {
-    result.setError(StatusCode.UNKNOWN_ERROR);
-  }
-catch (  ParseException e) {
-    result.setError(StatusCode.UNKNOWN_ERROR);
-  }
-catch (  NumberFormatException e) {
+ catch (  JSONException|ParseException|NumberFormatException e) {
     result.setError(StatusCode.UNKNOWN_ERROR);
   }
   return result;

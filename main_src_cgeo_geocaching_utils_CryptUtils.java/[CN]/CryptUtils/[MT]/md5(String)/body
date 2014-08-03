@@ -4,10 +4,7 @@
     digest.update(text.getBytes(CharEncoding.UTF_8),0,text.length());
     return new BigInteger(1,digest.digest()).toString(16);
   }
- catch (  NoSuchAlgorithmException e) {
-    Log.e("CryptUtils.md5",e);
-  }
-catch (  UnsupportedEncodingException e) {
+ catch (  NoSuchAlgorithmException|UnsupportedEncodingException e) {
     Log.e("CryptUtils.md5",e);
   }
   return StringUtils.EMPTY;

@@ -82,10 +82,7 @@
     searchResult.addAndPutInCache(caches);
     Log.d("Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
   }
- catch (  RuntimeException e) {
-    Log.e("GCMap.parseMapJSON",e);
-  }
-catch (  JSONException e) {
+ catch (  RuntimeException|JSONException e) {
     Log.e("GCMap.parseMapJSON",e);
   }
   return searchResult;

@@ -5,11 +5,7 @@
     menuKeyField.setAccessible(true);
     menuKeyField.setBoolean(config,false);
   }
- catch (  final IllegalArgumentException e) {
-  }
-catch (  final NoSuchFieldException e) {
-  }
-catch (  final IllegalAccessException e) {
+ catch (  IllegalArgumentException|IllegalAccessException|NoSuchFieldException ignore) {
   }
   DataStore.getLists();
 }
