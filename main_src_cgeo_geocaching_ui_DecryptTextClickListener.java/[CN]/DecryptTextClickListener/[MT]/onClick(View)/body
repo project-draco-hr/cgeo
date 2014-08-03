@@ -5,14 +5,12 @@
     }
     CharSequence text=targetView.getText();
     if (text instanceof Spannable) {
-      Spannable span=(Spannable)text;
-      targetView.setText(CryptUtils.rot13(span));
+      targetView.setText(CryptUtils.rot13((Spannable)text));
     }
  else {
-      String string=(String)text;
-      targetView.setText(CryptUtils.rot13(string));
+      targetView.setText(CryptUtils.rot13((String)text));
     }
   }
- catch (  RuntimeException e) {
+ catch (  final RuntimeException ignore) {
   }
 }
