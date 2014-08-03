@@ -2,6 +2,7 @@
   super.onCreate(savedInstanceState,R.layout.cachedetail_activity);
   createSubscriptions=new CompositeSubscription();
   setTitle(res.getString(R.string.cache));
+  getSupportActionBar().setIcon(android.R.color.transparent);
   final Bundle extras=getIntent().getExtras();
   final Uri uri=getIntent().getData();
   String name=null;
