@@ -1,0 +1,10 @@
+{
+  final ArrayList<String> numbers=new ArrayList<>();
+  if (adapter.isFiltered()) {
+    numbers.add(getCacheNumberString(getResources(),adapter.getCount()));
+  }
+  if (search != null) {
+    numbers.add(getCacheNumberString(getResources(),search.getCount()));
+  }
+  return numbers.isEmpty() ? null : StringUtils.join(numbers,'/');
+}

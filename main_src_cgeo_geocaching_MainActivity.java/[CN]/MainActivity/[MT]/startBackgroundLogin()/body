@@ -5,6 +5,9 @@
     if (mustLogin || !conn.isLoggedIn()) {
       new Thread(){
         @Override public void run(){
+          if (mustLogin && conn == GCConnector.getInstance()) {
+            GCLogin.getInstance().logout();
+          }
           conn.login(firstLoginHandler,MainActivity.this);
           updateUserInfoHandler.sendEmptyMessage(-1);
         }

@@ -1,6 +1,6 @@
 {
   final String prefKey=getKey();
-  for (  OAuthActivityMapping auth : OAuthActivityMapping.values()) {
+  for (  final OAuthActivityMapping auth : OAuthActivityMapping.values()) {
     if (auth.prefKeyId != NO_KEY && prefKey.equals(CgeoApplication.getInstance().getString(auth.prefKeyId))) {
       return auth;
     }

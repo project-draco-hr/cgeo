@@ -1,0 +1,9 @@
+{
+  if (StringUtils.endsWithIgnoreCase(pathName,GPX_FILE_EXTENSION)) {
+    return FileType.GPX;
+  }
+  if (StringUtils.endsWithIgnoreCase(pathName,LOC_FILE_EXTENSION)) {
+    return FileType.LOC;
+  }
+  return FileType.UNKNOWN;
+}

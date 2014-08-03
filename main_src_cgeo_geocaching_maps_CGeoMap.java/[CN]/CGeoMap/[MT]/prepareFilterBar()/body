@@ -1,7 +1,8 @@
 {
   if (Settings.getCacheType() != CacheType.ALL) {
-    String cacheType=Settings.getCacheType().getL10n();
-    ((TextView)activity.findViewById(R.id.filter_text)).setText(cacheType);
+    final String cacheType=Settings.getCacheType().getL10n();
+    final TextView filterTitleView=ButterKnife.findById(activity,R.id.filter_text);
+    filterTitleView.setText(cacheType);
     activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
   }
  else {

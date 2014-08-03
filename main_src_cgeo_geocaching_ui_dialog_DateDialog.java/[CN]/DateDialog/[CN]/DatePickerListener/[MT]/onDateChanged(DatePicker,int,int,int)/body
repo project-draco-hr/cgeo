@@ -1,6 +1,4 @@
 {
-  if (parent != null) {
-    date.set(year,month,day);
-    parent.setDate(date);
-  }
+  date.set(year,month,day);
+  ((DateDialogParent)getActivity()).setDate(date);
 }

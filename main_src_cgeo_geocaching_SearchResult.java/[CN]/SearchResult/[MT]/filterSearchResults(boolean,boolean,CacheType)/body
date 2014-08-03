@@ -1,11 +1,11 @@
 {
   SearchResult result=new SearchResult(this);
   result.geocodes.clear();
-  final ArrayList<Geocache> includedCaches=new ArrayList<Geocache>();
+  final ArrayList<Geocache> includedCaches=new ArrayList<>();
   final Set<Geocache> caches=DataStore.loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
   int excluded=0;
   for (  Geocache cache : caches) {
-    final boolean excludeCache=(excludeDisabled && cache.isDisabled()) || (excludeMine && (cache.isOwner() || cache.isFound())) || (!cacheType.contains(cache));
+    final boolean excludeCache=(excludeDisabled && (cache.isDisabled() || cache.isArchived())) || (excludeMine && (cache.isOwner() || cache.isFound())) || (!cacheType.contains(cache));
     if (excludeCache) {
       excluded++;
     }

@@ -3,15 +3,7 @@
   if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
     gp=new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
   }
-  CoordinatesInputDialog coordsDialog=new CoordinatesInputDialog(NavigateAnyPointActivity.this,null,gp,app.currentGeo());
+  final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(null,gp,app.currentGeo());
   coordsDialog.setCancelable(true);
-  coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate(){
-    @Override public void update(    Geopoint gp){
-      latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-      lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-      changed=true;
-    }
-  }
-);
-  coordsDialog.show();
+  coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
 }

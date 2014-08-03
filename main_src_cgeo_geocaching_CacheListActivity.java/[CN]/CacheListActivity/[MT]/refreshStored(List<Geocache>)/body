@@ -7,20 +7,25 @@
     showToast(getString(R.string.err_server));
     return;
   }
-  if (Settings.getChooseList() && type != CacheListType.OFFLINE) {
+  if (Settings.getChooseList() && (type != CacheListType.OFFLINE && type != CacheListType.HISTORY)) {
     new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
       @Override public void call(      final Integer selectedListId){
-        refreshStored(caches,selectedListId);
+        for (        final Geocache geocache : caches) {
+          geocache.setListId(selectedListId);
+        }
+        refreshStoredInternal(caches);
       }
     }
 ,true,StoredList.TEMPORARY_LIST_ID,newListName);
   }
  else {
     if (type != CacheListType.OFFLINE) {
-      refreshStored(caches,StoredList.STANDARD_LIST_ID);
+      for (      final Geocache geocache : caches) {
+        if (geocache.getListId() == StoredList.TEMPORARY_LIST_ID) {
+          geocache.setListId(StoredList.STANDARD_LIST_ID);
+        }
+      }
     }
- else {
-      refreshStored(caches,this.listId);
-    }
+    refreshStoredInternal(caches);
   }
 }

@@ -1,6 +1,6 @@
 {
-  AlertDialog.Builder builder=new AlertDialog.Builder(context);
-  AlertDialog dialog=builder.setTitle(title).setCancelable(true).setMessage(msg).setPositiveButton(positiveButton,okayListener).setNegativeButton(android.R.string.cancel,null).create();
+  final AlertDialog.Builder builder=new AlertDialog.Builder(context);
+  final AlertDialog dialog=builder.setTitle(title).setCancelable(true).setMessage(msg).setPositiveButton(positiveButton,okayListener).setNegativeButton(android.R.string.cancel,null).create();
   dialog.setOwnerActivity(context);
   dialog.show();
   return builder;

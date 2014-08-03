@@ -24,7 +24,7 @@
   assertThat(log.author).isEqualTo("Geoteufel");
   assertThat(log.date).isEqualTo(parseTime("2011-09-11T07:00:00Z"));
   assertThat(log.found).isEqualTo(-1);
-  assertEquals("Sehr sch??ne Runde und wir haben wieder etwas Neues ??ber Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel",log.log);
+  assertThat(log.log).isEqualTo("Sehr sch??ne Runde und wir haben wieder etwas Neues ??ber Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel");
   assertThat(log.isOwn()).isFalse();
   assertThat(log.getDisplayText()).isEqualTo(log.log);
   assertThat(log.daysSinceLog() > 700).isTrue();

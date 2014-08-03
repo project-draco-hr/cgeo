@@ -1,4 +1,6 @@
 {
-  followMyLocation=!followMyLocation;
-  switchMyLocationButton();
+  final CGeoMap map=mapRef.get();
+  if (map != null) {
+    map.onFollowMyLocationClicked();
+  }
 }

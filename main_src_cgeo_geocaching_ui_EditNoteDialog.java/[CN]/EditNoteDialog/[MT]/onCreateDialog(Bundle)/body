@@ -1,25 +1,28 @@
 {
   final @NonNull FragmentActivity activity=getActivity();
-  View view=View.inflate(new ContextThemeWrapper(activity,R.style.dark),R.layout.fragment_edit_note,null);
-  mEditText=(EditText)view.findViewById(R.id.note);
-  String initialNote=getArguments().getString(ARGUMENT_INITIAL_NOTE);
+  final Context themedContext;
+  if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)   themedContext=new ContextThemeWrapper(activity,R.style.dark);
+ else   themedContext=activity;
+  final View view=View.inflate(themedContext,R.layout.fragment_edit_note,null);
+  mEditText=ButterKnife.findById(view,R.id.note);
+  final String initialNote=getArguments().getString(ARGUMENT_INITIAL_NOTE);
   if (initialNote != null) {
     mEditText.setText(initialNote);
     Dialogs.moveCursorToEnd(mEditText);
     getArguments().remove(ARGUMENT_INITIAL_NOTE);
   }
-  AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+  final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
   builder.setTitle(R.string.cache_personal_note);
   builder.setView(view);
   builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int whichButton){
+    @Override public void onClick(    final DialogInterface dialog,    final int whichButton){
       listener.onFinishEditNoteDialog(mEditText.getText().toString());
       dialog.dismiss();
     }
   }
 );
   builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int whichButton){
+    @Override public void onClick(    final DialogInterface dialog,    final int whichButton){
       dialog.dismiss();
     }
   }

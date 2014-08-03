@@ -2,26 +2,30 @@
   if (CancellableHandler.isCancelled(handler)) {
     return;
   }
+  final Observable<LogEntry> logs=getLogsFromDetails(page).subscribeOn(RxUtils.computationScheduler);
+  Observable<LogEntry> specialLogs;
   if (Settings.isFriendLogsWanted()) {
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
-    final List<LogEntry> friendLogs=getLogsFromDetails(page,true);
-    if (friendLogs != null && !friendLogs.isEmpty()) {
-      ArrayList<LogEntry> mergedLogs=new ArrayList<LogEntry>(cache.getLogs());
-      for (      final LogEntry log : friendLogs) {
-        if (mergedLogs.contains(log)) {
-          mergedLogs.get(mergedLogs.indexOf(log)).friend=true;
-        }
+    specialLogs=Observable.merge(getSpecialLogs(page,SpecialLogs.FRIENDS),getSpecialLogs(page,SpecialLogs.OWN));
+  }
  else {
-          mergedLogs.add(log);
-        }
-      }
-      DataStore.saveLogsWithoutTransaction(cache.getGeocode(),mergedLogs);
+    CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
+    specialLogs=Observable.empty();
+  }
+  final Observable<List<LogEntry>> mergedLogs=Observable.zip(logs.toList(),specialLogs.toList(),new Func2<List<LogEntry>,List<LogEntry>,List<LogEntry>>(){
+    @Override public List<LogEntry> call(    final List<LogEntry> logEntries,    final List<LogEntry> specialLogEntries){
+      mergeFriendsLogs(logEntries,specialLogEntries);
+      return logEntries;
     }
   }
-  if (Settings.isRatingWanted()) {
-    if (CancellableHandler.isCancelled(handler)) {
-      return;
+).cache();
+  mergedLogs.subscribe(new Action1<List<LogEntry>>(){
+    @Override public void call(    final List<LogEntry> logEntries){
+      DataStore.saveLogsWithoutTransaction(cache.getGeocode(),logEntries);
     }
+  }
+);
+  if (Settings.isRatingWanted() && !CancellableHandler.isCancelled(handler)) {
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_gcvote);
     final GCVoteRating rating=GCVote.getRating(cache.getGuid(),cache.getGeocode());
     if (rating != null) {
@@ -30,4 +34,5 @@
       cache.setMyVote(rating.getMyVote());
     }
   }
+  mergedLogs.toBlocking().last();
 }

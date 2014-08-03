@@ -5,7 +5,7 @@
     final Parameters params=new Parameters("i",geocodeList,"_",String.valueOf(System.currentTimeMillis()));
     params.add("app","cgeo");
     final String referer=GCConstants.URL_LIVE_MAP_DETAILS;
-    final String data=StringUtils.defaultString(Tile.requestMapInfo(referer,params,referer));
+    final String data=StringUtils.defaultString(Tile.requestMapInfo(referer,params,referer).toBlocking().first());
     final JSONObject json=new JSONObject(data);
     final String status=json.getString("status");
     if (StringUtils.isBlank(status)) {
@@ -18,7 +18,7 @@
     if (dataArray == null) {
       throw new JSONException("No data inside JSON");
     }
-    final ArrayList<Geocache> caches=new ArrayList<Geocache>();
+    final ArrayList<Geocache> caches=new ArrayList<>();
     for (int j=0; j < dataArray.length(); j++) {
       final Geocache cache=new Geocache();
       JSONObject dataObject=dataArray.getJSONObject(j);

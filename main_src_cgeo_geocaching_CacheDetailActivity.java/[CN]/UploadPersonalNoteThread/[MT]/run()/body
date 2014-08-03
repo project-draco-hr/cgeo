@@ -1,11 +1,11 @@
 {
-  IConnector con=ConnectorFactory.getConnector(cache);
+  final IConnector con=ConnectorFactory.getConnector(cache);
   if (con.supportsPersonalNote()) {
     con.uploadPersonalNote(cache);
   }
-  Message msg=Message.obtain();
-  Bundle bundle=new Bundle();
-  bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,res.getString(R.string.cache_personal_note_upload_done));
+  final Message msg=Message.obtain();
+  final Bundle bundle=new Bundle();
+  bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,CgeoApplication.getInstance().getString(R.string.cache_personal_note_upload_done));
   msg.setData(bundle);
   handler.sendMessage(msg);
 }

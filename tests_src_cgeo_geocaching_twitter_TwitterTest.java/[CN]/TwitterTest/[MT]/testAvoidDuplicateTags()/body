@@ -5,7 +5,7 @@
     Geocache cache=new Geocache();
     cache.setGeocode("GC1234");
     cache.setName("TwitterTest");
-    assertEquals("TwitterTest #cgeo #mytag #geocaching",Twitter.getStatusMessage(cache,null));
+    assertThat(Twitter.getStatusMessage(cache,null)).isEqualTo("TwitterTest #cgeo #mytag #geocaching");
   }
   finally {
     TestSettings.setCacheTwitterMessage(oldMessage);

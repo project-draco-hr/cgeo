@@ -1,4 +1,7 @@
 {
+  if (isFinishing()) {
+    return;
+  }
   if (search == null) {
     return;
   }
@@ -10,15 +13,16 @@
     return;
   }
   cache.setChangeNotificationHandler(new ChangeNotificationHandler(this,progress));
-  if (StringUtils.isNotBlank(cache.getName())) {
-    setTitle(cache.getName() + " (" + cache.getGeocode()+ ')');
+  updateTitleBar(null);
+  initializeAndroidBeam(new ActivitySharingInterface(){
+    @Override public String getUri(){
+      return cache.getCgeoUrl();
+    }
   }
- else {
-    setTitle(cache.getGeocode());
-  }
-  ((TextView)findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId),null,null,null);
+);
   imagesList=null;
   reinitializeViewPager();
   invalidateOptionsMenuCompatible();
   progress.dismiss();
+  Settings.addCacheToHistory(cache.getGeocode());
 }

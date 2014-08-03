@@ -2,11 +2,6 @@
   final Button typeButton=(Button)findViewById(R.id.type);
   typeSelected=type;
   typeButton.setText(typeSelected.getL10n());
-  if (LogType.FOUND_IT == type && !tbChanged) {
-  }
- else   if (LogType.FOUND_IT != type && !tbChanged) {
-  }
   updateTweetBox(type);
   updateLogPasswordBox(type);
-  updatePostButtonText();
 }

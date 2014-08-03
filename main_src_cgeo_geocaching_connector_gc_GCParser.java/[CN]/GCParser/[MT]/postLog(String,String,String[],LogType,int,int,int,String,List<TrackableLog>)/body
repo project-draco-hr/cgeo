@@ -1,11 +1,11 @@
 {
   if (GCLogin.isEmpty(viewstates)) {
     Log.e("GCParser.postLog: No viewstate given");
-    return new ImmutablePair<StatusCode,String>(StatusCode.LOG_POST_ERROR,"");
+    return new ImmutablePair<>(StatusCode.LOG_POST_ERROR,"");
   }
   if (StringUtils.isBlank(log)) {
     Log.e("GCParser.postLog: No log text given");
-    return new ImmutablePair<StatusCode,String>(StatusCode.NO_LOG_TEXT,"");
+    return new ImmutablePair<>(StatusCode.NO_LOG_TEXT,"");
   }
   final String logInfo=log.replace("\n","\r\n").trim();
   Log.i("Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: "+ (trackables != null ? trackables.size() : "0"));
@@ -23,10 +23,11 @@
     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions",hdnSelected.toString(),"ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter","");
   }
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
-  String page=GCLogin.getInstance().postRequestLogged(uri,params);
-  if (!GCLogin.getInstance().getLoginStatus(page)) {
+  final GCLogin gcLogin=GCLogin.getInstance();
+  String page=gcLogin.postRequestLogged(uri,params);
+  if (!gcLogin.getLoginStatus(page)) {
     Log.e("GCParser.postLog: Cannot log in geocaching");
-    return new ImmutablePair<StatusCode,String>(StatusCode.NOT_LOGGED_IN,"");
+    return new ImmutablePair<>(StatusCode.NOT_LOGGED_IN,"");
   }
   final MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_MAINTENANCE,page);
   try {
@@ -34,7 +35,7 @@
       final String[] viewstatesConfirm=GCLogin.getViewstates(page);
       if (GCLogin.isEmpty(viewstatesConfirm)) {
         Log.e("GCParser.postLog: No viewstate for confirm log");
-        return new ImmutablePair<StatusCode,String>(StatusCode.LOG_POST_ERROR,"");
+        return new ImmutablePair<>(StatusCode.LOG_POST_ERROR,"");
       }
       params.clear();
       GCLogin.putViewstates(params,viewstatesConfirm);
@@ -75,17 +76,17 @@
       if (geocode != null) {
         DataStore.saveVisitDate(geocode);
       }
-      GCLogin.getInstance().getLoginStatus(page);
-      if (GCLogin.getInstance().getActualCachesFound() >= 0) {
-        GCLogin.getInstance().setActualCachesFound(GCLogin.getInstance().getActualCachesFound() + 1);
+      gcLogin.getLoginStatus(page);
+      if (gcLogin.getActualCachesFound() >= 0) {
+        gcLogin.setActualCachesFound(gcLogin.getActualCachesFound() + 1);
       }
       final String logID=TextUtils.getMatch(page,GCConstants.PATTERN_LOG_IMAGE_UPLOAD,"");
-      return new ImmutablePair<StatusCode,String>(StatusCode.NO_ERROR,logID);
+      return new ImmutablePair<>(StatusCode.NO_ERROR,logID);
     }
   }
  catch (  final Exception e) {
     Log.e("GCParser.postLog.check",e);
   }
   Log.e("GCParser.postLog: Failed to post log because of unknown error");
-  return new ImmutablePair<StatusCode,String>(StatusCode.LOG_POST_ERROR,"");
+  return new ImmutablePair<>(StatusCode.LOG_POST_ERROR,"");
 }

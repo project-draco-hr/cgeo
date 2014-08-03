@@ -1,8 +1,8 @@
 {
-  Preference pref=getPreference(key);
+  final Preference pref=getPreference(key);
   if (pref == null) {
     return;
   }
-  String value=PreferenceManager.getDefaultSharedPreferences(pref.getContext()).getString(pref.getKey(),"");
+  final String value=PreferenceManager.getDefaultSharedPreferences(pref.getContext()).getString(pref.getKey(),"");
   bindSummaryToValue(pref,value);
 }

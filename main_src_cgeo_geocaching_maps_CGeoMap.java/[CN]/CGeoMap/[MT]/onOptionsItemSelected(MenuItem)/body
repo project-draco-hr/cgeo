@@ -1,9 +1,12 @@
 {
   final int id=item.getItemId();
 switch (id) {
+case android.R.id.home:
+    ActivityMixin.navigateUp(activity);
+  return true;
 case R.id.menu_trail_mode:
-    Settings.setMapTrail(!Settings.isMapTrail());
-  mapView.repaintRequired(overlayPositionAndScale);
+Settings.setMapTrail(!Settings.isMapTrail());
+mapView.repaintRequired(overlayPositionAndScale);
 ActivityMixin.invalidateOptionsMenu(activity);
 return true;
 case R.id.menu_map_live:
@@ -19,7 +22,7 @@ return true;
 case R.id.menu_store_caches:
 if (!isLoading()) {
 final Set<String> geocodesInViewport=getGeocodesForCachesInViewport();
-final List<String> geocodes=new ArrayList<String>();
+final List<String> geocodes=new ArrayList<>();
 for (final String geocode : geocodesInViewport) {
 if (!DataStore.isOffline(geocode,null)) {
 geocodes.add(geocode);
@@ -45,9 +48,6 @@ storeCaches(geocodes,StoredList.STANDARD_LIST_ID);
 }
 return true;
 case R.id.menu_circle_mode:
-if (overlayCaches == null) {
-return false;
-}
 overlayCaches.switchCircles();
 mapView.repaintRequired(overlayCaches);
 ActivityMixin.invalidateOptionsMenu(activity);

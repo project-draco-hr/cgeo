@@ -1,12 +1,12 @@
 {
   if (cache.isOffline()) {
-    EditNoteDialogListener editNoteDialogListener=new EditNoteDialogListener(){
+    final EditNoteDialogListener editNoteDialogListener=new EditNoteDialogListener(){
       @Override public void onFinishEditNoteDialog(      final String note){
         cache.setPersonalNote(note);
         cache.parseWaypointsFromNote();
-        TextView personalNoteView=(TextView)activity.findViewById(R.id.personalnote);
+        final TextView personalNoteView=ButterKnife.findById(activity,R.id.personalnote);
         setPersonalNote(personalNoteView,note);
-        DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+        DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
         activity.notifyDataSetChanged();
       }
     }

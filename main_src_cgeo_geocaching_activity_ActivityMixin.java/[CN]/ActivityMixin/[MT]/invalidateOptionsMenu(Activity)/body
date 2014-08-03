@@ -1,3 +1,8 @@
 {
-  Compatibility.invalidateOptionsMenu(activity);
+  if (activity instanceof ActionBarActivity) {
+    ((ActionBarActivity)activity).supportInvalidateOptionsMenu();
+  }
+ else {
+    ActivityCompat.invalidateOptionsMenu(activity);
+  }
 }

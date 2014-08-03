@@ -1,0 +1,12 @@
+{
+switch (fileType) {
+case ZIP:
+    return new ImportGpxZipAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler);
+case GPX:
+  return new ImportGpxAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler);
+case LOC:
+return new ImportLocAttachmentThread(uri,contentResolver,listId,importStepHandler,progressHandler);
+default :
+return null;
+}
+}

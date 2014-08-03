@@ -2,7 +2,7 @@
   final String username=getString(connector.getUsernamePreferenceKey(),null);
   final String password=getString(connector.getPasswordPreferenceKey(),null);
   if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-    return new ImmutablePair<String,String>(StringUtils.EMPTY,StringUtils.EMPTY);
+    return new ImmutablePair<>(StringUtils.EMPTY,StringUtils.EMPTY);
   }
-  return new ImmutablePair<String,String>(username,password);
+  return new ImmutablePair<>(username,password);
 }

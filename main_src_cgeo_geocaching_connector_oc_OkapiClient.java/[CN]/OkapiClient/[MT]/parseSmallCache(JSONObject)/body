@@ -3,7 +3,7 @@
   cache.setReliableLatLon(true);
   try {
     parseCoreCache(response,cache);
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_CACHE));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.CACHE));
   }
  catch (  final JSONException e) {
     Log.e("OkapiClient.parseSmallCache",e);

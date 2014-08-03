@@ -1,15 +1,20 @@
 {
-  if (super.onOptionsItemSelected(item)) {
-    return true;
-  }
-  final int id=item.getItemId();
-  if (id >= 10 && id <= 19) {
-    rating=(id - 9) / 2.0f;
-    if (!GCVote.isValidRating(rating)) {
-      rating=GCVote.NO_RATING;
-    }
-    updatePostButtonText();
-    return true;
-  }
-  return false;
+switch (item.getItemId()) {
+case R.id.menu_send:
+    sendLog();
+  return true;
+case R.id.menu_image:
+selectImage();
+return true;
+case R.id.save:
+saveLog(true);
+finish();
+return true;
+case R.id.clear:
+clearLog();
+return true;
+default :
+break;
+}
+return super.onOptionsItemSelected(item);
 }

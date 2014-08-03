@@ -3,9 +3,9 @@
     return;
   }
   final Page page=pageOrder.get(position);
-  PageViewCreator creator=viewCreators.get(page);
+  final PageViewCreator creator=viewCreators.get(page);
   if (creator != null) {
-    @Nullable Bundle state=creator.getViewState();
+    @Nullable final Bundle state=creator.getViewState();
     if (state != null) {
       viewStates.put(page,state);
     }

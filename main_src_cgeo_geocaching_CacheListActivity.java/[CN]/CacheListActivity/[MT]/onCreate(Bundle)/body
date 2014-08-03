@@ -17,17 +17,12 @@
       coords=Geopoint.ZERO;
     }
   }
-  final View titleBar=findViewById(R.id.actionbar_title);
-  titleBar.setClickable(true);
-  titleBar.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      selectList();
-    }
-  }
-);
   setTitle(title);
   initAdapter();
   prepareFilterBar();
+  if (type.canSwitch) {
+    initActionBarSpinner();
+  }
   currentLoader=(AbstractSearchLoader)getSupportLoaderManager().initLoader(type.getLoaderId(),extras,this);
   if (CollectionUtils.isNotEmpty(cacheList)) {
     if (currentLoader != null && currentLoader.isStarted()) {

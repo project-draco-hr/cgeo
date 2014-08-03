@@ -1,13 +1,13 @@
 {
   init();
   if (id >= customListIdOffset) {
-    Cursor cursor=database.query(dbTableLists,new String[]{"_id","title"},"_id = ? ",new String[]{String.valueOf(id - customListIdOffset)},null,null,null);
-    ArrayList<StoredList> lists=getListsFromCursor(cursor);
+    final Cursor cursor=database.query(dbTableLists,new String[]{"_id","title"},"_id = ? ",new String[]{String.valueOf(id - customListIdOffset)},null,null,null);
+    final ArrayList<StoredList> lists=getListsFromCursor(cursor);
     if (!lists.isEmpty()) {
       return lists.get(0);
     }
   }
-  Resources res=CgeoApplication.getInstance().getResources();
+  final Resources res=CgeoApplication.getInstance().getResources();
   if (id == PseudoList.ALL_LIST.id) {
     return new StoredList(PseudoList.ALL_LIST.id,res.getString(R.string.list_all_lists),getAllCachesCount());
   }

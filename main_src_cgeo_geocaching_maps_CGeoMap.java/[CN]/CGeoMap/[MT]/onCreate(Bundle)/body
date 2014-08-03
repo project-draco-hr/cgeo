@@ -3,8 +3,8 @@
   res=this.getResources();
   activity=this.getActivity();
   app=(CgeoApplication)activity.getApplication();
-  int countBubbleCnt=DataStore.getAllCachesCount();
-  caches=new LeastRecentlyUsedSet<Geocache>(MAX_CACHES + countBubbleCnt);
+  final int countBubbleCnt=DataStore.getAllCachesCount();
+  caches=new LeastRecentlyUsedSet<>(MAX_CACHES + countBubbleCnt);
   final MapProvider mapProvider=Settings.getMapProvider();
   mapItemFactory=mapProvider.getMapItemFactory();
   final Bundle extras=activity.getIntent().getExtras();
@@ -41,23 +41,22 @@
   noMapTokenShowed=false;
   ActivityMixin.keepScreenOn(activity,true);
   ActivityMixin.setTheme(activity);
+  if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+    activity.getActionBar().setDisplayHomeAsUpEnabled(true);
+  }
   activity.setContentView(mapProvider.getMapLayoutId());
-  ActivityMixin.setTitle(activity,res.getString(R.string.map_map));
+  setTitle(res.getString(R.string.map_map));
   mapView=(MapViewImpl)activity.findViewById(mapProvider.getMapViewId());
   mapView.setMapSource();
   mapView.setBuiltInZoomControls(true);
   mapView.displayZoomControls(true);
   mapView.preLoad();
-  mapView.setOnDragListener(this);
+  mapView.setOnDragListener(new MapDragListener(this));
   mapView.clearOverlays();
-  if (overlayCaches == null) {
-    overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker));
-  }
-  if (overlayPositionAndScale == null) {
-    overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay(activity);
-    if (trailHistory != null) {
-      overlayPositionAndScale.setHistory(trailHistory);
-    }
+  overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker));
+  overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay();
+  if (trailHistory != null) {
+    overlayPositionAndScale.setHistory(trailHistory);
   }
   mapView.repaintRequired(null);
   setZoom(Settings.getMapZoom());
@@ -74,12 +73,10 @@
   if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
     centerMap(geocodeIntent,searchIntent,coordsIntent,mapStateIntent);
   }
-  myLocSwitch=(ImageSwitcher)activity.findViewById(R.id.my_position);
-  myLocSwitch.setFactory(this);
-  myLocSwitch.setInAnimation(activity,android.R.anim.fade_in);
-  myLocSwitch.setOutAnimation(activity,android.R.anim.fade_out);
-  myLocSwitch.setOnClickListener(new MyLocationListener());
-  switchMyLocationButton();
+  final CheckBox locSwitch=ButterKnife.findById(activity,R.id.my_position);
+  if (locSwitch != null) {
+    initMyLocationSwitchButton(locSwitch);
+  }
   prepareFilterBar();
   if (!app.isLiveMapHintShownInThisSession() && !Settings.getHideLiveMapHint() && Settings.getLiveMapHintShowCount() <= 3) {
     LiveMapInfoDialogBuilder.create(activity).show();

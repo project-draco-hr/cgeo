@@ -6,6 +6,6 @@
   cache=DataStore.loadCache(geoCode,LoadFlags.LOAD_ALL_DB_ONLY);
   assertThat(cache).isNotNull();
   assertThat(cache.getWaypoints()).hasSize(3);
-  cache.refreshSynchronous(cache.getListId(),null);
+  cache.refreshSynchronous(null);
   assertThat(cache.getWaypoints()).hasSize(3);
 }

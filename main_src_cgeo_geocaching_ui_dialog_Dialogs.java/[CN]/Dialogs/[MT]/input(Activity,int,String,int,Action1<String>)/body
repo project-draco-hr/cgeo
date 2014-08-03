@@ -1,5 +1,11 @@
 {
-  final Context themedContext=new ContextThemeWrapper(context,R.style.dark);
+  final Context themedContext;
+  if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
+    themedContext=new ContextThemeWrapper(context,R.style.dark);
+  }
+ else {
+    themedContext=context;
+  }
   final EditText input=new EditText(themedContext);
   input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
   input.setText(defaultValue);
@@ -7,24 +13,24 @@
   builder.setTitle(title);
   builder.setView(input);
   builder.setPositiveButton(buttonTitle,new OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
       okayListener.call(input.getText().toString());
     }
   }
 );
   builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int whichButton){
+    @Override public void onClick(    final DialogInterface dialog,    final int whichButton){
       dialog.dismiss();
     }
   }
 );
   final AlertDialog dialog=builder.create();
   input.addTextChangedListener(new TextWatcher(){
-    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+    @Override public void onTextChanged(    final CharSequence s,    final int start,    final int before,    final int count){
     }
-    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    @Override public void beforeTextChanged(    final CharSequence s,    final int start,    final int count,    final int after){
     }
-    @Override public void afterTextChanged(    Editable editable){
+    @Override public void afterTextChanged(    final Editable editable){
       enableDialogButtonIfNotEmpty(dialog,editable.toString());
     }
   }

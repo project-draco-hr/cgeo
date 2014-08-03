@@ -1,0 +1,19 @@
+{
+  final List<String> infos=new ArrayList<>(3);
+  WaypointType waypointType=waypoint.getWaypointType();
+  if (waypointType != WaypointType.OWN && waypointType != null) {
+    infos.add(waypointType.getL10n());
+  }
+  if (Waypoint.PREFIX_OWN.equalsIgnoreCase(waypoint.getPrefix())) {
+    infos.add(CgeoApplication.getInstance().getString(R.string.waypoint_custom));
+  }
+ else {
+    if (StringUtils.isNotBlank(waypoint.getPrefix())) {
+      infos.add(waypoint.getPrefix());
+    }
+    if (StringUtils.isNotBlank(waypoint.getLookup())) {
+      infos.add(waypoint.getLookup());
+    }
+  }
+  return StringUtils.join(infos,Formatter.SEPARATOR);
+}

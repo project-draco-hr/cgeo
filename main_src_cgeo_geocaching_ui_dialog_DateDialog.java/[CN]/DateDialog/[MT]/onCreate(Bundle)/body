@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  setContentView(R.layout.date);
-  final DatePicker picker=(DatePicker)findViewById(R.id.picker);
-  picker.init(date.get(Calendar.YEAR),date.get(Calendar.MONTH),date.get(Calendar.DATE),new DatePickerListener());
+  setStyle(DialogFragment.STYLE_NO_TITLE,0);
+  final Bundle args=getArguments();
+  date=(Calendar)args.getSerializable("date");
 }

@@ -1,0 +1,53 @@
+{
+  try {
+    showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
+    loadThreadRun=System.currentTimeMillis();
+    SearchResult searchResult;
+    if (mapMode == MapMode.LIVE) {
+      searchResult=isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(),Settings.getCacheType()));
+    }
+ else {
+      searchResult=searchIntent != null ? new SearchResult(searchIntent) : new SearchResult();
+      if (geocodeIntent != null) {
+        searchResult.addGeocode(geocodeIntent);
+      }
+    }
+    if (isLiveEnabled) {
+      searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport(),Settings.getCacheType()));
+    }
+    downloaded=true;
+    final Set<Geocache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+    caches.removeAll(cachesFromSearchResult);
+    caches.addAll(cachesFromSearchResult);
+    final boolean excludeMine=Settings.isExcludeMyCaches();
+    final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
+    if (mapMode == MapMode.LIVE) {
+      CGeoMap.filter(caches);
+    }
+    countVisibleCaches();
+    if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
+      waypoints.clear();
+      if (isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
+        final CacheType type=Settings.getCacheType();
+        final Set<Waypoint> waypointsInViewport=DataStore.loadWaypoints(mapView.getViewport(),excludeMine,excludeDisabled,type);
+        waypoints.addAll(waypointsInViewport);
+      }
+ else {
+        for (        final Geocache c : caches.getAsList()) {
+          waypoints.addAll(c.getWaypoints());
+        }
+      }
+    }
+ else {
+      waypoints.clear();
+    }
+    displayExecutor.execute(new DisplayRunnable(this));
+    if (isLiveEnabled) {
+      downloadExecutor.execute(new DownloadRunnable(this));
+    }
+    lastSearchResult=searchResult;
+  }
+  finally {
+    showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
+  }
+}

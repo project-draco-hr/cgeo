@@ -1,19 +1,22 @@
 {
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
-  final View layout=View.inflate(new ContextThemeWrapper(activity,R.style.dark),R.layout.gpx_export_dialog,null);
+  final Context themedContext;
+  if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)   themedContext=new ContextThemeWrapper(activity,R.style.dark);
+ else   themedContext=activity;
+  final View layout=View.inflate(themedContext,R.layout.gpx_export_dialog,null);
   builder.setView(layout);
-  final TextView text=(TextView)layout.findViewById(R.id.info);
+  final TextView text=ButterKnife.findById(layout,R.id.info);
   text.setText(getString(R.string.export_gpx_info,Settings.getGpxExportDir()));
-  final CheckBox shareOption=(CheckBox)layout.findViewById(R.id.share);
+  final CheckBox shareOption=ButterKnife.findById(layout,R.id.share);
   shareOption.setChecked(Settings.getShareAfterExport());
   shareOption.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       Settings.setShareAfterExport(shareOption.isChecked());
     }
   }
 );
   builder.setPositiveButton(R.string.export,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
       dialog.dismiss();
       new ExportTask(activity).execute(geocodes);
     }

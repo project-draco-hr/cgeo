@@ -1,8 +1,8 @@
 {
-  final RelativeLayout layout=(RelativeLayout)activity.getLayoutInflater().inflate(R.layout.cache_information_item,null);
-  final TextView nameView=(TextView)layout.findViewById(R.id.name);
-  lastValueView=(TextView)layout.findViewById(R.id.value);
-  final LinearLayout layoutStars=(LinearLayout)layout.findViewById(R.id.stars);
+  final RelativeLayout layout=(RelativeLayout)activity.getLayoutInflater().inflate(R.layout.cache_information_item,null,false);
+  final TextView nameView=ButterKnife.findById(layout,R.id.name);
+  lastValueView=ButterKnife.findById(layout,R.id.value);
+  final LinearLayout layoutStars=ButterKnife.findById(layout,R.id.stars);
   nameView.setText(activity.getResources().getString(nameId));
   lastValueView.setText(String.format("%.1f",value) + ' ' + activity.getResources().getString(R.string.cache_rating_of)+ " "+ String.format("%d",max));
   createStarImages(layoutStars,value,max);

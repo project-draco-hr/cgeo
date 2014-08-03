@@ -5,7 +5,7 @@
       final JSONObject logResponse=logsJSON.getJSONObject(i);
       final LogEntry log=new LogEntry(parseUser(logResponse.getJSONObject(LOG_USER)),parseDate(logResponse.getString(LOG_DATE)).getTime(),parseLogType(logResponse.getString(LOG_TYPE)),logResponse.getString(LOG_COMMENT).trim());
       if (result == null) {
-        result=new ArrayList<LogEntry>();
+        result=new ArrayList<>();
       }
       result.add(log);
     }

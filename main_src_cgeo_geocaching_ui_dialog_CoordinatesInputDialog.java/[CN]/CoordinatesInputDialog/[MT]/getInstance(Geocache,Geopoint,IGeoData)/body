@@ -1,0 +1,21 @@
+{
+  final Bundle args=new Bundle();
+  if (gp != null) {
+    args.putParcelable(GEOPOINT_ARG,gp);
+  }
+ else   if (geo != null && geo.getCoords() != null) {
+    args.putParcelable(GEOPOINT_ARG,geo.getCoords());
+  }
+ else {
+    args.putParcelable(GEOPOINT_ARG,Geopoint.ZERO);
+  }
+  if (geo != null) {
+    args.putParcelable(GEOPOINT_INTIAL_ARG,geo.getCoords());
+  }
+  if (cache != null) {
+    args.putParcelable(CACHECOORDS_ARG,cache.getCoords());
+  }
+  final CoordinatesInputDialog cid=new CoordinatesInputDialog();
+  cid.setArguments(args);
+  return cid;
+}

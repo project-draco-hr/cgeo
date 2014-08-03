@@ -8,7 +8,7 @@
   }
   params.add("langpref",getPreferredLanguage());
   if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-    ImmutablePair<String,String> tokens=Settings.getTokenPair(connector.getTokenPublicPrefKeyId(),connector.getTokenSecretPrefKeyId());
+    final ImmutablePair<String,String> tokens=Settings.getTokenPair(connector.getTokenPublicPrefKeyId(),connector.getTokenSecretPrefKeyId());
     OAuth.signOAuth(host,service.methodName,"GET",false,params,tokens.left,tokens.right,connector.getCK(),connector.getCS());
   }
  else {

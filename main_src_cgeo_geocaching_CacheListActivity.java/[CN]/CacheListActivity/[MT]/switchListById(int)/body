@@ -7,20 +7,24 @@
     finish();
     return;
   }
-  final StoredList list=DataStore.getList(id);
-  if (list == null) {
-    return;
+  if (id == PseudoList.ALL_LIST.id) {
+    listId=id;
+    title=res.getString(R.string.list_all_lists);
   }
-  listId=list.id;
-  title=list.title;
+ else {
+    final StoredList list=DataStore.getList(id);
+    if (list == null) {
+      return;
+    }
+    listId=list.id;
+    title=list.title;
+  }
+  type=CacheListType.OFFLINE;
   Settings.saveLastList(listId);
+  initAdapter();
   showProgress(true);
   showFooterLoadingCaches();
   DataStore.moveToList(adapter.getCheckedCaches(),listId);
-  currentLoader=(OfflineGeocacheListLoader)getSupportLoaderManager().initLoader(CacheListType.OFFLINE.getLoaderId(),new Bundle(),this);
-  currentLoader.reset();
-  ((OfflineGeocacheListLoader)currentLoader).setListId(listId);
-  ((OfflineGeocacheListLoader)currentLoader).setSearchCenter(coords);
-  currentLoader.startLoading();
+  currentLoader=(OfflineGeocacheListLoader)getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(),OfflineGeocacheListLoader.getBundleForList(listId),this);
   invalidateOptionsMenuCompatible();
 }

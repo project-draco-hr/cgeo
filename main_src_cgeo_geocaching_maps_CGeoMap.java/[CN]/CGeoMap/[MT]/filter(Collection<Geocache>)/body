@@ -1,9 +1,9 @@
 {
-  boolean excludeMine=Settings.isExcludeMyCaches();
-  boolean excludeDisabled=Settings.isExcludeDisabledCaches();
-  List<Geocache> removeList=new ArrayList<Geocache>();
-  for (  Geocache cache : caches) {
-    if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled())) {
+  final boolean excludeMine=Settings.isExcludeMyCaches();
+  final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
+  final List<Geocache> removeList=new ArrayList<>();
+  for (  final Geocache cache : caches) {
+    if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled())|| (excludeDisabled && cache.isArchived())) {
       removeList.add(cache);
     }
   }

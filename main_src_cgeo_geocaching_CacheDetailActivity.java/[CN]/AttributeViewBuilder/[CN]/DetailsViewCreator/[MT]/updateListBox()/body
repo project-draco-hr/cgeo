@@ -1,0 +1,17 @@
+{
+  final View box=view.findViewById(R.id.list_box);
+  if (cache.isOffline()) {
+    box.setVisibility(View.VISIBLE);
+    final TextView text=ButterKnife.findById(view,R.id.list_text);
+    final StoredList list=DataStore.getList(cache.getListId());
+    if (list != null) {
+      text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
+    }
+ else {
+      text.setText(R.string.cache_list_unknown);
+    }
+  }
+ else {
+    box.setVisibility(View.GONE);
+  }
+}

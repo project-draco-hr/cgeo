@@ -1,0 +1,17 @@
+{
+  final Builder builder=new AlertDialog.Builder(context).setMessage(message).setCancelable(true).setPositiveButton(getString(android.R.string.ok),null);
+  if (title != null) {
+    builder.setTitle(title);
+  }
+  builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
+  final AlertDialog dialog=builder.create();
+  if (iconObservable != null) {
+    iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Drawable>(){
+      @Override public void call(      final Drawable drawable){
+        dialog.setIcon(drawable);
+      }
+    }
+);
+  }
+  dialog.show();
+}

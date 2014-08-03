@@ -1,4 +1,4 @@
 {
-  assertEquals("Bretagne, France",parseLocation("    <span id=\"ctl00_ContentBody_Location\">In Bretagne, France</span><br />"));
-  assertEquals("California, United States",parseLocation("<span id=\"ctl00_ContentBody_Location\">In <a href=\"/map/beta/default.aspx?lat=37.4354&lng=-122.07745&z=16\" title=\"View Map\">California, United States</a></span><br />"));
+  assertThat(parseLocation("    <span id=\"ctl00_ContentBody_Location\">In Bretagne, France</span><br />")).isEqualTo("Bretagne, France");
+  assertThat(parseLocation("<span id=\"ctl00_ContentBody_Location\">In <a href=\"/map/beta/default.aspx?lat=37.4354&lng=-122.07745&z=16\" title=\"View Map\">California, United States</a></span><br />")).isEqualTo("California, United States");
 }

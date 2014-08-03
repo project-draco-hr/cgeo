@@ -40,7 +40,8 @@ return true;
  catch (final Geopoint.ParseException e) {
 }
 if (signalError) {
-context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+final AbstractActivity activity=(AbstractActivity)getActivity();
+activity.showToast(activity.getResources().getString(R.string.err_parse_lat_lon));
 }
 return false;
 }

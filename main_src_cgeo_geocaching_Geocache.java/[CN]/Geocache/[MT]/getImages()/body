@@ -1,11 +1,11 @@
 {
-  final LinkedList<Image> result=new LinkedList<Image>();
+  final LinkedList<Image> result=new LinkedList<>();
   result.addAll(getSpoilers());
   addLocalSpoilersTo(result);
   for (  final LogEntry log : getLogs()) {
     result.addAll(log.getLogImages());
   }
-  final Set<String> urls=new HashSet<String>(result.size());
+  final Set<String> urls=new HashSet<>(result.size());
   for (  final Image image : result) {
     urls.add(image.getUrl());
   }

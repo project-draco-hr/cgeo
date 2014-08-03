@@ -1,0 +1,14 @@
+{
+  Intent upIntent=NavUtils.getParentActivityIntent(activity);
+  if (upIntent == null) {
+    activity.finish();
+    return true;
+  }
+  if (NavUtils.shouldUpRecreateTask(activity,upIntent)) {
+    TaskStackBuilder.create(activity).addNextIntentWithParentStack(upIntent).startActivities();
+  }
+ else {
+    NavUtils.navigateUpTo(activity,upIntent);
+  }
+  return true;
+}

@@ -12,7 +12,10 @@ case OFFLINE:
  else {
       listId=Settings.getLastList();
     }
-  if (listId <= StoredList.TEMPORARY_LIST_ID) {
+  if (listId == PseudoList.ALL_LIST.id) {
+    title=res.getString(R.string.list_all_lists);
+  }
+ else   if (listId <= StoredList.TEMPORARY_LIST_ID) {
     listId=StoredList.STANDARD_LIST_ID;
     title=res.getString(R.string.stored_caches_button);
   }
@@ -28,6 +31,7 @@ loader=new OfflineGeocacheListLoader(this.getBaseContext(),coords,listId);
 break;
 case HISTORY:
 title=res.getString(R.string.caches_history);
+listId=PseudoList.HISTORY_LIST.id;
 loader=new HistoryGeocacheListLoader(app,coords);
 break;
 case NEAREST:
@@ -87,7 +91,7 @@ title=extras.getString(Intents.EXTRA_NAME);
 loader=new PocketGeocacheListLoader(app,guid);
 break;
 }
-setTitle(title);
+updateTitle();
 showProgress(true);
 showFooterLoadingCaches();
 if (loader != null) {

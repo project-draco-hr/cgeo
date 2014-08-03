@@ -1,7 +1,8 @@
 {
-  String streamContent=readStream(stream,progressHandler).toString();
+  final String streamContent=readStream(stream,null).toString();
+  final int maxSize=streamContent.length();
   final Map<String,Geocache> coords=parseCoordinates(streamContent);
-  final List<Geocache> caches=new ArrayList<Geocache>();
+  final List<Geocache> caches=new ArrayList<>();
   for (  Entry<String,Geocache> entry : coords.entrySet()) {
     Geocache coord=entry.getValue();
     if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
@@ -16,6 +17,9 @@
     cache.setListId(listId);
     cache.setDetailed(true);
     cache.store(null);
+    if (progressHandler != null) {
+      progressHandler.sendMessage(progressHandler.obtainMessage(0,maxSize * caches.size() / coords.size(),0));
+    }
   }
   Log.i("Caches found in .loc file: " + caches.size());
   return caches;

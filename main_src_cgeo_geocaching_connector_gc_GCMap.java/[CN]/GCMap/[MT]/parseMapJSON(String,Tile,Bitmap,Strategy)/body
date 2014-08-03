@@ -1,7 +1,7 @@
 {
   final SearchResult searchResult=new SearchResult();
   try {
-    final LeastRecentlyUsedMap<String,String> nameCache=new LeastRecentlyUsedMap.LruCache<String,String>(2000);
+    final LeastRecentlyUsedMap<String,String> nameCache=new LeastRecentlyUsedMap.LruCache<>(2000);
     if (StringUtils.isEmpty(data)) {
       throw new JSONException("No page given");
     }
@@ -18,8 +18,8 @@
     if (dataObject == null) {
       throw new JSONException("No data inside JSON");
     }
-    Map<String,List<UTFGridPosition>> positions=new HashMap<String,List<UTFGridPosition>>();
-    Map<String,List<UTFGridPosition>> singlePositions=new HashMap<String,List<UTFGridPosition>>();
+    Map<String,List<UTFGridPosition>> positions=new HashMap<>();
+    Map<String,List<UTFGridPosition>> singlePositions=new HashMap<>();
     for (int i=1; i < keys.length(); i++) {
       String key=keys.getString(i);
       if (StringUtils.isNotBlank(key)) {
@@ -32,9 +32,9 @@
           List<UTFGridPosition> listOfPositions=positions.get(id);
           List<UTFGridPosition> singleListOfPositions=singlePositions.get(id);
           if (listOfPositions == null) {
-            listOfPositions=new ArrayList<UTFGridPosition>();
+            listOfPositions=new ArrayList<>();
             positions.put(id,listOfPositions);
-            singleListOfPositions=new ArrayList<UTFGridPosition>();
+            singleListOfPositions=new ArrayList<>();
             singlePositions.put(id,singleListOfPositions);
           }
           listOfPositions.add(pos);
@@ -44,7 +44,7 @@
         }
       }
     }
-    final ArrayList<Geocache> caches=new ArrayList<Geocache>();
+    final ArrayList<Geocache> caches=new ArrayList<>();
     for (    Entry<String,List<UTFGridPosition>> entry : positions.entrySet()) {
       String id=entry.getKey();
       List<UTFGridPosition> pos=entry.getValue();

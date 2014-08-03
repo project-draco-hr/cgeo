@@ -5,6 +5,10 @@
     return true;
   }
   final String geocode=StringUtils.upperCase(logable.getGeocode());
-  StaticMapsActivity.startActivity(activity,geocode,download,waypoint);
+  StaticMapsActivity_.IntentBuilder_ builder=StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
+  if (waypoint != null) {
+    builder.waypointId(waypoint.getId());
+  }
+  builder.start();
   return true;
 }

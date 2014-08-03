@@ -1,0 +1,8 @@
+{
+  if (progress.isShowing()) {
+    showToast(res.getString(R.string.err_detail_still_working));
+    return;
+  }
+  progress.show(this,res.getString(R.string.cache_dialog_offline_drop_title),res.getString(R.string.cache_dialog_offline_drop_message),true,null);
+  cache.drop(new ChangeNotificationHandler(this,progress),RxUtils.networkScheduler);
+}

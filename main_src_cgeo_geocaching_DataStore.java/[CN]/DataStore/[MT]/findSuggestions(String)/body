@@ -3,7 +3,7 @@
     return null;
   }
   init();
-  final MatrixCursor resultCursor=new MatrixCursor(new String[]{BaseColumns._ID,SearchManager.SUGGEST_COLUMN_TEXT_1,SearchManager.SUGGEST_COLUMN_TEXT_2,SearchManager.SUGGEST_COLUMN_INTENT_ACTION,SearchManager.SUGGEST_COLUMN_QUERY});
+  final SearchSuggestionCursor resultCursor=new SearchSuggestionCursor();
   try {
     final String selectionArg=getSuggestionArgument(searchTerm);
     findCaches(resultCursor,selectionArg);

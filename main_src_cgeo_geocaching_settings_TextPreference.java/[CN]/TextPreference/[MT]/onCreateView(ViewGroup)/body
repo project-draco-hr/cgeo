@@ -1,9 +1,9 @@
 {
   this.setSelectable(false);
-  View v=super.onCreateView(parent);
-  TextView text=(TextView)v.findViewById(R.id.textPreferenceText);
+  final View v=super.onCreateView(parent);
+  final TextView text=ButterKnife.findById(v,R.id.textPreferenceText);
   text.setText(this.text);
-  summaryView=(TextView)v.findViewById(R.id.textPreferenceSummary);
+  summaryView=ButterKnife.findById(v,R.id.textPreferenceSummary);
   setSummary(null);
   return v;
 }

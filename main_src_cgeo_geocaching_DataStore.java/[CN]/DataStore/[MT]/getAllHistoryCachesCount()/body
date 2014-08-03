@@ -3,7 +3,7 @@
   try {
     return (int)PreparedStatements.getCountHistoryCaches().simpleQueryForLong();
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("DataStore.getAllHistoricCachesCount",e);
   }
   return 0;

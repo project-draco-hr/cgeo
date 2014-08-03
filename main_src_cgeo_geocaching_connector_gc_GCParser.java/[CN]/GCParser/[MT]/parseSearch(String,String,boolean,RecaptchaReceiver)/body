@@ -3,7 +3,7 @@
     Log.e("GCParser.parseSearch: No page given");
     return null;
   }
-  final List<String> cids=new ArrayList<String>();
+  final List<String> cids=new ArrayList<>();
   String page=pageContent;
   final SearchResult searchResult=new SearchResult();
   searchResult.setUrl(url);
@@ -37,7 +37,7 @@
   final String[] rows=page.split("<tr class=");
   final int rows_count=rows.length;
   int excludedCaches=0;
-  final ArrayList<Geocache> caches=new ArrayList<Geocache>();
+  final ArrayList<Geocache> caches=new ArrayList<>();
   for (int z=1; z < rows_count; z++) {
     final Geocache cache=new Geocache();
     final String row=rows[z];

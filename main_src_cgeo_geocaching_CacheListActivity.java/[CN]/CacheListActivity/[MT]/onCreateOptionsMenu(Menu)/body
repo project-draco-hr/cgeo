@@ -1,5 +1,21 @@
 {
   getMenuInflater().inflate(R.menu.cache_list_options,menu);
   CacheListAppFactory.addMenuItems(menu,this,res);
+  sortProvider=(SortActionProvider)MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
+  sortProvider.setSelection(adapter.getCacheComparator());
+  sortProvider.setClickListener(new Action1<CacheComparator>(){
+    @Override public void call(    final CacheComparator selectedComparator){
+      final CacheComparator oldComparator=adapter.getCacheComparator();
+      if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
+        adapter.toggleInverseSort();
+      }
+ else {
+        adapter.resetInverseSort();
+      }
+      setComparator(selectedComparator);
+      sortProvider.setSelection(selectedComparator);
+    }
+  }
+);
   return true;
 }

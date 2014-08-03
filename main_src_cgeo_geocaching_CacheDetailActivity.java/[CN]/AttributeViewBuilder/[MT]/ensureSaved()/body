@@ -1,0 +1,7 @@
+{
+  if (!cache.isOffline()) {
+    showToast(getString(R.string.info_cache_saved));
+    cache.setListId(StoredList.STANDARD_LIST_ID);
+    DataStore.saveCache(cache,LoadFlags.SAVE_ALL);
+  }
+}

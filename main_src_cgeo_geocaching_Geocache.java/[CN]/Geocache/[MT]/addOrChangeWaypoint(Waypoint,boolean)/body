@@ -10,7 +10,7 @@
  else {
     final int index=getWaypointIndex(waypoint);
     if (index >= 0) {
-      Waypoint oldWaypoint=waypoints.remove(index);
+      final Waypoint oldWaypoint=waypoints.remove(index);
       waypoint.setPrefix(oldWaypoint.getPrefix());
       if (StringUtils.isBlank(waypoint.getPrefix()) || StringUtils.equalsIgnoreCase(waypoint.getPrefix(),Waypoint.PREFIX_OWN)) {
         assignUniquePrefix(waypoint);

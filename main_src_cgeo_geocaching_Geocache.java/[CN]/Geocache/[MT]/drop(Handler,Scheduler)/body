@@ -1,6 +1,6 @@
 {
-  return scheduler.schedule(new Action1<Inner>(){
-    @Override public void call(    final Inner inner){
+  return scheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
       try {
         dropSynchronous();
         handler.sendMessage(Message.obtain());

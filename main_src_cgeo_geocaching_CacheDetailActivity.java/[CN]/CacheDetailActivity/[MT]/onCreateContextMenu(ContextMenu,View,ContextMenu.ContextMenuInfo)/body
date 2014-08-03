@@ -1,2 +1,27 @@
 {
+  super.onCreateContextMenu(menu,view,info);
+  final int viewId=view.getId();
+switch (viewId) {
+case R.id.waypoint:
+    menu.setHeaderTitle(selectedWaypoint.getName() + " (" + res.getString(R.string.waypoint)+ ")");
+  getMenuInflater().inflate(R.menu.waypoint_options,menu);
+final boolean isOriginalWaypoint=selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
+menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
+menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
+menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
+final boolean userDefined=selectedWaypoint.isUserDefined() && !selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
+menu.findItem(R.id.menu_waypoint_delete).setVisible(userDefined);
+final boolean hasCoords=selectedWaypoint.getCoords() != null;
+final MenuItem defaultNavigationMenu=menu.findItem(R.id.menu_waypoint_navigate_default);
+defaultNavigationMenu.setVisible(hasCoords);
+defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
+menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
+break;
+default :
+if (imagesList != null) {
+imagesList.onCreateContextMenu(menu,view);
+}
+break;
+}
 }

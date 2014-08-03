@@ -1,8 +1,8 @@
 {
   return Observable.create(new OnSubscribe<Float>(){
     @Override public void call(    final Subscriber<? super Float> subscriber){
-      handlerThread.start(subscriber,context);
-      subject.subscribe(subscriber);
+      HANDLER_THREAD.start(subscriber,context);
+      SUBJECT.subscribe(subscriber);
     }
   }
 );

@@ -1,7 +1,7 @@
 {
   progress.show(this,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,storeCacheHandler.cancelMessage());
-  Schedulers.io().schedule(new Action1<Inner>(){
-    @Override public void call(    final Inner inner){
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
       cache.store(listId,storeCacheHandler);
     }
   }

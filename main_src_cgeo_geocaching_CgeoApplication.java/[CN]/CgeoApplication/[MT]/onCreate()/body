@@ -1,0 +1,15 @@
+{
+  try {
+    final ViewConfiguration config=ViewConfiguration.get(this);
+    final Field menuKeyField=ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+    menuKeyField.setAccessible(true);
+    menuKeyField.setBoolean(config,false);
+  }
+ catch (  final IllegalArgumentException e) {
+  }
+catch (  final NoSuchFieldException e) {
+  }
+catch (  final IllegalAccessException e) {
+  }
+  DataStore.getLists();
+}

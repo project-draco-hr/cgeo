@@ -1,0 +1,115 @@
+{
+  final ArrayList<LogTemplate> templates=new ArrayList<>();
+  templates.add(new LogTemplate("DATE",R.string.init_signature_template_date){
+    @Override public String getValue(    final LogContext context){
+      return Formatter.formatFullDate(System.currentTimeMillis());
+    }
+  }
+);
+  templates.add(new LogTemplate("TIME",R.string.init_signature_template_time){
+    @Override public String getValue(    final LogContext context){
+      return Formatter.formatTime(System.currentTimeMillis());
+    }
+  }
+);
+  templates.add(new LogTemplate("DATETIME",R.string.init_signature_template_datetime){
+    @Override public String getValue(    final LogContext context){
+      final long currentTime=System.currentTimeMillis();
+      return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
+    }
+  }
+);
+  templates.add(new LogTemplate("USER",R.string.init_signature_template_user){
+    @Override public String getValue(    final LogContext context){
+      final Geocache cache=context.getCache();
+      if (cache != null) {
+        final IConnector connector=ConnectorFactory.getConnector(cache);
+        if (connector instanceof ILogin) {
+          return ((ILogin)connector).getUserName();
+        }
+      }
+      return Settings.getUsername();
+    }
+  }
+);
+  templates.add(new LogTemplate("NUMBER",R.string.init_signature_template_number){
+    @Override public String getValue(    final LogContext context){
+      final Geocache cache=context.getCache();
+      if (cache == null) {
+        return StringUtils.EMPTY;
+      }
+      int current=0;
+      final IConnector connector=ConnectorFactory.getConnector(cache);
+      if (connector instanceof ILogin) {
+        current=((ILogin)connector).getCachesFound();
+      }
+      if (current == 0) {
+        if (context.isOffline()) {
+          return StringUtils.EMPTY;
+        }
+        if (connector instanceof ILogin) {
+          ((ILogin)connector).login(null,null);
+          current=((ILogin)connector).getCachesFound();
+        }
+      }
+      if (current >= 0) {
+        return String.valueOf(current + 1);
+      }
+      return StringUtils.EMPTY;
+    }
+  }
+);
+  templates.add(new LogTemplate("OWNER",R.string.init_signature_template_owner){
+    @Override public String getValue(    final LogContext context){
+      final Trackable trackable=context.getTrackable();
+      if (trackable != null) {
+        return trackable.getOwner();
+      }
+      final Geocache cache=context.getCache();
+      if (cache != null) {
+        return cache.getOwnerDisplayName();
+      }
+      return StringUtils.EMPTY;
+    }
+  }
+);
+  templates.add(new LogTemplate("NAME",R.string.init_signature_template_name){
+    @Override public String getValue(    final LogContext context){
+      final Trackable trackable=context.getTrackable();
+      if (trackable != null) {
+        return trackable.getName();
+      }
+      final Geocache cache=context.getCache();
+      if (cache != null) {
+        return cache.getName();
+      }
+      return StringUtils.EMPTY;
+    }
+  }
+);
+  templates.add(new LogTemplate("URL",R.string.init_signature_template_url){
+    @Override public String getValue(    final LogContext context){
+      final Trackable trackable=context.getTrackable();
+      if (trackable != null) {
+        return trackable.getUrl();
+      }
+      final Geocache cache=context.getCache();
+      if (cache != null) {
+        return cache.getUrl();
+      }
+      return StringUtils.EMPTY;
+    }
+  }
+);
+  templates.add(new LogTemplate("LOG",R.string.init_signature_template_log){
+    @Override public String getValue(    final LogContext context){
+      final LogEntry logEntry=context.getLogEntry();
+      if (logEntry != null) {
+        return logEntry.getDisplayText();
+      }
+      return StringUtils.EMPTY;
+    }
+  }
+);
+  return templates;
+}

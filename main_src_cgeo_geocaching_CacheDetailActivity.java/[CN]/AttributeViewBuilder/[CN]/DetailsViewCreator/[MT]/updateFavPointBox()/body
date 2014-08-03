@@ -1,0 +1,27 @@
+{
+  final LinearLayout layout=ButterKnife.findById(view,R.id.favpoint_box);
+  final boolean supportsFavoritePoints=cache.supportsFavoritePoints();
+  layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
+  if (!supportsFavoritePoints || cache.isOwner() || !Settings.isGCPremiumMember()) {
+    return;
+  }
+  final Button buttonAdd=ButterKnife.findById(view,R.id.add_to_favpoint);
+  final Button buttonRemove=ButterKnife.findById(view,R.id.remove_from_favpoint);
+  final TextView text=ButterKnife.findById(view,R.id.favpoint_text);
+  if (cache.isFavorite()) {
+    buttonAdd.setVisibility(View.GONE);
+    buttonRemove.setVisibility(View.VISIBLE);
+    text.setText(R.string.cache_favpoint_on);
+  }
+ else {
+    buttonAdd.setVisibility(View.VISIBLE);
+    buttonRemove.setVisibility(View.GONE);
+    text.setText(R.string.cache_favpoint_not_on);
+  }
+  if (!cache.isFound()) {
+    buttonAdd.setEnabled(false);
+    buttonAdd.setVisibility(View.GONE);
+    buttonRemove.setEnabled(false);
+    buttonRemove.setVisibility(View.GONE);
+  }
+}

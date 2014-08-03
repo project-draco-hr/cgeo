@@ -2,7 +2,7 @@
   final RootElement root=new RootElement("desc");
   final AtomicReference<String> description=new AtomicReference<String>();
   root.setEndTextElementListener(new EndTextElementListener(){
-    public void end(    String body){
+    @Override public void end(    String body){
       description.set(body);
     }
   }

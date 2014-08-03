@@ -1,0 +1,4 @@
+{
+  final List<String> history=Arrays.asList(StringUtils.split(getString(R.string.pref_caches_history,StringUtils.EMPTY),HISTORY_SEPARATOR));
+  return history.subList(0,Math.min(HISTORY_SIZE,history.size()));
+}

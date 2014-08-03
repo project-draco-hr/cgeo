@@ -5,7 +5,7 @@
   assertThat(waymark).isNotNull();
   assertThat(waymark.getGeocode()).isEqualTo("WM7BM7");
   assertThat(waymark.getName()).isEqualTo("Roman water pipe Kornwestheim");
-  assertThat(StringUtils.isNotBlank(waymark.getUrl())).isTrue();
+  assertThat(waymark.getUrl()).isNotEmpty();
   assertThat(waymark.getType()).isEqualTo(CacheType.UNKNOWN);
   assertThat(waymark.getSize()).isEqualTo(CacheSize.UNKNOWN);
 }

@@ -7,7 +7,7 @@
   final String released=cursor.getString(cursor.getColumnIndex("released"));
   if (released != null) {
     try {
-      long releaseMilliSeconds=Long.parseLong(released);
+      final long releaseMilliSeconds=Long.parseLong(released);
       trackable.setReleased(new Date(releaseMilliSeconds));
     }
  catch (    final NumberFormatException e) {

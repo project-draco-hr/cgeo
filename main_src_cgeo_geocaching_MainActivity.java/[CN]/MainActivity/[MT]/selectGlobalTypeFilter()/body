@@ -1,10 +1,10 @@
 {
-  final List<CacheType> cacheTypes=new ArrayList<CacheType>();
+  final List<CacheType> cacheTypes=new ArrayList<>();
   cacheTypes.add(CacheType.ALL);
   cacheTypes.add(CacheType.TRADITIONAL);
   cacheTypes.add(CacheType.MULTI);
   cacheTypes.add(CacheType.MYSTERY);
-  List<CacheType> sorted=new ArrayList<CacheType>();
+  final List<CacheType> sorted=new ArrayList<>();
   sorted.addAll(Arrays.asList(CacheType.values()));
   sorted.removeAll(cacheTypes);
   Collections.sort(sorted,new Comparator<CacheType>(){
@@ -18,15 +18,15 @@
   if (checkedItem < 0) {
     checkedItem=0;
   }
-  String[] items=new String[cacheTypes.size()];
+  final String[] items=new String[cacheTypes.size()];
   for (int i=0; i < cacheTypes.size(); i++) {
     items[i]=cacheTypes.get(i).getL10n();
   }
-  Builder builder=new AlertDialog.Builder(this);
+  final Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(R.string.menu_filter);
   builder.setSingleChoiceItems(items,checkedItem,new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int position){
-      CacheType cacheType=cacheTypes.get(position);
+      final CacheType cacheType=cacheTypes.get(position);
       Settings.setCacheType(cacheType);
       setFilterTitle();
       dialog.dismiss();

@@ -1,6 +1,6 @@
 {
   final String page=getFileContent(cache);
-  final SearchResult result=GCParser.parseCacheFromText(page,null);
+  final SearchResult result=GCParser.parseAndSaveCacheFromText(page,null);
   assertThat(result).isNotNull();
   assertThat(result.isEmpty()).isTrue();
   assertThat(result.getError()).isEqualTo(StatusCode.UNPUBLISHED_CACHE);

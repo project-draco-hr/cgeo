@@ -1,0 +1,16 @@
+{
+  final View shortView=ButterKnife.findById(this,R.id.shortdesc);
+  if (shortView == null) {
+    return;
+  }
+  if (shortView.getVisibility() == View.GONE) {
+    return;
+  }
+  final String shortDescription=cache.getShortDescription();
+  if (StringUtils.isNotBlank(shortDescription)) {
+    final int index=StringUtils.indexOf(cache.getDescription(),shortDescription);
+    if (index >= 0 && index < 200) {
+      shortView.setVisibility(View.GONE);
+    }
+  }
+}

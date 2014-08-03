@@ -1,6 +1,6 @@
 {
-  String lonString=loc.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE);
-  String latString=loc.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE);
+  final String lonString=loc.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE);
+  final String latString=loc.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE);
   viewHolder.longitude.setText(lonString);
   viewHolder.latitude.setText(latString);
   viewHolder.date.setText(Formatter.formatShortDateTime(loc.getDate()));

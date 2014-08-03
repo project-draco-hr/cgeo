@@ -1,0 +1,7 @@
+{
+  ListAdapter adapter=getListView().getAdapter();
+  if (adapter instanceof HeaderViewListAdapter) {
+    return ((HeaderViewListAdapter)adapter).getWrappedAdapter();
+  }
+  return adapter;
+}

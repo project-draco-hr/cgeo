@@ -1,0 +1,26 @@
+{
+  final ImageView defaultNavigationImageView=ButterKnife.findById(v,R.id.defaultNavigation);
+  defaultNavigationImageView.setOnLongClickListener(new View.OnLongClickListener(){
+    @Override public boolean onLongClick(    final View v){
+      startDefaultNavigation2();
+      return true;
+    }
+  }
+);
+  defaultNavigationImageView.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View v){
+      navigateTo();
+    }
+  }
+);
+  final View overflowActionBar=v.findViewById(R.id.overflowActionBar);
+  overflowActionBar.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View v){
+      showPopup(v);
+    }
+  }
+);
+  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+    registerForContextMenu(overflowActionBar);
+  }
+}

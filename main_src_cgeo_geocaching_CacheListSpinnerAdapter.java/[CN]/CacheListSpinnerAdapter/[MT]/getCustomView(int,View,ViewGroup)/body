@@ -1,0 +1,25 @@
+{
+  View resultView=convertView;
+  final LayoutInflater inflater=(LayoutInflater)cacheListActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  CacheListSpinnerAdapter.ViewHolder holder;
+  if (resultView == null) {
+    resultView=inflater.inflate(R.layout.cachelist_spinneritem,parent,false);
+    holder=new ViewHolder();
+    holder.title=(TextView)resultView.findViewById(android.R.id.text1);
+    holder.subtitle=(TextView)resultView.findViewById(android.R.id.text2);
+    resultView.setTag(holder);
+  }
+ else {
+    holder=(CacheListSpinnerAdapter.ViewHolder)resultView.getTag();
+  }
+  final AbstractList list=getItem(position);
+  holder.title.setText(list.getTitle());
+  if (list.getNumberOfCaches() >= 0) {
+    holder.subtitle.setVisibility(View.VISIBLE);
+    holder.subtitle.setText(cacheListActivity.getCacheListSubtitle(list));
+  }
+ else {
+    holder.subtitle.setVisibility(View.GONE);
+  }
+  return resultView;
+}

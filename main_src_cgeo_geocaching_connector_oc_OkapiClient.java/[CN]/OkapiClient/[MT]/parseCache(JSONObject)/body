@@ -3,10 +3,13 @@
   cache.setReliableLatLon(true);
   try {
     parseCoreCache(response,cache);
-    final JSONObject owner=response.getJSONObject(CACHE_OWNER);
-    cache.setOwnerDisplayName(parseUser(owner));
+    final JSONObject ownerObject=response.getJSONObject(CACHE_OWNER);
+    final String owner=parseUser(ownerObject);
+    cache.setOwnerDisplayName(owner);
+    cache.setOwnerUserId(owner);
     cache.getLogCounts().put(LogType.FOUND_IT,response.getInt(CACHE_FOUNDS));
     cache.getLogCounts().put(LogType.DIDNT_FIND_IT,response.getInt(CACHE_NOTFOUNDS));
+    cache.getLogCounts().put(LogType.WILL_ATTEND,response.optInt(CACHE_WILLATTENDS));
     if (!response.isNull(CACHE_RATING)) {
       cache.setRating((float)response.getDouble(CACHE_RATING));
     }
@@ -31,6 +34,7 @@
     }
     cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES),response.optJSONArray(CACHE_ATTR_ACODES)));
     cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)),false);
+    cache.setInventory(parseTrackables(response.getJSONArray(CACHE_TRACKABLES)));
     if (!response.isNull(CACHE_IS_WATCHED)) {
       cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
     }
@@ -40,7 +44,7 @@
     }
     cache.setLogPasswordRequired(response.getBoolean(CACHE_REQ_PASSWORD));
     cache.setDetailedUpdatedNow();
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
     DataStore.saveLogsWithoutTransaction(cache.getGeocode(),parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
   }
  catch (  final JSONException e) {

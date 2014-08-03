@@ -3,7 +3,7 @@
     return null;
   }
   init();
-  final List<Trackable> trackables=new ArrayList<Trackable>();
+  final List<Trackable> trackables=new ArrayList<>();
   final Cursor cursor=database.query(dbTableTrackables,new String[]{"_id","updated","tbcode","guid","title","owner","released","goal","description"},"geocode = ?",new String[]{geocode},null,null,"title COLLATE NOCASE ASC","100");
   while (cursor.moveToNext()) {
     trackables.add(createTrackableFromDatabaseContent(cursor));

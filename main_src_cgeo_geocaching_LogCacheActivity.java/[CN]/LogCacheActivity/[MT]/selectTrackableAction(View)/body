@@ -1,13 +1,12 @@
 {
   final int realViewId=view.getId();
-  Builder alert=new AlertDialog.Builder(this);
+  final Builder alert=new AlertDialog.Builder(this);
   final TrackableLog trackableLog=actionButtons.get(realViewId);
   alert.setTitle(trackableLog.name);
-  String[] tbLogTypes=getTBLogTypes();
+  final String[] tbLogTypes=getTBLogTypes();
   alert.setItems(tbLogTypes,new OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int position){
+    @Override public void onClick(    final DialogInterface dialog,    final int position){
       final LogTypeTrackable logType=LogTypeTrackable.values()[position];
-      tbChanged=true;
       trackableLog.action=logType;
       Log.i("Trackable " + trackableLog.trackCode + " ("+ trackableLog.name+ ") has new action: #"+ logType);
       updateTrackablesList();

@@ -1,9 +1,12 @@
 {
   final int id=item.getItemId();
 switch (id) {
-case R.id.menu_about:
+case android.R.id.home:
     showAbout(null);
   return true;
+case R.id.menu_about:
+showAbout(null);
+return true;
 case R.id.menu_helpers:
 startActivity(new Intent(this,UsefulAppsActivity.class));
 return true;
@@ -27,7 +30,6 @@ CacheListActivity.startActivityPocket(MainActivity.this,pql);
 }
 );
 return true;
-default :
-return super.onOptionsItemSelected(item);
 }
+return super.onOptionsItemSelected(item);
 }

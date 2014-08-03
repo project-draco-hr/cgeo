@@ -1,7 +1,7 @@
 {
   final String searchTerm=uri.getLastPathSegment();
   if (StringUtils.equals(searchTerm,SearchManager.SUGGEST_URI_PATH_QUERY)) {
-    return lastCursor;
+    return getLastOpenedCaches();
   }
   return getSuggestions(searchTerm);
 }

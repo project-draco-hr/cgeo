@@ -1,5 +1,5 @@
 {
-  int oldVersion=getInt(R.string.pref_settingsversion,0);
+  final int oldVersion=getInt(R.string.pref_settingsversion,0);
   if (oldVersion < 1) {
     final String oldPreferencesName="cgeo.pref";
     final SharedPreferences old=CgeoApplication.getInstance().getSharedPreferences(oldPreferencesName,Context.MODE_PRIVATE);
@@ -73,11 +73,11 @@
       wpThreshold=SHOW_WP_THRESHOLD_MAX;
     }
     e.putInt(getKey(R.string.pref_showwaypointsthreshold),wpThreshold);
-    int ms=sharedPrefs.getInt(getKey(R.string.pref_mapsource),MAP_SOURCE_DEFAULT);
+    final int ms=sharedPrefs.getInt(getKey(R.string.pref_mapsource),MAP_SOURCE_DEFAULT);
     e.remove(getKey(R.string.pref_mapsource));
     e.putString(getKey(R.string.pref_mapsource),String.valueOf(ms));
-    int dnt1=sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool),NavigationAppsEnum.COMPASS.id);
-    int dnt2=sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool2),NavigationAppsEnum.INTERNAL_MAP.id);
+    final int dnt1=sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool),NavigationAppsEnum.COMPASS.id);
+    final int dnt2=sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool2),NavigationAppsEnum.INTERNAL_MAP.id);
     e.remove(getKey(R.string.pref_defaultNavigationTool));
     e.remove(getKey(R.string.pref_defaultNavigationTool2));
     e.putString(getKey(R.string.pref_defaultNavigationTool),String.valueOf(dnt1));

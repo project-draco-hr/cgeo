@@ -4,7 +4,7 @@
     TestSettings.setTrackableTwitterMessage("[LOG]");
     Trackable trackable=new Trackable();
     LogEntry log=new LogEntry(0,LogType.FOUND_IT,"trackable log text");
-    assertEquals("trackable log text #cgeo #geocaching",Twitter.getStatusMessage(trackable,log));
+    assertThat(Twitter.getStatusMessage(trackable,log)).isEqualTo("trackable log text #cgeo #geocaching");
   }
   finally {
     TestSettings.setTrackableTwitterMessage(oldMessage);

@@ -1,0 +1,13 @@
+{
+  if (progress.isShowing()) {
+    showToast(res.getString(R.string.err_detail_still_working));
+    return;
+  }
+  if (!Network.isNetworkConnected(getApplicationContext())) {
+    showToast(getString(R.string.err_server));
+    return;
+  }
+  final RefreshCacheHandler refreshCacheHandler=new RefreshCacheHandler(this,progress);
+  progress.show(this,res.getString(R.string.cache_dialog_refresh_title),res.getString(R.string.cache_dialog_refresh_message),true,refreshCacheHandler.cancelMessage());
+  cache.refresh(refreshCacheHandler,RxUtils.networkScheduler);
+}

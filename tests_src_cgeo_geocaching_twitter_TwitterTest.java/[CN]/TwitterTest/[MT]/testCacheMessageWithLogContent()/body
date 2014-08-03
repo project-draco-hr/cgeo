@@ -4,7 +4,7 @@
     TestSettings.setCacheTwitterMessage("[LOG]");
     Geocache cache=new Geocache();
     LogEntry log=new LogEntry(0,LogType.FOUND_IT,"log text");
-    assertEquals("log text #cgeo #geocaching",Twitter.getStatusMessage(cache,log));
+    assertThat(Twitter.getStatusMessage(cache,log)).isEqualTo("log text #cgeo #geocaching");
   }
   finally {
     TestSettings.setCacheTwitterMessage(oldMessage);

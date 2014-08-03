@@ -1,9 +1,9 @@
 {
-  final List<Geocache> deletion=new ArrayList<Geocache>();
+  final List<Geocache> deletion=new ArrayList<>();
   for (  final Geocache cache : adapter.getCheckedOrAllCaches()) {
     if (DateUtils.isPastEvent(cache)) {
       deletion.add(cache);
     }
   }
-  new DropDetailsTask(false).execute(deletion.toArray(new Geocache[deletion.size()]));
+  new DropDetailsTask().execute(deletion.toArray(new Geocache[deletion.size()]));
 }

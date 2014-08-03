@@ -10,7 +10,7 @@ synchronized (DataStore.class) {
     try {
       database=dbHelper.getWritableDatabase();
     }
- catch (    Exception e) {
+ catch (    final Exception e) {
       Log.e("DataStore.init: unable to open database for R/W",e);
       recreateDatabase(dbHelper);
     }

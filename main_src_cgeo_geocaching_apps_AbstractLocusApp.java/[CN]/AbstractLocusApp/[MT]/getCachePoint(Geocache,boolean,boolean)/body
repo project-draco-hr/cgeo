@@ -34,7 +34,7 @@
   }
   pg.found=cache.isFound();
   if (withWaypoints && cache.hasWaypoints()) {
-    pg.waypoints=new ArrayList<PointGeocachingDataWaypoint>();
+    pg.waypoints=new ArrayList<>();
     for (    Waypoint waypoint : cache.getWaypoints()) {
       if (waypoint == null || waypoint.getCoords() == null) {
         continue;

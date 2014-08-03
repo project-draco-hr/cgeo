@@ -14,8 +14,8 @@
   assertThat(cache.getSize()).isEqualTo(CacheSize.MICRO);
   assertThat(cache.getDifficulty()).isEqualTo(1.0f);
   assertThat(cache.getTerrain()).isEqualTo(5.0f);
-  assertEquals("Baden-W??rttemberg, Germany",cache.getLocation());
-  assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.",cache.getShortDescription());
-  assertEquals(new Geopoint(48.859683,9.1874),cache.getCoords());
+  assertThat(cache.getLocation()).isEqualTo("Baden-W??rttemberg, Germany");
+  assertThat(cache.getShortDescription()).isEqualTo("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.");
+  assertThat(cache.getCoords()).isEqualTo(new Geopoint(48.859683,9.1874));
   return cache;
 }

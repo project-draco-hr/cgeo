@@ -1,3 +1,7 @@
 {
-  onCreate(savedInstanceState,resourceLayoutID,false);
+  super.onCreate(savedInstanceState);
+  initializeCommonFields();
+  setTheme();
+  setContentView(resourceLayoutID);
+  ButterKnife.inject(this);
 }

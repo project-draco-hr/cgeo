@@ -6,7 +6,7 @@
   database.beginTransaction();
   boolean ok=false;
   try {
-    ContentValues values=new ContentValues();
+    final ContentValues values=new ContentValues();
     values.put("geocode",geocode);
     values.put("updated",System.currentTimeMillis());
     values.put("type",waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);

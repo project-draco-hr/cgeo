@@ -1,0 +1,11 @@
+{
+  if (mCacheListSpinnerAdapter == null) {
+    return;
+  }
+  mCacheListSpinnerAdapter.clear();
+  final AbstractList list=AbstractList.getListById(listId);
+  for (  final AbstractList l : StoredList.UserInterface.getMenuLists(false,PseudoList.NEW_LIST.id)) {
+    mCacheListSpinnerAdapter.add(l);
+  }
+  getSupportActionBar().setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+}

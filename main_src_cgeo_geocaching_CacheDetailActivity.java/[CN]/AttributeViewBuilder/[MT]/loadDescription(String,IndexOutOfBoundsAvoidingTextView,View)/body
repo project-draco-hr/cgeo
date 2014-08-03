@@ -1,0 +1,27 @@
+{
+  try {
+    final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
+    final Spanned description=Html.fromHtml(descriptionString,new HtmlImage(cache.getGeocode(),true,cache.getListId(),false,descriptionView),unknownTagsHandler);
+    addWarning(unknownTagsHandler,description);
+    if (StringUtils.isNotBlank(descriptionString)) {
+      try {
+        descriptionView.setText(description,TextView.BufferType.SPANNABLE);
+      }
+ catch (      final Exception e) {
+        Log.e("Android bug setting text: ",e);
+        descriptionView.setText(description.toString());
+      }
+      descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+      fixTextColor(descriptionString,descriptionView);
+      descriptionView.setVisibility(View.VISIBLE);
+      addContextMenu(descriptionView);
+      potentiallyHideShortDescription();
+    }
+    if (null != loadingIndicatorView) {
+      loadingIndicatorView.setVisibility(View.GONE);
+    }
+  }
+ catch (  final Exception e) {
+    showToast(res.getString(R.string.err_load_descr_failed));
+  }
+}

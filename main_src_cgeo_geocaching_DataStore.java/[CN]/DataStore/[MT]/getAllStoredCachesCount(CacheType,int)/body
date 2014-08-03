@@ -7,7 +7,7 @@
   }
   init();
   try {
-    StringBuilder sql=new StringBuilder("select count(_id) from " + dbTableCaches + " where detailed = 1");
+    final StringBuilder sql=new StringBuilder("select count(_id) from " + dbTableCaches + " where detailed = 1");
     String typeKey;
     int reasonIndex;
     if (cacheType != CacheType.ALL) {
@@ -28,8 +28,8 @@
       sql.append(" and reason = ?");
       listKey="list";
     }
-    String key="CountCaches_" + typeKey + "_"+ listKey;
-    SQLiteStatement compiledStmnt=PreparedStatements.getStatement(key,sql.toString());
+    final String key="CountCaches_" + typeKey + "_"+ listKey;
+    final SQLiteStatement compiledStmnt=PreparedStatements.getStatement(key,sql.toString());
     if (cacheType != CacheType.ALL) {
       compiledStmnt.bindString(1,cacheType.id);
     }
@@ -38,7 +38,7 @@
     }
     return (int)compiledStmnt.simpleQueryForLong();
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("DataStore.loadAllStoredCachesCount",e);
   }
   return 0;

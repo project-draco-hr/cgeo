@@ -1,0 +1,9 @@
+{
+  final TextView titleview=ButterKnife.findById(activity,R.id.actionbar_title);
+  if (titleview != null) {
+    titleview.setText(title);
+  }
+  if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)) {
+    setTitleHoneyComb(title);
+  }
+}

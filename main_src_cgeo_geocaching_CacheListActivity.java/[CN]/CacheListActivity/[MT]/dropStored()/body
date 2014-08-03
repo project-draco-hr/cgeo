@@ -1,0 +1,13 @@
+{
+  final int titleId=(adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
+  final int messageId=(adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected_confirm : R.string.caches_remove_all_confirm;
+  final String message=getString(messageId,adapter.getCheckedOrAllCount());
+  Dialogs.confirmYesNo(this,titleId,message,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    final DialogInterface dialog,    final int id){
+      final List<Geocache> selected=adapter.getCheckedOrAllCaches();
+      new DropDetailsTask().execute(selected.toArray(new Geocache[selected.size()]));
+      dialog.cancel();
+    }
+  }
+);
+}

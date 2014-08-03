@@ -1,8 +1,14 @@
 {
+  if (super.onOptionsItemSelected(item)) {
+    return true;
+  }
 switch (item.getItemId()) {
+case R.id.menu_show_on_map:
+    goMap();
+  return true;
 case R.id.menu_switch_select_mode:
-    adapter.switchSelectMode();
-  invalidateOptionsMenuCompatible();
+adapter.switchSelectMode();
+invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_refresh_stored_top:
 case R.id.menu_refresh_stored:
@@ -10,11 +16,7 @@ refreshStored(adapter.getCheckedOrAllCaches());
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_drop_caches:
-dropStored(false);
-invalidateOptionsMenuCompatible();
-return false;
-case R.id.menu_drop_caches_and_list:
-dropStored(true);
+dropStored();
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_import_gpx:
@@ -27,10 +29,11 @@ invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_create_list:
 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(),newListName);
+refreshSpinnerAdapter();
 invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_drop_list:
-removeList(true);
+removeList(false);
 invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_rename_list:
@@ -40,34 +43,18 @@ case R.id.menu_invert_selection:
 adapter.invertSelection();
 invalidateOptionsMenuCompatible();
 return false;
-case R.id.menu_switch_list:
-selectList();
-invalidateOptionsMenuCompatible();
-return false;
 case R.id.menu_filter:
 showFilterMenu(null);
 return true;
-case R.id.menu_sort:
-final CacheComparator oldComparator=adapter.getCacheComparator();
-new ComparatorUserInterface(this).selectComparator(oldComparator,new Action1<CacheComparator>(){
-@Override public void call(CacheComparator selectedComparator){
-if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
-adapter.toggleInverseSort();
-}
- else {
-adapter.resetInverseSort();
-}
-setComparator(selectedComparator);
-}
-}
-);
-return true;
 case R.id.menu_import_web:
 importWeb();
-return false;
-case R.id.menu_export:
-ExportFactory.showExportMenu(adapter.getCheckedOrAllCaches(),this);
-return false;
+return true;
+case R.id.menu_export_gpx:
+new GpxExport().export(adapter.getCheckedOrAllCaches(),this);
+return true;
+case R.id.menu_export_fieldnotes:
+new FieldnoteExport().export(adapter.getCheckedOrAllCaches(),this);
+return true;
 case R.id.menu_remove_from_history:
 removeFromHistoryCheck();
 invalidateOptionsMenuCompatible();

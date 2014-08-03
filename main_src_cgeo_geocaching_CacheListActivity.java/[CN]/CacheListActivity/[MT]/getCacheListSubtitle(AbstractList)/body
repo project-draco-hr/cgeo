@@ -1,0 +1,10 @@
+{
+  if (list.id == listId) {
+    return getCurrentSubtitle();
+  }
+  final int numberOfCaches=list.getNumberOfCaches();
+  if (numberOfCaches < 0) {
+    return StringUtils.EMPTY;
+  }
+  return getCacheNumberString(getResources(),numberOfCaches);
+}

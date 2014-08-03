@@ -1,0 +1,7 @@
+{
+  final String geoCode="OC6465";
+  removeCacheCompletely(geoCode);
+  Geocache cache=OkapiClient.getCache(geoCode);
+  assertThat(cache).as("Cache from OKAPI").isNotNull();
+  assertThat(cache.getLogCounts().get(LogType.WILL_ATTEND)).isGreaterThan(0);
+}

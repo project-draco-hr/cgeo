@@ -14,7 +14,7 @@
   final float defaultTitlePadding=res.getDimension(R.dimen.default_title_indicator_title_padding);
   final float defaultClipPadding=res.getDimension(R.dimen.default_title_indicator_clip_padding);
   final float defaultTopPadding=res.getDimension(R.dimen.default_title_indicator_top_padding);
-  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.TitlePageIndicator,defStyle,R.style.Widget_TitlePageIndicator);
+  final TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.TitlePageIndicator,defStyle,R.style.Widget_TitlePageIndicator);
   mFooterLineHeight=a.getDimension(R.styleable.TitlePageIndicator_footerLineHeight,defaultFooterLineHeight);
   mFooterIndicatorStyle=IndicatorStyle.fromValue(a.getInteger(R.styleable.TitlePageIndicator_footerIndicatorStyle,defaultFooterIndicatorStyle));
   mFooterIndicatorHeight=a.getDimension(R.styleable.TitlePageIndicator_footerIndicatorHeight,defaultFooterIndicatorHeight);

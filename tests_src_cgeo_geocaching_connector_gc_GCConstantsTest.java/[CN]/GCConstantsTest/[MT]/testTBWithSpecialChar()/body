@@ -1,6 +1,6 @@
 {
   final String page="<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&amp;ravestorm</span>";
-  assertEquals("Schlauchen&ravestorm",Html.fromHtml(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,"")).toString());
+  assertThat(Html.fromHtml(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,"")).toString()).isEqualTo("Schlauchen&ravestorm");
   final String page2="<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&ravestorm</span>";
-  assertEquals("Schlauchen&ravestorm",Html.fromHtml(TextUtils.getMatch(page2,GCConstants.PATTERN_TRACKABLE_NAME,"")).toString());
+  assertThat(Html.fromHtml(TextUtils.getMatch(page2,GCConstants.PATTERN_TRACKABLE_NAME,"")).toString()).isEqualTo("Schlauchen&ravestorm");
 }

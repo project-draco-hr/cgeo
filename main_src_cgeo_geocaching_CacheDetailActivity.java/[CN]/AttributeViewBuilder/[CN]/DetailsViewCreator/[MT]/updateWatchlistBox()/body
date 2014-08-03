@@ -1,0 +1,27 @@
+{
+  final LinearLayout layout=ButterKnife.findById(view,R.id.watchlist_box);
+  final boolean supportsWatchList=cache.supportsWatchList();
+  layout.setVisibility(supportsWatchList ? View.VISIBLE : View.GONE);
+  if (!supportsWatchList) {
+    return;
+  }
+  final Button buttonAdd=ButterKnife.findById(view,R.id.add_to_watchlist);
+  final Button buttonRemove=ButterKnife.findById(view,R.id.remove_from_watchlist);
+  final TextView text=ButterKnife.findById(view,R.id.watchlist_text);
+  if (cache.isOnWatchlist() || cache.isOwner()) {
+    buttonAdd.setVisibility(View.GONE);
+    buttonRemove.setVisibility(View.VISIBLE);
+    text.setText(R.string.cache_watchlist_on);
+  }
+ else {
+    buttonAdd.setVisibility(View.VISIBLE);
+    buttonRemove.setVisibility(View.GONE);
+    text.setText(R.string.cache_watchlist_not_on);
+  }
+  if (cache.isOwner()) {
+    buttonAdd.setEnabled(false);
+    buttonAdd.setVisibility(View.GONE);
+    buttonRemove.setEnabled(false);
+    buttonRemove.setVisibility(View.GONE);
+  }
+}

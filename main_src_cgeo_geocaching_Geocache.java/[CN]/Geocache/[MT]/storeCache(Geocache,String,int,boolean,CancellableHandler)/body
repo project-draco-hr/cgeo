@@ -56,12 +56,11 @@
       return;
     }
     cache.setListId(listId);
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
-    StaticMapsProvider.downloadMaps(cache);
-    imgGetter.waitForBackgroundLoading(handler);
+    RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache),imgGetter.waitForEndObservable(handler));
     if (handler != null) {
       handler.sendMessage(Message.obtain());
     }

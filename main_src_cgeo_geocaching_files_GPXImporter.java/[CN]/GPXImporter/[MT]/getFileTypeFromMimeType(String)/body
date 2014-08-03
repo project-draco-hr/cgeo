@@ -1,0 +1,9 @@
+{
+  if (GPX_MIME_TYPES.contains(mimeType)) {
+    return FileType.GPX;
+  }
+ else   if (ZIP_MIME_TYPES.contains(mimeType)) {
+    return FileType.ZIP;
+  }
+  return FileType.UNKNOWN;
+}

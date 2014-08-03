@@ -1,57 +1,12 @@
 {
   super.onCreate(savedInstanceState);
-  setContentView(R.layout.coordinatesinput_dialog);
-  final Spinner spinner=(Spinner)findViewById(R.id.spinnerCoordinateFormats);
-  final ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(context,R.array.waypoint_coordinate_formats,android.R.layout.simple_spinner_item);
-  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-  spinner.setAdapter(adapter);
-  spinner.setSelection(Settings.getCoordInputFormat().ordinal());
-  spinner.setOnItemSelectedListener(new CoordinateFormatListener());
-  bLat=(Button)findViewById(R.id.ButtonLat);
-  eLat=(EditText)findViewById(R.id.latitude);
-  eLatDeg=(EditText)findViewById(R.id.EditTextLatDeg);
-  eLatMin=(EditText)findViewById(R.id.EditTextLatMin);
-  eLatSec=(EditText)findViewById(R.id.EditTextLatSec);
-  eLatSub=(EditText)findViewById(R.id.EditTextLatSecFrac);
-  tLatSep1=(TextView)findViewById(R.id.LatSeparator1);
-  tLatSep2=(TextView)findViewById(R.id.LatSeparator2);
-  tLatSep3=(TextView)findViewById(R.id.LatSeparator3);
-  bLon=(Button)findViewById(R.id.ButtonLon);
-  eLon=(EditText)findViewById(R.id.longitude);
-  eLonDeg=(EditText)findViewById(R.id.EditTextLonDeg);
-  eLonMin=(EditText)findViewById(R.id.EditTextLonMin);
-  eLonSec=(EditText)findViewById(R.id.EditTextLonSec);
-  eLonSub=(EditText)findViewById(R.id.EditTextLonSecFrac);
-  tLonSep1=(TextView)findViewById(R.id.LonSeparator1);
-  tLonSep2=(TextView)findViewById(R.id.LonSeparator2);
-  tLonSep3=(TextView)findViewById(R.id.LonSeparator3);
-  eLatDeg.addTextChangedListener(new TextChanged(eLatDeg));
-  eLatMin.addTextChangedListener(new TextChanged(eLatMin));
-  eLatSec.addTextChangedListener(new TextChanged(eLatSec));
-  eLatSub.addTextChangedListener(new TextChanged(eLatSub));
-  eLonDeg.addTextChangedListener(new TextChanged(eLonDeg));
-  eLonMin.addTextChangedListener(new TextChanged(eLonMin));
-  eLonSec.addTextChangedListener(new TextChanged(eLonSec));
-  eLonSub.addTextChangedListener(new TextChanged(eLonSub));
-  EditUtils.disableSuggestions(eLatDeg);
-  EditUtils.disableSuggestions(eLatMin);
-  EditUtils.disableSuggestions(eLatSec);
-  EditUtils.disableSuggestions(eLatSub);
-  EditUtils.disableSuggestions(eLonDeg);
-  EditUtils.disableSuggestions(eLonMin);
-  EditUtils.disableSuggestions(eLonSec);
-  EditUtils.disableSuggestions(eLonSub);
-  bLat.setOnClickListener(new ButtonClickListener());
-  bLon.setOnClickListener(new ButtonClickListener());
-  final Button buttonCurrent=(Button)findViewById(R.id.current);
-  buttonCurrent.setOnClickListener(new CurrentListener());
-  final Button buttonCache=(Button)findViewById(R.id.cache);
-  if (cache != null) {
-    buttonCache.setOnClickListener(new CacheListener());
+  gp=getArguments().getParcelable(GEOPOINT_ARG);
+  gpinitial=getArguments().getParcelable(GEOPOINT_INTIAL_ARG);
+  cacheCoords=getArguments().getParcelable(CACHECOORDS_ARG);
+  if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {
+    gp=savedInstanceState.getParcelable(GEOPOINT_ARG);
   }
- else {
-    buttonCache.setVisibility(View.GONE);
+  if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB && Settings.isLightSkin()) {
+    setStyle(STYLE_NORMAL,R.style.DialogFixGingerbread);
   }
-  final Button buttonDone=(Button)findViewById(R.id.done);
-  buttonDone.setOnClickListener(new InputDoneListener());
 }

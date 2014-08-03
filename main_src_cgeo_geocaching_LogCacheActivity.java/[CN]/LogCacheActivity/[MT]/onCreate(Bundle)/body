@@ -11,6 +11,7 @@
     }
   }
   cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  invalidateOptionsMenuCompatible();
   possibleLogTypes=cache.getPossibleLogTypes();
   if (StringUtils.isNotBlank(cache.getName())) {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
@@ -18,10 +19,11 @@
  else {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
   }
-  postButton=(Button)findViewById(R.id.post);
   tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
   tweetCheck=(CheckBox)findViewById(R.id.tweet);
   logPasswordBox=(LinearLayout)findViewById(R.id.log_password_box);
+  final RatingBar ratingBar=(RatingBar)findViewById(R.id.gcvoteRating);
+  initializeRatingBar(ratingBar);
   setDefaultValues();
   if (savedInstanceState != null) {
     rating=savedInstanceState.getFloat(SAVED_STATE_RATING);
@@ -42,13 +44,11 @@
       insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),new LogContext(cache,null)),false);
     }
   }
-  updatePostButtonText();
-  updateImageButton();
   enablePostButton(false);
   final Button typeButton=(Button)findViewById(R.id.type);
   typeButton.setText(typeSelected.getL10n());
   typeButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View view){
+    @Override public void onClick(    final View view){
       selectLogType();
     }
   }
@@ -64,27 +64,6 @@
   tweetCheck.setChecked(true);
   updateTweetBox(typeSelected);
   updateLogPasswordBox(typeSelected);
-  final Button imageButton=(Button)findViewById(R.id.image_btn);
-  imageButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View view){
-      selectImage();
-    }
-  }
-);
-  final Button saveButton=(Button)findViewById(R.id.save);
-  saveButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      saveLog(true);
-    }
-  }
-);
-  final Button clearButton=(Button)findViewById(R.id.clear);
-  clearButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      clearLog();
-    }
-  }
-);
   loggingManager=cache.getLoggingManager(this);
   loggingManager.init();
 }

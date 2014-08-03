@@ -1,6 +1,6 @@
 {
-  int specMode=MeasureSpec.getMode(measureSpec);
-  int specSize=MeasureSpec.getSize(measureSpec);
+  final int specMode=MeasureSpec.getMode(measureSpec);
+  final int specSize=MeasureSpec.getSize(measureSpec);
   if (specMode != MeasureSpec.EXACTLY) {
     throw new IllegalStateException(getClass().getSimpleName() + " can only be used in EXACTLY mode.");
   }

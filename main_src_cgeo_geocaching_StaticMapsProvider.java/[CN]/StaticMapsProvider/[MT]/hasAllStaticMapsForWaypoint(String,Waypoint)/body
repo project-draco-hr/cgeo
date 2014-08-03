@@ -1,9 +1,9 @@
 {
-  int waypointId=waypoint.getId();
-  int waypointMapHash=waypoint.getStaticMapsHashcode();
+  final int waypointId=waypoint.getId();
+  final int waypointMapHash=waypoint.getStaticMapsHashcode();
   for (int level=1; level <= MAPS_LEVEL_MAX; level++) {
-    File mapFile=StaticMapsProvider.getMapFile(geocode,WAYPOINT_PREFIX + waypointId + "_"+ waypointMapHash+ "_"+ level,false);
-    boolean mapExists=mapFile.exists();
+    final File mapFile=StaticMapsProvider.getMapFile(geocode,WAYPOINT_PREFIX + waypointId + "_"+ waypointMapHash+ "_"+ level,false);
+    final boolean mapExists=mapFile.exists();
     if (!mapExists) {
       return false;
     }

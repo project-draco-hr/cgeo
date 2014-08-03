@@ -27,7 +27,7 @@ CacheDetailActivity.startActivity(this,cache.getGeocode(),cache.getName());
 break;
 case R.id.menu_drop_cache:
 cache.drop(new Handler(){
-@Override public void handleMessage(Message msg){
+@Override public void handleMessage(final Message msg){
 adapter.notifyDataSetChanged();
 refreshCurrentList();
 }
@@ -36,7 +36,7 @@ refreshCurrentList();
 break;
 case R.id.menu_move_to_list:
 new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list,new Action1<Integer>(){
-@Override public void call(Integer newListId){
+@Override public void call(final Integer newListId){
 DataStore.moveToList(Collections.singletonList(cache),newListId);
 adapter.setSelectMode(false);
 refreshCurrentList();
@@ -48,9 +48,6 @@ case R.id.menu_store_cache:
 case R.id.menu_refresh:
 refreshStored(Collections.singletonList(cache));
 break;
-case R.id.menu_export:
-ExportFactory.showExportMenu(Collections.singletonList(cache),this);
-return false;
 default :
 lastMenuInfo=info;
 LoggingUI.onMenuItemSelected(item,this,cache);

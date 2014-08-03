@@ -1,8 +1,8 @@
 {
-  String bearingText=bearingEditText.getText().toString();
-  String distanceText=distanceEditText.getText().toString() + distanceUnit;
-  String latText=latButton.getText().toString();
-  String lonText=lonButton.getText().toString();
+  final String bearingText=bearingEditText.getText().toString();
+  final String distanceText=distanceEditText.getText().toString() + distanceUnit;
+  final String latText=latButton.getText().toString();
+  final String lonText=lonButton.getText().toString();
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     showToast(res.getString(R.string.err_point_no_position_given));
     return null;
@@ -12,7 +12,7 @@
     try {
       coords=new Geopoint(latText,lonText);
     }
- catch (    Geopoint.ParseException e) {
+ catch (    final Geopoint.ParseException e) {
       showToast(res.getString(e.resource));
       return null;
     }
@@ -29,7 +29,7 @@
     try {
       bearing=Double.parseDouble(bearingText);
     }
- catch (    NumberFormatException e) {
+ catch (    final NumberFormatException e) {
       Dialogs.message(this,R.string.err_point_bear_and_dist_title,R.string.err_point_bear_and_dist);
       return null;
     }
@@ -37,7 +37,7 @@
     try {
       distance=DistanceParser.parseDistance(distanceText,!Settings.isUseImperialUnits());
     }
- catch (    NumberFormatException e) {
+ catch (    final NumberFormatException e) {
       showToast(res.getString(R.string.err_parse_dist));
       return null;
     }

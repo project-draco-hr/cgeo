@@ -3,7 +3,7 @@
     return StringUtils.EMPTY;
   }
   String result=signature;
-  for (  LogTemplate template : getTemplates()) {
+  for (  final LogTemplate template : getTemplatesWithSignature()) {
     result=template.apply(result,context);
   }
   return result;

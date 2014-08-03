@@ -4,7 +4,7 @@
   }
   Log.d("Database clean: started");
   try {
-    Set<String> geocodes=new HashSet<String>();
+    Set<String> geocodes=new HashSet<>();
     if (more) {
       queryToColl(dbTableCaches,new String[]{"geocode"},"reason = 0",null,null,null,null,null,geocodes,GET_STRING_0);
     }

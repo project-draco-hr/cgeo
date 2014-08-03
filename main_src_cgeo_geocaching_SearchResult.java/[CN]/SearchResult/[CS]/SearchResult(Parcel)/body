@@ -1,10 +1,10 @@
 {
-  final ArrayList<String> list=new ArrayList<String>();
+  final ArrayList<String> list=new ArrayList<>();
   in.readStringList(list);
-  geocodes=new HashSet<String>(list);
-  final ArrayList<String> filteredList=new ArrayList<String>();
+  geocodes=new HashSet<>(list);
+  final ArrayList<String> filteredList=new ArrayList<>();
   in.readStringList(filteredList);
-  filteredGeocodes=new HashSet<String>(filteredList);
+  filteredGeocodes=new HashSet<>(filteredList);
   error=(StatusCode)in.readSerializable();
   url=in.readString();
   final int length=in.readInt();

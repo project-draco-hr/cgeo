@@ -1,10 +1,10 @@
 {
-  final Set<String> cachedGeocodes=new HashSet<String>();
+  final Set<String> cachedGeocodes=new HashSet<>();
   for (  final Tile tile : tiles) {
     cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport(),CacheType.ALL));
   }
   cachedGeocodes.removeAll(searchResult.getGeocodes());
-  final Set<String> missingFromSearch=new HashSet<String>();
+  final Set<String> missingFromSearch=new HashSet<>();
   for (  final String geocode : cachedGeocodes) {
     if (connector.canHandle(geocode)) {
       final Geocache geocache=cacheCache.getCacheFromCache(geocode);

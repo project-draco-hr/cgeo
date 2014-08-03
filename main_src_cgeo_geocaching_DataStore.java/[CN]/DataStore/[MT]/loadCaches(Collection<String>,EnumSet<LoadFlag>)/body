@@ -1,28 +1,28 @@
 {
   if (CollectionUtils.isEmpty(geocodes)) {
-    return new HashSet<Geocache>();
+    return new HashSet<>();
   }
-  Set<Geocache> result=new HashSet<Geocache>();
-  Set<String> remaining=new HashSet<String>(geocodes);
-  if (loadFlags.contains(LoadFlag.LOAD_CACHE_BEFORE)) {
-    for (    String geocode : new HashSet<String>(remaining)) {
-      Geocache cache=cacheCache.getCacheFromCache(geocode);
+  final Set<Geocache> result=new HashSet<>();
+  final Set<String> remaining=new HashSet<>(geocodes);
+  if (loadFlags.contains(LoadFlag.CACHE_BEFORE)) {
+    for (    final String geocode : new HashSet<>(remaining)) {
+      final Geocache cache=cacheCache.getCacheFromCache(geocode);
       if (cache != null) {
         result.add(cache);
         remaining.remove(cache.getGeocode());
       }
     }
   }
-  if (loadFlags.contains(LoadFlag.LOAD_DB_MINIMAL) || loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES) || loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)|| loadFlags.contains(LoadFlag.LOAD_SPOILERS)|| loadFlags.contains(LoadFlag.LOAD_LOGS)|| loadFlags.contains(LoadFlag.LOAD_INVENTORY)|| loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+  if (loadFlags.contains(LoadFlag.DB_MINIMAL) || loadFlags.contains(LoadFlag.ATTRIBUTES) || loadFlags.contains(LoadFlag.WAYPOINTS)|| loadFlags.contains(LoadFlag.SPOILERS)|| loadFlags.contains(LoadFlag.LOGS)|| loadFlags.contains(LoadFlag.INVENTORY)|| loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
     final Set<Geocache> cachesFromDB=loadCachesFromGeocodes(remaining,loadFlags);
     result.addAll(cachesFromDB);
     for (    final Geocache cache : cachesFromDB) {
       remaining.remove(cache.getGeocode());
     }
   }
-  if (loadFlags.contains(LoadFlag.LOAD_CACHE_AFTER)) {
-    for (    String geocode : new HashSet<String>(remaining)) {
-      Geocache cache=cacheCache.getCacheFromCache(geocode);
+  if (loadFlags.contains(LoadFlag.CACHE_AFTER)) {
+    for (    final String geocode : new HashSet<>(remaining)) {
+      final Geocache cache=cacheCache.getCacheFromCache(geocode);
       if (cache != null) {
         result.add(cache);
         remaining.remove(cache.getGeocode());

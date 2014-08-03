@@ -45,7 +45,7 @@
   canvas.drawCircle(center.x,center.y,radius,accuracyCircle);
   positionHistory.rememberTrailPosition(coordinates);
   if (Settings.isMapTrail()) {
-    final ArrayList<Location> paintHistory=new ArrayList<Location>(positionHistory.getHistory());
+    final ArrayList<Location> paintHistory=new ArrayList<>(positionHistory.getHistory());
     paintHistory.add(coordinates);
     int size=paintHistory.size();
     if (size > 1) {
@@ -76,7 +76,7 @@
     }
   }
   if (arrow == null) {
-    arrow=BitmapFactory.decodeResource(activity.getResources(),R.drawable.my_location_chevron);
+    arrow=BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(),R.drawable.my_location_chevron);
     widthArrowHalf=arrow.getWidth() / 2;
     heightArrowHalf=arrow.getHeight() / 2;
   }

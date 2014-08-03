@@ -1,6 +1,6 @@
 {
   withMockedLoginDo(new Runnable(){
-    public void run(){
+    @Override public void run(){
       final Strategy strategy=Settings.getLiveMapStrategy();
       final Strategy testStrategy=Strategy.FAST;
       Settings.setLiveMapStrategy(testStrategy);

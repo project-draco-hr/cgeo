@@ -1,7 +1,7 @@
 {
   if (isEventCache()) {
     final Date eventDate=getHiddenDate();
-    boolean expired=DateUtils.isPastEvent(this);
+    final boolean expired=DateUtils.isPastEvent(this);
     if (hasOwnLog(LogType.WILL_ATTEND) || expired || (eventDate != null && DateUtils.daysSince(eventDate.getTime()) == 0)) {
       return hasOwnLog(LogType.ATTENDED) ? LogType.NOTE : LogType.ATTENDED;
     }

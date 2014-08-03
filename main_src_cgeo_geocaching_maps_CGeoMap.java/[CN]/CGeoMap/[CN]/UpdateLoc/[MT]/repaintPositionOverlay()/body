@@ -3,28 +3,23 @@
   if (currentTimeMillis > timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL) {
     timeLastPositionOverlayCalculation=currentTimeMillis;
     try {
-      CGeoMap cgeoMapRef=map.get();
-      if (cgeoMapRef != null) {
-        if (cgeoMapRef.mapView != null) {
-          if (cgeoMapRef.overlayPositionAndScale == null) {
-            cgeoMapRef.overlayPositionAndScale=cgeoMapRef.mapView.createAddPositionAndScaleOverlay(cgeoMapRef.activity);
+      final CGeoMap map=mapRef.get();
+      if (map != null) {
+        final boolean needsRepaintForDistance=needsRepaintForDistance();
+        final boolean needsRepaintForHeading=needsRepaintForHeading();
+        if (needsRepaintForDistance) {
+          if (map.followMyLocation) {
+            map.centerMap(new Geopoint(currentLocation));
           }
-          boolean needsRepaintForDistance=needsRepaintForDistance();
-          boolean needsRepaintForHeading=needsRepaintForHeading();
-          if (needsRepaintForDistance) {
-            if (cgeoMapRef.followMyLocation) {
-              cgeoMapRef.centerMap(new Geopoint(currentLocation));
-            }
-          }
-          if (needsRepaintForDistance || needsRepaintForHeading) {
-            cgeoMapRef.overlayPositionAndScale.setCoordinates(currentLocation);
-            cgeoMapRef.overlayPositionAndScale.setHeading(currentHeading);
-            cgeoMapRef.mapView.repaintRequired(cgeoMapRef.overlayPositionAndScale);
-          }
+        }
+        if (needsRepaintForDistance || needsRepaintForHeading) {
+          map.overlayPositionAndScale.setCoordinates(currentLocation);
+          map.overlayPositionAndScale.setHeading(currentHeading);
+          map.mapView.repaintRequired(map.overlayPositionAndScale);
         }
       }
     }
- catch (    RuntimeException e) {
+ catch (    final RuntimeException e) {
       Log.w("Failed to update location.");
     }
   }

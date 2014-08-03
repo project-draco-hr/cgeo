@@ -1,11 +1,11 @@
 {
-  String geocode=cache.getGeocode();
-  List<Waypoint> waypoints=cache.getWaypoints();
+  final String geocode=cache.getGeocode();
+  final List<Waypoint> waypoints=cache.getWaypoints();
   if (CollectionUtils.isNotEmpty(waypoints)) {
-    final ArrayList<String> currentWaypointIds=new ArrayList<String>();
-    ContentValues values=new ContentValues();
-    long timeStamp=System.currentTimeMillis();
-    for (    Waypoint oneWaypoint : waypoints) {
+    final ArrayList<String> currentWaypointIds=new ArrayList<>();
+    final ContentValues values=new ContentValues();
+    final long timeStamp=System.currentTimeMillis();
+    for (    final Waypoint oneWaypoint : waypoints) {
       values.clear();
       values.put("geocode",geocode);
       values.put("updated",timeStamp);

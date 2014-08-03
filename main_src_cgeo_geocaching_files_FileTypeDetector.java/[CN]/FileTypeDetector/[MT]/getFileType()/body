@@ -1,0 +1,25 @@
+{
+  InputStream is=null;
+  BufferedReader reader=null;
+  FileType type=FileType.UNKNOWN;
+  try {
+    is=contentResolver.openInputStream(uri);
+    if (is == null) {
+      return FileType.UNKNOWN;
+    }
+    reader=new BufferedReader(new InputStreamReader(is));
+    type=detectHeader(reader);
+    reader.close();
+  }
+ catch (  FileNotFoundException e) {
+    Log.e("FileTypeDetector",e);
+  }
+catch (  IOException e) {
+    Log.e("FileTypeDetector",e);
+  }
+ finally {
+    IOUtils.closeQuietly(reader);
+    IOUtils.closeQuietly(is);
+  }
+  return type;
+}

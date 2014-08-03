@@ -1,7 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.cachedetail_activity);
   createSubscriptions=new CompositeSubscription();
-  setTitle(res.getString(R.string.cache));
   final Bundle extras=getIntent().getExtras();
   final Uri uri=getIntent().getData();
   String name=null;
@@ -84,6 +83,8 @@
     finish();
     return;
   }
+  cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_ONLY);
+  updateTitleBar(geocode);
   final LoadCacheHandler loadCacheHandler=new LoadCacheHandler(this,progress);
   try {
     String title=res.getString(R.string.cache);
@@ -97,17 +98,9 @@
   }
  catch (  final RuntimeException e) {
   }
-  final ImageView defaultNavigationImageView=(ImageView)findViewById(R.id.defaultNavigation);
-  defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener(){
-    @Override public boolean onLongClick(    View v){
-      startDefaultNavigation2();
-      return true;
-    }
-  }
-);
   final int pageToOpen=savedInstanceState != null ? savedInstanceState.getInt(STATE_PAGE_INDEX,0) : Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
   createViewPager(pageToOpen,new OnPageSelectedListener(){
-    @Override public void onPageSelected(    int position){
+    @Override public void onPageSelected(    final int position){
       if (Settings.isOpenLastDetailsPage()) {
         Settings.setLastDetailsPage(position);
       }
@@ -119,8 +112,8 @@
 );
   final String realGeocode=geocode;
   final String realGuid=guid;
-  Schedulers.io().schedule(new Action1<Inner>(){
-    @Override public void call(    final Inner inner){
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
       search=Geocache.searchByGeocode(realGeocode,StringUtils.isBlank(realGeocode) ? realGuid : null,0,false,loadCacheHandler);
       loadCacheHandler.sendMessage(Message.obtain());
     }

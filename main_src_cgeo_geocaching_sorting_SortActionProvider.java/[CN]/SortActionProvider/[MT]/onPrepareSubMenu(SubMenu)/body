@@ -1,0 +1,19 @@
+{
+  subMenu.clear();
+  for (int i=0; i < registry.size(); i++) {
+    final ComparatorEntry comparatorEntry=registry.get(i);
+    final MenuItem menuItem=subMenu.add(MENU_GROUP,i,i,comparatorEntry.name);
+    menuItem.setOnMenuItemClickListener(this).setCheckable(true);
+    if (selection == null) {
+      if (comparatorEntry.cacheComparator == null) {
+        menuItem.setChecked(true);
+      }
+    }
+ else {
+      if (selection.getClass().equals(comparatorEntry.cacheComparator)) {
+        menuItem.setChecked(true);
+      }
+    }
+  }
+  subMenu.setGroupCheckable(MENU_GROUP,true,true);
+}

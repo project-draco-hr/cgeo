@@ -1,0 +1,17 @@
+{
+  String line=reader.readLine();
+  if (isZip(line)) {
+    return FileType.ZIP;
+  }
+  for (int i=0; i < 5; i++) {
+    line=StringUtils.trim(line);
+    if (StringUtils.contains(line,"<loc")) {
+      return FileType.LOC;
+    }
+    if (StringUtils.contains(line,"<gpx")) {
+      return FileType.GPX;
+    }
+    line=reader.readLine();
+  }
+  return FileType.UNKNOWN;
+}

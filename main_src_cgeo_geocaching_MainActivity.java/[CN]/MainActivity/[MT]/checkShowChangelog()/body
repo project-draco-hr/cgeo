@@ -1,0 +1,8 @@
+{
+  final long lastChecksum=Settings.getLastChangelogChecksum();
+  final long checksum=TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
+  Settings.setLastChangelogChecksum(checksum);
+  if (lastChecksum > 0 && lastChecksum != checksum) {
+    AboutActivity.showChangeLog(this);
+  }
+}

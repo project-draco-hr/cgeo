@@ -6,7 +6,7 @@
     final String size=response.getString(CACHE_SIZE2);
     return CacheSize.getById(size);
   }
- catch (  JSONException e) {
+ catch (  final JSONException e) {
     Log.e("OkapiClient.getCacheSize",e);
     return getCacheSizeDeprecated(response);
   }

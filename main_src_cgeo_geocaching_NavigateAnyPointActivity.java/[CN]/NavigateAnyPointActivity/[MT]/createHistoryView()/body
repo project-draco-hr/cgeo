@@ -1,5 +1,5 @@
 {
-  final View pointControls=getLayoutInflater().inflate(R.layout.navigateanypoint_header,null);
+  final View pointControls=getLayoutInflater().inflate(R.layout.navigateanypoint_header,historyListView,false);
   historyListView.addHeaderView(pointControls,null,false);
   ButterKnife.inject(this);
   if (getHistoryOfSearchedLocations().isEmpty()) {
@@ -7,7 +7,7 @@
   }
   historyListView.setAdapter(getDestionationHistoryAdapter());
   historyListView.setOnItemClickListener(new OnItemClickListener(){
-    @Override public void onItemClick(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
+    @Override public void onItemClick(    final AdapterView<?> arg0,    final View arg1,    final int arg2,    final long arg3){
       final Object selection=arg0.getItemAtPosition(arg2);
       if (selection instanceof Destination) {
         navigateTo(((Destination)selection).getCoords());
@@ -16,7 +16,7 @@
   }
 );
   historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener(){
-    @Override public void onCreateContextMenu(    ContextMenu menu,    View v,    ContextMenuInfo menuInfo){
+    @Override public void onCreateContextMenu(    final ContextMenu menu,    final View v,    final ContextMenuInfo menuInfo){
       menu.add(Menu.NONE,CONTEXT_MENU_NAVIGATE,Menu.NONE,res.getString(R.string.cache_menu_navigate));
       menu.add(Menu.NONE,CONTEXT_MENU_EDIT_WAYPOINT,Menu.NONE,R.string.waypoint_edit);
       menu.add(Menu.NONE,CONTEXT_MENU_DELETE_WAYPOINT,Menu.NONE,R.string.waypoint_delete);

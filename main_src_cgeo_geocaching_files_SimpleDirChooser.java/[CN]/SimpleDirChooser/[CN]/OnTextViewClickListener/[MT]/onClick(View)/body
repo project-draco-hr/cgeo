@@ -1,11 +1,11 @@
 {
-  Option option=adapter.getItem(position);
+  final Option option=adapter.getItem(position);
   if (option.getName().equals(PARENT_DIR)) {
     currentDir=new File(option.getPath());
     fill(currentDir);
   }
  else {
-    File dir=new File(option.getPath());
+    final File dir=new File(option.getPath());
     if (dir.list(new DirOnlyFilenameFilter()).length > 0) {
       currentDir=dir;
       fill(currentDir);

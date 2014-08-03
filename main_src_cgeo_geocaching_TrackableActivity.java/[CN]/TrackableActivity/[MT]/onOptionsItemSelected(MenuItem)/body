@@ -6,7 +6,6 @@ case R.id.menu_log_touch:
 case R.id.menu_browser_trackable:
 startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(trackable.getUrl())));
 return true;
-default :
-return false;
 }
+return super.onOptionsItemSelected(item);
 }

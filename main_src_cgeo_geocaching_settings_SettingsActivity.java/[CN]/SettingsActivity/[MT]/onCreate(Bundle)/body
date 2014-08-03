@@ -3,6 +3,6 @@
   super.onCreate(savedInstanceState);
   SettingsActivity.addPreferencesFromResource(this,R.xml.preferences);
   initPreferences();
-  Intent intent=getIntent();
+  final Intent intent=getIntent();
   openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN,0));
 }

@@ -1,6 +1,6 @@
 {
   final String page=getFileContent(cachePage);
-  final SearchResult result=GCParser.parseCacheFromText(page,null);
+  final SearchResult result=GCParser.parseAndSaveCacheFromText(page,null);
   assertThat(result).isNotNull();
   assertThat(result.getCount()).isEqualTo(1);
   final Geocache cache=result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);

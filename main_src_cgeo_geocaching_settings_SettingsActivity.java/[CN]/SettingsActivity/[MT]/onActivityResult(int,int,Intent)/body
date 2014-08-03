@@ -3,7 +3,7 @@
   if (resultCode != RESULT_OK) {
     return;
   }
-  for (  DirChooserType dct : DirChooserType.values()) {
+  for (  final DirChooserType dct : DirChooserType.values()) {
     if (requestCode == dct.requestCode) {
       setChosenDirectory(dct,data);
       return;
@@ -13,15 +13,15 @@ switch (requestCode) {
 case R.string.pref_mapDirectory:
     if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
       final String mapFile=data.getStringExtra(Intents.EXTRA_MAP_FILE);
-      File file=new File(mapFile);
+      final File file=new File(mapFile);
       if (!file.isDirectory()) {
         Settings.setMapFile(mapFile);
         if (!Settings.isValidMapFile(Settings.getMapFile())) {
           ActivityMixin.showToast(this,R.string.warn_invalid_mapfile);
         }
  else {
-          Integer mapSourceId=mapFile.hashCode();
-          ListPreference mapSource=(ListPreference)getPreference(R.string.pref_mapsource);
+          final Integer mapSourceId=mapFile.hashCode();
+          final ListPreference mapSource=(ListPreference)getPreference(R.string.pref_mapsource);
           mapSource.setValue(mapSourceId.toString());
           VALUE_CHANGE_LISTENER.onPreferenceChange(mapSource,mapSourceId);
         }
@@ -38,7 +38,8 @@ case R.string.pref_fakekey_ocpl_authorization:
 case R.string.pref_fakekey_ocnl_authorization:
 case R.string.pref_fakekey_ocus_authorization:
 case R.string.pref_fakekey_ocro_authorization:
-OCPreferenceKeys key=OCPreferenceKeys.getByAuthId(requestCode);
+case R.string.pref_fakekey_ocuk_authorization:
+final OCPreferenceKeys key=OCPreferenceKeys.getByAuthId(requestCode);
 if (key != null) {
 setOCAuthTitle(key);
 redrawScreen(key.prefScreenId);

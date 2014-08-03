@@ -1,0 +1,15 @@
+{
+  mCacheListSpinnerAdapter=new CacheListSpinnerAdapter(this,R.layout.support_simple_spinner_dropdown_item);
+  getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+  getSupportActionBar().setDisplayShowTitleEnabled(false);
+  getSupportActionBar().setListNavigationCallbacks(mCacheListSpinnerAdapter,new ActionBar.OnNavigationListener(){
+    @Override public boolean onNavigationItemSelected(    final int i,    final long l){
+      final int newListId=mCacheListSpinnerAdapter.getItem(i).id;
+      if (newListId != listId) {
+        switchListById(newListId);
+      }
+      return true;
+    }
+  }
+);
+}

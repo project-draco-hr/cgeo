@@ -1,0 +1,36 @@
+{
+  try {
+    showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
+    if (Settings.isGCConnectorActive()) {
+      if (tokens == null) {
+        tokens=GCLogin.getInstance().getMapTokens();
+        if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
+          tokens=null;
+          if (!noMapTokenShowed) {
+            ActivityMixin.showToast(activity,res.getString(R.string.map_token_err));
+            noMapTokenShowed=true;
+          }
+        }
+      }
+    }
+    final SearchResult searchResult=ConnectorFactory.searchByViewport(mapView.getViewport().resize(0.8),tokens);
+    downloaded=true;
+    final Set<Geocache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    CGeoMap.filter(result);
+    final Set<String> filteredCodes=searchResult.getFilteredGeocodes();
+    Log.d("Filtering out " + filteredCodes.size() + " caches: "+ filteredCodes.toString());
+    caches.removeAll(DataStore.loadCaches(filteredCodes,LoadFlags.LOAD_CACHE_ONLY));
+    DataStore.removeCaches(filteredCodes,EnumSet.of(RemoveFlag.CACHE));
+    caches.removeAll(result);
+    caches.addAll(result);
+    lastSearchResult=searchResult;
+    displayExecutor.execute(new DisplayRunnable(this));
+  }
+ catch (  final ThreadDeath e) {
+    Log.d("DownloadThread stopped");
+    displayHandler.sendEmptyMessage(UPDATE_TITLE);
+  }
+ finally {
+    showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
+  }
+}

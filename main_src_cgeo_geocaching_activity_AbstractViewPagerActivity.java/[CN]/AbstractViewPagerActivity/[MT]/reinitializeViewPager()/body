@@ -1,8 +1,8 @@
 {
-  for (  PageViewCreator creator : viewCreators.values()) {
+  for (  final PageViewCreator creator : viewCreators.values()) {
     creator.notifyDataSetChanged();
   }
-  for (  Bundle state : viewStates.values()) {
+  for (  final Bundle state : viewStates.values()) {
     state.clear();
   }
   pageOrder.clear();

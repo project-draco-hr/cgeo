@@ -9,5 +9,8 @@
 ));
     return null;
   }
-  return drawable.toBlockingObservable().lastOrDefault(null);
+  if (view == null) {
+    return drawable.toBlocking().lastOrDefault(null);
+  }
+  return new ContainerDrawable(view,drawable);
 }

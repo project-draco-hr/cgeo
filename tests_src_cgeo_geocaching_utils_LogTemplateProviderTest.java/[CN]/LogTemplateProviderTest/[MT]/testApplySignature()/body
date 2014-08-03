@@ -1,0 +1,15 @@
+{
+  String oldSignature=Settings.getSignature();
+  try {
+    TestSettings.setSignature("[DATE]");
+    String currentDate=LogTemplateProvider.applyTemplates(Settings.getSignature(),new LogContext(null,null,true));
+    final String signatureTemplate="Signature [SIGNATURE]";
+    final String signature=LogTemplateProvider.applyTemplates(signatureTemplate,new LogContext(null,null,true));
+    assertThat(signature).isEqualTo("Signature " + currentDate);
+    final String currentYear=Integer.toString(Calendar.YEAR);
+    assertThat(signature).contains(currentYear);
+  }
+  finally {
+    TestSettings.setSignature(oldSignature);
+  }
+}

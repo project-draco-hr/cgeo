@@ -15,9 +15,9 @@
     }
     cursor.close();
   }
- catch (  SQLiteDoneException e) {
+ catch (  final SQLiteDoneException e) {
   }
-catch (  Exception e) {
+catch (  final Exception e) {
     Log.e("DataStore.getCacheDescription",e);
   }
   return partial;

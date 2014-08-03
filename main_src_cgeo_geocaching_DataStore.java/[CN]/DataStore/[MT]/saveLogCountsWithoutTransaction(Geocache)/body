@@ -1,12 +1,12 @@
 {
-  String geocode=cache.getGeocode();
+  final String geocode=cache.getGeocode();
   database.delete(dbTableLogCount,"geocode = ?",new String[]{geocode});
-  Map<LogType,Integer> logCounts=cache.getLogCounts();
+  final Map<LogType,Integer> logCounts=cache.getLogCounts();
   if (MapUtils.isNotEmpty(logCounts)) {
-    Set<Entry<LogType,Integer>> logCountsItems=logCounts.entrySet();
-    SQLiteStatement insertLogCounts=PreparedStatements.getInsertLogCounts();
+    final Set<Entry<LogType,Integer>> logCountsItems=logCounts.entrySet();
+    final SQLiteStatement insertLogCounts=PreparedStatements.getInsertLogCounts();
     final long timestamp=System.currentTimeMillis();
-    for (    Entry<LogType,Integer> pair : logCountsItems) {
+    for (    final Entry<LogType,Integer> pair : logCountsItems) {
       insertLogCounts.bindString(1,geocode);
       insertLogCounts.bindLong(2,timestamp);
       insertLogCounts.bindLong(3,pair.getKey().id);

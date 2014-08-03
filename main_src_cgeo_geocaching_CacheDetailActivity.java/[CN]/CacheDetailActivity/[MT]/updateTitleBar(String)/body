@@ -1,0 +1,15 @@
+{
+  if (cache == null) {
+    setTitle(StringUtils.isBlank(geocode) ? res.getString(R.string.cache) : geocode);
+    getSupportActionBar().setIcon(android.R.color.transparent);
+  }
+ else {
+    if (StringUtils.isNotBlank(cache.getName())) {
+      setTitle(cache.getName() + " (" + cache.getGeocode()+ ')');
+    }
+ else {
+      setTitle(cache.getGeocode());
+    }
+    getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
+  }
+}

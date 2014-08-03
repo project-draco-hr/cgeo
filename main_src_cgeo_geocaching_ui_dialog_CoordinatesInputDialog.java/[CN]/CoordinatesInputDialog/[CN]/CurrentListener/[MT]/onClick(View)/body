@@ -1,8 +1,9 @@
 {
-  if (geo == null || geo.getCoords() == null) {
-    context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
+  if (gpinitial == null) {
+    final AbstractActivity activity=(AbstractActivity)getActivity();
+    activity.showToast(activity.getResources().getString(R.string.err_point_unknown_position));
     return;
   }
-  gp=geo.getCoords();
+  gp=gpinitial;
   updateGUI();
 }

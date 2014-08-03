@@ -1,0 +1,17 @@
+{
+  Log.e("UncaughtException",ex);
+  Throwable exx=ex;
+  while (exx.getCause() != null) {
+    exx=exx.getCause();
+  }
+  if (exx.getClass().equals(OutOfMemoryError.class)) {
+    try {
+      Log.e("OutOfMemory");
+      android.os.Debug.dumpHprofData(Environment.getExternalStorageDirectory().getPath() + "/dump.hprof");
+    }
+ catch (    final IOException e) {
+      Log.e("Error writing dump",e);
+    }
+  }
+  defaultHandler.uncaughtException(thread,ex);
+}

@@ -1,7 +1,7 @@
 {
   String gpxId=prefix;
   if (StringUtils.isNotBlank(geocode)) {
-    Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+    final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
     if (cache != null) {
       gpxId=cache.getWaypointGpxId(prefix);
     }

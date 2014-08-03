@@ -9,7 +9,7 @@
   try {
     final Geocache oldCache=DataStore.loadCache(upperCase,LoadFlags.LOAD_ALL_DB_ONLY);
     assertThat(oldCache).as("Old cache").isNull();
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.SAVE_DB));
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
     final Geocache cacheWithOriginalCode=DataStore.loadCache(upperCase,LoadFlags.LOAD_ALL_DB_ONLY);
     assertThat(cacheWithOriginalCode).overridingErrorMessage("Cache was not saved correctly!").isNotNull();
     final Geocache cacheLowerCase=DataStore.loadCache(lowerCase,LoadFlags.LOAD_ALL_DB_ONLY);

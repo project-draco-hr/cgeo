@@ -1,29 +1,3 @@
 {
-  return Schedulers.newThread().schedulePeriodically(new Action1<Scheduler.Inner>(){
-    @Override public void call(    Scheduler.Inner inner){
-      try {
-        if (mapView != null) {
-          final Viewport viewportNow=mapView.getViewport();
-          final int zoomNow=mapView.getMapZoomLevel();
-          final boolean moved=markersInvalidated || (isLiveEnabled && !downloaded) || (viewport == null)|| zoomNow != zoom || (mapMoved(viewport,viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow)));
-          if (moved || !viewportNow.equals(viewport)) {
-            displayHandler.sendEmptyMessage(UPDATE_TITLE);
-          }
-          zoom=zoomNow;
-          if (moved) {
-            markersInvalidated=false;
-            long currentTime=System.currentTimeMillis();
-            if (1000 < (currentTime - loadThreadRun)) {
-              viewport=viewportNow;
-              loadExecutor.execute(new LoadRunnable(viewport));
-            }
-          }
-        }
-      }
- catch (      Exception e) {
-        Log.w("CGeoMap.startLoadtimer.start",e);
-      }
-    }
-  }
-,250,250,TimeUnit.MILLISECONDS);
+  return Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this),0,250,TimeUnit.MILLISECONDS);
 }

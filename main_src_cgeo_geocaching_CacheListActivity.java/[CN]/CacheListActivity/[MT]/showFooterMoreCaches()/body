@@ -1,16 +1,22 @@
 {
+  if (listFooter == null) {
+    return;
+  }
   boolean enableMore=type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS;
   if (enableMore && search != null) {
     final int count=search.getTotalCountGC();
     enableMore=count > 0 && cacheList.size() < count;
   }
+  listFooter.setClickable(enableMore);
   if (enableMore) {
     listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently)+ ": "+ cacheList.size()+ ")");
     listFooter.setOnClickListener(new MoreCachesListener());
   }
- else {
+ else   if (type != CacheListType.OFFLINE) {
     listFooterText.setText(res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no));
     listFooter.setOnClickListener(null);
   }
-  listFooter.setClickable(enableMore);
+ else {
+    getListView().removeFooterView(listFooter);
+  }
 }

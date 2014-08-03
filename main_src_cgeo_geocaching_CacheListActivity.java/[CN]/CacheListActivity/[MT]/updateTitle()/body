@@ -1,15 +1,5 @@
 {
-  final ArrayList<Integer> numbers=new ArrayList<Integer>();
-  if (adapter.isFiltered()) {
-    numbers.add(adapter.getCount());
-  }
-  if (search != null) {
-    numbers.add(search.getCount());
-  }
-  if (numbers.isEmpty()) {
-    setTitle(title);
-  }
- else {
-    setTitle(title + " [" + StringUtils.join(numbers,'/')+ ']');
-  }
+  setTitle(title);
+  getSupportActionBar().setSubtitle(getCurrentSubtitle());
+  refreshSpinnerAdapter();
 }

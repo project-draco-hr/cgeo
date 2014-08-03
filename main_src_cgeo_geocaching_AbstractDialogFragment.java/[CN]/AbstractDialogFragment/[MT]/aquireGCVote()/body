@@ -1,0 +1,23 @@
+{
+  if (!Settings.isRatingWanted()) {
+    return;
+  }
+  if (!cache.supportsGCVote()) {
+    return;
+  }
+  AndroidObservable.bindActivity(getActivity(),Observable.defer(new Func0<Observable<GCVoteRating>>(){
+    @Override public Observable<GCVoteRating> call(){
+      final GCVoteRating rating=GCVote.getRating(cache.getGuid(),geocode);
+      return rating != null ? Observable.just(rating) : Observable.<GCVoteRating>empty();
+    }
+  }
+)).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<GCVoteRating>(){
+    @Override public void call(    final GCVoteRating rating){
+      cache.setRating(rating.getRating());
+      cache.setVotes(rating.getVotes());
+      DataStore.saveChangedCache(cache);
+      details.addRating(cache);
+    }
+  }
+);
+}
