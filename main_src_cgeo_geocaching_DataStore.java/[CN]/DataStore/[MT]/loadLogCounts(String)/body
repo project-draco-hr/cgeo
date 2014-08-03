@@ -3,7 +3,7 @@
     return null;
   }
   init();
-  final Map<LogType,Integer> logCounts=new HashMap<>();
+  final Map<LogType,Integer> logCounts=new EnumMap<>(LogType.class);
   final Cursor cursor=database.query(dbTableLogCount,new String[]{"type","count"},"geocode = ?",new String[]{geocode},null,null,null,"100");
   while (cursor.moveToNext()) {
     logCounts.put(LogType.getById(cursor.getInt(0)),cursor.getInt(1));
