@@ -1,15 +1,18 @@
 {
   if (connector == null) {
-    return new JSONResult(null);
+    return new JSONResult("unknown OKAPI connector");
   }
   final String host=connector.getHost();
   if (StringUtils.isBlank(host)) {
-    return new JSONResult(null);
+    return new JSONResult("unknown OKAPI connector host");
   }
   params.add("langpref",getPreferredLanguage());
   if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-    final ImmutablePair<String,String> tokens=Settings.getTokenPair(connector.getTokenPublicPrefKeyId(),connector.getTokenSecretPrefKeyId());
-    OAuth.signOAuth(host,service.methodName,"GET",false,params,tokens.left,tokens.right,connector.getCK(),connector.getCS());
+    final OAuthTokens tokens=new OAuthTokens(connector);
+    if (!tokens.isValid()) {
+      return new JSONResult("invalid oauth tokens");
+    }
+    OAuth.signOAuth(host,service.methodName,"GET",false,params,tokens,connector.getCK(),connector.getCS());
   }
  else {
     connector.addAuthentication(params);

@@ -3,7 +3,7 @@
   try {
     final Parameters params=new Parameters("oauth_verifier",verifier);
     final String method="POST";
-    OAuth.signOAuth(host,pathAccess,method,https,params,OAtoken,OAtokenSecret,consumerKey,consumerSecret);
+    OAuth.signOAuth(host,pathAccess,method,https,params,new OAuthTokens(OAtoken,OAtokenSecret),consumerKey,consumerSecret);
     final String line=StringUtils.defaultString(Network.getResponseData(Network.postRequest(getUrlPrefix() + host + pathAccess,params)));
     OAtoken="";
     OAtokenSecret="";
@@ -25,7 +25,7 @@
       status=AUTHENTICATED;
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("OAuthAuthorizationActivity.changeToken",e);
   }
   changeTokensHandler.sendEmptyMessage(status);

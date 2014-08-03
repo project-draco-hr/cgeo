@@ -1,0 +1,12 @@
+{
+  isSuccess=false;
+  data=new JSONObject();
+  final JSONObject error=new JSONObject();
+  try {
+    error.put("developer_message",errorMessage);
+    data.put("error",error);
+  }
+ catch (  final JSONException e) {
+    Log.e("error creating JSON result error message",e);
+  }
+}

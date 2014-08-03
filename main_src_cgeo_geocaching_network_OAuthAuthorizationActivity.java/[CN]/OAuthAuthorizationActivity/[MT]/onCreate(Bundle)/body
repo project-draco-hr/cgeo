@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.authorization_activity);
-  Bundle extras=getIntent().getExtras();
+  final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     host=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_HOST,host);
     pathRequest=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_PATH_REQUEST,pathRequest);
@@ -14,7 +14,7 @@
   setTitle(getAuthTitle());
   auth_1.setText(getAuthExplainShort());
   auth_2.setText(getAuthExplainLong());
-  ImmutablePair<String,String> tempToken=getTempTokens();
+  final ImmutablePair<String,String> tempToken=getTempTokens();
   OAtoken=tempToken.left;
   OAtokenSecret=tempToken.right;
   startButton.setText(getAuthAuthorize());
