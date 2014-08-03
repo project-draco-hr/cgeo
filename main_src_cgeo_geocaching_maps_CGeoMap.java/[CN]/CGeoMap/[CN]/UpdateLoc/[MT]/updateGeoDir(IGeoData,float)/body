@@ -1,11 +1,5 @@
 {
-  if (geo.isPseudoLocation()) {
-    locationValid=false;
-  }
- else {
-    locationValid=true;
-    currentLocation=geo.getLocation();
-    currentHeading=DirectionProvider.getDirectionNow(dir);
-    repaintPositionOverlay();
-  }
+  currentLocation=geo.getLocation();
+  currentHeading=DirectionProvider.getDirectionNow(dir);
+  repaintPositionOverlay();
 }
