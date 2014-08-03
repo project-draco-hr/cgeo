@@ -26,11 +26,7 @@
     lastSearchResult=searchResult;
     displayExecutor.execute(new DisplayRunnable(this));
   }
- catch (  final ThreadDeath e) {
-    Log.d("DownloadThread stopped");
-    displayHandler.sendEmptyMessage(UPDATE_TITLE);
-  }
- finally {
+  finally {
     showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
   }
 }

@@ -28,11 +28,7 @@
     }
     displayHandler.sendEmptyMessage(UPDATE_TITLE);
   }
- catch (  final ThreadDeath e) {
-    Log.d("DisplayThread stopped");
-    displayHandler.sendEmptyMessage(UPDATE_TITLE);
-  }
- finally {
+  finally {
     showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
   }
 }
