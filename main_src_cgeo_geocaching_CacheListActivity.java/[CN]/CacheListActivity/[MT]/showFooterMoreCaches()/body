@@ -1,9 +1,13 @@
 {
+  if (listFooter == null) {
+    return;
+  }
   boolean enableMore=type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS;
   if (enableMore && search != null) {
     final int count=search.getTotalCountGC();
     enableMore=count > 0 && cacheList.size() < count;
   }
+  listFooter.setClickable(enableMore);
   if (enableMore) {
     listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently)+ ": "+ cacheList.size()+ ")");
     listFooter.setOnClickListener(new MoreCachesListener());
@@ -13,7 +17,6 @@
     listFooter.setOnClickListener(null);
   }
  else {
-    listFooter.setVisibility(View.GONE);
+    getListView().removeFooterView(listFooter);
   }
-  listFooter.setClickable(enableMore);
 }
