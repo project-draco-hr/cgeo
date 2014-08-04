@@ -2,7 +2,7 @@
   final List<AbstractList> lists=new ArrayList<>();
   lists.addAll(getSortedLists());
   if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
-    StoredList exceptList=DataStore.getList(exceptListId);
+    final StoredList exceptList=DataStore.getList(exceptListId);
     if (exceptList != null) {
       lists.remove(exceptList);
     }

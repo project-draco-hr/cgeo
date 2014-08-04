@@ -5,7 +5,7 @@
   }
   Dialogs.input(activity,dialogTitle,defaultValue,buttonTitle,new Action1<String>(){
     @Override public void call(    final String input){
-      String listName=StringUtils.trim(input);
+      final String listName=StringUtils.trim(input);
       if (StringUtils.isNotBlank(listName)) {
         runnable.call(listName);
       }

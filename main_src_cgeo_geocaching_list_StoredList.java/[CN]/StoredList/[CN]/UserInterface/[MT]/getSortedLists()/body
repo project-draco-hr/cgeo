@@ -2,7 +2,7 @@
   final Collator collator=Collator.getInstance();
   final List<StoredList> lists=DataStore.getLists();
   Collections.sort(lists,new Comparator<StoredList>(){
-    @Override public int compare(    StoredList lhs,    StoredList rhs){
+    @Override public int compare(    final StoredList lhs,    final StoredList rhs){
       if (lhs.id == STANDARD_LIST_ID) {
         return -1;
       }
