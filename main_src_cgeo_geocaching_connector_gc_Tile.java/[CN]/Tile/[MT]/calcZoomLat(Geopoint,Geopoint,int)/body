@@ -1,7 +1,7 @@
 {
   int zoom=(int)Math.ceil(Math.log(2.0 * Math.PI * numberOfTiles / (Math.abs(asinh(tanGrad(bottom.getLatitude())) - asinh(tanGrad(top.getLatitude()))) * 2.0)) / Math.log(2));
-  Tile tileBottom=new Tile(bottom,zoom);
-  Tile tileTop=new Tile(top,zoom);
+  final Tile tileBottom=new Tile(bottom,zoom);
+  final Tile tileTop=new Tile(top,zoom);
   if (Math.abs(tileBottom.tileY - tileTop.tileY) > (numberOfTiles - 1)) {
     zoom-=1;
   }

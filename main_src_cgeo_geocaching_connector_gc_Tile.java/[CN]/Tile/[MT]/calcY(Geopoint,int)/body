@@ -1,4 +1,4 @@
 {
-  double sinLatRad=Math.sin(Math.toRadians(origin.getLatitude()));
+  final double sinLatRad=Math.sin(Math.toRadians(origin.getLatitude()));
   return (int)((0.5 - Math.log((1 + sinLatRad) / (1 - sinLatRad)) / (4 * Math.PI)) * NUMBER_OF_TILES[zoomlevel]);
 }

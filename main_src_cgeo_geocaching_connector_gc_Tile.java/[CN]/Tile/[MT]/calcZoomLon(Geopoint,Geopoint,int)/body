@@ -1,7 +1,7 @@
 {
   int zoom=(int)Math.floor(Math.log(360.0 * numberOfTiles / (2.0 * Math.abs(left.getLongitude() - right.getLongitude()))) / Math.log(2));
-  Tile tileLeft=new Tile(left,zoom);
-  Tile tileRight=new Tile(right,zoom);
+  final Tile tileLeft=new Tile(left,zoom);
+  final Tile tileRight=new Tile(right,zoom);
   if (Math.abs(tileLeft.tileX - tileRight.tileX) < (numberOfTiles - 1)) {
     zoom+=1;
   }

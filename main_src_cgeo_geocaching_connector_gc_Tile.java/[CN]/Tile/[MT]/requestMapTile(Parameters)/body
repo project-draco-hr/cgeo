@@ -5,7 +5,7 @@
       try {
         return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
       }
- catch (      IOException e) {
+ catch (      final IOException e) {
         Log.e("Tile.requestMapTile() ",e);
         return null;
       }
