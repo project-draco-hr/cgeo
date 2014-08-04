@@ -34,7 +34,7 @@
     return null;
   }
   page=page.substring(startPos + 1,endPos - startPos + 1);
-  final String[] rows=page.split("<tr class=");
+  final String[] rows=StringUtils.splitByWholeSeparator(page,"<tr class=");
   final int rows_count=rows.length;
   int excludedCaches=0;
   final ArrayList<Geocache> caches=new ArrayList<>();

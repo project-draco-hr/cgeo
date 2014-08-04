@@ -3,7 +3,7 @@
   if (StringUtils.isBlank(fileContent)) {
     return coords;
   }
-  final String[] points=fileContent.split("<waypoint>");
+  final String[] points=StringUtils.splitByWholeSeparator(fileContent,"<waypoint>");
   for (  String pointString : points) {
     final Geocache pointCoord=parseCache(pointString);
     if (StringUtils.isNotBlank(pointCoord.getGeocode())) {

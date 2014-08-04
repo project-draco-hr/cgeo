@@ -230,9 +230,9 @@
       if (wpBegin >= 0 && wpEnd >= 0 && wpEnd <= wpList.length()) {
         wpList=wpList.substring(wpBegin + 7,wpEnd);
       }
-      final String[] wpItems=wpList.split("<tr");
+      final String[] wpItems=StringUtils.splitByWholeSeparator(wpList,"<tr");
       for (int j=1; j < wpItems.length; j++) {
-        String[] wp=wpItems[j].split("<td");
+        String[] wp=StringUtils.splitByWholeSeparator(wpItems[j],"<td");
         final String name=TextUtils.getMatch(wp[6],GCConstants.PATTERN_WPNAME,true,1,CgeoApplication.getInstance().getString(R.string.waypoint),true);
         final String resulttype=TextUtils.getMatch(wp[3],GCConstants.PATTERN_WPTYPE,null);
         final Waypoint waypoint=new Waypoint(name,WaypointType.findById(resulttype),false);
@@ -245,7 +245,7 @@
         }
         j++;
         if (wpItems.length > j) {
-          wp=wpItems[j].split("<td");
+          wp=StringUtils.splitByWholeSeparator(wpItems[j],"<td");
         }
         waypoint.setNote(TextUtils.getMatch(wp[3],GCConstants.PATTERN_WPNOTE,waypoint.getNote()));
         cache.addOrChangeWaypoint(waypoint,false);
