@@ -3,5 +3,5 @@
   if (!result.isSuccess) {
     return new OkapiError(result.data);
   }
-  return new OkapiError(new JSONObject());
+  return new OkapiError(new ObjectNode(JsonUtils.factory));
 }

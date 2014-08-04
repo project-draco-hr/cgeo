@@ -1,15 +1,15 @@
 {
-  final boolean isSuccess=Network.isSuccess(response);
+  final boolean isRequestSuccessful=Network.isSuccess(response);
   final String responseData=Network.getResponseDataAlways(response);
-  JSONObject data=null;
+  ObjectNode tempData=null;
   if (responseData != null) {
     try {
-      data=new JSONObject(responseData);
+      tempData=(ObjectNode)JsonUtils.reader.readTree(responseData);
     }
- catch (    final JSONException e) {
+ catch (    IOException|ClassCastException e) {
       Log.w("JSONResult",e);
     }
   }
-  this.data=data;
-  this.isSuccess=isSuccess && data != null;
+  data=tempData;
+  isSuccess=isRequestSuccessful && tempData != null;
 }

@@ -3,9 +3,15 @@
     return Collections.emptyList();
   }
   addFilterParams(valueMap,connector,my);
-  params.add("search_params",new JSONObject(valueMap).toString());
+  try {
+    params.add("search_params",JsonUtils.writer.writeValueAsString(params));
+  }
+ catch (  final JsonProcessingException e) {
+    Log.e("requestCaches",e);
+    return Collections.emptyList();
+  }
   addRetrieveParams(params,connector);
-  final JSONObject data=request(connector,OkapiService.SERVICE_SEARCH_AND_RETRIEVE,params).data;
+  final ObjectNode data=request(connector,OkapiService.SERVICE_SEARCH_AND_RETRIEVE,params).data;
   if (data == null) {
     return Collections.emptyList();
   }

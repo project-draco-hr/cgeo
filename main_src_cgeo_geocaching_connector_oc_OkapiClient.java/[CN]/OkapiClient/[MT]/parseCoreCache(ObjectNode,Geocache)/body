@@ -1,0 +1,17 @@
+{
+  cache.setGeocode(response.get(CACHE_CODE).asText());
+  cache.setName(response.get(CACHE_NAME).asText());
+  setLocation(cache,response.get(CACHE_LOCATION).asText());
+  cache.setType(getCacheType(response.get(CACHE_TYPE).asText()));
+  final String status=response.get(CACHE_STATUS).asText();
+  cache.setDisabled(status.equalsIgnoreCase(CACHE_STATUS_DISABLED));
+  cache.setArchived(status.equalsIgnoreCase(CACHE_STATUS_ARCHIVED));
+  cache.setSize(getCacheSize(response));
+  cache.setDifficulty((float)response.get(CACHE_DIFFICULTY).asDouble());
+  cache.setTerrain((float)response.get(CACHE_TERRAIN).asDouble());
+  cache.setInventoryItems(response.get(CACHE_TRACKABLES_COUNT).asInt());
+  if (response.has(CACHE_IS_FOUND)) {
+    cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());
+  }
+  cache.setHidden(parseDate(response.get(CACHE_HIDDEN).asText()));
+}

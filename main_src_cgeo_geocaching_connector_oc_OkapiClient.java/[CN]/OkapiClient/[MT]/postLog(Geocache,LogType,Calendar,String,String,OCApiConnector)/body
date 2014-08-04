@@ -10,17 +10,17 @@
   if (logPassword != null) {
     params.add("password",logPassword);
   }
-  final JSONObject data=request(connector,OkapiService.SERVICE_SUBMIT_LOG,params).data;
+  final ObjectNode data=request(connector,OkapiService.SERVICE_SUBMIT_LOG,params).data;
   if (data == null) {
     return new LogResult(StatusCode.LOG_POST_ERROR,"");
   }
   try {
-    if (data.getBoolean("success")) {
-      return new LogResult(StatusCode.NO_ERROR,data.getString("log_uuid"));
+    if (data.get("success").asBoolean()) {
+      return new LogResult(StatusCode.NO_ERROR,data.get("log_uuid").asText());
     }
     return new LogResult(StatusCode.LOG_POST_ERROR,"");
   }
- catch (  final JSONException e) {
+ catch (  final NullPointerException e) {
     Log.e("OkapiClient.postLog",e);
   }
   return new LogResult(StatusCode.LOG_POST_ERROR,"");

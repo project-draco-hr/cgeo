@@ -1,0 +1,21 @@
+{
+  try {
+    final String result=response.get("results").asText();
+    if (StringUtils.isBlank(result) || StringUtils.equals(result,"[]")) {
+      return Collections.emptyList();
+    }
+    final ObjectNode cachesResponse=(ObjectNode)response.get("results");
+    if (cachesResponse != null) {
+      final List<Geocache> caches=new ArrayList<>(cachesResponse.size());
+      final Iterator<JsonNode> it=cachesResponse.elements();
+      while (it.hasNext()) {
+        caches.add(parseSmallCache((ObjectNode)it.next()));
+      }
+      return caches;
+    }
+  }
+ catch (  ClassCastException|NullPointerException e) {
+    Log.e("OkapiClient.parseCachesResult",e);
+  }
+  return Collections.emptyList();
+}
