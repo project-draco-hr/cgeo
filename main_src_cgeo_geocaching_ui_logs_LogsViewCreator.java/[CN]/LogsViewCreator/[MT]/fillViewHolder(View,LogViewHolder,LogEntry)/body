@@ -13,7 +13,7 @@
   if (TextUtils.containsHtml(logText)) {
     logText=log.getDisplayText();
     final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
-    holder.text.setText(Html.fromHtml(logText,new HtmlImage(getGeocode(),false,StoredList.STANDARD_LIST_ID,false,holder.text),unknownTagsHandler),TextView.BufferType.SPANNABLE);
+    holder.text.setText(Html.fromHtml(logText,new SmileyImage(getGeocode(),holder.text),unknownTagsHandler),TextView.BufferType.SPANNABLE);
   }
  else {
     holder.text.setText(logText,TextView.BufferType.SPANNABLE);

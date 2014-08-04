@@ -1,0 +1,14 @@
+{
+  final Bitmap bitmap=loadResult.getLeft();
+  BitmapDrawable drawable;
+  if (bitmap != null) {
+    final int lineHeight=(int)(view.getLineHeight() * 0.8);
+    drawable=new BitmapDrawable(view.getResources(),bitmap);
+    final int width=drawable.getIntrinsicWidth() * lineHeight / drawable.getIntrinsicHeight();
+    drawable.setBounds(0,0,width,lineHeight);
+  }
+ else {
+    drawable=null;
+  }
+  return new ImmutablePair<>(drawable,loadResult.getRight());
+}
