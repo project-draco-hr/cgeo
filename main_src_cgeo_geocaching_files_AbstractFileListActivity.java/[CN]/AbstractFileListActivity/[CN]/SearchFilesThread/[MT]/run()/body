@@ -19,13 +19,13 @@
       Log.w("No external media mounted.");
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("AbstractFileListActivity.loadFiles.run",e);
   }
   changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler,0,"loaded directories"));
   files.addAll(list);
   Collections.sort(files,new Comparator<File>(){
-    @Override public int compare(    File lhs,    File rhs){
+    @Override public int compare(    final File lhs,    final File rhs){
       return lhs.getName().compareToIgnoreCase(rhs.getName());
     }
   }

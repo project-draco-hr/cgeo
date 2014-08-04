@@ -2,16 +2,16 @@
   super.onCreate(savedInstanceState);
   setTheme();
   setContentView(R.layout.gpx);
-  Bundle extras=getIntent().getExtras();
+  final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     listId=extras.getInt(Intents.EXTRA_LIST_ID);
   }
-  if (listId <= StoredList.TEMPORARY_LIST_ID) {
+  if (listId <= StoredList.TEMPORARY_LIST.id) {
     listId=StoredList.STANDARD_LIST_ID;
   }
   setAdapter();
   waitDialog=ProgressDialog.show(this,res.getString(R.string.file_title_searching),res.getString(R.string.file_searching),true,true,new DialogInterface.OnCancelListener(){
-    @Override public void onCancel(    DialogInterface arg0){
+    @Override public void onCancel(    final DialogInterface arg0){
       if (searchingThread != null && searchingThread.isAlive()) {
         searchingThread.notifyEnd();
       }

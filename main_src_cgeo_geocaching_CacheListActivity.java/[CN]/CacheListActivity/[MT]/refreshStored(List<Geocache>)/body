@@ -16,12 +16,12 @@
         refreshStoredInternal(caches);
       }
     }
-,true,StoredList.TEMPORARY_LIST_ID,newListName);
+,true,StoredList.TEMPORARY_LIST.id,newListName);
   }
  else {
     if (type != CacheListType.OFFLINE) {
       for (      final Geocache geocache : caches) {
-        if (geocache.getListId() == StoredList.TEMPORARY_LIST_ID) {
+        if (geocache.getListId() == StoredList.TEMPORARY_LIST.id) {
           geocache.setListId(StoredList.STANDARD_LIST_ID);
         }
       }

@@ -16,7 +16,7 @@
     }
 synchronized (listId) {
       listId.bindString(1,value);
-      return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST_ID;
+      return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST.id;
     }
   }
  catch (  final SQLiteDoneException e) {

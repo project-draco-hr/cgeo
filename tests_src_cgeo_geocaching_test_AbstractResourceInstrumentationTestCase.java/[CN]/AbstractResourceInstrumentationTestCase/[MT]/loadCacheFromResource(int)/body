@@ -1,7 +1,7 @@
 {
   final InputStream instream=getResourceStream(resourceId);
   try {
-    GPX10Parser parser=new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
+    GPX10Parser parser=new GPX10Parser(StoredList.TEMPORARY_LIST.id);
     Collection<Geocache> caches=parser.parse(instream,null);
     assertThat(caches).isNotNull();
     assertThat(caches.isEmpty()).isFalse();
