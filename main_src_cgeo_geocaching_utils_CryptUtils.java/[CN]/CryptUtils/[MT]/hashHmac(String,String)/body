@@ -1,13 +1,12 @@
 {
-  byte[] macBytes={};
   try {
     final SecretKeySpec secretKeySpec=new SecretKeySpec(salt.getBytes(CharEncoding.UTF_8),"HmacSHA1");
     final Mac mac=Mac.getInstance("HmacSHA1");
     mac.init(secretKeySpec);
-    macBytes=mac.doFinal(text.getBytes(CharEncoding.UTF_8));
+    return mac.doFinal(text.getBytes(CharEncoding.UTF_8));
   }
  catch (  GeneralSecurityException|UnsupportedEncodingException e) {
     Log.e("CryptUtils.hashHmac",e);
+    return EMPTY;
   }
-  return macBytes;
 }

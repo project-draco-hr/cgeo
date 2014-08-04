@@ -13,11 +13,11 @@
     int o1=((i0 & 3) << 4) | (i1 >>> 4);
     int o2=((i1 & 0xf) << 2) | (i2 >>> 6);
     int o3=i2 & 0x3F;
-    out[op++]=base64map1[o0];
-    out[op++]=base64map1[o1];
-    out[op]=op < oDataLen ? base64map1[o2] : '=';
+    out[op++]=BASE64MAP1[o0];
+    out[op++]=BASE64MAP1[o1];
+    out[op]=op < oDataLen ? BASE64MAP1[o2] : '=';
     op++;
-    out[op]=op < oDataLen ? base64map1[o3] : '=';
+    out[op]=op < oDataLen ? BASE64MAP1[o3] : '=';
     op++;
   }
   return new String(out);
