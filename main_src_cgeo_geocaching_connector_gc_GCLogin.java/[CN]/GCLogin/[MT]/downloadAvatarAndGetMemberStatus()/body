@@ -6,7 +6,7 @@
     if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
       Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PM);
     }
-    setActualCachesFound(Integer.parseInt(TextUtils.getMatch(profile,GCConstants.PATTERN_CACHES_FOUND,true,"-1").replaceAll("[,.]","")));
+    setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile,GCConstants.PATTERN_CACHES_FOUND,true,"-1"))));
     final String avatarURL=TextUtils.getMatch(profile,GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE,false,null);
     if (null != avatarURL) {
       return Async.start(new Func0<Drawable>(){
