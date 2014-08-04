@@ -35,10 +35,10 @@
   }
   page=page.substring(startPos + 1,endPos - startPos + 1);
   final String[] rows=StringUtils.splitByWholeSeparator(page,"<tr class=");
-  final int rows_count=rows.length;
+  final int rowsCount=rows.length;
   int excludedCaches=0;
   final ArrayList<Geocache> caches=new ArrayList<>();
-  for (int z=1; z < rows_count; z++) {
+  for (int z=1; z < rowsCount; z++) {
     final Geocache cache=new Geocache();
     final String row=rows[z];
     if (!row.contains("images/wpttypes")) {
@@ -63,7 +63,7 @@
       }
     }
  catch (    final RuntimeException e) {
-      Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data");
+      Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data",e);
     }
     if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
       excludedCaches++;
@@ -103,7 +103,7 @@
         }
       }
  catch (      final ParseException e) {
-        Log.e("Error parsing event date from search");
+        Log.e("Error parsing event date from search",e);
       }
     }
     final MatcherWrapper matcherTbs=new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES,row);
@@ -141,7 +141,7 @@
       }
     }
  catch (    final NumberFormatException e) {
-      Log.w("GCParser.parseSearch: Failed to parse favorite count");
+      Log.w("GCParser.parseSearch: Failed to parse favorite count",e);
     }
     caches.add(cache);
   }
@@ -153,7 +153,7 @@
     }
   }
  catch (  final NumberFormatException e) {
-    Log.w("GCParser.parseSearch: Failed to parse cache count");
+    Log.w("GCParser.parseSearch: Failed to parse cache count",e);
   }
   String recaptchaText=null;
   if (recaptchaReceiver != null && StringUtils.isNotBlank(recaptchaReceiver.getChallenge())) {

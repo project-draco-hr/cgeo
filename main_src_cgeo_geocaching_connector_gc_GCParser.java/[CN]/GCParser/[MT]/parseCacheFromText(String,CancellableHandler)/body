@@ -71,7 +71,7 @@
       }
     }
  catch (    final ParseException e) {
-      Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
+      Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date",e);
     }
     try {
       cache.setFavoritePoints(Integer.parseInt(TextUtils.getMatch(tableInside,GCConstants.PATTERN_FAVORITECOUNT,true,"0")));
@@ -132,7 +132,7 @@
     }
   }
  catch (  final RuntimeException e) {
-    Log.w("GCParser.parseCache: Failed to parse cache attributes");
+    Log.w("GCParser.parseCache: Failed to parse cache attributes",e);
   }
   try {
     if (CancellableHandler.isCancelled(handler)) {
@@ -154,7 +154,7 @@
     }
   }
  catch (  final RuntimeException e) {
-    Log.w("GCParser.parseCache: Failed to parse cache spoilers");
+    Log.w("GCParser.parseCache: Failed to parse cache spoilers",e);
   }
   try {
     cache.setInventoryItems(0);
@@ -181,7 +181,7 @@
     }
   }
  catch (  final RuntimeException e) {
-    Log.w("GCParser.parseCache: Failed to parse cache inventory (2)");
+    Log.w("GCParser.parseCache: Failed to parse cache inventory (2)",e);
   }
   try {
     final String countlogs=TextUtils.getMatch(page,GCConstants.PATTERN_COUNTLOGS,true,null);
@@ -197,7 +197,7 @@
     }
   }
  catch (  final NumberFormatException e) {
-    Log.w("GCParser.parseCache: Failed to parse cache log count");
+    Log.w("GCParser.parseCache: Failed to parse cache log count",e);
   }
   cache.setWaypoints(Collections.<Waypoint>emptyList(),false);
   try {
@@ -209,7 +209,7 @@
       cache.setUserModifiedCoords(true);
     }
   }
- catch (  final Geopoint.GeopointException e) {
+ catch (  final Geopoint.GeopointException ignored) {
   }
   int wpBegin=page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
   if (wpBegin != -1) {
