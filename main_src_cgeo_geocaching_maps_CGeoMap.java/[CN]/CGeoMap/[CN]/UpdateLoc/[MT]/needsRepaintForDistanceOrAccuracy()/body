@@ -6,6 +6,9 @@
   final Location lastLocation=map.overlayPositionAndScale.getCoordinates();
   float dist=Float.MAX_VALUE;
   if (lastLocation != null) {
+    if (lastLocation.getAccuracy() != currentLocation.getAccuracy()) {
+      return true;
+    }
     dist=currentLocation.distanceTo(lastLocation);
   }
   final float[] mapDimension=new float[1];
