@@ -5,5 +5,8 @@
   if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
     return LocationProviderType.NETWORK;
   }
+  if (provider.equals("fused")) {
+    return LocationProviderType.FUSED;
+  }
   return LocationProviderType.LAST;
 }

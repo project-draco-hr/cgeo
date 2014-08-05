@@ -1,0 +1,10 @@
+{
+  if (firstLocation) {
+    final Location initialLocation=locationClient.getLastLocation();
+    if (initialLocation != null) {
+      subject.onNext(new GeoData(initialLocation));
+    }
+    firstLocation=false;
+  }
+  locationClient.requestLocationUpdates(LOCATION_REQUEST,this);
+}
