@@ -18,6 +18,8 @@
       holder.setPosition(position);
       final LogEntry log=getItem(position);
       fillViewHolder(convertView,holder,log);
+      final View logView=rowView.findViewById(R.id.log);
+      activity.addContextMenu(logView);
       return rowView;
     }
   }
