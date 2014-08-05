@@ -1,0 +1,52 @@
+{
+  final Geocache cache=new Geocache();
+  cache.setReliableLatLon(true);
+  try {
+    parseCoreCache(response,cache);
+    final String owner=parseUser(response.get(CACHE_OWNER));
+    cache.setOwnerDisplayName(owner);
+    cache.setOwnerUserId(owner);
+    cache.getLogCounts().put(LogType.FOUND_IT,response.get(CACHE_FOUNDS).asInt());
+    cache.getLogCounts().put(LogType.DIDNT_FIND_IT,response.get(CACHE_NOTFOUNDS).asInt());
+    cache.getLogCounts().put(LogType.WILL_ATTEND,response.path(CACHE_WILLATTENDS).asInt());
+    if (response.has(CACHE_RATING)) {
+      cache.setRating((float)response.get(CACHE_RATING).asDouble());
+    }
+    cache.setVotes(response.get(CACHE_VOTES).asInt());
+    cache.setFavoritePoints(response.get(CACHE_RECOMMENDATIONS).asInt());
+    final StringBuilder description=new StringBuilder(500);
+    if (response.has("gc_code")) {
+      final String gccode=response.get("gc_code").asText();
+      description.append(CgeoApplication.getInstance().getResources().getString(R.string.cache_listed_on,GCConnector.getInstance().getName())).append(": <a href=\"http://coord.info/").append(gccode).append("\">").append(gccode).append("</a><br /><br />");
+    }
+    description.append(response.get(CACHE_DESCRIPTION).asText());
+    cache.setDescription(description.toString());
+    cache.setHint(response.get(CACHE_HINT).asText());
+    final ArrayNode images=(ArrayNode)response.get(CACHE_IMAGES);
+    if (images != null) {
+      for (      final JsonNode imageResponse : images) {
+        final String title=imageResponse.get(CACHE_IMAGE_CAPTION).asText();
+        final String url=absoluteUrl(imageResponse.get(CACHE_IMAGE_URL).asText(),cache.getGeocode());
+        cache.addSpoiler(new Image(url,title));
+      }
+    }
+    cache.setAttributes(parseAttributes((ArrayNode)response.path(CACHE_ATTRNAMES),(ArrayNode)response.get(CACHE_ATTR_ACODES)));
+    cache.setWaypoints(parseWaypoints((ArrayNode)response.path(CACHE_WPTS)),false);
+    cache.setInventory(parseTrackables((ArrayNode)response.path(CACHE_TRACKABLES)));
+    if (response.has(CACHE_IS_WATCHED)) {
+      cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
+    }
+    if (response.has(CACHE_MY_NOTES)) {
+      cache.setPersonalNote(response.get(CACHE_MY_NOTES).asText());
+      cache.parseWaypointsFromNote();
+    }
+    cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
+    cache.setDetailedUpdatedNow();
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+    DataStore.saveLogsWithoutTransaction(cache.getGeocode(),parseLogs((ArrayNode)response.path(CACHE_LATEST_LOGS)));
+  }
+ catch (  ClassCastException|NullPointerException e) {
+    Log.e("OkapiClient.parseCache",e);
+  }
+  return cache;
+}

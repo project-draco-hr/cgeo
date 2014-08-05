@@ -3,10 +3,10 @@
   final String responseData=getResponseData(response,false);
   if (responseData != null) {
     try {
-      return new JSONObject(responseData);
+      return (ObjectNode)JsonUtils.reader.readTree(responseData);
     }
- catch (    final JSONException e) {
-      Log.w("Network.requestJSON",e);
+ catch (    final IOException e) {
+      Log.w("requestJSON",e);
     }
   }
   return null;

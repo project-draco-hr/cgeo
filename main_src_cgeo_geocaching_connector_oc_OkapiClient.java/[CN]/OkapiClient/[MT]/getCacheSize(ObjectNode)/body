@@ -1,0 +1,13 @@
+{
+  if (!response.has(CACHE_SIZE2)) {
+    return getCacheSizeDeprecated(response);
+  }
+  try {
+    final String size=response.get(CACHE_SIZE2).asText();
+    return CacheSize.getById(size);
+  }
+ catch (  final NullPointerException e) {
+    Log.e("OkapiClient.getCacheSize",e);
+    return getCacheSizeDeprecated(response);
+  }
+}

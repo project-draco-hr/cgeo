@@ -26,7 +26,7 @@
     }
   }
  catch (  final RuntimeException e) {
-    Log.w("GCParser.parseTrackable: Failed to parse trackable owner name");
+    Log.w("GCParser.parseTrackable: Failed to parse trackable owner name",e);
   }
   trackable.setOrigin(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_ORIGIN,true,trackable.getOrigin()));
   try {
@@ -50,20 +50,20 @@
     }
   }
  catch (  final RuntimeException e) {
-    Log.w("GCParser.parseTrackable: Failed to parse trackable last known place");
+    Log.w("GCParser.parseTrackable: Failed to parse trackable last known place",e);
   }
   final String releaseString=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null);
   if (releaseString != null) {
     try {
       trackable.setReleased(dateTbIn1.parse(releaseString));
     }
- catch (    final ParseException e) {
+ catch (    final ParseException ignore) {
       if (trackable.getReleased() == null) {
         try {
           trackable.setReleased(dateTbIn2.parse(releaseString));
         }
- catch (        final ParseException e1) {
-          Log.e("Could not parse trackable release " + releaseString);
+ catch (        final ParseException e) {
+          Log.e("Could not parse trackable release " + releaseString,e);
         }
       }
     }
@@ -92,7 +92,7 @@
     }
   }
  catch (  final RuntimeException e) {
-    Log.w("GCParser.parseTrackable: Failed to parse trackable details & image");
+    Log.w("GCParser.parseTrackable: Failed to parse trackable details & image",e);
   }
   if (StringUtils.isEmpty(trackable.getDetails()) && page.contains(GCConstants.ERROR_TB_NOT_ACTIVATED)) {
     trackable.setDetails(CgeoApplication.getInstance().getString(R.string.trackable_not_activated));
@@ -104,7 +104,7 @@
       try {
         date=GCLogin.parseGcCustomDate(matcherLogs.group(2)).getTime();
       }
- catch (      final ParseException e) {
+ catch (      final ParseException ignore) {
       }
       final LogEntry logDone=new LogEntry(Html.fromHtml(matcherLogs.group(3)).toString().trim(),date,LogType.getByIconName(matcherLogs.group(1)),matcherLogs.group(7).trim());
       if (matcherLogs.group(4) != null && matcherLogs.group(6) != null) {

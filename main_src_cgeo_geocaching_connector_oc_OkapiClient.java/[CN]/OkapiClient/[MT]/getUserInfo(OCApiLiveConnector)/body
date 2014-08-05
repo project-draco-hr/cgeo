@@ -6,28 +6,10 @@
     Log.e("OkapiClient.getUserInfo: error getting user info: '" + error.getMessage() + "'");
     return new UserInfo(StringUtils.EMPTY,0,UserInfoStatus.getFromOkapiError(error.getResult()));
   }
-  final JSONObject data=result.data;
-  String name=StringUtils.EMPTY;
-  boolean successUserName=false;
-  if (!data.isNull(USER_USERNAME)) {
-    try {
-      name=data.getString(USER_USERNAME);
-      successUserName=true;
-    }
- catch (    final JSONException e) {
-      Log.e("OkapiClient.getUserInfo - name",e);
-    }
-  }
-  int finds=0;
-  boolean successFinds=false;
-  if (!data.isNull(USER_CACHES_FOUND)) {
-    try {
-      finds=data.getInt(USER_CACHES_FOUND);
-      successFinds=true;
-    }
- catch (    final JSONException e) {
-      Log.e("OkapiClient.getUserInfo - finds",e);
-    }
-  }
+  final ObjectNode data=result.data;
+  final boolean successUserName=data.has(USER_USERNAME);
+  final String name=data.path(USER_USERNAME).asText();
+  final boolean successFinds=data.has(USER_CACHES_FOUND);
+  final int finds=data.path(USER_CACHES_FOUND).asInt();
   return new UserInfo(name,finds,successUserName && successFinds ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
 }

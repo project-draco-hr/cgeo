@@ -1,0 +1,19 @@
+{
+  if (trackablesJson.size() == 0) {
+    return Collections.emptyList();
+  }
+  final List<Trackable> result=new ArrayList<>();
+  for (  final JsonNode trackableResponse : trackablesJson) {
+    try {
+      final Trackable trk=new Trackable();
+      trk.setGeocode(trackableResponse.get(TRK_GEOCODE).asText());
+      trk.setName(trackableResponse.get(TRK_NAME).asText());
+      result.add(trk);
+    }
+ catch (    final NullPointerException e) {
+      Log.e("OkapiClient.parseWaypoints",e);
+      return null;
+    }
+  }
+  return result;
+}

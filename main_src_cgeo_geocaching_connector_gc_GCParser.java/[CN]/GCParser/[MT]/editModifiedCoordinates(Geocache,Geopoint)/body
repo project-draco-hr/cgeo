@@ -3,25 +3,18 @@
   if (StringUtils.isEmpty(userToken)) {
     return false;
   }
-  try {
-    JSONObject jo;
-    if (wpt != null) {
-      jo=new JSONObject().put("dto",(new JSONObject().put("ut",userToken).put("data",new JSONObject().put("lat",wpt.getLatitudeE6() / 1E6).put("lng",wpt.getLongitudeE6() / 1E6))));
-    }
- else {
-      jo=new JSONObject().put("dto",(new JSONObject().put("ut",userToken)));
-    }
-    final String uriSuffix=wpt != null ? "SetUserCoordinate" : "ResetUserCoordinate";
-    final String uriPrefix="http://www.geocaching.com/seek/cache_details.aspx/";
-    final HttpResponse response=Network.postJsonRequest(uriPrefix + uriSuffix,jo);
-    Log.i("Sending to " + uriPrefix + uriSuffix+ " :"+ jo.toString());
-    if (response != null && response.getStatusLine().getStatusCode() == 200) {
-      Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
-      return true;
-    }
+  final ObjectNode jo=new ObjectNode(JsonUtils.factory);
+  final ObjectNode dto=jo.putObject("dto").put("ut",userToken);
+  if (wpt != null) {
+    dto.putObject("data").put("lat",wpt.getLatitudeE6() / 1E6).put("lng",wpt.getLongitudeE6() / 1E6);
   }
- catch (  final JSONException e) {
-    Log.e("Unknown exception with json wrap code",e);
+  final String uriSuffix=wpt != null ? "SetUserCoordinate" : "ResetUserCoordinate";
+  final String uriPrefix="http://www.geocaching.com/seek/cache_details.aspx/";
+  final HttpResponse response=Network.postJsonRequest(uriPrefix + uriSuffix,jo);
+  Log.i("Sending to " + uriPrefix + uriSuffix+ " :"+ jo.toString());
+  if (response != null && response.getStatusLine().getStatusCode() == 200) {
+    Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
+    return true;
   }
   Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords");
   return false;

@@ -3,25 +3,18 @@
     Log.e("GCParser.searchByAddress: No address given");
     return null;
   }
-  try {
-    final JSONObject response=Network.requestJSON("http://www.geocaching.com/api/geocode",new Parameters("q",address));
-    if (response == null) {
-      return null;
-    }
-    if (!StringUtils.equalsIgnoreCase(response.getString("status"),"success")) {
-      return null;
-    }
-    if (!response.has("data")) {
-      return null;
-    }
-    final JSONObject data=response.getJSONObject("data");
-    if (data == null) {
-      return null;
-    }
-    return searchByCoords(new Geopoint(data.getDouble("lat"),data.getDouble("lng")),cacheType,showCaptcha,recaptchaReceiver);
+  final ObjectNode response=Network.requestJSON("http://www.geocaching.com/api/geocode",new Parameters("q",address));
+  if (response == null) {
+    return null;
   }
- catch (  final JSONException e) {
-    Log.w("GCParser.searchByAddress",e);
+  if (!StringUtils.equalsIgnoreCase(response.path("status").asText(),"success")) {
+    return null;
   }
-  return null;
+  final JsonNode data=response.path("data");
+  final JsonNode latNode=data.get("lat");
+  final JsonNode lngNode=data.get("lng");
+  if (latNode == null || lngNode == null) {
+    return null;
+  }
+  return searchByCoords(new Geopoint(latNode.asDouble(),lngNode.asDouble()),cacheType,showCaptcha,recaptchaReceiver);
 }

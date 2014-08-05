@@ -6,45 +6,39 @@
     params.add("app","cgeo");
     final String referer=GCConstants.URL_LIVE_MAP_DETAILS;
     final String data=StringUtils.defaultString(Tile.requestMapInfo(referer,params,referer).toBlocking().first());
-    final JSONObject json=new JSONObject(data);
-    final String status=json.getString("status");
+    final ObjectNode json=(ObjectNode)JsonUtils.reader.readTree(data);
+    final String status=json.path("status").asText();
     if (StringUtils.isBlank(status)) {
-      throw new JSONException("No status inside JSON");
+      throw new ParserException("No status inside JSON");
     }
     if ("success".compareTo(status) != 0) {
-      throw new JSONException("Wrong status inside JSON");
+      throw new ParserException("Wrong status inside JSON");
     }
-    final JSONArray dataArray=json.getJSONArray("data");
+    final ArrayNode dataArray=(ArrayNode)json.get("data");
     if (dataArray == null) {
-      throw new JSONException("No data inside JSON");
+      throw new ParserException("No data inside JSON");
     }
     final ArrayList<Geocache> caches=new ArrayList<>();
-    for (int j=0; j < dataArray.length(); j++) {
+    for (    final JsonNode dataObject : dataArray) {
       final Geocache cache=new Geocache();
-      JSONObject dataObject=dataArray.getJSONObject(j);
-      cache.setName(dataObject.getString("name"));
-      cache.setGeocode(dataObject.getString("gc"));
-      cache.setGuid(dataObject.getString("g"));
-      cache.setDisabled(!dataObject.getBoolean("available"));
-      cache.setArchived(dataObject.getBoolean("archived"));
-      cache.setPremiumMembersOnly(dataObject.getBoolean("subrOnly"));
-      cache.setFavoritePoints(Integer.parseInt(dataObject.getString("fp")));
-      JSONObject difficultyObj=dataObject.getJSONObject("difficulty");
-      cache.setDifficulty(Float.parseFloat(difficultyObj.getString("text")));
-      JSONObject terrainObj=dataObject.getJSONObject("terrain");
-      cache.setTerrain(Float.parseFloat(terrainObj.getString("text")));
-      cache.setHidden(GCLogin.parseGcCustomDate(dataObject.getString("hidden"),"MM/dd/yyyy"));
-      JSONObject containerObj=dataObject.getJSONObject("container");
-      cache.setSize(CacheSize.getById(containerObj.getString("text")));
-      JSONObject typeObj=dataObject.getJSONObject("type");
-      cache.setType(CacheType.getByPattern(typeObj.getString("text")));
-      JSONObject ownerObj=dataObject.getJSONObject("owner");
-      cache.setOwnerDisplayName(ownerObj.getString("text"));
+      cache.setName(dataObject.path("name").asText());
+      cache.setGeocode(dataObject.path("gc").asText());
+      cache.setGuid(dataObject.path("g").asText());
+      cache.setDisabled(!dataObject.path("available").asBoolean());
+      cache.setArchived(dataObject.path("archived").asBoolean());
+      cache.setPremiumMembersOnly(dataObject.path("subrOnly").asBoolean());
+      cache.setFavoritePoints(Integer.parseInt(dataObject.path("fp").asText()));
+      cache.setDifficulty(Float.parseFloat(dataObject.path("difficulty").path("text").asText()));
+      cache.setTerrain(Float.parseFloat(dataObject.path("terrain").path("text").asText()));
+      cache.setHidden(GCLogin.parseGcCustomDate(dataObject.path("hidden").asText(),"MM/dd/yyyy"));
+      cache.setSize(CacheSize.getById(dataObject.path("container").path("text").asText()));
+      cache.setType(CacheType.getByPattern(dataObject.path("type").path("text").asText()));
+      cache.setOwnerDisplayName(dataObject.path("owner").path("text").asText());
       caches.add(cache);
     }
     result.addAndPutInCache(caches);
   }
- catch (  JSONException|ParseException|NumberFormatException e) {
+ catch (  ParserException|ParseException|IOException|NumberFormatException ignore) {
     result.setError(StatusCode.UNKNOWN_ERROR);
   }
   return result;

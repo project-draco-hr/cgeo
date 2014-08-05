@@ -3,32 +3,31 @@
   try {
     final LeastRecentlyUsedMap<String,String> nameCache=new LeastRecentlyUsedMap.LruCache<>(2000);
     if (StringUtils.isEmpty(data)) {
-      throw new JSONException("No page given");
+      throw new ParserException("No page given");
     }
-    final JSONObject json=new JSONObject(data);
-    final JSONArray grid=json.getJSONArray("grid");
-    if (grid == null || grid.length() != (UTFGrid.GRID_MAXY + 1)) {
-      throw new JSONException("No grid inside JSON");
+    final ObjectNode json=(ObjectNode)JsonUtils.reader.readTree(data);
+    final ArrayNode grid=(ArrayNode)json.get("grid");
+    if (grid == null || grid.size() != (UTFGrid.GRID_MAXY + 1)) {
+      throw new ParserException("No grid inside JSON");
     }
-    final JSONArray keys=json.getJSONArray("keys");
+    final ArrayNode keys=(ArrayNode)json.get("keys");
     if (keys == null) {
-      throw new JSONException("No keys inside JSON");
+      throw new ParserException("No keys inside JSON");
     }
-    final JSONObject dataObject=json.getJSONObject("data");
+    final ObjectNode dataObject=(ObjectNode)json.get("data");
     if (dataObject == null) {
-      throw new JSONException("No data inside JSON");
+      throw new ParserException("No data inside JSON");
     }
     Map<String,List<UTFGridPosition>> positions=new HashMap<>();
     Map<String,List<UTFGridPosition>> singlePositions=new HashMap<>();
-    for (int i=1; i < keys.length(); i++) {
-      String key=keys.getString(i);
+    for (    final JsonNode rawKey : keys) {
+      final String key=rawKey.asText();
       if (StringUtils.isNotBlank(key)) {
         UTFGridPosition pos=UTFGridPosition.fromString(key);
-        JSONArray dataForKey=dataObject.getJSONArray(key);
-        for (int j=0; j < dataForKey.length(); j++) {
-          JSONObject cacheInfo=dataForKey.getJSONObject(j);
-          String id=cacheInfo.getString("i");
-          nameCache.put(id,cacheInfo.getString("n"));
+        final ArrayNode dataForKey=(ArrayNode)dataObject.get(key);
+        for (        final JsonNode cacheInfo : dataForKey) {
+          final String id=cacheInfo.get("i").asText();
+          nameCache.put(id,cacheInfo.get("n").asText());
           List<UTFGridPosition> listOfPositions=positions.get(id);
           List<UTFGridPosition> singleListOfPositions=singlePositions.get(id);
           if (listOfPositions == null) {
@@ -38,7 +37,7 @@
             singlePositions.put(id,singleListOfPositions);
           }
           listOfPositions.add(pos);
-          if (dataForKey.length() == 1) {
+          if (dataForKey.size() == 1) {
             singleListOfPositions.add(pos);
           }
         }
@@ -82,7 +81,7 @@
     searchResult.addAndPutInCache(caches);
     Log.d("Retrieved " + searchResult.getCount() + " caches for tile "+ tile.toString());
   }
- catch (  RuntimeException|JSONException e) {
+ catch (  RuntimeException|ParserException|IOException e) {
     Log.e("GCMap.parseMapJSON",e);
   }
   return searchResult;

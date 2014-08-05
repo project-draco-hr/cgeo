@@ -1,0 +1,20 @@
+{
+  try {
+    final Geocache cache=new Geocache();
+    cache.setReliableLatLon(true);
+    cache.setGeocode("EC" + response.get("cache_id").asText());
+    cache.setName(response.get("title").asText());
+    cache.setCoords(new Geopoint(response.get("lat").asText(),response.get("lon").asText()));
+    cache.setType(getCacheType(response.get("type").asText()));
+    cache.setDifficulty((float)response.get("difficulty").asDouble());
+    cache.setTerrain((float)response.get("terrain").asDouble());
+    cache.setSize(CacheSize.getById(response.get("size").asText()));
+    cache.setFound(response.get("found").asInt() == 1);
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.CACHE));
+    return cache;
+  }
+ catch (  final NullPointerException e) {
+    Log.e("ECApi.parseCache",e);
+    return null;
+  }
+}

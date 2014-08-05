@@ -6,41 +6,39 @@
         return;
       }
       try {
-        final JSONObject resp=new JSONObject(rawResponse);
-        if (!resp.getString("status").equals("success")) {
-          Log.e("GCParser.loadLogsFromDetails: status is " + resp.getString("status"));
+        final ObjectNode resp=(ObjectNode)JsonUtils.reader.readTree(rawResponse);
+        if (!resp.path("status").asText().equals("success")) {
+          Log.e("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
           subscriber.onCompleted();
           return;
         }
-        final JSONArray data=resp.getJSONArray("data");
-        for (int index=0; index < data.length(); index++) {
-          final JSONObject entry=data.getJSONObject(index);
-          final String logIconNameExt=entry.optString("LogTypeImage",".gif");
+        final ArrayNode data=(ArrayNode)resp.get("data");
+        for (        final JsonNode entry : data) {
+          final String logIconNameExt=entry.path("LogTypeImage").asText(".gif");
           final String logIconName=logIconNameExt.substring(0,logIconNameExt.length() - 4);
           long date=0;
           try {
-            date=GCLogin.parseGcCustomDate(entry.getString("Visited")).getTime();
+            date=GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
           }
- catch (          final ParseException e) {
-            Log.e("GCParser.loadLogsFromDetails: failed to parse log date.");
+ catch (          ParseException|NullPointerException e) {
+            Log.e("GCParser.loadLogsFromDetails: failed to parse log date",e);
           }
-          final String latLon=entry.getString("LatLonString");
-          final String logText=(StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.getString("LogText"));
-          final LogEntry logDone=new LogEntry(TextUtils.removeControlCharacters(entry.getString("UserName")),date,LogType.getByIconName(logIconName),logText);
-          logDone.found=entry.getInt("GeocacheFindCount");
+          final String latLon=entry.path("LatLonString").asText();
+          final String logText=(StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.path("LogText").asText());
+          final LogEntry logDone=new LogEntry(TextUtils.removeControlCharacters(entry.path("UserName").asText()),date,LogType.getByIconName(logIconName),logText);
+          logDone.found=entry.path("GeocacheFindCount").asInt();
           logDone.friend=markAsFriendsLog;
-          final JSONArray images=entry.getJSONArray("Images");
-          for (int i=0; i < images.length(); i++) {
-            final JSONObject image=images.getJSONObject(i);
-            final String url="http://imgcdn.geocaching.com/cache/log/large/" + image.getString("FileName");
-            final String title=TextUtils.removeControlCharacters(image.getString("Name"));
+          final ArrayNode images=(ArrayNode)entry.get("Images");
+          for (          final JsonNode image : images) {
+            final String url="http://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
+            final String title=TextUtils.removeControlCharacters(image.path("Name").asText());
             final Image logImage=new Image(url,title);
             logDone.addLogImage(logImage);
           }
           subscriber.onNext(logDone);
         }
       }
- catch (      final JSONException e) {
+ catch (      final IOException e) {
         Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs",e);
       }
       subscriber.onCompleted();
