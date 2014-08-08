@@ -1,8 +1,13 @@
 {
-  final long lastChecksum=Settings.getLastChangelogChecksum();
-  final long checksum=TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
-  Settings.setLastChangelogChecksum(checksum);
-  if (lastChecksum > 0 && lastChecksum != checksum) {
-    AboutActivity.showChangeLog(this);
+  try {
+    final long lastChecksum=Settings.getLastChangelogChecksum();
+    final long checksum=TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
+    Settings.setLastChangelogChecksum(checksum);
+    if (lastChecksum > 0 && lastChecksum != checksum) {
+      AboutActivity.showChangeLog(this);
+    }
+  }
+ catch (  final Exception ex) {
+    Log.e("Error checking/showing changelog!",ex);
   }
 }
