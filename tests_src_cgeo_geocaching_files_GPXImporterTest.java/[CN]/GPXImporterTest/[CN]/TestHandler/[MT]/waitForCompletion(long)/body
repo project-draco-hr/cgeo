@@ -1,0 +1,9 @@
+{
+  try {
+    while (System.currentTimeMillis() - lastMessage <= milliseconds && !hasTerminatingMessage()) {
+      wait(milliseconds);
+    }
+  }
+ catch (  InterruptedException e) {
+  }
+}
