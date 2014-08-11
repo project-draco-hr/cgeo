@@ -1,5 +1,5 @@
 {
-  Point displaySize=Compatibility.getDisplaySize();
+  final Point displaySize=Compatibility.getDisplaySize();
   final int maxWidth=Math.min(displaySize.x - 25,MAX_DISPLAY_IMAGE_XY);
   final int maxHeight=Math.min(displaySize.y - 25,MAX_DISPLAY_IMAGE_XY);
   final Bitmap image=readDownsampledImage(filename,maxWidth,maxHeight);

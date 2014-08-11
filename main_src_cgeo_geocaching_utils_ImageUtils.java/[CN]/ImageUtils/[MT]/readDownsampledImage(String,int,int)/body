@@ -4,7 +4,7 @@
     final ExifInterface exif=new ExifInterface(filePath);
     orientation=exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
   }
- catch (  IOException e) {
+ catch (  final IOException e) {
     Log.e("ImageUtils.readDownsampledImage",e);
   }
   final BitmapFactory.Options sizeOnlyOptions=new BitmapFactory.Options();

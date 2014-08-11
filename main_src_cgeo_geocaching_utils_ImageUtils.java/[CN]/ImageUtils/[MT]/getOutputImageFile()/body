@@ -6,6 +6,6 @@
       return null;
     }
   }
-  String timeStamp=new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.US).format(new Date());
+  final String timeStamp=new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.US).format(new Date());
   return new File(mediaStorageDir.getPath() + File.separator + "IMG_"+ timeStamp+ ".jpg");
 }
