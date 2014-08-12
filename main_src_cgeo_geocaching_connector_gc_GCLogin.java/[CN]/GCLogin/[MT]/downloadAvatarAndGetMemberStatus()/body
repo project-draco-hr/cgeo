@@ -8,14 +8,9 @@
     }
     setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile,GCConstants.PATTERN_CACHES_FOUND,true,"-1"))));
     final String avatarURL=TextUtils.getMatch(profile,GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE,false,null);
-    if (null != avatarURL) {
-      return Async.start(new Func0<Drawable>(){
-        @Override public Drawable call(){
-          final HtmlImage imgGetter=new HtmlImage("",false,0,false);
-          return imgGetter.getDrawable(avatarURL.replace("avatar","user/large"));
-        }
-      }
-);
+    if (avatarURL != null) {
+      final HtmlImage imgGetter=new HtmlImage("",false,0,false);
+      return imgGetter.fetchDrawable(avatarURL.replace("avatar","user/large")).cast(Drawable.class);
     }
     Log.d("No avatar set for user");
   }
