@@ -1,7 +1,6 @@
 {
   try {
-    final String result=response.get("results").asText();
-    if (StringUtils.isBlank(result) || StringUtils.equals(result,"[]")) {
+    if (response.get("results").isNull() || !response.get("results").isContainerNode()) {
       return Collections.emptyList();
     }
     final ObjectNode cachesResponse=(ObjectNode)response.get("results");
