@@ -1,11 +1,5 @@
 {
-  Float distance=null;
-  if (wpt.getCoords() != null) {
-    final Geopoint currentCoords=CgeoApplication.getInstance().currentGeo().getCoords();
-    if (currentCoords != null) {
-      distance=currentCoords.distanceTo(wpt);
-    }
-  }
+  Float distance=CgeoApplication.getInstance().distanceNonBlocking(wpt);
   String text="--";
   if (distance != null) {
     text=Units.getDistanceFromKilometers(distance);

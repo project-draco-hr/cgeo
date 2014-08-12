@@ -1,11 +1,5 @@
 {
-  Float distance=null;
-  if (cache.getCoords() != null) {
-    final Geopoint currentCoords=CgeoApplication.getInstance().currentGeo().getCoords();
-    if (currentCoords != null) {
-      distance=currentCoords.distanceTo(cache);
-    }
-  }
+  Float distance=CgeoApplication.getInstance().distanceNonBlocking(cache);
   if (distance == null) {
     if (cache.getDistance() != null) {
       distance=cache.getDistance();
