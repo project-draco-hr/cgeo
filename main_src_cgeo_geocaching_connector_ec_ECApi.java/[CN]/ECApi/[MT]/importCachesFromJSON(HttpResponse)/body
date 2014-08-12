@@ -1,12 +1,11 @@
 {
   if (response != null) {
     try {
-      final String data=Network.getResponseDataAlways(response);
-      if (StringUtils.isBlank(data) || StringUtils.equals(data,"[]")) {
+      final JsonNode json=JsonUtils.reader.readTree(Network.getResponseDataAlways(response));
+      if (!json.isArray()) {
         return Collections.emptyList();
       }
-      final ArrayNode json=(ArrayNode)JsonUtils.reader.readTree(data);
-      final List<Geocache> caches=new LinkedList<>();
+      final List<Geocache> caches=new ArrayList<>(json.size());
       for (      final JsonNode node : json) {
         final Geocache cache=parseCache(node);
         if (cache != null) {
