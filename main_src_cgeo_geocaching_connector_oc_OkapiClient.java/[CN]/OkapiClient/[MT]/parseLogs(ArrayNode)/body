@@ -1,11 +1,8 @@
 {
-  List<LogEntry> result=null;
+  final List<LogEntry> result=new LinkedList<>();
   for (  final JsonNode logResponse : logsJSON) {
     try {
       final LogEntry log=new LogEntry(parseUser(logResponse.get(LOG_USER)),parseDate(logResponse.get(LOG_DATE).asText()).getTime(),parseLogType(logResponse.get(LOG_TYPE).asText()),logResponse.get(LOG_COMMENT).asText().trim());
-      if (result == null) {
-        result=new ArrayList<>();
-      }
       result.add(log);
     }
  catch (    final NullPointerException e) {
