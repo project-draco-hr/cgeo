@@ -4,7 +4,7 @@
     return false;
   }
   try {
-    final JSONObject jo=new JSONObject().put("dto",(new JSONObject().put("et",cache.getPersonalNote()).put("ut",userToken)));
+    final JSONObject jo=new JSONObject().put("dto",(new JSONObject().put("et",StringUtils.defaultString(cache.getPersonalNote())).put("ut",userToken)));
     final String uriSuffix="SetUserCacheNote";
     final String uriPrefix="http://www.geocaching.com/seek/cache_details.aspx/";
     final HttpResponse response=Network.postJsonRequest(uriPrefix + uriSuffix,jo);
