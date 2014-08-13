@@ -1,13 +1,11 @@
 {
   if (directionObservable == null) {
-    final ConnectableObservable<Float> onDemand=DirectionProvider.create(this).replay(1);
-    onDemand.subscribe(new Action1<Float>(){
+    directionObservable=DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>(){
       @Override public void call(      final Float direction){
         currentDirection=direction;
       }
     }
 );
-    directionObservable=onDemand.refCount();
   }
   return directionObservable;
 }

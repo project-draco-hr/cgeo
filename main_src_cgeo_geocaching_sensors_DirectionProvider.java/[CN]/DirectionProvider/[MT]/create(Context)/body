@@ -1,9 +1,3 @@
 {
-  return Observable.create(new OnSubscribe<Float>(){
-    @Override public void call(    final Subscriber<? super Float> subscriber){
-      HANDLER_THREAD.start(subscriber,context);
-      SUBJECT.subscribe(subscriber);
-    }
-  }
-);
+  return Observable.create(new DirectionProvider(context));
 }

@@ -1,4 +1,3 @@
 {
-  final GeoDataProvider provider=new GeoDataProvider(context);
-  return provider.worker.refCount();
+  return Observable.create(new GeoDataProvider(context));
 }

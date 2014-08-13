@@ -1,9 +1,0 @@
-{
-  getHandler().obtainMessage(START,context).sendToTarget();
-  subscriber.add(Subscriptions.create(new Action0(){
-    @Override public void call(){
-      getHandler().sendEmptyMessage(STOP);
-    }
-  }
-));
-}

@@ -1,7 +1,6 @@
 {
   if (gpsStatusObservable == null) {
-    final ConnectableObservable<Status> onDemand=GpsStatusProvider.create(this).replay(1);
-    gpsStatusObservable=onDemand.refCount();
+    gpsStatusObservable=GpsStatusProvider.create(this).share();
   }
   return gpsStatusObservable;
 }

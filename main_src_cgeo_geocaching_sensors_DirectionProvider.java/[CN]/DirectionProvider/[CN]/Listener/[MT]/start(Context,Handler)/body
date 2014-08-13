@@ -1,9 +1,0 @@
-{
-  if (!hasSensor(context)) {
-    return;
-  }
-  if (++count == 1) {
-    Sensor orientationSensor=getOrientationSensor(context);
-    sensorManager.registerListener(this,orientationSensor,SensorManager.SENSOR_DELAY_NORMAL,handler);
-  }
-}
