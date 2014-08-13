@@ -7,7 +7,7 @@
   if (Settings.isUseEnglish()) {
     locale=Locale.ENGLISH;
   }
-  int switchLocale=tts.setLanguage(locale);
+  final int switchLocale=tts.setLanguage(locale);
   if (switchLocale == TextToSpeech.LANG_MISSING_DATA) {
     startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
     return;
@@ -19,4 +19,5 @@
   }
   initialized=true;
   initSubscription=geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
+  ActivityMixin.showShortToast(startingActivity,startingActivity.getResources().getString(R.string.tts_started));
 }
