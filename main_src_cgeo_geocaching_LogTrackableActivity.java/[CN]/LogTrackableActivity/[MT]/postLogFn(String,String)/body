@@ -4,6 +4,9 @@
     if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
       Twitter.postTweetTrackable(geocode,new LogEntry(0,typeSelected,log));
     }
+    if (status == StatusCode.NO_ERROR) {
+      addLocalTrackableLog(log);
+    }
     return status;
   }
  catch (  final Exception e) {
