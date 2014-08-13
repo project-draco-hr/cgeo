@@ -1,7 +1,7 @@
 {
   isRunning=true;
   startingActivity=activity;
-  Intent talkingService=new Intent(activity,SpeechService.class);
+  final Intent talkingService=new Intent(activity,SpeechService.class);
   talkingService.putExtra(EXTRA_TARGET_COORDS,dstCoords);
   activity.startService(talkingService);
 }
