@@ -1,4 +1,9 @@
 {
   CacheMenuHandler.addMenuItems(this,menu,cache);
+  final MenuItem menuItem=menu.findItem(R.id.menu_default_navigation);
+  final NavigationActionProvider navAction=(NavigationActionProvider)MenuItemCompat.getActionProvider(menuItem);
+  if (navAction != null) {
+    navAction.setNavigationSource(this);
+  }
   return true;
 }

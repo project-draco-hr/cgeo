@@ -1,0 +1,22 @@
+{
+  View view=null;
+  if (navigationSource != null) {
+    final LayoutInflater layoutInflater=LayoutInflater.from(context);
+    view=layoutInflater.inflate(R.layout.navigation_action,null);
+    final View navItem=view.findViewById(R.id.default_navigation_action);
+    navItem.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      final View v){
+        navigationSource.startDefaultNavigation();
+      }
+    }
+);
+    navItem.setOnLongClickListener(new View.OnLongClickListener(){
+      @Override public boolean onLongClick(      final View v){
+        navigationSource.startDefaultNavigation2();
+        return true;
+      }
+    }
+);
+  }
+  return view;
+}
