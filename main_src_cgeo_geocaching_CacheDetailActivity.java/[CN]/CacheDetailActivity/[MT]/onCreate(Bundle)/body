@@ -107,9 +107,12 @@
       if (getPage(position) == Page.IMAGES) {
         loadCacheImages();
       }
+      requireGeodata=getPage(position) == Page.DETAILS;
+      startOrStopGeoDataListener();
     }
   }
 );
+  requireGeodata=pageToOpen == 1;
   final String realGeocode=geocode;
   final String realGuid=guid;
   RxUtils.networkScheduler.createWorker().schedule(new Action0(){

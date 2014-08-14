@@ -1,5 +1,6 @@
 {
-  super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
+  super.onResume();
+  startOrStopGeoDataListener();
   if (refreshOnResume) {
     notifyDataSetChanged();
     refreshOnResume=false;
