@@ -12,4 +12,17 @@
     isGooglePlayServicesAvailable=true;
   }
   Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
+  geoDataObservable=(isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this)).replay(1).refCount().doOnNext(new Action1<IGeoData>(){
+    @Override public void call(    final IGeoData geoData){
+      currentGeo=geoData;
+    }
+  }
+);
+  directionObservable=DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>(){
+    @Override public void call(    final Float direction){
+      currentDirection=direction;
+    }
+  }
+);
+  gpsStatusObservable=GpsStatusProvider.create(this).share();
 }

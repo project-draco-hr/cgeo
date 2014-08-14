@@ -1,11 +1,3 @@
 {
-  if (directionObservable == null) {
-    directionObservable=DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>(){
-      @Override public void call(      final Float direction){
-        currentDirection=direction;
-      }
-    }
-);
-  }
   return directionObservable;
 }

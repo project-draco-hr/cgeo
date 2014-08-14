@@ -1,12 +1,3 @@
 {
-  if (geoDataObservable == null) {
-    final Observable<IGeoData> rawObservable=isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this);
-    geoDataObservable=rawObservable.replay(1).refCount().doOnNext(new Action1<IGeoData>(){
-      @Override public void call(      final IGeoData geoData){
-        currentGeo=geoData;
-      }
-    }
-);
-  }
   return geoDataObservable;
 }
