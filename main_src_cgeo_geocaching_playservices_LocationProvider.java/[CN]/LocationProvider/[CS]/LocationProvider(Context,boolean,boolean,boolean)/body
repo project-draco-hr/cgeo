@@ -1,0 +1,10 @@
+{
+  super(lowPower ? 0 : 2500,TimeUnit.MILLISECONDS);
+  if (onlyInitialLocation && !withInitialLocation) {
+    throw new IllegalArgumentException("LocationProvider: cannot request only initial location without requesting it at all");
+  }
+  locationClient=new LocationClient(context,this,this);
+  this.withInitialLocation=withInitialLocation;
+  this.lowPower=lowPower;
+  this.onlyInitialLocation=onlyInitialLocation;
+}
