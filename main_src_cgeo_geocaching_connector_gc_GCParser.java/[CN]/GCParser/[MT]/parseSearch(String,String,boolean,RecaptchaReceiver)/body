@@ -72,7 +72,7 @@
     cache.setGeocode(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_GEOCODE,true,1,cache.getGeocode(),true));
     cache.setType(CacheType.getByPattern(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_TYPE,null)));
     if (Settings.getLoadDirImg()) {
-      final String direction=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,1,null,false);
+      final String direction=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,null);
       if (direction != null) {
         cache.setDirectionImg(direction);
       }
@@ -92,9 +92,9 @@
         cache.setTerrain(terrain);
       }
     }
-    final String container=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_CONTAINER,false,1,null,false);
+    final String container=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_CONTAINER,false,null);
     cache.setSize(CacheSize.getById(container));
-    final String dateHidden=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_HIDDEN_DATE,false,1,null,false);
+    final String dateHidden=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_HIDDEN_DATE,false,null);
     if (StringUtils.isNotBlank(dateHidden)) {
       try {
         final Date date=GCLogin.parseGcCustomDate(dateHidden);
