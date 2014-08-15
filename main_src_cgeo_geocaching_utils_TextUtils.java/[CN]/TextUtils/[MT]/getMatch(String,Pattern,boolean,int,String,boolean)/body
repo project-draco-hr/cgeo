@@ -1,6 +1,6 @@
 {
   if (data != null) {
-    final Matcher matcher=p.matcher(data);
+    final Matcher matcher=pattern.matcher(data);
     if (matcher.find()) {
       String result=matcher.group(group);
       while (last && matcher.find()) {
