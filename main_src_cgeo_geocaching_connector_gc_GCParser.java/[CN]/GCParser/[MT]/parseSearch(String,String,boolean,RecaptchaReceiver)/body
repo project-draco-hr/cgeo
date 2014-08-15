@@ -70,7 +70,7 @@
       continue;
     }
     cache.setGeocode(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_GEOCODE,true,1,cache.getGeocode(),true));
-    cache.setType(CacheType.getByPattern(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_TYPE,true,1,null,true)));
+    cache.setType(CacheType.getByPattern(TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_TYPE,null)));
     if (Settings.getLoadDirImg()) {
       final String direction=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,1,null,false);
       if (direction != null) {

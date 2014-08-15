@@ -1,0 +1,6 @@
+{
+  final Pattern patternAll=Pattern.compile("foo(...)");
+  final String text="abc-foobar-def-fooxyz-ghi-foobaz-jkl";
+  assertThat(TextUtils.getMatch(text,patternAll,false,1,null,false)).isEqualTo("bar");
+  assertThat(TextUtils.getMatch(text,patternAll,false,1,null,true)).isEqualTo("baz");
+}

@@ -1,14 +1,16 @@
 {
   if (data != null) {
-    String result=null;
     final Matcher matcher=p.matcher(data);
     if (matcher.find()) {
-      result=matcher.group(group);
-    }
-    if (null != result) {
-      final Matcher remover=PATTERN_REMOVE_NONPRINTABLE.matcher(result);
-      result=remover.replaceAll(" ");
-      return trim ? new String(result).trim() : new String(result);
+      String result=matcher.group(group);
+      while (last && matcher.find()) {
+        result=matcher.group(group);
+      }
+      if (result != null) {
+        final Matcher remover=PATTERN_REMOVE_NONPRINTABLE.matcher(result);
+        result=remover.replaceAll(" ");
+        return trim ? new String(result).trim() : new String(result);
+      }
     }
   }
   return defaultValue;
