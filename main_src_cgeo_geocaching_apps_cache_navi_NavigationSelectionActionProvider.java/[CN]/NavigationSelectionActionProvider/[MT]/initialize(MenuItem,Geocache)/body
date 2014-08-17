@@ -1,0 +1,7 @@
+{
+  final ActionProvider actionProvider=MenuItemCompat.getActionProvider(menuItem);
+  if (actionProvider instanceof NavigationSelectionActionProvider) {
+    final NavigationSelectionActionProvider navigateAction=(NavigationSelectionActionProvider)actionProvider;
+    navigateAction.setTarget(cache);
+  }
+}
