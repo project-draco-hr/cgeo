@@ -1,0 +1,9 @@
+{
+  final List<NavigationAppsEnum> installedNavigationApps=NavigationAppFactory.getInstalledNavigationApps();
+  for (  final NavigationAppsEnum navigationApp : installedNavigationApps) {
+    if (navigationApp.id == navigationAppId) {
+      return navigationApp.app;
+    }
+  }
+  return NavigationAppsEnum.COMPASS.app;
+}
