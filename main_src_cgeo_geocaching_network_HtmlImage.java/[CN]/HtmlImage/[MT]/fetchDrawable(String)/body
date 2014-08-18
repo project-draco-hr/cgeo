@@ -1,12 +1,12 @@
 {
   if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url,BLOCKED)) {
-    return Observable.from(ImageUtils.getTransparent1x1Drawable(resources));
+    return Observable.just(ImageUtils.getTransparent1x1Drawable(resources));
   }
   if (FileUtils.isFileUrl(url)) {
-    return Observable.defer(new Func0<Observable<? extends BitmapDrawable>>(){
-      @Override public Observable<? extends BitmapDrawable> call(){
+    return Observable.defer(new Func0<Observable<BitmapDrawable>>(){
+      @Override public Observable<BitmapDrawable> call(){
         final Bitmap bitmap=loadCachedImage(FileUtils.urlToFile(url),true).getLeft();
-        return bitmap != null ? Observable.from(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
+        return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
       }
     }
 ).subscribeOn(RxUtils.computationScheduler);
