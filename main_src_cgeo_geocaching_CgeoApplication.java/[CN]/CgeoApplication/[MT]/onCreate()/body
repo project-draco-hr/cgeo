@@ -12,12 +12,14 @@
     isGooglePlayServicesAvailable=true;
   }
   Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
-  geoDataObservable=(isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this)).replay(1).refCount().doOnNext(new Action1<IGeoData>(){
+  final Action1<IGeoData> rememberGeoData=new Action1<IGeoData>(){
     @Override public void call(    final IGeoData geoData){
       currentGeo=geoData;
     }
   }
-);
+;
+  geoDataObservable=(isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this)).replay(1).refCount().doOnNext(rememberGeoData);
+  geoDataObservable.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeoData);
   directionObservable=DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>(){
     @Override public void call(    final Float direction){
       currentDirection=direction;
