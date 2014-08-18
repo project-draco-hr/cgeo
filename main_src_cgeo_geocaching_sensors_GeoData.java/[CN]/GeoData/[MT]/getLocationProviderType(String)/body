@@ -5,8 +5,11 @@
   if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
     return LocationProviderType.NETWORK;
   }
-  if (provider.equals("fused")) {
+  if (provider.equals(FUSED_PROVIDER)) {
     return LocationProviderType.FUSED;
+  }
+  if (provider.equals(LOW_POWER_PROVIDER)) {
+    return LocationProviderType.LOW_POWER;
   }
   return LocationProviderType.LAST;
 }
