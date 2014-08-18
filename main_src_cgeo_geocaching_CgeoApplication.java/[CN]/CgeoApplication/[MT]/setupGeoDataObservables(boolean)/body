@@ -1,0 +1,3 @@
+{
+  geoDataObservable=(isGooglePlayServicesAvailable() && useGooglePlayServices ? LocationProvider.create(this) : GeoDataProvider.create(this)).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+}

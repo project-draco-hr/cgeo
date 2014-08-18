@@ -1,0 +1,12 @@
+{
+  final Preference p=getPreference(R.string.pref_googleplayservices);
+  p.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    final Preference preference,    final Object newValue){
+      final boolean useGooglePlayServices=(Boolean)newValue;
+      CgeoApplication.getInstance().setupGeoDataObservables(useGooglePlayServices);
+      return true;
+    }
+  }
+);
+  p.setEnabled(CgeoApplication.getInstance().isGooglePlayServicesAvailable());
+}
