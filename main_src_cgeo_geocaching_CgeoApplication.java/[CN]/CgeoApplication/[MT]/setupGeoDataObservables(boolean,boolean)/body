@@ -1,0 +1,15 @@
+{
+  if (useGooglePlayServices) {
+    geoDataObservable=LocationProvider.getMostPrecise(this,true).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+    if (useLowPowerLocation) {
+      geoDataObservableLowPower=LocationProvider.getLowPower(this,true).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+    }
+ else {
+      geoDataObservableLowPower=geoDataObservable;
+    }
+  }
+ else {
+    geoDataObservable=GeoDataProvider.create(this).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+    geoDataObservableLowPower=geoDataObservable;
+  }
+}

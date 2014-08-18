@@ -12,7 +12,7 @@
     isGooglePlayServicesAvailable=true;
   }
   Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
-  setupGeoDataObservables(Settings.useGooglePlayServices());
+  setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
   geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(REMEMBER_GEODATA);
   directionObservable=DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>(){
     @Override public void call(    final Float direction){
