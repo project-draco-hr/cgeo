@@ -1,5 +1,10 @@
 {
   getMenuInflater().inflate(R.menu.navigate_any_point_activity_options,menu);
-  menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+  final MenuItem menuItem=menu.findItem(R.id.menu_default_navigation);
+  menuItem.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+  final NavigationActionProvider navAction=(NavigationActionProvider)MenuItemCompat.getActionProvider(menuItem);
+  if (navAction != null) {
+    navAction.setNavigationSource(this);
+  }
   return true;
 }
