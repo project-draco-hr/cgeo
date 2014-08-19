@@ -1,4 +1,5 @@
 {
   Log.d("GpsStatusProvider: starting the GPS status listener");
+  subscriber.onNext(NO_GPS);
   geoManager.addGpsStatusListener(gpsStatusListener);
 }
