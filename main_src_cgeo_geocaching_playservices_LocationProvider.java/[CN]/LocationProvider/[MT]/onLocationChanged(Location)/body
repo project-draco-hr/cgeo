@@ -1,3 +1,6 @@
 {
+  if (Settings.useLowPowerMode()) {
+    location.setProvider(GeoData.LOW_POWER_PROVIDER);
+  }
   subject.onNext(new GeoData(location));
 }
