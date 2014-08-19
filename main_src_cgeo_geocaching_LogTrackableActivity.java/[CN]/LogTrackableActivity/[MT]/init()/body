@@ -14,11 +14,7 @@
     possibleLogTypes=Trackable.getPossibleLogTypes();
   }
   if (GCLogin.isEmpty(viewstates)) {
-    setLoggingEnabled(false);
     new LoadDataThread().start();
-  }
- else {
-    setLoggingEnabled(true);
   }
   disableSuggestions(trackingEditText);
 }
