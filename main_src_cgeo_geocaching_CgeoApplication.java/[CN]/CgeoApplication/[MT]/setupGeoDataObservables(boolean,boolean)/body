@@ -1,15 +1,15 @@
 {
   if (useGooglePlayServices) {
-    geoDataObservable=LocationProvider.getMostPrecise(this,true).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+    geoDataObservable=LocationProvider.getMostPrecise(this).doOnNext(rememberGeodataAction);
     if (useLowPowerLocation) {
-      geoDataObservableLowPower=LocationProvider.getLowPower(this,true).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+      geoDataObservableLowPower=LocationProvider.getLowPower(this,true).doOnNext(rememberGeodataAction);
     }
  else {
       geoDataObservableLowPower=geoDataObservable;
     }
   }
  else {
-    geoDataObservable=GeoDataProvider.create(this).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+    geoDataObservable=GeoDataProvider.create(this).replay(1).refCount().doOnNext(rememberGeodataAction);
     geoDataObservableLowPower=geoDataObservable;
   }
 }

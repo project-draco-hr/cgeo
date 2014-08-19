@@ -1,13 +1,3 @@
 {
-  if (withInitialLocation) {
-    final Location initialLocation=locationClient.getLastLocation();
-    Log.d("LocationProvider: starting with " + (initialLocation == null ? "dummy" : "previous") + " location");
-    subscriber.onNext(initialLocation != null ? new GeoData(initialLocation) : GeoData.dummyLocation());
-  }
-  if (onlyInitialLocation) {
-    subscriber.onCompleted();
-  }
- else {
-    locationClient.requestLocationUpdates(lowPower ? LOCATION_REQUEST_LOW_POWER : LOCATION_REQUEST,this);
-  }
+  updateRequest();
 }

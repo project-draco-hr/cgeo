@@ -1,4 +1,3 @@
 {
-  location.setProvider(lowPower ? GeoData.LOW_POWER_PROVIDER : GeoData.FUSED_PROVIDER);
-  subscriber.onNext(new GeoData(location));
+  subject.onNext(new GeoData(location));
 }

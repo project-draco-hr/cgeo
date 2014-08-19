@@ -1,12 +1,11 @@
 {
   final Observable<IGeoData> initialLocationObservable=withInitialLocation ? getInitialLocation(context,true) : Observable.<IGeoData>empty();
-  final Observable<IGeoData> lowPowerObservable=Observable.create(new LocationProvider(context,true,false,false));
-  final Observable<IGeoData> lowPowerObservable2=Observable.create(new LocationProvider(context,true,false,false));
-  final Observable<IGeoData> gpsFixObservable=getMostPrecise(context,false).takeFirst(new Func1<IGeoData,Boolean>(){
+  final Observable<IGeoData> lowPowerObservable=get(context,lowPowerCount).skip(1);
+  final Observable<IGeoData> gpsFixObservable=get(context,mostPreciseCount).skip(1).takeFirst(new Func1<IGeoData,Boolean>(){
     @Override public Boolean call(    final IGeoData geoData){
       return geoData.getAccuracy() < 20;
     }
   }
-).delaySubscription(2,TimeUnit.SECONDS);
-  return initialLocationObservable.concatWith(lowPowerObservable.mergeWith(gpsFixObservable).first().concatWith(lowPowerObservable2).timeout(60,TimeUnit.SECONDS).retry());
+);
+  return initialLocationObservable.concatWith(lowPowerObservable.mergeWith(gpsFixObservable.delaySubscription(6,TimeUnit.SECONDS)).first().concatWith(lowPowerObservable).timeout(60,TimeUnit.SECONDS).retry());
 }
