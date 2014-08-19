@@ -20,7 +20,9 @@
         itemsToDisplay.add(getCacheItem(cache));
       }
     }
-    overlayCaches.updateItems(itemsToDisplay);
+    if (coordsIntent == null) {
+      overlayCaches.updateItems(itemsToDisplay);
+    }
     displayHandler.sendEmptyMessage(INVALIDATE_MAP);
     displayHandler.sendEmptyMessage(UPDATE_TITLE);
   }
