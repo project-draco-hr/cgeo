@@ -7,7 +7,10 @@
         return Observable.empty();
       }
       final String userToken=userTokenMatcher.group(1);
-      final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),logType.getParamName(),Boolean.toString(Boolean.TRUE),"decrypt","true");
+      final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),"decrypt","true");
+      if (logType != Logs.ALL) {
+        params.add(logType.getParamName(),Boolean.toString(Boolean.TRUE));
+      }
       final HttpResponse response=Network.getRequest("http://www.geocaching.com/seek/geocache.logbook",params);
       if (response == null) {
         Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
@@ -23,7 +26,7 @@
         Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
         return Observable.empty();
       }
-      return parseLogs(true,rawResponse);
+      return parseLogs(logType != Logs.ALL,rawResponse);
     }
   }
 ).subscribeOn(RxUtils.networkScheduler);
