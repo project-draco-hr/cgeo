@@ -7,6 +7,6 @@
     params.put("guid",guid);
   }
   params.put("log",log);
-  params.put("numlogs",numlogs);
+  params.put("numlogs","0");
   return GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx",params);
 }
