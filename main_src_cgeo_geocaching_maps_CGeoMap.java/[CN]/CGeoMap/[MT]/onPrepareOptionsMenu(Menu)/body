@@ -16,6 +16,7 @@
  else {
       item.setTitle(res.getString(R.string.map_live_enable));
     }
+    item.setVisible(coordsIntent == null);
     item=menu.findItem(R.id.menu_mycaches_mode);
     item.setChecked(Settings.isExcludeMyCaches());
     final Set<String> geocodesInViewport=getGeocodesForCachesInViewport();
