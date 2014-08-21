@@ -8,7 +8,6 @@
   waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
   waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
   waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
-  waypoint.setLatlon(cursor.getString(cursor.getColumnIndex("latlon")));
   waypoint.setCoords(getCoords(cursor,cursor.getColumnIndex("latitude"),cursor.getColumnIndex("longitude")));
   waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
   return waypoint;

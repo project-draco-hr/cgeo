@@ -240,7 +240,6 @@
         waypoint.setLookup(TextUtils.getMatch(wp[5],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,true,2,waypoint.getLookup(),false));
         latlon=Html.fromHtml(TextUtils.getMatch(wp[7],GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON,false,2,"",false)).toString().trim();
         if (!StringUtils.startsWith(latlon,"???")) {
-          waypoint.setLatlon(latlon);
           waypoint.setCoords(new Geopoint(latlon));
         }
         j++;

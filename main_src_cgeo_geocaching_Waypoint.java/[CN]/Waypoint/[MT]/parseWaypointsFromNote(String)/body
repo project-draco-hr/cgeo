@@ -1,8 +1,7 @@
 {
   final List<Waypoint> waypoints=new LinkedList<>();
-  final Pattern COORDPATTERN=Pattern.compile("\\b[nNsS]{1}\\s*\\d");
   String note=initialNote;
-  MatcherWrapper matcher=new MatcherWrapper(COORDPATTERN,note);
+  MatcherWrapper matcher=new MatcherWrapper(PATTERN_COORDS,note);
   int count=1;
   while (matcher.find()) {
     try {
@@ -16,10 +15,10 @@
         count++;
       }
     }
- catch (    final Geopoint.ParseException e) {
+ catch (    final Geopoint.ParseException ignore) {
     }
     note=note.substring(matcher.start() + 1);
-    matcher=new MatcherWrapper(COORDPATTERN,note);
+    matcher=new MatcherWrapper(PATTERN_COORDS,note);
   }
   return waypoints;
 }
