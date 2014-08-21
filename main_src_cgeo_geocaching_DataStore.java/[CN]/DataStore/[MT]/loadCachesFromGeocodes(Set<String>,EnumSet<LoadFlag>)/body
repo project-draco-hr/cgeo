@@ -18,7 +18,7 @@
     final Set<Geocache> caches=new HashSet<>();
     int logIndex=-1;
     while (cursor.moveToNext()) {
-      final Geocache cache=DataStore.createCacheFromDatabaseContent(cursor);
+      final Geocache cache=createCacheFromDatabaseContent(cursor);
       if (loadFlags.contains(LoadFlag.ATTRIBUTES)) {
         cache.setAttributes(loadAttributes(cache.getGeocode()));
       }
