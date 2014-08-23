@@ -1,0 +1,8 @@
+{
+  new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut,new Action1<Integer>(){
+    @Override public void call(    final Integer listId){
+      createOfflineListShortcut(listId.intValue());
+    }
+  }
+,false,-1);
+}

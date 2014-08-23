@@ -3,7 +3,7 @@
     return;
   }
   if (id == PseudoList.HISTORY_LIST.id) {
-    CacheListActivity.startActivityHistory(this);
+    startActivity(CacheListActivity.getHistoryIntent(this));
     finish();
     return;
   }

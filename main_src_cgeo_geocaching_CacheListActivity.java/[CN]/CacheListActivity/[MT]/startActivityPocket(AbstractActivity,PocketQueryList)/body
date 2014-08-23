@@ -5,7 +5,7 @@
     return;
   }
   final Intent cachesIntent=new Intent(context,CacheListActivity.class);
-  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.POCKET);
+  Intents.putListType(cachesIntent,CacheListType.POCKET);
   cachesIntent.putExtra(Intents.EXTRA_NAME,pq.getName());
   cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID,guid);
   context.startActivity(cachesIntent);

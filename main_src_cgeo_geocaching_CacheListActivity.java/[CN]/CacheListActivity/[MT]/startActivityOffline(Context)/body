@@ -1,5 +1,5 @@
 {
   final Intent cachesIntent=new Intent(context,CacheListActivity.class);
-  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.OFFLINE);
+  Intents.putListType(cachesIntent,CacheListType.OFFLINE);
   context.startActivity(cachesIntent);
 }

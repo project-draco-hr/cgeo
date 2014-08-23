@@ -3,7 +3,7 @@
     return;
   }
   final Intent cachesIntent=new Intent(context,CacheListActivity.class);
-  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.OWNER);
+  Intents.putListType(cachesIntent,CacheListType.OWNER);
   cachesIntent.putExtra(Intents.EXTRA_USERNAME,userName);
   context.startActivity(cachesIntent);
 }

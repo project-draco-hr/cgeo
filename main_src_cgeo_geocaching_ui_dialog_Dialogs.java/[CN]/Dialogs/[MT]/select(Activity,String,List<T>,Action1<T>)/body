@@ -1,0 +1,19 @@
+{
+  final ListAdapter adapter=new ArrayAdapter<T>(activity,android.R.layout.select_dialog_item,android.R.id.text1,items){
+    @Override public View getView(    final int position,    final View convertView,    final ViewGroup parent){
+      final View v=super.getView(position,convertView,parent);
+      final TextView tv=(TextView)v.findViewById(android.R.id.text1);
+      tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getIcon(),0,0,0);
+      final int dp5=(int)(5 * activity.getResources().getDisplayMetrics().density + 0.5f);
+      tv.setCompoundDrawablePadding(dp5);
+      return v;
+    }
+  }
+;
+  new AlertDialog.Builder(activity).setTitle(title).setAdapter(adapter,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    final DialogInterface dialog,    final int item){
+      listener.call(items.get(item));
+    }
+  }
+).show();
+}

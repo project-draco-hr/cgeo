@@ -4,8 +4,7 @@
   setContentView(R.layout.cacheslist_activity);
   Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    final Object typeObject=extras.get(Intents.EXTRA_LIST_TYPE);
-    type=(typeObject instanceof CacheListType) ? (CacheListType)typeObject : CacheListType.OFFLINE;
+    type=Intents.getListType(getIntent());
     coords=extras.getParcelable(Intents.EXTRA_COORDS);
   }
  else {
@@ -16,6 +15,9 @@
     if (coords == null) {
       coords=Geopoint.ZERO;
     }
+  }
+  if (type == CacheListType.NEAREST) {
+    coords=CgeoApplication.getInstance().currentGeo().getCoords();
   }
   setTitle(title);
   initAdapter();

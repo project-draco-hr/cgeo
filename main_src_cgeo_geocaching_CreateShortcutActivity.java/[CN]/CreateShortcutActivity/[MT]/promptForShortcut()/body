@@ -1,10 +1,20 @@
 {
-  new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut,new Action1<Integer>(){
-    @Override public void call(    final Integer listId){
-      final Intent shortcut=createShortcut(listId);
-      setResult(RESULT_OK,shortcut);
-      finish();
+  final List<Shortcut> shortcuts=new ArrayList<>();
+  shortcuts.add(new Shortcut(R.string.caches_nearby_button,R.drawable.main_nearby,CacheListActivity.getNearestIntent(this)));
+  final Shortcut offlineShortcut=new Shortcut(R.string.stored_caches_button,R.drawable.main_stored,null);
+  shortcuts.add(offlineShortcut);
+  shortcuts.add(new Shortcut(R.string.advanced_search_button,R.drawable.main_search,new Intent(this,SearchActivity.class)));
+  shortcuts.add(new Shortcut(R.string.any_button,R.drawable.main_any,new Intent(this,NavigateAnyPointActivity.class)));
+  shortcuts.add(new Shortcut(R.string.menu_history,CacheListActivity.getHistoryIntent(this)));
+  Dialogs.select(this,getString(R.string.create_shortcut),shortcuts,new Action1<Shortcut>(){
+    @Override public void call(    final Shortcut shortcut){
+      if (shortcut == offlineShortcut) {
+        promptForListShortcut();
+      }
+ else {
+        createShortcutAndFinish(shortcut.toString(),shortcut.intent,shortcut.drawableResourceId);
+      }
     }
   }
-,false,PseudoList.HISTORY_LIST.id);
+);
 }

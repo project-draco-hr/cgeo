@@ -1,9 +1,0 @@
-{
-  if (!isValidCoords(context,coordsNow)) {
-    return;
-  }
-  final Intent cachesIntent=new Intent(context,CacheListActivity.class);
-  cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE,CacheListType.NEAREST);
-  cachesIntent.putExtra(Intents.EXTRA_COORDS,coordsNow);
-  context.startActivity(cachesIntent);
-}

@@ -1,0 +1,9 @@
+{
+  final ShortcutIconResource iconResource=Intent.ShortcutIconResource.fromContext(this,iconResourceId);
+  final Intent intent=new Intent();
+  intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT,targetIntent);
+  intent.putExtra(Intent.EXTRA_SHORTCUT_NAME,title);
+  intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,iconResource);
+  setResult(RESULT_OK,intent);
+  finish();
+}

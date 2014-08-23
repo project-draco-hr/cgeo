@@ -3,5 +3,5 @@
     return;
   }
   nearestView.setPressed(true);
-  CacheListActivity.startActivityNearest(this,app.currentGeo().getCoords());
+  startActivity(CacheListActivity.getNearestIntent(this));
 }
