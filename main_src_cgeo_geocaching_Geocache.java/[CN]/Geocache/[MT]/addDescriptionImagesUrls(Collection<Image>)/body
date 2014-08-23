@@ -5,7 +5,7 @@
   }
   Html.fromHtml(getDescription(),new ImageGetter(){
     @Override public Drawable getDrawable(    final String source){
-      if (!urls.contains(source) && !ImageUtils.containsPattern(source,NO_EXTERNAL)) {
+      if (!urls.contains(source) && ImageUtils.canBeOpenedExternally(source)) {
         images.add(new Image(source,geocode));
         urls.add(source);
       }
