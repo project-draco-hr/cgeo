@@ -2,7 +2,7 @@
   if (CollectionUtils.isEmpty(geocodes)) {
     return new HashSet<>();
   }
-  final Set<Geocache> result=new HashSet<>();
+  final Set<Geocache> result=new HashSet<>(geocodes.size());
   final Set<String> remaining=new HashSet<>(geocodes);
   if (loadFlags.contains(LoadFlag.CACHE_BEFORE)) {
     for (    final String geocode : new HashSet<>(remaining)) {
