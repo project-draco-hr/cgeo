@@ -5,9 +5,5 @@
   setTitle();
   setDestCoords();
   setCacheInfo();
-  final CgeoApplication app=CgeoApplication.getInstance();
-  final IGeoData geo=app.currentGeo();
-  if (geo != null) {
-    geoDirHandler.updateGeoDir(geo,app.currentDirection());
-  }
+  forceRefresh();
 }
