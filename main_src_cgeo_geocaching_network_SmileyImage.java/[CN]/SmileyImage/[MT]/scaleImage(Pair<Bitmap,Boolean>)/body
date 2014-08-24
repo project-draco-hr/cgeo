@@ -2,10 +2,8 @@
   final Bitmap bitmap=loadResult.getLeft();
   BitmapDrawable drawable;
   if (bitmap != null) {
-    final int lineHeight=(int)(view.getLineHeight() * 0.8);
     drawable=new BitmapDrawable(view.getResources(),bitmap);
-    final int width=drawable.getIntrinsicWidth() * lineHeight / drawable.getIntrinsicHeight();
-    drawable.setBounds(0,0,width,lineHeight);
+    drawable.setBounds(ImageUtils.scaleImageToLineHeight(drawable,view));
   }
  else {
     drawable=null;
