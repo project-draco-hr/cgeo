@@ -1,10 +1,17 @@
 {
   sensorManager=(SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
-  rotationSensor=sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-  if (rotationSensor != null) {
-    Log.d("RotationProvider: sensor found");
+  final Sensor sensor=sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
+  if (sensor != null && Settings.useLowPowerMode()) {
+    rotationSensor=sensor;
+    Log.d("RotationProvider: geomagnetic (low-power) sensor found");
   }
  else {
-    Log.w("RotationProvider: no rotation sensor on this device");
+    rotationSensor=sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+    if (rotationSensor != null) {
+      Log.d("RotationProvider: sensor found");
+    }
+ else {
+      Log.w("RotationProvider: no rotation sensor on this device");
+    }
   }
 }
