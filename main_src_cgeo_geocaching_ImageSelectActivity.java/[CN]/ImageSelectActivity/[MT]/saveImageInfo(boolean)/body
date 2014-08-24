@@ -5,10 +5,10 @@
       imageUri=Uri.parse(filename);
       final Intent intent=new Intent();
       syncEditTexts();
-      intent.putExtra(EXTRAS_CAPTION,imageCaption);
-      intent.putExtra(EXTRAS_DESCRIPTION,imageDescription);
-      intent.putExtra(EXTRAS_URI_AS_STRING,imageUri.toString());
-      intent.putExtra(EXTRAS_SCALE,scaleChoiceIndex);
+      intent.putExtra(Intents.EXTRA_CAPTION,imageCaption);
+      intent.putExtra(Intents.EXTRA_DESCRIPTION,imageDescription);
+      intent.putExtra(Intents.EXTRA_URI_AS_STRING,imageUri.toString());
+      intent.putExtra(Intents.EXTRA_SCALE,scaleChoiceIndex);
       setResult(RESULT_OK,intent);
     }
  else {

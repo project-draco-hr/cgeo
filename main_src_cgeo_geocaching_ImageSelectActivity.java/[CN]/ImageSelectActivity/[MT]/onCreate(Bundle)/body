@@ -7,10 +7,10 @@
   imageUri=Uri.EMPTY;
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    imageCaption=extras.getString(EXTRAS_CAPTION);
-    imageDescription=extras.getString(EXTRAS_DESCRIPTION);
-    imageUri=Uri.parse(extras.getString(EXTRAS_URI_AS_STRING));
-    scaleChoiceIndex=extras.getInt(EXTRAS_SCALE,scaleChoiceIndex);
+    imageCaption=extras.getString(Intents.EXTRA_CAPTION);
+    imageDescription=extras.getString(Intents.EXTRA_DESCRIPTION);
+    imageUri=Uri.parse(extras.getString(Intents.EXTRA_URI_AS_STRING));
+    scaleChoiceIndex=extras.getInt(Intents.EXTRA_SCALE,scaleChoiceIndex);
   }
   if (savedInstanceState != null) {
     imageCaption=savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
@@ -19,13 +19,13 @@
     scaleChoiceIndex=savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
   }
   cameraButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View view){
+    @Override public void onClick(    final View view){
       selectImageFromCamera();
     }
   }
 );
   storedButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View view){
+    @Override public void onClick(    final View view){
       selectImageFromStorage();
     }
   }
@@ -40,22 +40,22 @@
   }
   scaleView.setSelection(scaleChoiceIndex);
   scaleView.setOnItemSelectedListener(new OnItemSelectedListener(){
-    @Override public void onItemSelected(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
+    @Override public void onItemSelected(    final AdapterView<?> arg0,    final View arg1,    final int arg2,    final long arg3){
       scaleChoiceIndex=scaleView.getSelectedItemPosition();
       Settings.setLogImageScale(scaleChoiceIndex);
     }
-    @Override public void onNothingSelected(    AdapterView<?> arg0){
+    @Override public void onNothingSelected(    final AdapterView<?> arg0){
     }
   }
 );
   saveButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       saveImageInfo(true);
     }
   }
 );
   clearButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       saveImageInfo(false);
     }
   }

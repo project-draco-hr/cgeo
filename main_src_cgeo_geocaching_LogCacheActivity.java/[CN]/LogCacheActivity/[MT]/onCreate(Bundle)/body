@@ -2,9 +2,9 @@
   super.onCreate(savedInstanceState,R.layout.logcache_activity);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    geocode=extras.getString(EXTRAS_GEOCODE);
+    geocode=extras.getString(Intents.EXTRA_GEOCODE);
     if (StringUtils.isBlank(geocode)) {
-      final String cacheid=extras.getString(EXTRAS_ID);
+      final String cacheid=extras.getString(Intents.EXTRA_ID);
       if (StringUtils.isNotBlank(cacheid)) {
         geocode=DataStore.getGeocodeForGuid(cacheid);
       }

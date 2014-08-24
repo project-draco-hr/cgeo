@@ -10,7 +10,7 @@
   if (data != null) {
     final Uri selectedImage=data.getData();
     if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
-      String[] filePathColumn={MediaColumns.DATA};
+      final String[] filePathColumn={MediaColumns.DATA};
       Cursor cursor=null;
       try {
         cursor=getContentResolver().query(selectedImage,filePathColumn,null,null,null);
@@ -19,15 +19,15 @@
           return;
         }
         cursor.moveToFirst();
-        int columnIndex=cursor.getColumnIndex(filePathColumn[0]);
-        String filePath=cursor.getString(columnIndex);
+        final int columnIndex=cursor.getColumnIndex(filePathColumn[0]);
+        final String filePath=cursor.getString(columnIndex);
         if (StringUtils.isBlank(filePath)) {
           showFailure();
           return;
         }
         imageUri=Uri.parse(filePath);
       }
- catch (      Exception e) {
+ catch (      final Exception e) {
         Log.e("ImageSelectActivity.onActivityResult",e);
         showFailure();
       }
@@ -48,7 +48,7 @@
         LocalStorage.copy(input,output);
         imageUri=Uri.fromFile(outputFile);
       }
- catch (      FileNotFoundException e) {
+ catch (      final FileNotFoundException e) {
         Log.e("ImageSelectActivity.onStartResult",e);
       }
  finally {

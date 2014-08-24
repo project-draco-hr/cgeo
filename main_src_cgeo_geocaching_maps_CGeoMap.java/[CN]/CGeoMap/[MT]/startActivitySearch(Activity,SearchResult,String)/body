@@ -1,10 +1,10 @@
 {
   final Intent mapIntent=newIntent(fromActivity);
-  mapIntent.putExtra(EXTRAS_SEARCH,search);
-  mapIntent.putExtra(EXTRAS_MAP_MODE,MapMode.LIST);
-  mapIntent.putExtra(EXTRAS_LIVE_ENABLED,false);
+  mapIntent.putExtra(Intents.EXTRA_SEARCH,search);
+  mapIntent.putExtra(Intents.EXTRA_MAP_MODE,MapMode.LIST);
+  mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED,false);
   if (StringUtils.isNotBlank(title)) {
-    mapIntent.putExtra(CGeoMap.EXTRAS_MAP_TITLE,title);
+    mapIntent.putExtra(Intents.EXTRA_MAP_TITLE,title);
   }
   fromActivity.startActivity(mapIntent);
 }

@@ -1,13 +1,13 @@
 {
   final Intent mapIntent=newIntent(fromActivity);
-  mapIntent.putExtra(EXTRAS_MAP_MODE,MapMode.COORDS);
-  mapIntent.putExtra(EXTRAS_LIVE_ENABLED,false);
-  mapIntent.putExtra(EXTRAS_COORDS,coords);
+  mapIntent.putExtra(Intents.EXTRA_MAP_MODE,MapMode.COORDS);
+  mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED,false);
+  mapIntent.putExtra(Intents.EXTRA_COORDS,coords);
   if (type != null) {
-    mapIntent.putExtra(EXTRAS_WPTTYPE,type.id);
+    mapIntent.putExtra(Intents.EXTRA_WPTTYPE,type.id);
   }
   if (StringUtils.isNotBlank(title)) {
-    mapIntent.putExtra(EXTRAS_MAP_TITLE,title);
+    mapIntent.putExtra(Intents.EXTRA_MAP_TITLE,title);
   }
   fromActivity.startActivity(mapIntent);
 }

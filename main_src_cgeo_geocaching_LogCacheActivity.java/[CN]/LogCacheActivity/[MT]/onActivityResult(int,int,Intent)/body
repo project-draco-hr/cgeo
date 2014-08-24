@@ -1,9 +1,9 @@
 {
   if (requestCode == SELECT_IMAGE) {
     if (resultCode == RESULT_OK) {
-      imageCaption=data.getStringExtra(ImageSelectActivity.EXTRAS_CAPTION);
-      imageDescription=data.getStringExtra(ImageSelectActivity.EXTRAS_DESCRIPTION);
-      imageUri=Uri.parse(data.getStringExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING));
+      imageCaption=data.getStringExtra(Intents.EXTRA_CAPTION);
+      imageDescription=data.getStringExtra(Intents.EXTRA_DESCRIPTION);
+      imageUri=Uri.parse(data.getStringExtra(Intents.EXTRA_URI_AS_STRING));
     }
  else     if (resultCode != RESULT_CANCELED) {
       showToast(getResources().getString(R.string.err_select_logimage_failed));

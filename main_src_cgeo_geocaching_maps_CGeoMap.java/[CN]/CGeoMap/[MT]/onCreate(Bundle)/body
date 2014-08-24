@@ -9,14 +9,14 @@
   mapItemFactory=mapProvider.getMapItemFactory();
   final Bundle extras=activity.getIntent().getExtras();
   if (extras != null) {
-    mapMode=(MapMode)extras.get(EXTRAS_MAP_MODE);
-    isLiveEnabled=extras.getBoolean(EXTRAS_LIVE_ENABLED,false);
-    searchIntent=extras.getParcelable(EXTRAS_SEARCH);
-    geocodeIntent=extras.getString(EXTRAS_GEOCODE);
-    coordsIntent=extras.getParcelable(EXTRAS_COORDS);
-    waypointTypeIntent=WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
-    mapStateIntent=extras.getIntArray(EXTRAS_MAPSTATE);
-    mapTitle=extras.getString(EXTRAS_MAP_TITLE);
+    mapMode=(MapMode)extras.get(Intents.EXTRA_MAP_MODE);
+    isLiveEnabled=extras.getBoolean(Intents.EXTRA_LIVE_ENABLED,false);
+    searchIntent=extras.getParcelable(Intents.EXTRA_SEARCH);
+    geocodeIntent=extras.getString(Intents.EXTRA_GEOCODE);
+    coordsIntent=extras.getParcelable(Intents.EXTRA_COORDS);
+    waypointTypeIntent=WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
+    mapStateIntent=extras.getIntArray(Intents.EXTRA_MAPSTATE);
+    mapTitle=extras.getString(Intents.EXTRA_MAP_TITLE);
   }
  else {
     mapMode=MapMode.LIVE;
