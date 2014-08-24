@@ -1,11 +1,11 @@
 {
-  NfcAdapter nfcAdapter=NfcAdapter.getDefaultAdapter(this);
+  final NfcAdapter nfcAdapter=NfcAdapter.getDefaultAdapter(this);
   if (nfcAdapter == null) {
     return;
   }
   nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback(){
-    @Override public NdefMessage createNdefMessage(    NfcEvent event){
-      NdefRecord record=NdefRecord.createUri(sharingInterface.getUri());
+    @Override public NdefMessage createNdefMessage(    final NfcEvent event){
+      final NdefRecord record=NdefRecord.createUri(sharingInterface.getUri());
       return new NdefMessage(new NdefRecord[]{record});
     }
   }
