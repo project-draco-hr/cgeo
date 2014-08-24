@@ -1,7 +1,11 @@
 {
   Log.i("Import GPX from uri: " + uri);
-  importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE,R.string.gpx_import_loading_caches,-1));
   final InputStream is=contentResolver.openInputStream(uri);
+  int streamSize=is.available();
+  if (streamSize == 0) {
+    streamSize=-1;
+  }
+  importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE,R.string.gpx_import_loading_caches,streamSize));
   try {
     return parser.parse(is,progressHandler);
   }
