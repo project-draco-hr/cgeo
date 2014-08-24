@@ -1,4 +1,4 @@
 {
   final boolean useGPSBearing=!Settings.isUseCompass() || geoData.getSpeed() > 5;
-  return useGPSBearing ? DirectionProvider.reverseDirectionNow(geoData.getBearing()) : direction;
+  return useGPSBearing ? AngleUtils.reverseDirectionNow(geoData.getBearing()) : direction;
 }
