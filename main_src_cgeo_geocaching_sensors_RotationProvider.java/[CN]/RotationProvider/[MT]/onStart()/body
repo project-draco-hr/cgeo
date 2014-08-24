@@ -1,0 +1,9 @@
+{
+  if (rotationSensor != null) {
+    Log.d("RotationProvider: starting the rotation provider");
+    sensorManager.registerListener(this,rotationSensor,SensorManager.SENSOR_DELAY_NORMAL);
+  }
+ else {
+    subscriber.onError(new RuntimeException("rotation sensor is absent on this device"));
+  }
+}
