@@ -6,7 +6,7 @@
   shortcuts.add(offlineShortcut);
   shortcuts.add(new Shortcut(R.string.advanced_search_button,R.drawable.main_search,new Intent(this,SearchActivity.class)));
   shortcuts.add(new Shortcut(R.string.any_button,R.drawable.main_any,new Intent(this,NavigateAnyPointActivity.class)));
-  shortcuts.add(new Shortcut(R.string.menu_history,CacheListActivity.getHistoryIntent(this)));
+  shortcuts.add(new Shortcut(R.string.menu_history,R.drawable.main_stored,CacheListActivity.getHistoryIntent(this)));
   Dialogs.select(this,getString(R.string.create_shortcut),shortcuts,new Action1<Shortcut>(){
     @Override public void call(    final Shortcut shortcut){
       if (shortcut == offlineShortcut) {

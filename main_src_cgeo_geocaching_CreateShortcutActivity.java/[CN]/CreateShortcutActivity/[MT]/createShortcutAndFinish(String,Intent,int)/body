@@ -1,9 +1,14 @@
 {
-  final ShortcutIconResource iconResource=Intent.ShortcutIconResource.fromContext(this,iconResourceId);
   final Intent intent=new Intent();
   intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT,targetIntent);
   intent.putExtra(Intent.EXTRA_SHORTCUT_NAME,title);
-  intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,iconResource);
+  if (iconResourceId == R.drawable.cgeo) {
+    final ShortcutIconResource iconResource=Intent.ShortcutIconResource.fromContext(this,iconResourceId);
+    intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,iconResource);
+  }
+ else {
+    intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,createOverlay(iconResourceId));
+  }
   setResult(RESULT_OK,intent);
   finish();
 }
