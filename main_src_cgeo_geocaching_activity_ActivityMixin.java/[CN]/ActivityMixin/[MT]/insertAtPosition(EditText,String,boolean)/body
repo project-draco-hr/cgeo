@@ -1,8 +1,8 @@
 {
-  int selectionStart=editText.getSelectionStart();
-  int selectionEnd=editText.getSelectionEnd();
-  int start=Math.min(selectionStart,selectionEnd);
-  int end=Math.max(selectionStart,selectionEnd);
+  final int selectionStart=editText.getSelectionStart();
+  final int selectionEnd=editText.getSelectionEnd();
+  final int start=Math.min(selectionStart,selectionEnd);
+  final int end=Math.max(selectionStart,selectionEnd);
   final String content=editText.getText().toString();
   String completeText;
   if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
@@ -12,6 +12,6 @@
     completeText=insertText;
   }
   editText.getText().replace(start,end,completeText);
-  int newCursor=moveCursor ? start + completeText.length() : start;
+  final int newCursor=moveCursor ? start + completeText.length() : start;
   editText.setSelection(newCursor);
 }
