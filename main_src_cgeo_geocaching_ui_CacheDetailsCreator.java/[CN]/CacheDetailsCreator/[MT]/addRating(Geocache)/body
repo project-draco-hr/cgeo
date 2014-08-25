@@ -3,7 +3,7 @@
     final RelativeLayout itemLayout=addStars(R.string.cache_rating,cache.getRating());
     if (cache.getVotes() > 0) {
       final TextView itemAddition=ButterKnife.findById(itemLayout,R.id.addition);
-      itemAddition.setText("(" + cache.getVotes() + ")");
+      itemAddition.setText(" (" + cache.getVotes() + ')');
       itemAddition.setVisibility(View.VISIBLE);
     }
   }

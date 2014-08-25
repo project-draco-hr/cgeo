@@ -1,11 +1,13 @@
 {
   if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled()|| cache.isPremiumMembersOnly()|| cache.isFound()) {
     final List<String> states=new ArrayList<>(5);
+    String date=getVisitedDate(cache);
     if (cache.isLogOffline()) {
-      states.add(res.getString(R.string.cache_status_offline_log));
+      states.add(res.getString(R.string.cache_status_offline_log) + date);
+      date="";
     }
     if (cache.isFound()) {
-      states.add(res.getString(R.string.cache_status_found));
+      states.add(res.getString(R.string.cache_status_found) + date);
     }
     if (cache.isArchived()) {
       states.add(res.getString(R.string.cache_status_archived));
