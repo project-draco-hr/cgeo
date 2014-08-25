@@ -1,0 +1,9 @@
+{
+  final List<NavigationAppsEnum> activeApps=new ArrayList<>();
+  for (  final NavigationAppsEnum appEnum : getInstalledNavigationApps()) {
+    if (Settings.isUseNavigationApp(appEnum)) {
+      activeApps.add(appEnum);
+    }
+  }
+  return activeApps;
+}
