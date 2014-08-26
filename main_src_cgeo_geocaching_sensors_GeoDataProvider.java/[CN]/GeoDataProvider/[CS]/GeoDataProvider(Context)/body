@@ -1,4 +1,5 @@
 {
   super(2500,TimeUnit.MILLISECONDS);
-  geoManager=(LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+  this.context=context.getApplicationContext();
+  geoManager=(LocationManager)this.context.getSystemService(Context.LOCATION_SERVICE);
 }

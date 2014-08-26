@@ -1,12 +1,19 @@
 {
-  subscriber.onNext(findInitialLocation());
+  final IGeoData initialLocation=GeoData.getInitialLocation(context);
+  if (initialLocation != null) {
+    subscriber.onNext(initialLocation);
+  }
   Log.d("GeoDataProvider: starting the GPS and network listeners");
-  for (  final Listener listener : new Listener[]{networkListener,gpsListener}) {
-    try {
-      geoManager.requestLocationUpdates(listener.locationProvider,0,0,listener);
-    }
- catch (    final Exception e) {
-      Log.w("There is no location provider " + listener.locationProvider,e);
-    }
+  try {
+    geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,gpsListener);
+  }
+ catch (  final Exception e) {
+    Log.w("No GPS provider available",e);
+  }
+  try {
+    geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,networkListener);
+  }
+ catch (  final Exception e) {
+    Log.w("No network provider available",e);
   }
 }

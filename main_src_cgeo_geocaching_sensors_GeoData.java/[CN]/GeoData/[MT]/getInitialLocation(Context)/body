@@ -1,0 +1,24 @@
+{
+  final LocationManager geoManager=(LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+  if (geoManager == null) {
+    Log.w("No LocationManager available");
+    return null;
+  }
+  try {
+    final Location lastGpsLocation=geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    final Location lastNetworkLocation=geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+    final Location bestLocation=best(lastGpsLocation,lastNetworkLocation);
+    if (bestLocation != null) {
+      bestLocation.setProvider(INITIAL_PROVIDER);
+      return new GeoData(bestLocation);
+    }
+ else {
+      Log.i("No last known location available");
+      return null;
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("Error when retrieving last known location",e);
+    return null;
+  }
+}

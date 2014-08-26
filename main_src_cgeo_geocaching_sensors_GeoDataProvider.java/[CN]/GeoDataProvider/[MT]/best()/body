@@ -1,9 +1,0 @@
-{
-  if (gpsLocation.isRecent() || !netLocation.isValid()) {
-    return gpsLocation.isValid() ? gpsLocation : null;
-  }
-  if (!gpsLocation.isValid()) {
-    return netLocation;
-  }
-  return gpsLocation.timestamp > netLocation.timestamp ? gpsLocation : netLocation;
-}
