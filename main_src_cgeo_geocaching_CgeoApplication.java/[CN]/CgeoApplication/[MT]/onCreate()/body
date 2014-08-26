@@ -13,7 +13,7 @@
   }
   Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
   setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
-  setupDirectionObservable();
+  setupDirectionObservable(Settings.useLowPowerMode());
   gpsStatusObservable=GpsStatusProvider.create(this).replay(1).refCount();
   geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
 }

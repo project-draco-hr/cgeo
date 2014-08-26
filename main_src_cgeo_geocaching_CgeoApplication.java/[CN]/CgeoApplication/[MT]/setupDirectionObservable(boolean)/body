@@ -1,5 +1,5 @@
 {
-  directionObservable=RotationProvider.create(this).onErrorResumeNext(new Func1<Throwable,Observable<? extends Float>>(){
+  directionObservable=RotationProvider.create(this,useLowPower).onErrorResumeNext(new Func1<Throwable,Observable<? extends Float>>(){
     @Override public Observable<? extends Float> call(    final Throwable throwable){
       return OrientationProvider.create(CgeoApplication.this);
     }
