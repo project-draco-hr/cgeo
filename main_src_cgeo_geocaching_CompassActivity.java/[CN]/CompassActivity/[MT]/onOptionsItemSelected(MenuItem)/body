@@ -9,14 +9,6 @@ case R.id.menu_map:
       CGeoMap.startActivityCoords(this,dstCoords,null,null);
     }
   return true;
-case R.id.menu_compass_sensor_gps:
-Settings.setUseCompass(false);
-invalidateOptionsMenuCompatible();
-return true;
-case R.id.menu_compass_sensor_magnetic:
-Settings.setUseCompass(true);
-invalidateOptionsMenuCompatible();
-return true;
 case R.id.menu_tts_start:
 SpeechService.startService(this,dstCoords);
 invalidateOptionsMenuCompatible();

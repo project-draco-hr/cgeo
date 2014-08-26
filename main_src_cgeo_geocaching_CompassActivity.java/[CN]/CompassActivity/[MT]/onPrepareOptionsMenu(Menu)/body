@@ -1,11 +1,5 @@
 {
   super.onPrepareOptionsMenu(menu);
-  if (Settings.isUseCompass()) {
-    menu.findItem(R.id.menu_compass_sensor_magnetic).setChecked(true);
-  }
- else {
-    menu.findItem(R.id.menu_compass_sensor_gps).setChecked(true);
-  }
   menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
   menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
   menu.findItem(R.id.menu_compass_cache).setVisible(cache != null);

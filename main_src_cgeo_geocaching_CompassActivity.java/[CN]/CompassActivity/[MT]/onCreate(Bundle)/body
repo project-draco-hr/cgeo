@@ -1,5 +1,5 @@
 {
-  super.onCreate(savedInstanceState,R.layout.compass_activity);
+  onCreate(savedInstanceState,R.layout.compass_activity);
   ButterKnife.inject(this);
   final Bundle extras=getIntent().getExtras();
   if (extras == null) {
@@ -28,6 +28,18 @@
   }
  else {
     setTitle(StringUtils.defaultIfBlank(extras.getString(Intents.EXTRA_NAME),res.getString(R.string.navigation)));
+  }
+  if (Sensors.getInstance().hasCompassCapabilities()) {
+    useCompassSwitch.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      final View view){
+        Settings.setUseCompass(((ToggleButton)view).isChecked());
+      }
+    }
+);
+    useCompassSwitch.setVisibility(View.VISIBLE);
+  }
+ else {
+    useCompassSwitch.setVisibility(View.INVISIBLE);
   }
   setVolumeControlStream(AudioManager.STREAM_MUSIC);
   presentShowcase();
