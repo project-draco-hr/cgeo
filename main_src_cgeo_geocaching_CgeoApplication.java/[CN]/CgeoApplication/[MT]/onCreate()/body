@@ -13,23 +13,7 @@
   }
   Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
   setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
-  geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
-  directionObservable=RotationProvider.create(this).onErrorResumeNext(new Func1<Throwable,Observable<? extends Float>>(){
-    @Override public Observable<? extends Float> call(    final Throwable throwable){
-      return OrientationProvider.create(CgeoApplication.this);
-    }
-  }
-).onErrorResumeNext(new Func1<Throwable,Observable<? extends Float>>(){
-    @Override public Observable<? extends Float> call(    final Throwable throwable){
-      Log.e("Device orientation will not be available as no suitable sensors were found");
-      return Observable.never();
-    }
-  }
-).replay(1).refCount().doOnNext(new Action1<Float>(){
-    @Override public void call(    final Float direction){
-      currentDirection=direction;
-    }
-  }
-);
+  setupDirectionObservable();
   gpsStatusObservable=GpsStatusProvider.create(this).replay(1).refCount();
+  geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
 }
