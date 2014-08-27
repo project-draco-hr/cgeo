@@ -14,7 +14,7 @@
     }
     return response;
   }
- catch (  final IOException e) {
+ catch (  final Exception e) {
     final String timeSpan=formatTimeSpan(before);
     Log.w("Failure" + timeSpan + reqLogStr+ " ("+ e.toString()+ ")");
   }
