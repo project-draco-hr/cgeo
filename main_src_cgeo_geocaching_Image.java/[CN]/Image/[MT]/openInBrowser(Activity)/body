@@ -1,0 +1,13 @@
+{
+  if (StringUtils.isBlank(url)) {
+    return;
+  }
+  final Intent browserIntent=new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+  try {
+    fromActivity.startActivity(browserIntent);
+  }
+ catch (  final ActivityNotFoundException e) {
+    Log.e("Cannot find suitable activity",e);
+    ActivityMixin.showToast(fromActivity,R.string.err_application_no);
+  }
+}
