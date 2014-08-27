@@ -83,8 +83,7 @@
     finish();
     return;
   }
-  cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_ONLY);
-  updateTitleBar(geocode);
+  updateTitleBar(geocode,name,null);
   final LoadCacheHandler loadCacheHandler=new LoadCacheHandler(this,progress);
   try {
     String title=res.getString(R.string.cache);

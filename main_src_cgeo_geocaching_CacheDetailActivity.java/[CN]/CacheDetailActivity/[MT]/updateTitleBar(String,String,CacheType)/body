@@ -1,0 +1,14 @@
+{
+  if (StringUtils.isNotBlank(name)) {
+    setTitle(StringUtils.isNotBlank(geocode) ? name + " (" + geocode+ ")" : name);
+  }
+ else {
+    setTitle(StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache));
+  }
+  if (type != null) {
+    getSupportActionBar().setIcon(getResources().getDrawable(type.markerId));
+  }
+ else {
+    getSupportActionBar().setIcon(android.R.color.transparent);
+  }
+}
