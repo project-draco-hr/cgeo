@@ -14,12 +14,6 @@
   }
   cache.setChangeNotificationHandler(new ChangeNotificationHandler(this,progress));
   updateTitleBar(cache.getGeocode(),cache.getName(),cache.getType());
-  initializeAndroidBeam(new ActivitySharingInterface(){
-    @Override public String getUri(){
-      return cache.getCgeoUrl();
-    }
-  }
-);
   imagesList=null;
   reinitializeViewPager();
   invalidateOptionsMenuCompatible();

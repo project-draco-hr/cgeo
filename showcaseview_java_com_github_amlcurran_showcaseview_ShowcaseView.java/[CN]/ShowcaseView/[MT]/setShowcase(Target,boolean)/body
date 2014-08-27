@@ -1,22 +1,27 @@
 {
   postDelayed(new Runnable(){
     @Override public void run(){
-      if (!shotStateStore.hasShot()) {
-        updateBitmap();
-        Point targetPoint=target.getPoint();
-        if (targetPoint != null) {
-          hasNoTarget=false;
-          if (animate) {
-            animationFactory.animateTargetToPoint(ShowcaseView.this,targetPoint);
+      try {
+        if (!shotStateStore.hasShot()) {
+          updateBitmap();
+          Point targetPoint=target.getPoint();
+          if (targetPoint != null) {
+            hasNoTarget=false;
+            if (animate) {
+              animationFactory.animateTargetToPoint(ShowcaseView.this,targetPoint);
+            }
+ else {
+              setShowcasePosition(targetPoint);
+            }
           }
  else {
-            setShowcasePosition(targetPoint);
+            hasNoTarget=true;
+            invalidate();
           }
         }
- else {
-          hasNoTarget=true;
-          invalidate();
-        }
+      }
+ catch (      RuntimeException e) {
+        Log.e("cgeo","Couldn't create showcase view",e);
       }
     }
   }
