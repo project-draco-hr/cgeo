@@ -2,7 +2,12 @@
   final Preference preference=getPreference(preferenceKey);
   preference.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    final Preference preference){
-      startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://" + host)));
+      try {
+        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://" + host)));
+      }
+ catch (      final ActivityNotFoundException e) {
+        Log.e("Cannot browse host " + host,e);
+      }
       return true;
     }
   }
