@@ -119,4 +119,10 @@
   }
 );
   locationUpdater=new CacheDetailsGeoDirHandler(this);
+  initializeAndroidBeam(new ActivitySharingInterface(){
+    @Override public String getUri(){
+      return cache != null ? cache.getCgeoUrl() : null;
+    }
+  }
+);
 }
