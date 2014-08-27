@@ -2,7 +2,7 @@
   CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_details);
   if (StringUtils.isBlank(pageIn)) {
     Log.e("GCParser.parseCache: No page given");
-    return null;
+    return UNKNOWN_PARSE_ERROR;
   }
   if (pageIn.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
     return ImmutablePair.of(StatusCode.UNPUBLISHED_CACHE,null);
@@ -12,7 +12,7 @@
   }
   final String cacheName=Html.fromHtml(TextUtils.getMatch(pageIn,GCConstants.PATTERN_NAME,true,"")).toString();
   if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
-    return ImmutablePair.of(StatusCode.UNKNOWN_ERROR,null);
+    return UNKNOWN_PARSE_ERROR;
   }
   String personalNoteWithLineBreaks="";
   final MatcherWrapper matcher=new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE,pageIn);
@@ -35,7 +35,7 @@
   final int pos=tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
   if (pos == -1) {
     Log.e("GCParser.parseCache: ID \"cacheDetails\" not found on page");
-    return null;
+    return UNKNOWN_PARSE_ERROR;
   }
   tableInside=tableInside.substring(pos);
   if (StringUtils.isNotBlank(tableInside)) {
@@ -136,7 +136,7 @@
   }
   try {
     if (CancellableHandler.isCancelled(handler)) {
-      return null;
+      return UNKNOWN_PARSE_ERROR;
     }
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_spoilers);
     final MatcherWrapper matcherSpoilersInside=new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE,page);
@@ -214,7 +214,7 @@
   int wpBegin=page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
   if (wpBegin != -1) {
     if (CancellableHandler.isCancelled(handler)) {
-      return null;
+      return UNKNOWN_PARSE_ERROR;
     }
     CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_waypoints);
     String wpList=page.substring(wpBegin);
@@ -253,7 +253,7 @@
   }
   cache.parseWaypointsFromNote();
   if (StringUtils.isBlank(cache.getGeocode())) {
-    return ImmutablePair.of(StatusCode.UNKNOWN_ERROR,null);
+    return UNKNOWN_PARSE_ERROR;
   }
   cache.setDetailedUpdatedNow();
   return ImmutablePair.of(StatusCode.NO_ERROR,cache);
