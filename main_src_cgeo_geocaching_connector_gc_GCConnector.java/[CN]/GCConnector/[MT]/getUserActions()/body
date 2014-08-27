@@ -8,7 +8,13 @@
 ));
   actions.add(new UserAction(R.string.user_menu_send_message,new Action1<UserAction.Context>(){
     @Override public void call(    cgeo.geocaching.connector.UserAction.Context context){
-      context.activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
+      try {
+        context.activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
+      }
+ catch (      final ActivityNotFoundException e) {
+        Log.e("Cannot find suitable activity",e);
+        ActivityMixin.showToast(context.activity,R.string.err_application_no);
+      }
     }
   }
 ));
