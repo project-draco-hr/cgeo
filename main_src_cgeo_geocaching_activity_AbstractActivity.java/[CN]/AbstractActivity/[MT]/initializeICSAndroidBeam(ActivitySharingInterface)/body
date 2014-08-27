@@ -5,8 +5,8 @@
   }
   nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback(){
     @Override public NdefMessage createNdefMessage(    final NfcEvent event){
-      final NdefRecord record=NdefRecord.createUri(sharingInterface.getUri());
-      return new NdefMessage(new NdefRecord[]{record});
+      final String uri=sharingInterface.getAndroidBeamUri();
+      return uri != null ? new NdefMessage(new NdefRecord[]{NdefRecord.createUri(uri)}) : null;
     }
   }
 ,this);
