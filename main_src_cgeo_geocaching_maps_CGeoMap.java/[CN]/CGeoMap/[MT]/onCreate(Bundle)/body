@@ -41,7 +41,7 @@
   noMapTokenShowed=false;
   ActivityMixin.onCreate(activity,true);
   ActivityMixin.setTheme(activity);
-  if (Build.VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH) {
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
     activity.getActionBar().setDisplayHomeAsUpEnabled(true);
   }
   activity.setContentView(mapProvider.getMapLayoutId());
