@@ -39,7 +39,7 @@
     return;
   }
   noMapTokenShowed=false;
-  ActivityMixin.keepScreenOn(activity,true);
+  ActivityMixin.onCreate(activity,true);
   ActivityMixin.setTheme(activity);
   if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
     activity.getActionBar().setDisplayHomeAsUpEnabled(true);
