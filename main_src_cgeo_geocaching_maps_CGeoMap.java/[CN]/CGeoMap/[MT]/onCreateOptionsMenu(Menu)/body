@@ -3,7 +3,7 @@
   MapProviderFactory.addMapviewMenuItems(menu);
   final SubMenu subMenuStrategy=menu.findItem(R.id.submenu_strategy).getSubMenu();
   subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
-  if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+  if (Build.VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH) {
     final MenuItem item=menu.findItem(R.id.menu_toggle_mypos);
     myLocSwitch=new CheckBox(activity);
     myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
