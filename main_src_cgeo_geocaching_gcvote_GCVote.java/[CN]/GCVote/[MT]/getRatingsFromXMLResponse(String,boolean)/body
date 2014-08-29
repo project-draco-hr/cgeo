@@ -1,0 +1,32 @@
+{
+  try {
+    final XmlPullParserFactory factory=XmlPullParserFactory.newInstance();
+    final XmlPullParser xpp=factory.newPullParser();
+    xpp.setInput(new StringReader(page));
+    boolean loggedIn=false;
+    final Map<String,GCVoteRating> ratings=new HashMap<>();
+    int eventType=xpp.getEventType();
+    while (eventType != XmlPullParser.END_DOCUMENT) {
+      if (eventType == XmlPullParser.START_TAG) {
+        final String tagName=xpp.getName();
+        if (StringUtils.equals(tagName,"vote")) {
+          final String guid=xpp.getAttributeValue(null,"cacheId");
+          final String id=requestByGuids ? guid : xpp.getAttributeValue(null,"waypoint");
+          final float myVote=loggedIn ? Float.parseFloat(xpp.getAttributeValue(null,"voteUser")) : 0;
+          final GCVoteRating voteRating=new GCVoteRating(Float.parseFloat(xpp.getAttributeValue(null,"voteAvg")),Integer.parseInt(xpp.getAttributeValue(null,"voteCnt")),myVote);
+          ratings.put(id,voteRating);
+        }
+ else         if (StringUtils.equals(tagName,"votes")) {
+          loggedIn=StringUtils.equals(xpp.getAttributeValue(null,"loggedIn"),"true");
+        }
+      }
+      eventType=xpp.next();
+    }
+    RATINGS_CACHE.putAll(ratings);
+    return ratings;
+  }
+ catch (  final Exception e) {
+    Log.e("Cannot parse GC vote result",e);
+    return MapUtils.EMPTY_SORTED_MAP;
+  }
+}

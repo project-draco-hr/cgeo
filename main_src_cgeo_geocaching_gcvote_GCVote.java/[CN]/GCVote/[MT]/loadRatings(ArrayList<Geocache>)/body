@@ -8,14 +8,12 @@
   }
   try {
     final Map<String,GCVoteRating> ratings=GCVote.getRating(null,geocodes);
-    if (MapUtils.isNotEmpty(ratings)) {
-      for (      Geocache cache : caches) {
-        if (ratings.containsKey(cache.getGeocode())) {
-          GCVoteRating rating=ratings.get(cache.getGeocode());
-          cache.setRating(rating.getRating());
-          cache.setVotes(rating.getVotes());
-          cache.setMyVote(rating.getMyVote());
-        }
+    for (    Geocache cache : caches) {
+      if (ratings.containsKey(cache.getGeocode())) {
+        GCVoteRating rating=ratings.get(cache.getGeocode());
+        cache.setRating(rating.getRating());
+        cache.setVotes(rating.getVotes());
+        cache.setMyVote(rating.getMyVote());
       }
     }
   }

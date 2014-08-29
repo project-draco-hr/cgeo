@@ -1,113 +1,22 @@
 {
   if (guids == null && geocodes == null) {
-    return null;
+    return MapUtils.EMPTY_SORTED_MAP;
   }
-  final Map<String,GCVoteRating> ratings=new HashMap<>();
-  try {
-    final Parameters params=new Parameters();
-    if (Settings.isLogin()) {
-      final ImmutablePair<String,String> login=Settings.getGCvoteLogin();
-      if (login != null) {
-        params.put("userName",login.left,"password",login.right);
-      }
-    }
-    boolean requestByGuids=true;
-    if (guids != null && !guids.isEmpty()) {
-      params.put("cacheIds",StringUtils.join(guids.toArray(),','));
-    }
+  final Parameters params=new Parameters("version","cgeo");
+  final ImmutablePair<String,String> login=Settings.getGCvoteLogin();
+  if (login != null) {
+    params.put("userName",login.left,"password",login.right);
+  }
+  final boolean requestByGuids=CollectionUtils.isNotEmpty(guids);
+  if (requestByGuids) {
+    params.put("cacheIds",StringUtils.join(guids,','));
+  }
  else {
-      params.put("waypoints",StringUtils.join(geocodes.toArray(),','));
-      requestByGuids=false;
-    }
-    params.put("version","cgeo");
-    final String page=Network.getResponseData(Network.getRequest("http://gcvote.com/getVotes.php",params));
-    if (page == null) {
-      return null;
-    }
-    final MatcherWrapper matcherVoteElement=new MatcherWrapper(PATTERN_VOTE_ELEMENT,page);
-    while (matcherVoteElement.find()) {
-      String voteData=matcherVoteElement.group(1);
-      if (voteData == null) {
-        continue;
-      }
-      String id=null;
-      String guid=null;
-      final MatcherWrapper matcherGuid=new MatcherWrapper(PATTERN_GUID,voteData);
-      if (matcherGuid.find()) {
-        if (matcherGuid.groupCount() > 0) {
-          guid=matcherGuid.group(1);
-          if (requestByGuids) {
-            id=guid;
-          }
-        }
-      }
-      if (!requestByGuids) {
-        final MatcherWrapper matcherWp=new MatcherWrapper(PATTERN_WAYPOINT,voteData);
-        if (matcherWp.find()) {
-          if (matcherWp.groupCount() > 0) {
-            id=matcherWp.group(1);
-          }
-        }
-      }
-      if (id == null) {
-        continue;
-      }
-      boolean loggedIn=false;
-      final MatcherWrapper matcherLoggedIn=new MatcherWrapper(PATTERN_LOG_IN,page);
-      if (matcherLoggedIn.find()) {
-        if (matcherLoggedIn.groupCount() > 0) {
-          if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
-            loggedIn=true;
-          }
-        }
-      }
-      float rating=NO_RATING;
-      try {
-        final MatcherWrapper matcherRating=new MatcherWrapper(PATTERN_RATING,voteData);
-        if (matcherRating.find()) {
-          rating=Float.parseFloat(matcherRating.group(1));
-        }
-      }
- catch (      NumberFormatException e) {
-        Log.w("GCVote.getRating: Failed to parse rating");
-      }
-      if (!isValidRating(rating)) {
-        continue;
-      }
-      int votes=-1;
-      try {
-        final MatcherWrapper matcherVotes=new MatcherWrapper(PATTERN_VOTES,voteData);
-        if (matcherVotes.find()) {
-          votes=Integer.parseInt(matcherVotes.group(1));
-        }
-      }
- catch (      NumberFormatException e) {
-        Log.w("GCVote.getRating: Failed to parse vote count");
-      }
-      if (votes < 0) {
-        continue;
-      }
-      float myVote=NO_RATING;
-      if (loggedIn) {
-        try {
-          final MatcherWrapper matcherVote=new MatcherWrapper(PATTERN_VOTE,voteData);
-          if (matcherVote.find()) {
-            myVote=Float.parseFloat(matcherVote.group(1));
-          }
-        }
- catch (        NumberFormatException e) {
-          Log.w("GCVote.getRating: Failed to parse user's vote");
-        }
-      }
-      if (StringUtils.isNotBlank(id)) {
-        GCVoteRating gcvoteRating=new GCVoteRating(rating,votes,myVote);
-        ratings.put(id,gcvoteRating);
-        RATINGS_CACHE.put(guid,gcvoteRating);
-      }
-    }
+    params.put("waypoints",StringUtils.join(geocodes,','));
   }
- catch (  RuntimeException e) {
-    Log.e("GCVote.getRating",e);
+  final String page=Network.getResponseData(Network.getRequest("http://gcvote.com/getVotes.php",params));
+  if (page == null) {
+    return MapUtils.EMPTY_SORTED_MAP;
   }
-  return ratings;
+  return getRatingsFromXMLResponse(page,requestByGuids);
 }
