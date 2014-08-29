@@ -1,5 +1,11 @@
 {
-  SensorManager.getRotationMatrixFromVector(rotationMatrix,event.values);
+  if (event.values.length > 4) {
+    System.arraycopy(event.values,0,values,0,4);
+    SensorManager.getRotationMatrixFromVector(rotationMatrix,values);
+  }
+ else {
+    SensorManager.getRotationMatrixFromVector(rotationMatrix,event.values);
+  }
   SensorManager.getOrientation(rotationMatrix,orientation);
   subscriber.onNext((float)(orientation[0] * 180 / Math.PI));
 }
