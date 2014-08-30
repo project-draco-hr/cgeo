@@ -2,7 +2,6 @@
   return scheduler.createWorker().schedule(new Action0(){
     @Override public void call(){
       refreshSynchronous(handler);
-      handler.sendEmptyMessage(CancellableHandler.DONE);
     }
   }
 );
