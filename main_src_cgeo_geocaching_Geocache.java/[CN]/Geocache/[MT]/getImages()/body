@@ -5,10 +5,6 @@
   for (  final LogEntry log : getLogs()) {
     result.addAll(log.getLogImages());
   }
-  final Set<String> urls=new HashSet<>(result.size());
-  for (  final Image image : result) {
-    urls.add(image.getUrl());
-  }
-  addDescriptionImagesUrls(result);
+  ImageUtils.addImagesFromHtml(result,getDescription(),geocode);
   return result;
 }

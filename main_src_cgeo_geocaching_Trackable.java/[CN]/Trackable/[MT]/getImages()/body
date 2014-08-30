@@ -1,0 +1,11 @@
+{
+  final List<Image> images=new LinkedList<>();
+  if (StringUtils.isNotBlank(image)) {
+    images.add(new Image(image,StringUtils.defaultIfBlank(name,geocode)));
+  }
+  ImageUtils.addImagesFromHtml(images,getDetails(),geocode);
+  for (  final LogEntry log : getLogs()) {
+    images.addAll(log.getLogImages());
+  }
+  return images;
+}

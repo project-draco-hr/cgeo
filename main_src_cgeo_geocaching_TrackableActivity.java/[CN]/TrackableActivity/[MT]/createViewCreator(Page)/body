@@ -4,6 +4,8 @@ case DETAILS:
     return new DetailsViewCreator();
 case LOGS:
   return new TrackableLogsViewCreator(this);
+case IMAGES:
+return new ImagesViewCreator();
 }
 throw new IllegalStateException();
 }

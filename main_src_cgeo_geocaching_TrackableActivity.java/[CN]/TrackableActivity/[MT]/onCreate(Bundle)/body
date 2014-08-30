@@ -67,13 +67,21 @@
     message=res.getString(R.string.trackable);
   }
   initializeAndroidBeam(this);
-  createViewPager(0,null);
+  createViewPager(0,new OnPageSelectedListener(){
+    @Override public void onPageSelected(    final int position){
+      if (getPage(position) == Page.IMAGES) {
+        loadTrackableImages();
+      }
+    }
+  }
+);
   waitDialog=ProgressDialog.show(this,message,res.getString(R.string.trackable_details_loading),true,true);
-  AndroidObservable.bindActivity(this,loadTrackable(geocode,guid,id)).singleOrDefault(null).subscribe(new Action1<Trackable>(){
+  createSubscriptions=new CompositeSubscription();
+  createSubscriptions.add(AndroidObservable.bindActivity(this,loadTrackable(geocode,guid,id)).singleOrDefault(null).subscribe(new Action1<Trackable>(){
     @Override public void call(    final Trackable trackable){
       TrackableActivity.this.trackable=trackable;
       displayTrackable();
     }
   }
-);
+));
 }

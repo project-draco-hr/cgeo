@@ -1,0 +1,15 @@
+{
+  if (imagesList != null) {
+    return;
+  }
+  final PageViewCreator creator=getViewCreator(Page.IMAGES);
+  if (creator == null) {
+    return;
+  }
+  final View imageView=creator.getView(null);
+  if (imageView == null) {
+    return;
+  }
+  imagesList=new ImagesList(this,trackable.getGeocode());
+  createSubscriptions.add(imagesList.loadImages(imageView,trackable.getImages(),false));
+}
