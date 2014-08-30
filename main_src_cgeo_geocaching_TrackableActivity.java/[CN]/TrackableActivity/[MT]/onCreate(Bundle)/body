@@ -67,6 +67,7 @@
     message=res.getString(R.string.trackable);
   }
   waitDialog=ProgressDialog.show(this,message,res.getString(R.string.trackable_details_loading),true,true);
+  initializeAndroidBeam(this);
   createViewPager(0,null);
   final LoadTrackableThread thread=new LoadTrackableThread(loadTrackableHandler,geocode,guid,id);
   thread.start();
