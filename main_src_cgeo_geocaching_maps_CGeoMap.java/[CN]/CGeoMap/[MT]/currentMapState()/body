@@ -1,4 +1,7 @@
 {
+  if (mapView == null) {
+    return null;
+  }
   final GeoPointImpl mapCenter=mapView.getMapViewCenter();
   return new int[]{mapCenter.getLatitudeE6(),mapCenter.getLongitudeE6(),mapView.getMapZoomLevel(),followMyLocation ? 1 : 0,overlayCaches.getCircles() ? 1 : 0};
 }
