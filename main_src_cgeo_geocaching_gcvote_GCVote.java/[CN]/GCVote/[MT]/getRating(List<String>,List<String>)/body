@@ -1,6 +1,6 @@
 {
   if (guids == null && geocodes == null) {
-    return MapUtils.EMPTY_SORTED_MAP;
+    return Collections.emptyMap();
   }
   final Parameters params=new Parameters("version","cgeo");
   final ImmutablePair<String,String> login=Settings.getGCvoteLogin();
@@ -16,7 +16,7 @@
   }
   final String page=Network.getResponseData(Network.getRequest("http://gcvote.com/getVotes.php",params));
   if (page == null) {
-    return MapUtils.EMPTY_SORTED_MAP;
+    return Collections.emptyMap();
   }
   return getRatingsFromXMLResponse(page,requestByGuids);
 }
