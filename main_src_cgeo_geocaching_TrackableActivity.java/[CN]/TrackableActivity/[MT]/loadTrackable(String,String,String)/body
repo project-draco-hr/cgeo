@@ -1,0 +1,23 @@
+{
+  return Observable.defer(new Func0<Observable<Trackable>>(){
+    @Override public Observable<Trackable> call(){
+      if (StringUtils.isNotEmpty(geocode)) {
+        for (        final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+          if (trackableConnector.canHandleTrackable(geocode)) {
+            final Trackable trackable=trackableConnector.searchTrackable(geocode,guid,id);
+            if (trackable != null) {
+              return Observable.just(trackable);
+            }
+          }
+        }
+        final Trackable trackable=DataStore.loadTrackable(geocode);
+        if (trackable != null) {
+          return Observable.just(trackable);
+        }
+      }
+      final Trackable trackable=TravelBugConnector.getInstance().searchTrackable(geocode,guid,id);
+      return trackable != null ? Observable.just(trackable) : Observable.<Trackable>empty();
+    }
+  }
+).subscribeOn(Schedulers.io());
+}

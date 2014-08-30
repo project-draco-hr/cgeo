@@ -1,0 +1,13 @@
+{
+  final HtmlImage imgGetter=new HtmlImage(HtmlImage.SHARED,false,0,false);
+  AndroidObservable.bindActivity(this,imgGetter.fetchDrawable(url)).subscribe(new Action1<BitmapDrawable>(){
+    @Override public void call(    final BitmapDrawable image){
+      if (actionBar != null) {
+        final int height=actionBar.getHeight();
+        image.setBounds(0,0,height,height);
+        actionBar.setIcon(image);
+      }
+    }
+  }
+);
+}

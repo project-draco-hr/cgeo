@@ -1,0 +1,33 @@
+{
+  if (trackable == null) {
+    if (waitDialog != null) {
+      waitDialog.dismiss();
+    }
+    if (StringUtils.isNotBlank(geocode)) {
+      showToast(res.getString(R.string.err_tb_find) + " " + geocode+ ".");
+    }
+ else {
+      showToast(res.getString(R.string.err_tb_find_that));
+    }
+    finish();
+    return;
+  }
+  try {
+    inflater=getLayoutInflater();
+    geocode=trackable.getGeocode();
+    if (StringUtils.isNotBlank(trackable.getName())) {
+      setTitle(Html.fromHtml(trackable.getName()).toString());
+    }
+ else {
+      setTitle(trackable.getName());
+    }
+    invalidateOptionsMenuCompatible();
+    reinitializeViewPager();
+  }
+ catch (  final Exception e) {
+    Log.e("TrackableActivity.loadTrackableHandler: ",e);
+  }
+  if (waitDialog != null) {
+    waitDialog.dismiss();
+  }
+}
