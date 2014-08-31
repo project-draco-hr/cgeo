@@ -1,0 +1,8 @@
+{
+  cache.setPersonalNote(note);
+  cache.parseWaypointsFromNote();
+  final TextView personalNoteView=ButterKnife.findById(this,R.id.personalnote);
+  setPersonalNote(personalNoteView,note);
+  DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+  notifyDataSetChanged();
+}

@@ -1,18 +1,7 @@
 {
   if (cache.isOffline()) {
-    final EditNoteDialogListener editNoteDialogListener=new EditNoteDialogListener(){
-      @Override public void onFinishEditNoteDialog(      final String note){
-        cache.setPersonalNote(note);
-        cache.parseWaypointsFromNote();
-        final TextView personalNoteView=ButterKnife.findById(activity,R.id.personalnote);
-        setPersonalNote(personalNoteView,note);
-        DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-        activity.notifyDataSetChanged();
-      }
-    }
-;
     final FragmentManager fm=activity.getSupportFragmentManager();
-    final EditNoteDialog dialog=EditNoteDialog.newInstance(cache.getPersonalNote(),editNoteDialogListener);
+    final EditNoteDialog dialog=EditNoteDialog.newInstance(cache.getPersonalNote());
     dialog.show(fm,"fragment_edit_note");
   }
 }
