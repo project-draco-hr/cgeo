@@ -19,5 +19,5 @@
       return trackable != null ? Observable.just(trackable) : Observable.<Trackable>empty();
     }
   }
-).subscribeOn(Schedulers.io());
+).subscribeOn(RxUtils.networkScheduler);
 }
