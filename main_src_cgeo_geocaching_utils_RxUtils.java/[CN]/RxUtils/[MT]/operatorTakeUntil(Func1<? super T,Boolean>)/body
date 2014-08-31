@@ -1,0 +1,13 @@
+{
+  return new OperatorTakeWhile<T>(new Func1<T,Boolean>(){
+    private boolean quitting=false;
+    @Override public Boolean call(    final T item){
+      if (quitting) {
+        return false;
+      }
+      quitting|=predicate.call(item);
+      return true;
+    }
+  }
+);
+}
