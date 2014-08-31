@@ -1,6 +1,8 @@
 {
-  myLocSwitch.setChecked(followMyLocation);
-  if (followMyLocation) {
-    myLocationInMiddle(app.currentGeo());
+  if (myLocSwitch != null) {
+    myLocSwitch.setChecked(followMyLocation);
+    if (followMyLocation) {
+      myLocationInMiddle(app.currentGeo());
+    }
   }
 }
