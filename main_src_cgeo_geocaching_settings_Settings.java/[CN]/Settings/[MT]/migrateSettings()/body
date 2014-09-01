@@ -3,6 +3,9 @@
   if (oldVersion < 1) {
     final String oldPreferencesName="cgeo.pref";
     final SharedPreferences old=CgeoApplication.getInstance().getSharedPreferences(oldPreferencesName,Context.MODE_PRIVATE);
+    if (old.getAll().isEmpty()) {
+      return;
+    }
     final Editor e=sharedPrefs.edit();
     e.putString(getKey(R.string.pref_temp_twitter_token_secret),old.getString(getKey(R.string.pref_temp_twitter_token_secret),null));
     e.putString(getKey(R.string.pref_temp_twitter_token_public),old.getString(getKey(R.string.pref_temp_twitter_token_public),null));
