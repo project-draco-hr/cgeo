@@ -4,6 +4,6 @@
   assertThat(trackable.getName()).isEqualTo("The Golden Lisa");
   final String goal=trackable.getGoal();
   assertThat(goal).isNotNull();
-  assertThat(goal.contains("..")).isFalse();
-  assertThat(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\"")).isTrue();
+  assertThat(goal).doesNotContain("..");
+  assertThat(goal).contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\"");
 }

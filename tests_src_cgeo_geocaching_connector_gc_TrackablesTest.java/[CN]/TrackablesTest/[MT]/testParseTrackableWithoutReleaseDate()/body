@@ -3,9 +3,9 @@
   assertThat(trackable).isNotNull();
   assertThat(trackable.getName()).isEqualTo("The Brickster");
   assertThat(trackable.getOwner()).isEqualTo("Adrian C");
-  assertThat(trackable.getGoal().startsWith("I'm on the run from the law.")).isTrue();
-  assertThat(trackable.getGoal().endsWith("what I've seen.")).isTrue();
-  assertThat(trackable.getDistance() >= 11663.5f).isTrue();
+  assertThat(trackable.getGoal()).startsWith("I'm on the run from the law.");
+  assertThat(trackable.getGoal()).endsWith("what I've seen.");
+  assertThat(trackable.getDistance()).isGreaterThanOrEqualTo(11663.5f);
   assertThat(trackable.getReleased()).isNull();
   assertThat(trackable.getOrigin()).isNull();
 }

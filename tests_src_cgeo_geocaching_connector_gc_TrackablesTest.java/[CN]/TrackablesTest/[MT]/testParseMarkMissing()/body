@@ -3,7 +3,7 @@
   assertThat(trackable).isNotNull();
   final List<LogEntry> logs=trackable.getLogs();
   assertThat(logs).isNotNull();
-  assertThat(logs.isEmpty()).isFalse();
+  assertThat(logs).isNotEmpty();
   final LogEntry marked=logs.get(0);
   assertThat(marked.type).isEqualTo(LogType.MARKED_MISSING);
 }
