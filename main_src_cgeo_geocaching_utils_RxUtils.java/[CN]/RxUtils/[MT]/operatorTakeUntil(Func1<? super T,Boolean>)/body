@@ -1,5 +1,5 @@
 {
-  return new OperatorTakeWhile<T>(new Func1<T,Boolean>(){
+  return new OperatorTakeWhile<>(new Func1<T,Boolean>(){
     private boolean quitting=false;
     @Override public Boolean call(    final T item){
       if (quitting) {
