@@ -4,24 +4,24 @@
   }
   String result=html.toString();
   if (html instanceof Spanned) {
-    Spanned text=(Spanned)html;
-    Object[] styles=text.getSpans(0,text.length(),Object.class);
-    ArrayList<Pair<Integer,Integer>> removals=new ArrayList<>();
-    for (    Object style : styles) {
+    final Spanned text=(Spanned)html;
+    final Object[] styles=text.getSpans(0,text.length(),Object.class);
+    final ArrayList<Pair<Integer,Integer>> removals=new ArrayList<>();
+    for (    final Object style : styles) {
       if (style instanceof ImageSpan) {
-        int start=text.getSpanStart(style);
-        int end=text.getSpanEnd(style);
+        final int start=text.getSpanStart(style);
+        final int end=text.getSpanEnd(style);
         removals.add(Pair.of(start,end));
       }
     }
     Collections.sort(removals,new Comparator<Pair<Integer,Integer>>(){
-      @Override public int compare(      Pair<Integer,Integer> lhs,      Pair<Integer,Integer> rhs){
+      @Override public int compare(      final Pair<Integer,Integer> lhs,      final Pair<Integer,Integer> rhs){
         return rhs.getRight().compareTo(lhs.getRight());
       }
     }
 );
     result=text.toString();
-    for (    Pair<Integer,Integer> removal : removals) {
+    for (    final Pair<Integer,Integer> removal : removals) {
       result=result.substring(0,removal.getLeft()) + result.substring(removal.getRight());
     }
   }

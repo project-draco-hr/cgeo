@@ -1,0 +1,9 @@
+{
+  if (StringUtils.startsWith(html,"<p>") && StringUtils.endsWith(html,"</p>")) {
+    final String paragraph=StringUtils.substring(html,"<p>".length(),html.length() - "</p>".length()).trim();
+    if (extractText(paragraph).equals(paragraph)) {
+      return paragraph;
+    }
+  }
+  return html;
+}
