@@ -1,4 +1,9 @@
 {
-  progress.show(this,null,res.getString(R.string.caches_clear_offlinelogs_progress),true,clearOfflineLogsHandler.cancelMessage());
-  new ClearOfflineLogsThread(clearOfflineLogsHandler).start();
+  Dialogs.confirmYesNo(this,R.string.caches_clear_offlinelogs,R.string.caches_clear_offlinelogs_message,new OnClickListener(){
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
+      progress.show(CacheListActivity.this,null,res.getString(R.string.caches_clear_offlinelogs_progress),true,clearOfflineLogsHandler.cancelMessage());
+      new ClearOfflineLogsThread(clearOfflineLogsHandler).start();
+    }
+  }
+);
 }
