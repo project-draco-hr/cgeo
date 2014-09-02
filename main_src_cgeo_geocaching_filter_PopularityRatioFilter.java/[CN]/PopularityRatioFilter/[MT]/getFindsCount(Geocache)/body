@@ -2,7 +2,7 @@
   if (cache.getLogCounts().isEmpty()) {
     cache.setLogCounts(DataStore.loadLogCounts(cache.getGeocode()));
   }
-  Integer logged=cache.getLogCounts().get(LogType.FOUND_IT);
+  final Integer logged=cache.getLogCounts().get(LogType.FOUND_IT);
   if (logged != null) {
     return logged;
   }
