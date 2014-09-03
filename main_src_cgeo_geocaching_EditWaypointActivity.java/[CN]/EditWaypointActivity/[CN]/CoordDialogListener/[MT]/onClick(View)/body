@@ -3,10 +3,10 @@
   try {
     gp=new Geopoint(buttonLat.getText().toString(),buttonLon.getText().toString());
   }
- catch (  Geopoint.ParseException e) {
+ catch (  final Geopoint.ParseException e) {
   }
-  Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
-  CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(cache,gp,app.currentGeo());
+  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+  final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(cache,gp,app.currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.show(getSupportFragmentManager(),"wpeditdialog");
 }

@@ -1,0 +1,16 @@
+{
+  final ArrayList<String> wpNames=new ArrayList<>();
+  for (  final Waypoint waypoint : cache.getWaypoints()) {
+    wpNames.add(waypoint.getName());
+  }
+  if (type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) {
+    if (!wpNames.contains(type.getL10n())) {
+      return type.getL10n();
+    }
+  }
+  int index=1;
+  while (wpNames.contains(type.getL10n() + " " + index)) {
+    index++;
+  }
+  return type.getL10n() + " " + index;
+}
