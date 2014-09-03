@@ -1,12 +1,4 @@
 {
-  coordinates.clear();
-  if (coordinatesWithType != null) {
-    for (    final IWaypoint coordinate : coordinatesWithType) {
-      if (coordinate != null) {
-        coordinates.add(coordinate);
-      }
-    }
-  }
   final Intent navigateIntent=new Intent(context,CompassActivity.class);
   navigateIntent.putExtra(EXTRAS_COORDS,coords);
   navigateIntent.putExtra(EXTRAS_GEOCODE,geocode);

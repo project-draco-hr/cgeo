@@ -1,18 +1,9 @@
 {
   getMenuInflater().inflate(R.menu.compass_activity_options,menu);
   menu.findItem(R.id.menu_compass_sensor).setVisible(hasMagneticFieldSensor);
-  final SubMenu subMenu=menu.findItem(R.id.menu_select_destination).getSubMenu();
-  if (coordinates.size() > 1) {
-    for (int i=0; i < coordinates.size(); i++) {
-      final IWaypoint coordinate=coordinates.get(i);
-      subMenu.add(0,COORDINATES_OFFSET + i,0,coordinate.getName() + " (" + coordinate.getCoordType()+ ")");
-    }
-  }
- else {
-    menu.findItem(R.id.menu_select_destination).setVisible(false);
-  }
   if (cache != null) {
     LoggingUI.addMenuItems(this,menu,cache);
   }
+  addWaypointItems(menu);
   return true;
 }

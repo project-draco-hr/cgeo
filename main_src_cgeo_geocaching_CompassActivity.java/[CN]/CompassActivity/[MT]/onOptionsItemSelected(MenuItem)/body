@@ -24,17 +24,18 @@ default :
 if (LoggingUI.onMenuItemSelected(item,this,cache)) {
 return true;
 }
-final int coordinatesIndex=id - COORDINATES_OFFSET;
-if (coordinatesIndex >= 0 && coordinatesIndex < coordinates.size()) {
-final IWaypoint coordinate=coordinates.get(coordinatesIndex);
-title=coordinate.getName();
-dstCoords=coordinate.getCoords();
+if (cache != null) {
+final Waypoint waypoint=cache.getWaypointById(id);
+if (waypoint != null) {
+title=waypoint.getName();
+dstCoords=waypoint.getCoords();
 setTitle();
 setDestCoords();
 setCacheInfo();
 updateDistanceInfo(app.currentGeo());
 Log.d("destination set: " + title + " ("+ dstCoords+ ")");
 return true;
+}
 }
 }
 return super.onOptionsItemSelected(item);
