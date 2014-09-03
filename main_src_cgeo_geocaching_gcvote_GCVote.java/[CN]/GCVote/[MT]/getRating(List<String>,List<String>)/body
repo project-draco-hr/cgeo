@@ -18,5 +18,10 @@
   if (response == null) {
     return Collections.emptyMap();
   }
-  return getRatingsFromXMLResponse(response,requestByGuids);
+  try {
+    return getRatingsFromXMLResponse(response,requestByGuids);
+  }
+  finally {
+    IOUtils.closeQuietly(response);
+  }
 }
