@@ -1,5 +1,5 @@
 {
-  final Map<String,GCVoteRating> ratings=GCVote.getRatingsFromXMLResponse(response,false);
+  final Map<String,GCVoteRating> ratings=GCVote.getRatingsFromXMLResponse(responseStream(),false);
   assertThat(ratings).hasSize(10);
   assertThat(ratings).containsKey("GCKF13");
   assertThat(ratings.get("GC1WEVZ")).isEqualToComparingFieldByField(new GCVoteRating(3.75f,2,0));

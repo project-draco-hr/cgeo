@@ -14,9 +14,9 @@
  else {
     params.put("waypoints",StringUtils.join(geocodes,','));
   }
-  final String page=Network.getResponseData(Network.getRequest("http://gcvote.com/getVotes.php",params));
-  if (page == null) {
+  final InputStream response=Network.getResponseStream(Network.getRequest("http://gcvote.com/getVotes.php",params));
+  if (response == null) {
     return Collections.emptyMap();
   }
-  return getRatingsFromXMLResponse(page,requestByGuids);
+  return getRatingsFromXMLResponse(response,requestByGuids);
 }

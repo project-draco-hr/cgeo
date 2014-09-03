@@ -1,7 +1,7 @@
 {
   final long start=System.currentTimeMillis();
   for (int i=0; i < occurrences; i++) {
-    GCVote.getRatingsFromXMLResponse(response,false);
+    GCVote.getRatingsFromXMLResponse(responseStream(),false);
   }
   Log.d("XML GCVote parsing (current) in ms (" + occurrences + " times): "+ (System.currentTimeMillis() - start));
 }

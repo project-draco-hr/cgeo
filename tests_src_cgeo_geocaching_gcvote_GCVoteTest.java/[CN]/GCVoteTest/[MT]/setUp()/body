@@ -1,4 +1,6 @@
 {
   super.setUp();
   response=getFileContent(R.raw.gcvote);
+  responseStream=new ByteArrayInputStream(response.getBytes());
+  responseStream.mark(response.getBytes().length + 1);
 }

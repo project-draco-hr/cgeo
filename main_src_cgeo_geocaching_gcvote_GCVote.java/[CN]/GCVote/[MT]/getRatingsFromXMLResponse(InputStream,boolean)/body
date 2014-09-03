@@ -2,7 +2,7 @@
   try {
     final XmlPullParserFactory factory=XmlPullParserFactory.newInstance();
     final XmlPullParser xpp=factory.newPullParser();
-    xpp.setInput(new StringReader(page));
+    xpp.setInput(response,Charsets.UTF_8.name());
     boolean loggedIn=false;
     final Map<String,GCVoteRating> ratings=new HashMap<>();
     int eventType=xpp.getEventType();
