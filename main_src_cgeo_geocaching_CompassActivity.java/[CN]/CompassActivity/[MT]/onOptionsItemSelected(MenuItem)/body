@@ -20,6 +20,9 @@ case R.id.menu_tts_stop:
 SpeechService.stopService(this);
 invalidateOptionsMenuCompatible();
 return true;
+case R.id.menu_compass_cache:
+setTarget(cache);
+return true;
 default :
 if (LoggingUI.onMenuItemSelected(item,this,cache)) {
 return true;
@@ -27,13 +30,7 @@ return true;
 if (cache != null) {
 final Waypoint waypoint=cache.getWaypointById(id);
 if (waypoint != null) {
-title=waypoint.getName();
-dstCoords=waypoint.getCoords();
-setTitle();
-setDestCoords();
-setCacheInfo();
-updateDistanceInfo(app.currentGeo());
-Log.d("destination set: " + title + " ("+ dstCoords+ ")");
+setTarget(waypoint);
 return true;
 }
 }

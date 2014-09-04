@@ -1,38 +1,36 @@
 {
   super.onCreate(savedInstanceState,R.layout.compass_activity);
+  ButterKnife.inject(this);
   final SensorManager sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
   hasMagneticFieldSensor=sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
   if (!hasMagneticFieldSensor) {
     Settings.setUseCompass(false);
   }
   final Bundle extras=getIntent().getExtras();
-  if (extras != null) {
-    final String geocode=extras.getString(EXTRAS_GEOCODE);
-    if (StringUtils.isNotEmpty(geocode)) {
-      cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
-    }
-    title=geocode;
-    final String name=extras.getString(EXTRAS_NAME);
-    dstCoords=extras.getParcelable(EXTRAS_COORDS);
-    info=extras.getString(EXTRAS_CACHE_INFO);
-    if (StringUtils.isNotBlank(name)) {
-      if (StringUtils.isNotBlank(title)) {
-        title+=": " + name;
-      }
- else {
-        title=name;
-      }
-    }
-  }
- else {
-    final Intent pointIntent=new Intent(this,NavigateAnyPointActivity.class);
-    startActivity(pointIntent);
+  if (extras == null) {
     finish();
     return;
   }
-  setTitle();
-  setDestCoords();
-  setCacheInfo();
-  ButterKnife.inject(this);
+  final String geocode=extras.getString(Intents.EXTRA_GEOCODE);
+  if (geocode != null) {
+    cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  }
+  if (extras.containsKey(Intents.EXTRA_WAYPOINT_ID)) {
+    final int waypointId=extras.getInt(Intents.EXTRA_WAYPOINT_ID);
+    setTarget(DataStore.loadWaypoint(waypointId));
+  }
+ else   if (extras.containsKey(Intents.EXTRA_COORDS)) {
+    final Geopoint coords=extras.getParcelable(Intents.EXTRA_COORDS);
+    final String description=extras.getString(Intents.EXTRA_DESCRIPTION);
+    setTarget(coords,description);
+  }
+ else {
+    setTarget(cache);
+  }
+  String title=extras.getString(Intents.EXTRA_NAME);
+  if (cache != null) {
+    title=cache.getGeocode() + ": " + cache.getName();
+  }
+  setTitle(StringUtils.defaultIfBlank(title,res.getString(R.string.navigation)));
   setVolumeControlStream(AudioManager.STREAM_MUSIC);
 }

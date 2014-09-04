@@ -1,0 +1,6 @@
+{
+  final Intent navigateIntent=new Intent(context,CompassActivity.class);
+  navigateIntent.putExtra(Intents.EXTRA_GEOCODE,waypoint.getGeocode());
+  navigateIntent.putExtra(Intents.EXTRA_WAYPOINT_ID,waypoint.getId());
+  context.startActivity(navigateIntent);
+}

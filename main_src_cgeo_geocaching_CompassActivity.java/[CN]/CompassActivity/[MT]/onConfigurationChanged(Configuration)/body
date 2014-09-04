@@ -2,8 +2,6 @@
   super.onConfigurationChanged(newConfig);
   setContentView(R.layout.compass_activity);
   ButterKnife.inject(this);
-  setTitle();
-  setDestCoords();
-  setCacheInfo();
+  setTarget(dstCoords,description);
   forceRefresh();
 }
