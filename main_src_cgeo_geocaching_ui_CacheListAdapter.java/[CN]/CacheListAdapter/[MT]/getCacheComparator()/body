@@ -5,5 +5,8 @@
   if (cacheComparator == null && eventsOnly) {
     return EventDateComparator.singleton;
   }
+  if (cacheComparator == null) {
+    return DistanceComparator.singleton;
+  }
   return cacheComparator;
 }
