@@ -13,7 +13,7 @@
     return;
   }
   cache.setChangeNotificationHandler(new ChangeNotificationHandler(this,progress));
-  updateTitleBar(cache.getGeocode(),cache.getName(),cache.getType());
+  setCacheTitleBar(cache);
   imagesList=null;
   reinitializeViewPager();
   invalidateOptionsMenuCompatible();
