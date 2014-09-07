@@ -1,0 +1,5 @@
+{
+  final ViewInteraction waypointTypeSelector=onView(withId(R.id.type));
+  waypointTypeSelector.check(matches(isDisplayed()));
+  waypointTypeSelector.check(matches(withChild(withText(WaypointType.STAGE.getL10n()))));
+}

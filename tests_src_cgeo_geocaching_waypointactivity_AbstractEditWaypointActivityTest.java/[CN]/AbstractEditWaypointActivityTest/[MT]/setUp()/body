@@ -1,0 +1,8 @@
+{
+  super.setUp();
+  createWaypoint();
+  getCache().addOrChangeWaypoint(waypoint,true);
+  final int waypointId=getCache().getWaypoints().get(0).getId();
+  setActivityIntent(new EditWaypointActivity_.IntentBuilder_(getInstrumentation().getContext()).geocode(getCache().getGeocode()).waypointId(waypointId).get());
+  getActivity();
+}

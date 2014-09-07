@@ -1,0 +1,4 @@
+{
+  DataStore.removeCache(cache.getGeocode(),LoadFlags.REMOVE_ALL);
+  assertThat(DataStore.loadCache(cache.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB)).isNull();
+}

@@ -96,13 +96,13 @@ waypoint.setLookup(lookup);
 waypoint.setCoords(coordsToSave);
 waypoint.setNote(noteText);
 waypoint.setVisited(visited);
-waypoint.setId(id);
+waypoint.setId(waypointId);
 final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
 if (cache == null) {
 finishHandler.sendEmptyMessage(SAVE_ERROR);
 return null;
 }
-final Waypoint oldWaypoint=cache.getWaypointById(id);
+final Waypoint oldWaypoint=cache.getWaypointById(waypointId);
 if (cache.addOrChangeWaypoint(waypoint,true)) {
 DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
 if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode,waypoint)) {

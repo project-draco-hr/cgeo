@@ -1,11 +1,11 @@
 {
   super.onCreate(savedInstanceState,R.layout.editwaypoint_activity);
-  if (StringUtils.isBlank(geocode) && id <= 0) {
+  if (StringUtils.isBlank(geocode) && waypointId <= 0) {
     showToast(res.getString(R.string.err_waypoint_cache_unknown));
     finish();
     return;
   }
-  if (id <= 0) {
+  if (waypointId <= 0) {
     setTitle(res.getString(R.string.waypoint_add_title));
   }
  else {
@@ -27,7 +27,7 @@
     cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
     setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode),cache);
   }
-  if (id > 0) {
+  if (waypointId > 0) {
     waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
     waitDialog.setCancelable(true);
     (new LoadWaypointThread()).start();
