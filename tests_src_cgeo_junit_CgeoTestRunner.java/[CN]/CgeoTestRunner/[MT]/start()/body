@@ -1,0 +1,28 @@
+{
+  mListener=new JUnitReportListener(getContext(),getTargetContext(),mReportFile,mReportDir,mFilterTraces,mMultiFile);
+  try {
+    Class<?> c=getClass();
+    Field bridgeTestRunner=c.getSuperclass().getDeclaredField("bridgeTestRunner");
+    bridgeTestRunner.setAccessible(true);
+    Object obj=bridgeTestRunner.get(this);
+    Method m=obj.getClass().getDeclaredMethod("getAndroidTestRunner",null);
+    AndroidTestRunner androidTestRunner=(AndroidTestRunner)m.invoke(obj);
+    androidTestRunner.addTestListener(mListener);
+  }
+ catch (  NoSuchFieldException x) {
+    Log.e(LOG_TAG,x.toString());
+  }
+catch (  SecurityException e) {
+    Log.e(LOG_TAG,e.toString());
+  }
+catch (  NoSuchMethodException e) {
+    Log.e(LOG_TAG,e.toString());
+  }
+catch (  IllegalAccessException x) {
+    Log.e(LOG_TAG,x.toString());
+  }
+catch (  InvocationTargetException e) {
+    Log.e(LOG_TAG,e.toString());
+  }
+  super.start();
+}
