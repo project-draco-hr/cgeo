@@ -1,22 +1,22 @@
 {
-  String extStorage=Environment.getExternalStorageDirectory().getAbsolutePath();
-  List<File> storages=new ArrayList<>();
+  final String extStorage=Environment.getExternalStorageDirectory().getAbsolutePath();
+  final List<File> storages=new ArrayList<>();
   storages.add(new File(extStorage));
-  File file=new File(FILE_SYSTEM_TABLE_PATH);
+  final File file=new File(FILE_SYSTEM_TABLE_PATH);
   if (file.canRead()) {
     Reader fr=null;
     BufferedReader br=null;
     try {
-      fr=new InputStreamReader(new FileInputStream(file),"UTF-8");
+      fr=new InputStreamReader(new FileInputStream(file),CharEncoding.UTF_8);
       br=new BufferedReader(fr);
       String s=br.readLine();
       while (s != null) {
         if (s.startsWith("dev_mount")) {
-          String[] tokens=StringUtils.split(s);
+          final String[] tokens=StringUtils.split(s);
           if (tokens.length >= 3) {
-            String path=tokens[2];
+            final String path=tokens[2];
             if (!extStorage.equals(path)) {
-              File directory=new File(path);
+              final File directory=new File(path);
               if (directory.exists() && directory.isDirectory()) {
                 storages.add(directory);
               }
@@ -26,7 +26,7 @@
         s=br.readLine();
       }
     }
- catch (    IOException e) {
+ catch (    final IOException e) {
       Log.e("Could not get additional mount points for user content. " + "Proceeding with external storage only (" + extStorage + ")");
     }
  finally {

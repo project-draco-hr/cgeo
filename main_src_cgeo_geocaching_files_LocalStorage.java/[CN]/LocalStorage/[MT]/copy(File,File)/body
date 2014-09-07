@@ -10,11 +10,11 @@
     input.close();
     output.close();
   }
- catch (  FileNotFoundException e) {
+ catch (  final FileNotFoundException e) {
     Log.e("LocalStorage.copy: could not copy file",e);
     return false;
   }
-catch (  IOException e) {
+catch (  final IOException e) {
     Log.e("LocalStorage.copy: could not copy file",e);
     return false;
   }

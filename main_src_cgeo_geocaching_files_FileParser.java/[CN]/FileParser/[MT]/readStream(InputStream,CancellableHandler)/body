@@ -1,7 +1,7 @@
 {
   final StringBuilder buffer=new StringBuilder();
-  ProgressInputStream progressInputStream=new ProgressInputStream(is);
-  final BufferedReader input=new BufferedReader(new InputStreamReader(progressInputStream,"UTF-8"));
+  final ProgressInputStream progressInputStream=new ProgressInputStream(is);
+  final BufferedReader input=new BufferedReader(new InputStreamReader(progressInputStream,CharEncoding.UTF_8));
   try {
     String line;
     while ((line=input.readLine()) != null) {

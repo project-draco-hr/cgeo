@@ -8,7 +8,7 @@
     saveHeader(HEADER_LAST_MODIFIED,saved ? response : null,targetFile);
     return saved;
   }
- catch (  IOException e) {
+ catch (  final IOException e) {
     Log.e("LocalStorage.saveEntityToFile",e);
   }
   return false;

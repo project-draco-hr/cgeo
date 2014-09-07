@@ -1,5 +1,5 @@
 {
-  BufferedInputStream stream=new BufferedInputStream(new FileInputStream(file));
+  final BufferedInputStream stream=new BufferedInputStream(new FileInputStream(file));
   try {
     return parse(stream,progressHandler);
   }

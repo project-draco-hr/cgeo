@@ -7,11 +7,11 @@
     if (is == null) {
       return FileType.UNKNOWN;
     }
-    reader=new BufferedReader(new InputStreamReader(is));
+    reader=new BufferedReader(new InputStreamReader(is,CharEncoding.UTF_8));
     type=detectHeader(reader);
     reader.close();
   }
- catch (  IOException e) {
+ catch (  final IOException e) {
     Log.e("FileTypeDetector",e);
   }
  finally {

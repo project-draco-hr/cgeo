@@ -18,7 +18,7 @@
       IOUtils.closeQuietly(inputStream);
     }
   }
- catch (  IOException e) {
+ catch (  final IOException e) {
     Log.e("LocalStorage.saveToFile",e);
     FileUtils.deleteIgnoringFailure(targetFile);
   }
