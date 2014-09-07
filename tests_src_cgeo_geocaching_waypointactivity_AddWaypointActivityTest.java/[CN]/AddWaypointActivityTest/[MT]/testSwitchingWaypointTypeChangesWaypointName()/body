@@ -1,0 +1,7 @@
+{
+  WaypointType waypointType=WaypointType.FINAL;
+  onView(withId(R.id.name)).check(matches(not(withText(waypointType.getL10n()))));
+  onView(withId(R.id.type)).perform(ViewActions.click());
+  onData(hasToString(startsWith(waypointType.getL10n()))).inAdapterView(isClickable()).perform(click());
+  onView(withId(R.id.name)).check(matches(withText(waypointType.getL10n())));
+}
