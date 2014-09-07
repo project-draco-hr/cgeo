@@ -3,7 +3,7 @@
   final LogType currentLogType=currentLog == null ? null : currentLog.type;
   final List<LogType> logTypes=cache.getPossibleLogTypes();
   final ArrayList<LogTypeEntry> list=new ArrayList<>();
-  for (  LogType logType : logTypes) {
+  for (  final LogType logType : logTypes) {
     list.add(new LogTypeEntry(logType,null,logType == currentLogType));
   }
   if (cache.isLogOffline()) {
@@ -14,7 +14,7 @@
   builder.setTitle(R.string.cache_menu_visit_offline);
   final ArrayAdapter<LogTypeEntry> adapter=new ArrayAdapter<>(activity,android.R.layout.select_dialog_item,list);
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int item){
+    @Override public void onClick(    final DialogInterface dialog,    final int item){
       final LogTypeEntry logTypeEntry=adapter.getItem(item);
       if (logTypeEntry.logType == null) {
 switch (logTypeEntry.specialLogType) {

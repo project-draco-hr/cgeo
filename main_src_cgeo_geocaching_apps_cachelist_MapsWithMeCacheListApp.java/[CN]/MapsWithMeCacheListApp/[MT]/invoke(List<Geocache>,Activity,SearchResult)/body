@@ -1,7 +1,7 @@
 {
   final MWMPoint[] points=new MWMPoint[caches.size()];
   for (int i=0; i < points.length; i++) {
-    Geocache geocache=caches.get(i);
+    final Geocache geocache=caches.get(i);
     points[i]=new MWMPoint(geocache.getCoords().getLatitude(),geocache.getCoords().getLongitude(),geocache.getName(),geocache.getGeocode());
   }
   MapsWithMeApi.showPointsOnMap(activity,null,getPendingIntent(activity),points);

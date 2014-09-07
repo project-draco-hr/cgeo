@@ -1,10 +1,8 @@
 {
   final MWMResponse mwmResponse=MWMResponse.extractFromIntent(context,intent);
-  if (mwmResponse != null) {
-    final MWMPoint point=mwmResponse.getPoint();
-    if (point != null) {
-      return point.getId();
-    }
+  final MWMPoint point=mwmResponse.getPoint();
+  if (point != null) {
+    return point.getId();
   }
   return null;
 }
