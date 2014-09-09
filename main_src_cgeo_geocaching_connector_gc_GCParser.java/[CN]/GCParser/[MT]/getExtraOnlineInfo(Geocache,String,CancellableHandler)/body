@@ -3,9 +3,10 @@
     return;
   }
   CancellableHandler.sendLoadProgressDetail(handler,R.string.cache_dialog_loading_details_status_logs);
-  final Observable<LogEntry> logs=getLogs(page,Logs.ALL);
-  final Observable<LogEntry> ownLogs=getLogs(page,Logs.OWN).cache();
-  final Observable<LogEntry> specialLogs=Settings.isFriendLogsWanted() ? Observable.merge(getLogs(page,Logs.FRIENDS),ownLogs) : Observable.<LogEntry>empty();
+  final String userToken=parseUserToken(page);
+  final Observable<LogEntry> logs=getLogs(userToken,Logs.ALL);
+  final Observable<LogEntry> ownLogs=getLogs(userToken,Logs.OWN).cache();
+  final Observable<LogEntry> specialLogs=Settings.isFriendLogsWanted() ? Observable.merge(getLogs(userToken,Logs.FRIENDS),ownLogs) : Observable.<LogEntry>empty();
   final Observable<List<LogEntry>> mergedLogs=Observable.zip(logs.toList(),specialLogs.toList(),new Func2<List<LogEntry>,List<LogEntry>,List<LogEntry>>(){
     @Override public List<LogEntry> call(    final List<LogEntry> logEntries,    final List<LogEntry> specialLogEntries){
       mergeFriendsLogs(logEntries,specialLogEntries);

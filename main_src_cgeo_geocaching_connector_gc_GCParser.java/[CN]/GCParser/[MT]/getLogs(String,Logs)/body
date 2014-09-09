@@ -1,12 +1,10 @@
 {
+  if (userToken.isEmpty()) {
+    Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
+    return Observable.empty();
+  }
   return Observable.defer(new Func0<Observable<LogEntry>>(){
     @Override public Observable<LogEntry> call(){
-      final MatcherWrapper userTokenMatcher=new MatcherWrapper(GCConstants.PATTERN_USERTOKEN,page);
-      if (!userTokenMatcher.find()) {
-        Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
-        return Observable.empty();
-      }
-      final String userToken=userTokenMatcher.group(1);
       final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),"decrypt","true");
       if (logType != Logs.ALL) {
         params.add(logType.getParamName(),Boolean.toString(Boolean.TRUE));

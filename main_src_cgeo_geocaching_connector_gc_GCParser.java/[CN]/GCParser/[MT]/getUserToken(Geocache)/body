@@ -1,4 +1,3 @@
 {
-  final String page=requestHtmlPage(cache.getGeocode(),null,"n");
-  return TextUtils.getMatch(page,GCConstants.PATTERN_USERTOKEN,"");
+  return parseUserToken(requestHtmlPage(cache.getGeocode(),null,"n"));
 }
