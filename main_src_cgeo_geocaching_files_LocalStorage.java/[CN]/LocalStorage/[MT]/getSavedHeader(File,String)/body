@@ -11,7 +11,7 @@
       f.close();
     }
   }
- catch (  final FileNotFoundException e) {
+ catch (  final FileNotFoundException ignored) {
   }
 catch (  final Exception e) {
     Log.w("could not read saved header " + name + " for "+ baseFile,e);

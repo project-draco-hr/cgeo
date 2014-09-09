@@ -8,7 +8,7 @@
     activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(uriString)));
     return;
   }
- catch (  RuntimeException e) {
+ catch (  RuntimeException ignored) {
   }
   Log.i("GoogleMapsApp.navigate: No maps application available.");
   ActivityMixin.showToast(activity,getString(R.string.err_application_no));

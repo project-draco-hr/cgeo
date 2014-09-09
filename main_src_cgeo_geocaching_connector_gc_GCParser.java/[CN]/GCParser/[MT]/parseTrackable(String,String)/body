@@ -57,7 +57,7 @@
     try {
       trackable.setReleased(dateTbIn1.parse(releaseString));
     }
- catch (    final ParseException ignore) {
+ catch (    final ParseException ignored) {
       if (trackable.getReleased() == null) {
         try {
           trackable.setReleased(dateTbIn2.parse(releaseString));
@@ -104,7 +104,7 @@
       try {
         date=GCLogin.parseGcCustomDate(matcherLogs.group(2)).getTime();
       }
- catch (      final ParseException ignore) {
+ catch (      final ParseException ignored) {
       }
       final LogEntry logDone=new LogEntry(Html.fromHtml(matcherLogs.group(3)).toString().trim(),date,LogType.getByIconName(matcherLogs.group(1)),matcherLogs.group(7).trim());
       if (matcherLogs.group(4) != null && matcherLogs.group(6) != null) {

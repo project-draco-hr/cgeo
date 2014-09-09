@@ -2,7 +2,7 @@
   try {
     super.onMeasure(widthMeasureSpec,heightMeasureSpec);
   }
- catch (  IndexOutOfBoundsException e) {
+ catch (  IndexOutOfBoundsException ignored) {
     setText(getText().toString());
     super.onMeasure(widthMeasureSpec,heightMeasureSpec);
   }

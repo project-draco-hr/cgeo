@@ -6,7 +6,7 @@
   try {
     return new ResultWrapper(Double.valueOf(replaceSpaceAfterComma),0,text.length());
   }
- catch (  NumberFormatException e1) {
+ catch (  NumberFormatException ignored) {
   }
   if (matcher.find()) {
     final double sign=matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
@@ -33,7 +33,7 @@
       return new ResultWrapper(Double.parseDouble(textPart),pos,textPart.length());
     }
   }
- catch (  NumberFormatException e) {
+ catch (  NumberFormatException ignored) {
   }
   throw new Geopoint.ParseException("Could not parse coordinates as " + latlon + ": \""+ text+ "\"",latlon);
 }

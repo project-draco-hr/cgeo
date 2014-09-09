@@ -2,7 +2,7 @@
   try {
     return doImport(new GPX10Parser(listId));
   }
- catch (  final ParserException pe) {
+ catch (  final ParserException ignored) {
     return doImport(new GPX11Parser(listId));
   }
 }

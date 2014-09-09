@@ -13,7 +13,7 @@
   try {
     stringName=CgeoApplication.getInstance().getResources().getResourceName(stringId);
   }
- catch (  final NullPointerException e) {
+ catch (  final NullPointerException ignored) {
     return null;
   }
   if (stringName == null) {

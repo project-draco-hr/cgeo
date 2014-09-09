@@ -10,7 +10,7 @@
       try {
         activity.startActivity(intent);
       }
- catch (      ActivityNotFoundException anfe) {
+ catch (      ActivityNotFoundException ignored) {
         Log.w(TAG,"Google Play is not installed; cannot install " + packageName);
       }
     }

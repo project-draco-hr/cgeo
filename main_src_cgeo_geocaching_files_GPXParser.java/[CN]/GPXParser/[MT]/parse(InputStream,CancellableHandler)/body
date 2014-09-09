@@ -247,7 +247,7 @@
             }
           }
         }
- catch (        final NumberFormatException e) {
+ catch (        final NumberFormatException ignored) {
         }
       }
     }
@@ -327,7 +327,7 @@
             trackable.setGeocode(attrs.getValue("ref"));
           }
         }
- catch (        final RuntimeException e) {
+ catch (        final RuntimeException ignored) {
         }
       }
     }
@@ -359,7 +359,7 @@
             log.id=Integer.parseInt(attrs.getValue("id"));
           }
         }
- catch (        final NumberFormatException e) {
+ catch (        final NumberFormatException ignored) {
         }
       }
     }

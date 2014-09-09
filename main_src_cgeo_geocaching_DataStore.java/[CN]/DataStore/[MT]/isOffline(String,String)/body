@@ -19,7 +19,7 @@ synchronized (listId) {
       return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST.id;
     }
   }
- catch (  final SQLiteDoneException e) {
+ catch (  final SQLiteDoneException ignored) {
   }
 catch (  final Exception e) {
     Log.e("DataStore.isOffline",e);

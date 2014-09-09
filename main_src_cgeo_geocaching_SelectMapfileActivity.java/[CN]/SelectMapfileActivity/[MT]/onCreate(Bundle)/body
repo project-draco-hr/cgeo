@@ -10,7 +10,7 @@
         dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,getString(android.R.string.ok));
         startActivityForResult(dirChooser,REQUEST_DIRECTORY);
       }
- catch (      android.content.ActivityNotFoundException ex) {
+ catch (      android.content.ActivityNotFoundException ignored) {
         final Intent dirChooser=new Intent(SelectMapfileActivity.this,SimpleDirChooser.class);
         dirChooser.putExtra(Intents.EXTRA_START_DIR,LocalStorage.getStorage().getAbsolutePath());
         startActivityForResult(dirChooser,REQUEST_DIRECTORY);
