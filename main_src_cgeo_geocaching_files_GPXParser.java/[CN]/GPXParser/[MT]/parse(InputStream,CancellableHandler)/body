@@ -20,7 +20,7 @@
         }
       }
  catch (      final NumberFormatException e) {
-        Log.w("Failed to parse waypoint's latitude and/or longitude.");
+        Log.w("Failed to parse waypoint's latitude and/or longitude",e);
       }
     }
   }
@@ -194,7 +194,7 @@
           }
         }
  catch (        final RuntimeException e) {
-          Log.w("Failed to parse cache attributes.");
+          Log.w("Failed to parse cache attributes",e);
         }
       }
     }
