@@ -1,6 +1,9 @@
 {
   final Observable<Bitmap> captcha=Observable.defer(new Func0<Observable<Bitmap>>(){
     @Override public Observable<Bitmap> call(){
+      if (needsFetch) {
+        recaptchaReceiver.fetchChallenge();
+      }
       final String url="http://www.google.com/recaptcha/api/image?c=" + recaptchaReceiver.getChallenge();
       final InputStream is=Network.getResponseStream(Network.getRequest(url));
       if (is != null) {

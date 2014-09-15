@@ -7,12 +7,11 @@
     reloadButton.setEnabled(false);
     reloadButton.setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      final View v){
-        recaptchaReceiver.fetchChallenge();
-        loadChallenge(imageView,reloadButton);
+        loadChallenge(imageView,reloadButton,true);
       }
     }
 );
-    loadChallenge(imageView,reloadButton);
+    loadChallenge(imageView,reloadButton,false);
     dlg.setTitle(activity.getString(R.string.caches_recaptcha_title));
     dlg.setView(view);
     dlg.setNeutralButton(activity.getString(R.string.caches_recaptcha_continue),new DialogInterface.OnClickListener(){
