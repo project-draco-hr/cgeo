@@ -1,5 +1,5 @@
 {
-  if (Settings.isUseImperialUnits()) {
+  if (Settings.useImperialUnits()) {
     return String.format(Locale.US,"%.0f mph",kilometersPerHour / IConversion.MILES_TO_KILOMETER);
   }
   return String.format(Locale.US,"%.0f km/h",kilometersPerHour);

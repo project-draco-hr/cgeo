@@ -1,6 +1,6 @@
 {
   assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
-  final boolean savedImperial=Settings.isUseImperialUnits();
+  final boolean savedImperial=Settings.useImperialUnits();
   try {
     TestSettings.setUseImperialUnits(false);
     assertSpeed("123 km/h",122.782f);

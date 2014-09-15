@@ -2,6 +2,7 @@
   setTheme(Settings.isLightSkin() && Build.VERSION.SDK_INT > 10 ? R.style.settings_light : R.style.settings);
   super.onCreate(savedInstanceState);
   initHardwareAccelerationPreferences();
+  initUnitPreferences();
   SettingsActivity.addPreferencesFromResource(this,R.xml.preferences);
   initPreferences();
   final Intent intent=getIntent();

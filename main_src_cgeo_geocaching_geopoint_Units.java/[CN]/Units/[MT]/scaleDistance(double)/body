@@ -1,7 +1,7 @@
 {
   double distance;
   String units;
-  if (Settings.isUseImperialUnits()) {
+  if (Settings.useImperialUnits()) {
     distance=distanceKilometers / IConversion.MILES_TO_KILOMETER;
     if (distance >= 0.1) {
       units="mi";

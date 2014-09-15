@@ -35,7 +35,7 @@
     }
     double distance;
     try {
-      distance=DistanceParser.parseDistance(distanceText,!Settings.isUseImperialUnits());
+      distance=DistanceParser.parseDistance(distanceText,!Settings.useImperialUnits());
     }
  catch (    final NumberFormatException ignored) {
       showToast(res.getString(R.string.err_parse_dist));

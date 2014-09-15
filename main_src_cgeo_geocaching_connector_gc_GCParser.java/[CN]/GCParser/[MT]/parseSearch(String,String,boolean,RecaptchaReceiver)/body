@@ -79,7 +79,7 @@
     }
     final String distance=TextUtils.getMatch(row,GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE,false,2,null,false);
     if (distance != null) {
-      cache.setDistance(DistanceParser.parseDistance(distance,!Settings.isUseImperialUnits()));
+      cache.setDistance(DistanceParser.parseDistance(distance,!Settings.useImperialUnits()));
     }
     final MatcherWrapper matcherDT=new MatcherWrapper(GCConstants.PATTERN_SEARCH_DIFFICULTY_TERRAIN,row);
     if (matcherDT.find()) {
