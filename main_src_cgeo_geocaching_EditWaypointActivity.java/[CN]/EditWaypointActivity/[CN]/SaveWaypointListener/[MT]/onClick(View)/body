@@ -55,9 +55,9 @@
     @Override public void handleMessage(    final Message msg){
 switch (msg.what) {
 case UPLOAD_SUCCESS:
-        showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website,coordsToSave));
-      progress.dismiss();
-    finish();
+        progress.dismiss();
+      finish();
+    showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website,coordsToSave));
   break;
 case SUCCESS:
 progress.dismiss();
