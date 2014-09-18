@@ -1,3 +1,6 @@
 {
-  context.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(buildTranslationURI(toLang,text))));
+  if (text.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
+    ActivityMixin.showToast(activity,R.string.translate_length_warning);
+  }
+  activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(buildTranslationURI(toLang,text))));
 }

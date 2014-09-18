@@ -2,9 +2,6 @@
   actionMode.setTitle(fieldTitle);
   menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
   if (!copyOnly) {
-    if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
-      showToast(res.getString(R.string.translate_length_warning));
-    }
     menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang,Locale.getDefault().getDisplayLanguage()));
   }
   final boolean localeIsEnglish=StringUtils.equals(Locale.getDefault().getLanguage(),Locale.ENGLISH.getLanguage());
