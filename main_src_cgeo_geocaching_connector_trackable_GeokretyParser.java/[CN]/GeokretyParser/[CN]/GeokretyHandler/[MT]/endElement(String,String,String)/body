@@ -1,0 +1,36 @@
+{
+  try {
+    if (localName.equalsIgnoreCase("geokret") && !content.trim().isEmpty()) {
+      trackable.setName(content);
+    }
+    if (localName.equalsIgnoreCase("name")) {
+      trackable.setName(content);
+    }
+    if (localName.equalsIgnoreCase("description")) {
+      trackable.setDetails(content);
+    }
+    if (localName.equalsIgnoreCase("owner")) {
+      trackable.setOwner(content);
+    }
+    if (localName.equalsIgnoreCase("datecreated")) {
+      final Date date=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss").parse(content);
+      trackable.setReleased(date);
+    }
+    if (localName.equalsIgnoreCase("distancetravelled")) {
+      trackable.setDistance(Float.parseFloat(content));
+    }
+    if (localName.equalsIgnoreCase("image")) {
+      trackable.setImage("http://geokrety.org/obrazki/" + content);
+    }
+    if (localName.equalsIgnoreCase("state")) {
+      trackable.setSpottedType(Integer.parseInt(content));
+    }
+    if (localName.equalsIgnoreCase("waypoint")) {
+      trackable.setSpottedName(content);
+      trackable.setSpottedType(Trackable.SPOTTED_CACHE);
+    }
+  }
+ catch (  final ParseException e) {
+    Log.e("Parsing geokret",e);
+  }
+}

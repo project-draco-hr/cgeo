@@ -1,0 +1,20 @@
+{
+  Log.d("GeokretyConnector.searchTrackable: gkid=" + getId(geocode));
+  try {
+    final String urlDetails=(Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php");
+    final InputStream response=Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + getId(geocode)));
+    if (response == null) {
+      Log.e("GeokretyConnector.searchTrackable: No data from server");
+      return null;
+    }
+    final InputSource is=new InputSource(response);
+    final List<Trackable> trackables=GeokretyParser.parse(is);
+    if (!trackables.isEmpty()) {
+      return trackables.get(0);
+    }
+  }
+ catch (  final Exception e) {
+    Log.w("GeokretyConnector.searchTrackable",e);
+  }
+  return null;
+}

@@ -4,7 +4,14 @@
   }
   view=(ListView)getLayoutInflater().inflate(R.layout.cachedetail_inventory_page,parentView,false);
   final TrackableListAdapter adapterTrackables=new TrackableListAdapter(CacheDetailActivity.this);
-  for (  final Trackable trackable : cache.getInventory()) {
+  final ArrayList<Trackable> trackables=new ArrayList<>();
+  if (cache.getInventory() != null) {
+    trackables.addAll(cache.getInventory());
+  }
+  if (genericTrackables != null) {
+    trackables.addAll(genericTrackables);
+  }
+  for (  final Trackable trackable : trackables) {
     adapterTrackables.add(trackable);
   }
   view.setAdapter(adapterTrackables);

@@ -1,7 +1,3 @@
 {
-  final String page=Network.getResponseData(Network.getRequest("http://geokrety.org/export2.php?gkid=" + getId(geocode)));
-  if (page == null) {
-    return null;
-  }
-  return GeokretyParser.parse(page);
+  return searchTrackable(geocode);
 }
