@@ -1,3 +1,6 @@
 {
-  return ConnectorFactory.getConnector(this);
+  if (trackableConnector == null) {
+    trackableConnector=ConnectorFactory.getConnector(this);
+  }
+  return trackableConnector;
 }
