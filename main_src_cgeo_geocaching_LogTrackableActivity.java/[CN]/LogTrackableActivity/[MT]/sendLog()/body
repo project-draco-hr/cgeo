@@ -1,5 +1,5 @@
 {
-  if (!gettingViewstate) {
+  if (postReady) {
     waitDialog=ProgressDialog.show(this,null,res.getString(R.string.log_saving),true);
     waitDialog.setCancelable(true);
     Settings.setTrackableAction(typeSelected.id);

@@ -4,7 +4,6 @@
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
-    guid=extras.getString(Intents.EXTRA_GUID);
     if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
       trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
       Dialogs.moveCursorToEnd(trackingEditText);
@@ -23,6 +22,14 @@
  else {
     setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
   }
+  if (!trackable.isLoggable()) {
+    showToast(res.getString(R.string.err_tb_not_loggable));
+    finish();
+    return;
+  }
+  connector=ConnectorFactory.getTrackableConnector(geocode);
+  getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(),null,this).forceLoad();
+  displayTrackable();
   init();
   requestKeyboardForLogging();
 }

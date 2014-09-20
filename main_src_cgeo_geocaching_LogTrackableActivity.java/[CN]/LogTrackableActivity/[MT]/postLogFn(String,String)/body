@@ -1,13 +1,15 @@
 {
   try {
-    final StatusCode status=GCParser.postLogTrackable(guid,tracking,viewstates,typeSelected,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log);
-    if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+    final TrackableLog trackableLog=new TrackableLog(tracking,trackable.getName(),0,0,trackable.getBrand());
+    trackableLog.setAction(typeSelected);
+    final LogResult logResult=loggingManager.postLog(null,trackableLog,date,log);
+    if (logResult.getPostLogResult() == StatusCode.NO_ERROR && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
       Twitter.postTweetTrackable(geocode,new LogEntry(0,typeSelected.oldLogtype,log));
     }
-    if (status == StatusCode.NO_ERROR) {
+    if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
       addLocalTrackableLog(log);
     }
-    return status;
+    return logResult.getPostLogResult();
   }
  catch (  final Exception e) {
     Log.e("LogTrackableActivity.postLogFn",e);

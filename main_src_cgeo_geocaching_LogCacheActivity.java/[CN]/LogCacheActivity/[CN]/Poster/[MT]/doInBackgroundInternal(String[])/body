@@ -30,7 +30,7 @@
         }
       }
       for (      final TrackableConnector connector : trackablesConnectors) {
-        final TrackableLoggingManager manager=connector.getTrackableLoggingManager();
+        final TrackableLoggingManager manager=connector.getTrackableLoggingManager((AbstractLoggingActivity)activity);
         for (        final TrackableLog trackableLog : trackables) {
           manager.postLog(cache,trackableLog,date,log);
         }

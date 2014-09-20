@@ -13,8 +13,5 @@
   if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
     possibleLogTypesTrackable=Trackable.getPossibleLogTypes();
   }
-  if (GCLogin.isEmpty(viewstates)) {
-    new LoadDataThread().start();
-  }
   disableSuggestions(trackingEditText);
 }

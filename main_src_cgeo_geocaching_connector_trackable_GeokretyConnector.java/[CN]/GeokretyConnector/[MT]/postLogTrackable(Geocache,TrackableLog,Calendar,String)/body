@@ -1,11 +1,11 @@
 {
   Log.d("GeokretyConnector.postLogTrackable: nr=" + trackableLog.trackCode);
   if (trackableLog.brand != TrackableBrand.GEOKRETY) {
-    Log.e("GeokretyConnector.postLogTrackable: receive invalid brand trackable");
+    Log.d("GeokretyConnector.postLogTrackable: receive invalid brand");
     return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,new ArrayList<String>());
   }
   if (trackableLog.action == LogTypeTrackable.DO_NOTHING) {
-    Log.e("GeokretyConnector.postLogTrackable: receive invalid logtype trackable");
+    Log.d("GeokretyConnector.postLogTrackable: received invalid logtype");
     return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,new ArrayList<String>());
   }
   try {
