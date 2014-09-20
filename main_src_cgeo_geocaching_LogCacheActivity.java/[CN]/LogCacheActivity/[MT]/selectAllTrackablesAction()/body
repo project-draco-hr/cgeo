@@ -1,12 +1,14 @@
 {
   final Builder alert=new AlertDialog.Builder(this);
   alert.setTitle(res.getString(R.string.log_tb_changeall));
-  final String[] tbLogTypes=getTBLogTypes();
+  final ArrayList<LogTypeTrackable> tbLogTypeValues=LogTypeTrackable.getLogTypeTrackableForLogCache();
+  final String[] tbLogTypes=getTBLogTypes(tbLogTypeValues);
   alert.setItems(tbLogTypes,new OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int position){
-      final LogTypeTrackable logType=LogTypeTrackable.values()[position];
+      final LogTypeTrackable logType=tbLogTypeValues.get(position);
       for (      final TrackableLog tb : trackables) {
         tb.action=logType;
+        Log.i("Trackable " + tb.trackCode + " ("+ tb.name+ ") has new action: #"+ logType);
       }
       updateTrackablesList();
       dialog.dismiss();

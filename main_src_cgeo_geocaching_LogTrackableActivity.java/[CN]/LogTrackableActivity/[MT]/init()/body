@@ -10,8 +10,8 @@
   dateButton.setOnClickListener(new DateListener());
   setDate(date);
   initTwitter();
-  if (CollectionUtils.isEmpty(possibleLogTypes)) {
-    possibleLogTypes=Trackable.getPossibleLogTypes();
+  if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
+    possibleLogTypesTrackable=Trackable.getPossibleLogTypes();
   }
   if (GCLogin.isEmpty(viewstates)) {
     new LoadDataThread().start();

@@ -13,10 +13,10 @@
     }
     final String page=Network.getResponseData(Network.getRequest("http://www.geocaching.com/track/log.aspx",params));
     viewstates=GCLogin.getViewstates(page);
-    final List<LogType> typesPre=GCParser.parseTypes(page);
+    final List<LogTypeTrackable> typesPre=GCParser.parseLogTypesTrackables(page);
     if (CollectionUtils.isNotEmpty(typesPre)) {
-      possibleLogTypes.clear();
-      possibleLogTypes.addAll(typesPre);
+      possibleLogTypesTrackable.clear();
+      possibleLogTypesTrackable.addAll(typesPre);
     }
   }
  catch (  final Exception e) {

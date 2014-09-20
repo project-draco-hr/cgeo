@@ -2,8 +2,8 @@
   super.onCreateContextMenu(menu,view,info);
   final int viewId=view.getId();
   if (viewId == R.id.type) {
-    for (    final LogType typeOne : possibleLogTypes) {
-      menu.add(viewId,typeOne.id,0,typeOne.getL10n());
+    for (    final LogTypeTrackable typeOne : possibleLogTypesTrackable) {
+      menu.add(viewId,typeOne.id,0,typeOne.getLabel());
     }
   }
 }
