@@ -1,0 +1,44 @@
+{
+  Log.d("GeokretyConnector.postLogTrackable: nr=" + trackableLog.trackCode);
+  if (trackableLog.brand != TrackableBrand.GEOKRETY) {
+    Log.e("GeokretyConnector.postLogTrackable: receive invalid brand trackable");
+    return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,new ArrayList<String>());
+  }
+  if (trackableLog.action == LogTypeTrackable.DO_NOTHING) {
+    Log.e("GeokretyConnector.postLogTrackable: receive invalid logtype trackable");
+    return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,new ArrayList<String>());
+  }
+  try {
+    if (null == Settings.getGeokretySecId() || Settings.getGeokretySecId().isEmpty()) {
+      Log.e("GeokretyConnector.postLogTrackable: not authenticated");
+      return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED,new ArrayList<String>());
+    }
+    final Parameters params=new Parameters("secid",Settings.getGeokretySecId(),"gzip","0","nr",trackableLog.trackCode,"formname","ruchy","logtype",String.valueOf(trackableLog.action.gkid),"data",String.format("%tY-%tm-%td",date,date,date),"godzina",String.format("%tH",date),"minuta",String.format("%tM",date),"comment",log,"app","c:geo","app_ver","dev","mobile_lang","en_EN.UTF-8");
+    if (null != cache && null != cache.getCoords() && null != cache.getGeocode()) {
+      params.add("latlon",cache.getCoords().toString());
+      params.add("wpt",cache.getGeocode());
+    }
+    final String page=Network.getResponseData(Network.postRequest(URL + "/ruchy.php",params));
+    if (page == null) {
+      Log.e("GeokretyConnector.postLogTrackable: No data from server");
+      return new ImmutablePair<>(StatusCode.CONNECTION_FAILED_GK,new ArrayList<String>());
+    }
+    final ImmutablePair<Integer,ArrayList<String>> response=GeokretyParser.parseResponse(page);
+    if (null == response) {
+      Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse geokrety");
+      return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,new ArrayList<String>());
+    }
+    if (!response.getRight().isEmpty()) {
+      for (      final String error : response.getRight()) {
+        Log.w("GeokretyConnector.postLogTrackable: " + error);
+      }
+      return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,response.getRight());
+    }
+    Log.i("Geokrety Log successfully posted to trackable #" + trackableLog.trackCode);
+    return new ImmutablePair<>(StatusCode.NO_ERROR,new ArrayList<String>());
+  }
+ catch (  final Exception e) {
+    Log.w("GeokretyConnector.searchTrackable",e);
+    return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,new ArrayList<String>());
+  }
+}

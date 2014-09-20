@@ -1,0 +1,13 @@
+{
+  if (null != page) {
+    try {
+      final GeokretyRuchyXmlParser parser=new GeokretyRuchyXmlParser();
+      parser.parse(page);
+      return new ImmutablePair(parser.getGkid(),parser.getErrors());
+    }
+ catch (    final Exception e) {
+      Log.w("Cannot parseResponse geokrety",e);
+    }
+  }
+  return null;
+}

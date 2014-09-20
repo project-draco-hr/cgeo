@@ -1,0 +1,11 @@
+{
+  try {
+    final ImmutablePair<StatusCode,ArrayList<String>> response=GeokretyConnector.postLogTrackable(cache,trackableLog,date,log);
+    final String logs=(response.getRight().isEmpty() ? "" : response.getRight().toString());
+    return new LogResult(response.getLeft(),logs);
+  }
+ catch (  final Exception e) {
+    Log.e("GeokretyLoggingManager.postLog",e);
+  }
+  return new LogResult(StatusCode.LOG_POST_ERROR,"");
+}

@@ -29,6 +29,12 @@
           showToast(res.getString(R.string.err_gcvote_send_rating));
         }
       }
+      for (      final TrackableConnector connector : trackablesConnectors) {
+        final TrackableLoggingManager manager=connector.getTrackableLoggingManager();
+        for (        final TrackableLog trackableLog : trackables) {
+          manager.postLog(cache,trackableLog,date,log);
+        }
+      }
       if (StringUtils.isNotBlank(imageUri.getPath())) {
         final ImageResult imageResult=loggingManager.postLogImage(logResult.getLogId(),imageCaption,imageDescription,imageUri);
         final String uploadedImageUrl=imageResult.getImageUri();
