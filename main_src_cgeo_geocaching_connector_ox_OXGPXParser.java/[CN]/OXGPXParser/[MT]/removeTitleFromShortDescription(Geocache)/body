@@ -1,3 +1,3 @@
 {
-  cache.setShortDescription(StringUtils.trim(StringUtils.substringAfterLast(cache.getShortDescription(),",")));
+  cache.setShortDescription(StringUtils.replace(StringUtils.trim(StringUtils.substringAfterLast(cache.getShortDescription(),",")),"("," ("));
 }
