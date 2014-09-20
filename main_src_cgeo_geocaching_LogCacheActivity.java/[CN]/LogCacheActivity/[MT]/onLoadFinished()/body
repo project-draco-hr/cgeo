@@ -3,7 +3,7 @@
     showErrorLoadingData();
     return;
   }
-  trackables=loggingManager.getTrackables();
+  trackables.addAll(loggingManager.getTrackables());
   possibleLogTypes=loggingManager.getPossibleLogTypes();
   if (possibleLogTypes.isEmpty()) {
     showErrorLoadingData();
