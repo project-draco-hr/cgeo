@@ -10,6 +10,8 @@
   inventoryView.removeAllViews();
   for (  final TrackableLog tb : trackables) {
     final LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.logcache_trackable_item,inventoryView,false);
+    final ImageView brandView=ButterKnife.findById(inventoryItem,R.id.trackable_image_brand);
+    brandView.setImageResource(tb.brand.getIconResource());
     final TextView codeView=ButterKnife.findById(inventoryItem,R.id.trackcode);
     codeView.setText(tb.trackCode);
     final TextView nameView=ButterKnife.findById(inventoryItem,R.id.name);
