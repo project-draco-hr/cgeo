@@ -1,7 +1,7 @@
 {
 switch (item.getItemId()) {
 case R.id.menu_log_touch:
-    startActivityForResult(LogTrackableActivity.getIntent(this,trackable),LogTrackableActivity.LOG_TRACKABLE);
+    startActivityForResult(LogTrackableActivity.getIntent(this,trackable,geocache),LogTrackableActivity.LOG_TRACKABLE);
   return true;
 case R.id.menu_browser_trackable:
 startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(trackable.getUrl())));

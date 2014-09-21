@@ -4,6 +4,12 @@
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
+    if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_GEOCACHE))) {
+      final Geocache tmpGeocache=DataStore.loadCache(extras.getString(Intents.EXTRA_GEOCACHE),LoadFlags.LOAD_CACHE_OR_DB);
+      if (tmpGeocache != null) {
+        geocache=tmpGeocache;
+      }
+    }
     if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
       trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
       Dialogs.moveCursorToEnd(trackingEditText);
