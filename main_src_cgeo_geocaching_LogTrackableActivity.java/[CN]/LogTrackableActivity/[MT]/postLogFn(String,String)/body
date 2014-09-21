@@ -1,6 +1,6 @@
 {
   try {
-    final TrackableLog trackableLog=new TrackableLog(tracking,trackable.getName(),0,0,trackable.getBrand());
+    final TrackableLog trackableLog=new TrackableLog(trackable.getGeocode(),trackable.getTrackingcode(),trackable.getName(),0,0,trackable.getBrand());
     trackableLog.setAction(typeSelected);
     final LogResult logResult=loggingManager.postLog(null,trackableLog,date,log);
     if (logResult.getPostLogResult() == StatusCode.NO_ERROR && Settings.isUseTwitter() && Settings.isTwitterLoginValid() && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {

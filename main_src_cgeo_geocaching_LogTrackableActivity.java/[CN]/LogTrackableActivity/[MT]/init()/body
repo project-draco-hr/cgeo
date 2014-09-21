@@ -9,6 +9,20 @@
   setType(typeSelected);
   dateButton.setOnClickListener(new DateListener());
   setDate(date);
+  if (loggingManager.canLogTime()) {
+    timeButton.setOnClickListener(new TimeListener());
+    setTime(date);
+    timeButton.setVisibility(View.VISIBLE);
+  }
+ else {
+    timeButton.setVisibility(View.GONE);
+  }
+  if (loggingManager.canLogCoordinates()) {
+    geocacheEditText.setOnFocusChangeListener(new LoadGeocacheListener());
+    geocacheEditText.setText(geocache.getGeocode());
+    updateCoordinates(geocache.getCoords());
+    coordinatesButton.setOnClickListener(new CoordinatesListener());
+  }
   initTwitter();
   if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
     possibleLogTypesTrackable=Trackable.getPossibleLogTypes();
