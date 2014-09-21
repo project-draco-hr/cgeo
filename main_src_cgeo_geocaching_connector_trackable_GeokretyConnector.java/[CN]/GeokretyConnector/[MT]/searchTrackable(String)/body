@@ -10,6 +10,7 @@
     final InputSource is=new InputSource(response);
     final List<Trackable> trackables=GeokretyParser.parse(is);
     if (!trackables.isEmpty()) {
+      DataStore.saveTrackable(trackables.get(0));
       return trackables.get(0);
     }
   }
