@@ -3,7 +3,7 @@
   final ArrayList<int[]> insets=new ArrayList<>(8);
   final Drawable marker=res.getDrawable(cache.getMapMarkerId());
   layers.add(marker);
-  final int resolution=marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? 2 : 1) : 0;
+  final int resolution=calculateResolution(marker);
   if (!cache.isReliableLatLon()) {
     insets.add(INSET_RELIABLE[resolution]);
     layers.add(res.getDrawable(R.drawable.marker_notreliable));

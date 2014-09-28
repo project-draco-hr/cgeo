@@ -1,0 +1,11 @@
+{
+  final int hashcode=new HashCodeBuilder().append(waypoint.isVisited()).append(waypoint.getWaypointType().id).toHashCode();
+synchronized (overlaysCache) {
+    LayerDrawable drawable=overlaysCache.get(hashcode);
+    if (drawable == null) {
+      drawable=createWaypointMarker(res,waypoint);
+      overlaysCache.put(hashcode,drawable);
+    }
+    return drawable;
+  }
+}
