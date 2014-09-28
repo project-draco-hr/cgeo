@@ -3,7 +3,7 @@
 synchronized (overlaysCache) {
     LayerDrawable drawable=overlaysCache.get(hashcode);
     if (drawable == null) {
-      drawable=MapUtils.createCacheItem(res,cache);
+      drawable=createCacheMarker(res,cache);
       overlaysCache.put(hashcode,drawable);
     }
     return drawable;

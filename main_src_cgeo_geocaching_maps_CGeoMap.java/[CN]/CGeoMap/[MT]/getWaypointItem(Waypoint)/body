@@ -1,14 +1,5 @@
 {
   final CachesOverlayItemImpl item=mapItemFactory.getCachesOverlayItem(waypoint,waypoint.getWaypointType().applyDistanceRule());
-  final Drawable marker=getResources().getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
-  final Drawable[] layers=new Drawable[]{marker,getResources().getDrawable(waypoint.getWaypointType().markerId)};
-  final LayerDrawable ld=new LayerDrawable(layers);
-  if (layers[0].getIntrinsicWidth() > 40) {
-    ld.setLayerInset(1,9,12,10,13);
-  }
- else {
-    ld.setLayerInset(1,9,12,8,12);
-  }
-  item.setMarker(ld);
+  item.setMarker(MapUtils.getWaypointMarker(getResources(),waypoint));
   return item;
 }
