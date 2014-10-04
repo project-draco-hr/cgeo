@@ -7,5 +7,5 @@
     }
   }
 ));
-  return initialLocationObservable.concatWith(lowPowerObservable.ambWith(gpsFixObservable.delaySubscription(6,TimeUnit.SECONDS)).first().concatWith(lowPowerObservable).timeout(25,TimeUnit.SECONDS).retry());
+  return initialLocationObservable.mergeWith(lowPowerObservable.ambWith(gpsFixObservable.delaySubscription(6,TimeUnit.SECONDS)).first().concatWith(lowPowerObservable).timeout(25,TimeUnit.SECONDS).retry());
 }
