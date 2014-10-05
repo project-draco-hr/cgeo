@@ -4,7 +4,6 @@
   for (int i=0; i < geocodes.length; i++) {
     geocodes[i]=caches.get(i).getGeocode();
   }
-  final Bundle b=new Bundle();
-  b.putStringArray(Intents.EXTRA_CACHELIST,geocodes);
-  getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.getLoaderId(),b,this);
+  DataStore.clearVisitDate(geocodes);
+  refreshCurrentList();
 }

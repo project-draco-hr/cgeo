@@ -78,10 +78,6 @@ search=(SearchResult)extras.get(Intents.EXTRA_SEARCH);
 replaceCacheListFromSearch();
 loadCachesHandler.sendMessage(Message.obtain());
 break;
-case REMOVE_FROM_HISTORY:
-title=res.getString(R.string.caches_history);
-loader=new RemoveFromHistoryLoader(app,extras.getStringArray(Intents.EXTRA_CACHELIST),coords);
-break;
 case NEXT_PAGE:
 loader=new NextPageGeocacheListLoader(app,search);
 break;
