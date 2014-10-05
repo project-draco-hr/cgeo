@@ -27,7 +27,7 @@ importGpxFromAndroid();
 invalidateOptionsMenuCompatible();
 return false;
 case R.id.menu_create_list:
-new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(),newListName);
+new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(),listNameMemento.getTerm());
 refreshSpinnerAdapter();
 invalidateOptionsMenuCompatible();
 return false;

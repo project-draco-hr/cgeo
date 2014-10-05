@@ -12,7 +12,7 @@
     @Override public void onClick(    final DialogInterface dialogInterface,    final int itemId){
       final AbstractList list=lists.get(itemId);
       if (list == PseudoList.NEW_LIST) {
-        promptForListCreation(runAfterwards,newListName);
+        promptForListCreation(runAfterwards,listNameMemento.getTerm());
       }
  else {
         runAfterwards.call(lists.get(itemId).id);
