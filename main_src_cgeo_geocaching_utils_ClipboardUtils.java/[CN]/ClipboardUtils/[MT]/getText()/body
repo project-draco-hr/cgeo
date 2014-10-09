@@ -1,4 +1,5 @@
 {
   final android.text.ClipboardManager clipboard=(android.text.ClipboardManager)CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
-  return clipboard.getText().toString();
+  final CharSequence text=clipboard.getText();
+  return text != null ? text.toString() : null;
 }

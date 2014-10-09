@@ -1,6 +1,6 @@
 {
   try {
-    gp=new Geopoint(ClipboardUtils.getText());
+    gp=new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
     updateGUI();
   }
  catch (  final ParseException e) {
