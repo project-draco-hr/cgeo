@@ -10,7 +10,7 @@
     return;
   }
   init();
-  final SQLiteStatement move=PreparedStatements.getMoveToList();
+  final SQLiteStatement move=PreparedStatement.MOVE_TO_LIST.getStatement();
   database.beginTransaction();
   try {
     for (    final Geocache cache : caches) {

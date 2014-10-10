@@ -8,7 +8,7 @@
   try {
     final int cnt=database.delete(dbTableLists,"_id = " + (listId - customListIdOffset),null);
     if (cnt > 0) {
-      final SQLiteStatement moveToStandard=PreparedStatements.getMoveToStandardList();
+      final SQLiteStatement moveToStandard=PreparedStatement.MOVE_TO_STANDARD_LIST.getStatement();
       moveToStandard.bindLong(1,listId);
       moveToStandard.execute();
       status=true;

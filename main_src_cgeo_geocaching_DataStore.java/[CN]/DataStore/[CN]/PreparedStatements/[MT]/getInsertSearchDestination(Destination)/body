@@ -1,8 +1,0 @@
-{
-  final SQLiteStatement statement=getStatement("InsertSearch","INSERT INTO " + dbTableSearchDestionationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)");
-  statement.bindLong(1,destination.getDate());
-  final Geopoint coords=destination.getCoords();
-  statement.bindDouble(2,coords.getLatitude());
-  statement.bindDouble(3,coords.getLongitude());
-  return statement;
-}

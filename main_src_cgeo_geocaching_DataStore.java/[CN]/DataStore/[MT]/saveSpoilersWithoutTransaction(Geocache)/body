@@ -3,7 +3,7 @@
   database.delete(dbTableSpoilers,"geocode = ?",new String[]{geocode});
   final List<Image> spoilers=cache.getSpoilers();
   if (CollectionUtils.isNotEmpty(spoilers)) {
-    final SQLiteStatement insertSpoiler=PreparedStatements.getInsertSpoiler();
+    final SQLiteStatement insertSpoiler=PreparedStatement.INSERT_SPOILER.getStatement();
     final long timestamp=System.currentTimeMillis();
     for (    final Image spoiler : spoilers) {
       insertSpoiler.bindString(1,geocode);

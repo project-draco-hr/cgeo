@@ -4,7 +4,7 @@
   final Map<LogType,Integer> logCounts=cache.getLogCounts();
   if (MapUtils.isNotEmpty(logCounts)) {
     final Set<Entry<LogType,Integer>> logCountsItems=logCounts.entrySet();
-    final SQLiteStatement insertLogCounts=PreparedStatements.getInsertLogCounts();
+    final SQLiteStatement insertLogCounts=PreparedStatement.INSERT_LOG_COUNTS.getStatement();
     final long timestamp=System.currentTimeMillis();
     for (    final Entry<LogType,Integer> pair : logCountsItems) {
       insertLogCounts.bindString(1,geocode);

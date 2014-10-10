@@ -5,7 +5,7 @@
   init();
   database.beginTransaction();
   try {
-    database.delete(dbTableSearchDestionationHistory,"_id = " + destination.getId(),null);
+    database.delete(dbTableSearchDestinationHistory,"_id = " + destination.getId(),null);
     database.setTransactionSuccessful();
     return true;
   }

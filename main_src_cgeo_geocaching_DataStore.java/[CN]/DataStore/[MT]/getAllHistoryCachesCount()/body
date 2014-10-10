@@ -1,7 +1,7 @@
 {
   init();
   try {
-    return (int)PreparedStatements.getCountHistoryCaches().simpleQueryForLong();
+    return (int)PreparedStatement.HISTORY_COUNT.simpleQueryForLong();
   }
  catch (  final Exception e) {
     Log.e("DataStore.getAllHistoricCachesCount",e);

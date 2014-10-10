@@ -1,6 +1,6 @@
 {
   database.delete(dbTableLogs,"geocode = ?",new String[]{geocode});
-  final SQLiteStatement insertLog=PreparedStatements.getInsertLog();
+  final SQLiteStatement insertLog=PreparedStatement.INSERT_LOG.getStatement();
   final long timestamp=System.currentTimeMillis();
   for (  final LogEntry log : logs) {
     insertLog.bindString(1,geocode);
@@ -13,7 +13,7 @@
     insertLog.bindLong(8,log.friend ? 1 : 0);
     final long logId=insertLog.executeInsert();
     if (log.hasLogImages()) {
-      final SQLiteStatement insertImage=PreparedStatements.getInsertLogImage();
+      final SQLiteStatement insertImage=PreparedStatement.INSERT_LOG_IMAGE.getStatement();
       for (      final Image img : log.getLogImages()) {
         insertImage.bindLong(1,logId);
         insertImage.bindString(2,img.getTitle());

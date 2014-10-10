@@ -7,34 +7,26 @@
   }
   init();
   try {
-    final StringBuilder sql=new StringBuilder("select count(_id) from " + dbTableCaches + " where detailed = 1");
-    String typeKey;
-    int reasonIndex;
-    if (cacheType != CacheType.ALL) {
-      sql.append(" and type = ?");
-      typeKey=cacheType.id;
-      reasonIndex=2;
-    }
- else {
-      typeKey="all_types";
-      reasonIndex=1;
-    }
-    String listKey;
+    SQLiteStatement compiledStmnt;
     if (list == PseudoList.ALL_LIST.id) {
-      sql.append(" and reason > 0");
-      listKey="all_list";
+      if (cacheType == CacheType.ALL) {
+        compiledStmnt=PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();
+      }
+ else {
+        compiledStmnt=PreparedStatement.COUNT_TYPE_ALL_LIST.getStatement();
+        compiledStmnt.bindString(1,cacheType.id);
+      }
     }
  else {
-      sql.append(" and reason = ?");
-      listKey="list";
-    }
-    final String key="CountCaches_" + typeKey + "_"+ listKey;
-    final SQLiteStatement compiledStmnt=PreparedStatements.getStatement(key,sql.toString());
-    if (cacheType != CacheType.ALL) {
-      compiledStmnt.bindString(1,cacheType.id);
-    }
-    if (list != PseudoList.ALL_LIST.id) {
-      compiledStmnt.bindLong(reasonIndex,list);
+      if (cacheType == CacheType.ALL) {
+        compiledStmnt=PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
+        compiledStmnt.bindLong(1,list);
+      }
+ else {
+        compiledStmnt=PreparedStatement.COUNT_TYPE_LIST.getStatement();
+        compiledStmnt.bindString(1,cacheType.id);
+        compiledStmnt.bindLong(1,list);
+      }
     }
     return (int)compiledStmnt.simpleQueryForLong();
   }

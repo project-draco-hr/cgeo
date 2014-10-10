@@ -4,7 +4,7 @@
   }
   init();
   try {
-    final SQLiteStatement logCount=PreparedStatements.getLogCountOfGeocode();
+    final SQLiteStatement logCount=PreparedStatement.LOG_COUNT_OF_GEOCODE.getStatement();
 synchronized (logCount) {
       logCount.bindString(1,geocode);
       return logCount.simpleQueryForLong() > 0;

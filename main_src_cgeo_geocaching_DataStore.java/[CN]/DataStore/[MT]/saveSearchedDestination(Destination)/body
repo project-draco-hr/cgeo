@@ -2,7 +2,11 @@
   init();
   database.beginTransaction();
   try {
-    final SQLiteStatement insertDestination=PreparedStatements.getInsertSearchDestination(destination);
+    final SQLiteStatement insertDestination=PreparedStatement.INSERT_SEARCH_DESTINATION.getStatement();
+    insertDestination.bindLong(1,destination.getDate());
+    final Geopoint coords=destination.getCoords();
+    insertDestination.bindDouble(2,coords.getLatitude());
+    insertDestination.bindDouble(3,coords.getLongitude());
     insertDestination.executeInsert();
     database.setTransactionSuccessful();
   }
