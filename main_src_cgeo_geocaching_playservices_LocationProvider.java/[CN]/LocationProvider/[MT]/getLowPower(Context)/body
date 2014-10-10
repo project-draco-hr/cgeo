@@ -1,0 +1,11 @@
+{
+  final Observable<IGeoData> lowPowerObservable=get(context,lowPowerCount).skip(1);
+  final Observable<IGeoData> highPowerObservable=get(context,mostPreciseCount).skip(1);
+  final Observable<IGeoData> untilPreciseEnoughObservable=lowPowerObservable.mergeWith(highPowerObservable.delaySubscription(6,TimeUnit.SECONDS)).lift(RxUtils.operatorTakeUntil(new Func1<IGeoData,Boolean>(){
+    @Override public Boolean call(    final IGeoData geoData){
+      return geoData.getAccuracy() <= 20;
+    }
+  }
+));
+  return subject.first().concatWith(untilPreciseEnoughObservable.concatWith(lowPowerObservable).timeout(25,TimeUnit.SECONDS).retry());
+}
