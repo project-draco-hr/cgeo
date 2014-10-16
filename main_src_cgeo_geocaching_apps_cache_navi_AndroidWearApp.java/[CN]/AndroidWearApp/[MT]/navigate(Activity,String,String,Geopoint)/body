@@ -1,0 +1,5 @@
+{
+  final Intent launchIntent=new Intent(INTENT_ACTION);
+  launchIntent.putExtra(Intents.EXTRA_NAME,destName).putExtra(Intents.EXTRA_GEOCODE,destCode).putExtra(Intents.EXTRA_LATITUDE,coords.getLatitude()).putExtra(Intents.EXTRA_LONGITUDE,coords.getLongitude());
+  activity.startService(launchIntent);
+}
