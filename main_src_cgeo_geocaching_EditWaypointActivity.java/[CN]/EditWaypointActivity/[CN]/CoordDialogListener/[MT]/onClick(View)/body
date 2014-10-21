@@ -5,8 +5,16 @@
   }
  catch (  final Geopoint.ParseException ignored) {
   }
-  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
-  final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(cache,gp,app.currentGeo());
-  coordsDialog.setCancelable(true);
-  coordsDialog.show(getSupportFragmentManager(),"wpeditdialog");
+  final Geopoint geopoint=gp;
+  new AsyncTask<Void,Void,Geocache>(){
+    @Override protected Geocache doInBackground(    final Void... params){
+      return DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+    }
+    @Override protected void onPostExecute(    final Geocache cache){
+      final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(cache,geopoint,app.currentGeo());
+      coordsDialog.setCancelable(true);
+      coordsDialog.show(getSupportFragmentManager(),"wpeditdialog");
+    }
+  }
+.execute();
 }
