@@ -1,8 +1,16 @@
 {
-  cache.setPersonalNote(note);
-  cache.parseWaypointsFromNote();
   final TextView personalNoteView=ButterKnife.findById(this,R.id.personalnote);
   setPersonalNote(personalNoteView,note);
-  DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-  notifyDataSetChanged();
+  new AsyncTask<Void,Void,Void>(){
+    @Override protected Void doInBackground(    final Void... params){
+      cache.setPersonalNote(note);
+      cache.parseWaypointsFromNote();
+      DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+      return null;
+    }
+    @Override protected void onPostExecute(    final Void v){
+      notifyDataSetChanged();
+    }
+  }
+.execute();
 }
