@@ -18,7 +18,7 @@
   }
  else {
     params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged",Integer.toString(month) + "/" + Integer.toString(day)+ "/"+ Integer.toString(year));
-    params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited",GCLogin.getCustomGcDateFormat().format(new GregorianCalendar(year,month - 1,day).getTime()));
+    params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited",GCLogin.formatGcCustomDate(year,month,day));
   }
   params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo,"ctl00$ContentBody$LogBookPanel1$btnSubmitLog","Submit Log Entry","ctl00$ContentBody$uxVistOtherTrackableTB","","ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry","ctl00$ContentBody$uxVistOtherListingGC","");
   final String uri=new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
