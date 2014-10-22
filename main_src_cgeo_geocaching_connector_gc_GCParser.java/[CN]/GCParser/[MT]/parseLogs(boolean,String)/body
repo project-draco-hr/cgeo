@@ -22,6 +22,7 @@
           }
  catch (          ParseException|NullPointerException e) {
             Log.e("GCParser.loadLogsFromDetails: failed to parse log date",e);
+            continue;
           }
           final String latLon=entry.path("LatLonString").asText();
           final String logText=(StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.path("LogText").asText());
