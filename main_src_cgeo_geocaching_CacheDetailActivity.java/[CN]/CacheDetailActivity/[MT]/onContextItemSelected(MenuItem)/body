@@ -9,17 +9,39 @@ case R.id.menu_waypoint_edit:
   return true;
 case R.id.menu_waypoint_duplicate:
 ensureSaved();
-if (cache.duplicateWaypoint(selectedWaypoint)) {
-DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-notifyDataSetChanged();
+new AsyncTask<Void,Void,Boolean>(){
+@Override protected Boolean doInBackground(final Void... params){
+  if (cache.duplicateWaypoint(selectedWaypoint)) {
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+    return true;
+  }
+  return false;
 }
+@Override protected void onPostExecute(final Boolean result){
+  if (result) {
+    notifyDataSetChanged();
+  }
+}
+}
+.execute();
 return true;
 case R.id.menu_waypoint_delete:
 ensureSaved();
+new AsyncTask<Void,Void,Boolean>(){
+@Override protected Boolean doInBackground(final Void... params){
 if (cache.deleteWaypoint(selectedWaypoint)) {
 DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+return true;
+}
+return false;
+}
+@Override protected void onPostExecute(final Boolean result){
+if (result) {
 notifyDataSetChanged();
 }
+}
+}
+.execute();
 return true;
 case R.id.menu_waypoint_navigate_default:
 if (selectedWaypoint != null) {

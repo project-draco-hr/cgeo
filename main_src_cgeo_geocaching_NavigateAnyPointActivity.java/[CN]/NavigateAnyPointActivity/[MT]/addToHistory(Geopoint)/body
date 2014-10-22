@@ -2,13 +2,16 @@
   final Destination loc=new Destination(coords);
   if (!getHistoryOfSearchedLocations().contains(loc)) {
     getHistoryOfSearchedLocations().add(0,loc);
-    DataStore.saveSearchedDestination(loc);
-    historyListView.removeFooterView(getEmptyHistoryFooter());
-    runOnUiThread(new Runnable(){
-      @Override public void run(){
+    new AsyncTask<Void,Void,Void>(){
+      @Override protected Void doInBackground(      final Void... params){
+        DataStore.saveSearchedDestination(loc);
+        return null;
+      }
+      @Override protected void onPostExecute(      final Void v){
+        historyListView.removeFooterView(getEmptyHistoryFooter());
         destinationHistoryAdapter.notifyDataSetChanged();
       }
     }
-);
+.execute();
   }
 }

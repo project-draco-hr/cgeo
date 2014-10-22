@@ -6,7 +6,14 @@
     Log.i("Image does not exist");
     return;
   }
-  final Bitmap bitmap=ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
-  imagePreview.setImageBitmap(bitmap);
-  imagePreview.setVisibility(View.VISIBLE);
+  new AsyncTask<Void,Void,Bitmap>(){
+    @Override protected Bitmap doInBackground(    final Void... params){
+      return ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
+    }
+    @Override protected void onPostExecute(    final Bitmap bitmap){
+      imagePreview.setImageBitmap(bitmap);
+      imagePreview.setVisibility(View.VISIBLE);
+    }
+  }
+.execute();
 }

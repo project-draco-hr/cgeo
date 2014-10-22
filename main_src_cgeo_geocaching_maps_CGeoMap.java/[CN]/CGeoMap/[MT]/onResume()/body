@@ -2,14 +2,22 @@
   super.onResume();
   resumeSubscription=Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR),startTimer());
   if (!CollectionUtils.isEmpty(dirtyCaches)) {
-    for (    final String geocode : dirtyCaches) {
-      final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
-      if (cache != null) {
-        caches.remove(cache);
-        caches.add(cache);
+    new AsyncTask<Void,Void,Void>(){
+      @Override public Void doInBackground(      final Void... params){
+        for (        final String geocode : dirtyCaches) {
+          final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
+          if (cache != null) {
+            caches.remove(cache);
+            caches.add(cache);
+          }
+        }
+        return null;
+      }
+      @Override public void onPostExecute(      final Void result){
+        dirtyCaches.clear();
+        displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
       }
     }
-    dirtyCaches.clear();
-    displayExecutor.execute(new DisplayRunnable(this));
+.execute();
   }
 }
