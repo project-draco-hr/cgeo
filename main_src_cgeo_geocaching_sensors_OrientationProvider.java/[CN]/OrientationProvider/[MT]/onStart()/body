@@ -4,6 +4,6 @@
     sensorManager.registerListener(this,orientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
   }
  else {
-    subscriber.onError(new RuntimeException("orientation sensor is absent on this device"));
+    subject.onError(new RuntimeException("orientation sensor is absent on this device"));
   }
 }

@@ -1,7 +1,7 @@
 {
   final IGeoData initialLocation=GeoData.getInitialLocation(context);
   if (initialLocation != null) {
-    subscriber.onNext(initialLocation);
+    subject.onNext(initialLocation);
   }
   Log.d("GeoDataProvider: starting the GPS and network listeners");
   try {
