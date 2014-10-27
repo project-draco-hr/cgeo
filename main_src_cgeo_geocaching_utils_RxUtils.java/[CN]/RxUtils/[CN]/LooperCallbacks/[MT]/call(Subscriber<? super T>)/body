@@ -1,20 +1,5 @@
 {
-  subscriber.add(subject.subscribe(new Action1<T>(){
-    @Override public void call(    final T data){
-      subscriber.onNext(data);
-    }
-  }
-,new Action1<Throwable>(){
-    @Override public void call(    final Throwable throwable){
-      subscriber.onError(throwable);
-    }
-  }
-,new Action0(){
-    @Override public void call(){
-      subscriber.onCompleted();
-    }
-  }
-));
+  subscriber.add(subject.subscribe(Subscribers.from(subscriber)));
   looperCallbacksWorker.schedule(new Action0(){
     @Override public void call(){
       if (counter.getAndIncrement() == 0) {
