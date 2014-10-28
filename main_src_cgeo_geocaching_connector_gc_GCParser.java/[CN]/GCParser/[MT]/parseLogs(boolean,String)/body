@@ -16,7 +16,7 @@
         for (        final JsonNode entry : data) {
           final String logIconNameExt=entry.path("LogTypeImage").asText(".gif");
           final String logIconName=logIconNameExt.substring(0,logIconNameExt.length() - 4);
-          long date=0;
+          long date;
           try {
             date=GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
           }
