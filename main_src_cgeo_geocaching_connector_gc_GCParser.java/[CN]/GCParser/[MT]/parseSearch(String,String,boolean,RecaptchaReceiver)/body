@@ -162,6 +162,12 @@
   }
   if (!cids.isEmpty() && (Settings.isGCPremiumMember() || showCaptcha) && ((recaptchaReceiver == null || StringUtils.isBlank(recaptchaReceiver.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
     Log.i("Trying to get .loc for " + cids.size() + " caches");
+    final Observable<Set<Geocache>> storedCaches=Async.start(new Func0<Set<Geocache>>(){
+      @Override public Set<Geocache> call(){
+        return DataStore.loadCaches(Geocache.getGeocodes(caches),LoadFlags.LOAD_CACHE_OR_DB);
+      }
+    }
+,Schedulers.io());
     try {
       final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","");
       GCLogin.putViewstates(params,searchResult.viewstates);
@@ -179,7 +185,7 @@
         searchResult.setError(StatusCode.UNAPPROVED_LICENSE);
         return searchResult;
       }
-      LocParser.parseLoc(searchResult,coordinates);
+      LocParser.parseLoc(searchResult,coordinates,storedCaches.toBlocking().single());
     }
  catch (    final RuntimeException e) {
       Log.e("GCParser.parseSearch.CIDs",e);
