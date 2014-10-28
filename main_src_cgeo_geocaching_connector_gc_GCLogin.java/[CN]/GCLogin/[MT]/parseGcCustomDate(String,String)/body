@@ -1,21 +1,3 @@
 {
-  if (StringUtils.isBlank(input)) {
-    throw new ParseException("Input is null",0);
-  }
-  final String trimmed=input.trim();
-  if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
-    try {
-      return GC_CUSTOM_DATE_FORMATS.get(format).parse(trimmed);
-    }
- catch (    final ParseException e) {
-    }
-  }
-  for (  final SimpleDateFormat sdf : GC_CUSTOM_DATE_FORMATS.values()) {
-    try {
-      return sdf.parse(trimmed);
-    }
- catch (    final ParseException e) {
-    }
-  }
-  throw new ParseException("No matching pattern",0);
+  return new SimpleDateFormat(format,Locale.ENGLISH).parse(input.trim());
 }
