@@ -1,0 +1,10 @@
+{
+  final Set<String> geocodes=new HashSet<>(caches.size());
+  for (  final Geocache cache : caches) {
+    final String geocode=cache.getGeocode();
+    if (StringUtils.isNotBlank(geocode)) {
+      geocodes.add(geocode);
+    }
+  }
+  return geocodes;
+}

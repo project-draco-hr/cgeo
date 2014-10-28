@@ -1,7 +1,3 @@
 {
-  final ArrayList<String> allGeocodes=new ArrayList<>(caches.size());
-  for (  final Geocache geocache : caches) {
-    allGeocodes.add(geocache.getGeocode());
-  }
-  return allGeocodes.toArray(new String[allGeocodes.size()]);
+  return Geocache.getGeocodes(caches).toArray(new String[caches.size()]);
 }
