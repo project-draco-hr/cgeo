@@ -1,0 +1,58 @@
+{
+  try {
+    final XmlPullParserFactory factory=XmlPullParserFactory.newInstance();
+    final XmlPullParser xpp=factory.newPullParser();
+    xpp.setInput(content,Charsets.UTF_8.name());
+    final Map<String,Geocache> caches=new HashMap<>();
+    int eventType=xpp.getEventType();
+    Geocache currentCache=DUMMY_GEOCACHE;
+    while (eventType != XmlPullParser.END_DOCUMENT) {
+      if (eventType == XmlPullParser.START_TAG) {
+switch (xpp.getName()) {
+case "waypoint":
+          currentCache=new Geocache();
+        currentCache.setType(CacheType.UNKNOWN);
+      break;
+case "name":
+    currentCache.setGeocode(xpp.getAttributeValue(null,"id"));
+  if (xpp.next() == XmlPullParser.TEXT) {
+    final String nameOwner=xpp.getText();
+    currentCache.setName(StringUtils.trim(StringUtils.substringBeforeLast(nameOwner,NAME_OWNER_SEPARATOR)));
+    currentCache.setOwnerUserId(StringUtils.trim(StringUtils.substringAfterLast(nameOwner,NAME_OWNER_SEPARATOR)));
+  }
+break;
+case "coord":
+currentCache.setCoords(new Geopoint(Double.valueOf(xpp.getAttributeValue(null,"lat")),Double.valueOf(xpp.getAttributeValue(null,"lon"))));
+currentCache.setReliableLatLon(true);
+break;
+case "container":
+if (xpp.next() == XmlPullParser.TEXT) {
+currentCache.setSize(SIZES[Integer.valueOf(xpp.getText()) - 1]);
+}
+break;
+case "difficulty":
+if (xpp.next() == XmlPullParser.TEXT) {
+currentCache.setDifficulty(Float.valueOf(xpp.getText()));
+}
+break;
+case "terrain":
+if (xpp.next() == XmlPullParser.TEXT) {
+currentCache.setTerrain(Float.valueOf(xpp.getText()));
+}
+break;
+default :
+}
+}
+ else if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("waypoint") && StringUtils.isNotBlank(currentCache.getGeocode())) {
+caches.put(currentCache.getGeocode(),currentCache);
+}
+eventType=xpp.next();
+}
+Log.d("Coordinates found in .loc content: " + caches.size());
+return caches;
+}
+ catch (XmlPullParserException|IOException e) {
+Log.e("unable to parse .loc content",e);
+return Collections.emptyMap();
+}
+}

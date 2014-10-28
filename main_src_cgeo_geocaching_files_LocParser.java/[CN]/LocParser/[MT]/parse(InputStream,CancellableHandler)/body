@@ -1,16 +1,12 @@
 {
-  final String streamContent=readStream(stream,null).toString();
-  final int maxSize=streamContent.length();
-  final Map<String,Geocache> coords=parseCoordinates(streamContent);
+  final int maxSize=stream.available();
+  final Map<String,Geocache> coords=parseLoc(stream);
   final List<Geocache> caches=new ArrayList<>();
-  for (  Entry<String,Geocache> entry : coords.entrySet()) {
-    Geocache coord=entry.getValue();
-    if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
+  for (  final Entry<String,Geocache> entry : coords.entrySet()) {
+    final Geocache cache=entry.getValue();
+    if (StringUtils.isBlank(cache.getGeocode()) || StringUtils.isBlank(cache.getName())) {
       continue;
     }
-    Geocache cache=new Geocache();
-    cache.setReliableLatLon(true);
-    copyCoordToCache(coord,cache);
     caches.add(cache);
     fixCache(cache);
     cache.setType(CacheType.UNKNOWN);
