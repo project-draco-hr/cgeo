@@ -1,5 +1,5 @@
 {
-  return scheduler.createWorker().schedule(new Action0(){
+  return Schedulers.io().createWorker().schedule(new Action0(){
     @Override public void call(){
       try {
         dropSynchronous();
