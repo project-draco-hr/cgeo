@@ -1,0 +1,9 @@
+{
+  try {
+    return geocoder.getFromLocationName(keyword,20);
+  }
+ catch (  final Exception e) {
+    handleException(e);
+    return Collections.EMPTY_LIST;
+  }
+}
