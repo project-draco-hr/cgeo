@@ -9,7 +9,7 @@
     }
   }
  else {
-    geoDataObservable=GeoDataProvider.create(this).replay(1).refCount().doOnNext(rememberGeodataAction);
+    geoDataObservable=GeoDataProvider.create(this).doOnNext(rememberGeodataAction).replay(1).refCount();
     geoDataObservableLowPower=geoDataObservable;
   }
 }

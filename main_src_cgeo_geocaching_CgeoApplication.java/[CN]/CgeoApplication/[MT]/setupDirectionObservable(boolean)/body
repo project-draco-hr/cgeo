@@ -10,10 +10,10 @@
       return Observable.<Float>never().startWith(0.0f);
     }
   }
-).replay(1).refCount().doOnNext(new Action1<Float>(){
+).doOnNext(new Action1<Float>(){
     @Override public void call(    final Float direction){
       currentDirection=direction;
     }
   }
-);
+).replay(1).refCount();
 }
