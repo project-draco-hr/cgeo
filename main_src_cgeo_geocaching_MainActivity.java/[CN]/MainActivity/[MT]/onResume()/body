@@ -6,4 +6,6 @@
   }
   startBackgroundLogin();
   init();
+  connectivityChangeReceiver=new ConnectivityChangeReceiver();
+  registerReceiver(connectivityChangeReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 }
