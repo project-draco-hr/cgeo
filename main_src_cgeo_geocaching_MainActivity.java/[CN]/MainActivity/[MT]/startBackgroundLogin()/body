@@ -3,8 +3,8 @@
   final boolean mustLogin=app.mustRelog();
   for (  final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
     if (mustLogin || !conn.isLoggedIn()) {
-      new Thread(){
-        @Override public void run(){
+      RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+        @Override public void call(){
           if (mustLogin) {
             conn.logout();
           }
@@ -12,7 +12,7 @@
           updateUserInfoHandler.sendEmptyMessage(-1);
         }
       }
-.start();
+);
     }
   }
 }
