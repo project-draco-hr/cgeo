@@ -3,7 +3,7 @@
   if (detailTotal == 0) {
     return;
   }
-  if (!Network.isNetworkConnected(getApplicationContext())) {
+  if (!Network.isNetworkConnected()) {
     showToast(getString(R.string.err_server));
     return;
   }
