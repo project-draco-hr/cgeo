@@ -1,3 +1,6 @@
 {
+  if (!Network.isNetworkConnected()) {
+    return StatusCode.COMMUNICATION_ERROR;
+  }
   return login(true);
 }
