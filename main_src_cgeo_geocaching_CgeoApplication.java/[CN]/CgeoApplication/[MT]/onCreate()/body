@@ -16,5 +16,5 @@
   setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
   setupDirectionObservable(Settings.useLowPowerMode());
   gpsStatusObservable=GpsStatusProvider.create(this).replay(1).refCount();
-  geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
+  geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe();
 }
