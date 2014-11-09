@@ -5,7 +5,7 @@
   final long before=System.currentTimeMillis();
   try {
     final HttpResponse response=client.execute(request);
-    int status=response.getStatusLine().getStatusCode();
+    final int status=response.getStatusLine().getStatusCode();
     if (status == 200) {
       Log.d(status + formatTimeSpan(before) + reqLogStr);
     }

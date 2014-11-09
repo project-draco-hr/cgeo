@@ -2,7 +2,7 @@
   try {
     return URLEncoder.encode(text,CharEncoding.UTF_8);
   }
- catch (  UnsupportedEncodingException e) {
+ catch (  final UnsupportedEncodingException e) {
     Log.e("Network.encode",e);
   }
   return null;
