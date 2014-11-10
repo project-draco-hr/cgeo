@@ -1,5 +1,5 @@
 {
-  final Float distance=CgeoApplication.getInstance().distanceNonBlocking(wpt);
+  final Float distance=distanceNonBlocking(wpt);
   String text="--";
   if (distance != null) {
     text=Units.getDistanceFromKilometers(distance);
