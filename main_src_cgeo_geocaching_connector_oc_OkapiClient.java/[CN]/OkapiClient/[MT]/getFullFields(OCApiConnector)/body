@@ -1,8 +1,4 @@
 {
-  if (connector == null) {
-    Log.e("OkapiClient.getFullFields called with invalid connector");
-    return StringUtils.EMPTY;
-  }
   final StringBuilder res=new StringBuilder(500);
   res.append(SERVICE_CACHE_CORE_FIELDS);
   res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_FIELDS);

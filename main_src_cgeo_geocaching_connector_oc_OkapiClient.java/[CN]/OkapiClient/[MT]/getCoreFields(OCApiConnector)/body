@@ -1,8 +1,4 @@
 {
-  if (connector == null) {
-    Log.e("OkapiClient.getCoreFields called with invalid connector");
-    return StringUtils.EMPTY;
-  }
   if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
     return SERVICE_CACHE_CORE_FIELDS + SEPARATOR + SERVICE_CACHE_CORE_L3_FIELDS;
   }

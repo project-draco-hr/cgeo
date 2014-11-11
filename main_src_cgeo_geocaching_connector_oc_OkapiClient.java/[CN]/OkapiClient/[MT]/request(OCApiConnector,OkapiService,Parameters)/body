@@ -1,7 +1,4 @@
 {
-  if (connector == null) {
-    return new JSONResult("unknown OKAPI connector");
-  }
   final String host=connector.getHost();
   if (StringUtils.isBlank(host)) {
     return new JSONResult("unknown OKAPI connector host");
