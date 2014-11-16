@@ -11,7 +11,7 @@
     finish();
     return;
   }
-  if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+  if (Intent.ACTION_SEARCH.equals(intent.getAction()) || GOOGLE_NOW_SEARCH_ACTION.equals(intent.getAction())) {
     hideKeyboard();
     final String query=intent.getStringExtra(SearchManager.QUERY);
     final boolean keywordSearch=intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH,true);
