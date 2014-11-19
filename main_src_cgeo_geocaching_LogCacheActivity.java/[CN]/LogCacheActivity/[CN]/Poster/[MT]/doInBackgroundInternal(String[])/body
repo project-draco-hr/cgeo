@@ -6,7 +6,7 @@
     if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
       if (typeSelected.isFoundLog()) {
         cache.setFound(true);
-        cache.setVisitedDate(new Date().getTime());
+        cache.setVisitedDate(date.getTimeInMillis());
       }
       DataStore.saveChangedCache(cache);
       final ArrayList<LogEntry> newLogs=new ArrayList<>(cache.getLogs());
