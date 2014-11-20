@@ -4,7 +4,7 @@
   long dataDetailedUpdate=0;
   int dataDetailed=0;
   try {
-    Cursor cursor;
+    final Cursor cursor;
     if (StringUtils.isNotBlank(geocode)) {
       cursor=database.query(dbTableCaches,new String[]{"detailed","detailedupdate","updated"},"geocode = ?",new String[]{geocode},null,null,null,"1");
     }

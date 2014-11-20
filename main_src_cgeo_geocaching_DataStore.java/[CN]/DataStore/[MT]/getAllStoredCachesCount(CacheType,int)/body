@@ -7,7 +7,7 @@
   }
   init();
   try {
-    SQLiteStatement compiledStmnt;
+    final SQLiteStatement compiledStmnt;
     if (list == PseudoList.ALL_LIST.id) {
       if (cacheType == CacheType.ALL) {
         compiledStmnt=PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();

@@ -5,6 +5,6 @@
   }
  catch (  final RuntimeException e) {
     Log.e("cannot get suggestions from " + table + "->"+ column+ " for input '"+ input+ "'",e);
-    return new String[0];
+    return ArrayUtils.EMPTY_STRING_ARRAY;
   }
 }
