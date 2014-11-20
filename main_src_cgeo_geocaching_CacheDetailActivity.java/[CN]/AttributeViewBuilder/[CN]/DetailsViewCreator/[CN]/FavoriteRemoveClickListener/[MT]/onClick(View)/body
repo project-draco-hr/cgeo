@@ -1,3 +1,8 @@
 {
-  doExecute(R.string.cache_dialog_favorite_remove_title,R.string.cache_dialog_favorite_remove_message,new FavoriteRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this,progress)));
+  doExecute(R.string.cache_dialog_favorite_remove_title,R.string.cache_dialog_favorite_remove_message,new Action1<SimpleCancellableHandler>(){
+    @Override public void call(    final SimpleCancellableHandler simpleCancellableHandler){
+      favoriteRemove(simpleCancellableHandler);
+    }
+  }
+);
 }

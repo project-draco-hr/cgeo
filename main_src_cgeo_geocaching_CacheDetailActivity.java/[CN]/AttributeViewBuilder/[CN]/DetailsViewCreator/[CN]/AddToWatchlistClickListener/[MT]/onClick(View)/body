@@ -1,3 +1,8 @@
 {
-  doExecute(R.string.cache_dialog_watchlist_add_title,R.string.cache_dialog_watchlist_add_message,new WatchlistAddThread(new SimpleUpdateHandler(CacheDetailActivity.this,progress)));
+  doExecute(R.string.cache_dialog_watchlist_add_title,R.string.cache_dialog_watchlist_add_message,new Action1<SimpleCancellableHandler>(){
+    @Override public void call(    final SimpleCancellableHandler simpleCancellableHandler){
+      watchListAdd(simpleCancellableHandler);
+    }
+  }
+);
 }

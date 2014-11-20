@@ -1,0 +1,10 @@
+{
+  final CacheDetailActivity activity=((CacheDetailActivity)activityRef.get());
+  if (activity != null) {
+    final Message msg=obtainMessage(what);
+    final Bundle bundle=new Bundle();
+    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,activity.getResources().getString(resId));
+    msg.setData(bundle);
+    msg.sendToTarget();
+  }
+}

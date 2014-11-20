@@ -1,3 +1,8 @@
 {
-  doExecute(R.string.cache_dialog_watchlist_remove_title,R.string.cache_dialog_watchlist_remove_message,new WatchlistRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this,progress)));
+  doExecute(R.string.cache_dialog_watchlist_remove_title,R.string.cache_dialog_watchlist_remove_message,new Action1<SimpleCancellableHandler>(){
+    @Override public void call(    final SimpleCancellableHandler simpleCancellableHandler){
+      watchListRemove(simpleCancellableHandler);
+    }
+  }
+);
 }

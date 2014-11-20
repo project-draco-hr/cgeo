@@ -1,0 +1,13 @@
+{
+  if (progress.isShowing()) {
+    showToast(res.getString(R.string.err_watchlist_still_managing));
+    return;
+  }
+  progress.show(CacheDetailActivity.this,res.getString(titleId),res.getString(messageId),true,null);
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
+      action.call(handler);
+    }
+  }
+);
+}

@@ -1,0 +1,8 @@
+{
+  if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
+    handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+  }
+ else {
+    handler.sendTextMessage(MESSAGE_FAILED,R.string.err_watchlist_failed);
+  }
+}
