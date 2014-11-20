@@ -1,3 +1,20 @@
 {
-  (new CountBubbleUpdateThread()).start();
+  AndroidObservable.bindActivity(this,DataStore.getAllCachesCountObservable()).subscribe(new Action1<Integer>(){
+    @Override public void call(    final Integer countBubbleCnt1){
+      if (countBubbleCnt1 == 0) {
+        countBubble.setVisibility(View.GONE);
+      }
+ else {
+        countBubble.setText(Integer.toString(countBubbleCnt1));
+        countBubble.bringToFront();
+        countBubble.setVisibility(View.VISIBLE);
+      }
+    }
+  }
+,new Action1<Throwable>(){
+    @Override public void call(    final Throwable throwable){
+      Log.e("Unable to add bubble count",throwable);
+    }
+  }
+);
 }
