@@ -15,14 +15,14 @@
         }
       }
     }
-    new Thread(new Runnable(){
-      @Override public void run(){
+    Schedulers.io().createWorker().schedule(new Action0(){
+      @Override public void call(){
         for (        final File dir : toRemove) {
           Log.i("Removing obsolete cache directory for " + dir.getName());
           LocalStorage.deleteDirectory(dir);
         }
       }
     }
-).start();
+);
   }
 }
