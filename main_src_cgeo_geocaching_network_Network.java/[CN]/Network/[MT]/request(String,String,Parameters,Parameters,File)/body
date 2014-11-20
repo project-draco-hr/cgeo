@@ -1,5 +1,5 @@
 {
-  HttpRequestBase request;
+  final HttpRequestBase request;
   if (method.equals("GET")) {
     final String fullUri=params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
     request=new HttpGet(fullUri);
