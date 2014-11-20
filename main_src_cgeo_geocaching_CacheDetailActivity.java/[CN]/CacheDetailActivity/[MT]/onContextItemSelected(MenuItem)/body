@@ -61,7 +61,7 @@ return true;
 case R.id.menu_waypoint_reset_cache_coords:
 ensureSaved();
 if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-createResetCacheCoordinatesDialog(cache,selectedWaypoint).show();
+createResetCacheCoordinatesDialog(selectedWaypoint).show();
 }
  else {
 final ProgressDialog progressDialog=ProgressDialog.show(this,getString(R.string.cache),getString(R.string.waypoint_reset),true);

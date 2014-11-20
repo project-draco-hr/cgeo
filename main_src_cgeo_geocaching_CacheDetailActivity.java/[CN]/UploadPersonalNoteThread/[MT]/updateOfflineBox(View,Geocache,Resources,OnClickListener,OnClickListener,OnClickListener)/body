@@ -4,7 +4,7 @@
   final Button offlineStore=ButterKnife.findById(view,R.id.offline_store);
   if (cache.isOffline()) {
     final long diff=(System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000));
-    String ago;
+    final String ago;
     if (diff < 15) {
       ago=res.getString(R.string.cache_offline_time_mins_few);
     }

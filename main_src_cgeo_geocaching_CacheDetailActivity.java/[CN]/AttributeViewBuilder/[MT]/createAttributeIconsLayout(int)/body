@@ -18,19 +18,18 @@
     final CacheAttribute attrib=CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
     if (attrib != null) {
       noAttributeIconsFound=false;
-      Drawable d=res.getDrawable(attrib.drawableId);
-      iv.setImageDrawable(d);
+      Drawable drawable=res.getDrawable(attrib.drawableId);
+      iv.setImageDrawable(drawable);
       if (strikeThrough) {
         final ImageView strikeThroughImage=new ImageView(CacheDetailActivity.this);
         strikeThroughImage.setLayoutParams(iv.getLayoutParams());
-        d=res.getDrawable(R.drawable.attribute__strikethru);
-        strikeThroughImage.setImageDrawable(d);
+        drawable=res.getDrawable(R.drawable.attribute__strikethru);
+        strikeThroughImage.setImageDrawable(drawable);
         fl.addView(strikeThroughImage);
       }
     }
  else {
-      final Drawable d=res.getDrawable(R.drawable.attribute_unknown);
-      iv.setImageDrawable(d);
+      iv.setImageDrawable(res.getDrawable(R.drawable.attribute_unknown));
     }
     attributeRow.addView(fl);
   }

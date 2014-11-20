@@ -1,6 +1,6 @@
 {
   watchlistThread=null;
-  Message msg;
+  final Message msg;
   if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
     msg=Message.obtain(handler,MESSAGE_SUCCEEDED);
   }

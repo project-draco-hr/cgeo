@@ -3,8 +3,8 @@
   final Drawable icon;
   if (wpt.isVisited()) {
     final LayerDrawable ld=new LayerDrawable(new Drawable[]{res.getDrawable(waypointType.markerId),res.getDrawable(R.drawable.tick)});
-    ld.setLayerInset(0,0,0,VISITED_INSET,VISITED_INSET);
-    ld.setLayerInset(1,VISITED_INSET,VISITED_INSET,0,0);
+    ld.setLayerInset(0,0,0,visitedInset,visitedInset);
+    ld.setLayerInset(1,visitedInset,visitedInset,0,0);
     icon=ld;
   }
  else {

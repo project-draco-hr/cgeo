@@ -27,12 +27,12 @@
  else {
     nameView.setText(res.getString(R.string.waypoint));
   }
-  setWaypointIcon(res,nameView,wpt);
+  setWaypointIcon(nameView,wpt);
   if (wpt.isVisited()) {
-    final TypedValue a=new TypedValue();
-    getTheme().resolveAttribute(R.attr.text_color_grey,a,true);
-    if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
-      nameView.setTextColor(a.data);
+    final TypedValue typedValue=new TypedValue();
+    getTheme().resolveAttribute(R.attr.text_color_grey,typedValue,true);
+    if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+      nameView.setTextColor(typedValue.data);
     }
   }
   final TextView noteView=holder.noteView;
