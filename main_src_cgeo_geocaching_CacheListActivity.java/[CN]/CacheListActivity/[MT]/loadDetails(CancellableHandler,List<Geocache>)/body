@@ -1,17 +1,23 @@
 {
-  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
-    @Override public void call(){
-      final List<Geocache> allCaches=Settings.isStoreOfflineMaps() ? ListUtils.union(ListUtils.selectRejected(caches,Geocache.hasStaticMap),ListUtils.select(caches,Geocache.hasStaticMap)) : caches;
-      for (      final Geocache cache : allCaches) {
-        if (handler.isCancelled()) {
-          break;
+  final List<Geocache> allCaches=Settings.isStoreOfflineMaps() ? ListUtils.union(ListUtils.selectRejected(caches,Geocache.hasStaticMap),ListUtils.select(caches,Geocache.hasStaticMap)) : caches;
+  final Observable<Geocache> loaded=Observable.from(allCaches).flatMap(new Func1<Geocache,Observable<Geocache>>(){
+    @Override public Observable<Geocache> call(    final Geocache cache){
+      return Observable.create(new OnSubscribe<Geocache>(){
+        @Override public void call(        final Subscriber<? super Geocache> subscriber){
+          cache.refreshSynchronous(null);
+          detailProgress.incrementAndGet();
+          handler.obtainMessage(DownloadProgress.MSG_LOADED,cache).sendToTarget();
+          subscriber.onCompleted();
         }
-        detailProgress++;
-        cache.refreshSynchronous(null);
-        handler.obtainMessage(DownloadProgress.MSG_LOADED,cache).sendToTarget();
       }
+).subscribeOn(RxUtils.networkScheduler);
+    }
+  }
+).doOnCompleted(new Action0(){
+    @Override public void call(){
       handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
     }
   }
 );
+  handler.unsubscribeIfCancelled(loaded.subscribe());
 }
