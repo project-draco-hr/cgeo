@@ -5,7 +5,7 @@
     }
     detailProgress++;
     cache.refreshSynchronous(null);
-    handler.obtainMessage(MSG_LOADED,cache).sendToTarget();
+    handler.obtainMessage(Send2CgeoDownloader.MSG_LOADED,cache).sendToTarget();
   }
  catch (  final InterruptedException e) {
     Log.i(e.getMessage());
