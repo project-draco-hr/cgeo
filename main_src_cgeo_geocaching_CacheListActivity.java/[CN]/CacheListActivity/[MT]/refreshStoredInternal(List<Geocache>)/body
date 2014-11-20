@@ -9,9 +9,9 @@
  else {
     message=res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins,etaTime,etaTime);
   }
+  final LoadDetailsHandler loadDetailsHandler=new LoadDetailsHandler();
   progress.show(this,null,message,ProgressDialog.STYLE_HORIZONTAL,loadDetailsHandler.cancelMessage());
   progress.setMaxProgressAndReset(detailTotal);
   detailProgressTime=System.currentTimeMillis();
-  final LoadDetailsThread threadDetails=new LoadDetailsThread(loadDetailsHandler,caches);
-  threadDetails.start();
+  loadDetails(loadDetailsHandler,caches);
 }

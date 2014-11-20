@@ -1,0 +1,17 @@
+{
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
+      final List<Geocache> allCaches=Settings.isStoreOfflineMaps() ? ListUtils.union(ListUtils.selectRejected(caches,Geocache.hasStaticMap),ListUtils.select(caches,Geocache.hasStaticMap)) : caches;
+      for (      final Geocache cache : allCaches) {
+        if (handler.isCancelled()) {
+          break;
+        }
+        detailProgress++;
+        cache.refreshSynchronous(null);
+        handler.obtainMessage(Send2CgeoDownloader.MSG_LOADED,cache).sendToTarget();
+      }
+      handler.sendEmptyMessage(Send2CgeoDownloader.MSG_DONE);
+    }
+  }
+);
+}

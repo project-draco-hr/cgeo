@@ -1,0 +1,36 @@
+{
+  updateAdapter();
+  if (msg.what == Send2CgeoDownloader.MSG_LOADED) {
+    ((Geocache)msg.obj).setStatusChecked(false);
+    adapter.notifyDataSetChanged();
+    final int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
+    final int minutesRemaining=((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
+    progress.setProgress(detailProgress);
+    if (minutesRemaining < 1) {
+      progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+    }
+ else {
+      progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins,minutesRemaining,minutesRemaining));
+    }
+  }
+ else {
+    new AsyncTask<Void,Void,Void>(){
+      @Override protected Void doInBackground(      final Void... params){
+        if (search != null) {
+          final Set<Geocache> cacheListTmp=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+          if (CollectionUtils.isNotEmpty(cacheListTmp)) {
+            cacheList.clear();
+            cacheList.addAll(cacheListTmp);
+          }
+        }
+        return null;
+      }
+      @Override protected void onPostExecute(      final Void result){
+        setAdapterCurrentCoordinates(false);
+        showProgress(false);
+        progress.dismiss();
+      }
+    }
+.execute();
+  }
+}
