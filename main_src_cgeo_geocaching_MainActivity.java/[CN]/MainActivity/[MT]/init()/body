@@ -63,5 +63,5 @@
   updateCacheCounter();
   setFilterTitle();
   checkRestore();
-  (new CleanDatabaseThread()).start();
+  DataStore.cleanIfNeeded(this);
 }
