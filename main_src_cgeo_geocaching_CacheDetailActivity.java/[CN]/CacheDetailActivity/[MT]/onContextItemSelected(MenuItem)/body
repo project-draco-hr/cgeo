@@ -66,7 +66,7 @@ createResetCacheCoordinatesDialog(selectedWaypoint).show();
  else {
 final ProgressDialog progressDialog=ProgressDialog.show(this,getString(R.string.cache),getString(R.string.waypoint_reset),true);
 final HandlerResetCoordinates handler=new HandlerResetCoordinates(this,progressDialog,false);
-new ResetCoordsThread(cache,handler,selectedWaypoint,true,false,progressDialog).start();
+resetCoords(cache,handler,selectedWaypoint,true,false,progressDialog);
 }
 return true;
 case R.id.menu_calendar:
