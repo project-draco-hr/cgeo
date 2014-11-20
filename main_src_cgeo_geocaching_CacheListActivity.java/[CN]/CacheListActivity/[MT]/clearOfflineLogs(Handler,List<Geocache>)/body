@@ -1,0 +1,9 @@
+{
+  Schedulers.io().createWorker().schedule(new Action0(){
+    @Override public void call(){
+      DataStore.clearLogsOffline(selectedCaches);
+      handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
+    }
+  }
+);
+}
