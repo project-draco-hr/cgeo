@@ -8,9 +8,9 @@
         }
         detailProgress++;
         cache.refreshSynchronous(null);
-        handler.obtainMessage(Send2CgeoDownloader.MSG_LOADED,cache).sendToTarget();
+        handler.obtainMessage(DownloadProgress.MSG_LOADED,cache).sendToTarget();
       }
-      handler.sendEmptyMessage(Send2CgeoDownloader.MSG_DONE);
+      handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
     }
   }
 );

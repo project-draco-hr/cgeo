@@ -1,6 +1,6 @@
 {
   updateAdapter();
-  if (msg.what == Send2CgeoDownloader.MSG_LOADED) {
+  if (msg.what == DownloadProgress.MSG_LOADED) {
     ((Geocache)msg.obj).setStatusChecked(false);
     adapter.notifyDataSetChanged();
     final int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
