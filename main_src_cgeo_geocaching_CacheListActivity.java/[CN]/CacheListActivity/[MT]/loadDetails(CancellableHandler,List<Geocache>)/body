@@ -10,7 +10,7 @@
           subscriber.onCompleted();
         }
       }
-).subscribeOn(RxUtils.networkScheduler);
+).subscribeOn(RxUtils.refreshScheduler);
     }
   }
 ).doOnCompleted(new Action0(){
