@@ -5,7 +5,7 @@
   if (FileUtils.isFileUrl(url)) {
     return Observable.defer(new Func0<Observable<BitmapDrawable>>(){
       @Override public Observable<BitmapDrawable> call(){
-        final Bitmap bitmap=loadCachedImage(FileUtils.urlToFile(url),true).getLeft();
+        final Bitmap bitmap=loadCachedImage(FileUtils.urlToFile(url),true).left;
         return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
       }
     }
@@ -18,9 +18,9 @@
       subscription.add(subscriber);
       subscriber.add(RxUtils.computationScheduler.createWorker().schedule(new Action0(){
         @Override public void call(){
-          final Pair<BitmapDrawable,Boolean> loaded=loadFromDisk();
-          final BitmapDrawable bitmap=loaded.getLeft();
-          if (loaded.getRight()) {
+          final ImmutablePair<BitmapDrawable,Boolean> loaded=loadFromDisk();
+          final BitmapDrawable bitmap=loaded.left;
+          if (loaded.right) {
             subscriber.onNext(bitmap);
             subscriber.onCompleted();
             return;
@@ -38,8 +38,8 @@
       }
 ));
     }
-    private Pair<BitmapDrawable,Boolean> loadFromDisk(){
-      final Pair<Bitmap,Boolean> loadResult=loadImageFromStorage(url,pseudoGeocode,shared);
+    private ImmutablePair<BitmapDrawable,Boolean> loadFromDisk(){
+      final ImmutablePair<Bitmap,Boolean> loadResult=loadImageFromStorage(url,pseudoGeocode,shared);
       return scaleImage(loadResult);
     }
     private void downloadAndSave(    final Subscriber<? super BitmapDrawable> subscriber){
@@ -64,8 +64,8 @@
  else {
         RxUtils.computationScheduler.createWorker().schedule(new Action0(){
           @Override public void call(){
-            final Pair<BitmapDrawable,Boolean> loaded=loadFromDisk();
-            final BitmapDrawable image=loaded.getLeft();
+            final ImmutablePair<BitmapDrawable,Boolean> loaded=loadFromDisk();
+            final BitmapDrawable image=loaded.left;
             if (image != null) {
               subscriber.onNext(image);
             }

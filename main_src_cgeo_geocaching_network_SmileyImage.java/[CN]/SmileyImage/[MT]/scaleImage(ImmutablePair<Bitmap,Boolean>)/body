@@ -1,0 +1,9 @@
+{
+  final Bitmap bitmap=loadResult.left;
+  if (bitmap == null) {
+    return ImmutablePair.of((BitmapDrawable)null,loadResult.right);
+  }
+  final BitmapDrawable drawable=new BitmapDrawable(view.getResources(),bitmap);
+  drawable.setBounds(ImageUtils.scaleImageToLineHeight(drawable,view));
+  return ImmutablePair.of(drawable,loadResult.right);
+}

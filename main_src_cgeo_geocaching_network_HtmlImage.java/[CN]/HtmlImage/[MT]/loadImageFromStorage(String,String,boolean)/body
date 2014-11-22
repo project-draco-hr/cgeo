@@ -1,8 +1,8 @@
 {
   try {
     final File file=LocalStorage.getStorageFile(pseudoGeocode,url,true,false);
-    final Pair<Bitmap,Boolean> image=loadCachedImage(file,forceKeep);
-    if (image.getRight() || image.getLeft() != null) {
+    final ImmutablePair<Bitmap,Boolean> image=loadCachedImage(file,forceKeep);
+    if (image.right || image.left != null) {
       return image;
     }
     final File fileSec=LocalStorage.getStorageSecFile(pseudoGeocode,url,true);
@@ -11,5 +11,5 @@
  catch (  final Exception e) {
     Log.w("HtmlImage.loadImageFromStorage",e);
   }
-  return new ImmutablePair<>(null,false);
+  return ImmutablePair.of((Bitmap)null,false);
 }
