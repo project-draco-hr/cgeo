@@ -58,7 +58,7 @@
     buttonClipboard.setOnClickListener(new ClipboardListener());
     buttonClipboard.setVisibility(View.VISIBLE);
   }
- catch (  final ParseException e) {
+ catch (  final ParseException ignored) {
   }
   final Button buttonDone=ButterKnife.findById(v,R.id.done);
   buttonDone.setOnClickListener(new InputDoneListener());
