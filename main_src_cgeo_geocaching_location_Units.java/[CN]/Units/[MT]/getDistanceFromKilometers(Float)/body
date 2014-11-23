@@ -3,15 +3,15 @@
     return "?";
   }
   final ImmutablePair<Double,String> scaled=scaleDistance(distanceKilometers);
-  String formatString;
+  final String formatString;
   if (scaled.left >= 100) {
-    formatString="%.0f";
+    formatString="%.0f %s";
   }
  else   if (scaled.left >= 10) {
-    formatString="%.1f";
+    formatString="%.1f %s";
   }
  else {
-    formatString="%.2f";
+    formatString="%.2f %s";
   }
-  return String.format(formatString + " %s",scaled.left,scaled.right);
+  return String.format(formatString,scaled.left,scaled.right);
 }
