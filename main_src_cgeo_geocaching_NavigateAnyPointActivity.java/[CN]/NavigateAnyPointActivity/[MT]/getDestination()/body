@@ -18,13 +18,9 @@
     }
   }
  else {
-    if (app.currentGeo().getCoords() == null) {
-      showToast(res.getString(R.string.err_point_curr_position_unavailable));
-      return null;
-    }
     coords=app.currentGeo().getCoords();
   }
-  if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     double bearing;
     try {
       bearing=Double.parseDouble(bearingText);
@@ -43,8 +39,6 @@
     }
     coords=coords.project(bearing,distance);
   }
-  if (coords != null) {
-    saveCoords(coords);
-  }
+  saveCoords(coords);
   return coords;
 }

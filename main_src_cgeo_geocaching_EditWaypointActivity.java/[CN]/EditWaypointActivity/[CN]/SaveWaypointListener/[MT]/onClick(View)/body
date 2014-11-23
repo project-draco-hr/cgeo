@@ -18,12 +18,7 @@
     }
   }
  else {
-    final IGeoData geo=app.currentGeo();
-    if (geo.getCoords() == null) {
-      showToast(res.getString(R.string.err_point_curr_position_unavailable));
-      return;
-    }
-    coords=geo.getCoords();
+    coords=app.currentGeo().getCoords();
   }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
     double bearing;

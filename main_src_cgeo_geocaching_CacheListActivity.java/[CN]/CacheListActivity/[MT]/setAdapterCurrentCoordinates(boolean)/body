@@ -1,9 +1,6 @@
 {
-  final Geopoint coordsNow=app.currentGeo().getCoords();
-  if (coordsNow != null) {
-    adapter.setActualCoordinates(coordsNow);
-    if (forceSort) {
-      adapter.forceSort();
-    }
+  adapter.setActualCoordinates(app.currentGeo().getCoords());
+  if (forceSort) {
+    adapter.forceSort();
   }
 }

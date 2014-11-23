@@ -1,9 +1,5 @@
 {
   final Geopoint coords=app.currentGeo().getCoords();
-  if (coords == null) {
-    showToast(res.getString(R.string.err_point_unknown_position));
-    return;
-  }
   latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
   lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
   changed=false;
