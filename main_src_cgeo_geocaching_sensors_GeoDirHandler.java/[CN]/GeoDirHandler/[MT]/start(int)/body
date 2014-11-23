@@ -1,34 +1,3 @@
 {
-  final CompositeSubscription subscriptions=new CompositeSubscription();
-  final boolean lowPower=(flags & LOW_POWER) != 0;
-  if ((flags & UPDATE_GEODATA) != 0) {
-    subscriptions.add(app.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<GeoData>(){
-      @Override public void call(      final GeoData geoData){
-        updateGeoData(geoData);
-      }
-    }
-));
-  }
-  if ((flags & UPDATE_DIRECTION) != 0) {
-    subscriptions.add(fixedDirection().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Float>(){
-      @Override public void call(      final Float direction){
-        updateDirection(direction);
-      }
-    }
-));
-  }
-  if ((flags & UPDATE_GEODIR) != 0) {
-    subscriptions.add(Observable.combineLatest(app.geoDataObservable(lowPower),app.directionObservable(),new Func2<GeoData,Float,ImmutablePair<GeoData,Float>>(){
-      @Override public ImmutablePair<GeoData,Float> call(      final GeoData geoData,      final Float direction){
-        return ImmutablePair.of(geoData,fixDirection(geoData,direction));
-      }
-    }
-).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData,Float>>(){
-      @Override public void call(      final ImmutablePair<GeoData,Float> geoDir){
-        updateGeoDir(geoDir.left,geoDir.right);
-      }
-    }
-));
-  }
-  return subscriptions;
+  return start(flags,0,TimeUnit.SECONDS);
 }
