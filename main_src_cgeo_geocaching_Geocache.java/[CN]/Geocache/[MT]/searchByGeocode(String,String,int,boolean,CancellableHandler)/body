@@ -9,7 +9,7 @@
     search.addGeocode(realGeocode);
     return search;
   }
-  if (geocode == null && guid != null) {
+  if (geocode == null) {
     return GCConnector.getInstance().searchByGeocode(null,guid,handler);
   }
   final IConnector connector=ConnectorFactory.getConnector(geocode);
