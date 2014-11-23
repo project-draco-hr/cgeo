@@ -1,5 +1,5 @@
 {
-  if (isRecent(gpsLocation) || netLocation == null) {
+  if (netLocation == null || (gpsLocation != null && System.currentTimeMillis() <= gpsLocation.getTime() + 30000)) {
     return gpsLocation;
   }
   if (gpsLocation == null) {
