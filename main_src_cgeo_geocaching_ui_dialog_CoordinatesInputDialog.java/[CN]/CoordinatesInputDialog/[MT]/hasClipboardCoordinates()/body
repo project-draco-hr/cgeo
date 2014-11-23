@@ -1,0 +1,9 @@
+{
+  try {
+    new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+  }
+ catch (  final ParseException ignored) {
+    return false;
+  }
+  return true;
+}

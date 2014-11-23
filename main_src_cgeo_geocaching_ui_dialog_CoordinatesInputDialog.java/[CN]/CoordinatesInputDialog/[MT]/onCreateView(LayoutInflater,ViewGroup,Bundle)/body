@@ -52,13 +52,10 @@
  else {
     buttonCache.setVisibility(View.GONE);
   }
-  final Button buttonClipboard=ButterKnife.findById(v,R.id.clipboard);
-  try {
-    new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+  if (hasClipboardCoordinates()) {
+    final Button buttonClipboard=ButterKnife.findById(v,R.id.clipboard);
     buttonClipboard.setOnClickListener(new ClipboardListener());
     buttonClipboard.setVisibility(View.VISIBLE);
-  }
- catch (  final ParseException ignored) {
   }
   final Button buttonDone=ButterKnife.findById(v,R.id.done);
   buttonDone.setOnClickListener(new InputDoneListener());
