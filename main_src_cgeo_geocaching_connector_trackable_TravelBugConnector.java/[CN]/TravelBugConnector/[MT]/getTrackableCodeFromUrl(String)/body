@@ -1,11 +1,11 @@
 {
-  String code=StringUtils.substringAfterLast(url,"coord.info/");
-  if (code != null && canHandleTrackable(code)) {
-    return code;
+  final String code1=StringUtils.substringAfterLast(url,"coord.info/");
+  if (canHandleTrackable(code1)) {
+    return code1;
   }
-  code=StringUtils.substringAfterLast(url,"?tracker=");
-  if (code != null && canHandleTrackable(code)) {
-    return code;
+  final String code2=StringUtils.substringAfterLast(url,"?tracker=");
+  if (canHandleTrackable(code2)) {
+    return code2;
   }
   return null;
 }
