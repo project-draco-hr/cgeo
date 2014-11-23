@@ -1,3 +1,14 @@
 {
-  return getLocationProviderType(getProvider());
+switch (getProvider()) {
+case LocationManager.GPS_PROVIDER:
+    return LocationProviderType.GPS;
+case LocationManager.NETWORK_PROVIDER:
+  return LocationProviderType.NETWORK;
+case FUSED_PROVIDER:
+return LocationProviderType.FUSED;
+case LOW_POWER_PROVIDER:
+return LocationProviderType.LOW_POWER;
+default :
+return LocationProviderType.LAST;
+}
 }
