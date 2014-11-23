@@ -13,16 +13,16 @@
   if (zoomlevel > 13) {
     numberOfDetections=13;
   }
-  int[] pngType=new int[numberOfDetections];
+  final int[] pngType=new int[numberOfDetections];
   for (int x=topX; x < topX + 4; x++) {
     for (int y=topY; y < topY + 4; y++) {
-      int color=bitmap.getPixel(x,y);
+      final int color=bitmap.getPixel(x,y);
       if ((color >>> 24) != 255) {
         continue;
       }
-      int r=(color & 0xFF0000) >> 16;
-      int g=(color & 0xFF00) >> 8;
-      int b=color & 0xFF;
+      final int r=(color & 0xFF0000) >> 16;
+      final int g=(color & 0xFF00) >> 8;
+      final int b=color & 0xFF;
       if (isPixelDuplicated(r,g,b,zoomlevel)) {
         continue;
       }

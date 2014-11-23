@@ -1,5 +1,5 @@
 {
-  Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT);
+  final Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT);
   intent.addCategory(Intent.CATEGORY_OPENABLE);
   intent.setType("*/*");
   activity.startActivityForResult(intent,requestCode);
