@@ -5,10 +5,10 @@
     changeTokensDialog.setMessage(getAuthDialogWait());
   }
   changeTokensDialog.show();
-  (new Thread(){
-    @Override public void run(){
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
       changeToken(verifier);
     }
   }
-).start();
+);
 }

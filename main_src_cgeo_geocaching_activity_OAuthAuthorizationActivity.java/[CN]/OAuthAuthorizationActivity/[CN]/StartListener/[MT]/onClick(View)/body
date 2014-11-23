@@ -9,10 +9,10 @@
   startButton.setOnTouchListener(null);
   startButton.setOnClickListener(null);
   setTempTokens(null,null);
-  (new Thread(){
-    @Override public void run(){
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
       requestToken();
     }
   }
-).start();
+);
 }
