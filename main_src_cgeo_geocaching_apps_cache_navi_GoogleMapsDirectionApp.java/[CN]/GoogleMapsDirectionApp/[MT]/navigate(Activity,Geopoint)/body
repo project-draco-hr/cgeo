@@ -1,6 +1,6 @@
 {
   try {
-    final IGeoData geo=CgeoApplication.getInstance().currentGeo();
+    final GeoData geo=CgeoApplication.getInstance().currentGeo();
     activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?f=d&saddr=" + geo.getCoords().getLatitude() + ","+ geo.getCoords().getLongitude()+ "&daddr="+ coords.getLatitude()+ ","+ coords.getLongitude())));
   }
  catch (  final Exception e) {

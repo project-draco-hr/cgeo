@@ -1,8 +1,8 @@
 {
-  final Observable<IGeoData> lowPowerObservable=get(context,lowPowerCount).skip(1);
-  final Observable<IGeoData> highPowerObservable=get(context,mostPreciseCount).skip(1);
-  final Observable<IGeoData> untilPreciseEnoughObservable=lowPowerObservable.mergeWith(highPowerObservable.delaySubscription(6,TimeUnit.SECONDS)).lift(RxUtils.operatorTakeUntil(new Func1<IGeoData,Boolean>(){
-    @Override public Boolean call(    final IGeoData geoData){
+  final Observable<GeoData> lowPowerObservable=get(context,lowPowerCount).skip(1);
+  final Observable<GeoData> highPowerObservable=get(context,mostPreciseCount).skip(1);
+  final Observable<GeoData> untilPreciseEnoughObservable=lowPowerObservable.mergeWith(highPowerObservable.delaySubscription(6,TimeUnit.SECONDS)).lift(RxUtils.operatorTakeUntil(new Func1<GeoData,Boolean>(){
+    @Override public Boolean call(    final GeoData geoData){
       return geoData.getAccuracy() <= 20;
     }
   }

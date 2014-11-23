@@ -1,5 +1,5 @@
 {
-  final IGeoData initialLocation=GeoData.getInitialLocation(context);
+  final GeoData initialLocation=GeoData.getInitialLocation(context);
   subject.onNext(initialLocation != null ? initialLocation : GeoData.DUMMY_LOCATION);
   locationClient=new LocationClient(context,this,this);
   locationClient.connect();
