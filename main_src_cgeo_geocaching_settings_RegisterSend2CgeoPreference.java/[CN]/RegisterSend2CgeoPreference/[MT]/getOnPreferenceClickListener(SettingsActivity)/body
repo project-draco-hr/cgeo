@@ -20,12 +20,14 @@
           HttpResponse response=Network.getRequest("http://send2.cgeo.org/auth.html",params);
           if (response != null && response.getStatusLine().getStatusCode() == 200) {
             final String[] strings=StringUtils.split(Network.getResponseData(response),',');
-            Settings.setWebNameCode(nam,strings[0]);
-            try {
-              return Observable.just(Integer.parseInt(strings[1].trim()));
-            }
- catch (            final Exception e) {
-              Log.e("RegisterSend2CgeoPreference",e);
+            if (strings != null) {
+              Settings.setWebNameCode(nam,strings[0]);
+              try {
+                return Observable.just(Integer.parseInt(strings[1].trim()));
+              }
+ catch (              final Exception e) {
+                Log.e("RegisterSend2CgeoPreference",e);
+              }
             }
           }
           return Observable.empty();
