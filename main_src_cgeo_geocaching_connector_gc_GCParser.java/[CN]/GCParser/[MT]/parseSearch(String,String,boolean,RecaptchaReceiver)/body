@@ -119,7 +119,7 @@
         inventoryPre=matcherTbs.group(2);
       }
     }
-    if (StringUtils.isNotBlank(inventoryPre)) {
+    if (inventoryPre != null && StringUtils.isNotBlank(inventoryPre)) {
       final MatcherWrapper matcherTbsInside=new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE,inventoryPre);
       while (matcherTbsInside.find()) {
         if (matcherTbsInside.groupCount() == 2 && matcherTbsInside.group(2) != null && !matcherTbsInside.group(2).equalsIgnoreCase("premium member only cache") && cache.getInventoryItems() <= 0) {

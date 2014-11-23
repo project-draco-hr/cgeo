@@ -69,6 +69,10 @@
  catch (  final RuntimeException e) {
     Log.e("GCParser.postLog.confim",e);
   }
+  if (page == null) {
+    Log.e("GCParser.postLog: didn't get response");
+    return new ImmutablePair<>(StatusCode.LOG_POST_ERROR,"");
+  }
   try {
     final MatcherWrapper matcherOk=new MatcherWrapper(GCConstants.PATTERN_OK1,page);
     if (matcherOk.find()) {
