@@ -55,12 +55,12 @@
   final String releaseString=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_RELEASES,false,null);
   if (releaseString != null) {
     try {
-      trackable.setReleased(dateTbIn1.parse(releaseString));
+      trackable.setReleased(DATE_TB_IN_1.parse(releaseString));
     }
  catch (    final ParseException ignored) {
       if (trackable.getReleased() == null) {
         try {
-          trackable.setReleased(dateTbIn2.parse(releaseString));
+          trackable.setReleased(DATE_TB_IN_2.parse(releaseString));
         }
  catch (        final ParseException e) {
           Log.e("Could not parse trackable release " + releaseString,e);
