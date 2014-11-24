@@ -8,16 +8,16 @@
   }
   try {
     final Map<String,GCVoteRating> ratings=GCVote.getRating(null,geocodes);
-    for (    Geocache cache : caches) {
+    for (    final Geocache cache : caches) {
       if (ratings.containsKey(cache.getGeocode())) {
-        GCVoteRating rating=ratings.get(cache.getGeocode());
+        final GCVoteRating rating=ratings.get(cache.getGeocode());
         cache.setRating(rating.getRating());
         cache.setVotes(rating.getVotes());
         cache.setMyVote(rating.getMyVote());
       }
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("GCvote.loadRatings",e);
   }
 }
