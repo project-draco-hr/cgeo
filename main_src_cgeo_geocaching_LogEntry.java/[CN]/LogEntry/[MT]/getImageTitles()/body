@@ -1,6 +1,6 @@
 {
   final List<String> titles=new ArrayList<>(5);
-  for (  Image image : getLogImages()) {
+  for (  final Image image : getLogImages()) {
     if (StringUtils.isNotBlank(image.getTitle())) {
       titles.add(HtmlUtils.extractText(image.getTitle()));
     }
