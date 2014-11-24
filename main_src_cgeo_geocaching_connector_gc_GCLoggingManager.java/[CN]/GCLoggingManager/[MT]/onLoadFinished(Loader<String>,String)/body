@@ -6,6 +6,16 @@
     viewstates=GCLogin.getViewstates(page);
     trackables=GCParser.parseTrackableLog(page);
     possibleLogTypes=GCParser.parseTypes(page);
+    if (StringUtils.isBlank(cache.getGuid())) {
+      final String guid=TextUtils.getMatch(page,GCConstants.PATTERN_LOG_GUID,null);
+      if (StringUtils.isNotBlank(guid)) {
+        cache.setGuid(guid);
+        DataStore.saveChangedCache(cache);
+      }
+ else {
+        Log.w("Could not acquire GUID from log page for " + cache.getGeocode());
+      }
+    }
     hasLoaderError=possibleLogTypes.isEmpty();
   }
   activity.onLoadFinished();
