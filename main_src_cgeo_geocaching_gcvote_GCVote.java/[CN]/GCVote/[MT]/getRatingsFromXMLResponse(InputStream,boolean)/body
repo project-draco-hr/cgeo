@@ -10,8 +10,7 @@
       if (eventType == XmlPullParser.START_TAG) {
         final String tagName=xpp.getName();
         if (StringUtils.equals(tagName,"vote")) {
-          final String guid=xpp.getAttributeValue(null,"cacheId");
-          final String id=requestByGuids ? guid : xpp.getAttributeValue(null,"waypoint");
+          final String id=xpp.getAttributeValue(null,requestByGuids ? "cacheId" : "waypoint");
           final float myVote=loggedIn ? Float.parseFloat(xpp.getAttributeValue(null,"voteUser")) : 0;
           final GCVoteRating voteRating=new GCVoteRating(Float.parseFloat(xpp.getAttributeValue(null,"voteAvg")),Integer.parseInt(xpp.getAttributeValue(null,"voteCnt")),myVote);
           ratings.put(id,voteRating);
