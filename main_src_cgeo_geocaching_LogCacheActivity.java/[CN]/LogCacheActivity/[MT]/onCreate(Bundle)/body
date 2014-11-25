@@ -19,9 +19,6 @@
  else {
     setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
   }
-  tweetBox=(LinearLayout)findViewById(R.id.tweet_box);
-  tweetCheck=(CheckBox)findViewById(R.id.tweet);
-  logPasswordBox=(LinearLayout)findViewById(R.id.log_password_box);
   initializeRatingBar();
   setDefaultValues();
   if (savedInstanceState != null) {
@@ -44,7 +41,7 @@
     }
   }
   enablePostButton(false);
-  final Button typeButton=(Button)findViewById(R.id.type);
+  final Button typeButton=ButterKnife.findById(this,R.id.type);
   typeButton.setText(typeSelected.getL10n());
   typeButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View view){
@@ -52,10 +49,10 @@
     }
   }
 );
-  final Button dateButton=(Button)findViewById(R.id.date);
+  final Button dateButton=ButterKnife.findById(this,R.id.date);
   setDate(date);
   dateButton.setOnClickListener(new DateListener());
-  final EditText logView=(EditText)findViewById(R.id.log);
+  final EditText logView=ButterKnife.findById(this,R.id.log);
   if (StringUtils.isBlank(currentLogText()) && StringUtils.isNotBlank(text)) {
     logView.setText(text);
     Dialogs.moveCursorToEnd(logView);

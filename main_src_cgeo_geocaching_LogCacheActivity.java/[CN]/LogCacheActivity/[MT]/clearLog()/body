@@ -3,9 +3,9 @@
   setDefaultValues();
   setType(typeSelected);
   setDate(date);
-  final EditText logView=(EditText)findViewById(R.id.log);
+  final EditText logView=ButterKnife.findById(this,R.id.log);
   logView.setText(StringUtils.EMPTY);
-  final EditText logPasswordView=(EditText)findViewById(R.id.log_password);
+  final EditText logPasswordView=ButterKnife.findById(this,R.id.log_password);
   logPasswordView.setText(StringUtils.EMPTY);
   showToast(res.getString(R.string.info_log_cleared));
 }

@@ -1,5 +1,5 @@
 {
   date=dateIn;
-  final Button dateButton=(Button)findViewById(R.id.date);
+  final Button dateButton=ButterKnife.findById(this,R.id.date);
   dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
 }

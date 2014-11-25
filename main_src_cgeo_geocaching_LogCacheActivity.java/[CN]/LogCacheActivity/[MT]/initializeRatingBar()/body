@@ -1,7 +1,7 @@
 {
   if (GCVote.isVotingPossible(cache) && !isRatingBarShown) {
-    final RatingBar ratingBar=(RatingBar)findViewById(R.id.gcvoteRating);
-    final TextView label=(TextView)findViewById(R.id.gcvoteLabel);
+    final RatingBar ratingBar=ButterKnife.findById(this,R.id.gcvoteRating);
+    final TextView label=ButterKnife.findById(this,R.id.gcvoteLabel);
     isRatingBarShown=true;
     ratingBar.setVisibility(View.VISIBLE);
     label.setVisibility(View.VISIBLE);

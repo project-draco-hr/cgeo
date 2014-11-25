@@ -1,5 +1,5 @@
 {
-  final Button typeButton=(Button)findViewById(R.id.type);
+  final Button typeButton=ButterKnife.findById(this,R.id.type);
   typeSelected=type;
   typeButton.setText(typeSelected.getL10n());
   updateTweetBox(type);

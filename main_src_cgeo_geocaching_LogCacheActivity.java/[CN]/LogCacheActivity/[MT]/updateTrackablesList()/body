@@ -6,7 +6,7 @@
     inflater=getLayoutInflater();
   }
   actionButtons=new SparseArray<>();
-  final LinearLayout inventoryView=(LinearLayout)findViewById(R.id.inventory);
+  final LinearLayout inventoryView=ButterKnife.findById(this,R.id.inventory);
   inventoryView.removeAllViews();
   for (  final TrackableLog tb : trackables) {
     final LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.logcache_trackable_item,inventoryView,false);
@@ -26,7 +26,7 @@
 );
     final String tbCode=tb.trackCode;
     inventoryItem.setClickable(true);
-    inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener(){
+    ButterKnife.findById(inventoryItem,R.id.info).setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      final View view){
         final Intent trackablesIntent=new Intent(LogCacheActivity.this,TrackableActivity.class);
         trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,tbCode);
@@ -37,10 +37,10 @@
     inventoryView.addView(inventoryItem);
   }
   if (inventoryView.getChildCount() > 0) {
-    findViewById(R.id.inventory_box).setVisibility(View.VISIBLE);
+    ButterKnife.findById(this,R.id.inventory_box).setVisibility(View.VISIBLE);
   }
   if (inventoryView.getChildCount() > 1) {
-    final LinearLayout inventoryChangeAllView=(LinearLayout)findViewById(R.id.inventory_changeall);
+    final LinearLayout inventoryChangeAllView=ButterKnife.findById(this,R.id.inventory_changeall);
     final Button changeButton=ButterKnife.findById(inventoryChangeAllView,R.id.changebutton);
     changeButton.setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      final View view){
