@@ -6,18 +6,17 @@
       final Resources res=getResources();
       final SettingsActivity activity=SettingsActivity.this;
       final ProgressDialog dialog=ProgressDialog.show(activity,res.getString(R.string.init_maintenance),res.getString(R.string.init_maintenance_directories),true,false);
-      new Thread(){
-        @Override public void run(){
+      RxUtils.andThenOnUi(Schedulers.io(),new Action0(){
+        @Override public void call(){
           DataStore.removeObsoleteCacheDirectories();
-          activity.runOnUiThread(new Runnable(){
-            @Override public void run(){
-              dialog.dismiss();
-            }
-          }
-);
         }
       }
-.start();
+,new Action0(){
+        @Override public void call(){
+          dialog.dismiss();
+        }
+      }
+);
       return true;
     }
   }

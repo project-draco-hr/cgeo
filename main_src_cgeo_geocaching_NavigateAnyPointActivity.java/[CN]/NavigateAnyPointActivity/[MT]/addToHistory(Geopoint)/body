@@ -5,16 +5,17 @@
   final Destination loc=new Destination(coords);
   if (!getHistoryOfSearchedLocations().contains(loc)) {
     getHistoryOfSearchedLocations().add(0,loc);
-    new AsyncTask<Void,Void,Void>(){
-      @Override protected Void doInBackground(      final Void... params){
+    RxUtils.andThenOnUi(Schedulers.io(),new Action0(){
+      @Override public void call(){
         DataStore.saveSearchedDestination(loc);
-        return null;
       }
-      @Override protected void onPostExecute(      final Void v){
+    }
+,new Action0(){
+      @Override public void call(){
         historyListView.removeFooterView(getEmptyHistoryFooter());
         destinationHistoryAdapter.notifyDataSetChanged();
       }
     }
-.execute();
+);
   }
 }

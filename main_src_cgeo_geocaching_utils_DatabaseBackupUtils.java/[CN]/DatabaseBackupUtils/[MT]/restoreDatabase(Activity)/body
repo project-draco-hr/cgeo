@@ -2,22 +2,21 @@
   final Resources res=activity.getResources();
   final ProgressDialog dialog=ProgressDialog.show(activity,res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_running),true,false);
   final AtomicBoolean restoreSuccessful=new AtomicBoolean(false);
-  new Thread(){
-    @Override public void run(){
+  RxUtils.andThenOnUi(Schedulers.io(),new Action0(){
+    @Override public void call(){
       restoreSuccessful.set(DataStore.restoreDatabaseInternal());
-      activity.runOnUiThread(new Runnable(){
-        @Override public void run(){
-          dialog.dismiss();
-          boolean restored=restoreSuccessful.get();
-          String message=restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-          Dialogs.message(activity,R.string.init_backup_restore,message);
-          if (activity instanceof MainActivity) {
-            ((MainActivity)activity).updateCacheCounter();
-          }
-        }
-      }
-);
     }
   }
-.start();
+,new Action0(){
+    @Override public void call(){
+      dialog.dismiss();
+      boolean restored=restoreSuccessful.get();
+      String message=restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+      Dialogs.message(activity,R.string.init_backup_restore,message);
+      if (activity instanceof MainActivity) {
+        ((MainActivity)activity).updateCacheCounter();
+      }
+    }
+  }
+);
 }
