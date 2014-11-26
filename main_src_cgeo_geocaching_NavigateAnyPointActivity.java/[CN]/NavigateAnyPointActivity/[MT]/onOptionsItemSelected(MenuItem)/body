@@ -1,15 +1,12 @@
 {
   final int menuItem=item.getItemId();
-  final Geopoint coords=getDestination();
-  if (coords != null) {
-    addToHistory(coords);
-  }
+  final Geopoint coords=getDestinationAndAddToHistory();
 switch (menuItem) {
 case R.id.menu_default_navigation:
-    navigateTo();
+    navigateTo(coords);
   return true;
 case R.id.menu_caches_around:
-cachesAround();
+cachesAround(coords);
 return true;
 case R.id.menu_clear_history:
 clearHistory();
