@@ -9,8 +9,5 @@
 ));
     return null;
   }
-  if (view == null) {
-    return drawable.toBlocking().lastOrDefault(null);
-  }
-  return getContainerDrawable(drawable);
+  return view == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(drawable);
 }

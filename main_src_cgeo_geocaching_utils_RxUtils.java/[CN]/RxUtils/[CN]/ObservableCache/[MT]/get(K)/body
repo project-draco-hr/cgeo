@@ -1,0 +1,8 @@
+{
+  if (cached.containsKey(key)) {
+    return cached.get(key);
+  }
+  final Observable<V> value=func.call(key).replay().refCount();
+  cached.put(key,value);
+  return value;
+}
