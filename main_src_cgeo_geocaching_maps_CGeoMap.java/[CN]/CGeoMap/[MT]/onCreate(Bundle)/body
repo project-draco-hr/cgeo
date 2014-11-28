@@ -76,6 +76,16 @@
     initMyLocationSwitchButton(locSwitch);
   }
   prepareFilterBar();
+  final View overflowActionBar=ButterKnife.findById(activity,R.id.overflowActionBar);
+  if (overflowActionBar != null) {
+    honeycombMenu=true;
+    overflowActionBar.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      final View v){
+        showPopupHoneycomb(v);
+      }
+    }
+);
+  }
   if (!app.isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
     LiveMapInfoDialogBuilder.create(activity).show();
   }

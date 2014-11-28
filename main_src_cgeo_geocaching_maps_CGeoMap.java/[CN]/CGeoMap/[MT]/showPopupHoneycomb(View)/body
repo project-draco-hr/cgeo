@@ -1,0 +1,14 @@
+{
+  final android.widget.PopupMenu popupMenu=new android.widget.PopupMenu(getActivity(),view);
+  final MenuInflater inflater=new MenuInflater(getActivity());
+  inflater.inflate(R.menu.map_activity,popupMenu.getMenu());
+  onCreateOptionsMenu(popupMenu.getMenu());
+  onPrepareOptionsMenu(popupMenu.getMenu());
+  popupMenu.setOnMenuItemClickListener(new android.widget.PopupMenu.OnMenuItemClickListener(){
+    @Override public boolean onMenuItemClick(    final MenuItem item){
+      return onOptionsItemSelected(item);
+    }
+  }
+);
+  popupMenu.show();
+}
