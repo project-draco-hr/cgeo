@@ -1,0 +1,4 @@
+{
+  final String result=Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"));
+  return TextUtils.getMatch(result,GCConstants.PATTERN_HOME_LOCATION,null);
+}
