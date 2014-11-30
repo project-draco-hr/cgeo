@@ -23,7 +23,7 @@
         return ImmutablePair.of(geoData,fixDirection(geoData,direction));
       }
     }
-),windowDuration,unit).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData,Float>>(){
+),windowDuration,unit).onBackpressureDrop().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData,Float>>(){
       @Override public void call(      final ImmutablePair<GeoData,Float> geoDir){
         updateGeoDir(geoDir.left,geoDir.right);
       }
