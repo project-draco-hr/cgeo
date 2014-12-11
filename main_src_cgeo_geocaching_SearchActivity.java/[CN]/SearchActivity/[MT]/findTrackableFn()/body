@@ -1,5 +1,5 @@
 {
-  final String trackableText=StringUtils.trim(trackableEditText.getText().toString());
+  final String trackableText=StringUtils.trimToEmpty(trackableEditText.getText().toString());
   if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
     Dialogs.message(this,R.string.warn_search_help_title,R.string.warn_search_help_tb);
     return;
