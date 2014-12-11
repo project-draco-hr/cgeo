@@ -55,12 +55,7 @@ title=listNameMemento.rememberTerm(address);
  else {
 title=coords.toString();
 }
-if (coords != null) {
 loader=new CoordsGeocacheListLoader(app,coords);
-}
- else {
-loader=new AddressGeocacheListLoader(app,address);
-}
 break;
 case FINDER:
 final String username=extras.getString(Intents.EXTRA_USERNAME);

@@ -1,6 +1,6 @@
 {
-  final AndroidGeocoder geocoder=new AndroidGeocoder(this);
-  AndroidObservable.bindActivity(this,geocoder.getFromLocationName(keyword).toList()).subscribe(new Action1<List<Address>>(){
+  final Observable<Address> geocoderObservable=new AndroidGeocoder(this).getFromLocationName(keyword).onErrorResumeNext(GCGeocoder.getFromLocationName(keyword));
+  AndroidObservable.bindActivity(this,geocoderObservable.toList()).subscribe(new Action1<List<Address>>(){
     @Override public void call(    final List<Address> addresses){
       waitDialog.dismiss();
       for (      final Address address : addresses) {
@@ -11,7 +11,7 @@
 ,new Action1<Throwable>(){
     @Override public void call(    final Throwable throwable){
       finish();
-      CacheListActivity.startActivityAddress(AddressListActivity.this,null,keyword);
+      showToast(res.getString(R.string.err_unknown_address));
     }
   }
 );

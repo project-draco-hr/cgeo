@@ -1,13 +1,8 @@
 {
   super.onCreate(savedInstanceState,R.layout.addresslist_activity);
-  final String keyword=getIntent().getStringExtra(Intents.EXTRA_KEYWORD);
-  if (keyword == null) {
-    showToast(res.getString(R.string.err_search_address_forgot));
-    finish();
-    return;
-  }
   final AddressListAdapter adapter=new AddressListAdapter(this);
   setListAdapter(adapter);
+  final String keyword=getIntent().getStringExtra(Intents.EXTRA_KEYWORD);
   final ProgressDialog waitDialog=ProgressDialog.show(this,res.getString(R.string.search_address_started),keyword,true);
   waitDialog.setCancelable(true);
   lookupAddressInBackground(keyword,adapter,waitDialog);
