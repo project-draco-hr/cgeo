@@ -1,0 +1,23 @@
+{
+  final String content=StringUtils.trimToNull(mapquestAddress.path(adminArea).asText());
+switch (adminAreaType) {
+case "City":
+    address.setLocality(content);
+  break;
+case "Neighborhood":
+address.setSubLocality(content);
+break;
+case "PostalCode":
+address.setPostalCode(content);
+break;
+case "State":
+address.setAdminArea(content);
+break;
+case "County":
+address.setSubAdminArea(content);
+break;
+case "Country":
+address.setCountryCode(content);
+break;
+}
+}

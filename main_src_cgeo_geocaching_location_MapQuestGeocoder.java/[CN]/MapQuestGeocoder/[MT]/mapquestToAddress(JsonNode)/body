@@ -1,0 +1,17 @@
+{
+  final Address address=new Address(Locale.getDefault());
+  for (int i=1; i <= 6; i++) {
+    final String adminAreaName="adminArea" + i;
+    setComponent(address,mapquestAddress,adminAreaName,mapquestAddress.path(adminAreaName + "Type").asText());
+  }
+  setComponent(address,mapquestAddress,"postalCode","PostalCode");
+  int index=0;
+  for (  final String addressComponent : new String[]{mapquestAddress.path("street").asText(),address.getSubLocality(),address.getLocality(),address.getPostalCode(),address.getSubAdminArea(),address.getAdminArea(),address.getCountryCode()}) {
+    if (StringUtils.isNotBlank(addressComponent)) {
+      address.setAddressLine(index++,addressComponent);
+    }
+  }
+  address.setLatitude(mapquestAddress.get("latLng").get("lat").asDouble());
+  address.setLongitude(mapquestAddress.get("latLng").get("lng").asDouble());
+  return address;
+}

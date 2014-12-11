@@ -1,5 +1,5 @@
 {
-  final Observable<Address> geocoderObservable=new AndroidGeocoder(this).getFromLocationName(keyword).onErrorResumeNext(GCGeocoder.getFromLocationName(keyword));
+  final Observable<Address> geocoderObservable=new AndroidGeocoder(this).getFromLocationName(keyword).onErrorResumeNext(MapQuestGeocoder.getFromLocationName(keyword)).onErrorResumeNext(GCGeocoder.getFromLocationName(keyword));
   AndroidObservable.bindActivity(this,geocoderObservable.toList()).subscribe(new Action1<List<Address>>(){
     @Override public void call(    final List<Address> addresses){
       waitDialog.dismiss();
