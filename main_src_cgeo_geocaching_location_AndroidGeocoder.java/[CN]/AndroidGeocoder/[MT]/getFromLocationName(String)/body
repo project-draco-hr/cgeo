@@ -1,0 +1,18 @@
+{
+  return Observable.defer(new Func0<Observable<Address>>(){
+    @Override public Observable<Address> call(){
+      try {
+        final List<Address> addresses=geocoder.getFromLocationName(keyword,20);
+        if (CollectionUtils.isEmpty(addresses)) {
+          return Observable.error(new RuntimeException("no result from Android geocoder"));
+        }
+        return Observable.from(addresses);
+      }
+ catch (      final Exception e) {
+        Log.i("Unable to use Android geocoder: " + e.getMessage());
+        return Observable.error(e);
+      }
+    }
+  }
+).subscribeOn(RxUtils.networkScheduler);
+}

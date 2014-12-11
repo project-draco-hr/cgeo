@@ -1,21 +1,18 @@
 {
-  new AsyncTask<Void,Void,List<Address>>(){
-    @Override protected List<Address> doInBackground(    final Void... params){
-      final Geocoder geocoder=new Geocoder(AddressListActivity.this);
-      return geocoder.getFromLocationName(keyword);
-    }
-    @Override protected void onPostExecute(    final List<Address> addresses){
+  final AndroidGeocoder geocoder=new AndroidGeocoder(this);
+  AndroidObservable.bindActivity(this,geocoder.getFromLocationName(keyword).toList()).subscribe(new Action1<List<Address>>(){
+    @Override public void call(    final List<Address> addresses){
       waitDialog.dismiss();
-      if (CollectionUtils.isNotEmpty(addresses)) {
-        for (        final Address address : addresses) {
-          adapter.add(address);
-        }
-      }
- else {
-        finish();
-        CacheListActivity.startActivityAddress(AddressListActivity.this,null,keyword);
+      for (      final Address address : addresses) {
+        adapter.add(address);
       }
     }
   }
-.execute();
+,new Action1<Throwable>(){
+    @Override public void call(    final Throwable throwable){
+      finish();
+      CacheListActivity.startActivityAddress(AddressListActivity.this,null,keyword);
+    }
+  }
+);
 }
