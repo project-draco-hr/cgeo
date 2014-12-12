@@ -1,0 +1,6 @@
+{
+  final Address address=addressObservable.toBlocking().first();
+  assertThat(address.getLatitude()).as("latitude for " + geocoder + " geocoder").isCloseTo(TEST_LATITUDE,TEST_OFFSET);
+  assertThat(address.getLongitude()).as("longitude for " + geocoder + " geocoder").isCloseTo(TEST_LONGITUDE,TEST_OFFSET);
+  assertThat(StringUtils.lowerCase(address.getAddressLine(0))).as("street address for " + geocoder + " geocoder").startsWith("46 rue barrault");
+}
