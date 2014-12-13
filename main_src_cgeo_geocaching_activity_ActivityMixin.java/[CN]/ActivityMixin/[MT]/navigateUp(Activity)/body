@@ -4,7 +4,7 @@
     activity.finish();
     return true;
   }
-  if (NavUtils.shouldUpRecreateTask(activity,upIntent)) {
+  if (NavUtils.shouldUpRecreateTask(activity,upIntent) || activity.isTaskRoot()) {
     TaskStackBuilder.create(activity).addNextIntentWithParentStack(upIntent).startActivities();
   }
  else {
