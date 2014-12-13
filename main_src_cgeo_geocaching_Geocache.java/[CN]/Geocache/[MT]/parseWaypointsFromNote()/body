@@ -1,7 +1,10 @@
 {
+  boolean changed=false;
   for (  final Waypoint waypoint : Waypoint.parseWaypointsFromNote(StringUtils.defaultString(getPersonalNote()))) {
     if (!hasIdenticalWaypoint(waypoint.getCoords())) {
       addOrChangeWaypoint(waypoint,false);
+      changed=true;
     }
   }
+  return changed;
 }

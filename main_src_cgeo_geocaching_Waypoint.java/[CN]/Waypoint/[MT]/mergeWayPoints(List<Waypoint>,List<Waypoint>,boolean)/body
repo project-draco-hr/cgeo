@@ -9,9 +9,7 @@
       newPrefixes.get(prefix).merge(oldWaypoint);
     }
  else     if (oldWaypoint.isUserDefined() || forceMerge) {
-      if (!isPersonalNoteWaypoint(oldWaypoint)) {
-        newPoints.add(oldWaypoint);
-      }
+      newPoints.add(oldWaypoint);
     }
   }
 }
