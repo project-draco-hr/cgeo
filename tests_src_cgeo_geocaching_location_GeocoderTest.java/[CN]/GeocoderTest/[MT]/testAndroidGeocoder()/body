@@ -1,3 +1,5 @@
 {
-  testGeocoder(new AndroidGeocoder(CgeoApplication.getInstance()).getFromLocationName(TEST_ADDRESS),"Android");
+  if (Geocoder.isPresent()) {
+    testGeocoder(new AndroidGeocoder(CgeoApplication.getInstance()).getFromLocationName(TEST_ADDRESS),"Android");
+  }
 }
