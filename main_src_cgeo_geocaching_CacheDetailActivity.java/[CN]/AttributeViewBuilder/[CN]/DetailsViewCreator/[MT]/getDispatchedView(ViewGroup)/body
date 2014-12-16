@@ -33,9 +33,7 @@
   details.addDifficulty(cache);
   details.addTerrain(cache);
   details.addRating(cache);
-  if (cache.getFavoritePoints() > 0) {
-    details.add(R.string.cache_favorite,cache.getFavoritePoints() + "??");
-  }
+  favoriteLine=details.add(R.string.cache_favorite,"");
   if (cache.getMyVote() > 0) {
     details.addStars(R.string.cache_own_rating,cache.getMyVote());
   }
