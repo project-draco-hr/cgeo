@@ -5,5 +5,5 @@
   lastValueView=ButterKnife.findById(layout,R.id.value);
   lastValueView.setText(value);
   parentView.addView(layout);
-  return lastValueView;
+  return ImmutablePair.of(layout,lastValueView);
 }

@@ -24,4 +24,11 @@
     buttonRemove.setEnabled(false);
     buttonRemove.setVisibility(View.GONE);
   }
+  if (cache.getFavoritePoints() > 0) {
+    favoriteLine.left.setVisibility(View.VISIBLE);
+    favoriteLine.right.setText(cache.getFavoritePoints() + "??");
+  }
+ else {
+    favoriteLine.left.setVisibility(View.GONE);
+  }
 }

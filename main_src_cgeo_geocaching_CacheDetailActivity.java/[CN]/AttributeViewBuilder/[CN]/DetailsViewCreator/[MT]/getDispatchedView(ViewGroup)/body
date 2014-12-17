@@ -23,24 +23,22 @@
   if (cache.isArchived()) {
     span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
-  addContextMenu(details.add(R.string.cache_name,span));
+  addContextMenu(details.add(R.string.cache_name,span).right);
   details.add(R.string.cache_type,cache.getType().getL10n());
   details.addSize(cache);
-  addContextMenu(details.add(R.string.cache_geocode,cache.getGeocode()));
+  addContextMenu(details.add(R.string.cache_geocode,cache.getGeocode()).right);
   details.addCacheState(cache);
   details.addDistance(cache,cacheDistanceView);
   cacheDistanceView=details.getValueView();
   details.addDifficulty(cache);
   details.addTerrain(cache);
   details.addRating(cache);
-  if (cache.getFavoritePoints() > 0) {
-    details.add(R.string.cache_favorite,cache.getFavoritePoints() + "??");
-  }
+  favoriteLine=details.add(R.string.cache_favorite,"");
   if (cache.getMyVote() > 0) {
     details.addStars(R.string.cache_own_rating,cache.getMyVote());
   }
   if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
-    final TextView ownerView=details.add(R.string.cache_owner,"");
+    final TextView ownerView=details.add(R.string.cache_owner,"").right;
     if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
       ownerView.setText(cache.getOwnerDisplayName(),TextView.BufferType.SPANNABLE);
     }
@@ -57,7 +55,7 @@
     details.add(R.string.cache_location,cache.getLocation());
   }
   if (cache.getCoords() != null) {
-    final TextView valueView=details.add(R.string.cache_coordinates,cache.getCoords().toString());
+    final TextView valueView=details.add(R.string.cache_coordinates,cache.getCoords().toString()).right;
     valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
     addContextMenu(valueView);
   }
