@@ -18,12 +18,7 @@
         }
       }
 ));
-      subscriber.add(subject.subscribe(new Action1<GeoData>(){
-        @Override public void call(        final GeoData geoData){
-          subscriber.onNext(geoData);
-        }
-      }
-));
+      subscriber.add(subject.subscribe(Subscribers.from(subscriber)));
     }
   }
 );
