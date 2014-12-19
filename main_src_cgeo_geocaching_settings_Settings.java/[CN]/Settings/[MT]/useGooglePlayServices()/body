@@ -1,3 +1,3 @@
 {
-  return CgeoApplication.getInstance().isGooglePlayServicesAvailable() && getBoolean(R.string.pref_googleplayservices,true);
+  return CgeoApplication.getInstance().isGooglePlayServicesAvailable() && getBoolean(R.string.pref_googleplayservices,VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH);
 }
