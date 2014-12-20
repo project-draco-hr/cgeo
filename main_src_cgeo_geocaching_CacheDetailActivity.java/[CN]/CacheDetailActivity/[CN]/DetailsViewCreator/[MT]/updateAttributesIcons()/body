@@ -1,0 +1,16 @@
+{
+  final GridView gridView=ButterKnife.findById(view,R.id.attributes_grid);
+  final List<String> attributes=cache.getAttributes();
+  if (attributes.isEmpty()) {
+    gridView.setVisibility(View.GONE);
+    return;
+  }
+  gridView.setAdapter(new AttributesGridAdapter(CacheDetailActivity.this,cache));
+  gridView.setVisibility(View.VISIBLE);
+  gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+    @Override public void onItemClick(    final android.widget.AdapterView<?> parent,    final View view,    final int position,    final long id){
+      toggleAttributesView();
+    }
+  }
+);
+}

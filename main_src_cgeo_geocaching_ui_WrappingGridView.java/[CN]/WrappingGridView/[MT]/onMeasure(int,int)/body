@@ -1,0 +1,7 @@
+{
+  int heightSpec=heightMeasureSpec;
+  if (getLayoutParams().height == android.view.ViewGroup.LayoutParams.WRAP_CONTENT) {
+    heightSpec=MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,MeasureSpec.AT_MOST);
+  }
+  super.onMeasure(widthMeasureSpec,heightSpec);
+}

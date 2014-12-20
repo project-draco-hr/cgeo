@@ -1,0 +1,91 @@
+{
+  if (cache == null) {
+    return null;
+  }
+  view=(ScrollView)getLayoutInflater().inflate(R.layout.cachedetail_details_page,parentView,false);
+  AndroidObservable.bindActivity(CacheDetailActivity.this,previewMap).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<BitmapDrawable>(){
+    @Override public void call(    final BitmapDrawable image){
+      final Bitmap bitmap=image.getBitmap();
+      if (bitmap != null && bitmap.getWidth() > 10) {
+        final ImageView imageView=ButterKnife.findById(view,R.id.map_preview);
+        imageView.setImageDrawable(image);
+        view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
+      }
+    }
+  }
+);
+  detailsList=ButterKnife.findById(view,R.id.details_list);
+  final CacheDetailsCreator details=new CacheDetailsCreator(CacheDetailActivity.this,detailsList);
+  final Spannable span=(new Spannable.Factory()).newSpannable(cache.getName());
+  if (cache.isDisabled() || cache.isArchived()) {
+    span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+  }
+  if (cache.isArchived()) {
+    span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+  }
+  addContextMenu(details.add(R.string.cache_name,span).right);
+  details.add(R.string.cache_type,cache.getType().getL10n());
+  details.addSize(cache);
+  addContextMenu(details.add(R.string.cache_geocode,cache.getGeocode()).right);
+  details.addCacheState(cache);
+  details.addDistance(cache,cacheDistanceView);
+  cacheDistanceView=details.getValueView();
+  details.addDifficulty(cache);
+  details.addTerrain(cache);
+  details.addRating(cache);
+  favoriteLine=details.add(R.string.cache_favorite,"");
+  if (cache.getMyVote() > 0) {
+    details.addStars(R.string.cache_own_rating,cache.getMyVote());
+  }
+  if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
+    final TextView ownerView=details.add(R.string.cache_owner,"").right;
+    if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
+      ownerView.setText(cache.getOwnerDisplayName(),TextView.BufferType.SPANNABLE);
+    }
+ else {
+      ownerView.setText(cache.getOwnerUserId(),TextView.BufferType.SPANNABLE);
+    }
+    ownerView.setOnClickListener(new OwnerActionsClickListener(cache));
+  }
+  final TextView hiddenView=details.addHiddenDate(cache);
+  if (hiddenView != null) {
+    addContextMenu(hiddenView);
+  }
+  if (StringUtils.isNotBlank(cache.getLocation())) {
+    details.add(R.string.cache_location,cache.getLocation());
+  }
+  if (cache.getCoords() != null) {
+    final TextView valueView=details.add(R.string.cache_coordinates,cache.getCoords().toString()).right;
+    valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
+    addContextMenu(valueView);
+  }
+  updateAttributesText();
+  updateAttributesIcons();
+  updateOfflineBox(view,cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
+  final Button buttonWatchlistAdd=ButterKnife.findById(view,R.id.add_to_watchlist);
+  final Button buttonWatchlistRemove=ButterKnife.findById(view,R.id.remove_from_watchlist);
+  buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
+  buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
+  updateWatchlistBox();
+  final Button buttonFavPointAdd=ButterKnife.findById(view,R.id.add_to_favpoint);
+  final Button buttonFavPointRemove=ButterKnife.findById(view,R.id.remove_from_favpoint);
+  buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
+  buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
+  updateFavPointBox();
+  final Button buttonChangeList=ButterKnife.findById(view,R.id.change_list);
+  buttonChangeList.setOnClickListener(new ChangeListClickListener());
+  updateListBox();
+  final IConnector connector=ConnectorFactory.getConnector(cache);
+  final String license=connector.getLicenseText(cache);
+  if (StringUtils.isNotBlank(license)) {
+    view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
+    final TextView licenseView=(ButterKnife.findById(view,R.id.license));
+    licenseView.setText(Html.fromHtml(license),BufferType.SPANNABLE);
+    licenseView.setClickable(true);
+    licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+  }
+ else {
+    view.findViewById(R.id.license_box).setVisibility(View.GONE);
+  }
+  return view;
+}

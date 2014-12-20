@@ -1,0 +1,28 @@
+{
+  final TextView attribView=ButterKnife.findById(view,R.id.attributes_text);
+  final List<String> attributes=cache.getAttributes();
+  if (attributes.isEmpty()) {
+    attribView.setVisibility(View.GONE);
+    return;
+  }
+  final StringBuilder text=new StringBuilder();
+  for (  String attributeName : attributes) {
+    final boolean enabled=CacheAttribute.isEnabled(attributeName);
+    final CacheAttribute attrib=CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+    if (attrib != null) {
+      attributeName=attrib.getL10n(enabled);
+    }
+    if (text.length() > 0) {
+      text.append('\n');
+    }
+    text.append(attributeName);
+  }
+  attribView.setText(text);
+  attribView.setVisibility(View.GONE);
+  attribView.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    final View v){
+      toggleAttributesView();
+    }
+  }
+);
+}

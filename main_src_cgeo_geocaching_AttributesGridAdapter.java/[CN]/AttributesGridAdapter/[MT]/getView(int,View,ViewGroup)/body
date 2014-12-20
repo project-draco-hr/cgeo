@@ -1,0 +1,11 @@
+{
+  final FrameLayout attributeLayout;
+  if (convertView == null) {
+    attributeLayout=(FrameLayout)inflater.inflate(R.layout.attribute_image,parent,false);
+  }
+ else {
+    attributeLayout=(FrameLayout)convertView;
+  }
+  drawAttribute(attributeLayout,attributes.get(position));
+  return attributeLayout;
+}
