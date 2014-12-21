@@ -3,7 +3,7 @@
   if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
     gp=new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
   }
-  final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(null,gp,app.currentGeo());
+  final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(null,gp,Sensors.getInstance().currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
 }

@@ -18,12 +18,12 @@
     if (dataObject == null) {
       throw new ParserException("No data inside JSON");
     }
-    Map<String,List<UTFGridPosition>> positions=new HashMap<>();
-    Map<String,List<UTFGridPosition>> singlePositions=new HashMap<>();
+    final Map<String,List<UTFGridPosition>> positions=new HashMap<>();
+    final Map<String,List<UTFGridPosition>> singlePositions=new HashMap<>();
     for (    final JsonNode rawKey : keys) {
       final String key=rawKey.asText();
       if (StringUtils.isNotBlank(key)) {
-        UTFGridPosition pos=UTFGridPosition.fromString(key);
+        final UTFGridPosition pos=UTFGridPosition.fromString(key);
         final ArrayNode dataForKey=(ArrayNode)dataObject.get(key);
         for (        final JsonNode cacheInfo : dataForKey) {
           final String id=cacheInfo.get("i").asText();
@@ -44,18 +44,18 @@
       }
     }
     final ArrayList<Geocache> caches=new ArrayList<>();
-    for (    Entry<String,List<UTFGridPosition>> entry : positions.entrySet()) {
-      String id=entry.getKey();
-      List<UTFGridPosition> pos=entry.getValue();
-      UTFGridPosition xy=UTFGrid.getPositionInGrid(pos);
-      Geocache cache=new Geocache();
+    for (    final Entry<String,List<UTFGridPosition>> entry : positions.entrySet()) {
+      final String id=entry.getKey();
+      final List<UTFGridPosition> pos=entry.getValue();
+      final UTFGridPosition xy=UTFGrid.getPositionInGrid(pos);
+      final Geocache cache=new Geocache();
       cache.setDetailed(false);
       cache.setReliableLatLon(false);
       cache.setGeocode(id);
       cache.setName(nameCache.get(id));
       cache.setCoords(tile.getCoord(xy),tile.getZoomLevel());
       if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
-        for (        UTFGridPosition singlePos : singlePositions.get(id)) {
+        for (        final UTFGridPosition singlePos : singlePositions.get(id)) {
           if (IconDecoder.parseMapPNG(cache,bitmap,singlePos,tile.getZoomLevel())) {
             break;
           }

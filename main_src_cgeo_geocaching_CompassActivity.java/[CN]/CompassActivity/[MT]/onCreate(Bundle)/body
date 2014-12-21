@@ -1,11 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.compass_activity);
   ButterKnife.inject(this);
-  final SensorManager sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
-  hasMagneticFieldSensor=sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
-  if (!hasMagneticFieldSensor) {
-    Settings.setUseCompass(false);
-  }
   final Bundle extras=getIntent().getExtras();
   if (extras == null) {
     finish();
@@ -20,9 +15,7 @@
     setTarget(DataStore.loadWaypoint(waypointId));
   }
  else   if (extras.containsKey(Intents.EXTRA_COORDS)) {
-    final Geopoint coords=extras.getParcelable(Intents.EXTRA_COORDS);
-    final String description=extras.getString(Intents.EXTRA_DESCRIPTION);
-    setTarget(coords,description);
+    setTarget(extras.<Geopoint>getParcelable(Intents.EXTRA_COORDS),extras.getString(Intents.EXTRA_DESCRIPTION));
   }
  else {
     setTarget(cache);

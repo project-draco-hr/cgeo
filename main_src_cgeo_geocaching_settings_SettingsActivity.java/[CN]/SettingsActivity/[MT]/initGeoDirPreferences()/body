@@ -1,8 +1,9 @@
 {
+  final Sensors sensors=Sensors.getInstance();
   final Preference playServices=getPreference(R.string.pref_googleplayservices);
   playServices.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    final Preference preference,    final Object newValue){
-      CgeoApplication.getInstance().setupGeoDataObservables((Boolean)newValue,Settings.useLowPowerMode());
+      sensors.setupGeoDataObservables((Boolean)newValue,Settings.useLowPowerMode());
       return true;
     }
   }
@@ -10,10 +11,9 @@
   playServices.setEnabled(CgeoApplication.getInstance().isGooglePlayServicesAvailable());
   getPreference(R.string.pref_lowpowermode).setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    final Preference preference,    final Object newValue){
-      final CgeoApplication app=CgeoApplication.getInstance();
       final Boolean useLowPower=(Boolean)newValue;
-      app.setupGeoDataObservables(Settings.useGooglePlayServices(),useLowPower);
-      app.setupDirectionObservable(useLowPower);
+      sensors.setupGeoDataObservables(Settings.useGooglePlayServices(),useLowPower);
+      sensors.setupDirectionObservable(useLowPower);
       return true;
     }
   }

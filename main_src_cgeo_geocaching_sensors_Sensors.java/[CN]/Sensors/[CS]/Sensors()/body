@@ -1,0 +1,5 @@
+{
+  gpsStatusObservable=GpsStatusProvider.create(app).replay(1).refCount();
+  final SensorManager sensorManager=(SensorManager)app.getSystemService(Context.SENSOR_SERVICE);
+  hasMagneticFieldSensor=sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
+}

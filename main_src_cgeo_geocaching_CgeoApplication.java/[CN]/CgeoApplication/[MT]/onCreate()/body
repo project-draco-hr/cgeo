@@ -13,8 +13,8 @@
     isGooglePlayServicesAvailable=true;
   }
   Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
-  setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
-  setupDirectionObservable(Settings.useLowPowerMode());
-  gpsStatusObservable=GpsStatusProvider.create(this).replay(1).refCount();
-  geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe();
+  final Sensors sensors=Sensors.getInstance();
+  sensors.setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
+  sensors.setupDirectionObservable(Settings.useLowPowerMode());
+  sensors.geoDataObservable(true).subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe();
 }

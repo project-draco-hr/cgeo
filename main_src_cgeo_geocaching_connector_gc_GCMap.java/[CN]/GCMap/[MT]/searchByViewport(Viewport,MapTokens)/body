@@ -1,12 +1,12 @@
 {
-  int speed=(int)CgeoApplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000;
+  final int speed=(int)Sensors.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000;
   Strategy strategy=Settings.getLiveMapStrategy();
   if (strategy == Strategy.AUTO) {
     strategy=speed >= 30 ? Strategy.FAST : Strategy.DETAILED;
   }
-  SearchResult result=searchByViewport(viewport,tokens,strategy);
+  final SearchResult result=searchByViewport(viewport,tokens,strategy);
   if (Settings.isDebug()) {
-    StringBuilder text=new StringBuilder(Formatter.SEPARATOR).append(strategy.getL10n()).append(Formatter.SEPARATOR).append(Units.getSpeed(speed));
+    final StringBuilder text=new StringBuilder(Formatter.SEPARATOR).append(strategy.getL10n()).append(Formatter.SEPARATOR).append(Units.getSpeed(speed));
     result.setUrl(result.getUrl() + text);
   }
   return result;

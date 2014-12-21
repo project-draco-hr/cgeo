@@ -1,5 +1,4 @@
 {
-  final CgeoApplication app=CgeoApplication.getInstance();
-  final GeoData geo=app.currentGeo();
-  geoDirHandler.updateGeoDir(geo,app.currentDirection());
+  final Sensors sensors=Sensors.getInstance();
+  geoDirHandler.updateGeoDir(sensors.currentGeo(),sensors.currentDirection());
 }

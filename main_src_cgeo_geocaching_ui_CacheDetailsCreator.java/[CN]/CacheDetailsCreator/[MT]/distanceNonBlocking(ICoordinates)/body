@@ -2,5 +2,5 @@
   if (target.getCoords() == null) {
     return null;
   }
-  return CgeoApplication.getInstance().currentGeo().getCoords().distanceTo(target);
+  return Sensors.getInstance().currentGeo().getCoords().distanceTo(target);
 }

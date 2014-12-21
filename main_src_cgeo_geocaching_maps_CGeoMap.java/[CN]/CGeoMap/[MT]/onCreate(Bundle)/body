@@ -2,7 +2,6 @@
   super.onCreate(savedInstanceState);
   res=this.getResources();
   activity=this.getActivity();
-  app=(CgeoApplication)activity.getApplication();
   final MapProvider mapProvider=Settings.getMapProvider();
   mapItemFactory=mapProvider.getMapItemFactory();
   final Bundle extras=activity.getIntent().getExtras();
@@ -86,7 +85,7 @@
     }
 );
   }
-  if (!app.isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
+  if (!CgeoApplication.getInstance().isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
     LiveMapInfoDialogBuilder.create(activity).show();
   }
 }

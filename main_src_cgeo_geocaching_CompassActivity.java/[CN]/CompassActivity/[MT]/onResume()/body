@@ -1,4 +1,4 @@
 {
-  super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
+  super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
   forceRefresh();
 }

@@ -1,5 +1,5 @@
 {
-  final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(null,null,app.currentGeo());
+  final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(null,null,Sensors.getInstance().currentGeo());
   coordsDialog.setCancelable(true);
   coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
 }

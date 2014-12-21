@@ -2,7 +2,7 @@
   if (myLocSwitch != null) {
     myLocSwitch.setChecked(followMyLocation);
     if (followMyLocation) {
-      myLocationInMiddle(app.currentGeo());
+      myLocationInMiddle(Sensors.getInstance().currentGeo());
     }
   }
 }

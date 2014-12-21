@@ -1,0 +1,15 @@
+{
+  if (useGooglePlayServices) {
+    geoDataObservable=LocationProvider.getMostPrecise(app).doOnNext(rememberGeodataAction);
+    if (useLowPowerLocation) {
+      geoDataObservableLowPower=LocationProvider.getLowPower(app).doOnNext(rememberGeodataAction);
+    }
+ else {
+      geoDataObservableLowPower=geoDataObservable;
+    }
+  }
+ else {
+    geoDataObservable=RxUtils.rememberLast(GeoDataProvider.create(app).doOnNext(rememberGeodataAction));
+    geoDataObservableLowPower=geoDataObservable;
+  }
+}

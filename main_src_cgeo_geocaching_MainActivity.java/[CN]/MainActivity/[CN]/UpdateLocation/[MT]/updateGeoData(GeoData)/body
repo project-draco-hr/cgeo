@@ -28,8 +28,7 @@
           try {
             addCoords=geo.getCoords();
             final Geocoder geocoder=new Geocoder(MainActivity.this,Locale.getDefault());
-            final Geopoint coords=app.currentGeo().getCoords();
-            final List<Address> addresses=geocoder.getFromLocation(coords.getLatitude(),coords.getLongitude(),1);
+            final List<Address> addresses=geocoder.getFromLocation(addCoords.getLatitude(),addCoords.getLongitude(),1);
             if (!addresses.isEmpty()) {
               subscriber.onNext(formatAddress(addresses.get(0)));
             }

@@ -1,6 +1,6 @@
 {
   setDestCoords(coords);
-  setTargetDescription(description);
-  updateDistanceInfo(app.currentGeo());
-  Log.d("destination set: " + description + " ("+ dstCoords+ ")");
+  setTargetDescription(newDescription);
+  updateDistanceInfo(Sensors.getInstance().currentGeo());
+  Log.d("destination set: " + newDescription + " ("+ dstCoords+ ")");
 }

@@ -7,7 +7,7 @@
       final ArrayList<Geocache> list=new ArrayList<>();
       list.add(cache1);
       list.add(cache2);
-      final DistanceComparator distanceComparator=new DistanceComparator(CgeoApplication.getInstance().currentGeo().getCoords(),list);
+      final DistanceComparator distanceComparator=new DistanceComparator(Sensors.getInstance().currentGeo().getCoords(),list);
       return distanceComparator.compare(cache1,cache2);
     }
     return dateDifference;
