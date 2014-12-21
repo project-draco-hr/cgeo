@@ -61,6 +61,7 @@
   }
   updateAttributesText();
   updateAttributesIcons();
+  ButterKnife.findById(view,R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
   updateOfflineBox(view,cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
   final Button buttonWatchlistAdd=ButterKnife.findById(view,R.id.add_to_watchlist);
   final Button buttonWatchlistRemove=ButterKnife.findById(view,R.id.remove_from_watchlist);
