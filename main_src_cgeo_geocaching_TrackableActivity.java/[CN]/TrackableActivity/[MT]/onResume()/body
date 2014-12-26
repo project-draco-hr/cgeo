@@ -2,7 +2,9 @@
   super.onResume();
   if (trackable != null) {
     final Trackable updatedTrackable=DataStore.loadTrackable(trackable.getGeocode());
-    trackable.setLogs(updatedTrackable.getLogs());
-    reinitializeViewPager();
+    if (updatedTrackable != null) {
+      trackable.setLogs(updatedTrackable.getLogs());
+      reinitializeViewPager();
+    }
   }
 }
