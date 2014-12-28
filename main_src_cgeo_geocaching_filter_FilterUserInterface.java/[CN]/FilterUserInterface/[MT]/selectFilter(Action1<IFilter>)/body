@@ -4,16 +4,16 @@
   final ArrayAdapter<FactoryEntry> adapter=new ArrayAdapter<>(activity,android.R.layout.select_dialog_item,registry);
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int itemIndex){
-      FactoryEntry entry=adapter.getItem(itemIndex);
+      final FactoryEntry entry=adapter.getItem(itemIndex);
       if (entry.filterFactory == null) {
         runAfterwards.call(null);
       }
  else {
         try {
-          IFilterFactory factoryInstance=entry.filterFactory.newInstance();
+          final IFilterFactory factoryInstance=entry.filterFactory.newInstance();
           selectFromFactory(factoryInstance,entry.name,runAfterwards);
         }
- catch (        Exception e) {
+ catch (        final Exception e) {
           Log.e("selectFilter",e);
         }
       }

@@ -11,12 +11,12 @@
   register(R.string.cache_attributes,AttributeFilter.Factory.class);
   register(R.string.cache_status,StateFilter.Factory.class);
   register(R.string.caches_filter_track,TrackablesFilter.class);
-  register(R.string.caches_filter_modified,ModifiedFilter.class);
   register(R.string.caches_filter_origin,OriginFilter.Factory.class);
   register(R.string.caches_filter_distance,DistanceFilter.Factory.class);
-  register(R.string.caches_filter_personal_note,PersonalNoteFilter.class);
   register(R.string.caches_filter_popularity,PopularityFilter.Factory.class);
   register(R.string.caches_filter_popularity_ratio,PopularityRatioFilter.Factory.class);
+  register(R.string.caches_filter_personal_data,PersonalDataFilterFactory.class);
+  register(R.string.caches_filter_rating,RatingFilter.class);
   Collections.sort(registry,new Comparator<FactoryEntry>(){
     @Override public int compare(    final FactoryEntry lhs,    final FactoryEntry rhs){
       return lhs.name.compareToIgnoreCase(rhs.name);
