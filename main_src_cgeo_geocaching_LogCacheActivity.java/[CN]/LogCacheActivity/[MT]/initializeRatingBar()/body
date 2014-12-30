@@ -1,20 +1,10 @@
 {
   if (GCVote.isVotingPossible(cache) && !isRatingBarShown) {
-    final RatingBar ratingBar=ButterKnife.findById(this,R.id.gcvoteRating);
-    final TextView label=ButterKnife.findById(this,R.id.gcvoteLabel);
-    isRatingBarShown=true;
-    ratingBar.setVisibility(View.VISIBLE);
-    label.setVisibility(View.VISIBLE);
-    ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(){
-      @Override public void onRatingChanged(      final RatingBar ratingBar,      final float stars,      final boolean fromUser){
-        rating=GCVote.isValidRating(stars) ? stars : 0;
-        if (rating < stars) {
-          ratingBar.setRating(rating);
-        }
-        label.setText(GCVote.getDescription(rating));
+    GCVoteRatingBarUtil.initializeRatingBar(cache,getWindow().getDecorView().getRootView(),new OnRatingChangeListener(){
+      @Override public void onRatingChanged(      final float stars){
+        rating=stars;
       }
     }
 );
-    ratingBar.setRating(cache.getMyVote());
   }
 }

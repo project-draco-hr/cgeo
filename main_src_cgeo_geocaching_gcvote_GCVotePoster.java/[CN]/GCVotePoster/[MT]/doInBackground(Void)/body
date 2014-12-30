@@ -1,0 +1,13 @@
+{
+  try {
+    if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
+      cache.setMyVote(rating);
+      DataStore.saveChangedCache(cache);
+      return GCVote.setRating(cache,rating);
+    }
+  }
+ catch (  final RuntimeException e) {
+    Log.e("GCVoteAsyncTask.doInBackground",e);
+  }
+  return false;
+}

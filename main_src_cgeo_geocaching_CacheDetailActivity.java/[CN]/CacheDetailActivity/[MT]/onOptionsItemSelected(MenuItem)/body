@@ -13,6 +13,9 @@ return true;
 case R.id.menu_refresh:
 refreshCache();
 return true;
+case R.id.menu_gcvote:
+showVoteDialog();
+return true;
 default :
 if (NavigationAppFactory.onMenuItemSelected(item,this,cache)) {
 return true;

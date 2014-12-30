@@ -1,6 +1,9 @@
 {
-  if (!isVotingPossible(cache) || !isValidRating(rating)) {
-    throw new IllegalArgumentException(!isVotingPossible(cache) ? "voting is not possible for " + cache : "invalid rating " + rating);
+  if (!isVotingPossible(cache)) {
+    throw new IllegalArgumentException("voting is not possible for " + cache);
+  }
+  if (!isValidRating(rating)) {
+    throw new IllegalArgumentException("invalid rating " + rating);
   }
   final ImmutablePair<String,String> login=Settings.getGCvoteLogin();
   final Parameters params=new Parameters("userName",login.left,"password",login.right,"cacheId",cache.getGuid(),"waypoint",cache.getGeocode(),"voteUser",String.format(Locale.US,"%.1f",rating),"version","cgeo");
