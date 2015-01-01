@@ -64,7 +64,7 @@
   if (!detailed && StringUtils.isBlank(getHint())) {
     hint=other.getHint();
   }
-  if (size == null || CacheSize.UNKNOWN == size) {
+  if (size == CacheSize.UNKNOWN) {
     size=other.size;
   }
   if (difficulty == 0) {

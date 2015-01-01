@@ -8,7 +8,7 @@
   warnIncorrectParsingIfBlank(getOwnerUserId(),"owner");
   warnIncorrectParsingIf(getHiddenDate() == null,"hidden");
   warnIncorrectParsingIf(getFavoritePoints() < 0,"favoriteCount");
-  warnIncorrectParsingIf(getSize() == null,"size");
+  warnIncorrectParsingIf(getSize() == CacheSize.UNKNOWN,"size");
   warnIncorrectParsingIf(getType() == null || getType() == CacheType.UNKNOWN,"type");
   warnIncorrectParsingIf(getCoords() == null,"coordinates");
   warnIncorrectParsingIfBlank(getLocation(),"location");
