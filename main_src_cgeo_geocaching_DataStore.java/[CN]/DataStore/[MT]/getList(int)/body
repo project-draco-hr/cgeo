@@ -11,8 +11,5 @@
   if (id == PseudoList.ALL_LIST.id) {
     return new StoredList(PseudoList.ALL_LIST.id,res.getString(R.string.list_all_lists),getAllCachesCount());
   }
-  if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
-    return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
-  }
-  return null;
+  return new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
 }

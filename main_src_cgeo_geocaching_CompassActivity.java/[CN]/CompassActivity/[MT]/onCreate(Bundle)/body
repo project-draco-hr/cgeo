@@ -12,7 +12,10 @@
   }
   if (extras.containsKey(Intents.EXTRA_WAYPOINT_ID)) {
     final int waypointId=extras.getInt(Intents.EXTRA_WAYPOINT_ID);
-    setTarget(DataStore.loadWaypoint(waypointId));
+    final Waypoint waypoint=DataStore.loadWaypoint(waypointId);
+    if (waypoint != null) {
+      setTarget(waypoint);
+    }
   }
  else   if (extras.containsKey(Intents.EXTRA_COORDS)) {
     setTarget(extras.<Geopoint>getParcelable(Intents.EXTRA_COORDS),extras.getString(Intents.EXTRA_DESCRIPTION));

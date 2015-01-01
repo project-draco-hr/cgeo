@@ -8,6 +8,8 @@
   final SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
   assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList(geocode));
   final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  assert(cache != null);
+  assertThat(cache).isNotNull();
   assertCacheProperties(cache);
   assertThat(cache.getWaypoints().isEmpty()).isTrue();
 }
