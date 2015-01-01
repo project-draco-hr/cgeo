@@ -1,5 +1,5 @@
 {
-  final AtomicReference<T> lastValue=new AtomicReference<>(null);
+  final AtomicReference<T> lastValue=new AtomicReference<>(initialValue);
   return observable.doOnNext(new Action1<T>(){
     @Override public void call(    final T value){
       lastValue.set(value);

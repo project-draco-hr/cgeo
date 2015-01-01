@@ -1,7 +1,7 @@
 {
   if (!hasMagneticFieldSensor) {
     Log.i("No magnetic field sensor, using only the GPS for the orientation");
-    directionObservable=RxUtils.rememberLast(geoDataObservableLowPower.map(GPS_TO_DIRECTION).doOnNext(onNextrememberDirectionAction));
+    directionObservable=RxUtils.rememberLast(geoDataObservableLowPower.map(GPS_TO_DIRECTION).doOnNext(onNextrememberDirectionAction),0f);
     return;
   }
   final AtomicBoolean useDirectionFromGps=new AtomicBoolean(false);
@@ -39,5 +39,5 @@
     }
   }
 ).map(GPS_TO_DIRECTION);
-  directionObservable=Observable.merge(magneticDirectionObservable,directionFromGpsObservable);
+  directionObservable=RxUtils.rememberLast(Observable.merge(magneticDirectionObservable,directionFromGpsObservable).doOnNext(onNextrememberDirectionAction),0f);
 }

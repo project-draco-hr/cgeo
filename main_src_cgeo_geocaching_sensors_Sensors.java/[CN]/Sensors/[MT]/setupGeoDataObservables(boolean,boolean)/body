@@ -9,7 +9,7 @@
     }
   }
  else {
-    geoDataObservable=RxUtils.rememberLast(GeoDataProvider.create(app).doOnNext(rememberGeodataAction));
+    geoDataObservable=RxUtils.rememberLast(GeoDataProvider.create(app).doOnNext(rememberGeodataAction),null);
     geoDataObservableLowPower=geoDataObservable;
   }
 }
