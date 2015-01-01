@@ -39,5 +39,5 @@
       cache.setMyVote(rating.getMyVote());
     }
   }
-  mergedLogs.toBlocking().last();
+  RxUtils.waitForCompletion(mergedLogs);
 }
