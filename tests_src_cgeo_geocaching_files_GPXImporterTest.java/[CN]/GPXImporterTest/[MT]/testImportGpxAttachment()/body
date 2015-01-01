@@ -1,15 +1,2 @@
 {
-  final String geocode="GC31J2H";
-  removeCacheCompletely(geocode);
-  final Uri uri=Uri.parse("android.resource://cgeo.geocaching.test/raw/gc31j2h");
-  final GPXImporter.ImportGpxAttachmentThread importThread=new GPXImporter.ImportGpxAttachmentThread(uri,getInstrumentation().getContext().getContentResolver(),listId,importStepHandler,progressHandler);
-  runImportThread(importThread);
-  assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
-  final SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
-  assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList(geocode));
-  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
-  assert(cache != null);
-  assertThat(cache).isNotNull();
-  assertCacheProperties(cache);
-  assertThat(cache.getWaypoints().isEmpty()).isTrue();
 }

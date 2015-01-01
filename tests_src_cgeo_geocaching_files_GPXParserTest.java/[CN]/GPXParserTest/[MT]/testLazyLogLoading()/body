@@ -1,13 +1,2 @@
 {
-  final String geocode="GC31J2H";
-  removeCacheCompletely(geocode);
-  final List<Geocache> caches=readGPX10(R.raw.lazy);
-  assertThat(caches).hasSize(1);
-  DataStore.removeAllFromCache();
-  final Geocache minimalCache=DataStore.loadCache(geocode,EnumSet.of(LoadFlag.DB_MINIMAL));
-  assert(minimalCache != null);
-  assertThat(minimalCache).isNotNull();
-  assertThat(minimalCache.getAttributes()).isNotEmpty();
-  assertThat(minimalCache.getLogs()).isNotEmpty();
-  removeCacheCompletely(geocode);
 }

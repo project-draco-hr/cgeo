@@ -1,21 +1,2 @@
 {
-  final String geocode="GC31J2H";
-  removeCacheCompletely(geocode);
-  final File gc31j2h=new File(tempDir,"gc31j2h.gpx");
-  copyResourceToFile(R.raw.gc31j2h,gc31j2h);
-  final GPXImporter.ImportGpxFileThread importThread=new GPXImporter.ImportGpxFileThread(gc31j2h,listId,importStepHandler,progressHandler);
-  runImportThread(importThread);
-  assertThat(importStepHandler.messages).hasSize(4);
-  final Iterator<Message> iMsg=importStepHandler.messages.iterator();
-  assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_START);
-  assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_READ_FILE);
-  assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS);
-  assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_FINISHED);
-  final SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
-  assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList(geocode));
-  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
-  assert(cache != null);
-  assertThat(cache).isNotNull();
-  assertCacheProperties(cache);
-  assertThat(cache.getWaypoints().isEmpty()).isTrue();
 }

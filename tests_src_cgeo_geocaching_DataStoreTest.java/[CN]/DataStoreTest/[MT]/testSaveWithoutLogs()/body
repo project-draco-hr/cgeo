@@ -1,22 +1,2 @@
 {
-  final String GEOCODE_CACHE="TEST";
-  final Geocache cache=new Geocache();
-  cache.setGeocode(GEOCODE_CACHE);
-  cache.setDetailed(true);
-  final Trackable trackable=new Trackable();
-  trackable.setLogs(null);
-  final List<Trackable> inventory=new ArrayList<Trackable>();
-  inventory.add(trackable);
-  cache.setInventory(inventory);
-  try {
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-    final Geocache loadedCache=DataStore.loadCache(GEOCODE_CACHE,LoadFlags.LOAD_ALL_DB_ONLY);
-    assert(loadedCache != null);
-    assertThat(loadedCache).isNotNull();
-    assertThat(loadedCache).overridingErrorMessage("Cache was not saved.").isNotNull();
-    assertThat(loadedCache.getInventory()).hasSize(1);
-  }
-  finally {
-    DataStore.removeCache(GEOCODE_CACHE,LoadFlags.REMOVE_ALL);
-  }
 }

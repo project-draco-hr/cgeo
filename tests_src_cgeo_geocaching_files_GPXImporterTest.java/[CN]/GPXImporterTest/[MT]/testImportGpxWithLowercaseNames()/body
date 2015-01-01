@@ -1,12 +1,2 @@
 {
-  final File tc2012=new File(tempDir,"tc2012.gpx");
-  copyResourceToFile(R.raw.tc2012,tc2012);
-  final GPXImporter.ImportGpxFileThread importThread=new GPXImporter.ImportGpxFileThread(tc2012,listId,importStepHandler,progressHandler);
-  runImportThread(importThread);
-  assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
-  final Geocache cache=DataStore.loadCache("AID1",LoadFlags.LOAD_CACHE_OR_DB);
-  assert(cache != null);
-  assertThat(cache).isNotNull();
-  assertCacheProperties(cache);
-  assertThat(cache.getName()).isEqualTo("First Aid Station #1");
 }

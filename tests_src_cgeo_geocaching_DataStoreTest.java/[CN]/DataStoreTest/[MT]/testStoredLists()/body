@@ -21,7 +21,6 @@
     assertThat(DataStore.getAllCachesCount() >= 2).isTrue();
     assertEquals(1,DataStore.renameList(listId1,"DataStore Test (renamed)"));
     final StoredList list1=DataStore.getList(listId1);
-    assert(list1 != null);
     assertThat(list1).isNotNull();
     assertThat(list1.title).isEqualTo("DataStore Test (renamed)");
     DataStore.moveToList(Collections.singletonList(cache1),listId2);

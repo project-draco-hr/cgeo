@@ -1,18 +1,2 @@
 {
-  assert(app != null);
-  final boolean mustLogin=app.mustRelog();
-  for (  final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
-    if (mustLogin || !conn.isLoggedIn()) {
-      RxUtils.networkScheduler.createWorker().schedule(new Action0(){
-        @Override public void call(){
-          if (mustLogin) {
-            conn.logout();
-          }
-          conn.login(firstLoginHandler,MainActivity.this);
-          updateUserInfoHandler.sendEmptyMessage(-1);
-        }
-      }
-);
-    }
-  }
 }

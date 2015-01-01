@@ -1,22 +1,2 @@
 {
-  withMockedLoginDo(new Runnable(){
-    @Override public void run(){
-      MockedCache cache=new GC2CJPF();
-      deleteCacheFromDBAndLogout(cache.getGeocode());
-      SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST.id,true,null);
-      assertThat(search).isNotNull();
-      assertThat(search.getGeocodes()).hasSize(1);
-      assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
-      final Geocache searchedCache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-      assertThat(searchedCache).isNotNull();
-      assert(searchedCache != null);
-      assertThat(searchedCache.getCoords()).isNull();
-      cache=new GC2JVEH();
-      deleteCacheFromDBAndLogout(cache.getGeocode());
-      search=Geocache.searchByGeocode(cache.getGeocode(),null,StoredList.TEMPORARY_LIST.id,true,null);
-      assertThat(search).isNotNull();
-      assertThat(search.getGeocodes()).isEmpty();
-    }
-  }
-);
 }
