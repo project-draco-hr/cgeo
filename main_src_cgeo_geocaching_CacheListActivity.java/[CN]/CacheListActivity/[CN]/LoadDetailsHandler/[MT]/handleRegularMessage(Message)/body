@@ -15,18 +15,15 @@
     }
   }
  else {
-    new AsyncTask<Void,Void,Void>(){
-      @Override protected Void doInBackground(      final Void... params){
-        if (search != null) {
-          final Set<Geocache> cacheListTmp=search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-          if (CollectionUtils.isNotEmpty(cacheListTmp)) {
-            cacheList.clear();
-            cacheList.addAll(cacheListTmp);
-          }
-        }
-        return null;
+    new AsyncTask<Void,Void,Set<Geocache>>(){
+      @Override protected Set<Geocache> doInBackground(      final Void... params){
+        return search != null ? search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB) : null;
       }
-      @Override protected void onPostExecute(      final Void result){
+      @Override protected void onPostExecute(      final Set<Geocache> result){
+        if (CollectionUtils.isNotEmpty(result)) {
+          cacheList.clear();
+          cacheList.addAll(result);
+        }
         setAdapterCurrentCoordinates(false);
         showProgress(false);
         progress.dismiss();
