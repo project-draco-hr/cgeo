@@ -1,0 +1,12 @@
+{
+  final ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
+  ImageUtils.decodeBase64ToStream(icon64,outputStream);
+  final byte[] decodedImage=outputStream.toByteArray();
+  outputStream.close();
+  assertThat(decodedImage.length).as("decoded image size").isEqualTo(409);
+  final InputStream originalStream=getResourceStream(R.raw.small_file);
+  final byte[] originalImage=new byte[409];
+  assertEquals("original image has the right size (consistency check)",409,originalStream.read(originalImage));
+  originalStream.close();
+  assertThat(decodedImage).as("decoded base64 image").isEqualTo(originalImage);
+}
