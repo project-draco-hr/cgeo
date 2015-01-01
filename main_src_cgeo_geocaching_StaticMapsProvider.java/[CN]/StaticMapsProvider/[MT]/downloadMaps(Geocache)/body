@@ -15,5 +15,5 @@
       }
     }
   }
-  return Observable.merge(downloaders);
+  return checkDownloadPermission(Observable.merge(downloaders));
 }

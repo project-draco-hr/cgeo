@@ -1,16 +1,12 @@
 {
-  int scale=1;
-  if (width > GOOGLE_MAPS_MAX_SIZE) {
-    scale=2;
-  }
+  final int scale=width <= GOOGLE_MAPS_MAX_SIZE ? 1 : 2;
   final float aspectRatio=width / (float)height;
   final int requestWidth=Math.min(width / scale,GOOGLE_MAPS_MAX_SIZE);
   final int requestHeight=(aspectRatio > 1) ? Math.round(requestWidth / aspectRatio) : requestWidth;
-  final int requestScale=scale;
   final int requestZoom=Math.min((scale == 2) ? zoom + 1 : zoom,GOOGLE_MAX_ZOOM);
-  return Async.fromAction(new Action0(){
+  return checkDownloadPermission(Async.fromAction(new Action0(){
     @Override public void call(){
-      final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(requestZoom),"size",String.valueOf(requestWidth) + 'x' + String.valueOf(requestHeight),"scale",String.valueOf(requestScale),"maptype",mapType,"markers","icon:" + markerUrl + '|'+ shadow+ latlonMap,"sensor","false");
+      final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(requestZoom),"size",String.valueOf(requestWidth) + 'x' + String.valueOf(requestHeight),"scale",String.valueOf(scale),"maptype",mapType,"markers","icon:" + markerUrl + '|'+ shadow+ latlonMap,"sensor","false");
       if (waypoints != null) {
         params.addAll(waypoints);
       }
@@ -19,8 +15,12 @@
         Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
         return;
       }
-      if (httpResponse.getStatusLine().getStatusCode() != 200) {
-        Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + httpResponse.getStatusLine().getStatusCode());
+      final int statusCode=httpResponse.getStatusLine().getStatusCode();
+      if (statusCode != 200) {
+        Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + statusCode);
+        if (statusCode == 403) {
+          last403=System.currentTimeMillis();
+        }
         return;
       }
       final File file=getMapFile(geocode,prefix,true);
@@ -32,5 +32,5 @@
       }
     }
   }
-,prefix,RxUtils.networkScheduler);
+,prefix,RxUtils.networkScheduler));
 }

@@ -4,5 +4,5 @@
   for (  final Waypoint waypoint : cache.getWaypoints()) {
     downloaders.add(storeWaypointStaticMap(cache.getGeocode(),width,height,waypoint));
   }
-  return Observable.merge(downloaders);
+  return checkDownloadPermission(Observable.merge(downloaders));
 }
