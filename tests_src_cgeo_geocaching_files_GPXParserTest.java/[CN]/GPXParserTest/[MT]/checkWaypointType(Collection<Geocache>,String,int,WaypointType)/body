@@ -1,0 +1,13 @@
+{
+  for (  final Geocache cache : caches) {
+    if (cache.getGeocode().equals(geocode)) {
+      final List<Waypoint> waypoints=cache.getWaypoints();
+      assertThat(waypoints).isNotEmpty();
+      final Waypoint waypoint=waypoints.get(wpIndex);
+      assertThat(waypoint).isNotNull();
+      assertThat(waypoint.getWaypointType()).isEqualTo(waypointType);
+      return;
+    }
+  }
+  fail("could not find cache with geocode " + geocode);
+}

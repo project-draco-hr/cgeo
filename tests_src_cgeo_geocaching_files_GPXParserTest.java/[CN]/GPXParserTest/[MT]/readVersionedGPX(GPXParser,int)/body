@@ -1,11 +1,11 @@
 {
   final Set<String> result=new HashSet<String>();
-  for (  int resourceId : resourceIds) {
+  for (  final int resourceId : resourceIds) {
     final InputStream instream=getResourceStream(resourceId);
     try {
-      Collection<Geocache> caches=parser.parse(instream,null);
+      final Collection<Geocache> caches=parser.parse(instream,null);
       assertThat(caches).isNotNull();
-      for (      Geocache cache : caches) {
+      for (      final Geocache cache : caches) {
         result.add(cache.getGeocode());
       }
     }

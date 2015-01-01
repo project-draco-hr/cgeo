@@ -1,7 +1,7 @@
 {
   final List<Geocache> caches=readGPX10(R.raw.giga_lab_caches);
   assertThat(caches).hasSize(10);
-  Geocache lab=getCache(caches,"01_Munich Olympic Walk Of Stars_Updated-Project MUNICH2014 - Mia san Giga! Olympiapark");
+  final Geocache lab=getCache(caches,"01_Munich Olympic Walk Of Stars_Updated-Project MUNICH2014 - Mia san Giga! Olympiapark");
   assertThat(lab).isNotNull();
   assertThat(lab.getType()).isEqualTo(CacheType.VIRTUAL);
   assertThat(lab.getTerrain()).isEqualTo(0);

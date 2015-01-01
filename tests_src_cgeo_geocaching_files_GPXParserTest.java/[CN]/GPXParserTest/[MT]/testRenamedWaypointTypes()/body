@@ -1,19 +1,6 @@
 {
-  removeCacheCompletely("GC31J2H");
   final List<Geocache> caches=readGPX10(R.raw.renamed_waypoints,R.raw.renamed_waypoints_wpts);
   assertThat(caches).hasSize(25);
-  Geocache cache=caches.get(12);
-  assertThat(cache.getGeocode()).isEqualTo("GC3NBDE");
-  List<Waypoint> waypoints=cache.getWaypoints();
-  assertThat(waypoints).isNotEmpty();
-  Waypoint waypoint=waypoints.get(1);
-  assertThat(waypoint).isNotNull();
-  assertThat(waypoint.getWaypointType()).isEqualTo(WaypointType.STAGE);
-  cache=caches.get(15);
-  assertThat(cache.getGeocode()).isEqualTo("GC16CBG");
-  waypoints=cache.getWaypoints();
-  assertThat(waypoints).isNotEmpty();
-  waypoint=waypoints.get(1);
-  assertThat(waypoint).isNotNull();
-  assertThat(waypoint.getWaypointType()).isEqualTo(WaypointType.PUZZLE);
+  checkWaypointType(caches,"GC3NBDE",1,WaypointType.STAGE);
+  checkWaypointType(caches,"GC16CBG",1,WaypointType.PUZZLE);
 }
