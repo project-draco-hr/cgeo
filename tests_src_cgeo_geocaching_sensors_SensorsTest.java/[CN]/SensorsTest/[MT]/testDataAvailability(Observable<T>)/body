@@ -1,0 +1,8 @@
+{
+  try {
+    observable.timeout(200,TimeUnit.MILLISECONDS).first().toBlocking().single();
+  }
+ catch (  final Exception ignored) {
+    fail("timeout while waiting for sensor data");
+  }
+}
