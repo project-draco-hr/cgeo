@@ -59,24 +59,24 @@
         return;
       }
       if (onlySave) {
+        Log.d("onlySave, returning");
         subscriber.onCompleted();
+        return;
       }
- else {
-        RxUtils.computationScheduler.createWorker().schedule(new Action0(){
-          @Override public void call(){
-            final ImmutablePair<BitmapDrawable,Boolean> loaded=loadFromDisk();
-            final BitmapDrawable image=loaded.left;
-            if (image != null) {
-              subscriber.onNext(image);
-            }
- else {
-              subscriber.onNext(returnErrorImage ? new BitmapDrawable(resources,BitmapFactory.decodeResource(resources,R.drawable.image_not_loaded)) : ImageUtils.getTransparent1x1Drawable(resources));
-            }
-            subscriber.onCompleted();
+      RxUtils.computationScheduler.createWorker().schedule(new Action0(){
+        @Override public void call(){
+          final ImmutablePair<BitmapDrawable,Boolean> loaded=loadFromDisk();
+          final BitmapDrawable image=loaded.left;
+          if (image != null) {
+            subscriber.onNext(image);
           }
+ else {
+            subscriber.onNext(returnErrorImage ? new BitmapDrawable(resources,BitmapFactory.decodeResource(resources,R.drawable.image_not_loaded)) : ImageUtils.getTransparent1x1Drawable(resources));
+          }
+          subscriber.onCompleted();
         }
-);
       }
+);
     }
   }
 );
