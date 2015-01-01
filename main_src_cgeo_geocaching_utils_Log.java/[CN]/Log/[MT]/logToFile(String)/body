@@ -7,7 +7,7 @@
   Writer writer=null;
   try {
     writer=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,true),CharEncoding.UTF_8));
-    writer.write(msg);
+    writer.write(addThreadInfo(msg));
   }
  catch (  final IOException e) {
     Log.e("logToFile: cannot write to " + file,e);
