@@ -1,6 +1,6 @@
 {
   if (StringUtils.isEmpty(page)) {
-    return null;
+    return Collections.emptyList();
   }
   String table=StringUtils.substringBetween(page,"<table id=\"tblTravelBugs\"","</table>");
   if (StringUtils.isBlank(table)) {
@@ -9,7 +9,7 @@
   table=StringUtils.substringBetween(table,"<tbody>","</tbody>");
   if (StringUtils.isBlank(table)) {
     Log.e("GCParser.parseTrackableLog: tbody not found on page");
-    return null;
+    return Collections.emptyList();
   }
   final List<TrackableLog> trackableLogs=new ArrayList<>();
   final MatcherWrapper trackableMatcher=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE,page);

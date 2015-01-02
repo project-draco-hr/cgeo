@@ -2,7 +2,7 @@
   final ArrayList<UserAction> actions=new ArrayList<>();
   if (ContactsAddon.isAvailable()) {
     actions.add(new UserAction(R.string.user_menu_open_contact,new Action1<UserAction.Context>(){
-      @Override public void call(      Context context){
+      @Override public void call(      final Context context){
         ContactsAddon.openContactCard(context.activity,context.userName);
       }
     }

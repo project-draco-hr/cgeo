@@ -1,7 +1,7 @@
 {
   if (super.filenameBelongsToList(filename)) {
     if (StringUtils.endsWithIgnoreCase(filename,GPXImporter.ZIP_FILE_EXTENSION)) {
-      for (      IConnector connector : ConnectorFactory.getConnectors()) {
+      for (      final IConnector connector : ConnectorFactory.getConnectors()) {
         if (connector.isZippedGPXFile(filename)) {
           return true;
         }
