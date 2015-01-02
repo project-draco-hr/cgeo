@@ -11,16 +11,16 @@
     }
   }
   trackable=DataStore.loadTrackable(geocode);
+  if (trackable == null) {
+    showToast(res.getString(R.string.err_tb_forgot_saw));
+    finish();
+    return;
+  }
   if (StringUtils.isNotBlank(trackable.getName())) {
     setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
   }
  else {
     setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
-  }
-  if (guid == null) {
-    showToast(res.getString(R.string.err_tb_forgot_saw));
-    finish();
-    return;
   }
   init();
   requestKeyboardForLogging();
