@@ -1,5 +1,5 @@
 {
-  params.put("oauth_consumer_key",consumerKey,"oauth_nonce",CryptUtils.md5(Long.toString(System.currentTimeMillis())),"oauth_signature_method","HMAC-SHA1","oauth_timestamp",Long.toString(new Date().getTime() / 1000),"oauth_token",StringUtils.defaultString(tokens.getTokenPublic()),"oauth_version","1.0");
+  params.put("oauth_consumer_key",consumerKey,"oauth_nonce",CryptUtils.md5(Long.toString(System.currentTimeMillis())),"oauth_signature_method","HMAC-SHA1","oauth_timestamp",Long.toString(System.currentTimeMillis() / 1000),"oauth_token",StringUtils.defaultString(tokens.getTokenPublic()),"oauth_version","1.0");
   params.sort();
   final List<String> paramsEncoded=new ArrayList<>();
   for (  final NameValuePair nameValue : params) {
