@@ -1,5 +1,5 @@
 {
-  if (GCVote.isVotingPossible(cache) && !isRatingBarShown) {
+  if (GCVote.isVotingPossible(cache)) {
     GCVoteRatingBarUtil.initializeRatingBar(cache,getWindow().getDecorView().getRootView(),new OnRatingChangeListener(){
       @Override public void onRatingChanged(      final float stars){
         rating=stars;
