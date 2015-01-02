@@ -1,7 +1,7 @@
 {
   final CacheSize[] cacheSizes=CacheSize.values();
   final List<IFilter> filters=new LinkedList<>();
-  for (  CacheSize cacheSize : cacheSizes) {
+  for (  final CacheSize cacheSize : cacheSizes) {
     if (cacheSize != CacheSize.UNKNOWN) {
       filters.add(new SizeFilter(cacheSize));
     }

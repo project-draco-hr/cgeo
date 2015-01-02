@@ -1,7 +1,7 @@
 {
   final CacheType[] types=CacheType.values();
   final List<IFilter> filters=new LinkedList<>();
-  for (  CacheType cacheType : types) {
+  for (  final CacheType cacheType : types) {
     if (cacheType != CacheType.ALL) {
       filters.add(new TypeFilter(cacheType));
     }

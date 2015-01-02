@@ -1,6 +1,6 @@
 {
   final ArrayList<OriginFilter> filters=new ArrayList<>();
-  for (  IConnector connector : ConnectorFactory.getConnectors()) {
+  for (  final IConnector connector : ConnectorFactory.getConnectors()) {
     filters.add(new OriginFilter(connector));
   }
   Collections.sort(filters,new Comparator<OriginFilter>(){
