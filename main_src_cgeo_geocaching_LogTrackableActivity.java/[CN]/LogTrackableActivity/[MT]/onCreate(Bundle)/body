@@ -12,7 +12,7 @@
   }
   trackable=DataStore.loadTrackable(geocode);
   if (trackable == null) {
-    showToast(res.getString(R.string.err_tb_forgot_saw));
+    Log.e("LogTrackableActivity.onCreate: cannot load trackable " + geocode);
     finish();
     return;
   }
