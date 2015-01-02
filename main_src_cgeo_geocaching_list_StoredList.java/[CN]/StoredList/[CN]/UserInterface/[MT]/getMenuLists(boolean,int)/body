@@ -2,8 +2,7 @@
   final List<AbstractList> lists=new ArrayList<>();
   lists.addAll(getSortedLists());
   if (exceptListId == StoredList.STANDARD_LIST_ID || exceptListId >= DataStore.customListIdOffset) {
-    final StoredList exceptList=DataStore.getList(exceptListId);
-    lists.remove(exceptList);
+    lists.remove(DataStore.getList(exceptListId));
   }
   if (!onlyConcreteLists) {
     if (exceptListId != PseudoList.ALL_LIST.id) {
