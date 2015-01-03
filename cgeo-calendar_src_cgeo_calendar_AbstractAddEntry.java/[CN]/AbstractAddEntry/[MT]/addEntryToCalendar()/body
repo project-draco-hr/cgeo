@@ -3,7 +3,7 @@
     addEntryToCalendarInternal();
     activity.showToast(R.string.event_success);
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     activity.showToast(R.string.event_fail);
     Log.e(CalendarActivity.LOG_TAG,"addToCalendar",e);
   }

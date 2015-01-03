@@ -12,7 +12,7 @@
   final AlertDialog.Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(R.string.calendars);
   builder.setItems(items,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int item){
+    @Override public void onClick(    final DialogInterface dialog,    final int item){
       final int calendarId=calendars.keyAt(item);
       new AddEntry(entry,CalendarActivity.this,calendarId).addEntryToCalendar();
       finish();
@@ -20,7 +20,7 @@
   }
 );
   builder.setOnCancelListener(new DialogInterface.OnCancelListener(){
-    @Override public void onCancel(    DialogInterface dialog){
+    @Override public void onCancel(    final DialogInterface dialog){
       finish();
     }
   }

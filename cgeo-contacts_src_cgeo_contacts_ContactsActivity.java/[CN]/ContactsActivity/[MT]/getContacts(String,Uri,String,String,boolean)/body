@@ -3,16 +3,16 @@
   final String selection=selectionColumnName + (like ? " LIKE" : " =") + " ? COLLATE NOCASE";
   final String[] selectionArgs=new String[]{like ? "%" + searchName + "%" : searchName};
   Cursor cursor=null;
-  List<Pair<Integer,String>> result=new ArrayList<>();
+  final List<Pair<Integer,String>> result=new ArrayList<>();
   try {
     cursor=getContentResolver().query(uri,projection,selection,selectionArgs,null);
     while (cursor != null && cursor.moveToNext()) {
-      int foundId=cursor.getInt(0);
-      String foundName=cursor.getString(1);
+      final int foundId=cursor.getInt(0);
+      final String foundName=cursor.getString(1);
       result.add(new Pair<>(foundId,foundName));
     }
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e(LOG_TAG,"ContactsActivity.getContactId",e);
   }
  finally {

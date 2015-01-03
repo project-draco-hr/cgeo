@@ -6,7 +6,7 @@
     }
     return URLDecoder.decode(param,CharEncoding.UTF_8).trim();
   }
- catch (  UnsupportedEncodingException e) {
+ catch (  final UnsupportedEncodingException e) {
     Log.e(LOG_TAG,"ContactsActivity.getParameter",e);
   }
   return StringUtils.EMPTY;
