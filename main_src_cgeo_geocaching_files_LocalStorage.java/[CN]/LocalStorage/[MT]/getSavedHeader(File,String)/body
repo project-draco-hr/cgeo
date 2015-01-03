@@ -1,14 +1,14 @@
 {
   try {
     final File file=filenameForHeader(baseFile,name);
-    final Reader f=new InputStreamReader(new FileInputStream(file),CharEncoding.UTF_8);
+    final Reader reader=new InputStreamReader(new FileInputStream(file),CharEncoding.UTF_8);
     try {
       final char[] value=new char[256];
-      final int count=f.read(value);
+      final int count=reader.read(value);
       return new String(value,0,count);
     }
   finally {
-      f.close();
+      reader.close();
     }
   }
  catch (  final FileNotFoundException ignored) {

@@ -9,10 +9,10 @@
     try {
       fr=new InputStreamReader(new FileInputStream(file),CharEncoding.UTF_8);
       br=new BufferedReader(fr);
-      String s=br.readLine();
-      while (s != null) {
-        if (s.startsWith("dev_mount")) {
-          final String[] tokens=StringUtils.split(s);
+      String str=br.readLine();
+      while (str != null) {
+        if (str.startsWith("dev_mount")) {
+          final String[] tokens=StringUtils.split(str);
           if (tokens.length >= 3) {
             final String path=tokens[2];
             if (!extStorage.equals(path)) {
@@ -23,7 +23,7 @@
             }
           }
         }
-        s=br.readLine();
+        str=br.readLine();
       }
     }
  catch (    final IOException e) {
