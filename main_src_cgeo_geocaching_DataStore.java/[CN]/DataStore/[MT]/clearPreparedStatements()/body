@@ -1,0 +1,9 @@
+{
+  for (  final PreparedStatement preparedStatement : statements) {
+    if (preparedStatement.statement != null) {
+      preparedStatement.statement.close();
+      preparedStatement.statement=null;
+    }
+  }
+  statements.clear();
+}

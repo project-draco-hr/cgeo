@@ -1,0 +1,12 @@
+{
+  if (statement == null) {
+synchronized (statements) {
+      if (statement == null) {
+        init();
+        statement=database.compileStatement(query);
+        statements.add(this);
+      }
+    }
+  }
+  return statement;
+}
