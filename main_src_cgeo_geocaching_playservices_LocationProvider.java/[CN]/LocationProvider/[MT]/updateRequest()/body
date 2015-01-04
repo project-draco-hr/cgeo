@@ -2,15 +2,15 @@
   if (locationClient.isConnected()) {
     if (mostPreciseCount.get() > 0) {
       Log.d("LocationProvider: requesting most precise locations");
-      locationClient.requestLocationUpdates(LOCATION_REQUEST,this,RxUtils.looperCallbacksLooper);
+      LocationServices.FusedLocationApi.requestLocationUpdates(locationClient,LOCATION_REQUEST,this,RxUtils.looperCallbacksLooper);
     }
  else     if (lowPowerCount.get() > 0) {
       Log.d("LocationProvider: requesting low-power locations");
-      locationClient.requestLocationUpdates(LOCATION_REQUEST_LOW_POWER,this,RxUtils.looperCallbacksLooper);
+      LocationServices.FusedLocationApi.requestLocationUpdates(locationClient,LOCATION_REQUEST_LOW_POWER,this,RxUtils.looperCallbacksLooper);
     }
  else {
       Log.d("LocationProvider: stopping location requests");
-      locationClient.removeLocationUpdates(this);
+      LocationServices.FusedLocationApi.removeLocationUpdates(locationClient,this);
     }
   }
 }

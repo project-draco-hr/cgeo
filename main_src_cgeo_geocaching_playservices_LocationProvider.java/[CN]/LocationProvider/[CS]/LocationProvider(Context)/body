@@ -1,6 +1,6 @@
 {
   final GeoData initialLocation=GeoData.getInitialLocation(context);
   subject.onNext(initialLocation != null ? initialLocation : GeoData.DUMMY_LOCATION);
-  locationClient=new LocationClient(context,this,this);
+  locationClient=new GoogleApiClient.Builder(context).addApi(LocationServices.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
   locationClient.connect();
 }
