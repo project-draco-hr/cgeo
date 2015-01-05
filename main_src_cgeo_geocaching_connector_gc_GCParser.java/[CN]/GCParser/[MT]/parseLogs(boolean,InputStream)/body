@@ -1,12 +1,8 @@
 {
   return Observable.create(new OnSubscribe<LogEntry>(){
     @Override public void call(    final Subscriber<? super LogEntry> subscriber){
-      if (StringUtils.isBlank(rawResponse)) {
-        subscriber.onCompleted();
-        return;
-      }
       try {
-        final ObjectNode resp=(ObjectNode)JsonUtils.reader.readTree(rawResponse);
+        final ObjectNode resp=(ObjectNode)JsonUtils.reader.readTree(responseStream);
         if (!resp.path("status").asText().equals("success")) {
           Log.e("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
           subscriber.onCompleted();
