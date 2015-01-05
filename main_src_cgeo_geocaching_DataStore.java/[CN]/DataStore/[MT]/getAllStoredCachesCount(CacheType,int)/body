@@ -8,27 +8,29 @@
   init();
   try {
     final SQLiteStatement compiledStmnt;
-    if (list == PseudoList.ALL_LIST.id) {
-      if (cacheType == CacheType.ALL) {
-        compiledStmnt=PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();
+synchronized (PreparedStatement.COUNT_TYPE_LIST) {
+      if (list == PseudoList.ALL_LIST.id) {
+        if (cacheType == CacheType.ALL) {
+          compiledStmnt=PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();
+        }
+ else {
+          compiledStmnt=PreparedStatement.COUNT_TYPE_ALL_LIST.getStatement();
+          compiledStmnt.bindString(1,cacheType.id);
+        }
       }
  else {
-        compiledStmnt=PreparedStatement.COUNT_TYPE_ALL_LIST.getStatement();
-        compiledStmnt.bindString(1,cacheType.id);
+        if (cacheType == CacheType.ALL) {
+          compiledStmnt=PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
+          compiledStmnt.bindLong(1,list);
+        }
+ else {
+          compiledStmnt=PreparedStatement.COUNT_TYPE_LIST.getStatement();
+          compiledStmnt.bindString(1,cacheType.id);
+          compiledStmnt.bindLong(1,list);
+        }
       }
+      return (int)compiledStmnt.simpleQueryForLong();
     }
- else {
-      if (cacheType == CacheType.ALL) {
-        compiledStmnt=PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
-        compiledStmnt.bindLong(1,list);
-      }
- else {
-        compiledStmnt=PreparedStatement.COUNT_TYPE_LIST.getStatement();
-        compiledStmnt.bindString(1,cacheType.id);
-        compiledStmnt.bindLong(1,list);
-      }
-    }
-    return (int)compiledStmnt.simpleQueryForLong();
   }
  catch (  final Exception e) {
     Log.e("DataStore.loadAllStoredCachesCount",e);

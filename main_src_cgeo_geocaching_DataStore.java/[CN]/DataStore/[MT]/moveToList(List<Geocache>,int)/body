@@ -12,16 +12,18 @@
   init();
   final SQLiteStatement move=PreparedStatement.MOVE_TO_LIST.getStatement();
   database.beginTransaction();
-  try {
-    for (    final Geocache cache : caches) {
-      move.bindLong(1,listId);
-      move.bindString(2,cache.getGeocode());
-      move.execute();
-      cache.setListId(listId);
+synchronized (move) {
+    try {
+      for (      final Geocache cache : caches) {
+        move.bindLong(1,listId);
+        move.bindString(2,cache.getGeocode());
+        move.execute();
+        cache.setListId(listId);
+      }
+      database.setTransactionSuccessful();
     }
-    database.setTransactionSuccessful();
-  }
   finally {
-    database.endTransaction();
+      database.endTransaction();
+    }
   }
 }
