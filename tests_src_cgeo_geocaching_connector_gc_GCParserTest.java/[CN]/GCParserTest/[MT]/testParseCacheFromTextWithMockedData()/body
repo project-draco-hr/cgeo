@@ -1,15 +1,2 @@
 {
-  final String gcCustomDate=Settings.getGcCustomDate();
-  try {
-    for (    MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
-      Settings.setGcCustomDate(MockedCache.getDateFormat());
-      SearchResult searchResult=GCParser.parseAndSaveCacheFromText(mockedCache.getData(),null);
-      Geocache parsedCache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-      assertThat(StringUtils.isNotBlank(mockedCache.getMockedDataUser())).isTrue();
-      Compare.assertCompareCaches(mockedCache,parsedCache,true);
-    }
-  }
-  finally {
-    Settings.setGcCustomDate(gcCustomDate);
-  }
 }
