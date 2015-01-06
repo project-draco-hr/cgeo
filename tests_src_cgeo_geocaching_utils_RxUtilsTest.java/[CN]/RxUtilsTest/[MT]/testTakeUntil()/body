@@ -1,5 +1,5 @@
 {
-  final Observable<Integer> observable=Observable.range(1,10).lift(RxUtils.operatorTakeUntil(new Func1<Integer,Boolean>(){
+  final Observable<Integer> observable=range.lift(RxUtils.operatorTakeUntil(new Func1<Integer,Boolean>(){
     @Override public Boolean call(    final Integer value){
       return value > 6;
     }
