@@ -1,0 +1,10 @@
+{
+  database.beginTransaction();
+  try {
+    saveLogsWithoutTransaction(geocode,logs);
+    database.setTransactionSuccessful();
+  }
+  finally {
+    database.endTransaction();
+  }
+}

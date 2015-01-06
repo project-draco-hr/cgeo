@@ -16,7 +16,7 @@
 ).cache();
   mergedLogs.subscribe(new Action1<List<LogEntry>>(){
     @Override public void call(    final List<LogEntry> logEntries){
-      DataStore.saveLogsWithoutTransaction(cache.getGeocode(),logEntries);
+      DataStore.saveLogs(cache.getGeocode(),logEntries);
     }
   }
 );

@@ -6,13 +6,11 @@
     return;
   }
   final SQLiteStatement statement=PreparedStatement.INSERT_ATTRIBUTE.getStatement();
-synchronized (statement) {
-    final long timestamp=System.currentTimeMillis();
-    for (    final String attribute : attributes) {
-      statement.bindString(1,geocode);
-      statement.bindLong(2,timestamp);
-      statement.bindString(3,attribute);
-      statement.executeInsert();
-    }
+  final long timestamp=System.currentTimeMillis();
+  for (  final String attribute : attributes) {
+    statement.bindString(1,geocode);
+    statement.bindLong(2,timestamp);
+    statement.bindString(3,attribute);
+    statement.executeInsert();
   }
 }
