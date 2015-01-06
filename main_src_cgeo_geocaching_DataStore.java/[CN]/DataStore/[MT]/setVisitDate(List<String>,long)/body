@@ -6,12 +6,10 @@
   database.beginTransaction();
   try {
     final SQLiteStatement setVisit=PreparedStatement.UPDATE_VISIT_DATE.getStatement();
-synchronized (setVisit) {
-      for (      final String geocode : geocodes) {
-        setVisit.bindLong(1,visitedDate);
-        setVisit.bindString(2,geocode);
-        setVisit.execute();
-      }
+    for (    final String geocode : geocodes) {
+      setVisit.bindLong(1,visitedDate);
+      setVisit.bindString(2,geocode);
+      setVisit.execute();
     }
     database.setTransactionSuccessful();
   }

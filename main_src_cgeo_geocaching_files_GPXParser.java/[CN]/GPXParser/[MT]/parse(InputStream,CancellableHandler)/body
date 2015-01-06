@@ -49,7 +49,7 @@
         afterParsing(cache);
         result.add(geocode);
         DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-        DataStore.saveLogsWithoutTransaction(cache.getGeocode(),logs);
+        DataStore.saveLogs(cache.getGeocode(),logs);
         DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.CACHE));
         showProgressMessage(progressHandler,progressStream.getProgress());
       }

@@ -42,7 +42,7 @@
     cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
     cache.setDetailedUpdatedNow();
     DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-    DataStore.saveLogsWithoutTransaction(cache.getGeocode(),parseLogs((ArrayNode)response.path(CACHE_LATEST_LOGS)));
+    DataStore.saveLogs(cache.getGeocode(),parseLogs((ArrayNode)response.path(CACHE_LATEST_LOGS)));
   }
  catch (  ClassCastException|NullPointerException e) {
     Log.e("OkapiClient.parseCache",e);

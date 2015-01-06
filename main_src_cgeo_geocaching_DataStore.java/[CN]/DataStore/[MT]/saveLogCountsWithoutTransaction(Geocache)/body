@@ -5,15 +5,13 @@
   if (MapUtils.isNotEmpty(logCounts)) {
     final Set<Entry<LogType,Integer>> logCountsItems=logCounts.entrySet();
     final SQLiteStatement insertLogCounts=PreparedStatement.INSERT_LOG_COUNTS.getStatement();
-synchronized (insertLogCounts) {
-      final long timestamp=System.currentTimeMillis();
-      for (      final Entry<LogType,Integer> pair : logCountsItems) {
-        insertLogCounts.bindString(1,geocode);
-        insertLogCounts.bindLong(2,timestamp);
-        insertLogCounts.bindLong(3,pair.getKey().id);
-        insertLogCounts.bindLong(4,pair.getValue());
-        insertLogCounts.executeInsert();
-      }
+    final long timestamp=System.currentTimeMillis();
+    for (    final Entry<LogType,Integer> pair : logCountsItems) {
+      insertLogCounts.bindString(1,geocode);
+      insertLogCounts.bindLong(2,timestamp);
+      insertLogCounts.bindLong(3,pair.getKey().id);
+      insertLogCounts.bindLong(4,pair.getValue());
+      insertLogCounts.executeInsert();
     }
   }
 }
