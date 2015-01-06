@@ -1,17 +1,17 @@
 {
-  Geocache stored=new Geocache();
+  final Geocache stored=new Geocache();
   stored.setGeocode("GC12345");
   stored.setDetailed(true);
   stored.setDisabled(true);
   stored.setType(CacheType.TRADITIONAL);
   stored.setCoords(new Geopoint(40.0,8.0));
   stored.setDescription("Test1");
-  ArrayList<String> attributes=new ArrayList<String>(1);
+  final ArrayList<String> attributes=new ArrayList<String>(1);
   attributes.add("TestAttribute");
   stored.setAttributes(attributes);
   stored.setShortDescription("Short");
   stored.setHint("Hint");
-  Geocache download=new Geocache();
+  final Geocache download=new Geocache();
   download.setGeocode("GC12345");
   download.setDetailed(true);
   download.setDisabled(false);
@@ -21,11 +21,10 @@
   download.gatherMissingFrom(stored);
   assertThat(download.isDetailed()).as("merged detailed").isTrue();
   assertThat(download.isDisabled()).as("merged disabled").isFalse();
-  assertEquals("Type not merged correctly",CacheType.MULTI,download.getType());
-  assertEquals("Longitude not merged correctly",9.0,download.getCoords().getLongitude(),0.1);
-  assertEquals("Latitude not merged correctly",41.0,download.getCoords().getLatitude(),0.1);
-  assertEquals("Description not merged correctly","Test2",download.getDescription());
-  assertEquals("ShortDescription not merged correctly","",download.getShortDescription());
-  assertEquals("Attributes not merged correctly",new ArrayList<String>(0),download.getAttributes());
-  assertEquals("Hint not merged correctly","",download.getHint());
+  assertThat(download.getType()).as("merged download").isEqualTo(CacheType.MULTI);
+  assertThat(download.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(41.0,9.0));
+  assertThat(download.getDescription()).as("merged description").isEqualTo("Test2");
+  assertThat(download.getShortDescription()).as("merged short description").isEmpty();
+  assertThat(download.getAttributes()).as("merged attributes").isEmpty();
+  assertThat(download.getHint()).as("merged hint").isEmpty();
 }

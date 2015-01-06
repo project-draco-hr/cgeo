@@ -1,15 +1,14 @@
 {
-  Geocache livemap=new Geocache();
+  final Geocache livemap=new Geocache();
   livemap.setGeocode("GC12345");
   livemap.setCoords(new Geopoint(40.0,8.0),12);
   livemap.setFound(true);
-  Geocache popup=new Geocache();
+  final Geocache popup=new Geocache();
   popup.setGeocode("GC12345");
   popup.setType(CacheType.MULTI);
   popup.gatherMissingFrom(livemap);
-  assertEquals("Type not merged correctly",CacheType.MULTI,popup.getType());
-  assertEquals("Longitude not merged correctly",8.0,popup.getCoords().getLongitude(),0.1);
-  assertEquals("Latitude not merged correctly",40.0,popup.getCoords().getLatitude(),0.1);
-  assertThat(popup.isFound()).overridingErrorMessage("Found not merged correctly").isTrue();
-  assertEquals("Zoomlevel not merged correctly",12,popup.getCoordZoomLevel());
+  assertThat(popup.getType()).as("merged type").isEqualTo(CacheType.MULTI);
+  assertThat(popup.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(40.0,8.0));
+  assertThat(popup.isFound()).overridingErrorMessage("merged found").isTrue();
+  assertThat(popup.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(12);
 }

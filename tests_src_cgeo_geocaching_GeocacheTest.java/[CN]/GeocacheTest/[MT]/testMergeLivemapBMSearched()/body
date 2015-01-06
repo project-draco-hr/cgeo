@@ -1,11 +1,10 @@
 {
-  Geocache bmsearched=new Geocache();
+  final Geocache bmsearched=new Geocache();
   bmsearched.setGeocode("GC12345");
-  Geocache livemap=new Geocache();
+  final Geocache livemap=new Geocache();
   livemap.setGeocode("GC12345");
   livemap.setCoords(new Geopoint(40.0,8.0),12);
   livemap.gatherMissingFrom(bmsearched);
-  assertEquals("Longitude not merged correctly",8.0,livemap.getCoords().getLongitude(),0.1);
-  assertEquals("Latitude not merged correctly",40.0,livemap.getCoords().getLatitude(),0.1);
-  assertEquals("Zoomlevel not merged correctly",12,livemap.getCoordZoomLevel());
+  assertThat(livemap.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(40.0,8.0));
+  assertThat(livemap.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(12);
 }
