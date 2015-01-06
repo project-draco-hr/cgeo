@@ -1,24 +1,26 @@
 {
   database.delete(dbTableLogs,"geocode = ?",new String[]{geocode});
   final SQLiteStatement insertLog=PreparedStatement.INSERT_LOG.getStatement();
-  final long timestamp=System.currentTimeMillis();
-  for (  final LogEntry log : logs) {
-    insertLog.bindString(1,geocode);
-    insertLog.bindLong(2,timestamp);
-    insertLog.bindLong(3,log.type.id);
-    insertLog.bindString(4,log.author);
-    insertLog.bindString(5,log.log);
-    insertLog.bindLong(6,log.date);
-    insertLog.bindLong(7,log.found);
-    insertLog.bindLong(8,log.friend ? 1 : 0);
-    final long logId=insertLog.executeInsert();
-    if (log.hasLogImages()) {
-      final SQLiteStatement insertImage=PreparedStatement.INSERT_LOG_IMAGE.getStatement();
-      for (      final Image img : log.getLogImages()) {
-        insertImage.bindLong(1,logId);
-        insertImage.bindString(2,img.getTitle());
-        insertImage.bindString(3,img.getUrl());
-        insertImage.executeInsert();
+synchronized (insertLog) {
+    final long timestamp=System.currentTimeMillis();
+    for (    final LogEntry log : logs) {
+      insertLog.bindString(1,geocode);
+      insertLog.bindLong(2,timestamp);
+      insertLog.bindLong(3,log.type.id);
+      insertLog.bindString(4,log.author);
+      insertLog.bindString(5,log.log);
+      insertLog.bindLong(6,log.date);
+      insertLog.bindLong(7,log.found);
+      insertLog.bindLong(8,log.friend ? 1 : 0);
+      final long logId=insertLog.executeInsert();
+      if (log.hasLogImages()) {
+        final SQLiteStatement insertImage=PreparedStatement.INSERT_LOG_IMAGE.getStatement();
+        for (        final Image img : log.getLogImages()) {
+          insertImage.bindLong(1,logId);
+          insertImage.bindString(2,img.getTitle());
+          insertImage.bindString(3,img.getUrl());
+          insertImage.executeInsert();
+        }
       }
     }
   }

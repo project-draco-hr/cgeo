@@ -8,9 +8,11 @@
       if (file.isDirectory()) {
         final String geocode=file.getName();
         if (oldFilePattern.matcher(geocode).find()) {
-          select.bindString(1,geocode);
-          if (select.simpleQueryForLong() == 0) {
-            toRemove.add(file);
+synchronized (select) {
+            select.bindString(1,geocode);
+            if (select.simpleQueryForLong() == 0) {
+              toRemove.add(file);
+            }
           }
         }
       }
