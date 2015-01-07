@@ -1,6 +1,6 @@
 {
   if (getLogCounts().isEmpty()) {
-    setLogCounts(DataStore.loadLogCounts(getGeocode()));
+    setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.<LogType,Integer>emptyMap());
   }
   final Integer logged=getLogCounts().get(LogType.FOUND_IT);
   if (logged != null) {

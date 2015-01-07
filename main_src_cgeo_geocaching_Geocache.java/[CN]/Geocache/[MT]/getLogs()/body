@@ -1,3 +1,3 @@
 {
-  return DataStore.loadLogs(geocode);
+  return inDatabase() ? DataStore.loadLogs(geocode) : Collections.<LogEntry>emptyList();
 }

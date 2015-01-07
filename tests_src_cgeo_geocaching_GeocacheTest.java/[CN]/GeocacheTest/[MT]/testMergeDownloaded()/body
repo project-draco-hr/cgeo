@@ -1,15 +1,15 @@
 {
-  final Geocache stored=new Geocache();
-  stored.setGeocode("GC12345");
-  stored.setDetailed(true);
-  stored.setDisabled(true);
-  stored.setType(CacheType.TRADITIONAL);
-  stored.setCoords(new Geopoint(40.0,8.0));
-  stored.setDescription("Test1");
-  stored.setAttributes(Collections.singletonList("TestAttribute"));
-  stored.setShortDescription("Short");
-  stored.setHint("Hint");
-  saveFreshCacheToDB(stored);
+  final Geocache previous=new Geocache();
+  previous.setGeocode("GC12345");
+  previous.setDetailed(true);
+  previous.setDisabled(true);
+  previous.setType(CacheType.TRADITIONAL);
+  previous.setCoords(new Geopoint(40.0,8.0));
+  previous.setDescription("Test1");
+  previous.setAttributes(Collections.singletonList("TestAttribute"));
+  previous.setShortDescription("Short");
+  previous.setHint("Hint");
+  removeCacheCompletely(previous.getGeocode());
   final Geocache download=new Geocache();
   download.setGeocode("GC12345");
   download.setDetailed(true);
@@ -17,8 +17,7 @@
   download.setType(CacheType.MULTI);
   download.setCoords(new Geopoint(41.0,9.0));
   download.setDescription("Test2");
-  download.setAttributes(Collections.<String>emptyList());
-  download.gatherMissingFrom(stored);
+  download.gatherMissingFrom(previous);
   assertThat(download.isDetailed()).as("merged detailed").isTrue();
   assertThat(download.isDisabled()).as("merged disabled").isFalse();
   assertThat(download.getType()).as("merged download").isEqualTo(CacheType.MULTI);

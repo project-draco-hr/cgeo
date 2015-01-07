@@ -1,19 +1,19 @@
 {
-  final Geocache stored=new Geocache();
-  stored.setGeocode("GC12345");
-  stored.setDetailed(true);
-  stored.setDisabled(true);
-  stored.setType(CacheType.TRADITIONAL);
-  stored.setCoords(new Geopoint(40.0,8.0));
-  saveFreshCacheToDB(stored);
+  final Geocache previous=new Geocache();
+  previous.setGeocode("GC12345");
+  previous.setDetailed(true);
+  previous.setDisabled(true);
+  previous.setType(CacheType.TRADITIONAL);
+  previous.setCoords(new Geopoint(40.0,8.0));
+  removeCacheCompletely(previous.getGeocode());
   final Geocache livemap=new Geocache();
   livemap.setGeocode("GC12345");
   livemap.setType(CacheType.MULTI,12);
   livemap.setCoords(new Geopoint(41.0,9.0),12);
-  livemap.gatherMissingFrom(stored);
+  livemap.gatherMissingFrom(previous);
   assertThat(livemap.isDetailed()).as("merged detailed").isTrue();
   assertThat(livemap.isDisabled()).as("merged disabled").isTrue();
   assertThat(livemap.getType()).as("merged type").isEqualTo(CacheType.TRADITIONAL);
   assertThat(livemap.getCoords()).as("merged coordinates").isEqualToComparingFieldByField(new Geopoint(40.0,8.0));
-  assertThat(livemap.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(stored.getCoordZoomLevel());
+  assertThat(livemap.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(previous.getCoordZoomLevel());
 }
