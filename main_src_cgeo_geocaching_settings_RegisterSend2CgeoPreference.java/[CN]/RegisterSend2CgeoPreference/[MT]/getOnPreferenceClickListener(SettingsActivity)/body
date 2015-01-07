@@ -12,7 +12,7 @@
       }
       final ProgressDialog progressDialog=ProgressDialog.show(activity,activity.getString(R.string.init_sendToCgeo),activity.getString(R.string.init_sendToCgeo_registering),true);
       progressDialog.setCancelable(false);
-      AndroidObservable.bindActivity(activity,Observable.defer(new Func0<Observable<Integer>>(){
+      AppObservable.bindActivity(activity,Observable.defer(new Func0<Observable<Integer>>(){
         @Override public Observable<Integer> call(){
           final String nam=StringUtils.defaultString(deviceName);
           final String cod=StringUtils.defaultString(deviceCode);

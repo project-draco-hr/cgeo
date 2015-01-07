@@ -23,7 +23,7 @@
     }
   }
 );
-  AndroidObservable.bindActivity(activity,captcha).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<Bitmap>(){
+  AppObservable.bindActivity(activity,captcha).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<Bitmap>(){
     @Override public void call(    final Bitmap bitmap){
       imageView.setImageBitmap(bitmap);
     }

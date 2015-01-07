@@ -1,6 +1,6 @@
 {
   final ProgressDialog dialog=ProgressDialog.show(fromActivity,fromActivity.getString(R.string.init_dbmove_dbmove),fromActivity.getString(R.string.init_dbmove_running),true,false);
-  AndroidObservable.bindActivity(fromActivity,Async.fromCallable(new Func0<Boolean>(){
+  AppObservable.bindActivity(fromActivity,Async.fromCallable(new Func0<Boolean>(){
     @Override public Boolean call(){
       if (!LocalStorage.isExternalStorageAvailable()) {
         Log.w("Database was not moved: external memory not available");

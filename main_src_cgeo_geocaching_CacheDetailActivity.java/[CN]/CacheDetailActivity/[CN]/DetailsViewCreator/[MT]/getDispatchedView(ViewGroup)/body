@@ -3,7 +3,7 @@
     return null;
   }
   view=(ScrollView)getLayoutInflater().inflate(R.layout.cachedetail_details_page,parentView,false);
-  AndroidObservable.bindActivity(CacheDetailActivity.this,previewMap).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<BitmapDrawable>(){
+  AppObservable.bindActivity(CacheDetailActivity.this,previewMap).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<BitmapDrawable>(){
     @Override public void call(    final BitmapDrawable image){
       final Bitmap bitmap=image.getBitmap();
       if (bitmap != null && bitmap.getWidth() > 10) {

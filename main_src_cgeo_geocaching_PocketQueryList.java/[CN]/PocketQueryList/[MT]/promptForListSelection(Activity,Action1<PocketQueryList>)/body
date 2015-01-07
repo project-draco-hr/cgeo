@@ -1,6 +1,6 @@
 {
   final Dialog waitDialog=ProgressDialog.show(activity,activity.getString(R.string.search_pocket_title),activity.getString(R.string.search_pocket_loading),true,true);
-  AndroidObservable.bindActivity(activity,Observable.create(new OnSubscribe<List<PocketQueryList>>(){
+  AppObservable.bindActivity(activity,Observable.create(new OnSubscribe<List<PocketQueryList>>(){
     @Override public void call(    final Subscriber<? super List<PocketQueryList>> subscriber){
       subscriber.onNext(GCParser.searchPocketQueryList());
       subscriber.onCompleted();
