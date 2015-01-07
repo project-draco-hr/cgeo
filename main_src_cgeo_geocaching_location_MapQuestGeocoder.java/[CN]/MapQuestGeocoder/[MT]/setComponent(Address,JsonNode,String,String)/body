@@ -18,6 +18,9 @@ address.setSubAdminArea(content);
 break;
 case "Country":
 address.setCountryCode(content);
+address.setCountryName(new Locale("",content).getDisplayCountry());
+break;
+default :
 break;
 }
 }

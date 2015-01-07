@@ -18,29 +18,20 @@
  else {
     navAccuracy.setText(null);
   }
+  final Geopoint currentCoords=geo.getCoords();
   if (Settings.isShowAddress()) {
     if (addCoords == null) {
       navLocation.setText(R.string.loc_no_addr);
     }
-    if (addCoords == null || (geo.getCoords().distanceTo(addCoords) > 0.5)) {
-      final Observable<String> address=Observable.create(new OnSubscribe<String>(){
-        @Override public void call(        final Subscriber<? super String> subscriber){
-          try {
-            addCoords=geo.getCoords();
-            final Geocoder geocoder=new Geocoder(MainActivity.this,Locale.getDefault());
-            final List<Address> addresses=geocoder.getFromLocation(addCoords.getLatitude(),addCoords.getLongitude(),1);
-            if (!addresses.isEmpty()) {
-              subscriber.onNext(formatAddress(addresses.get(0)));
-            }
-            subscriber.onCompleted();
-          }
- catch (          final Exception e) {
-            subscriber.onError(e);
-          }
+    if (addCoords == null || (currentCoords.distanceTo(addCoords) > 0.5)) {
+      addCoords=currentCoords;
+      final Observable<String> address=(new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords).onErrorResumeNext(MapQuestGeocoder.getFromLocation(currentCoords))).map(new Func1<Address,String>(){
+        @Override public String call(        final Address address){
+          return formatAddress(address);
         }
       }
-);
-      ViewObservable.bindView(navLocation,address.onErrorResumeNext(Observable.just(geo.getCoords().toString()))).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<String>(){
+).onErrorResumeNext(Observable.just(currentCoords.toString()));
+      ViewObservable.bindView(navLocation,address).subscribe(new Action1<String>(){
         @Override public void call(        final String address){
           navLocation.setText(address);
         }
@@ -49,6 +40,6 @@
     }
   }
  else {
-    navLocation.setText(geo.getCoords().toString());
+    navLocation.setText(currentCoords.toString());
   }
 }

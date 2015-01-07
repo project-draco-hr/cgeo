@@ -1,0 +1,3 @@
+{
+  return CollectionUtils.isEmpty(addresses) ? Observable.<Address>error(new RuntimeException("no result from Android geocoder")) : Observable.from(addresses);
+}

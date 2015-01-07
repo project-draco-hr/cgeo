@@ -1,5 +1,10 @@
 {
   if (Geocoder.isPresent()) {
-    testGeocoder(new AndroidGeocoder(CgeoApplication.getInstance()).getFromLocationName(TEST_ADDRESS),"Android");
+    final AndroidGeocoder geocoder=new AndroidGeocoder(CgeoApplication.getInstance());
+    testGeocoder(geocoder.getFromLocationName(TEST_ADDRESS),"Android",true);
+    testGeocoder(geocoder.getFromLocation(TEST_COORDS),"Android reverse",true);
+  }
+ else {
+    Log.i("not testing absent Android geocoder");
   }
 }

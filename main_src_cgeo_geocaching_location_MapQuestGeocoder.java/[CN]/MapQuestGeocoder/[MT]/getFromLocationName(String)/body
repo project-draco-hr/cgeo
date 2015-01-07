@@ -1,32 +1,3 @@
 {
-  return Observable.defer(new Func0<Observable<Address>>(){
-    @Override public Observable<Address> call(){
-      final ObjectNode response=Network.requestJSON("https://www.mapquestapi.com/geocoding/v1/address",new Parameters("key",MAPQUEST_KEY,"location",address,"maxResults","20","thumbMaps","false"));
-      if (response == null) {
-        Log.w("MapQuest decoder error: no response");
-        return Observable.error(new RuntimeException("no answer from MapQuest geocoder"));
-      }
-      final int statusCode=response.path("info").path("statuscode").asInt(-1);
-      if (statusCode != 0) {
-        Log.w("MapQuest decoder error: statuscode is not 0");
-        return Observable.error(new RuntimeException("no correct answer from MapQuest geocoder"));
-      }
-      return Observable.create(new OnSubscribe<Address>(){
-        @Override public void call(        final Subscriber<? super Address> subscriber){
-          try {
-            for (            final JsonNode address : response.get("results").get(0).get("locations")) {
-              subscriber.onNext(mapquestToAddress(address));
-            }
-            subscriber.onCompleted();
-          }
- catch (          final Exception e) {
-            Log.e("Error decoding MapQuest address",e);
-            subscriber.onError(e);
-          }
-        }
-      }
-);
-    }
-  }
-).subscribeOn(RxUtils.networkScheduler);
+  return get("address",new Parameters("location",address,"maxResults","20","thumbMaps","false"));
 }
