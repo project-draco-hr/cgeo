@@ -1,0 +1,7 @@
+{
+  final ScrollView view=(ScrollView)getLayoutInflater().inflate(R.layout.about_system_page,parentView,false);
+  ButterKnife.inject(this,view);
+  system.setText(systemInformation(AboutActivity.this));
+  system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+  return view;
+}
