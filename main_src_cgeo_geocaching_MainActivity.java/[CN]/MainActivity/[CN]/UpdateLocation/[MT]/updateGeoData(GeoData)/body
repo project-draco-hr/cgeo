@@ -31,7 +31,7 @@
         }
       }
 ).onErrorResumeNext(Observable.just(currentCoords.toString()));
-      ViewObservable.bindView(navLocation,address).subscribe(new Action1<String>(){
+      AppObservable.bindActivity(MainActivity.this,address).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<String>(){
         @Override public void call(        final String address){
           navLocation.setText(address);
         }
