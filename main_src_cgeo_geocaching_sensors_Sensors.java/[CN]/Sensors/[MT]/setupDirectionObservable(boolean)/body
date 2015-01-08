@@ -5,7 +5,7 @@
     return;
   }
   final AtomicBoolean useDirectionFromGps=new AtomicBoolean(false);
-  final boolean useRotationSensor=(Settings.useLowPowerMode() && RotationProvider.hasGeomagneticRotationSensor(app)) || !OrientationProvider.hasOrientationSensor(app);
+  final boolean useRotationSensor=(useLowPower && RotationProvider.hasGeomagneticRotationSensor(app)) || !OrientationProvider.hasOrientationSensor(app);
   final Observable<Float> sensorDirectionObservable=useRotationSensor ? RotationProvider.create(app,useLowPower) : OrientationProvider.create(app);
   final Observable<Float> magneticDirectionObservable=sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable,Observable<? extends Float>>(){
     @Override public Observable<? extends Float> call(    final Throwable throwable){
