@@ -1,3 +1,33 @@
 {
-  new GCVotePoster(cache,rating,afterVoteSent).execute();
+  RxUtils.andThenOnUi(RxUtils.networkScheduler,new Func0<Boolean>(){
+    @Override public Boolean call(){
+      try {
+        if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
+          if (GCVote.setRating(cache,rating)) {
+            cache.setMyVote(rating);
+            DataStore.saveChangedCache(cache);
+            return true;
+          }
+ else {
+            Log.w("GCVoteDialog.vote: could not send vote");
+          }
+        }
+      }
+ catch (      final RuntimeException e) {
+        Log.e("GCVoteDialog.vote: could not send vote",e);
+      }
+      return false;
+    }
+  }
+,new Action1<Boolean>(){
+    @Override public void call(    final Boolean status){
+      final CgeoApplication context=CgeoApplication.getInstance();
+      final String text=context.getString(status ? R.string.gcvote_sent : R.string.err_gcvote_send_rating);
+      Toast.makeText(context,text,Toast.LENGTH_SHORT).show();
+      if (afterVoteSent != null) {
+        afterVoteSent.run();
+      }
+    }
+  }
+);
 }
