@@ -1,6 +1,35 @@
 {
-  final List<Geocache> allCaches=Settings.isStoreOfflineMaps() ? ListUtils.union(ListUtils.selectRejected(caches,Geocache.hasStaticMap),ListUtils.select(caches,Geocache.hasStaticMap)) : caches;
-  final Observable<Geocache> loaded=Observable.from(allCaches).flatMap(new Func1<Geocache,Observable<Geocache>>(){
+  final Observable<Geocache> allCaches;
+  final Subscription generator;
+  if (Settings.isStoreOfflineMaps()) {
+    final ReplaySubject<Geocache> withStaticMaps=ReplaySubject.create(caches.size());
+    final ReplaySubject<Geocache> withoutStaticMaps=ReplaySubject.create(caches.size());
+    final Worker worker=Schedulers.io().createWorker();
+    generator=worker.schedule(new Action0(){
+      @Override public void call(){
+        for (        final Geocache cache : caches) {
+          if (worker.isUnsubscribed()) {
+            return;
+          }
+          if (cache.hasStaticMap()) {
+            withStaticMaps.onNext(cache);
+          }
+ else {
+            withoutStaticMaps.onNext(cache);
+          }
+        }
+        withStaticMaps.onCompleted();
+        withoutStaticMaps.onCompleted();
+      }
+    }
+);
+    allCaches=Observable.concat(withoutStaticMaps,withStaticMaps);
+  }
+ else {
+    allCaches=Observable.from(caches);
+    generator=Subscriptions.empty();
+  }
+  final Observable<Geocache> loaded=allCaches.flatMap(new Func1<Geocache,Observable<Geocache>>(){
     @Override public Observable<Geocache> call(    final Geocache cache){
       return Observable.create(new OnSubscribe<Geocache>(){
         @Override public void call(        final Subscriber<? super Geocache> subscriber){
@@ -19,5 +48,5 @@
     }
   }
 );
-  handler.unsubscribeIfCancelled(loaded.subscribe());
+  handler.unsubscribeIfCancelled(new CompositeSubscription(generator,loaded.subscribe()));
 }
