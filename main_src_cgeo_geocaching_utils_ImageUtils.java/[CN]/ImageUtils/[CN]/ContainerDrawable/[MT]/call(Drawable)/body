@@ -1,5 +1,10 @@
 {
-  setBounds(0,0,newDrawable.getIntrinsicWidth(),newDrawable.getIntrinsicHeight());
-  drawable=newDrawable;
-  view.setText(view.getText());
+  final boolean needsRedraw;
+synchronized (lock) {
+    needsRedraw=REDRAW_QUEUE.isEmpty();
+    REDRAW_QUEUE.add(ImmutablePair.of(this,newDrawable));
+  }
+  if (needsRedraw) {
+    UI_WORKER.schedule(REDRAW_QUEUED_DRAWABLES);
+  }
 }
