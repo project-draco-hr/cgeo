@@ -1,4 +1,7 @@
 {
+  if (cache.containsKey(url)) {
+    return cache.get(url);
+  }
   final Observable<BitmapDrawable> drawable=fetchDrawable(url);
   if (onlySave) {
     loading.onNext(drawable.map(new Func1<BitmapDrawable,String>(){
@@ -7,7 +10,10 @@
       }
     }
 ));
+    cache.put(url,null);
     return null;
   }
-  return view == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(drawable);
+  final BitmapDrawable result=view == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(drawable);
+  cache.put(url,result);
+  return result;
 }
