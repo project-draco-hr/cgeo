@@ -4,7 +4,7 @@
   }
   final boolean withCacheDetails=objectsToShow.size() < 200;
   final PointsData pd=new PointsData("c:geo");
-  for (  Object o : objectsToShow) {
+  for (  final Object o : objectsToShow) {
     Point p=null;
     if (o instanceof Geocache) {
       p=getCachePoint((Geocache)o,withCacheWaypoints,withCacheDetails);

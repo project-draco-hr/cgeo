@@ -8,6 +8,6 @@
     return cal.getTime();
   }
  catch (  final NumberFormatException e) {
+    throw new IllegalStateException("hidden date must be a valid date for cache calendar entries");
   }
-  return null;
 }

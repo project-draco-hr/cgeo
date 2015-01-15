@@ -35,14 +35,14 @@
   pg.found=cache.isFound();
   if (withWaypoints && cache.hasWaypoints()) {
     pg.waypoints=new ArrayList<>();
-    for (    Waypoint waypoint : cache.getWaypoints()) {
+    for (    final Waypoint waypoint : cache.getWaypoints()) {
       if (waypoint == null || waypoint.getCoords() == null) {
         continue;
       }
-      PointGeocachingDataWaypoint wp=new PointGeocachingDataWaypoint();
+      final PointGeocachingDataWaypoint wp=new PointGeocachingDataWaypoint();
       wp.code=waypoint.getGeocode();
       wp.name=waypoint.getName();
-      String locusWpId=toLocusWaypoint(waypoint.getWaypointType());
+      final String locusWpId=toLocusWaypoint(waypoint.getWaypointType());
       if (locusWpId != null) {
         wp.type=locusWpId;
       }
