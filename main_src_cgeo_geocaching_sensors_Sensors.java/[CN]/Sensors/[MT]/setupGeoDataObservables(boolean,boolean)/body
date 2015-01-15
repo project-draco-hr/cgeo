@@ -1,8 +1,8 @@
 {
   if (useGooglePlayServices) {
-    geoDataObservable=LocationProvider.getMostPrecise(app).doOnNext(rememberGeodataAction);
+    geoDataObservable=LocationProvider.getMostPrecise(app).onErrorResumeNext(fallbackToGeodataProvider).doOnNext(rememberGeodataAction);
     if (useLowPowerLocation) {
-      geoDataObservableLowPower=LocationProvider.getLowPower(app).doOnNext(rememberGeodataAction);
+      geoDataObservableLowPower=LocationProvider.getLowPower(app).doOnNext(rememberGeodataAction).onErrorResumeNext(geoDataObservable);
     }
  else {
       geoDataObservableLowPower=geoDataObservable;
