@@ -1,7 +1,4 @@
 {
-  if (super.onOptionsItemSelected(item)) {
-    return true;
-  }
 switch (item.getItemId()) {
 case R.id.menu_show_on_map:
     goMap();
@@ -25,23 +22,23 @@ return true;
 case R.id.menu_import_android:
 importGpxFromAndroid();
 invalidateOptionsMenuCompatible();
-return false;
+return true;
 case R.id.menu_create_list:
 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(),listNameMemento.getTerm());
 refreshSpinnerAdapter();
 invalidateOptionsMenuCompatible();
-return false;
+return true;
 case R.id.menu_drop_list:
 removeList(false);
 invalidateOptionsMenuCompatible();
-return false;
+return true;
 case R.id.menu_rename_list:
 renameList();
-return false;
+return true;
 case R.id.menu_invert_selection:
 adapter.invertSelection();
 invalidateOptionsMenuCompatible();
-return false;
+return true;
 case R.id.menu_filter:
 showFilterMenu(null);
 return true;
@@ -57,7 +54,7 @@ return true;
 case R.id.menu_remove_from_history:
 removeFromHistoryCheck();
 invalidateOptionsMenuCompatible();
-return false;
+return true;
 case R.id.menu_move_to_list:
 moveCachesToOtherList();
 invalidateOptionsMenuCompatible();
@@ -71,11 +68,10 @@ clearOfflineLogs();
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_cache_list_app:
-if (!cacheToShow()) {
-return false;
+if (cacheToShow()) {
+CacheListApps.getActiveApps().get(0).invoke(cacheList,this,getFilteredSearch());
 }
-return CacheListAppFactory.onMenuItemSelected(item,cacheList,this,getFilteredSearch());
-default :
-return CacheListAppFactory.onMenuItemSelected(item,cacheList,this,search);
+return true;
 }
+return super.onOptionsItemSelected(item);
 }

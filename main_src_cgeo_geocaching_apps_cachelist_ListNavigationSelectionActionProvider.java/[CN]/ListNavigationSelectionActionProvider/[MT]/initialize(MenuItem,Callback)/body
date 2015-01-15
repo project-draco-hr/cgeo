@@ -1,0 +1,7 @@
+{
+  final ActionProvider actionProvider=MenuItemCompat.getActionProvider(menuItem);
+  if (actionProvider instanceof ListNavigationSelectionActionProvider) {
+    final ListNavigationSelectionActionProvider navigateAction=(ListNavigationSelectionActionProvider)actionProvider;
+    navigateAction.setCallback(callback);
+  }
+}
