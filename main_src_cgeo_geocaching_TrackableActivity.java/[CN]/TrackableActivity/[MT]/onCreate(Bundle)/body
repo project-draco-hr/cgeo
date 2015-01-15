@@ -1,5 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.viewpager_activity);
+  createSubscriptions=new CompositeSubscription();
   setTitle(res.getString(R.string.trackable));
   final Bundle extras=getIntent().getExtras();
   final Uri uri;
@@ -84,7 +85,6 @@
   }
 );
   waitDialog=ProgressDialog.show(this,message,res.getString(R.string.trackable_details_loading),true,true);
-  createSubscriptions=new CompositeSubscription();
   createSubscriptions.add(AppObservable.bindActivity(this,loadTrackable(geocode,guid,id)).singleOrDefault(null).subscribe(new Action1<Trackable>(){
     @Override public void call(    final Trackable trackable){
       TrackableActivity.this.trackable=trackable;
