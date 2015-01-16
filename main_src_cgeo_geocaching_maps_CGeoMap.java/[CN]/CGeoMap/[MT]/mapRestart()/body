@@ -1,5 +1,4 @@
 {
-  activity.finish();
   final Intent mapIntent=new Intent(activity,Settings.getMapProvider().getMapClass());
   mapIntent.putExtra(Intents.EXTRA_SEARCH,searchIntent);
   mapIntent.putExtra(Intents.EXTRA_GEOCODE,geocodeIntent);
@@ -14,5 +13,6 @@
   if (mapState != null) {
     mapIntent.putExtra(Intents.EXTRA_MAPSTATE,mapState);
   }
+  activity.finish();
   activity.startActivity(mapIntent);
 }

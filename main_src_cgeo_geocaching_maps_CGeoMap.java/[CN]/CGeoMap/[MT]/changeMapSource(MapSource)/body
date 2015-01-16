@@ -7,7 +7,10 @@
     mapRestart();
   }
  else   if (mapView != null) {
+    mapStateIntent=currentMapState();
     mapView.setMapSource();
+    centered=false;
+    centerMap(geocodeIntent,searchIntent,coordsIntent,mapStateIntent);
     ActivityMixin.invalidateOptionsMenu(activity);
   }
   return restartRequired;
