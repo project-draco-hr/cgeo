@@ -16,6 +16,7 @@
  else {
     holder=(ViewHolder)v.getTag();
   }
+  holder.cache=cache;
   final boolean lightSkin=Settings.isLightSkin();
   final TouchListener touchListener=new TouchListener(cache,this);
   v.setOnClickListener(touchListener);
@@ -89,9 +90,17 @@
       holder.direction.updateHeading(cache.getDirection());
     }
  else     if (StringUtils.isNotBlank(cache.getDirectionImg())) {
-      holder.dirImg.setImageDrawable(DirectionImage.getDrawable(cache.getDirectionImg()));
-      holder.dirImg.setVisibility(View.VISIBLE);
+      holder.dirImg.setVisibility(View.INVISIBLE);
       holder.direction.setVisibility(View.GONE);
+      DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>(){
+        @Override public void call(        final BitmapDrawable bitmapDrawable){
+          if (cache == holder.cache) {
+            holder.dirImg.setImageDrawable(bitmapDrawable);
+            holder.dirImg.setVisibility(View.VISIBLE);
+          }
+        }
+      }
+);
     }
  else {
       holder.dirImg.setVisibility(View.GONE);
