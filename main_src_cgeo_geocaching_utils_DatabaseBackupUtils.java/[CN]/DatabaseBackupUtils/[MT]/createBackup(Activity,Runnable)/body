@@ -1,23 +1,17 @@
 {
   if (DataStore.getAllCachesCount() == 0) {
     Dialogs.message(activity,R.string.init_backup,R.string.init_backup_unnecessary);
-    return false;
+    return;
   }
-  final ProgressDialog dialog=ProgressDialog.show(activity,activity.getString(R.string.init_backup),activity.getString(R.string.init_backup_running),true,false);
-  RxUtils.andThenOnUi(Schedulers.io(),new Func0<String>(){
-    @Override public String call(){
-      return DataStore.backupDatabaseInternal();
-    }
-  }
-,new Action1<String>(){
-    @Override public void call(    final String backupFileName){
-      dialog.dismiss();
-      Dialogs.message(activity,R.string.init_backup_backup,backupFileName != null ? activity.getString(R.string.init_backup_success) + "\n" + backupFileName : activity.getString(R.string.init_backup_failed));
-      if (runAfterwards != null) {
-        runAfterwards.run();
+  if (hasBackup()) {
+    Dialogs.confirm(activity,R.string.init_backup,activity.getString(R.string.backup_confirm_overwrite,getBackupDateTime()),new OnClickListener(){
+      @Override public void onClick(      final DialogInterface dialog,      final int which){
+        createBackupInternal(activity,runAfterwards);
       }
     }
-  }
 );
-  return true;
+  }
+ else {
+    createBackupInternal(activity,runAfterwards);
+  }
 }
