@@ -1,0 +1,8 @@
+{
+  final Geocache cache=new Geocache();
+  cache.setGeocode("ABC123");
+  cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
+  DataStore.saveCache(cache,LoadFlags.SAVE_ALL);
+  assertThat(ConnectorFactory.getConnector(cache).getName()).isEqualTo("Unknown caches");
+  assertCanExport(cache);
+}

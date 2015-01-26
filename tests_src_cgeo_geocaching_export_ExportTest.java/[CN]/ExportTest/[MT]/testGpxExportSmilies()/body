@@ -5,16 +5,5 @@
   final LogEntry log=new LogEntry(1353244820000L,LogType.FOUND_IT,"Smile: \ud83d\ude0a");
   DataStore.saveCache(cache,LoadFlags.SAVE_ALL);
   DataStore.saveLogs(cache.getGeocode(),Collections.singletonList(log));
-  ArrayList<Geocache> exportList=new ArrayList<Geocache>();
-  exportList.add(cache);
-  GpxExportTester gpxExport=new GpxExportTester();
-  File result=null;
-  try {
-    result=gpxExport.testExportSync(exportList);
-  }
-  finally {
-    DataStore.removeCache(cache.getGeocode(),LoadFlags.REMOVE_ALL);
-  }
-  assertThat(result).isNotNull();
-  FileUtils.deleteIgnoringFailure(result);
+  assertCanExport(cache);
 }
