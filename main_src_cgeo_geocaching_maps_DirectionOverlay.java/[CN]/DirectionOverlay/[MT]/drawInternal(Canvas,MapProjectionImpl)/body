@@ -1,0 +1,16 @@
+{
+  if (currentCoords == null) {
+    return;
+  }
+  if (line == null) {
+    line=new Paint();
+    line.setAntiAlias(true);
+    line.setStrokeWidth(2f);
+    line.setColor(0xFFEB391E);
+  }
+  final Point pos=new Point();
+  final Point dest=new Point();
+  projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords),pos);
+  projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords),dest);
+  canvas.drawLine(pos.x,pos.y,dest.x,dest.y,line);
+}

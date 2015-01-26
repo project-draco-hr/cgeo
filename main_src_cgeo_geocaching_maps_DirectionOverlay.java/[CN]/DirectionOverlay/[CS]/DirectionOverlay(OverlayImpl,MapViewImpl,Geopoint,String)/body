@@ -1,0 +1,16 @@
+{
+  this.ovlImpl=ovlImpl;
+  if (coords == null) {
+    final Viewport bounds=DataStore.getBounds(geocode);
+    if (bounds == null) {
+      this.destinationCoords=new Geopoint(0,0);
+    }
+ else {
+      this.destinationCoords=bounds.center;
+    }
+  }
+ else {
+    this.destinationCoords=coords;
+  }
+  this.mapItemFactory=Settings.getMapProvider().getMapItemFactory();
+}

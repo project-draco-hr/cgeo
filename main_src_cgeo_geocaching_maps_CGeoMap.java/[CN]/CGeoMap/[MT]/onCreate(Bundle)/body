@@ -51,6 +51,9 @@
   mapView.setOnDragListener(new MapDragListener(this));
   mapView.clearOverlays();
   overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker));
+  if (coordsIntent != null || geocodeIntent != null) {
+    overlayDirection=mapView.createAddDirectionOverlay(coordsIntent,geocodeIntent);
+  }
   overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay();
   if (trailHistory != null) {
     overlayPositionAndScale.setHistory(trailHistory);
