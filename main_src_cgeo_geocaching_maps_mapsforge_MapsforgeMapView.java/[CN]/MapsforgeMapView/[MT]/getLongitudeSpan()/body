@@ -1,9 +1,9 @@
 {
   int span=0;
-  Projection projection=getProjection();
+  final Projection projection=getProjection();
   if (projection != null && getWidth() > 0) {
-    GeoPoint low=projection.fromPixels(0,0);
-    GeoPoint high=projection.fromPixels(getWidth(),0);
+    final GeoPoint low=projection.fromPixels(0,0);
+    final GeoPoint high=projection.fromPixels(getWidth(),0);
     if (low != null && high != null) {
       span=Math.abs(high.longitudeE6 - low.longitudeE6);
     }

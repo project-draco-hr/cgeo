@@ -1,15 +1,15 @@
 {
   try {
-    FrameLayout.LayoutParams zoomParams=new FrameLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT);
+    final FrameLayout.LayoutParams zoomParams=new FrameLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT);
     zoomParams.gravity=Gravity.RIGHT;
     final ZoomButtonsController controller=(ZoomButtonsController)MethodUtils.invokeMethod(this,"getZoomButtonsController");
     controller.getZoomControls().setLayoutParams(zoomParams);
     super.displayZoomControls(takeFocus);
   }
- catch (  NoSuchMethodException ignored) {
+ catch (  final NoSuchMethodException ignored) {
     Log.w("GoogleMapView.displayZoomControls: unable to explicitly place the zoom buttons");
   }
-catch (  Exception e) {
+catch (  final Exception e) {
     Log.e("GoogleMapView.displayZoomControls",e);
   }
 }

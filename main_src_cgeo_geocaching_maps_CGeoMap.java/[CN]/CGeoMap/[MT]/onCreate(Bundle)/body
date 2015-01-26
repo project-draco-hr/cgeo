@@ -55,6 +55,9 @@
   if (trailHistory != null) {
     overlayPositionAndScale.setHistory(trailHistory);
   }
+  if (coordsIntent != null || geocodeIntent != null) {
+    overlayDistance=mapView.createAddDistanceOverlay(coordsIntent,geocodeIntent);
+  }
   mapView.repaintRequired(null);
   setZoom(Settings.getMapZoom(mapMode));
   mapView.getMapController().setCenter(Settings.getMapCenter());

@@ -1,0 +1,50 @@
+{
+  if (currentCoords == null) {
+    return;
+  }
+  if (blurBoxShadow == null) {
+    blurBoxShadow=new BlurMaskFilter(3,BlurMaskFilter.Blur.NORMAL);
+  }
+  if (paintBoxShadow == null) {
+    paintBoxShadow=new Paint();
+    paintBoxShadow.setAntiAlias(true);
+    paintBoxShadow.setMaskFilter(blurBoxShadow);
+  }
+  if (paintBox == null) {
+    paintBox=new Paint();
+    paintBox.setAntiAlias(true);
+  }
+  if (paintText == null) {
+    paintText=new Paint();
+    paintText.setAntiAlias(true);
+    paintText.setTextAlign(Paint.Align.LEFT);
+    paintText.setTypeface(Typeface.DEFAULT_BOLD);
+  }
+  if (paintCompass == null) {
+    paintCompass=new Paint(Paint.ANTI_ALIAS_FLAG);
+    paintCompass.setDither(true);
+    paintCompass.setFilterBitmap(true);
+  }
+  if (needsInvertedColors) {
+    paintBoxShadow.setColor(0xFF000000);
+    paintBox.setColor(0xFFFFFFFF);
+    paintText.setColor(0xFF000000);
+  }
+ else {
+    paintBoxShadow.setColor(0xFFFFFFFF);
+    paintBox.setColor(0xFF000000);
+    paintText.setColor(0xFFFFFFFF);
+  }
+  final Rect textBounds=new Rect();
+  paintText.setTextSize(textHeight);
+  paintText.getTextBounds(distanceText,0,distanceText.length(),textBounds);
+  while (textBounds.height() > maxTextWidth) {
+    paintText.setTextSize(paintText.getTextSize() - 1);
+    paintText.getTextBounds(distanceText,0,distanceText.length(),textBounds);
+  }
+  final float textX=(boxWidth - 3 * boxPadding - textBounds.width()) / 2 + boxX + 2 * boxPadding;
+  final float textY=(boxHeight + textBounds.height()) / 2 + boxY;
+  canvas.drawRoundRect(new RectF(boxX - boxShadowSize,boxY - boxShadowSize - boxCornerRadius,boxX + boxWidth + boxShadowSize+ boxCornerRadius,boxY + boxHeight + boxShadowSize),boxCornerRadius,boxCornerRadius,paintBoxShadow);
+  canvas.drawRoundRect(new RectF(boxX,boxY - boxCornerRadius,boxX + boxWidth + boxCornerRadius,boxY + boxHeight),boxCornerRadius,boxCornerRadius,paintBox);
+  canvas.drawText(distanceText,textX,textY,paintText);
+}

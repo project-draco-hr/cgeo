@@ -16,6 +16,10 @@
           map.overlayPositionAndScale.setCoordinates(currentLocation);
           map.overlayPositionAndScale.setHeading(currentHeading);
           map.mapView.repaintRequired(map.overlayPositionAndScale);
+          if (map.overlayDistance != null) {
+            map.overlayDistance.setCoordinates(currentLocation);
+            map.mapView.repaintRequired(map.overlayDistance);
+          }
         }
       }
     }

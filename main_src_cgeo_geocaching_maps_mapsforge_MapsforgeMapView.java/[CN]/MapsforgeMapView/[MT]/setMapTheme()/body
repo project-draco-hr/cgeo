@@ -1,10 +1,10 @@
 {
-  String customRenderTheme=Settings.getCustomRenderThemeFilePath();
+  final String customRenderTheme=Settings.getCustomRenderThemeFilePath();
   if (StringUtils.isNotEmpty(customRenderTheme)) {
     try {
       setRenderTheme(new File(customRenderTheme));
     }
- catch (    FileNotFoundException ignored) {
+ catch (    final FileNotFoundException ignored) {
       Toast.makeText(getContext(),getContext().getResources().getString(R.string.warn_rendertheme_missing),Toast.LENGTH_LONG).show();
     }
   }

@@ -4,12 +4,12 @@
   }
  else {
     try {
-      Overlay ovl=(Overlay)overlay.getOverlayImpl();
+      final Overlay ovl=(Overlay)overlay.getOverlayImpl();
       if (ovl != null) {
         ovl.requestRedraw();
       }
     }
- catch (    Exception e) {
+ catch (    final Exception e) {
       Log.e("MapsforgeMapView.repaintRequired",e);
     }
   }
