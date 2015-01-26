@@ -11,7 +11,7 @@
   try {
     if (matcher.find()) {
       final double sign=matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
-      final double degree=Integer.valueOf(matcher.group(2)).doubleValue();
+      final double degree=Integer.valueOf(StringUtils.defaultIfEmpty(StringUtils.stripEnd(matcher.group(2),"??"),"0")).doubleValue();
       double minutes=0.0;
       double seconds=0.0;
       if (null != matcher.group(3)) {
