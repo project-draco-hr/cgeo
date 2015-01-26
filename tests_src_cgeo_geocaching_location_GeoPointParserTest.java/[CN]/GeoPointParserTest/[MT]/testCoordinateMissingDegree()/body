@@ -1,0 +1,4 @@
+{
+  final Geopoint point=GeopointParser.parse("N 51?? 23.123' W ?? 17.123");
+  assertThat(point).isEqualTo(new Geopoint("N","51","23","123","W","0","17","123"));
+}
