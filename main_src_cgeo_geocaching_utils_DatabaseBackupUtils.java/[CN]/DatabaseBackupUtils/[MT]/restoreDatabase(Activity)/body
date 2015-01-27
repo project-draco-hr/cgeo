@@ -4,7 +4,7 @@
     restoreDatabaseInternal(activity);
   }
  else {
-    Dialogs.confirm(activity,R.string.init_backup_restore,activity.getString(R.string.restore_confirm_overwrite,activity.getResources().getQuantityString(R.plurals.cache_counts,caches)),new OnClickListener(){
+    Dialogs.confirm(activity,R.string.init_backup_restore,activity.getString(R.string.restore_confirm_overwrite,activity.getResources().getQuantityString(R.plurals.cache_counts,caches,caches)),new OnClickListener(){
       @Override public void onClick(      final DialogInterface dialog,      final int which){
         restoreDatabaseInternal(activity);
       }
