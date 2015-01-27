@@ -1,6 +1,6 @@
 {
   if (!isEventCache()) {
-    return null;
+    return -1;
   }
   final String hourLocalized=CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
   final ArrayList<Pattern> patterns=new ArrayList<>();
@@ -20,12 +20,12 @@
           minutes=Integer.parseInt(matcher.group(2));
         }
         if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
-          return String.valueOf(hours * 60 + minutes);
+          return hours * 60 + minutes;
         }
       }
  catch (      final NumberFormatException ignored) {
       }
     }
   }
-  return null;
+  return -1;
 }

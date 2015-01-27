@@ -3,5 +3,5 @@
   cache.setDescription(description);
   cache.setType(CacheType.EVENT);
   final int minutesAfterMidnight=hours * 60 + minutes;
-  assertThat(cache.guessEventTimeMinutes()).isEqualTo(String.valueOf(minutesAfterMidnight));
+  assertThat(cache.guessEventTimeMinutes()).isEqualTo(minutesAfterMidnight);
 }

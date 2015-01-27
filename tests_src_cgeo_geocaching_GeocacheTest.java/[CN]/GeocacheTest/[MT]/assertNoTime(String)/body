@@ -2,5 +2,5 @@
   final Geocache cache=new Geocache();
   cache.setDescription(description);
   cache.setType(CacheType.EVENT);
-  assertThat(cache.guessEventTimeMinutes()).isNull();
+  assertThat(cache.guessEventTimeMinutes()).isEqualTo(-1);
 }
