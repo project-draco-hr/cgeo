@@ -1,0 +1,15 @@
+{
+  this.ovlImpl=ovlImpl;
+  positionDrawer=new PositionDrawer();
+  scaleDrawer=new ScaleDrawer();
+  if (coords == null && geocode != null) {
+    final Viewport bounds=DataStore.getBounds(geocode);
+    if (bounds != null) {
+      coords=bounds.center;
+    }
+  }
+  if (coords != null) {
+    directionDrawer=new DirectionDrawer(coords);
+    distanceDrawer=new DistanceDrawer(mapView,coords);
+  }
+}

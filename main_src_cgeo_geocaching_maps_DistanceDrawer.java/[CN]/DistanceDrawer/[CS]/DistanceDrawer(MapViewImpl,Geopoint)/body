@@ -1,0 +1,17 @@
+{
+  this.destinationCoords=destinationCoords;
+  final DisplayMetrics metrics=new DisplayMetrics();
+  final WindowManager windowManager=(WindowManager)CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+  windowManager.getDefaultDisplay().getMetrics(metrics);
+  pixelDensity=metrics.density;
+  boxPadding=2;
+  boxWidth=100 * pixelDensity + 3 * boxPadding;
+  boxHeight=30 * pixelDensity + 2 * boxPadding;
+  boxCornerRadius=5 * pixelDensity;
+  boxShadowSize=1 * pixelDensity;
+  textHeight=20 * pixelDensity;
+  needsInvertedColors=mapView.needsInvertedColors();
+  boxX=metrics.widthPixels - boxWidth;
+  boxY=0;
+  maxTextWidth=boxWidth - 3 * boxPadding;
+}

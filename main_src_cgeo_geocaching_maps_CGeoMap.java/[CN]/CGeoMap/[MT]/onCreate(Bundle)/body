@@ -51,15 +51,9 @@
   mapView.setOnDragListener(new MapDragListener(this));
   mapView.clearOverlays();
   overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),getResources().getDrawable(R.drawable.marker));
-  if (coordsIntent != null || geocodeIntent != null) {
-    overlayDirection=mapView.createAddDirectionOverlay(coordsIntent,geocodeIntent);
-  }
-  overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay();
+  overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay(coordsIntent,geocodeIntent);
   if (trailHistory != null) {
     overlayPositionAndScale.setHistory(trailHistory);
-  }
-  if (coordsIntent != null || geocodeIntent != null) {
-    overlayDistance=mapView.createAddDistanceOverlay(coordsIntent,geocodeIntent);
   }
   mapView.repaintRequired(null);
   setZoom(Settings.getMapZoom(mapMode));
