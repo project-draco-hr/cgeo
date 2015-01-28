@@ -1,0 +1,5 @@
+{
+  final Trackable trackable=new Trackable();
+  trackable.setGeocode("SW0017");
+  assertThat(new SwaggieConnector().getUrl(trackable)).isEqualTo("http://geocaching.com.au/swaggie/SW0017");
+}

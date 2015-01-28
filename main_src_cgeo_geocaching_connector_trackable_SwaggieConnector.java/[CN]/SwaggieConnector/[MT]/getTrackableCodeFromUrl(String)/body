@@ -1,0 +1,7 @@
+{
+  final String geocode=StringUtils.upperCase(StringUtils.substringAfterLast(url,"swaggie/"));
+  if (canHandleTrackable(geocode)) {
+    return geocode;
+  }
+  return null;
+}

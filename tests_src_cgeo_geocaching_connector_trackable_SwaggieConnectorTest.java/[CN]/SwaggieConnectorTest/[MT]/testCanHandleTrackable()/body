@@ -1,0 +1,7 @@
+{
+  assertThat(new SwaggieConnector().canHandleTrackable("SW0001")).isTrue();
+  assertThat(new SwaggieConnector().canHandleTrackable("SWABCD")).isFalse();
+  assertThat(new SwaggieConnector().canHandleTrackable("GK82A2")).isFalse();
+  assertThat(new SwaggieConnector().canHandleTrackable("TB1234")).isFalse();
+  assertThat(new SwaggieConnector().canHandleTrackable("UNKNOWN")).isFalse();
+}
