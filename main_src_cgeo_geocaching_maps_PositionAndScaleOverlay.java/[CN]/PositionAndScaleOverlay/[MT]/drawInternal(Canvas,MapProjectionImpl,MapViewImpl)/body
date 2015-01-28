@@ -1,6 +1,10 @@
 {
-  directionDrawer.drawDirection(canvas,projection);
+  if (directionDrawer != null) {
+    directionDrawer.drawDirection(canvas,projection);
+  }
   positionDrawer.drawPosition(canvas,projection);
   scaleDrawer.drawScale(canvas,mapView);
-  distanceDrawer.drawDistance(canvas);
+  if (distanceDrawer != null) {
+    distanceDrawer.drawDistance(canvas);
+  }
 }
