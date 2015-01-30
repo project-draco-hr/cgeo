@@ -3,13 +3,13 @@
   if (logCounts != null) {
     final List<Entry<LogType,Integer>> sortedLogCounts=new ArrayList<>(logCounts.size());
     for (    final Entry<LogType,Integer> entry : logCounts.entrySet()) {
-      if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getKey().getL10n() != null && entry.getValue() != 0) {
+      if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getValue() != 0) {
         sortedLogCounts.add(entry);
       }
     }
     if (!sortedLogCounts.isEmpty()) {
       Collections.sort(sortedLogCounts,new Comparator<Entry<LogType,Integer>>(){
-        @Override public int compare(        Entry<LogType,Integer> logCountItem1,        Entry<LogType,Integer> logCountItem2){
+        @Override public int compare(        final Entry<LogType,Integer> logCountItem1,        final Entry<LogType,Integer> logCountItem2){
           return logCountItem1.getKey().compareTo(logCountItem2.getKey());
         }
       }

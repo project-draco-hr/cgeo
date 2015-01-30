@@ -1,6 +1,9 @@
 {
+  if (url == null) {
+    return null;
+  }
   for (  final IConnector connector : CONNECTORS) {
-    final String geocode=connector.getGeocodeFromUrl(url);
+    @Nullable final String geocode=connector.getGeocodeFromUrl(url);
     if (StringUtils.isNotBlank(geocode)) {
       return geocode;
     }

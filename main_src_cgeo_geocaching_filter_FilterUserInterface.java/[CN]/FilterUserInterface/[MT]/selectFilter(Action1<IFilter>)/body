@@ -5,12 +5,13 @@
   builder.setAdapter(adapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int itemIndex){
       final FactoryEntry entry=adapter.getItem(itemIndex);
-      if (entry.filterFactory == null) {
+      final Class<? extends IFilterFactory> filterFactory=entry.filterFactory;
+      if (filterFactory == null) {
         runAfterwards.call(null);
       }
  else {
         try {
-          final IFilterFactory factoryInstance=entry.filterFactory.newInstance();
+          final IFilterFactory factoryInstance=filterFactory.newInstance();
           selectFromFactory(factoryInstance,entry.name,runAfterwards);
         }
  catch (        final Exception e) {
