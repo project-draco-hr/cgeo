@@ -1,8 +1,8 @@
 {
   cache.setDetailed(true);
   DataStore.saveCache(cache,LoadFlags.SAVE_ALL);
-  List<Geocache> exportList=Collections.singletonList(cache);
-  GpxExportTester gpxExport=new GpxExportTester();
+  final List<Geocache> exportList=Collections.singletonList(cache);
+  final GpxExportTester gpxExport=new GpxExportTester();
   File result=null;
   try {
     result=gpxExport.testExportSync(exportList);
@@ -11,8 +11,14 @@
     DataStore.removeCache(cache.getGeocode(),LoadFlags.REMOVE_ALL);
   }
   assertThat(result).isNotNull();
-  String gpx=org.apache.commons.io.FileUtils.readFileToString(result);
+  final String gpx=org.apache.commons.io.FileUtils.readFileToString(result);
   assertThat(gpx).contains("<wpt");
   assertThat(gpx).contains(cache.getGeocode());
+  if (cache.getUrl() != null) {
+    assertThat(gpx).contains("<url>");
+  }
+ else {
+    assertThat(gpx).doesNotContain("<url>");
+  }
   FileUtils.deleteIgnoringFailure(result);
 }
