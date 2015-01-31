@@ -8,7 +8,7 @@
   setClickListener(faq,"http://faq.cgeo.org/");
   market.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View v){
-      market();
+      ProcessUtils.openMarket(AboutActivity.this,"market://details?id=" + getPackageName());
     }
   }
 );

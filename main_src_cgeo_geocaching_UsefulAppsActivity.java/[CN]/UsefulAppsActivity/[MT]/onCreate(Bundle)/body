@@ -25,7 +25,7 @@
   list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
     @Override public void onItemClick(    final AdapterView<?> parent,    final View view,    final int position,    final long id){
       final HelperApp helperApp=HELPER_APPS[position];
-      helperApp.installFromMarket(UsefulAppsActivity.this);
+      ProcessUtils.openMarket(UsefulAppsActivity.this,helperApp.getMarketUrl());
     }
   }
 );
