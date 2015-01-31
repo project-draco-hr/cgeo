@@ -3,5 +3,6 @@
   ButterKnife.inject(this,view);
   system.setText(systemInformation(AboutActivity.this));
   system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+  Compatibility.setTextIsSelectable(system,true);
   return view;
 }
