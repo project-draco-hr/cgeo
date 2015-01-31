@@ -11,7 +11,7 @@
  else   if (cache.isEventCache()) {
     final Date hiddenDate=cache.getHiddenDate();
     if (hiddenDate != null) {
-      infos.add(Formatter.formatShortDate(hiddenDate.getTime()));
+      infos.add(Formatter.formatShortDateIncludingWeekday(hiddenDate.getTime()));
     }
   }
 }
