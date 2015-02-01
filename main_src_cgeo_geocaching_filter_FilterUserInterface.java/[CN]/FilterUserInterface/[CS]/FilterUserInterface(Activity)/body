@@ -17,9 +17,10 @@
   register(R.string.caches_filter_popularity_ratio,PopularityRatioFilter.Factory.class);
   register(R.string.caches_filter_personal_data,PersonalDataFilterFactory.class);
   register(R.string.caches_filter_rating,RatingFilter.class);
+  final Collator collator=TextUtils.getCollator();
   Collections.sort(registry,new Comparator<FactoryEntry>(){
     @Override public int compare(    final FactoryEntry lhs,    final FactoryEntry rhs){
-      return lhs.name.compareToIgnoreCase(rhs.name);
+      return collator.compare(lhs.name,rhs.name);
     }
   }
 );
