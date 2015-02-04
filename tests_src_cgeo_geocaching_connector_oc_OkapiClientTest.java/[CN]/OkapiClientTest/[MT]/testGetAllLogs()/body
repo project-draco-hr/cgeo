@@ -1,0 +1,6 @@
+{
+  final String geoCode="OC10CB8";
+  final Geocache cache=OkapiClient.getCache(geoCode);
+  final int defaultLogCount=10;
+  assertThat(cache.getLogs().size()).isGreaterThan(defaultLogCount);
+}

@@ -7,6 +7,7 @@
   final OCApiConnector ocapiConn=(OCApiConnector)connector;
   params.add("fields",getFullFields(ocapiConn));
   params.add("attribution_append","none");
+  params.add(PARAMETER_LOGCOUNT_KEY,PARAMETER_LOGCOUNT_VALUE);
   final JSONResult result=request(ocapiConn,OkapiService.SERVICE_CACHE,params);
   return result.isSuccess ? parseCache(result.data) : null;
 }
