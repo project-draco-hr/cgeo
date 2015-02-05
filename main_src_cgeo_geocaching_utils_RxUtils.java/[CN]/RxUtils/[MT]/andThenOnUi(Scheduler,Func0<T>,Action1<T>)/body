@@ -1,3 +1,14 @@
 {
-  Async.fromCallable(background,scheduler).observeOn(AndroidSchedulers.mainThread()).subscribe(foreground);
+  scheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
+      final T value=background.call();
+      AndroidSchedulers.mainThread().createWorker().schedule(new Action0(){
+        @Override public void call(){
+          foreground.call(value);
+        }
+      }
+);
+    }
+  }
+);
 }

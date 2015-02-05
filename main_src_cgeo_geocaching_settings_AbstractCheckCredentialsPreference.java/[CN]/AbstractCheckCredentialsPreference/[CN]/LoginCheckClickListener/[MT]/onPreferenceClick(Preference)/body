@@ -8,9 +8,9 @@
   final ProgressDialog loginDialog=ProgressDialog.show(settingsActivity,res.getString(R.string.init_login_popup),res.getString(R.string.init_login_popup_working),true);
   loginDialog.setCancelable(false);
   Cookies.clearCookies();
-  AppObservable.bindActivity(settingsActivity,Async.start(new Func0<ImmutablePair<StatusCode,Observable<Drawable>>>(){
-    @Override public ImmutablePair<StatusCode,Observable<Drawable>> call(){
-      return login();
+  AppObservable.bindActivity(settingsActivity,Observable.defer(new Func0<Observable<ImmutablePair<StatusCode,Observable<Drawable>>>>(){
+    @Override public Observable<ImmutablePair<StatusCode,Observable<Drawable>>> call(){
+      return Observable.just(login());
     }
   }
 )).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<ImmutablePair<StatusCode,Observable<Drawable>>>(){

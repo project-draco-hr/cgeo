@@ -1,9 +1,9 @@
 {
   final HttpResponse response=Network.getRequest(url,params,new Parameters("Referer",referer));
-  return Async.start(new Func0<String>(){
-    @Override public String call(){
-      return Network.getResponseData(response);
+  return Observable.defer(new Func0<Observable<String>>(){
+    @Override public Observable<String> call(){
+      return Observable.just(Network.getResponseData(response));
     }
   }
-,RxUtils.networkScheduler);
+).subscribeOn(RxUtils.networkScheduler);
 }

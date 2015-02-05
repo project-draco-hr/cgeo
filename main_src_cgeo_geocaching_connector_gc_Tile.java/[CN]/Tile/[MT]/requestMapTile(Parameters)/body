@@ -1,15 +1,15 @@
 {
   final HttpResponse response=Network.getRequest(GCConstants.URL_MAP_TILE,params,new Parameters("Referer",GCConstants.URL_LIVE_MAP));
-  return Async.start(new Func0<Bitmap>(){
-    @Override public Bitmap call(){
+  return Observable.defer(new Func0<Observable<Bitmap>>(){
+    @Override public Observable<Bitmap> call(){
       try {
-        return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
+        return Observable.just(response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null);
       }
  catch (      final IOException e) {
         Log.e("Tile.requestMapTile() ",e);
-        return null;
+        return Observable.just(null);
       }
     }
   }
-,RxUtils.computationScheduler);
+).subscribeOn(RxUtils.computationScheduler);
 }

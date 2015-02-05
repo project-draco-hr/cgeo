@@ -4,8 +4,8 @@
   final int requestWidth=Math.min(width / scale,GOOGLE_MAPS_MAX_SIZE);
   final int requestHeight=(aspectRatio > 1) ? Math.round(requestWidth / aspectRatio) : requestWidth;
   final int requestZoom=Math.min((scale == 2) ? zoom + 1 : zoom,GOOGLE_MAX_ZOOM);
-  return checkDownloadPermission(Async.fromAction(new Action0(){
-    @Override public void call(){
+  return checkDownloadPermission(Observable.defer(new Func0<Observable<String>>(){
+    @Override public Observable<String> call(){
       final Parameters params=new Parameters("center",latlonMap,"zoom",String.valueOf(requestZoom),"size",String.valueOf(requestWidth) + 'x' + String.valueOf(requestHeight),"scale",String.valueOf(scale),"maptype",mapType,"markers","icon:" + markerUrl + '|'+ shadow+ latlonMap,"sensor","false");
       if (waypoints != null) {
         params.addAll(waypoints);
@@ -13,7 +13,7 @@
       final HttpResponse httpResponse=Network.getRequest(GOOGLE_STATICMAP_URL,params);
       if (httpResponse == null) {
         Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
-        return;
+        return Observable.just(prefix);
       }
       final int statusCode=httpResponse.getStatusLine().getStatusCode();
       if (statusCode != 200) {
@@ -21,7 +21,7 @@
         if (statusCode == 403) {
           last403=System.currentTimeMillis();
         }
-        return;
+        return Observable.just(prefix);
       }
       final File file=getMapFile(geocode,prefix,true);
       if (LocalStorage.saveEntityToFile(httpResponse,file)) {
@@ -30,7 +30,8 @@
           FileUtils.deleteIgnoringFailure(file);
         }
       }
+      return Observable.just(prefix);
     }
   }
-,prefix,RxUtils.networkScheduler));
+).subscribeOn(RxUtils.networkScheduler));
 }

@@ -1,13 +1,8 @@
 {
-  andThenOnUi(scheduler,new Func0<Void>(){
-    @Override public Void call(){
+  scheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
       background.call();
-      return null;
-    }
-  }
-,new Action1<Void>(){
-    @Override public void call(    final Void ignored){
-      foreground.call();
+      AndroidSchedulers.mainThread().createWorker().schedule(foreground);
     }
   }
 );
