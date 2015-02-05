@@ -1,4 +1,11 @@
 {
-  testGeocoder(MapQuestGeocoder.getFromLocationName(TEST_ADDRESS),"MapQuest",true);
-  testGeocoder(MapQuestGeocoder.getFromLocation(TEST_COORDS),"MapQuest reverse",true);
+  final Locale locale=Locale.getDefault();
+  try {
+    Locale.setDefault(Locale.US);
+    testGeocoder(MapQuestGeocoder.getFromLocationName(TEST_ADDRESS),"MapQuest",true);
+    testGeocoder(MapQuestGeocoder.getFromLocation(TEST_COORDS),"MapQuest reverse",true);
+  }
+  finally {
+    Locale.setDefault(locale);
+  }
 }
