@@ -112,6 +112,9 @@
       }
       requireGeodata=getPage(position) == Page.DETAILS;
       startOrStopGeoDataListener();
+      if (currentActionMode != null) {
+        currentActionMode.finish();
+      }
     }
   }
 );
