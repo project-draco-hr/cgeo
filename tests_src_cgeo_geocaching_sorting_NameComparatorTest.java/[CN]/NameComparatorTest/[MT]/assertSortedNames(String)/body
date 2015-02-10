@@ -1,6 +1,6 @@
 {
-  ArrayList<Geocache> caches=new ArrayList<Geocache>(names.length);
-  for (  String name : names) {
+  final ArrayList<Geocache> caches=new ArrayList<Geocache>(names.length);
+  for (  final String name : names) {
     caches.add(new NamedCache(name));
   }
   Collections.sort(caches,comp);
