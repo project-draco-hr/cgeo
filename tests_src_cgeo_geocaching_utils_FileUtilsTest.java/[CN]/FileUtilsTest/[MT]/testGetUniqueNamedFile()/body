@@ -1,0 +1,15 @@
+{
+  LocalStorage.deleteDirectory(cacheDir);
+  cacheDir.mkdirs();
+  try {
+    assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(baseFile);
+    baseFile.createNewFile();
+    assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative1);
+    alternative1.createNewFile();
+    assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
+    assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
+  }
+  finally {
+    LocalStorage.deleteDirectory(cacheDir);
+  }
+}
