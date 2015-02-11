@@ -1,9 +1,0 @@
-{
-  try {
-    return (Context)ServiceTestCase.class.getMethod("getTestContext").invoke(this);
-  }
- catch (  final Exception e) {
-    Log.e("Unable to get test context",e);
-    return null;
-  }
-}
