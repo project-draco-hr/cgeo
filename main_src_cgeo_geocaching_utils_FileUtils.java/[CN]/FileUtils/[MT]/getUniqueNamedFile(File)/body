@@ -1,0 +1,15 @@
+{
+  if (!file.exists()) {
+    return file;
+  }
+  final String baseNameAndPath=file.getPath();
+  final String prefix=StringUtils.substringBeforeLast(baseNameAndPath,".") + "_";
+  final String extension="." + StringUtils.substringAfterLast(baseNameAndPath,".");
+  for (int i=1; i < Integer.MAX_VALUE; i++) {
+    final File numbered=new File(prefix + i + extension);
+    if (!numbered.exists()) {
+      return numbered;
+    }
+  }
+  throw new IllegalStateException("Unable to generate a non-existing file name");
+}

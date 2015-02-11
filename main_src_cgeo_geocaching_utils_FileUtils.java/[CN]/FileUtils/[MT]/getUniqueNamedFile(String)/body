@@ -1,9 +1,0 @@
-{
-  String extension=StringUtils.substringAfterLast(baseNameAndPath,".");
-  String pathName=StringUtils.substringBeforeLast(baseNameAndPath,".");
-  int number=1;
-  while (new File(getNumberedFileName(pathName,extension,number)).exists()) {
-    number++;
-  }
-  return new File(getNumberedFileName(pathName,extension,number));
-}
