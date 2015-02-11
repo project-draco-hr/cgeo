@@ -1,6 +1,6 @@
 {
-  FileUtils.deleteDirectory(cacheDir);
-  cacheDir.mkdirs();
+  FileUtils.deleteDirectory(testDir);
+  testDir.mkdirs();
   try {
     assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(baseFile);
     baseFile.createNewFile();
@@ -10,6 +10,6 @@
     assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
   }
   finally {
-    FileUtils.deleteDirectory(cacheDir);
+    FileUtils.deleteDirectory(testDir);
   }
 }

@@ -1,0 +1,8 @@
+{
+  FileUtils.deleteDirectory(testDir);
+  assertThat(testDir.exists()).isFalse();
+  FileUtils.mkdirs(testDir);
+  assertThat(testDir.exists()).isTrue();
+  FileUtils.deleteDirectory(testDir);
+  assertThat(testDir.exists()).isFalse();
+}
