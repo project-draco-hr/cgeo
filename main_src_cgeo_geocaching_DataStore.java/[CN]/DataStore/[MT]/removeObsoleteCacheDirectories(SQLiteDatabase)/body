@@ -21,7 +21,7 @@ synchronized (select) {
       @Override public void call(){
         for (        final File dir : toRemove) {
           Log.i("Removing obsolete cache directory for " + dir.getName());
-          LocalStorage.deleteDirectory(dir);
+          FileUtils.deleteDirectory(dir);
         }
       }
     }

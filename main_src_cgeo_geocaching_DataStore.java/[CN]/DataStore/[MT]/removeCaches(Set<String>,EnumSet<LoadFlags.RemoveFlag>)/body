@@ -36,7 +36,7 @@
       database.endTransaction();
     }
     for (    final String geocode : geocodes) {
-      LocalStorage.deleteDirectory(LocalStorage.getStorageDir(geocode));
+      FileUtils.deleteDirectory(LocalStorage.getStorageDir(geocode));
     }
   }
 }
