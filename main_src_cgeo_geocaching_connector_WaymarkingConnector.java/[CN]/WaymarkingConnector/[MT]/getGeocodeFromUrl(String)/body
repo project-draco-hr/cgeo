@@ -1,0 +1,11 @@
+{
+  String code=StringUtils.substringAfterLast(url,"coord.info/");
+  if (code != null && canHandle(code)) {
+    return code;
+  }
+  code=StringUtils.substringBetween(url,"waymarks/","_");
+  if (code != null && canHandle(code)) {
+    return code;
+  }
+  return null;
+}

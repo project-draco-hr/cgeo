@@ -1,0 +1,8 @@
+{
+  try {
+    getConnector().getUrl(new Trackable());
+    fail("IllegalStateException expected");
+  }
+ catch (  final IllegalStateException e) {
+  }
+}
