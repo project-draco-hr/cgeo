@@ -1,0 +1,4 @@
+{
+  final IConnector connector=ConnectorFactory.getConnector("OU07A0");
+  assertThat(connector.getGeocodeFromUrl("http://www.opencaching.us/viewcache.php?wp=OU07A0")).isEqualTo("OU07A0");
+}
