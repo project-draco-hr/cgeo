@@ -1,8 +1,8 @@
 {
   final int speed=(int)Sensors.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000;
-  Strategy strategy=Settings.getLiveMapStrategy();
-  if (strategy == Strategy.AUTO) {
-    strategy=speed >= 30 ? Strategy.FAST : Strategy.DETAILED;
+  LivemapStrategy strategy=Settings.getLiveMapStrategy();
+  if (strategy == LivemapStrategy.AUTO) {
+    strategy=speed >= 30 ? LivemapStrategy.FAST : LivemapStrategy.DETAILED;
   }
   final SearchResult result=searchByViewport(viewport,tokens,strategy);
   if (Settings.isDebug()) {

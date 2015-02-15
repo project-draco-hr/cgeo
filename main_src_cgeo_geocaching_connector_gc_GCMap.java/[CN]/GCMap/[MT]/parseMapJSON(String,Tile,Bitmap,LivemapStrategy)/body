@@ -54,7 +54,7 @@
       cache.setGeocode(id);
       cache.setName(nameCache.get(id));
       cache.setCoords(tile.getCoord(xy),tile.getZoomLevel());
-      if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
+      if (strategy.flags.contains(LivemapStrategy.Flag.PARSE_TILES) && bitmap != null) {
         for (        final UTFGridPosition singlePos : singlePositions.get(id)) {
           if (IconDecoder.parseMapPNG(cache,bitmap,singlePos,tile.getZoomLevel())) {
             break;
