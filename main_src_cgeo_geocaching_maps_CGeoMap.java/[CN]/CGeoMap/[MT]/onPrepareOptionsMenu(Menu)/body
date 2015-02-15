@@ -25,7 +25,7 @@
     item.setChecked(overlayCaches.getCircles());
     item=menu.findItem(R.id.menu_theme_mode);
     item.setVisible(mapView.hasMapThemes());
-    menu.findItem(R.id.menu_as_list).setVisible(!isLoading());
+    menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
     menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
 switch (Settings.getLiveMapStrategy()) {
 case FASTEST:
