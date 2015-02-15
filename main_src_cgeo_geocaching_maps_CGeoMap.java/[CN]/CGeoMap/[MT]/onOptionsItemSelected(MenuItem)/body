@@ -97,6 +97,11 @@ if (caches.size() == 1) {
 caches.iterator().next().showHintToast(getActivity());
 }
 return true;
+case R.id.menu_compass:
+if (caches.size() == 1) {
+CompassActivity.startActivityCache(this.getActivity(),caches.iterator().next());
+}
+return true;
 default :
 final MapSource mapSource=MapProviderFactory.getMapSource(id);
 if (mapSource != null) {

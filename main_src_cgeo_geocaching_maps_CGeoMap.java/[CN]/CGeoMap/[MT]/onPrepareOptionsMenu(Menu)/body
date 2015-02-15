@@ -41,6 +41,7 @@ default :
 menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
 }
 menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
+menu.findItem(R.id.menu_compass).setVisible(mapMode == MapMode.SINGLE);
 }
  catch (final RuntimeException e) {
 Log.e("CGeoMap.onPrepareOptionsMenu",e);
