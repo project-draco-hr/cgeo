@@ -1,3 +1,5 @@
 {
-  return allLogs ? getCache().getLogs() : getCache().getFriendsLogs();
+  final Geocache cache=getCache();
+  final List<LogEntry> logs=allLogs ? cache.getLogs() : cache.getFriendsLogs();
+  return addOwnOfflineLog(cache,logs);
 }
