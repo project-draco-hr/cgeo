@@ -2,5 +2,5 @@
   final Geocache cache=new Geocache();
   cache.setType(CacheType.EVENT);
   cache.setHidden(start.getTime());
-  assertThat(DateUtils.isPastEvent(cache)).isEqualTo(expectedPast);
+  assertThat(CalendarUtils.isPastEvent(cache)).isEqualTo(expectedPast);
 }

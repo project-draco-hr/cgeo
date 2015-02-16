@@ -2,7 +2,7 @@
   date=Calendar.getInstance();
   rating=GCVote.NO_RATING;
   typeSelected=cache.getDefaultLogType();
-  if (cache.isEventCache() && DateUtils.isPastEvent(cache) && typeSelected == LogType.ATTENDED) {
+  if (cache.isEventCache() && CalendarUtils.isPastEvent(cache) && typeSelected == LogType.ATTENDED) {
     date.setTime(cache.getHiddenDate());
   }
   text=null;

@@ -1,7 +1,7 @@
 {
   final List<Geocache> deletion=new ArrayList<>();
   for (  final Geocache cache : adapter.getCheckedOrAllCaches()) {
-    if (DateUtils.isPastEvent(cache)) {
+    if (CalendarUtils.isPastEvent(cache)) {
       deletion.add(cache);
     }
   }
