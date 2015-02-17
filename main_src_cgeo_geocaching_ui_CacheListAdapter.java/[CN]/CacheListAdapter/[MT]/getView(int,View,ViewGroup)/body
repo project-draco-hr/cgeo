@@ -62,7 +62,9 @@
     holder.text.setText(cache.getName());
   }
   holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache),null,null,null);
-  if (cache.getInventoryItems() > 0) {
+  final int inventorySize=cache.getInventoryItems();
+  if (inventorySize > 0) {
+    holder.inventory.setText(Integer.toString(inventorySize));
     holder.inventory.setVisibility(View.VISIBLE);
   }
  else {
