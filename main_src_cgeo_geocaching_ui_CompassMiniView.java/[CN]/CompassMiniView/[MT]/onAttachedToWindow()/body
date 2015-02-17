@@ -1,6 +1,7 @@
 {
   if (instances++ == 0) {
-    compassArrow=BitmapFactory.decodeResource(getResources(),Settings.isLightSkin() ? R.drawable.compass_arrow_mini_black : R.drawable.compass_arrow_mini_white);
+    final int drawable=isInEditMode() || !Settings.isLightSkin() ? R.drawable.compass_arrow_mini_white : R.drawable.compass_arrow_mini_black;
+    compassArrow=BitmapFactory.decodeResource(getResources(),drawable);
     compassArrowWidth=compassArrow.getWidth();
     compassArrowHeight=compassArrow.getWidth();
   }
