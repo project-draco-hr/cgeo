@@ -1,0 +1,13 @@
+{
+  final String id=StringUtils.substringAfter(url,"cacheid=");
+  try {
+    final String geocode=GEOCODE_PREFIX + StringUtils.leftPad(Integer.toHexString(Integer.valueOf(id)),4,'0');
+    if (canHandle(geocode)) {
+      return geocode;
+    }
+  }
+ catch (  final NumberFormatException e) {
+    Log.e("Unexpected URL for opencaching.cz " + url);
+  }
+  return super.getGeocodeFromUrl(url);
+}
