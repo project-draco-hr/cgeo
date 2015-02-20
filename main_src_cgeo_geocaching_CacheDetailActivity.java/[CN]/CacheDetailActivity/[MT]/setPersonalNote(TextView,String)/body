@@ -2,6 +2,7 @@
   personalNoteView.setText(personalNote,TextView.BufferType.SPANNABLE);
   if (StringUtils.isNotBlank(personalNote)) {
     personalNoteView.setVisibility(View.VISIBLE);
+    Linkify.addLinks(personalNoteView,Linkify.ALL);
   }
  else {
     personalNoteView.setVisibility(View.GONE);
