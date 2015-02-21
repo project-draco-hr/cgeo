@@ -1,8 +1,11 @@
 {
-  final Intent upIntent=NavUtils.getParentActivityIntent(activity);
-  if (upIntent == null) {
+  Intent upIntent=NavUtils.getParentActivityIntent(activity);
+  if (upIntent == null && !activity.isTaskRoot()) {
     activity.finish();
     return true;
+  }
+  if (upIntent == null) {
+    upIntent=new Intent(CgeoApplication.getInstance(),MainActivity.class);
   }
   if (NavUtils.shouldUpRecreateTask(activity,upIntent) || activity.isTaskRoot()) {
     TaskStackBuilder.create(activity).addNextIntentWithParentStack(upIntent).startActivities();
