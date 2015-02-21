@@ -16,6 +16,9 @@ return true;
 case R.id.menu_gcvote:
 showVoteDialog();
 return true;
+case R.id.menu_checker:
+startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(CheckerUtils.getCheckerUrl(cache))));
+return true;
 default :
 if (NavigationAppFactory.onMenuItemSelected(item,this,cache)) {
 return true;

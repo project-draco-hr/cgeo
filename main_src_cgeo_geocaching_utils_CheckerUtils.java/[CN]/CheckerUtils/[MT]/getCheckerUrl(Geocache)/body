@@ -1,0 +1,13 @@
+{
+  final String description=cache.getDescription();
+  final Matcher matcher=Patterns.WEB_URL.matcher(description);
+  while (matcher.find()) {
+    final String url=matcher.group();
+    for (    final String checker : CHECKERS) {
+      if (StringUtils.containsIgnoreCase(url,checker)) {
+        return url;
+      }
+    }
+  }
+  return null;
+}
