@@ -1,10 +1,11 @@
 {
   return new NfcAdapter.CreateNdefMessageCallback(){
     @Override public NdefMessage createNdefMessage(    final NfcEvent event){
-      final String uri=sharingInterface.getAndroidBeamUri();
+      String uri=sharingInterface.getAndroidBeamUri();
       if (uri == null) {
         return null;
       }
+      uri=StringUtils.replace(uri,"geocaching.com//","geocaching.com/");
       final NdefRecord[] records={NdefRecord.createUri(uri),NdefRecord.createApplicationRecord(CgeoApplication.getInstance().getPackageName())};
       return new NdefMessage(records);
     }
