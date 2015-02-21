@@ -2,15 +2,11 @@
   super.onCreate(savedInstanceState,R.layout.cachedetail_activity);
   createSubscriptions=new CompositeSubscription();
   final Bundle extras=getIntent().getExtras();
-  Uri uri=getIntent().getData();
+  final Uri uri=AndroidBeam.getUri(getIntent());
   String name=null;
   String geocode=null;
   String guid=null;
-  if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-    final NdefMessage msg=(NdefMessage)extras.getParcelableArray(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
-    uri=Uri.parse("http://" + new String(msg.getRecords()[0].getPayload(),Charsets.UTF_8));
-  }
- else   if (extras != null) {
+  if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
     name=extras.getString(Intents.EXTRA_NAME);
     guid=extras.getString(Intents.EXTRA_GUID);
@@ -101,5 +97,5 @@
   }
 );
   locationUpdater=new CacheDetailsGeoDirHandler(this);
-  initializeAndroidBeam(this);
+  AndroidBeam.enable(this,this);
 }

@@ -1,0 +1,7 @@
+{
+  final NfcAdapter nfcAdapter=NfcAdapter.getDefaultAdapter(activity);
+  if (nfcAdapter == null) {
+    return;
+  }
+  nfcAdapter.setNdefPushMessageCallback(messageCallback,activity);
+}

@@ -1,0 +1,7 @@
+{
+  if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+    final NdefMessage msg=(NdefMessage)intent.getExtras().getParcelableArray(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
+    return Uri.parse("http://" + new String(msg.getRecords()[0].getPayload(),Charsets.UTF_8));
+  }
+  return intent.getData();
+}
