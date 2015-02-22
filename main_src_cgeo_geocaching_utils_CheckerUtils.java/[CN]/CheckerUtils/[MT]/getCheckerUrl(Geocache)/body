@@ -5,7 +5,7 @@
     final String url=matcher.group();
     for (    final String checker : CHECKERS) {
       if (StringUtils.containsIgnoreCase(url,checker)) {
-        return url;
+        return StringEscapeUtils.unescapeHtml4(url);
       }
     }
   }
