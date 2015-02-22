@@ -1,0 +1,8 @@
+{
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
+      ((IgnoreCapability)ConnectorFactory.getConnector(cache)).ignoreCache(cache);
+    }
+  }
+);
+}
