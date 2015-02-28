@@ -3,10 +3,5 @@
     return;
   }
   final SearchResult searchToUse=getFilteredSearch();
-  final int count=searchToUse.getCount();
-  String mapTitle=title;
-  if (count > 0) {
-    mapTitle=title + " [" + count+ "]";
-  }
-  CGeoMap.startActivitySearch(this,searchToUse,mapTitle);
+  CGeoMap.startActivitySearch(this,searchToUse,title);
 }
