@@ -5,5 +5,8 @@
   final Intent cachesIntent=new Intent(context,CacheListActivity.class);
   Intents.putListType(cachesIntent,CacheListType.COORDINATE);
   cachesIntent.putExtra(Intents.EXTRA_COORDS,coords);
+  if (StringUtils.isNotEmpty(name)) {
+    cachesIntent.putExtra(Intents.EXTRA_TITLE,context.getString(R.string.around,name));
+  }
   context.startActivity(cachesIntent);
 }

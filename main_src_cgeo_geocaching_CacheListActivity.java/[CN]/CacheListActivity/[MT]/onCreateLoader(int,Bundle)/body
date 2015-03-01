@@ -82,6 +82,9 @@ title=extras.getString(Intents.EXTRA_NAME);
 loader=new PocketGeocacheListLoader(app,guid);
 break;
 }
+if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
+title=extras.getString(Intents.EXTRA_TITLE);
+}
 updateTitle();
 showProgress(true);
 showFooterLoadingCaches();

@@ -55,7 +55,7 @@ NavigationAppFactory.showNavigationMenu(this,null,selectedWaypoint,null);
 return true;
 case R.id.menu_waypoint_caches_around:
 if (selectedWaypoint != null) {
-CacheListActivity.startActivityCoordinates(this,selectedWaypoint.getCoords());
+CacheListActivity.startActivityCoordinates(this,selectedWaypoint.getCoords(),selectedWaypoint.getName());
 }
 return true;
 case R.id.menu_waypoint_reset_cache_coords:
