@@ -40,7 +40,7 @@
     noteView.setOnClickListener(new DecryptTextClickListener(noteView));
     noteView.setVisibility(View.VISIBLE);
     if (TextUtils.containsHtml(wpt.getNote())) {
-      noteView.setText(Html.fromHtml(wpt.getNote()),TextView.BufferType.SPANNABLE);
+      noteView.setText(Html.fromHtml(wpt.getNote(),new SmileyImage(cache.getGeocode(),noteView),new UnknownTagsHandler()),TextView.BufferType.SPANNABLE);
     }
  else {
       noteView.setText(wpt.getNote());
