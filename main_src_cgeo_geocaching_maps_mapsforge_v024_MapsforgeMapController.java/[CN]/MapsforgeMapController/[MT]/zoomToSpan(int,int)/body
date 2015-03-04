@@ -1,7 +1,0 @@
-{
-  if (latSpanE6 != 0 && lonSpanE6 != 0) {
-    int distDegree=Math.max(latSpanE6,lonSpanE6);
-    int zoomLevel=(int)Math.floor(Math.log(360.0 * 1e6 / distDegree) / Math.log(2));
-    mapController.setZoom(zoomLevel + 1);
-  }
-}

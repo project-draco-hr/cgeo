@@ -2,7 +2,7 @@
   MapProviderFactory.deleteOfflineMapSources();
   final Resources resources=CgeoApplication.getInstance().getResources();
   final List<String> offlineMaps=getOfflineMaps();
-  for (  String mapFile : offlineMaps) {
+  for (  final String mapFile : offlineMaps) {
     final String mapName=StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(),"."));
     registerMapSource(new OfflineMapSource(mapFile,this,mapName + " (" + resources.getString(R.string.map_source_osm_offline)+ ")",MapGeneratorInternal.DATABASE_RENDERER));
   }

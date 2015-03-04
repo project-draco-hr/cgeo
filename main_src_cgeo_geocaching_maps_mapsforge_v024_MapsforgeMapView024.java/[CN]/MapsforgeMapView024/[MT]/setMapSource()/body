@@ -1,8 +1,0 @@
-{
-  setMapViewMode(MapViewMode.CANVAS_RENDERER);
-  setMapFile(Settings.getMapFile());
-  if (!MapDatabase.isValidMapFile(Settings.getMapFile())) {
-    Log.e("MapsforgeMapView024: Invalid map file");
-  }
-  Toast.makeText(getContext(),getContext().getResources().getString(R.string.warn_deprecated_mapfile),Toast.LENGTH_LONG).show();
-}

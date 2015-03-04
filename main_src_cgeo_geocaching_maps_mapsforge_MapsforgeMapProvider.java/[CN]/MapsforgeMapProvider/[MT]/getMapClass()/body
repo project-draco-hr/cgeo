@@ -1,11 +1,4 @@
 {
-  final MapSource source=Settings.getMapSource();
-  if (source instanceof OfflineMapSource && isMapfile024(Settings.getMapFile())) {
-    oldMap=true;
-    mapItemFactory=new MapsforgeMapItemFactory024();
-    return MapsforgeMapActivity024.class;
-  }
-  oldMap=false;
   mapItemFactory=new MapsforgeMapItemFactory();
   return MapsforgeMapActivity.class;
 }
