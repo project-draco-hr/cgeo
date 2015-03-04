@@ -9,5 +9,11 @@
  else {
     changeLogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
   }
+  changeLogLink.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    final View v){
+      startUrl("https://github.com/cgeo/cgeo/releases");
+    }
+  }
+);
   return view;
 }
