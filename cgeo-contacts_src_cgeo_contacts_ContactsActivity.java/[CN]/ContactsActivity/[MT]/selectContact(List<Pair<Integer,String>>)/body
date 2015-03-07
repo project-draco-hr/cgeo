@@ -11,5 +11,11 @@
       openContactAndFinish(contactId);
     }
   }
+).setOnCancelListener(new OnCancelListener(){
+    @Override public void onCancel(    final DialogInterface dialog){
+      dialog.dismiss();
+      finish();
+    }
+  }
 ).create().show();
 }
