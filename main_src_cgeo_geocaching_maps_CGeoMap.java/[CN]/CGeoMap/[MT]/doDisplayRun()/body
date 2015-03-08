@@ -24,7 +24,7 @@
       overlayCaches.updateItems(itemsToDisplay);
     }
     displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-    displayHandler.sendEmptyMessage(UPDATE_TITLE);
+    updateMapTitle();
   }
   finally {
     showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);

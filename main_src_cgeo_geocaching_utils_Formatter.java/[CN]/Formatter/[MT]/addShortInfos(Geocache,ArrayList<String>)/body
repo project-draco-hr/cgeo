@@ -1,9 +1,9 @@
 {
   if (cache.hasDifficulty()) {
-    infos.add("D " + String.format("%.1f",cache.getDifficulty()));
+    infos.add("D " + formatDT(cache.getDifficulty()));
   }
   if (cache.hasTerrain()) {
-    infos.add("T " + String.format("%.1f",cache.getTerrain()));
+    infos.add("T " + formatDT(cache.getTerrain()));
   }
   if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
     infos.add(cache.getSize().getL10n());

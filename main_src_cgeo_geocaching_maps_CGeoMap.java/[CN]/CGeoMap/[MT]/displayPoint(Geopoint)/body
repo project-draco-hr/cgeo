@@ -4,6 +4,6 @@
   final CachesOverlayItemImpl item=getWaypointItem(waypoint);
   overlayCaches.updateItems(item);
   displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-  displayHandler.sendEmptyMessage(UPDATE_TITLE);
+  updateMapTitle();
   cachesCnt=1;
 }

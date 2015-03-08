@@ -42,7 +42,7 @@
     activity.getActionBar().setDisplayHomeAsUpEnabled(true);
   }
   activity.setContentView(mapProvider.getMapLayoutId());
-  setTitle(res.getString(R.string.map_map));
+  setTitle();
   mapView=(MapViewImpl)activity.findViewById(mapProvider.getMapViewId());
   mapView.setMapSource();
   mapView.setBuiltInZoomControls(true);

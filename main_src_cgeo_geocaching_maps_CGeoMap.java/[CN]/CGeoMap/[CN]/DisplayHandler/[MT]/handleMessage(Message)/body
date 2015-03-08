@@ -6,29 +6,8 @@
   }
 switch (what) {
 case UPDATE_TITLE:
-    if (map.mapMode == MapMode.LIVE && map.isLiveEnabled) {
-      map.setTitle(map.res.getString(R.string.map_live));
-    }
- else {
-      map.setTitle(map.mapTitle);
-    }
-  map.countVisibleCaches();
-final StringBuilder subtitle=new StringBuilder();
-if (!map.caches.isEmpty()) {
-final int totalCount=map.caches.size();
-if (map.cachesCnt != totalCount && Settings.isDebug()) {
-  subtitle.append(map.cachesCnt).append('/').append(map.res.getQuantityString(R.plurals.cache_counts,totalCount,totalCount));
-}
- else {
-  subtitle.append(map.res.getQuantityString(R.plurals.cache_counts,map.cachesCnt,map.cachesCnt));
-}
-}
-if (Settings.isDebug() && map.lastSearchResult != null && StringUtils.isNotBlank(map.lastSearchResult.getUrl())) {
-subtitle.append(" [").append(map.lastSearchResult.getUrl()).append(']');
-}
-if (subtitle.length() > 0) {
-map.setSubtitle(subtitle.toString());
-}
+    map.setTitle();
+  map.setSubtitle();
 break;
 case INVALIDATE_MAP:
 map.mapView.repaintRequired(null);

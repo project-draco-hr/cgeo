@@ -8,7 +8,7 @@
     final int zoomNow=map.mapView.getMapZoomLevel();
     final boolean moved=map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (previousViewport == null)|| zoomNow != previousZoom || (mapMoved(previousViewport,viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
     if (moved || !viewportNow.equals(previousViewport)) {
-      map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
+      map.updateMapTitle();
     }
     previousZoom=zoomNow;
     if (moved) {

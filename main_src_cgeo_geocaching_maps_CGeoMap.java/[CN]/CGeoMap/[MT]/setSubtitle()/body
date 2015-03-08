@@ -1,4 +1,8 @@
 {
+  final String subtitle=calculateSubtitle();
+  if (StringUtils.isEmpty(subtitle)) {
+    return;
+  }
   final TextView titleView=ButterKnife.findById(activity,R.id.actionbar_title);
   if (titleView != null) {
     titleView.setText(titleView.getText().toString() + ' ' + subtitle);

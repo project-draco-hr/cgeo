@@ -18,6 +18,10 @@ markersInvalidated=true;
 lastSearchResult=null;
 searchIntent=null;
 ActivityMixin.invalidateOptionsMenu(activity);
+if (mapMode != MapMode.SINGLE) {
+mapTitle=StringUtils.EMPTY;
+}
+updateMapTitle();
 return true;
 case R.id.menu_store_caches:
 if (!isLoading()) {
@@ -93,14 +97,10 @@ Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
 return true;
 }
 case R.id.menu_hint:
-if (caches.size() == 1) {
-caches.iterator().next().showHintToast(getActivity());
-}
+menuShowHint();
 return true;
 case R.id.menu_compass:
-if (caches.size() == 1) {
-CompassActivity.startActivityCache(this.getActivity(),caches.iterator().next());
-}
+menuCompass();
 return true;
 default :
 final MapSource mapSource=MapProviderFactory.getMapSource(id);
