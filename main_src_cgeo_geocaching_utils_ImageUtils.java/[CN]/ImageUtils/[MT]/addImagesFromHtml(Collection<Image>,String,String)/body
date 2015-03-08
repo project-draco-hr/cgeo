@@ -3,14 +3,16 @@
   for (  final Image image : images) {
     urls.add(image.getUrl());
   }
-  Html.fromHtml(StringUtils.defaultString(htmlText),new ImageGetter(){
-    @Override public Drawable getDrawable(    final String source){
-      if (!urls.contains(source) && canBeOpenedExternally(source)) {
-        images.add(new Image(source,StringUtils.defaultString(geocode)));
-        urls.add(source);
+  for (  final String text : htmlText) {
+    Html.fromHtml(StringUtils.defaultString(text),new ImageGetter(){
+      @Override public Drawable getDrawable(      final String source){
+        if (!urls.contains(source) && canBeOpenedExternally(source)) {
+          images.add(new Image(source,StringUtils.defaultString(geocode)));
+          urls.add(source);
+        }
+        return null;
       }
-      return null;
     }
-  }
 ,null);
+  }
 }
