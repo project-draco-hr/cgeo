@@ -1,8 +1,16 @@
 {
   final ScrollView view=(ScrollView)getLayoutInflater().inflate(R.layout.about_system_page,parentView,false);
   ButterKnife.inject(this,view);
-  system.setText(systemInformation(AboutActivity.this));
+  final String systemInfo=systemInformation(AboutActivity.this);
+  system.setText(systemInfo);
   system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
   Compatibility.setTextIsSelectable(system,true);
+  copy.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    final View view){
+      ClipboardUtils.copyToClipboard(systemInfo);
+      showShortToast(getString(R.string.clipboard_copy_ok));
+    }
+  }
+);
   return view;
 }
