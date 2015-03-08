@@ -11,6 +11,20 @@
   if (Settings.isUseEnglish()) {
     body.append(" (cgeo forced to English)");
   }
+  final boolean calendarAddonAvailable=CalendarAddon.isAvailable();
+  final boolean contactsAddonAvailable=ContactsAddon.isAvailable();
+  body.append("\nInstalled plugins:");
+  if (calendarAddonAvailable || contactsAddonAvailable) {
+    if (calendarAddonAvailable) {
+      body.append(" calendar");
+    }
+    if (contactsAddonAvailable) {
+      body.append(" contacts");
+    }
+  }
+ else {
+    body.append("none");
+  }
   body.append("\n--- End of system information ---\n");
   return body.toString();
 }
