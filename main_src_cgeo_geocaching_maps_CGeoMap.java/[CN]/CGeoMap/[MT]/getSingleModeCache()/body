@@ -1,5 +1,5 @@
 {
-  for (  final Geocache geocache : caches) {
+  for (  final Geocache geocache : new ArrayList<>(caches)) {
     if (geocache.getGeocode().equals(geocodeIntent)) {
       return geocache;
     }
