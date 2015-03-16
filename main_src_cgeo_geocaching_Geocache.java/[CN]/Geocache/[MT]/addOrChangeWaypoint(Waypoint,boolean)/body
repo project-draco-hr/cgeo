@@ -1,7 +1,9 @@
 {
   waypoint.setGeocode(geocode);
   if (waypoint.getId() < 0) {
-    assignUniquePrefix(waypoint);
+    if (StringUtils.isBlank(waypoint.getPrefix())) {
+      assignUniquePrefix(waypoint);
+    }
     waypoints.add(waypoint);
     if (waypoint.isFinalWithCoords()) {
       finalDefined=true;
