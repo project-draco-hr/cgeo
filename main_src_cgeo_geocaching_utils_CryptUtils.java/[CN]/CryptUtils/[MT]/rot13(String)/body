@@ -3,10 +3,10 @@
     return StringUtils.EMPTY;
   }
   final StringBuilder result=new StringBuilder();
-  Rot13Encryption rot13=new Rot13Encryption();
+  final Rot13Encryption rot13=new Rot13Encryption();
   final int length=text.length();
   for (int index=0; index < length; index++) {
-    char c=text.charAt(index);
+    final char c=text.charAt(index);
     result.append(rot13.getNextEncryptedCharacter(c));
   }
   return result.toString();

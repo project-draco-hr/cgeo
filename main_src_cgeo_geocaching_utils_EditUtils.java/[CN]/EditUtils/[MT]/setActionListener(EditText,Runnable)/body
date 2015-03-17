@@ -1,6 +1,6 @@
 {
   editText.setOnEditorActionListener(new TextView.OnEditorActionListener(){
-    @Override public boolean onEditorAction(    TextView v,    int actionId,    KeyEvent event){
+    @Override public boolean onEditorAction(    final TextView v,    final int actionId,    final KeyEvent event){
       if (actionId == EditorInfo.IME_ACTION_GO) {
         runnable.run();
         return true;
@@ -10,7 +10,7 @@
   }
 );
   editText.setOnKeyListener(new View.OnKeyListener(){
-    @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
+    @Override public boolean onKey(    final View v,    final int keyCode,    final KeyEvent event){
       if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
         runnable.run();
         return true;

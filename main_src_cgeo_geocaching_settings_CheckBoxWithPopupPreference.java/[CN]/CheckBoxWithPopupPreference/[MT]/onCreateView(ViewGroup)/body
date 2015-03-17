@@ -3,7 +3,7 @@
     baseOnPrefChangeListener=getOnPreferenceChangeListener();
   }
   setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
-    @Override public boolean onPreferenceChange(    final Preference preference,    Object newValue){
+    @Override public boolean onPreferenceChange(    final Preference preference,    final Object newValue){
       if (baseOnPrefChangeListener != null) {
         baseOnPrefChangeListener.onPreferenceChange(preference,newValue);
       }

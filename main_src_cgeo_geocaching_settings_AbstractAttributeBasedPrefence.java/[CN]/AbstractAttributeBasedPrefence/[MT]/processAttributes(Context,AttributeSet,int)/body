@@ -2,7 +2,7 @@
   if (attrs == null) {
     return;
   }
-  TypedArray types=context.obtainStyledAttributes(attrs,getAttributeNames(),defStyle,0);
+  final TypedArray types=context.obtainStyledAttributes(attrs,getAttributeNames(),defStyle,0);
   processAttributeValues(types);
   types.recycle();
 }

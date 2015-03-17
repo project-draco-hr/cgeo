@@ -2,7 +2,7 @@
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     loadThreadRun=System.currentTimeMillis();
-    SearchResult searchResult;
+    final SearchResult searchResult;
     if (mapMode == MapMode.LIVE) {
       searchResult=isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(),Settings.getCacheType()));
     }
