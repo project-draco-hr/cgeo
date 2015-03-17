@@ -1,5 +1,6 @@
 {
   subMenu.clear();
+  registerComparators();
   for (int i=0; i < registry.size(); i++) {
     final ComparatorEntry comparatorEntry=registry.get(i);
     final MenuItem menuItem=subMenu.add(MENU_GROUP,i,i,comparatorEntry.name);

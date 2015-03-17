@@ -1,6 +1,12 @@
 {
+  registry.clear();
   register(R.string.caches_sort_distance,DistanceComparator.class);
-  register(R.string.caches_sort_date_hidden,DateComparator.class);
+  if (isEventsOnly) {
+    register(R.string.caches_sort_eventdate,EventDateComparator.class);
+  }
+ else {
+    register(R.string.caches_sort_date_hidden,DateComparator.class);
+  }
   register(R.string.caches_sort_difficulty,DifficultyComparator.class);
   register(R.string.caches_sort_finds,FindsComparator.class);
   register(R.string.caches_sort_geocode,GeocodeComparator.class);
