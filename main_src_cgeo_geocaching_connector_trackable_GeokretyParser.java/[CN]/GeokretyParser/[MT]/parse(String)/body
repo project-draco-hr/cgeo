@@ -3,13 +3,13 @@
   final RootElement root=new RootElement("gkxml");
   final Element geokret=root.getChild("geokrety").getChild("geokret");
   geokret.setEndTextElementListener(new EndTextElementListener(){
-    @Override public void end(    String name){
+    @Override public void end(    final String name){
       trackable.setName(name);
     }
   }
 );
   geokret.setStartElementListener(new StartElementListener(){
-    @Override public void start(    Attributes attributes){
+    @Override public void start(    final Attributes attributes){
       try {
         final String kretyId=attributes.getValue("id");
         if (StringUtils.isNumeric(kretyId)) {

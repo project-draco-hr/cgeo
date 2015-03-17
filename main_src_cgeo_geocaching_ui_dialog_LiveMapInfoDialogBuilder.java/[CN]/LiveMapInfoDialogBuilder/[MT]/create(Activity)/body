@@ -8,7 +8,7 @@
   final int showCount=Settings.getLiveMapHintShowCount();
   Settings.setLiveMapHintShowCount(showCount + 1);
   builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
       dialog.dismiss();
       CgeoApplication.getInstance().setLiveMapHintShownInThisSession();
     }

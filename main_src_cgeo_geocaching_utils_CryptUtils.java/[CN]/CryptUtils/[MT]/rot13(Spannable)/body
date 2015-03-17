@@ -1,9 +1,9 @@
 {
   final SpannableStringBuilder buffer=new SpannableStringBuilder(span);
-  Rot13Encryption rot13=new Rot13Encryption();
+  final Rot13Encryption rot13=new Rot13Encryption();
   final int length=span.length();
   for (int index=0; index < length; index++) {
-    char c=span.charAt(index);
+    final char c=span.charAt(index);
     buffer.replace(index,index + 1,String.valueOf(rot13.getNextEncryptedCharacter(c)));
   }
   return buffer;

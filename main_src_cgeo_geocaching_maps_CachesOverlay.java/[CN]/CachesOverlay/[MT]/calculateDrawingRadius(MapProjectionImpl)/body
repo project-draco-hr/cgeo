@@ -1,5 +1,5 @@
 {
-  float[] distanceArray=new float[1];
+  final float[] distanceArray=new float[1];
   final Geopoint itemCoord=items.get(0).getCoord().getCoords();
   Location.distanceBetween(itemCoord.getLatitude(),itemCoord.getLongitude(),itemCoord.getLatitude(),itemCoord.getLongitude() + 1,distanceArray);
   final float longitudeLineDistance=distanceArray[0];

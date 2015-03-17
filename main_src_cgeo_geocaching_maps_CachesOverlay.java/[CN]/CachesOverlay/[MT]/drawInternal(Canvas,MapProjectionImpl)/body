@@ -10,7 +10,7 @@
     final int width=canvas.getWidth();
     final int radius=calculateDrawingRadius(projection);
     final Point center=new Point();
-    for (    CachesOverlayItemImpl item : items) {
+    for (    final CachesOverlayItemImpl item : items) {
       if (item.applyDistanceRule()) {
         final Geopoint itemCoord=item.getCoord().getCoords();
         final GeoPointImpl itemGeo=mapItemFactory.getGeoPointBase(itemCoord);

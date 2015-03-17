@@ -2,7 +2,7 @@
   if (msg.what == UPDATE_PROGRESS) {
     if (waitDialog != null) {
       final int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
-      int secondsRemaining;
+      final int secondsRemaining;
       if (detailProgress > 0) {
         secondsRemaining=(detailTotal - detailProgress) * secondsElapsed / detailProgress;
       }

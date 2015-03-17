@@ -1,5 +1,5 @@
 {
-  int read=super.read(cbuf,off,len);
+  final int read=super.read(cbuf,off,len);
   if (read == -1) {
     return -1;
   }
@@ -15,11 +15,11 @@ case '&':
 case ';':
 pos++;
 if (entityStart >= 0) {
-int entityLength=readPos - entityStart + 1;
+final int entityLength=readPos - entityStart + 1;
 if (entityLength <= 5) {
-  String entity=new String(cbuf,entityStart,entityLength);
+  final String entity=new String(cbuf,entityStart,entityLength);
   if (StringUtils.startsWith(entity,"&#")) {
-    String numberString=StringUtils.substringBetween(entity,"&#",";");
+    final String numberString=StringUtils.substringBetween(entity,"&#",";");
     final int value;
     if (StringUtils.startsWith(numberString,"x")) {
       value=Integer.parseInt(numberString.substring(1),16);

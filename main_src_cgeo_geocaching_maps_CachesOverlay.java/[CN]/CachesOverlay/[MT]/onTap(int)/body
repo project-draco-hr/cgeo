@@ -22,7 +22,7 @@
     if (StringUtils.equalsIgnoreCase(coordType,"cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
       final Geocache cache=DataStore.loadCache(coordinate.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
       if (cache != null) {
-        RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
+        final RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
         if (!requestDetailsThread.requestRequired()) {
           progress.dismiss();
         }
@@ -42,7 +42,7 @@
     }
     progress.dismiss();
   }
- catch (  NotFoundException e) {
+ catch (  final NotFoundException e) {
     Log.e("CachesOverlay.onTap",e);
     progress.dismiss();
   }

@@ -2,11 +2,11 @@
   if (response == null) {
     return Collections.emptyList();
   }
-  Collection<Geocache> caches;
+  final Collection<Geocache> caches;
   try {
     caches=new OXGPXParser(StoredList.TEMPORARY_LIST.id,isDetailed).parse(response.getEntity().getContent(),null);
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("Error importing from OpenCaching.com",e);
     return Collections.emptyList();
   }
