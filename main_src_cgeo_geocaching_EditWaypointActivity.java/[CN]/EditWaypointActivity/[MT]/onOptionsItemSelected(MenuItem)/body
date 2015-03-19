@@ -1,0 +1,15 @@
+{
+switch (item.getItemId()) {
+case R.id.menu_edit_waypoint_cancel:
+    finish();
+  return true;
+case R.id.menu_edit_waypoint_save:
+saveWaypoint();
+finish();
+return true;
+case android.R.id.home:
+saveWaypoint();
+break;
+}
+return super.onOptionsItemSelected(item);
+}

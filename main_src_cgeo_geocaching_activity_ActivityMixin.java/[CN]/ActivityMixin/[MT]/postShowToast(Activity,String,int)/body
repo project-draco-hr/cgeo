@@ -2,9 +2,7 @@
   if (StringUtils.isNotBlank(text)) {
     activity.runOnUiThread(new Runnable(){
       @Override public void run(){
-        final Toast toast=Toast.makeText(activity,text,toastDuration);
-        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM,0,100);
-        toast.show();
+        showCgeoToast(activity,text,toastDuration);
       }
     }
 );
