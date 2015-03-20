@@ -21,7 +21,7 @@
     coords=Sensors.getInstance().currentGeo().getCoords();
   }
   if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
-    double bearing;
+    final double bearing;
     try {
       bearing=Double.parseDouble(bearingText);
     }
@@ -29,7 +29,7 @@
       Dialogs.message(EditWaypointActivity.this,R.string.err_point_bear_and_dist_title,R.string.err_point_bear_and_dist);
       return;
     }
-    double distance;
+    final double distance;
     try {
       distance=DistanceParser.parseDistance(distanceText,!Settings.useImperialUnits());
     }
