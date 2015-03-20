@@ -1,0 +1,4 @@
+{
+  super.onStart();
+  LocalBroadcastManager.getInstance(this).registerReceiver(updateReceiver,new IntentFilter(Intents.INTENT_CACHE_CHANGED));
+}

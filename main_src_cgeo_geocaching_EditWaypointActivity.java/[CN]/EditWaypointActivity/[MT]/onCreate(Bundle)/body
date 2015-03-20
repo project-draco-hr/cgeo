@@ -13,7 +13,6 @@
   }
   buttonLat.setOnClickListener(new CoordDialogListener());
   buttonLon.setOnClickListener(new CoordDialogListener());
-  addWaypoint.setOnClickListener(new SaveWaypointListener());
   final List<String> wayPointNames=new ArrayList<>();
   for (  final WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
     wayPointNames.add(wpt.getL10n());

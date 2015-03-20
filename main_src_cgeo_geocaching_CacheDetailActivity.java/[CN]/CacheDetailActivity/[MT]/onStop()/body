@@ -2,5 +2,6 @@
   if (cache != null) {
     cache.setChangeNotificationHandler(null);
   }
+  LocalBroadcastManager.getInstance(this).unregisterReceiver(updateReceiver);
   super.onStop();
 }
