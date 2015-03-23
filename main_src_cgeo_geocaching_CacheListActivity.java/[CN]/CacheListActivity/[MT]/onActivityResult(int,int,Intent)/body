@@ -10,5 +10,7 @@
     final int[] filterIndex=data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
     setFilter(FilterActivity.getFilterFromPosition(filterIndex[0],filterIndex[1]));
   }
-  refreshCurrentList();
+  if (type == CacheListType.OFFLINE) {
+    refreshCurrentList();
+  }
 }
