@@ -1,0 +1,16 @@
+{
+  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
+      final String page=StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/membership")));
+      final Matcher match=GCConstants.PATTERN_MEMBERSHIP.matcher(page);
+      if (match.find()) {
+        Log.d("Setting member status to " + match.group(1));
+        Settings.setGCMemberStatus(match.group(1));
+      }
+ else {
+        Log.w("Cannot determine member status");
+      }
+    }
+  }
+);
+}
