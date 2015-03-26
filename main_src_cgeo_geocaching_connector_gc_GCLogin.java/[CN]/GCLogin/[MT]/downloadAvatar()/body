@@ -2,10 +2,6 @@
   try {
     final String responseData=StringUtils.defaultString(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
     final String profile=TextUtils.replaceWhitespace(responseData);
-    Settings.setGCMemberStatus(TextUtils.getMatch(profile,GCConstants.PATTERN_MEMBER_STATUS,true,null));
-    if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
-      Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PREMIUM);
-    }
     setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile,GCConstants.PATTERN_CACHES_FOUND,true,"-1"))));
     final String avatarURL=TextUtils.getMatch(profile,GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE,false,null);
     if (avatarURL != null) {
