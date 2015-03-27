@@ -2,7 +2,7 @@
   try {
     assertEquals(count,Integer.parseInt(TextUtils.getMatch(html,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll("[,.]","")));
   }
- catch (  NumberFormatException e) {
+ catch (  final NumberFormatException e) {
     fail();
   }
 }
