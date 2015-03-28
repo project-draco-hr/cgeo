@@ -1,0 +1,51 @@
+{
+  if (localName.equalsIgnoreCase("geokret")) {
+    trackable=new Trackable();
+    trackable.forceSetBrand(TrackableBrand.GEOKRETY);
+    trackables.add(trackable);
+  }
+  try {
+    if (localName.equalsIgnoreCase("geokret")) {
+      final String kretyId=attributes.getValue("id");
+      if (StringUtils.isNumeric(kretyId)) {
+        trackable.setGeocode(GeokretyConnector.geocode(Integer.parseInt(kretyId)));
+      }
+      final String distance=attributes.getValue("dist");
+      if (StringUtils.isNotBlank(distance)) {
+        trackable.setDistance(Float.parseFloat(distance));
+      }
+      final String trackingcode=attributes.getValue("nr");
+      if (StringUtils.isNotBlank(trackingcode)) {
+        trackable.setTrackingcode(trackingcode);
+      }
+      final String kretyType=attributes.getValue("type");
+      if (StringUtils.isNotBlank(kretyType)) {
+        trackable.setType(getType(Integer.parseInt(kretyType)));
+      }
+      final String waypointCode=attributes.getValue("waypoint");
+      if (StringUtils.isNotBlank(waypointCode)) {
+        trackable.setSpottedName(waypointCode);
+        trackable.setSpottedType(Trackable.SPOTTED_CACHE);
+      }
+      final String imageName=attributes.getValue("image");
+      if (StringUtils.isNotBlank(imageName)) {
+        trackable.setImage("http://geokrety.org/obrazki/" + imageName);
+      }
+    }
+    if (localName.equalsIgnoreCase("owner")) {
+      final String owner=attributes.getValue("id");
+      if (StringUtils.isNotBlank(owner)) {
+        trackable.setOwnerGuid(getType(Integer.parseInt(owner)));
+      }
+    }
+    if (localName.equalsIgnoreCase("type")) {
+      final String kretyType=attributes.getValue("id");
+      if (StringUtils.isNotBlank(kretyType)) {
+        trackable.setType(getType(Integer.parseInt(kretyType)));
+      }
+    }
+  }
+ catch (  final NumberFormatException e) {
+    Log.e("Parsing geokret",e);
+  }
+}

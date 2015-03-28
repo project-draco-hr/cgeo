@@ -1,0 +1,12 @@
+{
+  typeSelected=type;
+  typeButton.setText(typeSelected.getLabel());
+  if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
+    geocacheEditText.setVisibility(View.VISIBLE);
+    coordinatesButton.setVisibility(View.VISIBLE);
+  }
+ else {
+    geocacheEditText.setVisibility(View.GONE);
+    coordinatesButton.setVisibility(View.GONE);
+  }
+}

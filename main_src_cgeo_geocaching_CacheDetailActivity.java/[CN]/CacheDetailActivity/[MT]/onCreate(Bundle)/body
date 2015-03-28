@@ -4,7 +4,6 @@
   final Bundle extras=getIntent().getExtras();
   final Uri uri=AndroidBeam.getUri(getIntent());
   String name=null;
-  String geocode=null;
   String guid=null;
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
@@ -96,6 +95,10 @@
     }
   }
 );
+  trackablesConnectors=ConnectorFactory.getGenericTrackablesConnectors();
+  for (  final TrackableConnector connector : trackablesConnectors) {
+    getSupportLoaderManager().initLoader(connector.getCacheInventoryLoaderId(),null,this).forceLoad();
+  }
   locationUpdater=new CacheDetailsGeoDirHandler(this);
   AndroidBeam.enable(this,this);
 }

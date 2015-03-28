@@ -1,0 +1,12 @@
+{
+  if (!hasFocus && !geocacheEditText.getText().toString().isEmpty()) {
+    final Geocache tmpGeocache=DataStore.loadCache(geocacheEditText.getText().toString(),LoadFlags.LOAD_CACHE_OR_DB);
+    if (tmpGeocache == null) {
+      geocache.setGeocode(geocacheEditText.getText().toString());
+    }
+ else {
+      geocache=tmpGeocache;
+      updateCoordinates(geocache.getCoords());
+    }
+  }
+}

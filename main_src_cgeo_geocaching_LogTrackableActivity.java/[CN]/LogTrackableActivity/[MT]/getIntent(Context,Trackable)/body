@@ -1,7 +1,6 @@
 {
   final Intent logTouchIntent=new Intent(context,LogTrackableActivity.class);
   logTouchIntent.putExtra(Intents.EXTRA_GEOCODE,trackable.getGeocode());
-  logTouchIntent.putExtra(Intents.EXTRA_GUID,trackable.getGuid());
   logTouchIntent.putExtra(Intents.EXTRA_TRACKING_CODE,trackable.getTrackingcode());
   return logTouchIntent;
 }

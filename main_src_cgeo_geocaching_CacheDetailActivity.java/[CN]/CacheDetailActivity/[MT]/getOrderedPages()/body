@@ -10,7 +10,7 @@
   if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
     pages.add(Page.LOGSFRIENDS);
   }
-  if (CollectionUtils.isNotEmpty(cache.getInventory())) {
+  if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
     pages.add(Page.INVENTORY);
   }
   if (CollectionUtils.isNotEmpty(cache.getImages())) {

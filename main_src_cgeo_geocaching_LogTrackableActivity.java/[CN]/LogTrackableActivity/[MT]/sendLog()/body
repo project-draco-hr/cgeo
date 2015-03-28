@@ -1,15 +1,31 @@
 {
-  if (!gettingViewstate) {
-    waitDialog=ProgressDialog.show(this,null,res.getString(R.string.log_saving),true);
-    waitDialog.setCancelable(true);
-    Settings.setTrackableAction(typeSelected.id);
-    final EditText logEditText=(EditText)findViewById(R.id.log);
-    final String tracking=trackingEditText.getText().toString();
-    final String log=logEditText.getText().toString();
-    new PostLogThread(postLogHandler,tracking,log).start();
-    Settings.setLastTrackableLog(log);
+  if (!postReady) {
+    showToast(res.getString(R.string.log_post_not_possible));
+    return;
   }
- else {
-    showToast(res.getString(R.string.err_log_load_data_still));
+  if (!loggingManager.isRegistered()) {
+    final AlertDialog.Builder alertDialog=new AlertDialog.Builder(this);
+    alertDialog.setTitle(R.string.init_summary_geokrety_account);
+    alertDialog.setMessage(R.string.init_summary_geokrety_not_anonymous);
+    alertDialog.setPositiveButton(R.string.ok,null);
+    alertDialog.show();
+    return;
   }
+  if (trackingEditText.getText().toString().isEmpty()) {
+    showToast(res.getString(R.string.err_log_post_missing_tracking_code));
+    return;
+  }
+  trackable.setTrackingcode(trackingEditText.getText().toString());
+  if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected)) {
+    if (geocacheEditText.getText().toString().isEmpty()) {
+      showToast(res.getString(R.string.log_post_geocode_missing));
+      return;
+    }
+    if (null == geopoint) {
+      showToast(res.getString(R.string.err_log_post_missing_coordinates));
+      return;
+    }
+  }
+  new Poster(this,res.getString(R.string.log_saving)).execute(logEditText.getText().toString());
+  Settings.setLastTrackableLog(logEditText.getText().toString());
 }

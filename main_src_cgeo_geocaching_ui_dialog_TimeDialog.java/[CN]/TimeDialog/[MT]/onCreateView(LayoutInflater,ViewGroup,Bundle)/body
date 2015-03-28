@@ -1,0 +1,8 @@
+{
+  final View view=inflater.inflate(R.layout.time,container,false);
+  final TimePicker picker=ButterKnife.findById(view,R.id.picker);
+  picker.setCurrentHour(date.get(Calendar.HOUR_OF_DAY));
+  picker.setCurrentMinute(date.get(Calendar.MINUTE));
+  picker.setOnTimeChangedListener(new TimePickerListener());
+  return view;
+}

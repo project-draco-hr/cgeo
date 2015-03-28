@@ -1,0 +1,10 @@
+{
+  try {
+    final StatusCode status=GCParser.postLogTrackable(guid,trackableLog.trackCode,viewstates,trackableLog.action,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log);
+    return new LogResult(status,"");
+  }
+ catch (  final Exception e) {
+    Log.e("TrackableLoggingManager.postLog",e);
+  }
+  return new LogResult(StatusCode.LOG_POST_ERROR,"");
+}

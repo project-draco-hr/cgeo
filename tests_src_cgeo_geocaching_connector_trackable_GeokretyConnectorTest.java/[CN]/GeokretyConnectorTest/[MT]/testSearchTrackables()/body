@@ -1,0 +1,8 @@
+{
+  final List<Trackable> trackables1=GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
+  final List<Trackable> trackables2=new GeokretyConnector().searchTrackables("OX5BRQK");
+  assertThat(trackables1).hasSize(2);
+  assertThat(trackables2).hasSize(2);
+  assertThat(trackables1.get(0)).isEqualToComparingFieldByField(trackables2.get(0));
+  assertThat(trackables1.get(1)).isEqualToComparingFieldByField(trackables2.get(1));
+}

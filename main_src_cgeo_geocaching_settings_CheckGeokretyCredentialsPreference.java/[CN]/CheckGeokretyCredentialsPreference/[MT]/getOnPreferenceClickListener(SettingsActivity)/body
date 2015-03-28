@@ -1,0 +1,53 @@
+{
+  return new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    final Preference preference){
+      if (settingsActivity == null) {
+        return true;
+      }
+      final String username=Settings.getGeokretyUsername();
+      final String password=Settings.getGeokretyPassword();
+      if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+        ActivityMixin.showToast(settingsActivity,R.string.err_missing_auth);
+        return false;
+      }
+      final ProgressDialog progressDialog=ProgressDialog.show(settingsActivity,settingsActivity.getString(R.string.init_geokrety),settingsActivity.getString(R.string.init_geokrety_login),true);
+      progressDialog.setCancelable(false);
+      AppObservable.bindActivity(settingsActivity,Observable.defer(new Func0<Observable<Integer>>(){
+        @Override public Observable<Integer> call(){
+          final String nam=StringUtils.defaultString(username);
+          final String pwd=StringUtils.defaultString(password);
+          final Parameters params=new Parameters("login",nam,"password",pwd);
+          final HttpResponse response=Network.postRequest("http://geokrety.org/api-login2secid.php",params);
+          if (response != null && response.getStatusLine().getStatusCode() == 200) {
+            final String secid=Network.getResponseData(response);
+            try {
+              if (secid != null && secid.startsWith("error ")) {
+                return Observable.just(0);
+              }
+              Settings.setGeokretySecId(secid);
+              return Observable.just(1);
+            }
+ catch (            final Exception e) {
+              Log.e("CheckGeokretyCredentialsPreference",e);
+            }
+          }
+          return Observable.empty();
+        }
+      }
+).firstOrDefault(0)).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<Integer>(){
+        @Override public void call(        final Integer pin){
+          progressDialog.dismiss();
+          if (pin > 0) {
+            Dialogs.message(settingsActivity,R.string.init_geokrety,R.string.init_geokrety_register_ok);
+          }
+ else {
+            Dialogs.message(settingsActivity,R.string.init_geokrety,R.string.init_geokrety_register_fail);
+          }
+        }
+      }
+);
+      return true;
+    }
+  }
+;
+}

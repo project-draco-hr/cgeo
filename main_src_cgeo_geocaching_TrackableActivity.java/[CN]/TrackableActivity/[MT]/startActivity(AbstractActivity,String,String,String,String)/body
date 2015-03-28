@@ -1,0 +1,8 @@
+{
+  final Intent trackableIntent=new Intent(fromContext,TrackableActivity.class);
+  trackableIntent.putExtra(Intents.EXTRA_GUID,guid);
+  trackableIntent.putExtra(Intents.EXTRA_GEOCODE,geocode);
+  trackableIntent.putExtra(Intents.EXTRA_NAME,name);
+  trackableIntent.putExtra(Intents.EXTRA_GEOCACHE,geocache);
+  fromContext.startActivity(trackableIntent);
+}

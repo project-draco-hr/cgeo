@@ -1,0 +1,36 @@
+{
+  try {
+    final XmlPullParserFactory factory=XmlPullParserFactory.newInstance();
+    factory.setNamespaceAware(true);
+    final XmlPullParser parser=factory.newPullParser();
+    parser.setInput(new StringReader(page));
+    int eventType=parser.getEventType();
+    while (eventType != XmlPullParser.END_DOCUMENT) {
+      final String tagname=parser.getName();
+switch (eventType) {
+case XmlPullParser.START_TAG:
+        if (tagname.equalsIgnoreCase("geokret")) {
+          gkid=Integer.parseInt(parser.getAttributeValue(null,"id"));
+        }
+      break;
+case XmlPullParser.TEXT:
+    text=parser.getText();
+  break;
+case XmlPullParser.END_TAG:
+if (tagname.equalsIgnoreCase("error")) {
+  if (null != text && !text.trim().isEmpty()) {
+    errors.add(text);
+  }
+}
+break;
+default :
+break;
+}
+eventType=parser.next();
+}
+}
+ catch (XmlPullParserException|IOException e) {
+Log.e("GeokretyRuchyXmlParser: Error Parsing geokret",e);
+}
+return errors;
+}

@@ -1,0 +1,15 @@
+{
+  final Trackable trackable=getItem(position);
+  View view=convertView;
+  final ViewHolder holder;
+  if (view == null) {
+    view=inflater.inflate(R.layout.trackable_item,parent,false);
+    holder=new ViewHolder(view);
+  }
+ else {
+    holder=(ViewHolder)view.getTag();
+  }
+  holder.imageBrand.setImageResource(trackable.getIconBrand());
+  holder.name.setText(Html.fromHtml(trackable.getName()).toString());
+  return view;
+}

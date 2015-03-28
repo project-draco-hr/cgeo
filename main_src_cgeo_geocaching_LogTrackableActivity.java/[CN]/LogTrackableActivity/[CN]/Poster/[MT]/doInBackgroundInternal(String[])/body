@@ -1,0 +1,23 @@
+{
+  final String logMsg=params[0];
+  try {
+    final TrackableLog trackableLog=new TrackableLog(trackable.getGeocode(),trackable.getTrackingcode(),trackable.getName(),0,0,trackable.getBrand());
+    trackableLog.setAction(typeSelected);
+    final LogResult logResult=loggingManager.postLog(geocache,trackableLog,date,logMsg);
+    if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
+      addLocalTrackableLog(logMsg);
+      if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+        final LogEntry logNow=new LogEntry(date.getTimeInMillis(),typeSelected.oldLogtype,logMsg);
+        Twitter.postTweetTrackable(trackable.getGeocode(),logNow);
+      }
+    }
+    if (StringUtils.isNoneEmpty(logResult.getLogId())) {
+      showToast(logResult.getLogId());
+    }
+    return logResult.getPostLogResult();
+  }
+ catch (  final RuntimeException e) {
+    Log.e("LogTrackableActivity.Poster.doInBackgroundInternal",e);
+  }
+  return StatusCode.LOG_POST_ERROR;
+}

@@ -62,5 +62,11 @@
   updateLogPasswordBox(typeSelected);
   loggingManager=cache.getLoggingManager(this);
   loggingManager.init();
+  trackablesConnectors=ConnectorFactory.getGenericTrackablesConnectors();
+  for (  final TrackableConnector connector : trackablesConnectors) {
+    if (connector.isRegistered()) {
+      getSupportLoaderManager().initLoader(connector.getInventoryLoaderId(),null,this).forceLoad();
+    }
+  }
   requestKeyboardForLogging();
 }
