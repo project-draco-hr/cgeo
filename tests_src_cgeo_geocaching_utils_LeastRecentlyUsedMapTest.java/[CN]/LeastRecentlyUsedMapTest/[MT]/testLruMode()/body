@@ -3,11 +3,11 @@
   map.put("one","1");
   map.put("two","2");
   map.put("three","3");
-  map.get("one");
+  assertThat(map.get("one")).isNotNull();
   map.put("four","4");
   map.put("five","5");
   map.put("six","6");
-  map.get("one");
+  assertThat(map.get("one")).isNotNull();
   map.put("five","5");
   map.put("seven","7");
   assertEquals("six, one, five, seven",colToStr(map.keySet()));

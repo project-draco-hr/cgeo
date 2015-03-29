@@ -6,7 +6,7 @@
   ActivityMixin.setTheme(this);
   setContentView(R.layout.simple_dir_chooser);
   fill(currentDir);
-  okButton=(Button)findViewById(R.id.simple_dir_chooser_ok);
+  okButton=ButterKnife.findById(this,R.id.simple_dir_chooser_ok);
   resetOkButton();
   okButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View v){
@@ -24,7 +24,7 @@
     }
   }
 );
-  final EditText pathField=(EditText)findViewById(R.id.simple_dir_chooser_path);
+  final EditText pathField=ButterKnife.findById(this,R.id.simple_dir_chooser_path);
   pathField.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View v){
       editPath();

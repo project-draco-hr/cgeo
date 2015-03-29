@@ -1,5 +1,5 @@
 {
-  final EditText log=(EditText)findViewById(R.id.log);
+  final EditText log=ButterKnife.findById(this,R.id.log);
   log.setText(StringUtils.EMPTY);
   insertIntoLog(newText,true);
 }

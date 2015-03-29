@@ -6,7 +6,8 @@
   }
  else {
     final File dir=new File(option.getPath());
-    if (dir.list(new DirOnlyFilenameFilter()).length > 0) {
+    final String[] subDirs=dir.list(new DirOnlyFilenameFilter());
+    if (ArrayUtils.isNotEmpty(subDirs)) {
       currentDir=dir;
       fill(currentDir);
     }

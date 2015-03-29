@@ -1,9 +1,9 @@
 {
   FileUtils.deleteDirectory(testDir);
-  testDir.mkdirs();
+  assertThat(testDir.mkdirs()).isTrue();
   try {
     assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(baseFile);
-    baseFile.createNewFile();
+    assertThat(baseFile.createNewFile()).isTrue();
     assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative1);
     alternative1.createNewFile();
     assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);

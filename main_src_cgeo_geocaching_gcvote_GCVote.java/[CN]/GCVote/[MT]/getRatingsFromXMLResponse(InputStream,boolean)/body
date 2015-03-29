@@ -24,7 +24,7 @@
     RATINGS_CACHE.putAll(ratings);
     return ratings;
   }
- catch (  final Exception e) {
+ catch (  final NumberFormatException|XmlPullParserException|IOException e) {
     Log.e("Cannot parse GC vote result",e);
     return Collections.emptyMap();
   }

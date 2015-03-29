@@ -1,16 +1,14 @@
 {
   lastPosition=-1;
   resetOkButton();
-  final EditText path=(EditText)findViewById(R.id.simple_dir_chooser_path);
+  final EditText path=ButterKnife.findById(this,R.id.simple_dir_chooser_path);
   path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
   final File[] dirs=dir.listFiles(new DirOnlyFilenameFilter());
   final List<Option> listDirs=new ArrayList<>();
-  try {
+  if (dirs != null) {
     for (    final File currentDir : dirs) {
       listDirs.add(new Option(currentDir.getName(),currentDir.getAbsolutePath(),currentDir.canWrite()));
     }
-  }
- catch (  final RuntimeException ignored) {
   }
   Collections.sort(listDirs,Option.NAME_COMPARATOR);
   if (dir.getParent() != null) {

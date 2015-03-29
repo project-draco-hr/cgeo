@@ -1,10 +1,10 @@
 {
   final List<String> output=new ArrayList<String>();
   output.add(fieldName + ":");
-  for (  MockedCache cache : MOCKED_CACHES) {
-    String page=cache.getData();
-    String result1=TextUtils.getMatch(page,p1,true,"");
-    String result2=TextUtils.getMatch(page,p2,true,"");
+  for (  final MockedCache cache : MOCKED_CACHES) {
+    final String page=cache.getData();
+    final String result1=TextUtils.getMatch(page,p1,true,"");
+    final String result2=TextUtils.getMatch(page,p2,true,"");
     assertThat(result2).isEqualTo(result1);
     long diff1, diff2;
     output.add("Parsing " + cache.getGeocode() + " "+ cache.getName());
@@ -12,7 +12,7 @@
     output.add("Time pattern 1:\t" + diff1 + " ms");
     diff2=parse(page,p2,iterations);
     output.add("Time pattern 2:\t" + diff2 + " ms");
-    float reduction=(float)diff2 * 100 / diff1;
+    final float reduction=(float)diff2 * 100 / diff1;
     output.add("New runtime:\t" + String.format("%.1f",reduction) + "%\n");
   }
   return output;

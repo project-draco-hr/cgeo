@@ -3,7 +3,7 @@
     inflater=getLayoutInflater();
   }
   if (smapsView == null) {
-    smapsView=(LinearLayout)findViewById(R.id.maps_list);
+    smapsView=ButterKnife.findById(this,R.id.maps_list);
   }
   smapsView.removeAllViews();
   for (  final Bitmap image : maps) {

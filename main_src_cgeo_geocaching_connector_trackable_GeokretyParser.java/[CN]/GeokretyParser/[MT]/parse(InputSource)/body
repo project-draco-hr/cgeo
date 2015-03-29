@@ -9,7 +9,7 @@
       xmlR.parse(page);
       return gkXMLHandler.getTrackables();
     }
- catch (    final Exception e) {
+ catch (    final SAXException|IOException|ParserConfigurationException e) {
       Log.w("Cannot parse geokrety",e);
     }
   }
