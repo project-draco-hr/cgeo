@@ -9,15 +9,15 @@
     return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,Collections.<String>emptyList());
   }
   try {
-    if (null == Settings.getGeokretySecId() || Settings.getGeokretySecId().isEmpty()) {
+    if (Settings.getGeokretySecId() == null || Settings.getGeokretySecId().isEmpty()) {
       Log.e("GeokretyConnector.postLogTrackable: not authenticated");
       return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED,Collections.<String>emptyList());
     }
     final Parameters params=new Parameters("secid",Settings.getGeokretySecId(),"gzip","0","nr",trackableLog.trackCode,"formname","ruchy","logtype",String.valueOf(trackableLog.action.gkid),"data",String.format("%tY-%tm-%td",date,date,date),"godzina",String.format("%tH",date),"minuta",String.format("%tM",date),"comment",log,"app",context.getString(R.string.app_name),"app_ver",Version.getVersionName(context),"mobile_lang",Locale.getDefault().toString());
-    if (null != cache && null != cache.getCoords()) {
+    if (cache != null && cache.getCoords() != null) {
       params.add("latlon",cache.getCoords().toString());
     }
-    if (null != cache && null != cache.getGeocode()) {
+    if (cache != null && cache.getGeocode() != null) {
       params.add("wpt",cache.getGeocode());
     }
     final String page=Network.getResponseData(Network.postRequest(URL + "/ruchy.php",params));
@@ -26,7 +26,7 @@
       return new ImmutablePair<>(StatusCode.CONNECTION_FAILED_GK,Collections.<String>emptyList());
     }
     final ImmutablePair<Integer,List<String>> response=GeokretyParser.parseResponse(page);
-    if (null == response) {
+    if (response == null) {
       Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse geokrety");
       return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,Collections.<String>emptyList());
     }
