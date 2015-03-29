@@ -1,5 +1,5 @@
 {
-  if (!Settings.isLogin()) {
+  if (!Settings.hasGCCredentials()) {
     ActivityMixin.showToast(activity,activity.getResources().getString(R.string.err_login));
     return null;
   }
