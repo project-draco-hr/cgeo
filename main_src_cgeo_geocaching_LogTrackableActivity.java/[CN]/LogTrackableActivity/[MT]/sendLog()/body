@@ -17,11 +17,7 @@
   }
   trackable.setTrackingcode(trackingEditText.getText().toString());
   if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected)) {
-    if (geocacheEditText.getText().toString().isEmpty()) {
-      showToast(res.getString(R.string.log_post_geocode_missing));
-      return;
-    }
-    if (null == geopoint) {
+    if (geopoint == null) {
       showToast(res.getString(R.string.err_log_post_missing_coordinates));
       return;
     }
