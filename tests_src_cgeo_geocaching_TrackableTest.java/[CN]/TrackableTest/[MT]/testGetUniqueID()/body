@@ -1,0 +1,6 @@
+{
+  final Trackable trackable=createTrackable("tb1234");
+  assertThat(trackable.getUniqueID()).isEqualTo("TB1234");
+  trackable.setGuid("1234-567-890");
+  assertThat(trackable.getUniqueID()).isEqualTo("1234-567-890");
+}

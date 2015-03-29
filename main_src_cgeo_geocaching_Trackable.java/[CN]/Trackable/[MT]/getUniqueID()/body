@@ -1,0 +1,9 @@
+{
+  if (StringUtils.isNotEmpty(guid)) {
+    return guid;
+  }
+  if (StringUtils.isNotEmpty(geocode)) {
+    return geocode;
+  }
+  throw new IllegalStateException("Trackable must have at least one of geocode or guid");
+}
