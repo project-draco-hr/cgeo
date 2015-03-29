@@ -1,6 +1,6 @@
 {
   try {
-    if (localName.equalsIgnoreCase("geokret") && !content.trim().isEmpty()) {
+    if (localName.equalsIgnoreCase("geokret") && StringUtils.isNotEmpty(content)) {
       trackable.setName(content);
     }
     if (localName.equalsIgnoreCase("name")) {
@@ -13,7 +13,7 @@
       trackable.setOwner(content);
     }
     if (localName.equalsIgnoreCase("datecreated")) {
-      final Date date=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss").parse(content);
+      final Date date=DATE_FORMAT.parse(content);
       trackable.setReleased(date);
     }
     if (localName.equalsIgnoreCase("distancetravelled")) {
@@ -30,7 +30,7 @@
       trackable.setSpottedType(Trackable.SPOTTED_CACHE);
     }
   }
- catch (  final ParseException e) {
+ catch (  final ParseException|NumberFormatException e) {
     Log.e("Parsing geokret",e);
   }
 }

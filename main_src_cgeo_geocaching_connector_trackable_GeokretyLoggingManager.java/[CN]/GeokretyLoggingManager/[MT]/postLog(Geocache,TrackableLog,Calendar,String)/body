@@ -1,6 +1,6 @@
 {
   try {
-    final ImmutablePair<StatusCode,ArrayList<String>> response=GeokretyConnector.postLogTrackable(getContext(),cache,trackableLog,date,log);
+    final ImmutablePair<StatusCode,List<String>> response=GeokretyConnector.postLogTrackable(getContext(),cache,trackableLog,date,log);
     final String logs=(response.getRight().isEmpty() ? "" : response.getRight().toString());
     return new LogResult(response.getLeft(),logs);
   }
