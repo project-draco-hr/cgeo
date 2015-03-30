@@ -1,3 +1,6 @@
 {
-  return new Date(released.getTime());
+  if (released != null) {
+    return new Date(released.getTime());
+  }
+  return null;
 }
