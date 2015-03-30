@@ -1,3 +1,6 @@
 {
-  return new Date(hidden.getTime());
+  if (hidden != null) {
+    return new Date(hidden.getTime());
+  }
+  return null;
 }
