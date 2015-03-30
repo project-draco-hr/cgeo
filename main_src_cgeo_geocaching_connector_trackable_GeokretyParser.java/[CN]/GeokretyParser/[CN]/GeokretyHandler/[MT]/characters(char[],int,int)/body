@@ -1,3 +1,4 @@
 {
-  content=StringUtils.trim(new String(ch,start,length));
+  final String text=StringUtils.trim(new String(ch,start,length));
+  content=isMessage ? StringUtils.join(content,text) : text;
 }

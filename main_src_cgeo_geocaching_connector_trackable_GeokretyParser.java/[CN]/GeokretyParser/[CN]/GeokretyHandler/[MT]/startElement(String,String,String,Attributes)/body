@@ -1,4 +1,5 @@
 {
+  content="";
   if (localName.equalsIgnoreCase("geokret")) {
     trackable=new Trackable();
     trackable.forceSetBrand(TrackableBrand.GEOKRETY);
@@ -43,6 +44,9 @@
       if (StringUtils.isNotBlank(kretyType)) {
         trackable.setType(getType(Integer.parseInt(kretyType)));
       }
+    }
+    if (localName.equalsIgnoreCase("description")) {
+      isMessage=true;
     }
   }
  catch (  final NumberFormatException e) {
