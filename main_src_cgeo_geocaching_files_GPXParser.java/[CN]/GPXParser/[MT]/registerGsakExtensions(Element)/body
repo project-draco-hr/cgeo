@@ -40,5 +40,19 @@
       }
     }
 );
+    gsak.getChild(gsakNamespace,"LatBeforeCorrect").setEndTextElementListener(new EndTextElementListener(){
+      @Override public void end(      final String latitude){
+        originalLat=latitude;
+        addOriginalCoordinates();
+      }
+    }
+);
+    gsak.getChild(gsakNamespace,"LonBeforeCorrect").setEndTextElementListener(new EndTextElementListener(){
+      @Override public void end(      final String longitude){
+        originalLon=longitude;
+        addOriginalCoordinates();
+      }
+    }
+);
   }
 }
