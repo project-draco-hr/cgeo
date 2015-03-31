@@ -1,6 +1,6 @@
 {
-  List<File> folders=new ArrayList<>();
-  for (  File dir : LocalStorage.getStorages()) {
+  final List<File> folders=new ArrayList<>();
+  for (  final File dir : LocalStorage.getStorages()) {
     folders.add(new File(dir,"mfmaps"));
     folders.add(new File(new File(dir,"Locus"),"mapsVector"));
     folders.add(new File(dir,LocalStorage.CACHE_DIRNAME));

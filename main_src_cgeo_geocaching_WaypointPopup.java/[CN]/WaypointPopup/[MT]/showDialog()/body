@@ -1,10 +1,10 @@
 {
-  FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-  Fragment prev=getSupportFragmentManager().findFragmentByTag("dialog");
+  final FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+  final Fragment prev=getSupportFragmentManager().findFragmentByTag("dialog");
   if (prev != null) {
     ft.remove(prev);
   }
   ft.addToBackStack(null);
-  DialogFragment newFragment=WaypointPopupFragment.newInstance(geocode,waypointId);
+  final DialogFragment newFragment=WaypointPopupFragment.newInstance(geocode,waypointId);
   newFragment.show(ft,"dialog");
 }

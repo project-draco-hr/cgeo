@@ -20,7 +20,7 @@
     waypointDistance=details.getValueView();
     details.add(R.string.waypoint_note,waypoint.getNote());
     buttonEdit.setOnClickListener(new OnClickListener(){
-      @Override public void onClick(      View arg0){
+      @Override public void onClick(      final View arg0){
         EditWaypointActivity.startActivityEditWaypoint(getActivity(),cache,waypoint.getId());
         getActivity().finish();
       }
@@ -30,7 +30,7 @@
     details.add(R.string.cache_name,cache.getName());
     addCacheDetails();
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e("WaypointPopup.init",e);
   }
 }

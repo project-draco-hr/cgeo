@@ -3,14 +3,14 @@
   ButterKnife.inject(this);
   mapFile=Settings.getMapFile();
   selectDirectory.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View v){
+    @Override public void onClick(    final View v){
       try {
         final Intent dirChooser=new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
         dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,getString(R.string.simple_dir_chooser_title));
         dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,getString(android.R.string.ok));
         startActivityForResult(dirChooser,REQUEST_DIRECTORY);
       }
- catch (      android.content.ActivityNotFoundException ignored) {
+ catch (      final android.content.ActivityNotFoundException ignored) {
         final Intent dirChooser=new Intent(SelectMapfileActivity.this,SimpleDirChooser.class);
         dirChooser.putExtra(Intents.EXTRA_START_DIR,LocalStorage.getStorage().getAbsolutePath());
         startActivityForResult(dirChooser,REQUEST_DIRECTORY);

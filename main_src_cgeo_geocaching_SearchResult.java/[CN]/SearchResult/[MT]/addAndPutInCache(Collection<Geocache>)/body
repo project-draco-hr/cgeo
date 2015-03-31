@@ -1,5 +1,5 @@
 {
-  for (  Geocache geocache : caches) {
+  for (  final Geocache geocache : caches) {
     addGeocode(geocache.getGeocode());
   }
   DataStore.saveCaches(caches,EnumSet.of(SaveFlag.CACHE));
