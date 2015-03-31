@@ -7,7 +7,7 @@
   if (time <= 0) {
     return null;
   }
-  String dateString=Formatter.formatFullDate(time);
+  String dateString=formatFullDate(time);
   if (cache.isEventCache()) {
     dateString=DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(),time,DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
   }
