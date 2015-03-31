@@ -24,13 +24,10 @@
  catch (  final Exception e) {
     Log.e("DataStore.isThere",e);
   }
-  if (detailed && dataDetailed == 0) {
+  if (dataDetailed == 0) {
     return false;
   }
-  if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
-    return false;
-  }
-  if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
+  if (checkTime && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
     return false;
   }
   return true;

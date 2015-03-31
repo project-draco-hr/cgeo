@@ -2,7 +2,7 @@
   if (geocodes.isEmpty()) {
     return geocodes;
   }
-  final List<String> geocodesWithOfflineLog=queryToColl(dbTableLogsOffline,new String[]{"geocode"},null,null,null,null,null,null,new LinkedList<String>(),GET_STRING_0);
+  final List<String> geocodesWithOfflineLog=queryToColl(dbTableLogsOffline,new String[]{"geocode"},null,null,null,null,new LinkedList<String>(),GET_STRING_0);
   geocodes.removeAll(geocodesWithOfflineLog);
   return geocodes;
 }

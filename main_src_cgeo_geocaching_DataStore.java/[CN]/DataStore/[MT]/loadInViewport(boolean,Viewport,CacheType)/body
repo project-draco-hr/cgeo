@@ -13,7 +13,7 @@
     selection.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
   }
   try {
-    return new SearchResult(queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,null,"500",geocodes,GET_STRING_0));
+    return new SearchResult(queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,"500",geocodes,GET_STRING_0));
   }
  catch (  final Exception e) {
     Log.e("DataStore.loadInViewport",e);

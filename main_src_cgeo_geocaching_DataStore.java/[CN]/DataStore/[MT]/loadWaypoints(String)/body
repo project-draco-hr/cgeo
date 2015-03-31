@@ -2,7 +2,7 @@
   if (StringUtils.isBlank(geocode)) {
     return null;
   }
-  return queryToColl(dbTableWaypoints,WAYPOINT_COLUMNS,"geocode = ?",new String[]{geocode},null,null,"_id","100",new LinkedList<Waypoint>(),new Func1<Cursor,Waypoint>(){
+  return queryToColl(dbTableWaypoints,WAYPOINT_COLUMNS,"geocode = ?",new String[]{geocode},"_id","100",new LinkedList<Waypoint>(),new Func1<Cursor,Waypoint>(){
     @Override public Waypoint call(    final Cursor cursor){
       return createWaypointFromDatabaseContent(cursor);
     }

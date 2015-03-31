@@ -13,9 +13,9 @@
   }
   try {
     if (coords != null) {
-      return queryToColl(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},selection.toString(),selectionArgs,null,null,"dif",null,new HashSet<String>(),GET_STRING_0);
+      return queryToColl(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},selection.toString(),selectionArgs,"dif",null,new HashSet<String>(),GET_STRING_0);
     }
-    return queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,null,"geocode",null,new HashSet<String>(),GET_STRING_0);
+    return queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,"geocode",null,new HashSet<String>(),GET_STRING_0);
   }
  catch (  final Exception e) {
     Log.e("DataStore.loadBatchOfStoredGeocodes",e);
