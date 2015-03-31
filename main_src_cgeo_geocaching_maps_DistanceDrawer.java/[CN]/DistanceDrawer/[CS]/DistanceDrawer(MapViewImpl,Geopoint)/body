@@ -3,7 +3,7 @@
   final DisplayMetrics metrics=new DisplayMetrics();
   final WindowManager windowManager=(WindowManager)CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
   windowManager.getDefaultDisplay().getMetrics(metrics);
-  pixelDensity=metrics.density;
+  final float pixelDensity=metrics.density;
   boxPadding=2;
   boxWidth=100 * pixelDensity + 3 * boxPadding;
   boxHeight=30 * pixelDensity + 2 * boxPadding;
