@@ -1,6 +1,6 @@
 {
   String code=StringUtils.substringAfterLast(url,"coord.info/");
-  if (code != null && canHandle(code)) {
+  if (canHandle(code)) {
     return code;
   }
   code=StringUtils.substringBetween(url,"/geocache/","_");
