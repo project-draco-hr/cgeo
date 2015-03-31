@@ -12,7 +12,7 @@
     cache.setType(CacheType.UNKNOWN);
     cache.setListId(listId);
     cache.setDetailed(true);
-    cache.store(null);
+    cache.store();
     if (progressHandler != null) {
       progressHandler.sendMessage(progressHandler.obtainMessage(0,maxSize * caches.size() / coords.size(),0));
     }
