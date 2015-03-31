@@ -25,7 +25,7 @@
     }
     final ImmutablePair<Integer,List<String>> response=GeokretyParser.parseResponse(page);
     if (null == response) {
-      Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse geokrety");
+      Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety");
       return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,Collections.<String>emptyList());
     }
     if (!response.getRight().isEmpty()) {
