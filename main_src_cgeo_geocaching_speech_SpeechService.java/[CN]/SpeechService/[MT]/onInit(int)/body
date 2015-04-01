@@ -3,11 +3,7 @@
     Log.e("Text to speech cannot be initialized.");
     return;
   }
-  Locale locale=Locale.getDefault();
-  if (Settings.isUseEnglish()) {
-    locale=Locale.ENGLISH;
-  }
-  final int switchLocale=tts.setLanguage(locale);
+  final int switchLocale=tts.setLanguage(CgeoApplication.getInstance().getApplicationLocale());
   if (switchLocale == TextToSpeech.LANG_MISSING_DATA) {
     startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
     return;

@@ -7,7 +7,7 @@
   }
  catch (  IllegalArgumentException|IllegalAccessException|NoSuchFieldException ignored) {
   }
-  Settings.setLanguage(Settings.isUseEnglish());
+  initApplicationLocale(Settings.useEnglish());
   DataStore.getLists();
   if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
     isGooglePlayServicesAvailable=true;

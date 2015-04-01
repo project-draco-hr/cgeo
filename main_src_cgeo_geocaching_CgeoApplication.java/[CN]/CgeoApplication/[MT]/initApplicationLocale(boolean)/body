@@ -1,0 +1,7 @@
+{
+  applicationLocale=useEnglish ? Locale.ENGLISH : Locale.getDefault();
+  final Configuration config=new Configuration();
+  config.locale=applicationLocale;
+  final Resources resources=getResources();
+  resources.updateConfiguration(config,resources.getDisplayMetrics());
+}
