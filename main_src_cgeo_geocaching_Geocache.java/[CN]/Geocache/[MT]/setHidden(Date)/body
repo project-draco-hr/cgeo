@@ -1,8 +1,3 @@
 {
-  if (hidden == null) {
-    this.hidden=null;
-  }
- else {
-    this.hidden=new Date(hidden.getTime());
-  }
+  this.hidden=hidden != null ? new Date(hidden.getTime()) : null;
 }
