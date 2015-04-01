@@ -8,4 +8,5 @@
   final Intent intent=getIntent();
   openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN,0));
   AndroidBeam.disable(this);
+  setResult(NO_RESTART_NEEDED);
 }

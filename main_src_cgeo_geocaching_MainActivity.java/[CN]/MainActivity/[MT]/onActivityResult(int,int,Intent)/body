@@ -1,19 +1,26 @@
 {
-  final IntentResult scanResult=IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
-  if (scanResult != null) {
-    final String scan=scanResult.getContents();
-    if (StringUtils.isBlank(scan)) {
-      return;
+  if (requestCode == SETTINGS_ACTIVITY_REQUEST_CODE) {
+    if (resultCode == SettingsActivity.RESTART_NEEDED) {
+      CgeoApplication.getInstance().restartApplication();
     }
-    SearchActivity.startActivityScan(scan,this);
   }
- else   if (requestCode == SEARCH_REQUEST_CODE) {
-    if (resultCode == RESULT_CANCELED) {
-      String query=intent.getStringExtra(SearchManager.QUERY);
-      if (query == null) {
-        query="";
+ else {
+    final IntentResult scanResult=IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
+    if (scanResult != null) {
+      final String scan=scanResult.getContents();
+      if (StringUtils.isBlank(scan)) {
+        return;
       }
-      Dialogs.message(this,res.getString(R.string.unknown_scan) + "\n\n" + query);
+      SearchActivity.startActivityScan(scan,this);
+    }
+ else     if (requestCode == SEARCH_REQUEST_CODE) {
+      if (resultCode == RESULT_CANCELED) {
+        String query=intent.getStringExtra(SearchManager.QUERY);
+        if (query == null) {
+          query="";
+        }
+        Dialogs.message(this,res.getString(R.string.unknown_scan) + "\n\n" + query);
+      }
     }
   }
 }

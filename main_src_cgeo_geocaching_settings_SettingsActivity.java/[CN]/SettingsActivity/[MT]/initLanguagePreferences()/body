@@ -2,7 +2,7 @@
   final Preference p=getPreference(R.string.pref_useenglish);
   p.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    final Preference preference,    final Object newValue){
-      CgeoApplication.getInstance().initApplicationLocale((Boolean)newValue);
+      setResult(RESTART_NEEDED);
       return true;
     }
   }
