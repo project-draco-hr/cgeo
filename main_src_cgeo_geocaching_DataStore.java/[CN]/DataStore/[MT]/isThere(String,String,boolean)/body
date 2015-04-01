@@ -1,6 +1,5 @@
 {
   init();
-  long dataUpdated=0;
   long dataDetailedUpdate=0;
   int dataDetailed=0;
   try {
@@ -17,7 +16,6 @@
     if (cursor.moveToFirst()) {
       dataDetailed=cursor.getInt(0);
       dataDetailedUpdate=cursor.getLong(1);
-      dataUpdated=cursor.getLong(2);
     }
     cursor.close();
   }
