@@ -1,7 +1,6 @@
 {
-  String input=inputUntrimmed.trim();
-  final MatcherWrapper matcher=new MatcherWrapper(PATTERN_MILLISECONDS,input);
-  input=matcher.replaceFirst("");
+  final MatcherWrapper matcher=new MatcherWrapper(PATTERN_MILLISECONDS,inputUntrimmed.trim());
+  final String input=matcher.replaceFirst("");
   if (input.contains("Z")) {
     return formatSimpleZ.parse(input);
   }

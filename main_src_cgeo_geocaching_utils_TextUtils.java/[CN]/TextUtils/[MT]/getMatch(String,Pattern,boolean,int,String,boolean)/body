@@ -8,8 +8,8 @@
       }
       if (result != null) {
         final Matcher remover=PATTERN_REMOVE_NONPRINTABLE.matcher(result);
-        result=remover.replaceAll(" ");
-        return trim ? new String(result).trim() : new String(result);
+        final String untrimmed=remover.replaceAll(" ");
+        return trim ? new String(untrimmed).trim() : new String(untrimmed);
       }
     }
   }

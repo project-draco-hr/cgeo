@@ -1,11 +1,8 @@
 {
-  String code=StringUtils.substringAfterLast(url,"coord.info/");
-  if (canHandle(code)) {
-    return code;
+  final String topLevel=StringUtils.substringAfterLast(url,"coord.info/");
+  if (canHandle(topLevel)) {
+    return topLevel;
   }
-  code=StringUtils.substringBetween(url,"waymarks/","_");
-  if (code != null && canHandle(code)) {
-    return code;
-  }
-  return null;
+  final String waymark=StringUtils.substringBetween(url,"waymarks/","_");
+  return waymark != null && canHandle(waymark) ? waymark : null;
 }

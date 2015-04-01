@@ -1,9 +1,5 @@
 {
-  int hashCode=getIconHashCode(cache.getType(),cache.hasUserModifiedCoords() || cache.hasFinalDefined());
-  final Drawable drawable=gcIconDrawables.get(hashCode);
-  if (drawable != null) {
-    return drawable;
-  }
-  hashCode=getIconHashCode(CacheType.MYSTERY,cache.hasUserModifiedCoords() || cache.hasFinalDefined());
-  return gcIconDrawables.get(hashCode);
+  final boolean userModifiedOrFinal=cache.hasUserModifiedCoords() || cache.hasFinalDefined();
+  final Drawable drawable=gcIconDrawables.get(getIconHashCode(cache.getType(),userModifiedOrFinal));
+  return drawable != null ? drawable : gcIconDrawables.get(getIconHashCode(CacheType.MYSTERY,userModifiedOrFinal));
 }
