@@ -14,7 +14,7 @@
   final CheckBox onlyNewOption=ButterKnife.findById(layout,R.id.onlynew);
   onlyNewOption.setChecked(Settings.getFieldNoteExportOnlyNew());
   if (Settings.getFieldnoteExportDate() > 0) {
-    onlyNewOption.setText(getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate())+ ')');
+    onlyNewOption.setText(activity.getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate())+ ')');
   }
   builder.setPositiveButton(R.string.export,new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int which){

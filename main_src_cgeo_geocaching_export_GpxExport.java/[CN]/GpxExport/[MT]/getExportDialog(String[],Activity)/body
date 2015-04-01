@@ -10,7 +10,7 @@
   final View layout=View.inflate(themedContext,R.layout.gpx_export_dialog,null);
   builder.setView(layout);
   final TextView text=ButterKnife.findById(layout,R.id.info);
-  text.setText(getString(R.string.export_gpx_info,Settings.getGpxExportDir()));
+  text.setText(activity.getString(R.string.export_gpx_info,Settings.getGpxExportDir()));
   final CheckBox shareOption=ButterKnife.findById(layout,R.id.share);
   shareOption.setChecked(Settings.getShareAfterExport());
   shareOption.setOnClickListener(new View.OnClickListener(){
