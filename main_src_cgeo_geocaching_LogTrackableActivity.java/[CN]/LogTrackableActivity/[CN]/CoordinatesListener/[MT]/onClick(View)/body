@@ -1,5 +1,5 @@
 {
-  final CoordinatesInputDialog coordinatesDialog=CoordinatesInputDialog.getInstance(null,geopoint,null);
+  final CoordinatesInputDialog coordinatesDialog=CoordinatesInputDialog.getInstance(geocache,geopoint,Sensors.getInstance().currentGeo());
   coordinatesDialog.setCancelable(true);
   coordinatesDialog.show(getSupportFragmentManager(),"coordinates_dialog");
 }
