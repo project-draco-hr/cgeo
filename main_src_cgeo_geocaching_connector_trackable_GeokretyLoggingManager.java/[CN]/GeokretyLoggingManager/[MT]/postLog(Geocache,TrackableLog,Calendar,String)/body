@@ -1,7 +1,7 @@
 {
   try {
     final ImmutablePair<StatusCode,List<String>> response=GeokretyConnector.postLogTrackable(getContext(),cache,trackableLog,date,log);
-    final String logs=(response.getRight().isEmpty() ? "" : response.getRight().toString());
+    final String logs=(response.getRight().isEmpty() ? "" : StringUtils.join(response.getRight(),"\n"));
     return new LogResult(response.getLeft(),logs);
   }
  catch (  final Exception e) {
