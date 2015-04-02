@@ -22,7 +22,7 @@ case "name":
   }
 break;
 case "coord":
-currentCache.setCoords(new Geopoint(Double.valueOf(xpp.getAttributeValue(null,"lat")),Double.valueOf(xpp.getAttributeValue(null,"lon"))));
+currentCache.setCoords(new Geopoint(Double.parseDouble(xpp.getAttributeValue(null,"lat")),Double.parseDouble(xpp.getAttributeValue(null,"lon"))));
 currentCache.setReliableLatLon(true);
 break;
 case "container":
@@ -32,12 +32,12 @@ currentCache.setSize(SIZES[Integer.parseInt(xpp.getText()) - 1]);
 break;
 case "difficulty":
 if (xpp.next() == XmlPullParser.TEXT) {
-currentCache.setDifficulty(Float.valueOf(xpp.getText()));
+currentCache.setDifficulty(Float.parseFloat(xpp.getText()));
 }
 break;
 case "terrain":
 if (xpp.next() == XmlPullParser.TEXT) {
-currentCache.setTerrain(Float.valueOf(xpp.getText()));
+currentCache.setTerrain(Float.parseFloat(xpp.getText()));
 }
 break;
 default :

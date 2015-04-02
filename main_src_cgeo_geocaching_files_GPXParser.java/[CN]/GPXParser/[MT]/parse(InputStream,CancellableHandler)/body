@@ -15,7 +15,7 @@
           final String latitude=attrs.getValue("lat");
           final String longitude=attrs.getValue("lon");
           if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
-            cache.setCoords(new Geopoint(Double.valueOf(latitude),Double.valueOf(longitude)));
+            cache.setCoords(new Geopoint(Double.parseDouble(latitude),Double.parseDouble(longitude)));
           }
         }
       }

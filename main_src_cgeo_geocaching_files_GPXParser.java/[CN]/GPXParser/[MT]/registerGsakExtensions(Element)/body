@@ -3,7 +3,7 @@
     final Element gsak=cacheParent.getChild(gsakNamespace,"wptExtension");
     gsak.getChild(gsakNamespace,"Watch").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      final String watchList){
-        cache.setOnWatchlist(Boolean.valueOf(watchList.trim()));
+        cache.setOnWatchlist(Boolean.parseBoolean(watchList.trim()));
       }
     }
 );

@@ -2,14 +2,14 @@
   final Element cgeoVisited=cacheParent.getChild(CGEO_NS,"visited");
   cgeoVisited.setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    final String visited){
-      wptVisited=Boolean.valueOf(visited.trim());
+      wptVisited=Boolean.parseBoolean(visited.trim());
     }
   }
 );
   final Element cgeoUserDefined=cacheParent.getChild(CGEO_NS,"userdefined");
   cgeoUserDefined.setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    final String userDefined){
-      wptUserDefined=Boolean.valueOf(userDefined.trim());
+      wptUserDefined=Boolean.parseBoolean(userDefined.trim());
     }
   }
 );

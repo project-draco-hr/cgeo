@@ -1,6 +1,6 @@
 {
   try {
-    return new Geopoint(Double.valueOf(latitude),Double.valueOf(longitude));
+    return new Geopoint(Double.parseDouble(latitude),Double.parseDouble(longitude));
   }
  catch (  final NumberFormatException e) {
     Log.e("LOC format has changed",e);
