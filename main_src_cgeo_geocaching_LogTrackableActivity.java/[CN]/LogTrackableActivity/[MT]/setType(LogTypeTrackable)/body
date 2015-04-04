@@ -9,4 +9,10 @@
     geocacheEditText.setVisibility(View.GONE);
     coordinatesButton.setVisibility(View.GONE);
   }
+  if (typeSelected != LogTypeTrackable.NOTE || typeSelected == LogTypeTrackable.NOTE && loggingManager.isTrackingCodeNeededToPostNote()) {
+    trackingEditText.setVisibility(View.VISIBLE);
+  }
+ else {
+    trackingEditText.setVisibility(View.GONE);
+  }
 }

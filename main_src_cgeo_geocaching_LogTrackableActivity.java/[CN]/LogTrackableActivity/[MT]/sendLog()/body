@@ -11,7 +11,7 @@
     alertDialog.show();
     return;
   }
-  if (trackingEditText.getText().toString().isEmpty()) {
+  if (loggingManager.isTrackingCodeNeededToPostNote() && trackingEditText.getText().toString().isEmpty()) {
     showToast(res.getString(R.string.err_log_post_missing_tracking_code));
     return;
   }
