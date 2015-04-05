@@ -1,14 +1,15 @@
 {
   if (null != activity) {
+    final Context nonNullActivity=activity;
     if (result) {
       Settings.setFieldnoteExportDate(System.currentTimeMillis());
-      ActivityMixin.showToast(activity,getName() + ' ' + activity.getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
+      ActivityMixin.showToast(activity,getName() + ' ' + nonNullActivity.getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
       if (upload) {
-        ActivityMixin.showToast(activity,activity.getString(R.string.export_fieldnotes_upload_success));
+        ActivityMixin.showToast(activity,nonNullActivity.getString(R.string.export_fieldnotes_upload_success));
       }
     }
  else {
-      ActivityMixin.showToast(activity,activity.getString(R.string.export_failed));
+      ActivityMixin.showToast(activity,nonNullActivity.getString(R.string.export_failed));
     }
   }
 }

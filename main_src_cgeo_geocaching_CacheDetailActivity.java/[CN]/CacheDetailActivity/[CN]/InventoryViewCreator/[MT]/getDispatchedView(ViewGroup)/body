@@ -10,10 +10,8 @@
       trackables.put(trackable.getUniqueID(),trackable);
     }
   }
-  if (genericTrackables != null) {
-    for (    final Trackable trackable : genericTrackables) {
-      trackables.put(trackable.getUniqueID(),trackable);
-    }
+  for (  final Trackable trackable : genericTrackables) {
+    trackables.put(trackable.getUniqueID(),trackable);
   }
   for (  final Map.Entry<String,Trackable> trackable : trackables.entrySet()) {
     adapterTrackables.add(trackable.getValue());
