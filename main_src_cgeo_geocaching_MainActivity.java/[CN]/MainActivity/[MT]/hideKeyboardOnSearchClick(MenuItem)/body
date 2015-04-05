@@ -1,0 +1,13 @@
+{
+  searchView.setOnSuggestionListener(new OnSuggestionListener(){
+    @Override public boolean onSuggestionSelect(    final int arg0){
+      return false;
+    }
+    @Override public boolean onSuggestionClick(    final int arg0){
+      MenuItemCompat.collapseActionView(searchItem);
+      searchView.setIconified(true);
+      return false;
+    }
+  }
+);
+}
