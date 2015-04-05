@@ -1,0 +1,6 @@
+{
+  if (response.equals("1")) {
+    return res.getString(R.string.err_auth_geokrety_bad_password);
+  }
+  return res.getString(R.string.err_auth_geokrety_unknown,getAuthTitle(),response);
+}
