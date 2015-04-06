@@ -23,7 +23,7 @@
     final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
     if (mapMode == MapMode.LIVE) {
 synchronized (caches) {
-        CGeoMap.filter(caches);
+        filter(caches);
       }
     }
     countVisibleCaches();

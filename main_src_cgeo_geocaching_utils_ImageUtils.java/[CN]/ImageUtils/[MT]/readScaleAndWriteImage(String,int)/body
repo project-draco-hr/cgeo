@@ -7,7 +7,7 @@
     return null;
   }
   final BitmapDrawable scaledImage=scaleBitmapTo(image,maxXY,maxXY);
-  final File tempImageFile=ImageUtils.getOutputImageFile();
+  final File tempImageFile=getOutputImageFile();
   if (tempImageFile == null) {
     Log.e("ImageUtils.readScaleAndWriteImage: unable to write scaled image");
     return null;

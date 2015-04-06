@@ -7,7 +7,7 @@
     return;
   }
   try {
-    final Map<String,GCVoteRating> ratings=GCVote.getRating(null,geocodes);
+    final Map<String,GCVoteRating> ratings=getRating(null,geocodes);
     for (    final Geocache cache : caches) {
       if (ratings.containsKey(cache.getGeocode())) {
         final GCVoteRating rating=ratings.get(cache.getGeocode());

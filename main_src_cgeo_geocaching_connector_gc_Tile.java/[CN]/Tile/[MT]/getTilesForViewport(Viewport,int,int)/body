@@ -1,6 +1,6 @@
 {
   final Set<Tile> tiles=new HashSet<>();
-  final int zoom=Math.max(Math.min(Tile.calcZoomLon(viewport.bottomLeft,viewport.topRight,tilesOnAxis),Tile.calcZoomLat(viewport.bottomLeft,viewport.topRight,tilesOnAxis)),minZoom);
+  final int zoom=Math.max(Math.min(calcZoomLon(viewport.bottomLeft,viewport.topRight,tilesOnAxis),calcZoomLat(viewport.bottomLeft,viewport.topRight,tilesOnAxis)),minZoom);
   final Tile tileBottomLeft=new Tile(viewport.bottomLeft,zoom);
   final Tile tileTopRight=new Tile(viewport.topRight,zoom);
   final int xLow=Math.min(tileBottomLeft.getX(),tileTopRight.getX());

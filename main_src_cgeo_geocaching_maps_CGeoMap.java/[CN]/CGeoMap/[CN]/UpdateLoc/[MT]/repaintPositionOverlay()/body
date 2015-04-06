@@ -8,7 +8,7 @@
         final boolean needsRepaintForDistanceOrAccuracy=needsRepaintForDistanceOrAccuracy();
         final boolean needsRepaintForHeading=needsRepaintForHeading();
         if (needsRepaintForDistanceOrAccuracy) {
-          if (CGeoMap.followMyLocation) {
+          if (followMyLocation) {
             map.centerMap(new Geopoint(currentLocation));
           }
         }

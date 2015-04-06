@@ -3,7 +3,7 @@
   super.onCreate(savedInstanceState);
   initDeviceSpecificPreferences();
   initUnitPreferences();
-  SettingsActivity.addPreferencesFromResource(this,R.xml.preferences);
+  addPreferencesFromResource(this,R.xml.preferences);
   initPreferences();
   final Intent intent=getIntent();
   openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN,0));

@@ -2,7 +2,7 @@
   final int waypointId=waypoint.getId();
   final int waypointMapHash=waypoint.getStaticMapsHashcode();
   for (int level=1; level <= MAPS_LEVEL_MAX; level++) {
-    final File mapFile=StaticMapsProvider.getMapFile(geocode,WAYPOINT_PREFIX + waypointId + "_"+ waypointMapHash+ "_"+ level,false);
+    final File mapFile=getMapFile(geocode,WAYPOINT_PREFIX + waypointId + "_"+ waypointMapHash+ "_"+ level,false);
     if (mapFile.exists()) {
       return true;
     }

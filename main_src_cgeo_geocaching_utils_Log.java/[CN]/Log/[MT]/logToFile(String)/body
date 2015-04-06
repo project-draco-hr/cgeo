@@ -10,7 +10,7 @@
     writer.write(addThreadInfo(msg));
   }
  catch (  final IOException e) {
-    Log.e("logToFile: cannot write to " + file,e);
+    e("logToFile: cannot write to " + file,e);
   }
  finally {
     IOUtils.closeQuietly(writer);

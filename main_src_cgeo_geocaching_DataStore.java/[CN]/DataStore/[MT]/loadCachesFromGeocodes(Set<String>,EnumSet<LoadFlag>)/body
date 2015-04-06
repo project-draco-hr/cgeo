@@ -12,7 +12,7 @@
     query.append(" LEFT OUTER JOIN ").append(dbTableLogsOffline).append(" ON ( ").append(dbTableCaches).append(".geocode == ").append(dbTableLogsOffline).append(".geocode) ");
   }
   query.append(" WHERE ").append(dbTableCaches).append('.');
-  query.append(DataStore.whereGeocodeIn(geocodes));
+  query.append(whereGeocodeIn(geocodes));
   final Cursor cursor=database.rawQuery(query.toString(),null);
   try {
     final Set<Geocache> caches=new HashSet<>();

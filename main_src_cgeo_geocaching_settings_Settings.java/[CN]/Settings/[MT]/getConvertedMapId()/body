@@ -11,7 +11,7 @@ case MFMAP_BASEID + CYCLEMAP:
 return MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode();
 case MFMAP_BASEID + OFFLINE:
 {
-final String mapFile=Settings.getMapFile();
+final String mapFile=getMapFile();
 if (StringUtils.isNotEmpty(mapFile)) {
 return mapFile.hashCode();
 }

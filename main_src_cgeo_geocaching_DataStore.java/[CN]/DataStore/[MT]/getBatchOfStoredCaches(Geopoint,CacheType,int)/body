@@ -1,4 +1,4 @@
 {
-  final Set<String> geocodes=DataStore.loadBatchOfStoredGeocodes(coords,cacheType,listId);
-  return new SearchResult(geocodes,DataStore.getAllStoredCachesCount(cacheType,listId));
+  final Set<String> geocodes=loadBatchOfStoredGeocodes(coords,cacheType,listId);
+  return new SearchResult(geocodes,getAllStoredCachesCount(cacheType,listId));
 }

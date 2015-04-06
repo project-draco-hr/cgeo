@@ -16,7 +16,7 @@
     final SearchResult searchResult=ConnectorFactory.searchByViewport(mapView.getViewport().resize(0.8),tokens);
     downloaded=true;
     final Set<Geocache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-    CGeoMap.filter(result);
+    filter(result);
     final Set<String> filteredCodes=searchResult.getFilteredGeocodes();
     Log.d("Filtering out " + filteredCodes.size() + " caches: "+ filteredCodes.toString());
     caches.removeAll(DataStore.loadCaches(filteredCodes,LoadFlags.LOAD_CACHE_ONLY));
