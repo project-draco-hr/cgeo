@@ -1,5 +1,5 @@
 {
-  final ArrayList<Map<String,String>> groups=new ArrayList<>();
+  final List<Map<String,String>> groups=new ArrayList<>();
   for (  final FactoryEntry factoryEntry : FilterRegistry.getInstance().getFactories()) {
     final Map<String,String> map=new HashMap<>();
     map.put(KEY_FILTER_GROUP_NAME,factoryEntry.getName());

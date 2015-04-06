@@ -4,7 +4,7 @@
   }
   view=(ListView)getLayoutInflater().inflate(R.layout.cachedetail_inventory_page,parentView,false);
   final TrackableListAdapter adapterTrackables=new TrackableListAdapter(CacheDetailActivity.this);
-  final HashMap<String,Trackable> trackables=new HashMap<>();
+  final Map<String,Trackable> trackables=new HashMap<>();
   if (cache.getInventory() != null) {
     for (    final Trackable trackable : cache.getInventory()) {
       trackables.put(trackable.getUniqueID(),trackable);

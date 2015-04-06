@@ -1,7 +1,7 @@
 {
   final Builder alert=new AlertDialog.Builder(this);
   alert.setTitle(res.getString(R.string.log_tb_changeall));
-  final ArrayList<LogTypeTrackable> tbLogTypeValues=LogTypeTrackable.getLogTypeTrackableForLogCache();
+  final List<LogTypeTrackable> tbLogTypeValues=LogTypeTrackable.getLogTypeTrackableForLogCache();
   final String[] tbLogTypes=getTBLogTypes(tbLogTypeValues);
   alert.setItems(tbLogTypes,new OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int position){

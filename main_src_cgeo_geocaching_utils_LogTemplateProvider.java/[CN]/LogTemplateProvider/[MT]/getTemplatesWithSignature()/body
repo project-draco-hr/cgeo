@@ -1,5 +1,5 @@
 {
-  final ArrayList<LogTemplate> templates=getTemplatesWithoutSignature();
+  final List<LogTemplate> templates=getTemplatesWithoutSignature();
   templates.add(new LogTemplate("SIGNATURE",R.string.init_signature){
     @Override public String getValue(    final LogContext context){
       final String nestedTemplate=StringUtils.defaultString(Settings.getSignature());

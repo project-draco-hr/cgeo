@@ -18,7 +18,7 @@
     if (dataArray == null) {
       throw new ParserException("No data inside JSON");
     }
-    final ArrayList<Geocache> caches=new ArrayList<>();
+    final List<Geocache> caches=new ArrayList<>();
     for (    final JsonNode dataObject : dataArray) {
       final Geocache cache=new Geocache();
       cache.setName(dataObject.path("name").asText());

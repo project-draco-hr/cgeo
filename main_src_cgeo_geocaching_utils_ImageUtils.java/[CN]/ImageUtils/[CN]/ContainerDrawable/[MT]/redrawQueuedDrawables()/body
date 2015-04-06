@@ -1,6 +1,6 @@
 {
   if (!REDRAW_QUEUE.isEmpty()) {
-    final ArrayList<ImmutablePair<ContainerDrawable,Drawable>> toRedraw=new ArrayList<>(REDRAW_QUEUE.size() + 16);
+    final List<ImmutablePair<ContainerDrawable,Drawable>> toRedraw=new ArrayList<>(REDRAW_QUEUE.size() + 16);
 synchronized (lock) {
       REDRAW_QUEUE.drainTo(toRedraw);
     }

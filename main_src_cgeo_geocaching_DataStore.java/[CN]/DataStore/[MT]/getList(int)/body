@@ -2,7 +2,7 @@
   init();
   if (id >= customListIdOffset) {
     final Cursor cursor=database.query(dbTableLists,new String[]{"_id","title"},"_id = ? ",new String[]{String.valueOf(id - customListIdOffset)},null,null,null);
-    final ArrayList<StoredList> lists=getListsFromCursor(cursor);
+    final List<StoredList> lists=getListsFromCursor(cursor);
     if (!lists.isEmpty()) {
       return lists.get(0);
     }

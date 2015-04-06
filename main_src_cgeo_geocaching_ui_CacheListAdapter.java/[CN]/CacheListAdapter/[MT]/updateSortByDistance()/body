@@ -14,7 +14,7 @@
   if (coords == null) {
     return;
   }
-  final ArrayList<Geocache> oldList=new ArrayList<>(list);
+  final List<Geocache> oldList=new ArrayList<>(list);
   Collections.sort(list,getPotentialInversion(new DistanceComparator(coords,list)));
   if (list.equals(oldList)) {
     return;

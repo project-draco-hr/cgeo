@@ -119,7 +119,7 @@
     this.setWaypoints(other.waypoints,false);
   }
  else {
-    final ArrayList<Waypoint> newPoints=new ArrayList<>(waypoints);
+    final List<Waypoint> newPoints=new ArrayList<>(waypoints);
     Waypoint.mergeWayPoints(newPoints,other.waypoints,false);
     this.setWaypoints(newPoints,false);
   }

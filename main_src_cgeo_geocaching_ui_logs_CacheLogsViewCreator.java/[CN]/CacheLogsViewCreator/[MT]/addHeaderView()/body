@@ -14,7 +14,7 @@
         }
       }
 );
-      final ArrayList<String> labels=new ArrayList<>(sortedLogCounts.size());
+      final List<String> labels=new ArrayList<>(sortedLogCounts.size());
       for (      final Entry<LogType,Integer> pair : sortedLogCounts) {
         labels.add(pair.getValue() + "?? " + pair.getKey().getL10n());
       }

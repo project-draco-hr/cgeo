@@ -2,7 +2,7 @@
   final String geocode=cache.getGeocode();
   final List<Waypoint> waypoints=cache.getWaypoints();
   if (CollectionUtils.isNotEmpty(waypoints)) {
-    final ArrayList<String> currentWaypointIds=new ArrayList<>();
+    final List<String> currentWaypointIds=new ArrayList<>();
     final ContentValues values=new ContentValues();
     final long timeStamp=System.currentTimeMillis();
     for (    final Waypoint oneWaypoint : waypoints) {

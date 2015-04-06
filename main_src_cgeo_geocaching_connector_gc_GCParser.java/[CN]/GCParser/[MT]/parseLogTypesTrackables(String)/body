@@ -2,7 +2,7 @@
   if (StringUtils.isEmpty(page)) {
     return new ArrayList<>();
   }
-  final ArrayList<LogTypeTrackable> types=new ArrayList<>();
+  final List<LogTypeTrackable> types=new ArrayList<>();
   final MatcherWrapper typeBoxMatcher=new MatcherWrapper(GCConstants.PATTERN_TYPEBOX,page);
   if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {
     final String typesText=typeBoxMatcher.group(1);

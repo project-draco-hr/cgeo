@@ -3,7 +3,7 @@
     return -1;
   }
   final String hourLocalized=CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-  final ArrayList<Pattern> patterns=new ArrayList<>();
+  final List<Pattern> patterns=new ArrayList<>();
   patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
   if (StringUtils.isNotBlank(hourLocalized)) {
     patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s*" + "(?:\\d{1,2})(?:\\.00)?"+ "\\s+"+ Pattern.quote(hourLocalized),Pattern.CASE_INSENSITIVE));

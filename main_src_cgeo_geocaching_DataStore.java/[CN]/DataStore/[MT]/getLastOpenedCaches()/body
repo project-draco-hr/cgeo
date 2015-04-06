@@ -1,7 +1,7 @@
 {
   final List<String> geocodes=Settings.getLastOpenedCaches();
   final Set<Geocache> cachesSet=loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
-  final ArrayList<Geocache> caches=new ArrayList<>(cachesSet);
+  final List<Geocache> caches=new ArrayList<>(cachesSet);
   Collections.sort(caches,new Comparator<Geocache>(){
     @Override public int compare(    final Geocache lhs,    final Geocache rhs){
       final int lhsIndex=geocodes.indexOf(lhs.getGeocode());
