@@ -1,3 +1,6 @@
 {
-  return (GoogleCacheOverlayItem)base.createItem(i);
+  if (base != null) {
+    return (GoogleCacheOverlayItem)base.createItem(i);
+  }
+  return null;
 }
