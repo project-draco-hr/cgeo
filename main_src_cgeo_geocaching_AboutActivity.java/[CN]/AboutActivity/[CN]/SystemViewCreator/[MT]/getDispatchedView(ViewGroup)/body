@@ -1,7 +1,7 @@
 {
   final ScrollView view=(ScrollView)getLayoutInflater().inflate(R.layout.about_system_page,parentView,false);
   ButterKnife.inject(this,view);
-  final String systemInfo=systemInformation(AboutActivity.this);
+  final String systemInfo=SystemInformation.getSystemInformation(AboutActivity.this);
   system.setText(systemInfo);
   system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
   Compatibility.setTextIsSelectable(system,true);
