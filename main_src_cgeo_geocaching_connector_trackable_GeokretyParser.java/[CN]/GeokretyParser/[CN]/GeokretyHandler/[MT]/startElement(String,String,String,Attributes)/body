@@ -32,11 +32,15 @@
       if (StringUtils.isNotBlank(imageName)) {
         trackable.setImage("http://geokrety.org/obrazki/" + imageName);
       }
+      final String ownerId=attributes.getValue("owner_id");
+      if (StringUtils.isNotBlank(ownerId)) {
+        trackable.setOwner(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid,ownerId));
+      }
     }
     if (localName.equalsIgnoreCase("owner")) {
-      final String owner=attributes.getValue("id");
-      if (StringUtils.isNotBlank(owner)) {
-        trackable.setOwnerGuid(getType(Integer.parseInt(owner)));
+      final String ownerId=attributes.getValue("id");
+      if (StringUtils.isNotBlank(ownerId)) {
+        trackable.setOwner(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid,ownerId));
       }
     }
     if (localName.equalsIgnoreCase("type")) {
