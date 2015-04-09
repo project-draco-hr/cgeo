@@ -1,0 +1,20 @@
+{
+  onCreate(savedInstanceState,R.layout.authorization_token_activity);
+  final Bundle extras=getIntent().getExtras();
+  if (extras != null) {
+    urlToken=BundleUtils.getString(extras,Intents.EXTRA_TOKEN_AUTH_URL_TOKEN,urlToken);
+    urlRegister=BundleUtils.getString(extras,Intents.EXTRA_TOKEN_AUTH_URL_REGISTER,urlRegister);
+    fieldUsername=BundleUtils.getString(extras,Intents.EXTRA_TOKEN_AUTH_USERNAME,fieldUsername);
+    fieldPassword=BundleUtils.getString(extras,Intents.EXTRA_TOKEN_AUTH_PASSWORD,fieldPassword);
+  }
+  setTitle(getAuthTitle());
+  auth1.setText(getAuthExplainShort());
+  auth2.setText(getAuthExplainLong());
+  startButton.setText(getAuthAuthorize());
+  startButton.setEnabled(true);
+  startButton.setOnClickListener(new StartListener());
+  registerButton.setText(getAuthRegister());
+  registerButton.setEnabled(true);
+  registerButton.setOnClickListener(new RegisterListener());
+  startButton.setText(StringUtils.isBlank(getToken()) ? getAuthStart() : getAuthAgain());
+}

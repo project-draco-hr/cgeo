@@ -1,0 +1,41 @@
+{
+  final String nam=StringUtils.defaultString(username);
+  final String pwd=StringUtils.defaultString(password);
+  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+    ActivityMixin.showToast(this,R.string.err_missing_auth);
+    requestTokenHandler.sendEmptyMessage(NOT_AUTHENTICATED);
+    return;
+  }
+  final Parameters params=new Parameters(fieldUsername,nam,fieldPassword,pwd);
+  final HttpResponse response=Network.postRequest(urlToken,params);
+  int status=NOT_AUTHENTICATED;
+  String message=StringUtils.EMPTY;
+  if (Network.isSuccess(response)) {
+    final String line=StringUtils.defaultString(Network.getResponseData(response));
+    try {
+      final MatcherWrapper errorMatcher=new MatcherWrapper(getPatternIsError(),line);
+      final MatcherWrapper tokenMatcher=new MatcherWrapper(getPatternToken(),line);
+      if (errorMatcher.find()) {
+        status=ERROR_EXT_MSG;
+        message=getExtendedErrorMsg(errorMatcher.group(1));
+      }
+ else       if (tokenMatcher.find()) {
+        status=AUTHENTICATED;
+        setToken(tokenMatcher.group(1));
+      }
+    }
+ catch (    final Exception e) {
+      Log.e("TokenAuthorizationActivity:",e);
+    }
+  }
+ else {
+    message=getExtendedErrorMsg(response);
+  }
+  if (StringUtils.isNotBlank(message)) {
+    final Message msg=requestTokenHandler.obtainMessage(status,message);
+    requestTokenHandler.sendMessage(msg);
+  }
+ else {
+    requestTokenHandler.sendEmptyMessage(status);
+  }
+}

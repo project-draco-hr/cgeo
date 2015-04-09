@@ -1,0 +1,9 @@
+{
+  final String prefKey=getKey();
+  for (  final TokenActivityMapping auth : TokenActivityMapping.values()) {
+    if (auth.prefKeyId != NO_KEY && prefKey.equals(CgeoApplication.getInstance().getString(auth.prefKeyId))) {
+      return auth;
+    }
+  }
+  return TokenActivityMapping.NONE;
+}

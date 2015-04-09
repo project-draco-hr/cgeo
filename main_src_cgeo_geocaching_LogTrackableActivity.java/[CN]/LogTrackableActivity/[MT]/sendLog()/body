@@ -3,14 +3,6 @@
     showToast(res.getString(R.string.log_post_not_possible));
     return;
   }
-  if (!loggingManager.isRegistered()) {
-    final AlertDialog.Builder alertDialog=new AlertDialog.Builder(this);
-    alertDialog.setTitle(R.string.init_summary_geokrety_account);
-    alertDialog.setMessage(R.string.init_summary_geokrety_not_anonymous);
-    alertDialog.setPositiveButton(R.string.ok,null);
-    alertDialog.show();
-    return;
-  }
   if (loggingManager.isTrackingCodeNeededToPostNote() && trackingEditText.getText().toString().isEmpty()) {
     showToast(res.getString(R.string.err_log_post_missing_tracking_code));
     return;
