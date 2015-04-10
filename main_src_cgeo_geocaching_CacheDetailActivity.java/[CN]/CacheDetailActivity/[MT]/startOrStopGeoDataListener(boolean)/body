@@ -1,0 +1,13 @@
+{
+  final boolean start;
+  if (Settings.useLowPowerMode()) {
+    geoDataSubscription.unsubscribe();
+    start=requireGeodata;
+  }
+ else {
+    start=initial;
+  }
+  if (start) {
+    geoDataSubscription=locationUpdater.start(GeoDirHandler.UPDATE_GEODATA);
+  }
+}
