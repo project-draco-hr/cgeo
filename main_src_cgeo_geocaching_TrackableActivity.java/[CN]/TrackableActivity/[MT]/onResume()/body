@@ -1,0 +1,6 @@
+{
+  super.onResume();
+  if (!Settings.useLowPowerMode()) {
+    geoDataSubscription=locationUpdater.start(GeoDirHandler.UPDATE_GEODATA);
+  }
+}
