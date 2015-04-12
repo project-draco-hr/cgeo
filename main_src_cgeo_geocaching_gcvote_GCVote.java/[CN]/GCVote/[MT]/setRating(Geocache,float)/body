@@ -5,7 +5,7 @@
   if (!isValidRating(rating)) {
     throw new IllegalArgumentException("invalid rating " + rating);
   }
-  final ImmutablePair<String,String> login=Settings.getGCvoteLogin();
+  final ImmutablePair<String,String> login=Settings.getGCVoteLogin();
   final Parameters params=new Parameters("userName",login.left,"password",login.right,"cacheId",cache.getGuid(),"waypoint",cache.getGeocode(),"voteUser",String.format(Locale.US,"%.1f",rating),"version","cgeo");
   final String result=StringUtils.trim(Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php",params)));
   if (!StringUtils.equalsIgnoreCase(result,"ok")) {
