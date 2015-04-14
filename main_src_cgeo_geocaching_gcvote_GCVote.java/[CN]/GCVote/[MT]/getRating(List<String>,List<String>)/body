@@ -3,7 +3,7 @@
     return Collections.emptyMap();
   }
   final Parameters params=new Parameters("version","cgeo");
-  final ImmutablePair<String,String> login=Settings.getGCvoteLogin();
+  final ImmutablePair<String,String> login=Settings.getGCVoteLogin();
   if (login != null) {
     params.put("userName",login.left,"password",login.right);
   }
