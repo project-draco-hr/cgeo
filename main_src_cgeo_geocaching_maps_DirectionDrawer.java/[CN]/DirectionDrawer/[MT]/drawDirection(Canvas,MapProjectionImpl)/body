@@ -2,6 +2,9 @@
   if (currentCoords == null) {
     return;
   }
+  if (!Settings.isMapDirection()) {
+    return;
+  }
   if (line == null) {
     line=new Paint();
     line.setAntiAlias(true);
