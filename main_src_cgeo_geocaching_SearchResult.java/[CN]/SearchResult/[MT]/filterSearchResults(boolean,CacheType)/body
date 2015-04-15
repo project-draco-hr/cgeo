@@ -5,7 +5,7 @@
   final Set<Geocache> caches=DataStore.loadCaches(geocodes,LoadFlags.LOAD_CACHE_OR_DB);
   int excluded=0;
   for (  final Geocache cache : caches) {
-    final boolean excludeCache=(excludeDisabled && (cache.isDisabled() || cache.isArchived())) || (excludeMine && (cache.isOwner() || cache.isFound())) || (!cacheType.contains(cache));
+    final boolean excludeCache=(excludeDisabled && (cache.isDisabled() || cache.isArchived())) || !cacheType.contains(cache);
     if (excludeCache) {
       excluded++;
     }

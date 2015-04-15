@@ -1,5 +1,5 @@
 {
   final Collection<Geocache> caches=ECApi.searchByBBox(viewport);
   final SearchResult searchResult=new SearchResult(caches);
-  return searchResult.filterSearchResults(false,false,Settings.getCacheType());
+  return searchResult.filterSearchResults(false,Settings.getCacheType());
 }
