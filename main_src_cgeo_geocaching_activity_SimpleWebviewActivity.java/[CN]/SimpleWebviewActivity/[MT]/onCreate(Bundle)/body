@@ -2,6 +2,6 @@
   super.onCreate(savedInstanceState,R.layout.internal_browser);
   webview=ButterKnife.findById(this,R.id.webview);
   webview.getSettings().setJavaScriptEnabled(true);
-  webview.setWebViewClient(new SimplelWebviewClient());
+  webview.setWebViewClient(new SimpleWebviewClient());
   webview.loadUrl(String.valueOf(getIntent().getData()));
 }
