@@ -8,7 +8,6 @@
     final CacheListApp app=activeApps.get(i);
     subMenu.add(Menu.NONE,i,Menu.NONE,app.getName()).setOnMenuItemClickListener(new OnMenuItemClickListener(){
       @Override public boolean onMenuItemClick(      final MenuItem item){
-        final CacheListApp app=activeApps.get(item.getItemId());
         callback.onListNavigationSelected(app);
         return true;
       }

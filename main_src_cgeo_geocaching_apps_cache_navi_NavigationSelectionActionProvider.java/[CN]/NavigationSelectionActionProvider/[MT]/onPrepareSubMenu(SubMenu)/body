@@ -4,11 +4,14 @@
     return;
   }
   for (  final NavigationAppsEnum app : NavigationAppFactory.getActiveNavigationApps()) {
+    if (!(app.app instanceof CacheNavigationApp)) {
+      continue;
+    }
+    final CacheNavigationApp cacheApp=(CacheNavigationApp)app.app;
     if (app.app.isEnabled(geocache)) {
       subMenu.add(Menu.NONE,app.id,Menu.NONE,app.app.getName()).setOnMenuItemClickListener(new OnMenuItemClickListener(){
         @Override public boolean onMenuItemClick(        final MenuItem item){
-          final CacheNavigationApp app=(CacheNavigationApp)getNavigationAppForId(item.getItemId());
-          app.navigate(activity,geocache);
+          cacheApp.navigate(activity,geocache);
           return true;
         }
       }
