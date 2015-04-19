@@ -20,22 +20,12 @@ case R.id.menu_tts_stop:
 SpeechService.stopService(this);
 invalidateOptionsMenuCompatible();
 return true;
-case R.id.menu_compass_cache:
-setTarget(cache);
-return true;
 case R.id.menu_hint:
 cache.showHintToast(this);
 return true;
 default :
 if (LoggingUI.onMenuItemSelected(item,this,cache)) {
 return true;
-}
-if (cache != null) {
-final Waypoint waypoint=cache.getWaypointById(id);
-if (waypoint != null) {
-setTarget(waypoint);
-return true;
-}
 }
 }
 return super.onOptionsItemSelected(item);

@@ -1,0 +1,9 @@
+{
+  final ActionProvider actionProvider=MenuItemCompat.getActionProvider(menuItem);
+  if (actionProvider instanceof WaypointSelectionActionProvider) {
+    final WaypointSelectionActionProvider waypointsAction=(WaypointSelectionActionProvider)actionProvider;
+    waypointsAction.setCallback(callback);
+    waypointsAction.setCache(cache);
+    menuItem.setVisible(hasTargets(cache));
+  }
+}

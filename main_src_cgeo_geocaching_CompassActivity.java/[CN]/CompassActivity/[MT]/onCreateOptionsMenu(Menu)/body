@@ -2,7 +2,7 @@
   getMenuInflater().inflate(R.menu.compass_activity_options,menu);
   if (cache != null) {
     LoggingUI.addMenuItems(this,menu,cache);
+    initializeTargetActionProvider(menu);
   }
-  addWaypointItems(menu);
   return true;
 }

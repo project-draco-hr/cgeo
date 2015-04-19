@@ -1,0 +1,12 @@
+{
+  final MenuItem destinationMenu=menu.findItem(R.id.menu_select_destination);
+  WaypointSelectionActionProvider.initialize(destinationMenu,cache,new WaypointSelectionActionProvider.Callback(){
+    @Override public void onWaypointSelected(    final Waypoint waypoint){
+      setTarget(waypoint);
+    }
+    @Override public void onGeocacheSelected(    final Geocache geocache){
+      setTarget(geocache);
+    }
+  }
+);
+}
