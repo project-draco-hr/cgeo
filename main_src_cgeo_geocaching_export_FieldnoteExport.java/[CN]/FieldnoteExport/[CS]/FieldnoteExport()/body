@@ -1,3 +1,5 @@
 {
   super(R.string.export_fieldnotes);
+  final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
+  fileName=fileNameDateFormat.format(new Date()) + ".txt";
 }

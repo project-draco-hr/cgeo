@@ -3,8 +3,7 @@
     return null;
   }
   FileUtils.mkdirs(exportLocation);
-  final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyyMMddHHmmss",Locale.US);
-  final File exportFile=new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date())+ ".txt");
+  final File exportFile=new File(exportLocation.toString() + '/' + fileName);
   if (!FileUtils.writeFileUTF16(exportFile,getContent())) {
     return null;
   }

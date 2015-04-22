@@ -1,5 +1,6 @@
 {
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+  builder.setTitle(activity.getString(R.string.export_confirm_title,activity.getString(R.string.export_fieldnotes)));
   final Context themedContext;
   if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
     themedContext=new ContextThemeWrapper(activity,R.style.dark);
@@ -9,6 +10,8 @@
   }
   final View layout=View.inflate(themedContext,R.layout.fieldnote_export_dialog,null);
   builder.setView(layout);
+  final TextView text=ButterKnife.findById(layout,R.id.info);
+  text.setText(activity.getString(R.string.export_confirm_message,exportLocation.getAbsolutePath(),fileName));
   final CheckBox uploadOption=ButterKnife.findById(layout,R.id.upload);
   uploadOption.setChecked(Settings.getFieldNoteExportUpload());
   final CheckBox onlyNewOption=ButterKnife.findById(layout,R.id.onlynew);
