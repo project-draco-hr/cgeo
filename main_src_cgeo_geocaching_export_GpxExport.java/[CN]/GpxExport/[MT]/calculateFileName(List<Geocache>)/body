@@ -1,0 +1,10 @@
+{
+  if (caches.size() == 1) {
+    fileName=caches.get(0).getGeocode() + ".gpx";
+  }
+ else {
+    final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyy-MM-dd",Locale.US);
+    fileName="export_" + fileNameDateFormat.format(new Date()) + ".gpx";
+  }
+  fileName=FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(),fileName)).getName();
+}

@@ -1,4 +1,3 @@
 {
-  final SimpleDateFormat fileNameDateFormat=new SimpleDateFormat("yyyy-MM-dd",Locale.US);
-  return FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(),"export_" + fileNameDateFormat.format(new Date()) + ".gpx"));
+  return FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(),fileName));
 }

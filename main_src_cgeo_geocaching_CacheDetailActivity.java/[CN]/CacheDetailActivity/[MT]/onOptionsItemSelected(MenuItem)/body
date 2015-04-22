@@ -22,6 +22,12 @@ return true;
 case R.id.menu_ignore:
 ignoreCache();
 return true;
+case R.id.menu_export_gpx:
+new GpxExport().export(Collections.singletonList(cache),this);
+return true;
+case R.id.menu_export_fieldnotes:
+new FieldnoteExport().export(Collections.singletonList(cache),this);
+return true;
 default :
 if (NavigationAppFactory.onMenuItemSelected(item,this,cache)) {
 return true;
