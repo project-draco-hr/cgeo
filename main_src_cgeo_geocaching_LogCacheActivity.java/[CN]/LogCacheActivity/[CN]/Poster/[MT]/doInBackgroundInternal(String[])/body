@@ -29,7 +29,7 @@
           showToast(res.getString(R.string.err_gcvote_send_rating));
         }
       }
-      for (      final TrackableConnector connector : trackablesConnectors) {
+      for (      final TrackableConnector connector : ConnectorFactory.getGenericTrackablesConnectors()) {
         final TrackableLoggingManager manager=connector.getTrackableLoggingManager((AbstractLoggingActivity)activity);
         if (manager != null) {
           for (          final TrackableLog trackableLog : trackables) {

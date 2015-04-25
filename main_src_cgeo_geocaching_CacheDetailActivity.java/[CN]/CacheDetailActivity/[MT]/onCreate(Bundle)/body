@@ -95,11 +95,23 @@
     }
   }
 );
-  trackablesConnectors=ConnectorFactory.getGenericTrackablesConnectors();
-  for (  final TrackableConnector connector : trackablesConnectors) {
-    processedBrands.add(connector.getBrand());
-    getSupportLoaderManager().initLoader(connector.getCacheInventoryLoaderId(),null,this).forceLoad();
+  AppObservable.bindActivity(this,Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).subscribeOn(RxUtils.networkScheduler).flatMap(new Func1<TrackableConnector,Observable<Trackable>>(){
+    @Override public Observable<Trackable> call(    final TrackableConnector trackableConnector){
+      processedBrands.add(trackableConnector.getBrand());
+      return Observable.from(trackableConnector.searchTrackables(geocode));
+    }
   }
+)).doOnNext(new Action1<Trackable>(){
+    @Override public void call(    final Trackable trackable){
+      genericTrackables.add(trackable);
+    }
+  }
+).doOnTerminate(new Action0(){
+    @Override public void call(){
+      notifyDataSetChanged();
+    }
+  }
+).subscribe();
   locationUpdater=new CacheDetailsGeoDirHandler(this);
   AndroidBeam.enable(this,this);
 }
