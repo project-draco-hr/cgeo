@@ -5,10 +5,17 @@ case R.id.menu_send:
       sendLog();
     }
  else {
-      showToast(res.getString(R.string.err_trackable_log_not_anonymous,connector.getServiceTitle()));
-      if (connector.getPreferenceActivity() > 0) {
-        SettingsActivity.openForScreen(connector.getPreferenceActivity(),this);
+      Dialogs.confirmYesNo(this,res.getString(R.string.settings_title_open_settings),res.getString(R.string.err_trackable_log_not_anonymous,trackable.getBrand().getLabel(),connector.getServiceTitle()),new OnClickListener(){
+        @Override public void onClick(        final DialogInterface dialog,        final int which){
+          if (connector.getPreferenceActivity() > 0) {
+            SettingsActivity.openForScreen(connector.getPreferenceActivity(),LogTrackableActivity.this);
+          }
+ else {
+            showToast(res.getString(R.string.err_trackable_no_preference_activity,connector.getServiceTitle()));
+          }
+        }
       }
+);
     }
   return true;
 default :
