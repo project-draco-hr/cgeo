@@ -1,0 +1,8 @@
+{
+  for (  final LogEntry newLog : newLogs) {
+    if (!logs.contains(newLog)) {
+      logs.add(newLog);
+    }
+  }
+  Collections.sort(logs,LogEntry.DESCENDING_DATE_COMPARATOR);
+}

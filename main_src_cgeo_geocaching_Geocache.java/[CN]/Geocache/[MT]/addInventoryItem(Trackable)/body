@@ -1,0 +1,17 @@
+{
+  if (inventory == null) {
+    inventory=new ArrayList<>();
+  }
+  Boolean foundTrackable=false;
+  for (  final Trackable trackable : inventory) {
+    if (trackable.getUniqueID().equals(newTrackable.getUniqueID())) {
+      foundTrackable=true;
+      trackable.mergeTrackable(newTrackable);
+      break;
+    }
+  }
+  if (!foundTrackable) {
+    inventory.add(newTrackable);
+  }
+  inventoryItems=inventory.size();
+}

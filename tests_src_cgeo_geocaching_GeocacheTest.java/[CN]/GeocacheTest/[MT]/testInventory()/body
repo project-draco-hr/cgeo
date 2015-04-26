@@ -1,0 +1,8 @@
+{
+  final Geocache cache=new Geocache();
+  final Trackable trackable=new Trackable();
+  final List<Trackable> inventory=new ArrayList<>(Collections.singletonList(trackable));
+  cache.setInventory(inventory);
+  assertThat(cache.getInventory()).isEqualTo(inventory);
+  assertThat(cache.getInventoryItems()).isEqualTo(inventory.size());
+}
