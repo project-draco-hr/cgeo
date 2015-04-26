@@ -1,12 +1,15 @@
 {
   return Observable.from(connectors).flatMap(new Func1<C,Observable<SearchResult>>(){
     @Override public Observable<SearchResult> call(    final C connector){
-      return connector.isActive() ? Observable.defer(new Func0<Observable<SearchResult>>(){
+      if (!connector.isActive()) {
+        return Observable.<SearchResult>empty();
+      }
+      return Observable.defer(new Func0<Observable<SearchResult>>(){
         @Override public Observable<SearchResult> call(){
           return Observable.just(func.call(connector));
         }
       }
-).subscribeOn(RxUtils.networkScheduler) : Observable.<SearchResult>empty();
+).subscribeOn(RxUtils.networkScheduler);
     }
   }
 ).reduce(new SearchResult(),new Func2<SearchResult,SearchResult,SearchResult>(){
