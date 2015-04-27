@@ -1,0 +1,7 @@
+{
+  final LogEntry logEntry1=new LogEntry(100,LogType.FOUND_IT,"LOGENTRY1");
+  final LogEntry logEntry2=new LogEntry(200,LogType.DISCOVERED_IT,"LOGENTRY2");
+  assertThat(logEntry1).isEqualTo(logEntry1);
+  assertThat(logEntry2).isEqualTo(logEntry2);
+  assertThat(logEntry1).isNotEqualTo(logEntry2);
+}
