@@ -1,0 +1,17 @@
+{
+  final String defaultTitle=CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title);
+  final LogEntry logEntry=new LogEntry(100,LogType.FOUND_IT,"LOGENTRY");
+  assertThat(logEntry.getLogImages()).hasSize(0);
+  assertThat(logEntry.getImageTitles()).isEqualTo(defaultTitle);
+  final Image mockedImage1=new Image(null,null,null);
+  logEntry.addLogImage(mockedImage1);
+  assertThat(logEntry.getLogImages()).hasSize(1);
+  assertThat(logEntry.getImageTitles()).isEqualTo(defaultTitle);
+  final Image mockedImage2=new Image(null,"TITLE 1",null);
+  logEntry.addLogImage(mockedImage2);
+  final Image mockedImage3=new Image(null,"TITLE 2",null);
+  logEntry.addLogImage(mockedImage3);
+  assertThat(logEntry.getLogImages()).hasSize(3);
+  final String titlesWanted="TITLE 1, TITLE 2";
+  assertThat(logEntry.getImageTitles()).isEqualTo(titlesWanted);
+}

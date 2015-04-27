@@ -1,0 +1,18 @@
+{
+  final Boolean oldValue=Settings.getPlainLogs();
+  final LogEntry logEntry1=new LogEntry(100,LogType.FOUND_IT,"LOGENTRY");
+  final LogEntry logEntry2=new LogEntry(100,LogType.FOUND_IT,"<font color=\"red\">LOGENTRY</font>");
+  final LogEntry logEntry3=new LogEntry(100,LogType.FOUND_IT,"<FONT COLOR=\"red\">LOGENTRY</FONT>");
+  final LogEntry logEntry4=new LogEntry(100,LogType.FOUND_IT,"<FoNt COlOr=\"red\">LOGENTRY</fOnT>");
+  Settings.setPlainLogs(false);
+  assertThat(logEntry1.getDisplayText()).isEqualTo("LOGENTRY");
+  assertThat(logEntry2.getDisplayText()).isEqualTo("<font color=\"red\">LOGENTRY</font>");
+  assertThat(logEntry3.getDisplayText()).isEqualTo("<FONT COLOR=\"red\">LOGENTRY</FONT>");
+  assertThat(logEntry4.getDisplayText()).isEqualTo("<FoNt COlOr=\"red\">LOGENTRY</fOnT>");
+  Settings.setPlainLogs(true);
+  assertThat(logEntry1.getDisplayText()).isEqualTo("LOGENTRY");
+  assertThat(logEntry2.getDisplayText()).isEqualTo("LOGENTRY");
+  assertThat(logEntry3.getDisplayText()).isEqualTo("LOGENTRY");
+  assertThat(logEntry4.getDisplayText()).isEqualTo("LOGENTRY");
+  Settings.setPlainLogs(oldValue);
+}

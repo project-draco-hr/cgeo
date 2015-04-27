@@ -1,0 +1,7 @@
+{
+  final LogEntry logEntry=new LogEntry(100,LogType.FOUND_IT,"LOGENTRY");
+  final Image mockedImage=new Image(null,null,null);
+  logEntry.addLogImage(mockedImage);
+  assertThat(logEntry.getLogImages()).hasSize(1);
+  assertThat(logEntry.getLogImages().get(0)).isEqualTo(mockedImage);
+}
