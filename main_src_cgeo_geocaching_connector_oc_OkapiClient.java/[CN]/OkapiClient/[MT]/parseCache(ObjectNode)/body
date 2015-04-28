@@ -32,7 +32,7 @@
     }
     cache.setAttributes(parseAttributes((ArrayNode)response.path(CACHE_ATTRNAMES),(ArrayNode)response.get(CACHE_ATTR_ACODES)));
     cache.setWaypoints(parseWaypoints((ArrayNode)response.path(CACHE_WPTS)),false);
-    cache.setInventory(parseTrackables((ArrayNode)response.path(CACHE_TRACKABLES)));
+    cache.mergeInventory(parseTrackables((ArrayNode)response.path(CACHE_TRACKABLES)));
     if (response.has(CACHE_IS_WATCHED)) {
       cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
     }

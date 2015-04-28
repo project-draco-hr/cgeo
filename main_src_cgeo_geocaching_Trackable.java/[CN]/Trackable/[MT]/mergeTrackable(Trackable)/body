@@ -1,0 +1,22 @@
+{
+  guid=StringUtils.defaultIfEmpty(newTrackable.guid,guid);
+  geocode=StringUtils.defaultIfEmpty(newTrackable.geocode,geocode);
+  iconUrl=StringUtils.defaultIfEmpty(newTrackable.iconUrl,iconUrl);
+  name=StringUtils.defaultIfEmpty(newTrackable.name,name);
+  type=ObjectUtils.defaultIfNull(newTrackable.type,type);
+  released=ObjectUtils.defaultIfNull(newTrackable.released,released);
+  distance=newTrackable.distance == -1 ? distance : newTrackable.distance;
+  origin=ObjectUtils.defaultIfNull(newTrackable.origin,origin);
+  owner=ObjectUtils.defaultIfNull(newTrackable.owner,owner);
+  ownerGuid=ObjectUtils.defaultIfNull(newTrackable.ownerGuid,ownerGuid);
+  spottedName=ObjectUtils.defaultIfNull(newTrackable.spottedName,spottedName);
+  spottedType=newTrackable.spottedType == SPOTTED_UNSET ? spottedType : newTrackable.spottedType;
+  spottedGuid=ObjectUtils.defaultIfNull(newTrackable.spottedGuid,spottedGuid);
+  goal=ObjectUtils.defaultIfNull(newTrackable.goal,goal);
+  details=ObjectUtils.defaultIfNull(newTrackable.details,details);
+  image=ObjectUtils.defaultIfNull(newTrackable.image,image);
+  mergeLogEntry(newTrackable.logs);
+  trackingcode=ObjectUtils.defaultIfNull(newTrackable.trackingcode,trackingcode);
+  brand=ObjectUtils.defaultIfNull(newTrackable.brand,brand);
+  trackableConnector=ObjectUtils.defaultIfNull(newTrackable.trackableConnector,trackableConnector);
+}

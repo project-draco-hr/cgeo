@@ -4,17 +4,9 @@
   }
   view=(ListView)getLayoutInflater().inflate(R.layout.cachedetail_inventory_page,parentView,false);
   final TrackableListAdapter adapterTrackables=new TrackableListAdapter(CacheDetailActivity.this);
-  final Map<String,Trackable> trackables=new HashMap<>();
-  if (cache.getInventory() != null) {
-    for (    final Trackable trackable : cache.getInventory()) {
-      trackables.put(trackable.getUniqueID(),trackable);
-    }
-  }
-  for (  final Trackable trackable : genericTrackables) {
-    trackables.put(trackable.getUniqueID(),trackable);
-  }
-  for (  final Map.Entry<String,Trackable> trackable : trackables.entrySet()) {
-    adapterTrackables.add(trackable.getValue());
+  cache.mergeInventory(genericTrackables);
+  for (  final Trackable trackable : cache.getInventory()) {
+    adapterTrackables.add(trackable);
   }
   view.setAdapter(adapterTrackables);
   view.setOnItemClickListener(new OnItemClickListener(){
