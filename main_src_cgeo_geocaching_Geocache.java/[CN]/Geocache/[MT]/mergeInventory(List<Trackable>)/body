@@ -3,8 +3,8 @@
     final Iterator<Trackable> iterator=inventory.iterator();
     while (iterator.hasNext()) {
       final Trackable trackable=iterator.next();
-      Boolean removeTrackable=true;
-      Boolean hasBrand=false;
+      boolean removeTrackable=true;
+      boolean hasBrand=false;
       for (      final Trackable newTrackable : newTrackables) {
         if (trackable.getBrand() == newTrackable.getBrand()) {
           hasBrand=true;
