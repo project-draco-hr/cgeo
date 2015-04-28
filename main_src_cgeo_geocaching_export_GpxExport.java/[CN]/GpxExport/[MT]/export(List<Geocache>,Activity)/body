@@ -1,6 +1,6 @@
 {
-  calculateFileName(caches);
   final String[] geocodes=getGeocodes(caches);
+  calculateFileName(geocodes);
   if (null == activity) {
     new ExportTask(null).execute(geocodes);
   }
