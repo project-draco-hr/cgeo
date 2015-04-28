@@ -9,7 +9,7 @@
   }
   initApplicationLocale(Settings.useEnglish());
   DataStore.getLists();
-  if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+  if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
     isGooglePlayServicesAvailable=true;
   }
   Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
