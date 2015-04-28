@@ -5,23 +5,23 @@
   final Geocache second=new Geocache();
   assertThat(cache.put("2",second)).isNull();
   assertThat(cache).hasSize(2);
-  assertThat(cache.containsKey("1")).isTrue();
-  assertThat(cache.containsValue(first)).isTrue();
-  assertThat(cache.containsKey("2")).isTrue();
-  assertThat(cache.containsValue(second)).isTrue();
+  assertThat(cache).containsKey("1");
+  assertThat(cache).containsValue(first);
+  assertThat(cache).containsKey("2");
+  assertThat(cache).containsValue(second);
   for (int i=3; i <= 10; i++) {
     assertThat(cache.put(Integer.toString(i),new Geocache())).isNull();
   }
   assertThat(cache).hasSize(10);
-  assertThat(cache.containsKey("1")).isTrue();
-  assertThat(cache.containsValue(first)).isTrue();
-  assertThat(cache.containsKey("2")).isTrue();
-  assertThat(cache.containsValue(second)).isTrue();
+  assertThat(cache).containsKey("1");
+  assertThat(cache).containsValue(first);
+  assertThat(cache).containsKey("2");
+  assertThat(cache).containsValue(second);
   assertThat(cache.remove("1")).isNotNull();
   assertThat(cache.put("1",new Geocache())).isNull();
   assertThat(cache.put("11",new Geocache())).isNull();
   assertThat(cache).hasSize(10);
-  assertThat(cache.containsKey("1")).isTrue();
-  assertThat(cache.containsKey("2")).isFalse();
-  assertThat(cache.containsKey("11")).isTrue();
+  assertThat(cache).containsKey("1");
+  assertThat(cache).containsKey("2");
+  assertThat(cache).containsKey("11");
 }

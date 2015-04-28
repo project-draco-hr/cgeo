@@ -1,8 +1,8 @@
 {
   int sumCaches=0;
   int allCaches=0;
-  for (  CacheType cacheType : CacheType.values()) {
-    SearchResult historyOfType=DataStore.getHistoryOfCaches(false,cacheType);
+  for (  final CacheType cacheType : CacheType.values()) {
+    final SearchResult historyOfType=DataStore.getHistoryOfCaches(false,cacheType);
     assertThat(historyOfType).isNotNull();
     if (cacheType != CacheType.ALL) {
       sumCaches+=historyOfType.getCount();

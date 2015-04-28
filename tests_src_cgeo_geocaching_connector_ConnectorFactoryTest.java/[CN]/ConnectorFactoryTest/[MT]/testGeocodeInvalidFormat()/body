@@ -1,11 +1,11 @@
 {
-  assertThat(ConnectorFactory.getConnector("GC") instanceof UnknownConnector).isTrue();
-  assertThat(ConnectorFactory.getConnector("OC") instanceof UnknownConnector).isTrue();
-  assertThat(ConnectorFactory.getConnector("OX") instanceof UnknownConnector).isTrue();
-  assertThat(ConnectorFactory.getConnector("GC 1234") instanceof UnknownConnector).isTrue();
-  assertThat(ConnectorFactory.getConnector("OC 1234") instanceof UnknownConnector).isTrue();
-  assertThat(ConnectorFactory.getConnector("OX 1234") instanceof UnknownConnector).isTrue();
-  assertThat(ConnectorFactory.getConnector("GC-1234") instanceof UnknownConnector).isTrue();
-  assertThat(ConnectorFactory.getConnector("OC-1234") instanceof UnknownConnector).isTrue();
-  assertThat(ConnectorFactory.getConnector("OX-1234") instanceof UnknownConnector).isTrue();
+  assertThat(ConnectorFactory.getConnector("GC")).isInstanceOf(UnknownConnector.class);
+  assertThat(ConnectorFactory.getConnector("OC")).isInstanceOf(UnknownConnector.class);
+  assertThat(ConnectorFactory.getConnector("OX")).isInstanceOf(UnknownConnector.class);
+  assertThat(ConnectorFactory.getConnector("GC 1234")).isInstanceOf(UnknownConnector.class);
+  assertThat(ConnectorFactory.getConnector("OC 1234")).isInstanceOf(UnknownConnector.class);
+  assertThat(ConnectorFactory.getConnector("OX 1234")).isInstanceOf(UnknownConnector.class);
+  assertThat(ConnectorFactory.getConnector("GC-1234")).isInstanceOf(UnknownConnector.class);
+  assertThat(ConnectorFactory.getConnector("OC-1234")).isInstanceOf(UnknownConnector.class);
+  assertThat(ConnectorFactory.getConnector("OX-1234")).isInstanceOf(UnknownConnector.class);
 }

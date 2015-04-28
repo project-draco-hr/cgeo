@@ -27,6 +27,6 @@
   assertThat(log.log).isEqualTo("Sehr sch??ne Runde und wir haben wieder etwas Neues ??ber Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel");
   assertThat(log.isOwn()).isFalse();
   assertThat(log.getDisplayText()).isEqualTo(log.log);
-  assertThat(CalendarUtils.daysSince(log.date) > 700).isTrue();
+  assertThat(CalendarUtils.daysSince(log.date)).isGreaterThan(700);
   assertThat(cache.getAttributes()).isEmpty();
 }

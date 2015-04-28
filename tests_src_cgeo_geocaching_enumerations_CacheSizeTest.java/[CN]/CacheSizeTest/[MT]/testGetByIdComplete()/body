@@ -1,5 +1,5 @@
 {
-  for (  CacheSize size : CacheSize.values()) {
+  for (  final CacheSize size : CacheSize.values()) {
     assertThat(CacheSize.getById(size.id)).isEqualTo(size);
     assertThat(CacheSize.getById(size.id.toLowerCase(Locale.US))).isEqualTo(size);
     assertThat(CacheSize.getById(size.id.toUpperCase(Locale.US))).isEqualTo(size);

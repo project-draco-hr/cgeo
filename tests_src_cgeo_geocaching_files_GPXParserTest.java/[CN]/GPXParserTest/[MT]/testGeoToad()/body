@@ -5,6 +5,5 @@
   for (  final Geocache cache : caches) {
     codes.add(cache.getGeocode());
   }
-  assertThat(codes.contains("GC2KN6K")).isTrue();
-  assertThat(codes.contains("GC1T3MK")).isTrue();
+  assertThat(codes).contains("GC2KN6K","GC1T3MK");
 }

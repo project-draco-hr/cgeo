@@ -3,7 +3,7 @@
   try {
     point=GeopointParser.parse("N51 21.523 and some words in between, so there is no relation E07 02.680");
   }
- catch (  Geopoint.ParseException e) {
+ catch (  final Geopoint.ParseException e) {
   }
   assertThat(point).isNull();
 }

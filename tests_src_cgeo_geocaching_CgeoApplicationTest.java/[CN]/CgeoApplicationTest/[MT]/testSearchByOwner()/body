@@ -4,7 +4,7 @@
       final SearchResult search=GCParser.searchByOwner("blafoo",CacheType.MYSTERY,false,null);
       assertThat(search).isNotNull();
       assertThat(search.getGeocodes()).hasSize(3);
-      assertThat(search.getGeocodes().contains("GC36RT6")).isTrue();
+      assertThat(search.getGeocodes()).contains("GC36RT6");
     }
   }
 );

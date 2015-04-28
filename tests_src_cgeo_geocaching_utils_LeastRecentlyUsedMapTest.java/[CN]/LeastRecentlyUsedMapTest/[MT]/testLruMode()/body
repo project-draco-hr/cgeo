@@ -10,5 +10,5 @@
   assertThat(map.get("one")).isNotNull();
   map.put("five","5");
   map.put("seven","7");
-  assertEquals("six, one, five, seven",colToStr(map.keySet()));
+  assertThat(map.keySet()).containsExactly("six","one","five","seven");
 }

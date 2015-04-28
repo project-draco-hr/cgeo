@@ -23,10 +23,7 @@
   DataStore.saveCache(outTile,EnumSet.of(SaveFlag.CACHE));
   DataStore.saveCache(otherConnector,EnumSet.of(SaveFlag.CACHE));
   final SearchResult search=new SearchResult(main);
-  Set<String> filteredGeoCodes=DataStore.getCachedMissingFromSearch(search,tiles,GCConnector.getInstance(),Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
-  assertThat(filteredGeoCodes.contains(inTileLowZoom.getGeocode())).isTrue();
-  assertThat(filteredGeoCodes.contains(inTileHighZoom.getGeocode())).isFalse();
-  assertThat(filteredGeoCodes.contains(otherConnector.getGeocode())).isFalse();
-  assertThat(filteredGeoCodes.contains(outTile.getGeocode())).isFalse();
-  assertThat(filteredGeoCodes.contains(main.getGeocode())).isFalse();
+  final Set<String> filteredGeoCodes=DataStore.getCachedMissingFromSearch(search,tiles,GCConnector.getInstance(),Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
+  assertThat(filteredGeoCodes).contains(inTileLowZoom.getGeocode());
+  assertThat(filteredGeoCodes).doesNotContain(inTileHighZoom.getGeocode(),otherConnector.getGeocode(),outTile.getGeocode(),main.getGeocode());
 }

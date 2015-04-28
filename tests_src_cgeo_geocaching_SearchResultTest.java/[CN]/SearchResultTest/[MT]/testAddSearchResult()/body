@@ -13,9 +13,6 @@
   newSearch.addSearchResult(search);
   assertThat(newSearch.getCount()).isEqualTo(4);
   assertThat(newSearch.getFilteredGeocodes()).hasSize(2);
-  assertThat(newSearch.getGeocodes().contains("GC12345")).isTrue();
-  assertThat(newSearch.getGeocodes().contains("GC01234")).isTrue();
-  assertThat(newSearch.getGeocodes().contains("GC45678")).isFalse();
-  assertThat(newSearch.getFilteredGeocodes().contains("GC12345")).isFalse();
-  assertThat(newSearch.getFilteredGeocodes().contains("GC45678")).isTrue();
+  assertThat(newSearch.getGeocodes()).contains("GC12345","GC01234").doesNotContain("GC45678");
+  assertThat(newSearch.getFilteredGeocodes()).contains("GC45678").doesNotContain("GC12345");
 }

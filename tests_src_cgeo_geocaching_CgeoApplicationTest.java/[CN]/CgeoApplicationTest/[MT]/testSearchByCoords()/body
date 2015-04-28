@@ -3,8 +3,8 @@
     @Override public void run(){
       final SearchResult search=GCParser.searchByCoords(new Geopoint("N 50?? 06.654 E 008?? 39.777"),CacheType.MYSTERY,false,null);
       assertThat(search).isNotNull();
-      assertThat(20 <= search.getGeocodes().size()).isTrue();
-      assertThat(search.getGeocodes().contains("GC1HBMY")).isTrue();
+      assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
+      assertThat(search.getGeocodes()).contains("GC1HBMY");
     }
   }
 );

@@ -5,7 +5,7 @@
   try {
     caches=parser.parse(instream,null);
     assertThat(caches).isNotNull();
-    assertThat(caches.size() > 0).isTrue();
+    assertThat(caches).isNotEmpty();
   }
   finally {
     instream.close();
