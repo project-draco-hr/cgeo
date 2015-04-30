@@ -22,6 +22,6 @@
   assertThat(cache.put("11",new Geocache())).isNull();
   assertThat(cache).hasSize(10);
   assertThat(cache).containsKey("1");
-  assertThat(cache).containsKey("2");
+  assertThat(cache).doesNotContainKey("2");
   assertThat(cache).containsKey("11");
 }
