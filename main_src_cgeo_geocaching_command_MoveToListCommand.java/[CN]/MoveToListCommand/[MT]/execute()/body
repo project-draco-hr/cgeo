@@ -1,0 +1,9 @@
+{
+  new StoredList.UserInterface(getContext()).promptForListSelection(R.string.cache_menu_move_list,new Action1<Integer>(){
+    @Override public void call(    final Integer newListId){
+      MoveToListCommand.this.newListId=newListId;
+      MoveToListCommand.super.execute();
+    }
+  }
+,true,currentListId);
+}

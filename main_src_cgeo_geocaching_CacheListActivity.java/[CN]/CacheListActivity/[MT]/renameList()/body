@@ -1,8 +1,8 @@
 {
-  new StoredList.UserInterface(this).promptForListRename(listId,new Runnable(){
-    @Override public void run(){
+  (new RenameListCommand(this,listId){
+    @Override protected void onFinished(){
       refreshCurrentList();
     }
   }
-);
+).execute();
 }

@@ -1,0 +1,7 @@
+{
+  final SearchResult caches=DataStore.getBatchOfStoredCaches(null,CacheType.ALL,listId);
+  geocodes=caches.getGeocodes();
+  final StoredList list=DataStore.getList(listId);
+  listName=list.getTitle();
+  DataStore.removeList(listId);
+}

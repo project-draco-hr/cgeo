@@ -12,7 +12,7 @@ refreshStored(adapter.getCheckedOrAllCaches());
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_drop_caches:
-dropStored();
+deleteCachesWithConformation();
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_import_gpx:
@@ -29,7 +29,7 @@ refreshSpinnerAdapter();
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_drop_list:
-removeList(false);
+removeList();
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_rename_list:
@@ -56,7 +56,7 @@ removeFromHistoryCheck();
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_move_to_list:
-moveCachesToOtherList();
+moveCachesToOtherList(adapter.getCheckedOrAllCaches());
 invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_delete_events:

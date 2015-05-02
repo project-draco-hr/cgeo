@@ -1,10 +1,22 @@
 {
-  if (DataStore.removeList(listId)) {
-    showToast(res.getString(R.string.list_dialog_remove_ok));
-    refreshSpinnerAdapter();
-    switchListById(StoredList.STANDARD_LIST_ID);
+  new DeleteListCommand(this,listId){
+    private String oldListName;
+    @Override protected boolean canExecute(){
+      oldListName=DataStore.getList(listId).getTitle();
+      return super.canExecute();
+    }
+    @Override protected void onFinished(){
+      refreshSpinnerAdapter();
+      switchListById(StoredList.STANDARD_LIST_ID);
+    }
+    @Override protected void onFinishedUndo(){
+      refreshSpinnerAdapter();
+      for (      final StoredList list : DataStore.getLists()) {
+        if (oldListName.equals(list.getTitle())) {
+          switchListById(list.id);
+        }
+      }
+    }
   }
- else {
-    showToast(res.getString(R.string.list_dialog_remove_err));
-  }
+.execute();
 }
