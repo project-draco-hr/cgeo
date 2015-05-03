@@ -13,7 +13,7 @@
  else {
       setTitle(waypoint.getGeocode());
     }
-    actionBarTitle.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(waypoint.getWaypointType().markerId),null,null,null);
+    actionBarTitle.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(),waypoint.getWaypointType().markerId),null,null,null);
     details=new CacheDetailsCreator(getActivity(),waypointDetailsLayout);
     details.add(R.string.cache_geocode,waypoint.getPrefix() + waypoint.getGeocode().substring(2));
     details.addDistance(waypoint,waypointDistance);

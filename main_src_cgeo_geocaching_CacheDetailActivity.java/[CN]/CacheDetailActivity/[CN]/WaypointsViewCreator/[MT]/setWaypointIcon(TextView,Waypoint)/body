@@ -2,13 +2,13 @@
   final WaypointType waypointType=wpt.getWaypointType();
   final Drawable icon;
   if (wpt.isVisited()) {
-    final LayerDrawable ld=new LayerDrawable(new Drawable[]{res.getDrawable(waypointType.markerId),res.getDrawable(R.drawable.tick)});
+    final LayerDrawable ld=new LayerDrawable(new Drawable[]{Compatibility.getDrawable(res,waypointType.markerId),Compatibility.getDrawable(res,R.drawable.tick)});
     ld.setLayerInset(0,0,0,visitedInset,visitedInset);
     ld.setLayerInset(1,visitedInset,visitedInset,0,0);
     icon=ld;
   }
  else {
-    icon=res.getDrawable(waypointType.markerId);
+    icon=Compatibility.getDrawable(res,waypointType.markerId);
   }
   nameView.setCompoundDrawablesWithIntrinsicBounds(icon,null,null,null);
 }

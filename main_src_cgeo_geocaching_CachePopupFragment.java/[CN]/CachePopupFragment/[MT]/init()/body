@@ -8,7 +8,7 @@
       setTitle(geocode);
     }
     final TextView titleView=ButterKnife.findById(getView(),R.id.actionbar_title);
-    titleView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId),null,null,null);
+    titleView.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(),cache.getType().markerId),null,null,null);
     final LinearLayout layout=ButterKnife.findById(getView(),R.id.details_list);
     details=new CacheDetailsCreator(getActivity(),layout);
     addCacheDetails();

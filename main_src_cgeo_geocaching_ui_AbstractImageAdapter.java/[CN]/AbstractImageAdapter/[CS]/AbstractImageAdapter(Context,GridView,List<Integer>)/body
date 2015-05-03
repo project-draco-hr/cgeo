@@ -1,7 +1,7 @@
 {
   this.context=context;
   this.imageIds=imageIds;
-  final Drawable drawable=context.getResources().getDrawable(imageIds.get(0));
+  final Drawable drawable=Compatibility.getDrawable(context.getResources(),imageIds.get(0));
   imageWidth=drawable.getIntrinsicWidth();
   gridView.setColumnWidth(getImageWidth());
 }

@@ -1,6 +1,6 @@
 {
-  final Drawable marker=res.getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
-  final Drawable[] layers={marker,res.getDrawable(waypoint.getWaypointType().markerId)};
+  final Drawable marker=Compatibility.getDrawable(res,!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
+  final Drawable[] layers={marker,Compatibility.getDrawable(res,waypoint.getWaypointType().markerId)};
   final LayerDrawable drawable=new LayerDrawable(layers);
   final int resolution=calculateResolution(marker);
   drawable.setLayerInset(1,INSET_TYPE[resolution][0],INSET_TYPE[resolution][1],INSET_TYPE[resolution][2],INSET_TYPE[resolution][3]);
