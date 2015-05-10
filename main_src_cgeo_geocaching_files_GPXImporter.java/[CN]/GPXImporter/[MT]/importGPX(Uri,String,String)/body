@@ -8,7 +8,10 @@
   if (fileType == FileType.UNKNOWN) {
     fileType=getFileTypeFromMimeType(mimeType);
   }
-  final ImportThread importer=getImporterFromFileType(uri,contentResolver,fileType);
+  if (fileType == FileType.UNKNOWN && uri != null) {
+    fileType=getFileTypeFromPathName(uri.toString());
+  }
+  final AbstractImportThread importer=getImporterFromFileType(uri,contentResolver,fileType);
   if (importer != null) {
     importer.start();
   }

@@ -1,0 +1,12 @@
+{
+  try {
+    return contentResolver.openInputStream(uri);
+  }
+ catch (  final FileNotFoundException e) {
+    if (uri.toString().startsWith("http")) {
+      return Network.getResponseStream(Network.getRequest(uri.toString()));
+    }
+    Log.e("GPX import cannot resolve " + uri);
+  }
+  return null;
+}

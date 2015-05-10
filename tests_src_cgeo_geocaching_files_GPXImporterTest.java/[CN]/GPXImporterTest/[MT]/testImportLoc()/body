@@ -1,7 +1,7 @@
 {
   final File oc5952=new File(tempDir,"oc5952.loc");
   copyResourceToFile(R.raw.oc5952_loc,oc5952);
-  final GPXImporter.ImportLocFileThread importThread=new GPXImporter.ImportLocFileThread(oc5952,listId,importStepHandler,progressHandler);
+  final ImportLocFileThread importThread=new ImportLocFileThread(oc5952,listId,importStepHandler,progressHandler);
   runImportThread(importThread);
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
   final SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;

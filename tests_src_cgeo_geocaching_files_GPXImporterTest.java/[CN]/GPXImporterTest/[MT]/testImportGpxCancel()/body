@@ -2,7 +2,7 @@
   final File gc31j2h=new File(tempDir,"gc31j2h.gpx");
   copyResourceToFile(R.raw.gc31j2h,gc31j2h);
   progressHandler.cancel();
-  final GPXImporter.ImportGpxFileThread importThread=new GPXImporter.ImportGpxFileThread(gc31j2h,listId,importStepHandler,progressHandler);
+  final ImportGpxFileThread importThread=new ImportGpxFileThread(gc31j2h,listId,importStepHandler,progressHandler);
   runImportThread(importThread);
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_CANCELED);
 }
