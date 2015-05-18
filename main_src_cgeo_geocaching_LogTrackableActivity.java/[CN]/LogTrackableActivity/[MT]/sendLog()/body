@@ -14,6 +14,10 @@
       return;
     }
   }
-  new Poster(this,res.getString(R.string.log_saving)).execute(logEditText.getText().toString());
-  Settings.setLastTrackableLog(logEditText.getText().toString());
+  if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates() && connector.recommendLogWithGeocode()&& geocacheEditText.getText().toString().isEmpty()&& Settings.getLogTrackableWithoutGeocodeShowCount() < MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE) {
+    new LogTrackableWithoutGeocodeBuilder().create(this).show();
+  }
+ else {
+    postLog();
+  }
 }
