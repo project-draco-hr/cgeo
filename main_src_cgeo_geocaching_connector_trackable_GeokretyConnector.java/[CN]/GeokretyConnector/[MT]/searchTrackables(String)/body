@@ -1,7 +1,7 @@
 {
   Log.d("GeokretyConnector.searchTrackables: wpt=" + geocode);
   try {
-    final InputStream response=Network.getResponseStream(Network.getRequest(getUrlCache() + "/export2.php?wpt=" + geocode));
+    final InputStream response=Network.getResponseStream(Network.getRequest(getUrlCache() + "/export2.php?wpt=" + URLEncoder.encode(geocode,"utf-8")));
     if (response == null) {
       Log.e("GeokretyConnector.searchTrackable: No data from server");
       return Collections.emptyList();
