@@ -36,6 +36,10 @@
       if (StringUtils.isNotBlank(ownerId)) {
         trackable.setOwner(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid,ownerId));
       }
+      final String missing=attributes.getValue("missing");
+      if (StringUtils.isNotBlank(missing)) {
+        trackable.setMissing("1".equalsIgnoreCase(missing));
+      }
     }
     if (localName.equalsIgnoreCase("owner")) {
       final String ownerId=attributes.getValue("id");

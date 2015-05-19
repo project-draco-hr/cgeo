@@ -26,6 +26,9 @@
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("state")) {
       trackable.setSpottedType(Integer.parseInt(content));
     }
+    if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("missing")) {
+      trackable.setMissing("1".equalsIgnoreCase(content));
+    }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
       trackable.setSpottedName(content);
       trackable.setSpottedType(Trackable.SPOTTED_CACHE);
