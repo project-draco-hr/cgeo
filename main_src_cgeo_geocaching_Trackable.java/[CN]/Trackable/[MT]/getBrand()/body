@@ -1,11 +1,13 @@
 {
   if (brand == null) {
+    if (StringUtils.isNotEmpty(guid)) {
+      brand=TrackableBrand.TRAVELBUG;
+      return brand;
+    }
     if (StringUtils.isNotEmpty(geocode)) {
       final TrackableConnector connector=ConnectorFactory.getTrackableConnector(geocode);
-      if (connector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
-        brand=connector.getBrand();
-        return brand;
-      }
+      brand=connector.getBrand();
+      return brand;
     }
     brand=TrackableBrand.UNKNOWN;
   }
