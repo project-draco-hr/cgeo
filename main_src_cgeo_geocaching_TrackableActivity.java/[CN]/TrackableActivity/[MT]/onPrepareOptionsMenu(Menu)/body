@@ -2,6 +2,7 @@
   if (trackable != null) {
     menu.findItem(R.id.menu_log_touch).setVisible(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
     menu.findItem(R.id.menu_browser_trackable).setVisible(trackable.hasUrl());
+    menu.findItem(R.id.menu_refresh_trackable).setVisible(true);
   }
   return super.onPrepareOptionsMenu(menu);
 }

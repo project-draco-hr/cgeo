@@ -6,6 +6,9 @@ case R.id.menu_log_touch:
 case R.id.menu_browser_trackable:
 startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(trackable.getUrl())));
 return true;
+case R.id.menu_refresh_trackable:
+refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(),trackable.getGeocode()));
+return true;
 }
 return super.onOptionsItemSelected(item);
 }
