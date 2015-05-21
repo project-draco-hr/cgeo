@@ -1,5 +1,9 @@
 {
   setBounds(0,0,newDrawable.getIntrinsicWidth(),newDrawable.getIntrinsicHeight());
   drawable=newDrawable;
+  final TextView view=viewRef.get();
+  if (view == null) {
+    throw new IllegalStateException("text view has been deleted while its images are still in use");
+  }
   return view;
 }
