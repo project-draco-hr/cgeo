@@ -7,20 +7,26 @@ case R.id.menu_waypoint_edit:
       refreshOnResume=true;
     }
   return true;
+case R.id.menu_waypoint_copy_coordinates:
+if (selectedWaypoint != null) {
+  ClipboardUtils.copyToClipboard(selectedWaypoint.getCoords().toString());
+  showToast(getResources().getString(R.string.clipboard_copy_ok));
+}
+return true;
 case R.id.menu_waypoint_duplicate:
 ensureSaved();
 new AsyncTask<Void,Void,Boolean>(){
 @Override protected Boolean doInBackground(final Void... params){
-  if (cache.duplicateWaypoint(selectedWaypoint)) {
-    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-    return true;
-  }
-  return false;
+if (cache.duplicateWaypoint(selectedWaypoint)) {
+DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+return true;
+}
+return false;
 }
 @Override protected void onPostExecute(final Boolean result){
-  if (result) {
-    notifyDataSetChanged();
-  }
+if (result) {
+notifyDataSetChanged();
+}
 }
 }
 .execute();
