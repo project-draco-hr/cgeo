@@ -23,6 +23,7 @@
         if (CollectionUtils.isNotEmpty(result)) {
           cacheList.clear();
           cacheList.addAll(result);
+          adapter.reFilter();
         }
         setAdapterCurrentCoordinates(false);
         showProgress(false);
