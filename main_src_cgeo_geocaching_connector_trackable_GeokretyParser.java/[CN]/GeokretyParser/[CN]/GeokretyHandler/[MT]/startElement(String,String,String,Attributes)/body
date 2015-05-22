@@ -4,6 +4,7 @@
     trackable=new Trackable();
     trackable.forceSetBrand(TrackableBrand.GEOKRETY);
     trackables.add(trackable);
+    trackable.setSpottedType(Trackable.SPOTTED_OWNER);
   }
   try {
     if (localName.equalsIgnoreCase("geokret")) {
@@ -23,10 +24,13 @@
       if (StringUtils.isNotBlank(kretyType)) {
         trackable.setType(getType(Integer.parseInt(kretyType)));
       }
+      final String kretyState=attributes.getValue("state");
+      if (StringUtils.isNotBlank(kretyState)) {
+        trackable.setSpottedType(getSpottedType(Integer.parseInt(kretyState)));
+      }
       final String waypointCode=attributes.getValue("waypoint");
       if (StringUtils.isNotBlank(waypointCode)) {
         trackable.setSpottedName(waypointCode);
-        trackable.setSpottedType(Trackable.SPOTTED_CACHE);
       }
       final String imageName=attributes.getValue("image");
       if (StringUtils.isNotBlank(imageName)) {

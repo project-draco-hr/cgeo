@@ -1,7 +1,12 @@
 {
   try {
-    if (localName.equalsIgnoreCase("geokret") && StringUtils.isNotEmpty(content)) {
-      trackable.setName(content);
+    if (localName.equalsIgnoreCase("geokret")) {
+      if (StringUtils.isNotEmpty(content)) {
+        trackable.setName(content);
+      }
+      if (trackable.getSpottedType() == Trackable.SPOTTED_TRAVELLING && trackable.getDistance() == 0) {
+        trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+      }
     }
     if (localName.equalsIgnoreCase("name")) {
       trackable.setName(content);
@@ -24,14 +29,13 @@
       trackable.setImage("http://geokrety.org/obrazki/" + content);
     }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("state")) {
-      trackable.setSpottedType(Integer.parseInt(content));
+      trackable.setSpottedType(getSpottedType(Integer.parseInt(content)));
     }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("missing")) {
       trackable.setMissing("1".equalsIgnoreCase(content));
     }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
       trackable.setSpottedName(content);
-      trackable.setSpottedType(Trackable.SPOTTED_CACHE);
     }
   }
  catch (  final ParseException|NumberFormatException e) {
