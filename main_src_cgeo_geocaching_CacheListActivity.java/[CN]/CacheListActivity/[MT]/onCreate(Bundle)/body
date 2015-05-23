@@ -20,6 +20,9 @@
     coords=Sensors.getInstance().currentGeo().getCoords();
   }
   setTitle(title);
+  if (savedInstanceState != null) {
+    currentFilter=savedInstanceState.getParcelable(STATE_FILTER);
+  }
   initAdapter();
   prepareFilterBar();
   if (type.canSwitch) {
