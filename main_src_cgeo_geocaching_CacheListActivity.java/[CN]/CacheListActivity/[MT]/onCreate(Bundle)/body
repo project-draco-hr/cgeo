@@ -22,6 +22,7 @@
   setTitle(title);
   if (savedInstanceState != null) {
     currentFilter=savedInstanceState.getParcelable(STATE_FILTER);
+    currentInverseSort=savedInstanceState.getBoolean(STATE_INVERSE_SORT);
   }
   initAdapter();
   prepareFilterBar();
