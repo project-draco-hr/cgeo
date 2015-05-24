@@ -1,0 +1,6 @@
+{
+  final IConnector wmConnector=ConnectorFactory.getConnector("WM1234");
+  assertThat(wmConnector).isNotNull();
+  assertThat(wmConnector.canHandle("WM1234")).isTrue();
+  assertThat(wmConnector.canHandle("GC1234")).isFalse();
+}
