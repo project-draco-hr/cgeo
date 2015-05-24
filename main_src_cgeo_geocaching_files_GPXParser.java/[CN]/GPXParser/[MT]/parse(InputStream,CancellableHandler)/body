@@ -113,7 +113,9 @@
       if (StringUtils.startsWithIgnoreCase(content,"GCEC") && StringUtils.containsIgnoreCase(scriptUrl,"extremcaching")) {
         content=content.substring(2);
       }
-      cache.setName(content);
+      if (StringUtils.containsIgnoreCase(scriptUrl,"")) {
+        cache.setName(content);
+      }
       findGeoCode(cache.getName());
     }
   }
@@ -177,6 +179,7 @@
 );
   final Element cacheParent=getCacheParent(waypoint);
   registerGsakExtensions(cacheParent);
+  registerTerraCachingExtensions(cacheParent);
   registerCgeoExtensions(cacheParent);
   for (  final String nsGC : GROUNDSPEAK_NAMESPACE) {
     final Element gcCache=cacheParent.getChild(nsGC,"cache");

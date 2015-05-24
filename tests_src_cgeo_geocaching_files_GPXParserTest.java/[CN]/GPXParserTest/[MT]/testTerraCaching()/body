@@ -1,0 +1,16 @@
+{
+  final List<Geocache> caches=readGPX11(R.raw.terracaching_gpx);
+  assertThat(caches).hasSize(55);
+  Collections.sort(caches,new Comparator<Geocache>(){
+    @Override public int compare(    final Geocache lhs,    final Geocache rhs){
+      return lhs.getGeocode().compareTo(rhs.getGeocode());
+    }
+  }
+);
+  final Geocache cache=caches.get(0);
+  assertThat(cache.getGeocode()).isEqualTo("TC2JP");
+  assertThat(cache.getName()).isEqualTo("Pingo");
+  assertThat(cache.getOwnerDisplayName()).isEqualTo("harrieklomp");
+  assertThat(cache.getType()).isEqualTo(CacheType.UNKNOWN);
+  assertThat(cache.getSize()).isEqualTo(CacheSize.MICRO);
+}
