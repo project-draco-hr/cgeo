@@ -1,0 +1,14 @@
+{
+  final String geocode="GC1BKP3";
+  try {
+    final int cacheResource=R.raw.gc1bkp3_gpx101;
+    final Geocache cache=loadCacheFromResource(cacheResource);
+    final Waypoint waypoint=new Waypoint("WP",WaypointType.PARKING,false);
+    waypoint.setCoords(cache.getCoords());
+    cache.addOrChangeWaypoint(waypoint,true);
+    assertThat(getGPXFromCache(geocode)).contains("<sym>Parking Area</sym>").contains("<type>Waypoint|Parking Area</type>");
+  }
+  finally {
+    DataStore.removeCache(geocode,LoadFlags.REMOVE_ALL);
+  }
+}

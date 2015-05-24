@@ -4,7 +4,8 @@
     gpx.startTag(PREFIX_GPX,"wpt");
     gpx.attribute("","lat",Double.toString(coords.getLatitude()));
     gpx.attribute("","lon",Double.toString(coords.getLongitude()));
-    XmlUtils.multipleTexts(gpx,PREFIX_GPX,"name",wp.getGpxId(),"cmt",wp.getNote(),"desc",wp.getName(),"sym",wp.getWaypointType().toString(),"type","Waypoint|" + wp.getWaypointType().toString());
+    final String waypointTypeGpx=wp.getWaypointType().gpx;
+    XmlUtils.multipleTexts(gpx,PREFIX_GPX,"name",wp.getGpxId(),"cmt",wp.getNote(),"desc",wp.getName(),"sym",waypointTypeGpx,"type","Waypoint|" + waypointTypeGpx);
     gpx.startTag(PREFIX_GSAK,"wptExtension");
     gpx.startTag(PREFIX_GSAK,"Parent");
     gpx.text(wp.getGeocode());

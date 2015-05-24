@@ -71,7 +71,7 @@
         }
         final Geocache cacheForWaypoint=DataStore.loadCache(parentCacheCode,LoadFlags.LOAD_CACHE_OR_DB);
         if (cacheForWaypoint != null) {
-          final Waypoint waypoint=new Waypoint(cache.getShortDescription(),convertWaypointSym2Type(sym),false);
+          final Waypoint waypoint=new Waypoint(cache.getShortDescription(),WaypointType.fromGPXString(sym),false);
           if (wptUserDefined) {
             waypoint.setUserDefined();
           }
