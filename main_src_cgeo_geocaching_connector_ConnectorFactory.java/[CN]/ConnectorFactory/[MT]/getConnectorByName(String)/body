@@ -1,0 +1,8 @@
+{
+  for (  final IConnector connector : CONNECTORS) {
+    if (StringUtils.equals(connectorName,connector.getName())) {
+      return connector;
+    }
+  }
+  return UNKNOWN_CONNECTOR;
+}
