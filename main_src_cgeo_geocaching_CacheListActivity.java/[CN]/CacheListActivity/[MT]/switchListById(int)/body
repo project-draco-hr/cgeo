@@ -3,25 +3,28 @@
     return;
   }
   if (id == PseudoList.HISTORY_LIST.id) {
-    startActivity(getHistoryIntent(this));
-    finish();
-    return;
-  }
-  if (id == PseudoList.ALL_LIST.id) {
-    listId=id;
-    title=res.getString(R.string.list_all_lists);
+    type=CacheListType.HISTORY;
+    getSupportLoaderManager().destroyLoader(CacheListType.OFFLINE.getLoaderId());
+    currentLoader=(AbstractSearchLoader)getSupportLoaderManager().restartLoader(CacheListType.HISTORY.getLoaderId(),null,this);
   }
  else {
-    final StoredList list=DataStore.getList(id);
-    listId=list.id;
-    title=list.title;
+    if (id == PseudoList.ALL_LIST.id) {
+      listId=id;
+      title=res.getString(R.string.list_all_lists);
+    }
+ else {
+      final StoredList list=DataStore.getList(id);
+      listId=list.id;
+      title=list.title;
+    }
+    type=CacheListType.OFFLINE;
+    getSupportLoaderManager().destroyLoader(CacheListType.HISTORY.getLoaderId());
+    currentLoader=(OfflineGeocacheListLoader)getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(),OfflineGeocacheListLoader.getBundleForList(listId),this);
+    Settings.saveLastList(listId);
   }
-  type=CacheListType.OFFLINE;
-  Settings.saveLastList(listId);
   initAdapter();
   showProgress(true);
   showFooterLoadingCaches();
   adapter.setSelectMode(false);
-  currentLoader=(OfflineGeocacheListLoader)getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(),OfflineGeocacheListLoader.getBundleForList(listId),this);
   invalidateOptionsMenuCompatible();
 }

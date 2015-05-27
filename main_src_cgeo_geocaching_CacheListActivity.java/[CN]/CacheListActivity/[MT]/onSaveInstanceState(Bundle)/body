@@ -1,5 +1,7 @@
 {
+  super.onSaveInstanceState(savedInstanceState);
   savedInstanceState.putParcelable(STATE_FILTER,currentFilter);
   savedInstanceState.putBoolean(STATE_INVERSE_SORT,adapter.getInverseSort());
-  super.onSaveInstanceState(savedInstanceState);
+  savedInstanceState.putInt(STATE_LIST_TYPE,type.ordinal());
+  savedInstanceState.putInt(STATE_LIST_ID,listId);
 }
