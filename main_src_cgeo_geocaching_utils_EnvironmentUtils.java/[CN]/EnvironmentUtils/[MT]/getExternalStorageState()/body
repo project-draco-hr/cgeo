@@ -1,0 +1,9 @@
+{
+  try {
+    return Environment.getExternalStorageState();
+  }
+ catch (  final NullPointerException e) {
+    Log.w("Could not get external storage state",e);
+  }
+  return StringUtils.EMPTY;
+}

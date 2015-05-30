@@ -1,7 +1,7 @@
 {
   final List<File> list=new ArrayList<>();
   try {
-    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    if (EnvironmentUtils.isExternalStorageAvailable()) {
       boolean loaded=false;
       for (      final File dir : getExistingBaseFolders()) {
         FileUtils.listDir(list,dir,selector,changeWaitDialogHandler);
