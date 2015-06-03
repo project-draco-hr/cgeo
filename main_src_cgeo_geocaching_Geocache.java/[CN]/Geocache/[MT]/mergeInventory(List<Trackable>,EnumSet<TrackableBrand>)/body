@@ -1,0 +1,20 @@
+{
+  final List<Trackable> mergedTrackables=new ArrayList<>(newTrackables);
+  for (  final Trackable trackable : ListUtils.emptyIfNull(inventory)) {
+    if (processedBrands.contains(trackable.getBrand())) {
+      final ListIterator<Trackable> iterator=mergedTrackables.listIterator();
+      while (iterator.hasNext()) {
+        final Trackable newTrackable=iterator.next();
+        if (trackable.getUniqueID().equals(newTrackable.getUniqueID())) {
+          trackable.mergeTrackable(newTrackable);
+          iterator.set(trackable);
+          break;
+        }
+      }
+    }
+ else {
+      mergedTrackables.add(trackable);
+    }
+  }
+  setInventory(mergedTrackables);
+}
