@@ -97,6 +97,7 @@
 );
   trackablesConnectors=ConnectorFactory.getGenericTrackablesConnectors();
   for (  final TrackableConnector connector : trackablesConnectors) {
+    processedBrands.add(connector.getBrand());
     getSupportLoaderManager().initLoader(connector.getCacheInventoryLoaderId(),null,this).forceLoad();
   }
   locationUpdater=new CacheDetailsGeoDirHandler(this);

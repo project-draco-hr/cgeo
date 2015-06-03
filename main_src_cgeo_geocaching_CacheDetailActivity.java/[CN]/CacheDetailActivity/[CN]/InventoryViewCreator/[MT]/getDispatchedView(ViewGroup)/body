@@ -4,7 +4,7 @@
   }
   view=(ListView)getLayoutInflater().inflate(R.layout.cachedetail_inventory_page,parentView,false);
   final TrackableListAdapter adapterTrackables=new TrackableListAdapter(CacheDetailActivity.this);
-  cache.mergeInventory(genericTrackables);
+  cache.mergeInventory(genericTrackables,processedBrands);
   for (  final Trackable trackable : cache.getInventory()) {
     adapterTrackables.add(trackable);
   }
