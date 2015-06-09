@@ -1,0 +1,50 @@
+{
+  final ActivityData currentState=new ActivityData();
+  final String bearingText=bearing.getText().toString();
+  final String distanceText=distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
+  final String latText=buttonLat.getText().toString();
+  final String lonText=buttonLon.getText().toString();
+  if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
+    Dialogs.message(EditWaypointActivity.this,R.string.err_point_no_position_given_title,R.string.err_point_no_position_given);
+    return null;
+  }
+  Geopoint coords;
+  if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
+    try {
+      coords=new Geopoint(latText,lonText);
+    }
+ catch (    final Geopoint.ParseException e) {
+      showToast(res.getString(e.resource));
+      return null;
+    }
+  }
+ else {
+    coords=Sensors.getInstance().currentGeo().getCoords();
+  }
+  if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+    final double bearing;
+    try {
+      bearing=Double.parseDouble(bearingText);
+    }
+ catch (    final NumberFormatException ignored) {
+      Dialogs.message(EditWaypointActivity.this,R.string.err_point_bear_and_dist_title,R.string.err_point_bear_and_dist);
+      return null;
+    }
+    final double distance;
+    try {
+      distance=DistanceParser.parseDistance(distanceText,!Settings.useImperialUnits());
+    }
+ catch (    final NumberFormatException ignored) {
+      showToast(res.getString(R.string.err_parse_dist));
+      return null;
+    }
+    coords=coords.project(bearing,distance);
+  }
+  currentState.coords=coords;
+  final String givenName=waypointName.getText().toString().trim();
+  currentState.name=StringUtils.defaultIfBlank(givenName,getDefaultWaypointName(getSelectedWaypointType()));
+  currentState.noteText=note.getText().toString().trim();
+  currentState.type=getSelectedWaypointType();
+  currentState.visited=visitedCheckBox.isChecked();
+  return currentState;
+}
