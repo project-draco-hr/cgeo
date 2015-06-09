@@ -4,11 +4,11 @@ case R.id.menu_edit_waypoint_cancel:
     finish();
   return true;
 case R.id.menu_edit_waypoint_save:
-saveWaypoint();
+saveWaypoint(getActivityData());
 finish();
 return true;
 case android.R.id.home:
-saveWaypoint();
+toastOnChanged();
 break;
 }
 return super.onOptionsItemSelected(item);

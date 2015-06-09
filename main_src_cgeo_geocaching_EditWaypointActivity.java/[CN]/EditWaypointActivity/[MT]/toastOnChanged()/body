@@ -1,0 +1,6 @@
+{
+  final ActivityData currentState=getActivityData();
+  if (currentState != null && isWaypointChanged(currentState)) {
+    ActivityMixin.showToast(this,R.string.warn_discard_changes);
+  }
+}
