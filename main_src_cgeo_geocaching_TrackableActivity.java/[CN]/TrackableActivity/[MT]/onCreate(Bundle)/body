@@ -10,6 +10,7 @@
     guid=extras.getString(Intents.EXTRA_GUID);
     id=extras.getString(Intents.EXTRA_ID);
     geocache=extras.getString(Intents.EXTRA_GEOCACHE);
+    brand=TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND));
   }
   if (geocode == null && guid == null && id == null && uri != null) {
     geocode=ConnectorFactory.getTrackableFromURL(uri.toString());
