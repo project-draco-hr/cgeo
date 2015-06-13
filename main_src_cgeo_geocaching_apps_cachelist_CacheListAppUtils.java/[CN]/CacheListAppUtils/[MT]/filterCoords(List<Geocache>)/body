@@ -1,0 +1,9 @@
+{
+  final List<Geocache> cachesWithCoords=new ArrayList<>(caches.size());
+  for (  final Geocache geocache : caches) {
+    if (geocache.getCoords() != null) {
+      cachesWithCoords.add(geocache);
+    }
+  }
+  return cachesWithCoords;
+}

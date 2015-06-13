@@ -69,7 +69,7 @@ invalidateOptionsMenuCompatible();
 return true;
 case R.id.menu_cache_list_app:
 if (cacheToShow()) {
-CacheListApps.getActiveApps().get(0).invoke(cacheList,this,getFilteredSearch());
+CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(cacheList),this,getFilteredSearch());
 }
 return true;
 }
