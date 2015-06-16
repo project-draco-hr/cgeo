@@ -7,7 +7,9 @@
     return scanner.useDelimiter("\\A").next();
   }
   finally {
-    IOUtils.closeQuietly(scanner);
     IOUtils.closeQuietly(ins);
+    if (scanner != null) {
+      scanner.close();
+    }
   }
 }
