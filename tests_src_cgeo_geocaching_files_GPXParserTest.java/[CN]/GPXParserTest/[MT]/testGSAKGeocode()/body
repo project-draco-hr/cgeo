@@ -1,0 +1,6 @@
+{
+  final List<Geocache> caches=readGPX10(R.raw.liptov_gpx);
+  assertThat(caches).hasSize(1);
+  final Geocache cache=caches.get(0);
+  assertThat(cache.getGeocode()).isEqualTo("GC3A5N1");
+}
