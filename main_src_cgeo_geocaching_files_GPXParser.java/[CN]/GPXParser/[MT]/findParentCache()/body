@@ -1,0 +1,13 @@
+{
+  if (StringUtils.isBlank(parentCacheCode)) {
+    return null;
+  }
+  Geocache cacheForWaypoint=DataStore.loadCache(parentCacheCode,LoadFlags.LOAD_CACHE_OR_DB);
+  if (cacheForWaypoint == null) {
+    final String geocode=DataStore.getGeocodeForTitle(parentCacheCode);
+    if (StringUtils.isNotBlank(geocode)) {
+      cacheForWaypoint=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+    }
+  }
+  return cacheForWaypoint;
+}

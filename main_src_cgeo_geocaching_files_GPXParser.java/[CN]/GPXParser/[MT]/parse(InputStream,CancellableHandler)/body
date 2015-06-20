@@ -69,7 +69,7 @@
             parentCacheCode="GC" + cache.getName().substring(2).toUpperCase(Locale.US);
           }
         }
-        final Geocache cacheForWaypoint=DataStore.loadCache(parentCacheCode,LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cacheForWaypoint=findParentCache();
         if (cacheForWaypoint != null) {
           final Waypoint waypoint=new Waypoint(cache.getShortDescription(),WaypointType.fromGPXString(sym),false);
           if (wptUserDefined) {

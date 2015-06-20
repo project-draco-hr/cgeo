@@ -1,0 +1,19 @@
+{
+  if (StringUtils.isBlank(title)) {
+    return null;
+  }
+  init();
+  try {
+    final SQLiteStatement sqlStatement=PreparedStatement.GEOCODE_FROM_TITLE.getStatement();
+synchronized (sqlStatement) {
+      sqlStatement.bindString(1,title);
+      return sqlStatement.simpleQueryForString();
+    }
+  }
+ catch (  final SQLiteDoneException ignored) {
+  }
+catch (  final Exception e) {
+    Log.e("DataStore.getGeocodeForGuid",e);
+  }
+  return null;
+}
