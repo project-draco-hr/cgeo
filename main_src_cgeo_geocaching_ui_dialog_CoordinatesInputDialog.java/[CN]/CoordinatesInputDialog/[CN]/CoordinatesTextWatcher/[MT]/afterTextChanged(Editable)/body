@@ -2,6 +2,10 @@
   if (currentFormat == CoordInputFormatEnum.Plain) {
     return;
   }
+  final EditText editText=editTextRef.get();
+  if (editText == null) {
+    return;
+  }
   final int maxLength=getMaxLengthFromCurrentField(editText);
   if (s.length() == maxLength) {
     if (editText == eLatDeg) {
