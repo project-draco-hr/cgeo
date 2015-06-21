@@ -25,22 +25,11 @@
   tLonSep1=ButterKnife.findById(v,R.id.LonSeparator1);
   tLonSep2=ButterKnife.findById(v,R.id.LonSeparator2);
   tLonSep3=ButterKnife.findById(v,R.id.LonSeparator3);
-  eLatDeg.addTextChangedListener(new CoordinatesTextWatcher(eLatDeg));
-  eLatMin.addTextChangedListener(new CoordinatesTextWatcher(eLatMin));
-  eLatSec.addTextChangedListener(new CoordinatesTextWatcher(eLatSec));
-  eLatSub.addTextChangedListener(new CoordinatesTextWatcher(eLatSub));
-  eLonDeg.addTextChangedListener(new CoordinatesTextWatcher(eLonDeg));
-  eLonMin.addTextChangedListener(new CoordinatesTextWatcher(eLonMin));
-  eLonSec.addTextChangedListener(new CoordinatesTextWatcher(eLonSec));
-  eLonSub.addTextChangedListener(new CoordinatesTextWatcher(eLonSub));
-  EditUtils.disableSuggestions(eLatDeg);
-  EditUtils.disableSuggestions(eLatMin);
-  EditUtils.disableSuggestions(eLatSec);
-  EditUtils.disableSuggestions(eLatSub);
-  EditUtils.disableSuggestions(eLonDeg);
-  EditUtils.disableSuggestions(eLonMin);
-  EditUtils.disableSuggestions(eLonSec);
-  EditUtils.disableSuggestions(eLonSub);
+  orderedInputs=Arrays.asList(eLatDeg,eLatMin,eLatSec,eLatSub,eLonDeg,eLonMin,eLonSec,eLonSub);
+  for (  final EditText editText : orderedInputs) {
+    editText.addTextChangedListener(new CoordinatesTextWatcher(editText));
+    EditUtils.disableSuggestions(editText);
+  }
   bLat.setOnClickListener(new ButtonClickListener());
   bLon.setOnClickListener(new ButtonClickListener());
   final Button buttonCurrent=ButterKnife.findById(v,R.id.current);

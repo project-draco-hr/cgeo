@@ -6,51 +6,7 @@
   if (editText == null) {
     return;
   }
-  final int maxLength=getMaxLengthFromCurrentField(editText);
-  if (s.length() == maxLength) {
-    if (editText == eLatDeg) {
-      eLatMin.requestFocus();
-    }
- else     if (editText == eLatMin) {
-      if (eLatSec.getVisibility() == View.GONE) {
-        eLonDeg.requestFocus();
-      }
- else {
-        eLatSec.requestFocus();
-      }
-    }
- else     if (editText == eLatSec) {
-      if (eLatSub.getVisibility() == View.GONE) {
-        eLonDeg.requestFocus();
-      }
- else {
-        eLatSub.requestFocus();
-      }
-    }
- else     if (editText == eLatSub) {
-      eLonDeg.requestFocus();
-    }
- else     if (editText == eLonDeg) {
-      eLonMin.requestFocus();
-    }
- else     if (editText == eLonMin) {
-      if (eLonSec.getVisibility() == View.GONE) {
-        eLatDeg.requestFocus();
-      }
- else {
-        eLonSec.requestFocus();
-      }
-    }
- else     if (editText == eLonSec) {
-      if (eLonSub.getVisibility() == View.GONE) {
-        eLatDeg.requestFocus();
-      }
- else {
-        eLonSub.requestFocus();
-      }
-    }
- else     if (editText == eLonSub) {
-      eLatDeg.requestFocus();
-    }
+  if (s.length() == getMaxLengthFromCurrentField(editText)) {
+    focusNextVisibleInput(editText);
   }
 }
