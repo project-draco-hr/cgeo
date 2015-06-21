@@ -8,7 +8,7 @@
   actionButtons=new SparseArray<>();
   final LinearLayout inventoryView=ButterKnife.findById(this,R.id.inventory);
   inventoryView.removeAllViews();
-  for (  final TrackableLog tb : trackables) {
+  for (  final TrackableLog tb : getSortedTrackables()) {
     final LinearLayout inventoryItem=(LinearLayout)inflater.inflate(R.layout.logcache_trackable_item,inventoryView,false);
     final ImageView brandView=ButterKnife.findById(inventoryItem,R.id.trackable_image_brand);
     brandView.setImageResource(tb.brand.getIconResource());

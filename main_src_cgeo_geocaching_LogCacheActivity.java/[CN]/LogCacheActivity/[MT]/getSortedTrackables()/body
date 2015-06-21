@@ -1,0 +1,10 @@
+{
+  final ArrayList<TrackableLog> sortedTrackables=new ArrayList<>(trackables);
+  Collections.sort(sortedTrackables,new Comparator<TrackableLog>(){
+    @Override public int compare(    final TrackableLog lhs,    final TrackableLog rhs){
+      return lhs.name.compareToIgnoreCase(rhs.name);
+    }
+  }
+);
+  return sortedTrackables;
+}
