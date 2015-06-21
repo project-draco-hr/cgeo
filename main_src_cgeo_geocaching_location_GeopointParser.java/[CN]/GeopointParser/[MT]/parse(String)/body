@@ -1,4 +1,14 @@
 {
+  try {
+    final String[] parts=StringUtils.split(StringUtils.trim(text));
+    if (parts.length == 2) {
+      final double lat=Double.parseDouble(parts[0]);
+      final double lon=Double.parseDouble(parts[1]);
+      return new Geopoint(lat,lon);
+    }
+  }
+ catch (  final NumberFormatException e) {
+  }
   final ResultWrapper latitudeWrapper=parseHelper(text,LatLon.LAT);
   final ResultWrapper longitudeWrapper=parseHelper(text.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength),LatLon.LON);
   if (longitudeWrapper.matcherPos - (latitudeWrapper.matcherPos + latitudeWrapper.matcherLength) >= 10) {
