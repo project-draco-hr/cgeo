@@ -27,7 +27,8 @@
   tLonSep3=ButterKnife.findById(v,R.id.LonSeparator3);
   orderedInputs=Arrays.asList(eLatDeg,eLatMin,eLatSec,eLatSub,eLonDeg,eLonMin,eLonSec,eLonSub);
   for (  final EditText editText : orderedInputs) {
-    editText.addTextChangedListener(new CoordinatesTextWatcher(editText));
+    editText.addTextChangedListener(new SwitchToNextFieldWatcher(editText));
+    editText.setOnFocusChangeListener(new PadZerosOnFocusLostListener());
     EditUtils.disableSuggestions(editText);
   }
   bLat.setOnClickListener(new ButtonClickListener());

@@ -1,0 +1,14 @@
+{
+  if (!hasFocus) {
+    final EditText editText=(EditText)v;
+    final int maxLength=getMaxLengthFromCurrentField(editText);
+    if (editText.length() < maxLength) {
+      if ((editText.getGravity() & Gravity.HORIZONTAL_GRAVITY_MASK) == Gravity.RIGHT) {
+        editText.setText(StringUtils.leftPad(editText.getText().toString(),maxLength,'0'));
+      }
+ else {
+        editText.setText(StringUtils.rightPad(editText.getText().toString(),maxLength,'0'));
+      }
+    }
+  }
+}

@@ -6,6 +6,9 @@
   if (editText == null) {
     return;
   }
+  if (!editText.hasFocus()) {
+    return;
+  }
   if (s.length() == getMaxLengthFromCurrentField(editText)) {
     focusNextVisibleInput(editText);
   }
