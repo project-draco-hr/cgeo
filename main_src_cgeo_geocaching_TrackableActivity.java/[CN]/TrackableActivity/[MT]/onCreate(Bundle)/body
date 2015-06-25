@@ -59,9 +59,7 @@
   AndroidBeam.enable(this,this);
   createViewPager(0,new OnPageSelectedListener(){
     @Override public void onPageSelected(    final int position){
-      if (getPage(position) == Page.IMAGES) {
-        loadTrackableImages();
-      }
+      lazyLoadTrackableImages();
     }
   }
 );
