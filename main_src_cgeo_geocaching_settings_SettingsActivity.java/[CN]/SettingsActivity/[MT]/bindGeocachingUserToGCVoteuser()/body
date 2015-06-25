@@ -1,0 +1,9 @@
+{
+  if (!Settings.hasGCCredentials()) {
+    return;
+  }
+  final String value=Settings.getGcCredentials().getLeft();
+  getPreference(R.string.pref_user_vote).setSummary(value);
+  final Preference prefvote=getPreference(R.string.pref_user_vote);
+  bindSummaryToValue(prefvote,value);
+}
