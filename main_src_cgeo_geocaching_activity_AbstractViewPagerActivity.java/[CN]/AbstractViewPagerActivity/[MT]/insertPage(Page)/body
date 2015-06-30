@@ -1,0 +1,11 @@
+{
+  if (getPageIndex(page) > -1) {
+    return;
+  }
+  final int position=getOrderedPages().getLeft().indexOf(page);
+  if (position < 0) {
+    return;
+  }
+  pageOrder.add(position,page);
+  viewPagerAdapter.notifyDataSetChanged();
+}
