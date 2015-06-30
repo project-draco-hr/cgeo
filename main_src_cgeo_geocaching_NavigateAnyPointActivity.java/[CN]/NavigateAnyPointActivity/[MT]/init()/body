@@ -1,13 +1,13 @@
 {
-  latButton.setOnClickListener(new CoordDialogListener());
-  lonButton.setOnClickListener(new CoordDialogListener());
+  getLatButton().setOnClickListener(new CoordDialogListener());
+  getLonButton().setOnClickListener(new CoordDialogListener());
   final Geopoint coords=Settings.getAnyCoordinates();
   if (coords != null) {
-    latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
-    lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
+    getLatButton().setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
+    getLonButton().setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
   }
-  buttonCurrent.setOnClickListener(new CurrentListener());
+  getButtonCurrent().setOnClickListener(new CurrentListener());
   getDestionationHistoryAdapter().notifyDataSetChanged();
-  disableSuggestions(distanceEditText);
+  disableSuggestions(getDistanceEditText());
   initializeDistanceUnitSelector();
 }

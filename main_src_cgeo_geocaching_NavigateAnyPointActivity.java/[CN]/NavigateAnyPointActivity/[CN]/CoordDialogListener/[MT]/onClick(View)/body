@@ -1,7 +1,7 @@
 {
   Geopoint gp=null;
-  if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
-    gp=new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
+  if (getLatButton().getText().length() > 0 && getLonButton().getText().length() > 0) {
+    gp=new Geopoint(getLatButton().getText().toString() + " " + getLonButton().getText().toString());
   }
   final CoordinatesInputDialog coordsDialog=CoordinatesInputDialog.getInstance(null,gp,Sensors.getInstance().currentGeo());
   coordsDialog.setCancelable(true);

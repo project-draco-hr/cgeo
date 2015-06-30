@@ -1,8 +1,8 @@
 {
-  final String bearingText=bearingEditText.getText().toString();
-  final String distanceText=distanceEditText.getText().toString() + distanceUnit;
-  final String latText=latButton.getText().toString();
-  final String lonText=lonButton.getText().toString();
+  final String bearingText=getBearingEditText().getText().toString();
+  final String distanceText=getDistanceEditText().getText().toString() + distanceUnit;
+  final String latText=getLatButton().getText().toString();
+  final String lonText=getLonButton().getText().toString();
   if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText) && StringUtils.isBlank(latText)&& StringUtils.isBlank(lonText)) {
     showToast(res.getString(R.string.err_point_no_position_given));
     return null;

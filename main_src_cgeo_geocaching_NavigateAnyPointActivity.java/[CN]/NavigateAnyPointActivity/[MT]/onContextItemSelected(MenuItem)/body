@@ -18,8 +18,8 @@ return true;
 case CONTEXT_MENU_EDIT_WAYPOINT:
 if (destination instanceof Destination) {
 final Geopoint gp=((Destination)destination).getCoords();
-latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+getLatButton().setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+getLonButton().setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
 }
 return true;
 default :

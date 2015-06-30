@@ -1,6 +1,6 @@
 {
   final Geopoint coords=Sensors.getInstance().currentGeo().getCoords();
-  latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
-  lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
+  getLatButton().setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
+  getLonButton().setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
   changed=false;
 }
