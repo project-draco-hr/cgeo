@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.logtrackable_activity);
-  ButterKnife.inject(this);
+  ButterKnife.bind(this);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);

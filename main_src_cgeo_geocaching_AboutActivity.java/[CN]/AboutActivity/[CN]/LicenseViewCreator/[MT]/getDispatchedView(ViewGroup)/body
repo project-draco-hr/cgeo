@@ -1,6 +1,6 @@
 {
   final ScrollView view=(ScrollView)getLayoutInflater().inflate(R.layout.about_license_page,parentView,false);
-  ButterKnife.inject(this,view);
+  ButterKnife.bind(this,view);
   setClickListener(licenseLink,"http://www.apache.org/licenses/LICENSE-2.0.html");
   licenseText.setText(getRawResourceString(R.raw.license));
   return view;

@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState,R.layout.usefulapps_activity);
-  ButterKnife.inject(this);
+  ButterKnife.bind(this);
   list.setAdapter(new ArrayAdapter<HelperApp>(this,R.layout.usefulapps_item,HELPER_APPS){
     @Override public View getView(    final int position,    final View convertView,    final android.view.ViewGroup parent){
       View rowView=convertView;

@@ -1,6 +1,6 @@
 {
   final ScrollView view=(ScrollView)getLayoutInflater().inflate(R.layout.about_contributors_page,parentView,false);
-  ButterKnife.inject(this,view);
+  ButterKnife.bind(this,view);
   contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
   return view;
 }

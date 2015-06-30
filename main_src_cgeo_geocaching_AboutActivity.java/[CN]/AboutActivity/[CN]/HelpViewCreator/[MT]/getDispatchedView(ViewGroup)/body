@@ -1,6 +1,6 @@
 {
   final ScrollView view=(ScrollView)getLayoutInflater().inflate(R.layout.about_help_page,parentView,false);
-  ButterKnife.inject(this,view);
+  ButterKnife.bind(this,view);
   setClickListener(support,"mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) + "&body="+ Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this))+ "\n");
   setClickListener(website,"http://www.cgeo.org/");
   setClickListener(facebook,"http://www.facebook.com/pages/cgeo/297269860090");

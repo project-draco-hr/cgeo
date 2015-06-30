@@ -1,6 +1,6 @@
 {
   final ScrollView view=(ScrollView)getLayoutInflater().inflate(R.layout.about_changes_page,parentView,false);
-  ButterKnife.inject(this,view);
+  ButterKnife.bind(this,view);
   changeLogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
   final String changeLogMasterString=getString(R.string.changelog_master);
   if (StringUtils.isBlank(changeLogMasterString)) {
