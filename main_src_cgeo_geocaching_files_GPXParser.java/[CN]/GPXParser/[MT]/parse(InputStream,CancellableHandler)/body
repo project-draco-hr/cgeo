@@ -113,9 +113,7 @@
       if (StringUtils.startsWithIgnoreCase(content,"GCEC") && StringUtils.containsIgnoreCase(scriptUrl,"extremcaching")) {
         content=content.substring(2);
       }
-      if (StringUtils.containsIgnoreCase(scriptUrl,"")) {
-        cache.setName(content);
-      }
+      cache.setName(content);
       findGeoCode(cache.getName());
     }
   }
