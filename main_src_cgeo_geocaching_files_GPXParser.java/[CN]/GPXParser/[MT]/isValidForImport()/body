@@ -5,5 +5,9 @@
   if (cache.getCoords() == null) {
     return false;
   }
-  return ((type == null && sym == null) || StringUtils.contains(type,"geocache") || StringUtils.contains(sym,"geocache")|| StringUtils.containsIgnoreCase(sym,"waymark")|| StringUtils.containsIgnoreCase(sym,"terracache"));
+  final boolean valid=(type == null && sym == null) || StringUtils.contains(type,"geocache") || StringUtils.contains(sym,"geocache")|| StringUtils.containsIgnoreCase(sym,"waymark")|| (StringUtils.containsIgnoreCase(sym,"terracache") && !terraChildWaypoint);
+  if ("GC_WayPoint1".equals(cache.getShortDescription())) {
+    terraChildWaypoint=true;
+  }
+  return valid;
 }

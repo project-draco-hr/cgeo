@@ -1,0 +1,10 @@
+{
+  final List<Geocache> caches=readGPX11(R.raw.tc99un_gpx);
+  assertThat(caches).hasSize(1);
+  final Geocache cache=caches.get(0);
+  assertThat(cache.getShortDescription()).isEmpty();
+  final List<Waypoint> waypoints=cache.getWaypoints();
+  assertThat(waypoints).hasSize(4);
+  final Waypoint waypoint=waypoints.get(0);
+  assertThat(waypoint.getNote()).startsWith("75 feet due south of large shoreside");
+}

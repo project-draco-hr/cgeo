@@ -1,8 +1,8 @@
 {
-  final IConnector tcConnector=ConnectorFactory.getConnector("TCABC");
-  assertThat(tcConnector).isNotNull();
+  final IConnector tcConnector=getTerraCachingConnector();
   assertThat(tcConnector.canHandle("TCABC")).isTrue();
   assertThat(tcConnector.canHandle("TC2JP")).isTrue();
+  assertThat(tcConnector.canHandle("TC9")).isTrue();
   assertThat(tcConnector.canHandle("TC1234")).isFalse();
   assertThat(tcConnector.canHandle("GC1234")).isFalse();
 }

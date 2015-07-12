@@ -13,9 +13,109 @@
     }
   }
 );
+  terraCache.getChild(terraNamespace,"style").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String style){
+      cache.setType(TerraCachingType.getCacheType(style));
+    }
+  }
+);
   terraCache.getChild(terraNamespace,"size").setEndTextElementListener(new EndTextElementListener(){
     @Override public void end(    final String size){
       cache.setSize(CacheSize.getById(size));
+    }
+  }
+);
+  terraCache.getChild(terraNamespace,"country").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String country){
+      if (StringUtils.isNotBlank(country)) {
+        cache.setLocation(StringUtils.trim(country));
+      }
+    }
+  }
+);
+  terraCache.getChild(terraNamespace,"state").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String state){
+      final String trimmedState=state.trim();
+      if (StringUtils.isNotEmpty(trimmedState)) {
+        if (StringUtils.isBlank(cache.getLocation())) {
+          cache.setLocation(validate(state));
+        }
+ else {
+          cache.setLocation(trimmedState + ", " + cache.getLocation());
+        }
+      }
+    }
+  }
+);
+  terraCache.getChild(terraNamespace,"description").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String description){
+      cache.setDescription(trimHtml(description));
+    }
+  }
+);
+  terraCache.getChild(terraNamespace,"hint").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String hint){
+      cache.setHint(HtmlUtils.extractText(hint));
+    }
+  }
+);
+  final Element terraLogs=terraCache.getChild(terraNamespace,"logs");
+  final Element terraLog=terraLogs.getChild(terraNamespace,"log");
+  terraLog.setStartElementListener(new StartElementListener(){
+    @Override public void start(    final Attributes attrs){
+      log=new LogEntry("",0,LogType.UNKNOWN,"");
+      try {
+        if (attrs.getIndex("id") > -1) {
+          log.id=Integer.parseInt(attrs.getValue("id"));
+        }
+      }
+ catch (      final NumberFormatException ignored) {
+      }
+    }
+  }
+);
+  terraLog.setEndElementListener(new EndElementListener(){
+    @Override public void end(){
+      if (log.type != LogType.UNKNOWN) {
+        if (log.type.isFoundLog() && StringUtils.isNotBlank(log.author)) {
+          final IConnector connector=ConnectorFactory.getConnector(cache);
+          if (connector instanceof ILogin && StringUtils.equals(log.author,((ILogin)connector).getUserName())) {
+            cache.setFound(true);
+            cache.setVisitedDate(log.date);
+          }
+        }
+        logs.add(log);
+      }
+    }
+  }
+);
+  terraLog.getChild(terraNamespace,"date").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String body){
+      try {
+        log.date=parseDate(body).getTime();
+      }
+ catch (      final Exception e) {
+        Log.w("Failed to parse log date",e);
+      }
+    }
+  }
+);
+  terraLog.getChild(terraNamespace,"type").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String body){
+      final String logType=validate(body);
+      log.type=TerraCachingLogType.getLogType(logType);
+    }
+  }
+);
+  terraLog.getChild(terraNamespace,"user").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String finderName){
+      log.author=validate(finderName);
+    }
+  }
+);
+  terraLog.getChild(terraNamespace,"entry").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String entry){
+      log.log=trimHtml(validate(entry));
     }
   }
 );

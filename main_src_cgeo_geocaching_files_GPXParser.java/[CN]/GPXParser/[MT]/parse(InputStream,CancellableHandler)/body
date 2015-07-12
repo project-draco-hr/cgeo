@@ -8,6 +8,12 @@
     }
   }
 );
+  root.getChild(namespace,"creator").setEndTextElementListener(new EndTextElementListener(){
+    @Override public void end(    final String body){
+      scriptUrl=body;
+    }
+  }
+);
   waypoint.setStartElementListener(new StartElementListener(){
     @Override public void start(    final Attributes attrs){
       try {
@@ -53,7 +59,7 @@
         DataStore.removeCache(geocode,EnumSet.of(RemoveFlag.CACHE));
         showProgressMessage(progressHandler,progressStream.getProgress());
       }
- else       if (StringUtils.isNotBlank(cache.getName()) && StringUtils.containsIgnoreCase(type,"waypoint")) {
+ else       if (StringUtils.isNotBlank(cache.getName()) && (StringUtils.containsIgnoreCase(type,"waypoint") || terraChildWaypoint)) {
         addWaypointToCache();
       }
       resetCache();
@@ -65,9 +71,15 @@
           if (StringUtils.containsIgnoreCase(scriptUrl,"extremcaching")) {
             parentCacheCode=cache.getName().substring(2);
           }
+ else           if (terraChildWaypoint) {
+            parentCacheCode=StringUtils.left(cache.getGeocode(),cache.getGeocode().length() - 1);
+          }
  else {
             parentCacheCode="GC" + cache.getName().substring(2).toUpperCase(Locale.US);
           }
+        }
+        if ("GC_WayPoint1".equals(cache.getShortDescription())) {
+          cache.setShortDescription("");
         }
         final Geocache cacheForWaypoint=findParentCache();
         if (cacheForWaypoint != null) {
