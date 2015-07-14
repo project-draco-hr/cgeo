@@ -1,0 +1,4 @@
+{
+  Set<String> geocodes=ConnectorFactoryTest.getGeocodeSample();
+  assertThat(ECConnector.getInstance().handledGeocodes(geocodes)).containsOnly("EC1234","EC5678");
+}

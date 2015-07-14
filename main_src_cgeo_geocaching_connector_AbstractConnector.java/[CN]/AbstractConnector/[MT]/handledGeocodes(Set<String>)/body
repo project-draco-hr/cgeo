@@ -1,0 +1,9 @@
+{
+  final Set<String> strippedList=new HashSet<>();
+  for (  final String geocode : geocodes) {
+    if (canHandle(geocode)) {
+      strippedList.add(geocode);
+    }
+  }
+  return strippedList;
+}

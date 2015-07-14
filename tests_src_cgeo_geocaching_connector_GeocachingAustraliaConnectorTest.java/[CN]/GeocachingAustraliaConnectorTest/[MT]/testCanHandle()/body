@@ -1,0 +1,7 @@
+{
+  final IConnector wmConnector=getGeocachingAustraliaConnector();
+  assertThat(wmConnector.canHandle("GA1234")).isTrue();
+  assertThat(wmConnector.canHandle("GAAB12")).isFalse();
+  assertThat(wmConnector.canHandle("TP1234")).isTrue();
+  assertThat(wmConnector.canHandle("TPAB12")).isFalse();
+}

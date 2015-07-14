@@ -1,0 +1,4 @@
+{
+  Set<String> geocodes=ConnectorFactoryTest.getGeocodeSample();
+  assertThat(getGeocachingAustraliaConnector().handledGeocodes(geocodes)).containsOnly("GA1234","TP1234","GA5678","TP5678");
+}

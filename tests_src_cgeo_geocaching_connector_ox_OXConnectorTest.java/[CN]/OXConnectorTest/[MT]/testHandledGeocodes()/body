@@ -1,0 +1,4 @@
+{
+  Set<String> geocodes=ConnectorFactoryTest.getGeocodeSample();
+  assertThat(getOXConnector().handledGeocodes(geocodes)).containsOnly("OX1234","OX5678");
+}
