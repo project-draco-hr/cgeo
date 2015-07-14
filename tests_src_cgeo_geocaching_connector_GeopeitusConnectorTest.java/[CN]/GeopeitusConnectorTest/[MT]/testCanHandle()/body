@@ -1,0 +1,5 @@
+{
+  final IConnector wmConnector=getGeopeitusConnector();
+  assertThat(wmConnector.canHandle("GE1234")).isTrue();
+  assertThat(wmConnector.canHandle("GEAB12")).isFalse();
+}

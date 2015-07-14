@@ -1,6 +1,5 @@
 {
-  final IConnector wmConnector=ConnectorFactory.getConnector("WM1234");
-  assertThat(wmConnector).isNotNull();
+  final IConnector wmConnector=getWaymarkingConnector();
   assertThat(wmConnector.canHandle("WM1234")).isTrue();
   assertThat(wmConnector.canHandle("GC1234")).isFalse();
 }

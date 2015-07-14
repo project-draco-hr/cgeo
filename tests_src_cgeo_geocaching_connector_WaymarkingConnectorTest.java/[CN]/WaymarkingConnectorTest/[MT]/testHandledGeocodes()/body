@@ -1,0 +1,4 @@
+{
+  Set<String> geocodes=ConnectorFactoryTest.getGeocodeSample();
+  assertThat(getWaymarkingConnector().handledGeocodes(geocodes)).containsOnly("WM1234","WM5678");
+}
