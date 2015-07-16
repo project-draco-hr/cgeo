@@ -95,23 +95,26 @@
     }
   }
 );
-  AppObservable.bindActivity(this,Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).subscribeOn(RxUtils.networkScheduler).flatMap(new Func1<TrackableConnector,Observable<Trackable>>(){
+  AppObservable.bindActivity(this,Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Func1<TrackableConnector,Observable<Trackable>>(){
     @Override public Observable<Trackable> call(    final TrackableConnector trackableConnector){
       processedBrands.add(trackableConnector.getBrand());
-      return Observable.from(trackableConnector.searchTrackables(geocode));
+      return Observable.defer(new Func0<Observable<Trackable>>(){
+        @Override public Observable<Trackable> call(){
+          return Observable.from(trackableConnector.searchTrackables(geocode));
+        }
+      }
+).subscribeOn(RxUtils.networkScheduler);
     }
   }
-)).doOnNext(new Action1<Trackable>(){
-    @Override public void call(    final Trackable trackable){
-      genericTrackables.add(trackable);
+).toList()).subscribe(new Action1<List<Trackable>>(){
+    @Override public void call(    final List<Trackable> trackables){
+      genericTrackables.addAll(trackables);
+      if (!trackables.isEmpty()) {
+        notifyDataSetChanged();
+      }
     }
   }
-).doOnTerminate(new Action0(){
-    @Override public void call(){
-      notifyDataSetChanged();
-    }
-  }
-).subscribe();
+);
   locationUpdater=new CacheDetailsGeoDirHandler(this);
   AndroidBeam.enable(this,this);
 }

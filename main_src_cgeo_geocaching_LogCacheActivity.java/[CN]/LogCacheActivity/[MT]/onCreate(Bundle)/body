@@ -62,22 +62,23 @@
   updateLogPasswordBox(typeSelected);
   loggingManager=cache.getLoggingManager(this);
   loggingManager.init();
-  AppObservable.bindActivity(this,Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).subscribeOn(RxUtils.networkScheduler).flatMap(new Func1<TrackableConnector,Observable<TrackableLog>>(){
+  AppObservable.bindActivity(this,Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Func1<TrackableConnector,Observable<TrackableLog>>(){
     @Override public Observable<TrackableLog> call(    final TrackableConnector trackableConnector){
-      return trackableConnector.trackableLogInventory();
+      return Observable.defer(new Func0<Observable<TrackableLog>>(){
+        @Override public Observable<TrackableLog> call(){
+          return trackableConnector.trackableLogInventory();
+        }
+      }
+).subscribeOn(RxUtils.networkScheduler);
     }
   }
-)).doOnNext(new Action1<TrackableLog>(){
-    @Override public void call(    final TrackableLog trackableLog){
-      trackables.add(trackableLog);
-    }
-  }
-).doOnTerminate(new Action0(){
-    @Override public void call(){
+).toList()).subscribe(new Action1<List<TrackableLog>>(){
+    @Override public void call(    final List<TrackableLog> trackableLogs){
+      trackables.addAll(trackableLogs);
       initializeTrackablesAction();
       updateTrackablesList();
     }
   }
-).subscribe();
+);
   requestKeyboardForLogging();
 }
