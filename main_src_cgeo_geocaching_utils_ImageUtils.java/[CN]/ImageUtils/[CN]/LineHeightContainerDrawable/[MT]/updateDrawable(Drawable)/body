@@ -1,5 +1,7 @@
 {
   final TextView view=super.updateDrawable(newDrawable);
-  setBounds(scaleImageToLineHeight(newDrawable,view));
+  if (view != null) {
+    setBounds(scaleImageToLineHeight(newDrawable,view));
+  }
   return view;
 }
