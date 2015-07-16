@@ -5,7 +5,10 @@ synchronized (lock) {
       REDRAW_QUEUE.drainTo(toRedraw);
     }
     for (    final ImmutablePair<ContainerDrawable,Drawable> redrawable : toRedraw) {
-      VIEWS.add(redrawable.left.updateDrawable(redrawable.right));
+      final TextView view=redrawable.left.updateDrawable(redrawable.right);
+      if (view != null) {
+        VIEWS.add(view);
+      }
     }
     for (    final TextView view : VIEWS) {
       view.setText(view.getText());
