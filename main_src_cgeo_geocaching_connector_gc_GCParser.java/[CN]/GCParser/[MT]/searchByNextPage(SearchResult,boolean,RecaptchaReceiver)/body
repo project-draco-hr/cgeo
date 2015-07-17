@@ -30,7 +30,7 @@
   }
   GCVote.loadRatings(new ArrayList<>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
   search.setError(searchResult.getError());
-  search.setViewstates(searchResult.viewstates);
+  search.setViewstates(searchResult.getViewstates());
   for (  final String geocode : searchResult.getGeocodes()) {
     search.addGeocode(geocode);
   }
