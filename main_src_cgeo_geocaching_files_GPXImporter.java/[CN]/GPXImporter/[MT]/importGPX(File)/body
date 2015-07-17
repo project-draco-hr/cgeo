@@ -2,7 +2,7 @@
   if (StringUtils.endsWithIgnoreCase(file.getName(),GPX_FILE_EXTENSION)) {
     new ImportGpxFileThread(file,listId,importStepHandler,progressHandler).start();
   }
- else   if (StringUtils.endsWithIgnoreCase(file.getName(),ZIP_FILE_EXTENSION)) {
+ else   if (StringUtils.endsWithIgnoreCase(file.getName(),ZIP_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(file.getName(),COMPRESSED_GPX_FILE_EXTENSION)) {
     new ImportGpxZipFileThread(file,listId,importStepHandler,progressHandler).start();
   }
  else {
