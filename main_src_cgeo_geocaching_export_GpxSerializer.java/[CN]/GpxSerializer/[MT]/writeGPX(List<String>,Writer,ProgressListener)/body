@@ -3,20 +3,20 @@
   this.progressListener=progressListener;
   gpx.setOutput(writer);
   gpx.startDocument(CharEncoding.UTF_8,true);
-  gpx.setPrefix("",PREFIX_GPX);
-  gpx.setPrefix("xsi",PREFIX_XSI);
-  gpx.setPrefix("groundspeak",PREFIX_GROUNDSPEAK);
-  gpx.setPrefix("gsak",PREFIX_GSAK);
-  gpx.setPrefix("cgeo",PREFIX_CGEO);
-  gpx.startTag(PREFIX_GPX,"gpx");
+  gpx.setPrefix(PREFIX_GPX,NS_GPX);
+  gpx.setPrefix(PREFIX_XSI,NS_XSI);
+  gpx.setPrefix(PREFIX_GROUNDSPEAK,NS_GROUNDSPEAK);
+  gpx.setPrefix(PREFIX_GSAK,NS_GSAK);
+  gpx.setPrefix(PREFIX_CGEO,NS_CGEO);
+  gpx.startTag(NS_GPX,"gpx");
   gpx.attribute("","version","1.0");
   gpx.attribute("","creator","c:geo - http://www.cgeo.org/");
-  gpx.attribute(PREFIX_XSI,"schemaLocation",PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " + PREFIX_GROUNDSPEAK+ " http://www.groundspeak.com/cache/1/0/1/cache.xsd "+ PREFIX_GSAK+ " http://www.gsak.net/xmlv1/6/gsak.xsd");
+  gpx.attribute(NS_XSI,"schemaLocation",NS_GPX + " " + GPX_SCHEMA+ " "+ NS_GROUNDSPEAK+ " "+ GROUNDSPEAK_SCHEMA+ " "+ NS_GSAK+ " "+ GSAK_SCHEMA);
   while (!allGeocodes.isEmpty()) {
     final List<String> batch=allGeocodes.subList(0,Math.min(CACHES_PER_BATCH,allGeocodes.size()));
     exportBatch(gpx,batch);
     batch.clear();
   }
-  gpx.endTag(PREFIX_GPX,"gpx");
+  gpx.endTag(NS_GPX,"gpx");
   gpx.endDocument();
 }

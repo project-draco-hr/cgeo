@@ -1,26 +1,26 @@
 {
   final Geopoint coords=wp.getCoords();
   if (coords != null) {
-    gpx.startTag(PREFIX_GPX,"wpt");
+    gpx.startTag(NS_GPX,"wpt");
     gpx.attribute("","lat",Double.toString(coords.getLatitude()));
     gpx.attribute("","lon",Double.toString(coords.getLongitude()));
     final String waypointTypeGpx=wp.getWaypointType().gpx;
-    XmlUtils.multipleTexts(gpx,PREFIX_GPX,"name",wp.getGpxId(),"cmt",wp.getNote(),"desc",wp.getName(),"sym",waypointTypeGpx,"type","Waypoint|" + waypointTypeGpx);
-    gpx.startTag(PREFIX_GSAK,"wptExtension");
-    gpx.startTag(PREFIX_GSAK,"Parent");
+    XmlUtils.multipleTexts(gpx,NS_GPX,"name",wp.getGpxId(),"cmt",wp.getNote(),"desc",wp.getName(),"sym",waypointTypeGpx,"type","Waypoint|" + waypointTypeGpx);
+    gpx.startTag(NS_GSAK,"wptExtension");
+    gpx.startTag(NS_GSAK,"Parent");
     gpx.text(wp.getGeocode());
-    gpx.endTag(PREFIX_GSAK,"Parent");
-    gpx.endTag(PREFIX_GSAK,"wptExtension");
+    gpx.endTag(NS_GSAK,"Parent");
+    gpx.endTag(NS_GSAK,"wptExtension");
     if (wp.isVisited()) {
-      gpx.startTag(PREFIX_CGEO,"visited");
+      gpx.startTag(NS_CGEO,"visited");
       gpx.text("true");
-      gpx.endTag(PREFIX_CGEO,"visited");
+      gpx.endTag(NS_CGEO,"visited");
     }
     if (wp.isUserDefined()) {
-      gpx.startTag(PREFIX_CGEO,"userdefined");
+      gpx.startTag(NS_CGEO,"userdefined");
       gpx.text("true");
-      gpx.endTag(PREFIX_CGEO,"userdefined");
+      gpx.endTag(NS_CGEO,"userdefined");
     }
-    gpx.endTag(PREFIX_GPX,"wpt");
+    gpx.endTag(NS_GPX,"wpt");
   }
 }

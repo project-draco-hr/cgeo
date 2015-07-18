@@ -3,12 +3,12 @@
   if (CollectionUtils.isEmpty(inventory)) {
     return;
   }
-  gpx.startTag(PREFIX_GROUNDSPEAK,"travelbugs");
+  gpx.startTag(NS_GROUNDSPEAK,"travelbugs");
   for (  final Trackable trackable : inventory) {
-    gpx.startTag(PREFIX_GROUNDSPEAK,"travelbug");
+    gpx.startTag(NS_GROUNDSPEAK,"travelbug");
     gpx.attribute("","ref",trackable.getGeocode());
-    XmlUtils.simpleText(gpx,PREFIX_GROUNDSPEAK,"name",trackable.getName());
-    gpx.endTag(PREFIX_GROUNDSPEAK,"travelbug");
+    XmlUtils.simpleText(gpx,NS_GROUNDSPEAK,"name",trackable.getName());
+    gpx.endTag(NS_GROUNDSPEAK,"travelbug");
   }
-  gpx.endTag(PREFIX_GROUNDSPEAK,"travelbugs");
+  gpx.endTag(NS_GROUNDSPEAK,"travelbugs");
 }

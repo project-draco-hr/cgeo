@@ -3,16 +3,16 @@
   if (logs.isEmpty()) {
     return;
   }
-  gpx.startTag(PREFIX_GROUNDSPEAK,"logs");
+  gpx.startTag(NS_GROUNDSPEAK,"logs");
   for (  final LogEntry log : logs) {
-    gpx.startTag(PREFIX_GROUNDSPEAK,"log");
+    gpx.startTag(NS_GROUNDSPEAK,"log");
     gpx.attribute("","id",Integer.toString(log.id));
-    XmlUtils.multipleTexts(gpx,PREFIX_GROUNDSPEAK,"date",dateFormatZ.format(new Date(log.date)),"type",log.type.type);
-    gpx.startTag(PREFIX_GROUNDSPEAK,"finder");
+    XmlUtils.multipleTexts(gpx,NS_GROUNDSPEAK,"date",dateFormatZ.format(new Date(log.date)),"type",log.type.type);
+    gpx.startTag(NS_GROUNDSPEAK,"finder");
     gpx.attribute("","id","");
     gpx.text(log.author);
-    gpx.endTag(PREFIX_GROUNDSPEAK,"finder");
-    gpx.startTag(PREFIX_GROUNDSPEAK,"text");
+    gpx.endTag(NS_GROUNDSPEAK,"finder");
+    gpx.startTag(NS_GROUNDSPEAK,"text");
     gpx.attribute("","encoded","False");
     try {
       gpx.text(log.log);
@@ -21,8 +21,8 @@
       Log.e("GpxSerializer.writeLogs: cannot write log " + log.id + " for cache "+ cache.getGeocode(),e);
       gpx.text(" [end of log omitted due to an invalid character]");
     }
-    gpx.endTag(PREFIX_GROUNDSPEAK,"text");
-    gpx.endTag(PREFIX_GROUNDSPEAK,"log");
+    gpx.endTag(NS_GROUNDSPEAK,"text");
+    gpx.endTag(NS_GROUNDSPEAK,"log");
   }
-  gpx.endTag(PREFIX_GROUNDSPEAK,"logs");
+  gpx.endTag(NS_GROUNDSPEAK,"logs");
 }

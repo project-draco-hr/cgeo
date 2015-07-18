@@ -1,0 +1,5 @@
+{
+  gpx.startTag(NS_GSAK,"wptExtension");
+  XmlUtils.multipleTexts(gpx,NS_GSAK,"Watch",gpxBoolean(cache.isOnWatchlist()),"IsPremium",gpxBoolean(cache.isPremiumMembersOnly()),"FavPoints",Integer.toString(cache.getFavoritePoints()),"GcNote",StringUtils.trimToEmpty(cache.getPersonalNote()));
+  gpx.endTag(NS_GSAK,"wptExtension");
+}

@@ -8,33 +8,35 @@
     if (coords == null) {
       continue;
     }
-    gpx.startTag(PREFIX_GPX,"wpt");
+    gpx.startTag(NS_GPX,"wpt");
     gpx.attribute("","lat",Double.toString(coords.getLatitude()));
     gpx.attribute("","lon",Double.toString(coords.getLongitude()));
     final Date hiddenDate=cache.getHiddenDate();
     if (hiddenDate != null) {
-      XmlUtils.simpleText(gpx,PREFIX_GPX,"time",dateFormatZ.format(hiddenDate));
+      XmlUtils.simpleText(gpx,NS_GPX,"time",dateFormatZ.format(hiddenDate));
     }
-    XmlUtils.multipleTexts(gpx,PREFIX_GPX,"name",cache.getGeocode(),"desc",cache.getName(),"url",cache.getUrl(),"urlname",cache.getName(),"sym",cache.isFound() ? "Geocache Found" : "Geocache","type","Geocache|" + cache.getType().pattern);
-    gpx.startTag(PREFIX_GROUNDSPEAK,"cache");
+    XmlUtils.multipleTexts(gpx,NS_GPX,"name",cache.getGeocode(),"desc",cache.getName(),"url",cache.getUrl(),"urlname",cache.getName(),"sym",cache.isFound() ? "Geocache Found" : "Geocache","type","Geocache|" + cache.getType().pattern);
+    gpx.startTag(NS_GROUNDSPEAK,"cache");
     gpx.attribute("","id",cache.getCacheId());
     gpx.attribute("","available",!cache.isDisabled() ? "True" : "False");
     gpx.attribute("","archived",cache.isArchived() ? "True" : "False");
-    XmlUtils.multipleTexts(gpx,PREFIX_GROUNDSPEAK,"name",cache.getName(),"placed_by",cache.getOwnerDisplayName(),"owner",cache.getOwnerUserId(),"type",cache.getType().pattern,"container",cache.getSize().id,"difficulty",Float.toString(cache.getDifficulty()),"terrain",Float.toString(cache.getTerrain()),"country",getCountry(cache),"state",getState(cache),"encoded_hints",cache.getHint());
+    XmlUtils.multipleTexts(gpx,NS_GROUNDSPEAK,"name",cache.getName(),"placed_by",cache.getOwnerDisplayName(),"owner",cache.getOwnerUserId(),"type",cache.getType().pattern,"container",cache.getSize().id);
     writeAttributes(cache);
-    gpx.startTag(PREFIX_GROUNDSPEAK,"short_description");
+    XmlUtils.multipleTexts(gpx,NS_GROUNDSPEAK,"difficulty",Float.toString(cache.getDifficulty()),"terrain",Float.toString(cache.getTerrain()),"country",getCountry(cache),"state",getState(cache));
+    gpx.startTag(NS_GROUNDSPEAK,"short_description");
     gpx.attribute("","html",TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
     gpx.text(cache.getShortDescription());
-    gpx.endTag(PREFIX_GROUNDSPEAK,"short_description");
-    gpx.startTag(PREFIX_GROUNDSPEAK,"long_description");
+    gpx.endTag(NS_GROUNDSPEAK,"short_description");
+    gpx.startTag(NS_GROUNDSPEAK,"long_description");
     gpx.attribute("","html",TextUtils.containsHtml(cache.getDescription()) ? "True" : "False");
     gpx.text(cache.getDescription());
-    gpx.endTag(PREFIX_GROUNDSPEAK,"long_description");
+    gpx.endTag(NS_GROUNDSPEAK,"long_description");
+    XmlUtils.simpleText(gpx,NS_GROUNDSPEAK,"encoded_hints",cache.getHint());
     writeLogs(cache);
     writeTravelBugs(cache);
-    gpx.endTag(PREFIX_GROUNDSPEAK,"cache");
-    writeGSAK(cache);
-    gpx.endTag(PREFIX_GPX,"wpt");
+    gpx.endTag(NS_GROUNDSPEAK,"cache");
+    writeGsakExtensions(cache);
+    gpx.endTag(NS_GPX,"wpt");
     writeWaypoints(cache);
     countExported++;
     if (progressListener != null) {
