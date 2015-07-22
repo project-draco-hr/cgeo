@@ -1,0 +1,20 @@
+{
+  Log.d("Uploading personal note for opencaching");
+  final Parameters notesParam=new Parameters("cache_code",cache.getGeocode(),"fields",CACHE_MY_NOTES);
+  final ObjectNode notesData=request(connector,OkapiService.SERVICE_CACHE,notesParam).data;
+  String prevNote=StringUtils.EMPTY;
+  if (notesData != null && notesData.get(CACHE_MY_NOTES) != null) {
+    prevNote=notesData.get(CACHE_MY_NOTES).asText();
+  }
+  final String currentNote=StringUtils.defaultString(cache.getPersonalNote());
+  final Parameters params=new Parameters("cache_code",cache.getGeocode(),"new_value",currentNote,"old_value",prevNote);
+  final ObjectNode data=request(connector,OkapiService.SERVICE_UPLOAD_PERSONAL_NOTE,params).data;
+  if (data == null) {
+    return false;
+  }
+  if (data.get("replaced").asBoolean()) {
+    Log.d("Successfully uploaded");
+    return true;
+  }
+  return false;
+}
