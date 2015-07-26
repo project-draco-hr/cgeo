@@ -5,6 +5,7 @@
   nameView.setText(activity.getResources().getString(nameId));
   lastValueView.setText(String.format("%.1f",value) + ' ' + activity.getResources().getString(R.string.cache_rating_of)+ " "+ String.format("%d",max));
   final RatingBar layoutStars=ButterKnife.findById(layout,R.id.stars);
+  layoutStars.setNumStars(max);
   layoutStars.setRating(value);
   layoutStars.setVisibility(View.VISIBLE);
   parentView.addView(layout);
