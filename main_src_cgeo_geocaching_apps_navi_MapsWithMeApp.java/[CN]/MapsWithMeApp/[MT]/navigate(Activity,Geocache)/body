@@ -1,3 +1,9 @@
 {
-  navigate(activity,cache.getCoords(),cache.getName());
+  final List<Waypoint> waypoints=cache.getWaypoints();
+  if (waypoints.isEmpty()) {
+    navigate(activity,cache.getCoords(),cache.getName());
+  }
+ else {
+    navigateWithWaypoints(activity,cache);
+  }
 }
