@@ -11,7 +11,7 @@
     guid=extras.getString(Intents.EXTRA_GUID);
   }
   if (StringUtils.isEmpty(geocode)) {
-    geocode=MapsWithMeCacheListApp.getCacheFromMapsWithMe(this,getIntent());
+    geocode=MapsMeCacheListApp.getCacheFromMapsWithMe(this,getIntent());
   }
   if (geocode == null && uri != null) {
     geocode=ConnectorFactory.getGeocodeFromURL(uri.toString());
