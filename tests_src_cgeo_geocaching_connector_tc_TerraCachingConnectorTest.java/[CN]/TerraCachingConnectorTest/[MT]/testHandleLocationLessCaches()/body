@@ -1,0 +1,5 @@
+{
+  final IConnector tcConnector=getTerraCachingConnector();
+  assertThat(tcConnector.canHandle("LC5U28")).isTrue();
+  assertThat(tcConnector.canHandle("LC9")).isTrue();
+}

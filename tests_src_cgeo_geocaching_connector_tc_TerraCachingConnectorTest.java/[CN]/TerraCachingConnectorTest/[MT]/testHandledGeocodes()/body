@@ -1,4 +1,4 @@
 {
-  Set<String> geocodes=ConnectorFactoryTest.getGeocodeSample();
+  final Set<String> geocodes=ConnectorFactoryTest.getGeocodeSample();
   assertThat(getTerraCachingConnector().handledGeocodes(geocodes)).containsOnly("TCABC","TC2JP");
 }
