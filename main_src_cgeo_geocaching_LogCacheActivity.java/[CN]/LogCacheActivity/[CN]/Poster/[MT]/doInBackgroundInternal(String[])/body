@@ -17,11 +17,13 @@
       cache.clearOfflineLog();
       if (typeSelected == LogType.FOUND_IT) {
         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+          publishProgress(res.getString(R.string.log_posting_twitter));
           Twitter.postTweetCache(geocode,logNow);
         }
       }
       if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
         if (GCVote.setRating(cache,rating)) {
+          publishProgress(res.getString(R.string.log_posting_gcvote));
           cache.setMyVote(rating);
           DataStore.saveChangedCache(cache);
         }
@@ -32,12 +34,22 @@
       for (      final TrackableConnector connector : ConnectorFactory.getGenericTrackablesConnectors()) {
         final TrackableLoggingManager manager=connector.getTrackableLoggingManager((AbstractLoggingActivity)activity);
         if (manager != null) {
+          final Set<TrackableLog> trackablesMoved=new HashSet<>();
           for (          final TrackableLog trackableLog : trackables) {
+            if (trackableLog.action != LogTypeTrackable.DO_NOTHING && trackableLog.brand == connector.getBrand()) {
+              trackablesMoved.add(trackableLog);
+            }
+          }
+          int trackableLogcounter=1;
+          for (          final TrackableLog trackableLog : trackablesMoved) {
+            publishProgress(res.getString(R.string.log_posting_generic_trackable,trackableLog.brand,trackableLogcounter,trackablesMoved.size()));
             manager.postLog(cache,trackableLog,date,log);
+            trackableLogcounter++;
           }
         }
       }
       if (StringUtils.isNotBlank(imageUri.getPath())) {
+        publishProgress(res.getString(R.string.log_posting_image));
         final ImageResult imageResult=loggingManager.postLogImage(logResult.getLogId(),imageCaption,imageDescription,imageUri);
         final String uploadedImageUrl=imageResult.getImageUri();
         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
