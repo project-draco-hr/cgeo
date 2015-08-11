@@ -1,0 +1,6 @@
+{
+  final List<Geocache> caches=readGPX10(R.raw.gc31j2h2_bad_cacheid);
+  assertThat(caches).hasSize(1);
+  final Geocache cache=caches.get(0);
+  assertThat(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode()))).isEqualTo(cache.getCacheId());
+}

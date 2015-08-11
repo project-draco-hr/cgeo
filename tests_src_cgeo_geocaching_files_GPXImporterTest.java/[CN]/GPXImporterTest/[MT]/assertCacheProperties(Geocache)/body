@@ -2,4 +2,7 @@
   assertThat(cache).isNotNull();
   assertThat(cache.getLocation().startsWith(",")).isFalse();
   assertThat(cache.isReliableLatLon()).isTrue();
+  if (GCConnector.getInstance().equals(ConnectorFactory.getConnector(cache))) {
+    assertThat(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode()))).isEqualTo(cache.getCacheId());
+  }
 }

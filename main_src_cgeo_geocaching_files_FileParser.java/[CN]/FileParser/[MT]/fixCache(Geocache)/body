@@ -8,4 +8,7 @@
   final long time=System.currentTimeMillis();
   cache.setUpdated(time);
   cache.setDetailedUpdate(time);
+  if (GCConnector.getInstance().equals(ConnectorFactory.getConnector(cache))) {
+    cache.setCacheId(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode())));
+  }
 }
