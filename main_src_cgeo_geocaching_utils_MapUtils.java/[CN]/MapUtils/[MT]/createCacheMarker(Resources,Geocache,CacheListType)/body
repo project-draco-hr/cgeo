@@ -2,7 +2,9 @@
   final List<Drawable> layers=new ArrayList<>(9);
   final List<int[]> insets=new ArrayList<>(8);
   final Drawable marker=Compatibility.getDrawable(res,cache.getMapMarkerId());
-  layers.add(marker);
+  if (showBackground(cacheListType)) {
+    layers.add(marker);
+  }
   final int resolution=calculateResolution(marker);
   if (!cache.isReliableLatLon()) {
     insets.add(INSET_RELIABLE[resolution]);
@@ -14,7 +16,7 @@
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_own));
     insets.add(INSET_OWN[resolution]);
   }
- else   if (cache.getListId() > 0) {
+ else   if (cache.getListId() > 0 && showFloppyOverlay(cacheListType)) {
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_stored));
     insets.add(INSET_OWN[resolution]);
   }
@@ -35,7 +37,7 @@
     insets.add(INSET_PERSONALNOTE[resolution]);
   }
   final LayerDrawable ld=new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
-  int index=1;
+  int index=showBackground(cacheListType) ? 1 : 0;
   for (  final int[] inset : insets) {
     ld.setLayerInset(index++,inset[0],inset[1],inset[2],inset[3]);
   }

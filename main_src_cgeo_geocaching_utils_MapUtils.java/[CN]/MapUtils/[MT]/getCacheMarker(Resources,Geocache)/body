@@ -1,11 +1,3 @@
 {
-  final int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.getMapMarkerId()).append(cache.isOwner()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).toHashCode();
-synchronized (overlaysCache) {
-    LayerDrawable drawable=overlaysCache.get(hashcode);
-    if (drawable == null) {
-      drawable=createCacheMarker(res,cache);
-      overlaysCache.put(hashcode,drawable);
-    }
-    return drawable;
-  }
+  return getCacheMarker(res,cache,null);
 }

@@ -61,7 +61,7 @@
  else {
     holder.text.setText(cache.getName());
   }
-  holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache),null,null,null);
+  holder.text.setCompoundDrawablesWithIntrinsicBounds(MapUtils.getCacheMarker(res,cache,cacheListType),null,null,null);
   final int inventorySize=cache.getInventoryItems();
   if (inventorySize > 0) {
     holder.inventory.setText(Integer.toString(inventorySize));
