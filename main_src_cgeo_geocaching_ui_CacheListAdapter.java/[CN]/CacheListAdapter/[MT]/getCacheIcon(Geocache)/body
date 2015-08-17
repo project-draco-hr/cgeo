@@ -1,5 +1,0 @@
-{
-  final boolean userModifiedOrFinal=cache.hasUserModifiedCoords() || cache.hasFinalDefined();
-  final Drawable drawable=gcIconDrawables.get(getIconHashCode(cache.getType(),userModifiedOrFinal));
-  return drawable != null ? drawable : gcIconDrawables.get(getIconHashCode(CacheType.MYSTERY,userModifiedOrFinal));
-}
