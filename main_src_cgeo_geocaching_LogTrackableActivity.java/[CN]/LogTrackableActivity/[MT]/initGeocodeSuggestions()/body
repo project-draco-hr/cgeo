@@ -1,0 +1,8 @@
+{
+  geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(),layout.simple_dropdown_item_1line,new Func1<String,String[]>(){
+    @Override public String[] call(    final String input){
+      return DataStore.getSuggestionsGeocode(input);
+    }
+  }
+));
+}
