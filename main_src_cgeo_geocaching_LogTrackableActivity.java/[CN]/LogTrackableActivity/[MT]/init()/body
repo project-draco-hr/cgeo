@@ -18,8 +18,8 @@
     timeButton.setVisibility(View.GONE);
   }
   if (loggingManager.canLogCoordinates()) {
-    geocacheEditText.setOnFocusChangeListener(new LoadGeocacheListener());
-    geocacheEditText.setText(geocache.getGeocode());
+    geocodeEditText.setOnFocusChangeListener(new LoadGeocacheListener());
+    geocodeEditText.setText(geocache.getGeocode());
     updateCoordinates(geocache.getCoords());
     coordinatesButton.setOnClickListener(new CoordinatesListener());
   }

@@ -2,11 +2,11 @@
   typeSelected=type;
   typeButton.setText(typeSelected.getLabel());
   if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
-    geocacheEditText.setVisibility(View.VISIBLE);
+    geocodeEditText.setVisibility(View.VISIBLE);
     coordinatesButton.setVisibility(View.VISIBLE);
   }
  else {
-    geocacheEditText.setVisibility(View.GONE);
+    geocodeEditText.setVisibility(View.GONE);
     coordinatesButton.setVisibility(View.GONE);
   }
   if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {

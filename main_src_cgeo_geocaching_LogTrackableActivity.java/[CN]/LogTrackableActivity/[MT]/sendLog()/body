@@ -14,7 +14,7 @@
       return;
     }
   }
-  if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates() && connector.recommendLogWithGeocode()&& geocacheEditText.getText().toString().isEmpty()&& Settings.getLogTrackableWithoutGeocodeShowCount() < MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE) {
+  if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates() && connector.recommendLogWithGeocode()&& geocodeEditText.getText().toString().isEmpty()&& Settings.getLogTrackableWithoutGeocodeShowCount() < MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE) {
     new LogTrackableWithoutGeocodeBuilder().create(this).show();
   }
  else {
