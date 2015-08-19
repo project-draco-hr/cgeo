@@ -1,8 +1,0 @@
-{
-  final HttpResponse response=getRequest("http://www.opencaching.com/api/geocache/" + geocode + ".gpx",new Parameters("log_limit","50","hint","true","description","html"));
-  final Collection<Geocache> caches=importCachesFromResponse(response,true);
-  if (CollectionUtils.isNotEmpty(caches)) {
-    return caches.iterator().next();
-  }
-  return null;
-}
