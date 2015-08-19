@@ -7,9 +7,6 @@
   getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   setWebsite(R.string.pref_fakekey_gc_website,GCConnector.getInstance().getHost());
   getPreference(R.string.preference_screen_gc).setSummary(getServiceSummary(Settings.isGCConnectorActive()));
-  getPreference(R.string.pref_connectorOXActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-  setWebsite(R.string.pref_fakekey_ox_website,"opencaching.com");
-  getPreference(R.string.preference_screen_ox).setSummary(getServiceSummary(Settings.isOXConnectorActive()));
   getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   setWebsite(R.string.pref_fakekey_ec_website,"extremcaching.com");
   getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
