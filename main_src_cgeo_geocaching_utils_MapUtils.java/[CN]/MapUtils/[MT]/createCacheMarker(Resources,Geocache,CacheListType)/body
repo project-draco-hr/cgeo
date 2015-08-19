@@ -30,11 +30,11 @@
   }
   if (cache.hasUserModifiedCoords()) {
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_usermodifiedcoords));
-    insets.add(INSET_USERMODIFIEDCOORDS[resolution]);
+    insets.add(driftBottomItems(INSET_USERMODIFIEDCOORDS,resolution,cacheListType));
   }
   if (cache.getPersonalNote() != null) {
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_personalnote));
-    insets.add(INSET_PERSONALNOTE[resolution]);
+    insets.add(driftBottomItems(INSET_PERSONALNOTE,resolution,cacheListType));
   }
   final LayerDrawable ld=new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
   int index=showBackground(cacheListType) ? 1 : 0;
