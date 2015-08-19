@@ -1,7 +1,0 @@
-{
-  final IConnector oxConnector=getOXConnector();
-  assertThat(oxConnector.canHandle("OXZZZZZ")).isTrue();
-  assertThat(oxConnector.canHandle("OX1")).isTrue();
-  assertThat(oxConnector.canHandle("GCABCDE")).isFalse();
-  assertThat(oxConnector.canHandle("OX_")).isFalse();
-}
