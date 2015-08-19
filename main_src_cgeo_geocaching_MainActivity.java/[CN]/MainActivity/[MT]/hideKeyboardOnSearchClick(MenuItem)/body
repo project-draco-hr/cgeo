@@ -10,4 +10,15 @@
     }
   }
 );
+  searchView.setOnQueryTextListener(new OnQueryTextListener(){
+    @Override public boolean onQueryTextSubmit(    final String s){
+      MenuItemCompat.collapseActionView(searchItem);
+      searchView.setIconified(true);
+      return false;
+    }
+    @Override public boolean onQueryTextChange(    final String s){
+      return false;
+    }
+  }
+);
 }
