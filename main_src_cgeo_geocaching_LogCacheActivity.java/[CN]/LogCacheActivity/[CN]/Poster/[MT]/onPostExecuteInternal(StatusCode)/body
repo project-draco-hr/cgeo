@@ -9,6 +9,17 @@
     finish();
   }
  else {
-    showToast(status.getErrorString(res));
+    Dialogs.confirmPositiveNegativeNeutral(activity,R.string.info_log_post_failed,res.getString(R.string.info_log_post_failed_reason,status.getErrorString(res)),R.string.info_log_post_retry,string.cancel,R.string.info_log_post_save,new OnClickListener(){
+      @Override public void onClick(      final DialogInterface dialog,      final int which){
+        sendLogInternal();
+      }
+    }
+,null,new OnClickListener(){
+      @Override public void onClick(      final DialogInterface dialogInterface,      final int i){
+        saveLog(true);
+        finish();
+      }
+    }
+);
   }
 }
