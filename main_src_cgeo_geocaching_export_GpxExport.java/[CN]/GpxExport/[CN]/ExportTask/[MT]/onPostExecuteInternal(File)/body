@@ -1,13 +1,14 @@
 {
-  if (null != activity) {
+  final Activity activityLocal=activity;
+  if (null != activityLocal) {
     if (exportFile != null) {
-      ActivityMixin.showToast(activity,getName() + ' ' + activity.getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
+      ActivityMixin.showToast(activityLocal,getName() + ' ' + activityLocal.getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
       if (Settings.getShareAfterExport()) {
-        ShareUtils.share(activity,exportFile,"application/xml",R.string.export_gpx_to);
+        ShareUtils.share(activityLocal,exportFile,"application/xml",R.string.export_gpx_to);
       }
     }
  else {
-      ActivityMixin.showToast(activity,activity.getString(R.string.export_failed));
+      ActivityMixin.showToast(activityLocal,activityLocal.getString(R.string.export_failed));
     }
   }
 }
