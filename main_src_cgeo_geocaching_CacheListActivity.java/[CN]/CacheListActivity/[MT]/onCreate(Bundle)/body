@@ -23,6 +23,8 @@
   if (savedInstanceState != null) {
     currentFilter=savedInstanceState.getParcelable(STATE_FILTER);
     currentInverseSort=savedInstanceState.getBoolean(STATE_INVERSE_SORT);
+    type=CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE,type.ordinal())];
+    listId=savedInstanceState.getInt(STATE_LIST_ID);
   }
   initAdapter();
   prepareFilterBar();

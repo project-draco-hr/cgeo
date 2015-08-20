@@ -4,10 +4,7 @@
     final Set<Geocache> cachesFromSearchResult=searchIn.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
     cacheList.addAll(cachesFromSearchResult);
     search=searchIn;
-    adapter.reFilter();
-    adapter.checkEvents();
-    adapter.forceSort();
-    adapter.notifyDataSetChanged();
+    updateAdapter();
     updateTitle();
     showFooterMoreCaches();
   }
