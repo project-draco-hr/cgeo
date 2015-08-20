@@ -1,0 +1,6 @@
+{
+  if (isLogOffline() && offlineLogs == null) {
+    offlineLogs=DataStore.loadLogOffline(geocode);
+  }
+  return offlineLogs;
+}

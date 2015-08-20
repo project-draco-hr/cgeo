@@ -1,5 +1,5 @@
 {
-  final int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.getMapMarkerId()).append(cache.isOwner()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).append(showBackground(cacheListType)).append(showFloppyOverlay(cacheListType)).toHashCode();
+  final int hashcode=new HashCodeBuilder().append(cache.isReliableLatLon()).append(cache.getType().id).append(cache.isDisabled() || cache.isArchived()).append(cache.getMapMarkerId()).append(cache.isOwner()).append(cache.isFound()).append(cache.hasUserModifiedCoords()).append(cache.getPersonalNote()).append(cache.isLogOffline()).append(cache.getListId() > 0).append(cache.getOfflineLogType()).append(showBackground(cacheListType)).append(showFloppyOverlay(cacheListType)).toHashCode();
 synchronized (overlaysCache) {
     LayerDrawable drawable=overlaysCache.get(hashcode);
     if (drawable == null) {
