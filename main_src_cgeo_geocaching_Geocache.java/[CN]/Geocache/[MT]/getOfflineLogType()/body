@@ -1,6 +1,7 @@
 {
-  if (getOfflineLog() == null) {
+  final LogEntry offlineLog=getOfflineLog();
+  if (offlineLog == null) {
     return null;
   }
-  return getOfflineLog().type;
+  return offlineLog.type;
 }
