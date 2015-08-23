@@ -1,0 +1,7 @@
+{
+  final Bundle args=getArguments();
+  date=(Calendar)args.getSerializable("date");
+  final int hour=date.get(Calendar.HOUR_OF_DAY);
+  final int minute=date.get(Calendar.MINUTE);
+  return new TimePickerDialog(getActivity(),this,hour,minute,DateFormat.is24HourFormat(getActivity()));
+}
