@@ -1,14 +1,14 @@
 {
-  if (imageUri == null || imageUri.getPath() == null) {
+  if (image.isEmpty()) {
     return;
   }
-  if (!new File(imageUri.getPath()).exists()) {
+  if (!image.existsLocal()) {
     Log.i("Image does not exist");
     return;
   }
   new AsyncTask<Void,Void,Bitmap>(){
     @Override protected Bitmap doInBackground(    final Void... params){
-      return ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
+      return ImageUtils.readAndScaleImageToFitDisplay(image.getPath());
     }
     @Override protected void onPostExecute(    final Bitmap bitmap){
       imagePreview.setImageBitmap(bitmap);

@@ -25,7 +25,7 @@
           showFailure();
           return;
         }
-        imageUri=Uri.parse(filePath);
+        image=new Image.Builder(filePath).build();
       }
  catch (      final Exception e) {
         Log.e("ImageSelectActivity.onActivityResult",e);
@@ -46,7 +46,7 @@
         final File outputFile=ImageUtils.getOutputImageFile();
         output=new FileOutputStream(outputFile);
         LocalStorage.copy(input,output);
-        imageUri=Uri.fromFile(outputFile);
+        image=new Image.Builder(outputFile).build();
       }
  catch (      final FileNotFoundException e) {
         Log.e("ImageSelectActivity.onStartResult",e);
@@ -58,7 +58,7 @@
     }
   }
   if (requestCode == SELECT_NEW_IMAGE) {
-    showToast(getResources().getString(R.string.info_stored_image) + "\n" + imageUri);
+    showToast(getResources().getString(R.string.info_stored_image) + "\n" + image.getUrl());
   }
   loadImagePreview();
 }

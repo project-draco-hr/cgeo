@@ -1,0 +1,10 @@
+{
+  final Image image1=new Image.Builder(null,"Title","Description").build();
+  final Image image2=new Image.Builder("").build();
+  final Image image3=new Image.Builder(FILE1).build();
+  final Image image4=new Image.Builder(URL1).build();
+  assertThat(image1.isEmpty()).isTrue();
+  assertThat(image2.isEmpty()).isTrue();
+  assertThat(image3.isEmpty()).isFalse();
+  assertThat(image4.isEmpty()).isFalse();
+}

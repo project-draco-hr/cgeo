@@ -3,7 +3,5 @@
   outState.putDouble(SAVED_STATE_RATING,rating);
   outState.putInt(SAVED_STATE_TYPE,typeSelected.id);
   outState.putLong(SAVED_STATE_DATE,date.getTimeInMillis());
-  outState.putString(SAVED_STATE_IMAGE_URI,imageUri.getPath());
-  outState.putString(SAVED_STATE_IMAGE_CAPTION,imageCaption);
-  outState.putString(SAVED_STATE_IMAGE_DESCRIPTION,imageDescription);
+  outState.putParcelable(SAVED_STATE_IMAGE,image);
 }

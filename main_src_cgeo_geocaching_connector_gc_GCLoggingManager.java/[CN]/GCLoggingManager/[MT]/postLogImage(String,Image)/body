@@ -1,0 +1,7 @@
+{
+  if (!image.isEmpty()) {
+    final ImmutablePair<StatusCode,String> imageResult=GCParser.uploadLogImage(logId,image);
+    return new ImageResult(imageResult.left,imageResult.right);
+  }
+  return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR,"");
+}

@@ -1,0 +1,8 @@
+{
+  final Image image1=new Image.Builder("").build();
+  final Image image2=new Image.Builder(FILE1).build();
+  final Image image3=new Image.Builder(URL1).build();
+  assertThat(image1).isEqualTo(Image.NONE);
+  assertThat(image2).isNotEqualTo(Image.NONE);
+  assertThat(image3).isNotEqualTo(Image.NONE);
+}

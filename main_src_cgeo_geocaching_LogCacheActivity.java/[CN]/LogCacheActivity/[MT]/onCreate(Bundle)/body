@@ -1,5 +1,5 @@
 {
-  super.onCreate(savedInstanceState,R.layout.logcache_activity);
+  onCreate(savedInstanceState,R.layout.logcache_activity);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
@@ -25,9 +25,7 @@
     rating=savedInstanceState.getFloat(SAVED_STATE_RATING);
     typeSelected=LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
     date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
-    imageCaption=savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
-    imageDescription=savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
-    imageUri=Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+    image=savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
   }
  else {
     final LogEntry log=DataStore.loadLogOffline(geocode);
@@ -39,6 +37,9 @@
  else     if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
       insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),new LogContext(cache,null)),false);
     }
+  }
+  if (image == null) {
+    image=Image.NONE;
   }
   enablePostButton(false);
   final Button typeButton=ButterKnife.findById(this,R.id.type);

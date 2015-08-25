@@ -1,8 +1,6 @@
 {
   super.onSaveInstanceState(outState);
   syncEditTexts();
-  outState.putString(SAVED_STATE_IMAGE_CAPTION,imageCaption);
-  outState.putString(SAVED_STATE_IMAGE_DESCRIPTION,imageDescription);
-  outState.putString(SAVED_STATE_IMAGE_URI,imageUri != null ? imageUri.getPath() : StringUtils.EMPTY);
+  outState.putParcelable(SAVED_STATE_IMAGE,image);
   outState.putInt(SAVED_STATE_IMAGE_SCALE,scaleChoiceIndex);
 }

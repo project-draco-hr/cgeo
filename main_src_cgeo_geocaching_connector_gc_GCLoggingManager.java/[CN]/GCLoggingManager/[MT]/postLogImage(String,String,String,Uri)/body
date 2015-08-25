@@ -1,7 +1,0 @@
-{
-  if (StringUtils.isNotBlank(imageUri.getPath())) {
-    final ImmutablePair<StatusCode,String> imageResult=GCParser.uploadLogImage(logId,imageCaption,imageDescription,imageUri);
-    return new ImageResult(imageResult.left,imageResult.right);
-  }
-  return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR,"");
-}
