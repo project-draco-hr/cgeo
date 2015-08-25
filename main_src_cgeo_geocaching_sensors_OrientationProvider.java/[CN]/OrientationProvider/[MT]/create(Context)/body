@@ -1,3 +1,33 @@
 {
-  return Observable.create(new OrientationProvider(context)).onBackpressureDrop();
+  final SensorManager sensorManager=(SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
+  final Sensor orientationSensor=sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+  if (orientationSensor == null) {
+    return Observable.error(new RuntimeException("no orientation sensor"));
+  }
+  final Observable<Float> observable=Observable.create(new OnSubscribe<Float>(){
+    @Override public void call(    final Subscriber<? super Float> subscriber){
+      final SensorEventListener listener=new SensorEventListener(){
+        @Override public void onSensorChanged(        final SensorEvent sensorEvent){
+          subscriber.onNext(sensorEvent.values[0]);
+        }
+        @Override public void onAccuracyChanged(        final Sensor sensor,        final int i){
+        }
+      }
+;
+      sensorManager.registerListener(listener,orientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
+      subscriber.add(Subscriptions.create(new Action0(){
+        @Override public void call(){
+          RxUtils.looperCallbacksWorker.schedule(new Action0(){
+            @Override public void call(){
+              sensorManager.unregisterListener(listener,orientationSensor);
+            }
+          }
+);
+        }
+      }
+));
+    }
+  }
+);
+  return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
 }
