@@ -1,9 +1,9 @@
 {
   if (StringUtils.equals(location.getProvider(),LocationManager.GPS_PROVIDER)) {
-    latestGPSLocation=location;
-    assign(latestGPSLocation);
+    latestGPSLocation.set(location);
+    assign(latestGPSLocation.get());
   }
  else {
-    assign(GeoData.best(latestGPSLocation,location));
+    assign(GeoData.best(latestGPSLocation.get(),location));
   }
 }

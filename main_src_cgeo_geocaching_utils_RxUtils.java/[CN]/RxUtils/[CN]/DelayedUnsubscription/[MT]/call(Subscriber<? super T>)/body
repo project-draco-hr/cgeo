@@ -1,0 +1,33 @@
+{
+  final Subscriber<T> transformed=new Subscriber<T>(subscriber,false){
+    @Override public void onCompleted(){
+      if (!subscriber.isUnsubscribed()) {
+        subscriber.onCompleted();
+      }
+    }
+    @Override public void onError(    final Throwable e){
+      if (!subscriber.isUnsubscribed()) {
+        subscriber.onError(e);
+      }
+    }
+    @Override public void onNext(    final T t){
+      if (!subscriber.isUnsubscribed()) {
+        subscriber.onNext(t);
+      }
+    }
+  }
+;
+  subscriber.add(Subscriptions.create(new Action0(){
+    @Override public void call(){
+      Schedulers.computation().createWorker().schedule(new Action0(){
+        @Override public void call(){
+          transformed.unsubscribe();
+        }
+      }
+,time,unit);
+    }
+  }
+));
+  transformed.add(subscriber);
+  return transformed;
+}
