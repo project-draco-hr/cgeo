@@ -1,5 +1,5 @@
 {
-  gpsStatusObservable=GpsStatusProvider.create(app).replay(1).refCount();
+  gpsStatusObservable=GpsStatusProvider.create(app).replay(1).refCount().onBackpressureLatest();
   final Context context=CgeoApplication.getInstance().getApplicationContext();
   hasCompassCapabilities=RotationProvider.hasRotationSensor(context) || OrientationProvider.hasOrientationSensor(context);
 }
