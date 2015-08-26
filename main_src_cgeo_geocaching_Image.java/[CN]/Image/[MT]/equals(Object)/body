@@ -1,0 +1,10 @@
+{
+  if (this == o) {
+    return true;
+  }
+  if (o == null || getClass() != o.getClass()) {
+    return false;
+  }
+  final Image image=(Image)o;
+  return uri.equals(image.uri) && StringUtils.equals(title,image.title) && StringUtils.equals(description,image.description);
+}

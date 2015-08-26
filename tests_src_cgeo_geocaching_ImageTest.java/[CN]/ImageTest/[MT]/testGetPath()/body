@@ -1,0 +1,14 @@
+{
+  final Image image1=new Image.Builder(null,"Title","Description").build();
+  final Image image2=new Image.Builder("").build();
+  final Image image3=new Image.Builder(FILE1).build();
+  final Image image4=new Image.Builder(FILE2).build();
+  final Image image5=new Image.Builder(URL1).build();
+  final Image image6=new Image.Builder(URL2).build();
+  assertThat(image1.getPath()).isEqualTo("");
+  assertThat(image2.getPath()).isEqualTo("");
+  assertThat(image3.getPath()).isEqualTo("/dev/null");
+  assertThat(image4.getPath()).isEqualTo("/tmp/image.png");
+  assertThat(image5.getPath()).isEqualTo("");
+  assertThat(image6.getPath()).isEqualTo("");
+}

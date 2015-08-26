@@ -15,7 +15,7 @@
       logs.add(log);
     }
     if (!cursor.isNull(7)) {
-      log.addLogImage(new Image(cursor.getString(10),cursor.getString(9)));
+      log.addLogImage(new Image.Builder(cursor.getString(10),cursor.getString(9)).build());
     }
   }
   cursor.close();

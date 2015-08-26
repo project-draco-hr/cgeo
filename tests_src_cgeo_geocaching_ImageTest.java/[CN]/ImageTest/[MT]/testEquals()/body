@@ -1,0 +1,14 @@
+{
+  final Image image1=new Image.Builder(null,"Title1","Description1").build();
+  final Image image2=new Image.Builder(null,"Title2","Description2").build();
+  final Image image3=new Image.Builder(null,"Title1","Description1").build();
+  final Image image4=new Image.Builder("","Title1","Description1").build();
+  final Image image5=new Image.Builder(FILE1,"Title1","Description1").build();
+  final Image image6=new Image.Builder(FILE1,"FOO","BAR").build();
+  assertThat(image1).isEqualTo(image1);
+  assertThat(image1).isNotEqualTo(image2);
+  assertThat(image1).isEqualTo(image3);
+  assertThat(image1).isEqualTo(image4);
+  assertThat(image1).isNotEqualTo(image5);
+  assertThat(image1).isNotEqualTo(image6);
+}

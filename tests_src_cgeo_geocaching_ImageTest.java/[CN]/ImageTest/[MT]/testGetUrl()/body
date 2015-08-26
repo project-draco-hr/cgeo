@@ -1,0 +1,12 @@
+{
+  final Image image1=new Image.Builder(null,"Title","Description").build();
+  final Image image2=new Image.Builder("").build();
+  final Image image3=new Image.Builder(FILE1).build();
+  final Image image4=new Image.Builder(URL1).build();
+  final Image image5=new Image.Builder(URL2).build();
+  assertThat(image1.getUrl()).isEqualTo("");
+  assertThat(image2.getUrl()).isEqualTo("");
+  assertThat(image3.getUrl()).isEqualTo(FILE1);
+  assertThat(image4.getUrl()).isEqualTo(URL1);
+  assertThat(image5.getUrl()).isEqualTo(URL2);
+}

@@ -1,0 +1,8 @@
+{
+  final Image image1=new Image.Builder(FILE1,"Title1","Description1").build();
+  final Parcel parcel=Parcel.obtain();
+  image1.writeToParcel(parcel,0);
+  parcel.setDataPosition(0);
+  Image image2=Image.CREATOR.createFromParcel(parcel);
+  assertThat(image1).isEqualTo(image2);
+}

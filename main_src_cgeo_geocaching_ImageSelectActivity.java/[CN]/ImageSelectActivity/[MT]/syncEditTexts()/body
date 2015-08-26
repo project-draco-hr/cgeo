@@ -1,5 +1,7 @@
 {
-  imageCaption=captionView.getText().toString();
-  imageDescription=descriptionView.getText().toString();
+  final Image.Builder imageBuilder=new Image.Builder(image);
+  imageBuilder.setTitle(captionView.getText().toString());
+  imageBuilder.setDescription(descriptionView.getText().toString());
+  image=imageBuilder.build();
   scaleChoiceIndex=scaleView.getSelectedItemPosition();
 }

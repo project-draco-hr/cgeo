@@ -48,12 +48,13 @@
           }
         }
       }
-      if (StringUtils.isNotBlank(imageUri.getPath())) {
+      if (!image.isEmpty()) {
         publishProgress(res.getString(R.string.log_posting_image));
-        final ImageResult imageResult=loggingManager.postLogImage(logResult.getLogId(),imageCaption,imageDescription,imageUri);
+        final ImageResult imageResult=loggingManager.postLogImage(logResult.getLogId(),image);
         final String uploadedImageUrl=imageResult.getImageUri();
         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
-          logNow.addLogImage(new Image(uploadedImageUrl,imageCaption,imageDescription));
+          image=new Image.Builder(uploadedImageUrl).build();
+          logNow.addLogImage(image);
           DataStore.saveLogs(cache.getGeocode(),newLogs);
         }
         return imageResult.getPostResult();

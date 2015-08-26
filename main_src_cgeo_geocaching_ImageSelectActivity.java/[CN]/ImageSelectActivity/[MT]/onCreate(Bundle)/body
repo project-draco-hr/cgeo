@@ -1,22 +1,18 @@
 {
-  super.onCreate(savedInstanceState,R.layout.imageselect_activity);
+  onCreate(savedInstanceState,R.layout.imageselect_activity);
   ButterKnife.bind(this);
   scaleChoiceIndex=Settings.getLogImageScale();
-  imageCaption="";
-  imageDescription="";
-  imageUri=Uri.EMPTY;
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    imageCaption=extras.getString(Intents.EXTRA_CAPTION);
-    imageDescription=extras.getString(Intents.EXTRA_DESCRIPTION);
-    imageUri=Uri.parse(extras.getString(Intents.EXTRA_URI_AS_STRING));
+    image=extras.getParcelable(Intents.EXTRA_IMAGE);
     scaleChoiceIndex=extras.getInt(Intents.EXTRA_SCALE,scaleChoiceIndex);
   }
   if (savedInstanceState != null) {
-    imageCaption=savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
-    imageDescription=savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
-    imageUri=Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+    image=savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
     scaleChoiceIndex=savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
+  }
+  if (image == null) {
+    image=Image.NONE;
   }
   cameraButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View view){
@@ -30,12 +26,12 @@
     }
   }
 );
-  if (StringUtils.isNotBlank(imageCaption)) {
-    captionView.setText(imageCaption);
+  if (image.hasTitle()) {
+    captionView.setText(image.getTitle());
     Dialogs.moveCursorToEnd(captionView);
   }
-  if (StringUtils.isNotBlank(imageDescription)) {
-    descriptionView.setText(imageDescription);
+  if (image.hasDescription()) {
+    descriptionView.setText(image.getDescription());
     Dialogs.moveCursorToEnd(captionView);
   }
   scaleView.setSelection(scaleChoiceIndex);
