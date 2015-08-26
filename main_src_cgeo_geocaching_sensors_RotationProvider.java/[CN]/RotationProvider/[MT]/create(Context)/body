@@ -1,12 +1,11 @@
 {
   final SensorManager sensorManager=(SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
-  final Sensor preferredSensor=lowPower ? sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) : null;
-  final Sensor rotationSensor=preferredSensor != null ? preferredSensor : sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+  final Sensor rotationSensor=sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
   if (rotationSensor == null) {
     Log.w("RotationProvider: no rotation sensor on this device");
     return Observable.error(new RuntimeException("no rotation sensor"));
   }
-  Log.d(preferredSensor == null ? "RotationProvider: sensor found" : "RotationProvider: geomagnetic (low-power) sensor found");
+  Log.d("RotationProvider: sensor found");
   final Observable<Float> observable=Observable.create(new OnSubscribe<Float>(){
     private final float[] rotationMatrix=new float[16];
     private final float[] orientation=new float[4];
