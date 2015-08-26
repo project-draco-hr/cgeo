@@ -115,7 +115,7 @@
       final String logEntry=matcherLogs.group(0);
       final MatcherWrapper matcherLogImages=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG_IMAGES,logEntry);
       while (matcherLogImages.find()) {
-        final Image logImage=new Image.Builder(matcherLogImages.group(1),matcherLogImages.group(2)).build();
+        final Image logImage=new Image.Builder().setUrl(matcherLogImages.group(1)).setTitle(matcherLogImages.group(2)).build();
         logDone.addLogImage(logImage);
       }
       trackable.getLogs().add(logDone);

@@ -1,5 +1,5 @@
 {
-  final Image image1=new Image.Builder(FILE1,"Title1","Description1").build();
+  final Image image1=new Image.Builder().setUrl(FILE1).setTitle("Title1").setDescription("Description1").build();
   final Parcel parcel=Parcel.obtain();
   image1.writeToParcel(parcel,0);
   parcel.setDataPosition(0);

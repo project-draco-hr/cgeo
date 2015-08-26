@@ -1,14 +1,22 @@
 {
-  final Image image1=new Image.Builder(null,"Title1","Description1").build();
-  final Image image2=new Image.Builder(null,"Title2","Description2").build();
-  final Image image3=new Image.Builder(null,"Title1","Description1").build();
-  final Image image4=new Image.Builder("","Title1","Description1").build();
-  final Image image5=new Image.Builder(FILE1,"Title1","Description1").build();
-  final Image image6=new Image.Builder(FILE1,"FOO","BAR").build();
+  final Image image1=new Image.Builder().setUrl(FILE1).setTitle("Title1").setDescription("Description1").build();
+  final Image image2=new Image.Builder().build();
+  final Image image3=new Image.Builder().setTitle("Title1").setDescription("Description1").build();
+  final Image image4=new Image.Builder().setUrl("").setTitle("Title1").setDescription("Description1").build();
+  final Image image5=new Image.Builder().setUrl(FILE1).setTitle("Title1").setDescription("Description2").build();
+  final Image image6=new Image.Builder().setUrl(FILE1).setTitle("FOO").setDescription("BAR").build();
+  final Image image7=new Image.Builder().setUrl(image6).build();
+  final Image image8=new Image.Builder().setUrl(image5).setDescription("Description1").build();
+  final Image image9=new Image.Builder().setUrl(image5).setTitle("Title1").setDescription("Description1").build();
   assertThat(image1).isEqualTo(image1);
+  assertThat(image2).isEqualTo(image2);
   assertThat(image1).isNotEqualTo(image2);
-  assertThat(image1).isEqualTo(image3);
-  assertThat(image1).isEqualTo(image4);
+  assertThat(image1).isNotEqualTo(image3);
+  assertThat(image1).isNotEqualTo(image4);
   assertThat(image1).isNotEqualTo(image5);
   assertThat(image1).isNotEqualTo(image6);
+  assertThat(image1).isNotEqualTo(image7);
+  assertThat(image1).isNotEqualTo(image8);
+  assertThat(image1).isEqualTo(image9);
+  assertThat(image6).isNotEqualTo(image7);
 }

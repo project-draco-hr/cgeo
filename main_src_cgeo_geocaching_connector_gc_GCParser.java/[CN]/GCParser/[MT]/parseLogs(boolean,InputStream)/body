@@ -29,7 +29,7 @@
           for (          final JsonNode image : images) {
             final String url="http://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
             final String title=TextUtils.removeControlCharacters(image.path("Name").asText());
-            final Image logImage=new Image.Builder(url,title).build();
+            final Image logImage=new Image.Builder().setUrl(url).setTitle(title).build();
             logDone.addLogImage(logImage);
           }
           subscriber.onNext(logDone);

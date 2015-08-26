@@ -1,12 +1,4 @@
 {
-  final Image nullImage1=new Image.Builder((String)null).build();
-  final Image nullImage2=new Image.Builder((Uri)null).build();
-  final Image nullImage3=new Image.Builder((File)null).build();
-  final Image nullImage4=new Image.Builder(null,null).build();
-  final Image nullImage5=new Image.Builder(null,null,null).build();
+  final Image nullImage1=new Image.Builder().build();
   assertThat(nullImage1).isEqualTo(Image.NONE);
-  assertThat(nullImage2).isEqualTo(Image.NONE);
-  assertThat(nullImage3).isEqualTo(Image.NONE);
-  assertThat(nullImage4).isEqualTo(Image.NONE);
-  assertThat(nullImage5).isEqualTo(Image.NONE);
 }

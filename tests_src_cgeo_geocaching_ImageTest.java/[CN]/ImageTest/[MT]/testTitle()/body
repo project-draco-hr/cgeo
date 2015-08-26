@@ -1,4 +1,6 @@
 {
-  final Image image1=new Image.Builder(null,"Title").build();
+  final Image image1=new Image.Builder().setTitle("Title").build();
+  assertThat(image1).isNotEqualTo(Image.NONE);
   assertThat(image1.getTitle()).isEqualTo("Title");
+  assertThat(image1.getDescription()).isNull();
 }

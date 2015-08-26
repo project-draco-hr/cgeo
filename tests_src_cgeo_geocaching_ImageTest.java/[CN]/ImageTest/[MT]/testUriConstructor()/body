@@ -1,6 +1,6 @@
 {
-  final Image image1=new Image.Builder(Uri.parse(URL1)).build();
-  final Image image2=new Image.Builder(Uri.parse(URL2)).build();
+  final Image image1=new Image.Builder().setUrl(Uri.parse(URL1)).build();
+  final Image image2=new Image.Builder().setUrl(Uri.parse(URL2)).build();
   assertThat(image1).isNotEqualTo(Image.NONE);
   assertThat(image1.getUrl()).isEqualTo(URL1);
   assertThat(image2.getUrl()).isEqualTo(URL2);

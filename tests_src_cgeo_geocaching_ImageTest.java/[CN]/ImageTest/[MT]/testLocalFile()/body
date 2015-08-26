@@ -1,4 +1,4 @@
 {
-  final Image image1=new Image.Builder(FILE1,"Title","Description").build();
+  final Image image1=new Image.Builder().setUrl(FILE1).build();
   assertThat(image1.localFile()).isEqualTo(FileUtils.urlToFile(FILE1));
 }

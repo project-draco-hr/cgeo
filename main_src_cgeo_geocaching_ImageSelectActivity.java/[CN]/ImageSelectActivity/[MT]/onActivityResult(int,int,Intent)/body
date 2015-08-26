@@ -25,7 +25,7 @@
           showFailure();
           return;
         }
-        image=new Image.Builder(filePath).build();
+        image=new Image.Builder().setUrl(filePath).build();
       }
  catch (      final Exception e) {
         Log.e("ImageSelectActivity.onActivityResult",e);
@@ -46,7 +46,7 @@
         final File outputFile=ImageUtils.getOutputImageFile();
         output=new FileOutputStream(outputFile);
         LocalStorage.copy(input,output);
-        image=new Image.Builder(outputFile).build();
+        image=new Image.Builder().setUrl(outputFile).build();
       }
  catch (      final FileNotFoundException e) {
         Log.e("ImageSelectActivity.onStartResult",e);

@@ -1,6 +1,6 @@
 {
   final Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-  image=new Image.Builder(ImageUtils.getOutputImageFileUri()).build();
+  image=new Image.Builder().setUrl(ImageUtils.getOutputImageFileUri()).build();
   if (image.isEmpty()) {
     showFailure();
     return;

@@ -6,7 +6,7 @@
       }
       @Override protected void onPostExecute(      final String filename){
         if (filename != null) {
-          image=new Image.Builder(filename).build();
+          image=new Image.Builder().setUrl(filename).build();
           final Intent intent=new Intent();
           syncEditTexts();
           intent.putExtra(Intents.EXTRA_IMAGE,image);

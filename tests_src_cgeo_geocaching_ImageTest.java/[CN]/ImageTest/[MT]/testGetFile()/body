@@ -1,6 +1,6 @@
 {
-  final Image image1=new Image.Builder(null,"Title","Description").build();
-  final Image image2=new Image.Builder(FILE1).build();
+  final Image image1=new Image.Builder().build();
+  final Image image2=new Image.Builder().setUrl(FILE1).build();
   assertThat(image1.getFile()).isEqualTo(null);
   assertThat(image2.getFile()).isEqualTo(new File(FILE1));
 }
