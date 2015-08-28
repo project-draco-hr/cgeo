@@ -5,9 +5,9 @@
     return;
   }
   final AtomicBoolean useDirectionFromGps=new AtomicBoolean(false);
-  final Observable<Float> sensorDirectionObservable=RotationProvider.hasRotationSensor(app) ? RotationProvider.create(app) : OrientationProvider.create(app);
-  final Observable<Float> magneticDirectionObservable=sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable,Observable<? extends Float>>(){
-    @Override public Observable<? extends Float> call(    final Throwable throwable){
+  final Observable<Float> sensorDirectionObservable=Settings.useOrientationSensor(app) ? OrientationProvider.create(app) : RotationProvider.create(app);
+  final Observable<Float> magneticDirectionObservable=sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable,Observable<Float>>(){
+    @Override public Observable<Float> call(    final Throwable throwable){
       Log.e("Device orientation is not available due to sensors error, disabling compass",throwable);
       Settings.setUseCompass(false);
       return Observable.<Float>never().startWith(0.0f);

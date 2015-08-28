@@ -13,7 +13,7 @@
     @Override public boolean onPreferenceChange(    final Preference preference,    final Object newValue){
       final boolean useLowPower=((Boolean)newValue).booleanValue();
       sensors.setupGeoDataObservables(Settings.useGooglePlayServices(),useLowPower);
-      sensors.setupDirectionObservable(useLowPower);
+      sensors.setupDirectionObservable();
       return true;
     }
   }

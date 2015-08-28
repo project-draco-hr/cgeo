@@ -16,6 +16,6 @@
   Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
   final Sensors sensors=Sensors.getInstance();
   sensors.setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
-  sensors.setupDirectionObservable(Settings.useLowPowerMode());
+  sensors.setupDirectionObservable();
   sensors.geoDataObservable(true).subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe();
 }

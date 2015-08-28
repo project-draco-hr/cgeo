@@ -4,6 +4,7 @@
   if (orientationSensor == null) {
     return Observable.error(new RuntimeException("no orientation sensor"));
   }
+  Log.d("OrientationProvider: sensor found");
   final Observable<Float> observable=Observable.create(new OnSubscribe<Float>(){
     @Override public void call(    final Subscriber<? super Float> subscriber){
       final SensorEventListener listener=new SensorEventListener(){
@@ -14,11 +15,13 @@
         }
       }
 ;
+      Log.d("OrientationProvider: registering listener");
       sensorManager.registerListener(listener,orientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
       subscriber.add(Subscriptions.create(new Action0(){
         @Override public void call(){
           RxUtils.looperCallbacksWorker.schedule(new Action0(){
             @Override public void call(){
+              Log.d("OrientationProvider: unregistering listener");
               sensorManager.unregisterListener(listener,orientationSensor);
             }
           }

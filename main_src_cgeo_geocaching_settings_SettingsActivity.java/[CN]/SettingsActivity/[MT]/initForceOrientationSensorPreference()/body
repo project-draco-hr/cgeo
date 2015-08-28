@@ -1,0 +1,13 @@
+{
+  final Preference p=getPreference(R.string.pref_force_orientation_sensor);
+  p.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    final Preference preference,    final Object newValue){
+      final boolean useOrientationSensor=(Boolean)newValue;
+      Settings.setForceOrientationSensor(useOrientationSensor);
+      Sensors.getInstance().setupDirectionObservable();
+      return true;
+    }
+  }
+);
+  p.setEnabled(OrientationProvider.hasOrientationSensor(this) && RotationProvider.hasRotationSensor(this));
+}
