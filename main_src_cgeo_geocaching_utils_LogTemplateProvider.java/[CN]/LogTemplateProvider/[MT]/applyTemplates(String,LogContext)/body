@@ -1,7 +1,4 @@
 {
-  if (signature == null) {
-    return StringUtils.EMPTY;
-  }
   String result=signature;
   for (  final LogTemplate template : getTemplatesWithSignature()) {
     result=template.apply(result,context);
