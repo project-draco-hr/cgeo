@@ -3,7 +3,6 @@
   final Parcel parcel=Parcel.obtain();
   image1.writeToParcel(parcel,0);
   parcel.setDataPosition(0);
-  final Image image2=Image.CREATOR.createFromParcel(parcel);
+  Image image2=Image.CREATOR.createFromParcel(parcel);
   assertThat(image1).isEqualTo(image2);
-  parcel.recycle();
 }
