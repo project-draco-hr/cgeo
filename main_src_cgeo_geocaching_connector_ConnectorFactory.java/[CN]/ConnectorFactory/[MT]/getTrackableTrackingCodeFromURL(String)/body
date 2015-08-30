@@ -1,0 +1,12 @@
+{
+  if (url == null) {
+    return null;
+  }
+  for (  final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+    final String trackableCode=connector.getTrackableTrackingCodeFromUrl(url);
+    if (StringUtils.isNotBlank(trackableCode)) {
+      return trackableCode;
+    }
+  }
+  return null;
+}
