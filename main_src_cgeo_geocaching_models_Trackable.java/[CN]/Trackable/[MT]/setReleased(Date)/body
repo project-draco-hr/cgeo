@@ -1,8 +1,3 @@
 {
-  if (released == null) {
-    this.released=null;
-  }
- else {
-    this.released=new Date(released.getTime());
-  }
+  this.released=released == null ? null : new Date(released.getTime());
 }
