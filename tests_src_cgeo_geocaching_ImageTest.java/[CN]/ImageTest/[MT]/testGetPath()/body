@@ -5,10 +5,12 @@
   final Image image4=new Image.Builder().setUrl(FILE2).build();
   final Image image5=new Image.Builder().setUrl(URL1).build();
   final Image image6=new Image.Builder().setUrl(URL2).build();
+  final Image image7=new Image.Builder().setUrl(FILE3).build();
   assertThat(image1.getPath()).isEqualTo("");
   assertThat(image2.getPath()).isEqualTo("");
   assertThat(image3.getPath()).isEqualTo("/dev/null");
   assertThat(image4.getPath()).isEqualTo("/tmp/image.png");
   assertThat(image5.getPath()).isEqualTo("");
   assertThat(image6.getPath()).isEqualTo("");
+  assertThat(image7.getPath()).isEqualTo("/tmp/image.png");
 }

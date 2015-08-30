@@ -16,7 +16,7 @@
       final SQLiteStatement insertImage=PreparedStatement.INSERT_LOG_IMAGE.getStatement();
       for (      final Image img : log.getLogImages()) {
         insertImage.bindLong(1,logId);
-        insertImage.bindString(2,img.getTitle());
+        insertImage.bindString(2,StringUtils.defaultIfBlank(img.title,""));
         insertImage.bindString(3,img.getUrl());
         insertImage.executeInsert();
       }

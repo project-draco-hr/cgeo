@@ -9,9 +9,9 @@
       insertSpoiler.bindString(1,geocode);
       insertSpoiler.bindLong(2,timestamp);
       insertSpoiler.bindString(3,spoiler.getUrl());
-      insertSpoiler.bindString(4,spoiler.getTitle());
+      insertSpoiler.bindString(4,StringUtils.defaultIfBlank(spoiler.title,""));
       final String description=spoiler.getDescription();
-      if (description != null) {
+      if (StringUtils.isNotBlank(description)) {
         insertSpoiler.bindString(5,description);
       }
  else {

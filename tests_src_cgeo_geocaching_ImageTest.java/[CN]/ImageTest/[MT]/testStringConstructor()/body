@@ -2,7 +2,9 @@
   final Image image1=new Image.Builder().setUrl("").build();
   final Image image2=new Image.Builder().setUrl(FILE1).build();
   final Image image3=new Image.Builder().setUrl(URL1).build();
+  final Image image4=new Image.Builder().setUrl(FILE3).build();
   assertThat(image1).isEqualTo(Image.NONE);
   assertThat(image2).isNotEqualTo(Image.NONE);
   assertThat(image3).isNotEqualTo(Image.NONE);
+  assertThat(image4).isNotEqualTo(Image.NONE);
 }

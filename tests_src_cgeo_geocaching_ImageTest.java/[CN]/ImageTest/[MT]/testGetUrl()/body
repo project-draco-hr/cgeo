@@ -4,9 +4,11 @@
   final Image image3=new Image.Builder().setUrl(FILE1).build();
   final Image image4=new Image.Builder().setUrl(URL1).build();
   final Image image5=new Image.Builder().setUrl(URL2).build();
+  final Image image6=new Image.Builder().setUrl(FILE3).build();
   assertThat(image1.getUrl()).isEqualTo("");
   assertThat(image2.getUrl()).isEqualTo("");
   assertThat(image3.getUrl()).isEqualTo(FILE1);
   assertThat(image4.getUrl()).isEqualTo(URL1);
   assertThat(image5.getUrl()).isEqualTo(URL2);
+  assertThat(image6.getUrl()).isEqualTo("file://" + FILE3);
 }

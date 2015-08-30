@@ -1,4 +1,11 @@
 {
+  if (StringUtils.isEmpty(url)) {
+    uri=Uri.EMPTY;
+    return this;
+  }
   uri=Uri.parse(url);
+  if (uri.isRelative()) {
+    uri=Uri.fromFile(new File(url));
+  }
   return this;
 }

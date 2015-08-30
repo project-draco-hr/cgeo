@@ -1,6 +1,10 @@
 {
   final Image image1=new Image.Builder().build();
   final Image image2=new Image.Builder().setUrl(FILE1).build();
+  final Image image3=new Image.Builder().setUrl(FILE2).build();
+  final Image image4=new Image.Builder().setUrl(FILE3).build();
   assertThat(image1.getFile()).isEqualTo(null);
-  assertThat(image2.getFile()).isEqualTo(new File(FILE1));
+  assertThat(image2.getFile()).isEqualTo(new File("/dev/null"));
+  assertThat(image3.getFile()).isEqualTo(new File("/tmp/image.png"));
+  assertThat(image4.getFile()).isEqualTo(new File("/tmp/image.png"));
 }
