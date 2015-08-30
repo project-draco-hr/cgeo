@@ -1,6 +1,14 @@
 {
   final Image image1=new Image.Builder().setTitle("Title").build();
+  final Image image2=new Image.Builder().setTitle("").build();
+  final Image image3=new Image.Builder().setTitle(null).build();
   assertThat(image1).isNotEqualTo(Image.NONE);
   assertThat(image1.getTitle()).isEqualTo("Title");
   assertThat(image1.getDescription()).isNull();
+  assertThat(image2).isNotEqualTo(Image.NONE);
+  assertThat(image2.getTitle()).isEqualTo("");
+  assertThat(image2.getDescription()).isNull();
+  assertThat(image3).isEqualTo(Image.NONE);
+  assertThat(image3.getTitle()).isNull();
+  assertThat(image3.getDescription()).isNull();
 }

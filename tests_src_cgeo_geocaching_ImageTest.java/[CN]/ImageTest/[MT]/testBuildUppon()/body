@@ -1,0 +1,8 @@
+{
+  final Image image1=new Image.Builder().setUrl(FILE1).setTitle("Title1").setDescription("Description1").build();
+  final Image image2=image1.buildUpon().build();
+  final Image image3=image1.buildUpon().setTitle("New Title").build();
+  assertThat(image1).isEqualTo(image2);
+  assertThat(image1).isNotEqualTo(image3);
+  assertThat(image3.title).isEqualTo("New Title");
+}
