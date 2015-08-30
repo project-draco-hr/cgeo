@@ -2,6 +2,9 @@
   waitDialog=ProgressDialog.show(this,message,res.getString(R.string.trackable_details_loading),true,true);
   createSubscriptions.add(AppObservable.bindActivity(this,loadTrackable(geocode,guid,id,brand)).singleOrDefault(null).subscribe(new Action1<Trackable>(){
     @Override public void call(    final Trackable trackable){
+      if (trackable != null && trackingCode != null) {
+        trackable.setTrackingcode(trackingCode);
+      }
       TrackableActivity.this.trackable=trackable;
       displayTrackable();
       imagesList=null;
