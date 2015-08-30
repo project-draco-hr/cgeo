@@ -1,0 +1,15 @@
+{
+  waitDialog=ProgressDialog.show(this,message,res.getString(R.string.trackable_details_loading),true,true);
+  connector=ConnectorFactory.getTrackableConnector(geocode,brand);
+  createSubscriptions.add(AppObservable.bindActivity(this,ConnectorFactory.loadTrackable(geocode,null,null,brand)).singleOrDefault(null).subscribe(new Action1<Trackable>(){
+    @Override public void call(    final Trackable newTrackable){
+      if (newTrackable != null && trackingCode != null) {
+        newTrackable.setTrackingcode(trackingCode);
+      }
+      trackable=newTrackable;
+      getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(),null,LogTrackableActivity.this).forceLoad();
+      displayTrackable();
+    }
+  }
+));
+}

@@ -1,8 +1,35 @@
 {
-  if (StringUtils.isNotBlank(trackable.getName())) {
-    setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
-  }
+  if (trackable == null) {
+    Log.e("LogTrackableActivity.onCreate, cannot load trackable: " + geocode);
+    if (waitDialog != null) {
+      waitDialog.dismiss();
+    }
+    if (StringUtils.isNotBlank(geocode)) {
+      showToast(res.getString(R.string.err_tb_find) + ' ' + geocode+ '.');
+    }
  else {
-    setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
+      showToast(res.getString(R.string.err_tb_find_that));
+    }
+    setResult(RESULT_CANCELED);
+    finish();
+    return;
   }
+  if (!trackable.isLoggable()) {
+    if (waitDialog != null) {
+      waitDialog.dismiss();
+    }
+    showToast(res.getString(R.string.err_tb_not_loggable));
+    finish();
+    return;
+  }
+  setTitle(res.getString(R.string.trackable_touch) + ": " + StringUtils.defaultIfBlank(trackable.getGeocode(),trackable.getName()));
+  if (trackingCode != null) {
+    trackingEditText.setText(trackingCode);
+    Dialogs.moveCursorToEnd(trackingEditText);
+  }
+  init();
+  if (waitDialog != null) {
+    waitDialog.dismiss();
+  }
+  requestKeyboardForLogging();
 }

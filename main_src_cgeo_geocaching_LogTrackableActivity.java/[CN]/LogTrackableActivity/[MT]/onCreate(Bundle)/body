@@ -1,7 +1,9 @@
 {
-  super.onCreate(savedInstanceState,R.layout.logtrackable_activity);
+  onCreate(savedInstanceState,R.layout.logtrackable_activity);
   ButterKnife.bind(this);
+  createSubscriptions=new CompositeSubscription();
   final Bundle extras=getIntent().getExtras();
+  final Uri uri=AndroidBeam.getUri(getIntent());
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
     if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_GEOCACHE))) {
@@ -11,31 +13,24 @@
       }
     }
     if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
-      trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
-      Dialogs.moveCursorToEnd(trackingEditText);
+      trackingCode=extras.getString(Intents.EXTRA_TRACKING_CODE);
     }
   }
-  trackable=DataStore.loadTrackable(geocode);
-  if (trackable == null) {
-    Log.e("LogTrackableActivity.onCreate, cannot load trackable: " + geocode);
-    setResult(RESULT_CANCELED);
+  if (geocode == null && uri != null) {
+    geocode=ConnectorFactory.getTrackableFromURL(uri.toString());
+    trackingCode=ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
+    final String uriHost=uri.getHost().toLowerCase(Locale.US);
+    if (uriHost.endsWith("geokrety.org")) {
+      brand=TrackableBrand.GEOKRETY;
+      if (geocode == null && trackingCode != null) {
+        geocode=trackingCode;
+      }
+    }
+  }
+  if (geocode == null) {
+    showToast(res.getString(R.string.err_tb_display));
     finish();
     return;
   }
-  if (StringUtils.isNotBlank(trackable.getName())) {
-    setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
-  }
- else {
-    setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
-  }
-  if (!trackable.isLoggable()) {
-    showToast(res.getString(R.string.err_tb_not_loggable));
-    finish();
-    return;
-  }
-  connector=ConnectorFactory.getTrackableConnector(geocode);
-  getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(),null,this).forceLoad();
-  displayTrackable();
-  init();
-  requestKeyboardForLogging();
+  refreshTrackable(geocode);
 }
