@@ -25,7 +25,7 @@
     }
     if (addCoords == null || (currentCoords.distanceTo(addCoords) > 0.5)) {
       addCoords=currentCoords;
-      final Observable<String> address=(new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords).onErrorResumeNext(MapQuestGeocoder.getFromLocation(currentCoords))).map(new Func1<Address,String>(){
+      final Observable<String> address=(new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(new Func1<Address,String>(){
         @Override public String call(        final Address address){
           return formatAddress(address);
         }
