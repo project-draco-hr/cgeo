@@ -6,7 +6,7 @@
     layers.add(marker);
   }
   final int resolution=calculateResolution(marker);
-  if (!cache.isReliableLatLon()) {
+  if (!cache.isReliableLatLon() && showUnreliableLatLon(cacheListType)) {
     insets.add(INSET_RELIABLE[resolution]);
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_notreliable));
   }
