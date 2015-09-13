@@ -2,10 +2,11 @@
   final List<Drawable> layers=new ArrayList<>(9);
   final List<int[]> insets=new ArrayList<>(8);
   final Drawable marker=Compatibility.getDrawable(res,cache.getMapMarkerId());
+  final int resolution=calculateResolution(marker);
   if (showBackground(cacheListType)) {
     layers.add(marker);
+    insets.add(INSET_RELIABLE[resolution]);
   }
-  final int resolution=calculateResolution(marker);
   if (!cache.isReliableLatLon() && showUnreliableLatLon(cacheListType)) {
     insets.add(INSET_RELIABLE[resolution]);
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_notreliable));
@@ -43,7 +44,7 @@
     insets.add(driftBottomItems(INSET_PERSONALNOTE,resolution,cacheListType));
   }
   final LayerDrawable ld=new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
-  int index=showBackground(cacheListType) ? 1 : 0;
+  int index=0;
   for (  final int[] inset : insets) {
     ld.setLayerInset(index++,inset[0],inset[1],inset[2],inset[3]);
   }
