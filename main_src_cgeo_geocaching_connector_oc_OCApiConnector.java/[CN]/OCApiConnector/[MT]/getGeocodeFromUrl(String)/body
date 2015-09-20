@@ -1,0 +1,16 @@
+{
+  final String shortHost=StringUtils.remove(getHost(),"www.");
+  final String id=StringUtils.trim(StringUtils.substringAfter(url,shortHost + "/viewcache.php?cacheid="));
+  if (StringUtils.isNotBlank(id)) {
+    final String geocode=Observable.defer(new Func0<Observable<String>>(){
+      @Override public Observable<String> call(){
+        return Observable.just(OkapiClient.getGeocodeByUrl(OCApiConnector.this,url));
+      }
+    }
+).subscribeOn(RxUtils.networkScheduler).toBlocking().first();
+    if (geocode != null && canHandle(geocode)) {
+      return geocode;
+    }
+  }
+  return super.getGeocodeFromUrl(url);
+}

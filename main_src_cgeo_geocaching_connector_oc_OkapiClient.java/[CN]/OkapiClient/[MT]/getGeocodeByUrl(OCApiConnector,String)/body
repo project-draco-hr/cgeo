@@ -1,0 +1,12 @@
+{
+  final Parameters params=new Parameters("urls",url);
+  final ObjectNode data=request(connector,OkapiService.SERVICE_RESOLVE_URL,params).data;
+  if (data == null) {
+    return null;
+  }
+  if (data.has("results")) {
+    final ArrayNode results=(ArrayNode)data.path("results");
+    return results.get(0).asText();
+  }
+  return null;
+}
