@@ -1,9 +1,0 @@
-{
-  if (showBackground(cacheListType)) {
-    return inset[resolution];
-  }
-  final int[] newPosition=Arrays.copyOf(inset[resolution],4);
-  newPosition[1]-=INSET_TYPE[resolution][3] * 3 / 2;
-  newPosition[3]+=INSET_TYPE[resolution][3] * 3 / 2;
-  return newPosition;
-}
