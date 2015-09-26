@@ -6,7 +6,7 @@
       dirChooser.setData(Uri.fromFile(new File(startDirectory)));
     }
     dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,getString(R.string.simple_dir_chooser_title));
-    dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,getString(android.R.string.ok));
+    dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,getString(string.ok));
     startActivityForResult(dirChooser,dct.requestCode);
   }
  catch (  final ActivityNotFoundException ignored) {

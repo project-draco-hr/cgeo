@@ -3,9 +3,9 @@
     return Collections.emptyMap();
   }
   final Parameters params=new Parameters("version","cgeo");
-  final ImmutablePair<String,String> login=Settings.getGCVoteLogin();
-  if (login != null) {
-    params.put("userName",login.left,"password",login.right);
+  final Credentials login=Settings.getGCVoteLogin();
+  if (login.isValid()) {
+    params.put("userName",login.getUsername(),"password",login.getPassword());
   }
   final boolean requestByGuids=CollectionUtils.isNotEmpty(guids);
   if (requestByGuids) {

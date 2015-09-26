@@ -5,12 +5,12 @@
   if (!isValidRating(rating)) {
     throw new IllegalArgumentException("invalid rating " + rating);
   }
-  final ImmutablePair<String,String> login=Settings.getGCVoteLogin();
-  if (login == null) {
+  final Credentials login=Settings.getGCVoteLogin();
+  if (login.isInvalid()) {
     Log.e("GCVote.setRating: cannot find credentials");
     return false;
   }
-  final Parameters params=new Parameters("userName",login.left,"password",login.right,"cacheId",cache.getGuid(),"waypoint",cache.getGeocode(),"voteUser",String.format(Locale.US,"%.1f",rating),"version","cgeo");
+  final Parameters params=new Parameters("userName",login.getUsername(),"password",login.getPassword(),"cacheId",cache.getGuid(),"waypoint",cache.getGeocode(),"voteUser",String.format(Locale.US,"%.1f",rating),"version","cgeo");
   final String result=StringUtils.trim(Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php",params)));
   if (!StringUtils.equalsIgnoreCase(result,"ok")) {
     Log.e("GCVote.setRating: could not post rating, answer was " + result);
