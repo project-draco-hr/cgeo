@@ -6,6 +6,9 @@
       params.put("userid",String.valueOf(userid));
     }
  else {
+      if (StringUtils.isBlank(Settings.getGeokretySecId())) {
+        return Collections.emptyList();
+      }
       params.put("secid",Settings.getGeokretySecId());
     }
     final InputStream response=Network.getResponseStream(Network.getRequest(URL + "/export2.php",params));
