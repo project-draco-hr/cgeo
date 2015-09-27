@@ -1,6 +1,9 @@
 {
-  if (waypoint != null && waypoint.getCoords() != null) {
-    waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(waypoint.getCoords())));
-    waypointDistance.bringToFront();
+  if (waypoint != null) {
+    final Geopoint coordinates=waypoint.getCoords();
+    if (coordinates != null) {
+      waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(coordinates)));
+      waypointDistance.bringToFront();
+    }
   }
 }

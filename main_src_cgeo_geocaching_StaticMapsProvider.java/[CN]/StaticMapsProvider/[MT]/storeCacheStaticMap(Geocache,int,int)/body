@@ -2,11 +2,12 @@
   final String latlonMap=cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
   final Parameters waypoints=new Parameters();
   for (  final Waypoint waypoint : cache.getWaypoints()) {
-    if (waypoint.getCoords() == null) {
+    Geopoint coordinates=waypoint.getCoords();
+    if (coordinates == null) {
       continue;
     }
     final String wpMarkerUrl=getWpMarkerUrl(waypoint);
-    waypoints.put("markers","icon:" + wpMarkerUrl + '|'+ waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
+    waypoints.put("markers","icon:" + wpMarkerUrl + '|'+ coordinates.format(Format.LAT_LON_DECDEGREE_COMMA));
   }
   final String cacheMarkerUrl=getCacheMarkerUrl(cache);
   return downloadMaps(cache.getGeocode(),cacheMarkerUrl,"",latlonMap,width,height,waypoints);

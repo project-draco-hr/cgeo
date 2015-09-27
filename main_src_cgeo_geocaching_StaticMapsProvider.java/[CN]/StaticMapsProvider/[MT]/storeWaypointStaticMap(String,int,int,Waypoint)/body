@@ -7,10 +7,11 @@
     Log.e("storeWaypointStaticMap - missing input parameter waypoint");
     return Observable.empty();
   }
-  if (waypoint.getCoords() == null) {
+  Geopoint coordinates=waypoint.getCoords();
+  if (coordinates == null) {
     return Observable.empty();
   }
-  final String wpLatlonMap=waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
+  final String wpLatlonMap=coordinates.format(Format.LAT_LON_DECDEGREE_COMMA);
   final String wpMarkerUrl=getWpMarkerUrl(waypoint);
   if (!hasAllStaticMapsForWaypoint(geocode,waypoint)) {
     return downloadMaps(geocode,wpMarkerUrl,WAYPOINT_PREFIX + waypoint.getId() + '_'+ waypoint.getStaticMapsHashcode()+ "_",wpLatlonMap,width,height,null);

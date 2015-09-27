@@ -47,9 +47,10 @@
       if (locusWpId != null) {
         wp.type=locusWpId;
       }
-      if (waypoint.getCoords() != null) {
-        wp.lat=waypoint.getCoords().getLatitude();
-        wp.lon=waypoint.getCoords().getLongitude();
+      final Geopoint waypointCoords=waypoint.getCoords();
+      if (waypointCoords != null) {
+        wp.lat=waypointCoords.getLatitude();
+        wp.lon=waypointCoords.getLongitude();
       }
       pg.waypoints.add(wp);
     }

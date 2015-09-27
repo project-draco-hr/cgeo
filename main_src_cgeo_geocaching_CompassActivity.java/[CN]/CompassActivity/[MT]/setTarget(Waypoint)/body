@@ -1,4 +1,7 @@
 {
   waypoint=waypointIn;
-  setTarget(waypointIn.getCoords(),waypointIn.getName());
+  final Geopoint coordinates=waypointIn.getCoords();
+  if (coordinates != null) {
+    setTarget(coordinates,waypointIn.getName());
+  }
 }

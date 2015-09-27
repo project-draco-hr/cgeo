@@ -1,14 +1,2 @@
 {
-  final String note="Dummy note\nn 45?? 3.5 e 27?? 7.5\nNothing else";
-  final Collection<Waypoint> waypoints=Waypoint.parseWaypointsFromNote(note);
-  assertThat(waypoints).hasSize(1);
-  final Geopoint coords=waypoints.iterator().next().getCoords();
-  assertThat(coords.getLatDeg()).isEqualTo(45);
-  assertThat(coords.getLatMinRaw()).isEqualTo(3.5);
-  assertThat(coords.getLonDeg()).isEqualTo(27);
-  assertThat(coords.getLonMinRaw()).isEqualTo(7.5);
-  final String note2="Waypoint on two lines\nN 45??3.5\nE 27??7.5\nNothing else";
-  final Collection<Waypoint> waypoints2=Waypoint.parseWaypointsFromNote(note2);
-  assertThat(waypoints2).hasSize(1);
-  assertThat(waypoints2.iterator().next().getCoords()).isEqualTo(coords);
 }

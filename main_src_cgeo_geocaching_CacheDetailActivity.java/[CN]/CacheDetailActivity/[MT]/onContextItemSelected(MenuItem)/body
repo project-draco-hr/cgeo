@@ -9,8 +9,11 @@ case R.id.menu_waypoint_edit:
   return true;
 case R.id.menu_waypoint_copy_coordinates:
 if (selectedWaypoint != null) {
-  ClipboardUtils.copyToClipboard(selectedWaypoint.getCoords().toString());
-  showToast(getResources().getString(R.string.clipboard_copy_ok));
+  final Geopoint coordinates=selectedWaypoint.getCoords();
+  if (coordinates != null) {
+    ClipboardUtils.copyToClipboard(coordinates.toString());
+    showToast(getResources().getString(R.string.clipboard_copy_ok));
+  }
 }
 return true;
 case R.id.menu_waypoint_duplicate:
@@ -61,7 +64,10 @@ NavigationAppFactory.showNavigationMenu(this,null,selectedWaypoint,null);
 return true;
 case R.id.menu_waypoint_caches_around:
 if (selectedWaypoint != null) {
-CacheListActivity.startActivityCoordinates(this,selectedWaypoint.getCoords(),selectedWaypoint.getName());
+final Geopoint coordinates=selectedWaypoint.getCoords();
+if (coordinates != null) {
+CacheListActivity.startActivityCoordinates(this,coordinates,selectedWaypoint.getName());
+}
 }
 return true;
 case R.id.menu_waypoint_reset_cache_coords:

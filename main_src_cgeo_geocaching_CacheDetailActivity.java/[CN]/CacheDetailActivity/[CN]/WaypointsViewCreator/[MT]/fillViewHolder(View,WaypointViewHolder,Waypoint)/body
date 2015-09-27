@@ -1,8 +1,9 @@
 {
   final TextView coordinatesView=holder.coordinatesView;
-  if (null != wpt.getCoords()) {
-    coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(wpt.getCoords()));
-    coordinatesView.setText(wpt.getCoords().toString());
+  final Geopoint coordinates=wpt.getCoords();
+  if (null != coordinates) {
+    coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(coordinates));
+    coordinatesView.setText(coordinates.toString());
     coordinatesView.setVisibility(View.VISIBLE);
   }
  else {
@@ -21,8 +22,8 @@
   if (StringUtils.isNotBlank(wpt.getName())) {
     nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
   }
- else   if (null != wpt.getCoords()) {
-    nameView.setText(wpt.getCoords().toString());
+ else   if (null != coordinates) {
+    nameView.setText(coordinates.toString());
   }
  else {
     nameView.setText(res.getString(R.string.waypoint));
