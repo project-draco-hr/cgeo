@@ -11,10 +11,13 @@
   auth1.setText(getAuthExplainShort());
   auth2.setText(getAuthExplainLong());
   startButton.setText(getAuthAuthorize());
-  startButton.setEnabled(true);
   startButton.setOnClickListener(new StartListener());
+  enableStartButtonIfReady();
   registerButton.setText(getAuthRegister());
   registerButton.setEnabled(true);
   registerButton.setOnClickListener(new RegisterListener());
   startButton.setText(StringUtils.isBlank(getToken()) ? getAuthStart() : getAuthAgain());
+  final EnableStartButtonWatcher enableStartButtonWatcher=new EnableStartButtonWatcher();
+  usernameEditText.addTextChangedListener(enableStartButtonWatcher);
+  passwordEditText.addTextChangedListener(enableStartButtonWatcher);
 }
