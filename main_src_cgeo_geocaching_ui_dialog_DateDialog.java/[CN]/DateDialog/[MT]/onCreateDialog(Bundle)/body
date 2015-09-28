@@ -4,5 +4,9 @@
   final int year=date.get(Calendar.YEAR);
   final int month=date.get(Calendar.MONTH);
   final int day=date.get(Calendar.DAY_OF_MONTH);
-  return new DatePickerDialog(getActivity(),this,year,month,day);
+  final DatePickerDialog dialog=new DatePickerDialog(getActivity(),this,year,month,day);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+    forceTitleUpdate(year,month,day,dialog);
+  }
+  return dialog;
 }
