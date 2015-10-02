@@ -26,6 +26,10 @@ throw new UnsupportedOperationException();
 ;
 class SaveWptTask extends AsyncTask<Void,Void,Void> {
 @Override protected Void doInBackground(final Void... params){
+if (currentState == null) {
+finishHandler.sendEmptyMessage(SAVE_ERROR);
+return null;
+}
 final Waypoint waypoint=new Waypoint(currentState.name,currentState.type,own);
 waypoint.setGeocode(geocode);
 waypoint.setPrefix(prefix);
