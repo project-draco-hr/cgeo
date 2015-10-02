@@ -4,7 +4,7 @@
   }
   final Parameters params=new Parameters("version","cgeo");
   final ImmutablePair<String,String> login=Settings.getGCVoteLogin();
-  if (login != null) {
+  if (StringUtils.isNotBlank(login.left)) {
     params.put("userName",login.left,"password",login.right);
   }
   final boolean requestByGuids=CollectionUtils.isNotEmpty(guids);

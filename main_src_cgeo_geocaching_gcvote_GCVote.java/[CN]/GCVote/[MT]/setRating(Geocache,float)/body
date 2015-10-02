@@ -6,7 +6,7 @@
     throw new IllegalArgumentException("invalid rating " + rating);
   }
   final ImmutablePair<String,String> login=Settings.getGCVoteLogin();
-  if (login == null) {
+  if (StringUtils.isBlank(login.left)) {
     Log.e("GCVote.setRating: cannot find credentials");
     return false;
   }

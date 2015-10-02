@@ -2,7 +2,7 @@
   final String username=getString(R.string.pref_username,null);
   final String password=getString(R.string.pref_pass_vote,null);
   if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-    return null;
+    return new ImmutablePair<>(StringUtils.EMPTY,StringUtils.EMPTY);
   }
   return new ImmutablePair<>(username,password);
 }

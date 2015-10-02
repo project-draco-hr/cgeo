@@ -1,6 +1,6 @@
 {
   final ImmutablePair<String,String> login=Settings.getGCVoteLogin();
-  if (login == null) {
+  if (StringUtils.isBlank(login.left)) {
     Log.e("Credentials can't be retreived");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
