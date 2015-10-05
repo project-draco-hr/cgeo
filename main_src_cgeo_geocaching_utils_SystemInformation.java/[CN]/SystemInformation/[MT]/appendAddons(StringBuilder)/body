@@ -1,5 +1,5 @@
 {
-  final List<String> addons=new ArrayList<>();
+  final List<String> addons=new ArrayList<>(2);
   if (CalendarAddon.isAvailable()) {
     addons.add("calendar");
   }
@@ -7,10 +7,5 @@
     addons.add("contacts");
   }
   body.append("\nInstalled cgeo plugins: ");
-  if (CollectionUtils.isNotEmpty(addons)) {
-    body.append(StringUtils.join(addons,", "));
-  }
- else {
-    body.append(" none");
-  }
+  body.append(CollectionUtils.isNotEmpty(addons) ? StringUtils.join(addons,", ") : " none");
 }
