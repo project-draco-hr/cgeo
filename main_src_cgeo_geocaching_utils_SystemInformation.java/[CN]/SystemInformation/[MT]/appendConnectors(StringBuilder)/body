@@ -1,5 +1,5 @@
 {
-  final StringBuilder connectors=new StringBuilder();
+  final StringBuilder connectors=new StringBuilder(128);
   int connectorCount=0;
   for (  final IConnector connector : ConnectorFactory.getConnectors()) {
     if (connector.isActive()) {
