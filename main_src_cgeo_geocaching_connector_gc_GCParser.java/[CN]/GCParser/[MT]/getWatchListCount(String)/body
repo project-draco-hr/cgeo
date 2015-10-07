@@ -1,0 +1,13 @@
+{
+  int count;
+  String sCount=TextUtils.getMatch(page,GCConstants.PATTERN_WATCHLIST_COUNT,true,1,"notFound",false);
+  if (sCount.equals("notFound"))   return -1;
+  try {
+    count=Integer.parseInt(sCount);
+  }
+ catch (  NumberFormatException nfe) {
+    Log.i("Could not parse " + nfe);
+    return -1;
+  }
+  return count;
+}

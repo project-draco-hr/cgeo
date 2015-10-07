@@ -13,5 +13,7 @@
  else {
     Log.e("GCParser.addToWatchlist: cache is not on watchlist");
   }
+  final String watchListPage=GCLogin.getInstance().postRequestLogged(cache.getLongUrl(),null);
+  cache.setWatchlistCount(getWatchListCount(watchListPage));
   return guidOnPage;
 }

@@ -16,5 +16,7 @@
  else {
     Log.e("GCParser.removeFromWatchlist: cache not removed from watchlist");
   }
+  final String watchListPage=GCLogin.getInstance().postRequestLogged(cache.getLongUrl(),null);
+  cache.setWatchlistCount(getWatchListCount(watchListPage));
   return !guidOnPage;
 }
