@@ -50,6 +50,7 @@
   cache.setCoords(getCoords(cursor,35,36));
   cache.setFinalDefined(cursor.getInt(37) > 0);
   cache.setLogPasswordRequired(cursor.getInt(41) > 0);
+  cache.setWatchlistCount(cursor.getInt(42));
   Log.d("Loading " + cache.toString() + " ("+ cache.getListId()+ ") from DB");
   return cache;
 }
