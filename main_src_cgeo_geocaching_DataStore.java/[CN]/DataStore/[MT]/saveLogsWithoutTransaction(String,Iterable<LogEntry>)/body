@@ -18,6 +18,7 @@
         insertImage.bindLong(1,logId);
         insertImage.bindString(2,StringUtils.defaultIfBlank(img.title,""));
         insertImage.bindString(3,img.getUrl());
+        insertImage.bindString(4,StringUtils.defaultIfBlank(img.getDescription(),""));
         insertImage.executeInsert();
       }
     }
