@@ -1,6 +1,23 @@
 {
-  getDialog().setTitle(R.string.cache_coordinates);
+  final Dialog dialog=getDialog();
+  final boolean noTitle=dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
   final View v=inflater.inflate(R.layout.coordinatesinput_dialog,container,false);
+  final InputDoneListener inputdone=new InputDoneListener();
+  if (!noTitle) {
+    dialog.setTitle(R.string.cache_coordinates);
+  }
+ else {
+    final TextView title=ButterKnife.findById(v,R.id.coords_input_title);
+    if (title != null) {
+      title.setText(R.string.cache_coordinates);
+      title.setVisibility(View.VISIBLE);
+    }
+    final ImageButton done=ButterKnife.findById(v,R.id.coords_input_done);
+    if (done != null) {
+      done.setOnClickListener(inputdone);
+      done.setVisibility(View.VISIBLE);
+    }
+  }
   final Spinner spinner=ButterKnife.findById(v,R.id.spinnerCoordinateFormats);
   final ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getActivity(),R.array.waypoint_coordinate_formats,android.R.layout.simple_spinner_item);
   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -48,6 +65,6 @@
     buttonClipboard.setVisibility(View.VISIBLE);
   }
   final Button buttonDone=ButterKnife.findById(v,R.id.done);
-  buttonDone.setOnClickListener(new InputDoneListener());
+  buttonDone.setOnClickListener(inputdone);
   return v;
 }
