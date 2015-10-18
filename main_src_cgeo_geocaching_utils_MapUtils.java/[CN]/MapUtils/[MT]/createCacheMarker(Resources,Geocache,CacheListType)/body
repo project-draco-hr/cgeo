@@ -35,7 +35,7 @@
     }
     insets.add(getFoundInset(cacheListType)[resolution]);
   }
-  if (cache.hasUserModifiedCoords()) {
+  if (cache.hasUserModifiedCoords() || cache.hasFinalDefined() && cacheListType != null) {
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_usermodifiedcoords));
     insets.add(getUMCInset(cacheListType)[resolution]);
   }
