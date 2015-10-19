@@ -16,6 +16,7 @@
         Log.w("Could not acquire GUID from log page for " + cache.getGeocode());
       }
     }
+    premFavcount=GCParser.getFavoritePoints(page);
     hasLoaderError=possibleLogTypes.isEmpty();
   }
   activity.onLoadFinished();

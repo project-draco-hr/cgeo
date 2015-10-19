@@ -26,6 +26,7 @@
     typeSelected=LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
     date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
     image=savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
+    premFavPoints=savedInstanceState.getInt(SAVED_STATE_FAVPOINTS);
   }
  else {
     final LogEntry log=DataStore.loadLogOffline(geocode);

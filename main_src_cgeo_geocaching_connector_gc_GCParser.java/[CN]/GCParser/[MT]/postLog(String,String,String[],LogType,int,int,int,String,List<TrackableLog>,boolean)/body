@@ -10,6 +10,9 @@
   final String logInfo=log.replace("\n","\r\n").trim();
   Log.i("Trying to post log for cache #" + cacheid + " - action: "+ logType+ "; date: "+ year+ "."+ month+ "."+ day+ ", log: "+ logInfo+ "; trackables: "+ (trackables != null ? trackables.size() : "0"));
   final Parameters params=new Parameters("__EVENTTARGET","","__EVENTARGUMENT","","__LASTFOCUS","","ctl00$ContentBody$LogBookPanel1$ddLogType",Integer.toString(logType.id),"ctl00$ContentBody$LogBookPanel1$uxDateVisited",GCLogin.formatGcCustomDate(year,month,day),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged",String.format("%02d",month) + "/" + String.format("%02d",day)+ "/"+ String.format("%04d",year),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month",Integer.toString(month),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day",Integer.toString(day),"ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year",Integer.toString(year),"ctl00$ContentBody$LogBookPanel1$LogButton","Submit Log Entry","ctl00$ContentBody$LogBookPanel1$uxLogInfo",logInfo,"ctl00$ContentBody$LogBookPanel1$btnSubmitLog","Submit Log Entry","ctl00$ContentBody$LogBookPanel1$uxLogCreationSource","Old","ctl00$ContentBody$uxVistOtherListingGC","");
+  if (addToFavorites) {
+    params.put("ctl00$ContentBody$LogBookPanel1$chkAddToFavorites","on");
+  }
   GCLogin.putViewstates(params,viewstates);
   if (trackables != null && !trackables.isEmpty()) {
     final StringBuilder hdnSelected=new StringBuilder();
