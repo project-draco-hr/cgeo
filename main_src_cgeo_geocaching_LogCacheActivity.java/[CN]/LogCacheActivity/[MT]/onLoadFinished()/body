@@ -5,6 +5,7 @@
   }
   trackables.addAll(loggingManager.getTrackables());
   possibleLogTypes=loggingManager.getPossibleLogTypes();
+  premFavPoints=loggingManager.getPremFavoritePoints();
   if (possibleLogTypes.isEmpty()) {
     showErrorLoadingData();
     return;
@@ -18,5 +19,6 @@
   enablePostButton(true);
   initializeTrackablesAction();
   updateTrackablesList();
+  initializeFavoriteCheck();
   showProgress(false);
 }

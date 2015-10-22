@@ -1,6 +1,7 @@
 {
   try {
-    final ImmutablePair<StatusCode,String> postResult=GCParser.postLog(cache.getGeocode(),cache.getCacheId(),viewstates,logType,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackableLogs);
+    final CheckBox fav_check=(CheckBox)activity.findViewById(R.id.favorite_check);
+    final ImmutablePair<StatusCode,String> postResult=GCParser.postLog(cache.getGeocode(),cache.getCacheId(),viewstates,logType,date.get(Calendar.YEAR),(date.get(Calendar.MONTH) + 1),date.get(Calendar.DATE),log,trackableLogs,fav_check.isChecked());
     if (postResult.left == StatusCode.NO_ERROR) {
       if (logType == LogType.TEMP_DISABLE_LISTING) {
         cache.setDisabled(true);
