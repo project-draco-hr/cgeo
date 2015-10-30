@@ -3,7 +3,7 @@
   if (StringUtils.isEmpty(userToken)) {
     return false;
   }
-  final String uri="http://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f="+ Boolean.toString(add);
+  final String uri="https://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f="+ Boolean.toString(add);
   final HttpResponse response=Network.postRequest(uri,null);
   if (response != null && response.getStatusLine().getStatusCode() == 200) {
     Log.i("GCParser.changeFavorite: cache added/removed to/from favorites");

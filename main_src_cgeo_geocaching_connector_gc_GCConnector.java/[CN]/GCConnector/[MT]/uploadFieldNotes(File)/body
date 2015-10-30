@@ -5,7 +5,7 @@
       Log.e("FieldnoteExport.ExportTask upload: Login failed");
     }
   }
-  final String uri="http://www.geocaching.com/my/uploadfieldnotes.aspx";
+  final String uri="https://www.geocaching.com/my/uploadfieldnotes.aspx";
   final String page=GCLogin.getInstance().getRequestLogged(uri,null);
   if (StringUtils.isBlank(page)) {
     Log.e("FieldnoteExport.ExportTask get page: No data from server");
