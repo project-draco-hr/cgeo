@@ -6,7 +6,7 @@
   final ObjectNode jo=new ObjectNode(JsonUtils.factory);
   jo.putObject("dto").put("et",StringUtils.defaultString(cache.getPersonalNote())).put("ut",userToken);
   final String uriSuffix="SetUserCacheNote";
-  final String uriPrefix="http://www.geocaching.com/seek/cache_details.aspx/";
+  final String uriPrefix="https://www.geocaching.com/seek/cache_details.aspx/";
   final HttpResponse response=Network.postJsonRequest(uriPrefix + uriSuffix,jo);
   if (response != null && response.getStatusLine().getStatusCode() == 200) {
     Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");

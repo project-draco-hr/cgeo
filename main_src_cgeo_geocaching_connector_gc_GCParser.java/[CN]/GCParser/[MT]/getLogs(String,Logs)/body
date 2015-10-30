@@ -9,7 +9,7 @@
       if (logType != Logs.ALL) {
         params.add(logType.getParamName(),Boolean.toString(Boolean.TRUE));
       }
-      final HttpResponse response=Network.getRequest("http://www.geocaching.com/seek/geocache.logbook",params);
+      final HttpResponse response=Network.getRequest("https://www.geocaching.com/seek/geocache.logbook",params);
       if (response == null) {
         Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
         return Observable.empty();

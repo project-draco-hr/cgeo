@@ -1,5 +1,5 @@
 {
-  final String uri="http://www.geocaching.com/bookmarks/ignore.aspx?guid=" + cache.getGuid() + "&WptTypeID="+ cache.getType().wptTypeId;
+  final String uri="https://www.geocaching.com/bookmarks/ignore.aspx?guid=" + cache.getGuid() + "&WptTypeID="+ cache.getType().wptTypeId;
   final String page=GCLogin.getInstance().postRequestLogged(uri,null);
   if (StringUtils.isBlank(page)) {
     Log.e("GCParser.ignoreCache: No data from server");

@@ -1,7 +1,7 @@
 {
   if (previousPage != null && previousPage.contains(ENGLISH)) {
     Log.i("Geocaching.com language already set to English");
-    getLoginStatus(Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/")));
+    getLoginStatus(Network.getResponseData(Network.getRequest("https://www.geocaching.com/email/")));
   }
  else {
     final String page=Network.getResponseData(Network.getRequest(LANGUAGE_CHANGE_URI));

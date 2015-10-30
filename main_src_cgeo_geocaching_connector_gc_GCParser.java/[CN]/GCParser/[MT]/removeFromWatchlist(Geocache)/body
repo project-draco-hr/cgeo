@@ -1,5 +1,5 @@
 {
-  final String uri="http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
+  final String uri="https://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
   String page=GCLogin.getInstance().postRequestLogged(uri,null);
   if (StringUtils.isBlank(page)) {
     Log.e("GCParser.removeFromWatchlist: No data from server");
