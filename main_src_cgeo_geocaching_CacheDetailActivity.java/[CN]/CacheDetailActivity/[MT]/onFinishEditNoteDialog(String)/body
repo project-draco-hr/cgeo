@@ -8,9 +8,6 @@
       DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
       return null;
     }
-    @Override protected void onPostExecute(    final Void v){
-      notifyDataSetChanged();
-    }
   }
 .execute();
 }

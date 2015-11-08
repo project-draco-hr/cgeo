@@ -16,22 +16,35 @@
     getArguments().remove(ARGUMENT_INITIAL_NOTE);
   }
   final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
-  builder.setTitle(R.string.cache_personal_note);
   builder.setView(view);
-  builder.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    final DialogInterface dialog,    final int whichButton){
-      ((EditNoteDialogListener)getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
-      dialog.dismiss();
-    }
-  }
-);
-  builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
-    @Override public void onClick(    final DialogInterface dialog,    final int whichButton){
-      dialog.dismiss();
-    }
-  }
-);
   final AlertDialog dialog=builder.create();
+  dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+  final TextView title=ButterKnife.findById(view,R.id.dialog_title_title);
+  if (title != null) {
+    title.setText(R.string.cache_personal_note);
+    title.setVisibility(View.VISIBLE);
+  }
+  final ImageButton cancel=ButterKnife.findById(view,R.id.dialog_title_cancel);
+  if (cancel != null) {
+    cancel.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      final View view){
+        dialog.dismiss();
+      }
+    }
+);
+    cancel.setVisibility(View.VISIBLE);
+  }
+  final ImageButton done=ButterKnife.findById(view,R.id.dialog_title_done);
+  if (done != null) {
+    done.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      final View view){
+        ((EditNoteDialogListener)getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
+        dialog.dismiss();
+      }
+    }
+);
+    done.setVisibility(View.VISIBLE);
+  }
   new Keyboard(activity).showDelayed(mEditText);
   return dialog;
 }
