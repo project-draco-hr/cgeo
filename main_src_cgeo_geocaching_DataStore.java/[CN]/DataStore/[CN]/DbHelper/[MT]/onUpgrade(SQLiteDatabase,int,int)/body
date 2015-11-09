@@ -179,6 +179,14 @@
           Log.e("Failed to upgrade to ver. 68",e);
         }
       }
+      if (oldVersion < 69) {
+        try {
+          db.execSQL("alter table " + dbTableCaches + " add column watchlistCount integer default -1");
+        }
+ catch (        final Exception e) {
+          Log.e("Failed to upgrade to ver. 69",e);
+        }
+      }
     }
     db.setTransactionSuccessful();
   }
