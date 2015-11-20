@@ -1,0 +1,33 @@
+{
+  if (id < 0) {
+    return;
+  }
+  final Bundle extras=new Bundle();
+  extras.putSerializable(BUNDLE_ACTION_KEY,action);
+  if (id == PseudoList.HISTORY_LIST.id) {
+    type=CacheListType.HISTORY;
+    getSupportLoaderManager().destroyLoader(CacheListType.OFFLINE.getLoaderId());
+    currentLoader=(AbstractSearchLoader)getSupportLoaderManager().restartLoader(CacheListType.HISTORY.getLoaderId(),extras,this);
+  }
+ else {
+    if (id == PseudoList.ALL_LIST.id) {
+      listId=id;
+      title=res.getString(R.string.list_all_lists);
+    }
+ else {
+      final StoredList list=DataStore.getList(id);
+      listId=list.id;
+      title=list.title;
+    }
+    type=CacheListType.OFFLINE;
+    getSupportLoaderManager().destroyLoader(CacheListType.HISTORY.getLoaderId());
+    extras.putAll(OfflineGeocacheListLoader.getBundleForList(listId));
+    currentLoader=(OfflineGeocacheListLoader)getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(),extras,this);
+    Settings.saveLastList(listId);
+  }
+  initAdapter();
+  showProgress(true);
+  showFooterLoadingCaches();
+  adapter.setSelectMode(false);
+  invalidateOptionsMenuCompatible();
+}

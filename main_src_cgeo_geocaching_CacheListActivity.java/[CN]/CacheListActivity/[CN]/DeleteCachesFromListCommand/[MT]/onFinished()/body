@@ -2,7 +2,7 @@
   final CacheListActivity activity=activityRef.get();
   if (activity != null) {
     activity.adapter.setSelectMode(false);
-    activity.refreshCurrentList();
+    activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
     activity.replaceCacheListFromSearch();
     activity.getListView().setSelection(lastListPosition);
   }

@@ -2,7 +2,7 @@
   new MoveToListCommand(this,caches,listId){
     @Override protected void onFinished(){
       adapter.setSelectMode(false);
-      refreshCurrentList();
+      refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
     }
   }
 .execute();

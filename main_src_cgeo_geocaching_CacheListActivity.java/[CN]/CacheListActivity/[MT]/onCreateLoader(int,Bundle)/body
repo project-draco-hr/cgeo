@@ -85,6 +85,10 @@ break;
 if (extras != null && StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
 title=extras.getString(Intents.EXTRA_TITLE);
 }
+if (loader != null && extras != null && extras.getSerializable(BUNDLE_ACTION_KEY) != null) {
+final AfterLoadAction action=(AfterLoadAction)extras.getSerializable(BUNDLE_ACTION_KEY);
+loader.setAfterLoadAction(action);
+}
 updateTitle();
 showProgress(true);
 showFooterLoadingCaches();

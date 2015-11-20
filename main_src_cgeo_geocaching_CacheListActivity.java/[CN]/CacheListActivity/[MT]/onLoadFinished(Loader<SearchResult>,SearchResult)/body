@@ -11,4 +11,13 @@
   showProgress(false);
   hideLoading();
   invalidateOptionsMenuCompatible();
+  if (arg0 instanceof AbstractSearchLoader) {
+switch (((AbstractSearchLoader)arg0).getAfterLoadAction()) {
+case CHECK_IF_EMPTY:
+      checkIfEmptyAndRemoveAfterConfirm();
+    break;
+case NO_ACTION:
+default :
+}
+}
 }
