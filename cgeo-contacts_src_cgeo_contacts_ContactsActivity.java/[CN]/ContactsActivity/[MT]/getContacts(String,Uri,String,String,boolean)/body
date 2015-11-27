@@ -1,5 +1,5 @@
 {
-  final String[] projection=new String[]{idColumnName,selectionColumnName};
+  final String[] projection=new String[]{idColumnName,selectionColumnName,ContactsContract.Contacts.DISPLAY_NAME};
   final String selection=selectionColumnName + (like ? " LIKE" : " =") + " ? COLLATE NOCASE";
   final String[] selectionArgs=new String[]{like ? "%" + searchName + "%" : searchName};
   Cursor cursor=null;
@@ -9,7 +9,8 @@
     while (cursor != null && cursor.moveToNext()) {
       final int foundId=cursor.getInt(0);
       final String foundName=cursor.getString(1);
-      result.add(new Pair<>(foundId,foundName));
+      final String displayName=cursor.getString(2);
+      result.add(new Pair<>(foundId,StringUtils.isNotEmpty(displayName) && !StringUtils.equalsIgnoreCase(foundName,displayName) ? foundName + " (" + displayName+ ")" : foundName));
     }
   }
  catch (  final Exception e) {
