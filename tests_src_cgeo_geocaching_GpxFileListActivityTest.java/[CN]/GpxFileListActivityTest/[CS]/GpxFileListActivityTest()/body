@@ -1,3 +1,9 @@
 {
   super(GpxFileListActivity.class);
+  try {
+    Looper.prepare();
+  }
+ catch (  final RuntimeException ignored) {
+  }
+  importGpxActivity=new GpxFileListActivity();
 }
