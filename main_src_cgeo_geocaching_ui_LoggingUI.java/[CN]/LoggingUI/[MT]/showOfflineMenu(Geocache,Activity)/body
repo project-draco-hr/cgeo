@@ -29,6 +29,12 @@ case CLEAR_LOG:
  else {
 cache.logOffline(activity,logTypeEntry.logType);
 }
+if (selectedView != null) {
+final ViewHolder holder=(ViewHolder)selectedView.getTag();
+if (holder != null) {
+  CacheListAdapter.updateViewHolder(holder,cache,res);
+}
+}
 }
 }
 );
