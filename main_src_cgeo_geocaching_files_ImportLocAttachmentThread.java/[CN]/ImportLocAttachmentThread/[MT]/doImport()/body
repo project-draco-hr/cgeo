@@ -7,6 +7,6 @@
     return parser.parse(is,progressHandler);
   }
   finally {
-    is.close();
+    IOUtils.closeQuietly(is);
   }
 }
