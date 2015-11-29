@@ -1,5 +1,5 @@
 {
-  String name=getWaypoint().getName();
+  final String name=getWaypoint().getName();
   assertThat(name).isNotEmpty();
   onView(withId(R.id.name)).check(matches(withText(name)));
   final String note=getWaypoint().getNote();
