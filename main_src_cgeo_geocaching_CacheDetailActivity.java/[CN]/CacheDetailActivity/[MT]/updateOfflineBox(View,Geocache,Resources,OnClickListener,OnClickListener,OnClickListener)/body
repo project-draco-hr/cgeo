@@ -9,16 +9,13 @@
       ago=res.getString(R.string.cache_offline_time_mins_few);
     }
  else     if (diff < 50) {
-      ago=res.getString(R.string.cache_offline_time_about) + " " + diff+ " "+ res.getString(R.string.cache_offline_time_mins);
-    }
- else     if (diff < 90) {
-      ago=res.getString(R.string.cache_offline_time_about) + " " + res.getString(R.string.cache_offline_time_hour);
+      ago=res.getQuantityString(R.plurals.cache_offline_about_time_mins,(int)diff,(int)diff);
     }
  else     if (diff < (48 * 60)) {
-      ago=res.getString(R.string.cache_offline_time_about) + " " + (diff / 60)+ " "+ res.getString(R.string.cache_offline_time_hours);
+      ago=res.getQuantityString(R.plurals.cache_offline_about_time_hours,(int)(diff / 60),(int)(diff / 60));
     }
  else {
-      ago=res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60))+ " "+ res.getString(R.string.cache_offline_time_days);
+      ago=res.getQuantityString(R.plurals.cache_offline_about_time_days,(int)(diff / (24 * 60)),(int)(diff / (24 * 60)));
     }
     offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
     offlineRefresh.setOnClickListener(refreshCacheClickListener);
