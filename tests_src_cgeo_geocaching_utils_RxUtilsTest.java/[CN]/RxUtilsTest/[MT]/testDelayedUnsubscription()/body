@@ -1,0 +1,16 @@
+{
+  final AtomicBoolean unsubscribed=new AtomicBoolean(false);
+  Observable.never().doOnUnsubscribe(new Action0(){
+    @Override public void call(){
+      unsubscribed.set(true);
+    }
+  }
+).lift(new RxUtils.DelayedUnsubscription<Object>(100,TimeUnit.MILLISECONDS)).subscribe().unsubscribe();
+  assertThat(unsubscribed.get()).isFalse();
+  try {
+    Thread.sleep(200);
+  }
+ catch (  final InterruptedException ignored) {
+  }
+  assertThat(unsubscribed.get()).isTrue();
+}

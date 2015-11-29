@@ -1,0 +1,16 @@
+{
+  final Observable<String> fromNull=RxUtils.deferredNullable(new Func0<String>(){
+    @Override public String call(){
+      return null;
+    }
+  }
+);
+  assertThat(fromNull.toBlocking().getIterator().hasNext()).isFalse();
+  final Observable<String> fromNonNull=RxUtils.deferredNullable(new Func0<String>(){
+    @Override public String call(){
+      return "foo";
+    }
+  }
+);
+  assertThat(fromNonNull.toBlocking().single()).isEqualTo("foo");
+}

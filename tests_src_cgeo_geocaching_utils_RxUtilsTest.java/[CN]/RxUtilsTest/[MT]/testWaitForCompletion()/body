@@ -1,0 +1,22 @@
+{
+  final PublishSubject<String> observable=PublishSubject.create();
+  final AtomicBoolean terminated=new AtomicBoolean(false);
+  new Thread(){
+    @Override public void run(){
+      RxUtils.waitForCompletion(observable.toBlocking());
+      terminated.set(true);
+    }
+  }
+.start();
+  observable.onNext("foo");
+  assertThat(terminated.get()).isFalse();
+  observable.onNext("bar");
+  assertThat(terminated.get()).isFalse();
+  observable.onCompleted();
+  try {
+    Thread.sleep(100);
+  }
+ catch (  final InterruptedException ignored) {
+  }
+  assertThat(terminated.get()).isTrue();
+}

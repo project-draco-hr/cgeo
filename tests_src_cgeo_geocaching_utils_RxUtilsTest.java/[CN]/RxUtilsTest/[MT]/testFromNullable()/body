@@ -1,0 +1,6 @@
+{
+  final Observable<String> fromNull=RxUtils.fromNullable(null);
+  assertThat(fromNull.toBlocking().getIterator().hasNext()).isFalse();
+  final Observable<String> fromNonNull=RxUtils.fromNullable("foo");
+  assertThat(fromNonNull.toBlocking().single()).isEqualTo("foo");
+}
