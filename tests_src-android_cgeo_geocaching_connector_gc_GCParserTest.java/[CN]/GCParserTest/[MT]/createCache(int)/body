@@ -1,0 +1,17 @@
+{
+  final MockedCacheAndroid mockedCache=MockedCacheAndroid.MOCKED_CACHES.get(index);
+  final String oldCustomDate=Settings.getGcCustomDate();
+  final SearchResult searchResult;
+  try {
+    Settings.setGcCustomDate(MockedCacheAndroid.getDateFormat());
+    searchResult=GCParser.parseAndSaveCacheFromText(mockedCache.getData(),null);
+  }
+  finally {
+    Settings.setGcCustomDate(oldCustomDate);
+  }
+  assertThat(searchResult).isNotNull();
+  assertThat(searchResult.getCount()).isEqualTo(1);
+  final Geocache cache=searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+  assertThat(cache).isNotNull();
+  return cache;
+}
