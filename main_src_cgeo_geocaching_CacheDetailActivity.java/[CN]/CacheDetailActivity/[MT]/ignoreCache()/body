@@ -1,7 +1,7 @@
 {
   Dialogs.confirm(this,R.string.ignore_confirm_title,R.string.ignore_confirm_message,new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int which){
-      RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+      AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0(){
         @Override public void call(){
           ((IgnoreCapability)ConnectorFactory.getConnector(cache)).ignoreCache(cache);
         }

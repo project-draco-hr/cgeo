@@ -18,7 +18,7 @@
       sensorManager.registerListener(listener,orientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
       subscriber.add(Subscriptions.create(new Action0(){
         @Override public void call(){
-          RxUtils.looperCallbacksWorker.schedule(new Action0(){
+          AndroidRxUtils.looperCallbacksWorker.schedule(new Action0(){
             @Override public void call(){
               Log.d("OrientationProvider: unregistering listener");
               sensorManager.unregisterListener(listener,orientationSensor);
@@ -31,5 +31,5 @@
     }
   }
 );
-  return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
+  return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
 }

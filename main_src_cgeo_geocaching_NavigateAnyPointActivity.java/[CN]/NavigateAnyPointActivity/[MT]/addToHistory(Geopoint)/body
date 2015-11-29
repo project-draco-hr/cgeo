@@ -5,7 +5,7 @@
   final Destination loc=new Destination(coords);
   if (!getHistoryOfSearchedLocations().contains(loc)) {
     getHistoryOfSearchedLocations().add(0,loc);
-    RxUtils.andThenOnUi(Schedulers.io(),new Action0(){
+    AndroidRxUtils.andThenOnUi(Schedulers.io(),new Action0(){
       @Override public void call(){
         DataStore.saveSearchedDestination(loc);
       }

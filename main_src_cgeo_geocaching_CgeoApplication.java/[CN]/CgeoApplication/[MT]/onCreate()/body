@@ -16,5 +16,5 @@
   final Sensors sensors=Sensors.getInstance();
   sensors.setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
   sensors.setupDirectionObservable();
-  sensors.geoDataObservable(true).subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe();
+  sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).first().subscribe();
 }

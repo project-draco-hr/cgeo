@@ -7,7 +7,7 @@
       }
       subscriber.add(Subscriptions.create(new Action0(){
         @Override public void call(){
-          RxUtils.looperCallbacksWorker.schedule(new Action0(){
+          AndroidRxUtils.looperCallbacksWorker.schedule(new Action0(){
             @Override public void call(){
               if (reference.decrementAndGet() == 0) {
                 instance.updateRequest();

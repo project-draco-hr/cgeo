@@ -76,7 +76,7 @@
           return trackableConnector.trackableLogInventory();
         }
       }
-).subscribeOn(RxUtils.networkScheduler);
+).subscribeOn(AndroidRxUtils.networkScheduler);
     }
   }
 ).toList()).subscribe(new Action1<List<TrackableLog>>(){

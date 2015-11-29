@@ -38,7 +38,7 @@
       sensorManager.registerListener(listener,magnetometerSensor,SensorManager.SENSOR_DELAY_NORMAL);
       subscriber.add(Subscriptions.create(new Action0(){
         @Override public void call(){
-          RxUtils.looperCallbacksWorker.schedule(new Action0(){
+          AndroidRxUtils.looperCallbacksWorker.schedule(new Action0(){
             @Override public void call(){
               Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
               sensorManager.unregisterListener(listener,accelerometerSensor);
@@ -52,5 +52,5 @@
     }
   }
 );
-  return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
+  return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
 }

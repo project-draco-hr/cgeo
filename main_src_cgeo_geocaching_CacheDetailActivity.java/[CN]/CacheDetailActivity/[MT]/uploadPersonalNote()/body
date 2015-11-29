@@ -2,7 +2,7 @@
   final SimpleCancellableHandler myHandler=new SimpleCancellableHandler(CacheDetailActivity.this,progress);
   final Message cancelMessage=myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
   progress.show(CacheDetailActivity.this,res.getString(R.string.cache_personal_note_uploading),res.getString(R.string.cache_personal_note_uploading),true,cancelMessage);
-  myHandler.unsubscribeIfCancelled(RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+  myHandler.unsubscribeIfCancelled(AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0(){
     @Override public void call(){
       final IConnector con=ConnectorFactory.getConnector(cache);
       if (con.supportsPersonalNote()) {

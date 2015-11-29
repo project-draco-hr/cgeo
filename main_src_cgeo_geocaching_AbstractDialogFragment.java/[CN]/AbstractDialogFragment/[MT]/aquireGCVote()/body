@@ -10,7 +10,7 @@
       return GCVote.getRating(cache.getGuid(),geocode);
     }
   }
-)).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<GCVoteRating>(){
+)).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<GCVoteRating>(){
     @Override public void call(    final GCVoteRating rating){
       cache.setRating(rating.getRating());
       cache.setVotes(rating.getVotes());

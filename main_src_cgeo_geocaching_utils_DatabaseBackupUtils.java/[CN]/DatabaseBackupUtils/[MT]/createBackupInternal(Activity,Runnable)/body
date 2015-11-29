@@ -1,6 +1,6 @@
 {
   final ProgressDialog dialog=ProgressDialog.show(activity,activity.getString(R.string.init_backup),activity.getString(R.string.init_backup_running),true,false);
-  RxUtils.andThenOnUi(Schedulers.io(),new Func0<String>(){
+  AndroidRxUtils.andThenOnUi(Schedulers.io(),new Func0<String>(){
     @Override public String call(){
       return DataStore.backupDatabaseInternal();
     }

@@ -7,7 +7,7 @@
         return Observable.just(OkapiClient.getGeocodeByUrl(OCApiConnector.this,url));
       }
     }
-).subscribeOn(RxUtils.networkScheduler).toBlocking().first();
+).subscribeOn(AndroidRxUtils.networkScheduler).toBlocking().first();
     if (geocode != null && canHandle(geocode)) {
       return geocode;
     }

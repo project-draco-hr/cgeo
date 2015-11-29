@@ -6,7 +6,7 @@
       final Resources res=getResources();
       final SettingsActivity activity=SettingsActivity.this;
       final ProgressDialog dialog=ProgressDialog.show(activity,res.getString(R.string.init_maintenance),res.getString(R.string.init_maintenance_directories),true,false);
-      RxUtils.andThenOnUi(Schedulers.io(),new Action0(){
+      AndroidRxUtils.andThenOnUi(Schedulers.io(),new Action0(){
         @Override public void call(){
           DataStore.removeObsoleteCacheDirectories();
         }

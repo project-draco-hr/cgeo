@@ -42,7 +42,7 @@ subscriber.onNext(NO_GPS);
 geoManager.addGpsStatusListener(listener);
 subscriber.add(Subscriptions.create(new Action0(){
 @Override public void call(){
-RxUtils.looperCallbacksWorker.schedule(new Action0(){
+AndroidRxUtils.looperCallbacksWorker.schedule(new Action0(){
 @Override public void call(){
 geoManager.removeGpsStatusListener(listener);
 }
@@ -54,5 +54,5 @@ geoManager.removeGpsStatusListener(listener);
 }
 }
 );
-return observable.subscribeOn(RxUtils.looperCallbacksScheduler);
+return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler);
 }

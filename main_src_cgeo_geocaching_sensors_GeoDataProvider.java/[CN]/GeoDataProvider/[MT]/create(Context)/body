@@ -24,7 +24,7 @@
       }
       subscriber.add(Subscriptions.create(new Action0(){
         @Override public void call(){
-          RxUtils.looperCallbacksWorker.schedule(new Action0(){
+          AndroidRxUtils.looperCallbacksWorker.schedule(new Action0(){
             @Override public void call(){
               geoManager.removeUpdates(networkListener);
               geoManager.removeUpdates(gpsListener);
@@ -37,5 +37,5 @@
     }
   }
 );
-  return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500,TimeUnit.MILLISECONDS)).onBackpressureLatest();
+  return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500,TimeUnit.MILLISECONDS)).onBackpressureLatest();
 }

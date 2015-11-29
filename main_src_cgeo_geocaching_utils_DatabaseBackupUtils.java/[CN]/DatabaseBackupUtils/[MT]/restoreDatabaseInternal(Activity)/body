@@ -2,7 +2,7 @@
   final Resources res=activity.getResources();
   final ProgressDialog dialog=ProgressDialog.show(activity,res.getString(R.string.init_backup_restore),res.getString(R.string.init_restore_running),true,false);
   final AtomicBoolean restoreSuccessful=new AtomicBoolean(false);
-  RxUtils.andThenOnUi(Schedulers.io(),new Action0(){
+  AndroidRxUtils.andThenOnUi(Schedulers.io(),new Action0(){
     @Override public void call(){
       restoreSuccessful.set(DataStore.restoreDatabaseInternal());
     }

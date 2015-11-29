@@ -5,7 +5,7 @@
     changeTokensDialog.setMessage(getAuthDialogWait());
   }
   changeTokensDialog.show();
-  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+  AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0(){
     @Override public void call(){
       changeToken(verifier);
     }

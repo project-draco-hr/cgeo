@@ -88,7 +88,7 @@
   requireGeodata=pageToOpen == 1;
   final String realGeocode=geocode;
   final String realGuid=guid;
-  RxUtils.networkScheduler.createWorker().schedule(new Action0(){
+  AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0(){
     @Override public void call(){
       search=Geocache.searchByGeocode(realGeocode,StringUtils.isBlank(realGeocode) ? realGuid : null,0,false,loadCacheHandler);
       loadCacheHandler.sendMessage(Message.obtain());
@@ -103,7 +103,7 @@
           return Observable.from(trackableConnector.searchTrackables(geocode));
         }
       }
-).subscribeOn(RxUtils.networkScheduler);
+).subscribeOn(AndroidRxUtils.networkScheduler);
     }
   }
 ).toList()).subscribe(new Action1<List<Trackable>>(){
