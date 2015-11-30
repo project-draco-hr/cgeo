@@ -1,5 +1,5 @@
 {
   final Collection<IConnector> connectors=ConnectorFactory.getConnectors();
   assertThat(connectors).isNotNull();
-  assertThat(connectors.isEmpty()).isFalse();
+  assertThat(connectors).isNotEmpty();
 }
