@@ -2,9 +2,12 @@
   new StoredList.UserInterface(getContext()).promptForListSelection(R.string.cache_menu_move_list,new Action1<Integer>(){
     @Override public void call(    final Integer newListId){
       MoveToListCommand.this.newListId=newListId;
-      final String newListName=StoredList.getListById(newListId).getTitle();
-      setProgressMessage(getContext().getString(R.string.command_move_caches_progress,newListName));
-      MoveToListCommand.super.execute();
+      final AbstractList list=AbstractList.getListById(newListId);
+      if (list != null) {
+        final String newListName=list.getTitle();
+        setProgressMessage(getContext().getString(R.string.command_move_caches_progress,newListName));
+        MoveToListCommand.super.execute();
+      }
     }
   }
 ,true,currentListId);
