@@ -4,8 +4,6 @@
   final ImportLocFileThread importThread=new ImportLocFileThread(oc5952,listId,importStepHandler,progressHandler);
   runImportThread(importThread);
   assertImportStepMessages(GPXImporter.IMPORT_STEP_START,GPXImporter.IMPORT_STEP_READ_FILE,GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,GPXImporter.IMPORT_STEP_FINISHED);
-  final SearchResult search=(SearchResult)importStepHandler.messages.get(3).obj;
-  assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList("OC5952"));
   final Geocache cache=DataStore.loadCache("OC5952",LoadFlags.LOAD_CACHE_OR_DB);
   assertCacheProperties(cache);
 }
