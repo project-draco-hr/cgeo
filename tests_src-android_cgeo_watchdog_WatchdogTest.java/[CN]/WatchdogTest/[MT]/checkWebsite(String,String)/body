@@ -1,0 +1,5 @@
+{
+  final String url="http://" + host + "/";
+  final String page=Network.getResponseData(Network.getRequest(url));
+  assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
+}

@@ -1,0 +1,7 @@
+{
+  for (  final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+    if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+      checkWebsite("trackable website " + trackableConnector.getHost(),trackableConnector.getHost());
+    }
+  }
+}
