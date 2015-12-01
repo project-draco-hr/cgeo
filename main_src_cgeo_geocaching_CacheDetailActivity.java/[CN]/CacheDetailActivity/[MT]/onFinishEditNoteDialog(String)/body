@@ -1,13 +1,17 @@
 {
+  cache.setPersonalNote(note);
+  cache.parseWaypointsFromNote();
   final TextView personalNoteView=ButterKnife.findById(this,R.id.personalnote);
-  setPersonalNote(personalNoteView,note);
-  new AsyncTask<Void,Void,Void>(){
-    @Override protected Void doInBackground(    final Void... params){
-      cache.setPersonalNote(note);
-      cache.parseWaypointsFromNote();
+  if (personalNoteView != null) {
+    setPersonalNote(personalNoteView,note);
+  }
+ else {
+    reinitializeViewPager();
+  }
+  Schedulers.io().createWorker().schedule(new Action0(){
+    @Override public void call(){
       DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-      return null;
     }
   }
-.execute();
+);
 }
