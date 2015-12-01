@@ -1,23 +1,24 @@
 {
   super.onResume();
   resumeSubscription=Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR),startTimer());
-  if (!CollectionUtils.isEmpty(dirtyCaches)) {
-    new AsyncTask<Void,Void,Void>(){
-      @Override public Void doInBackground(      final Void... params){
-        for (        final String geocode : dirtyCaches) {
+  final List<String> toRefresh;
+synchronized (dirtyCaches) {
+    toRefresh=new ArrayList<>(dirtyCaches);
+    dirtyCaches.clear();
+  }
+  if (!toRefresh.isEmpty()) {
+    AndroidRxUtils.refreshScheduler.createWorker().schedule(new Action0(){
+      @Override public void call(){
+        for (        final String geocode : toRefresh) {
           final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_WAYPOINTS);
           if (cache != null) {
             caches.remove(cache);
             caches.add(cache);
           }
         }
-        return null;
-      }
-      @Override public void onPostExecute(      final Void result){
-        dirtyCaches.clear();
         displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
       }
     }
-.execute();
+);
   }
 }

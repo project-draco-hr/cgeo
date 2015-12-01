@@ -1,3 +1,5 @@
 {
-  dirtyCaches.add(geocode);
+synchronized (dirtyCaches) {
+    dirtyCaches.add(geocode);
+  }
 }
