@@ -10,12 +10,12 @@
     if (moved || !viewportNow.equals(previousViewport)) {
       map.updateMapTitle();
     }
-    previousZoom=zoomNow;
     if (moved) {
       map.markersInvalidated=false;
       final long currentTime=System.currentTimeMillis();
       if (1000 < (currentTime - map.loadThreadRun)) {
         previousViewport=viewportNow;
+        previousZoom=zoomNow;
         loadExecutor.execute(new LoadRunnable(map));
       }
     }
