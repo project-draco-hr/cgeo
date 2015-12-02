@@ -1,7 +1,0 @@
-{
-  final String page=Network.getResponseData(Network.getRequest(getUrl(geocode)));
-  if (page == null) {
-    return null;
-  }
-  return SwaggieParser.parse(page);
-}
