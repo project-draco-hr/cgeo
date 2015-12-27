@@ -1,7 +1,10 @@
 {
+  if (StringUtils.isBlank(cK)) {
+    throw new IllegalStateException("empty OKAPI OAuth token for host " + getHost() + ". fix your keys.xml");
+  }
   final String rotCK=CryptUtils.rot13(cK);
   if (StringUtils.startsWith(rotCK,"${")) {
-    throw new IllegalStateException("invalid OKAPI OAuth token " + rotCK);
+    throw new IllegalStateException("invalid OKAPI OAuth token '" + rotCK + "' for host "+ getHost()+ ". fix your keys.xml");
   }
   params.put(CryptUtils.rot13("pbafhzre_xrl"),rotCK);
 }
