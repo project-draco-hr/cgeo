@@ -32,7 +32,7 @@
     DataStore.removeList(listId2);
   }
   finally {
-    final Set<String> geocodes=new HashSet<String>();
+    final Set<String> geocodes=new HashSet<>();
     geocodes.add(cache1.getGeocode());
     geocodes.add(cache2.getGeocode());
     DataStore.removeCaches(geocodes,LoadFlags.REMOVE_ALL);
