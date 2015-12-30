@@ -1,8 +1,5 @@
 {
   try {
-    if (targetView.getSelectionStart() != -1 || targetView.getSelectionEnd() != -1) {
-      return;
-    }
     final CharSequence text=targetView.getText();
     if (text instanceof Spannable) {
       targetView.setText(CryptUtils.rot13((Spannable)text));

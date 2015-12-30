@@ -5,11 +5,16 @@
     addWarning(unknownTagsHandler,description);
     if (StringUtils.isNotBlank(descriptionString)) {
       try {
-        descriptionView.setText(description,TextView.BufferType.SPANNABLE);
+        if (descriptionView.getText().length() == 0) {
+          descriptionView.setText(description,TextView.BufferType.SPANNABLE);
+        }
+ else {
+          descriptionView.append(description);
+        }
       }
  catch (      final Exception e) {
         Log.e("Android bug setting text: ",e);
-        descriptionView.setText(description.toString());
+        descriptionView.append(description.toString());
       }
       descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
       fixTextColor(descriptionString,descriptionView);
