@@ -18,8 +18,8 @@
       return false;
     }
     final IWaypoint coordinate=item.getCoord();
-    final String coordType=coordinate.getCoordType();
-    if (StringUtils.equalsIgnoreCase(coordType,"cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
+    final CoordinatesType coordType=coordinate.getCoordType();
+    if (coordType == CoordinatesType.CACHE && StringUtils.isNotBlank(coordinate.getGeocode())) {
       final Geocache cache=DataStore.loadCache(coordinate.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
       if (cache != null) {
         final RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache);
@@ -32,7 +32,7 @@
       progress.dismiss();
       return false;
     }
-    if (StringUtils.equalsIgnoreCase(coordType,"waypoint") && coordinate.getId() >= 0) {
+    if (coordType == CoordinatesType.WAYPOINT && coordinate.getId() >= 0) {
       CGeoMap.markCacheAsDirty(coordinate.getGeocode());
       WaypointPopup.startActivity(context,coordinate.getId(),coordinate.getGeocode());
     }

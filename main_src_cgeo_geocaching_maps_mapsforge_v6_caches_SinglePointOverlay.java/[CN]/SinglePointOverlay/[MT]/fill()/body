@@ -1,0 +1,14 @@
+{
+  try {
+    showProgress();
+    clearLayers();
+    final Waypoint waypoint=new Waypoint("",type,false);
+    waypoint.setCoords(coords);
+    addItem(waypoint);
+    addLayers();
+    repaint();
+  }
+  finally {
+    hideProgress();
+  }
+}

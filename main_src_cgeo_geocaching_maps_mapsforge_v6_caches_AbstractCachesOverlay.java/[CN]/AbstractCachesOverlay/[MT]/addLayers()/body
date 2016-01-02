@@ -1,0 +1,5 @@
+{
+  final Layers layers=this.mapView.getLayerManager().getLayers();
+  final int index=layers.indexOf(anchorLayer) + 1;
+  layers.addAll(index,layerList.getAsLayers());
+}

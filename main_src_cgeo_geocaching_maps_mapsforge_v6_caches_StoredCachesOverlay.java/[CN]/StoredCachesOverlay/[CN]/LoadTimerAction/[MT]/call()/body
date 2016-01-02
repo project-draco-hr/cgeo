@@ -1,0 +1,23 @@
+{
+  final StoredCachesOverlay overlay=overlayRef.get();
+  if (overlay == null) {
+    return;
+  }
+  try {
+    final Viewport viewportNow=overlay.getViewport();
+    final int zoomNow=overlay.getMapZoomLevel();
+    final boolean moved=(previousViewport == null) || zoomNow != previousZoom || (mapMoved(previousViewport,viewportNow) || !previousViewport.includes(viewportNow));
+    if (moved || !viewportNow.equals(previousViewport)) {
+    }
+    previousZoom=zoomNow;
+    if (moved) {
+      previousViewport=viewportNow;
+      overlay.load();
+    }
+  }
+ catch (  final Exception e) {
+    Log.w("CGeoMap.startLoadtimer.start",e);
+  }
+ finally {
+  }
+}

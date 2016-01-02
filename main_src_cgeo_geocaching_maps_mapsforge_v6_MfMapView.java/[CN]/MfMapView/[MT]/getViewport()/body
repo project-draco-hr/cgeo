@@ -1,0 +1,4 @@
+{
+  final LatLong center=getModel().mapViewPosition.getCenter();
+  return new Viewport(new Geopoint(center.latitude,center.longitude),getLatitudeSpan(),getLongitudeSpan());
+}

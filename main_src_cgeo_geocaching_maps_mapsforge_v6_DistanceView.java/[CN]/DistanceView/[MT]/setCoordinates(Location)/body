@@ -1,0 +1,8 @@
+{
+  if (destinationCoords == null || coordinatesIn == null) {
+    return;
+  }
+  final Geopoint currentCoords=new Geopoint(coordinatesIn);
+  final float distance=currentCoords.distanceTo(destinationCoords);
+  distanceView.setText(Units.getDistanceFromKilometers(distance));
+}

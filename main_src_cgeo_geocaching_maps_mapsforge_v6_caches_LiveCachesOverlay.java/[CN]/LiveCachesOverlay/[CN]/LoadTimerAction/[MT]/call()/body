@@ -1,0 +1,29 @@
+{
+  final LiveCachesOverlay overlay=overlayRef.get();
+  if (overlay == null || overlay.downloading) {
+    return;
+  }
+  try {
+    final Viewport viewportNow=overlay.getViewport();
+    final int zoomNow=overlay.getMapZoomLevel();
+    final boolean moved=(previousViewport == null) || zoomNow != previousZoom || (mapMoved(previousViewport,viewportNow) || !previousViewport.includes(viewportNow));
+    if (moved || !viewportNow.equals(previousViewport)) {
+    }
+    previousZoom=zoomNow;
+    if (moved) {
+      final long currentTime=System.currentTimeMillis();
+      if (1000 < (currentTime - overlay.loadThreadRun)) {
+        overlay.downloading=true;
+        previousViewport=viewportNow;
+        overlay.download();
+        overlay.downloading=false;
+      }
+    }
+  }
+ catch (  final Exception e) {
+    Log.w("CGeoMap.startLoadtimer.start",e);
+  }
+ finally {
+    overlay.downloading=false;
+  }
+}

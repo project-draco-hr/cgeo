@@ -1,0 +1,10 @@
+{
+  final String subtitle=calculateSubtitle();
+  if (StringUtils.isEmpty(subtitle)) {
+    return;
+  }
+  ActionBar actionBar=getSupportActionBar();
+  if (actionBar != null) {
+    actionBar.setSubtitle(subtitle);
+  }
+}

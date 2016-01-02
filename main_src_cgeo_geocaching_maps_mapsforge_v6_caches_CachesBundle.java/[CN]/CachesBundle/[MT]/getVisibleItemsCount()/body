@@ -1,0 +1,13 @@
+{
+  int result=0;
+  if (this.baseOverlay != null) {
+    result+=this.baseOverlay.getVisibleItemsCount();
+  }
+  if (this.storedOverlay != null) {
+    result+=this.storedOverlay.getVisibleItemsCount();
+  }
+  if (this.liveOverlay != null) {
+    result+=this.liveOverlay.getVisibleItemsCount();
+  }
+  return result;
+}

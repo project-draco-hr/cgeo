@@ -1,0 +1,56 @@
+{
+  super.onStart();
+  if (mapStateIntent != null) {
+    this.mapView.getModel().mapViewPosition.setCenter(mapStateIntent.getCenter());
+    this.mapView.getModel().mapViewPosition.setZoomLevel((byte)mapStateIntent.getZoomLevel());
+  }
+ else   if (searchIntent != null) {
+    final Viewport viewport=DataStore.getBounds(searchIntent.getGeocodes());
+    if (viewport != null) {
+      mapView.zoomToViewport(viewport);
+    }
+  }
+ else   if (StringUtils.isNotEmpty(geocodeIntent)) {
+    final Viewport viewport=DataStore.getBounds(geocodeIntent);
+    if (viewport != null) {
+      mapView.zoomToViewport(viewport);
+    }
+  }
+ else   if (coordsIntent != null) {
+    mapView.zoomToViewport(new Viewport(coordsIntent,0,0));
+  }
+ else {
+    mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(),0,0));
+  }
+  this.tileRendererLayer=new TileRendererLayer(tileCache,new MapFile(NewMap.getMapFile()),this.mapView.getModel().mapViewPosition,false,true,AndroidGraphicFactory.INSTANCE);
+  this.setMapTheme();
+  this.mapView.getLayerManager().getLayers().add(this.tileRendererLayer);
+  this.historyLayer=new HistoryLayer(trailHistory);
+  this.mapView.getLayerManager().getLayers().add(this.historyLayer);
+  Geopoint navTarget=this.coordsIntent;
+  if (navTarget == null && StringUtils.isNotEmpty(this.geocodeIntent)) {
+    final Viewport bounds=DataStore.getBounds(this.geocodeIntent);
+    if (bounds != null) {
+      navTarget=bounds.center;
+    }
+  }
+  this.navigationLayer=new NavigationLayer(navTarget);
+  this.mapView.getLayerManager().getLayers().add(this.navigationLayer);
+  TapHandlerLayer tapHandlerLayer=new TapHandlerLayer(this.mapHandlers.getTapHandler());
+  this.mapView.getLayerManager().getLayers().add(tapHandlerLayer);
+  if (this.searchIntent != null) {
+    this.caches=new CachesBundle(this.searchIntent,this.mapView,this.mapHandlers);
+  }
+ else   if (StringUtils.isNotEmpty(this.geocodeIntent)) {
+    this.caches=new CachesBundle(this.geocodeIntent,this.mapView,this.mapHandlers);
+  }
+ else   if (this.coordsIntent != null) {
+    this.caches=new CachesBundle(coordsIntent,waypointTypeIntent,this.mapView,this.mapHandlers);
+  }
+ else   caches=new CachesBundle(this.mapView,this.mapHandlers);
+  caches.handleLiveLayers(isLiveEnabled);
+  this.positionLayer=new PositionLayer();
+  this.mapView.getLayerManager().getLayers().add(positionLayer);
+  this.distanceView=new DistanceView(navTarget,(TextView)findViewById(R.id.distance));
+  this.resumeSubscription=Subscriptions.from(this.geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
+}

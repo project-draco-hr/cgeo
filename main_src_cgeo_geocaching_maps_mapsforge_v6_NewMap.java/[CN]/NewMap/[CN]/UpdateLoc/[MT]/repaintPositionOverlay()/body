@@ -1,0 +1,29 @@
+{
+  final long currentTimeMillis=System.currentTimeMillis();
+  if (currentTimeMillis > timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL) {
+    timeLastPositionOverlayCalculation=currentTimeMillis;
+    try {
+      final NewMap map=mapRef.get();
+      if (map != null) {
+        final boolean needsRepaintForDistanceOrAccuracy=needsRepaintForDistanceOrAccuracy();
+        final boolean needsRepaintForHeading=needsRepaintForHeading();
+        if (needsRepaintForDistanceOrAccuracy) {
+          if (NewMap.followMyLocation) {
+            map.centerMap(new Geopoint(currentLocation));
+          }
+        }
+        if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
+          map.historyLayer.setCoordinates(currentLocation);
+          map.navigationLayer.setCoordinates(currentLocation);
+          map.distanceView.setCoordinates(currentLocation);
+          map.positionLayer.setCoordinates(currentLocation);
+          map.positionLayer.setHeading(currentHeading);
+          map.positionLayer.requestRedraw();
+        }
+      }
+    }
+ catch (    final RuntimeException e) {
+      Log.w("Failed to update location",e);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  try {
+    showProgress();
+    final SearchResult searchResult=DataStore.loadCachedInViewport(getViewport(),Settings.getCacheType());
+    if (Settings.isGCConnectorActive()) {
+      if (tokens == null) {
+        tokens=GCLogin.getInstance().getMapTokens();
+        if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
+          tokens=null;
+        }
+      }
+    }
+    searchResult.addSearchResult(ConnectorFactory.searchByViewport(getViewport().resize(1.2),tokens));
+    final Set<Geocache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    filter(result);
+    final Set<String> filteredCodes=searchResult.getFilteredGeocodes();
+    Log.d("Filtering out " + filteredCodes.size() + " caches: "+ filteredCodes.toString());
+    DataStore.removeCaches(filteredCodes,EnumSet.of(RemoveFlag.CACHE));
+    Log.d(String.format("Live caches found: %d",result.size()));
+    fill(result);
+  }
+  finally {
+    hideProgress();
+  }
+}

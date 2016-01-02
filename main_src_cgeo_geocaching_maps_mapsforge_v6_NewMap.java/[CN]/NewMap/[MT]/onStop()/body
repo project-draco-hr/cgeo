@@ -1,0 +1,15 @@
+{
+  this.resumeSubscription.unsubscribe();
+  this.caches.onDestroy();
+  this.caches=null;
+  this.mapView.getLayerManager().getLayers().remove(this.positionLayer);
+  this.positionLayer=null;
+  this.mapView.getLayerManager().getLayers().remove(this.navigationLayer);
+  this.navigationLayer=null;
+  this.mapView.getLayerManager().getLayers().remove(this.historyLayer);
+  this.historyLayer=null;
+  this.mapView.getLayerManager().getLayers().remove(this.tileRendererLayer);
+  this.tileRendererLayer.onDestroy();
+  this.tileRendererLayer=null;
+  super.onStop();
+}

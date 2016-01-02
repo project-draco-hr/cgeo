@@ -1,0 +1,28 @@
+{
+  try {
+    if (items.isEmpty()) {
+      return;
+    }
+    if (items.size() > 1) {
+      final ListAdapter adapter=new ArrayAdapter<GeoitemRef>(this,android.R.layout.select_dialog_item,android.R.id.text1,items){
+        @Override public View getView(        int position,        View convertView,        ViewGroup parent){
+          View v=super.getView(position,convertView,parent);
+          TextView tv=(TextView)v.findViewById(android.R.id.text1);
+          tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getMarkerId(),0,0,0);
+          int dp5=(int)(5 * getResources().getDisplayMetrics().density + 0.5f);
+          tv.setCompoundDrawablePadding(dp5);
+          return v;
+        }
+      }
+;
+      new AlertDialog.Builder(this).setTitle("Select an item").setAdapter(adapter,new SelectionClickListener(items)).show();
+    }
+ else {
+      showPopup(items.get(0));
+    }
+  }
+ catch (  final NotFoundException e) {
+    Log.e("NewMap.showPopup",e);
+  }
+  return;
+}

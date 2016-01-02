@@ -1,0 +1,9 @@
+{
+  if (this == o) {
+    return true;
+  }
+  if (!(o instanceof GeoitemRef)) {
+    return false;
+  }
+  return (StringUtils.equalsIgnoreCase(this.itemCode,((GeoitemRef)o).itemCode));
+}

@@ -1,0 +1,33 @@
+{
+  if (coordinates == null) {
+    return;
+  }
+  if (historyLine == null) {
+    historyLine=AndroidGraphicFactory.INSTANCE.createPaint();
+    historyLine.setStrokeWidth(3.0f);
+    historyLine.setColor(0xFFFFFFFF);
+  }
+  if (historyLineShadow == null) {
+    historyLineShadow=AndroidGraphicFactory.INSTANCE.createPaint();
+    historyLineShadow.setStrokeWidth(7.0f);
+    historyLineShadow.setColor(0x66000000);
+  }
+  positionHistory.rememberTrailPosition(coordinates);
+  if (Settings.isMapTrail()) {
+    final ArrayList<Location> paintHistory=new ArrayList<>(positionHistory.getHistory());
+    paintHistory.add(coordinates);
+    final int size=paintHistory.size();
+    if (size > 1) {
+      final long mapSize=MercatorProjection.getMapSize(zoomLevel,this.displayModel.getTileSize());
+      final Location prev=paintHistory.get(0);
+      Point pointPrevious=MercatorProjection.getPixelRelative(new LatLong(prev.getLatitude(),prev.getLongitude()),mapSize,topLeftPoint);
+      for (int cnt=1; cnt < size; cnt++) {
+        final Location now=paintHistory.get(cnt);
+        final Point pointNow=MercatorProjection.getPixelRelative(new LatLong(now.getLatitude(),now.getLongitude()),mapSize,topLeftPoint);
+        canvas.drawLine((int)pointPrevious.x,(int)pointPrevious.y,(int)pointNow.x,(int)pointNow.y,historyLineShadow);
+        canvas.drawLine((int)pointPrevious.x,(int)pointPrevious.y,(int)pointNow.x,(int)pointNow.y,historyLine);
+        pointPrevious=pointNow;
+      }
+    }
+  }
+}

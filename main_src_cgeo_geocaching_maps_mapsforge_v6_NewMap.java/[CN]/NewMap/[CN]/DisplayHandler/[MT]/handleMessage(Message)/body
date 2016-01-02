@@ -1,0 +1,18 @@
+{
+  final int what=msg.what;
+  final NewMap map=mapRef.get();
+  if (map == null) {
+    return;
+  }
+switch (what) {
+case UPDATE_TITLE:
+    map.setTitle();
+  map.setSubtitle();
+break;
+case INVALIDATE_MAP:
+map.mapView.repaint();
+break;
+default :
+break;
+}
+}

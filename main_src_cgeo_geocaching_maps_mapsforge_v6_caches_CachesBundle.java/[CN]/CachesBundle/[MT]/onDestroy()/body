@@ -1,0 +1,18 @@
+{
+  if (this.baseOverlay != null) {
+    this.baseOverlay.onDestroy();
+    this.baseOverlay=null;
+  }
+  if (this.storedOverlay != null) {
+    this.storedOverlay.onDestroy();
+    this.storedOverlay=null;
+  }
+  if (this.liveOverlay != null) {
+    this.liveOverlay.onDestroy();
+    this.liveOverlay=null;
+  }
+  for (  final SeparatorLayer layer : this.separators) {
+    this.mapView.getLayerManager().getLayers().remove(layer);
+  }
+  this.separators.clear();
+}

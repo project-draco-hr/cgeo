@@ -1,0 +1,11 @@
+{
+  super(overlayId,geoEntries,mapView,anchorLayer,mapHandlers);
+  this.coords=coords;
+  this.type=type;
+  AndroidRxUtils.computationScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
+      fill();
+    }
+  }
+);
+}

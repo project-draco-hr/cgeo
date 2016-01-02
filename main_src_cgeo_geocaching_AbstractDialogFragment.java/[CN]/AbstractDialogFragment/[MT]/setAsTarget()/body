@@ -1,0 +1,7 @@
+{
+  final Activity activity=getActivity();
+  final Intent result=new Intent();
+  result.putExtra(Intents.EXTRA_COORDS,getCoordinates());
+  activity.setResult(RESULT_CODE_SET_TARGET,result);
+  activity.finish();
+}

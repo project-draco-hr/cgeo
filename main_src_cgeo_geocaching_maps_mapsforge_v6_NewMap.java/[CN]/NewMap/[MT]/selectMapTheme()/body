@@ -1,0 +1,37 @@
+{
+  final File[] themeFiles=Settings.getMapThemeFiles();
+  String currentTheme=StringUtils.EMPTY;
+  final String currentThemePath=Settings.getCustomRenderThemeFilePath();
+  if (StringUtils.isNotEmpty(currentThemePath)) {
+    final File currentThemeFile=new File(currentThemePath);
+    currentTheme=currentThemeFile.getName();
+  }
+  final List<String> names=new ArrayList<>();
+  names.add(res.getString(R.string.map_theme_builtin));
+  int currentItem=0;
+  for (  final File file : themeFiles) {
+    if (currentTheme.equalsIgnoreCase(file.getName())) {
+      currentItem=names.size();
+    }
+    names.add(file.getName());
+  }
+  final int selectedItem=currentItem;
+  final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+  builder.setTitle(R.string.map_theme_select);
+  builder.setSingleChoiceItems(names.toArray(new String[names.size()]),selectedItem,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    final DialogInterface dialog,    final int newItem){
+      if (newItem != selectedItem) {
+        if (newItem > 0) {
+          Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
+        }
+ else {
+          Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
+        }
+        setMapTheme();
+      }
+      dialog.cancel();
+    }
+  }
+);
+  builder.show();
+}

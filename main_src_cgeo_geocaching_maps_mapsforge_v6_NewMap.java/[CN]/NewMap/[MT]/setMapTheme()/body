@@ -1,0 +1,17 @@
+{
+  final String themePath=Settings.getCustomRenderThemeFilePath();
+  if (StringUtils.isEmpty(themePath)) {
+    tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+  }
+ else {
+    try {
+      tileRendererLayer.setXmlRenderTheme(new ExternalRenderTheme(new File(themePath)));
+    }
+ catch (    final FileNotFoundException e) {
+      Log.w("Failed to set render theme",e);
+      tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+    }
+  }
+  tileCache.destroy();
+  tileRendererLayer.requestRedraw();
+}

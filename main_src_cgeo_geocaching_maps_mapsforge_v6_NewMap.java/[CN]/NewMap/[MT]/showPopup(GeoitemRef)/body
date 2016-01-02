@@ -1,0 +1,28 @@
+{
+  try {
+    if (item == null || StringUtils.isEmpty(item.getGeocode())) {
+      return;
+    }
+    if (item.getType() == CoordinatesType.CACHE) {
+      final Geocache cache=DataStore.loadCache(item.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
+      if (cache != null) {
+        final RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache,this);
+        if (!requestDetailsThread.requestRequired()) {
+        }
+        requestDetailsThread.start();
+        return;
+      }
+      return;
+    }
+    if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
+      WaypointPopup.startActivityAllowTarget(this,item.getId(),item.getGeocode());
+    }
+ else {
+      return;
+    }
+  }
+ catch (  final NotFoundException e) {
+    Log.e("NewMap.showPopup",e);
+  }
+  return;
+}

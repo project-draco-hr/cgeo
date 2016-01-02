@@ -1,0 +1,12 @@
+{
+  try {
+    showProgress();
+    final SearchResult searchResult=new SearchResult(DataStore.loadCachedInViewport(getViewport(),Settings.getCacheType()));
+    final Set<Geocache> cachesFromSearchResult=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+    filter(cachesFromSearchResult);
+    fill(cachesFromSearchResult);
+  }
+  finally {
+    hideProgress();
+  }
+}

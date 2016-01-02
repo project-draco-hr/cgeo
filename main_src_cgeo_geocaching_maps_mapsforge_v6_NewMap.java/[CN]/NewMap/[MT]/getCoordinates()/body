@@ -1,0 +1,7 @@
+{
+  final LatLong center=mapView.getModel().mapViewPosition.getCenter();
+  final Location loc=new Location("newmap");
+  loc.setLatitude(center.latitude);
+  loc.setLongitude(center.longitude);
+  return loc;
+}

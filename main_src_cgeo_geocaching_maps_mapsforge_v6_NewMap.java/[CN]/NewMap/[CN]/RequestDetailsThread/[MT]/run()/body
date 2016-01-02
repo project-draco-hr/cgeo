@@ -1,0 +1,10 @@
+{
+  final NewMap map=this.map.get();
+  if (map == null) {
+    return;
+  }
+  if (requestRequired()) {
+    GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+  }
+  CachePopup.startActivityAllowTarget(map,cache.getGeocode());
+}

@@ -1,0 +1,9 @@
+{
+  final ArrayList<Layer> result=new ArrayList<>();
+  for (  final String code : newCodes) {
+    if (geoitems.containsKey(code)) {
+      result.add(geoitems.get(code));
+    }
+  }
+  return result;
+}

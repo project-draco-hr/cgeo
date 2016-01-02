@@ -13,6 +13,22 @@
     }
   }
 );
+  final View setAsTargetView=v.findViewById(R.id.setAsTarget);
+  final View setAsTargetSep=v.findViewById(R.id.setAsTargetSep);
+  if (getActivity().getCallingActivity() != null) {
+    setAsTargetView.setVisibility(View.VISIBLE);
+    setAsTargetSep.setVisibility(View.VISIBLE);
+    setAsTargetView.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      final View v){
+        setAsTarget();
+      }
+    }
+);
+  }
+ else {
+    setAsTargetView.setVisibility(View.GONE);
+    setAsTargetSep.setVisibility(View.GONE);
+  }
   final View overflowActionBar=v.findViewById(R.id.overflowActionBar);
   overflowActionBar.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View v){

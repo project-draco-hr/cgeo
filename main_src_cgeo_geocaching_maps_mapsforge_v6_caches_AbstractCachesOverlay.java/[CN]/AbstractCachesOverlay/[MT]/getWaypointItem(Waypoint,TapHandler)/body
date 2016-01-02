@@ -1,0 +1,8 @@
+{
+  final Geopoint target=waypoint.getCoords();
+  if (target != null) {
+    final Bitmap marker=AndroidGraphicFactory.convertToBitmap(MapUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(),waypoint));
+    return new GeoitemLayer(waypoint.getGeoitemRef(),tapHandler,new LatLong(target.getLatitude(),target.getLongitude()),marker,0,-marker.getHeight() / 2);
+  }
+  return null;
+}

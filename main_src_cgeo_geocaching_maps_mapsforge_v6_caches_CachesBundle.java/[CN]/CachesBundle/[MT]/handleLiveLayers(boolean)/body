@@ -1,0 +1,18 @@
+{
+  if (enable) {
+    final SeparatorLayer separator1=this.separators.get(STORED_SEPARATOR);
+    this.storedOverlay=new StoredCachesOverlay(STORED_OVERLAY_ID,this.geoEntries,this.mapView,separator1,this.mapHandlers);
+    final SeparatorLayer separator2=this.separators.get(LIVE_SEPARATOR);
+    this.liveOverlay=new LiveCachesOverlay(LIVE_OVERLAY_ID,this.geoEntries,this.mapView,separator2,this.mapHandlers);
+  }
+ else {
+    if (this.storedOverlay != null) {
+      this.storedOverlay.onDestroy();
+      this.storedOverlay=null;
+    }
+    if (this.liveOverlay != null) {
+      this.liveOverlay.onDestroy();
+      this.liveOverlay=null;
+    }
+  }
+}

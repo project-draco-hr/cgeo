@@ -1,0 +1,9 @@
+{
+  final Layers layers=this.mapView.getLayerManager().getLayers();
+  for (  final GeoitemLayer layer : layerList) {
+    geoEntries.remove(new GeoEntry(layer.getItemCode(),overlayId));
+    layers.remove(layer);
+  }
+  layerList.clear();
+  Log.d(String.format("Layers for id %d cleared, remaining geoEntries: %d",overlayId,geoEntries.size()));
+}

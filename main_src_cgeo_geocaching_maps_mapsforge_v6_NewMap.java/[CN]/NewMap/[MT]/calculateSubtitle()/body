@@ -1,0 +1,20 @@
+{
+  final int visible=countVisibleCaches();
+  final int total=countTotalCaches();
+  final StringBuilder subtitle=new StringBuilder();
+  if (!isLiveEnabled && mapMode == MapMode.SINGLE) {
+    final Geocache cache=getSingleModeCache();
+    if (cache != null) {
+      return Formatter.formatMapSubtitle(cache);
+    }
+  }
+  if (total != 0) {
+    if (visible != total && Settings.isDebug()) {
+      subtitle.append(visible).append('/').append(res.getQuantityString(R.plurals.cache_counts,total,total));
+    }
+ else {
+      subtitle.append(res.getQuantityString(R.plurals.cache_counts,visible,visible));
+    }
+  }
+  return subtitle.toString();
+}
