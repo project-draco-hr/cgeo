@@ -1,0 +1,7 @@
+{
+  final Intent cachesIntent=new Intent(context,CacheListActivity.class);
+  Intents.putListType(cachesIntent,cacheListType);
+  cachesIntent.putExtra(Intents.EXTRA_NAME,pocketQuery.getName());
+  cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID,pocketQuery.getGuid());
+  context.startActivity(cachesIntent);
+}
