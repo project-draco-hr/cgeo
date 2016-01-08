@@ -1,0 +1,6 @@
+{
+  final Uri uri=Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + pocketQuery.getGuid() + "&src=web");
+  final Intent cachesIntent=new Intent(Intent.ACTION_VIEW,uri,context,CacheListActivity.class);
+  cachesIntent.setDataAndType(uri,"application/zip");
+  context.startActivity(cachesIntent);
+}
