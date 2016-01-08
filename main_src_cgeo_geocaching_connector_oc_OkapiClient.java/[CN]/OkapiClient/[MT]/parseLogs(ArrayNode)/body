@@ -2,7 +2,11 @@
   final List<LogEntry> result=new LinkedList<>();
   for (  final JsonNode logResponse : logsJSON) {
     try {
-      final LogEntry log=new LogEntry(parseUser(logResponse.get(LOG_USER)),parseDate(logResponse.get(LOG_DATE).asText()).getTime(),parseLogType(logResponse.get(LOG_TYPE).asText()),HtmlUtils.removeExtraParagraph(logResponse.get(LOG_COMMENT).asText().trim()));
+      final Date date=parseDate(logResponse.get(LOG_DATE).asText());
+      if (date == null) {
+        continue;
+      }
+      final LogEntry log=new LogEntry(parseUser(logResponse.get(LOG_USER)),date.getTime(),parseLogType(logResponse.get(LOG_TYPE).asText()),HtmlUtils.removeExtraParagraph(logResponse.get(LOG_COMMENT).asText().trim()));
       result.add(log);
     }
  catch (    final NullPointerException e) {

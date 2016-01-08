@@ -1,7 +1,4 @@
 {
-  if (waypoint == null) {
-    return false;
-  }
   final String geocode=waypoint.getGeocode();
   if (StringUtils.isNotEmpty(geocode) && DataStore.isOffline(geocode,null)) {
     return StaticMapsProvider.hasStaticMapForWaypoint(geocode,waypoint);

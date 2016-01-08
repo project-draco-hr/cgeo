@@ -1,7 +1,7 @@
 {
   final Parameters params=new Parameters("search_method",METHOD_SEARCH_ALL);
   final Map<String,String> valueMap=new LinkedHashMap<>();
-  final @Nullable String uuid=getUserUUID(connector,username);
+  @Nullable final String uuid=getUserUUID(connector,username);
   if (StringUtils.isEmpty(uuid)) {
     return Collections.emptyList();
   }
