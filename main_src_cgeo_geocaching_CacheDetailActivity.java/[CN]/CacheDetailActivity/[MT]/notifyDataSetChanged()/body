@@ -14,20 +14,9 @@
   }
   cache.setChangeNotificationHandler(new ChangeNotificationHandler(this,progress));
   setCacheTitleBar(cache);
-  final ScrollView scroll=ButterKnife.findById(this,R.id.detailScroll);
   imagesList=null;
   reinitializeViewPager();
   invalidateOptionsMenuCompatible();
   progress.dismiss();
   Settings.addCacheToHistory(cache.getGeocode());
-  if (scroll != null) {
-    final int lastScrollPos=scroll.getScrollY();
-    final ScrollView scrollNew=ButterKnife.findById(this,R.id.detailScroll);
-    scrollNew.post(new Runnable(){
-      @Override public void run(){
-        scrollNew.scrollTo(0,lastScrollPos);
-      }
-    }
-);
-  }
 }
