@@ -6,9 +6,10 @@
     final String owner=parseUser(response.get(CACHE_OWNER));
     cache.setOwnerDisplayName(owner);
     cache.setOwnerUserId(owner);
-    cache.getLogCounts().put(LogType.FOUND_IT,response.get(CACHE_FOUNDS).asInt());
-    cache.getLogCounts().put(LogType.DIDNT_FIND_IT,response.get(CACHE_NOTFOUNDS).asInt());
-    cache.getLogCounts().put(LogType.WILL_ATTEND,response.path(CACHE_WILLATTENDS).asInt());
+    final Map<LogType,Integer> logCounts=cache.getLogCounts();
+    logCounts.put(LogType.FOUND_IT,response.get(CACHE_FOUNDS).asInt());
+    logCounts.put(LogType.DIDNT_FIND_IT,response.get(CACHE_NOTFOUNDS).asInt());
+    logCounts.put(LogType.WILL_ATTEND,response.path(CACHE_WILLATTENDS).asInt());
     if (response.has(CACHE_RATING)) {
       cache.setRating((float)response.get(CACHE_RATING).asDouble());
     }
@@ -21,6 +22,12 @@
     }
     description.append(response.get(CACHE_DESCRIPTION).asText());
     cache.setDescription(description.toString());
+    if (response.has(CACHE_SHORT_DESCRIPTION)) {
+      final String shortDescription=StringUtils.trim(response.get(CACHE_SHORT_DESCRIPTION).asText());
+      if (StringUtils.isNotEmpty(shortDescription)) {
+        cache.setShortDescription(shortDescription);
+      }
+    }
     cache.setHint(response.get(CACHE_HINT).asText());
     final ArrayNode images=(ArrayNode)response.get(CACHE_IMAGES);
     if (images != null) {
