@@ -9,6 +9,10 @@
  else       if (logType == LogType.ENABLE_LISTING) {
         cache.setDisabled(false);
       }
+      if (fav_check.isChecked()) {
+        cache.setFavorite(true);
+        cache.setFavoritePoints(cache.getFavoritePoints() + 1);
+      }
     }
     return new LogResult(postResult.left,postResult.right);
   }
