@@ -6,6 +6,7 @@
     activity.startActivity(marketIntent);
   }
  catch (  final RuntimeException ignored) {
-    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)));
+    final String uri="http://play.google.com/store/apps/details?id=" + packageName;
+    openUri(uri,activity);
   }
 }

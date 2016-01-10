@@ -2,13 +2,8 @@
   final Preference preference=getPreference(preferenceKey);
   preference.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    final Preference preference){
-      try {
-        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://" + host)));
-      }
- catch (      final ActivityNotFoundException e) {
-        Log.e("Cannot find suitable activity",e);
-        ActivityMixin.showToast(SettingsActivity.this,R.string.err_application_no);
-      }
+      final String url=StringUtils.startsWith(urlOrHost,"http") ? urlOrHost : "http://" + urlOrHost;
+      ProcessUtils.openUri(url,SettingsActivity.this);
       return true;
     }
   }

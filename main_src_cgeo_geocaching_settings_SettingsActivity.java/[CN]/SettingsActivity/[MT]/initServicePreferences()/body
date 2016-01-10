@@ -2,21 +2,25 @@
   for (  final OCPreferenceKeys key : OCPreferenceKeys.values()) {
     getPreference(key.isActivePrefId).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
     setWebsite(key.websitePrefId,key.authParams.host);
+    setWebsite(key.registerPrefId,"http://" + key.authParams.host + "/register.php");
     getPreference(key.prefScreenId).setSummary(getServiceSummary(Settings.isOCConnectorActive(key.isActivePrefId)));
   }
   getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   setWebsite(R.string.pref_fakekey_gc_website,GCConnector.getInstance().getHost());
+  setWebsite(R.string.pref_fakekey_gc_register,GCConnector.getInstance().getCreateAccountUrl());
   getPreference(R.string.preference_screen_gc).setSummary(getServiceSummary(Settings.isGCConnectorActive()));
   getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-  setWebsite(R.string.pref_fakekey_ec_website,"extremcaching.com");
+  setWebsite(R.string.pref_fakekey_ec_website,ECConnector.getInstance().getHost());
+  setWebsite(R.string.pref_fakekey_ec_register,ECConnector.getInstance().getCreateAccountUrl());
   getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
   getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-  setWebsite(R.string.pref_fakekey_gcvote_website,"gcvote.com");
+  setWebsite(R.string.pref_fakekey_gcvote_website,GCVote.getWebsite());
+  setWebsite(R.string.pref_fakekey_gcvote_register,GCVote.getCreateAccountUrl());
   getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
   getPreference(R.string.pref_connectorGeokretyActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
   setWebsite(R.string.pref_fakekey_geokrety_website,"geokrety.org");
   setWebsite(R.string.pref_fakekey_geokretymap_website,"geokretymap.org");
-  setWebsite(R.string.pref_fakekey_geokrety_register,"geokrety.org/adduser.php");
+  setWebsite(R.string.pref_fakekey_geokrety_register,GeokretyConnector.getCreateAccountUrl());
   getPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary(Settings.isGeokretyConnectorActive()));
   setWebsite(R.string.pref_fakekey_sendtocgeo_website,"send2.cgeo.org");
   getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
