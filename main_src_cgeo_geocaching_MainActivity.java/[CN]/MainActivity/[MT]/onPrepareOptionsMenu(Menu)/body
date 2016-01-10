@@ -1,5 +1,5 @@
 {
   super.onPrepareOptionsMenu(menu);
-  menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCPremiumMember());
+  menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
   return true;
 }
