@@ -78,7 +78,7 @@ loader=new NextPageGeocacheListLoader(app,search);
 break;
 case POCKET:
 final String guid=extras.getString(Intents.EXTRA_POCKET_GUID);
-title=extras.getString(Intents.EXTRA_NAME);
+title=listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
 loader=new PocketGeocacheListLoader(app,guid);
 break;
 }

@@ -1,7 +1,0 @@
-{
-  if (CollectionUtils.isEmpty(pocketQueryList)) {
-    ActivityMixin.showToast(activity,activity.getString(R.string.warn_no_pocket_query_found));
-    return;
-  }
-  Dialogs.select(activity,activity.getString(R.string.search_pocket_select),pocketQueryList,runAfterwards);
-}

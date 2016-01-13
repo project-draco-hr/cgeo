@@ -41,6 +41,7 @@
     }
   }
   if (isInvokedFromAttachment()) {
+    listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
     importGpxAttachement();
   }
  else {

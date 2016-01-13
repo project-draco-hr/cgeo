@@ -1,0 +1,13 @@
+{
+  AppObservable.bindActivity(this,GCParser.searchPocketQueryListObservable).subscribe(new Action1<List<PocketQuery>>(){
+    @Override public void call(    final List<PocketQuery> pocketQueryList){
+      waitDialog.dismiss();
+      if (CollectionUtils.isEmpty(pocketQueryList)) {
+        ActivityMixin.showToast(PocketQueryListActivity.this,getString(R.string.warn_no_pocket_query_found));
+        finish();
+      }
+      adapter.addAll(pocketQueryList);
+    }
+  }
+);
+}

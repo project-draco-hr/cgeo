@@ -1,0 +1,24 @@
+{
+  final PocketQuery pocketQuery=getItem(position);
+  View view=convertView;
+  final ViewHolder holder;
+  if (view == null) {
+    view=inflater.inflate(R.layout.pocketquery_item,parent,false);
+    holder=new ViewHolder(view);
+  }
+ else {
+    holder=(ViewHolder)view.getTag();
+  }
+  view.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View v){
+      final Activity activity=(Activity)v.getContext();
+      CacheListActivity.startActivityPocket(activity,pocketQuery);
+    }
+  }
+);
+  holder.label.setText(pocketQuery.getName());
+  holder.label.setCompoundDrawablesWithIntrinsicBounds(pocketQuery.getIcon(),0,0,0);
+  final int caches=pocketQuery.getMaxCaches();
+  holder.caches.setText(caches >= 0 ? CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,caches,caches) : StringUtils.EMPTY);
+  return view;
+}

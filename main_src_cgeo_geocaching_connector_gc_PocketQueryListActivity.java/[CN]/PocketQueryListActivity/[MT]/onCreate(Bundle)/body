@@ -1,0 +1,8 @@
+{
+  super.onCreate(savedInstanceState,R.layout.pocketquery_activity);
+  final PocketQueryListAdapter adapter=new PocketQueryListAdapter(this);
+  setListAdapter(adapter);
+  final ProgressDialog waitDialog=ProgressDialog.show(this,getString(R.string.search_pocket_title),getString(R.string.search_pocket_loading),true,true);
+  waitDialog.setCancelable(true);
+  loadInBackground(adapter,waitDialog);
+}
