@@ -18,11 +18,16 @@
     text.append(attributeName);
   }
   attribView.setText(text);
-  attribView.setVisibility(View.GONE);
-  attribView.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    final View v){
-      toggleAttributesView();
+  if (ButterKnife.findById(view,R.id.attributes_grid).getVisibility() == View.VISIBLE) {
+    attribView.setVisibility(View.GONE);
+    attribView.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      final View v){
+        toggleAttributesView();
+      }
     }
-  }
 );
+  }
+ else {
+    attribView.setVisibility(View.VISIBLE);
+  }
 }

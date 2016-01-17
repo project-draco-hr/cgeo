@@ -1,7 +1,7 @@
 {
   final GridView gridView=ButterKnife.findById(view,R.id.attributes_grid);
   final List<String> attributes=cache.getAttributes();
-  if (attributes.isEmpty()) {
+  if (!CacheAttribute.hasRecognizedAttributeIcon(attributes)) {
     gridView.setVisibility(View.GONE);
     return;
   }
