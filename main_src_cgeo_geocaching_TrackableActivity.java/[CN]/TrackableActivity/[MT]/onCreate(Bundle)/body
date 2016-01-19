@@ -1,5 +1,5 @@
 {
-  super.onCreate(savedInstanceState,R.layout.viewpager_activity);
+  onCreate(savedInstanceState,R.layout.viewpager_activity);
   createSubscriptions=new CompositeSubscription();
   setTitle(res.getString(R.string.trackable));
   final Bundle extras=getIntent().getExtras();
@@ -15,6 +15,7 @@
   }
   if (geocode == null && guid == null && id == null && uri != null) {
     geocode=ConnectorFactory.getTrackableFromURL(uri.toString());
+    trackingCode=ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
     final String uriHost=uri.getHost().toLowerCase(Locale.US);
     if (uriHost.endsWith("geocaching.com")) {
       geocode=uri.getQueryParameter("tracker");
@@ -39,6 +40,12 @@
         showToast(res.getString(R.string.err_tb_details_open));
         finish();
         return;
+      }
+    }
+ else     if (uriHost.endsWith("geokrety.org")) {
+      brand=TrackableBrand.GEOKRETY;
+      if (geocode == null && trackingCode != null) {
+        geocode=trackingCode;
       }
     }
   }

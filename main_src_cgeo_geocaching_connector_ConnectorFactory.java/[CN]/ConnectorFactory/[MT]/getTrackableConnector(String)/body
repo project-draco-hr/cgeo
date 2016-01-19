@@ -1,8 +1,3 @@
 {
-  for (  final TrackableConnector connector : TRACKABLE_CONNECTORS) {
-    if (connector.canHandleTrackable(geocode)) {
-      return connector;
-    }
-  }
-  return UNKNOWN_TRACKABLE_CONNECTOR;
+  return getTrackableConnector(geocode,TrackableBrand.UNKNOWN);
 }

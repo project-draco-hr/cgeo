@@ -1,0 +1,7 @@
+{
+  final String gkTrackingCode=StringUtils.substringAfterLast(url,"qr.php?nr=");
+  if (StringUtils.isAlphanumeric(gkTrackingCode)) {
+    return gkTrackingCode;
+  }
+  return null;
+}

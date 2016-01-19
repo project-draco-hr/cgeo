@@ -1,0 +1,33 @@
+{
+  if (StringUtils.isEmpty(geocode)) {
+    return RxUtils.deferredNullable(new Func0<Trackable>(){
+      @Override public Trackable call(){
+        return TravelBugConnector.getInstance().searchTrackable(geocode,guid,id);
+      }
+    }
+).subscribeOn(AndroidRxUtils.networkScheduler);
+  }
+  final Observable<Trackable> fromNetwork=Observable.from(getTrackableConnectors()).filter(new Func1<TrackableConnector,Boolean>(){
+    @Override public Boolean call(    final TrackableConnector trackableConnector){
+      return trackableConnector.canHandleTrackable(geocode,brand);
+    }
+  }
+).flatMap(new Func1<TrackableConnector,Observable<Trackable>>(){
+    @Override public Observable<Trackable> call(    final TrackableConnector trackableConnector){
+      return RxUtils.deferredNullable(new Func0<Trackable>(){
+        @Override public Trackable call(){
+          return trackableConnector.searchTrackable(geocode,guid,id);
+        }
+      }
+).subscribeOn(AndroidRxUtils.networkScheduler);
+    }
+  }
+);
+  final Observable<Trackable> fromLocalStorage=RxUtils.deferredNullable(new Func0<Trackable>(){
+    @Override public Trackable call(){
+      return DataStore.loadTrackable(geocode);
+    }
+  }
+).subscribeOn(Schedulers.io());
+  return fromNetwork.concatWith(fromLocalStorage).take(1);
+}
