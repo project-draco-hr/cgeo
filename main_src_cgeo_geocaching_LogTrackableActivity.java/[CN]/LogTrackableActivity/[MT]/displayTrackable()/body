@@ -1,9 +1,7 @@
 {
   if (trackable == null) {
     Log.e("LogTrackableActivity.onCreate, cannot load trackable: " + geocode);
-    if (waitDialog != null) {
-      waitDialog.dismiss();
-    }
+    showProgress(false);
     if (StringUtils.isNotBlank(geocode)) {
       showToast(res.getString(R.string.err_tb_find) + ' ' + geocode+ '.');
     }
@@ -15,9 +13,7 @@
     return;
   }
   if (!trackable.isLoggable()) {
-    if (waitDialog != null) {
-      waitDialog.dismiss();
-    }
+    showProgress(false);
     showToast(res.getString(R.string.err_tb_not_loggable));
     finish();
     return;
@@ -28,8 +24,6 @@
     Dialogs.moveCursorToEnd(trackingEditText);
   }
   init();
-  if (waitDialog != null) {
-    waitDialog.dismiss();
-  }
+  showProgress(false);
   requestKeyboardForLogging();
 }
