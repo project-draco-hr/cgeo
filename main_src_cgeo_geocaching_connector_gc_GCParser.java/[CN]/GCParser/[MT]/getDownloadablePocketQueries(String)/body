@@ -1,13 +1,20 @@
 {
-  final Set<String> downloadablePocketQueries=new HashSet<>();
+  final Map<String,Integer> downloadablePocketQueries=new HashMap<>();
   final String downloadSubPage=StringUtils.substringAfter(subPage,"id=\"uxOfflinePQTable\"");
   if (StringUtils.isEmpty(downloadSubPage)) {
-    Log.w("GCParser.addDownloadableAttribute: id \"uxOfflinePQTable\" not found on page");
+    Log.w("GCParser.getDownloadablePocketQueries: id \"uxOfflinePQTable\" not found on page");
   }
   final MatcherWrapper matcherPocket=new MatcherWrapper(GCConstants.PATTERN_LIST_PQ_DL,downloadSubPage);
   while (matcherPocket.find()) {
     final String guid=Html.fromHtml(matcherPocket.group(1)).toString();
-    downloadablePocketQueries.add(guid);
+    try {
+      final Integer count=Integer.valueOf(matcherPocket.group(2));
+      downloadablePocketQueries.put(guid,count);
+    }
+ catch (    final NumberFormatException e) {
+      Log.w("GCParser.getDownloadablePocketQueries: cannot parse PQ cache count");
+      e.printStackTrace();
+    }
   }
   return downloadablePocketQueries;
 }
