@@ -6,7 +6,11 @@
         ActivityMixin.showToast(PocketQueryListActivity.this,getString(R.string.warn_no_pocket_query_found));
         finish();
       }
-      adapter.addAll(pocketQueryList);
+      adapter.setNotifyOnChange(false);
+      for (      final PocketQuery pocketQuery : pocketQueryList) {
+        adapter.add(pocketQuery);
+      }
+      adapter.notifyDataSetChanged();
     }
   }
 );
