@@ -1,10 +1,10 @@
 {
   Collection<Geocache> caches=Collections.emptySet();
-  final ZipInputStream zisPass1=new ZipInputStream(new BufferedInputStream(getInputStream()));
+  final ZipArchiveInputStream zisPass1=new ZipArchiveInputStream(new BufferedInputStream(getInputStream()),ENCODING);
   try {
     int acceptedFiles=0;
     int ignoredFiles=0;
-    for (ZipEntry zipEntry=zisPass1.getNextEntry(); zipEntry != null; zipEntry=zisPass1.getNextEntry()) {
+    for (ZipEntry zipEntry=zisPass1.getNextZipEntry(); zipEntry != null; zipEntry=zisPass1.getNextZipEntry()) {
       if (StringUtils.endsWithIgnoreCase(zipEntry.getName(),GPXImporter.GPX_FILE_EXTENSION)) {
         if (!StringUtils.endsWithIgnoreCase(zipEntry.getName(),GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
           importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE,R.string.gpx_import_loading_caches,(int)zipEntry.getSize()));
@@ -15,7 +15,6 @@
  else {
         ignoredFiles++;
       }
-      zisPass1.closeEntry();
     }
     if (ignoredFiles > 0 && acceptedFiles == 0) {
       throw new ParserException("Imported ZIP does not contain a GPX file.");
@@ -24,14 +23,13 @@
   finally {
     zisPass1.close();
   }
-  final ZipInputStream zisPass2=new ZipInputStream(new BufferedInputStream(getInputStream()));
+  final ZipArchiveInputStream zisPass2=new ZipArchiveInputStream(new BufferedInputStream(getInputStream()),ENCODING);
   try {
-    for (ZipEntry zipEntry=zisPass2.getNextEntry(); zipEntry != null; zipEntry=zisPass2.getNextEntry()) {
+    for (ZipEntry zipEntry=zisPass2.getNextZipEntry(); zipEntry != null; zipEntry=zisPass2.getNextZipEntry()) {
       if (StringUtils.endsWithIgnoreCase(zipEntry.getName(),GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
         importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_WPT_FILE,R.string.gpx_import_loading_waypoints,(int)zipEntry.getSize()));
         caches=parser.parse(new NoCloseInputStream(zisPass2),progressHandler);
       }
-      zisPass2.closeEntry();
     }
   }
   finally {
