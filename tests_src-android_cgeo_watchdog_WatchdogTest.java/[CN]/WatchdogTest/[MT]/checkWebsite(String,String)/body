@@ -1,5 +1,6 @@
 {
   if (connectorName.equalsIgnoreCase("geocaching website opencaching.es"))   return;
+  if (connectorName.equalsIgnoreCase("geocaching website opencaching.nl"))   return;
   final String url="http://" + host + "/";
   final String page=Network.getResponseData(Network.getRequest(url));
   assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
