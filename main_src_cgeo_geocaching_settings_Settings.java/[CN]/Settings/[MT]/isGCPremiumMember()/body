@@ -1,4 +1,3 @@
 {
-  final String memberStatus=getGCMemberStatus();
-  return StringUtils.equalsIgnoreCase(memberStatus,GCConstants.MEMBER_STATUS_PREMIUM) || StringUtils.equalsIgnoreCase(memberStatus,GCConstants.MEMBER_STATUS_CHARTER);
+  return getGCMemberStatus().isPremium();
 }
