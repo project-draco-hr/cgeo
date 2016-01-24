@@ -1,6 +1,6 @@
 {
   try {
-    while (System.currentTimeMillis() - lastMessage <= milliseconds && !hasTerminatingMessage()) {
+    while ((System.currentTimeMillis() - lastMessage <= milliseconds) && !hasTerminatingMessage()) {
       wait(milliseconds);
     }
   }

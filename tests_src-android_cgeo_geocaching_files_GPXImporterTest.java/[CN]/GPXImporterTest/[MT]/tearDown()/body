@@ -7,5 +7,6 @@
   FileUtils.deleteDirectory(tempDir);
   TestSettings.setStoreOfflineMaps(importCacheStaticMaps);
   TestSettings.setStoreOfflineWpMaps(importWpStaticMaps);
+  serviceThread.quit();
   super.tearDown();
 }

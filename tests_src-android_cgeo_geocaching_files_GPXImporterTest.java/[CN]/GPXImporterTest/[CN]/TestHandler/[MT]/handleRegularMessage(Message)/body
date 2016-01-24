@@ -1,7 +1,12 @@
 {
   final Message msg1=Message.obtain();
   msg1.copyFrom(msg);
-  messages.add(msg1);
+  if (msg1.what == TERMINATION_MESSAGE) {
+    receivedTerminationMessage=true;
+  }
+ else {
+    messages.add(msg1);
+  }
   lastMessage=System.currentTimeMillis();
   notifyAll();
 }
