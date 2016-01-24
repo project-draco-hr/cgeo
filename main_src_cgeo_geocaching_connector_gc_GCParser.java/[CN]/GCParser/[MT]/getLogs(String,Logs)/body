@@ -5,7 +5,7 @@
   }
   return Observable.defer(new Func0<Observable<LogEntry>>(){
     @Override public Observable<LogEntry> call(){
-      final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),"decrypt","true");
+      final Parameters params=new Parameters("tkn",userToken,"idx","1","num",String.valueOf(GCConstants.NUMBER_OF_LOGS),"decrypt","false");
       if (logType != Logs.ALL) {
         params.add(logType.getParamName(),Boolean.toString(Boolean.TRUE));
       }
