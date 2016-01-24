@@ -95,26 +95,28 @@
     }
   }
 );
-  AppObservable.bindActivity(this,Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Func1<TrackableConnector,Observable<Trackable>>(){
-    @Override public Observable<Trackable> call(    final TrackableConnector trackableConnector){
-      processedBrands.add(trackableConnector.getBrand());
-      return Observable.defer(new Func0<Observable<Trackable>>(){
-        @Override public Observable<Trackable> call(){
-          return Observable.from(trackableConnector.searchTrackables(geocode));
+  if (StringUtils.isNotBlank(geocode)) {
+    AppObservable.bindActivity(this,Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Func1<TrackableConnector,Observable<Trackable>>(){
+      @Override public Observable<Trackable> call(      final TrackableConnector trackableConnector){
+        processedBrands.add(trackableConnector.getBrand());
+        return Observable.defer(new Func0<Observable<Trackable>>(){
+          @Override public Observable<Trackable> call(){
+            return Observable.from(trackableConnector.searchTrackables(geocode));
+          }
+        }
+).subscribeOn(AndroidRxUtils.networkScheduler);
+      }
+    }
+).toList()).subscribe(new Action1<List<Trackable>>(){
+      @Override public void call(      final List<Trackable> trackables){
+        genericTrackables.addAll(trackables);
+        if (!trackables.isEmpty()) {
+          notifyDataSetChanged();
         }
       }
-).subscribeOn(AndroidRxUtils.networkScheduler);
     }
-  }
-).toList()).subscribe(new Action1<List<Trackable>>(){
-    @Override public void call(    final List<Trackable> trackables){
-      genericTrackables.addAll(trackables);
-      if (!trackables.isEmpty()) {
-        notifyDataSetChanged();
-      }
-    }
-  }
 );
+  }
   locationUpdater=new CacheDetailsGeoDirHandler(this);
   AndroidBeam.enable(this,this);
 }
