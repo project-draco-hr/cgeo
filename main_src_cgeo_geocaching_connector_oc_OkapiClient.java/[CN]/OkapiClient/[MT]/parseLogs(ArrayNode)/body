@@ -6,7 +6,7 @@
       if (date == null) {
         continue;
       }
-      final LogEntry log=new LogEntry(parseUser(logResponse.get(LOG_USER)),date.getTime(),parseLogType(logResponse.get(LOG_TYPE).asText()),HtmlUtils.removeExtraParagraph(logResponse.get(LOG_COMMENT).asText().trim()));
+      final LogEntry log=new LogEntry(parseUser(logResponse.get(LOG_USER)),date.getTime(),parseLogType(logResponse.get(LOG_TYPE).asText()),HtmlUtils.removeExtraTags(logResponse.get(LOG_COMMENT).asText().trim()));
       result.add(log);
     }
  catch (    final NullPointerException e) {
