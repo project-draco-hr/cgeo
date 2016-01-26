@@ -6,5 +6,6 @@
  catch (  final InterruptedException e) {
     Log.e("GPXImporterTest.runImportThread",e);
   }
+  importStepHandler.sendEmptyMessage(TestHandler.TERMINATION_MESSAGE);
   importStepHandler.waitForCompletion();
 }
