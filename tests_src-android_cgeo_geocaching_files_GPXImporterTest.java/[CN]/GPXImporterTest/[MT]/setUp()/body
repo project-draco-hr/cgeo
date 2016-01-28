@@ -2,7 +2,7 @@
   super.setUp();
   serviceThread=new HandlerThread("[" + getClass().getSimpleName() + "Thread]");
   serviceThread.start();
-  Looper serviceLooper=serviceThread.getLooper();
+  final Looper serviceLooper=serviceThread.getLooper();
   importStepHandler=new TestHandler(serviceLooper);
   progressHandler=new TestHandler(serviceLooper);
   final String globalTempDir=System.getProperty("java.io.tmpdir");
