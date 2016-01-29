@@ -1,5 +1,5 @@
 {
-  if (requestCode == SETTINGS_ACTIVITY_REQUEST_CODE) {
+  if (requestCode == Intents.SETTINGS_ACTIVITY_REQUEST_CODE) {
     if (resultCode == SettingsActivity.RESTART_NEEDED) {
       CgeoApplication.getInstance().restartApplication();
     }
@@ -13,7 +13,7 @@
       }
       SearchActivity.startActivityScan(scan,this);
     }
- else     if (requestCode == SEARCH_REQUEST_CODE) {
+ else     if (requestCode == Intents.SEARCH_REQUEST_CODE) {
       if (resultCode == RESULT_CANCELED) {
         String query=intent.getStringExtra(SearchManager.QUERY);
         if (query == null) {

@@ -11,7 +11,7 @@ case R.id.menu_helpers:
 startActivity(new Intent(this,UsefulAppsActivity.class));
 return true;
 case R.id.menu_settings:
-startActivityForResult(new Intent(this,SettingsActivity.class),SETTINGS_ACTIVITY_REQUEST_CODE);
+startActivityForResult(new Intent(this,SettingsActivity.class),Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
 return true;
 case R.id.menu_history:
 startActivity(CacheListActivity.getHistoryIntent(this));
@@ -24,6 +24,9 @@ if (!Settings.isGCPremiumMember()) {
 return true;
 }
 startActivity(new Intent(this,PocketQueryListActivity.class));
+return true;
+case R.id.menu_app_invite:
+AppInvite.send(this);
 return true;
 }
 return super.onOptionsItemSelected(item);

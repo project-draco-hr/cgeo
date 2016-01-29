@@ -1,5 +1,6 @@
 {
   super.onPrepareOptionsMenu(menu);
   menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+  menu.findItem(R.id.menu_app_invite).setVisible(AppInvite.isAvailable());
   return true;
 }
