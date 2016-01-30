@@ -1,0 +1,12 @@
+{
+  final Intent intent=new Intent(this.intent);
+  double[] targetLat={point.getLatitude()};
+  double[] targetLon={point.getLongitude()};
+  intent.putExtra(ORUXMAPS_EXTRA_LATITUDE,targetLat);
+  intent.putExtra(ORUXMAPS_EXTRA_LONGITUDE,targetLon);
+  if (!name.isEmpty()) {
+    String[] targetName={name};
+    intent.putExtra(ORUXMAPS_EXTRA_NAME,targetName);
+  }
+  activity.startActivity(intent);
+}
