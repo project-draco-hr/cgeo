@@ -1,0 +1,21 @@
+{
+  if (!pocketQuery.isDownloadable()) {
+    return StringUtils.EMPTY;
+  }
+  final List<String> infos=new ArrayList<>(3);
+  final int caches=pocketQuery.getCaches();
+  if (caches >= 0) {
+    infos.add(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,caches,caches));
+  }
+  if (pocketQuery.getLastGeneration() != null) {
+    infos.add(Formatter.formatShortDateVerbally(pocketQuery.getLastGeneration().getTime()));
+  }
+  final int daysRemaining=pocketQuery.getDaysRemaining();
+  if (daysRemaining == 0) {
+    infos.add(CgeoApplication.getInstance().getString(R.string.last_day_available));
+  }
+ else {
+    infos.add(daysRemaining > 0 ? CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_remaining,daysRemaining,daysRemaining) : StringUtils.EMPTY);
+  }
+  return StringUtils.join(infos,SEPARATOR);
+}

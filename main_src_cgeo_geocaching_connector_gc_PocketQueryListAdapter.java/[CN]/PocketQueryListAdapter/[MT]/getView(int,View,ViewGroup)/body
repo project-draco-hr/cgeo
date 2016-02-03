@@ -25,7 +25,6 @@
 );
   holder.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
   holder.label.setText(pocketQuery.getName());
-  final int caches=pocketQuery.getMaxCaches();
-  holder.caches.setText(caches >= 0 ? CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,caches,caches) : StringUtils.EMPTY);
+  holder.info.setText(Formatter.formatPocketQueryInfo(pocketQuery));
   return view;
 }
