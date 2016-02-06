@@ -5,7 +5,7 @@
   final Parameters params=new Parameters("version","cgeo");
   final Credentials login=Settings.getGCVoteLogin();
   if (login.isValid()) {
-    params.put("userName",login.getUsername(),"password",login.getPassword());
+    params.put("userName",login.getUserName(),"password",login.getPassword());
   }
   final boolean requestByGuids=CollectionUtils.isNotEmpty(guids);
   if (requestByGuids) {
