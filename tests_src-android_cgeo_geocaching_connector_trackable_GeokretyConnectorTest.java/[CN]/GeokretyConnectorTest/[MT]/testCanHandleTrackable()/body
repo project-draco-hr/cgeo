@@ -1,6 +1,11 @@
 {
-  assertThat(new GeokretyConnector().canHandleTrackable("GK82A2")).isTrue();
-  assertThat(new GeokretyConnector().canHandleTrackable("GKXYZ1")).isFalse();
-  assertThat(new GeokretyConnector().canHandleTrackable("TB1234")).isFalse();
-  assertThat(new GeokretyConnector().canHandleTrackable("UNKNOWN")).isFalse();
+  assertThat(getConnector().canHandleTrackable("GK82A2")).isTrue();
+  assertThat(getConnector().canHandleTrackable("TB1234")).isFalse();
+  assertThat(getConnector().canHandleTrackable("UNKNOWN")).isFalse();
+  assertThat(getConnector().canHandleTrackable("GKXYZ1")).isFalse();
+  assertThat(getConnector().canHandleTrackable("GKXYZ1",TrackableBrand.GEOKRETY)).isTrue();
+  assertThat(getConnector().canHandleTrackable("GC1234")).isFalse();
+  assertThat(getConnector().canHandleTrackable("GC1234",TrackableBrand.UNKNOWN)).isFalse();
+  assertThat(getConnector().canHandleTrackable("GC1234",TrackableBrand.TRAVELBUG)).isFalse();
+  assertThat(getConnector().canHandleTrackable("GC1234",TrackableBrand.GEOKRETY)).isTrue();
 }

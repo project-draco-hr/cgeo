@@ -7,4 +7,8 @@
   assertThat(getConnector().canHandleTrackable("GK1234")).isTrue();
   assertThat(getConnector().canHandleTrackable("GST9HV")).isTrue();
   assertThat(getConnector().canHandleTrackable("UNKNOWN")).isFalse();
+  assertThat(getConnector().canHandleTrackable("GC1234")).isTrue();
+  assertThat(getConnector().canHandleTrackable("GC1234",TrackableBrand.UNKNOWN)).isTrue();
+  assertThat(getConnector().canHandleTrackable("GC1234",TrackableBrand.TRAVELBUG)).isTrue();
+  assertThat(getConnector().canHandleTrackable("GC1234",TrackableBrand.GEOKRETY)).isFalse();
 }
