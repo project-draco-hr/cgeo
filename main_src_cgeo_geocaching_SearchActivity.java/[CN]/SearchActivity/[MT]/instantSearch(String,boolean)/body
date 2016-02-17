@@ -10,14 +10,14 @@
     return true;
   }
   TrackableConnector trackableConnector=ConnectorFactory.getTrackableConnector(geocode);
-  if (trackableConnector == ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+  if (trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
     final String tbCode=ConnectorFactory.getTrackableFromURL(query);
     if (StringUtils.isNotBlank(tbCode)) {
       trackableConnector=ConnectorFactory.getTrackableConnector(tbCode);
       geocode=tbCode;
     }
   }
-  if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR && geocode != null) {
+  if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) && geocode != null) {
     final Intent trackablesIntent=new Intent(this,TrackableActivity.class);
     trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,geocode.toUpperCase(Locale.US));
     startActivity(trackablesIntent);
