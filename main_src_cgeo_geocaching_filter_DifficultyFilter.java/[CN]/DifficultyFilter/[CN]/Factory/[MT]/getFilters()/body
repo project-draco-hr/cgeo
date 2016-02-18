@@ -1,7 +1,7 @@
 {
   final List<IFilter> filters=new ArrayList<>(DIFFICULTY_MAX);
   for (int difficulty=DIFFICULTY_MIN; difficulty <= DIFFICULTY_MAX; difficulty++) {
-    filters.add(new DifficultyFilter(difficulty));
+    filters.add(new DifficultyFilter(R.string.cache_difficulty,difficulty));
   }
   return filters;
 }
