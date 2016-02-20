@@ -1,13 +1,8 @@
 {
-  return Observable.defer(new Func0<Observable<String>>(){
-    @Override public Observable<String> call(){
-      final Parameters params=new Parameters("nr",trackingCode);
-      final String response=Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id.php",params));
-      if (response == null || StringUtils.equals(response,"0")) {
-        return Observable.empty();
-      }
-      return Observable.just(geocode(Integer.parseInt(response)));
-    }
+  final Parameters params=new Parameters("nr",trackingCode);
+  final String response=Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id.php",params));
+  if (response == null || StringUtils.equals(response,"0")) {
+    return null;
   }
-).subscribeOn(AndroidRxUtils.networkScheduler).toBlocking().firstOrDefault(null);
+  return geocode(Integer.parseInt(response));
 }
