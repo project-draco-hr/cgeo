@@ -1,11 +1,5 @@
 {
   showProgress(true);
-  loggingManager=connector.getTrackableLoggingManager(this);
-  if (loggingManager == null) {
-    showToast(res.getString(R.string.err_tb_not_loggable));
-    finish();
-    return null;
-  }
   if (id == Loaders.LOGGING_TRAVELBUG.getLoaderId()) {
     loggingManager.setGuid(trackable.getGuid());
   }
