@@ -18,7 +18,7 @@
     }
     writer.write("</");
     String prefix=elementStack[depth * 3 + 1];
-    if (!StringUtils.isEmpty(prefix)) {
+    if (StringUtils.isNotEmpty(prefix)) {
       writer.write(prefix);
       writer.write(':');
     }

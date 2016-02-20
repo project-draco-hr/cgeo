@@ -7,7 +7,7 @@
   }
   String prefix=StringUtils.isEmpty(namespace) ? "" : getPrefix(namespace,false,true);
   writer.write(' ');
-  if (!StringUtils.isEmpty(prefix)) {
+  if (StringUtils.isNotEmpty(prefix)) {
     writer.write(prefix);
     writer.write(':');
   }
