@@ -1,4 +1,4 @@
 {
   size++;
-  buffer.append(cache.getGeocode()).append(',').append(FIELD_NOTE_DATE_FORMAT.format(new Date(log.date))).append(',').append(StringUtils.capitalize(log.type.type)).append(",\"").append(StringUtils.replaceChars(log.log,'"','\'')).append("\"\n");
+  buffer.append(cache.getGeocode()).append(',').append(FIELD_NOTE_DATE_FORMAT.format(new Date(log.date))).append(',').append(StringUtils.capitalize(log.getType().type)).append(",\"").append(StringUtils.replaceChars(log.log,'"','\'')).append("\"\n");
 }

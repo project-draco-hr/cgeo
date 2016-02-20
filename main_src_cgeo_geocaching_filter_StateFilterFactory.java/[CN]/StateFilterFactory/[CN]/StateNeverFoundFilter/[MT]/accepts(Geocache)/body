@@ -3,7 +3,7 @@
     return false;
   }
   for (  final LogEntry log : cache.getLogs()) {
-    if (log.type.isFoundLog()) {
+    if (log.getType().isFoundLog()) {
       return false;
     }
   }

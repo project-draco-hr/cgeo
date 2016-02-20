@@ -1,5 +1,5 @@
 {
-  final LogEntry logEntry=new LogEntry(date.getTimeInMillis(),typeSelected.oldLogtype,logText);
+  final LogEntry logEntry=new LogEntry.Builder().setDate(date.getTimeInMillis()).setLogType(typeSelected.oldLogtype).setLog(logText).build();
   final List<LogEntry> modifiedLogs=new ArrayList<>(trackable.getLogs());
   modifiedLogs.add(0,logEntry);
   trackable.setLogs(modifiedLogs);

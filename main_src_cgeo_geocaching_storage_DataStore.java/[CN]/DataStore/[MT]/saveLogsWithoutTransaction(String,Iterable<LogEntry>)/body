@@ -5,7 +5,7 @@
   for (  final LogEntry log : logs) {
     insertLog.bindString(1,geocode);
     insertLog.bindLong(2,timestamp);
-    insertLog.bindLong(3,log.type.id);
+    insertLog.bindLong(3,log.getType().id);
     insertLog.bindString(4,log.author);
     insertLog.bindString(5,log.log);
     insertLog.bindLong(6,log.date);

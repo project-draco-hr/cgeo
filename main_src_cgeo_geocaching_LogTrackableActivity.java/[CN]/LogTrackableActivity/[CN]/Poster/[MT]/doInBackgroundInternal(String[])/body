@@ -7,7 +7,7 @@
     if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
       addLocalTrackableLog(logMsg);
       if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-        final LogEntry logNow=new LogEntry(date.getTimeInMillis(),typeSelected.oldLogtype,logMsg);
+        final LogEntry logNow=new LogEntry.Builder().setDate(date.getTimeInMillis()).setLogType(typeSelected.oldLogtype).setLog(logMsg).build();
         Twitter.postTweetTrackable(trackable.getGeocode(),logNow);
       }
     }

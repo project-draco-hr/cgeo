@@ -1,7 +1,9 @@
 {
-  final LogEntry logEntry=new LogEntry(100,LogType.FOUND_IT,"LOGENTRY");
-  final Image mockedImage=Image.NONE;
-  logEntry.addLogImage(mockedImage);
-  assertThat(logEntry.getLogImages()).hasSize(1);
-  assertThat(logEntry.getLogImages().get(0)).isEqualTo(mockedImage);
+  final Image mockedImage1=Image.NONE;
+  final LogEntry logEntry1=new LogEntry.Builder().addLogImage(mockedImage1).build();
+  assertThat(logEntry1.getLogImages()).hasSize(0);
+  final Image mockedImage2=new Image.Builder().setTitle("").build();
+  final LogEntry logEntry2=new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").addLogImage(mockedImage2).build();
+  assertThat(logEntry2.getLogImages()).hasSize(1);
+  assertThat(logEntry2.getLogImages().get(0)).isEqualTo(mockedImage2);
 }

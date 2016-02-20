@@ -1,6 +1,6 @@
 {
   for (  final LogEntry logEntry : getLogs()) {
-    if (logEntry.type == logType && logEntry.isOwn()) {
+    if (logEntry.getType() == logType && logEntry.isOwn()) {
       return true;
     }
   }

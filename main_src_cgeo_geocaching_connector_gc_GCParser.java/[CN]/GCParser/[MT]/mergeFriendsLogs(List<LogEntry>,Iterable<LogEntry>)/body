@@ -1,7 +1,9 @@
 {
   for (  final LogEntry log : logsToMerge) {
     if (mergedLogs.contains(log)) {
-      mergedLogs.get(mergedLogs.indexOf(log)).friend=true;
+      final LogEntry friendLog=mergedLogs.get(mergedLogs.indexOf(log));
+      final LogEntry updatedFriendLog=friendLog.buildUpon().setFriend(true).build();
+      mergedLogs.set(mergedLogs.indexOf(log),updatedFriendLog);
     }
  else {
       mergedLogs.add(log);

@@ -364,10 +364,10 @@
     final Element gcLog=gcLogs.getChild(nsGC,"log");
     gcLog.setStartElementListener(new StartElementListener(){
       @Override public void start(      final Attributes attrs){
-        log=new LogEntry("",0,LogType.UNKNOWN,"");
+        logBuilder=new LogEntry.Builder();
         try {
           if (attrs.getIndex("id") > -1) {
-            log.id=Integer.parseInt(attrs.getValue("id"));
+            logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
           }
         }
  catch (        final NumberFormatException ignored) {
@@ -377,8 +377,9 @@
 );
     gcLog.setEndElementListener(new EndElementListener(){
       @Override public void end(){
-        if (log.type != LogType.UNKNOWN) {
-          if (log.type.isFoundLog() && StringUtils.isNotBlank(log.author)) {
+        final LogEntry log=logBuilder.build();
+        if (log.getType() != LogType.UNKNOWN) {
+          if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
             final IConnector connector=ConnectorFactory.getConnector(cache);
             if (connector instanceof ILogin && StringUtils.equals(log.author,((ILogin)connector).getUserName())) {
               cache.setFound(true);
@@ -393,7 +394,7 @@
     gcLog.getChild(nsGC,"date").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      final String body){
         try {
-          log.date=parseDate(body).getTime();
+          logBuilder.setDate(parseDate(body).getTime());
         }
  catch (        final Exception e) {
           Log.w("Failed to parse log date",e);
@@ -404,19 +405,19 @@
     gcLog.getChild(nsGC,"type").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      final String body){
         final String logType=validate(body);
-        log.type=LogType.getByType(logType);
+        logBuilder.setLogType(LogType.getByType(logType));
       }
     }
 );
     gcLog.getChild(nsGC,"finder").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      final String finderName){
-        log.author=validate(finderName);
+        logBuilder.setAuthor(validate(finderName));
       }
     }
 );
     gcLog.getChild(nsGC,"text").setEndTextElementListener(new EndTextElementListener(){
       @Override public void end(      final String logText){
-        log.log=validate(logText);
+        logBuilder.setLog(validate(logText));
       }
     }
 );

@@ -22,18 +22,16 @@
           }
           final String latLon=entry.path("LatLonString").asText();
           final String logText=(StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.path("LogText").asText());
-          final LogEntry logDone=new LogEntry(TextUtils.removeControlCharacters(entry.path("UserName").asText()),date,LogType.getByIconName(logIconName),logText);
-          logDone.found=entry.path("GeocacheFindCount").asInt();
-          logDone.friend=markAsFriendsLog;
+          final LogEntry.Builder logDoneBuilder=new LogEntry.Builder().setAuthor(TextUtils.removeControlCharacters(entry.path("UserName").asText())).setDate(date).setLogType(LogType.getByIconName(logIconName)).setLog(logText).setFound(entry.path("GeocacheFindCount").asInt()).setFriend(markAsFriendsLog);
           final ArrayNode images=(ArrayNode)entry.get("Images");
           for (          final JsonNode image : images) {
             final String url="https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
             final String title=TextUtils.removeControlCharacters(image.path("Name").asText());
             final String description=image.path("Descr").asText();
             final Image logImage=new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build();
-            logDone.addLogImage(logImage);
+            logDoneBuilder.addLogImage(logImage);
           }
-          subscriber.onNext(logDone);
+          subscriber.onNext(logDoneBuilder.build());
         }
       }
  catch (      final IOException e) {

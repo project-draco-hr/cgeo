@@ -108,18 +108,18 @@
       }
  catch (      final ParseException ignored) {
       }
-      final LogEntry logDone=new LogEntry(Html.fromHtml(matcherLogs.group(3)).toString().trim(),date,LogType.getByIconName(matcherLogs.group(1)),matcherLogs.group(7).trim());
+      final LogEntry.Builder logDoneBuilder=new LogEntry.Builder().setAuthor(Html.fromHtml(matcherLogs.group(3)).toString().trim()).setDate(date).setLogType(LogType.getByIconName(matcherLogs.group(1))).setLog(matcherLogs.group(7).trim());
       if (matcherLogs.group(4) != null && matcherLogs.group(6) != null) {
-        logDone.cacheGuid=matcherLogs.group(4);
-        logDone.cacheName=matcherLogs.group(6);
+        logDoneBuilder.setCacheGuid(matcherLogs.group(4));
+        logDoneBuilder.setCacheName(matcherLogs.group(6));
       }
       final String logEntry=matcherLogs.group(0);
       final MatcherWrapper matcherLogImages=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG_IMAGES,logEntry);
       while (matcherLogImages.find()) {
         final Image logImage=new Image.Builder().setUrl(matcherLogImages.group(1)).setTitle(matcherLogImages.group(2)).build();
-        logDone.addLogImage(logImage);
+        logDoneBuilder.addLogImage(logImage);
       }
-      trackable.getLogs().add(logDone);
+      trackable.getLogs().add(logDoneBuilder.build());
     }
   }
  catch (  final Exception e) {

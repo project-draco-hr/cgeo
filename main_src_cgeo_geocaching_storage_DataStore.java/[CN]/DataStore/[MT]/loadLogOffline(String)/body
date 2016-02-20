@@ -6,8 +6,7 @@
   final Cursor cursor=database.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = ?",new String[]{geocode},null,null,"_id desc","1");
   LogEntry log=null;
   if (cursor.moveToFirst()) {
-    log=new LogEntry(cursor.getLong(3),LogType.getById(cursor.getInt(1)),cursor.getString(2));
-    log.id=cursor.getInt(0);
+    log=new LogEntry.Builder().setDate(cursor.getLong(3)).setLogType(LogType.getById(cursor.getInt(1))).setLog(cursor.getString(2)).setId(cursor.getInt(0)).build();
   }
   cursor.close();
   return log;

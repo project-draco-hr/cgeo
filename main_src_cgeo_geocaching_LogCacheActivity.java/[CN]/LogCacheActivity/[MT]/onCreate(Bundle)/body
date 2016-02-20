@@ -31,7 +31,7 @@
  else {
     final LogEntry log=DataStore.loadLogOffline(geocode);
     if (log != null) {
-      typeSelected=log.type;
+      typeSelected=log.getType();
       date.setTime(new Date(log.date));
       text=log.log;
     }

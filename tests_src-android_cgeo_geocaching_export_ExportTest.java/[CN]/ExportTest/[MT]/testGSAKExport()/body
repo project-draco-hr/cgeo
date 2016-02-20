@@ -1,7 +1,7 @@
 {
   final Geocache cache=new Geocache();
   cache.setGeocode("GCX1234");
-  final LogEntry log=new LogEntry(1353244820000L,LogType.FOUND_IT,"Hidden in a tree");
+  final LogEntry log=new LogEntry.Builder().setDate(1353244820000L).setLogType(LogType.FOUND_IT).setLog("Hidden in a tree").build();
   final FieldNotes fieldNotes=new FieldNotes();
   fieldNotes.add(cache,log);
   assertEquals("Non matching export " + fieldNotes.getContent(),"GCX1234,2012-11-18T13:20:20Z,Found it,\"Hidden in a tree\"\n",fieldNotes.getContent());

@@ -1,7 +1,7 @@
 {
-  final LogEntry logEntry1=new LogEntry("userthatisnotthedefaultuser",100,LogType.FOUND_IT,"LOGENTRY");
-  final LogEntry logEntry2=new LogEntry(Settings.getUserName(),100,LogType.FOUND_IT,"LOGENTRY");
-  final LogEntry logEntry3=new LogEntry(100,LogType.FOUND_IT,"LOGENTRY");
+  final LogEntry logEntry1=new LogEntry.Builder().setAuthor("userthatisnotthedefaultuser").setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+  final LogEntry logEntry2=new LogEntry.Builder().setAuthor(Settings.getUserName()).setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+  final LogEntry logEntry3=new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
   assertThat(logEntry1.isOwn()).isFalse();
   assertThat(logEntry2.isOwn()).isTrue();
   assertThat(logEntry3.isOwn()).isTrue();
