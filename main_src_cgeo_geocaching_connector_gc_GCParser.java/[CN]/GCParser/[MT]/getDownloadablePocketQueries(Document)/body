@@ -1,0 +1,29 @@
+{
+  final Map<String,PocketQuery> downloadablePocketQueries=new HashMap<>();
+  final Elements rows=document.select("#uxOfflinePQTable tr:has(td)");
+  for (  Element row : rows) {
+    if (row == rows.last()) {
+      break;
+    }
+    final Elements cells=row.select("td");
+    final Element link=cells.get(2).select("a").first();
+    final String name=link.text();
+    final String href=link.attr("href");
+    final Uri uri=Uri.parse(href);
+    final String guid=uri.getQueryParameter("g");
+    int count=Integer.parseInt(cells.get(4).text());
+    final MatcherWrapper matcherLastGeneration=new MatcherWrapper(GCConstants.PATTERN_PQ_LAST_GEN,cells.get(5).text());
+    Date lastGeneration=null;
+    int daysRemaining=0;
+    if (matcherLastGeneration.find()) {
+      lastGeneration=GCLogin.parseGcCustomDate(matcherLastGeneration.group(1));
+      final String daysRemainingString=matcherLastGeneration.group(3);
+      if (daysRemainingString != null) {
+        daysRemaining=Integer.parseInt(daysRemainingString);
+      }
+    }
+    final PocketQuery pocketQuery=new PocketQuery(guid,name,count,true,lastGeneration,daysRemaining);
+    downloadablePocketQueries.put(guid,pocketQuery);
+  }
+  return downloadablePocketQueries;
+}
