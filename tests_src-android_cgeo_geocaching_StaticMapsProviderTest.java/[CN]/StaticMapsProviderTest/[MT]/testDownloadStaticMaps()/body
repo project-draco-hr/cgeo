@@ -26,7 +26,7 @@
     assertThat(StaticMapsProvider.hasStaticMap(cache)).isFalse();
     assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode,theFinal)).isFalse();
     assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode,trailhead)).isFalse();
-    RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache));
+    StaticMapsProvider.downloadMaps(cache).await();
     try {
       Thread.sleep(10000);
     }

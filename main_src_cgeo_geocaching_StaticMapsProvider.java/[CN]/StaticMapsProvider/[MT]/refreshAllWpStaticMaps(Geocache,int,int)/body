@@ -1,8 +1,8 @@
 {
   LocalStorage.deleteFilesWithPrefix(cache.getGeocode(),MAP_FILENAME_PREFIX + WAYPOINT_PREFIX);
-  final List<Observable<String>> downloaders=new LinkedList<>();
+  final List<Completable> downloaders=new LinkedList<>();
   for (  final Waypoint waypoint : cache.getWaypoints()) {
     downloaders.add(storeWaypointStaticMap(cache.getGeocode(),width,height,waypoint));
   }
-  return checkDownloadPermission(Observable.merge(downloaders));
+  return checkDownloadPermission(Completable.merge(downloaders));
 }

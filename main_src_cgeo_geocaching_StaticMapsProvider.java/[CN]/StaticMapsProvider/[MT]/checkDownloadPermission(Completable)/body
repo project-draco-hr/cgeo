@@ -1,11 +1,11 @@
 {
-  return Observable.defer(new Func0<Observable<T>>(){
-    @Override public Observable<T> call(){
+  return Completable.defer(new Func0<Completable>(){
+    @Override public Completable call(){
       if (System.currentTimeMillis() - last403 >= 30000) {
         return ifPermitted;
       }
       Log.d("StaticMaps.downloadMap: request ignored because of recent \"permission denied\" answer");
-      return Observable.empty();
+      return Completable.complete();
     }
   }
 );

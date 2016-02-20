@@ -39,5 +39,5 @@
       cache.setMyVote(rating.getMyVote());
     }
   }
-  RxUtils.waitForCompletion(mergedLogs);
+  mergedLogs.toCompletable().await();
 }

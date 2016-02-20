@@ -1,9 +1,9 @@
 {
   if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
-    return Observable.empty();
+    return Completable.complete();
   }
   final Point displaySize=Compatibility.getDisplaySize();
-  final List<Observable<String>> downloaders=new LinkedList<>();
+  final List<Completable> downloaders=new LinkedList<>();
   if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
     downloaders.add(storeCachePreviewMap(cache));
     downloaders.add(storeCacheStaticMap(cache,displaySize.x,displaySize.y));
@@ -15,5 +15,5 @@
       }
     }
   }
-  return checkDownloadPermission(Observable.merge(downloaders));
+  return checkDownloadPermission(Completable.merge(downloaders));
 }

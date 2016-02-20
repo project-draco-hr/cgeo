@@ -4,12 +4,7 @@
   }
   final Observable<BitmapDrawable> drawable=fetchDrawable(url);
   if (onlySave) {
-    loading.onNext(drawable.map(new Func1<BitmapDrawable,String>(){
-      @Override public String call(      final BitmapDrawable bitmapDrawable){
-        return url;
-      }
-    }
-));
+    loading.onNext(drawable.toCompletable());
     cache.put(url,null);
     return null;
   }
