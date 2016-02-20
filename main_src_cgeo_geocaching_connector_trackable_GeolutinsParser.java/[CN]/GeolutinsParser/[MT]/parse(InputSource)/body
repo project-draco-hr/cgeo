@@ -1,0 +1,17 @@
+{
+  if (page != null) {
+    try {
+      final SAXParserFactory saxPF=SAXParserFactory.newInstance();
+      final SAXParser saxP=saxPF.newSAXParser();
+      final XMLReader xmlR=saxP.getXMLReader();
+      final GeolutinsHandler glXMLHandler=new GeolutinsHandler();
+      xmlR.setContentHandler(glXMLHandler);
+      xmlR.parse(page);
+      return glXMLHandler.getTrackables();
+    }
+ catch (    final SAXException|IOException|ParserConfigurationException e) {
+      Log.w("Cannot parse GeoLutins",e);
+    }
+  }
+  return Collections.emptyList();
+}

@@ -1,0 +1,5 @@
+{
+  final Trackable trackable=new Trackable();
+  trackable.setGeocode("GL007B8");
+  assertThat(getConnector().getUrl(trackable)).isEqualTo("http://www.geolutins.com/profil_geolutin.php?ID_Geolutin_Selectionne=1976");
+}

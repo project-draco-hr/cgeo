@@ -1,0 +1,16 @@
+{
+  content="";
+  if (localName.equalsIgnoreCase("geolutin")) {
+    trackable=new Trackable();
+    trackable.forceSetBrand(TrackableBrand.GEOLUTINS);
+    trackables.add(trackable);
+    trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+  }
+  if (localName.equalsIgnoreCase("apparition_disparition")) {
+    logEntryBuilder=new LogEntry.Builder();
+    isInApparition=true;
+  }
+  if (localName.equalsIgnoreCase("description")) {
+    isMultiline=true;
+  }
+}

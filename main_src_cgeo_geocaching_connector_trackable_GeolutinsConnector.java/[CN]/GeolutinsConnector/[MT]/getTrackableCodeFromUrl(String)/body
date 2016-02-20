@@ -1,0 +1,7 @@
+{
+  final String glid=StringUtils.upperCase(StringUtils.substringAfterLast(url,"ID_Geolutin_Selectionne="));
+  if (StringUtils.isNumeric(glid)) {
+    return geocode(Integer.parseInt(glid));
+  }
+  return null;
+}

@@ -1,0 +1,63 @@
+{
+  try {
+    if (localName.equalsIgnoreCase("geolutin_id")) {
+      trackable.setGeocode(content);
+    }
+    if (localName.equalsIgnoreCase("nom")) {
+      trackable.setName(content);
+    }
+    if (localName.equalsIgnoreCase("description")) {
+      trackable.setDetails(content);
+      isMultiline=false;
+    }
+    if (localName.equalsIgnoreCase("esprit_nom")) {
+      if (isInApparition) {
+        logEntryBuilder.setAuthor(content);
+      }
+ else {
+        trackable.setOwner(content);
+      }
+    }
+    if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("date_naissance")) {
+      final Date date=DATE_FORMAT.parse(content);
+      trackable.setReleased(date);
+    }
+    if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("distance_parcourue")) {
+      trackable.setDistance(Float.parseFloat(content));
+    }
+    if (localName.equalsIgnoreCase("date_apparition_disparition")) {
+      logEntryBuilder.setDate(DATE_FORMAT.parse(content).getTime());
+    }
+    if (localName.equalsIgnoreCase("commentaires")) {
+      logEntryBuilder.setLog(content);
+    }
+    if (localName.equalsIgnoreCase("type")) {
+      logEntryBuilder.setLogType(getLogType(content));
+    }
+    if (localName.equalsIgnoreCase("geolutin")) {
+      trackable.setLogs(logsEntries);
+      if (!logsEntries.isEmpty()) {
+        final LogEntry lastLog=logsEntries.get(0);
+        if (lastLog.getType() == LogType.PLACED_IT) {
+          trackable.setSpottedType(Trackable.SPOTTED_CACHE);
+          trackable.setSpottedName(lastLog.cacheName);
+        }
+ else         if (lastLog.getType() == LogType.RETRIEVED_IT) {
+          trackable.setSpottedName(lastLog.author);
+          trackable.setSpottedType(Trackable.SPOTTED_USER);
+          trackable.setSpottedName(lastLog.author);
+        }
+ else {
+          Log.e("GeolutinsHandler.endElement unknown logtype:" + lastLog.getType());
+        }
+      }
+    }
+    if (localName.equalsIgnoreCase("apparition_disparition")) {
+      isInApparition=false;
+      logsEntries.add(logEntryBuilder.build());
+    }
+  }
+ catch (  final ParseException|NumberFormatException e) {
+    Log.e("Parsing GeoLutins",e);
+  }
+}

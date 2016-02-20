@@ -1,0 +1,25 @@
+{
+  final List<Trackable> trackables1=GeolutinsParser.parse(new InputSource(getResourceStream(R.raw.geolutins19_xml)));
+  assertThat(trackables1).hasSize(2);
+  final Trackable trackable1=trackables1.get(0);
+  assertThat(trackable1.getName()).isEqualTo("c:geo tests");
+  assertThat(trackable1.getGeocode()).isEqualTo("GL007B8");
+  assertThat(trackable1.getDetails()).isEqualTo("Virtual GeoLutins for testing c:geo android application.");
+  assertThat(trackable1.getType()).isNull();
+  assertThat(trackable1.getOwner()).isEqualTo("kumy");
+  final Trackable trackable2=trackables1.get(1);
+  assertThat(trackable1.getName()).isEqualTo(trackable2.getName());
+  assertThat(trackable1.getGeocode()).isEqualTo(trackable2.getGeocode());
+  assertThat(trackable1.getDetails()).isEqualTo(trackable2.getDetails());
+  assertThat(trackable1.getType()).isEqualTo(trackable2.getType());
+  assertThat(trackable1.getOwner()).isEqualTo(trackable2.getOwner());
+  final List<Trackable> trackables2=GeolutinsParser.parse(new InputSource(getResourceStream(R.raw.geolutins1_xml)));
+  assertThat(trackables2).hasSize(1);
+  final Trackable trackable3=trackables2.get(0);
+  assertThat(trackable3.getName()).isEqualTo("G??olutin #1");
+  assertThat(trackable3.getGeocode()).isEqualTo("GL00001");
+  assertThat(trackable3.getDetails()).isEqualTo("Je suis le premier G??olutin ! Mon but est simple : voyager le plus possible afin de faire d??couvrir mes futurs copains !<br><br>");
+  assertThat(trackable3.getType()).isNull();
+  assertThat(trackable3.getOwner()).isEqualTo("redregis");
+  assertThat(trackable3.getLogs()).hasSize(23);
+}

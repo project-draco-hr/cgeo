@@ -1,0 +1,34 @@
+{
+  final String glid;
+  if (StringUtils.startsWithIgnoreCase(geocode,"GL")) {
+    glid=geocode;
+  }
+ else {
+    Log.d("GeokretyConnector.searchTrackable: geocode=" + geocode);
+    final String geocodeFound=getGeocodeFromTrackingCode(geocode);
+    if (geocodeFound == null) {
+      return null;
+    }
+    glid=geocodeFound;
+  }
+  Log.i("GeolutinsConnector.searchTrackable: glid=" + glid);
+  try {
+    final String urlDetails="http://www.geolutins.com/xml/api.php?G=" + glid.toUpperCase();
+    Log.i("GeolutinsConnector.searchTrackable URL: " + urlDetails);
+    final InputStream response=Network.getResponseStream(Network.getRequest(urlDetails));
+    if (response == null) {
+      Log.e("GeolutinsConnector.searchTrackable: No data from server");
+      return null;
+    }
+    final InputSource is=new InputSource(response);
+    final List<Trackable> trackables=GeolutinsParser.parse(is);
+    if (CollectionUtils.isNotEmpty(trackables)) {
+      DataStore.saveTrackable(trackables.get(0));
+      return trackables.get(0);
+    }
+  }
+ catch (  final Exception e) {
+    Log.w("GeolutinsConnector.searchTrackable",e);
+  }
+  return null;
+}
