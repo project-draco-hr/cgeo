@@ -1,6 +1,6 @@
 {
-  if (brand != null && brand != TrackableBrand.UNKNOWN) {
-    return brand == getBrand() && canHandleTrackable(geocode);
+  if (brand == null || brand == TrackableBrand.UNKNOWN) {
+    return canHandleTrackable(geocode);
   }
-  return canHandleTrackable(geocode);
+  return brand == getBrand() && canHandleTrackable(geocode);
 }
