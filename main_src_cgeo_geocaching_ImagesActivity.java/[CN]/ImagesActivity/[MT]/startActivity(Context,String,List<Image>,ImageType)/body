@@ -1,6 +1,5 @@
 {
-  final Intent logImgIntent=new Intent(fromActivity,ImagesActivity.class);
-  logImgIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET).putExtra(Intents.EXTRA_GEOCODE,geocode).putExtra(Intents.EXTRA_TYPE,imageType);
+  final Intent logImgIntent=new Intent(fromActivity,ImagesActivity.class).putExtra(Intents.EXTRA_GEOCODE,geocode).putExtra(Intents.EXTRA_TYPE,imageType);
   final ArrayList<Image> arrayList=new ArrayList<>(logImages);
   logImgIntent.putParcelableArrayListExtra(Intents.EXTRA_IMAGES,arrayList);
   fromActivity.startActivity(logImgIntent);
