@@ -1,0 +1,12 @@
+{
+  final StringBuilder cookies=new StringBuilder();
+  for (  final okhttp3.Cookie cookie : allCookies.values()) {
+    cookies.append(cookie.name());
+    cookies.append('=');
+    cookies.append(cookie.value());
+    cookies.append('=');
+    cookies.append(cookie.domain());
+    cookies.append(';');
+  }
+  return cookies.toString();
+}

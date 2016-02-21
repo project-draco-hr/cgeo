@@ -1,16 +1,3 @@
 {
-  if (!cookieStoreRestored) {
-    clearCookies();
-    if (oldCookies != null) {
-      for (      final String cookie : StringUtils.split(oldCookies,';')) {
-        final String[] split=StringUtils.split(cookie,"=",3);
-        if (split.length == 3) {
-          final BasicClientCookie newCookie=new BasicClientCookie(split[0],split[1]);
-          newCookie.setDomain(split[2]);
-          cookieStore.addCookie(newCookie);
-        }
-      }
-    }
-    cookieStoreRestored=true;
-  }
+  cookieJar.restoreCookieStore(oldCookies);
 }

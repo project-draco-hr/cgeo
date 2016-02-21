@@ -1,12 +1,3 @@
 {
-  final StringBuilder cookies=new StringBuilder();
-  for (  final Cookie cookie : cookieStore.getCookies()) {
-    cookies.append(cookie.getName());
-    cookies.append('=');
-    cookies.append(cookie.getValue());
-    cookies.append('=');
-    cookies.append(cookie.getDomain());
-    cookies.append(';');
-  }
-  return cookies.toString();
+  return cookieJar.dumpCookieStore();
 }

@@ -1,0 +1,13 @@
+{
+  final List<okhttp3.Cookie> allCookies;
+synchronized (cookieJar) {
+    allCookies=new ArrayList<>(cookieJar.allCookies.values());
+  }
+  final List<Cookie> cookies=new ArrayList<>(allCookies.size());
+  for (  final okhttp3.Cookie cookie : allCookies) {
+    final BasicClientCookie newCookie=new BasicClientCookie(cookie.name(),cookie.value());
+    newCookie.setDomain('.' + cookie.domain());
+    cookies.add(newCookie);
+  }
+  return cookies;
+}
