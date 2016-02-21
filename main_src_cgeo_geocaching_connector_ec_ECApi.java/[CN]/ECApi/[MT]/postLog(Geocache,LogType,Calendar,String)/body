@@ -5,25 +5,26 @@
   params.add("date",LOG_DATE_FORMAT.format(date.getTime()));
   params.add("sid",ecLogin.getSessionId());
   final String uri=API_HOST + "log.php";
-  final HttpResponse response=Network.postRequest(uri,params);
-  if (response == null) {
-    return new LogResult(StatusCode.LOG_POST_ERROR,"");
-  }
-  if (response.getStatusLine().getStatusCode() == 403) {
-    if (ecLogin.login() == StatusCode.NO_ERROR) {
-      apiRequest(uri,params,true);
+  try {
+    final Response response=Network.postRequest(uri,params).toBlocking().value();
+    if (response.code() == 403) {
+      if (ecLogin.login() == StatusCode.NO_ERROR) {
+        apiRequest(uri,params,true);
+      }
+    }
+    if (response.code() != 200) {
+      return new LogResult(StatusCode.LOG_POST_ERROR,"");
+    }
+    final String data=Network.getResponseData(response,false);
+    if (!StringUtils.isBlank(data) && StringUtils.contains(data,"success")) {
+      if (logType == LogType.FOUND_IT || logType == LogType.ATTENDED) {
+        ecLogin.setActualCachesFound(ecLogin.getActualCachesFound() + 1);
+      }
+      final String uid=StringUtils.remove(data,"success:");
+      return new LogResult(StatusCode.NO_ERROR,uid);
     }
   }
-  if (response.getStatusLine().getStatusCode() != 200) {
-    return new LogResult(StatusCode.LOG_POST_ERROR,"");
-  }
-  final String data=Network.getResponseDataAlways(response);
-  if (!StringUtils.isBlank(data) && StringUtils.contains(data,"success")) {
-    if (logType == LogType.FOUND_IT || logType == LogType.ATTENDED) {
-      ecLogin.setActualCachesFound(ecLogin.getActualCachesFound() + 1);
-    }
-    final String uid=StringUtils.remove(data,"success:");
-    return new LogResult(StatusCode.NO_ERROR,uid);
+ catch (  final Exception ignored) {
   }
   return new LogResult(StatusCode.LOG_POST_ERROR,"");
 }

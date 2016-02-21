@@ -1,14 +1,4 @@
 {
-  final HttpPost request=new HttpPost(uri);
-  request.addHeader("Content-Type","application/json; charset=utf-8");
-  if (json != null) {
-    try {
-      request.setEntity(new StringEntity(json.toString(),CharEncoding.UTF_8));
-    }
- catch (    final UnsupportedEncodingException e) {
-      Log.e("postJsonRequest:JSON Entity: UnsupportedEncodingException",e);
-      return null;
-    }
-  }
-  return doLogRequest(request);
+  final Request request=new Request.Builder().url(uri).post(RequestBody.create(MEDIA_TYPE_APPLICATION_JSON,json.toString())).build();
+  return RxOkHttpUtils.request(OK_HTTP_CLIENT,request);
 }

@@ -3,17 +3,14 @@
     params.add("cgeo","1");
     params.add("sid",ecLogin.getSessionId());
   }
-  final HttpResponse response=Network.getRequest(API_HOST + uri,params);
-  if (response == null) {
-    return null;
-  }
-  if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
-    if (ecLogin.login() == StatusCode.NO_ERROR) {
-      return apiRequest(uri,params,true);
+  final Single<Response> response=Network.getRequest(API_HOST + uri,params);
+  return response.flatMap(new Func1<Response,Single<Response>>(){
+    @Override public Single<Response> call(    final Response response){
+      if (!isRetry && response.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
+        return apiRequest(uri,params,true);
+      }
+      return Single.just(response);
     }
   }
-  if (response.getStatusLine().getStatusCode() != 200) {
-    return null;
-  }
-  return response;
+);
 }

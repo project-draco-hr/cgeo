@@ -1,0 +1,9 @@
+{
+  try {
+    return new GPX10Parser(StoredList.TEMPORARY_LIST.id).parse(response.body().byteStream(),null);
+  }
+ catch (  final Exception e) {
+    Log.e("Error importing gpx from extremcaching.com",e);
+    return Collections.emptyList();
+  }
+}

@@ -7,6 +7,11 @@
   params.add("lat2",String.valueOf(viewport.getLatitudeMax()));
   params.add("lon1",String.valueOf(viewport.getLongitudeMin()));
   params.add("lon2",String.valueOf(viewport.getLongitudeMax()));
-  final HttpResponse response=apiRequest(params);
-  return importCachesFromJSON(response);
+  try {
+    final Response response=apiRequest(params).toBlocking().value();
+    return importCachesFromJSON(response);
+  }
+ catch (  final Exception ignored) {
+    return Collections.emptyList();
+  }
 }

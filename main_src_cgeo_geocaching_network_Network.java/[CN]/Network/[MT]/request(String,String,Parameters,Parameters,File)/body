@@ -1,21 +1,22 @@
 {
-  final HttpRequestBase request;
+  final Builder builder=new Builder();
   if (method.equals("GET")) {
     final String fullUri=params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
-    request=new HttpGet(fullUri);
+    builder.url(fullUri);
   }
  else {
-    request=new HttpPost(uri);
+    builder.url(uri);
     if (params != null) {
-      try {
-        ((HttpPost)request).setEntity(new UrlEncodedFormEntity(params,CharEncoding.UTF_8));
+      final FormBody.Builder body=new FormBody.Builder();
+      for (      final NameValuePair param : params) {
+        body.add(param.getName(),param.getValue());
       }
- catch (      final UnsupportedEncodingException e) {
-        Log.e("request",e);
-        return null;
-      }
+      builder.post(body.build());
+    }
+ else {
+      builder.post(null);
     }
   }
-  addHeaders(request,headers,cacheFile);
-  return doLogRequest(request);
+  addHeaders(builder,headers,cacheFile);
+  return RxOkHttpUtils.request(OK_HTTP_CLIENT,builder.build());
 }

@@ -1,12 +1,17 @@
 {
-  final HttpResponse response=Network.getRequest(uri,params);
-  final String data=Network.getResponseData(response,canRemoveWhitespace(uri));
-  if (Network.isPageNotFound(response) || getLoginStatus(data)) {
+  try {
+    final Response response=Network.getRequest(uri,params).toBlocking().value();
+    final String data=Network.getResponseData(response,canRemoveWhitespace(uri));
+    if (response.code() == 404 || getLoginStatus(data)) {
+      return data;
+    }
+    if (login() == StatusCode.NO_ERROR) {
+      return Network.getResponseData(Network.getRequest(uri,params),canRemoveWhitespace(uri));
+    }
+    Log.w("Working as guest.");
     return data;
   }
-  if (login() == StatusCode.NO_ERROR) {
-    return Network.getResponseData(Network.getRequest(uri,params),canRemoveWhitespace(uri));
+ catch (  final Exception ignored) {
+    return null;
   }
-  Log.w("Working as guest.");
-  return data;
 }

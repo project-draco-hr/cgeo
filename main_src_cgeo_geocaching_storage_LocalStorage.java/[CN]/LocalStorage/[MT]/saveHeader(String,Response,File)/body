@@ -1,0 +1,15 @@
+{
+  final String header=response.header(name);
+  final File file=filenameForHeader(baseFile,name);
+  if (header == null) {
+    FileUtils.deleteIgnoringFailure(file);
+  }
+ else {
+    try {
+      saveToFile(new ByteArrayInputStream(header.getBytes("UTF-8")),file);
+    }
+ catch (    final UnsupportedEncodingException e) {
+      Log.e("LocalStorage.saveHeader: unable to decode header",e);
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  try {
+    return response.flatMap(withSuccess).toBlocking().value().body().byteStream();
+  }
+ catch (  final Exception ignored) {
+    return null;
+  }
+}

@@ -9,22 +9,14 @@
       if (logType != Logs.ALL) {
         params.add(logType.getParamName(),Boolean.toString(Boolean.TRUE));
       }
-      final HttpResponse response=Network.getRequest("https://www.geocaching.com/seek/geocache.logbook",params);
-      if (response == null) {
-        Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
+      try {
+        final InputStream responseStream=Network.getResponseStream(Network.getRequest("https://www.geocaching.com/seek/geocache.logbook",params));
+        return parseLogs(logType != Logs.ALL,responseStream);
+      }
+ catch (      final Exception e) {
+        Log.e("unable to read logs",e);
         return Observable.empty();
       }
-      final int statusCode=response.getStatusLine().getStatusCode();
-      if (statusCode != 200) {
-        Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
-        return Observable.empty();
-      }
-      final InputStream responseStream=Network.getResponseStream(response);
-      if (responseStream == null) {
-        Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
-        return Observable.empty();
-      }
-      return parseLogs(logType != Logs.ALL,responseStream);
     }
   }
 ).subscribeOn(AndroidRxUtils.networkScheduler);

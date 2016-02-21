@@ -1,0 +1,8 @@
+{
+  try {
+    return response.flatMap(getResponseDataReplaceWhitespace).toBlocking().value();
+  }
+ catch (  final Exception ignored) {
+    return null;
+  }
+}

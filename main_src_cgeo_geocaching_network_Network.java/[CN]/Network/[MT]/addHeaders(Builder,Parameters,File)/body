@@ -1,0 +1,5 @@
+{
+  for (  final NameValuePair header : Parameters.extend(Parameters.merge(headers,cacheHeaders(cacheFile)))) {
+    request.header(header.getName(),header.getValue());
+  }
+}
