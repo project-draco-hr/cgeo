@@ -1,0 +1,5 @@
+{
+  assertCanHandle("GC123").isTrue();
+  assertCanHandle("GC123M").isTrue();
+  assertCanHandle("GC123L").overridingErrorMessage("L is not allowed in GC codes").isFalse();
+}

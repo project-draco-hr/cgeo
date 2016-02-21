@@ -1,4 +1,4 @@
 {
-  Set<String> geocodes=ConnectorFactoryTest.getGeocodeSample();
+  final Set<String> geocodes=ConnectorFactoryTest.getGeocodeSample();
   assertThat(GCConnector.getInstance().handledGeocodes(geocodes)).containsOnly("GC1234","GC5678");
 }
