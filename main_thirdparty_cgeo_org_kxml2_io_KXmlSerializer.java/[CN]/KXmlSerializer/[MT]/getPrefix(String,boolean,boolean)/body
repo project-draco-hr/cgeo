@@ -1,6 +1,6 @@
 {
   for (int i=nspCounts[depth + 1] * 2 - 2; i >= 0; i-=2) {
-    if (nspStack[i + 1].equals(namespace) && (includeDefault || !StringUtils.isEmpty(nspStack[i]))) {
+    if (nspStack[i + 1].equals(namespace) && (includeDefault || StringUtils.isNotEmpty(nspStack[i]))) {
       String cand=nspStack[i];
       for (int j=i + 2; j < nspCounts[depth + 1] * 2; j++) {
         if (nspStack[j].equals(cand)) {
