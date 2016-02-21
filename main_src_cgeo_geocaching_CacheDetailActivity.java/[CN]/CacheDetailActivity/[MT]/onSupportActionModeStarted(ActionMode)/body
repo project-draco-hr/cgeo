@@ -1,0 +1,14 @@
+{
+  if (mActionMode == null && selectedTextView != null) {
+    mActionMode=mode;
+    Menu menu=mode.getMenu();
+    mode.getMenuInflater().inflate(R.menu.details_context,menu);
+    menu.findItem(R.id.menu_copy).setVisible(false);
+    menu.findItem(R.id.menu_cache_share_field).setOnMenuItemClickListener(new TextMenuItemClickListener());
+    menu.findItem(R.id.menu_translate_to_sys_lang).setOnMenuItemClickListener(new TextMenuItemClickListener());
+    menu.findItem(R.id.menu_translate_to_english).setOnMenuItemClickListener(new TextMenuItemClickListener());
+    buildDetailsContextMenu(mode,menu,res.getString(R.string.cache_description),false);
+    selectedTextView.setWindowFocusWait(true);
+  }
+  super.onSupportActionModeStarted(mode);
+}
