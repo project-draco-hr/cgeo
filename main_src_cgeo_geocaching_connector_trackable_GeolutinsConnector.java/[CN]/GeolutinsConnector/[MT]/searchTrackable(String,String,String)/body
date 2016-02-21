@@ -13,7 +13,7 @@
   }
   Log.i("GeolutinsConnector.searchTrackable: glid=" + glid);
   try {
-    final String urlDetails="http://www.geolutins.com/xml/api.php?G=" + glid.toUpperCase();
+    final String urlDetails="http://www.geolutins.com/xml/api.php?G=" + StringUtils.upperCase(glid);
     Log.i("GeolutinsConnector.searchTrackable URL: " + urlDetails);
     final InputStream response=Network.getResponseStream(Network.getRequest(urlDetails));
     if (response == null) {
