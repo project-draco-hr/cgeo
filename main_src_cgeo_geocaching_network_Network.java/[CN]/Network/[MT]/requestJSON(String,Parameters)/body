@@ -1,13 +1,3 @@
 {
-  final HttpResponse response=request("GET",uri,params,new Parameters("Accept","application/json, text/javascript, */*; q=0.01"),null);
-  final String responseData=getResponseData(response,false);
-  if (responseData != null) {
-    try {
-      return (ObjectNode)JsonUtils.reader.readTree(responseData);
-    }
- catch (    final IOException e) {
-      Log.w("requestJSON",e);
-    }
-  }
-  return null;
+  return request("GET",uri,params,new Parameters("Accept","application/json, text/javascript, */*; q=0.01"),null).flatMap(getResponseData).flatMap(stringToJson);
 }

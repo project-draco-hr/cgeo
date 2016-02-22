@@ -9,7 +9,7 @@
     final Parameters params=new Parameters("i",geocodeList,"_",String.valueOf(System.currentTimeMillis()));
     params.add("app","cgeo");
     final String referer=GCConstants.URL_LIVE_MAP_DETAILS;
-    final String data=StringUtils.defaultString(Tile.requestMapInfo(referer,params,referer).toBlocking().first());
+    final String data=Tile.requestMapInfo(referer,params,referer).toBlocking().value();
     final ObjectNode json=(ObjectNode)JsonUtils.reader.readTree(data);
     final String status=json.path("status").asText();
     if (StringUtils.isBlank(status)) {

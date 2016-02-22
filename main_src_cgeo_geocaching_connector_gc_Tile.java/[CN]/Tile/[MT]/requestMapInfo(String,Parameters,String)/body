@@ -1,9 +1,9 @@
 {
-  final HttpResponse response=Network.getRequest(url,params,new Parameters("Referer",referer));
-  return Observable.defer(new Func0<Observable<String>>(){
-    @Override public Observable<String> call(){
-      return Observable.just(Network.getResponseData(response));
-    }
+  try {
+    final Response response=Network.getRequest(url,params,new Parameters("Referer",referer)).toBlocking().value();
+    return Single.just(response).flatMap(Network.getResponseData);
   }
-).subscribeOn(AndroidRxUtils.networkScheduler);
+ catch (  final Exception e) {
+    return Single.error(e);
+  }
 }

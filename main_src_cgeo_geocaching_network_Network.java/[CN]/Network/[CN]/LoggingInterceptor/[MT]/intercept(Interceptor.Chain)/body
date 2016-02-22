@@ -1,0 +1,21 @@
+{
+  final Request request=chain.request();
+  final String reqLogStr=request.method() + " " + hidePassword(request.url().toString());
+  Log.d(reqLogStr);
+  final long before=System.currentTimeMillis();
+  try {
+    final Response response=chain.proceed(request);
+    final String protocol=" (" + response.protocol() + ')';
+    if (response.isSuccessful()) {
+      Log.d(response.code() + formatTimeSpan(before) + reqLogStr+ protocol);
+    }
+ else {
+      Log.d(response.code() + " [" + response.message()+ "]"+ formatTimeSpan(before)+ reqLogStr+ protocol);
+    }
+    return response;
+  }
+ catch (  final Exception e) {
+    Log.w("Failure" + formatTimeSpan(before) + reqLogStr+ " ("+ e+ ")");
+    throw e;
+  }
+}

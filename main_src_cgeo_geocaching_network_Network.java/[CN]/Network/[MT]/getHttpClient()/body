@@ -1,7 +1,0 @@
-{
-  final DefaultHttpClient client=new DefaultHttpClient();
-  client.setCookieStore(Cookies.cookieStore);
-  client.setParams(CLIENT_PARAMS);
-  client.setRedirectStrategy(new LaxRedirectStrategy());
-  return new DecompressingHttpClient(client);
-}

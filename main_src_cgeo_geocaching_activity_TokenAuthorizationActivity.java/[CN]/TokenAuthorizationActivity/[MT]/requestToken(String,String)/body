@@ -7,12 +7,12 @@
     return;
   }
   final Parameters params=new Parameters(fieldUsername,nam,fieldPassword,pwd);
-  final HttpResponse response=Network.postRequest(urlToken,params);
   int status=NOT_AUTHENTICATED;
   String message=StringUtils.EMPTY;
-  if (Network.isSuccess(response)) {
-    final String line=StringUtils.defaultString(Network.getResponseData(response));
-    try {
+  try {
+    final Response response=Network.postRequest(urlToken,params).toBlocking().value();
+    if (response.isSuccessful()) {
+      final String line=StringUtils.defaultString(Network.getResponseData(response));
       final MatcherWrapper errorMatcher=new MatcherWrapper(getPatternIsError(),line);
       final MatcherWrapper tokenMatcher=new MatcherWrapper(getPatternToken(),line);
       if (errorMatcher.find()) {
@@ -24,12 +24,12 @@
         setToken(tokenMatcher.group(1));
       }
     }
- catch (    final Exception e) {
-      Log.e("TokenAuthorizationActivity:",e);
+ else {
+      message=getExtendedErrorMsg(response);
     }
   }
- else {
-    message=getExtendedErrorMsg(response);
+ catch (  final Exception e) {
+    Log.e("TokenAuthorizationActivity:",e);
   }
   if (StringUtils.isNotBlank(message)) {
     final Message msg=requestTokenHandler.obtainMessage(status,message);

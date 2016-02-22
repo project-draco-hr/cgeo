@@ -1,3 +1,7 @@
 {
-  return URLEncodedUtils.format(this,CharEncoding.UTF_8);
+  final Builder builder=HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
+  for (  final NameValuePair nameValuePair : this) {
+    builder.addQueryParameter(nameValuePair.getName(),nameValuePair.getValue());
+  }
+  return StringUtils.defaultString(builder.build().encodedQuery());
 }

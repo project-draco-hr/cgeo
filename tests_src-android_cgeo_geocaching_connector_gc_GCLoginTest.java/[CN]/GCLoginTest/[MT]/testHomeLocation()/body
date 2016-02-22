@@ -1,3 +1,3 @@
 {
-  assertThat(StringUtils.isNotBlank(GCLogin.retrieveHomeLocation())).isTrue();
+  assertThat(StringUtils.isNotBlank(GCLogin.retrieveHomeLocation().toBlocking().value())).isTrue();
 }

@@ -3,6 +3,11 @@
   params.add("distance","20");
   params.add("lat",String.valueOf(center.getLatitude()));
   params.add("lon",String.valueOf(center.getLongitude()));
-  final HttpResponse response=apiRequest(params);
-  return importCachesFromJSON(response);
+  try {
+    final Response response=apiRequest(params).toBlocking().value();
+    return importCachesFromJSON(response);
+  }
+ catch (  final Exception ignored) {
+    return Collections.emptyList();
+  }
 }

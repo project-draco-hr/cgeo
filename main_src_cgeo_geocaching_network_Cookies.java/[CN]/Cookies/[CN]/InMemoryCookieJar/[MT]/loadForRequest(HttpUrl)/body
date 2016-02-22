@@ -1,0 +1,11 @@
+{
+  final List<Cookie> cookies=new LinkedList<>();
+synchronized (this) {
+    for (    final Cookie cookie : allCookies.values()) {
+      if (cookie.matches(url)) {
+        cookies.add(cookie);
+      }
+    }
+  }
+  return cookies;
+}

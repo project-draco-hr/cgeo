@@ -1,9 +1,14 @@
 {
   final Parameters params=new Parameters("id",getIdFromGeocode(geocode));
-  final HttpResponse response=apiRequest("gpx.php",params);
-  final Collection<Geocache> caches=importCachesFromGPXResponse(response);
-  if (CollectionUtils.isNotEmpty(caches)) {
-    return caches.iterator().next();
+  try {
+    final Response response=apiRequest("gpx.php",params).toBlocking().value();
+    final Collection<Geocache> caches=importCachesFromGPXResponse(response);
+    if (CollectionUtils.isNotEmpty(caches)) {
+      return caches.iterator().next();
+    }
+    return null;
   }
-  return null;
+ catch (  final Exception ignored) {
+    return null;
+  }
 }

@@ -9,8 +9,8 @@
         handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
         return;
       }
-      final HttpResponse responseFromWeb=Network.getRequest("http://send2.cgeo.org/read.html",PARAMS);
-      if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
+      try {
+        final Response responseFromWeb=Network.getRequest("http://send2.cgeo.org/read.html",PARAMS).flatMap(Network.withSuccess).toBlocking().value();
         final String response=Network.getResponseData(responseFromWeb);
         if (response != null && response.length() > 2) {
           handler.sendMessage(handler.obtainMessage(DownloadProgress.MSG_LOADING,response));
@@ -29,7 +29,8 @@
           handler.sendEmptyMessage(DownloadProgress.MSG_WAITING);
         }
       }
- else {
+ catch (      final Exception e) {
+        Log.e("loadFromWeb",e);
         handler.sendEmptyMessage(DownloadProgress.MSG_SERVER_FAIL);
         handler.cancel();
       }

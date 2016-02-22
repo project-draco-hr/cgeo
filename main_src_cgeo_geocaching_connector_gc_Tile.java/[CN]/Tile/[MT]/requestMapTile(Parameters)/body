@@ -1,15 +1,20 @@
 {
-  final HttpResponse response=Network.getRequest(GCConstants.URL_MAP_TILE,params,new Parameters("Referer",GCConstants.URL_LIVE_MAP));
-  return Observable.defer(new Func0<Observable<Bitmap>>(){
-    @Override public Observable<Bitmap> call(){
-      try {
-        return Observable.just(response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null);
-      }
- catch (      final IOException e) {
-        Log.e("Tile.requestMapTile() ",e);
-        return Observable.just(null);
+  try {
+    final Response response=Network.getRequest(GCConstants.URL_MAP_TILE,params,new Parameters("Referer",GCConstants.URL_LIVE_MAP)).toBlocking().value();
+    return Single.just(response).flatMap(new Func1<Response,Single<Bitmap>>(){
+      @Override public Single<Bitmap> call(      final Response response){
+        if (response.isSuccessful()) {
+          final Bitmap bitmap=BitmapFactory.decodeStream(response.body().byteStream());
+          if (bitmap != null) {
+            return Single.just(bitmap);
+          }
+        }
+        return Single.error(new IOException("could not decode bitmap"));
       }
     }
-  }
 ).subscribeOn(AndroidRxUtils.computationScheduler);
+  }
+ catch (  final Exception e) {
+    return Single.error(e);
+  }
 }

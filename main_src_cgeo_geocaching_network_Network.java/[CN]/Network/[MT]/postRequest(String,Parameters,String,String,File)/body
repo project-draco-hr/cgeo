@@ -1,17 +1,10 @@
 {
-  final MultipartEntity entity=new MultipartEntity();
+  final MultipartBody.Builder entity=new MultipartBody.Builder().setType(FORM);
   for (  final NameValuePair param : params) {
-    try {
-      entity.addPart(param.getName(),new StringBody(param.getValue(),TextUtils.CHARSET_UTF8));
-    }
- catch (    final UnsupportedEncodingException e) {
-      Log.e("Network.postRequest: unsupported encoding for parameter " + param.getName(),e);
-      return null;
-    }
+    entity.addFormDataPart(param.getName(),param.getValue());
   }
-  entity.addPart(fileFieldName,new FileBody(file,fileContentType));
-  final HttpPost request=new HttpPost(uri);
-  request.setEntity(entity);
+  entity.addFormDataPart(fileFieldName,file.getName(),RequestBody.create(MediaType.parse(fileContentType),file));
+  final Builder request=new Request.Builder().url(uri).post(entity.build());
   addHeaders(request,null,null);
-  return doLogRequest(request);
+  return RxOkHttpUtils.request(OK_HTTP_CLIENT,request.build());
 }

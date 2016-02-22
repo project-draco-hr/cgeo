@@ -15,5 +15,10 @@
     connector.addAuthentication(params);
   }
   final String uri="http://" + host + service.methodName;
-  return new JSONResult(Network.getRequest(uri,params));
+  try {
+    return new JSONResult(Network.getRequest(uri,params).toBlocking().value());
+  }
+ catch (  final Exception e) {
+    return new JSONResult("connection error");
+  }
 }

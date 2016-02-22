@@ -15,12 +15,14 @@
     }
     final Parameters params=new Parameters("__EVENTTARGET",paramEnglish,"__EVENTARGUMENT","");
     transferViewstates(page,params);
-    final HttpResponse response=Network.postRequest(LANGUAGE_CHANGE_URI,params,new Parameters("Referer",LANGUAGE_CHANGE_URI));
-    if (Network.isSuccess(response)) {
+    try {
+      Network.completeWithSuccess(Network.postRequest(LANGUAGE_CHANGE_URI,params,new Parameters("Referer",LANGUAGE_CHANGE_URI)));
       Log.i("changed language on geocaching.com to English");
       return true;
     }
-    Log.e("Failed to set geocaching.com language to English");
+ catch (    final Exception ignored) {
+      Log.e("Failed to set geocaching.com language to English");
+    }
   }
   return false;
 }
