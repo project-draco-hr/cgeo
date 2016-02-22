@@ -3,29 +3,51 @@
     return false;
   }
   final boolean withCacheDetails=objectsToShow.size() < 200;
-  final PointsData pd=new PointsData("c:geo");
+  final PackWaypoints pd=new PackWaypoints("c:geo");
   for (  final Object o : objectsToShow) {
-    Point p=null;
+    Waypoint p=null;
     if (o instanceof Geocache) {
       p=getCachePoint((Geocache)o,withCacheWaypoints,withCacheDetails);
     }
- else     if (o instanceof Waypoint) {
-      p=getWaypointPoint((Waypoint)o);
+ else     if (o instanceof cgeo.geocaching.models.Waypoint) {
+      p=getWaypointPoint((cgeo.geocaching.models.Waypoint)o);
     }
     if (p != null) {
-      pd.addPoint(p);
+      pd.addWaypoint(p);
     }
   }
-  if (pd.getPoints().isEmpty()) {
+  if (pd.getWaypoints().isEmpty()) {
     return false;
   }
-  if (pd.getPoints().size() <= 1000) {
-    DisplayData.sendData(activity,pd,export);
+  if (pd.getWaypoints().size() <= 1000) {
+    try {
+      ActionDisplayPoints.sendPack(activity,pd,export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
+    }
+ catch (    RequiredVersionMissingException e) {
+      Log.e("AbstractLocusApp.showInLocus: problem in sendPack",e);
+      return false;
+    }
   }
  else {
-    final ArrayList<PointsData> data=new ArrayList<>();
+    final File externalDir=Environment.getExternalStorageDirectory();
+    if (externalDir == null || !externalDir.exists()) {
+      Log.w("AbstractLocusApp.showInLocus: problem with obtain of External dir");
+      return false;
+    }
+    String filePath=externalDir.getAbsolutePath();
+    if (!filePath.endsWith("/")) {
+      filePath+="/";
+    }
+    filePath+="Android/data/menion.android.locus.api/files/showIn.locus";
+    final ArrayList<PackWaypoints> data=new ArrayList<PackWaypoints>();
     data.add(pd);
-    DisplayData.sendDataCursor(activity,data,"content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(Locale.US),export);
+    try {
+      ActionDisplayPoints.sendPacksFile(activity,data,filePath,export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
+    }
+ catch (    RequiredVersionMissingException e) {
+      Log.e("AbstractLocusApp.showInLocus: problem in sendPacksFile",e);
+      return false;
+    }
   }
   return true;
 }

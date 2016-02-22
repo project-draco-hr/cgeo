@@ -9,7 +9,6 @@
   final Location loc=new Location("cgeo");
   loc.setLatitude(coordinates.getLatitude());
   loc.setLongitude(coordinates.getLongitude());
-  final Point p=new Point(waypoint.getName(),loc);
-  p.setDescription("<a href=\"" + waypoint.getUrl() + "\">"+ waypoint.getGeocode()+ "</a>");
+  final Waypoint p=new Waypoint(waypoint.getName(),loc);
   return p;
 }

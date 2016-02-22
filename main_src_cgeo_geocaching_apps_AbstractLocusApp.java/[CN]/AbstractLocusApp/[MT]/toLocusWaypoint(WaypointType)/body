@@ -1,19 +1,19 @@
 {
 switch (wt) {
 case FINAL:
-    return PointGeocachingData.CACHE_WAYPOINT_TYPE_FINAL;
+    return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_FINAL;
 case OWN:
-  return PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
+  return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_PHYSICAL_STAGE;
 case PARKING:
-return PointGeocachingData.CACHE_WAYPOINT_TYPE_PARKING;
+return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_PARKING;
 case PUZZLE:
-return PointGeocachingData.CACHE_WAYPOINT_TYPE_QUESTION;
+return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_VIRTUAL_STAGE;
 case STAGE:
-return PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
+return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_PHYSICAL_STAGE;
 case TRAILHEAD:
-return PointGeocachingData.CACHE_WAYPOINT_TYPE_TRAILHEAD;
+return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_TRAILHEAD;
 case WAYPOINT:
-return PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
+return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE;
 default :
 return null;
 }
