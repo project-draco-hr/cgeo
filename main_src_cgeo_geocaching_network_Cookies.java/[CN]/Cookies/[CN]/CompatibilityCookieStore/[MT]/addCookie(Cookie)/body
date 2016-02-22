@@ -1,5 +1,0 @@
-{
-  final String domain=cookie.getDomain();
-  final okhttp3.Cookie newCookie=new Builder().domain(domain.startsWith(".") ? domain.substring(1) : domain).name(cookie.getName()).value(cookie.getValue()).build();
-  cookieJar.addCookie(newCookie);
-}

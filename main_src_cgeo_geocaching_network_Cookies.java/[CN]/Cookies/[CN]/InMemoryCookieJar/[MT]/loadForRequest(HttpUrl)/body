@@ -1,7 +1,7 @@
 {
-  final List<okhttp3.Cookie> cookies=new LinkedList<>();
+  final List<Cookie> cookies=new LinkedList<>();
 synchronized (this) {
-    for (    final okhttp3.Cookie cookie : allCookies.values()) {
+    for (    final Cookie cookie : allCookies.values()) {
       if (cookie.matches(url)) {
         cookies.add(cookie);
       }
