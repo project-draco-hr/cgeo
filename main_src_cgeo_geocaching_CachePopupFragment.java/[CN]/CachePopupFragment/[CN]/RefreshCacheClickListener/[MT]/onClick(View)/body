@@ -3,7 +3,7 @@
     showToast(res.getString(R.string.err_detail_still_working));
     return;
   }
-  if (!Network.isNetworkConnected()) {
+  if (!CgeoApplication.getInstance().isNetworkConnected()) {
     showToast(getString(R.string.err_server));
     return;
   }

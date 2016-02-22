@@ -1,5 +1,5 @@
 {
-  if (!Network.isNetworkConnected()) {
+  if (!CgeoApplication.getInstance().isNetworkConnected()) {
     return StatusCode.COMMUNICATION_ERROR;
   }
   return login(true);

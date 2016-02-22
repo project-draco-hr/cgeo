@@ -1,6 +1,6 @@
 {
   if (connectivityManager == null) {
-    connectivityManager=(ConnectivityManager)CgeoApplication.getInstance().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    connectivityManager=(ConnectivityManager)getInstance().getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
   }
   final NetworkInfo activeNetworkInfo=connectivityManager.getActiveNetworkInfo();
   return activeNetworkInfo != null && activeNetworkInfo.isConnected();
