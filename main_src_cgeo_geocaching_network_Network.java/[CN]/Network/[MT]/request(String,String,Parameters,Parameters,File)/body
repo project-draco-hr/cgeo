@@ -8,8 +8,8 @@
     builder.url(uri);
     if (params != null) {
       final FormBody.Builder body=new FormBody.Builder();
-      for (      final NameValuePair param : params) {
-        body.add(param.getName(),param.getValue());
+      for (      final ImmutablePair<String,String> param : params) {
+        body.add(param.left,param.right);
       }
       builder.post(body.build());
     }

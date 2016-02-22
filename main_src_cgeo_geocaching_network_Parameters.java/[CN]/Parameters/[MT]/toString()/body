@@ -1,7 +1,7 @@
 {
   final Builder builder=HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
-  for (  final NameValuePair nameValuePair : this) {
-    builder.addQueryParameter(nameValuePair.getName(),nameValuePair.getValue());
+  for (  final ImmutablePair<String,String> nameValuePair : this) {
+    builder.addQueryParameter(nameValuePair.left,nameValuePair.right);
   }
   return StringUtils.defaultString(builder.build().encodedQuery());
 }

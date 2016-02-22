@@ -3,7 +3,7 @@
     throw new InvalidParameterException("odd number of parameters");
   }
   for (int i=0; i < keyValues.length; i+=2) {
-    add(new NameValuePair(keyValues[i],keyValues[i + 1]));
+    add(ImmutablePair.of(keyValues[i],keyValues[i + 1]));
   }
   return this;
 }

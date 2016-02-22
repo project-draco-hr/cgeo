@@ -1,7 +1,7 @@
 {
   final MultipartBody.Builder entity=new MultipartBody.Builder().setType(FORM);
-  for (  final NameValuePair param : params) {
-    entity.addFormDataPart(param.getName(),param.getValue());
+  for (  final ImmutablePair<String,String> param : params) {
+    entity.addFormDataPart(param.left,param.right);
   }
   entity.addFormDataPart(fileFieldName,file.getName(),RequestBody.create(MediaType.parse(fileContentType),file));
   final Builder request=new Request.Builder().url(uri).post(entity.build());
