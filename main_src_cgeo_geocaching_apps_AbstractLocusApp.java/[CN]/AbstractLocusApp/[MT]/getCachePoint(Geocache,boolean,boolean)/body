@@ -5,60 +5,60 @@
   final Location loc=new Location("cgeo");
   loc.setLatitude(cache.getCoords().getLatitude());
   loc.setLongitude(cache.getCoords().getLongitude());
-  final Point p=new Point(cache.getName(),loc);
-  final PointGeocachingData pg=new PointGeocachingData();
-  p.setGeocachingData(pg);
-  pg.cacheID=cache.getGeocode();
-  pg.available=!cache.isDisabled();
-  pg.archived=cache.isArchived();
-  pg.premiumOnly=cache.isPremiumMembersOnly();
-  pg.name=cache.getName();
-  pg.placedBy=cache.getOwnerDisplayName();
-  final Date hiddenDate=cache.getHiddenDate();
-  if (hiddenDate != null) {
-    pg.hidden=ISO8601DATE.format(hiddenDate);
+  final Waypoint wpt=new Waypoint(cache.getName(),loc);
+  final GeocachingData gcData=new GeocachingData();
+  gcData.setCacheID(cache.getGeocode());
+  gcData.setName(cache.getName());
+  gcData.setOwner(cache.getOwnerUserId());
+  gcData.setPlacedBy(cache.getOwnerDisplayName());
+  if (cache.getDifficulty() > 0) {
+    gcData.setDifficulty(cache.getDifficulty());
   }
-  final int type=toLocusType(cache.getType());
-  if (type != NO_LOCUS_ID) {
-    pg.type=type;
+  if (cache.getTerrain() > 0) {
+    gcData.setTerrain(cache.getTerrain());
   }
   final int container=toLocusSize(cache.getSize());
   if (container != NO_LOCUS_ID) {
-    pg.container=container;
+    gcData.setContainer(container);
   }
-  if (cache.getDifficulty() > 0) {
-    pg.difficulty=cache.getDifficulty();
+  gcData.setAvailable(!cache.isDisabled());
+  gcData.setArchived(cache.isArchived());
+  gcData.setPremiumOnly(cache.isPremiumMembersOnly());
+  final Date hiddenDate=cache.getHiddenDate();
+  if (hiddenDate != null) {
+    gcData.setDateHidden(hiddenDate.getTime());
   }
-  if (cache.getTerrain() > 0) {
-    pg.terrain=cache.getTerrain();
+  final int type=toLocusType(cache.getType());
+  if (type != NO_LOCUS_ID) {
+    gcData.setType(type);
   }
-  pg.found=cache.isFound();
+  gcData.setFound(cache.isFound());
   if (withWaypoints && cache.hasWaypoints()) {
-    pg.waypoints=new ArrayList<>();
-    for (    final Waypoint waypoint : cache.getWaypoints()) {
+    for (    final cgeo.geocaching.models.Waypoint waypoint : cache.getWaypoints()) {
       if (waypoint == null) {
         continue;
       }
-      final PointGeocachingDataWaypoint wp=new PointGeocachingDataWaypoint();
-      wp.code=waypoint.getLookup();
-      wp.name=waypoint.getName();
-      wp.description=waypoint.getNote();
+      GeocachingWaypoint gcWpt=new GeocachingWaypoint();
+      gcWpt.setCode(waypoint.getLookup());
+      gcWpt.setName(waypoint.getName());
+      gcWpt.setDesc(waypoint.getNote());
+      gcWpt.setType(GeocachingWaypoint.CACHE_WAYPOINT_TYPE_PARKING);
       final String locusWpId=toLocusWaypoint(waypoint.getWaypointType());
       if (locusWpId != null) {
-        wp.type=locusWpId;
+        gcWpt.setType(locusWpId);
       }
       final Geopoint waypointCoords=waypoint.getCoords();
       if (waypointCoords != null) {
-        wp.lat=waypointCoords.getLatitude();
-        wp.lon=waypointCoords.getLongitude();
+        gcWpt.setLon(waypointCoords.getLongitude());
+        gcWpt.setLat(waypointCoords.getLatitude());
       }
-      pg.waypoints.add(wp);
+      gcData.waypoints.add(gcWpt);
     }
   }
   if (withCacheDetails) {
-    pg.shortDescription=cache.getShortDescription();
-    pg.longDescription=cache.getDescription();
-    pg.encodedHints=cache.getHint();
+    gcData.setDescriptions(cache.getShortDescription(),true,cache.getDescription(),true);
+    gcData.setEncodedHints(cache.getHint());
   }
-  return p;
+  wpt.gcData=gcData;
+  return wpt;
 }
