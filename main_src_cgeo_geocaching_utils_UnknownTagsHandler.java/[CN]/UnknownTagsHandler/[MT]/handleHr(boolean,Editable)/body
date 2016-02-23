@@ -1,6 +1,8 @@
 {
   if (opening) {
-    output.append("\n");
+    if (output.length() > 0 && output.charAt(output.length() - 1) != '\n') {
+      output.append('\n');
+    }
     final int start=output.length();
     output.append("                              ");
     output.setSpan(new StrikethroughSpan(),start,output.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
