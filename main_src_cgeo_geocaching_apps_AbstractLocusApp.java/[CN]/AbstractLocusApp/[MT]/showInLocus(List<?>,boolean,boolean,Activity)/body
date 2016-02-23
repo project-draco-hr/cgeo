@@ -23,7 +23,7 @@
     try {
       ActionDisplayPoints.sendPack(activity,pd,export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
     }
- catch (    RequiredVersionMissingException e) {
+ catch (    final RequiredVersionMissingException e) {
       Log.e("AbstractLocusApp.showInLocus: problem in sendPack",e);
       return false;
     }
@@ -39,12 +39,12 @@
       filePath+="/";
     }
     filePath+="Android/data/menion.android.locus.api/files/showIn.locus";
-    final ArrayList<PackWaypoints> data=new ArrayList<PackWaypoints>();
+    final ArrayList<PackWaypoints> data=new ArrayList<>();
     data.add(pd);
     try {
       ActionDisplayPoints.sendPacksFile(activity,data,filePath,export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
     }
- catch (    RequiredVersionMissingException e) {
+ catch (    final RequiredVersionMissingException e) {
       Log.e("AbstractLocusApp.showInLocus: problem in sendPacksFile",e);
       return false;
     }
