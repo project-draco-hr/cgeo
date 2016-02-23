@@ -16,7 +16,8 @@
     @Override public Observable<Trackable> call(    final TrackableConnector trackableConnector){
       return RxUtils.deferredNullable(new Func0<Trackable>(){
         @Override public Trackable call(){
-          return trackableConnector.searchTrackable(geocode,guid,id);
+          final Trackable trackable=trackableConnector.searchTrackable(geocode,guid,id);
+          return trackable;
         }
       }
 ).subscribeOn(AndroidRxUtils.networkScheduler);
@@ -25,7 +26,8 @@
 );
   final Observable<Trackable> fromLocalStorage=RxUtils.deferredNullable(new Func0<Trackable>(){
     @Override public Trackable call(){
-      return DataStore.loadTrackable(geocode);
+      final Trackable trackable=DataStore.loadTrackable(geocode);
+      return trackable;
     }
   }
 ).subscribeOn(Schedulers.io());
