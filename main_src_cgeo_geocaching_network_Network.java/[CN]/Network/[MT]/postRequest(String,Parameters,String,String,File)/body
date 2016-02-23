@@ -1,5 +1,5 @@
 {
-  final MultipartBody.Builder entity=new MultipartBody.Builder().setType(FORM);
+  final MultipartBody.Builder entity=new MultipartBody.Builder().setType(MultipartBody.FORM);
   for (  final ImmutablePair<String,String> param : params) {
     entity.addFormDataPart(param.left,param.right);
   }
