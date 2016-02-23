@@ -1,7 +1,7 @@
 {
   try {
     final UnknownTagsHandler unknownTagsHandler=new UnknownTagsHandler();
-    final Spanned description=Html.fromHtml(descriptionString,new HtmlImage(cache.getGeocode(),true,cache.getListId(),false,descriptionView),unknownTagsHandler);
+    final Spanned description=Html.fromHtml(descriptionString,new HtmlImage(cache.getGeocode(),true,false,descriptionView,false),unknownTagsHandler);
     addWarning(unknownTagsHandler,description);
     if (StringUtils.isNotBlank(descriptionString)) {
       try {

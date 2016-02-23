@@ -28,7 +28,7 @@
     if (CancellableHandler.isCancelled(handler)) {
       return;
     }
-    final HtmlImage imgGetter=new HtmlImage(cache.getGeocode(),false,listId,true);
+    final HtmlImage imgGetter=new HtmlImage(cache.getGeocode(),false,true,forceRedownload);
     if (StringUtils.isNotBlank(cache.getDescription())) {
       Html.fromHtml(cache.getDescription(),imgGetter,null);
     }
