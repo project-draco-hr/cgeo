@@ -5,7 +5,7 @@
   if (getHistoryOfSearchedLocations().isEmpty()) {
     historyListView.addFooterView(getEmptyHistoryFooter(),null,false);
   }
-  historyListView.setAdapter(getDestionationHistoryAdapter());
+  historyListView.setAdapter(getDestinationHistoryAdapter());
   historyListView.setOnItemClickListener(new OnItemClickListener(){
     @Override public void onItemClick(    final AdapterView<?> arg0,    final View arg1,    final int arg2,    final long arg3){
       final Object selection=arg0.getItemAtPosition(arg2);
