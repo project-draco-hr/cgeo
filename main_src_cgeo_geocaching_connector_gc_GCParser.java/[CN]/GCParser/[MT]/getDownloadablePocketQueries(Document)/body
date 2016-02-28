@@ -1,7 +1,7 @@
 {
   final Map<String,PocketQuery> downloadablePocketQueries=new HashMap<>();
   final Elements rows=document.select("#uxOfflinePQTable tr:has(td)");
-  for (  Element row : rows) {
+  for (  final Element row : rows) {
     if (row == rows.last()) {
       break;
     }
@@ -19,7 +19,7 @@
     final String href=link.attr("href");
     final Uri uri=Uri.parse(href);
     final String guid=uri.getQueryParameter("g");
-    int count=Integer.parseInt(cells.get(4).text());
+    final int count=Integer.parseInt(cells.get(4).text());
     final MatcherWrapper matcherLastGeneration=new MatcherWrapper(GCConstants.PATTERN_PQ_LAST_GEN,cells.get(5).text());
     Date lastGeneration=null;
     int daysRemaining=0;

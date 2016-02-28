@@ -79,7 +79,7 @@
       Log.e("GCParser.parseTrackable: Failed to parse distance",e);
     }
   }
-  trackable.setGoal(HtmlUtils.removeExtraTags(convertLinks(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GOAL,true,trackable.getGoal()))));
+  trackable.setGoal(convertLinks(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_GOAL,true,trackable.getGoal())));
   try {
     final MatcherWrapper matcherDetailsImage=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE,page);
     if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
@@ -89,7 +89,7 @@
         trackable.setImage(StringUtils.replace(image,"/display/","/large/"));
       }
       if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details,"No additional details available.")) {
-        trackable.setDetails(HtmlUtils.removeExtraTags(convertLinks(details)));
+        trackable.setDetails(convertLinks(details));
       }
     }
   }
