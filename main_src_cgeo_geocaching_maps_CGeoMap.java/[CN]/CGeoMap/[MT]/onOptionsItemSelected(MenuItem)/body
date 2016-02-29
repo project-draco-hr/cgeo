@@ -69,6 +69,14 @@ if (!Settings.isExcludeMyCaches()) {
 Tile.cache.clear();
 }
 return true;
+case R.id.menu_disabled_mode:
+Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
+markersInvalidated=true;
+ActivityMixin.invalidateOptionsMenu(activity);
+if (!Settings.isExcludeDisabledCaches()) {
+Tile.cache.clear();
+}
+return true;
 case R.id.menu_theme_mode:
 selectMapTheme();
 return true;
