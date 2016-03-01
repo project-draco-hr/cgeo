@@ -33,6 +33,9 @@
   }
  else {
     initializeWaypointTypeSelector();
+    if (initialCoords != null) {
+      updateCoordinates(initialCoords);
+    }
   }
   initializeDistanceUnitSelector();
   disableSuggestions(distanceView);
