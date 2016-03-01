@@ -1,0 +1,40 @@
+{
+  try {
+    final File file=LocalStorage.getStorageFile(geocode,img.getUrl(),true,false);
+    final Metadata metadata=ImageMetadataReader.readMetadata(file);
+    final Collection<GpsDirectory> gpsDirectories=metadata.getDirectoriesOfType(GpsDirectory.class);
+    if (gpsDirectories == null) {
+      return;
+    }
+    for (    final GpsDirectory gpsDirectory : gpsDirectories) {
+      final GeoLocation geoLocation=gpsDirectory.getGeoLocation();
+      if (geoLocation != null && !geoLocation.isZero()) {
+        final ImageView geoOverlay=(ImageView)imageViewLayout.findViewById(R.id.geo_overlay);
+        geoOverlay.setVisibility(View.VISIBLE);
+        geoOverlay.setOnClickListener(new View.OnClickListener(){
+          @Override public void onClick(          final View wpNavView){
+            final Geopoint gpt=new Geopoint(geoLocation.getLatitude(),geoLocation.getLongitude());
+            wpNavView.setOnClickListener(new View.OnClickListener(){
+              @Override public void onClick(              final View v){
+                NavigationAppFactory.startDefaultNavigationApplication(1,activity,gpt);
+              }
+            }
+);
+            wpNavView.setOnLongClickListener(new View.OnLongClickListener(){
+              @Override public boolean onLongClick(              final View v){
+                NavigationAppFactory.startDefaultNavigationApplication(2,activity,gpt);
+                return true;
+              }
+            }
+);
+          }
+        }
+);
+        break;
+      }
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("ImagesList.addGeoOverlay",e);
+  }
+}
