@@ -1,11 +1,8 @@
 {
-  if (null == other || null == other.value) {
+  if (other == null || other.value == null) {
     return this;
   }
-  if (null == this.value) {
-    return other;
-  }
-  if (other.certaintyLevel > certaintyLevel) {
+  if (this.value == null || other.certaintyLevel > certaintyLevel) {
     return other;
   }
   return this;

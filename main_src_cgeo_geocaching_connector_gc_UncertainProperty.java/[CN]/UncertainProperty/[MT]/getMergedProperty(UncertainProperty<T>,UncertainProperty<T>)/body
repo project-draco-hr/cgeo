@@ -1,6 +1,3 @@
 {
-  if (null == property) {
-    return otherProperty;
-  }
-  return property.getMergedProperty(otherProperty);
+  return property == null ? otherProperty : property.getMergedProperty(otherProperty);
 }

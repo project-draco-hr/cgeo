@@ -1,0 +1,9 @@
+{
+  if (property == null || otherProperty == null) {
+    return property == null && otherProperty == null;
+  }
+  if (property.value == null || otherProperty.value == null) {
+    return property.value == null && otherProperty.value == null;
+  }
+  return property.value.equals(otherProperty.value);
+}
