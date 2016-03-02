@@ -19,7 +19,5 @@
   if (CollectionUtils.isEmpty(imageNames)) {
     showToast(res.getString(R.string.warn_load_images));
     finish();
-    return;
   }
-  offline=DataStore.isOffline(geocode,null) && (imgType == ImageType.SpoilerImages || Settings.isStoreLogImages());
 }
