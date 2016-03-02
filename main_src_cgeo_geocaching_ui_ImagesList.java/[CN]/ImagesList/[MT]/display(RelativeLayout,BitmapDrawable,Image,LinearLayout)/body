@@ -1,4 +1,5 @@
 {
+  final ImageView imageView=(ImageView)imageViewLayout.findViewById(R.id.map_image);
   if (image != null) {
     bitmaps.add(image.getBitmap());
     final Rect bounds=image.getBounds();
@@ -13,9 +14,10 @@
     activity.registerForContextMenu(imageView);
     imageView.setImageDrawable(image);
     imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-    imageView.setLayoutParams(new LinearLayout.LayoutParams(bounds.width(),bounds.height()));
+    imageView.setLayoutParams(new RelativeLayout.LayoutParams(bounds.width(),bounds.height()));
     view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
     imageView.setId(image.hashCode());
+    addGeoOverlay(imageViewLayout,img);
     images.put(imageView.getId(),img);
     view.invalidate();
   }
