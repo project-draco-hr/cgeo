@@ -1,6 +1,6 @@
 {
   final FilenameFilter filter=new FilenameFilter(){
-    @Override public boolean accept(    final File dir,    final String filename){
+    @Override public boolean accept(    final File dir,    @NonNull final String filename){
       return filename.startsWith(filenamePrefix);
     }
   }
