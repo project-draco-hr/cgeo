@@ -8,7 +8,7 @@
           try {
             addCookie(new Builder().name(split[0]).value(split[1]).domain(split[2]).build());
           }
- catch (          final Exception ignored) {
+ catch (          final RuntimeException ignored) {
           }
         }
       }

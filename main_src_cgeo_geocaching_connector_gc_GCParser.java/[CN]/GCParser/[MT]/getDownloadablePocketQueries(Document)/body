@@ -21,10 +21,13 @@
     final String guid=uri.getQueryParameter("g");
     final int count=Integer.parseInt(cells.get(4).text());
     final MatcherWrapper matcherLastGeneration=new MatcherWrapper(GCConstants.PATTERN_PQ_LAST_GEN,cells.get(5).text());
-    Date lastGeneration=null;
+    long lastGeneration=0;
     int daysRemaining=0;
     if (matcherLastGeneration.find()) {
-      lastGeneration=GCLogin.parseGcCustomDate(matcherLastGeneration.group(1));
+      final Date lastGenerationDate=GCLogin.parseGcCustomDate(matcherLastGeneration.group(1));
+      if (lastGenerationDate != null) {
+        lastGeneration=lastGenerationDate.getTime();
+      }
       final String daysRemainingString=matcherLastGeneration.group(3);
       if (daysRemainingString != null) {
         daysRemaining=Integer.parseInt(daysRemainingString);

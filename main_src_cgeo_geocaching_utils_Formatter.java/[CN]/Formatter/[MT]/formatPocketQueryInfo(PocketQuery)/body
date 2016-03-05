@@ -7,8 +7,9 @@
   if (caches >= 0) {
     infos.add(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts,caches,caches));
   }
-  if (pocketQuery.getLastGeneration() != null) {
-    infos.add(Formatter.formatShortDateVerbally(pocketQuery.getLastGeneration().getTime()));
+  final long lastGenerationTime=pocketQuery.getLastGenerationTime();
+  if (lastGenerationTime > 0) {
+    infos.add(Formatter.formatShortDateVerbally(lastGenerationTime));
   }
   final int daysRemaining=pocketQuery.getDaysRemaining();
   if (daysRemaining == 0) {
