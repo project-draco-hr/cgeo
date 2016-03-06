@@ -19,10 +19,8 @@
       }
     }
   }
- else   if (msg.what == FINISHED_LOADING_DETAILS) {
-    if (waitDialog != null) {
-      waitDialog.dismiss();
-      waitDialog.setOnCancelListener(null);
-    }
+ else   if (msg.what == FINISHED_LOADING_DETAILS && waitDialog != null) {
+    waitDialog.dismiss();
+    waitDialog.setOnCancelListener(null);
   }
 }

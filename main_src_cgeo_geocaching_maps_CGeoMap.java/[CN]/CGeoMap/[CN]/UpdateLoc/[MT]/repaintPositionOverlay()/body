@@ -7,10 +7,8 @@
       if (map != null) {
         final boolean needsRepaintForDistanceOrAccuracy=needsRepaintForDistanceOrAccuracy();
         final boolean needsRepaintForHeading=needsRepaintForHeading();
-        if (needsRepaintForDistanceOrAccuracy) {
-          if (followMyLocation) {
-            map.centerMap(new Geopoint(currentLocation));
-          }
+        if (needsRepaintForDistanceOrAccuracy && followMyLocation) {
+          map.centerMap(new Geopoint(currentLocation));
         }
         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
           map.overlayPositionAndScale.setCoordinates(currentLocation);

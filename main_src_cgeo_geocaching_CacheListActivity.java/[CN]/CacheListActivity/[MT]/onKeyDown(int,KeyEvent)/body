@@ -1,9 +1,7 @@
 {
-  if (keyCode == KeyEvent.KEYCODE_BACK) {
-    if (adapter.isSelectMode()) {
-      adapter.setSelectMode(false);
-      return true;
-    }
+  if (keyCode == KeyEvent.KEYCODE_BACK && adapter.isSelectMode()) {
+    adapter.setSelectMode(false);
+    return true;
   }
   return super.onKeyDown(keyCode,event);
 }

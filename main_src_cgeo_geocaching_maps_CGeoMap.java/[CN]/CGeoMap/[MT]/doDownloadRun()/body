@@ -1,15 +1,13 @@
 {
   try {
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
-    if (Settings.isGCConnectorActive()) {
-      if (tokens == null) {
-        tokens=GCLogin.getInstance().getMapTokens();
-        if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
-          tokens=null;
-          if (!noMapTokenShowed) {
-            ActivityMixin.showToast(activity,res.getString(R.string.map_token_err));
-            noMapTokenShowed=true;
-          }
+    if (Settings.isGCConnectorActive() && tokens == null) {
+      tokens=GCLogin.getInstance().getMapTokens();
+      if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
+        tokens=null;
+        if (!noMapTokenShowed) {
+          ActivityMixin.showToast(activity,res.getString(R.string.map_token_err));
+          noMapTokenShowed=true;
         }
       }
     }
