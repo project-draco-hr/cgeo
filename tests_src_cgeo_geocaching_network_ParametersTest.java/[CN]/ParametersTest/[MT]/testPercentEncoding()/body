@@ -1,0 +1,6 @@
+{
+  final Parameters params=new Parameters("oauth_callback","callback://www.cgeo.org/");
+  assertThat(params.toString()).isEqualTo("oauth_callback=callback://www.cgeo.org/");
+  params.usePercentEncoding();
+  assertThat(params.toString()).isEqualTo("oauth_callback=callback%3a%2f%2fwww.cgeo.org%2f");
+}
