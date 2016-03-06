@@ -1,0 +1,10 @@
+{
+  if ((dir & (View.FOCUS_FORWARD | View.FOCUS_DOWN)) != 0) {
+    if (view.getLayout() == null) {
+      Selection.setSelection(text,text.length());
+    }
+  }
+ else {
+    Selection.setSelection(text,text.length());
+  }
+}
