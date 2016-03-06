@@ -1,7 +1,5 @@
 {
-  final String code=Locale.getDefault().getLanguage();
-  if (StringUtils.isNotBlank(code)) {
-    return StringUtils.lowerCase(code) + "|en";
-  }
-  return "en";
+  final String defaultLanguage=StringUtils.defaultIfBlank(StringUtils.lowerCase(Locale.getDefault().getLanguage()),"en");
+  if (defaultLanguage.equals("en"))   return defaultLanguage;
+  return Settings.useEnglish() ? "en|" + defaultLanguage : defaultLanguage + "|en";
 }

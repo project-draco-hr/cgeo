@@ -1,0 +1,19 @@
+{
+  final Locale savedLocale=Locale.getDefault();
+  final boolean useEnglish=Settings.useEnglish();
+  try {
+    Settings.setUseEnglish(false);
+    Locale.setDefault(Locale.US);
+    assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en");
+    Settings.setUseEnglish(true);
+    assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en");
+    Locale.setDefault(Locale.GERMANY);
+    assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en|de");
+    Settings.setUseEnglish(false);
+    assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("de|en");
+  }
+  finally {
+    Locale.setDefault(savedLocale);
+    Settings.setUseEnglish(useEnglish);
+  }
+}
