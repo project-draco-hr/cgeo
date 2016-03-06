@@ -3,7 +3,7 @@
     final Character c=(char)i;
     if (!UNRESERVED.contains(c)) {
       final @NonNull String charAsString=String.valueOf(c);
-      final String encoded=OAuth.percentEncode(charAsString);
+      final String encoded=Parameters.percentEncode(charAsString);
       assertThat(charAsString).overridingErrorMessage("Character '" + charAsString + "' not encoded").isNotEqualTo(encoded);
       assertThat(encoded).startsWith("%");
     }
