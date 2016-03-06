@@ -1,0 +1,71 @@
+{
+  try {
+    Geocache cache=null;
+    if (origCache != null) {
+      SearchResult search=null;
+      if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
+        search=searchByGeocode(origCache.getGeocode(),null,lists,false,handler);
+      }
+      if (search != null) {
+        cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+      }
+ else {
+        cache=origCache;
+      }
+    }
+ else     if (StringUtils.isNotBlank(geocode)) {
+      final SearchResult search=searchByGeocode(geocode,null,lists,forceRedownload,handler);
+      if (search != null) {
+        cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+      }
+    }
+    if (cache == null) {
+      if (handler != null) {
+        handler.sendMessage(Message.obtain());
+      }
+      return;
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    final HtmlImage imgGetter=new HtmlImage(cache.getGeocode(),false,true,forceRedownload);
+    if (StringUtils.isNotBlank(cache.getDescription())) {
+      Html.fromHtml(cache.getDescription(),imgGetter,null);
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+      for (      final Image oneSpoiler : cache.getSpoilers()) {
+        imgGetter.getDrawable(oneSpoiler.getUrl());
+      }
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    if (Settings.isStoreLogImages()) {
+      for (      final LogEntry log : cache.getLogs()) {
+        if (log.hasLogImages()) {
+          for (          final Image oneLogImg : log.getLogImages()) {
+            imgGetter.getDrawable(oneLogImg.getUrl());
+          }
+        }
+      }
+    }
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    cache.setLists(lists);
+    DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+    if (CancellableHandler.isCancelled(handler)) {
+      return;
+    }
+    StaticMapsProvider.downloadMaps(cache).mergeWith(imgGetter.waitForEndCompletable(handler)).await();
+    if (handler != null) {
+      handler.sendEmptyMessage(CancellableHandler.DONE);
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("Geocache.storeCache",e);
+  }
+}

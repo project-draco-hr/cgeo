@@ -6,12 +6,12 @@
   if (Settings.getChooseList()) {
     new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
       @Override public void call(      final Integer selectedListId){
-        storeCache(selectedListId,new StoreCacheHandler(CacheDetailActivity.this,progress));
+        storeCacheInList(selectedListId,new StoreCacheHandler(CacheDetailActivity.this,progress));
       }
     }
-,true,StoredList.TEMPORARY_LIST.id);
+,true,cache.getLists());
   }
  else {
-    storeCache(StoredList.TEMPORARY_LIST.id,new StoreCacheHandler(this,progress));
+    storeCacheInList(StoredList.TEMPORARY_LIST.id,new StoreCacheHandler(this,progress));
   }
 }

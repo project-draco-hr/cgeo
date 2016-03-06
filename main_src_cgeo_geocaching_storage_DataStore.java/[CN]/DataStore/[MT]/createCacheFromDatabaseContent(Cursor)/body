@@ -1,7 +1,6 @@
 {
   final Geocache cache=new Geocache();
   cache.setUpdated(cursor.getLong(0));
-  cache.setListId(cursor.getInt(1));
   cache.setDetailed(cursor.getInt(2) == 1);
   cache.setDetailedUpdate(cursor.getLong(3));
   cache.setVisitedDate(cursor.getLong(4));
@@ -51,6 +50,6 @@
   cache.setFinalDefined(cursor.getInt(37) > 0);
   cache.setLogPasswordRequired(cursor.getInt(41) > 0);
   cache.setWatchlistCount(cursor.getInt(42));
-  Log.d("Loading " + cache.toString() + " ("+ cache.getListId()+ ") from DB");
+  Log.d("Loading " + cache.toString() + " from DB");
   return cache;
 }

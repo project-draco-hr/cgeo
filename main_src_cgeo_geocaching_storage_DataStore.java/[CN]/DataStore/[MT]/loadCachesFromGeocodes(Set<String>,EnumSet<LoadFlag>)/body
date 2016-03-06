@@ -19,6 +19,7 @@
     int logIndex=-1;
     while (cursor.moveToNext()) {
       final Geocache cache=createCacheFromDatabaseContent(cursor);
+      cache.setLists(loadLists(cache.getGeocode()));
       if (loadFlags.contains(LoadFlag.ATTRIBUTES)) {
         cache.setAttributes(loadAttributes(cache.getGeocode()));
       }

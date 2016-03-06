@@ -4,19 +4,19 @@
   }
   init();
   try {
-    final SQLiteStatement listId;
+    final SQLiteStatement offlineListCound;
     final String value;
     if (StringUtils.isNotBlank(geocode)) {
-      listId=PreparedStatement.LIST_ID_OF_GEOCODE.getStatement();
+      offlineListCound=PreparedStatement.GEOCODE_OFFLINE.getStatement();
       value=geocode;
     }
  else {
-      listId=PreparedStatement.LIST_ID_OF_GUID.getStatement();
+      offlineListCound=PreparedStatement.GUID_OFFLINE.getStatement();
       value=guid;
     }
-synchronized (listId) {
-      listId.bindString(1,value);
-      return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST.id;
+synchronized (offlineListCound) {
+      offlineListCound.bindString(1,value);
+      return offlineListCound.simpleQueryForLong() > 0;
     }
   }
  catch (  final SQLiteDoneException ignored) {

@@ -1,0 +1,9 @@
+{
+  new CopyToListCommand(this,caches,listId){
+    @Override protected void onFinished(){
+      adapter.setSelectMode(false);
+      refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
+    }
+  }
+.execute();
+}

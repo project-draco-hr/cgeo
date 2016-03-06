@@ -10,7 +10,7 @@
     caches.add(cache);
     fixCache(cache);
     cache.setType(CacheType.UNKNOWN);
-    cache.setListId(listId);
+    cache.getLists().add(listId);
     cache.setDetailed(true);
     cache.store();
     if (progressHandler != null) {

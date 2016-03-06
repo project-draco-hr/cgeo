@@ -2,7 +2,7 @@
   CacheMenuHandler.onPrepareOptionsMenu(menu,cache);
   LoggingUI.onPrepareOptionsMenu(menu,cache);
   menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
-  menu.findItem(R.id.menu_store).setVisible(cache != null && !cache.isOffline());
+  menu.findItem(R.id.menu_store_in_list).setVisible(cache != null);
   menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
   menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
   menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));

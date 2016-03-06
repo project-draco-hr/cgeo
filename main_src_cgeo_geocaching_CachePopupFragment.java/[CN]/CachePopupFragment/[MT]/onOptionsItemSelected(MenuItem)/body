@@ -1,0 +1,12 @@
+{
+  if (super.onOptionsItemSelected(item)) {
+    return true;
+  }
+  final int menuItem=item.getItemId();
+switch (menuItem) {
+case R.id.menu_delete:
+    new DropCacheClickListener().onClick(getView());
+  return true;
+}
+return false;
+}

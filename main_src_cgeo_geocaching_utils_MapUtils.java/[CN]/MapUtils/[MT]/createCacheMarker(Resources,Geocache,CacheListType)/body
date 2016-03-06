@@ -17,7 +17,7 @@
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_own));
     insets.add(getOwnInset(cacheListType)[resolution]);
   }
- else   if (cache.getListId() > 0 && showFloppyOverlay(cacheListType)) {
+ else   if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
     layers.add(Compatibility.getDrawable(res,R.drawable.marker_stored));
     insets.add(getOwnInset(cacheListType)[resolution]);
   }

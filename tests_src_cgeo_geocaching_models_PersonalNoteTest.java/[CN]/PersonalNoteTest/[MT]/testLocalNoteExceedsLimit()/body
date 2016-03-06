@@ -4,7 +4,7 @@
   truncCache.setPersonalNote(testString.substring(0,GCConstants.PERSONAL_NOTE_MAX_CHARS));
   PersonalNote parsedNote=new PersonalNote(truncCache);
   Geocache exceedingCache=new Geocache();
-  exceedingCache.setListId(StoredList.STANDARD_LIST_ID);
+  exceedingCache.getLists().add(StoredList.STANDARD_LIST_ID);
   exceedingCache.setPersonalNote(testString);
   PersonalNote otherNote=new PersonalNote(exceedingCache);
   PersonalNote result=parsedNote.mergeWith(otherNote);

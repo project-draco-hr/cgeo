@@ -3,14 +3,17 @@
     throw new IllegalArgumentException("cacheType must not be null");
   }
   final StringBuilder selection=new StringBuilder();
-  selection.append("reason ");
-  selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId,1) : ">= " + StoredList.STANDARD_LIST_ID);
-  selection.append(" and detailed = 1 ");
+  selection.append(" detailed = 1 ");
   String[] selectionArgs=null;
   if (cacheType != CacheType.ALL) {
     selection.append(" and type = ?");
     selectionArgs=new String[]{String.valueOf(cacheType.id)};
   }
+  selection.append(" and geocode in (SELECT geocode FROM ");
+  selection.append(dbTableCachesLists);
+  selection.append(" WHERE list_id ");
+  selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId,1) : ">= " + StoredList.STANDARD_LIST_ID);
+  selection.append(")");
   try {
     if (coords != null) {
       return queryToColl(dbTableCaches,new String[]{"geocode","(abs(latitude-" + String.format((Locale)null,"%.6f",coords.getLatitude()) + ") + abs(longitude-"+ String.format((Locale)null,"%.6f",coords.getLongitude())+ ")) as dif"},selection.toString(),selectionArgs,"dif",null,new HashSet<String>(),GET_STRING_0);

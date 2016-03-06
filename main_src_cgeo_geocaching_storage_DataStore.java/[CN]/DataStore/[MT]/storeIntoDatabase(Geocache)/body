@@ -1,7 +1,7 @@
 {
   cache.addStorageLocation(StorageLocation.DATABASE);
   cacheCache.putCacheInCache(cache);
-  Log.d("Saving " + cache.toString() + " ("+ cache.getListId()+ ") to DB");
+  Log.d("Saving " + cache.toString() + " ("+ cache.getLists()+ ") to DB");
   final ContentValues values=new ContentValues();
   if (cache.getUpdated() == 0) {
     values.put("updated",System.currentTimeMillis());
@@ -9,7 +9,7 @@
  else {
     values.put("updated",cache.getUpdated());
   }
-  values.put("reason",cache.getListId());
+  values.put("reason",StoredList.STANDARD_LIST_ID);
   values.put("detailed",cache.isDetailed() ? 1 : 0);
   values.put("detailedupdate",cache.getDetailedUpdate());
   values.put("visiteddate",cache.getVisitedDate());
@@ -62,6 +62,7 @@
     saveSpoilersWithoutTransaction(cache);
     saveLogCountsWithoutTransaction(cache);
     saveInventoryWithoutTransaction(cache.getGeocode(),cache.getInventory());
+    saveListsWithoutTransaction(cache);
     final int rows=database.update(dbTableCaches,values,"geocode = ?",new String[]{cache.getGeocode()});
     if (rows == 0) {
       database.insert(dbTableCaches,null,values);

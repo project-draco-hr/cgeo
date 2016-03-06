@@ -1,4 +1,4 @@
 {
-  final int newListId=listId < StoredList.STANDARD_LIST_ID ? Math.max(getListId(),StoredList.STANDARD_LIST_ID) : listId;
-  storeCache(this,null,newListId,false,handler);
+  lists.add(listId);
+  storeCache(this,null,lists,false,handler);
 }
