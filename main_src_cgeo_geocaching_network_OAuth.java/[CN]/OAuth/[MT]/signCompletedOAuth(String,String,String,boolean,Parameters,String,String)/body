@@ -1,0 +1,7 @@
+{
+  params.sort();
+  params.usePercentEncoding();
+  final String requestPacked=method + '&' + Parameters.percentEncode((https ? "https" : "http") + "://" + host+ path)+ '&'+ Parameters.percentEncode(params.toString());
+  final String keysPacked=Parameters.percentEncode(consumerSecret) + '&' + Parameters.percentEncode(StringUtils.defaultString(tokenSecret));
+  return CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked,keysPacked));
+}

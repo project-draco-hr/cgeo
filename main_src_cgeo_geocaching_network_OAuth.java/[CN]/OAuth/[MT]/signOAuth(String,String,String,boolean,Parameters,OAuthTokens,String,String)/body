@@ -1,8 +1,4 @@
 {
   params.put("oauth_consumer_key",consumerKey,"oauth_nonce",CryptUtils.md5(Long.toString(System.currentTimeMillis())),"oauth_signature_method","HMAC-SHA1","oauth_timestamp",Long.toString(System.currentTimeMillis() / 1000),"oauth_token",StringUtils.defaultString(tokens.getTokenPublic()),"oauth_version","1.0");
-  params.sort();
-  params.usePercentEncoding();
-  final String requestPacked=method + '&' + Parameters.percentEncode((https ? "https" : "http") + "://" + host+ path)+ '&'+ Parameters.percentEncode(params.toString());
-  final String keysPacked=Parameters.percentEncode(consumerSecret) + '&' + Parameters.percentEncode(StringUtils.defaultString(tokens.getTokenSecret()));
-  params.put("oauth_signature",CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked,keysPacked)));
+  params.put("oauth_signature",signCompletedOAuth(host,path,method,https,params,tokens.getTokenSecret(),consumerSecret));
 }
