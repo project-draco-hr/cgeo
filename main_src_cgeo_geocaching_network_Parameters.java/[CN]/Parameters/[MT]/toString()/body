@@ -1,7 +1,17 @@
 {
-  final Builder builder=HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
-  for (  final ImmutablePair<String,String> nameValuePair : this) {
-    builder.addQueryParameter(nameValuePair.left,nameValuePair.right);
+  if (percentEncoding) {
+    if (isEmpty())     return "";
+    final StringBuilder builder=new StringBuilder();
+    for (    final ImmutablePair<String,String> nameValuePair : this) {
+      builder.append('&').append(percentEncode(nameValuePair.left)).append('=').append(percentEncode(nameValuePair.right));
+    }
+    return builder.substring(1);
   }
-  return StringUtils.defaultString(builder.build().encodedQuery());
+ else {
+    final Builder builder=HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
+    for (    final ImmutablePair<String,String> nameValuePair : this) {
+      builder.addQueryParameter(nameValuePair.left,nameValuePair.right);
+    }
+    return StringUtils.defaultString(builder.build().encodedQuery());
+  }
 }
