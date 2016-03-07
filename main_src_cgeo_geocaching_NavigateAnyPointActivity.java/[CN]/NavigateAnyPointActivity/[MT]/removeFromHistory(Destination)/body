@@ -2,10 +2,8 @@
   if (getHistoryOfSearchedLocations().contains(destination)) {
     getHistoryOfSearchedLocations().remove(destination);
     DataStore.removeSearchedDestination(destination);
-    if (getHistoryOfSearchedLocations().isEmpty()) {
-      if (historyListView.getFooterViewsCount() == 0) {
-        historyListView.addFooterView(getEmptyHistoryFooter());
-      }
+    if (getHistoryOfSearchedLocations().isEmpty() && historyListView.getFooterViewsCount() == 0) {
+      historyListView.addFooterView(getEmptyHistoryFooter());
     }
     getDestinationHistoryAdapter().notifyDataSetChanged();
     showToast(res.getString(R.string.search_remove_destination));

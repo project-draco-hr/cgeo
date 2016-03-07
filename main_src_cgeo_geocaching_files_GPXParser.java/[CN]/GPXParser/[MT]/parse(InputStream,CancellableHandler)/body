@@ -39,10 +39,8 @@
         findGeoCode(desc);
         findGeoCode(cmt);
       }
-      if (StringUtils.isBlank(cache.getGeocode())) {
-        if (StringUtils.isNotBlank(name)) {
-          cache.setGeocode(name.trim());
-        }
+      if (StringUtils.isBlank(cache.getGeocode()) && StringUtils.isNotBlank(name)) {
+        cache.setGeocode(name.trim());
       }
       if (isValidForImport()) {
         fixCache(cache);

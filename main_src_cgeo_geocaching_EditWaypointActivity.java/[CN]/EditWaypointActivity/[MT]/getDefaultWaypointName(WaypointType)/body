@@ -3,10 +3,8 @@
   for (  final Waypoint waypoint : cache.getWaypoints()) {
     wpNames.add(waypoint.getName());
   }
-  if (type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) {
-    if (!wpNames.contains(type.getL10n())) {
-      return type.getL10n();
-    }
+  if ((type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) && !wpNames.contains(type.getL10n())) {
+    return type.getL10n();
   }
   int max=0;
   for (int i=0; i < 30; i++) {
