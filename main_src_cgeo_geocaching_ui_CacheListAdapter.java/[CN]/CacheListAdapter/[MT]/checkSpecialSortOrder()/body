@@ -1,0 +1,10 @@
+{
+  checkEvents();
+  checkSeries();
+  if (!eventsOnly && isSortedByEvent()) {
+    setComparator(DistanceComparator.INSTANCE);
+  }
+  if (!series && isSortedBySeries()) {
+    setComparator(DistanceComparator.INSTANCE);
+  }
+}

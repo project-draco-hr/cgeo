@@ -3,9 +3,6 @@
   for (  final Geocache cache : list) {
     if (!cache.isEventCache()) {
       eventsOnly=false;
-      if (isSortedByEvent()) {
-        setComparator(DistanceComparator.singleton);
-      }
       return;
     }
   }

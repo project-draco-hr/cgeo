@@ -1,0 +1,26 @@
+{
+  series=false;
+  if (list.size() < 3 || list.size() > 50) {
+    return;
+  }
+  final ArrayList<String> names=new ArrayList<>();
+  final ArrayList<String> reverseNames=new ArrayList<>();
+  for (  final Geocache cache : list) {
+    final String name=cache.getName();
+    names.add(name);
+    reverseNames.add(StringUtils.reverse(name));
+  }
+  final String commonPrefix=StringUtils.getCommonPrefix(names.toArray(new String[names.size()]));
+  if (StringUtils.length(commonPrefix) >= MIN_COMMON_CHARACTERS_SERIES) {
+    series=true;
+  }
+ else {
+    final String commonSuffix=StringUtils.getCommonPrefix(reverseNames.toArray(new String[reverseNames.size()]));
+    if (StringUtils.length(commonSuffix) >= MIN_COMMON_CHARACTERS_SERIES) {
+      series=true;
+    }
+  }
+  if (series) {
+    setComparator(new SeriesNameComparator());
+  }
+}

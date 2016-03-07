@@ -3,10 +3,13 @@
     return VisitComparator.singleton;
   }
   if (cacheComparator == null && eventsOnly) {
-    return EventDateComparator.singleton;
+    return EventDateComparator.INSTANCE;
+  }
+  if (cacheComparator == null && series) {
+    return SeriesNameComparator.INSTANCE;
   }
   if (cacheComparator == null) {
-    return DistanceComparator.singleton;
+    return DistanceComparator.INSTANCE;
   }
   return cacheComparator;
 }
