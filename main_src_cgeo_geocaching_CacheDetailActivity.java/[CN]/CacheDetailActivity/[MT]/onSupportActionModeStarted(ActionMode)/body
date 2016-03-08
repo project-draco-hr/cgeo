@@ -1,5 +1,6 @@
 {
-  if (mActionMode == null && selectedTextView != null) {
+  if (mSelectionModeActive == true && selectedTextView != null) {
+    mSelectionModeActive=false;
     mActionMode=mode;
     Menu menu=mode.getMenu();
     mode.getMenuInflater().inflate(R.menu.details_context,menu);
