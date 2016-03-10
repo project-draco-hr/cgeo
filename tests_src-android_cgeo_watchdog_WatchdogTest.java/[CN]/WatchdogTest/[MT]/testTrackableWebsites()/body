@@ -1,7 +1,10 @@
 {
   for (  final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
-    if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
-      checkWebsite("trackable website " + trackableConnector.getHost(),trackableConnector.getHost());
+    if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
+      checkWebsite("trackable website " + trackableConnector.getHost(),trackableConnector.getHostUrl());
+      if (StringUtils.isNotBlank(trackableConnector.getProxyUrl())) {
+        checkWebsite("trackable website " + trackableConnector.getHost() + " proxy "+ trackableConnector.getProxyUrl(),trackableConnector.getProxyUrl());
+      }
     }
   }
 }

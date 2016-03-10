@@ -4,7 +4,7 @@
     glid=geocode;
   }
  else {
-    Log.d("GeokretyConnector.searchTrackable: geocode=" + geocode);
+    Log.d("GeolutinsConnector.searchTrackable: geocode=" + geocode);
     final String geocodeFound=getGeocodeFromTrackingCode(geocode);
     if (geocodeFound == null) {
       return null;
@@ -13,7 +13,7 @@
   }
   Log.i("GeolutinsConnector.searchTrackable: glid=" + glid);
   try {
-    final String urlDetails="http://www.geolutins.com/xml/api.php?G=" + StringUtils.upperCase(glid);
+    final String urlDetails=URL + "/xml/api.php?G=" + StringUtils.upperCase(glid);
     Log.i("GeolutinsConnector.searchTrackable URL: " + urlDetails);
     final InputStream response=Network.getResponseStream(Network.getRequest(urlDetails));
     if (response == null) {
