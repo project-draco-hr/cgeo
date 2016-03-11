@@ -1,6 +1,6 @@
 {
   final Parameters params=new Parameters("G",trackingCode);
-  final InputStream response=Network.getResponseStream(Network.getRequest("http://www.geolutins.com/xml/decode.php",params));
+  final InputStream response=Network.getResponseStream(Network.getRequest(URL + "/xml/decode.php",params));
   final List<Trackable> trackables=GeolutinsParser.parse(new InputSource(response));
   if (CollectionUtils.isNotEmpty(trackables)) {
     return trackables.get(0).getGeocode();
