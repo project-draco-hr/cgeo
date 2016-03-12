@@ -1,5 +1,5 @@
 {
-  final Map<LogType,Integer> logCounts=new HashMap<LogType,Integer>();
+  final Map<LogType,Integer> logCounts=new EnumMap<>(LogType.class);
   logCounts.put(LogType.PUBLISH_LISTING,1);
   logCounts.put(LogType.FOUND_IT,368);
   logCounts.put(LogType.POST_REVIEWER_NOTE,1);
