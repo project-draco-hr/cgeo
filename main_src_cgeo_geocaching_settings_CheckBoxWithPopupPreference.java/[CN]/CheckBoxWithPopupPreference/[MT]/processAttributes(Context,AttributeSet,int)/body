@@ -2,9 +2,9 @@
   if (attrs == null) {
     return;
   }
-  final TypedArray types=context.obtainStyledAttributes(attrs,new int[]{R.attr.title,R.attr.text,R.attr.url,R.attr.urlButton},defStyle,0);
-  title=types.getString(0);
-  text=types.getString(1);
+  final TypedArray types=context.obtainStyledAttributes(attrs,new int[]{R.attr.text,R.attr.title,R.attr.url,R.attr.urlButton},defStyle,0);
+  text=types.getString(0);
+  title=types.getString(1);
   url=types.getString(2);
   urlButton=types.getString(3);
   types.recycle();
