@@ -1,0 +1,20 @@
+{
+  try {
+    final File file=LocalStorage.getStorageFile(geocode,image.getUrl(),true,false);
+    final Metadata metadata=ImageMetadataReader.readMetadata(file);
+    final Collection<GpsDirectory> gpsDirectories=metadata.getDirectoriesOfType(GpsDirectory.class);
+    if (gpsDirectories == null) {
+      return null;
+    }
+    for (    final GpsDirectory gpsDirectory : gpsDirectories) {
+      final GeoLocation geoLocation=gpsDirectory.getGeoLocation();
+      if (geoLocation != null && !geoLocation.isZero()) {
+        return geoLocation;
+      }
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("ImagesList.addGeoOverlay",e);
+  }
+  return null;
+}
