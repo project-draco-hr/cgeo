@@ -5,11 +5,11 @@
     }
     if (items.size() > 1) {
       final ListAdapter adapter=new ArrayAdapter<GeoitemRef>(this,android.R.layout.select_dialog_item,android.R.id.text1,items){
-        @Override public View getView(        int position,        View convertView,        ViewGroup parent){
-          View v=super.getView(position,convertView,parent);
-          TextView tv=(TextView)v.findViewById(android.R.id.text1);
+        @Override public View getView(        final int position,        final View convertView,        final ViewGroup parent){
+          final View v=super.getView(position,convertView,parent);
+          final TextView tv=(TextView)v.findViewById(android.R.id.text1);
           tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getMarkerId(),0,0,0);
-          int dp5=(int)(5 * getResources().getDisplayMetrics().density + 0.5f);
+          final int dp5=(int)(5 * getResources().getDisplayMetrics().density + 0.5f);
           tv.setCompoundDrawablePadding(dp5);
           return v;
         }

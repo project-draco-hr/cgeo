@@ -12,7 +12,7 @@
     }
     searchResult.addSearchResult(ConnectorFactory.searchByViewport(getViewport().resize(1.2),tokens));
     final Set<Geocache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-    filter(result);
+    AbstractCachesOverlay.filter(result);
     final Set<String> filteredCodes=searchResult.getFilteredGeocodes();
     Log.d("Filtering out " + filteredCodes.size() + " caches: "+ filteredCodes.toString());
     DataStore.removeCaches(filteredCodes,EnumSet.of(RemoveFlag.CACHE));

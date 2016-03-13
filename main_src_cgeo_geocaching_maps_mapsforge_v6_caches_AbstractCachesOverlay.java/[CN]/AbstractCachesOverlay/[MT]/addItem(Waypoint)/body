@@ -1,5 +1,5 @@
 {
-  GeoEntry entry=new GeoEntry(waypoint.getGpxId(),overlayId);
+  final GeoEntry entry=new GeoEntry(waypoint.getGpxId(),overlayId);
   final GeoitemLayer waypointItem=getWaypointItem(waypoint,this.mapHandlers.getTapHandler());
   if (waypointItem != null && geoEntries.add(entry)) {
     layerList.add(waypointItem);

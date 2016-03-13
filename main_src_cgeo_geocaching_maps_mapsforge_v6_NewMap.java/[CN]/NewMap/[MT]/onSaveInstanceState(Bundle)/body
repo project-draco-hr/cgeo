@@ -1,6 +1,6 @@
 {
   super.onSaveInstanceState(outState);
-  final MapState state=new MapState(mapView.getModel().mapViewPosition.getCenter(),mapView.getModel().mapViewPosition.getZoomLevel(),followMyLocation,false);
+  final MapState state=prepareMapState();
   outState.putParcelable(BUNDLE_MAP_STATE,state);
   if (historyLayer != null) {
     outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY,historyLayer.getHistory());

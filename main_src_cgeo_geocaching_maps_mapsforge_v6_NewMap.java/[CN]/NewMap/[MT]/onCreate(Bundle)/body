@@ -35,6 +35,28 @@
   mapView.getMapZoomControls().setZoomLevelMin((byte)10);
   mapView.getMapZoomControls().setZoomLevelMax((byte)20);
   tileCache=AndroidUtil.createTileCache(this,"mapcache",mapView.getModel().displayModel.getTileSize(),1f,this.mapView.getModel().frameBufferModel.getOverdrawFactor());
-  DragHandler dragHandler=new DragHandler(this);
+  final DragHandler dragHandler=new DragHandler(this);
   mapView.setOnMapDragListener(dragHandler);
+  if (mapStateIntent != null) {
+    this.mapView.getModel().mapViewPosition.setCenter(mapStateIntent.getCenter());
+    this.mapView.getModel().mapViewPosition.setZoomLevel((byte)mapStateIntent.getZoomLevel());
+  }
+ else   if (searchIntent != null) {
+    final Viewport viewport=DataStore.getBounds(searchIntent.getGeocodes());
+    if (viewport != null) {
+      mapView.zoomToViewport(viewport);
+    }
+  }
+ else   if (StringUtils.isNotEmpty(geocodeIntent)) {
+    final Viewport viewport=DataStore.getBounds(geocodeIntent);
+    if (viewport != null) {
+      mapView.zoomToViewport(viewport);
+    }
+  }
+ else   if (coordsIntent != null) {
+    mapView.zoomToViewport(new Viewport(coordsIntent,0,0));
+  }
+ else {
+    mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(),0,0));
+  }
 }

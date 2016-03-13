@@ -1,5 +1,5 @@
 {
-  GeoEntry entry=new GeoEntry(cache.getGeocode(),overlayId);
+  final GeoEntry entry=new GeoEntry(cache.getGeocode(),overlayId);
   if (geoEntries.add(entry)) {
     layerList.add(getCacheItem(cache,this.mapHandlers.getTapHandler()));
     Log.d(String.format("Cache %s for id %d added, geoEntries: %d",entry.geocode,overlayId,geoEntries.size()));

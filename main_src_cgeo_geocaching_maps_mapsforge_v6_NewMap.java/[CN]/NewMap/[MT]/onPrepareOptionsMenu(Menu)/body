@@ -20,15 +20,33 @@
       itemMapLive.setTitle(res.getString(R.string.map_live_enable));
     }
     itemMapLive.setVisible(coordsIntent == null);
+    menu.findItem(R.id.menu_store_caches).setVisible(false);
     menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
+    menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
     menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
+    menu.findItem(R.id.menu_circle_mode).setVisible(false);
     menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
     menu.findItem(R.id.menu_theme_mode).setVisible(true);
-    menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
-    menu.findItem(R.id.menu_compass).setVisible(mapMode == MapMode.SINGLE);
-  }
- catch (  final RuntimeException e) {
-    Log.e("CGeoMap.onPrepareOptionsMenu",e);
-  }
-  return true;
+    menu.findItem(R.id.menu_as_list).setVisible(false);
+    menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
+switch (Settings.getLiveMapStrategy()) {
+case FASTEST:
+      menu.findItem(R.id.menu_strategy_fastest).setChecked(true);
+    break;
+case FAST:
+  menu.findItem(R.id.menu_strategy_fast).setChecked(true);
+break;
+case AUTO:
+menu.findItem(R.id.menu_strategy_auto).setChecked(true);
+break;
+default :
+menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
+}
+menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
+menu.findItem(R.id.menu_compass).setVisible(mapMode == MapMode.SINGLE);
+}
+ catch (final RuntimeException e) {
+Log.e("NewMap.onPrepareOptionsMenu",e);
+}
+return true;
 }

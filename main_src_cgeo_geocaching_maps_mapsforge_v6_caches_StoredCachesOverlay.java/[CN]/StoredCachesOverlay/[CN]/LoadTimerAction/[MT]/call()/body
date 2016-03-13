@@ -6,13 +6,14 @@
   try {
     final Viewport viewportNow=overlay.getViewport();
     final int zoomNow=overlay.getMapZoomLevel();
-    final boolean moved=(previousViewport == null) || zoomNow != previousZoom || (mapMoved(previousViewport,viewportNow) || !previousViewport.includes(viewportNow));
+    final boolean moved=overlay.isInvalidated() || (previousViewport == null) || zoomNow != previousZoom || (mapMoved(previousViewport,viewportNow) || !previousViewport.includes(viewportNow));
     if (moved || !viewportNow.equals(previousViewport)) {
     }
     previousZoom=zoomNow;
     if (moved) {
       previousViewport=viewportNow;
       overlay.load();
+      overlay.refreshed();
     }
   }
  catch (  final Exception e) {

@@ -25,18 +25,57 @@ if (mapMode != MapMode.SINGLE) {
 mapTitle=StringUtils.EMPTY;
 }
 return true;
+case R.id.menu_store_caches:
+return true;
 case R.id.menu_circle_mode:
 return true;
 case R.id.menu_mycaches_mode:
 Settings.setExcludeMine(!Settings.isExcludeMyCaches());
+caches.invalidate();
 ActivityMixin.invalidateOptionsMenu(this);
 if (!Settings.isExcludeMyCaches()) {
+Tile.cache.clear();
+}
+return true;
+case R.id.menu_disabled_mode:
+Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
+caches.invalidate();
+ActivityMixin.invalidateOptionsMenu(this);
+if (!Settings.isExcludeDisabledCaches()) {
 Tile.cache.clear();
 }
 return true;
 case R.id.menu_theme_mode:
 selectMapTheme();
 return true;
+case R.id.menu_as_list:
+{
+return true;
+}
+case R.id.menu_strategy_fastest:
+{
+item.setChecked(true);
+Settings.setLiveMapStrategy(LivemapStrategy.FASTEST);
+return true;
+}
+case R.id.menu_strategy_fast:
+{
+item.setChecked(true);
+Settings.setLiveMapStrategy(LivemapStrategy.FAST);
+return true;
+}
+case R.id.menu_strategy_auto:
+{
+item.setChecked(true);
+Settings.setLiveMapStrategy(LivemapStrategy.AUTO);
+return true;
+}
+case R.id.menu_strategy_detailed:
+{
+item.setChecked(true);
+Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
+return true;
+}
 case R.id.menu_hint:
 menuShowHint();
 return true;
