@@ -1,7 +1,7 @@
 {
   mActionMode=null;
   if (selectedTextView != null)   selectedTextView.setWindowFocusWait(false);
-  if (mSelectionModeActive == false) {
+  if (!mSelectionModeActive) {
     selectedTextView=null;
   }
   super.onSupportActionModeFinished(mode);
