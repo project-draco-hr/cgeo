@@ -1,5 +1,5 @@
 {
-  final LeastRecentlyUsedSet<Geocache> caches=new LeastRecentlyUsedSet<Geocache>(10);
+  final LeastRecentlyUsedSet<Geocache> caches=new LeastRecentlyUsedSet<>(10);
   final Geocache first=new Geocache();
   first.setGeocode("1");
   assertThat(caches.add(first)).isTrue();

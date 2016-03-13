@@ -1,5 +1,5 @@
 {
-  final LeastRecentlyUsedMap<String,Geocache> cache=new LeastRecentlyUsedMap.LruCache<String,Geocache>(10);
+  final LeastRecentlyUsedMap<String,Geocache> cache=new LeastRecentlyUsedMap.LruCache<>(10);
   final Geocache first=new Geocache();
   assertThat(cache.put("1",first)).isNull();
   final Geocache second=new Geocache();

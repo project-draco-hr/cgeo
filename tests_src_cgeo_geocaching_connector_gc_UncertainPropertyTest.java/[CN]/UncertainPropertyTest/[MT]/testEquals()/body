@@ -1,6 +1,6 @@
 {
-  final UncertainProperty<String> prop1=new UncertainProperty<String>("prop1",10);
-  final UncertainProperty<String> prop2=new UncertainProperty<String>(null,20);
+  final UncertainProperty<String> prop1=new UncertainProperty<>("prop1",10);
+  final UncertainProperty<String> prop2=new UncertainProperty<>(null,20);
   assertThat(UncertainProperty.equalValues(null,null)).isTrue();
   assertThat(UncertainProperty.equalValues(prop1,null)).isFalse();
   assertThat(UncertainProperty.equalValues(null,prop1)).isFalse();
