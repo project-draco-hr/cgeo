@@ -51,6 +51,11 @@ setConnectedUsernameTitle(requestCode,GCConnector.getInstance());
 redrawScreen(R.string.preference_screen_gc);
 initBasicMemberPreferences();
 break;
+case R.string.pref_fakekey_ec_authorization:
+setAuthTitle(requestCode,ECConnector.getInstance());
+setConnectedUsernameTitle(requestCode,ECConnector.getInstance());
+redrawScreen(R.string.preference_screen_ec);
+break;
 case R.string.pref_fakekey_twitter_authorization:
 setTwitterAuthTitle();
 redrawScreen(R.string.preference_screen_twitter);

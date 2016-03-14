@@ -12,6 +12,10 @@ case R.string.pref_fakekey_ocro_authorization:
 case R.string.pref_fakekey_ocuk_authorization:
 setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
 break;
+case R.string.pref_fakekey_ec_authorization:
+setAuthTitle(prefKeyId,ECConnector.getInstance());
+setConnectedUsernameTitle(prefKeyId,ECConnector.getInstance());
+break;
 case R.string.pref_fakekey_twitter_authorization:
 setTwitterAuthTitle();
 break;
