@@ -1,10 +1,9 @@
 {
-  final Credentials login=Settings.getGCVoteLogin();
-  if (login.isInvalid()) {
+  if (credentials.isInvalid()) {
     Log.e("Credentials can't be retrieved");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
-  final Parameters params=new Parameters("version","cgeo","userName",login.getUserName(),"password",login.getPassword());
+  final Parameters params=new Parameters("version","cgeo","userName",credentials.getUserName(),"password",credentials.getPassword());
   final InputStream response=Network.getResponseStream(Network.getRequest("http://gcvote.com/getVotes.php",params));
   try {
     final XmlPullParserFactory factory=XmlPullParserFactory.newInstance();
@@ -16,7 +15,7 @@
         final String tagName=xpp.getName();
         if (StringUtils.equals(tagName,"votes")) {
           if (StringUtils.equals(xpp.getAttributeValue(null,"loggedIn"),"true")) {
-            Log.i("Successfully logged in gcvote.com as " + login.getUserName());
+            Log.i("Successfully logged in gcvote.com as " + credentials.getUserName());
             return StatusCode.NO_ERROR;
           }
           Log.e("Username or password is wrong");
