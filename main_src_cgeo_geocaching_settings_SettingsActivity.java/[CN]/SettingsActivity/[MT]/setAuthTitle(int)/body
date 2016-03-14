@@ -10,7 +10,14 @@ case R.string.pref_fakekey_ocnl_authorization:
 case R.string.pref_fakekey_ocus_authorization:
 case R.string.pref_fakekey_ocro_authorization:
 case R.string.pref_fakekey_ocuk_authorization:
-setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
+final OCPreferenceKeys key=OCPreferenceKeys.getByAuthId(prefKeyId);
+if (key != null) {
+setOCAuthTitle(key);
+setConnectedTitle(prefKeyId,Settings.hasOCAuthorization(key.publicTokenPrefId,key.privateTokenPrefId));
+}
+ else {
+setConnectedTitle(prefKeyId,false);
+}
 break;
 case R.string.pref_fakekey_ec_authorization:
 setAuthTitle(prefKeyId,ECConnector.getInstance());
@@ -22,9 +29,11 @@ setConnectedUsernameTitle(prefKeyId,GCVote.getInstance());
 break;
 case R.string.pref_fakekey_twitter_authorization:
 setTwitterAuthTitle();
+setConnectedTitle(prefKeyId,Settings.hasTwitterAuthorization());
 break;
 case R.string.pref_fakekey_geokrety_authorization:
 setGeokretyAuthTitle();
+setConnectedTitle(prefKeyId,Settings.hasGeokretyAuthorization());
 break;
 default :
 Log.e(String.format(Locale.ENGLISH,"Invalid key %d in SettingsActivity.setTitle()",prefKeyId));

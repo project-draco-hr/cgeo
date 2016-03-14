@@ -42,7 +42,11 @@ case R.string.pref_fakekey_ocuk_authorization:
 final OCPreferenceKeys key=OCPreferenceKeys.getByAuthId(requestCode);
 if (key != null) {
 setOCAuthTitle(key);
+setConnectedTitle(requestCode,Settings.hasOCAuthorization(key.publicTokenPrefId,key.privateTokenPrefId));
 redrawScreen(key.prefScreenId);
+}
+ else {
+setConnectedTitle(requestCode,false);
 }
 break;
 case R.string.pref_fakekey_gc_authorization:
@@ -63,10 +67,12 @@ redrawScreen(R.string.init_gcvote);
 break;
 case R.string.pref_fakekey_twitter_authorization:
 setTwitterAuthTitle();
+setConnectedTitle(requestCode,Settings.hasTwitterAuthorization());
 redrawScreen(R.string.preference_screen_twitter);
 break;
 case R.string.pref_fakekey_geokrety_authorization:
 setGeokretyAuthTitle();
+setConnectedTitle(requestCode,Settings.hasGeokretyAuthorization());
 redrawScreen(R.string.preference_screen_geokrety);
 break;
 default :
