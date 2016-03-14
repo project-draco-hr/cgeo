@@ -1,0 +1,9 @@
+{
+  if (!CgeoApplication.getInstance().isNetworkConnected()) {
+    return StatusCode.COMMUNICATION_ERROR;
+  }
+  if (credentials == null) {
+    return login(true);
+  }
+  return login(true,credentials);
+}
