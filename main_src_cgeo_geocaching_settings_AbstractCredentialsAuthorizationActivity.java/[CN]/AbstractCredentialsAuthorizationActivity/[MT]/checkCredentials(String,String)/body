@@ -1,0 +1,35 @@
+{
+  final String nam=StringUtils.defaultString(username);
+  final String pwd=StringUtils.defaultString(password);
+  if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+    ActivityMixin.showToast(this,R.string.err_missing_auth);
+    return;
+  }
+  final Credentials credentials=new Credentials(nam,pwd);
+  final AbstractCredentialsAuthorizationActivity authorizationActivity=this;
+  final ProgressDialog loginDialog=ProgressDialog.show(authorizationActivity,res.getString(R.string.init_login_popup),getAuthDialogWait(),true);
+  loginDialog.setCancelable(false);
+  AppObservable.bindActivity(authorizationActivity,Observable.defer(new Func0<Observable<StatusCode>>(){
+    @Override public Observable<StatusCode> call(){
+      return Observable.just(checkCredentials(credentials));
+    }
+  }
+)).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<StatusCode>(){
+    @Override public void call(    StatusCode statusCode){
+      loginDialog.dismiss();
+      if (statusCode == StatusCode.NO_ERROR) {
+        setCredentials(credentials);
+        showToast(getAuthDialogCompleted());
+        setResult(RESULT_OK);
+        finish();
+      }
+ else {
+        Dialogs.message(authorizationActivity,R.string.init_login_popup,res.getString(R.string.init_login_popup_failed_reason,statusCode.getErrorString(res)));
+        checkButton.setText(getAuthCheckAgain());
+        checkButton.setOnClickListener(new CheckListener());
+        checkButton.setEnabled(true);
+      }
+    }
+  }
+);
+}

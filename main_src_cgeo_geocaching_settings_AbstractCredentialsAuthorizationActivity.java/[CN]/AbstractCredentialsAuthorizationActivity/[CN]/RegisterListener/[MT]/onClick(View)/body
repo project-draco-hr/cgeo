@@ -1,0 +1,10 @@
+{
+  final Activity activity=AbstractCredentialsAuthorizationActivity.this;
+  try {
+    activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(connectorUrlRegister)));
+  }
+ catch (  final ActivityNotFoundException e) {
+    Log.e("Cannot find suitable activity",e);
+    ActivityMixin.showToast(activity,R.string.err_application_no);
+  }
+}
