@@ -1,0 +1,7 @@
+{
+  Credentials currentCredentials=getCredentials();
+  if (currentCredentials.isInvalid() || !currentCredentials.getUserName().equals(credentials.getUserName()) || !currentCredentials.getPassword().equals(credentials.getPassword())) {
+    GCLogin.getInstance().logout();
+  }
+  return GCLogin.getInstance().login(credentials);
+}

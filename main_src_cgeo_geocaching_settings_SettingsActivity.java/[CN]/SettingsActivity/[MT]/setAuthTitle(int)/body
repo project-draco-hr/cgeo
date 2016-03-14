@@ -1,13 +1,17 @@
 {
 switch (prefKeyId) {
+case R.string.pref_fakekey_gc_authorization:
+    setAuthTitle(prefKeyId,GCConnector.getInstance());
+  setConnectedUsernameTitle(prefKeyId,GCConnector.getInstance());
+break;
 case R.string.pref_fakekey_ocde_authorization:
 case R.string.pref_fakekey_ocpl_authorization:
 case R.string.pref_fakekey_ocnl_authorization:
 case R.string.pref_fakekey_ocus_authorization:
 case R.string.pref_fakekey_ocro_authorization:
 case R.string.pref_fakekey_ocuk_authorization:
-    setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
-  break;
+setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
+break;
 case R.string.pref_fakekey_twitter_authorization:
 setTwitterAuthTitle();
 break;

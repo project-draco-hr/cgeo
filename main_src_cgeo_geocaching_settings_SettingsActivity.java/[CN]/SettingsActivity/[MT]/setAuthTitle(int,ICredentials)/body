@@ -1,0 +1,4 @@
+{
+  final Credentials credentials=Settings.getCredentials(connector);
+  getPreference(prefKeyId).setTitle(getString(StringUtils.isNotBlank(credentials.getUsernameRaw()) ? R.string.settings_reauthorize : R.string.settings_authorize));
+}
