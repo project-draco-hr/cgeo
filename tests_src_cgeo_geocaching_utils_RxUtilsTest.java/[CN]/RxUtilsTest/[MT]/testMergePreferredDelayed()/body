@@ -1,0 +1,17 @@
+{
+  final TestScheduler scheduler=new TestScheduler();
+  final Observable<Integer> o1=Observable.range(2,3).delay(100,TimeUnit.MILLISECONDS,scheduler);
+  final Observable<Integer> o2=Observable.range(10,5);
+  final Observable<Integer> merged=RxUtils.mergePreferred(o1,o2);
+  final TestSubscriber<Integer> subscriber=new TestSubscriber<>(0);
+  merged.subscribe(subscriber);
+  subscriber.assertNoValues();
+  subscriber.requestMore(1);
+  subscriber.assertValues(10);
+  subscriber.requestMore(1);
+  subscriber.assertValues(10,11);
+  scheduler.advanceTimeBy(120,TimeUnit.MILLISECONDS);
+  subscriber.requestMore(100);
+  subscriber.assertValues(10,11,2,3,4,12,13,14);
+  subscriber.assertCompleted();
+}

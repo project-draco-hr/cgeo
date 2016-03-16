@@ -1,0 +1,42 @@
+{
+{
+    final PublishSubject<Integer> o1=PublishSubject.create();
+    final PublishSubject<Integer> o2=PublishSubject.create();
+    final Observable<Integer> merged=RxUtils.mergePreferred(o1,o2);
+    final TestSubscriber<Integer> subscriber=new TestSubscriber<>(0);
+    merged.subscribe(subscriber);
+    o1.onNext(1);
+    o1.onNext(2);
+    o2.onNext(11);
+    o2.onNext(12);
+    o2.onNext(13);
+    subscriber.assertNoValues();
+    subscriber.requestMore(3);
+    subscriber.assertValues(1,2,11);
+    o1.onNext(3);
+    subscriber.requestMore(100);
+    subscriber.assertValues(1,2,11,3,12,13);
+    o1.onError(new RuntimeException());
+    subscriber.assertError(RuntimeException.class);
+  }
+{
+    final PublishSubject<Integer> o1=PublishSubject.create();
+    final PublishSubject<Integer> o2=PublishSubject.create();
+    final Observable<Integer> merged=RxUtils.mergePreferred(o1,o2);
+    final TestSubscriber<Integer> subscriber=new TestSubscriber<>(0);
+    merged.subscribe(subscriber);
+    o1.onNext(1);
+    o1.onNext(2);
+    o2.onNext(11);
+    o2.onNext(12);
+    o2.onNext(13);
+    subscriber.assertNoValues();
+    subscriber.requestMore(3);
+    subscriber.assertValues(1,2,11);
+    o1.onNext(3);
+    subscriber.requestMore(100);
+    subscriber.assertValues(1,2,11,3,12,13);
+    o2.onError(new RuntimeException());
+    subscriber.assertError(RuntimeException.class);
+  }
+}

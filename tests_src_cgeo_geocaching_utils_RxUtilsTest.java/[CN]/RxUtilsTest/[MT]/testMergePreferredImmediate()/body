@@ -1,0 +1,10 @@
+{
+  final Observable<Integer> o1=Observable.range(0,5);
+  final Observable<Integer> o2=Observable.range(5,5);
+  final List<Integer> merged=RxUtils.mergePreferred(o1,o2).take(100).toList().toBlocking().single();
+  final List<Integer> expected=new LinkedList<>();
+  for (int i=0; i < 10; i++) {
+    expected.add(i);
+  }
+  assertThat(merged).isEqualTo(expected);
+}
