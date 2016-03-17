@@ -4,7 +4,7 @@
   if (exceptListIds.contains(STANDARD_LIST_ID)) {
     lists.remove(DataStore.getList(STANDARD_LIST_ID));
   }
-  for (  Integer exceptListId : exceptListIds) {
+  for (  final Integer exceptListId : exceptListIds) {
     if (exceptListId >= DataStore.customListIdOffset) {
       lists.remove(DataStore.getList(exceptListId));
     }

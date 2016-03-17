@@ -2,7 +2,7 @@
   if (mSelectionModeActive && selectedTextView != null) {
     mSelectionModeActive=false;
     mActionMode=mode;
-    Menu menu=mode.getMenu();
+    final Menu menu=mode.getMenu();
     mode.getMenuInflater().inflate(R.menu.details_context,menu);
     menu.findItem(R.id.menu_copy).setVisible(false);
     menu.findItem(R.id.menu_cache_share_field).setOnMenuItemClickListener(new TextMenuItemClickListener());

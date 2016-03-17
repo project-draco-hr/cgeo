@@ -1,7 +1,6 @@
 {
   init();
   final SQLiteStatement remove=PreparedStatement.REMOVE_FROM_LIST.getStatement();
-  final SQLiteStatement add=PreparedStatement.ADD_TO_LIST.getStatement();
   database.beginTransaction();
   try {
     for (    final Geocache cache : caches) {

@@ -2,14 +2,13 @@
   final LinearLayout listListView=(LinearLayout)view.findViewById(R.id.list_list);
   if (cache.isOffline()) {
     listListView.removeAllViews();
-    ;
     for (    final Integer listId : cache.getLists()) {
       final View listItemView=getLayoutInflater().inflate(R.layout.list_list_item,listListView,false);
       final ListItemViewHolder holder=new ListItemViewHolder(listItemView);
       final StoredList list=DataStore.getList(listId);
       holder.name.setText(list.getTitle());
       holder.remove.setOnClickListener(new View.OnClickListener(){
-        @Override public void onClick(        View v){
+        @Override public void onClick(        final View v){
           DataStore.removeFromList(Collections.singletonList(cache),listId);
           updateListBox();
         }

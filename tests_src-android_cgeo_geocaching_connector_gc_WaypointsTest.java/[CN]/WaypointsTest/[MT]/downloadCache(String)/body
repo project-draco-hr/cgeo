@@ -1,5 +1,5 @@
 {
-  final SearchResult searchResult=Geocache.searchByGeocode(geocode,null,0,true,handler);
+  final SearchResult searchResult=Geocache.searchByGeocode(geocode,null,Collections.EMPTY_SET,true,handler);
   assertThat(searchResult.getCount()).isEqualTo(1);
   return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_WAYPOINTS);
 }

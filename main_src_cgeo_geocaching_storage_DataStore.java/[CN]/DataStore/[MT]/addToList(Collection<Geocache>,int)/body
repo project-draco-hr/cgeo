@@ -1,12 +1,12 @@
 {
+  if (caches.isEmpty()) {
+    return;
+  }
   final AbstractList list=AbstractList.getListById(listId);
   if (list == null) {
     return;
   }
   if (!list.isConcrete()) {
-    return;
-  }
-  if (caches.isEmpty()) {
     return;
   }
   init();
