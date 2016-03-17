@@ -21,6 +21,7 @@
     setVisible(menu,R.id.menu_drop_caches,!isEmpty && isOffline);
     setVisible(menu,R.id.menu_delete_events,isConcrete && !isEmpty && containsPastEvents());
     setVisible(menu,R.id.menu_move_to_list,isOffline && !isEmpty);
+    setVisible(menu,R.id.menu_copy_to_list,isOffline && !isEmpty);
     setVisible(menu,R.id.menu_remove_from_history,!isEmpty && isHistory);
     setVisible(menu,R.id.menu_clear_offline_logs,!isEmpty && (isHistory || isOffline) && containsOfflineLogs());
     setVisible(menu,R.id.menu_import,isOffline);
@@ -35,6 +36,7 @@
       setMenuItemLabel(menu,R.id.menu_drop_caches,R.string.caches_remove_selected,R.string.caches_remove_all);
       setMenuItemLabel(menu,R.id.menu_refresh_stored,R.string.caches_refresh_selected,R.string.caches_refresh_all);
       setMenuItemLabel(menu,R.id.menu_move_to_list,R.string.caches_move_selected,R.string.caches_move_all);
+      setMenuItemLabel(menu,R.id.menu_copy_to_list,R.string.caches_copy_selected,R.string.caches_copy_all);
     }
  else {
       setMenuItemLabel(menu,R.id.menu_refresh_stored,R.string.caches_store_selected,R.string.caches_store_offline);

@@ -1,0 +1,32 @@
+{
+  final AbstractList list=AbstractList.getListById(newListId);
+  if (list == null) {
+    return;
+  }
+  if (!list.isConcrete()) {
+    return;
+  }
+  if (caches.isEmpty()) {
+    return;
+  }
+  init();
+  final SQLiteStatement remove=PreparedStatement.REMOVE_FROM_LIST.getStatement();
+  final SQLiteStatement add=PreparedStatement.ADD_TO_LIST.getStatement();
+  database.beginTransaction();
+  try {
+    for (    final Geocache cache : caches) {
+      remove.bindLong(1,oldListId);
+      remove.bindString(2,cache.getGeocode());
+      remove.execute();
+      add.bindLong(1,newListId);
+      add.bindString(2,cache.getGeocode());
+      add.execute();
+      cache.getLists().remove(oldListId);
+      cache.getLists().add(newListId);
+    }
+    database.setTransactionSuccessful();
+  }
+  finally {
+    database.endTransaction();
+  }
+}

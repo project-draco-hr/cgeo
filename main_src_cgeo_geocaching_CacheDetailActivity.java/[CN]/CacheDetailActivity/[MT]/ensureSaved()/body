@@ -1,7 +1,7 @@
 {
   if (!cache.isOffline()) {
     showToast(getString(R.string.info_cache_saved));
-    cache.setListId(StoredList.STANDARD_LIST_ID);
+    cache.getLists().add(StoredList.STANDARD_LIST_ID);
     new AsyncTask<Void,Void,Void>(){
       @Override protected Void doInBackground(      final Void... params){
         DataStore.saveCache(cache,LoadFlags.SAVE_ALL);

@@ -36,8 +36,8 @@
   if (visitedDate == 0) {
     visitedDate=other.visitedDate;
   }
-  if (listId == StoredList.TEMPORARY_LIST.id) {
-    listId=other.listId;
+  if (lists.isEmpty()) {
+    lists.addAll(other.lists);
   }
   if (StringUtils.isBlank(geocode)) {
     geocode=other.geocode;

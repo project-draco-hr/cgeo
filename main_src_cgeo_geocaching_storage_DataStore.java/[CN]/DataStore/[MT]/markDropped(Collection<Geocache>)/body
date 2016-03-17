@@ -1,3 +1,15 @@
 {
-  moveToList(caches,StoredList.TEMPORARY_LIST.id);
+  final SQLiteStatement remove=PreparedStatement.REMOVE_FROM_ALL_LISTS.getStatement();
+  database.beginTransaction();
+  try {
+    for (    final Geocache cache : caches) {
+      remove.bindString(1,cache.getGeocode());
+      remove.execute();
+      cache.getLists().clear();
+    }
+    database.setTransactionSuccessful();
+  }
+  finally {
+    database.endTransaction();
+  }
 }

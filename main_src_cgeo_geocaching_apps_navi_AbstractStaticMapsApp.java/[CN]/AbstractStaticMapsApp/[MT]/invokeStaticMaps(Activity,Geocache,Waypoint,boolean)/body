@@ -1,5 +1,5 @@
 {
-  final ILogable logable=cache != null && cache.getListId() != 0 ? cache : waypoint;
+  final ILogable logable=cache != null && !cache.getLists().isEmpty() ? cache : waypoint;
   if (logable == null || logable.getGeocode() == null) {
     ActivityMixin.showToast(activity,getString(R.string.err_detail_no_map_static));
     return true;

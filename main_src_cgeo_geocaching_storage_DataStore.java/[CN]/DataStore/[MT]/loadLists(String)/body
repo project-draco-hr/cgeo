@@ -1,0 +1,6 @@
+{
+  if (StringUtils.isBlank(geocode)) {
+    return null;
+  }
+  return queryToColl(dbTableCachesLists,new String[]{"list_id"},"geocode = ?",new String[]{geocode},null,"100",new HashSet<Integer>(),GET_INTEGER_0);
+}

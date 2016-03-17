@@ -45,7 +45,9 @@ break;
 case KEYWORD:
 final String keyword=extras.getString(Intents.EXTRA_KEYWORD);
 title=listNameMemento.rememberTerm(keyword);
+if (keyword != null) {
 loader=new KeywordGeocacheListLoader(app,keyword);
+}
 break;
 case ADDRESS:
 final String address=extras.getString(Intents.EXTRA_ADDRESS);
@@ -60,12 +62,16 @@ break;
 case FINDER:
 final String username=extras.getString(Intents.EXTRA_USERNAME);
 title=listNameMemento.rememberTerm(username);
+if (username != null) {
 loader=new FinderGeocacheListLoader(app,username);
+}
 break;
 case OWNER:
 final String ownerName=extras.getString(Intents.EXTRA_USERNAME);
 title=listNameMemento.rememberTerm(ownerName);
+if (ownerName != null) {
 loader=new OwnerGeocacheListLoader(app,ownerName);
+}
 break;
 case MAP:
 title=res.getString(R.string.map_map);

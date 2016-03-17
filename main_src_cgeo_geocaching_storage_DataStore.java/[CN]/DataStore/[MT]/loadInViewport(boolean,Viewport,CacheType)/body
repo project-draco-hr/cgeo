@@ -10,7 +10,7 @@
     selectionArgs=new String[]{String.valueOf(cacheType.id)};
   }
   if (stored) {
-    selection.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
+    selection.append(" and geocode in (select geocode from " + dbTableCachesLists + " where list_id >= "+ StoredList.STANDARD_LIST_ID+ ")");
   }
   try {
     return new SearchResult(queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,null,"500",geocodes,GET_STRING_0));

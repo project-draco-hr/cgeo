@@ -59,6 +59,10 @@ case R.id.menu_move_to_list:
 moveCachesToOtherList(adapter.getCheckedOrAllCaches());
 invalidateOptionsMenuCompatible();
 return true;
+case R.id.menu_copy_to_list:
+copyCachesToOtherList(adapter.getCheckedOrAllCaches());
+invalidateOptionsMenuCompatible();
+return true;
 case R.id.menu_delete_events:
 deletePastEvents();
 invalidateOptionsMenuCompatible();

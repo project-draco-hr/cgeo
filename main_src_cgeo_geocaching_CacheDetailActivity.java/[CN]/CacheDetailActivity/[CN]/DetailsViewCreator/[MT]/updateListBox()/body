@@ -1,12 +1,24 @@
 {
-  final View box=view.findViewById(R.id.list_box);
+  final LinearLayout listListView=(LinearLayout)view.findViewById(R.id.list_list);
   if (cache.isOffline()) {
-    box.setVisibility(View.VISIBLE);
-    final TextView text=ButterKnife.findById(view,R.id.list_text);
-    final StoredList list=DataStore.getList(cache.getListId());
-    text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
+    listListView.removeAllViews();
+    ;
+    for (    final Integer listId : cache.getLists()) {
+      final View listItemView=getLayoutInflater().inflate(R.layout.list_list_item,listListView,false);
+      final ListItemViewHolder holder=new ListItemViewHolder(listItemView);
+      final StoredList list=DataStore.getList(listId);
+      holder.name.setText(list.getTitle());
+      holder.remove.setOnClickListener(new View.OnClickListener(){
+        @Override public void onClick(        View v){
+          DataStore.removeFromList(Collections.singletonList(cache),listId);
+          updateListBox();
+        }
+      }
+);
+      listListView.addView(listItemView);
+    }
   }
  else {
-    box.setVisibility(View.GONE);
+    listListView.setVisibility(View.GONE);
   }
 }

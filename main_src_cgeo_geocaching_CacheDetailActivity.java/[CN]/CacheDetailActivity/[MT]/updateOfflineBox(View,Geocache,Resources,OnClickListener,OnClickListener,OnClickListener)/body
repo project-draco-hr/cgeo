@@ -2,6 +2,12 @@
   final TextView offlineText=ButterKnife.findById(view,R.id.offline_text);
   final Button offlineRefresh=ButterKnife.findById(view,R.id.offline_refresh);
   final Button offlineStore=ButterKnife.findById(view,R.id.offline_store);
+  final Button offlineDrop=ButterKnife.findById(view,R.id.offline_drop);
+  offlineStore.setClickable(true);
+  offlineStore.setOnClickListener(storeCacheClickListener);
+  offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
+  offlineRefresh.setClickable(true);
+  offlineRefresh.setOnClickListener(refreshCacheClickListener);
   if (cache.isOffline()) {
     final long diff=(System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000));
     final String ago;
@@ -18,18 +24,16 @@
       ago=res.getQuantityString(R.plurals.cache_offline_about_time_days,(int)(diff / (24 * 60)),(int)(diff / (24 * 60)));
     }
     offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-    offlineRefresh.setOnClickListener(refreshCacheClickListener);
-    offlineStore.setText(res.getString(R.string.cache_offline_drop));
-    offlineStore.setClickable(true);
-    offlineStore.setOnClickListener(dropCacheClickListener);
+    if (offlineDrop != null) {
+      offlineDrop.setOnClickListener(dropCacheClickListener);
+      offlineDrop.setClickable(true);
+      offlineDrop.setVisibility(View.VISIBLE);
+    }
   }
  else {
     offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-    offlineRefresh.setOnClickListener(refreshCacheClickListener);
-    offlineStore.setText(res.getString(R.string.cache_offline_store));
-    offlineStore.setClickable(true);
-    offlineStore.setOnClickListener(storeCacheClickListener);
+    if (offlineDrop != null) {
+      offlineDrop.setVisibility(View.GONE);
+    }
   }
-  offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
-  offlineRefresh.setClickable(true);
 }

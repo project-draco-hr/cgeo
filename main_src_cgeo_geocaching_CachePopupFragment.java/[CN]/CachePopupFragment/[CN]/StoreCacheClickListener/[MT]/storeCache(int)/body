@@ -1,16 +1,23 @@
 {
-  final StoreCacheHandler storeCacheHandler=new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
-  final FragmentActivity activity=getActivity();
-  progress.show(activity,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,storeCacheHandler.cancelMessage());
-  AndroidRxUtils.andThenOnUi(Schedulers.io(),new Action0(){
-    @Override public void call(){
-      cache.store(listId,storeCacheHandler);
-    }
+  if (cache.isOffline()) {
+    DataStore.addToList(Collections.singletonList(cache),listId);
+    updateCacheLists();
   }
+ else {
+    final StoreCacheHandler storeCacheHandler=new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
+    final FragmentActivity activity=getActivity();
+    progress.show(activity,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,storeCacheHandler.cancelMessage());
+    AndroidRxUtils.andThenOnUi(Schedulers.io(),new Action0(){
+      @Override public void call(){
+        cache.store(listId,storeCacheHandler);
+      }
+    }
 ,new Action0(){
-    @Override public void call(){
-      activity.supportInvalidateOptionsMenu();
+      @Override public void call(){
+        activity.supportInvalidateOptionsMenu();
+        updateCacheLists();
+      }
     }
-  }
 );
+  }
 }

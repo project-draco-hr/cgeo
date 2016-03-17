@@ -1,0 +1,13 @@
+{
+  final String geocode=cache.getGeocode();
+  final Set<Integer> lists=cache.getLists();
+  if (lists.isEmpty()) {
+    return;
+  }
+  final SQLiteStatement statement=PreparedStatement.ADD_TO_LIST.getStatement();
+  for (  final Integer list_id : lists) {
+    statement.bindLong(1,list_id);
+    statement.bindString(2,geocode);
+    statement.executeInsert();
+  }
+}

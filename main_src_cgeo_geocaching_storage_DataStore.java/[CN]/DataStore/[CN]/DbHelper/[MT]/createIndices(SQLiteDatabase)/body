@@ -15,4 +15,5 @@
   db.execSQL("create index if not exists in_logcount_geo on " + dbTableLogCount + " (geocode)");
   db.execSQL("create index if not exists in_logsoff_geo on " + dbTableLogsOffline + " (geocode)");
   db.execSQL("create index if not exists in_trck_geo on " + dbTableTrackables + " (geocode)");
+  db.execSQL("create index if not exists in_lists_geo on " + dbTableCachesLists + " (geocode)");
 }

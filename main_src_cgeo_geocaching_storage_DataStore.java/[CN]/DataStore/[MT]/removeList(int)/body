@@ -11,6 +11,9 @@
       final SQLiteStatement moveToStandard=PreparedStatement.MOVE_TO_STANDARD_LIST.getStatement();
       moveToStandard.bindLong(1,listId);
       moveToStandard.execute();
+      final SQLiteStatement removeAllFromList=PreparedStatement.REMOVE_ALL_FROM_LIST.getStatement();
+      removeAllFromList.bindLong(1,listId);
+      removeAllFromList.execute();
       status=true;
     }
     database.setTransactionSuccessful();

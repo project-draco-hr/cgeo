@@ -73,8 +73,6 @@
   buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
   buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
   updateFavPointBox();
-  final Button buttonChangeList=ButterKnife.findById(view,R.id.change_list);
-  buttonChangeList.setOnClickListener(new ChangeListClickListener());
   updateListBox();
   final IConnector connector=ConnectorFactory.getConnector(cache);
   final String license=connector.getLicenseText(cache);

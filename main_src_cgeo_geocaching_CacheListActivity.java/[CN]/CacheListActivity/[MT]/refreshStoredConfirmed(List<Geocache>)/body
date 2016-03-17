@@ -11,7 +11,7 @@
     new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
       @Override public void call(      final Integer selectedListId){
         for (        final Geocache geocache : caches) {
-          geocache.setListId(selectedListId);
+          geocache.getLists().add(selectedListId);
         }
         refreshStoredInternal(caches);
       }
@@ -21,8 +21,8 @@
  else {
     if (type != CacheListType.OFFLINE) {
       for (      final Geocache geocache : caches) {
-        if (geocache.getListId() == StoredList.TEMPORARY_LIST.id) {
-          geocache.setListId(StoredList.STANDARD_LIST_ID);
+        if (geocache.getLists().isEmpty()) {
+          geocache.getLists().add(StoredList.STANDARD_LIST_ID);
         }
       }
     }
