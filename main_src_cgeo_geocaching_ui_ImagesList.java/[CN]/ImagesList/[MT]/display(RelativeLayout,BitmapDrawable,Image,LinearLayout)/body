@@ -1,6 +1,6 @@
 {
   final ImageView imageView=(ImageView)imageViewLayout.findViewById(R.id.map_image);
-  if (image != null) {
+  if (image != null && imageView != null) {
     bitmaps.add(image.getBitmap());
     final Rect bounds=image.getBounds();
     imageView.setImageResource(R.drawable.image_not_loaded);
