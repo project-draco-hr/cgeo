@@ -1,7 +1,5 @@
 {
-  if (cache.isOffline()) {
-    final FragmentManager fm=activity.getSupportFragmentManager();
-    final EditNoteDialog dialog=EditNoteDialog.newInstance(cache.getPersonalNote());
-    dialog.show(fm,"fragment_edit_note");
-  }
+  final FragmentManager fm=activity.getSupportFragmentManager();
+  final EditNoteDialog dialog=EditNoteDialog.newInstance(cache.getPersonalNote());
+  dialog.show(fm,"fragment_edit_note");
 }
