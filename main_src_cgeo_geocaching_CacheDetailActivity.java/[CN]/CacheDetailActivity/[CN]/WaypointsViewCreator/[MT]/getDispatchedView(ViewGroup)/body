@@ -19,14 +19,14 @@
   view.setAdapter(new ArrayAdapter<Waypoint>(CacheDetailActivity.this,R.layout.waypoint_item,sortedWaypoints){
     @Override public View getView(    final int position,    final View convertView,    final ViewGroup parent){
       View rowView=convertView;
-      if (null == rowView) {
+      if (rowView == null) {
         rowView=getLayoutInflater().inflate(R.layout.waypoint_item,parent,false);
         rowView.setClickable(true);
         rowView.setLongClickable(true);
         registerForContextMenu(rowView);
       }
       WaypointViewHolder holder=(WaypointViewHolder)rowView.getTag();
-      if (null == holder) {
+      if (holder == null) {
         holder=new WaypointViewHolder(rowView);
       }
       final Waypoint waypoint=getItem(position);

@@ -1,6 +1,6 @@
 {
   final String progressValue=status[0];
-  if (null != activity && StringUtils.isNotBlank(progressValue)) {
+  if (activity != null && StringUtils.isNotBlank(progressValue)) {
     progress.setMessage(progressValue);
   }
   onProgressUpdateInternal(progressValue);

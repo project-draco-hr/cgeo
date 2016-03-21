@@ -13,7 +13,7 @@
     if (moved) {
       map.markersInvalidated=false;
       final long currentTime=System.currentTimeMillis();
-      if (1000 < (currentTime - map.loadThreadRun)) {
+      if ((currentTime - map.loadThreadRun) > 1000) {
         previousViewport=viewportNow;
         previousZoom=zoomNow;
         loadExecutor.execute(new LoadRunnable(map));

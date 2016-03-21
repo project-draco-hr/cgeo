@@ -1,5 +1,5 @@
 {
-  if (cacheType == null || CacheType.ALL == cacheType) {
+  if (cacheType == null || cacheType == CacheType.ALL) {
     throw new IllegalArgumentException("Illegal cache type");
   }
   this.cacheType=new UncertainProperty<>(cacheType);

@@ -17,7 +17,7 @@ case XmlPullParser.TEXT:
     text=parser.getText();
   break;
 case XmlPullParser.END_TAG:
-if (tagname.equalsIgnoreCase("error") && null != text && !text.trim().isEmpty()) {
+if (tagname.equalsIgnoreCase("error") && text != null && !text.trim().isEmpty()) {
   errors.add(text);
 }
 break;

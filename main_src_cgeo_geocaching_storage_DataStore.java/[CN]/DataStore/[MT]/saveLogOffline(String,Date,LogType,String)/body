@@ -3,7 +3,7 @@
     Log.e("DataStore.saveLogOffline: cannot log a blank geocode");
     return false;
   }
-  if (LogType.UNKNOWN == type && StringUtils.isBlank(log)) {
+  if (type == LogType.UNKNOWN && StringUtils.isBlank(log)) {
     Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
     return false;
   }
