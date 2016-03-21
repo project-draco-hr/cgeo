@@ -1,9 +1,9 @@
 {
-  if (netLocation == null || (gpsLocation != null && System.currentTimeMillis() <= gpsLocation.getTime() + 30000)) {
-    return gpsLocation;
-  }
   if (gpsLocation == null) {
     return netLocation;
+  }
+  if (netLocation == null || System.currentTimeMillis() <= gpsLocation.getTime() + 30000) {
+    return gpsLocation;
   }
   return gpsLocation.getTime() >= netLocation.getTime() ? gpsLocation : netLocation;
 }
