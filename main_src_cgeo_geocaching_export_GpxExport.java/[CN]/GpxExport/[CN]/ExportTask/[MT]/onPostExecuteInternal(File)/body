@@ -1,6 +1,6 @@
 {
   final Activity activityLocal=activity;
-  if (null != activityLocal) {
+  if (activityLocal != null) {
     if (exportFile != null) {
       ActivityMixin.showToast(activityLocal,getName() + ' ' + activityLocal.getString(R.string.export_exportedto)+ ": "+ exportFile.toString());
       if (Settings.getShareAfterExport()) {

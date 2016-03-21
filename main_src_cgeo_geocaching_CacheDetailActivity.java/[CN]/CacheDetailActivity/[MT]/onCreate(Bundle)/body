@@ -61,7 +61,7 @@
     if (StringUtils.isNotBlank(name)) {
       title=name;
     }
- else     if (null != geocode && StringUtils.isNotBlank(geocode)) {
+ else     if (geocode != null && StringUtils.isNotBlank(geocode)) {
       title=geocode;
     }
     progress.show(this,title,res.getString(R.string.cache_dialog_loading_details),true,loadCacheHandler.cancelMessage());

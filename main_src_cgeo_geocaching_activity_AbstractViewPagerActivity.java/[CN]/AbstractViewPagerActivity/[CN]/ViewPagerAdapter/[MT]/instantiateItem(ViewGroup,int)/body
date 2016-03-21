@@ -1,14 +1,14 @@
 {
   final Page page=pageOrder.get(position);
   PageViewCreator creator=viewCreators.get(page);
-  if (null == creator && null != page) {
+  if (creator == null && page != null) {
     creator=AbstractViewPagerActivity.this.createViewCreator(page);
     viewCreators.put(page,creator);
     viewStates.put(page,new Bundle());
   }
   View view=null;
   try {
-    if (null != creator) {
+    if (creator != null) {
       view=creator.getView(container);
       final Bundle state=viewStates.get(page);
       if (state != null) {

@@ -71,7 +71,7 @@
     }
   }
   final String distance=TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_DISTANCE,false,null);
-  if (null != distance) {
+  if (distance != null) {
     try {
       trackable.setDistance(DistanceParser.parseDistance(distance,!Settings.useImperialUnits()));
     }

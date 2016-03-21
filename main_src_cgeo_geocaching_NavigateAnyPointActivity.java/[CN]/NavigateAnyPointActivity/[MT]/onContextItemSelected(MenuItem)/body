@@ -1,6 +1,6 @@
 {
   final AdapterView.AdapterContextMenuInfo menuInfo=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-  final int position=(null != menuInfo) ? menuInfo.position : contextMenuItemPosition;
+  final int position=(menuInfo != null) ? menuInfo.position : contextMenuItemPosition;
   final Object destination=historyListView.getItemAtPosition(position);
 switch (item.getItemId()) {
 case CONTEXT_MENU_NAVIGATE:

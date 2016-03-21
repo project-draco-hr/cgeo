@@ -1,7 +1,7 @@
 {
   final TextView coordinatesView=holder.coordinatesView;
   final Geopoint coordinates=wpt.getCoords();
-  if (null != coordinates) {
+  if (coordinates != null) {
     coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(coordinates));
     coordinatesView.setText(coordinates.toString());
     coordinatesView.setVisibility(View.VISIBLE);
@@ -22,7 +22,7 @@
   if (StringUtils.isNotBlank(wpt.getName())) {
     nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
   }
- else   if (null != coordinates) {
+ else   if (coordinates != null) {
     nameView.setText(coordinates.toString());
   }
  else {

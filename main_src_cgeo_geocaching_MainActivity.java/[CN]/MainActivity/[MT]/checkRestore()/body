@@ -1,5 +1,5 @@
 {
-  if (!DataStore.isNewlyCreatedDatebase() || null == DatabaseBackupUtils.getRestoreFile()) {
+  if (!DataStore.isNewlyCreatedDatebase() || DatabaseBackupUtils.getRestoreFile() == null) {
     return;
   }
   new AlertDialog.Builder(this).setTitle(res.getString(R.string.init_backup_restore)).setMessage(res.getString(R.string.init_restore_confirm)).setCancelable(false).setPositiveButton(getString(android.R.string.yes),new DialogInterface.OnClickListener(){
