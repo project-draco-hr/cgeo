@@ -24,6 +24,9 @@ ActivityMixin.invalidateOptionsMenu(this);
 if (mapMode != MapMode.SINGLE) {
 mapTitle=StringUtils.EMPTY;
 }
+ else {
+targetGeocode=geocodeIntent;
+}
 return true;
 case R.id.menu_store_caches:
 return true;

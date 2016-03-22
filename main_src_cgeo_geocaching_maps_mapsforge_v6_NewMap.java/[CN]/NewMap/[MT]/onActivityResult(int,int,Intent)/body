@@ -1,16 +1,21 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
-  if (requestCode == AbstractDialogFragment.REQUEST_CODE_COORDINATES && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
-    final Geopoint coords=data.getExtras().getParcelable(Intents.EXTRA_COORDS);
-    if (coords != null) {
-      lastNavTarget=coords;
+  if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
+    final TargetInfo targetInfo=data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
+    if (targetInfo != null) {
+      lastNavTarget=targetInfo.coords;
       if (navigationLayer != null) {
-        navigationLayer.setDestination(coords);
+        navigationLayer.setDestination(targetInfo.coords);
         navigationLayer.requestRedraw();
       }
       if (distanceView != null) {
-        distanceView.setDestination(coords);
+        distanceView.setDestination(targetInfo.coords);
         distanceView.setCoordinates(geoDirUpdate.getCurrenLocation());
+      }
+      if (StringUtils.isNotBlank(targetInfo.geocode)) {
+        targetGeocode=targetInfo.geocode;
+        final Geocache target=getCurrentTargetCache();
+        targetView.setTarget(targetGeocode,target != null ? target.getName() : StringUtils.EMPTY);
       }
     }
   }

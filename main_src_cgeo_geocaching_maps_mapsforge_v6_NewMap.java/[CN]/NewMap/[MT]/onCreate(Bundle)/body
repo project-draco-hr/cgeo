@@ -52,6 +52,7 @@
     if (viewport != null) {
       mapView.zoomToViewport(viewport);
     }
+    targetGeocode=geocodeIntent;
   }
  else   if (coordsIntent != null) {
     mapView.zoomToViewport(new Viewport(coordsIntent,0,0));

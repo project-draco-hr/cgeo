@@ -1,0 +1,7 @@
+{
+  if (StringUtils.isNotBlank(targetGeocode)) {
+    final Geocache cache=DataStore.loadCache(targetGeocode,LoadFlags.LOAD_CACHE_OR_DB);
+    return cache;
+  }
+  return null;
+}

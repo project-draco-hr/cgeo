@@ -1,5 +1,5 @@
 {
-  final Geocache cache=getSingleModeCache();
+  final Geocache cache=getCurrentTargetCache();
   if (cache != null) {
     EditWaypointActivity.startActivityAddWaypoint(this,cache,new Geopoint(tapLatLong.latitude,tapLatLong.longitude));
   }
