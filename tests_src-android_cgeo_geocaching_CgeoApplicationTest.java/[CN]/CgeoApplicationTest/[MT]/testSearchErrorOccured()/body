@@ -3,7 +3,7 @@
     @Override public void run(){
       final MockedCacheAndroid cache=new GC1ZXX2Android();
       deleteCacheFromDBAndLogout(cache.getGeocode());
-      final SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,Collections.EMPTY_SET,true,null);
+      final SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,true,null);
       assertThat(search).isNotNull();
       assertThat(search.getGeocodes()).isEmpty();
     }

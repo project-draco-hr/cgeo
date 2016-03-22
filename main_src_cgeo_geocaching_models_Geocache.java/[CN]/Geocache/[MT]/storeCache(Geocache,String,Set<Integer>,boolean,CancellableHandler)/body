@@ -4,7 +4,7 @@
     if (origCache != null) {
       SearchResult search=null;
       if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
-        search=searchByGeocode(origCache.getGeocode(),null,lists,false,handler);
+        search=searchByGeocode(origCache.getGeocode(),null,false,handler);
       }
       if (search != null) {
         cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -14,7 +14,7 @@
       }
     }
  else     if (StringUtils.isNotBlank(geocode)) {
-      final SearchResult search=searchByGeocode(geocode,null,lists,forceRedownload,handler);
+      final SearchResult search=searchByGeocode(geocode,null,forceRedownload,handler);
       if (search != null) {
         cache=search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
       }

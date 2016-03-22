@@ -1,5 +1,5 @@
 {
-  final SearchResult search=Geocache.searchByGeocode(geocode,null,Collections.EMPTY_SET,true,null);
+  final SearchResult search=Geocache.searchByGeocode(geocode,null,true,null);
   assertThat(search).isNotNull();
   if (Settings.isGCPremiumMember() || search.getError() == null) {
     assertThat(search.getGeocodes()).containsExactly(geocode);
