@@ -1,2 +1,93 @@
 {
+  if (cache == null) {
+    return null;
+  }
+  view=(ScrollView)getLayoutInflater().inflate(R.layout.cachedetail_description_page,parentView,false);
+  ButterKnife.bind(this,view);
+  if (StringUtils.isNotBlank(cache.getShortDescription())) {
+    loadDescription(cache.getShortDescription(),descView,null);
+  }
+  if (StringUtils.isNotBlank(cache.getDescription())) {
+    loadLongDescription();
+  }
+  setPersonalNote(personalNoteView,cache.getPersonalNote());
+  personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+  addContextMenu(personalNoteView);
+  final Button personalNoteEdit=ButterKnife.findById(view,R.id.edit_personalnote);
+  personalNoteEdit.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View v){
+      ensureSaved();
+      editPersonalNote(cache,CacheDetailActivity.this);
+    }
+  }
+);
+  final Button personalNoteUpload=ButterKnife.findById(view,R.id.upload_personalnote);
+  if (ConnectorFactory.getConnector(cache).supportsPersonalNote()) {
+    personalNoteUpload.setVisibility(View.VISIBLE);
+    personalNoteUpload.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      final View v){
+        if (StringUtils.length(cache.getPersonalNote()) > GCConstants.PERSONAL_NOTE_MAX_CHARS) {
+          warnPersonalNoteExceedsLimit();
+        }
+ else {
+          uploadPersonalNote();
+        }
+      }
+    }
+);
+  }
+ else {
+    personalNoteUpload.setVisibility(View.GONE);
+  }
+  final View hintBoxView=view.findViewById(R.id.hint_box);
+  if (StringUtils.isNotBlank(cache.getHint()) || CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+    hintBoxView.setVisibility(View.VISIBLE);
+  }
+ else {
+    hintBoxView.setVisibility(View.GONE);
+  }
+  final TextView hintView=(ButterKnife.findById(view,R.id.hint));
+  if (StringUtils.isNotBlank(cache.getHint())) {
+    if (TextUtils.containsHtml(cache.getHint())) {
+      hintView.setText(Html.fromHtml(cache.getHint(),new HtmlImage(cache.getGeocode(),false,false,false),null),TextView.BufferType.SPANNABLE);
+      hintView.setText(CryptUtils.rot13((Spannable)hintView.getText()));
+    }
+ else {
+      hintView.setText(CryptUtils.rot13(cache.getHint()));
+    }
+    hintView.setVisibility(View.VISIBLE);
+    hintView.setClickable(true);
+    hintView.setOnClickListener(new DecryptTextClickListener(hintView));
+    hintBoxView.setOnClickListener(new DecryptTextClickListener(hintView));
+    hintBoxView.setClickable(true);
+    addContextMenu(hintView);
+  }
+ else {
+    hintView.setVisibility(View.GONE);
+    hintView.setClickable(false);
+    hintView.setOnClickListener(null);
+    hintBoxView.setClickable(false);
+    hintBoxView.setOnClickListener(null);
+  }
+  final TextView spoilerlinkView=(ButterKnife.findById(view,R.id.hint_spoilerlink));
+  if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+    spoilerlinkView.setVisibility(View.VISIBLE);
+    spoilerlinkView.setClickable(true);
+    spoilerlinkView.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      final View arg0){
+        if (cache == null || CollectionUtils.isEmpty(cache.getSpoilers())) {
+          showToast(res.getString(R.string.err_detail_no_spoiler));
+          return;
+        }
+        ImagesActivity.startActivitySpoilerImages(CacheDetailActivity.this,cache.getGeocode(),cache.getSpoilers());
+      }
+    }
+);
+  }
+ else {
+    spoilerlinkView.setVisibility(View.GONE);
+    spoilerlinkView.setClickable(true);
+    spoilerlinkView.setOnClickListener(null);
+  }
+  return view;
 }
