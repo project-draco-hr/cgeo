@@ -4,7 +4,7 @@
   Location.distanceBetween(itemCoord.getLatitude(),itemCoord.getLongitude(),itemCoord.getLatitude(),itemCoord.getLongitude() + 1,distanceArray);
   final float longitudeLineDistance=distanceArray[0];
   final GeoPointImpl itemGeo=mapItemFactory.getGeoPointBase(itemCoord);
-  final Geopoint leftCoords=new Geopoint(itemCoord.getLatitude(),itemCoord.getLongitude() - 161 / longitudeLineDistance);
+  final Geopoint leftCoords=new Geopoint(itemCoord.getLatitude(),itemCoord.getLongitude() - 528.0 * IConversion.FEET_TO_KILOMETER * 1000.0 / longitudeLineDistance);
   final GeoPointImpl leftGeo=mapItemFactory.getGeoPointBase(leftCoords);
   final Point center=new Point();
   projection.toPixels(itemGeo,center);
