@@ -1,12 +1,7 @@
 {
   if (currentFormat != null) {
     if (!areCurrentCoordinatesValid(false)) {
-      if (gpinitial != null) {
-        gp=gpinitial;
-      }
- else {
-        gp=Geopoint.ZERO;
-      }
+      gp=currentCoords();
     }
   }
   currentFormat=CoordInputFormatEnum.fromInt(pos);
