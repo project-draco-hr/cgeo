@@ -1,9 +1,4 @@
 {
-  if (gpinitial == null) {
-    final AbstractActivity activity=(AbstractActivity)getActivity();
-    activity.showToast(activity.getResources().getString(R.string.err_point_unknown_position));
-    return;
-  }
-  gp=gpinitial;
+  gp=currentCoords();
   updateGUI();
 }

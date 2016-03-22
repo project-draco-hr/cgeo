@@ -3,12 +3,6 @@
   if (gp != null) {
     args.putParcelable(GEOPOINT_ARG,gp);
   }
- else {
-    args.putParcelable(GEOPOINT_ARG,geo != null ? geo.getCoords() : Geopoint.ZERO);
-  }
-  if (geo != null) {
-    args.putParcelable(GEOPOINT_INITIAL_ARG,geo.getCoords());
-  }
   if (cache != null) {
     args.putParcelable(CACHECOORDS_ARG,cache.getCoords());
   }
