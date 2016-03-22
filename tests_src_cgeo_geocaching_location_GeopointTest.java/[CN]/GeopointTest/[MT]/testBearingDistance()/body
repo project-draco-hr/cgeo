@@ -2,7 +2,7 @@
   final Geopoint gp1=new Geopoint(-30.4,-1.2);
   final Geopoint gp2=new Geopoint(-30.1,-2.3);
   final float d12=gp1.distanceTo(gp2);
-  if (Build.VERSION.SDK_INT == 17) {
+  if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR1) {
     assertThat((double)d12).isEqualTo(110.83107,offset(1e-6));
   }
  else {
