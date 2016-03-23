@@ -38,7 +38,7 @@
           showToast(res.getString(R.string.err_gcvote_send_rating));
         }
       }
-      for (      final TrackableConnector connector : ConnectorFactory.getGenericTrackablesConnectors()) {
+      for (      final TrackableConnector connector : ConnectorFactory.getLoggableGenericTrackablesConnectors()) {
         final TrackableLoggingManager manager=connector.getTrackableLoggingManager((AbstractLoggingActivity)activity);
         if (manager != null) {
           final Set<TrackableLog> trackablesMoved=new HashSet<>();
