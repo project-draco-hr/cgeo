@@ -6,7 +6,7 @@
     if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
       showLicenseConfirmationDialog();
     }
- else     if (search != null && search.getError() != null) {
+ else     if (search != null && search.getError() != StatusCode.NO_ERROR) {
       showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString(res)+ '.');
       hideLoading();
       showProgress(false);
