@@ -13,7 +13,7 @@
       finishActivity();
       return;
     }
-    if (activity.search.getError() != null) {
+    if (activity.search.getError() != StatusCode.NO_ERROR) {
       final StatusCode error=activity.search.getError();
       final Resources res=activity.getResources();
       final String toastPrefix=error != StatusCode.CACHE_NOT_FOUND ? res.getString(R.string.err_dwld_details_failed) + " " : "";
