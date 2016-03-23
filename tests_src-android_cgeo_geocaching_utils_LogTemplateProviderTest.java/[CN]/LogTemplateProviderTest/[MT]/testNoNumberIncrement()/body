@@ -1,0 +1,14 @@
+{
+  final Geocache cache=new Geocache();
+  cache.setGeocode("GC45GGA");
+  final LogContext context=new LogContext(cache,new LogEntry.Builder().build());
+  final String template="[NUMBER]";
+  final String withIncrement=LogTemplateProvider.applyTemplates(template,context);
+  final String withoutIncrement=LogTemplateProvider.applyTemplatesNoIncrement(template,context);
+  if (withIncrement.isEmpty()) {
+    assertThat(withoutIncrement).isEmpty();
+  }
+ else {
+    assertThat(Integer.valueOf(withIncrement) - Integer.valueOf(withoutIncrement)).isEqualTo(1);
+  }
+}
