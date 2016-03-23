@@ -1,0 +1,24 @@
+{
+  final Geocache cache=context.getCache();
+  if (cache == null) {
+    return StringUtils.EMPTY;
+  }
+  int current=0;
+  final IConnector connector=ConnectorFactory.getConnector(cache);
+  if (connector instanceof ILogin) {
+    current=((ILogin)connector).getCachesFound();
+  }
+  if (current == 0) {
+    if (context.isOffline()) {
+      return StringUtils.EMPTY;
+    }
+    if (connector instanceof ILogin) {
+      ((ILogin)connector).login(null,null);
+      current=((ILogin)connector).getCachesFound();
+    }
+  }
+  if (current >= 0) {
+    return String.valueOf(incrementCounter ? current + 1 : current);
+  }
+  return StringUtils.EMPTY;
+}
