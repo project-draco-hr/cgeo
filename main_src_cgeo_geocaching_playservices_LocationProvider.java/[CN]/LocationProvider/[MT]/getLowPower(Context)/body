@@ -7,5 +7,5 @@
     }
   }
 );
-  return subject.first().concatWith(untilPreciseEnoughObservable.concatWith(lowPowerObservable).timeout(25,TimeUnit.SECONDS).retry()).onBackpressureDrop();
+  return subject.first().concatWith(untilPreciseEnoughObservable.concatWith(lowPowerObservable).timeout(25,TimeUnit.SECONDS).retry()).onBackpressureLatest();
 }
