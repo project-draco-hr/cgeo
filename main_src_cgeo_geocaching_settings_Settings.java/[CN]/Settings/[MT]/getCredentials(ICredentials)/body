@@ -1,5 +1,5 @@
 {
-  final String username=getString(connector.getUsernamePreferenceKey(),null);
-  final String password=getString(connector.getPasswordPreferenceKey(),null);
+  final String username=getString(connector.getUsernamePreferenceKey(),StringUtils.EMPTY);
+  final String password=getString(connector.getPasswordPreferenceKey(),StringUtils.EMPTY);
   return new Credentials(username,password);
 }
