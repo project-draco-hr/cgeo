@@ -1,0 +1,14 @@
+{
+  final View preferenceView=super.onCreateView(parent);
+  final String avatarUrl=Settings.getAvatarUrl(credentialsMapping.getConnector());
+  if (StringUtils.isEmpty(avatarUrl)) {
+    return preferenceView;
+  }
+  final ImageView iconView=(ImageView)inflater.inflate(R.layout.preference_info_icon,parent,false);
+  final HtmlImage imgGetter=new HtmlImage(HtmlImage.SHARED,false,false,false);
+  iconView.setImageDrawable(imgGetter.getDrawable(avatarUrl));
+  final LinearLayout frame=ButterKnife.findById(preferenceView,android.R.id.widget_frame);
+  frame.setVisibility(View.VISIBLE);
+  frame.addView(iconView);
+  return preferenceView;
+}
