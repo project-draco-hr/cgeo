@@ -3,4 +3,7 @@
   zoomLevel=in.readInt();
   followMyLocation=in.readInt() > 0 ? true : false;
   showCircles=in.readInt() > 0 ? true : false;
+  targetGeocode=in.readString();
+  lastNavTarget=in.readParcelable(Geopoint.class.getClassLoader());
+  liveEnabled=in.readInt() > 0 ? true : false;
 }

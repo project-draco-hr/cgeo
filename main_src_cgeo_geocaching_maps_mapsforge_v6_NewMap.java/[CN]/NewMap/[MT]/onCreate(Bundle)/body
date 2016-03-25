@@ -40,6 +40,9 @@
   if (mapStateIntent != null) {
     this.mapView.getModel().mapViewPosition.setCenter(mapStateIntent.getCenter());
     this.mapView.getModel().mapViewPosition.setZoomLevel((byte)mapStateIntent.getZoomLevel());
+    this.targetGeocode=mapStateIntent.getTargetGeocode();
+    this.lastNavTarget=mapStateIntent.getLastNavTarget();
+    this.isLiveEnabled=mapStateIntent.isLiveEnabled();
   }
  else   if (searchIntent != null) {
     final Viewport viewport=DataStore.getBounds(searchIntent.getGeocodes());
