@@ -1,0 +1,14 @@
+{
+  settingsActivity.setAuthTitle(credentialsMapping.prefKeyId);
+  return new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    final Preference preference){
+      if (credentialsMapping != CredentialActivityMapping.NONE) {
+        final Intent checkIntent=new Intent(preference.getContext(),credentialsMapping.getAuthActivity());
+        credentialsMapping.getCredentialsParams().setCredentialsAuthExtras(checkIntent);
+        settingsActivity.startActivityForResult(checkIntent,credentialsMapping.prefKeyId);
+      }
+      return false;
+    }
+  }
+;
+}

@@ -1,14 +1,10 @@
 {
   try {
-    final String responseData=StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/my/")));
-    final String profile=TextUtils.replaceWhitespace(responseData);
-    setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile,GCConstants.PATTERN_CACHES_FOUND,true,"-1"))));
-    final String avatarURL=TextUtils.getMatch(profile,GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE,false,null);
-    if (avatarURL != null) {
+    final String avatarURL=getAvatarUrl();
+    if (!avatarURL.isEmpty()) {
       final HtmlImage imgGetter=new HtmlImage(HtmlImage.SHARED,false,false,false);
-      return imgGetter.fetchDrawable(avatarURL.replace("avatar","user/large")).cast(Drawable.class);
+      return imgGetter.fetchDrawable(avatarURL).cast(Drawable.class);
     }
-    Log.d("No avatar set for user");
   }
  catch (  final Exception e) {
     Log.w("Error when retrieving user avatar",e);

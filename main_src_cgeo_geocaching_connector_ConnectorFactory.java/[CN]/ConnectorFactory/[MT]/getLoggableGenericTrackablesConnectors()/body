@@ -1,0 +1,9 @@
+{
+  final List<TrackableConnector> trackableConnectors=new ArrayList<>();
+  for (  final TrackableConnector connector : getGenericTrackablesConnectors()) {
+    if (connector.isGenericLoggable() && connector.isRegistered()) {
+      trackableConnectors.add(connector);
+    }
+  }
+  return trackableConnectors;
+}
