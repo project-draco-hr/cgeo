@@ -8,7 +8,9 @@
   this.navigationLayer=null;
   this.mapView.getLayerManager().getLayers().remove(this.historyLayer);
   this.historyLayer=null;
-  this.mapView.getLayerManager().getLayers().remove(this.tileRendererLayer);
-  this.tileRendererLayer.onDestroy();
-  this.tileRendererLayer=null;
+  if (this.tileRendererLayer != null) {
+    this.mapView.getLayerManager().getLayers().remove(this.tileRendererLayer);
+    this.tileRendererLayer.onDestroy();
+    this.tileRendererLayer=null;
+  }
 }
