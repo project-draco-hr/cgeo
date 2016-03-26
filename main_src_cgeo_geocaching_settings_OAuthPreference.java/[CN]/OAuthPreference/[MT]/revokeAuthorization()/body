@@ -1,0 +1,6 @@
+{
+  final OCPreferenceKeys key=OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
+  if (key != null) {
+    Settings.setTokens(key.publicTokenPrefId,null,key.privateTokenPrefId,null);
+  }
+}
