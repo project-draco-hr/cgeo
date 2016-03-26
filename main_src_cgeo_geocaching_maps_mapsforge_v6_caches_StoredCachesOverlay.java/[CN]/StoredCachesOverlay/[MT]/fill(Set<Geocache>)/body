@@ -4,7 +4,8 @@
     final Collection<String> newCodes=new HashSet<>();
     final Set<Geocache> cachesToDisplay=caches;
     if (!cachesToDisplay.isEmpty()) {
-      final boolean showWaypoints=cachesToDisplay.size() == 1 || cachesToDisplay.size() < Settings.getWayPointsThreshold();
+      final boolean showWaypoints=cachesToDisplay.size() < Settings.getWayPointsThreshold();
+      Log.d(String.format("CachsToDisplay: %d, showWaypoints: %b",cachesToDisplay.size(),showWaypoints));
       for (      final Geocache cache : cachesToDisplay) {
         if (cache == null) {
           continue;
@@ -15,8 +16,8 @@
             if (waypoint == null || waypoint.getCoords() == null) {
               continue;
             }
-            if (removeCodes.contains(waypoint.getGeocode())) {
-              removeCodes.remove(waypoint.getGeocode());
+            if (removeCodes.contains(waypoint.getGpxId())) {
+              removeCodes.remove(waypoint.getGpxId());
             }
  else {
               if (addItem(waypoint)) {
