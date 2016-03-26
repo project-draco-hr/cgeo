@@ -1,0 +1,20 @@
+{
+  if (!isAuthorized()) {
+    return false;
+  }
+  final AlertDialog.Builder builder=new AlertDialog.Builder(v.getContext());
+  builder.setMessage("You'll be disconnected from this connector. Your currently saved credentials will be lost.").setIcon(android.R.drawable.ic_dialog_alert).setTitle("Forget authorization?").setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    final DialogInterface dialog,    final int id){
+      revokeAuthorization();
+      setSummary(R.string.auth_unconnected);
+    }
+  }
+).setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    final DialogInterface dialog,    final int id){
+      dialog.cancel();
+    }
+  }
+);
+  builder.create().show();
+  return true;
+}

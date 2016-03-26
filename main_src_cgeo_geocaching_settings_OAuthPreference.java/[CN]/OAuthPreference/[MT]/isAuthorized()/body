@@ -1,0 +1,7 @@
+{
+  final OCPreferenceKeys key=OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
+  if (key != null) {
+    return Settings.hasOCAuthorization(key.publicTokenPrefId,key.privateTokenPrefId);
+  }
+  return false;
+}
