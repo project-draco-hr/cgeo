@@ -1,8 +1,10 @@
 {
   final SQLiteStatement remove=PreparedStatement.REMOVE_FROM_ALL_LISTS.getStatement();
+  final Map<String,Set<Integer>> oldLists=new HashMap<>();
   database.beginTransaction();
   try {
     for (    final Geocache cache : caches) {
+      oldLists.put(cache.getGeocode(),loadLists(cache.getGeocode()));
       remove.bindString(1,cache.getGeocode());
       remove.execute();
       cache.getLists().clear();
@@ -12,4 +14,5 @@
   finally {
     database.endTransaction();
   }
+  return oldLists;
 }
