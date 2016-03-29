@@ -9,12 +9,12 @@
     for (    final GpsDirectory gpsDirectory : gpsDirectories) {
       final GeoLocation geoLocation=gpsDirectory.getGeoLocation();
       if (geoLocation != null && !geoLocation.isZero()) {
-        return geoLocation;
+        return new Geopoint(geoLocation.getLatitude(),geoLocation.getLongitude());
       }
     }
   }
  catch (  final Exception e) {
-    Log.e("ImagesList.addGeoOverlay",e);
+    Log.e("ImagesList.getImageLocation",e);
   }
   return null;
 }

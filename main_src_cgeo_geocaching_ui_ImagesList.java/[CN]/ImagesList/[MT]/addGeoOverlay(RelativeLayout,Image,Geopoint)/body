@@ -1,0 +1,22 @@
+{
+  final ImageView geoOverlay=(ImageView)imageViewLayout.findViewById(R.id.geo_overlay);
+  geoOverlay.setVisibility(View.VISIBLE);
+  geoOverlay.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View wpNavView){
+      wpNavView.setOnClickListener(new View.OnClickListener(){
+        @Override public void onClick(        final View v){
+          NavigationAppFactory.startDefaultNavigationApplication(1,activity,gpt);
+        }
+      }
+);
+      wpNavView.setOnLongClickListener(new View.OnLongClickListener(){
+        @Override public boolean onLongClick(        final View v){
+          NavigationAppFactory.startDefaultNavigationApplication(2,activity,gpt);
+          return true;
+        }
+      }
+);
+    }
+  }
+);
+}
