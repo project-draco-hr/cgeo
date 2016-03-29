@@ -1,3 +1,8 @@
 {
-  DataStore.addToList(getCaches(),listId);
+  if (listId == PseudoList.ALL_LIST.id) {
+    DataStore.addToLists(getCaches(),oldCachesLists);
+  }
+ else {
+    DataStore.addToList(getCaches(),listId);
+  }
 }
