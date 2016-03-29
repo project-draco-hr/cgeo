@@ -2,7 +2,6 @@
   onCreate(savedInstanceState,R.layout.authorization_credentials_activity);
   final Bundle extras=getIntent().getExtras();
   if (extras != null) {
-    connectorUrlRegister=BundleUtils.getString(extras,Intents.EXTRA_CREDENTIALS_AUTH_URL_REGISTER,connectorUrlRegister);
     connectorUsername=BundleUtils.getString(extras,Intents.EXTRA_CREDENTIALS_AUTH_USERNAME,connectorUsername);
   }
   setTitle(getAuthTitle());
@@ -11,14 +10,6 @@
   checkButton.setText(getAuthCheck());
   checkButton.setOnClickListener(new CheckListener());
   enableCheckButtonIfReady();
-  if (StringUtils.isEmpty(connectorUrlRegister)) {
-    registerButton.setVisibility(View.GONE);
-  }
- else {
-    registerButton.setText(getAuthRegister());
-    registerButton.setEnabled(true);
-    registerButton.setOnClickListener(new RegisterListener());
-  }
   usernameEditText.setText(connectorUsername);
   final EnableStartButtonWatcher enableStartButtonWatcher=new EnableStartButtonWatcher();
   usernameEditText.addTextChangedListener(enableStartButtonWatcher);
