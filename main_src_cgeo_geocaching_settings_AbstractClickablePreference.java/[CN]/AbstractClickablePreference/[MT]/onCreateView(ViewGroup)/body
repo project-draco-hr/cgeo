@@ -1,13 +1,13 @@
 {
   setOnPreferenceClickListener(getOnPreferenceClickListener(activity));
-  ListView listView=(ListView)parent;
+  final ListView listView=(ListView)parent;
   listView.setOnItemLongClickListener(new ListView.OnItemLongClickListener(){
-    @Override public boolean onItemLongClick(    AdapterView<?> parent,    View view,    int position,    long id){
-      ListView listView=(ListView)parent;
-      ListAdapter listAdapter=listView.getAdapter();
-      Object obj=listAdapter.getItem(position);
+    @Override public boolean onItemLongClick(    final AdapterView<?> parent,    final View view,    final int position,    final long id){
+      final ListView listView=(ListView)parent;
+      final ListAdapter listAdapter=listView.getAdapter();
+      final Object obj=listAdapter.getItem(position);
       if (obj instanceof View.OnLongClickListener) {
-        View.OnLongClickListener longListener=(View.OnLongClickListener)obj;
+        final View.OnLongClickListener longListener=(View.OnLongClickListener)obj;
         return longListener.onLongClick(view);
       }
       return false;
