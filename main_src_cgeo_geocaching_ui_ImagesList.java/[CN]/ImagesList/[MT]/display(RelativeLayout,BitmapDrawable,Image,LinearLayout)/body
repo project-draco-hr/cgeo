@@ -17,8 +17,12 @@
     imageView.setLayoutParams(new RelativeLayout.LayoutParams(bounds.width(),bounds.height()));
     view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
     imageView.setId(image.hashCode());
-    addGeoOverlay(imageViewLayout,img);
     images.put(imageView.getId(),img);
+    final Geopoint gpt=getImageLocation(img);
+    if (gpt != null) {
+      addGeoOverlay(imageViewLayout,img,gpt);
+      geoPoints.put(imageView.getId(),gpt);
+    }
     view.invalidate();
   }
 }
