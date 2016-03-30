@@ -1,8 +1,6 @@
 {
   if (intent != null) {
     intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME,StringUtils.defaultIfBlank(username,StringUtils.EMPTY));
-    if (urlRegister != null) {
-      intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_URL_REGISTER,urlRegister);
-    }
+    intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD,StringUtils.defaultIfBlank(password,StringUtils.EMPTY));
   }
 }

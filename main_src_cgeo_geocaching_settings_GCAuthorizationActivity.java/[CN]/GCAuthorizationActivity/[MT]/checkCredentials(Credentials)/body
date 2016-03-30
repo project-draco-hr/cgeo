@@ -1,5 +1,5 @@
 {
-  Credentials currentCredentials=getCredentials();
+  Credentials currentCredentials=GCConnector.getInstance().getCredentials();
   if (currentCredentials.isInvalid() || !currentCredentials.getUserName().equals(credentials.getUserName()) || !currentCredentials.getPassword().equals(credentials.getPassword())) {
     GCLogin.getInstance().logout();
   }
