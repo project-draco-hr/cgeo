@@ -6,7 +6,7 @@
     imageView.setImageResource(R.drawable.image_not_loaded);
     imageView.setClickable(true);
     imageView.setOnClickListener(new View.OnClickListener(){
-      @Override public void onClick(      final View arg0){
+      @Override public void onClick(      final View view){
         viewImageInStandardApp(img,image);
       }
     }
@@ -18,10 +18,10 @@
     view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
     imageView.setId(image.hashCode());
     images.put(imageView.getId(),img);
-    final Geopoint gpt=getImageLocation(img);
-    if (gpt != null) {
-      addGeoOverlay(imageViewLayout,img,gpt);
-      geoPoints.put(imageView.getId(),gpt);
+    final Geopoint geoPoint=getImageLocation(img);
+    if (geoPoint != null) {
+      addGeoOverlay(imageViewLayout,geoPoint);
+      geoPoints.put(imageView.getId(),geoPoint);
     }
     view.invalidate();
   }
