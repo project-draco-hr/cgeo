@@ -1,0 +1,7 @@
+{
+  if (StringUtils.isEmpty(urlHost)) {
+    Log.d("OCAuthorizationActivity.getCreateAccountUrl: Failed to determine full URL");
+    return StringUtils.EMPTY;
+  }
+  return (urlHttps ? "https://" : "http://") + urlHost + "/register.php";
+}

@@ -14,6 +14,14 @@
   usernameEditText.setText(connectorUsername);
   passwordEditText.setText(connectorPassword);
   enableCheckButtonIfReady();
+  if (StringUtils.isEmpty(getCreateAccountUrl())) {
+    registerButton.setVisibility(View.GONE);
+  }
+ else {
+    registerButton.setText(getAuthRegister());
+    registerButton.setEnabled(true);
+    registerButton.setOnClickListener(new RegisterListener());
+  }
   final EnableStartButtonWatcher enableStartButtonWatcher=new EnableStartButtonWatcher();
   usernameEditText.addTextChangedListener(enableStartButtonWatcher);
   passwordEditText.addTextChangedListener(enableStartButtonWatcher);
