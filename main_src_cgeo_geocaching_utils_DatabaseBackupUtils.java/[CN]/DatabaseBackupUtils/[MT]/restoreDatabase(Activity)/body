@@ -1,5 +1,6 @@
 {
   if (!hasBackup()) {
+    Dialogs.message(activity,R.string.init_backup_restore,R.string.init_backup_no_backup_available);
     return;
   }
   final int caches=DataStore.getAllCachesCount();
