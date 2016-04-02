@@ -4,21 +4,30 @@
     return new JSONResult("unknown OKAPI connector host");
   }
   params.add("langpref",getPreferredLanguage());
-  if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-    final OAuthTokens tokens=new OAuthTokens(connector);
-    if (!tokens.isValid()) {
-      return new JSONResult("invalid oauth tokens");
+switch (connector.getSupportedAuthLevel()) {
+case Level3:
+{
+      final OAuthTokens tokens=new OAuthTokens(connector);
+      if (!tokens.isValid()) {
+        return new JSONResult("invalid oauth tokens");
+      }
+      OAuth.signOAuth(host,service.methodName,"GET",false,params,tokens,connector.getCK(),connector.getCS());
+      break;
     }
-    OAuth.signOAuth(host,service.methodName,"GET",false,params,tokens,connector.getCK(),connector.getCS());
-  }
- else {
+case Level1:
+{
     connector.addAuthentication(params);
+    break;
   }
-  final String uri="http://" + host + service.methodName;
-  try {
-    return new JSONResult(Network.getRequest(uri,params).toBlocking().value());
-  }
- catch (  final Exception e) {
-    return new JSONResult("connection error");
-  }
+case Level0:
+{
+}
+}
+final String uri="http://" + host + service.methodName;
+try {
+return new JSONResult(Network.getRequest(uri,params).toBlocking().value());
+}
+ catch (final Exception e) {
+return new JSONResult("connection error");
+}
 }

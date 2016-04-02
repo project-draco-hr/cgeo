@@ -1,0 +1,10 @@
+{
+  final ObjectNode data=request(connector,OkapiService.SERVICE_API_INSTALLATION,new Parameters()).data;
+  if (data == null) {
+    return null;
+  }
+  if (data.has(field) && !data.get(field).isNull()) {
+    return data.get(field).asText();
+  }
+  return null;
+}

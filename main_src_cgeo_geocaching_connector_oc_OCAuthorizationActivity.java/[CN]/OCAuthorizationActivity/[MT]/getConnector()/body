@@ -1,0 +1,8 @@
+{
+  for (  final IConnector connector : ConnectorFactory.getConnectors()) {
+    if (connector.getHost().equalsIgnoreCase(urlHost)) {
+      return connector;
+    }
+  }
+  throw new IllegalStateException("Cannot find connector for host " + urlHost);
+}

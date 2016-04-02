@@ -1,0 +1,11 @@
+{
+  String url=OkapiClient.getMobileRegistrationUrl(this);
+  if (StringUtils.isNotBlank(url)) {
+    return url;
+  }
+  url=OkapiClient.getRegistrationUrl(this);
+  if (StringUtils.isNotBlank(url)) {
+    return url;
+  }
+  return super.getCreateAccountUrl();
+}
