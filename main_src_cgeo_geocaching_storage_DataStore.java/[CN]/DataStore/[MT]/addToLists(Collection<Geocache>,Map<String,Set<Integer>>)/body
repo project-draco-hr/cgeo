@@ -11,7 +11,7 @@
       if (lists.isEmpty()) {
         continue;
       }
-      for (      Integer listId : lists) {
+      for (      final Integer listId : lists) {
         add.bindLong(1,listId);
         add.bindString(2,cache.getGeocode());
         add.execute();
