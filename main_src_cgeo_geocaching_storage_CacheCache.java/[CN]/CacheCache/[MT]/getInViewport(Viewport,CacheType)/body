@@ -2,7 +2,7 @@
   final Set<String> geocodes=new HashSet<>();
   for (  final Geocache cache : cachesCache.values()) {
     if (cache.getCoords() == null) {
-      Log.e("CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
+      Log.w("CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
       continue;
     }
     if (cacheType.contains(cache) && viewport.contains(cache)) {
