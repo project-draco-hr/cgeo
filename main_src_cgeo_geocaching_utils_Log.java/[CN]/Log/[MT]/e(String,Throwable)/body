@@ -1,3 +1,9 @@
 {
   android.util.Log.e(TAG,addThreadInfo(msg),t);
+  if (isDebug) {
+    if (t instanceof RuntimeException) {
+      throw (RuntimeException)t;
+    }
+    throw new RuntimeException("Aborting on Log.e()",t);
+  }
 }
