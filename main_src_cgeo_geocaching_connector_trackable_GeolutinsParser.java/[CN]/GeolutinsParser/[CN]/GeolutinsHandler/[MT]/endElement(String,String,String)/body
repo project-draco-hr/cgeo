@@ -48,7 +48,7 @@
           trackable.setSpottedName(lastLog.author);
         }
  else {
-          Log.e("GeolutinsHandler.endElement unknown logtype:" + lastLog.getType());
+          Log.w("GeolutinsHandler.endElement unknown logtype:" + lastLog.getType());
         }
       }
     }
@@ -58,6 +58,6 @@
     }
   }
  catch (  final ParseException|NumberFormatException e) {
-    Log.e("Parsing GeoLutins",e);
+    Log.w("Parsing GeoLutins",e);
   }
 }
