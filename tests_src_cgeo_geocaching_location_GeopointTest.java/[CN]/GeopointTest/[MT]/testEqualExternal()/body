@@ -1,0 +1,9 @@
+{
+  final Geopoint gp1=new Geopoint(48.2,2.31);
+  assertThat(Geopoint.equals(gp1,gp1)).isTrue();
+  final Geopoint gp2=new Geopoint(48.3,2.31);
+  assertThat(Geopoint.equals(gp1,gp2)).isFalse();
+  assertThat(Geopoint.equals(null,null)).isTrue();
+  assertThat(Geopoint.equals(null,gp1)).isFalse();
+  assertThat(Geopoint.equals(gp1,null)).isFalse();
+}

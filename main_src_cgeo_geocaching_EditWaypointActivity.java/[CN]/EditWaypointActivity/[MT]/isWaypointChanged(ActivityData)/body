@@ -1,6 +1,3 @@
 {
-  if (waypoint == null || currentState.coords != waypoint.getCoords() || !StringUtils.equals(currentState.name,waypoint.getName()) || !StringUtils.equals(currentState.noteText,waypoint.getNote()) || currentState.visited != waypoint.isVisited() || currentState.type != waypoint.getWaypointType()) {
-    return true;
-  }
-  return false;
+  return waypoint == null || !Geopoint.equals(currentState.coords,waypoint.getCoords()) || !StringUtils.equals(currentState.name,waypoint.getName()) || !StringUtils.equals(currentState.noteText,waypoint.getNote()) || currentState.visited != waypoint.isVisited() || currentState.type != waypoint.getWaypointType();
 }
