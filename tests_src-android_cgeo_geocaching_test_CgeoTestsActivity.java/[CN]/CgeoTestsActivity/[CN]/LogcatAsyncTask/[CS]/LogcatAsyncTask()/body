@@ -3,7 +3,7 @@
     mProc=Runtime.getRuntime().exec(CMD);
     mReader=new BufferedReader(new InputStreamReader(mProc.getInputStream()));
   }
- catch (  Exception e) {
+ catch (  final Exception e) {
     Log.e(TAG,"Creating proc",e);
   }
 }

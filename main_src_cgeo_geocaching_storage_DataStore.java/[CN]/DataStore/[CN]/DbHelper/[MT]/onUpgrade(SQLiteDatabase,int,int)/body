@@ -97,7 +97,7 @@
       if (oldVersion < 59) {
         try {
           createIndices(db);
-          removeObsoleteCacheDirectories(db);
+          removeObsoleteCacheDirectories();
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 59",e);
