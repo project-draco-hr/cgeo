@@ -1,0 +1,10 @@
+{
+  final List<LogTemplate> templates=getTemplatesWithSignature();
+  templates.add(new LogTemplate("NUMBER$NOINC",-1){
+    @Override public String getValue(    final LogContext context){
+      return getCounter(context,false);
+    }
+  }
+);
+  return templates;
+}

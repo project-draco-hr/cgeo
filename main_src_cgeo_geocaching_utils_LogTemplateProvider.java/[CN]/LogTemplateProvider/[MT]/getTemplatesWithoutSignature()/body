@@ -34,28 +34,7 @@
 );
   templates.add(new LogTemplate("NUMBER",R.string.init_signature_template_number){
     @Override public String getValue(    final LogContext context){
-      final Geocache cache=context.getCache();
-      if (cache == null) {
-        return StringUtils.EMPTY;
-      }
-      int current=0;
-      final IConnector connector=ConnectorFactory.getConnector(cache);
-      if (connector instanceof ILogin) {
-        current=((ILogin)connector).getCachesFound();
-      }
-      if (current == 0) {
-        if (context.isOffline()) {
-          return StringUtils.EMPTY;
-        }
-        if (connector instanceof ILogin) {
-          ((ILogin)connector).login(null,null);
-          current=((ILogin)connector).getCachesFound();
-        }
-      }
-      if (current >= 0) {
-        return String.valueOf(current + 1);
-      }
-      return StringUtils.EMPTY;
+      return getCounter(context,true);
     }
   }
 );

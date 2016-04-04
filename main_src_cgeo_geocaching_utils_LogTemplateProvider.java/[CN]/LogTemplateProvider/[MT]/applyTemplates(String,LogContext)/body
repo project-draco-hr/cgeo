@@ -1,6 +1,6 @@
 {
   String result=signature;
-  for (  final LogTemplate template : getTemplatesWithSignature()) {
+  for (  final LogTemplate template : getAllTemplates()) {
     result=template.apply(result,context);
   }
   return result;
