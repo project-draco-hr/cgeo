@@ -1,0 +1,5 @@
+{
+  final Geocache cache=new Geocache();
+  cache.setLists(new HashSet<>(Arrays.asList(StoredList.TEMPORARY_LIST.id,42)));
+  assertThat(cache.isOffline()).isTrue();
+}
