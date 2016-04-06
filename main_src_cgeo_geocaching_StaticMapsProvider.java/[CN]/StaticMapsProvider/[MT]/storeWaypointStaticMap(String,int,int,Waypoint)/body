@@ -7,7 +7,7 @@
     Log.e("storeWaypointStaticMap - missing input parameter waypoint");
     return Completable.complete();
   }
-  Geopoint coordinates=waypoint.getCoords();
+  final Geopoint coordinates=waypoint.getCoords();
   if (coordinates == null) {
     return Completable.complete();
   }
