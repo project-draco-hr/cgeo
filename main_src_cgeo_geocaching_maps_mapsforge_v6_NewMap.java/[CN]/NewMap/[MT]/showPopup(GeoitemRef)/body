@@ -7,8 +7,6 @@
       final Geocache cache=DataStore.loadCache(item.getGeocode(),LoadFlags.LOAD_CACHE_OR_DB);
       if (cache != null) {
         final RequestDetailsThread requestDetailsThread=new RequestDetailsThread(cache,this);
-        if (!requestDetailsThread.requestRequired()) {
-        }
         requestDetailsThread.start();
         return;
       }
@@ -24,5 +22,4 @@
  catch (  final NotFoundException e) {
     Log.e("NewMap.showPopup",e);
   }
-  return;
 }

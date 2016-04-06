@@ -4,7 +4,7 @@
   }
   final Matrix matrix=new Matrix();
   matrix.setRotate(heading,widthArrowHalf,heightArrowHalf);
-  arrowRotNative=android.graphics.Bitmap.createBitmap(arrowNative,0,0,arrowNative.getWidth(),arrowNative.getHeight(),matrix,true);
+  final android.graphics.Bitmap arrowRotNative=android.graphics.Bitmap.createBitmap(arrowNative,0,0,arrowNative.getWidth(),arrowNative.getHeight(),matrix,true);
   final Drawable tmpArrow=new BitmapDrawable(CgeoApplication.getInstance().getResources(),arrowRotNative);
   arrow=AndroidGraphicFactory.convertToBitmap(tmpArrow);
   widthArrowHalf=arrow.getWidth() / 2;
