@@ -1,2 +1,21 @@
 {
+  if (!Settings.isUseTwitter() || !Settings.isTwitterLoginValid()) {
+    return;
+  }
+  try {
+    final String trimmed=StringUtils.trim(status);
+    final String truncated=StringUtils.length(trimmed) <= MAX_TWEET_SIZE ? trimmed : StringUtils.substring(trimmed,0,MAX_TWEET_SIZE - 1) + CgeoApplication.getInstance().getString(R.string.ellipsis);
+    final Parameters parameters=new Parameters("status",truncated);
+    OAuth.signOAuth("api.twitter.com","/1.1/statuses/update.json","POST",true,parameters,new OAuthTokens(Settings.getTokenPublic(),Settings.getTokenSecret()),Settings.getTwitterKeyConsumerPublic(),Settings.getTwitterKeyConsumerSecret());
+    try {
+      Network.completeWithSuccess(Network.postRequest("https://api.twitter.com/1.1/statuses/update.json",parameters));
+      Log.i("Tweet posted");
+    }
+ catch (    final Exception ignored) {
+      Log.e("Tweet could not be posted");
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("Twitter.postTweet",e);
+  }
 }

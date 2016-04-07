@@ -1,2 +1,36 @@
 {
+  if (directory == null || !directory.isDirectory() || !directory.canRead() || result == null || chooser == null) {
+    return;
+  }
+  final File[] files=directory.listFiles();
+  if (ArrayUtils.isNotEmpty(files)) {
+    for (    final File file : files) {
+      if (chooser.shouldEnd()) {
+        return;
+      }
+      if (!file.canRead()) {
+        continue;
+      }
+      String name=file.getName();
+      if (file.isFile()) {
+        if (chooser.isSelected(file)) {
+          result.add(file);
+        }
+      }
+ else       if (file.isDirectory()) {
+        if (name.charAt(0) == '.') {
+          continue;
+        }
+        if (name.length() > 16) {
+          name=name.substring(0,14) + CgeoApplication.getInstance().getString(R.string.ellipsis);
+        }
+        if (feedBackHandler != null) {
+          feedBackHandler.sendMessage(Message.obtain(feedBackHandler,0,name));
+        }
+        if (depths < MAX_DIRECTORY_SCAN_DEPTH) {
+          listDirInternally(result,file,chooser,feedBackHandler,depths + 1);
+        }
+      }
+    }
+  }
 }
