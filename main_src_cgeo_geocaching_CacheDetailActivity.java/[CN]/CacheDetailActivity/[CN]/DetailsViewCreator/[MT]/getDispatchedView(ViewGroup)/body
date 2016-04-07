@@ -78,7 +78,7 @@
   final String license=connector.getLicenseText(cache);
   if (StringUtils.isNotBlank(license)) {
     view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
-    final TextView licenseView=(ButterKnife.findById(view,R.id.license));
+    final TextView licenseView=ButterKnife.findById(view,R.id.license);
     licenseView.setText(Html.fromHtml(license),BufferType.SPANNABLE);
     licenseView.setClickable(true);
     licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
