@@ -5,7 +5,7 @@
   intent.putExtra(ORUXMAPS_EXTRA_LATITUDE,targetLat);
   intent.putExtra(ORUXMAPS_EXTRA_LONGITUDE,targetLon);
   if (!name.isEmpty()) {
-    String[] targetName={name};
+    final String[] targetName={name};
     intent.putExtra(ORUXMAPS_EXTRA_NAME,targetName);
   }
   activity.startActivity(intent);
