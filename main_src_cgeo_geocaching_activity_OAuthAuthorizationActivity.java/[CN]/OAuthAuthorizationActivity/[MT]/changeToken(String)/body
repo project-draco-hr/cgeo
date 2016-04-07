@@ -3,25 +3,25 @@
   try {
     final Parameters params=new Parameters("oauth_verifier",verifier);
     final String method="POST";
-    OAuth.signOAuth(host,pathAccess,method,https,params,new OAuthTokens(OAtoken,OAtokenSecret),consumerKey,consumerSecret);
+    OAuth.signOAuth(host,pathAccess,method,https,params,new OAuthTokens(oAtoken,oAtokenSecret),consumerKey,consumerSecret);
     final String line=StringUtils.defaultString(Network.getResponseData(Network.postRequest(getUrlPrefix() + host + pathAccess,params)));
-    OAtoken="";
-    OAtokenSecret="";
+    oAtoken="";
+    oAtokenSecret="";
     final MatcherWrapper paramsMatcher1=new MatcherWrapper(PARAMS_PATTERN_1,line);
     if (paramsMatcher1.find()) {
-      OAtoken=paramsMatcher1.group(1);
+      oAtoken=paramsMatcher1.group(1);
     }
     final MatcherWrapper paramsMatcher2=new MatcherWrapper(PARAMS_PATTERN_2,line);
     if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
-      OAtokenSecret=paramsMatcher2.group(1);
+      oAtokenSecret=paramsMatcher2.group(1);
     }
-    if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
-      OAtoken="";
-      OAtokenSecret="";
+    if (StringUtils.isBlank(oAtoken) && StringUtils.isBlank(oAtokenSecret)) {
+      oAtoken="";
+      oAtokenSecret="";
       setTokens(null,null,false);
     }
  else {
-      setTokens(OAtoken,OAtokenSecret,true);
+      setTokens(oAtoken,oAtokenSecret,true);
       status=AUTHENTICATED;
     }
   }
