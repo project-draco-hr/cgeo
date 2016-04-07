@@ -5,7 +5,7 @@
     adapter.notifyDataSetChanged();
     final int dp=detailProgress.get();
     final int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
-    final int minutesRemaining=((detailTotal - dp) * secondsElapsed / ((dp > 0) ? dp : 1) / 60);
+    final int minutesRemaining=(detailTotal - dp) * secondsElapsed / (dp > 0 ? dp : 1) / 60;
     progress.setProgress(dp);
     if (minutesRemaining < 1) {
       progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
