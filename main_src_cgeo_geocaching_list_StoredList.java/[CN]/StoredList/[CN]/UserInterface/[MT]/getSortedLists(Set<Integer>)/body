@@ -1,0 +1,23 @@
+{
+  final Collator collator=Collator.getInstance();
+  final List<StoredList> lists=DataStore.getLists();
+  Collections.sort(lists,new Comparator<StoredList>(){
+    @Override public int compare(    final StoredList lhs,    final StoredList rhs){
+      if (selectedLists.contains(lhs.id) && !selectedLists.contains(rhs.id)) {
+        return -1;
+      }
+      if (selectedLists.contains(rhs.id) && !selectedLists.contains(lhs.id)) {
+        return 1;
+      }
+      if (lhs.id == STANDARD_LIST_ID) {
+        return -1;
+      }
+      if (rhs.id == STANDARD_LIST_ID) {
+        return 1;
+      }
+      return collator.compare(lhs.getTitle(),rhs.getTitle());
+    }
+  }
+);
+  return lists;
+}

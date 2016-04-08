@@ -1,0 +1,44 @@
+{
+  final List<AbstractList> lists=getMenuLists(onlyConcreteLists,exceptListIds,currentListIds);
+  final CharSequence[] listTitles=new CharSequence[lists.size()];
+  final boolean[] selectedItems=new boolean[lists.size()];
+  for (int i=0; i < lists.size(); i++) {
+    AbstractList list=lists.get(i);
+    listTitles[i]=list.getTitleAndCount();
+    selectedItems[i]=currentListIds.contains(list.id);
+  }
+  final Set<Integer> selectedListIds=new HashSet<>(currentListIds);
+  final Activity activity=activityRef.get();
+  final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+  builder.setTitle(res.getString(titleId));
+  builder.setMultiChoiceItems(listTitles,selectedItems,new DialogInterface.OnMultiChoiceClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int itemId,    boolean isChecked){
+      final AbstractList list=lists.get(itemId);
+      if (isChecked) {
+        selectedListIds.add(list.id);
+      }
+ else {
+        selectedListIds.remove(list.id);
+      }
+    }
+  }
+);
+  builder.setPositiveButton(R.string.lists_ok,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int id){
+      if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
+        promptForListCreation(runAfterwards,selectedListIds,listNameMemento.getTerm());
+      }
+ else {
+        runAfterwards.call(selectedListIds);
+      }
+      dialog.cancel();
+    }
+  }
+).setNegativeButton(R.string.lists_cancel,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int id){
+      dialog.dismiss();
+    }
+  }
+);
+  builder.create().show();
+}

@@ -1,0 +1,9 @@
+{
+  final Set<String> listNames=new HashSet<>();
+  for (  Integer listId : cache.getLists()) {
+    final StoredList list=DataStore.getList(listId);
+    listNames.add(list.getTitle());
+  }
+  final TextView offlineLists=ButterKnife.findById(view,R.id.offline_lists);
+  offlineLists.setText(res.getString(R.string.list_list_headline) + " " + StringUtils.join(listNames.toArray(),", "));
+}

@@ -1,9 +1,0 @@
-{
-  if (cache.isOffline()) {
-    DataStore.addToList(Collections.singletonList(cache),selectedListId);
-    new StoreCacheHandler(CacheDetailActivity.this,progress).sendEmptyMessage(CancellableHandler.DONE);
-  }
- else {
-    storeCache(selectedListId);
-  }
-}

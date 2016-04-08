@@ -63,6 +63,7 @@
   updateAttributesText();
   ButterKnife.findById(view,R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
   updateOfflineBox(view,cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
+  updateCacheLists(view,cache,res);
   final Button buttonWatchlistAdd=ButterKnife.findById(view,R.id.add_to_watchlist);
   final Button buttonWatchlistRemove=ButterKnife.findById(view,R.id.remove_from_watchlist);
   buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
@@ -73,7 +74,6 @@
   buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
   buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
   updateFavPointBox();
-  updateListBox();
   final IConnector connector=ConnectorFactory.getConnector(cache);
   final String license=connector.getLicenseText(cache);
   if (StringUtils.isNotBlank(license)) {

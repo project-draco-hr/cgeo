@@ -1,0 +1,25 @@
+{
+  if (cache.isOffline()) {
+    DataStore.saveLists(Collections.singletonList(cache),listIds);
+    CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
+    CacheDetailActivity.updateCacheLists(getView(),cache,res);
+  }
+ else {
+    final StoreCacheHandler storeCacheHandler=new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
+    final FragmentActivity activity=getActivity();
+    progress.show(activity,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,storeCacheHandler.cancelMessage());
+    AndroidRxUtils.andThenOnUi(Schedulers.io(),new Action0(){
+      @Override public void call(){
+        cache.store(listIds,storeCacheHandler);
+      }
+    }
+,new Action0(){
+      @Override public void call(){
+        activity.supportInvalidateOptionsMenu();
+        CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
+        CacheDetailActivity.updateCacheLists(getView(),cache,res);
+      }
+    }
+);
+  }
+}

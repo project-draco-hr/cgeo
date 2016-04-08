@@ -29,11 +29,13 @@
       offlineDrop.setClickable(true);
       offlineDrop.setVisibility(View.VISIBLE);
     }
+    offlineStore.setText(R.string.cache_offline_manage);
   }
  else {
     offlineText.setText(res.getString(R.string.cache_offline_not_ready));
     if (offlineDrop != null) {
       offlineDrop.setVisibility(View.GONE);
     }
+    offlineStore.setText(R.string.cache_offline_store);
   }
 }
