@@ -35,7 +35,7 @@
         @Override public void call(        final Integer pin){
           progressDialog.dismiss();
           if (pin > 0) {
-            Dialogs.message(activity,R.string.init_sendToCgeo,activity.getString(R.string.init_sendToCgeo_register_ok).replace("####",String.valueOf(pin)));
+            Dialogs.message(activity,R.string.init_sendToCgeo,activity.getString(R.string.init_sendToCgeo_register_ok,pin));
           }
  else {
             Dialogs.message(activity,R.string.init_sendToCgeo,R.string.init_sendToCgeo_register_fail);
