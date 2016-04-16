@@ -1,7 +1,7 @@
 {
   detailProgress.set(0);
   showProgress(false);
-  final int etaTime=((detailTotal * 25) / 60);
+  final int etaTime=detailTotal * 25 / 60;
   final String message;
   if (etaTime < 1) {
     message=res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);

@@ -13,7 +13,7 @@
   }
   Log.d("GeokretyConnector.searchTrackable: gkid=" + gkid);
   try {
-    final String urlDetails=(Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php");
+    final String urlDetails=Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php";
     final InputStream response=Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + gkid));
     if (response == null) {
       Log.e("GeokretyConnector.searchTrackable: No data from server");

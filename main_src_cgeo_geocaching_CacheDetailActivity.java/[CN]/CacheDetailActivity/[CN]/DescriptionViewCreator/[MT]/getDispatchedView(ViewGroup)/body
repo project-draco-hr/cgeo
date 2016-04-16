@@ -46,7 +46,7 @@
  else {
     hintBoxView.setVisibility(View.GONE);
   }
-  final TextView hintView=(ButterKnife.findById(view,R.id.hint));
+  final TextView hintView=ButterKnife.findById(view,R.id.hint);
   if (StringUtils.isNotBlank(cache.getHint())) {
     if (TextUtils.containsHtml(cache.getHint())) {
       hintView.setText(Html.fromHtml(cache.getHint(),new HtmlImage(cache.getGeocode(),false,false,false),null),TextView.BufferType.SPANNABLE);
@@ -69,7 +69,7 @@
     hintBoxView.setClickable(false);
     hintBoxView.setOnClickListener(null);
   }
-  final TextView spoilerlinkView=(ButterKnife.findById(view,R.id.hint_spoilerlink));
+  final TextView spoilerlinkView=ButterKnife.findById(view,R.id.hint_spoilerlink);
   if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
     spoilerlinkView.setVisibility(View.VISIBLE);
     spoilerlinkView.setClickable(true);

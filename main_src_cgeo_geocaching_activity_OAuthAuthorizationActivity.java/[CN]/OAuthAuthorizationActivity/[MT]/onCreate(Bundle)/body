@@ -12,11 +12,11 @@
     callback=BundleUtils.getString(extras,Intents.EXTRA_OAUTH_CALLBACK,callback);
   }
   setTitle(getAuthTitle());
-  auth_1.setText(getAuthExplainShort());
-  auth_2.setText(getAuthExplainLong());
+  auth1.setText(getAuthExplainShort());
+  auth2.setText(getAuthExplainLong());
   final ImmutablePair<String,String> tempToken=getTempTokens();
-  OAtoken=tempToken.left;
-  OAtokenSecret=tempToken.right;
+  oAtoken=tempToken.left;
+  oAtokenSecret=tempToken.right;
   startButton.setText(getAuthAuthorize());
   startButton.setEnabled(true);
   startButton.setOnClickListener(new StartListener());
@@ -28,7 +28,7 @@
     registerButton.setEnabled(true);
     registerButton.setOnClickListener(new RegisterListener());
   }
-  if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
+  if (StringUtils.isBlank(oAtoken) && StringUtils.isBlank(oAtokenSecret)) {
     startButton.setText(getAuthStart());
   }
  else {

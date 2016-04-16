@@ -3,5 +3,5 @@
   final double dLat=toRadians(lat2 - lat1);
   final double dLon=toRadians(lon2 - lon1);
   final double a=Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2)* Math.sin(dLon / 2);
-  return (2 * earthRadius * 1000* Math.asin(Math.sqrt(a)));
+  return 2 * earthRadius * 1000* Math.asin(Math.sqrt(a));
 }
