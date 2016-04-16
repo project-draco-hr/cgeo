@@ -1,0 +1,81 @@
+{
+  final ArrayList<Geocache> caches=new ArrayList<>();
+  try {
+    final XmlPullParserFactory factory=XmlPullParserFactory.newInstance();
+    factory.setNamespaceAware(true);
+    final XmlPullParser parser=factory.newPullParser();
+    parser.setInput(inputStream,"UTF-8");
+    String text="";
+    Geocache cache=createNewCache();
+    String lattitude="";
+    Builder logEntry=new LogEntry.Builder();
+    ArrayList<LogEntry> logs=new ArrayList<>();
+    int eventType=parser.getEventType();
+    while (eventType != XmlPullParser.END_DOCUMENT) {
+      final String tagname=parser.getName();
+switch (eventType) {
+case XmlPullParser.START_TAG:
+        if ("cache".equalsIgnoreCase(tagname)) {
+          cache=createNewCache();
+          logs=new ArrayList<>();
+        }
+ else         if ("note".equalsIgnoreCase(tagname)) {
+          logEntry=new LogEntry.Builder();
+          logEntry.setAuthor(parser.getAttributeValue(null,"nick"));
+          logEntry.setDate(parseDateTime(parser.getAttributeValue(null,"date")));
+          logEntry.setLogType(LogType.NOTE);
+        }
+      break;
+case XmlPullParser.TEXT:
+    text=parser.getText();
+  break;
+case XmlPullParser.END_TAG:
+if ("id".equalsIgnoreCase(tagname)) {
+  cache.setGeocode("SU" + text);
+}
+ else if ("name".equalsIgnoreCase(tagname)) {
+  cache.setName(text);
+}
+ else if (endTag.equalsIgnoreCase(tagname)) {
+  DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+  DataStore.saveLogs(cache.getGeocode(),logs);
+  caches.add(cache);
+}
+ else if ("lat".equalsIgnoreCase(tagname)) {
+  lattitude=text;
+}
+ else if ("lon".equalsIgnoreCase(tagname)) {
+  cache.setCoords(new Geopoint(lattitude,text));
+}
+ else if ("nick".equalsIgnoreCase(tagname)) {
+  cache.setOwnerDisplayName(text);
+}
+ else if ("adesc".equalsIgnoreCase(tagname)) {
+  cache.setDescription(text);
+  cache.setDetailedUpdatedNow();
+}
+ else if ("date".equalsIgnoreCase(tagname)) {
+  cache.setHidden(parseDate(text));
+}
+ else if ("type".equalsIgnoreCase(tagname)) {
+  cache.setType(parseType(text));
+}
+ else if ("note".equalsIgnoreCase(tagname)) {
+  logEntry.setLog(StringUtils.trim(text));
+  logs.add(logEntry.build());
+}
+ else if ("img".equalsIgnoreCase(tagname)) {
+  cache.addSpoiler(new Image.Builder().setUrl(text).build());
+}
+break;
+default :
+break;
+}
+eventType=parser.next();
+}
+}
+ catch (XmlPullParserException|IOException|ParseException e) {
+Log.e("Error parsing geocaching.su data",e);
+}
+return new SearchResult(caches);
+}
