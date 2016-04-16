@@ -1,6 +1,10 @@
 {
-  if (this == o)   return true;
-  if (o == null || getClass() != o.getClass())   return false;
-  GeoEntry geoEntry=(GeoEntry)o;
+  if (this == o) {
+    return true;
+  }
+  if (o == null || getClass() != o.getClass()) {
+    return false;
+  }
+  final GeoEntry geoEntry=(GeoEntry)o;
   return geocode.equals(geoEntry.geocode);
 }
