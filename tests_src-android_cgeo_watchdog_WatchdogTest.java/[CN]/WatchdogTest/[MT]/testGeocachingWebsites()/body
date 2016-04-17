@@ -1,7 +1,7 @@
 {
   for (  final IConnector connector : ConnectorFactory.getConnectors()) {
     if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR)) {
-      checkWebsite("geocaching website " + connector.getName(),connector.getHostUrl());
+      checkWebsite("geocaching website " + connector.getName(),connector.getTestUrl());
     }
   }
 }
