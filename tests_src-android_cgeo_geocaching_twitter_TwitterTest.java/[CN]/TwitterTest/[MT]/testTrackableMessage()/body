@@ -2,7 +2,7 @@
   final String oldMessage=Settings.getTrackableTwitterMessage();
   try {
     TestSettings.setTrackableTwitterMessage("I touched [NAME] ([URL]).");
-    Trackable tb=new Trackable();
+    final Trackable tb=new Trackable();
     tb.setName("Travel bug");
     tb.setGeocode("TB1234");
     assertThat(Twitter.getStatusMessage(tb,null)).isEqualTo("I touched Travel bug (https://www.geocaching.com//track/details.aspx?tracker=TB1234). #cgeo #geocaching");

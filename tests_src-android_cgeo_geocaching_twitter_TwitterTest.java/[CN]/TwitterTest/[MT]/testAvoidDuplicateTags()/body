@@ -2,7 +2,7 @@
   final String oldMessage=Settings.getCacheTwitterMessage();
   try {
     TestSettings.setCacheTwitterMessage("[NAME] #cgeo #mytag");
-    Geocache cache=new Geocache();
+    final Geocache cache=new Geocache();
     cache.setGeocode("GC1234");
     cache.setName("TwitterTest");
     assertThat(Twitter.getStatusMessage(cache,null)).isEqualTo("TwitterTest #cgeo #mytag #geocaching");

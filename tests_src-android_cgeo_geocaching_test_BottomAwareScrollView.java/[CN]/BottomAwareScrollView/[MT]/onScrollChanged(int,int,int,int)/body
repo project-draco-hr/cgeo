@@ -1,6 +1,6 @@
 {
-  View lastChildView=getChildAt(getChildCount() - 1);
-  int diff=(lastChildView.getBottom() - (getHeight() + getScrollY()));
+  final View lastChildView=getChildAt(getChildCount() - 1);
+  final int diff=lastChildView.getBottom() - (getHeight() + getScrollY());
   isAtBottom=diff <= 0;
   super.onScrollChanged(l,t,oldl,oldt);
 }
