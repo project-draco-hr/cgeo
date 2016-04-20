@@ -1,6 +1,6 @@
 {
   final Builder builder=new Builder();
-  if (method.equals("GET")) {
+  if ("GET".equals(method)) {
     final HttpUrl.Builder urlBuilder=HttpUrl.parse(uri).newBuilder();
     if (params != null) {
       urlBuilder.encodedQuery(params.toString());
