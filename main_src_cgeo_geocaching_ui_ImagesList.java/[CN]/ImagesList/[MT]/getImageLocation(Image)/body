@@ -13,8 +13,8 @@
       }
     }
   }
- catch (  final Exception e) {
-    Log.e("ImagesList.getImageLocation",e);
+ catch (  ImageProcessingException|IOException e) {
+    Log.i("ImagesList.getImageLocation",e);
   }
   return null;
 }
