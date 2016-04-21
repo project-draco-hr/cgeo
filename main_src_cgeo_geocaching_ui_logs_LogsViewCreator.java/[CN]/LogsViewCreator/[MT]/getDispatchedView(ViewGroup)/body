@@ -6,7 +6,7 @@
   view=(ListView)activity.getLayoutInflater().inflate(R.layout.logs_page,parentView,false);
   addHeaderView();
   view.setAdapter(new ArrayAdapter<LogEntry>(activity,R.layout.logs_item,logs){
-    @Override public View getView(    final int position,    final View convertView,    final android.view.ViewGroup parent){
+    @Override public View getView(    final int position,    final View convertView,    final ViewGroup parent){
       View rowView=convertView;
       if (rowView == null) {
         rowView=activity.getLayoutInflater().inflate(R.layout.logs_item,parent,false);
