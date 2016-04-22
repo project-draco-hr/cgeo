@@ -1,25 +1,29 @@
 {
+  if (items.isEmpty()) {
+    return;
+  }
+  if (items.size() == 1) {
+    showPopup(items.get(0));
+    return;
+  }
   try {
-    if (items.isEmpty()) {
-      return;
-    }
-    if (items.size() > 1) {
-      final ListAdapter adapter=new ArrayAdapter<GeoitemRef>(this,android.R.layout.select_dialog_item,android.R.id.text1,items){
-        @Override public View getView(        final int position,        final View convertView,        final ViewGroup parent){
-          final View v=super.getView(position,convertView,parent);
-          final TextView tv=(TextView)v.findViewById(android.R.id.text1);
-          tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getMarkerId(),0,0,0);
-          final int dp5=(int)(5 * getResources().getDisplayMetrics().density + 0.5f);
-          tv.setCompoundDrawablePadding(dp5);
-          return v;
-        }
+    final ArrayList<GeoitemRef> sorted=new ArrayList<>(items);
+    Collections.sort(sorted,GeoitemRef.NAME_COMPARATOR);
+    final LayoutInflater inflater=LayoutInflater.from(this);
+    final ListAdapter adapter=new ArrayAdapter<GeoitemRef>(this,R.layout.cacheslist_item_select,sorted){
+      @Override public View getView(      final int position,      final View convertView,      final ViewGroup parent){
+        final View view=convertView == null ? inflater.inflate(R.layout.cacheslist_item_select,null) : convertView;
+        final TextView tv=(TextView)view.findViewById(R.id.text);
+        final GeoitemRef item=getItem(position);
+        tv.setText(item.getName());
+        tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(),0,0,0);
+        final TextView infoView=(TextView)view.findViewById(R.id.info);
+        infoView.setText(item.getItemCode());
+        return view;
       }
+    }
 ;
-      new AlertDialog.Builder(this).setTitle("Select an item").setAdapter(adapter,new SelectionClickListener(items)).show();
-    }
- else {
-      showPopup(items.get(0));
-    }
+    new AlertDialog.Builder(this).setTitle("Select an item").setAdapter(adapter,new SelectionClickListener(items)).show();
   }
  catch (  final NotFoundException e) {
     Log.e("NewMap.showSelection",e);
