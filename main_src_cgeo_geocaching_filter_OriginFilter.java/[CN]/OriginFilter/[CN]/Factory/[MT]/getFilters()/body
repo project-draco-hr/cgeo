@@ -5,7 +5,7 @@
   }
   Collections.sort(filters,new Comparator<OriginFilter>(){
     @Override public int compare(    final OriginFilter lhs,    final OriginFilter rhs){
-      return lhs.getName().compareToIgnoreCase(rhs.getName());
+      return TextUtils.COLLATOR.compare(lhs.getName(),rhs.getName());
     }
   }
 );

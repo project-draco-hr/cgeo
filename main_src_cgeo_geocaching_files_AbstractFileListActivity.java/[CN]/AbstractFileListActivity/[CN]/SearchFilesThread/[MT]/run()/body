@@ -26,7 +26,7 @@
   files.addAll(list);
   Collections.sort(files,new Comparator<File>(){
     @Override public int compare(    final File lhs,    final File rhs){
-      return lhs.getName().compareToIgnoreCase(rhs.getName());
+      return TextUtils.COLLATOR.compare(lhs.getName(),rhs.getName());
     }
   }
 );

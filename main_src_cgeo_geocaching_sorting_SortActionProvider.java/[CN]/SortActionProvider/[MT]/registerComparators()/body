@@ -23,7 +23,7 @@
   register(R.string.caches_sort_vote,VoteComparator.class);
   Collections.sort(registry,new Comparator<ComparatorEntry>(){
     @Override public int compare(    final ComparatorEntry lhs,    final ComparatorEntry rhs){
-      return lhs.name.compareToIgnoreCase(rhs.name);
+      return TextUtils.COLLATOR.compare(lhs.name,rhs.name);
     }
   }
 );
