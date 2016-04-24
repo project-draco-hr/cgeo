@@ -1,13 +1,19 @@
 {
   Settings.setMapSource(mapSource);
-  final TileRendererLayer newLayer=new TileRendererLayer(tileCache,new MapFile(NewMap.getMapFile()),this.mapView.getModel().mapViewPosition,false,true,AndroidGraphicFactory.INSTANCE);
   final TileRendererLayer oldLayer=this.tileRendererLayer;
-  final Layers layers=this.mapView.getLayerManager().getLayers();
-  final int index=layers.indexOf(oldLayer) + 1;
-  layers.add(index,newLayer);
-  this.tileRendererLayer=newLayer;
-  this.setMapTheme();
-  layers.remove(oldLayer);
+  final File mapFile=NewMap.getMapFile();
+  if (mapFile != null && mapFile.exists()) {
+    final TileRendererLayer newLayer=new TileRendererLayer(tileCache,new MapFile(mapFile),this.mapView.getModel().mapViewPosition,false,true,AndroidGraphicFactory.INSTANCE);
+    final Layers layers=this.mapView.getLayerManager().getLayers();
+    final int index=layers.indexOf(oldLayer) + 1;
+    layers.add(index,newLayer);
+    this.tileRendererLayer=newLayer;
+    this.setMapTheme();
+  }
+ else {
+    this.tileRendererLayer=null;
+  }
+  this.mapView.getLayerManager().getLayers().remove(oldLayer);
   oldLayer.onDestroy();
   tileCache.destroy();
 }

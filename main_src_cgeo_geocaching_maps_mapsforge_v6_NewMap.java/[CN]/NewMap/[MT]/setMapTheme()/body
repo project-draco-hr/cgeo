@@ -1,14 +1,25 @@
 {
+  if (tileRendererLayer == null) {
+    return;
+  }
   final String themePath=Settings.getCustomRenderThemeFilePath();
   if (StringUtils.isEmpty(themePath)) {
     tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
   }
  else {
     try {
-      tileRendererLayer.setXmlRenderTheme(new ExternalRenderTheme(new File(themePath)));
+      final XmlRenderTheme xmlRenderTheme=new ExternalRenderTheme(new File(themePath));
+      RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE,new DisplayModel(),xmlRenderTheme);
+      tileRendererLayer.setXmlRenderTheme(xmlRenderTheme);
     }
- catch (    final FileNotFoundException e) {
+ catch (    final IOException e) {
       Log.w("Failed to set render theme",e);
+      ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_file_unreadable));
+      tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+    }
+catch (    final XmlPullParserException e) {
+      Log.w("render theme invalid",e);
+      ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_invalid));
       tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
     }
   }
