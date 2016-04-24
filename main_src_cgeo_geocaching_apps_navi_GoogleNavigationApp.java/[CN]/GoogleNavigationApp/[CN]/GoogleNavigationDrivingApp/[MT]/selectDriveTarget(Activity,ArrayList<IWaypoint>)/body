@@ -1,0 +1,34 @@
+{
+  final LayoutInflater inflater=LayoutInflater.from(context);
+  final ListAdapter adapter=new ArrayAdapter<IWaypoint>(context,R.layout.cacheslist_item_select,targets){
+    @Override public View getView(    final int position,    final View convertView,    final ViewGroup parent){
+      final View view=convertView == null ? inflater.inflate(R.layout.cacheslist_item_select,parent,false) : convertView;
+      final TextView tv=(TextView)view.findViewById(R.id.text);
+      final IWaypoint item=getItem(position);
+      tv.setText(item.getName());
+      final int icon=item instanceof Waypoint ? item.getWaypointType().markerId : ((Geocache)item).getType().markerId;
+      tv.setCompoundDrawablesWithIntrinsicBounds(icon,0,0,0);
+      final TextView infoView=(TextView)view.findViewById(R.id.info);
+      if (item instanceof Waypoint) {
+        infoView.setText(((Waypoint)item).getNote());
+      }
+ else {
+        infoView.setText(item.getGeocode());
+      }
+      return view;
+    }
+  }
+;
+  new AlertDialog.Builder(context).setTitle(R.string.cache_menu_navigation_drive_select_target).setAdapter(adapter,new OnClickListener(){
+    @Override public void onClick(    final DialogInterface dialog,    final int which){
+      final IWaypoint target=targets.get(which);
+      if (target instanceof Geocache) {
+        GoogleNavigationDrivingApp.super.navigate(context,(Geocache)target);
+      }
+      if (target instanceof Waypoint) {
+        navigate(context,(Waypoint)target);
+      }
+    }
+  }
+).show();
+}
