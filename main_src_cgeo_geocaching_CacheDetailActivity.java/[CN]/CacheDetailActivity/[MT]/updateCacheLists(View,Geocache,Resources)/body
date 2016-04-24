@@ -1,6 +1,6 @@
 {
   final Set<String> listNames=new HashSet<>();
-  for (  Integer listId : cache.getLists()) {
+  for (  final Integer listId : cache.getLists()) {
     final StoredList list=DataStore.getList(listId);
     listNames.add(list.getTitle());
   }
