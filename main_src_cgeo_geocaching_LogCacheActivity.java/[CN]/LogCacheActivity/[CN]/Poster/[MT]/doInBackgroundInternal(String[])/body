@@ -24,7 +24,7 @@
       newLogs.add(0,logNow);
       DataStore.saveLogs(cache.getGeocode(),newLogs);
       cache.clearOfflineLog();
-      if (typeSelected == LogType.FOUND_IT && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+      if (typeSelected == LogType.FOUND_IT && tweetCheck.isChecked() && tweetCheck.getVisibility() == View.VISIBLE) {
         publishProgress(res.getString(R.string.log_posting_twitter));
         Twitter.postTweetCache(geocode,logNow);
       }

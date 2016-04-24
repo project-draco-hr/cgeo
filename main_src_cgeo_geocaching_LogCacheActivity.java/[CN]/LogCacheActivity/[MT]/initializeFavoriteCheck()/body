@@ -1,11 +1,11 @@
 {
   if (ConnectorFactory.getConnector(cache).supportsAddToFavorite(cache,typeSelected)) {
     if (premFavPoints > 0) {
-      favBox.setVisibility(View.VISIBLE);
-      favRemaining.setText(getString(R.string.fav_points_remaining,premFavPoints));
+      favCheck.setVisibility(View.VISIBLE);
+      favCheck.setText(getString(R.string.fav_points_remaining,premFavPoints));
     }
   }
  else {
-    favBox.setVisibility(View.GONE);
+    favCheck.setVisibility(View.GONE);
   }
 }
