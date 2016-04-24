@@ -11,7 +11,7 @@
     DataStore.removeCache(cache.getGeocode(),LoadFlags.REMOVE_ALL);
   }
   assertThat(result).isNotNull();
-  final String gpx=org.apache.commons.io.FileUtils.readFileToString(result);
+  final String gpx=org.apache.commons.io.FileUtils.readFileToString(result,(String)null);
   assertThat(gpx).contains("<wpt");
   assertThat(gpx).contains(cache.getGeocode());
   if (cache.getUrl() != null) {
