@@ -1,0 +1,21 @@
+{
+  handleListNameInput(newListName,R.string.list_dialog_create_title,R.string.list_dialog_create,new Action1<String>(){
+    @SuppressWarnings("unused") @Override public void call(    final String listName){
+      final Activity activity=activityRef.get();
+      if (activity == null) {
+        return;
+      }
+      final int newId=DataStore.createList(listName);
+      new StoredList(newId,listName,0);
+      if (newId >= DataStore.customListIdOffset) {
+        selectedLists.remove(PseudoList.NEW_LIST.id);
+        selectedLists.add(newId);
+        runAfterwards.call(selectedLists);
+      }
+ else {
+        ActivityMixin.showToast(activity,res.getString(R.string.list_dialog_create_err));
+      }
+    }
+  }
+);
+}

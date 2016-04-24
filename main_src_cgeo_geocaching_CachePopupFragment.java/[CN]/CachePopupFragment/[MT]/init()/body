@@ -13,7 +13,7 @@
     details=new CacheDetailsCreator(getActivity(),layout);
     addCacheDetails();
     CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
-    updateCacheLists();
+    CacheDetailActivity.updateCacheLists(getView(),cache,res);
   }
  catch (  final Exception e) {
     Log.e("CachePopupFragment.init",e);

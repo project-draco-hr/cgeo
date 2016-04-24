@@ -1,0 +1,10 @@
+{
+  final StoreCacheHandler storeCacheHandler=new StoreCacheHandler(CacheDetailActivity.this,progress);
+  progress.show(this,res.getString(R.string.cache_dialog_offline_save_title),res.getString(R.string.cache_dialog_offline_save_message),true,storeCacheHandler.cancelMessage());
+  AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0(){
+    @Override public void call(){
+      cache.store(listIds,storeCacheHandler);
+    }
+  }
+);
+}
