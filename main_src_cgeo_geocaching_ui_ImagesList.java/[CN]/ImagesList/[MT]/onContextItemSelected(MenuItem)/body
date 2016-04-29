@@ -9,6 +9,17 @@ if (currentImage != null) {
   currentImage.openInBrowser(activity);
 }
 return true;
+case R.id.image_add_waypoint:
+final Geopoint coords=geoPoints.get(currentView.getId());
+if (geocache != null && coords != null) {
+final Waypoint waypoint=new Waypoint(currentImage.getTitle(),WaypointType.WAYPOINT,true);
+waypoint.setCoords(coords);
+geocache.addOrChangeWaypoint(waypoint,true);
+final Intent intent=new Intent(Intents.INTENT_CACHE_CHANGED);
+intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE,true);
+LocalBroadcastManager.getInstance(activity).sendBroadcast(intent);
+}
+return true;
 case R.id.menu_navigate:
 final Geopoint geopoint=geoPoints.get(currentView.getId());
 if (geopoint != null) {

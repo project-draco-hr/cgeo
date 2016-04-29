@@ -10,6 +10,6 @@
   if (imageView == null) {
     return;
   }
-  imagesList=new ImagesList(this,cache.getGeocode());
+  imagesList=new ImagesList(this,cache.getGeocode(),cache);
   createSubscriptions.add(imagesList.loadImages(imageView,cache.getImages()));
 }
