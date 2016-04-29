@@ -4,8 +4,7 @@
   cacheTypes.add(CacheType.TRADITIONAL);
   cacheTypes.add(CacheType.MULTI);
   cacheTypes.add(CacheType.MYSTERY);
-  final List<CacheType> sorted=new ArrayList<>();
-  sorted.addAll(Arrays.asList(CacheType.values()));
+  final List<CacheType> sorted=new ArrayList<>(Arrays.asList(CacheType.values()));
   sorted.removeAll(cacheTypes);
   Collections.sort(sorted,new Comparator<CacheType>(){
     @Override public int compare(    final CacheType left,    final CacheType right){
