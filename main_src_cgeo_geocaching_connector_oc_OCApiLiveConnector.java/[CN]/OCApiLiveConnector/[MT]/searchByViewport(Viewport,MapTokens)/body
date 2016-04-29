@@ -1,5 +1,5 @@
 {
   final SearchResult result=new SearchResult(OkapiClient.getCachesBBox(viewport,this));
-  Log.d(String.format("OC returning %d caches from search by viewport",result.getCount()));
+  Log.d(String.format("OC returning %d caches from search by viewport",result.getCount(),Locale.getDefault()));
   return result;
 }
