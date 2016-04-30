@@ -1,2 +1,5 @@
 {
+  position=(position + 1) % availableFormats.length;
+  final TextView textView=(TextView)view;
+  textView.setText(coordinates.format(availableFormats[position]));
 }

@@ -1,2 +1,74 @@
 {
+  view.setOnLongClickListener(new OnLongClickListener(){
+    @Override public boolean onLongClick(    final View v){
+      if ((Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) && ((view.getId() == R.id.description) || (view.getId() == R.id.hint))) {
+        selectedTextView=(IndexOutOfBoundsAvoidingTextView)view;
+        mSelectionModeActive=true;
+        return false;
+      }
+      currentActionMode=startSupportActionMode(new ActionMode.Callback(){
+        @Override public boolean onPrepareActionMode(        final ActionMode actionMode,        final Menu menu){
+          return prepareClipboardActionMode(view,actionMode,menu);
+        }
+        private boolean prepareClipboardActionMode(        final View view,        final ActionMode actionMode,        final Menu menu){
+switch (view.getId()) {
+case R.id.value:
+            clickedItemText=((TextView)view).getText();
+          final CharSequence itemTitle=((TextView)((View)view.getParent()).findViewById(R.id.name)).getText();
+        buildDetailsContextMenu(actionMode,menu,itemTitle,true);
+      return true;
+case R.id.description:
+    final String shortDesc=cache.getShortDescription();
+  if (StringUtils.isBlank(shortDesc)) {
+    clickedItemText=cache.getDescription();
+  }
+ else {
+    clickedItemText=shortDesc + "\n\n" + cache.getDescription();
+  }
+buildDetailsContextMenu(actionMode,menu,res.getString(R.string.cache_description),false);
+return true;
+case R.id.personalnote:
+clickedItemText=cache.getPersonalNote();
+buildDetailsContextMenu(actionMode,menu,res.getString(R.string.cache_personal_note),true);
+return true;
+case R.id.hint:
+clickedItemText=cache.getHint();
+buildDetailsContextMenu(actionMode,menu,res.getString(R.string.cache_hint),false);
+return true;
+case R.id.log:
+clickedItemText=((TextView)view).getText();
+buildDetailsContextMenu(actionMode,menu,res.getString(R.string.cache_logs),false);
+return true;
+case R.id.date:
+clickedItemText=Formatter.formatHiddenDate(cache);
+buildDetailsContextMenu(actionMode,menu,res.getString(R.string.cache_event),true);
+menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
+return true;
+}
+return false;
+}
+@Override public void onDestroyActionMode(final ActionMode actionMode){
+currentActionMode=null;
+}
+@Override public boolean onCreateActionMode(final ActionMode actionMode,final Menu menu){
+actionMode.getMenuInflater().inflate(R.menu.details_context,menu);
+prepareClipboardActionMode(view,actionMode,menu);
+return true;
+}
+@Override public boolean onActionItemClicked(final ActionMode actionMode,final MenuItem menuItem){
+switch (menuItem.getItemId()) {
+case R.id.menu_calendar:
+CalendarAddon.addToCalendarWithIntent(CacheDetailActivity.this,cache);
+actionMode.finish();
+return true;
+default :
+return onClipboardItemSelected(actionMode,menuItem,clickedItemText);
+}
+}
+}
+);
+return true;
+}
+}
+);
 }

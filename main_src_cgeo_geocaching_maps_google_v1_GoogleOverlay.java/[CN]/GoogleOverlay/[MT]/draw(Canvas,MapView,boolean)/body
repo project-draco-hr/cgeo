@@ -1,2 +1,6 @@
 {
+  super.draw(canvas,mapView,shadow);
+  if (overlayBase != null) {
+    overlayBase.draw(canvas,(MapViewImpl)mapView,shadow);
+  }
 }

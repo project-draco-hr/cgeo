@@ -1,2 +1,44 @@
 {
+  if (currentActionMode != null) {
+    return false;
+  }
+  currentActionMode=startSupportActionMode(new ActionMode.Callback(){
+    @Override public boolean onPrepareActionMode(    final ActionMode actionMode,    final Menu menu){
+      return prepareClipboardActionMode(view,actionMode,menu);
+    }
+    private boolean prepareClipboardActionMode(    final View view,    final ActionMode actionMode,    final Menu menu){
+      final int viewId=view.getId();
+      clickedItemText=((TextView)view).getText();
+switch (viewId) {
+case R.id.value:
+        final TextView textView=ButterKnife.findById((View)view.getParent(),R.id.name);
+      final CharSequence itemTitle=textView.getText();
+    buildDetailsContextMenu(actionMode,menu,itemTitle,true);
+  return true;
+case R.id.goal:
+buildDetailsContextMenu(actionMode,menu,res.getString(R.string.trackable_goal),false);
+return true;
+case R.id.details:
+buildDetailsContextMenu(actionMode,menu,res.getString(R.string.trackable_details),false);
+return true;
+case R.id.log:
+buildDetailsContextMenu(actionMode,menu,res.getString(R.string.cache_logs),false);
+return true;
+}
+return false;
+}
+@Override public void onDestroyActionMode(final ActionMode actionMode){
+currentActionMode=null;
+}
+@Override public boolean onCreateActionMode(final ActionMode actionMode,final Menu menu){
+actionMode.getMenuInflater().inflate(R.menu.details_context,menu);
+prepareClipboardActionMode(view,actionMode,menu);
+return true;
+}
+@Override public boolean onActionItemClicked(final ActionMode actionMode,final MenuItem menuItem){
+return onClipboardItemSelected(actionMode,menuItem,clickedItemText);
+}
+}
+);
+return false;
 }

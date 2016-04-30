@@ -1,2 +1,24 @@
 {
+  final Button button=(Button)view;
+  final CharSequence text=button.getText();
+  if (StringUtils.isBlank(text)) {
+    return;
+  }
+switch (text.charAt(0)) {
+case 'N':
+    button.setText("S");
+  break;
+case 'S':
+button.setText("N");
+break;
+case 'E':
+button.setText("W");
+break;
+case 'W':
+button.setText("E");
+break;
+default :
+break;
+}
+areCurrentCoordinatesValid(true);
 }

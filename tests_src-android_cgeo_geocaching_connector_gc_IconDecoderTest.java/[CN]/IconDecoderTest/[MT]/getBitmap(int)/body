@@ -1,2 +1,7 @@
 {
+  final BitmapFactory.Options options=new BitmapFactory.Options();
+  options.inScaled=false;
+  final Bitmap bitmap=BitmapFactory.decodeStream(getInstrumentation().getContext().getResources().openRawResource(resourceId));
+  assertThat(bitmap.getWidth()).isEqualTo(Tile.TILE_SIZE);
+  return bitmap;
 }

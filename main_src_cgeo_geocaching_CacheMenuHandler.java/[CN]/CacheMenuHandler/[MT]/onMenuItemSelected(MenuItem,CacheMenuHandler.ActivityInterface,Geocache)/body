@@ -1,2 +1,39 @@
 {
+  final Activity activity;
+  if (activityInterface instanceof Activity) {
+    activity=(Activity)activityInterface;
+  }
+ else {
+    activity=((Fragment)activityInterface).getActivity();
+  }
+switch (item.getItemId()) {
+case R.id.menu_default_navigation:
+    activityInterface.navigateTo();
+  return true;
+case R.id.menu_navigate:
+final NavigationSelectionActionProvider navigationProvider=(NavigationSelectionActionProvider)MenuItemCompat.getActionProvider(item);
+if (navigationProvider == null) {
+activityInterface.showNavigationMenu();
+return true;
+}
+return false;
+case R.id.menu_caches_around:
+activityInterface.cachesAround();
+return true;
+case R.id.menu_show_in_browser:
+cache.openInBrowser(activity);
+return true;
+case R.id.menu_share:
+final ShareActionProvider shareActionProvider=(ShareActionProvider)MenuItemCompat.getActionProvider(item);
+if (shareActionProvider == null) {
+cache.shareCache(activity,res);
+return true;
+}
+return false;
+case R.id.menu_calendar:
+CalendarAddon.addToCalendarWithIntent(activity,cache);
+return true;
+default :
+return false;
+}
 }

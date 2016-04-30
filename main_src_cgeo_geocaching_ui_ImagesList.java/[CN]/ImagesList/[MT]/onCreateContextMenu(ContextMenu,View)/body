@@ -1,2 +1,10 @@
 {
+  activity.getMenuInflater().inflate(R.menu.images_list_context,menu);
+  final Resources res=activity.getResources();
+  menu.setHeaderTitle(res.getString(R.string.cache_image));
+  currentView=(ImageView)v;
+  currentImage=images.get(currentView.getId());
+  final boolean hasCoordinates=geoPoints.get(currentView.getId()) != null;
+  menu.findItem(R.id.image_add_waypoint).setVisible(hasCoordinates && geocache != null);
+  menu.findItem(R.id.menu_navigate).setVisible(hasCoordinates);
 }
