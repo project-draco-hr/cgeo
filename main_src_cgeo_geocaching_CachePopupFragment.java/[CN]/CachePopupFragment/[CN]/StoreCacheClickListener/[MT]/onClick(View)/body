@@ -3,7 +3,7 @@
     showToast(res.getString(R.string.err_detail_still_working));
     return;
   }
-  if (Settings.getChooseList()) {
+  if (Settings.getChooseList() || cache.isOffline()) {
     new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,new Action1<Set<Integer>>(){
       @Override public void call(      final Set<Integer> selectedListIds){
         storeCache(selectedListIds);
