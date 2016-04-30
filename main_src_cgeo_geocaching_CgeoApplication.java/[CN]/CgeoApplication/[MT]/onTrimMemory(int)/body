@@ -1,4 +1,5 @@
 {
+  super.onTrimMemory(level);
   if (level >= TRIM_MEMORY_MODERATE) {
     Log.i("Cleaning applications cache to trim memory");
     DataStore.removeAllFromCache();
