@@ -1,0 +1,14 @@
+{
+  final StringBuilder message=new StringBuilder();
+  final String lineBreak="\n";
+  final String separator=": ";
+  message.append(cache.getName()).append(lineBreak);
+  message.append(activity.getString(R.string.cache_type)).append(separator).append(cache.getType().getL10n()).append(lineBreak);
+  message.append(activity.getString(R.string.cache_terrain)).append(separator).append(cache.getTerrain()).append(lineBreak);
+  message.append(activity.getString(R.string.cache_difficulty)).append(separator).append(cache.getDifficulty()).append(lineBreak);
+  message.append(cache.getUrl());
+  final Intent searchIntent=new Intent(CgeoApplication.getInstance(),SearchActivity.class);
+  searchIntent.setAction(Intent.ACTION_SEARCH).putExtra(SearchManager.QUERY,cache.getGeocode()).putExtra(Intents.EXTRA_KEYWORD_SEARCH,false);
+  final String deepLink=searchIntent.toUri(0);
+  sendInvite(activity,message.toString(),deepLink);
+}

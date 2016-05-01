@@ -7,6 +7,7 @@
   menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
   menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
   menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
+  menu.findItem(R.id.menu_app_invite).setVisible(cache != null && AppInvite.isAvailable());
   if (cache != null) {
     final IConnector connector=ConnectorFactory.getConnector(cache);
     if (connector instanceof IgnoreCapability) {

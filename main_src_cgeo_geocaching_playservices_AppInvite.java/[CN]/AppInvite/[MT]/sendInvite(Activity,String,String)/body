@@ -1,0 +1,8 @@
+{
+  final IntentBuilder builder=new AppInviteInvitation.IntentBuilder(activity.getString(R.string.invitation_title)).setMessage(message).setCustomImage(Uri.parse("http://www.cgeo.org/images/cgeo-logo.png"));
+  if (deepLink != null) {
+    builder.setDeepLink(Uri.parse(deepLink));
+  }
+  final Intent intent=builder.build();
+  activity.startActivityForResult(intent,Intents.APP_INVITE_REQUEST_CODE);
+}

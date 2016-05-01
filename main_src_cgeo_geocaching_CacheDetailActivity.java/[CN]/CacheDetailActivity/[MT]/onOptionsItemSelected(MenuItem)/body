@@ -37,6 +37,11 @@ if (NavigationAppFactory.onMenuItemSelected(item,this,cache)) {
 return true;
 }
 break;
+case R.id.menu_app_invite:
+if (AppInvite.isAvailable()) {
+AppInvite.send(this,cache);
+}
+return true;
 default :
 if (LoggingUI.onMenuItemSelected(item,this,cache)) {
 refreshOnResume=true;
