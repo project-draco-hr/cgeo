@@ -1,7 +1,7 @@
 {
   if (cache.isOffline()) {
     DataStore.saveLists(Collections.singletonList(cache),listIds);
-    CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
+    CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener(),null);
     CacheDetailActivity.updateCacheLists(getView(),cache,res);
   }
  else {
@@ -16,7 +16,7 @@
 ,new Action0(){
       @Override public void call(){
         activity.supportInvalidateOptionsMenu();
-        CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
+        CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener(),null);
         CacheDetailActivity.updateCacheLists(getView(),cache,res);
       }
     }

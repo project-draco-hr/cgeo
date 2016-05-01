@@ -5,6 +5,9 @@
   final Button offlineDrop=ButterKnife.findById(view,R.id.offline_drop);
   offlineStore.setClickable(true);
   offlineStore.setOnClickListener(storeCacheClickListener);
+  if (moveCacheListener != null) {
+    offlineStore.setOnLongClickListener(moveCacheListener);
+  }
   offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
   offlineRefresh.setClickable(true);
   offlineRefresh.setOnClickListener(refreshCacheClickListener);

@@ -1,0 +1,12 @@
+{
+  if (progress.isShowing()) {
+    showToast(res.getString(R.string.err_detail_still_working));
+    return;
+  }
+  new MoveToListCommand(CacheDetailActivity.this,Collections.singletonList(cache),cache.getLists().iterator().next()){
+    @Override protected void onFinished(){
+      updateCacheLists(ButterKnife.findById(CacheDetailActivity.this,R.id.offline_lists),cache,res);
+    }
+  }
+.execute();
+}

@@ -12,7 +12,7 @@
     final LinearLayout layout=ButterKnife.findById(getView(),R.id.details_list);
     details=new CacheDetailsCreator(getActivity(),layout);
     addCacheDetails();
-    CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener());
+    CacheDetailActivity.updateOfflineBox(getView(),cache,res,new RefreshCacheClickListener(),new DropCacheClickListener(),new StoreCacheClickListener(),null);
     CacheDetailActivity.updateCacheLists(getView(),cache,res);
   }
  catch (  final Exception e) {
