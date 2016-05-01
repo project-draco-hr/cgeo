@@ -1,0 +1,9 @@
+{
+  final ArrayList<Image> result=new ArrayList<>();
+  for (  final Image image : getImages()) {
+    if (!StringUtils.containsAny(image.getUrl(),"/static","/resource")) {
+      result.add(image);
+    }
+  }
+  return result;
+}

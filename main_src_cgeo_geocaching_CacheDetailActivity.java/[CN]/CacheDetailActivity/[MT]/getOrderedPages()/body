@@ -13,7 +13,7 @@
   if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
     pages.add(Page.INVENTORY);
   }
-  if (CollectionUtils.isNotEmpty(cache.getImages())) {
+  if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
     pages.add(Page.IMAGES);
   }
   return new ImmutablePair<List<? extends Page>,Integer>(pages,detailsIndex);
