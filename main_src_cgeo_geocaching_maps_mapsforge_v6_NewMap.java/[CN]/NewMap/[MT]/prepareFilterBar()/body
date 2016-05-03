@@ -1,0 +1,11 @@
+{
+  if (Settings.getCacheType() != CacheType.ALL) {
+    final String cacheType=Settings.getCacheType().getL10n();
+    final TextView filterTitleView=ButterKnife.findById(this,R.id.filter_text);
+    filterTitleView.setText(cacheType);
+    findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+  }
+ else {
+    findViewById(R.id.filter_bar).setVisibility(View.GONE);
+  }
+}
