@@ -1,5 +1,5 @@
 {
-  final @NonNull FragmentActivity activity=getActivity();
+  @NonNull final FragmentActivity activity=getActivity();
   final Context themedContext;
   if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
     themedContext=new ContextThemeWrapper(activity,R.style.dark);
