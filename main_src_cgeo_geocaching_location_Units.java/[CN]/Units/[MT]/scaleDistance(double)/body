@@ -1,23 +1,15 @@
 {
-  double distance;
-  final String units;
   if (Settings.useImperialUnits()) {
-    distance=distanceKilometers / IConversion.MILES_TO_KILOMETER;
-    if (distance >= 0.1) {
-      units="mi";
+    final double distanceMiles=distanceKilometers / IConversion.MILES_TO_KILOMETER;
+    if (distanceMiles >= 0.1) {
+      return new ImmutablePair<>(distanceMiles,"mi");
     }
- else {
-      distance*=5280;
-      units="ft";
-    }
+    return new ImmutablePair<>(distanceMiles * 5280,"ft");
   }
  else   if (distanceKilometers >= 1) {
-    distance=distanceKilometers;
-    units="km";
+    return new ImmutablePair<>(distanceKilometers,"km");
   }
  else {
-    distance=distanceKilometers * 1000;
-    units="m";
+    return new ImmutablePair<>(distanceKilometers * 1000,"m");
   }
-  return new ImmutablePair<>(distance,units);
 }
