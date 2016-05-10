@@ -1,9 +1,0 @@
-{
-  final Parameters params=new Parameters();
-  params.put("aaa","AAA");
-  params.put("ccc","CCC");
-  params.put("bbb","BBB");
-  assertThat(params.toString()).isEqualTo("aaa=AAA&ccc=CCC&bbb=BBB");
-  params.sort();
-  assertThat(params.toString()).isEqualTo("aaa=AAA&bbb=BBB&ccc=CCC");
-}
