@@ -14,8 +14,6 @@
         overlay.downloading=true;
         previousViewport=viewportNow;
         overlay.download();
-        overlay.refreshed();
-        overlay.downloading=false;
       }
     }
   }
@@ -23,6 +21,7 @@
     Log.w("LiveCachesOverlay.startLoadtimer.start",e);
   }
  finally {
+    overlay.refreshed();
     overlay.downloading=false;
   }
 }
