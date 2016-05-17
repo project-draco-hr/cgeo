@@ -1,3 +1,3 @@
 {
-  return Html.fromHtml(gpxFileName).toString();
+  return gpxFileName == null ? ".gpx" : Html.fromHtml(gpxFileName).toString();
 }
