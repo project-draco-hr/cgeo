@@ -1,6 +1,8 @@
 {
   final Geocache gcv2r9=CgeoApplicationTest.testSearchByGeocode("GCV2R9");
+  assertThat(gcv2r9).isNotNull();
   assertThat(gcv2r9.getLocation()).isEqualTo("California, United States");
   final Geocache gc1zxez=CgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
+  assertThat(gc1zxez).isNotNull();
   assertThat(gc1zxez.getOwnerUserId()).isEqualTo("Ms.Marple/Mr.Stringer");
 }
