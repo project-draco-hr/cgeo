@@ -1,4 +1,5 @@
 {
   assertThat(disabledFilter.accepts(disabledCache)).isTrue();
+  assertThat(disabledFilter.accepts(archivedCache)).isFalse();
   assertThat(disabledFilter.accepts(new Geocache())).isFalse();
 }
