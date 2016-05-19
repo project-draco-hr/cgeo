@@ -1,9 +1,8 @@
 {
   final List<IFilter> filters=new ArrayList<>(RATIOS.length);
   for (  final int minRange : RATIOS) {
-    final int maxRange=Integer.MAX_VALUE;
     final String name=CgeoApplication.getInstance().getResources().getString(R.string.more_than_percent_favorite_points,minRange);
-    filters.add(new PopularityRatioFilter(name,minRange,maxRange));
+    filters.add(new PopularityRatioFilter(name,minRange));
   }
   return filters;
 }
