@@ -1,6 +1,6 @@
 {
   final AtomicInteger counter=new AtomicInteger(0);
-  final RxUtils.ObservableCache<String,Integer> cache=new RxUtils.ObservableCache<String,Integer>(new Func1<String,Observable<Integer>>(){
+  final RxUtils.ObservableCache<String,Integer> cache=new RxUtils.ObservableCache<>(new Func1<String,Observable<Integer>>(){
     @Override public Observable<Integer> call(    final String s){
       counter.incrementAndGet();
       return Observable.just(s.length());

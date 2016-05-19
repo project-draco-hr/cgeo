@@ -5,7 +5,7 @@
       unsubscribed.set(true);
     }
   }
-).lift(new RxUtils.DelayedUnsubscription<Object>(100,TimeUnit.MILLISECONDS)).subscribe().unsubscribe();
+).lift(new RxUtils.DelayedUnsubscription<>(100,TimeUnit.MILLISECONDS)).subscribe().unsubscribe();
   assertThat(unsubscribed.get()).isFalse();
   try {
     Thread.sleep(200);
