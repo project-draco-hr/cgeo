@@ -1,7 +1,7 @@
 {
   withMockedLoginDo(new Runnable(){
     @Override public void run(){
-      final MockedCacheAndroid cache=new GC1ZXX2Android();
+      final MockedCache cache=new GC1ZXX2();
       deleteCacheFromDBAndLogout(cache.getGeocode());
       final SearchResult search=Geocache.searchByGeocode(cache.getGeocode(),null,true,null);
       assertThat(search).isNotNull();

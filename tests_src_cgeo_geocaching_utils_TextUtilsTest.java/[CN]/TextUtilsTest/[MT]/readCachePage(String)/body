@@ -1,0 +1,22 @@
+{
+  InputStream is=null;
+  BufferedReader br=null;
+  try {
+    is=TextUtilsTest.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
+    br=new BufferedReader(new InputStreamReader(is),150000);
+    final StringBuilder buffer=new StringBuilder();
+    String line;
+    while ((line=br.readLine()) != null) {
+      buffer.append(line).append('\n');
+    }
+    return TextUtils.replaceWhitespace(buffer.toString());
+  }
+ catch (  final IOException e) {
+    Assert.fail(e.getMessage());
+  }
+ finally {
+    IOUtils.closeQuietly(is);
+    IOUtils.closeQuietly(br);
+  }
+  return null;
+}

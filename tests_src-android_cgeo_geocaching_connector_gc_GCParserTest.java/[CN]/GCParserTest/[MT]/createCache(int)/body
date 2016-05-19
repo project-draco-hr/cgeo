@@ -1,9 +1,9 @@
 {
-  final MockedCacheAndroid mockedCache=MockedCacheAndroid.MOCKED_CACHES.get(index);
+  final MockedCache mockedCache=MockedCache.MOCKED_CACHES.get(index);
   final String oldCustomDate=Settings.getGcCustomDate();
   final SearchResult searchResult;
   try {
-    Settings.setGcCustomDate(MockedCacheAndroid.getDateFormat());
+    Settings.setGcCustomDate(MockedCache.getDateFormat());
     searchResult=GCParser.parseAndSaveCacheFromText(mockedCache.getData(),null);
   }
   finally {
