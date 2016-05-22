@@ -1,0 +1,7 @@
+{
+  final List<Image> images=new ArrayList<>();
+  for (  final JsonNode image : imagesNode) {
+    images.add(new Image.Builder().setUrl(image.get(IMAGE_URL).asText()).setTitle(image.get(IMAGE_CAPTION).asText()).build());
+  }
+  return images;
+}

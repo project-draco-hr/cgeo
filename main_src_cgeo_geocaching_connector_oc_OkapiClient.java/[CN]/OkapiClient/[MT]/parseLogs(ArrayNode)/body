@@ -6,7 +6,7 @@
       if (date == null) {
         continue;
       }
-      final LogEntry log=new LogEntry.Builder().setAuthor(parseUser(logResponse.get(LOG_USER))).setDate(date.getTime()).setLogType(parseLogType(logResponse.get(LOG_TYPE).asText())).setLog(logResponse.get(LOG_COMMENT).asText().trim()).build();
+      final LogEntry log=new LogEntry.Builder().setAuthor(parseUser(logResponse.get(LOG_USER))).setDate(date.getTime()).setLogType(parseLogType(logResponse.get(LOG_TYPE).asText())).setLogImages(parseLogImages((ArrayNode)logResponse.path(LOG_IMAGES))).setLog(logResponse.get(LOG_COMMENT).asText().trim()).build();
       result.add(log);
     }
  catch (    final NullPointerException e) {

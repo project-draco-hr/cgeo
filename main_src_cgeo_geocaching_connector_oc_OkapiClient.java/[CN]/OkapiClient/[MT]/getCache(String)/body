@@ -8,6 +8,7 @@
   params.add("fields",getFullFields(ocapiConn));
   params.add("attribution_append","none");
   params.add(PARAMETER_LOGCOUNT_KEY,PARAMETER_LOGCOUNT_VALUE);
+  params.add(PARAMETER_LOG_FIELDS_KEY,PARAMETER_LOG_FIELDS_VALUE);
   final JSONResult result=request(ocapiConn,OkapiService.SERVICE_CACHE,params);
   return result.isSuccess ? parseCache(result.data) : null;
 }
