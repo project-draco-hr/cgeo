@@ -1,2 +1,17 @@
 {
+  final boolean mustLogin=ConnectorFactory.mustRelog();
+  for (  final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
+    if (mustLogin || !conn.isLoggedIn()) {
+      AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0(){
+        @Override public void call(){
+          if (mustLogin) {
+            conn.logout();
+          }
+          conn.login(firstLoginHandler,MainActivity.this);
+          updateUserInfoHandler.sendEmptyMessage(-1);
+        }
+      }
+);
+    }
+  }
 }

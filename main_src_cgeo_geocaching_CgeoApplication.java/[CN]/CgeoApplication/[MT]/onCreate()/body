@@ -8,7 +8,7 @@
   }
  catch (  IllegalArgumentException|IllegalAccessException|NoSuchFieldException ignored) {
   }
-  initApplicationLocale(Settings.useEnglish());
+  initApplicationLocale();
   DataStore.getLists();
   final Sensors sensors=Sensors.getInstance();
   sensors.setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());

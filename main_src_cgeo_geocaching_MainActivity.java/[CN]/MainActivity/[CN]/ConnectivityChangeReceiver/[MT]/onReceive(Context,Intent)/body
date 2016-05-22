@@ -1,6 +1,6 @@
 {
   final boolean wasConnected=isConnected;
-  isConnected=app.isNetworkConnected();
+  isConnected=Network.isConnected();
   if (isConnected && !wasConnected) {
     startBackgroundLogin();
   }

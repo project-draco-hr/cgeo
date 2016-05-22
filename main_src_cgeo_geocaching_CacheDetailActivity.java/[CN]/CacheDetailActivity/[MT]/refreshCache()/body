@@ -3,7 +3,7 @@
     showToast(res.getString(R.string.err_detail_still_working));
     return;
   }
-  if (!app.isNetworkConnected()) {
+  if (!Network.isConnected()) {
     showToast(getString(R.string.err_server));
     return;
   }
