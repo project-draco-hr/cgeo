@@ -1,9 +1,9 @@
 {
-  final int finds=getFindsCount(cache);
+  final int finds=cache.getFindsCount();
   if (finds == 0) {
     return false;
   }
   final int favorites=cache.getFavoritePoints();
   final float ratio=100.0f * favorites / finds;
-  return ratio > minRatio && ratio <= maxRatio;
+  return ratio > minRatio;
 }
