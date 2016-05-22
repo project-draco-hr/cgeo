@@ -10,7 +10,10 @@
     final int[] filterIndex=data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
     setFilter(FilterActivity.getFilterFromPosition(filterIndex[0],filterIndex[1]));
   }
-  if (type == CacheListType.OFFLINE) {
+ else   if (requestCode == REQUEST_CODE_RESTART && resultCode == Activity.RESULT_OK) {
+    restartActivity();
+  }
+  if (type == CacheListType.OFFLINE && requestCode != REQUEST_CODE_RESTART) {
     refreshCurrentList();
   }
 }
