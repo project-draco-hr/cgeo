@@ -1,5 +1,5 @@
 {
-  final boolean googlePlayServicesAvailable=CgeoApplication.getInstance().isGooglePlayServicesAvailable();
+  final boolean googlePlayServicesAvailable=GooglePlayServices.isAvailable();
   final String usedDirectionSensor;
   if (Settings.useOrientationSensor(context)) {
     usedDirectionSensor="orientation";

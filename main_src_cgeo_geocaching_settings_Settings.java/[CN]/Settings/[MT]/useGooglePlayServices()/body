@@ -1,4 +1,4 @@
 {
   final boolean defaultForPhone=VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH;
-  return CgeoApplication.getInstance().isGooglePlayServicesAvailable() && outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices,defaultForPhone);
+  return GooglePlayServices.isAvailable() && outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices,defaultForPhone);
 }

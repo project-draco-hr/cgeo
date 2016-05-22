@@ -10,9 +10,6 @@
   }
   initApplicationLocale(Settings.useEnglish());
   DataStore.getLists();
-  if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
-    isGooglePlayServicesAvailable=true;
-  }
   final Sensors sensors=Sensors.getInstance();
   sensors.setupGeoDataObservables(Settings.useGooglePlayServices(),Settings.useLowPowerMode());
   sensors.setupDirectionObservable();
