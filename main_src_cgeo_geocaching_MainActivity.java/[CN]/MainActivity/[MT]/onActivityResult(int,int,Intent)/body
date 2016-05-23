@@ -1,7 +1,7 @@
 {
   if (requestCode == Intents.SETTINGS_ACTIVITY_REQUEST_CODE) {
     if (resultCode == SettingsActivity.RESTART_NEEDED) {
-      CgeoApplication.getInstance().restartApplication();
+      ProcessPhoenix.triggerRebirth(this);
     }
   }
  else {
