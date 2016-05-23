@@ -1,0 +1,6 @@
+{
+  if (!liveMapHintShownInThisSession && Settings.getLiveMapHintShowCount() <= 3) {
+    liveMapHintShownInThisSession=true;
+    LiveMapInfoDialogBuilder.create(activity).show();
+  }
+}
