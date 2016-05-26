@@ -14,11 +14,13 @@
       return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED,Collections.<String>emptyList());
     }
     final Parameters params=new Parameters("secid",Settings.getGeokretySecId(),"gzip","0","nr",trackableLog.trackCode,"formname","ruchy","logtype",String.valueOf(trackableLog.action.gkid),"data",String.format(Locale.ENGLISH,"%tY-%tm-%td",date,date,date),"godzina",String.format("%tH",date),"minuta",String.format("%tM",date),"comment",log,"app",context.getString(R.string.app_name),"app_ver",Version.getVersionName(context),"mobile_lang",Settings.getApplicationLocale().toString() + ".UTF-8");
-    if (cache != null && cache.getCoords() != null) {
-      params.add("latlon",cache.getCoords().toString());
-    }
-    if (cache != null && StringUtils.isNotEmpty(cache.getGeocode())) {
-      params.add("wpt",cache.getGeocode());
+    if (cache != null) {
+      if (cache.getCoords() != null) {
+        params.add("latlon",cache.getCoords().toString());
+      }
+      if (StringUtils.isNotEmpty(cache.getGeocode())) {
+        params.add("wpt",cache.getGeocode());
+      }
     }
     final String page=Network.getResponseData(Network.postRequest(URL + "/ruchy.php",params));
     if (page == null) {
