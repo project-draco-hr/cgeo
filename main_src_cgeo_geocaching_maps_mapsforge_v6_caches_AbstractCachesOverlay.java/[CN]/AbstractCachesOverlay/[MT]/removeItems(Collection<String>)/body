@@ -1,0 +1,11 @@
+{
+  final Layers layers=this.mapView.getLayerManager().getLayers();
+  for (  final String code : removeCodes) {
+    final GeoitemLayer item=layerList.getItem(code);
+    if (item != null) {
+      geoEntries.remove(new GeoEntry(code,overlayId));
+      layers.remove(item);
+      layerList.remove(item);
+    }
+  }
+}

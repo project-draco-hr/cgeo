@@ -13,6 +13,7 @@
       return;
     }
     if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
+      popupGeocodes.add(item.getGeocode());
       WaypointPopup.startActivityAllowTarget(this,item.getId(),item.getGeocode());
     }
   }

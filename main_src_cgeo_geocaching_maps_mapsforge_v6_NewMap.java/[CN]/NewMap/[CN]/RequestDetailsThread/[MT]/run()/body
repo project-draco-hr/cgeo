@@ -6,5 +6,6 @@
   if (requestRequired()) {
     GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
   }
+  map.popupGeocodes.add(cache.getGeocode());
   CachePopup.startActivityAllowTarget(map,cache.getGeocode());
 }
