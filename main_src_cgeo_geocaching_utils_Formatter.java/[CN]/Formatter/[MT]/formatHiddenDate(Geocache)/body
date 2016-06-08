@@ -9,6 +9,10 @@
   }
   String dateString=formatFullDate(time);
   if (cache.isEventCache()) {
+    final String verbally=formatDateVerbally(time);
+    if (verbally != null) {
+      return verbally;
+    }
     dateString=DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(),time,DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
   }
   return dateString;

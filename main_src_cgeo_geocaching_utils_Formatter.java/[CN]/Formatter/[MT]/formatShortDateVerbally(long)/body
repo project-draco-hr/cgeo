@@ -1,11 +1,7 @@
 {
-  final int diff=CalendarUtils.daysSince(date);
-switch (diff) {
-case 0:
-    return CgeoApplication.getInstance().getString(R.string.log_today);
-case 1:
-  return CgeoApplication.getInstance().getString(R.string.log_yesterday);
-default :
-return formatShortDate(date);
-}
+  final String verbally=formatDateVerbally(date);
+  if (verbally != null) {
+    return verbally;
+  }
+  return formatShortDate(date);
 }
