@@ -9,16 +9,21 @@
     return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,Collections.<String>emptyList());
   }
   try {
-    if (Settings.getGeokretySecId() == null || Settings.getGeokretySecId().isEmpty()) {
+    final String secId=Settings.getGeokretySecId();
+    if (StringUtils.isEmpty(secId)) {
       Log.e("GeokretyConnector.postLogTrackable: not authenticated");
       return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED,Collections.<String>emptyList());
     }
-    final Parameters params=new Parameters("secid",Settings.getGeokretySecId(),"gzip","0","nr",trackableLog.trackCode,"formname","ruchy","logtype",String.valueOf(trackableLog.action.gkid),"data",String.format(Locale.ENGLISH,"%tY-%tm-%td",date,date,date),"godzina",String.format("%tH",date),"minuta",String.format("%tM",date),"comment",log,"app",context.getString(R.string.app_name),"app_ver",Version.getVersionName(context),"mobile_lang",Settings.getApplicationLocale().toString() + ".UTF-8");
-    if (cache != null && cache.getCoords() != null) {
-      params.add("latlon",cache.getCoords().toString());
-    }
-    if (cache != null && StringUtils.isNotEmpty(cache.getGeocode())) {
-      params.add("wpt",cache.getGeocode());
+    final Parameters params=new Parameters("secid",secId,"gzip","0","nr",trackableLog.trackCode,"formname","ruchy","logtype",String.valueOf(trackableLog.action.gkid),"data",String.format(Locale.ENGLISH,"%tY-%tm-%td",date,date,date),"godzina",String.format("%tH",date),"minuta",String.format("%tM",date),"comment",log,"app",context.getString(R.string.app_name),"app_ver",Version.getVersionName(context),"mobile_lang",Settings.getApplicationLocale().toString() + ".UTF-8");
+    if (cache != null) {
+      final Geopoint coords=cache.getCoords();
+      if (coords != null) {
+        params.add("latlon",coords.toString());
+      }
+      final String geocode=cache.getGeocode();
+      if (StringUtils.isNotEmpty(geocode)) {
+        params.add("wpt",geocode);
+      }
     }
     final String page=Network.getResponseData(Network.postRequest(URL + "/ruchy.php",params));
     if (page == null) {
@@ -30,11 +35,12 @@
       Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety");
       return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,Collections.<String>emptyList());
     }
-    if (!response.getRight().isEmpty()) {
-      for (      final String error : response.getRight()) {
+    final List<String> errors=response.getRight();
+    if (CollectionUtils.isNotEmpty(errors)) {
+      for (      final String error : errors) {
         Log.w("GeokretyConnector.postLogTrackable: " + error);
       }
-      return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,response.getRight());
+      return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK,errors);
     }
     Log.i("Geokrety Log successfully posted to trackable #" + trackableLog.trackCode);
     return new ImmutablePair<>(StatusCode.NO_ERROR,Collections.<String>emptyList());
