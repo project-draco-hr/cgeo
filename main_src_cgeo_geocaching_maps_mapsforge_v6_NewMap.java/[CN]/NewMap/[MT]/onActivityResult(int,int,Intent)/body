@@ -26,6 +26,8 @@
       changedGeocodes.add(geocode);
       geocode=popupGeocodes.poll();
     }
-    caches.invalidate(changedGeocodes);
+    if (caches != null) {
+      caches.invalidate(changedGeocodes);
+    }
   }
 }
