@@ -1,8 +1,6 @@
 {
   if (trackable == null) {
-    if (waitDialog != null) {
-      waitDialog.dismiss();
-    }
+    Dialogs.dismiss(waitDialog);
     if (StringUtils.isNotBlank(geocode)) {
       showToast(res.getString(R.string.err_tb_find) + " " + geocode+ ".");
     }
@@ -27,7 +25,5 @@
  catch (  final Exception e) {
     Log.e("TrackableActivity.loadTrackableHandler: ",e);
   }
-  if (waitDialog != null) {
-    waitDialog.dismiss();
-  }
+  Dialogs.dismiss(waitDialog);
 }
