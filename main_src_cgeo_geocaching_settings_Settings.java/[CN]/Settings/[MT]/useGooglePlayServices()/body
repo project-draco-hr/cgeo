@@ -1,4 +1,7 @@
 {
+  if (!GooglePlayServices.isAvailable()) {
+    return false;
+  }
   final boolean defaultForPhone=VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH;
-  return GooglePlayServices.isAvailable() && outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices,defaultForPhone);
+  return outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices,defaultForPhone);
 }
