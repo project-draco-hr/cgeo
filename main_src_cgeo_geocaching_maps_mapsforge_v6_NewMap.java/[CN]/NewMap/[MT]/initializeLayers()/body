@@ -1,7 +1,7 @@
 {
   final File mapFile=NewMap.getMapFile();
   if (mapFile != null && mapFile.exists()) {
-    this.tileRendererLayer=new TileRendererLayer(tileCache,new MapFile(mapFile),this.mapView.getModel().mapViewPosition,false,true,AndroidGraphicFactory.INSTANCE);
+    this.tileRendererLayer=new TileRendererLayer(tileCache,new MapFile(mapFile),this.mapView.getModel().mapViewPosition,false,true,false,AndroidGraphicFactory.INSTANCE);
     this.setMapTheme();
     this.mapView.getLayerManager().getLayers().add(this.tileRendererLayer);
   }

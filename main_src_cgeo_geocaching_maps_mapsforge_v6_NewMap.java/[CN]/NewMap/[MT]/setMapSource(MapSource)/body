@@ -3,7 +3,7 @@
   final TileRendererLayer oldLayer=this.tileRendererLayer;
   final File mapFile=NewMap.getMapFile();
   if (mapFile != null && mapFile.exists()) {
-    final TileRendererLayer newLayer=new TileRendererLayer(tileCache,new MapFile(mapFile),this.mapView.getModel().mapViewPosition,false,true,AndroidGraphicFactory.INSTANCE);
+    final TileRendererLayer newLayer=new TileRendererLayer(tileCache,new MapFile(mapFile),this.mapView.getModel().mapViewPosition,false,true,false,AndroidGraphicFactory.INSTANCE);
     final Layers layers=this.mapView.getLayerManager().getLayers();
     final int index=layers.indexOf(oldLayer) + 1;
     layers.add(index,newLayer);
