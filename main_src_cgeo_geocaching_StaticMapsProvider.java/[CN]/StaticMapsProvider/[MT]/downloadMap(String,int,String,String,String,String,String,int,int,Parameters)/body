@@ -28,8 +28,8 @@
           }
         }
       }
- catch (      final Exception ignored) {
-        Log.e("StaticMapsProvider.downloadMap: error");
+ catch (      final Exception ex) {
+        Log.w("StaticMapsProvider.downloadMap: error",ex);
       }
       return Completable.complete();
     }
