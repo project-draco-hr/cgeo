@@ -1,6 +1,5 @@
 {
   super(context,caches,R.string.command_delete_caches_progress);
-  lastListPosition=context.getListView().getFirstVisiblePosition();
-  activityRef=new WeakReference<>(context);
+  this.lastPositionHelper=new LastPositionHelper(context);
   this.listId=listId;
 }

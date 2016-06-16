@@ -1,8 +1,12 @@
 {
   new MoveToListCommand(this,caches,listId){
+    private LastPositionHelper lastPositionHelper;
+    @Override protected void doCommand(){
+      lastPositionHelper=new LastPositionHelper(CacheListActivity.this);
+      super.doCommand();
+    }
     @Override protected void onFinished(){
-      adapter.setSelectMode(false);
-      refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
+      lastPositionHelper.refreshListAtLastPosition();
     }
   }
 .execute();
