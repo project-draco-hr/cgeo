@@ -1,4 +1,4 @@
 {
   final String id=StringUtils.substring(geocode,2);
-  return searchCaches("data","rtype=2&cid=" + id + "&istr=abcdefghiklmnos");
+  return searchCaches("data",new Parameters(PARAMETER_REQUEST_TYPE,REQUEST_TYPE_CACHE,"cid",id,PARAMETER_RESULT_FIELDS,RESULT_FIELDS_DETAILED));
 }

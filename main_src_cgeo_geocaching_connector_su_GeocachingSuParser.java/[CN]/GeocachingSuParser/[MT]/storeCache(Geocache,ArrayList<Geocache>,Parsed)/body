@@ -1,0 +1,7 @@
+{
+  cache.setDescription(parsed.getDescription());
+  cache.setDetailedUpdatedNow();
+  DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
+  DataStore.saveLogs(cache.getGeocode(),parsed.logs);
+  caches.add(cache);
+}

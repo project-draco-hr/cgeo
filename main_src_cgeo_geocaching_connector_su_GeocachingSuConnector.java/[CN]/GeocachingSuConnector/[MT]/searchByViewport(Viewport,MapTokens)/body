@@ -1,3 +1,5 @@
 {
-  return searchCaches("cache","rtype=0&lngmax=" + viewport.getLongitudeMax() + "&lngmin="+ viewport.getLongitudeMin()+ "&latmax="+ viewport.getLatitudeMax()+ "&latmin="+ viewport.getLatitudeMin());
+  final Geopoint min=viewport.bottomLeft;
+  final Geopoint max=viewport.topRight;
+  return searchCaches("cache",new Parameters(PARAMETER_REQUEST_TYPE,REQUEST_TYPE_BOUNDING_BOX,"lngmax",GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,max),"lngmin",GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,min),"latmax",GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,max),"latmin",GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,min),PARAMETER_RESULT_FIELDS,RESULT_FIELDS_AREA));
 }

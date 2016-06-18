@@ -1,3 +1,3 @@
 {
-  return searchCaches("cache","rtype=1&radius=20&clng=" + center.getLongitude() + "&clat="+ center.getLatitude());
+  return searchCaches("cache",new Parameters(PARAMETER_REQUEST_TYPE,REQUEST_TYPE_CENTER,"radius","20","clng",GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,center),"clat",GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,center)));
 }

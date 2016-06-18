@@ -5,11 +5,9 @@
     factory.setNamespaceAware(true);
     final XmlPullParser parser=factory.newPullParser();
     parser.setInput(inputStream,"UTF-8");
-    String text="";
+    Parsed parsed=new Parsed();
     Geocache cache=createNewCache();
-    String lattitude="";
-    Builder logEntry=new LogEntry.Builder();
-    ArrayList<LogEntry> logs=new ArrayList<>();
+    String text="";
     int eventType=parser.getEventType();
     while (eventType != XmlPullParser.END_DOCUMENT) {
       final String tagname=parser.getName();
@@ -17,13 +15,13 @@ switch (eventType) {
 case XmlPullParser.START_TAG:
         if ("cache".equalsIgnoreCase(tagname)) {
           cache=createNewCache();
-          logs=new ArrayList<>();
+          parsed=new Parsed();
         }
  else         if ("note".equalsIgnoreCase(tagname)) {
-          logEntry=new LogEntry.Builder();
-          logEntry.setAuthor(parser.getAttributeValue(null,"nick"));
-          logEntry.setDate(parseDateTime(parser.getAttributeValue(null,"date")));
-          logEntry.setLogType(LogType.NOTE);
+          parsed.logBuilder=new LogEntry.Builder();
+          parsed.logBuilder.setAuthor(parser.getAttributeValue(null,"nick"));
+          parsed.logBuilder.setDate(parseDateTime(parser.getAttributeValue(null,"date")));
+          parsed.logBuilder.setLogType(LogType.NOTE);
         }
       break;
 case XmlPullParser.TEXT:
@@ -37,35 +35,44 @@ if ("id".equalsIgnoreCase(tagname)) {
   cache.setName(text);
 }
  else if (endTag.equalsIgnoreCase(tagname)) {
-  DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-  DataStore.saveLogs(cache.getGeocode(),logs);
-  caches.add(cache);
+  storeCache(cache,caches,parsed);
 }
  else if ("lat".equalsIgnoreCase(tagname)) {
-  lattitude=text;
+  parsed.latitude=text;
 }
  else if ("lng".equalsIgnoreCase(tagname)) {
-  cache.setCoords(new Geopoint(lattitude,text));
+  cache.setCoords(new Geopoint(parsed.latitude,text));
 }
- else if ("nick".equalsIgnoreCase(tagname)) {
+ else if ("nick".equalsIgnoreCase(tagname) || "autor".equalsIgnoreCase(tagname)) {
   cache.setOwnerDisplayName(text);
 }
  else if ("adesc".equalsIgnoreCase(tagname)) {
-  cache.setDescription(text);
-  cache.setDetailedUpdatedNow();
+  parsed.addDescription(text);
+}
+ else if ("cdesc".equalsIgnoreCase(tagname)) {
+  parsed.addDescription(text);
+}
+ else if ("tpart".equalsIgnoreCase(tagname)) {
+  parsed.addDescription(text);
+}
+ else if ("vpart".equalsIgnoreCase(tagname)) {
+  parsed.addDescription(text);
 }
  else if ("date".equalsIgnoreCase(tagname)) {
   cache.setHidden(parseDate(text));
 }
- else if ("type".equalsIgnoreCase(tagname)) {
+ else if ("type".equalsIgnoreCase(tagname) || "ctype".equalsIgnoreCase(tagname)) {
   cache.setType(parseType(text));
 }
  else if ("note".equalsIgnoreCase(tagname)) {
-  logEntry.setLog(StringUtils.trim(text));
-  logs.add(logEntry.build());
+  parsed.logBuilder.setLog(StringUtils.trim(text));
+  parsed.logs.add(parsed.logBuilder.build());
 }
  else if ("img".equalsIgnoreCase(tagname)) {
   cache.addSpoiler(new Image.Builder().setUrl(text).build());
+}
+ else if ("status".equalsIgnoreCase(tagname)) {
+  cache.setDisabled(isDisabledStatus(text));
 }
 break;
 default :
