@@ -22,7 +22,7 @@ case XmlPullParser.START_TAG:
         parsed.logBuilder=new LogEntry.Builder();
         parsed.logBuilder.setAuthor(parser.getAttributeValue(null,"nick"));
         parsed.logBuilder.setDate(parseDateTime(parser.getAttributeValue(null,"date")));
-        parsed.logBuilder.setLogType(LogType.NOTE);
+        parsed.logBuilder.setLogType(parseLogType(parser.getAttributeValue(null,"status")));
       }
     break;
 case XmlPullParser.TEXT:
