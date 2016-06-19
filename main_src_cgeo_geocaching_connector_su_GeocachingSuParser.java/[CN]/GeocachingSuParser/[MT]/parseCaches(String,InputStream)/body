@@ -30,7 +30,7 @@ case XmlPullParser.TEXT:
 break;
 case XmlPullParser.END_TAG:
 if ("id".equalsIgnoreCase(tagname)) {
-cache.setGeocode("SU" + text);
+parsed.id=text;
 }
  else if ("name".equalsIgnoreCase(tagname)) {
 cache.setName(text);
@@ -63,6 +63,7 @@ parsed.addDescription(text);
 cache.setHidden(parseDate(text));
 }
  else if ("type".equalsIgnoreCase(tagname) || "ctype".equalsIgnoreCase(tagname)) {
+parsed.type=text;
 cache.setType(parseType(text));
 }
  else if ("note".equalsIgnoreCase(tagname)) {
@@ -87,6 +88,12 @@ cache.setFavoritePoints(Integer.valueOf(StringUtils.trim(text)));
 final String trimmed=StringUtils.trim(text);
 if (StringUtils.isNotEmpty(trimmed)) {
   cache.setRating(Float.valueOf(trimmed));
+}
+}
+ else if ("container".equalsIgnoreCase(tagname)) {
+final String trimmed=StringUtils.trim(text);
+if (StringUtils.isNotEmpty(trimmed)) {
+  cache.setHint(trimmed);
 }
 }
 break;

@@ -1,4 +1,5 @@
 {
+  cache.setGeocode(getGeocode(parsed));
   cache.setDescription(parsed.getDescription());
   cache.setDetailedUpdatedNow();
   DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
