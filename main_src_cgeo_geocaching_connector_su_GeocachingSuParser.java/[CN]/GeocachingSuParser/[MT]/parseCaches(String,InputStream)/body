@@ -82,7 +82,7 @@ if (text.contains("photos/caches")) {
 cache.setDisabled(isDisabledStatus(text));
 }
  else if ("recom".equalsIgnoreCase(tagname)) {
-cache.setFavoritePoints(Integer.valueOf(StringUtils.trim(text)));
+cache.setFavoritePoints(Integer.parseInt(StringUtils.trim(text)));
 }
  else if ("rating".equalsIgnoreCase(tagname)) {
 final String trimmed=StringUtils.trim(text);
