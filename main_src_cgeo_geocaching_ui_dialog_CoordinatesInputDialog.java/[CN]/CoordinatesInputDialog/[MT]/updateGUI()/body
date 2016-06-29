@@ -6,14 +6,14 @@
   bLon.setText(String.valueOf(gp.getLonDir()));
 switch (currentFormat) {
 case Plain:
-    getView().findViewById(R.id.coordTable).setVisibility(View.GONE);
+    setVisible(R.id.coordTable,View.GONE);
   eLat.setVisibility(View.VISIBLE);
 eLon.setVisibility(View.VISIBLE);
 eLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
 eLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
 break;
 case Deg:
-getView().findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+setVisible(R.id.coordTable,View.VISIBLE);
 eLat.setVisibility(View.GONE);
 eLon.setVisibility(View.GONE);
 eLatSec.setVisibility(View.GONE);
@@ -34,7 +34,7 @@ eLonMin.setText(addZeros(gp.getLonDegFrac(),5));
 eLonMin.setGravity(Gravity.NO_GRAVITY);
 break;
 case Min:
-getView().findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+setVisible(R.id.coordTable,View.VISIBLE);
 eLat.setVisibility(View.GONE);
 eLon.setVisibility(View.GONE);
 eLatSec.setVisibility(View.VISIBLE);
@@ -59,7 +59,7 @@ eLonMin.setGravity(Gravity.RIGHT);
 eLonSec.setText(addZeros(gp.getLonMinFrac(),3));
 break;
 case Sec:
-getView().findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+setVisible(R.id.coordTable,View.VISIBLE);
 eLat.setVisibility(View.GONE);
 eLon.setVisibility(View.GONE);
 eLatSec.setVisibility(View.VISIBLE);
