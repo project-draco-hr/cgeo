@@ -1,26 +1,4 @@
 {
-  final Map<LogType,Integer> logCounts=getCache().getLogCounts();
-  if (logCounts != null) {
-    final List<Entry<LogType,Integer>> sortedLogCounts=new ArrayList<>(logCounts.size());
-    for (    final Entry<LogType,Integer> entry : logCounts.entrySet()) {
-      if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getValue() != 0) {
-        sortedLogCounts.add(entry);
-      }
-    }
-    if (!sortedLogCounts.isEmpty()) {
-      Collections.sort(sortedLogCounts,new Comparator<Entry<LogType,Integer>>(){
-        @Override public int compare(        final Entry<LogType,Integer> logCountItem1,        final Entry<LogType,Integer> logCountItem2){
-          return logCountItem1.getKey().compareTo(logCountItem2.getKey());
-        }
-      }
-);
-      final List<String> labels=new ArrayList<>(sortedLogCounts.size());
-      for (      final Entry<LogType,Integer> pair : sortedLogCounts) {
-        labels.add(pair.getValue() + "?? " + pair.getKey().getL10n());
-      }
-      final TextView countView=new TextView(activity);
-      countView.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels,", "));
-      view.addHeaderView(countView,null,false);
-    }
-  }
+  addLogCountsHeader();
+  addEmptyLogsHeader();
 }
