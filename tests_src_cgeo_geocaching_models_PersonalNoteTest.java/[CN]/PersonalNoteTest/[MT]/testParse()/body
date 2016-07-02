@@ -1,8 +1,8 @@
 {
   final String testString="Simple cgeo note\n--\nSimple provider note";
-  Geocache cache=new Geocache();
+  final Geocache cache=new Geocache();
   cache.setPersonalNote(testString);
-  PersonalNote parsedNote=new PersonalNote(cache);
+  final PersonalNote parsedNote=new PersonalNote(cache);
   assertThat(parsedNote.toString()).isEqualTo(testString);
   assertPersonalNote(parsedNote,"Simple cgeo note","Simple provider note");
 }

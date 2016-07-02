@@ -1,5 +1,5 @@
 {
-  ProgressInputStream stream=new ProgressInputStream(IOUtils.toInputStream("test","UTF-8"));
+  final ProgressInputStream stream=new ProgressInputStream(IOUtils.toInputStream("test","UTF-8"));
   assertThat(stream.getProgress()).isEqualTo(0);
   int bytesRead=0;
   while (stream.read() >= 0 && bytesRead < 10000) {
