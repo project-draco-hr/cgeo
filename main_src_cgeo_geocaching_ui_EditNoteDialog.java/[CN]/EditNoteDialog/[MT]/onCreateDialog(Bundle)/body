@@ -9,8 +9,11 @@
   }
   final View view=View.inflate(themedContext,R.layout.fragment_edit_note,null);
   mEditText=ButterKnife.findById(view,R.id.note);
-  final String initialNote=getArguments().getString(ARGUMENT_INITIAL_NOTE);
+  String initialNote=getArguments().getString(ARGUMENT_INITIAL_NOTE);
   if (initialNote != null) {
+    if (StringUtils.isNotBlank(initialNote)) {
+      initialNote=StringUtils.appendIfMissing(initialNote,"\n");
+    }
     mEditText.setText(initialNote);
     Dialogs.moveCursorToEnd(mEditText);
     getArguments().remove(ARGUMENT_INITIAL_NOTE);
@@ -33,7 +36,8 @@
   final ImageButton done=ButterKnife.findById(view,R.id.dialog_title_done);
   done.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    final View view){
-      ((EditNoteDialogListener)getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
+      final String personalNote=StringUtils.trim(mEditText.getText().toString());
+      ((EditNoteDialogListener)getActivity()).onFinishEditNoteDialog(personalNote);
       dialog.dismiss();
     }
   }
