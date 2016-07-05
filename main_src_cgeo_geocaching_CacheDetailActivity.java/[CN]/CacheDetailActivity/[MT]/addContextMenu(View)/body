@@ -15,16 +15,19 @@ switch (view.getId()) {
 case R.id.value:
             clickedItemText=((TextView)view).getText();
           final CharSequence itemTitle=((TextView)((View)view.getParent()).findViewById(R.id.name)).getText();
-        buildDetailsContextMenu(actionMode,menu,itemTitle,true);
-      return true;
+        if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
+          clickedItemText=clickedItemText.toString().replace("?? ","");
+        }
+      buildDetailsContextMenu(actionMode,menu,itemTitle,true);
+    return true;
 case R.id.description:
-    final String shortDesc=cache.getShortDescription();
-  if (StringUtils.isBlank(shortDesc)) {
-    clickedItemText=cache.getDescription();
-  }
+  final String shortDesc=cache.getShortDescription();
+if (StringUtils.isBlank(shortDesc)) {
+  clickedItemText=cache.getDescription();
+}
  else {
-    clickedItemText=shortDesc + "\n\n" + cache.getDescription();
-  }
+  clickedItemText=shortDesc + "\n\n" + cache.getDescription();
+}
 buildDetailsContextMenu(actionMode,menu,res.getString(R.string.cache_description),false);
 return true;
 case R.id.personalnote:
