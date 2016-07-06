@@ -15,10 +15,10 @@
     throw new Geopoint.ParseException("Distance between latitude and longitude text is to large.",LatLon.LON);
   }
   final double lat=latitudeWrapper.result;
-  final double lon=longitudeWrapper.result;
   if (!Geopoint.isValidLatitude(lat)) {
     throw new Geopoint.ParseException(text,LatLon.LAT);
   }
+  final double lon=longitudeWrapper.result;
   if (!Geopoint.isValidLongitude(lon)) {
     throw new Geopoint.ParseException(text,LatLon.LON);
   }

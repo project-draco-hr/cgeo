@@ -1,9 +1,9 @@
 {
-  final Geopoint currentPos=new Geopoint(geo);
   final Geopoint coords=cache.getCoords();
   if (coords == null) {
     return false;
   }
+  final Geopoint currentPos=new Geopoint(geo);
   final float distance=currentPos.distanceTo(coords);
   return distance >= minDistance && distance <= maxDistance;
 }
