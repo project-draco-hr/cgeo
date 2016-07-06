@@ -1,9 +1,9 @@
 {
-  final int what=msg.what;
   final CGeoMap map=mapRef.get();
   if (map == null) {
     return;
   }
+  final int what=msg.what;
 switch (what) {
 case UPDATE_TITLE:
     map.setTitle();

@@ -1,11 +1,11 @@
 {
   final String replaceSpaceAfterComma=new MatcherWrapper(PATTERN_BAD_BLANK,text).replaceAll("$1.$2");
-  final MatcherWrapper matcher=new MatcherWrapper(latlon == LatLon.LAT ? PATTERN_LAT : PATTERN_LON,replaceSpaceAfterComma);
   try {
     return new ResultWrapper(Double.parseDouble(replaceSpaceAfterComma),0,text.length());
   }
  catch (  final NumberFormatException ignored) {
   }
+  final MatcherWrapper matcher=new MatcherWrapper(latlon == LatLon.LAT ? PATTERN_LAT : PATTERN_LON,replaceSpaceAfterComma);
   try {
     if (matcher.find()) {
       final double sign=matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
