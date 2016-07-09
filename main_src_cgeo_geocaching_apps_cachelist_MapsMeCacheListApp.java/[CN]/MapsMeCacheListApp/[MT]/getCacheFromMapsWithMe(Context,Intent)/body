@@ -2,7 +2,11 @@
   final MWMResponse mwmResponse=MWMResponse.extractFromIntent(context,intent);
   final MWMPoint point=mwmResponse.getPoint();
   if (point != null) {
-    return point.getId();
+    final String id=point.getId();
+    if (StringUtils.contains(id,"&id=")) {
+      return StringUtils.substringAfter(id,"&id=");
+    }
+    return id;
   }
   return null;
 }
