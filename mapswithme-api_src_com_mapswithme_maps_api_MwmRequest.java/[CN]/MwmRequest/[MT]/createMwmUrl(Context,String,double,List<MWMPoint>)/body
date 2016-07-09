@@ -9,6 +9,7 @@
       urlBuilder.append("ll=").append(String.format(Locale.US,"%f,%f&",point.getLat(),point.getLon()));
       appendIfNotNull(urlBuilder,"n",point.getName());
       appendIfNotNull(urlBuilder,"id",point.getId());
+      appendIfNotNull(urlBuilder,"s",point.getStyleForUrl());
     }
   }
   return urlBuilder;
