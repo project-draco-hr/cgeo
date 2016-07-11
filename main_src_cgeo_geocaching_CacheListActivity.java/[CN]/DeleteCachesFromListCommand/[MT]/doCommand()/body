@@ -1,6 +1,6 @@
 {
   if (listId == PseudoList.ALL_LIST.id) {
-    oldCachesLists=DataStore.markDropped(getCaches());
+    oldCachesLists.putAll(DataStore.markDropped(getCaches()));
   }
  else {
     DataStore.removeFromList(getCaches(),listId);
