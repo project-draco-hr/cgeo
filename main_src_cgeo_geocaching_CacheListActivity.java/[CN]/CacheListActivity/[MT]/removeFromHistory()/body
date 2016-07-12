@@ -1,8 +1,8 @@
 {
   final List<Geocache> caches=adapter.getCheckedOrAllCaches();
-  final String[] geocodes=new String[caches.size()];
-  for (int i=0; i < geocodes.length; i++) {
-    geocodes[i]=caches.get(i).getGeocode();
+  final Vector<String> geocodes=new Vector<>(caches.size());
+  for (  final Geocache cache : caches) {
+    geocodes.add(cache.getGeocode());
   }
   DataStore.clearVisitDate(geocodes);
   refreshCurrentList();
