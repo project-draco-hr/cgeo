@@ -1,6 +1,7 @@
 {
-  isRunning=true;
-  startingActivity=activity;
+synchronized (startingActivityLock) {
+    startingActivity=activity;
+  }
   final Intent talkingService=new Intent(activity,SpeechService.class);
   talkingService.putExtra(Intents.EXTRA_COORDS,dstCoords);
   activity.startService(talkingService);
