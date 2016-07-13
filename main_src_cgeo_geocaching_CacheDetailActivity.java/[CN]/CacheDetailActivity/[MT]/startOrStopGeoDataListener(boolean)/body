@@ -2,6 +2,7 @@
   final boolean start;
   if (Settings.useLowPowerMode()) {
     geoDataSubscription.unsubscribe();
+    geoDataSubscription=Subscriptions.empty();
     start=requireGeodata;
   }
  else {

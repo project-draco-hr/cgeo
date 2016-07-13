@@ -1,5 +1,6 @@
 {
   periodicUpdate.unsubscribe();
+  periodicUpdate=Subscriptions.empty();
   super.onDetachedFromWindow();
   if (compassUnderlay != null) {
     compassUnderlay.recycle();

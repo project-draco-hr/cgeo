@@ -1,5 +1,6 @@
 {
   this.resumeSubscription.unsubscribe();
+  this.resumeSubscription=Subscriptions.empty();
   this.caches.onDestroy();
   this.caches=null;
   this.mapView.getLayerManager().getLayers().remove(this.positionLayer);
