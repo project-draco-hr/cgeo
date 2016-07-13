@@ -1,0 +1,8 @@
+{
+  for (  final IConnector connector : connectors) {
+    if (connector.isActive()) {
+      return SearchResult.parallelCombineActive(connectors,func);
+    }
+  }
+  throw new NoConnectorException();
+}

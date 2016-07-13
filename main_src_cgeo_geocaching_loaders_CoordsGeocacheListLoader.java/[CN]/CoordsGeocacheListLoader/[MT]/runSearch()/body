@@ -1,5 +1,5 @@
 {
-  return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByCenterConnectors(),new Func1<ISearchByCenter,SearchResult>(){
+  return nonEmptyCombineActive(ConnectorFactory.getSearchByCenterConnectors(),new Func1<ISearchByCenter,SearchResult>(){
     @Override public SearchResult call(    final ISearchByCenter connector){
       return connector.searchByCenter(coords,CoordsGeocacheListLoader.this);
     }
