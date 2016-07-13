@@ -99,6 +99,9 @@
   if (StringUtils.isEmpty(trackable.getDetails()) && page.contains(GCConstants.ERROR_TB_NOT_ACTIVATED)) {
     trackable.setDetails(CgeoApplication.getInstance().getString(R.string.trackable_not_activated));
   }
+  if (page.contains(GCConstants.TRACKABLE_IS_LOCKED)) {
+    trackable.setIsLocked();
+  }
   try {
     final MatcherWrapper matcherLogs=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG,page);
     while (matcherLogs.find()) {
