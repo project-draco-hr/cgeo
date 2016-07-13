@@ -1,5 +1,5 @@
 {
-  return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByOwnerConnectors(),new Func1<ISearchByOwner,SearchResult>(){
+  return nonEmptyCombineActive(ConnectorFactory.getSearchByOwnerConnectors(),new Func1<ISearchByOwner,SearchResult>(){
     @Override public SearchResult call(    final ISearchByOwner connector){
       return connector.searchByOwner(username,OwnerGeocacheListLoader.this);
     }

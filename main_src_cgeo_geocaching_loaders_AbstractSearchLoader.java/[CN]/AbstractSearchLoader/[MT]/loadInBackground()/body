@@ -8,7 +8,16 @@
       search=new SearchResult(search);
     }
   }
- catch (  final Exception e) {
+ catch (  final NoConnectorException ignored) {
+    activity.runOnUiThread(new Runnable(){
+      @Override public void run(){
+        Toast.makeText(activity,R.string.warn_no_connector,Toast.LENGTH_LONG).show();
+        activity.finish();
+      }
+    }
+);
+  }
+catch (  final Exception e) {
     Log.e("Error in Loader ",e);
   }
   loading=false;
