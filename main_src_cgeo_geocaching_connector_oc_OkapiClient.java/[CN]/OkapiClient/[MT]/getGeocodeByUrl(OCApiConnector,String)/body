@@ -4,9 +4,5 @@
   if (data == null) {
     return null;
   }
-  if (data.has("results")) {
-    final ArrayNode results=(ArrayNode)data.path("results");
-    return results.get(0).asText();
-  }
-  return null;
+  return data.path("results").path(0).asText(null);
 }
