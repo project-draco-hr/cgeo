@@ -1,6 +1,6 @@
 {
   if (credentials.isInvalid()) {
-    Log.e("Credentials can't be retrieved");
+    Log.w("Credentials can't be retrieved");
     return StatusCode.NO_LOGIN_INFO_STORED;
   }
   final Parameters params=new Parameters("version","cgeo","userName",credentials.getUserName(),"password",credentials.getPassword());
@@ -18,7 +18,7 @@
             Log.i("Successfully logged in gcvote.com as " + credentials.getUserName());
             return StatusCode.NO_ERROR;
           }
-          Log.e("Username or password is wrong");
+          Log.w("Username or password is wrong");
           return StatusCode.WRONG_LOGIN_DATA;
         }
       }
@@ -26,7 +26,7 @@
     }
   }
  catch (  final Exception e) {
-    Log.e("Cannot parse GCVote result",e);
+    Log.w("Cannot parse GCVote result",e);
     return StatusCode.UNKNOWN_ERROR;
   }
   return StatusCode.UNKNOWN_ERROR;
