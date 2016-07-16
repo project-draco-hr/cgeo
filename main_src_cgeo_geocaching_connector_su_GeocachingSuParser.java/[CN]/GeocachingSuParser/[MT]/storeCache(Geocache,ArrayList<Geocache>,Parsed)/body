@@ -4,8 +4,8 @@
   cache.setDescription(description);
   if (StringUtils.isNotEmpty(description)) {
     cache.setDetailedUpdatedNow();
+    DataStore.saveLogs(cache.getGeocode(),parsed.logs);
   }
   DataStore.saveCache(cache,EnumSet.of(SaveFlag.DB));
-  DataStore.saveLogs(cache.getGeocode(),parsed.logs);
   caches.add(cache);
 }
