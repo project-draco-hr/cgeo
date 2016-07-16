@@ -5,7 +5,7 @@
   final Page page=pageOrder.get(position);
   final PageViewCreator creator=viewCreators.get(page);
   if (creator != null) {
-    @Nullable final Bundle state=creator.getViewState();
+    final Bundle state=creator.getViewState();
     if (state != null) {
       viewStates.put(page,state);
     }

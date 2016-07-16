@@ -1,7 +1,7 @@
 {
   final String urlPrefix=getCacheUrlPrefix();
   if (StringUtils.isEmpty(urlPrefix) || StringUtils.startsWith(url,urlPrefix)) {
-    @NonNull final String geocode=url.substring(urlPrefix.length());
+    final String geocode=url.substring(urlPrefix.length());
     if (canHandle(geocode)) {
       return geocode;
     }

@@ -1,7 +1,7 @@
 {
   final ContentResolver contentResolver=fromActivity.getContentResolver();
   Log.i("importGPX: " + uri + ", mimetype="+ mimeType);
-  @NonNull FileType fileType=new FileTypeDetector(uri,contentResolver).getFileType();
+  FileType fileType=new FileTypeDetector(uri,contentResolver).getFileType();
   if (fileType == FileType.UNKNOWN) {
     fileType=getFileTypeFromPathName(pathName);
   }

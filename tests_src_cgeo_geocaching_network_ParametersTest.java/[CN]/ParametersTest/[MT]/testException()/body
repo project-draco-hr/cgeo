@@ -4,13 +4,13 @@
     params.clear();
     fail("Exception not raised");
   }
- catch (  InvalidParameterException e) {
+ catch (  final InvalidParameterException e) {
   }
   try {
     final Parameters params=new Parameters("aaa","AAA");
     params.put("bbb","BBB","ccc");
     fail("Exception not raised");
   }
- catch (  InvalidParameterException e) {
+ catch (  final InvalidParameterException e) {
   }
 }

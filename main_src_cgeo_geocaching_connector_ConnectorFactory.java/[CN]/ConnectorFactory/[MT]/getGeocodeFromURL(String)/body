@@ -3,7 +3,7 @@
     return null;
   }
   for (  final IConnector connector : CONNECTORS) {
-    @Nullable final String geocode=connector.getGeocodeFromUrl(url);
+    final String geocode=connector.getGeocodeFromUrl(url);
     if (StringUtils.isNotBlank(geocode)) {
       return StringUtils.upperCase(geocode);
     }
