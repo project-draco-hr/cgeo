@@ -252,9 +252,9 @@
           if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
             final int attributeId=Integer.parseInt(attrs.getValue("id"));
             final boolean attributeActive=Integer.parseInt(attrs.getValue("inc")) != 0;
-            final String internalId=CacheAttributeTranslator.getInternalId(attributeId,attributeActive);
-            if (internalId != null) {
-              cache.getAttributes().add(internalId);
+            final CacheAttribute attribute=CacheAttribute.getById(attributeId);
+            if (attribute != null) {
+              cache.getAttributes().add(attribute.getValue(attributeActive));
             }
           }
         }
