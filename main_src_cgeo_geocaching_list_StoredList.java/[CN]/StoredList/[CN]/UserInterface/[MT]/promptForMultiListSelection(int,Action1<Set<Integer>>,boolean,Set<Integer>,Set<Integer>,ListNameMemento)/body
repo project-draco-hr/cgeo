@@ -20,6 +20,7 @@
  else {
         selectedListIds.remove(list.id);
       }
+      ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
     }
   }
 );
@@ -34,11 +35,14 @@
       dialog.cancel();
     }
   }
-).setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
+);
+  builder.setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int id){
       dialog.dismiss();
     }
   }
 );
-  builder.create().show();
+  final AlertDialog dialog=builder.create();
+  dialog.show();
+  dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
 }
