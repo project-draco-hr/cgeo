@@ -15,7 +15,7 @@
     if (hiddenDate != null) {
       XmlUtils.simpleText(gpx,NS_GPX,"time",dateFormatZ.format(hiddenDate));
     }
-    XmlUtils.multipleTexts(gpx,NS_GPX,"name",cache.getGeocode(),"desc",cache.getName(),"url",cache.getUrl(),"urlname",cache.getName(),"sym",cache.isFound() ? "Geocache Found" : "Geocache","type","Geocache|" + cache.getType().pattern);
+    XmlUtils.multipleTexts(gpx,NS_GPX,"name",cache.getGeocode(),"desc",cache.getName(),"url",cache.getUrl(),"urlname",cache.getName(),"sym",cache.isFound() && Settings.getIncludeFoundStatus() ? "Geocache Found" : "Geocache","type","Geocache|" + cache.getType().pattern);
     gpx.startTag(NS_GROUNDSPEAK,"cache");
     gpx.attribute("","id",cache.getCacheId());
     gpx.attribute("","available",!cache.isDisabled() ? "True" : "False");
