@@ -1,9 +1,10 @@
 {
-  assertThat(AngleUtils.normalize(0)).isEqualTo(0.0f);
-  assertThat(AngleUtils.normalize(360)).isEqualTo(0.0f);
-  assertThat(AngleUtils.normalize(720)).isEqualTo(0.0f);
-  assertThat(AngleUtils.normalize(-360)).isEqualTo(0.0f);
-  assertThat(AngleUtils.normalize(-720)).isEqualTo(0.0f);
-  assertThat(AngleUtils.normalize(721)).isEqualTo(1.0f);
-  assertThat(AngleUtils.normalize(-721)).isEqualTo(359.0f);
+  assertEquals(AngleUtils.normalize(0),0.0f,0);
+  assertEquals(AngleUtils.normalize(-0.0f),0.0f,0);
+  assertEquals(AngleUtils.normalize(360),0.0f,0);
+  assertEquals(AngleUtils.normalize(720),0.0f,0);
+  assertEquals(AngleUtils.normalize(-360),0.0f,0);
+  assertEquals(AngleUtils.normalize(-720),0.0f,0);
+  assertEquals(AngleUtils.normalize(721),1.0f,0);
+  assertEquals(AngleUtils.normalize(-721),359.0f,0);
 }
