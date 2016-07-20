@@ -25,7 +25,7 @@
     followMyLocation=mapStateIntent.followsMyLocation();
   }
  else {
-    followMyLocation=followMyLocation && (mapMode == MapMode.LIVE);
+    followMyLocation=followMyLocation && mapMode == MapMode.LIVE;
   }
   ActivityMixin.onCreate(this,true);
   ActivityMixin.setTheme(this);

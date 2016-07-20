@@ -6,7 +6,7 @@
   try {
     final Viewport viewportNow=overlay.getViewport();
     final int zoomNow=overlay.getMapZoomLevel();
-    final boolean moved=overlay.isInvalidated() || (previousViewport == null) || zoomNow != previousZoom || (AbstractCachesOverlay.mapMoved(previousViewport,viewportNow) || !previousViewport.includes(viewportNow));
+    final boolean moved=overlay.isInvalidated() || previousViewport == null || zoomNow != previousZoom || AbstractCachesOverlay.mapMoved(previousViewport,viewportNow) || !previousViewport.includes(viewportNow);
     previousZoom=zoomNow;
     if (moved) {
       previousViewport=viewportNow;

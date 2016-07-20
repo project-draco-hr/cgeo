@@ -66,7 +66,7 @@ synchronized (Tile.cache) {
   }
   if (strategy.flags.contains(Flag.SEARCH_NEARBY) && Settings.isGCPremiumMember()) {
     final Geopoint center=viewport.getCenter();
-    if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
+    if (lastSearchViewport == null || !lastSearchViewport.contains(center)) {
       final SearchResult search=GCParser.searchByCoords(center,Settings.getCacheType(),false,null);
       if (search != null && !search.isEmpty()) {
         final Set<String> geocodes=search.getGeocodes();

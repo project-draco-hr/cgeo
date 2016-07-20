@@ -5,7 +5,7 @@
     final List<Waypoint> waypointsToDisplay=new ArrayList<>(waypoints);
     final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<>();
     if (!cachesToDisplay.isEmpty()) {
-      if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
+      if (mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
         for (        final Waypoint waypoint : waypointsToDisplay) {
           if (waypoint == null || waypoint.getCoords() == null) {
             continue;
