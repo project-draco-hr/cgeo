@@ -7,6 +7,7 @@
       if (trackable.getSpottedType() == Trackable.SPOTTED_TRAVELLING && trackable.getDistance() == 0) {
         trackable.setSpottedType(Trackable.SPOTTED_OWNER);
       }
+      trackable.setLogs(logsEntries);
     }
     if (localName.equalsIgnoreCase("name")) {
       trackable.setName(content);
@@ -19,14 +20,23 @@
       trackable.setOwner(content);
     }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("datecreated")) {
-      final Date date=DATE_FORMAT.parse(content);
+      final Date date=DATE_FORMAT_SECONDS.parse(content);
       trackable.setReleased(date);
     }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("distancetravelled")) {
       trackable.setDistance(Float.parseFloat(content));
     }
+    if (localName.equalsIgnoreCase("images")) {
+      isInImages=false;
+    }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("image")) {
-      trackable.setImage("http://geokrety.org/obrazki/" + content);
+      if (isInMoves) {
+        imageBuilder.setUrl("http://geokrety.org/obrazki/" + content);
+        logEntryBuilder.addLogImage(imageBuilder.build());
+      }
+ else       if (!isInImages) {
+        trackable.setImage("http://geokrety.org/obrazki/" + content);
+      }
     }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("state")) {
       trackable.setSpottedType(getSpottedType(Integer.parseInt(content)));
@@ -36,6 +46,26 @@
     }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
       trackable.setSpottedName(content);
+    }
+    if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("user")) {
+      logEntryBuilder.setAuthor(content);
+    }
+    if (localName.equalsIgnoreCase("move")) {
+      isInMoves=false;
+      logsEntries.add(logEntryBuilder.build());
+    }
+    if (localName.equalsIgnoreCase("comments")) {
+      isInComments=false;
+    }
+    if (localName.equalsIgnoreCase("comment") && !isInComments) {
+      isMultiline=false;
+      logEntryBuilder.setLog(content);
+    }
+    if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("wpt")) {
+      logEntryBuilder.setCacheName(content);
+    }
+    if (localName.equalsIgnoreCase("id")) {
+      logEntryBuilder.setId(Integer.parseInt(content));
     }
   }
  catch (  final ParseException|NumberFormatException e) {

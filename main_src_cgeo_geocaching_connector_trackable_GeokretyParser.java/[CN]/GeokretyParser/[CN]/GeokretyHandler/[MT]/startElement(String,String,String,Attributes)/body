@@ -60,8 +60,44 @@
     if (localName.equalsIgnoreCase("description")) {
       isMultiline=true;
     }
+    if (localName.equalsIgnoreCase("move")) {
+      logEntryBuilder=new LogEntry.Builder();
+      isInMoves=true;
+    }
+    if (localName.equalsIgnoreCase("date")) {
+      final String movedDate=attributes.getValue("moved");
+      if (StringUtils.isNotBlank(movedDate)) {
+        logEntryBuilder.setDate(DATE_FORMAT.parse(movedDate).getTime());
+      }
+    }
+    if (localName.equalsIgnoreCase("user")) {
+      final String userId=attributes.getValue("id");
+      if (StringUtils.isNotBlank(userId)) {
+        logEntryBuilder.setAuthor(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid,userId));
+      }
+    }
+    if (localName.equalsIgnoreCase("comments")) {
+      isInComments=true;
+    }
+    if (localName.equalsIgnoreCase("comment")) {
+      isMultiline=true;
+    }
+    if (localName.equalsIgnoreCase("logtype")) {
+      final String logtype=attributes.getValue("id");
+      logEntryBuilder.setLogType(getLogType(Integer.parseInt(logtype)));
+    }
+    if (localName.equalsIgnoreCase("images")) {
+      isInImages=true;
+    }
+    if (localName.equalsIgnoreCase("image") && !isInImages) {
+      imageBuilder=new Image.Builder();
+      final String title=attributes.getValue("title");
+      if (StringUtils.isNotBlank(title)) {
+        imageBuilder.setTitle(title);
+      }
+    }
   }
- catch (  final NumberFormatException e) {
+ catch (  final ParseException|NumberFormatException e) {
     Log.e("Parsing GeoKret",e);
   }
 }
