@@ -7,6 +7,9 @@
   message.append(activity.getString(R.string.cache_terrain)).append(separator).append(cache.getTerrain()).append(lineBreak);
   message.append(activity.getString(R.string.cache_difficulty)).append(separator).append(cache.getDifficulty()).append(lineBreak);
   message.append(cache.getUrl());
+  while (message.length() > AppInviteInvitation.IntentBuilder.MAX_MESSAGE_LENGTH && message.lastIndexOf(lineBreak) > 0) {
+    message.delete(message.lastIndexOf(lineBreak),message.length());
+  }
   final Intent searchIntent=new Intent(CgeoApplication.getInstance(),SearchActivity.class);
   searchIntent.setAction(Intent.ACTION_SEARCH).putExtra(SearchManager.QUERY,cache.getGeocode()).putExtra(Intents.EXTRA_KEYWORD_SEARCH,false);
   final String deepLink=searchIntent.toUri(0);
