@@ -1,5 +1,9 @@
 {
   if (msg.what == SHOW_CAPTCHA) {
+    final Activity activity=getActivity();
+    if (activity == null) {
+      return;
+    }
     final AlertDialog.Builder dlg=new AlertDialog.Builder(activity);
     final View view=activity.getLayoutInflater().inflate(R.layout.recaptcha_dialog,null,false);
     final ImageView imageView=ButterKnife.findById(view,R.id.image);
