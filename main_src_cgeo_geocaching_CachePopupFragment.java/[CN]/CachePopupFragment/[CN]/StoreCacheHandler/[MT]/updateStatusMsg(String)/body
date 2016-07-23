@@ -1,3 +1,7 @@
 {
-  progress.setMessage(res.getString(progressMessage) + "\n\n" + msg);
+  final CachePopupFragment popup=popupRef.get();
+  if (popup == null) {
+    return;
+  }
+  popup.progress.setMessage(popup.getResources().getString(progressMessage) + "\n\n" + msg);
 }
