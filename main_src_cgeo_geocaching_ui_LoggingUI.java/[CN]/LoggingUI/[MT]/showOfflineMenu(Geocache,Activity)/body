@@ -29,6 +29,7 @@ case CLEAR_LOG:
  else {
 cache.logOffline(activity,logTypeEntry.logType);
 }
+final View selectedView=selectedViewRef != null ? selectedViewRef.get() : null;
 if (selectedView != null) {
 final ViewHolder holder=(ViewHolder)selectedView.getTag();
 if (holder != null) {
