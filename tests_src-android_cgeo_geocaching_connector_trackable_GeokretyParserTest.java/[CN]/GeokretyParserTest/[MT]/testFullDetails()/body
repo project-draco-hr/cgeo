@@ -1,0 +1,16 @@
+{
+  final Application app=CgeoApplication.getInstance();
+  final List<Trackable> trackables=GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret47496_details_xml)));
+  assertThat(trackables).hasSize(1);
+  final Trackable trackable1=trackables.get(0);
+  assertThat(trackable1).isNotNull();
+  assertThat(trackable1.getName()).isEqualTo("c:geo tests");
+  assertThat(trackable1.getGeocode()).isEqualTo("GKB988");
+  assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+  assertThat(trackable1.getOwner()).isEqualTo("kumy");
+  assertThat(trackable1.getDistance()).isEqualTo(143);
+  assertThat(trackable1.isMissing()).isFalse();
+  assertThat(trackable1.getDetails()).isEqualTo("virtual, just for testing c:geo app<br />" + "<br />" + "<br />"+ "<br />"+ "<br />"+ "Test to break c:geo");
+  assertThat(trackable1.getSpottedType()).isEqualTo(Trackable.SPOTTED_USER);
+  assertThat(trackable1.getSpottedName()).isEqualTo("gueta");
+}
