@@ -1,0 +1,12 @@
+{
+  try {
+    final Method m=UserManager.class.getMethod("get",Context.class);
+    m.setAccessible(true);
+    m.invoke(null,this);
+  }
+ catch (  final Throwable e) {
+    if (BuildConfig.DEBUG) {
+      throw new RuntimeException(e);
+    }
+  }
+}
