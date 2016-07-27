@@ -2,6 +2,12 @@
   final List<NavigationAppsEnum> installedNavigationApps=getInstalledNavigationApps();
   for (  final NavigationAppsEnum navigationApp : installedNavigationApps) {
     if (navigationApp.id == navigationAppId) {
+      if (navigationApp == NavigationAppsEnum.INTERNAL_MAP && Settings.useNewMapAsDefault()) {
+        return NavigationAppsEnum.INTERNAL_MAP_NEW.app;
+      }
+      if (navigationApp == NavigationAppsEnum.INTERNAL_MAP_NEW && !Settings.useNewMapAsDefault()) {
+        return NavigationAppsEnum.INTERNAL_MAP.app;
+      }
       return navigationApp.app;
     }
   }
