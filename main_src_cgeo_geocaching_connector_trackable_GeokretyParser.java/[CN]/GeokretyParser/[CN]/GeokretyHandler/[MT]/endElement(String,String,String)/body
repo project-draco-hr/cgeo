@@ -4,8 +4,14 @@
       if (StringUtils.isNotEmpty(content)) {
         trackable.setName(content);
       }
-      if (trackable.getSpottedType() == Trackable.SPOTTED_TRAVELLING && trackable.getDistance() == 0) {
-        trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+      if (trackable.getSpottedType() == Trackable.SPOTTED_USER) {
+        if (trackable.getDistance() == 0) {
+          trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+          trackable.setSpottedName(trackable.getOwner());
+        }
+ else {
+          trackable.setSpottedName(getLastSpottedUsername(logsEntries));
+        }
       }
       trackable.setLogs(logsEntries);
     }
