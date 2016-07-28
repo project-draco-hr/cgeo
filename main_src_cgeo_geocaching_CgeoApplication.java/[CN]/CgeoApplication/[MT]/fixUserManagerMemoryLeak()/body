@@ -6,7 +6,7 @@
   }
  catch (  final Throwable e) {
     if (BuildConfig.DEBUG) {
-      throw new RuntimeException(e);
+      throw new IllegalStateException("Cannot fix UserManager memory leak",e);
     }
   }
 }

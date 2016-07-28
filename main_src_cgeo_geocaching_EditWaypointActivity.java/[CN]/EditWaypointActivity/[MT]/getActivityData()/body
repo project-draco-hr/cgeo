@@ -1,5 +1,4 @@
 {
-  final ActivityData currentState=new ActivityData();
   final String bearingText=bearing.getText().toString();
   final String distanceText=distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
   final String latText=buttonLat.getText().toString();
@@ -40,6 +39,7 @@
     }
     coords=coords.project(bearing,distance);
   }
+  final ActivityData currentState=new ActivityData();
   currentState.coords=coords;
   final String givenName=waypointName.getText().toString().trim();
   currentState.name=StringUtils.defaultIfBlank(givenName,getDefaultWaypointName(getSelectedWaypointType()));

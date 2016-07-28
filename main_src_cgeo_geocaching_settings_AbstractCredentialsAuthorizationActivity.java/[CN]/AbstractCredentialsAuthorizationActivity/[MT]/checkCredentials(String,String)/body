@@ -1,10 +1,10 @@
 {
-  final String nam=StringUtils.defaultString(username);
-  final String pwd=StringUtils.defaultString(password);
   if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
     ActivityMixin.showToast(this,R.string.err_missing_auth);
     return;
   }
+  final String nam=StringUtils.defaultString(username);
+  final String pwd=StringUtils.defaultString(password);
   final Credentials credentials=new Credentials(nam,pwd);
   final AbstractCredentialsAuthorizationActivity authorizationActivity=this;
   final ProgressDialog loginDialog=ProgressDialog.show(authorizationActivity,res.getString(R.string.init_login_popup),getAuthDialogWait(),true);

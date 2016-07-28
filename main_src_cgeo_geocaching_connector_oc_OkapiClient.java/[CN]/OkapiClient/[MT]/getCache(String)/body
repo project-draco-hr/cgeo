@@ -1,10 +1,10 @@
 {
-  final Parameters params=new Parameters("cache_code",geoCode);
   final IConnector connector=ConnectorFactory.getConnector(geoCode);
   if (!(connector instanceof OCApiConnector)) {
     return null;
   }
   final OCApiConnector ocapiConn=(OCApiConnector)connector;
+  final Parameters params=new Parameters("cache_code",geoCode);
   params.add("fields",getFullFields(ocapiConn));
   params.add("attribution_append","none");
   params.add(PARAMETER_LOGCOUNT_KEY,PARAMETER_LOGCOUNT_VALUE);

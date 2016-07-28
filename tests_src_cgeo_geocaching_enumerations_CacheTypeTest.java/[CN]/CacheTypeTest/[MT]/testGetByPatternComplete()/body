@@ -1,5 +1,5 @@
 {
-  for (  CacheType type : CacheType.values()) {
+  for (  final CacheType type : CacheType.values()) {
     assertThat(CacheType.getByPattern(type.pattern)).isEqualTo(type);
     assertThat(CacheType.getByPattern(type.pattern.toLowerCase(Locale.US))).isEqualTo(type);
     assertThat(CacheType.getByPattern(type.pattern.toUpperCase(Locale.US))).isEqualTo(type);

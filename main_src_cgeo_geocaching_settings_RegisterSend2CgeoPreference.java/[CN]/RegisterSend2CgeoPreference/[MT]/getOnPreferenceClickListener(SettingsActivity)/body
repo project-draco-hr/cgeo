@@ -5,11 +5,11 @@
         return true;
       }
       final String deviceName=Settings.getWebDeviceName();
-      final String deviceCode=Settings.getWebDeviceCode();
       if (StringUtils.isBlank(deviceName)) {
         ActivityMixin.showToast(activity,R.string.err_missing_device_name);
         return false;
       }
+      final String deviceCode=Settings.getWebDeviceCode();
       final ProgressDialog progressDialog=ProgressDialog.show(activity,activity.getString(R.string.init_sendToCgeo),activity.getString(R.string.init_sendToCgeo_registering),true);
       progressDialog.setCancelable(false);
       AppObservable.bindActivity(activity,Observable.defer(new Func0<Observable<Integer>>(){

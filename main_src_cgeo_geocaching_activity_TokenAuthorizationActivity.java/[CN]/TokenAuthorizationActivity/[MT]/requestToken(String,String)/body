@@ -1,11 +1,11 @@
 {
-  final String nam=StringUtils.defaultString(username);
-  final String pwd=StringUtils.defaultString(password);
   if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
     ActivityMixin.showToast(this,R.string.err_missing_auth);
     requestTokenHandler.sendEmptyMessage(NOT_AUTHENTICATED);
     return;
   }
+  final String nam=StringUtils.defaultString(username);
+  final String pwd=StringUtils.defaultString(password);
   final Parameters params=new Parameters(fieldUsername,nam,fieldPassword,pwd);
   int status=NOT_AUTHENTICATED;
   String message=StringUtils.EMPTY;

@@ -1,4 +1,8 @@
 {
+  final Activity activity=getActivity();
+  if (activity == null) {
+    return;
+  }
   final Observable<Bitmap> captcha=Observable.defer(new Func0<Observable<Bitmap>>(){
     @Override public Observable<Bitmap> call(){
       if (needsFetch) {
@@ -23,10 +27,6 @@
     }
   }
 );
-  final Activity activity=getActivity();
-  if (activity == null) {
-    return;
-  }
   AppObservable.bindActivity(activity,captcha).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<Bitmap>(){
     @Override public void call(    final Bitmap bitmap){
       imageView.setImageBitmap(bitmap);

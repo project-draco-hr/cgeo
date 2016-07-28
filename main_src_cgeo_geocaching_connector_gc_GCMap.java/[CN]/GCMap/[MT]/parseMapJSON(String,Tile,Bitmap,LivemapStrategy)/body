@@ -1,7 +1,6 @@
 {
   final SearchResult searchResult=new SearchResult();
   try {
-    final LeastRecentlyUsedMap<String,String> nameCache=new LeastRecentlyUsedMap.LruCache<>(2000);
     if (StringUtils.isEmpty(data)) {
       throw new ParserException("No page given");
     }
@@ -20,6 +19,7 @@
     }
     final Map<String,List<UTFGridPosition>> positions=new HashMap<>();
     final Map<String,List<UTFGridPosition>> singlePositions=new HashMap<>();
+    final LeastRecentlyUsedMap<String,String> nameCache=new LeastRecentlyUsedMap.LruCache<>(2000);
     for (    final JsonNode rawKey : keys) {
       final String key=rawKey.asText();
       if (StringUtils.isNotBlank(key)) {
