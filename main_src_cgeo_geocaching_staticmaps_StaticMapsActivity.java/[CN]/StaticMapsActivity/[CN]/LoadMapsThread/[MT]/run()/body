@@ -6,13 +6,13 @@
           if (waypointId != null) {
             final Bitmap image=StaticMapsProvider.getWaypointMap(geocode,cache.getWaypointById(waypointId),level);
             if (image != null) {
-              maps.add(image);
+              adapter.add(image);
             }
           }
  else {
             final Bitmap image=StaticMapsProvider.getCacheMap(geocode,level);
             if (image != null) {
-              maps.add(image);
+              adapter.add(image);
             }
           }
         }
@@ -20,7 +20,7 @@
           Log.e("StaticMapsActivity.LoadMapsThread.run",e);
         }
       }
-      if (!maps.isEmpty()) {
+      if (!adapter.isEmpty()) {
         break;
       }
     }

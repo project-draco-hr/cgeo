@@ -1,0 +1,9 @@
+{
+  final Bitmap bitmap=getItem(position);
+  ImageView view=(ImageView)convertView;
+  if (view == null) {
+    view=(ImageView)inflater.inflate(R.layout.staticmaps_activity_item,parent,false);
+  }
+  view.setImageBitmap(bitmap);
+  return view;
+}
