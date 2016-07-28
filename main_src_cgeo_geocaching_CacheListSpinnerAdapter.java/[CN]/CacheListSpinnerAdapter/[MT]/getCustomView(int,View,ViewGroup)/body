@@ -1,6 +1,6 @@
 {
   View resultView=convertView;
-  final LayoutInflater inflater=(LayoutInflater)cacheListActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  final LayoutInflater inflater=LayoutInflater.from(cacheListActivity);
   final CacheListSpinnerAdapter.ViewHolder holder;
   if (resultView == null) {
     resultView=inflater.inflate(R.layout.cachelist_spinneritem,parent,false);

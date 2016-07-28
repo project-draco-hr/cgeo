@@ -1,7 +1,7 @@
 {
   View v=convertView;
   if (v == null) {
-    final LayoutInflater vi=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    final LayoutInflater vi=LayoutInflater.from(context);
     v=vi.inflate(id,null);
   }
   final Option option=items.get(position);
