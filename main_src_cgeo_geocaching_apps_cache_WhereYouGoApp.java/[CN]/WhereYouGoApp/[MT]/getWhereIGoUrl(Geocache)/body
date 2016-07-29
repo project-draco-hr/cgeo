@@ -1,3 +1,11 @@
 {
-  return TextUtils.getMatch(cache.getDescription(),PATTERN_CARTRIDGE,null);
+  final Matcher matcher=PATTERN_CARTRIDGE.matcher(cache.getDescription());
+  final Set<String> urls=new HashSet<>();
+  while (matcher.find()) {
+    urls.add(matcher.group(1));
+  }
+  if (urls.size() == 1) {
+    return urls.iterator().next();
+  }
+  return null;
 }
