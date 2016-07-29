@@ -1,0 +1,12 @@
+{
+  for (  final LogEntry log : logsEntries) {
+    final LogType logType=log.getType();
+    if (logType == LogType.GRABBED_IT || logType == LogType.VISIT) {
+      return log.author;
+    }
+    if (logType != LogType.NOTE) {
+      break;
+    }
+  }
+  return CgeoApplication.getInstance().getString(R.string.user_unknown);
+}
