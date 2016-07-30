@@ -8,11 +8,9 @@
     return;
   }
   trackable.setTrackingcode(trackingEditText.getText().toString());
-  if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected)) {
-    if (geopoint == null) {
-      showToast(res.getString(R.string.err_log_post_missing_coordinates));
-      return;
-    }
+  if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected) && geopoint == null) {
+    showToast(res.getString(R.string.err_log_post_missing_coordinates));
+    return;
   }
   if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates() && connector.recommendLogWithGeocode()&& geocodeEditText.getText().toString().isEmpty()&& Settings.getLogTrackableWithoutGeocodeShowCount() < MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE) {
     new LogTrackableWithoutGeocodeBuilder().create(this).show();
