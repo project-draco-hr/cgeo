@@ -68,6 +68,7 @@
       logEntryBuilder.setLog(content);
     }
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("wpt")) {
+      logEntryBuilder.setCacheGeocode(content);
       logEntryBuilder.setCacheName(content);
     }
     if (localName.equalsIgnoreCase("id")) {
