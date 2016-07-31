@@ -53,7 +53,7 @@
     if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
       trackable.setSpottedName(content);
     }
-    if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("user")) {
+    if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("user") && !isInComments) {
       logEntryBuilder.setAuthor(content);
     }
     if (localName.equalsIgnoreCase("move")) {

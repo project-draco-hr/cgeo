@@ -70,7 +70,7 @@
         logEntryBuilder.setDate(DATE_FORMAT.parse(movedDate).getTime());
       }
     }
-    if (localName.equalsIgnoreCase("user")) {
+    if (localName.equalsIgnoreCase("user") && !isInComments) {
       final String userId=attributes.getValue("id");
       if (StringUtils.isNotBlank(userId)) {
         logEntryBuilder.setAuthor(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid,userId));
