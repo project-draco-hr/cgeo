@@ -12,8 +12,8 @@
   if (!supportsFavoritePoints || cache.isOwner() || !Settings.isGCPremiumMember()) {
     return;
   }
-  final Button buttonAdd=ButterKnife.findById(view,R.id.add_to_favpoint);
-  final Button buttonRemove=ButterKnife.findById(view,R.id.remove_from_favpoint);
+  final ImageButton buttonAdd=ButterKnife.findById(view,R.id.add_to_favpoint);
+  final ImageButton buttonRemove=ButterKnife.findById(view,R.id.remove_from_favpoint);
   final TextView text=ButterKnife.findById(view,R.id.favpoint_text);
   if (cache.isFavorite()) {
     buttonAdd.setVisibility(View.GONE);
