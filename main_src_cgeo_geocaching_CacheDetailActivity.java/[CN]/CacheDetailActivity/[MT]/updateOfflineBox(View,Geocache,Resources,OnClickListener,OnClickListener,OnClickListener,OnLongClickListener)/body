@@ -1,8 +1,8 @@
 {
   final TextView offlineText=ButterKnife.findById(view,R.id.offline_text);
-  final Button offlineRefresh=ButterKnife.findById(view,R.id.offline_refresh);
-  final Button offlineStore=ButterKnife.findById(view,R.id.offline_store);
-  final Button offlineDrop=ButterKnife.findById(view,R.id.offline_drop);
+  final ImageButton offlineRefresh=ButterKnife.findById(view,R.id.offline_refresh);
+  final ImageButton offlineStore=ButterKnife.findById(view,R.id.offline_store);
+  final ImageButton offlineDrop=ButterKnife.findById(view,R.id.offline_drop);
   offlineStore.setClickable(true);
   offlineStore.setOnClickListener(storeCacheClickListener);
   if (moveCacheListener != null) {
@@ -32,13 +32,13 @@
       offlineDrop.setClickable(true);
       offlineDrop.setVisibility(View.VISIBLE);
     }
-    offlineStore.setText(R.string.cache_offline_manage);
+    offlineStore.setImageResource(R.drawable.ic_menu_edit);
   }
  else {
     offlineText.setText(res.getString(R.string.cache_offline_not_ready));
     if (offlineDrop != null) {
       offlineDrop.setVisibility(View.GONE);
     }
-    offlineStore.setText(R.string.cache_offline_store);
+    offlineStore.setImageResource(R.drawable.ic_menu_save);
   }
 }
