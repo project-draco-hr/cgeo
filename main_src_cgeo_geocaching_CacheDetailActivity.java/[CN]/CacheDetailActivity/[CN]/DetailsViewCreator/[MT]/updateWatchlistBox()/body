@@ -5,8 +5,8 @@
   if (!supportsWatchList) {
     return;
   }
-  final Button buttonAdd=ButterKnife.findById(view,R.id.add_to_watchlist);
-  final Button buttonRemove=ButterKnife.findById(view,R.id.remove_from_watchlist);
+  final ImageButton buttonAdd=ButterKnife.findById(view,R.id.add_to_watchlist);
+  final ImageButton buttonRemove=ButterKnife.findById(view,R.id.remove_from_watchlist);
   final TextView text=ButterKnife.findById(view,R.id.watchlist_text);
   final int watchListCount=cache.getWatchlistCount();
   if (cache.isOnWatchlist() || cache.isOwner()) {
