@@ -2,7 +2,7 @@
   this.geocode=geocode;
   this.returnErrorImage=returnErrorImage;
   this.onlySave=onlySave;
-  this.view=view;
+  this.viewRef=new WeakReference<>(view);
   this.userInitiatedRefresh=userInitiatedRefresh;
   final Point displaySize=Compatibility.getDisplaySize();
   this.maxWidth=displaySize.x - 25;

@@ -8,7 +8,8 @@
     cache.put(url,null);
     return null;
   }
-  final BitmapDrawable result=view == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(drawable);
+  final TextView textView=viewRef.get();
+  final BitmapDrawable result=textView == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(textView,drawable);
   cache.put(url,result);
   return result;
 }

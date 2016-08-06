@@ -3,6 +3,7 @@
   if (bitmap == null) {
     return ImmutablePair.of((BitmapDrawable)null,loadResult.right);
   }
+  final TextView view=viewRef.get();
   final BitmapDrawable drawable=new BitmapDrawable(view.getResources(),bitmap);
   drawable.setBounds(ImageUtils.scaleImageToLineHeight(drawable,view));
   return ImmutablePair.of(drawable,loadResult.right);
