@@ -1,9 +1,8 @@
 {
-  final String packageName=CgeoApplication.getInstance().getBaseContext().getPackageName();
-  final Resources res=CgeoApplication.getInstance().getResources();
   final List<IFilter> filters=new LinkedList<>();
-  for (  final String id : res.getStringArray(R.array.attribute_ids)) {
-    filters.add(new AttributeFilter(getName("attribute_" + id,res,packageName),id));
+  for (  final CacheAttribute cacheAttribute : CacheAttribute.values()) {
+    filters.add(new AttributeFilter(cacheAttribute.getL10n(true),cacheAttribute.getValue(true)));
+    filters.add(new AttributeFilter(cacheAttribute.getL10n(false),cacheAttribute.getValue(false)));
   }
   return filters;
 }
