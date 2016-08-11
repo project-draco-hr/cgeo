@@ -1,0 +1,9 @@
+{
+  final StringBuilder stringBuilder=new StringBuilder(PREFIX);
+  stringBuilder.append(ADD_MAP_MARKER);
+  if (parameters != null && !parameters.isEmpty()) {
+    stringBuilder.append('?');
+    stringBuilder.append(parameters.toString());
+  }
+  return new Intent(Intent.ACTION_VIEW,Uri.parse(stringBuilder.toString()));
+}
