@@ -1,6 +1,6 @@
 {
   subMenu.clear();
-  if (geocache == null) {
+  if (geocache == null || geocache.getCoords() == null) {
     return;
   }
   for (  final NavigationAppsEnum app : NavigationAppFactory.getActiveNavigationApps()) {

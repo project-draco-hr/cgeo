@@ -1,6 +1,8 @@
 {
   if (app instanceof GeopointNavigationApp) {
     final GeopointNavigationApp geopointApp=(GeopointNavigationApp)app;
-    geopointApp.navigate(activity,destination);
+    if (destination != null) {
+      geopointApp.navigate(activity,destination);
+    }
   }
 }

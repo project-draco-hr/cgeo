@@ -1,6 +1,8 @@
 {
   if (app instanceof CacheNavigationApp) {
     final CacheNavigationApp cacheApp=(CacheNavigationApp)app;
-    cacheApp.navigate(activity,cache);
+    if (cache.getCoords() != null) {
+      cacheApp.navigate(activity,cache);
+    }
   }
 }

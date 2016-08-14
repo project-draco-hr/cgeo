@@ -1,6 +1,8 @@
 {
   if (app instanceof WaypointNavigationApp) {
     final WaypointNavigationApp waypointApp=(WaypointNavigationApp)app;
-    waypointApp.navigate(activity,waypoint);
+    if (waypoint.getCoords() != null) {
+      waypointApp.navigate(activity,waypoint);
+    }
   }
 }
