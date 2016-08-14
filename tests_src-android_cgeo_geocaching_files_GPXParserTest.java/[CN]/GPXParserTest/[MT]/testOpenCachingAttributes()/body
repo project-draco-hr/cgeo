@@ -1,0 +1,7 @@
+{
+  final List<Geocache> caches=readGPX10(R.raw.oc1310f_gpx);
+  assertThat(caches).hasSize(1);
+  final Geocache cache=caches.get(0);
+  final List<String> attributes=cache.getAttributes();
+  assertThat(attributes).hasSize(2);
+}
