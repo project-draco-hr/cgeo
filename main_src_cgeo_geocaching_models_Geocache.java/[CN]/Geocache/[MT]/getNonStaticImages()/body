@@ -1,7 +1,8 @@
 {
   final ArrayList<Image> result=new ArrayList<>();
   for (  final Image image : getImages()) {
-    if (!StringUtils.containsAny(image.getUrl(),"/static","/resource","/icons/")) {
+    final String url=image.getUrl();
+    if (!StringUtils.contains(url,"/static") && !StringUtils.contains(url,"/resource") && !StringUtils.contains(url,"/icons/")) {
       result.add(image);
     }
   }
