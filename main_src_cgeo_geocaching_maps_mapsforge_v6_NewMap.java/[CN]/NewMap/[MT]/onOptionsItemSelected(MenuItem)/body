@@ -30,7 +30,7 @@ targetGeocode=geocodeIntent;
 return true;
 case R.id.menu_store_caches:
 if (!caches.isDownloading()) {
-final List<String> geocodes=caches.getVisibleGeocodes();
+final Set<String> geocodes=caches.getVisibleGeocodes();
 if (geocodes.isEmpty()) {
 ActivityMixin.showToast(this,res.getString(R.string.warn_save_nothing));
 return true;
@@ -71,6 +71,7 @@ selectMapTheme();
 return true;
 case R.id.menu_as_list:
 {
+CacheListActivity.startActivityMap(this,new SearchResult(caches.getVisibleGeocodes()));
 return true;
 }
 case R.id.menu_strategy_fastest:
