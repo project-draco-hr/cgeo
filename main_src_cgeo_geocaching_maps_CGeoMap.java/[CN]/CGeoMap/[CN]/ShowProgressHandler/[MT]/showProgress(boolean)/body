@@ -5,12 +5,8 @@
   }
   final ProgressBar progress=ButterKnife.findById(map.activity,R.id.actionbar_progress);
   if (progress != null) {
-    if (show) {
-      progress.setVisibility(View.VISIBLE);
-    }
- else {
-      progress.setVisibility(View.GONE);
-    }
+    final int visibility=show ? View.VISIBLE : View.GONE;
+    progress.setVisibility(visibility);
   }
   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
     map.activity.setProgressBarIndeterminateVisibility(show);

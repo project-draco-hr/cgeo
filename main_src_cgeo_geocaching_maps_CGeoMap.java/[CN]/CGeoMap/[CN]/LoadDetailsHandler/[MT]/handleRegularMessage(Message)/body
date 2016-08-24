@@ -1,14 +1,8 @@
 {
-  if (msg.what == UPDATE_PROGRESS) {
-    if (waitDialog != null) {
+  if (waitDialog != null) {
+    if (msg.what == UPDATE_PROGRESS) {
       final int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
-      final int secondsRemaining;
-      if (detailProgress > 0) {
-        secondsRemaining=(detailTotal - detailProgress) * secondsElapsed / detailProgress;
-      }
- else {
-        secondsRemaining=(detailTotal - detailProgress) * secondsElapsed;
-      }
+      final int secondsRemaining=(detailTotal - detailProgress) * secondsElapsed / detailProgress;
       waitDialog.setProgress(detailProgress);
       if (secondsRemaining < 40) {
         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
@@ -18,9 +12,9 @@
         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins,minsRemaining,minsRemaining));
       }
     }
-  }
- else   if (msg.what == FINISHED_LOADING_DETAILS && waitDialog != null) {
-    waitDialog.dismiss();
-    waitDialog.setOnCancelListener(null);
+ else     if (msg.what == FINISHED_LOADING_DETAILS) {
+      waitDialog.dismiss();
+      waitDialog.setOnCancelListener(null);
+    }
   }
 }

@@ -7,17 +7,15 @@
     if (!cachesToDisplay.isEmpty()) {
       if (mapOptions.mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
         for (        final Waypoint waypoint : waypointsToDisplay) {
-          if (waypoint == null || waypoint.getCoords() == null) {
-            continue;
+          if (waypoint != null && waypoint.getCoords() != null) {
+            itemsToDisplay.add(getWaypointItem(waypoint));
           }
-          itemsToDisplay.add(getWaypointItem(waypoint));
         }
       }
       for (      final Geocache cache : cachesToDisplay) {
-        if (cache == null || cache.getCoords() == null) {
-          continue;
+        if (cache != null && cache.getCoords() != null) {
+          itemsToDisplay.add(getCacheItem(cache));
         }
-        itemsToDisplay.add(getCacheItem(cache));
       }
     }
     if (mapOptions.coords == null) {
