@@ -1,7 +1,7 @@
 {
   boolean result=true;
   for (  final GeoitemLayer geoitem : geoitemsIn) {
-    if (!this.add(geoitem)) {
+    if (!this.addInternal(geoitem)) {
       result=false;
     }
   }
