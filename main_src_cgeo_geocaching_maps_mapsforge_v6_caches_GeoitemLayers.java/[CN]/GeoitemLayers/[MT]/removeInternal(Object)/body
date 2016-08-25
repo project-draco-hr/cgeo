@@ -1,0 +1,7 @@
+{
+  if (object instanceof GeoitemLayer) {
+    final GeoitemLayer item=(GeoitemLayer)object;
+    return this.geoitems.remove(item.getItem().getItemCode()) != null;
+  }
+  return false;
+}
