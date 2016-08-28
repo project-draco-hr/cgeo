@@ -1,0 +1,20 @@
+{
+  final int cacheResource=R.raw.gc31j2h;
+  loadCacheFromResource(cacheResource);
+  final String exported=extractWaypoint(getGPXFromCache("GC31J2H"));
+  final String imported=extractWaypoint(IOUtils.toString(getResourceStream(R.raw.gc31j2h),Charsets.UTF_8));
+  assertEqualTags(imported,exported,"time");
+  assertEqualTags(imported,exported,"name");
+  assertEqualTags(imported,exported,"urlname");
+  assertEqualTags(imported,exported,"sym");
+  assertEqualTags(imported,exported,"type");
+  assertEqualTags(imported,exported,"groundspeak:name");
+  assertEqualTags(imported,exported,"groundspeak:placed_by");
+  assertEqualTags(imported,exported,"groundspeak:type");
+  assertEqualTags(imported,exported,"groundspeak:container");
+  assertEqualTags(imported,exported,"groundspeak:difficulty");
+  assertEqualTags(imported,exported,"groundspeak:terrain");
+  assertEqualTags(imported,exported,"groundspeak:country");
+  assertEqualTags(imported,exported,"groundspeak:state");
+  assertEqualTags(imported,exported,"groundspeak:date");
+}
