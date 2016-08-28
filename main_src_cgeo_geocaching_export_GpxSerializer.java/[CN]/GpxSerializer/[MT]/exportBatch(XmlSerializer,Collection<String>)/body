@@ -22,7 +22,7 @@
     gpx.attribute("","archived",cache.isArchived() ? "True" : "False");
     XmlUtils.multipleTexts(gpx,NS_GROUNDSPEAK,"name",cache.getName(),"placed_by",cache.getOwnerDisplayName(),"owner",cache.getOwnerUserId(),"type",cache.getType().pattern,"container",cache.getSize().id);
     writeAttributes(cache);
-    XmlUtils.multipleTexts(gpx,NS_GROUNDSPEAK,"difficulty",Float.toString(cache.getDifficulty()),"terrain",Float.toString(cache.getTerrain()),"country",getCountry(cache),"state",getState(cache));
+    XmlUtils.multipleTexts(gpx,NS_GROUNDSPEAK,"difficulty",integerIfPossible(cache.getDifficulty()),"terrain",integerIfPossible(cache.getTerrain()),"country",getCountry(cache),"state",getState(cache));
     gpx.startTag(NS_GROUNDSPEAK,"short_description");
     gpx.attribute("","html",TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
     gpx.text(cache.getShortDescription());

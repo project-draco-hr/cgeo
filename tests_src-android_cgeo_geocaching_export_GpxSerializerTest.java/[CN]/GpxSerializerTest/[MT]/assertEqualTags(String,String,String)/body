@@ -1,0 +1,6 @@
+{
+  final String[] importedContent=StringUtils.substringsBetween(imported,"<" + tag + ">","</" + tag + ">");
+  final String[] exportedContent=StringUtils.substringsBetween(exported,"<" + tag + ">","</" + tag + ">");
+  assertThat(importedContent).isNotEmpty();
+  assertThat(importedContent).isEqualTo(exportedContent);
+}

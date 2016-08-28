@@ -1,0 +1,7 @@
+{
+  final int cacheResource=R.raw.gc31j2h;
+  loadCacheFromResource(cacheResource);
+  final String exported=getGPXFromCache("GC31J2H");
+  final String imported=IOUtils.toString(getResourceStream(R.raw.gc31j2h),Charsets.UTF_8);
+  assertEqualTags(imported,exported,"groundspeak:type");
+}
