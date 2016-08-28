@@ -1,3 +1,7 @@
 {
-  return this.mapView.getMapZoomLevel();
+  final MfMapView mapView=this.mapViewRef.get();
+  if (mapView == null) {
+    return 0;
+  }
+  return mapView.getMapZoomLevel();
 }

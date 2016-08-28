@@ -1,5 +1,9 @@
 {
-  final Layers layers=this.mapView.getLayerManager().getLayers();
+  final MfMapView mapView=this.mapViewRef.get();
+  if (mapView == null) {
+    return;
+  }
+  final Layers layers=mapView.getLayerManager().getLayers();
   for (  final String code : removeCodes) {
     final GeoitemLayer item=layerList.getItem(code);
     if (item != null) {

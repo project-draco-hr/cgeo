@@ -1,3 +1,7 @@
 {
-  return this.mapView.getViewport();
+  final MfMapView mapView=this.mapViewRef.get();
+  if (mapView == null) {
+    return null;
+  }
+  return mapView.getViewport();
 }

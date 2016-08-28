@@ -1,3 +1,7 @@
 {
+  final MfMapView mapView=mapViewRef.get();
+  if (mapView == null) {
+    return 0;
+  }
   return mapView.getViewport().count(DataStore.loadCaches(getGeocodes(),LoadFlags.LOAD_CACHE_OR_DB));
 }
