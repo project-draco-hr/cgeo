@@ -13,7 +13,7 @@
     }
     final InputStream response=Network.getResponseStream(Network.getRequest(URL + "/export2.php",params));
     if (response == null) {
-      Log.e("GeokretyConnector.loadInventory: No data from server");
+      Log.d("GeokretyConnector.loadInventory: No data from server");
       return Collections.emptyList();
     }
     final InputSource is=new InputSource(response);

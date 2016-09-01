@@ -7,6 +7,7 @@
     Log.d("GeokretyConnector.searchTrackable: geocode=" + geocode);
     final String geocodeFound=getGeocodeFromTrackingCode(geocode);
     if (geocodeFound == null) {
+      Log.d("GeokretyConnector.searchTrackable: Unable to retrieve trackable by TrackingCode");
       return null;
     }
     gkid=getId(geocodeFound);
@@ -16,7 +17,7 @@
     final String urlDetails=Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php";
     final InputStream response=Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + gkid));
     if (response == null) {
-      Log.e("GeokretyConnector.searchTrackable: No data from server");
+      Log.d("GeokretyConnector.searchTrackable: No data from server");
       return null;
     }
     final InputSource is=new InputSource(response);

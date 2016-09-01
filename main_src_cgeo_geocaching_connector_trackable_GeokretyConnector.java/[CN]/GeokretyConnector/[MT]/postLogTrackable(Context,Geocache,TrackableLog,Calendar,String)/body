@@ -11,7 +11,7 @@
   try {
     final String secId=Settings.getGeokretySecId();
     if (StringUtils.isEmpty(secId)) {
-      Log.e("GeokretyConnector.postLogTrackable: not authenticated");
+      Log.d("GeokretyConnector.postLogTrackable: not authenticated");
       return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED,Collections.<String>emptyList());
     }
     final Parameters params=new Parameters("secid",secId,"gzip","0","nr",trackableLog.trackCode,"formname","ruchy","logtype",String.valueOf(trackableLog.action.gkid),"data",String.format(Locale.ENGLISH,"%tY-%tm-%td",date,date,date),"godzina",String.format("%tH",date),"minuta",String.format("%tM",date),"comment",log,"app",context.getString(R.string.app_name),"app_ver",Version.getVersionName(context),"mobile_lang",Settings.getApplicationLocale().toString() + ".UTF-8");
@@ -27,7 +27,7 @@
     }
     final String page=Network.getResponseData(Network.postRequest(URL + "/ruchy.php",params));
     if (page == null) {
-      Log.e("GeokretyConnector.postLogTrackable: No data from server");
+      Log.d("GeokretyConnector.postLogTrackable: No data from server");
       return new ImmutablePair<>(StatusCode.CONNECTION_FAILED_GK,Collections.<String>emptyList());
     }
     final ImmutablePair<Integer,List<String>> response=GeokretyParser.parseResponse(page);
