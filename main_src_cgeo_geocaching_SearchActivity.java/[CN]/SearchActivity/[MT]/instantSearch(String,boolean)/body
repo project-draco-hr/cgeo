@@ -9,18 +9,25 @@
     CacheDetailActivity.startActivity(this,geocode.toUpperCase(Locale.US));
     return true;
   }
-  TrackableConnector trackableConnector=ConnectorFactory.getTrackableConnector(geocode);
-  if (trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
+  TrackableBrand trackableBrand=ConnectorFactory.getTrackableConnector(geocode).getBrand();
+  if (trackableBrand.equals(TrackableBrand.UNKNOWN)) {
     final String tbCode=ConnectorFactory.getTrackableFromURL(query);
     if (StringUtils.isNotBlank(tbCode)) {
-      trackableConnector=ConnectorFactory.getTrackableConnector(tbCode);
+      trackableBrand=ConnectorFactory.getTrackableConnector(tbCode).getBrand();
       geocode=tbCode;
     }
   }
-  if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) && geocode != null) {
+  if (trackableBrand.equals(TrackableBrand.UNKNOWN)) {
+    final TrackableTrackingCode tbTrackingCode=ConnectorFactory.getTrackableTrackingCodeFromURL(query);
+    if (!tbTrackingCode.isEmpty()) {
+      trackableBrand=tbTrackingCode.brand;
+      geocode=tbTrackingCode.trackingCode;
+    }
+  }
+  if (!trackableBrand.equals(TrackableBrand.UNKNOWN) && geocode != null) {
     final Intent trackablesIntent=new Intent(this,TrackableActivity.class);
     trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,geocode.toUpperCase(Locale.US));
-    trackablesIntent.putExtra(Intents.EXTRA_BRAND,trackableConnector.getBrand().getId());
+    trackablesIntent.putExtra(Intents.EXTRA_BRAND,trackableBrand.getId());
     startActivity(trackablesIntent);
     return true;
   }

@@ -18,13 +18,12 @@
   }
   if (geocode == null && uri != null) {
     geocode=ConnectorFactory.getTrackableFromURL(uri.toString());
-    trackingCode=ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
-    final String uriHost=uri.getHost().toLowerCase(Locale.US);
-    if (uriHost.endsWith("geokrety.org")) {
-      brand=TrackableBrand.GEOKRETY;
-      if (geocode == null && trackingCode != null) {
-        geocode=trackingCode;
-      }
+  }
+  if (geocode == null && uri != null) {
+    final TrackableTrackingCode tbTrackingCode=ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
+    if (!tbTrackingCode.isEmpty()) {
+      brand=tbTrackingCode.brand;
+      geocode=tbTrackingCode.trackingCode;
     }
   }
   if (geocode == null) {
