@@ -1,14 +1,13 @@
 {
   try {
     showProgress();
-    final SearchResult searchResult=DataStore.loadCachedInViewport(getViewport(),Settings.getCacheType());
     if (Settings.isGCConnectorActive() && tokens == null) {
       tokens=GCLogin.getInstance().getMapTokens();
       if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
         tokens=null;
       }
     }
-    searchResult.addSearchResult(ConnectorFactory.searchByViewport(getViewport().resize(1.2),tokens));
+    final SearchResult searchResult=ConnectorFactory.searchByViewport(getViewport().resize(1.2),tokens);
     final Set<Geocache> result=searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
     AbstractCachesOverlay.filter(result);
     final Set<String> filteredCodes=searchResult.getFilteredGeocodes();

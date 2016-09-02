@@ -29,6 +29,24 @@ targetGeocode=geocodeIntent;
 }
 return true;
 case R.id.menu_store_caches:
+if (!caches.isDownloading()) {
+final List<String> geocodes=caches.getVisibleGeocodes();
+if (geocodes.isEmpty()) {
+ActivityMixin.showToast(this,res.getString(R.string.warn_save_nothing));
+return true;
+}
+if (Settings.getChooseList()) {
+new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
+@Override public void call(final Integer selectedListId){
+storeCaches(geocodes,selectedListId);
+}
+}
+,true,StoredList.TEMPORARY_LIST.id);
+}
+ else {
+storeCaches(geocodes,StoredList.STANDARD_LIST_ID);
+}
+}
 return true;
 case R.id.menu_circle_mode:
 return true;

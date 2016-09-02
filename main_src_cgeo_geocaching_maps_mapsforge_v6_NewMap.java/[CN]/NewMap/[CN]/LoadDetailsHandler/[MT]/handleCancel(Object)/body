@@ -1,0 +1,9 @@
+{
+  final NewMap map=mapRef.get();
+  if (map == null) {
+    return;
+  }
+  if (map.loadDetailsThread != null) {
+    map.loadDetailsThread.stopIt();
+  }
+}

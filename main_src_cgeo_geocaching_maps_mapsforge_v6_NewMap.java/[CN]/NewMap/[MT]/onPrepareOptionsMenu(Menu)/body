@@ -21,6 +21,7 @@
     }
     itemMapLive.setVisible(coordsIntent == null);
     menu.findItem(R.id.menu_store_caches).setVisible(false);
+    menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
     menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
     menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
     menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());

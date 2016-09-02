@@ -1,0 +1,13 @@
+{
+  final List<String> result=new ArrayList<>();
+  if (this.baseOverlay != null) {
+    result.addAll(this.baseOverlay.getVisibleGeocodes());
+  }
+  if (this.storedOverlay != null) {
+    result.addAll(this.storedOverlay.getVisibleGeocodes());
+  }
+  if (this.liveOverlay != null) {
+    result.addAll(this.liveOverlay.getVisibleGeocodes());
+  }
+  return result;
+}
