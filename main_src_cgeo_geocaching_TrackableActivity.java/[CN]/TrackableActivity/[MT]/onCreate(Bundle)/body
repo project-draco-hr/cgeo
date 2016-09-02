@@ -15,7 +15,7 @@
   }
   if (geocode == null && guid == null && id == null && uri != null) {
     geocode=ConnectorFactory.getTrackableFromURL(uri.toString());
-    trackingCode=ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
+    final TrackableTrackingCode tbTrackingCode=ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
     final String uriHost=uri.getHost().toLowerCase(Locale.US);
     if (uriHost.endsWith("geocaching.com")) {
       geocode=uri.getQueryParameter("tracker");
@@ -43,10 +43,8 @@
       }
     }
  else     if (uriHost.endsWith("geokrety.org")) {
-      brand=TrackableBrand.GEOKRETY;
-      if (geocode == null && trackingCode != null) {
-        geocode=trackingCode;
-      }
+      brand=tbTrackingCode.brand;
+      geocode=trackingCode=tbTrackingCode.trackingCode;
     }
   }
   if (geocode == null && guid == null && id == null) {

@@ -1,12 +1,12 @@
 {
   if (url == null) {
-    return null;
+    return TrackableTrackingCode.EMPTY;
   }
   for (  final TrackableConnector connector : TRACKABLE_CONNECTORS) {
     final String trackableCode=connector.getTrackableTrackingCodeFromUrl(url);
     if (StringUtils.isNotBlank(trackableCode)) {
-      return trackableCode;
+      return new TrackableTrackingCode(trackableCode,connector.getBrand());
     }
   }
-  return null;
+  return TrackableTrackingCode.EMPTY;
 }
