@@ -1,0 +1,33 @@
+{
+  final NewMap map=mapRef.get();
+  if (map == null) {
+    return;
+  }
+  if (msg.what == UPDATE_PROGRESS) {
+    if (detailProgress < detailTotal) {
+      detailProgress++;
+    }
+    if (map.waitDialog != null) {
+      final int secondsElapsed=(int)((System.currentTimeMillis() - detailProgressTime) / 1000);
+      final int secondsRemaining;
+      if (detailProgress > 0) {
+        secondsRemaining=(detailTotal - detailProgress) * secondsElapsed / detailProgress;
+      }
+ else {
+        secondsRemaining=(detailTotal - detailProgress) * secondsElapsed;
+      }
+      map.waitDialog.setProgress(detailProgress);
+      if (secondsRemaining < 40) {
+        map.waitDialog.setMessage(map.res.getString(R.string.caches_downloading) + " " + map.res.getString(R.string.caches_eta_ltm));
+      }
+ else {
+        final int minsRemaining=secondsRemaining / 60;
+        map.waitDialog.setMessage(map.res.getString(R.string.caches_downloading) + " " + map.res.getQuantityString(R.plurals.caches_eta_mins,minsRemaining,minsRemaining));
+      }
+    }
+  }
+ else   if (msg.what == FINISHED_LOADING_DETAILS && map.waitDialog != null) {
+    map.waitDialog.dismiss();
+    map.waitDialog.setOnCancelListener(null);
+  }
+}

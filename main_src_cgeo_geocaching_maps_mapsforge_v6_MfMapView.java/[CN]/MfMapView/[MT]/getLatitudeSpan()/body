@@ -3,9 +3,14 @@
   final long mapSize=MercatorProjection.getMapSize(getModel().mapViewPosition.getZoomLevel(),getModel().displayModel.getTileSize());
   final Point center=MercatorProjection.getPixelAbsolute(getModel().mapViewPosition.getCenter(),mapSize);
   if (getHeight() > 0) {
-    final LatLong low=MercatorProjection.fromPixels(center.x,center.y - getHeight() / 2,mapSize);
-    final LatLong high=MercatorProjection.fromPixels(center.x,center.y + getHeight() / 2,mapSize);
-    span=Math.abs(high.latitude - low.latitude);
+    try {
+      final LatLong low=MercatorProjection.fromPixels(center.x,center.y - getHeight() / 2,mapSize);
+      final LatLong high=MercatorProjection.fromPixels(center.x,center.y + getHeight() / 2,mapSize);
+      span=Math.abs(high.latitude - low.latitude);
+    }
+ catch (    final IllegalArgumentException ex) {
+      Log.w("Exception when calculating latitude span",ex);
+    }
   }
   return span;
 }

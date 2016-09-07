@@ -1,0 +1,26 @@
+{
+  if (CollectionUtils.isEmpty(geocodes)) {
+    return;
+  }
+  for (  final String geocode : geocodes) {
+    try {
+      if (handler.isCancelled()) {
+        break;
+      }
+      if (!DataStore.isOffline(geocode,null)) {
+        final Set<Integer> lists=new HashSet<>();
+        lists.add(listId);
+        Geocache.storeCache(null,geocode,lists,false,handler);
+      }
+    }
+ catch (    final Exception e) {
+      Log.e("CGeoMap.LoadDetails.run",e);
+    }
+ finally {
+      handler.sendEmptyMessage(UPDATE_PROGRESS);
+    }
+  }
+  caches.invalidate(geocodes);
+  invalidateOptionsMenuCompatible();
+  handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
+}
