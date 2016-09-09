@@ -1,10 +1,10 @@
 {
-  final List<OriginFilter> filters=new ArrayList<>();
+  final List<IFilter> filters=new ArrayList<>();
   for (  final IConnector connector : ConnectorFactory.getConnectors()) {
     filters.add(new OriginFilter(connector));
   }
-  Collections.sort(filters,new Comparator<OriginFilter>(){
-    @Override public int compare(    final OriginFilter lhs,    final OriginFilter rhs){
+  Collections.sort(filters,new Comparator<IFilter>(){
+    @Override public int compare(    final IFilter lhs,    final IFilter rhs){
       return TextUtils.COLLATOR.compare(lhs.getName(),rhs.getName());
     }
   }

@@ -1,5 +1,5 @@
 {
-  final List<AbstractFilter> filters=new ArrayList<>(6);
+  final List<IFilter> filters=new ArrayList<>(6);
   filters.add(new StateFoundFilter());
   filters.add(new StateNotFoundFilter());
   filters.add(new StateNeverFoundFilter());
@@ -13,8 +13,8 @@
   filters.add(new RatingFilter());
   filters.add(new TrackablesFilter());
   filters.add(new MultiListingFilter());
-  Collections.sort(filters,new Comparator<AbstractFilter>(){
-    @Override public int compare(    final AbstractFilter filter1,    final AbstractFilter filter2){
+  Collections.sort(filters,new Comparator<IFilter>(){
+    @Override public int compare(    final IFilter filter1,    final IFilter filter2){
       return TextUtils.COLLATOR.compare(filter1.getName(),filter2.getName());
     }
   }
