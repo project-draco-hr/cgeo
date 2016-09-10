@@ -1,0 +1,17 @@
+{
+  final SearchResult search=DataStore.getBatchOfStoredCaches(null,CacheType.ALL,listId);
+  final Set<Geocache> caches=DataStore.loadCaches(search.getGeocodes(),LoadFlags.LOAD_CACHE_OR_DB);
+  for (  final Geocache geocache : caches) {
+    final HashSet<Integer> backupOfLists=new HashSet<>(geocache.getLists());
+    final String geocode=geocache.getGeocode();
+    backupOfLists.remove(geocode);
+    oldLists.put(geocode,backupOfLists);
+  }
+  final List<StoredList> lists=DataStore.getLists();
+  for (  final StoredList list : lists) {
+    if (list.id == listId) {
+      continue;
+    }
+    DataStore.removeFromList(caches,list.id);
+  }
+}

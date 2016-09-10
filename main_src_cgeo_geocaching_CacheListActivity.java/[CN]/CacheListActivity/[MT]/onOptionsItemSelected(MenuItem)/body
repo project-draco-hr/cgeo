@@ -76,6 +76,17 @@ if (cacheToShow()) {
 CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(cacheList),this,getFilteredSearch());
 }
 return true;
+case R.id.menu_make_list_unique:
+new MakeListUniqueCommand(this,listId){
+@Override protected void onFinished(){
+refreshSpinnerAdapter();
+}
+@Override protected void onFinishedUndo(){
+refreshSpinnerAdapter();
+}
+}
+.execute();
+return true;
 }
 return super.onOptionsItemSelected(item);
 }
