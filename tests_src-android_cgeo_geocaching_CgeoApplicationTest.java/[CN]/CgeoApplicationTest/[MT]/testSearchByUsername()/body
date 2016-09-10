@@ -1,7 +1,7 @@
 {
   withMockedFilters(new Runnable(){
     @Override public void run(){
-      final SearchResult search=GCParser.searchByUsername("blafoo",CacheType.WEBCAM,false,null);
+      final SearchResult search=GCParser.searchByUsername("blafoo",CacheType.WEBCAM);
       assertThat(search).isNotNull();
       assertThat(search.getTotalCountGC()).isEqualTo(5);
       assertThat(search.getGeocodes()).contains("GCP0A9");

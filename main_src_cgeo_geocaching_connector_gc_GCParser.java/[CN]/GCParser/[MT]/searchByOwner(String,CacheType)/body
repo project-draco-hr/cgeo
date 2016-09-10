@@ -1,0 +1,8 @@
+{
+  if (StringUtils.isBlank(userName)) {
+    Log.e("GCParser.searchByOwner: No user name given");
+    return null;
+  }
+  final Parameters params=new Parameters("u",userName);
+  return searchByAny(cacheType,isSearchForMyCaches(userName),params);
+}

@@ -1,8 +1,0 @@
-{
-  if (StringUtils.isBlank(keyword)) {
-    Log.e("GCParser.searchByKeyword: No keyword given");
-    return null;
-  }
-  final Parameters params=new Parameters("key",keyword);
-  return searchByAny(cacheType,false,showCaptcha,params,recaptchaReceiver);
-}

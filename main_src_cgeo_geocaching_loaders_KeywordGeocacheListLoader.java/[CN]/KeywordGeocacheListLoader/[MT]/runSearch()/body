@@ -1,7 +1,7 @@
 {
   return nonEmptyCombineActive(ConnectorFactory.getSearchByKeywordConnectors(),new Func1<ISearchByKeyword,SearchResult>(){
     @Override public SearchResult call(    final ISearchByKeyword connector){
-      return connector.searchByKeyword(keyword,KeywordGeocacheListLoader.this);
+      return connector.searchByKeyword(keyword);
     }
   }
 );

@@ -1,7 +1,7 @@
 {
   return nonEmptyCombineActive(ConnectorFactory.getSearchByFinderConnectors(),new Func1<ISearchByFinder,SearchResult>(){
     @Override public SearchResult call(    final ISearchByFinder connector){
-      return connector.searchByFinder(username,FinderGeocacheListLoader.this);
+      return connector.searchByFinder(username);
     }
   }
 );

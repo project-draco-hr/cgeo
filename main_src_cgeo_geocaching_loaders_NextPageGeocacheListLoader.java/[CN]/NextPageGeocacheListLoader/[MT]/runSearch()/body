@@ -1,7 +1,7 @@
 {
   return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByNextPageConnectors(),new Func1<ISearchByNextPage,SearchResult>(){
     @Override public SearchResult call(    final ISearchByNextPage connector){
-      return connector.searchByNextPage(search,Settings.isShowCaptcha(),NextPageGeocacheListLoader.this);
+      return connector.searchByNextPage(search);
     }
   }
 );
