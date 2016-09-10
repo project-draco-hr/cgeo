@@ -18,8 +18,6 @@
   if (supportsOwnCoordinates()) {
     list.add(feature(R.string.feature_own_coordinates));
   }
-  if (supportsWatchList()) {
-    list.add(feature(R.string.feature_watch_list));
-  }
+  addCapability(list,WatchListCapability.class,R.string.feature_watch_list);
   return list;
 }

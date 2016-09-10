@@ -1,3 +1,4 @@
 {
-  return getConnector().supportsWatchList();
+  final IConnector connector=getConnector();
+  return (connector instanceof WatchListCapability) && ((WatchListCapability)connector).canAddToWatchList(this);
 }

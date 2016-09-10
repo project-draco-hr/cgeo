@@ -1,5 +1,6 @@
 {
-  if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
+  final WatchListCapability connector=(WatchListCapability)ConnectorFactory.getConnector(cache);
+  if (connector.addToWatchlist(cache)) {
     handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
   }
  else {
