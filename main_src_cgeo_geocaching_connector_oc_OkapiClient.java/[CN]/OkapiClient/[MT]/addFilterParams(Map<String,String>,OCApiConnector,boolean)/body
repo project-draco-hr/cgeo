@@ -6,6 +6,9 @@
     valueMap.put("exclude_my_own","true");
     valueMap.put("found_status","notfound_only");
   }
+  if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+    valueMap.put("ignored_status","notignored_only");
+  }
   if (Settings.getCacheType() != CacheType.ALL) {
     valueMap.put("type",getFilterFromType());
   }
