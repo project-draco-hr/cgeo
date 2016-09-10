@@ -1,0 +1,6 @@
+{
+  final Parameters params=new Parameters("cache_code",cache.getGeocode());
+  params.add("ignored","true");
+  final ObjectNode data=request(connector,OkapiService.SERVICE_MARK_CACHE,params).data;
+  return data != null;
+}
