@@ -1,0 +1,7 @@
+{
+  final char zone=Character.toUpperCase(inZone);
+  if (zone < 'A' || zone > 'Z') {
+    throw new IllegalArgumentException("Invalid UTMPoint zone letter: " + zone);
+  }
+  return zone;
+}

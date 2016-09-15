@@ -7,7 +7,13 @@
       return new Geopoint(lat,lon);
     }
   }
- catch (  final NumberFormatException e) {
+ catch (  final NumberFormatException ignored) {
+  }
+  try {
+    final UTMPoint utmPoint=new UTMPoint(text);
+    return utmPoint.toLatLong();
+  }
+ catch (  final Exception ignored) {
   }
   final ResultWrapper latitudeWrapper=parseHelper(text,LatLon.LAT);
   final ResultWrapper longitudeWrapper=parseHelper(text.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength),LatLon.LON);

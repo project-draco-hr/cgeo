@@ -1,0 +1,17 @@
+{
+  final MatcherWrapper matcher=new MatcherWrapper(PATTERN_UTM,utmString);
+  try {
+    if (matcher.find()) {
+      this.zoneNumber=Integer.parseInt(matcher.group(2));
+      this.zoneLetter=checkZone(matcher.group(3).charAt(0));
+      this.easting=Double.parseDouble(matcher.group(4).replace(",","."));
+      this.northing=Double.parseDouble(matcher.group(5).replace(",","."));
+    }
+ else {
+      throw new ParseException("Unable to recognize UTM format in String '" + utmString + "'");
+    }
+  }
+ catch (  final NumberFormatException ignored) {
+    throw new ParseException("Error parsing UTM numbers in String '" + utmString + "'");
+  }
+}

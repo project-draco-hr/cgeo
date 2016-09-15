@@ -1,0 +1,19 @@
+{
+  if (zoneNumber < 0 || zoneNumber > 60) {
+    throw new IllegalArgumentException("ZoneNumber out of range [0-60]: " + zoneNumber);
+  }
+  final double x=easting - FALSE_EASTING;
+  final double y=zoneLetter < 'N' ? northing - FALSE_NORTHING : northing;
+  final double longOrigin=(zoneNumber - 1) * 6 - 180 + 3;
+  final double m=y / K_0;
+  final double mu=m / (WGS_84_RADIUS * (1 - WGS_84_ECC_SQUARED / 4 - 3 * ECC_SQUARED_2 / 64 - 5 * ECC_SQUARED_3 / 256));
+  final double phi1Rad=mu + (3 * E_1 / 2 - 27 * E_1 * E_1* E_1 / 32) * Math.sin(2 * mu) + (21 * E_1 * E_1 / 16 - 55 * E_1 * E_1* E_1* E_1 / 32) * Math.sin(4 * mu) + (151 * E_1 * E_1* E_1 / 96) * Math.sin(6 * mu);
+  final double n1=WGS_84_RADIUS / Math.sqrt(1 - WGS_84_ECC_SQUARED * Math.sin(phi1Rad) * Math.sin(phi1Rad));
+  final double t1=Math.tan(phi1Rad) * Math.tan(phi1Rad);
+  final double c1=ECC_PRIME_SQUARED * Math.cos(phi1Rad) * Math.cos(phi1Rad);
+  final double r1=WGS_84_RADIUS * (1 - WGS_84_ECC_SQUARED) / Math.pow(1 - WGS_84_ECC_SQUARED * Math.sin(phi1Rad) * Math.sin(phi1Rad),1.5);
+  final double d=x / (n1 * K_0);
+  final double latRad=phi1Rad - (n1 * Math.tan(phi1Rad) / r1) * (d * d / 2 - (5 + 3 * t1 + 10 * c1 - 4 * c1 * c1 - 9 * ECC_PRIME_SQUARED) * d * d* d* d / 24 + (61 + 90 * t1 + 298 * c1 + 45 * t1 * t1 - 252 * ECC_PRIME_SQUARED - 3 * c1 * c1) * d * d* d* d* d* d / 720);
+  final double lonRad=(d - (1 + 2 * t1 + c1) * d * d* d / 6 + (5 - 2 * c1 + 28 * t1 - 3 * c1 * c1 + 8 * ECC_PRIME_SQUARED + 24 * t1 * t1) * d * d* d* d* d / 120) / Math.cos(phi1Rad);
+  return new Geopoint(Math.toDegrees(latRad),longOrigin + Math.toDegrees(lonRad));
+}

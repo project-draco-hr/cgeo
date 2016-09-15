@@ -1,0 +1,23 @@
+{
+  if (lon == 180) {
+    return 60;
+  }
+  if (lat >= 56.0f && lat < 64.0f && lon >= 3.0f && lon < 12.0f) {
+    return 32;
+  }
+  if (lat >= 72.0f && lat < 84.0f) {
+    if (lon >= 0.0f && lon < 9.0f) {
+      return 31;
+    }
+ else     if (lon >= 9.0f && lon < 21.0f) {
+      return 33;
+    }
+ else     if (lon >= 21.0f && lon < 33.0f) {
+      return 35;
+    }
+ else     if (lon >= 33.0f && lon < 42.0f) {
+      return 37;
+    }
+  }
+  return (int)((lon + 180) / 6) + 1;
+}

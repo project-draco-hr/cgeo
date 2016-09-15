@@ -45,6 +45,10 @@ case LON_DECMINUTE_RAW:
 final Geopoint rgp=gp.roundedAt(60 * 1000);
 return String.format(Locale.getDefault(),"%c %03d %06.3f",rgp.getLonDir(),rgp.getLonDeg(),rgp.getLonMinRaw());
 }
+case UTM:
+{
+return UTMPoint.latLong2UTM(gp).toString();
+}
 }
 throw new IllegalStateException();
 }

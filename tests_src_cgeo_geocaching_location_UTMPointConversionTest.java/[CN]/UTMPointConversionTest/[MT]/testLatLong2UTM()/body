@@ -1,0 +1,12 @@
+{
+  final UTMPoint utm=UTMPoint.latLong2UTM(new Geopoint(this.lat,this.lon));
+  Assert.assertEquals(this.easting,utm.getEasting(),1.1d);
+  Assert.assertEquals(this.northing,utm.getNorthing(),1.1d);
+  Assert.assertEquals(this.zone,utm.getZoneNumber());
+  if ("ABY".contains(this.zoneLetter)) {
+    Assert.assertThat(String.valueOf(utm.getZoneLetter()),CoreMatchers.anyOf(CoreMatchers.is("Z"),CoreMatchers.is(this.zoneLetter)));
+  }
+ else {
+    Assert.assertEquals(this.zoneLetter,String.valueOf(utm.getZoneLetter()));
+  }
+}
