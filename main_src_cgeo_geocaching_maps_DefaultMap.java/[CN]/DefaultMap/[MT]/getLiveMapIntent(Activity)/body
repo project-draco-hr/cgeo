@@ -1,6 +1,3 @@
 {
-  if (Settings.useNewMapAsDefault()) {
-    return NewMap.getLiveMapIntent(fromActivity);
-  }
-  return CGeoMap.getLiveMapIntent(fromActivity);
+  return getLiveMapIntent(fromActivity,getDefaultMapClass());
 }

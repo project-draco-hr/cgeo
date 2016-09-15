@@ -1,0 +1,19 @@
+{
+  if (extras != null) {
+    mapMode=(MapMode)extras.get(Intents.EXTRA_MAP_MODE);
+    isLiveEnabled=extras.getBoolean(Intents.EXTRA_LIVE_ENABLED,false);
+    searchResult=extras.getParcelable(Intents.EXTRA_SEARCH);
+    geocode=extras.getString(Intents.EXTRA_GEOCODE);
+    coords=extras.getParcelable(Intents.EXTRA_COORDS);
+    waypointType=WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
+    mapState=extras.getParcelable(Intents.EXTRA_MAPSTATE);
+    title=extras.getString(Intents.EXTRA_TITLE);
+  }
+ else {
+    mapMode=MapMode.LIVE;
+    isLiveEnabled=Settings.isLiveMap();
+  }
+  if (StringUtils.isBlank(title)) {
+    title=context.getString(R.string.map_map);
+  }
+}

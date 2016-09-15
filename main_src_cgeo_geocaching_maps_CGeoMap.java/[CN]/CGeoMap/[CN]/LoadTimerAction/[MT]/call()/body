@@ -6,7 +6,7 @@
   try {
     final Viewport viewportNow=map.mapView.getViewport();
     final int zoomNow=map.mapView.getMapZoomLevel();
-    final boolean moved=map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || previousViewport == null || zoomNow != previousZoom || (mapMoved(previousViewport,viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
+    final boolean moved=map.markersInvalidated || (map.mapOptions.isLiveEnabled && !map.downloaded) || previousViewport == null || zoomNow != previousZoom || (mapMoved(previousViewport,viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
     if (moved || !viewportNow.equals(previousViewport)) {
       map.updateMapTitle();
     }

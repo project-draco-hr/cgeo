@@ -1,7 +1,4 @@
 {
   final CGeoMap map=mapRef.get();
-  if (map == null) {
-    return false;
-  }
-  return Math.abs(AngleUtils.difference(currentHeading,map.overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
+  return map != null && Math.abs(AngleUtils.difference(currentHeading,map.overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
 }

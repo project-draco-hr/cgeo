@@ -9,9 +9,9 @@
   this.mapView.getLayerManager().getLayers().add(this.historyLayer);
   Geopoint navTarget=lastNavTarget;
   if (navTarget == null) {
-    navTarget=this.coordsIntent;
-    if (navTarget == null && StringUtils.isNotEmpty(this.geocodeIntent)) {
-      final Viewport bounds=DataStore.getBounds(this.geocodeIntent);
+    navTarget=mapOptions.coords;
+    if (navTarget == null && StringUtils.isNotEmpty(mapOptions.geocode)) {
+      final Viewport bounds=DataStore.getBounds(mapOptions.geocode);
       if (bounds != null) {
         navTarget=bounds.center;
       }
@@ -21,19 +21,19 @@
   this.mapView.getLayerManager().getLayers().add(this.navigationLayer);
   final TapHandlerLayer tapHandlerLayer=new TapHandlerLayer(this.mapHandlers.getTapHandler());
   this.mapView.getLayerManager().getLayers().add(tapHandlerLayer);
-  if (this.searchIntent != null) {
-    this.caches=new CachesBundle(this.searchIntent,this.mapView,this.mapHandlers);
+  if (mapOptions.searchResult != null) {
+    this.caches=new CachesBundle(mapOptions.searchResult,this.mapView,this.mapHandlers);
   }
- else   if (StringUtils.isNotEmpty(this.geocodeIntent)) {
-    this.caches=new CachesBundle(this.geocodeIntent,this.mapView,this.mapHandlers);
+ else   if (StringUtils.isNotEmpty(mapOptions.geocode)) {
+    this.caches=new CachesBundle(mapOptions.geocode,this.mapView,this.mapHandlers);
   }
- else   if (this.coordsIntent != null) {
-    this.caches=new CachesBundle(coordsIntent,waypointTypeIntent,this.mapView,this.mapHandlers);
+ else   if (mapOptions.coords != null) {
+    this.caches=new CachesBundle(mapOptions.coords,mapOptions.waypointType,this.mapView,this.mapHandlers);
   }
  else {
     caches=new CachesBundle(this.mapView,this.mapHandlers);
   }
-  caches.handleLiveLayers(isLiveEnabled);
+  caches.handleLiveLayers(mapOptions.isLiveEnabled);
   this.positionLayer=new PositionLayer();
   this.mapView.getLayerManager().getLayers().add(positionLayer);
   this.distanceView=new DistanceView(navTarget,(TextView)findViewById(R.id.distance));

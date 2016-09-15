@@ -5,7 +5,7 @@
     final List<Waypoint> waypointsToDisplay=new ArrayList<>(waypoints);
     final List<CachesOverlayItemImpl> itemsToDisplay=new ArrayList<>();
     if (!cachesToDisplay.isEmpty()) {
-      if (mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
+      if (mapOptions.mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
         for (        final Waypoint waypoint : waypointsToDisplay) {
           if (waypoint == null || waypoint.getCoords() == null) {
             continue;
@@ -20,7 +20,7 @@
         itemsToDisplay.add(getCacheItem(cache));
       }
     }
-    if (coordsIntent == null) {
+    if (mapOptions.coords == null) {
       overlayCaches.updateItems(itemsToDisplay);
     }
     displayHandler.sendEmptyMessage(INVALIDATE_MAP);

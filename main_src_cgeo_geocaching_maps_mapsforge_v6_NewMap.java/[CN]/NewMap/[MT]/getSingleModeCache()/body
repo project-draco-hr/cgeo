@@ -1,6 +1,6 @@
 {
-  if (StringUtils.isNotBlank(geocodeIntent)) {
-    return DataStore.loadCache(geocodeIntent,LoadFlags.LOAD_CACHE_OR_DB);
+  if (StringUtils.isNotBlank(mapOptions.geocode)) {
+    return DataStore.loadCache(mapOptions.geocode,LoadFlags.LOAD_CACHE_OR_DB);
   }
   return null;
 }

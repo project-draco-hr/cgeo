@@ -1,0 +1,9 @@
+{
+  center=in.readParcelable(Geopoint.class.getClassLoader());
+  zoomLevel=in.readInt();
+  followMyLocation=in.readInt() > 0;
+  showCircles=in.readInt() > 0;
+  targetGeocode=in.readString();
+  lastNavTarget=in.readParcelable(Geopoint.class.getClassLoader());
+  liveEnabled=in.readInt() > 0;
+}

@@ -3,16 +3,16 @@
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     loadThreadRun=System.currentTimeMillis();
     final SearchResult searchResult;
-    if (mapMode == MapMode.LIVE) {
-      searchResult=isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(),Settings.getCacheType()));
+    if (mapOptions.mapMode == MapMode.LIVE) {
+      searchResult=mapOptions.isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(),Settings.getCacheType()));
     }
  else {
-      searchResult=searchIntent != null ? new SearchResult(searchIntent) : new SearchResult();
-      if (geocodeIntent != null) {
-        searchResult.addGeocode(geocodeIntent);
+      searchResult=mapOptions.searchResult != null ? new SearchResult(mapOptions.searchResult) : new SearchResult();
+      if (mapOptions.geocode != null) {
+        searchResult.addGeocode(mapOptions.geocode);
       }
     }
-    if (isLiveEnabled) {
+    if (mapOptions.isLiveEnabled) {
       searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport(),Settings.getCacheType()));
     }
     downloaded=true;
@@ -21,15 +21,15 @@
     caches.addAll(cachesFromSearchResult);
     final boolean excludeMine=Settings.isExcludeMyCaches();
     final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
-    if (mapMode == MapMode.LIVE) {
+    if (mapOptions.mapMode == MapMode.LIVE) {
 synchronized (caches) {
         filter(caches);
       }
     }
     countVisibleCaches();
-    if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
+    if (cachesCnt < Settings.getWayPointsThreshold() || mapOptions.geocode != null) {
       waypoints.clear();
-      if (isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
+      if (mapOptions.isLiveEnabled || mapOptions.mapMode == MapMode.LIVE || mapOptions.mapMode == MapMode.COORDS) {
         final CacheType type=Settings.getCacheType();
         final Set<Waypoint> waypointsInViewport=DataStore.loadWaypoints(mapView.getViewport(),excludeMine,excludeDisabled,type);
         waypoints.addAll(waypointsInViewport);
@@ -44,7 +44,7 @@ synchronized (caches) {
       waypoints.clear();
     }
     displayExecutor.execute(new DisplayRunnable(this));
-    if (isLiveEnabled) {
+    if (mapOptions.isLiveEnabled) {
       downloadExecutor.execute(new DownloadRunnable(this));
     }
     lastSearchResult=searchResult;

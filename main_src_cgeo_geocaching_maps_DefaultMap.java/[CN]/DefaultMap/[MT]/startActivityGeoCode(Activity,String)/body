@@ -1,8 +1,3 @@
 {
-  if (Settings.useNewMapAsDefault()) {
-    NewMap.startActivityGeoCode(fromActivity,geocode);
-  }
- else {
-    CGeoMap.startActivityGeoCode(fromActivity,geocode);
-  }
+  startActivityGeoCode(fromActivity,getDefaultMapClass(),geocode);
 }

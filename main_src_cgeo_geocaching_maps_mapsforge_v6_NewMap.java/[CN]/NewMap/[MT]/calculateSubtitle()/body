@@ -1,5 +1,5 @@
 {
-  if (!isLiveEnabled && mapMode == MapMode.SINGLE) {
+  if (!mapOptions.isLiveEnabled && mapOptions.mapMode == MapMode.SINGLE) {
     final Geocache cache=getSingleModeCache();
     if (cache != null) {
       return Formatter.formatMapSubtitle(cache);

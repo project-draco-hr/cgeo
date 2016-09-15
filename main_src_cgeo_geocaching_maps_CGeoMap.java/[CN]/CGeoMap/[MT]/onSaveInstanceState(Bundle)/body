@@ -1,6 +1,6 @@
 {
   outState.putInt(BUNDLE_MAP_SOURCE,currentSourceId);
-  outState.putIntArray(BUNDLE_MAP_STATE,currentMapState());
-  outState.putBoolean(BUNDLE_LIVE_ENABLED,isLiveEnabled);
+  outState.putParcelable(BUNDLE_MAP_STATE,currentMapState());
+  outState.putBoolean(BUNDLE_LIVE_ENABLED,mapOptions.isLiveEnabled);
   outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY,overlayPositionAndScale.getHistory());
 }

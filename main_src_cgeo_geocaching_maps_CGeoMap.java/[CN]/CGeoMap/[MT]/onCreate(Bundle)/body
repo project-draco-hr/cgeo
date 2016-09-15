@@ -5,28 +5,12 @@
   final MapProvider mapProvider=Settings.getMapProvider();
   mapItemFactory=mapProvider.getMapItemFactory();
   final Bundle extras=activity.getIntent().getExtras();
-  if (extras != null) {
-    mapMode=(MapMode)extras.get(Intents.EXTRA_MAP_MODE);
-    isLiveEnabled=extras.getBoolean(Intents.EXTRA_LIVE_ENABLED,false);
-    searchIntent=extras.getParcelable(Intents.EXTRA_SEARCH);
-    geocodeIntent=extras.getString(Intents.EXTRA_GEOCODE);
-    coordsIntent=extras.getParcelable(Intents.EXTRA_COORDS);
-    waypointTypeIntent=WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
-    mapStateIntent=extras.getIntArray(Intents.EXTRA_MAPSTATE);
-    mapTitle=extras.getString(Intents.EXTRA_TITLE);
-  }
- else {
-    mapMode=MapMode.LIVE;
-    isLiveEnabled=Settings.isLiveMap();
-  }
-  if (StringUtils.isBlank(mapTitle)) {
-    mapTitle=res.getString(R.string.map_map);
-  }
+  mapOptions=new MapOptions(activity,extras);
   ArrayList<Location> trailHistory=null;
   if (savedInstanceState != null) {
     currentSourceId=savedInstanceState.getInt(BUNDLE_MAP_SOURCE,Settings.getMapSource().getNumericalId());
-    mapStateIntent=savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
-    isLiveEnabled=savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED,false);
+    mapOptions.mapState=savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
+    mapOptions.isLiveEnabled=savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED,false);
     trailHistory=savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
   }
  else {
@@ -49,24 +33,24 @@
   mapView.setOnDragListener(new MapDragListener(this));
   mapView.clearOverlays();
   overlayCaches=mapView.createAddMapOverlay(mapView.getContext(),Compatibility.getDrawable(getResources(),R.drawable.marker));
-  overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay(coordsIntent,geocodeIntent);
+  overlayPositionAndScale=mapView.createAddPositionAndScaleOverlay(mapOptions.coords,mapOptions.geocode);
   if (trailHistory != null) {
     overlayPositionAndScale.setHistory(trailHistory);
   }
   mapView.repaintRequired(null);
-  setZoom(Settings.getMapZoom(mapMode));
+  setZoom(Settings.getMapZoom(mapOptions.mapMode));
   mapView.getMapController().setCenter(Settings.getMapCenter());
-  if (mapStateIntent == null) {
-    followMyLocation=followMyLocation && (mapMode == MapMode.LIVE);
+  if (mapOptions.mapState == null) {
+    followMyLocation=followMyLocation && (mapOptions.mapMode == MapMode.LIVE);
   }
  else {
-    followMyLocation=mapStateIntent[3] == 1;
-    if ((overlayCaches.getCircles() ? 1 : 0) != mapStateIntent[4]) {
+    followMyLocation=mapOptions.mapState.followsMyLocation();
+    if (overlayCaches.getCircles() != mapOptions.mapState.showsCircles()) {
       overlayCaches.switchCircles();
     }
   }
-  if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
-    centerMap(geocodeIntent,searchIntent,coordsIntent,mapStateIntent);
+  if (mapOptions.geocode != null || mapOptions.searchResult != null || mapOptions.coords != null || mapOptions.mapState != null) {
+    centerMap(mapOptions.geocode,mapOptions.searchResult,mapOptions.coords,mapOptions.mapState);
   }
   final CheckBox locSwitch=ButterKnife.findById(activity,R.id.my_position);
   if (locSwitch != null) {

@@ -1,5 +1,5 @@
 {
-  final Waypoint waypoint=new Waypoint("some place",waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT,false);
+  final Waypoint waypoint=new Waypoint("some place",mapOptions.waypointType != null ? mapOptions.waypointType : WaypointType.WAYPOINT,false);
   waypoint.setCoords(coords);
   final CachesOverlayItemImpl item=getWaypointItem(waypoint);
   overlayCaches.updateItems(item);

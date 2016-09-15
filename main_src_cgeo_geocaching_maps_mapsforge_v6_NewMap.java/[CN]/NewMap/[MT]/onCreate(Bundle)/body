@@ -1,31 +1,14 @@
 {
   super.onCreate(savedInstanceState);
   AndroidGraphicFactory.createInstance(this.getApplication());
-  final Bundle extras=getIntent().getExtras();
-  if (extras != null) {
-    mapMode=(MapMode)extras.get(Intents.EXTRA_MAP_MODE);
-    isLiveEnabled=extras.getBoolean(Intents.EXTRA_LIVE_ENABLED,false);
-    geocodeIntent=extras.getString(Intents.EXTRA_GEOCODE);
-    searchIntent=extras.getParcelable(Intents.EXTRA_SEARCH);
-    coordsIntent=extras.getParcelable(Intents.EXTRA_COORDS);
-    waypointTypeIntent=WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
-    mapTitle=extras.getString(Intents.EXTRA_TITLE);
-    mapStateIntent=extras.getParcelable(Intents.EXTRA_MAPSTATE);
-  }
- else {
-    mapMode=MapMode.LIVE;
-    isLiveEnabled=Settings.isLiveMap();
-  }
-  if (StringUtils.isBlank(mapTitle)) {
-    mapTitle=res.getString(R.string.map_map);
-  }
+  mapOptions=new MapOptions(this,getIntent().getExtras());
   if (savedInstanceState != null) {
-    mapStateIntent=savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
+    mapOptions.mapState=savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
     trailHistory=savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
-    followMyLocation=mapStateIntent.followsMyLocation();
+    followMyLocation=mapOptions.mapState.followsMyLocation();
   }
  else {
-    followMyLocation=followMyLocation && mapMode == MapMode.LIVE;
+    followMyLocation=followMyLocation && mapOptions.mapMode == MapMode.LIVE;
   }
   ActivityMixin.onCreate(this,true);
   ActivityMixin.setTheme(this);
@@ -40,28 +23,28 @@
   tileCache=AndroidUtil.createTileCache(this,"mapcache",mapView.getModel().displayModel.getTileSize(),1f,this.mapView.getModel().frameBufferModel.getOverdrawFactor());
   final DragHandler dragHandler=new DragHandler(this);
   mapView.setOnMapDragListener(dragHandler);
-  if (mapStateIntent != null) {
-    this.mapView.getModel().mapViewPosition.setCenter(mapStateIntent.getCenter());
-    this.mapView.getModel().mapViewPosition.setZoomLevel((byte)mapStateIntent.getZoomLevel());
-    this.targetGeocode=mapStateIntent.getTargetGeocode();
-    this.lastNavTarget=mapStateIntent.getLastNavTarget();
-    this.isLiveEnabled=mapStateIntent.isLiveEnabled();
+  if (mapOptions.mapState != null) {
+    this.mapView.getModel().mapViewPosition.setCenter(MapsforgeUtils.toLatLong(mapOptions.mapState.getCenter()));
+    this.mapView.getModel().mapViewPosition.setZoomLevel((byte)mapOptions.mapState.getZoomLevel());
+    this.targetGeocode=mapOptions.mapState.getTargetGeocode();
+    this.lastNavTarget=mapOptions.mapState.getLastNavTarget();
+    mapOptions.isLiveEnabled=mapOptions.mapState.isLiveEnabled();
   }
- else   if (searchIntent != null) {
-    final Viewport viewport=DataStore.getBounds(searchIntent.getGeocodes());
+ else   if (mapOptions.searchResult != null) {
+    final Viewport viewport=DataStore.getBounds(mapOptions.searchResult.getGeocodes());
     if (viewport != null) {
       mapView.zoomToViewport(viewport);
     }
   }
- else   if (StringUtils.isNotEmpty(geocodeIntent)) {
-    final Viewport viewport=DataStore.getBounds(geocodeIntent);
+ else   if (StringUtils.isNotEmpty(mapOptions.geocode)) {
+    final Viewport viewport=DataStore.getBounds(mapOptions.geocode);
     if (viewport != null) {
       mapView.zoomToViewport(viewport);
     }
-    targetGeocode=geocodeIntent;
+    targetGeocode=mapOptions.geocode;
   }
- else   if (coordsIntent != null) {
-    mapView.zoomToViewport(new Viewport(coordsIntent,0,0));
+ else   if (mapOptions.coords != null) {
+    mapView.zoomToViewport(new Viewport(mapOptions.coords,0,0));
   }
  else {
     mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(),0,0));

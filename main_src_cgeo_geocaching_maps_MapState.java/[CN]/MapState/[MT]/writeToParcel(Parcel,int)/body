@@ -1,0 +1,9 @@
+{
+  dest.writeParcelable(center,0);
+  dest.writeInt(zoomLevel);
+  dest.writeInt(followMyLocation ? 1 : 0);
+  dest.writeInt(showCircles ? 1 : 0);
+  dest.writeString(targetGeocode);
+  dest.writeParcelable(lastNavTarget,PARCELABLE_WRITE_RETURN_VALUE);
+  dest.writeInt(liveEnabled ? 1 : 0);
+}

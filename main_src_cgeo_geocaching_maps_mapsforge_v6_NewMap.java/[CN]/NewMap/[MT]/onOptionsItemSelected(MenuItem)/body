@@ -15,17 +15,17 @@ navigationLayer.requestRedraw();
 ActivityMixin.invalidateOptionsMenu(this);
 return true;
 case R.id.menu_map_live:
-isLiveEnabled=!isLiveEnabled;
-if (mapMode == MapMode.LIVE) {
-Settings.setLiveMap(isLiveEnabled);
+mapOptions.isLiveEnabled=!mapOptions.isLiveEnabled;
+if (mapOptions.mapMode == MapMode.LIVE) {
+Settings.setLiveMap(mapOptions.isLiveEnabled);
 }
-caches.handleLiveLayers(isLiveEnabled);
+caches.handleLiveLayers(mapOptions.isLiveEnabled);
 ActivityMixin.invalidateOptionsMenu(this);
-if (mapMode != MapMode.SINGLE) {
-mapTitle=StringUtils.EMPTY;
+if (mapOptions.mapMode != MapMode.SINGLE) {
+mapOptions.title=StringUtils.EMPTY;
 }
  else {
-targetGeocode=geocodeIntent;
+targetGeocode=mapOptions.geocode;
 }
 return true;
 case R.id.menu_store_caches:

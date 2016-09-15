@@ -1,5 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  startActivity(CGeoMap.getLiveMapIntent(this));
+  startActivity(DefaultMap.getLiveMapIntent(this,Settings.getMapProvider().getMapClass()));
   finish();
 }

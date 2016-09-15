@@ -13,13 +13,13 @@
   }
   try {
     final MenuItem itemMapLive=menu.findItem(R.id.menu_map_live);
-    if (isLiveEnabled) {
+    if (mapOptions.isLiveEnabled) {
       itemMapLive.setTitle(res.getString(R.string.map_live_disable));
     }
  else {
       itemMapLive.setTitle(res.getString(R.string.map_live_enable));
     }
-    itemMapLive.setVisible(coordsIntent == null);
+    itemMapLive.setVisible(mapOptions.coords == null);
     menu.findItem(R.id.menu_store_caches).setVisible(false);
     menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
     menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
@@ -29,7 +29,7 @@
     menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
     menu.findItem(R.id.menu_theme_mode).setVisible(true);
     menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
-    menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
+    menu.findItem(R.id.submenu_strategy).setVisible(mapOptions.isLiveEnabled);
 switch (Settings.getLiveMapStrategy()) {
 case FASTEST:
       menu.findItem(R.id.menu_strategy_fastest).setChecked(true);
@@ -44,8 +44,8 @@ default :
 menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
 break;
 }
-menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
-menu.findItem(R.id.menu_compass).setVisible(mapMode == MapMode.SINGLE);
+menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
+menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
 }
  catch (final RuntimeException e) {
 Log.e("NewMap.onPrepareOptionsMenu",e);

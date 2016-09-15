@@ -1,8 +1,3 @@
 {
-  if (Settings.useNewMapAsDefault()) {
-    NewMap.startActivitySearch(fromActivity,search,title);
-  }
- else {
-    CGeoMap.startActivitySearch(fromActivity,search,title);
-  }
+  startActivitySearch(fromActivity,getDefaultMapClass(),search,title);
 }

@@ -1,18 +1,5 @@
 {
-  final Intent mapIntent=new Intent(activity,Settings.getMapProvider().getMapClass());
-  mapIntent.putExtra(Intents.EXTRA_SEARCH,searchIntent);
-  mapIntent.putExtra(Intents.EXTRA_GEOCODE,geocodeIntent);
-  if (coordsIntent != null) {
-    mapIntent.putExtra(Intents.EXTRA_COORDS,coordsIntent);
-  }
-  mapIntent.putExtra(Intents.EXTRA_WPTTYPE,waypointTypeIntent != null ? waypointTypeIntent.id : null);
-  mapIntent.putExtra(Intents.EXTRA_TITLE,mapTitle);
-  mapIntent.putExtra(Intents.EXTRA_MAP_MODE,mapMode);
-  mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED,isLiveEnabled);
-  final int[] mapState=currentMapState();
-  if (mapState != null) {
-    mapIntent.putExtra(Intents.EXTRA_MAPSTATE,mapState);
-  }
+  mapOptions.mapState=currentMapState();
   activity.finish();
-  activity.startActivity(mapIntent);
+  mapOptions.startIntent(activity,Settings.getMapProvider().getMapClass());
 }

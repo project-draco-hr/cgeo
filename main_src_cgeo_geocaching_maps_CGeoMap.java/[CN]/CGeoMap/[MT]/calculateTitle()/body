@@ -1,12 +1,12 @@
 {
-  if (isLiveEnabled) {
+  if (mapOptions.isLiveEnabled) {
     return res.getString(R.string.map_live);
   }
-  if (mapMode == MapMode.SINGLE) {
+  if (mapOptions.mapMode == MapMode.SINGLE) {
     final Geocache cache=getSingleModeCache();
     if (cache != null) {
       return cache.getName();
     }
   }
-  return StringUtils.defaultIfEmpty(mapTitle,res.getString(R.string.map_map));
+  return StringUtils.defaultIfEmpty(mapOptions.title,res.getString(R.string.map_map));
 }
