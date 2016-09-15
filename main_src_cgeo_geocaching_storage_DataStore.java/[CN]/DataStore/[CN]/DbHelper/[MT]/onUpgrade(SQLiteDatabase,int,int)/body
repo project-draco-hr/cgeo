@@ -11,7 +11,7 @@
       Log.i("Database structure created.");
     }
     if (oldVersion > 0) {
-      db.execSQL("delete from " + dbTableCaches + " where reason = 0");
+      db.execSQL("DELETE FROM " + dbTableCaches + " WHERE reason = 0");
       if (oldVersion < 52) {
         try {
           db.execSQL(dbCreateSearchDestinationHistory);
@@ -23,7 +23,7 @@
       }
       if (oldVersion < 53) {
         try {
-          db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
+          db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN onWatchlist INTEGER");
           Log.i("Column onWatchlist added to " + dbTableCaches + ".");
         }
  catch (        final Exception e) {
@@ -40,7 +40,7 @@
       }
       if (oldVersion < 55) {
         try {
-          db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
+          db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN personal_note TEXT");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 55",e);
@@ -48,7 +48,7 @@
       }
       if (oldVersion < 56) {
         try {
-          db.execSQL("update " + dbTableAttributes + " set attribute = "+ "lower(attribute) where attribute like \"%_yes\" "+ "or attribute like \"%_no\"");
+          db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = "+ "LOWER(attribute) WHERE attribute LIKE \"%_yes\" "+ "OR  attribute LIKE \"%_no\"");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 56",e);
@@ -56,12 +56,12 @@
       }
       if (oldVersion < 57) {
         try {
-          db.execSQL("drop index in_a");
-          db.execSQL("drop index in_b");
-          db.execSQL("drop index in_c");
-          db.execSQL("drop index in_d");
-          db.execSQL("drop index in_e");
-          db.execSQL("drop index in_f");
+          db.execSQL("DROP INDEX in_a");
+          db.execSQL("DROP INDEX in_b");
+          db.execSQL("DROP INDEX in_c");
+          db.execSQL("DROP INDEX in_d");
+          db.execSQL("DROP INDEX in_e");
+          db.execSQL("DROP INDEX in_f");
           createIndices(db);
         }
  catch (        final Exception e) {
@@ -72,17 +72,17 @@
         try {
           db.beginTransaction();
           final String dbTableCachesTemp=dbTableCaches + "_temp";
-          final String dbCreateCachesTemp="" + "create table " + dbTableCachesTemp + " ("+ "_id integer primary key autoincrement, "+ "updated long not null, "+ "detailed integer not null default 0, "+ "detailedupdate long, "+ "visiteddate long, "+ "geocode text unique not null, "+ "reason integer not null default 0, "+ "cacheid text, "+ "guid text, "+ "type text, "+ "name text, "+ "own integer not null default 0, "+ "owner text, "+ "owner_real text, "+ "hidden long, "+ "hint text, "+ "size text, "+ "difficulty float, "+ "terrain float, "+ "location text, "+ "direction double, "+ "distance double, "+ "latitude double, "+ "longitude double, "+ "reliable_latlon integer, "+ "personal_note text, "+ "shortdesc text, "+ "description text, "+ "favourite_cnt integer, "+ "rating float, "+ "votes integer, "+ "myvote float, "+ "disabled integer not null default 0, "+ "archived integer not null default 0, "+ "members integer not null default 0, "+ "found integer not null default 0, "+ "favourite integer not null default 0, "+ "inventorycoins integer default 0, "+ "inventorytags integer default 0, "+ "inventoryunknown integer default 0, "+ "onWatchlist integer default 0 "+ "); ";
+          final String dbCreateCachesTemp="" + "CREATE TABLE " + dbTableCachesTemp + " ("+ "_id INTEGER PRIMARY KEY AUTOINCREMENT, "+ "updated LONG NOT NULL, "+ "detailed INTEGER NOT NULL DEFAULT 0, "+ "detailedupdate LONG, "+ "visiteddate LONG, "+ "geocode TEXT UNIQUE NOT NULL, "+ "reason INTEGER NOT NULL DEFAULT 0, "+ "cacheid TEXT, "+ "guid TEXT, "+ "type TEXT, "+ "name TEXT, "+ "own INTEGER NOT NULL DEFAULT 0, "+ "owner TEXT, "+ "owner_real TEXT, "+ "hidden LONG, "+ "hint TEXT, "+ "size TEXT, "+ "difficulty FLOAT, "+ "terrain FLOAT, "+ "location TEXT, "+ "direction DOUBLE, "+ "distance DOUBLE, "+ "latitude DOUBLE, "+ "longitude DOUBLE, "+ "reliable_latlon INTEGER, "+ "personal_note TEXT, "+ "shortdesc TEXT, "+ "description TEXT, "+ "favourite_cnt INTEGER, "+ "rating FLOAT, "+ "votes INTEGER, "+ "myvote FLOAT, "+ "disabled INTEGER NOT NULL DEFAULT 0, "+ "archived INTEGER NOT NULL DEFAULT 0, "+ "members INTEGER NOT NULL DEFAULT 0, "+ "found INTEGER NOT NULL DEFAULT 0, "+ "favourite INTEGER NOT NULL DEFAULT 0, "+ "inventorycoins INTEGER DEFAULT 0, "+ "inventorytags INTEGER DEFAULT 0, "+ "inventoryunknown INTEGER DEFAULT 0, "+ "onWatchlist INTEGER DEFAULT 0 "+ "); ";
           db.execSQL(dbCreateCachesTemp);
-          db.execSQL("insert into " + dbTableCachesTemp + " select _id,updated,detailed,detailedupdate,visiteddate,geocode,reason,cacheid,guid,type,name,own,owner,owner_real,"+ "hidden,hint,size,difficulty,terrain,location,direction,distance,latitude,longitude, 0,"+ "personal_note,shortdesc,description,favourite_cnt,rating,votes,myvote,disabled,archived,members,found,favourite,inventorycoins,"+ "inventorytags,inventoryunknown,onWatchlist from "+ dbTableCaches);
-          db.execSQL("drop table " + dbTableCaches);
-          db.execSQL("alter table " + dbTableCachesTemp + " rename to "+ dbTableCaches);
+          db.execSQL("INSERT INTO " + dbTableCachesTemp + " SELECT _id,updated,detailed,detailedupdate,visiteddate,geocode,reason,cacheid,guid,type,name,own,owner,owner_real,"+ "hidden,hint,size,difficulty,terrain,location,direction,distance,latitude,longitude, 0,"+ "personal_note,shortdesc,description,favourite_cnt,rating,votes,myvote,disabled,archived,members,found,favourite,inventorycoins,"+ "inventorytags,inventoryunknown,onWatchlist FROM "+ dbTableCaches);
+          db.execSQL("DROP TABLE " + dbTableCaches);
+          db.execSQL("ALTER TABLE " + dbTableCachesTemp + " RENAME TO "+ dbTableCaches);
           final String dbTableWaypointsTemp=dbTableWaypoints + "_temp";
-          final String dbCreateWaypointsTemp="" + "create table " + dbTableWaypointsTemp + " ("+ "_id integer primary key autoincrement, "+ "geocode text not null, "+ "updated long not null, "+ "type text not null default 'waypoint', "+ "prefix text, "+ "lookup text, "+ "name text, "+ "latitude double, "+ "longitude double, "+ "note text "+ "); ";
+          final String dbCreateWaypointsTemp="" + "CREATE TABLE " + dbTableWaypointsTemp + " ("+ "_id INTEGER PRIMARY KEY AUTOINCREMENT, "+ "geocode TEXT NOT NULL, "+ "updated LONG NOT NULL, "+ "type TEXT NOT NULL DEFAULT 'waypoint', "+ "prefix TEXT, "+ "lookup TEXT, "+ "name TEXT, "+ "latitude DOUBLE, "+ "longitude DOUBLE, "+ "note TEXT "+ "); ";
           db.execSQL(dbCreateWaypointsTemp);
-          db.execSQL("insert into " + dbTableWaypointsTemp + " select _id, geocode, updated, type, prefix, lookup, name, latitude, longitude, note from "+ dbTableWaypoints);
-          db.execSQL("drop table " + dbTableWaypoints);
-          db.execSQL("alter table " + dbTableWaypointsTemp + " rename to "+ dbTableWaypoints);
+          db.execSQL("INSERT INTO " + dbTableWaypointsTemp + " SELECT _id, geocode, updated, type, prefix, lookup, name, latitude, longitude, note FROM "+ dbTableWaypoints);
+          db.execSQL("DROP TABLE " + dbTableWaypoints);
+          db.execSQL("ALTER TABLE " + dbTableWaypointsTemp + " RENAME TO "+ dbTableWaypoints);
           createIndices(db);
           db.setTransactionSuccessful();
           Log.i("Removed latitude_string and longitude_string columns");
@@ -113,8 +113,8 @@
       }
       if (oldVersion < 61) {
         try {
-          db.execSQL("alter table " + dbTableLogs + " add column friend integer");
-          db.execSQL("alter table " + dbTableCaches + " add column coordsChanged integer default 0");
+          db.execSQL("ALTER TABLE " + dbTableLogs + " ADD COLUMN friend INTEGER");
+          db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN coordsChanged INTEGER DEFAULT 0");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 61",e);
@@ -122,9 +122,9 @@
       }
       if (oldVersion < 62) {
         try {
-          db.execSQL("alter table " + dbTableCaches + " add column finalDefined integer default 0");
-          db.execSQL("alter table " + dbTableWaypoints + " add column own integer default 0");
-          db.execSQL("update " + dbTableWaypoints + " set own = 1 where type = 'own'");
+          db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN finalDefined INTEGER DEFAULT 0");
+          db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN own INTEGER DEFAULT 0");
+          db.execSQL("UPDATE " + dbTableWaypoints + " SET own = 1 WHERE type = 'own'");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 62",e);
@@ -140,7 +140,7 @@
       }
       if (oldVersion < 64) {
         try {
-          db.execSQL("update " + dbTableCaches + " set reason=1 where reason=2");
+          db.execSQL("UPDATE " + dbTableCaches + " SET reason=1 WHERE reason=2");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 64",e);
@@ -148,7 +148,7 @@
       }
       if (oldVersion < 65) {
         try {
-          db.execSQL("update " + dbTableWaypoints + " set type='original', own=0 where name='Original Coordinates'");
+          db.execSQL("UPDATE " + dbTableWaypoints + " SET type='original', own=0 WHERE name='Original Coordinates'");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 65:",e);
@@ -156,7 +156,7 @@
       }
       if (oldVersion < 66) {
         try {
-          db.execSQL("alter table " + dbTableWaypoints + " add column visited integer default 0");
+          db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN visited INTEGER DEFAULT 0");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 66",e);
@@ -164,8 +164,8 @@
       }
       if (oldVersion < 67) {
         try {
-          db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_yes' where geocode like 'OC%' and attribute = 'climbing_yes'");
-          db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_no' where geocode like 'OC%' and attribute = 'climbing_no'");
+          db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = 'easy_climbing_yes' WHERE geocode LIKE 'OC%' AND attribute = 'climbing_yes'");
+          db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = 'easy_climbing_no' WHERE geocode LIKE 'OC%' AND attribute = 'climbing_no'");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 67",e);
@@ -173,7 +173,7 @@
       }
       if (oldVersion < 68) {
         try {
-          db.execSQL("alter table " + dbTableCaches + " add column logPasswordRequired integer default 0");
+          db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN logPasswordRequired INTEGER DEFAULT 0");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 68",e);
@@ -181,7 +181,7 @@
       }
       if (oldVersion < 69) {
         try {
-          db.execSQL("alter table " + dbTableLogImages + " add column description text");
+          db.execSQL("ALTER TABLE " + dbTableLogImages + " ADD COLUMN description TEXT");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 69",e);
@@ -189,7 +189,7 @@
       }
       if (oldVersion < 70) {
         try {
-          db.execSQL("alter table " + dbTableCaches + " add column watchlistCount integer default -1");
+          db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN watchlistCount INTEGER DEFAULT -1");
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 70",e);
@@ -199,7 +199,7 @@
         try {
           db.execSQL(dbCreateCachesLists);
           createIndices(db);
-          db.execSQL("insert into " + dbTableCachesLists + " select reason, geocode from "+ dbTableCaches);
+          db.execSQL("INSERT INTO " + dbTableCachesLists + " SELECT reason, geocode FROM "+ dbTableCaches);
         }
  catch (        final Exception e) {
           Log.e("Failed to upgrade to ver. 71",e);

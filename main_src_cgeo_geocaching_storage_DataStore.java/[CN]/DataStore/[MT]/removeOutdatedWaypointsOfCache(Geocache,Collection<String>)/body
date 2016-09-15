@@ -1,4 +1,4 @@
 {
   final String idList=StringUtils.join(remainingWaypointIds,',');
-  database.delete(dbTableWaypoints,"geocode = ? AND _id NOT in (" + idList + ")",new String[]{cache.getGeocode()});
+  database.delete(dbTableWaypoints,"geocode = ? AND _id NOT IN (" + idList + ")",new String[]{cache.getGeocode()});
 }

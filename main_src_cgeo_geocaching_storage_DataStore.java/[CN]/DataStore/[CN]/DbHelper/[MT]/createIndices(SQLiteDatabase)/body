@@ -1,19 +1,19 @@
 {
-  db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
-  db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
-  db.execSQL("create index if not exists in_caches_lat on " + dbTableCaches + " (latitude)");
-  db.execSQL("create index if not exists in_caches_lon on " + dbTableCaches + " (longitude)");
-  db.execSQL("create index if not exists in_caches_reason on " + dbTableCaches + " (reason)");
-  db.execSQL("create index if not exists in_caches_detailed on " + dbTableCaches + " (detailed)");
-  db.execSQL("create index if not exists in_caches_type on " + dbTableCaches + " (type)");
-  db.execSQL("create index if not exists in_caches_visit_detail on " + dbTableCaches + " (visiteddate, detailedupdate)");
-  db.execSQL("create index if not exists in_attr_geo on " + dbTableAttributes + " (geocode)");
-  db.execSQL("create index if not exists in_wpts_geo on " + dbTableWaypoints + " (geocode)");
-  db.execSQL("create index if not exists in_wpts_geo_type on " + dbTableWaypoints + " (geocode, type)");
-  db.execSQL("create index if not exists in_spoil_geo on " + dbTableSpoilers + " (geocode)");
-  db.execSQL("create index if not exists in_logs_geo on " + dbTableLogs + " (geocode)");
-  db.execSQL("create index if not exists in_logcount_geo on " + dbTableLogCount + " (geocode)");
-  db.execSQL("create index if not exists in_logsoff_geo on " + dbTableLogsOffline + " (geocode)");
-  db.execSQL("create index if not exists in_trck_geo on " + dbTableTrackables + " (geocode)");
-  db.execSQL("create index if not exists in_lists_geo on " + dbTableCachesLists + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_geo ON " + dbTableCaches + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_guid ON " + dbTableCaches + " (guid)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_lat ON " + dbTableCaches + " (latitude)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_lon ON " + dbTableCaches + " (longitude)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_reason ON " + dbTableCaches + " (reason)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_detailed ON " + dbTableCaches + " (detailed)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_type ON " + dbTableCaches + " (type)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_visit_detail ON " + dbTableCaches + " (visiteddate, detailedupdate)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_attr_geo ON " + dbTableAttributes + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_wpts_geo ON " + dbTableWaypoints + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_wpts_geo_type ON " + dbTableWaypoints + " (geocode, type)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_spoil_geo ON " + dbTableSpoilers + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_logs_geo ON " + dbTableLogs + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_logcount_geo ON " + dbTableLogCount + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoff_geo ON " + dbTableLogsOffline + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_trck_geo ON " + dbTableTrackables + " (geocode)");
+  db.execSQL("CREATE INDEX IF NOT EXISTS in_lists_geo ON " + dbTableCachesLists + " (geocode)");
 }

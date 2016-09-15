@@ -26,7 +26,7 @@
       database.delete(dbTableLogsOffline,baseWhereClause,null);
       String wayPointClause=baseWhereClause;
       if (!removeFlags.contains(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING)) {
-        wayPointClause+=" and type <> 'own'";
+        wayPointClause+=" AND type <> 'own'";
       }
       database.delete(dbTableWaypoints,wayPointClause,null);
       database.delete(dbTableTrackables,baseWhereClause,null);

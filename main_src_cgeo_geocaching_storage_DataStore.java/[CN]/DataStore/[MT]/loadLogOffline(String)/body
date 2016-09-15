@@ -3,7 +3,7 @@
     return null;
   }
   init();
-  final Cursor cursor=database.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = ?",new String[]{geocode},null,null,"_id desc","1");
+  final Cursor cursor=database.query(dbTableLogsOffline,new String[]{"_id","type","log","date"},"geocode = ?",new String[]{geocode},null,null,"_id DESC","1");
   LogEntry log=null;
   if (cursor.moveToFirst()) {
     log=new LogEntry.Builder().setDate(cursor.getLong(3)).setLogType(LogType.getById(cursor.getInt(1))).setLog(cursor.getString(2)).setId(cursor.getInt(0)).build();

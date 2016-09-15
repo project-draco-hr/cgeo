@@ -4,7 +4,7 @@
     return logs;
   }
   init();
-  final Cursor cursor=database.rawQuery("SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"+ " FROM "+ dbTableLogs+ " LEFT OUTER JOIN "+ dbTableLogImages+ " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc",new String[]{geocode});
+  final Cursor cursor=database.rawQuery("SELECT cg_logs._id AS cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"+ " FROM "+ dbTableLogs+ " LEFT OUTER JOIN "+ dbTableLogImages+ " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC",new String[]{geocode});
   LogEntry.Builder log=null;
   while (cursor.moveToNext() && logs.size() < 100) {
     if (log == null || log.getId() != cursor.getInt(0)) {

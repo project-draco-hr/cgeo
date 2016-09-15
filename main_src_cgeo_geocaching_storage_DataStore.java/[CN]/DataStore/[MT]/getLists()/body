@@ -4,7 +4,7 @@
   final List<StoredList> lists=new ArrayList<>();
   lists.add(new StoredList(StoredList.STANDARD_LIST_ID,res.getString(R.string.list_inbox),(int)PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
   try {
-    final String query="SELECT l._id as _id, l.title as title, COUNT(c.geocode) as count" + " FROM " + dbTableLists + " l LEFT OUTER JOIN "+ dbTableCachesLists+ " c"+ " ON l._id + "+ customListIdOffset+ " = c.list_id"+ " GROUP BY l._id"+ " ORDER BY l.title COLLATE NOCASE ASC";
+    final String query="SELECT l._id AS _id, l.title AS title, COUNT(c.geocode) AS count" + " FROM " + dbTableLists + " l LEFT OUTER JOIN "+ dbTableCachesLists+ " c"+ " ON l._id + "+ customListIdOffset+ " = c.list_id"+ " GROUP BY l._id"+ " ORDER BY l.title COLLATE NOCASE ASC";
     lists.addAll(getListsFromCursor(database.rawQuery(query,null)));
   }
  catch (  final Exception e) {

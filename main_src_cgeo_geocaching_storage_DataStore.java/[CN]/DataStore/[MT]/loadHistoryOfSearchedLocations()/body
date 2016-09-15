@@ -1,5 +1,5 @@
 {
-  return queryToColl(dbTableSearchDestinationHistory,new String[]{"_id","date","latitude","longitude"},"latitude IS NOT NULL AND longitude IS NOT NULL",null,"date desc","100",new LinkedList<Destination>(),new Func1<Cursor,Destination>(){
+  return queryToColl(dbTableSearchDestinationHistory,new String[]{"_id","date","latitude","longitude"},"latitude IS NOT NULL AND longitude IS NOT NULL",null,"date DESC","100",new LinkedList<Destination>(),new Func1<Cursor,Destination>(){
     @Override public Destination call(    final Cursor cursor){
       return new Destination(cursor.getLong(0),cursor.getLong(1),getCoords(cursor,2,3));
     }

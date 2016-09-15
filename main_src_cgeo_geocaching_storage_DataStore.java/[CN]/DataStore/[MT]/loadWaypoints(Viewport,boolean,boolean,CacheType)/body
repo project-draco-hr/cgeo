@@ -1,20 +1,20 @@
 {
   final StringBuilder where=buildCoordinateWhere(dbTableWaypoints,viewport);
   if (excludeMine) {
-    where.append(" and ").append(dbTableCaches).append(".found == 0");
+    where.append(" AND ").append(dbTableCaches).append(".found == 0");
   }
   if (excludeDisabled) {
-    where.append(" and ").append(dbTableCaches).append(".disabled == 0");
-    where.append(" and ").append(dbTableCaches).append(".archived == 0");
+    where.append(" AND ").append(dbTableCaches).append(".disabled == 0");
+    where.append(" AND ").append(dbTableCaches).append(".archived == 0");
   }
   if (type != CacheType.ALL) {
-    where.append(" and ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
+    where.append(" AND ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
   }
   final StringBuilder query=new StringBuilder("SELECT ");
   for (int i=0; i < WAYPOINT_COLUMNS.length; i++) {
     query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
   }
-  query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where).append(" LIMIT " + (Settings.SHOW_WP_THRESHOLD_MAX * 2));
+  query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append(".geocode == ").append(dbTableCaches).append(".geocode AND ").append(where).append(" LIMIT " + (Settings.SHOW_WP_THRESHOLD_MAX * 2));
   return cursorToColl(database.rawQuery(query.toString(),null),new HashSet<Waypoint>(),new Func1<Cursor,Waypoint>(){
     @Override public Waypoint call(    final Cursor cursor){
       return createWaypointFromDatabaseContent(cursor);

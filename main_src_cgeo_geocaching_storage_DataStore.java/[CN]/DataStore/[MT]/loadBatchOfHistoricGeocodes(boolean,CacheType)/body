@@ -1,11 +1,11 @@
 {
   final StringBuilder selection=new StringBuilder("visiteddate > 0");
   if (detailedOnly) {
-    selection.append(" and detailed = 1");
+    selection.append(" AND detailed = 1");
   }
   String[] selectionArgs=null;
   if (cacheType != CacheType.ALL) {
-    selection.append(" and type = ?");
+    selection.append(" AND type = ?");
     selectionArgs=new String[]{String.valueOf(cacheType.id)};
   }
   try {
