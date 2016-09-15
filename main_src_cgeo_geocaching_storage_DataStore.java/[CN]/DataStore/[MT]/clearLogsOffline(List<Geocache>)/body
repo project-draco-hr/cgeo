@@ -6,5 +6,7 @@
   for (  final Geocache cache : caches) {
     cache.setLogOffline(false);
   }
-  database.execSQL(String.format("DELETE FROM %s where %s",dbTableLogsOffline,whereGeocodeIn(Geocache.getGeocodes(caches))));
+  final String geocodes=whereGeocodeIn(Geocache.getGeocodes(caches)).toString();
+  database.execSQL(String.format("DELETE FROM %s WHERE %s",dbTableLogsOffline,geocodes));
+  database.execSQL(String.format("UPDATE %s SET visiteddate = 0 WHERE %s",dbTableCaches,geocodes));
 }

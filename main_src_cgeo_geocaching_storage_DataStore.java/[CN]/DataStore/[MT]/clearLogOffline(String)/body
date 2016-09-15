@@ -3,5 +3,7 @@
     return;
   }
   init();
-  database.delete(dbTableLogsOffline,"geocode = ?",new String[]{geocode});
+  final String[] geocodeWhereArgs={geocode};
+  database.delete(dbTableLogsOffline,"geocode = ?",geocodeWhereArgs);
+  database.execSQL(String.format("UPDATE %s SET visiteddate = 0 WHERE geocode = ?",dbTableCaches),geocodeWhereArgs);
 }
