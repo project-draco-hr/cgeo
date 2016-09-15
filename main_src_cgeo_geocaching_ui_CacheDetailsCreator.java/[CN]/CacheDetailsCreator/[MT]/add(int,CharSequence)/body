@@ -2,8 +2,8 @@
   final RelativeLayout layout=(RelativeLayout)activity.getLayoutInflater().inflate(R.layout.cache_information_item,null,false);
   final TextView nameView=ButterKnife.findById(layout,R.id.name);
   nameView.setText(res.getString(nameId));
-  lastValueView=ButterKnife.findById(layout,R.id.value);
-  lastValueView.setText(value);
+  final TextView valueView=ButterKnife.findById(layout,R.id.value);
+  valueView.setText(value);
   parentView.addView(layout);
-  return ImmutablePair.of(layout,lastValueView);
+  return ImmutablePair.of(layout,valueView);
 }

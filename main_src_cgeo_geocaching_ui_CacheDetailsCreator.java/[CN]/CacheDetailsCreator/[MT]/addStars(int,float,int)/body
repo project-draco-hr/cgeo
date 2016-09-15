@@ -1,9 +1,9 @@
 {
   final RelativeLayout layout=(RelativeLayout)activity.getLayoutInflater().inflate(R.layout.cache_information_item,null,false);
   final TextView nameView=ButterKnife.findById(layout,R.id.name);
-  lastValueView=ButterKnife.findById(layout,R.id.value);
+  final TextView valueView=ButterKnife.findById(layout,R.id.value);
   nameView.setText(activity.getResources().getString(nameId));
-  lastValueView.setText(String.format(Locale.getDefault(),"%.1f",value) + ' ' + activity.getResources().getString(R.string.cache_rating_of)+ ' '+ String.format(Locale.getDefault(),"%d",max));
+  valueView.setText(String.format(Locale.getDefault(),"%.1f",value) + ' ' + activity.getResources().getString(R.string.cache_rating_of)+ ' '+ String.format(Locale.getDefault(),"%d",max));
   final RatingBar layoutStars=ButterKnife.findById(layout,R.id.stars);
   layoutStars.setNumStars(max);
   layoutStars.setRating(value);
