@@ -12,8 +12,8 @@
   final double c=ECC_PRIME_SQUARED * cosLatRad * cosLatRad;
   final double a=cosLatRad * (longRad - longOriginRad);
   final double m=WGS_84_RADIUS * ((1 - WGS_84_ECC_SQUARED / 4 - 3 * ECC_SQUARED_2 / 64 - 5 * ECC_SQUARED_3 / 256) * latRad - (3 * WGS_84_ECC_SQUARED / 8 + 3 * ECC_SQUARED_2 / 32 + 45 * ECC_SQUARED_3 / 1024) * Math.sin(2 * latRad) + (15 * ECC_SQUARED_2 / 256 + 45 * ECC_SQUARED_3 / 1024) * Math.sin(4 * latRad) - (35 * ECC_SQUARED_3 / 3072) * Math.sin(6 * latRad));
-  final double utmEasting=(K_0 * n * (a + (1 - t + c) * a * a* a / 6.0d + (5 - 18 * t + t * t + 72 * c - 58 * ECC_PRIME_SQUARED) * a * a* a* a* a / 120.0d) + FALSE_EASTING);
-  final double utmNorthing=(K_0 * (m + n * Math.tan(latRad) * (a * a / 2 + (5 - t + 9 * c + 4 * c * c) * a * a* a* a / 24.0d + (61 - 58 * t + t * t + 600 * c - 330 * ECC_PRIME_SQUARED) * a * a* a* a* a* a / 720.0d)));
+  final double utmEasting=K_0 * n * (a + (1 - t + c) * a * a* a / 6.0d + (5 - 18 * t + t * t + 72 * c - 58 * ECC_PRIME_SQUARED) * a * a* a* a* a / 120.0d) + FALSE_EASTING;
+  final double utmNorthing=K_0 * (m + n * Math.tan(latRad) * (a * a / 2 + (5 - t + 9 * c + 4 * c * c) * a * a* a* a / 24.0d + (61 - 58 * t + t * t + 600 * c - 330 * ECC_PRIME_SQUARED) * a * a* a* a* a* a / 720.0d));
   final char zoneLetter=getLetterDesignator(geopoint.getLatitude());
   return new UTMPoint(zoneNumber,zoneLetter,utmEasting,geopoint.getLatitude() < 0f ? utmNorthing + FALSE_NORTHING : utmNorthing);
 }
