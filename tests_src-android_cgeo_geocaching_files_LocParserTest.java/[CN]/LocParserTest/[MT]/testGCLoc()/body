@@ -1,13 +1,13 @@
 {
-  final List<Geocache> caches=readLoc(R.raw.gc1bkp3_loc);
+  final List<Geocache> caches=readLoc(gc1bkp3_loc);
   assertThat(caches).hasSize(1);
   final Geocache cache=caches.get(0);
   assertThat(cache).isNotNull();
   assertThat(cache.getGeocode()).isEqualTo("GC1BKP3");
   assertThat(cache.getName()).isEqualTo("Die Schatzinsel / treasure island");
   assertThat(cache.getOwnerUserId()).isEqualTo("Die unbesiegbaren Geo - Geparden");
-  assertEquals(new Geopoint(48.859683,9.1874),cache.getCoords());
+  assertThat(cache.getCoords()).isEqualTo(new Geopoint(48.859683,9.1874));
   assertThat(cache.getDifficulty()).isEqualTo(1.0f);
   assertThat(cache.getTerrain()).isEqualTo(5.0f);
-  assertThat(cache.getSize()).isEqualTo(CacheSize.MICRO);
+  assertThat(cache.getSize()).isEqualTo(MICRO);
 }

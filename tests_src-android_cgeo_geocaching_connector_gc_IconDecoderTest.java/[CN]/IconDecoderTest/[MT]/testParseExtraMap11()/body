@@ -1,12 +1,12 @@
 {
-  final Bitmap bitmap=getBitmap(R.raw.map11);
-  assertEquals(CacheType.EVENT,parseMapPNG(bitmap,132,16,11).getType());
-  assertEquals(CacheType.MULTI,parseMapPNG(bitmap,104,48,11).getType());
-  assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,128,124,11).getType());
-  assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,228,8,11).getType());
-  assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,160,156,11).getType());
-  assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,208,176,11).getType());
-  assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,252,24,11).getType());
-  assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,216,96,11).getType());
-  assertEquals(CacheType.EARTH,parseMapPNG(bitmap,24,212,11).getType());
+  final Bitmap bitmap=getBitmap(map11);
+  assertThat(parseMapPNG(bitmap,132,16,11).getType()).isEqualTo(EVENT);
+  assertThat(parseMapPNG(bitmap,104,48,11).getType()).isEqualTo(MULTI);
+  assertThat(parseMapPNG(bitmap,128,124,11).getType()).isEqualTo(TRADITIONAL);
+  assertThat(parseMapPNG(bitmap,228,8,11).getType()).isEqualTo(TRADITIONAL);
+  assertThat(parseMapPNG(bitmap,160,156,11).getType()).isEqualTo(TRADITIONAL);
+  assertThat(parseMapPNG(bitmap,208,176,11).getType()).isEqualTo(MYSTERY);
+  assertThat(parseMapPNG(bitmap,252,24,11).getType()).isEqualTo(MYSTERY);
+  assertThat(parseMapPNG(bitmap,216,96,11).getType()).isEqualTo(MYSTERY);
+  assertThat(parseMapPNG(bitmap,24,212,11).getType()).isEqualTo(EARTH);
 }

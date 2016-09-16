@@ -1,5 +1,5 @@
 {
   final Geopoint gp=new UTMPoint(this.zone,this.zoneLetter.charAt(0),this.easting,this.northing).toLatLong();
-  Assert.assertEquals(this.lat,gp.getLatitude(),1.1d);
-  Assert.assertEquals(this.lon,gp.getLongitude(),1.1d);
+  assertThat(gp.getLatitude()).isEqualTo(this.lat,offset(1.1d));
+  assertThat(gp.getLongitude()).isEqualTo(this.lon,offset(1.1d));
 }

@@ -1,10 +1,10 @@
 {
-  assertThat(Viewport.containing(Collections.singleton((ICoordinates)null))).isNull();
+  assertThat(containing(singleton((ICoordinates)null))).isNull();
   final Set<Geopoint> points=new HashSet<>();
   points.add(vpRef.bottomLeft);
-  assertEquals(new Viewport(vpRef.bottomLeft,vpRef.bottomLeft),Viewport.containing(points));
+  assertThat(containing(points)).isEqualTo(new Viewport(vpRef.bottomLeft,vpRef.bottomLeft));
   points.add(vpRef.topRight);
-  assertThat(Viewport.containing(points)).isEqualTo(vpRef);
+  assertThat(containing(points)).isEqualTo(vpRef);
   points.add(vpRef.center);
-  assertThat(Viewport.containing(points)).isEqualTo(vpRef);
+  assertThat(containing(points)).isEqualTo(vpRef);
 }

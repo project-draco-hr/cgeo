@@ -1,4 +1,4 @@
 {
   final Geopoint goal=new Geopoint(refLatitude,refLongitude);
-  assertEquals(goal,GeopointParser.parse("N 49?? 56.031 | E 8?? 38.564"),(float)1e-6);
+  assertGeopointEquals(goal,GeopointParser.parse("N 49?? 56.031 | E 8?? 38.564"),(float)1e-6);
 }

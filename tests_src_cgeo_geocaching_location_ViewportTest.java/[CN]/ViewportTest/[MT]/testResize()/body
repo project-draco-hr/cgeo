@@ -1,5 +1,5 @@
 {
   assertThat(vpRef.resize(1.0)).isEqualTo(vpRef);
-  assertEquals(new Viewport(new Geopoint(-3.0,-5.0),new Geopoint(5.0,7.0)),vpRef.resize(2.0));
-  assertEquals(new Viewport(new Geopoint(0.0,-0.5),new Geopoint(2.0,2.5)),vpRef.resize(0.5));
+  assertThat(vpRef.resize(2.0)).isEqualTo(new Viewport(new Geopoint(-3.0,-5.0),new Geopoint(5.0,7.0)));
+  assertThat(vpRef.resize(0.5)).isEqualTo(new Viewport(new Geopoint(0.0,-0.5),new Geopoint(2.0,2.5)));
 }

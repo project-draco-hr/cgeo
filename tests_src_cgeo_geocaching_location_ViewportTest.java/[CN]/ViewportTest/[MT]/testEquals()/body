@@ -1,5 +1,5 @@
 {
   assertThat(vpRef).isEqualTo(vpRef);
-  assertEquals(vpRef,new Viewport(vpRef.bottomLeft,vpRef.topRight));
+  assertThat(new Viewport(vpRef.bottomLeft,vpRef.topRight)).isEqualTo(vpRef);
   assertThat(vpRef.equals(new Viewport(new Geopoint(0.0,0.0),1.0,1.0))).isFalse();
 }

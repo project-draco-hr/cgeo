@@ -1,8 +1,8 @@
 {
-  final Bitmap bitmap=getBitmap(R.raw.tile14);
-  Log.d("Bitmap=" + bitmap.getWidth() + "x"+ bitmap.getHeight());
-  assertEquals(CacheType.TRADITIONAL,parseMapPNG(bitmap,88,124,14).getType());
-  assertEquals(CacheType.MYSTERY,parseMapPNG(bitmap,228,104,14).getType());
-  assertEquals(CacheType.MULTI,parseMapPNG(bitmap,52,92,14).getType());
+  final Bitmap bitmap=getBitmap(tile14);
+  d("Bitmap=" + bitmap.getWidth() + "x"+ bitmap.getHeight());
+  assertThat(parseMapPNG(bitmap,88,124,14).getType()).isEqualTo(TRADITIONAL);
+  assertThat(parseMapPNG(bitmap,228,104,14).getType()).isEqualTo(MYSTERY);
+  assertThat(parseMapPNG(bitmap,52,92,14).getType()).isEqualTo(MULTI);
   assertThat(parseMapPNG(bitmap,108,112,14).isFound()).isTrue();
 }

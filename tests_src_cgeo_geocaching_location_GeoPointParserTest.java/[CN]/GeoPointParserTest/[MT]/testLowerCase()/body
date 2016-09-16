@@ -1,3 +1,3 @@
 {
-  assertEquals(refLongitude,GeopointParser.parseLongitude("e 8?? 38.564"),1e-8);
+  assertThat(parseLongitude("e 8?? 38.564")).isEqualTo(refLongitude,offset(1e-8));
 }

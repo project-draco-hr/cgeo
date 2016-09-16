@@ -1,7 +1,7 @@
 {
   final UTMPoint utm=new UTMPoint("54s e 293848 n 3915114");
-  Assert.assertEquals(54,utm.getZoneNumber());
-  Assert.assertEquals('S',utm.getZoneLetter());
-  Assert.assertEquals(293848,utm.getEasting(),1.1d);
-  Assert.assertEquals(3915114,utm.getNorthing(),1.1d);
+  assertThat(utm.getZoneNumber()).isEqualTo(54);
+  assertThat(utm.getZoneLetter()).isEqualTo('S');
+  assertThat(utm.getEasting()).isEqualTo(293848,offset(1.1d));
+  assertThat(utm.getNorthing()).isEqualTo(3915114,offset(1.1d));
 }
