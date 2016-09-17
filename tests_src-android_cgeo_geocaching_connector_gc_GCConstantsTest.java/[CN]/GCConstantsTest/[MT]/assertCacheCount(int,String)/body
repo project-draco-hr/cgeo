@@ -1,6 +1,6 @@
 {
   try {
-    assertThat(parseInt(getMatch(html,PATTERN_CACHES_FOUND,true,"0").replaceAll("[,.]",""))).isEqualTo(count);
+    assertThat(Integer.parseInt(TextUtils.getMatch(html,GCConstants.PATTERN_CACHES_FOUND,true,"0").replaceAll("[,.]",""))).isEqualTo(count);
   }
  catch (  final NumberFormatException e) {
     fail();
