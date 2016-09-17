@@ -4,7 +4,7 @@
   for (  final Geocache geocache : caches) {
     final HashSet<Integer> backupOfLists=new HashSet<>(geocache.getLists());
     final String geocode=geocache.getGeocode();
-    backupOfLists.remove(geocode);
+    backupOfLists.remove(listId);
     oldLists.put(geocode,backupOfLists);
   }
   final List<StoredList> lists=DataStore.getLists();
