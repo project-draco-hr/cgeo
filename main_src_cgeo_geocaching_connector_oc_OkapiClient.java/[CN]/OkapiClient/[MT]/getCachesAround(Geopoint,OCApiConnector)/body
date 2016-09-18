@@ -3,7 +3,7 @@
   final Parameters params=new Parameters("search_method",METHOD_SEARCH_NEAREST);
   final Map<String,String> valueMap=new LinkedHashMap<>();
   valueMap.put("center",centerString);
-  valueMap.put("limit","20");
+  valueMap.put("limit",MAX_CACHES);
   valueMap.put("radius","200");
   return requestCaches(connector,params,valueMap,false);
 }

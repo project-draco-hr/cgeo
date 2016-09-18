@@ -5,12 +5,11 @@
     final String centerString=GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW,center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW,center);
     params=new Parameters("search_method",METHOD_SEARCH_NEAREST);
     valueMap.put("center",centerString);
-    valueMap.put("limit","20");
   }
  else {
     params=new Parameters("search_method",METHOD_SEARCH_ALL);
-    valueMap.put("limit","20");
   }
+  valueMap.put("limit",MAX_CACHES);
   valueMap.put("name","*" + namePart + "*");
   return requestCaches(connector,params,valueMap,false);
 }
