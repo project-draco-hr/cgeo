@@ -38,7 +38,7 @@
     if (spannable == null) {
       spannable=Spannable.Factory.getInstance().newSpannable(cache.getName());
     }
-    spannable.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)),0,spannable.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(),R.color.archived_cache_color)),0,spannable.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
   if (spannable != null) {
     holder.text.setText(spannable,TextView.BufferType.SPANNABLE);
