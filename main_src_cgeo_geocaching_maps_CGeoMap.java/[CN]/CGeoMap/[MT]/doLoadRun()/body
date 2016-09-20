@@ -3,7 +3,8 @@
     showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
     loadThreadRun=System.currentTimeMillis();
     final SearchResult searchResult;
-    if (mapOptions.mapMode == MapMode.LIVE) {
+    final MapMode mapMode=mapOptions.mapMode;
+    if (mapMode == MapMode.LIVE) {
       searchResult=mapOptions.isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(),Settings.getCacheType()));
     }
  else {
@@ -21,15 +22,15 @@
     caches.addAll(cachesFromSearchResult);
     final boolean excludeMine=Settings.isExcludeMyCaches();
     final boolean excludeDisabled=Settings.isExcludeDisabledCaches();
-    if (mapOptions.mapMode == MapMode.LIVE) {
+    if (mapMode == MapMode.LIVE) {
 synchronized (caches) {
         filter(caches);
       }
     }
     countVisibleCaches();
+    waypoints.clear();
     if (cachesCnt < Settings.getWayPointsThreshold() || mapOptions.geocode != null) {
-      waypoints.clear();
-      if (mapOptions.isLiveEnabled || mapOptions.mapMode == MapMode.LIVE || mapOptions.mapMode == MapMode.COORDS) {
+      if (mapOptions.isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
         final CacheType type=Settings.getCacheType();
         final Set<Waypoint> waypointsInViewport=DataStore.loadWaypoints(mapView.getViewport(),excludeMine,excludeDisabled,type);
         waypoints.addAll(waypointsInViewport);
@@ -39,9 +40,6 @@ synchronized (caches) {
           waypoints.addAll(c.getWaypoints());
         }
       }
-    }
- else {
-      waypoints.clear();
     }
     displayExecutor.execute(new DisplayRunnable(this));
     if (mapOptions.isLiveEnabled) {

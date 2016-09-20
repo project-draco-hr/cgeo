@@ -1,12 +1,10 @@
 {
   final int what=msg.what;
-  if (what == HIDE_PROGRESS) {
-    if (--counter == 0) {
-      showProgress(false);
-    }
-  }
- else   if (what == SHOW_PROGRESS) {
+  if (what == SHOW_PROGRESS) {
     showProgress(true);
     counter++;
+  }
+ else   if (what == HIDE_PROGRESS && --counter == 0) {
+    showProgress(false);
   }
 }

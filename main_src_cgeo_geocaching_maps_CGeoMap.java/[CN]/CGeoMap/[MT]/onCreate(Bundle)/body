@@ -40,14 +40,14 @@
   mapView.repaintRequired(null);
   setZoom(Settings.getMapZoom(mapOptions.mapMode));
   mapView.getMapController().setCenter(Settings.getMapCenter());
-  if (mapOptions.mapState == null) {
-    followMyLocation=followMyLocation && (mapOptions.mapMode == MapMode.LIVE);
-  }
- else {
+  if (mapOptions.mapState != null) {
     followMyLocation=mapOptions.mapState.followsMyLocation();
     if (overlayCaches.getCircles() != mapOptions.mapState.showsCircles()) {
       overlayCaches.switchCircles();
     }
+  }
+ else   if (mapOptions.mapMode != MapMode.LIVE) {
+    followMyLocation=false;
   }
   if (mapOptions.geocode != null || mapOptions.searchResult != null || mapOptions.coords != null || mapOptions.mapState != null) {
     centerMap(mapOptions.geocode,mapOptions.searchResult,mapOptions.coords,mapOptions.mapState);
