@@ -1,11 +1,10 @@
 {
-  final int count=geocodes.size();
-  final LoadDetailsHandler loadDetailsHandler=new LoadDetailsHandler(count,this);
-  waitDialog=new ProgressDialog(this);
+  final LoadDetailsHandler loadDetailsHandler=new LoadDetailsHandler();
+  waitDialog=new ProgressDialog(activity);
   waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
   waitDialog.setCancelable(true);
   waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
-  waitDialog.setMax(count);
+  waitDialog.setMax(detailTotal);
   waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
     @Override public void onCancel(    final DialogInterface arg0){
       try {
@@ -19,7 +18,7 @@
     }
   }
 );
-  final float etaTime=count * 7.0f / 60.0f;
+  final float etaTime=detailTotal * 7.0f / 60.0f;
   final int roundedEta=Math.round(etaTime);
   if (etaTime < 0.4) {
     waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
@@ -27,8 +26,8 @@
  else {
     waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins,roundedEta,roundedEta));
   }
-  loadDetailsHandler.setStart();
   waitDialog.show();
-  loadDetailsThread=new LoadDetails(loadDetailsHandler,geocodes,listId);
+  detailProgressTime=System.currentTimeMillis();
+  loadDetailsThread=new LoadDetails(loadDetailsHandler,geocodes,listIds);
   loadDetailsThread.start();
 }

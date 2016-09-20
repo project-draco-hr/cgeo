@@ -36,15 +36,15 @@ ActivityMixin.showToast(this,res.getString(R.string.warn_save_nothing));
 return true;
 }
 if (Settings.getChooseList()) {
-new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,new Action1<Integer>(){
-@Override public void call(final Integer selectedListId){
-storeCaches(geocodes,selectedListId);
+new StoredList.UserInterface(this).promptForMultiListSelection(R.string.list_title,new Action1<Set<Integer>>(){
+@Override public void call(final Set<Integer> selectedListIds){
+storeCaches(geocodes,selectedListIds);
 }
 }
-,true,StoredList.TEMPORARY_LIST.id);
+,true,Collections.singleton(StoredList.TEMPORARY_LIST.id));
 }
  else {
-storeCaches(geocodes,StoredList.STANDARD_LIST_ID);
+storeCaches(geocodes,Collections.singleton(StoredList.STANDARD_LIST_ID));
 }
 }
 return true;
