@@ -1,0 +1,11 @@
+{
+  final LogEntry log=DataStore.loadLogOffline(geocode);
+  if (log != null) {
+    typeSelected=log.getType();
+    date.setTime(new Date(log.date));
+    text=log.log;
+  }
+ else   if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
+    insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(),new LogContext(cache,null)),false);
+  }
+}

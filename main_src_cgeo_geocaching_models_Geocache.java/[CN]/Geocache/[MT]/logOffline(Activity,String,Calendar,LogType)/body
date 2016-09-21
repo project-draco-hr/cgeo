@@ -8,7 +8,7 @@
     ActivityMixin.showToast(fromActivity,res.getString(R.string.info_log_saved));
     DataStore.saveVisitDate(geocode);
     logOffline=Boolean.TRUE;
-    offlineLogs=DataStore.loadLogOffline(geocode);
+    offlineLog=DataStore.loadLogOffline(geocode);
     notifyChange();
   }
  else {

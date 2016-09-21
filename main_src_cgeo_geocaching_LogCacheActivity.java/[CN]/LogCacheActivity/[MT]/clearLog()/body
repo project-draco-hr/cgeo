@@ -1,11 +1,3 @@
 {
-  cache.clearOfflineLog();
-  setDefaultValues();
-  setType(typeSelected);
-  setDate(date);
-  final EditText logView=ButterKnife.findById(this,R.id.log);
-  logView.setText(StringUtils.EMPTY);
-  final EditText logPasswordView=ButterKnife.findById(this,R.id.log_password);
-  logPasswordView.setText(StringUtils.EMPTY);
-  showToast(res.getString(R.string.info_log_cleared));
+  new ClearLogCommand(this).execute();
 }
