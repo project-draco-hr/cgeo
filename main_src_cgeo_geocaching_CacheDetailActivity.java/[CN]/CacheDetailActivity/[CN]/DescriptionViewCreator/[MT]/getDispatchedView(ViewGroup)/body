@@ -22,7 +22,8 @@
   }
 );
   final Button personalNoteUpload=ButterKnife.findById(view,R.id.upload_personalnote);
-  if (ConnectorFactory.getConnector(cache).supportsPersonalNote()) {
+  final PersonalNoteCapability connector=ConnectorFactory.getConnectorAs(cache,PersonalNoteCapability.class);
+  if (connector != null && connector.canAddPersonalNote(cache)) {
     personalNoteUpload.setVisibility(View.VISIBLE);
     personalNoteUpload.setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      final View v){

@@ -12,9 +12,7 @@
   if (supportsLogImages()) {
     list.add(feature(R.string.feature_log_images));
   }
-  if (supportsPersonalNote()) {
-    list.add(feature(R.string.feature_personal_notes));
-  }
+  addCapability(list,PersonalNoteCapability.class,R.string.feature_personal_notes);
   if (supportsOwnCoordinates()) {
     list.add(feature(R.string.feature_own_coordinates));
   }

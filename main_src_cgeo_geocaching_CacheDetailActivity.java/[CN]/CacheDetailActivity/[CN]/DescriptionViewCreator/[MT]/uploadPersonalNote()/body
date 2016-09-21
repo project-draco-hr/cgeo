@@ -4,8 +4,8 @@
   progress.show(CacheDetailActivity.this,res.getString(R.string.cache_personal_note_uploading),res.getString(R.string.cache_personal_note_uploading),true,cancelMessage);
   myHandler.unsubscribeIfCancelled(AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0(){
     @Override public void call(){
-      final IConnector con=ConnectorFactory.getConnector(cache);
-      final boolean success=con.uploadPersonalNote(cache);
+      final PersonalNoteCapability connector=(PersonalNoteCapability)ConnectorFactory.getConnector(cache);
+      final boolean success=connector.uploadPersonalNote(cache);
       final Message msg=Message.obtain();
       final Bundle bundle=new Bundle();
       bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,CgeoApplication.getInstance().getString(success ? R.string.cache_personal_note_upload_done : R.string.cache_personal_note_upload_error));
