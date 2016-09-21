@@ -9,7 +9,7 @@
  else {
     params=new Parameters("search_method",METHOD_SEARCH_ALL);
   }
-  valueMap.put("limit",MAX_CACHES);
+  valueMap.put("limit",getCacheLimit());
   valueMap.put("name","*" + namePart + "*");
   return requestCaches(connector,params,valueMap,false);
 }
