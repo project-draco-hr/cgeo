@@ -11,14 +11,19 @@
     line.setStrokeWidth(width);
     line.setColor(0x80EB391E);
   }
-  final Point pos=new Point();
-  final Point dest=new Point();
   Geopoint[] routingPoints=null;
-  try {
-    routingPoints=BRouter.getTrack(currentCoords,destinationCoords);
+  if (lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005) {
+    routingPoints=lastRoutingPoints;
   }
- catch (  SAXException e) {
-    e.printStackTrace();
+ else {
+    try {
+      routingPoints=BRouter.getTrack(currentCoords,destinationCoords);
+      lastRoutingPoints=routingPoints;
+      lastDirectionUpdatePoint=currentCoords;
+    }
+ catch (    SAXException e) {
+      e.printStackTrace();
+    }
   }
   if (routingPoints != null && routingPoints.length > 0) {
     Point lastPoint=null;
@@ -36,6 +41,8 @@
     }
   }
  else {
+    final Point pos=new Point();
+    final Point dest=new Point();
     projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords),pos);
     projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords),dest);
     canvas.drawLine(pos.x,pos.y,dest.x,dest.y,line);
