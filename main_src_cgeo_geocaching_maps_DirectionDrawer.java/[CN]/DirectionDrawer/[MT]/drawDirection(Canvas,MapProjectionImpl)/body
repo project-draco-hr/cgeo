@@ -12,17 +12,19 @@
     line.setColor(0x80EB391E);
   }
   Geopoint[] routingPoints=null;
-  if (lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005) {
-    routingPoints=lastRoutingPoints;
-  }
- else {
-    try {
-      routingPoints=BRouter.getTrack(currentCoords,destinationCoords);
-      lastRoutingPoints=routingPoints;
-      lastDirectionUpdatePoint=currentCoords;
+  if (currentCoords.distanceTo(destinationCoords) <= 1.5) {
+    if (lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005) {
+      routingPoints=lastRoutingPoints;
     }
- catch (    SAXException e) {
-      e.printStackTrace();
+ else {
+      try {
+        routingPoints=BRouter.getTrack(currentCoords,destinationCoords);
+        lastRoutingPoints=routingPoints;
+        lastDirectionUpdatePoint=currentCoords;
+      }
+ catch (      SAXException e) {
+        e.printStackTrace();
+      }
     }
   }
   if (routingPoints != null && routingPoints.length > 0) {
