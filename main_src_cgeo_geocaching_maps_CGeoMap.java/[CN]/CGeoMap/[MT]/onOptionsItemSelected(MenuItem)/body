@@ -112,21 +112,21 @@ return true;
 case R.id.menu_routing_walk:
 {
 item.setChecked(true);
-Settings.setRoutingMode("foot");
+Settings.setRoutingMode(RoutingMode.WALK);
 mapView.repaintRequired(overlayPositionAndScale);
 return true;
 }
 case R.id.menu_routing_bike:
 {
 item.setChecked(true);
-Settings.setRoutingMode("bicycle");
+Settings.setRoutingMode(RoutingMode.BIKE);
 mapView.repaintRequired(overlayPositionAndScale);
 return true;
 }
 case R.id.menu_routing_car:
 {
 item.setChecked(true);
-Settings.setRoutingMode("motorcar");
+Settings.setRoutingMode(RoutingMode.CAR);
 mapView.repaintRequired(overlayPositionAndScale);
 return true;
 }

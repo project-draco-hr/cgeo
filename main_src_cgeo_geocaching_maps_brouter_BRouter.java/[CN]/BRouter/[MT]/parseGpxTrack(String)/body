@@ -1,0 +1,24 @@
+{
+  try {
+    final LinkedList<Geopoint> result=new LinkedList<>();
+    Xml.parse(gpx,new DefaultHandler(){
+      @Override public void startElement(      final String uri,      final String localName,      final String qName,      final Attributes atts) throws SAXException {
+        if (qName.equalsIgnoreCase("trkpt")) {
+          final String lat=atts.getValue("lat");
+          if (lat != null) {
+            final String lon=atts.getValue("lon");
+            if (lon != null) {
+              result.add(new Geopoint(lat,lon));
+            }
+          }
+        }
+      }
+    }
+);
+    return result.toArray(new Geopoint[result.size()]);
+  }
+ catch (  final SAXException e) {
+    Log.e("cannot parse brouter output",e);
+  }
+  return null;
+}
