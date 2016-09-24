@@ -3,10 +3,9 @@
     return;
   }
   brouter=new BRouterServiceConnection();
-  Intent intent=new Intent();
+  final Intent intent=new Intent();
   intent.setClassName("btools.routingapp","btools.routingapp.BRouterService");
-  boolean hasBRouter=ctx.bindService(intent,brouter,Context.BIND_AUTO_CREATE);
-  if (!hasBRouter) {
+  if (!ctx.bindService(intent,brouter,Context.BIND_AUTO_CREATE)) {
     brouter=null;
   }
 }
