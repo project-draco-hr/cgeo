@@ -2,7 +2,7 @@
   if (brouter == null) {
     return null;
   }
-  if (start.distanceTo(dest) > 1.5) {
+  if (start.distanceTo(dest) > MAX_ROUTING_DISTANCE_KILOMETERS) {
     return null;
   }
   if (lastDirectionUpdatePoint != null && start.distanceTo(lastDirectionUpdatePoint) < 0.005) {
