@@ -2,13 +2,14 @@
   if (brouter == null) {
     return null;
   }
-  if (start.distanceTo(dest) > MAX_ROUTING_DISTANCE_KILOMETERS) {
+  if (start.distanceTo(destination) > MAX_ROUTING_DISTANCE_KILOMETERS) {
     return null;
   }
-  if (lastDirectionUpdatePoint != null && start.distanceTo(lastDirectionUpdatePoint) < 0.005) {
+  if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < 0.005) {
     return lastRoutingPoints;
   }
-  lastRoutingPoints=calculateRouting(start,dest);
+  lastDestination=destination;
+  lastRoutingPoints=calculateRouting(start,destination);
   lastDirectionUpdatePoint=start;
   return lastRoutingPoints;
 }
