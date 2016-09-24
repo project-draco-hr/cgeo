@@ -12,7 +12,7 @@
     linePaint.setStyle(Paint.Style.STROKE);
     linePaint.setColor(0x80EB391E);
   }
-  final Geopoint[] routingPoints=BRouter.getTrack(currentCoords,destinationCoords);
+  final Geopoint[] routingPoints=Routing.getTrack(currentCoords,destinationCoords);
   if (routingPoints != null && routingPoints.length > 1) {
     final Point pixelPoint=new Point();
     final Path path=new Path();

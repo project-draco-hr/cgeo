@@ -34,7 +34,7 @@ break;
 default :
 menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
 }
-menu.findItem(R.id.submenu_routing).setVisible(BRouter.isAvailable());
+menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
 switch (Settings.getRoutingMode()) {
 case WALK:
 menu.findItem(R.id.menu_routing_walk).setChecked(true);
