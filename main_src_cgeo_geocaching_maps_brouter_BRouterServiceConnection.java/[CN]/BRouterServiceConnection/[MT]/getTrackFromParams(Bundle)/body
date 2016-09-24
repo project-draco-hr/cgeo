@@ -1,0 +1,11 @@
+{
+  if (!isConnected()) {
+    return null;
+  }
+  try {
+    return brouterService.getTrackFromParams(params);
+  }
+ catch (  RemoteException e) {
+    return null;
+  }
+}

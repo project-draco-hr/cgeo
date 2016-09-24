@@ -1,0 +1,11 @@
+{
+  if (brouter != null && brouter.isConnected()) {
+    return;
+  }
+  brouter=new BRouterServiceConnection();
+  final Intent intent=new Intent();
+  intent.setClassName("btools.routingapp","btools.routingapp.BRouterService");
+  if (!ctx.bindService(intent,brouter,Context.BIND_AUTO_CREATE)) {
+    brouter=null;
+  }
+}

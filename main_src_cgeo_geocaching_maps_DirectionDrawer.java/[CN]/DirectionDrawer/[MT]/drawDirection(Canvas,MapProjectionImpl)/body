@@ -11,9 +11,42 @@
     line.setStrokeWidth(width);
     line.setColor(0x80EB391E);
   }
-  final Point pos=new Point();
-  final Point dest=new Point();
-  projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords),pos);
-  projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords),dest);
-  canvas.drawLine(pos.x,pos.y,dest.x,dest.y,line);
+  Geopoint[] routingPoints=null;
+  if (currentCoords.distanceTo(destinationCoords) <= 1.5) {
+    if (lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005) {
+      routingPoints=lastRoutingPoints;
+    }
+ else {
+      try {
+        routingPoints=BRouter.getTrack(currentCoords,destinationCoords);
+        lastRoutingPoints=routingPoints;
+        lastDirectionUpdatePoint=currentCoords;
+      }
+ catch (      SAXException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  if (routingPoints != null && routingPoints.length > 0) {
+    Point lastPoint=null;
+    final Point currentPoint=new Point();
+    for (    final Geopoint currentGeoPoint : routingPoints) {
+      projection.toPixels(mapItemFactory.getGeoPointBase(currentGeoPoint),currentPoint);
+      if (lastPoint != null) {
+        canvas.drawLine(lastPoint.x,lastPoint.y,currentPoint.x,currentPoint.y,line);
+      }
+ else {
+        lastPoint=new Point();
+      }
+      lastPoint.x=currentPoint.x;
+      lastPoint.y=currentPoint.y;
+    }
+  }
+ else {
+    final Point pos=new Point();
+    final Point dest=new Point();
+    projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords),pos);
+    projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords),dest);
+    canvas.drawLine(pos.x,pos.y,dest.x,dest.y,line);
+  }
 }
