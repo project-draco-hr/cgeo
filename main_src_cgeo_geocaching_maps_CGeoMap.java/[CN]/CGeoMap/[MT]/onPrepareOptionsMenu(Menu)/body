@@ -34,6 +34,17 @@ break;
 default :
 menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
 }
+switch (Settings.getRoutingMode()) {
+case "bicycle":
+menu.findItem(R.id.menu_routing_bike).setChecked(true);
+break;
+case "car":
+menu.findItem(R.id.menu_routing_car).setChecked(true);
+break;
+default :
+menu.findItem(R.id.menu_routing_walk).setChecked(true);
+break;
+}
 menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
 menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
 }

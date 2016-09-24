@@ -109,6 +109,27 @@ item.setChecked(true);
 Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
 return true;
 }
+case R.id.menu_routing_walk:
+{
+item.setChecked(true);
+Settings.setRoutingMode("foot");
+mapView.repaintRequired(overlayPositionAndScale);
+return true;
+}
+case R.id.menu_routing_bike:
+{
+item.setChecked(true);
+Settings.setRoutingMode("bicycle");
+mapView.repaintRequired(overlayPositionAndScale);
+return true;
+}
+case R.id.menu_routing_car:
+{
+item.setChecked(true);
+Settings.setRoutingMode("motorcar");
+mapView.repaintRequired(overlayPositionAndScale);
+return true;
+}
 case R.id.menu_hint:
 menuShowHint();
 return true;

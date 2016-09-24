@@ -7,6 +7,7 @@
   params.putString("v","foot");
   params.putDoubleArray("lats",new double[]{start.getLatitude(),dest.getLatitude()});
   params.putDoubleArray("lons",new double[]{start.getLongitude(),dest.getLongitude()});
+  params.putString("v",Settings.getRoutingMode());
   final String gpx=brouter.getTrackFromParams(params);
   final LinkedList<Geopoint> result=new LinkedList<>();
   Xml.parse(gpx,new DefaultHandler(){
