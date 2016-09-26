@@ -11,7 +11,7 @@ case R.id.menu_waypoint_copy_coordinates:
 if (selectedWaypoint != null) {
   final Geopoint coordinates=selectedWaypoint.getCoords();
   if (coordinates != null) {
-    ClipboardUtils.copyToClipboard(coordinates.toString());
+    ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(coordinates.toString()));
     showToast(getResources().getString(R.string.clipboard_copy_ok));
   }
 }

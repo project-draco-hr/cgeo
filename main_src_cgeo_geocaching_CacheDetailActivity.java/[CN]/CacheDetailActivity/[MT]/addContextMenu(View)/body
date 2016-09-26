@@ -16,7 +16,7 @@ case R.id.value:
             clickedItemText=((TextView)view).getText();
           final CharSequence itemTitle=((TextView)((View)view.getParent()).findViewById(R.id.name)).getText();
         if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
-          clickedItemText=clickedItemText.toString().replace("?? ","");
+          clickedItemText=GeopointFormatter.reformatForClipboard(clickedItemText);
         }
       buildDetailsContextMenu(actionMode,menu,itemTitle,true);
     return true;
