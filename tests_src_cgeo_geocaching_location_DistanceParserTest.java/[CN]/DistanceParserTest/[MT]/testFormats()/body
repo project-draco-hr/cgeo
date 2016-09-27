@@ -1,7 +1,7 @@
 {
-  assertEquals(1.2,DistanceParser.parseDistance("1200 m",true),MM);
-  assertEquals(1.2,DistanceParser.parseDistance("1.2 km",true),MM);
-  assertEquals(0.36576,DistanceParser.parseDistance("1200 ft",true),MM);
-  assertEquals(1.09728,DistanceParser.parseDistance("1200 yd",true),MM);
-  assertEquals(1.9312128,DistanceParser.parseDistance("1.2 mi",true),MM);
+  assertThat((double)DistanceParser.parseDistance("1200 m",true)).isEqualTo(1.2,offset(MM));
+  assertThat((double)DistanceParser.parseDistance("1.2 km",true)).isEqualTo(1.2,offset(MM));
+  assertThat((double)DistanceParser.parseDistance("1200 ft",true)).isEqualTo(0.36576,offset(MM));
+  assertThat((double)DistanceParser.parseDistance("1200 yd",true)).isEqualTo(1.09728,offset(MM));
+  assertThat((double)DistanceParser.parseDistance("1.2 mi",true)).isEqualTo(1.9312128,offset(MM));
 }

@@ -1,4 +1,4 @@
 {
-  assertEquals(1.2,DistanceParser.parseDistance("1200",true),MM);
-  assertEquals(0.36576,DistanceParser.parseDistance("1200",false),MM);
+  assertThat((double)DistanceParser.parseDistance("1200",true)).isEqualTo(1.2,offset(MM));
+  assertThat((double)DistanceParser.parseDistance("1200",false)).isEqualTo(0.36576,offset(MM));
 }
