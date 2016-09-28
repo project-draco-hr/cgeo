@@ -1,6 +1,12 @@
 {
   if (requestRequired()) {
-    GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+    try {
+      GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+    }
+ catch (    final Exception ex) {
+      Log.w("Error requesting cache popup info",ex);
+      ActivityMixin.showToast((Activity)context,R.string.err_request_popup_info);
+    }
   }
   CGeoMap.markCacheAsDirty(cache.getGeocode());
   CachePopup.startActivity(context,cache.getGeocode());

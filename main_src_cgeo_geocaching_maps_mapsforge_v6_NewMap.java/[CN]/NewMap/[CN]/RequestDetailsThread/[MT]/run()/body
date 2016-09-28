@@ -4,7 +4,13 @@
     return;
   }
   if (requestRequired()) {
-    GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+    try {
+      GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+    }
+ catch (    final Exception ex) {
+      Log.w("Error requesting cache popup info",ex);
+      ActivityMixin.showToast(map,R.string.err_request_popup_info);
+    }
   }
   map.popupGeocodes.add(cache.getGeocode());
   CachePopup.startActivityAllowTarget(map,cache.getGeocode());
