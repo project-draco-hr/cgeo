@@ -1,0 +1,13 @@
+{
+  final float[] pointData=new float[(pixelPoints.size() - 1) * 4];
+  for (int i=1; i < pixelPoints.size(); i++) {
+    final Point last=pixelPoints.get(i - 1);
+    final Point current=pixelPoints.get(i);
+    final int index=(i - 1) * 4;
+    pointData[index]=last.x;
+    pointData[index + 1]=last.y;
+    pointData[index + 2]=current.x;
+    pointData[index + 3]=current.y;
+  }
+  canvas.drawLines(pointData,paint);
+}

@@ -13,23 +13,13 @@
     linePaint.setColor(0x80EB391E);
   }
   final Geopoint[] routingPoints=Routing.getTrack(currentCoords,destinationCoords);
+  final ArrayList<Point> pixelPoints=new ArrayList<>();
+  pixelPoints.add(translateToPixels(projection,currentCoords));
   if (routingPoints != null && routingPoints.length > 1) {
-    final Point pixelPoint=new Point();
-    final Path path=new Path();
-    projection.toPixels(mapItemFactory.getGeoPointBase(routingPoints[0]),pixelPoint);
-    path.moveTo(pixelPoint.x,pixelPoint.y);
-    for (int i=1; i < routingPoints.length; i++) {
-      final Geopoint currentRoutingPoint=routingPoints[i];
-      projection.toPixels(mapItemFactory.getGeoPointBase(currentRoutingPoint),pixelPoint);
-      path.lineTo(pixelPoint.x,pixelPoint.y);
+    for (    final Geopoint geopoint : routingPoints) {
+      pixelPoints.add(translateToPixels(projection,geopoint));
     }
-    canvas.drawPath(path,linePaint);
   }
- else {
-    final Point pos=new Point();
-    final Point dest=new Point();
-    projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords),pos);
-    projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords),dest);
-    canvas.drawLine(pos.x,pos.y,dest.x,dest.y,linePaint);
-  }
+  pixelPoints.add(translateToPixels(projection,destinationCoords));
+  CanvasUtils.drawPath(pixelPoints,canvas,linePaint);
 }
