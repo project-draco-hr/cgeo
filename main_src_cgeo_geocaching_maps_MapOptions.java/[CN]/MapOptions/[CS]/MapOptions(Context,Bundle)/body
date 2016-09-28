@@ -5,7 +5,7 @@
     searchResult=extras.getParcelable(Intents.EXTRA_SEARCH);
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
     coords=extras.getParcelable(Intents.EXTRA_COORDS);
-    waypointType=WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
+    waypointType=(WaypointType)extras.get(Intents.EXTRA_WPTTYPE);
     mapState=extras.getParcelable(Intents.EXTRA_MAPSTATE);
     title=extras.getString(Intents.EXTRA_TITLE);
   }
