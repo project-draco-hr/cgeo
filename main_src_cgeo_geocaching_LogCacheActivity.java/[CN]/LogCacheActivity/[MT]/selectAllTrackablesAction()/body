@@ -1,6 +1,6 @@
 {
   final Builder alert=new AlertDialog.Builder(this);
-  alert.setTitle(res.getString(R.string.log_tb_changeall));
+  alert.setTitle(res.getString(R.string.log_tb_changeall) + " (" + trackables.size()+ ')');
   final List<LogTypeTrackable> tbLogTypeValues=LogTypeTrackable.getLogTypeTrackableForLogCache();
   final String[] tbLogTypes=getTBLogTypes(tbLogTypeValues);
   alert.setItems(tbLogTypes,new OnClickListener(){
@@ -8,7 +8,7 @@
       final LogTypeTrackable logType=tbLogTypeValues.get(position);
       for (      final TrackableLog tb : trackables) {
         tb.action=logType;
-        Log.i("Trackable " + tb.trackCode + " ("+ tb.name+ ") has new action: #"+ logType);
+        Log.d("Trackable " + tb.trackCode + " ("+ tb.name+ ") has new action: #"+ logType);
       }
       updateTrackablesList();
       dialog.dismiss();

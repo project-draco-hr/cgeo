@@ -1,0 +1,19 @@
+{
+  final ListAdapter listAdapter=listView.getAdapter();
+  if (listAdapter != null) {
+    final int numberOfItems=listAdapter.getCount();
+    int totalItemsHeight=0;
+    for (int itemPos=0; itemPos < numberOfItems; itemPos++) {
+      final View item=listAdapter.getView(itemPos,null,listView);
+      item.measure(0,0);
+      totalItemsHeight+=item.getMeasuredHeight();
+    }
+    final int totalDividersHeight=listView.getDividerHeight() * (numberOfItems - 1);
+    final ViewGroup.LayoutParams params=listView.getLayoutParams();
+    params.height=totalItemsHeight + totalDividersHeight;
+    listView.setLayoutParams(params);
+    listView.requestLayout();
+    return true;
+  }
+  return false;
+}

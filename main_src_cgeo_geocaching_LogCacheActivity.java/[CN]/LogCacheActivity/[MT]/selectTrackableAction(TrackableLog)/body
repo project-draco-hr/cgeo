@@ -1,15 +1,13 @@
 {
-  final int realViewId=view.getId();
   final Builder alert=new AlertDialog.Builder(this);
-  final TrackableLog trackableLog=actionButtons.get(realViewId);
-  alert.setTitle(trackableLog.name);
+  alert.setTitle(trackable.name);
   final List<LogTypeTrackable> tbLogTypeValues=LogTypeTrackable.getLogTypeTrackableForLogCache();
   final String[] tbLogTypes=getTBLogTypes(tbLogTypeValues);
   alert.setItems(tbLogTypes,new OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int position){
       final LogTypeTrackable logType=tbLogTypeValues.get(position);
-      trackableLog.action=logType;
-      Log.i("Trackable " + trackableLog.trackCode + " ("+ trackableLog.name+ ") has new action: #"+ logType);
+      trackable.action=logType;
+      Log.d("Trackable " + trackable.trackCode + " ("+ trackable.name+ ") has new action: #"+ logType);
       updateTrackablesList();
       dialog.dismiss();
     }
