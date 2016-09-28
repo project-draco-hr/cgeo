@@ -3,7 +3,7 @@
   alert.setTitle(trackable.name);
   final List<LogTypeTrackable> tbLogTypeValues=LogTypeTrackable.getLogTypeTrackableForLogCache();
   final String[] tbLogTypes=getTBLogTypes(tbLogTypeValues);
-  alert.setItems(tbLogTypes,new OnClickListener(){
+  alert.setSingleChoiceItems(tbLogTypes,tbLogTypeValues.indexOf(trackable.action),new OnClickListener(){
     @Override public void onClick(    final DialogInterface dialog,    final int position){
       final LogTypeTrackable logType=tbLogTypeValues.get(position);
       trackable.action=logType;
