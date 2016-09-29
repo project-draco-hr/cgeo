@@ -1,0 +1,5 @@
+{
+  final int posX=(int)(MercatorProjection.longitudeToPixelX(coords.getLongitude(),mapSize) - topLeftPoint.x);
+  final int posY=(int)(MercatorProjection.latitudeToPixelY(coords.getLatitude(),mapSize) - topLeftPoint.y);
+  return new Pair<>(posX,posY);
+}
