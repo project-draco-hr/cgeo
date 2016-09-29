@@ -44,6 +44,18 @@ default :
 menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
 break;
 }
+menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
+switch (Settings.getRoutingMode()) {
+case WALK:
+menu.findItem(R.id.menu_routing_walk).setChecked(true);
+break;
+case BIKE:
+menu.findItem(R.id.menu_routing_bike).setChecked(true);
+break;
+case CAR:
+menu.findItem(R.id.menu_routing_car).setChecked(true);
+break;
+}
 menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
 menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
 }
