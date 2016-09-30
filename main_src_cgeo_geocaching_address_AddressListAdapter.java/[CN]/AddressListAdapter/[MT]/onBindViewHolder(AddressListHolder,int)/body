@@ -1,0 +1,11 @@
+{
+  final Address address=addresses.get(position);
+  holder.label.setText(getAddressText(address));
+  holder.distance.setText(getDistanceText(address));
+  holder.itemView.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    final View v){
+      clickListener.onClickAddress(address);
+    }
+  }
+);
+}
