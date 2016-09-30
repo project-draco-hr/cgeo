@@ -2,14 +2,19 @@
   if (brouter == null) {
     return null;
   }
+  final long timeNow=System.currentTimeMillis();
+  if ((timeNow - timeLastUpdate) < 1000 * UPDATE_MIN_DELAY_SECONDS) {
+    return lastRoutingPoints;
+  }
   if (start.distanceTo(destination) > MAX_ROUTING_DISTANCE_KILOMETERS) {
     return null;
   }
-  if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < 0.005) {
+  if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < UPDATE_MIN_DISTANCE_KILOMETERS) {
     return lastRoutingPoints;
   }
   lastDestination=destination;
   lastRoutingPoints=calculateRouting(start,destination);
   lastDirectionUpdatePoint=start;
+  timeLastUpdate=timeNow;
   return lastRoutingPoints;
 }
