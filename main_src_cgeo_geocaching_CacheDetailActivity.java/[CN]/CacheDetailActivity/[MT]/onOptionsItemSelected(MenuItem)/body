@@ -28,6 +28,9 @@ return true;
 case R.id.menu_export_fieldnotes:
 new FieldnoteExport().export(Collections.singletonList(cache),this);
 return true;
+case R.id.menu_export_persnotes:
+new PersonalnoteExport().export(Collections.singletonList(cache),this);
+return true;
 case R.id.menu_edit_fieldnote:
 ensureSaved();
 editPersonalNote(cache,this);

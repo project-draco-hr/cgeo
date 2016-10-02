@@ -1,0 +1,18 @@
+{
+  try {
+    int i=0;
+    for (    final Geocache cache : caches) {
+      final IConnector connector=ConnectorFactory.getConnector(cache);
+      publishProgress(++i);
+      if (connector instanceof PersonalNoteCapability && StringUtils.isNotBlank(cache.getPersonalNote())) {
+        ((PersonalNoteCapability)connector).uploadPersonalNote(cache);
+        persNotesCount++;
+      }
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("PersonalnoteExport.ExportTask uploading personal notes",e);
+    return false;
+  }
+  return true;
+}

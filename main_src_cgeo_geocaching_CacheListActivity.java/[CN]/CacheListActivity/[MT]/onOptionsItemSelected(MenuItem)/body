@@ -51,6 +51,9 @@ return true;
 case R.id.menu_export_fieldnotes:
 new FieldnoteExport().export(adapter.getCheckedOrAllCaches(),this);
 return true;
+case R.id.menu_export_persnotes:
+new PersonalnoteExport().export(adapter.getCheckedOrAllCaches(),this);
+return true;
 case R.id.menu_remove_from_history:
 removeFromHistoryCheck();
 invalidateOptionsMenuCompatible();
