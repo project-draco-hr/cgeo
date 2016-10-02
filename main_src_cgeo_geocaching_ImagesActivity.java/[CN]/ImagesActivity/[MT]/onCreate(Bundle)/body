@@ -4,7 +4,6 @@
   String geocode=null;
   if (extras != null) {
     geocode=extras.getString(Intents.EXTRA_GEOCODE);
-    imgType=(ImageType)extras.getSerializable(Intents.EXTRA_TYPE);
   }
   if (extras == null || geocode == null) {
     showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
