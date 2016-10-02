@@ -6,6 +6,8 @@
   if (extras != null) {
     image=extras.getParcelable(Intents.EXTRA_IMAGE);
     scaleChoiceIndex=extras.getInt(Intents.EXTRA_SCALE,scaleChoiceIndex);
+    final String geocode=extras.getString(Intents.EXTRA_GEOCODE);
+    setCacheTitleBar(geocode);
   }
   if (savedInstanceState != null) {
     image=savedInstanceState.getParcelable(SAVED_STATE_IMAGE);

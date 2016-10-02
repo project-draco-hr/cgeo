@@ -1,0 +1,11 @@
+{
+  if (StringUtils.isEmpty(geocode)) {
+    return;
+  }
+  final Geocache cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
+  if (cache == null) {
+    Log.e("AbstractActivity.setCacheTitleBar: cannot find the cache " + geocode);
+    return;
+  }
+  setCacheTitleBar(cache);
+}

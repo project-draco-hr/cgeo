@@ -13,7 +13,7 @@
   }
   setTheme();
   setContentView(R.layout.images_activity);
-  setTitle(res.getString(imgType.getTitle()));
+  setCacheTitleBar(geocode);
   imagesList=new ImagesList(this,geocode,null);
   imageNames=extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
   if (CollectionUtils.isEmpty(imageNames)) {

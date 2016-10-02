@@ -13,12 +13,7 @@
   cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
   invalidateOptionsMenuCompatible();
   possibleLogTypes=cache.getPossibleLogTypes();
-  if (StringUtils.isNotBlank(cache.getName())) {
-    setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
-  }
- else {
-    setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
-  }
+  setCacheTitleBar(cache);
   initializeRatingBar();
   setDefaultValues();
   if (savedInstanceState != null) {

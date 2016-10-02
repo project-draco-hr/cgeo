@@ -1,5 +1,6 @@
 {
   final Intent selectImageIntent=new Intent(this,ImageSelectActivity.class);
   selectImageIntent.putExtra(Intents.EXTRA_IMAGE,image);
+  selectImageIntent.putExtra(Intents.EXTRA_GEOCODE,cache.getGeocode());
   startActivityForResult(selectImageIntent,SELECT_IMAGE);
 }
