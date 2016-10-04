@@ -1,6 +1,6 @@
 {
   final String log=currentLogText();
-  if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log,text))) {
+  if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log,text) && !StringUtils.equals(log,Settings.getSignature()))) {
     cache.logOffline(this,log,date,typeSelected);
     Settings.setLastCacheLog(log);
   }
