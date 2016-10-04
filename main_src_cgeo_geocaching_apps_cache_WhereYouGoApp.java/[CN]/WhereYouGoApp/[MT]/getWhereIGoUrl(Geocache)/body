@@ -1,5 +1,5 @@
 {
-  final Matcher matcher=PATTERN_CARTRIDGE.matcher(cache.getDescription());
+  final Matcher matcher=PATTERN_CARTRIDGE.matcher(cache.getShortDescription() + " " + cache.getDescription());
   final Set<String> urls=new HashSet<>();
   while (matcher.find()) {
     urls.add(matcher.group(1));
