@@ -1,4 +1,7 @@
 {
+  if (cache == null) {
+    return null;
+  }
   final IConnector connector=getConnector(cache);
   if (capabilityClass.isInstance(connector)) {
     return capabilityClass.cast(connector);

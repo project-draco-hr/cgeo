@@ -9,10 +9,12 @@
     insertIntoLog(template.getValue(getLogContext()),true);
     return true;
   }
-  final Smiley smiley=GCSmiliesProvider.getSmiley(id);
-  if (smiley != null) {
-    insertIntoLog("[" + smiley.text + "]",true);
-    return true;
+  final CharSequence title=item.getTitle();
+  for (  Smiley smiley : getSmilies()) {
+    if (smiley.text.equals(title)) {
+      insertIntoLog("[" + title + "]",true);
+      return true;
+    }
   }
   return super.onOptionsItemSelected(item);
 }
