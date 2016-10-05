@@ -81,7 +81,9 @@
     if (matcherOk.find()) {
       Log.i("Log successfully posted to cache #" + cacheid);
       if (geocode != null) {
-        DataStore.saveVisitDate(geocode);
+        final Calendar visitedDate=Calendar.getInstance();
+        visitedDate.set(year,month - 1,day);
+        DataStore.saveVisitDate(geocode,visitedDate.getTimeInMillis());
       }
       gcLogin.getLoginStatus(page);
       if (gcLogin.getActualCachesFound() >= 0) {
