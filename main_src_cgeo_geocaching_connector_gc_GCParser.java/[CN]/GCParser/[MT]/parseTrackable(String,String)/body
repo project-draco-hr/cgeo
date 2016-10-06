@@ -18,7 +18,7 @@
   trackable.setIconUrl(iconUrl.startsWith("/") ? "https://www.geocaching.com" + iconUrl : iconUrl);
   trackable.setName(Html.fromHtml(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_NAME,true,"")).toString());
   if (StringUtils.isNotBlank(trackable.getName())) {
-    trackable.setType(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_TYPE,true,trackable.getType()));
+    trackable.setType(Html.fromHtml(TextUtils.getMatch(page,GCConstants.PATTERN_TRACKABLE_TYPE,true,trackable.getType())).toString());
   }
   try {
     final MatcherWrapper matcherOwner=new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER,page);
