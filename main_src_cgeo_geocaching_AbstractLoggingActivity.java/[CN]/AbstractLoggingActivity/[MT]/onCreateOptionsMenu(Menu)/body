@@ -5,7 +5,7 @@
     menuLog.add(0,template.getItemId(),0,template.getResourceId());
   }
   final SubMenu menuSmilies=menu.findItem(R.id.menu_smilies).getSubMenu();
-  for (  final Smiley smiley : GCSmiliesProvider.getSmilies()) {
+  for (  final Smiley smiley : getSmileys()) {
     menuSmilies.add(Menu.NONE,Menu.NONE,Menu.NONE,smiley.text);
   }
   return true;

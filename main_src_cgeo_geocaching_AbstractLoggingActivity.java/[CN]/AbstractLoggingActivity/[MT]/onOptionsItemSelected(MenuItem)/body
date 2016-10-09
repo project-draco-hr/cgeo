@@ -10,7 +10,7 @@
     return true;
   }
   final CharSequence title=item.getTitle();
-  for (  Smiley smiley : getSmilies()) {
+  for (  final Smiley smiley : getSmileys()) {
     if (smiley.text.equals(title)) {
       insertIntoLog("[" + title + "]",true);
       return true;
