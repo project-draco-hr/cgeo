@@ -1,6 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   AndroidGraphicFactory.createInstance(this.getApplication());
+  ReadBuffer.setMaximumBufferSize(6500000);
   mapOptions=new MapOptions(this,getIntent().getExtras());
   if (savedInstanceState != null) {
     mapOptions.mapState=savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
