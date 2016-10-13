@@ -10,21 +10,21 @@
     return true;
   }
   TrackableBrand trackableBrand=ConnectorFactory.getTrackableConnector(geocode).getBrand();
-  if (trackableBrand.equals(TrackableBrand.UNKNOWN)) {
+  if (trackableBrand == TrackableBrand.UNKNOWN) {
     final String tbCode=ConnectorFactory.getTrackableFromURL(query);
     if (StringUtils.isNotBlank(tbCode)) {
       trackableBrand=ConnectorFactory.getTrackableConnector(tbCode).getBrand();
       geocode=tbCode;
     }
   }
-  if (trackableBrand.equals(TrackableBrand.UNKNOWN)) {
+  if (trackableBrand == TrackableBrand.UNKNOWN) {
     final TrackableTrackingCode tbTrackingCode=ConnectorFactory.getTrackableTrackingCodeFromURL(query);
     if (!tbTrackingCode.isEmpty()) {
       trackableBrand=tbTrackingCode.brand;
       geocode=tbTrackingCode.trackingCode;
     }
   }
-  if (!trackableBrand.equals(TrackableBrand.UNKNOWN) && geocode != null) {
+  if (trackableBrand != TrackableBrand.UNKNOWN && geocode != null) {
     final Intent trackablesIntent=new Intent(this,TrackableActivity.class);
     trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,geocode.toUpperCase(Locale.US));
     trackablesIntent.putExtra(Intents.EXTRA_BRAND,trackableBrand.getId());
