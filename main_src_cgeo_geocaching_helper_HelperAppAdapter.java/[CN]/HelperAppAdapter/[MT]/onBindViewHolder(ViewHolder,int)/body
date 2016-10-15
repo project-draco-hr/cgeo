@@ -1,0 +1,13 @@
+{
+  final HelperApp app=helperApps.get(position);
+  holder.itemView.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View v){
+      clickListener.onClickHelperApp(app);
+    }
+  }
+);
+  final Resources resources=context.getResources();
+  holder.title.setText(resources.getString(app.titleId));
+  holder.image.setImageDrawable(Compatibility.getDrawable(resources,app.iconId));
+  holder.description.setText(Html.fromHtml(resources.getString(app.descriptionId)));
+}
