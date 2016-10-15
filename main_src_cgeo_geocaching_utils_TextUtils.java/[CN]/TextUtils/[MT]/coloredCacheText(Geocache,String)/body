@@ -1,0 +1,10 @@
+{
+  final SpannableString span=new SpannableString(text);
+  if (cache.isDisabled() || cache.isArchived()) {
+    span.setSpan(new StrikethroughSpan(),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+  }
+  if (cache.isArchived()) {
+    span.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CgeoApplication.getInstance(),R.color.archived_cache_color)),0,span.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+  }
+  return span;
+}

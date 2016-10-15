@@ -1,0 +1,9 @@
+{
+  setTitle(title);
+  if (type != null) {
+    getSupportActionBar().setIcon(Compatibility.getDrawable(getResources(),type.markerId));
+  }
+ else {
+    getSupportActionBar().setIcon(android.R.color.transparent);
+  }
+}
