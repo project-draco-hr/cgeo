@@ -1,0 +1,14 @@
+{
+  final File file=files.get(position);
+  final String currentFile=parentView.getCurrentFile();
+  if (currentFile != null && file.equals(new File(currentFile))) {
+    holder.filename.setTypeface(holder.filename.getTypeface(),Typeface.BOLD);
+  }
+ else {
+    holder.filename.setTypeface(holder.filename.getTypeface(),Typeface.NORMAL);
+  }
+  final TouchListener touchLst=new TouchListener(file);
+  holder.itemView.setOnClickListener(touchLst);
+  holder.filepath.setText(file.getParent());
+  holder.filename.setText(file.getName());
+}

@@ -9,7 +9,9 @@
   if (listId <= StoredList.TEMPORARY_LIST.id) {
     listId=StoredList.STANDARD_LIST_ID;
   }
-  setAdapter();
+  adapter=getAdapter(files);
+  final RecyclerView view=RecyclerViewProvider.provideRecyclerView(this,R.id.list,true,true);
+  view.setAdapter(adapter);
   waitDialog=ProgressDialog.show(this,res.getString(R.string.file_title_searching),res.getString(R.string.file_searching),true,true,new DialogInterface.OnCancelListener(){
     @Override public void onCancel(    final DialogInterface arg0){
       if (searchingThread != null && searchingThread.isAlive()) {

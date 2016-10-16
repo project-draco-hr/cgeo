@@ -1,0 +1,25 @@
+{
+  final File file=files.get(position);
+  holder.itemView.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View v){
+      (new GPXImporter(activity,activity.getListId(),null)).importGPX(file);
+    }
+  }
+);
+  holder.filepath.setText(file.getParent());
+  holder.filename.setText(file.getName());
+  holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
+    @Override public boolean onLongClick(    final View v){
+      Dialogs.confirmYesNo(activity,R.string.gpx_import_delete_title,activity.getString(R.string.gpx_import_delete_message,file.getName()),new DialogInterface.OnClickListener(){
+        @Override public void onClick(        final DialogInterface dialog,        final int id){
+          FileUtils.deleteIgnoringFailure(file);
+          files.remove(position);
+          notifyItemRemoved(position);
+        }
+      }
+);
+      return true;
+    }
+  }
+);
+}
