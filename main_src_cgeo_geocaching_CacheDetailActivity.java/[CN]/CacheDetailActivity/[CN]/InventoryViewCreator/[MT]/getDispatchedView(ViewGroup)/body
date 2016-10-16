@@ -2,22 +2,16 @@
   if (cache == null) {
     return null;
   }
-  view=(ListView)getLayoutInflater().inflate(R.layout.cachedetail_inventory_page,parentView,false);
-  final TrackableListAdapter adapterTrackables=new TrackableListAdapter(CacheDetailActivity.this);
-  cache.mergeInventory(genericTrackables,processedBrands);
-  for (  final Trackable trackable : cache.getInventory()) {
-    adapterTrackables.add(trackable);
-  }
-  view.setAdapter(adapterTrackables);
-  view.setOnItemClickListener(new OnItemClickListener(){
-    @Override public void onItemClick(    final AdapterView<?> arg0,    final View arg1,    final int arg2,    final long arg3){
-      final Object selection=arg0.getItemAtPosition(arg2);
-      if (selection instanceof Trackable) {
-        final Trackable trackable=(Trackable)selection;
-        TrackableActivity.startActivity(CacheDetailActivity.this,trackable.getGuid(),trackable.getGeocode(),trackable.getName(),cache.getGeocode(),trackable.getBrand().getId());
-      }
+  view=(RecyclerView)getLayoutInflater().inflate(R.layout.cachedetail_inventory_page,parentView,false);
+  final RecyclerView recyclerView=ButterKnife.findById(view,R.id.list);
+  RecyclerViewProvider.provideRecyclerView(CacheDetailActivity.this,recyclerView,true,true);
+  final TrackableListAdapter adapterTrackables=new TrackableListAdapter(cache.getInventory(),new TrackableListAdapter.TrackableClickListener(){
+    @Override public void onTrackableClicked(    final Trackable trackable){
+      TrackableActivity.startActivity(CacheDetailActivity.this,trackable.getGuid(),trackable.getGeocode(),trackable.getName(),cache.getGeocode(),trackable.getBrand().getId());
     }
   }
 );
+  recyclerView.setAdapter(adapterTrackables);
+  cache.mergeInventory(genericTrackables,processedBrands);
   return view;
 }

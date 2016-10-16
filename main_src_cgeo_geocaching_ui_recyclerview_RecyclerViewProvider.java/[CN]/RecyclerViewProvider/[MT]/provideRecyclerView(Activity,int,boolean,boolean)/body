@@ -1,10 +1,5 @@
 {
   final RecyclerView view=ButterKnife.findById(context,viewId);
-  view.setHasFixedSize(fixedSize);
-  if (showDivider) {
-    view.addItemDecoration(new HorizontalDividerItemDecoration.Builder(context).build());
-  }
-  view.setLayoutManager(new LinearLayoutManager(context));
-  view.setItemAnimator(new DefaultItemAnimator());
+  configureView(context,view,fixedSize,showDivider);
   return view;
 }
