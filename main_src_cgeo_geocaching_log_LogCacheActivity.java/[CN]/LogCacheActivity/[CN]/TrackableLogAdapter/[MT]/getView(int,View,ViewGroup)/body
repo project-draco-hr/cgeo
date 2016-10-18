@@ -1,0 +1,13 @@
+{
+  View rowView=convertView;
+  if (rowView == null) {
+    rowView=getLayoutInflater().inflate(R.layout.logcache_trackable_item,parent,false);
+  }
+  ViewHolder holder=(ViewHolder)rowView.getTag();
+  if (holder == null) {
+    holder=new ViewHolder(rowView);
+  }
+  final TrackableLog trackable=getItem(position);
+  fillViewHolder(holder,trackable);
+  return rowView;
+}

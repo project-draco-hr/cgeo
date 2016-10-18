@@ -1,0 +1,31 @@
+{
+  final FieldNotes fieldNotes=new FieldNotes();
+  try {
+    int i=0;
+    for (    final Geocache cache : caches) {
+      if (ConnectorFactory.getConnector(cache).equals(connector) && cache.isLogOffline()) {
+        final LogEntry log=DataStore.loadLogOffline(cache.getGeocode());
+        if (log != null && (!onlyNew || log.date > Settings.getFieldnoteExportDate())) {
+          fieldNotes.add(cache,log);
+        }
+      }
+      publishProgress(++i);
+    }
+  }
+ catch (  final Exception e) {
+    Log.e("FieldNoteExport.ExportTask generation",e);
+    return false;
+  }
+  fieldNotesCount+=fieldNotes.size();
+  exportFile=fieldNotes.writeToDirectory(exportLocation,fileName);
+  if (exportFile == null) {
+    return false;
+  }
+  if (upload) {
+    publishProgress(STATUS_UPLOAD);
+    if (!connector.uploadFieldNotes(exportFile)) {
+      return false;
+    }
+  }
+  return true;
+}

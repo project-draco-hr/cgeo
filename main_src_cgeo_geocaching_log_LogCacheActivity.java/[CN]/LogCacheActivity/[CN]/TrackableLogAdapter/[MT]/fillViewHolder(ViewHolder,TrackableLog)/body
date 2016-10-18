@@ -1,0 +1,23 @@
+{
+  holder.brandView.setImageResource(trackable.brand.getIconResource());
+  holder.codeView.setText(trackable.trackCode);
+  holder.nameView.setText(trackable.name);
+  holder.actionButton.setText(trackable.action.getLabel() + " ???");
+  holder.actionButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View view){
+      selectTrackableAction(trackable);
+    }
+  }
+);
+  holder.infoView.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View view){
+      final Intent trackablesIntent=new Intent(LogCacheActivity.this,TrackableActivity.class);
+      final String tbCode=StringUtils.isNotEmpty(trackable.geocode) ? trackable.geocode : trackable.trackCode;
+      trackablesIntent.putExtra(Intents.EXTRA_GEOCODE,tbCode);
+      trackablesIntent.putExtra(Intents.EXTRA_BRAND,trackable.brand.getId());
+      trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE,trackable.trackCode);
+      startActivity(trackablesIntent);
+    }
+  }
+);
+}

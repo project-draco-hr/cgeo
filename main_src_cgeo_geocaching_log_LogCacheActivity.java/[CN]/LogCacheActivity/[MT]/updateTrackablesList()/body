@@ -1,0 +1,16 @@
+{
+  final TrackableLog[] trackablesArray=getSortedTrackables().toArray(new TrackableLog[trackables.size()]);
+  final ListView inventoryList=ButterKnife.findById(this,R.id.inventory);
+  inventoryList.setAdapter(new TrackableLogAdapter(this,R.layout.logcache_trackable_item,trackablesArray));
+  ViewUtils.setListViewHeightBasedOnItems(inventoryList);
+  ButterKnife.findById(this,R.id.inventory_box).setVisibility(trackables.isEmpty() ? View.GONE : View.VISIBLE);
+  final LinearLayout inventoryChangeAllView=ButterKnife.findById(this,R.id.inventory_changeall);
+  inventoryChangeAllView.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
+  final Button changeButton=ButterKnife.findById(inventoryChangeAllView,R.id.changebutton);
+  changeButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    final View view){
+      selectAllTrackablesAction();
+    }
+  }
+);
+}
