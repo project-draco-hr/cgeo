@@ -9,7 +9,9 @@
     selectionArgs=new String[]{String.valueOf(cacheType.id)};
   }
   try {
-    return queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,"visiteddate",null,new HashSet<String>(),GET_STRING_0);
+    final Set<String> historicCaches=queryToColl(dbTableCaches,new String[]{"geocode"},selection.toString(),selectionArgs,"visiteddate",null,new HashSet<String>(),GET_STRING_0);
+    historicCaches.addAll(queryToColl(dbTableLogsOffline,new String[]{"geocode"},null,null,"date",null,new HashSet<String>(),GET_STRING_0));
+    return historicCaches;
   }
  catch (  final Exception e) {
     Log.e("DataStore.loadBatchOfHistoricGeocodes",e);
