@@ -20,8 +20,6 @@
         final Set<String> withoutOfflineLogs=exceptCachesWithOfflineLog(geocodes);
         Log.d("Database clean: removing " + withoutOfflineLogs.size() + " geocaches");
         removeCaches(withoutOfflineLogs,LoadFlags.REMOVE_ALL);
-        Log.d("Database clean: removing obsolete log images records");
-        database.delete(dbTableLogImages,"log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")",null);
         Log.d("Database clean: removing non-existing caches from lists");
         database.delete(dbTableCachesLists,"geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")",null);
         FileUtils.deleteDirectory(LocalStorage.getStorageDir("_others"));
