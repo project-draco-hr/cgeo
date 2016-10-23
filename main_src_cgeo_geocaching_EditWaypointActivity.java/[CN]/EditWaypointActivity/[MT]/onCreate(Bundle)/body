@@ -24,7 +24,7 @@
   }
   if (geocode != null) {
     cache=DataStore.loadCache(geocode,LoadFlags.LOAD_CACHE_OR_DB);
-    setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode),cache);
+    setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode));
   }
   if (waypointId > 0) {
     waitDialog=ProgressDialog.show(this,null,res.getString(R.string.waypoint_loading),true);
