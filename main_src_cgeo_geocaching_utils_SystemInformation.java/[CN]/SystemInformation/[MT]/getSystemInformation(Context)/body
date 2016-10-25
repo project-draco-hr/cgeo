@@ -17,6 +17,9 @@
   body.append("\nLog date format: ").append(Formatter.formatShortDate(System.currentTimeMillis())).append("\nDebug mode active: ").append(Settings.isDebug() ? "yes" : "no");
   appendPermissions(context,body);
   appendConnectors(body);
+  if (GCConnector.getInstance().isActive()) {
+    body.append("\nGeocaching.com date format: ").append(Settings.getGcCustomDate());
+  }
   appendAddons(body);
   body.append("\n--- End of system information ---\n");
   return body.toString();
