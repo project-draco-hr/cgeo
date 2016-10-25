@@ -15,6 +15,9 @@
     body.append(" (cgeo forced to English)");
   }
   appendConnectors(body);
+  if (GCConnector.getInstance().isActive()) {
+    body.append("\nGeocaching.com date format: ").append(Settings.getGcCustomDate());
+  }
   appendAddons(body);
   body.append("\n--- End of system information ---\n");
   return body.toString();
