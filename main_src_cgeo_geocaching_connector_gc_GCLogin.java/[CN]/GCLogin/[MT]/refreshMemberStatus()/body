@@ -1,9 +1,9 @@
 {
-  Network.getRequest("https://www.geocaching.com/account/settings/membership").flatMap(Network.getResponseData).subscribe(new Action1<String>(){
-    @Override public void call(    final String page){
-      final Matcher match=GCConstants.PATTERN_MEMBERSHIP.matcher(page);
-      if (match.find()) {
-        final GCMemberState memberState=GCMemberState.fromString(match.group(1));
+  Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/membership")).subscribe(new Action1<Document>(){
+    @Override public void call(    final Document document){
+      final Element membership=document.select("dl.membership-details > dd:eq(3)").first();
+      if (membership != null) {
+        final GCMemberState memberState=GCMemberState.fromString(membership.text());
         Log.d("Setting member status to " + memberState);
         Settings.setGCMemberStatus(memberState);
       }
@@ -14,7 +14,7 @@
   }
 ,new Action1<Throwable>(){
     @Override public void call(    final Throwable throwable){
-      Log.w("Unable to retrieve member status");
+      Log.w("Unable to retrieve member status",throwable);
     }
   }
 );
