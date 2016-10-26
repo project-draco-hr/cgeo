@@ -1,7 +1,7 @@
 {
-  return Network.getRequest("https://www.geocaching.com/account/settings/homelocation").flatMap(Network.getResponseData).map(new Func1<String,String>(){
-    @Override public String call(    final String page){
-      return Html.fromHtml(TextUtils.getMatch(page,GCConstants.PATTERN_HOME_LOCATION,null)).toString();
+  return Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/homelocation")).map(new Func1<Document,String>(){
+    @Override public String call(    final Document document){
+      return document.select("input.search-coordinates").attr("value");
     }
   }
 );
