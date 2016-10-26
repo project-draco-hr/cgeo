@@ -1,0 +1,29 @@
+{
+  return response.flatMap(new Func1<Response,Single<Document>>(){
+    @Override public Single<Document> call(    final Response resp){
+      try {
+        final String uri=resp.request().url().toString();
+        if (resp.isSuccessful()) {
+          final MediaType mediaType=MediaType.parse(resp.header("content-type",""));
+          if (mediaType == null || !StringUtils.equals(mediaType.type(),"text") || !StringUtils.equals(mediaType.subtype(),"html")) {
+            throw new IOException("unable to parse non HTML page with media type " + mediaType + " for "+ uri);
+          }
+          final InputStream inputStream=resp.body().byteStream();
+          try {
+            return Single.just(Jsoup.parse(inputStream,null,uri));
+          }
+  finally {
+            IOUtils.closeQuietly(inputStream);
+          }
+        }
+ else {
+          throw new IOException("unsuccessful request " + uri);
+        }
+      }
+ catch (      final Throwable t) {
+        return Single.error(t);
+      }
+    }
+  }
+);
+}
